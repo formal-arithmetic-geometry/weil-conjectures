@@ -8,6 +8,10 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Integral.Exact
 
+import Sheaf.AlgebraicGeometry.IntegralGeometricPointExchange
+import WeilConjectures.SixFunctors.BaseChange.Pasting
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+
 /-!
 # Base change along an integral morphism
 
@@ -53,10 +57,44 @@ stalk of `f_* F` at a geometric point `y` of `Y` is the module of sections of `F
 `X ×_Y Spec 𝒪^{sh}_{Y,y}`, the spectrum of an integral algebra over a strictly henselian local
 ring, and such sections only depend on the fibre of `X` over `y`, which is the same for `y` and
 for a geometric point of `Y'` above it. This is the integral case of the exchange property whose
-finite case is `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`. -/
+finite case is `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`.
+
+The Lean proof reduces to the geometric-point exchange, applies it to the base-changed
+integral morphism and to the outer square, and cancels the two comparison isomorphisms
+in the horizontal pasting identity. The inverse-image stalk isomorphism then makes
+every geometric stalk of the original exchange invertible.
+Source: Stacks Project, Tag 0EYP.
+(blueprint: lem-sbc-integral-underived-exchange). -/
 theorem Etale.isIso_baseChangeMap_of_isIntegralHom (sq : IsPullback g' f' f g) :
-    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  sorry
+    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
+  have hf' : IsIntegralHom f' := MorphismProperty.of_isPullback sq inferInstance
+  suffices ∀ F, IsIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) from
+    NatIso.isIso_of_isIso_app _
+  intro F
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun y ↦ ?_
+  let s := Y'.algClosurePoint y
+  -- Compare the inner and outer exchanges over the same geometric point.
+  let sq₂ := IsPullback.of_hasPullback f' s
+  have sq₃ := sq₂.paste_horiz sq
+  have h₂ := Etale.isIso_baseChangeMap_app_of_isIntegralHom_geometricPoint Λ sq₂
+    ((g')^*[ModuleCat.{u + 1} Λ].obj F)
+  have h₃ := Etale.isIso_baseChangeMap_app_of_isIntegralHom_geometricPoint Λ sq₃ F
+  have hp := Etale.baseChangeMap_paste_horiz_app (ModuleCat.{u + 1} Λ)
+    sq.toCommSq sq₂.toCommSq sq₃.toCommSq F
+  -- Pasting isolates the pullback of the exchange we want to prove.
+  have hs : IsIso ((s)^*[ModuleCat.{u + 1} Λ].map
+      ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)) := by
+    rw [hp] at h₃
+    simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using h₃
+  -- Pullback to s followed by its identity-point stalk is the original stalk.
+  have hi := Etale.upperStarCompUliftSheafFiberIso (ModuleCat.{u + 1} Λ) s
+    (𝟙 (Spec (.of (AlgebraicClosure (Y'.residueField y)))))
+  rw [Category.id_comp] at hi
+  rw [Scheme.uliftPointSmallEtale, ← NatIso.isIso_map_iff hi]
+  change IsIso (((Scheme.pointSmallEtale _).ulift.{u + 1}).sheafFiber.map
+    ((s)^*[ModuleCat.{u + 1} Λ].map
+      ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)))
+  infer_instance
 
 /-- **Derived base change along an integral morphism**: for a cartesian square with `f`
 integral, the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism. The

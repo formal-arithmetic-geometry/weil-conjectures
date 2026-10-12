@@ -1,0 +1,165 @@
+{
+ "id": "lem-sbc-integral-geometric-point-exchange",
+ "kind": "statement",
+ "title": "Integral exchange after base change to a geometric point",
+ "statement": "Let $\\Lambda$ be a commutative ring and $F$ a sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves]. Let $f:X\\to Y$ be an integral morphism [def-weil-finite-integral-morphism]. Let $\\Omega$ be an algebraically closed field and $s:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point]. For any Cartesian square [def-weil-pbc-cartesian-square] with horizontal maps $g':X'\\to X$ and $s$ and vertical maps $f':X'\\to\\operatorname{Spec}\\Omega$ and $f$, the canonical exchange component [def-weil-pbc-underived-exchange] $s^* f_*F\\to f'_*g'^*F$ is an isomorphism. No torsion, finite-type, surjectivity or residue-field algebraicity hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, etale-cohomology.tex",
+  "place": "Tag 0EYP (integral direct-image base change); strict-henselian proof via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "Work over an affine open of Y containing the image of s. The integral morphism is affine and qcqs, and its strict-henselian base change is Spec B with B integral over A, where A is the strict henselization at s. By [lem-weil-pbc-sets-pushforward-stalk-strict-henselization], the direct-image stalk is sections on Spec B, with every neighbourhood germ sent to its restriction.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let m be the maximal ideal of A. By [lem-weil-pbc-integral-over-henselian-pair], (B,mB) is henselian. Restriction from Spec B to Spec(B/mB) is an isomorphism by the affine special case of [lemma-weil-pbc-etale-degree-zero]: apply its proper morphism hypothesis to the identity of Spec B, not to f. The separably closed residue field kappa of A embeds in Omega. The fibre X' is Spec(B/mB) base changed along kappa -> Omega, and [lem-weil-pbc-sections-base-field-extension] shows that this further restriction is bijective.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lemma-weil-pbc-etale-degree-zero",
+    "lem-weil-pbc-sections-base-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the identity point of Spec Omega, [lemma-openclosed-stalk-upperstar] identifies the source stalk with (f_*F)_s. The terminal-object germ isomorphism [lem-weil-pbc-strictly-henselian-sections-stalk] identifies the target stalk with sections of g'^*F on X'. Expand [def-weil-pbc-underived-exchange] on a section over a pointed neighbourhood V: the adjunction unit pulls it to X' times_SpecOmega (Spec Omega times_Y V), the square identifies the iterated pullback, and the counit restricts to X'. Hence this is exactly the composite canonical restriction of steps 1 and 2. It is therefore bijective on the identity-point stalk. Forgetting module structure reflects isomorphisms; [lemma-weil-pbc-geometric-stalk-conservative] gives the exchange isomorphism over Spec Omega.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "def-weil-pbc-underived-exchange",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "def-weil-pbc-underived-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, etale-cohomology.tex",
+  "place": "Tag 0EYP (integral direct-image base change); strict-henselian proof via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ii]ntegral|[Ii]ntegral.*baseChange|isIso_iff_bijective",
+   "results": "Returned 25 hits: Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean, Mathlib/CategoryTheory/Presentable/Type.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean.",
+   "verdict": "No direct integral etale exchange found; generic isomorphism criteria are usable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change map for the direct image of an etale sheaf along an integral morphism is an isomorphism",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.respectsIso, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "verdict": "No direct integral etale exchange found; generic isomorphism criteria are usable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, Function.Bijective",
+   "results": "Returned 12 hits: CategoryTheory.bijective_iff_isIso_ofHom, CategoryTheory.isIso_iff_bijective, CategoryTheory.isIso_of_coyoneda_map_bijective, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.isIso_iff_coyoneda_map_bijective, CategoryTheory.isIso_iff_yoneda_map_bijective, CategoryTheory.ConcreteCategory.bijective_of_isIso, CategoryTheory.ConcreteCategory.isIso_iff_bijective.",
+   "verdict": "No direct integral etale exchange found; generic isomorphism criteria are usable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral morphism etale direct image base change geometric point stalk",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Integral.BaseChange",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-integral-base",
+   "place": "Geometric-point specialization of the integral exchange identity in the proof of sbc-lem-bc-integral-base; strict-henselian fibre comparison from the source module docstring.",
+   "via": [
+    "lem-sbc-integral-underived-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralGeometricPointExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralGeometricPointExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_isIntegralHom_geometricPoint",
+  "statement": "theorem isIso_baseChangeMap_app_of_isIntegralHom_geometricPoint\n    (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsIso ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T042417-L-1820239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T042417-L-1820239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

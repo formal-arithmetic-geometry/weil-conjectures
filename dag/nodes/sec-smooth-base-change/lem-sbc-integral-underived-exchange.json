@@ -1,0 +1,149 @@
+{
+ "id": "lem-sbc-integral-underived-exchange",
+ "kind": "statement",
+ "title": "Underived integral direct-image exchange",
+ "statement": "Let $\\Lambda$ be a commutative ring. Let $g':X'\\to X$, $f':X'\\to Y'$, $f:X\\to Y$ and $g:Y'\\to Y$ form a Cartesian square of schemes [def-weil-pbc-cartesian-square], and assume f is integral [def-weil-finite-integral-morphism]. The canonical exchange transformation [def-weil-pbc-underived-exchange] $g^*f_*\\to f'_*g'^*$ on sheaves of $\\Lambda$-modules [def-weil-pbc-etale-sheaves] is an isomorphism.",
+ "source": {
+  "document": "Stacks Project, etale-cohomology.tex",
+  "place": "Tag 0EYP (integral direct-image base change); strict-henselian proof via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "By stability of integral morphisms under base change (Stacks Tag 01WK; Mathlib IsIntegralHom stability), infer IsIntegralHom f' with MorphismProperty.of_isPullback. Fix a sheaf F and a residue-field algebraic-closure point s of Y'. Form its pullback square sq2 for f', and paste with the given square to obtain sq3 for f over s followed by g. Apply [lem-sbc-integral-geometric-point-exchange] to sq2 and sq3.",
+   "uses": [
+    "lem-sbc-integral-geometric-point-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-pbc-underived-horizontal-pasting] on F. The outer exchange equals the composite of the source composition isomorphism, s^* of the desired exchange, the inner exchange, and the pushforward of the target composition isomorphism. Since both geometric-point exchanges and both composition maps are isomorphisms, cancel them with isIso_comp_left_iff and isIso_comp_right_iff to prove that s^* of the desired exchange is invertible.",
+   "uses": [
+    "lem-weil-pbc-underived-horizontal-pasting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The lifted inverse-image stalk isomorphism [lemma-openclosed-stalk-upperstar], applied to s and the identity point of Spec Omega, identifies the original stalk at s with the identity-point stalk of this pullback. Naturality and preservation of isomorphisms give invertibility of the original stalk. Apply [lemma-weil-pbc-geometric-stalk-conservative] for every point, then NatIso.isIso_of_isIso_app for every sheaf F, obtaining invertibility of the entire exchange natural transformation.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-integral-geometric-point-exchange",
+  "lem-weil-pbc-underived-horizontal-pasting",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, etale-cohomology.tex",
+  "place": "Tag 0EYP (integral direct-image base change); strict-henselian proof via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Ii]ntegral|[Ii]ntegral.*baseChange|isIso_iff_bijective",
+   "results": "Returned 25 hits: Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean, Mathlib/CategoryTheory/Presentable/Type.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean.",
+   "verdict": "No direct integral etale exchange found; generic isomorphism criteria are usable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change map for the direct image of an etale sheaf along an integral morphism is an isomorphism",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.respectsIso, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "verdict": "No direct integral etale exchange found; generic isomorphism criteria are usable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, Function.Bijective",
+   "results": "Returned 12 hits: CategoryTheory.bijective_iff_isIso_ofHom, CategoryTheory.isIso_iff_bijective, CategoryTheory.isIso_of_coyoneda_map_bijective, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.isIso_iff_coyoneda_map_bijective, CategoryTheory.isIso_iff_yoneda_map_bijective, CategoryTheory.ConcreteCategory.bijective_of_isIso, CategoryTheory.ConcreteCategory.isIso_iff_bijective.",
+   "verdict": "No direct integral etale exchange found; generic isomorphism criteria are usable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral morphism etale direct image base change geometric point stalk",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Integral.BaseChange",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-integral-base",
+   "place": "Proof: the identity (f′)^{-1} pi_* = pi′_* (f′′)^{-1}, before the conservativity step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Integral.BaseChange",
+  "file": "lean/WeilConjectures/SixFunctors/Integral/BaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isIntegralHom",
+  "statement": "theorem Etale.isIso_baseChangeMap_of_isIntegralHom (sq : IsPullback g' f' f g) :\n    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "note": "Existing source theorem with a previously absent DAG record. lean.existing=false denotes that this delivery includes its Lean file, as required by the delivery schema."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-underived-horizontal-pasting",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T042417-L-1820239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T042417-L-1820239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
