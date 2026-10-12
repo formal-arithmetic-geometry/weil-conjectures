@@ -2,16 +2,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.ConstructibleCurveAnnihilator
 import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.Paper.InverseImageStalkGerm
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 @[expose] public section
 universe u
@@ -28,5 +21,48 @@ theorem constructible_sub_part {k : Type u} [Field k] [IsAlgClosed k]
     (α : F₁ ⟶ P.F) (β : P.F ⟶ F₂) (w : α ≫ β = 0)
     (hS : (ShortComplex.mk α β w).ShortExact) (hF : P.IsConstructible) :
     AlgebraicGeometry.CurveCoefficientPair.IsConstructible
-      { P with F := F₁, isTorsion := h₁ } := by sorry
+      { P with F := F₁, isTorsion := h₁ } := by
+  have _hT₂ := h₂
+  have : IsCurve P.toSpec := P.isCurve
+  have : IsLocallyNoetherian P.C := LocallyOfFiniteType.isLocallyNoetherian P.toSpec
+  have : CompactSpace P.C := QuasiCompact.compactSpace_of_compactSpace P.toSpec
+  have : IsNoetherian P.C := ⟨⟩
+  obtain ⟨n, hn, hkill⟩ := exists_annihilator_of_constructible P hF
+  have : NeZero n := ⟨Nat.ne_of_gt hn⟩
+  have : Mono α := hS.mono_f
+  have hkill₁ : n • 𝟙 F₁ = 0 := by
+    rw [← cancel_mono α, Limits.zero_comp, Preadditive.nsmul_comp, Category.id_comp,
+      ← Category.comp_id α, ← Preadditive.comp_nsmul, hkill, Limits.comp_zero]
+  obtain ⟨hT, M, e, _, hM, _⟩ :=
+    Scheme.constructible_torsion_modules_agree P.toSpec n hn P.F hkill
+  obtain ⟨hT₁, M₁, e₁, _, hM₁, _⟩ :=
+    Scheme.constructible_torsion_modules_agree P.toSpec n hn F₁ hkill₁
+  let R := ULift.{u + 1} (ZMod n)
+  let U := sheafCompose P.C.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1})
+  let a : U.obj M₁ ⟶ U.obj M := e₁.hom ≫ α ≫ e.inv
+  let i : M₁ ⟶ M := ⟨{
+    app := fun V ↦ ModuleCat.ofHom
+      { toFun := a.hom.app V
+        map_add' := map_add (a.hom.app V).hom
+        map_smul' := fun c x ↦ by
+          have hc : (c.down.val : R) = c := by
+            apply ULift.ext
+            exact ZMod.natCast_zmod_val c.down
+          let f : (M₁.obj.obj V) →+ (M.obj.obj V) := (a.hom.app V).hom
+          change f (c • x) = c • f x
+          rw [← hc]
+          simpa only [Nat.cast_smul_eq_nsmul] using
+            f.map_nsmul c.down.val x }
+    naturality := fun V W f ↦ by
+      ext x
+      exact ConcreteCategory.congr_hom (a.hom.naturality f) x }⟩
+  have hi : U.map i = a := by rfl
+  have : Mono a := inferInstance
+  have : Mono i := by
+    apply Functor.mono_of_mono_map U
+    rw [hi]
+    infer_instance
+  have hMc : Scheme.IsConstructibleEtaleModuleSheaf M := hM.mp hF
+  exact hM₁.mpr (Scheme.isConstructibleEtaleModuleSheaf_of_mono_noetherian i hMc)
 end AlgebraicGeometry.CurveCoefficientPair
