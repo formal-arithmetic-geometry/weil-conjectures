@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-scheme-iso-perfect-local-transport",
+ "kind": "statement",
+ "title": "Local perfect model transport under a scheme isomorphism",
+ "statement": "Given a scheme isomorphism and a local strictly perfect model of an object on an open neighbourhood of the image point, the inverse derived equivalence admits a local strictly perfect model on a neighbourhood of the original point.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, local transport argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the localization comparison for pushforward along the scheme isomorphism and its inverse on corresponding open sites. Transport the strictly perfect complex termwise; finite free modules, splittings, zero terms and degree bounds are preserved. Apply the induced localized functor to the given local model isomorphism.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, local transport argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB",
+  "group": "U2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward along an isomorphism preserves perfect complexes of sheaves of modules and quasi-coherent cohomology",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward along a scheme isomorphism preserves perfect complexes",
+   "date": "2026-10-12",
+   "results": "Returned generic exact-functor localization constructions only, not IsPerfect transport.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|perfect.*isomorphism|isomorphism.*perfect in Mathlib/AlgebraicGeometry and both source roots",
+   "date": "2026-10-12",
+   "results": "No Mathlib scheme-perfect predicate; Sheaf.DerivedPullbackPerfect concerns the specified derivedPullback in a shared universe and does not provide this independent-universe isomorphism comparison.",
+   "verdict": "no exact scheme-level match; the listed ingredients are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine finite-presentation input: Step 2, transport local strictly perfect models",
+   "via": [
+    "lem-pc-perfect-affine-finite-presentation",
+    "lem-pc-perfect-affine-classes-small",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoPerfectLocalTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scheme_iso_local_perfect_transport",
+  "statement": "theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}\n    (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w₁} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w₂} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))]\n    (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (E : schemeDerivedCategory Y) (x : X)\n    (V : Y.Opens) (hx : s.hom.base x ∈ V)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) ℤ)\n    (hK : IsStrictlyPerfect Y V K)\n    (hE : Nonempty ((SheafOfModules.overFunctor\n      (moduleRings Y.toRingedSpace) V).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K)) :\n    ∃ U : X.Opens, x ∈ U ∧\n      ∃ K' : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        IsStrictlyPerfect X U K' ∧\n        Nonempty ((SheafOfModules.overFunctor\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (e.inverse.obj E) ≅\n          DerivedCategory.Q.obj K')",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport
 
 /-! # Perfect objects under scheme isomorphisms
 
@@ -55,6 +56,9 @@ theorem scheme_iso_derived_inverse_preserves_perfect {X Y : Scheme.{u}}
         (SheafOfModules.pushforward s.hom.toRingCatSheafHom)
         ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)
     (E : schemeDerivedCategory Y) (hE : IsPerfect Y E) :
-    IsPerfect X (e.inverse.obj E) := by sorry
+    IsPerfect X (e.inverse.obj E) := by
+  intro x
+  rcases hE (s.hom.base x) with ⟨V, hx, K, hK, hIso⟩
+  exact scheme_iso_local_perfect_transport s e he E x V hx K hK hIso
 
 end AlgebraicGeometry.Scheme
