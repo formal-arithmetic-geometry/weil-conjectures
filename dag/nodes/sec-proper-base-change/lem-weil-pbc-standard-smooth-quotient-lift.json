@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite submersive presentation of the standard smooth R/I-algebra C. Lift all coefficients of its equations fbar to equations f over R, preserving the finite index sets and the injection selecting the Jacobian minor variables. Form B = R[x,z]/(f,z D - 1), where D is the selected Jacobian determinant of f. The enlarged Jacobian matrix is block triangular with diagonal blocks the selected matrix and D, so its determinant is D squared. This is a unit in B because z D = 1. Thus B is standard smooth over R.",
+   "text": "Choose a finite submersive presentation P of C over R/I. Reindex its generators by ULift to universe max(u,v). Surjectivity of R to R/I gives P.HasCoeffs R. Mathlib Presentation.ModelOfHasCoeffs constructs A = R[x]/(f), with lifted equations, and PreSubmersivePresentation.ofHasCoeffs gives its selected injective minor. Put B = A[1/d], where d is this presentation's Jacobian. Compose its presubmersive presentation with the localizationAway presentation. PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian computes the new Jacobian as the image of d squared. IsLocalization.map_units makes this a unit, so SubmersivePresentation.isStandardSmooth proves B standard smooth. No hollow construction or choice from an unproved theorem is used.",
    "uses": [
     "def-weil-pbc-standard-smooth-algebra",
     "def-weil-pbc-polynomial-partial-derivative"
@@ -20,7 +20,7 @@
    "elementary": true
   },
   {
-   "text": "Reduction of coefficients modulo I commutes with partial derivatives and determinants. Therefore B/IB is (R/I)[x,z]/(fbar,z Dbar - 1). The presentation map sends x to the generators of C and z to the inverse of the image of Dbar; it kills each relation. Conversely the classes of x give a map from C to B/IB. The composites fix the x generators; they also fix z, since z and the image of Dbar inverse are both inverses of Dbar. Hence the maps are inverse R/I-algebra maps. Transport B along ULift to the carrier universe max(u,v). This argument works for zero rings and empty lists as well.",
+   "text": "Presentation.tensorModelOfHasCoeffsEquiv identifies (R/I) tensor_R A with C. Its value on the base-changed Jacobian is P.jacobian, by tensorModelOfHasCoeffsEquiv_tmul and SubmersivePresentation.aeval_jacobianOfHasCoeffs. Compose TensorProduct.quotIdealMapEquivQuotTensor (B/IB to (R/I) tensor_R B), IsLocalization.Away.tensorProductEquivTMulRight (base change commutes with localization), IsLocalization.algEquivOfAlgEquiv (transport along the model equivalence), and the inverse of IsLocalization.atUnit restricted to R/I (localizing C at its unit Jacobian changes nothing). This gives the required R/I-algebra equivalence. Raising the generator universe already makes B inhabit Type(max(u,v)). Empty index sets and zero algebras are covered by the same Mathlib constructions.",
    "uses": [],
    "elementary": true
   }
@@ -32,7 +32,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07CK (lemma-lift-once), proof: lifting the equations and adjoining the inverse Jacobian determinant; original core steps 7--8"
+  "place": "Tag 07CK (lemma-lift-once), proof: lifting the equations and adjoining the inverse Jacobian determinant; original core steps 7--8; implemented by E2 using Mathlib presentation descent, localization composition, and quotient/tensor equivalences"
  },
  "mathlib_searches": [
   {
@@ -106,10 +106,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T184337-L-4017483",
-  "kind": "interface",
+  "landing": "20261012T202237-L-703413",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
