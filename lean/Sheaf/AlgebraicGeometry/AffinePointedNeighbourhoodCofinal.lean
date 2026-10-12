@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Limits.Final
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-!
 # Cofinality of affine pointed étale neighbourhoods
@@ -52,6 +53,24 @@ theorem affinePointedNeighbourhoods_initial_and_final_op
     Functor.Final
       (ObjectProperty.ι
         (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).op := by
-  sorry
+  have h : Functor.Initial
+      (ObjectProperty.ι
+        (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)) := by
+    apply Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful
+    rintro ⟨X, x⟩
+    cases X with | _ Y f
+    obtain ⟨y, hy, rfl⟩ := Over.homMk_surjective x
+    dsimp at y hy
+    obtain ⟨R, j, _, y', rfl⟩ : ∃ (R : CommRingCat) (j : Spec (.of R) ⟶ Y)
+        (_ : IsOpenImmersion j) (y' : _ ⟶ _), y' ≫ j = y := by
+      obtain ⟨R, j, _, hj, _⟩ := exists_affine_mem_range_and_range_subset
+        (x := y.base default) (U := ⊤) (by simp)
+      refine ⟨R, j, inferInstance, _, IsOpenImmersion.lift_fac j y ?_⟩
+      rintro _ ⟨a, rfl⟩
+      rwa [Subsingleton.elim a default]
+    refine ⟨⟨Functor.elementsMk _ (Etale.mk (j ≫ f))
+      (Over.homMk y'), by change IsAffine (Spec (.of R)); infer_instance⟩, ?_⟩
+    exact ⟨⟨MorphismProperty.Over.homMk j rfl (by simp), by cat_disch⟩⟩
+  exact ⟨h, inferInstance⟩
 
 end AlgebraicGeometry.Scheme
