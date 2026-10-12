@@ -24,39 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Adjunction (Stacks, Modules, lemma-adjoint-tensor-restrict, the sheaf analogue of Algebra 05DQ, proved openwise). Let $\\mathcal G$ be an $A$-module and $\\mathcal F$ an $\\mathcal O_X$-module. To an $A$-linear $\\psi:\\mathcal G\\to\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F)$ assign the $\\mathcal O_X$-linear map $g:\\mathcal G\\to\\mathcal F$, $g_V(m)=\\psi_V(m)_V(1)$ on each open $V$; conversely to $g$ assign $\\psi_V(m)$ = the $\\mathcal O_V$-linear map $A|_V\\to\\mathcal F|_V$ given on $W\\subseteq V$ by $s\\mapsto g_W(s\\cdot m|_W)$. By [def-pur-sheaf-hom] sections of the sheaf Hom over $V$ are $\\mathcal O|_V$-linear maps on $V$ with restriction by restriction, so both assignments are defined open by open, are compatible with restriction, and are mutually inverse and natural in $\\mathcal G$ and $\\mathcal F$ by the same two-line computation as for modules ($\\psi(m)(s)=\\psi(sm)(1)$ by $A$-linearity). No localization of Hom is used. Taking $\\mathcal G=\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F)$ and $\\psi=\\mathrm{id}$ shows the counit is $\\varphi\\mapsto\\varphi(1)$, evaluation at the unit.",
+   "text": "Apply the sheaf coinduction adjunction to f, without needing affineness, obtaining H,i,adj, the multiplication action and evaluation-at-one counit.",
    "uses": [
-    "def-pur-sheaf-hom"
+    "lem-sc-sheaf-coinduction-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
-   }
+   "elementary": false
   },
   {
-   "text": "Sections over an affine open $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$. Since $f$ is affine, $A=f_*\\mathcal O_Y$ is quasi-coherent [lem-pc-affine-morphism-hi, applied to the quasi-coherent $\\mathcal O_Y$], hence so is $A|_U$, and by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) $A|_U\\cong\\widetilde S$ with $S=\\Gamma(U,A)=\\mathcal O_Y(f^{-1}(U))$. By [def-pur-sheaf-hom] and [lem-weil-pbc-affine-tilde-gamma-adjunction] (1), which holds for every $\\mathcal O_U$-module (no quasi-coherence or finite presentation of $\\mathcal F$ is needed), $\\Gamma(U,\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F))=\\operatorname{Hom}_{\\mathcal O_U}(\\widetilde S,\\mathcal F|_U)\\cong\\operatorname{Hom}_R(S,\\mathcal F(U))$, $\\alpha\\mapsto\\alpha_U\\circ\\tau_U$; under it the counit of Step 1 is $\\varphi\\mapsto\\varphi(1)$, $1\\in S$.",
+   "text": "The restricted unit of f_*O_Y is definitionally the pushforward of the unit O_Y-module. The unit is quasi-coherent; affine pushforward preserves quasi-coherence. Hence M=T(A) is quasi-coherent.",
    "uses": [
-    "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pur-sheaf-hom"
+    "lem-pc-affine-morphism-hi"
    ],
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
-   },
+   "elementary": false
+  },
+  {
+   "text": "For an affine open U define ev(phi) as the component at the identity of U. Evaluation is additive; its scalar compatibility follows from the internal-Hom scalar action and the identity restriction on O_X(U). The affine evaluation theorem makes ev bijective, so LinearEquiv.ofBijective gives the stated linear equivalence with its evaluation formula. Combine it with the action and counit from step 1.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sc-affine-internal-hom-evaluation-bijective"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
   "lem-pc-affine-morphism-hi",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-sc-affine-internal-hom-evaluation-bijective",
+  "lem-sc-sheaf-coinduction-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
+  "place": "Tag 0BUZ; F1 stage-3 Lean decomposition of its two independent steps, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -144,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T095859-L-315392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

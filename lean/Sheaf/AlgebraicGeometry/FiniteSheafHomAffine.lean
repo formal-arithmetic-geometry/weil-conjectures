@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.SheafCoinductionAdjunction
+import Sheaf.AlgebraicGeometry.AffineInternalHomEvaluationBijective
 
 /-!
 # Affine sheaf-Hom is right adjoint to restriction
@@ -26,6 +29,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- For an affine `f : Y ⟶ X`, internal Hom from `f_* O_Y`, with its canonical
 `f_* O_Y`-action, is right adjoint to restriction of scalars. Its sections on an
 affine open are the module Hom of sections, and its counit evaluates at one.
@@ -72,6 +76,32 @@ theorem sheafHom_affine_rightAdjoint
             ∀ (φ : (SheafOfModules.homObj M F).val.obj (op U))
               (s : M.val.obj (op U)),
               e φ s = (φ.app (op (Over.mk (𝟙 U)))).hom s) := by
-  sorry
+  dsimp only
+  obtain ⟨H, i, adj, haction, hcounit⟩ := sheafHom_restrictScalars_adjunction f
+  refine ⟨H, i, adj, haction, hcounit, ?_⟩
+  intro F U hU
+  let M := (SheafOfModules.restrictScalars.{u} f.toRingCatSheafHom).obj
+    (SheafOfModules.unit
+      (((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous
+        RingCat.{u} _ _).obj Y.ringCatSheaf))
+  have hM : M.IsQuasicoherent := by
+    change ((Scheme.Modules.pushforward f).obj
+      (SheafOfModules.unit Y.ringCatSheaf)).IsQuasicoherent
+    have : (SheafOfModules.unit Y.ringCatSheaf).IsQuasicoherent :=
+      SheafOfModules.isQuasicoherent_unit.{u, u, u}
+    exact Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom f _
+  let ev : (SheafOfModules.homObj M F).val.obj (op U) →ₗ[X.presheaf.obj (op U)]
+      (M.val.obj (op U) →ₗ[X.presheaf.obj (op U)] F.val.obj (op U)) :=
+    { toFun := fun φ ↦ (φ.app (op (Over.mk (𝟙 U)))).hom
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun r φ ↦ by
+        ext s
+        rw [PresheafOfModules.smul_app (R := X.presheaf) r φ (op (Over.mk (𝟙 U)))]
+        change X.presheaf.map (𝟙 U).op r •
+          ((φ.app (op (Over.mk (𝟙 U)))).hom s : F.val.obj (op U)) =
+          r • ((φ.app (op (Over.mk (𝟙 U)))).hom s : F.val.obj (op U))
+        simp }
+  exact ⟨LinearEquiv.ofBijective ev (affine_internalHom_evaluation_bijective M F U hU),
+    fun _ _ ↦ rfl⟩
 
 end AlgebraicGeometry
