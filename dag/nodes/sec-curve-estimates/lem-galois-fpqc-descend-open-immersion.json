@@ -27,73 +27,32 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal P$ be the property of a scheme morphism being an open immersion [def-weil-open-immersion]. It is invariant under isomorphisms of source and target: such isomorphisms transport the open image, the homeomorphism onto it, and the isomorphism of structure sheaves.",
+   "text": "For the property of being an open immersion [def-weil-open-immersion], Mathlib supplies Zariski locality at the target and stability under arbitrary base change. Its proved instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (the declaration recorded by [lem-galois-open-immersion-affine-descent], in its full generality) supplies descent along surjective flat quasi-compact morphisms. These are exactly the typeclass assumptions of the source library covering-family descent theorem.",
    "uses": [
-    "def-weil-open-immersion"
+    "def-weil-open-immersion",
+    "lem-galois-open-immersion-affine-descent"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02L3, proof lines 5866-5868; Definition Tag 02KO, line 5310"
-   }
+   "elementary": true
   },
   {
-   "text": "The property $\\mathcal P$ is stable under flat base change, indeed under arbitrary base change: if $j:U\\to T$ is an open immersion, the second projection of $U\\times_TT'\\to T'$ identifies with the inclusion of the inverse image of the open subscheme $j(U)$; it has the required homeomorphism and sheaf isomorphism [def-pc-fibre-product], [def-weil-open-immersion].",
+   "text": "The given fpqc precover [def-weil-pbc-fpqc-covering] generates an fpqc covering sieve by Precoverage.generate_mem_toGrothendieck. Apply the proved source declaration AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc) with P = IsOpenImmersion, the given maps p and phi', the given fibre-product witnesses [def-pc-fibre-product], and the hypotheses that phi' i are open immersions. It yields IsOpenImmersion phi directly, with arbitrary index universe and no choice of canonical pullbacks. This invokes proved covering-family descent rather than the unfinished Sheaf formulation of the affine fpqc-local criterion.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-open-immersion"
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fibre-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02L3, proof lines 5866-5867; Schemes, Lemma Tag 01JY"
-   }
-  },
-  {
-   "text": "The property $\\mathcal P$ is Zariski local on the target: if open subschemes $V_k$ cover $T$ and each restriction $f^{-1}(V_k)\\to V_k$ is an open immersion, their open images agree on overlaps as the image of the same restriction of $f$. They glue to an open subset of $T$, and the local inverse maps and sheaf isomorphisms glue to make $f$ an open immersion [def-weil-open-immersion].",
-   "uses": [
-    "def-weil-open-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02L3, proof line 5868"
-   }
-  },
-  {
-   "text": "For affine schemes $T'$ and $T$, if $g:T'\\to T$ is flat and surjective and the base change of $f:Y\\to T$ along $g$ is an open immersion, then $f$ is an open immersion by [lem-galois-open-immersion-affine-descent]. This verifies the faithfully flat affine condition (3) of [lem-weil-pbc-fpqc-local-on-base-criterion] for $\\mathcal P$.",
-   "uses": [
-    "lem-galois-open-immersion-affine-descent",
-    "lem-weil-pbc-fpqc-local-on-base-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02L3, proof lines 5880-5912; Lemma Tag 02KP, line 5407"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-fpqc-local-on-base-criterion] to $\\mathcal P$, the given morphism $\\varphi:Y\\to T$, and the fpqc covering $\\{h_i:T_i\\to T\\}_{i\\in I}$. Steps 1-4 give its four conditions, and the hypothesis says every base change has $\\mathcal P$. The criterion concludes that $\\varphi$ is an open immersion.",
-   "uses": [
-    "lem-weil-pbc-fpqc-local-on-base-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KP, line 5407, applied as in the final line of the proof of Lemma Tag 02L3"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-open-immersion",
-  "def-pc-fibre-product",
   "lem-galois-open-immersion-affine-descent",
-  "lem-weil-pbc-fpqc-local-on-base-criterion"
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 02L3, proof lines 5866-5912, through Lemma Tag 02KP"
+  "by": "library",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "place": "Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology specialized to IsOpenImmersion using descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (Stacks 02L3); V2 stage 3"
  },
  "mathlib_searches": [
   {
@@ -197,5 +156,15 @@
   "group": "H1",
   "result": "fix",
   "note": "phi:Y->T over Scheme.{u}; index I:Type v (empty allowed); cover as Presieve.ofArrows T' h in Scheme.fpqcPrecoverage T (C1 UnramifiedDescent convention); Y_i,p_i,phi_i with IsPullback (p i) (phi' i) phi (h i) = chosen fibre product of phi and h_i; forall i IsOpenImmersion (phi' i) => IsOpenImmersion phi; Mathlib has only the single-morphism instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (FlatDescent.lean 133), WeilConjectures only the generic of_isPullback_of_ofArrows_mem_fpqcTopology, so existing:false right; docstring covers proof steps 1-5; fix: dropped redundant import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion (Sites.Fpqc already provides IsOpenImmersion; recompiled clean)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T060759-L-2918452",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

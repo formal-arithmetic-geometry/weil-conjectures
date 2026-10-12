@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of open immersions along an fpqc covering
@@ -37,6 +37,7 @@ theorem isOpenImmersion_of_fpqcPrecoverage_pullback
     (Y' : I → Scheme.{u}) (p : ∀ i, Y' i ⟶ Y) (φ' : ∀ i, Y' i ⟶ T' i)
     (hp : ∀ i, IsPullback (p i) (φ' i) φ (h i))
     (hφ' : ∀ i, IsOpenImmersion (φ' i)) : IsOpenImmersion φ := by
-  sorry
+  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (P := @IsOpenImmersion)
+    (Precoverage.generate_mem_toGrothendieck hh) φ p φ' hp hφ'
 
 end AlgebraicGeometry
