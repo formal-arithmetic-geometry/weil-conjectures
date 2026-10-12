@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.KFlatPullback
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Sheaf.Algebra.Homology.ModuleStalkExact
 
 /-! # Exact tensor pullback to an affine morphism's direct-image algebra
 

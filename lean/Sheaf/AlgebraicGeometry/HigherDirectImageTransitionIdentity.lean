@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Identity triangle for higher direct images
 

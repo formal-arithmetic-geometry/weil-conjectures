@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 import Sheaf.Paper.TorLongExactFirstVariable
+import Sheaf.Algebra.Homology.FreeResolutionSesSplit
 
 /-!
 # The Tor boundary for kernels, natural in presentations

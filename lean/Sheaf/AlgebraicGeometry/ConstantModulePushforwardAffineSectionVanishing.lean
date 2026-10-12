@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Constant-module section vanishing at an inverse limit
 

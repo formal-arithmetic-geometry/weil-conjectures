@@ -13,6 +13,7 @@ import Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators
 import Sheaf.RingTheory.ImprovePresentation
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
+import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Preparing the polynomial lifting problem in the separable case

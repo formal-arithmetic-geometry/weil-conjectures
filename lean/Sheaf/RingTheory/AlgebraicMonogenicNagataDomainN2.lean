@@ -7,6 +7,10 @@ module
 
 public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.Algebraic.Defs
+import Sheaf.RingTheory.FiniteOverNagata
+import Sheaf.RingTheory.IsN1AdjoinSingleton
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataDomainN2
 
 /-!
 # Algebraic monogenic extensions of Nagata domains are Japanese

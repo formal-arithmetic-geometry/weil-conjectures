@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
 public import Mathlib.CategoryTheory.Sites.Continuous
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # AffineEtaleBaseChangeGeometry

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
+import Sheaf.AlgebraicGeometry.DivisorModule
+import Sheaf.AlgebraicGeometry.FunctionField
 
 /-! # Divisor restriction across a smooth curve compactification -/
 

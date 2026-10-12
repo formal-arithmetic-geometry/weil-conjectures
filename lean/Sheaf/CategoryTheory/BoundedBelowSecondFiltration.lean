@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The second filtration for a double complex supported in a half-plane
 

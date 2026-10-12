@@ -7,6 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.DerivedCoupleExact
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Canonical quotient maps in half-plane convergence

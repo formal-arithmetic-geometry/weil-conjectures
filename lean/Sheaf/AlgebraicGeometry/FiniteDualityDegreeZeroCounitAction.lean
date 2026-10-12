@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 
 /-! # FiniteDualityDegreeZeroCounitAction
 

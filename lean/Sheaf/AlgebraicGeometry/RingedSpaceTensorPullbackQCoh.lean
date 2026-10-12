@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 
 /-! # Quasi-coherence of tensor pullback on ringed spaces
 

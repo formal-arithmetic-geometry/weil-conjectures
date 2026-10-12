@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.ConstructibleSheaf.Defs
 
 
 /-!

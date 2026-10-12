@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.AlgebraicGeometry.GaloisStalkActionFunctor
 
 /-!
 # Finite actions in the essential image of the Galois stalk functor

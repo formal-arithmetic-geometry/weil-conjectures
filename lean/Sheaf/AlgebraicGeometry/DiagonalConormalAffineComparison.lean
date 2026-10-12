@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DiagonalConormal
+import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
 /-!
 # The diagonal comparison on affine sections

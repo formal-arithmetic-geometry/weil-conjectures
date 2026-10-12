@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsTwoCocycles
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.FieldTheory.GaloisUnitsCohomology
 
 /-!
 # Etale unit cohomology computed by continuous inhomogeneous cocycles

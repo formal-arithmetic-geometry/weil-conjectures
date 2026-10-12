@@ -27,6 +27,7 @@ import Sheaf.RingTheory.RegularSequencePowers
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
 import Sheaf.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # The auxiliary eighth-power problem in positive characteristic

@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Resolution comparison for the étale section complexes

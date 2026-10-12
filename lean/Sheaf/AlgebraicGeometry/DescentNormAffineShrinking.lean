@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Norm shrinking around finite saturated sets

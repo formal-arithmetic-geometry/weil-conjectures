@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
+import WeilConjectures.SixFunctors.OpenClosed.Stalk
 
 /-! # Closed coefficient range comparison
 

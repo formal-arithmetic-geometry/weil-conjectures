@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 
 /-!

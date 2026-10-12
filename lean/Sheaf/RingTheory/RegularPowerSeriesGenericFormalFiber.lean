@@ -9,6 +9,10 @@ public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
+import Sheaf.RingTheory.RegularLocalLocalization
 
 /-!
 # Generic formal fibres of regular power-series models

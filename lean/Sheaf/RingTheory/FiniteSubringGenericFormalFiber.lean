@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Finiteness.Basic
+import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
+import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Generic formal fibres and finite subrings

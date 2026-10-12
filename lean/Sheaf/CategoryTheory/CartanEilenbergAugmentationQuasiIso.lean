@@ -10,6 +10,7 @@ import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
 import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # Quasi-isomorphism of the augmented total
 

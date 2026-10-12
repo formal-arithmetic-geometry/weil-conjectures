@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Resolution comparison for sections of a direct image
 

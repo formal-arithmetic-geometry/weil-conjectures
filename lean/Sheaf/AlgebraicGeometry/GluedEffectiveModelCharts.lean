@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
+import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-!
 # Gluing local effective models along descended overlaps

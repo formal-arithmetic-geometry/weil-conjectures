@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
 # Restriction to a localized ringed site preserves K-injectivity

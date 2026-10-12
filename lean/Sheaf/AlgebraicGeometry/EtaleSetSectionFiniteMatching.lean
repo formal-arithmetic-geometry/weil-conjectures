@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Finite matching equations become effective at a stage
 Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction.

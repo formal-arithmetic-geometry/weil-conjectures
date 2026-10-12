@@ -11,6 +11,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 import Sheaf.AlgebraicGeometry.HomComplexSingle
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Deriving internal Hom from a module in degree zero
 

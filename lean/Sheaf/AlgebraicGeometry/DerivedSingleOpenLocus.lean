@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # The flat single-cohomology open locus
 

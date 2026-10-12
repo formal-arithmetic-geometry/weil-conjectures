@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 @[expose] public section
 

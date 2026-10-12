@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChange
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-!
 # Base change of a right adjoint on the self-product

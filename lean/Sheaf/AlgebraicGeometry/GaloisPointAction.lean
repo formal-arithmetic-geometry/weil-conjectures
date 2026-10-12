@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Galois action on the functor of geometric lifts

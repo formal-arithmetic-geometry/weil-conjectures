@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! Intermediate determinant facts for the ordinary determinant evaluation.
 Source: Stacks Project, Tag 0BRT. -/

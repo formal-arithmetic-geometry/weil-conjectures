@@ -14,6 +14,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Spec
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.ThickeningIntegral
 
 /-!
 # Scheme components from a split reduced tensor algebra

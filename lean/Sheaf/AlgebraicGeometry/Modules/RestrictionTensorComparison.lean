@@ -6,6 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Restriction and tensor products of modules

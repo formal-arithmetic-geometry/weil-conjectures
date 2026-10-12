@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 import Sheaf.AlgebraicGeometry.PullbackSectionsComparison
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Constant-module section comparisons on a cartesian square
 

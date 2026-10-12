@@ -6,6 +6,8 @@ Authors: SHEAF group C2
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Transport of canonical pullback maps to complex representatives
 

@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication
 import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # Tensor powers of a homogeneous section of a polynomial Proj twist
 

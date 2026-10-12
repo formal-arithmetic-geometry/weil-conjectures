@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # The constructed algebra-valued derived Hom adjunction
 

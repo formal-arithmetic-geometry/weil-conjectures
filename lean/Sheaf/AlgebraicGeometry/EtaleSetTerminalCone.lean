@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport
 public import Sheaf.AlgebraicGeometry.EtaleSetTerminalRestriction
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Compatibility of terminal section identifications
 

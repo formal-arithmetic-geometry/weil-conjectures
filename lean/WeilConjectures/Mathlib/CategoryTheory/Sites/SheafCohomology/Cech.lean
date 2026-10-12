@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import Sheaf.CategoryTheory.CechResolutionColumns
 import Sheaf.CategoryTheory.CechResolutionTotal
+import Sheaf.CategoryTheory.CechResolutionDoubleComplex
 
 /-!
 # The Čech-to-derived spectral sequence

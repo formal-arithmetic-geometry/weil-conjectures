@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
 import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-! # Existence of the canonical strict-local neighbourhood geometry
 

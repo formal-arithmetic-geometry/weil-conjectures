@@ -6,6 +6,10 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Projection restriction formulas for the strict-local mate
 

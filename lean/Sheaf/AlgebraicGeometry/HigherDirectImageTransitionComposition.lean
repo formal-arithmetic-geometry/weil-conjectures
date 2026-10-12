@@ -6,6 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Composition of higher direct image triangles
 

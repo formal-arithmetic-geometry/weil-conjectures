@@ -7,6 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # Signed row identifications for the second-filtration spectral sequence
 

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
+import Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundaryTrivial
+import Sheaf.AlgebraicGeometry.Curve.PicRestrictionPointLift
 
 /-! # Divisor restriction across a smooth curve compactification -/
 

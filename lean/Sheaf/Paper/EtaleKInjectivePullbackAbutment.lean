@@ -7,6 +7,12 @@ module
 
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
+import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # K-injective computation of the étale pullback abutment
 

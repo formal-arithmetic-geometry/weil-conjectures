@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalSums
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Local sum characterization of finite étale traces

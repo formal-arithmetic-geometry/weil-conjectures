@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Natural comparison for abelian higher direct images
 

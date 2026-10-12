@@ -14,6 +14,9 @@ import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Filtered resolution construction of étale hypercohomology pullback
 

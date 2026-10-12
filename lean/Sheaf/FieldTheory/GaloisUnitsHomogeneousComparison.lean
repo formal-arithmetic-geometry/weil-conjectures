@@ -6,6 +6,7 @@ Authors: SHEAF worker N3
 module
 
 public import Sheaf.FieldTheory.GaloisUnitsTwoCocycles
+import Sheaf.FieldTheory.GaloisUnitsCohomology
 
 /-!
 # Homogeneous and inhomogeneous continuous unit cohomology

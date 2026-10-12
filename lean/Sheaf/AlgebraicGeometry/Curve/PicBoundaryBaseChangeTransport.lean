@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.GenusInvariant
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 import WeilConjectures.AlgebraicGeometry.Picard.Degree
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-! # Transport of degree-zero boundary subgroups
 

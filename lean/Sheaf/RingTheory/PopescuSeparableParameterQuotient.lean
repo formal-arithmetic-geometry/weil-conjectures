@@ -16,6 +16,7 @@ import Sheaf.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.PopescuDelocalizeHeightZero
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Resolving the nilpotent parameter quotient

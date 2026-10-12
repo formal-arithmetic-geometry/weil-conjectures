@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Skeletal
 public import Mathlib.Logic.Small.Basic
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Smallness of perfect isomorphism classes on an affine scheme
 

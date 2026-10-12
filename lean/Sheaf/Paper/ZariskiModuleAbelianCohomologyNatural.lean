@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
 import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 
 /-! # Natural comparison of module and abelian cohomology
 

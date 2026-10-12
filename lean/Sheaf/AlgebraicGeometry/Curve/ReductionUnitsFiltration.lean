@@ -10,6 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # A finite quasi-coherent filtration of infinitesimal units
 
