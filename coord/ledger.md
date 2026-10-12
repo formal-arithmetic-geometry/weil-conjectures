@@ -7978,3 +7978,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/V3/Sheaf.RingTheory.AdjoinRootCRTMatrix (stage 3; reviewer PASS; first push; landing 20261012T135330-L-1698644 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:53 L: merged deliver/V3/Sheaf.Topology.SheafOfModulesFromIndexedBasis (stage 3; reviewer PASS; first push; landing 20261012T135330-L-1698793 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/W2/Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation (stage 3; reviewer PASS; after a return; landing 20261012T135331-L-1698936 (interface); batch 20261012T135212; modules 4; new nodes 3)
+- 13:53 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsBackward (stage 3; reviewer PASS; after a return; landing 20261012T135331-L-1699126 (proof); batch 20261012T135212; modules 1; new nodes 0)
