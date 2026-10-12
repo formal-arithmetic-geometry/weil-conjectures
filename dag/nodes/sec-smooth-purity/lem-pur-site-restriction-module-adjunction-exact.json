@@ -38,11 +38,11 @@
    }
   },
   {
-   "text": "The abelian sheafification of the underlying presheaf of $P_F$ is the direct-sum presheaf extension by zero for the underlying abelian sheaf of $F$, by [def-weil-extension-by-zero-presheaf] and the underlying-sheaf clause of [lem-pc-sites-module-sheafification-interface]. Hence the underlying abelian functor of $j_{U!}$ is the sheafified direct-sum functor of [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint], while the underlying functor of $j_U^*$ is abelian restriction. The natural bijection of that node therefore gives the required bijection of underlying hom-sets. In the explicit sectionwise formula, multiplication by $a\\in\\mathcal O(V)$ is carried to multiplication by its restriction in $\\mathcal O|_U(V\\to U)$; therefore a map and its adjoint are $\\mathcal O$-linear simultaneously. The underlying bijection thus restricts to a natural bijection $\\operatorname{Hom}_{\\mathcal O}(j_{U!}F,G)\\cong\\operatorname{Hom}_{\\mathcal O|_U}(F,j_U^*G)$.",
+   "text": "Construct the module Hom equivalence directly, following the sectionwise formula of Stacks 03DI. From a map from the extension-by-zero presheaf to G, compose each section map with the direct-sum injection indexed by the slice arrow. Conversely, from F to the restriction of G, use DirectSum.toModule on the component linear maps. Naturality follows from the restriction formula of [def-weil-extension-by-zero-presheaf] and naturality in the slice. The direct-sum universal property proves both inverse laws; checking the same generators proves naturality in F and G. Compose this presheaf Hom equivalence with the module sheafification Hom equivalence of [def-weil-presheaf-modules-sheafification] (the interface in [lem-pc-sites-module-sheafification-interface]) and use Adjunction.mkOfHomEquiv. This produces the module adjunction without requiring a sectionwise formula from the abelian adjunction statement.",
    "uses": [
     "def-weil-extension-by-zero-presheaf",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-interface"
    ],
    "elementary": false,
    "source": {
@@ -51,8 +51,9 @@
    }
   },
   {
-   "text": "For a short exact sequence of $\\mathcal O$-module sheaves, forgetting the module structure gives a short exact sequence of abelian sheaves by the faithful exactness of the forgetful functor in [lem-weil-pbc-module-sheaves-colimits-forgetful]. Applying the exact abelian restriction functor [lem-weil-pbc-site-restriction-exact] gives a short exact sequence after restriction. The underlying sequence of the restricted module sequence is therefore exact, and faithfulness and exactness of forgetting imply that $j_U^*$ is exact.",
+   "text": "The module restriction is additive by its sectionwise formula in [def-pur-localized-ringed-site]. Forget the short complex to abelian sheaves; exactness of the forgetful functor follows from [lem-weil-pbc-module-sheaves-colimits-forgetful]. Restriction commutes with forgetting by the identity natural isomorphism. Apply [lem-weil-pbc-site-restriction-exact], transport the mapped short complex along this isomorphism, and use ShortExact.reflects_shortExact_of_faithful. The Mathlib characterizations of finite-limit and finite-colimit preservation for additive functors between abelian categories give both preservation clauses.",
    "uses": [
+    "def-pur-localized-ringed-site",
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-weil-pbc-site-restriction-exact"
    ],
@@ -63,14 +64,13 @@
    }
   },
   {
-   "text": "Likewise, forgetting a short exact sequence of $\\mathcal O|_U$-module sheaves gives a short exact sequence of abelian sheaves. By Step 2 the underlying abelian functor of $j_{U!}$ is the sheafified direct-sum functor, a left adjoint of abelian restriction by [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint]; the functor $j_{U!}$ of [lem-weil-pbc-site-extension-by-zero-exact] is the left adjoint of [lem-weil-pbc-site-restriction-adjunction], so the two are naturally isomorphic by uniqueness of adjoints, and exactness passes along the isomorphism. Hence [lem-weil-pbc-site-extension-by-zero-exact] makes the underlying sequence after applying $j_{U!}$ short exact. The forgetful functor is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful], hence the module sequence itself is short exact. Thus $j_{U!}$ is exact.",
+   "text": "Compare extension-by-zero followed by forgetting with forgetting followed by the abelian direct-sum extension. The section objects are identical; equality of the maps follows by direct-sum induction, since DirectSum.lmap and DirectSum.toAddMonoid agree on every summand. Whisker this comparison with abelian sheafification and use the sheafification/forgetful isomorphism of [lem-pc-sites-module-sheafification-interface]. The abelian adjunction of [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] and Mathlib's constructed sheafAdjunctionContinuous identify the abelian extension with the sheaf pullback by uniqueness of left adjoints. This pullback is additive because it preserves coproducts and zero morphisms; transfer additivity along the comparison and reflect it through the faithful additive module forgetful functor. Apply [lem-weil-pbc-site-extension-by-zero-exact] to the forgotten short complex, using [lem-weil-pbc-module-sheaves-colimits-forgetful] to preserve its short exactness. Transport along the comparison of functors, reflect short exactness through the faithful forgetful functor, and apply the Mathlib finite-limit and finite-colimit characterizations as in Step 3.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-weil-pbc-site-extension-by-zero-exact",
     "lem-pc-sites-module-sheafification-interface",
     "def-weil-extension-by-zero-presheaf",
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-    "lem-weil-pbc-site-restriction-adjunction"
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
    ],
    "elementary": false,
    "source": {
@@ -84,16 +84,15 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-site-restriction-exact",
   "lem-weil-pbc-site-extension-by-zero-exact",
-  "lem-weil-pbc-site-restriction-adjunction"
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Sections 03DH and 03DJ, together with Lemmas 03DA and 03CY"
+  "place": "Stacks 03DI direct module Hom construction; 03DJ exactness, transported from the existing abelian exactness statement; formalized by H2 on 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -207,5 +206,15 @@
   "group": "H1",
   "result": "pass",
   "note": "site = recorded Precoverage form of def-weil-pbc-sites-and-cohomology (4 instances, J.toGrothendieck); O : Sheaf CommRingCat via sheafCompose forget₂; j_U^* = SheafOfModules.overFunctor on R.over U (localized topology); j_U! = extensionByZeroPresheaf ⋙ PresheafOfModules.sheafification (𝟙 _) tied, not an abstract left adjoint; exactness of both as PreservesFiniteLimits ∧ PreservesFiniteColimits; Nonempty (j_! ⊣ j^*) gives natural homEquiv in F and G (EXTENSION BY ZERO line form); no let/letI, inline instance, notation, choose or tautological conjunct; universe u common"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T144117-L-2098197",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
