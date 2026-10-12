@@ -56,19 +56,31 @@
  "statement": "Let U be an affine open subscheme of a scheme T [def-pc-scheme], C a complex of quasi-coherent O_U-modules [def-pc-derived-category], and d a natural number. Suppose C vanishes termwise above d and its complex of global sections is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Then there exists a complex Q of O_U-modules vanishing above d, each of whose terms is finite free [def-weil-pbc-free-module], and an actual quasi-isomorphism Q→C. No geometric morphism, nonnegative bound, or flatness hypothesis is required.",
  "proof": [
   {
-   "text": "Exactness of global sections on quasi-coherent modules on an affine scheme\nidentifies C with the associated sheaf complex of its global sections. Pseudo-coherence\nand the vanishing above d give a bounded-above finite-free ring model with upper bound d\nby Tag 064U. A bounded-above projective complex is K-projective; lift the derived\nisomorphism into the global-sections complex to an actual chain map, whose cone is acyclic.\nThe exact tilde functor sends this map to a quasi-isomorphism. Compose with the affine\ncounit to obtain Q → C; tilde sends finite free modules to free sheaves of the same rank.\nZero complexes, including the empty base, give rank zero. No flatness is needed.",
+   "text": "Evaluate C at the top open. The additive evaluation functor sends zero terms to zero terms, so its module complex D is strictly bounded above by d; transport its homology vanishing through homologyFunctorFactors. Apply exists_finiteFree_model_isStrictlyLE to Q(D) and its pseudo-coherence hypothesis to obtain P with finite free terms, upper bound d and a derived isomorphism Q(P) ≅ Q(D).",
    "uses": [
-    "lem-pc-pseudo-coherent-bounded-finite-free-model",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Free modules are projective. Apply CochainComplex.isKProjective_of_projective at d. Surjectivity of IsKProjective.Qh_map_bijective lifts the derived isomorphism after conjugating by quotientCompQhIso. Fullness of HomotopyCategory.quotient supplies an actual chain map f:P→D. Naturality and cancellation show Q.map f equals the isomorphism hom; isIso_Q_map_iff_quasiIso therefore proves QuasiIso f.",
+   "uses": [
     "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_affine_sheaf_resolution_of_ring_model to U, C, P and the actual quasi-isomorphism f. This provides Q, the same termwise upper bound, finite free sheaf terms and the required actual quasi-isomorphism Q→C.",
+   "uses": [
+    "lem-pc-affine-sheaf-resolution-from-ring-model"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-pseudo-coherent-bounded-finite-free-model",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-sc-bounded-above-projective-kprojective"
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-pc-affine-sheaf-resolution-from-ring-model"
  ],
  "lean": {
   "existing": false,
@@ -89,7 +101,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 064U, final assertion; Tag 08E7, affine equivalence"
+  "place": "Tag 064U, final assertion; Tag 01IB, affine equivalence; Tag 01HV, exactness of associated sheaf; K-projective lifting implemented with Mathlib"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -104,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-9f545",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T154830-L-2473028",
+  "landing": "20261012T184303-L-4004418",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with both DAG nodes, cited sources, import-change record and report; compiled both modules and the sole direct importer and checked axioms."
  }
 }

@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-sheaf-resolution-from-ring-model",
+ "kind": "statement",
+ "title": "Sheafifying an actual finite-free affine ring resolution",
+ "statement": "Let U be an affine open of a scheme T [def-pc-scheme], and C a cochain complex of quasi-coherent O_U-modules [def-pc-derived-category]. Write A=Γ(U,O_U). Let d be a natural number and P a cochain complex of A-modules whose terms vanish above d and are finite free [def-weil-pbc-free-module]. Given an actual quasi-isomorphism f:P→Γ(U,C) (global sections taken termwise), there exists a complex Q of O_U-modules vanishing above d, whose terms are isomorphic to free sheaves on ULift(Fin r) for some natural r in each degree, and an actual quasi-isomorphism Q→C. No pseudo-coherence hypothesis, construction of P, lower bound or geometric morphism is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Lemma 26.7.5 (Tag 01IB), affine equivalence; Lemma 26.5.4 (Tag 01HV), exactness of associated sheaf"
+ },
+ "proof": [
+  {
+   "text": "Set X=U.toScheme and A=Γ(X,⊤). The canonical affine isomorphism X≅Spec A transports the tilde/global-sections adjunction to X. Its counit on each quasi-coherent term C.X n is invertible; naturality gives an isomorphism of cochain complexes tilde(Γ(C))≅C.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply transported tilde termwise to P and f. At every prime its action is module localization; localization is exact and stalks detect exactness. Thus it preserves homology and sends the given quasi-isomorphism f to a quasi-isomorphism. Compose with the counit complex isomorphism to produce Q→C. Its terms above d are zero because tilde preserves zero objects.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n, freeness and finiteness give a finite basis of P.X n. Reindex it by ULift (Fin r), using r=0 if the module is zero. The basis isomorphism identifies P.X n with the finite direct sum of A. The left adjoint tilde sends this to the direct sum of the structure sheaf, namely SheafOfModules.free (ULift (Fin r)); affine restriction preserves the unit and coproducts. These choices are made inside the existential proof only. For the zero ring or empty scheme all modules and sheaves are zero, and rank zero works.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01IB and 01HV, applied termwise to complexes; finite free associated sheaves from coproduct preservation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of a finite free resolution on an affine scheme",
+   "results": "Service unavailable: Internal Server Error; no results returned.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme a finite free module complex with a quasi-isomorphism to global sections sheafifies to a finite free sheaf resolution",
+   "results": "Eight hits about finite presentation and quasicoherence of sheaves; none states the complex-level transport.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "tilde.adjunction and its invertible unit; the counit on quasi-coherent sheaves is in Tilde.lean, but the result is on Spec and not a comparison of complexes on U.toScheme.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_affine.*resolution|fromTildeΓ|tildeFinsupp",
+   "results": "Mathlib Tilde.lean has the module-level counit and free-sheaf isomorphism. Project library AffineQuotientResolutionSheafification handles an augmentation to a single quotient module, and AffineFiniteFreeResolutionPerfectModel handles a bounded chain resolution; neither handles the general cochain quasi-isomorphism here. Blueprint search for finite free resolution found no same statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence proof, part (a), finite-free replacement of the affine cohomology complex: transferring its actual algebraic resolution to sheaves",
+   "via": [
+    "lem-pc-proper-cohomology-finite-free-resolution",
+    "lem-pc-proper-flat-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSheafResolutionOfRingModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_sheaf_resolution_of_ring_model",
+  "statement": "theorem exists_affine_sheaf_resolution_of_ring_model\n    {T : Scheme.{u}} (U : T.Opens) [IsAffine U.toScheme]\n    (C : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)\n    (hCqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)\n    (P : CochainComplex (ModuleCat.{u}\n        (U.toScheme.ringCatSheaf.obj.obj (.op ⊤))) ℤ)\n    (hP : P.IsStrictlyLE d)\n    (hfree : ∀ i : ℤ, Module.Free (U.toScheme.ringCatSheaf.obj.obj (.op ⊤)) (P.X i) ∧\n      Module.Finite (U.toScheme.ringCatSheaf.obj.obj (.op ⊤)) (P.X i))\n    (f : P ⟶ ((SheafOfModules.evaluation.{u} U.toScheme.ringCatSheaf\n      (.op ⊤)).mapHomologicalComplex (ComplexShape.up ℤ)).obj C)\n    [QuasiIso f] :\n    ∃ Q : CochainComplex U.toScheme.Modules ℤ, Q.IsStrictlyLE d ∧\n      (∀ n : ℤ, ∃ r : ℕ, Nonempty (Q.X n ≅ SheafOfModules.free\n        (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r)))) ∧\n      ∃ e : Q ⟶ C, QuasiIso e",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9f545",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184303-L-4004418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9f545",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184303-L-4004418",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with both DAG nodes, cited sources, import-change record and report; compiled both modules and the sole direct importer and checked axioms."
+ }
+}
