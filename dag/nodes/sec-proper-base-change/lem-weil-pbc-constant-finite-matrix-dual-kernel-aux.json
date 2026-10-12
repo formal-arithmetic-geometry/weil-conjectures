@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-pbc-constant-finite-matrix-dual-kernel-aux",
+ "kind": "statement",
+ "title": "Categorical kernel comparison for the dual of a finite free constant matrix",
+ "statement": "Let X, Λ, n, m and g be as in lem-weil-pbc-constant-finite-matrix-dual-kernel. The categorical kernel of the internal-Hom dual of the constant sheaf map induced by g is isomorphic to the constant sheaf on the categorical ModuleCat kernel of ModuleCat.ofHom g.dualMap.",
+ "stmt_deps": [
+  "def-constructible-constant"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring; finite free kernel step"
+ },
+ "proof": [
+  {
+   "text": "Identify finite free modules with finite biproducts of the coefficient module, transport the dual map through the monoidal constant sheaf functor, and use preservation of finite kernels.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "finite free transpose and constant kernel argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf preserves kernel finite free module dual matrix",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel dual finite free constant sheaf",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*kernel.*dualMap",
+   "date": "2026-10-12",
+   "results": "No exact match in Lean library",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernel",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-finite-matrix-dual-kernel",
+   "place": "finite-free categorical kernel substep",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux",
+  "file": "lean/Sheaf/ConstructibleSheaf/ConstantFiniteMatrixDualKernelAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantFiniteMatrixDualKernelIso_aux",
+  "statement": "theorem constantFiniteMatrixDualKernelIso_aux\n    (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ]\n    (n m : ℕ) (g : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) :\n    Nonempty (kernel\n      ((MonoidalClosed.internalHom.flip.obj\n        (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))).map\n          ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map\n            (ModuleCat.ofHom g)).op) ≅\n      (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (kernel (ModuleCat.ofHom g.dualMap)))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

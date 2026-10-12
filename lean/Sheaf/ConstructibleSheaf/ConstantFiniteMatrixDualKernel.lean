@@ -7,6 +7,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux
 
 /-! # Constant finite matrix dual kernels
 
@@ -50,6 +51,9 @@ theorem nonempty_constantFiniteMatrixDualKernelIso
             (ModuleCat.ofHom g)).op) ≅
       (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (LinearMap.ker g.dualMap))) := by
-  sorry
+  obtain ⟨e⟩ := constantFiniteMatrixDualKernelIso_aux X n m g
+  exact ⟨e ≪≫
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
+      (ModuleCat.kernelIsoKer (ModuleCat.ofHom g.dualMap))⟩
 
 end AlgebraicGeometry.Scheme
