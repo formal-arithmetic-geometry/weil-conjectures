@@ -1,0 +1,169 @@
+{
+ "id": "lem-weil-pbc-localized-symmetric-differentials-split",
+ "kind": "statement",
+ "title": "Split differentials of a localized symmetric algebra",
+ "statement": "Let R -> A be a map of commutative rings and M a finite A-module. Set C=Sym_A(M) [lem-weil-pbc-symmetric-algebra-universal-property], with its composite R-algebra structure. Let a in A, S=A_a smooth over R [def-weil-pbc-smooth-ring-map], and suppose N=S tensor_A M is projective over S [def-weil-pbc-projective-module]. Set T=Localization(algebraMapSubmonoid C (powers a)), with its canonical S-algebra structure. Then Omega[T/R] [def-weil-pbc-kahler-differentials] is S-base-change split: there is a T-linear equivalence Omega[T/R] equiv T tensor_S (N times Omega[S/R]).",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07CE proof, final differential decomposition; Algebra 031K and 00S2; More on Algebra 07EV"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Set S=A_a, N=S tensor_A M, C=Sym_A(M), and T the localization of C at the mapped powers of a. Install the composite R-algebra structure and verify both scalar towers. The localization square is a pushout by Mathlib Algebra.isPushout_of_isLocalization.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply symmetric-algebra baseChange_bijective and the tensor-localization equivalence to identify T with Sym_S(N). Since N is finite projective, smooth_of_finite_projective and invariance under algebra equivalences give Smooth S T.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite free surjection pi onto M, put K=ker(pi), and apply the symmetric-algebra cotangent lemma to obtain Omega[C/A] equiv C tensor_A M. KaehlerDifferential.tensorKaehlerEquiv for the pushout and the two cancelBaseChange equivalences give Omega[T/S] equiv T tensor_S N.",
+   "uses": [
+    "lem-weil-pbc-cotangent-complex-symmetric-algebra",
+    "lem-weil-pbc-localization-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the first differential exact sequence for R -> S -> T, Smooth S T makes H1Cotangent S T a subsingleton. Mathlib H1Cotangent.exact_delta_mapBaseChange and LinearMap.injective_iff_eq_zero_of_exact give injectivity of the first map. The last map is surjective and its target is projective. Split it using Mathlib projective lifting and Function.Exact.splitSurjectiveEquiv.",
+   "uses": [
+    "lem-weil-pbc-formally-smooth-differentials-injective",
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the splitting with the relative differential equivalence, commute the two factors, and apply TensorProduct.prodRight inversely to give Omega[T/R] equiv T tensor_S (N times Omega[S/R]).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+  "lem-weil-pbc-cotangent-complex-symmetric-algebra",
+  "lem-weil-pbc-formally-smooth-differentials-injective",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07CE proof, final differential decomposition; Algebra 031K and 00S2; More on Algebra 07EV; formalized through the stated dependencies and Mathlib exact-sequence and tensor equivalences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "differentials of symmetric algebra of finite projective module split into tensor module and differentials of base ring",
+   "results": "Algebra.Generators.H1Cotangent.δAux, Algebra.Generators.toKaehler_tmul_D, KaehlerDifferential.D_apply, KaehlerDifferential.DLinearMap_apply, derivationQuotKerSq_mk, KaehlerDifferential.kerTotal_mkQ_single_mul, Algebra.Presentation.differentialsSolution, KaehlerDifferential",
+   "date": "2026-10-12",
+   "verdict": "components only; no one-line match for the displayed equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquiv",
+   "results": "KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquiv_tmul_D, KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul', KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul",
+   "date": "2026-10-12",
+   "verdict": "components only; no one-line match for the displayed equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "exact_δ_mapBaseChange|exact_mapBaseChange_map|splitSurjectiveEquiv",
+   "results": "Mathlib/Algebra/Exact/Basic.lean, Mathlib/Algebra/Exact/Basic.lean, Mathlib/Algebra/Exact/Basic.lean, Mathlib/Algebra/Exact/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-12",
+   "verdict": "components only; no one-line match for the displayed equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "differentials of symmetric algebra of finite projective module split into tensor module and differentials of base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ImprovePresentation",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07CE proof, final differential decomposition; Algebra 031K and 00S2; More on Algebra 07EV in the proof of lem-weil-pbc-improve-presentation",
+   "via": [
+    "lem-weil-pbc-improve-presentation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedSymmetricDifferentialsSplit",
+  "file": "lean/Sheaf/RingTheory/LocalizedSymmetricDifferentialsSplit.lean",
+  "declaration": "SymmetricAlgebra.localized_differentials_equiv",
+  "statement": "theorem localized_differentials_equiv (R : Type u) (A : Type v) (M : Type w) [CommRing R] [CommRing A] [Algebra R A] [AddCommGroup M] [Module A M] [Module.Finite A M] (a : A) [Algebra.Smooth R (Localization.Away a)] [Module.Projective (Localization.Away a) (Localization.Away a ⊗[A] M)] : let C := SymmetricAlgebra A M letI : Algebra R C := ((algebraMap A C).comp (algebraMap R A)).toAlgebra let T := Localization (Algebra.algebraMapSubmonoid C (Submonoid.powers a)) Nonempty (KaehlerDifferential R T ≃ₗ[T] T ⊗[Localization.Away a] ((Localization.Away a ⊗[A] M) × KaehlerDifferential R (Localization.Away a)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12",
+  "note": "Complete Lean proof in this delivery; no new sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T151905-L-2287071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T151905-L-2287071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
