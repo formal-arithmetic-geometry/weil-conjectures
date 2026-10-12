@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-flc-dual-locally-constant",
+ "kind": "statement",
+ "title": "Local constancy of the coefficient dual",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a commutative noetherian ring, and $F$ a finite locally constant sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-constructible-finite-locally-constant]. Then the internal Hom $\\mathcal Hom_\\Lambda(F,\\Lambda_X)$ is locally constant [def-constructible-locally-constant].",
+ "source": {
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring, local finite presentation and dual finite generation"
+ },
+ "stmt_deps": [
+  "def-constructible-finite-locally-constant",
+  "def-constructible-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Choose an étale cover trivializing F. Discard empty members. On a nonempty member F is the constant sheaf associated to a module M. A geometric stalk identifies M with a stalk of F, so M is finitely generated. Since Λ is noetherian, choose a finite presentation Λᵐ → Λⁿ → M → 0. Constant sheafification is exact and monoidal, so this presents the restriction of F by finite free constant sheaves. Internal Hom into the unit is left exact: its restriction is the kernel of the transposed map Λⁿ → Λᵐ. That map is constant and its kernel is the constant sheaf associated to Hom_Λ(M, Λ), since constant sheafification preserves finite limits. Restriction to a slice commutes with internal Hom, by the local characterization of internal Hom through maps from restricted sheaves. Hence the same cover trivializes the coefficient dual. Empty members impose no condition.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring, local finite presentation and dual finite generation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal hom dual of a finite locally constant sheaf of modules is finite locally constant over a noetherian ring",
+   "date": "2026-10-12",
+   "results": "CompHausLike.LocallyConstantModule.functor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition', CompHausLike.LocallyConstantModule.functor_obj_val, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "verdict": "No exact sheaf-dual preservation or stalk comparison; isNoetherian_linearMap proves the module finiteness step."
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*(IsConstant|LocallyConstant|sheafFiber)|linearMap.*[Nn]oetherian",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/HopkinsLevitzki.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean",
+   "verdict": "No exact sheaf-dual preservation or stalk comparison; isNoetherian_linearMap proves the module finiteness step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom into the constant coefficient sheaf of a finite locally constant module sheaf is locally constant and its geometric stalk is the linear dual of the stalk over a noetherian ring",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dual finite locally constant sheaf",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "isNoetherian_linearMap",
+   "date": "2026-10-12",
+   "results": "isNoetherian_linearMap",
+   "verdict": "No exact sheaf-dual preservation or stalk comparison; isNoetherian_linearMap proves the module finiteness step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.ConstructibleSheaf.Monoidal",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Unattached upstream declaration WeilConjectures.ConstructibleSheaf.Monoidal.ihom_unit; Local constancy of the coefficient dual",
+   "via": [
+    "lem-weil-pbc-flc-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.DualLocallyConstant",
+  "file": "lean/Sheaf/ConstructibleSheaf/DualLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom_unit_locallyConstant",
+  "statement": "theorem IsFiniteLocallyConstantSheaf.ihom_unit_locallyConstant (hF : IsFiniteLocallyConstantSheaf F) : IsLocallyConstantSheaf ((ihom F).obj (𝟙_ _))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085246-L-17622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085246-L-17622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

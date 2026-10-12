@@ -13,6 +13,8 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import Sheaf.ConstructibleSheaf.MonoidalParts
+import Sheaf.ConstructibleSheaf.DualLocallyConstant
+import Sheaf.ConstructibleSheaf.DualStalk
 
 /-!
 # Tensor products and duals of constructible sheaves
@@ -156,8 +158,17 @@ being finitely generated and hence finitely presented, `Λ` being noetherian; an
 `Hom_Λ(M, Λ)` is finitely generated, being a submodule of `Λⁿ` for a surjection `Λⁿ ⟶ M`. -/
 theorem IsFiniteLocallyConstantSheaf.ihom_unit [IsNoetherianRing Λ]
     (hF : IsFiniteLocallyConstantSheaf F) :
-    IsFiniteLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) :=
-  sorry
+    IsFiniteLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) where
+  toIsLocallyConstantSheaf := hF.ihom_unit_locallyConstant
+  toIsFiniteSheaf := ⟨fun Ω _ _ s ↦ by
+    have : Module.Finite Λ
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :=
+      (ModuleCat.isFinitelyGenerated_iff _).1
+        (hF.toIsFiniteSheaf.isFinitelyGenerated_sheafFiber Ω s)
+    obtain ⟨e⟩ := hF.nonempty_ihom_unit_stalk_iso Ω s
+    exact ((ModuleCat.isFinitelyGenerated_iff _).2
+      (inferInstance : Module.Finite Λ
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F →ₗ[Λ] Λ))).of_iso e.symm⟩
 
 /-- A sheaf of `Λ`-modules with a tensor inverse, `F ⊗ G ≅ Λ`, is finite: the stalks are strong
 monoidal, so `F_s ⊗ G_s ≅ Λ` and `F_s` is an invertible, hence finitely generated, `Λ`-module. -/
