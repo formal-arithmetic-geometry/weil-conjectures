@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction
 /-!
 # Models of base-derived tensor cohomology and its localization comparison
 
@@ -38,7 +40,50 @@ Tensor induction proves equality on all tensors. -/
 @[instance]
 theorem extendScalars_additive {S : Type uS} {T : Type uT} [CommRing S] [CommRing T]
     (f : S →+* T) : (extendScalars.{uS, uT, v} f).Additive := by
-  sorry
+  refine ⟨?_⟩
+  intro M N g h
+  apply ExtendScalars.hom_ext
+  intro m
+  change (1 : T) ⊗ₜ[S, f] (g m + h m) =
+    (extendScalars f).map g ((1 : T) ⊗ₜ[S, f] m) +
+      (extendScalars f).map h ((1 : T) ⊗ₜ[S, f] m)
+  simp only [ExtendScalars.map_tmul, TensorProduct.tmul_add]
+
+/-- The scalar-extension unit transposes to the termwise coefficient map.
+Source: Stacks Project, Tag 05G3; (blueprint: def-pc-base-derived-tensor-cohomology-model). -/
+private theorem exists_tensorExtensionMap {S : Type uS} {T : Type uT} {U : Type uD}
+    [CommRing S] [CommRing T] [CommRing U] (f : S →+* T) (g : T →+* U)
+    (K : CochainComplex (ModuleCat.{max uS uT uD v} S) ℤ) :
+    ∃ φ : ((extendScalars.{_, _, max uS uT uD v} f).mapHomologicalComplex (.up ℤ)).obj K ⟶
+      ((restrictScalars.{max uS uT uD v} g).mapHomologicalComplex (.up ℤ)).obj
+        (((extendScalars.{_, _, max uS uT uD v} (g.comp f)).mapHomologicalComplex
+          (.up ℤ)).obj K),
+      ∀ (i : ℤ) (t : T) (k : K.X i), φ.f i (t ⊗ₜ[S,f] k) = g t ⊗ₜ[S,g.comp f] k := by
+  let F := extendScalars.{_, _, max uS uT uD v} f
+  let G := extendScalars.{_, _, max uS uT uD v} (g.comp f)
+  let H := restrictScalars.{max uS uT uD v} g
+  let adj := extendRestrictScalarsAdj.{max uS uT uD v, _, _} f
+  let adj' := extendRestrictScalarsAdj.{max uS uT uD v, _, _} (g.comp f)
+  let α : 𝟭 (ModuleCat.{max uS uT uD v} S) ⟶ G ⋙ H ⋙ restrictScalars f :=
+    adj'.unit ≫ Functor.whiskerLeft G (restrictScalarsComp f g).hom
+  let β : F ⟶ G ⋙ H :=
+    { app := fun M ↦ (adj.homEquiv _ _).symm (α.app M)
+      naturality := by
+        intro M N a
+        apply (adj.homEquiv _ _).injective
+        rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+        simpa only [Equiv.apply_symm_apply, Functor.id_map, Functor.comp_map]
+          using α.naturality a }
+  refine ⟨(β.mapHomologicalComplex (.up ℤ)).app K, ?_⟩
+  intro i t k
+  let _ : Module S (H.obj (G.obj (K.X i))) := Module.compHom _ f
+  change ((adj.homEquiv _ _).symm (α.app (K.X i))) (t ⊗ₜ[S,f] k) = _
+  change (ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{uS, uT, max uS uT uD v} f
+    (α.app (K.X i))) (t ⊗ₜ[S,f] k) = _
+  erw [ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply,
+    TensorProduct.lift.tmul]
+  change g t • ((1 : U) ⊗ₜ[S,g.comp f] k) = _
+  rw [ExtendScalars.smul_tmul, mul_one]
 
 variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [CommRing B]
   [Algebra R A] [Algebra R B]
@@ -164,7 +209,40 @@ theorem nonempty_baseDerivedTensorCohomologyModel
     (Q : CochainComplex (ModuleCat.{max uR uA uB uD v} A) ℤ)
     (D : Type uD) [CommRing D] [Algebra (A ⊗[R] B) D] :
     Nonempty (BaseDerivedTensorCohomologyModel R A B Q D) := by
-  sorry
+  obtain ⟨ordinaryIso, ordinaryIso_tmul⟩ :=
+    exists_baseTensorOrdinaryIso.{uR, uA, uB, max uD v} R A B Q
+  obtain ⟨ordinaryToLocalized, ordinaryToLocalized_tmul⟩ :=
+    exists_tensorExtensionMap.{uD, max uR uA uB uD v, uA, max uA uB}
+      (algebraMap A (A ⊗[R] B)) (algebraMap (A ⊗[R] B) D) Q
+  obtain ⟨derived, counit, universal, cohomology, cohomologyIso, cohomologyIso_smul,
+    comparison, comparison_eq⟩ :=
+    exists_baseDerivedTensorCohomologyAction.{uR, uA, uB, max uD v, w}
+      R A B Q ordinaryIso ordinaryIso_tmul
+  let adj := extendRestrictScalarsAdj.{max uR uA uB uD v, _, _}
+    (algebraMap (A ⊗[R] B) D)
+  let localizedComparison := fun i : ℤ ↦ (adj.homEquiv _ _).symm
+    (comparison i ≫ HomologicalComplex.homologyMap ordinaryToLocalized i ≫
+      ((((extendScalars.{_, _, max uR uA uB uD v} ((algebraMap (A ⊗[R] B) D).comp
+        (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q).sc i
+          |>.mapHomologyIso
+            (restrictScalars.{max uR uA uB uD v} (algebraMap (A ⊗[R] B) D))).hom)
+  refine ⟨{
+    derived := derived
+    counit := counit
+    universal := universal
+    ordinaryIso := ordinaryIso
+    ordinaryIso_tmul := ordinaryIso_tmul
+    cohomology := cohomology
+    cohomologyIso := cohomologyIso
+    cohomologyIso_smul := cohomologyIso_smul
+    comparison := comparison
+    comparison_eq := comparison_eq
+    ordinaryToLocalized := ordinaryToLocalized
+    ordinaryToLocalized_tmul := ordinaryToLocalized_tmul
+    localizedComparison := localizedComparison
+    localized_eq := ?_ }⟩
+  intro i
+  exact (adj.homEquiv _ _).apply_symm_apply _
 
 /-- (blueprint: def-pc-base-derived-tensor-cohomology-model) Stacks, Tags 06Y6 and
 08IB. Choose a model of derived tensor cohomology and its canonical localization

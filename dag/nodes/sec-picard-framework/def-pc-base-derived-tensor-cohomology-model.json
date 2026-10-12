@@ -13,9 +13,75 @@
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08IB, lemma-compare-base-change, local affine derived-tensor comparison; construction of derived extension and its counit: Tag 06Y6, lemma-derived-base-change"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Extension of scalars is additive: use ExtendScalars.hom_ext to test equality on 1 tensor m; map_tmul and tmul_add identify the map of a sum with the sum of the maps. This is independent of any module-carrier lower bound on the target ring universe.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05G3, additivity of extension"
+   }
+  },
+  {
+   "text": "Obtain the ordinary associativity isomorphism and its specified generator equation from [lem-pc-base-tensor-ordinary-iso].",
+   "uses": [
+    "lem-pc-base-tensor-ordinary-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y6 and 08IB, ordinary tensor identification"
+   }
+  },
+  {
+   "text": "Construct the map to the further coefficient algebra directly. For f:A→E and g:E→D, compose the unit for g∘f with the restriction-composition isomorphism; transpose under extension/restriction for f. Naturality follows by applying the adjunction hom equivalence to both composites. Extend this natural transformation degreewise to Q. On pure tensors the adjunction inverse sends e tensor q to e times (1 tensor q), which after restriction is g(e) tensor q.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05G3, extension/restriction adjunction and its generator formula"
+   }
+  },
+  {
+   "text": "Use [lem-pc-base-derived-tensor-cohomology-action] with the ordinary isomorphism and its generator equation to obtain derived, counit, universal, the E-cohomology, the scalar action compatibility, and the E-linear ordinary comparison equation.",
+   "uses": [
+    "lem-pc-base-derived-tensor-cohomology-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y6 and 08IB, derived counit and coefficient action"
+   }
+  },
+  {
+   "text": "For each degree compose comparison with homology of the termwise extension map and the restriction/homology isomorphism, giving an E-linear map into restricted D-cohomology. Transpose this composite under extension/restriction for E→D to define localizedComparison. The identity homEquiv.apply_symm_apply proves localized_eq exactly. Fill the model record with these data, and use its witness to prove Nonempty. No isomorphism of a comparison is claimed.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08IB, canonical base-change comparison; scalar adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "lem-pc-base-derived-tensor-cohomology-action",
+  "lem-pc-base-tensor-ordinary-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 08IB; two strict intermediate statements, direct termwise extension and adjunction assembly"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -113,5 +179,15 @@
   "group": "J1",
   "result": "fix",
   "note": "R,A,B CommRing + Algebra R A/B; hTor Tor' over ULift R of ULift A, ULift B (ULift.module = canonical action, checked; Mathlib monoidal ModuleCat needs same universe), 0<i; Q CochainComplex (ModuleCat A) Z, bounded as IsZero outside [m,n]; Module.Finite+Projective = summand of A^m; D CommRing, Algebra E D, IsLocalization S D; Q(x)^L_R B = IsLeftDerivedFunctor of extendScalars R->B on Q_R (no recorded module derived tensor; def-weil-derived-tensor unrecorded); Q(x)_A D termwise extendScalars along A->E->D; conclusion IsIso localizedComparison i for all i. FIX: model pinned only the B-action on T_i, so for non-injective beta_i the E-action and c_i were not canonical; added field cohomologyIso_smul (a(x)1 acts as H^i(L(a.id_Q))) + node statement/docstrings"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T085304-L-25468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,175 @@
+{
+ "id": "lem-pc-base-derived-tensor-cohomology-action",
+ "kind": "statement",
+ "title": "Derived tensor cohomology action and ordinary counit comparison",
+ "statement": "Let R be a commutative ring, A and B commutative R-algebras, E=A\\otimes_R B [def-weil-pbc-module-tensor-product], and Q a cochain complex of A-modules. Suppose D(R) and D(B) with their localization functors Qh and cohomology functors H^i are chosen [def-weil-abstract-derived-category]. Let Q_R be Q restricted to R, and use the additive extension functors [def-weil-module-base-change]. Fix a B-linear complex isomorphism j:B\\otimes_R Q_R\\cong\\operatorname{Res}_{B\\to E}(E\\otimes_A Q) satisfying j_i(b\\otimes q)=(1\\otimes b)\\otimes q. There exist a total left derived extension L:D(R)\\to D(B), its universal counit alpha:L\\circ Qh_R\\to Qh_B\\circ(-\\otimes_R B), E-modules T_i, B-linear isomorphisms e_i:\\operatorname{Res}_{B\\to E}T_i\\cong H^i(L(Q_R)), and E-linear maps beta_i:T_i\\to H^i(E\\otimes_A Q). The isomorphisms intertwine multiplication by a\\otimes1 with H^i(L(a\\,\\mathrm{id}_{Q_R})) for every a\\in A. After restricting to B and applying the canonical exact-functor homology isomorphism, beta_i equals e_i followed by H^i(alpha_{Q_R}), the canonical localization-to-complex homology factorization maps, and H^i(j). Module carriers lie in a universe containing R,A,B; the two given derived categories have a common morphism universe. No further coefficient algebra or localized comparison is part of this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 08IB, lemma-compare-base-change, affine tensor comparison"
+ },
+ "proof": [
+  {
+   "text": "Resolve the restricted R-complexes by K-flat complexes using [lem-pc-kflat-resolution], specialized to ordinary modules on the one-point site. Extension to B sends quasi-isomorphisms of these resolutions to quasi-isomorphisms: this is the fixed-second-factor construction [lem-pc-derived-tensor-second-factor-functor] with second factor B in degree zero. Apply [lem-pur-left-derived-from-kflat-class] to extension on the homotopy category followed by the derived localization. It supplies the functor L, the counit, its left-derived universal property, and computation on K-flat resolutions. These arguments allow unequal ring universes by lifting the coefficient rings to the common module universe and transporting along the canonical equivalences.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, lemma-derived-base-change; K-flat computation and localization"
+   }
+  },
+  {
+   "text": "The derived extension is additive and R-linear. Compute sums and scalar multiplication on a K-flat resolution: ordinary extension is additive, and multiplication by r on its R-factor equals multiplication by the image of r in B. The resolution comparison is an isomorphism, so these identities transport to the derived value. For each a in A apply L and then H^i to the restricted endomorphism a times identity of Q. Identities, sums and composition yield a ring map from A to B-linear endomorphisms of the cohomology object. Its restriction to R equals the existing B-scalar action by the computation above.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, functoriality and computation of derived extension"
+   }
+  },
+  {
+   "text": "These A and B actions commute because every endomorphism just constructed is B-linear. They agree on R, so the universal property of the algebra tensor product [def-weil-pbc-module-tensor-product] gives an E-module structure on each cohomology object. Bundle these objects as E-modules. The identity of the underlying B-modules is cohomologyIso, and the action of a tensor 1 gives exactly cohomologyIso_smul.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, commuting coefficient actions"
+   }
+  },
+  {
+   "text": "Naturality of the counit with respect to a times identity makes its cohomology map A-linear; it is already B-linear. The supplied pure-tensor equation for ordinaryIso ensures this isomorphism also intertwines the A-action: check on b tensor q, then use tensor induction. Compose the cohomology counit with the homology factorization isomorphisms, ordinaryIso and the exact restriction-of-scalars homology isomorphism. The resulting B-linear map is A-linear, hence E-linear; bundle it as comparison. Unfolding this definition and cancelling the restriction homology isomorphism proves comparison_eq.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06Y6 and 08IB, canonical tensor comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 08IB; explicit construction from the model existence docstring"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars cohomology has a tensor product algebra action and a scalar linear counit comparison to ordinary tensor cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars cohomology has a tensor product algebra action and a scalar linear counit comparison to ordinary tensor cohomology",
+   "results": "8 hits: groupCohomologyIsoExt, Rep.torIso, Rep.barResolution.extIso, Rep.standardResolution.extIso, Algebra.Extension.tensorH1Cotangent, Rep.Tor_map, Rep.Tor_obj, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryIso_tmul|cohomologyIso_smul|ordinaryToLocalized_tmul",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related infrastructure only."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08IB local affine reduction in finite duality: Derived tensor cohomology action and ordinary counit comparison",
+   "via": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyAction.lean",
+  "declaration": "ModuleCat.exists_baseDerivedTensorCohomologyAction",
+  "statement": "theorem exists_baseDerivedTensorCohomologyAction\n    (Q : CochainComplex (ModuleCat.{max uR uA uB v} A) ℤ)\n    [(extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).Additive]\n    [(extendScalars.{_, _, max uR uA uB v}\n      (algebraMap A (A ⊗[R] B))).Additive]\n    (ordinaryIso :\n      ((extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj\n      (((restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex (.up\n      ℤ)).obj Q) ≅\n    ((restrictScalars.{max uR uA uB v}\n      Algebra.TensorProduct.includeRight.toRingHom).mapHomologicalComplex\n      (.up ℤ)).obj\n      (((extendScalars.{_, _, max uR uA uB v} (algebraMap A (A ⊗[R]\n      B))).mapHomologicalComplex (.up ℤ)).obj Q))\n    (ordinaryIso_tmul : ∀ (i : ℤ) (b : B) (q : Q.X i),\n      ordinaryIso.hom.f i (b ⊗ₜ[R,algebraMap R B] q) =\n        (Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)] q)) :\n    ∃ (derived : DerivedCategory (ModuleCat.{max uR uA uB v} R) ⥤\n    DerivedCategory (ModuleCat.{max uR uA uB v} B)) (counit : DerivedCategory.Qh ⋙ derived ⟶\n    (extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙\n      DerivedCategory.Qh),\n      (derived.IsLeftDerivedFunctor counit\n    (HomotopyCategory.quasiIso (ModuleCat.{max uR uA uB v} R) (.up ℤ))) ∧\n      ∃ (cohomology : ℤ → ModuleCat.{max uR uA uB v} (A ⊗[R] B)) (cohomologyIso : ∀ i : ℤ,\n    (restrictScalars.{max uR uA uB v} Algebra.TensorProduct.includeRight.toRingHom).obj\n      (cohomology i) ≅\n    (DerivedCategory.homologyFunctor (ModuleCat.{max uR uA uB v} B) i).obj\n      (derived.obj (DerivedCategory.Qh.obj\n        ((HomotopyCategory.quotient _ _).obj\n          (((restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex (.up\n      ℤ)).obj Q))))),\n        (∀ (i : ℤ) (a : A),\n    (restrictScalars.{max uR uA uB v} Algebra.TensorProduct.includeRight.toRingHom).map\n        ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • 𝟙 (cohomology i)) ≫\n      (cohomologyIso i).hom =\n    (cohomologyIso i).hom ≫\n      (DerivedCategory.homologyFunctor (ModuleCat.{max uR uA uB v} B) i).map\n        (derived.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map\n          (((restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex\n            (.up ℤ)).map (a • 𝟙 Q)))))) ∧\n        ∃ (comparison : ∀ i : ℤ, cohomology i ⟶\n    (((extendScalars.{_, _, max uR uA uB v} (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n      (.up ℤ)).obj Q).homology i),\n          ∀ i : ℤ,\n    (restrictScalars.{max uR uA uB v} Algebra.TensorProduct.includeRight.toRingHom).map\n      (comparison i) ≫\n      (((((extendScalars.{_, _, max uR uA uB v} (algebraMap A (A ⊗[R] B))).mapHomologicalComplex\n        (.up ℤ)).obj Q).sc i).mapHomologyIso\n         (restrictScalars.{max uR uA uB v} Algebra.TensorProduct.includeRight.toRingHom)).inv =\n    (cohomologyIso i).hom ≫\n      (DerivedCategory.homologyFunctor (ModuleCat.{max uR uA uB v} B) i).map\n        (counit.app ((HomotopyCategory.quotient _ _).obj\n          (((restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex (.up\n      ℤ)).obj Q))) ≫\n      (DerivedCategory.homologyFunctorFactorsh (ModuleCat.{max uR uA uB v} B) i).hom.app\n        ((HomotopyCategory.quotient _ _).obj\n          (((extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).mapHomologicalComplex\n      (.up ℤ)).obj\n            (((restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex (.up\n      ℤ)).obj Q))) ≫\n      (HomotopyCategory.homologyFunctorFactors (ModuleCat.{max uR uA uB v} B) (.up ℤ)\n      i).hom.app _\n      ≫\n      HomologicalComplex.homologyMap ordinaryIso.hom i",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T085304-L-25468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T085304-L-25468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

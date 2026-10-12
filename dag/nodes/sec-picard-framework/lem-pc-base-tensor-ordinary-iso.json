@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-base-tensor-ordinary-iso",
+ "kind": "statement",
+ "title": "Ordinary tensor associativity on complexes with specified generators",
+ "statement": "Let R be a commutative ring, A and B commutative R-algebras, E=A\\otimes_R B [def-weil-pbc-module-tensor-product], and Q a cochain complex of A-modules. Let Q_R denote scalar restriction to R and use the additive extension functors [def-weil-module-base-change]. There exists a B-linear complex isomorphism B\\otimes_R Q_R\\cong\\operatorname{Res}_{B\\to E}(E\\otimes_A Q) whose component in every degree i sends b\\otimes q to (1\\otimes b)\\otimes q for all b\\in B and q\\in Q^i. All ring and module universes may differ, with module carriers taken in one universe containing the rings. No flatness or boundedness is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tag 08IB, lemma-compare-base-change, affine tensor comparison"
+ },
+ "proof": [
+  {
+   "text": "Use the tensor universal property [def-weil-pbc-module-tensor-product] in each degree to define the B-linear map $b\\otimes q\\mapsto(1\\otimes b)\\otimes q$. Define its inverse on double pure tensors by $(a\\otimes b)\\otimes q\\mapsto b\\otimes(aq)$. The inner R-balancing uses the given R-algebra structures; outer A-balancing is $(aa_0\\otimes b)\\otimes q=(a\\otimes b)\\otimes a_0q$. Thus both maps descend to the tensor quotients.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08IB affine tensor identification; Tags 00CX and 05G3, tensor universal property"
+   }
+  },
+  {
+   "text": "The inverse composites are identity: the first sends $b\\otimes q$ back to itself; the second sends $(a\\otimes b)\\otimes q$ to $(1\\otimes b)\\otimes aq=(a\\otimes b)\\otimes q$. Tensor induction extends these equalities to all elements. A-linearity of each differential gives $d(aq)=a\\,d(q)$, so the degreewise maps commute with differentials and assemble to the required complex isomorphism with its generator equation.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX and 05G3; degreewise tensor extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06Y6 and 08IB; explicit construction from the model existence docstring"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ordinary tensor associativity isomorphism B tensor over R Q to (A tensor over R B) tensor over A Q and the scalar extension map to a further algebra D",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor extension along a tensor product of algebras is isomorphic to restricting scalars then extending scalars, B tensor over R Q equals (A tensor over R B) tensor over A Q",
+   "results": "8 hits: Algebra.TensorProduct.cancelBaseChange, Algebra.TensorProduct.cancelBaseChange_tmul, IsLocalization.algebraTensorEquiv, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, IsBaseChange.tensorEquiv, Algebra.IsPushout.cancelBaseChange_tmul, Algebra.Extension.baseChange",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryIso_tmul|cohomologyIso_smul|ordinaryToLocalized_tmul",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related infrastructure only."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08IB local affine reduction in finite duality: Ordinary tensor associativity on complexes with specified generators",
+   "via": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorOrdinaryIso",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorOrdinaryIso.lean",
+  "declaration": "ModuleCat.exists_baseTensorOrdinaryIso",
+  "statement": "theorem exists_baseTensorOrdinaryIso\n    (Q : CochainComplex (ModuleCat.{max uR uA uB v} A) ℤ)\n    [(extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).Additive]\n    [(extendScalars.{_, _, max uR uA uB v}\n      (algebraMap A (A ⊗[R] B))).Additive] :\n    ∃ (ordinaryIso :\n      ((extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).mapHomologicalComplex (.up ℤ)).obj\n      (((restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex (.up\n      ℤ)).obj Q) ≅\n    ((restrictScalars.{max uR uA uB v}\n      Algebra.TensorProduct.includeRight.toRingHom).mapHomologicalComplex\n      (.up ℤ)).obj\n      (((extendScalars.{_, _, max uR uA uB v} (algebraMap A (A ⊗[R]\n      B))).mapHomologicalComplex (.up ℤ)).obj Q)),\n      ∀ (i : ℤ) (b : B) (q : Q.X i),\n    ordinaryIso.hom.f i (b ⊗ₜ[R,algebraMap R B] q) =\n      (Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)] q)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T085304-L-25468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T085304-L-25468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
