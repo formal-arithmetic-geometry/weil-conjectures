@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-single-homotopy-presheaf-homology",
+ "kind": "statement",
+ "title": "Homotopy maps from a family of single objects compute Hom-presheaf homology",
+ "statement": "Let C be any category, D an abelian category [def-sp-abelian], A:C→D any functor, L an integer-indexed cochain complex in D, and n an integer. Define E:D→(Cᵒᵖ→Ab) by E(B)(U)=Hom_D(A(U),B), with restriction by precomposition and covariant action by postcomposition. Let P be the complex obtained by applying E termwise to L. The presheaf U↦Hom_{K(D)}(A(U)[0],L[n]), with restriction by A on arrows, is naturally isomorphic to the degree-n homology presheaf of P. K(D) is the category of cochain complexes modulo chain homotopy, and [0] denotes the complex with its only nonzero term in degree zero. No resolutions, injectivity or boundedness are assumed.",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+  "place": "CohomologyClass.homAddEquiv (line 170), leftHomologyData (211); HomComplexSingle.lean: Cochain.fromSingleEquiv (77), delta_fromSingleMk (64), fromSingleMk_precomp (116); ShortComplex/PreservesHomology.lean: homologyMap_mapNatTrans (725). This is the algebraic Hom-complex step in the item, rather than a claim that Stacks Tag 06XR alone states it."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Cochain.fromSingleEquiv identifies the Hom complex out of A(U)[0] with evaluation at U of the termwise Hom presheaf complex. Compatibility with differentials is delta_fromSingleMk. Compatibility with restriction maps is fromSingleMk_precomp.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct precomposition on cochains, cocycles and their quotient by coboundaries. delta_ofHom_comp proves it preserves coboundaries. The resulting LeftHomologyMapData proves naturality of leftHomologyData.homologyIso; equivHomShift_symm_precomp proves naturality of CohomologyClass.homAddEquiv. Compose these identifications with the preceding complex isomorphism to identify the homotopy presheaf with the objectwise homology of the Hom complex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation is exact and preserves homology. ShortComplex.homologyMap_mapNatTrans applied to the evaluation transformation for an arrow gives naturality in the evaluated object. Its mapHomologyIso components therefore assemble into a presheaf isomorphism. Compose it with the preceding isomorphism.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+  "place": "CohomologyClass.homAddEquiv (line 170), leftHomologyData (211); HomComplexSingle.lean: Cochain.fromSingleEquiv (77), delta_fromSingleMk (64), fromSingleMk_precomp (116); ShortComplex/PreservesHomology.lean: homologyMap_mapNatTrans (725). This is the algebraic Hom-complex step in the item, rather than a claim that Stacks Tag 06XR alone states it.",
+  "note": "Lean proof written by R2 from the Mathlib constructions; fully proved, no remaining holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes from a single object complex compute homology of the Hom complex",
+   "results": "8 hits: HomologicalComplex.singleObjHomologySelfIso, HomologicalComplex.instHasHomologyObjSingle, HomologicalComplex.homologyFunctorSingleIso_hom_app, HomologicalComplex.singleObjOpcyclesSelfIso, HomologicalComplex.singleObjOpcyclesSelfIso_hom, HomologicalComplex.homologyFunctorSingleIso, HomologicalComplex.singleObjHomologySelfIso_hom_singleObjHomologySelfIso_inv_assoc, HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom_assoc",
+   "date": "2026-10-13",
+   "verdict": "No complete presheaf comparison; used the indicated Mathlib component lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+   "results": "2 hits: CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply",
+   "date": "2026-10-13",
+   "verdict": "No complete presheaf comparison; used the indicated Mathlib component lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "fromSingle.*[Hh]omology|[Hh]omotopy.*[Pp]resheaf|[Ff]ree.*[Hh]omology",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No complete presheaf comparison; used the indicated Mathlib component lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes from a single object complex compute homology of the Hom complex naturally under precomposition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FreeRepresentableHomotopyHomology",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Hom-sections comparison below the Gabber effacement argument, as inherited from the item; specifically step 2 of lem-weil-pbc-free-representable-homotopy-homology: homotopy classes versus Hom-complex homology and restriction naturality.",
+   "via": [
+    "lem-weil-pbc-free-representable-homotopy-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SingleHomotopyPresheafHomology",
+  "file": "lean/Sheaf/CategoryTheory/SingleHomotopyPresheafHomology.lean",
+  "declaration": "singleHomotopyPresheaf_homology",
+  "statement": "theorem singleHomotopyPresheaf_homology\n    {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]\n    [Abelian D] (A : C ⥤ D) (L : CochainComplex D ℤ) (n : ℤ) :\n    Nonempty\n      ((A ⋙ CochainComplex.singleFunctor D 0 ⋙ HomotopyCategory.quotient D (.up ℤ)).op ⋙\n          preadditiveYoneda.obj ((HomotopyCategory.quotient D (.up ℤ)).obj (L⟦n⟧)) ≅\n        (((restrictedHomPresheafFunctor A).mapHomologicalComplex (.up ℤ)).obj L).homology\n          n)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T184338-L-4017999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T184338-L-4017999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
