@@ -99,7 +99,7 @@ lemma isHypercover_const (J : GrothendieckTopology C) {T : C} (hT : IsTerminal T
     convert J.top_mem W
     ext W' g
     simp only [Sieve.top_apply, iff_true]
-    exact ⟨g ≫ x 0, fun i ↦ by simpa using hT.hom_ext _ _⟩
+    exact ⟨g ≫ x 0, fun i ↦ hT.hom_ext _ _⟩
 
 end Const
 
@@ -114,7 +114,13 @@ lemma liftSieve_eq_pullback {n : ℕ} {W : C} (x : Fin (n + 2) → (W ⟶ U.obj 
     U.liftSieve x =
       (Sieve.ofArrows (fun _ : Unit ↦ U.obj (n + 1)) (fun _ ↦ U.toMatching n)).pullback
       (U.matchingLift x hx) := by
-  sorry
+  ext W' g
+  rw [Sieve.pullback_apply, Sieve.mem_ofArrows_iff, mem_liftSieve_iff]
+  constructor
+  · rintro ⟨y, hy⟩
+    exact ⟨(), y, U.matching_hom_ext fun i ↦ by simp [hy]⟩
+  · rintro ⟨_, y, hy⟩
+    exact ⟨y, fun i ↦ by simpa using (congrArg (· ≫ U.matchingπ n i) hy).symm⟩
 
 /-- In a category with finite limits and a terminal object `T`, `U` is a hypercover if and only
 if `U.obj 0 ⟶ T` and all the matching maps `U.obj (n + 1) ⟶ M_{n + 1}(U)` are coverings. -/
@@ -123,7 +129,24 @@ lemma isHypercover_iff {T : C} (hT : IsTerminal T) :
       Sieve.ofArrows (fun _ : Unit ↦ U.obj 0) (fun _ ↦ hT.from (U.obj 0)) ∈ J T ∧
         ∀ n : ℕ, Sieve.ofArrows (fun _ : Unit ↦ U.obj (n + 1)) (fun _ ↦ U.toMatching n) ∈
           J (U.matching n) := by
-  sorry
+  have hcover (W : C) : U.coverSieve W = Sieve.ofObjects (fun _ : Unit ↦ U.obj 0) W := by
+    ext W' g
+    simp [coverSieve, Sieve.mem_ofObjects_iff]
+  have hid (n : ℕ) : U.matchingLift (U.matchingπ n) (U.compatible_matchingπ n) = 𝟙 _ :=
+    U.matching_hom_ext fun i ↦ by simp
+  rw [Sieve.ofArrows_eq_ofObjects hT]
+  constructor
+  · intro h
+    refine ⟨by simpa [hcover] using h.coverSieve_mem T, fun n ↦ ?_⟩
+    have := h.liftSieve_mem _ (U.compatible_matchingπ n)
+    rwa [U.liftSieve_eq_pullback _ (U.compatible_matchingπ n), hid, Sieve.pullback_id] at this
+  · rintro ⟨h0, h⟩
+    refine ⟨fun W ↦ ?_, fun {n W} x hx ↦ ?_⟩
+    · convert J.pullback_stable (hT.from W) h0 using 1
+      ext W' g
+      simp [hcover, Sieve.mem_ofObjects_iff]
+    · rw [U.liftSieve_eq_pullback x hx]
+      exact J.pullback_stable _ (h n)
 
 end Matching
 

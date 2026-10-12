@@ -298,7 +298,7 @@ lemma compatible_matchingπ (n : ℕ) : U.Compatible (U.matchingπ n) := by
     intro i j hij
     have h := congrArg (· ≫ Pi.π (fun _ : MatchingIndex m ↦ U.obj m) ⟨(i, j), hij⟩)
       (equalizer.condition (U.matchingLeft m) (U.matchingRight m))
-    show (equalizer.ι (U.matchingLeft m) (U.matchingRight m) ≫ Pi.π _ j.succ) ≫ U.δ m i =
+    change (equalizer.ι (U.matchingLeft m) (U.matchingRight m) ≫ Pi.π _ j.succ) ≫ U.δ m i =
       (equalizer.ι (U.matchingLeft m) (U.matchingRight m) ≫ Pi.π _ i.castSucc) ≫ U.δ m j
     simpa [matchingLeft, matchingRight] using h
 
@@ -315,7 +315,7 @@ lemma matchingLift_π {n : ℕ} {W : C} (x : Fin (n + 2) → (W ⟶ U.obj n)) (h
   cases n with
   | zero => exact Pi.lift_π x i
   | succ m =>
-    show equalizer.lift (Pi.lift x) _ ≫ equalizer.ι (U.matchingLeft m) (U.matchingRight m) ≫
+    change equalizer.lift (Pi.lift x) _ ≫ equalizer.ι (U.matchingLeft m) (U.matchingRight m) ≫
       Pi.π (fun _ : Fin (m + 3) ↦ U.obj (m + 1)) i = x i
     rw [equalizer.lift_ι_assoc, Pi.lift_π]
 
