@@ -11,7 +11,8 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 import Sheaf.RingTheory.FreeComplexModNonzerodivisorExact
-import Sheaf.RingTheory.UnitMaximalMinorOfDepthZero
+import Sheaf.RingTheory.NonzerodivisorInInjectiveMaximalMinors
+import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Buchsbaum--Eisenbud regular sequence from an exact free complex
@@ -23,6 +24,52 @@ lem-weil-pbc-exact-free-complex-last-minors-regular-sequence).
 @[expose] public section
 
 universe u
+
+private theorem regular_cons_of_quotient {R : Type u} [CommRing R]
+    (x : R) (rs : List R) (hx : x ∈ nonZeroDivisors R)
+    (hrs : RingTheory.Sequence.IsRegular (R ⧸ Ideal.span {x})
+      (rs.map (Ideal.Quotient.mk (Ideal.span {x})))) :
+    RingTheory.Sequence.IsRegular R (x :: rs) := by
+  let := Submodule.pointwiseDistribMulAction (α := R) (R := R) (M := R)
+  have heq : x • (⊤ : Submodule R R) = (Ideal.span {x}) := by
+    rw [← Submodule.ideal_span_singleton_smul, Ideal.smul_eq_mul, Ideal.mul_top]
+  let eqv : QuotSMulTop x R ≃ₗ[R] R ⧸ Ideal.span {x} :=
+    Submodule.quotEquivOfEq _ _ heq
+  let eqv' : QuotSMulTop x R ≃ₗ[R ⧸ Ideal.span {x}] R ⧸ Ideal.span {x} :=
+    eqv.extendScalarsOfSurjective Ideal.Quotient.mk_surjective
+  apply (RingTheory.Sequence.isRegular_cons_iff' R x rs).mpr
+  refine ⟨?_, (eqv'.isRegular_congr _).mpr hrs⟩
+  change Function.Injective (fun y : R ↦ x * y)
+  intro a b hab
+  apply sub_eq_zero.mp
+  apply hx.1 (a - b)
+  simp only [mul_sub, hab, sub_self]
+
+private theorem lift_list_in_ideal {R S : Type u} [CommRing R] [CommRing S]
+    (q : R →+* S) (hq : Function.Surjective q) (I : Ideal R) (ys : List S)
+    (hys : ∀ y ∈ ys, y ∈ I.map q) :
+    ∃ rs : List R, rs.map q = ys ∧ ∀ x ∈ rs, x ∈ I := by
+  induction ys with
+  | nil => exact ⟨[], rfl, by simp⟩
+  | cons y ys ih =>
+    obtain ⟨x, hx, rfl⟩ := (Ideal.mem_map_iff_of_surjective q hq).mp (hys y (by simp))
+    obtain ⟨rs, hrs, hmem⟩ := ih (fun y hy ↦ hys y (by simp [hy]))
+    exact ⟨x :: rs, by simp [hrs], by simpa using And.intro hx hmem⟩
+
+private theorem map_maximal_minor_ideal {R S : Type u} [CommRing R] [CommRing S]
+    (q : R →+* S) {n p : ℕ} (A : Matrix (Fin p) (Fin n) R) :
+    (Ideal.span {d : R | ∃ r : Fin n → Fin p,
+      StrictMono r ∧ d = (A.submatrix r id).det}).map q =
+      Ideal.span {d : S | ∃ r : Fin n → Fin p,
+        StrictMono r ∧ d = ((A.map q).submatrix r id).det} := by
+  rw [Ideal.map_span]
+  congr 1
+  ext d
+  constructor
+  · rintro ⟨z, ⟨r, hr, rfl⟩, rfl⟩
+    exact ⟨r, hr, q.map_det _⟩
+  · rintro ⟨r, hr, rfl⟩
+    exact ⟨(A.submatrix r id).det, ⟨r, hr, rfl⟩, q.map_det _⟩
 
 /-- Source: Stacks Project, Algebra, Proposition 00N1 (`proposition-what-exact`),
 implication (1) => (2) at `i = e`; maximal minors as in Definition 00MV (`definition-rank`).
@@ -73,4 +120,94 @@ theorem exact_free_complex_last_minors_regular_sequence
       StrictMono r ∧ d = ((φ e).submatrix r id).det}
     I = ⊤ ∨ ∃ rs : List R, rs.length = e ∧
       (∀ x ∈ rs, x ∈ I) ∧ RingTheory.Sequence.IsRegular R rs := by
-  sorry
+  classical
+  induction e generalizing R n with
+  | zero => omega
+  | succ k ih =>
+    dsimp only
+    let I : Ideal R := Ideal.span {d : R | ∃ r : Fin (n (k + 1)) → Fin (n k),
+      StrictMono r ∧ d = ((φ (k + 1)).submatrix r id).det}
+    change I = ⊤ ∨ _
+    by_cases hI : I = ⊤
+    · exact Or.inl hI
+    right
+    obtain ⟨x, hxI, hx⟩ :=
+      Matrix.exists_nonZeroDivisor_mem_maximal_minors (φ (k + 1)) hinjective
+    have hxI : x ∈ I := hxI
+    have hxmax := IsLocalRing.le_maximalIdeal hI hxI
+    let J : Ideal R := Ideal.span ({x} : Set R)
+    have hJI : J ≤ I := Ideal.span_le.mpr (by simpa using hxI)
+    have hJ : J ≠ ⊤ := fun h ↦ hI (top_le_iff.mp (h ▸ hJI))
+    let S := R ⧸ J
+    let q : R →+* S := Ideal.Quotient.mk J
+    let : Nontrivial S := Ideal.Quotient.nontrivial_iff.mpr hJ
+    let : IsNoetherianRing S :=
+      isNoetherianRing_of_surjective R S q Ideal.Quotient.mk_surjective
+    let : IsLocalRing S := IsLocalRing.of_surjective' q Ideal.Quotient.mk_surjective
+    have hlift : ∀ rs : List R,
+        RingTheory.Sequence.IsRegular S (rs.map q) →
+        RingTheory.Sequence.IsRegular R (x :: rs) := fun rs h ↦
+      regular_cons_of_quotient x rs hx h
+    cases k with
+    | zero =>
+      refine ⟨[x], rfl, ?_, hlift [] (RingTheory.Sequence.IsRegular.nil S S)⟩
+      simpa using hxI
+    | succ k =>
+      have hmod := free_complex_mod_nonzerodivisor_exact R (k + 2) (by omega) n φ
+        (fun i hi hie ↦ hcomplex i hi (by omega))
+        (fun i hi hie ↦ hexact i hi (by omega)) hinjective x hxmax hx
+      let nb : ℕ → ℕ := fun i ↦ n (i + 1)
+      let ψ : ∀ i : ℕ, Matrix (Fin (nb (i - 1))) (Fin (nb i)) S
+        | 0 => 0
+        | i + 1 => (φ (i + 2)).map q
+      have hψcomplex : ∀ i : ℕ, 1 ≤ i → i + 1 ≤ k + 1 →
+          ∀ v : Fin (nb (i + 1)) → S, (ψ i).mulVec ((ψ (i + 1)).mulVec v) = 0 := by
+        intro i hi hie v
+        obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : i ≠ 0)
+        choose w hw using fun t ↦ Ideal.Quotient.mk_surjective (v t)
+        have hv : v = q ∘ w := funext (fun t ↦ (hw t).symm)
+        subst v
+        ext t
+        change (((φ (j + 2)).map q).mulVec
+          (((φ (j + 3)).map q).mulVec (q ∘ w))) t = 0
+        have hinner : ((φ (j + 3)).map q).mulVec (q ∘ w) =
+            q ∘ (φ (j + 3)).mulVec w :=
+          funext (fun t ↦ (q.map_mulVec _ _ t).symm)
+        rw [hinner, ← q.map_mulVec]
+        have hc := congrFun (hcomplex (j + 2) (by omega) (by omega) w) t
+        simp only [hc, Pi.zero_apply, map_zero]
+      have hψexact : ∀ i : ℕ, 1 ≤ i → i + 1 ≤ k + 1 →
+          Function.Exact (ψ (i + 1)).mulVec (ψ i).mulVec := by
+        intro i hi hie
+        obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : i ≠ 0)
+        exact hmod.2 (j + 2) (by omega) (by omega)
+      have hψinj : Function.Injective (ψ (k + 1)).mulVec := hmod.1
+      obtain htop | ⟨ys, hlen, hmem, hreg⟩ :=
+        ih S (by omega) nb ψ hψcomplex hψexact hψinj
+      · have hminor :
+            Ideal.span {d : S | ∃ r : Fin (nb (k + 1)) → Fin (nb k),
+              StrictMono r ∧ d = ((ψ (k + 1)).submatrix r id).det} = I.map q := by
+          exact (map_maximal_minor_ideal q (φ (k + 2))).symm
+        have htop' : I.map q = ⊤ := hminor.symm.trans htop
+        have hc := congrArg (Ideal.comap q) htop'
+        rw [Ideal.comap_map_of_surjective q Ideal.Quotient.mk_surjective,
+          Ideal.comap_top] at hc
+        have hker : Ideal.comap q ⊥ = J := by
+          ext z
+          exact Ideal.Quotient.eq_zero_iff_mem
+        rw [hker, sup_eq_left.mpr hJI] at hc
+        exact (hI hc).elim
+      · have hminor :
+            Ideal.span {d : S | ∃ r : Fin (nb (k + 1)) → Fin (nb k),
+              StrictMono r ∧ d = ((ψ (k + 1)).submatrix r id).det} = I.map q := by
+          exact (map_maximal_minor_ideal q (φ (k + 2))).symm
+        obtain ⟨rs, hrs, hrsI⟩ := lift_list_in_ideal q Ideal.Quotient.mk_surjective I ys
+          (fun y hy ↦ hminor ▸ hmem y hy)
+        refine ⟨x :: rs, ?_, ?_, hlift rs ?_⟩
+        · have hl := congrArg List.length hrs
+          simp only [List.length_map] at hl
+          simp only [List.length_cons]
+          omega
+        · simpa using And.intro hxI hrsI
+        · rwa [hrs]
+
