@@ -9776,3 +9776,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/E2/Sheaf.CategoryTheory.SpectralObjectBottomPageCompatibility (stage 3; reviewer PASS; first push; landing 20261012T223401-L-1635314 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/E3/Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces (stage 3; reviewer PASS; first push; landing 20261012T223401-L-1635422 (proof); batch 20261012T223357; modules 1; new nodes 0)
 - 22:34 L: merged deliver/E3/Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep (stage 3; reviewer PASS; first push; landing 20261012T223402-L-1635539 (interface); batch 20261012T223357; modules 3; new nodes 2)
+- 22:34 L: merged deliver/F1/Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingReverse (stage 3; reviewer PASS; first push; landing 20261012T223402-L-1635701 (interface); batch 20261012T223357; modules 2; new nodes 1)
