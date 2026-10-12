@@ -14,16 +14,65 @@
  },
  "proof": [
   {
-   "text": "Finite direct image is exact, and the cohomology edge map identifies the\ncohomology of F with that of its direct image. The finite geometric-stalk formula\nexpresses each direct-image stalk as the finite product of source stalks; each\nsource stalk is a direct factor. Thus primary torsion, invertible torsion orders,\nimply the respective source torsion conditions. For constructibility use the\nepimorphic counit f^* f_* F → F and constructibility of\nquotients of constructible sheaves. This holds for arbitrary coefficient rings.\nThe edge isomorphism transfers C1. A finite scheme over an affine is affine, giving\nC2; the stalk conditions give C3 and C4. A finite scheme over a proper scheme is\nproper, giving C5. For C6 and C7 form the cartesian square over the field extension.\nFinite base change identifies the inverse image of the direct image with the\ndirect image on the base changed source, and the edge maps commute with pullback.\nThe resulting square has horizontal isomorphisms and a bijective source vertical\nmap by H, so the target vertical map is bijective. Use the stalk condition for C6\nand properness for C7. For C8 repeat the square with any open immersion into Y;\nits inverse image is open in X. Transport a class through the edge isomorphism,\nlift by H.C8 on X, then transport back. Commutativity and injectivity of the edge\nisomorphism verify the lift. Empty finite fibres give zero factors throughout.",
-   "uses": [],
+   "text": "The finite-stalk product formula identifies the counit on each geometric stalk as a split product projection. Geometric points jointly reflect epimorphisms, so the module counit is epi. Source primary torsion and torsion of invertible order follow by lifting a stalk element through the counit and transporting annihilators along upperStarCompSheafFiberIso.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-counit-stalk-germ-restriction",
+    "lemma-openclosed-point-ulift",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the bijective finite cohomology edge map for the underlying abelian sheaf. Forgetting module coefficients commutes definitionally with direct image. Transfer C1, C2, C3 by injectivity into subsingleton source cohomology, using finite-over-affine for C2 and the primary-torsion reflection for C3.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect module constructibility using the strict coefficient lemma, and invertible-order torsion using the counit. Transfer finiteness through the injective edge equivalence for C4 and C5. Finite over proper is proper for C5.",
+   "uses": [
+    "p2-finite-pushforward-module-constructible-reflection",
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For C6 and C7, take the pullback of f along the field-extension source map and paste its cartesian square with the given square over k. Finite exchange and both finite edge maps are bijective, and the edge base-change identity gives a commuting comparison square. Bijectivity of the source pullback is equivalent to bijectivity of the target pullback. For C6 use invertible-order reflection; for C7 use properness of f composed with g.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-edge-map-base-change",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For C8 pull back any open immersion into Y to X; it remains open. The same finite-exchange/edge square identifies surjectivity of the two restrictions. Apply C8 on X and assemble the eight separate clauses using assertions_iff.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-edge-map-base-change"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-counit-stalk-germ-restriction",
+  "lemma-openclosed-point-ulift",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "p2-finite-pushforward-module-constructible-reflection",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-edge-map-base-change"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Lemma 0A5D (finite pushforward statements); module coefficient adaptation by B3"
+  "place": "Lemma 0A5D; explicit eight-clause module-coefficient reduction by P2"
  },
  "mathlib_searches": [
   {
@@ -118,9 +167,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T150950-L-2229548",
-  "kind": "interface"
+  "landing": "20261012T160830-L-2612146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
