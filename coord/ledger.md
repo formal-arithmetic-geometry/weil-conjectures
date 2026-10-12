@@ -5827,3 +5827,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:04 L: returned deliver/V1/WeilConjectures.ConstructibleSheaf.LocallyConstantReduction (reviewer RETURN: (reviewer X-01328, head 01328d91d) B2/B3/B5: both new node statements are not self-contained (`F_ℓ` is undefined and no )
 - 02:08 L: merged deliver/K1/Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison (stage 3; reviewer PASS; first push; landing 20261012T020819-L-987360 (proof); modules 1; new nodes 0)
 - 02:10 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ConstantPullbackIdentityCoherence (stage 3; reviewer PASS; first push; landing 20261012T021015-L-995891 (proof); modules 1; new nodes 0)
+- 02:12 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (reviewer X-2722c, head 2722cdb69) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.AlgebraicG)
