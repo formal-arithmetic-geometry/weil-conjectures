@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-open-free-restriction-hom",
+ "kind": "statement",
+ "title": "Restriction of morphisms from the image-open free sheaf",
+ "statement": "Let $X,Y$ be schemes, $j:Y\\to X$ an open immersion [def-sc-zariski-site], and $F$ any abelian sheaf on $X$ [def-weil-pbc-sites-and-cohomology]. Write $L_W$ for the sheafification of the free abelian presheaf on the representable of the open $W$ [lem-pc-free-mayer-vietoris-short-exact]. For $W=j(Y)$, the map $\\operatorname{Hom}_X(L_W,F)\\to\\operatorname{Hom}_Y(j^{-1}L_W,j^{-1}F)$ sending $a$ to $j^{-1}a$ [def-pc-flat-cohomology-comparison] is bijective.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/03DJ; https://stacks.math.columbia.edu/tag/01AK",
+  "place": "Stacks Tags 03DI (extension-by-zero adjunction), 03DJ (exactness), and 04J0 (localization of morphisms of ringed sites); represented free-sheaf restriction and inverse image in the open-subscheme Zariski case."
+ },
+ "stmt_deps": [
+  "def-sc-zariski-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
+ ],
+ "proof": [
+  {
+   "text": "Let U be the image open. The explicit extension-by-zero formula on opens inside U restricts to the original sheaf; consequently its adjunction unit is an isomorphism. The free/forgetful, Yoneda and sheafification adjunctions identify the free sheaf L_U with extension by zero of the top-open free sheaf of Y: both represent sections on U, naturally in the coefficient sheaf.",
+   "uses": [
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "lem-pc-free-mayer-vietoris-short-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For that extended source the extension/restriction adjunction homEquiv is restriction on morphisms composed with precomposition by its invertible unit. Since homEquiv and precomposition with an isomorphism are bijective, the restriction map itself is bijective. Transport along the represented-source identification. If U is empty the source is zero; if U is top the open immersion is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact",
+  "lem-weil-pbc-zariski-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/03DJ; https://stacks.math.columbia.edu/tag/01AK",
+  "place": "Proof of lem-pc-open-restriction-ext-bijective, exact open restriction and represented free sheaves; instantiated to the Lean inverse-image presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from the free abelian sheaf represented by the image open of an open immersion is bijective on morphisms",
+   "date": "2026-10-13",
+   "results": "8 hits: structure sheaf open-immersion section isomorphisms and module local-bijection APIs, no exact match.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yonedaEquiv",
+   "date": "2026-10-13",
+   "results": "12 hits: Yoneda equivalence and naturality APIs.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullbackIso|sheafificationAdjunction|yonedaEquiv",
+   "date": "2026-10-13",
+   "results": "25 capped Mathlib hits; the direct source APIs were separately read, no existing restriction-Hom theorem found.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction on Hom from the represented free abelian sheaf of an image open is bijective",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, quasi-separated-case paragraph: Mayer–Vietoris and induction on affine opens; represented open free-sheaf Ext presentations and their inverse-image identifications.",
+   "via": [
+    "lem-pc-open-restriction-ext-bijective",
+    "lem-pc-open-free-ext-transport",
+    "lem-pc-open-free-ext-comparison",
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+    "lem-pc-cohomology-mayer-vietoris-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.OpenFreeSheafRestrictionHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/OpenFreeSheafRestrictionHom.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.openFreeSheaf_restrictionHom_bijective",
+  "statement": "theorem H.openFreeSheaf_restrictionHom_bijective {X Y : Scheme.{u}}\n    (j : Y ⟶ X) [IsOpenImmersion j]\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :\n    Function.Bijective (fun a : H.openFreeSheaf j.opensRange ⟶ F =>\n      (invImage j).map a)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d0c1b",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d0c1b",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394352",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, declarations, axioms, and direct importer matched the stage-3 brief; all checks compiled cleanly."
+ }
+}

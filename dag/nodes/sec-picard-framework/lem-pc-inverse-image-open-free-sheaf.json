@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-inverse-image-open-free-sheaf",
+ "kind": "statement",
+ "title": "Inverse image of a represented open free abelian sheaf",
+ "statement": "Let $p:Y\\to X$ be any morphism of schemes and $W$ an open subset of $X$ [def-sc-zariski-site]. Let $L_W$ and $L_{p^{-1}W}$ denote the represented open free abelian sheaves [lem-pc-free-mayer-vietoris-short-exact] on $X$ and $Y$, respectively. For the inverse-image functor [def-pc-flat-cohomology-comparison] there is an isomorphism $p^{-1}L_W\\cong L_{p^{-1}W}$. No flatness, open-immersion or coefficient hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/03DJ; https://stacks.math.columbia.edu/tag/01AK",
+  "place": "Stacks Tags 03DI (extension-by-zero adjunction), 03DJ (exactness), and 04J0 (localization of morphisms of ringed sites); represented free-sheaf restriction and inverse image in the open-subscheme Zariski case."
+ },
+ "stmt_deps": [
+  "def-sc-zariski-site",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
+ ],
+ "proof": [
+  {
+   "text": "Compose Mathlib sheafificationAdjunction, AddCommGrpCat.adj.whiskerRight and yonedaEquiv to obtain Hom(L_W,F) equivalent to F(W), and verify naturality in F by homEquiv_naturality_right.",
+   "uses": [
+    "lem-pc-free-mayer-vietoris-short-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The sheafAdjunctionContinuous defining inverse image identifies Hom(p⁻¹L_W,F) with Hom(L_W,p_*F). Applying the sections equivalence identifies this with (p_*F)(W)=F(p⁻¹W), and its inverse on Y identifies it with Hom(L_{p⁻¹W},F). Verify naturality by the two preceding naturality identities. Apply Mathlib Coyoneda.ext to this natural equivalence and invert the resulting isomorphism to obtain the displayed orientation.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-free-mayer-vietoris-short-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/03DJ; https://stacks.math.columbia.edu/tag/01AK",
+  "place": "Proof of lem-pc-open-restriction-ext-bijective, exact open restriction and represented free sheaves; instantiated to the Lean inverse-image presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the free abelian sheaf represented by an open is the free abelian sheaf represented by its preimage open",
+   "date": "2026-10-13",
+   "results": "8 hits: module free-sheaf and restriction APIs, no exact abelian represented-open statement.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Coyoneda.ext",
+   "date": "2026-10-13",
+   "results": "1 hit: the natural-Hom-equivalence construction of an object isomorphism, used in the proof.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAdjunctionContinuous|Coyoneda.ext",
+   "date": "2026-10-13",
+   "results": "9 hits including Sites/Pullback.lean and Yoneda.lean; these implement the proof, no exact theorem found.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a represented open free abelian sheaf is the free abelian sheaf of the preimage open",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, quasi-separated-case paragraph: Mayer–Vietoris and induction on affine opens; represented open free-sheaf Ext presentations and their inverse-image identifications.",
+   "via": [
+    "lem-pc-open-restriction-ext-bijective",
+    "lem-pc-open-free-ext-transport",
+    "lem-pc-open-free-ext-comparison",
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+    "lem-pc-cohomology-mayer-vietoris-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/InverseImageOpenFreeSheaf.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.invImage_openFreeSheaf_iso",
+  "statement": "theorem H.invImage_openFreeSheaf_iso {X Y : Scheme.{u}} (p : Y ⟶ X) (W : X.Opens) :\n    Nonempty ((invImage p).obj (H.openFreeSheaf W) ≅ H.openFreeSheaf (p ⁻¹ᵁ W))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d0c1b",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d0c1b",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394352",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, declarations, axioms, and direct importer matched the stage-3 brief; all checks compiled cleanly."
+ }
+}

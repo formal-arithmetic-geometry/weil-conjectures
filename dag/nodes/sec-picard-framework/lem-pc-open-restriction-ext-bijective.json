@@ -15,38 +15,47 @@
  ],
  "proof": [
   {
-   "text": "Exact open extension is left adjoint to exact restriction. The represented free sheaf L_W is extension by zero of the represented top free sheaf on W: their morphisms to any coefficient sheaf are the sections on W by the free/forgetful and sheafification adjunctions. The unit is the canonical identification after restriction. Apply the exact Ext adjunction; its inverse is the Ext restriction map under this identification. Replacing the source or coefficient identifications by any e and d composes it with precomposition or postcomposition by isomorphisms, which preserve bijectivity.",
+   "text": "For an exact additive functor preserving injectives, prove by induction on n that Ext from A is preserved whenever the functor is bijective on Hom(A,F) for every F. Degree zero follows from Ext.mk₀_bijective and mapExactFunctor_mk₀. For degree n+1 choose an injective presentation of F and its short exact cokernel sequence. The original and mapped Ext covariant sequences are right exact. mapExactFunctor_comp and mapExactFunctor_extClass give commuting squares. Ext into the injective middle objects vanishes in positive degree. Apply AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact with the induction hypothesis to obtain bijectivity.",
    "uses": [
-    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-    "lem-weil-pbc-zariski-extension-by-zero-exact",
-    "lem-pc-free-mayer-vietoris-short-exact",
-    "lem-sc-ext-exact-adjunction"
+    "def-pc-ext",
+    "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "The base-changed inclusion k is an open immersion, and inverse image of the free sheaf represented by W is the free sheaf represented by its preimage under p. That preimage is the image of k by the cartesian square. Thus the same argument on X_S gives the bijectivity of the second restriction map, for all e′ and d′. Isomorphism transport is bijective by composition with the inverse isomorphisms. Empty opens give zero source free sheaves, and zero coefficients give zero Ext; top opens give restriction equivalences, so no excluded edge cases are needed.",
+   "text": "Apply this induction to inverse image of W.ι. Use preservation of injectives and restriction-Hom bijectivity for the image open, whose image is W. Compose the resulting Ext map with precomposition by e.inv and postcomposition by d.hom. Their inverse isomorphisms prove these compositions bijective.",
    "uses": [
-    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-    "lem-weil-pbc-zariski-extension-by-zero-exact",
-    "def-pc-flat-cohomology-comparison",
-    "lem-pc-free-mayer-vietoris-short-exact",
-    "lem-sc-ext-exact-adjunction"
+    "lem-pc-open-inverse-image-injectives",
+    "lem-pc-open-free-restriction-hom",
+    "lem-pc-ext-restriction-map-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express k as the inverse of pullbackRightPullbackFstIso followed by pullback.snd W.ι p. Hence k is an open immersion and its opensRange equals p⁻¹W by opensRange_pullbackSnd. The proved inverse-image/free-sheaf isomorphism identifies p⁻¹L_W with L_{k(Y)}. Transport restriction-Hom bijectivity across this source isomorphism, use preservation of injectives, and apply the same induction. Compose with e′.inv and d′.hom, whose Ext maps are bijective.",
+   "uses": [
+    "lem-pc-open-inverse-image-injectives",
+    "lem-pc-open-free-restriction-hom",
+    "lem-pc-inverse-image-open-free-sheaf",
+    "lem-pc-open-restriction-data",
+    "lem-pc-ext-restriction-map-calculus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "lem-pc-free-mayer-vietoris-short-exact",
-  "lem-sc-ext-exact-adjunction",
-  "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-  "lem-weil-pbc-zariski-extension-by-zero-exact"
+  "def-pc-ext",
+  "def-sp-injective-resolutions",
+  "lem-pc-ext-restriction-map-calculus",
+  "lem-pc-inverse-image-open-free-sheaf",
+  "lem-pc-open-free-restriction-hom",
+  "lem-pc-open-inverse-image-injectives",
+  "lem-pc-open-restriction-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/03DJ; https://stacks.math.columbia.edu/tag/01AK",
-  "place": "Exact open extension (03DJ, 01AK), its restriction adjunction (03DI, 00A7), and localization (04J0); applying the exact Ext adjunction to represented open free sheaves."
+  "place": "K1: the exact open-restriction Ext argument implemented by injective-presentation dimension shifting, using degree-zero Hom restriction and preservation of injectives. Inverse image of represented free sheaves is proved by adjunction and Coyoneda.ext."
  },
  "mathlib_searches": [
   {
@@ -117,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-d0c1b",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T194144-L-466176",
+  "landing": "20261012T220523-L-1394352",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG nodes, report, declarations, axioms, and direct importer matched the stage-3 brief; all checks compiled cleanly."
  }
 }
