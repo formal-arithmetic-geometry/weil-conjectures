@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-primary-constant-quotient-identification",
+ "kind": "statement",
+ "title": "Prime-field identification of one finite trivial quotient",
+ "statement": "Let K, Ks and Omega be fields in universe u, with compatible embeddings K -> Ks -> Omega [def-pd-separable-closure], and Omega algebraically closed. Let G=Gal(Ks/K) with the Krull topology, let H be an open subgroup of G, and set L=(Ks)^H. Assume Ks is a separable closure of K. A fixed-field comparison C consists of an equivalence E from abelian etale sheaves on Spec L [def-weil-pbc-abelian-etale-sheaves] to discrete continuous integer H-modules [def-exc-discrete-modules-category], a natural additive isomorphism j from the underlying group of E(F) to the geometric stalk F_p at the point p:Spec Omega -> Spec L induced by L -> Ks -> Omega [def-weil-pbc-geometric-stalks], and the following action compatibility. For every F, g in H, K-automorphism tau of Omega extending g on Ks, etale L-scheme X, pointed lifts x,x' of p with x'=Spec(tau) followed by x, and section z of F on X, j_F(g*j_F^{-1}(germ_x(z)))=germ_x'(z). Let T be a scheme in universe u and e:Spec L ~= T an isomorphism. For a specified discrete H-module V define P_C(V)=(e.inv)^*(E.inverse(V)) using inverse image [def-weil-pbc-inverse-image]. Let R be a discrete continuous integer G-representation with underlying abelian group R.V in universe u+1. Restrict it to H with the same action. For an H-invariant additive subgroup B of R.V, write V_B for its canonical integer submodule with this restricted action; its underlying elements are exactly x in B. For additive subgroups A,B of R.V put N=A.toIntSubmodule.comap(B.toIntSubmodule.subtype). Let Q_{A,B} be the discrete H-module with underlying group B.toIntSubmodule/N and trivial H-action. Assume R.V is finite. Let ell be prime and assume ell*x belongs to A for every x in B. No inclusion A<=B is required: N is their relative intersection in B. Then there exists a natural number d such that P_C(Q_{A,B}) is isomorphic to the iterated binary biproduct defined by Z(0)=0 and Z(d+1)=Z(d) biproduct T.constantZMod(ell) [def-sc-constant-sheaves].",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure",
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+ },
+ "proof": [
+  {
+   "text": "Every quotient element is represented in B and is annihilated by ell. Integer multiplication modulo ell defines a module over the field ZMod ell. Finiteness of R implies finiteness of B and its quotient, so a finite basis identifies the latter additively with finitely many copies of the prime field. Both actions are trivial, so this is equivariant. A zero quotient has the empty basis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The geometric stalk of a constant sheaf is its value, and constant germs are invariant under changing a pointed lift. The stipulated action formula of C and the existence of extensions of Galois automorphisms identify its image with the trivial representation. Full faithfulness identifies the inverse image of a trivial representation with its constant sheaf. Equivalences preserve finite biproducts; inverse image across e preserves constant sheaves and biproducts. Induct on the basis cardinal to obtain the Nat.rec expression.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-exc-galois-automorphism-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-galois-automorphism-extension",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport finite invariant Galois module subgroup filtration to abelian etale sheaves with constant prime field quotients",
+   "results": "InfiniteGalois.asProfiniteGaloisGroupFunctor, finGaloisGroupFunctor, IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.mul_inv_mem_inertia, arithFrobAt, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, IsArithFrobAt.arithFrobAt, galBasis",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.subrepresentation",
+   "results": "Rep.subrepresentation, Rep.subtype, Rep.subtype_hom_toFun",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "primary.*filtration|filtration.*primary",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian etale sheaves on a field are equivalent to discrete continuous Galois modules via the geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "proof paragraphs 1--2: the restricted primary-module chain has constant-quotient etale sheaves",
+   "via": [
+    "lem-sc-primary-module-filtration-sheaf-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationConstantQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimaryModuleFiltrationConstantQuotient.lean",
+  "declaration": "AlgebraicGeometry.Scheme.primaryTrivialQuotient_constant",
+  "statement": "theorem primaryTrivialQuotient_constant\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (H : OpenSubgroup (Gal(Ks/K))) (C : PrimaryFixedFieldEquivalence K Ks H)\n    (hC : PrimaryFixedFieldComparison K Ks H Ω C)\n    (T : Scheme.{u}) (e : Spec (.of (IntermediateField.fixedField H.toSubgroup)) ≅ T)\n    (R : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K))) [Finite R.obj.V]\n    (A B : AddSubgroup R.obj.V) (ℓ : ℕ) (hℓ : ℓ.Prime)\n    (hkill : ∀ x : R.obj.V, x ∈ B → ℓ • x ∈ A) :\n    ∃ d : ℕ, Nonempty\n      (primaryAssociatedSheaf K Ks H Ω C T e (primaryTrivialQuotient K Ks H R A B) ≅\n        Nat.rec (0 : _) (fun _ V ↦ V ⊞ T.constantZMod ℓ) d)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38891",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38891",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640273",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
+ }
+}

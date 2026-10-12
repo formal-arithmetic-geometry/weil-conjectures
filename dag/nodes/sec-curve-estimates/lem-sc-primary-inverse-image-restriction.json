@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-primary-inverse-image-restriction",
+ "kind": "statement",
+ "title": "Inverse image agrees with the specified restricted stalk module",
+ "statement": "Let K, Ks and Omega be fields in universe u, with compatible embeddings K -> Ks -> Omega [def-pd-separable-closure], and Omega algebraically closed. Let G=Gal(Ks/K) with the Krull topology, let H be an open subgroup of G, and set L=(Ks)^H. Assume Ks is a separable closure of K and L/K is finite-dimensional. A fixed-field comparison C consists of an equivalence E from abelian etale sheaves on Spec L [def-weil-pbc-abelian-etale-sheaves] to discrete continuous integer H-modules [def-exc-discrete-modules-category], a natural additive isomorphism j from the underlying group of E(F) to the geometric stalk F_p at the point p:Spec Omega -> Spec L induced by L -> Ks -> Omega [def-weil-pbc-geometric-stalks], and the following action compatibility. For every F, g in H, K-automorphism tau of Omega extending g on Ks, etale L-scheme X, pointed lifts x,x' of p with x'=Spec(tau) followed by x, and section z of F on X, j_F(g*j_F^{-1}(germ_x(z)))=germ_x'(z). Let T be a scheme in universe u and e:Spec L ~= T an isomorphism. For a specified discrete H-module V define P_C(V)=(e.inv)^*(E.inverse(V)) using inverse image [def-weil-pbc-inverse-image]. Let R be a discrete continuous integer G-representation with underlying abelian group R.V in universe u+1. Restrict it to H with the same action. For an H-invariant additive subgroup B of R.V, write V_B for its canonical integer submodule with this restricted action; its underlying elements are exactly x in B. Let M be an abelian etale sheaf on Spec K. Let s:Spec Omega -> Spec K be induced by K -> Omega and let i:R.V ~= M_s be an additive isomorphism. Assume that for every g in G, every K-automorphism tau of Omega extending g on Ks, every etale K-scheme X, pointed lifts x,x' of s with x'=Spec(tau) followed by x, and section z of M on X, i(g*i^{-1}(germ_x(z)))=germ_x'(z). Define q:T->Spec K by e.inv followed by Spec(K->L). Then q^*M is isomorphic to P_C(R restricted to H). No prime, subgroup chain, or quotient is part of this assertion.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure",
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+ },
+ "proof": [
+  {
+   "text": "The geometric point p of Spec L composes with b:Spec L->Spec K to s, by the scalar tower identity. The inverse-image stalk theorem identifies (b^*M)_p with M_s. On represented germs the comparison is projection from a pulled-back neighborhood to the original one. Applying an extension tau of g in H to a pointed lift commutes with that projection. Such an extension exists and fixes L. Hence the comparison is equivariant for the prescribed germ actions, not just additive.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "lem-exc-galois-automorphism-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the stalk comparison with i and the supplied fiberIso of C. The two action formulas imply an equivariant integer-linear isomorphism from the restricted R to E(b^*M), because every stalk element is represented by a germ. Full faithfulness and the unit/counit of E identify b^*M with E.inverse(restricted R). Apply (e.inv)^* and inverse-image composition to obtain q^*M ~= P_C(restricted R). This also applies to the zero representation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-galois-automorphism-extension",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport finite invariant Galois module subgroup filtration to abelian etale sheaves with constant prime field quotients",
+   "results": "InfiniteGalois.asProfiniteGaloisGroupFunctor, finGaloisGroupFunctor, IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.mul_inv_mem_inertia, arithFrobAt, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, IsArithFrobAt.arithFrobAt, galBasis",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.subrepresentation",
+   "results": "Rep.subrepresentation, Rep.subtype, Rep.subtype_hom_toFun",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "primary.*filtration|filtration.*primary",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian etale sheaves on a field are equivalent to discrete continuous Galois modules via the geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "proof paragraphs 1--2: the restricted primary-module chain has constant-quotient etale sheaves",
+   "via": [
+    "lem-sc-primary-module-filtration-sheaf-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimaryModuleFiltrationInverseImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.primary_inverseImage_restriction",
+  "statement": "theorem primary_inverseImage_restriction\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (R : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))\n    (i : AddCommGrpCat.of R.obj.V ≅\n      ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj M)\n    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (_hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (_hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : M.obj.obj (op X)),\n      i.hom (R.obj.ρ g (i.inv ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x M.obj z))) =\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' M.obj z)\n    (H : OpenSubgroup (Gal(Ks/K)))\n    [FiniteDimensional K (IntermediateField.fixedField H.toSubgroup)]\n    (C : PrimaryFixedFieldEquivalence K Ks H)\n    (hC : PrimaryFixedFieldComparison K Ks H Ω C)\n    (T : Scheme.{u}) (e : Spec (.of (IntermediateField.fixedField H.toSubgroup)) ≅ T) :\n    Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1}\n      (e.inv ≫ Spec.map (CommRingCat.ofHom\n        (algebraMap K (IntermediateField.fixedField H.toSubgroup))))).obj M ≅\n      primaryAssociatedSheaf K Ks H Ω C T e (primaryRestrictedModule K Ks H R))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38891",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38891",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640273",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
+ }
+}

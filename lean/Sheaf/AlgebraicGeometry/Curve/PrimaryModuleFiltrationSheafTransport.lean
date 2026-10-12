@@ -11,9 +11,10 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.FieldTheory.OpenSubgroupFixedField
+
+import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafExactness
+import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationConstantQuotient
+import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseImage
 
 /-!
 # Transport of an invariant primary module filtration to etale sheaves
@@ -27,7 +28,10 @@ proof paragraphs 1--2; Stacks Project, Tags 04JQ, 03QT and 03SF.
 universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 
+
 namespace AlgebraicGeometry.Scheme
+
+set_option linter.unusedVariables false
 
 /-- Transport a supplied invariant subgroup chain, rather than construct a Sylow chain.
 Source: blueprint `lem-sc-affine-generic-second`, proof paragraphs 1--2;
@@ -94,6 +98,41 @@ theorem exists_sheaf_filtration_of_invariant_primary_chain
       Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1}
         (e.inv ≫ Spec.map (CommRingCat.ofHom
           (algebraMap K (IntermediateField.fixedField H.toSubgroup))))).obj M ≅ F n) := by
-  sorry
+  obtain ⟨C, hC⟩ := nonempty_primaryFixedFieldComparison K Ks H Ω
+  let idx (a : ℕ) : Fin (n + 1) := ⟨min a n, by omega⟩
+  let F (a : ℕ) := primaryAssociatedSheaf K Ks H Ω C T e
+    (primarySubmodule K Ks H R (A (idx a)) (hstable (idx a)))
+  have hidx0 : idx 0 = 0 := Fin.ext (Nat.zero_min n)
+  have hidxn : idx n = Fin.last n := Fin.ext (Nat.min_self n)
+  refine ⟨F, ?_, ?_, ?_⟩
+  · apply primaryAssociatedSheaf_zero K Ks H Ω C T e R (A (idx 0))
+    exact hidx0 ▸ hzero
+  · intro a ha
+    let b : Fin n := ⟨a, ha⟩
+    have hidxa : idx a = b.castSucc := Fin.ext (Nat.min_eq_left ha.le)
+    have hidxs : idx (a + 1) = b.succ := Fin.ext (Nat.min_eq_left ha)
+    have hle : A b.castSucc ≤ A b.succ := hmono (by simp [Fin.le_iff_val_le_val])
+    obtain ⟨hS, ⟨jQ⟩⟩ := primarySheafSequence_shortExact K Ks Ω H C hC T e R
+      (A b.castSucc) (A b.succ) hle (hstable b.castSucc) (hstable b.succ)
+      (fun g x hx ↦ (hstep b x hx).2 g)
+    obtain ⟨d, ⟨jconst⟩⟩ := primaryTrivialQuotient_constant K Ks Ω H C hC T e R
+      (A b.castSucc) (A b.succ) ℓ hℓ (fun x hx ↦ (hstep b x hx).1)
+    refine ⟨primarySheafSequence K Ks H Ω C T e R (A b.castSucc) (A b.succ)
+      hle (hstable b.castSucc) (hstable b.succ), d, hS, ?_, ?_, ⟨jQ ≪≫ jconst⟩⟩
+    · change Nonempty (primaryAssociatedSheaf K Ks H Ω C T e
+        (primarySubmodule K Ks H R (A b.castSucc) (hstable b.castSucc)) ≅ F a)
+      dsimp [F]
+      rw [hidxa]
+      exact ⟨Iso.refl _⟩
+    · change Nonempty (primaryAssociatedSheaf K Ks H Ω C T e
+        (primarySubmodule K Ks H R (A b.succ) (hstable b.succ)) ≅ F (a + 1))
+      dsimp [F]
+      rw [hidxs]
+      exact ⟨Iso.refl _⟩
+  · obtain ⟨jM⟩ := primary_inverseImage_restriction K Ks Ω M R i haction H C hC T e
+    have htop' : A (idx n) = ⊤ := hidxn ▸ htop
+    obtain ⟨jtop⟩ := primarySubmoduleTopIso K Ks H R (A (idx n)) htop' (hstable (idx n))
+    exact ⟨jM ≪≫ (Etale.upperStar AddCommGrpCat.{u + 1} e.inv).mapIso
+      (C.inverse.mapIso jtop.symm)⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-primary-fixed-field-module-comparison",
+ "kind": "statement",
+ "title": "Fixed-field equivalence with its canonical stalk action",
+ "statement": "Let K, Ks and Omega be fields in universe u, with compatible embeddings K -> Ks -> Omega [def-pd-separable-closure], and Omega algebraically closed. Let G=Gal(Ks/K) with the Krull topology, let H be an open subgroup of G, and set L=(Ks)^H. Assume Ks is a separable closure of K. A fixed-field comparison C consists of an equivalence E from abelian etale sheaves on Spec L [def-weil-pbc-abelian-etale-sheaves] to discrete continuous integer H-modules [def-exc-discrete-modules-category], a natural additive isomorphism j from the underlying group of E(F) to the geometric stalk F_p at the point p:Spec Omega -> Spec L induced by L -> Ks -> Omega [def-weil-pbc-geometric-stalks], and the following action compatibility. For every F, g in H, K-automorphism tau of Omega extending g on Ks, etale L-scheme X, pointed lifts x,x' of p with x'=Spec(tau) followed by x, and section z of F on X, j_F(g*j_F^{-1}(germ_x(z)))=germ_x'(z). Such a comparison C exists. No representation R, original sheaf M, or filtration is part of the assertion.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure",
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+ },
+ "proof": [
+  {
+   "text": "The open-subgroup fixed-field theorem gives L/K finite separable and fixingSubgroup(L)=H. Ks is a separable closure of L. Restriction of scalars identifies Gal(Ks/L) with H. Both Krull topologies have the same neighborhood basis of stabilizers of finite subsets of Ks, hence this group identification is a homeomorphism.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the abelian geometric-stalk equivalence over L and reindex discrete representations by this homeomorphism. Retain its natural additive stalk isomorphism. An extension tau of g in H fixes L, since elements of L are fixed by g and embedded via Ks; restricting scalars turns the canonical germ formula over L into the formula specified for C. Thus the functor and its quasi-inverse are determined up to the natural isomorphisms used downstream.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-etale-open-subgroup-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ (abelian stalk equivalence), 03QT and 03QW (canonical germ action); blueprint lem-sc-affine-generic-second, proof paragraphs 1--2; fixed-field correspondence in Tag 0BML where applicable. Read the named Stacks pages online during repair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport finite invariant Galois module subgroup filtration to abelian etale sheaves with constant prime field quotients",
+   "results": "InfiniteGalois.asProfiniteGaloisGroupFunctor, finGaloisGroupFunctor, IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.mul_inv_mem_inertia, arithFrobAt, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, IsArithFrobAt.arithFrobAt, galBasis",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.subrepresentation",
+   "results": "Rep.subrepresentation, Rep.subtype, Rep.subtype_hom_toFun",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "primary.*filtration|filtration.*primary",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "No direct transport theorem; Rep.subrepresentation and Rep.subtype are used in the actual constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Abelian etale sheaves on a field are equivalent to discrete continuous Galois modules via the geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "proof paragraphs 1--2: the restricted primary-module chain has constant-quotient etale sheaves",
+   "via": [
+    "lem-sc-primary-module-filtration-sheaf-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimaryModuleFiltrationFixedFieldComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_primaryFixedFieldComparison",
+  "statement": "theorem nonempty_primaryFixedFieldComparison\n    (K Ks : Type u) [Field K] [Field Ks] [Algebra K Ks]\n    (H : OpenSubgroup (Gal(Ks/K))) [IsSepClosure K Ks]\n    (Ω : Type u) [Field Ω] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] :\n    ∃ C : PrimaryFixedFieldEquivalence K Ks H,\n      PrimaryFixedFieldComparison K Ks H Ω C",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38891",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38891",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640273",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
+ }
+}

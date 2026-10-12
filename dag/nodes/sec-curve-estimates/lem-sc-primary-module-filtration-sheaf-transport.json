@@ -18,48 +18,38 @@
  },
  "proof": [
   {
-   "text": "For each a, make A(a) an integer submodule of R and restrict its action to H. Stability gives actions on the submodules and on A(a+1)/A(a); their stabilizers are open because each contains the open stabilizer of a representative. Monotonicity gives equivariant inclusions and the quotient maps, forming short exact sequences of discrete H-modules. The bottom and top equalities identify their endpoints with zero and R restricted to H.",
+   "text": "Obtain the canonical fixed-field comparison C. Construct the restricted representation and each invariant subgroup representation explicitly, with open stabilizers proved by preimage and subtype equality. Define idx(a)=min(a,n) and F(a)=P_C(V_{A(idx(a))}). The bottom subgroup gives a zero representation; fully faithful functors reflect zero objects and inverse image across e preserves them.",
    "uses": [
-    "def-exc-discrete-modules-category"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For a successor quotient Q, the hypothesis ell*x in A(a) says ell*Q=0, so Q has its canonical Z/ell-module structure. The second successor condition says every element of H acts trivially on Q. Since R is finite, Q is finite. As ell is prime, a maximal linearly independent subset of the finite set Q is a finite basis: if its span were proper, adjoining a vector outside the span would contradict maximality. The coordinate maps therefore identify Q with a finite direct sum of copies of Z/ell. If Q=0 the basis is empty and the sum is the zero object.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Let L=(Ks)^H. The fixed-field correspondence identifies its fixing subgroup with H and Ks is a separable closure of L. On the sites of etale schemes, composing Spec L -> Spec K identifies the pointed fibres with their same geometric points, with Galois action restricted to H; the point/G-set classification describes these actions by precomposition. The stalk of inverse image is thus the same abelian group with restricted action. The supplied action-on-germs equality makes i an equivariant identification of that stalk with R restricted to H. Applying the abelian sheaf/module equivalence over L therefore identifies the inverse image of M with this restricted module.",
-   "uses": [
-    "lem-exc-etale-open-subgroup-fixed-field",
-    "lem-exc-etale-field-gsets",
-    "lem-exc-abelian-sheaves-gmodules"
+    "lem-sc-primary-fixed-field-module-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the inverse abelian equivalence over L to the supplied submodule chain and its short exact sequences. Equivalences preserve zero objects, kernels and cokernels, so the sequences stay short exact. The trivial-action module Z/ell corresponds to the constant Z/ell sheaf, by computing its stalk and action. The finite direct-sum identifications from step 2 become the stated iterated binary biproducts. Pull the chain across e:Spec L ~= T. The inverse image along an isomorphism is an equivalence, so it again preserves these properties and carries constant sheaves to constant sheaves. Composition of inverse images gives the terminal identification for e.inv followed by Spec(algebraMap K L). Extend the chain from Fin(n+1) to the natural numbers by taking A(min(a,n)), so all indices a<n and both endpoints agree; when n=0 the given bottom/top equalities force R=0.",
+   "text": "For a<n, monotonicity supplies the subtype inclusion A(a)->A(a+1). Its sheaf inclusion and categorical cokernel form the explicit primarySheafSequence. Apply the single-inclusion exactness/quotient comparison using the trivial-action half of hstep. Apply the finite prime-field quotient identification using its annihilation half. Compose these two isomorphisms inline; idx(a)=a and idx(a+1)=a+1 identify the first two terms with F(a) and F(a+1).",
    "uses": [
-    "lem-exc-abelian-sheaves-gmodules",
-    "def-weil-pbc-inverse-image",
-    "def-sc-constant-sheaves"
+    "lem-sc-primary-subgroup-sheaf-exactness",
+    "lem-sc-primary-constant-quotient-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At idx(n)=n, the top subgroup inclusion is an isomorphism to the restricted ambient module, constructed using its injectivity and surjectivity. Apply the inverse-image restriction comparison for the given i and haction and compose with the inverse of this top-stage isomorphism after applying the associated-sheaf construction. For n=0 the same formulas work and there are no successor conditions.",
+   "uses": [
+    "lem-sc-primary-inverse-image-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category",
-  "def-sc-constant-sheaves",
-  "def-weil-pbc-inverse-image",
-  "lem-exc-abelian-sheaves-gmodules",
-  "lem-exc-etale-field-gsets",
-  "lem-exc-etale-open-subgroup-fixed-field"
+  "lem-sc-primary-constant-quotient-identification",
+  "lem-sc-primary-fixed-field-module-comparison",
+  "lem-sc-primary-inverse-image-restriction",
+  "lem-sc-primary-subgroup-sheaf-exactness"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
-  "place": "proof paragraphs 1--2: convert the restricted primary-module chain to constant-quotient etale sheaves"
+  "place": "R3 repair: explicit restricted subgroup modules, associated sheaves, inclusion/cokernel complexes, and combination of four strictly smaller comparison obligations."
  },
  "mathlib_searches": [
   {
@@ -142,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V1",
+  "reviewer": "X-38891",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T165537-L-2941628",
+  "landing": "20261012T223415-L-1640273",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered modules and nodes, target signature, axioms, compilation, and direct importer all matched the stage-3 brief."
  }
 }
