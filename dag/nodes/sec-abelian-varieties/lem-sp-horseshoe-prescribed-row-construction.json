@@ -13,31 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Set K^0=I_A^0⊕I_C^0 and w=(t,g s_C^0). The equation f t=s_A^0 and fg=0 give the two commutative squares with the split biproduct row. The outer augmentations are mono. The snake lemma makes w mono and gives a short exact sequence of its three cokernels.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-snake-lemma-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
-   }
-  },
-  {
-   "text": "Exactness of each prescribed outer resolution gives a monomorphism from the cokernel of its augmentation into its degree-one term. Apply injectivity of I_A^1 to extend the left cokernel embedding across the first map of the cokernel short exact sequence. Pair this extension with the right cokernel embedding composed with the second map to obtain the next middle embedding into I_A^1⊕I_C^1. Apply the snake lemma to obtain the next short exact cokernel sequence. Repeat this operation recursively with the cokernels and the next prescribed outer terms. At step n, the chosen middle object is I_A^n⊕I_C^n, and the new maps on cokernels commute with the inclusions and projections.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-snake-lemma-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
-   }
-  },
-  {
-   "text": "Define d_K^n as the quotient from K^n to the current middle cokernel followed by its embedding into K^(n+1). Its composite with the next differential is zero because the next quotient kills this embedding. The cokernel squares and the embedding squares show that the outer inclusions and projections commute with these differentials. They therefore define complex maps α and β with αβ=0; the initial squares give the augmentation equations. Every row is the canonical split biproduct row. The identity of K^0 with the initial biproduct gives e_0 and the required equality.",
+   "text": "Use Mathlib ShortComplex.Exact.descToInjective for S to descend -(lift d_A^0) along g, since f lift d_A^0=s_A^0 d_A^0=0. Extend this map across the monomorphism s_C^0 using Injective.factorThru, giving t_0:I_C^0→I_A^1 with lift d_A^0+g s_C^0 t_0=0. Since g is epi, this equality implies s_C^0 t_0 d_A^1=0. Apply IC.exact₀.descToInjective to obtain t_1 with d_C^0 t_1=-t_0 d_A^1.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -48,7 +24,29 @@
    }
   },
   {
-   "text": "The first differential is the quotient onto Coker(w) followed by a monomorphism. Thus its kernel is the image of w, and B → K^0 → K^1 is exact. The equation w d_K^0=0 determines the augmentation B[0] → K. No verification of positive-degree exactness, termwise injectivity, or quasi-isomorphism is needed for this construction statement.",
+   "text": "Recursively keep the pair (t_n,t_(n+1)) and the equation d_C^n t_(n+1)=-t_n d_A^(n+1). Multiplying by d_A^(n+2) shows d_C^n kills -t_(n+1) d_A^(n+2). Mathlib IC.exact_succ n and Exact.descToInjective therefore give t_(n+2) satisfying the next equation. Nat.rec constructs all t_n; no unproved existence theorem supplies data.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
+   }
+  },
+  {
+   "text": "Set K^n=I_A^n⊕I_C^n and d_K^n=[[d_A^n,t_n],[0,d_C^n]]. Biproduct extensionality, square-zero of the outer differentials, and the recursive equation show d_K^n d_K^(n+1)=0. CochainComplex.of constructs K, and CochainComplex.ofHom assembles the canonical inclusions α and projections β. They compose to zero and every evaluated row is short exact by ShortComplex.Splitting.ofHasBinaryBiproduct.shortExact. The first equation shows w=(lift,g s_C^0) is killed by d_K^0. CochainComplex.fromSingle₀Equiv constructs its augmentation. The two augmentation squares follow from f lift=s_A^0 and fg=0; e_0 is Iso.refl.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
+   }
+  },
+  {
+   "text": "Prove degree-zero exactness using Mathlib ShortComplex.exact_iff_exact_up_to_refinements. For x:T→K^0 killed by d_K^0, its right coordinate is killed by d_C^0, hence IC.exact₀.lift gives c:T→C. Since g is epi, surjective_up_to_refinements_of_epi gives an epi π:T'→T and b:T'→B with π c=b g. Put y=π x-b w. Its right coordinate vanishes and y d_K^0=0, so its left coordinate is killed by d_A^0. IA.exact₀.lift gives a:T'→A with a s_A^0=y fst. Then (b+a f) w=π x, checked on the two biproduct projections. This proves the required exactness.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -60,13 +58,12 @@
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-snake-lemma-abelian"
+  "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 013T, proof Step 2; degree-by-degree cokernel argument from the parent node, with fixed initial lift and verification separated."
+  "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2, upper triangular differential; direct object specialization with the prescribed initial lift, implemented by Mathlib exactness and injective extension instead of the former snake/cokernel induction."
  },
  "mathlib_searches": [
   {
@@ -144,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-faf89",
   "group": "Y2",
   "result": "pass",
-  "landing": "20261012T060801-L-2919222",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135338-L-1702106",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, DAG node, report, and direct importer compiled cleanly; theorem signature and allowed axioms match the repository."
  }
 }
