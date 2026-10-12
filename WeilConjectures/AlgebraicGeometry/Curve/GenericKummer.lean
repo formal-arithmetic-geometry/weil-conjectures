@@ -200,6 +200,22 @@ theorem exists_isColimit_rightDerived_one_rootsOfUnitySheaf [IsNoetherian X] [Is
     erw [CategoryTheory.Functor.map_id, Category.comp_id]
   exact ⟨_, _, ⟨CokernelCofork.isColimitOfπOfIso e₁ he _ h₀⟩⟩
 
+/-- **The cokernel of `n` on `η_* 𝔾ₘ` is the cokernel of `n` on the divisors.** Let `X` be an
+integral regular locally noetherian scheme on which `n` is invertible. Composing the divisor map
+`η_* 𝔾ₘ ⟶ ⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ` with a cokernel of `n` on its target gives a cokernel of `n` on
+`η_* 𝔾ₘ`, as `n` is surjective on `𝔾ₘ` by the Kummer sequence. -/
+noncomputable def isColimitOfπDivisorSequenceMapComp [IsLocallyNoetherian X] [IsRegular X]
+    (c : Cofan fun x : {x : X // Order.coheight x = 1} ↦ X.pointConstantInt x.1)
+    (hc : IsColimit c) (n : ℕ) (hn : IsUnit (n : Γ(X, ⊤))) {Z : Sheaf X.smallEtaleTopology
+      AddCommGrpCat.{u + 1}} {π : c.pt ⟶ Z} (w : (n • 𝟙 c.pt) ≫ π = 0)
+    (h : IsColimit (CokernelCofork.ofπ π w)) :
+    IsColimit (CokernelCofork.ofπ (f := n • 𝟙 X.genericGm) (X.divisorSequenceMap c hc ≫ π)
+      (by rw [← Category.assoc, show (n • 𝟙 _) ≫ X.divisorSequenceMap c hc =
+        X.divisorSequenceMap c hc ≫ (n • 𝟙 _) by simp, Category.assoc, w, comp_zero])) :=
+  have : Epi (n • 𝟙 X.gmSheaf) := (X.kummerSequence_shortExact n hn).epi_g
+  CokernelCofork.isColimitOfπOfShortExact (X.shortExact_divisorSequence c hc)
+    (a := n • 𝟙 _) (b := n • 𝟙 _) (c := n • 𝟙 _) (by simp) (by simp) w h
+
 end Generic
 
 end AlgebraicGeometry.Scheme
