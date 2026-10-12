@@ -9,8 +9,8 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.ClosedPointDimensionLocalRing
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # A global complete intersection has the expected dimension at every point
@@ -80,7 +80,35 @@ theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound
         topologicalKrullDimAt
           (⟨p, inferInstance⟩ :
             Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))) := by
-  sorry
+  intro p
+  classical
+  let _ := hT
+  let P := MvPolynomial (Fin m) k
+  let J : Ideal P := Ideal.span (Set.range f)
+  let T := P ⧸ J
+  let q : Ideal P := p.asIdeal.comap (Ideal.Quotient.mk J)
+  obtain ⟨d, d', hd, hd', hdd, hdm, hdim⟩ :=
+    topologicalKrullDimAt_polynomial_quotient_eq_height_difference m J p.asIdeal
+  have hsubset : Set.range f ⊆ q := by
+    rintro _ ⟨i, rfl⟩
+    change Ideal.Quotient.mk J (f i) ∈ p.asIdeal
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr
+      (Ideal.subset_span (Set.mem_range_self i))]
+    exact p.asIdeal.zero_mem
+  have hheight := Ideal.height_le_height_add_encard_of_subset (Set.range f) hsubset
+  have hmap : q.map (Ideal.Quotient.mk J) = p.asIdeal :=
+    Ideal.map_comap_of_surjective _ Ideal.Quotient.mk_surjective _
+  have hcard : (Set.range f).encard ≤ (t : ℕ∞) := by
+    simpa only [Set.image_univ, Set.encard_univ, ENat.card_eq_coe_fintype_card,
+      Fintype.card_fin] using Set.encard_image_le f Set.univ
+  rw [hmap, hd, hd'] at hheight
+  have hbound : (d' : ℕ∞) ≤ (d : ℕ∞) + t :=
+    hheight.trans (add_le_add_right hcard _)
+  have hnat : d' ≤ d + t := by exact_mod_cast hbound
+  rw [hdim]
+  apply WithBot.coe_le_coe.mpr
+  have harith : m - t ≤ m - d' + d := by omega
+  exact_mod_cast harith
 
 theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq
     (k : Type u) [Field k] (m t : ℕ)
