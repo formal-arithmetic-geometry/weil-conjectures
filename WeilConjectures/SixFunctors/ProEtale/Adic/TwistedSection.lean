@@ -162,6 +162,39 @@ lemma globalSectionsTransport_comp_germ {S Y Y' : Scheme.{u}} {L : Type u} [Fiel
     simp
     exact Category.comp_id _
 
+/-- The global section of an isomorphism `ℚ̄_ℓ ≅ M` on a connected scheme is nonzero. -/
+lemma globalSectionOfModHom_ne_zero_of_iso {Z : Scheme.{u}} [ConnectedSpace Z]
+    {M : AdicSheaf l Z} (θ : AdicSheaf.unit l Z ≅ M) : globalSectionOfModHom θ.hom ≠ 0 := by
+  intro h0
+  have hφ : θ.hom = 0 :=
+    (bijective_globalSectionOfModHom _).1 (h0.trans globalSectionOfModHom_zero.symm)
+  have hone : 𝟙 (AdicSheaf.unit l Z) = 0 := by
+    rw [← θ.hom_inv_id, hφ, zero_comp]
+  refine oneGlobalSection_ne_zero (l := l) Z ?_
+  have h := globalSectionOfModHom_eq (𝟙 (AdicSheaf.unit l Z))
+  rw [Mod.id_hom', CategoryTheory.Functor.map_id, hone, globalSectionOfModHom_zero] at h
+  exact h.symm
+
+private lemma injective_Γ_map_upperStarCompIso {S Y Y' P : Scheme.{u}} {π : P ⟶ S}
+    {w : Y' ⟶ Y} {z : S ⟶ Y} {z' : P ⟶ Y'} (hz : z' ≫ w = π ≫ z)
+    (N : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)) :
+    Function.Injective ((Sheaf.Γ _ (WeilCoefficients.{u} l)).map
+      ((upperStarCompIso (WeilCoefficients.{u} l) hz).hom.app N ≫
+      (π)^*[WeilCoefficients.{u} l].map (𝟙 ((z)^*[WeilCoefficients.{u} l].obj N)))).hom :=
+  (ConcreteCategory.bijective_of_isIso _).1
+
+private lemma globalSectionsTransport_one_apply {S Y Y' P : Scheme.{u}} {π : P ⟶ S}
+    {w : Y' ⟶ Y} {z : S ⟶ Y} {z' : P ⟶ Y'} (hz : z' ≫ w = π ≫ z)
+    (N : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)) (x) :
+    (globalSectionsTransport _ hz (𝟙 ((z)^*[WeilCoefficients.{u} l].obj N))).hom x =
+      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).map
+        ((upperStarCompIso (WeilCoefficients.{u} l) hz).hom.app N ≫
+        (π)^*[WeilCoefficients.{u} l].map (𝟙 ((z)^*[WeilCoefficients.{u} l].obj N)))).hom
+      (((globalSectionsToUpperStar (WeilCoefficients.{u} l) z').app
+        ((w)^*[WeilCoefficients.{u} l].obj N)).hom x) := by
+  rw [globalSectionsTransport, ModuleCat.comp_apply]
+  rfl
+
 /-- The transport along `z' ≫ w = π ≫ z` of the section of an isomorphism `θ : ℚ̄_ℓ ≅ w^* N`
 to the spectrum of a field is nonzero. -/
 lemma globalSectionsTransport_globalSectionOfModHom_ne_zero {S Y Y' : Scheme.{u}} {L : Type u}
@@ -169,29 +202,18 @@ lemma globalSectionsTransport_globalSectionOfModHom_ne_zero {S Y Y' : Scheme.{u}
     (hz : z' ≫ w = π ≫ z) {N : AdicSheaf l Y} (θ : AdicSheaf.unit l Y' ≅ (w)^*ᵃ[l].obj N) :
     (globalSectionsTransport _ hz (𝟙 ((z)^*[WeilCoefficients.{u} l].obj N.X))).hom
       (globalSectionOfModHom θ.hom) ≠ 0 := by
-  intro he0
-  let A := WeilCoefficients.{u} l
-  let E := (adicUpperStarUnitIso l z').symm ≪≫ (z')^*ᵃ[l].mapIso θ
-  have hres : ((globalSectionsToUpperStar A z').app ((w)^*[A].obj N.X)).hom
-      (globalSectionOfModHom θ.hom) = globalSectionOfModHom E.hom :=
+  have hres : ((globalSectionsToUpperStar (WeilCoefficients.{u} l) z').app
+      ((w)^*[WeilCoefficients.{u} l].obj N.X)).hom (globalSectionOfModHom θ.hom) =
+      globalSectionOfModHom ((adicUpperStarUnitIso l z').inv ≫ (z')^*ᵃ[l].map θ.hom) :=
     globalSectionsToUpperStar_globalSectionOfModHom z' θ.hom
-  let T := (Sheaf.Γ _ A).map ((upperStarCompIso A hz).hom.app N.X ≫
-    (π)^*[A].map (𝟙 ((z)^*[A].obj N.X)))
-  have hT : globalSectionsTransport A hz (𝟙 ((z)^*[A].obj N.X)) =
-      (globalSectionsToUpperStar A z').app ((w)^*[A].obj N.X) ≫ T := rfl
-  have hinj : Function.Injective T.hom := (ConcreteCategory.bijective_of_isIso T).1
-  have h0 : globalSectionOfModHom E.hom = globalSectionOfModHom 0 := by
-    rw [globalSectionOfModHom_zero, ← hres]
-    refine hinj ?_
-    rw [map_zero]
-    exact he0
-  have hφ : E.hom = 0 := (bijective_globalSectionOfModHom _).1 h0
-  have hone : 𝟙 (AdicSheaf.unit l (Spec (.of L))) = 0 := by
-    rw [← E.hom_inv_id, hφ, zero_comp]
-  refine oneGlobalSection_ne_zero (l := l) (Spec (.of L)) ?_
-  have h := globalSectionOfModHom_eq (𝟙 (AdicSheaf.unit l (Spec (.of L))))
-  rw [Mod.id_hom', CategoryTheory.Functor.map_id, hone, globalSectionOfModHom_zero] at h
-  exact h.symm
+  rw [globalSectionsTransport_one_apply, hres]
+  intro h
+  have h' := injective_Γ_map_upperStarCompIso hz N.X (h.trans (map_zero _).symm)
+  have hE : (adicUpperStarUnitIso l z').inv ≫ (z')^*ᵃ[l].map θ.hom =
+      ((adicUpperStarUnitIso l z').symm ≪≫ (z')^*ᵃ[l].mapIso θ).hom := by
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  rw [hE] at h'
+  exact globalSectionOfModHom_ne_zero_of_iso _ h'
 
 /-- **The twisted section.** Let `N` be an `ℓ`-adic sheaf on `Y`, `w : Y' ⟶ Y`, `g : Y' ⟶ Y'`
 with `g ≫ w = w`, and `θ : ℚ̄_ℓ ≅ w^* N` a trivialisation whose section is multiplied by `χ`
