@@ -777,6 +777,7 @@ public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.AffineStratification
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.EtaleDescent
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriek
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekAffine
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekNoetherian
@@ -882,6 +883,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
@@ -1686,6 +1688,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
+public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
@@ -1799,6 +1802,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
