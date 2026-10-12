@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Algebra.Homology.BaseTensorOrdinaryDegreeIso
 
 /-!
 # Ordinary base tensor associativity
@@ -56,6 +57,30 @@ theorem exists_baseTensorOrdinaryIso
       ∀ (i : ℤ) (b : B) (q : Q.X i),
     ordinaryIso.hom.f i (b ⊗ₜ[R,algebraMap R B] q) =
       (Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)] q) := by
-  sorry
+  classical
+  choose f hf using fun i => exists_baseTensorOrdinaryDegreeIso R A B (Q.X i)
+  refine ⟨HomologicalComplex.Hom.isoOfComponents f ?_, ?_⟩
+  · intro i j hij
+    ext x
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b q =>
+      change B at b
+      change Q.X i at q
+      change
+        (restrictScalars Algebra.TensorProduct.includeRight.toRingHom).map
+          ((extendScalars (algebraMap A (A ⊗[R] B))).map (Q.d i j))
+            ((f i).hom (b ⊗ₜ[R,algebraMap R B] q)) =
+        (f j).hom (((extendScalars (algebraMap R B)).map
+          ((restrictScalars (algebraMap R A)).map (Q.d i j)))
+            (b ⊗ₜ[R,algebraMap R B] q))
+      rw [hf i]
+      change Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)]
+        ((Q.d i j) q) =
+        (f j).hom (b ⊗ₜ[R,algebraMap R B] ((Q.d i j) q))
+      exact (hf j b ((Q.d i j) q)).symm
+    | add x y hx hy => simp only [comp_apply, map_add] at hx hy ⊢; rw [hx, hy]
+  · intro i b q
+    exact hf i b q
 
 end ModuleCat

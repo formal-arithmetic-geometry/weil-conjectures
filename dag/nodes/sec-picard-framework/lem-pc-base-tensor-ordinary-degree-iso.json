@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-base-tensor-ordinary-degree-iso",
+ "kind": "statement",
+ "title": "Degreewise ordinary base tensor comparison",
+ "statement": "Let R be a commutative ring, A and B commutative R-algebras, and M an A-module. Use the tensor product [def-weil-pbc-module-tensor-product] and scalar extension [def-weil-module-base-change]. There exists a B-linear isomorphism B ⊗_R Res_R M ≅ Res_B ((A ⊗_R B) ⊗_A M) which sends b ⊗ m to (1 ⊗ b) ⊗ m for every b and m. Ring and module universes may differ with carriers in a common containing universe. No flatness is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CX, 05G3, 08IB"
+ },
+ "proof": [
+  {
+   "text": "Define the B-linear forward map b ⊗ m ↦ (1 ⊗ b) ⊗ m and inverse (a ⊗ b) ⊗ m ↦ b ⊗ am using the tensor universal property. R-balancing uses the algebra structures; A-balancing uses (aa₀)m = a(a₀m).",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX, 05G3, 08IB"
+   }
+  },
+  {
+   "text": "The composites fix pure tensors: one returns b ⊗ m, and the other returns (1 ⊗ b) ⊗ am = (a ⊗ b) ⊗ m by A-balancing. Tensor induction proves both identities, giving the isomorphism and generator formula. Mathlib IsPushout.cancelBaseChange and cancelBaseChange_symm_tmul implement this after transport of the scalar actions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CX, 05G3, 08IB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CX, 05G3, 08IB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor comparison B tensor R M and (A tensor R B) tensor A M",
+   "results": "Algebra.IsPushout.cancelBaseChange and cancelBaseChange_symm_tmul",
+   "date": "2026-10-12",
+   "verdict": "generalization: Mathlib provides the underlying linear equivalence; scalar-action transport is intermediate glue"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsPushout.cancelBaseChange",
+   "results": "Algebra.IsPushout.cancelBaseChange, cancelBaseChange_symm_tmul",
+   "date": "2026-10-12",
+   "verdict": "match for underlying equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "Mathlib/RingTheory/IsTensorProduct.lean cancelBaseChange_symm_tmul",
+   "results": "line 832",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change tensor product associativity for modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseTensorOrdinaryIso",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08IB affine tensor comparison: degreewise tensor cancellation, the first step of lem-pc-base-tensor-ordinary-iso",
+   "via": [
+    "lem-pc-base-tensor-ordinary-iso",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseTensorOrdinaryDegreeIso",
+  "file": "lean/Sheaf/Algebra/Homology/BaseTensorOrdinaryDegreeIso.lean",
+  "declaration": "ModuleCat.exists_baseTensorOrdinaryDegreeIso",
+  "statement": "theorem exists_baseTensorOrdinaryDegreeIso\n    (R : Type uR) (A : Type uA) (B : Type uB)\n    [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]\n    (M : ModuleCat.{max uR uA uB v} A) :\n    ∃ e :\n      (extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).obj\n        ((restrictScalars.{max uR uA uB v} (algebraMap R A)).obj M) ≅\n      (restrictScalars.{max uR uA uB v}\n        Algebra.TensorProduct.includeRight.toRingHom).obj\n        ((extendScalars.{_, _, max uR uA uB v}\n          (algebraMap A (A ⊗[R] B))).obj M),\n      ∀ (b : B) (m : M), e.hom (b ⊗ₜ[R,algebraMap R B] m) =\n        Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)] m",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T110319-L-621707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T110319-L-621707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
