@@ -24,22 +24,34 @@
  ],
  "proof": [
   {
-   "text": "This is [thm-sc-constant-invariance] of the Jacobian chapter (applied with\n$n=d$), which proves the same assertion for the constant sheaf\n$\\mathbf F_d$; this is the displayed pullback map by the definition of\nthe etale cohomology of [def-weil-pbc-etale-cohomology].",
+   "text": "Reduce the quasi-compact separated smooth curve to connected smooth curves by the finite-clopen-component reduction. For each connected curve obtain its smooth proper compactification with finite closed complement using the existing compactification theorem. Apply the curve-estimate chapter constant-invariance theorem to obtain the canonical constant-coefficient comparison as a bijective map.",
    "uses": [
-    "thm-sc-constant-invariance",
-    "def-weil-pbc-etale-cohomology"
+    "lem-sc-curve-cohomology-connected-reduction",
+    "lem-sc-compactification",
+    "thm-sc-constant-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied curve-invariance map is the exact cohomologyMap followed by the cohomology map of upperStarConstantSheafIso. That second map is bijective because it comes from an isomorphism. Cancel it explicitly on injectivity and surjectivity to obtain bijectivity of the exact original pullback map. This retains the blueprint curve-estimate route.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-cohomology-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-curve-cohomology-connected-reduction",
+  "lem-sc-compactification",
   "thm-sc-constant-invariance",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/AlgClosedExtension.lean",
+  "place": "Curve specialization via connected components, compactification, and the existing curve constant-invariance theorem"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -70,5 +82,25 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-thm-vanishing"
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/AlgClosedExtension.lean",
+  "declaration": "AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension",
+  "statement": "theorem bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension {k : Type u}\n    [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] {k' : Type u} [Field k']\n    [IsAlgClosed k'] [Algebra k k'] (d : ℕ) (hd : (d : k) ≠ 0) (q : ℕ) :\n    Function.Bijective (Etale.cohomologyMap\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (C.constantZMod d) q)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T040421-L-1646442",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
