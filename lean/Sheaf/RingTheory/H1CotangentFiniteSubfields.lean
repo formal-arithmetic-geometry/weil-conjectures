@@ -16,6 +16,7 @@ universe u v
 
 namespace Algebra
 
+set_option backward.isDefEq.respectTransparency false in
 /-- First cotangent homology of a field extension vanishes if it vanishes on every
 finitely generated intermediate field.
 
@@ -41,6 +42,69 @@ theorem subsingleton_h1Cotangent_of_finite_subfields
     (k : Type u) (L : Type v) [Field k] [Field L] [Algebra k L]
     (h : ∀ E : IntermediateField k L, E.FG → Subsingleton (H1Cotangent k E)) :
     Subsingleton (H1Cotangent k L) := by
-  sorry
+  classical
+  let P := Generators.self k L
+  have hz : ∀ x : H1Cotangent k L, x = 0 := by
+    intro x
+    obtain ⟨g, hg⟩ := Extension.Cotangent.mk_surjective x.1
+    have hd : ∀ i : L, MvPolynomial.aeval _root_.id (MvPolynomial.pderiv i g.1) = 0 := by
+      intro i
+      have hx := congrArg (fun z => P.cotangentSpaceBasis.repr z i) x.2
+      rw [← hg, Extension.cotangentComplex_mk] at hx
+      rw [Generators.cotangentSpaceBasis_repr_one_tmul] at hx
+      simpa only [show P.val = _root_.id from rfl, map_zero, Finsupp.zero_apply] using hx
+    let E : IntermediateField k L := IntermediateField.adjoin k (g.1.vars : Set L)
+    have hE : E.FG := IntermediateField.fg_adjoin_finset _
+    obtain ⟨q, hq⟩ := MvPolynomial.exists_rename_eq_of_vars_subset_range g.1
+      (Subtype.val : E → L) Subtype.val_injective (by
+        intro i hi
+        exact ⟨⟨i, IntermediateField.subset_adjoin k _ hi⟩, rfl⟩)
+    have heval (r : MvPolynomial E k) :
+        algebraMap E L (MvPolynomial.aeval _root_.id r) =
+          MvPolynomial.aeval _root_.id (MvPolynomial.rename (Subtype.val : E → L) r) := by
+      rw [MvPolynomial.aeval_rename]
+      exact MvPolynomial.comp_aeval_apply (_root_.id : E → E) E.val r
+    have hq0 : MvPolynomial.aeval (_root_.id : E → E) q = 0 := by
+      apply (algebraMap E L).injective
+      rw [map_zero, heval, hq]
+      exact Generators.aeval_val_eq_zero (P := P) g.2
+    have hqd : ∀ i : E, MvPolynomial.aeval _root_.id (MvPolynomial.pderiv i q) = 0 := by
+      intro i
+      apply (algebraMap E L).injective
+      rw [map_zero, heval, ← MvPolynomial.pderiv_rename Subtype.val_injective, hq]
+      exact hd i
+    let Q := Generators.self k E
+    have hqker : q ∈ Q.ker := by
+      rw [Generators.ker_eq_ker_aeval_val, RingHom.mem_ker]
+      exact hq0
+    have hqc : Q.toExtension.cotangentComplex (Extension.Cotangent.mk ⟨q, hqker⟩) = 0 := by
+      apply Q.cotangentSpaceBasis.repr.injective
+      ext i
+      rw [Extension.cotangentComplex_mk, Generators.cotangentSpaceBasis_repr_one_tmul]
+      simpa [Q, Generators.self] using hqd i
+    have hqm : Extension.Cotangent.mk (P := Q.toExtension) ⟨q, hqker⟩ = 0 := by
+      have : Subsingleton (H1Cotangent k E) := h E hE
+      exact congrArg Subtype.val (Subsingleton.elim (α := H1Cotangent k E)
+        (⟨Extension.Cotangent.mk ⟨q, hqker⟩, hqc⟩ : H1Cotangent k E) 0)
+    have hqsq : q ∈ Q.ker ^ 2 := (Extension.Cotangent.mk_eq_zero_iff _).mp hqm
+    have hgsq : g.1 ∈ P.ker ^ 2 := by
+      let f := MvPolynomial.rename (R := k) (Subtype.val : E → L)
+      have hf : Ideal.map f Q.ker ≤ P.ker := by
+        rw [Ideal.map_le_iff_le_comap]
+        intro r hr
+        rw [Ideal.mem_comap, Generators.ker_eq_ker_aeval_val, RingHom.mem_ker]
+        change MvPolynomial.aeval _root_.id (f r) = 0
+        rw [← heval]
+        have hr0 := Generators.aeval_val_eq_zero (P := Q) hr
+        change MvPolynomial.aeval _root_.id r = 0 at hr0
+        rw [hr0, map_zero]
+      have hs := Ideal.mem_map_of_mem f hqsq
+      rw [Ideal.map_pow] at hs
+      have hs' := (pow_le_pow_left' hf 2) hs
+      simpa [f, hq] using hs'
+    apply Subtype.ext
+    rw [← hg]
+    exact (Extension.Cotangent.mk_eq_zero_iff _).mpr hgsq
+  exact ⟨fun x y => (hz x).trans (hz y).symm⟩
 
 end Algebra
