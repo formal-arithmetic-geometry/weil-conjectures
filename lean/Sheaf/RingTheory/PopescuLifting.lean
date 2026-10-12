@@ -7,13 +7,8 @@ module
 
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.FinitePresentation
-import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
-import Sheaf.RingTheory.EquationCountFibreDimensionFlat
-import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
-import Sheaf.RingTheory.SmoothAtPrimeFreeConormalBasis
+import Sheaf.RingTheory.PopescuLiftMaps
+import Sheaf.RingTheory.PopescuLiftSmooth
 
 /-! # Popescu lifting lemma
 
@@ -299,6 +294,11 @@ theorem popescu_lifting (R : Type a) (Λ : Type b) (Cbar : Type c)
           (PrimeSpectrum.comap c.toRingHom q) →
         @IsSmoothAtPrime (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar))
           (D ⧸ Ideal.span ({algebraMap R D π} : Set D)) _ _ cmod.toAlgebra q) := by
-  sorry
+  obtain ⟨d, hd⟩ := exists_popescu_lift_preparation R Cbar π
+  obtain ⟨φ, ψ, red, c, cmod, hψ, hred, hsquare, hcmod, hc⟩ :=
+    exists_popescu_lift_maps R Λ Cbar π d hd hAnnΛ j
+  obtain ⟨haway, hover, hmod⟩ := popescu_lift_smooth R Cbar π d hd hAnnR c cmod hc hcmod
+  exact ⟨d.liftingAlgebra, inferInstance, inferInstance, φ, ψ, red, c, cmod,
+    d.finitePresentation, hψ, hred, hsquare, hcmod, haway, hover, hmod⟩
 
 end Algebra

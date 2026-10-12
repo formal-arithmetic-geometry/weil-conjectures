@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-popescu-lift-maps",
+ "kind": "statement",
+ "title": "Compatible maps for the explicit prepared Popescu quotient",
+ "statement": "Let R, Lambda and Cbar be commutative R-algebras, pi in R, Cbar an R/pi^2R-algebra compatible with its R-algebra structure, and let d be prepared finite polynomial data as in [lem-weil-pbc-popescu-lift-preparation]. Write Q=R[x_1,...,x_n,z_1,...,z_m], p_{kl}=a_k z_l-sum_{j in E_k}h_{klj}z_j-pi g_{kl}, J=(f_l-pi z_l,p_{kl}), and D=ULift(Q/J), the explicit quotient of these equations. Assume Ann_Lambda(pi)=Ann_Lambda(pi^2) and an R-algebra map j:Cbar to Lambda/pi^2Lambda. There exist an R-algebra map phi:D to Lambda, its induced map psi:D/pi D to Lambda/pi Lambda, the canonical reduction red:Lambda/pi^2Lambda to Lambda/pi Lambda, an R-algebra map c:Cbar to D/pi D, and the induced map cmod:Cbar/pi Cbar to D/pi D. Their four composition identities with the quotient maps and with j hold, and c(epsilon(X_i)) is the image of the original generator x_i for every i. No smoothness conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07CP, original DAG steps 6--7, maps after the definition of D (Tag 07CP; https://stacks.math.columbia.edu/tag/07CP)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation"
+ ],
+ "proof": [
+  {
+   "text": "Lift the images of the generators to lambda_i in Lambda. Evaluation of each f_l is zero modulo pi^2, hence equals pi^2 mu_l. Evaluate Q=R[x,z] with x_i=lambda_i and z_l=pi mu_l. Its f_l-pi z_l relations vanish. Evaluating the prepared relation gives pi^2 Y=0 for Y=a_k(lambda)mu_l-sum h_{klj}(lambda)mu_j-g_{kl}(lambda). Membership in the annihilator of the singleton span and the assumed annihilator equality give pi Y=0. Therefore the p_{kl} relations vanish; quotient lifting and ULift give phi. This entire evaluation and annihilator argument is a Lean proof using MvPolynomial.aeval, Submodule.mem_annihilator_span_singleton and Ideal.Quotient.lift_algebra.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Modulo pi, evaluation of x_i at the canonical generator x_i kills pi^2 and the f_l. Descend this evaluation along the surjection epsilon using AlgHom.liftOfSurjective to construct c, with the specified generator values. Construct the other quotient maps using Ideal.Quotient.lift and lift_algebra. Equality of the right square is checked on the polynomial generators and scalars, and then on all of Cbar by surjectivity of epsilon. The Lean proof establishes all four composition identities and the generator formula.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-popescu-lift-preparation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07CP, original DAG steps 6--7, maps after the definition of D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descend evaluation of polynomial quotient using equality of annihilators of pi and pi squared and construct compatible reduction maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgHom.liftOfSurjective",
+   "date": "2026-10-13",
+   "results": "AlgHom.liftOfSurjective, AlgHom.liftOfSurjective_comp, AlgHom.liftOfSurjective_surjective, AlgHom.liftOfSurjective_apply",
+   "verdict": "Mathlib provides the quotient descent used in the proved maps theorem, not its polynomial evaluation and annihilator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgHom.liftOfSurjective|mem_annihilator_span_singleton|Quotient.liftₐ",
+   "date": "2026-10-13",
+   "results": "Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+   "verdict": "Ingredients only; used where applicable. No exact prepared-quotient theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLifting",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP within the essential-surjectivity approximation: Proof of Lemma 07CP, original DAG steps 6--7, maps after the definition of D",
+   "via": [
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftMaps",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftMaps.lean",
+  "declaration": "Algebra.exists_popescu_lift_maps",
+  "statement": "theorem exists_popescu_lift_maps (R : Type a) (Λ : Type b) (Cbar : Type c)\n    [CommRing R] [CommRing Λ] [CommRing Cbar] [Algebra R Λ] [Algebra R Cbar]\n    (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (hAnnΛ : Module.annihilator Λ (Ideal.span ({algebraMap R Λ π} : Set Λ)) =\n      Module.annihilator Λ (Ideal.span ({algebraMap R Λ (π ^ 2)} : Set Λ)))\n    (j : Cbar →ₐ[R] (Λ ⧸ Ideal.span ({algebraMap R Λ (π ^ 2)} : Set Λ))) :\n    ∃ (φ : d.liftingAlgebra →ₐ[R] Λ)\n      (ψ : (d.liftingAlgebra ⧸ Ideal.span ({algebraMap R d.liftingAlgebra π} :\n        Set d.liftingAlgebra)) →+* (Λ ⧸ Ideal.span ({algebraMap R Λ π} : Set Λ)))\n      (red : (Λ ⧸ Ideal.span ({algebraMap R Λ (π ^ 2)} : Set Λ)) →+*\n        (Λ ⧸ Ideal.span ({algebraMap R Λ π} : Set Λ)))\n      (c : Cbar →ₐ[R] (d.liftingAlgebra ⧸\n        Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n      (cmod : (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar)) →+*\n        (d.liftingAlgebra ⧸\n          Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra))),\n      ψ.comp (Ideal.Quotient.mk _) = (Ideal.Quotient.mk _).comp φ.toRingHom ∧\n      red.comp (Ideal.Quotient.mk _) = Ideal.Quotient.mk _ ∧\n      ψ.comp c.toRingHom = red.comp j.toRingHom ∧\n      cmod.comp (Ideal.Quotient.mk _) = c.toRingHom ∧\n      (∀ i : Fin d.n, c (d.ε (MvPolynomial.X i)) = Ideal.Quotient.mk _ (d.x i))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184346-L-4021160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184346-L-4021160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
