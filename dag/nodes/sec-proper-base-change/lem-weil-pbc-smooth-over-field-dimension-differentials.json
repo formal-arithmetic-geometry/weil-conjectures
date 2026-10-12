@@ -31,53 +31,36 @@
  ],
  "proof": [
   {
-   "text": "(A standard smooth neighbourhood of the point.) By smoothness at $\\mathfrak q$ [def-weil-pbc-singular-ideal], choose $u\\in S\\setminus\\mathfrak q$ such that $k\\to S_u$ is a smooth ring map [def-weil-pbc-smooth-ring-map]. The extended ideal $\\mathfrak qS_u$ is prime. Apply [lem-weil-pbc-smooth-ring-map-locally-standard-smooth] to $k\\to S_u$ and $\\mathfrak qS_u$: there is $v\\in S_u\\setminus\\mathfrak qS_u$ such that $(S_u)_v$ has a standard smooth presentation [def-weil-pbc-standard-smooth-algebra], say with $n\\ge c\\ge0$. Write $v=a/u^m$ with $a\\in S$. Since $v\\notin\\mathfrak qS_u$, we have $a\\notin\\mathfrak q$; hence $f=ua\\notin\\mathfrak q$. Localizing successively at $u$ and $v$ is isomorphic as a $k$-algebra to the principal localization $S_f$ (both invert $u$ and $a$, and $f=ua$; the mutually inverse maps follow from the universal property of localization), so transport gives a standard smooth presentation of $S_f$ with the same $n,c$.",
+   "text": "Finite type over the field implies finite presentation (Mathlib Algebra.FinitePresentation.of_finiteType). The smooth principal localization supplied by IsSmoothAtPrime puts q in Algebra.smoothLocus, by basicOpen_subset_smoothLocus_iff_smooth. Apply Algebra.IsSmoothAt.exists_notMem_isStandardSmooth to get f outside q and a standard smooth principal localization B = S_f. Extract its finite submersive presentation. Enumerate the relation variables first, via the equivalence from the domain of its injective map to its range, and enumerate the complementary variables second; reindex with these equivalences to obtain a presentation on Fin n and Fin c, with c <= n and map Fin.castLE.",
    "uses": [
     "def-weil-pbc-singular-ideal",
     "def-weil-pbc-smooth-ring-map",
     "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
     "def-weil-pbc-standard-smooth-algebra"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00TT (lemma-characterize-smooth-over-field), first paragraph: smoothness at q and Lemma 00TA (lemma-smooth-syntomic) give g not in q with S_g standard smooth over k"
-   }
+   "elementary": false
   },
   {
-   "text": "(Differentials on the standard smooth neighbourhood.) Let $b_i\\in S_f$ be the images of the variables in the standard smooth presentation from step 1. By [lem-weil-pbc-standard-smooth-kahler-basis], $\\Omega_{S_f/k}$ is free over $S_f$ with basis $\\mathrm db_{c+1},\\dots,\\mathrm db_n$, hence has rank $n-c$. The prime $\\mathfrak q_f=\\mathfrak qS_f$ has residue field canonically $\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. Tensoring the displayed basis with that field therefore gives a basis of $\\Omega_{S_f/k}\\otimes_{S_f}\\kappa(\\mathfrak q)$ of cardinality $n-c$; in particular this vector space is finite-dimensional of dimension $n-c$.",
+   "text": "Let K = kappa(q). The image of f in K is nonzero because the kernel of S -> K is q, hence is a unit. Extend the residue map to B by IsLocalization.Away.liftAlgHom, with its scalar-tower identity. The prime Q obtained by contracting the zero prime of K to B contracts further to q. The localization spectrum map is an open embedding. Prove local dimension invariance for an open embedding by pulling back open neighbourhoods for one inequality and taking open images for the other; the latter neighbourhoods are homeomorphic to the source neighbourhoods. Apply the existing standard smooth point-dimension theorem to the normalized presentation at Q, obtaining topologicalKrullDimAt q = n-c.",
    "uses": [
-    "lem-weil-pbc-standard-smooth-kahler-basis",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00T7 (lemma-standard-smooth), part (2), as used in the first paragraph of the proof of Lemma 00TT"
-   }
-  },
-  {
-   "text": "(Return to the original module of differentials.) By [lem-weil-pbc-kahler-differentials-localization], $\\Omega_{S_f/k}\\cong(\\Omega_{S/k})_f=\\Omega_{S/k}\\otimes_SS_f$, with the isomorphism induced by localization. Tensoring over $S_f$ with $\\kappa(\\mathfrak q)$ and using associativity of tensor products yields $\\Omega_{S_f/k}\\otimes_{S_f}\\kappa(\\mathfrak q)\\cong\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)$. Thus the vector space in the statement is finite-dimensional of dimension $n-c$ by step 2.",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00RT (lemma-differentials-localize), part (2), implicit in the localization used in the proof of Lemma 00TT"
-   }
-  },
-  {
-   "text": "(Dimension comparison.) The standard open $D(f)\\subseteq\\operatorname{Spec}S$ contains $\\mathfrak q$ and is homeomorphic to $\\operatorname{Spec}S_f$, carrying $\\mathfrak q$ to $\\mathfrak q_f$. By [lem-weil-pbc-dimension-at-point-open-subspace], the Krull dimension of $\\operatorname{Spec}S$ at $\\mathfrak q$ equals that of $\\operatorname{Spec}S_f$ at $\\mathfrak q_f$. By [lem-weil-pbc-standard-smooth-over-field-dimension-at-points] the latter is $n-c$. Together with step 3, this proves $\\dim_{\\kappa(\\mathfrak q)}(\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q))=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$.",
-   "uses": [
-    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "def-weil-pbc-localization-at-prime",
+    "def-kun-topological-dimension-at-point",
     "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00TT (lemma-characterize-smooth-over-field), first paragraph: a standard smooth neighbourhood has free differentials of rank equal to its dimension"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Localization S -> B is formally etale. KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale identifies B tensor_S Omega(S/k) with Omega(B/k); base-change its inverse along B -> K and use AlgebraTensorModule.cancelBaseChange to obtain a K-linear equivalence K tensor_B Omega(B/k) -> K tensor_S Omega(S/k). Base-change P.basisKaehler to K and map this basis along that equivalence.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The basis index is the complement of the range of the injective presentation map Fin c -> Fin n. Module.Finite.of_basis gives finite dimensionality; Module.finrank_eq_card_basis, Fintype.card_compl_set and Set.card_range_of_injective give finrank = n-c. Cast this natural-number equality to WithBot ENat and compare with the point dimension computed above.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -85,16 +68,16 @@
   "def-weil-pbc-smooth-ring-map",
   "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
   "def-weil-pbc-standard-smooth-algebra",
-  "lem-weil-pbc-standard-smooth-kahler-basis",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points"
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00TT (lemma-characterize-smooth-over-field), implication (1) => (3), using Lemmas 00TA and 00T7"
+  "place": "Algebra, Tag 00TT, implication (1) => (3), with Tag 00T7; formalized by G3 using Mathlib standard-smooth neighbourhoods, normalized presentations, localization of differentials and elementary open-embedding dimension invariance."
  },
  "mathlib_searches": [
   {
@@ -171,5 +154,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T095904-L-317336",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
