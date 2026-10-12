@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-etale-zariski-natural-acyclic-leray",
+ "kind": "statement",
+ "title": "Natural mixed-universe Leray for acyclic abelian sheaves",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $i:X.Opens\\to X.Etale$ a continuous finite-limit-preserving functor carrying the top open to a terminal etale object. Let $T=i_*$ [def-weil-pbc-sites-and-cohomology] be additive. Fix any small $HasExt$ model on Zariski abelian sheaves [def-pc-ext]. For every abelian sheaf $A$ on $X.Etale$ [def-weil-pbc-abelian-etale-sheaves] satisfying $R^{n+1}T(A)=0$ for all $n\\in\\mathbb N$, there exist simultaneously additive equivalences $b_A^n:H^{n+1}(X.Opens,TA)\\cong H^{n+1}(X.Etale,A)$, natural in every sheaf morphism between such acyclic objects and independent of the proofs of their acyclicity. The left-hand group is object cohomology at the top open in the fixed small Ext model; the right-hand group is constant-integer-sheaf Ext in the standard large model. The hypothesis is acyclicity; no claim that tensor-sections sheaves satisfy it is made [def-sc-zariski-cohomology, def-weil-pbc-etale-cohomology].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-ext",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-zariski-cohomology",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0733",
+  "place": "Lemma 21.14.6 (1), direct injective-resolution proof; Tags 072Z, 0730 and 06XP, Lemma 13.27.2 (1), for Ext and natural resolution computations"
+ },
+ "proof": [
+  {
+   "text": "Finite-limit preservation implies representable flatness of i. Continuous flat pullback is left exact; after passing to abelian group objects, abelian inverse image is exact. Its right adjoint T preserves injectives and is left exact. This argument is unchanged on an essentially small model of the etale site and with small abelian coefficients.",
+   "uses": [
+    "lem-weil-pbc-zariski-etale-sheaf-left-exact",
+    "lem-weil-pbc-site-pullback-abelian-underlying",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an injective resolution of an acyclic A. Apply T degreewise and to the augmentation. Left exactness gives exactness at degree zero; all positive homology objects identify with the positive derived images and are zero by acyclicity. Since T preserves injectives, this is an injective resolution of TA. Global section complexes agree because the image of the top open is terminal.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify small Zariski object Ext and standard large etale global Ext with cohomology of the same section complex, using free representables and the constant integer sheaf respectively. The resolution Ext equivalences commute with lifted coefficient maps, and any two lifts are homotopic. Thus these additive equivalences are invertible and simultaneously natural on the acyclic objects, independent of all resolution choices and acyclicity proofs.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-sc-site-cohomology-right-derived-sections",
+    "new-sheaf-cohomology-derived-evaluation",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-etale-sheaf-left-exact",
+  "lem-weil-pbc-site-pullback-abelian-underlying",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "new-sheaf-cohomology-derived-evaluation",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-12",
+  "document": "https://stacks.math.columbia.edu/tag/0733",
+  "place": "Lemma 21.14.6 (1), direct injective-resolution proof; Tags 072Z, 0730 and 06XP, Lemma 13.27.2 (1), for Ext and natural resolution computations",
+  "note": "Stage-3 reduction of the parent; source pages read at official Stacks URLs. Explicit interface/glue and universe bookkeeping written by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Leray gives cohomology equivalences natural in acyclic abelian sheaves with different Ext universes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray comparison for acyclic sheaves is natural in the coefficient morphism",
+   "results": "CategoryTheory.GrothendieckTopology.plusMap_plusLift; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; CategoryTheory.GrothendieckTopology.toPlus_naturality; CategoryTheory.Functor.IsCoverDense.Types.naturality_apply; CategoryTheory.Functor.IsCoverDense.Types.naturality; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; CategoryTheory.GrothendieckTopology.toPlus_naturality_assoc; these provide ingredients but no declaration of this comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "0d399a640c0f20ca"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorIsoPullback|unit_leftAdjointUniq|rightDerivedObjIsoOfResolution|isZero.*Direct|natural.*Leray",
+   "results": "Direct Mathlib source search found restriction and adjunction uniqueness ingredients, no etale tensor-sections direct image or natural mixed-universe Leray theorem. Whole DAG/blueprint search found the existing canonical open-section isomorphisms, which are used in the first lemma; no duplicate of these new full statements.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleZariskiAbelianPositiveComparison",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: '$\\wp=F-1$ with $F$ the $p$-linear Frobenius endomorphism of the finite-dimensional $k$-vector space $H^1(C,\\mathcal O_C)$' (the identification of $H^1(C,\\mathbf G_a)$ with $H^1(C,\\mathcal O_C)$ as $k$-vector spaces, which needs the comparison isomorphism to be natural in the module)",
+   "via": [
+    "lem-sc-etale-zariski-abelian-positive-comparison",
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleZariskiNaturalAcyclicLeray.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleZariskiNaturalAcyclicLeray",
+  "statement": "theorem etaleZariskiNaturalAcyclicLeray (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology] [(i.sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive] [PreservesFiniteLimits i] (hterminal : IsTerminal (i.obj ⊤)) [HasExt.{u} (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u})] : let T := i.sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology ∃ b : ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (n : ℕ), Sheaf.H' (T.obj F) (n + 1) (⊤ : X.Opens) ≃+ @Sheaf.H _ _ X.smallEtaleTopology F inferInstance (HasExt.standard _) (n + 1), ∀ (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (hG : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj G)) (φ : F ⟶ G) (n : ℕ) (x : Sheaf.H' (T.obj F) (n + 1) (⊤ : X.Opens)), b G hG n (((Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X.carrier) (n + 1)).map (T.map φ)).app (op ⊤) x) = @Sheaf.H.map _ _ X.smallEtaleTopology inferInstance (HasExt.standard _) _ _ φ (n + 1) (b F hF n x)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e3dc",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T184356-L-4024246",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e3dc",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T184356-L-4024246",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery files, DAG nodes, report, and change record match the stated proof; all four modules and the direct importer compile cleanly."
+ }
+}

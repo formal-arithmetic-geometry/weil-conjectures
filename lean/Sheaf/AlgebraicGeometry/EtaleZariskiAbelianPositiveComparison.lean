@@ -12,16 +12,10 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.SiteLerayDegenerate
-import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import Sheaf.Paper.ZariskiEtaleCore
+import Sheaf.AlgebraicGeometry.EtaleTensorDirectImageIdentification
+import Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing
+import Sheaf.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
 
 /-! # Positive-degree comparison for underlying abelian sheaves
 
@@ -38,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite Topological
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
+
+attribute [local irreducible] tensorPullback tensorPullbackObj
 
 /-- In positive degrees, the underlying Zariski abelian sheaf of a quasi-coherent
 module has the same cohomology as its associated tensor-sections étale sheaf.
@@ -103,6 +99,48 @@ theorem etaleZariskiAbelianPositiveComparison (X : Scheme.{u})
           (Opens.grothendieckTopology X.carrier) (n + 1)).map
             ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).map φ)).app (op ⊤) x) =
         @Sheaf.H.map _ _ X.smallEtaleTopology inferInstance (HasExt.standard _)
-          _ _ (m F G φ) (n + 1) (e F n x) := by sorry
+          _ _ (m F G φ) (n + 1) (e F n x) := by
+  classical
+  let : EnoughInjectives
+      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}) :=
+    @IsGrothendieckAbelian.enoughInjectives _ _ _
+      (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}
+        (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u})
+  let : HasExt.{u}
+      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}) :=
+    hasExt_of_enoughInjectives _
+  obtain ⟨i, hi, _, hlim, ⟨hterminal⟩, hcont, _, _⟩ := zariski_to_etale_core X
+  let := hcont
+  let := hlim
+  let T := i.sheafPushforwardContinuous AddCommGrpCat.{u}
+    (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology
+  let : T.Additive := Functor.Additive.mk (by intros; rfl)
+  obtain ⟨a, ha⟩ := etaleTensorDirectImageIdentification X i hi m hm
+  have hacyc (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :
+      IsZero ((T.rightDerived (n + 1)).obj (etaleTensorSectionsSheaf F)) :=
+    etaleTensorPositiveDirectImageVanishing X i hi F n
+  obtain ⟨b, hb⟩ := etaleZariskiNaturalAcyclicLeray X i hterminal
+  let Q (n : ℕ) := Sheaf.cohomologyPresheafFunctor
+    (Opens.grothendieckTopology X.carrier) (n + 1) ⋙
+      (CategoryTheory.evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let c (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) := (Q n).mapIso (a F)
+  refine ⟨fun F _ n ↦ (c F n).addCommGroupIsoToAddEquiv.trans
+    (b (etaleTensorSectionsSheaf F) (hacyc F) n), ?_⟩
+  intro F G _ _ φ n x
+  have hn : (Q n).map
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).map φ) ≫
+        (c G n).hom = (c F n).hom ≫ (Q n).map (T.map (m F G φ)) := by
+    change (Q n).map _ ≫ (Q n).map _ = (Q n).map _ ≫ (Q n).map _
+    rw [← Functor.map_comp, ← Functor.map_comp, ha F G φ]
+  have hx := congrArg (fun f ↦ f x) hn
+  change (c G n).hom (((Q n).map
+      ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).map φ)) x) =
+    ((Q n).map (T.map (m F G φ))) ((c F n).hom x) at hx
+  change b (etaleTensorSectionsSheaf G) (hacyc G) n
+      ((c G n).hom (((Q n).map
+        ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).map φ)) x)) = _
+  exact (congrArg (b (etaleTensorSectionsSheaf G) (hacyc G) n) hx).trans
+    (hb (etaleTensorSectionsSheaf F) (etaleTensorSectionsSheaf G)
+      (hacyc F) (hacyc G) (m F G φ) n ((c F n).hom x))
 
 end AlgebraicGeometry.Scheme.Modules

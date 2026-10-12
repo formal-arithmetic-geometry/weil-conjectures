@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-etale-tensor-positive-direct-image-vanishing",
+ "kind": "statement",
+ "title": "Positive direct images of quasi-coherent tensor-sections sheaves vanish",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $i:X.Opens\\to X.Etale$ a continuous functor with $i\\circ forget=X.restrictFunctor$. Let $T=i_*$ be continuous direct image [def-weil-pbc-sites-and-cohomology], assumed additive. For every quasi-coherent $X$-module $F$ [def-weil-sheaf-of-modules-category, pqf-def-coherent] and $n\\in\\mathbb N$, $R^{n+1}T(F_{et})=0$, where $F_{et}$ is the associated tensor-sections abelian sheaf [def-sc-etale-qcoherent-module]. No global cohomology comparison or natural equivalence is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Proposition Tag 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2); etale-cohomology.tex, Theorem Tag 03P2 (etale-cohomology-theorem-zariski-fpqc-quasi-coherent); sites-cohomology.tex, Tags 03F3, 072W and 0733(1)"
+ },
+ "proof": [
+  {
+   "text": "Evaluate an injective resolution of the associated etale sheaf at an affine open object W. Cohomology over that object is the global cohomology of its localization on the small etale site of W. Tensor-pullback composition identifies the localized sheaf with the tensor-sections sheaf of F restricted to W. Quasi-coherent affine acyclicity makes this group zero in every positive degree. When working with large coefficients, the coefficient-lift resolution comparison identifies the same complexes before and after lifting, so this applies to the original coefficient universe as well. Every open is covered by affine opens; hence all positive object-cohomology sections are locally zero. Sheafification is zero and the sheafified-presheaf description gives zero positive higher direct images. This argument only proves vanishing of derived direct image, without constructing any global comparison equivalence.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-open-object-cohomology-natural",
+    "lem-sc-etale-ulift-injective-resolution",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Proposition Tag 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2); etale-cohomology.tex, Theorem Tag 03P2 (etale-cohomology-theorem-zariski-fpqc-quasi-coherent); sites-cohomology.tex, Tags 03F3, 072W and 0733(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-open-object-cohomology-natural",
+  "lem-sc-etale-ulift-injective-resolution",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Proposition Tag 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2); etale-cohomology.tex, Theorem Tag 03P2 (etale-cohomology-theorem-zariski-fpqc-quasi-coherent); sites-cohomology.tex, Tags 03F3, 072W and 0733(1)",
+  "note": "Stage-3 reduction of the parent; source pages read at official Stacks URLs. Explicit interface/glue and universe bookkeeping written by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher derived direct images of quasi coherent etale tensor sections along the Zariski inclusion vanish",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images from etale to Zariski of a quasi coherent sheaf vanish",
+   "results": "Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.smallEtaleTopology; Algebra.FormallyEtale.comp; these provide ingredients but no declaration of this comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "d0ecb53d18a2fa72"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorIsoPullback|unit_leftAdjointUniq|rightDerivedObjIsoOfResolution|isZero.*Direct|natural.*Leray",
+   "results": "Direct Mathlib source search found restriction and adjunction uniqueness ingredients, no etale tensor-sections direct image or natural mixed-universe Leray theorem. Whole DAG/blueprint search found the existing canonical open-section isomorphisms, which are used in the first lemma; no duplicate of these new full statements.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleZariskiAbelianPositiveComparison",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: '$\\wp=F-1$ with $F$ the $p$-linear Frobenius endomorphism of the finite-dimensional $k$-vector space $H^1(C,\\mathcal O_C)$' (the identification of $H^1(C,\\mathbf G_a)$ with $H^1(C,\\mathcal O_C)$ as $k$-vector spaces, which needs the comparison isomorphism to be natural in the module)",
+   "via": [
+    "lem-sc-etale-zariski-abelian-positive-comparison",
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorPositiveDirectImageVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorPositiveDirectImageVanishing",
+  "statement": "theorem etaleTensorPositiveDirectImageVanishing (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology] [(i.sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive] (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) : IsZero ((((i.sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).rightDerived (n + 1)).obj (etaleTensorSectionsSheaf F)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e3dc",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T184356-L-4024246",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e3dc",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T184356-L-4024246",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery files, DAG nodes, report, and change record match the stated proof; all four modules and the direct importer compile cleanly."
+ }
+}
