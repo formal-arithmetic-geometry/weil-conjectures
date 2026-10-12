@@ -8,8 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.AlgebraicGeometry.AffineAlgebraTensorPullbackExact
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackQCoh
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Quasi-coherence in the affine algebra derived adjunction
 
@@ -30,20 +33,17 @@ quasi-coherent cohomology.
 Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof
 (blueprint: lem-sc-affine-algebra-derived-adjunction-qcoh).
 
-Proof: On affine opens write Y = Spec B and X = Spec A. At a point p above q,
-the stalk map of g is A localized at q to A localized at p. The latter is a
-localization of the former, so it is flat, and tensor pullback g^* is exact.
-Applying this exact functor to kernels and images gives
-H^i(Lg^*M) = g^*H^i(M) in every integer degree. No boundedness is used.
-Tensor associativity identifies g^*G with the two tensor operations H(G) of
-affine_module_correspondence: extend the inverse-image G to the pulled-back
-algebra, then extend along its multiplication counit to O_X. The correspondence
-says H(G) is quasi-coherent whenever G is. Thus each H^i(Lg^*M) is quasi-coherent.
-These statements can be checked on the affine inverse images, which cover X.
-The ringed-space derived adjunction supplies Lg^* as a left adjoint to Rg_*.
-Uniqueness of left adjoints gives an adjunction-compatible natural isomorphism
-from the given L to Lg^*. Apply cohomology and transport quasi-coherence through
-this isomorphism to get the result for L. -/
+Proof: Use the ringed-space derived adjunction to obtain the concrete tensor
+pullback P and its left-derived functor D. The affine stalk calculation
+(affine_algebra_tensorModulePullback_exact) makes P exact on all module sheaves.
+Consequently P.mapDerivedCategory is also a left-derived functor, with its
+invertible localization comparison. Uniqueness of left-derived functors gives
+D isomorphic to P.mapDerivedCategory. Uniqueness of left adjoints identifies
+the given L with D. The exact-functor homology comparison identifies every
+H^n(P.mapDerivedCategory M) with P(H^n(M)), without boundedness. Tensor
+pullback preserves quasi-coherence by the local free-presentation argument
+of Stacks 01BG (tensorModulePullback_isQuasicoherent). Apply it to H^n(M),
+then transport along the homology comparison and the isomorphism from L. -/
 theorem affine_algebra_derived_pullback_preserves_qcoh
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]
@@ -53,6 +53,40 @@ theorem affine_algebra_derived_pullback_preserves_qcoh
     (adj : L ⊣ RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)) :
     (∀ M : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))),
       directImageAlgebraDerivedQCohProperty f M →
-        schemeDerivedQCohProperty X (L.obj M)) := by sorry
+        schemeDerivedQCohProperty X (L.obj M)) := by
+  obtain ⟨P, h, hm, hP, D, ε, hD, _, ⟨adjD⟩⟩ :=
+    RingedSpace.derivedModulePullback_adjunction (toDirectImageAlgebraSpace f)
+  let := hP
+  obtain ⟨hlim, hcolim⟩ := affine_algebra_tensorModulePullback_exact f P h hm
+  let := hlim
+  let := hcolim
+  let := hD
+  have hPD : P.mapDerivedCategory.IsLeftDerivedFunctor
+      P.mapDerivedCategoryFactorsh.hom
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))
+        (ComplexShape.up ℤ)) :=
+    Functor.isLeftDerivedFunctor_of_inverts _ _ P.mapDerivedCategoryFactorsh
+  let := hPD
+  let eD : D ≅ P.mapDerivedCategory :=
+    Functor.leftDerivedUnique P.mapDerivedCategory D ε
+      P.mapDerivedCategoryFactorsh.hom
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))
+        (ComplexShape.up ℤ))
+  let e : L ≅ P.mapDerivedCategory := adj.leftAdjointUniq adjD ≪≫ eD
+  intro M hM n
+  have hq : (P.obj
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))
+        n).obj M)).IsQuasicoherent := by
+    rw [h]
+    exact RingedSpace.tensorModulePullback_isQuasicoherent
+      (toDirectImageAlgebraSpace f) _ (hM n)
+  exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+    (((P.mapDerivedCategoryHomologyFunctorIso n).app M) ≪≫
+      (DerivedCategory.homologyFunctor
+        (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).mapIso
+          ((e.app M).symm)) hq
 
 end AlgebraicGeometry
