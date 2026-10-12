@@ -11,7 +11,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import Sheaf.RingTheory.ArtinianTranscendentalLocalizationProperties
+import Sheaf.RingTheory.ArtinianTranscendentalLocalizationEvaluation
 
 /-!
 # The polynomial localization for a transcendental residue element
@@ -56,6 +57,11 @@ theorem artinian_transcendental_polynomial_localization
     let T := ULift.{max u v z} (Localization.AtPrime P)
     IsLocalRing T ∧ IsArtinianRing T ∧ IsLocalHom (algebraMap D T) ∧ EssentiallySmooth D T ∧
       ∃ g' : T →+* S, IsLocalHom g' ∧ g'.Flat ∧
-        g'.comp (algebraMap D T) = algebraMap D S ∧ x ∈ Set.range g' := by sorry
+        g'.comp (algebraMap D T) = algebraMap D S ∧ x ∈ Set.range g' := by
+  dsimp
+  have hs := localization_artinian_transcendental_properties D S hflat x hx
+  have he := localization_transcendental_evaluation D S hflat x hx
+  rcases hs with ⟨h1, h2, h3, h4⟩
+  exact ⟨h1, h2, h3, h4, he⟩
 
 end Algebra
