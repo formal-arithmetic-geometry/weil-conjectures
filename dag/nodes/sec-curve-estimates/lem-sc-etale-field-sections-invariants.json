@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-etale-field-sections-invariants",
+ "kind": "lemma",
+ "title": "Global sections are invariants in a canonical abelian geometric stalk equivalence",
+ "statement": "Let $K$ be a field [def-pc-field-extension], $K^s$ a separable closure [def-pd-separable-closure], and $\\Omega$ an algebraically closed algebraic extension of $K$ containing $K^s$ in a compatible algebra tower. Let $S=\\operatorname{Spec}K$, $G=\\operatorname{Gal}(K^s/K)$ with its Krull topology, and $p$ the geometric point [def-weil-geometric-point]. Let $E:\\operatorname{Sh}(S_{\\mathrm{et}},\\mathrm{Ab}_{u+1})\\simeq\\operatorname{DiscreteRep}_{\\mathbf Z}(G)$ [def-weil-pbc-etale-sheaves, def-exc-discrete-modules-category] be an equivalence equipped with a natural additive identification $i$ of its underlying groups with the geometric stalk [def-weil-pbc-geometric-stalks]. Assume its action on germs is given by changing lifts: whenever $\\tau\\in\\operatorname{Aut}_K(\\Omega)$ restricts to $g\\in G$ and $x\\prime=\\operatorname{Spec}(\\tau)\\circ x$, $i(g\\cdot i^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x\\prime}z$. Then evaluation at the terminal etale object is naturally isomorphic to $F\\mapsto E(F)^G$, with the latter maps the restrictions of equivariant coefficient maps.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, lemma-global-sections-point; Tag 04JQ, lemma-equivalence-abelian-sheaves-point; Tag 03QW"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaves",
+  "def-exc-discrete-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing sections/stalk-invariants theorem to the underlying set sheaf. The forgetful functor commutes with the stalk and germ maps. Represent each germ and compare its two actions using an extending automorphism and the point action; they agree.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "lem-exc-galois-automorphism-extension",
+    "lem-exc-galois-point-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize to the bottom intermediate field. Its fixing subgroup is all of G. The spectrum of the bottom field is isomorphic to the terminal etale object using botEquiv. Naturality of germs transports the bijection to global sections. The terminal germ followed by i inverse is additive, invariant, and bijective onto the invariant subgroup. Its naturality follows from naturality of the terminal germ transformation and i inverse. Form the natural isomorphism from these bijective components.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-exc-galois-automorphism-extension",
+  "lem-exc-galois-point-action"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, lemma-global-sections-point; Tag 04JQ, lemma-equivalence-abelian-sheaves-point; Tag 03QW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between abelian sheaves and discrete continuous representations identifies sheaf cohomology with continuous group cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an etale abelian sheaf on a field are invariants in the geometric stalk and the multiplicative stalk is separable closure units",
+   "results": "Read search results: ModuleCat.Tilde.isUnit_toStalk, AlgebraicGeometry.Scheme.germToFunctionField, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply, smoothSheafCommRing.isUnit_stalk_iff, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv. No exact comparison theorem; stalk/forgetful isomorphisms are used in the sections proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberCompIso|rightDerived.*invariant|invariant.*rightDerived",
+   "results": "Read search results: Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean. No exact comparison theorem; stalk/forgetful isomorphisms are used in the sections proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ReverseEmbedding",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: identify field Brauer classes with continuous unit cohomology via the geometric stalk and derived invariants",
+   "via": [
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFieldSectionsInvariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFieldSectionsInvariants.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_iso_etaleFieldSections_invariants",
+  "statement": "theorem nonempty_iso_etaleFieldSections_invariants (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω] : let S := Spec (.of K) let J := S.smallEtaleTopology let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) let G := Gal(Ks/K) let D := Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ G let U : D ⥤ Rep.{u + 1} ℤ G := ObjectProperty.ι _ ∀ (E : Sheaf J AddCommGrpCat.{u + 1} ≌ D) (i : E.functor ⋙ U ⋙ Rep.RepToAction ℤ G ⋙ Action.forget (ModuleCat.{u + 1} ℤ) G ⋙ forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅ p.sheafFiber), (∀ (F : Sheaf J AddCommGrpCat.{u + 1}) (g : G) (τ : Ω ≃ₐ[K] Ω) (_hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (_hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (i.hom.app F) ((E.functor.obj F).obj.ρ g ((i.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z) → Nonempty (sheafToPresheaf J AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 S))) ≅ E.functor ⋙ U ⋙ Rep.invariantsFunctor ℤ G ⋙ forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T165520-L-2935568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T165520-L-2935568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

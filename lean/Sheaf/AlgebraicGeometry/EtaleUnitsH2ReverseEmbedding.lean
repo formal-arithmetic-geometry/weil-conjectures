@@ -7,6 +7,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.EtaleFieldSectionsInvariants
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkRepresentation
+import Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison
+import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import Mathlib.FieldTheory.Galois.Profinite
 
 /-! Directional degree-two comparison over a field. -/
 
@@ -52,6 +57,24 @@ inverse map on classes to this equality. Its composite with the reverse map is t
 identity, so the original classes were equal. This proves only injectivity in this direction. -/
 theorem nonempty_embedding_cohomologicalBrauerGroup_galoisUnitsH2 (K : Type u) [Field K] :
     Nonempty ((Spec (.of K)).CohomologicalBrauerGroup ↪ Field.GaloisUnitsH2 K) := by
-  sorry
+  classical
+  let Ω := AlgebraicClosure K
+  obtain ⟨E, _, i, _, _, haction, _⟩ :=
+    abelianSheaves_equiv_discreteGModules.{u, 0} K (SeparableClosure K) Ω
+  obtain ⟨η⟩ := nonempty_iso_etaleFieldSections_invariants
+    K (SeparableClosure K) Ω E i haction
+  obtain ⟨e, he⟩ := exists_etaleUnits_stalk_linearEquiv K Ω E i haction
+  let S := Spec (.of K)
+  let Γ := (CategoryTheory.sheafToPresheaf S.smallEtaleTopology
+    AddCommGrpCat.{u + 1}).comp
+      ((CategoryTheory.evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
+        (Opposite.op (Scheme.Etale.mk (CategoryTheory.CategoryStruct.id S))))
+  obtain ⟨a⟩ := CategoryTheory.Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ
+    S.smallEtaleTopology (Scheme.Etale.mk (CategoryTheory.CategoryStruct.id S))
+    (CategoryTheory.MorphismProperty.Over.mkIdTerminal _ S) S.gmSheaf 1
+  have : DiscreteTopology (Field.galoisUnitsTopRep K).V := ⟨rfl⟩
+  obtain ⟨b⟩ := Rep.nonempty_equiv_rightDerived_continuousCohomology.{u, u + 2, u + 1, u + 1, u}
+    (Gal(SeparableClosure K/K)) _ E Γ η S.gmSheaf (Field.galoisUnitsTopRep K) e he 2
+  exact ⟨(a.toEquiv.trans b).toEmbedding⟩
 
 end AlgebraicGeometry.Scheme

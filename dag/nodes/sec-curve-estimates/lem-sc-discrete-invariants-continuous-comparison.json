@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-discrete-invariants-continuous-comparison",
+ "kind": "lemma",
+ "title": "Derived invariants under an equivalence compute homogeneous continuous cohomology",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group, and $\\mathcal A$ an abelian category [def-sp-abelian] with injective resolutions [def-sp-injective-resolutions]. Let $E:\\mathcal A\\simeq\\operatorname{DiscreteRep}_{\\mathbf Z}(G)$ be an equivalence to integer representations whose elements have open stabilizers [def-exc-discrete-modules-category], with representation universe $\\max(u,s)$, at least the group universe $u$ so that continuous coinduction stays in this category. Let $\\Gamma:\\mathcal A\\to\\mathrm{Ab}_{\\max(u,s)}$ be additive and equipped with a natural isomorphism $\\Gamma\\simeq(F\\mapsto E(F)^G)$, whose maps are restrictions of equivariant coefficient maps. For $F\\in\\mathcal A$, let $N$ be a topological integer representation with discrete coefficient topology in universe $\\max(u,t)$, and let $e:E(F)\\simeq_{\\mathbf Z}N$ be an equivariant linear equivalence. Then for every $q\\geq0$ there is a type equivalence $(R^q\\Gamma)(F)\\simeq H^q_{\\mathrm{cont}}(G,N)$ [def-sp-left-exact-additive], where the right side is homology of the homogeneous continuous cochain complex: its degree $n$ consists of $G$-invariants in $n+1$ iterated continuous maps $G\\to\\cdots\\to N$, with alternating omission differential. This allows different coefficient universes and imposes no finiteness on the ring of integers or on the module.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 0DVG, section-continuous-group-cohomology, profinite comparison; explicit homogeneous change of variables"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-exc-discrete-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport an injective resolution of F across E. An equivalence preserves injectives and exact sequences. The natural isomorphism Gamma to invariants identifies its Gamma complex with the invariant complex. This computes the right derived functor.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Continuous inhomogeneous cochains on discrete modules give an exact delta-functor: compact finite powers have finite image under maps to a discrete group, so a surjection admits continuous lifts of each cochain. Embed m into locally constant functions by x maps to x*m, with right translation action. Finite clopen partitions yield open stabilizers and continuity of the insertion operator h(F)(g1,...,g(n-1))(x)=F(x,g1,...,g(n-1))(1). Expanding the alternating differential gives dh+hd=1 in positive degrees. Thus continuous cohomology is effaceable and universal. It and derived invariants have the same degree zero, so the universal extensions in both directions are inverse.",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the compact-open exponential law to identify iterated continuous maps with jointly continuous maps. Evaluate homogeneous equivariant cochains at (1,g1,g1*g2,...); use g0*c(g0^-1*g1,...,g(n-1)^-1*gn) as the inverse. Expand the recursive differential to see alternating omission become the inhomogeneous differential. Transport coefficients through e. The maps are inverse on cochains, cocycles and coboundaries. Underlying TopModuleCat homology is kernel modulo image, giving the claimed equivalence across universes.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 0DVG, section-continuous-group-cohomology, profinite comparison; explicit homogeneous change of variables"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between abelian sheaves and discrete continuous representations identifies sheaf cohomology with continuous group cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an etale abelian sheaf on a field are invariants in the geometric stalk and the multiplicative stalk is separable closure units",
+   "results": "Read search results: ModuleCat.Tilde.isUnit_toStalk, AlgebraicGeometry.Scheme.germToFunctionField, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply, smoothSheafCommRing.isUnit_stalk_iff, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv. No exact comparison theorem; stalk/forgetful isomorphisms are used in the sections proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberCompIso|rightDerived.*invariant|invariant.*rightDerived",
+   "results": "Read search results: Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean. No exact comparison theorem; stalk/forgetful isomorphisms are used in the sections proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ReverseEmbedding",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: identify field Brauer classes with continuous unit cohomology via the geometric stalk and derived invariants",
+   "via": [
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison",
+  "file": "lean/Sheaf/RepresentationTheory/DiscreteInvariantsContinuousComparison.lean",
+  "declaration": "Rep.nonempty_equiv_rightDerived_continuousCohomology",
+  "statement": "theorem nonempty_equiv_rightDerived_continuousCohomology (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Category.{w} A] [Abelian A] [HasInjectiveResolutions A] (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G) (Γ : A ⥤ AddCommGrpCat.{max u s}) [Γ.Additive] (η : Γ ≅ E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙ forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat) (F : A) (N : TopRep.{max u t} ℤ G) [DiscreteTopology N.V] (e : (E.functor.obj F).obj.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : (E.functor.obj F).obj.V), e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) : Nonempty ((Γ.rightDerived q).obj F ≃ continuousCohomology q N)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T165520-L-2935568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T165520-L-2935568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
