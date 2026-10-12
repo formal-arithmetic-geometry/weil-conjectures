@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
+import Sheaf.AlgebraicGeometry.SerreSectionModuleCharts
 import Sheaf.AlgebraicGeometry.SerreSectionModuleFinite
 
 /-!
@@ -90,6 +90,9 @@ theorem coherent_exists_graded_representation
           alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
           alpha g b hb hg (F.val.map (homOfLE inc).op s) =
             mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)) := by
-  sorry
+  obtain ⟨M, hM, 𝓜, h𝓜, hsmul, hneg, φ, hφ⟩ := serreSectionModuleFinite k G hG
+  obtain ⟨alpha, hinj, hscalar, hres⟩ :=
+    serreSectionModuleCharts k G hG M 𝓜 h𝓜 hsmul hneg φ hφ
+  exact ⟨M, hM, 𝓜, h𝓜, hsmul, G, ⟨Iso.refl G⟩, alpha, hinj, hscalar, hres⟩
 
 end AlgebraicGeometry.Proj

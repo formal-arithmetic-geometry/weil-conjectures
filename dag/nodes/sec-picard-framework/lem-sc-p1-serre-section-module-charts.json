@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-p1-serre-section-module-charts",
+ "kind": "statement",
+ "title": "Canonical localization charts for a truncated graded section module",
+ "statement": "Let k be a field, S=k[x_0,x_1] with standard grading and P=Proj S [def-sc-p1-standard], and let G be coherent [pqf-def-coherent]. Let M be an S-module with an internal Z-grading M_z, homogeneous multiplication S_e M_z contained in M_(e+z), and M_z=0 for z<0. Suppose additive equivalences phi_z:M_z -> Gamma(P,G tensor O_P(z)) for z>=0 commute with multiplication by every homogeneous a in S_e, using G tensor twistMul(z,a) on sections [def-weil-pbc-proj-twisting-sheaf]. Then there are additive injections alpha_(f,d):Gamma(D+(f),G) -> M_f for every homogeneous f of degree d>0, whose image is the degree-zero fractions [def-sc-degree-zero-module-fractions]. They respect the S_(f) action via awayToSection, and for every inclusion D+(g) contained in D+(f) and relation g^e=a*f with e>0 and homogeneous a, restriction carries any fraction y/f^m to a^m*y/g^(e*m). No finite generation of M is asserted or assumed.",
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 0BXD, final paragraph of the proof; canonical comparison for the nonnegative section module"
+ },
+ "proof": [
+  {
+   "text": "For each homogeneous f of positive degree d, multiplication by f^r gives an isomorphism G|D+(f) to G(r*d)|D+(f): use twistRestrictIso, unitIsoTwistZero, and tensor with G. For y in M_(r*d), send y/f^r to the inverse image of the restriction of phi_(r*d)(y). If f=0 then D+(f) is empty and the localization is zero, and the construction is the unique zero map. Otherwise a homogeneous representative with denominator f^r has degree r*d, since a nonzero homogeneous polynomial has a unique degree. Equality of fractions is the relation LocalizedModule.mk_eq. Clear denominators to compare two numerators in a common degree, and use hphi and the inverse multiplication maps. This proves independence and additivity; a difference maps to zero precisely when its corresponding twisted section restricts to zero. The second clause of lem-sc-p1-serre-section-module-comparison kills it by a power of f; hphi translates this to the localization relation. The first clause supplies every section. Thus the map is an additive bijection from the degree-zero fractions to the chart sections; invert it and compose with the inclusion into the ordinary localization.",
+   "uses": [
+    "lem-sc-p1-serre-section-module-comparison",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a scalar homogeneous fraction b/f^l and a module fraction y/f^r, the product is (b*y)/f^(l+r), by LocalizedModule.mk_smul_mk. The compatibility of phi with b says its twisted section is multiplication by b of the section for y. On D+(f), invert multiplication by f^(l+r), giving exactly the action of b/f^l on the inverse image of y/f^r. Every homogeneous-localization scalar has such a representative, so this proves the scalar formula for the inverse additive chart map.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For g^e=a*f and any representative y/f^m, first use a homogeneous equal-degree representative to compute the restriction as (a^m*y)/g^(e*m). Indeed compatibility with a^m identifies its numerator section, while a^m*f^m=g^(e*m), so both sides give the same section after the invertible multiplication by g^(e*m). For an arbitrary y/f^m representing the same degree-zero fraction, LocalizedModule.mk_eq says a power of f kills the difference after denominators are cleared. Multiplication by the corresponding power of a converts this equality into one killed by a power of g, since g^e=a*f. Thus the same formula holds for every representative, including nonhomogeneous numerators. This is the restriction identity asserted in the conclusion.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-degree-zero-module-fractions",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-serre-section-module-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 0BXD, final paragraph; fraction formulas expanded by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "graded section module localized at homogeneous polynomial is sections of coherent sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf on Proj represented by finite graded section module",
+   "results": "8 structure-sheaf declarations only; no graded module comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, AddEquiv",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "serreSectionModule|degreeZeroFractions",
+   "results": "No direct atlas in Mathlib or WeilConjectures; existing SerreSectionModuleComparison has only existence and annihilation clauses. DegreeZeroFractions supplies the carrier, not its chart equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentProjRepresentation",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, first sentence; canonical comparison charts",
+   "via": [
+    "lem-sc-p1-coherent-proj-representation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleCharts.lean",
+  "declaration": "AlgebraicGeometry.Proj.serreSectionModuleCharts",
+  "statement": "theorem serreSectionModuleCharts\n    (k : Type u) [Field k]\n    (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (hG : RingedSpace.IsCoherent\n      (Proj (homogeneousSubmodule (Fin 2) k)).toRingedSpace G)\n    (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (hneg : ∀ z : ℤ, z < 0 → 𝓜 z = ⊥)\n    (φ : ∀ z : ℤ, 0 ≤ z →\n        (𝓜 z ≃+ Γ(G ⊗ Proj.twist (homogeneousSubmodule (Fin 2) k) z, ⊤)))\n    (hφ : ∀ (z : ℤ) (hz : 0 ≤ z) (e : ℕ) (hze : 0 ≤ z + e) (a : MvPolynomial (Fin 2) k)\n        (ha : a ∈ homogeneousSubmodule (Fin 2) k e)\n        (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)),\n        φ (z + e) hze ⟨a • (y : M), hay⟩ =\n          Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y)) :\n    ∃ (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f M),\n      (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f)) ∧\n      (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s) ∧\n      (∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : M)\n          (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (G.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T053934-L-2636217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T053934-L-2636217",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
