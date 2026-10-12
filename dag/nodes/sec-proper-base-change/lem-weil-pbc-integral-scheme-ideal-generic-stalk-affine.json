@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+   "place": "stage-3 decomposition of the affine-section and generic-stalk steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Nonzero ideal sheaf iff all nonempty affine sections are nonzero",
+ "statement": "Let (X : Scheme.{u}) [IsIntegral X] and (J : X.IdealSheafData). Then J ≠ ⊥ ↔ ∀ U : X.affineOpens, Nonempty U.1 → J.ideal U ≠ ⊥.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 01YL"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The closed support contains the generic point iff it is all of X (genericPoint_closure); support_eq_top_iff on a reduced scheme identifies this with J = bottom. On every nonempty affine U, mem_support_iff_of_mem and fromSpec_preimage_zeroLocus identify generic-point membership with the section ideal lying in the zero prime (primeIdealOf_genericPoint and genericPoint_eq_bot_of_affine). Negate, and choose one affine neighborhood for the converse. All lemmas are proved in Mathlib.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-pc-scheme",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 01YL; proved using Mathlib support and generic-point lemmas, without module-stalk locality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "primeIdealOf_genericPoint|support_eq_top_iff|germ_injective_of_isIntegral",
+   "results": "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subset of an irreducible space contains the generic point if and only if it is the whole space",
+   "results": "IsIrreducible.isGenericPoint_genericPoint; quasiSober_iff; QuasiSober.sober; IsGenericPoint.isIrreducible; genericPoint_spec; genericPoint_closure; genericPoints; IsIrreducible.closure_genericPoint",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal sheaf on an integral scheme has a nontrivial stalk at the generic point precisely when it is nonzero; its inclusion is then surjective",
+   "results": "AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint; AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; AlgebraicGeometry.isReduced_of_isReduced_stalk; AlgebraicGeometry.isReduced_stalk_of_isReduced; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff; AlgebraicGeometry.germ_injective_of_isIntegral; AlgebraicGeometry.genericPoint_eq_bot_of_affine",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an integral scheme a quasi coherent ideal sheaf is nonzero iff its sections on every nonempty affine open and its generic stalk are nonzero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralIdealAffineSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralIdealAffineSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integral_ideal_nonzero_iff_affine_sections",
+  "statement": "theorem integral_ideal_nonzero_iff_affine_sections (X : Scheme.{u}) [IsIntegral X]\n    (J : X.IdealSheafData) :\n    J ≠ ⊥ ↔ ∀ U : X.affineOpens, Nonempty U.1 → J.ideal U ≠ ⊥",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2d858",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184346-L-4020865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2d858",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184346-L-4020865",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly, preserve the target signature, satisfy the import-reader gate, and all proved declarations use only allowed axioms."
+ }
+}

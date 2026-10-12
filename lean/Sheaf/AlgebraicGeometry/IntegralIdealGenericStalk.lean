@@ -6,10 +6,11 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-public import Mathlib.AlgebraicGeometry.FunctionField
+import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalkEquivalences
+import Sheaf.AlgebraicGeometry.IntegralIdealAffineSections
 
 /-!
 # Nonzero ideals on integral schemes and their generic stalks
@@ -23,6 +24,7 @@ Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01YL
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
+noncomputable section
 
 namespace AlgebraicGeometry.Scheme
 
@@ -68,6 +70,11 @@ theorem integral_ideal_generic_stalk (X : Scheme.{u}) [IsIntegral X]
         Function.Surjective
           ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).map
             J.toModulesι).hom) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · exact (inferInstance : Field X.functionField).toIsField
+  · exact (quasi_coherent_ideal_zero_set_affine X J).1 _
+  · exact integral_ideal_nonzero_iff_affine_sections X J
+  · exact (integral_ideal_nonzero_iff_generic_stalk X J).1
+  · exact (integral_ideal_nonzero_iff_generic_stalk X J).2
 
 end AlgebraicGeometry.Scheme

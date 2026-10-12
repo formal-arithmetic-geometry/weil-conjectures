@@ -36,66 +36,32 @@
  ],
  "proof": [
   {
-   "text": "Let $U\\subseteq Z$ be a nonempty affine open and put $R=\\mathcal O_Z(U)$. Since $Z$ is integral [def-pc-integral-scheme], $R$ is a domain. The generic point $\\eta$ belongs to every nonempty open of the irreducible space $Z$: its closure is all of $Z$, so a nonempty open disjoint from $\\eta$ would have a closed complement containing that closure. Under the canonical identification $U\\cong\\operatorname{Spec}R$ [lem-weil-pbc-affine-open-spec-points], $\\eta$ corresponds to $(0)$, the generic point of the spectrum of the domain $R$ [lem-weil-pbc-spec-domain-stalks-function-field](2). That lemma identifies $\\mathcal O_{Z,\\eta}$ with the fraction field of $R$; in particular it is a field.",
+   "text": "Apply the field instance for the function field of an integral scheme and the stalk-injectivity component of the affine zero-set theorem.",
    "uses": [
     "def-pc-integral-scheme",
-    "def-weil-irreducible-components",
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-spec-domain-stalks-function-field"
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Proof of Lemma 01YL, label lemma-property-irreducible-higher-rank-cohomological, third paragraph; the generic-point calculation is supplied from Properties Lemma 01ON and Schemes Lemma 01HV"
-   }
+   "elementary": false
   },
   {
-   "text": "For every nonempty affine open $U$ as in step 1, [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] applied to $\\mathcal I$ at the prime $(0)$ says $\\mathcal I_\\eta=\\mathcal O_{Z,\\eta}$ exactly when $\\mathcal I(U)\\not\\subseteq(0)$, equivalently $\\mathcal I(U)\\ne0$. Hence (d) implies (b), while (b) implies (d) by choosing any nonempty affine open of the nonempty scheme $Z$.",
+   "text": "Apply the affine-section equivalence and generic-stalk equivalence intermediate theorems, then reassociate the conjunction.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-    "def-pc-integral-scheme"
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Proof of Lemma 01YL, third paragraph, the implicit use that a nonzero ideal on integral $Z_0$ is nonzero at its generic point"
-   }
-  },
-  {
-   "text": "If (b) holds, then $\\mathcal I$ has a nonzero section and is not the zero sheaf, giving (a). Conversely, if $\\mathcal I\\ne0$, there is an open $V$ and a section $s\\in\\mathcal I(V)$ which is not zero. Its germ is nonzero at some point $z\\in V$, since a section whose germs all vanish is zero by the sheaf axiom [def-weil-pbc-module-stalk]. Choose a nonempty affine open $U\\subseteq V$ containing $z$; the restriction $s|_U$ has the same nonzero germ, so $\\mathcal I(U)\\ne0$. Step 2 then gives (d), and thus (b). This proves (a), (b), and (d) equivalent.",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Proof of Lemma 01YL, third paragraph, the unstated implication from a nonzero ideal sheaf to a nonzero generic stalk"
-   }
-  },
-  {
-   "text": "The stalk $\\mathcal I_\\eta$ is an ideal of the field $\\mathcal O_{Z,\\eta}$, as stated, and a field has exactly two ideals: if an ideal contains $0\\ne a$, it contains $a^{-1}a=1$ and is the whole field. Thus (c) and (d) are equivalent. With step 3 this gives all four equivalences and the field assertion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Proof of Lemma 01YL, third paragraph, the implicit use of the function field at the generic point"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-integral-scheme",
-  "def-weil-irreducible-components",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
   "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "def-weil-pbc-module-stalk",
-  "def-pc-scheme"
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk-stalk"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Proof of Lemma 01YL, third paragraph (facts used without proof); affine-local details supplied here"
+  "place": "Proof of Lemma 01YL; field and injectivity clauses follow existing declarations, and both intermediate equivalence theorems are proved without sorry."
  },
  "mathlib_searches": [
   {
@@ -174,5 +140,15 @@
   "group": "E1",
   "result": "fix",
   "note": "Read packet whole; matched integral Z = [IsIntegral X], eta = genericPoint X, O_{Z,eta} field = IsField (X.presheaf.stalk eta), quasi-coherent ideal sheaf; FIX (H4/H12): abstract (I : X.Modules) [IsQuasicoherent] (iota) [Mono iota] and TopCat abelian stalks restated in the shared forms: (J : X.IdealSheafData) with J.toModules/J.toModulesι (G1 e9aa3e2d8, C1 7f9de320b) and RingedSpace.moduleStalkFunctor; injective generic stalk map of toModulesι; (a) J != bot (ideal_bot checked), (b) J.ideal U != bot for every nonempty affine U, (c) nontrivial generic module stalk, (d) surjective generic stalk map; compiled as L"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2d858",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184346-L-4020865",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly, preserve the target signature, satisfy the import-reader gate, and all proved declarations use only allowed axioms."
  }
 }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-integral-scheme-ideal-generic-stalk-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+   "place": "stage-3 decomposition of the affine-section and generic-stalk steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Nonzero ideal sheaf iff its generic stalk is nontrivial and surjective",
+ "statement": "Let (X : Scheme.{u}) [IsIntegral X] and (J : X.IdealSheafData). Then (J ≠ ⊥ ↔ Nontrivial ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).obj J.toModules)) ∧ (J ≠ ⊥ ↔ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).map J.toModulesι).hom).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 01YL"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+ ],
+ "proof": [
+  {
+   "text": "On an affine neighborhood of the generic point the affine zero-set theorem gives surjectivity iff the section ideal is not bottom, since the generic point is the zero prime. Use the proved affine-section criterion and ideal_bot to obtain the surjectivity equivalence.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a nonzero affine ideal element to an ideal-module section. Its generic germ cannot vanish: equality of its image germ with zero would force its restriction to a smaller nonempty open to vanish, contradicting map_injective_of_isIntegral. Conversely, when J is bottom, represent any germ and shrink to an affine neighborhood; range_toModulesι_app and ideal_bot force the image to vanish, and sectionwise injectivity forces the representative to vanish. Thus every germ is zero.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine",
+    "def-weil-pbc-module-stalk",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk-affine",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 01YL; complete germ argument and affine zero-set criterion, no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "primeIdealOf_genericPoint|support_eq_top_iff|germ_injective_of_isIntegral",
+   "results": "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subset of an irreducible space contains the generic point if and only if it is the whole space",
+   "results": "IsIrreducible.isGenericPoint_genericPoint; quasiSober_iff; QuasiSober.sober; IsGenericPoint.isIrreducible; genericPoint_spec; genericPoint_closure; genericPoints; IsIrreducible.closure_genericPoint",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal sheaf on an integral scheme has a nontrivial stalk at the generic point precisely when it is nonzero; its inclusion is then surjective",
+   "results": "AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint; AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; AlgebraicGeometry.isReduced_of_isReduced_stalk; AlgebraicGeometry.isReduced_stalk_of_isReduced; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff; AlgebraicGeometry.germ_injective_of_isIntegral; AlgebraicGeometry.genericPoint_eq_bot_of_affine",
+   "date": "2026-10-13",
+   "verdict": "Partial lemmas used; no existing theorem with this full statement found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an integral scheme a quasi coherent ideal sheaf is nonzero iff its sections on every nonempty affine open and its generic stalk are nonzero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralIdealGenericStalkEquivalences",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralIdealGenericStalkEquivalences.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integral_ideal_nonzero_iff_generic_stalk",
+  "statement": "theorem integral_ideal_nonzero_iff_generic_stalk (X : Scheme.{u}) [IsIntegral X]\n    (J : X.IdealSheafData) :\n    (J ≠ ⊥ ↔\n        Nontrivial ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).obj\n          J.toModules)) ∧\n      (J ≠ ⊥ ↔\n        Function.Surjective\n          ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).map\n            J.toModulesι).hom)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2d858",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184346-L-4020865",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2d858",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184346-L-4020865",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile cleanly, preserve the target signature, satisfy the import-reader gate, and all proved declarations use only allowed axioms."
+ }
+}
