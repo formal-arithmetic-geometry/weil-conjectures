@@ -26,9 +26,47 @@
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-kinjective-hom-derived"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Specialize the proved source-library theorem SheafOfModules.isGrothendieckAbelian to moduleRings X on the small site of opens. This supplies exactly the Grothendieck structure required by the existing functorial replacement construction; the stronger degreewise-injective resolution theorem is unnecessary.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Direct image preserves sums of morphisms: after extensionality to section maps, both sides are definitionally the same linear map. This proves moduleDirectImage_additive_proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the functorial replacement I and natural quasi-isomorphism eta of [lem-weil-pbc-kinjective-functorial-existence]. Naturality and two-out-of-three imply that I(s) is a quasi-isomorphism when s is. By [lem-weil-pbc-kinjective-hom-derived] it is a homotopy equivalence. Apply the additive direct image to this homotopy equivalence. Its image is a quasi-isomorphism, so target localization sends it to an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker eta with source localization; its components are isomorphisms. Whisker the right-derived-functor unit with I followed by the homotopy quotient; its components are isomorphisms because I(K) is K-injective. Compose the first isomorphism (whiskered with Rg-star), the inverse of the second, and the canonical quotient/localization and termwise-functor comparisons. This gives the natural factorization Q followed by Rg-star isomorphic to resolvedModuleDirectImage.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any quasi-isomorphism s:K to J with J K-injective, apply Rg-star to the isomorphism Q(s), then compose with Functor.rightDerivedFunctorObjQIso at J. This gives the claimed computation by any resolution without choosing or lifting a comparison between two resolutions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079V, K-injective construction preceding Tag 079W; implemented with the existing source-library right-derived-functor unit and K-injective computation API"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -118,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aaffe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T095916-L-321942",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proofs with the unchanged node statement and recorded dependencies; signatures and data definitions are unchanged, compilation is clean, and all nine declarations use only the three permitted axioms."
  }
 }
