@@ -8,12 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesFiniteProducts
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelClosure
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImage
 
 /-! # Coherent formal modules form an abelian category
 
@@ -37,43 +35,16 @@ by the universal property. Here `op n` denotes positive level `n + 1`.
 Source: Stacks, Lemma 087X, part (1), and its proof
 (blueprint: lem-weil-pbc-coherent-formal-modules-abelian).
 
-Proof (the ten steps of the node):
-1. Transitions are surjective and identify later terms modulo lower powers with earlier
-terms. Choose a finite affine cover. The affine equivalence of
-lem-weil-pbc-coherent-formal-modules-affine identifies each system with a finite module over
-an adic completion; quasi-coherent maps and submodules can be checked on these affines
-using lem-weil-pbc-affine-tilde-gamma-adjunction and
-lem-weil-pbc-ideal-times-quasi-coherent-affine-sections.
-2. Addition and composition are termwise. Zero and binary direct sums satisfy the adic
-conditions, giving finite biproducts (lem-weil-pbc-coherent-kernel-cokernel-locnoeth).
-3. Component cokernels are coherent by that same node and
-lem-weil-pbc-quasi-coherent-module-cokernel-image. Their induced transitions satisfy the
-adic quotient condition: affine sections are the quotient of the target by the image,
-and reducing modulo I^n commutes with that quotient. Component quotient projections are
-compatible. Each compatible family killing the morphism factors uniquely through them;
-epimorphic quotient projections imply that the factorizations commute with transitions.
-4. Form K'_{l,m}, the image of Ker(alpha_l) in F_m. On each affine it is
-(f^{-1}(I^l N) + I^m M)/I^m M. Noetherianity of the completion
-(lem-weil-pbc-adic-completion-noetherian) and Artin-Rees
-(lem-weil-pbc-artin-rees), applied to Ker(f) and Im(f), give a uniform c over the finite
-cover. For l >= m+c these images stabilize at (K + I^m M)/I^m M, where K=Ker(f).
-5. The quotient K'_m/I^n K'_m stabilizes for m >= n+c at K/I^n K. Set
-K_n=K'_{n+c}/I^n K'_{n+c}. These coherent quotients satisfy the adic conditions and
-form a system (lem-weil-pbc-ideal-times-quasi-coherent-affine-sections).
-6. The inclusions induce a compatible map K_n -> F_n killing alpha. Any beta killed by
-alpha lands in K'_{l,m}, since its source transitions are epi. Pass to the stabilized
-images and then reduce modulo I^n to obtain a compatible factorization through K_n.
-7. Uniqueness follows from Artin-Rees: the kernel of K_{n+c} -> F_{n+c} maps to zero in
-K_n. A factorization whose composite is zero therefore vanishes after precomposition
-with an epimorphic source transition, and hence vanishes. This gives kernels.
-8. The constructions commute with affine restriction: kernels, images, ideal products
-and cokernels restrict, and the stabilization constants can be enlarged. Under the affine
-equivalence they are the kernel and cokernel of the corresponding finite module map.
-9. Consequently the coimage-image comparison is an isomorphism on each affine by the
-first isomorphism theorem for modules. The affine equivalence reflects isomorphisms;
-componentwise local checking proves the comparison is an isomorphism globally.
-10. Apply lem-weil-pbc-abelian-of-coimage-image-iso to the preadditive category with finite
-products, kernels and cokernels. Step 3 gives exactly the asserted termwise cokernel clause.
+Proof: Closure under ambient finite products supplies finite products in the full
+subcategory. Extract the stabilized kernel and its unique-factorization property
+from `coherentFormalModule_kernel`, and build its limiting fork. Closure under
+ambient cokernels supplies cokernels and makes the inclusion preserve them.
+The comparison lemma and Mathlib's coimage-image criterion give abelianness.
+For the second clause take the canonical cokernel cofork. The inclusion followed
+by any evaluation functor preserves its colimit, so each evaluated cofork is
+colimiting. The three closure/comparison lemmas record the geometric work of
+Steps 2, 3, and 8--9 of the original plan; the existing kernel theorem supplies
+Steps 4--7. No termwise-kernel assertion is used.
 -/
 theorem coherentFormalModule_abelian (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) :
@@ -83,6 +54,30 @@ theorem coherentFormalModule_abelian (X : Scheme.{u}) [IsNoetherian X]
           ∀ n : ℕ, Nonempty (IsColimit
             (((IsCoherentFormalModule I).ι ⋙
               (evaluation ℕᵒᵖ X.Modules).obj (op n)).mapCocone c)) := by
-  sorry
+  classical
+  have := coherentFormalModules_closedUnderFiniteProducts X I
+  have := coherentFormalModules_closedUnderCokernels X I
+  have : HasKernels (CoherentFormalModule X I) := by
+    constructor
+    intro F G α
+    obtain ⟨_, _, _, _, _, K, ι, _, _, _, hzero, huni⟩ :=
+      coherentFormalModule_kernel I F G α
+    refine ⟨⟨KernelFork.ofι ι hzero, ?_⟩⟩
+    exact Fork.IsLimit.mk' _ fun s ↦ Classical.choice (by
+      obtain ⟨δ, hδ, hδ_unique⟩ := huni s.pt s.ι (by simp)
+      exact ⟨⟨δ, hδ, fun {m} hm ↦ hδ_unique m hm⟩⟩)
+  have : ∀ {F G : CoherentFormalModule X I} (α : F ⟶ G),
+      IsIso (Abelian.coimageImageComparison α) := fun α ↦
+    coherentFormalModules_coimageImage_isIso X I α
+  refine ⟨⟨Abelian.ofCoimageImageComparisonIsIso⟩, ?_⟩
+  intro F G α
+  have : PreservesColimit (parallelPair α 0) (IsCoherentFormalModule I).ι :=
+    (IsCoherentFormalModule I).preservesCokernels_ι α
+  refine ⟨CokernelCofork.ofπ (cokernel.π α) (cokernel.condition α),
+    ⟨cokernelIsCokernel α⟩, ?_⟩
+  intro n
+  exact ⟨isColimitOfPreserves
+    ((IsCoherentFormalModule I).ι ⋙ (evaluation ℕᵒᵖ X.Modules).obj (op n))
+    (cokernelIsCokernel α)⟩
 
 end AlgebraicGeometry

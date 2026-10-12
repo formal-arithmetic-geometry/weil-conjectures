@@ -8882,3 +8882,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/A2/Sheaf.RingTheory.PopescuDesingularize (stage 3; reviewer PASS; first push; landing 20261012T184240-L-3994880 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:42 L: merged deliver/A3/Sheaf.AlgebraicGeometry.FormalFunctionsPowerKernel (stage 3; reviewer PASS; after a return; landing 20261012T184240-L-3995018 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/A3/Sheaf.FieldTheory.CoefficientRootExtension (stage 3; reviewer PASS; first push; landing 20261012T184240-L-3995194 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:42 L: merged deliver/B2/Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian (stage 3; reviewer PASS; first push; landing 20261012T184241-L-3995376 (interface); batch 20261012T184234; modules 4; new nodes 3)

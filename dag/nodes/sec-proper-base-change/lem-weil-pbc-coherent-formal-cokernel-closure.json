@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-cokernel-closure",
+ "kind": "statement",
+ "title": "CoherentFormalModulesCokernelClosure",
+ "statement": "Let $X$ be a Noetherian scheme and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal sheaf. The property of being a coherent adic inverse system [def-weil-pbc-coherent-formal-module] is closed under cokernels in the ambient category of inverse systems of $\\mathcal O_X$-modules: for every map between two such systems, the vertex of every colimiting cokernel cofork is again such a system.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X (lemma-inverse-systems-abelian), first sentence of the proof, termwise cokernels (details omitted)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Ambient cokernels of inverse systems are computed termwise. For $\\alpha:F\\to G$, coherence of $C_n=\\operatorname{Coker}(\\alpha_n)$ follows from [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. Naturality of $\\alpha$ induces transitions of $C$. On affine sections [lem-weil-pbc-quasi-coherent-module-cokernel-image] identifies $C_n$ with $G_n/\\alpha_n(F_n)$ and gives surjective quotient projections.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal-power annihilation of $G_n$ passes to its quotient $C_n$. The transition of $F$ is surjective, and the transition on $G$ has kernel $I^nG_{n+1}$ in positive-level notation. Thus $\\alpha_{n+1}(F_{n+1})$ maps onto $\\alpha_n(F_n)$, and $C_{n+1}/I^nC_{n+1}\\cong G_{n+1}/(\\alpha_{n+1}(F_{n+1})+I^nG_{n+1})\\cong C_n$. Its composite with the quotient projection is precisely the induced transition. Apply the affine ideal-product and quotient formulas of [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] and the tilde/Gamma identification [lem-weil-pbc-affine-tilde-gamma-adjunction] to obtain the sheaf conditions. In Lean level $\\operatorname{op} n$ represents positive level $n+1$.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every colimiting ambient cokernel cofork is uniquely isomorphic to the termwise one. Its vertex therefore satisfies the same three object conditions. This is exactly closure under cokernels, without assuming abelianness of the formal subcategory.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X; details expanded by B2 from the ten-step plan of lem-weil-pbc-coherent-formal-modules-abelian"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent adic inverse systems closed under finite products and cokernels canonical coimage image comparison isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent formal modules finite products cokernels coimage image comparison isomorphism",
+   "results": "FGModuleCat.instIsIsoCoimageImageComparison, instAB4ModuleCat, ModuleCat.cokernel_π_imageSubobject_ext, instIsGrothendieckAbelianModuleCat, CategoryTheory.instIsIsoIndCoimageImageComparison, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.ι_d_assoc, CategoryTheory.Abelian.coimageImageComparison_eq_coimageImageComparison', CategoryTheory.Abelian.instIsIsoCoimageImageComparison",
+   "date": "2026-10-12",
+   "verdict": "generic category machinery found; no specialization to coherent formal systems"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderFiniteProducts|IsClosedUnderCokernels|coimageImageComparison",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean",
+   "date": "2026-10-12",
+   "verdict": "generic category machinery found; no specialization to coherent formal systems"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the abelian coherent-formal-module category required by Grothendieck existence, cokernels",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesCokernelClosure.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_closedUnderCokernels",
+  "statement": "theorem coherentFormalModules_closedUnderCokernels (X : Scheme.{u})\n    [IsNoetherian X] (I : X.IdealSheafData) :\n    (IsCoherentFormalModule I).IsClosedUnderCokernels",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T184241-L-3995376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T184241-L-3995376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
