@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+ "kind": "statement",
+ "title": "Degree-zero continuity for stalkwise etale sections",
+ "statement": "Let X be a scheme in universe u+1 [def-pc-scheme], i : X.Opens -> X.Etale a functor [def-sc-zariski-site] [def-weil-pbc-etale-site] whose underlying scheme functor equals X.restrictFunctor, and x a point. There is an epimorphism-preserving functor H from abelian etale sheaves on X [def-weil-pbc-abelian-etale-sheaves] to abelian etale sheaves on Spec(O_X,x), and a natural isomorphism from etaleObjectStalkSections X i x to H followed by evaluation at the terminal etale object of Spec(O_X,x). No henselian assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Degree zero of Lemma 59.51.5 and proof steps (1)-(3), restricted to affine neighbourhoods; applied after restriction to i(top)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to i(top), whose underlying scheme is X, and pull back to Spec(O_X,x). This defines H by genuine inverse-image constructions, both left adjoints, so H preserves epimorphisms. The degree-zero continuity argument for the cofinal system of affine neighbourhoods identifies the section colimit with terminal sections of H, naturally in the sheaf. Equality of the underlying scheme functors and faithfulness identify all arrows of i with open restriction arrows inside i(top); its structural endomorphism need not be the identity. Choose a fixed affine neighbourhood V of x and the cofinal principal neighbourhoods inside V before applying 03Q6; this supplies its qcqs hypothesis without imposing qcqs on X.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Degree zero of Lemma 59.51.5 and proof steps (1)-(3), restricted to affine neighbourhoods; applied after restriction to i(top)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Zariski stalk sections of an etale sheaf compare to sections on the spectrum of its local ring",
+   "results": "Eight algebraic local-ring stalk identities; none supplies etale section continuity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesEpimorphisms",
+   "results": "PreservesEpimorphisms.of_iso, preservesEpimorphisms_comp and preservation by left adjoints; no section comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(Sections|sections)|local.*(colimit|Colimit)",
+   "results": "No section-continuity declaration in Mathlib. The existing EtaleCohomologyLocalRingColimit uses AddCommGrpCat above the site universe and higher-cohomology data, unlike the present section functor.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image etale sheaf sections spectrum stalk ring filtered colimit affine neighborhoods",
+   "results": "Second reading: only etale-locus and scheme-stalk identities, no sheaf section continuity comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafSections",
+   "results": "Second reading: evaluation comparisons and constant-sheaf adjunctions, no local-scheme continuity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|etaleObjectStalkSections|surjective_app_of_epi_of_isStrictlyHenselianLocalRing",
+   "results": "Second reading also searched both Lean roots: scheme-stalk limit available, local terminal-section surjectivity available, higher-cohomology continuity uses larger coefficients; no duplicate of this same-universe functor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of etale sheaves on a strictly henselian local ring preserve epimorphisms",
+   "results": "Service unavailable: Internal Server Error. Recorded by msearch.py; used LeanFinder, Loogle and grep instead.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselianStalkSectionsEpi",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+   "place": "Intermediate comparison used in the proof",
+   "via": [
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictHenselianStalkSectionsComparison",
+  "file": "lean/Sheaf/Paper/StrictHenselianStalkSectionsComparison.lean",
+  "declaration": "strictHenselian_stalkSections_comparison",
+  "statement": "theorem strictHenselian_stalkSections_comparison\n    {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale)\n    (hi_inclusion : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (x : X) :\n    ∃ H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤\n        Sheaf (Spec (X.presheaf.stalk x)).smallEtaleTopology AddCommGrpCat.{u + 1},\n      H.PreservesEpimorphisms ∧\n        Nonempty (etaleObjectStalkSections X i x ≅\n          H ⋙ (sheafSections (Spec (X.presheaf.stalk x)).smallEtaleTopology\n            AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 _))))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T153011-L-2350900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T153011-L-2350900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,47 +16,20 @@
  ],
  "proof": [
   {
-   "text": "Restrict sheaves first to the etale object i(top). The equality of underlying scheme functors identifies its scheme with X and all i(U) with the corresponding open restrictions. It does not force the structural arrow i(top)->X to be the identity. The faithful forgetful functor ensures that these identifications also respect every restriction arrow.",
+   "text": "Use the degree-zero continuity comparison to factor E as an epimorphism-preserving inverse-image functor H followed by terminal sections on Spec(O_X,x). Install hx as the strictly henselian local-ring instance. Apply the source library theorem Scheme.surjective_app_of_epi_of_isStrictlyHenselianLocalRing to each epimorphism of abelian sheaves, and convert its surjectivity into epimorphism using AddCommGrpCat.epi_iff_surjective. Compose the preservation instances and transport across the comparison isomorphism by Functor.PreservesEpimorphisms.of_iso.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict the neighbourhood diagram to affine opens containing x, which are cofinal under reverse inclusion. They have limit Spec(O_X,x). The degree-zero section-continuity argument of 03Q6 identifies E with sections on this limit after inverse image of the sheaf restricted to i(top), naturally in the sheaf. Use the same coefficient universe throughout; this is the section-level argument, not an application of the incompatible higher-cohomology encoding.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction to the etale object and inverse image preserve epimorphisms. On Spec(O_X,x), a covering of the terminal object has a member meeting the closed point; strict henselianity supplies a section, so the covering sieve contains the identity. Local surjectivity of an epi of abelian sheaves thus becomes actual surjectivity on terminal sections, hence an epi of abelian groups. This is the exactness part of 03QO, with the argument carried out in the coefficient universe of E.",
-   "uses": [
-    "lem-weil-pbc-strictly-henselian-etale-acyclic",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport preservation of epimorphisms through the natural degree-zero section comparison. The conclusion involves only the actual functor E, no choice of a resolution and no positive-degree cohomology.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-strict-henselian-stalk-sections-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-etale-cohomology-local-ring-colimit",
-  "lem-weil-pbc-strictly-henselian-etale-acyclic",
-  "def-weil-pbc-henselian-terminology"
+  "lem-weil-pbc-strict-henselian-stalk-sections-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "J2 stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q6, degree zero (local-ring continuity on affine neighbourhoods); Tag 03QO, proof (sections at the closed point); Tag 09AX, proof, local-ring step. Read from the local Stacks source mirror and https://stacks.math.columbia.edu/tag/03QO."
+  "place": "Tags 03Q6, 03QO and 09AX; comparison plus transport"
  },
  "mathlib_searches": [
   {
@@ -131,11 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-adb8e",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T135312-L-1690456",
+  "landing": "20261012T153011-L-2350900",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, DAG records, report, target signature, and direct importer compiled and matched; no mechanical or interface violations found."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
