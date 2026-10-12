@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-constant-pullback-identity-coherence",
+ "kind": "statement",
+ "title": "ConstantPullbackIdentityCoherence",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme] and $M$ an abelian group, with constant sheaf $M_Z$ [def-constructible-constant]. Let $c:M_Z\\xrightarrow{\\sim}\\mathrm{id}_Z^{-1}M_Z$ be the inverse constant-sheaf comparison, defined by uniqueness of left adjoints to global sections using the inverse-image adjunction [def-weil-pbc-inverse-image] and the identification of sections of direct image [def-weil-pbc-direct-image]. Let $a:\\mathrm{id}_Z^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ be the identity comparison of [lem-weil-pbc-inverse-image-composition]. Then\n$$a_{M_Z}\\circ c=\\mathrm{id}_{M_Z}.$$\nThis is an equality of sheaf morphisms, with no cohomology degree or Ext class quantified.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), with categories.tex Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints); the constant-sheaf comparison is Adjunction.leftAdjointUniq as defined in WeilConjectures/ConstructibleSheaf/Defs.lean"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-constructible-constant",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Compose constant sheaf adjoint to sections [def-constructible-constant] with identity inverse image adjoint to identity direct image [def-weil-pbc-inverse-image]. Transport along the canonical identity comparison for direct image. The section comparison over the terminal object is identity, as follows by evaluating [def-weil-pbc-direct-image] and the identity pullback isomorphism.",
+   "uses": [
+    "def-constructible-constant",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit equation for a in [lem-weil-pbc-inverse-image-composition] identifies this transported adjunction with the original constant-sheaf adjunction. The inverse constant comparison c is the comparison of the same two adjunctions in the other direction. Hence a after c and the identity have the same adjoint, the unit at M. The uniqueness/injectivity assertion of [lem-weil-pbc-conjugate-iso-unit-equation] makes their components equal. This uses no cohomology functor.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), with categories.tex Lemma Tag 0B65 (lemma-transformation-between-functors-and-adjoints); the constant-sheaf comparison is Adjunction.leftAdjointUniq as defined in WeilConjectures/ConstructibleSheaf/Defs.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf comparison inverse image identity composition coherences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf pullback comparison isomorphism coherence identity and composition",
+   "results": "TopCat.Sheaf.pullbackIso; SheafOfModules.pullback_id_comp; SheafOfModules.pullback_comp_id; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-12",
+   "verdict": "No exact constant-sheaf coherence statement; results concern sheaf pullback constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|upperStarConstantSheafIso",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact constant-sheaf coherence statement; results concern sheaf pullback constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Proof, 'To check the upper square' paragraph: identify successive pullbacks with composite pullback; supports composition/identity in lem-weil-pbc-cohomology-pullback-functorial",
+   "via": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantPullbackIdentityCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantPullbackIdentityCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantPullbackIdentityCoherence",
+  "statement": "theorem constantPullbackIdentityCoherence (Z : Scheme.{u}) (M : AddCommGrpCat.{u + 1}) :\n    (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (𝟙 Z)).inv.app M ≫\n        (upperStarId AddCommGrpCat.{u + 1} Z).hom.app\n          ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4e198",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T015900-L-944365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4e198",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T015900-L-944365",
+  "kind": "interface",
+  "note": "independent Codex review: All five modules compile cleanly; unchanged existing signature, four auxiliary signatures, DAG proof records, canonical comparisons, report, and axiom audit satisfy the stage-3 brief."
+ }
+}

@@ -5815,3 +5815,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:53 L: merged deliver/R1/Sheaf.CategoryTheory.ExtensionByZeroPresheaf (stage 3; reviewer PASS; first push; landing 20261012T015235-L-916176 (proof); modules 1; new nodes 0)
 - 01:58 L: merged deliver/E1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero (stage 3; reviewer PASS; after a return; landing 20261012T015708-L-934080 (interface); modules 2; new nodes 1)
 - 01:58 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint (stage 3; reviewer PASS; first push; landing 20261012T015829-L-941838 (proof); modules 1; new nodes 0)
+- 02:00 L: merged deliver/K1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial (stage 3; reviewer PASS; after a return; landing 20261012T015900-L-944365 (interface); modules 5; new nodes 4)

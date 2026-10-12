@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-ext-exact-functor-composition-comparison",
+ "kind": "statement",
+ "title": "ExtExactFunctorCompositionComparison",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be abelian categories [def-sp-abelian] with small Ext groups [def-pc-ext]. Let $F:\\mathcal A\\to\\mathcal B$, $G:\\mathcal B\\to\\mathcal C$, $H:\\mathcal A\\to\\mathcal C$ be additive functors preserving finite limits and finite colimits, and let $e:H\\xrightarrow{\\sim}G\\circ F$ be a natural isomorphism. For objects $A,B\\in\\mathcal A$, $n\\geq0$, and $x\\in\\operatorname{Ext}^n_{\\mathcal A}(A,B)$, let $F_*x$ denote its image under the termwise exact functor on derived categories [lem-weil-pbc-exact-functor-derived-factorization], using the canonical identifications of the single complexes and shifts. For a morphism $a$ write $\\operatorname{mk}_0(a)$ for its degree-zero Ext class. Then\n$$\\operatorname{mk}_0(e_B)\\circ H_*x=G_*F_*x\\circ\\operatorname{mk}_0(e_A).$$",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4), and Definition Tag 06XQ (definition-ext); argument by naturality on localized complexes, written by K1"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pc-ext",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the termwise functors on complexes. Exactness ensures that each preserves quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. On complexes, applying F and then G is applying their composite, and e is the termwise natural isomorphism H to that composite. Localization carries this natural isomorphism and the composite identification to the derived categories; this is the universal property in [def-weil-abstract-derived-category]. Both comparisons commute with shifts, since the termwise components are unchanged on shifted complexes.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent x as A[0] to B[0][n] by [def-pc-ext]. Naturality of the induced e for this morphism gives e at B[0][n] after H(x) equal to G(F(x)) after e at A[0]. Its components on single complexes are the images of e_A and e_B; shift compatibility makes the target component e_B[n]. These are the degree-zero classes mk_0(e_A), mk_0(e_B). Thus the naturality equation is precisely the displayed Ext equality; no sheaf, constant object or cohomology pullback is involved.",
+   "uses": [
+    "def-pc-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "def-pc-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4), and Definition Tag 06XQ (definition-ext); argument by naturality on localized complexes, written by K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf comparison inverse image identity composition coherences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Abelian.Ext.id_mapExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀; CategoryTheory.Abelian.Ext.mapExactFunctor_comp; CategoryTheory.Abelian.Ext.mapExactFunctor_extClass; CategoryTheory.Abelian.Ext.comp_mapExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp; CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-12",
+   "verdict": "No exact match in pinned Mathlib; online results for newer Mathlib checked against pinned source and compiler"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext map induced by exact functor naturally isomorphic to identity equals identity after comparison",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapExtLinearMap_apply; CategoryTheory.Functor.mapExtLinearMap_coe; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapExtAddHom_apply; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Abelian.Ext.mapExactFunctor_zero; CategoryTheory.Functor.mapExtAddHom_coe",
+   "date": "2026-10-12",
+   "verdict": "No exact match in pinned Mathlib; online results for newer Mathlib checked against pinned source and compiler"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|upperStarConstantSheafIso",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match in pinned Mathlib; online results for newer Mathlib checked against pinned source and compiler"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Proof, 'To check the upper square' paragraph: identify successive pullbacks with composite pullback; supports composition/identity in lem-weil-pbc-cohomology-pullback-functorial",
+   "via": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison",
+  "file": "lean/Sheaf/CategoryTheory/ExtExactFunctorCompositionComparison.lean",
+  "declaration": "CategoryTheory.Abelian.Ext.exactFunctorCompositionComparison",
+  "statement": "theorem exactFunctorCompositionComparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [Abelian C] [Abelian D] [Abelian E]\n    [HasExt.{w} C] [HasExt.{w} D] [HasExt.{w} E]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (e : H ≅ F ⋙ G) {X Y : C} {n : ℕ} (x : Ext.{w} X Y n) :\n    (x.mapExactFunctor H).comp (Ext.mk₀ (e.hom.app Y)) (add_zero n) =\n      (Ext.mk₀ (e.hom.app X)).comp\n        ((x.mapExactFunctor F).mapExactFunctor G) (zero_add n)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4e198",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T015900-L-944365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4e198",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T015900-L-944365",
+  "kind": "interface",
+  "note": "independent Codex review: All five modules compile cleanly; unchanged existing signature, four auxiliary signatures, DAG proof records, canonical comparisons, report, and axiom audit satisfy the stage-3 brief."
+ }
+}
