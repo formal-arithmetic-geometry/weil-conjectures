@@ -15,6 +15,11 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Data.Finset.Union
 
+import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
+import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+import Sheaf.RingTheory.PowerSeriesSubringFiniteBasis
+import Sheaf.RingTheory.PowerSeriesSubringIntersection
+
 /-!
 # Subfields of the fraction field of a power-series polynomial ring
 
@@ -65,9 +70,10 @@ Proof (the eight steps of the node):
    coefficient roots gives a p-th root of every element supported on p-divisible
    exponents with coefficients in k^p. Hence a^p and b^p lie in every AJ, giving
    (a/b)^p in every KJ.
-6. Clear denominators in the finite basis of step 4 to prove its independence
-   over KJ. Comparing the expansion of h in A intersect KJ with h times the basis
-   vector 1 gives A intersect KJ = AJ.
+6. If h in A maps into KJ, clear its denominator to get c*h=a for a,c in AJ,
+   c nonzero. Apply the AJ-linear basis coordinate at the basis vector 1.
+   It gives c*coordinate(h)=a; cancelling c proves h=coordinate(h) in AJ.
+   Thus A intersect KJ = AJ.
 7. Write z in every KJ as f/b^p, with f in A and b nonzero. Since b^p lies in
    every AJ, step 6 puts f in every AJ. Step 3 puts its coefficients in k^p,
    and step 5 gives f = h^p. Thus z = (h/b)^p, proving the intersection equality.
@@ -105,6 +111,104 @@ theorem powerSeriesRingSubfields
       (∀ J : Finset I, Set.range (fun x : K => x ^ p) ⊆ (KJ J : Set K)) ∧
       (Set.range (fun x : K => x ^ p) = ⋂ J : Finset I, (KJ J : Set K)) ∧
       (∀ J J' : Finset I, KJ (J ∪ J') ≤ KJ J ⊓ KJ J') := by
-  sorry
+  classical
+  let A := MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)
+  have hroot := powerSeriesSubringIntersection p k I t hpb n m kJ hkJ AJ hAJ
+  have hpower (a : A) (J : Finset I) : a ^ p ∈ AJ J :=
+    (hroot (a ^ p)).mpr ⟨a, rfl⟩ J
+  have hbasis (J : Finset I) :=
+    powerSeriesSubringFiniteBasis p k I t hpb n m J (kJ J) (hkJ J) (AJ J) (hAJ J)
+  have hfinite : ∀ J : Finset I, Module.Finite (AJ J) A := by
+    intro J
+    obtain ⟨d, b, i, hi⟩ := hbasis J
+    exact Module.Finite.of_basis b
+  have hinj := IsFractionRing.injective A K
+  have hmap (J : Finset I) (a : A) (ha : a ∈ AJ J) :
+      algebraMap A K a ∈ KJ J := by
+    apply (hKJ J _).mpr
+    refine ⟨⟨a, ha⟩, 1, one_ne_zero, ?_⟩
+    change algebraMap A K a = algebraMap A K a / algebraMap A K (1 : A)
+    rw [map_one, div_one]
+  have hpow : ∀ J : Finset I, Set.range (fun x : K => x ^ p) ⊆ (KJ J : Set K) := by
+    rintro J _ ⟨z, rfl⟩
+    obtain ⟨a, b, hb, rfl⟩ := IsFractionRing.div_surjective A z
+    change (algebraMap A K a / algebraMap A K b) ^ p ∈ KJ J
+    rw [div_pow, ← map_pow, ← map_pow]
+    exact (KJ J).div_mem (hmap J _ (hpower a J)) (hmap J _ (hpower b J))
+  have hsaturated (J : Finset I) (f : A) (hf : algebraMap A K f ∈ KJ J) :
+      f ∈ AJ J := by
+    obtain ⟨a, c, hc, heq⟩ := (hKJ J _).mp hf
+    have hcn : algebraMap A K (c : A) ≠ 0 := fun h => hc (hinj (by simpa using h))
+    have hmul : (c : A) * f = (a : A) := by
+      apply hinj
+      simpa only [map_mul, mul_comm] using (eq_div_iff hcn).mp heq
+    obtain ⟨d, b, i, hi⟩ := hbasis J
+    have hrepr_one : b.repr (1 : A) i = 1 := by
+      rw [← hi, b.repr_self]
+      simp
+    have hrepr : c * b.repr f i = a := by
+      have hh := congrArg (fun x : A => b.repr x i) hmul
+      have ha : (a : A) = a • (1 : A) := by
+        change (a : A) = (a : A) * 1
+        exact (mul_one _).symm
+      rw [ha] at hh
+      change b.repr (c • f) i = b.repr (a • (1 : A)) i at hh
+      simpa only [map_smul, Finsupp.smul_apply, smul_eq_mul, hrepr_one, mul_one] using hh
+    have heq' : (c : A) * (b.repr f i : A) = (a : A) := by
+      exact congrArg (fun x : AJ J => (x : A)) hrepr
+    have : f = (b.repr f i : A) := mul_left_cancel₀ hc (hmul.trans heq'.symm)
+    rw [this]
+    exact (b.repr f i).property
+  have hinter : Set.range (fun x : K => x ^ p) = ⋂ J : Finset I, (KJ J : Set K) := by
+    apply Set.Subset.antisymm
+    · intro z hz
+      exact Set.mem_iInter.mpr (fun J => hpow J hz)
+    · intro z hz
+      obtain ⟨a, c, hc, hfrac⟩ := IsFractionRing.div_surjective A z
+      let f : A := a * c ^ (p - 1)
+      have hp : 1 ≤ p := (Fact.out : p.Prime).one_lt.le
+      have hcn : algebraMap A K c ≠ 0 := fun h =>
+        (nonZeroDivisors.ne_zero hc) (hinj (by simpa using h))
+      have heq : algebraMap A K f = z * algebraMap A K (c ^ p) := by
+        rw [← hfrac]
+        simp only [f, map_mul, map_pow]
+        have hpc : algebraMap A K c ^ p =
+            algebraMap A K c ^ (p - 1) * algebraMap A K c := by
+          rw [← pow_succ, Nat.sub_add_cancel hp]
+        rw [hpc]
+        rw [div_mul_eq_mul_div, mul_div_assoc, mul_div_cancel_right₀ _ hcn]
+      have hall : ∀ J, f ∈ AJ J := by
+        intro J
+        apply hsaturated J
+        rw [heq]
+        exact (KJ J).mul_mem (Set.mem_iInter.mp hz J) (hmap J _ (hpower c J))
+      obtain ⟨h, hh⟩ := (hroot f).mp hall
+      refine ⟨algebraMap A K h / algebraMap A K c, ?_⟩
+      change (algebraMap A K h / algebraMap A K c) ^ p = z
+      rw [div_pow, ← map_pow, hh]
+      rw [heq, map_pow]
+      exact mul_div_cancel_right₀ z (pow_ne_zero p hcn)
+  have hmono : ∀ J J' : Finset I, KJ (J ∪ J') ≤ KJ J ⊓ KJ J' := by
+    have hkmono (J L : Finset I) (hJL : J ⊆ L) : kJ L ≤ kJ J := by
+      rw [hkJ L, hkJ J]
+      apply Subfield.closure_mono
+      rintro x (hx | ⟨i, hi, rfl⟩)
+      · exact Or.inl hx
+      · exact Or.inr ⟨i, fun h => hi (hJL h), rfl⟩
+    have hAmono (J L : Finset I) (hJL : J ⊆ L) : AJ L ≤ AJ J := by
+      intro f hf
+      apply (hAJ J f).mpr
+      intro a g
+      obtain ⟨hc, hd⟩ := (hAJ L f).mp hf a g
+      exact ⟨hkmono J L hJL hc, hd⟩
+    have hKmono (J L : Finset I) (hJL : J ⊆ L) : KJ L ≤ KJ J := by
+      intro z hz
+      obtain ⟨a, b, hb, heq⟩ := (hKJ L z).mp hz
+      exact (hKJ J z).mpr
+        ⟨⟨a, hAmono J L hJL a.property⟩, ⟨b, hAmono J L hJL b.property⟩, hb, heq⟩
+    intro J J' z hz
+    exact ⟨hKmono J (J ∪ J') Finset.subset_union_left hz,
+      hKmono J' (J ∪ J') Finset.subset_union_right hz⟩
+  exact ⟨hfinite, hpow, hinter, hmono⟩
 
 end RingTheory

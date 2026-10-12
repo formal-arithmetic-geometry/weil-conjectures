@@ -32,110 +32,56 @@
  ],
  "proof": [
   {
-   "text": "($A$ is a domain; the fields $K_J$.) The field $k$ is an integral domain, so $k[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series] is an integral domain by [lem-weil-pbc-power-series-domain] (with $d=n$), and $A$, the polynomial ring [def-weil-pbc-mv-polynomial-ring] in $y_1,\\ldots,y_m$ over it, is an integral domain by [lem-weil-pbc-polynomial-ring-domain]. Hence $(0)$ is a prime of $A$, its fraction field $K=A_{(0)}$ [def-weil-pbc-localization-at-prime] is a field, and $A\\to K$, $a\\mapsto a/1$, is injective; we regard $A\\subseteq K$. For a subring $A'\\subseteq A$ the set $\\{a/b:a,b\\in A',b\\ne0\\}$ contains $0,1$ and is closed under sums ($a/b+c/d=(ad+bc)/bd$, $bd\\ne0$ as $A$ is a domain), products, negatives and inverses of nonzero elements ($(a/b)^{-1}=b/a$); so $K_J$ is a subfield of $K$ containing $A_J$, once $A_J$ is known to be a subring (Step 2).",
+   "text": "For each J use powerSeriesSubringFiniteBasis to obtain an AJ-module basis b indexed by Fin d with b i=1. Module.Finite.of_basis proves the finite-module clause.",
    "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "lem-weil-pbc-power-series-domain",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-ring-domain",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof (the statement takes K, the fraction field of the domain A, for granted; written out)"
-   }
-  },
-  {
-   "text": "(Coefficients; $A_J$ is a subring.) By [def-weil-pbc-mv-polynomial-ring] and [def-weil-pbc-multivariate-power-series] an element $h\\in A$ is $h=\\sum_{g}H_gy^g$ with $H_g=\\sum_ac_{a,g}x^a\\in k[[x_1,\\ldots,x_n]]$, $H_g=0$ for $g\\in\\mathbf N^m$ outside a finite set; so $h$ is given by its coefficients $c_{a,g}=c_{a,g}(h)\\in k$, $(a,g)\\in\\mathbf N^n\\times\\mathbf N^m$, with $c_{\\cdot,g}=0$ for almost all $g$, and conversely every such family is an element of $A$. Addition is coefficientwise and the product is $c_{a,g}(hh')=\\sum c_{a',g'}(h)c_{a'',g''}(h')$, the finite sum over $(a',g')+(a'',g'')=(a,g)$. In particular multiplying by a monomial $x^ey^{g_0}$ shifts: $c_{a,g}(x^ey^{g_0}h)=c_{a-e,g-g_0}(h)$ if $a\\ge e$, $g\\ge g_0$ componentwise, and $0$ otherwise. Write $p\\mathbf N^n=\\{pq:q\\in\\mathbf N^n\\}$. By its definition in the statement, $A_J$ is the set of $h\\in A$ with $c_{a,g}(h)\\in k_J$ for all $(a,g)$ and $c_{a,g}(h)=0$ unless $a\\in p\\mathbf N^n$ and $g\\in p\\mathbf N^m$. It contains $1$, is closed under sums and negatives, and under products: in the product formula a term $c_{a',g'}(h)c_{a'',g''}(h')$ with $h,h'\\in A_J$ is nonzero only if $a',a''\\in p\\mathbf N^n$ and $g',g''\\in p\\mathbf N^m$, which forces $a\\in p\\mathbf N^n$, $g\\in p\\mathbf N^m$, and it lies in the subfield $k_J$. So $A_J$ is a subring of $A$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-multivariate-power-series"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof (the definition of A_J)"
-   }
-  },
-  {
-   "text": "(The fields $k_J$.) Since $p=0$ in $k$, $F:k\\to k$, $c\\mapsto c^p$, is a ring map ($p\\mid\\binom pj$ for $0<j<p$), injective as $k$ is a field, so $k^p=F(k)$ is a subfield. Let $\\mathcal M$ be the set of families $E=(e_i)_{i\\in I}$ of integers $0\\le e_i<p$, almost all $0$, $\\mathrm{supp}\\,E=\\{i:e_i\\ne0\\}$; by hypothesis $(t^E)_{E\\in\\mathcal M}$ is a basis of $k$ over $k^p$ [def-weil-pbc-free-module]. Fix a finite $J\\subseteq I$; let $\\mathcal M_J=\\{E:\\mathrm{supp}\\,E\\subseteq J\\}$ (finite, $p^{|J|}$ elements) and $\\mathcal M^J=\\{E:\\mathrm{supp}\\,E\\cap J=\\emptyset\\}$. Every $E\\in\\mathcal M$ is uniquely $E=E'+E''$ with $E'\\in\\mathcal M_J$, $E''\\in\\mathcal M^J$ (restriction to $J$ and to $I\\setminus J$), and $t^E=t^{E'}t^{E''}$. (a) $k_J=S_J$, the $k^p$-span of the $t^E$, $E\\in\\mathcal M^J$. $S_J$ contains $k^p$ ($E=0$) and the $t_i$, $i\\notin J$; for $E,F\\in\\mathcal M^J$, $t^Et^F=\\prod_it_i^{e_i+f_i}=c\\,t^G$ with $c=\\prod_{e_i+f_i\\ge p}t_i^p\\in k^p$ and $g_i=e_i+f_i$ or $e_i+f_i-p$, $G\\in\\mathcal M^J$; so $S_J$ is a subring. For $0\\ne s\\in S_J$ let $G_0$ be the (finite) union of the supports of the monomials occurring in $s$; the $k^p$-span $S'$ of the $t^E$ with $\\mathrm{supp}\\,E\\subseteq G_0$ is a subring by the same computation, of dimension $\\le p^{|G_0|}$ over $k^p$, and multiplication by $s$ is an injective ($k$ is a field) $k^p$-linear map $S'\\to S'$, hence surjective, so $s^{-1}\\in S'\\subseteq S_J$. Thus $S_J$ is a subfield containing $k^p$ and the $t_i$, $i\\notin J$, so $k_J\\subseteq S_J$; conversely $k_J$ contains these generators, hence their products $t^E$ and the $k^p$-combinations of them: $S_J\\subseteq k_J$. (b) $(t^{E'})_{E'\\in\\mathcal M_J}$ is a basis of $k$ over $k_J$ [def-weil-pbc-free-module]. Spanning: $c=\\sum_Ea_Et^E$ ($a_E\\in k^p$) equals $\\sum_{E'\\in\\mathcal M_J}\\bigl(\\sum_{E''}a_{E'+E''}t^{E''}\\bigr)t^{E'}$ with inner sums in $S_J=k_J$. Independence: if $\\sum_{E'}c_{E'}t^{E'}=0$ with $c_{E'}\\in k_J$, write $c_{E'}=\\sum_{E''\\in\\mathcal M^J}b_{E',E''}t^{E''}$ ($b\\in k^p$) by (a); then $\\sum_{E',E''}b_{E',E''}t^{E'+E''}=0$, and $(E',E'')\\mapsto E'+E''$ is injective, so all $b_{E',E''}=0$ by independence over $k^p$, and all $c_{E'}=0$. (c) $\\bigcap_Jk_J=k^p$. $k^p\\subseteq k_J$ by definition. If $c\\in\\bigcap_Jk_J$, write $c=\\sum_Ea_Et^E$ ($a_E\\in k^p$) and let $J_0$ be the union of the supports of the $E$ with $a_E\\ne0$, a finite set. By (a) $c=\\sum_{E\\in\\mathcal M^{J_0}}b_Et^E$ with $b_E\\in k^p$; by uniqueness of coordinates in the $k^p$-basis, $a_E=b_E$ for all $E$ (with $b_E=0$ for $E\\notin\\mathcal M^{J_0}$). An $E\\ne0$ with $a_E\\ne0$ has $\\emptyset\\ne\\mathrm{supp}\\,E\\subseteq J_0$, so $E\\notin\\mathcal M^{J_0}$ and $a_E=b_E=0$, a contradiction; hence $c=a_0\\in k^p$. (d) If $J\\subseteq J''$ then $k_{J''}\\subseteq k_J$, since the generators $k^p$ and $t_i$, $i\\notin J''$, of $k_{J''}$ lie in $k_J$; in particular $k_{J\\cup J'}\\subseteq k_J\\cap k_{J'}$.",
-   "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, first sentence ('Since k/k_J is finite') and the last sentences ('it is clear that A^p = cap_J A_J'): the facts on k_J used there, from the p-basis, written out (the subfield argument as in the proof of Lemma Tag 07P2, lemma-p-basis, line 11363)"
-   }
-  },
-  {
-   "text": "(A basis of $A$ over $A_J$; proof of (1).) Fix a finite $J$ and let $\\mathcal B_J=\\mathcal M_J\\times\\{0,\\ldots,p-1\\}^n\\times\\{0,\\ldots,p-1\\}^m$, a finite set with $p^{|J|+n+m}$ elements, and $b_{E,e,g}=t^Ex^ey^g\\in A$. Claim: $(b_\\beta)_{\\beta\\in\\mathcal B_J}$ is a basis of the $A_J$-module $A$ [def-weil-pbc-free-module]. Every $(a,g)\\in\\mathbf N^n\\times\\mathbf N^m$ is uniquely $(pq+e,pr+g_0)$ with $q\\in\\mathbf N^n$, $r\\in\\mathbf N^m$, $0\\le e_i<p$, $0\\le(g_0)_j<p$ (division with remainder in each component). Existence: let $h\\in A$ and write each coefficient $c_{a,g}(h)=\\sum_{E\\in\\mathcal M_J}c_{a,g,E}t^E$ with unique $c_{a,g,E}\\in k_J$ (Step 3(b)); by uniqueness $c_{a,g,E}=0$ whenever $c_{a,g}(h)=0$. For $(E,e,g_0)\\in\\mathcal B_J$ let $\\alpha_{E,e,g_0}$ be the element with coefficient $c_{pq+e,pr+g_0,E}\\in k_J$ at $(pq,pr)$ and $0$ at exponents outside $p\\mathbf N^n\\times p\\mathbf N^m$; it lies in $A$ (only the finitely many $r$ with $pr+g_0$ a $y$-exponent of $h$ give nonzero columns), hence in $A_J$ (Step 2). By the shift rule of Step 2, the coefficient of $\\alpha_{E,e',g'}t^Ex^{e'}y^{g'}$ at $(pq+e,pr+g_0)$ is $t^E$ times the coefficient of $\\alpha_{E,e',g'}$ at $(p q+e-e',pr+g_0-g')$, which is $0$ unless $e-e'\\in p\\mathbf Z^n$ and $g_0-g'\\in p\\mathbf Z^m$, i.e. $e'=e$, $g'=g_0$ (all entries in $[0,p)$). Hence $\\sum_{\\beta\\in\\mathcal B_J}\\alpha_\\beta b_\\beta$ (a finite sum) has coefficient $\\sum_Ec_{pq+e,pr+g_0,E}t^E=c_{pq+e,pr+g_0}(h)$ at every $(pq+e,pr+g_0)$, so it equals $h$. Uniqueness: if $\\sum_\\beta\\alpha_\\beta b_\\beta=0$ with all $\\alpha_\\beta\\in A_J$, the same computation gives at $(pq+e,pr+g_0)$: $\\sum_{E\\in\\mathcal M_J}c_{pq,pr}(\\alpha_{E,e,g_0})t^E=0$ with coefficients in $k_J$, so $c_{pq,pr}(\\alpha_{E,e,g_0})=0$ by Step 3(b); as $\\alpha_{E,e,g_0}$ has no other nonzero coefficients, $\\alpha_\\beta=0$ for all $\\beta$. So $A$ is a free $A_J$-module with the finite basis $(b_\\beta)$, in particular a finitely generated $A_J$-module [def-weil-finitely-generated-module]: this is (1).",
-   "uses": [
-    "def-weil-pbc-free-module",
+    "lem-weil-pbc-power-series-subring-finite-basis",
     "def-weil-finitely-generated-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, first paragraph ('Since k/k_J is finite, the ring extension k_J[[x^p]] in k[[x]] is finite by Algebra, Lemma 0394 ... This implies that A_J -> A is finite'); finiteness proved here by an explicit basis instead of Algebra Lemma Tag 0394 (lemma-finite-after-completion)"
-   }
+   "elementary": false
   },
   {
-   "text": "($p$th powers in $A$; proof of (2).) Let $h=\\sum_gH_gy^g\\in A$ as in Step 2. In the ring $A$ of characteristic $p$, $(u+v)^p=u^p+v^p$, so by induction on the number of terms $h^p=\\sum_gH_g^py^{pg}$ (a finite sum). By [lem-weil-pbc-power-series-frobenius-coefficientwise] (for the field $k$ of characteristic $p$), $H_g^p=\\sum_ac_{a,g}^px^{pa}$. Hence: (a) $c_{pa,pg}(h^p)=c_{a,g}(h)^p$ and $c_{a',g'}(h^p)=0$ unless $a'\\in p\\mathbf N^n$, $g'\\in p\\mathbf N^m$. (b) Conversely, if $f\\in A$ has $c_{a',g'}(f)=0$ unless $(a',g')\\in p\\mathbf N^n\\times p\\mathbf N^m$, and $c_{pa,pg}(f)=d_{a,g}^p$ with $d_{a,g}\\in k$, then $f=h^p$ for the element $h\\in A$ with coefficients $c_{a,g}(h)=d_{a,g}$ (it lies in $A$: $d_{\\cdot,g}=0$ whenever $c_{\\cdot,pg}(f)=0$, as $F$ is injective). Proof of (2): let $z=a/b\\in K$, $a,b\\in A$, $b\\ne0$. By (a) the coefficients of $a^p$ and $b^p$ lie in $k^p\\subseteq k_J$ (Step 3(c)) and vanish off $p\\mathbf N^n\\times p\\mathbf N^m$, so $a^p,b^p\\in A_J$ (Step 2), and $b^p\\ne0$ as $A$ is a domain (Step 1). So $z^p=a^p/b^p\\in K_J$: $K^p\\subseteq K_J$ for every finite $J$.",
+   "text": "The coefficient-subring intersection theorem puts every a^p in every AJ. Represent z in K as a/c by IsFractionRing.div_surjective; taking pth powers and using hKJ and closure under division proves K^p is contained in every KJ. The domain instances and IsFractionRing.injective identify A with its image.",
    "uses": [
-    "lem-weil-pbc-power-series-frobenius-coefficientwise"
+    "lem-weil-pbc-power-series-subring-intersection",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-polynomial-ring-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, second paragraph, 'Proof of (1). For a in A we see that a^p in A_J. Hence K^p subset K_J'"
-   }
+   "elementary": false
   },
   {
-   "text": "($A\\cap K_J=A_J$.) Fix $J$ and the basis $(b_\\beta)_{\\beta\\in\\mathcal B_J}$ of Step 4. It is linearly independent over $K_J$ in $K$: if $\\sum_\\beta\\gamma_\\beta b_\\beta=0$ with $\\gamma_\\beta=u_\\beta/v_\\beta\\in K_J$ ($u_\\beta,v_\\beta\\in A_J$, $v_\\beta\\ne0$), put $v=\\prod_\\beta v_\\beta\\in A_J\\setminus\\{0\\}$ (Step 1: $A$ is a domain); then $v\\gamma_\\beta\\in A_J$ and $\\sum_\\beta(v\\gamma_\\beta)b_\\beta=0$ in $A\\subseteq K$, so all $v\\gamma_\\beta=0$ by the uniqueness in Step 4, and all $\\gamma_\\beta=0$. Now let $h\\in A\\cap K_J$. By Step 4, $h=\\sum_\\beta\\alpha_\\beta b_\\beta$ with $\\alpha_\\beta\\in A_J\\subseteq K_J$. The element $\\beta_0=(0,0,0)$ has $b_{\\beta_0}=1$, so $(\\alpha_{\\beta_0}-h)b_{\\beta_0}+\\sum_{\\beta\\ne\\beta_0}\\alpha_\\beta b_\\beta=0$ is a relation with coefficients in $K_J$; by independence $h=\\alpha_{\\beta_0}\\in A_J$. Hence $A\\cap K_J=A_J$ (the inclusion $A_J\\subseteq A\\cap K_J$ is clear).",
+   "text": "Prove saturation: if f in A maps into KJ, hKJ gives nonzero c in AJ and a in AJ with c*f=a. Apply the basis coordinate at i where b i=1. Since this coordinate takes 1 to 1, c*repr(f)(i)=a. Coercing back into A and cancelling nonzero c gives f=repr(f)(i), hence f lies in AJ. This proves A intersect KJ=AJ without constructing any new data.",
    "uses": [
-    "def-weil-pbc-free-module"
+    "lem-weil-pbc-power-series-subring-finite-basis",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-polynomial-ring-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, second paragraph, 'Proof of (2) ... Since f/g^p in K_J we can write f/g^p = a/b^p with a in A_J ... Hence b^p f in A_J ... we conclude ... f in A_J': the source deduces f in A_J with the derivations d/dx_i, d/dy_j and k_J-derivations of k; here it is deduced from the basis of Step 4"
-   }
+   "elementary": false
   },
   {
-   "text": "(Proof of (3).) By (2), $K^p\\subseteq\\bigcap_JK_J$. Conversely let $z\\in\\bigcap_JK_J$ and write $z=a/b$ with $a,b\\in A$, $b\\ne0$; put $f=ab^{p-1}\\in A$, so that $z=f/b^p$. For every finite $J$: $b^p\\in A_J\\subseteq K_J$ (Step 5), so $f=zb^p\\in K_J\\cap A=A_J$ (Step 6). Thus, for every finite $J$, all coefficients of $f$ lie in $k_J$ and vanish off $p\\mathbf N^n\\times p\\mathbf N^m$ (Step 2). So the coefficients of $f$ lie in $\\bigcap_Jk_J=k^p$ (Step 3(c)): $c_{pa,pg}(f)=d_{a,g}^p$ with $d_{a,g}\\in k$. By Step 5(b), $f=h^p$ with $h\\in A$, and $z=h^p/b^p=(h/b)^p\\in K^p$. Hence $K^p=\\bigcap_JK_J$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, second paragraph, 'Proof of (2). Suppose that f/g^p in K ... is contained in K_J for every choice of J ... Since it is clear that A^p = cap_J A_J ... we conclude f in A^p as desired' (the clear equality written out with Steps 3(c) and 5(b))"
-   }
+   "text": "For z in every KJ write z=a/c, c nonzero, and set f=a*c^(p-1), so f=z*c^p in K. As c^p belongs to every AJ, saturation puts f in every AJ. The coefficient-subring intersection theorem gives f=h^p, so z=(h/c)^p. Together with containment this gives the desired intersection equality.",
+   "uses": [
+    "lem-weil-pbc-power-series-subring-intersection",
+    "lem-weil-pbc-power-series-subring-finite-basis"
+   ],
+   "elementary": false
   },
   {
-   "text": "(Proof of (4).) Let $J,J'\\subseteq I$ be finite. By Step 3(d), $k_{J\\cup J'}\\subseteq k_J\\cap k_{J'}$, so by the description of Step 2 $A_{J\\cup J'}\\subseteq A_J\\cap A_{J'}$, and every quotient $a/b$ with $a,b\\in A_{J\\cup J'}$ lies in $K_J\\cap K_{J'}$: $K_{J\\cup J'}\\subseteq K_J\\cap K_{J'}$.",
+   "text": "For J subset L, the generators defining kL lie in the generating set defining kJ; Subfield.closure_mono gives kL<=kJ. The exact coefficient condition hAJ implies AL<=AJ, and the quotient condition hKJ implies KL<=KJ. Apply these to both inclusions into J union J-prime to prove the last clause.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521), proof, second paragraph, 'Proof of (3). This is clear because K_{J cup J'} subset K_J cap K_{J'}'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-multivariate-power-series",
-  "lem-weil-pbc-power-series-domain",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-free-module",
+  "lem-weil-pbc-power-series-subring-finite-basis",
   "def-weil-finitely-generated-module",
-  "lem-weil-pbc-power-series-frobenius-coefficientwise"
+  "lem-weil-pbc-power-series-subring-intersection",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-polynomial-ring-domain"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07P5 (lemma-power-series-ring-subfields, line 11521) and its proof, followed in its structure ((2) from a^p in A_J; (3) by writing an element of the intersection as f/g^p, showing f in A_J for every J and then f in A^p; (4) from K_{J cup J'} in K_J cap K_{J'}); two arguments are the agent's: finiteness (1) by an explicit basis of A over A_J instead of Algebra Lemma Tag 0394, and f in A_J from the K_J-independence of that basis instead of the derivations d/dx_i, d/dy_j and k_J-derivations of k; the source's 'it is clear that A^p = cap_J A_J' is written out (Steps 3(c), 5(b))"
+  "place": "Tag 07P5 proof, keeping the parent explicit-basis/coefficient route. Saturation is proved in Lean by applying the AJ-linear basis coordinate at the basis vector 1 and cancelling the denominator, rather than extending the entire basis to KJ."
  },
  "mathlib_searches": [
   {
@@ -248,5 +194,15 @@
   "group": "H1",
   "result": "pass",
   "note": "p prime, k char p, p-basis as Module.Basis over adjoin(ZMod p)(k^p) indexed by bounded finsupps (as ExistsPBasis); A = MvPolynomial (Fin m) (MvPowerSeries (Fin n) k); K IsFractionRing; kJ = closure(k^p ∪ t(I\\J)); AJ by coefficients in kJ with p-divisible x- and y-exponents; KJ = quotients of AJ, b≠0; (1) Module.Finite (smul = mul, checked rfl) (2) K^p ⊆ KJ (3) K^p = ⋂ over Finset I (4) KJ(J∪J') ≤ KJ ⊓ KJ'; no let, no hollow hyp, universes u/v/w harmless"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T211615-L-1057568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
