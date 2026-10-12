@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
+import Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockData
+import Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockIso
 
 /-! # Local free decompositions with an invertible pivot block
 
@@ -56,6 +58,12 @@ theorem exists_local_invertible_minor_block
           free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),
         IsIso (biprod.inl ≫ eS.inv ≫
           (restrictFunctor U.ι).map ((Modules.pullback j).map φ) ≫
-          eT.hom ≫ biprod.fst) := by sorry
+          eT.hom ≫ biprod.fst) := by
+  obtain ⟨U, hz, eS, eT, hblock, hunit⟩ := exists_local_invertible_minor_block_data
+    eM eN φ j a z rows cols hminor
+  refine ⟨U, hz, eS, eT, ?_⟩
+  apply local_invertible_minor_block_isIso
+  rw [hblock]
+  exact hunit
 
 end AlgebraicGeometry.Scheme.Modules
