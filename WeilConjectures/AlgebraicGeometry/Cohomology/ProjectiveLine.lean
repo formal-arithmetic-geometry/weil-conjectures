@@ -22,7 +22,9 @@ twisting sheaves `𝒪(d)` on `ℙ¹_k`, the vanishing of the cohomology of quas
 finiteness of the cohomology of coherent sheaves on a smooth projective curve.
 
 The twisting sheaves are `AlgebraicGeometry.ProjectiveSpace.twist`, which exist and are
-invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist` (blueprint
+invertible by `AlgebraicGeometry.ProjectiveSpace.isInvertible_twist`; that they are the twisted
+structure sheaves of the standard cover, unique up to unique isomorphism, is
+`AlgebraicGeometry.ProjectiveLine.nonempty_twistData` (blueprint
 `lem-sc-p1-twist-exists`). The cohomology of the twists on `ℙ¹_k` is the case `d = 1` of
 Serre's computation of the cohomology of `ℙᵈ_k`, `sk-thm-picard-pn`.
 
