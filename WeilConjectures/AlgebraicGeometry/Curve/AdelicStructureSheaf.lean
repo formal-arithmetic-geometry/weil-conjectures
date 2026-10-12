@@ -139,7 +139,7 @@ noncomputable def localSubalgebra (x : X) : Subalgebra k X.functionField where
 lemma localSubalgebra_toSubmodule (x : X) :
     Subalgebra.toSubmodule (localSubalgebra k X x) =
       Modules.stalkLattice k (Modules.structureSheafToGeneric X) x :=
-  Submodule.ext fun _ ↦ Iff.rfl
+  rfl
 
 lemma mem_localSubalgebra {x : X} {f : X.functionField} :
     f ∈ localSubalgebra k X x ↔
