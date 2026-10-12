@@ -213,7 +213,7 @@ theorem affine_morphism_relative_spec (S : Scheme.{u}) :
     have : IsIso ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U).toSpecΓ :=
       (hU.preimage _).isoSpec.isIso_hom
     infer_instance
-  · exact relative_spec_morphism_chart S E hobj
+  · exact relative_spec_morphism_chart S E hobj hmap
   · intro Y V W
     simp only [structureAlgebraRestrictionIso, Scheme.Opens.ι_appLE]
     rfl

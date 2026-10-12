@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Relative spectrum morphism chart compatibility",
- "statement": "Let S be a scheme, E the affine relative-spectrum equivalence, and hobj the object identifications with pushforward structure algebras. For every algebra morphism φ and affine open U, the induced affine morphism chart commutes with Spec.map of the section map.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $E$ be an equivalence from the opposite of schemes affine over $S$ [pqf-def-affine-morphism] to quasi-coherent commutative $\\mathcal O_S$-algebras [def-weil-pbc-comm-algebra-sheaf]. Suppose its value on each $f:X\\to S$ is identified by $h_{obj}$ with $f_*\\mathcal O_X$, and its value on every $S$-morphism is the canonical map on sections, transported along $h_{obj}$. For every algebra morphism $\\varphi:\\mathcal A\\to\\mathcal B$ and affine open $U\\subseteq S$, the restricted morphism induced by $E^{-1}(\\varphi)$ commutes with $\\operatorname{Spec}(\\varphi_U)$ under the charts defined by the inverse counit and $h_{obj}$.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Lemma 01SA proof and Constructions Lemma 01LX"
@@ -25,24 +25,20 @@
  ],
  "proof": [
   {
-   "text": "Apply naturality of the counit of the equivalence to φ. Rewrite the resulting sectionwise equality using the object identifications hobj and the formula for the canonical functor on morphisms. The affine toSpecΓ naturality lemma and functoriality of Spec.map yield exactly the displayed chart equality.",
-   "uses": [
-    "lem-weil-pbc-affine-structure-algebra-fully-faithful"
-   ],
-   "elementary": false,
+   "text": "Use Mathlib Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc to replace the restricted scheme map followed by toSpecΓ by toSpecΓ followed by Spec of appLE. Combine the two Spec maps using Spec.map_comp. Evaluate naturality of E.counitIso.inv on φ at the open U. Apply hmap to E.inverse.map φ and simplify the underlying full-subcategory, Under and sheaf compositions. Evaluate sheaf equality transports using Mathlib eqToHom_map for the forgetful functor and eqToHom_app for evaluation, with no duplicate helper. Postcompose with the sectionwise transport hobj for B; the inverse transports cancel. Applying Spec and precomposing with toSpecΓ gives the desired equality. This is formal naturality and transport cancellation and does not use full faithfulness.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 01SA and Constructions Lemma 01LX"
+    "place": "Lemma 01SA proof and Constructions Lemma 01LX"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-affine-structure-algebra-fully-faithful"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemma 01SA proof"
+  "place": "Lemma 01SA (canonical structure-algebra functor on morphisms); formal counit naturality and Mathlib Scheme.Opens.toSpecΓ_SpecMap_appLE"
  },
  "mathlib_searches": [
   {
@@ -90,7 +86,7 @@
   "module": "Sheaf.AlgebraicGeometry.RelativeSpecMorphismChart",
   "file": "lean/Sheaf/AlgebraicGeometry/RelativeSpecMorphismChart.lean",
   "declaration": "AlgebraicGeometry.relative_spec_morphism_chart",
-  "statement": "theorem relative_spec_morphism_chart (S : Scheme.{u}) (E : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌ ObjectProperty.FullSubcategory (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent)) (hobj : ∀ Y, (E.functor.obj (op Y)).obj = Under.mk (⟨Y.obj.hom.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} Y.obj.hom.base).obj (Scheme.sheaf _))) : ∀ (A B) (φ : A ⟶ B) (U : S.Opens), IsAffineOpen U → (E.inverse.map φ).unop.hom.left.resLE ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U) ((E.inverse.obj B).unop.obj.hom ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, Over.w (E.inverse.map φ).unop.hom]) ≫ ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app A).inv.hom ≫ eqToHom (hobj (E.inverse.obj A).unop)).right.hom.app (op U)) = ((E.inverse.obj B).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app B).inv.hom ≫ eqToHom (hobj (E.inverse.obj B).unop)).right.hom.app (op U)) ≫ Spec.map (φ.hom.right.hom.app (op U))",
+  "statement": "theorem relative_spec_morphism_chart (S : Scheme.{u}) (E : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌ ObjectProperty.FullSubcategory (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent)) (hobj : ∀ Y, (E.functor.obj (op Y)).obj = Under.mk (⟨Y.obj.hom.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} Y.obj.hom.base).obj (Scheme.sheaf _))) (hmap : ∀ (Y Y') (h : Y ⟶ Y') (V : S.Opens), (E.functor.map h.op).hom.right.hom.app (op V) = eqToHom (by rw [hobj Y']; rfl) ≫ h.hom.left.appLE (Y'.obj.hom ⁻¹ᵁ V) (Y.obj.hom ⁻¹ᵁ V) (by rw [← Over.w h.hom, Scheme.Hom.comp_preimage]) ≫ eqToHom (by rw [hobj Y]; rfl)) : ∀ (A B) (φ : A ⟶ B) (U : S.Opens), IsAffineOpen U → (E.inverse.map φ).unop.hom.left.resLE ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U) ((E.inverse.obj B).unop.obj.hom ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, Over.w (E.inverse.map φ).unop.hom]) ≫ ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app A).inv.hom ≫ eqToHom (hobj (E.inverse.obj A).unop)).right.hom.app (op U)) = ((E.inverse.obj B).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app B).inv.hom ≫ eqToHom (hobj (E.inverse.obj B).unop)).right.hom.app (op U)) ≫ Spec.map (φ.hom.right.hom.app (op U))",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-12",
@@ -109,11 +105,44 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-b09ec",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T053931-L-2634849",
+  "landing": "20261012T150956-L-2232011",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivery matched its DAG correction and report; delivered modules and adapted importer compile cleanly, original importer fails exactly as recorded, signatures and axioms verified."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "R1 stage 2",
+  "old_statement": "Let S be a scheme, E the affine relative-spectrum equivalence, and hobj the object identifications with pushforward structure algebras. For every algebra morphism φ and affine open U, the induced affine morphism chart commutes with Spec.map of the section map.",
+  "what": "The Lean statement omitted the canonical action on morphisms hmap. Object equalities do not determine the action of an arbitrary equivalence on morphisms. Add the sectionwise hmap assumption already supplied by the parent. This corrects an intermediate statement, not any Challenge target. The earlier proof plan silently assumed this formula.",
+  "source": {
+   "document": "literature/stacks-project/morphisms.tex",
+   "place": "Lemma 01SA proof and Constructions Lemma 01LX"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-affine-morphism-relative-spec",
+    "holds": true,
+    "note": "The parent already constructs the canonical morphism action hmap; pass it to the corrected chart lemma. The parent statement and conclusion are unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Apply naturality of the counit of the equivalence to φ. Rewrite the resulting sectionwise equality using the object identifications hobj and the formula for the canonical functor on morphisms. The affine toSpecΓ naturality lemma and functoriality of Spec.map yield exactly the displayed chart equality.",
+    "uses": [
+     "lem-weil-pbc-affine-structure-algebra-fully-faithful"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/morphisms.tex",
+     "place": "Lemma 01SA and Constructions Lemma 01LX"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-affine-structure-algebra-fully-faithful"
+  ]
  }
 }
