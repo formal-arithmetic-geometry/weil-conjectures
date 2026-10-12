@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Finiteness.Basic
 import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
 import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.GenericFormalFiberFiniteSubringBase
+import Sheaf.RingTheory.GenericFormalFiberFractionFieldTransport
 
 /-!
 # Generic formal fibres and finite subrings
@@ -61,4 +63,5 @@ theorem isGeometricallyRegular_genericFormalFiber_of_finite_subring
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
       (Localization.AtPrime P)
     Algebra.IsGeometricallyRegular K (TensorProduct A K C) := by
-  sorry
+  apply genericFormalFiber_geometricallyRegular_of_fractionField_transport A K P
+  exact genericFormalFiber_bot_geometricallyRegular_of_finite_subring A A₀ P hbase
