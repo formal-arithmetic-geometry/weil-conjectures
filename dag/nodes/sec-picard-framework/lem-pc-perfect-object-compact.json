@@ -26,58 +26,50 @@
  ],
  "proof": [
   {
-   "text": "Let P^\\vee be the dual of P supplied by [lem-pc-perfect-tensor-hom-duality]. For every M in D_{\\mathrm{QCoh}}(\\mathcal O_X), its first tensor-Hom isomorphism with A=\\mathcal O_X and B=M (and P\\otimes^L\\mathcal O_X=P, as \\mathcal O_X is a flat module in degree 0) identifies Hom(P,M) with Hom(\\mathcal O_X,P^\\vee\\otimes^L M), naturally in M; in particular P^\\vee\\otimes^L M lies in D_{\\mathrm{QCoh}}(\\mathcal O_X).",
+   "text": "Use [lem-pc-derived-tensor-unit-compact] to obtain a compact object U isomorphic to the derived tensor unit.",
+   "uses": [
+    "lem-pc-derived-tensor-unit-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+   }
+  },
+  {
+   "text": "For perfect P use [lem-pc-perfect-tensor-hom-duality] to obtain its dual D, both tensor adjunctions, and quasi-coherent closure of both tensor functors. Restrict the adjunctions along the fully faithful inclusion of D_QCoh, with Mathlib Adjunction.restrictFullyFaithful. Thus G = D tensor - is itself a left adjoint and preserves all coproducts (Adjunction.leftAdjoint_preservesColimits). Both restricted functors are additive since G preserves binary biproducts. The right unitor identifies F(U) with P. The adjunction gives additive equivalences e_M:Hom(P,M) = Hom(U,G(M)), natural in M.",
    "uses": [
     "lem-pc-perfect-tensor-hom-duality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, first paragraph"
+    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
    }
   },
   {
-   "text": "Derived tensoring with the fixed complex P^\\vee commutes with set-indexed direct sums. Choose a K-flat resolution of P^\\vee using [lem-pc-kflat-resolution]; the direct sum of the K_i, which exists in D_{\\mathrm{QCoh}} by [lem-pc-derived-qcoh-direct-sums], is represented by the termwise direct sum of representative complexes by [lem-pc-derived-ambient-direct-sums]; form the total tensor complexes using [def-pc-tensor-complex-sheaves]. The termwise tensor products and the direct sums indexed by total degree commute, so the direct sum of the complexes P^\\vee\\otimes^L K_i is P^\\vee\\otimes^L(\\bigoplus_i K_i), compatibly with the inclusions of the summands.",
+   "text": "For every family E, form the direct sum d of the e_(E_i), a bijection by DirectSum.map_injective and map_surjective. Compactness of U gives the bijection b from the sum of Hom(U,G(E_i)) to Hom(U,coproduct G(E_i)). The coproduct comparison for G is an isomorphism, so postcomposition gives a bijection t to Hom(U,G(coproduct E)). Check e_(coproduct E) composed with the canonical P-Hom comparison equals t composed with b composed with d: DirectSum.addHom_ext reduces to one summand, and adjunction naturality and the coproduct comparison inclusion identity prove it. Cancel the bijection e_(coproduct E) to conclude. Empty families use the same direct-sum universal property.",
    "uses": [
-    "lem-pc-kflat-resolution",
     "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-derived-ambient-direct-sums",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-compact-object"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, first paragraph"
-   }
-  },
-  {
-   "text": "Let Y=\\operatorname{Spec}(\\mathbb Z) and let a:X\\to Y be the structure morphism; it is quasi-compact and quasi-separated because X is. Since \\mathcal O_Y is a flat module in degree 0, La^*\\mathcal O_Y=\\mathcal O_X, so by the adjunction [lem-pc-ringed-spaces-derived-adjoint] Hom(\\mathcal O_X,N)\\cong Hom(\\mathcal O_Y,Ra_*N) naturally in N. By [lem-pc-derived-direct-image-preserves-direct-sums], Ra_* maps D_{\\mathrm{QCoh}}(\\mathcal O_X) to D_{\\mathrm{QCoh}}(\\mathcal O_Y) and commutes with direct sums. By [lem-pc-affine-qcoh-derived-equivalence] with A=\\mathbb Z, R\\Gamma(Y,-) is an equivalence D_{\\mathrm{QCoh}}(\\mathcal O_Y)\\to D(\\mathbb Z) sending \\mathcal O_Y to \\mathbb Z; an equivalence preserves direct sums, so Hom(\\mathcal O_Y,L)\\cong Hom_{D(\\mathbb Z)}(\\mathbb Z,R\\Gamma(Y,L))=H^0(R\\Gamma(Y,L)) commutes with direct sums, because in D(\\mathbb Z) direct sums are termwise and H^0 commutes with direct sums of abelian groups. Composing with Steps 1 and 2, Hom(P,-) is naturally isomorphic to a functor on D_{\\mathrm{QCoh}}(\\mathcal O_X) whose canonical comparison map for direct sums is an isomorphism; by naturality the canonical map \\bigoplus_i Hom(P,K_i)\\to Hom(P,\\bigoplus_i K_i) is an isomorphism, including for the empty family.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-derived-direct-image-preserves-direct-sums",
-    "lem-pc-affine-qcoh-derived-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, first paragraph"
+    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
    }
   }
  ],
  "proof_deps": [
+  "lem-pc-derived-tensor-unit-compact",
   "lem-pc-perfect-tensor-hom-duality",
   "lem-pc-derived-qcoh-direct-sums",
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-derived-direct-image-preserves-direct-sums",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-kflat-resolution",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-compact-object"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Proposition proposition-compact-is-perfect (Tag 09M1), proof, forward implication"
+  "place": "Tag 09M1 forward implication; tensor sums replaced by the left-adjoint coproduct theorem"
  },
  "mathlib_searches": [
   {
@@ -175,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085401-L-48510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
