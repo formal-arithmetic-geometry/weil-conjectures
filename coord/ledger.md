@@ -9462,3 +9462,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/R3/Sheaf.Algebra.Homology.HomComplexSectionsCanonicalComparison (stage 3; reviewer PASS; first push; landing 20261012T203948-L-832141 (interface); batch 20261012T203936; modules 3; new nodes 2)
 - 20:39 L: merged deliver/R3/Sheaf.AlgebraicGeometry.CotangentComplexSymmetricAlgebra (stage 3; reviewer PASS; first push; landing 20261012T203948-L-832255 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/T1/Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective (stage 3; reviewer PASS; first push; landing 20261012T203949-L-832369 (interface); batch 20261012T203936; modules 2; new nodes 2)
+- 20:39 L: merged deliver/T2/Sheaf.Algebra.Module.GradedLocalizationExact (stage 3; reviewer PASS; first push; landing 20261012T203949-L-832576 (proof); batch 20261012T203936; modules 1; new nodes 1)

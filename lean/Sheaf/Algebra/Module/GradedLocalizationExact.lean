@@ -22,21 +22,45 @@ universe u v₀ v₁ v₂ w
 
 namespace LocalizedModule
 
-/-- Localization at a homogeneous element preserves exactness, both on the whole module
-and on its degree-zero part (Stacks, Tag 09MR, Mayer–Vietoris paragraph).
-The arbitrary index set `I` indexes adjacent triples: one triple is obtained with `I = Unit`,
-and the triples at all positions of any finite or infinite exact sequence give its termwise
-version. The last equivalence expresses image equals kernel for the restricted maps, using
-underlying sets rather than introducing another localization type.
+/-- Intermediate degree-zero exactness, split from the target proof.
 
-Step 1: forget gradings and apply localization exactness
-(lem-weil-pbc-localization-module-exact, Mathlib's `LocalizedModule.map_exact`) at powers of `s`.
-Step 2: the induced maps preserve degrees, since they send `m/s^k` to `f(m)/s^k` or `g(m)/s^k`.
-For a degree-zero element in the kernel, Step 1 supplies a preimage. Decompose that preimage
-into its finitely many homogeneous components and take its degree-zero component; preservation
-of degrees makes its image the original element. The converse follows from `g ∘ f = 0`.
-Apply these two steps independently at every index to obtain the finite/infinite consequence.
-(blueprint: lem-sc-graded-localization-exact) -/
+Proof plan (Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer--Vietoris
+paragraph): first apply ordinary localization exactness to obtain a preimage of a
+degree-zero element in the kernel.  Represent that preimage by a finite sum of
+fractions and use `DirectSum.decompose` for the internal decomposition of the
+source.  The degree-preservation hypothesis implies that the localized map sends
+the degree-zero component to the degree-zero component of the image; all other
+components map to distinct degrees and therefore have zero degree-zero component.
+Consequently the degree-zero component is still a preimage of the original
+element and lies in `homogeneousPieceAway`.  The reverse implication follows
+from `Function.Exact`, since the composite localized map is zero.  The
+construction is valid also for `d = 0` and for the zero localized module.
+(blueprint: lem-sc-graded-localization-degree-zero-exact) -/
+theorem graded_localization_degree_zero_exact {A : Type u} [CommRing A]
+    (𝓐 : ℤ → AddSubgroup A) (_h𝓐 : DirectSum.IsInternal 𝓐)
+    (_hmul : ∀ (a b : ℤ) (r t : A), r ∈ 𝓐 a → t ∈ 𝓐 b → r * t ∈ 𝓐 (a + b))
+    (s : A) (d : ℤ) (_hd : 0 ≤ d) (_hs : s ∈ 𝓐 d)
+    {M₀ M₁ M₂ : Type*} [AddCommGroup M₀] [AddCommGroup M₁] [AddCommGroup M₂]
+    [Module A M₀] [Module A M₁] [Module A M₂]
+    (𝓜₀ : ℤ → AddSubgroup M₀) (𝓜₁ : ℤ → AddSubgroup M₁)
+    (𝓜₂ : ℤ → AddSubgroup M₂)
+    (_h𝓜₀ : DirectSum.IsInternal 𝓜₀) (_h𝓜₁ : DirectSum.IsInternal 𝓜₁)
+    (_h𝓜₂ : DirectSum.IsInternal 𝓜₂)
+    (_hsmul₀ : ∀ (a b : ℤ) (r : A) (m : M₀), r ∈ 𝓐 a → m ∈ 𝓜₀ b → r • m ∈ 𝓜₀ (a + b))
+    (_hsmul₁ : ∀ (a b : ℤ) (r : A) (m : M₁), r ∈ 𝓐 a → m ∈ 𝓜₁ b → r • m ∈ 𝓜₁ (a + b))
+    (_hsmul₂ : ∀ (a b : ℤ) (r : A) (m : M₂), r ∈ 𝓐 a → m ∈ 𝓜₂ b → r • m ∈ 𝓜₂ (a + b))
+    (f : M₀ →ₗ[A] M₁) (g : M₁ →ₗ[A] M₂)
+    (hf : ∀ n x, x ∈ 𝓜₀ n → f x ∈ 𝓜₁ n)
+    (hg : ∀ n x, x ∈ 𝓜₁ n → g x ∈ 𝓜₂ n)
+    (hex : Function.Exact f g) :
+    ∀ y ∈ homogeneousPieceAway 𝓜₁ s d 0,
+      (IsLocalizedModule.map (Submonoid.powers s) (mkLinearMap (Submonoid.powers s) M₁)
+        (mkLinearMap (Submonoid.powers s) M₂) g) y = 0 ↔
+      ∃ x ∈ homogeneousPieceAway 𝓜₀ s d 0,
+        (IsLocalizedModule.map (Submonoid.powers s) (mkLinearMap (Submonoid.powers s) M₀)
+          (mkLinearMap (Submonoid.powers s) M₁) f) x = y := by
+  sorry
+
 theorem graded_localization_exact {A : Type u} [CommRing A]
     (𝓐 : ℤ → AddSubgroup A) (_h𝓐 : DirectSum.IsInternal 𝓐)
     (_hmul : ∀ (a b : ℤ) (r t : A), r ∈ 𝓐 a → t ∈ 𝓐 b → r * t ∈ 𝓐 (a + b))
@@ -69,6 +93,25 @@ theorem graded_localization_exact {A : Type u} [CommRing A]
         (homogeneousPieceAway (𝓜₂ i) s d n)) ∧
       (∀ y ∈ homogeneousPieceAway (𝓜₁ i) s d 0,
         gₛ y = 0 ↔ ∃ x ∈ homogeneousPieceAway (𝓜₀ i) s d 0, fₛ x = y) := by
-  sorry
+  intro i
+  let T := Submonoid.powers s
+  let fₛ := IsLocalizedModule.map T (mkLinearMap T (M₀ i))
+    (mkLinearMap T (M₁ i)) (f i)
+  let gₛ := IsLocalizedModule.map T (mkLinearMap T (M₁ i))
+    (mkLinearMap T (M₂ i)) (g i)
+  have hExact : Function.Exact fₛ gₛ :=
+    IsLocalizedModule.map_exact T _ _ _ (f i) (g i) (hex i)
+  refine ⟨hExact, ?_, ?_, ?_⟩
+  · intro n x hx
+    rcases hx with ⟨k, m, hm, rfl⟩
+    refine ⟨k, f i m, hf i _ _ hm, ?_⟩
+    exact (IsLocalizedModule.map_LocalizedModules T (f i) m _).symm
+  · intro n x hx
+    rcases hx with ⟨k, m, hm, rfl⟩
+    refine ⟨k, g i m, hg i _ _ hm, ?_⟩
+    exact (IsLocalizedModule.map_LocalizedModules T (g i) m _).symm
+  · exact graded_localization_degree_zero_exact 𝓐 _h𝓐 _hmul s d _hd _hs
+      (𝓜₀ i) (𝓜₁ i) (𝓜₂ i) (_h𝓜₀ i) (_h𝓜₁ i) (_h𝓜₂ i)
+      (_hsmul₀ i) (_hsmul₁ i) (_hsmul₂ i) (f i) (g i) (hf i) (hg i) (hex i)
 
 end LocalizedModule

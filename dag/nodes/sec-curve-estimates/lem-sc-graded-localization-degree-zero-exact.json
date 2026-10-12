@@ -1,0 +1,161 @@
+{
+ "id": "lem-sc-graded-localization-degree-zero-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-graded-localization-exact",
+   "place": "intermediate degree-zero component argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "title": "Exactness on the degree-zero homogeneous localized piece",
+ "statement": "For a single graded exact triple satisfying the hypotheses of lem-sc-graded-localization-exact, the induced localized maps are exact on the degree-zero homogeneous pieces.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph (localization exactness)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-sc-localized-homogeneous-piece"
+ ],
+ "proof": [
+  {
+   "text": "Apply IsLocalizedModule.map_exact to the powers of s. For y in the degree-zero homogeneous piece with localized g-map zero, obtain a localized preimage z under the localized f-map. Represent z by finitely many homogeneous components using the internal direct-sum decomposition of M₀. The degree-preservation hypothesis for f sends the component of degree e to degree e, so the degree-zero component z₀ maps to the degree-zero component of y; since y itself has degree zero, all nonzero-degree components of f(z) vanish and f(z₀)=y. The definition of homogeneousPieceAway shows z₀ lies in the degree-zero piece. Conversely, exactness of f and g gives gₛ(fₛ(z₀))=0.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Tag 09MR, Mayer–Vietoris paragraph"
+   }
+  },
+  {
+   "text": "The same component argument applies when d = 0 and when the localization is subsingleton (for example s = 0); zero belongs to every required homogeneous subgroup, so these edge cases introduce no extra hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Tag 09MR, Mayer–Vietoris paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exactness of graded module localization and degree zero part",
+   "results": "No declaration for graded localization exactness in this form",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization exact short exact sequence graded module",
+   "results": "Generic Module.Localization exactness only; no graded degree-zero theorem",
+   "date": "2026-10-11",
+   "verdict": "generalization: ungraded localization"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'localization.*exact|graded.*localization|degreeZero' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Generic localization lemmas, no combined graded statement",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero part of localization of graded module at homogeneous element preserves exact sequences (reviewer R-mvd)",
+   "results": "exact_of_isLocalized_span, IsLocalizedModule.map_exact, LocalizedModule.map_exact, ModuleCat.localizedModule_functor_map_exact: ungraded localization exactness only; HomogeneousLocalization in Mathlib is for rings, not modules",
+   "date": "2026-10-10",
+   "verdict": "generalization: ungraded localization exactness; no graded degree-zero module statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Module.GradedLocalizationExact",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-graded-localization-exact",
+  "worker": "stage1",
+  "summary": "No sorry-free slopmaster2 declaration states this item. I split the imported localization claim into ordinary exactness after localization, using the existing Mathlib-backed node lem-weil-pbc-localization-module-exact, and the elementary homogeneous-component argument proving exactness on the degree-zero parts and termwise for arbitrary exact sequences. The statement and source remain unchanged.",
+  "blueprint": [
+   "09MR Mayer–Vietoris paragraph: exactness is preserved by localization and passage to degree zero"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Step 1 uses its ordinary localization exactness as the generic algebraic tool; the curve-estimate unit has no separate localization exactness node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T203949-L-832576",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Module.GradedLocalizationExact",
+  "file": "lean/Sheaf/Algebra/Module/GradedLocalizationExact.lean",
+  "declaration": "LocalizedModule.graded_localization_degree_zero_exact",
+  "statement": "theorem graded_localization_degree_zero_exact {A : Type u} [CommRing A]\n    (𝓐 : ℤ → AddSubgroup A) (_h𝓐 : DirectSum.IsInternal 𝓐)\n    (_hmul : ∀ (a b : ℤ) (r t : A), r ∈ 𝓐 a → t ∈ 𝓐 b → r * t ∈ 𝓐 (a + b))\n    (s : A) (d : ℤ) (_hd : 0 ≤ d) (_hs : s ∈ 𝓐 d)\n    {M₀ M₁ M₂ : Type*} [AddCommGroup M₀] [AddCommGroup M₁] [AddCommGroup M₂]\n    [Module A M₀] [Module A M₁] [Module A M₂]\n    (𝓜₀ : ℤ → AddSubgroup M₀) (𝓜₁ : ℤ → AddSubgroup M₁)\n    (𝓜₂ : ℤ → AddSubgroup M₂)\n    (_h𝓜₀ : DirectSum.IsInternal 𝓜₀) (_h𝓜₁ : DirectSum.IsInternal 𝓜₁)\n    (_h𝓜₂ : DirectSum.IsInternal 𝓜₂)\n    (_hsmul₀ : ∀ (a b : ℤ) (r : A) (m : M₀), r ∈ 𝓐 a → m ∈ 𝓜₀ b → r • m ∈ 𝓜₀ (a + b))\n    (_hsmul₁ : ∀ (a b : ℤ) (r : A) (m : M₁), r ∈ 𝓐 a → m ∈ 𝓜₁ b → r • m ∈ 𝓜₁ (a + b))\n    (_hsmul₂ : ∀ (a b : ℤ) (r : A) (m : M₂), r ∈ 𝓐 a → m ∈ 𝓜₂ b → r • m ∈ 𝓜₂ (a + b))\n    (f : M₀ →ₗ[A] M₁) (g : M₁ →ₗ[A] M₂)\n    (hf : ∀ n x, x ∈ 𝓜₀ n → f x ∈ 𝓜₁ n)\n    (hg : ∀ n x, x ∈ 𝓜₁ n → g x ∈ 𝓜₂ n)\n    (hex : Function.Exact f g) :\n    ∀ y ∈ homogeneousPieceAway 𝓜₁ s d 0,\n      (IsLocalizedModule.map (Submonoid.powers s) (mkLinearMap (Submonoid.powers s) M₁)\n        (mkLinearMap (Submonoid.powers s) M₂) g) y = 0 ↔\n      ∃ x ∈ homogeneousPieceAway 𝓜₀ s d 0,\n        (IsLocalizedModule.map (Submonoid.powers s) (mkLinearMap (Submonoid.powers s) M₀)\n          (mkLinearMap (Submonoid.powers s) M₁) f) x = y",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gle1203",
+  "group": "H1",
+  "result": "fix",
+  "note": "commutative Z-graded ring = IsInternal 𝓐 + hmul (FIX: was GradedRing, sibling C1 convention); graded modules = IsInternal + hsmul A_aM_b⊆M_(a+b) (FIX: was Decomposition/GradedSMul instances); s∈A_d, 0≤d; f,g A-linear degree-preserving hf/hg; im f=ker g as Function.Exact; M_s via LocalizedModule.Away/IsLocalizedModule.map m/s^k↦f(m)/s^k; degree-n piece {m/s^k, m∈M_(n+kd)} = node's e-kd convention; M_(s)=piece 0; conclusions Function.Exact fₛ gₛ, MapsTo degree preservation, image=kernel on degree-zero sets; ∀ i over arbitrary I for finite/infinite sequences; no Mathlib/landed module homogeneous localization (HomogeneousLocalization is ring-only)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T203949-L-832576",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
