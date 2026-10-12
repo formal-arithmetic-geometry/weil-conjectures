@@ -7,9 +7,9 @@ module
 
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Sheaf.FieldTheory.MakeSeparable
-import Sheaf.FieldTheory.SeparableExtension
-import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.RingTheory.Smooth.Field
+import Sheaf.RingTheory.H1CotangentFiniteSubfields
 
 /-!
 # Vanishing of the first cotangent homology of a field over its positive prime field
@@ -61,6 +61,11 @@ theorem subsingleton_h1Cotangent_of_charP
     (p : ℕ) (hp : 0 < p) (K : Type u) [Field K] [CharP K p] :
     letI := ZMod.algebra K p
     Subsingleton (H1Cotangent (ZMod p) K) := by
-  sorry
+  have : Fact p.Prime := ⟨CharP.char_prime_of_ne_zero K (Nat.ne_of_gt hp)⟩
+  let := ZMod.algebra K p
+  apply subsingleton_h1Cotangent_of_finite_subfields
+  intro E hE
+  have : Algebra.EssFiniteType (ZMod p) E := IntermediateField.essFiniteType_iff.mpr hE
+  exact Algebra.FormallySmooth.subsingleton_h1Cotangent
 
 end Algebra
