@@ -1,0 +1,160 @@
+{
+ "id": "new-affine-module-tensor-extension-epi",
+ "kind": "statement",
+ "title": "The second affine tensor unit is an epimorphism",
+ "statement": "Let $f:U\\to X$ be a scheme morphism [def-pc-scheme], $A=f_*\\mathcal O_U$, and $S$ restriction of scalars along $\\mathcal O_X\\to A$ on sheaves of modules [def-weil-sheaf-of-modules-category]. Let $T=f^*$ be the tensor pullback [def-pc-module-pullback]. Let $B$ be a sheaf of commutative rings on $U$, $b:\\mathcal O_U\\to B$, and $\\epsilon:B\\to\\mathcal O_U$. Suppose $P:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(B)$ and $H:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(\\mathcal O_U)$ are functors, $\\kappa:P\\operatorname{Res}_b\\simeq ST$, and $h_G:H(G)=\\mathcal O_U\\otimes_{B,\\epsilon}P(G)$ is an object equality for every $G$, using the sheafified tensor product [def-pur-sheaf-tensor-product]. Suppose $\\gamma:ST\\to H$ is natural and for every open $W\\subseteq U$ and section $p\\in P(G)(W)$, transporting $\\gamma_G(\\kappa_G(p))$ by $h_G$ gives the sheafification of $1\\otimes p$ [def-weil-presheaf-modules-sheafification]. Then every $\\gamma_G$ is an epimorphism: for any module sheaf $N$ and maps $q,r:H(G)\\to N$, $\\gamma_Gq=\\gamma_Gr$ implies $q=r$. No affineness, quasi-coherence or splitting of $\\epsilon$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, morphisms-lemma-affine-equivalence-modules, construction of h and its tensor-unit map; Tag 008A sheafified extension of scalars"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Given maps q,r with gamma_G followed by q equal to gamma_G followed by r, precompose with the inverse object equality from h_G and apply the injective sheafification Hom equivalence. Thus equality reduces to the induced maps from the tensor presheaf.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At an arbitrary open W, use linearity and the tensor universal property: maps out of scalar extension are determined by their values on 1 tensor p for each p in P(G)(W). The formula for gamma composed with kappa identifies these values with evaluation of gamma_G followed by q or r. Use the hypothesized equality, cancel the two equality transports, and conclude. This is exactly the Lean proof using ModuleCat.ExtendScalars.hom_ext and the sheafification Hom equivalence. Zero modules and empty spaces use the same universal properties.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "N3 stage-3 worker",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB tensor-unit map; elementary Hom-universal-property elaboration written and proved in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction counit for pullback modules over direct image algebra of affine morphism is isomorphism",
+   "results": "Scheme.Modules.pullbackPushforwardAdjunction and open-immersion counit; no exact tensor-unit epimorphism result",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "results": "Generic equality transporting counits along uniqueness of left adjoints; used by the parent, not a match for tensor-unit epimorphy",
+   "date": "2026-10-12",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Aa]djunction|counit.*[Ii]so",
+   "results": "Generic counit isomorphisms and scheme pullback adjunctions, no exact match. Direct source inspection found ModuleCat.ExtendScalars.hom_ext and PresheafOfModules.sheafificationHomEquiv, sufficient to prove the helper.",
+   "date": "2026-10-12",
+   "verdict": "proved from universal properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of extension of scalars is an epimorphism after restriction along a split map of sheaves of rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map into a sheafified extension of scalars is an epimorphism if its image contains the sheafification of every pure tensor 1 tensor m",
+   "results": "GeneratingSections.epi and generic sheaf/presheaf generators; none directly gives this comparison map cancellation. Independent second reading retained the shorter Hom-equivalence proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.ExtendScalars.hom_ext",
+   "results": "Exact tensor Hom-extensionality lemma used in the proof, not the sheafified comparison epimorphism statement.",
+   "date": "2026-10-12",
+   "verdict": "used universal property"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationHomEquiv|ExtendScalars.hom_ext|restrictScalars.*Faithful",
+   "results": "Sheafification Hom equivalence and faithful presheaf scalar restriction found; no existing sheafified tensor comparison epi theorem. Repository affine_module_tensor_counitFactor only asserts epimorphy on R(F), insufficient for the left triangle at arbitrary G.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence for the finite morphism: identification of the underived tensor pullback counit with the affine correspondence evaluation",
+   "via": [
+    "new-affine-algebra-module-counit-iso",
+    "lem-sc-affine-algebra-module-adjunction-isos",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleTensorExtensionEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleTensorExtensionEpi.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_tensor_extension_epi",
+  "statement": "theorem affine_module_tensor_extension_epi\n    (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)\n    (ε : B ⟶ U.sheaf)\n    (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))\n    (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f)\n    (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules)\n    (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G))\n    (γ : S ⋙ tensorPullback f ⟶ H)\n    (hunit : ∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ)\n        (p : (P.obj G).val.obj W),\n      ((eqToHom (hobj G)).val.app W)\n        ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) =\n        ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app\n          (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W\n            ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W,(ε.hom.app W).hom] p)) :\n    ∀ G, Epi (γ.app G)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T160829-L-2611947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T160829-L-2611947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

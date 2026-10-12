@@ -16,24 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Identify the canonical left adjoint with tensor pullback for g by its Hom adjunction. Tensor associativity identifies it with the two operations in the affine module correspondence. Its counit is alpha: on pure tensors the evaluation sends a tensor s to a times s, uniquely by the tensor universal property. The correspondence proves alpha invertible on quasi-coherent O_X-modules. Transport it across the adjunction-compatible isomorphism of left adjoints. No surjectivity of f is used; empty schemes and zero modules satisfy the claim.",
+   "text": "Extract the tensor construction data H, gamma, alpha and beta and invertibility of alpha on quasi-coherent modules from affine_module_correspondence. Retain the second tensor unit formula and the two comparison equations with the scheme tensor pullback adjunction.",
    "uses": [
     "lem-weil-pbc-affine-module-correspondence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The second extension unit gamma is an epimorphism by affine_module_tensor_extension_epi. Scalar restriction S is faithful, since it leaves the underlying component functions unchanged. Use the chosen tensorPullback adjunction T left adjoint to R followed by S. The equation S(beta)=adj.homEquiv(gamma) and gamma_R followed by alpha=counit prove the right triangle after faithful scalar restriction. For the left triangle, cancel gamma, use naturality of gamma to move H(beta) across it, and the same counit equation. The inverse Hom identity gives the left triangle. Thus H is left adjoint to R with counit exactly alpha.",
+   "uses": [
+    "new-affine-module-tensor-extension-epi",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify R definitionally with RingedSpace.moduleDirectImage(toDirectImageAlgebraSpace f). Apply Mathlib Adjunction.leftAdjointUniq_hom_app_counit to the canonical adjunction and the constructed one. It expresses the canonical counit component as a component of the isomorphism of left adjoints followed by alpha. Both factors are isomorphisms on the given quasi-coherent module, so their composite is an isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-module-correspondence"
+  "lem-weil-pbc-affine-module-correspondence",
+  "new-affine-module-tensor-extension-epi",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
-  "by": "R2 stage 3",
+  "by": "N3 stage-3 worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof; Tag 01SB (read online)"
+  "place": "Tag 0AVW final paragraph, via Tag 01SB; categorical triangle assembly written in Lean"
  },
  "mathlib_searches": [
   {
@@ -120,9 +131,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T131310-L-1354875",
-  "kind": "interface"
+  "landing": "20261012T160829-L-2611947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
