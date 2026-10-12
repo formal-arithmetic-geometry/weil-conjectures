@@ -10,10 +10,6 @@ public import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange
 import Sheaf.AlgebraicGeometry.FirstOrderThickeningBaseChange
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Thickening
-import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
-import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 
 /-!
 # Universal first order thickenings under flat base change
@@ -75,6 +71,55 @@ theorem universalFirstOrderThickening_flat_base_change
               (@Scheme.Modules.closedImmersion_conormal_functorial
                 (pullback g s) (pullback g hW) W' W iZ iW HZ.1.1 HW.1.1
                 (pullback.snd g s) (pullback.snd g hW) hsnd).2).2) → IsIso c := by
-  sorry
+  classical
+  let hu : FormallyUnramified (pullback.fst g hW) :=
+    MorphismProperty.pullback_fst g hW (inferInstance : FormallyUnramified hW)
+  have hc : IsPullback iZ (pullback.snd g hW) (pullback.snd g s) iW := by
+    have outer : IsPullback (pullback.snd g hW)
+        (iZ ≫ pullback.fst g s) (iW ≫ s) g := by
+      simpa only [_hfst, HW.2.1] using (IsPullback.of_hasPullback g hW).flip
+    exact (IsPullback.of_bot outer hsnd.symm (IsPullback.of_hasPullback g s).flip).flip
+  have ht := (IsFirstOrderThickening.baseChange iW (pullback.snd g s) HW.1).1
+  have hiZ : IsFirstOrderThickening iZ := by
+    let := ht.1
+    have hi : IsClosedImmersion iZ := by
+      rw [← hc.isoPullback_hom_fst]
+      infer_instance
+    refine ⟨hi, ?_⟩
+    rw [← hc.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso]
+    exact ht.2
+  have HZ : IsUniversalFirstOrderThickening (pullback.fst g hW) iZ
+      (pullback.fst g s) := by
+    refine ⟨hiZ, _hfst, ?_⟩
+    intro T T' j b a hj hab
+    have habW : j ≫ (b ≫ g) = (a ≫ pullback.snd g hW) ≫ hW := by
+      rw [← Category.assoc, hab, Category.assoc, pullback.condition]
+      simp only [Category.assoc]
+    obtain ⟨c, hcprop, hcuniq⟩ := HW.2.2 j (b ≫ g) (a ≫ pullback.snd g hW) hj habW
+    let d : T' ⟶ pullback g s := pullback.lift b c hcprop.1.symm
+    have hd : d ≫ pullback.fst g s = b ∧ j ≫ d = a ≫ iZ := by
+      refine ⟨pullback.lift_fst _ _ _, ?_⟩
+      apply pullback.hom_ext
+      · simp only [Category.assoc, d, pullback.lift_fst, _hfst]
+        exact hab
+      · simp only [Category.assoc, d, pullback.lift_snd, hsnd]
+        exact hcprop.2
+    refine ⟨d, hd, ?_⟩
+    intro e he
+    apply pullback.hom_ext
+    · exact he.1.trans hd.1.symm
+    · have hec : e ≫ pullback.snd g s = c := by
+        apply hcuniq
+        constructor
+        · rw [Category.assoc, ← pullback.condition, ← Category.assoc, he.1]
+        · rw [← Category.assoc, he.2, Category.assoc, hsnd]
+          simp only [Category.assoc]
+      simpa only [d, pullback.lift_snd] using hec
+  refine ⟨hu, HZ, inferInstance, ?_⟩
+  intro c hcanonical
+  let := HZ.1.1
+  let := HW.1.1
+  exact (Scheme.Modules.closedImmersion_conormal_flat_base_change iZ iW
+    (pullback.snd g s) (pullback.snd g hW) hsnd hc.isLimit c hcanonical).2 inferInstance
 
 end AlgebraicGeometry

@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "*$Z\\subset Z'$ is a first order thickening over $X$.* Let $s:W'\\to Y$ be the structure morphism, so $s\\circ i_W=h'$, let $Z'=X\\times_YW'$ be the fibre product of $g$ and $s$ with projections $p_X:Z'\\to X$ and $f':Z'\\to W'$, and $i_Z=\\mathrm{id}_X\\times_Yi_W$ the induced morphism [def-pc-fibre-product], so $p_X\\circ i_Z=h$ and $f'\\circ i_Z=i_W\\circ f$. In the diagram with rows $Z\\xrightarrow{f}W$, $Z'\\xrightarrow{f'}W'$, $X\\xrightarrow{g}Y$ and columns $i_Z,p_X$ resp. $i_W,s$, the lower square is cartesian (definition of $Z'$) and the outer rectangle ($Z\\to W$, $Z\\xrightarrow{p_X\\circ i_Z=h}X$ over $Y$) is cartesian (definition of $Z$); by [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(Z,i_Z,f)$ is a fibre product of $f'$ and $i_W$. Since $W\\subset W'$ is a first order thickening [def-weil-pbc-universal-first-order-thickening], [def-sbc-first-order-thickening], [lem-weil-pbc-first-order-thickening-base-change] applied to $i=i_W$ and $p=f'$ shows that $i_Z$ is a closed immersion whose ideal sheaf $\\mathcal I_Z=\\mathcal I_W\\mathcal O_{Z'}$ has square zero. So $Z\\subset Z'$ with $p_X:Z'\\to X$, $p_X\\circ i_Z=h$, is a first order thickening of $Z$ over $X$, and $(f,f'):(Z\\subset Z')\\to(W\\subset W')$ is a morphism of thickenings.",
+   "text": "*$Z\\subset Z'$ is a first order thickening over $X$.* Let $s:W'\\to Y$ be the structure morphism, so $s\\circ i_W=h'$, let $Z'=X\\times_YW'$ be the fibre product of $g$ and $s$ with projections $p_X:Z'\\to X$ and $f':Z'\\to W'$, and $i_Z=\\mathrm{id}_X\\times_Yi_W$ the induced morphism [def-pc-fibre-product], so $p_X\\circ i_Z=h$ and $f'\\circ i_Z=i_W\\circ f$. In the diagram with rows $Z\\xrightarrow{f}W$, $Z'\\xrightarrow{f'}W'$, $X\\xrightarrow{g}Y$ and columns $i_Z,p_X$ resp. $i_W,s$, the lower square is cartesian (definition of $Z'$) and the outer rectangle ($Z\\to W$, $Z\\xrightarrow{p_X\\circ i_Z=h}X$ over $Y$) is cartesian (definition of $Z$); by [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(Z,i_Z,f)$ is a fibre product of $f'$ and $i_W$. Since $W\\subset W'$ is a first order thickening [def-weil-pbc-universal-first-order-thickening], [def-sbc-first-order-thickening], [lem-weil-pbc-first-order-thickening-base-change] applied to $i=i_W$ and $p=f'$ shows that $i_Z$ is a closed immersion whose ideal sheaf $\\mathcal I_Z=\\mathcal I_W\\mathcal O_{Z'}$ has square zero. So $Z\\subset Z'$ with $p_X:Z'\\to X$, $p_X\\circ i_Z=h$, is a first order thickening of $Z$ over $X$, and $(f,f'):(Z\\subset Z')\\to(W\\subset W')$ is a morphism of thickenings. In Lean, the cartesian square gives the comparison isomorphism to the chosen pullback of the ambient second projection and i_W. Transport the closed immersion by composition with this isomorphism, and transport the square-zero kernel by Scheme.Hom.ker_comp_of_isIso.",
    "uses": [
     "def-pc-fibre-product",
     "lem-weil-pbc-cartesian-square-pasting",
@@ -85,9 +85,8 @@
    }
   },
   {
-   "text": "*(3) The conormal map is an isomorphism.* By step 1 $h$ is formally unramified and by step 3 $(Z',i_Z,p_X)$ is a universal first order thickening of $Z$ over $X$; universal first order thickenings are unique up to unique isomorphism compatible with $Z$ [lem-weil-pbc-universal-first-order-thickening-exists], so $\\mathcal C_{Z/X}$ may be computed with it: $\\mathcal C_{Z/X}=i_Z^*\\mathcal I_Z$, and likewise $\\mathcal C_{W/Y}=i_W^*\\mathcal I_W$ [def-weil-pbc-conormal-sheaf-formally-unramified], [def-pc-module-pullback]. The canonical map $f^*\\mathcal C_{W/Y}\\to\\mathcal C_{Z/X}$ of the statement is the map $c$ of [lem-weil-pbc-closed-immersion-conormal-functorial] for the commutative square $f'\\circ i_Z=i_W\\circ f$ of closed immersions $i_Z,i_W$. That square is cartesian (step 2) and $f'$ is flat (step 4), so [lem-weil-pbc-closed-immersion-conormal-flat-base-change] shows that $c$ is an isomorphism of $\\mathcal O_Z$-modules.",
+   "text": "Compute both conormal modules directly from the supplied universal thickenings using [def-weil-pbc-conormal-sheaf-formally-unramified] and [def-pc-module-pullback]: these definitions are the tensor pullbacks of the kernel ideals for i_W and i_Z. No choice of a further thickening or independence comparison is required. For the cartesian square constructed in step 2, the map specified in the statement is exactly the canonical map of [lem-weil-pbc-closed-immersion-conormal-functorial]. Apply [lem-weil-pbc-closed-immersion-conormal-flat-base-change] to that map and the flat ambient second projection from step 4. Its isomorphism conclusion proves the final clause.",
    "uses": [
-    "lem-weil-pbc-universal-first-order-thickening-exists",
     "def-weil-pbc-conormal-sheaf-formally-unramified",
     "def-pc-module-pullback",
     "lem-weil-pbc-closed-immersion-conormal-functorial",
@@ -110,7 +109,6 @@
   "lem-weil-pbc-first-order-thickening-base-change",
   "lem-weil-pbc-flat-morphism-base-change",
   "def-weil-flat-morphism",
-  "lem-weil-pbc-universal-first-order-thickening-exists",
   "def-weil-pbc-conormal-sheaf-formally-unramified",
   "def-pc-module-pullback",
   "lem-weil-pbc-closed-immersion-conormal-functorial",
@@ -209,5 +207,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T202300-L-711244",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
