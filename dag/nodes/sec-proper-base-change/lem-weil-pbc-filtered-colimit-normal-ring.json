@@ -24,77 +24,22 @@
  ],
  "proof": [
   {
-   "text": "*Reduction to one prime and the colimit of the localizations.* By the definition of a normal ring [def-weil-pbc-normal-ring] we must show that $R_{\\mathfrak p}$ is a normal domain for every prime ideal $\\mathfrak p\\subset R$. Fix $\\mathfrak p$, write $\\iota_i:R_i\\to R$ for the coprojections and put $\\mathfrak p_i=\\iota_i^{-1}(\\mathfrak p)$, a prime of $R_i$. By [lem-weil-pbc-filtered-colimit-localization-at-prime], $i\\mapsto D_i:=(R_i)_{\\mathfrak p_i}$ is a functor from the filtered category $I$ to commutative rings, with transition maps $D(a):D_i\\to D_j$ induced by $R(a)$, and $R_{\\mathfrak p}$ with the maps $\\kappa_i:D_i\\to R_{\\mathfrak p}$, $x/s\\mapsto\\iota_i(x)/\\iota_i(s)$, is its colimit in commutative rings [def-weil-pbc-category-colimit]. Since $R_i$ is a normal ring, each $D_i$ is a normal domain [def-weil-pbc-normal-ring]. So it suffices to show: a filtered colimit $R_{\\mathfrak p}=\\varinjlim_ID_i$ of normal domains, which is moreover nonzero, is a normal domain (Stacks: 'we reduce to proving the statement of the lemma for normal domains').",
+   "text": "Apply the domain and integral-closedness component lemmas to the chosen prime localization.",
    "uses": [
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-filtered-colimit-normal-ring-domain",
+    "lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), proof, lines 8320-8334"
-   }
-  },
-  {
-   "text": "*Common lifts.* Every finite family $x_1,\\dots,x_m$ of elements of $R_{\\mathfrak p}$ comes from one index: by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2), applied to the diagram $i\\mapsto D_i$ of commutative $\\mathbb Z$-algebras (= commutative rings), $x_l=\\kappa_{i_l}(y_l)$ with $y_l\\in D_{i_l}$; as $I$ is filtered there are an object $k$ and morphisms $a_l:i_l\\to k$, and since $\\kappa_k\\circ D(a_l)=\\kappa_{i_l}$ (cocone), $x_l=\\kappa_k(D(a_l)(y_l))$ for all $l$. Moreover, if $y,y'\\in D_k$ are lifts at a common index and $z\\in D_k$ with $\\kappa_k(z)=0$, then by [lem-weil-pbc-filtered-colimit-rings-zero] there is $f:k\\to k'$ with $D(f)(z)=0$, and the images $D(f)(y),D(f)(y')$ are again lifts of the same elements; so finitely many relations among the lifted elements that hold in $R_{\\mathfrak p}$ hold already in some $D_{k'}$ (apply the zero criterion to each relation and pass to a common later index, again by filteredness).",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), proof, lines 8320-8334"
-   }
-  },
-  {
-   "text": "*$R_{\\mathfrak p}$ is a domain.* (The Stacks proof leaves this part implicit.) $R_{\\mathfrak p}$ is a local ring with maximal ideal $\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], so $1\\neq0$ in $R_{\\mathfrak p}$. Let $x,y\\in R_{\\mathfrak p}$ with $xy=0$. By step 2 there are $k$ and $u,v\\in D_k$ with $\\kappa_k(u)=x$, $\\kappa_k(v)=y$, and since $\\kappa_k(uv)=xy=0$, after passing along some $f:k\\to k'$ we may assume $uv=0$ in $D_k$. As $D_k$ is a domain (step 1), $u=0$ or $v=0$, hence $x=0$ or $y=0$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), proof, lines 8320-8334"
-   }
-  },
-  {
-   "text": "*$R_{\\mathfrak p}$ is integrally closed.* Let $K$ be the field of fractions of the domain $R_{\\mathfrak p}$ (step 3); $R_{\\mathfrak p}\\to K$ is injective. Let $\\xi\\in K$ be a root of a monic polynomial $P(T)=T^n+c_1T^{n-1}+\\dots+c_n$ with $c_1,\\dots,c_n\\in R_{\\mathfrak p}$; write $\\xi=a/b$ with $a,b\\in R_{\\mathfrak p}$, $b\\ne0$. Then $e:=a^n+c_1a^{n-1}b+\\dots+c_nb^n=b^nP(a/b)=0$ in $K$, hence in $R_{\\mathfrak p}$. By step 2 there are an index $k$ and $\\alpha,\\beta,\\gamma_1,\\dots,\\gamma_n\\in D_k$ mapping under $\\kappa_k$ to $a,b,c_1,\\dots,c_n$ such that $\\alpha^n+\\gamma_1\\alpha^{n-1}\\beta+\\dots+\\gamma_n\\beta^n=0$ in $D_k$ (this element maps to $e=0$; pass to a later index). Since $\\kappa_k(\\beta)=b\\neq0$, $\\beta\\neq0$. Dividing by $\\beta^n$ in the field of fractions $\\operatorname{Frac}(D_k)$ gives $P_k(\\alpha/\\beta)=0$ for the monic $P_k(T)=T^n+\\gamma_1T^{n-1}+\\dots+\\gamma_n\\in D_k[T]$. As $D_k$ is a normal domain (step 1) [def-weil-pbc-normal-ring], $\\alpha/\\beta=r$ for some $r\\in D_k$, i.e. $\\alpha=r\\beta$ in $D_k$ (since $D_k\\to\\operatorname{Frac}(D_k)$ is injective). Applying the ring map $\\kappa_k$: $a=\\kappa_k(r)b$, so $\\xi=a/b=\\kappa_k(r)\\in R_{\\mathfrak p}$. (Stacks: 'we can find a (sufficiently large) $i$ such that $a,b$ come from $a_i,b_i$, $P$ comes from a monic $P_i$ and $P_i(a_i/b_i)=0$. Since $R_i$ is normal we see $a_i/b_i\\in R_i$ and hence also $a/b\\in R$.')",
-   "uses": [
-    "def-weil-pbc-normal-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), proof, lines 8320-8334"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 3 and 4, $R_{\\mathfrak p}$ is a domain integrally closed in its field of fractions, i.e. a normal domain; as $\\mathfrak p$ was arbitrary, $R$ is a normal ring [def-weil-pbc-normal-ring]. The argument used only the filtered-colimit descriptions of steps 1-2, so no reduction from filtered to directed index categories (Categories, Lemma Tag 0032) is needed, and no condition on the transition maps is used.",
-   "uses": [
-    "def-weil-pbc-normal-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), proof, lines 8320-8334"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-rings-zero",
-  "def-weil-pbc-localization-at-prime"
+  "lem-weil-pbc-filtered-colimit-normal-ring-domain",
+  "lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), proof (lines 8319-8334), stated there for a directed system; the domain part and the common-index bookkeeping, left implicit in Stacks, are written out from the filtered-colimit descriptions (Algebra, Lemmas Tag 00D6, 00D7)"
+  "place": "Algebra, Lemma Tag 037D"
  },
  "mathlib_searches": [
   {
@@ -184,5 +129,15 @@
   "group": "E1",
   "result": "pass",
   "note": "I small filtered (Type w, SmallCategory, IsFiltered); F : I ⥤ CommRingCat with HasColimit; hF = inline NORMAL RING per stage; conclusion = inline NORMAL RING on colimit F carrier; no transition-map condition; matches STATE FILTERED COLIMITS OF RINGS form of K1 ccd06d885"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

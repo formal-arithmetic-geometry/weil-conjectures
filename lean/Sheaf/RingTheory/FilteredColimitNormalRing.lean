@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.FilteredColimitNormalRingDomain
+import Sheaf.RingTheory.FilteredColimitNormalRingIntegrallyClosed
 
 /-!
 # A filtered colimit of normal rings is normal
@@ -48,6 +50,10 @@ theorem isNormal_of_filtered_colimit
     ∀ (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧
         IsIntegrallyClosed (Localization.AtPrime p) := by
-  sorry
+  set_option linter.style.haveILetI false in
+  intro p hp
+  letI := hp
+  exact ⟨filtered_colimit_localization_isDomain F (fun i q hq => (hF i q).1) p,
+    filtered_colimit_localization_isIntegrallyClosed F (fun i q hq => (hF i q).2) p⟩
 
 end CommRingCat
