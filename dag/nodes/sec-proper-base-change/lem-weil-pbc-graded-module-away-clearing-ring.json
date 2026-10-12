@@ -12,8 +12,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/01M4",
-  "place": "Fraction computation for (1)(e), expanded and checked by the second reader S2"
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01M4 (1)(e), explicit graded fraction calculation; U2 second reading, 2026-10-13. Mathlib Away.mk_surjective handles nilpotence; mk'_spec and map_units supply the fraction equations and cancellation."
  },
  "mathlib_searches": [
   {
@@ -69,7 +69,7 @@
  "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be a commutative graded ring and $M=\\bigoplus_{z\\in\\mathbf Z}M_z$ an $S$-module with $S_nM_z\\subset M_{n+z}$. Let $F=\\{(f,d):d>0, f\\in S_d\\}$, $R_f=S_{(f)}$, $L_f=S_f$, $N_f=M_f$ [def-nagata-homogeneous-localization-degree-zero, def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. Write $f\\preceq g$ for a homogeneous relation $g^e=af$ with $e>0$. Suppose submodules $Z_f\\subset N_f$ have precisely the equal-degree fractions as carriers [def-sc-degree-zero-module-fractions]. Suppose maps $\\lambda_{f,g}:N_f\\to N_g$, $\\lambda^S_{f,g}:L_f\\to L_g$, $\\rho_{f,g}:Z_f\\to Z_g$, $\\rho^S_{f,g}:R_f\\to R_g$ and $U_{f,g}=g^{\\deg f}/f^{\\deg g}$ are given. Assume $f/1$ is a unit with inverse $a/g^e$, multiplication by $f$ on $N_g$ is bijective, $\\lambda$ is the unique $S$-linear extension of $x/1$ with formula $x/f^m\\mapsto a^mx/g^{em}$, $\\lambda^S$ preserves $S$, $\\lambda$ is semilinear over $\\lambda^S$, $\\rho,\\rho^S$ are their restrictions, $\\rho$ is semilinear over $\\rho^S$, and $\\rho^S(U)$ is a unit. Then for every $f\\preceq g$, each $b\\in R_g$ admits $n\\ge0$ and $a\\in R_f$ such that $\\rho^S(U)^n b=\\rho^S(a)$.",
  "proof": [
   {
-   "text": "If g is nilpotent, S_g and its homogeneous degree-zero subring R_g are zero;\nchoose n = 0 and x = 0. Otherwise the homogeneous fraction representation gives\ny = b/g^n with b homogeneous of degree n*deg(g), as in\nHomogeneousLocalization.Away.mk_surjective. Put d = deg(f), delta = deg(g), and\nB = g^(n*(d-1))*b. The graded multiplication rule gives degree n*d*delta for B,\nso x = B/f^(n*delta) lies in R_f. Because lambdaS preserves S and f/1 is a unit,\nit sends a fraction c/f^m to c/f^m in S_g. In particular it sends U to g^d/f^delta.\nConsequently lambdaS(x) = B/f^(n*delta) = (g^d/f^delta)^n*y in S_g, using d > 0\nand n*(d-1)+n = n*d. The compatibility of rhoS with lambdaS and injectivity of\nthe inclusion R_g into S_g yield rhoS(x) = rhoS(U)^n*y. Only units in S_g are\ncanceled, so zero divisors, zero numerators, and n = 0 cause no exception.",
+   "text": "Mathlib's homogeneous fraction representation, including its nilpotent\ncase, gives y = b/g^n with b of degree n*deg(g). Write deg(f) = d+1 and put\nB = g^(n*d)*b. Graded multiplication gives B degree n*deg(g)*deg(f), so the\nexplicit fraction x = B/f^(n*deg(g)) lies in R_f. Applying lambdaS to the\nlocalization fraction equation gives lambdaS(c/f^m)*(f/1)^m = c/1, since\nlambdaS preserves S. Apply this to x and U and raise the latter equation to n.\nTogether with y*(g/1)^n = b/1, commutative multiplication and\n(d+1)*n = n*d+n prove the desired ambient equality after multiplication by\n(f/1)^(n*deg(g)) and (g/1)^n. Both factors are units, so cancellation is valid\nalso with zero divisors or nilpotent g. Compatibility with rhoS and injectivity\nof the value map give the equality in R_g. The witness is explicitly constructed;\nno arbitrary object is chosen from an unproved existence theorem.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero",
     "def-weil-pbc-module-localization-away",
@@ -119,10 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T153300-L-2370691",
-  "kind": "interface",
+  "landing": "20261012T160832-L-2612973",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

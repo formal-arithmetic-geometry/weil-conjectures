@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Mathlib.Tactic.Ring
 
 /-!
 # GradedModuleAwayClearingRing
@@ -25,17 +26,18 @@ set_option linter.unusedVariables false in
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e).
 (blueprint: lem-weil-pbc-graded-module-away-clearing-ring)
 
-Proof: If g is nilpotent, S_g and its homogeneous degree-zero subring R_g are zero;
-choose n = 0 and x = 0. Otherwise the homogeneous fraction representation gives
-y = b/g^n with b homogeneous of degree n*deg(g), as in
-HomogeneousLocalization.Away.mk_surjective. Put d = deg(f), delta = deg(g), and
-B = g^(n*(d-1))*b. The graded multiplication rule gives degree n*d*delta for B,
-so x = B/f^(n*delta) lies in R_f. Because lambdaS preserves S and f/1 is a unit,
-it sends a fraction c/f^m to c/f^m in S_g. In particular it sends U to g^d/f^delta.
-Consequently lambdaS(x) = B/f^(n*delta) = (g^d/f^delta)^n*y in S_g, using d > 0
-and n*(d-1)+n = n*d. The compatibility of rhoS with lambdaS and injectivity of
-the inclusion R_g into S_g yield rhoS(x) = rhoS(U)^n*y. Only units in S_g are
-canceled, so zero divisors, zero numerators, and n = 0 cause no exception. -/
+Proof: Mathlib's homogeneous fraction representation, including its nilpotent
+case, gives y = b/g^n with b of degree n*deg(g). Write deg(f) = d+1 and put
+B = g^(n*d)*b. Graded multiplication gives B degree n*deg(g)*deg(f), so the
+explicit fraction x = B/f^(n*deg(g)) lies in R_f. Applying lambdaS to the
+localization fraction equation gives lambdaS(c/f^m)*(f/1)^m = c/1, since
+lambdaS preserves S. Apply this to x and U and raise the latter equation to n.
+Together with y*(g/1)^n = b/1, commutative multiplication and
+(d+1)*n = n*d+n prove the desired ambient equality after multiplication by
+(f/1)^(n*deg(g)) and (g/1)^n. Both factors are units, so cancellation is valid
+also with zero divisors or nilpotent g. Compatibility with rhoS and injectivity
+of the value map give the equality in R_g. The witness is explicitly constructed;
+no arbitrary object is chosen from an unproved existence theorem. -/
 theorem gradedModuleAwayClearingRing
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
@@ -85,6 +87,63 @@ theorem gradedModuleAwayClearingRing
         IsUnit (rhoS f g p (U f g))) →
     ∀ (f g : F) (p : Rel f g),
       (∀ y : R g, ∃ (n : ℕ) (x : R f),
-        (rhoS f g p (U f g)) ^ n * y = rhoS f g p x) := by sorry
+        (rhoS f g p (U f g)) ^ n * y = rhoS f g p x) := by
+  dsimp
+  intro Z hZ lambda lambdaS rho rhoS U h f g p y
+  rcases h.2 f g p with ⟨hu, hb, hi, hl, huniq, hformula, hls, hsemi, hrho, hrs,
+    hrsem, hunit⟩
+  obtain ⟨n, b, hbdeg, rfl⟩ := HomogeneousLocalization.Away.mk_surjective 𝒜 g.property.2 y
+  obtain ⟨d, hd⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt f.property.1)
+  change f.val.2 = d + 1 at hd
+  have hB : g.val.1 ^ (n * d) * b ∈ 𝒜 ((n * g.val.2) • f.val.2) := by
+    convert SetLike.mul_mem_graded (SetLike.pow_mem_graded (n * d) g.property.2)
+      hbdeg using 1
+    congr 1
+    simp only [nsmul_eq_mul, hd, Nat.cast_id]
+    ring
+  let x := HomogeneousLocalization.Away.mk 𝒜 f.property.2 (n * g.val.2)
+    (g.val.1 ^ (n * d) * b) hB
+  refine ⟨n, x, ?_⟩
+  apply HomogeneousLocalization.val_injective
+  simp only [HomogeneousLocalization.val_pow, HomogeneousLocalization.val_mul, hrs]
+  have hfrac (a : S) (m : ℕ) :
+      lambdaS f g p (Localization.mk a
+        (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1)) *
+        (algebraMap S (Localization.Away g.val.1) f.val.1) ^ m =
+        algebraMap S (Localization.Away g.val.1) a := by
+    have he := congrArg (lambdaS f g p)
+      (IsLocalization.mk'_spec (Localization.Away f.val.1) a
+        (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1))
+    simpa only [← Localization.mk_eq_mk', map_mul, hls, map_pow, Subtype.coe_mk] using he
+  have hU := hfrac (g.val.1 ^ f.val.2) g.val.2
+  rw [← h.1 f g, map_pow] at hU
+  have hUn := congrArg (fun z ↦ z ^ n) hU
+  simp only [mul_pow, ← pow_mul] at hUn
+  have hy := IsLocalization.mk'_spec (Localization.Away g.val.1) b
+    (⟨g.val.1 ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers g.val.1)
+  simp only [← Localization.mk_eq_mk', map_pow] at hy
+  have hx := hfrac (g.val.1 ^ (n * d) * b) (n * g.val.2)
+  apply (hu.pow (n * g.val.2)).mul_right_cancel
+  apply (IsLocalization.map_units (Localization.Away g.val.1)
+    (⟨g.val.1 ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers g.val.1)).mul_right_cancel
+  simp only [map_pow, HomogeneousLocalization.Away.val_mk]
+  change (_ * _ * _ * _) =
+    lambdaS f g p (Localization.mk (g.val.1 ^ (n * d) * b)
+      (⟨f.val.1 ^ (n * g.val.2), ⟨n * g.val.2, rfl⟩⟩ :
+        Submonoid.powers f.val.1)) * _ * _
+  rw [hx]
+  calc
+    _ = ((lambdaS f g p (U f g).val) ^ n *
+          (algebraMap S (Localization.Away g.val.1) f.val.1) ^ (g.val.2 * n)) *
+        (Localization.mk b (⟨g.val.1 ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers g.val.1) *
+          (algebraMap S (Localization.Away g.val.1) g.val.1) ^ n) := by
+      rw [Nat.mul_comm g.val.2 n]
+      ring
+    _ = (algebraMap S (Localization.Away g.val.1) g.val.1) ^ (f.val.2 * n) *
+        algebraMap S (Localization.Away g.val.1) b := by rw [hUn, hy]
+    _ = _ := by
+      simp only [map_mul, map_pow, hd]
+      rw [show (d + 1) * n = n * d + n by ring, pow_add]
+      ring
 
 end LocalizedModule
