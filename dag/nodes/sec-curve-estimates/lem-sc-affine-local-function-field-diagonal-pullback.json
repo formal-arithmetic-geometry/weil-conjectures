@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-affine-local-function-field-diagonal-pullback",
+ "kind": "statement",
+ "title": "The affine-local function-field square is a pullback of the diagonal",
+ "statement": "Let X be an integral scheme [def-pc-integral-scheme], η its generic point [def-sc-generic-point], U a nonempty affine open, and x a point outside U whose local ring B = O_{X,x} [def-weil-pbc-module-stalk] is Noetherian of Krull dimension one [def-weil-pbc-krull-dimension-ring]. Put A = Γ(X,U), K = k(X) [def-sc-function-field], and T = A ⊗_ℤ B. Let φ : T → K be the canonical map induced by the germ map A → K and the stalk-specialization map B → K. Let j_A : Spec A → X be the affine-open chart, j_B : Spec B → X the canonical local-scheme morphism, and c : Spec K → X the canonical generic-stalk morphism [def-weil-affine-spectrum]. Let q : Spec T → X × X be the pair of the spectrum maps of the tensor inclusions followed by j_A and j_B. Then the square with top arrow c, left arrow Spec φ, right arrow the diagonal X → X × X, and bottom arrow q is cartesian [def-pc-fibre-product]. No separatedness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma Tag 09NB, opening paragraph of its proof; https://stacks.math.columbia.edu/tag/09NB"
+ },
+ "proof": [
+  {
+   "text": "The stalk B is a local domain with fraction field K by lem-sc-integral-scheme-stalks-in-function-field. The canonical morphism Spec B → X identifies points with generalizations of x and induces stalk isomorphisms by lem-weil-pbc-spec-local-ring-canonical-morphism. Its inverse image of U omits the closed point and contains the generic point. A one-dimensional local domain has no other primes: a nonzero prime properly below its maximal ideal would make a prime chain of length two.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a nonzero element t in the maximal ideal of B; it exists because a field has dimension zero. The inverse image of U is D(t), with coordinate ring B[1/t] by lem-weil-pbc-principal-localization-open-immersion and lem-weil-pbc-open-immersion-base-change. Its canonical map to K is an isomorphism by lem-sc-local-domain-dim-one-principal-localization-fraction-field. Consequently the two canonical maps Spec K → Spec A and Spec K → Spec B exhibit Spec K as Spec A ×_X Spec B. Their composite to X is the map from its generic stalk.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-sc-local-domain-dim-one-principal-localization-fraction-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the product Spec A × Spec B with Spec (A ⊗_ℤ B) by the affine-spectrum tensor-product description (lem-weil-pbc-fibre-product-affine-spectra), applied to the terminal integer spectrum (with a universe lift if needed). The two projections are spectra of the tensor inclusions. Composing the spectrum of the tensor lift with these projections gives respectively the germ map A → K and the canonical stalk map B → K, by the defining equations of the lift.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any arrows Y → X and Z → X, the fibre product Y ×_X Z is the pullback of X → X × X along Y × Z → X × X: a cone to this square is exactly a pair of maps to Y and Z whose composites to X agree, with that common composite as the map to X. Apply this universal property to the preceding identifications; it gives the displayed IsPullback square and uses no separatedness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma Tag 09NB, first paragraph; the diagonal-square formulation is the universal property of the indicated fibre product"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pullback of the diagonal along an affine open and a one-dimensional local stalk outside it is the spectrum of the function field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre product of a nonempty affine open with the spectrum of a one-dimensional local stalk outside it is the spectrum of the function field",
+   "results": "AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.Pullback.SpecOfPoint; AlgebraicGeometry.ValuativeCommSq.field; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField; AlgebraicGeometry.instIsAffineFiberOfIsAffineHom; AlgebraicGeometry.Scheme.Hom.fiber; AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField",
+   "date": "2026-10-13",
+   "verdict": "No exact geometric pullback statement; supporting stalk or pullback results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback, AlgebraicGeometry.Scheme.fromSpecStalk",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField|fromSpecStalk",
+   "results": "16; 17; 34; 40; 49",
+   "date": "2026-10-13",
+   "verdict": "No exact geometric pullback statement; supporting stalk or pullback results only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjectiveCore",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-separated-affine-function-field-surjective-core",
+   "place": "09NB: identify U ×_X Spec B with Spec K before using separatedness"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalFunctionFieldDiagonalPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalFunctionFieldDiagonalPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isPullback_affine_local_functionField_diagonal",
+  "statement": "theorem Scheme.isPullback_affine_local_functionField_diagonal\n    (X : Scheme.{u}) [IsIntegral X]\n    (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U]\n    (x : X) (hx : x ∉ U)\n    [IsNoetherianRing (X.presheaf.stalk x)]\n    (hdim : ringKrullDim (X.presheaf.stalk x) = 1) :\n    let A : Type u := Γ(X, U)\n    let B : Type u := X.presheaf.stalk x\n    let K : Type u := X.functionField\n    let φ : TensorProduct ℤ A B →ₐ[ℤ] K :=\n      Algebra.TensorProduct.lift\n        (X.germToFunctionField U).hom.toIntAlgHom\n        (algebraMap B K).toIntAlgHom\n        (fun _ _ => Commute.all _ _)\n    IsPullback (X.fromSpecStalk (genericPoint X))\n      (Spec.map (CommRingCat.ofHom φ.toRingHom))\n      (prod.lift (𝟙 X) (𝟙 X))\n      (prod.lift\n        (Spec.map (CommRingCat.ofHom\n          (Algebra.TensorProduct.includeLeftRingHom : A →+* TensorProduct ℤ A B)) ≫\n          hU.fromSpec)\n        (Spec.map (CommRingCat.ofHom\n          (Algebra.TensorProduct.includeRight.toRingHom : B →+* TensorProduct ℤ A B)) ≫\n          X.fromSpecStalk x))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194142-L-465588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194142-L-465588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

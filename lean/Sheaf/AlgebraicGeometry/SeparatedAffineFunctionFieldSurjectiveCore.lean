@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.AffineLocalFunctionFieldDiagonalPullback
 
 @[expose] public section
 
@@ -34,7 +35,9 @@ theorem Scheme.isClosedImmersion_specMap_tensor_functionField
         (algebraMap B K).toIntAlgHom
         (fun _ _ => Commute.all _ _)
     IsClosedImmersion (Spec.map (CommRingCat.ofHom φ.toRingHom)) := by
-  sorry
+  dsimp only
+  exact CategoryTheory.MorphismProperty.of_isPullback
+    (Scheme.isPullback_affine_local_functionField_diagonal X U hU x hx hdim) inferInstance
 
 /-- A closed immersion between affine spectra induces a surjective ring map.
 Source: Stacks Project, Morphisms Lemma 01IQ (blueprint: lem-sc-closed-immersion-affine-surjective).
