@@ -188,6 +188,6 @@ theorem etaleRestrictionH_toCohomologicalPicardGroup (L : Y.Pic) :
   rw [Pic.toCohomologicalPicardGroup_apply, Pic.toCohomologicalPicardGroup_apply, hL,
     Pic.etaleTorsorClass_mk]
   exact (classH1_etaleRestriction f _).symm.trans
-    (congrArg _ (Quotient.sound (Modules.etaleIsoTorsor_restrict_equiv f _)))
+    (congrArg _ (Quotient.sound (@Modules.etaleIsoTorsor_restrict_equiv _ _ f _ _ _ this)))
 
 end AlgebraicGeometry.Scheme

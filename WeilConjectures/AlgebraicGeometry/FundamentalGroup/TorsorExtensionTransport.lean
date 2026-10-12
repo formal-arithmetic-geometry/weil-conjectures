@@ -38,7 +38,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] {m : ℕ} [NeZero m]
 `Γ(U ×_Y P', 𝒪)ˣ ⟶ Γ(U ×_X P, 𝒪)ˣ` induced by `U ×_X P ⟶ U ×_Y P'`. -/
 noncomputable def restrictW : (etaleRestriction f).obj t'.pushforwardGm ⟶ t.pushforwardGm :=
   ⟨{ app U := CommRingCat.unitsAddCommGrpULift.map
-        (pullback.map U.unop.hom t.π (U.unop.hom ≫ f) t'.π (𝟙 _) h f (by simp) hπ).appTop
+        (pullback.map U.unop.hom t.π ((etaleLocalization f).obj U.unop).hom t'.π (𝟙 _) h f
+          (Category.id_comp _).symm hπ).appTop
      naturality {U V} φ := by
       change CommRingCat.unitsAddCommGrpULift.map _ ≫ CommRingCat.unitsAddCommGrpULift.map _ =
         CommRingCat.unitsAddCommGrpULift.map _ ≫ CommRingCat.unitsAddCommGrpULift.map _
@@ -52,9 +53,9 @@ noncomputable def restrictW : (etaleRestriction f).obj t'.pushforwardGm ⟶ t.pu
             ((etaleLocalization f).map φ.unop)).left =
           pullback.map _ _ _ _ φ.unop.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
         show ((MorphismProperty.Over.pullback @Etale ⊤ t.π).map φ.unop).left =
-          pullback.map _ _ _ _ φ.unop.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl,
-        pullback.map_comp, pullback.map_comp]
-      congr 1 }⟩
+          pullback.map _ _ _ _ φ.unop.left (𝟙 _) (𝟙 _) (by simp) (by simp) from rfl]
+      congr 1
+      apply pullback.hom_ext <;> simp }⟩
 
 lemma restrictW_translate (hv : t.vadd 1 ≫ h = h ≫ t'.vadd 1) :
     (etaleRestriction f).map (t'.pushforwardGmTranslate 1) ≫ t.restrictW f t' h hπ =
@@ -77,13 +78,14 @@ lemma restrictW_unit :
     CommRingCat.unitsAddCommGrpULift.map _
   rw [← Functor.map_comp]
   congr 1
-  change Scheme.Γ.map _ ≫ _ = Scheme.Γ.map _
-  rw [← Scheme.Hom.comp_appTop]
-  congr 1
-  simp
+  change (pullback.fst ((etaleLocalization f).obj V.unop).hom t'.π).appTop ≫
+      (pullback.map V.unop.hom t.π ((etaleLocalization f).obj V.unop).hom t'.π (𝟙 _) h f
+        (Category.id_comp _).symm hπ).appTop = (pullback.fst V.unop.hom t.π).appTop
+  rw [← Scheme.Hom.comp_appTop, pullback.lift_fst, Category.comp_id]
 
 variable (hv : t.vadd 1 ≫ h = h ≫ t'.vadd 1)
 
+include hv in
 @[reassoc]
 lemma restrictW_gmDiff :
     (etaleRestriction f).map t'.gmDiff ≫ t.restrictW f t' h hπ =
@@ -95,14 +97,18 @@ lemma restrictW_gmDiff :
 /-- Pullback of units along `h` on `π_* μ_m`. -/
 noncomputable def restrictV : (etaleRestriction f).obj t'.pushforwardMu ⟶ t.pushforwardMu :=
   kernel.lift _ ((etaleRestriction f).map (kernel.ι _) ≫ t.restrictW f t' h hπ) (by
-    rw [Category.assoc, comp_nsmul_id, ← Category.assoc, ← CategoryTheory.Functor.map_id,
-      ← Functor.map_nsmul, ← Functor.map_comp, kernel.condition, Functor.map_zero, zero_comp])
+    have e : m • 𝟙 ((etaleRestriction f).obj t'.pushforwardGm) =
+        (etaleRestriction f).map (m • 𝟙 _) := by
+      rw [Functor.map_nsmul, CategoryTheory.Functor.map_id]
+    rw [Category.assoc, comp_nsmul_id, ← Category.assoc, e, ← Functor.map_comp, kernel.condition,
+      Functor.map_zero, zero_comp])
 
 @[reassoc (attr := simp)]
 lemma restrictV_ι : t.restrictV f t' h hπ ≫ kernel.ι _ =
     (etaleRestriction f).map (kernel.ι _) ≫ t.restrictW f t' h hπ :=
   kernel.lift_ι _ _ _
 
+include hv in
 @[reassoc]
 lemma restrictV_muDiff :
     (etaleRestriction f).map t'.muDiff ≫ t.restrictV f t' h hπ =
@@ -111,6 +117,7 @@ lemma restrictV_muDiff :
     muDiff_ι, restrictV_ι, restrictV_ι_assoc, ← Functor.map_comp_assoc, muDiff_ι,
     Functor.map_comp_assoc, t.restrictW_gmDiff f t' h hπ hv]
 
+include hv in
 /-- The map `R K₁' ⟶ K₁`. -/
 noncomputable def restrictK₁ : (etaleRestriction f).obj (kernel t'.muDiff) ⟶ kernel t.muDiff :=
   kernel.lift _ ((etaleRestriction f).map (kernel.ι _) ≫ t.restrictV f t' h hπ) (by
@@ -122,6 +129,7 @@ lemma restrictK₁_ι : t.restrictK₁ f t' h hπ hv ≫ kernel.ι _ =
     (etaleRestriction f).map (kernel.ι _) ≫ t.restrictV f t' h hπ :=
   kernel.lift_ι _ _ _
 
+include hv in
 /-- The map `R K₂' ⟶ K₂`. -/
 noncomputable def restrictK₂ :
     (etaleRestriction f).obj (kernel (t'.muDiff ≫ t'.muDiff)) ⟶ kernel (t.muDiff ≫ t.muDiff) :=
@@ -135,24 +143,27 @@ lemma restrictK₂_ι : t.restrictK₂ f t' h hπ hv ≫ kernel.ι _ =
     (etaleRestriction f).map (kernel.ι _) ≫ t.restrictV f t' h hπ :=
   kernel.lift_ι _ _ _
 
+lemma restrictK₁_kernelToKernelComp :
+    t.restrictK₁ f t' h hπ hv ≫ kernelToKernelComp t.muDiff =
+      (etaleRestriction f).map (kernelToKernelComp t'.muDiff) ≫ t.restrictK₂ f t' h hπ hv := by
+  rw [← cancel_mono (kernel.ι (t.muDiff ≫ t.muDiff)), Category.assoc, Category.assoc,
+    kernelToKernelComp_ι, restrictK₁_ι, restrictK₂_ι, ← Functor.map_comp_assoc,
+    kernelToKernelComp_ι]
+
+lemma restrictK₂_kernelCompToKernel :
+    t.restrictK₂ f t' h hπ hv ≫ kernelCompToKernel t.muDiff =
+      (etaleRestriction f).map (kernelCompToKernel t'.muDiff) ≫ t.restrictK₁ f t' h hπ hv := by
+  rw [← cancel_mono (kernel.ι t.muDiff), Category.assoc, Category.assoc, kernelCompToKernel_ι,
+    restrictK₂_ι_assoc, restrictK₁_ι, ← Functor.map_comp_assoc, kernelCompToKernel_ι,
+    Functor.map_comp_assoc, t.restrictV_muDiff f t' h hπ hv]
+
 /-- The morphism from the restriction of the extension of `t'` to the extension of `t`. -/
 noncomputable def restrictExtSeq : t'.extSeq.map (etaleRestriction f) ⟶ t.extSeq where
   τ₁ := t.restrictK₁ f t' h hπ hv
   τ₂ := t.restrictK₂ f t' h hπ hv
   τ₃ := t.restrictK₁ f t' h hπ hv
-  comm₁₂ := by
-    rw [← cancel_mono (kernel.ι _)]
-    change (etaleRestriction f).map (kernelToKernelComp _) ≫ _ ≫ _ =
-      (_ ≫ kernelToKernelComp _) ≫ _
-    rw [restrictK₂_ι, Category.assoc, kernelToKernelComp_ι, restrictK₁_ι,
-      ← Functor.map_comp_assoc, kernelToKernelComp_ι]
-  comm₂₃ := by
-    rw [← cancel_mono (kernel.ι _)]
-    change (etaleRestriction f).map (kernelCompToKernel _) ≫ _ ≫ _ =
-      (_ ≫ kernelCompToKernel _) ≫ _
-    rw [restrictK₁_ι, Category.assoc, kernelCompToKernel_ι, restrictK₂_ι_assoc,
-      ← Functor.map_comp_assoc, kernelCompToKernel_ι, Functor.map_comp_assoc,
-      t.restrictV_muDiff f t' h hπ hv]
+  comm₁₂ := t.restrictK₁_kernelToKernelComp f t' h hπ hv
+  comm₂₃ := t.restrictK₂_kernelCompToKernel f t' h hπ hv
 
 variable [Mono f]
 
@@ -163,6 +174,7 @@ lemma muUnit_restrictK₁ :
   simp only [Category.assoc, restrictK₁_ι, restrictV_ι, ← Functor.map_comp_assoc]
   simp [muUnit, muUnitV]
 
+include hπ hv in
 /-- **Cup products and restriction.** The cup products of `t` and `t'` correspond under the
 restriction maps `H^q(Y, μ_m) ⟶ H^q(X, R μ_m) ≅ H^q(X, μ_m)`. -/
 theorem restrictMu_cupMu (x : Sheaf.H (Y.rootsOfUnitySheaf m) 1) :
@@ -173,16 +185,19 @@ theorem restrictMu_cupMu (x : Sheaf.H (Y.rootsOfUnitySheaf m) 1) :
   have := t'.isIso_muUnit
   have e₁ : (etaleRestriction f).map (inv t'.muUnit) ≫ (rootsOfUnityRestrictionIso f m).hom =
       t.restrictK₁ f t' h hπ hv ≫ inv t.muUnit := by
-    rw [Functor.map_inv, IsIso.inv_comp_eq, ← Category.assoc, ← t.muUnit_restrictK₁ f t' h hπ hv,
+    rw [Functor.map_inv, IsIso.inv_comp_eq, ← Category.assoc, t.muUnit_restrictK₁ f t' h hπ hv,
       Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   simp only [cupMu, AddMonoidHom.comp_apply]
-  rw [etaleRestrictionH_map, ← Sheaf.H.map_comp_apply, e₁, Sheaf.H.map_comp_apply,
-    etaleRestrictionH_δSucc]
+  rw [etaleRestrictionH_map, ← Sheaf.H.map_comp_apply, e₁, Sheaf.H.map_comp_apply]
   congr 1
+  refine (congrArg (Sheaf.H.map (t.restrictK₁ f t' h hπ hv) 2)
+    (etaleRestrictionH_δSucc f t'.extSeq_shortExact 1 _)).trans ?_
   refine (Sheaf.H.map_δSucc _ t.extSeq_shortExact (t.restrictExtSeq f t' h hπ hv) 1 _).trans ?_
   congr 1
   change Sheaf.H.map (t.restrictK₁ f t' h hπ hv) 1 _ = _
-  rw [etaleRestrictionH_map, ← Sheaf.H.map_comp_apply, t.muUnit_restrictK₁ f t' h hπ hv,
-    Sheaf.H.map_comp_apply]
+  rw [etaleRestrictionH_map]
+  exact (Sheaf.H.map_comp_apply ((etaleRestriction f).map t'.muUnit) _ _).symm.trans
+    ((congrArg (fun φ ↦ Sheaf.H.map φ 1 _) (t.muUnit_restrictK₁ f t' h hπ hv)).trans
+      (Sheaf.H.map_comp_apply _ _ _))
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
