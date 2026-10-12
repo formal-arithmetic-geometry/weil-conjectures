@@ -29,6 +29,14 @@ theorem integralExtensionDimension
     (f : R →+* S) (hf : f.IsIntegral) :
     ringKrullDim S ≤ ringKrullDim R ∧
       ∀ (I : Ideal S), I.IsMaximal → (I.comap f).IsMaximal := by
-  sorry
+  constructor
+  · let _ : Algebra R S := f.toAlgebra
+    have : Algebra.IsIntegral R S := ⟨hf⟩
+    apply Order.krullDim_le_of_strictMono
+      (fun I : PrimeSpectrum S ↦ (⟨I.asIdeal.comap f, inferInstance⟩ : PrimeSpectrum R))
+    intro I J hIJ
+    exact Ideal.IsIntegral.comap_lt_comap hIJ
+  · intro I hI
+    exact Ideal.isMaximal_comap_of_isIntegral_of_isMaximal' f hf I
 
 end RingHom
