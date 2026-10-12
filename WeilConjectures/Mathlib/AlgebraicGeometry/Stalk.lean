@@ -131,4 +131,46 @@ theorem isLocalization_stalkSpecializes_fromSpecStalk {y : X}
   convert h using 2
   exact (comap_stalkSpecializes_fromSpecStalk p).symm
 
+/-! ### Points with values in a local ring -/
+
+section stalkClosedPointTo
+
+variable {R S : CommRingCat.{u}} [IsLocalRing R] [IsLocalRing S]
+
+open IsLocalRing
+
+/-- Two morphisms `Spec R ⟶ X` from the spectrum of a local ring agree if they send the closed
+point to the same point and induce the same local homomorphism on stalks. -/
+theorem eq_of_stalkClosedPointTo_eq {f g : Spec R ⟶ X} (h : f (closedPoint R) = g (closedPoint R))
+    (e : stalkClosedPointTo f =
+      (X.presheaf.stalkCongr (.of_eq h)).hom ≫ stalkClosedPointTo g) : f = g :=
+  (SpecToEquivOfLocalRing X R).injective (SpecToEquivOfLocalRing_eq_iff.mpr ⟨h, e⟩)
+
+/-- The local homomorphism on stalks attached to `Spec φ ≫ (Spec 𝒪_{X,x} ⟶ X)` is `φ`. -/
+theorem stalkClosedPointTo_spec_map_fromSpecStalk {x : X} (φ : X.presheaf.stalk x ⟶ R)
+    [IsLocalHom φ.hom] :
+    stalkClosedPointTo (Spec.map φ ≫ X.fromSpecStalk x) =
+      (X.presheaf.stalkCongr (.of_eq (by simp))).hom ≫ φ := by
+  have h := (SpecToEquivOfLocalRing X R).right_inv ⟨x, φ, inferInstance⟩
+  obtain ⟨h₁, h₂⟩ := SpecToEquivOfLocalRing_eq_iff.mp h
+  exact h₂
+
+/-- Precomposing a morphism `f : Spec R ⟶ X` with `Spec ψ`, for a local homomorphism
+`ψ : R ⟶ S` of local rings, postcomposes the homomorphism `stalkClosedPointTo f` with `ψ`. -/
+theorem stalkClosedPointTo_spec_map_comp (ψ : R ⟶ S) [IsLocalHom ψ.hom] (f : Spec R ⟶ X) :
+    stalkClosedPointTo (Spec.map ψ ≫ f) =
+      (X.presheaf.stalkCongr (.of_eq (by simp))).hom ≫ stalkClosedPointTo f ≫ ψ := by
+  have e : Spec.map ψ ≫ f = Spec.map (stalkClosedPointTo f ≫ ψ) ≫ X.fromSpecStalk _ := by
+    conv_lhs => rw [← Spec_stalkClosedPointTo_fromSpecStalk f]
+    rw [Spec.map_comp, Category.assoc]
+  have : IsLocalHom (stalkClosedPointTo f ≫ ψ).hom := by
+    rw [CommRingCat.hom_comp]
+    infer_instance
+  have h := congrArg (SpecToEquivOfLocalRing X S) e
+  obtain ⟨h₁, h₂⟩ := SpecToEquivOfLocalRing_eq_iff.mp
+    (h.trans ((SpecToEquivOfLocalRing X S).right_inv ⟨_, _, this⟩))
+  exact h₂
+
+end stalkClosedPointTo
+
 end AlgebraicGeometry.Scheme
