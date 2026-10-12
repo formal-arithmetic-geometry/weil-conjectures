@@ -6,6 +6,8 @@ Authors: SHEAF worker T1
 module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Sheaf.FieldTheory.BrauerScalarDefectFaithfulForward
+import Sheaf.FieldTheory.BrauerScalarDefectFaithfulBackward
 
 /-!
 # Faithfulness and independence of scalar-defect classes
@@ -47,6 +49,11 @@ construction preceding it; Section 0DVG for the cochain convention.
 theorem brauerScalarDefect_eq_iff (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y) :
-    x = y ↔ IsBrauerEquivalent A B := by sorry
+    x = y ↔ IsBrauerEquivalent A B := by
+  constructor
+  · intro hxy
+    exact brauerEquivalent_of_brauerScalarDefect_eq K A B x y hx hy hxy
+  · intro hAB
+    exact brauerScalarDefect_eq_of_brauerEquivalent K A B x y hx hy hAB
 
 end Field

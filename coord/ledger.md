@@ -7547,3 +7547,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/U1/Sheaf.RingTheory.DepthLeDimAssociatedPrime (stage 3; reviewer PASS; first push; landing 20261012T112851-L-772101 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/U2/Sheaf.RingTheory.FormallySmoothAdicCompletion (stage 3; reviewer PASS; first push; landing 20261012T112851-L-772196 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/U3/Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackQCoh (stage 3; reviewer PASS; first push; landing 20261012T112851-L-772291 (interface); batch 20261012T112824; modules 2; new nodes 1)
+- 11:28 L: merged deliver/U3/Sheaf.FieldTheory.BrauerScalarDefectFaithful (stage 3; reviewer PASS; first push; landing 20261012T112851-L-772400 (interface); batch 20261012T112824; modules 3; new nodes 2)
