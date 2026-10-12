@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-!
 # Completeness of power series over a complete base
@@ -60,4 +61,50 @@ theorem power_series_complete_over_complete_base
       (Ideal.map (algebraMap Λ (MvPowerSeries (Fin d) Λ)) J ⊔
         Ideal.span (Set.range (MvPowerSeries.X : Fin d → MvPowerSeries (Fin d) Λ)))
       (MvPowerSeries (Fin d) Λ) := by
-  sorry
+  classical
+  let a : Ideal (MvPowerSeries (Fin d) Λ) :=
+    Ideal.map (algebraMap Λ (MvPowerSeries (Fin d) Λ)) J ⊔
+      Ideal.span (Set.range (MvPowerSeries.X : Fin d → MvPowerSeries (Fin d) Λ))
+  change IsAdicComplete a (MvPowerSeries (Fin d) Λ)
+  have hcoeff (n : ℕ) (F G : MvPowerSeries (Fin d) Λ) :
+      F ≡ G [SMOD (a ^ n • ⊤ : Ideal (MvPowerSeries (Fin d) Λ))] ↔
+      ∀ E : Fin d →₀ ℕ, E.degree < n →
+        MvPowerSeries.coeff E F ≡ MvPowerSeries.coeff E G
+          [SMOD (J ^ (n - E.degree) • ⊤ : Ideal Λ)] := by
+    simp only [SModEq.sub_mem, smul_eq_mul, Ideal.mul_top]
+    rw [power_series_mem_combined_ideal_pow_iff Λ J d n]
+    simp only [map_sub]
+  refine { toIsHausdorff := ⟨?haus⟩, toIsPrecomplete := ⟨?prec⟩ }
+  case haus =>
+    intro F hF
+    apply MvPowerSeries.ext
+    intro E
+    apply IsHausdorff.haus' (I := J)
+    intro n
+    have h := (hcoeff (n + E.degree + 1) F 0).mp (hF _)
+    have hE := h E (by omega)
+    have hexp : n + E.degree + 1 - E.degree = n + 1 := by omega
+    rw [hexp] at hE
+    exact SModEq.mono (Submodule.pow_smul_top_le J Λ (Nat.le_succ n)) hE
+  case prec =>
+    intro f hf
+    have hlim (E : Fin d →₀ ℕ) : ∃ b : Λ, ∀ k : ℕ,
+        MvPowerSeries.coeff E (f (k + E.degree + 1)) ≡ b [SMOD (J ^ k • ⊤ : Ideal Λ)] := by
+      apply IsPrecomplete.prec' (I := J)
+      intro m n hmn
+      have h := (hcoeff (m + E.degree + 1) _ _).mp
+        (hf (Nat.add_le_add_right (Nat.add_le_add_right hmn E.degree) 1))
+      have hE := h E (by omega)
+      have hexp : m + E.degree + 1 - E.degree = m + 1 := by omega
+      rw [hexp] at hE
+      exact SModEq.mono (Submodule.pow_smul_top_le J Λ (Nat.le_succ m)) hE
+    choose b hb using hlim
+    refine ⟨(b : MvPowerSeries (Fin d) Λ), ?_⟩
+    intro n
+    apply (hcoeff n _ _).mpr
+    intro E hE
+    have hstep := (hcoeff n _ _).mp
+      (hf (show n ≤ (n - E.degree) + E.degree + 1 by omega))
+    have hfirst := hstep E hE
+    have hlast := hb E (n - E.degree)
+    exact hfirst.trans hlast
