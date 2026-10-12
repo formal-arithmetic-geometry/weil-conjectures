@@ -58,13 +58,13 @@
    }
   },
   {
-   "text": "*Step 3 ($i$ is a homeomorphism).* Let $U\\subseteq Y$ be an affine open, $B=\\mathcal O_Y(U)$, and $x\\in U$ with prime $\\mathfrak p_x\\subset B$. Every element of $\\mathcal J(U)=JB$ (Step 1) is a finite sum $\\sum_k a_kb_k$ with $a_k\\in J$, $b_k\\in B$; as $a_k^N=0\\in\\mathfrak p_x$ and $\\mathfrak p_x$ is prime, the image of $a_k$ lies in $\\mathfrak p_x$, hence so does the sum. So $\\mathcal J(U)\\subseteq\\mathfrak p_x$ for every $x\\in U$, and by [lem-weil-pbc-closed-immersion-image-zero-locus] $i(Y_0)\\cap U=\\{x\\in U:\\mathcal J(U)\\subseteq\\mathfrak p_x\\}=U$. The affine opens cover $Y$, so $i$ is surjective. A closed immersion is a homeomorphism onto the closed subset $i(Y_0)$ [def-weil-closed-immersion]; as $i(Y_0)=Y$, $i$ is a homeomorphism $Y_0\\to Y$. Hence $Y$ is a thickening of $Y_0$ [def-sbc-first-order-thickening] (1), and with Step 2 a finite order thickening; this proves (1).",
+   "text": "Step 3 (homeomorphism). Since N >= 1, Mathlib Scheme.IdealSheafData.support_pow gives support(i.ker^N) = support(i.ker). The power is zero by Step 2 and Scheme.IdealSheafData.support_bot gives full support. Scheme.Hom.support_ker identifies this support with the closure of the image of i (closed immersions are quasi-compact). The image of a closed immersion is closed, so closure(image i) = image i, and i is surjective. Apply isHomeomorph_iff_isEmbedding_surjective to its closed embedding. This replaces the affine prime-by-prime argument using lem-weil-pbc-closed-immersion-image-zero-locus by the existing Mathlib support API; it is precisely the same argument packaged by Mathlib.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-image-zero-locus",
     "def-weil-closed-immersion",
-    "def-sbc-first-order-thickening"
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
     "place": "More on Morphisms, Lemma Tag 09ZU (lemma-base-change-thickening, line 209; proof omitted), Definition Tag 04EX (definition-thickening, line 36)"
@@ -87,14 +87,13 @@
   "def-sbc-first-order-thickening",
   "def-sbc-ideal-sheaf-powers",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-immersion-image-zero-locus",
   "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
   "lem-weil-pbc-scheme-clopen-idempotent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma Tag 09ZU (proof omitted in the source; written by an agent) for (1); (2) follows the proof of Derived Categories of Schemes, Lemma Tag 0G7X (perfect.tex lines 8137-8146) with Algebra, Lemma Tag 00EE"
+  "place": "More on Morphisms, Lemma Tag 09ZU (proof omitted in the source; written by an agent) for (1); (2) follows the proof of Derived Categories of Schemes, Lemma Tag 0G7X (perfect.tex lines 8137-8146) with Algebra, Lemma Tag 00EE; F3 stage-3 Lean proof: Step 3 uses Mathlib support_pow, support_bot and Hom.support_ker; all other steps retain the stated route."
  },
  "mathlib_searches": [
   {
@@ -184,5 +183,15 @@
   "group": "M1",
   "result": "pass",
   "note": "A CommRing, J^N=⊥ with 1≤N, g:Y⟶Spec A, Y₀=pullback g (Spec.map Quotient.mk), i=pullback.fst; IsClosedImmersion i, i.ker^N=⊥ (Scheme.Hom.ker = kernel for qc i), IsFiniteOrderThickening (project def), IsHomeomorph (cont+open+bij), ∃! idempotent lift via Γ.map i.op = appTop (rfl-checked)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144109-L-2094358",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
