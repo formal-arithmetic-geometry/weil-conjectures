@@ -14,12 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Affine opens form a basis. Extend the compatible affine-open maps by local gluing in the target sheaf, factor uniquely through module sheafification, and check on affine stalks that the resulting map is an isomorphism. Naturality follows from uniqueness.",
+   "text": "Affine opens form a basis (Scheme.isBasis_affineOpens), hence the inclusion is cover dense by TopCat.Opens.coverDense_iff_isBasis. Apply Functor.IsCoverDense.restrictHomEquivHom to underlying presheaves. The extended map is linear by restricting scalar-linearity along the cover-dense sieve and using separatedness of the target sheaf.",
    "uses": [
-    "def-weil-pbc-sheafification",
     "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-sheaf-morphism-on-basis",
-    "lem-weil-pbc-stalk-germs-on-basis"
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each parameter, extend the affine restriction isomorphism to a module-presheaf map, factor uniquely through module sheafification by its adjunction, and prove parameter naturality by injectivity of restriction and naturality of the given isomorphism.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every module sheaf N, precomposition with the extended map is bijective on maps into N, by the same affine restriction equivalence and the basis isomorphism. Transfer this bijection through the sheafification adjunction and apply the co-Yoneda isomorphism criterion.",
+   "uses": [
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false
   }
@@ -27,8 +39,7 @@
  "proof_deps": [
   "def-weil-pbc-sheafification",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-sheaf-morphism-on-basis",
-  "lem-weil-pbc-stalk-germs-on-basis"
+  "lem-weil-pbc-sheaf-morphism-on-basis"
  ],
  "mathlib_searches": [
   {
@@ -100,9 +111,11 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tags 009U and 0089: restriction of module sheaves to a basis and module sheafification"
+  "place": "Tags 009U and 0089; affine basis extension via cover-dense presheaf hom equivalence and module sheafification adjunction"
  },
  "lean": {
   "existing": false,
@@ -127,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-4c16c",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T085221-L-6827",
+  "landing": "20261012T135325-L-1696484",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and completed proof with the node; checked dependency pruning, change record, report, and earlier repairs. Delivery and sole direct importer compile cleanly; all three proved declarations use only permitted axioms."
  }
 }
