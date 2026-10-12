@@ -8207,3 +8207,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/T1/Sheaf.Paper.MLCohomologyPowersIdeal (stage 3; reviewer PASS; first push; landing 20261012T144147-L-2107926 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/T2/Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparison (stage 3; reviewer PASS; first push; landing 20261012T144147-L-2108025 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/T2/Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection (stage 3; reviewer PASS; after a return; landing 20261012T144147-L-2108125 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/T2/Sheaf.AlgebraicGeometry.DerivedTensorPreservesQCoh (stage 3; reviewer PASS; first push; landing 20261012T144148-L-2108224 (interface); batch 20261012T144049; modules 3; new nodes 2)

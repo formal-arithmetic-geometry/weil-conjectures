@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-affine-derived-tensor-chart-comparison",
+ "kind": "statement",
+ "title": "Affine tensor computation on specified module representatives",
+ "statement": "Let X be an affine scheme [def-pc-scheme] and A=Gamma(X,O_X). Let M,N,P be unbounded A-module complexes, s:P→M a quasi-isomorphism, and P categorically K-flat [def-pc-module-kflat-complex]. Let C be termwise tilde followed by termwise exact restriction along X.toSpecΓ. In the derived tensor structure [def-pc-scheme-derived-tensor-structure] of D(O_X) [def-pc-derived-category], Q(C(M)) tensor-derived Q(C(N)) is isomorphic to Q(C(Tot(P tensor_A N))). No cohomological quasi-coherence hypothesis occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Lemma 36.3.9, proof of (1), locality and the K-flat computation (2); Tag 08DV for tilde K-flatness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The canonical chart X.toSpecΓ is an isomorphism. Tilde is exact, so tilde(s) is a quasi-isomorphism; its restriction is also a quasi-isomorphism. Tilde(P) is K-flat by 08DV and its restriction is K-flat. Thus Q(C(P)) identifies with Q(C(M)).",
+   "uses": [
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the K-flat derived tensor comparison to C(P) and C(N). Restriction commutes with sheaf tensor, all coproducts and both differentials. Combine this total restriction comparison with the affine tilde total-tensor comparison to identify the output with Q(C(Tot(P tensor N))). Transport the first input along Q(C(s)). This includes empty affine schemes, zero complexes, and unbounded complexes.",
+   "uses": [
+    "lem-pc-affine-tilde-total-tensor",
+    "lem-pc-kflat-derived-tensor-comparison",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-tilde-total-tensor",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Lemma 36.3.9, proof of (1), locality and the K-flat computation (2); Tag 08DV for tilde K-flatness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact open restriction commutes with derived tensor products",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a scheme derived tensor of complexes with quasi coherent cohomology has quasi coherent cohomology",
+   "results": "Only underived sheaf tensor and Tor results; no derived open/chart tensor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*tensor|tensor.*restrict; derived.*quasi.*coherent in Mathlib and the two library roots",
+   "results": "Underived restriction tensor comparison and the same-universe derived open restriction statement found; no independent-universe or canonical affine-chart derived tensor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedTensorPreservesQCoh",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-tensor-qcoh-component",
+   "place": "affine-local tensor computation, restriction and spectrum-chart comparisons",
+   "via": [
+    "lem-pc-derived-tensor-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedTensorChartComparison.lean",
+  "declaration": "AlgebraicGeometry.affine_derivedTensor_chart_comparison",
+  "statement": "theorem affine_derivedTensor_chart_comparison (X : Scheme.{u}) [IsAffine X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M N P : CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ) (s : P ⟶ M) (hs : QuasiIso s) (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(X, ⊤)) (.up ℤ)).kFlat P) : Nonempty (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (Scheme.Modules.restrictFunctor X.toSpecΓ)) (by change (Scheme.Modules.restrictFunctor X.toSpecΓ).PreservesZeroMorphisms infer_instance) (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} Γ(X, ⊤) ⥤ SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)) ⊗ DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (Scheme.Modules.restrictFunctor X.toSpecΓ)) (by change (Scheme.Modules.restrictFunctor X.toSpecΓ).PreservesZeroMorphisms infer_instance) (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} Γ(X, ⊤) ⥤ SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj N)) ≅ DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings X.toRingedSpace)) (Scheme.Modules.restrictFunctor X.toSpecΓ)) (by change (Scheme.Modules.restrictFunctor X.toSpecΓ).PreservesZeroMorphisms infer_instance) (.up ℤ)).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} Γ(X, ⊤) ⥤ SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj (CochainComplex.mapBifunctor P N (curriedTensor (ModuleCat.{u} Γ(X, ⊤)))))))",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108224",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108224",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
