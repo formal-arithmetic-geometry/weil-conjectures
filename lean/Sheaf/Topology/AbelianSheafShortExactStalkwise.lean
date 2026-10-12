@@ -6,8 +6,6 @@ Authors: SHEAF group T1
 module
 
 public import Mathlib.Topology.Sheaves.Abelian
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Short exactness of abelian sheaves is detected on stalks
@@ -45,6 +43,32 @@ theorem shortExact_iff_stalkFunctor_map_shortExact
     S.ShortExact ↔
       ∀ (x : X), (S.map (Sheaf.forget AddCommGrpCat X ⋙ Presheaf.stalkFunctor (X := X)
         AddCommGrpCat x)).ShortExact := by
-  sorry
+  constructor
+  · intro h x
+    exact h.map_of_exact (Sheaf.forget AddCommGrpCat X ⋙
+      Presheaf.stalkFunctor (X := X) AddCommGrpCat x)
+  · intro h
+    refine ShortComplex.ShortExact.mk'
+      ((Sheaf.exact_iff_stalkFunctor_map_exact S).mpr (fun x ↦ (h x).exact)) ?_ ?_
+    · open ZeroObject in
+      -- Detect the endpoint condition as exactness of a complex with a zero map.
+      let T : ShortComplex (Sheaf AddCommGrpCat X) :=
+        ShortComplex.mk (0 : 0 ⟶ S.X₁) S.f zero_comp
+      apply (T.exact_iff_mono rfl).mp
+      apply (Sheaf.exact_iff_stalkFunctor_map_exact T).mpr
+      intro x
+      apply ((T.map (Sheaf.forget AddCommGrpCat X ⋙
+        Presheaf.stalkFunctor (X := X) AddCommGrpCat x)).exact_iff_mono (by simp [T])).mpr
+      exact (h x).mono_f
+    · open ZeroObject in
+      -- Detect the endpoint condition as exactness of a complex with a zero map.
+      let T : ShortComplex (Sheaf AddCommGrpCat X) :=
+        ShortComplex.mk S.g (0 : S.X₃ ⟶ 0) comp_zero
+      apply (T.exact_iff_epi rfl).mp
+      apply (Sheaf.exact_iff_stalkFunctor_map_exact T).mpr
+      intro x
+      apply ((T.map (Sheaf.forget AddCommGrpCat X ⋙
+        Presheaf.stalkFunctor (X := X) AddCommGrpCat x)).exact_iff_epi (by simp [T])).mpr
+      exact (h x).epi_g
 
 end TopCat

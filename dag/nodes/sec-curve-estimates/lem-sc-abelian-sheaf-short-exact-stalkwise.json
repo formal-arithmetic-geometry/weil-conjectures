@@ -25,59 +25,37 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-exact-sequence], the sequence $0\\to F'\\xrightarrow{f}F\\xrightarrow{g}F''\\to0$ in the abelian category $\\operatorname{Ab}(X)$ of [def-sc-topological-abelian-cohomology] is short exact if and only if $g\\circ f=0$, the short complex $F'\\xrightarrow{f}F\\xrightarrow{g}F''$ is exact, $f$ is a monomorphism and $g$ is an epimorphism; likewise for the stalk sequence $0\\to F'_x\\to F_x\\to F''_x\\to0$ of abelian groups, where a monomorphism is an injective and an epimorphism a surjective homomorphism.",
+   "text": "For each point x the sheaf stalk functor preserves finite limits and finite colimits, by the instances in Mathlib.Topology.Sheaves.Abelian. Therefore ShortComplex.ShortExact.map_of_exact sends a short exact sheaf complex to a short exact stalk complex. Short exactness is the notion of [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Sheaves/Abelian.lean and Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+    "place": "Sheaf stalk finite-limit instance and ShortExact.map_of_exact"
+   }
+  },
+  {
+   "text": "Conversely, suppose all stalk complexes are short exact. Their middle exactness implies S.Exact by [lem-sc-abelian-sheaf-exact-iff-stalk-exact]. To detect Mono S.f, form T=(0 -> S.X1 -> S.X2), with arrows 0 and S.f. By ShortComplex.exact_iff_mono, a clause of [def-weil-pbc-exact-sequence], T is exact iff S.f is mono. Every mapped T is exact by the same lemma, since its first arrow is zero (stalk functors preserve zero morphisms) and its second arrow is the mono first arrow of the mapped S. Apply [lem-sc-abelian-sheaf-exact-iff-stalk-exact] to T to conclude Mono S.f. For Epi S.g, form T=(S.X2 -> S.X3 -> 0), with arrows S.g and 0; ShortComplex.exact_iff_epi and the same stalkwise exactness criterion imply Epi S.g from the epi second arrow of each mapped S. Recombine S.Exact, Mono S.f and Epi S.g using ShortComplex.ShortExact.mk', the definition in [def-weil-pbc-exact-sequence]. The zero-composition condition already belongs to the given ShortComplex.",
    "uses": [
     "def-weil-pbc-exact-sequence",
-    "def-sc-topological-abelian-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Section 007S (exactness at points) and the definition of a short exact sequence"
-   }
-  },
-  {
-   "text": "If the sheaf sequence is short exact, then $g_x\\circ f_x=(g\\circ f)_x=0$ by the definition of stalk maps [def-weil-pbc-module-stalk], the stalk complex $F'_x\\to F_x\\to F''_x$ is exact by [lem-sc-abelian-sheaf-exact-iff-stalk-exact], $f_x$ is injective by [lem-sc-abelian-sheaf-mono-iff-stalk-mono] and $g_x$ is surjective by [lem-sc-abelian-sheaf-epi-iff-stalk-epi]. Hence by Step 1 each stalk sequence is short exact.",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-    "lem-sc-abelian-sheaf-mono-iff-stalk-mono",
-    "lem-sc-abelian-sheaf-epi-iff-stalk-epi"
+    "lem-sc-abelian-sheaf-exact-iff-stalk-exact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AG (lemma-abelian), specialized to sheaves of Z-modules; Sheaves, Section 007S (section-exactness-points)"
-   }
-  },
-  {
-   "text": "Conversely, suppose every stalk sequence is short exact. First $g\\circ f=0$: for an open $U$ and $s\\in F'(U)$, every germ of $t=g_U(f_U(s))$ is $(g\\circ f)(s)_x=g_x(f_x(s_x))=0$, so by [def-weil-pbc-module-stalk] each $x\\in U$ has an open neighbourhood $W_x\\subseteq U$ with $t|_{W_x}=0$, and $t=0$ by the sheaf axiom for $F''$; thus $F'\\to F\\to F''$ is a short complex of abelian sheaves. Its stalk complexes are exact, so it is exact by [lem-sc-abelian-sheaf-exact-iff-stalk-exact]; $f$ is a monomorphism by [lem-sc-abelian-sheaf-mono-iff-stalk-mono] and $g$ an epimorphism by [lem-sc-abelian-sheaf-epi-iff-stalk-epi], the stalk maps being injective, resp. surjective. By Step 1 the sheaf sequence is short exact.",
-   "uses": [
-    "def-sc-topological-abelian-cohomology",
-    "def-weil-pbc-module-stalk",
-    "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-    "lem-sc-abelian-sheaf-mono-iff-stalk-mono",
-    "lem-sc-abelian-sheaf-epi-iff-stalk-epi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AG (lemma-abelian), specialized to sheaves of Z-modules; Sheaves, Section 007S (section-exactness-points)"
+    "document": "Mathlib/Topology/Sheaves/Abelian.lean and Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+    "place": "Sheaf.exact_iff_stalkFunctor_map_exact; ShortComplex.exact_iff_mono and exact_iff_epi"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-exact-sequence",
-  "def-sc-topological-abelian-cohomology",
-  "def-weil-pbc-module-stalk",
-  "lem-sc-abelian-sheaf-exact-iff-stalk-exact",
-  "lem-sc-abelian-sheaf-mono-iff-stalk-mono",
-  "lem-sc-abelian-sheaf-epi-iff-stalk-epi"
+  "lem-sc-abelian-sheaf-exact-iff-stalk-exact"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01AG (lemma-abelian), specialized to the constant sheaf of rings Z; Sheaves, Section 007S (section-exactness-points)"
+  "document": "Mathlib/Topology/Sheaves/Abelian.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "place": "Stalk finite-limit/colimit instances; exact_iff_stalkFunctor_map_exact applied at the middle and both zero-map endpoints; ShortExact.map_of_exact and ShortExact.mk'. Implements the stalk criterion of Modules 01AG / Sheaves 007S."
  },
  "mathlib_searches": [
   {
@@ -156,5 +134,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ee3f9",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085346-L-42300",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged Lean signature and completed proof match the node and updated DAG; delivery and all five direct importers compile cleanly; axioms are exactly propext, Classical.choice, and Quot.sound."
  }
 }
