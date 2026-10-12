@@ -71,6 +71,25 @@ theorem locallyFreeCharpoly_spec {n r : ℕ} (f : Fin r → A)
       locallyFreeCharpoly f hgen hfree φ = (LinearMap.toMatrix e e φ).charpoly) := by
   sorry
 
+/-- Over a nonzero ring the module determines its constant rank.
+Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
+(blueprint: def-weil-pbc-charpoly-locally-free).
+Proof (step 3 of the node): choose a maximal ideal and an element of each cover outside it.
+The localization at their product is nonzero and has both bases after further localization
+(`def-weil-pbc-module-localization-away`, `def-weil-ring-localization-away`). Tensor with a
+residue field (`def-weil-module-base-change`) and compare the two finite basis sizes. -/
+theorem locallyFree_constantRank_eq [Nontrivial A] {n m r s : ℕ}
+    (f : Fin r → A) (g : Fin s → A)
+    (hfgen : Ideal.span (Set.range f) = ⊤)
+    (hffree : ∀ i : Fin r,
+      ∃ _e : Module.Basis (Fin n) (Localization.Away (f i))
+        (LocalizedModule.Away (f i) M), True)
+    (hggen : Ideal.span (Set.range g) = ⊤)
+    (hgfree : ∀ j : Fin s,
+      ∃ _e : Module.Basis (Fin m) (Localization.Away (g j))
+        (LocalizedModule.Away (g j) M), True) : n = m := by
+  sorry
+
 /-- Independence of both the trivializing cover and the stated constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
 (blueprint: def-weil-pbc-charpoly-locally-free).
@@ -93,25 +112,14 @@ theorem locallyFreeCharpoly_eq {n m r s : ℕ} (f : Fin r → A) (g : Fin s → 
         (LocalizedModule.Away (g j) M), True)
     (φ : M →ₗ[A] M) :
     locallyFreeCharpoly f hfgen hffree φ = locallyFreeCharpoly g hggen hgfree φ := by
-  sorry
-
-/-- Over a nonzero ring the module determines its constant rank.
-Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
-(blueprint: def-weil-pbc-charpoly-locally-free).
-Proof (step 3 of the node): choose a maximal ideal and an element of each cover outside it.
-The localization at their product is nonzero and has both bases after further localization
-(`def-weil-pbc-module-localization-away`, `def-weil-ring-localization-away`). Tensor with a
-residue field (`def-weil-module-base-change`) and compare the two finite basis sizes. -/
-theorem locallyFree_constantRank_eq [Nontrivial A] {n m r s : ℕ}
-    (f : Fin r → A) (g : Fin s → A)
-    (hfgen : Ideal.span (Set.range f) = ⊤)
-    (hffree : ∀ i : Fin r,
-      ∃ _e : Module.Basis (Fin n) (Localization.Away (f i))
-        (LocalizedModule.Away (f i) M), True)
-    (hggen : Ideal.span (Set.range g) = ⊤)
-    (hgfree : ∀ j : Fin s,
-      ∃ _e : Module.Basis (Fin m) (Localization.Away (g j))
-        (LocalizedModule.Away (g j) M), True) : n = m := by
-  sorry
+  classical
+  by_cases hA : Nontrivial A
+  · have := hA
+    have hnm := locallyFree_constantRank_eq (M := M) f g hfgen hffree hggen hgfree
+    subst m
+    exact (((locallyFreeCharpoly_spec.{_,_,0} (M := M) f hfgen hffree φ).1.2
+      _ (locallyFreeCharpoly_spec.{_,_,0} (M := M) g hggen hgfree φ).1.1).symm)
+  · have : Subsingleton A := not_nontrivial_iff_subsingleton.mp hA
+    exact Subsingleton.elim _ _
 
 end Algebra
