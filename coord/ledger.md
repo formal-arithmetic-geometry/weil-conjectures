@@ -7662,3 +7662,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:46 L: returned deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (reviewer RETURN: (reviewer X-7dba8, head 7dba89394) B3: In each new node file lem-weil-pbc-etale-limit-affine-degree-zero-kernel.json, le)
 - 12:46 L: returned deliver/K2/Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder (reviewer RETURN: (reviewer X-55e83, head 55e83616c) B6 / brief point 6: Correct two Mathlib declaration records. (1) In dag/nodes/sec-pro)
 - 12:46 L: merged deliver/H1/Sheaf.CategoryTheory.IdentityDerivedHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T124628-L-1182825 (proof); batch 20261012T120425; modules 1; new nodes 2)
+- 12:47 L: merged deliver/H3/Sheaf.Algebra.Homology.FilteredColimitsTensor (stage 3; reviewer PASS; first push; landing 20261012T124732-L-1187782 (interface); batch 20261012T120425; modules 2; new nodes 1)
