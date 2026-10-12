@@ -52,6 +52,64 @@ lemma Scheme.isSeparated_of_isSeparated_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [Is
 
 namespace Scheme.Modules
 
+/-- The global sections of a stage of the Noetherian approximation of an affine scheme form a
+Noetherian ring. -/
+lemma isNoetherianRing_ofIsAffine_obj (V : Scheme.{u}) [IsAffine V] (k : (ofIsAffine V).I) :
+    IsNoetherianRing Γ((ofIsAffine V).D.obj k, ⊤) := by
+  have : Algebra.FiniteType ℤ k.unop.1 := (Subalgebra.fg_iff_finiteType _).mp k.unop.2
+  have : IsNoetherianRing k.unop.1 := Algebra.FiniteType.isNoetherianRing ℤ _
+  exact isNoetherianRing_of_ringEquiv _
+    (Scheme.ΓSpecIso (CommRingCat.of k.unop.1)).commRingCatIsoToRingEquiv.symm
+
+/-- The stage-level step of `exists_isNoetherianRing_model`: if `(f, ℱ)` is the base change of a
+pair `(p₂, 𝒢₂)` over a stage `Spec Aᵢ` of the Noetherian approximation of `V`, with `p₂`
+separated, quasi-compact and of finite presentation, then the base change of `(p₂, 𝒢₂)` to some
+later stage is a Noetherian model of `(f, ℱ)`. -/
+theorem exists_isNoetherianRing_model_of_isPullback {X V : Scheme.{u}} [IsAffine V] (f : X ⟶ V)
+    (ℱ : X.Modules) [IsProper f] (hℱ : ℱ.IsFlatOver f) {i : (ofIsAffine V).I} {Y₂ : Scheme.{u}}
+    (p₂ : Y₂ ⟶ (ofIsAffine V).D.obj i) [IsSeparated p₂] [LocallyOfFinitePresentation p₂]
+    [QuasiCompact p₂] (h₂ : X ⟶ Y₂) (H₂ : IsPullback h₂ f p₂ ((ofIsAffine V).π.app i))
+    (𝒢₂ : Y₂.Modules) [𝒢₂.IsFinitePresentation] (eX : (Modules.pullback h₂).obj 𝒢₂ ≅ ℱ) :
+    ∃ (S Y : Scheme.{u}) (_ : IsAffine S) (_ : IsNoetherianRing Γ(S, ⊤)) (π : V ⟶ S)
+      (p : Y ⟶ S) (_ : IsProper p) (_ : LocallyOfFinitePresentation p) (𝒢 : Y.Modules)
+      (_ : 𝒢.IsFinitePresentation) (h : X ⟶ Y),
+      𝒢.IsFlatOver p ∧ IsPullback h f p π ∧ Nonempty ((Modules.pullback h).obj 𝒢 ≅ ℱ) := by
+  let N := ofIsAffine V
+  have hA (k : N.I) : IsAffine (N.D.obj k) := inferInstanceAs (IsAffine (Spec (.of k.unop.1)))
+  have (k : N.I) : CompactSpace (N.D.obj k) := inferInstance
+  have (k : N.I) : QuasiSeparatedSpace (N.D.obj k) := inferInstance
+  have {k l : N.I} (g : k ⟶ l) : IsAffineHom (N.D.map g) := N.isAffineHom_map g
+  -- properness descends to a stage
+  have : IsProper (pullback.snd p₂ (N.π.app i)) := by
+    rw [← H₂.isoPullback_inv_snd]
+    infer_instance
+  obtain ⟨j₃, f₃, hp₃⟩ := Scheme.exists_isProper_pullback_snd_of_isLimit N.isLimit p₂
+  -- flatness descends to a stage
+  have hflat : ((Modules.pullback (pullback.fst p₂ (N.π.app i))).obj 𝒢₂).IsFlatOver
+      (pullback.snd p₂ (N.π.app i)) := by
+    rw [← H₂.isoPullback_inv_snd]
+    exact (hℱ.pullback_of_isOpenImmersion H₂.isoPullback.inv).of_iso
+      ((Modules.pullback H₂.isoPullback.inv).mapIso eX.symm ≪≫
+        pullbackCompOfEq _ _ _ H₂.isoPullback_inv_fst 𝒢₂)
+  obtain ⟨j₄, f₄, hf₄⟩ := exists_isFlatOver_pullback_ofIsAffine V p₂ 𝒢₂ hflat
+  -- a common later stage
+  let k := IsCofiltered.min j₃ j₄
+  let t : k ⟶ i := IsCofiltered.minToRight j₃ j₄ ≫ f₄
+  have ht : IsCofiltered.minToLeft j₃ j₄ ≫ f₃ = t := Quiver.Hom.unop_inj (Subsingleton.elim _ _)
+  have : IsProper (pullback.snd p₂ (N.D.map t)) := by
+    rw [← ht]
+    exact MorphismProperty.of_isPullback (P := @IsProper)
+      (isPullback_pullback_map p₂ (N.D.map (IsCofiltered.minToLeft j₃ j₄ ≫ f₃)) (N.D.map f₃)
+        (N.D.map (IsCofiltered.minToLeft j₃ j₄)) (N.D.map_comp _ _).symm) hp₃
+  have hw : N.π.app k ≫ N.D.map t = N.π.app i := (Cone.mk V N.π).w t
+  refine ⟨N.D.obj k, pullback p₂ (N.D.map t), hA k, isNoetherianRing_ofIsAffine_obj V k,
+    N.π.app k, pullback.snd _ _, inferInstance, inferInstance,
+    (Modules.pullback (pullback.fst p₂ (N.D.map t))).obj 𝒢₂, inferInstance,
+    pullback.lift h₂ (f ≫ N.π.app k) (by rw [Category.assoc, hw, H₂.w]), hf₄ _ _, ?_,
+    ⟨pullbackCompOfEq _ _ _ (pullback.lift_fst _ _ _) 𝒢₂ ≪≫ eX⟩⟩
+  exact IsPullback.of_right (by simpa [hw] using H₂) (pullback.lift_snd _ _ _)
+    (IsPullback.of_hasPullback _ _)
+
 /-- **Noetherian models of proper flat families** (EGA IV₃, 8.9.1, 8.10.5, 11.2.6). Let `V` be an
 affine scheme, `f : X ⟶ V` proper and locally of finite presentation, and `ℱ` an `𝒪_X`-module of
 finite presentation which is flat over `V`. Then there are an affine scheme `S` with Noetherian
@@ -81,7 +139,18 @@ theorem exists_isNoetherianRing_model {X V : Scheme.{u}} [IsAffine V] (f : X ⟶
   obtain ⟨j₂, 𝒢₂, h𝒢₂, ⟨e₂⟩⟩ :=
     exists_isFinitePresentation_pullback_iso_of_isLimit
       (isLimitBaseChangeCone N.D (Cone.mk V N.π) p₁ N.isLimit) ℱ₁
-  sorry
+  have := h𝒢₂
+  let c := baseChangeCone N.D (Cone.mk V N.π) p₁
+  have H₂ : IsPullback (e₁.hom ≫ c.π.app j₂) f (pullback.snd p₁ (N.D.map j₂.hom))
+      (N.π.app j₂.left) := by
+    have := (IsPullback.of_horiz_isIso (fst := e₁.hom) (snd := f)
+      (f := pullback.snd p₁ (N.π.app i₁)) (g := 𝟙 V) ⟨by simp [e₁]⟩).paste_horiz
+      (isPullback_baseChangeCone_π N.D (Cone.mk V N.π) p₁ j₂)
+    simpa using this
+  exact exists_isNoetherianRing_model_of_isPullback f ℱ hℱ _ _ H₂ 𝒢₂
+    ((pullbackCompOfEq e₁.hom (c.π.app j₂) _ rfl 𝒢₂).symm ≪≫
+      (Modules.pullback e₁.hom).mapIso e₂ ≪≫
+      pullbackCompOfEq e₁.hom e₁.inv (𝟙 X) e₁.hom_inv_id ℱ ≪≫ pullbackId.app ℱ)
 
 end Scheme.Modules
 
