@@ -28,7 +28,7 @@
    }
   },
   {
-   "text": "**Step 2 (descending induction on $p$).** Claim: $F^p\\varphi$ is an isomorphism for every $p$. For $p\\ge m$ both $F^pA$ and $F'^pA'$ are $0$ (Step 1), so $F^p\\varphi$ is the isomorphism $0\\to0$. Let $p<m$ and assume $F^{p+1}\\varphi$ is an isomorphism. In the diagram of Step 1 for this $p$, the left vertical arrow $F^{p+1}\\varphi$ is an isomorphism by the induction hypothesis and the right vertical arrow $\\operatorname{gr}^p\\varphi$ is an isomorphism by hypothesis; the rows are short exact, so the short five lemma [lem-weil-pbc-short-five-lemma] gives that the middle arrow $F^p\\varphi$ is an isomorphism. Since only the finitely many $p$ with $n\\le p<m$ need an induction step, this descending induction reaches every $p\\ge n$, and for $p<n$ the map $F^p\\varphi=F^n\\varphi$ (as $F^pA=F^nA$, $F'^pA'=F'^nA'$). No strictness of $\\varphi$ is used: the five lemma needs only the commutative diagram.",
+   "text": "**Step 2 (descending induction).** Put $m=\\max(m_A,m_B)$ using the two zero-step bounds. For every $p\\ge m$, antitonicity gives $F^pA=F^pB=0$, so the restriction is an isomorphism between zero objects. Prove by induction on $k\\in\\mathbf N$ that every restriction at $p$ with $m\\le p+k$ is an isomorphism. The base case is the zero-object argument. For the successor case, the induction hypothesis gives the isomorphism at $p+1$. Form the morphism of cokernel short complexes from the commuting restrictions and graded map of Step 1. Both rows are short exact, since their first maps are monomorphisms and their second maps are cokernel projections. The short five lemma [lem-weil-pbc-short-five-lemma] gives the isomorphism at $p$. For arbitrary $p$, take $k=\\max(m-p,0)$, viewed as a natural number. This proves every restriction is an isomorphism without needing a separate argument for $p<n$.",
    "uses": [
     "lem-weil-pbc-short-five-lemma",
     "def-sp-filtration"
@@ -174,5 +174,15 @@
   "group": "M1",
   "result": "pass",
   "note": "C abelian, A B : FilteredObject (landed def-sp-filtration), f : Hom A B (not strict), hA/hB IsFinite each = common n<=m bounds, hgraded all p via cokernel-induced gradedMap, concl IsIso f.hom and all step restrictions (=> strict); gradedMap chosen from named sorry existence theorem per brief-stage2 H5 pattern"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699441",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
