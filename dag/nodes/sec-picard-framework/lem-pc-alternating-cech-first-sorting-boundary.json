@@ -15,23 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Label each entry by its original position, including equal values. The stable sort filter has exactly one solution, as in `Tuple.eq_sort_iff`. At each prefix length, the partial sort filter also has exactly one solution: fix the prefix and list the unused labels increasingly. Expand both differentials and distribute through the finite sums and integer multiples. In the outgoing expansion, pair a deletion of a label different from the repeated junction label with the incoming term for the same deleted original position. Deleting in the prefix reduces its length by one; deleting in the tail preserves it. The remaining sorting permutations are those of the corresponding face, since deleting a labelled entry preserves lexicographic order. Deleting position r with value label j changes the permutation sign by (-1)^(r+j): move that position and value to the end and restrict the permutation. Together with the differential and junction signs, this gives opposite coefficients for each paired term. Index maps have identical composites with all projections, so their transports agree by the product universal property. The two unpaired occurrences of the junction label have the signed partial permutation with prefix length a and the negative of that with prefix length a+1. Summing these gives the displayed sum. The last two partial stages are identical, so the terminal summand is zero. No telescoping or identification of the first and final stages is needed. This argument uses labels rather than distinct values and thus includes tuples with repetitions. If the index type is empty there is no tuple to evaluate.",
+   "text": "Expand the outgoing differential using additivity of restriction and integer scalar multiplication. Partition each finite summand by whether its deleted original label is the repeated junction label. This proves outgoing = J + N, where J and N are the two explicit disjoint filtered sums.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators",
     "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the nonjunction cancellation to obtain N + incoming = 0.",
+   "uses": [
+    "lem-pc-alternating-cech-first-sorting-nonjunction-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the junction deletion formula to identify J with the sum of successive partial sorting differences. Associativity gives (J + N) + incoming = J + (N + incoming) = J, proving the statement without identifying endpoints or telescoping.",
+   "uses": [
+    "lem-pc-alternating-cech-first-sorting-junction-deletions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-alternating-cech-sorting-operators",
-  "def-weil-pbc-site-cech-complex"
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-first-sorting-junction-deletions",
+  "lem-pc-alternating-cech-first-sorting-nonjunction-cancellation"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "T1",
+  "agent": "H3",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, verification of 20.23.6.1 omitted in the source; labelled-deletion pairing written out by T1"
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification of dh+hd; https://stacks.math.columbia.edu/tag/01FM; disjoint labelled-deletion partition implemented in Lean"
  },
  "mathlib_searches": [
   {
@@ -112,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T165533-L-2940252",
+  "landing": "20261012T184306-L-4005448",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

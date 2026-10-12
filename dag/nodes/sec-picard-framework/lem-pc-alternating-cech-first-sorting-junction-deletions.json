@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-alternating-cech-first-sorting-junction-deletions",
+ "kind": "statement",
+ "title": "Junction deletion contribution to the first Cech sorting boundary",
+ "statement": "Let $X$ be a scheme, $I$ a linearly ordered type, $U:I\\to\\operatorname{Opens}(X)$,\n$F:\\operatorname{Opens}(X)^{\\mathrm{op}}\\to\\mathrm{Ab}$ a presheaf, and $S$ a\nSiteCechComplex for the arrows $U_i\\to X$ [def-pc-scheme, def-sc-zariski-site,\ndef-weil-pbc-site-cech-complex]. Let $p\\ge0$, $s$ a cochain in degree $p+1$,\nand $t:\\operatorname{Fin}(p+2)\\to I$. Use stable sorting, partial sorting and\njunction maps from [def-pc-alternating-cech-sorting-operators]. For permutations\n$\\sigma,\\tau$ of $\\operatorname{Fin}(p+2)$, $a\\in\\operatorname{Fin}(p+2)$ and\n$r\\in\\operatorname{Fin}(p+3)$, write $q=\\operatorname{cechJunction}(\\sigma,\\tau,a)$,\n$\\delta_r=r.\\operatorname{succAbove}$, and define\n$E_{\\sigma,a,\\tau,r}=(-1)^a\\operatorname{sign}(\\tau)\\,\n F(\\operatorname{indexMap}(t,q))((-1)^r\n F(\\operatorname{indexMap}(t\\circ q,\\delta_r))(s((t\\circ q)\\circ\\delta_r)))$,\nwith contravariant restriction maps. Sum only over pairs for which $\\sigma$\nis the stable sort of $t$ and $\\tau$ fixes its prefix below $a$ and has an\nincreasing tail starting at $a$. The sum $J$ of these terms with $q(r)=\\sigma(a)$ equals\n$\\sum_{a=0}^{p+1}(B_a(s)(t)-B_{a+1}(s)(t))$, where $B_b(s)(t)$ is the signed\nrestriction sum over the stable $\\sigma$ and the permutation fixing its prefix\nbelow $b$ with increasing tail starting at $b$; its summand is\n$\\operatorname{sign}(\\tau)F(\\operatorname{indexMap}(t,\\tau))(s(t\\circ\\tau))$.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification of dh+hd; https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "A stable permutation exists uniquely by ordering the finite set of labels\nby (value, original position). For every prefix length, the partial permutation\nexists uniquely by keeping that prefix and enumerating the unused labels\nin their original increasing order. Thus both permutation filters pick one term.\nFor each stable permutation σ and partial permutation τ with prefix a,\nσ a occurs exactly twice in the junction: at a, and at the unique tail position\nwhose τ-label is σ a. All other labels occur once. Delete the prefix occurrence:\nthe remaining tuple is t composed with τ, because τ agrees with σ below a.\nIts coefficient is sign τ, since the two powers of -1 at a cancel. Delete the\ntail occurrence: the remaining permutation fixes σ through a and has an\nincreasing unused tail, hence is the partial permutation at a+1. If σ a occurs\nat position b of τ (junction position b+1), moving it from b to a contributes\n(-1)^(b-a); the deletion at b+1 therefore gives minus the sign of this next partial permutation.\nIndex-map composites agree with the resulting permutation map by comparing\nall projections and applying the product universal property. This proves the\ndifference at each a after summing over the unique partial permutation.\nFor the final a, both partial permutations are σ, so the two terms cancel.\nStable sorting orders pairs (value, original position), so repeated values do\nnot change the argument. Empty index types have no tuple t.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H3",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification of dh+hd; https://stacks.math.columbia.edu/tag/01FM; labelled-deletion proof written by H3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech sorting homotopy junction deletions and nonjunction cancellation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech sorting homotopy cancellation of labelled deletions",
+   "results": "8 results: AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant, AlgebraicTopology.DoldKan.hσ'_eq, SimplexCategoryGenRel.standardσ_simplicialInsert, SimplexCategory.factor_δ_spec, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, SimplexCategoryGenRel.standardσ_comp_standardσ, AlgebraicTopology.DoldKan.homotopyPToId, AlgebraicTopology.DoldKan.hσ'_eq'; no identity for the explicit Cech sorting sum.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechFirstSorting|cechJunction|sum_ite",
+   "results": "25 results: Mathlib/NumberTheory/Chebyshev.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean; no identity for the explicit Cech sorting sum.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "permutation deleting a position sign of induced permutation finite ordered type",
+   "results": "List permutation erasure lemmas, Equiv.Perm.decomposeFin, and Fin.removeNth_removeNth_eq_swap; none states the filtered Cech cancellation or junction contribution.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign",
+   "results": "Basic sign, swap sign, inverse sign results; no complete junction or nonjunction identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sign.*(remove|succAbove|decompose|cycle)|sort.*(erase|remove)|homotopy.*sort",
+   "results": "Mathlib sign_cycleRange and sign_cycleIcc_of_le are useful sign ingredients; no full partial identity in either library root.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingBoundary",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Ordered Cech contraction: junction deletions give consecutive partial sorting stages",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-boundary",
+    "lem-pc-alternating-cech-first-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingJunctionDeletions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingJunctionDeletions",
+  "statement": "theorem cechFirstSortingJunctionDeletions (X : Scheme.{u}) {I : Type v} [LinearOrder I]\n    (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})\n    (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))\n    (p : ℕ) (s : S.cochains F (p + 1)) (t : Fin (p + 2) → I) :\n    let E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ : Equiv.Perm (Fin (p + 2)), ∑ τ : Equiv.Perm (Fin (p + 2)),\n        if cechStableSort t σ ∧\n            (∀ k, k.val < a → τ k = σ k) ∧\n            (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n          (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    (∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),\n      ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),\n        if (cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n            cechJunction σ τ a r = σ a then E σ a τ r else 0) =\n      ∑ a : Fin (p + 2), (B a.val t - B (a.val + 1) t)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T184306-L-4005448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T184306-L-4005448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
