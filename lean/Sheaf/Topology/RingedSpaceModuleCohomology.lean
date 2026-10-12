@@ -104,7 +104,9 @@ theorem moduleCohomology_iso_resolution (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X))
     (I : CategoryTheory.InjectiveResolution F) (p : ℕ) :
     Nonempty ((moduleCohomology X p).obj F ≅ (globalSectionsComplex I).homology p) := by
-  sorry
+  let : EnoughInjectives (SheafOfModules.{u} (moduleRings X)) :=
+    (moduleSheaves_abelian_enoughInjectives X).2
+  exact ⟨I.isoRightDerivedObj (globalSectionsFunctor X) p⟩
 
 /-- The cohomology of `Γ(X, I^•)` is independent, up to isomorphism, of the chosen injective
 resolution. Source: Stacks Project, Cohomology, Section 20.11, Tag 01DZ
@@ -120,6 +122,8 @@ theorem moduleCohomology_independent (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X))
     (I J : CategoryTheory.InjectiveResolution F) (p : ℕ) :
     Nonempty ((globalSectionsComplex I).homology p ≅ (globalSectionsComplex J).homology p) := by
-  sorry
+  obtain ⟨eI⟩ := moduleCohomology_iso_resolution X F I p
+  obtain ⟨eJ⟩ := moduleCohomology_iso_resolution X F J p
+  exact ⟨eI.symm ≪≫ eJ⟩
 
 end AlgebraicGeometry.RingedSpace

@@ -27,9 +27,28 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Install EnoughInjectives for module sheaves using AlgebraicGeometry.RingedSpace.moduleSheaves_abelian_enoughInjectives [lem-sc-ringed-space-module-sheaves-enough-injectives]. Apply Mathlib CategoryTheory.InjectiveResolution.isoRightDerivedObj to I, the additive globalSectionsFunctor X and arbitrary p : Nat. Unfolding the unchanged moduleCohomology and globalSectionsComplex identifies its source and target with the required objects, proving moduleCohomology_iso_resolution.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For resolutions I and J, obtain the two isomorphisms eI and eJ from moduleCohomology_iso_resolution. The composite eI.symm followed by eJ is an isomorphism from degree-p homology of globalSectionsComplex I to degree-p homology of globalSectionsComplex J, proving moduleCohomology_independent.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 20.11, Tag 01DZ; injective-resolution computation implemented by Mathlib CategoryTheory.InjectiveResolution.isoRightDerivedObj, with independence by symmetry and composition (C1 stage-3 second reading, 2026-10-12)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -114,5 +133,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T063505-L-3153151",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
