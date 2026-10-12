@@ -143,6 +143,125 @@ noncomputable def toIhomIhomNatTrans (W : C) :
   app X := toIhomIhom W X
   naturality _ _ f := toIhomIhom_naturality W f
 
+/-- The double-dual map is extranatural in the dualizing object: for `g : W ⟶ W'` both ways
+from `X` to `[[X, W], W']`,
+```
+  X ──── toIhomIhom W X ────→ [[X, W], W]
+  │                               │
+  toIhomIhom W' X           [[X, W], g]
+  ↓                               ↓
+  [[X, W'], W'] ──[[X, g], W']──→ [[X, W], W']
+```
+agree. -/
+@[reassoc]
+lemma toIhomIhom_comp_ihom_map {W W' : C} (g : W ⟶ W') (X : C) :
+    toIhomIhom W X ≫ (ihom _).map g = toIhomIhom W' X ≫ (pre ((ihom X).map g)).app W' := by
+  apply uncurry_injective
+  rw [uncurry_natural_right, uncurry_toIhomIhom, uncurry_pre_app, uncurry_toIhomIhom,
+    BraidedCategory.braiding_naturality_left_assoc, Category.assoc, ihom.ev_naturality]
+
+section Functor
+
+variable {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
+
+open Functor.LaxMonoidal in
+/-- The double-dual map is compatible with lax braided functors: for `G : C ⥤ D` lax braided
+between braided monoidal closed categories, with comparison maps `c : G [A, B] ⟶ [G A, G B]`
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), the square
+```
+  G X ─────────── G δ ───────────→ G [[X, W], W]
+   │                                    │
+   δ                                    c
+   ↓                                    ↓
+  [[G X, G W], G W] ──[c, G W]──→ [G [X, W], G W]
+```
+commutes, where `δ` is `CategoryTheory.MonoidalClosed.toIhomIhom`. -/
+@[reassoc]
+lemma map_toIhomIhom_comp_ihomComparison (G : C ⥤ D) [G.LaxBraided] (W X : C) :
+    G.map (toIhomIhom W X) ≫ (ihomComparison G ((ihom X).obj W)).natTrans.app W =
+      toIhomIhom (G.obj W) (G.obj X) ≫
+        (pre ((ihomComparison G X).natTrans.app W)).app (G.obj W) := by
+  apply uncurry_injective
+  rw [uncurry_pre_app, uncurry_toIhomIhom, uncurry_natural_left, uncurry_eq,
+    ihomComparison_ev, μ_natural_right_assoc, ← G.map_comp, ← uncurry_eq, uncurry_toIhomIhom,
+    G.map_comp, Functor.LaxBraided.braided_assoc, BraidedCategory.braiding_naturality_left_assoc,
+    ihomComparison_ev]
+
+open Functor.LaxMonoidal in
+/-- If the comparison maps `G [A, B] ⟶ [G A, G B]` of a lax braided functor `G` are
+isomorphisms, then `G` carries the double-dual map `X ⟶ [[X, W], W]` to an isomorphism if and
+only if the double-dual map `G X ⟶ [[G X, G W], G W]` is an isomorphism
+(`CategoryTheory.MonoidalClosed.map_toIhomIhom_comp_ihomComparison`). -/
+lemma isIso_map_toIhomIhom_iff (G : C ⥤ D) [G.LaxBraided] (W X : C)
+    [IsIso ((ihomComparison G X).natTrans.app W)]
+    [IsIso ((ihomComparison G ((ihom X).obj W)).natTrans.app W)] :
+    IsIso (G.map (toIhomIhom W X)) ↔ IsIso (toIhomIhom (G.obj W) (G.obj X)) := by
+  have h := map_toIhomIhom_comp_ihomComparison G W X
+  constructor
+  · intro
+    have : IsIso (toIhomIhom (G.obj W) (G.obj X) ≫
+        (pre ((ihomComparison G X).natTrans.app W)).app (G.obj W)) := by
+      rw [← h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ ((pre ((ihomComparison G X).natTrans.app W)).app _)
+  · intro
+    have : IsIso (G.map (toIhomIhom W X) ≫
+        (ihomComparison G ((ihom X).obj W)).natTrans.app W) := by
+      rw [h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ ((ihomComparison G ((ihom X).obj W)).natTrans.app W)
+
+open Functor.LaxMonoidal in
+/-- The double-dual map under a lax braided functor `G` with a map `ε : G W ⟶ W'`, for instance
+a direct image with the counit `Rf_* ω_X ⟶ ω_Y`: the comparison
+`φ_X : G [X, W] ⟶ [G X, G W] ⟶ [G X, W']` carries `G δ` to `δ`,
+```
+  G X ─────────── G δ ───────────→ G [[X, W], W]
+   │                                    │
+   δ                                    φ
+   ↓                                    ↓
+  [[G X, W'], W'] ───[φ, W']───→ [G [X, W], W']
+```
+-/
+@[reassoc]
+lemma map_toIhomIhom_comp_ihomComparison_comp_ihom_map (G : C ⥤ D) [G.LaxBraided] (W X : C)
+    {W' : D} (ε : G.obj W ⟶ W') :
+    G.map (toIhomIhom W X) ≫ (ihomComparison G ((ihom X).obj W)).natTrans.app W ≫
+        (ihom _).map ε =
+      toIhomIhom W' (G.obj X) ≫
+        (pre ((ihomComparison G X).natTrans.app W ≫ (ihom _).map ε)).app W' := by
+  rw [map_toIhomIhom_comp_ihomComparison_assoc, pre_comm_ihom_map,
+    toIhomIhom_comp_ihom_map_assoc, pre_map, NatTrans.comp_app]
+
+open Functor.LaxMonoidal in
+/-- If the comparisons `φ_X : G [X, W] ⟶ [G X, W']` of
+`CategoryTheory.MonoidalClosed.map_toIhomIhom_comp_ihomComparison_comp_ihom_map` are
+isomorphisms, then `G` carries the double-dual map `X ⟶ [[X, W], W]` to an isomorphism if and
+only if the double-dual map `G X ⟶ [[G X, W'], W']` is an isomorphism. -/
+lemma isIso_map_toIhomIhom_iff_of_isIso_comp (G : C ⥤ D) [G.LaxBraided] (W X : C)
+    {W' : D} (ε : G.obj W ⟶ W')
+    [IsIso ((ihomComparison G X).natTrans.app W ≫ (ihom _).map ε)]
+    [IsIso ((ihomComparison G ((ihom X).obj W)).natTrans.app W ≫ (ihom _).map ε)] :
+    IsIso (G.map (toIhomIhom W X)) ↔ IsIso (toIhomIhom W' (G.obj X)) := by
+  have h := map_toIhomIhom_comp_ihomComparison_comp_ihom_map G W X ε
+  constructor
+  · intro
+    have : IsIso (toIhomIhom W' (G.obj X) ≫
+        (pre ((ihomComparison G X).natTrans.app W ≫ (ihom _).map ε)).app W') := by
+      rw [← h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      ((pre ((ihomComparison G X).natTrans.app W ≫ (ihom _).map ε)).app W')
+  · intro
+    have : IsIso (G.map (toIhomIhom W X) ≫
+        (ihomComparison G ((ihom X).obj W)).natTrans.app W ≫ (ihom _).map ε) := by
+      rw [h]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      ((ihomComparison G ((ihom X).obj W)).natTrans.app W ≫ (ihom _).map ε)
+
+end Functor
+
 /-- The canonical biduality map `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category:
 the transpose of
 ```
