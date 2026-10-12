@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-etale-units-stalk-evaluation-bijective",
+ "kind": "statement",
+ "title": "The geometric stalk evaluation homomorphism on units is bijective",
+ "statement": "Let $K$ be a field, $K^{sep}$ its separable closure, $\\Omega$ its algebraic closure, $p$ its geometric point [def-weil-pbc-geometric-stalks], and $\\mathbb G_m$ its units sheaf [def-sc-gm-torsor]. Suppose an additive homomorphism $f:(\\mathbb G_m)_p\\to (K^{sep})^\\times$ [def-sc-galois-units-cohomology] satisfies the evaluation formula on every unit germ: its image embedded into $\\Omega$ is the value of the representing unit at the geometric lift. Then $f$ is bijective. This conclusion has no Galois action or equivariance clause.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+ },
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "For surjectivity, a separable-closure unit and its inverse belong to a finite separable subextension. Its spectrum is an etale K-neighbourhood and its inclusion in the algebraic closure gives a lift. The corresponding unit germ maps to the original unit by the evaluation formula and injectivity of the separable-closure embedding.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-sc-gm-torsor",
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For injectivity, represent both elements by germs. Refine their neighbourhoods to connected affine components at the chosen lift, each the spectrum of a finite separable field extension. Embed both fields into the algebraic closure using the lifts and take their finite separable compositum. It gives a common pointed etale refinement. Equality of evaluations makes the pulled-back units equal in the compositum, so the original germs agree in the stalk colimit. The argument includes imperfect fields and uses only separable extensions.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-finite-separable-extension-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "evaluation on the geometric etale stalk of units over a field; separability and bijectivity",
+   "results": "Service unavailable: Internal Server Error on worker queries.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bijective evaluation map from etale geometric stalk multiplicative group to separable closure units",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, StandardEtalePair.homEquiv. None states the stalk evaluation result.",
+   "date": "2026-10-13",
+   "verdict": "related algebraic results, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Uu]nits|[Uu]nits.*stalk|stalk.*[Ee]valuat|[Ee]valuat.*stalk in Mathlib AlgebraicGeometry/Sites and WeilConjectures/AlgebraicGeometry/Sites; exact new declaration names in dag/nodes and both library roots",
+   "results": "No exact declaration matches. Nearby GmGenericPoint and DivisorMap use Zariski localization of units. Existing residue-field separability node supplies part of the proof of the separability theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkGalois",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-h2-forward-embedding",
+   "place": "geometric units-stalk comparison: The geometric stalk evaluation homomorphism on units is bijective",
+   "via": [
+    "lem-sc-etale-units-stalk-galois"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitsStalkEvaluationBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_units_stalk_evaluation_bijective",
+  "statement": "theorem etale_units_stalk_evaluation_bijective (K : Type u) [Field K] : let Ω := AlgebraicClosure K let S := Spec (.of K) let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ∀ f : (p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf →+ Field.galoisUnitsTopRep K, (∀ (X : S.Etale) (x : p.fiber.obj X) (z : S.gmSheaf.obj.obj (op X)), algebraMap (SeparableClosure K) Ω (Additive.toMul (f (p.toPresheafFiber X x S.gmSheaf.obj z)) : (SeparableClosure K)ˣ) = (ΓSpecIso (.of Ω)).hom (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))) → Function.Bijective f",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-etale-evaluation-separable",
+ "kind": "statement",
+ "title": "Values of global functions on etale field neighbourhoods are separable",
+ "statement": "For a field $K$, let $\\Omega$ be its algebraic closure and let $p$ be the geometric point of $\\operatorname{Spec}K$ [def-weil-pbc-geometric-stalks]. For every etale $K$-scheme $X$, every lift $x:\\operatorname{Spec}\\Omega\\to X$, and every global function $z$ on $X$, its evaluated value $\\Gamma(\\operatorname{Spec}\\Omega)\\cong\\Omega$ is separable over $K$. The precise evaluation map is recorded in the Lean signature.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02G8 (finite separable residue extensions), as used in Example 03QV (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Factor the lift through the residue field at its image. The base residue-field point is a surjective closed immersion into the reduced one-point scheme Spec K, so it is an isomorphism. Spec.preimage therefore yields a bijective map from K to that residue field. Compose it with the etale structural residue-field map. The source-library Scheme.Hom.etale_residueFieldMap, RingHom.Etale.of_bijective and stability under composition show the composite is etale, hence separable by Algebra.FormallyEtale.iff_isSeparable.",
+   "uses": [
+    "lem-weil-pbc-etale-residue-field-extension-separable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The factorization of the lift and its equality over Spec K give that the final residue-field embedding into the algebraic closure is K-linear. Evaluate z in that residue field and apply IsSeparable.map to its injective algebra homomorphism. Scheme.GammaSpecIso_naturality identifies the image value with evaluation along the original lift (the Lean name is Scheme.ΓSpecIso_naturality).",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-etale-residue-field-extension-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02G8 (finite separable residue extensions), as used in Example 03QV (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "evaluation on the geometric etale stalk of units over a field; separability and bijectivity",
+   "results": "Service unavailable: Internal Server Error on worker queries.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of global function on etale scheme over field in algebraic closure is separable",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, StandardEtalePair.homEquiv. None states the stalk evaluation result.",
+   "date": "2026-10-13",
+   "verdict": "related algebraic results, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Uu]nits|[Uu]nits.*stalk|stalk.*[Ee]valuat|[Ee]valuat.*stalk in Mathlib AlgebraicGeometry/Sites and WeilConjectures/AlgebraicGeometry/Sites; exact new declaration names in dag/nodes and both library roots",
+   "results": "No exact declaration matches. Nearby GmGenericPoint and DivisorMap use Zariski localization of units. Existing residue-field separability node supplies part of the proof of the separability theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkGalois",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-h2-forward-embedding",
+   "place": "geometric units-stalk comparison: Values of global functions on etale field neighbourhoods are separable",
+   "via": [
+    "lem-sc-etale-units-stalk-galois"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleEvaluationSeparable",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleEvaluationSeparable.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_evaluation_isSeparable",
+  "statement": "theorem etale_evaluation_isSeparable (K : Type u) [Field K] : let Ω := AlgebraicClosure K let S := Spec (.of K) let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ∀ (X : S.Etale) (x : p.fiber.obj X) (z : Γ(X.left, ⊤)), IsSeparable K ((ΓSpecIso (.of Ω)).hom (x.left.appTop z))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,24 +14,35 @@
  },
  "proof": [
   {
-   "text": "Use the separable closure inside the algebraic closure as geometric point.\nAny germ of a unit has a representative on an etale neighbourhood. Shrink to the connected\ncomponent at the given lift, which is the spectrum of a finite separable field extension.\nEvaluation of its functions at that lift gives a unit of the separable closure. Evaluation\ncommutes with restriction, so this defines a map from the stalk. Conversely, any nonzero\nseparable algebraic element belongs to a finite separable field extension, so it and its\ninverse define a unit on that neighbourhood. Two representatives with equal values agree\nafter passing to their common finite separable compositum. These facts prove bijectivity.\nMultiplication of units becomes addition and the canonical universe lift/down maps\npreserve it, giving the additive equivalence `c`.\nReplacing a lift by its composite with an automorphism of the algebraic closure changes\nits evaluated value by that automorphism. Since the evaluated value lies in the separable\nclosure and the automorphism restricts to `g`, this is exactly the action of `g` on units.\nThis proves the displayed formula on every germ. The argument applies to imperfect fields:\nonly separable elements occur in etale neighbourhoods, not all algebraic-closure units.",
+   "text": "Obtain the explicitly constructed evaluation homomorphism from [lem-sc-etale-units-stalk-evaluation]. Apply [lem-sc-etale-units-stalk-evaluation-bijective] and AddEquiv.ofBijective to obtain the additive equivalence. Its underlying function is the same evaluation homomorphism.",
    "uses": [
-    "def-sc-galois-units-cohomology",
-    "def-weil-pbc-geometric-stalks",
-    "def-sc-gm-torsor"
+    "lem-sc-etale-units-stalk-evaluation",
+    "lem-sc-etale-units-stalk-evaluation-bijective"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For the action formula, reduce equality through Additive.toMul, Units.ext and the injective separable-closure embedding. The evaluation formula gives the left-hand side. Apply hτ to the value of the original germ to rewrite the right-hand side as τ of its evaluation. Substitute the lift relation hx, use Scheme.Hom.comp_appTop, and apply Scheme.ΓSpecIso_naturality to τ. This is exactly the desired equality on values, and the injective reductions prove the original equality.",
+   "uses": [
+    "lem-sc-etale-units-stalk-evaluation",
+    "def-sc-galois-units-cohomology",
+    "def-sc-gm-torsor",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-galois-units-cohomology",
   "def-sc-gm-torsor",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "lem-sc-etale-units-stalk-evaluation",
+  "lem-sc-etale-units-stalk-evaluation-bijective"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03QU and Example 03QV (2)"
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
  },
  "mathlib_searches": [
   {
@@ -112,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T153300-L-2370590",
+  "landing": "20261012T173906-L-3306636",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -7,7 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.CategoryTheory.Sites.Torsor
+
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluation
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationBijective
 
 /-!
 # The geometric stalk of units and its Galois action
@@ -24,6 +26,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 /-- The stalk of the units sheaf is separable-closure units, with its natural action.
 
 Source: Stacks Project, Example 03QV (2), and Tag 03QU.
@@ -58,6 +61,32 @@ theorem exists_etale_units_stalk_galois_equiv (K : Type u) [Field K] :
         (z : S.gmSheaf.obj.obj (op X)),
         c (p.toPresheafFiber X x' S.gmSheaf.obj z) =
           (Field.galoisUnitsTopRep K).ρ g (c (p.toPresheafFiber X x S.gmSheaf.obj z)) :=
-  by sorry
+  by
+    dsimp only
+    obtain ⟨f, hf⟩ := exists_etale_units_stalk_evaluation K
+    let c := AddEquiv.ofBijective f (etale_units_stalk_evaluation_bijective K f hf)
+    refine ⟨c, ?_⟩
+    intro g τ hτ X x x' hx z
+    apply Additive.toMul.injective
+    apply Units.ext
+    apply (algebraMap (SeparableClosure K) (AlgebraicClosure K)).injective
+    change algebraMap (SeparableClosure K) (AlgebraicClosure K)
+        (Additive.toMul (f (_)) : (SeparableClosure K)ˣ) = _
+    rw [hf X x' z]
+    let p := pointSmallEtale
+      (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))
+    have hτ' := congrArg (fun φ : SeparableClosure K →+* AlgebraicClosure K ↦
+      φ (Additive.toMul (f (p.toPresheafFiber X x (Spec (.of K)).gmSheaf.obj z)) :
+        (SeparableClosure K)ˣ)) hτ
+    change _ = algebraMap (SeparableClosure K) (AlgebraicClosure K)
+      (g (Additive.toMul (f (_)) : (SeparableClosure K)ˣ))
+    dsimp only [RingHom.comp_apply] at hτ'
+    refine Eq.trans ?_ hτ'.symm
+    dsimp only [p]
+    rw [hf X x z]
+    rw [hx, Hom.comp_appTop]
+    have hn := ΓSpecIso_naturality (CommRingCat.ofHom τ.toRingHom)
+    exact congrArg (fun φ ↦ φ (x.left.appTop
+      ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))) hn
 
 end AlgebraicGeometry.Scheme

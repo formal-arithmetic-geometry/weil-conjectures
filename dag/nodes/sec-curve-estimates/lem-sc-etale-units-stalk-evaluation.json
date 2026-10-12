@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-etale-units-stalk-evaluation",
+ "kind": "statement",
+ "title": "Evaluation defines the geometric stalk homomorphism on units",
+ "statement": "Let $K$ be a field, $K^{sep}=\\operatorname{SeparableClosure}K$, $\\Omega=\\operatorname{AlgebraicClosure}K$, $S=\\operatorname{Spec}K$ and $p$ its geometric point [def-weil-pbc-geometric-stalks]. For the units sheaf [def-sc-gm-torsor], there exists an additive homomorphism $f:(\\mathbb G_m)_p\\to (K^{sep})^\\times$, written additively as in [def-sc-galois-units-cohomology], whose image of each germ, embedded into $\\Omega$, equals evaluation of its representing unit at the lift. The exact formula is in the Lean signature. No bijectivity or Galois compatibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+ },
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sc-etale-evaluation-separable] to construct the evaluation ring homomorphism with codomain SeparableClosure K as a subtype of the algebraic closure. The ring-homomorphism laws follow by Subtype.ext from the laws of evaluation. Apply Units.map, Additive.ofMul, and ULift.up to obtain an additive map on units for every pointed neighbourhood.",
+   "uses": [
+    "lem-sc-etale-evaluation-separable",
+    "def-sc-gm-torsor",
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of functions commutes with pullback along the lift: the equality is Scheme.Hom.comp_appTop after unfolding pointSmallEtale. Prove equality of unit maps by ULift.ext, Units.ext and Subtype.ext. The compatible family defines a stalk map using Point.presheafFiberDesc; compose with ULift.down to remove the lift. Point.toPresheafFiber_presheafFiberDesc proves the required evaluation formula on every germ.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-geometric-stalks",
+  "lem-sc-etale-evaluation-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "evaluation on the geometric etale stalk of units over a field; separability and bijectivity",
+   "results": "Service unavailable: Internal Server Error on worker queries.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bijective evaluation map from etale geometric stalk multiplicative group to separable closure units",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, StandardEtalePair.homEquiv. None states the stalk evaluation result.",
+   "date": "2026-10-13",
+   "verdict": "related algebraic results, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Uu]nits|[Uu]nits.*stalk|stalk.*[Ee]valuat|[Ee]valuat.*stalk in Mathlib AlgebraicGeometry/Sites and WeilConjectures/AlgebraicGeometry/Sites; exact new declaration names in dag/nodes and both library roots",
+   "results": "No exact declaration matches. Nearby GmGenericPoint and DivisorMap use Zariski localization of units. Existing residue-field separability node supplies part of the proof of the separability theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkGalois",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-h2-forward-embedding",
+   "place": "geometric units-stalk comparison: Evaluation defines the geometric stalk homomorphism on units",
+   "via": [
+    "lem-sc-etale-units-stalk-galois"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitsStalkEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_units_stalk_evaluation",
+  "statement": "theorem exists_etale_units_stalk_evaluation (K : Type u) [Field K] : let Ω := AlgebraicClosure K let S := Spec (.of K) let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ∃ f : (p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf →+ Field.galoisUnitsTopRep K, ∀ (X : S.Etale) (x : p.fiber.obj X) (z : S.gmSheaf.obj.obj (op X)), algebraMap (SeparableClosure K) Ω (Additive.toMul (f (p.toPresheafFiber X x S.gmSheaf.obj z)) : (SeparableClosure K)ˣ) = (ΓSpecIso (.of Ω)).hom (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
