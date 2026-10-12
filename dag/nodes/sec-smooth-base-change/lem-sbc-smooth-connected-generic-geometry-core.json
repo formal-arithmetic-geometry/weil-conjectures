@@ -15,18 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Smoothness preserves normal local rings (034F). Openness (01UA) and C nonempty imply that the generic fibre is nonempty. Smooth base change and geometric connectedness make Cη a connected smooth scheme over K(S). It is locally noetherian and normal (056T); its irreducible components are disjoint and open, so connectedness gives integrality. Every nonempty open of C has open image containing the generic point of S and hence meets j(Cη). The dense image of the irreducible Cη makes C irreducible, and its normal stalks make it reduced. Thus C is integral and both schemes have integrally closed local rings. This is the remaining unformalized geometric argument, detailed in the theorem docstring.",
+   "text": "Use the proved library declarations GeometricallyIrreducible.of_smooth_of_geometricallyConnected and GeometricallyReduced.of_smooth from WeilConjectures.AlgebraicGeometry.Regular. Mathlib GeometricallyIrreducible.irreducibleSpace applies because the smooth map c is open and S is irreducible. The irreducible components of S form a singleton; hence the finite-component hypothesis of GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents holds. Smoothness gives flatness, so that lemma makes C reduced. Combine reducedness and irreducibility to obtain IsIntegral C. These are direct applications of existing proved declarations, with no Noetherian assumption on S.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport smoothness to q using the flipped given pullback square. The definition of geometrically connected gives ConnectedSpace Cη for the same square. Smoothness over the function field gives local Noetherianity and regularity by the proved IsRegular.of_smooth declaration. Apply [lem-sc-regular-connected-integral], whose recorded declaration is IsRegular.isIntegral, to obtain IsIntegral Cη. All hypotheses are instantiated for Cη, not for S or C.",
+   "uses": [
+    "lem-sc-regular-connected-integral"
+   ],
    "elementary": false
+  },
+  {
+   "text": "For each x in C choose affine opens V containing x and U containing c(x), with V contained in the preimage of U. HasRingHomProperty.appLE gives a smooth ring map Γ(S,U) → Γ(C,V). For any prime p of Γ(S,U), the canonical localization equivalence identifies Γ(S,U)_p with the stalk at hU.fromSpec p; this is a domain by integrality of S and integrally closed by hS. Apply [lem-weil-pbc-smooth-over-normal-ring-normal]. Its conclusion at the prime corresponding to x, transported through the localization equivalence with C.presheaf.stalk x, is the required integral closedness. No witnesses of unproved existence statements are chosen.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved IsRegular.uniqueFactorizationMonoid_stalk declaration gives unique factorization in every stalk of the regular Cη. The standard IsIntegrallyClosed instance for a unique factorization domain yields its integral closedness. Assemble the already constructed integral structures on C and Cη and the two stalk conclusions. This is a direct specialization of a proved upstream declaration followed by instance synthesis.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-smooth-over-normal-ring-normal"
+ ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "G2 second reader",
-  "document": "Stacks Project",
-  "place": "Tags 034F, 056T and 01UA",
-  "note": "Remaining source-based geometric argument; not claimed proved."
+  "by": "E2 second reader",
+  "document": "Lean library and Mathlib",
+  "place": "WeilConjectures.AlgebraicGeometry.Regular; Sheaf.RingTheory.SmoothNormalRing; Mathlib.AlgebraicGeometry.Geometrically.Irreducible and Reduced",
+  "note": "Complete local Lean proof, no new statements or holes. Normality ascent still has sorryAx through existing imported dependencies; other principal geometric inputs pass the standard-axiom check."
  },
  "mathlib_searches": [
   {
@@ -100,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T135235-L-1666278",
-  "kind": "interface",
+  "landing": "20261012T173818-L-3293159",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
