@@ -8,15 +8,11 @@ public import Sheaf.AlgebraicGeometry.DerivedSectionPresheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
-import Sheaf.CategoryTheory.TruncationHypercohomology
-import Sheaf.Topology.RestrictInjectiveResolution
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+
+import Sheaf.Paper.QCohAcyclicDerivedSectionsTruncationIso
+import Sheaf.Paper.DerivedSectionsLeftExactBottom
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 
 @[expose] public section
 
@@ -76,6 +72,35 @@ theorem qcoh_acyclic_derived_sections_comparison_sections {X Y : Scheme.{u}}
           PresheafOfModules.pushforward₀
             (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V))
             (moduleRings Y.toRingedSpace).obj) := by
-  sorry
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let D := PresheafOfModules.{u} (moduleRings Y.toRingedSpace).obj
+  let S := RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙
+    SheafOfModules.forget (moduleRings Y.toRingedSpace)
+  let := HasDerivedCategory.standard D
+  have : EnoughInjectives C :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  have : S.Additive := by dsimp [S]; infer_instance
+  have : PreservesFiniteLimits S := by
+    let T := PresheafOfModules.toPresheaf (moduleRings Y.toRingedSpace).obj
+    have : PreservesFiniteLimits (S ⋙ T) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget (moduleRings X.toRingedSpace) ⋙
+          PresheafOfModules.toPresheaf (moduleRings X.toRingedSpace).obj) ⋙
+          (Functor.whiskeringLeft _ _ _).obj (TopologicalSpace.Opens.map f.base).op)
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves S T
+  let P := PresheafOfModules.pushforward₀
+    (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V))
+    (moduleRings Y.toRingedSpace).obj
+  let ι := (schemeDerivedQCohProperty X).ι
+  let H := DerivedCategory.homologyFunctor D i
+  let τ := Functor.whiskerLeft ι
+    (Functor.whiskerRight (Functor.whiskerRight (Functor.whiskerRight
+      (DerivedCategory.TStructure.t.truncGEπ i) S.rightDerivedFunctor) H) P)
+  have (E : schemeDerivedQCohCategory X) : IsIso (τ.app E) :=
+    qcoh_acyclic_derived_sections_truncation_isIso f hacyc i E
+  have : IsIso τ := NatIso.isIso_of_isIso_app τ
+  obtain ⟨e⟩ := S.rightDerivedFunctor_truncated_bottom i
+  exact ⟨asIso τ ≪≫ Functor.isoWhiskerLeft ι (Functor.isoWhiskerRight e P)⟩
 
 end AlgebraicGeometry

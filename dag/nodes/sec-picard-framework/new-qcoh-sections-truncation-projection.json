@@ -1,0 +1,142 @@
+{
+ "id": "new-qcoh-sections-truncation-projection",
+ "kind": "statement",
+ "title": "Canonical truncation projection on affine derived sections",
+ "statement": "For a qcqs f:X→Y with positive higher direct image zero on all quasi-coherent modules, an object E∈D_QCoh(O_X) [def-pc-derived-category] and i∈ℤ, the canonical projection E→τ≥i E induces an isomorphism on the degree-i derived-section module presheaf restricted to the full affine-open category [def-pc-derived-section-presheaf]. This compares E and its truncation, not E and H^i(E).",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D4 (3) with N=1 and the canonical truncation triangle; Tag 08D5 affine-open argument"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-section-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open V. Write S for direct image followed by forgetting to presheaves, A for exact evaluation at V followed by forgetting modules, and F=S⋙A. It is sections over f⁻¹V and preserves countable products. Positive quasi-coherent derived functors vanish by the inverse-affine-open vanishing theorem.",
+   "uses": [
+    "new-qcoh-inverse-affine-open-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strictly lower truncation K=τ<i E remains quasi-coherent and is supported in degrees ≤i-1. Apply the existing unbounded cohomological bound with N=1 to deduce H^i(RF K)=H^(i+1)(RF K)=0.",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply RF to the distinguished truncation triangle and use the two vanishing endpoints to make H^i of its second map invertible.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare R(S⋙A) and RS⋙mapDerivedCategory(A) by the common K-injective model of the source. Exact evaluation commutes with homology. Natural-isomorphism conjugacy transports invertibility to evaluation of the stated presheaf map, and the forgetful presheaf functor reflects isomorphisms. No K-injective resolutions on the presheaf target are required. The cited exact-functor theorem supplies mapDerivedCategoryHomologyFunctorIso. The K-injective comparison itself is the explicit composition of rightDerivedFunctorIsoKInjectives, mapHomotopyCategoryCompIso and mapDerivedCategoryFactorsh written in Lean, not an unproved existence assertion.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-qcoh-inverse-affine-open-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D4 (3) with N=1 and the canonical truncation triangle; Tag 08D5 affine-open argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The homology in degree n of a right derived left exact functor of the lower truncation at n is naturally isomorphic to the functor on the nth homology",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-12). No verdict from the unavailable service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded quasi coherent derived object and its lower truncation have the same derived sections in the cutoff degree under higher direct image acyclicity",
+   "results": "8 hits: quasiIso_πTruncGE_iff, quasiIso_ιTruncLE_iff, quasiIso_truncGEMap_iff and ordinary derived-category support bounds. No scheme-relative derived sections truncation statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*trunc|trunc.*rightDerived|cohomology.*[Aa]ffine; local rg for rightDerivedFunctor_truncated_bottom and bottom homology",
+   "results": "msearch grep: 0 hits. Local search found AffineDerivedSectionsTruncatedBottom, an affine scheme specialization; no existing general bottom comparison. Mathlib truncation and homology interfaces supply parts of the proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSections",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+   "place": "Canonical truncation projection on affine derived sections; proof of affine-open component",
+   "via": [
+    "new-qcoh-acyclic-sections-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QCohAcyclicDerivedSectionsTruncationIso",
+  "file": "lean/Sheaf/Paper/QCohAcyclicDerivedSectionsTruncationIso.lean",
+  "declaration": "AlgebraicGeometry.qcoh_acyclic_derived_sections_truncation_isIso",
+  "statement": "theorem qcoh_acyclic_derived_sections_truncation_isIso {X Y : Scheme.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      F.IsQuasicoherent → ∀ (p : ℤ), 0 < p →\n        IsZero ((schemeModuleHigherDirectImage f p).obj F))\n    (i : ℤ) (E : schemeDerivedQCohCategory X) :\n    IsIso ((PresheafOfModules.pushforward₀\n      (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V))\n      (moduleRings Y.toRingedSpace).obj).map\n        ((schemeDerivedSectionPresheaf f i).map\n          ((DerivedCategory.TStructure.t.truncGEπ i).app E.obj)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T144201-L-2112898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T144201-L-2112898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

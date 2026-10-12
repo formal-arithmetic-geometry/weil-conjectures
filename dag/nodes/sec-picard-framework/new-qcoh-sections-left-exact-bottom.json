@@ -1,0 +1,135 @@
+{
+ "id": "new-qcoh-sections-left-exact-bottom",
+ "kind": "statement",
+ "title": "Left exact bottom cohomology after lower truncation",
+ "statement": "Let C and D be abelian categories with derived categories [def-pc-derived-category]; C has enough injectives and K-injective resolutions [prop-pur-kinjective-resolutions-exist]. For an additive left exact functor S:C→D and n∈ℤ, there is a natural isomorphism H^n(RS(τ≥n(-))) ≅ S(H^n(-)). Neither Grothendieck structure on D nor quasi-coherent cohomology is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TC (2), lemma-negative-vanishing; derived single-object computation and left exactness. Generalization of the proved affineDerivedSections_truncated_bottom construction."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof": [
+  {
+   "text": "Lift τ≥n to D+(C). Apply the derived functor to τ<n+1 M→M→τ≥n+1 M; negative vanishing kills the last term in degrees n-1 and n, so its first map is invertible on degree-n homology.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On M=τ≥n E the second lower-truncation projection of τ<n+1 M is an isomorphism. Double truncation is the single object H^n(M) placed in degree n. Shift to zero, compare derived single objects with rightDerived 0, and apply left exactness to identify rightDerived 0 with S. All identifications are natural. The single-object comparison is the cited natural identification; the last step is Mathlib Functor.rightDerivedZeroIsoSelf. Double truncation and shifts are the existing natural isomorphisms DerivedCategory.Plus.eTruncLTCompETruncGEIso, singleFunctors.shiftIso, commShiftIso and homologyFunctor.shiftIso, composed as in the Lean proof.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use bounded-below/unbounded compatibility and invert the homology map of the canonical projection E→τ≥n E. Compose the natural isomorphisms.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TC (2), lemma-negative-vanishing; derived single-object computation and left exactness. Generalization of the proved affineDerivedSections_truncated_bottom construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The homology in degree n of a right derived left exact functor of the lower truncation at n is naturally isomorphic to the functor on the nth homology",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-12). No verdict from the unavailable service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lowest degree cohomology of a right derived left exact functor after lower truncation is the functor applied to cohomology",
+   "results": "8 hits including Functor.rightDerived, Abelian.Ext.mapExactFunctor and Functor.mapDerivedCategoryFactors; none states the bottom-degree total right-derived comparison. The source library affineDerivedSections_truncated_bottom specializes to Spec A and scalar transport; the new theorem generalizes its proved argument to arbitrary abelian targets.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*trunc|trunc.*rightDerived|cohomology.*[Aa]ffine; local rg for rightDerivedFunctor_truncated_bottom and bottom homology",
+   "results": "msearch grep: 0 hits. Local search found AffineDerivedSectionsTruncatedBottom, an affine scheme specialization; no existing general bottom comparison. Mathlib truncation and homology interfaces supply parts of the proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSections",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+   "place": "Left exact bottom cohomology after lower truncation; proof of affine-open component",
+   "via": [
+    "new-qcoh-acyclic-sections-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedSectionsLeftExactBottom",
+  "file": "lean/Sheaf/Paper/DerivedSectionsLeftExactBottom.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctor_truncated_bottom",
+  "statement": "theorem rightDerivedFunctor_truncated_bottom\n    {C : Type uC} [Category.{vC} C] [Abelian C]\n    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]\n    [HasDerivedCategory.{wC} C]\n    {D : Type uD} [Category.{vD} D] [Abelian D]\n    [HasDerivedCategory.{wD} D]\n    (S : C ⥤ D) [S.Additive] [Limits.PreservesFiniteLimits S] (n : ℤ) :\n    Nonempty ((DerivedCategory.TStructure.t.truncGE n) ⋙ S.rightDerivedFunctor ⋙\n      DerivedCategory.homologyFunctor D n ≅\n      DerivedCategory.homologyFunctor C n ⋙ S)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T144201-L-2112898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T144201-L-2112898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

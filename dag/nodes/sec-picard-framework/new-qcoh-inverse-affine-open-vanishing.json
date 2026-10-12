@@ -1,0 +1,146 @@
+{
+ "id": "new-qcoh-inverse-affine-open-vanishing",
+ "kind": "statement",
+ "title": "Positive quasi-coherent cohomology on inverse affine opens",
+ "statement": "Let f:X→Y be quasi-compact and quasi-separated [def-pc-scheme, def-pc-derived-direct-image]. Suppose R^q f_*M=0 for every quasi-coherent module M and integer q>0. For any affine open V⊆Y, any quasi-coherent O_X-module F and p∈ℕ with p>0, the open module cohomology H^p(f⁻¹V,F|f⁻¹V) [def-sc-open-module-cohomology] is zero.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 affine localization; Cohomology Tag 01F4 (2), Tags 08FE, 01E1, 01XJ and 01XB"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-direct-image",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict an injective resolution to U=f⁻¹V, preserving injectivity; thus openModuleCohomology computes ordinary module cohomology of F|U.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use bounded-below/unbounded compatibility and the derived single-object identification to identify H^q(Rf_*(F[0])) with the ordinary R^q f_*F for q in the natural numbers. Exact open restriction commutes with homology; derived open restriction on F[0] therefore passes hacyc to the ordinary higher direct images of f|V. Those are quasi-coherent by clause (1) of finite-support-hi, using qcqs only.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-finite-support-hi",
+    "def-pc-derived-direct-image",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine vanishing on V kills positive cohomology of all higher direct images. Leray degeneration identifies H^p(U,F|U) with sections of R^p(f|V)_*(F|U), which is zero when p>0. The empty open is included.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-pc-leray-degenerate-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-finite-support-hi",
+  "def-pc-derived-direct-image",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-pc-affine-vanishing",
+  "lem-pc-leray-degenerate-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 affine localization; Cohomology Tag 01F4 (2), Tags 08FE, 01E1, 01XJ and 01XB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Positive cohomology of quasi coherent sheaves vanishes on inverse images of affine opens when all positive higher direct images vanish",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-12).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If higher pushforwards of quasicoherent modules vanish then cohomology of quasicoherent sheaves on inverse images of affine opens vanishes",
+   "results": "8 hits including CategoryTheory.Sheaf.H, cohomologyPresheaf, DerivedCategory.isZero_of_isGE and isZero_of_isLE. No inverse-affine-open module-derived sections vanishing theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Aa]ffine; local rg isZero.*openModuleCohomology|openModuleCohomology.*IsZero|acyclic.*[Ss]ection; blueprint_refs search 01F4",
+   "results": "msearch grep: 0 hits. Local affine-open module vanishing requires the source open itself affine, which need not hold here. LerayDegenerateSections gives the global edge, and restriction interfaces require composition to obtain this consequence. Blueprint search 01F4: no duplicate blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSections",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+   "place": "Positive quasi-coherent cohomology on inverse affine opens; proof of affine-open component",
+   "via": [
+    "new-qcoh-acyclic-sections-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QCohInverseAffineOpenVanishing",
+  "file": "lean/Sheaf/Paper/QCohInverseAffineOpenVanishing.lean",
+  "declaration": "AlgebraicGeometry.qcoh_acyclic_inverse_affine_open_vanishing",
+  "statement": "theorem qcoh_acyclic_inverse_affine_open_vanishing {X Y : Scheme.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      F.IsQuasicoherent → ∀ (p : ℤ), 0 < p →\n        IsZero ((schemeModuleHigherDirectImage f p).obj F))\n    (V : Y.Opens) (hV : IsAffineOpen V)\n    (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (hF : F.IsQuasicoherent) (p : ℕ) (hp : 0 < p) :\n    IsZero ((RingedSpace.openModuleCohomology X.toRingedSpace p (f ⁻¹ᵁ V)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T144201-L-2112898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T144201-L-2112898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
