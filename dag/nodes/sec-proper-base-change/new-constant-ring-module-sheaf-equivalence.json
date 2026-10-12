@@ -15,30 +15,29 @@
  ],
  "proof": [
   {
-   "text": "Identify the single and double lifts of ZMod r by the ring isomorphism up(a) -> up(up(a)). Transport scalar structures along this isomorphism. All underlying abelian groups and abelian maps stay the same.",
+   "text": "Identify the single and double lifts of ZMod r using ULift.ringEquiv. Compose the induced isomorphism of constant ring presheaves with the sheafification unit, giving scalarUnit. This ring map is locally injective and locally surjective: the first factor is an isomorphism, the second is a sheafification unit.",
    "uses": [
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-constant-sheaf"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": true
   },
   {
-   "text": "For a module-valued sheaf, regard its action as an action of the constant ring presheaf. Sheafify this action together with the ring using Lemma 03CY. Concretely, locally lift a scalar section to a constant scalar, act on the restricted module section, and glue; common refinements and sheaf separatedness show independence of lifts. The module laws hold locally and hence globally. Since the underlying abelian presheaf is already a sheaf, its sheafification is canonically isomorphic to it. This gives the forward functor and its underlying-abelian-sheaf comparison.",
+   "text": "Convert presheaves of modules over the constant coefficient ring to module-valued presheaves: the semilinear restriction maps are linear because the scalar restriction maps are identities. The conversion is full, as natural transformations have exactly the same componentwise linearity and naturality requirements. Compose scalar restriction with this conversion and lift to sheaves, since forgetting to abelian groups preserves and detects the sheaf condition. This defines restriction, which commutes identically with the underlying abelian-sheaf functor. Faithfulness follows from the latter functor. Fullness follows from Mathlib PresheafOfModules.sheafificationAdjunction and its invertible counit, which make SheafOfModules.forget followed by scalar restriction full, together with fullness of the constant-presheaf conversion and faithfulness of the inclusion of module-valued sheaves into presheaves.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict a constant-ring-sheaf action along the sheafification unit, and transport along the inverse lift-ring isomorphism. Restrictions are linear over constant scalars, giving a module-valued sheaf. Morphisms in both directions keep the underlying abelian map; forward linearity is checked locally and backward linearity follows by restriction. Uniqueness of action extension shows that forward and backward are inverse up to natural isomorphism, producing the required equivalence and natural forgetful comparison.",
+   "text": "For a module-valued sheaf N, form its presheaf of modules P over the constant coefficient ring and take M = PresheafOfModules.sheafification scalarUnit P. The module-sheafification adjunction unit gives P -> restriction(M). Its underlying abelian map is the ordinary sheafification unit of P. Since the abelian presheaf of N is already a sheaf, this map is an isomorphism. Forgetting module scalars reflects isomorphisms, so N is isomorphic to restriction(M). Thus restriction is essentially surjective and, being full and faithful, is an equivalence. Take its inverse equivalence for E. Whisker the counit isomorphism with the underlying abelian-sheaf functor and compose with the restriction forgetful comparison to obtain the required natural isomorphism. Every construction is valid for r = 0, r = 1 and the empty scheme.",
    "uses": [
-    "def-weil-pbc-sheafification",
     "def-weil-pbc-etale-sheaves",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false
   }
@@ -52,8 +51,10 @@
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "P2",
+  "date": "2026-10-12",
   "document": "https://stacks.math.columbia.edu/tag/03CY",
-  "place": "Modules on Sites, Lemma 18.11.1: simultaneous sheafification of a ring presheaf and its modules; specialize the ring presheaf to the constant presheaf. The equivalence is the explicit constant-ring specialization of this construction."
+  "place": "Lemma 18.11.1, implemented by Mathlib PresheafOfModules.sheafification and sheafificationAdjunction; constant-ring encoding and equivalence packaging proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -132,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T032116-L-1384760",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042414-L-1818747",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
