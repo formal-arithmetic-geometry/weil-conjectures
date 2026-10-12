@@ -132,6 +132,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.AdelicH1
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineCount
