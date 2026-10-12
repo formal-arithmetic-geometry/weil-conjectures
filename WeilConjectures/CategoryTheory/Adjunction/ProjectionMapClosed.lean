@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 
@@ -15,9 +15,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 Let `C` and `D` be monoidal closed categories. This file records how projection formulas for
 an adjunction of monoidal functors control the comparison maps between internal homs.
 
-- For an adjunction `F ⊣ G` with `F` braided monoidal, the lax monoidal right adjoint `G`
-  (`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`) is lax braided
-  (`CategoryTheory.Adjunction.rightAdjointLaxBraided`).
 - **Internal adjunction.** For adjunctions `F ⊣ G ⊣ H` with `F` monoidal, if the projection
   maps `G M ⊗ L ⟶ G (M ⊗ F L)` are isomorphisms then so are the maps
   `G [M, H K] ⟶ [G M, G H K] ⟶ [G M, K]` given by the comparison map of the lax monoidal
@@ -41,26 +38,6 @@ namespace CategoryTheory.Adjunction
 open MonoidalCategory MonoidalClosed Functor.LaxMonoidal Functor.OplaxMonoidal
 
 variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
-
-section Braided
-
-variable [BraidedCategory C] [BraidedCategory D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
-  [F.Braided]
-
-/-- The right adjoint of a braided monoidal functor is lax braided, for its lax monoidal
-structure `CategoryTheory.Adjunction.rightAdjointLaxMonoidal`. -/
-@[instance_reducible]
-noncomputable def rightAdjointLaxBraided : G.LaxBraided where
-  toLaxMonoidal := adj.rightAdjointLaxMonoidal
-  braided X Y := by
-    let := adj.rightAdjointLaxMonoidal
-    rw [rightAdjointLaxMonoidal_μ, rightAdjointLaxMonoidal_μ,
-      ← homEquiv_naturality_right, ← homEquiv_naturality_left]
-    congr 1
-    rw [Category.assoc, BraidedCategory.braiding_naturality, Functor.map_braiding_assoc,
-      Functor.Monoidal.μ_δ_assoc]
-
-end Braided
 
 section InternalAdjunction
 

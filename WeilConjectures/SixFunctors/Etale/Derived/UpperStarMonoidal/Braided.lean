@@ -66,11 +66,12 @@ lemma leftDerivedUpperStar_map_braiding_comp_tensorComparison
         (β_ (L((g)^*[A]).obj X) (L((g)^*[A]).obj X')).hom :=
   letI := DerivedCategory.braidedCategory (Sheaf Y.smallEtaleTopology A)
   letI := DerivedCategory.braidedCategory (Sheaf Z.smallEtaleTopology A)
-  map_braiding_comp_app_app_of_lax_square (leftDerivedUpperStarTensorComparison A g)
+  map_braiding_comp_app_app_of_lax_square (Q₁ := Qh) (Q₂ := Qh)
+    (F := (g)^*[A].mapHomotopyCategory (.up ℤ)) (leftDerivedUpperStarTensorComparison A g)
     (fun a ↦ (g)^*[A].leftDerivedFunctorCounit.app a)
     (fun _ _ f ↦ (g)^*[A].leftDerivedFunctorCounit.naturality f)
     (leftDerivedUpperStarTensorComparison_app_app_comp A g) (braiding_hom_μ_Qh)
-    (braiding_hom_μ_Qh) (fun a b ↦ ((g)^*[A].mapHomotopyCategory_δ_comp_braiding a b).symm)
+    (braiding_hom_μ_Qh) ((g)^*[A].mapHomotopyCategory_δ_comp_braiding)
     (kFlatUpperStar A g) (exists_kFlatUpperStar_iso A g)
     (fun x _ hb ↦ isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb) X X'
 
