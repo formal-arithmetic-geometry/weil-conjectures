@@ -8252,3 +8252,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 23:00 L: batch 20261012T144049 dependency take-out
 - 15:05 L: returned deliver/K1/Sheaf.AlgebraicGeometry.FullAffineEtaleTopos (reviewer RETURN: (reviewer X-0c5cb, head 0c5cb5de5) E2 (review point 4): lean/Sheaf/AlgebraicGeometry/FullAffineEtaleTopos.lean:437 retai)
+- 15:09 L: returned deliver/J2/Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineImageRep (reviewer RETURN: (the landing tools, head de846075a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
