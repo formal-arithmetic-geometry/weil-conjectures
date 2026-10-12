@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-devissage-second-adic-system-lift",
+ "kind": "statement",
+ "title": "Compatible algebraization without a torsion hypothesis",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], let $I,K$ be quasi-coherent ideal sheaves [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], let $M$ be a coherent $I$-adic system [def-weil-pbc-coherent-formal-module], and let $H$ be a coherent module [pqf-def-coherent]. For each $q\\geq1$, assume completion on $V(K^q)$ with respect to the extended ideal $I\\mathcal O_{V(K^q)}$ [def-nagata-extended-ideal] is an equivalence, for every choice of its Noetherian instance. Let $\\alpha:M\\to\\widehat H_I$. Supply a natural isomorphism $\\theta_{e,n}:(H/K^{e+1}H)/I^{n+1}\\cong(H/I^{n+1}H)/K^{e+1}$ whose composite with the successive quotient projections agrees in both orders, for every $e,n\\geq0$. Then there exist a coherent $K$-adic system $N$, a morphism $\\delta:N\\to\\widehat H_K$, and a natural isomorphism $\\sigma_{e,n}:N_e/I^{n+1}N_e\\cong M_n/K^{e+1}M_n$ such that $\\sigma_{e,n}$ followed by $\\alpha_n$ modulo $K^{e+1}$ equals $\\delta_e$ modulo $I^{n+1}$ followed by $\\theta_{e,n}$, for all $e,n\\geq0$. No annihilation hypothesis on $\\alpha$ is assumed and no torsion estimate on $\\delta$ is asserted.",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-nagata-extended-ideal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, lemma-existence-tricky: construction of G_e and the lifted comparison maps, before choosing t"
+ },
+ "proof": [
+  {
+   "text": "For each e, form the coherent I-adic quotient system M_n/K^(e+1)M_n. On affine opens its coherence is finite generation of a quotient and its I-adic transition identities are successive quotient identities. Descend this supported system to Z_e=V(K^(e+1)) using the closed-immersion formal equivalence. Apply a quasi-inverse of the assumed completion equivalence, then coherent pushforward, to obtain G_e and its comparison with the quotient system. The equivalence determines the algebraization together with the comparison up to unique isomorphism.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The I-completion of G_(e+1)/K^(e+1)G_(e+1) is the level-e quotient system, by the equality of successive quotients and the canonical projection identities. Full faithfulness on Z_e identifies this quotient with G_e. Compose the quotient projection with this isomorphism to define the adjacent transition; define longer transitions by composition. Faithfulness proves that the comparisons commute with these transitions. Coherence, annihilation and the adjacent quotient isomorphisms give N in Coh(X,K). The comparisons assemble into the doubly natural sigma.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduce alpha modulo K^(e+1), then compose with theta inverse. Naturality makes it an I-adic morphism from completion_I(G_e) to completion_I(H/K^(e+1)H). Both terms descend to Z_e. Full faithfulness of completion on Z_e uniquely lifts it to delta_e. Faithfulness proves transition compatibility, so the delta_e form delta. Their lifted defining equations are precisely the stated comparison square. The projection identity on theta specifies the canonical quotient interchange.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, lemma-existence-tricky: construction of G_e and the lifted comparison maps, before choosing t",
+  "note": "Read Tags 088A and 0888 online, and their coherent.tex source; categorical lifting and reflection steps expanded by G1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible algebraization of a double quotient coherent formal module system on closed ideal power thickenings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible algebraization of a double quotient coherent formal module system on closed ideal power thickenings",
+   "results": "8 hits: AdicCompletion.transitionMapₐ, AdicCompletion.subalgebra, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, Hausdorffification, AdicCompletion.of_apply, AdicCompletion.instAlgebra, AdicCompletion, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete. No exact sheaf-level match; local searches of both Lean roots and DAG found no existing statement for this part.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraiz|EssSurj",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean. No exact sheaf-level match; local searches of both Lean roots and DAG found no existing statement for this part.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCore",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 088A: constructing G_e and compatible comparison morphisms before the torsion bound",
+   "via": [
+    "lem-weil-pbc-devissage-second-adic-system-core",
+    "lem-weil-pbc-devissage-second-adic-system",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageSecondAdicSystemLift.lean",
+  "declaration": "AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_lift",
+  "statement": "theorem grothendieckDevissage_secondAdicSystem_lift\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (M : CoherentFormalModule X I)\n    (hthick : ∀ (e : ℕ), 1 ≤ e →\n      ∀ (hZ : IsNoetherian (K ^ e).subscheme),\n        Functor.IsEquivalence\n          (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι)))\n    (H : CoherentModules X) (α : M ⟶ (completion X I).obj H)\n    (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅\n      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)\n    (hθ : ∀ e n : ℕ,\n        formalModuleQuotientπ K (e + 1) H.obj ≫\n          formalModuleQuotientπ I (n + 1) (formalModuleQuotient K (e + 1) H.obj) ≫\n          (θ.hom.app (op e)).app (op n) =\n        formalModuleQuotientπ I (n + 1) H.obj ≫\n          formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H.obj)) :\n    ∃ (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)\n      (σ : N.obj ⋙ formalCompletionFunctor I ≅\n        (M.obj ⋙ formalCompletionFunctor K).flip),\n      ∀ e n : ℕ,\n        (σ.hom.app (op e)).app (op n) ≫\n          formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =\n        formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫\n          (θ.hom.app (op e)).app (op n)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T223404-L-1636343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T223404-L-1636343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

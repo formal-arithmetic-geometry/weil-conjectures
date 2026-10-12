@@ -9780,3 +9780,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/F2/Sheaf.RingTheory.CompletionTensorLocalMapsSurjective (stage 3; reviewer PASS; first push; landing 20261012T223403-L-1635893 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/F3/Sheaf.Algebra.Homology.OpenCoverMateComplexShortExact (stage 3; reviewer PASS; first push; landing 20261012T223403-L-1636018 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/F3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenTransfer (stage 3; reviewer PASS; first push; landing 20261012T223403-L-1636170 (interface); batch 20261012T223357; modules 2; new nodes 1)
+- 22:34 L: merged deliver/G1/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCore (stage 3; reviewer PASS; first push; landing 20261012T223404-L-1636343 (interface); batch 20261012T223357; modules 3; new nodes 2)

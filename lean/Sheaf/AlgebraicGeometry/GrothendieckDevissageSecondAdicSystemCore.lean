@@ -3,9 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTorsion
 
 /-! # Algebraization after a supplied quotient interchange
 
@@ -76,6 +75,12 @@ theorem grothendieckDevissage_secondAdicSystem_core
           (kernel (δ.hom.app (op e)))) ∧
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
           (cokernel (δ.hom.app (op e))))) := by
-  sorry
+  obtain ⟨N, δ, σ, hsquare⟩ :=
+    grothendieckDevissage_secondAdicSystem_lift I K M hthick H α θ hθ
+  obtain ⟨t, ht, hα⟩ := htorsion
+  refine ⟨N, δ, σ, hsquare, 4 * t, ?_, ?_⟩
+  · omega
+  · exact grothendieckDevissage_secondAdicSystem_torsion
+      I K M hthick H α θ N δ σ hsquare t ht hα
 
 end AlgebraicGeometry
