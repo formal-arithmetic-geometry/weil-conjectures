@@ -55,14 +55,16 @@ zero; applying the additive tensor-power isomorphism preserves zero. -/
 theorem sectionRing_mul_zero (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (a : SectionRingComponent L i) :
     GradedMonoid.GMul.mul a (0 : SectionRingComponent L j) = 0 := by
-  sorry
+  change (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a 0) = 0
+  rw [tmulSection_zero, map_zero]
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The tensor product with zero is
 zero, and the tensor-power isomorphism is additive. -/
 theorem sectionRing_zero_mul (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (b : SectionRingComponent L j) :
     GradedMonoid.GMul.mul (0 : SectionRingComponent L i) b = 0 := by
-  sorry
+  change (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection 0 b) = 0
+  rw [zero_tmulSection, map_zero]
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). Distribute the tensor of
 sections in its second argument and use additivity of the exponent isomorphism. -/
@@ -70,7 +72,10 @@ theorem sectionRing_mul_add (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (a : SectionRingComponent L i) (b c : SectionRingComponent L j) :
     GradedMonoid.GMul.mul a (b + c) =
       GradedMonoid.GMul.mul a b + GradedMonoid.GMul.mul a c := by
-  sorry
+  change (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a (b + c)) =
+    (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a b) +
+      (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a c)
+  rw [tmulSection_add, map_add]
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). Distribute the tensor of
 sections in its first argument and use additivity of the exponent isomorphism. -/
@@ -78,7 +83,10 @@ theorem sectionRing_add_mul (L : X.Modules) [L.IsInvertible]
     {i j : ℕ} (a b : SectionRingComponent L i) (c : SectionRingComponent L j) :
     GradedMonoid.GMul.mul (a + b) c =
       GradedMonoid.GMul.mul a c + GradedMonoid.GMul.mul b c := by
-  sorry
+  change (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection (a + b) c) =
+    (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a c) +
+      (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection b c)
+  rw [add_tmulSection, map_add]
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The degree-zero section is the
 monoidal unit; the left unitor and the exponent isomorphism cancel. -/
@@ -148,7 +156,12 @@ The product of two single-component sums is the single-component sum of their te
 so its degree is the sum of the two degrees. -/
 theorem sectionRing_gradedMonoid (L : X.Modules) [L.IsInvertible] :
     SetLike.GradedMonoid (sectionRingGrade L) := by
-  sorry
+  refine { one_mem := ?_, mul_mem := ?_ }
+  · exact ⟨GradedMonoid.GOne.one, rfl⟩
+  · intro i j a b ha hb
+    obtain ⟨a, rfl⟩ := ha
+    obtain ⟨b, rfl⟩ := hb
+    exact ⟨GradedMonoid.GMul.mul a b, (DirectSum.of_mul_of a b).symm⟩
 
 /-- The section ring is the internal direct sum of its homogeneous components (Stacks, Tag 01PZ;
 (blueprint: def-sc-invertible-section-ring)). Every finitely supported section family is the
@@ -156,7 +169,27 @@ sum of its single-component families. Evaluation in each degree shows this expre
 unique. Thus the canonical recomposition map is bijective. -/
 theorem sectionRing_isInternal (L : X.Modules) :
     DirectSum.IsInternal (sectionRingGrade L) := by
-  sorry
+  let f := DirectSum.map (fun n ↦ (DirectSum.of (SectionRingComponent L) n).rangeRestrict)
+  have hf : Function.Bijective f := by
+    constructor
+    · exact (DirectSum.map_injective _).2 fun n ↦
+        AddMonoidHom.rangeRestrict_injective_iff.mpr (DirectSum.of_injective n)
+    · exact (DirectSum.map_surjective _).2 fun n ↦
+        AddMonoidHom.rangeRestrict_surjective _
+  have hcomp : (DirectSum.coeAddMonoidHom (sectionRingGrade L)).comp f =
+      AddMonoidHom.id (InvertibleSectionRing L) := by
+    ext n a
+    simp [f, sectionRingGrade, DirectSum.coeAddMonoidHom]
+  have h (a : InvertibleSectionRing L) :
+      DirectSum.coeAddMonoidHom (sectionRingGrade L) (f a) = a :=
+    DFunLike.congr_fun hcomp a
+  constructor
+  · intro a b hab
+    obtain ⟨a, rfl⟩ := hf.2 a
+    obtain ⟨b, rfl⟩ := hf.2 b
+    exact congrArg f (by simpa only [h] using hab)
+  · intro a
+    exact ⟨f a, h a⟩
 
 /-- The grading on the section ring, using the inverse of the bijective recomposition map
 (Stacks, Tag 01PZ; (blueprint: def-sc-invertible-section-ring)). -/

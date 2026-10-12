@@ -12,9 +12,35 @@
   "document": "literature/stacks-project/properties.tex",
   "place": "Tag 01PZ, S = Gamma_*(X,L); Constructions Tag 01N8, tensor multiplication on sections"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "The section components, tensor-product multiplication, unit and grade subgroups are the explicit constructions SectionRingComponent, sectionRingGMul, sectionRingGOne and sectionRingGrade. The four zero and distributivity laws follow directly from tmulSection_zero, zero_tmulSection, tmulSection_add and add_tmulSection in WeilConjectures.AlgebraicGeometry.Modules.TensorSection and additive map preservation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The four homogeneous unit, associativity and commutativity laws remain open as the existing named theorems sectionRing_one_mul, sectionRing_mul_one, sectionRing_mul_assoc and sectionRing_mul_comm. Their documented monoidal-coherence and local-trivialization arguments are still required. sectionRingGCommRing packages these laws with the proved additive laws and explicit natural and integer casts.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "sectionRing_gradedMonoid: the unit is the inclusion of the degree-zero homogeneous unit. For products, express each homogeneous element as DirectSum.of of a section and apply DirectSum.of_mul_of to exhibit the product in degree i+j.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "sectionRing_isInternal: map each summand into the range of its injective DirectSum.of inclusion, using AddMonoidHom.rangeRestrict. This componentwise map is bijective by DirectSum.map_injective, DirectSum.map_surjective, DirectSum.of_injective and range-restriction bijectivity. Its composite with canonical recomposition is the identity, checked on each summand by additive-hom extensionality. Surjectivity of the componentwise map and that identity give both injectivity and surjectivity of recomposition. The resulting unique decomposition supplies sectionRingGradedRing.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "date": "2026-10-13",
+  "place": "Partial Lean verification of the explicit section-ring construction from Stacks Tags 01PZ and 01N8, using the upstream tensor-section API and Mathlib direct-sum API; four pre-existing homogeneous multiplicative laws remain open."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -164,5 +190,15 @@
   "group": "M1",
   "result": "pass",
   "note": "X:Scheme.{v}; L with recorded IsInvertible; S = ⨁ Γ(L.tensorPow n,⊤) with tmulSection/tensorPowAddIso.inv mul, unit in degree 0, grade = range of DirectSum.of; X_s = source generatingLocus (IsFreeGenerator on all V⊆U, = 01CY nonvanishing for invertible); hcover pointwise any d>0; ∃ f : X ⟶ Proj S; ∀ d>0 s: f⁻¹ D+(s) = X_s and f.app∘awayToSection(Away.mk ξ/s^n) · s^n|= ξ| (determines s^{-n}ξ since s^n free generator on X_s; Away.mk surjective); edge cases n=0, s=0, empty X; no Mathlib/DAG duplicate of section ring"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T165539-L-2942051",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
