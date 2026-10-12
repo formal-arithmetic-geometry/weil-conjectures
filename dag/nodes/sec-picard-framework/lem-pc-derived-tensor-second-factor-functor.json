@@ -31,71 +31,42 @@
  ],
  "proof": [
   {
-   "text": "Clause (1) is exactly [lem-pc-kflat-tensor-quasi-iso] on the one-point site, applied with $N$ regarded as a complex of $R$-modules; $\\operatorname{Tot}(\\alpha\\otimes 1_N)$ is moreover $A$-linear, the $A$-action coming through $N$.",
+   "text": "Apply lem-pc-mixed-tensor-kflat-quasi-iso for first-variable inversion and second-variable inversion on K-flat complexes.",
    "uses": [
-    "lem-pc-kflat-tensor-quasi-iso"
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064L"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\Phi:K(R)\\to D(A)$ be $M\\mapsto Q_A\\operatorname{Tot}(M\\otimes_R N)$ [def-pc-tensor-complex-sheaves], a complex of $A$-modules through $N$. It is well defined on the homotopy category: a homotopy $h$ between $f,g:M\\to M'$ gives the homotopy $\\operatorname{Tot}(h\\otimes 1_N)$ between $\\operatorname{Tot}(f\\otimes 1_N)$ and $\\operatorname{Tot}(g\\otimes 1_N)$. For a chain map $f:E\\to E'$ the cone of $\\operatorname{Tot}(f\\otimes 1_N)$ is identified term by term with $\\operatorname{Tot}(C(f)\\otimes_R N)$: both have the summands $E'^r\\otimes N^s$ and $E^{r+1}\\otimes N^s$ in total degree $r+s$, with the same block differential and signs; the same reindexing identifies $\\operatorname{Tot}(E[1]\\otimes_R N)$ with $\\operatorname{Tot}(E\\otimes_R N)[1]$. Hence $\\Phi$ sends cone triangles to cone triangles and is an exact functor of triangulated categories [def-weil-abstract-derived-category]. The same computation in the second variable identifies $\\operatorname{Tot}(F\\otimes_R C(u))$ with the cone of $\\operatorname{Tot}(1_F\\otimes u)$ for a chain map $u:N\\to N'$.",
+   "text": "For each fixed N, obtain the left-derived universal pair, exactness and K-flat computation from lem-pc-mixed-tensor-pointwise-left-derived. Choose these universal pairs, which are determined up to canonical isomorphism.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
+    "lem-pc-mixed-tensor-pointwise-left-derived"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6 (lemmas derived-tor-homotopy, derived-tor-exact)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-left-derived-from-kflat-class] to the abelian category of $R$-modules, the exact functor $\\Phi$ of Step 2 and $\\mathcal P$ the class of K-flat complexes [def-pc-kflat-complex]: hypothesis (1) is [lem-pc-kflat-resolution], and hypothesis (2) is Step 1. This gives the everywhere defined exact left derived functor $-\\otimes_R^{\\mathbf L}N=L\\Phi:D(R)\\to D(A)$ with $\\varepsilon:L\\Phi\\circ Q\\to\\Phi$, $\\varepsilon_F$ an isomorphism for K-flat $F$. For a K-flat resolution $s:F\\to E$, the canonical map is $\\varepsilon_F\\circ L\\Phi(Q s)^{-1}:E\\otimes_R^{\\mathbf L}N\\to\\operatorname{Tot}(F\\otimes_R N)$, an isomorphism; the isomorphism between the total complexes of two K-flat resolutions is the composite through $E\\otimes_R^{\\mathbf L}N$, so these isomorphisms are compatible with composition for a third resolution.",
-   "uses": [
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-tensor-quasi-iso",
-    "def-pc-kflat-complex",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6 (derived-lemma-find-existence-computes with P the K-flat complexes)"
-   }
+   "text": "Assemble the pairs using Mathlib leftDerivedNatTrans. Its identity, composition and comparison equations give a functor T and the required representative equation. For a K-flat resolution s:F → E, use the inverse of T(Qs) composed with epsilon_F; cancellation gives uniqueness. Cancellation of e2 with its inverse proves the cocycle equation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "A morphism $u:N\\to N'$ gives chain maps $\\operatorname{Tot}(1_M\\otimes u)$ of $A$-modules, natural in $M$ and compatible with homotopies, hence a natural transformation $\\Phi_N\\to\\Phi_{N'}$ respecting identities and composites. By the universal property in [lem-pur-left-derived-from-kflat-class] for $(L\\Phi_{N'},\\varepsilon')$, the composite $L\\Phi_N\\circ Q\\xrightarrow{\\varepsilon}\\Phi_N\\to\\Phi_{N'}$ factors uniquely through $\\varepsilon'$, giving $-\\otimes_R^{\\mathbf L}N\\to-\\otimes_R^{\\mathbf L}N'$; uniqueness gives compatibility with identities and composites, and since $\\varepsilon_F,\\varepsilon'_F$ are isomorphisms for K-flat $F$ it is represented by $\\operatorname{Tot}(1_F\\otimes u)$. If $u$ is a quasi-isomorphism, $C(u)$ is acyclic (also as a complex of $R$-modules), so $\\operatorname{Tot}(C(u)\\otimes_R F)$ is acyclic by the definition of K-flatness [def-pc-kflat-complex]; the swap $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ is an isomorphism of total complexes $\\operatorname{Tot}(C(u)\\otimes_R F)\\cong\\operatorname{Tot}(F\\otimes_R C(u))$, and Step 2 identifies the latter with the cone of $\\operatorname{Tot}(1_F\\otimes u)$. Thus $\\operatorname{Tot}(1_F\\otimes u)$ is a quasi-isomorphism for every K-flat $F$, and since every object of $D(R)$ is isomorphic to some $QF$ with $F$ K-flat [lem-pc-kflat-resolution], the transformation is an isomorphism.",
+   "text": "Every derived object has a K-flat model from the existing functorial flat resolution. For a quasi-isomorphism u in the second variable, the comparison equation on that model has the two counits and Q_A(B(1,u)) invertible. Cancel the target counit to make the component of T(u) invertible. Naturality transports this to every derived object, hence T(u) is an isomorphism.",
    "uses": [
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
+    "def-pc-module-kflat-complex",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6, functoriality in N"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-tensor-quasi-iso",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex"
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pc-mixed-tensor-pointwise-left-derived",
+  "def-pc-module-kflat-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 064L and 06Y6"
+  "place": "Tag 064L, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06Y6, lemma-derived-base-change"
  },
  "mathlib_searches": [
   {
@@ -176,5 +147,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T113948-L-821228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

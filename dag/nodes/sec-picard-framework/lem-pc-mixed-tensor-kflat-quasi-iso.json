@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-mixed-tensor-kflat-quasi-iso",
+ "kind": "statement",
+ "title": "Mixed total tensor preserves K-flat quasi-isomorphisms",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof of Tag 0DJ8: choose K-flat models for the derived tensor over R; Tag 06Y6 construction of the fixed-second-factor derived tensor",
+   "via": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-balanced-derived-tensor-model"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let $R$ and $A$ be commutative rings and $f:R\\to A$ a ring homomorphism. Let $B(E,N)=\\operatorname{Tot}(E\\otimes_R N)$, with $E$ an unbounded cochain complex of $R$-modules and $N$ an unbounded cochain complex of $A$-modules; this is the mixed total tensor [def-pc-mixed-total-tensor], with its $A$-action through $N$. Use ordinary-module K-flatness [def-pc-module-kflat-complex] and quasi-isomorphisms [def-pc-quasi-iso-modules]. (i) For every $N$, a quasi-isomorphism $a:E\\to E'$ between K-flat $R$-complexes induces a quasi-isomorphism $B(a,1_N)$. (ii) For every quasi-isomorphism $u:N\\to N'$ and every K-flat $R$-complex $F$, the map $B(1_F,u)$ is a quasi-isomorphism of $A$-complexes.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064L, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06Y6, lemma-derived-base-change"
+ },
+ "stmt_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-mixed-total-tensor",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the A-complexes to R. The tensor associativity map identifies the restriction of N tensor_A (A tensor_R E) with N tensor_R E. On the total complexes use the signed swap x tensor y ↦ (-1)^(pq) y tensor x to put E first. It commutes with both differentials and variable maps. Restriction is exact and reflects isomorphisms, so it detects quasi-isomorphisms.",
+   "uses": [
+    "def-pc-mixed-total-tensor",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For (i), take a K-flat resolution K → N of the restricted complex, using lem-pc-kflat-resolution on the one-point site and the ordinary-module interpretation. Form the natural tensor square with rows a tensor 1_K and a tensor 1_N. K-flatness of K makes the top map a quasi-isomorphism; K-flatness of E and E prime makes the two vertical maps quasi-isomorphisms. Functoriality and two-of-three imply the bottom map is a quasi-isomorphism. Equivalently apply lem-pc-kflat-tensor-quasi-iso after the ordinary-module comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-tensor-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For (ii), restriction of u is a quasi-isomorphism. Ordinary-module K-flatness of F says exactly that tensoring this map with F on either side is a quasi-isomorphism. Apply the natural signed tensor comparison of the first step and detection by restriction.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mixed-total-tensor",
+  "def-pc-module-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064L, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06Y6, lemma-derived-base-change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mixed total tensor with a complex of modules over another ring preserves quasi-isomorphisms between K-flat complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed total tensor with a complex of modules over another ring preserves quasi-isomorphisms between K-flat complexes",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans",
+   "results": "10 hits: CategoryTheory.Functor.leftDerivedNatTrans_id, CategoryTheory.Functor.leftDerivedNatTrans, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatIso_inv, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.leftDerivedNatTrans_app, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedTensor|kFlat|KFlat",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/MixedTensorKFlatQuasiIso.lean",
+  "declaration": "CochainComplex.mixedTensor_kFlat_quasiIso",
+  "statement": "theorem mixedTensor_kFlat_quasiIso {R A : Type u} [CommRing R] [CommRing A] (f : R →+* A) : let B := (ModuleCat.mixedTensor f).flip.map₂CochainComplex (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ) (E E' : CochainComplex (ModuleCat.{u} R) ℤ) (a : E ⟶ E'), QuasiIso a → (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat E → (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat E' → QuasiIso ((B.map a).app N)) ∧ (∀ (N N' : CochainComplex (ModuleCat.{u} A) ℤ) (u : N ⟶ N'), QuasiIso u → ∀ F : CochainComplex (ModuleCat.{u} R) ℤ, (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat F → QuasiIso ((B.obj F).map u))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T113948-L-821228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T113948-L-821228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
