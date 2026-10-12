@@ -8,7 +8,6 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.Paper.PowerSetComplexContractible
 
 /-!
 # The cocycle lifting step for injective module presheaves
@@ -46,6 +45,9 @@ Exactness factors it through the image of K_(q+1) -> K_q. Injectivity extends
 that map along the image inclusion into K_q. The resulting map K_q -> M
 corresponds to the desired cochain b, and its precomposition is the original
 cocycle. This argument includes q=0, since exactness is used at q+1, not at q. -/
+-- STATEMENT-DISPUTED: independent universes permit small-valued injective presheaves
+-- on Type 1 with nonzero Cech H^1 for the three edges of a triangle. See report.md.
+-- The free representables used in the planned proof need not lie in PMod.{s} R.
 theorem injective_presheaf_module_cech_cocycle_lift
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{r})
     (M : PresheafOfModules.{s} R) [Injective M]
