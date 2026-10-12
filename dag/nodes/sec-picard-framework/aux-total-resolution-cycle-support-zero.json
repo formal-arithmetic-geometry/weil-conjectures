@@ -1,0 +1,104 @@
+{
+ "id": "aux-total-resolution-cycle-support-zero",
+ "kind": "statement",
+ "title": "Lift a column-zero total cycle to a vertical cycle",
+ "statement": "For a ring R, theorem total_resolution_cycle_support_zero\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (j : K.X 0 ⟶ K.total (ComplexShape.up ℤ))\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (hj : ∀ q, j.f q = K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp))\n    (z : (K.total (ComplexShape.up ℤ)).cycles n)\n    (x : (K.X 0).X n)\n    (hx : (K.total (ComplexShape.up ℤ)).iCycles n z = j.f n x) :\n    ∃ y : (K.X 0).cycles n,\n      (K.total (ComplexShape.up ℤ)).iCycles n z = j.f n ((K.X 0).iCycles n y)",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof (lemma-good-resolution-gives-qis)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Each component j.f is the injection of the column-zero summand into a\ncoproduct, and is therefore a split monomorphism. Write iCycles(z)=j.f(n)(x).\nThe chain-map equation for j and the fact that z is a cycle imply\nj.f(n+1)(d(x))=0. Injectivity gives d(x)=0, so x defines a vertical cycle y.\nThe inclusion of y is x, which proves the equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof, explicit finite-support decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cocycle supported in one column of a double complex lifts to a cycle in that column by injectivity of the coproduct inclusion",
+   "results": "Found HomologicalComplex.liftCycles and liftCycles_i, not the bicomplex statement. The proof uses the existing cyclesMk API.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; existing tools used"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.ιTotal",
+   "results": "Found ιTotal, ιTotalOrZero_eq, ι_D₁, ι_D₂ and totalDesc. No column-zero cycle lifting theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; existing tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "ιTotal|cycle.*support",
+   "results": "Found total-complex symmetry and shift lemmas, not cycle lifting. Read isSplitMono_sigma_ι and ShortComplex.cyclesMk/i_cyclesMk and use them directly.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; existing tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a total complex cycle is in the image of the column zero injection then its preimage is a cycle in column zero",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no mathematical verdict claimed. Used leanfinder, loogle and source grep instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TotalResolutionCycleReduction",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-resolution-column-zero-cycle-reduction",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TotalResolutionCycleSupportZero",
+  "file": "lean/Sheaf/Paper/TotalResolutionCycleSupportZero.lean",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_cycle_support_zero",
+  "statement": "theorem total_resolution_cycle_support_zero\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (j : K.X 0 ⟶ K.total (ComplexShape.up ℤ))\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (hj : ∀ q, j.f q = K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp))\n    (z : (K.total (ComplexShape.up ℤ)).cycles n)\n    (x : (K.X 0).X n)\n    (hx : (K.total (ComplexShape.up ℤ)).iCycles n z = j.f n x) :\n    ∃ y : (K.X 0).cycles n,\n      (K.total (ComplexShape.up ℤ)).iCycles n z = j.f n ((K.X 0).iCycles n y)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T204507-L-868746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T204507-L-868746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

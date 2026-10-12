@@ -1,0 +1,104 @@
+{
+ "id": "aux-total-resolution-cycle-support-step",
+ "kind": "statement",
+ "title": "One-column support reduction for a total cycle",
+ "statement": "For a ring R, theorem total_resolution_cycle_support_step\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (h_homology : ∀ (p q : ℤ), p < -1 →\n      Function.Exact\n        (HomologicalComplex.homologyMap (K.d p (p + 1)) q).hom\n        (HomologicalComplex.homologyMap (K.d (p + 1) (p + 2)) q).hom)\n    (r : ℕ) (z : (K.total (ComplexShape.up ℤ)).cycles n)\n    (x : ∀ i : ℕ, (K.X (-(i : ℤ))).X (n + (i : ℤ)))\n    (hx : (K.total (ComplexShape.up ℤ)).iCycles n z =\n      ∑ i ∈ Finset.range (r + 1 + 1),\n        K.ιTotalOrZero (ComplexShape.up ℤ) (-(i : ℤ)) (n + (i : ℤ)) n (x i)) :\n    ∃ z' : (K.total (ComplexShape.up ℤ)).cycles n,\n      ∃ x' : ∀ i : ℕ, (K.X (-(i : ℤ))).X (n + (i : ℤ)),\n      ∃ b : (K.total (ComplexShape.up ℤ)).X (n - 1),\n        (K.total (ComplexShape.up ℤ)).iCycles n z' =\n          (∑ i ∈ Finset.range (r + 1),\n            K.ιTotalOrZero (ComplexShape.up ℤ) (-(i : ℤ)) (n + (i : ℤ)) n (x' i)) ∧\n        (K.total (ComplexShape.up ℤ)).iCycles n z =\n          (K.total (ComplexShape.up ℤ)).iCycles n z' +\n            (K.total (ComplexShape.up ℤ)).d (n - 1) n b",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof (lemma-good-resolution-gives-qis)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Set s=r+1 and q=n+s. Project the total cocycle equation to column -s.\nSince no column to its left occurs, the component x_s is a vertical cycle.\nProjection to column 1-s shows that the horizontal image of x_s is a vertical\nboundary, up to the total sign. Its homology class is thus in the kernel of\nH^q(K.X(-s)) -> H^q(K.X(1-s)). Apply h_homology at p=-s-1 (< -1) to lift this\nclass from H^q(K.X(-s-1)), and choose a vertical cycle representative a there.\nIts total degree is n-1. Subtract the appropriately signed total boundary of\na. Its vertical boundary vanishes; its horizontal boundary changes only column\n-s, making that component a vertical boundary. Choose a primitive t in vertical\ndegree q-1 in column -s, and subtract its signed total boundary. This kills\ncolumn -s and changes only column 1-s in addition. The difference remains a\ncycle because the square of the total differential is zero. Call it z' and\nwrite its remaining coordinates as x' from column 0 through -r. Let b be the\nsum of these two signed corrections. Then z = z' + d(b), as asserted. No\niteration, column-zero identification, or choice of descent measure is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof, explicit finite-support decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Remove the leftmost column of a finite support total cocycle using exactness of the horizontal homology row and two boundary corrections",
+   "results": "Found HomComplex coboundary criteria and d_comp_d lemmas, not one-column support reduction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap, Function.Exact",
+   "results": "No results.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "column.*(reduc|support)|support.*column",
+   "results": "Only an unrelated matrix-rank lemma in Mathlib. Library search finds the original reduction and its users, no one-step lemma.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely supported cycle of a total double complex with exact horizontal homology rows loses one outer column by subtraction of a total boundary",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no mathematical verdict claimed. Used leanfinder, loogle and source grep instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TotalResolutionCycleReduction",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-resolution-column-zero-cycle-reduction",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TotalResolutionCycleSupportStep",
+  "file": "lean/Sheaf/Paper/TotalResolutionCycleSupportStep.lean",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_cycle_support_step",
+  "statement": "theorem total_resolution_cycle_support_step\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (h_homology : ∀ (p q : ℤ), p < -1 →\n      Function.Exact\n        (HomologicalComplex.homologyMap (K.d p (p + 1)) q).hom\n        (HomologicalComplex.homologyMap (K.d (p + 1) (p + 2)) q).hom)\n    (r : ℕ) (z : (K.total (ComplexShape.up ℤ)).cycles n)\n    (x : ∀ i : ℕ, (K.X (-(i : ℤ))).X (n + (i : ℤ)))\n    (hx : (K.total (ComplexShape.up ℤ)).iCycles n z =\n      ∑ i ∈ Finset.range (r + 1 + 1),\n        K.ιTotalOrZero (ComplexShape.up ℤ) (-(i : ℤ)) (n + (i : ℤ)) n (x i)) :\n    ∃ z' : (K.total (ComplexShape.up ℤ)).cycles n,\n      ∃ x' : ∀ i : ℕ, (K.X (-(i : ℤ))).X (n + (i : ℤ)),\n      ∃ b : (K.total (ComplexShape.up ℤ)).X (n - 1),\n        (K.total (ComplexShape.up ℤ)).iCycles n z' =\n          (∑ i ∈ Finset.range (r + 1),\n            K.ιTotalOrZero (ComplexShape.up ℤ) (-(i : ℤ)) (n + (i : ℤ)) n (x' i)) ∧\n        (K.total (ComplexShape.up ℤ)).iCycles n z =\n          (K.total (ComplexShape.up ℤ)).iCycles n z' +\n            (K.total (ComplexShape.up ℤ)).d (n - 1) n b",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T204507-L-868746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T204507-L-868746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
