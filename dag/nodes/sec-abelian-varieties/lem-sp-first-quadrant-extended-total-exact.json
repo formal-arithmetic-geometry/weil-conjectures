@@ -1,0 +1,178 @@
+{
+ "id": "lem-sp-first-quadrant-extended-total-exact",
+ "kind": "statement",
+ "title": "Exactness of extended first-quadrant totalization",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] with totals for all first-quadrant bicomplexes [def-sp-double-complex-total]. Let $0\\to A\\xrightarrow{f}B\\xrightarrow{g}D\\to0$ be a short exact sequence of first-quadrant bicomplexes. Totalize its maps, and extend the resulting nonnegative cochain complexes by zero to integer degrees. The resulting sequence $0\\to\\operatorname{Tot}(A)\\xrightarrow{\\operatorname{Tot}(f)}\\operatorname{Tot}(B)\\xrightarrow{\\operatorname{Tot}(g)}\\operatorname{Tot}(D)\\to0$ is short exact as a sequence of integer-indexed cochain complexes.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite-diagonal total complex construction; exactness refinement proved from Mathlib finite biproduct exactness."
+ },
+ "proof": [
+  {
+   "text": "In each total degree n, the diagonal J={(p,q) in N^2:p+q=n} is finite, since it is contained in [0,n]^2. Evaluation in each coordinate preserves finite limits and finite colimits. Assemble these evaluations into the functor to diagrams on Discrete J. It preserves finite limits and finite colimits by evaluation detection.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "Finite-diagonal total complex construction; exactness refinement proved from Mathlib finite biproduct exactness."
+   }
+  },
+  {
+   "text": "Finite coproducts in an abelian category are biproducts. Mathlib hasExactColimitsOfShape_discrete_finite gives exactness of colim on these finite discrete diagrams. Applying ShortComplex.ShortExact.map_of_exact therefore proves short exactness in each total degree, and HomologicalComplex.shortExact_of_degreewise_shortExact proves short exactness of the total sequence.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "Finite-diagonal total complex construction; exactness refinement proved from Mathlib finite biproduct exactness."
+   }
+  },
+  {
+   "text": "For any integer k in the image of N, the extension component is isomorphic to the original component via extendXIso, and extendMap_f identifies the maps. Transfer the degreewise short exact sequence through these three isomorphisms. Outside the image all three objects are zero, hence the sequence is short exact. Apply degreewise detection once more.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "Finite-diagonal total complex construction; exactness refinement proved from Mathlib finite biproduct exactness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite-diagonal total complex construction; exactness refinement proved from Mathlib finite biproduct exactness."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T15:30:33Z",
+   "tool": "leansearch",
+   "query": "finite biproducts preserve short exact sequences of complexes",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T15:49:19Z",
+   "tool": "leanfinder",
+   "query": "finite biproducts preserve short exact sequences of complexes",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex.shortExact_of_degreewise_shortExact",
+    "CategoryTheory.ShortComplex.ShortExact.map_of_exact",
+    "HomologicalComplex.shortExact_iff_degreewise_shortExact",
+    "CategoryTheory.ShortComplex.ShortExact.map",
+    "CategoryTheory.ComposableArrows.Exact.sc",
+    "CategoryTheory.ShortComplex.Exact.exact_toComposableArrows",
+    "CategoryTheory.ShortComplex.exact_iff_exact_toComposableArrows",
+    "CategoryTheory.ShortComplex.Exact.map"
+   ],
+   "digest": "209e5a78b2b67a20",
+   "date": "2026-10-12",
+   "results": "8 hits; top declarations/files: HomologicalComplex.shortExact_of_degreewise_shortExact, CategoryTheory.ShortComplex.ShortExact.map_of_exact, HomologicalComplex.shortExact_iff_degreewise_shortExact, CategoryTheory.ShortComplex.ShortExact.map, CategoryTheory.ComposableArrows.Exact.sc, CategoryTheory.ShortComplex.Exact.exact_toComposableArrows, CategoryTheory.ShortComplex.exact_iff_exact_toComposableArrows, CategoryTheory.ShortComplex.Exact.map",
+   "verdict": "Related APIs inspected; no exact declaration of this statement."
+  },
+  {
+   "t": "2026-10-12T16:05:14Z",
+   "tool": "grep",
+   "query": "hasExactColimitsOfShape_discrete_finite|colimIsoLim|shortExact_of_degreewise",
+   "sub": "CategoryTheory",
+   "ok": true,
+   "n_hits": 6,
+   "note": "",
+   "top": [
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+    "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean"
+   ],
+   "digest": "456bea2f2d1a03d9",
+   "date": "2026-10-12",
+   "results": "6 hits; top declarations/files: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+   "verdict": "Related APIs inspected; no exact declaration of this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonFinite",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-double-complex-spectral-sequences",
+   "place": "Proof steps 1 and 2: finite cutoff-cone comparison, before taking the first spectral sequence",
+   "via": [
+    "lem-sp-double-complex-vertical-tower-comparison-finite",
+    "lem-sp-double-complex-vertical-tower-comparison",
+    "lem-sp-double-complex-vertical-spectral-object"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstQuadrantExtendedTotalExact",
+  "file": "lean/Sheaf/Algebra/Homology/FirstQuadrantExtendedTotalExact.lean",
+  "declaration": "HomologicalComplex₂.shortExact_extended_total",
+  "statement": "theorem shortExact_extended_total (S : ShortComplex (HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))) (hS : S.ShortExact) : (ShortComplex.mk (HomologicalComplex.extendMap (total.map S.f (ComplexShape.up ℕ)) ComplexShape.embeddingUpNat) (HomologicalComplex.extendMap (total.map S.g (ComplexShape.up ℕ)) ComplexShape.embeddingUpNat) (by rw [← HomologicalComplex.extendMap_comp, ← total.map_comp, S.zero, total.map_zero, HomologicalComplex.extendMap_zero])).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T165504-L-2930686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T165504-L-2930686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

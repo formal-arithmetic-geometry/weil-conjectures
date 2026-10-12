@@ -13,22 +13,49 @@
  },
  "proof": [
   {
-   "text": "This is the corresponding finite (respectively top) endpoint case of the columnwise smart truncation cone comparison and bounded-below totalization argument.",
+   "text": "Construct the natural map between finite smart cutoff functors using the inverse truncation inclusion on the smaller cutoff. Whisker with extension and restriction, and apply it columnwise to K. Its composite with the b-cutoff inclusion is the a-cutoff inclusion. Degreewise monicity gives Mono f. Form the canonical cokernel short exact sequence.",
    "uses": [
-    "lem-sp-double-complex-vertical-tower-maps",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exactness of extended first-quadrant totalization. The totalized first map equals the chosen tower map: both factor the a-tower inclusion through the monomorphic b-tower inclusion. Mathlib CochainComplex.mappingCone.quasiIso_descShortComplex now identifies cone homology with the homology of the extended total cokernel.",
+   "uses": [
+    "lem-sp-first-quadrant-extended-total-exact",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the columnwise cutoff quotient comparison to obtain q from the bicomplex cokernel to the smart window, with every q.f p a quasi-isomorphism. Apply the generic vertical cone filtration to the extended total map of q. Negative graded pieces are zero; nonnegative graded pieces have the homology of the extended column-map cones. Mathlib extension preserves quasi-isomorphisms, and its cone criterion makes each such cone acyclic.",
+   "uses": [
+    "lem-sp-vertical-cutoff-quotient-comparison",
+    "lem-sp-first-quadrant-vertical-cone-filtration",
     "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Degreewise finite filtered acyclicity makes the total-map cone acyclic. The cone criterion gives a quasi-isomorphism from the extended total cokernel to the extended total window. Compose its homology isomorphism with the short-exact cone comparison, in the order cone -> total cokernel -> total window.",
+   "uses": [
+    "lem-sp-degreewise-filtered-acyclic"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-degreewise-filtered-acyclic",
   "lem-sp-double-complex-vertical-tower-maps",
-  "def-sp-double-complex-vertical-window"
+  "lem-sp-first-quadrant-extended-total-exact",
+  "lem-sp-first-quadrant-vertical-cone-filtration",
+  "lem-sp-vertical-cutoff-quotient-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
-  "place": "Proof steps 1 and 2, first sequence: Homology of a totalized cutoff cone equals smart vertical interval homology; explicit cone-tower realization of the spectral-object reformulation"
+  "place": "Finite endpoint case: canonical cutoff lift, totalized cokernel sequence, column quotient comparison, and finite cone filtration; Lean reduction by B2"
  },
  "mathlib_searches": [
   {
@@ -152,9 +179,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T144147-L-2108025",
+  "landing": "20261012T165504-L-2930686",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

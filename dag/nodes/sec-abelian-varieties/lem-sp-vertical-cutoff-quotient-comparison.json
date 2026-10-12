@@ -1,0 +1,185 @@
+{
+ "id": "lem-sp-vertical-cutoff-quotient-comparison",
+ "kind": "statement",
+ "title": "Columnwise quasi-isomorphism from nested cutoff quotients to smart windows",
+ "statement": "Let $C$ be abelian [def-sp-abelian] and $K$ a first-quadrant bicomplex [def-sp-double-complex-total]. For integers $a\\le b$, write $A$ and $B$ for the columnwise cutoffs at $a$ and $b$ of [lem-sp-double-complex-vertical-tower-maps], and $R$ for the columnwise reextension into which these cutoffs include. Let $f:A\\to B$ satisfy $f\\,\\iota_b=\\iota_a$. There exists a bicomplex morphism $q:\\operatorname{coker}(f)\\to W[a,b)(K)$, with the smart window of [def-sp-double-complex-vertical-window], such that $q^{p,\\bullet}$ is a quasi-isomorphism of nonnegative cochain complexes for every horizontal index $p$. No totalization or homology-of-total conclusion is asserted.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "lem-sp-double-complex-vertical-tower-maps",
+  "def-sp-double-complex-vertical-window"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+  "place": "Proof step 1 of the cutoff-cone comparison: quotient of nested smart cutoffs maps to the smart window, before totalization."
+ },
+ "proof": [
+  {
+   "text": "The cutoff inclusions are monomorphisms in every degree, so the compatibility with them determines f columnwise. Compose the b-cutoff inclusion with the projection onto the smart lower truncation at a and apply the b-cutoff functor to that projection. The resulting map B->W[a,b)(K) annihilates A: A has no terms in degrees >=a and the lower truncation has no terms below a. The cokernel universal property therefore gives q. Naturality of the projections makes q commute with the horizontal differentials.",
+   "uses": [
+    "lem-sp-double-complex-vertical-tower-maps",
+    "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+    "place": "Proof step 1 of the cutoff-cone comparison: quotient of nested smart cutoffs maps to the smart window, before totalization."
+   }
+  },
+  {
+   "text": "If a<b, in each extended column the quotient has im(d^(a-1)) in degree a-1. In degree a it has the original term when b>a+1, or its cycles when b=a+1. The map to the window is zero in degree a-1, the quotient by im(d^(a-1)) in degree a, and an isomorphism in higher degrees. It is degreewise epi. Its kernel is the two-term complex im(d^(a-1))->im(d^(a-1)) in degrees a-1,a, whose differential is the canonical image isomorphism. This kernel is contractible, so the short exact homology sequence makes q a quasi-isomorphism.",
+   "uses": [
+    "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+    "place": "Proof step 1 of the cutoff-cone comparison: quotient of nested smart cutoffs maps to the smart window, before totalization."
+   }
+  },
+  {
+   "text": "For a=b, monicity forces f to be the identity, and both quotient and smart window are zero. Original columns were extended from nonnegative degrees: if a=0 the boundary image in degree -1 is zero; if a<0 the comparison is an isomorphism on the retained terms. Thus restriction to N does not remove a nonzero half of the contractible kernel. If b<=0 both sides are zero. This verifies the assertion for all integer endpoints.",
+   "uses": [
+    "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+    "place": "Proof step 1 of the cutoff-cone comparison: quotient of nested smart cutoffs maps to the smart window, before totalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+  "place": "Proof step 1 of the cutoff-cone comparison: quotient of nested smart cutoffs maps to the smart window, before totalization."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T15:48:01Z",
+   "tool": "leansearch",
+   "query": "cokernel of an inclusion of nested smart truncations maps quasi-isomorphically to the smart interval truncation",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T15:49:19Z",
+   "tool": "leanfinder",
+   "query": "cokernel of an inclusion of nested smart truncations maps quasi-isomorphically to the smart interval truncation",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g",
+    "HomologicalComplex.instQuasiIsoAtπTruncGEF",
+    "HomologicalComplex.quasiIsoAt_πTruncGE",
+    "HomologicalComplex.quasiIsoAt_ιTruncLE",
+    "HomologicalComplex.instQuasiIsoAtιTruncLEF",
+    "HomologicalComplex.quasiIso_truncGEMap_iff",
+    "HomologicalComplex.quasiIso_truncLEMap_iff",
+    "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE"
+   ],
+   "digest": "2338161c1ec6a54d",
+   "date": "2026-10-12",
+   "results": "8 hits; top declarations/files: HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g, HomologicalComplex.instQuasiIsoAtπTruncGEF, HomologicalComplex.quasiIsoAt_πTruncGE, HomologicalComplex.quasiIsoAt_ιTruncLE, HomologicalComplex.instQuasiIsoAtιTruncLEF, HomologicalComplex.quasiIso_truncGEMap_iff, HomologicalComplex.quasiIso_truncLEMap_iff, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+   "verdict": "Related APIs inspected; no exact declaration of this statement."
+  },
+  {
+   "t": "2026-10-12T15:58:01Z",
+   "tool": "grep",
+   "query": "shortComplexTruncLEX₃ToTruncGE|truncLE.*truncGE",
+   "sub": "Algebra/Homology/Embedding",
+   "ok": true,
+   "n_hits": 15,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/Basic.lean",
+    "Mathlib/Algebra/Homology/Embedding/Basic.lean",
+    "Mathlib/Algebra/Homology/Embedding/Basic.lean"
+   ],
+   "digest": "d30644eba7dc8b0d",
+   "date": "2026-10-12",
+   "results": "15 hits; top declarations/files: Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean",
+   "verdict": "Related APIs inspected; no exact declaration of this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonFinite",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-double-complex-spectral-sequences",
+   "place": "Proof steps 1 and 2: finite cutoff-cone comparison, before taking the first spectral sequence",
+   "via": [
+    "lem-sp-double-complex-vertical-tower-comparison-finite",
+    "lem-sp-double-complex-vertical-tower-comparison",
+    "lem-sp-double-complex-vertical-spectral-object"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.VerticalCutoffQuotientComparison",
+  "file": "lean/Sheaf/Algebra/Homology/VerticalCutoffQuotientComparison.lean",
+  "declaration": "HomologicalComplex₂.verticalCutoff_cokernel_column_comparison",
+  "statement": "theorem verticalCutoff_cokernel_column_comparison (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) (a b : ℤ) (hab : a ≤ b) (f : (((verticalCutoff a).mapHomologicalComplex (ComplexShape.up ℕ)).obj K) ⟶ (((verticalCutoff b).mapHomologicalComplex (ComplexShape.up ℕ)).obj K)) (hf : f ≫ ((verticalCutoffι b).mapHomologicalComplex (ComplexShape.up ℕ)).app K = ((verticalCutoffι a).mapHomologicalComplex (ComplexShape.up ℕ)).app K) : ∃ q : cokernel f ⟶ (((verticalWindow a b).mapHomologicalComplex (ComplexShape.up ℕ)).obj K), ∀ p : ℕ, QuasiIso (q.f p)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T165504-L-2930686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T165504-L-2930686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
