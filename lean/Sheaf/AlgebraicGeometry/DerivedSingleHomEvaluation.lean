@@ -18,6 +18,72 @@ Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3.
 universe u wY
 open CategoryTheory Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
+
+private theorem localized_hom_evaluation
+    {C E : Type*} [Category* C] [Category* E]
+    (Q : C ⥤ E) (W : MorphismProperty C) [Q.IsLocalization W]
+    (H : Cᵒᵖ ⥤ C ⥤ C) (D : Eᵒᵖ × E ⥤ E)
+    (T : C ⥤ C) (η : 𝟭 C ⟶ T) (L : C) (e : H.obj (op L) ≅ 𝟭 C)
+    (d : Q.op.prod Q ⋙ D ≅ (𝟭 _).prod T ⋙ Functor.uncurry.obj H ⋙ Q)
+    (hη : ∀ M, IsIso (Q.map (η.app M))) :
+    ∃ j : (Functor.curry.obj D).obj (op (Q.obj L)) ≅ 𝟭 E,
+      ∀ (B : C) (k : L ⟶ B) (I : C)
+        (_ : IsIso (Q.map ((H.obj (op B)).map (η.app I)))),
+      ∃ c : Q.obj ((H.obj (op B)).obj I) ≅ D.obj (op (Q.obj B), Q.obj I),
+        c.hom ≫ D.map ((Q.map k).op, 𝟙 (Q.obj I)) ≫ j.hom.app (Q.obj I) =
+          Q.map ((H.map k.op).app I ≫ e.hom.app I) := by
+  let r : Q ≅ T ⋙ Q :=
+    NatIso.ofComponents (fun M ↦ asIso (Q.map (η.app M))) (by
+      intro M N f
+      simpa only [Functor.comp_map, Functor.id_map, asIso_hom, Functor.map_comp] using
+        congrArg Q.map (η.naturality f))
+  let a := (Functor.curryObjProdComp Q.op Q D).app (op L)
+  let b : (Functor.curry.obj
+      ((𝟭 _).prod T ⋙ Functor.uncurry.obj H ⋙ Q)).obj (op L) ≅
+      T ⋙ H.obj (op L) ⋙ Q :=
+    NatIso.ofComponents (fun M ↦ Iso.refl _) (by
+      intro M N f
+      simp)
+  let t := a.symm ≪≫ ((Functor.curry.mapIso d).app (op L)) ≪≫ b ≪≫
+    Functor.isoWhiskerLeft T (Functor.isoWhiskerRight e Q) ≪≫
+      (Functor.associator T (𝟭 _) Q).symm ≪≫
+      Functor.isoWhiskerRight T.rightUnitor Q ≪≫ r.symm ≪≫ Q.rightUnitor.symm
+  let ff := Localization.fullyFaithfulWhiskeringLeft Q W E
+  let j := ff.preimageIso t
+  refine ⟨j, ?_⟩
+  intro B k I hI
+  have := hI
+  let c := asIso (Q.map ((H.obj (op B)).map (η.app I))) ≪≫
+    (d.app (op B, I)).symm
+  refine ⟨c, ?_⟩
+  have hj : j.hom.app (Q.obj I) = t.hom.app I :=
+    congrArg (fun f ↦ f.app I) (ff.map_preimage t.hom)
+  have ht : t.hom.app I = d.hom.app (op L, I) ≫
+      Q.map (e.hom.app (T.obj I)) ≫ inv (Q.map (η.app I)) := by
+    simp [t, a, b, r]
+  rw [hj, ht]
+  change (Q.map ((H.obj (op B)).map (η.app I)) ≫ d.inv.app (op B, I)) ≫
+    D.map (show (op (Q.obj B), Q.obj I) ⟶ (op (Q.obj L), Q.obj I) from
+      ((Q.map k).op, 𝟙 (Q.obj I))) ≫
+      d.hom.app (op L, I) ≫ Q.map (e.hom.app (T.obj I)) ≫
+        inv (Q.map (η.app I)) = Q.map ((H.map k.op).app I ≫ e.hom.app I)
+  have hd : d.inv.app (op B, I) ≫
+      D.map (show (op (Q.obj B), Q.obj I) ⟶ (op (Q.obj L), Q.obj I) from
+        ((Q.map k).op, 𝟙 (Q.obj I))) =
+      Q.map ((H.map k.op).app (T.obj I)) ≫ d.inv.app (op L, I) := by
+    simpa using (d.inv.naturality
+      (show (op B, I) ⟶ (op L, I) from (k.op, 𝟙 I))).symm
+  rw [Category.assoc, reassoc_of% hd]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [← Q.map_comp_assoc, ← Q.map_comp_assoc]
+  rw [(H.map k.op).naturality, Category.assoc, e.hom.naturality]
+  simp only [Functor.id_map, Q.map_comp, Category.assoc,
+    IsIso.hom_inv_id, Category.comp_id]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option maxHeartbeats 800000 in
+-- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
 
@@ -75,6 +141,38 @@ theorem derived_single_hom_evaluation (Y : Scheme.{u})
               (((homComplexFunctor (R := Y.toRingedSpace.sheaf)).map
                 (((CochainComplex.singleFunctor
                   (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op)).app I ≫
-                    e.hom.app I) := by sorry
+                    e.hom.app I)  := by
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let T := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  obtain ⟨d⟩ := derivedInternalHom_comparison.{u, wY}
+    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf T η
+    (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
+  have hη (M : CochainComplex A ℤ) : IsIso (DerivedCategory.Q.map (η.app M)) := by
+    have : QuasiIso (η.app M) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
+    infer_instance
+  obtain ⟨j, hj⟩ := localized_hom_evaluation DerivedCategory.Q
+    (HomologicalComplex.quasiIso A (.up ℤ))
+    (homComplexFunctor (R := Y.toRingedSpace.sheaf))
+    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)
+    T η _ e d hη
+  refine ⟨j, ?_⟩
+  intro B k I hI
+  have : I.IsKInjective := hI
+  have : (T.obj I).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A I
+  have : QuasiIso (η.app I) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A I).2
+  let LB := (CochainComplex.singleFunctor A 0).obj B
+  have : QuasiIso
+      (((homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op LB)).map (η.app I)) := by
+    have hid := (homComplexFunctor (R := Y.toRingedSpace.sheaf)).map_id (op LB)
+    simpa only [op_id, hid, NatTrans.id_app, Category.id_comp] using
+      quasiIso_homComplex_map (R := Y.toRingedSpace.sheaf)
+        (show I ⟶ T.obj I from η.app I) (𝟙 LB)
+  exact hj LB ((CochainComplex.singleFunctor A 0).map k) I inferInstance
 
 end AlgebraicGeometry
