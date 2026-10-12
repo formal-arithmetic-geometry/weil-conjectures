@@ -283,6 +283,72 @@ lemma Q_map_towerFunctor_map_comp_towerFunctorIso_hom (n : ℕ) :
   erw [← Functor.mapDerivedCategoryFactors_inv_naturality_assoc]
   erw [reassoc_of% h']
 
+variable (hφ : ∀ {n m k : ℕ} (h₁ : n ≤ m) (h₂ : m ≤ k), (φ h₁).comp (φ h₂) = φ (h₁.trans h₂))
+
+/-- The composite chain maps `P_{n+k+1} ⟶ Res P_n` of the strict model of a tower. -/
+noncomputable def towerModelComp (n : ℕ) : ∀ k : ℕ,
+    (towerModel (φ := fun n ↦ φ n.le_succ) L t (n + k + 1)).P ⟶
+      ((Sheaf.restrictScalars J (φ (Nat.le_add_right n (k + 1)))).mapHomologicalComplex
+        (.up ℤ)).obj (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P
+  | 0 => towerModelMap (φ := fun n ↦ φ n.le_succ) L t n
+  | k + 1 => towerModelMap (φ := fun n ↦ φ n.le_succ) L t (n + k + 1) ≫
+      ((Sheaf.restrictScalars J (φ (n + k + 1).le_succ)).mapHomologicalComplex (.up ℤ)).map
+        (towerModelComp n k) ≫
+      (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J
+        (φ (n + k + 1).le_succ) (φ (Nat.le_add_right n (k + 1)))
+        (φ (Nat.le_add_right n (k + 2))) (hφ _ _).symm) (.up ℤ)).hom.app _
+
+/-- The chain maps of the strict model represent derived base changes. -/
+lemma isDerivedBaseChange_towerModelMap (ht : ∀ n, Sheaf.IsDerivedBaseChange (t n)) (n : ℕ) :
+    Sheaf.IsDerivedBaseChange (Q.map (towerModelMap (φ := fun n ↦ φ n.le_succ) L t n) ≫
+      (Sheaf.restrictScalars J (φ n.le_succ)).mapDerivedCategoryFactors.inv.app
+        (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P) := by
+  have h := towerModelMap_spec (φ := fun n ↦ φ n.le_succ) L t n
+  have : Q.map (towerModelMap (φ := fun n ↦ φ n.le_succ) L t n) ≫
+      (Sheaf.restrictScalars J (φ n.le_succ)).mapDerivedCategoryFactors.inv.app
+        (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P =
+      (towerModel (φ := fun n ↦ φ n.le_succ) L t (n + 1)).iso.hom ≫ t n ≫
+        (Sheaf.derivedRestrictScalars J (φ n.le_succ)).map
+          (towerModel (φ := fun n ↦ φ n.le_succ) L t n).iso.inv := by
+    rw [← reassoc_of% h, ← Functor.map_comp, Iso.hom_inv_id, CategoryTheory.Functor.map_id,
+      Category.comp_id]
+  rw [this, ← Category.assoc]
+  exact ((ht n).of_iso (towerModel (φ := fun n ↦ φ n.le_succ) L t (n + 1)).iso).comp_map_iso
+    (towerModel (φ := fun n ↦ φ n.le_succ) L t n).iso.symm
+
+/-- The composite chain maps of the strict model represent derived base changes. -/
+lemma isDerivedBaseChange_towerModelComp (ht : ∀ n, Sheaf.IsDerivedBaseChange (t n))
+    (n k : ℕ) :
+    Sheaf.IsDerivedBaseChange (Q.map (towerModelComp φ L t hφ n k) ≫
+      (Sheaf.restrictScalars J (φ (Nat.le_add_right n (k + 1)))).mapDerivedCategoryFactors.inv.app
+        (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P) := by
+  induction k with
+  | zero => exact isDerivedBaseChange_towerModelMap φ L t ht n
+  | succ k ih =>
+    have h' := derivedRestrictScalarsCompIso_hom_app_Q_obj (J := J)
+      (hφ (Nat.le_add_right n (k + 1)) (n + k + 1).le_succ).symm
+      (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P
+    have := (isDerivedBaseChange_towerModelMap φ L t ht (n + k + 1)).comp
+      (hφ (Nat.le_add_right n (k + 1)) (n + k + 1).le_succ).symm ih
+    have key : Q.map (towerModelComp φ L t hφ n (k + 1)) ≫
+        (Sheaf.restrictScalars J (φ (Nat.le_add_right n (k + 2)))).mapDerivedCategoryFactors.inv.app
+          (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P =
+        (Q.map (towerModelMap (φ := fun n ↦ φ n.le_succ) L t (n + k + 1)) ≫
+          (Sheaf.restrictScalars J (φ (n + k + 1).le_succ)).mapDerivedCategoryFactors.inv.app
+            (towerModel (φ := fun n ↦ φ n.le_succ) L t (n + k + 1)).P) ≫
+        (Sheaf.derivedRestrictScalars J (φ (n + k + 1).le_succ)).map
+          (Q.map (towerModelComp φ L t hφ n k) ≫
+            (Sheaf.restrictScalars J (φ (Nat.le_add_right n (k + 1)))).mapDerivedCategoryFactors.inv.app
+              (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P) ≫
+        (Sheaf.derivedRestrictScalarsCompIso J
+          (hφ (Nat.le_add_right n (k + 1)) (n + k + 1).le_succ).symm).hom.app
+            (Q.obj (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P) := by
+      dsimp only [towerModelComp]
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← h', Functor.mapDerivedCategoryFactors_inv_naturality_assoc]
+    rw [key]
+    exact this
+
 end RTower
 
 end DerivedCategory
