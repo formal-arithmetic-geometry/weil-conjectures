@@ -10,10 +10,8 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent
-import Mathlib.FieldTheory.Galois.GaloisClosure
-import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisGermRepresentative
+import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent
 
 /-!
 # A section representing an invariant geometric germ
@@ -32,6 +30,8 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
+-- Preserve the existing names of nondependent premises in the public signature.
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, [Tag 04JM](https://stacks.math.columbia.edu/tag/04JM),
 the direct proof of Lemma 59.56.5, applied after restricting the sheaf to `Spec L`.
 (blueprint: lem-exc-field-invariant-germ-representative).
@@ -83,6 +83,32 @@ theorem exists_fieldSection_of_invariant_germ
     (m : (pointSmallEtale s).sheafFiber.obj F)
     (hm : ∀ g ∈ L.fixingSubgroup, action.smul g m = m) :
     ∃ z : F.obj.obj (op (etaleSpec K L)),
-      (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj z = m := by sorry
+      (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj z = m := by
+  obtain ⟨E, hLE, y, hy, z, hz⟩ :=
+    exists_finiteGalois_germ_representative K Ks Ω s hs F L m
+  have hinj : Function.Injective
+      ((pointSmallEtale s).toPresheafFiber (etaleSpec K E.toIntermediateField) y F.obj) := by
+    intro z z' h
+    obtain ⟨Y, f, y', _, hf⟩ :=
+      ((pointSmallEtale s).toPresheafFiber_eq_iff' (P := F.obj)
+        (etaleSpec K E.toIntermediateField) y z z').mp h
+    have hcov : Sieve.ofArrows _ (fun _ : Unit ↦ f) ∈
+        (Spec (.of K)).smallEtaleTopology (etaleSpec K E.toIntermediateField) := by
+      rw [ofArrows_mem_smallEtaleTopology_iff]
+      ext a
+      simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+      exact ⟨(), y'.left (default : Spec (.of Ω)),
+        @Subsingleton.elim (Spec (.of E.toIntermediateField)) _ _ _⟩
+    have hsheaf : Presieve.IsSheafFor F.obj (Presieve.singleton f) := by
+      rw [← Presieve.ofArrows_pUnit.{0}, Presieve.isSheafFor_iff_generate]
+      exact ((isSheaf_iff_isSheaf_of_type _ _).mp F.property) _ hcov
+    exact (Presieve.isSeparatedFor_singleton.mp hsheaf.isSeparatedFor) hf
+  have hfixed : ∀ g ∈ L.fixingSubgroup,
+      action.smul g ((pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z) =
+        (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z := by
+    simpa only [hz] using hm
+  obtain ⟨w, hw⟩ := exists_fieldSection_of_finiteGalois_invariant_representative
+    K Ks Ω s hs F action haction L x hx E hLE y hy z hinj hfixed
+  exact ⟨w, hw.trans hz⟩
 
 end AlgebraicGeometry.Scheme

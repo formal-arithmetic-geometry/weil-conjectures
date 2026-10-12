@@ -10009,3 +10009,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: merged deliver/F1/Sheaf.RingTheory.UniversalFirstOrderThickening (stage 3; reviewer PASS; first push; landing 20261012T230755-L-1908080 (interface); batch 20261012T230749; modules 3; new nodes 2)
 - 23:07 L: merged deliver/F2/Sheaf.CategoryTheory.FilteredComplexPageDifferential (stage 3; reviewer PASS; first push; landing 20261012T230755-L-1908188 (interface); batch 20261012T230749; modules 3; new nodes 2)
 - 23:07 L: merged deliver/F4/Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistImage (stage 3; reviewer PASS; first push; landing 20261012T230756-L-1908333 (proof); batch 20261012T230749; modules 1; new nodes 0)
+- 23:07 L: merged deliver/G3/Sheaf.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative (stage 3; reviewer PASS; after a return; landing 20261012T230756-L-1908434 (interface); batch 20261012T230749; modules 3; new nodes 2)
