@@ -12,34 +12,47 @@
  ],
  "proof": [
   {
-   "text": "Apply thm-sp-grothendieck to direct image and terminal sections. Direct image preserves injectives. Abelian sheaves on the small opens sites have the Grothendieck abelian and enough-injectives properties directly from the site-sheaf Mathlib result. Use the common Cartan--Eilenberg augmentation and its equivalent truncation spectral object; natural comparisons give a spectral object in the functor category. Its interval and abutment computations give e and h, transported through HX and HZ.",
+   "text": "Use the source-library Grothendieck spectral object for f_* followed by terminal sections. Direct image is a right adjoint, so it is left exact, and preserves injectives by the existing topological injectivity result. Higher derived sections vanish on those injectives, giving the acyclicity condition. Assemble the functorial spectral object in the functor category: define interval functors by evaluation, connecting maps componentwise, and reflect exactness and zero objects through all evaluations. Transport HX and HZ to their specified canonical Ext cohomology functors.",
    "uses": [
-    "thm-sp-grothendieck",
     "lem-sc-topological-pushforward-injective",
     "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sp-grothendieck-edge-maps",
     "def-sc-topological-abelian-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "For the bottom interval, the inverse map from H^p(bottom,1) to H^p(0,1) is followed by the total augmentation. On a comparison J to f_*I the latter sends s to s followed by phi^p. The inverse-image generator formula for a identifies this global section with z under a followed by f_*z = s followed by phi^p. The canonical injective-resolution cohomology computation is I.extMk(z); homotopy independence makes the same computation valid for every pair of resolutions and every comparison commuting with augmentations.",
+   "text": "Obtain the normalized derived-section/Ext comparisons x and zc from the terminal resolution comparison. Compose the canonical interval isomorphism with x, and the canonical abutment isomorphism with zc, to define e and h. These are witnesses inside the existential proof; the spectral object itself is the concrete assembled construction.",
    "uses": [
-    "thm-sp-grothendieck",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-topological-terminal-resolution-ext-comparison",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation commutes with the inverse map defining the bottom edge, so the assembled edge is exactly the source-library natural bottom edge. Naturality of x inverse across f_* -> R^0 f_* and the definition of rightDerivedZeroIsoSelf identify the transported composite with x inverse followed by grothendieckBottomEdgeMap followed by zc. Replace that edge by the generic resolution formula, apply the normalized terminal resolution cocycle computation, and cancel the HX/HZ equality transports by substituting funext hX and funext hZ.",
+   "uses": [
+    "lem-sc-grothendieck-bottom-resolution-comparison",
+    "lem-sc-topological-terminal-resolution-ext-comparison",
+    "lem-sp-derived-well-defined",
+    "lem-sp-grothendieck-edge-maps"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sp-grothendieck",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-grothendieck-bottom-resolution-comparison",
   "lem-sc-topological-pushforward-injective",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "def-sc-topological-abelian-cohomology"
+  "lem-sc-topological-terminal-resolution-ext-comparison",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/015N",
-  "place": "Tags 015N, 015J and 01F2; second Cartan--Eilenberg spectral object and resolution-degree-zero augmentation; expanded spectral-object formulation by H1"
+  "document": "Stacks Project, Tags 015M, 015N, 015J, 01F2, 01FT and 06XR; source-library Grothendieck.lean",
+  "place": "Concrete functor-category assembly and bottom-edge normalization formalized by H3; two independent resolution comparisons remain named statements."
  },
  "mathlib_searches": [
   {
@@ -164,11 +177,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8c075",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T173831-L-3297062",
+  "landing": "20261012T194117-L-457274",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean statements and proof with their DAG nodes, unchanged existing signature, cited spectral-object APIs, clean compilation, and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

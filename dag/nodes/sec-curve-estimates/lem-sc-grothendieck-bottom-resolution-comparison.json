@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-grothendieck-bottom-resolution-comparison",
+ "kind": "statement",
+ "title": "The Grothendieck bottom edge computed on an augmented resolution comparison",
+ "statement": "Let $A,B$ be Grothendieck abelian categories and $C$ an abelian category, all equipped with bounded below derived categories. Let $F:A\\to B$ and $G:B\\to C$ be additive left exact functors [def-sp-left-exact-additive], with $F$ sending injectives to $G$-acyclics. Let $X\\in A$, let $I$ resolve $X$ and $J$ resolve $F(X)$ [def-sp-injective-resolutions], and let $\\phi:J^\\bullet\\to F(I^\\bullet)$ satisfy $\\iota_J^0\\phi^0=F(\\iota_I^0)$. For every $n\\in\\mathbb N$, the canonical Grothendieck bottom edge [lem-sp-grothendieck-edge-maps] is the composite $R^nG(F(X))\\xrightarrow{\\rho_J}H^n(GJ)\\xrightarrow{H^n(G\\phi)}H^n(GFI)\\xrightarrow{\\rho_I^{-1}}R^n(GF)(X)$, where $\\rho$ denotes the canonical right-derived resolution comparison [lem-sp-derived-well-defined]. No Ext or sheaf cohomology comparison is involved.",
+ "source": {
+  "document": "Stacks Project, Derived Categories; https://stacks.math.columbia.edu/tag/015M",
+  "place": "Tags 015M, 015N and 015J; explicit bottom-interval augmentation and unit naturality in step 2 of the parent augmentation proof"
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "lem-sp-grothendieck-edge-maps",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Extend I and J by zero. The augmentation J <- F(X)[0] is a quasi-isomorphism. The supplied degree-zero identity says that phi after this augmentation is the canonical map F(X)[0] -> F(I). Cancelling the augmentation in the derived category determines the represented map independently of phi. Use the canonical resolution comparison to identify F(I) with RF(X).",
+   "uses": [
+    "def-pc-canonical-resolution-derived-iso",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify F(X)[0] with the bottom truncation of RF(X) using left exactness and the canonical R^0F comparison. Under the truncation/shift identification defining grothendieckSpectralObjectHIso at q=0, the preceding map is the bottom-interval inclusion. Applying RG and H^n therefore gives the canonical grothendieckBottomEdgeMap.",
+   "uses": [
+    "lem-sp-grothendieck-edge-maps",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived G units are invertible on J (injective terms) and F(I) (G-acyclic terms). Naturality of this unit along phi identifies the induced map with H^n(G phi). The composite derived comparison transports the target unit, and the ordinary resolution comparison transports the source unit. Cancelling the extension/homology comparisons gives rho_J followed by H^n(G phi) followed by rho_I inverse, in this order.",
+   "uses": [
+    "lem-pc-canonical-resolution-composite-unit-comparison",
+    "lem-pc-canonical-resolution-homology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-resolution-derived-iso",
+  "lem-pc-canonical-resolution-composite-unit-comparison",
+  "lem-pc-canonical-resolution-homology-comparison",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories; https://stacks.math.columbia.edu/tag/015M",
+  "place": "Tags 015M, 015N and 015J; explicit bottom-interval augmentation and unit naturality in step 2 of the parent augmentation proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence bottom edge computed by injective resolution comparison homology map",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral object bottom edge injective resolution cocycle",
+   "results": "InjectiveResolution.descFOne, descFZero, desc, descFSucc and augmentation identities",
+   "date": "2026-10-13",
+   "verdict": "No bottom-edge/homology comparison returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj_hom_naturality\"",
+   "results": "InjectiveResolution.isoRightDerivedObj_hom_naturality and its reassociated form",
+   "date": "2026-10-13",
+   "verdict": "Ordinary derived-map naturality only; the comparison into F(I) is not between resolutions of the same category."
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckBottomEdgeMap|bottomEdge in Mathlib and both library roots",
+   "results": "Source Grothendieck.lean constructs the edge; existing Sheaf generic cocycle lemmas concern the left edge. No bottom-resolution formula.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "blueprint",
+   "query": "bottom edge; Grothendieck",
+   "results": "Edge-maps node constructs the maps but has no formula on augmented resolution comparisons.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalLeraySpectralObjectAugmentation",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tags 015M, 015N and 015J; explicit bottom-interval augmentation and unit naturality in step 2 of the parent augmentation proof",
+   "via": [
+    "lem-sc-topological-leray-spectral-object-augmentation",
+    "lem-sc-topological-leray-cartan-eilenberg-cocycle",
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckBottomResolutionComparison",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckBottomResolutionComparison.lean",
+  "declaration": "CategoryTheory.grothendieckBottomEdgeMap_eq_resolution",
+  "statement": "theorem grothendieckBottomEdgeMap_eq_resolution {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G] (hFG : F.IsAcyclicComposablePair G) (X : A) (I : InjectiveResolution X) (J : InjectiveResolution (F.obj X)) (φ : J.cocomplex ⟶ (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) (hφ : J.ι.f 0 ≫ φ.f 0 = F.map (I.ι.f 0)) (n : ℕ) : (F.grothendieckBottomEdgeMap G hFG n).app X = (J.isoRightDerivedObj G n).hom ≫ HomologicalComplex.homologyMap ((G.mapHomologicalComplex (ComplexShape.up ℕ)).map φ) n ≫ (I.isoRightDerivedObj (F ⋙ G) n).inv",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T194117-L-457274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T194117-L-457274",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

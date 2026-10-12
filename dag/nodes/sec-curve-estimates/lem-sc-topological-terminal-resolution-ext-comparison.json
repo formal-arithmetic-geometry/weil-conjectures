@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-topological-terminal-resolution-ext-comparison",
+ "kind": "statement",
+ "title": "Terminal-section derived comparisons compatible with Ext cocycles",
+ "statement": "Let $f:Z\\to X$ be continuous with additive abelian-sheaf pushforward $F=f_*$ [def-sc-topological-abelian-cohomology]. Write $K_X,K_Z$ for sheafified free abelian terminal representables, $G=\\Gamma(X,-)$, and $C_X^n,C_Z^n$ for the Ext-defined cohomology presheaf functors evaluated at the terminal opens. Suppose $a:K_X\\to F(K_Z)$ takes each sheafified representable generator to its inverse-image generator followed by $f^{-1}(X)=Z$. There are natural isomorphisms $x_n:R^nG\\simeq C_X^n$ and $z_n:R^n(FG)\\simeq C_Z^n$, simultaneously for all $n\\ge0$, with this normalization: for every sheaf $M$ on $Z$, injective resolutions $I$ of $M$ and $J$ of $F(M)$ [def-sp-injective-resolutions], augmented comparison $\\phi:J\\to F(I)$, and cocycles $s:K_X\\to J^p$, $t:K_Z\\to I^p$ satisfying $aF(t)=s\\phi^p$, one has $z_p(M)(\\rho_I^{-1}H^p(G\\phi)\\rho_J(x_p(F(M))^{-1}(J.\\mathrm{extMk}(s))))=I.\\mathrm{extMk}(t)$. The $\\rho$ are canonical right-derived resolution comparisons [lem-sp-derived-well-defined]. This states no spectral-object construction or spectral edge identification.",
+ "source": {
+  "document": "Stacks Project, Cohomology on Sites and Derived Categories; https://stacks.math.columbia.edu/tag/01FT",
+  "place": "Tag 01FT equation 21.2.0.1, Tag 06XR injective-resolution Ext computation, and Tag 01F2 terminal-section composite; cocycle part of parent augmentation step 2"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Construct the additive Hom/section identification using the sheafification adjunction, the free abelian adjunction and Yoneda. On a map out of the free terminal sheaf, it evaluates the image of its terminal generator. Use its naturality degreewise to identify the Hom complex of every injective resolution with its section complex.",
+   "uses": [
+    "lem-sc-site-cohomology-right-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute Ext by the Hom complex and ordinary derived sections by the section complex; compose these explicit identifications on the chosen resolution to construct x_n, with naturality from resolution-map naturality. Do not choose an arbitrary isomorphism from the nonempty comparison theorem: use the underlying Hom-complex construction, so its value on extMk is the represented homology class.",
+   "uses": [
+    "lem-sc-ext-right-derived-hom",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality of terminal sections of f_*M and M, including transport across f^{-1}(top)=top, is an additive natural isomorphism. The generator formula for a says that precomposing F(t) with a corresponds to the same terminal section as t. Derive this natural isomorphism and compose with the Z analogue of x to construct z_n.",
+   "uses": [
+    "lem-sc-site-cohomology-right-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary I,J,phi, apply the degreewise Hom/section identification to s and t. The given relation aF(t)=s phi sends the cocycle represented by s to the cocycle represented by t. Homology of G(phi) thus has the required effect. Naturality of the canonical right-derived resolution computations and independence of injective-resolution comparisons give the equation for all supplied resolutions and comparisons.",
+   "uses": [
+    "lem-sc-ext-right-derived-hom",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-right-derived-hom",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology on Sites and Derived Categories; https://stacks.math.columbia.edu/tag/01FT",
+  "place": "Tag 01FT equation 21.2.0.1, Tag 06XR injective-resolution Ext computation, and Tag 01F2 terminal-section composite; cocycle part of parent augmentation step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology Ext derived evaluation injective resolution cocycle comparison",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived global sections Ext sheaf cohomology natural isomorphism compatible injective resolution cocycle",
+   "results": "InjectiveResolution.extEquivCohomologyClass, extAddEquivCohomologyClass and extEquivCohomologyClass_extMk",
+   "date": "2026-10-13",
+   "verdict": "Ext API only; no normalized terminal-section composite comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheafFunctor|rightDerived|extMk in Mathlib Sites/SheafCohomology and Injective/Ext; library CohomologyRightDerivedSections and CohomologyResolutionEvaluationNatural",
+   "results": "Existing natural derived-section isomorphism has no cocycle normalization. Existing resolution evaluation result uses constant-sheaf H, positive degrees and endomorphisms, not H-prime and a pushforward comparison.",
+   "date": "2026-10-13",
+   "verdict": "Neither existing theorem supplies the required normalization."
+  },
+  {
+   "tool": "blueprint",
+   "query": "Ext sections; derived evaluation; cohomology",
+   "results": "No blueprint statement of the normalized cross-site resolution comparison.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalLeraySpectralObjectAugmentation",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 01FT equation 21.2.0.1, Tag 06XR injective-resolution Ext computation, and Tag 01F2 terminal-section composite; cocycle part of parent augmentation step 2",
+   "via": [
+    "lem-sc-topological-leray-spectral-object-augmentation",
+    "lem-sc-topological-leray-cartan-eilenberg-cocycle",
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.TopologicalTerminalResolutionExtComparison",
+  "file": "lean/Sheaf/Topology/TopologicalTerminalResolutionExtComparison.lean",
+  "declaration": "CategoryTheory.exists_topological_terminal_resolution_ext_comparison",
+  "statement": "theorem exists_topological_terminal_resolution_ext_comparison {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive] (a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ (TopCat.Sheaf.pushforwardAb f).obj ((presheafToSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free))) (ha : (∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)), a.hom.app (op U) ((toSheafify (Opens.grothendieckTopology X) (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app (op U) (FreeAbelianGroup.of h)) = (toSheafify (Opens.grothendieckTopology Z) (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app (op ((Opens.map f).obj U)) (FreeAbelianGroup.of ((Opens.map f).map h ≫ eqToHom (Opens.map_top f))))) : let G := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙ (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) ∃ x : ∀ n : ℕ, G.rightDerived n ≅ Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙ (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤), ∃ zc : ∀ n : ℕ, (TopCat.Sheaf.pushforwardAb f ⋙ G).rightDerived n ≅ Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙ (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤), (∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) (I : InjectiveResolution F) (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F)) (φ : J.cocomplex ⟶ ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) (_hφ : J.ι.f 0 ≫ φ.f 0 = (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ) (s : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ J.cocomplex.X p) (hs : s ≫ J.cocomplex.d p (p + 1) = 0) (z : (presheafToSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶ I.cocomplex.X p) (hz : z ≫ I.cocomplex.d p (p + 1) = 0) (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p), (zc p).hom.app F ((I.isoRightDerivedObj (TopCat.Sheaf.pushforwardAb f ⋙ G) p).inv (HomologicalComplex.homologyMap ((G.mapHomologicalComplex (ComplexShape.up ℕ)).map φ) p ((J.isoRightDerivedObj G p).hom ((x p).inv.app ((TopCat.Sheaf.pushforwardAb f).obj F) (J.extMk s (p + 1) rfl hs))))) = I.extMk z (p + 1) rfl hz)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T194117-L-457274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T194117-L-457274",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
