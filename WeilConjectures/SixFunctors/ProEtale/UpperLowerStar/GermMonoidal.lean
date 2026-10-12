@@ -127,4 +127,32 @@ lemma germ_unit {V : Y.ProEt}
   simp only [Monoidal.tensorUnit_map, Category.id_comp]
   rfl
 
+variable (g) in
+
+/-- The lax monoidal functor `Γ(Z, g^* -)` is compatible with the braidings: `g^*` is braided,
+being the strong monoidal left adjoint of the lax braided `g_*`, and taking sections is lax
+braided. -/
+lemma μ_comp_map_braiding_upperStar_comp_Γ
+    (P Q : Sheaf (ProEt.topology Y) (WeilCoefficients.{u} l)) :
+    μ ((g)^*[_] ⋙ Sheaf.Γ _ _) P Q ≫ ((g)^*[_] ⋙ Sheaf.Γ _ _).map (β_ P Q).hom =
+      (β_ _ _).hom ≫ μ ((g)^*[_] ⋙ Sheaf.Γ _ _) Q P := by
+  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g)
+      Functor.Monoidal.toOplaxMonoidal _ :=
+    isMonoidal_upperStarLowerStarAdjunction _ _
+  have h₁ := Adjunction.μ_comp_map_braiding
+    (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g) P Q
+  have h₂ := congr_app (Functor.LaxBraided.braided
+    (F := sheafToPresheaf (ProEt.topology Z) (WeilCoefficients.{u} l))
+    ((g)^*[_].obj P) ((g)^*[_].obj Q)) (op (ProEt.mk (𝟙 Z)))
+  simp only [NatTrans.comp_app] at h₂
+  have n := (Sheaf.ΓNatIsoSheafSections _ (WeilCoefficients.{u} l)
+    (ProEt.isTerminalMkId Z)).inv.naturality (β_ ((g)^*[_].obj P) ((g)^*[_].obj Q)).hom
+  rw [Functor.LaxMonoidal.comp_μ, Functor.LaxMonoidal.comp_μ, Functor.comp_map, Category.assoc,
+    ← Functor.map_comp, h₁, Functor.map_comp, μ_Γ, μ_Γ]
+  simp only [Category.assoc]
+  rw [← reassoc_of% n]
+  erw [reassoc_of% h₂]
+  exact BraidedCategory.braiding_naturality_assoc _ _ _
+
 end AlgebraicGeometry.ProEtale

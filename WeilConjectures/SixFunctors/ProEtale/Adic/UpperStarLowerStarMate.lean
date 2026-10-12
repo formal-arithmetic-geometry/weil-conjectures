@@ -68,6 +68,34 @@ lemma adicLowerStarExchangeIso_hom_app_hom (w : φ ≫ b.inv = a.inv ≫ φ) (M 
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Mod.comp_hom',
     adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
 
+omit [Fact l.Prime] in
+/-- `unit_mateEquiv` for a known mate `γ`, at an explicit object. Stated for general
+adjunctions: instantiating `unit_mateEquiv` directly produces objects `(𝟭 _).obj M` which the
+kernel cannot compare with `M` inside pro-étale exchange isomorphisms. -/
+private lemma unit_app_comp_app_of_mateEquiv_eq {C D E F : Type*} [Category* C] [Category* D]
+    [Category* E] [Category* F] {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
+    {L₂ : E ⥤ F} {R₂ : F ⥤ E} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H)
+    (γ : TwoSquare R₁ H G R₂) (h : mateEquiv adj₁ adj₂ α = γ) (c : C) :
+    G.map (adj₁.unit.app c) ≫ γ.app (L₁.obj c) = adj₂.unit.app (G.obj c) ≫ R₂.map (α.app c) :=
+  h ▸ unit_mateEquiv adj₁ adj₂ α c
+
+private lemma adicUnit_app_hom (M : AdicSheaf l Y) :
+    ((adicUpperStarLowerStarAdjunction l φ).unit.app M).hom =
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ).unit.app M.X := by
+  rw [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
+
+private lemma lowerStar_map_adicUnit_app_hom (M : AdicSheaf l Y) :
+    ((b.inv)_*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l φ).unit.app M)).hom =
+      (b.inv)_*[_].map ((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ).unit.app
+        M.X) := by
+  rw [adicLowerStar_map_hom, adicUnit_app_hom]
+
+private lemma adicUnit_app_lowerStar_obj_hom (M : AdicSheaf l Y) :
+    ((adicUpperStarLowerStarAdjunction l φ).unit.app ((b.inv)_*ᵃ[l].obj M)).hom =
+      (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ).unit.app
+        ((b.inv)_*[_].obj M.X) :=
+  adicUnit_app_hom φ _
+
 /-- A criterion for `ℓ`-adic exchange isomorphisms to be mates: their underlying morphisms of
 sheaves are the sheaf-level exchange isomorphisms, which are mates
 (`AlgebraicGeometry.ProEtale.mateEquiv_upperStarExchangeIso_inv`). -/
@@ -81,14 +109,55 @@ lemma mateEquiv_eq_of_hom_app_hom (w : φ ≫ b.inv = a.inv ≫ φ) (c : a.hom �
     mateEquiv (adicUpperStarLowerStarAdjunction l φ) (adicUpperStarLowerStarAdjunction l φ)
         (TwoSquare.mk _ _ _ _ E.inv) = TwoSquare.mk _ _ _ _ E'.hom := by
   refine mateEquiv_eq_of_unit _ _ _ _ fun M ↦ Mod.hom_ext _ _ ?_
-  have h := unit_mateEquiv (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ)
-    (upperStarLowerStarAdjunction _ φ)
-    (TwoSquare.mk _ _ _ _ (upperStarExchangeIso (WeilCoefficients.{u} l) φ a b c).inv) M.X
-  rw [mateEquiv_upperStarExchangeIso_inv _ φ a b w c] at h
-  rw [Mod.comp_hom', Mod.comp_hom', adicLowerStar_map_hom, adicLowerStar_map_hom,
-    adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom,
-    Adjunction.modAdjunction_unit_app_hom]
-  rw [hE, hE']
-  sorry
+  have h := unit_app_comp_app_of_mateEquiv_eq
+    (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ) (upperStarLowerStarAdjunction _ φ)
+    (TwoSquare.mk _ _ _ _ (upperStarExchangeIso (WeilCoefficients.{u} l) φ a b c).inv) _
+    (mateEquiv_upperStarExchangeIso_inv _ φ a b w c) M.X
+  have h₁ : ((φ)_*ᵃ[l].map (E.inv.app M)).hom =
+      (φ)_*[_].map ((upperStarExchangeIso (WeilCoefficients.{u} l) φ a b c).inv.app M.X) := by
+    rw [adicLowerStar_map_hom, hE]
+  rw [Mod.comp_hom', Mod.comp_hom']
+  exact (congrArg₂ (· ≫ ·) (lowerStar_map_adicUnit_app_hom φ b M) (hE' _)).trans
+    (h.trans (congrArg₂ (· ≫ ·) (adicUnit_app_lowerStar_obj_hom φ b M) h₁).symm)
+
+section GeometricFrobenius
+
+variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
+  {g : Y₀ ⟶ Spec (.of k)} (ψ : X₀ ⟶ Y₀) (hψ : ψ ≫ g = f)
+
+private lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq' :
+    adicUpperStarGeometricFiberMapCompFrobeniusIso l ψ hψ =
+      Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius).symm ≪≫
+      (adicUpperStarComp l _ _).symm ≪≫
+      adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius ψ hψ).symm ≪≫
+      adicUpperStarComp l _ _ ≪≫
+      Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius) _ :=
+  rfl
+
+private lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_eq :
+    adicLowerStarGeometricFiberMapCompFrobeniusIso l ψ hψ =
+      adicLowerStarComp l _ _ ≪≫
+        adicLowerStarCongr l
+          (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv ψ hψ) ≪≫
+        (adicLowerStarComp l _ _).symm :=
+  rfl
+
+/-- **The `ℓ`-adic Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*` are mates** under the
+adjunction `φ̄^* ⊣ φ̄_*`, for the base change `φ̄` of a morphism `φ` of schemes over a finite
+field. Consequently the unit and the counit of `φ̄^* ⊣ φ̄_*` are compatible with the Weil
+structures. -/
+lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
+    mateEquiv (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap ψ hψ))
+        (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap ψ hψ))
+        (TwoSquare.mk _ _ _ _ (adicUpperStarGeometricFiberMapCompFrobeniusIso l ψ hψ).inv) =
+      TwoSquare.mk _ _ _ _ (adicLowerStarGeometricFiberMapCompFrobeniusIso l ψ hψ).hom := by
+  rw [adicUpperStarGeometricFiberMapCompFrobeniusIso_eq',
+    adicLowerStarGeometricFiberMapCompFrobeniusIso_eq]
+  exact mateEquiv_eq_of_hom_app_hom _ _ _
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv ψ hψ)
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius ψ hψ).symm
+    (adicUpperStarExchangeIso_inv_app_hom _ _ _ _) (adicLowerStarExchangeIso_hom_app_hom _ _ _ _)
+
+end GeometricFrobenius
 
 end AlgebraicGeometry.ProEtale

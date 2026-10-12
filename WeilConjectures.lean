@@ -640,8 +640,10 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomDual
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
@@ -1869,6 +1871,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
+public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
@@ -2045,6 +2048,7 @@ public import WeilConjectures.WeilSheaf.TensorPower
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
+public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
