@@ -1,0 +1,126 @@
+{
+ "id": "new-geometric-point-morphism-addcommgrp-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+   "place": "Step 5: comparison of stalk colimits"
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The representative-preserving comparison of abelian geometric stalks",
+ "statement": "Let S be a scheme [def-pc-scheme], with geometric points s : Spec k → S and s' : Spec k' → S [def-weil-geometric-point], and a : Spec k → Spec k' satisfying a ≫ s' = s. For every abelian sheaf F [def-weil-pbc-abelian-etale-sheaves] on the small étale site [def-weil-pbc-etale-site], there is exactly one group homomorphism F_s' → F_s between geometric stalks [def-weil-pbc-geometric-stalks] whose composite with the coprojection at (U,t) equals the coprojection at (U,a ≫ t). Every homomorphism satisfying this formula is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, line 3416): the canonical map of stalks of a morphism of geometric points, 'since the functor above is clearly an equivalence ... this canonical map is an isomorphism of stalk functors'; used in the paragraph before Definition 04FS (line 3984)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Use the equivalence of pointed neighbourhoods. Their forgetful functors agree, so the source diagram is the target diagram precomposed with its opposite. Mathlib colimit.pre defines the comparison, colimit.ι_pre gives its rule, and Functor.Final.colimit_pre_isIso gives invertibility. Point.presheafFiber_hom_ext proves uniqueness; in Type, isIso_iff_bijective gives bijectivity.",
+   "uses": [
+    "new-geometric-point-morphism-category-equivalence",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-geometric-point-morphism-category-equivalence",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Remark 04FN (remark-map-stalks, line 3416): the canonical map of stalks of a morphism of geometric points, 'since the functor above is clearly an equivalence ... this canonical map is an isomorphism of stalk functors'; used in the paragraph before Definition 04FS (line 3984); second reading: field embedding argument for the equivalence, Mathlib final-functor colimit comparison for both stalk clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "precomposition with an algebraically closed field extension gives an equivalence of pointed etale neighborhoods",
+   "results": "StandardEtalePair.homEquiv and ring etale facts; no geometric-point equivalence. For stalks: HasColimit.isoOfEquivalence, general colimit comparison APIs.",
+   "date": "2026-10-13",
+   "verdict": "no direct geometric match; reuse generic colimit APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CategoryOfElements.map; CategoryTheory.Limits.colimit.pre",
+   "results": "CategoryOfElements.map; colimit.pre; colimit.ι_pre. Direct source inspection: Functor.Final.colimit_pre_isIso.",
+   "date": "2026-10-13",
+   "verdict": "generic APIs used"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_fac_of_etale_of_isSepClosed; presheafFiber_hom_ext",
+   "results": "Existence of lifts in EtalePoint, not uniqueness or compatibility with arbitrary a; Point.presheafFiber_hom_ext in Point.Basic used for stalk uniqueness.",
+   "date": "2026-10-13",
+   "verdict": "generic uniqueness API used; no direct geometric match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "colimit precomposition along an equivalence is an isomorphism",
+   "results": "Unavailable: service returned Internal Server Error. Other search kinds and direct source inspection used.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointMorphismAddCommGrpStalk",
+  "declaration": "AlgebraicGeometry.Scheme.geometricPointMorphism_addCommGrp_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointMorphismAddCommGrpStalk.lean",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13",
+  "existing": false,
+  "statement": "theorem geometricPointMorphism_addCommGrp_stalk\n    {S : Scheme.{u}} {k k' : Type u} [Field k] [IsAlgClosed k]\n    [Field k'] [IsAlgClosed k'] (s : Spec (.of k) ⟶ S) (s' : Spec (.of k') ⟶ S)\n    (a : Spec (.of k) ⟶ Spec (.of k')) (ha : a ≫ s' = s) :\n    ∀ F : Sheaf S.smallEtaleTopology AddCommGrpCat.{max u v},\n      let b : Over.mk s ⟶ Over.mk s' := Over.homMk a ha\n      let α : (pointSmallEtale s').fiber ⟶ (pointSmallEtale s).fiber :=\n        Functor.whiskerLeft (Etale.forget S) (coyoneda.map b.op)\n      let P := fun f : (pointSmallEtale s').sheafFiber.obj F ⟶\n          (pointSmallEtale s).sheafFiber.obj F ↦\n        ∀ (U : S.Etale) (t : (pointSmallEtale s').fiber.obj U),\n          (pointSmallEtale s').toPresheafFiber U t F.obj ≫ f =\n            (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj\n      (∃! f, P f) ∧ ∀ f, P f → IsIso f"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T231635-L-1962268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T231635-L-1962268",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

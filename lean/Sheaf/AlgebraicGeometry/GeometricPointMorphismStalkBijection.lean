@@ -7,7 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.SpecFieldPointResidueField
+import Sheaf.AlgebraicGeometry.GeometricPointMorphismCategoryEquivalence
+import Sheaf.AlgebraicGeometry.GeometricPointMorphismSetStalk
+import Sheaf.AlgebraicGeometry.GeometricPointMorphismAddCommGrpStalk
 
 /-!
 # Morphisms of geometric points and étale stalks
@@ -72,6 +74,9 @@ theorem geometricPointMorphism_stalk_bijection
           (pointSmallEtale s').toPresheafFiber U t F.obj ≫ f =
             (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj
       (∃! f, P f) ∧ ∀ f, P f → IsIso f) := by
-  sorry
+  dsimp
+  refine ⟨geometricPointMorphism_category_equivalence s s' a ha, ?_, ?_⟩
+  · exact geometricPointMorphism_set_stalk s s' a ha
+  · exact geometricPointMorphism_addCommGrp_stalk s s' a ha
 
 end AlgebraicGeometry.Scheme
