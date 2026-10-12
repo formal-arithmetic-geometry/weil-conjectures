@@ -11,6 +11,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.CategoryTheory.Adjunction.Whiskering
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
 /-!
 # Affine étale restriction and cohomology
@@ -392,6 +395,44 @@ private lemma affineEtaleHZeroSectionsEquiv_naturality
   rw [extZero_postcomp, affineEtaleSectionsEquiv_naturality]
   rfl
 
+private theorem affineEtale_free_restriction (S : Scheme.{u}) (U : S.FullAffineEtale) :
+    Nonempty ((presheafToSheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u}).obj
+        (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
+      ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+        (fullAffineEtaleTopology S) S.smallEtaleTopology).obj
+        ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+          (yoneda.obj U.obj ⋙ AddCommGrpCat.free))) := by
+  let R := (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+    (fullAffineEtaleTopology S) S.smallEtaleTopology
+  have : R.IsEquivalence := fullAffineEtale_ab_equivalence S
+  let E := R.asEquivalence
+  let X := (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (yoneda.obj U.obj ⋙ AddCommGrpCat.free)
+  let Y := (presheafToSheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u}).obj
+    (yoneda.obj U ⋙ AddCommGrpCat.free)
+  let a := E.symm.toAdjunction
+  let e : coyoneda.obj (op (E.inverse.obj Y)) ≅ coyoneda.obj (op X) :=
+    NatIso.ofComponents (fun G =>
+      (((a.homEquiv Y G).trans
+        (affineEtaleSectionsEquiv (fullAffineEtaleTopology S) U (R.obj G)).toEquiv).trans
+        (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj G).toEquiv.symm).toIso) (by
+      intro G H f
+      ext x
+      change (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj H).symm
+        (affineEtaleSectionsEquiv (fullAffineEtaleTopology S) U (R.obj H)
+          (a.homEquiv Y H (x ≫ f))) =
+        (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj G).symm
+          (affineEtaleSectionsEquiv (fullAffineEtaleTopology S) U (R.obj G)
+            (a.homEquiv Y G x)) ≫ f
+      apply (affineEtaleSectionsEquiv S.smallEtaleTopology U.obj H).injective
+      rw [AddEquiv.apply_symm_apply, Adjunction.homEquiv_naturality_right,
+        affineEtaleSectionsEquiv_naturality, affineEtaleSectionsEquiv_naturality,
+        AddEquiv.apply_symm_apply]
+      rfl)
+  let i : E.inverse.obj Y ≅ X := (coyoneda.preimageIso e).unop.symm
+  exact ⟨(E.counitIso.app Y).symm ≪≫ R.mapIso i⟩
+
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Cohomology on Sites, Lemma 03YU, specialized to the
 restriction equivalence of Topologies Lemma 04HR.
 (blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_data)
@@ -422,7 +463,38 @@ theorem fullAffineEtale_cohomology_comparison_data (S : Scheme.{u})
         Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
           (CategoryTheory.evaluation _ _).obj (op U) ≅
       Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
-        (CategoryTheory.evaluation _ _).obj (op U.obj)), True := by sorry
+        (CategoryTheory.evaluation _ _).obj (op U.obj)), True := by
+  classical
+  let R := (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+    (fullAffineEtaleTopology S) S.smallEtaleTopology
+  have : R.IsEquivalence := fullAffineEtale_ab_equivalence S
+  have : R.Additive := ⟨by intros; rfl⟩
+  have : EnoughInjectives (Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) := inferInstance
+  obtain ⟨i⟩ := affineEtale_free_restriction S U
+  let X := (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u}).obj
+    (yoneda.obj U.obj ⋙ AddCommGrpCat.free)
+  let m (p : ℕ) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :=
+    (Ext.precompAddEquiv i (R.obj G) p).toAddMonoidHom.comp (R.mapExtAddHom X G p)
+  have hm (p : ℕ) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) :
+      Function.Bijective (m p G) :=
+    (Ext.precompAddEquiv i (R.obj G) p).bijective.comp
+      (R.mapExt_bijective_of_preservesInjectiveObjects X G p)
+  let e (p : ℕ) :
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U.obj) ≅
+      R ⋙ Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) :=
+    NatIso.ofComponents (fun G => (AddEquiv.ofBijective (m p G) (hm p G)).toAddCommGrpIso)
+      (by
+        intro G H f
+        ext x
+        change (Ext.mk₀ i.hom).comp
+          ((x.comp (Ext.mk₀ f) (add_zero p)).mapExactFunctor R) (zero_add p) =
+          ((Ext.mk₀ i.hom).comp (x.mapExactFunctor R) (zero_add p)).comp
+            (Ext.mk₀ (R.map f)) (add_zero p)
+        rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
+        exact (Ext.comp_assoc _ _ _ (zero_add p) (add_zero p) (by omega)).symm)
+  exact ⟨fun p => (e p).symm, trivial⟩
 
 /-- Source: Stacks 03YU, degree-zero sections identification.
 
