@@ -3,7 +3,8 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.Paper.AffineOpenSectionsCanonicalTransformation
+import Sheaf.Paper.AffineOpenSectionsCanonicalColimitCore
 
 @[expose] public section
 
@@ -44,4 +45,7 @@ theorem affineOpenSections_exists_canonical_colimit
             exact hp j))
           (by exact pullback.lift_snd _ _ _)).op) ∧
         Nonempty (IsColimit (Cocone.mk _ ν₀)) := by
-  sorry
+  obtain ⟨ν₀, hν₀⟩ := affineOpenSections_exists_canonical_transformation
+    D c p hp hc H hH F
+  exact ⟨ν₀, hν₀, affineOpenSections_canonical_colimit_core
+    D c p hp hc H hH F ν₀ hν₀⟩

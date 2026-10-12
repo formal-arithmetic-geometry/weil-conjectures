@@ -1,0 +1,103 @@
+{
+ "id": "affine-open-sections-canonical-transformation",
+ "kind": "statement",
+ "title": "Canonical affine open sections restriction transformation",
+ "statement": "Under the hypotheses of new-local-stalk-sections-canonical-colimit, there exists the natural transformation ν₀ with the displayed adjunction-unit and pullback-lift component formula.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree-zero continuity"
+ },
+ "proof": [
+  {
+   "text": "Construct the component maps by the adjunction unit followed by restriction along the pullback lifts; naturality follows from functoriality and unit naturality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine sheaf sections filtered colimit",
+   "results": "No exact supplied-adjunction match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf sections affine inverse system colimit",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (IsColimit (Cocone.mk",
+   "results": "Generic colimit lemmas only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg affine colimit sections Mathlib",
+   "results": "No exact theorem for supplied adjunction and etale sites.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOpenSectionsCanonicalColimit",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-local-stalk-sections-canonical-colimit",
+   "place": "canonical transformation substep",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOpenSectionsCanonicalTransformation",
+  "file": "lean/Sheaf/Paper/AffineOpenSectionsCanonicalTransformation.lean",
+  "declaration": "affineOpenSections_exists_canonical_transformation",
+  "statement": "theorem affineOpenSections_exists_canonical_transformation {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J] (D : J ⥤ X.Etale) [∀ j, IsAffine (D.obj j).left] [∀ j, IsOpenImmersion (D.obj j).hom] (c : Cone (D ⋙ Scheme.Etale.forget X ⋙ Over.forget X)) (p : c.pt ⟶ X) (hp : ∀ j, c.π.app j ≫ (D.obj j).hom = p) (hc : IsLimit c) (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : H ⊣ p.Etale.sheafPushforwardContinuous AddCommGrpCat.{u + 1} X.smallEtaleTopology c.pt.smallEtaleTopology) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : ∃ ν₀ : D.op ⋙ F.obj ⟶ (Functor.const Jᵒᵖ).obj ((H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt)))), (∀ j, ν₀.app (op j) = (hH.unit.app F).hom.app (op (D.obj j)) ≫ (H.obj F).obj.map (MorphismProperty.Over.homMk (B := p.Etale.obj (D.obj j)) (pullback.lift (c.π.app j) (𝟙 c.pt) (by change c.π.app j ≫ (D.obj j).hom = 𝟙 c.pt ≫ p rw [Category.id_comp] exact hp j)) (by exact pullback.lift_snd _ _ _)).op)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "new-local-stalk-sections-canonical-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T225322-L-1810580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T225322-L-1810580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
