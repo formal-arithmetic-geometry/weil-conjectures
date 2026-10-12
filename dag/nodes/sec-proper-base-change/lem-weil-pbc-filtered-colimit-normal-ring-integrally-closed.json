@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Integral-closedness part of Stacks Tag 037D.",
- "statement": "For a filtered diagram of commutative rings whose localizations at all contracted primes are integrally closed, the localization of the colimit at any prime is integrally closed.",
+ "statement": "For a filtered diagram of commutative rings whose localizations at all primes are integrally closed domains, the localization of the colimit at any prime is integrally closed.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Stacks Project, Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), stated there for a directed system; a filtered colimit is a directed colimit by Categories, Lemma Tag 0032 (categories-lemma-directed-category-system). Used in More on Algebra, Lemma Tag 06DI."
@@ -24,16 +24,22 @@
  ],
  "proof": [
   {
-   "text": "The assertion follows by the common-stage lifting argument for filtered colimits, clearing denominators (domain case) or lifting a monic relation (integral-closedness case).",
-   "uses": [],
+   "text": "Use localization at the contracted primes to obtain a filtered localization diagram and a colimit cocone with point the localization of the original colimit. Each stage is an integrally closed domain by the hypothesis. Apply the common-stage integrally closedness theorem with the colimit witness.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed-common-stage"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed-common-stage"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "S1 stage 3 worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 037D"
+  "place": "Tag 037D, common-stage normal-domain argument, implemented with Mathlib filtered-colimit and scaleRoots APIs"
  },
  "mathlib_searches": [
   {
@@ -115,7 +121,7 @@
   "module": "Sheaf.RingTheory.FilteredColimitNormalRingIntegrallyClosed",
   "declaration": "CommRingCat.filtered_colimit_localization_isIntegrallyClosed",
   "file": "lean/Sheaf/RingTheory/FilteredColimitNormalRingIntegrallyClosed.lean",
-  "statement": "theorem filtered_colimit_localization_isIntegrallyClosed {I : Type u} [SmallCategory I] [IsFiltered I] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (hF : ∀ i : I, ∀ (p : Ideal (F.obj i)) [p.IsPrime], IsIntegrallyClosed (Localization.AtPrime p)) (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime] : IsIntegrallyClosed (Localization.AtPrime p)",
+  "statement": "theorem filtered_colimit_localization_isIntegrallyClosed {I : Type u} [SmallCategory I] [IsFiltered I] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (hF : ∀ i : I, ∀ (p : Ideal (F.obj i)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime] : IsIntegrallyClosed (Localization.AtPrime p)",
   "branch": "sheaf-dag",
   "by": "J2",
   "date": "2026-10-12",
@@ -132,17 +138,36 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-9d2be",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T053926-L-2633122",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CommRingCat.filtered_colimit_localization_isIntegrallyClosed"
+  "landing": "20261012T135314-L-1691353",
+  "kind": "interface",
+  "note": "independent Codex review: Matched corrected Lean signatures and proofs with nodes, change record, and Stacks 037D; delivery and direct importers compile cleanly, original parent fails as reported, adaptation is minimal, and axiom checks show only standard axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "S1 stage 2",
+  "old_statement": "For a filtered diagram of commutative rings whose localizations at all contracted primes are integrally closed, the localization of the colimit at any prime is integrally closed.",
+  "what": "Restore the normal-domain assumptions of Tag 037D. The common-stage Lean statement also omitted IsColimit c, so originally any cocone from Z would falsely force its point to be integrally closed. The localized conclusion is now restricted to the domain case used by the parent normal-ring theorem, whose statement is unchanged. The stronger integral-closedness-only generalization is not proved or silently reused.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Stacks Project, Algebra, Lemma Tag 037D (lemma-colimit-normal-ring), stated there for a directed system; a filtered colimit is a directed colimit by Categories, Lemma Tag 0032 (categories-lemma-directed-category-system). Used in More on Algebra, Lemma Tag 06DI."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-filtered-colimit-normal-ring",
+    "holds": true,
+    "note": "Its normal-ring hypotheses supply both domain and integral-closedness assumptions; the conclusion used is unchanged."
+   }
   ],
-  "sorry_after": [
-   "CommRingCat.integrallyClosed_of_localization_cocone"
-  ]
+  "old_proof": [
+   {
+    "text": "The assertion follows by the common-stage lifting argument for filtered colimits, clearing denominators (domain case) or lifting a monic relation (integral-closedness case).",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }

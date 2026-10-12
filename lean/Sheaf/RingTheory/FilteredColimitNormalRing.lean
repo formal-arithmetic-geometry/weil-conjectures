@@ -54,6 +54,6 @@ theorem isNormal_of_filtered_colimit
   intro p hp
   letI := hp
   exact ⟨filtered_colimit_localization_isDomain F (fun i q hq => (hF i q).1) p,
-    filtered_colimit_localization_isIntegrallyClosed F (fun i q hq => (hF i q).2) p⟩
+    filtered_colimit_localization_isIntegrallyClosed F hF p⟩
 
 end CommRingCat
