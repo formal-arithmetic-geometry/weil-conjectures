@@ -9,115 +9,33 @@
  },
  "proof": [
   {
-   "text": "(Reduction modulo $I$.) Write $A\\cong R[y_1,\\dots,y_p]/(h_1,\\dots,h_q)$ [def-weil-pbc-finitely-presented-algebra]. Then $A/IA\\cong R[y_1,\\dots,y_p]/\\bigl((h_1,\\dots,h_q)+I\\,R[y_1,\\dots,y_p]\\bigr)\\cong(R/I)[y_1,\\dots,y_p]/(\\bar h_1,\\dots,\\bar h_q)$, $\\bar h_l$ the reduction of $h_l$ modulo $I$, so $A/IA$ is a finitely presented, in particular finite type, $R/I$-algebra. Since $\\varphi(IA)\\subset I\\Lambda$, $\\varphi$ induces a homomorphism of $R/I$-algebras $\\bar\\varphi:A/IA\\to\\Lambda/I\\Lambda$ with $\\bar\\varphi(a\\bmod IA)=\\varphi(a)\\bmod I\\Lambda$. Let $p:\\Lambda\\to\\Lambda/I\\Lambda$ be the quotient map.",
+   "text": "Apply the ind standard smooth refinement theorem to Lambda/I Lambda over R/I. It turns the given filtered colimit of smooth algebras into a filtered colimit of standard smooth algebras.",
    "uses": [
-    "def-weil-pbc-finitely-presented-algebra"
+    "lem-weil-pbc-colimit-standard-smooth-algebras"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'Choose a factorization A/IA -> B-bar -> Lambda/I Lambda' (the reduction modulo I that this presupposes)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Factor through a standard smooth $\\bar B$.) By hypothesis (2) and [lem-weil-pbc-colimit-standard-smooth-algebras] (Lemma 07CI, applied to the $R/I$-algebra $\\Lambda/I\\Lambda$), there are a small filtered category $\\mathcal K$, a functor $k\\mapsto C_k$ to commutative $R/I$-algebras with every $C_k$ standard smooth over $R/I$ [def-weil-pbc-standard-smooth-algebra], and $R/I$-algebra maps $\\iota_k:C_k\\to\\Lambda/I\\Lambda$ forming a colimit in $R/I$-algebras. By [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1) the same cocone is a colimit of the underlying diagram of commutative rings. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] (Algebra 00QO) over the ring $R/I$ to $C=(R/I)[y_1,\\dots,y_p]/(\\bar h_1,\\dots,\\bar h_q)\\cong A/IA$ (Step 1) and $g=\\bar\\varphi$: there are $k$ and a homomorphism of $R/I$-algebras $\\bar\\alpha:A/IA\\to\\bar B:=C_k$ with $\\bar\\beta\\circ\\bar\\alpha=\\bar\\varphi$, where $\\bar\\beta:=\\iota_k:\\bar B\\to\\Lambda/I\\Lambda$. So $\\bar B$ is standard smooth over $R/I$ and $A/IA\\xrightarrow{\\bar\\alpha}\\bar B\\xrightarrow{\\bar\\beta}\\Lambda/I\\Lambda$ is a factorization of $\\bar\\varphi$ by $R/I$-algebra maps.",
+   "text": "Apply the standard smooth reduction factor construction to obtain a finitely presented A prime and maps iota and phi prime with phi prime composed with iota equal to phi, and with A prime/IA prime standard smooth over R/I.",
    "uses": [
-    "lem-weil-pbc-colimit-standard-smooth-algebras",
-    "def-weil-pbc-filtered-colimit-smooth-algebras",
-    "def-weil-pbc-standard-smooth-algebra",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+    "lem-weil-pbc-popescu-standard-reduction-factor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'Choose a factorization A/IA -> B-bar -> Lambda/I Lambda with B-bar standard smooth over R/I; this is possible by assumption and Lemma 07CI (lemma-colimit-standard-smooth)'"
-   }
+   "elementary": false
   },
   {
-   "text": "(A presentation of $\\bar B$ over $A/IA$.) A standard smooth presentation of $\\bar B$ is in particular a presentation, so $\\bar B$ is of finite presentation over $R/I$ [def-weil-pbc-standard-smooth-algebra, def-weil-pbc-finitely-presented-algebra], and $A/IA$ is of finite type over $R/I$ (Step 1) [def-weil-pbc-finite-type-algebra]. By [lem-weil-pbc-finite-presentation-over-finite-type-algebra] (Algebra 00F4 (4)) applied to $R/I$, $S'=A/IA$, $S=\\bar B$, $\\sigma=\\bar\\alpha$, there are $r,s\\ge0$ and $\\bar g_1,\\dots,\\bar g_s\\in(A/IA)[t_1,\\dots,t_r]$ with $\\bar B\\cong(A/IA)[t_1,\\dots,t_r]/(\\bar g_1,\\dots,\\bar g_s)$ as $A/IA$-algebras; write $\\bar t_i\\in\\bar B$ for the class of $t_i$.",
+   "text": "Lift this standard smooth R/I-algebra to a standard smooth R-algebra B with an R/I-algebra isomorphism B/IB to A prime/IA prime. Standard smooth implies smooth. Restrict the isomorphism along R to R/I, obtaining exactly the R-algebra isomorphism required in the statement. Combine these witnesses with the factorization equality from the preceding step.",
    "uses": [
-    "def-weil-pbc-standard-smooth-algebra",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+    "lem-weil-pbc-standard-smooth-quotient-lift",
+    "lem-weil-pbc-standard-smooth-is-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'Write B-bar = A/IA[t_1, ..., t_r]/(g-bar_1, ..., g-bar_s)'"
-   }
-  },
-  {
-   "text": "(Choice of $\\lambda_i$, $g_i$, $\\epsilon_{ij}$, $\\mu_{ij}$.) Since $p$ is surjective choose $\\lambda_1,\\dots,\\lambda_r\\in\\Lambda$ with $p(\\lambda_i)=\\bar\\beta(\\bar t_i)$, and choose $g_1,\\dots,g_s\\in A[t_1,\\dots,t_r]$ whose coefficientwise reductions modulo $IA$ are $\\bar g_1,\\dots,\\bar g_s$ (possible as $A\\to A/IA$ is surjective). For $g\\in A[t_1,\\dots,t_r]$ let $\\varphi(g)(\\lambda)\\in\\Lambda$ be the value at $t_i=\\lambda_i$ of the polynomial obtained by applying $\\varphi$ to the coefficients; $g\\mapsto\\varphi(g)(\\lambda)$ is the $A$-algebra map $\\mathrm{ev}:A[t]\\to\\Lambda$, $t_i\\mapsto\\lambda_i$. Then $p\\circ\\mathrm{ev}$ and the composite $A[t]\\to(A/IA)[t]\\to\\bar B\\xrightarrow{\\bar\\beta}\\Lambda/I\\Lambda$ agree: both are ring maps that agree on $A$ (as $p\\circ\\varphi$ equals $\\bar\\varphi=\\bar\\beta\\circ\\bar\\alpha$ composed with $A\\to A/IA$) and on each $t_i$ (both give $p(\\lambda_i)=\\bar\\beta(\\bar t_i)$). The second kills $g_i$ because $\\bar g_i\\mapsto0$ in $\\bar B$. Hence $\\varphi(g_i)(\\lambda)\\in\\ker p=I\\Lambda$, so $\\varphi(g_i)(\\lambda)=\\sum_{j}\\epsilon_{ij}\\mu_{ij}$ for finitely many $\\epsilon_{ij}\\in I$, $\\mu_{ij}\\in\\Lambda$ ($j=1,\\dots,N_i$).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'say B-bar -> Lambda/I Lambda maps t_i to the class of lambda_i ... Write phi(g_i)(lambda_1, ..., lambda_r) = sum epsilon_ij mu_ij'"
-   }
-  },
-  {
-   "text": "(The algebra $A'$ and its map to $\\Lambda$.) Put $A'=A[t_1,\\dots,t_r,\\delta_{ij}]/(g_i-\\sum_j\\epsilon_{ij}\\delta_{ij})_{i=1,\\dots,s}$ (variables $\\delta_{ij}$, $1\\le i\\le s$, $1\\le j\\le N_i$), an $R$-algebra via $R\\to A$, with the $R$-algebra map $\\iota_A:A\\to A'$. The $A$-algebra map $A[t,\\delta]\\to\\Lambda$, $t_i\\mapsto\\lambda_i$, $\\delta_{ij}\\mapsto\\mu_{ij}$ (coefficients through $\\varphi$) sends $g_i-\\sum_j\\epsilon_{ij}\\delta_{ij}$ to $\\varphi(g_i)(\\lambda)-\\sum_j\\epsilon_{ij}\\mu_{ij}=0$ (Step 4), so it induces a homomorphism of $R$-algebras $\\varphi':A'\\to\\Lambda$ with $\\varphi'\\circ\\iota_A=\\varphi$. Moreover $A'$ is of finite presentation over $A$ (finitely many variables and relations) and $A$ is of finite presentation over $R$, so $A'$ is of finite presentation over $R$ by [lem-weil-pbc-finite-presentation-base-change-composition] (2).",
-   "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-finite-presentation-base-change-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'Define A' = A[t_1, ..., t_r, delta_ij]/(g_i - sum epsilon_ij delta_ij) and consider the map A' -> Lambda, a -> phi(a), t_i -> lambda_i, delta_ij -> mu_ij'"
-   }
-  },
-  {
-   "text": "($A'/IA'$ is standard smooth over $R/I$.) Since every $\\epsilon_{ij}\\in I$, $A'/IA'=A[t,\\delta]/\\bigl((g_i-\\sum_j\\epsilon_{ij}\\delta_{ij})_i+I\\,A[t,\\delta]\\bigr)=(A/IA)[t,\\delta]/(\\bar g_1,\\dots,\\bar g_s)\\cong\\bigl((A/IA)[t]/(\\bar g_1,\\dots,\\bar g_s)\\bigr)[\\delta]\\cong\\bar B[\\delta_{ij}]$ (Step 3), an isomorphism of $A/IA$-algebras, hence of $R/I$-algebras. Let $(R/I)[x_1,\\dots,x_m]/(e_1,\\dots,e_c)\\cong\\bar B$ be a standard smooth presentation [def-weil-pbc-standard-smooth-algebra], $\\det(\\partial e_j/\\partial x_i)_{i,j\\le c}$ [def-weil-pbc-polynomial-partial-derivative] a unit in $\\bar B$. Number the $\\delta_{ij}$ as $x_{m+1},\\dots,x_n$. Then $\\bar B[\\delta]\\cong(R/I)[x_1,\\dots,x_n]/(e_1,\\dots,e_c)$, and since $e_j$ does not involve $x_{m+1},\\dots,x_n$ the matrix $(\\partial e_j/\\partial x_i)_{i,j\\le c}$ is unchanged and its determinant is still a unit (its image under $\\bar B\\to\\bar B[\\delta]$). So with $\\bar f_j:=e_j$ we have a standard smooth presentation $A'/IA'\\cong(R/I)[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$ with $\\bar\\Delta:=\\det(\\partial\\bar f_j/\\partial x_i)_{i,j=1,\\dots,c}$ invertible in $A'/IA'$; write $\\bar\\xi_i\\in A'/IA'$ for the image of $x_i$.",
-   "uses": [
-    "def-weil-pbc-standard-smooth-algebra",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'We have A'/IA' = A/IA[t_1, ..., t_r]/(g-bar_1, ..., g-bar_s)[delta_ij] = B-bar[delta_ij]. This is a standard smooth algebra over R/I as B-bar is standard smooth. Choose a presentation A'/IA' = R/I[x_1, ..., x_n]/(f-bar_1, ..., f-bar_c) with det invertible'"
-   }
-  },
-  {
-   "text": "(The smooth algebra $B$.) Choose lifts $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ of $\\bar f_1,\\dots,\\bar f_c$, let $\\Delta=\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ and $B=R[x_1,\\dots,x_{n+1}]/(f_1,\\dots,f_c,\\,x_{n+1}\\Delta-1)$. $B$ is standard smooth over $R$ [def-weil-pbc-standard-smooth-algebra]: order the variables as $x_1,\\dots,x_c,x_{n+1},x_{c+1},\\dots,x_n$ and take the $c+1$ equations $f_1,\\dots,f_c,x_{n+1}\\Delta-1$. Since no $f_j$ involves $x_{n+1}$ and $\\partial(x_{n+1}\\Delta-1)/\\partial x_{n+1}=\\Delta$, the $(c+1)\\times(c+1)$ matrix of partial derivatives [def-weil-pbc-polynomial-partial-derivative] of these equations with respect to $x_1,\\dots,x_c,x_{n+1}$ is block triangular with diagonal blocks $(\\partial f_j/\\partial x_i)_{i,j\\le c}$ and $(\\Delta)$, so its determinant is $\\Delta^2$, a unit in $B$ because $x_{n+1}\\Delta=1$ in $B$. Hence $B$ is a smooth $R$-algebra by [lem-weil-pbc-standard-smooth-is-smooth] (Algebra 00T7 (1)).",
-   "uses": [
-    "def-weil-pbc-standard-smooth-algebra",
-    "def-weil-pbc-polynomial-partial-derivative",
-    "lem-weil-pbc-standard-smooth-is-smooth",
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'Choose lifts f_1, ..., f_c in R[x_1, ..., x_n] ... Then B = R[x_1, ..., x_{n+1}]/(f_1, ..., f_c, x_{n+1} det - 1) is smooth over R' (the standard smooth presentation and the determinant Delta^2 written out)"
-   }
-  },
-  {
-   "text": "($B/IB\\cong A'/IA'$.) Reduction modulo $I$ is a ring map $R[x]\\to(R/I)[x]$ commuting with $\\partial/\\partial x_i$ and with determinants, so $\\Delta$ reduces to $\\bar\\Delta$ and $B/IB\\cong(R/I)[x_1,\\dots,x_{n+1}]/(\\bar f_1,\\dots,\\bar f_c,x_{n+1}\\bar\\Delta-1)$. Define $\\bar\\theta:B/IB\\to A'/IA'$ as the $R/I$-algebra map with $x_i\\mapsto\\bar\\xi_i$ ($i\\le n$) and $x_{n+1}\\mapsto(\\text{image of }\\bar\\Delta)^{-1}$ (well defined: it kills $\\bar f_j$ and $x_{n+1}\\bar\\Delta-1$), and $\\bar\\kappa:A'/IA'\\cong(R/I)[x_1,\\dots,x_n]/(\\bar f_j)\\to B/IB$, $\\bar\\xi_i\\mapsto x_i$. Then $\\bar\\theta\\bar\\kappa=\\mathrm{id}$ (check on $\\bar\\xi_i$) and $\\bar\\kappa\\bar\\theta=\\mathrm{id}$ (check on $x_i$, $i\\le n$, and on $x_{n+1}$: $\\bar\\kappa(\\bar\\Delta^{-1})$ is the inverse of $\\bar\\Delta$ in $B/IB$, which is $x_{n+1}$). So $\\bar\\theta$ is an isomorphism of $R/I$-algebras. Let $\\gamma:B\\to A'/IA'$ be $\\bar\\theta$ composed with $B\\to B/IB$; it is a homomorphism of $R$-algebras.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CK (lemma-lift-once, lines 1255-1303): 'there exists an R-algebra map B -> A' which is an isomorphism modulo I' (the isomorphism B/IB = A'/IA' that this presupposes, written out)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finitely-presented-algebra",
   "lem-weil-pbc-colimit-standard-smooth-algebras",
-  "def-weil-pbc-filtered-colimit-smooth-algebras",
-  "def-weil-pbc-standard-smooth-algebra",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "def-weil-pbc-polynomial-partial-derivative",
-  "lem-weil-pbc-standard-smooth-is-smooth",
-  "def-weil-pbc-smooth-ring-map"
+  "lem-weil-pbc-popescu-standard-reduction-factor",
+  "lem-weil-pbc-standard-smooth-quotient-lift",
+  "lem-weil-pbc-standard-smooth-is-smooth"
  ],
  "proof_origin": {
   "by": "document",
@@ -199,9 +117,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T163619-L-2787224",
+  "landing": "20261012T184337-L-4017483",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

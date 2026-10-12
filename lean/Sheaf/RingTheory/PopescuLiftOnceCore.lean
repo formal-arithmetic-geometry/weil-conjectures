@@ -5,6 +5,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.RingTheory.IndStandardSmooth
+import Sheaf.RingTheory.PopescuStandardReductionFactor
+import Sheaf.RingTheory.StandardSmoothQuotientLift
+import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 
 @[expose] public section
 
@@ -54,6 +57,19 @@ theorem exists_smooth_reduction_factorization
         Smooth R B ∧
           Nonempty ((B ⧸ I.map (algebraMap R B)) ≃ₐ[R]
             (A' ⧸ I.map (algebraMap R A'))) := by
-  sorry
+  have hstd := ind_isStandardSmooth_of_ind_smooth (R ⧸ I)
+    (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ))) hΛ
+  obtain ⟨A', hring, halg, hfp, ι, φ', hcomp, hred⟩ :=
+    exists_standardSmooth_reduction_factorization R Λ I hstd A φ
+  let := hring
+  let := halg
+  let := hred
+  obtain ⟨B, hBring, hBalg, hBstd, ⟨e⟩⟩ :=
+    exists_standardSmooth_quotient_lift R I (A' ⧸ I.map (algebraMap R A'))
+  let := hBring
+  let := hBalg
+  let := hBstd
+  exact ⟨A', hring, halg, hfp, ι, φ', hcomp, B, hBring, hBalg,
+    inferInstance, ⟨e.restrictScalars R⟩⟩
 
 end Algebra
