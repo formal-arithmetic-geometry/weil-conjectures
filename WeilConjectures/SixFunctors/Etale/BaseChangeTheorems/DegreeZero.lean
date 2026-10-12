@@ -58,12 +58,6 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
-/-- The étale `X`-scheme `X` is terminal. -/
-noncomputable def _root_.AlgebraicGeometry.Scheme.Etale.isTerminalMkId (X : Scheme.{u}) :
-    IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
-  IsTerminal.ofUniqueHom (fun V ↦ MorphismProperty.Over.homMk V.hom (Category.comp_id _))
-    (fun _ _ ↦ Scheme.Etale.hom_ext_mk_id _ _)
-
 set_option backward.isDefEq.respectTransparency false in
 /-- Morphisms of étale `X`-schemes into an étale `X`-scheme whose structure morphism is a
 monomorphism are unique. -/

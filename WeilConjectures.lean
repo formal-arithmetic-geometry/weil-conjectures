@@ -1168,6 +1168,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafHom
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.SmallObject.TransfiniteIteration
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru

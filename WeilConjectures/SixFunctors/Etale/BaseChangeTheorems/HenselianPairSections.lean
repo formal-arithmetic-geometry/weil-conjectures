@@ -62,13 +62,6 @@ noncomputable def toTerminalOfPullback (U : Y.Etale) :
   MorphismProperty.Over.homMk (pullback.snd U.hom i) (Category.comp_id _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Morphisms into the terminal étale `X`-scheme `X` are unique. -/
-lemma _root_.AlgebraicGeometry.Scheme.Etale.hom_ext_mk_id {X : Scheme.{u}} {V : X.Etale}
-    (a b : V ⟶ Scheme.Etale.mk (𝟙 X)) : a = b :=
-  MorphismProperty.Over.Hom.ext ((Category.comp_id _).symm.trans ((MorphismProperty.Over.w a).trans
-    ((MorphismProperty.Over.w b).symm.trans (Category.comp_id _))))
-
-set_option backward.isDefEq.respectTransparency false in
 /-- **Local representatives.** Let `i : Y₀ ⟶ Y` be a closed immersion and `t` a global section
 of `i^* G`. Every point `y₀` of `Y₀` lies in the image of `U ×_Y Y₀` for some étale `U ⟶ Y`
 with a section `g` of `G` over `U` whose restriction to `U ×_Y Y₀` is the restriction of `t`. -/

@@ -209,7 +209,14 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g'
   exact (isIso_comp_right_iff _ _).symm
 
 /-- **The derived base change map and restriction of scalars.** For a commutative square
-`g' ≫ f = f' ≫ g` and `K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an
+```
+X' --g'--> X
+|          |
+f'         f
+v          v
+Y' --g---> Y
+```
+and `K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an
 isomorphism at the restriction of scalars of `K` along `φ : Λ →+* Λ'` if and only if the derived
 base change map over `Λ'` is an isomorphism at `K`. -/
 theorem isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff (sq : CommSq g' f' f g)

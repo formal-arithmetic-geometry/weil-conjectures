@@ -141,7 +141,15 @@ theorem isIso_app_of_isIso_Qh_map_mapHomotopyCategoryPlus_app (τ : F ⟶ G) (J 
 omit [HasDerivedCategory D] in
 /-- A natural transformation `τ : S ⟶ T` between left exact functors of abelian categories is an
 isomorphism at the kernel `E.X₁` of a morphism `E.g : E.X₂ ⟶ E.X₃` as soon as it is one at
-`E.X₂` and at `E.X₃`: both `S` and `T` preserve the kernel. -/
+`E.X₂` and at `E.X₃`: both `S` and `T` preserve the kernel. In the diagram
+```
+0 ⟶ S E.X₁ ⟶ S E.X₂ ⟶ S E.X₃
+      |         |         |
+      τ         τ         τ
+      v         v         v
+0 ⟶ T E.X₁ ⟶ T E.X₂ ⟶ T E.X₃
+```
+both rows are exact and the two right vertical maps are isomorphisms. -/
 theorem isIso_app_of_exact_of_mono {S T : C ⥤ D} [PreservesFiniteLimits S]
     [PreservesFiniteLimits T] (τ : S ⟶ T) {E : ShortComplex C} (hE : E.Exact) [Mono E.f]
     [IsIso (τ.app E.X₂)] [IsIso (τ.app E.X₃)] : IsIso (τ.app E.X₁) := by

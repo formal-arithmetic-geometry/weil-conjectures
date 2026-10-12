@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
@@ -460,24 +461,11 @@ lemma overlapSnd_left {V V₁ V₂ : X.Etale} (a₁ : V₁ ⟶ V) (a₂ : V₂ �
     (overlapSnd a₁ a₂).left = pullback.snd a₁.left a₂.left :=
   rfl
 
-/-- A sheaf on the small étale site satisfies the sheaf condition for every jointly surjective
-family. -/
-lemma isSheafFor_ofArrows {V : X.Etale} {ι : Type*} {V' : ι → X.Etale} (a : ∀ i, V' i ⟶ V)
-    (ha : ∀ x : V.left, ∃ i, x ∈ Set.range (a i).left) :
-    Presieve.IsSheafFor (F.obj ⋙ forget AddCommGrpCat.{u + 1}) (Presieve.ofArrows V' a) := by
-  have hS : Sieve.ofArrows V' a ∈ X.smallEtaleTopology V := by
-    rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
-    ext x
-    simpa using ha x
-  have hsh := (isSheaf_iff_isSheaf_of_type _ _).1
-    (Presheaf.isSheaf_comp_of_isSheaf _ F.obj (forget AddCommGrpCat.{u + 1}) F.property) _ hS
-  exact (Presieve.isSheafFor_iff_generate _).2 hsh
-
 /-- A section of a sheaf vanishing on a jointly surjective family vanishes. -/
 lemma eq_zero_of_forall_map_eq_zero {V : X.Etale} {ι : Type*} {V' : ι → X.Etale}
     (a : ∀ i, V' i ⟶ V) (ha : ∀ x : V.left, ∃ i, x ∈ Set.range (a i).left)
     (s : F.obj.obj (op V)) (hs : ∀ i, F.obj.map (a i).op s = 0) : s = 0 :=
-  (isSheafFor_ofArrows F a ha).isSeparatedFor.ext fun _ _ ⟨i⟩ ↦ by
+  (Scheme.isSheafFor_ofArrows F a (Set.iUnion_eq_univ_iff.2 ha)).isSeparatedFor.ext fun _ _ ⟨i⟩ ↦ by
     change F.obj.map (a i).op s = F.obj.map (a i).op 0
     rw [hs i, map_zero]
 
@@ -488,7 +476,8 @@ lemma exists_map_eq_of_compatible {V : X.Etale} {ι : Type*} {V' : ι → X.Etal
     (hσ : ∀ i j, F.obj.map (overlapFst (a i) (a j)).op (σ i) =
       F.obj.map (overlapSnd (a i) (a j)).op (σ j)) :
     ∃ s : F.obj.obj (op V), ∀ i, F.obj.map (a i).op s = σ i := by
-  obtain ⟨s, hs, -⟩ := (Presieve.isSheafFor_arrows_iff _ _).1 (isSheafFor_ofArrows F a ha) σ
+  obtain ⟨s, hs, -⟩ := (Presieve.isSheafFor_arrows_iff _ _).1
+    (Scheme.isSheafFor_ofArrows F a (Set.iUnion_eq_univ_iff.2 ha)) σ
     (fun i j Z gi gj h ↦ by
       have hl : gi.left ≫ (a i).left = gj.left ≫ (a j).left := by
         simpa using congrArg (fun c ↦ c.left) h
