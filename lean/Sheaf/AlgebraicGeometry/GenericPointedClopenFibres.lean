@@ -7,6 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
+import Sheaf.AlgebraicGeometry.GenericPointedClopenFibresCore
+
 /-!
 # Persistence of connected fibres of a pointed clopen piece
 
@@ -48,6 +50,11 @@ theorem exists_open_preconnected_fibres_of_pointed_clopen {P T : Scheme.{u}}
     (hA : IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A})
     (hconn : IsPreconnected (g ⁻¹' {y} ∩ A)) (hpoint : σ y ∈ A) :
     ∃ W : Set T, IsOpen W ∧ y ∈ W ∧ W ⊆ V ∧
-      ∀ t ∈ W ∩ closure {y}, IsPreconnected (g ⁻¹' {t} ∩ A) := by sorry
+      ∀ t ∈ W ∩ closure {y}, IsPreconnected (g ⁻¹' {t} ∩ A) := by
+  obtain ⟨U, hU, hyU, hUf⟩ :=
+    exists_open_preconnected_fibres_of_pointed_clopen_core g σ hσ y V A hV hyV hA hconn hpoint
+  refine ⟨U ∩ V, hU.inter hV, ⟨hyU, hyV⟩, (fun _ h ↦ h.2), ?_⟩
+  intro t ht
+  exact hUf t ⟨ht.1.1, ht.2⟩
 
 end AlgebraicGeometry
