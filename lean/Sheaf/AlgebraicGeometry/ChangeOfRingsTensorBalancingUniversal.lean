@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorBalancingExists
+import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorBalancingUnique
 
 /-! # Universal property of the change-of-rings balancing map
 
@@ -75,6 +77,15 @@ theorem changeOfRings_tensor_balancing_universal (Y : Scheme.{u})
             (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W))
               (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p)) →
       ∀ (Q : Y.Modules) (f : S ⟶ Q), a ≫ f = d ≫ f →
-        ∃! t : T ⟶ Q, g ≫ t = f := by sorry
+        ∃! t : T ⟶ Q, g ≫ t = f := by
+  dsimp
+  intro a d g ha hd hg Q f hfd
+  obtain ⟨t, ht⟩ := changeOfRings_tensor_balancing_universal_exists
+    Y B C φ P a d g ha hd hg Q f hfd
+  refine ⟨t, ht, ?_⟩
+  intro t' ht'
+  exact (changeOfRings_tensor_balancing_universal_unique
+    Y B C φ P a d g ha hd hg Q f t t' ht ht'
+    ).symm
 
 end AlgebraicGeometry.Scheme.Modules
