@@ -114,7 +114,7 @@ lemma irreducible_or_exists_mul {f : A[X]} (hf : f.Monic) (hdeg : 0 < f.natDegre
   · rwa [← natDegree_map_eq_of_injective hinj g, hg]
   · rwa [← natDegree_map_eq_of_injective hinj h, hh]
 
-omit [IsDomain A] [IsLocalRing A] [IsSepClosed Ω] in
+omit [IsLocalRing A] [IsSepClosed Ω] in
 include Ω in
 /-- A monic polynomial of positive degree over `A` has a monic factor over `A` of positive degree
 which is irreducible over `Ω`. -/
