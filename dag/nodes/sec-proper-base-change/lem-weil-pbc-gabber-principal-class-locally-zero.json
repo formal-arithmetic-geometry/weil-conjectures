@@ -30,40 +30,32 @@
  ],
  "proof": [
   {
-   "text": "The local rings of D(h) at primes avoiding h are those of Spec R, namely the prime localizations of R. They are strictly henselian by hypothesis. Apply the canonical strict henselian Zariski-etale comparison on D(h), and on its open subschemes.",
+   "text": "For p avoiding h, regard p as a point x of D(h). Compose the restriction stalk isomorphism with Spec.stalkIso to identify O_D(h),x with R_p. Transport strict henselianity along this ring isomorphism. The upstream Scheme.subsingleton_H_of_isStrictlyHenselianLocalRing makes the pullback of ξ to Spec O_D(h),x zero in degree q>0. This uses the already proved Ext-valued upstream theorem directly, rather than the derived-cohomology declaration recorded on the acyclicity node; both express the same strict-local acyclicity argument.",
    "uses": [
     "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison"
+    "lem-weil-pbc-strictly-henselian-etale-acyclic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
-   }
+   "elementary": false
   },
   {
-   "text": "The corresponding positive-degree Zariski class vanishes on a neighborhood of each p in D(h). Choose a basic open D(fh) inside that neighborhood containing p. Then f is outside p. Naturality of the comparison and cohomological restriction gives rho_{h,f}(xi)=0. If h=0 the statement is vacuous.",
+   "text": "Apply the vanishing-spreads theorem to obtain an open U of D(h) containing x where ξ dies. Its image W in Spec R is open. Choose D(f) containing p inside W, and refine to D(fh). The map D(fh) → D(h) factors through U, via the open-immersion isoImage. Pullback composition and injectivity of the coefficient-comparison map show that ξ dies on D(fh). Membership p in D(f) gives f outside p.",
    "uses": [
-    "lem-weil-pbc-zariski-cohomology-locally-zero",
+    "lem-weil-pbc-etale-class-vanishing-spreads",
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+  "lem-weil-pbc-etale-class-vanishing-spreads",
   "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-zariski-cohomology-locally-zero"
+  "lem-weil-pbc-strictly-henselian-etale-acyclic"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
+  "place": "Lemma 0GY0, local triviality paragraph, via strict-local acyclicity (Tag 03QO) and the local-ring colimit argument of Lemma 09AX (using Tags 03Q6, 09YQ and 03F3)."
  },
  "mathlib_searches": [
   {
@@ -135,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T070553-L-3478408",
+  "landing": "20261012T085251-L-19981",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-etale-class-vanishing-spreads",
+ "kind": "statement",
+ "title": "Vanishing over a local scheme spreads to an open neighborhood",
+ "statement": "Let X be a scheme [def-pc-scheme], F an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], q a nonnegative integer, and ξ a class in H^q(X,F) [def-weil-pbc-etale-cohomology]. Let x be a point and g_x:Spec O_X,x → X its canonical morphism [lem-weil-pbc-spec-local-ring-canonical-morphism]. If g_x^*(ξ)=0 under cohomology pullback [def-weil-pbc-cohomology-pullback], there is an open neighborhood U of x [def-weil-open-immersion] such that ξ pulls back to zero along U → X.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09AX, proof (local-ring colimit), using Tags 03Q6 and 09YQ; Cohomology on Sites Tag 03F3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local-ring colimit theorem to the Ext object-cohomology presheaf restricted to open neighborhoods of x, using its canonical open-to-etale inclusion. Represent the global class on the top open via the theorem's restriction comparison. Pullback composition shows that its colimit image is zero by the given vanishing over Spec O_X,x. The theorem's elementwise conclusion supplies a smaller open with zero restriction. Naturality of the comparison and injectivity of cohomology maps induced by coefficient isomorphisms remove the transports. Pullback composition then identifies this with the original global class pulled back to the smaller open.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09AX, proof (local-ring colimit), using Tags 03Q6 and 09YQ; Cohomology on Sites Tag 03F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology class vanishing over local ring spreads to neighborhood",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology class vanishing over local ring spreads to neighborhood",
+   "results": "RingedSpace.exists_res_eq_zero_of_germ_eq_zero concerns structure-sheaf sections, not etale cohomology. Other results concerned the etale locus.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*local.*colimit|class.*vanish.*neigh|cohomology.*locally.*zero",
+   "results": "Mathlib has no etale local-ring continuity theorem. Existing Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit supplies the object-presheaf formulation used in the proof; the new theorem derives its global-class specialization. Blueprint search local ring cohomology found no exact separate node.",
+   "date": "2026-10-12",
+   "verdict": "proved specialization of existing project theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology class restricts to zero on neighborhood if zero in stalk",
+   "results": "RingedSpace.exists_res_eq_zero_of_germ_eq_zero applies only to structure-sheaf sections; Scheme.zero_of_zero_cover likewise. HomComplex cohomology-class results concern coboundaries, not local-scheme pullbacks. No replacement. Independent second reading.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme",
+   "results": "0 hits in independent second reading.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberPrincipalClassLocallyZero",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Gabber criterion (Stacks 0GY0), local triviality paragraph: vanishing near each point",
+   "via": [
+    "lem-weil-pbc-gabber-principal-class-locally-zero",
+    "lem-weil-pbc-gabber-criterion-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleClassVanishingSpreads",
+  "file": "lean/Sheaf/Paper/EtaleClassVanishingSpreads.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_class_vanishing_spreads",
+  "statement": "theorem etale_class_vanishing_spreads {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (ξ : Sheaf.H F q) (x : X) (hξ : cohomologyMap (X.fromSpecStalk x) F q ξ = 0) : ∃ U : X.Opens, x ∈ U ∧ cohomologyMap U.ι F q ξ = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T085251-L-19981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T085251-L-19981",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
