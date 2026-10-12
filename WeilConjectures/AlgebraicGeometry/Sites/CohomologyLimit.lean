@@ -141,6 +141,21 @@ lemma restrictAlongBaseChange_trans {Y' : Scheme.{u}} (pY' : Y' ⟶ S) (g' : Y' 
       Category.assoc]
   rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
 
+/-- Restricting along `𝟙 : V ×_Z Z' ⟶ V ×_Z Z'` and then along the induced morphism
+`U ⟶ (V ×_Z Z') ×_{Z'} Y` is restricting along `φ : U ⟶ V ×_Z Y`. -/
+lemma restrictAlongBaseChange_baseChangeLift {Z' : Scheme.{u}} (pZ' : Z' ⟶ S) (g' : Y ⟶ Z')
+    (h : Z' ⟶ Z) (hgh : g' ≫ h = g) (hh : h ≫ pZ = pZ') (hg' : g' ≫ pZ' = pY) (n : ℕ)
+    (s : ((pZ)^*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op (V.obj n))) :
+    restrictAlongBaseChange pY pZ' g' hg' (baseChangeLift g φ g' h hgh) F n
+        (restrictAlongBaseChange pZ' pZ h hh (𝟙 (V.baseChange h)) F n s) =
+      restrictAlongBaseChange pY pZ g hg φ F n s := by
+  simp only [restrictAlongBaseChange]
+  rw [ModuleSheaf.restrictAlong_restrictAlong, ModuleSheaf.restrictAlong_congr_hom F pZ pY _ hgh]
+  have hm : baseChangeProj g' (baseChangeLift g φ g' h hgh) n ≫
+      baseChangeProj h (𝟙 (V.baseChange h)) n = baseChangeProj g φ n := by
+    rw [baseChangeProj_id, baseChangeProj_baseChangeLift]
+  rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
+
 lemma cohomologyRestrictOver_congr' {g₁ g₂ : Y ⟶ Z} (hg₁ : g₁ ≫ pZ = pY) (h : g₁ = g₂) (q : ℕ) :
     cohomologyRestrictOver Λ pY pZ g₁ hg₁ F q =
       cohomologyRestrictOver Λ pY pZ g₂ (h ▸ hg₁) F q := by
@@ -397,6 +412,69 @@ theorem exists_cohomologyRestrictOver_eq_zero_of_isLimit (q : ℕ) (i : I)
           simp only [Ψ₃, baseChangeProj_baseChangeLift_assoc, baseChangeProj_baseChangeLift]
           exact baseChangeProj_baseChangeLift _ _ _ _ _ q
     rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
-  sorry
+  cases q with
+  | zero =>
+    have hσ : σ = 0 := hfσ.symm.trans hf
+    obtain ⟨_, _⟩ := hqc 0 (Nat.zero_le _)
+    obtain ⟨k₄, g₄, hk₄⟩ := ModuleSheaf.exists_restrictAlong_eq_zero_of_isLimit hc π c.pt.hom hP
+      F (V₃.obj 0) _ (hpb 0 (Nat.zero_le _)) s₃ (hs₃.trans hσ)
+    let V₄ := V₃.baseChange (D'.map g₄)
+    refine ⟨k₄, g₄ ≫ φtot, final hV hs (g₄ ≫ φtot) (hV₃.baseChange _) (D'.map g₄ ≫ tot)
+      ((D'.map_comp _ _).trans (congrArg (D'.map g₄ ≫ ·) hφtot))
+      (baseChangeTrans (D'.map g₄) tot (baseChangeComp (D'.map g₄) (𝟙 V₄) φ₃)) ?_⟩
+    change restrictAlongBaseChange _ _ _ _ _ F 0 s = 0
+    rw [restrictAlongBaseChange_trans (π.app k₃) (π.app i) tot hπtot φ₃ F (π.app k₄) (D'.map g₄)
+      (hπ g₄)]
+    exact hk₄ (𝟙 _) g₄ (Category.id_comp _) _ _ _
+  | succ p =>
+    obtain ⟨t, ht⟩ := hf
+    rw [hfσ] at ht
+    obtain ⟨_, _⟩ := hqc p (by omega)
+    obtain ⟨K, h₄, hK⟩ := ModuleSheaf.exists_restrictAlong_eq_of_isLimit hc π c.pt.hom hP F
+      (V₃.obj p) _ (hpb p (by omega)) t
+    let V₄ := V₃.baseChange (D'.map (𝟙 K ≫ h₄))
+    have hV₄ : V₄.IsHypercover (D'.obj K).smallEtaleTopology := hV₃.baseChange _
+    let l₄ : U' ⟶ V₄.baseChange (c'.π.app K) := baseChangeLift (c'.π.app k₃) d₃.toCosk
+      (c'.π.app K) (D'.map (𝟙 K ≫ h₄)) (c'.w _)
+    obtain ⟨t₄, ht₄⟩ := hK (𝟙 K) (V₄.obj p) (baseChangeProj _ (𝟙 V₄) p) (baseChangeProj_w _ _ p)
+      (baseChangeProj _ l₄ p) (baseChangeProj_w _ _ p)
+      (by rw [baseChangeProj_id]; exact baseChangeProj_baseChangeLift _ _ _ _ _ p)
+    let φ₄ : V₄ ⟶ V.baseChange (D'.map (𝟙 K ≫ h₄) ≫ tot) :=
+      baseChangeTrans _ tot (baseChangeComp _ (𝟙 V₄) φ₃)
+    have hπ₄ : (D'.map (𝟙 K ≫ h₄) ≫ tot) ≫ π.app i = π.app K := by
+      rw [Category.assoc, hπtot, hπ]
+    let s₄ := restrictAlongBaseChange (π.app K) (π.app i) _ hπ₄ φ₄ F (p + 1) s
+    let G₄ := (π.app K)^*[ModuleCat.{u + 1} Λ].obj F
+    let e₄ := (V₄.cochainDifferential G₄.obj p).hom t₄ - s₄
+    have he₄ : restrictAlongBaseChange c.pt.hom (π.app K) (c'.π.app K) (hP K).symm l₄ F (p + 1)
+        e₄ = 0 := by
+      rw [map_sub, ← cochainDifferential_restrictAlongBaseChange,
+        show restrictAlongBaseChange c.pt.hom (π.app K) (c'.π.app K) (hP K).symm l₄ F p t₄ = t
+          from ht₄, ht, sub_eq_zero, ← hs₃]
+      simp only [s₄, φ₄]
+      rw [restrictAlongBaseChange_trans (π.app k₃) (π.app i) tot hπtot φ₃ F (π.app K) _ (hπ _),
+        restrictAlongBaseChange_baseChangeLift]
+    have hqc₄ : Scheme.Etale.qcqs _ (V₄.obj (p + 1)) :=
+      Scheme.Etale.qcqs_baseChange _ (hqc (p + 1) (Nat.le_succ _))
+    obtain ⟨_, _⟩ := hqc₄
+    have hpb₄ : IsPullback (baseChangeProj (c'.π.app K) l₄ (p + 1)) (U'.obj (p + 1)).hom
+        (V₄.obj (p + 1)).hom (c'.π.app K) := by
+      have := isPullback_lift_of_isPullback (𝟙 K ≫ h₄) (hpb (p + 1) (Nat.le_succ _))
+      rw [show baseChangeProj (c'.π.app K) l₄ (p + 1) = pullback.lift _ _ _ from
+        baseChangeProj_baseChangeMk _ _ _ _ _]
+      exact this
+    obtain ⟨k₅, g₅, hk₅⟩ := ModuleSheaf.exists_restrictAlong_eq_zero_of_isLimit hc π c.pt.hom hP
+      F (V₄.obj (p + 1)) _ hpb₄ e₄ he₄
+    let V₅ := V₄.baseChange (D'.map g₅)
+    let t₅ := restrictAlongBaseChange (π.app k₅) (π.app K) (D'.map g₅) (hπ g₅) (𝟙 V₅) F p t₄
+    refine ⟨k₅, g₅ ≫ (𝟙 K ≫ h₄) ≫ φtot, final hV hs _ (hV₄.baseChange _)
+      (D'.map g₅ ≫ D'.map (𝟙 K ≫ h₄) ≫ tot)
+      ((D'.map_comp _ _).trans (congrArg (D'.map g₅ ≫ ·)
+        ((D'.map_comp _ _).trans (congrArg (D'.map (𝟙 K ≫ h₄) ≫ ·) hφtot))))
+      (baseChangeTrans (D'.map g₅) _ (baseChangeComp (D'.map g₅) (𝟙 V₅) φ₄)) ⟨t₅, ?_⟩⟩
+    rw [cochainDifferential_restrictAlongBaseChange, restrictAlongBaseChange_trans (π.app K)
+      (π.app i) _ hπ₄ φ₄ F (π.app k₅) (D'.map g₅) (hπ g₅)]
+    have : (V₄.cochainDifferential G₄.obj p).hom t₄ = e₄ + s₄ := (sub_add_cancel _ _).symm
+    rw [this, map_add, hk₅ (𝟙 _) g₅ (Category.id_comp _) _ _ _, zero_add]
 
 end AlgebraicGeometry.Etale
