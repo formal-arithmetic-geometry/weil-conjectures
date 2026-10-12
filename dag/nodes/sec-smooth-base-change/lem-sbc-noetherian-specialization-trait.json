@@ -1,0 +1,106 @@
+{
+ "id": "lem-sbc-noetherian-specialization-trait",
+ "kind": "statement",
+ "title": "Tracing a strict specialization by a DVR",
+ "statement": "Let X be a locally noetherian scheme and y specialize to x with y distinct from x. There exist a discrete valuation ring R and a scheme morphism a:Spec R→X taking its closed point to x and its zero prime to y.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054F"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose an affine chart j:Spec B→X containing x. Its open image also contains y. Since j is an embedding, the lifted points y₀ and x₀ specialize in Spec B; their ideals form a strict inclusion. The ring B is noetherian because X is locally noetherian.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved library theorem Ideal.exists_isDiscreteValuationRing_of_lt to that strict inclusion. Its map φ:B→R has kernel the smaller prime and inverse image of the maximal ideal equal to the larger prime. Compose Spec.map φ with j and compute both point images by PrimeSpectrum.ext.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 054F",
+  "note": "Source argument translated to Lean by S3; only the generic-connectedness theorem remains unproved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Discrete valuation ring tracing a strict specialization in a locally noetherian scheme",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponentIn\", \"pullback\"",
+   "results": "0 hits. LeanFinder also returned general specialization and valuative-criterion results, not these component or trait theorems.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "055J|055M|054F|exists_isDiscreteValuationRing_of_lt|connected.*generic|generic.*connected",
+   "results": "SlicingFlat contains a proved base-change equality but reaches this item through Slicing, so cannot be imported. The ring-level DVR tracing and idempotent-extension theorems are already proved and are used or identified explicitly. No scheme-level connected-generic-fibre theorem exists. Existing global component theorems reach this item.",
+   "date": "2026-10-12",
+   "verdict": "no usable exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianGeneralization",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 054F; fibrewise component openness in the slicing argument",
+   "via": [
+    "lem-sbc-smooth-section-component-noetherian-generalization-core",
+    "lem-sbc-smooth-section-component-noetherian-generalization",
+    "lem-sbc-smooth-section-component-generalization",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NoetherianSpecializationTrait",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianSpecializationTrait.lean",
+  "declaration": "AlgebraicGeometry.exists_trait_of_strict_specializes",
+  "statement": "theorem exists_trait_of_strict_specializes {X : Scheme.{u}} [IsLocallyNoetherian X]\n    {x y : X} (hxy : y ⤳ x) (hne : y ≠ x) :\n    ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : IsDiscreteValuationRing R)\n      (a : Spec (.of R) ⟶ X),\n      a (closedPoint R) = x ∧ a (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R) = y",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

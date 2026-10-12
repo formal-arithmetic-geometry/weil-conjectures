@@ -10,17 +10,42 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Trace a specialization by a valuation trait, base change, remove the other special-fibre components, and apply connectedness of the generic fibre for a flat family with geometrically reduced special fibre.",
+   "text": "Choose the locus to be exactly the displayed fibrewise component predicate. To prove generalization stability, let y specialize to x with x in this locus. The equality case is immediate. Otherwise P is locally noetherian because g is locally of finite type over the noetherian T. Trace y→x by a DVR morphism a:Spec R→P.",
+   "uses": [
+    "lem-sbc-noetherian-specialization-trait"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change g along a≫g. The original section gives σ′ and a gives the tautological second section τ. The section identities and projection equalities follow from pullback.lift_fst and pullback.lift_snd. The special point of τ belongs to the component of σ′ by the existing cartesian section-component equality (Tag 055M), evaluated at that point.",
+   "uses": [
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the two-section comparison over the trait to get component membership of τ at the zero prime.",
+   "uses": [
+    "lem-sbc-smooth-trait-section-components"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map that connected component by pullback.fst. Its image is preconnected, contains the original section point over g(y), contains y, and lies in g inverse image {g(y)} by pullback.condition. Mathlib ContinuousOn.image_connectedComponentIn_subset and connectedComponentIn_mono give the required membership. This proves stability of the explicitly constructed locus.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-noetherian-specialization-trait",
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-smooth-trait-section-components"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 055Q",
-  "note": "Intermediate theorem records the core geometric argument."
+  "place": "Tag 055Q, noetherian and DVR paragraphs, using Tags 054F, 055M and 055J",
+  "note": "Source argument translated to Lean by S3; only the generic-connectedness theorem remains unproved."
  },
  "mathlib_searches": [
   {
@@ -85,10 +110,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T112838-L-767389",
-  "kind": "proof",
+  "landing": "20261012T153300-L-2370790",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
