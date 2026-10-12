@@ -76,10 +76,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Blueprint `sbc-thm-spreading-finite-etale-galois`: Spreading a finite étale Galois cover
-
-Let `S` be a qcqs integral normal scheme with generic point `η` and function field
-`κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
+/-- **Spreading a finite étale Galois cover.** Let `S` be a qcqs integral normal scheme with
+generic point `η` and function field `κ(η) = S.functionField`, let `c : C ⟶ S` be a qcqs smooth morphism with geometrically
 connected fibres, and let `σ` be a section of `c`. Let `G` be a finite group whose order is
 invertible on `S`, let `Cη` be the generic fibre of `c`, given by the cartesian square
 `hCη`, and let `Z` be a finite étale Galois cover of `Cη` with group `G` carrying a
@@ -89,8 +87,8 @@ making `Z` the restriction of `T` to `Cη`, that is, making the square over `j :
 cartesian.
 
 This is [Stacks 0EZJ], recorded as a classical input. Galois covers are taken in the sense
-of `AlgebraicGeometry.Scheme.GaloisCover`, following the blueprint definition
-`def-sbc-normal-dominant-galois`: their total space need not be connected. -/
+of `AlgebraicGeometry.Scheme.GaloisCover`: their total space need not be connected.
+(blueprint: `sbc-thm-spreading-finite-etale-galois`) -/
 @[stacks 0EZJ]
 theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S]
     [QuasiSeparatedSpace S] [IsIntegral S]

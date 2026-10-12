@@ -35,14 +35,10 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
   reduced curves and constructible `𝐅_r`-coefficients.
 - `AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced`: all eight assertions reduce to
   reduced curves and constructible `𝐅_ℓ`-coefficients.
-- `AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek`: localisation to a dense
-  open on which the coefficients are finite locally constant.
-- `AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek`: the same, split
-  along the irreducible components of the dense open.
-- `AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar`: the normalisation
-  exact sequence `0 → j_! 𝐅_ℓ → ν_* j'_! 𝐅_ℓ → Q → 0`.
-- `AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite`: the
-  assertions for `j_! 𝐅_ℓ` on a reduced curve follow from those on its normalisation.
+
+The localisation to a dense open is in
+`WeilConjectures.AlgebraicGeometry.Curve.DenseOpenReduction`, the normalisation step in
+`WeilConjectures.AlgebraicGeometry.Curve.NormalizationSequence`.
 
 ## References
 
@@ -186,104 +182,6 @@ theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
     IsCurve.Assertions Λ f F :=
-  sorry
-
-/-! ### Localisation to a dense open -/
-
-/-- **Dense-open localisation reduction.** Let `X` be a reduced curve over an algebraically
-closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime `r`, over a
-finite ring `Λ`. There is a dense open `j : U ⟶ X` whose connected components are irreducible
-and on which `F` is finite locally constant, and for it the eight assertions for `F` are
-equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F → F → i_* i^* F → 0`
-has third term
-supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
-degree zero and invariant under field extension.
-(blueprint: `lemma-weil-pbc-curve-dense-open-reduction`) -/
-theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
-    [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
-    (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0) :
-    ∃ U : X.Opens, Dense (U : Set X) ∧
-      (∀ x ∈ (U : Set X), IsIrreducible (connectedComponentIn (U : Set X) x)) ∧
-      Scheme.IsFiniteLocallyConstantSheaf ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F) ∧
-      (IsCurve.Assertions Λ f F ↔ IsCurve.Assertions Λ f
-        ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
-  sorry
-
-/-- **Dense-open localisation, componentwise.** Let `C` be a reduced curve over an
-algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime
-`r`, over a finite ring `Λ`. There are finitely many pairwise disjoint irreducible opens
-`U_a ⊆ C`, with dense union `U` and zero-dimensional complement `Z = C ∖ U`, on each of which
-`F` is finite locally constant, such that, writing `j_a : U_a ⟶ C` for the inclusions,
-`C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. This combines the open–closed sequence
-`0 → j_! j^* F → F → i_* i^* F → 0`, the assertions on the zero-dimensional `Z`, the
-decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage.
-(blueprint: `lem-weil-pbc-curve-dense-open-localization`) -/
-theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : Type u}
-    [Field k]
-    [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
-    (r : ℕ) [Fact r.Prime] (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0) :
-    ∃ (n : ℕ) (U : Fin n → C.Opens), Dense (⋃ a, (U a : Set C)) ∧
-      Pairwise (fun a b ↦ Disjoint (U a : Set C) (U b)) ∧ (∀ a, IsIrreducible (U a : Set C)) ∧
-      topologicalKrullDim ↥(⋃ a, (U a : Set C))ᶜ ≤ 0 ∧
-      (∀ a, Scheme.IsFiniteLocallyConstantSheaf (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F)) ∧
-      (IsCurve.Assertions Λ f F ↔ ∀ a, IsCurve.Assertions Λ f
-        (((U a).ι)_!open[ModuleCat.{u + 1} Λ].obj (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
-  sorry
-
-/-! ### Normalisation -/
-
-/-- **The normalisation exact sequence.** Let `X` be a reduced curve over an algebraically
-closed field `k`, `ν : X' ⟶ X` a finite surjective morphism which is an isomorphism over a
-dense open `V ⊆ X` (e.g. the normalisation of `X`), `j : U ⟶ X` an open immersion and
-`j' : U' ⟶ X'` its pullback along `ν`. For a prime `ℓ` with `Λ/ℓΛ` finite there is a
-monomorphism
-
-`α : j_! (Λ/ℓ)_U ⟶ ν_* j'_! (Λ/ℓ)_{U'}`
-
-(the extension by zero of the unit of `ν|_{U'}^* ⊣ ν|_{U'*}`, stalkwise the diagonal into the
-fibre) whose cokernel `Q` is constructible and supported on the finite set `X ∖ V`, giving the
-short exact sequence `0 → j_! 𝐅_ℓ → ν_* j'_! 𝐅_ℓ → Q → 0`.
-
-Mathlib's `Scheme.Hom.normalization` is the relative normalisation of a morphism, and does not
-directly provide the normalisation of a reduced curve together with its finiteness; we therefore
-state the lemma for an arbitrary finite surjective `ν` which is an isomorphism over a dense open,
-the properties of the normalisation that are used. The compatibility of the sequence with field
-extension and restriction to opens, also part of the blueprint statement, is not recorded in
-this existential form. (blueprint: `lemma-weil-pbc-normalization-exact-sequence`) -/
-theorem exists_mono_lowerShriek_constantModSheaf_lowerStar {k : Type u} [Field k]
-    [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
-    (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] (V : X.Opens) (hV : Dense (V : Set X))
-    [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j] {j' : U' ⟶ X'} [IsOpenImmersion j']
-    {ν' : U' ⟶ U} (hj : IsPullback j' ν' ν j) (ℓ : ℕ) [Fact ℓ.Prime]
-    [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})] :
-    ∃ α : (j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ) ⟶
-        (ν)_*[ModuleCat.{u + 1} Λ].obj
-          ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)),
-      Mono α ∧ Scheme.IsConstructibleSheaf (cokernel α) ∧
-        IsZero ((V.ι)^*[ModuleCat.{u + 1} Λ].obj (cokernel α)) :=
-  sorry
-
-/-- **Normalisation and the smooth constant case.** Let `X` be a reduced curve over an
-algebraically closed field `k`, `ν : X' ⟶ X` a finite surjective morphism from a smooth
-`k`-scheme which is an isomorphism over a dense open (e.g. the normalisation of `X`),
-`j : U ⟶ X` an open immersion and `j' : U' ⟶ X'` its pullback along `ν`. Then the eight
-assertions for `j_! 𝐅_ℓ` on `X` follow from those for `j'_! 𝐅_ℓ` on the smooth curve `X'`
-(which are the Kummer and Artin–Schreier calculations): finite direct image is exact and
-preserves cohomology, and the normalisation exact sequence
-`AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar` has a third term whose
-cohomology is concentrated in degree zero and invariant under field extension.
-(blueprint: `lemma-weil-pbc-curve-normalization-constant`) -/
-theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite {k : Type u} [Field k]
-    [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
-    (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] [Smooth (ν ≫ f)] (V : X.Opens)
-    (hV : Dense (V : Set X)) [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j]
-    {j' : U' ⟶ X'} [IsOpenImmersion j'] {ν' : U' ⟶ U} (hj : IsPullback j' ν' ν j) (ℓ : ℕ)
-    [Fact ℓ.Prime]
-    (H : IsCurve.Assertions Λ (ν ≫ f)
-      ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ))) :
-    IsCurve.Assertions Λ f ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ)) :=
   sorry
 
 end AlgebraicGeometry
