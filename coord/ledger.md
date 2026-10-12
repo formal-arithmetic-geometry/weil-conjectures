@@ -6219,3 +6219,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/K2/Sheaf.Algebra.LocallyFreeCharpoly (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2637791 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/K2/Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2637889 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/K2/Sheaf.AlgebraicGeometry.EtaleZariskiCohomology (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2638005 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/K2/Sheaf.CategoryTheory.SheafAlgebrasDirectedColimit (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2638101 (interface); batch 20261012T053916; modules 3; new nodes 2)

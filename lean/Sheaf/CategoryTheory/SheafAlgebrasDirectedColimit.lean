@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
+import Sheaf.CategoryTheory.SheafAlgebrasDirectedColimitAlgebraCore
+import Sheaf.CategoryTheory.SheafAlgebrasDirectedColimitModuleCore
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.LeftExact
@@ -73,6 +75,9 @@ theorem sheafAlgebras_directed_colimit
       Nonempty (IsColimit (Cocone.mk (Under.mk σ) ι)) ∧
       Nonempty (IsColimit
         ((commAlgebraSheafModuleFunctor O).mapCocone (Cocone.mk (Under.mk σ) ι))) := by
-  sorry
+  obtain ⟨σP, σ, ι, hP, hσ, hι, hc⟩ :=
+    sheafAlgebras_directed_colimit_algebra_core X O I F p hp
+  refine ⟨σP, σ, ι, hP, hσ, hι, hc, ?_⟩
+  exact sheafAlgebras_directed_colimit_module_core X O I F p σ ι
 
 end CategoryTheory
