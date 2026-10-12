@@ -10,6 +10,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Purity
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
@@ -124,25 +125,134 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isUnramifiedAtI
 
 variable {ι}
 
-/-- **Degree one on an open of the line, through a quasi-finite map to `ℙ¹`.** Let `𝓕` be lisse on
-the dense open `U₀ ⊆ 𝔸¹`, punctually `ι`-pure of weight `w`, and let `H : U₀ ⟶ ℙ¹` be a separated
+/-- **Degree one on an open of `ℙ¹` containing `∞`.** Let `W ⊆ ℙ¹` be an open containing the
+point at infinity and `𝓖` a lisse Weil sheaf on `W`, punctually `ι`-pure of weight `w`. Then
+`H_c^1(W, 𝓖)` has weights at most `w + 1`: it is a quotient of `H_c^1(V, 𝓖|_V)` for the part
+`V = W ∩ 𝔸¹` of `W` in the affine chart, whose complement in `W` is at most the point `∞`, and
+`𝓖|_V` is unramified at infinity, since it extends to the lisse sheaf `𝓖` on `W ∋ ∞`. -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine
+    (W : (ProjectiveLine (Spec (CommRingCat.of k₀))).Opens)
+    [IsSeparated (W.toScheme ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (W.toScheme ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀))]
+    (hWtop : (ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))).opensRange ⊔ W = ⊤)
+    {G : WeilSheaf k₀ l W} (hG : G.IsLisse) {w : ℝ} (hw : G.IsPunctuallyPureOfWeight ι w) :
+    (G.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
+  let a := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))
+  have := isNoetherian_of_locallyOfFiniteType
+    (ProjectiveLine (Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+  -- the part `V` of `W` in the affine chart; its complement in `W` lies over `∞`
+  let V : W.toScheme.Opens := W.ι ⁻¹ᵁ a.opensRange
+  have := isNoetherian_of_locallyOfFiniteType (W.toScheme ↘ Spec (CommRingCat.of k₀))
+  have : QuasiCompact V.ι := inferInstance
+  have := V.isSeparated (k₀ := k₀)
+  have := V.locallyOfFiniteType (k₀ := k₀)
+  have : QuasiCompact (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over V.ι]
+    infer_instance
+  have hVfin : ((Set.range V.ι.base)ᶜ).Finite := by
+    rw [Scheme.Opens.range_ι]
+    refine ((Set.finite_singleton (ProjectiveLine.infinity (Spec (CommRingCat.of k₀))
+      (IsLocalRing.closedPoint k₀))).preimage W.ι.isOpenEmbedding.injective.injOn).subset ?_
+    intro x hx
+    have : W.ι x ∈ ((a.opensRange : Set (ProjectiveLine (Spec (CommRingCat.of k₀))))ᶜ) := hx
+    rwa [ProjectiveLine.compl_opensRange_affineChart_eq_singleton] at this
+  refine WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar_of_isOpenImmersion
+    V.ι hVfin G Nat.one_pos ?_
+  -- the open immersion `j : V ⟶ 𝔸¹`
+  have hr : Set.range (V.ι ≫ W.ι) ⊆ Set.range a := by
+    rintro _ ⟨x, rfl⟩
+    exact x.2
+  let j : V.toScheme ⟶ affineLine k₀ := IsOpenImmersion.lift a (V.ι ≫ W.ι) hr
+  have hj : j ≫ a = V.ι ≫ W.ι := IsOpenImmersion.lift_fac _ _ _
+  have : IsOpenImmersion j := by
+    have : IsOpenImmersion (j ≫ a) := hj ▸ inferInstance
+    exact IsOpenImmersion.of_comp j a
+  have : j.IsOver (Spec (CommRingCat.of k₀)) := IsOpenImmersion.isOver_lift _ _ hr
+  have := isNoetherian_of_locallyOfFiniteType (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+  have : QuasiCompact j := inferInstance
+  have hjrange : a ⁻¹ᵁ W = j.opensRange := by
+    ext x
+    change a x ∈ W ↔ x ∈ Set.range j
+    constructor
+    · intro hx
+      obtain ⟨y, hy⟩ : a x ∈ Set.range W.ι := by rwa [Scheme.Opens.range_ι]
+      refine ⟨⟨y, ⟨x, hy.symm⟩⟩, a.isOpenEmbedding.injective ?_⟩
+      rw [← Scheme.Hom.comp_apply, hj]
+      exact hy
+    · rintro ⟨y, rfl⟩
+      rw [← Scheme.Hom.comp_apply, hj]
+      change W.ι (V.ι y) ∈ (W : Set (ProjectiveLine (Spec (CommRingCat.of k₀))))
+      rw [← Scheme.Opens.range_ι W]
+      exact Set.mem_range_self (V.ι y)
+  have : IsDominant j := by
+    have : IrreducibleSpace (affineLine k₀) := inferInstance
+    refine ⟨?_⟩
+    change Dense (Set.range j)
+    rw [← Scheme.Hom.coe_opensRange, ← hjrange]
+    refine (a ⁻¹ᵁ W).isOpen.dense ?_
+    have hinfty : ProjectiveLine.infinity (Spec (CommRingCat.of k₀)) (IsLocalRing.closedPoint k₀) ∈
+        W := by
+      have : ProjectiveLine.infinity (Spec (CommRingCat.of k₀)) (IsLocalRing.closedPoint k₀) ∈
+          a.opensRange ⊔ W := by rw [hWtop]; trivial
+      refine this.resolve_left fun h ↦ ?_
+      have h' : ProjectiveLine.infinity (Spec (CommRingCat.of k₀)) (IsLocalRing.closedPoint k₀) ∈
+          ((a.opensRange : Set (ProjectiveLine (Spec (CommRingCat.of k₀))))ᶜ) := by
+        rw [ProjectiveLine.compl_opensRange_affineChart_eq_singleton]
+        rfl
+      exact h' h
+    have : IrreducibleSpace (ProjectiveLine (Spec (CommRingCat.of k₀))) :=
+      GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+        (f := ProjectiveLine (Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+    obtain ⟨z, ⟨x, rfl⟩, hz⟩ := nonempty_preirreducible_inter a.opensRange.isOpen W.isOpen
+      ⟨a (affineLine.origin k₀), ⟨_, rfl⟩⟩ ⟨_, hinfty⟩
+    exact ⟨x, hz⟩
+  have hinf : ((upperStar V.ι).obj G).IsUnramifiedAtInfinity j :=
+    ⟨W, hjrange, hWtop, G, hG, ⟨(upperStarCongr (by
+      rw [← cancel_mono W.ι, IsOpenImmersion.lift_fac, hj])).app G⟩⟩
+  have hE : ((upperStar V.ι).obj G).IsLisse := hG.upperStar V.ι
+  have hEw := hw.upperStar V.ι
+  exact hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity ι j
+    hE hinf hEw
+
+/-- **Degree one through a quasi-finite map to `ℙ¹`.** Let `U` be a separated `k₀`-scheme of
+finite type, `𝓕` a Weil sheaf on `U`, punctually `ι`-pure of weight `w`, `H : U ⟶ ℙ¹` a separated
 quasi-finite morphism and `W ⊆ ℙ¹` an open containing `∞`, with finite complement, on which
 `H₀!𝓕` is lisse. Then `H_c^1(U, 𝓕)` has weights at most `w + 1`:
-`H_c^1(U, 𝓕) = H_c^1(ℙ¹, H₀!𝓕)` is a quotient of `H_c^1(W, 𝓖)`, `𝓖 = (H₀!𝓕)|_W`, which is a quotient
-of `H_c^1(V, 𝓖|_V)` for the part `V = W ∩ 𝔸¹` of `W` in the affine chart; and `𝓖|_V` is unramified
-at infinity, since it extends to the lisse sheaf `𝓖` on `W ∋ ∞`. This replaces the constant field
-extension and the homography of the blueprint (`lem-a1-unramified-at-infinity`). -/
-theorem LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
-    (D : LisseOnDenseOpen k₀ l) (H : D.U ⟶ ProjectiveLine (Spec (CommRingCat.of k₀)))
-    [H.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated H] [LocallyQuasiFinite H]
-    [LocallyOfFiniteType H] [QuasiCompact H]
+`H_c^1(U, 𝓕) = H_c^1(ℙ¹, H₀!𝓕)` is a quotient of `H_c^1(W, (H₀!𝓕)|_W)`, the finite complement of `W`
+having no `H_c^1`, and `hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine`
+applies on `W`. This replaces the constant field extension and the homography of the blueprint
+(`lem-a1-unramified-at-infinity`). -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
+    {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+    (H : U ⟶ ProjectiveLine (Spec (CommRingCat.of k₀))) [H.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated H] [LocallyQuasiFinite H] [LocallyOfFiniteType H] [QuasiCompact H]
     (W : (ProjectiveLine (Spec (CommRingCat.of k₀))).Opens)
     (hWtop : (ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))).opensRange ⊔ W = ⊤)
-    (hWfin : ((W : Set (ProjectiveLine (Spec (CommRingCat.of k₀))))ᶜ).Finite)
-    (hG : ((upperStar W.ι).obj ((higherLowerShriek k₀ l H 0).obj D.sheaf)).IsLisse)
-    {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
-    (D.sheaf.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
-  sorry
+    (hWfin : ((W : Set (ProjectiveLine (Spec (CommRingCat.of k₀))))ᶜ).Finite) {F : WeilSheaf k₀ l U}
+    (hG : ((upperStar W.ι).obj ((higherLowerShriek k₀ l H 0).obj F)).IsLisse)
+    {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
+    (F.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
+  -- before the local instances below, so that instance arguments agree with those of `hG`
+  have hKw : ((higherLowerShriek k₀ l H 0).obj F).IsPunctuallyPureOfWeight ι w :=
+    hw.higherLowerShriek_zero_of_quasiFinite (f := H)
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_zero H F 1
+  have := isNoetherian_of_locallyOfFiniteType
+    (ProjectiveLine (Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+  have : QuasiCompact W.ι := inferInstance
+  have := W.isSeparated (k₀ := k₀)
+  have := W.locallyOfFiniteType (k₀ := k₀)
+  have : QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over W.ι]
+    infer_instance
+  have hW := hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine W
+    hWtop hG (hKw.upperStar W.ι)
+  have hK := WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar_of_isOpenImmersion
+    W.ι (by rwa [Scheme.Opens.range_ι]) _ Nat.one_pos hW
+  exact FrobeniusModule.HasWeightsAtMost.of_equiv E hK
 
 end WeilSheaf
 
