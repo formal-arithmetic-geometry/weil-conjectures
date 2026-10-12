@@ -26,7 +26,7 @@ lift is the stalk of `G` (`AlgebraicGeometry.Scheme.IsFiniteSheaf.of_upperStar`,
 `IsFiniteLocallyConstantSheaf.of_upperStar`). This is the case needed for the independence of
 constructibility from the scheme structures on the strata, see
 `WeilConjectures.ConstructibleSheaf.Refinement`.
-(blueprint: `lemma:constructible-universal-homeomorphism-invariance`)
+(blueprint: `lemma-constructible-universal-homeomorphism-invariance`)
 
 -/
 
@@ -119,7 +119,7 @@ instance : JointlySurjective etalePrecoverage.{u} :=
 `V' ⟶ X` of a trivialising cover of `u^* G` is the base change of an étale `V ⟶ Y`
 (Stacks 04DZ), the `V` cover `Y` since `u` is surjective, and `V ×_Y X ⟶ V` is again a
 universal homeomorphism, along which the constancy of the pullback of `G` to `V ×_Y X`
-descends to `V`. (blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
+descends to `V`. (blueprint: `lemma-constructible-universal-homeomorphism-invariance`) -/
 theorem IsLocallyConstantSheaf.of_upperStar (G : Sheaf Y.smallEtaleTopology A)
     [IsLocallyConstantSheaf ((Etale.upperStar A u).obj G)] : IsLocallyConstantSheaf G := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ :=
@@ -178,7 +178,7 @@ variable {W Z : Scheme.{u}} (p : W ⟶ Z) [IsClosedImmersion p] [Surjective p]
 omit [HasSmallSiteSheafify A] in
 /-- **Finiteness descends along a surjective closed immersion** `p : W ⟶ Z`: a geometric
 point of `Z` lifts to `W`, and the stalk of `p^* G` at the lift is the stalk of `G`.
-(blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
+(blueprint: `lemma-constructible-universal-homeomorphism-invariance`) -/
 theorem IsFiniteSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
     [IsFiniteSheaf ((Etale.upperStar A p).obj G)] : IsFiniteSheaf G where
   isFinitelyGenerated_sheafFiber Ω _ _ s := by
@@ -188,7 +188,7 @@ theorem IsFiniteSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
       ((Etale.upperStarCompSheafFiberIso A p s').app G)
 
 /-- **Finite local constancy descends along a surjective closed immersion.**
-(blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
+(blueprint: `lemma-constructible-universal-homeomorphism-invariance`) -/
 theorem IsFiniteLocallyConstantSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
     [IsFiniteLocallyConstantSheaf ((Etale.upperStar A p).obj G)] :
     IsFiniteLocallyConstantSheaf G where

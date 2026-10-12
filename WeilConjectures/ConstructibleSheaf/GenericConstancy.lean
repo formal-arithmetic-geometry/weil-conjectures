@@ -24,7 +24,7 @@ the interiors of the strata of a witnessing stratification is dense
 (`Topology.Stratification.dense_iUnion_interior_stratum`), and on the open `interior Xᵢ` of
 `U` the sheaf `F|_U` is the pullback of `F` along a morphism with image in `Xᵢ`, hence finite
 locally constant by the independence of the scheme structure. No Noetherian hypothesis is
-needed. (blueprint: `prop:constructible-generic-constancy`)
+needed. (blueprint: `prop-constructible-generic-constancy`)
 
 -/
 
@@ -137,7 +137,7 @@ def Stratification.interiorUnionCover (S : Stratification X) :
 
 /-- **Generic constancy**: a constructible sheaf is finite locally constant on a dense open
 subscheme, the union of the interiors of the strata of a witnessing stratification.
-(blueprint: `prop:constructible-generic-constancy`) -/
+(blueprint: `prop-constructible-generic-constancy`) -/
 theorem IsConstructibleSheaf.exists_dense_open (F : Sheaf X.smallEtaleTopology A)
     [IsConstructibleSheaf F] :
     ∃ U : X.Opens, Dense (U : Set X) ∧
