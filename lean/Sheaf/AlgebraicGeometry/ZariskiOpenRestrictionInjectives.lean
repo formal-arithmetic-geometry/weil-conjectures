@@ -9,9 +9,10 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
+import Mathlib.Topology.Sheaves.Over
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Restriction of abelian Zariski sheaves to an open
@@ -39,7 +40,10 @@ Consequently restriction commutes with sums and zero morphisms. -/
 @[instance]
 theorem zariski_open_restriction_additive (X : Scheme.{u}) (U : X.Opens) :
     (U.sheafRestrict (C := AddCommGrpCat.{u})).Additive := by
-  sorry
+  constructor
+  intro F G f g
+  ext V
+  rfl
 
 /-- Open restriction of abelian sheaves is exact and preserves injectives.
 Source: Stacks Project, Lemmas 03F3 and 01E1 and their proofs
@@ -59,7 +63,36 @@ theorem zariski_open_restriction_injectives (X : Scheme.{u}) (U : X.Opens) :
       S.Exact → (S.map (U.sheafRestrict (C := AddCommGrpCat.{u}))).Exact) ∧
     (∀ I : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u},
       Injective I → Injective ((U.sheafRestrict (C := AddCommGrpCat.{u})).obj I)) := by
-  sorry
+  constructor
+  · intro S hS
+    have : CategoryTheory.Limits.PreservesFiniteLimits
+        (U.sheafRestrict (C := AddCommGrpCat.{u})) := by
+      change CategoryTheory.Limits.PreservesFiniteLimits
+        ((Opens.grothendieckTopology X).overPullback AddCommGrpCat.{u} U ⋙
+          (U.sheafEquivOver (A := AddCommGrpCat.{u})).functor)
+      infer_instance
+    have : CategoryTheory.Limits.PreservesFiniteColimits
+        (U.sheafRestrict (C := AddCommGrpCat.{u})) := by
+      change CategoryTheory.Limits.PreservesFiniteColimits
+        ((Opens.grothendieckTopology X).overPullback AddCommGrpCat.{u} U ⋙
+          (U.sheafEquivOver (A := AddCommGrpCat.{u})).functor)
+      infer_instance
+    exact hS.map _
+  · intro I hI
+    let L := Functor.sheafPullbackConstruction.sheafPullback (Over.forget U)
+      AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U)
+      (Opens.grothendieckTopology X)
+    have : L.PreservesMonomorphisms := ⟨fun f hf ↦
+      (zariski_extensionByZero_exact X U).2 f hf⟩
+    have : ((Opens.grothendieckTopology X).overPullback
+        AddCommGrpCat.{u} U).PreservesInjectiveObjects :=
+      Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+        (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+          (Over.forget U) AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U)
+          (Opens.grothendieckTopology X))
+    change Injective (((Opens.grothendieckTopology X).overPullback AddCommGrpCat.{u} U ⋙
+      (U.sheafEquivOver (A := AddCommGrpCat.{u})).functor).obj I)
+    exact Functor.injective_obj_of_injective _ hI
 
 /-- Restricting an injective resolution gives the termwise restricted resolution with the
 restricted augmentation. Its global section complex on U equals evaluation of the original
@@ -90,6 +123,30 @@ theorem zariski_open_restriction_injectiveResolution (X : Scheme.{u}) (U : X.Ope
       (((sheafSections (Opens.grothendieckTopology X)
         AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj I.cocomplex := by
-  sorry
+  let R := U.sheafRestrict (C := AddCommGrpCat.{u})
+  have : R.PreservesHomology :=
+    Functor.preservesHomology_of_map_exact R (zariski_open_restriction_injectives X U).1
+  have : R.PreservesInjectiveObjects :=
+    ⟨fun h ↦ (zariski_open_restriction_injectives X U).2 _ h⟩
+  let J : InjectiveResolution (R.obj F) :=
+    { cocomplex := (R.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+      injective := fun n ↦ R.injective_obj (I.cocomplex.X n)
+      ι := (HomologicalComplex.singleMapHomologicalComplex R (ComplexShape.up ℕ) 0).inv.app F ≫
+        (R.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι }
+  constructor
+  · refine ⟨J, rfl, ?_⟩
+    simp [J, R, HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
+  · let f : TopCat.of U ⟶ X.toTopCat :=
+      TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩
+    have hf : Topology.IsOpenEmbedding f := U.isOpenEmbedding
+    have htop : hf.isOpenMap.functor.obj ⊤ = U := by
+      ext x
+      change x ∈ Set.image (Subtype.val : U → X) Set.univ ↔ x ∈ U
+      simp
+    let K : X.Opens → CochainComplex AddCommGrpCat.{u} ℕ := fun V ↦
+      (((sheafSections (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
+        (op V)).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+    change K (hf.isOpenMap.functor.obj ⊤) = K U
+    exact congrArg K htop
 
 end AlgebraicGeometry
