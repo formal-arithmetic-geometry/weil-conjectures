@@ -33,7 +33,8 @@ of the zeta function, but neither notion involves anything beyond polynomial alg
 namespace Polynomial
 
 /-- The alternating sum `∑ᵢ (-1)ⁱ deg (P i)` of the degrees of a finite family of polynomials.
-For a family of Weil factors of a zeta function this is the Euler characteristic `χ`. -/
+For a family of Weil factors of a zeta function this is the Euler characteristic `χ` (blueprint
+`sk-def-roots`). -/
 def alternatingNatDegreeSum {R : Type*} [Semiring R] {n : ℕ} (P : Fin (n + 1) → R[X]) : ℤ :=
   ∑ i : Fin (n + 1), (-1) ^ (i : ℕ) * ((P i).natDegree : ℤ)
 

@@ -82,7 +82,9 @@ degree of the class of `ℒ` is `deg ℒ = χ(ℒ) - χ(𝒪_C)`
 (`AlgebraicGeometry.Scheme.Hom.picDegree`); it is a homomorphism by
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj`. Its kernel is `Pic⁰(C)`
 (`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`), and it is the degree of divisors
-(`AlgebraicGeometry.Scheme.picDegreeHom_toPic`). -/
+(`AlgebraicGeometry.Scheme.picDegreeHom_toPic`).
+
+(blueprint: `def-sc-pic0`) -/
 noncomputable def picDegreeHom : C.Pic →* Multiplicative ℤ where
   toFun L := .ofAdd ((C ↘ Spec (.of k)).picDegree L)
   map_one' := by
@@ -126,7 +128,9 @@ noncomputable def Pic.ofClosedPoint (P : closedPoints C) : C.Pic :=
 
 variable (k C) in
 /-- The homomorphism `Div(C) → Pic(C)`, `D = ∑_P n_P [P] ↦ [𝒪_C(D)] = ∏_P [𝒪_C(P)]^{n_P}`, of a
-smooth curve `C`, with values in `Additive C.Pic`. -/
+smooth curve `C`, with values in `Additive C.Pic`.
+
+This is the class map `D ↦ [𝒪_C(D)]` of blueprint `def-sc-divisor`. -/
 noncomputable def Divisor.toPic : C.Divisor →+ Additive C.Pic :=
   Finsupp.liftAddHom fun P ↦ zmultiplesHom _ (.ofMul (Pic.ofClosedPoint k P))
 
@@ -262,7 +266,9 @@ since conversely every isomorphism `𝒪_C(-E₂) ≅ 𝒪_C(-E₁)` is multipli
 surjective since every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`, a nonzero rational section
 giving a nonzero morphism `𝒪_C(-E₂) ⟶ ℒ` whose zero scheme is a sum of points
 (`AlgebraicGeometry.Scheme.Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj`;
-blueprint `lem-sc-line-bundle-rational-section`). -/
+blueprint `lem-sc-line-bundle-rational-section`).
+
+This is the identification `Cl(C) ≅ Pic(C)` asserted in blueprint `def-sc-divisor`. -/
 theorem exists_divisorClassGroup_addEquiv_pic [IsCurve (C ↘ Spec (.of k))] [IsIntegral C]
     [IsNoetherian C] :
     ∃ e : C.DivisorClassGroup ≃+ Additive C.Pic,
@@ -343,7 +349,9 @@ noncomputable def fieldPointOfClosedPoint (P : closedPoints C) :
     (pointOfClosedPoint_comp (C ↘ Spec (.of k)) P.1 P.2).trans (by
       rw [Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id])⟩
 
-/-- Over an algebraically closed field, the class `𝒪_C(P)` of a closed point has degree one. -/
+/-- Over an algebraically closed field, the class `𝒪_C(P)` of a closed point has degree one.
+
+(blueprint: `def-sc-pic0`) -/
 lemma picDegreeHom_ofClosedPoint (P : closedPoints C) :
     picDegreeHom k C (Pic.ofClosedPoint k P) = .ofAdd 1 := by
   have hJ := isInvertible_vanishingIdeal_of_isClosed (C ↘ Spec (.of k)) P.2
@@ -353,7 +361,9 @@ lemma picDegreeHom_ofClosedPoint (P : closedPoints C) :
   rwa [fieldPointOfClosedPoint, ker_pointOfClosedPoint] at h
 
 /-- **The degree on `Pic(C)` is the degree of divisors.** Over an algebraically closed field,
-`deg 𝒪_C(D) = deg D` for every divisor `D` on a smooth proper curve `C`. -/
+`deg 𝒪_C(D) = deg D` for every divisor `D` on a smooth proper curve `C`.
+
+(blueprint: `def-sc-pic0`) -/
 theorem picDegreeHom_toPic (D : C.Divisor) :
     picDegreeHom k C (Divisor.toPic k C D).toMul = .ofAdd (Divisor.degree C D) := by
   induction D using Finsupp.induction_linear with
@@ -435,7 +445,9 @@ variable (k) in
 include k in
 /-- **Principal divisors have degree zero** on a smooth proper integral curve over an
 algebraically closed field: `deg div(f) = ∑_P v_P(f) = 0`
-(`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`). -/
+(`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`).
+
+(blueprint: `def-sc-pic0`) -/
 theorem degree_div_eq_zero (f : Additive C.functionFieldˣ) : Divisor.degree C (C.div f) = 0 := by
   have := QuasiCompact.compactSpace_of_compactSpace (C ↘ Spec (.of k))
   rw [← finsum_ord_eq_zero k C f.toMul.ne_zero, Divisor.degree_apply, Finsupp.sum,
