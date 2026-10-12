@@ -89,7 +89,8 @@ namespace ProEtale
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
   [Etale.HasBoundedBelowUpperShriek A f]
 
-/-- Blueprint `sk-def-sf-operations` (vi): the exceptional inverse image
+/-- Blueprint `sk-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
+the exceptional inverse image
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, where `f^×` is the étale exceptional inverse image
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, the right adjoint of the étale `Rf_!`. It is

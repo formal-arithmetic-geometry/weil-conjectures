@@ -291,7 +291,12 @@ instance ProEtale.openImmersionRestriction_additive :
 
 namespace ProEtale
 
-/-- The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
+/-- Blueprint `def-weil-extension-by-zero`: Extension by zero. It is the sheafification of the
+left Kan extension of the presheaf along the localization functor, whose value at `V ⟶ X` is
+`M(V ⟶ U)` if `V ⟶ X` factors through `U` and zero otherwise
+(`AlgebraicGeometry.ProEtale.mem_essImage_or_isEmpty_costructuredArrow_op_overMap`).
+
+The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
 pro-étale sites. -/
 noncomputable def openImmersionLowerShriek :
     Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A :=

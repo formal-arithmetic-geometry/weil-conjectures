@@ -296,7 +296,10 @@ instance Etale.faithful_boundedConstructibleIntegral_ι_comp_rightDerivedLowerSt
         i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
+/-- Blueprint `def-weil-rationalization-karoubi`: Rationalization (scalar localization), the
+category `Dᵇc(Y, E) = Dᵇc(Y, 𝒪_E)[1/ϖ_E]` (as its full subcategory, with no Karoubi completion).
+
+The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
 `Dᵇc(X, 𝒪_E)`, as a full subcategory of `D_comp(X_ét, E)`. Its `Hom` groups are those of
 `Dᵇc(X, 𝒪_E)` with the nonzero elements of `𝒪_E` inverted
 (`CategoryTheory.Rationalization.exists_smul_eq_map`,
@@ -308,7 +311,9 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
       ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj L) ∧
     Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K)
 
-/-- The rational stage `Dᵇc(X, E)` of blueprint `def-weil-rationalization-karoubi`: the Karoubi
+/-- The Karoubi envelope of the rational stage `Dᵇc(X, E)` of blueprint
+`def-weil-rationalization-karoubi` (which takes no Karoubi completion; the canonical functor into
+the envelope is an equivalence by `lem-weil-rationalization-idempotent-complete`): the Karoubi
 envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=
   Idempotents.Karoubi (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory

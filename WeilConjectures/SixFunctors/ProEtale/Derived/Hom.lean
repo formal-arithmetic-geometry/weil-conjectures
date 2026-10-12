@@ -64,7 +64,11 @@ variable (X : Scheme.{u})
 
 namespace ProEtale
 
-/-- The derived hom `RHom(-, -) : D(X_proét)ᵒᵖ ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded derived
+/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
+internal Hom; the derived internal Hom, right adjoint to `- ⊗ᴸ -`
+(`AlgebraicGeometry.ProEtale.derivedTensorHomAdjunction₂`).
+
+The derived hom `RHom(-, -) : D(X_proét)ᵒᵖ ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded derived
 category of `A`-valued pro-étale sheaves on `X`: the internal hom of the monoidal closed
 structure on `D(X_proét)`, i.e. the right adjoint of the derived tensor product `- ⊗ᴸ -`. -/
 @[implicit_reducible]

@@ -1,0 +1,184 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+
+/-!
+# The completed integral coefficient sheaf on the pro-étale site
+
+Let `Λ` be a commutative ring with an ideal `I` (the intended case is `Λ = 𝒪_E`, `I = 𝔪_E`, so
+that `Λ ⧸ Iⁿ = A_{E,n}`). Blueprint `def-weil-completed-integral-coefficients` defines the
+completed coefficient sheaf on the small pro-étale site of a scheme `Y`,
+
+`𝒪̂_{E,Y} = lim_n (A_{E,n})_Y`,
+
+as a limit in the category of sheaves of rings, the category `Sh(Y_proét, 𝒪_E)` of modules over
+it, the derived category `D(Y_proét, 𝒪_E)`, and, for every `n`, the restriction of scalars
+`Res_n` along `𝒪̂_{E,Y} ⟶ (A_{E,n})_Y`.
+
+On the pro-étale site the constant sheaf of rings with value a discrete ring `A` is the sheaf of
+continuous (that is, locally constant) functions `U ↦ C(U, A)` (Bhatt–Scholze, Lemma 4.2.12);
+on the small étale site this is `AlgebraicGeometry.Scheme.Etale.constantSheafIsoContinuousMapSheaf`.
+We take this as the definition of `(A_{E,n})_Y` as a sheaf of rings
+(`AlgebraicGeometry.ProEtale.reductionRingSheaf`).
+
+## Main definitions
+
+- `AlgebraicGeometry.ProEtale.continuousMapRingSheaf`: the sheaf of rings `U ↦ C(U, T)` on
+  `Y_proét` for a topological ring `T`.
+- `AlgebraicGeometry.ProEtale.reductionRingSheaf`: the sheaf of rings `(Λ ⧸ Iⁿ)_Y`.
+- `AlgebraicGeometry.ProEtale.reductionRingSheafMap`: the reduction `(Λ ⧸ Iⁿ⁺¹)_Y ⟶ (Λ ⧸ Iⁿ)_Y`.
+- `AlgebraicGeometry.ProEtale.completedIntegralSheaf`: `𝒪̂_{E,Y} = lim_n (Λ ⧸ Iⁿ)_Y`.
+- `AlgebraicGeometry.ProEtale.CompletedIntegralModule`: the abelian category of
+  `𝒪̂_{E,Y}`-modules.
+- `AlgebraicGeometry.ProEtale.CompletedIntegralDerivedCategory`: `D(Y_proét, 𝒪_E)`.
+- `AlgebraicGeometry.ProEtale.restrictScalarsReduction`: `Res_n`.
+
+## Implementation notes
+
+The derived category of `𝒪̂_{E,Y}`-modules is Mathlib's standard localization at the
+quasi-isomorphisms (`HasDerivedCategory.standard`).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits Opposite
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+variable (Y : Scheme.{u})
+
+section ContinuousMap
+
+variable (T : Type (u + 1)) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+
+/-- The sheaf of rings `U ↦ C(U, T)` of continuous functions with values in a topological ring
+`T` on the small pro-étale site of `Y`: the restriction of the fpqc sheaf
+`AlgebraicGeometry.continuousMapPresheafRing`. -/
+noncomputable def continuousMapRingSheaf : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
+  ((Scheme.ProEt.forget Y ⋙ Over.forget _).sheafPushforwardContinuous _ _
+    Scheme.proetaleTopology).obj
+    ⟨continuousMapPresheafRing T, .of_le Scheme.proetaleTopology_le_fpqcTopology
+      (isSheaf_fpqcTopology_continuousMapPresheafRing T)⟩
+
+/-- The sections of `C(-, T)` over `U` are the continuous functions `U → T`. -/
+lemma continuousMapRingSheaf_obj_obj (U : Y.ProEt) :
+    (continuousMapRingSheaf Y T).obj.obj (op U) = RingCat.of C(U.left, T) :=
+  rfl
+
+variable {T} {T' : Type (u + 1)} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
+
+/-- The morphism of sheaves of rings `C(-, T) ⟶ C(-, T')` induced by a continuous ring
+homomorphism. -/
+noncomputable def continuousMapRingSheafMap (φ : T →+* T') (hφ : Continuous φ) :
+    continuousMapRingSheaf Y T ⟶ continuousMapRingSheaf Y T' :=
+  ((Scheme.ProEt.forget Y ⋙ Over.forget _).sheafPushforwardContinuous _ _
+    Scheme.proetaleTopology).map ⟨continuousMapPresheafRingMap φ hφ⟩
+
+end ContinuousMap
+
+variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
+
+/-- The discrete topology on `Λ ⧸ Iⁿ`. -/
+abbrev reductionTopology (n : ℕ) : TopologicalSpace (Λ ⧸ I ^ n) := ⊥
+
+lemma discreteTopology_reductionTopology (n : ℕ) :
+    @DiscreteTopology (Λ ⧸ I ^ n) (reductionTopology I n) :=
+  @DiscreteTopology.mk _ (reductionTopology I n) rfl
+
+/-- The constant sheaf of rings `(Λ ⧸ Iⁿ)_Y` on the small pro-étale site of `Y` (for
+`Λ = 𝒪_E`, `I = 𝔪_E`, the finite-torsion coefficients `(A_{E,n})_Y` of blueprint
+`def-weil-finite-torsion-constructibility`): the sheaf of locally constant functions
+`U ↦ C(U, Λ ⧸ Iⁿ)` for the discrete topology. -/
+noncomputable def reductionRingSheaf (n : ℕ) : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
+  @continuousMapRingSheaf Y (Λ ⧸ I ^ n) (reductionTopology I n) _
+    (@DiscreteTopology.topologicalRing _ (reductionTopology I n) _
+      (discreteTopology_reductionTopology I n))
+
+/-- The reduction map `(Λ ⧸ Iⁿ⁺¹)_Y ⟶ (Λ ⧸ Iⁿ)_Y` of sheaves of rings, induced by
+`Λ ⧸ Iⁿ⁺¹ ↠ Λ ⧸ Iⁿ`. -/
+noncomputable def reductionRingSheafMap (n : ℕ) :
+    reductionRingSheaf Y I (n + 1) ⟶ reductionRingSheaf Y I n :=
+  @continuousMapRingSheafMap Y (Λ ⧸ I ^ (n + 1)) (reductionTopology I (n + 1)) _
+    (@DiscreteTopology.topologicalRing _ (reductionTopology I (n + 1)) _
+      (discreteTopology_reductionTopology I (n + 1)))
+    (Λ ⧸ I ^ n) (reductionTopology I n) _
+    (@DiscreteTopology.topologicalRing _ (reductionTopology I n) _
+      (discreteTopology_reductionTopology I n))
+    (Ideal.Quotient.factor (Ideal.pow_le_pow_right n.le_succ))
+    (by
+      let _ := reductionTopology I (n + 1)
+      let _ := reductionTopology I n
+      have := discreteTopology_reductionTopology I (n + 1)
+      exact continuous_of_discreteTopology)
+
+/-- The inverse system `n ↦ (Λ ⧸ Iⁿ)_Y` of sheaves of rings, with the reduction maps. -/
+noncomputable def reductionRingSheafSystem :
+    ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
+  Functor.ofOpSequence (reductionRingSheafMap Y I)
+
+/-- Blueprint `def-weil-completed-integral-coefficients`: Completed integral coefficient sheaf.
+
+The completed coefficient sheaf `𝒪̂_{E,Y} = lim_n (A_{E,n})_Y` on the small pro-étale site of
+`Y`, the limit of the reductions `(Λ ⧸ Iⁿ)_Y` in the category of sheaves of rings. -/
+noncomputable def completedIntegralSheaf : Sheaf (Scheme.ProEt.topology Y) RingCat.{u + 1} :=
+  limit (reductionRingSheafSystem Y I)
+
+/-- The projection `𝒪̂_{E,Y} ⟶ (A_{E,n})_Y`. -/
+noncomputable def completedIntegralSheafπ (n : ℕ) :
+    completedIntegralSheaf Y I ⟶ reductionRingSheaf Y I n :=
+  limit.π (reductionRingSheafSystem Y I) (op n)
+
+/-- The projections are compatible with the reduction maps. -/
+@[reassoc (attr := simp)]
+lemma completedIntegralSheafπ_reductionRingSheafMap (n : ℕ) :
+    completedIntegralSheafπ Y I (n + 1) ≫ reductionRingSheafMap Y I n =
+      completedIntegralSheafπ Y I n := by
+  have := limit.w (reductionRingSheafSystem Y I) (homOfLE n.le_succ).op
+  simpa [completedIntegralSheafπ, reductionRingSheafSystem, Functor.ofOpSequence_map_homOfLE_succ]
+    using this
+
+/-- The category `Sh(Y_proét, 𝒪_E)` of sheaves of modules over the completed coefficient sheaf
+`𝒪̂_{E,Y}` (blueprint `def-weil-completed-integral-coefficients`, with
+`def-weil-sheaf-of-modules-category`, Mathlib's `SheafOfModules`). It is abelian. -/
+abbrev CompletedIntegralModule : Type _ :=
+  SheafOfModules.{u + 1} (completedIntegralSheaf Y I)
+
+/-- The category of `𝒪̂_{E,Y}`-modules is abelian. -/
+noncomputable example : Abelian (CompletedIntegralModule Y I) := inferInstance
+
+attribute [local instance] HasDerivedCategory.standard in
+/-- The derived category `D(Y_proét, 𝒪_E)` of `𝒪̂_{E,Y}`-modules: the localization of the
+category of complexes at the quasi-isomorphisms. Its cohomology sheaves are the homology
+functors `DerivedCategory.homologyFunctor`. -/
+abbrev CompletedIntegralDerivedCategory : Type _ :=
+  DerivedCategory (CompletedIntegralModule Y I)
+
+/-- The restriction of scalars `Res_n : Sh(Y_proét, A_{E,n}) ⥤ Sh(Y_proét, 𝒪_E)` along the
+projection `𝒪̂_{E,Y} ↠ (A_{E,n})_Y`, which makes every `A_{E,n}`-module an
+`𝒪̂_{E,Y}`-module (blueprint `def-weil-completed-integral-coefficients`). -/
+noncomputable def restrictScalarsReduction (n : ℕ) :
+    SheafOfModules.{u + 1} (reductionRingSheaf Y I n) ⥤ CompletedIntegralModule Y I :=
+  SheafOfModules.restrictScalars (completedIntegralSheafπ Y I n)
+
+/-- The restriction of scalars along the reduction map `(A_{E,n+1})_Y ⟶ (A_{E,n})_Y`. -/
+noncomputable def restrictScalarsReductionMap (n : ℕ) :
+    SheafOfModules.{u + 1} (reductionRingSheaf Y I n) ⥤
+      SheafOfModules.{u + 1} (reductionRingSheaf Y I (n + 1)) :=
+  SheafOfModules.restrictScalars (reductionRingSheafMap Y I n)
+
+end AlgebraicGeometry.ProEtale

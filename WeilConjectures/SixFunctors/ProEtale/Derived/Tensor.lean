@@ -77,7 +77,10 @@ variable [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
 
-/-- The derived tensor product `- ⊗ᴸ - : D(X_proét) ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded
+/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
+internal Hom; the derived tensor product.
+
+The derived tensor product `- ⊗ᴸ - : D(X_proét) ⥤ D(X_proét) ⥤ D(X_proét)` on the unbounded
 derived category of `A`-valued pro-étale sheaves on `X`: the tensor product of the monoidal
 structure on `D(X_proét)` obtained from the K-flat left derivability structure. -/
 @[implicit_reducible]

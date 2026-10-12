@@ -84,7 +84,11 @@ namespace ProEtale
 
 variable {f : X ⟶ Y} (c : Compactification f)
 
-/-- The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` attached to a compactification
+/-- Blueprint `def-weil-compact-support-candidate`: Compact-support candidate attached to a
+compactification, `Rf^c_{!,n} = Rf̄_* j_!` (restricted to the étale-origin complexes in
+`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationEtaleOrigin`).
+
+The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of pro-étale sheaves:
 the functor `Di_!` induced on derived categories by the *exact* extension by zero `i_!`,
 followed by the total right derived pushforward `Rg_*`.

@@ -102,7 +102,10 @@ noncomputable def leftDerivedUpperStarCompactificationIso :
 
 variable [ProEtale.UpperStarPreservesFlat A]
 
-/-- The **projection map** `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)` for a
+/-- Blueprint `def-exchange-projection`: Exchange and projection transformations, the
+projection transformation `PF`.
+
+The **projection map** `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)` for a
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, as a natural transformation of bifunctors
 `D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`. It is the composite
 ```

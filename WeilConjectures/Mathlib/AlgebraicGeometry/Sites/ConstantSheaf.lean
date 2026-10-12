@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -160,3 +161,50 @@ noncomputable def Etale.constantSheafIsoContinuousMapSheaf :
 end Discrete
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry
+
+section Ring
+
+variable (T : Type (u + 1)) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+
+/-- `continuousMapPresheaf` as a presheaf of rings `U ↦ C(U, T)` on schemes, associated to a
+topological ring `T`. -/
+@[simps]
+noncomputable def continuousMapPresheafRing : Scheme.{u}ᵒᵖ ⥤ RingCat.{u + 1} where
+  obj U := RingCat.of C(U.unop, T)
+  map {U V} f := RingCat.ofHom
+    { toFun g := g.comp f.unop.base.hom
+      map_one' := rfl
+      map_mul' _ _ := rfl
+      map_zero' := rfl
+      map_add' _ _ := rfl }
+
+/-- The presheaf of rings `U ↦ C(U, T)` is a sheaf for the fpqc topology: its underlying presheaf
+of sets is `continuousMapPresheaf T`. -/
+lemma isSheaf_fpqcTopology_continuousMapPresheafRing :
+    Presheaf.IsSheaf Scheme.fpqcTopology (continuousMapPresheafRing T) := by
+  have : ReflectsLimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget RingCat.{u + 1}) :=
+    reflectsLimits_of_reflectsIsomorphisms
+  have : ReflectsLimitsOfSize.{u, u + 1} (CategoryTheory.forget RingCat.{u + 1}) :=
+    reflectsLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  apply Presheaf.isSheaf_of_isSheaf_comp _ _ (CategoryTheory.forget RingCat.{u + 1})
+  exact isSheaf_fpqcTopology_continuousMapPresheaf.{u + 1, u} T
+
+variable {T} {T' : Type (u + 1)} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
+
+/-- A continuous ring homomorphism `φ : T →+* T'` induces a morphism of presheaves of rings
+`C(-, T) ⟶ C(-, T')` by postcomposition. -/
+@[simps]
+noncomputable def continuousMapPresheafRingMap (φ : T →+* T') (hφ : Continuous φ) :
+    continuousMapPresheafRing T ⟶ continuousMapPresheafRing T' where
+  app U := RingCat.ofHom
+    { toFun g := (ContinuousMap.mk φ hφ).comp g
+      map_one' := by ext; simp
+      map_mul' _ _ := by ext; simp
+      map_zero' := by ext; simp
+      map_add' _ _ := by ext; simp }
+
+end Ring
+
+end AlgebraicGeometry

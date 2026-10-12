@@ -76,7 +76,12 @@ variable (X : Scheme.{u})
 
 namespace ProEtale
 
-/-- An object of the derived category of pro-étale sheaves is bounded constructible if it is of
+/-- Blueprint `def-weil-finite-torsion-constructibility`: Finite-torsion constructibility, the
+derived category `Dᵇc(Y, A)`, in the étale-origin reading of `def-weil-pbc-proetale-modules`
+(the intrinsic reading is
+`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleIntrinsic`).
+
+An object of the derived category of pro-étale sheaves is bounded constructible if it is of
 étale origin: isomorphic to `D(ν^*) K'` for a bounded constructible complex `K'` of étale
 sheaves.
 
@@ -162,7 +167,9 @@ noncomputable def DerivedCategoryBoundedConstructible.toBounded :
       _root_.DerivedCategory.Bounded (Sheaf (Scheme.ProEt.topology X) A) :=
   ObjectProperty.ιOfLE fun _ hK ↦ DerivedCategory.boundedConstructible.bounded hK
 
-/-- Membership in `D_c^[a, b](X, A)` as an object property of `D(X_proét)`: bounded
+/-- Blueprint `def-weil-constructible-intervals`: Constructible cohomological intervals.
+
+Membership in `D_c^[a, b](X, A)` as an object property of `D(X_proét)`: bounded
 constructible with homology concentrated in `[a, b]` (blueprint
 `def-weil-constructible-intervals`). -/
 noncomputable def DerivedCategory.constructibleIn (a b : ℤ) :
