@@ -7,9 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-!
 # Base change of a first order thickening
@@ -33,22 +31,16 @@ commute with `p` and `i`, giving a morphism of thickenings (Stacks Project, Tags
 01JU (1), and 04EX (5)).
 
 Proof:
-1. By lem-weil-pbc-closed-immersion-base-change the first projection is a closed immersion.
-2. On an affine open `V = Spec A` of the target, write the immersion as `Spec (A/K)`.
-   The affine-cover criterion, open-preimage fibre product, and cartesian-square pasting
-   identify the restricted base change with the fibre product over `Spec A`.
-3. By lem-weil-pbc-quotient-base-change-closed-immersion-ideal its ideal on an affine
-   `U = Spec B` above `V` is the extended ring ideal `KB`.
-4. By lem-weil-pbc-module-pullback-ideal-quotient (1), the image of the tensor module
-   pullback of the original ideal in the structure sheaf has the same sections `KB`.
-   Such affine opens form a basis, so the two quasi-coherent ideal sheaves are equal.
-   This extended ideal is represented by the recorded `IdealSheafData.comap`.
-5. By part (2) of that lemma extension commutes with powers. The original ideal has
-   square zero, so the extended ideal has square zero. Equivalently every product of
-   two generators in `KB` vanishes because its two original factors multiply to zero.
-6. The closed immersion and square-zero ideal give `IsFirstOrderThickening` by
-   def-sbc-first-order-thickening. The pullback equation supplies the factorization
-   through the original closed subscheme required for a morphism of thickenings.
+1. The closed immersion component of the hypothesis gives a local instance.
+   Closed immersions are stable under base change, so the first projection is
+   a closed immersion.
+2. Mathlib's `Scheme.IdealSheafData.ker_fst_of_isClosedImmersion` identifies its
+   kernel with `i.ker.comap p`.
+3. The proved source-library `Scheme.IdealSheafData.comap_pow` identifies the
+   square of this extended ideal with `(i.ker ^ 2).comap p`. The hypothesis
+   makes this `⊥.comap p`, which is `⊥` by `Scheme.IdealSheafData.comap_bot`.
+4. The closed immersion and square-zero kernel give the first order thickening.
+   The defining pullback equation supplies the required commuting square.
 
 (blueprint: lem-weil-pbc-first-order-thickening-base-change). -/
 theorem IsFirstOrderThickening.baseChange {W W' Z' : Scheme.{u}}
@@ -57,6 +49,10 @@ theorem IsFirstOrderThickening.baseChange {W W' Z' : Scheme.{u}}
       (pullback.fst p i).ker = i.ker.comap p ∧
       (i.ker.comap p) ^ 2 = ⊥ ∧
       pullback.fst p i ≫ p = pullback.snd p i ≫ i := by
-  sorry
+  let : IsClosedImmersion i := hi.1
+  have hker := Scheme.IdealSheafData.ker_fst_of_isClosedImmersion i p
+  have hsq : (i.ker.comap p) ^ 2 = ⊥ := by
+    rw [← Scheme.IdealSheafData.comap_pow, hi.2, Scheme.IdealSheafData.comap_bot]
+  exact ⟨⟨inferInstance, by rw [hker]; exact hsq⟩, hker, hsq, pullback.condition⟩
 
 end AlgebraicGeometry
