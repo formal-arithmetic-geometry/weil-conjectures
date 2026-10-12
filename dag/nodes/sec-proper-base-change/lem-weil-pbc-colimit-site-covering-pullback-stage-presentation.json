@@ -23,35 +23,43 @@
  ],
  "proof": [
   {
-   "text": "Match the finite stage presieve R₀ and the finite indexed family f in both directions using their image equality. Lift g and endpoint data and enforce all arrow equalities at a common refinement of the original stage, using surjectivity and eventual equality of set colimits. The resulting indexed presieve equals the transition image of R₀, hence is covering. Empty indices force R₀ to be empty.",
+   "text": "Define the image precoverage concretely by the stage-presieve existence predicate. Apply colimit_site_covering_families_at_stage with a singleton target index to obtain an indexed stage cover mapping to f. Lift g above that stage by joint surjectivity of arrows and eventual equality of its target, then transition the cover using hcover.",
    "uses": [
+    "lem-weil-pbc-colimit-site-covering-families-at-stage",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
   },
   {
-   "text": "Form stage pullbacks of each member of that cover along the lifted g. Their preservation by every further transition implies preservation by the cocone functor. Thus each prescribed colimit pullback is uniquely isomorphic to the corresponding image square, compatibly with the legs.",
+   "text": "Construct the pullbacks of the members of that cover along the lifted g. hpullback and filteredColimit_preservesPullback preserve their images; use pullback symmetry and IsPullback.isoIsPullback to compare them with the prescribed squares, including the first-leg equation.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-preserves-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Lift the finitely many prescribed vertices, comparison isomorphisms and inverses. Enforce the inverse and leg equations at one further stage by eventual equality. Transport the stage pullback vertices along the resulting isomorphisms, preserving pullbackness and the transitioned source cover. The mapped presieve of their first projections is exactly the prescribed one. This step does not assert these first projections cover.",
+   "text": "Apply finite isomorphism lifting to those comparison isomorphisms above the fixed stage. Transport the transitioned pullback vertices using the lifted isomorphisms. hcover keeps the source family covering and hpullback keeps the stage squares pullbacks.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-finite-iso-lift"
    ],
    "elementary": false
+  },
+  {
+   "text": "Functoriality and cocone naturality identify each first-leg image with its prescribed arrow, including endpoints. Presieve.map_ofArrows and equality of the indexed Arrow representatives give the transported presieve equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-colimit-site-covering-families-at-stage",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimit-preserves-pullback"
+  "lem-weil-pbc-filtered-colimit-preserves-pullback",
+  "lem-weil-pbc-filtered-colimit-finite-iso-lift"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 09YL, finite-diagram and covering-pullback paragraphs; expanded by B2 second reader for arbitrary specified pullbacks, repeated arrows and empty indices."
+  "place": "Tag 09YL, finite-diagram observation; Categories Tag 04AX, eventual equality; R2 second reading: explicit cover lifting, pullback preservation/comparison and vertex transport; only finite isomorphism lifting split off."
  },
  "mathlib_searches": [
   {
@@ -117,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T202230-L-700917",
+  "landing": "20261012T223414-L-1640024",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

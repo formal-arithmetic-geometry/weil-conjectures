@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-finite-iso-lift",
+ "kind": "statement",
+ "title": "Finite isomorphisms lift above fixed stage objects",
+ "statement": "Let J be a small filtered category [def-weil-pbc-category-colimit], F : J → Cat a strict diagram, and V a cocone whose object and arrow cocones [def-weil-pbc-arrows-functor] are colimits of sets. Fix a finite index type I, a stage j, objects D_i in F(j), objects Z_i in V.pt, and isomorphisms E_i : V_j(D_i) ≅ Z_i. There exist a stage k, a transition c : j → k, objects D′_i in F(k), and isomorphisms t_i : D′_i ≅ F(c)(D_i), such that the image arrow of t_i.hom equals E_i.inv as an Arrow, including both endpoints. No precoverage or pullback assumption is used.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram observation; Categories Tag 04AX, eventual equality"
+ },
+ "proof": [
+  {
+   "text": "Represent the finitely many target objects and the hom and inverse arrows of E_i by joint surjectivity. Move their stages and j to a common stage. Refine to make all endpoints equal to their prescribed transition representatives by eventual equality of objects.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After endpoint transport the representative arrows have mutually inverse images. Eventual equality of arrows makes both inverse equations hold at one common refinement.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse equations define isomorphisms t_i whose hom represents E_i.inv. Naturality preserves these images. For the empty index choose the identity out of j.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram observation; Categories Tag 04AX, eventual equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lift finite family of isomorphisms above a fixed stage in a filtered colimit of categories",
+   "results": "Eight hits inspected: Ind.exists_nonempty_arrow_mk_iso_ind_lim, eventual-constant cocone isomorphisms, filtered set equality and IsFiltered.sup_exists. None lifts a finite family of category isomorphisms above prescribed stage objects.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback, CategoryTheory.Iso",
+   "results": "Twelve hits inspected, including IsPullback.isoIsPullback and of_iso′. These supply comparison and transport and are used in the item, but do not lift their finite family above a fixed stage.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*iso|iso.*finite|iso.*stage|stage.*iso",
+   "results": "Mathlib general search returned unrelated finite-limit and algebra hits. Focused local search found filteredColimit_category_iso_clause: a single arbitrary-stage isomorphism for the canonical object colimit, conditional on finite-functor lifting. It does not provide finite simultaneous lifting above prescribed stage objects. FiniteLift, FiniteFunctorLift and ListEquality likewise have canonical-colimit signatures, not this arbitrary-cocone conclusion. No exact upstream or Sheaf declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given finitely many isomorphisms from objects at a fixed stage of a filtered colimit of categories, lift all isomorphisms above that stage",
+   "results": "Internal Server Error; unavailable, no results to assess.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringPullbackStagePresentation",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-pullback-stage-presentation",
+   "place": "third proof step: lifting the finite comparison isomorphisms and inverses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitFiniteIsoLift",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitFiniteIsoLift.lean",
+  "declaration": "CategoryTheory.filteredColimit_finite_iso_lift",
+  "statement": "theorem filteredColimit_finite_iso_lift\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    {ι : Type u} [Finite ι] (j : J) (D : ι → F.obj j) (Z : ι → V.pt)\n    (E : ∀ i, (V.ι.app j).toFunctor.obj (D i) ≅ Z i) :\n    ∃ (k : J) (c : j ⟶ k) (D' : ι → F.obj k)\n      (t : ∀ i, D' i ≅ (F.map c).toFunctor.obj (D i)),\n      ∀ i, Arrow.mk ((V.ι.app k).toFunctor.map (t i).hom) = Arrow.mk (E i).inv",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T223414-L-1640024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T223414-L-1640024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
