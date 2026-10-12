@@ -26,61 +26,47 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-scheme-coproduct-family], the coprojections \\iota_i identify the summands C_i with pairwise disjoint open-and-closed subschemes covering C. Thus every etale object over C restricts to etale objects over the C_i, and the restriction maps are componentwise.",
+   "text": "The coprojections are open immersions: transport the standard coprojections along the unique isomorphism between the standard coproduct cofan and the given colimit cofan. Apply the clopen sheaf product theorem to obtain that R = pi-prime of the inverse-image functors is an equivalence, hence fully faithful.",
    "uses": [
-    "lem-weil-pbc-scheme-coproduct-family"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite disjoint-union decomposition"
-   }
-  },
-  {
-   "text": "The sheaf condition on the finite family of open-and-closed inclusions says that a sheaf F on C is uniquely determined by the family of restrictions \\iota_i^{-1}F, and every family of component sheaves glues uniquely because intersections between distinct summands are empty. Hence restriction is an equivalence with the finite product of the component sheaf categories. On the final object C, this equivalence identifies F(C) with the finite product of the component sections (\\iota_i^{-1}F)(C_i). The inverse-image notation is the functor of [def-weil-pbc-inverse-image].",
-   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
     "lem-weil-pbc-etale-sheaf-clopen-product",
     "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
-   }
+   "elementary": false
   },
   {
-   "text": "For every scheme T the category Ab(T_{Et}) has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives], and the global-sections functor \\Gamma(T_{Et},-) [def-weil-pbc-global-sections-functor] is additive and left exact, being a right adjoint (of the constant-sheaf functor). Etale cohomology H^q(T_{Et},F) is defined [def-weil-pbc-etale-cohomology] as \\mathcal H^q(\\Gamma(T,I^\\bullet)) for a K-injective resolution F\\to I^\\bullet; an injective resolution of F is a bounded below complex of injectives, hence K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], so H^q(T_{Et},F)=R^q\\Gamma(T_{Et},-)(F) in the sense of [def-sp-left-exact-additive]. The equivalence of Step 2 carries injective objects and injective resolutions in Ab(C_{Et}) to those of \\prod_i Ab((C_i)_{Et}) and carries \\Gamma(C_{Et},-) to the product functor of the \\Gamma((C_i)_{Et},-) [lem-weil-pbc-etale-sheaf-clopen-product]; so R^q\\Gamma(C_{Et},-)(F) is R^q of the product functor at (\\iota_i^{-1}F)_i. Applying [lem-weil-pbc-derived-finite-product] (each Ab((C_i)_{Et}) has enough injectives and each \\Gamma((C_i)_{Et},-) is additive left exact, as above) gives, naturally for every q\\ge0, H^q(C,F)\\cong\\prod_{i\\in I}H^q(C_i,\\iota_i^{-1}F). These isomorphisms are induced by restriction, so they are the canonical restriction maps in the statement; the product is finite.",
+   "text": "Work with the library definition Sheaf.H as Ext from the constant integer sheaf. Each coprojection is etale, so inverse image is exact and preserves injective abelian sheaves. The latter is the proved abelian-group version injective_upperStar_obj_of_etale_addCommGrp in WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic, following the exact extension-by-zero adjunction of the etale-restriction-injectives node. Enough injectives is already an instance for the source etale sheaf category.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-global-sections-functor",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-sp-left-exact-additive",
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-derived-finite-product"
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-cohomology-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The proved private helper mapExt_family_bijective shows that a fully faithful family of exact injective-preserving functors induces a bijection from Ext(M,N,q) to the product of component Ext groups. In degree zero this is full faithfulness and Ext.mk-zero bijectivity. For the successor degree choose an injective presentation N to J and its cokernel Q. The exact rows Ext(M,J,q) to Ext(M,Q,q) to Ext(M,N,q+1) to zero compare with their componentwise images. Exactness of the product row is proved by choosing preimages coordinatewise; its last map is surjective because the component images of J are injective. Ext.mapExactFunctor_comp and mapExactFunctor_extClass make the squares commute. Apply the additive right-exact five lemma and the induction hypothesis. This entire helper is proved in Lean, with no postponed assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the helper with M the constant integer sheaf and N=F. Precompose each component Ext group with the canonical isomorphism from the component constant integer sheaf to its inverse image. Each precomposition is an additive equivalence, so their dependent product is an equivalence. Its composite with the helper map is definitionally the family cohomologyMap of the statement; bijectivity follows by composition.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-etale-sheaf-clopen-product",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-derived-finite-product",
-  "def-weil-pbc-global-sections-functor",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "def-sp-left-exact-additive"
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-12",
+  "description": "Ext dimension shifting, using the existing clopen sheaf equivalence and exact etale restriction; fully written Lean proof."
  },
  "mathlib_searches": [
   {
@@ -169,5 +155,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T095854-L-313277",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
