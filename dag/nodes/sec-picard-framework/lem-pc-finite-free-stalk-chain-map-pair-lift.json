@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-finite-free-stalk-chain-map-pair-lift",
+ "kind": "statement",
+ "title": "Lifting a prescribed pair of finite free chain maps",
+ "statement": "Let Y be a scheme [def-pc-scheme], P a cochain complex of O_Y-modules\n[def-pc-derived-category] with finite free terms [def-weil-pbc-free-module], supported\nin [0,d], and Q the single complex O_Y^r in degree i. For y in Y let T denote termwise\npullback [def-pc-derived-pullback] along Y.fromSpecStalk y. Given arbitrary chain maps\nf:TP→TQ and g:TQ→TP, there are an open V containing y, chain maps fV:P|V→Q|V and\ngV:Q|V→P|V, and complex isomorphisms eP:S(P|V)≅TP, eQ:S(Q|V)≅TQ, where S is pullback\nalong V.fromSpecStalkOfMem y hyV, such that S(fV)=eP.hom;f;eQ.inv and\nS(gV)=eQ.hom;g;eP.inv. No inverse or homotopy condition is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix coefficient extension and chain equations"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "On an affine neighbourhood of y choose the finite bases supplied by the free-term hypotheses. Under the affine quasicoherent correspondence the components of the given maps f and g are matrices over O_{Y,y}. P is supported in [0,d] and Q in {i}, so only finitely many entries and commutativity equations are needed. Uses [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each matrix entry use the stalk representation criterion to choose a section near y, and intersect these finitely many neighbourhoods. For each chain commutativity equation take the difference of its two matrix expressions. Every entry has zero germ because f and g are chain maps. The germ equality criterion supplies a smaller neighbourhood for each entry. Intersect the finite family of these neighbourhoods. Uses [def-weil-pbc-module-stalk].",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The represented matrices define fV and gV on this intersection. Outside the support there is a zero source or target, so the components and commutativity equations are uniquely determined. Pullback-composition, V.fromSpecStalkOfMem_ι and restriction-pullback comparison give the isomorphisms eP and eQ. Entrywise representation of the given f and g gives the two exact conjugacy equations. Uses [def-weil-pbc-free-module], [lem-weil-pbc-open-immersion-module-pullback-restriction].",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Expanded from lem-pc-finite-free-stalk-homotopy-spread, proof steps 1 and 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chain map between bounded finite free complexes over a scheme stalk extends to an open neighbourhood",
+   "results": "AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.spread_out_of_isGermInjective'; ModuleCat.Tilde.toOpen_germ; ModuleCat.Tilde.toOpen_germ_apply; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; ModuleCat.Tilde.exists_const; AlgebraicGeometry.spread_out_of_isGermInjective",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv, AlgebraicGeometry.Scheme.fromSpecStalk",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*homotopy|homotopy.*stalk|exists.*lift.*[Cc]omplex",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean; Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean; Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean; Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pair of chain maps between a bounded finite free complex and a single finite free complex over a scheme stalk extends to an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, extension of finite basis changes to a neighbourhood: lift prescribed chain-map coefficients and impose chain commutativity",
+   "via": [
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkChainMapPairLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_chainMap_pair_of_stalk",
+  "statement": "theorem exists_restrict_chainMap_pair_of_stalk\n    {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)\n    (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)\n    (hfree : ∀ n : ℤ, ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (i : ℤ) (r : ℕ) (y : Y)\n    (f : (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P) ⟶\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj\n        ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))))\n    (g : (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj\n        ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))) ⟶\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P)) :\n    ∃ (V : Y.Opens) (hyV : y ∈ V),\n      let R := (restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)\n      let S := (Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let T := (Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let Q := ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))\n      ∃ (eP : S.obj (R.obj P) ≅ T.obj P) (eQ : S.obj (R.obj Q) ≅ T.obj Q)\n        (fV : R.obj P ⟶ R.obj Q) (gV : R.obj Q ⟶ R.obj P),\n        S.map fV = eP.hom ≫ f ≫ eQ.inv ∧ S.map gV = eQ.hom ≫ g ≫ eP.inv",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T161505-L-2649494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T161505-L-2649494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

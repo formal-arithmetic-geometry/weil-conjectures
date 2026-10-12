@@ -15,26 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood of y, and bases of the finite free terms. Over Spec(O_{Y,y}), the maps in the given equivalence and the two contracting homotopies are matrices over O_{Y,y}. P has finite support in [0,d] and the single complex has support {i}; hence only finitely many matrix coefficients occur.",
-   "uses": [],
+   "text": "Lift the prescribed chain maps e.hom and e.inv using lem-pc-finite-free-stalk-chain-map-pair-lift. Obtain V containing y, f and g on the restricted complexes, and eP,eQ identifying their stalk pullbacks with the original stalk complexes, with exact conjugacy equations.",
+   "uses": [
+    "lem-pc-finite-free-stalk-chain-map-pair-lift"
+   ],
    "elementary": false
   },
   {
-   "text": "Represent every coefficient by a section on a neighbourhood of y, then intersect this finite family of opens. The chain-map equations and both contracting-homotopy identities are finitely many entrywise equalities, since the complexes are bounded and all terms are finite free. Each equality holds after taking the germ at y, so the equality criterion for a stalk gives a smaller neighbourhood on which it holds. Intersect the finitely many smaller neighbourhoods.",
+   "text": "Precompose and postcompose the two homotopies of e by eP.hom/eP.inv and eQ.hom/eQ.inv. The conjugacy equations, functoriality, and cancellation of inverse isomorphisms identify them with homotopies from the pullbacks of f;g and g;f to the pullbacks of the identities.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-finite-free-stalk-homotopy-pair-shrink to the fixed endomorphism pairs (f;g,id) and (g;f,id). Obtain W≤V containing y and homotopies between their restrictions.",
+   "uses": [
+    "lem-pc-finite-free-stalk-homotopy-pair-shrink"
+   ],
    "elementary": false
   },
   {
-   "text": "On the resulting open V the represented matrices define chain maps and homotopies for the restricted complexes. Outside the finite support all components are unique maps from or to zero objects; the chain and homotopy equations there are automatic. The two homotopy identities give the desired equivalence. This argument uses the actual given local-ring homotopy equivalence, and uses neither residue cohomology nor a change of base.",
+   "text": "Use the restrictions of f and g and the two homotopies to construct HomotopyEquiv on the twice restricted complexes. The natural isomorphism restrictFunctorCongr(homOfLE_ι).symm followed by restrictFunctorComp, mapped to complexes, identifies restriction first to V and then to W with direct restriction to W. Transport this homotopy equivalence across those two complex isomorphisms.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-finite-free-stalk-chain-map-pair-lift",
+  "lem-pc-finite-free-stalk-homotopy-pair-shrink"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation"
+  "place": "Finite matrix extension argument decomposed into prescribed chain-map lifting and shrinking of homotopies; categorical assembly checked in Lean by U1"
  },
  "mathlib_searches": [
   {
@@ -121,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T153011-L-2351158",
+  "landing": "20261012T161505-L-2649494",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

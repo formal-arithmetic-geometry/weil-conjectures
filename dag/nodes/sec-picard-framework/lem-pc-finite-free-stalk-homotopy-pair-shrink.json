@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-finite-free-stalk-homotopy-pair-shrink",
+ "kind": "statement",
+ "title": "Shrinking to spread homotopies of fixed endomorphisms",
+ "statement": "Let Y,P,d,i,r,y,Q be as in the finite-free stalk chain-map lifting statement:\nY is a scheme [def-pc-scheme], P a cochain complex [def-pc-derived-category] of finite\nfree modules [def-weil-pbc-free-module] supported in [0,d], and Q=O_Y^r in degree i.\nFix an open V containing y. Let a,b be any two endomorphisms of P|V and c,e any two\nendomorphisms of Q|V. Let S be termwise pullback [def-pc-derived-pullback] along\nV.fromSpecStalkOfMem y hyV. If S(a) is homotopic to S(b) and S(c) to S(e), then there\nis an open W contained in V and containing y such that the restrictions of a,b to W\nare homotopic and the restrictions of c,e to W are homotopic. Both pairs of maps are\nfixed before shrinking; they need not be composites or identities.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix homotopy identities after shrinking"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the two assumed homotopies after pullback along V.fromSpecStalkOfMem, and choose an affine neighbourhood of y inside V with finite termwise bases. Their components are matrices over O_{Y,y}. Only components in the reverse differential relation can be nonzero; bounded support makes the list finite. Uses [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent every homotopy coefficient by a section on a neighbourhood inside V. Intersect this finite family. For each degree in the supports, compare a with dh+hd+b, and c with dk+kd+e. These are finitely many matrix-entry equations for the fixed maps. Each has equal germs by the assumed stalk homotopies; the germ equality criterion gives a smaller neighbourhood for each. Intersect them to get W≤V containing y. Uses [def-weil-pbc-module-stalk].",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The represented reverse-degree components, with zero components elsewhere, satisfy the Homotopy.zero fields. The entrywise equations give the Homotopy.comm fields in the finite supports. Outside these supports equality is automatic because the terms are zero objects. Thus these are actual homotopies of the restrictions of the specified endomorphisms. Uses [def-weil-pbc-free-module], [lem-weil-pbc-open-immersion-module-pullback-restriction].",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Expanded from lem-pc-finite-free-stalk-homotopy-spread, proof steps 2 and 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy.*(stalk|shrink|restrict)|stalk.*homotopy|exists_restrict_chainMap",
+   "results": "Mathlib/Topology/Homotopy/Basic.lean; Mathlib/Topology/Homotopy/Lifting.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy between specified endomorphisms of bounded finite free complexes over a scheme stalk extends after shrinking an open neighbourhood",
+   "results": "AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant; ComplexShape.QFactorsThroughHomotopy_of_exists_prev; AlgebraicGeometry.spread_out_of_isGermInjective'; AlgebraicGeometry.exists_lift_of_germInjective; instQFactorsThroughHomotopyDown; Homotopy.ofExtend_extend; Homotopy.extendEquiv; AlgebraicGeometry.exists_lift_of_germInjective_aux",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, AlgebraicGeometry.Scheme.fromSpecStalk",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopies between fixed endomorphisms of bounded finite free complexes spread from a stalk to a smaller open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, extension of finite basis changes to a neighbourhood: extend homotopy coefficients and shrink for the two homotopy identities",
+   "via": [
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkHomotopyPairShrink.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_shrink_homotopy_pair_of_stalk",
+  "statement": "theorem exists_shrink_homotopy_pair_of_stalk\n    {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)\n    (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)\n    (hfree : ∀ n : ℤ, ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (i : ℤ) (r : ℕ) (y : Y)\n    (V : Y.Opens) (hyV : y ∈ V)\n    (a b : (((restrictFunctor V.ι).mapHomologicalComplex _).obj P) ⟶\n      (((restrictFunctor V.ι).mapHomologicalComplex _).obj P))\n    (c e : (((restrictFunctor V.ι).mapHomologicalComplex _).obj\n      ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))) ⟶\n      (((restrictFunctor V.ι).mapHomologicalComplex _).obj\n      ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))))\n    (hP : Nonempty (Homotopy\n      (((Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex _).map a)\n      (((Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex _).map b)))\n    (hQ : Nonempty (Homotopy\n      (((Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex _).map c)\n      (((Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex _).map e))) :\n    ∃ (W : Y.Opens) (hWV : W ≤ V), y ∈ W ∧\n      Nonempty (Homotopy\n        (((restrictFunctor (Y.homOfLE hWV)).mapHomologicalComplex _).map a)\n        (((restrictFunctor (Y.homOfLE hWV)).mapHomologicalComplex _).map b)) ∧\n      Nonempty (Homotopy\n        (((restrictFunctor (Y.homOfLE hWV)).mapHomologicalComplex _).map c)\n        (((restrictFunctor (Y.homOfLE hWV)).mapHomologicalComplex _).map e))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T161505-L-2649494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T161505-L-2649494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
