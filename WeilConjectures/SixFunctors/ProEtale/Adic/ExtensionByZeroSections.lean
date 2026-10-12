@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 
 Let `j : U ⟶ X` be an open immersion and `G` a sheaf of `ℚ̄_ℓ,U`-modules. A global section `a`
 of the extension by zero `j_! G` vanishes near every point `z` outside `U`: its pullback to
-`Spec κ(z)` vanishes (`AlgebraicGeometry.ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek`),
+`Spec κ(z)` vanishes
+(`AlgebraicGeometry.ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek`),
 so `a` vanishes on a weakly étale neighbourhood `V` of a point over `z`
 (`AlgebraicGeometry.ProEtale.exists_mem_precoverage_map_eq_zero`). Weakly étale morphisms lift
 generizations, so `V` also has a point over every generization `x` of `z`, and `a` vanishes at
@@ -58,7 +59,8 @@ lemma globalSectionsToUpperStar_app_eq_zero_of_map_eq_zero
   set g := t ≫ V.hom
   set P := MorphismProperty.Over.pullback @WeaklyEtale ⊤ g
   let σ : ProEt.mk (𝟙 Z) ⟶ P.obj V :=
-    MorphismProperty.Over.homMk (pullback.lift t (𝟙 Z) (Category.id_comp _).symm) (by simp [P]) trivial
+    MorphismProperty.Over.homMk (pullback.lift t (𝟙 Z) (Category.id_comp _).symm) (by simp [P])
+      trivial
   have hσ : (overPullbackObjMkIdIso g).inv = σ ≫ P.map f :=
     (IsTerminal.ofIso (ProEt.isTerminalMkId Z) (overPullbackObjMkIdIso g).symm).hom_ext _ _
   set a' := ((Sheaf.ΓNatIsoSheafSections _ _ (ProEt.isTerminalMkId W)).hom.app F) a
@@ -71,7 +73,8 @@ lemma globalSectionsToUpperStar_app_eq_zero_of_map_eq_zero
     ((Sheaf.ΓNatIsoSheafSections _ _ (ProEt.isTerminalMkId W)).hom.naturality η)
   simp only [ConcreteCategory.comp_apply] at hΓ
   rw [globalSectionsToUpperStar_app, globalSectionsLowerStarIso_hom_app',
-    ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, hσ, op_comp, Functor.map_comp,
+    ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, hσ,
+    op_comp, Functor.map_comp,
     ConcreteCategory.comp_apply]
   erw [hΓ, hu, map_zero, map_zero]
 
@@ -100,7 +103,8 @@ theorem exists_globalSectionsToUpperStar_eq_zero_of_specializes {G : AdicSheaf l
   have hg : Set.range j.base ∩ Set.range g.base = ∅ := by
     rw [range_fromSpecResidueField, Set.inter_singleton_eq_empty]
     exact hz
-  have hzero : IsZero ((g)^*ᵃ[l].obj M) := isZero_adicUpperStar_adicOpenImmersionLowerShriek j g hg G
+  have hzero : IsZero ((g)^*ᵃ[l].obj M) :=
+    isZero_adicUpperStar_adicOpenImmersionLowerShriek j g hg G
   set a' := ((Sheaf.ΓNatIsoSheafSections _ _ (ProEt.isTerminalMkId X)).hom.app M.X) a
   have hs : ((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g).unit.app M.X).hom.app
       (op (ProEt.mk (𝟙 X))) a' = 0 := by

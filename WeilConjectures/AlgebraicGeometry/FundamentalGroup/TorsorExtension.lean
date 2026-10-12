@@ -234,8 +234,10 @@ section Algebra
 
 variable {A : Type*} [AddCommGroup A]
 
+omit [AddCommGroup A] in
 /-- A function on `ℤ/m` invariant under the shift by `-1` is constant. -/
-lemma apply_eq_apply_zero_of_forall_sub_one {F : ULift.{u + 1} (ZMod m) → A} (h : ∀ a, F (a - 1) = F a)
+lemma apply_eq_apply_zero_of_forall_sub_one {F : ULift.{u + 1} (ZMod m) → A}
+    (h : ∀ a, F (a - 1) = F a)
     (a : ULift.{u + 1} (ZMod m)) : F a = F 0 := by
   have key (k : ℕ) : F ⟨-(k : ZMod m)⟩ = F 0 := by
     induction k with
@@ -253,10 +255,12 @@ lemma apply_eq_apply_zero_of_forall_sub_one {F : ULift.{u + 1} (ZMod m) → A} (
 noncomputable def zmodChar (c : A) (hc : m • c = 0) : ZMod m →+ A :=
   ZMod.lift m ⟨zmultiplesHom A c, by simpa [natCast_zsmul] using hc⟩
 
+omit [NeZero m] in
 lemma zmodChar_one (c : A) (hc : m • c = 0) : zmodChar c hc 1 = c := by
   have := ZMod.lift_coe m ⟨zmultiplesHom A c, by simpa [natCast_zsmul] using hc⟩ 1
   simpa [zmodChar] using this
 
+omit [NeZero m] in
 lemma nsmul_zmodChar (c : A) (hc : m • c = 0) (k : ZMod m) : m • zmodChar c hc k = 0 := by
   rw [← map_nsmul, nsmul_eq_mul, ZMod.natCast_self, zero_mul, map_zero]
 

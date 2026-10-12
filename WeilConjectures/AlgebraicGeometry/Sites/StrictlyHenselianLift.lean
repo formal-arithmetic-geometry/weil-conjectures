@@ -115,7 +115,9 @@ lemma surjective_residueFieldMap_of_comp_eq_closedGeometricPoint {Y : Scheme.{u}
     refine ⟨((Spec (.of A)).residueFieldCongr e).inv z, ?_⟩
     rw [he, CommRingCat.comp_apply]
     convert hz
-    all_goals first | rfl | exact ConcreteCategory.congr_hom ((Spec (.of A)).residueFieldCongr e).inv_hom_id z
+    all_goals first
+      | rfl
+      | exact ConcreteCategory.congr_hom ((Spec (.of A)).residueFieldCongr e).inv_hom_id z
   have hd : Function.Bijective (descResidueField (stalkClosedPointTo y)) := by
     refine ⟨(descResidueField (stalkClosedPointTo y)).hom.injective, fun c ↦ ?_⟩
     obtain ⟨z, rfl⟩ := hc c
@@ -188,7 +190,7 @@ theorem exists_section_apply_eq_of_isStrictlyHenselianLocalRing {Y : Scheme.{u}}
         simp only [Ideal.mem_comap, IsLocalRing.mem_maximalIdeal, mem_nonunits_iff]
         exact (isUnit_map_iff e.symm b).not
       rw [he]
-      exact Localization.AtPrime.comap_maximalIdeal
+      exact Localization.AtPrime.under_maximalIdeal
     rw [hpt]
     exact hV.fromSpec_primeIdealOf ⟨y, hyV⟩
 

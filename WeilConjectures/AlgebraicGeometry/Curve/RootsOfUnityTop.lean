@@ -73,7 +73,6 @@ lemma ker_picDegreeMod [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X]
     have h₀ : L.toMul * (L₁ ^ m)⁻¹ ∈ picardZero k X := by
       rw [MonoidHom.mem_ker, map_mul, map_inv, map_pow, hL₁, ← ofAdd_toAdd (picDegreeHom k X _),
         hd, ← ofAdd_nsmul, ← ofAdd_neg, ← ofAdd_add, ofAdd_eq_one, nsmul_eq_mul]
-      push_cast
       ring
     obtain ⟨L₂, hL₂⟩ := surjective_pow_picardZero (k := k) (X := X) m hm ⟨_, h₀⟩
     refine ⟨Additive.ofMul (L₁ * L₂.1), ?_⟩
@@ -89,7 +88,8 @@ lemma ker_picDegreeMod [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X]
 
 /-! ### The Kummer identifications in degrees one and two -/
 
-omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+  [IsAlgClosed k] in
 /-- An integer which is nonzero in `k` is a unit on every `k`-scheme. -/
 lemma isUnit_natCast_appTop (m : ℕ) (hm : (m : k) ≠ 0) : IsUnit (m : Γ(X, ⊤)) := by
   simpa using hm.isUnit.map ((ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom
@@ -112,7 +112,8 @@ lemma injective_sheafHMap_kernelι_one (m : ℕ) (hm : (m : k) ≠ 0) :
     exact ⟨Additive.ofMul v, by simp [← ofMul_pow, hv]⟩
   exact hu
 
-omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+  [IsAlgClosed k] in
 /-- The image of `H¹(X, μ_m) ⟶ H¹(X, 𝔾ₘ) ≅ Pic(X)` is the `m`-torsion. -/
 lemma mem_torsionBy_iff_exists_sheafHMap_kernelι_one (m : ℕ) (hm : (m : k) ≠ 0)
     (L : Additive X.Pic) :
@@ -135,15 +136,18 @@ canonical identification `H¹(X, 𝔾ₘ) ≅ Pic(X)`
 (`AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`). -/
 noncomputable def kummerTorsionEquiv (m : ℕ) (hm : (m : k) ≠ 0) :
     Sheaf.H (X.rootsOfUnitySheaf m) 1 ≃+ AddSubgroup.torsionBy (Additive X.Pic) (m : ℤ) :=
-  (AddMonoidHom.ofInjective (f := ((Pic.toCohomologicalPicardGroupAddEquiv X).symm.toAddMonoidHom.comp
-    (Sheaf.H.map (kernel.ι (m • 𝟙 X.gmSheaf)) 1))) ((Pic.toCohomologicalPicardGroupAddEquiv
-      X).symm.injective.comp (injective_sheafHMap_kernelι_one m hm))).trans
+  (AddMonoidHom.ofInjective
+    (f := ((Pic.toCohomologicalPicardGroupAddEquiv X).symm.toAddMonoidHom.comp
+      (Sheaf.H.map (kernel.ι (m • 𝟙 X.gmSheaf)) 1)))
+    ((Pic.toCohomologicalPicardGroupAddEquiv X).symm.injective.comp
+      (injective_sheafHMap_kernelι_one m hm))).trans
     (AddEquiv.addSubgroupCongr (by
       ext L
       rw [mem_torsionBy_iff_exists_sheafHMap_kernelι_one m hm]
       rfl))
 
 omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- The Kummer identification sends a class to its image in `Pic(X)`. -/
 lemma coe_kummerTorsionEquiv_apply (m : ℕ) (hm : (m : k) ≠ 0)
     (x : Sheaf.H (X.rootsOfUnitySheaf m) 1) :
     (kummerTorsionEquiv m hm x : Additive X.Pic) = (Pic.toCohomologicalPicardGroupAddEquiv X).symm
@@ -171,7 +175,8 @@ lemma surjective_picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) :
   obtain ⟨z, hz⟩ := (hαβ y).1 (Subsingleton.elim _ _)
   exact ⟨(Pic.toCohomologicalPicardGroupAddEquiv X).symm z, by simp [picToSheafHTwo, hz]⟩
 
-omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+  [IsAlgClosed k] in
 /-- The kernel of the Kummer map to `H²(X, μ_m)` consists of the `m`-th multiples. -/
 lemma picToSheafHTwo_eq_zero_iff (m : ℕ) (hm : (m : k) ≠ 0) (L : Additive X.Pic) :
     picToSheafHTwo m hm L = 0 ↔ ∃ L', (m : ℤ) • L' = L := by
@@ -188,6 +193,7 @@ lemma picToSheafHTwo_eq_zero_iff (m : ℕ) (hm : (m : k) ≠ 0) (L : Additive X.
   · rintro ⟨L', rfl⟩
     exact ⟨Pic.toCohomologicalPicardGroupAddEquiv X L', by rw [map_zsmul]⟩
 
+omit [IsAlgClosed k] in
 /-- The kernel of the Kummer map to `H²(X, μ_m)` has degree divisible by `m`. -/
 lemma ker_picToSheafHTwo_le (m : ℕ) (hm : (m : k) ≠ 0) :
     (picToSheafHTwo (X := X) m hm).ker ≤ (picDegreeMod (k := k) (X := X) m).ker := by

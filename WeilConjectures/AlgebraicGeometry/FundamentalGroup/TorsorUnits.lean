@@ -317,7 +317,7 @@ lemma pushforwardGmUnits_add (x y : t.pushforwardGm.obj.obj (op U)) :
 
 lemma injective_pushforwardGmUnits :
     Function.Injective (t.pushforwardGmUnits (U := U)) :=
-  fun x y h ↦ ULift.ext _ _ (Additive.toMul.injective h)
+  fun _ _ h ↦ ULift.ext _ _ (Additive.toMul.injective h)
 
 lemma pushforwardGmUnits_translate (b : M) (x : t.pushforwardGm.obj.obj (op U)) :
     (t.pushforwardGmUnits ((t.pushforwardGmTranslate b).hom.app (op U) x) :

@@ -56,7 +56,8 @@ lemma isSheaf_uliftYoneda (P : Y.FiniteEtale) :
   ((isFiniteLocallyConstant_yoneda_and_exists_iso Y).1 P.obj.left P.obj.hom).fst
 
 /-- The sheaf of sections `U ↦ Hom_Y(U, P)` of a finite étale `Y`-scheme `P`. -/
-noncomputable abbrev sectionsSheaf (P : Y.FiniteEtale) : Sheaf Y.smallEtaleTopology (Type (u + 1)) :=
+noncomputable abbrev sectionsSheaf (P : Y.FiniteEtale) :
+    Sheaf Y.smallEtaleTopology (Type (u + 1)) :=
   ⟨uliftYoneda.{u + 1}.obj P.obj, isSheaf_uliftYoneda P⟩
 
 /-- Blueprint `thm-galois-lc-etale`: the sheaf of sections of a finite étale `Y`-scheme is
@@ -227,7 +228,8 @@ noncomputable abbrev stalk (F : Y.FiniteLocallyConstant) : Type (u + 1) :=
   (pointSmallEtale s).sheafFiber.obj F.obj
 
 /-- The map on stalks induced by a morphism of finite locally constant sheaves of sets. -/
-noncomputable abbrev stalkMap {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') : stalk s F → stalk s F' :=
+noncomputable abbrev stalkMap {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') :
+    stalk s F → stalk s F' :=
   (pointSmallEtale s).sheafFiber.map f.hom
 
 lemma stalkMap_comp {F F' F'' : Y.FiniteLocallyConstant} (f : F ⟶ F') (f' : F' ⟶ F'')
@@ -288,6 +290,9 @@ geometric fibre of the finite étale `Y`-scheme representing `F`. -/
 noncomputable def smul {F : Y.FiniteLocallyConstant} (g : G) (x : stalk s F) : stalk s F :=
   (repStalkEquiv s F).symm (ULift.up (g • (repStalkEquiv s F x).down))
 
+omit [ConnectedSpace Y] in
+/-- The action on the stalk, read through any representing finite étale scheme, is the action
+on its geometric fibre. -/
 lemma isoStalkEquiv_smul {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
     (i : F ≅ (sectionsFunctor Y).obj P) (g : G) (x : stalk s F) :
     isoStalkEquiv s i (smul s G g x) = ULift.up (g • (isoStalkEquiv s i x).down) := by
@@ -301,6 +306,8 @@ lemma isoStalkEquiv_smul {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
   unfold smul
   rw [Equiv.apply_symm_apply, IsNaturalSMul.naturality]
 
+omit [ConnectedSpace Y] in
+/-- Morphisms of finite locally constant sheaves induce equivariant maps of stalks. -/
 lemma stalkMap_smul {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') (g : G) (x : stalk s F) :
     stalkMap s f (smul s G g x) = smul s G g (stalkMap s f x) := by
   obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
@@ -310,16 +317,22 @@ lemma stalkMap_smul {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') (g : G) (x :
   rw [isoStalkEquiv_smul, isoStalkEquiv_stalkMap s _ _ f φ h,
     isoStalkEquiv_stalkMap s _ _ f φ h, isoStalkEquiv_smul, IsNaturalSMul.naturality]
 
+omit [ConnectedSpace Y] [IsNaturalSMul (FiniteEtale.fiber s) G] in
+/-- The identity acts trivially on stalks. -/
 lemma one_smul {F : Y.FiniteLocallyConstant} (x : stalk s F) : smul s G 1 x = x := by
   unfold smul
   rw [_root_.one_smul]
   exact (repStalkEquiv s F).symm_apply_apply x
 
+omit [ConnectedSpace Y] [IsNaturalSMul (FiniteEtale.fiber s) G] in
+/-- The action on stalks is compatible with multiplication. -/
 lemma mul_smul {F : Y.FiniteLocallyConstant} (g h : G) (x : stalk s F) :
     smul s G (g * h) x = smul s G g (smul s G h x) := by
   unfold smul
   rw [Equiv.apply_symm_apply, SemigroupAction.mul_smul]
 
+omit [ConnectedSpace Y] in
+/-- The action on the stalk of the sheaf of sections of `P` is the action on the fibre of `P`. -/
 lemma smul_sectionsFunctor (P : Y.FiniteEtale) (g : G)
     (x : stalk s ((sectionsFunctor Y).obj P)) :
     sheafFiberSectionsSheafEquiv s P (smul s G g x) =
@@ -348,6 +361,7 @@ section Fundamental
 variable [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [IsFundamentalGroup (FiniteEtale.fiber s) G]
 
+omit [IsNaturalSMul (FiniteEtale.fiber s) G] in
 open scoped FintypeCatDiscrete in
 /-- Blueprint `lem-galois-action-continuous`: the action of `π₁(Y, s)` on the stalk of a finite
 locally constant sheaf of sets is continuous, i.e. every stabilizer is open. -/
@@ -356,7 +370,7 @@ lemma isOpen_setOf_smul_eq {F : Y.FiniteLocallyConstant} (x : stalk s F) :
   have : {g : G | smul s G g x = x} =
       (MulAction.stabilizer G (repStalkEquiv s F x).down : Set G) := by
     ext g
-    simp only [Set.mem_setOf_eq, SetLike.mem_coe, MulAction.mem_stabilizer_iff]
+    simp only [Set.mem_ofPred_eq, SetLike.mem_coe, MulAction.mem_stabilizer_iff]
     constructor
     · intro h
       have := congrArg (fun y ↦ (repStalkEquiv s F y).down) h
@@ -368,6 +382,7 @@ lemma isOpen_setOf_smul_eq {F : Y.FiniteLocallyConstant} (x : stalk s F) :
   rw [this]
   exact stabilizer_isOpen G _
 
+omit [IsNaturalSMul (FiniteEtale.fiber s) G] in
 /-- The stalk functor is full onto `π₁(Y, s)`-equivariant maps: every equivariant map between
 the stalks of two finite locally constant sheaves of sets is induced by a morphism of sheaves. -/
 lemma exists_stalkMap_eq {F F' : Y.FiniteLocallyConstant} (t : stalk s F → stalk s F')

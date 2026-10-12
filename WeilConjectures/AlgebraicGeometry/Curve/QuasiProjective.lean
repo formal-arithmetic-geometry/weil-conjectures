@@ -197,7 +197,8 @@ lemma comap_ne_maximalIdeal_of_notMem [IsIntegral X] [X.IsSeparated] {U : X.Open
     rw [← Spec.map_comp_assoc, ← Spec.map_comp_assoc, ← CommRingCat.ofHom_comp,
       ← CommRingCat.ofHom_comp, hα, hβ, CommRingCat.ofHom_hom]
     exact (hU.fromSpecStalk_eq_fromSpecStalk hη).trans
-      (Scheme.SpecMap_stalkSpecializes_fromSpecStalk ((genericPoint_spec X).specializes trivial)).symm
+      (Scheme.SpecMap_stalkSpecializes_fromSpecStalk
+        ((genericPoint_spec X).specializes trivial)).symm
   let z : Spec (CommRingCat.of R) := ⟨P, inferInstance⟩
   have h₁ : (Spec.map (CommRingCat.ofHom α) ≫ hU.fromSpec) z ∈ U := by
     rw [Scheme.Hom.comp_apply]
@@ -261,7 +262,7 @@ theorem exists_forall_isIntegral_adjoin_singleton {k A : Type*} [Field k] [CommR
     rw [Set.mem_singleton_iff, hi]
     simp [g, i.pos]
   refine ⟨g, fun a ↦ ?_⟩
-  letI := φ.toRingHom.toAlgebra
+  let := φ.toRingHom.toAlgebra
   have ha : IsIntegral (MvPolynomial (Fin d) k) a := hfin.to_isIntegral a
   exact ha.map_of_comp_eq ((Subalgebra.inclusion hle).toRingHom.comp φ.rangeRestrict.toRingHom)
     (RingHom.id A) (RingHom.ext fun _ ↦ rfl)
