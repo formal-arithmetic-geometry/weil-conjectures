@@ -32,140 +32,44 @@
  ],
  "proof": [
   {
-   "text": "*Lifts with the same degree-$0$ component give the same map.* Let $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$ be an injective resolution [def-sp-injective-resolutions] with $\\mathcal J^n=0$ for $n<0$, $\\mathcal J'^\\bullet$ a complex of injective $\\mathcal O_Y$-modules with $\\mathcal J'^n=0$ for $n<0$, and $\\beta_1,\\beta_2:\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$ morphisms of complexes with $\\beta_1^0\\circ s_{\\mathcal G}=\\beta_2^0\\circ s_{\\mathcal G}$. The augmentation $\\alpha:\\mathcal G[0]\\to\\mathcal J^\\bullet$ ($\\alpha^0=s_{\\mathcal G}$) is a quasi-isomorphism, as $0\\to\\mathcal G\\to\\mathcal J^0\\to\\mathcal J^1\\to\\cdots$ is exact, and $\\beta_1\\alpha=\\beta_2\\alpha$. By [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] $\\beta_1$ and $\\beta_2$ are chain-homotopic, so by [lem-weil-pbc-homotopic-maps-equal-cohomology] applied to the additive functor $\\Gamma(Y,-)$, $H^p(\\Gamma(Y,\\beta_1))=H^p(\\Gamma(Y,\\beta_2))$ for all $p$. The same holds on any scheme in place of $Y$; it is used below on $Y$ and on $Z$. (In particular, in a system of choices of [def-weil-pbc-module-cohomology-fmap] any morphism of complexes $\\beta$ with $\\beta^0\\circ s_{\\mathcal G}=\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi$ is admissible and all give the same $H^p(\\Gamma(Y,\\beta))$.)",
+   "text": "Partial stage-3 proof: independence, general composition, and restriction remain open in moduleCohomologyFMap_independent, moduleCohomologyFMap_comp, and moduleCohomologyFMap_restriction. Their complete comparison-resolution proof plans remain in the declaration docstrings; no new comparison assertion replaces them.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "lem-weil-pbc-homotopic-maps-equal-cohomology",
     "def-weil-pbc-module-cohomology-fmap"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy); literature/stacks-project/homology.tex Lemma 0116 (lemma-map-cohomology-homotopy-cochain); used in Cohomology Remark 01FB (remark-explain-arrow), where beta is chosen by Lemma 013P"
-   }
+   "elementary": false
   },
   {
-   "text": "*(1) for fixed $\\mathcal I^\\bullet$, $\\mathcal J^\\bullet$: independence of $(\\mathcal J'^\\bullet,\\lambda,\\beta)$.* Fix the injective resolutions $s_{\\mathcal F}:\\mathcal F\\to\\mathcal I^\\bullet$, $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$. Since $\\Mod(\\mathcal O_Y)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ gives a complex $\\mathcal J'^\\bullet_0$ of injective $\\mathcal O_Y$-modules, zero in negative degrees, and a quasi-isomorphism $\\lambda_0:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet_0$ which is a monomorphism in every degree; complete it by an admissible $\\beta_0$ to a system $C_0$ [def-weil-pbc-module-cohomology-fmap]. Let $C_1=(\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet_1,\\lambda_1,\\beta_1)$ be any system with the same $\\mathcal I^\\bullet,\\mathcal J^\\bullet$. By [lem-weil-pbc-lift-along-injective-quasi-iso] ($K=h_*\\mathcal I^\\bullet$, $L=\\mathcal J'^\\bullet_0$, $\\alpha=\\lambda_0$, $\\gamma=\\lambda_1$; all bounded below) there is a morphism of complexes $c:\\mathcal J'^\\bullet_0\\to\\mathcal J'^\\bullet_1$ with $c\\lambda_0=\\lambda_1$. Then $(c\\beta_0)^0s_{\\mathcal G}=c^0\\lambda_0^0h_*(s_{\\mathcal F})\\varphi=\\lambda_1^0h_*(s_{\\mathcal F})\\varphi$, so by Step 1 $H^p(\\Gamma(Y,\\beta_1))=H^p(\\Gamma(Y,c))H^p(\\Gamma(Y,\\beta_0))$. Applying $\\Gamma(Y,-)$ to $c\\lambda_0=\\lambda_1$ gives $H^p(\\Gamma(Y,c))H^p(\\mu_0)=H^p(\\mu_1)$, where $\\mu_i=\\Gamma(Y,\\lambda_i)$ are quasi-isomorphisms [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso]; hence $H^p(\\mu_1)^{-1}H^p(\\Gamma(Y,\\beta_1))=H^p(\\mu_0)^{-1}H^p(\\Gamma(Y,c))^{-1}H^p(\\Gamma(Y,c))H^p(\\Gamma(Y,\\beta_0))=H^p(\\mu_0)^{-1}H^p(\\Gamma(Y,\\beta_0))$ ($H^p(\\Gamma(Y,c))=H^p(\\mu_1)H^p(\\mu_0)^{-1}$ is invertible). So $\\varphi^*_{C_1}=\\varphi^*_{C_0}$: $\\varphi^*_C$ depends only on $(\\mathcal I^\\bullet,\\mathcal J^\\bullet)$, and in computing it we may take $\\lambda$ a monomorphism in every degree.",
-   "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-complex-injective-resolution-mono",
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): the choices of I, J, J' and beta; independence not written in Stacks (there the arrow is a morphism in D^+ via Lemma 01F8); argument written by the agent with Derived Categories Lemma 013P (2) (lemma-morphisms-lift) and Lemma 013S"
-   }
-  },
-  {
-   "text": "*(1): independence of $\\mathcal J^\\bullet$.* Let $s_1:\\mathcal G\\to\\mathcal J_1^\\bullet$, $s_2:\\mathcal G\\to\\mathcal J_2^\\bullet$ be two injective resolutions (zero in negative degrees) and fix $\\mathcal I^\\bullet$, $\\mathcal J'^\\bullet$, $\\lambda$. By [lem-weil-pbc-injective-resolution-lift-exists] (with $h=\\mathrm{id}_{\\mathcal G}$) there is a morphism of complexes $b:\\mathcal J_1^\\bullet\\to\\mathcal J_2^\\bullet$ with $b^0s_1=s_2$. By [lem-weil-pbc-derived-functor-map-via-lift] for $v=\\Gamma(Y,-)$ (so $R^pv=H^p(Y,-)$ [pqf-def-cohomology]; $\\Mod(\\mathcal O_Y)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]) and the morphism $\\mathrm{id}_{\\mathcal G}$, $\\mathrm{id}=R^pv(\\mathrm{id}_{\\mathcal G})=(\\iota^p_{\\mathcal J_2})^{-1}H^p(\\Gamma(Y,b))\\iota^p_{\\mathcal J_1}$, i.e. $\\iota^p_{\\mathcal J_2}=H^p(\\Gamma(Y,b))\\iota^p_{\\mathcal J_1}$. If $\\beta_2$ is admissible for $\\mathcal J_2^\\bullet$, then $(\\beta_2b)^0s_1=\\beta_2^0s_2=\\lambda^0h_*(s_{\\mathcal F})\\varphi$, so $\\beta_2b$ is admissible for $\\mathcal J_1^\\bullet$ (Step 1), and $(\\iota^p_{\\mathcal I})^{-1}H^p(\\mu)^{-1}H^p(\\Gamma(Y,\\beta_2b))\\iota^p_{\\mathcal J_1}=(\\iota^p_{\\mathcal I})^{-1}H^p(\\mu)^{-1}H^p(\\Gamma(Y,\\beta_2))\\iota^p_{\\mathcal J_2}$. With Step 2, $\\varphi^*_C$ depends only on $\\mathcal I^\\bullet$.",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "pqf-def-cohomology",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "def-weil-pbc-module-cohomology-fmap"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow) (choice of the resolution G -> J); argument written by the agent; the identification of the cohomology computed by two resolutions is literature/stacks-project/derived.tex Section 'Right derived functors and injective resolutions' (Lemma 05TD)"
-   }
-  },
-  {
-   "text": "*(1): independence of $\\mathcal I^\\bullet$; end of (1).* Let $s_1:\\mathcal F\\to\\mathcal I_1^\\bullet$, $s_2:\\mathcal F\\to\\mathcal I_2^\\bullet$ be two injective resolutions (zero in negative degrees) and fix $\\mathcal J^\\bullet$. By [lem-weil-pbc-injective-resolution-lift-exists] there is $a:\\mathcal I_1^\\bullet\\to\\mathcal I_2^\\bullet$ with $a^0s_1=s_2$, and as in Step 3 ([lem-weil-pbc-derived-functor-map-via-lift] for $\\Gamma(X,-)$ and $\\mathrm{id}_{\\mathcal F}$) $\\iota^p_{\\mathcal I_2}=H^p(\\Gamma(X,a))\\iota^p_{\\mathcal I_1}$, so $H^p(\\Gamma(X,a))$ is invertible. Take any system $C_2=(\\mathcal I_2^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet_2,\\lambda_2,\\beta_2)$ and, by Step 2, a system $C_1=(\\mathcal I_1^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet_1,\\lambda_1,\\beta_1)$ with $\\lambda_1$ a monomorphism in every degree. $h_*(a):h_*\\mathcal I_1^\\bullet\\to h_*\\mathcal I_2^\\bullet$ is a morphism of complexes ($h_*$ is a functor [def-pc-module-pullback]); by [lem-weil-pbc-lift-along-injective-quasi-iso] ($\\alpha=\\lambda_1$, $\\gamma=\\lambda_2h_*(a)$) there is $c:\\mathcal J'^\\bullet_1\\to\\mathcal J'^\\bullet_2$ with $c\\lambda_1=\\lambda_2h_*(a)$. Then $(c\\beta_1)^0s_{\\mathcal G}=c^0\\lambda_1^0h_*(s_1)\\varphi=\\lambda_2^0h_*(a^0s_1)\\varphi=\\lambda_2^0h_*(s_2)\\varphi$, so $c\\beta_1$ is admissible for $C_2$ and by Step 1 $H^p(\\Gamma(Y,\\beta_2))=H^p(\\Gamma(Y,c))H^p(\\Gamma(Y,\\beta_1))$. Since $\\Gamma(Y,h_*(a))=\\Gamma(X,a)$ (definition of $h_*$), $\\Gamma(Y,-)$ applied to $c\\lambda_1=\\lambda_2h_*(a)$ gives $H^p(\\Gamma(Y,c))H^p(\\mu_1)=H^p(\\mu_2)H^p(\\Gamma(X,a))$, with $\\mu_1,\\mu_2$ quasi-isomorphisms [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso]; so $H^p(\\mu_2)^{-1}H^p(\\Gamma(Y,c))=H^p(\\Gamma(X,a))H^p(\\mu_1)^{-1}$ and $\\varphi^*_{C_2}=(\\iota^p_{\\mathcal I_2})^{-1}H^p(\\mu_2)^{-1}H^p(\\Gamma(Y,c))H^p(\\Gamma(Y,\\beta_1))\\iota^p_{\\mathcal J}=(\\iota^p_{\\mathcal I_1})^{-1}H^p(\\Gamma(X,a))^{-1}H^p(\\Gamma(X,a))H^p(\\mu_1)^{-1}H^p(\\Gamma(Y,\\beta_1))\\iota^p_{\\mathcal J}=\\varphi^*_{C_1}$. Together with Steps 2 and 3 (which make $\\varphi^*_C$ a function of $\\mathcal I^\\bullet$ alone), $\\varphi^*_C=\\varphi^*_{C'}$ for any two systems: this is (1).",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-    "def-weil-pbc-module-cohomology-fmap"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow) (choice of F -> I); argument written by the agent with Derived Categories Lemma 013P (2)"
-   }
-  },
-  {
-   "text": "*(2): the composite is a $(k\\circ h)$-map.* For an open $T\\subseteq Z$, $(k_*h_*\\mathcal F)(T)=(h_*\\mathcal F)(k^{-1}T)=\\mathcal F(h^{-1}k^{-1}T)=\\mathcal F((k\\circ h)^{-1}T)=((k\\circ h)_*\\mathcal F)(T)$ with the same restriction maps, and the $\\mathcal O_Z(T)$-module structures agree because $(k\\circ h)^\\sharp_T=h^\\sharp_{k^{-1}T}\\circ k^\\sharp_T$ (composition of morphisms of schemes [def-pc-scheme]); so $k_*h_*\\mathcal F=(k\\circ h)_*\\mathcal F$, likewise $k_*h_*=(k\\circ h)_*$ on morphisms and complexes. $k_*(\\varphi)$ is a morphism of $\\mathcal O_Z$-modules ($k_*$ is a functor $\\Mod(\\mathcal O_Y)\\to\\Mod(\\mathcal O_Z)$ [def-pc-module-pullback]), hence so is $k_*(\\varphi)\\circ\\psi:\\mathcal H\\to(k\\circ h)_*\\mathcal F$.",
-   "uses": [
-    "def-pc-scheme",
-    "def-pc-module-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves on Spaces, Lemma 008E (lemma-pushforward-composition): (g o f)_* = g_* o f_*, as used in literature/stacks-project/cohomology.tex Lemma 01F5 (lemma-higher-direct-images-compose: 'It is clear that g_* o f_* = (g o f)_*')"
-   }
-  },
-  {
-   "text": "*(2): $(k_*(\\varphi)\\circ\\psi)^*=\\varphi^*\\circ\\psi^*$.* Put $\\chi=k_*(\\varphi)\\circ\\psi$. Choose injective resolutions $s_{\\mathcal F}:\\mathcal F\\to\\mathcal I^\\bullet$, $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$, $s_{\\mathcal H}:\\mathcal H\\to\\mathcal K^\\bullet$ (zero in negative degrees). By (1) we may compute: $\\varphi^*$ with $(\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet_1,\\lambda_1,\\beta_1)$, any admissible system; $\\psi^*$ with $(\\mathcal J^\\bullet,\\mathcal K^\\bullet,\\mathcal J''^\\bullet_2,\\lambda_2,\\beta_2)$, $\\lambda_2:k_*\\mathcal J^\\bullet\\to\\mathcal J''^\\bullet_2$; $\\chi^*$ with $(\\mathcal I^\\bullet,\\mathcal K^\\bullet,\\mathcal L^\\bullet,\\lambda_3,\\beta_3)$, $\\lambda_3:(k\\circ h)_*\\mathcal I^\\bullet\\to\\mathcal L^\\bullet$, where $\\lambda_2,\\lambda_3$ are monomorphisms in every degree (Step 2). By [lem-weil-pbc-scheme-modules-enough-injectives] and [lem-weil-pbc-complex-injective-resolution-mono] ($a=0$) choose a quasi-isomorphism $\\varepsilon:k_*\\mathcal J'^\\bullet_1\\to\\mathcal L'^\\bullet$ into a complex of injective $\\mathcal O_Z$-modules zero in negative degrees. By [lem-weil-pbc-lift-along-injective-quasi-iso] there are morphisms of complexes $\\sigma:\\mathcal J''^\\bullet_2\\to\\mathcal L'^\\bullet$ with $\\sigma\\lambda_2=\\varepsilon\\circ k_*(\\beta_1)$ and $\\theta:\\mathcal L^\\bullet\\to\\mathcal L'^\\bullet$ with $\\theta\\lambda_3=\\varepsilon\\circ k_*(\\lambda_1)$ (Step 5: $k_*h_*\\mathcal I^\\bullet=(k\\circ h)_*\\mathcal I^\\bullet$). In degree $0$: $\\sigma^0\\beta_2^0s_{\\mathcal H}=\\sigma^0\\lambda_2^0k_*(s_{\\mathcal G})\\psi=\\varepsilon^0k_*(\\beta_1^0s_{\\mathcal G})\\psi=\\varepsilon^0k_*(\\lambda_1^0)\\,(k\\circ h)_*(s_{\\mathcal F})\\,k_*(\\varphi)\\psi$ and $\\theta^0\\beta_3^0s_{\\mathcal H}=\\theta^0\\lambda_3^0(k\\circ h)_*(s_{\\mathcal F})\\chi=\\varepsilon^0k_*(\\lambda_1^0)(k\\circ h)_*(s_{\\mathcal F})k_*(\\varphi)\\psi$; so by Step 1 (on $Z$) $H^p(\\Gamma(Z,\\sigma\\beta_2))=H^p(\\Gamma(Z,\\theta\\beta_3))$. Let $\\nu=\\Gamma(Z,\\varepsilon):\\Gamma(Y,\\mathcal J'^\\bullet_1)\\to\\Gamma(Z,\\mathcal L'^\\bullet)$, a quasi-isomorphism by [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso] (for $k$, the complex of injectives $\\mathcal J'^\\bullet_1$ and $\\varepsilon$), as are $\\mu_i=\\Gamma(\\cdot,\\lambda_i)$. Applying $\\Gamma(Z,-)$ (with $\\Gamma(Z,k_*(-))=\\Gamma(Y,-)$) to the two defining identities: $H^p(\\Gamma(Z,\\sigma))H^p(\\mu_2)=H^p(\\nu)H^p(\\Gamma(Y,\\beta_1))$ and $H^p(\\Gamma(Z,\\theta))H^p(\\mu_3)=H^p(\\nu)H^p(\\mu_1)$, so $H^p(\\Gamma(Z,\\theta))$ is invertible. Hence $H^p(\\mu_3)^{-1}H^p(\\Gamma(Z,\\beta_3))=H^p(\\mu_3)^{-1}H^p(\\Gamma(Z,\\theta))^{-1}H^p(\\Gamma(Z,\\sigma))H^p(\\Gamma(Z,\\beta_2))=H^p(\\mu_1)^{-1}H^p(\\nu)^{-1}H^p(\\nu)H^p(\\Gamma(Y,\\beta_1))H^p(\\mu_2)^{-1}H^p(\\Gamma(Z,\\beta_2))=H^p(\\mu_1)^{-1}H^p(\\Gamma(Y,\\beta_1))\\cdot H^p(\\mu_2)^{-1}H^p(\\Gamma(Z,\\beta_2))$. Composing with $(\\iota^p_{\\mathcal I})^{-1}$ on the left and $\\iota^p_{\\mathcal K}$ on the right, and inserting $\\iota^p_{\\mathcal J}(\\iota^p_{\\mathcal J})^{-1}$ in the middle, gives $\\chi^*=\\varphi^*\\circ\\psi^*$.",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-complex-injective-resolution-mono",
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Section 01F7: Lemma 01F8 (lemma-functoriality, 'this construction is functorial in the triple') and Remark 01FB; the composition rule is not stated in Stacks; argument written by the agent with Derived Categories Lemma 013P (2) and Lemma 013S"
-   }
-  },
-  {
-   "text": "*(2): the special cases.* (i) For $u:\\mathcal G'\\to\\mathcal G$ on $Y$ apply (2) with $(Z,Y,X)=(Y,Y,X)$, $k=\\mathrm{id}_Y$, $\\psi=u$ (an $\\mathrm{id}_Y$-map, $(\\mathrm{id}_Y)_*\\mathcal G=\\mathcal G$): $(\\varphi\\circ u)^*=\\varphi^*\\circ u^*$, and $u^*=H^p(u)$ by [lem-weil-pbc-module-cohomology-fmap-basic-properties] (3). (ii) For $v:\\mathcal F\\to\\mathcal F'$ on $X$ apply (2) with $(Z,Y,X)=(Y,X,X)$, $k=h$, $\\psi=\\varphi$, and the $\\mathrm{id}_X$-map $v$: $(h_*(v)\\circ\\varphi)^*=v^*\\circ\\varphi^*=H^p(v)\\circ\\varphi^*$ by the same clause (3). (iii) Pullbacks. The maps $f\\mapsto h_*(f)\\circ\\eta^h_{k^*\\mathcal H}$, $\\mathrm{Hom}(h^*k^*\\mathcal H,M)\\to\\mathrm{Hom}(k^*\\mathcal H,h_*M)$, and $g\\mapsto k_*(g)\\circ\\eta^k_{\\mathcal H}$, $\\mathrm{Hom}(k^*\\mathcal H,N)\\to\\mathrm{Hom}(\\mathcal H,k_*N)$, are the adjunction bijections [def-pc-module-pullback]; their composite is $f\\mapsto(k\\circ h)_*(f)\\circ k_*(\\eta^h_{k^*\\mathcal H})\\circ\\eta^k_{\\mathcal H}$ (Step 5), so $c$ exists and is unique. By (2) applied to $\\psi=\\eta^k_{\\mathcal H}$ and $\\varphi=\\eta^h_{k^*\\mathcal H}$ [def-weil-pbc-module-cohomology-fmap] (a), $h^*\\circ k^*=(k_*(\\eta^h_{k^*\\mathcal H})\\circ\\eta^k_{\\mathcal H})^*$; by (ii) with $v=c$, $H^p(c)\\circ h^*\\circ k^*=((k\\circ h)_*(c)\\circ k_*(\\eta^h_{k^*\\mathcal H})\\circ\\eta^k_{\\mathcal H})^*=(\\eta^{k\\circ h}_{\\mathcal H})^*=(k\\circ h)^*$.",
+   "text": "Source naturality: apply the composition clause with k the identity on Y and psi=a. The identity clause of moduleCohomologyFMap_basic_properties identifies the first cohomology map with H(a). On each open set the pushforward identity and composition comparison are identity maps, so extensionality identifies the composite module map with a followed by phi.",
    "uses": [
     "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-    "def-pc-module-pullback",
     "def-weil-pbc-module-cohomology-fmap"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma 01F8 (lemma-functoriality) with f = id, and Section 01F7 ('an f-map ... is a map G -> f_*F, or what is the same thing, a map f^*G -> F'); special cases written by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "*(3).* Let $j_V:V\\to Z$, $j_W:W\\to Y$ be the inclusions; $k\\circ j_W=j_V\\circ k|_W:W\\to Z$. $\\psi|_V$ is well defined: for $T\\subseteq V$ open, $((k|_W)_*(\\mathcal G|_W))(T)=\\mathcal G(k^{-1}T\\cap W)=\\mathcal G(k^{-1}T)$ [lem-weil-pbc-module-restriction-open-immersion-colimits], and the $\\psi_T$ are $\\mathcal O_Z(T)$-linear and compatible with restriction. By [def-weil-pbc-module-cohomology-fmap] (b), $\\mathrm{res}^Y_W=\\rho_{\\mathcal G}^*$ and $\\mathrm{res}^Z_V=\\rho_{\\mathcal H}^*$ for the restriction maps $\\rho_{\\mathcal G}:\\mathcal G\\to j_{W*}(\\mathcal G|_W)$, $\\rho_{\\mathcal H}:\\mathcal H\\to j_{V*}(\\mathcal H|_V)$. By (2), $\\mathrm{res}^Y_W\\circ\\psi^*=(k_*(\\rho_{\\mathcal G})\\circ\\psi)^*$ and $(\\psi|_V)^*\\circ\\mathrm{res}^Z_V=(j_{V*}(\\psi|_V)\\circ\\rho_{\\mathcal H})^*$, both maps of $(k\\circ j_W)$-maps $\\mathcal H\\to(k\\circ j_W)_*(\\mathcal G|_W)$, whose module of sections over $T\\subseteq Z$ open is $\\mathcal G(k^{-1}T\\cap W)$. On $t\\in\\mathcal H(T)$ the first sends $t$ to $\\psi_T(t)|_{k^{-1}T\\cap W}$, the second to $\\psi_{T\\cap V}(t|_{T\\cap V})\\in\\mathcal G(k^{-1}(T\\cap V))=\\mathcal G(k^{-1}T\\cap W)$; these agree because $\\psi$ commutes with the restriction from $T$ to $T\\cap V$. So the two $(k\\circ j_W)$-maps are equal, and so are their maps on $H^p$.",
+   "text": "Target naturality: apply composition with h the identity on X, k the given scheme map, psi=phi, and the identity-scheme map b. Use the same identity clause to replace its cohomology map by H(b); check the pushforward composition comparison componentwise by reflexivity.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Section 01F7 and Remark 01FB; restriction to opens as in Lemma 01E1 (lemma-cohomology-of-open); argument written by the agent"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Pullback composition: unfold the pullback maps as maps of the adjunction units, reassociate, and use moduleCohomologyFMap_comp in reverse. Apply target naturality to c and use the supplied unit equation hc after reassociation. Thus the result follows from the strictly more general composition clause already in this module.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-pc-scheme",
-  "def-sp-injective-resolutions",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-weil-pbc-complex-injective-resolution-mono",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-homotopic-maps-equal-cohomology",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "pqf-def-cohomology"
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8, Remark 01FB; Stacks obtains functoriality in D^+ and states neither the independence of the choices nor the composition rule at the level of the explicit construction; the steps are written by the agent from Derived Categories Lemmas 013P (2) and 013S and Homology Lemma 0116"
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8, Remark 01FB; Stacks obtains functoriality in D^+ and states neither the independence of the choices nor the composition rule at the level of the explicit construction; the steps are written by the agent from Derived Categories Lemmas 013P (2) and 013S and Homology Lemma 0116; U1 second reading: partial Lean realization of the two naturality clauses and pullback composition by Step 7, retaining the other three named holes."
  },
  "mathlib_searches": [
   {
@@ -270,5 +174,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108730",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

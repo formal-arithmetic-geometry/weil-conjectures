@@ -6,13 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
-import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.PQFCohomology
 
 /-! # Functoriality of cohomology maps induced by scheme maps
 
@@ -131,7 +125,15 @@ theorem moduleCohomologyFMap_source_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     (forget₂ _ AddCommGrpCat.{u}).map
       ((RingedSpace.moduleCohomology Y.toRingedSpace p).map a) ≫
         moduleCohomologyFMap h φ p = moduleCohomologyFMap h (a ≫ φ) p := by
-  sorry
+  have hi := (moduleCohomologyFMap_basic_properties (𝟙 Y) a p).2.2.1 Y G' G a
+  have hh := moduleCohomologyFMap_comp h (𝟙 Y) a φ p
+  rw [hi] at hh
+  have he : a ≫ (pushforward (𝟙 Y)).map φ ≫
+      (pushforwardComp h (𝟙 Y)).hom.app F = a ≫ φ := by
+    ext U
+    rfl
+  rw [he] at hh
+  exact hh.symm
 
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
@@ -164,7 +166,15 @@ theorem moduleCohomologyFMap_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
     moduleCohomologyFMap h φ p ≫ (forget₂ _ AddCommGrpCat.{u}).map
       ((RingedSpace.moduleCohomology X.toRingedSpace p).map b) =
         moduleCohomologyFMap h (φ ≫ (pushforward h).map b) p := by
-  sorry
+  have hi := (moduleCohomologyFMap_basic_properties (𝟙 X) b p).2.2.1 X F F' b
+  have hh := moduleCohomologyFMap_comp (𝟙 X) h φ b p
+  rw [hi] at hh
+  have he : φ ≫ (pushforward h).map b ≫
+      (pushforwardComp (𝟙 X) h).hom.app F' = φ ≫ (pushforward h).map b := by
+    ext U
+    rfl
+  rw [he] at hh
+  exact hh.symm
 
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
@@ -208,7 +218,11 @@ theorem moduleCohomologyPullback_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y 
       moduleCohomologyPullback h ((tensorPullback k).obj H) p ≫
       (forget₂ _ AddCommGrpCat.{u}).map
         ((RingedSpace.moduleCohomology X.toRingedSpace p).map c) := by
-  sorry
+  unfold moduleCohomologyPullback
+  rw [← Category.assoc]
+  rw [← moduleCohomologyFMap_comp h k]
+  rw [moduleCohomologyFMap_target_naturality]
+  simp only [Category.assoc, hc]
 
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
