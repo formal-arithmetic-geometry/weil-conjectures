@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-affine-ideal-tensor-sections",
+ "kind": "statement",
+ "title": "Affine ideal tensor sections comparison",
+ "statement": "Let i : Z → X be a closed immersion, U an affine open of X, R a commutative ring, r : R ≃+* Γ(X,U) a ring isomorphism and I = ker(i.app U ∘ r). There exists an r-semilinear equivalence from I tensor_R (R/I) to Γ((pushforward i).obj ((tensorPullback i).obj i.ker.toModules),U), sending a tensor 1 to the adjunction-unit image of every ideal-module section s with inclusion r(a). The objects and adjunction are those of [def-weil-closed-immersion], [def-sbc-closed-immersion-ideal-sheaf], [def-pc-module-pullback], [def-weil-affine-spectrum], [lem-pc-module-pullback-adjunction].",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-affine-spectrum",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 01R3 (2), affine tensor comparison before the identification I tensor_R R/I = I/I²; Schemes, Lemma 01I9 (1)-(2)."
+ },
+ "proof": [
+  {
+   "text": "The ideal module is the kernel of the structure-module map to the closed-subscheme pushforward. Structure modules, closed-immersion pushforwards and kernels are quasi-coherent.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put A = Γ(X,U), V = i⁻¹U, and ρ = i.app U. The closed immersion is affine and ρ is surjective. The section inclusion of the ideal module is injective and has range ker ρ. Transport along r identifies these sections with I, and the first isomorphism theorem identifies Γ(Z,V) with R/I.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_tensorPullback_affine_sections to the ideal module and the affine opens U,V. Transport the comparison along the section identifications from the previous step to obtain the r-semilinear equivalence I tensor_R R/I to pullback sections on V. The pure-tensor formula at b=1 identifies a tensor 1 with the adjunction-unit section. Pushforward on U restricts scalars along ρ, giving the displayed target. This step does not identify the tensor product with the cotangent quotient.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 01R3 (2), with the affine pullback description of Schemes 01I9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ideal.*tensor|tensor.*ideal|conormal",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No full match. Mathlib supplies affine ideal and quotient-ring data but no tensor-pullback ideal-section comparison compatible with this adjunction unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme ideal sheaf sections tensor quotient ring pullback unit comparison",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app; AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; AlgebraicGeometry.Scheme.IdealSheafData.map_ideal'; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map; AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp",
+   "date": "2026-10-12",
+   "verdict": "No full match. Mathlib supplies affine ideal and quotient-ring data but no tensor-pullback ideal-section comparison compatible with this adjunction unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sections of ideal sheaf pulled back along closed immersion are tensor product of ideal with quotient ring compatible with adjunction unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "Service unavailable; no conclusion drawn."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-conormal-sections-existence",
+   "place": "Steps 1–3 of the original affine conormal proof, before the algebraic cotangent identification"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineIdealTensorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineIdealTensorSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_ideal_tensor_sections",
+  "statement": "theorem affine_ideal_tensor_sections {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] :\n      ∀ (U : X.affineOpens) (R : Type v) [CommRing R]\n        (r : R ≃+* Γ(X, U.1)) (I : Ideal R),\n        I = RingHom.ker ((i.app U.1).hom.comp (r : R →+* Γ(X, U.1))) →\n        ∃ e : LinearEquiv (r : R →+* Γ(X, U.1))\n            (σ' := (r.symm : Γ(X, U.1) →+* R)) (I ⊗[R] (R ⧸ I))\n            Γ((pushforward i).obj ((tensorPullback i).obj i.ker.toModules), U.1),\n          ∀ (a : I) (s : Γ(i.ker.toModules, U.1)),\n            i.ker.toModulesι.app U.1 s = r (a : R) →\n            e (a ⊗ₜ[R] (1 : R ⧸ I)) =\n              ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app\n                i.ker.toModules).app U.1 s",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T231639-L-1963396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T231639-L-1963396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

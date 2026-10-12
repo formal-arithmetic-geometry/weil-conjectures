@@ -4,12 +4,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.RingTheory.Ideal.Cotangent
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+import Sheaf.AlgebraicGeometry.AffineIdealTensorSections
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 @[expose] public section
 
@@ -63,6 +59,19 @@ theorem affine_conormal_sections_existence {X Z : Scheme.{u}} (i : Z ⟶ X)
             e (I.toCotangent a) =
               ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
                 i.ker.toModules).app U.1 s := by
-  sorry
+  intro U R _ r I hI
+  obtain ⟨c, hc⟩ := affine_ideal_tensor_sections i U R r I hI
+  let t : (TensorProduct R I (R ⧸ I)) ≃ₗ[R] I.Cotangent :=
+    TensorProduct.tensorQuotEquivQuotSMul I I
+  refine ⟨t.symm.trans c, ?_⟩
+  intro a s hs
+  have ht : t (TensorProduct.tmul R a (1 : R ⧸ I)) = I.toCotangent a := by
+    change TensorProduct.quotTensorEquivQuotSMul I I
+      (TensorProduct.comm R I (R ⧸ I) (TensorProduct.tmul R a (1 : R ⧸ I))) = _
+    rw [TensorProduct.comm_tmul, TensorProduct.quotTensorEquivQuotSMul_mk_one_tmul]
+    rfl
+  change c (t.symm (I.toCotangent a)) = _
+  rw [← ht, t.symm_apply_apply]
+  exact hc a s hs
 
 end AlgebraicGeometry.Scheme.Modules
