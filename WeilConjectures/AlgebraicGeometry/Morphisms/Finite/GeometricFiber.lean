@@ -55,7 +55,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] (y : Spec (.o
 
 /-- The geometric fibre of `f : X ⟶ Y` over the geometric point `y : Spec Ω ⟶ Y`: the geometric
 points `x : Spec Ω ⟶ X` with `x ≫ f = y`. This is a reducible definition so that the
-coercion `t.1` is transparent to tactics. -/
+coercion `t.1` is transparent to tactics (blueprint `def-weil-pbc-geometric-fibre`). -/
 abbrev GeometricFiber : Type u :=
   {x : Spec (.of Ω) ⟶ X // x ≫ f = y}
 
@@ -193,7 +193,8 @@ section Finite
 
 variable [IsFinite f]
 
-/-- **The geometric fibre of a finite morphism is finite.** -/
+/-- **The geometric fibre of a finite morphism is finite**
+(blueprint `def-weil-pbc-geometric-fibre`). -/
 instance GeometricFiber.finite : Finite (GeometricFiber f y) := by
   obtain ⟨Y₀, hY₀, hy, -⟩ :=
     exists_isAffineOpen_mem_and_subset (X := Y) (x := y default) (U := ⊤) trivial

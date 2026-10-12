@@ -73,7 +73,8 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 
 /-- The square isomorphism `g^* ⋙ f'^* ≅ f^* ⋙ g'^*` attached to a commutative square
 `g' ≫ f = f' ≫ g`: both sides are identified with the pullback along the diagonal
-`g' ≫ f = f' ≫ g` by `AlgebraicGeometry.Etale.upperStarComp`. -/
+`g' ≫ f = f' ≫ g` by `AlgebraicGeometry.Etale.upperStarComp`
+(blueprint `def-weil-pbc-cartesian-square`). -/
 noncomputable def Etale.squareUpperStarIso (sq : CommSq g' f' f g) :
     (g)^*[A] ⋙ (f')^*[A] ≅ (f)^*[A] ⋙ (g')^*[A] :=
   (Etale.upperStarComp A f' g (g' ≫ f) sq.w).symm ≪≫ Etale.upperStarComp A g' f
