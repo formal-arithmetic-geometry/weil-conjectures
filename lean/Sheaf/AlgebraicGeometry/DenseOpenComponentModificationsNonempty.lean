@@ -3,6 +3,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.DenseOpenComponentCoproduct
+import Sheaf.AlgebraicGeometry.SigmaDescRestrictIsIso
 
 @[expose] public section
 universe u
@@ -25,6 +27,19 @@ isomorphisms.
     (hν : ∀ i, ∃ U : (C i).Opens, Dense (U : Set (C i)) ∧ IsIso (ν i ∣_ U)) :
     ∃ U : X.Opens, Dense (U : Set X) ∧
       IsIso (CategoryTheory.Limits.Sigma.desc (fun i => ν i ≫ ι i) ∣_ U) := by
-  sorry
+  classical
+  let : NeZero n := ⟨Nat.ne_of_gt hn⟩
+  choose V hV hνV using hν
+  obtain ⟨U, hU, hιU, hUV⟩ :=
+    exists_dense_open_component_coproduct X n C ι hC hinj hcover V hV
+  refine ⟨U, hU, isIso_sigmaDesc_comp_restrict X n C Y ι ν U hιU ?_⟩
+  intro i
+  have h := IsZariskiLocalAtTarget.restrict (P := MorphismProperty.isomorphisms Scheme)
+    (hνV i) ((V i).ι ⁻¹ᵁ (ι i ⁻¹ᵁ U))
+  have h' := (MorphismProperty.arrow_mk_iso_iff (MorphismProperty.isomorphisms Scheme)
+    (morphismRestrictRestrict (ν i) (V i) ((V i).ι ⁻¹ᵁ (ι i ⁻¹ᵁ U)))).mp h
+  change IsIso (ν i ∣_ (V i).ι ''ᵁ ((V i).ι ⁻¹ᵁ (ι i ⁻¹ᵁ U))) at h'
+  rwa [Scheme.Hom.image_preimage_eq_opensRange_inf,
+    Scheme.Opens.opensRange_ι, inf_eq_right.mpr (hUV i)] at h'
 
 end AlgebraicGeometry

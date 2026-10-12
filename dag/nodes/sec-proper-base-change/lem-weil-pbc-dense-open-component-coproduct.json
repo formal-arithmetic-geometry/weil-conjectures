@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-dense-open-component-coproduct",
+ "kind": "statement",
+ "title": "Component coproduct over prescribed dense opens",
+ "statement": "Let X be a reduced scheme [def-pc-reduced-scheme], and let ι_i:C_i→X, indexed by Fin(n), be closed immersions [def-weil-closed-immersion] from integral schemes [def-pc-integral-scheme] whose images enumerate without repetitions the irreducible components [def-weil-irreducible-components]. For dense opens V_i⊆C_i, there is a dense open U⊆X such that the component coproduct morphism [def-weil-pbc-scheme-conventions] restricted to U is an isomorphism and ι_i^{-1}(U)⊆V_i for every i.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAJ, reduction to a dense disjoint union of components; expanded component-open proof in lem-weil-pbc-dense-open-component-modifications, steps 1-3 (Stacks web text checked)"
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Set Z_i = range(ι_i). Let W_i be the complement of the union of Z_j for j ≠ i. Finiteness makes it open. The generic point of Z_i lies in W_i: a containment Z_i ⊆ Z_j forces equality by maximality and then i=j by injectivity. The cover implies W_i ⊆ Z_i.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The restriction C_i ×_X W_i → W_i is a surjective closed immersion into a reduced scheme, hence an isomorphism: on affines the defining ideal lies in the nilradical and is zero. Intersect its source with V_i and transfer the intersection to an open O_i of X. The dense open V_i of integral C_i contains its generic point, so O_i contains the generic point of Z_i.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take U = union of O_i. They are disjoint since W_i excludes every other component. The closure of U contains each component generic point and hence all components; it is X. Only O_i has a nonempty inverse image in C_i, and this inverse image lies in V_i. The maps C_i ×_X U → O_i are isomorphisms. Base change preserves finite scheme coproducts; their coproduct is Sigma.desc ι restricted to U and is an isomorphism. If n=0, the cover forces X empty and U is empty.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAJ, reduction to a dense disjoint union of components; expanded component-open proof in lem-weil-pbc-dense-open-component-modifications, steps 1-3 (Stacks web text checked)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite irreducible components of reduced scheme; coproduct restriction isomorphism",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "component coproduct over prescribed dense opens; isomorphism of restricted coproduct modifications",
+   "results": "sigmaSpec, normalizationOpenCover, and Scheme.Cover.instIsIsoFromGlued only; no direct theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.morphismRestrict, CategoryTheory.IsIso",
+   "results": "instIsIsoSchemeMorphismRestrict and isIso_morphismRestrict_iff_isIso_app; ingredients only.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|sigmaDesc|morphismRestrict|isUniversal_finiteCoproducts",
+   "results": "closure_sUnion_irreducibleComponents_sdiff_singleton, isIso_of_isClosedImmersion_of_surjective, nonempty_isColimit_cofanMk_of and universal coproduct APIs. No combined geometric theorem; the categorical transfer was proved from the universal coproduct APIs.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DenseOpenComponentModificationsNonempty",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "Dense-open componentwise modification in the reduced-curve normalization argument: construction of the disjoint component opens",
+   "via": [
+    "lem-weil-pbc-dense-open-component-modifications-nonempty",
+    "lem-weil-pbc-dense-open-component-modifications",
+    "lem-weil-pbc-reduced-curve-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DenseOpenComponentCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/DenseOpenComponentCoproduct.lean",
+  "declaration": "AlgebraicGeometry.exists_dense_open_component_coproduct",
+  "statement": "theorem exists_dense_open_component_coproduct (X : Scheme.{u}) [IsReduced X] (n : ℕ) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X) (hC : ∀ i, IsIntegral (C i) ∧ IsClosedImmersion (ι i) ∧ Set.range (ι i) ∈ irreducibleComponents X) (hinj : Function.Injective (fun i ↦ Set.range (ι i))) (hcover : ∀ Z ∈ irreducibleComponents X, ∃ i, Set.range (ι i) = Z) (V : ∀ i, (C i).Opens) (hV : ∀ i, Dense (V i : Set (C i))) : ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (CategoryTheory.Limits.Sigma.desc ι ∣_ U) ∧ ∀ i, ι i ⁻¹ᵁ U ≤ V i",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

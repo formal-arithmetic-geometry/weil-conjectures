@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-sigma-desc-restrict-iso",
+ "kind": "statement",
+ "title": "Isomorphism transfer for a restricted component coproduct",
+ "statement": "Let X, C_i and Y_i be schemes [def-weil-pbc-scheme-conventions], indexed by Fin(n), with morphisms ι_i:C_i→X and ν_i:Y_i→C_i, and let U be an open of X. If Sigma.desc ι restricted to U and each ν_i restricted to ι_i^{-1}(U) are isomorphisms, then Sigma.desc (ν_i ≫ ι_i) restricted to U is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAJ, reduction to a dense disjoint union of components; expanded component-open proof in lem-weil-pbc-dense-open-component-modifications, steps 1-3 (Stacks web text checked)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "For p = Sigma.desc ι, restrict the coproduct injections to obtain a_i:(ι_i^{-1}U).toScheme → (p^{-1}U).toScheme. Their squares with the open inclusions are pullbacks: the inverse image identity is (Sigma.ι_i ≫ p)^{-1}U = ι_i^{-1}U. Mathlib FinitaryPreExtensive.isUniversal_finiteCoproducts gives a colimiting cofan. Cofan.nonempty_isColimit_iff_isIso_sigmaDesc implies Sigma.desc a is an isomorphism. Apply the same construction to f = Sigma.desc (ν_i ≫ ι_i) to obtain the comparison b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coproduct of the given restricted ν_i is an isomorphism by Sigma.map_isIso. Verify Sigma.desc b ≫ (f restricted to U) = Sigma.map (restricted ν_i) ≫ Sigma.desc a ≫ (p restricted to U) on each coproduct summand, then cancel U.ι and simplify restrictions. The right side and Sigma.desc b are isomorphisms, hence so is f restricted to U.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAJ, reduction to a dense disjoint union of components; expanded component-open proof in lem-weil-pbc-dense-open-component-modifications, steps 1-3 (Stacks web text checked)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite irreducible components of reduced scheme; coproduct restriction isomorphism",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "component coproduct over prescribed dense opens; isomorphism of restricted coproduct modifications",
+   "results": "sigmaSpec, normalizationOpenCover, and Scheme.Cover.instIsIsoFromGlued only; no direct theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.morphismRestrict, CategoryTheory.IsIso",
+   "results": "instIsIsoSchemeMorphismRestrict and isIso_morphismRestrict_iff_isIso_app; ingredients only.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|sigmaDesc|morphismRestrict|isUniversal_finiteCoproducts",
+   "results": "closure_sUnion_irreducibleComponents_sdiff_singleton, isIso_of_isClosedImmersion_of_surjective, nonempty_isColimit_cofanMk_of and universal coproduct APIs. No combined geometric theorem; the categorical transfer was proved from the universal coproduct APIs.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DenseOpenComponentModificationsNonempty",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "Dense-open componentwise modification in the reduced-curve normalization argument: coproduct and restriction gluing",
+   "via": [
+    "lem-weil-pbc-dense-open-component-modifications-nonempty",
+    "lem-weil-pbc-dense-open-component-modifications",
+    "lem-weil-pbc-reduced-curve-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SigmaDescRestrictIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SigmaDescRestrictIsIso.lean",
+  "declaration": "AlgebraicGeometry.isIso_sigmaDesc_comp_restrict",
+  "statement": "theorem isIso_sigmaDesc_comp_restrict (X : Scheme.{u}) (n : ℕ) (C Y : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X) (ν : ∀ i, Y i ⟶ C i) (U : X.Opens) (hι : IsIso (CategoryTheory.Limits.Sigma.desc ι ∣_ U)) (hν : ∀ i, IsIso (ν i ∣_ ι i ⁻¹ᵁ U)) : IsIso (CategoryTheory.Limits.Sigma.desc (fun i ↦ ν i ≫ ι i) ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
