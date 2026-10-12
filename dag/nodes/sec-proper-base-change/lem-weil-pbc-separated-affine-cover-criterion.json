@@ -30,78 +30,33 @@
  ],
  "proof": [
   {
-   "text": "Notation and an affine open cover of $V\\times_SV$. Write $S=\\operatorname{Spec}R$, $A_a=\\mathcal O_V(V_a)$, $C_{ab}=\\mathcal O_V(V_a\\cap V_b)$, and let $p,q:V\\times_SV\\to V$ be the two projections [def-pc-fibre-product]. Each $A_a$ is an $R$-algebra via $R=\\mathcal O_S(S)\\xrightarrow{f^\\sharp}\\mathcal O_V(V)\\to A_a$, and $V_a\\cong\\operatorname{Spec}A_a$ over $S$ since $V_a$ is affine [def-weil-affine-spectrum]. For $a,b\\in A$ put $W_{ab}=p^{-1}(V_a)\\cap q^{-1}(V_b)$, an open subset of $V\\times_SV$. (i) The $W_{ab}$ cover $V\\times_SV$: for a point $z$ choose $a$ with $p(z)\\in V_a$ and $b$ with $q(z)\\in V_b$; then $z\\in W_{ab}$. (ii) By [lem-weil-pbc-open-fibre-product] (with the open $U=S$ of the base and the opens $V_a,V_b$ of the two factors, $f(V_a),f(V_b)\\subseteq S$), the canonical morphism $V_a\\times_SV_b\\to V\\times_SV$ is an open immersion with image $W_{ab}$, compatibly with the projections. By [lem-weil-pbc-fibre-product-affine-spectra], $V_a\\times_SV_b\\cong\\operatorname{Spec}A_a\\times_{\\operatorname{Spec}R}\\operatorname{Spec}A_b\\cong\\operatorname{Spec}(A_a\\otimes_RA_b)$ with the projections becoming $\\operatorname{Spec}$ of $x\\mapsto x\\otimes1$ and $y\\mapsto1\\otimes y$. Hence $W_{ab}$ is an affine open of $V\\times_SV$ and there is a ring isomorphism $\\mathcal O(W_{ab})\\cong A_a\\otimes_RA_b$ under which $p^\\sharp(x)|_{W_{ab}}\\mapsto x\\otimes1$ for $x\\in A_a$ (here $p^\\sharp:\\mathcal O_V(V_a)\\to\\mathcal O(p^{-1}V_a)$) and $q^\\sharp(y)|_{W_{ab}}\\mapsto1\\otimes y$ for $y\\in A_b$.",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01KP (lemma-characterize-separated), proof of part (2), lines 4198-4215: 'the collection of affine opens $U\\times_SV$ ... form an affine open covering of $X\\times_SX$ (see e.g. Lemma 01JS)', and the proof of part (1): '$U\\times_SV=U\\times_WV=\\operatorname{Spec}(A\\otimes_RB)$ is an affine open of $X\\times_SX$' (Lemma 01JR lemma-open-fibre-product, Lemma 01JQ lemma-fibre-product-affines); the covering claim of 01JS is written out in (i) directly"
-   }
-  },
-  {
-   "text": "Inverse image under the diagonal. Let $\\Delta:V\\to V\\times_SV$ be the diagonal, the morphism with $p\\circ\\Delta=q\\circ\\Delta=\\mathrm{id}_V$ [def-weil-proper-morphism, def-pc-fibre-product]. For $v\\in V$ we have $\\Delta(v)\\in W_{ab}$ iff $p(\\Delta(v))=v\\in V_a$ and $q(\\Delta(v))=v\\in V_b$; so $\\Delta^{-1}(W_{ab})=V_a\\cap V_b$, which is affine by hypothesis, with ring $C_{ab}$.",
-   "uses": [
-    "def-weil-proper-morphism",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01KP (lemma-characterize-separated), proof of part (2), lines 4198-4215: '$U\\cap V=\\Delta_{X/S}^{-1}(U\\times_SV)$'; also the proof of Lemma 01KO (lemma-characterize-quasi-separated): '$\\Delta_{X/S}^{-1}(V_j\\times_{U_i}V_{j\\prime})=V_j\\cap V_{j\\prime}$'"
-   }
-  },
-  {
-   "text": "The ring map induced by $\\Delta$ over $W_{ab}$. Let $\\Delta^\\sharp_{W_{ab}}:\\mathcal O(W_{ab})\\to\\mathcal O_V(\\Delta^{-1}W_{ab})=C_{ab}$ be the ring map induced by $\\Delta$ (step 2). For $x\\in A_a$, functoriality of pulling back sections gives $\\Delta^\\sharp(p^\\sharp(x)|_{W_{ab}})=(p\\circ\\Delta)^\\sharp(x)|_{V_a\\cap V_b}=x|_{V_a\\cap V_b}$, and likewise $\\Delta^\\sharp(q^\\sharp(y)|_{W_{ab}})=y|_{V_a\\cap V_b}$ for $y\\in A_b$. Since $\\Delta^\\sharp$ is a ring homomorphism and $x\\otimes y=(x\\otimes1)(1\\otimes y)$, under the identification of step 1 the map $\\Delta^\\sharp_{W_{ab}}$ is $\\varphi_{ab}:A_a\\otimes_RA_b\\to C_{ab}$, $x\\otimes y\\mapsto x|_{V_a\\cap V_b}\\cdot y|_{V_a\\cap V_b}$ (it is determined on the pure tensors, which span $A_a\\otimes_RA_b$ additively).",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01KP (lemma-characterize-separated), proof of part (2), lines 4198-4215: 'writing $U=\\operatorname{Spec}(A)$, $V=\\operatorname{Spec}(B)$ ... the composition $A\\otimes_{\\mathbf Z}B\\to A\\otimes_RB\\to C$' (the identification of $\\Delta$ over $U\\times_SV$ with this ring map is left implicit there and written out here)"
-   }
-  },
-  {
-   "text": "Surjectivity. The ring map $\\pi:A_a\\otimes_{\\mathbf Z}A_b\\to A_a\\otimes_RA_b$, $x\\otimes y\\mapsto x\\otimes y$ (well defined since the defining relations of $\\otimes_{\\mathbf Z}$ hold in $\\otimes_R$), is surjective because its image contains every pure tensor and is additively closed. The composite $\\varphi_{ab}\\circ\\pi$ is $x\\otimes y\\mapsto x|_{V_a\\cap V_b}\\cdot y|_{V_a\\cap V_b}$, the map assumed surjective in the statement. Hence $\\varphi_{ab}$ is surjective.",
+   "text": "For a,b, let C be the subring closure of the two restriction images in the global sections of the overlap scheme. For each tensor t, the image of φ(t), transported by (V_a ∩ V_b).topIso.inv, lies in C: tensor induction uses closure under zero and sums, and the pure tensor case is the product of two generators. Scheme.homOfLE_appTop_topIso_inv identifies the transported restrictions with the appTop maps defining IsSeparatingPair. Surjectivity of φ and the topIso inverse identity imply C is the full ring. Thus every pair is a separating pair.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01KP (lemma-characterize-separated), proof of part (2), lines 4198-4215: 'the assumption (b) means that the composition $A\\otimes_{\\mathbf Z}B\\to A\\otimes_RB\\to C$ is surjective. Hence $A\\otimes_RB\\to C$ is surjective'"
-   }
+   "elementary": true
   },
   {
-   "text": "Conclusion. Apply [lem-weil-pbc-closed-immersion-affine-cover-criterion], part (2), to $h=\\Delta:V\\to V\\times_SV$ and the covering of $V\\times_SV$ by the affine opens $W_{ab}$ (step 1): for every $(a,b)$ the open $\\Delta^{-1}(W_{ab})=V_a\\cap V_b$ is affine (step 2) and $\\Delta^\\sharp_{W_{ab}}$ is surjective (steps 3 and 4). Hence $\\Delta$ is a closed immersion [def-weil-closed-immersion], i.e. $f$ is separated [def-weil-proper-morphism].",
+   "text": "The set-theoretic covering equality gives TopologicalSpace.IsOpenCover V_a. Apply the already proved source theorem Scheme.isSeparated_of_isSeparatingPair [lem-weil-pbc-separated-separating-pair-cover] with the affine-cover and affine-overlap hypotheses and the separating pairs of the preceding step. This proves Scheme.IsSeparated V.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "def-weil-closed-immersion",
+    "lem-weil-pbc-separated-separating-pair-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib supplies IsSeparated f for every morphism from a separated scheme. Apply this instance to f:V→S. The affine-base hypothesis is retained in the unchanged signature but is not used.",
+   "uses": [
     "def-weil-proper-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01KP (lemma-characterize-separated), proof of part (2), lines 4198-4215: 'it suffices to show that each morphism $U\\cap V=\\Delta^{-1}(U\\times_SV)\\to U\\times_SV$ is a closed immersion, see Lemma 01HL (lemma-closed-local-target) ... we conclude that $\\operatorname{Spec}(C)\\to\\operatorname{Spec}(A\\otimes_RB)$ is a closed immersion'; both facts are the content of Morphisms Lemma 01QO, (3)$\\Rightarrow$(1)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "def-weil-closed-immersion"
+  "lem-weil-pbc-separated-separating-pair-cover",
+  "def-weil-proper-morphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma Tag 01KP (lemma-characterize-separated), proof of part (2), specialized to an affine base S and a fixed affine cover with all pairs (V_a, V_b)"
+  "place": "Tag 01KP (2), using the already proved absolute affine-cover criterion in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated; tensor-induction glue written by Q1"
  },
  "mathlib_searches": [
   {
@@ -208,5 +163,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T060750-L-2913527",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
