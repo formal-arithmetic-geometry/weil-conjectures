@@ -19,6 +19,11 @@ coefficients, and `deg D = ∑_P n_P`. For a nonzero rational function `f ∈ k(
 `P`; such divisors are *principal*, and the divisor class group is
 `Cl(X) = Div(X) / {div f : f ∈ k(X)ˣ}`.
 
+The function field `k(X)` (blueprint `def-sc-function-field`) is Mathlib's
+`AlgebraicGeometry.Scheme.functionField`, the stalk at the generic point; it is the fraction
+field of `Γ(X, U)` for every nonempty affine open `U`
+(`AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen`).
+
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Divisor`: the free abelian group `Div(X)` on the closed points.
