@@ -16,16 +16,17 @@
  ],
  "proof": [
   {
-   "text": "Contract q to q' in S'. For each y in S, away-map surjectivity gives z in S' and n with z = g^n y. The power g^n lies in S' and outside q. Thus S' is saturated to all of S along the intersection of the prime complement with S'. Localization.localRingHom_bijective_of_saturated_inf_eq_top supplies the local-ring isomorphism S'_{q'} to S_q. Alternatively the same numerator and denominator formulas establish bijectivity directly. It takes the maximal ideals and all their powers to one another. Apply its quotient equivalences componentwise to compatible sequences to get the completion equivalence alpha, with its levelwise formula and its formula on S'.",
+   "text": "Contract q to q' in S'. Apply Localization.awayMap_surjective_iff to clear powers of g from every element of S. Since g is outside q, these powers witness that S'.saturation along q.primeCompl intersected with S' is the whole ring. Localization.localRingHom_bijective_of_saturated_inf_eq_top gives bijectivity of the canonical localRingHom l from S' localized at q' to S localized at q. RingEquiv.ofBijective makes this a ring equivalence L. IsLocalRing.map_maximalIdeal_of_surjective identifies the image of the maximal ideal with Iq. At every power of the maximal ideal, Ideal.quotientEquiv gives a quotient equivalence. Apply RingTheory.pair_henselization_completion_data [lem-weil-pbc-henselization-completion-data] to obtain alpha and its coordinate formula; the private completion_equiv_of_ringEquiv helper handles transport along the equality of ideals.",
    "uses": [
     "def-weil-pbc-module-localization-away",
     "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-adic-completion"
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-henselization-completion-data"
    ],
    "elementary": false
   },
   {
-   "text": "The ideal q' is prime and lies over p. Apply completion_finite_extension_decomposition R S' p and select the factor indexed by q'. Its completed-base map theta has the displayed quotient formula. For every x and n choose a representative a of x's nth quotient coordinate. The quotient formulas for theta, alpha and psi, and commutativity of the local-ring square on R_p, give equal nth coordinates of alpha(theta(x)) and psi(x). Completion extensionality identifies these elements. On x tensor y, multiplicativity, the completed-base compatibility and S'-linearity of the finite product equivalence show phi j equals alpha followed by this factor projection.",
+   "text": "The contracted ideal q' is prime and lies over p by the definitions of contraction and the subalgebra structure. Apply AdicCompletion.completion_finite_extension_decomposition R S' p and let q0 be the index q'. Prove the local-ring square by IsLocalization.ringHom_ext and Localization.localRingHom_to_map. For each x and n take a quotient representative a with Ideal.Quotient.mk_surjective. Apply the quotient formulas for theta, alpha and psi, then the local-ring square; AdicCompletion.ext_eval_a (Lean: ext_evalₐ) gives alpha(theta(q0,x))=psi(x). The same coordinate calculation proves alpha's compatibility on S'. The S'-algebra property of the product equivalence and the factorization x tensor y=(x tensor 1)(1 tensor y) identify its value on tensors. TensorProduct.induction_on, additivity, and the given formula for phi show phi(j(t))=alpha(E(t)(q0)) for all t.",
    "uses": [
     "lem-weil-pbc-completion-finite-extension-decomposition",
     "def-weil-pbc-adic-completion"
@@ -33,7 +34,7 @@
    "elementary": false
   },
   {
-   "text": "Pull back the tuple supported at q' with value 1 to e in T. Multiplication is componentwise, so e is idempotent and the projection of e is 1. Since g is outside q', its image in S'_{q'} and hence in its completion is a unit. Pull back the tuple supported at q' with its inverse to v. Componentwise multiplication gives v gamma=e. Given c in Sqh, pull back the tuple supported at q' with value alpha inverse(c), proving surjectivity of phi j. If phi(j(t))=0, alpha injective gives zero q' component; multiplication by the tuple defining e kills all other components, so e t=0. The formulas include a singleton product and arbitrary other factors.",
+   "text": "The image E(gamma)(q0) is a unit, since the image of g is a unit in the local ring at q' by IsLocalization.map_units and remains a unit under the completion map. Apply the proved private factor_idempotent helper to E.toRingEquiv, q0, alpha, phi.comp j and gamma. That helper pulls Pi.single q0 1 back to e and Pi.single q0 c back to v, where c is an inverse of E(gamma)(q0). Applying the injective E reduces idempotence and v*gamma=e to componentwise equations, with a case split on equality to q0. The projection formula gives phi(j(e))=1. Pulling back Pi.single q0 (alpha.symm b) proves surjectivity. If phi(j(t))=0, injectivity of alpha gives E(t)(q0)=0; every component of E(e*t) is zero, proving e*t=0. This handles arbitrary complementary factors, including no complementary factor.",
    "uses": [],
    "elementary": true
   }
@@ -42,12 +43,13 @@
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-henselization-completion-data",
   "lem-weil-pbc-completion-finite-extension-decomposition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Expanded selected-factor argument of Tag 07NC, with coordinate comparison and supported tuples spelled out."
+  "place": "Tag 07NC selected-factor argument; V3 implements all three steps, using the existing quotient-comparison theorem for the completion equivalence, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -137,10 +139,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T215158-L-1305460",
-  "kind": "interface",
+  "landing": "20261012T225336-L-1815322",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
