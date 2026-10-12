@@ -63,7 +63,7 @@ def stage3(imports, dist, waiting: set[str]):
             continue
         text = p.read_text(errors="ignore")
         n = li.sorry_count(text)
-        if n == 0:
+        if n == 0 and m not in repairs:
             continue
         kind = "repair" if m in repairs else "disputed" if "STATEMENT-DISPUTED" in text else "proof"
         if m in waiting and kind == "proof":
