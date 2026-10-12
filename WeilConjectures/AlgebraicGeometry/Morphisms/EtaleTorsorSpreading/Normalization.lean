@@ -130,4 +130,24 @@ theorem isPullback_toNormalization :
     exact Category.id_comp _
   · simp [e]
 
+/-- If the normalization `N ⟶ C` of `C` in the Galois cover is étale over every point of `S`,
+it is étale. -/
+theorem etale_fromNormalization_of_forall_etaleOver (h : ∀ s, D.EtaleOver s) :
+    Etale D.ν.fromNormalization := by
+  refine IsZariskiLocalAtSource.of_iSup_eq_top (P := @Etale)
+    (fun U : {U : D.ν.normalization.Opens // Etale (U.ι ≫ D.ν.fromNormalization)} ↦ U.1)
+    (top_unique fun x _ ↦ ?_) fun U ↦ U.2
+  obtain ⟨U, hxU, hU⟩ := h _ x rfl
+  exact TopologicalSpace.Opens.mem_iSup.2 ⟨⟨U, hU⟩, hxU⟩
+
+/-- If the normalization `N ⟶ C` of `C` in the Galois cover is étale over every point of `S`,
+then the Galois cover `Z.P` of the generic fibre extends to a finite étale `C`-scheme, namely
+`N`. -/
+theorem exists_isFinite_etale_isPullback_of_forall_etaleOver (h : ∀ s, D.EtaleOver s) :
+    ∃ (Y : Scheme.{u}) (p : Y ⟶ D.C) (_ : IsFinite p) (_ : Etale p) (ψ : D.Z.P ⟶ Y),
+      IsPullback ψ D.Z.π p D.j := by
+  have := D.etale_fromNormalization_of_forall_etaleOver h
+  refine ⟨_, D.ν.fromNormalization, ?_, this, _, D.isPullback_toNormalization⟩
+  exact (IsFinite.iff_isIntegralHom_and_locallyOfFiniteType _).2 ⟨inferInstance, inferInstance⟩
+
 end AlgebraicGeometry.Scheme.SpreadingDatum
