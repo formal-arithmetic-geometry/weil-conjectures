@@ -45,6 +45,10 @@ theorem constructibleGeneration_finiteType
       (D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       (∀ a : A, Scheme.IsConstructibleEtaleModuleSheaf (D.obj a)) ∧
         ∃ ι : D ⟶ (Functor.const A).obj F,
-          Nonempty (IsColimit (Cocone.mk F ι)) := sorry
+          Nonempty (IsColimit (Cocone.mk F ι)) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : QuasiSeparatedSpace X := by infer_instance
+  exact Scheme.exists_filtered_colimit_constructible F
 
 end AlgebraicGeometry
