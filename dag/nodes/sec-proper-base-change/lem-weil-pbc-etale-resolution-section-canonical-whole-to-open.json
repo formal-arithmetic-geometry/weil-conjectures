@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "proof_origin": {
+  "by": "J3 stage 3 decomposition",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, cocycle restriction computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution sections canonical cohomology comparison natural restriction to open subsets",
+   "results": "8 hits, including CategoryTheory.Sheaf.ΓRes_map and unrelated locally injective and topological sheaf statements. No normalized Ext comparison restriction identity.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.mk₀_comp_extMk",
+   "results": "One hit: CategoryTheory.InjectiveResolution.mk₀_comp_extMk, Mathlib.CategoryTheory.Abelian.Injective.Ext. It computes precomposition of an Ext cocycle; the representing identity-generator and inverse-image comparisons remain.",
+   "date": "2026-10-13",
+   "verdict": "Useful ingredient, not the full restriction identity."
+  },
+  {
+   "tool": "grep",
+   "query": "mk₀_comp_extMk|sectionsEquiv_naturality|homologyπ_naturality",
+   "results": "25 hits, including HomologicalComplex.homologyπ_naturality and InjectiveResolution.mk₀_comp_extMk. Local rg additionally found EtaleOpenComparison.sectionsEquiv_naturality and downstream resolutionSection_canonical_restriction consumers.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only; the downstream naturality theorem imports the parent and cannot prove it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison of sections of an injective resolution with sheaf cohomology commutes with restriction to opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The resolution-section comparison: normalized Hom cocycles, their restriction, and their augmentation-preserving pullback transfer, below the Mayer-Vietoris comparison. Substep: whole-to-open restriction of normalized comparisons.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-canonical-restriction",
+    "lem-weil-pbc-etale-resolution-section-homology-naturality",
+    "lem-weil-pbc-etale-resolution-section-homology",
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-etale-resolution-section-canonical-whole-to-open",
+ "title": "Whole to open restriction of canonical resolution comparison",
+ "statement": "Let X be a scheme, G an abelian sheaf on its small etale site, I an injective resolution of G, and c a resolution-section comparison normalized on Hom cocycles [def-weil-pbc-etale-resolution-section-canonical-comparison]. For every open W of X, natural-number degree q, and class x in H^q(I(X)), applying c.openEquiv W q after homology of section restriction X to W equals cohomologyMap W.ι G q applied after c.globalEquiv q [def-weil-pbc-cohomology-pullback].",
+ "stmt_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Let K be the resolution evaluated at the terminal etale object. Since K.homologyπ q is an epimorphism of abelian groups, write the given class as the image of a cycle z. The constant-sheaf adjunction identifies K.iCycles q z with a unique morphism f from the constant lifted integers to I.cocomplex.X q. Naturality in the coefficient sheaf identifies its composite with the differential with the differential of the section, which is zero; thus f is a Hom cocycle. Let a be the free-sheaf map from the free sheaf on W to the constant integer sheaf corresponding to the constant section 1 on W. The free-sheaf sections adjunction identifies a composed with f with the restriction of the original section. Naturality of homologyπ identifies its cycle class with the homology map of etaleSectionMap. Apply c.global_cocycle and c.open_cocycle to the two cycles. The formula I.mk₀_comp_extMk identifies the second Ext class with precomposition of the first by a. In etaleOpenObjectCohomologyMap, pulling back a and precomposing with etaleOpenFreeSheafUnit W is the inverse of the constant-sheaf comparison: both maps classify the section 1 by the constant sheaf adjunction. Functoriality of Ext under the exact inverse-image functor and associativity of Ext composition now give cohomologyMap W.ι on the first class. Surjectivity of homologyπ gives the equality for every class. The argument uses no positive-degree or nonempty-open assumption, so includes q = 0, the empty open, identity restriction and the zero sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-resolution-section-canonical-comparison",
+    "def-weil-pbc-etale-open-comparison-data",
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-open-comparison-data",
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalRestriction",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalWholeToOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionCanonicalWholeToOpen.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionSection_canonical_whole_to_open",
+  "statement": "theorem resolutionSection_canonical_whole_to_open {X : Scheme.{u}} (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) (c : ResolutionSectionCanonicalComparison G I) : ∀ W q x, c.openEquiv W q (HomologicalComplex.homologyMap (etaleSectionMap (MorphismProperty.Over.homMk W.ι (Category.comp_id _) : Scheme.Etale.mk W.ι ⟶ Scheme.Etale.mk (𝟙 X)) I.cocomplex) q x) = cohomologyMap W.ι G q (c.globalEquiv q x)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T211614-L-1057325",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T211614-L-1057325",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

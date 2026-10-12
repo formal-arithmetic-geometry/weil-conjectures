@@ -9546,3 +9546,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: merged deliver/F2/Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent (stage 3; reviewer PASS; first push; landing 20261012T211613-L-1056993 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/F3/Sheaf.AlgebraicGeometry.FormalModuleQuotientScalarZero (stage 3; reviewer PASS; first push; landing 20261012T211614-L-1057107 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/G1/Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing (stage 3; reviewer PASS; first push; landing 20261012T211614-L-1057224 (interface); batch 20261012T211610; modules 3; new nodes 2)
+- 21:16 L: merged deliver/J3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalRestriction (stage 3; reviewer PASS; first push; landing 20261012T211614-L-1057325 (interface); batch 20261012T211610; modules 3; new nodes 2)
