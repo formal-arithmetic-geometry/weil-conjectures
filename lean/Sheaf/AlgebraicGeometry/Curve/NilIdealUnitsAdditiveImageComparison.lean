@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
+import Sheaf.AlgebraicGeometry.Curve.NilIdealUnitImageRelativeKernel
+import Sheaf.AlgebraicGeometry.Curve.IdealAdditiveImageRelativeKernel
+import Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeUnitsAdditiveKernel
+
 /-! # Linearizing the unit image into the additive image
 
 Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim,
@@ -45,13 +49,26 @@ etale refinements. Categorical sheaf images are sheafifications of these
 presheaf images; sheafifying the mutually inverse natural homomorphisms gives
 the desired isomorphism, including the coefficient universe lift. When I=J,
 I=0 or the scheme is empty both images vanish and the formulas still apply.
-No quasi-coherence assertion about the module cokernel is used. -/
+No quasi-coherence assertion about the module cokernel is used.
+
+Formal reduction: First identify each image with the pushforward from Z_J of
+the corresponding kernel for Z_I to Z_J. The unit identification uses nilpotence
+to lift units; the additive identification is quotient exactness without any
+nil hypothesis. On Z_J the relative ideal I/J has square zero, so subtracting
+one identifies these two kernel sheaves. Push forward that isomorphism and
+compose with the two image identifications. -/
 theorem nonempty_nilIdealUnitsAdditiveImageIso (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J)
     (hIN : I ≤ X.nilradical) :
     Nonempty (image (kernel.ι (gmSheafToLowerStarGmSheaf I.subschemeι) ≫
         gmSheafToLowerStarGmSheaf J.subschemeι) ≅
       image (kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) ≫
-        etaleAdditiveSheafToLowerStar J.subschemeι)) := by sorry
+        etaleAdditiveSheafToLowerStar J.subschemeι)) := by
+  obtain ⟨eUnits⟩ := nonempty_nilIdealUnitImageRelativeKernelIso X I J hJI hIN
+  obtain ⟨eAdditive⟩ := nonempty_idealAdditiveImageRelativeKernelIso X I J hJI
+  obtain ⟨eRelative⟩ := nonempty_squareZeroRelativeUnitsAdditiveKernelIso X I J hJI hII
+  exact ⟨eUnits ≪≫
+    (Etale.lowerStar AddCommGrpCat.{u + 1} J.subschemeι).mapIso eRelative ≪≫
+      eAdditive.symm⟩
 
 end AlgebraicGeometry.Scheme

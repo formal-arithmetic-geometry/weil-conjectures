@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-nil-ideal-unit-image-relative-kernel",
+ "kind": "statement",
+ "title": "The image of nil-ideal units is the pushforward of the relative unit kernel.",
+ "statement": "Let X be a scheme [def-pc-scheme], J ≤ I quasi-coherent ideals [def-sbc-ideal-sheaf-powers], and I ≤ the nilradical [def-weil-pbc-scheme-reduction]. Write i_J: Z_J → X and j: Z_I → Z_J for the inclusions. For the unit restriction q [def-sc-gm-torsor] and direct image [def-weil-pbc-direct-image], the categorical image of ker(q_I) → Gm_X → (i_J)_*Gm_Z_J is isomorphic to (i_J)_* ker(q_j). No square-zero hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as NilIdealUnitImageRelativeKernel"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Refine etale X-objects by affine opens mapping into affine X-opens. On these, the structure rings of the J and I subschemes are B/J_B and B/I_B. A section of the relative unit kernel has a representative b with b-1 in I_B. The extended ideal I_B is nil since nilpotents form an ideal in a commutative ring. Thus b is a unit and lifts the given section in the kernel of q_I.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-pbc-scheme-reduction",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Direct image preserves kernels. Consequently the pushed-forward relative kernel embeds into (i_J)_*Gm_Z_J. Associativity of base change and the equality j followed by i_J equals i_I show that the composite from ker(q_I) factors through this kernel. The affine lifting in Step 1 is local surjectivity onto it.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact",
+    "def-weil-pbc-direct-image",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A locally surjective factorization followed by a monomorphism is an image factorization in abelian sheaves: the categorical image is the sheafification of the sectionwise image. Its uniqueness yields the stated isomorphism; the coefficient lift commutes with these formulas.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-direct-image-left-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as NilIdealUnitImageRelativeKernel"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ideal with square zero identifies units congruent to one with the additive ideal, naturally in commutative rings",
+   "results": "Hits: TrivSqZeroExt.isUnit_or_isNilpotent, TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent, IsNilpotent.isUnit_quotient_mk_iff, TrivSqZeroExt.isUnit_iff_isUnit_fst, TrivSqZeroExt.isUnit_inl_iff, Ideal.toCotangent_eq, factorPowSucc.isUnit_of_isUnit_image, TrivSqZeroExt.isUnit_inr_iff. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent.isUnit_add_one",
+   "results": "Hits: IsNilpotent.isUnit_add_one. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*kernel|kernel.*image",
+   "results": "Hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean, Mathlib/GroupTheory/Congruence/Basic.lean, Mathlib/Algebra/Homology/Opposite.lean. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For nested ideals J contained in I the image of I in B/J is the kernel of B/J to B/I; nilpotent units lift and square zero unit kernels are additive kernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsAdditiveImageComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: NilIdealUnitImageRelativeKernel",
+   "via": [
+    "lem-sc-nil-ideal-units-additive-image-comparison",
+    "lem-sc-nil-ideal-units-image-linearization",
+    "lem-sc-reduction-units-power-cokernel",
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitImageRelativeKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NilIdealUnitImageRelativeKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_nilIdealUnitImageRelativeKernelIso",
+  "statement": "theorem nonempty_nilIdealUnitImageRelativeKernelIso (X : Scheme.{u})\n    (I J : X.IdealSheafData) (hJI : J ≤ I) (hIN : I ≤ X.nilradical) :\n    Nonempty (image (kernel.ι (gmSheafToLowerStarGmSheaf I.subschemeι) ≫\n        gmSheafToLowerStarGmSheaf J.subschemeι) ≅\n      (Etale.lowerStar AddCommGrpCat.{u + 1} J.subschemeι).obj\n        (kernel (gmSheafToLowerStarGmSheaf (IdealSheafData.inclusion hJI))))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T220519-L-1392973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T220519-L-1392973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

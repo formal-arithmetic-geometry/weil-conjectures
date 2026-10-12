@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-square-zero-relative-units-additive-kernel",
+ "kind": "statement",
+ "title": "A square-zero closed immersion identifies its unit and additive kernels.",
+ "statement": "Let X be a scheme [def-pc-scheme], J ≤ I quasi-coherent ideal sheaves with I*I ≤ J [def-sbc-ideal-sheaf-powers], and j: Z_I → Z_J their inclusion. Then the kernel of unit restriction q_j [def-sc-gm-torsor] is isomorphic, as an abelian sheaf on the small etale site of Z_J, to the kernel of additive restriction r_j [def-sc-etale-additive-structure-restriction], using the same coefficient universe lift. No nilpotence hypothesis on I in X is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as SquareZeroRelativeUnitsAdditiveKernel"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-gm-torsor",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The ideal of Z_I in Z_J is I/J and has square zero. Its extension K to every affine etale Z_J-object still has square zero. Unit kernel sections are the units 1+a with a in K; additive kernel sections are a in K.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-sc-gm-torsor",
+    "def-sc-etale-additive-structure-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Send u to u-1, and a to 1+a with inverse 1-a. Since a*b=0 for a,b in K, (1+a)(1+b)=1+a+b. The maps are inverse group homomorphisms.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "These formulas commute with all ring restriction maps and universe lifts. They define inverse natural morphisms on an affine etale basis and hence inverse morphisms of the kernel sheaves. Their composites are the identity on the basis and therefore on the sheaves. Zero ideals and the empty scheme give trivial kernels.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-etale-additive-structure-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-etale-additive-structure-restriction",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as SquareZeroRelativeUnitsAdditiveKernel"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ideal with square zero identifies units congruent to one with the additive ideal, naturally in commutative rings",
+   "results": "Hits: TrivSqZeroExt.isUnit_or_isNilpotent, TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent, IsNilpotent.isUnit_quotient_mk_iff, TrivSqZeroExt.isUnit_iff_isUnit_fst, TrivSqZeroExt.isUnit_inl_iff, Ideal.toCotangent_eq, factorPowSucc.isUnit_of_isUnit_image, TrivSqZeroExt.isUnit_inr_iff. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent.isUnit_add_one",
+   "results": "Hits: IsNilpotent.isUnit_add_one. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*kernel|kernel.*image",
+   "results": "Hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Nilpotent.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/FinitelyPresentedGroup.lean, Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean, Mathlib/GroupTheory/Congruence/Basic.lean, Mathlib/Algebra/Homology/Opposite.lean. No result states the relative etale kernel comparison. Local quotient and nilpotent unit infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no match for the sheaf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For nested ideals J contained in I the image of I in B/J is the kernel of B/J to B/I; nilpotent units lift and square zero unit kernels are additive kernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsAdditiveImageComparison",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: SquareZeroRelativeUnitsAdditiveKernel",
+   "via": [
+    "lem-sc-nil-ideal-units-additive-image-comparison",
+    "lem-sc-nil-ideal-units-image-linearization",
+    "lem-sc-reduction-units-power-cokernel",
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.SquareZeroRelativeUnitsAdditiveKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SquareZeroRelativeUnitsAdditiveKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_squareZeroRelativeUnitsAdditiveKernelIso",
+  "statement": "theorem nonempty_squareZeroRelativeUnitsAdditiveKernelIso (X : Scheme.{u})\n    (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J) :\n    Nonempty (kernel (gmSheafToLowerStarGmSheaf (IdealSheafData.inclusion hJI)) ≅\n      kernel (etaleAdditiveSheafToLowerStar (IdealSheafData.inclusion hJI)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T220519-L-1392973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T220519-L-1392973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
