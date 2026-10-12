@@ -8,12 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonC0
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat
 
 /-! # Canonical module base change under open restriction
 
@@ -30,6 +26,8 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 1000000 in
+-- The categorical composition below needs additional elaboration heartbeats.
 /-- Restriction identifies the module base-change arrow with the arrow of the
 chosen pullback of the restricted maps. No affine chart is used.
 Source: Stacks Project, Tag 08FE, proof; Tag 08HY, counit construction;
@@ -108,6 +106,10 @@ theorem exists_canonicalModuleBaseChange_open_comparison
           a.hom ≫
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
-      := by sorry
+      := by
+  dsimp
+  obtain ⟨c0, hc0⟩ := exists_restricted_module_pullback_comparison f g g' f' sq G c hc V W hWV
+  obtain h := restricted_base_change_compatibility f g g' f' sq G c hc V W hWV c0 hc0
+  exact ⟨c0, hc0, h⟩
 
 end AlgebraicGeometry

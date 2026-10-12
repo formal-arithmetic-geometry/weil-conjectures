@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-canonical-module-base-change-open-comparison-c0",
+ "kind": "statement",
+ "title": "lem-pc-canonical-module-base-change-open-comparison-c0",
+ "statement": "Choose the shared derived categories and additive tensor pullbacks [def-pc-derived-category, def-pc-module-pullback]. Let $f:X\\to S$, $g:S'\\to S$, $g':X'\\to X$ and $f':X'\\to S'$ be scheme morphisms forming a cartesian square [def-pc-scheme, def-pc-fibre-product]. Let $G$ be an $\\mathcal O_X$-module and $c:Lg'^*(G[0])\\to(g'^*G)[0]$ satisfy IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map]. For arbitrary opens $V\\subseteq S$, $W\\subseteq S'$ with $W\\subseteq g^{-1}V$, set $U=f^{-1}V$, $f_V=f|_V:U\\to V$, $g_V=g|_W:W\\to V$, $H=G|_U$, $P=U\\times_V W$, $p:P\\to U$, and $q:P\\to W$. Let $R:D(S')\\to D(W)$ be the exact derived restriction [def-pc-derived-open-restriction-maps]. There exist $c_V:Lp^*(H[0])\\to(p^*H)[0]$ satisfying IsDerivedModulePullbackComparison, isomorphisms $a:R(Lg^*Rf_*(G[0]))\\cong Lg_V^*Rf_{V,*}(H[0])$ and $b:R(Rf'_*(g'^*G)[0])\\cong Rq_*((p^*H)[0])$, for which $R(\\beta\\mathbin{\\gg}Rf'_*(c))\\mathbin{\\gg}b=a\\mathbin{\\gg}(\\beta_V\\mathbin{\\gg}Rq_*(c_V))$, where $\\beta$ and $\\beta_V$ are the canonical derived mates of the original and chosen restricted pullback squares [def-pc-derived-base-change-map]. No affineness, flatness or quasi-coherence is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE, proof of derived direct-image restriction; Tag 08HY, counit construction; Tag 08IB, first proof paragraph (restriction part); Tag 0D5U, exact extension by zero"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-base-change-map",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply the cited open-restriction and derived base-change constructions; the required cartesian and naturality identities give the displayed witness and equality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tags 08FE, 08HY, 08IB, 0D5U",
+  "note": "Stage-3 decomposition of the parent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restricted derived module pullback comparison under open restriction",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory IsPullback DerivedCategory",
+   "results": "Unknown identifier CategoryTheory; no match",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedModulePullbackComparison|schemeDerivedBaseChangeMap",
+   "results": "No Mathlib hits",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1 local affine reduction: restrict to opens before choosing spectrum coordinates",
+   "via": [
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonC0",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalModuleBaseChangeOpenComparisonC0.lean",
+  "declaration": "AlgebraicGeometry.exists_restricted_module_pullback_comparison",
+  "statement": "theorem exists_restricted_module_pullback_comparison [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ {Y Z : Scheme.{u}} (a : Y ⟶ Z), (Scheme.Modules.tensorPullback a).Additive] {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g) (G : X.Modules) (c : (derivedPullback g').obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ⟶ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj ((Scheme.Modules.tensorPullback g').obj G)) (hc : IsDerivedModulePullbackComparison g' G c) (V : S.Opens) (W : S'.Opens) (hWV : W ≤ g ⁻¹ᵁ V) : let U := f ⁻¹ᵁ V let fA := f ∣_ V let gA := g.resLE V W hWV let H := (schemeOpenRestriction X U).obj G let E0 := (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj H ∃ c0 : (derivedPullback (pullback.fst fA gA)).obj E0 ⟶ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H), IsDerivedModulePullbackComparison (pullback.fst fA gA) H c0",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T202242-L-705179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T202242-L-705179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9373,3 +9373,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/J2/Sheaf.RingTheory.FormallySmoothAdicBaseChange (stage 3; reviewer PASS; first push; landing 20261012T202241-L-704827 (interface); batch 20261012T202227; modules 2; new nodes 1)
 - 20:22 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility (stage 3; reviewer PASS; first push; landing 20261012T202241-L-704927 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/K1/Sheaf.AlgebraicGeometry.PopescuDelocalizeDehomogenizationEquiv (stage 3; reviewer PASS; first push; landing 20261012T202241-L-705026 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/K2/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison (stage 3; reviewer PASS; first push; landing 20261012T202242-L-705179 (interface); batch 20261012T202227; modules 3; new nodes 2)
