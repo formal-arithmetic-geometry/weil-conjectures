@@ -20,9 +20,9 @@
   "lem-pc-derived-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.22.1 (Tag 08EU)"
+  "place": "Tag 08EU, locality of isomorphisms of the projection map; implemented via exact restriction, cohomology, and the existing open-cover locality theorem for module sheaves."
  },
  "mathlib_searches": [
   {
@@ -69,16 +69,32 @@
  "statement": "Local isomorphisms imply global isomorphism.",
  "proof": [
   {
-   "text": "Local isomorphisms imply global isomorphism.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.22.1 (Tag 08EU)"
-   }
+   "text": "Apply the proved Mathlib criterion DerivedCategory.isIso_iff to the morphism phi. It suffices to show that each integer-degree cohomology map is an isomorphism. This criterion applies to the unbounded derived category of sheaves of modules, without boundedness or quasi-coherence assumptions.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each cover member U_i, apply cohomology to the given isomorphism of derived restrictions. The exact functor comparison schemeOpenRestriction.mapDerivedCategoryHomologyFunctorIso identifies this map with the restriction of the global cohomology map. The open restriction is overFunctor followed by Scheme.Modules.overEquiv; reflect isomorphisms through that equivalence to obtain an isomorphism of the over-site restriction of the cohomology map. The comparison is the proved exact-functor cohomology comparison, descended to the localization by quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pointwise covering hypothesis gives iSup U_i = top. Apply sheaf_module_isIso_iff_isIso_over_open_cover to the cohomology map, using the local isomorphisms from the preceding step. This proves each global cohomology map invertible, hence phi invertible by the first step.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.ProjectionFormulaLocalityLocalToGlobal",
@@ -103,10 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T053922-L-2630922",
-  "kind": "interface",
+  "landing": "20261012T070543-L-3473924",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
