@@ -24,7 +24,7 @@ Let `X` be a scheme and let `F` be a sheaf on the small étale site of `X` (see
 [SGA 4, Exp. IX, §2] we define:
 
 - `F` is *constant* if it is isomorphic to the sheafification of a constant presheaf;
-  this is mathlib's `CategoryTheory.Sheaf.IsConstant`.
+  this is mathlib's `CategoryTheory.Sheaf.IsConstant` (blueprint: `def-constructible-constant`).
 - `F` is *locally constant* (`IsLocallyConstantSheaf`) if there is an étale cover of `X`
   (a jointly surjective family of étale maps `Uᵢ ⟶ X`, a cover in
   `Scheme.etalePrecoverage`) such that the restriction of `F` to each `Uᵢ` is constant;
@@ -320,7 +320,9 @@ project. In the `ℓ`-adic formalism it is applied with `A = ModuleCat Λ` for t
 stages `Λ` of `def-sf-setting`.
 
 Over a scheme with Noetherian underlying space the constructibility of the strata is automatic,
-see `IsConstructibleSheaf.of_noetherianSpace`. (blueprint: `def-constructible-constructible`) -/
+see `IsConstructibleSheaf.of_noetherianSpace`. For `A = ModuleCat Λ` this is the constructible
+sheaf of modules of blueprint `def-weil-pbc-etale-constructible-sheaf`.
+(blueprint: `def-constructible-constructible`, `def-weil-pbc-etale-constructible-sheaf`) -/
 class IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   exists_stratification : ∃ S : Stratification X, ∀ i : Fin S.n,
     IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F)

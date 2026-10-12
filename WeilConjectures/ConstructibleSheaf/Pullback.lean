@@ -31,7 +31,7 @@ pullback (`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`). Finiteness is c
 stalks, which pullback preserves (`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`), and
 a stratification pulls back to a stratification
 (`AlgebraicGeometry.Scheme.Stratification.pullback`).
-(blueprint: `prop:constructible-pullback`)
+(blueprint: `prop-constructible-pullback`)
 
 -/
 
@@ -109,7 +109,7 @@ lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F
 
 /-- **Pullback of a locally constant sheaf is locally constant**: the pullback of a
 trivialising cover is a trivialising cover.
-(blueprint: `lemma:constructible-pullback-locally-constant`) -/
+(blueprint: `lemma-constructible-pullback-locally-constant`) -/
 theorem IsLocallyConstantSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf ((Etale.upperStar A g).obj F) := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
@@ -148,7 +148,7 @@ lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
 
 omit [HasSmallSiteSheafify A] in
 /-- **Pullback of a finite sheaf is finite**: the stalks of `g^* F` are stalks of `F`.
-(blueprint: `lemma:constructible-pullback-finite`) -/
+(blueprint: `lemma-constructible-pullback-finite`) -/
 theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsFiniteSheaf F] : IsFiniteSheaf ((Etale.upperStar A g).obj F) where
   isFinitelyGenerated_sheafFiber Ω _ _ s :=
@@ -176,7 +176,7 @@ section Stratification
 
 /-- The pullback of a stratification of `X` along `g : Y ⟶ X`: the strata are the preimages
 of the strata, with the base changes of the immersions.
-(blueprint: `lemma:constructible-pullback-stratification`) -/
+(blueprint: `lemma-constructible-pullback-stratification`) -/
 @[simps n stratum domain immersion]
 def Stratification.pullback (S : Stratification X) (g : Y ⟶ X) : Stratification Y where
   n := S.n
@@ -211,7 +211,7 @@ lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F �
 
 /-- **Pullback of a constructible sheaf is constructible**: the stratification pulls back, and
 the pullback of `F` to a pulled-back stratum is the pullback of the pullback of `F` to the
-stratum. (blueprint: `prop:constructible-pullback`) -/
+stratum. (blueprint: `prop-constructible-pullback`) -/
 theorem IsConstructibleSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
     [IsConstructibleSheaf F] : IsConstructibleSheaf ((Etale.upperStar A g).obj F) := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)
