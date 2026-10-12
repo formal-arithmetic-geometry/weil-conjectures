@@ -9,16 +9,30 @@
  },
  "proof": [
   {
-   "text": "Apply the existing injective-presheaf/Cech exactness or sheaf gluing argument stated in the source, with the categorical product universal property and the indicated universe bounds.",
+   "text": "Use Presheaf.IsSheaf.hom_ext_ofArrows and the component hypothesis he, pulled back along singleton product diagonals, to prove that e.f 0 is monic. Reduce the degree-zero quasi-isomorphism to invertibility of its lift to zero cycles with CochainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_isIso_liftCycles.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply categorical zero-cocycle compatibility to the universal cycle inclusion. The extracted local morphisms form a compatible family.",
+   "uses": [
+    "lem-sc-cech-zero-cocycle-compatibility"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply the proved Mathlib sheaf amalgamateOfArrows to this family. Its restriction equations, he, and the inverse singleton projection identities prove g e.f 0 equals the cycle inclusion. Kernel inclusion cancellation gives g f = id for the cycle lift f; monicity of f gives f g = id. These equations construct IsIso f.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-cech-zero-cocycle-compatibility"
+ ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/03AW",
-  "place": "Tags 03AW and 03AN"
+  "document": "https://stacks.math.columbia.edu/tag/03AN",
+  "place": "Degree-zero descent via zero-cocycle compatibility, Mathlib sheaf separatedness and amalgamation; completed by the M1 second reader"
  },
  "mathlib_searches": [
   {
@@ -90,11 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "X-2379b",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T163614-L-2785334",
+  "landing": "20261012T194123-L-458930",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Both Lean statements and proofs match their DAG records; existing signature unchanged; both delivered modules and the sole direct importer compile cleanly; axiom checks show only propext, Classical.choice, and Quot.sound; import pruning is documented and no sorry remains."
  }
 }

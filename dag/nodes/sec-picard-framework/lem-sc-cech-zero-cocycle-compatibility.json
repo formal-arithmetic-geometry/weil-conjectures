@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-cech-zero-cocycle-compatibility",
+ "kind": "statement",
+ "title": "Categorical degree-zero Cech cocycles give compatible local morphisms",
+ "statement": "For an abelian-group-valued presheaf P on C, a family of arrows pi_i : U_i -> X, and an abelian group E, any morphism z from E to the categorical product of singleton-product presheaf values killed by the first Mathlib Cech differential gives compatible morphisms to P(U_i). For a : W -> U_i and b : W -> U_j with a pi_i = b pi_j, extract the i and j components of z and identify singleton products with U_i and U_j using their diagonal inverses; the resulting morphisms agree after restriction along a and b. No covering or sheaf hypothesis is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AN",
+  "place": "Tags 03AM and 03AN; first Cech differential and zero-cocycle compatibility"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Expand the first alternating coface differential as delta_0 minus delta_1. Project z d^0 = 0 to the tuple (i,j), using the FormalCoproduct evaluation product-projection equation. The two resulting restrictions to the pair product agree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two maps from Fin 1 to Fin 2 skipping 0 and 1 are respectively constant 1 and constant 0. Thus the coface maps are the product lifts of the pair projections to singleton products.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the arrow from W over X to the pair product by the finite product universal property, using a pi_i = b pi_j. Its composites with the singleton coface maps are a followed by the singleton diagonal and b followed by the singleton diagonal. Restrict the projected equation along this arrow and use presheaf functoriality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03AN",
+  "place": "Tags 03AM and 03AN; categorical calculation checked against Mathlib FormalCoproduct and alternating coface definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms killed by the first differential of the categorical Cech complex give compatible local sections",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element killed by the first alternating Cech differential restricts to equal sections along two arrows over the base",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, TopCat.Presheaf.IsCompatible.sectionPairwise, CategoryTheory.Meq.condition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.Equalizer.Sieve.compatible_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue",
+   "verdict": "No existing statement for morphisms into Mathlib categorical Cech products; generic sheaf or Cech definitions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-12",
+   "results": "1 hits: CategoryTheory.cechComplexFunctor",
+   "verdict": "No existing statement for morphisms into Mathlib categorical Cech products; generic sheaf or Cech definitions only."
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCofaceMapComplex|hom_ext_ofArrows|cech.*[Cc]ompatib",
+   "date": "2026-10-12",
+   "results": "4 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Hypercover/One.lean",
+   "verdict": "No existing statement for morphisms into Mathlib categorical Cech products; generic sheaf or Cech definitions only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheafCechAugmentationDegreeZero",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-sheaf-cech-augmentation-degree-zero",
+   "place": "zero-cocycle compatibility in the sheaf gluing argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CechZeroCocycleCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/CechZeroCocycleCompatibility.lean",
+  "declaration": "CategoryTheory.cech_zero_cocycle_compatibility",
+  "statement": "theorem cech_zero_cocycle_compatibility\n    {C : Type u} [Category.{v} C] [HasFiniteWidePullbacks C]\n    (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) (X : C)\n    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)\n    {E : AddCommGrpCat.{v}}\n    (z : E ⟶ ∏ᶜ (fun s : Fin 1 → ι ↦\n      P.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)))\n    (hz : z ≫ ((cechComplexFunctor (fun i ↦ Over.mk (π i))).obj\n      ((Over.forget X).op ⋙ P)).d 0 1 = 0)\n    {W : C} {i j : ι} (a : W ⟶ U i) (b : W ⟶ U j)\n    (hab : a ≫ π i = b ≫ π j) :\n    z ≫ Pi.π (fun s : Fin 1 → ι ↦\n      P.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)) (fun _ ↦ i) ≫\n        P.map (Pi.lift (fun _ : Fin 1 ↦ 𝟙 (Over.mk (π i)))).left.op ≫ P.map a.op =\n    z ≫ Pi.π (fun s : Fin 1 → ι ↦\n      P.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)) (fun _ ↦ j) ≫\n        P.map (Pi.lift (fun _ : Fin 1 ↦ 𝟙 (Over.mk (π j)))).left.op ≫ P.map b.op",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2379b",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T194123-L-458930",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2379b",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T194123-L-458930",
+  "kind": "interface",
+  "note": "independent Codex review: Both Lean statements and proofs match their DAG records; existing signature unchanged; both delivered modules and the sole direct importer compile cleanly; axiom checks show only propext, Classical.choice, and Quot.sound; import pruning is documented and no sorry remains."
+ }
+}
