@@ -1,0 +1,151 @@
+{
+ "id": "lem-pc-perfect-affine-map-representative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the object of the thick closure of the perfect generator and the cone I are perfect",
+   "via": [
+    "lem-pc-perfect-two-out-of-three",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-pseudo-coherent-support-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Chain-map representatives of affine strictly perfect derived arrows",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, and $A^\\bullet,B^\\bullet$ strictly perfect complexes of $\\mathcal O_U$-modules [def-pc-perfect-complex]. For every arrow $f:Q(A^\\bullet)\\to Q(B^\\bullet)$ in $D(\\mathcal O_U)$ [def-weil-abstract-derived-category], there is a chain map $\\alpha:A^\\bullet\\to B^\\bullet$ such that $Q(\\alpha)=f$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport the localized site to the affine scheme $U\\cong\\operatorname{Spec}(R)$. Each term of the transported $A^\\bullet$ and $B^\\bullet$ is a retract of a finite free sheaf, hence quasi-coherent. The affine tilde/global-sections adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction] recovers these terms by its counit. Taking sections termwise constructs bounded complexes $P^\\bullet,Q^\\bullet$ of finite projective $R$-modules: map the finite-free retract equations to sections. The counit is natural in the differentials, hence yields actual complex isomorphisms $\\widetilde P\\cong A$ and $\\widetilde Q\\cong B$.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  },
+  {
+   "text": "Conjugate $f$ by these complex isomorphisms. The factorization isomorphism of [lem-pc-affine-qcoh-derived-equivalence] identifies the resulting arrow with an arrow between the images of $Q(P)$ and $Q(Q)$ in the full quasi-coherent derived subcategory. Its fully faithful inclusion and the equivalence lift the arrow to $D(R)$. By [lem-pc-ring-derived-map-representative], since $P$ is bounded above and projective, this lift has a chain-map representative $\\beta:P\\to Q$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  },
+  {
+   "text": "Sheafify $\\beta$ termwise, conjugate by the complex counit isomorphisms, and transport back to the localized site. Naturality of the factorization isomorphism for the affine equivalence shows that the image of this chain map under $Q$ is the original $f$. This proof uses actual complexes of sections; it chooses no object from an undetermined existence theorem. In the empty affine case all objects and arrows vanish.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between strictly perfect complexes on affine schemes are represented by chain maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every derived morphism between bounded strictly perfect complexes on an affine scheme is represented by a chain map",
+   "results": "DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac, DerivedCategory.left_fac, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component API only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_Q_map_eq|perfect_affine_map|IsStrictlyPerfect",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_affine_map_representative",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineMapRepresentative.lean",
+  "statement": "theorem perfect_affine_map_representative (X : Scheme.{u}) (U : X.Opens) [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (hU : IsAffineOpen U) (A B : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hA : IsStrictlyPerfect X U A) (hB : IsStrictlyPerfect X U B) (f : DerivedCategory.Q.obj A ⟶ DerivedCategory.Q.obj B) : ∃ α : A ⟶ B, DerivedCategory.Q.map α = f",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T194144-L-465996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T194144-L-465996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

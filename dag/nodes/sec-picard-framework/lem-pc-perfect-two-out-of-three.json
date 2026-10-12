@@ -26,56 +26,56 @@
  ],
  "proof": [
   {
-   "text": "Perfectness is local by [def-pc-perfect-complex]. In each of the three cases (K and L perfect, L and M perfect, or K and M perfect), intersect the covers given by the definition for the two perfect terms and refine to a common affine cover; restrictions of strictly perfect complexes to smaller opens remain strictly perfect. Fix a member $U=\\operatorname{Spec}(R)$. Restriction to $U$ is exact on complexes of $\\mathcal O_X$-modules and commutes with mapping cones, so it carries the distinguished triangle to a distinguished triangle $K_U\\to L_U\\to M_U\\to K_U[1]$ of $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. By the affine clause of [def-pc-perfect-complex] (Tag 08EB), each of the two perfect terms is isomorphic in $D(\\mathcal O_U)$ to $\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $R$-modules.",
+   "text": "Given perfect first and second terms, [lem-pc-perfect-common-affine-models] supplies at each point one affine open and strictly perfect models for both terms. Apply [lem-pc-perfect-affine-cone-model] on that open. The resulting local models of the third term satisfy the definition [def-pc-perfect-complex], proving the first two-out-of-three implication.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CR, local reduction to an affine open"
-   }
-  },
-  {
-   "text": "Case K and L perfect: $K_U\\cong\\widetilde{A^\\bullet}$ and $L_U\\cong\\widetilde{B^\\bullet}$ with $A^\\bullet,B^\\bullet$ bounded complexes of finite projective $R$-modules. By [lem-pc-affine-qcoh-derived-equivalence] the morphism $K_U\\to L_U$ is the image of a morphism $A^\\bullet\\to B^\\bullet$ in $D(R)$, and by [lem-sc-affine-projective-complex-derived-hom] (applied to the bounded projective complex $A^\\bullet$ and the bounded complex $B^\\bullet$; $H^0$ of the Hom complex is chain maps modulo homotopy) that morphism is represented by a chain map $\\alpha:A^\\bullet\\to B^\\bullet$. Its cone $C(\\alpha)^r=B^r\\oplus A^{r+1}$ is a bounded complex of finite projective $R$-modules, and $\\widetilde{C(\\alpha)}=C(\\widetilde\\alpha)$ termwise, so the cone triangle $\\widetilde{A^\\bullet}\\to\\widetilde{B^\\bullet}\\to\\widetilde{C(\\alpha)}\\to\\widetilde{A^\\bullet}[1]$ is distinguished in $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. By (TR3) of [def-weil-triangulated-category] there is a morphism from this triangle to the restricted triangle extending the two isomorphisms, and by [lem-sf-triangle-morphism-iso] the third component $\\widetilde{C(\\alpha)}\\to M_U$ is an isomorphism. Case L and M perfect: by (TR2) of [def-weil-triangulated-category] the rotated triangle $L_U\\to M_U\\to K_U[1]\\to L_U[1]$ is distinguished, and the first case gives $K_U[1]\\cong\\widetilde{C^\\bullet}$ with $C^\\bullet$ bounded finite projective, hence $K_U\\cong\\widetilde{C^\\bullet[-1]}$, a reindexing. Case K and M perfect: applying (TR2) twice in the inverse direction, $M_U[-1]\\to K_U\\to L_U\\to M_U$ is distinguished, and the first case applied to $M_U[-1]$ and $K_U$ gives $L_U\\cong\\widetilde{C^\\bullet}$ with $C^\\bullet$ bounded finite projective. In every case the remaining term restricted to $U$ is isomorphic to $\\widetilde{C^\\bullet}$, which is strictly perfect since each finite projective $R$-module is a direct summand of a finite free module.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-sc-affine-projective-complex-derived-hom",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CR, affine mapping-cone construction"
-   }
-  },
-  {
-   "text": "The affine representatives obtained in Step 2 show that whichever term was not assumed perfect restricts to a strictly perfect complex on every member of the common affine cover. By the definition of a perfect complex [def-pc-perfect-complex], that term is perfect on X.",
-   "uses": [
+    "lem-pc-perfect-common-affine-models",
+    "lem-pc-perfect-affine-cone-model",
     "def-pc-perfect-complex"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08CR, gluing the local conclusion"
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  },
+  {
+   "text": "Perfectness is invariant under isomorphism: map the inverse isomorphism through each open restriction and compose it with the representing isomorphism. It is invariant under any integer shift: replace a local model $K$ with $K[n]$, replace its bounds $a,b$ with $a-n,b-n$, and use the same finite-free retract pair in degree $i+n$. The commutation isomorphisms of exact restriction and $Q$ with shifts give the required derived isomorphism.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-weil-abstract-derived-category",
+    "lem-sc-derived-hom-mayer-vietoris"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  },
+  {
+   "text": "If the last two terms are perfect, rotate by TR2 [def-weil-triangulated-category] and apply the first case to obtain perfection of $T_1[1]$. Shift by $-1$ and transport across the canonical cancellation isomorphism to prove perfection of $T_1$. If the first and last terms are perfect, inverse-rotate to $T_3[-1]\\to T_1\\to T_2$; shift invariance and the first case prove perfection of $T_2$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
    }
   }
  ],
  "proof_deps": [
+  "lem-pc-perfect-common-affine-models",
+  "lem-pc-perfect-affine-cone-model",
   "def-pc-perfect-complex",
   "def-weil-abstract-derived-category",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-sc-affine-projective-complex-derived-hom",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso"
+  "lem-sc-derived-hom-mayer-vietoris",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08CR (lemma-two-out-of-three-perfect)"
+  "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
  },
  "mathlib_searches": [
   {
@@ -159,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T194144-L-465996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

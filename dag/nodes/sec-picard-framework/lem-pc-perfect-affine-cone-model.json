@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-perfect-affine-cone-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the object of the thick closure of the perfect generator and the cone I are perfect",
+   "via": [
+    "lem-pc-perfect-two-out-of-three",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-pseudo-coherent-support-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strictly perfect affine cone models",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an affine open, and $T$ a distinguished triangle of $D(\\mathcal O_X)$ [def-pc-derived-category] [def-weil-triangulated-category]. Suppose strictly perfect complexes $A^\\bullet,B^\\bullet$ [def-pc-perfect-complex] represent $T_1|_U,T_2|_U$. Then there is a strictly perfect complex $K^\\bullet$ representing $T_3|_U$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-triangulated-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Exact open restriction [lem-sc-derived-hom-mayer-vietoris] carries $T$ to a distinguished triangle. Conjugate its first arrow by the given representing isomorphisms, and apply [lem-pc-perfect-affine-map-representative] to get a chain map $\\alpha:A\\to B$ whose localized arrow is that conjugated arrow.",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-pc-perfect-affine-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  },
+  {
+   "text": "Construct $K=C(\\alpha)$ [def-weil-abstract-derived-category]. Its degree $i$ term is $A^{i+1}\\oplus B^i$. If the bounds of $A,B$ are $[a_1,b_1],[a_2,b_2]$, this is zero outside $[\\min(a_1-1,a_2),\\max(b_1-1,b_2)]$. The biproduct of their finite-free retract pairs is again a retract pair, by checking the two projections. A binary sum of finite free sheaves is free on the disjoint union of their finite bases; reindex by a finite ordinal and its universe lift. Thus $K$ satisfies precisely [def-pc-perfect-complex], including zero-rank retracts.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  },
+  {
+   "text": "The image of the cone triangle under $Q$ is distinguished [def-weil-abstract-derived-category]. Its first arrow agrees with the restricted arrow by the representative equation. TR3 [def-weil-triangulated-category] completes the first two isomorphisms to a triangle morphism; [lem-sf-triangle-morphism-iso] makes the third component an isomorphism. Its inverse gives $T_3|_U\\cong Q(K)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-pc-perfect-affine-map-representative",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-complex",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR (lemma-two-out-of-three-perfect), second proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mapping cone of a morphism between strictly perfect complexes is strictly perfect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping cones of bounded complexes whose terms are retracts of finite free sheaves are strictly perfect",
+   "results": "CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component API only"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overMapUnitIso|isZero_X_iff",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; component API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectAffineConeModel",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_affine_cone_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineConeModel.lean",
+  "statement": "theorem perfect_affine_cone_model (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (U : X.Opens) (hU : IsAffineOpen U) (T : Triangle (schemeDerivedCategory X)) (hT : T ∈ distTriang (schemeDerivedCategory X)) (A B : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hA : IsStrictlyPerfect X U A) (hB : IsStrictlyPerfect X U B) (eA : Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₁ ≅ DerivedCategory.Q.obj A)) (eB : Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₂ ≅ DerivedCategory.Q.obj B)) : ∃ K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, IsStrictlyPerfect X U K ∧ Nonempty ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj T.obj₃ ≅ DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T194144-L-465996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T194144-L-465996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

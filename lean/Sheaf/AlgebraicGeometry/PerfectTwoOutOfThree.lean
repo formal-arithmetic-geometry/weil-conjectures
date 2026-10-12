@@ -6,8 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.Paper.AffineProjectiveComplexDerivedHom
+import Sheaf.AlgebraicGeometry.PerfectCommonAffineModels
+import Sheaf.AlgebraicGeometry.PerfectAffineConeModel
 
 /-! # Two out of three for perfect complexes on a scheme
 
@@ -22,6 +22,33 @@ universe u w
 open CategoryTheory CategoryTheory.Pretriangulated
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem perfect_of_iso (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    {E F : schemeDerivedCategory X} (e : E ≅ F) (hE : IsPerfect X E) :
+    IsPerfect X F := by
+  intro x
+  obtain ⟨U, hx, K, hK, ⟨eK⟩⟩ := hE x
+  exact ⟨U, hx, K, hK, ⟨((SheafOfModules.overFunctor
+    (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso e.symm) ≪≫ eK⟩⟩
+
+private theorem perfect_shift (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    {E : schemeDerivedCategory X} (hE : IsPerfect X E) (n : ℤ) :
+    IsPerfect X (E⟦n⟧) := by
+  intro x
+  obtain ⟨U, hx, K, ⟨⟨a, b, hb⟩, hf⟩, ⟨eK⟩⟩ := hE x
+  refine ⟨U, hx, K⟦n⟧, ⟨?_, ?_⟩, ?_⟩
+  · refine ⟨a - n, b - n, fun i hi ↦ ?_⟩
+    exact hb (i + n) (by omega)
+  · exact fun i ↦ hf (i + n)
+  · let F := (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory
+    exact ⟨(F.commShiftIso n).app E ≪≫ (shiftFunctor _ n).mapIso eK ≪≫
+      ((DerivedCategory.Q.commShiftIso n).app K).symm⟩
 
 /-- In a distinguished triangle of `D(𝒪_X)`, any two perfect terms force the third to be
 perfect. Source: Stacks Project, Cohomology of Sheaves, Lemma 20.49.7, Tag 08CR
@@ -53,6 +80,21 @@ theorem isPerfect_two_out_of_three (X : Scheme.{u})
     (IsPerfect X T.obj₁ → IsPerfect X T.obj₂ → IsPerfect X T.obj₃) ∧
       (IsPerfect X T.obj₂ → IsPerfect X T.obj₃ → IsPerfect X T.obj₁) ∧
       (IsPerfect X T.obj₁ → IsPerfect X T.obj₃ → IsPerfect X T.obj₂) := by
-  sorry
+  have hcone (S : Triangle (schemeDerivedCategory X))
+      (hS : S ∈ distTriang (schemeDerivedCategory X))
+      (h₁ : IsPerfect X S.obj₁) (h₂ : IsPerfect X S.obj₂) : IsPerfect X S.obj₃ := by
+    intro x
+    obtain ⟨U, hx, hU, A, B, hA, hB, eA, eB⟩ :=
+      perfect_common_affine_models X S.obj₁ S.obj₂ h₁ h₂ x
+    obtain ⟨K, hK, eK⟩ := perfect_affine_cone_model X U hU S hS A B hA hB eA eB
+    exact ⟨U, hx, K, hK, eK⟩
+  refine ⟨hcone T hT, ?_, ?_⟩
+  · intro h₂ h₃
+    have hshift : IsPerfect X (T.obj₁⟦(1 : ℤ)⟧) :=
+      hcone T.rotate (rot_of_distTriang T hT) h₂ h₃
+    exact perfect_of_iso X ((shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by omega)).app T.obj₁)
+      (perfect_shift X hshift (-1))
+  · intro h₁ h₃
+    exact hcone T.invRotate (inv_rot_of_distTriang T hT) (perfect_shift X h₃ (-1)) h₁
 
 end AlgebraicGeometry.Scheme
