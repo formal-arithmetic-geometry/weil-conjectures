@@ -6,8 +6,8 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
+import Sheaf.CategoryTheory.FilteredCohomologyImageNormalized
 
 /-! # A cycle presentation of the graded cohomology image
 
@@ -49,6 +49,10 @@ theorem cohomologyImage_graded_presentation
   let B := imageSubobject (K.d (n - 1) n)
   Nonempty ((L.cohomologyImage n).gradedPiece p ≅
     cokernel ((Subobject.pullback (A ⊓ Z).arrow).obj
-      ((A ⊓ B) ⊔ (A' ⊓ Z))).arrow) := by sorry
+      ((A ⊓ B) ⊔ (A' ⊓ Z))).arrow) := by
+  dsimp only
+  obtain ⟨hBZ, ⟨e₀⟩⟩ := cohomologyImage_graded_normalized L p n
+  obtain ⟨e₁⟩ := L.normalizedStationaryQuotient_presentation p n hBZ
+  exact ⟨e₀ ≪≫ e₁⟩
 
 end CategoryTheory.DecreasingFiltration
