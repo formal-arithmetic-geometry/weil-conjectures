@@ -6,10 +6,9 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.FlatOfFpqcCover
-import Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
-import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Etale descent along fpqc coverings
@@ -36,6 +35,9 @@ theorem etale_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, Etale (pullback.snd f (g i))) : Etale f := by
-  sorry
+  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (P := @Etale)
+    (Precoverage.generate_mem_toGrothendieck hg) f
+    (fun i ↦ pullback.fst f (g i)) (fun i ↦ pullback.snd f (g i))
+    (fun i ↦ IsPullback.of_hasPullback f (g i)) h
 
 end AlgebraicGeometry
