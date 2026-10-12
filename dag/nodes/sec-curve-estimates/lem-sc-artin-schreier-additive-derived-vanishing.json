@@ -23,37 +23,36 @@
  },
  "proof": [
   {
-   "text": "Use the natural injective-resolution comparison of derived global sections on a sheaf placed in degree zero with ordinary sheaf cohomology.",
+   "text": "Finite type over the field gives CompactSpace C. The separated structure morphism and separated affine base imply C.IsSeparated. Apply the coefficient-universe comparison to the unit module and degree q.",
    "uses": [
-    "lem-sp-kinjective-computes",
-    "lem-sp-derived-functor-single-identification"
+    "lem-sc-etale-qcoherent-cohomology-ulift"
    ],
    "elementary": false
   },
   {
-   "text": "Compute the change of coefficient universe using finite affine etale hypercovers: quasi-compactness supplies finite refinements in each relevant degree. Universe lift identifies finite products, cocycles, and coboundaries, without an assumption that it preserves injective sheaves.",
+   "text": "Apply subsingleton_etale_ga_and_structure_cohomology to the smooth connected curve in degree q>=2. The unitObj and unit definitions agree. Transfer small-coefficient subsingletonness to the lifted sheaf using injectivity of the additive equivalence from step 1.",
    "uses": [
     "lem-sc-ga-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "The additive etale structure sheaf has zero cohomology in degree at least two, by its Zariski comparison and the Noetherian dimension-one bound. Transport vanishing through the previous comparisons and the given sheaf isomorphism.",
+   "text": "Apply the functor Sheaf.functorH to the given sheaf isomorphism e. Its induced additive equivalence transports subsingletonness to Sheaf.H G q. Use nonempty_sheafH_extDerivedIso and AddCommGrpCat.isZero_iff_subsingleton to transport the zero object to the specified derived etale cohomology of G placed in degree zero.",
    "uses": [
-    "lem-sc-ga-cohomology"
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sp-kinjective-computes",
-  "lem-sp-derived-functor-single-identification",
-  "lem-sc-ga-cohomology"
+  "lem-sc-etale-qcoherent-cohomology-ulift",
+  "lem-sc-ga-cohomology",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
-  "place": "step 2: additive cohomology vanishing, including the coefficient-universe and derived-encoding comparisons; the derived-encoding glue is made explicit by second reader B2"
+  "document": "https://stacks.math.columbia.edu/tag/03P2; https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "H1 Lean realization: coefficient-universe comparison, existing Ga vanishing, and existing natural comparison of Sheaf.H with derived etale cohomology. The sole open step is the independent finite-affine-cover coefficient comparison."
  },
  "mathlib_searches": [
   {
@@ -137,9 +136,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T053918-L-2629101",
+  "landing": "20261012T070537-L-3471264",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

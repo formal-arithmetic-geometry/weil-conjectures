@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-etale-qcoherent-cohomology-ulift",
+ "kind": "statement",
+ "title": "Quasi-coherent etale cohomology is unchanged by coefficient universe lift",
+ "statement": "Let X be a quasi-compact separated scheme [def-weil-pbc-scheme-conventions] and F a quasi-coherent O_X-module [pqf-def-coherent]. Let F_et be its associated additive sheaf [def-sc-etale-qcoherent-module]. For every natural q there exists an additive equivalence H^q(X_et, ULift(F_et)) ≃+ H^q(X_et,F_et), where the left coefficients lie in AddCommGrpCat.{u+1} and the right coefficients lie in AddCommGrpCat.{u}. Both sides are the Ext-defined Sheaf.H groups. No curve, dimension, smoothness or vanishing hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, separated-case affine-cover Cech comparison; also Proposition 35.9.3 (03DW), part (2). Coefficient-universe comparison obtained by applying this same computation in each universe."
+ },
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover of the quasi-compact separated scheme X. Finite intersections are affine. Pullback preserves quasi-coherence, and the pullback-composition identifications identify the restriction of the associated sheaf with the sheaf of the restricted module. The same is true after coefficient lift, sectionwise.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each finite affine intersection, apply the small-coefficient affine acyclicity theorem and its lifted-coefficient version. The latter uses faithfully flat Amitsur exactness in the lifted section complex, without assuming that ULift preserves injectives.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent-succ",
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Cech-to-derived spectral sequence to the open covering, in each coefficient universe. The positive-cohomology rows vanish by step 2, so the sole degree-zero row identifies sheaf cohomology with Cech cohomology in every degree. Identify H at the terminal object with this abutment.",
+   "uses": [
+    "lem-sc-cech-spectral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lifted Cech complex identifies with the coefficient lift of the small Cech complex. Indeed each degree has finitely many cover tuples; the finite-product comparison commutes with restriction maps and alternating sums. AddCommGrpCat.uliftFunctor preserves finite limits and colimits, so the short-complex mapHomologyIso identifies their homology groups. Unlift this additive isomorphism and compose with the two comparisons of step 3. At degree zero this is the sectionwise ULift equivalence. The empty cover and zero module give zero complexes, so these boundary cases are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-etale-affine-qcoherent-succ",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-cech-spectral"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Separated-case proof, applied to a finite affine open cover in each coefficient universe; coefficient lift preserves finite products and homology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a sheaf of abelian groups is unchanged by lifting its coefficient universe",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.instAddCommGroupH; CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq; CategoryTheory.Presieve.isSheaf_comp_uliftFunctor; CategoryTheory.PresheafOfGroups.H1; CochainComplex.HomComplex.CohomologyClass",
+   "digest": "6eb8dddc347d9684",
+   "verdict": "No theorem comparing the two coefficient universes in quasi-coherent etale cohomology; the hits define sheaf cohomology or coefficient lift only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uliftFunctor\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.uliftFunctor; CategoryTheory.fullyFaithfulULiftFunctor; CategoryTheory.uliftFunctor_faithful; CategoryTheory.uliftFunctor_full; CategoryTheory.uliftFunctor_obj; CategoryTheory.uliftFunctorTrivial; CategoryTheory.uliftFunctor_map; AddCommMonCat.uliftFunctor",
+   "digest": "ea4cea380af8f412",
+   "verdict": "No theorem comparing the two coefficient universes in quasi-coherent etale cohomology; the hits define sheaf cohomology or coefficient lift only."
+  },
+  {
+   "tool": "grep",
+   "query": "ulift.*cohomology|cohomology.*ulift|cohomology.*universe",
+   "date": "2026-10-12",
+   "results": "No matches",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No theorem comparing the two coefficient universes in quasi-coherent etale cohomology; the hits define sheaf cohomology or coefficient lift only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a quasi coherent etale sheaf is unchanged by coefficient universe lift",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierAdditiveVanishing",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-additive-derived-vanishing",
+   "place": "Step 2: coefficient-universe comparison, isolated independently of dimension and derived encoding",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleQcoherentCohomologyULift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_etaleTensorSectionsSheaf_cohomology_ulift",
+  "statement": "theorem nonempty_etaleTensorSectionsSheaf_cohomology_ulift (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated] (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) : Nonempty (Sheaf.H ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (etaleTensorSectionsSheaf F)) q ≃+ Sheaf.H (etaleTensorSectionsSheaf F) q)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T070537-L-3471264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T070537-L-3471264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

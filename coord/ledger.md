@@ -6605,3 +6605,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/G1/Sheaf.RingTheory.QuotientHenselianPair (stage 3; reviewer PASS; first push; landing 20261012T070537-L-3470895 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/G2/Sheaf.Paper.SplitCoverSectionsLimit (stage 3; reviewer PASS; first push; landing 20261012T070537-L-3471033 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/H1/Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian (stage 3; reviewer PASS; first push; landing 20261012T070537-L-3471159 (proof); batch 20261012T070523; modules 1; new nodes 1)
+- 07:05 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Curve.ArtinSchreierAdditiveVanishing (stage 3; reviewer PASS; first push; landing 20261012T070537-L-3471264 (interface); batch 20261012T070523; modules 2; new nodes 1; change records: coord/changes/etale-qcoherent-cohomology-ulift.md)
