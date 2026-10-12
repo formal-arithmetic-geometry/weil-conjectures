@@ -7,10 +7,9 @@ module
 
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
-import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
+public import Sheaf.AlgebraicGeometry.EtaleRestrictedTotalResolution
+public import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComparison
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Sheaf.CategoryTheory.KInjectiveComputes
 
 /-! # Computing one filtered Cartan--Eilenberg step
 
@@ -25,6 +24,27 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
+
+/-- The canonical filtered-step cohomology comparison. Its first factor is the
+inverse of the sections lift through the monic step inclusion; its second is
+cohomology of the specified restricted K-injective augmentation.
+Source: Stacks, Tag 015J, proof remark (3), and Tag 0133.
+(blueprint: def-weil-pbc-etale-filtered-step-cohomology-iso). -/
+noncomputable def etaleFilteredStepCohomologyIso
+    (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) :
+    ((T.L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ).homology p) ≅
+      (cohomology AddCommGrpCat.{u + 1} X p).obj
+        (DerivedCategory.Q.obj (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q))) := by
+  letI := (etaleRestrictedTotal_resolution X K T q).1
+  letI := (etaleRestrictedTotal_resolution X K T q).2
+  letI := etaleRestrictedSectionsLift_isIso X K T q
+  exact (HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (ComplexShape.up ℤ)
+    p).mapIso (asIso (etaleRestrictedSectionsLift X K T q)).symm ≪≫
+      resolutionEtaleCohomologyIso X
+        (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q))
+        (etaleRestrictedTotal X K T q) (etaleRestrictedAugmentation X K T q) p
 
 /-- The cohomology of one filtered total step computes derived global sections of
 one fixed stupid truncation, compatibly with its inclusion in the full complex.
@@ -59,13 +79,13 @@ theorem etale_filtered_step_cohomology_iso
     Nonempty (((T.L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ).homology p) ≅
         (cohomology AddCommGrpCat.{u + 1} X p).obj
           (DerivedCategory.Q.obj (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q)))) := by
-  sorry
+  exact ⟨etaleFilteredStepCohomologyIso X K T p q⟩
 
 /-- Compatibility of the canonical filtered-step isomorphism with truncation inclusion.
 Source: Stacks Project, Tags 015J and 0133; restricted augmented-total comparison.
 
-Proof: Use the restricted augmented Cartan--Eilenberg total from
-`etale_filtered_step_cohomology_iso`. The diagonal description of the mapped total
+Proof: Use the explicit restricted augmentation and total from
+`etaleRestrictedAugmentation`. The diagonal description of the mapped total
 identifies its inclusion into the full mapped total with `(T.L.step q).arrow`.
 The augmentation comparison agrees with the truncation inclusion on degree-zero
 summands by `T.aug_formula` and `T.over_K`; the K-injective comparison principle
@@ -79,7 +99,7 @@ theorem etale_filtered_step_cohomology_compatibility
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) :
     HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom =
-      (Classical.choice (etale_filtered_step_cohomology_iso X K T p q)).hom ≫
+      (etaleFilteredStepCohomologyIso X K T p q).hom ≫
         (cohomology AddCommGrpCat.{u + 1} X p).map
           (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q))) := by
   sorry
@@ -94,7 +114,7 @@ theorem etale_filtered_step_cohomology
       HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom =
         e.hom ≫ (cohomology AddCommGrpCat.{u + 1} X p).map
           (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q))) := by
-  let e := Classical.choice (etale_filtered_step_cohomology_iso X K T p q)
+  let e := etaleFilteredStepCohomologyIso X K T p q
   refine ⟨e, ?_⟩
   exact etale_filtered_step_cohomology_compatibility X K T p q
 

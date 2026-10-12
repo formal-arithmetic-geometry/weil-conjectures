@@ -15,28 +15,22 @@
  ],
  "proof": [
   {
-   "text": "Apply etale_filtered_step_cohomology_iso to obtain an isomorphism e for the filtered step and stupid truncation.",
+   "text": "Take e := etaleFilteredStepCohomologyIso X K T p q, the concrete composite of the inverse sections lift and derived-resolution comparison. Pair it with etale_filtered_step_cohomology_compatibility, which now refers to that same map. The existential statement is unchanged.",
    "uses": [
-    "lem-weil-pbc-etale-filtered-step-cohomology-iso"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply etale_filtered_step_cohomology_compatibility to this chosen e; the displayed homology equation is exactly the target conclusion.",
-   "uses": [
+    "def-weil-pbc-etale-filtered-step-cohomology-iso",
     "lem-weil-pbc-etale-filtered-step-cohomology-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-filtered-step-cohomology-iso",
+  "def-weil-pbc-etale-filtered-step-cohomology-iso",
   "lem-weil-pbc-etale-filtered-step-cohomology-compatibility"
  ],
  "proof_origin": {
-  "by": "worker W2",
+  "by": "worker P1",
   "document": "Stacks Project, Tags 015J and 0133",
-  "place": "Restricted filtered-step comparison, decomposed into existence and compatibility"
+  "place": "Repair E3: explicit restricted augmentation, monic sections lift, and derived-cohomology comparison"
  },
  "mathlib_searches": [
   {
@@ -125,8 +119,8 @@
   "declaration": "AlgebraicGeometry.Etale.etale_filtered_step_cohomology",
   "statement": "theorem etale_filtered_step_cohomology (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) : ∃ e : ((T.L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ).homology p) ≅ (cohomology AddCommGrpCat.{u + 1} X p).obj (DerivedCategory.Q.obj (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q))), HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom = e.hom ≫ (cohomology AddCommGrpCat.{u + 1} X p).map (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))",
   "branch": "sheaf-dag",
-  "by": "Q1",
-  "date": "2026-10-12"
+  "by": "P1",
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -141,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-4f3ba",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T163623-L-2788701",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T203946-L-831528",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the canonical comparison, remaining property statements, proof routes, and change record with the delivered Lean and nodes; all six modules and the sole direct importer compile cleanly, with only permitted axioms and expected sorryAx dependencies."
  }
 }

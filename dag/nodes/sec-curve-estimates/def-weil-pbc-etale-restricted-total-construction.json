@@ -1,0 +1,107 @@
+{
+ "id": "def-weil-pbc-etale-restricted-total-construction",
+ "kind": "definition",
+ "title": "Concrete restricted CE total and sections inclusion",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $K$ a bounded-below cochain complex of abelian sheaves on its small étale site [def-weil-pbc-etale-sheaves], and $T$ an étale termwise hypercohomology presentation of $K$ [def-weil-pbc-termwise-hypercohomology-presentation]. Let $q$ be any integer. Define $I_q=\\sigma_{\\ge q}T.I$, truncating the complex-degree index and retaining nonnegative resolution degree, and $R_q=\\operatorname{Tot}((I_q\\text{ extended in resolution degree}).\\mathrm{flip})$. Define augmentation components from $\\sigma_{\\ge q}K$ using the truncation inclusion, $T.a$, the degreewise truncation projection, and the resolution-degree-zero total summand. For abelian Grothendieck categories $A,B$, an additive $F:A\\to B$, and a rowwise bounded-below bicomplex $I$, define $\\operatorname{Tot}(FI)\\cong F\\operatorname{Tot}(I)$ from the extension natural isomorphism and coproduct comparison: each diagonal has finitely many nonzero terms. Using this canonical comparison, define $s_q:\\Gamma R_q\\to\\operatorname{Tot}(\\Gamma T.I)$ by totalizing $I_q\\to T.I$. No isomorphism is chosen from an unproved existence theorem.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof remark (3) and finite-diagonal comparison; Tag 0133, augmented-total quasi-isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker P1",
+  "document": "Stacks Project, Tags 015J and 0133",
+  "place": "Concrete restricted augmentation and finite-diagonal sections comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite diagonal total complex of injective resolutions is a K-injective resolution of the stupid truncation",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subobject.factorThru",
+   "results": "CategoryTheory.Subobject.factorThru; CategoryTheory.Subobject.factorThru_arrow; CategoryTheory.Subobject.factorThru_mk_self; CategoryTheory.Subobject.factorThru_arrow_assoc; CategoryTheory.Subobject.factorThru_right; CategoryTheory.Subobject.factorThru_comp_arrow; CategoryTheory.Subobject.factorThru_self; CategoryTheory.Subobject.factorThru_ofLE",
+   "verdict": "generic ingredients; no restricted étale total comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "stupidTrunc|mapTotalIso|factorThru_arrow",
+   "results": "Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/FactorThru.lean; Mathlib/CategoryTheory/Subobject/FactorThru.lean; Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+   "verdict": "generic ingredients; no restricted étale total comparison",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Filtered total step resolves the fixed stupid truncation, in the proof of lem-weil-pbc-etale-presentation-image-filtration",
+   "via": [
+    "lem-weil-pbc-etale-filtered-step-cohomology",
+    "lem-weil-pbc-etale-presentation-image-filtration",
+    "lem-weil-pbc-etale-complex-filtration-page-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictedTotalConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictedTotalConstruction.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleRestrictedTotal",
+  "statement": "def etaleRestrictedTotal (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (T : EtaleTermwiseHypercohomology X K) (q : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleCEMappedTotalIso",
+   "AlgebraicGeometry.Etale.etaleRestrictedBicomplex",
+   "AlgebraicGeometry.Etale.etaleRestrictedTotal",
+   "AlgebraicGeometry.Etale.etaleRestrictedBicomplex_below",
+   "AlgebraicGeometry.Etale.etaleRestrictedAugmentationComponent",
+   "AlgebraicGeometry.Etale.etaleRestrictedMappedInclusion",
+   "AlgebraicGeometry.Etale.etaleRestrictedSectionsInclusion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4f3ba",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T203946-L-831528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4f3ba",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T203946-L-831528",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the canonical comparison, remaining property statements, proof routes, and change record with the delivered Lean and nodes; all six modules and the sole direct importer compile cleanly, with only permitted axioms and expected sorryAx dependencies."
+ }
+}

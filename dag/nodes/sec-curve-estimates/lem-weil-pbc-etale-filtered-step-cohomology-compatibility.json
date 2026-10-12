@@ -5,51 +5,36 @@
   "place": "Lemma 13.21.3 and Tag 0133"
  },
  "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-termwise-hypercohomology-presentation",
-  "lem-sp-cartan-eilenberg-mapped-total",
-  "lem-sp-cartan-eilenberg-total-resolution",
-  "lem-sp-kinjective-comparison-principle",
-  "lem-sp-kinjective-computes",
-  "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-filtered-step-cohomology-iso"
  ],
  "proof": [
   {
-   "text": "Restrict the augmented Cartan–Eilenberg bicomplex to complex degrees s ≥ q and extend by zero. The rows resolve the stupid truncation; finite diagonals give a bounded-below K-injective total and its augmentation computes derived global sections.",
+   "text": "Use the explicit a_q and l_q, with l_q j_q = s_q. Totalizing the restricted column inclusion makes a_q followed by the full-total inclusion agree with the stupid-truncation inclusion followed by T.aug. Then T.over_K makes its composite with T.comparison homotopic to the truncation inclusion followed by T.ρ.map. K-injective comparison uniqueness identifies the induced derived map. Apply Γ and homology; T.w_formula and T.c_formula identify the full comparison, and resolutionEtaleCohomologyIso naturality gives the equation for the concrete e_{p,q}. No arbitrary isomorphism is selected.",
    "uses": [
-    "lem-sp-cartan-eilenberg-total-resolution"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the mapped-total diagonal formula to identify the restricted mapped total with (T.L).step q and apply the K-injective computation to obtain the degree-p isomorphism.",
-   "uses": [
-    "lem-sp-cartan-eilenberg-mapped-total",
-    "lem-sp-kinjective-computes"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compare the restricted augmentation with the truncation inclusion via T.aug_formula and T.over_K; the K-injective comparison principle, T.w_formula and T.c_formula identify the induced map with the derived truncation map. This also handles empty diagonals and arbitrary integer bounds.",
-   "uses": [
-    "lem-sp-kinjective-comparison-principle",
-    "def-weil-pbc-termwise-hypercohomology-presentation",
-    "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+    "def-weil-pbc-etale-filtered-step-cohomology-iso",
+    "def-weil-pbc-etale-restricted-augmentation",
+    "def-weil-pbc-etale-restricted-sections-lift",
+    "def-weil-pbc-etale-restricted-total-construction",
+    "lem-sp-kinjective-comparison-principle"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-termwise-hypercohomology-presentation",
-  "lem-sp-cartan-eilenberg-mapped-total",
-  "lem-sp-cartan-eilenberg-total-resolution",
-  "lem-sp-kinjective-comparison-principle",
-  "lem-sp-kinjective-computes",
-  "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+  "def-weil-pbc-etale-filtered-step-cohomology-iso",
+  "def-weil-pbc-etale-restricted-augmentation",
+  "def-weil-pbc-etale-restricted-sections-lift",
+  "def-weil-pbc-etale-restricted-total-construction",
+  "lem-sp-kinjective-comparison-principle"
  ],
  "proof_origin": {
-  "by": "worker W2",
-  "document": "Stacks Project",
-  "place": "Tags 015J and 0133"
+  "by": "worker P1",
+  "document": "Stacks Project, Tags 015J and 0133",
+  "place": "Repair E3: explicit restricted augmentation, monic sections lift, and derived-cohomology comparison"
  },
  "mathlib_searches": [
   {
@@ -102,15 +87,15 @@
  "unit": "sk-prop-h2",
  "id": "lem-weil-pbc-etale-filtered-step-cohomology-compatibility",
  "title": "Compatibility of filtered-step cohomology isomorphism",
- "statement": "For X,K,T,p,q, the canonical isomorphism selected by the preceding existence theorem satisfies the truncation inclusion homology equation.",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $K$ a bounded-below cochain complex of abelian sheaves on its small étale site [def-weil-pbc-etale-sheaves], and $T$ an étale termwise hypercohomology presentation of $K$ [def-weil-pbc-termwise-hypercohomology-presentation]. Let $q$ be any integer. For every integer $p$, the constructed isomorphism $e_{p,q}$ [def-weil-pbc-etale-filtered-step-cohomology-iso] satisfies $H^p(j_q)(T.c(p))=e_{p,q}H^p(R\\Gamma(\\iota))$, in diagrammatic composition order, where $j_q$ is the filtered-step inclusion and $\\iota:\\sigma_{\\ge q}K\\to K$ is the stupid-truncation inclusion. The isomorphism is the concrete restricted-resolution comparison, not a witness selected from a bare existence proposition.",
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology",
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleFilteredStepCohomology.lean",
   "declaration": "AlgebraicGeometry.Etale.etale_filtered_step_cohomology_compatibility",
-  "statement": "theorem etale_filtered_step_cohomology_compatibility\n    (X : Scheme.{u})\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) :\n    HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom =\n      (Classical.choice (etale_filtered_step_cohomology_iso X K T p q)).hom ≫\n        (cohomology AddCommGrpCat.{u + 1} X p).map\n          (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))",
+  "statement": "theorem etale_filtered_step_cohomology_compatibility (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) : HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom = (etaleFilteredStepCohomologyIso X K T p q).hom ≫ (cohomology AddCommGrpCat.{u + 1} X p).map (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))",
   "branch": "sheaf-dag",
-  "by": "W2",
+  "by": "P1",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -126,11 +111,70 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-4f3ba",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T163623-L-2788701",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T203946-L-831528",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the canonical comparison, remaining property statements, proof routes, and change record with the delivered Lean and nodes; all six modules and the sole direct importer compile cleanly, with only permitted axioms and expected sorryAx dependencies."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "P1 stage 2",
+  "old_statement": "For X,K,T,p,q, the canonical isomorphism selected by the preceding existence theorem satisfies the truncation inclusion homology equation.",
+  "what": "Repair E3: replace unrestricted Classical.choice of a bare Nonempty Iso by the explicit restricted-total and derived-cohomology comparison. The previous existence proposition did not determine its witness. The final existential theorem and Challenge signatures remain identical.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/015J",
+   "place": "Proof remark (3) and finite-diagonal comparison; Tag 0133, augmented-total quasi-isomorphism"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-etale-filtered-step-cohomology",
+    "holds": true,
+    "note": "The existential final statement is unchanged; take the constructed canonical comparison as witness."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-termwise-hypercohomology-presentation",
+   "lem-sp-cartan-eilenberg-mapped-total",
+   "lem-sp-cartan-eilenberg-total-resolution",
+   "lem-sp-kinjective-comparison-principle",
+   "lem-sp-kinjective-computes",
+   "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+  ],
+  "old_proof": [
+   {
+    "text": "Restrict the augmented Cartan–Eilenberg bicomplex to complex degrees s ≥ q and extend by zero. The rows resolve the stupid truncation; finite diagonals give a bounded-below K-injective total and its augmentation computes derived global sections.",
+    "uses": [
+     "lem-sp-cartan-eilenberg-total-resolution"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use the mapped-total diagonal formula to identify the restricted mapped total with (T.L).step q and apply the K-injective computation to obtain the degree-p isomorphism.",
+    "uses": [
+     "lem-sp-cartan-eilenberg-mapped-total",
+     "lem-sp-kinjective-computes"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Compare the restricted augmentation with the truncation inclusion via T.aug_formula and T.over_K; the K-injective comparison principle, T.w_formula and T.c_formula identify the induced map with the derived truncation map. This also handles empty diagonals and arbitrary integer bounds.",
+    "uses": [
+     "lem-sp-kinjective-comparison-principle",
+     "def-weil-pbc-termwise-hypercohomology-presentation",
+     "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-termwise-hypercohomology-presentation",
+   "lem-sp-cartan-eilenberg-mapped-total",
+   "lem-sp-cartan-eilenberg-total-resolution",
+   "lem-sp-kinjective-comparison-principle",
+   "lem-sp-kinjective-computes",
+   "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+  ]
  }
 }
