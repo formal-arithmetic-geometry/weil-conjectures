@@ -288,15 +288,6 @@ lemma hom_ext_pullback {V : T.Etale} {U : R.Etale}
   simp only [MorphismProperty.Over.pullback_obj_hom] at ha hb
   rw [ha, hb]
 
-/-- The composition isomorphism of the pushforwards acts on sections by restriction along the
-pasting isomorphism of base changes. -/
-lemma lowerStarComp_hom_app_hom_app {S : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₁₂ : T ⟶ R)
-    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (M : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (W : R.Etale) :
-    ((lowerStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).hom.app M).hom.app (op W) =
-      M.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂ h₁₂ hh₁₂).hom.app W).op := by
-  simp [lowerStarComp]
-
 /-- The comparison map `unitComparison` on sections over `W` is the restriction along the
 projection `W ×_R T' ⟶ W ×_R T`. -/
 lemma unitComparison_hom_app_eq (W : R.Etale) :

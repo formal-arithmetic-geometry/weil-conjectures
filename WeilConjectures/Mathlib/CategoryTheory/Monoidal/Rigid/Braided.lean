@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
 # The categorical trace, and internal duals of dualizable objects
@@ -31,6 +32,8 @@ and `End (𝟙_ C) = R`.
 - `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
   category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
 
+- `CategoryTheory.MonoidalClosed.toIhomIhom`: the double-dual map `X ⟶ [[X, W], W]` relative to
+  an object `W`, natural in `X` (`CategoryTheory.MonoidalClosed.toIhomIhomNatTrans`).
 - `CategoryTheory.MonoidalClosed.toIhomIhomUnit`: the canonical biduality map
   `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category.
 
@@ -101,6 +104,45 @@ theorem IsDualizable.ihom_unit {X : C} (hX : IsDualizable X) :
 
 namespace MonoidalClosed
 
+/-- The canonical double-dual map `X ⟶ [[X, W], W]` relative to an object `W` of a braided
+monoidal closed category: the transpose of
+```
+                 β_                  ev
+  [X, W] ⊗ X ──────────→ X ⊗ [X, W] ──────────→ W.
+```
+For `W = 𝟙_ C` it is `CategoryTheory.MonoidalClosed.toIhomIhomUnit`. -/
+noncomputable def toIhomIhom (W X : C) : X ⟶ (ihom ((ihom X).obj W)).obj W :=
+  curry ((β_ _ X).hom ≫ (ihom.ev X).app W)
+
+lemma uncurry_toIhomIhom (W X : C) :
+    uncurry (toIhomIhom W X) = (β_ _ X).hom ≫ (ihom.ev X).app W :=
+  uncurry_curry _
+
+/-- The double-dual map is natural: for `f : X ⟶ Y` the square
+```
+  X ───────── f ─────────→ Y
+  │                        │
+  toIhomIhom W X     toIhomIhom W Y
+  ↓                        ↓
+  [[X, W], W] ─[[f, W], W]→ [[Y, W], W]
+```
+commutes. -/
+@[reassoc]
+lemma toIhomIhom_naturality (W : C) {X Y : C} (f : X ⟶ Y) :
+    f ≫ toIhomIhom W Y = toIhomIhom W X ≫ (pre ((pre f).app W)).app W := by
+  apply uncurry_injective
+  rw [uncurry_natural_left, uncurry_pre_app, uncurry_toIhomIhom, uncurry_toIhomIhom,
+    BraidedCategory.braiding_naturality_right_assoc, BraidedCategory.braiding_naturality_left_assoc,
+    id_tensor_pre_app_comp_ev]
+
+/-- The double-dual maps `X ⟶ [[X, W], W]` as a natural transformation from the identity to
+the square of the contravariant functor `[-, W]`. -/
+@[simps]
+noncomputable def toIhomIhomNatTrans (W : C) :
+    𝟭 C ⟶ (internalHom.flip.obj W).rightOp ⋙ internalHom.flip.obj W where
+  app X := toIhomIhom W X
+  naturality _ _ f := toIhomIhom_naturality W f
+
 /-- The canonical biduality map `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category:
 the transpose of
 ```
@@ -110,6 +152,9 @@ the transpose of
 -/
 noncomputable def toIhomIhomUnit (X : C) : X ⟶ (ihom ((ihom X).obj (𝟙_ C))).obj (𝟙_ C) :=
   curry ((β_ _ X).hom ≫ (ihom.ev X).app (𝟙_ C))
+
+/-- The double-dual map relative to the unit is `toIhomIhomUnit`. -/
+lemma toIhomIhom_unit (X : C) : toIhomIhom (𝟙_ C) X = toIhomIhomUnit X := rfl
 
 /-- In a braided monoidal closed category, the canonical biduality map
 `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of an object with a right dual is an isomorphism. -/
@@ -212,5 +257,76 @@ lemma pre_whiskerRight_app_whiskerRight_comp_ihomTensorObjWhiskerRightIso_hom {A
 end
 
 end MonoidalClosed
+
+/-- **Duality into an invertible object.** In a braided monoidal closed category, for a
+dualizable `K` and an invertible `ω`, the double `ω`-dual of `K` is `K`:
+`[[K, ω], ω] ≅ K`. Indeed `[K, ω] ≅ Kᘁ ⊗ ω`, whose left dual is `M ⊗ K` for a tensor inverse `M`
+of `ω`, so `[[K, ω], ω] ≅ (M ⊗ K) ⊗ ω ≅ K ⊗ (M ⊗ ω) ≅ K`. -/
+theorem nonempty_iso_ihom_obj_ihom_obj_of_isInvertible {K ω : C} (hK : IsDualizable K)
+    (hω : IsInvertible ω) :
+    Nonempty ((ihom ((ihom K).obj ω)).obj ω ≅ K) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hω
+  let : ExactPairing M ω := exactPairingOfTensorIso e' e
+  let : ExactPairing Kᘁ K := BraidedCategory.exactPairing_swap K Kᘁ
+  let : ExactPairing (M ⊗ K) ((ihom K).obj ω) :=
+    exactPairingCongrRight (MonoidalClosed.ihomObjIsoTensor Kᘁ K ω)
+  exact ⟨MonoidalClosed.ihomObjIsoTensor (M ⊗ K) ((ihom K).obj ω) ω ≪≫
+    whiskerRightIso (β_ M K) ω ≪≫ α_ K M ω ≪≫ whiskerLeftIso K e' ≪≫ ρ_ K⟩
+
+
+section ExternalHom
+
+variable {C₁ C₂ : Type*} [Category C₁] [Category C₂] [MonoidalCategory C₁] [MonoidalCategory C₂]
+  [BraidedCategory C₁] [BraidedCategory C₂] [MonoidalClosed C₁] [MonoidalClosed C₂]
+  (F₁ : C₁ ⥤ C) (F₂ : C₂ ⥤ C) [F₁.Monoidal] [F₂.Monoidal]
+
+/-- The rearrangement `(a ⊗ b) ⊗ (c ⊗ d) ≅ (c ⊗ a) ⊗ (b ⊗ d)` in a braided monoidal category. -/
+noncomputable def tensorTensorRearrangeIso (a b c d : C) :
+    (a ⊗ b) ⊗ (c ⊗ d) ≅ (c ⊗ a) ⊗ (b ⊗ d) :=
+  α_ a b (c ⊗ d) ≪≫ whiskerLeftIso a (α_ b c d).symm ≪≫
+    whiskerLeftIso a (whiskerRightIso (β_ b c) d) ≪≫ whiskerLeftIso a (α_ c b d) ≪≫
+    (α_ a c (b ⊗ d)).symm ≪≫ whiskerRightIso (β_ a c) (b ⊗ d)
+
+/-- **The external Hom map for dualizable objects.** For monoidal functors `F₁ : C₁ ⥤ C`,
+`F₂ : C₂ ⥤ C` into a braided monoidal closed category and dualizable `E₁`, `E₂`,
+`F₁ [E₁, N₁] ⊗ F₂ [E₂, N₂] ≅ [F₁ E₁ ⊗ F₂ E₂, F₁ N₁ ⊗ F₂ N₂]`: both sides are
+`F₂ E₂ᘁ ⊗ F₁ E₁ᘁ ⊗ F₁ N₁ ⊗ F₂ N₂` up to rearrangement, internal homs out of dualizable objects
+being tensor products with their duals. -/
+theorem nonempty_iso_tensorObj_map_ihom_obj {E₁ N₁ : C₁} {E₂ N₂ : C₂} (h₁ : IsDualizable E₁)
+    (h₂ : IsDualizable E₂) :
+    Nonempty (F₁.obj ((ihom E₁).obj N₁) ⊗ F₂.obj ((ihom E₂).obj N₂) ≅
+      (ihom (F₁.obj E₁ ⊗ F₂.obj E₂)).obj (F₁.obj N₁ ⊗ F₂.obj N₂)) := by
+  obtain ⟨_⟩ := h₁
+  obtain ⟨_⟩ := h₂
+  let _ : ExactPairing E₁ᘁ E₁ := BraidedCategory.exactPairing_swap E₁ E₁ᘁ
+  let _ : ExactPairing E₂ᘁ E₂ := BraidedCategory.exactPairing_swap E₂ E₂ᘁ
+  let _ : ExactPairing (F₁.obj E₁) (F₁.obj E₁ᘁ) := ExactPairing.map F₁ E₁ E₁ᘁ
+  let _ : ExactPairing (F₂.obj E₂) (F₂.obj E₂ᘁ) := ExactPairing.map F₂ E₂ E₂ᘁ
+  let _ : ExactPairing (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) (F₁.obj E₁ ⊗ F₂.obj E₂) :=
+    BraidedCategory.exactPairing_swap _ _
+  exact ⟨(F₁.mapIso (MonoidalClosed.ihomObjIsoTensor E₁ᘁ E₁ N₁) ⊗ᵢ
+      F₂.mapIso (MonoidalClosed.ihomObjIsoTensor E₂ᘁ E₂ N₂)) ≪≫
+    ((Functor.Monoidal.μIso F₁ _ _).symm ⊗ᵢ (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫
+    tensorTensorRearrangeIso _ _ _ _ ≪≫
+    (MonoidalClosed.ihomObjIsoTensor (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) _ _).symm⟩
+
+omit [MonoidalCategory C₁] [BraidedCategory C₁] [MonoidalClosed C₁] [F₁.Monoidal] in
+/-- **The Künneth–Verdier map for a dualizable second factor.** For monoidal functors
+`F₁ : C₁ ⥤ C`, `F₂ : C₂ ⥤ C` into a braided monoidal closed category and a dualizable `N`,
+`F₁ M ⊗ F₂ [N, ω] ≅ [F₂ N, F₁ M ⊗ F₂ ω]`: both sides are `F₂ Nᘁ ⊗ F₁ M ⊗ F₂ ω`. -/
+theorem nonempty_iso_tensorObj_map_ihom_obj_right (M : C₁) {N : C₂} (ω : C₂)
+    (hN : IsDualizable N) :
+    Nonempty (F₁.obj M ⊗ F₂.obj ((ihom N).obj ω) ≅
+      (ihom (F₂.obj N)).obj (F₁.obj M ⊗ F₂.obj ω)) := by
+  obtain ⟨_⟩ := hN
+  let _ : ExactPairing Nᘁ N := BraidedCategory.exactPairing_swap N Nᘁ
+  let _ : ExactPairing (F₂.obj Nᘁ) (F₂.obj N) := ExactPairing.map F₂ Nᘁ N
+  exact ⟨whiskerLeftIso (F₁.obj M) (F₂.mapIso (MonoidalClosed.ihomObjIsoTensor Nᘁ N ω) ≪≫
+      (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫ (α_ _ _ _).symm ≪≫
+    whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _ ≪≫
+    (MonoidalClosed.ihomObjIsoTensor (F₂.obj Nᘁ) (F₂.obj N) _).symm⟩
+
+end ExternalHom
 
 end CategoryTheory

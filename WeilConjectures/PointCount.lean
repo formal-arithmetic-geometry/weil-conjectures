@@ -440,22 +440,28 @@ theorem Hom.pointCount_eq_sum [Finite k] (f : X.Hom (Spec (.of k)))
     _ = ∑ x ∈ T', f.degreeOver x.1 :=
         Finset.sum_coe_sort T' (fun x : X.finitePoints ↦ f.degreeOver x.1)
 
+/-- On a scheme locally of finite type over a finite field, the points with finite residue field
+are the closed points (`AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints`). -/
+theorem Hom.finitePoints_eq_closedPoints [Finite k] (f : X.Hom (Spec (.of k)))
+    [LocallyOfFiniteType f] : X.finitePoints = closedPoints X := by
+  let g : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
+  have hg : g.FiniteType := by
+    have h₁ : (algebraMap ℤ k).FiniteType :=
+      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
+    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
+  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom g)) := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
+    exact hg
+  exact Scheme.finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom g))
+
 /-- A nonempty quasi-compact scheme locally of finite type over a finite field has a point
 with finite residue field: it has a closed point, and closed points of such a scheme have
-finite residue fields (`AlgebraicGeometry.Scheme.finitePoints_eq_closedPoints`). -/
+finite residue fields (`AlgebraicGeometry.Scheme.Hom.finitePoints_eq_closedPoints`). -/
 theorem Hom.exists_mem_finitePoints [Finite k] (f : X.Hom (Spec (.of k)))
     [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X] : ∃ x, x ∈ X.finitePoints := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := X) Set.univ_nonempty
-  let φ : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
-  have hφ : φ.FiniteType := by
-    have h₁ : (algebraMap ℤ k).FiniteType :=
-      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
-    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
-  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom φ)) := by
-    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
-    exact hφ
-  rw [finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom φ))]
+  rw [f.finitePoints_eq_closedPoints]
   exact ⟨x, hx⟩
 
 end AlgebraicGeometry.Scheme

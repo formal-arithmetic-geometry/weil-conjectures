@@ -101,6 +101,16 @@ instance isIntegral (k : Type u) [Field k] : IsIntegral (ProjectiveLine (Spec (.
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
   exact IsRegular.isIntegral _
 
+/-- The projective line over a field is geometrically connected: its base change to a field `K`
+is the projective line over `K` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`), which is
+connected. -/
+instance geometricallyConnected (k : Type u) [Field k] :
+    GeometricallyConnected (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) := by
+  refine ⟨fun K _ y Z fst snd h ↦ ?_⟩
+  have e : Z ≅ ProjectiveLine (Spec (.of K)) :=
+    h.isoIsPullback _ _ (ProjectiveSpace.isPullback_map _ y)
+  exact (Scheme.homeoOfIso e.symm).connectedSpace_iff.1 inferInstance
+
 end AlgebraicGeometry.ProjectiveLine
 
 namespace AlgebraicGeometry.ProjectiveLine

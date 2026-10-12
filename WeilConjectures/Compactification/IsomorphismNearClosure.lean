@@ -6,12 +6,14 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Blowup.Extension
+public import WeilConjectures.Compactification.BoundarySeparationData
 public import WeilConjectures.Compactification.EliminationOfIndeterminacy
 public import WeilConjectures.Compactification.StrictTransformBlowup
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
+public import WeilConjectures.Topology.SpectralSpace.ConstructibleSeparation
 
 /-!
 
@@ -25,6 +27,11 @@ blueprint `thm:0F3W`, `def:nagata-isomorphism-near-closure`,
   proper morphism which is an isomorphism over a neighbourhood of a closed piece `T` of
   `U` acquires, after a `U`-admissible blow-up, a strict transform which is an
   isomorphism over a neighbourhood of the closure of `T`.
+- `AlgebraicGeometry.isoNearClosureBlowup`: the blow-up `IsoBl_{U,T}(q)` of blueprint
+  `def-nagata-isomorphism-near-closure`, assembled from its named steps (constructible
+  separation, separation blow-up, elimination over the separated region, extension of the
+  centre, composition), and
+  `AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup`: it does the job.
 
 It is used for the improved comparison projection of the two-open compactification
 theorem, and rests on elimination of indeterminacy
@@ -39,156 +46,488 @@ noncomputable section
 universe u
 
 open CategoryTheory Limits
-
 namespace AlgebraicGeometry
 
-/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W;
-blueprint: `def:nagata-isomorphism-near-closure`,
-`lemma:nagata-isomorphism-near-closure`; used for the improved comparison projection of
-the two-open compactification theorem).
+/-! ### The isomorphism-near-closure construction
 
-The proof runs as follows. Inside `U`, constructible separation
-(`PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ`) separates `T` from
-the complement of the maximal isomorphism open `M` of `q`, producing a quasi-compact
-open `V₂` of `X` with `T ⊆ V₂ ⊆ U ⊓ M` and a constructible closed decomposition of `U`.
-The boundary-separation blow-up `X₁ ⟶ X` (`exists_admissibleBlowup_disjoint_closures`,
-Tag 0F3V) then separates the closure of the inverse image of `T` from the closure of
-the inverse image of `U \ V₂`, and a second constructible separation, now in `X₁`,
-produces a **quasi-compact** open `A ⊆ X₁` containing the first closure and missing the
-second; consequently every point of `A` over `U` lies over `V₂`.
+The named steps of blueprint `def-nagata-isomorphism-near-closure`, in the form used by the
+formal proof. Throughout, `q : Z ⟶ X` is proper, `U` is a quasi-compact open of the qcqs
+scheme `X`, `T ⊆ U` is closed in `U`, and `q` is an isomorphism over an open neighbourhood `N`
+of `T`; `M = q.maximalIsomorphismOpen` is the maximal open over which `q` is an isomorphism
+(`def-nagata-maximal-isomorphism-open`), so `E = U \ M` is the blueprint's exceptional set. -/
 
-Over `X₁` the canonical lift of `q` is an isomorphism above `V₂`, so eliminating its
-indeterminacy (`exists_admissibleBlowup_isOpenImmersion_strictTransformMap`, Tag 081S)
-gives a finite-type centre whose support misses the locus above `V₂`, hence also
-`A ∩ π₁⁻¹(U)`. Gluing that centre across `A` and the locus above `U`
-(`Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint`, Tag 080M) and composing
-with the first blow-up (`Scheme.IdealSheafData.exists_blowup_comp_base_change`, Tag 080B)
-produces a single `U`-admissible centre `K` on `X`, together with identifications of
-both `K.blowup` and `(K.comap q).blowup` with their counterparts upstairs.
+section IsoNearClosureConstruction
 
-Finally Tag 080E (`Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform`)
-turns the strict transform of `q` along `K.blowupMap` into the canonical lift
-`(K.comap q).blowup ⟶ K.blowup`, and the localization of canonical lifts
-(`Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens`) identifies that lift over
-the copy of `A` with the open immersion produced by Tag 081S. The neighbourhood `N'` is
-the range of the resulting partial section; it contains the closure of the inverse
-image of `T` because that closure lies over `A` and inside the (closed, since `q` is
-proper) range of the strict transform. No scheme-theoretic density argument is used. -/
-theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
-    {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
-    (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
-    {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
+/-- `T` lies in the maximal isomorphism open of `q`. -/
+lemma subset_maximalIsomorphismOpen_of_isIso {X Z : Scheme.{u}} (q : Z ⟶ X) {T : Set X}
     {N : X.Opens} (hTN : T ⊆ (N : Set X)) (hN : IsIso (q ∣_ N)) :
-    ∃ (B : IsAdmissible X U) (N' : B.I.blowup.Opens),
-      closure (B.I.blowupMap ⁻¹' T) ⊆ (N' : Set B.I.blowup) ∧
-      IsIso (strictTransformMap q B.I.blowupMap B.preservedOpen ∣_ N') := by
+    T ⊆ (q.maximalIsomorphismOpen : Set X) :=
+  hTN.trans fun _ hx ↦ q.le_maximalIsomorphismOpen hN hx
+
+/-- The maximal isomorphism open of `q` lies in the image of `q`. -/
+lemma maximalIsomorphismOpen_subset_range {X Z : Scheme.{u}} (q : Z ⟶ X) :
+    (q.maximalIsomorphismOpen : Set X) ⊆ Set.range q := by
+  intro x hx
+  have hqM : IsIso (q ∣_ q.maximalIsomorphismOpen) := q.isIso_restrict_maximalIsomorphismOpen
+  obtain ⟨z, hz⟩ := (Scheme.homeoOfIso (asIso (q ∣_ q.maximalIsomorphismOpen))).surjective
+    ⟨x, hx⟩
+  refine ⟨(q ⁻¹ᵁ q.maximalIsomorphismOpen).ι z, ?_⟩
+  calc q ((q ⁻¹ᵁ q.maximalIsomorphismOpen).ι z)
+      = ((q ⁻¹ᵁ q.maximalIsomorphismOpen).ι ≫ q) z := (Scheme.Hom.comp_apply _ _ _).symm
+    _ = ((q ∣_ q.maximalIsomorphismOpen) ≫ q.maximalIsomorphismOpen.ι) z := by
+        rw [morphismRestrict_ι]
+    _ = q.maximalIsomorphismOpen.ι ((q ∣_ q.maximalIsomorphismOpen) z) :=
+        Scheme.Hom.comp_apply _ _ _
+    _ = x := congrArg Subtype.val (by simpa using hz)
+
+variable {X Z : Scheme.{u}} {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z ⟶ X)
+  {T : Set X} (hT : IsClosed (U.ι ⁻¹' T)) {N : X.Opens} (hTN : T ⊆ (N : Set X))
+  (hN : IsIso (q ∣_ N))
+
+/-- **Step 1 of the isomorphism-near-closure construction: constructible separation data**
+`(T_c, E_c)` in `U` of the closed subsets `T` and `E = U \ M`
+(`PrespectralSpace.constructibleSeparation`, blueprint
+`def-nagata-spectral-constructible-separation`). The two pieces are closed in `U`, have
+quasi-compact complements, contain `T` resp. `E`, and are disjoint.
+(blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureSeparation : Set U.toScheme × Set U.toScheme :=
+  haveI : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  PrespectralSpace.constructibleSeparation hT
+    (q.maximalIsomorphismOpen.isOpen.isClosed_compl.preimage U.ι.continuous)
+    (Set.disjoint_left.mpr fun _ h₁ h₂ ↦ h₂ (subset_maximalIsomorphismOpen_of_isIso q hTN hN h₁))
+
+lemma isClosed_isoNearClosureSeparation_fst :
+    IsClosed (isoNearClosureSeparation hU q hT hTN hN).1 := by
   have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
-  -- Step 0: `T` lies in the maximal isomorphism open `M` of `q`, and `M` lies in the
-  -- image of `q`.
-  set M : X.Opens := q.maximalIsomorphismOpen with hMdef
-  have hqM : IsIso (q ∣_ M) := q.isIso_restrict_maximalIsomorphismOpen
-  have hTM : T ⊆ (M : Set X) := hTN.trans fun _ hx ↦ q.le_maximalIsomorphismOpen hN hx
-  have hMrange : (M : Set X) ⊆ Set.range q := by
-    intro x hx
-    have := hqM
-    obtain ⟨z, hz⟩ := (Scheme.homeoOfIso (asIso (q ∣_ M))).surjective ⟨x, hx⟩
-    refine ⟨(q ⁻¹ᵁ M).ι z, ?_⟩
-    calc q ((q ⁻¹ᵁ M).ι z) = ((q ⁻¹ᵁ M).ι ≫ q) z := (Scheme.Hom.comp_apply _ _ _).symm
-      _ = ((q ∣_ M) ≫ M.ι) z := by rw [morphismRestrict_ι]
-      _ = M.ι ((q ∣_ M) z) := Scheme.Hom.comp_apply _ _ _
-      _ = x := congrArg Subtype.val (by simpa using hz)
-  -- Step 1: constructible separation of `T` from the complement of `M` inside `U`.
-  obtain ⟨O₁, O₂, hO₁o, hO₂o, hO₁c, hO₂c, hO₁T, hO₂M, hOcov⟩ :=
-    PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ (X := U.toScheme)
-      (T₁ := U.ι ⁻¹' T) (T₂ := U.ι ⁻¹' (M : Set X)ᶜ) hT
-      (M.isOpen.isClosed_compl.preimage U.ι.continuous)
-      (Set.disjoint_left.mpr fun _ h₁ h₂ ↦ h₂ (hTM h₁))
-  set V₂ : X.Opens := U.ι ''ᵁ (⟨O₂, hO₂o⟩ : U.toScheme.Opens) with hV₂def
-  have hV₂U : V₂ ≤ U := by
-    rintro x ⟨y, -, rfl⟩
-    have : U.ι y ∈ Set.range U.ι := ⟨y, rfl⟩
-    rwa [Scheme.Opens.range_ι] at this
-  have hV₂M : V₂ ≤ M := by
-    rintro x ⟨y, hy, rfl⟩
-    by_contra hcon
-    exact Set.disjoint_left.mp hO₂M hy hcon
-  have hV₂c : IsCompact (V₂ : Set X) := hO₂c.image U.ι.continuous
-  have hTcl : IsClosed (O₁ᶜ : Set U.toScheme) := hO₁o.isClosed_compl
-  have hEcl : IsClosed (O₂ᶜ : Set U.toScheme) := hO₂o.isClosed_compl
-  have hTsub : U.ι ⁻¹' T ⊆ (O₁ᶜ : Set U.toScheme) := fun _ hy hy₁ ↦
-    Set.disjoint_left.mp hO₁T hy₁ hy
-  have hTEdisj : Disjoint (O₁ᶜ : Set U.toScheme) (O₂ᶜ : Set U.toScheme) := by
-    rw [Set.disjoint_left]
-    intro y hy₁ hy₂
-    rcases Set.eq_univ_iff_forall.mp hOcov y with h | h
-    · exact hy₁ h
-    · exact hy₂ h
-  have hTimg : T ⊆ U.ι '' (O₁ᶜ : Set U.toScheme) := by
+  exact PrespectralSpace.isClosed_constructibleSeparation_fst _ _ _
+
+lemma isClosed_isoNearClosureSeparation_snd :
+    IsClosed (isoNearClosureSeparation hU q hT hTN hN).2 := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact PrespectralSpace.isClosed_constructibleSeparation_snd _ _ _
+
+lemma isCompact_compl_isoNearClosureSeparation_fst :
+    IsCompact (isoNearClosureSeparation hU q hT hTN hN).1ᶜ := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact PrespectralSpace.isCompact_compl_constructibleSeparation_fst _ _ _
+
+lemma isCompact_compl_isoNearClosureSeparation_snd :
+    IsCompact (isoNearClosureSeparation hU q hT hTN hN).2ᶜ := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact PrespectralSpace.isCompact_compl_constructibleSeparation_snd _ _ _
+
+lemma preimage_subset_isoNearClosureSeparation_fst :
+    U.ι ⁻¹' T ⊆ (isoNearClosureSeparation hU q hT hTN hN).1 := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact PrespectralSpace.subset_constructibleSeparation_fst _ _ _
+
+lemma preimage_compl_subset_isoNearClosureSeparation_snd :
+    U.ι ⁻¹' (q.maximalIsomorphismOpen : Set X)ᶜ ⊆ (isoNearClosureSeparation hU q hT hTN hN).2 := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact PrespectralSpace.subset_constructibleSeparation_snd _ _ _
+
+lemma disjoint_isoNearClosureSeparation :
+    Disjoint (isoNearClosureSeparation hU q hT hTN hN).1
+      (isoNearClosureSeparation hU q hT hTN hN).2 := by
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  exact PrespectralSpace.disjoint_constructibleSeparation _ _ _
+
+/-- The quasi-compact open `V₂ = U \ E_c` of `X`: it contains `T` and `q` is an isomorphism
+over it. -/
+noncomputable def isoNearClosureIsoLocus : X.Opens :=
+  U.ι ''ᵁ (⟨(isoNearClosureSeparation hU q hT hTN hN).2ᶜ,
+    (isClosed_isoNearClosureSeparation_snd hU q hT hTN hN).isOpen_compl⟩ : U.toScheme.Opens)
+
+lemma isoNearClosureIsoLocus_le : isoNearClosureIsoLocus hU q hT hTN hN ≤ U := by
+  rintro x ⟨y, -, rfl⟩
+  have : U.ι y ∈ Set.range U.ι := ⟨y, rfl⟩
+  rwa [Scheme.Opens.range_ι] at this
+
+lemma isoNearClosureIsoLocus_le_maximalIsomorphismOpen :
+    isoNearClosureIsoLocus hU q hT hTN hN ≤ q.maximalIsomorphismOpen := by
+  rintro x ⟨y, hy, rfl⟩
+  by_contra hcon
+  exact hy (preimage_compl_subset_isoNearClosureSeparation_snd hU q hT hTN hN hcon)
+
+lemma isCompact_isoNearClosureIsoLocus :
+    IsCompact (isoNearClosureIsoLocus hU q hT hTN hN : Set X) :=
+  (isCompact_compl_isoNearClosureSeparation_snd hU q hT hTN hN).image U.ι.continuous
+
+lemma isIso_restrict_isoNearClosureIsoLocus :
+    IsIso (q ∣_ isoNearClosureIsoLocus hU q hT hTN hN) :=
+  Scheme.Hom.isIso_restrict_of_le (isoNearClosureIsoLocus_le_maximalIsomorphismOpen hU q hT hTN hN)
+    q.isIso_restrict_maximalIsomorphismOpen
+
+variable [CompactSpace X] [QuasiSeparatedSpace X]
+
+/-- **Step 2 of the isomorphism-near-closure construction: the separation blow-up**
+`X₁ = CSepBl_U(T_c, E_c)` (`constructibleSeparationBlowup`, blueprint
+`def-nagata-separate-constructible-closed`), in which the closures of the inverse images of
+`T_c` and `E_c` are disjoint. (blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureSeparationBlowup : IsAdmissible X U :=
+  constructibleSeparationBlowup hU (isClosed_isoNearClosureSeparation_fst hU q hT hTN hN)
+    (isClosed_isoNearClosureSeparation_snd hU q hT hTN hN)
+    (isCompact_compl_isoNearClosureSeparation_fst hU q hT hTN hN)
+    (isCompact_compl_isoNearClosureSeparation_snd hU q hT hTN hN)
+    (disjoint_isoNearClosureSeparation hU q hT hTN hN)
+
+lemma disjoint_closure_isoNearClosureSeparationBlowup :
+    Disjoint
+      (closure ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹'
+        (U.ι '' (isoNearClosureSeparation hU q hT hTN hN).1)))
+      (closure ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹'
+        (U.ι '' (isoNearClosureSeparation hU q hT hTN hN).2))) :=
+  disjoint_closure_preimage_constructibleSeparationBlowup hU _ _ _ _ _
+
+lemma isProper_isoNearClosureSeparationBlowup :
+    IsProper (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap :=
+  (isoNearClosureSeparationBlowup hU q hT hTN hN).isProper_blowupMap
+
+lemma compactSpace_isoNearClosureSeparationBlowup :
+    CompactSpace (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup :=
+  have := isProper_isoNearClosureSeparationBlowup hU q hT hTN hN
+  QuasiCompact.compactSpace_of_compactSpace
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap
+
+lemma quasiSeparatedSpace_isoNearClosureSeparationBlowup :
+    QuasiSeparatedSpace (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup :=
+  have := isProper_isoNearClosureSeparationBlowup hU q hT hTN hN
+  quasiSeparatedSpace_of_quasiSeparated
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap
+
+/-- **Step 3 of the isomorphism-near-closure construction: a second constructible
+separation**, now in `X₁`, of the (disjoint, closed) closures of the inverse images of `T_c`
+and `E_c`. -/
+noncomputable def isoNearClosureNbhdSeparation :
+    Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup ×
+      Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup :=
+  haveI := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  PrespectralSpace.constructibleSeparation isClosed_closure isClosed_closure
+    (disjoint_closure_isoNearClosureSeparationBlowup hU q hT hTN hN)
+
+/-- The quasi-compact open `A ⊆ X₁`, the complement of the second piece of
+`isoNearClosureNbhdSeparation`: it contains the closure of the inverse image of `T_c` and
+misses the closure of the inverse image of `E_c`. It replaces the blueprint's open
+`X₀ = X₁ \ closure(E_c)`, which need not be quasi-compact. -/
+noncomputable def isoNearClosureNbhd :
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.Opens :=
+  ⟨(isoNearClosureNbhdSeparation hU q hT hTN hN).2ᶜ, by
+    have := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+    exact (PrespectralSpace.isClosed_constructibleSeparation_snd _ _ _).isOpen_compl⟩
+
+lemma isCompact_isoNearClosureNbhd :
+    IsCompact (isoNearClosureNbhd hU q hT hTN hN :
+      Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup) := by
+  have := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  exact PrespectralSpace.isCompact_compl_constructibleSeparation_snd _ _ _
+
+lemma closure_preimage_subset_isoNearClosureNbhd (hTU : T ⊆ (U : Set X)) :
+    closure ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹' T) ⊆
+      (isoNearClosureNbhd hU q hT hTN hN :
+        Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup) := by
+  have := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have hTimg : T ⊆ U.ι '' (isoNearClosureSeparation hU q hT hTN hN).1 := by
     intro x hx
     obtain ⟨y, rfl⟩ : x ∈ Set.range U.ι := by
       rw [Scheme.Opens.range_ι]; exact hTU hx
-    exact ⟨y, hTsub hx, rfl⟩
-  -- Step 2: the boundary-separation blow-up (Tag 0F3V).
-  obtain ⟨B₁, hB₁disj⟩ := exists_admissibleBlowup_disjoint_closures hU hTcl hEcl
-    (by rwa [compl_compl]) (by rwa [compl_compl]) hTEdisj
-  have : IsProper B₁.I.blowupMap := B₁.isProper_blowupMap
-  have : QuasiCompact B₁.I.blowupMap :=
-    Scheme.IdealSheafData.quasiCompact_blowupMap B₁.finiteType
-  have : CompactSpace B₁.I.blowup :=
-    QuasiCompact.compactSpace_of_compactSpace B₁.I.blowupMap
-  have : QuasiSeparatedSpace B₁.I.blowup :=
-    quasiSeparatedSpace_of_quasiSeparated B₁.I.blowupMap
-  -- Step 3: a quasi-compact open of the blow-up around the closure of the inverse
-  -- image of `T`, disjoint from the closure of the inverse image of the boundary.
-  obtain ⟨A₁, A₂, -, hA₂o, -, hA₂c, hA₁T, hA₂E, hAcov⟩ :=
-    PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ
-      (X := B₁.I.blowup) isClosed_closure isClosed_closure hB₁disj
-  set A : (B₁.I.blowup).Opens := ⟨A₂, hA₂o⟩ with hAdef
-  have hCTA : closure (B₁.I.blowupMap ⁻¹' (U.ι '' (O₁ᶜ : Set U.toScheme))) ⊆
-      (A : Set B₁.I.blowup) := by
-    intro x hx
-    rcases Set.eq_univ_iff_forall.mp hAcov x with h | h
-    · exact absurd hx (Set.disjoint_left.mp hA₁T h)
-    · exact h
-  have hAUV : ∀ x : B₁.I.blowup, x ∈ (A : Set B₁.I.blowup) →
-      B₁.I.blowupMap x ∈ (U : Set X) → B₁.I.blowupMap x ∈ (V₂ : Set X) := by
-    intro x hxA hxU
-    by_contra hcon
-    obtain ⟨y, hy⟩ : B₁.I.blowupMap x ∈ Set.range U.ι := by
-      rw [Scheme.Opens.range_ι]; exact hxU
-    have hyE : y ∈ (O₂ᶜ : Set U.toScheme) := fun hy₂ ↦ hcon (hy ▸ ⟨y, hy₂, rfl⟩)
-    exact Set.disjoint_left.mp hA₂E hxA
-      (subset_closure (Set.mem_preimage.mpr ⟨y, hyE, hy⟩))
-  -- Step 4: the canonical lift of `q` to the first blow-up, and its properness.
+    exact ⟨y, preimage_subset_isoNearClosureSeparation_fst hU q hT hTN hN hx, rfl⟩
+  intro x hx
+  have hx₁ := PrespectralSpace.subset_constructibleSeparation_fst isClosed_closure isClosed_closure
+    (disjoint_closure_isoNearClosureSeparationBlowup hU q hT hTN hN)
+    ((closure_mono (Set.preimage_mono hTimg)) hx)
+  exact fun hx₂ ↦ Set.disjoint_left.mp (PrespectralSpace.disjoint_constructibleSeparation
+    isClosed_closure isClosed_closure
+    (disjoint_closure_isoNearClosureSeparationBlowup hU q hT hTN hN)) hx₁ hx₂
+
+/-- Every point of `A` over `U` lies over `V₂`. -/
+lemma mem_isoNearClosureIsoLocus_of_mem_isoNearClosureNbhd
+    (x : (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup)
+    (hxA : x ∈ (isoNearClosureNbhd hU q hT hTN hN :
+      Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup))
+    (hxU : (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap x ∈ (U : Set X)) :
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap x ∈
+      (isoNearClosureIsoLocus hU q hT hTN hN : Set X) := by
+  have := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  by_contra hcon
+  obtain ⟨y, hy⟩ : (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap x ∈
+      Set.range U.ι := by
+    rw [Scheme.Opens.range_ι]; exact hxU
+  have hyE : y ∈ (isoNearClosureSeparation hU q hT hTN hN).2 := by
+    by_contra hy₂
+    exact hcon (hy ▸ ⟨y, hy₂, rfl⟩)
+  exact hxA (PrespectralSpace.subset_constructibleSeparation_snd isClosed_closure
+    isClosed_closure (disjoint_closure_isoNearClosureSeparationBlowup hU q hT hTN hN)
+    (subset_closure (Set.mem_preimage.mpr ⟨y, hyE, hy⟩)))
+
+/-- **Step 4 of the isomorphism-near-closure construction: the canonical lift**
+`lam₁ : Bl_{𝓘·𝒪_Z}(Z) ⟶ X₁` of `q` to the separation blow-up `X₁ = Bl_𝓘(X)` (Stacks
+Project Tag 0806; it is the strict transform of `q`, Tag 080E). -/
+noncomputable def isoNearClosureLift :
+    ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap q).blowup ⟶
+      (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup :=
+  ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.exists_lift_blowup
+    (t := ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap q).blowupMap ≫ q)
+    (by rw [Scheme.IdealSheafData.comap_comp]
+        exact ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap
+          q).isInvertible_comap_blowupMap)).choose
+
+lemma isoNearClosureLift_comp :
+    isoNearClosureLift hU q hT hTN hN ≫
+        (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap =
+      ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap q).blowupMap ≫ q :=
+  ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.exists_lift_blowup
+    (t := ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap q).blowupMap ≫ q)
+    (by rw [Scheme.IdealSheafData.comap_comp]
+        exact ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap
+          q).isInvertible_comap_blowupMap)).choose_spec
+
+variable [IsProper q]
+
+lemma isProper_isoNearClosureLift : IsProper (isoNearClosureLift hU q hT hTN hN) := by
+  set B₁ := isoNearClosureSeparationBlowup hU q hT hTN hN
   have hcqft : (B₁.I.comap q).ofFiniteType := B₁.finiteType.comap q
   have : IsProper (B₁.I.comap q).blowupMap :=
     (B₁.I.comap q).isProper_blowupMap fun V ↦ hcqft V le_top
-  obtain ⟨lam₁, hlam₁⟩ := B₁.I.exists_lift_blowup
-    (t := (B₁.I.comap q).blowupMap ≫ q)
-    (by rw [Scheme.IdealSheafData.comap_comp]
-        exact (B₁.I.comap q).isInvertible_comap_blowupMap)
-  have : IsProper (lam₁ ≫ B₁.I.blowupMap) := by rw [hlam₁]; infer_instance
-  have : IsProper lam₁ := IsProper.of_comp lam₁ B₁.I.blowupMap
-  -- `lam₁` is an isomorphism over the locus above `V₂`
+  have := isProper_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have : IsProper (isoNearClosureLift hU q hT hTN hN ≫ B₁.I.blowupMap) := by
+    rw [isoNearClosureLift_comp]; infer_instance
+  exact IsProper.of_comp (isoNearClosureLift hU q hT hTN hN) B₁.I.blowupMap
+
+omit [IsProper q] in
+/-- The canonical lift is an isomorphism over the locus above `V₂`. -/
+lemma isIso_isoNearClosureLift_restrict :
+    IsIso (isoNearClosureLift hU q hT hTN hN ∣_
+      ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ
+        isoNearClosureIsoLocus hU q hT hTN hN)) := by
+  set B₁ := isoNearClosureSeparationBlowup hU q hT hTN hN
+  set V₂ := isoNearClosureIsoLocus hU q hT hTN hN
   have hdisjV₂ : Disjoint (V₂ : Set X) (B₁.I.support : Set X) :=
-    B₁.disjoint_support.mono_left fun _ hx ↦ hV₂U hx
+    B₁.disjoint_support.mono_left fun _ hx ↦ isoNearClosureIsoLocus_le hU q hT hTN hN hx
   have hπ₁V₂ : IsIso (B₁.I.blowupMap ∣_ V₂) := B₁.I.isIso_blowupMap_restrict hdisjV₂
-  have hqV₂ : IsIso (q ∣_ V₂) := Scheme.Hom.isIso_restrict_of_le hV₂M hqM
+  have hqV₂ : IsIso (q ∣_ V₂) := isIso_restrict_isoNearClosureIsoLocus hU q hT hTN hN
   have hπZV₂ : IsIso ((B₁.I.comap q).blowupMap ∣_ (q ⁻¹ᵁ V₂)) := by
     refine (B₁.I.comap q).isIso_blowupMap_restrict ?_
     rw [Set.disjoint_left]
     intro z hz hzs
     rw [Scheme.IdealSheafData.coe_support_comap] at hzs
     exact Set.disjoint_left.mp hdisjV₂ hz hzs
-  have hlam₁iso : IsIso (lam₁ ∣_ (B₁.I.blowupMap ⁻¹ᵁ V₂)) := by
-    refine isIso_morphismRestrict_of_comp lam₁ B₁.I.blowupMap hlam₁ V₂ hπ₁V₂ ?_
-    have := hπZV₂
-    have := hqV₂
-    rw [morphismRestrict_comp]
-    infer_instance
-  -- Step 5: elimination of indeterminacy on the blow-up, over the locus above `V₂`.
-  obtain ⟨B', hB'⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap
-    (B₁.I.blowupMap.isCompact_preimage hV₂c) lam₁ hlam₁iso
+  refine isIso_morphismRestrict_of_comp _ B₁.I.blowupMap
+    (isoNearClosureLift_comp hU q hT hTN hN) V₂ hπ₁V₂ ?_
+  rw [morphismRestrict_comp]
+  infer_instance
+
+/-- **Step 5 of the isomorphism-near-closure construction: elimination over the separated
+region**: the elimination-of-indeterminacy blow-up (`eliminationBlowup`, blueprint
+`def-nagata-elimination-indeterminacy`) of the canonical lift `lam₁` over the quasi-compact
+open of `X₁` above `V₂`, over which `lam₁` is an isomorphism.
+(blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureElimination :
+    IsAdmissible (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup
+      ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ
+        isoNearClosureIsoLocus hU q hT hTN hN) :=
+  haveI := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  haveI := quasiSeparatedSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  haveI := isProper_isoNearClosureSeparationBlowup hU q hT hTN hN
+  haveI := isProper_isoNearClosureLift hU q hT hTN hN
+  eliminationBlowup ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap.isCompact_preimage
+    (isCompact_isoNearClosureIsoLocus hU q hT hTN hN)) (isoNearClosureLift hU q hT hTN hN)
+    (isIso_isoNearClosureLift_restrict hU q hT hTN hN)
+
+lemma isOpenImmersion_strictTransformMap_isoNearClosureElimination :
+    IsOpenImmersion (strictTransformMap (isoNearClosureLift hU q hT hTN hN)
+      (isoNearClosureElimination hU q hT hTN hN).I.blowupMap
+      (isoNearClosureElimination hU q hT hTN hN).preservedOpen) := by
+  have := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have := quasiSeparatedSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have := isProper_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have := isProper_isoNearClosureLift hU q hT hTN hN
+  exact isOpenImmersion_strictTransformMap_eliminationBlowup _ _ _
+
+/-- The restriction of the elimination centre to `A` is admissible for the locus above `U`. -/
+lemma disjoint_support_comap_isoNearClosureElimination :
+    Disjoint (((isoNearClosureNbhd hU q hT hTN hN).ι ⁻¹ᵁ
+        ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ U) :
+          (isoNearClosureNbhd hU q hT hTN hN).toScheme.Opens) :
+            Set (isoNearClosureNbhd hU q hT hTN hN).toScheme)
+      (((isoNearClosureElimination hU q hT hTN hN).I.comap
+        (isoNearClosureNbhd hU q hT hTN hN).ι).support :
+          Set (isoNearClosureNbhd hU q hT hTN hN).toScheme) := by
+  set A := isoNearClosureNbhd hU q hT hTN hN
+  rw [Set.disjoint_left]
+  intro y hyU hyJ
+  rw [Scheme.IdealSheafData.coe_support_comap] at hyJ
+  have hyA : A.ι y ∈ (A : Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup) := by
+    have : A.ι y ∈ Set.range A.ι := ⟨y, rfl⟩
+    rwa [Scheme.Opens.range_ι] at this
+  exact Set.disjoint_left.mp (isoNearClosureElimination hU q hT hTN hN).disjoint_support
+    (mem_isoNearClosureIsoLocus_of_mem_isoNearClosureNbhd hU q hT hTN hN _ hyA hyU) hyJ
+
+/-- The extension step (Stacks Project Tag 080M, blueprint
+`def-nagata-extended-admissible-blowup`): a finite-type ideal on `X₁` restricting on `A` to
+the elimination centre and avoiding the locus above `U`. -/
+theorem exists_isoNearClosureExtendedCentre :
+    ∃ D : (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.IdealSheafData,
+      D.ofFiniteType ∧ D.comap (isoNearClosureNbhd hU q hT hTN hN).ι =
+        (isoNearClosureElimination hU q hT hTN hN).I.comap (isoNearClosureNbhd hU q hT hTN hN).ι ∧
+      Disjoint (((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ U :
+          (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.Opens) :
+            Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup)
+        (D.support : Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup) := by
+  have := compactSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have := quasiSeparatedSpace_isoNearClosureSeparationBlowup hU q hT hTN hN
+  have := isProper_isoNearClosureSeparationBlowup hU q hT hTN hN
+  exact Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint
+    (isCompact_isoNearClosureNbhd hU q hT hTN hN)
+    ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap.isCompact_preimage hU) _
+    ((isoNearClosureElimination hU q hT hTN hN).finiteType.comap_of_isOpenImmersion _)
+    (disjoint_support_comap_isoNearClosureElimination hU q hT hTN hN)
+
+/-- **Step 6 of the isomorphism-near-closure construction: the extended centre** on `X₁`,
+selected from `exists_isoNearClosureExtendedCentre`: the elimination blow-up of the open `A`
+extended to an admissible blow-up of `X₁` (blueprint `def-nagata-extended-admissible-blowup`).
+(blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureExtendedCentre :
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.IdealSheafData :=
+  (exists_isoNearClosureExtendedCentre hU q hT hTN hN).choose
+
+lemma isoNearClosureExtendedCentre_spec :
+    (isoNearClosureExtendedCentre hU q hT hTN hN).ofFiniteType ∧
+      (isoNearClosureExtendedCentre hU q hT hTN hN).comap (isoNearClosureNbhd hU q hT hTN hN).ι =
+        (isoNearClosureElimination hU q hT hTN hN).I.comap (isoNearClosureNbhd hU q hT hTN hN).ι ∧
+      Disjoint (((isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ⁻¹ᵁ U :
+          (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup.Opens) :
+            Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup)
+        ((isoNearClosureExtendedCentre hU q hT hTN hN).support :
+          Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup) :=
+  (exists_isoNearClosureExtendedCentre hU q hT hTN hN).choose_spec
+
+/-- **Step 7 of the isomorphism-near-closure construction: the composite centre** `K` on `X`,
+selected from the composition theorem for blow-ups with base change
+(`Scheme.IdealSheafData.exists_blowup_comp_base_change`, Stacks Project Tag 080B) applied to
+the separation centre and the extended centre on `X₁`.
+(blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureCentre : X.IdealSheafData :=
+  (Scheme.IdealSheafData.exists_blowup_comp_base_change
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).finiteType
+    (isoNearClosureExtendedCentre hU q hT hTN hN)
+    (isoNearClosureExtendedCentre_spec hU q hT hTN hN).1).choose
+
+/-- The composite centre is of finite type, has support `supp 𝓘 ∪ π₁(supp D)`, its blow-up is
+identified with `Bl_D(X₁)` over `X`, and the blow-up of its pullback along `q` is identified
+with the blow-up of the pullback of `D` along the canonical lift `lam₁`. -/
+theorem isoNearClosureCentre_spec :
+    (isoNearClosureCentre hU q hT hTN hN).ofFiniteType ∧
+      ((isoNearClosureCentre hU q hT hTN hN).support : Set X) =
+        ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.support : Set X) ∪
+          (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap ''
+            ((isoNearClosureExtendedCentre hU q hT hTN hN).support :
+              Set (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowup) ∧
+      ∃ al : (isoNearClosureCentre hU q hT hTN hN).blowup ≅
+          (isoNearClosureExtendedCentre hU q hT hTN hN).blowup,
+        al.hom ≫ (isoNearClosureExtendedCentre hU q hT hTN hN).blowupMap ≫
+            (isoNearClosureSeparationBlowup hU q hT hTN hN).I.blowupMap =
+          (isoNearClosureCentre hU q hT hTN hN).blowupMap ∧
+        ∃ be : ((isoNearClosureCentre hU q hT hTN hN).comap q).blowup ≅
+            ((isoNearClosureExtendedCentre hU q hT hTN hN).comap
+              (isoNearClosureLift hU q hT hTN hN)).blowup,
+          be.hom ≫ ((isoNearClosureExtendedCentre hU q hT hTN hN).comap
+              (isoNearClosureLift hU q hT hTN hN)).blowupMap ≫
+              ((isoNearClosureSeparationBlowup hU q hT hTN hN).I.comap q).blowupMap =
+            ((isoNearClosureCentre hU q hT hTN hN).comap q).blowupMap := by
+  obtain ⟨hKft, hKsupp, al, hal, hbc⟩ := (Scheme.IdealSheafData.exists_blowup_comp_base_change
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).I
+    (isoNearClosureSeparationBlowup hU q hT hTN hN).finiteType
+    (isoNearClosureExtendedCentre hU q hT hTN hN)
+    (isoNearClosureExtendedCentre_spec hU q hT hTN hN).1).choose_spec
+  obtain ⟨be, hbe, -⟩ := hbc q _ (isoNearClosureLift_comp hU q hT hTN hN)
+  exact ⟨hKft, hKsupp, al, hal, be, hbe⟩
+
+lemma disjoint_support_isoNearClosureCentre :
+    Disjoint (U : Set X) ((isoNearClosureCentre hU q hT hTN hN).support : Set X) := by
+  rw [Set.disjoint_left]
+  intro x hxU hxK
+  rw [(isoNearClosureCentre_spec hU q hT hTN hN).2.1] at hxK
+  rcases hxK with hx | ⟨x', hx', rfl⟩
+  · exact Set.disjoint_left.mp (isoNearClosureSeparationBlowup hU q hT hTN hN).disjoint_support
+      hxU hx
+  · exact Set.disjoint_left.mp (isoNearClosureExtendedCentre_spec hU q hT hTN hN).2.2 hxU hx'
+
+/-- **The isomorphism-near-closure blow-up** `IsoBl_{U,T}(q) ⟶ X`: for a proper morphism
+`q : Z ⟶ X` over a qcqs scheme `X` which is an isomorphism over an open neighbourhood `N` of a
+piece `T` closed in the quasi-compact open `U`, the `U`-admissible blow-up of `X` assembled
+from the named steps:
+
+1. constructible separation data `(T_c, E_c)` in `U` of `T` and of the complement `E` of the
+   maximal isomorphism open (`isoNearClosureSeparation`);
+2. the separation blow-up `X₁ = CSepBl_U(T_c, E_c)` (`isoNearClosureSeparationBlowup`);
+3. a second constructible separation in `X₁`, giving a quasi-compact open `A ⊆ X₁` around the
+   closure of the inverse image of `T_c` and away from that of `E_c`
+   (`isoNearClosureNbhd`);
+4. the canonical lift `lam₁` of `q` to `X₁` (`isoNearClosureLift`), an isomorphism above
+   `V₂ = U \ E_c`;
+5. the elimination-of-indeterminacy blow-up of `lam₁` over the locus above `V₂`
+   (`isoNearClosureElimination`);
+6. its restriction to `A`, extended to a `U`-admissible centre `D` on `X₁`
+   (`isoNearClosureExtendedCentre`);
+7. the composite centre `K` of `X₁ ⟶ X` and `Bl_D(X₁) ⟶ X₁` (`isoNearClosureCentre`).
+
+Difference from the blueprint: the blueprint eliminates over `X₀ = X₁ \ closure(E_c)` and
+extends from `X₀`. The formalization performs the elimination over the quasi-compact open of
+`X₁` above `V₂` and extends from the quasi-compact open `A ⊆ X₀` produced by a second
+constructible separation (step 3), since the extension of admissible blow-ups (Tag 080M) needs a
+quasi-compact open; `A` still contains the closure of the inverse image of `T`, which is all
+that is used. (blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureBlowup : IsAdmissible X U where
+  I := isoNearClosureCentre hU q hT hTN hN
+  finiteType := (isoNearClosureCentre_spec hU q hT hTN hN).1
+  disjoint_support := disjoint_support_isoNearClosureCentre hU q hT hTN hN
+
+end IsoNearClosureConstruction
+/-! ### The final step of the isomorphism-near-closure argument -/
+
+/-- The final step of the isomorphism near a boundary closure, for arbitrary data of the shape
+produced by the construction `isoNearClosureBlowup`: a `U`-admissible blow-up `X₁ ⟶ X` with an
+open `A ⊆ X₁` containing the closure of the inverse image of `T`, the canonical lift `lam₁` of
+`q` to `X₁`, an admissible blow-up `B'` of `X₁` along which the strict transform of `lam₁` is
+an open immersion, an extension `D` of the restriction of the centre of `B'` to `A` which is
+`U`-admissible, and a composite centre `K` of `X₁` and `D` (Tag 080B) with its base change
+along `q`.
+
+Tag 080E (`Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform`) turns the strict
+transform of `q` along `K.blowupMap` into the canonical lift `(K.comap q).blowup ⟶ K.blowup`,
+and the localization of canonical lifts
+(`Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens`) identifies that lift over the
+copy of `A` with the open immersion produced by `B'`. The neighbourhood is the range of the
+resulting partial section; it contains the closure of the inverse image of `T` because that
+closure lies over `A` and inside the (closed, since `q` is proper) range of the strict
+transform. -/
+theorem exists_isIso_strictTransformMap_of_isoNearClosureData {X Z : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens} (q : Z ⟶ X) [IsProper q]
+    {T : Set X} (hTU : T ⊆ (U : Set X)) (hTrange : T ⊆ Set.range q)
+    (B₁ : IsAdmissible X U) (A : B₁.I.blowup.Opens)
+    (hTA : closure (B₁.I.blowupMap ⁻¹' T) ⊆ (A : Set B₁.I.blowup))
+    (lam₁ : (B₁.I.comap q).blowup ⟶ B₁.I.blowup)
+    (hlam₁ : lam₁ ≫ B₁.I.blowupMap = (B₁.I.comap q).blowupMap ≫ q)
+    {V : B₁.I.blowup.Opens} (B' : IsAdmissible B₁.I.blowup V)
+    (hB' : IsOpenImmersion (strictTransformMap lam₁ B'.I.blowupMap B'.preservedOpen))
+    (D : B₁.I.blowup.IdealSheafData) (hDA : D.comap A.ι = B'.I.comap A.ι)
+    (hDdisj : Disjoint ((B₁.I.blowupMap ⁻¹ᵁ U : B₁.I.blowup.Opens) : Set B₁.I.blowup)
+      (D.support : Set B₁.I.blowup))
+    (K : X.IdealSheafData) (hKft : K.ofFiniteType)
+    (hKsupp : (K.support : Set X) =
+      (B₁.I.support : Set X) ∪ B₁.I.blowupMap '' (D.support : Set B₁.I.blowup))
+    (al : K.blowup ≅ D.blowup) (hal : al.hom ≫ D.blowupMap ≫ B₁.I.blowupMap = K.blowupMap)
+    (be : (K.comap q).blowup ≅ (D.comap lam₁).blowup)
+    (hbe : be.hom ≫ (D.comap lam₁).blowupMap ≫ (B₁.I.comap q).blowupMap = (K.comap q).blowupMap) :
+    ∃ N' : K.blowup.Opens, closure (K.blowupMap ⁻¹' T) ⊆ (N' : Set K.blowup) ∧
+      IsIso (strictTransformMap q K.blowupMap K.support.compl ∣_ N') := by
+  have := B₁.isProper_blowupMap
+  have hcqft : (B₁.I.comap q).ofFiniteType := B₁.finiteType.comap q
+  have : IsProper (B₁.I.comap q).blowupMap :=
+    (B₁.I.comap q).isProper_blowupMap fun V ↦ hcqft V le_top
+  have : IsProper (lam₁ ≫ B₁.I.blowupMap) := by rw [hlam₁]; infer_instance
+  have : IsProper lam₁ := IsProper.of_comp lam₁ B₁.I.blowupMap
   obtain ⟨eC, -, heC⟩ := B'.I.exists_blowup_comap_iso_strictTransform lam₁
   set lamC : (B'.I.comap lam₁).blowup ⟶ B'.I.blowup :=
     eC.hom ≫ strictTransformMap lam₁ B'.I.blowupMap B'.I.support.compl with hlamCdef
@@ -196,26 +535,8 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     have := hB'
     rw [hlamCdef]
     infer_instance
-  -- Step 6: glue the centre across `A` and the locus above `U` (Tag 080M).
+  -- the restriction of the centre of `B'` to `A`, which `D` extends
   set JA : A.toScheme.IdealSheafData := B'.I.comap A.ι with hJAdef
-  have hJAft : JA.ofFiniteType := B'.finiteType.comap_of_isOpenImmersion A.ι
-  have hJAdisj : Disjoint
-      ((A.ι ⁻¹ᵁ (B₁.I.blowupMap ⁻¹ᵁ U) : A.toScheme.Opens) : Set A.toScheme)
-      (JA.support : Set A.toScheme) := by
-    rw [Set.disjoint_left]
-    intro y hyU hyJ
-    rw [hJAdef, Scheme.IdealSheafData.coe_support_comap] at hyJ
-    have hyA : A.ι y ∈ (A : Set B₁.I.blowup) := by
-      have : A.ι y ∈ Set.range A.ι := ⟨y, rfl⟩
-      rwa [Scheme.Opens.range_ι] at this
-    exact Set.disjoint_left.mp B'.disjoint_support (hAUV _ hyA hyU) hyJ
-  obtain ⟨D, hDft, hDA, hDdisj⟩ :=
-    Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint hA₂c
-      (B₁.I.blowupMap.isCompact_preimage hU) JA hJAft hJAdisj
-  -- Step 7: composition of the two blow-ups, compatibly with base change along `q`.
-  obtain ⟨K, hKft, hKsupp, al, hal, hbc⟩ :=
-    Scheme.IdealSheafData.exists_blowup_comp_base_change B₁.I B₁.finiteType D hDft
-  obtain ⟨be, hbe, -⟩ := hbc q lam₁ hlam₁
   have hKdisj : Disjoint (U : Set X) (K.support : Set X) := by
     rw [Set.disjoint_left]
     intro x hxU hxK
@@ -321,7 +642,7 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     have h1 : K.blowupMap x ∈ (K.support.compl : X.Opens) :=
       Set.disjoint_left.mp hKdisj (hTU hx)
     obtain ⟨t, ht⟩ := mem_range_strictTransformMap_of_mem_of_mem_range q K.blowupMap
-      K.support.compl h1 (hMrange (hTM hx))
+      K.support.compl h1 (hTrange hx)
     have hsurj : Function.Surjective ⇑eK.hom := by
       have := (Scheme.homeoOfIso eK).surjective
       rwa [Scheme.coe_homeoOfIso] at this
@@ -337,7 +658,7 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
     rw [hpre]
     refine (Continuous.closure_preimage_subset
       (al.hom ≫ D.blowupMap).continuous _).trans (Set.preimage_mono ?_)
-    exact (closure_mono (Set.preimage_mono hTimg)).trans hCTA
+    exact hTA
   have hclosure : closure (K.blowupMap ⁻¹' T) ⊆ Set.range (m ≫ lamK) := by
     intro y hy
     obtain ⟨y₀, rfl⟩ : y ∈ Set.range lamK := closure_minimal hTrangeK hclosedK hy
@@ -364,7 +685,7 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
   -- Step 10: conclude.
   have hmst : (m ≫ eK.hom) ≫ st = m ≫ lamK := by rw [hlamKdef, Category.assoc]
   have : IsOpenImmersion ((m ≫ eK.hom) ≫ st) := by rw [hmst]; infer_instance
-  refine ⟨⟨K, hKft, hKdisj⟩, ((m ≫ eK.hom) ≫ st).opensRange, ?_, ?_⟩
+  refine ⟨((m ≫ eK.hom) ≫ st).opensRange, ?_, ?_⟩
   · change closure (K.blowupMap ⁻¹' T) ⊆ Set.range ((m ≫ eK.hom) ≫ st)
     rw [hmst]
     exact hclosure
@@ -384,5 +705,84 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
         rwa [Set.mem_preimage, ← Scheme.Hom.comp_apply, ← hlamKdef] at ht
       obtain ⟨w, hw⟩ := hmrange.ge this
       exact ⟨w, by rw [hmdef] at hw ⊢; rw [Scheme.Hom.comp_apply, hw]⟩
+
+/-- **The isomorphism-near-closure blow-up does its job** (Stacks Project Tag 0F3W;
+blueprint: `lemma-nagata-isomorphism-near-closure`): after the blow-up `IsoBl_{U,T}(q)`
+(`isoNearClosureBlowup`), the strict transform of `q` is an isomorphism over an open
+neighbourhood of the closure of the inverse image of `T`. The proof feeds the named steps of
+the construction into `exists_isIso_strictTransformMap_of_isoNearClosureData`. -/
+theorem exists_isIso_strictTransformMap_isoNearClosureBlowup {X Z : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
+    {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
+    {N : X.Opens} (hTN : T ⊆ (N : Set X)) (hN : IsIso (q ∣_ N)) :
+    ∃ N' : (isoNearClosureBlowup hU q hT hTN hN).I.blowup.Opens,
+      closure ((isoNearClosureBlowup hU q hT hTN hN).I.blowupMap ⁻¹' T) ⊆
+        (N' : Set (isoNearClosureBlowup hU q hT hTN hN).I.blowup) ∧
+      IsIso (strictTransformMap q (isoNearClosureBlowup hU q hT hTN hN).I.blowupMap
+        (isoNearClosureBlowup hU q hT hTN hN).preservedOpen ∣_ N') := by
+  obtain ⟨-, hDA, hDdisj⟩ := isoNearClosureExtendedCentre_spec hU q hT hTN hN
+  obtain ⟨hKft, hKsupp, al, hal, be, hbe⟩ := isoNearClosureCentre_spec hU q hT hTN hN
+  exact exists_isIso_strictTransformMap_of_isoNearClosureData q hTU
+    (fun _ hx ↦ maximalIsomorphismOpen_subset_range q
+      (subset_maximalIsomorphismOpen_of_isIso q hTN hN hx))
+    _ _ (closure_preimage_subset_isoNearClosureNbhd hU q hT hTN hN hTU) _
+    (isoNearClosureLift_comp hU q hT hTN hN) _
+    (isOpenImmersion_strictTransformMap_isoNearClosureElimination hU q hT hTN hN) _ hDA hDdisj
+    _ hKft hKsupp al hal be hbe
+
+/-- **Isomorphism near the closure of a boundary piece** (Stacks Project Tag 0F3W;
+blueprint: `def:nagata-isomorphism-near-closure`,
+`lemma:nagata-isomorphism-near-closure`; used for the improved comparison projection of
+the two-open compactification theorem): a proper morphism which is an isomorphism over a
+neighbourhood of a closed piece `T` of `U` acquires, after a `U`-admissible blow-up, a strict
+transform which is an isomorphism over a neighbourhood of the closure of `T`. A witness is the
+constructed blow-up `isoNearClosureBlowup`
+(`exists_isIso_strictTransformMap_isoNearClosureBlowup`). -/
+theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
+    {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
+    (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
+    {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
+    {N : X.Opens} (hTN : T ⊆ (N : Set X)) (hN : IsIso (q ∣_ N)) :
+    ∃ (B : IsAdmissible X U) (N' : B.I.blowup.Opens),
+      closure (B.I.blowupMap ⁻¹' T) ⊆ (N' : Set B.I.blowup) ∧
+      IsIso (strictTransformMap q B.I.blowupMap B.preservedOpen ∣_ N') :=
+  ⟨isoNearClosureBlowup hU q hT hTN hN,
+    exists_isIso_strictTransformMap_isoNearClosureBlowup hU q hTU hT hTN hN⟩
+
+
+/-- **A proper open immersion with dense image is an isomorphism** (blueprint:
+`lemma-nagata-proper-open-dense-iso`): if `q : Z ⟶ X` is proper and an open immersion, and its
+image contains a scheme-theoretically dense quasi-compact open `D` of `X`, then `q` is an
+isomorphism. The image of `q` is open, and closed because `q` is universally closed; it contains
+the dense set `D`, hence is everything. -/
+theorem isIso_of_isProper_of_isOpenImmersion {X Z : Scheme.{u}} (q : Z ⟶ X) [IsProper q]
+    [IsOpenImmersion q] (D : X.Opens) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
+    (hD : D ≤ q.opensRange) : IsIso q := by
+  refine isIso_of_isOpenImmersion_of_opensRange_eq_top q ?_
+  have hclosed : IsClosed (Set.range q) := q.isClosedMap.isClosed_range
+  have hdense : closure (D : Set X) = Set.univ := by
+    simpa using D.ι.denseRange.closure_range
+  apply TopologicalSpace.Opens.ext
+  rw [Scheme.Hom.coe_opensRange, TopologicalSpace.Opens.coe_top, Set.eq_univ_iff_forall]
+  intro x
+  have : closure (D : Set X) ⊆ Set.range q := hclosed.closure_subset_iff.mpr (by
+    intro y hy; exact (hD hy : y ∈ q.opensRange))
+  exact this (hdense ▸ Set.mem_univ x)
+
+/-! ### Axiom census -/
+
+/--
+info: 'AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup
+
+/--
+info: 'AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs (whitespace := lax) in
+#print axioms AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure
 
 end AlgebraicGeometry
