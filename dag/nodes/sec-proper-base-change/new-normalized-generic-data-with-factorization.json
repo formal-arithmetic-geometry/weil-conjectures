@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6"
+ },
+ "proof": [
+  {
+   "text": "Convert the finite-value constructibility hypothesis using isConstructibleEtaleModuleSheaf_iff, pull it back along X.fromSpecResidueField x with IsConstructibleSheaf.upperStar, and convert back. Apply constructible_field_finite_separable_constant to this residue-field pullback, obtaining a finite-dimensional separable extension K and a finite module M with a trivialization e on Spec K.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-field-finite-separable-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Noetherian X is quasi-separated. Apply normalization_in_finite_residue_field_extension to K. Obtain integral nu:Y -> X, integral Y with integrally closed stalks, g:Spec K -> Y, the equality g followed by nu = the extension map followed by the residue-field inclusion, and generic image and residue-field isomorphism of g.",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse Core's private isIso_unit_constantSheaf_of_generic_residueFieldIso through import all. Its argument identifies g's image with the generic point. The source and generic stalks are fields, so their residue quotient maps are isomorphisms; the residue-field square and supplied residue-field isomorphism make g's stalk map an isomorphism. Thus Spec.map (Scheme.stalkClosedPointTo g) is an isomorphism whose composite with the canonical generic-stalk morphism equals g. Apply the normal constant generic unit theorem to that canonical morphism. The composition-unit equation transports this isomorphism along the source isomorphism; cancel the final isomorphism to obtain the unit for g.",
+   "uses": [
+    "lem-weil-pbc-normal-constant-generic",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse-image composition isomorphism for g and nu, transport across the normalization factorization equality, and use the composition isomorphism for the field-extension map and the residue-field inclusion. Compose with e and the inverse of upperStarConstantSheafIso at M. This identifies g^*nu^*F with g^*M_Y. Package Y, nu, K, g, M, their integrality and finiteness, the unit isomorphism, and this trivialization. Retain the algebra structure hAlg, the finite-dimensional (hence Module.Finite) witness hfin, and the normalization square hcomp in the final existential, rather than discarding them.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-field-finite-separable-constant",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-normal-constant-generic",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6, proof of (1), finite residue-field extension and normalization. Existing core argument reused by P2, retaining the square and finite extension witnesses. Repair X-54ab0: reuse the existing Core private unit-transport theorem through import all instead of redeclaring it."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "new-normalized-generic-data-with-factorization",
+ "title": "Normalized generic data with a finite residue-field factorization",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth, def-weil-pbc-scheme-conventions], $\\Lambda$ a finite commutative ring, $F$ a constructible sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-sheaves, def-weil-pbc-etale-constructible-sheaf], and $x\\in X$. There exist a scheme $Y$, an integral morphism $\\nu:Y\\to X$ [def-weil-finite-integral-morphism], a field $K$, a morphism $g:\\operatorname{Spec}K\\to Y$, and a finite $\\Lambda$-module $M$ such that, writing $M_Y$ for the constant sheaf [def-weil-pbc-constant-sheaf], the adjunction unit $M_Y\\to g_*g^*M_Y$ is an isomorphism and $g^*\\nu^*F\\cong g^*M_Y$ [def-weil-pbc-inverse-image, def-weil-pbc-direct-image]. Moreover, there exists a $\\kappa(x)$-algebra structure $a$ on $K$ making $K$ a finite-dimensional $\\kappa(x)$-module [def-weil-residue-field], such that $\\iota_x\\circ\\operatorname{Spec}(a)=\\nu\\circ g$, where $\\iota_x:\\operatorname{Spec}\\kappa(x)\\to X$ is the canonical residue-field morphism.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-residue-field",
+  "def-weil-pbc-inverse-image"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Proof step 4, Noetherian Tag 09Z6 input: generic trivialization and normalization; retain the finite residue-field structure and commuting square.",
+   "via": [
+    "new-normalized-generic-data-lifts",
+    "lem-weil-pbc-constructible-module-normalized-generic-data"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite residue field extension normalization generic point factorization",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend embedding of algebraic field extension into algebraically closed field",
+   "date": "2026-10-12",
+   "results": "8 hits including IsAlgClosed.lift; supplies the lift, not the normalized sheaf construction.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed.lift",
+   "date": "2026-10-12",
+   "results": "3 hits including IsAlgClosed.lift; exact field embedding tool.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization_in_finite_residue_field_extension|SpecToEquivOfField",
+   "date": "2026-10-12",
+   "results": "23 Mathlib hits for the residue-field description. Repository rg finds the existing core construction which drops the normalization square in its statement.",
+   "verdict": "reuse core proof and retain its witnesses"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedGenericDataWithFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedGenericDataWithFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_constructible_module_normalized_generic_data_with_factorization",
+  "statement": "theorem exists_constructible_module_normalized_generic_data_with_factorization\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X : Scheme.{u}} [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hF : Scheme.IsConstructibleEtaleModuleSheaf F) (x : X) :\n    ∃ (Y : Scheme.{u}) (ν : Y ⟶ X), IsIntegralHom ν ∧\n      ∃ (K : Type u) (_ : Field K) (g : Spec (.of K) ⟶ Y)\n        (M : ModuleCat.{u + 1} Λ), Finite M ∧\n        IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app\n          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ∧\n        Nonempty\n          ((upperStar (ModuleCat.{u + 1} Λ) g).obj\n            ((upperStar (ModuleCat.{u + 1} Λ) ν).obj F) ≅\n           (upperStar (ModuleCat.{u + 1} Λ) g).obj\n            ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ∧\n        ∃ a : Algebra (X.residueField x) K,\n          @Module.Finite (X.residueField x) K _ _ a.toModule ∧\n          Spec.map (CommRingCat.ofHom (@algebraMap (X.residueField x) K _ _ a)) ≫\n            X.fromSpecResidueField x = g ≫ ν",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b7c36",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T150955-L-2231638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b7c36",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T150955-L-2231638",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; original caller fails at the changed lifting application and adapted caller compiles; signatures, change record, nodes, report, imports, and axioms satisfy the review brief."
+ }
+}

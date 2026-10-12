@@ -20,62 +20,28 @@
  ],
  "proof": [
   {
-   "text": "Pull back F to Spec kappa(x). Pull the finite locally closed stratification back, including constructibility of its subsets. Convert each finite-value trivialization to finite locally constant, use pullback stability, then convert back with finite_locally_constant_module_values_iff. Apply the field trivialization theorem to obtain a finite separable K/kappa(x), finite M and an isomorphism on Spec K.",
+   "text": "Obtain normalized generic data retaining the finite residue-field algebra and the normalization square from exists_constructible_module_normalized_generic_data_with_factorization.",
    "uses": [
-    "prop-constructible-pullback",
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "lem-weil-pbc-constructible-field-finite-separable-constant",
-    "def-weil-pbc-etale-constructible-sheaf"
+    "new-normalized-generic-data-with-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Noetherian X is quasi-separated. Normalize X in Spec K using the finite residue-field extension theorem, obtaining integral nu:Y -> X, normal integral Y, and g:Spec K -> Y whose composite with nu is the residue-field map and whose image is generic with residue-field isomorphism. Compose inverse images and the constant pullback comparison to identify g^*nu^*F with g^*M_Y.",
+   "text": "Keep Y, nu, K, g and M and their sheaf properties. Apply normalized_generic_data_lifts with the retained algebra, finiteness and square to supply every geometric-point lift.",
    "uses": [
-    "lem-weil-pbc-normalization-in-residue-field-extension",
-    "lem-weil-pbc-inverse-image-composition",
-    "lemma-constructible-pullback-constant"
+    "new-normalized-generic-data-lifts"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the normal constant generic theorem to M_Y. Its Lean interface uses the canonical spectrum of the generic local ring. Factor g through the spectrum of the residue field at its image, using the residue-field description of field-valued points. Its residue-field map is an isomorphism, and the quotient from the generic local ring to its residue field is an isomorphism since that local ring is a field. Thus g differs from the canonical generic inclusion by an isomorphism of source schemes. The adjunction for a scheme isomorphism is an equivalence; composition of inverse images and uniqueness of adjoints transport the invertible unit to g. This gives precisely the unit isomorphism in the conclusion.",
-   "uses": [
-    "lem-weil-pbc-normal-constant-generic",
-    "lem-weil-pbc-normalization-in-residue-field-extension",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-geometric-point",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For an algebraically closed Omega and s above x, its residue-field homomorphism kappa(x) -> Omega extends to K by the algebraic-extension embedding theorem. Take Spec of this extension to obtain w. Compatibility over kappa(x), the residue-field description of s, and g followed by nu equal to the original residue-field morphism show w followed by g and nu equals s. This gives every required lift. The empty base has no x; for the zero sheaf take M=0.",
-   "uses": [
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "def-weil-geometric-point",
-    "lem-weil-pbc-normalization-in-residue-field-extension"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-constructible-pullback",
-  "lem-weil-pbc-finite-locally-constant-module-values",
-  "lem-weil-pbc-constructible-field-finite-separable-constant",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
-  "lem-weil-pbc-inverse-image-composition",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-normal-constant-generic",
-  "def-weil-geometric-point",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+  "new-normalized-generic-data-with-factorization",
+  "new-normalized-generic-data-lifts"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09Z6 (lemma-constructible-maps-into-constant), proof of (1), paragraph from the reduced closure of x to the generic inclusion; transferred to (3), using Tag 09Z5 (lemma-push-constant-sheaf-from-open)"
+  "place": "Tag 09Z6, generic trivialization, normalization and geometric lift; P2 repair retaining the residue-field factorization."
  },
  "mathlib_searches": [
   {
@@ -174,15 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
+  "reviewer": "X-b7c36",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T053945-L-2641227",
+  "landing": "20261012T150955-L-2231638",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.exists_constructible_module_normalized_generic_data"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered files compile cleanly; original caller fails at the changed lifting application and adapted caller compiles; signatures, change record, nodes, report, imports, and axioms satisfy the review brief."
  }
 }

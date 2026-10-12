@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.NormalizedGenericDataCore
+import Sheaf.AlgebraicGeometry.NormalizedGenericDataWithFactorization
 import Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts
 
 /-!
@@ -70,9 +70,9 @@ theorem exists_constructible_module_normalized_generic_data
         ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X),
           ((Scheme.SpecToEquivOfField Ω X) s).1 = x →
             ∃ w : Spec (.of Ω) ⟶ Spec (.of K), w ≫ g ≫ ν = s := by
-  obtain ⟨Y, ν, hν, K, hK, g, M, hM, hu, he⟩ :=
-    exists_constructible_module_normalized_generic_data_core Λ F hF x
+  obtain ⟨Y, ν, hν, K, hK, g, M, hM, hu, he, a, ha, hcomp⟩ :=
+    exists_constructible_module_normalized_generic_data_with_factorization Λ F hF x
   refine ⟨Y, ν, hν, K, hK, g, M, hM, hu, he, ?_⟩
-  exact normalized_generic_data_lifts Λ F hF x Y ν hν K hK g M hM hu he
+  exact normalized_generic_data_lifts Λ F hF x Y ν hν K hK g a ha hcomp M hM hu he
 
 end AlgebraicGeometry.Etale
