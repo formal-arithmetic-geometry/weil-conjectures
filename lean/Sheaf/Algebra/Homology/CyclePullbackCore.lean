@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Abelian.Basic
 
+import Sheaf.Algebra.Homology.CyclePullbackLaws
+import Sheaf.Algebra.Homology.CyclePullbackTowerComparison
+
 /-!
 # Structural cycle-pullback construction
 
@@ -65,6 +68,41 @@ theorem exists_functorial_cyclePullback_core {A : Type u} [Category.{v} A] [Abel
           ∃ (c : (Q.obj F).X i ≅ T.obj (pullback f g)),
             c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g = (ε.app F).f i ∧
             c.hom ≫ π.app (pullback f g) ≫ pullback.snd f g ≫ kernel.ι d =
-              (Q.obj F).d i (i + 1) := by sorry
+              (Q.obj F).d i (i + 1) := by
+  classical
+  let P : ObjectProperty (CochainComplex A ℤ) :=
+    fun F ↦ ∀ i : ℤ, N < i → IsZero (F.X i)
+  let X := CyclePullback.term T π P.ι N
+  let d := CyclePullback.differential T π P.ι N
+  let e := CyclePullback.augmentation T π P.ι N
+  have laws := CyclePullback.tower_laws T π P.ι N
+  let Q : P.FullSubcategory ⥤ CochainComplex A ℤ :=
+    { obj := fun F ↦ CochainComplex.of (fun i ↦ (X i).obj F) (fun i ↦ (d i).app F)
+        (fun i ↦ by
+          exact congrArg (fun α ↦ α.app F) (laws i).1)
+      map := fun φ ↦ CochainComplex.ofHom (fun i ↦ (X i).map φ) (fun i ↦ by
+        simpa only [CochainComplex.of_d] using (d i).naturality φ)
+      map_id := fun F ↦ by ext i; exact (X i).map_id F
+      map_comp := fun φ ψ ↦ by ext i; exact (X i).map_comp φ ψ }
+  let ε : Q ⟶ P.ι :=
+    { app := fun F ↦ CochainComplex.ofHom (fun i ↦ (e i).app F) (fun i ↦ by
+        dsimp only [Q, CochainComplex.ofHom]
+        simpa only [CochainComplex.of_d, NatTrans.comp_app, CyclePullback.targetD,
+          Functor.whiskerLeft_app, HomologicalComplex.dNatTrans_app] using
+          congrArg (fun α ↦ α.app F) (laws i).2)
+      naturality := fun F G φ ↦ by
+        ext i
+        exact (e i).naturality φ }
+  refine ⟨Q, ε, ?_⟩
+  intro F
+  refine ⟨?_, ?_, ?_⟩
+  · intro i
+    exact CyclePullback.term_mem S hzero T π hT P.ι N i F
+  · intro i hi
+    exact CyclePullback.term_isZero T π P.ι N i hi F
+  · intro i hi
+    dsimp only [Q, ε, CochainComplex.ofHom]
+    rw [CochainComplex.of_d, CochainComplex.of_d]
+    exact CyclePullback.tower_comparison T π P.ι N F i hi
 
 end CochainComplex

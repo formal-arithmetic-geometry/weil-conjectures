@@ -12,21 +12,31 @@
  ],
  "proof": [
   {
-   "text": "Put zero in degrees above N. Descend through degrees N-k: form the kernel of the next differential, map it to the next target term via the augmentation, and pull back along the current target differential. Set the current term equal to T of this pullback. Define the augmentation by pi followed by the first projection, and the differential by pi, the second projection and the kernel inclusion. The kernel equation gives square zero; the pullback equation gives the chain-map equation. The term property follows from hT, or hzero above N. Assembly of the integer-indexed complex transports the constructed term identification to the isomorphism c. The two projection equations hold by the definitions. No epimorphism or lifting property is assumed or asserted.",
-   "uses": [],
+   "text": "Use the explicit functor-category descending tower. Its reindexed term natural transformations satisfy square-zero and augmentation chain-map equations by tower_laws. Assemble the object complexes using CochainComplex.of. The maps of the term functors assemble using CochainComplex.ofHom; naturality of each differential supplies the chain-map equations. The term functors identity and composition laws prove Q is a functor. Assemble the augmentations using ofHom and the second tower law; their degreewise naturality makes epsilon natural.",
+   "uses": [
+    "def-pc-cycle-pullback-tower-data-stage3",
+    "lem-pc-cycle-pullback-tower-laws-stage3"
+   ],
    "elementary": false
   },
   {
-   "text": "For a map of target complexes descend in degree. The already constructed maps in the next two degrees induce the kernel map and then the pullback map; applying T gives the current component. Naturality of pi gives compatibility with the augmentation and differential. Uniqueness in the kernel and pullback universal properties and the functor laws of T prove identity and composition. Assemble Q and the natural augmentation epsilon, carrying along the constructed term identifications at or below N.",
-   "uses": [],
+   "text": "Below the bound each selected stage is a successor, whose current functor is a pullback followed by T; hT proves term membership. Above the bound the term is the literal constant zero family, giving both hzero membership and the required bound. Apply tower_comparison to the explicit constructed terms. Rewrite the two adjacent differentials of CochainComplex.of using of_d to obtain exactly the target comparison and both equations.",
+   "uses": [
+    "def-pc-cycle-pullback-tower-data-stage3",
+    "lem-pc-cycle-pullback-tower-comparison-stage3"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-cycle-pullback-tower-data-stage3",
+  "lem-pc-cycle-pullback-tower-laws-stage3",
+  "lem-pc-cycle-pullback-tower-comparison-stage3"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05T7 (1); fixed functor T and natural pi give the functorial variant by universal properties"
+  "place": "Lemma 05T7 (1); explicit functor-category tower, assembled in Lean by S3"
  },
  "mathlib_searches": [
   {
@@ -97,9 +107,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T135233-L-1665507",
+  "landing": "20261012T173903-L-3305716",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-cycle-pullback-tower-laws-stage3",
+ "kind": "statement",
+ "title": "Equations for the reindexed explicit cycle-pullback tower",
+ "statement": "Let $A,B,F,T,\\pi,N$ and $X_i,\\delta_i,e_i,V_i$ be the explicit functor-category construction [def-pc-cycle-pullback-tower-data-stage3]. For every $i\\in\\mathbf Z$, $\\delta_i\\delta_{i+1}=0$ and $e_i d_F^i=\\delta_i e_{i+1}$ as natural transformations. No boundedness of $F$, epimorphism hypothesis, or preservation of limits by $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1), descending cycle-pullback construction; https://stacks.math.columbia.edu/tag/05T7"
+ },
+ "stmt_deps": [
+  "def-pc-cycle-pullback-tower-data-stage3"
+ ],
+ "proof": [
+  {
+   "text": "For a stage s, its successor differential composed with s.d vanishes by kernel.condition. Its successor augmentation composed with the target differential equals the successor differential composed with s.e by pullback.condition. These two local assertions are already proved as step_square and step_comm in the explicit tower module.",
+   "uses": [
+    "def-pc-cycle-pullback-tower-data-stage3"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For i<N, prove equality of the selected stage at i with the successor of the selected stage at i+1. The private pair_square and pair_comm lemmas transport the local equations across this stage equality. Expand differential and augmentation, compose successive eqToHom transports, and apply the pair equations; target_transport moves the degree-equality morphism through the target differential. For i=N, pair_comm uses the initial zero stage, while the next raw differential and augmentation are zero. For i>N the current raw maps are zero. These cases prove both equations in Lean without any unproved auxiliary theorem.",
+   "uses": [
+    "def-pc-cycle-pullback-tower-data-stage3"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cycle-pullback-tower-data-stage3"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1); explicit formalization in the abelian functor category by S3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Recursive descending cycle pullback tower in a functor category with fixed functor and natural augmentation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of a differential along a kernel inclusion gives a square zero differential and a commuting augmentation",
+   "results": "8 hits: ChainComplex.augment_d_one_zero, ChainComplex.augment_d_succ_succ, CategoryTheory.ShortComplex.SnakeInput.L₀', CochainComplex.augment_d_zero_one, ChainComplex.augment, CategoryTheory.ShortComplex.SnakeInput.L₀X₂ToP, Algebra.Generators.H1Cotangent.δ, CochainComplex.augment_d_succ_succ",
+   "date": "2026-10-12",
+   "verdict": "Partial matches; no fixed-T integer-indexed recursive construction. Local equations and pointwise limits supplied by Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.condition|pullback.condition|pullbackObjIso",
+   "results": "25 hits: Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/VanKampen.lean, Mathlib/CategoryTheory/Limits/VanKampen.lean, Mathlib/CategoryTheory/Limits/VanKampen.lean",
+   "date": "2026-10-12",
+   "verdict": "Partial matches; no fixed-T integer-indexed recursive construction. Local equations and pointwise limits supplied by Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.CyclePullbackCore",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "Bounded-above flat replacement: square-zero and chain-map equations for the descending construction",
+   "via": [
+    "lem-pc-functorial-cycle-pullback-core-stage3",
+    "lem-pc-functorial-cycle-pullback-construction",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CyclePullbackLaws",
+  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackLaws.lean",
+  "declaration": "CochainComplex.CyclePullback.tower_laws",
+  "declarations": [
+   "CochainComplex.CyclePullback.tower_laws"
+  ],
+  "statement": "theorem tower_laws {A : Type u} [Category.{v} A] [Abelian A] {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A) (F : B ⥤ CochainComplex A ℤ) (N : ℤ) : ∀ i : ℤ, differential T π F N i ≫ differential T π F N (i + 1) = 0 ∧ augmentation T π F N i ≫ targetD F i (i + 1) = differential T π F N i ≫ augmentation T π F N (i + 1)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T173903-L-3305716",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T173903-L-3305716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
