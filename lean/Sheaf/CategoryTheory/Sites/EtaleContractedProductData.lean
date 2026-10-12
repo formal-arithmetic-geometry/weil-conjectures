@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.CategoryTheory.Sites.SheafifyAddAction
+import Sheaf.CategoryTheory.Sites.SheafifySimplyTransitive
 
 /-! # The explicit orbit presheaf for coefficient change of torsors
 
@@ -165,6 +167,75 @@ theorem exists_contracted_product_action :
           vadd V (G'.obj.map f g) ((contractedOrbitSheaf S φ T).obj.map f t)) ∧
       (∀ U t, Function.Bijective (vadd U · t)) ∧
       (∀ U t h k, contractedOrbitQuotient S φ T U t (h + k) =
-        vadd U k (contractedOrbitQuotient S φ T U t h)) := by sorry
+        vadd U k (contractedOrbitQuotient S φ T U t h)) := by
+  let P := contractedOrbitPresheaf S φ T
+  let a : ∀ U, G'.obj.obj U → P.obj U → P.obj U := fun U k ↦
+    Quot.lift (fun x ↦ Quot.mk (contractedOrbitRel S φ T U) (x.1, x.2 + k)) (by
+      intro x y hxy
+      obtain ⟨g, rfl⟩ := hxy
+      apply Quot.sound
+      refine ⟨g, ?_⟩
+      congr 1
+      dsimp
+      abel)
+  have az : ∀ U t, a U 0 t = t := by
+    intro U t
+    induction t using Quot.ind with
+    | mk x => change Quot.mk _ (x.1, x.2 + 0) = Quot.mk _ x; simp
+  have aa : ∀ U g h t, a U (g + h) t = a U g (a U h t) := by
+    intro U g h t
+    induction t using Quot.ind with
+    | mk x =>
+      change Quot.mk _ (x.1, x.2 + (g + h)) = Quot.mk _ (x.1, (x.2 + h) + g)
+      congr 1
+      abel
+  have an : ∀ ⦃U V⦄ (f : U ⟶ V) g t,
+      P.map f (a U g t) = a V (G'.obj.map f g) (P.map f t) := by
+    intro U V f g t
+    induction t using Quot.ind with
+    | mk x =>
+      change Quot.mk _ (T.sheaf.obj.map f x.1, G'.obj.map f (x.2 + g)) =
+        Quot.mk _ (T.sheaf.obj.map f x.1, G'.obj.map f x.2 + G'.obj.map f g)
+      rw [map_add]
+  have ab : ∀ U t, Function.Bijective (a U · t) := by
+    intro U t
+    induction t using Quot.ind with
+    | mk x =>
+      let e := contractedOrbitEquiv S φ T U x.1
+      have he : ∀ k, e (a U k (Quot.mk _ x)) = x.2 + k := by
+        intro k
+        change (x.2 + k) + φ.hom.app U
+          ((Equiv.ofBijective (T.vadd U · x.1) (T.bijective_vadd U x.1)).symm x.1) = _
+        have hz : (Equiv.ofBijective (T.vadd U · x.1)
+            (T.bijective_vadd U x.1)).symm x.1 = 0 := by
+          apply (T.bijective_vadd U x.1).injective
+          exact (Equiv.ofBijective (T.vadd U · x.1)
+            (T.bijective_vadd U x.1)).apply_symm_apply x.1 |>.trans
+              (T.zero_vadd U x.1).symm
+        rw [hz, map_zero, add_zero]
+      constructor
+      · intro g h hgh
+        have heq := congrArg e hgh
+        rw [he, he] at heq
+        exact add_left_cancel heq
+      · intro y
+        obtain ⟨k, hk⟩ := (Equiv.addLeft x.2).surjective (e y)
+        refine ⟨k, e.injective ?_⟩
+        rw [he]
+        exact hk
+  obtain ⟨b, ⟨bz, ba, bn, bq⟩, bu⟩ :=
+    existsUnique_sheafify_add_action S.smallEtaleTopology G' P a az aa an
+  have bb := bijective_sheafify_add_action S.smallEtaleTopology G' P a an ab b bn bq
+  refine ⟨b, ⟨bz, ba, bn, bb, ?_⟩, ?_⟩
+  · intro U t h k
+    exact (bq U k (Quot.mk _ (t, h))).symm
+  · intro c hc
+    apply bu c
+    refine ⟨hc.1, hc.2.1, hc.2.2.1, ?_⟩
+    intro U g t
+    induction t using Quot.ind with
+    | mk x => exact (hc.2.2.2.2 U x.1 x.2 g).symm
+
 
 end CategoryTheory.Sheaf.Torsor
+

@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-sheafify-add-action",
+ "kind": "statement",
+ "title": "Unique extension of natural additive actions through sheafification",
+ "statement": "Let C be a category with Grothendieck topology J, with set-valued sheafification in a fixed universe. Let G be an abelian group sheaf and P a presheaf of sets [def-weil-pbc-sheafification], whose sheafification unit is locally injective and locally surjective. A sectionwise operation a of G on P, natural under restriction and satisfying zero and addition, extends uniquely to an operation b on the sheafification of P with the same laws and naturality, such that b(g,eta(p))=eta(a(g,p)) for every object, group section and presheaf section.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WH, associated sheaf; local bijectivity and sheaf gluing; torsor application as in Tag 03AH of sites-cohomology.tex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Local injectivity of eta and separatedness of P-sharp show that eta(a(g,p)) depends only on eta(p). Restrict to the covering equalizer sieve of p and q and use naturality of a.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the covering image sieve of x, choose representatives p of restrictions of x and translate by restrictions of g. Independence proves compatibility. Glue in P-sharp, and use separatedness on pullback covering sieves to prove the characterization for every local representative.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of the characterized section gives naturality and the zero and addition laws. Every operation with naturality and the unit formula has the same characterization, proving uniqueness.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-12",
+  "note": "Complete Lean proof by local representatives, covering sieves and sheaf gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural additive action on a presheaf extends uniquely to its sheafification",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple transitivity of a natural presheaf group action is preserved by sheafification",
+   "results": "Eight presheaf-of-modules scalar-action hits; no theorem for actions on presheaves of sets.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyInjective\", \"toSheafify\"",
+   "results": "Four hits for local injectivity of sheafification units, used through Mathlib LocallyBijective.",
+   "date": "2026-10-12",
+   "verdict": "tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafify.*(action|vadd)|pseudo.?torsor; rg on Mathlib Sites and source Torsor",
+   "results": "No generic action extension or simple-transitivity theorem. Mathlib gives equalizerSieve_mem, imageSieve_mem, sheaf gluing and local bijectivity; source torsor transport requires an existing torsor.",
+   "date": "2026-10-12",
+   "verdict": "tools used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.EtaleContractedProductData",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Proper and affine cases: compatibility of the Kummer/Picard torsor-class identifications with pullback; geometric contracted-product construction for coefficient change; explicit orbit-action construction, steps 2 and 3 of lem-sc-etale-contracted-product-exists-data",
+   "via": [
+    "lem-sc-etale-contracted-product-exists-data",
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-sc-h1-gm-pic-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.SheafifyAddAction",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SheafifyAddAction.lean",
+  "declaration": "CategoryTheory.existsUnique_sheafify_add_action",
+  "statement": "theorem existsUnique_sheafify_add_action\n    (a : ∀ U, G.obj.obj U → P.obj U → P.obj U)\n    (hz : ∀ U t, a U 0 t = t)\n    (ha : ∀ U g h t, a U (g + h) t = a U g (a U h t))\n    (hn : ∀ ⦃U V⦄ (f : U ⟶ V) g t,\n      P.map f (a U g t) = a V (G.obj.map f g) (P.map f t)) :\n    ∃! b : ∀ U, G.obj.obj U → (sheafify J P).obj U → (sheafify J P).obj U,\n      (∀ U t, b U 0 t = t) ∧\n      (∀ U g h t, b U (g + h) t = b U g (b U h t)) ∧\n      (∀ ⦃U V⦄ (f : U ⟶ V) g t,\n        (sheafify J P).map f (b U g t) =\n          b V (G.obj.map f g) ((sheafify J P).map f t)) ∧\n      (∀ U g t, b U g ((toSheafify J P).app U t) =\n        (toSheafify J P).app U (a U g t))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T110312-L-619075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T110312-L-619075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
