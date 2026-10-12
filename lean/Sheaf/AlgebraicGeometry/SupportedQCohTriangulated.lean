@@ -20,6 +20,81 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+abbrev supportedProperty (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (T : Set X) : ObjectProperty (schemeDerivedCategory X) := fun K ↦
+  schemeDerivedQCohProperty X K ∧ ∀ (n : ℤ) (x : X), x ∉ T →
+    Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).val.presheaf x))
+
+/-- The supported quasi-coherent property contains a zero object.
+Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
+(blueprint: lem-pc-supported-qcoh-contains-zero).
+
+Proof: Choose the zero object of the derived category. Each homology functor is additive,
+so its image is a zero sheaf of modules. A zero module sheaf is quasi-coherent: on every
+affine open it is the sheaf associated to the zero module, or equivalently it has the
+presentation with no generators and no relations. Its underlying additive sheaf has
+zero sections on every open, and hence zero stalk at every point. Thus all homology
+sheaves are quasi-coherent and all stalks outside T are subsingleton, independently of T. -/
+theorem supported_qcoh_containsZero (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (T : Set X) : (supportedProperty X T).ContainsZero := by
+  sorry
+
+/-- The supported quasi-coherent property is stable under every integer shift.
+Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
+(blueprint: lem-pc-supported-qcoh-stable-shift).
+
+Proof: For integers a and n, the shift sequence gives H^n(K[a]) ≅ H^(a+n)(K).
+Transport quasi-coherence along its inverse. Applying the underlying additive
+presheaf functor and the stalk functor at x gives an isomorphism of additive groups.
+Its forward map is injective, so a subsingleton stalk of H^(a+n)(K) implies a
+subsingleton stalk of H^n(K[a]). This works for all shifts and every subset T. -/
+theorem supported_qcoh_stableShift (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (T : Set X) : (supportedProperty X T).IsStableUnderShift ℤ := by
+  refine ⟨fun a ↦ ⟨fun K hK ↦ ?_⟩⟩
+  constructor
+  · intro n
+    exact (SheafOfModules.isQuasicoherent.{u} (moduleRings X.toRingedSpace)).prop_of_iso
+      (((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).shiftIso
+        a n (a + n) rfl).app K).symm (hK.1 (a + n))
+  · intro n x hx
+    let e := (((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).shiftIso
+      a n (a + n) rfl).app K)
+    let F := SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙
+      PresheafOfModules.toPresheaf.{u} (moduleRings X.toRingedSpace).obj ⋙
+      TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x
+    let h : Subsingleton (↑(F.obj ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (a + n)).obj K))) :=
+      hK.2 (a + n) x hx
+    refine ⟨fun b c ↦ (ConcreteCategory.bijective_of_isIso (F.mapIso e).hom).1 ?_⟩
+    exact h.elim _ _
+
+/-- The supported quasi-coherent property is closed under middle terms of triangles.
+Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
+(blueprint: lem-pc-supported-qcoh-closed-middle).
+
+Proof: For a distinguished triangle K → L → M → K[1] with K and M in the property,
+the long exact homology sequence gives a short exact sequence from the cokernel of
+H^(n-1)(M) → H^n(K) to H^n(L) to the kernel of H^n(M) → H^(n+1)(K).
+Kernels, cokernels, and extensions of quasi-coherent module sheaves on a scheme are
+quasi-coherent. For kernels and cokernels this follows on affine opens from exactness
+of the module-to-sheaf correspondence. For extensions, on an affine open the outer
+quasi-coherent sheaves have vanishing H^1, so sections form an exact extension of
+modules; sheafifying this extension identifies its middle term with the given sheaf.
+At a point x outside T, the stalk functor is exact and both outer stalks in the long
+exact sequence are zero. Exactness forces the middle stalk to be zero as well.
+Thus L itself has the property, and in particular lies in its isomorphism closure,
+as required by IsTriangulatedClosed₂. The argument also covers empty T and T = X. -/
+theorem supported_qcoh_closedMiddle (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (T : Set X) : (supportedProperty X T).IsTriangulatedClosed₂ := by
+  sorry
+
 /-- Quasi-coherent cohomology with zero stalks off T is stable under triangles.
 No compactness or closedness assumption on T is needed for this closure assertion.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
@@ -49,6 +124,10 @@ theorem supported_qcoh_isTriangulated (X : Scheme.{u})
         ∀ (n : ℤ) (x : X), x ∉ T →
           Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).val.presheaf x))) := by
-  sorry
+  let : (supportedProperty X T).ContainsZero := supported_qcoh_containsZero X T
+  let : (supportedProperty X T).IsStableUnderShift ℤ := supported_qcoh_stableShift X T
+  let : (supportedProperty X T).IsTriangulatedClosed₂ := supported_qcoh_closedMiddle X T
+  exact ObjectProperty.IsTriangulated.mk
+
 
 end AlgebraicGeometry

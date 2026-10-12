@@ -28,43 +28,57 @@
  ],
  "proof": [
   {
-   "text": "The zero complex has zero cohomology sheaves; these are quasi-coherent and their stalks are zero. This verifies ContainsZero.",
-   "uses": [],
+   "text": "The declaration `supported_qcoh_containsZero` supplies the `ContainsZero` typeclass obligation for the supported object property.",
+   "uses": [
+    "lem-pc-supported-qcoh-contains-zero"
+   ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, definition preceding lemma"
+    "document": "lean/Sheaf/AlgebraicGeometry/SupportedQCohTriangulated.lean",
+    "place": "supported_qcoh_containsZero"
    }
   },
   {
-   "text": "Cohomology of K shifted by m is canonically cohomology of K in degree n+m. Quasi-coherence and zero stalks are invariant under these isomorphisms. This verifies IsStableUnderShift for every integer shift, including negative shifts.",
-   "uses": [],
+   "text": "The declaration `supported_qcoh_stableShift` supplies the `IsStableUnderShift ℤ` typeclass obligation for the supported object property.",
+   "uses": [
+    "lem-pc-supported-qcoh-stable-shift"
+   ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, definition preceding lemma"
+    "document": "lean/Sheaf/AlgebraicGeometry/SupportedQCohTriangulated.lean",
+    "place": "supported_qcoh_stableShift"
    }
   },
   {
-   "text": "Apply cohomology to a distinguished triangle with its first and third objects in the property. Its middle cohomology sheaf is an extension of a cokernel between quasi-coherent cohomology sheaves and a kernel between such sheaves. Kernels, cokernels and extensions of quasi-coherent modules on a scheme are quasi-coherent, as can be checked on affine opens by the exact module-to-sheaf equivalence.",
-   "uses": [],
+   "text": "The declaration `supported_qcoh_closedMiddle` supplies the `IsTriangulatedClosed₂` typeclass obligation for the supported object property.",
+   "uses": [
+    "lem-pc-supported-qcoh-closed-middle"
+   ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, definition preceding lemma"
+    "document": "lean/Sheaf/AlgebraicGeometry/SupportedQCohTriangulated.lean",
+    "place": "supported_qcoh_closedMiddle"
    }
   },
   {
-   "text": "At a point outside T, stalks preserve exact sequences. The long exact cohomology sequence has zero terms on both sides of each middle term, so that term is zero. Consequently the middle object has the property itself, hence also its isoClosure. These three assertions give ObjectProperty.IsTriangulated. The empty subset and the whole space require exactly the same argument.",
-   "uses": [],
+   "text": "With these three typeclass instances, `ObjectProperty.IsTriangulated.mk` constructs the triangulated property, exactly as used by `supported_qcoh_isTriangulated`.",
+   "uses": [
+    "lem-pc-supported-qcoh-contains-zero",
+    "lem-pc-supported-qcoh-stable-shift",
+    "lem-pc-supported-qcoh-closed-middle"
+   ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, definition preceding lemma"
+    "document": "lean/Sheaf/AlgebraicGeometry/SupportedQCohTriangulated.lean",
+    "place": "supported_qcoh_isTriangulated"
    }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-supported-qcoh-contains-zero",
+  "lem-pc-supported-qcoh-stable-shift",
+  "lem-pc-supported-qcoh-closed-middle"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
@@ -134,10 +148,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T085319-L-31861",
-  "kind": "interface",
+  "landing": "20261012T135224-L-1658455",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
