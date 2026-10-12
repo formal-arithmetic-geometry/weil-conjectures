@@ -8955,3 +8955,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink (stage 3; reviewer PASS; first push; landing 20261012T184304-L-4004820 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FormalModuleSupportConstant (stage 3; reviewer PASS; first push; landing 20261012T184304-L-4004954 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/H2/Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeFilteredColimit (stage 3; reviewer PASS; after a return; landing 20261012T184305-L-4005092 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/H2/Sheaf.AlgebraicGeometry.StalkTensorMultiplicationRange (stage 3; reviewer PASS; first push; landing 20261012T184305-L-4005195 (proof); batch 20261012T184234; modules 1; new nodes 0)
