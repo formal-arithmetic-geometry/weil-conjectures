@@ -16,9 +16,10 @@ public import WeilConjectures.CategoryTheory.Sites.CechFreeResolution
 Let `X` be an object of a category `C` and `U : ι → Over X` a family of objects over `X`
 (with `ι : Type w`). For a presheaf `P : Cᵒᵖ ⥤ AddCommGrpCat.{max v w}`, the Čech cochains of
 degree `n` of `(Over.forget X).op ⋙ P` with respect to `U` (Mathlib's
-`CategoryTheory.cechComplexFunctor`) are the morphisms `ℤ_𝔘[n] ⟶ P` from the free
-presheaf `CategoryTheory.Presheaf.cechFree U n`, compatibly with the differentials. As the complex `ℤ_𝔘[•]` is exact, the Čech complex of an
-injective presheaf is exact in positive degrees.
+`CategoryTheory.cechComplexFunctor`) are the morphisms `ℤ_𝔘[n] ⟶ P` from the
+free presheaf `CategoryTheory.Presheaf.cechFree U n`, compatibly with the differentials.
+As the complex `ℤ_𝔘[•]` is exact, the Čech complex of an injective presheaf is exact in
+positive degrees.
 
 ## Main definitions
 
