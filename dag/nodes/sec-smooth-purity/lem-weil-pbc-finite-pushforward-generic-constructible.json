@@ -19,85 +19,41 @@
  ],
  "proof": [
   {
-   "text": "Write S=Spec A with A a Noetherian domain and fraction field K. Since a finite algebra is integral by [pqf-lem-finite-integral-lft], lying over shows that finite morphisms are closed; this permits all subsequent shrinkings of S.",
+   "text": "Apply the finite-source generic-lissity theorem to the constructible sheaf E, obtaining a dense open U where the underlying abelian restriction to g^{-1}(U) is lisse.",
    "uses": [
-    "pqf-lem-finite-integral-lft"
+    "lem-weil-pbc-finite-source-generic-lisse"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "## Proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Replace Z by its reduction. The nilpotent immersion is a universal homeomorphism, so [thm-weil-pbc-universal-homeomorphism-invariance] identifies the etale sites and transports E. By [lem-weil-pbc-noetherian-finite-components], Z has finitely many irreducible components. The generic points of the finite fibre over (0) are precisely the generic points of components dominating S. If there are none, the closed image g(Z) misses the generic point and g_*E is zero on a dense open.",
+   "text": "Independently apply the generic preservation theorem to the finite map g, obtaining a dense open V on which direct image preserves lissity over every smaller open.",
    "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lem-weil-pbc-noetherian-finite-components"
+    "lem-weil-pbc-finite-map-generic-lisse-preservation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "## Proof, second paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "For each component dominating S, apply [lem-weil-pbc-irreducible-lisse-strata] to the constructible sheaf E. The stratum containing its generic point contains an open neighbourhood of that point in the component; remove the other components and intersect the finitely many resulting neighbourhoods. Their union W is open in the reduced Z, contains the generic fibre, and E is lisse on W. The closed set g(Z\\setminus W) misses the generic point, so after replacing S by a nonempty principal open in its complement, E is lisse on all of Z.",
+   "text": "Take W=U intersect V. The intersection is dense by Dense.inter_of_isOpen_left. The inclusion g^{-1}(W) into g^{-1}(U) is the map Z.homOfLE of the inclusion of opens. Apply pullback_finite_locally_constant to this inclusion and (g^{-1}(U)).ι. Rewrite the composite inclusion using Scheme.homOfLE_ι to obtain lissity of the exact abelian restriction to g^{-1}(W).",
    "uses": [
-    "lem-weil-pbc-irreducible-lisse-strata"
+    "lem-weil-pbc-pullback-finite-locally-constant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "## Proof, third paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-generic-finite-algebra-splitting] to B=Γ(Z,O_Z). After a further dense shrinking and a finite surjective etale cover S'=Spec A'→S, the reduction of Z×_S S' is a finite disjoint union of schemes Spec D_j, each finite, surjective and universally homeomorphic to S'. The nilpotent thickening is again removed using [thm-weil-pbc-universal-homeomorphism-invariance].",
-   "uses": [
-    "lem-weil-pbc-generic-finite-algebra-splitting",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "## Proof, finite-algebra calculation"
-   }
-  },
-  {
-   "text": "For each factor $u_j:\\operatorname{Spec}(D_j)\\to S'$ the universal-homeomorphism equivalence [thm-weil-pbc-universal-homeomorphism-invariance] identifies the pullback of $E$ with a finite locally constant sheaf on $S'$ and identifies its direct image $u_{j*}$ with that sheaf. The direct image from the finite disjoint union is therefore a finite product of finite locally constant sheaves, hence lisse (refine their finitely many trivializing etale covers). The finite exchange isomorphism [lemma-weil-pbc-finite-exchange] identifies this sheaf with the pullback of $g_*E$ over the shrunken $S$.",
-   "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lemma-weil-pbc-finite-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "## Proof, final paragraph"
-   }
-  },
-  {
-   "text": "Because S'→S is etale and surjective, a trivializing etale cover of the pullback descends to a trivializing etale cover of S. Hence g_*E is lisse on the chosen dense open.",
+   "text": "Since W is contained in V, apply the preservation property over W to E and the just-proved lissity of its source restriction. This yields the exact underlying set restriction of g_*E required by the target declaration.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "## Proof, final paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-lem-finite-integral-lft",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "lem-weil-pbc-noetherian-finite-components",
-  "lem-weil-pbc-irreducible-lisse-strata",
-  "lem-weil-pbc-generic-finite-algebra-splitting",
-  "lemma-weil-pbc-finite-exchange"
+  "lem-weil-pbc-finite-source-generic-lisse",
+  "lem-weil-pbc-finite-map-generic-lisse-preservation",
+  "lem-weil-pbc-pullback-finite-locally-constant"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "## Proof"
+  "place": "## Proof, first three paragraphs and finite-algebra calculation/final paragraph split independently; Lean proof intersects the resulting dense opens and uses existing pullback preservation"
  },
  "mathlib_searches": [
   {
@@ -209,5 +165,15 @@
   "group": "E1",
   "result": "pass",
   "note": "S integral (AlgebraicGeometry.IsIntegral, #check'd; packet §5 misresolved to ring IsIntegral) Noetherian affine; g finite IsFinite; E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u+1}, constructible via IsConstructibleEtaleSheafOfSets on sheafCompose forget (same spelling as K1 382eecafa sibling); ∃ U : S.Opens, Dense; g_*E = Etale.lowerStar AddCommGrpCat g, restricted by etaleSetPullback U.ι, IsLisseEtaleSheafOfSets (finite stalks); no statement change; empty Z / E=0 fine"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,141 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFinitePushforward",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "id": "lem-weil-pbc-finite-source-generic-lisse",
+ "title": "A constructible finite source is generically lisse",
+ "statement": "Let $S$ be an integral Noetherian affine scheme [def-weil-pbc-scheme-conventions], let $g:Z\\to S$ be finite, and let $E$ be an abelian etale sheaf whose underlying set sheaf is constructible [def-weil-pbc-etale-sheaves]. There exists a dense open $U\\subseteq S$ such that the underlying set sheaf of the abelian inverse image $E|_{g^{-1}(U)}$ [def-weil-pbc-inverse-image] is finite locally constant [def-weil-pbc-etale-sheaves].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "## Proof, first three paragraphs (closedness, reduction, generic lisse source)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The finite map is integral, hence affine and universally closed. Its source is Noetherian, since it is of finite type over a Noetherian scheme. Replace the source by its reduction via universal-homeomorphism invariance of the etale site. There are finitely many irreducible components.",
+   "uses": [
+    "pqf-lem-finite-integral-lft",
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-noetherian-finite-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Remove the closed images of components not dominating S. Points of the generic fibre are generic points of the remaining components: after tensoring the finite algebra with the fraction field, its primes are minimal because it is Artinian. For each such point, the irreducible lisse stratification supplies a locally closed stratum containing it, hence an open neighbourhood within that component. Shrink to avoid the other components. The resulting neighbourhoods are open in the source and disjoint, and their union W is lisse and contains the generic fibre.",
+   "uses": [
+    "lem-weil-pbc-irreducible-lisse-strata"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of the closed complement of W is closed and misses the generic point of S. Its complement U is open and dense, and g^{-1}(U) is contained in W. Restriction preserves finite local constancy. If there is no dominating component, this inverse image is empty and the stalk condition is vacuous. Transport back through the reduction equivalence.",
+   "uses": [
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-pullback-finite-locally-constant",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the comparison between the set inverse image of the underlying sheaf and the underlying sheaf of the abelian inverse image to express source lissity by the displayed abelian restriction. Transport trivializations and finite stalks through that isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-finite-integral-lft",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-irreducible-lisse-strata",
+  "lem-weil-pbc-pullback-finite-locally-constant",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "## Proof, first three paragraphs (closedness, reduction, generic lisse source); adapted to the Lean interfaces and independent dense-open shrinkings"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible etale sheaf on finite scheme over integral noetherian base is lisse over a dense open of the base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible sheaf on a finite scheme over an integral base restricts to a finite locally constant sheaf over some dense open of the base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, PrimeSpectrum.exists_range_eq_of_isConstructible, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Topology.IsLocallyConstructible.isConstructible",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyConstant|IsLisse|IsConstructible.*Sheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "## Proof, first three paragraphs (closedness, reduction, generic lisse source)",
+   "via": [
+    "lem-weil-pbc-finite-pushforward-generic-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFiniteSourceLisse",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiniteSourceLisse.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dense_open_lisse_finite_source",
+  "statement": "theorem exists_dense_open_lisse_finite_source\n    (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S]\n    {Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g]\n    (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hE : IsConstructibleEtaleSheafOfSets\n      ((sheafCompose Z.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E)) :\n    ∃ U : S.Opens, Dense (U : Set S) ∧\n      IsLisseEtaleSheafOfSets\n        ((sheafCompose (g ⁻¹ᵁ U).toScheme.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n            ((Etale.upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ U).ι).obj E))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

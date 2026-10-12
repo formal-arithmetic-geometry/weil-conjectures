@@ -1,0 +1,144 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFinitePushforward",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "id": "lem-weil-pbc-finite-map-generic-lisse-preservation",
+ "title": "A finite map generically preserves lissity",
+ "statement": "Let $S$ be an integral Noetherian affine scheme [def-weil-pbc-scheme-conventions] and let $g:Z\\to S$ be finite. There exists a dense open $U\\subseteq S$, depending only on $g$, with the following property. For every open $V\\subseteq U$ and every abelian etale sheaf $E$ on $Z$ [def-weil-pbc-etale-sheaves], if the underlying set sheaf of the abelian inverse image $E|_{g^{-1}(V)}$ [def-weil-pbc-inverse-image] is finite locally constant, then the set inverse image to $V$ of the underlying set sheaf of $g_*E$ [def-weil-pbc-direct-image] is finite locally constant. Finite local constancy means etale local constancy and finite geometric stalks, as in [def-weil-pbc-etale-sheaves].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "## Proof, finite-algebra calculation and final paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Write S=Spec A and Z=Spec B. The generic finite-algebra splitting theorem supplies a nonzero c, a finite surjective etale cover of U=D(c), and a decomposition of the reduction of the pulled-back source into finitely many finite surjective universal homeomorphisms onto that cover. No sheaf participates in this choice.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-algebra-splitting",
+    "pqf-lem-finite-integral-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For V contained in U, restrict the cover and decomposition to V. Universal homeomorphisms are stable under base change, and reduction commutes with open restriction. Restrict the finite product decomposition on the inverse images of affine opens of V; its orthogonal idempotents still give the same disjoint components. This produces the restricted splitting.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-generic-finite-algebra-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the assumed lisse source restriction to the reduced components. Pullback preserves finite local constancy. For each universal-homeomorphism factor the etale-site equivalence identifies direct image with inverse pullback, and thus transports its trivializing etale cover and finite geometric stalks to the base.",
+   "uses": [
+    "lem-weil-pbc-pullback-finite-locally-constant",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sections over a finite disjoint union are the finite product of the component sections, by the sheaf axiom on the component covering; this identification is natural in etale test objects. Refine the finitely many trivializing covers by their fibre product, which trivializes this product with a finite product of finite sets. For no components the abelian product is zero, whose underlying set sheaf is the constant singleton.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Finite exchange identifies this direct image with the pullback of the restricted original direct image. Forgetting abelian structures commutes with inverse and direct image, so the identification applies to underlying set sheaves as well. Compose the trivializing cover with the surjective etale splitting cover. Every geometric point lifts to the cover, so all original stalks are finite. This proves the assertion for each V and E.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-generic-finite-algebra-splitting",
+  "pqf-lem-finite-integral-lft",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-pullback-finite-locally-constant",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "## Proof, finite-algebra calculation and final paragraph; adapted to the Lean interfaces and independent dense-open shrinkings"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite map of schemes has a dense open where direct image preserves finite locally constant etale sheaves for every smaller open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism generically preserves finite locally constant etale sheaves uniformly after shrinking the integral noetherian base",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyConstant|IsLisse|IsConstructible.*Sheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "## Proof, finite-algebra calculation and final paragraph",
+   "via": [
+    "lem-weil-pbc-finite-pushforward-generic-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFiniteLissePreservation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiniteLissePreservation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dense_open_finite_lisse_preservation",
+  "statement": "theorem exists_dense_open_finite_lisse_preservation\n    (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S]\n    {Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g] :\n    ∃ U : S.Opens, Dense (U : Set S) ∧\n      ∀ (V : S.Opens), V ≤ U →\n        ∀ (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}),\n          IsLisseEtaleSheafOfSets\n            ((sheafCompose (g ⁻¹ᵁ V).toScheme.smallEtaleTopology\n              (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n                ((Etale.upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ V).ι).obj E)) →\n          IsLisseEtaleSheafOfSets\n            ((etaleSetPullback V.ι).obj\n              ((sheafCompose S.smallEtaleTopology\n                (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n                  ((Etale.lowerStar AddCommGrpCat.{u + 1} g).obj E)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638929",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638929",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

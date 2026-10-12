@@ -8,10 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
-import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import WeilConjectures.SixFunctors.Finite.BaseChange
+import Sheaf.AlgebraicGeometry.GenericFiniteSourceLisse
+import Sheaf.AlgebraicGeometry.GenericFiniteLissePreservation
+import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-!
 # Generic lissity of finite direct images
@@ -62,6 +61,14 @@ theorem exists_dense_open_lisse_finite_directImage
         ((etaleSetPullback U.ι).obj
           ((sheafCompose S.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
             ((Etale.lowerStar AddCommGrpCat.{u + 1} g).obj E))) := by
-  sorry
+  obtain ⟨U, hUd, hU⟩ := exists_dense_open_lisse_finite_source S g E hE
+  obtain ⟨V, hVd, hV⟩ := exists_dense_open_finite_lisse_preservation S g
+  refine ⟨U ⊓ V, ?_, ?_⟩
+  · exact hUd.inter_of_isOpen_left hVd U.isOpen
+  · have hWU : g ⁻¹ᵁ (U ⊓ V) ≤ g ⁻¹ᵁ U := fun x hx ↦ hx.1
+    have hW := (pullback_finite_locally_constant
+      (Z.homOfLE hWU) (g ⁻¹ᵁ U).ι E hU).2
+    rw [Scheme.homOfLE_ι] at hW
+    exact hV (U ⊓ V) inf_le_right E hW
 
 end AlgebraicGeometry.Scheme
