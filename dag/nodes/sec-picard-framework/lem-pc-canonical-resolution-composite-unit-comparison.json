@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-canonical-resolution-composite-unit-comparison",
+ "kind": "statement",
+ "title": "Composite unit transport for the canonical prescribed-resolution comparison",
+ "statement": "Let A,B,C be Grothendieck abelian categories [def-sp-grothendieck-abelian] with bounded below derived categories [def-weil-pbc-bounded-derived-subcategories]. Let F:A\\to B and G:B\\to C be additive left exact functors [def-sp-left-exact-additive] such that F sends injectives to G-acyclic objects [def-sp-composite-acyclicity]. Given X, an injective resolution I [def-sp-injective-resolutions], and n a natural number, put K=F(I), L its zero extension and e=canonicalResolutionDerivedIso F I [def-pc-canonical-resolution-derived-iso]. Then \\iota_GF^{-1} b^{-1} H^n(RG(e)) = \\epsilon_GK^{-1} H^n(\\mu_GK^{-1}) \\rho_GL^{-1} H^n(\\eta_G(L)), with b the canonical Grothendieck abutment identification [lem-sp-grothendieck-edge-maps] and \\iota_GF the resolution comparison [lem-sp-derived-well-defined]. This is the composite-unit identity for the specific canonical e; all factors and the left-to-right composition convention are expanded by the recorded Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015M (lemma-compose-derived-functors), resolution and composite-unit calculation; 015N (lemma-grothendieck-spectral-sequence), abutment identification. Read online and downloaded to scratchpad/derived.tex."
+ },
+ "stmt_deps": [
+  "def-pc-canonical-resolution-derived-iso",
+  "def-sp-composite-acyclicity",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof": [
+  {
+   "text": "Expand grothendieckSpectralObjectHBotTopIso into the inverse composition isomorphism followed by the GF single-object homology comparison. Apply the ordinary canonical homology identity to GF and cancel the prescribed GF resolution comparison.",
+   "uses": [
+    "lem-pc-canonical-resolution-homology-comparison",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the composition isomorphism unit equation on the extended injective resolution. Naturality along the augmentation and cancellation of the invertible F unit give resolutionDerivedIso_comp, already proved in this module. The acyclicity assumption supplies the composition isomorphism.",
+   "uses": [
+    "def-sp-composite-acyclicity",
+    "def-pc-canonical-resolution-derived-iso",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of the G unit on the F map/extension isomorphism. Degreewise the GF map/extension comparison is G of the F comparison followed by the G comparison, including the zero terms. Apply homology, use quotient-homology naturality, and cancel the extension-homology comparisons. The remaining factors are the inverse G comparison and the G unit asserted on the right. The argument includes n=0.",
+   "uses": [
+    "def-pc-canonical-resolution-derived-iso",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-resolution-derived-iso",
+  "def-sp-composite-acyclicity",
+  "lem-pc-canonical-resolution-homology-comparison",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015M and 015N",
+  "note": "Canonical transport factors expanded from the source-library comparison definitions; decomposition of the existing resolution-unit-comparison proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical bounded below derived functor isomorphism on a prescribed injective resolution, homology comparison and composition unit compatibility",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism from a bounded below right derived functor to a prescribed injective resolution compatible with homology and composite derived units",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "verdict": "No exact match: classical resolution and derived unit tools do not state the canonical bounded below resolution comparison and its two transport identities.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "verdict": "No exact match: classical resolution and derived unit tools do not state the canonical bounded below resolution comparison and its two transport identities.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerived.*[Uu]nit|mapExtendIso",
+   "results": "19 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "verdict": "No exact match: classical resolution and derived unit tools do not state the canonical bounded below resolution comparison and its two transport identities.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckResolutionUnitComparison",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Resolution identification in lem-pc-grothendieck-resolution-unit-comparison: Composite unit transport for the canonical prescribed-resolution comparison",
+   "via": [
+    "lem-pc-grothendieck-resolution-unit-comparison",
+    "lem-pc-grothendieck-hypercohomology-edge",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CanonicalResolutionCompositeUnitComparison",
+  "file": "lean/Sheaf/CategoryTheory/CanonicalResolutionCompositeUnitComparison.lean",
+  "declaration": "CategoryTheory.resolution_composite_unit_transport",
+  "statement": "theorem resolution_composite_unit_transport\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B]\n    [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C]\n    [Abelian C] [IsGrothendieckAbelian.{vC} C] [HasDerivedCategory A]\n    [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C)\n    [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G]\n    (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)\n    (X : A) (I : InjectiveResolution X) (n : ℕ) :\n      (I.isoRightDerivedObj (F ⋙ G) n).inv ≫\n          (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv.app X ≫\n          (DerivedCategory.Plus.homologyFunctor C n).map\n            (G.rightDerivedFunctorPlus.map (canonicalResolutionDerivedIso F I).hom) =\n        (((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj\n          ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)).extendHomologyIso\n          ComplexShape.embeddingUpNat (rfl : (n : ℤ) = n)).inv ≫\n        HomologicalComplex.homologyMap\n          (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).mapExtendIso\n            ComplexShape.embeddingUpNat G).inv (n : ℤ) ≫\n        (DerivedCategory.Plus.homologyFunctorObjQIso\n          (G.mapCochainComplexPlus.obj\n            ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend\n              ComplexShape.embeddingUpNat, 0, inferInstance⟩) n).inv ≫\n        (DerivedCategory.Plus.homologyFunctor C n).map\n          (G.rightDerivedFunctorPlusUnit.app\n            ((HomotopyCategory.Plus.quotient B).obj\n              ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend\n                ComplexShape.embeddingUpNat, 0, inferInstance⟩))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144109-L-2094475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144109-L-2094475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

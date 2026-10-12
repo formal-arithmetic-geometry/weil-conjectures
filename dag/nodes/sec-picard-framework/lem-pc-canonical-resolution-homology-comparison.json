@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-canonical-resolution-homology-comparison",
+ "kind": "statement",
+ "title": "Homology of the canonical prescribed-resolution comparison",
+ "statement": "Let A,B be abelian categories with bounded below derived categories [def-weil-pbc-bounded-derived-subcategories], with enough injectives in A. Let F:A\\to B be additive, X in A, I an injective resolution of X [def-sp-injective-resolutions], and n a natural number. Set K=F(I), L its zero extension and e=canonicalResolutionDerivedIso F I [def-pc-canonical-resolution-derived-iso]. The ordinary homology of this specific e satisfies \\theta_F \\iota_F = H^n(e) \\rho_L \\epsilon_K, where \\theta_F is the single-object derived homology comparison [lem-sp-derived-functor-single-identification], \\iota_F is the prescribed-resolution comparison [lem-sp-derived-well-defined], \\rho_L is quotient homology and \\epsilon_K is extension homology. Composition is read left to right; every factor is expanded in the recorded Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015M (lemma-compose-derived-functors), resolution and composite-unit calculation; 015N (lemma-grothendieck-spectral-sequence), abutment identification. Read online and downloaded to scratchpad/derived.tex."
+ },
+ "stmt_deps": [
+  "def-pc-canonical-resolution-derived-iso",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "For the chosen resolution expand homologyRightDerivedFunctorPlusObjSingleFunctorIso and cancel its final inverse resolution comparison.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a map from the chosen resolution to I lifting the identity. The augmentation commutes with this map. Naturality of the F derived unit and its invertibility on injectives identify the chosen comparison followed by the localized F-image of the map with resolutionDerivedIso F I. Naturality of quotient homology and isoRightDerivedObjCochainComplex identifies its homology with the prescribed resolution comparison.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sp-derived-well-defined",
+    "def-pc-canonical-resolution-derived-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand isoRightDerivedObjCochainComplex. Cancel the inverse map/extension homology comparison against the map/extension factor of e, and the inverse extension homology comparison against ε_K. This proves the displayed equality, also in degree zero.",
+   "uses": [
+    "def-pc-canonical-resolution-derived-iso",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-resolution-derived-iso",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015M and 015N",
+  "note": "Canonical transport factors expanded from the source-library comparison definitions; decomposition of the existing resolution-unit-comparison proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical bounded below derived functor isomorphism on a prescribed injective resolution, homology comparison and composition unit compatibility",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism from a bounded below right derived functor to a prescribed injective resolution compatible with homology and composite derived units",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "verdict": "No exact match: classical resolution and derived unit tools do not state the canonical bounded below resolution comparison and its two transport identities.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "verdict": "No exact match: classical resolution and derived unit tools do not state the canonical bounded below resolution comparison and its two transport identities.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerived.*[Uu]nit|mapExtendIso",
+   "results": "19 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "verdict": "No exact match: classical resolution and derived unit tools do not state the canonical bounded below resolution comparison and its two transport identities.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckResolutionUnitComparison",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Resolution identification in lem-pc-grothendieck-resolution-unit-comparison: Homology of the canonical prescribed-resolution comparison",
+   "via": [
+    "lem-pc-grothendieck-resolution-unit-comparison",
+    "lem-pc-grothendieck-hypercohomology-edge",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison",
+  "file": "lean/Sheaf/CategoryTheory/CanonicalResolutionHomologyComparison.lean",
+  "declaration": "CategoryTheory.resolution_homology_transport",
+  "statement": "theorem resolution_homology_transport\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [EnoughInjectives A] {B : Type uB} [Category.{vB} B]\n    [Abelian B] [HasDerivedCategory A]\n    [HasDerivedCategory B] (F : A ⥤ B) [F.Additive]\n    (X : A) (I : InjectiveResolution X) (n : ℕ) :\n    (F.homologyRightDerivedFunctorPlusObjSingleFunctorIso X n).hom ≫\n          (I.isoRightDerivedObj F n).hom =\n        (DerivedCategory.Plus.homologyFunctor B n).map (canonicalResolutionDerivedIso F I).hom ≫\n          (DerivedCategory.Plus.homologyFunctorObjQIso\n            ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend\n              ComplexShape.embeddingUpNat, 0, inferInstance⟩ n).hom ≫\n          (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extendHomologyIso\n            ComplexShape.embeddingUpNat (rfl : (n : ℤ) = n)).hom",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144109-L-2094475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144109-L-2094475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,8 +6,8 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.GrothendieckComposablePair
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison
+import Sheaf.CategoryTheory.CanonicalResolutionCompositeUnitComparison
 
 /-! # Resolution comparisons and the composite derived unit
 
@@ -84,6 +84,10 @@ theorem exists_grothendieck_resolution_unit_comparison
         (DerivedCategory.Plus.homologyFunctorObjQIso
           (G.mapCochainComplexPlus.obj L) n).inv ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) := by sorry
+          (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L)) := by
+  dsimp
+  refine ⟨canonicalResolutionDerivedIso F I, ?_, ?_⟩
+  · exact resolution_homology_transport F X I n
+  · exact resolution_composite_unit_transport F G hFG X I n
 
 end CategoryTheory

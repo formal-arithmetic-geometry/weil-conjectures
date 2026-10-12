@@ -19,50 +19,25 @@
  ],
  "proof": [
   {
-   "text": "Extend the prescribed injective resolution $I$ by zero. Its augmentation is a quasi-isomorphism $X[0]\\to I^{\\mathrm{ext}}$, so it becomes an isomorphism after $Q$. Apply $RF$ and invert its unit at $I^{\\mathrm{ext}}$, which is invertible on bounded below complexes of injectives. Compose with $Q$ of the map/extension isomorphism. This explicitly constructs $e$; it is not an arbitrary object chosen from mere existence.",
+   "text": "Supply canonicalResolutionDerivedIso F I, an explicit augmentation/unit/map-extension construction, as the witness. Apply the canonical ordinary homology transport and canonical composite unit transport to its two required identities. The two transport theorems each assert only one of the identities for this fixed comparison.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-sp-derived-functor-single-identification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the chosen injective resolution, the definition of the canonical single-object comparison gives the first equation. For the prescribed resolution, choose a comparison lifting $\\mathrm{id}_X$. Comparisons of injective resolutions are homotopy equivalences; their images under additive functors induce the canonical resolution comparison on homology. Naturality of the derived unit and of the quotient-homology comparison transfers the chosen-resolution equation to $I$.",
-   "uses": [
-    "lem-sp-derived-functor-single-identification",
-    "lem-sp-derived-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The abutment comparison uses the composition isomorphism $R(GF)\\simeq RG\\,RF$. Its defining right-derived uniqueness equation carries the $GF$ unit to the composite unit. Evaluate this equation at the bounded below complex of injectives $I^{\\mathrm{ext}}$; the $F$ unit there is invertible. Naturality along the augmentation of $X[0]$ and cancellation of that $F$ unit leaves exactly the $G$ unit at $F(I^{\\mathrm{ext}})$. This is the representative calculation in Tag 015M (lemma-compose-derived-functors), implemented by rightDerivedNatTrans_fac, rightDerivedFunctorPlusCompUnit_app, and the definition of grothendieckSpectralObjectHBotTopIso in the already proved source library.",
-   "uses": [
-    "def-sp-composite-acyclicity",
-    "lem-sp-grothendieck-edge-maps"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply degree-$n$ homology to the last unit equation. Expand the canonical quotient-homology, map/extension and extension-homology isomorphisms. Their factors give precisely the second displayed equation. All shifts are absent from this calculation, so the same argument applies at $n=0$.",
-   "uses": [
-    "lem-sp-derived-well-defined",
-    "lem-sp-derived-functor-single-identification"
+    "def-pc-canonical-resolution-derived-iso",
+    "lem-pc-canonical-resolution-homology-comparison",
+    "lem-pc-canonical-resolution-composite-unit-comparison"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-composite-acyclicity",
-  "def-sp-injective-resolutions",
-  "lem-sp-derived-functor-single-identification",
-  "lem-sp-derived-well-defined",
-  "lem-sp-grothendieck-edge-maps"
+  "def-pc-canonical-resolution-derived-iso",
+  "lem-pc-canonical-resolution-homology-comparison",
+  "lem-pc-canonical-resolution-composite-unit-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 015M (lemma-compose-derived-functors), proof; Tag 015N (lemma-grothendieck-spectral-sequence), proof",
-  "note": "Explicit unit and homology equations expand the canonical resolution calculation in these proofs; the source-library definitions fix every comparison. Sources read online and downloaded to the item scratchpad."
+  "note": "F3 second reading: explicit canonical witness and two strictly smaller transport obligations; decomposition, closing one hole and adding two (net -1). No statement or unit route changed."
  },
  "mathlib_searches": [
   {
@@ -150,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T113949-L-821880",
+  "landing": "20261012T144109-L-2094475",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
