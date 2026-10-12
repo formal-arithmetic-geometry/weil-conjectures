@@ -28,6 +28,22 @@ The route is the blueprint's: the model case is affine-space purity
 deformation to the normal cone (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`)
 of the diagonal, a closed section of the first projection `X ×_Y X ⟶ X`.
 
+## Structure of the proof
+
+The blueprint remarks `sk-rem-split` and `rem-pur-five-moves` record where the moves of the
+proof sit: the rank-one computation (Kummer class, excision, Gysin identification) in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine` (`sk-prop-a1-kummer`), the Künneth
+and frame-independence arguments in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`
+(`sk-prop-an`), and the geometry of the deformation of a section in
+`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone` (`sk-lem-geometry`). Purity for
+regular closed immersions (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`,
+`sk-thm-regular`) is not one of the moves: it follows from smooth purity for the two structure
+morphisms and the co-projection (`WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection`).
+The remark `rem-pur-status-after-completion` records the dependency order: the projective-line
+adjunction, then the affine-space adjunction, the orientation-free smooth tensor and base-change
+statements, and only then the deformation statement and smooth purity itself; the formal
+six-functor bookkeeping is downstream of this file.
+
 ## Implementation notes
 
 The blueprint asserts that each isomorphism below is *canonical*: `sk-prop-cohsm` (b) is about
