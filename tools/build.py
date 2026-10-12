@@ -23,6 +23,16 @@ Usage:
                            (group M) and without the landings reverted, taking in nothing else that has landed
   tools/build.py status    the last result and the landings waiting
 Results: local/builds/last.json, the log in local/build.log.
+
+Landings of a batch (tools/batch_land.py; the landing's record carries `batch`) were not compiled one by one on the
+server before they landed, so the build checks for them what that compile checked, after `lake build` has succeeded and
+before anything is published (batch_checks): every file of theirs compiles alone within SHEAF_FILE_TIMEOUT, no
+declaration of their modules uses an axiom beyond propext, Classical.choice and Quot.sound, and none has a `sorry` the
+delivery's text check did not see. The time is the one Lake prints for the file in this build; only a file over the
+limit there (the build runs many files at once, so its time is an upper bound) is compiled once more, alone, with
+tools/lean_file.sh, and fails when that reaches the limit. The axioms and the sorries are read from the compiled modules
+by one probe file that imports them. A finding makes the build red, with the module among the failing ones and the
+finding in `batch_checks` of last.json.
 Options (coord/sheaf.env): SHEAF_BUILD_THREADS (default 3), SHEAF_BUILD_POLL seconds (10).
 The packages in lean/.lake/packages are shared with the copy through a link and must never be rebuilt from it: the
 build does not start if Lake would rebuild Mathlib. A dependency given by a relative path is not supported.
@@ -176,6 +186,102 @@ def suspects(failing: list[str], included: list[dict]) -> list[dict]:
     return sorted(out, key=lambda s: s["kind"] != "interface")
 
 
+def build_times(log: str) -> dict[str, float]:
+    """module -> the seconds Lake printed for building it (`✔ [n/N] Built M (9.6s)`; ms, s, and m/h if Lake prints them)."""
+    out = {}
+    for m, t in re.findall(r"^\S \[\d+/\d+\] Built (\S+) \(([^)]*)\)", log, re.M):
+        out[m] = sum(float(v) * {"ms": .001, "s": 1, "m": 60, "h": 3600}[u] for v, u in re.findall(r"([\d.]+)\s*(ms|s|m|h)", t))
+    return out
+
+
+# Appended to a file that imports the modules of the batch: for every constant of each module, its axioms beyond the
+# three allowed and sorryAx (transitively), and the constants whose own term uses sorryAx (directly); the probe of
+# tools/stage3_delivery.py, read from the compiled modules. Tested on the pinned toolchain (v4.33.1), 2026-10-12.
+BATCH_PROBE = """
+open Lean Elab Command in
+run_cmd do
+  let env ← getEnv
+  let mods : List Name := [%s]
+  let ok : List Name := [``propext, ``Classical.choice, ``Quot.sound, ``sorryAx]
+  for m in mods do
+    let some idx := env.getModuleIdx? m | logInfo m!"SHEAF-MISSING {m}"
+    let mut cnt : Nat := 0
+    for c in env.header.moduleData[idx.toNat]!.constNames do
+      let some ci := env.find? c | continue
+      let used := ci.type.getUsedConstants ++ (ci.value? (allowOpaque := true)).elim #[] (·.getUsedConstants)
+      if used.contains ``sorryAx then logInfo m!"SHEAF-SORRY {m} {c}"
+      if c.isInternal then continue
+      cnt := cnt + 1
+      for a in (← Lean.collectAxioms c) do
+        unless ok.contains a do logInfo m!"SHEAF-AXIOM {m} {c} {a}"
+    logInfo m!"SHEAF-PROBED {m} {cnt}"
+"""
+
+
+def run_probe(mods: list[str]) -> dict[str, dict]:
+    """module -> {ran, axioms: [(decl, axiom)], sorry: [constant], out}; one Lean run that imports `mods`."""
+    d = CLONE / ".sandbox"
+    d.mkdir(exist_ok=True)
+    f = d / "BatchProbe.lean"
+    f.write_text("".join(f"import {m}\n" for m in mods) + BATCH_PROBE % ",\n    ".join("`" + m for m in mods))
+    r = run(["nice", "-n", "19", "timeout", "600", "lake", "env", "lean", str(f)], cwd=CLONE,
+            env=dict(os.environ, LEAN_NUM_THREADS=THREADS))
+    out = r.stdout + r.stderr
+    res = {}
+    for m in mods:
+        res[m] = {"ran": bool(re.search(r"SHEAF-PROBED " + re.escape(m) + r" \d+", out)), "out": out[-1500:],
+                  "axioms": re.findall(r"SHEAF-AXIOM " + re.escape(m) + r" (\S+) (\S+)", out),
+                  "sorry": re.findall(r"SHEAF-SORRY " + re.escape(m) + r" (\S+)", out)}
+    return res
+
+
+def batch_checks(included: list[dict], log: str) -> list[dict]:
+    """What the build checks for the landings of a batch (see the top). [{module, kind: overtime|probe, landing,
+    message}]; empty when nothing is found or no landing of a batch is included."""
+    mods = {}
+    for r in included:
+        if r.get("batch"):
+            for f in r["files"]:
+                if (CLONE / f["path"]).is_file():
+                    mods[f["module"]] = (r, f["path"])
+    if not mods:
+        return []
+    import stage3_delivery as s3
+    limit = float(CFG.get("SHEAF_FILE_TIMEOUT", "60"))
+    out = []
+    for m, secs in sorted(build_times(log).items()):
+        if m in mods and secs > limit:
+            env = {k: v for k, v in os.environ.items() if k != "SHEAF_GROUP"}
+            alone = run(["bash", str(TOOLS / "lean_file.sh"), str(CLONE / mods[m][1])],
+                        env=dict(env, SHEAF_TREE=str(CLONE), SHEAF_FILE_TIMEOUT=f"{limit:g}"))
+            if alone.returncode == 124:
+                out.append({"module": m, "kind": "overtime", "landing": mods[m][0]["id"],
+                            "message": f"{m} took {secs:g} s in the global build and does not compile alone within "
+                                       f"{limit:g} s, the limit for one file (SHEAF_FILE_TIMEOUT; tools/lean_file.sh): the "
+                                       "cause is a definition the file uses; find it and change it."})
+    todo = sorted(m for m in mods if m not in {c["module"] for c in out})
+    res = run_probe(todo) if todo else {}
+    for m in [m for m in todo if not res[m]["ran"]] if len(todo) > 1 else []:
+        res[m] = run_probe([m])[m]      # one module of the set stopped the common run: each of the others alone
+    for m in todo:
+        r, (rec, path) = res[m], mods[m]
+        if not r["ran"]:
+            out.append({"module": m, "kind": "probe", "landing": rec["id"],
+                        "message": f"the axiom and sorry probe did not run on {m}: " + " | ".join(r["out"].strip().splitlines()[-8:])})
+            continue
+        for decl, a in sorted(set(r["axioms"])):
+            out.append({"module": m, "kind": "probe", "landing": rec["id"],
+                        "message": f"{path}: {decl} uses the axiom {a} (AGENTS.md §4: only {', '.join(s3.OK_AXIOMS)})"})
+        table = s3.decl_table((CLONE / path).read_text(errors="ignore"))
+        allowed = set((rec.get("sorry_allowed") or {}).get(m) or [])
+        extra = sorted({s3.owner(c, table) for c in r["sorry"]} - allowed)
+        if extra:
+            out.append({"module": m, "kind": "probe", "landing": rec["id"],
+                        "message": f"{path}: Lean finds `sorry` in {', '.join(extra)}, which the text check did not "
+                                   "(a macro or an elaborator inserted it)"})
+    return out
+
+
 def publish():
     marker = ld.LOCAL / "PUBLISHING"
     marker.write_text(ld.now())
@@ -280,6 +386,10 @@ def main() -> int:
     shutil.copy2(LOG, ld.LOCAL / "build.log")
     errors = [x for x in text.split("\n") if x.startswith("error")]
     built = proc.returncode == 0 and not errors and "Build completed successfully" in text
+    checks = batch_checks(included, text) if built else []
+    if checks:
+        built = False
+        errors = ["error: " + c["message"] for c in checks]
     result = {"time": ld.now(), "commit": commit, "seconds": round(time.time() - t0), "restarts": preempted}
     if built:
         publish()
@@ -288,9 +398,9 @@ def main() -> int:
         ld.write_json(ld.B / "last.json", result)
         print(f"GREEN in {result['seconds']} s; {len(ids)} landing(s) verified; compiled files published.")
         return 0
-    failing = failing_modules(text)
+    failing = sorted(set(failing_modules(text)) | {c["module"] for c in checks})
     sus = suspects(failing, included)
-    result.update(result="red", failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids))
+    result.update(result="red", failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids), batch_checks=checks)
     ld.write_json(ld.B / "last.json", result)
     print(f"RED in {result['seconds']} s; nothing published. Failing: {' '.join(failing[:12]) or '-'}")
     for x in errors[:12]:

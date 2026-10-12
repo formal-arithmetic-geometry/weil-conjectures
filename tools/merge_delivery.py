@@ -72,25 +72,26 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         delivered module is left out as by --drop-files (refused if a kept module imports it).
   tools/merge_delivery.py <group> <module> --stage 3 --reviewer ID --head SHA [--apply-fixes DIR] [--spot-checked NOTE]
                         [--verdict PASS|FIX] [--dry-run]
-                        a stage-3 delivery (tools/stage3_delivery.py): the static checks a-e again (on the fixed files
-                        when DIR holds <basename>.lean, <new node id>.json, <name>.change.md or <module>.report.md); the
-                        compile of every module with the probe in lean/.sandbox/L/ (an axiom or an unexpected sorry
-                        refuses; nothing landed); with --reviewer AUTO also the AUTO class again (refused if CODEX).
-                        Then one module alone with SHEAF_GROUP=L tools/land.sh, several modules (item, adapted, new) as
-                        ONE set with SHEAF_GROUP=L tools/land_set.sh lean/.sandbox/L/<module>-set/ (stage 3 §3.4, lead.md
-                        §4); with --reviewer AUTO the landing must be of kind `proof`, else it is reverted
-                        (tools/landing.py revert) and refused. Then: new nodes written whole with `reviewed` and
+                        a stage-3 delivery a reader passed (tools/stage3_delivery.py): the static checks a-e again (on
+                        the fixed files when DIR holds <basename>.lean, <new node id>.json, <name>.change.md or
+                        <module>.report.md) and the other checks of tools/batch_land.py that need no lock (the base's
+                        age, the delivered files unchanged in the library since the base, import_prune_check.py); with
+                        --reviewer AUTO also the AUTO class again. Then the pass is recorded (local/batch/passed/) and
+                        the tool answers `QUEUED <module> <head>`. Nothing is compiled and nothing is written to the
+                        library here, and coord/.merge.lock is not taken: the next batch of tools/batch_land.py lands
+                        the delivery together with the others (one landing; new nodes written whole with `reviewed` and
                         `reviewed_proof`; existing nodes changed only in the stage-3 fields, with `reviewed_proof`; the
-                        node(s) whose lean.file is the item's module get `reviewed_proof` = {date, by L, reviewer, group,
-                        result, landing, kind, sorry_before, sorry_after}; each change record's `## Status` becomes
-                        `landed <landing id> <date>` (the lead closes it when the global build has verified the set:
-                        `closed <commit>`); the report; claim done, return entry dropped, ledger line, deliveries.log;
-                        one commit "Prove <module> (<group>, reviewed by <ID>)"; branch deleted; queue rewritten.
+                        node(s) whose lean.file is the item's module get `reviewed_proof` = {date, by L, reviewer,
+                        group, result, landing, kind, sorry_before, sorry_after}; each change record's `## Status`
+                        becomes `landed <landing id> <date>`; the report; claim done, return entry dropped, ledger
+                        line, deliveries.log; one commit "Prove <module> (<group>, reviewed by <ID>)"; branch deleted)
+                        and the global build verifies the batch: compile, axioms, sorry, 60 s per file. A delivery the
+                        build refuses is taken out of the library again and returned to its group with the message.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
-Output: exactly one line, `MERGED <item> <commit>` / `RETURNED <item> <commit>`, or `NOT MERGED <item>: <reason>`
-(`NOT RETURNED ...` for a return) with exit code 1.
+Output: exactly one line, `MERGED <item> <commit>` / `RETURNED <item> <commit>` (`QUEUED <module> <head>` for
+--stage 3), or `NOT MERGED <item>: <reason>` (`NOT RETURNED ...` for a return) with exit code 1.
 
 Every path that writes the working tree or commits holds an exclusive flock on coord/.merge.lock (not committed), so
 several reviewers can run the tool at once; the lead's own commits can take it too: `flock coord/.merge.lock git ...`.
@@ -1038,170 +1039,16 @@ def cmd_merge2(o):
 
 
 def cmd_merge3(o):
-    """A stage-3 delivery (called by ~/cc1/autoland.py for AUTO, by the script that executes the Codex reviewer's
-    verdict otherwise; non-interactive, SHEAF_LEAD=L-only). Static checks, compile with the probe, landing (land.sh or land_set.sh as one
-    set), node records, change records, bookkeeping as stage 2."""
-    import shutil
-    import stage2_delivery as s2
-    import stage3_delivery as s3
-    group, item, dry = o.group, o.item, o.dry_run
-    br = branch_of(group, item)
-    if not o.head:
-        raise Fail("--stage 3 needs --head SHA (the commit the reviewer read)")
+    """A stage-3 delivery a reader passed (called by the script that executes the independent reviewer's verdict;
+    non-interactive, SHEAF_LEAD=L-only). The static checks, then the pass is recorded; the next batch of
+    tools/batch_land.py lands it and the global build verifies it. No compile and no lock here."""
+    import batch_land
     if git("symbolic-ref", "-q", "--short", "HEAD", check=False) != MAIN:
         raise Fail(f"the working tree is not on {MAIN}")
-    with merge_lock():
-        if not has_ref(f"refs/heads/{br}"):
-            raise Fail(f"no branch {br}")
-        if not git("rev-parse", br).startswith(o.head):
-            raise Fail(f"the branch head is {git('rev-parse', '--short', br)}, not {o.head}: review the new head")
-        base = git("merge-base", MAIN, br)
-        if time.time() - int(git("show", "-s", "--format=%ct", base)) > MAX_AGE:
-            raise Fail(f"base {base[:7]} is too far behind {MAIN}: pull, rebase, push again")
-        G = s2.Git(ROOT)
-        D = s3.read_delivery(G, br, base, group, item)
-        nfix = 0
-        if o.apply_fixes:
-            fixdir, over = pathlib.Path(o.apply_fixes).resolve(), {}
-            by = {pathlib.PurePosixPath(m["file"]).name: m["file"] for m in D["modules"]}
-            by.update({f"{n}.json": x["path"] for n, x in D["nodes"].items()})
-            by.update({pathlib.PurePosixPath(p).stem + ".change.md": p for p in D["changes"]})
-            by[f"{item}.report.md"] = D["report_path"]
-            for fp in sorted(fixdir.iterdir()):
-                if fp.name not in by:
-                    raise Fail(f"--apply-fixes: {fp.name} is not a file of the delivery")
-                over[by[fp.name]] = fp.read_text(); nfix += 1
-            D = s3.read_delivery(G, br, base, group, item, overrides=over)
-        if D["fails"]:
-            raise Fail("; ".join(f"({L}) {x}" for L, x in D["fails"][:6]))
-        why = s3.classify(D, group, item)
-        if o.reviewer == "AUTO" and why:
-            raise Fail("not AUTO: " + "; ".join(why))
-        res = [] if dry else s3.probe(D, "L", ROOT)
-        pf = s3.probe_fails(D, res)
-        if pf:
-            raise Fail("; ".join(x for _, x in pf[:4]))
-        mods = D["modules"]
-        say = (lambda m: print(f"  would {m}")) if dry else (lambda m: None)
-        tree, book, landing, kind = Tree(), {"group": group, "item": item}, None, None
-        try:
-            if len(mods) == 1:
-                m = mods[0]
-                sand = ROOT / "lean" / ".sandbox" / "L" / (item.replace(".", "_") + ".lean")
-                cmd = ["bash", str(ROOT / "tools" / "land.sh"), str(sand), str(ROOT / m["file"])]
-                say(f"write {sand.relative_to(ROOT)} and run SHEAF_GROUP=L tools/land.sh {sand.relative_to(ROOT)} {m['file']}")
-                if not dry:
-                    sand.parent.mkdir(parents=True, exist_ok=True); sand.write_text(m["text"])
-            else:
-                setdir = ROOT / "lean" / ".sandbox" / "L" / (item.replace(".", "_") + "-set")
-                cmd = ["bash", str(ROOT / "tools" / "land_set.sh"), str(setdir)]
-                say(f"write the set {setdir.relative_to(ROOT)} ({len(mods)} modules) and run SHEAF_GROUP=L tools/land_set.sh")
-                if not dry:
-                    shutil.rmtree(setdir, ignore_errors=True)
-                    for m in mods:
-                        p = setdir / m["file"][len("lean/"):]
-                        p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
-            if dry:
-                print(f"DRY RUN {item} (stage 3): class {'AUTO' if not why else 'CODEX: ' + '; '.join(why)}; nothing changed")
-                return 0
-            r = subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
-            if r.returncode != 0:
-                raise Fail(f"landing exit {r.returncode}: " + " | ".join((r.stdout + r.stderr).strip().splitlines()[-25:]))
-            mm = re.search(r"as landing ([\w-]+)(?: \((\w+)\))?", r.stdout)
-            landing = mm.group(1) if mm else "?"
-            kind = (mm.group(2) if mm and mm.group(2) else "interface")
-            if o.reviewer == "AUTO" and kind != "proof":
-                # a removed public import in a module nobody imports is the one interface landing AUTO allows
-                try:
-                    ch = json.loads((ROOT / "local" / "builds" / "requests" / f"{landing}.json").read_text()).get("changed") or []
-                except (OSError, ValueError):
-                    ch = ["?"]
-                if len(mods) == 1 and ch and set(ch) <= {"(imports removed)"}:
-                    kind = "proof"
-            if o.reviewer == "AUTO" and kind != "proof":
-                subprocess.run([sys.executable, "tools/landing.py", "revert", landing, "AUTO landing was not a proof landing"],
-                               cwd=ROOT, capture_output=True)
-                landing = None
-                raise Fail(f"the landing is of kind {kind}, not proof: reverted; the delivery is CODEX")
-            # a module whose compile was deferred (it imports a sibling of the set) is probed now that the set is in
-            # the library: the same axiom and sorry check as for the others; a failure reverts the landing
-            late = [m for m, r in zip(mods, res) if r["status"] == "deferred"]
-            if late:
-                D2 = dict(D, modules=late)
-                res2 = s3.probe(D2, "L", ROOT)
-                pf = s3.probe_fails(D2, res2)
-                if pf or any(r["status"] != "ok" for r in res2):
-                    subprocess.run([sys.executable, "tools/landing.py", "revert", landing, "the probe of a module of the set failed"],
-                                   cwd=ROOT, capture_output=True)
-                    landing = None
-                    raise Fail("after the landing, the probe failed for a module compiled late (reverted): "
-                               + ("; ".join(x for _, x in pf[:4]) or "it does not compile with the probe"))
-            verdict = (o.verdict or ("FIX" if nfix else "PASS")).upper()
-            rv = {"date": today(), "by": "L", "reviewer": o.reviewer, "group": group, "result": verdict.lower(),
-                  "landing": landing, "kind": kind}
-            if o.spot_checked:
-                rv["note"] = o.spot_checked
-            paths = []
-            for nid, x in D["nodes"].items():
-                if x["role"] == "new":
-                    nd = dict(x["node"])
-                    nd["reviewed"] = dict(rv, note="new node of a stage-3 delivery, read against its source by the reviewer")
-                else:
-                    nd = json.loads((ROOT / x["path"]).read_text())
-                    for k in s3.STAGE3_OWNS + s3.STAGE3_STATEMENT:   # only what the delivery changed against its base
-                        if (x["base_node"] or {}).get(k) == x["node"].get(k):
-                            continue
-                        if k in x["node"]:
-                            nd[k] = x["node"][k]
-                        else:
-                            nd.pop(k, None)
-                nd["reviewed_proof"] = rv
-                tree.write(x["path"], dump(nd)); paths.append(x["path"])
-            for nid, d in s2.nodes_at(G, MAIN).items():   # the node(s) of the item's module
-                l = d.get("lean") if isinstance(d.get("lean"), dict) else {}
-                if l.get("module") == item and nid not in D["nodes"]:
-                    p = G.node_path(MAIN, nid)
-                    nd = json.loads((ROOT / p).read_text())
-                    m0 = next(m for m in mods if m["role"] == "item")
-                    nd["reviewed_proof"] = dict(rv, sorry_before=m0["diff"]["sorry_before"], sorry_after=m0["diff"]["sorry_after"])
-                    tree.write(p, dump(nd)); paths.append(p)
-            for p, t in D["changes"].items():
-                t2 = re.sub(r"(?m)^(## Status\n+)open\b.*$", f"\\1landed {landing} {today()} (merge of {br})", t)
-                tree.write(p, t2); paths.append(p)
-            tree.write(D["report_path"], D["report"]); paths.append(D["report_path"])
-            rp, rtext, parts = return_entries(group, item)
-            keep = [x for x in parts if not x.startswith(f"## {item} (")]
-            returned = rtext is not None and len(keep) != len(parts)
-            book["returns"] = (rp, rtext)
-            if returned:
-                rp.write_text("".join(keep)); paths.append(rp.relative_to(ROOT).as_posix())
-            claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
-            book["claim"] = (claim, claim.read_text() if claim.exists() else None)
-            dlog = ROOT / "coord" / "deliveries.log"
-            book["dlog"] = (dlog, dlog.read_text() if dlog.exists() else "")
-            subprocess.run([sys.executable, "tools/claim.py", "done", group, item,
-                            f"delivered by {group} on {br}, merged by L (reviewer {o.reviewer})"], cwd=ROOT, capture_output=True)
-            book["ledger"] = ledger_line(f"merged {br} (stage 3; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
-                                         f"landing {landing} ({kind}); modules {len(mods)}; new nodes {sum(1 for x in D['nodes'].values() if x['role'] == 'new')}"
-                                         + (f"; change records: {', '.join(D['changes'])}" if D["changes"] else "") + ")")
-            paths += [m["file"] for m in mods] + ["coord/ledger.md", "coord/deliveries.log"]
-            if book["claim"][1] is not None and exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
-                paths.append(claim.relative_to(ROOT).as_posix())
-            author = git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
-            git_retry("add", "-A", "--", *paths)
-            git_retry("commit", "-q", f"--author={author}", "-m",
-                      f"Prove {item} ({group}, reviewed by {o.reviewer})\n\nDelivered by group {group} ({br}); landing "
-                      f"{landing} ({kind}); merged by tools/merge_delivery.py --stage 3 for L.", "--", *paths)
-        except BaseException as e:
-            tree.restore(); unbook(book)
-            if landing and isinstance(e, Fail):
-                raise Fail(f"{e}. LANDED BUT NOTHING COMMITTED: revert with tools/landing.py revert {landing} <reason>")
-            raise
-        sha = git("rev-parse", "--short", "HEAD")
-        git("branch", "-D", br, check=False)
-        refresh_queue(item)
-    print(f"MERGED {item} {sha}")
-    return 0
+    try:
+        return batch_land.cmd_pass(o)
+    except batch_land.md.Fail as e:
+        raise Fail(str(e))
 
 
 def main():

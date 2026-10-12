@@ -42,7 +42,7 @@ When a definition or an intermediate statement turns out wrong or hard to use yo
 1. Claim the module and every module that must be adapted. A module another group has claimed stays with that group: change in it only what the adaptation requires, and name it and its group in the record.
 2. List the modules that depend on it (`tools/downstream.py <module> --uses <name>`), and check for each that what it states does not become weaker, stronger or different.
 3. Write `coord/changes/<name>.md` (§6).
-4. Deliver the change with all adapted modules in the same delivery: the merge lands them as one set (`tools/land_set.sh`).
+4. Deliver the change with all adapted modules in the same delivery: they land together, as one set.
 
 A target statement never changes (`AGENTS.md` §4). A target whose statement uses the changed definition is reviewed again (`stages/2-statements.md` §4): say so in the record. Of two definitions of one notion keep the better one and make the other an `abbrev` of it. A node whose statement changes gets `statement_change` as in stage 2 (`coord/brief-stage2.md` §5, citers included).
 
@@ -68,6 +68,6 @@ One commit on top of `sheaf-dag`, pushed to `deliver/<G>/<module>` (e.g. `delive
   - `## Second reading by <G>`: another worker of the group, with the module and the nodes open: does the proof prove the node's statement unchanged; is every new statement true and exactly as strong as needed; is the unit's route kept;
   - `## New nodes` (when there are new nodes): one paragraph per id; and the path of each change record.
 
-Before pushing: `python3 tools/preflight_delivery.py <G> <module> --stage 3` until it passes. It prints the review class of the delivery. `AUTO`: it changes only proofs of your module; a script lands it after the tools' own checks (it compiles, no new `sorry` without its node, no axiom, the statements of existing declarations unchanged). `CODEX: <reasons>`: it changes a statement, a definition, an import other modules see, or adds nodes; an independent Codex reviewer on another machine reads it, and a script executes its verdict (landing or return). There is no Claude reviewer in stage 3. Returns go to `coord/returns/<G>.md` and are repaired point by point.
+Before pushing: `python3 tools/preflight_delivery.py <G> <module> --stage 3` until it passes. It prints the review class of the delivery. `AUTO`: it changes only proofs of your module; a script lands it after the tools' own checks (it compiles, no new `sorry` without its node, no axiom, the statements of existing declarations unchanged). `CODEX: <reasons>`: it changes a statement, a definition, an import other modules see, or adds nodes; an independent Codex reviewer on another machine reads it, and a script executes its verdict (landing or return). Deliveries land in batches and the server does not compile a delivery again: the global build verifies the batch (compile, axioms, `sorry`, 60 s for each file alone), and a delivery it refuses is taken out of the library again and returned with the compiler's message. There is no Claude reviewer in stage 3. Returns go to `coord/returns/<G>.md` and are repaired point by point.
 
 merge_delivery.py, land.sh, land_set.sh and landing.py take coord/.merge.lock themselves and are NEVER wrapped in `flock`.

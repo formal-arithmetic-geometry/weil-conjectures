@@ -10,9 +10,9 @@ Stage 3 (decision of the human, 2026-10-12: no Claude reviewer in stage 3). An i
          other modules see changed (leanindex.interface_changes), no declaration added (public), removed or restated,
          no public import changed in a module with importers, no removed import of a unit-route module, no `sorry`
          left in a declaration it adds or rewrites, no axiom/unsafe/extern/opaque, no STATEMENT-DISPUTED, not the
-         repair of a return, no failed automatic landing of this head. Landed by ~/cc1/autoland.py with
-         tools/merge_delivery.py <G> <module> --stage 3 --reviewer AUTO --head <sha> --verdict PASS, which compiles
-         every module with the axiom/sorry probe and lands with land.sh; the landing must be a proof landing.
+         repair of a return, no failed automatic landing of this head. Landed by ~/cc1/autoland3.py in a
+         batch (tools/batch_land.py): the static checks, no compile on the server, and the global build verifies the
+         whole batch; with reviewer AUTO the landing must be a proof landing.
   CODEX  everything else, with the reasons (a statement, a definition, an import other modules see, nodes, a change
          record, several modules, a failed static check, ...): read by the independent Codex reviewer on the other
          machine, whose verdict a script executes with tools/merge_delivery.py <G> <module> --stage 3 --reviewer <ID>
@@ -40,7 +40,7 @@ def git(*a):
 def show(ref, path):
     r = subprocess.run(["git", "-C", str(ROOT), "show", f"{ref}:{path}"], capture_output=True, text=True)
     return r.stdout if r.returncode == 0 else None
-def classify(g: str, item: str):
+def classify(g: str, item: str, D=None):
     br = f"deliver/{g}/{item}"; head = git("rev-parse", br).strip()
     if not head: return "NONE", "no such branch", ""
     if "." in item:   # a stage-3 item is a module; a stage-1/2 item is a node id (no dot)
@@ -52,7 +52,8 @@ def classify(g: str, item: str):
                     return "CODEX", "automatic landing failed: " + (p[3] if len(p) > 3 else ""), head
         sys.path.insert(0, str(ROOT / "tools")); import stage2_delivery as s2, stage3_delivery as s3
         try:
-            D = s3.read_delivery(s2.Git(ROOT), br, "sheaf-dag", g, item)
+            if D is None:   # tools/batch_land.py passes its own reading, so that a delivery is read once
+                D = s3.read_delivery(s2.Git(ROOT), br, "sheaf-dag", g, item)
             why = s3.classify(D, g, item)
         except Exception as e:   # a delivery the tool cannot read needs a reader
             return "CODEX", "the delivery could not be read: " + repr(e)[:200], head
