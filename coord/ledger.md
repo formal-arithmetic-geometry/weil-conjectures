@@ -7571,3 +7571,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:39 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleCoproductRepresentation (stage 3; reviewer PASS; first push; landing 20261012T113946-L-820580 (interface); batch 20261012T113943; modules 1; new nodes 0; change records: coord/changes/etale-coproduct-representation-imports.md)
 - 11:39 L: merged deliver/H2/Sheaf.RingTheory.ExistsLiftOfFieldCharP (stage 3; reviewer PASS; first push; landing 20261012T113946-L-820688 (proof); batch 20261012T113943; modules 1; new nodes 0)
 - 11:39 L: merged deliver/J2/Sheaf.RingTheory.FactorsThroughSmooth (stage 3; reviewer PASS; first push; landing 20261012T113947-L-820843 (interface); batch 20261012T113943; modules 2; new nodes 1)
+- 11:39 L: merged deliver/J3/Sheaf.Algebra.Homology.FreeCoverColumns (stage 3; reviewer PASS; first push; landing 20261012T113947-L-820951 (proof); batch 20261012T113943; modules 1; new nodes 0)
