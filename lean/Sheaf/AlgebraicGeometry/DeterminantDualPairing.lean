@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.DeterminantDualAlternatingFamily
+import Sheaf.AlgebraicGeometry.ExteriorSheafDualExt
 
 /-! # Construction of the exterior dual pairing
 Source: Stacks Project, Tag 0BRT, determinant inversion.
@@ -21,6 +22,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The determinant of evaluation defines a morphism of exterior sheaves, in every degree
 and without any local freeness assumption.
 Source: Stacks Project, Tag 0BRT, determinant pairing; Mathlib
@@ -50,6 +52,72 @@ theorem exterior_dual_pairing_exists (X : Scheme.{u}) (M : X.Modules) (n : ℕ) 
         (Scheme.Modules.exteriorSheafSection M n U a) =
       (Matrix.of fun i j ↦
         (show X.presheaf.obj (op U) from
-          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det := by sorry
+          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det := by
+  classical
+  choose A hA huniq using exterior_dual_pairing_local X M n
+  have hnat (U V : X.Opens) (g : V ⟶ U)
+      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
+      A V (fun i ↦ (Scheme.Modules.dual M).val.map g.op (φ i)) =
+        (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.map g.op (A U φ) := by
+    apply exteriorSheaf_dual_ext X M n V
+    intro W k a
+    rw [hA V W k a]
+    change _ = (A U φ).app (op (Over.mk (k ≫ g)))
+      (Scheme.Modules.exteriorSheafSection M n W a)
+    rw [hA U W (k ≫ g) a]
+    rfl
+  have heval (U : X.Opens) (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
+      exteriorPower.alternatingMapLinearEquiv (A U)
+        (exteriorPower.ιMulti (X.presheaf.obj (op U)) n φ) = A U φ :=
+    exteriorPower.alternatingMapLinearEquiv_apply_ιMulti (A U) φ
+  let p : Scheme.Modules.exteriorSheafPresheaf (Scheme.Modules.dual M) n ⟶
+      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val :=
+    { app := fun U ↦ ModuleCat.ofHom
+          (X := Scheme.Modules.exteriorSheafObj (Scheme.Modules.dual M) n U)
+          (Y := (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj U)
+          (exteriorPower.alternatingMapLinearEquiv (R := X.presheaf.obj (op U.unop))
+            (N := (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U.unop))
+            (A U.unop))
+      naturality := by
+        intro U V g
+        rcases U with ⟨U₀⟩
+        rcases V with ⟨V₀⟩
+        apply ModuleCat.hom_ext
+        apply exteriorPower.linearMap_ext (R := X.presheaf.obj (op U₀))
+        ext φ
+        change exteriorPower.alternatingMapLinearEquiv (A V₀)
+            (Scheme.Modules.exteriorSheafRestriction (Scheme.Modules.dual M) n g
+              (exteriorPower.ιMulti (X.presheaf.obj (op U₀)) n φ)) =
+          (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.map g
+            (exteriorPower.alternatingMapLinearEquiv (A U₀)
+              (exteriorPower.ιMulti (X.presheaf.obj (op U₀)) n φ))
+        have hr := (Classical.choose_spec
+          (Scheme.Modules.exteriorSheafRestriction_existsUnique
+            (Scheme.Modules.dual M) n g)).1 φ
+        change Scheme.Modules.exteriorSheafRestriction (Scheme.Modules.dual M) n g
+          (exteriorPower.ιMulti (X.presheaf.obj (op U₀)) n φ) = _ at hr
+        rw [hr]
+        exact (heval V₀ _).trans ((hnat U₀ V₀ g.unop φ).trans
+          (congrArg ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.map g)
+            (heval U₀ φ).symm)) }
+  let adj := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 X.ringCatSheaf.obj)
+  let f : Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n ⟶
+      Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n) :=
+    (adj.homEquiv _ _).symm p
+  have hf := (adj.homEquiv
+    (Scheme.Modules.exteriorSheafPresheaf (Scheme.Modules.dual M) n)
+    (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n))).apply_symm_apply p
+  refine ⟨f, ?_⟩
+  intro U a φ
+  have h := congrArg
+    (fun t ↦ t.app (op U) (exteriorPower.ιMulti (X.presheaf.obj (op U)) n φ)) hf
+  change f.val.app (op U)
+      (Scheme.Modules.exteriorSheafSection (Scheme.Modules.dual M) n U φ) =
+    exteriorPower.alternatingMapLinearEquiv (A U)
+      (exteriorPower.ιMulti (X.presheaf.obj (op U)) n φ) at h
+  rw [heval U φ] at h
+  rw [h]
+  exact hA U U (𝟙 U) a φ
+
 
 end AlgebraicGeometry

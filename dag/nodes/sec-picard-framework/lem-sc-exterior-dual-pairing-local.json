@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-exterior-dual-pairing-local",
+ "kind": "statement",
+ "title": "Unique alternating family of local determinant functionals",
+ "statement": "Let X be a scheme [def-pc-scheme], M an O_X-module sheaf, n a natural number and U an open. There is a unique O_X(U)-alternating n-linear map A from internal dual sections [def-pur-sheaf-hom] of M on U to internal dual sections of its sheafified exterior power [def-sc-sheaf-exterior-power] on U. It is characterized by (A(φ))_V(a_1∧⋯∧a_n)=det(φ_j,V(a_i)) for every V→U and all tuples a,φ.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
+  "place": "Tags 03CY and 0BRT (determinant inversion); pairingDual and pairingDual_ιMulti_ιMulti. Expanded local argument written by N1; Stacks pages read at https://stacks.math.columbia.edu/tag/03CY and https://stacks.math.columbia.edu/tag/0BRT."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "For each tuple φ choose the unique functional given by the fixed-tuple construction; the uniqueness prevents any arbitrary data choice. This defines the function underlying A.",
+   "uses": [
+    "lem-sc-exterior-dual-pairing-functional"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove additivity and scalar compatibility in each argument by the all-subopen wedge extensionality theorem. On such a wedge, the defining formula reduces these identities to Matrix.det_updateCol_add and Matrix.det_updateCol_smul; a scalar r restricts to O_X(g)(r). If two arguments agree, two columns agree, so Matrix.det_zero_of_column_eq proves the alternating condition. All three identities are implemented in Lean. Columns are rewritten explicitly using Function.update.",
+   "uses": [
+    "lem-sc-exterior-sheaf-dual-ext",
+    "lem-sc-exterior-dual-pairing-functional"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The construction has the desired formula by the fixed-tuple theorem. Any other alternating map with that formula agrees on every tuple by all-subopen wedge extensionality, so AlternatingMap.ext gives uniqueness.",
+   "uses": [
+    "lem-sc-exterior-sheaf-dual-ext",
+    "lem-sc-exterior-dual-pairing-functional"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-exterior-dual-pairing-functional",
+  "lem-sc-exterior-sheaf-dual-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
+  "place": "Tags 03CY and 0BRT (determinant inversion); pairingDual and pairingDual_ιMulti_ιMulti. Expanded local argument written by N1; Stacks pages read at https://stacks.math.columbia.edu/tag/03CY and https://stacks.math.columbia.edu/tag/0BRT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "alternating multilinear determinant columns internal dual sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating multilinear determinant columns internal dual sheaf",
+   "results": "Matrix.det_updateCol_add; Matrix.det_updateCol_smul; Matrix.det_zero_of_column_eq; exteriorPower.alternatingMapToDual; no exact internal sheaf statement",
+   "date": "2026-10-12",
+   "verdict": "related ring or sheaf results only; no exact sheaf-exterior statement"
+  },
+  {
+   "tool": "grep",
+   "query": "det_updateCol_add|det_updateCol_smul|det_zero_of_column_eq",
+   "results": "Matrix.det_updateCol_add; Matrix.det_updateCol_smul; Matrix.det_zero_of_column_eq; exteriorPower.alternatingMapToDual; no exact internal sheaf statement",
+   "date": "2026-10-12",
+   "verdict": "ingredients found; no exact sheaf-exterior statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DeterminantDualPairing",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Unique alternating family of local determinant functionals in the determinant inversion step of Tag 0BRT",
+   "via": [
+    "lem-sc-exterior-dual-pairing-construction",
+    "lem-sc-determinant-dual-evaluation-dual-identification",
+    "lem-sc-determinant-dual-evaluation",
+    "lem-sc-shifted-determinant-dual-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DeterminantDualAlternatingFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualAlternatingFamily.lean",
+  "declaration": "AlgebraicGeometry.exterior_dual_pairing_local",
+  "statement": "theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (U : X.Opens) :\n    ∃! A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]\n        ((Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U)),\n      ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V))\n        (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n        (A φ).app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =\n          (Matrix.of fun i j ↦ (show X.presheaf.obj (op V) from\n            (φ j).app (op (Over.mk g)) (a i))).det",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T144129-L-2102153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T144129-L-2102153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

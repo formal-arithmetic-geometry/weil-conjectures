@@ -14,27 +14,28 @@
  ],
  "proof": [
   {
-   "text": "For each tuple of internal dual sections on U, evaluate on every subopen V and apply the canonical exterior-power determinant pairing. Its value on pure wedges is the determinant of evaluations. The determinant formula is natural under restriction: internal Hom sections commute with restriction, and ring restriction preserves the finite determinant polynomial.",
+   "text": "For each open choose the uniquely characterized alternating family of local determinant functionals. Prove compatibility under restriction by the all-subopen wedge extensionality theorem: for W→V→U, both sides evaluate to the determinant of the original tuple on W. The internal Hom restriction maps identify the components definitionally.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "lem-sc-exterior-power-dual-pairing"
+    "lem-sc-exterior-dual-pairing-local",
+    "lem-sc-exterior-sheaf-dual-ext",
+    "def-pur-sheaf-hom"
    ],
    "elementary": false
   },
   {
-   "text": "By the exterior universal property, these functionals give a morphism from the exterior presheaf on the localized open site to the structure sheaf there. Extend to the exterior sheaf by the module sheafification adjunction. Uniqueness makes these extensions commute when U shrinks. Thus the alternating multilinear pairing of the dual tuple has values in the internal dual of the exterior sheaf.",
+   "text": "Apply exteriorPower.alternatingMapLinearEquiv on each open. These linear maps form a morphism from the exterior presheaf of the internal dual to the internal dual of the exterior sheaf. Prove naturality using exteriorPower.linearMap_ext, the pure-wedge characterization of exteriorSheafRestriction and the restriction identity from the preceding step.",
    "uses": [
     "def-sc-sheaf-exterior-power",
-    "def-pur-sheaf-hom",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-sc-exterior-dual-pairing-local",
+    "lem-sc-exterior-sheaf-dual-ext"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the exterior universal property in the dual tuple and extend the resulting presheaf morphism through sheafification, its target being a sheaf. The two adjunction units recover the determinant formula on wedges. The construction uses no basis or rank, and includes the empty determinant.",
+   "text": "Extend the presheaf morphism through the sheafification adjunction to obtain f. The hom-equivalence apply_symm_apply identity says its composite with the unit is the original presheaf morphism. Evaluate on the pure wedge of φ, then on the pure wedge of a, and use the local determinant formula at the identity subopen. This proves exactly the original existence statement and formula.",
    "uses": [
-    "def-sc-sheaf-exterior-power",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-sc-exterior-dual-pairing-local"
    ],
    "elementary": false
   }
@@ -43,12 +44,13 @@
   "def-pur-sheaf-hom",
   "def-sc-sheaf-exterior-power",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-sc-exterior-power-dual-pairing"
+  "lem-sc-exterior-dual-pairing-local",
+  "lem-sc-exterior-sheaf-dual-ext"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BRT determinant inversion: expanded the local-to-global argument from the item node; finite free pairing from Mathlib Pairing.lean and Basis.lean. In the installed Mathlib, local bijectivity follows from basis_coord and the finite dual basis; bijective_pairingDual is not present."
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
+  "place": "N1 Lean reduction of the determinant pairing construction: fixed-open alternating functionals, proved wedge extensionality, restriction compatibility, and sheafification adjunction."
  },
  "mathlib_searches": [
   {
@@ -130,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T110308-L-617414",
+  "landing": "20261012T144129-L-2102153",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
