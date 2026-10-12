@@ -14,61 +14,45 @@
  },
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-free-resolution-ses-split] to the exact sequence $0\\to K\\xrightarrow{\\mathrm{id}}K\\to0\\to0$. Its first augmented complex supplies one free resolution $\\cdots\\to G_2\\xrightarrow{e_2}G_1\\xrightarrow{e_1}G_0\\xrightarrow{\\eta}K\\to0$. Fix this resolution once for all $N$; in particular the choice does not depend on a map $g:N\\to N'$.",
+   "text": "Fix Mathlib CategoryTheory.projectiveResolution of K = S.X₁, independently of N. The definition of Tor permits projective resolutions [def-weil-pbc-tor-modules], so no compatible free-resolution horseshoe construction is needed.",
    "uses": [
-    "lem-weil-pbc-free-resolution-ses-split"
+    "def-weil-pbc-tor-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00LY (section-tor), free resolutions; proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), free-presentation dimension shift"
-   }
+   "elementary": false
   },
   {
-   "text": "Write the given exact sequence as $0\\to K\\xrightarrow{j}F\\xrightarrow{p}M\\to0$ [def-weil-pbc-exact-sequence]. Splice the fixed resolution to it: put $P_0=F$, $P_{n+1}=G_n$ for $n\\ge0$, $d_1=j\\eta$, $d_{n+1}=e_n$ for $n\\ge1$, and augment by $p$. All $P_n$ are free [def-weil-pbc-free-module]. This is an exact augmented complex: $\\operatorname{im}(j\\eta)=j(K)=\\ker p$, $\\ker(j\\eta)=\\ker\\eta=\\operatorname{im}e_1$ since $j$ is injective, and exactness in every higher degree is that of $G_\\bullet$. Thus $P_\\bullet$ is a free resolution of $M$, also fixed independently of $N$.",
+   "text": "Splice this resolution Q to the given short exact sequence [def-weil-pbc-exact-sequence]: P₀ = S.X₂, Pₙ₊₁ = Qₙ, d₁ = η followed by S.f, and augmentation S.g. Freeness [def-weil-pbc-free-module] makes P₀ projective; the remaining terms are projective. Exactness at P₀ follows by comparing Q₀ → S.X₂ → S.X₃ with S using the epimorphism η and identity middle and last maps. Exactness at P₁ follows by comparing Q₁ → Q₀ → S.X₁ with Q₁ → Q₀ → S.X₂ using the monomorphism S.f and identity first and middle maps. Both comparisons use Mathlib ShortComplex.exact_iff_of_epi_of_isIso_of_mono. Higher degrees inherit Q.exact_succ. The augmentation is a quasi-isomorphism by ChainComplex.quasiIsoAt₀_iff and quasiIsoAt_iff_exactAt'. Thus P is a projective resolution of S.X₃.",
    "uses": [
     "def-weil-pbc-exact-sequence",
-    "def-weil-pbc-free-module"
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-tor-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), free-presentation dimension shift; splicing detail supplied by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "Compute Tor from these fixed free resolutions [def-weil-pbc-tor-modules]. For $i\\ge1$, $P_{i+2}=G_{i+1}$, $P_{i+1}=G_i$, $P_i=G_{i-1}$, and the two differentials around degree $i+1$ in $P_\\bullet\\otimes_RN$ are exactly $e_{i+1}\\otimes1_N$ and $e_i\\otimes1_N$. Consequently the identity on $G_i\\otimes_RN$ induces an $R$-linear isomorphism $H_{i+1}(P_\\bullet\\otimes_RN)=\\ker(e_i\\otimes1_N)/\\operatorname{im}(e_{i+1}\\otimes1_N)\\xrightarrow{\\sim}H_i(G_\\bullet\\otimes_RN)$. Compose it with the canonical resolution identifications of [def-weil-pbc-tor-modules] to define $\\theta_N$.",
+   "text": "For either fixed resolution form the functor N ↦ resolution ⊗ N, with maps induced by tensoringRight.map g. Mathlib ProjectiveResolution.isoLeftDerivedObj computes Tor from this functor; ProjectiveResolution.leftDerived_app_eq proves that these comparison isomorphisms are natural in N [def-weil-pbc-tor-modules]. This is the private helper torResolutionIso.",
    "uses": [
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00LY (section-tor), Lemma Tag 00LZ (lemma-tor-welldefined), and proof of Lemma Tag 00S2 (lemma-exact-sequence-NL)"
-   }
+   "elementary": false
   },
   {
-   "text": "For $g:N\\to N'$, the functorial maps of [def-weil-pbc-tor-modules] on these chosen resolutions come from the chain maps $1_{P_n}\\otimes g$ and $1_{G_n}\\otimes g$. At the three terms used in Step 3, $P_{i+2}=G_{i+1}$, $P_{i+1}=G_i$, $P_i=G_{i-1}$, so the two chain maps are literally the same maps $1_{G_{i+1}}\\otimes g$, $1_{G_i}\\otimes g$, $1_{G_{i-1}}\\otimes g$. They carry cycles to cycles and boundaries to boundaries, and the identity isomorphism between the two quotient modules in Step 3 therefore commutes with the induced homology maps. The canonical resolution identifications are functorial in $N$ by [def-weil-pbc-tor-modules], giving $\\theta_{N'}\\circ\\operatorname{Tor}^R_{i+1}(M,g)=\\operatorname{Tor}^R_i(K,g)\\circ\\theta_N$.",
+   "text": "Write i = n+1. The three terms of P ⊗ N in degrees n+3,n+2,n+1 coincide with the terms of Q ⊗ N in degrees n+2,n+1,n, including both differentials and the maps induced by g. Identity components therefore give a natural isomorphism of short-complex functors (spliceScIso). Apply ShortComplex.homologyFunctor and HomologicalComplex.homologyFunctorIso' to obtain spliceHomologyIso in degrees n+2 and n+1. Compose with torResolutionIso for P and the inverse comparison for Q. The components give θ; naturality of this composite gives precisely the required equation.",
    "uses": [
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00LY (section-tor) and Lemma Tag 00LZ (lemma-tor-welldefined), functoriality of Tor; naturality calculation supplied by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-resolution-ses-split",
+  "def-weil-pbc-tor-modules",
   "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-tor-modules"
+  "def-weil-pbc-free-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Section Tags 00LY and 00LZ and proof of Lemma Tag 00S2; explicit splicing and naturality argument supplied by the agent"
+  "place": "Tags 00LY, 00LZ and proof of 00S2; projective-resolution variant of the same splice argument, implemented using Mathlib projectiveResolution, isoLeftDerivedObj, leftDerived_app_eq, and short-complex homology functors by V1 on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -193,5 +177,15 @@
   "group": "F1",
   "result": "pass",
   "note": "comm ring R (Type u); 0->K->F->M->0 as S : ShortComplex (ModuleCat R) + S.ShortExact (mono/epi/exact); F free = Module.Free R S.X2; i>=1 as hi : 1<=i; theta_N : Tor'_{i+1}(S.X3,N) iso Tor'_i(S.X1,N) for all N (Tor' resolves first variable, as M1); naturality Tor_{i+1}(M,g) >> theta N' = theta N >> Tor_i(K,g) for all g : N -> N', matches node order"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T085351-L-44159",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

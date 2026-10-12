@@ -7090,3 +7090,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint (stage 3; reviewer PASS; first push; landing 20261012T085350-L-43865 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U3/Sheaf.CategoryTheory.PushoutShortExactSequence (stage 3; reviewer PASS; first push; landing 20261012T085350-L-43965 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U3/Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T085350-L-44061 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/V1/Sheaf.Algebra.TorDimensionShiftNatural (stage 3; reviewer PASS; first push; landing 20261012T085351-L-44159 (proof); batch 20261012T085205; modules 1; new nodes 0)
