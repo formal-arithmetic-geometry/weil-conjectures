@@ -1,6 +1,6 @@
 # Work queue
 
-104 items; claim with `tools/claim.py next <group> [--stage N]`.
+107 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -23,7 +23,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (95)
+## Stage 3: modules to prove (98)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -34,7 +34,6 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback` | 2 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism` | 2 | 1 | proof |
@@ -43,15 +42,19 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.ConstantExtensionCover` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood` | 4 | 1 | proof |
+| `Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor` | 4 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration` | 4 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
