@@ -61,7 +61,42 @@ triangle with first arrow `Rv(c)`.
 vanish for `j ≤ n`. Thus `H^j(Rv(c))` is both monic and epic, hence an isomorphism.
 5. For the canonical truncation, `lem-weil-pbc-truncation-cohomology` gives the isomorphism
 hypotheses and zero source in degree `n + 1`, hence the monomorphism hypothesis. Applying
-steps 1-4 gives the truncation corollary below. -/
+steps 1-4 gives the truncation corollary below.
+
+This helper is the monomorphism half. (blueprint: lem-weil-pbc-derived-functor-truncation-iso-mono)
+Proof: use the long exact cohomology sequence after applying the right derived functor. -/
+theorem mono_homologyFunctor_rightDerivedFunctorPlus_map
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
+    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
+    (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v]
+    (n : ℤ) {L M : DerivedCategory.Plus A} (c : L ⟶ M)
+    (hiso : ∀ i : ℤ, i ≤ n →
+      IsIso ((DerivedCategory.Plus.homologyFunctor A i).map c))
+    (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) :
+    ∀ j : ℤ, j ≤ n →
+      Mono ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c)) := by
+  sorry
+
+/-- The cone argument of Stacks Lemma 05TC gives the epimorphism half in low degrees.
+Source: Stacks Project, Derived Categories, Lemma 05TC, part (2).
+(blueprint: lem-weil-pbc-derived-functor-truncation-iso-epi)
+Proof: apply the long exact cohomology sequence to the image of the cone triangle under the
+right derived functor; the lower cohomology of the cone vanishes, so the displayed map is epic. -/
+theorem epi_homologyFunctor_rightDerivedFunctorPlus_map
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
+    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
+    (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v]
+    (n : ℤ) {L M : DerivedCategory.Plus A} (c : L ⟶ M)
+    (hiso : ∀ i : ℤ, i ≤ n →
+      IsIso ((DerivedCategory.Plus.homologyFunctor A i).map c))
+    (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) :
+    ∀ j : ℤ, j ≤ n →
+      Epi ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c)) := by
+  sorry
+
+set_option linter.style.haveILetI false in
 theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
@@ -71,8 +106,13 @@ theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map
     (hiso : ∀ i : ℤ, i ≤ n → IsIso ((DerivedCategory.Plus.homologyFunctor A i).map c))
     (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) :
     ∀ j : ℤ, j ≤ n →
-      IsIso ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c)) :=
-  sorry
+      IsIso ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c)) := by
+  intro j hj
+  have hm := mono_homologyFunctor_rightDerivedFunctorPlus_map v n c hiso hmono j hj
+  have he := epi_homologyFunctor_rightDerivedFunctorPlus_map v n c hiso hmono j hj
+  haveI := hm
+  haveI := he
+  exact isIso_of_mono_of_epi _
 
 /-- The canonical truncation `τ≤n K → K` induces an isomorphism on degree-`n` cohomology
 after applying the right derived functor of a left exact additive functor.

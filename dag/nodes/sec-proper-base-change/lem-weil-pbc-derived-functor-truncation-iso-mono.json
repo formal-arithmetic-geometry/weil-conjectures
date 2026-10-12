@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-derived-functor-truncation-iso-mono",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derived-functor-truncation-iso",
+   "place": "stage-3 decomposition",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Low-degree derived cohomology map is mono",
+ "statement": "Under the hypotheses of lem-weil-pbc-derived-functor-truncation-iso, the induced map on degree j cohomology after right derivation is mono for every j ≤ n.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05TC (lemma-negative-vanishing, line 5497), part (2) and its proof (lines 5525-5541): the triangle $\\tau_{\\leq a}K\\to K\\to\\tau_{\\geq a+1}K\\to$, part (1) applied to its third vertex, and the long exact cohomology sequence; the statement above is that proof with the cone of $c$ in place of $\\tau_{\\geq n+1}K$"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-derived-functor-truncation-iso"
+ ],
+ "proof": [
+  {
+   "text": "Complete the cone argument and long exact cohomology sequence from the parent lemma, retaining only the mono half of the conclusion.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-truncation-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05TC, proof of part (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'truncLE\\|truncGE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rln 'rightDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "truncations: CategoryTheory/Triangulated/TStructure/{{TruncLEGT,TruncLTGE,ETrunc,Induced}}.lean, Algebra/Homology/Embedding/TruncLE*.lean, Algebra/Homology/DerivedCategory/{{TStructure,Plus,Fractions}}.lean; derived functors: CategoryTheory/Functor/Derived/*.lean, CategoryTheory/Abelian/RightDerived.lean, Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean. None relates the homology of `rightDerivedFunctorPlus` (or of `Functor.rightDerived`) on a truncation to that on the complex; `rightDerivedFunctorPlus` is not even shown to be triangulated in Mathlib (TODO in its docstring).",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right derived functor homology of truncation isomorphism in low degrees",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj(_hom_naturality_assoc) (Mathlib.CategoryTheory.Abelian.RightDerived), HomologicalComplex.truncGE'XIsoOpcycles and variants (Mathlib.Algebra.Homology.Embedding.TruncGE)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism in derived category inducing isomorphism on homology in degrees at most n when its cone is concentrated in degrees at least n+1",
+   "results": "DerivedCategory.isZero_of_isLE (Mathlib.Algebra.Homology.DerivedCategory.TStructure), DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff / mono_homologyMap_mor₁_iff (Mathlib.Algebra.Homology.DerivedCategory.HomologySequence), ShortComplex.isIso_homologyFunctor_map_of_epi_of_isIso_of_mono, CochainComplex.mappingCone(.triangle)",
+   "date": "2026-10-09",
+   "verdict": "no match (ingredients of Steps 1 and 4 only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorPlus",
+   "results": "rightDerivedFunctorPlus, rightDerivedFunctorPlusUnit(h), instCommShiftPlusRightDerivedFunctorPlusInt, instIsTriangulatedPlusRightDerivedFunctorPlus, NatTrans.rightDerivedFunctorPlus(_id/_comp/_add/_neg/_zero/_fach) (all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus, in loogle's newer Mathlib; the pinned Mathlib has no IsTriangulated instance, TODO line 18)",
+   "date": "2026-10-09",
+   "verdict": "no match (nothing about homology of the derived functor)"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor, CategoryTheory.Functor.rightDerivedFunctorPlus",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism c : L → M in the derived category which is an isomorphism on cohomology H^i for i ≤ n and injective on H^{n+1}, the right derived functor of a left exact functor applied to c is an isomorphism on H^j for j ≤ n",
+   "results": "InjectiveResolution.isoRightDerivedObj, Functor.isZero_rightDerived_obj_injective_succ, instIsIsoAppToRightDerivedZeroOfInjective (Mathlib.CategoryTheory.Abelian.RightDerived), DerivedCategory.isIso_Q_map_iff_quasiIso, CochainComplex.isKInjective_iff_of_iso",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if the third object of a distinguished triangle is in degrees ≥ n+1 for a t-structure then truncation ≤ n of the first morphism is an isomorphism",
+   "results": "TStructure.triangle_iso_exists, instIsGEObjTruncGE, instIsLEObjTruncLT..., truncGEδLT, triangleLTGE_distinguished (Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'rightDerivedFunctorPlus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -n 'isIso_homology\\|mono_homologyMap\\|epi_homologyMap\\|isIso₁_truncLE_map_of_isGE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated/TStructure/",
+   "results": "rightDerivedFunctorPlus only in DerivedCategory/RightDerivedFunctorPlus.lean (definition, unit, IsRightDerivedFunctor instances, isIso of the unit on injective complexes; TODO line 18: 'show that this functor is triangulated') and a docstring of CategoryTheory/Abelian/RightDerived.lean:46; HomologySequence.lean:185-197 epi/mono_homologyMap_mor₁/₂_iff; TStructure/TruncLEGT.lean:364 `TStructure.isIso₁_truncLE_map_of_isGE` (for a distinguished triangle T with T.obj₃ ≥ n₁ = n₀+1, (t.truncLE n₀).map T.mor₁ is an iso: an abstract t-structure form of Step 4 after Step 3, not applied to derived functors)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance\\|def' ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean (source repository, not Mathlib); grep -rn 'rightDerivedFunctorPlus' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'trunc\\|isIso.*homology\\|isLE\\|isGE'",
+   "results": "RightDerivedFunctorPlus.lean (285 lines): isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor (91), isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE (115, the node lem-weil-pbc-derived-functor-negative-vanishing), injectiveObjectEquivalence and instances (139-194), rightDerivedFunctorPlusIsoInjectiveObject (207), CommShift / IsTriangulated instances (222-227, the node lem-weil-pbc-derived-direct-image-triangulated), commShift_rightDerivedFunctorPlusUnit (245); no declaration about the homology of rightDerivedFunctorPlus on a morphism or a truncation; elsewhere only SpectralSequence/Grothendieck.lean:164-174 (uses of the vanishing lemma)",
+   "date": "2026-10-09",
+   "verdict": "no match (no Lean declaration of this statement in the source repository)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-derived-functor-truncation-iso",
+  "worker": "stage1",
+  "summary": "Read Stacks derived.tex Lemma 05TC (lines 5497-5541) and wrote the proof of part (2) with the cone $C$ of $c$ in place of $\\tau_{\\geq a+1}K$: Step 1 (worker's addition, which the source does not need) derives $\\mathcal H^i(C)=0$ for $i\\leq n$ from the long exact sequence, using surjectivity of $\\mathcal H^j(c)$ ($j\\leq n$) and injectivity of $\\mathcal H^{j+1}(c)$ ($j+1\\leq n+1$); Step 2 uses the closed node lem-weil-pbc-derived-direct-image-triangulated; Step 3 the closed node lem-weil-pbc-derived-functor-negative-vanishing with $b=n+1$; Step 4 the long exact sequence via the Mathlib leaf lem-sf-derived-homology-long-exact (lem-sp-long-exact-of-triangle, the general homological-functor version, is imported, unsplit and of unit sk-prop-av-pqf-finite, so not used), with $\\mathcal H^{j-1}(RvC)=0$ for injectivity and $\\mathcal H^j(RvC)=0$ for surjectivity; Step 5 the truncation via the new Mathlib leaf lem-weil-pbc-truncation-cohomology. Statement unchanged in content; added the references to $D^+$ (def-weil-pbc-bounded-derived-subcategories), the cohomology functors (def-weil-abstract-derived-category) and the canonical truncation (def-sbc-standard-tstructure-derived-category) and the matching stmt_deps. Mathlib (pinned) has no statement of this (rightDerivedFunctorPlus is not even triangulated there); the source repository's RightDerivedFunctorPlus.lean has no declaration stating it."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T173844-L-3300735",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedFunctorTruncationIso.lean",
+  "declaration": "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map",
+  "statement": "theorem mono_homologyFunctor_rightDerivedFunctorPlus_map\n    {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]\n    {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]\n    [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]\n    (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v]\n    (n : ℤ) {L M : DerivedCategory.Plus A} (c : L ⟶ M)\n    (hiso : ∀ i : ℤ, i ≤ n → IsIso ((DerivedCategory.Plus.homologyFunctor A i).map c))\n    (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) :\n    ∀ j : ℤ, j ≤ n →\n      Mono ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dti0945b",
+  "group": "F1",
+  "result": "pass",
+  "note": "A,B Abelian+IsGrothendieckAbelian (both); v Additive+PreservesFiniteLimits (=def-sp-left-exact-additive); Rv = Mathlib rightDerivedFunctorPlus as siblings negative-vanishing/triangulated records; L M : DerivedCategory.Plus A, c; hiso all i<=n, hmono at n+1 via Plus.homologyFunctor; concl forall j<=n IsIso H^j(Rv c); corollary K : Plus A, tau<=n = TStructure.t.onPlus.truncLEι n (no DerivedCategory.truncLE in pinned Mathlib), concl H^n iso; #check'd elaborated statements"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T173844-L-3300735",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
