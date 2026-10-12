@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-mixed-tensor-restriction-comparison",
+ "kind": "statement",
+ "title": "Restriction comparison for mixed total tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof of Tag 0DJ8: choose K-flat models for derived tensor over R; restriction comparison needed for the fixed-second-factor tensor construction",
+   "via": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let $R,A$ be commutative rings and $f:R\\to A$ a ring homomorphism. Let $S$ be degreewise restriction of scalars on cochain complexes [def-pc-cochain-complex-modules], and $B(E,N)$ the flipped mixed total tensor [def-pc-mixed-total-tensor], with $E$ first. There is a natural isomorphism of bifunctors $S(B(E,N))\\cong E\\otimes_R S(N)$, natural in both complexes. No K-flatness or flatness of $A$ over $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section 06Y5 preceding Lemma 06Y6; Lemma 06Y6"
+ },
+ "stmt_deps": [
+  "def-pc-mixed-total-tensor",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "On coefficient modules use TensorProduct.AlgebraTensorModule.cancelBaseChange and TensorProduct.comm: n tensor (a tensor e) maps to e tensor a n. The inverse sends e tensor n to n tensor (1 tensor e). Prove naturality on pure tensors in both variables; linearity extends it to all tensors.",
+   "uses": [
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply HomologicalComplex.Hom.isoOfComponents twice to assemble the coefficient isomorphisms into an isomorphism of bicomplexes. Naturality from step 1 is precisely compatibility with each differential.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction preserves coproducts, so HomologicalComplex₂.mapTotalIso compares restriction after totalization with totalization after restriction. Compose its inverse with total.mapIso of the bicomplex comparison. Total-map functoriality and mapTotalIso_inv_naturality prove naturality in both variables. Assemble these comparisons using NatIso.ofComponents twice.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mixed-total-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section 06Y5 preceding Lemma 06Y6; Lemma 06Y6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a mixed total tensor complex is naturally isomorphic to the tensor of the restricted complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange natural isomorphism restriction mixed total tensor",
+   "results": "8 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange, cancelBaseChange_tmul, lTensor_comp_cancelBaseChange, cancelBaseChange_symm_tmul; no exact complex-level comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|mapTotalIso",
+   "results": "25 Mathlib hits including TensorProduct.AlgebraTensorModule.cancelBaseChange in Mathlib/LinearAlgebra/TensorProduct/Tower.lean:436. Local source grep also finds HomologicalComplex₂.mapTotalIso and its naturality in WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean:118,133.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.MixedTensorRestrictionComparison",
+  "file": "lean/Sheaf/Algebra/Homology/MixedTensorRestrictionComparison.lean",
+  "declaration": "CochainComplex.exists_mixedTensor_restriction_iso",
+  "statement": "theorem exists_mixedTensor_restriction_iso {R A : Type u} [CommRing R] [CommRing A]\n    (f : R →+* A) :\n    let S := (ModuleCat.restrictScalars f).mapHomologicalComplex (.up ℤ)\n    let B := (ModuleCat.mixedTensor f).flip.map₂CochainComplex\n    Nonempty (B ⋙ (Functor.whiskeringRight _ _ _).obj S ≅\n      curriedTensor (CochainComplex (ModuleCat.{u} R) ℤ) ⋙\n        (Functor.whiskeringLeft _ _ _).obj S)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T144158-L-2111868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T144158-L-2111868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

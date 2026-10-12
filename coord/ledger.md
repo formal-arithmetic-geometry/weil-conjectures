@@ -8239,3 +8239,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/W2/Sheaf.CategoryTheory.IdentityDerivedHomologyComparison (stage 3; reviewer PASS; after a return; landing 20261012T144157-L-2111516 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/W2/Sheaf.Paper.ZariskiEtalePushedResolutionFiniteLimits (stage 3; reviewer PASS; first push; landing 20261012T144157-L-2111625 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/W2/Sheaf.RingTheory.LinearEquationLocalizationPolynomialCore (stage 3; reviewer PASS; first push; landing 20261012T144158-L-2111755 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/W3/Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T144158-L-2111868 (interface); batch 20261012T144049; modules 2; new nodes 1)
