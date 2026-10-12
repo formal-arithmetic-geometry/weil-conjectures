@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0A1H and 0B91; coherence unit, part (a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded flat proper cohomology complex finite free resolution",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper finitely presented morphism relatively flat sheaf bounded flat Cech complex finite free resolution",
+   "results": "SheafOfModules finite presentation and flat projective lemmas; no complex construction",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|PseudoCoherent",
+   "results": "Mathlib Cech nerve API; no proper cohomology model",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatCechModel",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit, part (a): finite affine Čech model and all base changes",
+   "via": [
+    "lem-pc-proper-flat-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "state": "none"
+ },
+ "id": "lem-pc-proper-flat-cohomology-model",
+ "title": "Bounded flat proper cohomology model",
+ "statement": "Let f:X→T be proper and finitely presented [def-pc-morphism-conventions], and F a finitely presented module flat over T. For every t∈T there exist an affine open U containing t, d∈ℕ and a quasi-coherent complex C of O_U-modules [def-pc-derived-category] vanishing outside [0,d], with every term flat over U, whose ordinary pullback computes every higher direct image after every cartesian base change to U. Moreover the ring complex of global sections Γ(U,C) is pseudo-coherent [def-pc-ring-pseudo-coherent-complex].",
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood of t. Its proper inverse image has a finite affine\ncover. Separatedness makes nonempty finite intersections affine. Form the alternating\ncomplex of sections of F over these intersections and associate sheaves on the affine\nbase. It is bounded in [0,d], quasi-coherent, and flat over the base by relative flatness\nand the affine local criterion for flatness. After affine base change its terms tensor\nwith the new base ring and still form the alternating section complex of the pulled-back\ncover. Affine quasi-coherent acyclicity and Čech comparison compute higher direct images.\nThese identifications glue on affine opens of arbitrary new bases. Transport through the\nunique isomorphism to a standard fibre product gives the assertion for every cartesian\nsquare. Noetherian approximation of (f,F), proper coherence at the Noetherian stage,\nand derived base change show that the ring complex of sections is pseudo-coherent.\nEmpty inverse images give the zero complex; no lower bound on fibre dimension is\nneeded.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-pc-affine-sections-flat-over-base",
+    "lem-pc-cohomology-sections-affine-base",
+    "lem-pc-affine-vanishing",
+    "lem-pc-flat-bounded-complex-descent",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-proper-basic",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-affine-vanishing",
+  "lem-pc-flat-bounded-complex-descent",
+  "lem-pc-coherent-hi"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatCohomologyModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatCohomologyModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_proper_flat_cohomology_model",
+  "statement": "theorem exists_proper_flat_cohomology_model {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation] (hF : F.IsFlatOver f) (t : T) : ∃ (U : T.Opens) (C : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧ IsAffine U.toScheme ∧ C.IsStrictlyGE 0 ∧ C.IsStrictlyLE d ∧ (∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme)) ∧ (∀ n : ℤ, (C.X n).IsQuasicoherent) ∧ (letI : CommRing (U.toScheme.ringCatSheaf.obj.obj (.op ⊤)) := inferInstanceAs (CommRing Γ(U.toScheme, ⊤)); letI := HasDerivedCategory.standard (ModuleCat.{u} (U.toScheme.ringCatSheaf.obj.obj (.op ⊤))); DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj (((SheafOfModules.evaluation.{u} U.toScheme.ringCatSheaf (.op ⊤)).mapHomologicalComplex (ComplexShape.up ℤ)).obj C))) ∧ ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅ (higherDirectImage f' q).obj ((Modules.pullback g').obj F))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0A1H and 0B91; coherence unit, part (a)"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T154830-L-2473028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T154830-L-2473028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
