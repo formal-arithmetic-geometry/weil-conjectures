@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import Mathlib.AlgebraicGeometry.Gluing
 
 /-!
 # Standard charts and twisting module on a polynomial Proj
@@ -104,6 +104,63 @@ theorem proj_polynomial_twist_chart (A : Type u) [CommRing A] (m : ℕ) :
           Spec.map (CommRingCat.ofHom (algebraMap A
             (HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A)
               (MvPolynomial.X k)))) := by
-  sorry
+  classical
+  let 𝒜 := MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A
+  have hcover : (⨆ k : Fin (m + 1), Proj.basicOpen 𝒜 (MvPolynomial.X k)) = ⊤ :=
+    Proj.iSup_basicOpen_eq_top' 𝒜 MvPolynomial.X
+      (fun k ↦ ⟨1, MvPolynomial.isHomogeneous_X A k⟩)
+      (MvPolynomial.adjoin_range_X_eq_top _ _)
+  refine ⟨hcover, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro k
+    exact (Proj.basicOpenIsoSpec 𝒜 _ (MvPolynomial.isHomogeneous_X A k) Nat.one_pos).isIso_hom
+  · intro k
+    refine ⟨(MvPolynomial.homogeneousLocalizationAwayXEquiv A k).symm, ?_⟩
+    intro l
+    exact MvPolynomial.homogeneousLocalizationAwayXEquiv_symm_X A k l
+  · intro k
+    exact Proj.isFreeGenerator_twistPowSection 1 (MvPolynomial.isHomogeneous_X A k)
+  · intro k l
+    refine Subtype.ext (funext fun x ↦ Subtype.ext ?_)
+    change
+      ((Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X A l)).1
+        ⟨x.1, x.2.2⟩ : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
+      ((Proj.awayToSection 𝒜 (MvPolynomial.X k) (MvPolynomial.awayXRatio A k l)).1
+        ⟨x.1, x.2.1⟩).val *
+      ((Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X A k)).1
+        ⟨x.1, x.2.1⟩ : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal)
+    rw [Proj.val_twistPowSection_apply, Proj.val_twistPowSection_apply]
+    have hratio := ProjectiveSpectrum.Proj.awayToSection_apply 𝒜 (MvPolynomial.X k)
+      (MvPolynomial.awayXRatio A k l) ⟨x.1, x.2.1⟩
+    erw [hratio]
+    dsimp only [MvPolynomial.awayXRatio]
+    erw [HomogeneousLocalization.Away.val_mk]
+    simp only [Localization.mk_eq_mk', IsLocalization.map_mk', RingHom.id_apply]
+    rw [← IsLocalization.mk'_mul, IsLocalization.mk'_eq_iff_eq]
+    simp [mul_comm]
+  · intro k l
+    rw [Proj.awayι_preimage_basicOpen 𝒜 (MvPolynomial.isHomogeneous_X A k) Nat.one_pos
+      (MvPolynomial.isHomogeneous_X A l) Nat.one_pos, MvPolynomial.isLocalizationElem_X]
+  · let q : Proj 𝒜 ⟶ Spec (.of A) := Proj.toSpecZero 𝒜 ≫
+      Spec.map (CommRingCat.ofHom
+        (MvPolynomial.homogeneousSubmoduleZeroEquiv (Fin (m + 1)) A).toRingHom)
+    have hq (k : Fin (m + 1)) :
+        Proj.awayι 𝒜 (MvPolynomial.X k) (MvPolynomial.isHomogeneous_X A k)
+          Nat.one_pos ≫ q =
+        Spec.map (CommRingCat.ofHom (algebraMap A
+          (HomogeneousLocalization.Away 𝒜 (MvPolynomial.X k)))) := by
+      dsimp [q]
+      rw [Proj.awayι_toSpecZero_assoc, ← Spec.map_comp]
+      congr 1
+    refine ⟨q, hq, ?_⟩
+    intro q' hq'
+    apply Scheme.hom_ext_of_forall
+    intro x
+    obtain ⟨k, hk⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      (hcover.ge (show x ∈ (⊤ : (Proj 𝒜).Opens) from trivial))
+    refine ⟨Proj.basicOpen 𝒜 (MvPolynomial.X k), hk, ?_⟩
+    apply (cancel_epi
+      (Proj.basicOpenIsoSpec 𝒜 _ (MvPolynomial.isHomogeneous_X A k) Nat.one_pos).inv).mp
+    simpa only [← Category.assoc, Proj.basicOpenIsoSpec_inv_ι] using
+      (hq' k).trans (hq k).symm
 
 end AlgebraicGeometry
