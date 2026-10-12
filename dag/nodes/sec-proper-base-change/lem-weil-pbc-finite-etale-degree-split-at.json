@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-etale-degree-split-at",
+ "kind": "statement",
+ "title": "Degree-counted local splitting at a point of an étale-site object",
+ "statement": "Let $f:Y\\to X$ be an étale morphism of schemes [def-weil-pbc-scheme-conventions, def-weil-etale-morphism] finite locally free of degree $d\\in\\mathbf N$ [def-pc-finite-locally-free]. For every object $W\\to X$ of the small étale site [def-weil-pbc-etale-site] and $w\\in W$, there exist another site object $V$, a site morphism $a:V\\to W$, a point $v\\in V$ with $a(v)=w$, schemes $D_j$ indexed by $j\\in\\operatorname{Fin}(d)$, and maps $i_j:D_j\\to Y\\times_X V$ [def-pc-fibre-product] forming a coproduct cofan. Each $i_j$ is an open and closed immersion [def-weil-open-immersion, def-weil-closed-immersion], and $i_j$ followed by the projection to $V$ is an isomorphism. The empty index set is allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04HN (lemma-finite-etale-etale-local) in etale.tex; geometric-degree count in etale-cohomology.tex, Tag 03SH (section-trace-method) after Definition 03SE"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegreeTrace",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "trace splitting step",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-degree-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Apply finite_etale_etale_local_split to Y×_X W→W at w. Obtain an étale neighbourhood U→W with a point above w and a finite clopen coproduct of pieces projecting isomorphically to U.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an algebraic closure of the residue field at the selected point of U. Base-change fibre-degree invariance and fiberDegree_eq_finrankΓ identify the geometric fibre dimension with d; exists_overIso_sigma_of_isSepClosed splits this fibre into exactly d points. Pull back the given coproduct to this same point; each component is a copy of the field spectrum, which has exactly one point. Hence its index set has cardinality d. The base-changed coproduct has underlying space the disjoint union of the component spaces. Since each component map to Spec Ω is an isomorphism, the projection of this disjoint union to its index set is a bijection. Comparing with the geometric fibre decomposition yields equality of the two finite cardinalities. No base nonemptiness is assumed globally: the distinguished point alone supplies the geometric point.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-galois-geometric-fibre",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "lem-weil-pbc-scheme-coproduct-copies"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex the finite set by Fin d, with the universe lift required by Lean. Compose U→W with W→X to obtain V. Pullback pasting transports the coproduct cofan to Y×_X V and preserves the component isomorphisms; the selected point maps to w.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "lem-galois-geometric-fibre",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-copies"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04HN (lemma-finite-etale-etale-local) in etale.tex; geometric-degree count in etale-cohomology.tex, Tag 03SH (section-trace-method) after Definition 03SE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale local splitting degree and trace sum",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale local splitting prescribed fibre degree",
+   "results": "8 hits including Algebra.Etale.iff_exists_algEquiv_prod and algebraic etale descent; no prescribed-degree scheme local splitting or sheaf trace formula",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberDegree.*split|trace.*split",
+   "results": "12 Mathlib hits, all ring or linear algebra trace/splitting or tactic trace. Lean-root rg found finite_etale_etale_local_split but no prescribed-count splitting or split trace component",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleDegreeSplitAt",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleDegreeSplitAt.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_finiteEtale_degree_split_at",
+  "statement": "theorem exists_finiteEtale_degree_split_at\n    {X Y : Scheme.{u}} (f : Y ⟶ X) [Etale f]\n    (d : ℕ) [f.IsFiniteLocallyFreeOfDegree d]\n    (W : X.Etale) (w : W.left) :\n    ∃ (V : X.Etale) (a : V ⟶ W) (v : V.left),\n      a.left v = w ∧\n      ∃ (D : ULift.{u} (Fin d) → Scheme.{u}) (i : ∀ j, D j ⟶ pullback f V.hom),\n        Nonempty (IsColimit (Cofan.mk (pullback f V.hom) i)) ∧\n        (∀ j, IsOpenImmersion (i j) ∧ IsClosedImmersion (i j)) ∧\n        (∀ j, IsIso (i j ≫ pullback.snd f V.hom))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085345-L-41958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085345-L-41958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
