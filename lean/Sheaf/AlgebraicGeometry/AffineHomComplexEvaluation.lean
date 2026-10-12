@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Sheaf.AlgebraicGeometry.AffineHomComplexEvaluationD
+import Sheaf.Algebra.Homology.HomComplexUnitIso
 
 /-! # Termwise affine Hom evaluation
 
@@ -89,6 +91,11 @@ theorem affine_hom_complex_evaluation
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
               (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)).app I ≫
             e.hom.app I =
-              ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I) := by sorry
+              ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I) := by
+  classical
+  obtain ⟨e⟩ := CategoryTheory.homComplex_unit_iso
+    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+  refine ⟨e, ?_⟩
+  exact affine_hom_complex_d f H iH adj₀ h_eval e
 
 end AlgebraicGeometry

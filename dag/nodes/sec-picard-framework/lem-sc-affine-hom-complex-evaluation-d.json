@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-affine-hom-complex-evaluation-d",
+ "kind": "statement",
+ "title": "Affine direct-image Hom-complex comparison and counit compatibility",
+ "statement": "With the notation and hypotheses of lem-sc-affine-hom-complex-evaluation, for every complex I and every chosen natural isomorphism e: Hom-complex(O_Y[0],-) ≅ 𝟭, there is a chain isomorphism d:T(H(I)) ≅ Hom-complex(f_*O_X[0],I) whose composite with precomposition by O_Y → f_*O_X and e_I is the termwise adjunction counit.",
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "termwise affine Hom evaluation, Tags 0BUZ, 0BV0, 0AX3"
+ },
+ "proof": [
+  {
+   "text": "Identify the restriction of the direct-image algebra unit with f_*O_X, project the Hom-complex product to source degree zero, and define d degreewise by the resulting internal-Hom isomorphisms.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed sectionwise counit evaluation gives the required composite equality; extensionality on opens, sections, and chain maps finishes.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "termwise affine Hom evaluation, Tags 0BUZ, 0BV0, 0AX3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homComplex unit projection direct-image counit evaluation",
+   "date": "2026-10-13",
+   "results": "No existing theorem combines the affine direct-image comparison with counit compatibility.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "homComplex direct image counit evaluation",
+   "date": "2026-10-13",
+   "results": "No exact match for the combined theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine Hom complex counit evaluation",
+   "date": "2026-10-13",
+   "results": "No exact match for the combined theorem.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineHomComplexEvaluation",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-hom-complex-evaluation",
+   "place": "strict inner conclusion of the target"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineHomComplexEvaluationD",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineHomComplexEvaluationD.lean",
+  "declaration": "AlgebraicGeometry.affine_hom_complex_d",
+  "statement": "theorem affine_hom_complex_d {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) [H.Additive] (iH : H ⋙ SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ≅ (SheafOfModules.homFunctor Y.sheaf).obj (op ((SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj (SheafOfModules.unit (moduleRings (directImageAlgebraSpace f)))))) (adj₀ : SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ⊣ H) (h_eval : ∀ (F : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (U : Y.Opens) (φ : (H.obj F).val.obj (op U)), ((adj₀.counit.app F).val.app (op U)).hom φ = ((((iH.hom.app F).val.app (op U)).hom φ).app (op (Over.mk (𝟙 U)))).hom (1 : (moduleRings (directImageAlgebraSpace f)).obj.obj (op U))) (e : (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _) : ∀ I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ, ∃ d : (((SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).mapHomologicalComplex (.up ℤ)).obj ((H.mapHomologicalComplex (.up ℤ)).obj I)) ≅ homComplex (R := Y.toRingedSpace.sheaf) ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))) I, d.hom ≫ ((homComplexFunctor (R := Y.toRingedSpace.sheaf)).map (((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)).app I ≫ e.hom.app I = ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173919-L-3310653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173919-L-3310653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
