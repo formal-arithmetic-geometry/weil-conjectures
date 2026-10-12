@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-sheaf-ring-objects-bijective",
+ "kind": "statement",
+ "title": "Sectionwise ring-object functors are bijective on objects",
+ "statement": "Let $\\mathcal C$ be a category with a Grothendieck topology $J$. Work in any universe of sets at least as large as the object and morphism universes of $\\mathcal C$. Let $F$ be a functor from sheaves of commutative rings to internal commutative ring objects of sheaves of sets. Suppose $h_F$ identifies the composite of $F$ with the internal-object forgetful functor with the usual underlying-set sheaf functor, as an equality of functors. Suppose that on every object $A$ and every section set, the transport given by $h_F$ sends each of the five internal operations (addition, zero, negation, multiplication, one) to the corresponding operation on $A$. Then the function on objects of $F$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR (section-sheaves-algebraic-structures), proof of Proposition 00YV (proposition-functoriality-algebraic-structures-topoi), rings as sextuples"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For an internal ring object R, give R(U) addition and multiplication by evaluating the binary operation maps, negation by evaluating the unary map, and zero and one by evaluating the two constant maps on the unique element of the singleton section set. Evaluate every internal diagram: these are exactly the commutative ring axioms. Naturality of each operation makes restrictions ring homomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resulting presheaf A of commutative rings has underlying set presheaf R. Apply the underlying-set sheaf criterion to make A a ring sheaf.",
+   "uses": [
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For surjectivity, hF identifies the underlying sheaves of F(A) and R. The assumed operation formulas identify all five structure maps after that equality. Equality of their components gives equality of maps; ring diagram witnesses are propositions. Thus F(A)=R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For injectivity, transport an equality F(A)=F(B) through hF to identify their underlying set presheaves. The formulas identify the five operations of the ring structures on every section. All remaining ring structure data (natural and integer scalar multiplication, and powers) are determined by these operations and their recursion laws. Hence the bundled commutative rings agree. Restrictions agree because their underlying functions agree; sheaf witnesses agree by proof irrelevance. Therefore A=B.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-12",
+  "note": "Object-reconstruction portion of the sectionwise sextuple argument; does not construct functors or prove morphism fullness or strict inverse identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "commutative ring structures on sections of internal commutative ring object sheaf bijective objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal commutative ring object evaluated on sections recovers a sheaf of rings bijection on objects",
+   "results": "8 hits: AlgebraicGeometry.structurePresheafCompForget, AlgebraicGeometry.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.LocallyRingedSpace.Γ, AlgebraicGeometry.LocallyRingedSpace.Γ_def, SheafOfModules.unitHomEquiv, SheafOfModules.unit_val, SheafOfModules.unit, AlgebraicGeometry.LocallyRingedSpace.Γ_obj_op",
+   "date": "2026-10-12",
+   "verdict": "No sheaf ring-object reconstruction match; Cartesian/Ring only constructs Yoneda ring presheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsIso",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No sheaf ring-object reconstruction match; Cartesian/Ring only constructs Yoneda ring presheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "CommRingObj|sheavesAlgebraicStructures|yonedaCommRing",
+   "results": "11 hits: Mathlib/Algebra/Category/Ring/Limits.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean",
+   "date": "2026-10-12",
+   "verdict": "No sheaf ring-object reconstruction match; Cartesian/Ring only constructs Yoneda ring presheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingCore",
+  "group": "J2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "its sheaf-level inverse-image prerequisites: sectionwise ring reconstruction in the sextuple description used for algebraic inverse images",
+   "via": [
+    "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+    "lem-weil-pbc-sheaf-algebraic-structures-ring-component",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafRingObjectsBijective",
+  "file": "lean/Sheaf/CategoryTheory/SheafRingObjectsBijective.lean",
+  "declaration": "CategoryTheory.sheafRingObjects_bijective",
+  "statement": "theorem sheafRingObjects_bijective\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (F : Sheaf J CommRingCat.{max u v w} ⥤\n      CommRingObjCat (Sheaf J (Type (max u v w))))\n    (hF : F ⋙ CommRingObjCat.forget _ =\n      sheafCompose J (forget CommRingCat.{max u v w}))\n    (hops : ∀ (A : Sheaf J CommRingCat.{max u v w}) (U : Cᵒᵖ),\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddMonObj.add (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) +\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddMonObj.zero (X := (F.obj A).X)).hom.app U t) =\n            (0 : A.obj.obj U)) ∧\n        (∀ a : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddGrpObj.neg (X := (F.obj A).X)).hom.app U a) =\n            -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)) ∧\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) *\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) =\n            (1 : A.obj.obj U))) :\n    Function.Bijective F.obj",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085253-L-20505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085253-L-20505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
