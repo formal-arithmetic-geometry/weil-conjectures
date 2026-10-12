@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-affine-generic-finite-second",
+ "kind": "statement",
+ "title": "Finite generic sheaves: reduction of second cohomology to constant sheaves",
+ "statement": "Let $k$ be algebraically closed, $C/k$ a smooth integral affine connected curve, $K=k(C)$, and $\\eta:\\operatorname{Spec}K\\to C$ its generic point. Assume (a) for every finite field extension $L/K$, its normalization $h:C_L\\to C$ is finite, $C_L$ is smooth affine connected over $k$, and the canonical map $\\operatorname{Spec}L\\to C_L$ identifies $L$ with $k(C_L)$; and (b) for every smooth affine connected curve $D/k$ and every prime $\\ell$, $H^2(D,\\mathbf Z/\\ell)=0$. If $M$ is a torsion abelian etale sheaf on $\\operatorname{Spec}K$ whose stalk at $\\operatorname{Spec}\\overline K$ is finite, then $H^2(C,\\eta_*M)=0$. The hypotheses (a) and (b) are inputs, so this lemma concerns only the finite-module trace and filtration argument.",
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-fin-normalization-extension",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "Proof, paragraphs 1--3: finite primary reduction, trace retraction, normalization and filtration"
+ },
+ "proof": [
+  {
+   "text": "Use [lem-exc-abelian-sheaves-gmodules] to identify $M$ with its finite continuous Galois module and decompose it into its finitely many primary summands. For an $\\ell$-primary summand, [lem-sc-sylow-module-filtration] supplies an open subgroup of index prime to $\\ell$. By [lem-exc-etale-open-subgroup-fixed-field], it corresponds to a finite separable field extension. Finite etale restriction and trace have composite the degree by [lem-weil-pbc-finite-etale-trace-degree]. Multiplication by this degree is invertible on the primary summand; rescale the trace to exhibit a retraction.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-sc-sylow-module-filtration",
+    "lem-exc-etale-open-subgroup-fixed-field",
+    "def-weil-pbc-finite-etale-trace",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hypothesis (a) to this extension. The generic-point identification gives $\\eta_*a_*M'=h_*b_*M'$, hence the original generic pushforward is a retract of this finite direct image. The sheaf $b_*M'$ is killed by the exponent of the finite group and is therefore torsion. Apply [lem-fd-finite-pushforward-cohomology] and exactness [lemma-weil-pbc-finite-direct-image-exact] to reduce to second cohomology of $b_*M'$ on the normalization.",
+   "uses": [
+    "lem-fd-finite-pushforward-cohomology",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a short exact filtration step $0\\to M_1\\to M_2\\to M_3\\to0$, put $G_i=b_*M_i$ and $I=\\operatorname{im}(G_2\\to G_3)$. Left exactness gives $0\\to G_1\\to G_2\\to I\\to0$. The generic stalk comparison identifies $b^{-1}b_*M_i$ with $M_i$; exactness of inverse image shows that the torsion quotient $G_3/I$ has zero generic restriction. It is acyclic by [lem-sc-zero-generic-acyclic]. The two long exact sequences propagate vanishing from $G_1,G_3$ to $G_2$. Normality identifies $b_*\\mathbf Z/\\ell$ with the constant sheaf by [lem-fin-normal-generic-constant]; hypothesis (b) gives its second-cohomology vanishing. Induct through the finite filtration, then pass to the retract and sum the primary parts.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact",
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sc-zero-generic-acyclic",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-fin-normal-generic-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-sc-sylow-module-filtration",
+  "lem-exc-etale-open-subgroup-fixed-field",
+  "def-weil-pbc-finite-etale-trace",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-fd-finite-pushforward-cohomology",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sc-zero-generic-acyclic",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-fin-normal-generic-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "Proof, paragraphs 1--3: finite primary reduction, trace retraction, normalization and filtration",
+  "note": "Regrouping of the cited proof into a separately provable Lean step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite torsion etale sheaf on the generic point of a smooth affine curve over an algebraically closed field has vanishing second cohomology after direct image",
+   "date": "2026-10-12",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite stalk torsion sheaf generic point smooth affine curve second cohomology vanishes",
+   "date": "2026-10-12",
+   "results": "8 hits: Algebra.smoothLocus_eq_compl_support_inter, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.smoothLocus, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finite, Subsingleton",
+   "date": "2026-10-12",
+   "results": "9 hits: Finite.of_subsingleton, Finite.card_le_one_iff_subsingleton, Finite.induction_subsingleton_or_nontrivial, Module.finite_finsupp_self_iff, Module.finite_finsupp_iff, subsingleton_of_disjoint_isClosed_iUnion_eq_univ, exteriorPower.subsingleton_of_span_eq_top_of_card_lt, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*colimit|finite.*stalk|subsingleton.*lowerStar",
+   "date": "2026-10-12",
+   "results": "22 hits: Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Gluing.lean",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Affine",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "Proof, paragraphs 1--3: finite primary reduction, trace retraction, normalization and filtration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.GenericFiniteSecond",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/GenericFiniteSecond.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_finite_stalk",
+  "statement": "theorem subsingleton_sheafH_two_lowerStar_of_finite_stalk\n    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsIntegral C]\n    (hmodel : ∀ (L : Type u) [Field L] [Algebra C.functionField L]\n      [FiniteDimensional C.functionField L],\n      IsFinite (C.fromNormalizationIn L) ∧ IsAffine (C.normalizationIn L) ∧\n        IsConnectedCurve (C.fromNormalizationIn L ≫ f) ∧\n        Smooth (C.fromNormalizationIn L ≫ f) ∧\n        ∃ e : Spec (.of L) ≅ Spec (C.normalizationIn L).functionField,\n          e.hom ≫ (C.normalizationIn L).fromSpecFunctionField =\n            (C.fromSpecOfAlgebraFunctionField L).toNormalization)\n    (hconstant : ∀ {D : Scheme.{u}} (g : D ⟶ Spec (.of k)) [IsConnectedCurve g]\n      [Smooth g] [IsAffine D] (ℓ : ℕ) [Fact ℓ.Prime],\n      Subsingleton (Sheaf.H (D.constantZMod ℓ) 2))\n    (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hM : M.IsTorsion)\n    (hfinite : Finite (((Scheme.pointSmallEtale\n      (Spec.map (CommRingCat.ofHom\n        (algebraMap C.functionField (AlgebraicClosure C.functionField))))).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj M)) :\n    Subsingleton\n      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f6d8c",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f6d8c",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035480",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, report, and Lean modules match the stated proofs and compile cleanly with lcompile.py --all; no target/signature violations or mechanical findings."
+ }
+}

@@ -6063,3 +6063,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/G2/Sheaf.RingTheory.EtaleNormalRing (stage 3; reviewer PASS; first push; landing 20261012T044743-L-2035064 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/G2/WeilConjectures.AlgebraicGeometry.EffectiveDescent (stage 3; reviewer PASS; first push; landing 20261012T044744-L-2035220 (interface); batch 20261012T044734; modules 5; new nodes 4)
 - 04:47 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AssociatedModulePullback (stage 3; reviewer PASS; first push; landing 20261012T044744-L-2035329 (proof); batch 20261012T044734; modules 1; new nodes 0)
+- 04:47 L: merged deliver/H1/WeilConjectures.AlgebraicGeometry.Curve.Affine (stage 3; reviewer PASS; after a return; landing 20261012T044744-L-2035480 (interface); batch 20261012T044734; modules 3; new nodes 2; change records: coord/changes/Affine-proof-imports.md)

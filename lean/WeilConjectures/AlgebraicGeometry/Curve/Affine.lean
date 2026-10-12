@@ -5,32 +5,23 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
-public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
-public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
-public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.FieldDiscreteModules
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
-import Sheaf.AlgebraicGeometry.NormalGenericConstant
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.RepresentationTheory.SylowModuleFiltration
-import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Finite.GlobalSections
+import Sheaf.AlgebraicGeometry.Curve.GenericFiniteSecond
+import Sheaf.AlgebraicGeometry.Curve.GenericTorsionColimit
 
 /-!
 # Smooth affine curves over an algebraically closed field
@@ -265,8 +256,79 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
       IsConnectedCurve c.g ∧ Smooth c.g ∧
         (∃ e : (picardFunctorDegree c.g 0).obj.RepresentableBy J, IsPicardZeroMul c.g e) ∧
         Λ.FG ∧
-        Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ Λ) :=
-  sorry
+        Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ Λ) := by
+  classical
+  obtain ⟨c, hc, hs, hfin, hcl⟩ := exists_smooth_properCompactification f
+  let := hc
+  let := hs
+  have := c.isProper
+  let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+  have := IsConnectedCurve.connectedSpace' c.g
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : IsRegular c.Z := IsRegular.of_smooth c.g
+  have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z
+  have : SmoothOfRelativeDimension 1 c.g :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := c.g))
+  have : GeometricallyConnected c.g := GeometricallyConnected.of_isSepClosed (k := k) c.Z
+  have : GeometricallyIrreducible c.g :=
+    GeometricallyIrreducible.of_smooth_of_geometricallyConnected c.g
+  have : GeometricallyIntegral c.g :=
+    GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible c.g
+  have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) := by
+    change SmoothOfRelativeDimension 1 c.g
+    infer_instance
+  have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper
+  have : GeometricallyIntegral (c.Z ↘ Spec (.of k)) :=
+    ‹GeometricallyIntegral c.g›
+  obtain ⟨J, hJ, eJ, hproper, hdim, hint, hmul, ⟨e⟩⟩ :=
+    exists_jacobian (k := k) (X := c.Z)
+  change (picardFunctorDegree c.g 0).obj.RepresentableBy J at eJ
+  change IsPicardZeroMul c.g eJ at hmul
+  let := hJ
+  let := hproper
+  let := hdim
+  let := hint
+  have : IsAbelianVariety J :=
+    { toIsProper := hproper
+      toSmooth := SmoothOfRelativeDimension.smooth (Scheme.arithmeticGenus k c.Z) J.hom
+      toConnectedSpace := GeometricallyConnected.connectedSpace_of_subsingleton (f := J.hom) }
+  have : IsJacobian c.g J :=
+    { dim_eq := by
+        have h := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq J.hom
+          (Scheme.arithmeticGenus k c.Z)).mp hdim
+        rw [IsAbelianVariety.topologicalKrullDim_eq] at h
+        have hd : IsAbelianVariety.dim J = Scheme.arithmeticGenus k c.Z := by
+          exact_mod_cast h
+        exact hd.trans (Scheme.genus_eq_arithmeticGenus (k := k) (X := c.Z)).symm
+      represents := ⟨((Functor.RepresentableBy.equivUliftYonedaIso _ J) eJ).symm,
+        by
+          rw [Iso.symm_symm_eq, Equiv.symm_apply_apply]
+          exact hmul⟩ }
+  let G := picardZero k c.Z
+  have hG : (G : Set c.Z.Pic) = c.g.picZero := by
+    exact Scheme.coe_ker_picDegreeHom (k := k) (C := c.Z)
+  obtain ⟨⟨x, hx⟩, hquot⟩ := pic_affine_quotient f c hfin hcl J G hG e
+  let P₀ : closedPoints c.Z := ⟨x, hcl x hx⟩
+  let d (P : closedPoints c.Z) :=
+    @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ _ P /
+      @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ _ P₀
+  let a (P : closedPoints c.Z) :=
+    Additive.ofMul (e (Function.invFun (Subtype.val : G → c.Z.Pic) (d P)))
+  let S : Set (Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)) :=
+    {a | ∃ (P : closedPoints c.Z) (L : G), P.val ∉ Set.range c.i.base ∧
+      L.val = d P ∧ a = Additive.ofMul (e L)}
+  have hS : S.Finite := by
+    have hB : {P : closedPoints c.Z | P.val ∉ Set.range c.i.base}.Finite :=
+      hfin.preimage Subtype.val_injective.injOn
+    refine (hB.image a).subset ?_
+    rintro y ⟨P, L, hP, hL, rfl⟩
+    refine ⟨P, hP, ?_⟩
+    dsimp [a]
+    rw [← hL, Function.leftInverse_invFun Subtype.val_injective]
+  refine ⟨c, J, inferInstance, inferInstance, AddSubgroup.closure S, hc, hs,
+    ⟨eJ, hmul⟩, (AddSubgroup.fg_iff _).2 ⟨S, rfl, hS⟩, ?_⟩
+  exact hquot P₀ hx
 
 /-- **`Pic` of an affine curve is divisible with finite torsion.** Let `C` be a smooth affine
 connected curve over an algebraically closed field `k` and `n` prime to `char k`. Then `Pic(C)`
@@ -363,7 +425,25 @@ theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedC
     (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
     (hM : M.IsTorsion) :
     Subsingleton
-      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2) :=
-  sorry
+      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2) := by
+  obtain ⟨I, hI, hfiltered, F, ιF, htor, hfin, -, hcolim⟩ :=
+    Scheme.exists_generic_torsion_finite_stalk_cohomology_colimit C M hM
+  let := hI
+  let := hfiltered
+  obtain ⟨hc⟩ := hcolim 2
+  apply AddCommGrpCat.subsingleton_of_isZero (G :=
+    (Sheaf.functorH C.smallEtaleTopology 2).obj
+      ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M))
+  apply hc.isZero_pt
+  apply Functor.isZero
+  intro i
+  have : Subsingleton (Sheaf.H
+      ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj (F.obj i)) 2) :=
+    subsingleton_sheafH_two_lowerStar_of_finite_stalk f
+    (fun L _ _ _ ↦ normalizationIn f L)
+    (fun g _ _ _ ℓ _ ↦ subsingleton_sheafH_two_constantZMod g ℓ) (F.obj i) (htor i) (hfin i)
+  change IsZero (AddCommGrpCat.of (Sheaf.H
+    ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj (F.obj i)) 2))
+  exact AddCommGrpCat.isZero_of_subsingleton _
 
 end AlgebraicGeometry.IsConnectedCurve

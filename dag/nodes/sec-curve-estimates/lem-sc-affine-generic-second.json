@@ -20,66 +20,37 @@
  ],
  "proof": [
   {
-   "text": "First let $M$ be finite $\\ell$-primary. Use\n[lem-exc-field-discrete-modules], [lem-sc-sylow-module-filtration]\nto choose a finite separable extension $K'/K$, $K=k(C)$,\nof degree $d$ prime to $\\ell$, such that $M'=M|_{K'}$\nhas a filtration by trivial $\\mathbf F_\\ell$-modules.\nWrite $a:\\eta'=\\operatorname{Spec}K'\\to\\eta$.\nThe finite etale trace on the field is the sum over the $d$\ngeometric points of its fibre. The unit and this sum give\n\n$$\nM\\longrightarrow a_*a^*M\\longrightarrow M\n$$\n\nwith composite $d\\,\\mathrm{id}$. Multiplication by $d$ is\ninvertible, so this is a splitting after rescaling the sum.\nNo trace for a ramified morphism is being asserted.",
+   "text": "Apply [lem-sc-generic-torsion-finite-stalk-colimit] to obtain a filtered presentation of $M$ by torsion finite-stalk sheaves and the corresponding colimit cocone in second cohomology after generic direct image.",
    "uses": [
-    "lem-exc-field-discrete-modules",
-    "lem-sc-sylow-module-filtration",
-    "def-weil-pbc-finite-etale-trace",
-    "lem-weil-pbc-finite-etale-trace-degree"
+    "lem-sc-generic-torsion-finite-stalk-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Use [lem-sc-finite-extension-affine-model] to obtain\n$h:C'\\to C$ and the generic point map $b:\\eta'\\to C'$.\nThe equality $h b=\\eta a$ gives\n$\\eta_*a_*M'=h_*b_*M'$. Applying $\\eta_*$ to the splitting\nmakes $\\eta_*M$ a direct summand of this sheaf.\nFinite direct image is exact by\n[lemma-weil-pbc-finite-direct-image-exact], and since $b_*M'$ is\nkilled by the exponent of $M'$, hence torsion,\n[lem-fd-finite-pushforward-cohomology] gives\n$H^2(C,h_*b_*M')\\cong H^2(C',b_*M')$; a direct summand of a zero\ngroup is zero, so it remains to prove $H^2(C',b_*M')=0$.",
+   "text": "For every diagram object, apply [lem-sc-affine-generic-finite-second]. Supply its finite-extension-model input using [lem-sc-finite-extension-affine-model] and its constant-sheaf input using [lem-sc-affine-constant-second]. Thus every object of the cohomology diagram is zero.",
    "uses": [
+    "lem-sc-affine-generic-finite-second",
     "lem-sc-finite-extension-affine-model",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-fd-finite-pushforward-cohomology"
+    "lem-sc-affine-constant-second"
    ],
    "elementary": false
   },
   {
-   "text": "For a filtration step $0\\to M_1\\to M_2\\to M_3\\to0$, put\n$G_i=b_*M_i$ and $I=\\operatorname{im}(G_2\\to G_3)$.\nAlthough $b_*$ need not be exact, [lem-weil-pbc-direct-image-left-exact]\ngives $0\\to G_1\\to G_2\\to I\\to0$. The sheaf $G_3/I$ has zero\ngeneric restriction: for a geometric point $\\bar\\xi$ over the generic\npoint of $C'$ the strict henselization is $\\operatorname{Spec}K'^{\\rm sep}$,\nso [lem-weil-pbc-unrestricted-strict-henselization-stalk] (for the affine,\nhence quasi-compact quasi-separated, morphism $b$ and $q=0$) identifies\n$(b_*M_i)_{\\bar\\xi}$ with the stalk $(M_i)_{\\bar\\xi}$, i.e. the counit\n$b^{-1}b_*M_i\\to M_i$ is an isomorphism; as $b^{-1}$ is exact\n[prop-weil-pbc-inverse-image-modules-exact], $b^{-1}(G_3/I)$ is the cokernel\nof the surjection $M_2\\to M_3$, hence zero. It is torsion, being killed by\nthe exponent of $M_3$. By [lem-sc-zero-generic-acyclic],\n$H^2(C',I)\\simeq H^2(C',G_3)$. Applying the long exact\nsequence of [lem-weil-pbc-derived-functor-long-exact] to the two\nshort exact sequences shows that vanishing for $G_1$ and $G_3$\nimplies vanishing for $G_2$. For a trivial quotient,\n[lem-fin-normal-generic-constant] gives $b_*\\mathbf F_\\ell=\\mathbf F_\\ell$\n(the smooth curve $C'$ is Noetherian, normal and integral).\nThe base case is [lem-sc-affine-constant-second]. Induction through\nthe filtration proves the finite case.",
-   "uses": [
-    "lem-sc-zero-generic-acyclic",
-    "lem-sc-affine-constant-second",
-    "lem-weil-pbc-direct-image-left-exact",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-fin-normal-generic-constant",
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A general torsion $G_K$-module is the directed union of finite\nstable submodules: each orbit is finite by continuity, and a\nfinite set of torsion generators generates a finite group.\nSeparate the finitely many primary parts of each finite module.\nOn a quasi-compact etale test curve the generic fibre is a finite\ndisjoint union of spectra of finite separable extensions, so\nsections of $\\eta_*$ are finite products of invariant groups;\ninvariants commute with directed unions because membership is\nchecked elementwise. Thus $\\eta_*$ commutes with this directed\nunion. Finally [lem-weil-pbc-cohomology-filtered-colimit] proves\nthe assertion for the union.",
-   "uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit"
-   ],
+   "text": "A colimit of zero objects is zero. In Lean, apply IsColimit.isZero_pt to the mapped cocone and Functor.isZero to its objectwise vanishing, then AddCommGrpCat.subsingleton_of_isZero.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-exc-field-discrete-modules",
-  "lem-sc-sylow-module-filtration",
-  "def-weil-pbc-finite-etale-trace",
-  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-sc-generic-torsion-finite-stalk-colimit",
+  "lem-sc-affine-generic-finite-second",
   "lem-sc-finite-extension-affine-model",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-sc-zero-generic-acyclic",
-  "lem-sc-affine-constant-second",
-  "lem-weil-pbc-direct-image-left-exact",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-fin-normal-generic-constant",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-fd-finite-pushforward-cohomology",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-sc-affine-constant-second"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
-  "place": "## Proof"
+  "place": "Proof, paragraphs 1--4; H1: finite-stalk and colimit steps are separate obligations, combined by the proved zero-colimit argument."
  },
  "mathlib_searches": [
   {
@@ -239,5 +210,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f6d8c",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035480",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, change record, report, and Lean modules match the stated proofs and compile cleanly with lcompile.py --all; no target/signature violations or mechanical findings."
  }
 }
