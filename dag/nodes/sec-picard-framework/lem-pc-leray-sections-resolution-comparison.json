@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "The direct-image definition identifies sections over Y with sections on the inverse image of the whole space. Restriction along Opens.map_top and its inverse give inverse additive maps, natural in the module sheaf. Apply these maps in every degree of a complex; presheaf restriction commutes with the differentials and with cochain maps.",
+   "text": "Construct sectionsIso by applying each underlying abelian presheaf to eqToIso of congrArg op (Opens.map_top f.base).symm. Presheaf morphism naturality proves that it is natural in the module sheaf. Apply NatIso.mapHomologicalComplex to obtain the termwise comparison.",
    "uses": [
     "def-pc-ringed-spaces-derived-direct-image",
     "pqf-def-cohomology"
@@ -25,7 +25,7 @@
    "elementary": true
   },
   {
-   "text": "Apply homology to these inverse termwise maps after forgetting scalars. Conjugating with the canonical isoRightDerivedObj isomorphisms for chosen injective resolutions gives e_q. For a coefficient morphism, use a resolution comparison extending it: naturality of restriction and of isoRightDerivedObj gives naturality of e_q. A comparison extending the identity gives the same formula for every supplied resolution I.",
+   "text": "Use ShortComplex.mapHomologyIso for exact forgetting of scalars to construct homologyForgetIso. Compose with homology of the termwise section comparison to construct sectionsHomologyIso. For any injective resolution, conjugate this natural isomorphism by isoRightDerivedObj to obtain resolutionIso. The hom and inv naturality lemmas for isoRightDerivedObj prove resolutionIso_naturality along any cochain comparison extending a coefficient map. NatIso.ofComponents on the chosen injective resolutions gives derivedSectionsIso. A cochain comparison extending the identity proves derivedSectionsIso_app for every supplied injective resolution.",
    "uses": [
     "def-sp-injective-resolutions",
     "lem-sp-derived-well-defined",
@@ -34,8 +34,17 @@
    "elementary": false
   },
   {
-   "text": "Global sections preserves the kernel of the degree-q differential. Lift the transported global cycle to z in sections of the cycle sheaf. The inclusion equation characterizes z uniquely. Given any c satisfying its inclusion equation, c(z) is the transported global cycle, by monicity of the cycle inclusion. The homology map induced by the termwise section identification takes the original cycle class to the class represented by c(z). Conjugating with isoRightDerivedObj proves the displayed formula. The cycle quotient is epic, so the formula determines e on every cohomology class; degree zero, zero complexes, and empty schemes obey the same kernel argument.",
+   "text": "The canonical homology and cycle isomorphisms for exact forgetting of scalars respect homologyπ and iCycles, by the mapped left-homology data. Cancel the monic cycle inclusion to identify the image of a cycle under the termwise comparison with any cycle having the displayed restricted degree term. homologyπ_naturality gives sectionsHomologyIso_cycle. Conjugation by the resolution isomorphisms gives derivedSectionsIso_cycle.",
    "uses": [
+    "pqf-def-cohomology",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf evaluation functor G preserves finite limits. KernelFork.mapIsLimit applied to the direct-image complex cycle kernel identifies its sections with cycles of G applied termwise. Naturality of the upstairs differential with restriction shows the transported degree term has zero differential; construct its cycle by HomologicalComplex.cyclesMk. The preserved-kernel identification sends that cycle to z, and its inclusion identity gives the required equation. For any c satisfying c followed by iCycles = G(iCycles), evaluate this morphism equality at z. Combining with the inclusion equation for z supplies the hypothesis of derivedSectionsIso_cycle at c(z), which proves the required formula. Degree zero and empty schemes require no additional assumptions.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
     "pqf-def-cohomology",
     "lem-sp-derived-well-defined"
    ],
@@ -51,7 +60,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "lemma-before-Leray and remark-elucidate-lemma, expansion of the termwise identity and kernel lift"
+  "place": "lemma-before-Leray and remark-elucidate-lemma; K1 formal proof using exact forgetful homology comparison and preservation of the cycle kernel"
  },
  "mathlib_searches": [
   {
@@ -142,11 +151,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-6ff9f",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T095902-L-316306",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T113947-L-821069",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered LeraySectionsResolutionComparison proof and node match the recorded statement; all modules compile, and the direct importer also compiles against the delivered module."
  }
 }
