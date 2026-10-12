@@ -6,13 +6,10 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 import Sheaf.CategoryTheory.DerivedFunctorShift
 import Sheaf.CategoryTheory.LeftDerivedValueMorphism
-import Sheaf.CategoryTheory.TriangleMorphismCategory
+import Sheaf.CategoryTheory.DerivedFunctorThirdValue
+import Sheaf.CategoryTheory.DerivedFunctorValueTriangle
 
 /-!
 # Left derived functors preserve distinguished triangles
@@ -125,6 +122,34 @@ theorem leftDerived_map_distinguished_of_two_defined
                       lh ≫ (shiftFunctor D (1 : ℤ)).map (uX.app s') ≫
                         (F.commShiftIso (1 : ℤ)).inv.app s'.left) ∧
                 Triangle.mk lf lg lh ∈ distTriang D := by
-  sorry
+  have hshift (X : C) := (isTriangulatedLeftDerivedDefinedAt_shift_iff F S hS X 1).1
+  have hall : F.IsTriangulatedLeftDerivedDefinedAt S hS T.obj₁ ∧
+      F.IsTriangulatedLeftDerivedDefinedAt S hS T.obj₂ ∧
+      F.IsTriangulatedLeftDerivedDefinedAt S hS T.obj₃ := by
+    rcases hdefined with ⟨hX, hY⟩ | ⟨hY, hZ⟩ | ⟨hZ, hX⟩
+    · exact ⟨hX, hY, leftDerived_definedAt_third_of_first_two F S hS T hT hX hY⟩
+    · have hX := (hshift T.obj₁).mpr
+        (leftDerived_definedAt_third_of_first_two F S hS T.rotate
+          (rot_of_distTriang T hT) hY hZ)
+      exact ⟨hX, hY, hZ⟩
+    · have hY := (hshift T.obj₂).mpr
+        (leftDerived_definedAt_third_of_first_two F S hS T.rotate.rotate
+          (rot_of_distTriang T.rotate (rot_of_distTriang T hT)) hZ
+          ((hshift T.obj₁).mp hX))
+      exact ⟨hX, hY, hZ⟩
+  obtain ⟨LX, hX⟩ := hall.1
+  obtain ⟨LY, hY⟩ := hall.2.1
+  obtain ⟨LZ, hZ⟩ := hall.2.2
+  obtain ⟨uX, huX⟩ := hX.2
+  obtain ⟨uY, huY⟩ := hY.2
+  obtain ⟨uZ, huZ⟩ := hZ.2
+  obtain ⟨lf, hf, _⟩ := leftDerived_value_morphism F S hS T.mor₁ LX LY hX hY uX uY huX huY
+  obtain ⟨lg, hg, _⟩ := leftDerived_value_morphism F S hS T.mor₂ LY LZ hY hZ uY uZ huY huZ
+  have hf' := fun s s' f' hf' ↦ (hf s s' f' hf').1
+  have hg' := fun s s' g' hg' ↦ (hg s s' g' hg').1
+  obtain ⟨lh, hh, hdist⟩ := leftDerived_value_triangle_extension F S hS T hT
+    LX LY LZ hX hY hZ uX uY uZ huX huY huZ lf lg hf' hg'
+  exact ⟨LX, LY, LZ, hX, hY, hZ, uX, uY, uZ, huX, huY, huZ, lf, lg, lh, hf', hg', hh,
+    hdist⟩
 
 end CategoryTheory.Functor
