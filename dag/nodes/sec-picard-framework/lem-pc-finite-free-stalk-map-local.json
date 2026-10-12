@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-finite-free-stalk-map-local",
+ "kind": "statement",
+ "title": "Local extension of maps between canonical finite free sheaves",
+ "statement": "Let Y be a scheme [def-pc-scheme], r and s natural numbers, y a point of Y, and F_r and F_s the canonical finite free structure sheaves [def-weil-pbc-free-module] on ULift (Fin r) and ULift (Fin s). Given t: T(F_r) → T(F_s), where T is ordinary module pullback [def-pc-module-pullback] along Y.fromSpecStalk y, there is an open neighbourhood U of y and g: R_U(F_r) → R_U(F_s), where R_U is restriction, such that S_U(g) = E_U(F_r).hom ; t ; E_U(F_s).inv. Here S_U is pullback along U.fromSpecStalkOfMem y and E_U: R_U ⋙ S_U ≅ T is exactly the underlying module natural isomorphism used in [def-pc-stalk-restriction-complex-iso]: restriction-as-pullback followed by pullback composition and pullbackCongr for U.fromSpecStalkOfMem y ≫ U.ι = Y.fromSpecStalk y.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Finite matrix coefficient extension, expanded in lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2; canonical-free part only"
+ },
+ "proof": [
+  {
+   "text": "Identify pullbacks of the two canonical free sheaves with free sheaves on Spec O_{Y,y}. The free universal property and affine global-section identification turn t into a finite matrix of elements of O_{Y,y}. Represent each entry by a section near y and intersect the finitely many opens, keeping y in the intersection. Form the corresponding map on the restrictions. Compatibility of the chosen germs with restriction and the three comparison isomorphisms gives the displayed equality. Empty matrices give the zero map on Y.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-stalk",
+    "def-pc-module-pullback",
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Finite matrix coefficient extension, expanded in lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2; canonical-free part only"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map between finite rank free structure sheaves after pullback to Spec of a stalk extends to a neighborhood of the point",
+   "results": "{'t': '2026-10-12T21:43:04Z', 'tool': 'leanfinder', 'query': 'A map between finite rank free structure sheaves after pullback to Spec of a stalk extends to a neighborhood of the point', 'sub': '', 'ok': True, 'n_hits': 8, 'note': '', 'top': ['AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux', 'AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply', 'AlgebraicGeometry.StructureSheaf.toPushforwardStalk', \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", 'AlgebraicGeometry.localRingHom_comp_stalkIso_apply', 'AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom', 'AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply', 'AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk'], 'digest': 'd9b93bbccfd0154f'}",
+   "date": "2026-10-13",
+   "verdict": "Found free-sheaf and germ ingredients, but no local extension theorem with the stated comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackObjFreeIso\"",
+   "results": "{'t': '2026-10-12T21:44:31Z', 'tool': 'loogle', 'query': '\"pullbackObjFreeIso\"', 'sub': '', 'ok': True, 'n_hits': 5, 'note': '', 'top': ['SheafOfModules.pullbackObjFreeIso', 'SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom', 'SheafOfModules.pullbackObjFreeIso_hom_naturality', 'SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc', 'SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc'], 'digest': 'b83b533dcb8ac233'}",
+   "date": "2026-10-13",
+   "verdict": "Found free-sheaf and germ ingredients, but no local extension theorem with the stated comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|freeHomEquiv|exists_germ_eq",
+   "results": "{'t': '2026-10-12T21:49:33Z', 'tool': 'grep', 'query': 'pullbackObjFreeIso|freeHomEquiv|exists_germ_eq', 'sub': '', 'ok': True, 'n_hits': 25, 'note': '', 'top': ['Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean'], 'digest': '64966b26c6d3b384'}",
+   "date": "2026-10-13",
+   "verdict": "Found free-sheaf and germ ingredients, but no local extension theorem with the stated comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between finite rank free sheaves pulled back to the spectrum of a stalk extend to an open neighborhood",
+   "results": "{'t': '2026-10-12T21:58:41Z', 'tool': 'leansearch', 'query': 'Maps between finite rank free sheaves pulled back to the spectrum of a stalk extend to an open neighborhood', 'sub': '', 'ok': False, 'n_hits': 0, 'note': 'service unavailable: Internal Server Error', 'top': [], 'digest': '4f53cda18c2baa0c'}",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLocal",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-stalk-degreewise-local",
+   "place": "Canonical-free matrix extension, after the zero cases and basis changes",
+   "via": [
+    "lem-pc-finite-free-stalk-degreewise-local"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkMapLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkMapLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_free_stalk_map",
+  "statement": "theorem exists_local_free_stalk_map\n    {Y : Scheme.{u}} (r s : ℕ) (y : Y)\n    (t : (Modules.pullback (Y.fromSpecStalk y)).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))) ⟶\n      (Modules.pullback (Y.fromSpecStalk y)).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s)))) :\n    ∃ (U : Y.Opens), ∃ (hyU : y ∈ U), ∃ (g :\n      (restrictFunctor U.ι).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))) ⟶\n      (restrictFunctor U.ι).obj\n        (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s)))),\n      let E := Functor.isoWhiskerRight (restrictFunctorIsoPullback U.ι)\n          (Modules.pullback (U.fromSpecStalkOfMem y hyU)) ≪≫\n        pullbackComp (U.fromSpecStalkOfMem y hyU) U.ι ≪≫\n        pullbackCongr (U.fromSpecStalkOfMem_ι y hyU)\n      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map g =\n        E.hom.app _ ≫ t ≫ E.inv.app _",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd0b",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T225322-L-1810468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd0b",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T225322-L-1810468",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG metadata, report, and importer match the stage-3 rules; all compile cleanly."
+ }
+}

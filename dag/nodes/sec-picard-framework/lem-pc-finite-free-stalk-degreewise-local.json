@@ -16,26 +16,33 @@
  },
  "proof": [
   {
-   "text": "Proof: Fix a degree n. If either term is zero, restriction and pullback preserve\nzero objects, so the unique zero map represents t n on the whole scheme. Otherwise\nchoose the two finite free isomorphisms in the hypotheses. Pullback preserves free\nsheaves. On the affine scheme Spec O_{Y,y}, morphisms between these finite free\nsheaves are finite matrices over O_{Y,y}, by the free universal property and the\nidentification of global functions on an affine spectrum with its ring. Each entry\nis a germ of a structure-sheaf section near y. Intersect the finitely many entry\nneighbourhoods and restrict these sections. Restrict the chosen free isomorphisms,\nform the section matrix, and conjugate it to obtain g. The comparison is built from\nrestriction-as-pullback and pullback composition; its naturality identifies the\npulled-back matrix with the prescribed germ matrix. This gives the displayed\ncomponent equation. For a rank-zero term the matrix has no entries and the whole\nscheme suffices. Repeat separately for each n; boundedness is unnecessary here.",
+   "text": "Introduce the degree n. In either zero-term case, Functor.map_isZero makes t n zero (IsZero.eq_of_src/eq_of_tgt); choose the zero map on the top open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For two nonzero terms choose the finite free isomorphisms eP and eQ. Apply the canonical-free extension lemma to F.map eP.inv ; t n ; F.map eQ.hom, where F is stalk pullback.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-module-stalk",
-    "def-pc-derived-pullback",
-    "def-pc-stalk-restriction-complex-iso"
+    "lem-pc-finite-free-stalk-map-local"
    ],
    "elementary": false
+  },
+  {
+   "text": "Conjugate the resulting local map by R.map eP.hom and R.map eQ.inv. The component of stalkRestrictionComplexIso is definitionally the module comparison E. Naturality of E.hom and E.inv and the two basis inverse identities prove the required component equation.",
+   "uses": [
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-module-stalk",
-  "def-pc-derived-pullback",
+  "lem-pc-finite-free-stalk-map-local",
   "def-pc-stalk-restriction-complex-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Expansion of lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2, finite coefficient extension before imposing differential equations"
+  "place": "Second-reader reduction: zero terms, canonical finite-free extension, basis conjugation and comparison naturality"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -146,12 +153,12 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "X-dbd0b",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T212209-L-1097756",
+  "landing": "20261012T225322-L-1810468",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG metadata, report, and importer match the stage-3 rules; all compile cleanly."
  },
  "lean_audit": {
   "master": {
