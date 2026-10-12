@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-hom-kinjective-evaluation",
+ "kind": "statement",
+ "title": "Termwise affine Hom evaluation on K-injective targets",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme]. Put $A=f_*\\mathcal O_X$ and $Y_A=(Y,A)$ [def-sc-direct-image-algebra-derived-category], and let $T:\\mathrm{Mod}(A)\\to\\mathrm{Mod}(\\mathcal O_Y)$ be scalar restriction. Assume the derived category $D(\\mathcal O_Y)$ exists [def-pc-derived-category], with localization $Q$ of cochain complexes [def-pc-cochain-complex-modules]. Let $H:\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(A)$ be additive, let $i_H:T\\circ H\\simeq\\mathcal Hom_{\\mathcal O_Y}(T(A),-)$ [def-pur-sheaf-hom], and let $T\\dashv H$ have counit $\\epsilon_0$. Suppose for every module $F$, open $U$ of $Y$, and section $\\phi$ of $H(F)$ on $U$, $\\epsilon_{0,F}(\\phi)=i_H(\\phi)(1)$ on $U$. There is a natural isomorphism $j:R\\mathcal Hom(\\mathcal O_Y[0],-)\\simeq\\mathrm{Id}_{D(\\mathcal O_Y)}$ [def-pur-derived-internal-hom] such that for every K-injective complex $I$, there is an isomorphism $c:Q(T^\\bullet(H^\\bullet(I)))\\simeq R\\mathcal Hom(A[0],QI)$ satisfying $c;R\\mathcal Hom(\\mathcal O_Y\\to A,QI);j_{QI}=Q(\\epsilon_0^\\bullet(I))$. No derived adjunction or derived algebra-valued functor is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-sheaf-hom",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "section-duality-finite, lemma-compute-sheafhom-affine (0BUZ), lemma-sheafhom-affine-adjoint (0BV0), and remark-trace-map-finite (0AX3); termwise evaluation part"
+ },
+ "proof": [
+  {
+   "text": "Internal sheaf Hom from the unit is naturally the identity by evaluation at one. Degreewise evaluation gives an isomorphism from the Hom complex out of the unit in degree zero to its second complex: all other product factors are zero, and the differential is that of the second complex. Apply the derived internal Hom localization comparison and invert the resolution map to descend this natural isomorphism to j on D(Y).",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction of the algebra unit has the same sections and restrictions as f_*O_X, with identity sectionwise identification. Apply iH degreewise to a K-injective I. Hom from a complex concentrated in degree zero has the degreewise Hom sheaves and differential of I. The K-injective computation of derived internal Hom therefore gives c: Q(T(H(I))) is isomorphic to RHom(A[0],QI).",
+   "uses": [
+    "def-sc-direct-image-algebra-derived-category",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By h_eval, on every open and section the underived counit equals precomposition by O_Y to A followed by evaluation at one. Sheaf-morphism extensionality gives equality in every degree, hence of chain maps. Apply Q and the comparisons from the preceding steps to obtain c followed by RHom(O_Y to A,QI) followed by j_QI equal to Q of the termwise counit.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "termwise comparison and evaluation in section-duality-finite; explicit argument extracted from steps 2 and 3 of lem-sc-affine-derived-hom-localized-evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor comparison is isomorphism on K injective complexes and computation of derived internal Hom evaluation",
+   "date": "2026-10-12",
+   "results": "8 hits: InjectiveResolution.isoRightDerivedObj and its naturality lemmas; Functor.mapDerivedCategoryFactorsh_hom_app; LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison. No exact termwise sheaf-Hom evaluation comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "date": "2026-10-12",
+   "results": "0 hits; unknown identifier 'SheafOfModules.homObj'",
+   "verdict": "unavailable: identifier absent from service index; no mathematical match verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRightDerivedFunctor|isIso.*KInjective|derivedInternalHom.*unit",
+   "date": "2026-10-12",
+   "results": "25 hits in Mathlib right-derived/derivability APIs, including Derives.isIso_of_isRightDerivedFunctor. No exact internal-Hom evaluation statement. Local rg found proved SheafOfModules.homObjUnitIso in WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree, but only underived objects.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "internal Hom of sheaves from the unit sheaf is naturally isomorphic to the identity and evaluates sections at one",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedHomLocalizedEvaluation",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, finite duality comparison and counit evaluation: termwise Hom calculation on a K-injective target",
+   "via": [
+    "lem-sc-affine-derived-hom-localized-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineHomKInjectiveEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineHomKInjectiveEvaluation.lean",
+  "declaration": "AlgebraicGeometry.affine_hom_kInjective_evaluation",
+  "statement": "theorem affine_hom_kInjective_evaluation\n    {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))\n      [H.Additive]\n      (iH : H ⋙ SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ≅\n        (SheafOfModules.homFunctor Y.sheaf).obj\n          (op ((SheafOfModules.restrictScalars\n            (R := moduleRings Y.toRingedSpace)\n            (R' := moduleRings (directImageAlgebraSpace f))\n            ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj\n              (SheafOfModules.unit (moduleRings (directImageAlgebraSpace f))))))\n      (adj₀ : SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ⊣ H)\n    (h_eval : ∀ (F : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (U : Y.Opens)\n          (φ : (H.obj F).val.obj (op U)),\n        ((adj₀.counit.app F).val.app (op U)).hom φ =\n          ((((iH.hom.app F).val.app (op U)).hom φ).app (op (Over.mk (𝟙 U)))).hom\n            (1 : (moduleRings (directImageAlgebraSpace f)).obj.obj (op U))) :\n    ∃ j : (Functor.curry.obj\n        (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj\n          (op ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _,\n      ∀ (I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (_ : I.IsKInjective),\n      ∃ c : DerivedCategory.Q.obj\n          (((SheafOfModules.restrictScalars\n            (R := moduleRings Y.toRingedSpace)\n            (R' := moduleRings (directImageAlgebraSpace f))\n            ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).mapHomologicalComplex\n              (.up ℤ)).obj ((H.mapHomologicalComplex (.up ℤ)).obj I)) ≅\n          (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj\n            (op ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))),\n              DerivedCategory.Q.obj I),\n        c.hom ≫ (derivedInternalHom (Opens.grothendieckTopology Y)\n            Y.toRingedSpace.sheaf).map\n          (((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map\n              (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op,\n            𝟙 (DerivedCategory.Q.obj I)) ≫\n          j.hom.app (DerivedCategory.Q.obj I) =\n            DerivedCategory.Q.map\n              ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6f534",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T112829-L-764098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6f534",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T112829-L-764098",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet/node statements, compiled cleanly, preserved the existing theorem signature, and the required importer compiled against them."
+ }
+}

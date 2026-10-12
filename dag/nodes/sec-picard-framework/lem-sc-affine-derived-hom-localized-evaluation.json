@@ -17,31 +17,30 @@
  },
  "proof": [
   {
-   "text": "Compute the supplied right-derived functor R on a K-injective resolution I of K. The comparison beta is invertible on I by the right-derived universal property; t identifies L with the termwise exact restriction functor.",
+   "text": "Use the termwise K-injective evaluation theorem to obtain the canonical unit-Hom natural isomorphism j and the counit-compatible comparison c on K-injective complexes. This involves no supplied derived adjunction.",
    "uses": [
-    "def-pc-derived-rhom-algebra-module",
+    "lem-sc-affine-hom-kinjective-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the existing functorial K-injective resolution K to I. For the K-injective localizer morphism, quasi-isomorphisms between K-injective complexes are homotopy equivalences. Additivity of H preserves these homotopy equivalences, so Q_A H inverts them. The right derivability structure and the supplied right-derived property make beta_I invertible. Compose inverse L(beta_I), t_H(I), and c; the supplied equation h_counit and cancellation of beta_I prove compatibility with the derived counit at QI.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pur-derived-internal-hom",
+    "lem-sc-affine-hom-kinjective-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the comparison at QI along the isomorphism q=Q(K to I). Naturality of the derived counit, precomposition map, and j gives the equation at QK. The private Lean lemma transport_evaluation proves this in an arbitrary category.",
+   "uses": [
     "def-pur-derived-internal-hom"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply iH termwise and identify the restricted algebra unit with f_*O_X by the identity on every open. The Hom-complex localization comparison supplies d.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "def-sc-direct-image-algebra-derived-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The given sectionwise counit formula is evaluation at one. Under iH this is precomposition by O_Y -> f_*O_X followed by Hom(O_Y,I) -> I. Apply Q to the degreewise identity and use the given derived counit formula on I, canceling invertible resolution comparisons.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let j be the canonical evaluation isomorphism for Hom from O_Y. For the given iota adjust d by RHom(f_*O_X, alpha), with alpha=iota.inv followed by j.hom. Naturality moves alpha across precomposition; j.inv followed by iota followed by alpha is the identity, so the desired equality still holds.",
+   "text": "For the supplied iota, set alpha=iota_QK inverse followed by j_QK. Postcompose the comparison by RHom(A[0],alpha). Naturality of precomposition and of iota gives RHom(O_Y[0],alpha) followed by iota_QK equal to j_QK, proving the required equality. The private Lean lemma change_evaluation_iso proves this in an arbitrary category.",
    "uses": [
     "def-pur-derived-internal-hom"
    ],
@@ -49,15 +48,14 @@
   }
  ],
  "proof_deps": [
-  "def-pc-derived-rhom-algebra-module",
+  "def-pc-derived-category",
   "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-sc-direct-image-algebra-derived-category"
+  "lem-sc-affine-hom-kinjective-evaluation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0BUZ, 0BV0 and 0AX3: derived scalar adjunction and evaluation counit"
+  "place": "Tags 0BUZ, 0BV0 and 0AX3; K-injective evaluation reduction plus proved categorical transport and change-of-isomorphism arguments"
  },
  "mathlib_searches": [
   {
@@ -153,11 +151,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-6f534",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T085401-L-48282",
+  "landing": "20261012T112829-L-764098",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet/node statements, compiled cleanly, preserved the existing theorem signature, and the required importer compiled against them."
  }
 }
