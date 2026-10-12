@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+ "kind": "statement",
+ "title": "Canonical coefficient comparisons intertwine derived exchange",
+ "statement": "Let Λ : Type (u+1) be a commutative ring and let f:X→Y, f′:X′→Y′, g′:X′→X, g:Y′→Y be any commutative square of schemes. For each edge, fix the inverse-image coefficient comparison to be the mate of the forgotten module adjunction unit [lem-weil-pbc-module-abelian-inverse-image-comparison], and fix the derived direct-image comparison to be rightDerivedFunctorPlusBaseChange of the evaluation identity [lem-weil-pbc-module-abelian-derived-direct-image-comparison]. For any K in D⁺(Sheaf(X_et,ModuleCat Λ)), define s_K:DU_Y′(Dg_Mod Rf_Mod K)≅Dg_Ab Rf_Ab(DU_X K) by the inverse g comparison followed by Dg_Ab of the f comparison, and r_K:DU_Y′(Rf′_Mod Dg′_Mod K)≅Rf′_Ab Dg′_Ab(DU_X K) by the f′ comparison followed by Rf′_Ab of the inverse g′ comparison. Then DU_Y′(Ex_Mod(K)) followed by r_K equals s_K followed by Ex_Ab(DU_X K), for the canonical derivedBaseChangeMapPlus transformations [def-weil-pbc-derived-exchange]. This is equality for fixed maps, not existence of comparison isomorphisms. No stalk or degree is involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736 construction and homotopy uniqueness; Remark 07A7 adjunction-mate construction; Tags 03FD and 0D6J(3) for canonical coefficient comparisons. Compatibility expanded by R2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical edge comparisons. Their construction fixes the comparison of direct-image derived units. The underived inverse-image comparison is the mate of the forgotten module unit, so the corresponding units and counits agree under it. Lift the exact inverse-image comparison using mapDerivedCategoryPlusNatIso and composition isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the underived exchange as adjunction unit, commutation isomorphism for the square, and counit. Direct image and its composition identification commute with forgetting by evaluation. The mate identities from the first step make this precisely the abelian underived exchange, with the fixed edge comparisons.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For both derived transformations, precompose on every bounded below module complex with the forgotten g image of the f derived unit. Use rightDerivedFunctorPlusBaseChange_fac for the coefficient comparison and derivedBaseChangeMapPlus_fac_app for exchange. The preceding underived equality identifies both resulting transformations; exact-functor factorization isomorphisms and naturality transport the terms. Uniqueness of the right derived transformation gives the stated equality for all K. This avoids an assumption that forgetting preserves injectives.",
+   "uses": [
+    "lemma-weil-pbc-derived-exchange-replacement",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lemma-weil-pbc-derived-exchange-replacement"
+ ],
+ "proof_origin": {
+  "by": "worker R2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736 construction and homotopy uniqueness; Remark 07A7 adjunction-mate construction; Tags 03FD and 0D6J(3) for canonical coefficient comparisons. Compatibility expanded by R2.",
+  "note": "Agent expansion in the bounded below module-valued encoding; source tags read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition compatibility of right derived functor base change natural transformations with exact coefficient forgetful functors",
+   "date": "2026-10-12",
+   "results": "Service returned Internal Server Error; unavailable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting module sheaves to abelian sheaves commutes with derived direct image and base change exchange maps",
+   "date": "2026-10-12",
+   "results": "Eight results: underived SheafOfModules.pushforwardNatIso, PresheafOfModules.pushforward₀CompToPresheaf and related underived comparisons. No derived coefficient comparison or exchange compatibility.",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlus\"",
+   "date": "2026-10-12",
+   "results": "Mathlib gives rightDerivedFunctorPlus, its unit and induced natural transformations. The source library PlusBaseChange provides isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic; used for direct image after proving the acyclicity hypothesis. No exchange coefficient coherence theorem.",
+   "verdict": "general infrastructure used; no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusBaseChange|sheafFiberCompIso; repository search for coefficient exchange and derived forgetting",
+   "date": "2026-10-12",
+   "results": "Mathlib Point.sheafFiberCompIso supplies the stalk comparison. Source PlusBaseChange supplies the canonical derived coefficient map. Existing lem-weil-pbc-exchange-forget-coefficients has no Lean record and bundles inverse image, direct image, and exchange; the new nodes isolate its direct-image and coherence parts for explicitly fixed maps. Blueprint search found no matching imported node.",
+   "verdict": "existing infrastructure used; no matching declared exchange lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "coefficient comparison in the termwise exchange calculation; Canonical coefficient comparisons intertwine derived exchange",
+   "via": [
+    "lem-weil-pbc-module-abelian-stalk-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianDerivedExchangeCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleAbelianDerivedExchange_compatibility",
+  "statement": "theorem moduleAbelianDerivedExchange_compatibility (Λ : Type (u + 1)) [CommRing Λ] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : D+(moduleAbelianForget Λ Y').map ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq).app K) ≫ (moduleAbelianDerivedExchangeTargetIso Λ g' f' K).hom = (moduleAbelianDerivedExchangeSourceIso Λ f g K).hom ≫ (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq).app (D+(moduleAbelianForget Λ X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T070549-L-3476552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T070549-L-3476552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

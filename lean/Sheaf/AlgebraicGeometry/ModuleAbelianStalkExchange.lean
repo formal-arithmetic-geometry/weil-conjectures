@@ -8,12 +8,10 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
-import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 
 /-! # Module and abelian stalk exchange comparison
 
@@ -40,22 +38,23 @@ Source: Stacks Project, Tag 03FD (module/abelian acyclic comparison), together
 with the termwise mate construction of Tag 0736 and Remark 07A7.
 (blueprint: lem-weil-pbc-module-abelian-stalk-exchange)
 
-Proof: resolve F by a bounded below complex of injective module sheaves I.
-The underlying abelian terms are acyclic for evaluation on every etale object,
-by Tag 03FD. They are therefore acyclic for direct image, whose higher derived
-images are the sheafifications of these objectwise cohomology groups. Forgetting
-coefficients is exact and commutes with inverse image and with stalks (the
-filtered colimit is computed on underlying groups). The acyclic-resolution
-comparison thus identifies the source homology stalk with the abelian source.
-Choose an injective module replacement J of g'^* I. The same argument for J,
-and exactness of inverse image, gives the target comparison. To compare maps,
-forget the termwise exchange followed by f'_* of I → J. Underived inverse image
-and direct image comparisons preserve units, the square isomorphism and
-counits, so this is the abelian termwise mate. Comparing the underlying acyclic
-complexes to injective abelian resolutions gives the abelian derived exchange;
-homotopy uniqueness shows the comparisons commute with this map. Take degree q
-homology and the exact stalk. No claim that forgetting preserves injectives is
-used. -/
+Proof: Use the canonical derived direct-image coefficient comparison. Its
+invertibility is proved by identifying injective module sheaves with modules
+on the constant ringed site, applying injective Cech acyclicity and the Cech
+vanishing criterion to every etale object, and using the sheafification of
+higher direct images. Lift the proved canonical inverse-image comparison to
+D+ and compose edge comparisons to obtain source and target isomorphisms.
+The derived coefficient exchange compatibility identifies the maps under
+these particular isomorphisms. Naturality transports this equality through
+the exact forgetful functor's comparison with the single complex F[0]. Apply
+homology and use naturality of the exact-functor homology isomorphism to
+obtain a commuting square of abelian sheaves. Apply the abelian stalk functor
+and use the inverse of Point.sheafFiberCompIso for coefficient forgetting.
+Naturality gives a commuting square of stalk maps, whose two isomorphisms
+yield b1 and b2 as additive equivalences. Finally,
+baseChange_eq_derivedBaseChangeMapPlus identifies the module exchange with
+the map used in the statement. No preservation of injectives by forgetting
+and no exactness of the stalk functor is required. -/
 theorem Etale.exists_addEquiv_module_abelian_stalk_exchange
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}
@@ -86,6 +85,82 @@ theorem Etale.exists_addEquiv_module_abelian_stalk_exchange
           (A := ModuleCat.{u + 1} Λ)).map
           (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
         ((((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).map e).hom (b₁ x)) := by
-  sorry
+  let U := Etale.moduleAbelianForget Λ Y'
+  let V := Etale.moduleAbelianForget Λ X
+  let KM := (DerivedCategory.Plus.singleFunctor _ 0).obj F
+  let SM := (R+((f)_*[ModuleCat.{u + 1} Λ]) ⋙
+    D+((g)^*[ModuleCat.{u + 1} Λ])).obj KM
+  let TM := (D+((g')^*[ModuleCat.{u + 1} Λ]) ⋙
+    R+((f')_*[ModuleCat.{u + 1} Λ])).obj KM
+  let HM := DerivedCategory.Plus.homologyFunctor
+    (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+  let HA := DerivedCategory.Plus.homologyFunctor
+    (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
+  let d := (V.mapDerivedCategoryPlusSingleFunctor 0).app F
+  let s := Etale.moduleAbelianDerivedExchangeSourceIso Λ f g KM ≪≫
+    (R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙
+      D+((g)^*[AddCommGrpCat.{u + 1}])).mapIso d
+  let r := Etale.moduleAbelianDerivedExchangeTargetIso Λ g' f' KM ≪≫
+    (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙
+      R+((f')_*[AddCommGrpCat.{u + 1}])).mapIso d
+  let a := (U.mapDerivedCategoryPlusHomologyFunctorIso (q : ℤ)).app SM ≪≫ HA.mapIso s
+  let b := (U.mapDerivedCategoryPlusHomologyFunctorIso (q : ℤ)).app TM ≪≫ HA.mapIso r
+  let em := (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app KM
+  let ea := (Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj (V.obj F))
+  have hder : D+(U).map em ≫ r.hom = s.hom ≫ ea := by
+    dsimp only [r, s, Iso.trans_hom, Functor.mapIso_hom]
+    rw [← Category.assoc, Etale.moduleAbelianDerivedExchange_compatibility,
+      Category.assoc]
+    rw [← (Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).naturality]
+    simp only [ea, Category.assoc, Functor.comp_obj]
+  have hsheaf : U.map (HM.map em) ≫ b.hom = a.hom ≫ HA.map ea := by
+    dsimp only [a, b, Iso.trans_hom, Functor.mapIso_hom]
+    rw [← Category.assoc]
+    have hn := (U.mapDerivedCategoryPlusHomologyFunctorIso (q : ℤ)).hom.naturality em
+    change U.map (HM.map em) ≫
+        ((U.mapDerivedCategoryPlusHomologyFunctorIso (q : ℤ)).app TM).hom =
+      ((U.mapDerivedCategoryPlusHomologyFunctorIso (q : ℤ)).app SM).hom ≫
+        HA.map (D+(U).map em) at hn
+    rw [hn]
+    rw [Category.assoc, ← HA.map_comp, hder, HA.map_comp]
+    simp only [Category.assoc]
+  have : LocallySmall.{u} Y'.Etale := CategoryTheory.locallySmall_self _
+  let P := (pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})
+  let PM := (pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  let W : ModuleCat.{u + 1} Λ ⥤ AddCommGrpCat.{u + 1} :=
+    forget₂.{u + 1, u + 1, u + 2, u + 1, u + 1, u + 2, u + 1} _ _
+  have : W.IsLeftAdjoint := by
+    change (ModuleCat.restrictScalars (Int.castRingHom Λ) ⋙
+      forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).IsLeftAdjoint
+    have : (ModuleCat.restrictScalars.{u + 1} (Int.castRingHom Λ)).IsLeftAdjoint :=
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, 0, u + 1}
+        (Int.castRingHom Λ)).isLeftAdjoint
+    infer_instance
+  have : PreservesColimitsOfSize.{u, u} W :=
+    (Adjunction.ofIsLeftAdjoint W).leftAdjoint_preservesColimits
+  let c : U ⋙ P ≅ PM ⋙ W :=
+    (pointSmallEtale t).sheafFiberCompIso W
+  let i₁ := c.symm.app (HM.obj SM) ≪≫ P.mapIso a
+  let i₂ := c.symm.app (HM.obj TM) ≪≫ P.mapIso b
+  refine ⟨i₁.addCommGroupIsoToAddEquiv, i₂.addCommGroupIsoToAddEquiv, ?_⟩
+  intro x
+  have hstalk :
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).map
+          (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+            (HM.map em)) ≫ i₂.hom = i₁.hom ≫ P.map (HA.map ea) := by
+    dsimp only [i₁, i₂, Iso.trans_hom, Functor.mapIso_hom]
+    have hn := c.inv.naturality (HM.map em)
+    change W.map (PM.map (HM.map em)) ≫ (c.symm.app (HM.obj TM)).hom =
+      (c.symm.app (HM.obj SM)).hom ≫ P.map (U.map (HM.map em)) at hn
+    rw [← Category.assoc, hn]
+    rw [Category.assoc, ← P.map_comp, hsheaf, P.map_comp, Category.assoc]
+  have h := congrArg (fun k => k.hom x) hstalk
+  simp only [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  change i₂.hom.hom ((PM.map (HM.map em)).hom x) =
+    (P.map (HA.map ea)).hom (i₁.hom.hom x)
+  exact h
 
 end AlgebraicGeometry

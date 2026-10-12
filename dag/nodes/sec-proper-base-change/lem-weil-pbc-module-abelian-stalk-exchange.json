@@ -18,47 +18,40 @@
  ],
  "proof": [
   {
-   "text": "The coefficient forgetful functor and its sheaf version are exact. Module inverse image commutes with the underlying abelian inverse image, compatibly with the unit. Direct image commutes with forgetting by evaluation, and stalks commute with forgetting by filtered-colimit creation.",
+   "text": "Use the canonical exact coefficient forgetful functors and the derived direct-image comparison. The proved underived inverse-image isomorphism lifts to D⁺. Compose these edge comparisons to get the source and target derived isomorphisms for F[0], and use mapDerivedCategoryPlusSingleFunctor to identify the forgotten single complex with the abelian one.",
    "uses": [
-    "lem-weil-pbc-module-abelian-inverse-image-comparison",
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply moduleAbelianDerivedExchange_compatibility to F[0]. Naturality of abelian derived exchange transports this equality through the single-functor comparison. Apply homology; naturality of mapDerivedCategoryPlusHomologyFunctorIso for the exact forgetful functor gives a commuting square of abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the abelian stalk functor and compose with the inverse of Mathlib Point.sheafFiberCompIso for the coefficient forgetful functor. This functor preserves filtered colimits since it is a left adjoint. Naturality gives the required commuting square of additive maps. Convert the two stalk isomorphisms to additive equivalences. Rewrite module baseChange by the proved baseChange_eq_derivedBaseChangeMapPlus to match the original baseChangeHomologyMap.",
+   "uses": [
     "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Resolve F by injective module sheaves. Their underlying abelian sheaves are acyclic for all etale evaluations, hence for direct image via the sheafification description of higher direct images. The acyclic-resolution comparison gives the underlying direct-image derived comparison. Apply exact inverse image and exact stalks; repeat with an injective module replacement of the inverse-image complex to obtain b1 and b2.",
-   "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For modules, identify the mate baseChange with derivedBaseChangeMapPlus by the existing baseChange_eq_derivedBaseChangeMapPlus theorem. Forget the termwise mate: the unit, square isomorphism, and counit become their abelian counterparts. Compare the underlying acyclic resolutions to injective abelian ones. Homotopy uniqueness makes this comparison commute with the maps. Apply homology and the exact stalk to get b2 Ex_module = Ex_abelian b1.",
-   "uses": [
-    "lem-weil-pbc-derived-exchange-termwise",
-    "prop-weil-pbc-cohomology-resolution-independent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "lem-weil-pbc-module-abelian-inverse-image-comparison",
-  "prop-weil-pbc-cohomology-resolution-independent",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison"
  ],
  "proof_origin": {
-  "by": "worker J1",
+  "by": "worker R2",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03FD and proof (acyclic module/abelian comparison); Tag 0736 and Remark 07A7 (termwise mate). The compatibility of these comparisons is expanded by worker J1.",
-  "note": "Agent expansion of the original node proof, separating coefficient comparison from the geometric calculation."
+  "place": "Tags 03FD, 072W, 0736 and 07A7; Lean exact-functor homology and filtered-colimit stalk comparisons.",
+  "note": "Canonical derived edge comparisons replace resolution choices. Direct-image comparison proved from existing Cech and sheafification statements; only exchange coherence split off. No unit statement or step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -135,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T053936-L-2637123",
+  "landing": "20261012T070549-L-3476552",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
