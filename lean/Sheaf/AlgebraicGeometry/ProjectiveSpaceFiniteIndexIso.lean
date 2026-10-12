@@ -6,8 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Topology.GlueSheavesOfModules
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso
 
 /-! # Reindexing finite projective space and its twisting module
 
@@ -30,24 +29,35 @@ Source: Stacks Project, Constructions, Definition 01NF and Lemma 01NE.
 (blueprint: lem-weil-pbc-projective-space-finite-index-iso).
 
 Proof:
-1. Let n + 1 be the cardinality of the finite nonempty type, and choose a bijection
-   between it and ULift (Fin (n + 1)). Rename polynomial variables by this bijection.
-   The resulting graded ring isomorphism preserves the degree and the base ring.
-2. On each standard open it gives an isomorphism of the degree-zero localized rings,
-   carrying each coordinate ratio to the renamed ratio. These isomorphisms agree on
-   overlaps, since localization commutes with the renaming and its inverse.
-3. Glue the affine scheme isomorphisms; their composites are identities chartwise.
-   They preserve the constant-ring maps, so the structure morphism is unchanged.
-4. On the same opens identify the rank-one twisting modules by sending the basis
-   indexed by one coordinate to the basis indexed by its renamed coordinate. Their
-   transition units are precisely the coordinate ratios, which step 2 preserves.
-   Thus the local identifications glue to the asserted pullback isomorphism.
-   Equivalently this is the base change of the renaming on the integral model. -/
+1. Write the positive cardinality of the finite nonempty type as n + 1, and choose
+   b : ULift (Fin (n + 1)) ≃ β using Fintype.equivFinOfCardEq and Equiv.ulift.
+2. Reorder the coordinate sections of the identity pullback of O(1) by b. They are
+   free generators on the reordered standard opens, which cover by Equiv.iSup_comp.
+   Apply homOfIsFreeGenerator and the reindexing invertibility lemma to get e.
+   The native homOfIsFreeGenerator_over gives the equality of structure maps.
+3. The native twistRestrictHom is an isomorphism from e^* O(1) to the identity
+   pullback of O(1). Compose it with pullbackId to obtain e^* O(1) ≅ O(1). -/
 theorem exists_finite_index_iso (β : Type u) [Finite β] [Nonempty β] (S : Scheme.{u}) :
     ∃ (n : ℕ) (e : ℙ(β; S) ≅ ℙ(ULift.{u} (Fin (n + 1)); S)),
       e.hom ≫ ℙ(ULift.{u} (Fin (n + 1)); S) ↘ S = ℙ(β; S) ↘ S ∧
       Nonempty ((Scheme.Modules.pullback e.hom).obj
         (twist (ULift.{u} (Fin (n + 1))) S 1) ≅ twist β S 1) := by
-  sorry
+  classical
+  let _ := Fintype.ofFinite β
+  obtain ⟨n, hn⟩ := Nat.exists_eq_succ_of_ne_zero
+    (Nat.ne_of_gt (Fintype.card_pos : 0 < Fintype.card β))
+  let γ := ULift.{u} (Fin (n + 1))
+  let b : γ ≃ β := Equiv.ulift.trans (Fintype.equivFinOfCardEq hn).symm
+  let s := fun j : γ ↦ Scheme.Modules.pullbackSection (𝟙 ℙ(β; S))
+    (twistOneSection β S (b j))
+  let U := fun j : γ ↦ standardOpen β S (b j)
+  let hs := fun j : γ ↦
+    isFreeGenerator_pullbackSection_twistOneSection (𝟙 ℙ(β; S)) (b j)
+  have hU : ⨆ j, U j = ⊤ := (b.iSup_comp).trans (iSup_standardOpen β S)
+  let φ := homOfIsFreeGenerator s U hs (ℙ(β; S) ↘ S) hU
+  have : IsIso φ := isIso_homOfIsFreeGenerator_reindex β γ b S
+  refine ⟨n, asIso φ, homOfIsFreeGenerator_over s U hs _ hU, ?_⟩
+  exact ⟨asIso (twistRestrictHom s U hs (ℙ(β; S) ↘ S) hU) ≪≫
+    (Scheme.Modules.pullbackId ℙ(β; S)).app (twist β S 1)⟩
 
 end AlgebraicGeometry.ProjectiveSpace

@@ -15,24 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Choose n+1 equal to the cardinality of beta and a coordinate bijection. Polynomial variable renaming and its inverse preserve grading and coefficients.",
+   "text": "Equip beta with Fintype.ofFinite. Since beta is nonempty, Fintype.card_pos and Nat.exists_eq_succ_of_ne_zero give card beta = n+1. Compose Equiv.ulift with the inverse of Fintype.equivFinOfCardEq to obtain b : ULift (Fin (n+1)) equiv beta.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Rename each standard chart and its degree-zero localization. The affine scheme isomorphisms agree on overlaps since they preserve all coordinate ratios; glue them and their inverses, and then base change the integral-model isomorphism to S.",
+   "text": "Use the native construction homOfIsFreeGenerator with the reordered coordinate sections of the identity pullback of O(1), on the reordered standard opens. The native isFreeGenerator_pullbackSection_twistOneSection provides its local free generators, while Equiv.iSup_comp and iSup_standardOpen prove its cover condition. The construction homOfIsFreeGenerator_over proves compatibility with the base. Apply the coordinate-reindexing invertibility statement to get the scheme isomorphism asIso phi.",
    "uses": [
+    "lem-weil-pbc-projective-space-reindex-is-iso",
     "def-pc-proj",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
     "lem-weil-pbc-scheme-morphism-gluing"
    ],
    "elementary": false
   },
   {
-   "text": "The maps preserve constants, hence are over S. Send each rank-one twist basis to its renamed basis; preservation of coordinate-ratio transition units makes these isomorphisms glue. The result is the pullback of O(1) along e.",
+   "text": "The native twistRestrictHom is already an isomorphism from phi pullback O(1) to the identity pullback of O(1). Compose asIso twistRestrictHom with the component of Scheme.Modules.pullbackId at O(1). This supplies the required twisting-module isomorphism. No new module-gluing theorem is needed.",
    "uses": [
     "def-pc-projective-space-twist",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "def-pc-module-pullback"
    ],
    "elementary": false
   }
@@ -41,13 +43,13 @@
   "def-pc-module-pullback",
   "def-pc-proj",
   "def-pc-projective-space-twist",
-  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-projective-space-reindex-is-iso",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions Definition 01NF and Lemma 01NE: projective-space charts and coordinate construction, applied to bijective renaming and its inverse."
+  "place": "Tags 01NE and 01NF, realized by the native homOfIsFreeGenerator and twistRestrictHom constructions in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible; invertibility of the coordinate reindexing map is split off."
  },
  "mathlib_searches": [
   {
@@ -130,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f65b",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T070530-L-3467643",
+  "landing": "20261012T085220-L-5902",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature, two new statements and node records, proof reduction, pruning and report; all three scratch files compile cleanly, and axiom checks agree with the reported sorries."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
