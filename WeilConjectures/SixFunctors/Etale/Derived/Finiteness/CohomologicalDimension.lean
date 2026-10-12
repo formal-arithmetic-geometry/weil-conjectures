@@ -49,8 +49,14 @@ theorem subsingleton_H_forget₂_of_two_mul_lt {k' : Type u} [Field k'] [IsAlgCl
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (hq : 2 * d < q) :
     Subsingleton (Sheaf.H ((sheafCompose X.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  refine Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d a hX _ ?_ q hq
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
+  have := Fintype.ofFinite Λ
+  refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨Fintype.card Λ, Fintype.card_pos, ?_⟩
+  let y : F.obj.obj U := x
+  change Fintype.card Λ • y = 0
+  rw [← one_smul Λ y, ← smul_assoc, card_nsmul_eq_zero, zero_smul]
 
 /-- Blueprint `lem-dg-compact-support-amplitude`: The compact-support bound uses the original
 fibres.
