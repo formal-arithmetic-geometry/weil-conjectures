@@ -7499,3 +7499,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/F1/Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition (stage 3; reviewer PASS; first push; landing 20261012T112837-L-766677 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleQcoherentULiftFiniteCechComparison (stage 3; reviewer PASS; first push; landing 20261012T112837-L-766774 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/F2/Sheaf.AlgebraicGeometry.GaloisStalkActionFull (stage 3; reviewer PASS; first push; landing 20261012T112837-L-766871 (interface); batch 20261012T112824; modules 2; new nodes 1)
+- 11:28 L: merged deliver/F2/Sheaf.RingTheory.ExistsCoefficientSubring (stage 3; reviewer PASS; first push; landing 20261012T112837-L-766968 (interface); batch 20261012T112824; modules 4; new nodes 3)

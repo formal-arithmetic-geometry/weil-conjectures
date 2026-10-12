@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-coefficient-residue-section",
+ "kind": "statement",
+ "title": "A section of the characteristic-zero residue map",
+ "statement": "Let R be a commutative local ring, complete for its maximal ideal m [def-weil-pbc-adically-complete-ring]. If its residue field has characteristic zero, then there is a ring homomorphism f: R/m -> R with residue_R composed with f equal to the identity of R/m.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem Tag 032A(1), first proof paragraph, using Proposition Tag 0322"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "Every nonzero integer has nonzero residue, hence is a unit in R. The localization universal property for Q as the fraction ring of Z gives R a Q-algebra structure.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a transcendence basis of the residue field over Q. Its intermediate rational function field has characteristic zero and is perfect, and the residue field is algebraic and thus separable over it. Apply the Mathlib formally smooth separably generated extension theorem.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-formally-smooth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete to the identity ring map of R/m, made into a Q-algebra map by uniqueness of ring maps from Q. It lifts into R, and its reduction is the identity. This Mathlib theorem constructs the compatible lifts and their inverse limit.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem Tag 032A(1), first proof paragraph, using Proposition Tag 0322"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A formally smooth algebra lifts a map into a complete local ring from its residue field; the image of a complete Noetherian local ring is complete",
+   "results": "Unavailable: service returned Internal Server Error. No verdict; used other searches and local source inspection.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local ring admits a coefficient ring by lifting its residue field or a Cohen ring",
+   "results": "isLocalRing_of_isAdicComplete_maximal, HenselianLocalRing, WittVector.isAdicCompleteIdealSpanP; no coefficient-ring lifting theorem. Local source search found exists_mkₐ_comp_eq_of_isAdicComplete and liftRingHom for the two lifting arguments.",
+   "verdict": "use generic lifting API and stated Cohen-ring formal smoothness",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "liftRingHom|exists_mk.*isAdicComplete|quotient.*complete; quotientMap_injective; map_maximalIdeal_of_surjective; finite_module_complete",
+   "results": "Mathlib Smooth/AdicCompletion.lean, AdicCompletion/RingHom.lean, Ideal/Quotient/Operations.lean, LocalRing/RingHom/Basic.lean; existing Sheaf.RingTheory.FiniteModuleComplete. Signatures inspected and used.",
+   "verdict": "generic tools suffice; no existing exact section or Cohen-ring lift in the library",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ExistsCoefficientSubring",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Stage-3 proof of coefficient-ring existence: A section of the characteristic-zero residue map",
+   "via": [
+    "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoefficientResidueSection",
+  "declaration": "IsLocalRing.exists_residue_section",
+  "file": "lean/Sheaf/RingTheory/CoefficientResidueSection.lean",
+  "statement": "theorem exists_residue_section (R : Type u) [CommRing R] [IsLocalRing R] [IsAdicComplete (maximalIdeal R) R] [CharP (ResidueField R) 0] : ∃ f : ResidueField R →+* R, (residue R).comp f = RingHom.id _",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

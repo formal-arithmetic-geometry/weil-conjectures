@@ -10,9 +10,10 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.Ring.Subring.Defs
 public import Mathlib.Algebra.CharP.Defs
-import Sheaf.RingTheory.CohenRingModPowFormallySmooth
 import Sheaf.RingTheory.CohenRingsExist
-import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.CoefficientResidueSection
+import Sheaf.RingTheory.CohenRingLiftToCompleteLocal
+import Sheaf.RingTheory.CoefficientSubringOfPrincipalSource
 
 /-!
 # Existence of a coefficient subring
@@ -58,6 +59,40 @@ theorem exists_coefficient_subring (R : Type u) [CommRing R] [IsLocalRing R]
         (Ideal.quotientMap (I := (maximalIdeal R).comap Λ.subtype)
           (maximalIdeal R) Λ.subtype le_rfl) ∧
       (maximalIdeal R).comap Λ.subtype = Ideal.span {(p : Λ)} := by
-  sorry
+  rcases CharP.char_is_prime_or_zero (ResidueField R) p with hp | hp
+  · obtain ⟨C, hcomm, hC, ⟨e⟩⟩ := exists_cohenRing p hp (ResidueField R)
+    let _ := hcomm
+    obtain ⟨f, hf⟩ := exists_cohenRing_lift R p C hC e
+    obtain ⟨_, hdom, hdvr, hm, hcomplete⟩ := hC
+    let _ := hdom
+    let _ := hdvr
+    have : IsAdicComplete (maximalIdeal C) C := hm.symm ▸ hcomplete
+    have hlocal : (maximalIdeal R).comap f = maximalIdeal C := by
+      ext x
+      rw [Ideal.mem_comap, ← residue_eq_zero_iff, ← RingHom.comp_apply, hf]
+      simp [hm, Ideal.Quotient.eq_zero_iff_mem]
+    have hsurj : Function.Surjective ((residue R).comp f) := by
+      rw [hf]
+      exact e.surjective.comp (Ideal.Quotient.mk_surjective)
+    obtain ⟨hL, hprops⟩ := coefficient_subring_of_principal_source R C p hm f hlocal hsurj
+    exact ⟨f.range, hL, hprops⟩
+  · subst p
+    obtain ⟨f, hf⟩ := exists_residue_section R
+    have hm : maximalIdeal (ResidueField R) = Ideal.span {(0 : ResidueField R)} := by
+      simp [maximalIdeal_eq_bot]
+    have : IsAdicComplete (maximalIdeal (ResidueField R)) (ResidueField R) := by
+      rw [maximalIdeal_eq_bot]
+      exact IsAdicComplete.bot _
+    have hlocal : (maximalIdeal R).comap f = maximalIdeal (ResidueField R) := by
+      ext x
+      rw [Ideal.mem_comap, ← residue_eq_zero_iff, ← RingHom.comp_apply, hf]
+      simp [maximalIdeal_eq_bot]
+    have hsurj : Function.Surjective ((residue R).comp f) := by
+      rw [hf]
+      exact Function.surjective_id
+    obtain ⟨hL, hprops⟩ :=
+      coefficient_subring_of_principal_source R (ResidueField R) 0
+        (by simpa using hm) f hlocal hsurj
+    exact ⟨f.range, hL, hprops⟩
 
 end IsLocalRing

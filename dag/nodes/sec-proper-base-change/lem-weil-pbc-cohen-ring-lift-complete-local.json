@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-cohen-ring-lift-complete-local",
+ "kind": "statement",
+ "title": "Lifting a prescribed Cohen-ring residue isomorphism",
+ "statement": "Let R be a commutative local ring complete for its maximal ideal m [def-weil-pbc-adically-complete-ring], whose residue field has characteristic p. Let C be a Cohen ring for p [def-weil-pbc-cohen-ring] and e: C/pC -> R/m a ring isomorphism. There exists a ring homomorphism f: C -> R whose reduction modulo m is e composed with reduction modulo pC.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem Tag 032A(1), second proof paragraph, using Lemma Tag 0329"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-cohen-ring"
+ ],
+ "proof": [
+  {
+   "text": "For a square-zero ideal J of a ring D with p^n=0, any ring map C -> D/J factors through C/p^n because it kills the generator p^n. Apply the explicit ring-map lifting clause of Cohen-ring formal smoothness, then precompose the lift with C -> C/p^n.",
+   "uses": [
+    "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since p lies in m, p^(n+2) is zero in D=R/m^(n+2). The ideal J which is the image of m^(n+1) in D is square-zero since 2(n+1) >= n+2. The double quotient D/J is isomorphic to R/m^(n+1). Apply the previous step to lift any map C -> R/m^(n+1) into R/m^(n+2), compatibly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Start with e composed with C -> C/pC and transport its target to R/m^1. Dependent recursion chooses a compatible map at each successor. IsAdicComplete.StrictMono.liftRingHom gives the map C -> R from this compatible sequence; its degree-zero component (exponent one) gives the required residue equality.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Theorem Tag 032A(1), second proof paragraph, using Lemma Tag 0329"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A formally smooth algebra lifts a map into a complete local ring from its residue field; the image of a complete Noetherian local ring is complete",
+   "results": "Unavailable: service returned Internal Server Error. No verdict; used other searches and local source inspection.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local ring admits a coefficient ring by lifting its residue field or a Cohen ring",
+   "results": "isLocalRing_of_isAdicComplete_maximal, HenselianLocalRing, WittVector.isAdicCompleteIdealSpanP; no coefficient-ring lifting theorem. Local source search found exists_mkₐ_comp_eq_of_isAdicComplete and liftRingHom for the two lifting arguments.",
+   "verdict": "use generic lifting API and stated Cohen-ring formal smoothness",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "liftRingHom|exists_mk.*isAdicComplete|quotient.*complete; quotientMap_injective; map_maximalIdeal_of_surjective; finite_module_complete",
+   "results": "Mathlib Smooth/AdicCompletion.lean, AdicCompletion/RingHom.lean, Ideal/Quotient/Operations.lean, LocalRing/RingHom/Basic.lean; existing Sheaf.RingTheory.FiniteModuleComplete. Signatures inspected and used.",
+   "verdict": "generic tools suffice; no existing exact section or Cohen-ring lift in the library",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ExistsCoefficientSubring",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Stage-3 proof of coefficient-ring existence: Lifting a prescribed Cohen-ring residue isomorphism",
+   "via": [
+    "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenRingLiftToCompleteLocal",
+  "declaration": "IsLocalRing.exists_cohenRing_lift",
+  "file": "lean/Sheaf/RingTheory/CohenRingLiftToCompleteLocal.lean",
+  "statement": "theorem exists_cohenRing_lift (R : Type u) [CommRing R] [IsLocalRing R] [IsAdicComplete (maximalIdeal R) R] (p : ℕ) [CharP (ResidueField R) p] (C : Type v) [CommRing C] (hC : IsCohenRing p C) (e : (C ⧸ Ideal.span {(p : C)}) ≃+* ResidueField R) : ∃ f : C →+* R, (residue R).comp f = e.toRingHom.comp (Ideal.Quotient.mk _)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
