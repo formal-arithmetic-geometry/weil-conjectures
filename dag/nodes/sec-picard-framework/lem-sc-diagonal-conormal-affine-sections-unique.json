@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-diagonal-conormal-affine-sections-unique",
+ "kind": "statement",
+ "title": "Uniqueness of normalized diagonal conormal derivations on all open sections",
+ "statement": "For a scheme morphism f : X → S [def-pc-scheme], any two relative derivations D₁,D₂ into its diagonal conormal [def-sc-diagonal-conormal] satisfying the prescribed difference formula [lem-sc-diagonal-conormal-derivation-exists] agree on every section over every open U ⊆ X. No affine-chart or separatedness hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (https://stacks.math.columbia.edu/tag/08S2), affine calculation (read online, 2026-10-13)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-diagonal-conormal",
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof": [
+  {
+   "text": "For any open U put W = p₁⁻¹(U) ∩ p₂⁻¹(U). Since δ ≫ pᵢ = id, U = δ⁻¹(W). For a ∈ Γ(X,U), b = p₂* a − p₁* a is killed by δ.app W: apply Scheme.Hom.appLE_comp_appLE and subtract the equal composite maps.",
+   "uses": [
+    "def-sc-diagonal-conormal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved upstream theorem Scheme.Modules.range_map_kernelι identifies sections killed by δ.app W with the image of the actual sheaf-module kernel inclusion, giving a kernel section s mapping to b. Apply both normalization hypotheses to this same W,s. Both values are equal to the same restricted tensor-pullback unit on s; transitivity gives the result. No existence theorem for a derivation is used.",
+   "uses": [
+    "lem-sc-diagonal-conormal-derivation-exists"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-diagonal-conormal",
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 08S2, 01KJ and 01R3; checked online in the independent second reading on 2026-10-13. For uniqueness, the difference-formula argument is made directly in Lean using the existing sectionwise kernel theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two sheaf derivations agreeing with the same kernel section map are equal; kernel of a sheaf module morphism evaluated on an open",
+   "results": "PresheafOfModules.Derivation.Universal.mk.inj, PresheafOfModules.Derivation.ext, PresheafOfModules.Derivation.ext_iff, PresheafOfModules.Derivation.instSubsingletonUniversal, PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.Derivation.mk.inj, PresheafOfModules.HasDifferentials.exists_universal_derivation, PresheafOfModules.DifferentialsConstruction.isUniversal'",
+   "date": "2026-10-13",
+   "verdict": "No existing normalization uniqueness theorem; use the upstream sectionwise kernel theorem and Mathlib appLE composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"appLE_comp_appLE\"",
+   "results": "AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc",
+   "date": "2026-10-13",
+   "verdict": "No existing normalization uniqueness theorem; use the upstream sectionwise kernel theorem and Mathlib appLE composition."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*(range|section)|unitToPushforwardObjUnit_val_app_apply",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Kernels.lean, Mathlib/Algebra/Category/ModuleCat/Kernels.lean, Mathlib/Algebra/Category/ModuleCat/Kernels.lean",
+   "date": "2026-10-13",
+   "verdict": "No existing normalization uniqueness theorem; use the upstream sectionwise kernel theorem and Mathlib appLE composition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two normalized derivations into the conormal of a scheme diagonal agree on sections over every open, by lifting the difference of the two projections to the sheaf module kernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSections",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-diagonal-conormal-affine-sections",
+   "place": "decomposition of normalization independence"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineSectionsUnique.lean",
+  "declaration": "AlgebraicGeometry.diagonalConormal_affine_sections_unique",
+  "statement": "theorem diagonalConormal_affine_sections_unique (f : X ⟶ S)\n    (U : X.Opens)\n    (D₁ D₂ : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)\n    (h₁ : IsDiagonalConormalDerivation f D₁)\n    (h₂ : IsDiagonalConormalDerivation f D₂) :\n    ∀ a : Γ(X, U), D₁.d (X := op U) a = D₂.d (X := op U) a",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184346-L-4021030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184346-L-4021030",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

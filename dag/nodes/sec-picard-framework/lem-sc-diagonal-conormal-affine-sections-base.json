@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-diagonal-conormal-affine-sections-base",
+ "kind": "statement",
+ "title": "Affine diagonal conormal coordinates for one normalized derivation",
+ "statement": "Let f : X → S be a scheme morphism [def-pc-scheme], U ⊆ X and V ⊆ S affine opens with U ⊆ f⁻¹(V), A = Γ(X,U), and R = Γ(S,V). For a supplied relative derivation D into the diagonal conormal [def-sc-diagonal-conormal] satisfying the normalization of [lem-sc-diagonal-conormal-derivation-exists], there exists an A-linear equivalence e : Ω[A/R] → Γ(diagonalConormal f,U) [def-weil-pbc-kahler-differentials] with e(da) = D(a) for every a ∈ A. This statement only calculates coordinates for the supplied D; it neither constructs D nor asserts simultaneous compatibility with every normalized derivation.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2 (https://stacks.math.columbia.edu/tag/08S2), affine calculation (read online, 2026-10-13)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-diagonal-conormal",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof": [
+  {
+   "text": "Form the affine ambient open W = U ×_V U = Spec(A ⊗_R A). Its diagonal inverse image is U and the restricted diagonal is closed, induced by multiplication. Restrict the actual module-sheaf kernel and tensor pullback, identifying their restrictions with the restricted diagonal ideal and its conormal. The adjunction units agree under these canonical restriction identifications by uniqueness of mates.",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine_conormal_sections to the restricted closed diagonal. The resulting equivalence from the multiplication ideal cotangent quotient to conormal sections is A-linear through multiplication. Use Mathlib’s identification of KaehlerDifferential with this cotangent quotient.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections",
+    "lem-sc-kahler-differentials-diagonal-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual kernel section corresponding to 1 ⊗ a − a ⊗ 1 has that difference as its image. Apply the affine conormal class-map formula and the supplied normalization hD; KaehlerDifferential.D_apply identifies its cotangent class with da. This proves the coordinate formula for the supplied D.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections",
+    "lem-sc-kahler-differentials-diagonal-ideal",
+    "lem-sc-diagonal-conormal-derivation-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-diagonal-conormal",
+  "def-pc-base-change",
+  "lem-weil-pbc-affine-conormal-sections",
+  "lem-sc-kahler-differentials-diagonal-ideal",
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 08S2, 01KJ and 01R3; checked online in the independent second reading on 2026-10-13. For uniqueness, the difference-formula argument is made directly in Lean using the existing sectionwise kernel theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a fixed derivation into the conormal of a scheme diagonal satisfying the difference formula, the module of Kahler differentials of affine sections maps isomorphically to the conormal sections",
+   "results": "KaehlerDifferential.endEquivDerivation', KaehlerDifferential.quotientCotangentIdeal, tensorKaehlerQuotKerSqEquiv, KaehlerDifferential.kerCotangentToTensor_toCotangent, KaehlerDifferential.quotientCotangentIdealRingEquiv, KaehlerDifferential.endEquivAuxEquiv, Algebra.Extension.cotangentComplex_mk, Derivation.liftKaehlerDifferential_apply",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level match; ring tools and kernel-section tools were read and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"Cotangent\"",
+   "results": "KaehlerDifferential.kerCotangentToTensor, KaehlerDifferential.range_kerCotangentToTensor, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, KaehlerDifferential.kerCotangentToTensor_toCotangent, KaehlerDifferential.quotientCotangentIdeal, KaehlerDifferential.quotientCotangentIdealRingEquiv, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, KaehlerDifferential.cotangentComplexBaseChange",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level match; ring tools and kernel-section tools were read and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|kerCotangentToTensor|D_apply",
+   "results": "Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level match; ring tools and kernel-section tools were read and used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal module on an affine chart of a scheme diagonal is linearly equivalent to Kahler differentials with its value on da prescribed by a supplied normalized derivation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSections",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-diagonal-conormal-affine-sections",
+   "place": "decomposition of affine normalization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineSectionsBase.lean",
+  "declaration": "AlgebraicGeometry.exists_diagonalConormal_affine_sections_base",
+  "statement": "theorem exists_diagonalConormal_affine_sections_base (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)\n    (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)\n    (hD : IsDiagonalConormalDerivation f D) :\n    ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)]\n          Γ(diagonalConormal f, U.1),\n        ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =\n          D.d (X := op U.1) a",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184346-L-4021030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184346-L-4021030",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,8 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
-import Sheaf.AlgebraicGeometry.AffineConormalSections
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsBase
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
 
 /-!
 # Normalized diagonal conormal sections on an affine chart
@@ -53,6 +53,12 @@ theorem diagonalConormal_affine_sections (f : X ⟶ S)
         Γ(diagonalConormal f, U.1),
       ∀ (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf),
         IsDiagonalConormalDerivation f D → ∀ a : Γ(X, U.1),
-          e (CommRingCat.KaehlerDifferential.d a) = D.d (X := op U.1) a := by sorry
+          e (CommRingCat.KaehlerDifferential.d a) = D.d (X := op U.1) a := by
+  obtain ⟨D₀, hD₀⟩ := exists_diagonalConormalDerivation f
+  obtain ⟨e, he⟩ := exists_diagonalConormal_affine_sections_base f U V hUV D₀ hD₀
+  refine ⟨e, ?_⟩
+  intro D hD a
+  rw [he]
+  exact (diagonalConormal_affine_sections_unique f U.1 D₀ D hD₀ hD a)
 
 end AlgebraicGeometry
