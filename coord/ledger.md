@@ -6393,3 +6393,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/N1/Sheaf.Paper.StrictHenselizationMapExists (stage 3; reviewer PASS; first push; landing 20261012T060746-L-2911636 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/N2/Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement (stage 3; reviewer PASS; first push; landing 20261012T060746-L-2911772 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/N2/Sheaf.CategoryTheory.Galois.AutProfinite (stage 3; reviewer PASS; first push; landing 20261012T060747-L-2911899 (proof); batch 20261012T060728; modules 1; new nodes 0)
+- 06:07 L: merged deliver/N2/Sheaf.RingTheory.LiftIdempotentUpstairs (stage 3; reviewer PASS; first push; landing 20261012T060747-L-2912021 (interface); batch 20261012T060728; modules 2; new nodes 1)

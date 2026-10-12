@@ -35,100 +35,47 @@
    }
   },
   {
-   "text": "*Lifting the factorization.* In $(A/I)[x]$ we have $\\bar f=\\bar g\\bar h$ with $\\bar g=x^d$ and $\\bar h=(x-1)^d$. The leading coefficient of $\\bar g$ is $1$, a unit, and $\\bar g,\\bar h$ generate the unit ideal: $1=(x-(x-1))^{2d-1}=\\sum_{i=0}^{2d-1}\\binom{2d-1}{i}x^i(-(x-1))^{2d-1-i}$, and in each term $i\\ge d$ or $2d-1-i\\ge d$, so each term lies in $(x^d)+((x-1)^d)$. Hence [lem-weil-pbc-lift-coprime-factorization-etale] gives a ring map $A\\to A_1$ with $\\operatorname{Spec}A_1\\to\\operatorname{Spec}A$ etale [def-weil-etale-morphism] and $\\alpha_1:A/I\\to A_1/IA_1$ an isomorphism, and $g,h\\in A_1[x]$ with $f=gh$ in $A_1[x]$, $g\\equiv x^d$ and $h\\equiv(x-1)^d$ modulo $IA_1$.",
+   "text": "The elementary Bezout identity $1=X-(X-1)$ proves that $X$ and $X-1$ are coprime. Mathlib IsCoprime.pow proves the same for their $d$th powers, and $X^d$ is monic, hence has unit leading coefficient. Apply [lem-weil-pbc-lift-coprime-factorization-etale] to obtain $A\\to C$, etale and bijective modulo $I$, and $g,h\\in C[X]$ factoring the image of $f$ and reducing to the prescribed powers.",
    "uses": [
-    "lem-weil-pbc-lift-coprime-factorization-etale",
-    "def-weil-etale-morphism"
+    "lem-weil-pbc-lift-coprime-factorization-etale"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs), third sentence (Lemma Tag 07M1); the coprimality of $x^d$ and $(x-1)^d$, which Stacks leaves implicit, is written out"
-   }
+   "elementary": false
   },
   {
-   "text": "*Replacing $A$ by $A_1$.* Put $B_1=B\\otimes_AA_1$; it is integral over $A_1$ [lem-weil-pbc-integral-base-change]. The map $B\\to B_1$, $b\\mapsto b\\otimes1$, induces $B/IB=B\\otimes_A(A/I)\\xrightarrow{\\mathrm{id}\\otimes\\alpha_1}B\\otimes_A(A_1/IA_1)=B_1/IB_1$, an isomorphism; let $\\bar e_1$ be the image of $\\bar e$, an idempotent of $B_1/IB_1$. Then $y_1=y\\otimes1$ lifts $\\bar e_1$, and $f(y_1)=0$ since $f$ has coefficients in $A$. Set $b_1=g(y_1)$, $b_2=h(y_1)\\in B_1$. Then $b_1b_2=(gh)(y_1)=f(y_1)=0$; modulo $IB_1$, $b_1\\equiv\\bar e_1^d=\\bar e_1$ and $b_2\\equiv(\\bar e_1-1)^d=(-1)^d(1-\\bar e_1)^d=(-1)^d(1-\\bar e_1)$ (powers of the idempotents $\\bar e_1$, $1-\\bar e_1$).",
-   "uses": [
-    "lem-weil-pbc-integral-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs), fourth to sixth sentences ('After replacing A by A' ... moreover b_1b_2=0'); Algebra Lemma Tag 02JK for the integrality of the base change, used there without mention"
-   }
-  },
-  {
-   "text": "*The element $a$.* Let $J=(b_1,b_2)\\subseteq B_1$. Since $b_1+(-1)^db_2\\equiv\\bar e_1+(1-\\bar e_1)=1$ modulo $IB_1$, we have $J+IB_1=B_1$, so no prime of $B_1$ contains both $J$ and $IB_1$: $V(J)\\cap V(IB_1)=\\emptyset$. The map $\\operatorname{Spec}B_1\\to\\operatorname{Spec}A_1$ is closed [lem-weil-pbc-integral-spec-closed-map] ($B_1$ integral over $A_1$, step 3), so the image $Z$ of $V(J)$ is closed and equals its closure. $Z\\cap V(IA_1)=\\emptyset$: if $\\mathfrak q\\supseteq J$ is a prime of $B_1$ whose preimage in $A_1$ contains $IA_1$, then $\\mathfrak q\\supseteq IB_1+J=B_1$, impossible. By [lem-weil-pbc-separate-image-closed-from-closed] (with $R=A_1$, $S=B_1$, the ideals $IA_1$ and $J$) there is $a\\in A_1$ with $a\\equiv1$ modulo $IA_1$ and image of $a$ in $B_1$ lying in $J$.",
-   "uses": [
-    "lem-weil-pbc-integral-spec-closed-map",
-    "lem-weil-pbc-separate-image-closed-from-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs), sentences 'Thus (b_1,b_2)B/IB = B/IB ... see Lemma lemma-separate-image-closed-from-closed' (Algebra Lemmas Tag 00GU, 00HZ; Lemma Tag 07M3)"
-   }
-  },
-  {
-   "text": "*Replacing $A_1$ by $A_2=(A_1)_a$.* $\\operatorname{Spec}A_2\\to\\operatorname{Spec}A_1$ is an open immersion [lem-weil-pbc-principal-localization-open-immersion], hence etale, and $\\operatorname{Spec}A_2\\to\\operatorname{Spec}A$ is etale as a composite of etale morphisms [lem-weil-pbc-etale-composition-cancellation]. Since $a\\equiv1$ modulo $IA_1$, $A_2/IA_2=(A_1/IA_1)_{\\bar a}=(A_1/IA_1)_1=A_1/IA_1$ (localization commutes with quotients, and inverting $1$ changes nothing), so $\\beta:A_1/IA_1\\to A_2/IA_2$ is an isomorphism and $\\alpha_2=\\beta\\circ\\alpha_1:A/I\\to A_2/IA_2$ is an isomorphism. Put $B_2=B_1\\otimes_{A_1}A_2=(B_1)_a$; it is integral over $A_2$ [lem-weil-pbc-integral-base-change]. The image of $a$ in $B_2$ is a unit and lies in $JB_2$, so the images of $b_1,b_2$ (still written $b_1,b_2$) generate the unit ideal of $B_2$, and $b_1b_2=0$.",
-   "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-integral-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs), 'After replacing A by the localization A_a we get that (b_1,b_2)=B', and the general remark before Lemma Tag 07LX (composites of such etale maps are again such)"
-   }
-  },
-  {
-   "text": "*The idempotent $e$.* $\\operatorname{Spec}B_2=D(b_1)\\cup D(b_2)$ since no prime contains $(b_1,b_2)=B_2$, and $D(b_1)\\cap D(b_2)=\\emptyset$ since $b_1b_2=0$ lies in every prime. So $D(b_1)$ is open with open complement $D(b_2)$, hence open and closed, and there is a unique idempotent $e\\in B_2$ with $D(e)=D(b_1)$ [lem-weil-pbc-spec-clopen-idempotent]. (Explicitly: writing $1=ub_1+vb_2$, $e=ub_1$ works, since $e(1-e)=ub_1vb_2=0$, and $e\\notin\\mathfrak p\\iff b_1\\notin\\mathfrak p$ because $b_2\\in\\mathfrak p$ forces $e=1-vb_2\\notin\\mathfrak p$.)",
-   "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs), 'Then Spec(B)=D(b_1) ⨿ D(b_2) ... Let e in B be the idempotent corresponding to D(b_1)' (Algebra Lemma Tag 00EE)"
-   }
-  },
-  {
-   "text": "*$e$ lifts $\\bar e$.* Let $\\pi:B_2\\to B_2/IB_2$ be the quotient map and $\\bar e_2\\in B_2/IB_2$ the image of $\\bar e_1$ under $B_1/IB_1\\to B_2/IB_2$ (an isomorphism, $B\\otimes_A$ of $\\beta$), i.e. the image of $\\bar e$ under $B/IB\\cong B_2/IB_2$ induced by $\\alpha_2$. By step 3 and the map $B_1\\to B_2$, $\\pi(b_1)=\\bar e_2$. $\\operatorname{Spec}(B_2/IB_2)$ is the closed subset $V(IB_2)$ of $\\operatorname{Spec}B_2$, and for $x\\in B_2$ the open $D(\\pi(x))$ of it is $D(x)\\cap V(IB_2)$. Hence $D(\\pi(e))=D(e)\\cap V(IB_2)=D(b_1)\\cap V(IB_2)=D(\\pi(b_1))=D(\\bar e_2)$. Both $\\pi(e)$ and $\\bar e_2$ are idempotents of $B_2/IB_2$, so by the uniqueness in [lem-weil-pbc-spec-clopen-idempotent] (for the ring $B_2/IB_2$) $\\pi(e)=\\bar e_2$.",
-   "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs), last sentence ('by the uniqueness statement in Algebra, Lemma lemma-disjoint-decomposition')"
-   }
-  },
-  {
-   "text": "*Conclusion.* Take $A'=A_2$, $\\alpha=\\alpha_2$ and $e'\\in B\\otimes_AA'$ the image of $e$ under $B_2=(B\\otimes_AA_1)\\otimes_{A_1}A_2\\cong B\\otimes_AA_2$ (associativity of the tensor product). $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is etale and $\\alpha$ is an isomorphism (step 5); $e'$ is idempotent. The composite $\\rho:B\\otimes_AA'\\to B\\otimes_A(A'/IA')\\xrightarrow{\\mathrm{id}\\otimes\\alpha^{-1}}B/IB$ is, under these identifications, $\\pi$ followed by the inverse of the isomorphism $B/IB\\cong B_2/IB_2$ of step 7 (both send $b\\otimes a'$ to $b\\otimes\\alpha^{-1}(a'\\bmod IA')$), so $\\rho(e')=\\bar e$ by step 7.",
+   "text": "Construct the canonical equivalence $B/IB\\cong (B\\otimes_A C)/I(B\\otimes_A C)$ by the tensor-quotient equivalences and tensoring the quotient equivalence of $A\\to C$; it sends the class of $b$ to the class of $b\\otimes1$. In $T=B\\otimes_A C$, put $y_1=y\\otimes1$, $x=g(y_1)$ and $z=h(y_1)$. Evaluation is a ring map, so $xz=f(y_1)=0$. Reduction commutes with evaluation. Thus $x$ reduces to $\\bar y_1^d=\\bar y_1$, using idempotence and $d\\ge1$. The two reduced values are coprime by applying the evaluation ring map to the coprime polynomial powers.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M4 (lemma-lift-idempotent-upstairs); the bookkeeping of the identifications, implicit in Stacks' 'after replacing A by A'', is written out by the agent"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-make-tensor-pair-coprime] to $A,B,C$, the ideal $IC$ and the pair $x,z$. This gives a further etale $C\\to D$ preserving its quotient, and a Bezout identity $1=u\\,m(x)+v\\,m(z)$ in $B\\otimes_A D$, where $m$ is the map induced by $C\\to D$.",
+   "uses": [
+    "lem-weil-pbc-etale-make-tensor-pair-coprime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set $e=u\\,m(x)$. The equation $m(x)m(z)=0$ implies $e\\,v\\,m(z)=0$, whence $e^2=e(e+v\\,m(z))=e$. Compose the quotient equivalences of $A\\to C\\to D$ and obtain the canonical tensor quotient equivalence $\\beta:B/IB\\cong (B\\otimes_A D)/I(B\\otimes_A D)$, again checking its values on representatives. Write $t=\\beta(\\bar e)$. The reduction of $m(x)$ equals $t$ by functoriality of the quotient map. It is idempotent, and its product with the reduction of $m(z)$ is zero. Multiplying the reduced Bezout identity by $t$ yields $\\bar u t^2+\\bar v\\overline{m(z)}t=t$, so $\\bar u t=t$. Therefore the reduction of $e$ equals $t$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The composite $A\\to C\\to D$ is etale by [lem-weil-pbc-etale-composition-cancellation]. Take $A^{\\prime}=D$, the composite quotient equivalence $\\alpha$, and the idempotent $e$. The representative identities for $\\alpha$ and $\\beta$, and $\\beta(\\bar e)=e\\bmod I$, give every clause of the unchanged Lean statement.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-etale-morphism",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-etale-make-tensor-pair-coprime",
   "lem-weil-pbc-integral-idempotent-annihilating-polynomial",
-  "lem-weil-pbc-integral-spec-closed-map",
-  "lem-weil-pbc-lift-coprime-factorization-etale",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-separate-image-closed-from-closed",
-  "lem-weil-pbc-spec-clopen-idempotent"
+  "lem-weil-pbc-lift-coprime-factorization-etale"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.11.7, Tag 07M4 (lemma-lift-idempotent-upstairs), proof"
+  "place": "Tag 07M4 (lemma-lift-idempotent-upstairs), with the explicit Bezout construction e = u*x in place of the clopen/idempotent correspondence; tensor and quotient compatibility proved in Lean by N2"
  },
  "mathlib_searches": [
   {
@@ -218,5 +165,15 @@
   "group": "G1",
   "result": "pass",
   "note": "A,B commutative, Algebra A B = ring map, Algebra.IsIntegral, ebar in B/IB IsIdempotentElem; A' CommRingCat.{u} with g, Algebra A A' tied to g (rfl), Etale (Spec.map g) = recorded AlgebraicGeometry.Etale (#check); alpha pinned to induced map on representatives; e' IsIdempotentElem in B⊗A'; beta pinned to b|->b⊗1 (exists iff alpha iso, inverse = node's id_B⊗alpha^-1 composite), beta ebar = mk e'; algebraMap A (B⊗A') a = 1⊗g a (checked); node statement unchanged; I=⊥/⊤, zero rings ok"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T060747-L-2912021",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

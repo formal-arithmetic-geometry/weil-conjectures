@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-etale-make-tensor-pair-coprime",
+ "kind": "statement",
+ "title": "An integral tensor pair coprime modulo an ideal becomes coprime on an etale neighbourhood",
+ "statement": "Let $A,B,C$ be commutative rings, with $A$-algebra structures on $B$ and $C$, and suppose $B$ is integral over $A$. Let $I\\subseteq C$ be an ideal and put $S=B\\otimes_A C$. Let $x,z\\in S$ have coprime images in $S/IS$, meaning that these two images admit a Bezout identity. Then there exist a commutative ring $D$ and a ring map $\\psi:C\\to D$ such that $\\operatorname{Spec} D\\to\\operatorname{Spec} C$ is etale [def-weil-etale-morphism], the canonical map $C/I\\to D/ID$ is bijective, and the images of $x,z$ under $b\\otimes c\\mapsto b\\otimes\\psi(c)$ are coprime in $B\\otimes_A D$. The $A$-algebra structure on $D$ is the composite of $A\\to C$ and $\\psi$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Tag 07M4 (lemma-lift-idempotent-upstairs), separation and localization paragraph; the argument only uses coprimality modulo the extended ideal, not the zero-product condition"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=B\\otimes_A C$ and let $\\iota:C\\to S$ send $c$ to $1\\otimes c$. This ring map is integral by [lem-weil-pbc-integral-base-change], transporting along the tensor commutor. Put $J=(x,z)$ and $K=IS$. Choose lifts $u,v\\in S$ of the coefficients of a Bezout identity in $S/K$. Then $w=1-(ux+vz)\\in K$.",
+   "uses": [
+    "lem-weil-pbc-integral-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of $V(J)$ in $\\operatorname{Spec} C$ is closed by [lem-weil-pbc-integral-spec-closed-map]. It misses $V(I)$: if a prime $\\mathfrak p$ of $S$ contains $J$ and its inverse image contains $I$, then $K\\subseteq\\mathfrak p$, so both $w$ and $ux+vz$ belong to $\\mathfrak p$, forcing $1\\in\\mathfrak p$. Apply [lem-weil-pbc-separate-image-closed-from-closed] to obtain $a\\in C$ with $a\\equiv1\\pmod I$ and $\\iota(a)\\in J$.",
+   "uses": [
+    "lem-weil-pbc-integral-spec-closed-map",
+    "lem-weil-pbc-separate-image-closed-from-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take $D=C[a^{-1}]$ and let $\\psi:C\\to D$ be its localization map. Its spectrum map is an open immersion by [lem-weil-pbc-principal-localization-open-immersion], hence etale by [lem-weil-pbc-etale-composition-cancellation]. Since $a\\bmod I=1$, localization has a map $\\tau:D\\to C/I$ extending the quotient map. The ideal $ID$ lies in its kernel, so it factors through $D/ID$. This factorization is inverse to $C/I\\to D/ID$: one composite is the identity on the representatives $c\\bmod I$; the other is the identity after precomposition with $C\\to D$, hence is the identity by uniqueness of a localization map. Thus the canonical quotient map is bijective.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $m:S\\to B\\otimes_A D$ be induced by $b\\otimes c\\mapsto b\\otimes\\psi(c)$. Write $\\iota(a)=rx+sz$. Its image under $m$ equals $1\\otimes\\psi(a)$ and is a unit. If $t$ is its inverse, then $(t\\,m(r))m(x)+(t\\,m(s))m(z)=1$. This is the desired coprimality. The equalities on tensor factors follow from the universal property of the tensor product.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-separate-image-closed-from-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Tag 07M4 (lemma-lift-idempotent-upstairs), separation and localization paragraph; the argument only uses coprimality modulo the extended ideal, not the zero-product condition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an integral algebra S over R and an ideal I of R, two elements coprime modulo IS become coprime after localizing R at an element congruent to one modulo I",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCoprime, Ideal.Quotient.mk",
+   "results": "Ideal.pi_quotient_surjective, Ideal.quotientInfRingEquivPiQuotient_mk_apply, Ideal.quotientInfRingEquivPiQuotient_mk_eq",
+   "date": "2026-10-12",
+   "verdict": "no exact match; components used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoprime.*[Ll]ocalization|[Ll]ocalization.*IsCoprime",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match; components used in the Lean proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two elements in an integral algebra that generate the unit ideal modulo an extended ideal become coprime after an etale extension inducing an isomorphism on the quotient",
+   "results": "Polynomial.instEtaleUniversalCoprimeFactorizationRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePair.instEtaleRing, StandardEtalePresentation, Algebra.instIsStandardEtaleRing, Algebra.IsStandardEtale, StandardEtalePresentation.hasMap, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-12",
+   "verdict": "no exact match; components used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LiftIdempotentUpstairs",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 3 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'Let A^h be the filtered colimit of étale A-algebras B such that A/I → B/IB is an isomorphism. Then (A^h, IA^h) is a henselian pair and A/I = A^h/IA^h'; more-algebra.tex Lemma Tag 0A02); specifically steps 4 and 5 of lem-weil-pbc-lift-idempotent-upstairs: separation of the integral image and localization at an element equal to one modulo the ideal",
+   "via": [
+    "lem-weil-pbc-lift-idempotent-upstairs",
+    "lem-weil-pbc-etale-section-lifting-henselian-pair",
+    "lem-weil-pbc-pair-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleMakeTensorPairCoprime",
+  "file": "lean/Sheaf/RingTheory/EtaleMakeTensorPairCoprime.lean",
+  "declaration": "AlgebraicGeometry.exists_etale_isCoprime_tensor_of_isCoprime_quotient",
+  "statement": "theorem exists_etale_isCoprime_tensor_of_isCoprime_quotient {A : Type u} {B : Type v} {C : Type u} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra A C] [Algebra.IsIntegral A B] (I : Ideal C) (x z : TensorProduct A B C) (h : IsCoprime (Ideal.Quotient.mk (I.map (Algebra.TensorProduct.includeRight (R := A) (A := B))) x) (Ideal.Quotient.mk (I.map (Algebra.TensorProduct.includeRight (R := A) (A := B))) z)) : ∃ (D : Type u) (_ : CommRing D) (ψ : C →+* D), letI : Algebra A D := (ψ.comp (algebraMap A C)).toAlgebra; let ψA : C →ₐ[A] D := { ψ with commutes' := fun _ => rfl }; Etale (Spec.map (CommRingCat.ofHom ψ)) ∧ Function.Bijective (Ideal.quotientMap (I.map ψ) ψ Ideal.le_comap_map) ∧ IsCoprime (Algebra.TensorProduct.map (AlgHom.id A B) ψA x) (Algebra.TensorProduct.map (AlgHom.id A B) ψA z)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T060747-L-2912021",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T060747-L-2912021",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
