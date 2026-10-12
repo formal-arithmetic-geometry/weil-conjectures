@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-linear-equation-localization-polynomial-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-linear-equation-localization-polynomial",
+   "place": "stage-3 decomposition",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Core localization polynomial equivalence",
+ "statement": "Let A be a commutative ring, r a natural number, f : Fin r → A, and i : Fin r. Write I = (∑ j, f(j)X_j - 1), B = A[X_j : j : Fin r]/I [def-weil-pbc-mv-polynomial-ring], Af = A localized at f(i), and Bf = B localized at the image of f(i) [def-weil-ring-localization-away]. Equip Bf with its induced Af-algebra structure [lem-weil-pbc-localization-away-universal-property]. Then there exists an Af-algebra equivalence Af[Y_j : j ≠ i] ≃ Bf whose forward homomorphism is evaluation at the localized classes x_j of X_j, and whose inverse sends x_j to Y_j for every j ≠ i.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve): 'B_{f_i} is smooth over A_{f_i}. Details omitted.' (the isomorphism is the omitted detail)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Use polynomial evaluation for the forward map. For the inverse, send X_i to f(i)⁻¹(1−∑ j ≠ i f(j)Y_j) and X_j to Y_j otherwise. The relation evaluates to zero; factor through the quotient, then extend through localization since f(i) maps to a unit. The extension respects Af coefficients by uniqueness of localization. The two composites fix all generators, using the relation for X_i, and are identities by polynomial, quotient and localization uniqueness.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "proof of Lemma Tag 07EU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "eliminate a variable in multivariate polynomial quotient by a relation with invertible coefficient",
+   "results": "No direct match. MvPolynomial.toPolynomialAdjoinImageCompl assumes fields; presentation and renaming results do not prove the localization equivalence.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval₂",
+   "results": "eval₂, eval₂_X, eval₂_sum, eval₂_assoc and other evaluation identities; none is the required equivalence.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ee]quiv|invSelf_mul|mul_invSelf",
+   "results": "No direct equivalence match. Supplementary local rg finds IsLocalization.Away.mul_invSelf and Fintype.sum_eq_add_sum_subtype_ne, used in the formula proof.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a multivariate polynomial algebra modulo a linear relation at one coefficient is a polynomial algebra with that variable eliminated",
+   "results": "Service unavailable: Internal Server Error. No verdict asserted; used leanfinder, loogle and grep instead.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LinearEquationLocalizationPolynomial",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LinearEquationLocalizationPolynomialCore",
+  "file": "lean/Sheaf/RingTheory/LinearEquationLocalizationPolynomialCore.lean",
+  "declaration": "MvPolynomial.linearEquationLocalizationPolynomialCore",
+  "statement": "theorem linearEquationLocalizationPolynomialCore (A : Type u) [CommRing A]\n    (r : ℕ) (f : Fin r → A) (i : Fin r) :\n    let I : Ideal (MvPolynomial (Fin r) A) :=\n      Ideal.span {(∑ j : Fin r, C (f j) * X j) - 1}\n    let B := MvPolynomial (Fin r) A ⧸ I\n    let q := Ideal.Quotient.mk I\n    let Af := Localization.Away (f i)\n    let Bf := Localization.Away (algebraMap A B (f i))\n    letI : Algebra Af Bf := (Localization.awayMap (algebraMap A B) (f i)).toAlgebra\n    let x : Fin r → Bf := fun j ↦ algebraMap B Bf (q (X j))\n    ∃ e : MvPolynomial {j : Fin r // j ≠ i} Af ≃ₐ[Af] Bf,\n      e.toAlgHom = aeval (fun j ↦ x j.1) ∧\n      (∀ j : {j : Fin r // j ≠ i}, e.symm (x j.1) = X j)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112836-L-766474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112836-L-766474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

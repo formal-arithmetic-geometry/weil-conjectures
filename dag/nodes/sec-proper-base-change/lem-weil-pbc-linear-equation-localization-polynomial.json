@@ -29,64 +29,22 @@
  ],
  "proof": [
   {
-   "text": "(The map $\\Phi$ and the structure map.) Write $g=f_1x_1+\\dots+f_rx_r-1$, $\\pi:A[x_1,\\dots,x_r]\\to B$ the quotient map, $\\lambda:B\\to B_{f_i}$, $b\\mapsto b/1$, and $u=1/f_i\\in A_{f_i}$, so $f_iu=1$. The image of $f_i$ in $B_{f_i}$ is a unit, so by the universal property of localization [lem-weil-pbc-localization-away-universal-property] the composite $A\\to B\\to B_{f_i}$ extends uniquely to a ring map $\\alpha:A_{f_i}\\to B_{f_i}$ with $\\alpha(a/f_i^e)=a/f_i^e$; this is the $A_{f_i}$-algebra structure of the statement. By the universal property of the polynomial ring [def-weil-pbc-mv-polynomial-ring] over $A_{f_i}$ there is a unique $A_{f_i}$-algebra map $\\Phi:A_{f_i}[y_j:j\\ne i]\\to B_{f_i}$ with $\\Phi(y_j)=\\bar x_j/1$ ($j\\ne i$): this is the map of the statement.",
+   "text": "Obtain the equivalence and inverse values on the free variables from the core computation. Apply the proved eliminated-variable formula to that equivalence and combine the three clauses.",
    "uses": [
-    "lem-weil-pbc-localization-away-universal-property",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-ring-localization-away"
+    "lem-weil-pbc-linear-equation-localization-polynomial-core",
+    "lem-weil-pbc-linear-equation-localization-polynomial-formula"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve), line ~312: 'B_{f_i} is smooth over A_{f_i}. Details omitted.' (this computation is the omitted detail; written by an agent)"
-   }
-  },
-  {
-   "text": "(The map $\\Psi$.) Let $C=A_{f_i}[y_j:j\\ne i]$ and $z=u\\bigl(1-\\sum_{j\\ne i}f_jy_j\\bigr)\\in C$ (coefficients $f_j$ read in $A_{f_i}$ via $a\\mapsto a/1$). By the universal property of the polynomial ring [def-weil-pbc-mv-polynomial-ring] over $A$ ($C$ an $A$-algebra via $A\\to A_{f_i}\\to C$) there is a unique $A$-algebra map $\\psi_0:A[x_1,\\dots,x_r]\\to C$ with $\\psi_0(x_j)=y_j$ for $j\\ne i$ and $\\psi_0(x_i)=z$. Then $\\psi_0(g)=f_iz+\\sum_{j\\ne i}f_jy_j-1=f_iu\\bigl(1-\\sum_{j\\ne i}f_jy_j\\bigr)+\\sum_{j\\ne i}f_jy_j-1=0$, since $f_iu=1$. Hence $\\psi_0$ kills the ideal $(g)$ and factors through the quotient: $\\psi_0=\\psi_1\\circ\\pi$ for a unique ring map $\\psi_1:B\\to C$ (universal property of a quotient ring, i.e. the homomorphism theorem). $\\psi_1(\\bar f_i)=f_i/1$ is a unit of $C$ (inverse $u$), so by [lem-weil-pbc-localization-away-universal-property] $\\psi_1$ extends uniquely to a ring map $\\Psi:B_{f_i}\\to C$ with $\\Psi\\circ\\lambda=\\psi_1$, $\\Psi(b/f_i^e)=\\psi_1(b)u^e$. In particular $\\Psi(\\bar x_j/1)=y_j$ for $j\\ne i$ and $\\Psi(\\bar x_i/1)=f_i^{-1}\\bigl(1-\\sum_{j\\ne i}f_jy_j\\bigr)$, the formulas of the statement. $\\Psi$ is $A_{f_i}$-linear: $\\Psi(\\alpha(a/f_i^e))=\\Psi(\\bar a/f_i^e)=(a/1)u^e=a/f_i^e$, i.e. $\\Psi\\circ\\alpha$ is the structure map $A_{f_i}\\to C$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-localization-away-universal-property",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve), line ~312: 'B_{f_i} is smooth over A_{f_i}. Details omitted.' (this computation is the omitted detail; written by an agent)"
-   }
-  },
-  {
-   "text": "($\\Psi\\circ\\Phi=\\mathrm{id}$.) $\\Psi\\circ\\Phi:C\\to C$ is an $A_{f_i}$-algebra map (both are, step 1 and step 2) with $\\Psi(\\Phi(y_j))=\\Psi(\\bar x_j/1)=y_j$ for every $j\\ne i$; the identity of $C$ has the same values, so $\\Psi\\circ\\Phi=\\mathrm{id}_C$ by the uniqueness in the universal property of the polynomial ring [def-weil-pbc-mv-polynomial-ring].",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve), line ~312: 'B_{f_i} is smooth over A_{f_i}. Details omitted.' (this computation is the omitted detail; written by an agent)"
-   }
-  },
-  {
-   "text": "($\\Phi\\circ\\Psi=\\mathrm{id}$, conclusion.) Consider the two ring maps $\\Phi\\circ\\Psi\\circ\\lambda\\circ\\pi$ and $\\lambda\\circ\\pi$ from $A[x_1,\\dots,x_r]$ to $B_{f_i}$; both are $A$-algebra maps ($\\Phi\\circ\\Psi\\circ\\lambda\\circ\\pi=\\Phi\\circ\\psi_0$, and $\\Phi$ is $A_{f_i}$-linear, hence $A$-linear). On $x_j$, $j\\ne i$: $\\Phi(\\psi_0(x_j))=\\Phi(y_j)=\\bar x_j/1$. On $x_i$: $\\Phi(\\psi_0(x_i))=\\Phi(z)=\\alpha(u)\\bigl(1-\\sum_{j\\ne i}\\bar f_j\\bar x_j/1\\bigr)$, and in $B$ the relation $\\bar g=0$ gives $1-\\sum_{j\\ne i}\\bar f_j\\bar x_j=\\bar f_i\\bar x_i$, so $\\Phi(z)=\\alpha(u)\\alpha(f_i/1)(\\bar x_i/1)=\\bar x_i/1$ since $\\alpha(u)\\alpha(f_i/1)=\\alpha(1)=1$. So the two maps agree on all variables and are equal by [def-weil-pbc-mv-polynomial-ring]. Since $\\pi$ is surjective, $\\Phi\\circ\\Psi\\circ\\lambda=\\lambda$, and by the uniqueness in [lem-weil-pbc-localization-away-universal-property] (both $\\Phi\\circ\\Psi$ and $\\mathrm{id}$ are ring maps $B_{f_i}\\to B_{f_i}$ extending $\\lambda$) $\\Phi\\circ\\Psi=\\mathrm{id}_{B_{f_i}}$. With step 3, $\\Phi$ is an isomorphism of $A_{f_i}$-algebras with inverse $\\Psi$, which has the values on $\\bar x_j/1$ computed in step 2.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-localization-away-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07EU (lemma-final-solve), line ~312: 'B_{f_i} is smooth over A_{f_i}. Details omitted.' (this computation is the omitted detail; written by an agent)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-away-universal-property",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-ring-localization-away"
+  "lem-weil-pbc-linear-equation-localization-polynomial-core",
+  "lem-weil-pbc-linear-equation-localization-polynomial-formula"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "proof of Lemma Tag 07EU (lemma-final-solve): 'Details omitted.'; the computation is written by an agent from the universal properties of polynomial rings, quotients and localizations"
+  "place": "Tag 07EU, omitted computation; stage-3 reduction to the equivalence construction and proved relation computation"
  },
  "mathlib_searches": [
   {
@@ -162,5 +120,15 @@
   "group": "J1",
   "result": "pass",
   "note": "A:Type u CommRing; r,f:Fin r→A,i:Fin r (r≥1); I=span{∑C(f j)X j - 1}, B quotient; Af/Bf Localization.Away at f i / its image; Af→Bf = awayMap (A→B) via letI; x j = class/1; e ≃ₐ[Af] with toAlgHom = aeval(y_j↦x_j); inverse x_j↦X_j (j≠i), x_i↦C(invSelf)*(1-∑C(f j)X j); #check: C/X/aeval resolve to MvPolynomial.*"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112836-L-766474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

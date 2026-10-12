@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.LinearEquationLocalizationPolynomialCore
+import Sheaf.RingTheory.LinearEquationLocalizationPolynomialFormula
 
 /-!
 # Localizing a polynomial algebra with one linear relation
@@ -63,6 +65,9 @@ theorem linearEquationLocalizationPolynomial (A : Type u) [CommRing A]
         C (IsLocalization.Away.invSelf (S := Af) (f i)) *
           (1 - ∑ j : {j : Fin r // j ≠ i},
             C (algebraMap A Af (f j.1)) * X j) := by
-  sorry
+  dsimp
+  obtain ⟨e, he, hf⟩ := linearEquationLocalizationPolynomialCore A r f i
+  refine ⟨e, he, hf, ?_⟩
+  exact linearEquationLocalizationPolynomialFormula A r f i e he hf
 
 end MvPolynomial
