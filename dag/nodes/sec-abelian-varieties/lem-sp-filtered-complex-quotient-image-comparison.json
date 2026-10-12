@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-filtered-complex-quotient-image-comparison",
+ "kind": "statement",
+ "title": "Natural image comparison for a filtered-complex subquotient",
+ "statement": "Let $\\mathcal A$ be abelian [def-sp-abelian], $K$ a cochain complex, and $F$ a decreasing filtration by subcomplexes [def-sp-filtration]. Fix integers $p,n,r$ with $r\\ge1$ and an inclusion $B_r\\le Z_r$ of the subobjects of $\\mathrm{gr}^pK^n$ [def-sp-filtered-complex-subquotients]. Put $S=F^pK/F^{p+r}K$ and $T=F^{p-r+1}K/F^{p+1}K$. There is a map $\\varphi:S\\to T$ induced by the inclusion $F^p\\to F^{p-r+1}$, characterized by its projection square. Put $R=F^pK^n\\cap d^{-1}(F^{p+r}K^{n+1})$, viewed inside $F^pK^n$. There are maps $z:R\\to Z_r$ and $g:R\\to Z^n(S)$ whose composites with the subobject inclusion and cycle inclusion are respectively the projections from $R$ to $\\mathrm{gr}^pK^n$ and $S^n$. There is an isomorphism $e:Z_r/B_r\\cong\\operatorname{im}(H^n(\\varphi))$ with $z\\pi e\\iota=g\\pi_H H^n(\\varphi)$ on these representatives. The map, representatives, and equation are part of the conclusion, with exactly the types recorded in the Lean statement. No finite-filtration or spectral-sequence assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "The inequalities p-r+1 ≤ p and p+1 ≤ p+r follow from r ≥ 1. The inclusion F^p → F^{p-r+1}, followed by projection modulo F^{p+1}, kills F^{p+r}, and hence factors through the cokernel S, giving φ with the required projection square. Let R = F^p ∩ d⁻¹(F^{p+r}) inside F^p. Its projection to the graded piece factors through Z by the image universal property, giving z. Its projection to S is killed by the differential, so factors through the kernel S.cycles n, giving g. The composite R → H(S) → H(T) has image image Hφ: R surjects onto the cycles of S, and cycles surject onto H(S). Its kernel consists exactly of representatives dy+f with y in F^{p-r+1} and f in F^{p+1}. Since the representative and f lie in F^p, dy lies in F^p ∩ d(F^{p-r+1}); conversely these boundaries lie in R by d²=0. The map R → Z → Z/B is epic and has the same kernel. The abelian first isomorphism theorem therefore identifies Z/B with image Hφ. Taking this induced isomorphism, rather than any isomorphism, gives the required equality on representatives.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K",
+  "note": "The categorical details of the displayed formulas are expanded by X2; the image-kernel argument is step 3 of the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of filtered cycles by filtered boundaries is the image of the homology map between quotient complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of the map on cohomology between two filtration quotient complexes is the quotient of filtered cycles by filtered boundaries",
+   "results": "LeanFinder returned general homology image and group cohomology declarations, but none with this filtration quotient comparison or representative compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "kernelSubobject, imageSubobject",
+   "results": "0 hits; unknown identifier kernelSubobject.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*complex|complexCycles|complexBoundaries|filtration.*homology in Mathlib/Algebra/Homology and Mathlib/CategoryTheory/Subobject; complexCycles|complexBoundaries in both project roots",
+   "results": "No matching Mathlib filtered-complex theorem. The project has the subobject definitions and the associated spectral-sequence construction, and downstream statements relying on the parent module; no independent theorem for this calculation.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredComplexZBDescription",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3, filtered-complex cycle-boundary calculation",
+   "via": [
+    "lem-sp-filtered-complex-ZB-description"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredComplexQuotientImageComparison.lean",
+  "declaration": "CategoryTheory.DecreasingFiltration.filteredComplex_quotient_image_comparison",
+  "statement": "theorem filteredComplex_quotient_image_comparison (F : DecreasingFiltration K)\n    (p n r : ℤ) (hr : 1 ≤ r)\n    (hBZ : F.complexBoundaries p n r ≤ F.complexCycles p n r) :\n    let Z := F.complexCycles p n r\n    let B := F.complexBoundaries p n r\n    ∃ (ha : p - r + 1 ≤ p) (hb : p + 1 ≤ p + r),\n      let hs := (Int.le_add_one (show p ≤ p from le_rfl)).trans hb\n      let ht := ha.trans (Int.le_add_one (show p ≤ p from le_rfl))\n      let S := F.complexQuotient p (p + r) hs\n      let T := F.complexQuotient (p - r + 1) (p + 1) ht\n      ∃ φ : S ⟶ T,\n        F.complexQuotientπ p (p + r) hs ≫ φ =\n          Subobject.ofLE (F.step p) (F.step (p - r + 1)) (F.antitone_step ha) ≫\n            F.complexQuotientπ (p - r + 1) (p + 1) ht ∧\n        let R := F.complexCycleRepresentatives p n r\n        let Hφ := HomologicalComplex.homologyMap φ n\n        ∃ (z : (R : C) ⟶ (Z : C)) (g : (R : C) ⟶ S.cycles n),\n          z ≫ Z.arrow = R.arrow ≫\n            (F.complexQuotientπ p (p + 1) (Int.le_add_one (show p ≤ p from le_rfl))).f n ∧\n          g ≫ S.iCycles n = R.arrow ≫ (F.complexQuotientπ p (p + r) hs).f n ∧\n          ∃ e : cokernel (Subobject.ofLE B Z hBZ) ≅ image Hφ,\n            z ≫ cokernel.π (Subobject.ofLE B Z hBZ) ≫ e.hom ≫ image.ι Hφ =\n              g ≫ S.homologyπ n ≫ Hφ",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085400-L-48026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085400-L-48026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

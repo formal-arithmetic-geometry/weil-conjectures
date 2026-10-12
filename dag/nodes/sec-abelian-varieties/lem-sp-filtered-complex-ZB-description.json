@@ -24,62 +24,48 @@
  ],
  "proof": [
   {
-   "text": "Use the filtered-complex construction [lem-sp-filtered-complex-associated-spectral-sequence-construction]. Its graded differential object has component $F^{p+1}K^{p+1+q}$ and its injective shift map is induced by $F^{p+1}K^{p+1+q}\\hookrightarrow F^pK^{p+1+q}$; hence the resulting page differentials have bidegree $(r,1-r)$ and its initial graded object is $\\operatorname{gr}^pK^{p+q}$.",
+   "text": "Apply filteredComplex_associated_spectralSequence to obtain one E and the isomorphisms E_r^{p,q} ≅ cokernel(ofLE B_r Z_r) for every r ≥ 1. Retain its inclusion witnesses hBZ.",
    "uses": [
     "lem-sp-filtered-complex-associated-spectral-sequence-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 12.18.1 and Remark 12.18.2, applied in the proof of Lemma 12.19.2 (Tag 012K)"
-   }
+   "elementary": true
   },
   {
-   "text": "Unwinding the kernel and image formulas for the self-map spectral sequence gives, in the component of total degree $p+q$, $Z_r^{p,q}=((F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$ and $B_r^{p,q}=((F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$. The inclusion $B_r^{p,q}\\subseteq Z_r^{p,q}$ follows because $d^2=0$ and $d(F^{p-r+1})\\subseteq F^{p-r+1}$, while the page definition is $E_r^{p,q}=Z_r^{p,q}/B_r^{p,q}$.",
+   "text": "Apply filteredComplex_firstPage_cycles_boundaries to get the two subobject equalities for r=1.",
    "uses": [
-    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-    "def-sp-filtration"
+    "lem-sp-filtered-complex-first-page-cycles-boundaries"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 12.19.2, proof after Remark 12.18.2, Tag 012K"
-   }
+   "elementary": true
   },
   {
-   "text": "For the equivalent cohomology description (working with elements in the abelian category, as in Stacks), write $\\tilde Z=F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1})$. Every class in ^{p+q}(F^pK/F^{p+r}K)$ is represented by some \\in\\tilde Z$, and since \\ge1$ we have \\in F^{p+r}\\subseteq F^{p+1}$, so the same $ is a cocycle of ^{p-r+1}K/F^{p+1}K$ representing the image class. Hence the image is the quotient of $\\tilde Z$ by $\\tilde Z\\cap(d(F^{p-r+1}K^{p+q-1})+F^{p+1}K^{p+q})$. If =dy+f$ with \\in F^{p-r+1}K^{p+q-1}$ and \\in F^{p+1}K^{p+q}$, then =x-f\\in F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1})$; conversely every element of ^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1})$ lies in $\\tilde Z$ because ^2=0$. So this kernel is $\\tilde Z\\cap((F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1}))+F^{p+1}K^{p+q})$, and the map $\\tilde Z\\to Z_r^{p,q}/B_r^{p,q}$, which is surjective by the definition of ^{p,q}$, has exactly this kernel. Thus the image is naturally ^{p,q}/B_r^{p,q}$.",
+   "text": "Apply filteredComplex_quotient_image_comparison to each hBZ to obtain the natural image comparison including the projection square and equality on representatives. For E_1, specialize this comparison to r=1. Normalize p-1+1=p. Its source and target are both the graded complex, and its projection square says π ≫ φ = π. The projection π is epic, so φ is the identity. Thus homologyMap φ is the identity; image.eqToIso and imageMonoIsoSource identify its image with H(gr). Compose with the page-one subquotient isomorphism.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-filtration"
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 12.19.2, cycle-boundary formulas and quotient-complex interpretation, Tag 012K"
-   }
+   "elementary": true
   },
   {
-   "text": "At $r=1$, the condition $d^{-1}(F^{p+1})$ is the kernel of the differential on $\\operatorname{gr}^pK$, and $d(F^p)$ gives its boundaries, so $Z_1$ and $B_1$ are the cycles and boundaries and $E_1=H(\\operatorname{gr}^pK)$. Since the filtration is bounded degreewise, for fixed $p,q$ both tails $F^{p+r}K^{p+q+1}$ and $F^{p-r+1}K^{p+q-1}$ are eventually zero or equal to the relevant endpoint; the displayed subobjects therefore stabilize for sufficiently large $r$.",
+   "text": "Unpack finiteness as F.step a=top and F.step b=bottom. Antitonicity gives F.step i=bottom for b≤i and F.step i=top for i≤a. For fixed p put R=max(1,max(b-p,p+1-a)). Whenever r≥R, both F.step(p+r) and F.step(p+R) are bottom, while both F.step(p-r+1) and F.step(p-R+1) are top. Apply the function S ↦ imageSubobject(S.arrow.f(n±1)) to these equalities and rewrite the definitions of complexCycles and complexBoundaries. The subobjects at r and R are equal. Transport the cokernels of their inclusions using these equalities and proof irrelevance, and compose the page-r isomorphism, the transported cokernel isomorphism and the inverse page-R isomorphism. This proves all three stabilization clauses with no remaining obligation.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-filtration"
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 12.19.2, formulas immediately preceding and following the statement, Tag 012K"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-  "def-sp-abelian",
+  "lem-sp-filtered-complex-first-page-cycles-boundaries",
+  "lem-sp-filtered-complex-quotient-image-comparison",
+  "def-sp-filtered-complex-subquotients",
   "def-sp-filtration"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Lemma 12.19.2 (Tag 012K), proof"
+  "place": "Tag 012K, cycle-boundary formulas and filtered-complex construction; X2 formalizes stabilization from the finite bounds and derives E_1 using the image comparison at r=1."
  },
  "mathlib_searches": [
   {
@@ -166,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085400-L-48026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

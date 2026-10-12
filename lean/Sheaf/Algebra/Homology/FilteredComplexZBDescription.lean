@@ -8,7 +8,8 @@ module
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 
 /-!
 # Cycles and boundaries of a filtered complex
@@ -24,6 +25,48 @@ universe vZ uZ
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.DecreasingFiltration
+
+private theorem complexSubobjects_stabilize
+    {C : Type uZ} [Category.{vZ} C] [Abelian C]
+    {K : CochainComplex C ℤ} (F : DecreasingFiltration K) (hF : F.IsFinite)
+    (p n : ℤ) :
+    ∃ (R : ℤ) (_hR : 1 ≤ R), ∀ r : ℤ, R ≤ r →
+      F.complexCycles p n r = F.complexCycles p n R ∧
+      F.complexBoundaries p n r = F.complexBoundaries p n R := by
+  obtain ⟨a, b, ha, hb⟩ := hF
+  have hbot (i : ℤ) (hi : b ≤ i) : F.step i = ⊥ := by
+    apply le_antisymm _ bot_le
+    simpa only [hb] using F.antitone_step hi
+  have htop (i : ℤ) (hi : i ≤ a) : F.step i = ⊤ := by
+    apply le_antisymm le_top
+    simpa only [ha] using F.antitone_step hi
+  let R := max 1 (max (b - p) (p + 1 - a))
+  have hR : 1 ≤ R := le_max_left _ _
+  have hRb : b - p ≤ R := (le_max_left _ _).trans (le_max_right _ _)
+  have hRa : p + 1 - a ≤ R := (le_max_right _ _).trans (le_max_right _ _)
+  refine ⟨R, hR, ?_⟩
+  intro r hr
+  have hhi : F.step (p + r) = F.step (p + R) := by
+    rw [hbot (p + r) (by omega), hbot (p + R) (by omega)]
+  have hlo : F.step (p - r + 1) = F.step (p - R + 1) := by
+    rw [htop (p - r + 1) (by omega), htop (p - R + 1) (by omega)]
+  have hhi' : F.complexStep (p + r) (n + 1) = F.complexStep (p + R) (n + 1) :=
+    congrArg (fun S : Subobject K ↦ imageSubobject (S.arrow.f (n + 1))) hhi
+  have hlo' : F.complexStep (p - r + 1) (n - 1) =
+      F.complexStep (p - R + 1) (n - 1) :=
+    congrArg (fun S : Subobject K ↦ imageSubobject (S.arrow.f (n - 1))) hlo
+  constructor
+  · simp only [complexCycles, hhi']
+  · simp only [complexBoundaries, hlo']
+
+private theorem cokernelOfLE_iso_of_eq
+    {C : Type uZ} [Category.{vZ} C] [Abelian C] {A : C}
+    {B Z B' Z' : Subobject A} (h : B ≤ Z) (h' : B' ≤ Z')
+    (hB : B = B') (hZ : Z = Z') :
+    Nonempty (cokernel (Subobject.ofLE B Z h) ≅ cokernel (Subobject.ofLE B' Z' h')) := by
+  subst B'
+  subst Z'
+  exact ⟨Iso.refl _⟩
 
 /-- Cycles, boundaries, quotient-complex image description, first page and stabilization.
 Source: Stacks, Tag 012K (blueprint: lem-sp-filtered-complex-ZB-description).
@@ -88,6 +131,40 @@ theorem filteredComplex_ZB_description
         Nonempty
           ((E.page r (le_trans (le_trans (show 0 ≤ 1 from zero_le_one) hR) hr)).X (p, q) ≅
             (E.page R (le_trans (show 0 ≤ 1 from zero_le_one) hR)).X (p, q))) := by
-  sorry
+  obtain ⟨E, _, _, hpages⟩ := filteredComplex_associated_spectralSequence K F
+  have hfirst := filteredComplex_firstPage_cycles_boundaries F
+  refine ⟨E, hfirst, ?_, ?_, ?_⟩
+  · intro p q
+    obtain ⟨hBZ, ⟨e⟩⟩ := hpages p q 1 le_rfl
+    have hcmp := filteredComplex_quotient_image_comparison F p (p + q) 1 le_rfl hBZ
+    dsimp only at hcmp
+    generalize hx : p - 1 + 1 = a at hcmp
+    have hap : a = p := by omega
+    clear hx
+    subst a
+    obtain ⟨ha, hb, φ, hφ, z, g, hz, hg, eH, heH⟩ := hcmp
+    let π := F.complexQuotientπ p (p + 1) (Int.le_add_one le_rfl)
+    let : Epi π := by
+      dsimp [π, complexQuotientπ]
+      infer_instance
+    have hφid : φ = 𝟙 (F.complexQuotient p (p + 1) (Int.le_add_one le_rfl)) := by
+      apply (cancel_epi π).1
+      simpa only [π, Subobject.ofLE_refl, Category.id_comp, Category.comp_id] using hφ
+    subst φ
+    exact ⟨e ≪≫ eH ≪≫ image.eqToIso (HomologicalComplex.homologyMap_id _ _) ≪≫
+      imageMonoIsoSource (𝟙 ((F.complexQuotient p (p + 1)
+        (Int.le_add_one le_rfl)).homology (p + q)))⟩
+  · intro p q r hr
+    obtain ⟨hBZ, he⟩ := hpages p q r hr
+    exact ⟨hBZ, he, filteredComplex_quotient_image_comparison F p (p + q) r hr hBZ⟩
+  · intro p q
+    obtain ⟨R, hR, hstable⟩ := complexSubobjects_stabilize F hF p (p + q)
+    refine ⟨R, hR, ?_⟩
+    intro r hr
+    obtain ⟨hZ, hB⟩ := hstable r hr
+    obtain ⟨hBZr, ⟨er⟩⟩ := hpages p q r (hR.trans hr)
+    obtain ⟨hBZR, ⟨eR⟩⟩ := hpages p q R hR
+    obtain ⟨equot⟩ := cokernelOfLE_iso_of_eq hBZr hBZR hB hZ
+    exact ⟨hZ, hB, ⟨er ≪≫ equot ≪≫ eR.symm⟩⟩
 
 end CategoryTheory.DecreasingFiltration
