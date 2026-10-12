@@ -57,7 +57,21 @@ theorem isFinite_of_finite_pullback {D T : Scheme.{u}} (f : D ⟶ T) (i : D ⟶ 
     (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T),
       Finite (pullback f t : Scheme.{u})) :
     IsFinite f := by
-  sorry
+  subst hi
+  have : LocallyQuasiFinite (i ≫ ℙ(n; T) ↘ T) := by
+    refine LocallyQuasiFinite.of_finite_preimage_singleton _ fun x ↦ ?_
+    let K := T.residueField x
+    let t : Spec (.of (AlgebraicClosure K)) ⟶ T :=
+      Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))) ≫ T.fromSpecResidueField x
+    have := hfib (AlgebraicClosure K) t
+    refine (Set.finite_range (pullback.fst (i ≫ ℙ(n; T) ↘ T) t)).subset fun y hy ↦ ?_
+    obtain ⟨p⟩ : Nonempty (Spec (.of (AlgebraicClosure K))) := inferInstance
+    obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := i ≫ ℙ(n; T) ↘ T) (g := t)
+      y p (by
+      simp only [Set.mem_preimage, Set.mem_singleton_iff] at hy
+      rw [hy]; exact (T.fromSpecResidueField_apply x _).symm)
+    exact ⟨z, hz⟩
+  exact IsFinite.of_isProper_of_locallyQuasiFinite _
 
 /-- Blueprint `lem-fin-projective-generically-finite`: A projective family with finite generic
 fibre is generically finite.
@@ -71,7 +85,24 @@ theorem exists_isFinite_morphismRestrict_of_generic_fibre {A : Type u} [CommRing
     (hD : topologicalKrullDim (pullback f
       (Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A)))) : Scheme.{u}) ≤ 0) :
     ∃ U : (Spec (.of A)).Opens, U ≠ ⊥ ∧ IsFinite (f ∣_ U) := by
-  sorry
+  subst hi
+  set η := Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A)))
+  have : IsLocallyNoetherian (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd _ η)
+  have : IsLocallyArtinian (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    .of_topologicalKrullDim_le_zero hD
+  have : CompactSpace (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd _ η)
+  have : Finite (pullback (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η : Scheme.{u}) :=
+    finite_of_compact_of_discrete
+  obtain ⟨p⟩ : Nonempty (Spec (.of (FractionRing A))) := inferInstance
+  obtain ⟨V, hV, hfin⟩ := exists_isFinite_morphismRestrict_of_finite_preimage_singleton
+    (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (η p) <| by
+      refine (Set.finite_range
+        (pullback.fst (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) η)).subset fun y hy ↦ ?_
+      obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback y p hy
+      exact ⟨z, hz⟩
+  exact ⟨V, fun h ↦ by simp [h] at hV, hfin⟩
 
 /-- Blueprint `lem-fin-finite-over-projective`: Finite covers of projective schemes are
 projective.
@@ -88,6 +119,23 @@ theorem exists_isClosedImmersion_of_isFinite {S T Y : Scheme.{u}} [IsAffine S] (
     [IsFinite h] :
     ∃ (m : Type u) (_ : Finite m) (j : Y ⟶ ℙ(m; S)),
       IsClosedImmersion j ∧ j ≫ ℙ(m; S) ↘ S = h ≫ f := by
-  sorry
+  subst hi
+  have hs (j : n) : IsAffineOpen
+      (Scheme.Modules.Hom.zeroLocus (coordinateSection n S j)).support.compl := by
+    rw [compl_support_zeroLocus_coordinateSection]
+    exact isAffineOpen_standardOpen n S j
+  have hcov : ⨆ j, (Scheme.Modules.Hom.zeroLocus (coordinateSection n S j)).support.compl =
+      ⊤ := by
+    simp_rw [compl_support_zeroLocus_coordinateSection]
+    exact iSup_standardOpen n S
+  obtain ⟨L, hL, s, hs', hcov'⟩ :=
+    Scheme.Modules.exists_isAffineOpen_compl_support_zeroLocus_of_isAffineHom (h ≫ i)
+      (twist n S 1) (coordinateSection n S) hs hcov
+  obtain ⟨m, hm, j, hj, hjS⟩ :=
+    exists_isImmersion_projectiveSpace_of_isAffineOpen (h ≫ i ≫ ℙ(n; S) ↘ S) L s hs' hcov'
+  refine ⟨m, hm, j, ?_, by simpa using hjS⟩
+  have : IsProper (j ≫ ℙ(m; S) ↘ S) := hjS ▸ inferInstance
+  have : IsProper j := IsProper.of_comp j (ℙ(m; S) ↘ S)
+  exact (IsClosedImmersion.iff_isProper_and_mono j).mpr ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.ProjectiveSpace
