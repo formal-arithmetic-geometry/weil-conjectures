@@ -7,11 +7,8 @@ module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
 import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
-import Sheaf.RingTheory.EquationCountFibreDimensionFlat
-import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.PopescuLiftChartFibres
+import Sheaf.RingTheory.PopescuLiftChartFlat
 
 @[expose] public section
 
@@ -77,6 +74,25 @@ theorem popescu_lift_smooth_special (R : Type a) (Cbar : Type c)
       @IsSmoothAtPrime (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar))
         (d.liftingAlgebra ⧸
           Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra))
-        _ _ cmod.toAlgebra q) := by sorry
+        _ _ cmod.toAlgebra q) := by
+  rw [← forall_and]
+  intro q
+  rw [← imp_and]
+  intro hq
+  obtain ⟨k, hk⟩ := hd.cover (PrimeSpectrum.comap c.toRingHom q) hq
+  obtain ⟨hfibre, hspecial⟩ :=
+    popescu_lift_chart_fibres R Cbar π d hd c cmod hc hcmod q k hk
+  have hflat := popescu_lift_chart_flat R Cbar π d hd hAnnR c hc q k hk
+  have : FinitePresentation R d.liftingAlgebra := d.finitePresentation
+  let qD : PrimeSpectrum d.liftingAlgebra :=
+    PrimeSpectrum.comap (Ideal.Quotient.mk _) q
+  have hfp : ∃ g : d.liftingAlgebra,
+      g ∉ qD.asIdeal ∧
+      FinitePresentation R (Localization.Away g) :=
+    ⟨1, qD.isPrime.one_notMem,
+      FinitePresentation.of_isLocalizationAway (1 : d.liftingAlgebra)⟩
+  exact ⟨flat_smooth_fibre_smooth_at_prime (R := R)
+    (S := d.liftingAlgebra) qD hfp hflat hfibre,
+    c (d.ε (d.reduced (d.a k))), hk, hspecial⟩
 
 end Algebra

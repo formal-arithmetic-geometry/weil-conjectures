@@ -1,0 +1,200 @@
+{
+ "id": "lem-weil-pbc-popescu-lift-chart-fibres",
+ "kind": "statement",
+ "title": "Smooth special and residue-field fibres on a prepared Popescu chart",
+ "statement": "Let R and Cbar be commutative rings, pi in R, and compatible algebra structures R to Cbar and R/pi^2 to Cbar. Let d be prepared finite polynomial data [lem-weil-pbc-popescu-lift-preparation]: P=R[x_1,...,x_n], finitely many f_l, a_k, subsets E_k, coefficients h_{klj}, g_{kl}, and a surjection epsilon:(R/pi^2)[x] to Cbar with the prescribed kernel, smooth charts, conormal and differential bases, normalized coefficients and cleared relations. Put Q=P[z_1,...,z_m], u_l=f_l-pi z_l, p_{kl}=a_k z_l-sum_{j in E_k}h_{klj}z_j-pi g_{kl}, D=ULift(Q/(u_l,p_{kl})), and D_0=D/pi D. Let c:Cbar to D_0 be an R-algebra map taking epsilon(X_i) to the original generator x_i of D_0. Fix a prime q of D_0 and a chart k with c(epsilon(reduced(a_k))) outside q. Put qD equal to the inverse image of q in D, and p equal to its contraction to R. Let cmod:Cbar/pi Cbar to D_0 be a ring map whose composite with the quotient projection is c. Then the fibre ring kappa(p) tensor_R D is smooth at the prime corresponding to qD [def-weil-pbc-localization-at-prime] [def-weil-pbc-singular-ideal]. Also the principal localization (D_0)_{c(epsilon(reduced(a_k)))} is smooth over Cbar/pi Cbar for the algebra structure induced by cmod [def-weil-pbc-smooth-ring-map]. No annihilator or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write P=R[x], Q=P[z], u_l=f_l-pi z_l and p_{kl}=a_k z_l-sum_{j in E_k}h_{klj}z_j-pi g_{kl}. Modulo pi and after inverting a_k, the cleared relation expresses every f_l in the ideal of the f_j with j in E_k. The normalized p_{kl} for l in E_k are zero. Eliminate z_l for l outside E_k using p_{kl}=0.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  },
+  {
+   "text": "For another chart k prime and j in E_k, set b_j=a_{k prime}h_{klj}-sum_{j prime in E_{k prime}}h_{k prime,l,j prime}h_{k,j prime,j}. Comparing the expressions for a_k a_{k prime} f_l in the reduced conormal module gives sum b_j f_j=0. The specified basis on chart k makes every b_j zero in Cbar localized at a_k. Equality in localization clears a power of a_k, placing that multiple in I+pi^2P. In D/pi D all f_l are already zero. The expansion a_k p_{k prime,l}-a_{k prime}p_{kl}+sum h_{k prime,l,j prime}p_{k,j prime}=sum b_j z_j modulo pi therefore makes every extra p relation redundant.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  },
+  {
+   "text": "The quotient after inverting a_k is consequently (Cbar/pi Cbar)_{a_k}[z_j : j in E_k]. The inverse sends each complementary z_l to a_k inverse times sum h_{klj}z_j. The two substitutions fix the original x_i and the remaining z_j, and their composites fix each eliminated z_l by its relation. Surjectivity and kernel of epsilon identify the coefficient quotient; the generator identity hc and the quotient identity hcmod identify its map with cmod. ULift is transported by its algebra equivalence.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  },
+  {
+   "text": "Principal localization of Cbar/pi Cbar is smooth over Cbar/pi Cbar. The polynomial algebra over it is smooth, and composition gives Smooth over Cbar/pi Cbar for the localization at c(epsilon(reduced(a_k))).",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  },
+  {
+   "text": "Prepared.smooth, identified using epsilon, is smoothness of Cbar localized at epsilon(reduced(a_k)) over R/pi^2. Base change modulo pi gives smoothness of (Cbar/pi Cbar)_{a_k} over R/pi. Hence the displayed polynomial chart is smooth over R/pi. If qD is the inverse image of q in D and p its contraction to R, pi is zero in the residue field of p. Base changing the chart to that field gives the fibre algebra p.Fiber D localized at a_k. The prime corresponding to qD contracts to qD, so a_k avoids it by hk. This smooth principal localization witnesses smoothness at the fibre prime.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-popescu-lift-preparation",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The special fibre of the prepared Popescu quotient is smooth on each chart, and its residue field fibres are smooth",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth special fibre chart of a polynomial quotient with relations a z_l minus sum h_j z_j",
+   "date": "2026-10-13",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.toPresentation_val, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.Ring, StandardEtalePresentation.toPresentation, Algebra.IsStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension",
+   "verdict": "No exact statement for the prepared lifting quotient; generic ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|popescu|prepared.*smooth|smooth.*prepared",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean",
+   "verdict": "No exact statement for the prepared lifting quotient; generic ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, MvPolynomial",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "Second reading: no statement identifies the explicit prepared quotient or proves this chart conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eliminating linear auxiliary variables in a localized polynomial quotient to obtain a smooth polynomial algebra over the coefficient quotient",
+   "date": "2026-10-13",
+   "results": "Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero, Algebra.PreSubmersivePresentation.localizationAway, Algebra.Generators.compLocalizationAwayAlgHom_X_inl, Algebra.Generators.compLocalizationAwayAlgHom, Algebra.Generators.localizationAway_σ, Algebra.Generators.localizationAway, Algebra.Presentation.localizationAway, Algebra.Generators.toAlgHom_ofComp_localizationAway",
+   "verdict": "Second reading: no statement identifies the explicit prepared quotient or proves this chart conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftSmoothSpecial",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP within the essential-surjectivity approximation: computation of the special fibre on D(a_k) and its residue-field base changes",
+   "via": [
+    "lem-weil-pbc-popescu-lift-smooth-special",
+    "lem-weil-pbc-popescu-lift-smooth",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftChartFibres",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftChartFibres.lean",
+  "declaration": "Algebra.popescu_lift_chart_fibres",
+  "statement": "theorem popescu_lift_chart_fibres (R : Type a) (Cbar : Type c)\n    [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (c : Cbar →ₐ[R] (d.liftingAlgebra ⧸\n      Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (cmod : (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar)) →+*\n      (d.liftingAlgebra ⧸\n        Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (hc : ∀ i : Fin d.n, c (d.ε (MvPolynomial.X i)) = Ideal.Quotient.mk _ (d.x i))\n    (hcmod : cmod.comp (Ideal.Quotient.mk _) = c.toRingHom)\n    (q : PrimeSpectrum (d.liftingAlgebra ⧸\n      Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra)))\n    (k : Fin d.r) (hk : c (d.ε (d.reduced (d.a k))) ∉ q.asIdeal) :\n    let qD := PrimeSpectrum.comap (Ideal.Quotient.mk _) q\n    let p := PrimeSpectrum.comap (algebraMap R d.liftingAlgebra) qD\n    IsSmoothAtPrime p.asIdeal.ResidueField\n      (PrimeSpectrum.preimageEquivFiber R d.liftingAlgebra p ⟨qD, rfl⟩) ∧\n    @Smooth (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar)) _\n      (Localization.Away (c (d.ε (d.reduced (d.a k))))) _\n      (letI := cmod.toAlgebra; inferInstance)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T213848-L-1207955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T213848-L-1207955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

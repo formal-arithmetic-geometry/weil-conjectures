@@ -9624,3 +9624,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:38 L: merged deliver/D3/Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue (stage 3; reviewer PASS; first push; landing 20261012T213847-L-1207586 (interface); batch 20261012T213845; modules 3; new nodes 2)
 - 21:38 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelAnnihilation (stage 3; reviewer PASS; first push; landing 20261012T213847-L-1207694 (interface); batch 20261012T213845; modules 3; new nodes 2)
 - 21:38 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FieldEquivariantGermsOnePoint (stage 3; reviewer PASS; first push; landing 20261012T213847-L-1207854 (proof); batch 20261012T213845; modules 1; new nodes 0)
+- 21:38 L: merged deliver/F1/Sheaf.RingTheory.PopescuLiftSmoothSpecial (stage 3; reviewer PASS; first push; landing 20261012T213848-L-1207955 (interface); batch 20261012T213845; modules 3; new nodes 2)
