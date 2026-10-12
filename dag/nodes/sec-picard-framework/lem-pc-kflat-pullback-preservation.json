@@ -26,63 +26,55 @@
  ],
  "proof": [
   {
-   "text": "Fix $x\\in X$ and put $y=f(x)$, $A=\\mathcal O_{Y,y}$ and $B=\\mathcal O_{X,x}$, with ring map $A\\to B$ induced by $f^\\sharp$. The natural inverse-image stalk isomorphisms identify $(f^{-1}K^n)_x$ with $K^n_y$ and $(f^{-1}\\mathcal O_Y)_x$ with $A$ [lem-weil-pbc-topological-inverse-image-stalk]. Applying the natural change-of-rings tensor-stalk isomorphism [lem-weil-pbc-stalk-change-of-rings-tensor] degreewise to the definition of $f^*$ identifies $(f^*K^\\bullet)_x$ with $K_y^\\bullet\\otimes_A B$ as a complex, including the differentials by naturality.",
+   "text": "The shape and square-zero laws of the explicit tensorPullbackDifferential follow from preservation of zero and composition by the inverse-image abelian-sheaf functor, sectionwise ModuleCat.extendScalars, and module sheafification. The four private helpers prove these laws directly from functor laws; apply K.shape and K.d_comp_d.",
    "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "lem-weil-pbc-stalk-change-of-rings-tensor"
+    "def-pc-topological-inverse-image-module",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 0098 (label lemma-stalk-pullback-modules), via Tags 008H and 008B"
-   }
+   "elementary": true
   },
   {
-   "text": "By the forward implication of [lem-pc-kflat-stalk-criterion] applied on $Y$, the K-flatness of $K^\\bullet$ implies that $K_y^\\bullet$ is a K-flat complex of $A$-modules.",
+   "text": "Package (X,OX) and (Y,OY) as ringed spaces. The forward implication of the K-flat stalk criterion applied to K on Y gives K-flatness of K_(f x) for each x.",
    "uses": [
     "lem-pc-kflat-stalk-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma Tag 06YC (label lemma-pullback-K-flat), citing Lemma Tag 06YB (label lemma-check-K-flat-stalks)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $L^\\bullet$ be any acyclic complex of $B$-modules. Forgetting the $B$-action leaves an acyclic $A$-complex, since kernels and images of its differentials are the same additive subgroups. Associativity of tensor products, with the total-complex direct sums, gives $\\operatorname{Tot}(L^\\bullet\\otimes_B(K_y^\\bullet\\otimes_A B))\\cong\\operatorname{Tot}(L^\\bullet\\otimes_A K_y^\\bullet)$. The latter is acyclic by the K-flatness from step 2. Thus $K_y^\\bullet\\otimes_A B$ is K-flat over $B$ by definition [def-pc-kflat-complex]. This is the two-line base-change argument of Stacks Tag 06Y1; no flatness of $A\\to B$ is required.",
+   "text": "Apply the termwise tensor-pullback stalk-complex comparison to the constructed pullback P, with identity termwise isomorphisms. Its differential compatibility square is the equality d≫id=id≫d. Obtain a ring map ρ:OY_(f x)→OX_x and a chain isomorphism from extension of scalars of K_(f x) to P_x.",
    "uses": [
-    "def-pc-kflat-complex",
+    "lem-pc-tensor-pullback-stalk-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any acyclic OX_x-complex L, K-flat module base change gives acyclicity of Tot(L⊗ extension_ρ K_(f x)). Map the preceding chain isomorphism through the functor Tot(L⊗-), and apply HomologicalComplex.ExactAt.of_iso in every degree to transfer acyclicity to Tot(L⊗P_x).",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 06Y1 (label lemma-base-change-K-flat), proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Steps 1 and 3 show that $(f^*K^\\bullet)_x$ is K-flat over $\\mathcal O_{X,x}$ for every $x\\in X$. The reverse implication of [lem-pc-kflat-stalk-criterion] on $X$ gives that $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
+   "text": "The reverse implication of the K-flat stalk criterion on X now proves IsKFlat of the tensor pullback complex.",
    "uses": [
     "lem-pc-kflat-stalk-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma Tag 06YC (label lemma-pullback-K-flat), citing Lemma Tag 06YB (label lemma-check-K-flat-stalks)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-topological-inverse-image-stalk",
-  "lem-weil-pbc-stalk-change-of-rings-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-extension-of-scalars",
   "lem-pc-kflat-stalk-criterion",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pc-tensor-pullback-stalk-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma Tag 06YC (label lemma-pullback-K-flat), using Tags 06YB, 0098 and 06Y1"
+  "place": "Tag 06YC, using Tags 06YB, 0098 and 06Y1; stage-3 Lean reduction by R2 on 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -250,5 +242,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085327-L-35102",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
