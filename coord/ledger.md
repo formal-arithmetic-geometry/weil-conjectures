@@ -5761,3 +5761,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:43 L: returned deliver/K1/Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions (reviewer RETURN: (reviewer X-1a26e, head 1a26ee8d4) D1: PrimeCoefficientCurveAssertionsFirstHalf and PrimeCoefficientCurveAssertionsSecon)
 - 00:44 L: merged deliver/K1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero (stage 3; reviewer PASS; first push; landing 20261012T004403-L-637054 (proof); modules 1; new nodes 0)
 - 00:44 L: merged deliver/E1/Sheaf.AlgebraicGeometry.TorsionEtaleSheaf (stage 3; reviewer PASS; first push; landing 20261012T004444-L-639286 (proof); modules 1; new nodes 0)
+- 00:47 L: returned deliver/E1/Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding (reviewer RETURN: (reviewer X-37d07, head 37d07423e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Co)
