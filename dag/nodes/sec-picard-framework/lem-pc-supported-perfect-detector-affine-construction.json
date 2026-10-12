@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-supported-perfect-detector-affine-construction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine Koszul zero-detector proof, construction and open-restriction comparison",
+   "via": [
+    "lem-pc-supported-perfect-detector-affine",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine supported Koszul object and open-unit comparison",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let X be an affine scheme with chosen derived categories for module sheaves and every open restriction [def-pc-derived-category]. Let T be closed with quasi-compact complement, and let U be the open whose underlying set is X minus T. There exist a quasi-coherent derived object E, a right adjoint R to exact derived restriction to U, and an adjunction, such that E is perfect [def-pc-perfect-complex], every cohomology stalk of E outside T is zero, and for every quasi-coherent derived K (without any support condition), vanishing of Hom(E[n],K) for all integers n makes the canonical adjunction unit at K invertible.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0A9A and 09IR, affine paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical affine presentation X isomorphic to Spec of its global section ring A. The quasi-compact open U is a finite union of principal opens D(f_i); their common zero locus is T. The zero ring and the empty tuple are allowed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the finite Koszul complex on f_i, put its degree-q term in cohomological degree minus q, sheafify termwise, localize, and transport along the affine presentation. Each term is finite locally free and the complex is bounded, so it is strictly perfect locally and has quasi-coherent homology. Multiplication by f_i is null-homotopic; on D(f_i) it is invertible, hence the complex is acyclic there. Thus all cohomology stalks outside T vanish.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0663"
+   }
+  },
+  {
+   "text": "Derived open restriction has the derived direct image as a right adjoint, constructed using injective resolutions. The canonical comparison is independent of that presentation of the right adjoint. Apply koszul_open_orthogonality on Spec A with its complement U, then transport the adjunction and unit along the affine presentation and the module-category equivalence. It makes the canonical unit invertible for every quasi-coherent K orthogonal to all shifts of the constructed Koszul object.",
+   "uses": [
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-generation-koszul-orthogonal",
+  "lem-pc-ringed-spaces-derived-adjoint-general"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0A9A and 09IR, affine paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction to an open is zero if cohomology stalks vanish on that open",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex supported on closed subset affine scheme detects zero by orthogonality; cohomology stalks vanish on open subset restriction derived category zero",
+   "results": "Basic-open vanishing and derived boundedness lemmas, but no scheme-level Koszul comparison or supported derived restriction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*detector|stalk.*zero|zero.*stalk|mapHomologyIso|section_ext in Mathlib and both library roots",
+   "results": "No existing exact statement. Restriction vanishing is proved using TopCat.Presheaf.section_ext, ShortComplex.mapHomologyIso, DerivedCategory.homologyFunctorFactors, and DerivedCategory.isIso_iff. KoszulOpenOrthogonality is the existing comparison input, not its transport and construction on an arbitrary affine scheme.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedPerfectDetectorAffineConstruction.lean",
+  "declaration": "AlgebraicGeometry.supported_perfect_detector_affine_construction",
+  "statement": "theorem supported_perfect_detector_affine_construction\n    (X : Scheme.{u}) [IsAffine X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)\n    (U : X.Opens) (hU : (U : Set X) = Tᶜ) :\n    ∃ (E : schemeDerivedQCohCategory X)\n      (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X)\n      (adj : (SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R),\n      Scheme.IsPerfect X E.obj ∧\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E.obj).val.presheaf x))) ∧\n      ∀ K : schemeDerivedQCohCategory X,\n        (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsIso (adj.unit.app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T112852-L-772597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T112852-L-772597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

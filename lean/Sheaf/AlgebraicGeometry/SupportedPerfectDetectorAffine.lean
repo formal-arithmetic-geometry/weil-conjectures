@@ -1,23 +1,23 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group P3
+Authors: SHEAF group V1
 -/
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
+import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction
+import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Affine supported zero detection
-
 Source: Stacks Project, Tag 0A9A, affine case.
 (blueprint: lem-pc-supported-perfect-detector-affine).
 -/
 
 @[expose] public section
-
 universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
@@ -58,6 +58,32 @@ theorem supported_perfect_detector_affine
           Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) →
         (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsZero K.obj := by
-  sorry
+  classical
+  have htop : IsAffineOpen (⊤ : X.Opens) := by
+    by_cases hs : s.Nonempty
+    · obtain ⟨V, hV⟩ := hs
+      have heq : s = {V} := Finset.eq_singleton_iff_unique_mem.mpr
+        ⟨hV, fun W hW ↦ Finset.card_le_one.mp hcard W hW V hV⟩
+      have hVtop : (V : X.Opens) = ⊤ := by simpa [heq] using hcover
+      exact hVtop ▸ V.property
+    · have heq : s = ∅ := Finset.not_nonempty_iff_eq_empty.mp hs
+      have hbot : (⊥ : X.Opens) = ⊤ := by simpa [heq] using hcover
+      exact hbot ▸ isAffineOpen_bot X
+  have : IsAffine (⊤ : X.Opens).toScheme := htop
+  have : IsAffine X := .of_isIso X.topIso.inv
+  let U : X.Opens := ⟨Tᶜ, hT.isOpen_compl⟩
+  obtain ⟨E, R, adj, hE, hsupport, hunit⟩ :=
+    supported_perfect_detector_affine_construction X T hT hTc U rfl
+  refine ⟨E, hE, hsupport, ?_⟩
+  intro K hK horth
+  have := hunit K horth
+  have hz := supported_derived_restriction_zero X T U (by rfl) K.obj hK
+  have hR : IsZero (R.obj
+      (((SheafOfModules.overFunctor.{u}
+        (moduleRings X.toRingedSpace) U).mapDerivedCategory).obj K.obj)) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (adj.homEquiv _ _).symm.injective
+    exact hz.eq_of_tgt _ _
+  exact hR.of_iso (asIso (adj.unit.app K.obj))
 
 end AlgebraicGeometry

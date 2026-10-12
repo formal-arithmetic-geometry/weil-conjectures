@@ -28,24 +28,38 @@
  ],
  "proof": [
   {
-   "text": "If the cover is empty, its union is empty, so X has no points. Every module sheaf and every derived object is zero. Take the strictly perfect zero complex. Otherwise the cover has one member, which equals X. Thus X is affine. Identify X with Spec A by the canonical affine presentation. Quasi-compactness of X minus T gives finitely many functions f_i whose principal opens cover that complement. Sheafify the actual finite Koszul complex on these functions and localize it. It is perfect and has quasi-coherent cohomology. Each f_i acts null-homotopically, so its cohomology stalks vanish off their common zero locus T (Tag 0663). For a quasi-coherent K supported on T and orthogonal to every shift of this complex, apply koszul_open_orthogonality with the affine chart equal to X and open X minus T. The restriction of K to this open is zero: its cohomology sheaves have zero stalks there. The canonical unit therefore identifies K with derived pushforward of zero. A right adjoint preserves zero, so K is zero. The same calculation handles T empty (the Koszul complex is acyclic) and T equal to X (the empty Koszul tuple).",
+   "text": "The cardinality bound makes the finite cover either empty or a singleton. In the singleton case its member equals top by the cover equality. In the empty case bottom equals top. Both opens are affine, so the top subscheme, hence X, is affine.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set U=X minus T and apply the affine Koszul construction and open-unit comparison to obtain a perfect supported quasi-coherent E, a right adjoint R to derived restriction, and an adjunction whose unit at every quasi-coherent K orthogonal to the shifts of E is invertible.",
    "uses": [
-    "lem-pc-perfect-generation-koszul-orthogonal"
+    "lem-pc-supported-perfect-detector-affine-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, affine paragraph"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a supported K orthogonal to E, derived restriction is zero by the stalkwise restriction-vanishing lemma. The adjunction identifies every endomorphism of R(K restricted to U) with a map into the zero restriction. These maps are all equal, so its identity equals zero and the pushforward is zero. Transport the zero-object property across the invertible unit.",
+   "uses": [
+    "lem-pc-supported-derived-restriction-zero"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-generation-koszul-orthogonal"
+  "lem-pc-supported-perfect-detector-affine-construction",
+  "lem-pc-supported-derived-restriction-zero"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A9A, affine case"
+  "by": "agent",
+  "agent": "V1 stage-3 worker",
+  "date": "2026-10-12",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tags 0A9A and 09IR, affine paragraphs"
+  },
+  "note": "The source route is unchanged; affine-cover reduction, supported restriction vanishing, and right-adjoint zero preservation are implemented in Lean."
  },
  "mathlib_searches": [
   {
@@ -111,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T085319-L-31861",
+  "landing": "20261012T112852-L-772597",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
