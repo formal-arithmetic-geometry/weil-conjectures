@@ -8,6 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationSurjective
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationInjective
+
 /-!
 # Bijectivity of evaluation on the geometric stalk of units
 
@@ -52,6 +55,10 @@ theorem etale_units_stalk_evaluation_bijective (K : Type u) [Field K] :
               (SeparableClosure K)ˣ) =
           (ΓSpecIso (.of Ω)).hom
             (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))) →
-      Function.Bijective f := by sorry
+      Function.Bijective f := by
+  dsimp
+  intro f hf
+  exact ⟨etale_units_stalk_evaluation_injective K f hf,
+    etale_units_stalk_evaluation_surjective K f hf⟩
 
 end AlgebraicGeometry.Scheme

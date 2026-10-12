@@ -1,0 +1,139 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+ },
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "evaluation on the geometric etale stalk of units over a field; separability and bijectivity",
+   "results": "Service unavailable: Internal Server Error on worker queries.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bijective evaluation map from etale geometric stalk multiplicative group to separable closure units",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, StandardEtalePair.homEquiv. None states the stalk evaluation result.",
+   "date": "2026-10-13",
+   "verdict": "related algebraic results, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Uu]nits|[Uu]nits.*stalk|stalk.*[Ee]valuat|[Ee]valuat.*stalk in Mathlib AlgebraicGeometry/Sites and WeilConjectures/AlgebraicGeometry/Sites; exact new declaration names in dag/nodes and both library roots",
+   "results": "No exact declaration matches. Nearby GmGenericPoint and DivisorMap use Zariski localization of units. Existing residue-field separability node supplies part of the proof of the separability theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric point fiber units sheaf injectivity surjectivity separable closure",
+   "results": "germToFunctionField_injective, SpecToEquivOfField, specTargetImageFactorization_app_injective, germ_injective_of_isIntegral: Zariski or residue-field tools, no geometric etale units-stalk comparison.",
+   "date": "2026-10-13",
+   "verdict": "related tools only; no exact match (second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+   "results": "toPresheafFiber_jointly_surjective, presheafFiber_hom_ext, toPresheafFiber_w, toPresheafFiber_presheafFiberDesc: generic colimit tools, no finite separable pointed-neighbourhood comparison.",
+   "date": "2026-10-13",
+   "verdict": "generic stalk tools only (second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber_(jointly_surjective|eq_iff)|etale_units_stalk_evaluation_(injective|surjective); local rg: separable.*stalk|stalk.*separable|gm.*fiber|fiber.*gm|units.*fiber|fiber.*units",
+   "results": "Mathlib Point.Basic has jointly_surjective, jointly_surjective2 and eq_iff; GmGenericPoint concerns generic-point localization. No existing component declaration in either library root. Higher Galois comparisons depend on this item and cannot be used here.",
+   "date": "2026-10-13",
+   "verdict": "no existing theorem of either component (second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-stalk-evaluation-bijective",
+   "place": "Surjectivity of geometric stalk evaluation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "id": "lem-sc-etale-units-stalk-evaluation-surjective",
+ "title": "Surjectivity of geometric stalk evaluation",
+ "statement": "Let $K$ be a field, $K^{sep}$ its separable closure, $\\Omega$ its algebraic closure, $p$ its geometric point [def-weil-pbc-geometric-stalks], and $\\mathbb G_m$ its units sheaf [def-sc-gm-torsor]. Suppose an additive homomorphism $f:(\\mathbb G_m)_p\\to (K^{sep})^\\times$ [def-sc-galois-units-cohomology] satisfies the evaluation formula on every unit germ: its image embedded into $\\Omega$ is the value of the representing unit at the geometric lift. Then $f$ is surjective. This conclusion has no Galois action or equivariance clause.",
+ "proof": [
+  {
+   "text": "Let a be a unit of the separable closure, with its multiplicative group written additively. The subfield L = K(a) inside the separable closure is finite and separable over K and contains both a and its inverse. Spec L is therefore etale over Spec K, and the composite embedding of L into the algebraic closure gives a geometric lift x. Via the global-sections isomorphism for Spec L, a and its inverse define a unit section z on this neighbourhood. Let t be the germ of z at x. The evaluation formula for f says that the underlying value of f(t) embedded in the algebraic closure is the embedded value of a. Injectivity of the separable-closure embedding, followed by extensionality of units and transport through the additive wrapper, gives f(t) = a. Thus every target element has a preimage. This construction uses only separable extensions, even for imperfect K.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-sc-gm-torsor",
+    "def-sc-galois-units-cohomology",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "def-sc-gm-torsor",
+  "def-sc-galois-units-cohomology",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationBijective",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitsStalkEvaluationSurjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_units_stalk_evaluation_surjective",
+  "statement": "theorem etale_units_stalk_evaluation_surjective (K : Type u) [Field K] :\n    let Ω := AlgebraicClosure K\n    let S := Spec (.of K)\n    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    ∀ f : (p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf →+\n        Field.galoisUnitsTopRep K,\n      (∀ (X : S.Etale) (x : p.fiber.obj X) (z : S.gmSheaf.obj.obj (op X)),\n        algebraMap (SeparableClosure K) Ω\n            (Additive.toMul (f (p.toPresheafFiber X x S.gmSheaf.obj z)) :\n              (SeparableClosure K)ˣ) =\n          (ΓSpecIso (.of Ω)).hom\n            (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))) →\n      Function.Surjective f",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T184349-L-4021810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T184349-L-4021810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
