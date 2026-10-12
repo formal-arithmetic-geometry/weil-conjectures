@@ -1,0 +1,104 @@
+{
+ "id": "stage3-cech-general-columns",
+ "kind": "statement",
+ "title": "universe-lifted Cech double complex with column comparisons",
+ "statement": "universe-lifted Cech double complex with column comparisons",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
+  "place": "Steps 1--2: universe-lifted injective-resolution double complex and its column and total comparisons"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose a universe-lifted injective resolution, form its Cech double complex, and transport the equal-universe column comparison along canonical ULift equivalences.",
+   "uses": [
+    "def-sc-cech-resolution-double-complex",
+    "lem-sc-cech-resolution-columns"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-resolution-double-complex",
+  "lem-sc-cech-resolution-columns"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
+  "place": "Steps 1--2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "independent universe Cech double complex sheaf cohomology",
+   "results": "No direct theorem returned; search unavailable for this project-specific construction",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂ AddCommGrpCat Cech homology",
+   "results": "No direct independent-universe comparison theorem",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'ULift|exists_cechDoubleComplex_general|cechResolutionDoubleComplex' lean/WeilConjectures lean/Sheaf",
+   "results": "Only equal-universe Cech resolution comparisons exist; no general theorem",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-spectral",
+   "place": "independent-universe part of the target proof",
+   "via": [
+    "lem-sc-cech-spectral"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralColumns",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SheafCohomology/CechGeneralColumns.lean",
+  "declaration": "CategoryTheory.Sheaf.exists_cechDoubleComplex_general_columns",
+  "statement": "theorem Sheaf.exists_cechDoubleComplex_general_columns\n    [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]\n    (F : Sheaf J AddCommGrpCat.{v}) (X : C) {ι : Type w} {U : ι → C}\n    (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :\n    ∃ D : HomologicalComplex₂ AddCommGrpCat.{w} (ComplexShape.up ℕ) (ComplexShape.up ℕ),\n      ∀ q : ℕ, Nonempty (((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) q).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj D ≅ (cechComplexFunctor fun i ↦ Over.mk (π i)).obj\n          ((Over.forget X).op ⋙ F.cohomologyPresheaf q))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434371",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

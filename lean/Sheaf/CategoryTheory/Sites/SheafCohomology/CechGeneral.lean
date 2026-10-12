@@ -4,9 +4,7 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.CategoryTheory.CechResolutionColumns
-import Sheaf.CategoryTheory.CechResolutionDoubleComplex
-import Sheaf.CategoryTheory.CechResolutionTotal
+import Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralTotal
 
 /-! General-universe Cech double complex comparison. -/
 
@@ -50,6 +48,7 @@ theorem Sheaf.exists_cechDoubleComplex_general
         (cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧
       ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) := by
-  sorry
+  obtain ⟨D, hcol⟩ := Sheaf.exists_cechDoubleComplex_general_columns F X π hπ
+  exact ⟨D, hcol, Sheaf.cechDoubleComplex_general_total F X π hπ D hcol⟩
 
 end CategoryTheory
