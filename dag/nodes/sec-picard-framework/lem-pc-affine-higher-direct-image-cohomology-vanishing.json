@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-affine-higher-direct-image-cohomology-vanishing",
+ "kind": "statement",
+ "title": "Affine higher direct image cohomology vanishing",
+ "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], with $S$ affine. For an $\\mathcal O_X$-module $M$ which is quasi-coherent [pqf-def-coherent], every $q\\in\\mathbb N$ and every $p>0$, the module $H^p(S,R^q f_*M)$ is zero. Ordinary higher direct images and module cohomology are [def-pc-ringed-spaces-derived-direct-image, def-sc-ringed-space-module-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XJ (1), Tag 01XB; sites-cohomology.tex Tag 03FD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Install the quasi-coherence instance of M and the enough-injectives instance supplied by moduleSheaves_abelian_enoughInjectives. Apply Scheme.Modules.isQuasicoherent_higherDirectImage to the ordinary right derived moduleDirectImage object in degree q. Only clause (1) of the qcqs higher-image theorem is used; no uniform bound is needed.",
+   "uses": [
+    "lem-pc-ordinary-higher-image-quasi-coherent",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine vanishing to each R^q f_*M. The source comparison identifies its Ext-model cohomology with module right-derived global sections. Transfer the subsingleton additive group across this equivalence; a module with subsingleton underlying additive group is a zero object. This includes q=0, the zero module and the empty affine base.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-pc-ordinary-higher-image-quasi-coherent",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XJ (1), Tag 01XB; sites-cohomology.tex Tag 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive cohomology of a higher direct image of quasi coherent sheaf over affine base is zero",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive cohomology of a higher direct image of quasi coherent sheaf over affine base is zero",
+   "results": "Sheaf.H, Sheaf.cohomologyPresheaf and unrelated affine transition-limit lemmas; no vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|rightDerived in Mathlib/AlgebraicGeometry/Modules and Mathlib/Algebra/Category/ModuleCat/Sheaf; directImage.*restrict in both local roots",
+   "results": "Source DirectImage.Sections now has an acyclic usable quasi-coherence declaration. Its affine-section comparison requires IsSeparated and is not used. Combine its quasi-coherence declaration with affine vanishing and the module/source comparison.",
+   "date": "2026-10-13",
+   "verdict": "existing source theorem used through the displayed comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenHigherDirectImageSectionsIso",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare dualizing sheaves; uniform upper bound in Tag 08D5, ordinary affine section bound; Tag 01XK, together with Tag 01XJ (1) and Cohomology Tags 01E1, 01E4 and 01F4 (2); Affine higher direct image cohomology vanishing",
+   "via": [
+    "lem-pc-affine-open-higher-direct-image-sections-iso",
+    "lem-pc-uniform-inverse-affine-sections-bound",
+    "lem-pc-uniform-direct-image-bound-core",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineHigherDirectImageCohomologyVanishing.lean",
+  "declaration": "AlgebraicGeometry.isZero_affine_higherDirectImage_moduleCohomology",
+  "statement": "theorem isZero_affine_higherDirectImage_moduleCohomology\n    {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] [IsAffine S]\n    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hM : M.IsQuasicoherent)\n    (q p : ℕ) (hp : 0 < p) :\n    IsZero ((RingedSpace.moduleCohomology S.toRingedSpace p).obj\n      (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj M))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T215154-L-1303845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T215154-L-1303845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

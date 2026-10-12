@@ -10,10 +10,12 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.Paper.HigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
+import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
 
 /-! # Leray comparison on affine opens of the target
 
@@ -53,6 +55,38 @@ theorem nonempty_affineOpen_higherDirectImage_sections_iso
       ((((RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ U)).rightDerived p).obj M) ≅
         (RingedSpace.openModuleSections S.toRingedSpace U).obj
           (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M)) :=
-  by sorry
+  by
+    let V := f ⁻¹ᵁ U
+    let N := (Scheme.Modules.restrictFunctor V.ι).obj M
+    let g := f ∣_ U
+    let : IsAffine U.toScheme := hU
+    let : M.IsQuasicoherent := hM
+    have hN : N.IsQuasicoherent :=
+      Scheme.Modules.isQuasicoherent_restrictFunctor V.ι M
+    have : QuasiCompact g := by dsimp [g]; infer_instance
+    have : QuasiSeparated g := by dsimp [g]; infer_instance
+    obtain ⟨ε, _, hε⟩ := exists_lerayEdge_isIso_of_vanishing g
+    have hvan (q r : ℕ) (hr : 0 < r) :
+        IsZero ((RingedSpace.moduleCohomology U.toScheme.toRingedSpace r).obj
+          (((RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerived q).obj N)) :=
+      isZero_affine_higherDirectImage_moduleCohomology g N hN q r hr
+    let : IsIso ((ε p).app N) := hε N hvan p
+    obtain ⟨a⟩ := nonempty_openModuleCohomology_addEquiv_restrict_H X M V p
+    obtain ⟨b, _⟩ := Scheme.Modules.exists_moduleCohomology_source_comparison V.toScheme p
+    let eSource :
+        (((RingedSpace.openModuleSections X.toRingedSpace V).rightDerived p).obj M) ≅
+          (forget₂ _ AddCommGrpCat).obj
+            ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace p).obj N) :=
+      (a.trans (b N).symm).toAddCommGrpIso
+    obtain ⟨eRestrict⟩ := nonempty_higherDirectImage_openRestriction_iso f U M p
+    let G := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat
+    let L : S.Modules :=
+      ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M
+    let eSections : G.obj ((Scheme.Modules.restrictFunctor U.ι).obj L) ≅
+        (RingedSpace.openModuleSections S.toRingedSpace U).obj L :=
+      Scheme.Modules.restrictAppIso U.ι L ⊤ ≪≫
+        L.presheaf.mapIso (eqToIso U.ι_image_top.symm).op
+    exact ⟨eSource ≪≫ asIso ((ε p).app N) ≪≫ G.mapIso eRestrict ≪≫ eSections⟩
 
 end AlgebraicGeometry
