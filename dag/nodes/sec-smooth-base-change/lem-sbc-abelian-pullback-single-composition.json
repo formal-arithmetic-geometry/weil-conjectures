@@ -1,0 +1,123 @@
+{
+ "id": "lem-sbc-abelian-pullback-single-composition",
+ "kind": "statement",
+ "title": "Exact abelian pullback composition on single complexes",
+ "statement": "Let $S,Y,Y\\prime$ be schemes [def-weil-pbc-scheme-conventions], let $a:Y\\prime\\to Y$, $h:Y\\to S$, $h\\prime:Y\\prime\\to S$, and $w:a\\gg h=h\\prime$. Let $A$ be an abelian etale sheaf on $S$ [def-weil-pbc-etale-sheaves]. Write $c_f:D^+(f^{-1})(A[0])\\to(f^{-1}A)[0]$ for the canonical exact-pullback single-complex comparison [def-weil-pbc-derived-inverse-image]. Let $e:h\\prime^{-1}\\cong h^{-1}\\circ a^{-1}$ be the underived composition comparison and let $\\theta:D^+(h\\prime^{-1})\\cong D^+(h^{-1})\\circ D^+(a^{-1})$ be its canonical derived composition comparison, transported along $w$. Then $c_{h\\prime}(A)\\gg e(A)[0]\\gg c_a(h^{-1}A)^{-1}=\\theta(A[0])\\gg D^+(a^{-1})(c_h(A))$. No shift, direct image, coefficient morphism, raw class, or evaluation occurs in this equality.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/EtalePullbackSingleComp.lean; https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Proved generic private helpers single_hom, complex_single_comp, derived_single_comp, complex_single_natIso, derived_single_natIso, plus_single_comp, plus_single_natIso; reuse for abelian sheaves rather than module sheaves."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Import all Sheaf.AlgebraicGeometry.EtalePullbackSingleComp to reuse its already proved generic private plus_single_comp and plus_single_natIso lemmas. Transport along w, cancel the exact abelian pullback single-comparison isomorphism, expand upperStarPlusComp, and apply those two existing generic identities to the abelian inverse-image functors and upperStarComp. No generic coherence lemma is restated.",
+   "uses": [
+    "lem-sbc-pullback-single-comp"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-pullback-single-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/EtalePullbackSingleComp.lean; https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "C1 returned-delivery repair: import all the existing module and apply its generic private plus_single_comp and plus_single_natIso; transport and cancel to obtain the abelian orientation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition comparison for exact functors on bounded below derived categories compatible with single complexes",
+   "results": "Service unavailable: Internal Server Error. No results obtained.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction compatibility with inverse image composition and homology shift naturality",
+   "results": "Eight hits: generic exact functor factorization and single-complex comparisons; no exact comparison or shift-transition theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shift_app_comm\"",
+   "results": "Four generic NatTrans.shift_app_comm and CommShiftCore component lemmas; require shift-compatibility instances.",
+   "date": "2026-10-13",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarPlusComp_single|derivedPlus.*CommShift|CommShift.*derivedPlus",
+   "results": "msearch found zero hits. Additional local rg found the module-coefficient single-composition theorem in EtalePullbackSingleComp and unbounded adjunction shift instances, but no abelian bounded-below transition shift theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Canonical comparison in Tag 09Z1: Exact abelian pullback composition on single complexes",
+   "via": [
+    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianPullbackSingleComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianPullbackSingleComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianPullbackSingleComposition",
+  "statement": "theorem abelianPullbackSingleComposition {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')\n    (A : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) :\n    (((h')^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫\n        (DerivedCategory.Plus.singleFunctor _ 0).map\n          ((upperStarComp AddCommGrpCat.{v + 1} a h h' w.symm).hom.app A) ≫\n        (((a)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlusSingleFunctor 0).inv.app _ =\n      (eqToIso (congrArg\n          (fun t : Y' ⟶ S => ((t)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlus)\n          w.symm)).hom.app ((DerivedCategory.Plus.singleFunctor _ 0).obj A) ≫\n        (upperStarPlusComp AddCommGrpCat.{v + 1} a h).hom.app _ ≫\n        D+((a)^*[AddCommGrpCat.{v + 1}]).map\n          ((((h)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

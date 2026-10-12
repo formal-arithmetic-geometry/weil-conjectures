@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-abelian-derived-transition-shift",
+ "kind": "statement",
+ "title": "Integer-shift compatibility of the abelian derived transition",
+ "statement": "Let $S,Y,Y\\prime$ be schemes [def-weil-pbc-scheme-conventions], let $a:Y\\prime\\to Y$, $h:Y\\to S$, $h\\prime:Y\\prime\\to S$, and $w:a\\gg h=h\\prime$. Let $K\\in D^+(Y_{\\mathrm{Et}},\\mathrm{Ab})$ and $K\\prime\\in D^+(Y\\prime_{\\mathrm{Et}},\\mathrm{Ab})$ [def-weil-pbc-derived-categories] and let $t:D^+(a^{-1})K\\to K\\prime$ [def-weil-pbc-derived-inverse-image]. Define $T_t:Rh_*K\\to Rh\\prime_*K\\prime$ as the derived unit for $h\\prime$, followed by $Rh\\prime_*$ of the derived inverse-image composition comparison, $D^+(a^{-1})$ of the derived counit for $h$, and $t$ [prop-weil-pbc-derived-inverse-image-adjunction], [def-sbc-abelian-higher-direct-image-map]. For every $n\\in\\mathbf Z$, let $t_n$ be the shift comparison for $D^+(a^{-1})$ followed by $t[n]$. Then $T_{t_n}\\gg c_{Rh\\prime_*,n}(K\\prime)=c_{Rh_*,n}(K)\\gg T_t[n]$, where $c_{R f_*,n}:Rf_*(K[n])\\cong(Rf_*K)[n]$ are the specified shift comparisons. This is an equality of derived morphisms for arbitrary complexes; it contains neither homology, raw classes, nor evaluation at a section.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1; WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor; WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+  "place": "Tag 09Z1 canonical comparison, explicit derived-adjunction coherence elaboration; exact pullback comparison definitions and derivedPlus unit/counit factorization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-sbc-abelian-higher-direct-image-map"
+ ],
+ "proof": [
+  {
+   "text": "Transport along w to hprime = a followed by h. Apply lem-weil-pbc-derived-adjunction-commshift for h and hprime: it supplies compatibility of the specified derived unit and counit with every integer shift. For the exact pullback composition comparison, descend the termwise comparison through the shift-compatible localization factorization; its component in each degree is the underived inverse-image composition comparison, so its shifted component is the same.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-derived-adjunction-commshift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand T as unit, image of composition comparison, image of counit, and t. Apply these shift identities and naturality of the shift comparisons, cancelling the internal inverse pairs. The surviving end factors are precisely the shifts of Rh_* and Rhprime_*.",
+   "uses": [
+    "def-sbc-abelian-higher-direct-image-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-derived-adjunction-commshift",
+  "def-sbc-abelian-higher-direct-image-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09Z1; WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor; WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+  "place": "Tag 09Z1 canonical comparison, explicit derived-adjunction coherence elaboration; exact pullback comparison definitions and derivedPlus unit/counit factorization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction transition morphism commutes with integer shifts",
+   "results": "Service unavailable: Internal Server Error. No results obtained.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction compatibility with inverse image composition and homology shift naturality",
+   "results": "Eight hits: generic exact functor factorization and single-complex comparisons; no exact comparison or shift-transition theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shift_app_comm\"",
+   "results": "Four generic NatTrans.shift_app_comm and CommShiftCore component lemmas; require shift-compatibility instances.",
+   "date": "2026-10-13",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarPlusComp_single|derivedPlus.*CommShift|CommShift.*derivedPlus",
+   "results": "msearch found zero hits. Additional local rg found the module-coefficient single-composition theorem in EtalePullbackSingleComp and unbounded adjunction shift instances, but no abelian bounded-below transition shift theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Canonical comparison in Tag 09Z1: Integer-shift compatibility of the abelian derived transition",
+   "via": [
+    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianDerivedDirectImageTransitionShift.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianDerivedDirectImageTransition_shift",
+  "statement": "theorem abelianDerivedDirectImageTransition_shift {S Y Y' : Scheme.{v}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')\n    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (t : D+((a)^*[AddCommGrpCat.{v + 1}]).obj K ⟶ K') (n : ℤ) :\n    abelianDerivedDirectImageTransition a h h' w (K⟦n⟧) (K'⟦n⟧)\n        ((D+((a)^*[AddCommGrpCat.{v + 1}]).commShiftIso n).hom.app K ≫\n          (shiftFunctor _ n).map t) ≫\n        (R+((h')_*[AddCommGrpCat.{v + 1}]).commShiftIso n).hom.app K' =\n      (R+((h)_*[AddCommGrpCat.{v + 1}]).commShiftIso n).hom.app K ≫\n        (shiftFunctor _ n).map (abelianDerivedDirectImageTransition a h h' w K K' t)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
