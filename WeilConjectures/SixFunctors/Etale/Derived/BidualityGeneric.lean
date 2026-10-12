@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.GeometricGenericFibre
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricGenericDuality
 
 /-!
 # Verdier biduality at the nonclosed points
