@@ -148,7 +148,7 @@ It is called cohomological because the Brauer group proper, the group of Azumaya
 to Morita equivalence — Mathlib's `BrauerGroup K` for a field `K` — is a different definition;
 the two agree for a quasi-compact separated scheme with an ample family of line bundles
 (Gabber), which is not stated here.
-(blueprint: `def-br`) -/
+(blueprint: `sk-def-br`, `def-br`) -/
 noncomputable abbrev CohomologicalBrauerGroup : Type (u + 1) := Sheaf.H X.gmSheaf 2
 
 variable {X} {Y : Scheme.{u}}

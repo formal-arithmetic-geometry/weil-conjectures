@@ -25,7 +25,6 @@ one pulling back along `g` and then along `f` kills a class exactly when pulling
   the coefficient sheaf.
 - `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap_eq_zero_iff`: pulling back in two steps
   kills a class of degree one exactly when pulling back along the composite does.
-- `AlgebraicGeometry.Etale.cohomologyMap_comp_eq_zero_iff`: the same in every degree.
 -/
 
 @[expose] public section
@@ -72,17 +71,29 @@ lemma cohomologyMap_eq_zero_of_fac (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk
     (hx : cohomologyMap g F 1 x = 0) : cohomologyMap k F 1 x = 0 := by
   rw [← cohomologyMap_cohomologyMap_eq_zero_iff f g k hk, hx, map_zero]
 
-/-- A class of any degree on `Z` dies after pulling back along `g : Y ⟶ Z` and then along
-`f : X ⟶ Y` exactly when it dies after pulling back along `f ≫ g`. -/
-theorem cohomologyMap_comp_eq_zero_iff (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk : f ≫ g = k)
-    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ} (x : Sheaf.H F n) :
+/-- Pulling back along `g` and then along `f` kills a class exactly when pulling back along
+`f ≫ g` does, in every degree. -/
+theorem cohomologyMap_cohomologyMap_eq_zero_iff' (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
+    (hk : f ≫ g = k) (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ}
+    (x : Sheaf.H F n) :
     cohomologyMap f _ n (cohomologyMap g F n x) = 0 ↔ cohomologyMap k F n x = 0 := by
   subst hk
-  have : EnoughInjectives (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
-  rw [cohomologyMap_apply, cohomologyMap_apply, cohomologyMap_apply, Ext.mapExactFunctor_comp,
-    Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mapExactFunctor _ _ _
-      (upperStarComp AddCommGrpCat.{u + 1} f g), Ext.mk₀_comp_eq_zero_iff_of_isIso,
-    Ext.mk₀_comp_eq_zero_iff_of_isIso, Ext.mk₀_comp_eq_zero_iff_of_isIso,
-    Ext.mk₀_comp_eq_zero_iff_of_isIso, Ext.comp_mk₀_eq_zero_iff_of_isIso]
+  rw [cohomologyMap_apply, cohomologyMap_apply, cohomologyMap_apply]
+  exact Ext.mk₀_comp_mapExactFunctor_comp_eq_zero_iff' _ _ _ (upperStarComp _ f g) _ _ _ _
+
+/-- Pulling back along the identity kills no class. -/
+lemma cohomologyMap_id_eq_zero_iff (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    {n : ℕ} (x : Sheaf.H F n) : cohomologyMap (𝟙 X) F n x = 0 ↔ x = 0 := by
+  rw [cohomologyMap_apply, ← Ext.mk₀_comp_mapExactFunctor_comp_eq_zero_iff' (𝟭 _) (𝟭 _) _
+    ((upperStarId AddCommGrpCat.{u + 1} X) ≪≫ (Functor.leftUnitor _).symm) (𝟙 _) (𝟙 _),
+    Ext.mapExactFunctor_id, Ext.mk₀_id_comp, Ext.mapExactFunctor_id, Ext.mk₀_id_comp]
+
+/-- Pulling back along a morphism with a section is injective on cohomology. -/
+theorem injective_cohomologyMap_of_comp_eq_id (p : X ⟶ Y) (s : Y ⟶ X) (hs : s ≫ p = 𝟙 Y)
+    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
+    Function.Injective (cohomologyMap p F n) := by
+  refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+  rw [← cohomologyMap_id_eq_zero_iff, ← cohomologyMap_cohomologyMap_eq_zero_iff' s p _ hs, hx,
+    map_zero]
 
 end AlgebraicGeometry.Etale

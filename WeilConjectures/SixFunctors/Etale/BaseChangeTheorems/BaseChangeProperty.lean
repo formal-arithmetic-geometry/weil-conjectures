@@ -134,7 +134,7 @@ docstring. (blueprint: `sk-def-pbc`) -/
 def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-    Etale.DerivedCategory.Plus.torsionHomology Λ X K →
+    Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X K →
       IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)
 
 /-- A morphism for which the derived base change map is an isomorphism on all of `D⁺`
@@ -156,7 +156,7 @@ theorem Etale.isBaseChangeIso_of_hasTorsionBaseChange (hΛ : IsAddTorsion Λ) {f
     Etale.IsBaseChangeIso (ModuleCat.{u + 1} Λ) f where
   isIso _ _ _ sq :=
     have : ∀ K, IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
-      fun K ↦ hf sq K (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
+      fun K ↦ hf sq K (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X hΛ K)
     NatIso.isIso_of_isIso_app _
 
 /-- **Injective acyclicity** `IA(f)` of a morphism of schemes `f : X ⟶ Y`: for every
@@ -186,7 +186,7 @@ and it can be checked on geometric stalks.
 of the latter is the case `Λ = 𝐅_r`, where every sheaf is torsion) -/
 def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (_sq : IsPullback g' f' f g)
-    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionSheaf I → Injective I →
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionModuleSheaf I → Injective I →
       ∀ q : ℤ, 0 < q →
         IsZero ((DerivedCategory.Plus.homologyFunctor
             (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj
@@ -206,7 +206,7 @@ theorem Etale.HasTorsionBaseChange.hasInjectiveAcyclicity (f : X ⟶ Y)
   intro Y' X' g f' g' sq I _ _ q hq
   let K := (DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0).obj I
-  have := hf sq K (Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj Λ X I)
+  have := hf sq K (Etale.DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj Λ X I)
   have hsrc : IsZero ((DerivedCategory.Plus.homologyFunctor _ q).obj
       (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.obj
         ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus.obj K))) :=
@@ -224,7 +224,7 @@ theorem Etale.HasTorsionBaseChange.hasInjectiveAcyclicity (f : X ⟶ Y)
 `f'_*`-acyclic, in the sense of `CategoryTheory.Functor.rightAcyclic`. -/
 lemma Etale.HasInjectiveAcyclicity.rightAcyclic {f : X ⟶ Y} (hf : Etale.HasInjectiveAcyclicity Λ f)
     {Y' X' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
-    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf I] [Injective I] :
+    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf I] [Injective I] :
     (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic ((g')^*[ModuleCat.{u + 1} Λ].obj I) := fun q ↦
   IsZero.of_iso (hf sq I inferInstance inferInstance (q + 1) (by lia))
     ((f')_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorPlusObjSingleFunctorIso
@@ -258,7 +258,7 @@ theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap
   have hM : ∀ m, (f')_*[ModuleCat.{u + 1} Λ].rightAcyclic
       ((((g')^*[ModuleCat.{u + 1} Λ]).mapCochainComplexPlus.obj M).obj.X m) := fun m ↦
     have : Injective (M.obj.X m) := (L.obj.X m).2
-    have : IsTorsionSheaf (M.obj.X m) := .of_isTorsion hΛ _
+    have : IsTorsionModuleSheaf (M.obj.X m) := .of_isTorsion hΛ _
     hf.rightAcyclic Λ sq (M.obj.X m)
   have h₁ : IsIso ((f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app
       (((g')^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj P)) :=

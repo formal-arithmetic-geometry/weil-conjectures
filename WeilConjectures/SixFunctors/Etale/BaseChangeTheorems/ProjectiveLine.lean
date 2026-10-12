@@ -23,7 +23,7 @@ arbitrary proper morphism by a projective one.
 
 The two halves are combined here into
 `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, from which
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` of
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology` of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper` is derived.
 
 ## The proof of the projective-line case
