@@ -6,7 +6,6 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 
 /-!
@@ -21,9 +20,8 @@ in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
 The transition maps and the limit theorem are in
 `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition`, the
-cohomology presheaf and its consequences in `...HigherDirectImage.CohomologyPresheaf`,
-`...HigherDirectImage.FilteredColimit` and `...HigherDirectImage.LocalVanishing`; this module
-imports all of them.
+cohomology presheaf and its consequences in `...HigherDirectImage.CohomologyPresheaf` and
+`...HigherDirectImage.FilteredColimit`; this module imports all of them.
 
 ## Main definitions
 
