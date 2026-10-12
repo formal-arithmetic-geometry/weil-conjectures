@@ -1,0 +1,118 @@
+{
+ "id": "lem-galois-fpqc-affine-model-transition-reconstruction",
+ "kind": "statement",
+ "title": "The restricted model projection satisfies the overlap equation",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and $D$ a transport descent datum on $V\\to X$ [def-pd-descent-datum]. For every affine open $A$ of $S$, put $X_A=X\\times_S A$ and $V_A=V\\times_X X_A$ [def-pc-fibre-product], and give $V_A\\to X_A$ a datum $E_A$ relative to $X_A\\to A$ whose transports project to D-transports on V. Let $W_A\\to A$ and $r_A:V_A\\to W_A$ form a Cartesian square with $V_A\\to X_A$ and $X_A\\to A$, and assume $r_A$ is invariant under $E_A$. For any affine inclusion $i:U\\hookrightarrow B$, write $c_i:V_U\\to V_B$ for restriction. For any scheme $T$ and maps $g,h:T\\to V_U$ with $g r_U=h r_U$, one has $g c_i r_B=h c_i r_B$. The covering hypothesis on f is unnecessary for this overlap equation.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, nested affine comparison"
+ },
+ "proof": [
+  {
+   "text": "Write a and b for the images of g and h in X_U. Their images in U agree by the Cartesian square. Transport the point g along E_U from a to b. Invariance and the universal property of the U-model square identify this point with h.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The restriction maps j : X_U -> X_B and c : V_U -> V_B preserve projection to X and V. Compare E_U-transport followed by c with E_B-transport of g followed by c. Their projections to V agree by the two hcompat equations. Projection V_B -> V is mono since it is a base change of the open immersion B -> S, hence the transported points agree. Invariance of r_B gives the desired equation. The Lean private transport_left_congr proves the equality of dependent transport expressions by substituting their equal endpoints and equal underlying point maps.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02W3",
+  "place": "Direct Lean proof of the overlap equation implicit in the nested-affine comparison; W2, 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square of schemes is Cartesian if its base change along an fpqc covering is Cartesian",
+   "results": "AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp', AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp, AlgebraicGeometry.Scheme.Pullback.hasPullback_of_cover, AlgebraicGeometry.Scheme.instOverXPullbackCoverOver', AlgebraicGeometry.Scheme.isPullback_of_openCover, AlgebraicGeometry.Scheme.instOverXPullbackCoverOver, AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic pullback APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "transport.*invar|invar.*transport|IsPullback.*fpqc|fpqc.*IsPullback",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic pullback APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reconstructed morphism between two effective models over nested affine opens is Cartesian after fpqc descent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcAffineModelTransitions",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Proof Step 2: effective local models glue; nested affine comparison in Stacks Tag 02W3 before relative gluing.",
+   "via": [
+    "lem-galois-fpqc-affine-model-transitions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcAffineModelTransitionReconstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcAffineModelTransitionReconstruction.lean",
+  "declaration": "AlgebraicGeometry.fpqc_affine_model_transition_reconstruction",
+  "statement": "theorem fpqc_affine_model_transition_reconstruction\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    {V : Over X} (D : Over.DescentDatum f V)\n    (E : ∀ U : S.affineOpens,\n      Over.DescentDatum (pullback.snd f U.1.ι)\n        (Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))))\n    (hcompat : ∀ U : S.affineOpens,\n        ∀ {T : Scheme.{u}} (a b : T ⟶ pullback f U.1.ι)\n          (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι)\n          (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))),\n          (D.transport (a ≫ pullback.fst f U.1.ι) (b ≫ pullback.fst f U.1.ι)\n            (by simp only [Category.assoc, pullback.condition]; rw [← Category.assoc,\n              ← Category.assoc, hab])\n            (Over.homMk (x.left ≫ pullback.fst V.hom (pullback.fst f U.1.ι))\n              (by simpa [Category.assoc, pullback.condition] using\n                  congrArg (fun z ↦ z ≫ pullback.fst f U.1.ι) (Over.w x)))).left =\n            ((E U).transport a b hab x).left ≫ pullback.fst V.hom (pullback.fst f U.1.ι))\n    (W : ∀ U : S.affineOpens, Over U.1.toScheme)\n    (r : ∀ U : S.affineOpens,\n      pullback V.hom (pullback.fst f U.1.ι) ⟶ (W U).left)\n    (hp : ∀ U, IsPullback (r U) (pullback.snd V.hom (pullback.fst f U.1.ι))\n      (W U).hom (pullback.snd f U.1.ι))\n    (hinv : ∀ (U : S.affineOpens) {T : Scheme.{u}}\n      (a b : T ⟶ pullback f U.1.ι)\n      (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι)\n      (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))),\n      ((E U).transport a b hab x).left ≫ r U = x.left ≫ r U)\n    {U B : S.affineOpens} (i : U ⟶ B)\n    {T : Scheme.{u}}\n    (g h : T ⟶ pullback V.hom (pullback.fst f U.1.ι))\n    (hgh : g ≫ r U = h ≫ r U) :\n    g ≫ Scheme.Cover.trans ((S.directedAffineCover.pullback₁ f).pullback₁ V.hom) i ≫ r B =\n      h ≫ Scheme.Cover.trans ((S.directedAffineCover.pullback₁ f).pullback₁ V.hom) i ≫ r B",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T173916-L-3309816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T173916-L-3309816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

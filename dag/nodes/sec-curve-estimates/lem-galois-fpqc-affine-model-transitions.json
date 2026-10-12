@@ -15,57 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Pull back the B-model W_B to U. Its canonical pullback to X_U identifies with V_U via the chosen Cartesian square for r_B and the iterated pullback identities. The U-model also pulls back to V_U via its specified square.",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
-   }
-  },
-  {
-   "text": "The common identification is compatible with transport: both local transports project to the same D-transport on V by hcompat. The projection V_U -> V is a monomorphism, being a base change of an open immersion, so equality after projection identifies the transported points. On an effective Cartesian model, invariance of r and its universal property identify E with the canonical descent datum.",
-   "uses": [
-    "def-pd-descent-datum",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
-   }
-  },
-  {
-   "text": "The cover X_U -> U is fpqc by base change. Apply fpqc full faithfulness of morphisms to descend the common pullback identification between W_U and W_B times_B U, and descend its inverse. Faithfulness proves that their composites are identities. The descended isomorphism followed by the projection to W_B defines t.",
-   "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "def-weil-pbc-fpqc-covering"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
-   }
-  },
-  {
-   "text": "The isomorphism W_U to W_B times_B U gives the Cartesian square. Reconstruction in descent says that its pullback map is the chosen comparison on V_U, giving c_i followed by r_B equal to r_U followed by t. This argument covers empty opens and empty objects and does not require affine intersections.",
+   "text": "Pull back the singleton fpqc covering to U, and then along the structural map of W_U using hp U. The resulting r_U is an fpqc singleton, hence an effective epimorphism by subcanonicity.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-galois-fpqc-morphisms-descend"
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved overlap equation to c_i followed by r_B. EffectiveEpi.desc constructs t from that equation and EffectiveEpi.fac gives reconstruction. Cancel the epi r_U and use the two model square equations and the canonical restriction projection equations to show t is over i.",
+   "uses": [
+    "lem-galois-fpqc-affine-model-transition-reconstruction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the reconstructed-transition Cartesian lemma to t, its structural equation and reconstruction. Pair this Cartesian square with reconstruction to finish.",
+   "uses": [
+    "lem-galois-fpqc-affine-model-transition-cartesian"
+   ],
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 02W3, general-base comparison of nested affine models, using Tag 02W0"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02W3",
+  "place": "W2 second reading, 2026-10-13: construct t using the representable sheaf/effective epimorphism API; separate the overlap calculation and Cartesian verification."
  },
  "mathlib_searches": [
   {
@@ -125,9 +103,11 @@
  },
  "proof_deps": [
   "def-pc-fibre-product",
-  "def-pd-descent-datum",
-  "lem-galois-fpqc-morphisms-descend",
-  "def-weil-pbc-fpqc-covering"
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-affine-model-transition-cartesian",
+  "lem-galois-fpqc-affine-model-transition-reconstruction",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -142,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-7e963",
-  "group": "B3",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T144053-L-2089049",
+  "landing": "20261012T173916-L-3309816",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proofs with both DAG nodes and Stacks sources; signatures unchanged, delivery and sole direct importer compile cleanly, axioms match the reported remaining sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
