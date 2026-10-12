@@ -31,74 +31,29 @@
  ],
  "proof": [
   {
-   "text": "Choose any $g_0\\in B'$ whose image in $B'/IB'$ is $\\varepsilon'$. Since $\\varepsilon'^2=\\varepsilon'$, we have $g_0(1-g_0)\\in IB'$. The projection $B'/IB'\\to C'_1$ is surjective with kernel $(1-\\varepsilon')(B'/IB')$, so the composite $B'\\to C'_1$ is surjective with kernel $K:=IB'+(1-g_0)B'$. By the correspondence between the primes of a quotient $B'/K$ and the primes of $B'$ containing $K$, the subset $\\operatorname{Spec}(C'_1)\\subseteq\\operatorname{Spec}(B')$ of the statement is $V(K)=\\{\\mathfrak p:K\\subseteq\\mathfrak p\\}$, a closed subset of $\\operatorname{Spec}(B')$ for the Zariski topology.",
+   "text": "Let R be the integral closure and let q : R → C₁′ × C₂′ be the surjective quotient map followed by eB′. The composite f = fst ∘ q is surjective. Let K = ker f. By the quotient-prime correspondence V(K) = range(Spec f), and hU says this is contained in U. Let J be the vanishing ideal of the closed complement of U, so V(J) is that complement. The disjointness gives V(J ⊔ K) = ∅ and hence J ⊔ K = R. Choose j ∈ J and k ∈ K with j + k = 1. Choose g₀ with q(g₀) = (1,0). Then q(j).1 = 1 and q(g₀j) = (1,0), so g = g₀j has the prescribed quotient image. Because g ∈ J, D(g) ⊆ U. Mathlib supplies range_comap_of_surjective, zeroLocus_vanishingIdeal_eq_closure, zeroLocus_sup and zeroLocus_empty_iff_eq_top.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2543-2546, proof of Lemma Tag 09XH ('Spec(C'_1) ... closed in Spec(B')'); the product/idempotent dictionary is Algebra Tag 00EE (lemma-disjoint-decomposition)"
-   }
+   "elementary": false
   },
   {
-   "text": "The complement $Z=\\operatorname{Spec}(B')\\setminus U$ is closed, so by definition of the Zariski topology $Z=V(J)$ for some ideal $J\\subseteq B'$. Since $V(K)=\\operatorname{Spec}(C'_1)\\subseteq U$ (step 1 and the hypothesis on $U$), $V(J)\\cap V(K)=\\emptyset$. A prime contains $J+K$ if and only if it contains $J$ and $K$, so $V(J+K)=V(J)\\cap V(K)=\\emptyset$; as $V(J+K)$ is the complement of $\\bigcup_{r\\in J+K}D(r)$, part (i) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] applied to the family of all elements of $J+K$ gives $J+K=B'$. Write $1=j+k$ with $j\\in J$ and $k\\in K$.",
+   "text": "Write φ = Spec(algebraMap R B). Restrict the isomorphism φ|U further to the inverse image under U.ι of D(g). Its image in Spec R is U ∩ D(g) = D(g). The Arrow isomorphism morphismRestrictRestrict shows φ|D(g) is an isomorphism. Mathlib SpecMapRestrictBasicOpenIso identifies this arrow with Spec of Localization.awayMap (algebraMap R B) g. The criterion isIso_SpecMap_iff implies that ring map is bijective.",
    "uses": [
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma Tag 00E0 (lemma-Zariski-topology), items (8) V(I)=emptyset iff I=R and (9)/(10) intersections of V's; used at more-algebra.tex:2543-2546 ('this is possible because Spec(C'_1) and Spec(C'_2) are disjoint and closed in Spec(B') and Spec(C'_1) is contained in U')"
-   }
-  },
-  {
-   "text": "Put $g=g_0j\\in B'$. Then $g-g_0=-g_0k\\in g_0IB'+g_0(1-g_0)B'\\subseteq IB'$, because $g_0(1-g_0)\\in IB'$ (step 1); so the image of $g$ in $B'/IB'$ is $\\varepsilon'$. Moreover $g\\in J$, so every prime of $Z=V(J)$ contains $g$, i.e. $D(g)\\cap Z=\\emptyset$, i.e. $D(g)\\subseteq U$. This proves the first assertion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2542-2546, proof of Lemma Tag 09XH ('Pick a g in B' mapping to (1,0) in C'_1 x C'_2 such that D(g) subset U'); the explicit choice g=g_0 j is written by the agent"
-   }
-  },
-  {
-   "text": "Let $\\iota:B'\\to B$ be the inclusion, so $\\phi=\\operatorname{Spec}\\iota$, whose map on global sections is $\\iota$ under $\\Gamma(\\operatorname{Spec}B',\\mathcal O)=B'$, $\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$ ([def-weil-affine-spectrum]; $\\operatorname{Spec}\\iota$ is the morphism corresponding to $\\iota$ under the bijection of [lem-weil-pbc-morphism-into-affine-scheme] for $X=\\operatorname{Spec}B$). By the second clause of [lem-weil-pbc-morphism-into-affine-scheme], $\\phi^{-1}(D(g))$ is the principal open of $\\iota(g)=g$ in $\\operatorname{Spec}B$, which we also write $D(g)$. By [lem-weil-pbc-affine-ideals-closed-subscheme](0) (with $X=U=\\operatorname{Spec}B'$, resp. $X=U=\\operatorname{Spec}B$), the restriction maps $B'\\to\\mathcal O_{\\operatorname{Spec}B'}(D(g))$ and $B\\to\\mathcal O_{\\operatorname{Spec}B}(D(g))$ are localizations at $g$ [def-weil-ring-localization-away], so we may identify these section rings with $B'_g$ and $B_g$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-affine-ideals-closed-subscheme",
     "def-weil-ring-localization-away"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes Lemma Tag 01I1 (lemma-morphism-into-affine) with Tag 01HY (preimage of D(g)) and Lemma Tag 01HV (lemma-spec-sheaves: O(D(f))=R_f); used at more-algebra.tex:2546-2548"
-   }
-  },
-  {
-   "text": "The hypothesis says that $\\phi$ restricts to an isomorphism of locally ringed spaces $\\phi^{-1}(U)\\to U$; in particular, for every open $W\\subseteq U$ the sheaf map $\\phi^\\sharp_W:\\mathcal O_{\\operatorname{Spec}B'}(W)\\to\\mathcal O_{\\operatorname{Spec}B}(\\phi^{-1}(W))$ is a ring isomorphism. Take $W=D(g)\\subseteq U$ (step 3). The map $\\phi^\\sharp_{D(g)}$ commutes with the restrictions from global sections, and on global sections $\\phi^\\sharp$ is $\\iota$ (step 4); so under the identifications of step 4, $\\phi^\\sharp_{D(g)}:B'_g\\to B_g$ is a ring map whose composite with $B'\\to B'_g$ is $B'\\xrightarrow{\\iota}B\\to B_g$. Since every element of $B'_g$ is $b/g^n$, such a map is unique, hence it is the induced localization map $b/g^n\\mapsto\\iota(b)/g^n$. Therefore $B'_g\\to B_g$ is an isomorphism.",
-   "uses": [
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2546-2549, proof of Lemma Tag 09XH ('Then B'_g -> B_g defines a homeomorphism on spectra and an isomorphism on local rings (by our choice of U above). Hence it is an isomorphism'); Stacks concludes 'for example' by Algebra Tag 00E9; here the hypothesis is an isomorphism of locally ringed spaces over U, and the agent takes sections over D(g) instead"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-affine-ideals-closed-subscheme",
   "def-weil-ring-localization-away"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "more-algebra.tex:2542-2549, proof of Lemma Tag 09XH (lemma-helper-finite-type), choice of g and conclusion; the explicit construction g=g_0 j (step 3) and the sections argument of step 5 (instead of Algebra Tag 00E9, which Stacks names 'for example') are filled in by the agent"
+  "place": "2542–2549, proof of Tag 09XH; the explicit construction g = g₀j is the existing node argument. T2 formalizes the restriction/localization step using Mathlib Arrow isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -197,5 +152,15 @@
   "group": "J1",
   "result": "fix",
   "note": "A, I, finite-type A->B, B/IB=C1xC2 (eB, heB), C1 finite (Module.Finite), B'=integralClosure A B (fix: was abstract IsIntegralClosure B' A B + IsScalarTower), B'/IB'=C1'xC2' A/I-algebras (eB', heB'), factors map to C1,C2 (f1,f2,hprod), U ⊇ Spec C1' (hU via two comaps), phi^-1(U)->U iso (hIso, morphismRestrict); conclusion: g lifts eB'.symm(1,0), D(g) ⊆ U, awayMap bijective"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060755-L-2916023",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
