@@ -10,9 +10,13 @@ public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Differential
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Dimension
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.LocalPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -51,23 +55,14 @@ bijection (`GrpObj.lieEquiv`).
 
 ## The bracket
 
-Over the two-parameter thickening `S[ε][δ]`, a point `v : S[ε] ⟶ G` gives `v_ε` and `v_δ` by the
-two projections. The commutator `c(v, w) = v_ε w_δ v_ε⁻¹ w_δ⁻¹` reduces to the identity both for
-`ε = 0` and for `δ = 0`, and the points of `G` over `S[ε][δ]` with this property are in bijection
-with `infPoints G` through `η ↦ εδ` (`GrpObj.mixedEquiv`). The Lie bracket is the mixed term of the
-commutator,
-
-$$
-[v, w] = \mu^{-1}(v_ε w_δ v_ε^{-1} w_δ^{-1}),
-$$
-
-transported to `Lie(G)` along the bridge. This is the restriction to the identity of the commutator
-`[ṽ, w̃]` of the left-invariant vector fields `ṽ(g, d) = g v(d)` extending `v` and `w`: the
-pullback of right multiplication by `v_ε` on the functions of `G[ε]` is `1 + ε D_v`, so that of
-`c(v, w)` is `1 + εδ (D_v D_w - D_w D_v)`. For an affine `G = Spec A` it is the convolution
-commutator `(v ⊗ w - w ⊗ v) ∘ Δ` of point derivations at the counit. For `G = GL_n`, where the
-infinitesimal points are the matrices `1 + εX`, it is the matrix commutator, and
-`Lie(GL_n) = gl_n`; see `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie`, and
+For a group scheme `G` over a field `k`, write `G(R)⁰` for the points of `G` with values in a
+local `k`-algebra `R` with residue field `k` that reduce to the identity
+(`GrpObj.pointsKer`). Tangent vectors are the points `1 + εX` over `k[ε]`
+(`GrpObj.lieEquivTangent`). Over `k[ε][δ]`, the commutator `(1 + εX)(1 + δY)(1 + εX)⁻¹(1 + δY)⁻¹`
+reduces to the identity modulo `ε` and modulo `δ`, hence is `1 + εδ Z` for a unique tangent
+vector `Z = [X, Y]` (`GrpObj.tangentBracket`). This is the Lie bracket of `Lie(G)`; the Jacobi
+identity is the Hall–Witt identity over `k[α][β][γ]`. For `G = GL_n` it is the matrix commutator,
+and `Lie(GL_n) = gl_n`; see `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie`, and
 `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie` for the Lie
 algebras of the closed subgroup schemes of `GL_n`.
 
@@ -76,11 +71,12 @@ algebras of the closed subgroup schemes of `GL_n`.
 - `AlgebraicGeometry.GrpObj.unitSection`, `AlgebraicGeometry.GrpObj.omega`,
   `AlgebraicGeometry.GrpObj.lieAlgebraSheaf`: the identity section, `ω_{G/S}` and `Lie(G/S)`.
 - `AlgebraicGeometry.GrpObj.Lie`: the Lie algebra `Lie(G) = Hom(ω_{G/S}, 𝒪_S)`, a module over
-  `Γ(S, 𝒪_S)`, and over `R` when `S = Spec R`, with its `LieRing` and `LieAlgebra` structures.
+  `Γ(S, 𝒪_S)`, and over `R` when `S = Spec R`, with its `LieRing` and `LieAlgebra k` structures
+  over a field `k`.
 - `AlgebraicGeometry.GrpObj.infPoints`: the infinitesimal points `ker(G(S[ε]) → G(S))`, and the
   bridge `AlgebraicGeometry.GrpObj.lieEquiv : infPoints G ≃ Lie G`.
-- `AlgebraicGeometry.GrpObj.differential`: the differential `Lie(G) →ₗ⁅R⁆ Lie(H)` of a
-  homomorphism of group schemes over `R`.
+- `AlgebraicGeometry.GrpObj.differential`: the differential `Lie(G) →ₗ⁅k⁆ Lie(H)` of a
+  homomorphism of group schemes over a field `k`.
 - `AlgebraicGeometry.tangentGroup`, `AlgebraicGeometry.GrpObj.infPointsEquivTangentGroup`: for `G`
   over `Spec R`, the infinitesimal points are the points with values in the ring of dual numbers
   `R[ε]` reducing to the identity.
@@ -106,10 +102,9 @@ algebras of the closed subgroup schemes of `GL_n`.
 
 All constructions are genuine definitions. The bridge `toLie` is a bijection: its inverse sends a
 derivation `d : 𝒪_G → e_*𝒪_S` to the point `GrpObj.pointOfDerivation`, `a ↦ e^♯(a) + ε d(a)`.
-The proofs that are still missing (the sheaf and local conditions of the thickening, the
-bijectivity of the mixed-term map, the Lie algebra axioms, and the functoriality of the bracket)
-are recorded as `sorry`. The base ring of a
-group scheme over an affine base is written `R`; `k` is reserved for a field.
+The bracket is only defined over a field, where the points over Artinian local `k`-algebras
+are determined by their maps on the local ring at the identity. The base ring of a group scheme
+over an affine base is written `R`; `k` is reserved for a field.
 
 ## Blueprint
 

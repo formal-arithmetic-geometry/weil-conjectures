@@ -415,25 +415,6 @@ theorem stalkAt_isPureOfWeight_of_epi {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w
 
 end StalkAt
 
-omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- An isomorphism of Weil sheaves induces an isomorphism of the geometric stalks, compatible
-with the Frobenius. -/
-theorem nonempty_equiv_stalkAt_of_iso (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) :=
-  ⟨⟨LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
-    (LinearMap.ext fun v ↦ by
-      change stalkAtMap s m hs e.hom (stalkAtMap s m hs e.inv v) = v
-      rw [← stalkAtMap_comp, e.inv_hom_id, stalkAtMap_id])
-    (LinearMap.ext fun v ↦ by
-      change stalkAtMap s m hs e.inv (stalkAtMap s m hs e.hom v) = v
-      rw [← stalkAtMap_comp, e.hom_inv_id, stalkAtMap_id]),
-    fun v ↦ (congrFun (LinearEquiv.coe_ofLinearMap _ _ _ _) _).trans
-      ((stalkAtMap_frobenius s m hs e.hom v).trans
-        (congrArg _ (congrFun (LinearEquiv.coe_ofLinearMap _ _ _ _) _).symm))⟩⟩
-
 /-- A subobject of a punctually `ι`-pure Weil sheaf of weight `w` is punctually `ι`-pure of
 weight `w`: its stalks are Frobenius-stable subspaces. -/
 theorem IsPunctuallyPureOfWeight.of_mono {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Mono f]
