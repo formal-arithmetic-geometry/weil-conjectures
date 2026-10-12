@@ -207,6 +207,7 @@ lemma Etale.stageTargetIso_comp :
     (Etale.stage_hom_fst k W U).symm (Etale.stage_hom_fst k W U').symm _
 
 
+-- the elaboration of the composite of the base-change and transition maps is slow
 set_option maxHeartbeats 1000000 in
 /-- The base-change map composed with the transition map of the targets, for the transition
 maps `AlgebraicGeometry.Etale.overLowerStarTransition` of the sources. -/
