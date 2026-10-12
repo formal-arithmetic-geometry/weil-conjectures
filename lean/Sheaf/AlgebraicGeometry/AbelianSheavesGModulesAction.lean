@@ -7,9 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
-import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.AlgebraicGeometry.GaloisStalkActionFunctor
+import Sheaf.AlgebraicGeometry.GaloisStalkActionFullyFaithful
+import Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj
 
 /-!
 # Canonical set-valued stalk equivalence over an algebraically closed extension
@@ -25,6 +25,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+-- Keep the quantified proof-binder names in the existing statement.
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Tags 03QT and 03QW.
 (blueprint: lem-exc-abelian-sheaves-gmodules-action).
 
@@ -77,6 +79,14 @@ theorem abelianSheaves_equiv_discreteGModules_action
         (j.hom.app F) ((Eset.functor.obj F).obj.obj.ρ g
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) := by
-  sorry
+  obtain ⟨T, j, hj⟩ := exists_galoisStalkActionFunctor.{u, v} K Ks Ω
+  obtain ⟨hfull, hfaithful⟩ := galoisStalkActionFunctor_full_faithful.{u, v} K Ks Ω T j hj
+  have : T.Full := hfull
+  have : T.Faithful := hfaithful
+  have : T.EssSurj := galoisStalkActionFunctor_essSurj.{u, v} K Ks Ω T j hj
+  have : T.IsEquivalence := ⟨inferInstance, inferInstance, inferInstance⟩
+  refine ⟨T.asEquivalence, j, ?_⟩
+  intro F g τ hτ X x x' hx z
+  exact hj F g τ hτ X x x' hx z
 
 end AlgebraicGeometry.Scheme

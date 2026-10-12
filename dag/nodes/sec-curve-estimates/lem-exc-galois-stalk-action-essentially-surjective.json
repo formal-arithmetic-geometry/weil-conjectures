@@ -1,0 +1,137 @@
+{
+ "id": "lem-exc-galois-stalk-action-essentially-surjective",
+ "kind": "statement",
+ "title": "Essential surjectivity of the canonical Galois stalk functor",
+ "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u+1,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is essentially surjective: for every discrete continuous $G$-set $M$ in $\\mathrm{Type}\\,w$, there is a sheaf $F$ and an equivariant isomorphism $T(F)\\cong M$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof and remark-every-sheaf-representable; Tag 03QR used in that proof"
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-galois-stalk-action-functor"
+ ],
+ "proof": [
+  {
+   "text": "Each orbit of a discrete continuous G-set M is finite: its stabilizer is open, and the quotient of the compact group G by an open subgroup is finite. Represent the orbit in Type u. Apply the etale-field/G-set equivalence to produce an etale K-scheme X with that small geometric-point G-set.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-quotient-finite-discrete",
+    "lem-exc-etale-field-gsets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The representable h_X is a sheaf. Lift its values to Type w. Its stalk is the Omega-points of X by the representable-stalk isomorphism. Finite separable residue fields identify these with its Ks-points. The assumed germ formula identifies the actions under j, so T(h_X) is equivariantly isomorphic to the orbit.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the coproduct of these sheaves, indexed by the orbit set of M in Type w. Stalks preserve coproducts: Mathlib Point.Skyscraper makes sheafFiber left adjoint to the skyscraper functor. Naturality of j identifies the underlying maps of the images of the coproduct injections with the stalk injections; they are equivariant since T is a functor to G-sets. The induced underlying bijection from the disjoint union of orbits is therefore an equivariant isomorphism to T of the coproduct. This disjoint union is M. If M is empty take the empty coproduct; no Type u coproduct scheme is needed.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-etale-field-gsets",
+  "lem-exc-etale-open-subgroup-quotient-finite-discrete",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof and remark-every-sheaf-representable; Tag 03QR used in that proof; omitted details and universe adaptation written by X2 from the source and the parent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every discrete continuous absolute Galois group set is the stalk of an etale sheaf over the field, using a coproduct of representables for its finite orbits",
+   "results": "8 hits: InfiniteGalois.asProfiniteGaloisGroupFunctor, InfiniteGalois.profiniteGalGrp, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, Field.instTopologicalSpaceAbsoluteGaloisGroup, CategoryTheory.PreGaloisCategory.PointedGaloisObject.isGalois, krullTopology_discreteTopology_of_finiteDimensional, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat. No exact geometric Galois-stalk theorem; generic API only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.EssSurj",
+   "results": "12 hits: CategoryTheory.Functor.instEssSurjId, CategoryTheory.Functor.EssSurj, CategoryTheory.Functor.objPreimage, CategoryTheory.Functor.EssSurj.mem_essImage, CategoryTheory.Functor.EssSurj.mk, CategoryTheory.Functor.essSurj_of_surj, CategoryTheory.Functor.EssSurj.toEssImage, CategoryTheory.Functor.objObjPreimageIso. No exact geometric Galois-stalk theorem; generic API only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|preservesColimits",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean. No exact geometric Galois-stalk theorem; generic API only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every discrete continuous Galois group action is realized by a geometric stalk of a sheaf on the small etale site of a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianSheavesGModulesAction",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, third and fourth paragraphs: canonical set-valued stalk equivalence; realizing discrete G-sets",
+   "via": [
+    "lem-exc-abelian-sheaves-gmodules-action",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkActionEssSurj.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galoisStalkActionFunctor_essSurj",
+  "statement": "theorem galoisStalkActionFunctor_essSurj (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] : let S := Spec (.of K) let J := S.smallEtaleTopology let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)) let p := pointSmallEtale s let G := Gal(Ks/K) let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G)) ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤ DiscreteContAction (Type (max (u + 1) v)) G) (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber), (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (j.hom.app F) ((T.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z) → T.EssSurj",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070558-L-3480280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070558-L-3480280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
