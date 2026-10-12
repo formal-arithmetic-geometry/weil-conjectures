@@ -21,21 +21,21 @@
  ],
  "proof": [
   {
-   "text": "Represent finitely many coefficients at a common stage using the elementwise colimit description; write monic polynomials with leading coefficient exactly 1.",
+   "text": "Use Concrete.colimit_exists_rep for every coefficient in a finite set and Finset.exists_le to move its representatives to a common stage. Apply Polynomial.lifts_iff_coeff_lifts and Polynomial.lifts_and_natDegree_eq_and_monic to lift a finite family of polynomials simultaneously, preserving monicity whenever required. The Mathlib monic-lifting theorem includes the zero-ring case.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-algebras-elementwise"
    ],
    "elementary": false
   },
   {
-   "text": "An element mapping into the union ideal eventually lies in a stage ideal: compare it with an ideal representative using eventual equality. Move finitely many such membership conditions to one common stage.",
+   "text": "For a stage element whose image belongs to I, use hI to choose an ideal representative. Concrete.colimit_exists_of_rep_eq makes the representatives equal at a common later stage, where ideal compatibility gives membership. For a finite family of polynomials vanishing modulo I, apply this to their finitely many nonzero coefficients, take one common upper bound also dominating the original stage, and use compatibility again. Every coefficient then vanishes modulo the ideal at that stage.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-rings-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Choose coefficient lifts of the two monic factors and their Bezout witnesses. The coefficients of F-GH and 1-GGprime-HHprime map into I, so the preceding step puts them in a stage ideal. Reduce there to obtain factorization and coprimality, with the required images. If A/I is zero, eventually 1 lies in the stage ideal; take both stage factors to be 1 and any monic descent of f (F=1 if A=0). Both quotients are zero and all required equalities hold.",
+   "text": "Lift the prescribed monic quotient factors to monic polynomials over A using Polynomial.lifts_and_natDegree_eq_and_monic and quotient-map surjectivity. Lift the two Bezout witnesses using Polynomial.map_surjective. Apply step 1 to the five polynomials f,g,h,a,b. Apply step 2 to the two polynomials F-GH and AG+BH-1. At the resulting stage their zero reductions give the factorization and the Bezout identity; transition maps preserve monicity, and cocone naturality gives the prescribed images. This uniform argument also handles zero colimit or quotient rings without assuming nontriviality.",
    "uses": [],
    "elementary": true
   }
@@ -47,7 +47,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0FWT, second proof paragraph; finite coefficient expansion and zero-quotient case spelled out"
+  "place": "Stacks Project Tag 0FWT, second proof paragraph (https://stacks.math.columbia.edu/tag/0FWT); finite-coefficient argument made explicit in Lean by W2, with Mathlib monic lifting covering zero rings uniformly"
  },
  "mathlib_searches": [
   {
@@ -111,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0837d",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T063504-L-3152655",
-  "kind": "interface",
-  "note": "independent Codex review: Matched unchanged target signature, delivered proof and descent lemma with their nodes and [Stacks 0FWT](https://stacks.math.columbia.edu/tag/0FWT); both modules compile cleanly with only permitted axioms and expected sorryAx."
+  "landing": "20261012T085358-L-46962",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
