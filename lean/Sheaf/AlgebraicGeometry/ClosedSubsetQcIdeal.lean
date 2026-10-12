@@ -6,7 +6,6 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Closed subsets are cut out by quasi-coherent ideals
 
@@ -36,6 +35,7 @@ exactly when `I` is not contained in `p`. Thus the vanishing set of this ideal i
 the prescribed subset. Take this vanishing ideal as `J`. -/
 theorem exists_idealSheafData_support_eq (Y : Scheme.{u}) (Z : Set Y) (hZ : IsClosed Z) :
     ∃ J : Y.IdealSheafData, (J.support : Set Y) = Z := by
-  sorry
+  exact ⟨IdealSheafData.vanishingIdeal ⟨Z, hZ⟩,
+    IdealSheafData.coe_support_vanishingIdeal ⟨Z, hZ⟩⟩
 
 end AlgebraicGeometry.Scheme

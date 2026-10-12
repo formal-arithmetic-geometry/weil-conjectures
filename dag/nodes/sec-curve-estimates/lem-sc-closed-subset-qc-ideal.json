@@ -26,24 +26,20 @@
  ],
  "proof": [
   {
-   "text": "Apply the existing reduced-induced-closed-subscheme construction [lem-weil-pbc-reduced-induced-closed-subscheme] to $X=Y$ and $T=Z$. Its sheaf $\\mathcal I_Z$ is quasi-coherent, and on every affine open $U=\\operatorname{Spec}R$ it is the radical ideal $I$ with $V(I)=Z\\cap U$. The associated closed subscheme has image $Z$, so the stalk vanishing locus $V(\\mathcal I_Z)=Z$. Taking $\\mathcal J=\\mathcal I_Z$ gives the required quasi-coherent ideal sheaf.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
-   ],
-   "elementary": false,
+   "text": "Regard Z with its closedness proof as T : TopologicalSpace.Closeds Y. Take J = Scheme.IdealSheafData.vanishingIdeal T, the concrete compatible family of affine vanishing ideals constructed in Mathlib.AlgebraicGeometry.IdealSheaf.Basic. The Mathlib lemma Scheme.IdealSheafData.coe_support_vanishingIdeal T identifies its support with T, whose underlying set is definitionally Z. This gives the requested witness and equality directly, without constructing a closed subscheme.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.12.4 (Tag 01J3), construction of the reduced induced closed subscheme from the vanishing ideal"
+    "place": "Schemes Lemma 01J3 (schemes-lemma-reduced-closed-subscheme), proof constructs the quasi-coherent ideal sheaf defining a closed subset"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 26.12.4 (Tag 01J3), using the existing reduced induced closed subscheme construction"
+  "place": "Schemes Lemma 26.12.4 (01J3), affine vanishing-ideal construction, reused directly through Mathlib IdealSheafData.vanishingIdeal and coe_support_vanishingIdeal; N1"
  },
  "mathlib_searches": [
   {
@@ -131,5 +127,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135255-L-1678731",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

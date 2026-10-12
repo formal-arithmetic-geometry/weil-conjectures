@@ -7871,3 +7871,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/M2/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex (stage 3; reviewer PASS; first push; landing 20261012T135254-L-1678067 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/M3/Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification (stage 3; reviewer PASS; first push; landing 20261012T135255-L-1678370 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:52 L: merged deliver/M3/Sheaf.AlgebraicGeometry.PullbackSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T135255-L-1678600 (interface); batch 20261012T135212; modules 2; new nodes 1)
+- 13:52 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal (stage 3; reviewer PASS; first push; landing 20261012T135255-L-1678731 (proof); batch 20261012T135212; modules 1; new nodes 0)
