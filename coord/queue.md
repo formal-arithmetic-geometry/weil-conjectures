@@ -59,9 +59,10 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
@@ -70,7 +71,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
 | `Sheaf.Topology.NoetherianExtensionByZeroReduction` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
-| `Sheaf.Topology.AbelianOpenExtensionByZero` | 7 | 1 | proof |
 | `Sheaf.Topology.AbelianOpenExtensionByZeroStalks` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf` | 8 | 6 | proof |
 | `Sheaf.CategoryTheory.ExtensionByZeroPresheaf` | 9 | 7 | proof |
