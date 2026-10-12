@@ -35,68 +35,53 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-h1-gm-pic], the class of an invertible module $\\mathcal L$ in $H^1(X_{\\mathrm{Et}},\\mathbf G_{m,X})$ is represented by the etale torsor $T_{\\mathcal L}=\\underline{\\operatorname{Isom}}(\\mathcal O_X,\\mathcal L)$; [lem-sc-torsor-h1] identifies this torsor class with the corresponding cohomology class.",
-   "uses": [
-    "lem-sc-h1-gm-pic",
-    "lem-sc-torsor-h1"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 040E (Lemma 21.6.1), torsor representative"
-   }
-  },
-  {
-   "text": "Let $u^{-1}T_{\\mathcal L}$ be the inverse image of the etale sheaf of sets $T_{\\mathcal L}$ (sheafified presheaf inverse image, as in [def-weil-pbc-inverse-image]), a $u^{-1}\\mathbf G_{m,X}$-torsor. Define $\\theta:u^{-1}T_{\\mathcal L}\\to T_{u^*\\mathcal L}=\\underline{\\operatorname{Isom}}(\\mathcal O_Y,u^*\\mathcal L)$ by sending a local generator $s$ of $\\mathcal L$ on an etale $U\\to X$, pulled back to an etale $V\\to Y$ over $U$, to the generator $1\\otimes s$ of $u^*\\mathcal L=\\mathcal O_Y\\otimes_{u^{-1}\\mathcal O_X}u^{-1}\\mathcal L$ [def-pc-module-pullback] on $V$. For a local unit $f$ one has $1\\otimes fs=c_u(f)(1\\otimes s)$, so $\\theta$ is equivariant along $c_u$, the comparison of the statement (adjoint, via [def-weil-pbc-inverse-image], to pullback of units). An equivariant map from a $G$-torsor to a $G'$-torsor along $G\\to G'$ induces an isomorphism from the contracted product (Stacks Tag 03AH; local check on a trivializing covering, where both sides are $G'$). Hence $u^{-1}T_{\\mathcal L}\\wedge^{u^{-1}\\mathbf G_{m,X}}\\mathbf G_{m,Y}\\cong T_{u^*\\mathcal L}$.",
+   "text": "Obtain the isomorphism between Mathlib module pullback and tensorPullback from uniqueness of left adjoints to pushforward. Transport the existing invertibility instance across it. The Picard map is the torsor class of the generator torsor; rewrite using Pic.etaleTorsorClass_mk. Its class is independent of the chosen terminal object: represent a torsor as a lifting torsor, restrict the lifted section along the unique terminal map, identify the lifting sheaves, and use naturality of H.equiv-zero to identify their boundaries.",
    "uses": [
     "def-pc-module-pullback",
-    "def-weil-pbc-inverse-image"
+    "lem-sc-h1-gm-pic",
+    "lem-sc-torsor-h1",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-invertible-pullback-invertible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 040E (Lemma 21.6.1), pullback of the Isom torsor"
-   }
+   "elementary": false
   },
   {
-   "text": "By clause (1) of [lem-sc-etale-torsor-h1-functoriality], $u^*:H^1(X_{\\mathrm{Et}},\\mathbf G_{m,X})\\to H^1(Y_{\\mathrm{Et}},u^{-1}\\mathbf G_{m,X})$ sends the class of $T_{\\mathcal L}$ (step 1, via [lem-sc-torsor-h1]) to the class of $u^{-1}T_{\\mathcal L}$; by clause (2) applied to $c_u$, $H^1(c_u)$ (the map of [lem-weil-pbc-cohomology-pullback-functorial]) sends that to the class of $u^{-1}T_{\\mathcal L}\\wedge^{u^{-1}\\mathbf G_{m,X}}\\mathbf G_{m,Y}$, which is $[T_{u^*\\mathcal L}]$ by step 2. Under [lem-sc-h1-gm-pic] for $Y$ this is $[u^*\\mathcal L]$, so $H^1(c_u)\\circ u^*$ corresponds to $[\\mathcal L]\\mapsto[u^*\\mathcal L]$.",
+   "text": "Apply clause (1) of etale torsor H1 functoriality to the generator torsor, obtaining T-prime, the sheaf isomorphism eT, its unit equivariance, and the equality of cohomology pullback with the class of T-prime. Apply lem-sc-etale-generators-pullback-equivariant to obtain a c_u-equivariant sheaf map from T-prime to the generator torsor of tensorPullback(u)(L). The existing classH1_eq_map_of_equivariant theorem identifies the coefficient image with that target torsor class. Rewrite the target class back to the canonical Picard identification.",
    "uses": [
     "lem-sc-etale-torsor-h1-functoriality",
+    "lem-sc-etale-generators-pullback-equivariant",
     "lem-sc-torsor-h1",
-    "lem-weil-pbc-cohomology-pullback-functorial",
     "lem-sc-h1-gm-pic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 040E (Lemma 21.6.1), functoriality"
-   }
+   "elementary": false
   },
   {
-   "text": "For degree zero, [lem-weil-pbc-cohomology-pullback-degree-zero] identifies cohomology with global sections and identifies the pullback with the unit map on sections. Applied to $\\mathbf G_m$, this is the pullback homomorphism $\\mathcal O_X(X)^\\times\\to\\mathcal O_Y(Y)^\\times$.",
+   "text": "In degree zero, transport H.equiv-zero along the unique maps between the explicit identity etale object and the chosen terminal object. Apply cohomologyMap_zero_eq_globalSectionsUpperStarMap, then H.equiv-zero coefficient naturality. Expand the global-section unit map, cancel the section/global-section isomorphisms, and apply naturality of the comparison. Its adjunction identity identifies the unit followed by the comparison with gmSheafToLowerStarGmSheaf. Naturality transports this calculation back to the explicit identity objects. The composite etale map m from Y to the pullback of X has m.left followed by the first projection equal to u, using m.w and the pullback condition. The formula for gmPresheaf restrictions and composition of appTop then gives exactly Units.map u.appTop.hom.toMonoidHom.",
    "uses": [
-    "lem-weil-pbc-cohomology-pullback-degree-zero"
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 040E (Lemma 21.6.1), degree zero"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-pbc-inverse-image",
+  "lem-sc-etale-generators-pullback-equivariant",
+  "lem-sc-etale-torsor-h1-functoriality",
   "lem-sc-h1-gm-pic",
   "lem-sc-torsor-h1",
-  "def-pc-module-pullback",
-  "def-weil-pbc-inverse-image",
-  "lem-sc-etale-torsor-h1-functoriality",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-cohomology-pullback-degree-zero"
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-invertible-pullback-invertible"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 040E (Lemma 21.6.1)"
+  "by": "agent",
+  "based_on": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 040E; original node steps 1-4"
+  },
+  "why": "Lean reduction using existing torsor pullback functoriality and coefficient equivariance, with one geometric step split off and degree-zero calculated in full."
  },
  "mathlib_searches": [
   {
@@ -197,5 +182,15 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T070549-L-3476431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
