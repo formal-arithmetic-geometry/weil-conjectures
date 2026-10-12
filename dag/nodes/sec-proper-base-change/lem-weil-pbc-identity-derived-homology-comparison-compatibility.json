@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-identity-derived-homology-comparison-compatibility",
+ "kind": "statement",
+ "title": "Identity derived homology comparison compatibility",
+ "statement": "For every abelian C, integer n and bounded below derived object K, the homology map of the bounded-below inclusion preimage of the composite identity comparison and compatibility inverse equals the composite of the corresponding homology maps.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "equations 01F9--01FA"
+ },
+ "proof": [
+  {
+   "text": "Unfold the localization constructions and use the identity functor on complexes; the remaining equality follows from functoriality of homology and the fully faithful bounded-below inclusion.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "H1 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "equations 01F9--01FA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "identity derived homology comparison",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "none"
+  },
+  {
+   "tool": "loogle",
+   "query": "mapDerivedCategoryHomologyFunctorIso",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "identityDerivedHomologyComparison",
+   "date": "2026-10-12",
+   "results": "No existing declaration",
+   "verdict": "none"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.IdentityDerivedHomologyComparison",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-identity-derived-homology-comparison",
+   "place": "identity comparison proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.IdentityDerivedHomologyComparison",
+  "file": "lean/Sheaf/CategoryTheory/IdentityDerivedHomologyComparison.lean",
+  "declaration": "CategoryTheory.Functor.identityDerivedHomologyComparisonCompatibility",
+  "statement": "theorem identityDerivedHomologyComparisonCompatibility {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C] (n : ℤ) (K : DerivedCategory.Plus C) : (DerivedCategory.homologyFunctor C n).map (DerivedCategory.Plus.ι.preimage ((mapDerivedCategoryIdIso C).inv.app K.obj ≫ (𝟭 C).mapDerivedCategoryPlusCompatibility.inv.app K)).hom = (DerivedCategory.homologyFunctor C n).map ((mapDerivedCategoryIdIso C).inv.app K.obj) ≫ (DerivedCategory.homologyFunctor C n).map ((𝟭 C).mapDerivedCategoryPlusCompatibility.inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T124628-L-1182825",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T124628-L-1182825",
+  "kind": "proof"
+ }
+}
