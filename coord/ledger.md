@@ -5881,3 +5881,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:01 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T030019-L-1269397 (interface); modules 4; new nodes 3)
 - 03:02 L: merged deliver/Z2/lem-sc-boundary-cech-injective-middle (stage 2; reviewer PASS; first push; Sheaf.Paper.BoundaryCechInjectiveMiddle AlgebraicGeometry.Scheme.Modules.boundary_cech_injective_middle)
 - 03:04 L: merged deliver/T1/Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer (stage 3; reviewer PASS; after a return; landing 20261012T030255-L-1281385 (interface); modules 3; new nodes 2)
+- 03:05 L: merged deliver/T1/WeilConjectures.ConstructibleSheaf.KernelCokernel (stage 3; reviewer PASS; after a return; landing 20261012T030432-L-1289367 (interface); modules 2; new nodes 1)

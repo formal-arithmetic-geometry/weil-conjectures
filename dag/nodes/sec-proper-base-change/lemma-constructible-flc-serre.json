@@ -29,30 +29,31 @@
    "elementary": false
   },
   {
-   "text": "For an extension $0\\to M_X\\to\\mathcal E\\xrightarrow{\\pi} N_X\\to0$, work on an étale cover on which the outer terms are constant, as in Stacks 03RX (3). Choose generators $y_1,\\ldots,y_m$ of the finite $\\Lambda$-module $N$, and let $0\\to K\\to\\Lambda^m\\xrightarrow{q}N\\to0$ be the resulting exact sequence; $K$ is finite because $\\Lambda$ is finite. By [lem-constructible-shortexact-local-lift], after a further cover the sections $y_j$ lift to sections $s_j$ of $\\mathcal E$, so they define a $\\Lambda$-linear map $r:\\Lambda^m_U\\to\\mathcal E|_U$ with $\\pi r=q_U$. The composite $g:K_U\\to\\Lambda^m_U\\xrightarrow{r}\\mathcal E|_U$ lands in $M_U$ because $q_U$ kills $K_U$; write also $g:K_U\\to M_U$ for this factor. The sequence $0\\to K_U\\to\\Lambda^m_U\\to N_U\\to0$ is exact by [lem-constructible-constant-exact]. The map $(-g,\\mathrm{incl}):K_U\\to M_U\\oplus\\Lambda^m_U$ has cokernel isomorphic to $\\mathcal E|_U$: the map $M_U\\oplus\\Lambda^m_U\\to\\mathcal E|_U$, $(a,v)\\mapsto a+r(v)$, is onto because $\\pi$ is onto and $q$ is onto; its kernel consists exactly of pairs $(-g(k),k)$, since $a+r(v)=0$ implies $q(v)=\\pi r(v)=0$, hence $v=k\\in K_U$, and then $a=-g(k)$. Thus $\\mathcal E|_U\\cong\\operatorname{coker}(-g,\\mathrm{incl})$. By [lemma-constructible-flc-biproduct], $M_U\\oplus\\Lambda^m_U$ is finite locally constant, and $K_U$ is constant with finite $K$; applying the cokernel clause from step 1 (via [lemma-constructible-hom-constant-locally]) shows $\\mathcal E|_U$ is finite locally constant. This is the extension argument of Stacks 03RX (3), and it does not assert that the original extension splits.",
+   "text": "Take a common trivialising cover of the two outer terms, by the common-cover construction used for finite biproducts. Pullback preserves short exactness and finite stalks. Apply lem-constructible-constant-extension-cover to the pulled-back sequence on each member and bind the covers. Transport through the upperStar composition isomorphism to obtain locally constant datum for E.",
    "uses": [
-    "lem-constructible-shortexact-local-lift",
-    "lem-constructible-constant-exact",
     "lemma-constructible-flc-biproduct",
-    "lemma-constructible-hom-constant-locally"
+    "lem-constructible-constant-extension-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03RX (lemma-kernel-finite-locally-constant), assertion (3), proof via Modules on Sites Lemma 093U"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For every geometric point, the stalk functor preserves finite limits and colimits, so the stalk sequence is short exact. Convert finite stalks of the outer terms to Module.Finite with ModuleCat.isFinitelyGenerated_iff; apply Mathlib Module.Finite.of_exact to exactness and surjectivity of the last map. Thus E has finite stalks, independently of its local constancy. Combine the two class fields.",
+   "uses": [
+    "def-constructible-finite"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lemma-constructible-flc-biproduct",
   "lemma-constructible-hom-constant-locally",
-  "lem-constructible-shortexact-local-lift",
-  "lem-constructible-constant-exact"
+  "lem-constructible-constant-extension-cover",
+  "def-constructible-finite"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03RX (lemma-kernel-finite-locally-constant), assertion (3), proof via Modules on Sites Lemma 093U"
+  "place": "Tag 03RX (3), separated stalk finite generation and constant-outer-term local constancy"
  },
  "mathlib_searches": [
   {
@@ -198,5 +199,15 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fl2 (reviewer sub-agent of L); spot-checked: Re-push after return 08713424a, every point checked. Point 1 (E3/E7) repaired: step 2 now follows Stacks 03RX (3) as proved in sites-modules.tex lemma-kernel-finite-locally-constant (093U), read: localize so outer terms are M_U, N_U; presentation 0->K->Lambda^m->N->0 with K finite; local lifts s_j by lem-constructible-shortexact-local-lift (true: epi of etale sheaves is locally surjective); exactness of the constant sequence by new statement-only node lem-constructible-constant-exact (true: constant sheaf = sheafified constant presheaf, exact; cites existing def nodes); the pushout written out as E|_U = coker((-g,incl): K_U -> M_U (+) Lambda^m_U), surjectivity and kernel chase checked (a+r(v)=0 gives q(v)=0, v in K_U, a=-g(v)); target finite locally constant by lemma-constructible-flc-biproduct, source constant finite, cokernel clause of step 1 via lemma-constructible-hom-constant-locally (statement read: finite M, any N, local f_i, kernel/cokernel locally constant with stated restrictions). lemma-constructible-torsor-trivialises dropped from uses/proof_deps; proof_origin and step source are Stacks 03RX(3)/093U; '## Source error' with the Z/4 counterexample present. Point 2 asked for created.by/date, merged_into and lean_audit on the local-lift node: all maintainer's fields (tools/README, brief), correctly not set; the report's claim that it added them is inaccurate but harmless. Point 3 repaired: the nonsplit Z/4 extension tested in the report; I rechecked it: presentation Z/4 -> Z/2 with K=2Z/4, the cokernel of K -> Z/2 (+) Z/4 is Z/4, consistent. Statement unchanged; maintainer fields unchanged. Start Sat Oct 10 04:41:59 PM UTC 2026, end Sat Oct 10 04:42:28 PM UTC 2026."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T030432-L-1289367",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
