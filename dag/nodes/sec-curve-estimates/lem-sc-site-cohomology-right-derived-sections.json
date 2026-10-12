@@ -12,26 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Sheafification adjunction, the free-abelian/forgetful adjunction, and additive Yoneda give a natural additive isomorphism from Hom out of the sheafified free abelian representable at U to evaluation of sections at U.",
+   "text": "The sheafification additive adjunction, whiskered free-abelian/forgetful adjunction, and Yoneda give the private additive equivalence sectionsEquiv. Additivity is pointwise evaluation of sums of morphisms; naturality is homEquiv_naturality_right. NatIso.ofComponents gives sectionsIso identifying additive Hom from the sheafified free representable with sections at U.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply this isomorphism degreewise to an injective resolution of F. Ext from the representing sheaf and the right derived sections are the homology of the two isomorphic complexes. Mathlib InjectiveResolution.extAddEquivCohomologyClass supplies the Ext computation.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Comparison maps lifting sheaf morphisms commute with the degreewise isomorphisms. Independence from the comparison lift follows because homotopic maps have equal maps on cohomology. This produces a natural isomorphism, with no compactness assumption on U.",
-   "uses": [],
+   "text": "Apply the fully proved generic comparison [lem-sc-ext-right-derived-hom] to the sheafified free abelian representable. Evaluation of cohomologyPresheafFunctor is definitionally its extFunctor. Derive sectionsIso in degree q using NatTrans.rightDerived on its hom and inv; rightDerived_comp and rightDerived_id show these are inverse. Compose the Ext comparison and this derived isomorphism.",
+   "uses": [
+    "lem-sc-ext-right-derived-hom"
+   ],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-ext-right-derived-hom"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 01FT, definition of cohomology and cohomology over an object; proof elaborated by E2"
+  "place": "Tag 01FT, equation-cohomology-object-site; representation and comparison proof formalized by N1"
  },
  "mathlib_searches": [
   {
@@ -102,9 +101,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T085231-L-11116",
+  "landing": "20261012T110313-L-619406",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
