@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.DifferentialsSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 
 /-!
 # The standard charts of projective space over a ring are polynomial rings
@@ -81,12 +82,6 @@ theorem homOfSections_coord_eq :
   have h3 : B.ι ≫ H = B.ι ≫ (standardOpenIso n S i).inv ≫ (standardOpen n S i).ι := by
     rw [← Scheme.Hom.resLE_comp_ι H hle, ← h2, Category.assoc, Iso.hom_inv_id_assoc]
   exact (cancel_epi B.ι).mp h3
-
-/-- Equal morphisms of schemes induce equal maps `appLE`. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom {X Y : Scheme.{u}} {f g : X ⟶ Y}
-    (h : f = g) (U : Y.Opens) (V : X.Opens) (e e') : f.appLE U V e = g.appLE U V e' := by
-  subst h
-  rfl
 
 variable (n) (A : Type u) [CommRing A] {i}
 

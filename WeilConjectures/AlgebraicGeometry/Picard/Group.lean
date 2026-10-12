@@ -210,13 +210,6 @@ theorem eq_one_of_subsingleton [Subsingleton Y] (y : Y) (L : Y.Pic) : L = 1 := b
   obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit y ((fromSkeleton Y.Modules).obj L.val)
   exact eq_iff_nonempty_iso.2 ⟨e ≪≫ oneIso.symm⟩
 
-/-- **The Picard group of a field is trivial**: `Pic(Spec K) = 1` for a field `K`.
-
-(blueprint: `lem-pc-pic-of-field`) -/
-instance subsingleton_spec_field (K : Type u) [Field K] : Subsingleton (Spec (.of K)).Pic :=
-  ⟨fun L L' ↦ (eq_one_of_subsingleton default L).trans
-    (eq_one_of_subsingleton default L').symm⟩
-
 end Scheme.Pic
 
 variable {X S : Scheme.{u}}

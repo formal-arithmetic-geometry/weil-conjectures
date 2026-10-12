@@ -543,9 +543,11 @@ by an invertible module pulled back from the base commutes with the higher direc
 
 The blueprint states the projection formula `Rf_* E ⊗^𝕃 K ≅ Rf_* (E ⊗^𝕃 Lf^* K)` in the derived
 category `D_QCoh` for `f` quasi-compact and quasi-separated, and deduces this case `K = 𝒩[0]`.
-There is no derived category of `X.Modules` here, so only this case is stated, through the
-higher direct images; it holds for every `f` and `ℱ`: twisting by an invertible module is an
-autoequivalence, and the projection formula `f_* (ℱ ⊗ f^* 𝒩) ≅ f_* ℱ ⊗ 𝒩` is natural in `ℱ`
+Only this case is stated here, through the higher direct images rather than the derived
+functors `AlgebraicGeometry.Scheme.Modules.derivedPushforward` and
+`AlgebraicGeometry.Scheme.Modules.derivedPullback`; it holds for every `f` and `ℱ`: twisting
+by an invertible module is an autoequivalence, and the projection formula
+`f_* (ℱ ⊗ f^* 𝒩) ≅ f_* ℱ ⊗ 𝒩` is natural in `ℱ`
 (`AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso`).
 
 (blueprint: `lem-pc-projection-formula`) -/

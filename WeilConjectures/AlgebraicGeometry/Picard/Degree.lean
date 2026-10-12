@@ -157,7 +157,7 @@ is trivial. -/
 lemma Scheme.Pic.map_fiberι_mul_map {Y T : Scheme.{u}} (g : Y ⟶ T) (L : Y.Pic) (N : T.Pic)
     (t : T) : Pic.map (g.fiberι t) (L * Pic.map g N) = Pic.map (g.fiberι t) L := by
   rw [Pic.map_mul, ← Pic.map_comp, Scheme.Hom.fiber_fac, Pic.map_comp,
-    Subsingleton.elim (h := Pic.subsingleton_spec (T.residueField t)) (Pic.map _ N) 1,
+    Subsingleton.elim (h := Pic.subsingleton_spec_field (T.residueField t)) (Pic.map _ N) 1,
     Pic.map_one, mul_one]
 
 /-- The fibre Euler characteristic at `t` of (the representative of) a class of the Picard group

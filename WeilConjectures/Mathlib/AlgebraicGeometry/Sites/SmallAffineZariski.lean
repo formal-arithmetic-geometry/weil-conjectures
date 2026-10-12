@@ -159,7 +159,7 @@ lemma sectionsIso_hom (U : X.AffineZariskiSite) :
         (Scheme.ΓSpecIso _).hom :=
   rfl
 
-
+/-- Equal morphisms of schemes induce equal maps `appLE`. -/
 lemma _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom {X Y : Scheme.{u}} {f g : X ⟶ Y}
     (h : f = g) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ g ⁻¹ᵁ U) :
     f.appLE U V e = g.appLE U V e' := by

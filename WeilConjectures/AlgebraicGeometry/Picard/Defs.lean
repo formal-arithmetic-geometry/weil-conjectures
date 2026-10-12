@@ -393,7 +393,7 @@ to the structure sheaf: it is trivial on an open neighbourhood of the unique poi
 of `Spec k`.
 
 (blueprint: `lem-pc-pic-of-field`) -/
-instance subsingleton_spec (k : Type u) [Field k] : Subsingleton (Spec (.of k)).Pic := by
+instance subsingleton_spec_field (k : Type u) [Field k] : Subsingleton (Spec (.of k)).Pic := by
   refine ⟨fun L L' ↦ Pic.eq_iff_nonempty_iso.2 ?_⟩
   have := L.isInvertible
   have := L'.isInvertible

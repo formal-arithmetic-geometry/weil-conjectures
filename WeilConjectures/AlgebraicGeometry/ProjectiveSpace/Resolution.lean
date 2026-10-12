@@ -118,17 +118,6 @@ lemma subsingleton_H_biprod (A B : X.Modules) (n : ℕ) [Subsingleton (A.H n)]
     H.map_comp_apply, Subsingleton.elim (H.map biprod.fst n z) 0,
     Subsingleton.elim (H.map biprod.snd n z) 0, map_zero, map_zero, add_zero]
 
-/-- Tensoring with a module preserves colimits, being a left adjoint. -/
-lemma preservesColimits_tensorLeft (M : X.Modules) :
-    PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
-  (ihom.adjunction M).leftAdjoint_preservesColimits
-
-/-- Tensoring with a module is additive. -/
-lemma additive_tensorLeft (M : X.Modules) : (tensorLeft M).Additive := by
-  have := preservesColimits_tensorLeft M
-  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft M)
-  exact Functor.additive_of_preservesBinaryBiproducts _
-
 end Generalities
 
 section Koszul
@@ -141,15 +130,16 @@ abbrev koszulTensor : ShortComplex (ProjectiveLine (Spec (.of k))).Modules :=
 
 /-- The Koszul sequence tensored with `M` is exact, `M ⊗ -` being right exact. -/
 lemma koszulTensor_exact : (koszulTensor M a).Exact := by
-  have := preservesColimits_tensorLeft M
-  have := preservesColimits_tensorLeft M
+  have : PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+    (ihom.adjunction M).leftAdjoint_preservesColimits
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft M)
   have hK := koszul_shortExact (Spec (.of k)) a
   have := hK.epi_g
   exact hK.exact.map_of_epi_of_preservesCokernel _ inferInstance inferInstance
 
 instance epi_koszulTensor_g : Epi (koszulTensor M a).g := by
-  have := preservesColimits_tensorLeft M
+  have : PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+    (ihom.adjunction M).leftAdjoint_preservesColimits
   have := (koszul_shortExact (Spec (.of k)) a).epi_g
   exact (tensorLeft M).map_epi (koszul (Spec (.of k)) a).g
 
@@ -161,7 +151,8 @@ variable (M : (ProjectiveLine (Spec (.of k))).Modules)
 
 lemma isQuasicoherent_koszulTensor_X₂ [M.IsQuasicoherent] (a : ℤ) :
     (koszulTensor M a).X₂.IsQuasicoherent := by
-  have := preservesColimits_tensorLeft M
+  have : PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+    (ihom.adjunction M).leftAdjoint_preservesColimits
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft M)
   have := isQuasicoherent_tensorObj M (𝒪(a + 1))
   have := isQuasicoherent_biprod_self (M ⊗ 𝒪(a + 1))
@@ -170,7 +161,8 @@ lemma isQuasicoherent_koszulTensor_X₂ [M.IsQuasicoherent] (a : ℤ) :
 
 lemma subsingleton_H_koszulTensor_X₂ (a : ℤ) (n : ℕ) [Subsingleton ((M ⊗ 𝒪(a + 1)).H n)] :
     Subsingleton ((koszulTensor M a).X₂.H n) := by
-  have := preservesColimits_tensorLeft M
+  have : PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
+    (ihom.adjunction M).leftAdjoint_preservesColimits
   have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft M)
   have := subsingleton_H_biprod (M ⊗ 𝒪(a + 1)) (M ⊗ 𝒪(a + 1)) n
   exact @subsingleton_H_of_iso _ _ _ ((tensorLeft M).mapBiprod (𝒪(a + 1)) (𝒪(a + 1))).symm n this
@@ -194,7 +186,6 @@ lemma surjective_H_zero_whiskerRight_twist_succ {E F : (ProjectiveLine (Spec (.o
     (hR : Subsingleton ((F ⊗ 𝒪(a)).H 1)) (hQ : Function.Surjective (H.map (φ ▷ 𝒪(b)) 0)) :
     Function.Surjective (H.map (φ ▷ 𝒪(c)) 0) := by
   subst hab hbc
-  have := additive_tensorLeft F
   have := isQuasicoherent_koszulTensor_X₂ F a
   have : (koszulTensor F a).X₁.IsQuasicoherent := isQuasicoherent_tensorObj F (𝒪(a))
   have : (koszulTensor F a).X₃.IsQuasicoherent := isQuasicoherent_tensorObj F (𝒪(a + 1 + 1))
