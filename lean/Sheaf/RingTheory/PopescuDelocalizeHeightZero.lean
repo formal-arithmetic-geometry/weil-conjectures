@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.FiniteStability
 public import Mathlib.RingTheory.Localization.Submodule
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations
+import Sheaf.RingTheory.PopescuDelocalizeHeightZeroData
 import Sheaf.RingTheory.PopescuDelocalizeWeak
 import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
@@ -83,6 +84,8 @@ theorem canBePopescuResolved_of_local_height_zero
         ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal), inferInstance⟩)
     (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = 0) :
     CanBePopescuResolved α q := by
-  sorry
+  obtain ⟨B, _instB, _algB, β, γ, hfp, hcomp, hle, hnot⟩ :=
+    exists_popescu_resolution_data_of_local_height_zero α q hminimal hlocal hdim
+  exact ⟨B, inferInstance, inferInstance, β, γ, hfp, hcomp, hle, hnot⟩
 
 end Algebra
