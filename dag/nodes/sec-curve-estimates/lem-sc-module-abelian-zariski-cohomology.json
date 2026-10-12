@@ -172,14 +172,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology",
-  "declaration": "AlgebraicGeometry.module_cohomology_iso_underlying_abelian",
-  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianZariskiCohomology.lean",
-  "statement": "theorem module_cohomology_iso_underlying_abelian (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (q : ℕ) [hE : EnoughInjectives (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u})] : Nonempty ((forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤))) AddCommGrpCat).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≅ @CategoryTheory.Sheaf.H' _ _ _ _ (CategoryTheory.hasExt_of_enoughInjectives _) ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) q ⊤)",
+  "module": "Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural",
+  "file": "lean/Sheaf/Paper/ZariskiModuleAbelianCohomologyNatural.lean",
+  "declaration": "AlgebraicGeometry.zariskiModuleAbelianCohomologyNatural",
+  "statement": "theorem zariskiModuleAbelianCohomologyNatural (X : Scheme.{u}) (q : ℕ) :\n    Nonempty ((RingedSpace.moduleCohomology X.toRingedSpace q ⋙\n        forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n          AddCommGrpCat.{u}) ≅\n      (SheafOfModules.toSheaf (moduleRings X.toRingedSpace) ⋙\n        @CategoryTheory.Sheaf.cohomologyPresheafFunctor.{u, u, u}\n          (Opens X.carrier) inferInstance (Opens.grothendieckTopology X.carrier)\n          inferInstance\n          (@hasExt_of_enoughInjectives _ _ _ inferInstance\n            (@IsGrothendieckAbelian.enoughInjectives _ _ _\n              (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}\n                (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}))) q ⋙\n        (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)))",
   "branch": "sheaf-dag",
-  "by": "M1",
+  "by": "Y3",
   "date": "2026-10-12",
-  "existing": false
+  "existing": false,
+  "note": "Restore the natural-in-the-module clause already present in this node: the earlier objectwise Nonempty signature did not encode it. The old declaration is preserved in its old module; no existing signature changes."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -193,10 +194,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T085237-L-13889",
-  "kind": "proof",
+  "landing": "20261012T095934-L-328686",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

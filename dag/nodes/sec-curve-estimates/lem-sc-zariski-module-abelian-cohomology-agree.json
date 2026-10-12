@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "The reviewed comparison node [lem-sc-module-abelian-zariski-cohomology] states that for a scheme with its small Zariski site and any sheaf of $\\mathcal O_X$-modules, the module-derived and underlying-abelian derived global sections are canonically isomorphic in every degree and naturally in the module sheaf. Applied to the present $X$ and $\\mathcal M$, it gives the canonical isomorphisms $H^q(X,\\mathcal M)\\cong H^q(X_{\\rm Zar},\\mathcal M_{ab})$, natural in $\\mathcal M$, which we take as the isomorphisms of the statement for $q\\geq1$.",
+   "text": "For every positive degree, take a natural functor isomorphism from [lem-sc-module-abelian-zariski-cohomology], now represented by zariskiModuleAbelianCohomologyNatural. This supplies all positive-degree components. The degree-zero component is chosen separately and does not use this comparison.",
    "uses": [
     "lem-sc-module-abelian-zariski-cohomology"
    ],
@@ -38,9 +38,9 @@
    }
   },
   {
-   "text": "For $q=0$, both zeroth right-derived functors of a left exact functor are that functor: the module side is $H^0(X,\\mathcal M)=\\Gamma(X,\\mathcal M)$ by [pqf-def-cohomology], and the abelian-sheaf side is $H^0(X_{\\rm Zar},\\mathcal M_{ab})=\\mathcal M_{ab}(X)=\\Gamma(X,\\mathcal M)$ by [def-sc-zariski-cohomology] and the definition of the underlying sheaf. In degree zero we take as the isomorphism of the statement the identity of $\\Gamma(X,\\mathcal M)$ under these two identifications (the statement of [lem-sc-module-abelian-zariski-cohomology] does not say what its comparison is in degree zero, so it is not used there). The identity is canonical and natural in $\\mathcal M$, since a morphism of $\\mathcal O_X$-modules acts on both sides by the same map on global sections. Together with step 1 this gives the canonical natural isomorphisms in every degree, the identity in degree zero.",
+   "text": "For degree zero, the global-sections functor is left exact, so Mathlib rightDerivedZeroIsoSelf identifies its zeroth right derived functor with itself. The abelian Ext-zero comparison of [def-sc-zariski-cohomology] is constructed explicitly: compose Ext.addEquiv₀, the sheafification adjunction, the free-abelian-group adjunction whiskered over the opens category, and Yoneda. The resulting additive equivalence sends an Ext class to precisely the section evaluation in the statement. Its naturality follows from Ext.mk₀_comp_mk₀ and functorial evaluation. Whisker the derived-zero isomorphism with forget₂ and the Ext-zero isomorphism with toSheaf; the two section functors are definitionally equal. Compose these natural isomorphisms to define e 0. In the normalization equation, apply_symm_apply cancels the Ext-zero equivalence and its inverse, and rightDerivedZeroIsoSelf_inv_hom_id_app cancels the canonical map Γ to R⁰Γ. Choose the positive-degree components by natural-number case distinction, yielding the asserted family and its degree-zero identity.",
    "uses": [
-    "pqf-def-cohomology",
+    "def-sc-ringed-space-module-cohomology",
     "def-sc-zariski-cohomology"
    ],
    "elementary": true,
@@ -52,13 +52,15 @@
  ],
  "proof_deps": [
   "lem-sc-module-abelian-zariski-cohomology",
-  "pqf-def-cohomology",
+  "def-sc-ringed-space-module-cohomology",
   "def-sc-zariski-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "Y3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), statement and proof"
+  "place": "Tag 03FD; degree-zero identification by Ext/sheafification/free/Yoneda adjunctions and Mathlib rightDerivedZeroIsoSelf"
  },
  "mathlib_searches": [
   {
@@ -137,5 +139,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T095934-L-328686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

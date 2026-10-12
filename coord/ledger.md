@@ -7312,3 +7312,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.EtaleInverseImageModuleActionLaws (stage 3; reviewer PASS; first push; landing 20261012T095933-L-328264 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint (stage 3; reviewer PASS; first push; landing 20261012T095933-L-328453 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.FpqcEffectivityAffineBaseGluing (stage 3; reviewer PASS; first push; landing 20261012T095933-L-328556 (interface); batch 20261012T095846; modules 3; new nodes 2)
+- 09:59 L: merged deliver/Y3/Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree (stage 3; reviewer PASS; first push; landing 20261012T095934-L-328686 (interface); batch 20261012T095846; modules 2; new nodes 0)
