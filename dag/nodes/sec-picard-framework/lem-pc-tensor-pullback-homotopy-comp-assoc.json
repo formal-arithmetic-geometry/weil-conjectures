@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-tensor-pullback-homotopy-comp-assoc",
+ "kind": "statement",
+ "title": "Pinned tensor pullback comparisons are associative on homotopy categories",
+ "statement": "For scheme morphisms h:W→X, f:X→Y, g:Y→Z [def-pc-scheme], suppose each tensor pullback is additive. Let T_k be the functor induced on homotopy categories of module cochain complexes by tensorPullback k [lem-pc-module-pullback-adjunction], and let t(f,g):T_g⋙T_f≅T_(f≫g) be mapHomotopyCategoryCompIso of the adjunction conjugate of pushforwardComp(f,g) inverse, using exactly the adjunctions chosen from exists_tensorPullbackAdjunction. At every homotopy complex H of O_Z-modules, T_h.map(t(f,g).hom.app H) followed by t(h,f≫g).hom.app H equals t(h,f).hom.app(T_g.obj H) followed by t(h≫f,g).hom.app H. The total composite morphisms are identified by Category.assoc, whose transport has identity components here. No derived category, derived comparison, counit, or K-flat hypothesis is used.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+  "place": "Adjunction.leftAdjointCompIso_assoc; Algebra/Homology/Additive.lean mapHomologicalComplexCompIso; AlgebraicGeometry/Modules/Sheaf.lean pushforwardComp_hom_app_app"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply Adjunction.leftAdjointCompIso_assoc to the pinned adjunctions for g, f, h, f≫g, h≫f, and the total composite. The required pushforward isomorphism equality follows by extensionality on sheaves and sections and the identity-component formulas for pushforwardComp.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write H as the homotopy quotient of a complex P. Each homotopy comparison component is the quotient map of the termwise comparison component. Combine consecutive quotient maps, reduce equality to a complex morphism equality, and check each degree by evaluating the underived adjunction associativity equality at P.X i.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+  "place": "leftAdjointCompIso_assoc and termwise homotopy quotient; R2 second reading",
+  "via": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity of the composition isomorphism for left adjoints induced by composition of right adjoints",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of mates of direct image composition isomorphisms for additive left adjoints on homotopy categories",
+   "results": "leftAdjointCompIso_assoc, leftAdjointCompIso_hom_app, NatTrans.mapHomotopyCategory_comp; generic underived associativity used in the proof, no existing homotopy specialization",
+   "date": "2026-10-13",
+   "verdict": "generic theorem used"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "One hit: CategoryTheory.Adjunction.leftAdjointCompIso_assoc in Mathlib.CategoryTheory.Adjunction.CompositionIso; the generic theorem is used explicitly in the proof, and the homotopy specialization is proved here.",
+   "date": "2026-10-13",
+   "verdict": "generic theorem used"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*assoc|conjugate.*assoc|mapHomotopyCategoryCompIso",
+   "results": "Mathlib Adjunction/CompositionIso.lean leftAdjointCompIso_assoc; HomotopyCategory.lean mapHomotopyCategoryCompIso; no existing tensorPullback homotopy associativity in lean/Sheaf or upstream",
+   "date": "2026-10-13",
+   "verdict": "no exact duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionAssocKFlat",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-pullback-assoc-kflat",
+   "place": "underived triple tensor comparison step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackHomotopyCompAssoc.lean",
+  "declaration": "AlgebraicGeometry.tensorPullback_homotopy_comp_assoc",
+  "statement": "theorem tensorPullback_homotopy_comp_assoc\n    (a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive)\n    {W X Y Z : Scheme.{u₁}} (h : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)\n    (H : HomotopyCategory Z.Modules (ComplexShape.up ℤ)) :\n    let T {X Y : Scheme.{u₁}} (f : X ⟶ Y) :=\n    (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ)\n    let t {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z) :=\n    Functor.mapHomotopyCategoryCompIso\n      ((conjugateIsoEquiv\n        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))\n        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp\n          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm\n        (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)\n    (T h).map ((t f g).hom.app H) ≫ (t h (f ≫ g)).hom.app H =\n      (t h f).hom.app ((T g).obj H) ≫ (t (h ≫ f) g).hom.app H",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T184338-L-4017892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T184338-L-4017892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

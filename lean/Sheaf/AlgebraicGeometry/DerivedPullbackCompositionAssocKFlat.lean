@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackHomotopyCompAssoc
 
 /-! Associativity calculation on K-flat representatives for derived pullback. -/
 
@@ -94,6 +94,60 @@ theorem derivedPullbackComposition_assoc_kflat
       Functor.isoWhiskerLeft (derivedPullback g) (c h f) ≪≫ c (h ≫ f) g ≪≫
         eqToIso (congrArg (fun k : W ⟶ Z ↦ derivedPullback k)
           (Category.assoc h f g))).hom.app (DerivedCategory.Qh.obj
-        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by sorry
+        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
+  let q := (HomotopyCategory.quotient
+    (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ)).obj P
+  let m := (ε (h ≫ f ≫ g)).app q
+  let _ := hK (h ≫ f ≫ g) P hP
+  apply (cancel_mono m).1
+  let _ := @hL
+  let T {X Y : Scheme.{u₁}} (f : X ⟶ Y) :=
+    (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ)
+  let t {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
+    Functor.mapHomotopyCategoryCompIso
+      ((conjugateIsoEquiv
+        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
+        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+          (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
+        (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)
+  have fac {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      (H : HomotopyCategory (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace))
+        (ComplexShape.up ℤ)) :
+      (c f g).hom.app (DerivedCategory.Qh.obj H) ≫ (ε (f ≫ g)).app H =
+        (derivedPullback f).map ((ε g).app H) ≫ (ε f).app ((T g).obj H) ≫
+          DerivedCategory.Qh.map ((t f g).hom.app H) := by
+    rw [hc]
+    simp [T, t]
+  let H := (HomotopyCategory.quotient
+    (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ)).obj P
+  simp only [Category.assoc, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, eqToIso_refl,
+    Iso.refl_hom, Category.id_comp, Category.comp_id]
+  change (derivedPullback h).map ((c f g).hom.app (DerivedCategory.Qh.obj H)) ≫
+      (c h (f ≫ g)).hom.app (DerivedCategory.Qh.obj H) ≫ (ε (h ≫ f ≫ g)).app H =
+    (c h f).hom.app ((derivedPullback g).obj (DerivedCategory.Qh.obj H)) ≫
+      (c (h ≫ f) g).hom.app (DerivedCategory.Qh.obj H) ≫ (ε (h ≫ f ≫ g)).app H
+  rw [fac h (f ≫ g) H]
+  have fac2 := fac (h ≫ f) g H
+  change (c (h ≫ f) g).hom.app (DerivedCategory.Qh.obj H) ≫
+      (ε (h ≫ f ≫ g)).app H =
+    (derivedPullback (h ≫ f)).map ((ε g).app H) ≫
+      (ε (h ≫ f)).app ((T g).obj H) ≫
+        DerivedCategory.Qh.map ((t (h ≫ f) g).hom.app H) at fac2
+  rw [fac2]
+  rw [← Functor.map_comp_assoc, fac f g H]
+  have nc := (c h f).hom.naturality ((ε g).app H)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at nc
+  rw [← reassoc_of% nc, reassoc_of% (fac h f ((T g).obj H))]
+  simp only [Functor.map_comp, Category.assoc]
+  have ne := (ε h).naturality ((t f g).hom.app H)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at ne
+  rw [reassoc_of% ne]
+  have ht := tensorPullback_homotopy_comp_assoc a h f g H
+  simpa only [Functor.map_comp, Category.assoc] using congrArg
+    (fun k ↦ (derivedPullback h).map ((derivedPullback f).map ((ε g).app H)) ≫
+      (derivedPullback h).map ((ε f).app ((T g).obj H)) ≫
+      (ε h).app ((T f).obj ((T g).obj H)) ≫ DerivedCategory.Qh.map k) ht
 
 end AlgebraicGeometry
