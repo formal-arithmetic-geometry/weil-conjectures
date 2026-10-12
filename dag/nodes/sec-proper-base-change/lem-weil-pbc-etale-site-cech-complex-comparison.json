@@ -14,39 +14,23 @@
  ],
  "proof": [
   {
-   "text": "For every degree p and tuple a, form the product P_a of the objects (V_(a k) -> U) in Over U. Its underlying object and projections satisfy the same fibre-product universal property as S.W p a, by [def-weil-pbc-site-cech-complex] and [def-weil-pbc-etale-site]. The universal properties give inverse projection-compatible maps between them.",
+   "text": "The small etale category of X has finite wide pullbacks, supplied by its Mathlib instances. Apply lem-weil-pbc-site-cech-mathlib-comparison to C = X.Etale, the given arrows f, the chosen SiteCechComplex S, and the presheaf F. Its index and coefficient universes both specialize to u+1. The resulting isomorphism is exactly the asserted one; no covering or sheaf hypothesis is required.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply the contravariant abelian presheaf F to the isomorphisms of Step 1, and take their product over all tuples a. The categorical product in AddCommGrpCat is isomorphic to the group of tuples by its projections. Thus these maps identify the degree-p objects of the explicit complex [def-weil-pbc-site-cech-complex] with those of the categorical complex [def-weil-pbc-cech-complex].",
-   "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-pbc-cech-complex"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For each omitted index j, the product isomorphisms commute with the omitted-factor maps: both composites to the target product have the same projection to each remaining factor, so are equal by uniqueness. Applying F proves compatibility with each restriction term; additivity proves compatibility with the signed finite sum defining the differential in [def-weil-pbc-site-cech-complex] and [def-weil-pbc-cech-complex]. The degree maps therefore define a complex morphism. Reverse the product isomorphisms to get its inverse. The composites are identities degreewise, hence on complexes. Empty index sets give empty products on both sides; degree zero uses the singleton product isomorphism.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-pbc-cech-complex"
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-site-cech-mathlib-comparison"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cech-complex",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-site-cech-complex"
+  "lem-weil-pbc-site-cech-mathlib-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 03AK and Definition 03AM, the alternating restriction formula; universal-property comparison written out for the two Lean constructions"
+  "place": "Section Tag 03AK, equation-d-cech and Definition Tag 03AM; independence of fibre-product choices, as written out in def-weil-pbc-site-cech-complex, proof step 4",
+  "note": "K2 specializes the existing generic chosen-product comparison theorem. The same universal-property and alternating-differential route is retained in that dependency; sk-thm-p1 is unchanged."
  },
  "mathlib_searches": [
   {
@@ -137,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T024111-L-1152519",
-  "kind": "interface",
+  "landing": "20261012T033330-L-1461754",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

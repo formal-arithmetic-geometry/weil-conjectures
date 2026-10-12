@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.SiteCechMathlibComparison
 
 /-!
 # Comparison of the two étale Čech complex constructions
@@ -50,6 +51,6 @@ theorem nonempty_etale_siteCech_complex_iso
     (F : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) :
     Nonempty (S.complex F ≅
       (cechComplexFunctor fun j : J ↦ Over.mk (f j)).obj ((Over.forget U).op ⋙ F)) := by
-  sorry
+  exact CategoryTheory.SiteCechComplex.mathlib_complex_iso_exists (V := V) f S F
 
 end AlgebraicGeometry.Scheme
