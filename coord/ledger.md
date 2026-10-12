@@ -9434,3 +9434,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact (stage 3; reviewer PASS; first push; landing 20261012T203937-L-828386 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/B2/Sheaf.RingTheory.CommonStrictlyStandardPower (stage 3; reviewer PASS; first push; landing 20261012T203937-L-828499 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/C2/Sheaf.AlgebraicGeometry.ClosedImmersionIdealPowerImage (stage 3; reviewer PASS; first push; landing 20261012T203938-L-828658 (proof); batch 20261012T203936; modules 1; new nodes 0)
+- 20:39 L: merged deliver/C2/Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion (stage 3; reviewer PASS; first push; landing 20261012T203938-L-828763 (interface); batch 20261012T203936; modules 2; new nodes 1)

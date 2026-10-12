@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-associated-primes-flat-quotient",
+ "kind": "statement",
+ "title": "Associated primes of a quotient under flat base change",
+ "statement": "Let R and S be Noetherian commutative rings, with S a flat R-algebra [def-weil-pbc-flat-ring-map]. Let I be an ideal of R. Every associated prime q of the S-module S/IS is an associated prime of S/pS for some associated prime p of the R-module R/I [def-weil-pbc-annihilator-associated-primes]. Here IS and pS are extensions along the algebra map R -> S, and associated primes use Mathlib's equivalent Noetherian definition.",
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-annihilator-associated-primes"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0312 (lemma-bourbaki), specialized to M=R/I and N=S, and proof of Lemma Tag 0330 (lemma-criterion-analytically-unramified), lines 45934-45962, displayed associated-prime formula"
+ },
+ "proof": [
+  {
+   "text": "Identify (R/I) tensor_R S with S/IS as S-modules using Ideal.qoutMapEquivTensorQout and tensor commutation. Transport the S-action on (R/I) tensor_R S along commutation, exactly as in the Bourbaki theorem. Use isAssociatedPrime_iff and the linear equivalence to transfer q into the annihilator-associated-prime set of this tensor product.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the equality clause of annihilatorAssociatedPrimes_flat_base_change [lem-weil-pbc-associated-primes-flat-base-change] with M=R/I and N=S. Noetherianity of R gives equality. Membership in the double union supplies p in Ass_R(R/I) and q in Ass_S(S/((p:Set R) smul top)).",
+   "uses": [
+    "lem-weil-pbc-associated-primes-flat-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The S-submodule (p:Set R) smul top equals the extended ideal pS: each generating scalar product algebraMap(r)*s lies in pS; conversely every algebraMap(r), r in p, lies in the scalar-product submodule by multiplication by one, and the submodule contains their S-span. Rewrite this equality and convert both annihilator memberships back using isAssociatedPrime_iff. Noetherianity of S is used for the latter conversion.",
+   "uses": [
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-associated-primes-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Application of Lemma Tag 0312 in the proof of Tag 0330; quotient and action identifications written out by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associated primes of a quotient by an extended ideal under flat base change of Noetherian rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes",
+   "results": "12 hits; top: associatedPrimes, associatedPrimes.nonempty, associatedPrimes.eq_empty_of_subsingleton, AssociatedPrimes.mem_iff, instIsPrimeValIdealMemSetAssociatedPrimes, associatedPrimes.prod, LinearEquiv.AssociatedPrimes.eq, associatedPrimes.eq_singleton_of_isPrimary",
+   "date": "2026-10-12",
+   "verdict": "No direct quotient-associated-prime formula; use the project Bourbaki formula with Mathlib quotient-tensor equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes.*flat|qoutMapEquivTensorQout",
+   "results": "3 hits; top: Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-12",
+   "verdict": "No direct quotient-associated-prime formula; use the project Bourbaki formula with Mathlib quotient-tensor equivalences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Bourbaki quotient formula in the principal-quotient criterion, step 5, serving step 4 of the ancestor split (Tag 09Z5)",
+   "via": [
+    "lem-weil-pbc-analytic-unramified-principal-criterion",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.QuotientAssociatedPrimesFlatBaseChange",
+  "file": "lean/Sheaf/RingTheory/QuotientAssociatedPrimesFlatBaseChange.lean",
+  "declaration": "associatedPrimes_quotient_map_of_flat",
+  "statement": "theorem associatedPrimes_quotient_map_of_flat\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [IsNoetherianRing S] [Module.Flat R S]\n    (I : Ideal R) (q : Ideal S)\n    (hq : q ∈ associatedPrimes S (S ⧸ I.map (algebraMap R S))) :\n    ∃ p ∈ associatedPrimes R (R ⧸ I),\n      q ∈ associatedPrimes S (S ⧸ p.map (algebraMap R S))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T203938-L-828763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T203938-L-828763",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
