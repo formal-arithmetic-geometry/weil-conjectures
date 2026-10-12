@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.Triangle
 
 /-!
@@ -368,20 +369,6 @@ theorem IsMixedOfWeightsAtMost.mono_weight {w' : ℝ} (h : K.IsMixedOfWeightsAtM
     (hw : w ≤ w') : K.IsMixedOfWeightsAtMost ι w' :=
   fun b ↦ (h b).mono_weight (by linarith)
 
-/-- The cohomology sheaves of a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of Weil complexes
-form exact sequences `𝓗ᵇK₁ ⟶ 𝓗ᵇK₂ ⟶ 𝓗ᵇK₃` of Weil sheaves: the cohomology functors on the
-derived category are homological, and Weil sheaves are an exact subcategory of pro-étale Weil
-sheaves (blueprint: `lem-sp-long-exact-of-triangle`). -/
-theorem homologySheaf_exact₂ (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _)
-    (b : ℤ) :
-    (ShortComplex.mk ((homologySheaf b).map T.mor₁) ((homologySheaf b).map T.mor₂)
-      (by rw [← Functor.map_comp, comp_distTriang_mor_zero₁₂ _ hT, Functor.map_zero])).Exact := by
-  have hT' := (WeilComplex.objectProperty k₀ l X).ι.map_distinguished T hT
-  have h := (_root_.DerivedCategory.homologyFunctor _ b).map_distinguished_exact _ hT'
-  have : (WeilSheaf.objectProperty k₀ l X).ι.Faithful := ObjectProperty.faithful_ι _
-  exact (ShortComplex.exact_map_iff_of_faithful (ShortComplex.mk ((homologySheaf b).map T.mor₁)
-    ((homologySheaf b).map T.mor₂) _) (WeilSheaf.objectProperty k₀ l X).ι).1 h
-
 /-- **Extension stability of complex weights.** If `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` is a distinguished
 triangle of Weil complexes and `K₁`, `K₃` are mixed of weights at most `w`, then so is `K₂`: in
 each degree `j` the exact sequence `𝓗ʲK₁ ⟶ 𝓗ʲK₂ ⟶ 𝓗ʲK₃` exhibits `𝓗ʲK₂` as an extension of a
@@ -389,7 +376,7 @@ subsheaf of `𝓗ʲK₃` by a quotient of `𝓗ʲK₁` (blueprint: `lem-zl-compl
 theorem IsMixedOfWeightsAtMost.of_distTriang (T : Triangle (WeilComplex k₀ l X))
     (hT : T ∈ distTriang _) (h₁ : T.obj₁.IsMixedOfWeightsAtMost ι w)
     (h₃ : T.obj₃.IsMixedOfWeightsAtMost ι w) : T.obj₂.IsMixedOfWeightsAtMost ι w :=
-  fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (homologySheaf_exact₂ T hT b) (h₁ b) (h₃ b)
+  fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (homologySheaf_exact₂ T b hT) (h₁ b) (h₃ b)
 
 /-- **Retract stability of complex weights.** A direct summand, more generally a retract, of a
 Weil complex mixed of weights at most `w` is mixed of weights at most `w`: its cohomology sheaves

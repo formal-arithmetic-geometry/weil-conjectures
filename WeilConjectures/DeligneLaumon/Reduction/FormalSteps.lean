@@ -392,7 +392,7 @@ theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme
         ((WeilSheaf.upperStar i).obj F)) := by
   obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_openClosed
     j i hij f (WeilSheaf.toComplex.obj F)
-  refine ⟨_, WeilComplex.homologySheaf_exact₂ T hT r, ⟨?_⟩, ⟨?_⟩, ⟨?_⟩⟩
+  refine ⟨_, WeilComplex.homologySheaf_exact₂ T r hT, ⟨?_⟩, ⟨?_⟩, ⟨?_⟩⟩
   · exact (WeilComplex.homologySheaf r).mapIso (e₁ ≪≫
       (WeilComplex.derivedLowerShriek k₀ l (j ≫ f)).mapIso
         (WeilComplex.upperStarToComplexIso j F))
@@ -449,9 +449,9 @@ theorem WeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
     (hS : S.ShortExact) (r : ℕ) :
     (S.map (WeilSheaf.higherLowerShriek k₀ l f r)).Exact := by
   have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
-  exact WeilComplex.homologySheaf_exact₂ _
+  exact WeilComplex.homologySheaf_exact₂ _ r
     ((WeilComplex.derivedLowerShriek k₀ l f).map_distinguished _
-      (WeilSheaf.singleTriangle_distinguished hS)) r
+      (WeilSheaf.singleTriangle_distinguished hS))
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the
 direct-image weight assertion holds for `j ≫ f` and for `i ≫ f`, then it holds for `f`:

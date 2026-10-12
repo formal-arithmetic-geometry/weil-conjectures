@@ -24,9 +24,7 @@ As a consequence an upper weight bound passes to Frobenius-stable subquotients.
 - `FrobeniusModule.charpoly_frobeniusEnd_eq_mul`: multiplicativity of the characteristic
   polynomial along a short exact sequence.
 - `FrobeniusModule.roots_charpoly_frobeniusEnd_map_eq_add`: additivity of the spectrum.
-- `FrobeniusModule.HasWeightsAtMost.of_injective`,
-  `FrobeniusModule.HasWeightsAtMost.of_surjective` and
-  `FrobeniusModule.HasWeightsAtMost.of_subquotient`: weights of subquotients.
+- `FrobeniusModule.HasWeightsAtMost.of_subquotient`: weights of subquotients.
 -/
 
 @[expose] public section
@@ -93,28 +91,6 @@ theorem roots_charpoly_frobeniusEnd_map_eq_add (ι : K →+* ℂ) (hinj : Functi
 
 end Exact
 
-section Weights
-
-variable {M N : FrobeniusModule.{u, v} K} (g : M.carrier →ₗ[K] N.carrier)
-  (hg : ∀ x, g (M.frobenius x) = N.frobenius (g x))
-
-include hg in
-/-- A Frobenius-stable subspace of a Frobenius module with weights at most `w` has weights at
-most `w`: its eigenvalues are eigenvalues of the ambient module.
-(blueprint: `lem-a1-subquotient-extension-bounds`) -/
-theorem HasWeightsAtMost.of_injective (hinj : Function.Injective g) {ι : K →+* ℂ} {q : ℕ}
-    {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=
-  fun α hα ↦ h α (hasEigenvalue_of_injective g hg hinj hα)
-
-include hg in
-/-- A Frobenius-equivariant quotient of a Frobenius module with weights at most `w` has weights
-at most `w`: its eigenvalues are eigenvalues of the ambient module.
-(blueprint: `lem-a1-subquotient-extension-bounds`) -/
-theorem HasWeightsAtMost.of_surjective (hsurj : Function.Surjective g) {ι : K →+* ℂ} {q : ℕ}
-    {w : ℝ} (h : M.HasWeightsAtMost ι q w) : N.HasWeightsAtMost ι q w :=
-  fun α hα ↦ h α (hasEigenvalue_of_surjective g hg hsurj hα)
-
-end Weights
 
 /-- *Subquotient bounds for Frobenius modules*: if `(V, F)` has weights at most `w`, then so
 has every Frobenius-stable subquotient of `V`, presented as a Frobenius-equivariant quotient
