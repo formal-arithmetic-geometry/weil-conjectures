@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-p1-section-action-laws",
+ "kind": "statement",
+ "title": "Action laws for the direct sum of twisted sections",
+ "statement": "Let k be a field, S=k[x_0,x_1] with its total-degree grading and P=Proj S [def-sc-p1-standard]. For an arbitrary O_P-module G and an integer z, put B_z=(PLift(0≤z) → Gamma(P,G tensor O_P(z))), where PLift is the lift of a proposition to a type. Thus B_z is the section group if z≥0 and zero if z<0. Put D=⊕_z B_z. For homogeneous a∈S_e and s∈B_z, define H(e,z,a,s)∈B_(z+e) by h↦(G tensor twistMul(z,a))_*(s) if z≥0 and zero otherwise; the twists and maps are those of [def-weil-pbc-proj-twisting-sheaf]. Define a⋅x for arbitrary a∈S and x∈D to be the finite sum, over nonzero homogeneous components a_e of a and nonzero components x_z of x, of the injection of H(e,z,a_e,x_z) in degree z+e. This explicitly defined operation satisfies 1⋅x=x, (ab)⋅x=a⋅(b⋅x), a⋅(x+y)=a⋅x+a⋅y, (a+b)⋅x=a⋅x+b⋅x. Moreover, for every e≥0, z∈Z, homogeneous a∈S_e and s∈B_z, a⋅ι_z(s)=ι_(z+e)(H(e,z,a,s)).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(5) (https://stacks.math.columbia.edu/tag/01YS), the graded module M_k; Definition 01MN for twists and Lemma 01M7 for localization descriptions and functoriality. Online source read; local text absent."
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The homogeneous twist multiplication map acts on local fractions by multiplication by a/1. These maps are additive in a and in the section, multiplication by 1 is identity, and successive multiplications by a and b give multiplication by ab, with the degree cast (z+e)+f=z+(e+f). Tensoring with G and applying global sections preserve the identities. Negative B_z is a zero group. Expand serreSectionSMul as the double sum over polynomial and section support. Terms outside supports vanish. Additivity follows by distributing finite sums over additive homogeneous components and additive section maps. Recompose ab from the finite convolution of the components of a and b, then use the composite-map identity to obtain associativity. The degree-zero component of 1 gives the unit law. For a homogeneous a and a single section injection, each support has at most one entry, giving the single-summand identity; if either is zero, multiplication by zero or the zero section gives the same equality. This verifies precisely the concrete action, without choosing any module witness.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(5), graded module construction; agent expansion of the finite-sum action verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The explicit direct sum of nonnegative global sections of twisting sheaves is a graded polynomial module",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct sum of sections of twisting sheaves carries a graded polynomial module action",
+   "date": "2026-10-12",
+   "results": "['SetLike.gmodule', 'GradedModule.isModule', 'DirectSum.GradeZero.module', 'DirectSum.Gmodule', 'DirectSum.Gmodule.of_smul_of', 'DirectSum.Gmodule.module', 'DirectSum.GSemiring.toGmodule', 'DirectSum.Gmodule.smulAddMonoidHom_apply_of_of']",
+   "verdict": "no match for the twisted-section action"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.Gmodule.module",
+   "date": "2026-10-12",
+   "results": "['DirectSum.Gmodule.module']",
+   "verdict": "no match for the twisted-section action"
+  },
+  {
+   "tool": "grep",
+   "query": "twistMul.*section|section.*twistMul",
+   "date": "2026-10-12",
+   "results": "[]",
+   "verdict": "no match for the twisted-section action"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleConstruction",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, first sentence: construction of the graded section module",
+   "via": [
+    "lem-sc-p1-section-module-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleAction.lean",
+  "declaration": "AlgebraicGeometry.serreSectionActionLaws",
+  "statement": "theorem serreSectionActionLaws :\n    (∀ x : serreSectionSum k G, (1 : MvPolynomial (Fin 2) k) • x = x) ∧\n    (∀ (a b : MvPolynomial (Fin 2) k) (x : serreSectionSum k G),\n      (a * b) • x = a • (b • x)) ∧\n    (∀ (a : MvPolynomial (Fin 2) k) (x y : serreSectionSum k G),\n      a • (x + y) = a • x + a • y) ∧\n    (∀ (a b : MvPolynomial (Fin 2) k) (x : serreSectionSum k G),\n      (a + b) • x = a • x + b • x) ∧\n    (∀ (e : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k)\n      (ha : a ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k e)\n      (s : serreSectionPiece k G z),\n      a • DirectSum.of (serreSectionPiece k G) z s =\n        DirectSum.of (serreSectionPiece k G) (z + e)\n          (serreSectionHomogeneous k G e z ⟨a, ha⟩ s))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T110319-L-622047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T110319-L-622047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
