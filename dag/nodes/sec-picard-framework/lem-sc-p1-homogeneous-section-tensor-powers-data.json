@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-p1-homogeneous-section-tensor-powers-data",
+ "kind": "statement",
+ "title": "Tensor-power multiplication data for a homogeneous polynomial Proj section",
+ "statement": "Let k be a field, d>0, f a homogeneous polynomial of degree d on P=Proj k[x_0,x_1] [def-sc-p1-standard]. For L=O_P(d) and the section f/1 [def-weil-pbc-proj-twisting-sheaf], there exist isomorphisms a_n:L^tensor n ~= O_P(nd) and b_mn:O_P(m) tensor L^tensor n ~= O_P(m+nd), for all n in N and m in Z, carrying the nth tensor power of f/1 to f^n/1, and carrying its product with a section of O_P(m) to multiplication by f^n.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS (lemma-when-invertible), 01MU (lemma-where-invertible), 01MV (lemma-principal-open), 01NG (lemma-standard-covering-projective-space); multiplication formula equation-multiply"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "On D_+(x_i), the twist O(m) is free with basis x_i^m for every integer m.\nMultiplication of homogeneous fractions maps the tensor of the bases to x_i^(m+r),\nso the multiplication maps are isomorphisms and agree on overlaps. Starting with\nO = O(0), iterate them to obtain a_n, and compose multiplication with id tensor a_n\nto obtain b_mn. The local coefficient of the section f is f/x_i^d, whose nth tensor\npower is (f/x_i^d)^n. The identifications therefore send the tensor-power section\nand its product with any local section of O(m) to multiplication by f^n. Equality\non the chart cover proves both morphism identities globally. At n=0 these are the\nunit isomorphisms and multiplication by 1; for f=0 positive powers are zero.\nNegative m uses the same local basis and the fraction multiplication rule.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "lem-sc-p1-twist-multiplication"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-sc-p1-twist-multiplication"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS (lemma-when-invertible), 01MU (lemma-where-invertible), 01MV (lemma-principal-open), 01NG (lemma-standard-covering-projective-space); multiplication formula equation-multiply"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"unitToTwist\"",
+   "results": "msearch: OK, zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nonvanishing locus homogeneous polynomial section twisting sheaf Proj tensor powers multiplication",
+   "results": "Eight Mathlib structure-sheaf and homogeneous-localization hits; none contains twist tensor powers or their nonvanishing locus.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitToTwist|tensorPowSection|nonvanishingLocus",
+   "results": "msearch Mathlib: no hits. Local rg: source Twist/UnitToTwist provides fraction formulas and freeness on D_+(f); ProjectiveLineTwistMultiplication provides coordinate-degree-one formulas, not arbitrary homogeneous sections and tensor powers.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On polynomial Proj, tensor powers of a homogeneous section of O(d) agree with multiplication by powers of the polynomial, and its nonvanishing locus is the standard open.",
+   "results": "Service unavailable: Internal Server Error. Loogle, LeanFinder and Mathlib grep performed instead.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowers",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-homogeneous-section-tensor-powers",
+   "place": "tensor-power and multiplication component",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjHomogeneousSectionTensorPowersData.lean",
+  "declaration": "AlgebraicGeometry.proj_homogeneous_section_tensor_powers_data",
+  "statement": "theorem proj_homogeneous_section_tensor_powers_data (k : Type u) [Field k]\n    {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k}\n    (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) :\n    let L := Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + (d : ℤ))\n    ∃ (a : ∀ n : ℕ, L.tensorPow n ≅\n          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)\n            (0 + ((n • d : ℕ) : ℤ)))\n        (b : ∀ (m : ℤ) (n : ℕ),\n          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⊗ L.tensorPow n ≅\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)\n              (m + ((n • d : ℕ) : ℤ))),\n        (∀ n : ℕ, tensorPowSection\n            (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1)))\n            n ≫ (a n).hom =\n          Proj.unitToTwist (SetLike.pow_mem_graded n hf)) ∧\n        (∀ (m : ℤ) (n : ℕ),\n          (ρ_ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m)).inv ≫\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ◁\n              tensorPowSection\n                (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1)))\n                n ≫ (b m n).hom =\n            Proj.twistMul m (SetLike.pow_mem_graded n hf))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112836-L-766375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112836-L-766375",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

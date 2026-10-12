@@ -9,9 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication
 import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData
+import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 
 /-! # Tensor powers of a homogeneous section of a polynomial Proj twist
 
@@ -73,6 +74,18 @@ theorem proj_homogeneous_section_tensor_powers (k : Type u) [Field k]
                 (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1)))
                 n ≫ (b m n).hom =
             Proj.twistMul m (SetLike.pow_mem_graded n hf)) := by
-  sorry
+  dsimp
+  have hL := Proj.isInvertible_twist
+    (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + (d : ℤ)) (by
+      intro x
+      have hx : x ∈ ⨆ i : Fin 2,
+          Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X i) := by
+        rw [(proj_polynomial_twist_chart k 1).1]
+        trivial
+      obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+      exact ⟨_, MvPolynomial.isHomogeneous_X k i, hi⟩)
+  obtain ⟨ha, hb, h₁, h₂⟩ := proj_homogeneous_section_tensor_powers_data k hd hf
+  have hl := proj_homogeneous_section_tensor_powers_locus k hd hf
+  exact ⟨hL, hl, ⟨ha, hb, h₁, h₂⟩⟩
 
 end AlgebraicGeometry
