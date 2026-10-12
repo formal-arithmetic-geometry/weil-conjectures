@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Prime
 public import Mathlib.RingTheory.Localization.Away.Basic
 
+import Mathlib.RingTheory.Flat.Stability
+import Mathlib.RingTheory.LocalRing.Module
+import Mathlib.RingTheory.Localization.Free
+
 /-!
 # Finite projective modules are free on a neighbourhood of each prime
 
@@ -50,6 +54,13 @@ theorem exists_localizationAway_equiv_finsupp_of_finite_projective
     ∃ f : A, f ∉ p ∧ ∃ r : ℕ,
       Nonempty (LocalizedModule.Away f M ≃ₗ[Localization.Away f]
         (Fin r →₀ Localization.Away f)) := by
-  sorry
+  have : Module.FinitePresentation A M := Module.finitePresentation_of_projective A M
+  have : Module.Free (Localization.AtPrime p) (LocalizedModule p.primeCompl M) :=
+    Module.free_of_flat_of_isLocalRing
+  let b := Module.finBasis (Localization.AtPrime p) (LocalizedModule p.primeCompl M)
+  obtain ⟨f, hf, b', _⟩ :=
+    Module.FinitePresentation.exists_basis_localizedModule_powers p.primeCompl
+      (LocalizedModule.mkLinearMap p.primeCompl M) (Localization.AtPrime p) b
+  exact ⟨f, hf, _, ⟨b'.repr⟩⟩
 
 end Module

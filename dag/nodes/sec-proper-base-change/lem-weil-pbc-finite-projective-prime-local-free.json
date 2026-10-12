@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "$M$ is finitely presented: since $M$ is finitely generated and projective, a surjection $A^{\\oplus n}\\to M$ splits, its kernel $K$ is a direct summand of $A^{\\oplus n}$, hence finitely generated, and $A^{\\oplus m}\\to A^{\\oplus n}\\to M\\to0$ is exact for a surjection $A^{\\oplus m}\\to K$ [lem-weil-pbc-finite-projective-finitely-presented].",
+   "text": "$M$ is finitely presented: since $M$ is finitely generated and projective, a surjection $A^{\\oplus n}\\to M$ splits, its kernel $K$ is a direct summand of $A^{\\oplus n}$, hence finitely generated, and $A^{\\oplus m}\\to A^{\\oplus n}\\to M\\to0$ is exact for a surjection $A^{\\oplus m}\\to K$ [lem-weil-pbc-finite-projective-finitely-presented]. In Lean, install Module.FinitePresentation A M using Module.finitePresentation_of_projective A M.",
    "uses": [
     "lem-weil-pbc-finite-projective-finitely-presented"
    ],
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "Fix the prime $\\mathfrak p$. Since $M$ is finite projective, its localization $M_{\\mathfrak p}$ [def-weil-pbc-module-localization] is a finite free module over the local ring $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] [lem-weil-pbc-finite-projective-rank-locally-constant, first clause]; say $M_{\\mathfrak p}\\cong A_{\\mathfrak p}^{\\oplus r}$.",
+   "text": "Fix the prime $\\mathfrak p$. Since $M$ is finite projective, its localization $M_{\\mathfrak p}$ [def-weil-pbc-module-localization] is a finite free module over the local ring $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] [lem-weil-pbc-finite-projective-rank-locally-constant, first clause]; say $M_{\\mathfrak p}\\cong A_{\\mathfrak p}^{\\oplus r}$. In Lean, localization preserves finiteness and flatness by instances; Module.free_of_flat_of_isLocalRing gives freeness, and Module.finBasis chooses a basis indexed by Fin (Module.finrank (Localization.AtPrime p) (LocalizedModule p.primeCompl M)). Only the stalk-freeness clause of the cited rank lemma is used.",
    "uses": [
     "lem-weil-pbc-finite-projective-rank-locally-constant",
     "def-weil-pbc-module-localization",
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "By step 1 $M$ is finitely presented and by step 2 $M_{\\mathfrak p}$ is free of rank $r$ over $A_{\\mathfrak p}$. Hence [lem-weil-pbc-finitely-presented-free-at-prime-spreads] (lift a basis of $M_{\\mathfrak p}$ to a map $\\varphi:A^{\\oplus r}\\to M$ whose localization at $\\mathfrak p$ is an isomorphism; as source and target are finitely presented, $\\varphi_f$ is an isomorphism for some $f\\notin\\mathfrak p$) there is $f\\in A\\setminus\\mathfrak p$ with $M_f\\cong A_f^{\\oplus r}$ [def-weil-pbc-module-localization-away], which is the claim.",
+   "text": "Apply the basis-lifting form of [lem-weil-pbc-finitely-presented-free-at-prime-spreads], namely Module.FinitePresentation.exists_basis_localizedModule_powers, with S = p.primeCompl, the map LocalizedModule.mkLinearMap p.primeCompl M, the ring Localization.AtPrime p, and the finite basis from step 2. It returns f in p.primeCompl and a basis of LocalizedModule.Away f M over Localization.Away f with the same finite index set. Membership in p.primeCompl is definitionally f not in p. The coordinate equivalence b'.repr of this lifted basis proves M_f is isomorphic to the direct sum of r copies of A_f [def-weil-pbc-module-localization-away].",
    "uses": [
     "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
     "def-weil-pbc-module-localization-away"
@@ -77,7 +77,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), (2)$\\Rightarrow$(3)$\\Rightarrow$(1) for finite presentation and freeness of $M_{\\mathfrak p}$; Lemma Tag 0GWM (lemma-finitely-presented-localization-free, line 19447) for spreading freeness from $\\mathfrak p$ to $D(f)$. Stacks proves (1)$\\Rightarrow$(7) of 00NX directly by Nakayama (line 19073); 0GWM is the same conclusion for a finitely presented module free at $\\mathfrak p$, and is the form Mathlib has."
+  "place": "Lemma Tag 00NX (lemma-finite-projective, line 19027), (2)$\\Rightarrow$(3)$\\Rightarrow$(1) for finite presentation and freeness of $M_{\\mathfrak p}$; Lemma Tag 0GWM (lemma-finitely-presented-localization-free, line 19447) for spreading freeness from $\\mathfrak p$ to $D(f)$. Stacks proves (1)$\\Rightarrow$(7) of 00NX directly by Nakayama (line 19073); 0GWM is the same conclusion for a finitely presented module free at $\\mathfrak p$, and is the form Mathlib has. Lean realization by C2 on 2026-10-12 uses the basis-lifting form exists_basis_localizedModule_powers of the same spreading argument, followed by Basis.repr; the three-step route and proof dependencies are unchanged."
  },
  "mathlib_searches": [
   {
@@ -174,5 +174,15 @@
   "group": "E1",
   "result": "pass",
   "note": "CommRing A; Module.Finite+Module.Projective A M (stmt_deps); every prime p via (p : Ideal A) [p.IsPrime]; ∃ f ∉ p, ∃ r : ℕ, Nonempty (LocalizedModule.Away f M ≃ₗ[Localization.Away f] (Fin r →₀ A_f)); M=0/r=0 and zero-ring edge cases; independent universes harmless"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631547",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

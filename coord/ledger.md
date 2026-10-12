@@ -6164,3 +6164,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/C1/Sheaf.Paper.FreeCechComplexDecomposition (stage 3; reviewer PASS; first push; landing 20261012T053922-L-2631157 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/C2/Sheaf.AlgebraicGeometry.Curve.ConstantInvariance (stage 3; reviewer PASS; first push; landing 20261012T053923-L-2631271 (interface); batch 20261012T053916; modules 5; new nodes 4)
 - 05:39 L: merged deliver/C2/Sheaf.AlgebraicGeometry.LocalSystemGenericZeroMap (stage 3; reviewer PASS; first push; landing 20261012T053923-L-2631406 (interface); batch 20261012T053916; modules 2; new nodes 1)
+- 05:39 L: merged deliver/C2/Sheaf.RingTheory.FiniteProjectivePrimeLocalFree (stage 3; reviewer PASS; first push; landing 20261012T053923-L-2631547 (proof); batch 20261012T053916; modules 1; new nodes 0)
