@@ -1,6 +1,6 @@
 # Work queue
 
-105 items; claim with `tools/claim.py next <group> [--stage N]`.
+106 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (95)
+## Stage 3: modules to prove (96)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -49,12 +49,13 @@ Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
-| `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology` | 4 | 1 | proof |
+| `Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration` | 4 | 1 | proof |
+| `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction` | 5 | 1 | proof |
