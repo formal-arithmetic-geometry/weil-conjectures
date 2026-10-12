@@ -106,10 +106,9 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_adicConstantS
   obtain ⟨a, ha⟩ := hb.2 b.down
   exact ⟨ULift.up a, congrArg ULift.up ha⟩
 
-/-- **The unit at a finite free sheaf.** In the setting of
-`AlgebraicGeometry.ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_adicConstantSheaf`,
-the unit of the restriction adjunction is an isomorphism at every sheaf isomorphic to a finite
-direct sum of copies of `ℚ̄_ℓ,X`. -/
+/-- **The unit at a finite free sheaf.** In the setting of the previous theorem, the unit
+of the restriction adjunction is an isomorphism at every sheaf isomorphic to a finite direct sum
+of copies of `ℚ̄_ℓ,X`. -/
 theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_iso_biproduct
     {X C U V : Scheme.{u}} (p : X ⟶ C) [WeaklyEtale p]
     (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]
@@ -159,7 +158,8 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover
             G))).app T) := h T.unop
     exact NatIso.isIso_of_isIso_app _
   intro T
-  rw [localizationRestriction_map_hom_app, openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app]
+  rw [localizationRestriction_map_hom_app,
+    openImmersionRestrictionLowerStarAdjunction_unit_app_hom_app]
   -- the component over `V i` of the unit at the restriction of `G`
   have h₁ : IsIso (((openImmersionRestrictionLowerStarAdjunction (WeilCoefficients.{u} l)
       ι').unit.app ((localizationRestriction (WeilCoefficients.{u} l) (g i)
@@ -206,7 +206,8 @@ lemma isIso_upperStarLowerStarAdjunction_unit_app_iff {A : Type*} [Category.{u +
       IsIso ((openImmersionRestrictionLowerStarAdjunction A ι).unit.app G) := by
   let adj := upperStarLowerStarAdjunction A ι
   let adj' := openImmersionRestrictionLowerStarAdjunction A ι
-  have h : adj.unit.app G = adj'.unit.app G ≫ (ι)_*[A].map ((adj.leftAdjointUniq adj').inv.app G) := by
+  have h : adj.unit.app G =
+      adj'.unit.app G ≫ (ι)_*[A].map ((adj.leftAdjointUniq adj').inv.app G) := by
     rw [← adj.unit_leftAdjointUniq_hom_app adj' G, Category.assoc, ← Functor.map_comp,
       Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
     exact (Category.comp_id _).symm
