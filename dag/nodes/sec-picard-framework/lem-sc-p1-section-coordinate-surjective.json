@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-p1-section-coordinate-surjective",
+ "kind": "statement",
+ "title": "Eventual coordinate surjectivity on twisted sections",
+ "statement": "Let k be a field and P=Proj k[x_0,x_1] as in [def-sc-p1-standard]. For a coherent O_P-module G [pqf-def-coherent], there is an integer N>=0 such that for every z>=N and every section s of G tensor O_P(z+1), there are sections s0,s1 of G tensor O_P(z) with s=x0*s0+x1*s1. Multiplication is the map G whiskered with twistMul of [def-weil-pbc-proj-twisting-sheaf]. No finiteness assertion about sections or their direct sum is made.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Tag 01YS (4); coordinate split exact sequence on P1, checked on D+(x0) and D+(x1); online source read because local checkout is absent"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Use coordinate multiplication to form 0 -> O(-1) -> O^2 -> O(1) -> 0, with maps t -> (-x1*t,x0*t) and (a,b) -> x0*a+x1*b. On D+(xi), xi is a unit in the trivialized twists, so the sequence is split exact. Tensor with G tensor O(z); local splitting preserves exactness without assuming G flat. Twist addition identifies the kernel with G tensor O(z-1). The quotient maps are exactly G whiskered with twistMul by x0 and x1, by the fraction formula.",
+   "uses": [
+    "lem-pc-twist-tensor",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the Proj twists with the twists on the standard projective line using the chart isomorphism and uniqueness of TwistData. Coherence on projective space over a field supplies the quasi-coherence and finite presentation required by Serre vanishing. Apply vanishing to G and choose a natural bound N such that H1(G tensor O(z-1)) is zero for z>=N.",
+   "uses": [
+    "lem-sc-p1-proj-shifted-free-twist",
+    "lem-sc-p1-twist-exists",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-projective-space-serre-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The long exact sequence makes the section map from two copies of Gamma(G tensor O(z)) onto Gamma(G tensor O(z+1)) surjective. Sections commute with finite direct sums; read a preimage as a pair to obtain the displayed sum. The zero sheaf case uses the zero pair.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-pc-projective-space-serre-vanishing",
+  "lem-pc-twist-tensor",
+  "lem-sc-p1-proj-shifted-free-twist",
+  "lem-sc-p1-twist-exists",
+  "pqf-def-cohomology",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Tag 01YS (4); coordinate split exact sequence on P1, checked on D+(x0) and D+(x1); online source read because local checkout is absent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On projective line multiplication by the two homogeneous coordinates on global sections of a coherent sheaf is eventually surjective",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent sheaf on projective line global sections twists eventually generated multiplication degree one",
+   "results": "Found general Proj and sheaf declarations, no coordinate section surjectivity theorem. Loogle MvPolynomial.X, MvPolynomial.IsHomogeneous found isHomogeneous_X, checked in source.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "eventual.*surject|surject.*twist|twist.*surject; section-coordinate|coordinate.*surject|surject.*coordinate|Euler.*sequence in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "No existing eventual coordinate-surjectivity result. Existing Proj.epi_sigmaUnitToTwist is sheaf-level surjectivity only; existing Serre vanishing supplies the H1 input, but not this section-level map.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleTailFinite",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "finite generation of the representing graded section module, via eventual coordinate multiplication",
+   "via": [
+    "lem-sc-p1-section-module-tail-finite",
+    "lem-sc-p1-serre-section-module-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionCoordinateSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionCoordinateSurjective.lean",
+  "declaration": "AlgebraicGeometry.serreSectionCoordinateSurjective",
+  "statement": "theorem serreSectionCoordinateSurjective (k : Type u) [Field k] (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (hG : RingedSpace.IsCoherent (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).toRingedSpace G) : ∃ N : ℕ, ∀ (z : ℤ), (N : ℤ) ≤ z → ∀ s : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (z + (1 : ℕ)), ⊤), ∃ s₀ s₁ : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z, ⊤), s = Scheme.Modules.Hom.app (G ◁ Proj.twistMul z (MvPolynomial.X_mem_homogeneousSubmodule_one k (0 : Fin 2))) ⊤ s₀ + Scheme.Modules.Hom.app (G ◁ Proj.twistMul z (MvPolynomial.X_mem_homogeneousSubmodule_one k (1 : Fin 2))) ⊤ s₁",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T110322-L-623056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T110322-L-623056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
