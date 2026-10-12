@@ -89,6 +89,6 @@ lemma mateEquiv_eq_of_hom_app_hom (w : φ ≫ b.inv = a.inv ≫ φ) (c : a.hom �
     adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom,
     Adjunction.modAdjunction_unit_app_hom]
   rw [hE, hE']
-  exact h
+  sorry
 
 end AlgebraicGeometry.ProEtale

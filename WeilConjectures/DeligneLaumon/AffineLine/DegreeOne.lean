@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 
 /-!
 # The degree-one estimate for an irreducible factor
@@ -43,14 +44,13 @@ The degree-one bound is derived along the blueprint argument from the boundary s
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+The boundary semicontinuity is the case of the affine line of
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`.
 
 ## TODO
 
-Prove the two inputs of the degree-one bound:
-- the boundary semicontinuity
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`;
-- the stationary phase
-  `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+Prove the stationary phase
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
 -/
 
 @[expose] public section
@@ -119,8 +119,12 @@ closed point of the line, including the finitely many points outside `U₀`, whe
 singular. This is the case of the affine line of the blueprint lemma, which holds on every
 smooth geometrically connected curve. (blueprint: `lem-wf-boundary-semicontinuity`) -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
-    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
-  sorry
+    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β := by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  exact WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse hβ
 
 /-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
 middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of

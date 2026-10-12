@@ -29,7 +29,8 @@ set of closed points of `C₀` lying in `U₀`, whose complement is finite. The 
 `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`), split into the
 product over `T` and the finitely many local factors outside `T`, gives
 
-`L (T, J, T) · ι det (1 - F T ∣ H_c² (J)) = ι det (1 - F T ∣ H_c¹ (J)) · ∏_{s ∉ T} ι P_s (J, T ^ e_s)`.
+`L (T, J, T) · ι det (1 - F T ∣ H_c² (J)) =`
+`  ι det (1 - F T ∣ H_c¹ (J)) · ∏_{s ∉ T} ι P_s (J, T ^ e_s)`.
 
 On `T` the stalks of `J` are those of `ℱ`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_directImage`), of bounded rank
@@ -196,7 +197,8 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
   have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
   have : ConnectedSpace C := GeometricallyConnected.connectedSpace_of_subsingleton p
   have : Nonempty U := j.denseRange.nonempty_iff.2 inferInstance
-  have hjp : j ≫ p = U ↘ Spec (CommRingCat.of k₀) := (Scheme.Hom.isOver_iff (Spec (CommRingCat.of k₀))).1 inferInstance
+  have hjp : j ≫ p = U ↘ Spec (CommRingCat.of k₀) :=
+    (Scheme.Hom.isOver_iff (Spec (CommRingCat.of k₀))).1 inferInstance
   have : QuasiCompact (U ↘ Spec (CommRingCat.of k₀)) := hjp ▸ inferInstance
   have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := hjp ▸ inferInstance
   have hdeg (y : U) : (U ↘ Spec (CommRingCat.of k₀)).degreeOver y = p.degreeOver (j.base y) := by
@@ -303,8 +305,7 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
   have hFB : (∏ x ∈ hT.toFinset, f x) * (B : PowerSeries ℂ) = 1 := by
     rw [hBdef, ← Polynomial.coeToPowerSeries.ringHom_apply, map_prod, ← Finset.prod_mul_distrib]
     exact Finset.prod_eq_one fun x _ ↦ PowerSeries.inv_mul_cancel _
-      (by rw [Polynomial.coeToPowerSeries.ringHom_apply, PowerSeries.constantCoeff_eulerPoly _
-        (he x)]; exact one_ne_zero)
+      (by rw [PowerSeries.constantCoeff_eulerPoly _ (he x)]; exact one_ne_zero)
   have hD2 : (D2 : PowerSeries ℂ) =
       (S.map fun b ↦ 1 - PowerSeries.C b * PowerSeries.X).prod := by
     rw [hD2def, FrobeniusModule.localPolynomial, LinearMap.charpolyRev_eq_prod_roots,
@@ -352,6 +353,66 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
     exact one_le_pow₀ key
   rw [← hqc]
   simpa using (le_mul_inv_iff₀ (norm_pos_iff.2 hα0)).1 h1
+
+/-- Blueprint `lem-wf-boundary-semicontinuity` (first assertion of `sk-p-real-semi`):
+*boundary semicontinuity of weights* on a smooth geometrically connected affine curve.
+
+Let `C₀` be a smooth geometrically connected affine curve over `k₀`, `j : U₀ ⟶ C₀` a dense
+quasi-compact open immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most
+`β`. Then `j_* ℱ` has punctual weights at most `β` on all of `C₀`.
+
+At the points of `U₀` the stalks of `j_* ℱ` are those of `ℱ`. At a boundary point `s`, an
+eigenvalue `α` of the local Frobenius gives the eigenvalue `α ^ k` at `s` of `j_* (ℱ^{⊗ k})`,
+where `ℱ^{⊗ k}` has weights at most `k β`; the preliminary bound
+(`AlgebraicGeometry.WeilSheaf.norm_le_of_hasEigenvalue_stalk_directImage`) gives
+`|ι α| ^ k ≤ q_s ^ (k β / 2 + 1)` for every `k ≥ 1`, hence `|ι α| ≤ q_s ^ (β / 2)`. -/
+theorem hasWeightsAtMost_directImage {F : WeilSheaf k₀ l U} (hF : F.IsLisse) {β : ℝ}
+    (hw : F.HasWeightsAtMost ι β) : ((directImage j).obj F).HasWeightsAtMost ι β := by
+  set p := C ↘ Spec (CommRingCat.of k₀) with hp
+  have hq1 : (1 : ℝ) < Nat.card k₀ := by
+    have := (Finite.one_lt_card_iff_nontrivial (α := k₀)).2 inferInstance
+    exact_mod_cast this
+  have hq0 : (0 : ℝ) < Nat.card k₀ := zero_lt_one.trans hq1
+  have hjp : j ≫ p = U ↘ Spec (CommRingCat.of k₀) :=
+    (Scheme.Hom.isOver_iff (Spec (CommRingCat.of k₀))).1 inferInstance
+  have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := hjp ▸ inferInstance
+  intro x α hα
+  rw [Scheme.Hom.residueCard, Nat.cast_pow]
+  by_cases hx : x.1 ∈ Set.range j.base
+  · -- a point of `U₀`: the stalk is that of `ℱ`
+    obtain ⟨y, hy⟩ := hx
+    have hyfin : y ∈ U.finitePoints := (Scheme.Hom.mem_finitePoints_iff_of_isIso j y).1 (hy ▸ x.2)
+    obtain ⟨E⟩ := nonempty_equiv_stalk_directImage j F ⟨y, hyfin⟩ x hy
+    have h := hw ⟨y, hyfin⟩ α (E.hasEigenvalue hα)
+    rwa [Scheme.Hom.residueCard, ← hjp, Scheme.Hom.degreeOver_comp_of_isIso, hy,
+      Nat.cast_pow] at h
+  · -- a boundary point: sharpening by tensor powers
+    set e := p.degreeOver x.1
+    have ha0 : 0 < ‖ι α‖ :=
+      norm_pos_iff.2 ((map_ne_zero ι).2 (FrobeniusModule.ne_zero_of_hasEigenvalue hα))
+    have hlog (k : ℕ) (hk : k ≠ 0) :
+        k * Real.log ‖ι α‖ ≤ e * ((k * β / 2 + 1) * Real.log (Nat.card k₀)) := by
+      have h := norm_le_of_hasEigenvalue_stalk_directImage j ι (isLisse_tensorPow F hF k)
+        (hw.tensorPow hF k) x hx
+        (hasEigenvalue_stalk_directImage_tensorPow j j.denseRange hF x hα hk)
+      rw [map_pow, norm_pow] at h
+      have := Real.log_le_log (pow_pos ha0 k) h
+      rwa [Real.log_pow, Real.log_pow, Real.log_rpow hq0] at this
+    rw [← Real.rpow_natCast, ← Real.rpow_mul hq0.le,
+      ← Real.log_le_log_iff ha0 (Real.rpow_pos_of_pos hq0 _), Real.log_rpow hq0]
+    refine le_of_forall_pos_lt_add fun ε hε ↦ ?_
+    obtain ⟨k, hk⟩ := exists_nat_gt (e * Real.log (Nat.card k₀) / ε)
+    have hk0 : (0 : ℝ) < k :=
+      lt_of_le_of_lt (div_nonneg (mul_nonneg (Nat.cast_nonneg _) (Real.log_pos hq1).le)
+        hε.le) hk
+    have h1 := hlog k (by exact_mod_cast hk0.ne')
+    have h2 : e * Real.log (Nat.card k₀) < ε * k := by
+      rw [div_lt_iff₀ hε] at hk
+      linarith
+    have h3 : (k : ℝ) * Real.log ‖ι α‖ <
+        k * (e * (β / 2) * Real.log (Nat.card k₀) + ε) := by
+      nlinarith
+    exact lt_of_mul_lt_mul_left h3 hk0.le
 
 end Semicontinuity
 

@@ -1957,6 +1957,7 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Germ
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GermMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSectionsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
