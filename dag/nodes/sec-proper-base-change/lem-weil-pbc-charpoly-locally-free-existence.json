@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "*Local polynomials.* For each $i$ let $\\varphi_{f_i}:M_{f_i}\\to M_{f_i}$, $m/f_i^e\\mapsto\\varphi(m)/f_i^e$; it is well defined and $A_{f_i}$-linear, being the map corresponding to $\\varphi\\otimes1$ under $M\\otimes_AA_{f_i}\\cong M_{f_i}$ [lem-weil-pbc-localization-module-tensor]. As $M_{f_i}$ is free of rank $n$ over $A_{f_i}$, let $\\chi_i\\in A_{f_i}[T]$ be the characteristic polynomial of $\\varphi_{f_i}$ in a basis of $M_{f_i}$ [def-weil-pbc-charpoly-free-module]; it does not depend on the basis and $\\chi_i=T^n+(\\text{terms of degree}<n)$ [lem-weil-pbc-charpoly-free-module-properties (a), (c)].",
+   "text": "Choose one local tensor-product basis for each element of Set.range f. Transport the localized bases in hfree along the inverse of LocalizedModule.isBaseChange.equiv, realizing the localization/tensor comparison. Define each local polynomial as the matrix characteristic polynomial of the scalar extension of φ in that basis.",
    "uses": [
     "def-weil-pbc-module-localization-away",
     "lem-weil-pbc-localization-module-tensor",
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "*Local comparison.* Fix $i$ and a ring map $A\\to B$ under which $f_i$ maps to a unit. By the universal property of $A\\to A_{f_i}$ [def-weil-ring-localization-away] there is exactly one ring map $A_{f_i}\\to B$ compatible with the maps from $A$. Then there are isomorphisms of $B$-modules $M\\otimes_AB\\cong(M\\otimes_AA_{f_i})\\otimes_{A_{f_i}}B$ [lem-weil-pbc-module-base-change-transitive, with $A\\to A_{f_i}\\to B$] and $(M\\otimes_AA_{f_i})\\otimes_{A_{f_i}}B\\cong M_{f_i}\\otimes_{A_{f_i}}B$ (base change along $A_{f_i}\\to B$ [def-weil-module-base-change] of the isomorphism of [lem-weil-pbc-localization-module-tensor]); by the naturality clauses of both lemmas the composite carries $\\varphi\\otimes1_B$ to $(\\varphi\\otimes1_{A_{f_i}})\\otimes1_B$ and then to $\\varphi_{f_i}\\otimes1_B$. By [lem-weil-pbc-charpoly-free-module-properties] (d), $M_{f_i}\\otimes_{A_{f_i}}B$ is free of rank $n$ over $B$ and the characteristic polynomial of $\\varphi_{f_i}\\otimes1_B$ is the image of $\\chi_i$ under $A_{f_i}[T]\\to B[T]$; by (b) of the same lemma, transported along the isomorphism: *$M\\otimes_AB$ is free of rank $n$ over $B$ and $\\det(T-\\varphi\\otimes1_B)$ is the image of $\\chi_i$ in $B[T]$.*",
+   "text": "The proved private helper charpoly_tower compares characteristic polynomials through any scalar tower A → S → T. Use LinearMap.charpoly_toMatrix to pass to basis-independent polynomials, LinearMap.charpoly_baseChange and LinearMap.baseChange_baseChange, and LinearEquiv.charpoly_conj for tensor cancellation. This realizes local scalar-extension comparison without introducing another public lemma.",
    "uses": [
     "def-weil-ring-localization-away",
     "lem-weil-pbc-module-base-change-transitive",
@@ -60,7 +60,7 @@
    }
   },
   {
-   "text": "*Agreement on overlaps.* Fix $i,j$ and take $B=A_{f_if_j}$ [def-weil-ring-localization-away], in which $f_i$ and $f_j$ are units (they divide the unit $f_if_j$). The ring map $A_{f_i}\\to A_{f_if_j}$ of the previous step is the canonical map $x/f_i^e\\mapsto f_j^ex/(f_if_j)^e$ (it is compatible with the maps from $A$, and such a map is unique), and likewise for $j$. Applying the previous step once with $i$ and once with $j$: the images of $\\chi_i$ and of $\\chi_j$ in $A_{f_if_j}[T]$ are both equal to $\\det(T-\\varphi\\otimes1)$ on $M\\otimes_AA_{f_if_j}$, hence equal. Since a ring map acts on polynomials coefficientwise, for every $k\\ge0$ the $T^k$-coefficients $c_{i,k}\\in A_{f_i}$ of $\\chi_i$ and $c_{j,k}\\in A_{f_j}$ of $\\chi_j$ have the same image in $A_{f_if_j}$.",
+   "text": "The proved private helper charpoly_standardCover_overlap factors the maps to A[1/(ab)] through A[1/a] and A[1/b] using awayToAwayRight and awayToAwayLeft. Transport a scalar-extended basis through cancelBaseChange to obtain a common basis, then apply charpoly_tower to both maps. The two mapped matrix characteristic polynomials agree.",
    "uses": [
     "def-weil-ring-localization-away"
    ],
@@ -71,7 +71,7 @@
    }
   },
   {
-   "text": "*Gluing.* For each $k\\ge0$ the family $(c_{i,k})_i$ agrees on overlaps (previous step), so by [lem-weil-pbc-standard-covering-glue] (ii) there is exactly one $c_k\\in A$ with $c_k/1=c_{i,k}$ in $A_{f_i}$ for all $i$. For $k>n$ all $c_{i,k}=0$ and for $k=n$ all $c_{i,n}=1$ (first step), so by the uniqueness in (ii) $c_k=0$ for $k>n$ and $c_n=1$. Put $\\chi=\\sum_{k=0}^nc_kT^k=T^n+c_{n-1}T^{n-1}+\\dots+c_0\\in A[T]$ (in particular monic of degree $n$). By construction the image of $\\chi$ in $A_{f_i}[T]$ is $\\chi_i$ for every $i$.",
+   "text": "The proved private helper charpoly_standardCover_glue applies Localization.existsUnique_algebraMap_eq_of_span_eq_top to each coefficient indexed by Fin n. Compatibility follows by taking coefficients in the overlap identity. Define χ as X^n plus the sum of the glued coefficients. Matrix.charpoly_monic.as_sum and Matrix.charpoly_natDegree_eq_dim identify its image with each local polynomial. Handle a zero localization ring by Subsingleton.elim before using the degree formula.",
    "uses": [
     "lem-weil-pbc-standard-covering-glue"
    ],
@@ -82,7 +82,7 @@
    }
   },
   {
-   "text": "*$\\chi$ has the property.* Let $\\rho:A\\to A'$ be a ring map with $N=M\\otimes_AA'$ free of rank $n$ over $A'$; put $\\psi=\\varphi\\otimes1$ and $P=\\det(T-\\psi)\\in A'[T]$ [def-weil-pbc-charpoly-free-module], which does not depend on the basis [lem-weil-pbc-charpoly-free-module-properties] (a). Write $1=\\sum_ia_if_i$; then $1=\\sum_i\\rho(a_i)g_i$ with $g_i=\\rho(f_i)$, so $g_1,\\dots,g_r$ generate the unit ideal of $A'$. Fix $i$ and let $B_i=A'_{g_i}$ [def-weil-ring-localization-away], an $A$-algebra via $A\\to A'\\to B_i$ in which $f_i$ maps to the unit $g_i$. (1) By the local comparison step, $\\det(T-\\varphi\\otimes1_{B_i}\\mid M\\otimes_AB_i)$ is the image of $\\chi_i$ under $A_{f_i}[T]\\to B_i[T]$; as $A\\to A_{f_i}\\to B_i$ equals $A\\to A'\\to B_i$ and $\\chi\\mapsto\\chi_i$ (gluing step), this is the image of $\\rho(\\chi)\\in A'[T]$ in $B_i[T]$. (2) $N\\otimes_{A'}B_i\\cong M\\otimes_AB_i$ [lem-weil-pbc-module-base-change-transitive, with $A\\to A'\\to B_i$], carrying $\\psi\\otimes1_{B_i}$ to $\\varphi\\otimes1_{B_i}$; by [lem-weil-pbc-charpoly-free-module-properties] (d) the characteristic polynomial of $\\psi\\otimes1_{B_i}$ is the image of $P$ in $B_i[T]$, and by (b) it equals $\\det(T-\\varphi\\otimes1_{B_i})$. So $\\rho(\\chi)$ and $P$ have the same image in $A'_{g_i}[T]$ for every $i$; applying [lem-weil-pbc-standard-covering-glue] (i) over $A'$ with $g_1,\\dots,g_r$ to each coefficient of $\\rho(\\chi)-P$ gives $\\rho(\\chi)=P$.",
+   "text": "The reverse direction of the proved private helper charpoly_standardCover_comparison proves the universal base-change property from the local identities. For A → A′ and a basis over A′, use Ideal.map_span and Ideal.map_top to show the images of f generate the unit ideal. At T = A′[1/ρ(f_i)], factor A → T through A[1/f_i] using IsLocalization.Away.lift. Apply charpoly_tower to this factorization and to A → A′ → T. The images of χ and the given matrix characteristic polynomial agree at every localization. Localization.algebraMap_injective_of_span_eq_top applied coefficientwise proves their equality.",
    "uses": [
     "def-weil-pbc-charpoly-free-module",
     "lem-weil-pbc-charpoly-free-module-properties",
@@ -97,9 +97,11 @@
    }
   },
   {
-   "text": "*Uniqueness.* Let $\\tilde\\chi\\in A[T]$ have the property of the statement. For each $i$, the local comparison step with $B=A_{f_i}$ shows that $M\\otimes_AA_{f_i}$ is free of rank $n$ and $\\det(T-\\varphi\\otimes1)=\\chi_i$ on it; so the property applied to $A\\to A_{f_i}$ gives: the image of $\\tilde\\chi$ in $A_{f_i}[T]$ is $\\chi_i$, which is the image of $\\chi$ (gluing step). Applying [lem-weil-pbc-standard-covering-glue] (i) to each coefficient of $\\tilde\\chi-\\chi$ gives $\\tilde\\chi=\\chi$.",
+   "text": "The forward direction of charpoly_standardCover_comparison recovers the local identities from the universal property, even for arbitrary w: lift each local ring S to ULift.{w} S, extend the local basis and transport it through tensor cancellation, apply the universal property and charpoly_tower, and descend by Polynomial.map_injective along ULift.ringEquiv.symm. Thus any two polynomials satisfying the universal property have identical images in every localization. Apply Localization.algebraMap_injective_of_span_eq_top to each coefficient to prove uniqueness.",
    "uses": [
-    "lem-weil-pbc-standard-covering-glue"
+    "lem-weil-pbc-standard-covering-glue",
+    "lem-weil-pbc-charpoly-free-module-properties",
+    "lem-weil-pbc-module-base-change-transitive"
    ],
    "elementary": false,
    "source": {
@@ -108,7 +110,7 @@
    }
   },
   {
-   "text": "*The free case.* If $M$ is free of rank $n$, take $A'=A$ ($\\rho=\\mathrm{id}$): the map $M\\otimes_AA\\to M$, $m\\otimes a\\mapsto am$, is an isomorphism [def-weil-module-base-change] carrying $\\varphi\\otimes1$ to $\\varphi$, so $M\\otimes_AA$ is free of rank $n$ and, by the property and [lem-weil-pbc-charpoly-free-module-properties] (b), $\\chi=\\det(T-\\varphi\\otimes1)=\\det(T-\\varphi\\mid M)$, the characteristic polynomial of $\\varphi$ in any basis of $M$ [def-weil-pbc-charpoly-free-module].",
+   "text": "For a basis e over A, apply charpoly_standardCover_comparison at universe parameter zero to obtain the universal property with A itself among the test rings. Apply it to the identity map and the basis transported along TensorProduct.lid.symm. LinearMap.toMatrix_map_left and toMatrix_map_right, followed by equality of the transported endomorphisms on generators, identify its matrix with that of φ in e. Polynomial.map_id gives the free-case identity.",
    "uses": [
     "def-weil-module-base-change",
     "def-weil-pbc-charpoly-free-module",
@@ -134,7 +136,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), last paragraph: 'If the module is free the CharPol$_A$ is defined as the characteristic polynomial of the corresponding matrix and in general one uses Algebra, Lemma \\ref{algebra-lemma-standard-covering} to glue. Details omitted.' The source states only the free case (characteristic polynomial of the matrix) and the gluing by Algebra Lemma 00EJ, and omits the details; the steps (local polynomials, their agreement on overlaps, gluing by 00EJ, the characterizing property via base change, uniqueness, the free case) were written out by the worker along that indication."
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), last paragraph: 'If the module is free the CharPol$_A$ is defined as the characteristic polynomial of the corresponding matrix and in general one uses Algebra, Lemma \\ref{algebra-lemma-standard-covering} to glue. Details omitted.' The source states only the free case (characteristic polynomial of the matrix) and the gluing by Algebra Lemma 00EJ, and omits the details; the steps (local polynomials, their agreement on overlaps, gluing by 00EJ, the characterizing property via base change, uniqueness, the free case) were written out by the worker along that indication. Lean realization by J2, 2026-10-12: all seven steps are proved with private implementation lemmas in the existing module; scalar lifting handles the arbitrary universe in the universal property. No new mathematical assumptions or public statements."
  },
  "mathlib_searches": [
   {
@@ -224,5 +226,15 @@
   "group": "G1",
   "result": "pass",
   "note": "A comm ring/M module/phi endo; f : Fin r -> A spanning unit ideal; M_{f_i} free rank n over A_{f_i} (LocalizedModule.Away, Localization.Away); P: all CommRing A' in Type (max u w) with rho, all Fin n bases of A' (x)_A M, chi.map rho = charpoly(toMatrix (phi.baseChange A')); unique for P alone; X^n + sum_{k<n} c_k X^k; free case every basis; n=0, r=0 (zero ring), universes (localizations fit via ULift); Mathlib/source have charpoly only for free modules, no existing"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T053936-L-2637232",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
