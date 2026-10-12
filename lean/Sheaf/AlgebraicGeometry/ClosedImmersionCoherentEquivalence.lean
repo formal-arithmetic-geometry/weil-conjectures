@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
@@ -38,6 +39,59 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+open MonoidalCategory Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem product_zero_iff {X : Scheme.{u}} (J : X.IdealSheafData)
+    (F : X.Modules) :
+    IsZero (Scheme.idealModuleProduct J.toModulesι F) ↔
+      ∀ (V : X.Opens) (a : Γ(X, V)), a ∈ J.idealOfOpens V →
+        ∀ s : Γ(F, V), a • s = 0 := by
+  let μ : J.toModules ⊗ F ⟶ F := J.toModulesι ▷ F ≫ (λ_ F).hom
+  have hm : IsZero (image μ) ↔ μ = 0 := by
+    constructor
+    · intro h
+      exact eq_zero_of_image_eq_zero (h.eq_of_src _ _)
+    · intro h
+      have hi : image.ι μ = 0 := by
+        apply (cancel_epi (factorThruImage μ)).mp
+        simp only [image.fac, comp_zero, h]
+      exact IsZero.of_mono_eq_zero (image.ι μ) hi
+  change IsZero (image μ) ↔ _
+  rw [hm]
+  constructor
+  · intro h V a ha s
+    have hr : a ∈ Set.range (J.toModulesι.app V) := by
+      rw [J.range_toModulesι_app_eq_idealOfOpens V]
+      exact ha
+    obtain ⟨b, rfl⟩ := hr
+    have he := congrArg (fun f : J.toModules ⊗ F ⟶ F ↦ f.app V (tmulSection b s)) h
+    dsimp only [μ] at he
+    rw [Hom.comp_app, ConcreteCategory.comp_apply, whiskerRight_app_tmulSection] at he
+    erw [leftUnitor_hom_app_tmulSection'] at he
+    exact he
+  · intro h
+    let adj := sheafificationAdjunction X
+    apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification J.toModules F).inv).mp
+    apply (adj.homEquiv (J.toModules.val ⊗ F.val) F).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext t
+    change μ.val.app U
+      ((SheafOfModules.tensorObjIsoSheafification J.toModules F).inv.val.app U
+        (((adj.unit.app (J.toModules.val ⊗ F.val)).app U) t)) = _
+    induction t using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | add t s ht hs => simp only [map_add, ht, hs]
+    | tmul a s =>
+      change μ.app U.unop (tmulSection a s) = 0
+      dsimp only [μ]
+      rw [Hom.comp_app, ConcreteCategory.comp_apply, whiskerRight_app_tmulSection]
+      erw [leftUnitor_hom_app_tmulSection']
+      exact h U.unop (J.toModulesι.app U.unop a)
+        ((J.range_toModulesι_app_eq_idealOfOpens U.unop).subset ⟨a, rfl⟩) s
+
 /-- Pushforward induces the equivalence on coherent modules of Stacks Tag 087T.
 (blueprint: lem-weil-pbc-closed-immersion-coherent-equivalence)
 Proof (node steps 1--4): a closed immersion is finite
@@ -61,7 +115,36 @@ theorem closedImmersion_coherent_equivalence {Z X : Scheme.{u}} (i : Z ⟶ X)
         ObjectProperty.ι (RingedSpace.IsCoherent X.toRingedSpace) ≅
         ObjectProperty.ι (RingedSpace.IsCoherent Z.toRingedSpace) ⋙
           Scheme.Modules.pushforward i) := by
-  sorry
+  classical
+  let P := Scheme.Modules.pushforward i
+  have hbij := (closedImmersion_pushforward_fullyFaithful i).2
+  have : P.Full := ⟨fun {G H} ↦ (hbij G H).2⟩
+  have : P.Faithful := ⟨fun {G H} ↦ (hbij G H).1⟩
+  let C : CoherentModules Z ⥤ CoherentModules X :=
+    ObjectProperty.lift (RingedSpace.IsCoherent X.toRingedSpace)
+      (ObjectProperty.ι (RingedSpace.IsCoherent Z.toRingedSpace) ⋙ P)
+      (fun G ↦ (isCoherent_pushforward_of_isFinite i G.obj G.property).1)
+  have hC (G : CoherentModules Z) : CoherentModuleSupportedOn (C.obj G) i := by
+    have := ((isCoherent_iff_isQuasicoherent_and_isFiniteType Z G.obj).mp G.property).1
+    exact (product_zero_iff i.ker (P.obj G.obj)).mpr
+      ((closedImmersion_pushforward_annihilated i).1 G.obj).2
+  let D := ObjectProperty.lift
+    (fun F : CoherentModules X ↦ CoherentModuleSupportedOn F i) C hC
+  have : D.EssSurj := ⟨fun F ↦ by
+    have hF := (isCoherent_iff_isQuasicoherent_and_isFiniteType X F.obj.obj).mp
+      F.obj.property
+    have := hF.1
+    obtain ⟨hq, hu, ht⟩ := (closedImmersion_pushforward_annihilated i).2 F.obj.obj
+      ((product_zero_iff i.ker F.obj.obj).mp F.property)
+    let G : CoherentModules Z := ⟨(tensorPullback i).obj F.obj.obj,
+      (isCoherent_iff_isQuasicoherent_and_isFiniteType Z _).mpr ⟨hq, ht hF.2⟩⟩
+    have := hu
+    let adj := Classical.choose (exists_tensorPullbackAdjunction i)
+    refine ⟨G, ⟨?_⟩⟩
+    exact ObjectProperty.isoMk _
+      (ObjectProperty.isoMk _ (asIso (adj.unit.app F.obj.obj)).symm)⟩
+  have : D.IsEquivalence := {}
+  exact ⟨D.asEquivalence, ⟨Iso.refl _⟩⟩
 
 /-- The support formula accompanying Stacks Tag 087T, by the stalk calculation of
 Sheaves, Tag 00AE (blueprint: lem-weil-pbc-closed-immersion-coherent-equivalence).
@@ -75,7 +158,23 @@ theorem closedImmersion_coherent_support {Z X : Scheme.{u}} (i : Z ⟶ X)
     (G : CoherentModules Z) :
     {x : X | ¬ Subsingleton (((Scheme.Modules.pushforward i).obj G.obj).presheaf.stalk x)} =
       i '' {z : Z | ¬ Subsingleton (G.obj.presheaf.stalk z)} := by
-  sorry
+  classical
+  obtain ⟨hoff, hon, _⟩ := closedImmersion_pushforward_stalks i i.isClosedEmbedding G.obj
+  ext x
+  constructor
+  · intro hx
+    have hr : x ∈ Set.range i.base := by
+      by_contra h
+      exact hx (hoff x h)
+    obtain ⟨z, rfl⟩ := hr
+    refine ⟨z, ?_, rfl⟩
+    intro hz
+    have := hz
+    exact hx (hon z).1.1.subsingleton
+  · rintro ⟨z, hz, rfl⟩ hx
+    have : Subsingleton (((TopCat.Presheaf.pushforward Ab i.base).obj
+        G.obj.presheaf).stalk (i.base z)) := hx
+    exact hz (hon z).1.2.subsingleton
 
 /-- The termwise closed pushforward equivalence and its natural completion comparison.
 Source: Stacks Tags 088A, 088C, 088E, using Tag 087T without further mention; completion
