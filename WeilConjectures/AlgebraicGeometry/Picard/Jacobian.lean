@@ -1660,7 +1660,12 @@ theorem exists_picardZero_equiv_picardFunctorDegree_zero [IsSepClosed k]
 over a separably closed field `k`.  Then there is a `k`-scheme `J` carrying a commutative group
 scheme structure which is proper, smooth of relative dimension `g` and geometrically integral
 over `k`, which represents the degree-zero part `Pic^0_{X/k}` of the Picard functor compatibly
-with the group laws, and whose group of `k`-rational points is isomorphic to `Pic^0(X)`.
+with the group laws, and whose group of `k`-rational points is isomorphic to `Pic^0(X)`: the
+isomorphism `ψ` sends `ℒ ∈ Pic^0(X)` to the `k`-point of `J` which the representation `e`
+attaches to the class of `ℒ` (pulled back to `X ×_k k`) in `Pic^0_{X/k}(k)`.
+
+That `J`, with `e`, is a Jacobian in the sense of `AlgebraicGeometry.IsJacobian` is
+`AlgebraicGeometry.exists_isJacobian`.
 
 The tangent space clause `T_e J ≅ H^1(X, 𝒪_X)` is
 `AlgebraicGeometry.nonempty_tangentSpaceAt_linearEquiv_H_one` and is not repeated here; the
@@ -1675,7 +1680,11 @@ theorem exists_jacobian [IsSepClosed k]
       (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J),
       IsProper J.hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) J.hom ∧
         GeometricallyIntegral J.hom ∧ IsPicardZeroMul (X ↘ Spec (.of k)) e ∧
-        Nonempty (picardZero k X ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J)) := by
+        ∃ ψ : picardZero k X ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J), ∀ L, ∃ h,
+          ψ L = e.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+            (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app _
+              ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1,
+                h⟩) := by
   obtain ⟨A, -, hA, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
   obtain ⟨Pd, -, -, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
   obtain ⟨h₀⟩ := hPd 0
@@ -1686,14 +1695,16 @@ theorem exists_jacobian [IsSepClosed k]
         Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) a.1 *
           Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) b.1 :=
     Pic.map_mul _ a.1 b.1
-  obtain ⟨ψ, -⟩ := exists_mulEquiv_of_isPicardZeroMul (X ↘ Spec (.of k)) h₀ he
+  obtain ⟨ψ, hψ⟩ := exists_mulEquiv_of_isPicardZeroMul (X ↘ Spec (.of k)) h₀ he
     (T := 𝟙_ (Over (Spec (.of k))))
     (fun L : picardZero k X ↦
       Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1)
     hρ Φ hΦ
-  exact ⟨Pd 0, inferInstance, h₀, isProper_of_representableBy_picardFunctorDegree 0 _ h₀,
+  refine ⟨Pd 0, inferInstance, h₀, isProper_of_representableBy_picardFunctorDegree 0 _ h₀,
     smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 _ h₀,
-    geometricallyIntegral_of_representableBy_picardFunctorDegree 0 _ h₀, he, ⟨ψ⟩⟩
+    geometricallyIntegral_of_representableBy_picardFunctorDegree 0 _ h₀, he, ψ, fun L ↦ ?_⟩
+  obtain ⟨h, hL⟩ := hΦ L
+  exact ⟨h, (hψ L).trans (congrArg _ hL)⟩
 
 end Jacobian
 
@@ -1742,7 +1753,9 @@ theorem isSepClosed_and_pullback_sepClosure (ks : Type u) [Field ks] [Algebra k 
 /-- **The degree-zero Picard functor over a separable closure.** Let `C` be a smooth projective
 geometrically integral curve of genus `g` over `k` and let `k_s` be a separable closure of `k`.
 Then `Pic^0_{C_{k_s}/k_s}` is represented, compatibly with the group laws, by an abelian variety
-`J_s` of dimension `g` over `k_s`, whose group of `k_s`-points is isomorphic to `Pic^0(C_{k_s})`.
+`J_s` of dimension `g` over `k_s`, whose group of `k_s`-points is isomorphic to `Pic^0(C_{k_s})`
+through the canonical identification: the isomorphism `ψ` sends `ℒ` to the `k_s`-point of `J_s`
+which the representation `e` attaches to the class of `ℒ` in `Pic^0_{C_{k_s}/k_s}(k_s)`.
 
 (blueprint: `thm-pd-geometric-pic0`) -/
 theorem exists_jacobian_pullback (ks : Type u) [Field ks] [Algebra k ks] [IsSepClosure k ks]
@@ -1754,9 +1767,15 @@ theorem exists_jacobian_pullback (ks : Type u) [Field ks] [Algebra k ks] [IsSepC
         (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) 0).obj.RepresentableBy J),
       IsProper J.hom ∧ SmoothOfRelativeDimension g J.hom ∧ GeometricallyIntegral J.hom ∧
         IsPicardZeroMul _ e ∧
-        Nonempty (picardZero ks
+        ∃ ψ : picardZero ks
             (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))) ≃*
-          (𝟙_ (Over (Spec (.of ks))) ⟶ J)) := by
+          (𝟙_ (Over (Spec (.of ks))) ⟶ J), ∀ L, ∃ h,
+          ψ L = e.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of ks)))
+            (picardSubfunctorDegree (pullback (C ↘ Spec (.of k))
+              (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) 0).toFunctor).app _
+              ⟨Pic.map (pullback.fst (pullback (C ↘ Spec (.of k))
+                (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks))
+                  (𝟙_ (Over (Spec (.of ks)))).hom) L.1, h⟩) := by
   -- The base change of `C` to `k_s` is a smooth projective geometrically integral curve of
   -- genus `g` over the separably closed field `k_s`
   -- (`AlgebraicGeometry.isSepClosed_and_pullback_sepClosure`).
@@ -1867,7 +1886,11 @@ theorem exists_jacobian_baseChange [IsSepClosed k] (X : Scheme.{u}) [X.Over (Spe
       (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J),
       IsProper J.hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) J.hom ∧
         GeometricallyIntegral J.hom ∧ IsPicardZeroMul (X ↘ Spec (.of k)) e ∧
-        Nonempty (picardZero k X ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J)) ∧
+        (∃ ψ : picardZero k X ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J), ∀ L, ∃ h,
+          ψ L = e.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+            (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app _
+              ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1,
+                h⟩)) ∧
         ∀ (k' : Type u) [Field k'] [Algebra k k'] (X' : Scheme.{u}) [X'.Over (Spec (.of k'))]
           (q : X' ⟶ X), IsPullback q (X' ↘ Spec (.of k')) (X ↘ Spec (.of k))
             (Spec.map (CommRingCat.ofHom (algebraMap k k'))) →
