@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilized
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelQuotient
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
@@ -88,6 +90,10 @@ theorem coherentFormalModule_kernel_construction {X : Scheme.{u}} [IsNoetherian 
               j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) ∧
           (∀ n : ℕ, kernel.ι (ι.hom.app (op (n + c))) ≫
             K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0) := by
-  sorry
+  obtain ⟨c, hc, S, j, hS⟩ :=
+    coherentFormalModule_kernel_stabilized_aux I F H α
+  obtain ⟨K, ι, e, heq, hι, hker⟩ :=
+    coherentFormalModule_kernel_quotient_aux I F H α c S j hc hS
+  exact ⟨c, hc, S, j, hS, K, ι, e, heq, hι, hker⟩
 
 end AlgebraicGeometry
