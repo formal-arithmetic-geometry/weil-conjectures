@@ -6,6 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceDerivedRestriction
 
 /-! # Computing source derived sections on an injective representative
 
@@ -78,6 +79,13 @@ theorem strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}}
                 (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
               representativeSectionsComparison
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫
-              (strictLocalBaseChangeTargetIso f s K n).inv := by sorry
+              (strictLocalBaseChangeTargetIso f s K n).inv := by
+  intro i
+  apply (cancel_mono (strictLocalBaseChangeTargetIso f s K n).hom).1
+  rw [Category.assoc]
+  rw [strictLocalInjectiveSourceIso_derivedRestriction f s K n Q J q i]
+  have h := (injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
+  simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using
+    congrArg (fun a ↦ (strictLocalInjectiveSourceIso f s K n J q i).hom ≫ a) h
 
 end AlgebraicGeometry.Etale
