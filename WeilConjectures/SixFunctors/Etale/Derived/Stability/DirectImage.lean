@@ -281,6 +281,47 @@ lemma constructibleFiniteTor_mapDerivedCategory_upperStar {X Y : Scheme.{u}} (f 
       ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app N)
       (torAmplitudeIn_leftDerivedUpperStar _ f c d hcd)⟩
 
+section DualizingHom
+
+variable [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
+  [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
+
+include a in
+/-- Blueprint `cor-weil-finite-constructible-hom`: Internal Hom for arbitrary finite-stage
+constructible complexes.
+
+For `X` separated of finite type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ`
+whose exponent is invertible on `k`, and `K, L ∈ Dctf(X, Λ)` with Tor intervals `[p, q]` and
+`[r, s]`, the internal hom `RHom(K, L)` is bounded constructible with Tor amplitude in
+`[r - q - 2d, s - p + 2d]`. As in the blueprint, `RHom(K, L) ≅ 𝔻_X(𝔻_X L ⊗ᴸ K)` by biduality
+(`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`), and `𝔻_X` carries the Tor
+interval `[r, s]` into `[-s - 2d, -r]` (`AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`). -/
+theorem constructibleFiniteTor_derivedHom_of_isSeparated (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) {p q r s : ℤ}
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X p q K)
+    (hL : boundedConstructible (ModuleCat.{u + 1} Λ) X L)
+    (hLt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X r s L) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) ∧
+      torAmplitudeIn (ModuleCat.{u + 1} Λ) X (r - q - 2 * (d : ℤ))
+        (s - p + 2 * (d : ℤ)) ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) := by
+  have hL' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L := ⟨hL, r, s, hLt⟩
+  obtain ⟨e⟩ := nonempty_iso_verdierDual_verdierDual Λ a hL'
+  obtain ⟨e'⟩ := nonempty_iso_derivedHom_verdierDual _ a K L e
+  -- `𝔻_X L` has Tor amplitude in `[-s - 2d, -r]`, so `𝔻_X L ⊗ᴸ K` in `[p - s - 2d, q - r]`
+  have hD := constructibleFiniteTor_verdierDual Λ a hL'
+  have hDt := torAmplitudeIn_verdierDual Λ a d hd r s hL hLt
+  have hT := constructibleFiniteTor_tensor Λ X hD ⟨hK, p, q, hKt⟩
+  have hTt := torAmplitudeIn_tensor _ X _ _ _ _ hDt hKt
+  have hDT := torAmplitudeIn_verdierDual Λ a d hd _ _ hT.1 hTt
+  refine ⟨(boundedConstructible _ X).prop_of_iso e'.symm
+    (constructibleFiniteTor_verdierDual Λ a hT).1, (torAmplitudeIn _ X _ _).prop_of_iso e'.symm ?_⟩
+  exact hDT.mono (by omega) (by omega)
+
+end DualizingHom
+
 section DerivedHom
 
 variable {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
