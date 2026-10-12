@@ -1,0 +1,196 @@
+{
+ "id": "lem-weil-pbc-flat-fp-lqf-maximal-degree-etale-neighborhood",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Geometric claim in steps 2-6 of lem-weil-pbc-flat-fp-lqf-bounded-stratification, serving the constructible-sheaf argument in step 2 of the ancestor split; Stacks Tag 07RY, proof, second paragraph.",
+   "via": [
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Etale neighbourhood of a maximal fibre degree point is finite locally free",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], separated [def-weil-pbc-scheme-conventions], and locally quasi-finite [pqf-def-quasifinite]. Suppose $m\\in\\mathbb N$ bounds its finite fibre degrees [def-weil-pbc-fibre-degree-bound]. Let $s\\in S$ have fibre degree $m$. There exist a scheme $T$, an etale morphism $\\varphi:T\\to S$ [def-weil-etale-morphism] and a point $t\\in T$ with $\\varphi(t)=s$ such that the projection $X\\times_S T\\to T$ [def-pc-fibre-product] is finite locally free of degree $m$ [def-pc-finite-locally-free].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), proof, second paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-fibre-degree-bound",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "*Set-up at the specified point of maximal degree.* Fix $s\\in S_m$. The fibre $X_s$ is finite over $\\kappa(s)$, so $X_s\\to\\operatorname{Spec}\\kappa(s)$ has finite fibres [lem-weil-pbc-finite-closed-map-finite-fibres] (2), i.e. $X_s$ is a finite set; the first projection is a homeomorphism of $X_s$ onto $f^{-1}(\\{s\\})$ [def-pc-scheme-fibre], so $f^{-1}(\\{s\\})$ is finite and $X_s$ has at most finitely many isolated points. As $f$ is locally of finite presentation it is locally of finite type (a finitely presented algebra is finitely generated: [def-sbc-locally-finite-presentation], [def-weil-finite-type-morphism]), and it is separated. By [lem-weil-pbc-etale-splits-off-quasi-finite-part] there are an elementary etale neighbourhood $\\varphi:(U,u)\\to(S,s)$ ($\\varphi$ etale [def-weil-etale-morphism]) and a decomposition $U\\times_SX=W\\sqcup V$ into disjoint open subschemes with $V\\to U$ finite and $W_u=\\emptyset$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-pc-scheme-fibre",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-splits-off-quasi-finite-part",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('Choose an elementary etale morphism (U,u) -> (S,s) and a decomposition U x_S X = W amalg V as in Lemma 02LP')"
+   }
+  },
+  {
+   "text": "*$V\\to U$ is finite locally free.* The projection $U\\times_SX\\to U$ is the base change of $f$ along $\\varphi$, hence flat and locally of finite presentation (step 1). $V$ is an open subscheme of $U\\times_SX$: for $v\\in V$ the local ring $\\mathcal O_{V,v}$ is $\\mathcal O_{U\\times_SX,v}$, so $V\\to U$ is flat at $v$ [def-weil-flat-morphism], and the affine opens around $v$ with finitely presented ring maps given by [def-sbc-locally-finite-presentation] may be shrunk to standard opens $D(a)$ inside $V$ (a localization $B_a$ of a finitely presented $R$-algebra $B$ is finitely presented, $B_a=B[x]/(ax-1)$), so $V\\to U$ is locally of finite presentation. Being also finite, $V\\to U$ is finite locally free [def-pc-finite-locally-free] (finite, flat and locally of finite presentation; this is Stacks Morphisms, Lemma 02KB, which here is the definition).",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('Since V -> U is finite, flat, and locally of finite presentation, we see that V -> U is finite locally free, see Morphisms, Lemma 02KB')"
+   }
+  },
+  {
+   "text": "*Shrinking $U$; the degree at $u$ is $m$.* By [lem-weil-pbc-finite-locally-free-degree-locally-constant] the degree function $\\delta_{V\\to U}$ is locally constant; let $d=\\delta_{V\\to U}(u)$ and $U'=\\delta_{V\\to U}^{-1}(d)$, an open (and closed) neighbourhood of $u$ over which the preimage of $U'$ in $V$ is finite locally free of degree $d$ (Stacks Morphisms, Lemma 04MH). Replace $U$ by $U'$, and $W,V$ by their preimages $W',V'$ under $U'\\times_SX\\to U'$; by [lem-weil-pbc-open-preimage-fibre-product] $U'\\times_SX$ is the preimage of $U'$ in $U\\times_SX$ and $U'\\times_SX=W'\\sqcup V'$ with $V'\\to U'$ finite locally free of degree $d$, $W'_u=\\emptyset$; $U'\\to S$ is etale as the composite of the open immersion $U'\\to U$ and $\\varphi$ [lem-weil-pbc-etale-composition-cancellation] (1), (2), and $\\kappa(u)$ is unchanged. The fibre $(U'\\times_SX)_u$ has degree $\\delta_f(s)=m$ (step 1, for the base change along $U'\\to S$, $u\\mapsto s$). It is the disjoint union of its open subschemes $W'_u=\\emptyset$ and $V'_u$ (preimages of $W'$, $V'$; fibres by pasting of cartesian squares [def-pc-fibre-product] with [lem-weil-pbc-open-preimage-fibre-product]), so it equals $V'_u$, whose degree is $d$. Hence $d=m$.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('After shrinking U ... we may assume V -> U is finite locally free of some degree d, see Morphisms, Lemma 04MH. As u -> s and W_u is empty we see that d = n')"
+   }
+  },
+  {
+   "text": "*$W'=\\emptyset$ and $\\varphi(U')\\subseteq S_m$; $S_m$ is open.* Let $u'\\in U'$ and $s'=\\varphi(u')$. The fibre $F=(U'\\times_SX)_{u'}$ is finite over $\\kappa(u')$ of degree $\\delta_f(s')\\le m$ [lem-weil-pbc-fibre-degree-base-change]. It is the disjoint union of its open subschemes $F_W$, $F_V$, the preimages of $W'$, $V'$, which are the fibres of $W'\\to U'$ and $V'\\to U'$ at $u'$ ([lem-weil-pbc-open-preimage-fibre-product], pasting [def-pc-fibre-product]); by the sheaf axiom for the cover $F=F_W\\sqcup F_V$, $\\Gamma(F,\\mathcal O_F)=\\Gamma(F_W,\\mathcal O)\\times\\Gamma(F_V,\\mathcal O)$, so $\\delta_f(s')=\\dim\\Gamma(F_W,\\mathcal O)+m$ (as $V'\\to U'$ has degree $m$ [def-pc-finite-locally-free]). Hence $\\Gamma(F_W,\\mathcal O)=0$, so $F_W=\\emptyset$ (in a nonempty scheme $1\\ne0$ in some local ring, hence in $\\Gamma$), and $\\delta_f(s')=m$. Since every point of $W'$ lies in the fibre over its image in $U'$, $W'=\\emptyset$: $U'\\times_SX=V'\\to U'$ is finite locally free of degree $m$, and $\\varphi(U')\\subseteq S_m$. The shrunken etale neighbourhood still contains the distinguished point over $s$, and its whole pullback is finite locally free of degree $m$. This proves the local existence statement; no openness or descent assertion is needed here.",
+   "uses": [
+    "lem-weil-pbc-fibre-degree-base-change",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('Since n is the maximum degree of a fibre we see that W is empty! ... Im(U -> S) which is an open neighbourhood of s (Morphisms, Lemma 03WT)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-splits-off-quasi-finite-part",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), proof, second paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A point of maximal fibre degree of a flat locally finitely presented separated locally quasi finite morphism has an etale neighbourhood where the pullback is finite locally free of that degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of maximal fibre degree of a flat locally finitely presented separated locally quasi finite morphism has an etale neighbourhood where the pullback is finite locally free of that degree",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.isOpen_etaleLocus, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale, RingHom.Etale.toAlgebra, RingHom.Etale.propertyIsLocal, Algebra.etaleLocus",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "maximal.*degree|etale.*finite.*degree|degree.*etale.*neigh",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatFpLqfBoundedStratification",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatFpLqfMaximalDegreeEtaleNeighborhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFpLqfMaximalDegreeEtaleNeighborhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_isFiniteLocallyFreeOfDegree_of_maximal_fiber_degree",
+  "statement": "theorem exists_etale_isFiniteLocallyFreeOfDegree_of_maximal_fiber_degree {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (h_lqf : IsLocallyQuasiFinite f) (m : ℕ) (hm : BoundsFiberDegrees f m) (s : S) (hs : (f.fiberToSpecResidueField s).finrankΓ = m) : ∃ (T : Scheme.{u}) (φ : T ⟶ S) (t : T), Etale φ ∧ φ t = s ∧ (pullback.snd f φ).IsFiniteLocallyFreeOfDegree m",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085208-L-845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085208-L-845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -36,174 +36,60 @@
  ],
  "proof": [
   {
-   "text": "*Notation; base change keeps the hypotheses and the bound.* For a morphism $f:X\\to S$ whose fibres are finite over the residue fields write $\\delta_f(s)=\\dim_{\\kappa(s)}\\Gamma(X_s,\\mathcal O_{X_s})$ for $s\\in S$ (the degree of $X_s$ over $\\kappa(s)$, [def-weil-pbc-fibre-degree-bound]); for our $f$, $\\delta_f(s)\\le n$ for all $s$. Let $g:T\\to S$ be any morphism and $f_T:X_T=X\\times_ST\\to T$ the base change. Then $f_T$ is flat [lem-weil-pbc-flat-morphism-base-change], locally of finite presentation [lem-weil-pbc-qcqs-morphism-permanence] (3), separated and locally quasi-finite [lem-weil-pbc-separated-lqf-base-change], and for every $t\\in T$ the fibre $(X_T)_t$ is finite over $\\kappa(t)$ with $\\delta_{f_T}(t)=\\delta_f(g(t))$ [lem-weil-pbc-fibre-degree-base-change]. In particular $n$ bounds the degrees of the fibres of $f_T$ (Stacks: Morphisms, Lemma 03J7), and all integers $r$ for which some nonempty $X_T\\to T$ is finite locally free of degree $r$ are $\\le n$.",
+   "text": "Define delta(s) as the degree of the finite scheme-theoretic fibre. For every bound n, prove by induction that every sublevel set {delta <= r} is closed. For n=0 it is the whole base. For n+1, sublevels above the bound are the whole base; otherwise the maximal-degree claim makes {delta <= n} closed. Give this complement its reduced induced closed subscheme and pull f back to it. Base-change invariance lowers the bound to n. The induction hypothesis gives the desired closed sublevel there; its image under the closed immersion is exactly the sublevel in S. A closed embedding maps closed sets to closed sets.",
    "uses": [
-    "def-weil-pbc-fibre-degree-bound",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-separated-lqf-base-change",
-    "lem-weil-pbc-fibre-degree-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, first paragraph ('By Morphisms, Lemma 03J7 we see that any base change has degrees of fibres bounded by n also')"
-   }
-  },
-  {
-   "text": "*Claim, set-up at a point of maximal degree.* Claim: let $f:X\\to S$ be any morphism which is flat, locally of finite presentation, separated and locally quasi-finite, and let $m\\ge0$ be an integer bounding the degrees of its fibres; then $S_m:=\\{s\\in S:\\delta_f(s)=m\\}$ is open in $S$ and $X\\times_SS_m\\to S_m$ is finite locally free of degree $m$ [def-pc-finite-locally-free]. (Steps 2-6 prove the claim.) Fix $s\\in S_m$. The fibre $X_s$ is finite over $\\kappa(s)$, so $X_s\\to\\operatorname{Spec}\\kappa(s)$ has finite fibres [lem-weil-pbc-finite-closed-map-finite-fibres] (2), i.e. $X_s$ is a finite set; the first projection is a homeomorphism of $X_s$ onto $f^{-1}(\\{s\\})$ [def-pc-scheme-fibre], so $f^{-1}(\\{s\\})$ is finite and $X_s$ has at most finitely many isolated points. As $f$ is locally of finite presentation it is locally of finite type (a finitely presented algebra is finitely generated: [def-sbc-locally-finite-presentation], [def-weil-finite-type-morphism]), and it is separated. By [lem-weil-pbc-etale-splits-off-quasi-finite-part] there are an elementary etale neighbourhood $\\varphi:(U,u)\\to(S,s)$ ($\\varphi$ etale [def-weil-etale-morphism]) and a decomposition $U\\times_SX=W\\sqcup V$ into disjoint open subschemes with $V\\to U$ finite and $W_u=\\emptyset$.",
-   "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "def-pc-scheme-fibre",
-    "def-sbc-locally-finite-presentation",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-etale-splits-off-quasi-finite-part",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('Choose an elementary etale morphism (U,u) -> (S,s) and a decomposition U x_S X = W amalg V as in Lemma 02LP')"
-   }
-  },
-  {
-   "text": "*$V\\to U$ is finite locally free.* The projection $U\\times_SX\\to U$ is the base change of $f$ along $\\varphi$, hence flat and locally of finite presentation (step 1). $V$ is an open subscheme of $U\\times_SX$: for $v\\in V$ the local ring $\\mathcal O_{V,v}$ is $\\mathcal O_{U\\times_SX,v}$, so $V\\to U$ is flat at $v$ [def-weil-flat-morphism], and the affine opens around $v$ with finitely presented ring maps given by [def-sbc-locally-finite-presentation] may be shrunk to standard opens $D(a)$ inside $V$ (a localization $B_a$ of a finitely presented $R$-algebra $B$ is finitely presented, $B_a=B[x]/(ax-1)$), so $V\\to U$ is locally of finite presentation. Being also finite, $V\\to U$ is finite locally free [def-pc-finite-locally-free] (finite, flat and locally of finite presentation; this is Stacks Morphisms, Lemma 02KB, which here is the definition).",
-   "uses": [
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('Since V -> U is finite, flat, and locally of finite presentation, we see that V -> U is finite locally free, see Morphisms, Lemma 02KB')"
-   }
-  },
-  {
-   "text": "*Shrinking $U$; the degree at $u$ is $m$.* By [lem-weil-pbc-finite-locally-free-degree-locally-constant] the degree function $\\delta_{V\\to U}$ is locally constant; let $d=\\delta_{V\\to U}(u)$ and $U'=\\delta_{V\\to U}^{-1}(d)$, an open (and closed) neighbourhood of $u$ over which the preimage of $U'$ in $V$ is finite locally free of degree $d$ (Stacks Morphisms, Lemma 04MH). Replace $U$ by $U'$, and $W,V$ by their preimages $W',V'$ under $U'\\times_SX\\to U'$; by [lem-weil-pbc-open-preimage-fibre-product] $U'\\times_SX$ is the preimage of $U'$ in $U\\times_SX$ and $U'\\times_SX=W'\\sqcup V'$ with $V'\\to U'$ finite locally free of degree $d$, $W'_u=\\emptyset$; $U'\\to S$ is etale as the composite of the open immersion $U'\\to U$ and $\\varphi$ [lem-weil-pbc-etale-composition-cancellation] (1), (2), and $\\kappa(u)$ is unchanged. The fibre $(U'\\times_SX)_u$ has degree $\\delta_f(s)=m$ (step 1, for the base change along $U'\\to S$, $u\\mapsto s$). It is the disjoint union of its open subschemes $W'_u=\\emptyset$ and $V'_u$ (preimages of $W'$, $V'$; fibres by pasting of cartesian squares [def-pc-fibre-product] with [lem-weil-pbc-open-preimage-fibre-product]), so it equals $V'_u$, whose degree is $d$. Hence $d=m$.",
-   "uses": [
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-degree-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('After shrinking U ... we may assume V -> U is finite locally free of some degree d, see Morphisms, Lemma 04MH. As u -> s and W_u is empty we see that d = n')"
-   }
-  },
-  {
-   "text": "*$W'=\\emptyset$ and $\\varphi(U')\\subseteq S_m$; $S_m$ is open.* Let $u'\\in U'$ and $s'=\\varphi(u')$. The fibre $F=(U'\\times_SX)_{u'}$ is finite over $\\kappa(u')$ of degree $\\delta_f(s')\\le m$ [lem-weil-pbc-fibre-degree-base-change]. It is the disjoint union of its open subschemes $F_W$, $F_V$, the preimages of $W'$, $V'$, which are the fibres of $W'\\to U'$ and $V'\\to U'$ at $u'$ ([lem-weil-pbc-open-preimage-fibre-product], pasting [def-pc-fibre-product]); by the sheaf axiom for the cover $F=F_W\\sqcup F_V$, $\\Gamma(F,\\mathcal O_F)=\\Gamma(F_W,\\mathcal O)\\times\\Gamma(F_V,\\mathcal O)$, so $\\delta_f(s')=\\dim\\Gamma(F_W,\\mathcal O)+m$ (as $V'\\to U'$ has degree $m$ [def-pc-finite-locally-free]). Hence $\\Gamma(F_W,\\mathcal O)=0$, so $F_W=\\emptyset$ (in a nonempty scheme $1\\ne0$ in some local ring, hence in $\\Gamma$), and $\\delta_f(s')=m$. Since every point of $W'$ lies in the fibre over its image in $U'$, $W'=\\emptyset$: $U'\\times_SX=V'\\to U'$ is finite locally free of degree $m$, and $\\varphi(U')\\subseteq S_m$. $\\varphi(U')$ is open [lem-weil-pbc-etale-morphism-open-map] and contains $s$. As $s\\in S_m$ was arbitrary, $S_m$ is the union of these opens, hence open.",
-   "uses": [
-    "lem-weil-pbc-fibre-degree-base-change",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "def-pc-fibre-product",
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-etale-morphism-open-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('Since n is the maximum degree of a fibre we see that W is empty! ... Im(U -> S) which is an open neighbourhood of s (Morphisms, Lemma 03WT)')"
-   }
-  },
-  {
-   "text": "*Descent to $S_m$; end of the claim.* Give $S_m$ its open subscheme structure; $X\\times_SS_m=f^{-1}(S_m)\\to S_m$ [lem-weil-pbc-open-preimage-fibre-product]. For every $s\\in S_m$ let $\\varphi_s:U'_s\\to S$ be the etale morphism of steps 2-5; its image lies in $S_m$, so it factors as $U'_s\\xrightarrow{\\psi_s}S_m\\hookrightarrow S$ [lem-weil-pbc-morphism-factors-through-open-subscheme], and $\\psi_s$ is etale because $\\varphi_s$ and the open immersion $S_m\\to S$ are [lem-weil-pbc-etale-composition-cancellation] (1), (3). The images $\\psi_s(U'_s)\\ni s$ cover $S_m$. By pasting cartesian squares [def-pc-fibre-product], $(X\\times_SS_m)\\times_{S_m}U'_s=X\\times_SU'_s\\to U'_s$, which is finite locally free of degree $m$ by step 5. By [lem-weil-pbc-finite-locally-free-degree-etale-descent], $X\\times_SS_m\\to S_m$ is finite locally free of degree $m$. This proves the claim.",
-   "uses": [
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-finite-locally-free-degree-etale-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, second paragraph ('By Descent, Lemma 02VO we conclude that X -> S is finite locally free of degree n over Im(U -> S) ... This proves the claim')"
-   }
-  },
-  {
-   "text": "*The sets $Z_r$ are closed (induction on $n$).* For $r\\ge-1$ put $Z_r=\\{s\\in S:\\delta_f(s)\\le r\\}$, so $\\emptyset=Z_{-1}\\subseteq Z_0\\subseteq\\cdots\\subseteq Z_n=S$. We show by induction on $n$: for every $f$ satisfying the hypotheses with $n$ bounding its fibre degrees, every $Z_r$ is closed in $S$. If $n=0$, $Z_{-1}=\\emptyset$ and $Z_r=S$ for $r\\ge0$. Let $n\\ge1$. $Z_r=S$ for $r\\ge n$, and $Z_{n-1}=S\\setminus S_n$ is closed by the claim (with $m=n$). Let $S'$ be the reduced induced closed subscheme on $Z_{n-1}$, $i:S'\\to S$ its closed immersion with $i(S')=Z_{n-1}$ [lem-weil-pbc-reduced-induced-closed-subscheme] [def-weil-closed-immersion], and $f':X'=X\\times_SS'\\to S'$. By step 1 $f'$ is flat, locally of finite presentation, separated, locally quasi-finite, and $\\delta_{f'}(s')=\\delta_f(i(s'))\\le n-1$ for $s'\\in S'$, so $n-1$ bounds its fibre degrees [def-weil-pbc-fibre-degree-bound]. By induction $Z'_r=\\{s'\\in S':\\delta_{f'}(s')\\le r\\}$ is closed in $S'$ for every $r$; for $r\\le n-1$, $i(Z'_r)=Z_r\\cap Z_{n-1}=Z_r$, and $i$ is a homeomorphism onto the closed subset $Z_{n-1}$, so $Z_r$ is closed in $S$.",
-   "uses": [
+    "lem-weil-pbc-flat-fp-lqf-maximal-degree-locus",
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-closed-immersion",
     "lem-weil-pbc-fibre-degree-base-change",
-    "def-weil-pbc-fibre-degree-bound"
+    "lem-weil-pbc-separated-lqf-base-change",
+    "def-weil-closed-immersion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, first paragraph ('We will prove the lemma by induction on n. The base case is n = 0 which is obvious') and third paragraph ('Let S' = S minus S_n endowed with the reduced induced scheme structure ... By induction we find a stratification S' = S_0 amalg ... amalg S_{n-1}')"
+    "place": "Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), proof, second paragraph"
    }
   },
   {
-   "text": "*The strata.* For $0\\le r\\le n$, $S_r:=Z_r\\setminus Z_{r-1}=\\{s:\\delta_f(s)=r\\}$, and for $r>n$, $S_r=\\emptyset=\\{s:\\delta_f(s)=r\\}$ since $\\delta_f\\le n$. These sets are pairwise disjoint with union $S$, since $\\delta_f(s)$ is one integer in $[0,n]$. (For $r=n$ this is the open set of the claim; for $r<n$ it is the stratum the induction of step 7 produces on $S'$, since $\\delta_{f'}=\\delta_f\\circ i$.)",
+   "text": "Put Z(0)=empty and Z(r+1)={delta <= r}. The closedness just proved, elementary order inequalities, and the bound give a monotone closed filtration ending in S. Each successive difference equals {delta=r}; equality of natural numbers proves pairwise disjointness and choosing r=delta(s) proves the union is S.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, statement and third paragraph ('We claim that S = coprod_{r=0..n} S_r works')"
+    "place": "Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), proof, second paragraph"
    }
   },
   {
-   "text": "*Universal property, 'only if'.* Let $g:T\\to S$ be a morphism and $r\\ge0$ such that $X\\times_ST\\to T$ is finite locally free of degree $r$. For $t\\in T$ the fibre $(X_T)_t$ has degree $r$ by [def-pc-finite-locally-free] and degree $\\delta_f(g(t))$ by [lem-weil-pbc-fibre-degree-base-change]; so $\\delta_f(g(t))=r$, i.e. $g(t)\\in S_r$ (step 8). Hence $g(T)\\subseteq S_r$; in particular $T=\\emptyset$ if $r>n$.",
+   "text": "For the only-if implication, finite local freeness of degree r on the pullback says every fibre has degree r. Fibre-degree invariance implies delta(g(t))=r, so the image lies in the degree-r difference. Conversely an image in this difference makes all finite fibres of the pullback have degree r and hence gives bound r. Apply the maximal-degree claim to that pullback. Its open degree-r locus contains every target point. Finiteness is Zariski local at the target, so the whole pullback is finite. It is already flat and locally of finite presentation by base change; together these give finite local freeness, and the fibre equalities give degree r. This includes an empty base, and r above n forces the image to be empty.",
    "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-fibre-degree-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, third paragraph ('Let g: T -> S be a morphism of schemes and assume that X x_S T -> T is finite locally free of degree r ... we see that g(T) = g(T_red) is contained in S_r'); argued directly from the fibre degrees, see step 10"
-   }
-  },
-  {
-   "text": "*Universal property, 'if'.* Let $g:T\\to S$ with $g(T)\\subseteq S_r$. By step 1, $f_T:X_T\\to T$ is flat, locally of finite presentation, separated and locally quasi-finite, and $\\delta_{f_T}(t)=\\delta_f(g(t))=r$ for every $t\\in T$; so $r$ bounds the degrees of the fibres of $f_T$ [def-weil-pbc-fibre-degree-bound] and $\\{t\\in T:\\delta_{f_T}(t)=r\\}=T$. The claim (steps 2-6) applied to $f_T$ with $m=r$ gives that $X_T\\times_TT=X_T\\to T$ is finite locally free of degree $r$ [def-pc-finite-locally-free]. (Stacks argues here, for $r<n$, through $T_{red}\\to S'$, the universal homeomorphism $X\\times_ST_{red}\\to X\\times_ST$ and More on Morphisms, Lemma 02LS; applying the claim to the base change $f_T$, whose fibre degrees are all equal to $r$, gives the same conclusion directly, and also covers the 'only if' direction of step 9 without passing to $T_{red}$.)",
-   "uses": [
+    "lem-weil-pbc-flat-fp-lqf-maximal-degree-locus",
     "lem-weil-pbc-fibre-degree-base-change",
-    "def-weil-pbc-fibre-degree-bound",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
     "def-pc-finite-locally-free"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, proof, third paragraph ('Conversely, suppose that we have g: T -> S such that g(T) is contained in S_r ... Finally, the degree is r as all the fibres have degree r'), rewritten by the worker through the claim of the second paragraph"
+    "place": "Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), proof, second paragraph"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-fibre-degree-bound",
+  "def-pc-finite-locally-free",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-flat-fp-lqf-maximal-degree-locus",
   "lem-weil-pbc-flat-morphism-base-change",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-separated-lqf-base-change",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "def-pc-finite-locally-free",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
-  "def-pc-scheme-fibre",
-  "def-sbc-locally-finite-presentation",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-etale-splits-off-quasi-finite-part",
-  "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-finite-locally-free-degree-etale-descent",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-weil-closed-immersion"
+  "lem-weil-pbc-separated-lqf-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, with its proof; the 'if' direction of the universal property (step 10) and the 'only if' direction (step 9) are argued by the worker from the proof's own claim and the fibre degrees instead of Stacks' passage through T_red and Lemma 02LS"
+  "place": "More on Morphisms, Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), line 12761, with its proof; the 'if' direction of the universal property (step 10) and the 'only if' direction (step 9) are argued by the worker from the proof's own claim and the fibre degrees instead of Stacks' passage through T_red and Lemma 02LS; A2 stage 3: the local etale-neighbourhood calculation is split off, openness/descent and the closed-sublevel induction and universal property are Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -287,5 +173,15 @@
   "group": "F1",
   "result": "fix",
   "note": "Flat/LocallyOfFinitePresentation/IsSeparated instances, IsLocallyQuasiFinite (01TD), bound tied as (n) BoundsFiberDegrees f n with Z (n+1)=univ, Z 0=∅ shift as J1 sibling, strata Z(r+1)\\Z r written out, disjoint+cover, universal property over Scheme.{u} via pullback.snd IsFiniteLocallyFreeOfDegree"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085208-L-845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
