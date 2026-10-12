@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.FormalCompletionMapInjectiveProper
+import Sheaf.AlgebraicGeometry.FormalCompletionMapSurjectiveProper
 
 /-! # Fully faithful completion over a complete proper base
 
@@ -68,6 +70,7 @@ theorem formalCompletion_map_bijective_of_proper
         (@completion X (isNoetherian_of_locallyOfFiniteType f)
           ((Scheme.IdealSheafData.ofIdealTop
             (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)).map v) := by
-  sorry
+  exact ⟨formalCompletion_map_injective_of_proper I f G F,
+    formalCompletion_map_surjective_of_proper I f G F⟩
 
 end AlgebraicGeometry
