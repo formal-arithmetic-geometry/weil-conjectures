@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.QCohAcyclicDerivedSectionsComparison
+import Sheaf.AlgebraicGeometry.ModuleSheafificationAffineRestriction
 
 /-! # Cohomology of acyclic quasi-coherent derived pushforward
 
@@ -54,6 +55,14 @@ theorem qcoh_acyclic_derived_pushforward_cohomology {X Y : Scheme.{u}}
         DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i ⋙
         RingedSpace.moduleDirectImage f.toLRSHom.toShHom) := by
-  sorry
+  obtain ⟨⟨sectionsIso⟩, ⟨pushforwardIso⟩⟩ :=
+    qcoh_acyclic_derived_sections_comparison f hacyc i
+  obtain ⟨sheafIso⟩ := module_sheafification_iso_of_affine_restriction Y
+    ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedSectionPresheaf f i)
+    ((schemeDerivedQCohProperty X).ι ⋙
+      DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i ⋙
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom) sectionsIso
+  exact ⟨pushforwardIso.symm ≪≫ sheafIso⟩
 
 end AlgebraicGeometry

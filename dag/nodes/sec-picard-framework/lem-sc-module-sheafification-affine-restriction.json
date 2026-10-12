@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-module-sheafification-affine-restriction",
+ "kind": "statement",
+ "title": "Module sheafification from affine-open restriction",
+ "statement": "Let Y be a scheme. Let C be a category and let P : C → PresheafOfModules(O_Y) and Q : C → SheafOfModules(O_Y) be functors. If the restrictions of P and the underlying presheaf of Q to the affine-open basis of Y are naturally isomorphic, then the sheafification of P is naturally isomorphic to Q.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 009U (lemma-restrict-basis-equivalence-modules) and 0089: module restriction to a basis and module sheafification"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Affine opens form a basis. Extend the compatible affine-open maps by local gluing in the target sheaf, factor uniquely through module sheafification, and check on affine stalks that the resulting map is an isomorphism. Naturality follows from uniqueness.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "lem-weil-pbc-stalk-germs-on-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-stalk-germs-on-basis"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of module presheaves isomorphic on affine open basis",
+   "results": "Scheme.AffineZariskiSite.sheafEquiv gives a sheaf equivalence for ordinary values, not the module-presheaf statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "Found PresheafOfModules.sheafification and its adjunction, but no affine-basis gluing theorem.",
+   "date": "2026-10-12",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*[Bb]asis|[Bb]asis.*sheafification",
+   "results": "No existing affine-basis module sheafification theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafification presheaf modules isomorphism restriction basis",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module presheaf that agrees with a sheaf on a topological basis has isomorphic associated sheaf",
+   "results": "TopCat.Sheaf.hom_ext and module sheaf structures, not the required module-valued natural sheafification isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.restrictHomEquivHom",
+   "results": "TopCat.Sheaf.restrictHomEquivHom and extend_hom_app extend underlying presheaf maps; module linearity, sheafification invertibility, and parameter naturality remain.",
+   "date": "2026-10-12",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*sheaf|sheaf.*dense|sheafification.*iso",
+   "results": "Module sheafification adjunction full/faithful instances only; no direct affine restriction comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof passage identifying cohomology of derived pushforward with pushforward of cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 009U and 0089: restriction of module sheaves to a basis and module sheafification"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSheafificationAffineRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSheafificationAffineRestriction.lean",
+  "declaration": "AlgebraicGeometry.module_sheafification_iso_of_affine_restriction",
+  "statement": "theorem module_sheafification_iso_of_affine_restriction (Y : Scheme.{u}) {C : Type v} [Category.{w} C] (P : C ⥤ PresheafOfModules.{u} (moduleRings Y.toRingedSpace).obj) (Q : C ⥤ SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (e : P ⋙ PresheafOfModules.pushforward₀ (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) (moduleRings Y.toRingedSpace).obj ≅ Q ⋙ SheafOfModules.forget (moduleRings Y.toRingedSpace) ⋙ PresheafOfModules.pushforward₀ (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) (moduleRings Y.toRingedSpace).obj) : Nonempty (P ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings Y.toRingedSpace).obj) ≅ Q)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T085221-L-6827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T085221-L-6827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
