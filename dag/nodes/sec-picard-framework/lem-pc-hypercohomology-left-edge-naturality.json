@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-hypercohomology-left-edge-naturality",
+ "kind": "statement",
+ "title": "Naturality of hypercohomology left edge",
+ "statement": "Let B and C be abelian categories, B Grothendieck, with derived categories, and G:B→C additive and left exact. For any natural-indexed cochain map f:K→L and degree n, H^n(Gf) followed by the left edge of L equals the left edge of K followed by G(H^n f) [def-pc-hypercohomology-left-edge].",
+ "stmt_deps": [
+  "def-pc-hypercohomology-left-edge"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J"
+ },
+ "proof": [
+  {
+   "text": "Proof: extend the cochain map by zero. Naturality of the extension homology isomorphism,\nthe map-extension isomorphism and the quotient homology isomorphism transports its ordinary\nhomology map to the derived-category homology map. Naturality of the derived unit then\nmoves the map through the unit. Apply naturality of the first-quadrant spectral object's\nleft edge and of the truncation/shift/degree-zero target comparison. Finally apply the\nquotient and extension homology naturality equations on the target. Associate the composites;\nthis is the stated equality. All maps are defined also in degree zero, so no positivity\nassumption on n is used.",
+   "uses": [
+    "def-pc-hypercohomology-left-edge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-hypercohomology-left-edge"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J",
+  "note": "Agent-written expansion of the canonical truncation and derived-unit comparison, following Tag 015J; source consulted at https://stacks.math.columbia.edu/tag/015J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left exact functor canonical homology comparison map cycles quotient",
+   "results": "Hits: CategoryTheory.ShortComplex.LeftHomologyData.map_cyclesMap', CategoryTheory.ShortComplex.mapCyclesIso_hom_iCycles_assoc, CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality, CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapCyclesIso_hom_iCycles, CategoryTheory.ShortComplex.mapCyclesIso, CategoryTheory.ShortComplex.LeftHomologyData.mapCyclesIso_eq, CategoryTheory.ShortComplex.map_leftRightHomologyComparison'. Read the source of the useful cycle, single-complex and quotient naturality lemmas. None states the explicit truncation-edge normalization or full edge naturality.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.leftHomology",
+   "results": "loogle: unknown identifier 'ShortComplex.leftHomology'; this query was inconclusive and is not used as evidence of absence.",
+   "verdict": "inconclusive",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "leftEdge|singleObjHomologySelfIso|mkHomFromSingle",
+   "results": "Hits: Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean. Read the source of the useful cycle, single-complex and quotient naturality lemmas. None states the explicit truncation-edge normalization or full edge naturality.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "Hits: HomologicalComplex.homologyπ_naturality. Read the source of the useful cycle, single-complex and quotient naturality lemmas. None states the explicit truncation-edge normalization or full edge naturality.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "hypercohomology left edge naturality single degree normalization",
+   "results": "service unavailable: Internal Server Error; unavailable, no search verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-hypercohomology-edge-cocycle-canonical",
+   "place": "decomposition"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HypercohomologyLeftEdgeNaturality",
+  "file": "lean/Sheaf/CategoryTheory/HypercohomologyLeftEdgeNaturality.lean",
+  "declaration": "CategoryTheory.Functor.cochainHypercohomologyLeftEdge_naturality",
+  "statement": "theorem cochainHypercohomologyLeftEdge_naturality\n    {K L : CochainComplex B ℕ} (f : K ⟶ L) (n : ℕ) :\n    HomologicalComplex.homologyMap\n        ((G.mapHomologicalComplex (ComplexShape.up ℕ)).map f) n ≫\n      G.cochainHypercohomologyLeftEdge L n =\n    G.cochainHypercohomologyLeftEdge K n ≫ G.map (HomologicalComplex.homologyMap f n)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

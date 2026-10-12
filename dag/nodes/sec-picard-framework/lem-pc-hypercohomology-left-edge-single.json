@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-hypercohomology-left-edge-single",
+ "kind": "statement",
+ "title": "Single-degree normalization of hypercohomology left edge",
+ "statement": "Let B and C be Grothendieck abelian categories with derived categories, G:B→C additive left exact, A an object and n a natural number. On S=A placed in degree n, the canonical lift of G of the inverse term comparison, followed by the homology quotient, the explicit hypercohomology left edge [def-pc-hypercohomology-left-edge], and G of the canonical H^n(S)≅A comparison is the identity of G(A). No acyclicity of A is assumed.",
+ "stmt_deps": [
+  "def-pc-hypercohomology-left-edge"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J"
+ },
+ "proof": [
+  {
+   "text": "Proof: extend the single complex by zero. Its image in the derived category is the object\nA placed in degree n. Its truncations in degrees below n are zero and those containing n\nare the object itself, so both arrows defining the left edge are identities under the\ncanonical truncation isomorphisms. Express this object as A[0] shifted by minus n\nand use shift compatibility to reduce the remaining composite to degree zero. The derived unit on A[0], followed by the degree-zero right-derived\ncomparison and rightDerivedZeroIsoSelf, is the original functor applied to A, by the\nnormalization of the right derived unit. The extension, quotient, single-complex homology,\nand shift comparisons are natural canonical isomorphisms and cancel in inverse pairs.\nThe degree-n cycle representative is the inverse of the single-complex term comparison;\nits homology quotient is the inverse of the single-complex homology comparison. This\nproves the identity displayed below, including n=0 and the zero object.",
+   "uses": [
+    "def-pc-hypercohomology-left-edge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-hypercohomology-left-edge"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J",
+  "note": "Agent-written expansion of the canonical truncation and derived-unit comparison, following Tag 015J; source consulted at https://stacks.math.columbia.edu/tag/015J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left exact functor canonical homology comparison map cycles quotient",
+   "results": "Hits: CategoryTheory.ShortComplex.LeftHomologyData.map_cyclesMap', CategoryTheory.ShortComplex.mapCyclesIso_hom_iCycles_assoc, CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality, CategoryTheory.ShortComplex.mapCyclesIso_hom_naturality_assoc, CategoryTheory.ShortComplex.mapCyclesIso_hom_iCycles, CategoryTheory.ShortComplex.mapCyclesIso, CategoryTheory.ShortComplex.LeftHomologyData.mapCyclesIso_eq, CategoryTheory.ShortComplex.map_leftRightHomologyComparison'. Read the source of the useful cycle, single-complex and quotient naturality lemmas. None states the explicit truncation-edge normalization or full edge naturality.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.leftHomology",
+   "results": "loogle: unknown identifier 'ShortComplex.leftHomology'; this query was inconclusive and is not used as evidence of absence.",
+   "verdict": "inconclusive",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "leftEdge|singleObjHomologySelfIso|mkHomFromSingle",
+   "results": "Hits: Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean, Mathlib/Algebra/Homology/Single.lean. Read the source of the useful cycle, single-complex and quotient naturality lemmas. None states the explicit truncation-edge normalization or full edge naturality.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "Hits: HomologicalComplex.homologyπ_naturality. Read the source of the useful cycle, single-complex and quotient naturality lemmas. None states the explicit truncation-edge normalization or full edge naturality.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "hypercohomology left edge naturality single degree normalization",
+   "results": "service unavailable: Internal Server Error; unavailable, no search verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-hypercohomology-edge-cocycle-canonical",
+   "place": "decomposition"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingle",
+  "file": "lean/Sheaf/CategoryTheory/HypercohomologyLeftEdgeSingle.lean",
+  "declaration": "CategoryTheory.Functor.cochainHypercohomologyLeftEdge_single",
+  "statement": "theorem cochainHypercohomologyLeftEdge_single (A : B) (n : ℕ) :\n    (let S := (HomologicalComplex.single B (ComplexShape.up ℕ) n).obj A\n     let T := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj S\n     let c := T.liftCycles\n       (G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) n A).inv)\n       (n + 1) (by simp) (by\n         change _ ≫ G.map (S.d n (n + 1)) = 0\n         simp [S])\n     c ≫ T.homologyπ n ≫ G.cochainHypercohomologyLeftEdge S n ≫\n       G.map (HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) n A).hom =\n       𝟙 (G.obj A))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

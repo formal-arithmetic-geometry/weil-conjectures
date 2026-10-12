@@ -1,8 +1,8 @@
 module
 
 public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.Paper.CartanEilenbergLeftExactCohomology
+import Sheaf.CategoryTheory.HypercohomologyLeftEdgeNaturality
+import Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingle
 
 @[expose] public section
 
@@ -35,6 +35,57 @@ theorem cochainHypercohomologyLeftEdge_canonical
          rw [← G.map_comp, K.iCycles_d, G.map_zero])
      c ≫ T.homologyπ n ≫ G.cochainHypercohomologyLeftEdge K n =
        G.map (K.homologyπ n)) := by
-  sorry
+  let S := (HomologicalComplex.single B (ComplexShape.up ℕ) n).obj (K.cycles n)
+  let GS := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj S
+  let T := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K
+  let f : S ⟶ K := HomologicalComplex.mkHomFromSingle (K.iCycles n)
+    (fun k _ ↦ K.iCycles_d n k)
+  let a := GS.liftCycles
+    (G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) n (K.cycles n)).inv)
+    (n + 1) (by simp) (by
+      change _ ≫ G.map (S.d n (n + 1)) = 0
+      simp [S])
+  let c := T.liftCycles (G.map (K.iCycles n)) (n + 1) (by simp)
+    (by
+      change G.map (K.iCycles n) ≫ G.map (K.d n (n + 1)) = 0
+      rw [← G.map_comp, K.iCycles_d, G.map_zero])
+  have ha : a ≫ HomologicalComplex.cyclesMap
+      ((G.mapHomologicalComplex (ComplexShape.up ℕ)).map f) n = c := by
+    apply (cancel_mono (T.iCycles n)).1
+    rw [Category.assoc, HomologicalComplex.cyclesMap_i]
+    dsimp only [a, c]
+    rw [GS.liftCycles_i_assoc, T.liftCycles_i]
+    change G.map _ ≫ G.map (f.f n) = _
+    rw [← G.map_comp]
+    simp only [f, HomologicalComplex.mkHomFromSingle_f, Iso.inv_hom_id_assoc]
+  have hf :
+      (HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) n
+        (K.cycles n)).inv ≫ HomologicalComplex.homologyMap f n = K.homologyπ n := by
+    rw [← HomologicalComplex.singleObjCyclesSelfIso_inv_homologyπ,
+      Category.assoc, HomologicalComplex.homologyπ_naturality]
+    have hcyc :
+        (HomologicalComplex.singleObjCyclesSelfIso (ComplexShape.up ℕ) n
+          (K.cycles n)).inv ≫ HomologicalComplex.cyclesMap f n = 𝟙 (K.cycles n) := by
+      apply (cancel_mono (K.iCycles n)).1
+      rw [Category.assoc, HomologicalComplex.cyclesMap_i]
+      dsimp only [f]
+      rw [HomologicalComplex.mkHomFromSingle_f,
+        HomologicalComplex.singleObjCyclesSelfIso_inv_iCycles_assoc,
+        Iso.inv_hom_id_assoc, Category.id_comp]
+    rw [← Category.assoc, hcyc, Category.id_comp]
+  have hn := cochainHypercohomologyLeftEdge_naturality G f n
+  have hs := cochainHypercohomologyLeftEdge_single G (K.cycles n) n
+  change c ≫ T.homologyπ n ≫ G.cochainHypercohomologyLeftEdge K n = _
+  rw [← ha, Category.assoc, ← HomologicalComplex.homologyπ_naturality_assoc,
+    hn]
+  have hs' : a ≫ GS.homologyπ n ≫ G.cochainHypercohomologyLeftEdge S n =
+      G.map (HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) n
+        (K.cycles n)).inv := by
+    apply (cancel_mono
+      (G.map (HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) n
+        (K.cycles n)).hom)).1
+    simpa only [Category.assoc, ← G.map_comp, Iso.inv_hom_id, G.map_id] using hs
+  simpa only [Category.assoc, ← G.map_comp, hf] using
+    congrArg (· ≫ G.map (HomologicalComplex.homologyMap f n)) hs'
 
 end CategoryTheory.Functor
