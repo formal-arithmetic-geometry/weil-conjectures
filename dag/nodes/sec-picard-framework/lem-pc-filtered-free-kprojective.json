@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-filtered-free-kprojective",
+ "kind": "statement",
+ "title": "Exhaustive split filtered free complexes are K-projective",
+ "statement": "Let $A$ be a commutative ring in universe $u$. Let $P$ and $F_n$ ($n\\in\\mathbb N$) be cochain complexes of $A$-modules with carriers in $\\max(u,v)$ [def-pc-cochain-complex-modules]. Suppose there are monomorphisms $\\iota_n:F_n\\to P$ and maps $s_n:F_n\\to F_{n+1}$ with $s_n\\iota_{n+1}=\\iota_n$, $F_0=0$, and every element of each $P^k$ in the image of some $\\iota_n^k$. Suppose every $s_n^k$ has an $A$-linear retraction. Suppose for each $n$ the cokernel complex of $s_n$ is a direct sum, indexed by a set in $\\max(u,v)$, of complexes concentrated in integer degrees with the rank-one $A$-module $\\operatorname{ULift}^{v}A$ in that degree. Then $P$ is K-projective: every chain map $P\\to N$ to an acyclic cochain complex of such modules is homotopic to zero.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KM, lemma-property-P-K-projective, applied to A concentrated in degree zero"
+ },
+ "proof": [
+  {
+   "text": "A chain map from a rank-one free module concentrated in degree k to an acyclic N is a cycle of N in degree k. Acyclicity supplies its primitive in degree k-1, giving a null homotopy. On a coproduct choose these primitives on each generator, which defines a homotopy by the coproduct universal property. The same argument works for shifts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The compatible monomorphisms make each step monic. Its degreewise retractions and the cokernel exact sequence give a degreewise split short exact sequence F_n to F_(n+1) to its quotient. Its homotopy-category triangle and exact Hom sequence show that if F_n and the quotient have no maps to any shifts of acyclic N, the same holds for F_(n+1). Induction starts with F_0 zero. Thus every finite stage and its shifts are left orthogonal to acyclic complexes.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "On the direct sum of F_n form a=identity-successor and b induced by iota_n. In each degree a is injective by inspecting components from index zero upward; b is surjective by exhaustion. A finite tuple in ker(b) can be moved modulo im(a) into a single sufficiently large stage; monicity of its inclusion makes that last component zero. Hence ker(b)=im(a). Choose retractions r_n of each step and compose to get r_(j,i):F_j to F_i. On the j-th summand define a left inverse to a with components -r_(j,0),...,-r_(j,j-1),0,...; composing with identity-successor cancels the earlier components and gives the identity in component j. Consequently the telescope sequence is degreewise split.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The degreewise split telescope sequence yields a distinguished triangle in K(A). Maps from either direct sum to an acyclic complex or its shifts are families of zero maps, by the finite-stage result. The exact Hom sequence therefore makes every map from P to an acyclic complex zero in K(A). The homotopy quotient identifies this with a null homotopy of every chain map, which is precisely IsKProjective.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KL and 09KM, telescope exact sequence and its Hom vanishing argument, specialized to ordinary module complexes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exhaustive degreewise split filtration of a complex whose quotients are coproducts of shifts of free rank one modules makes the complex K-projective",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered free complex with exhaustive split filtration is K-projective",
+   "results": "['CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex', 'CategoryTheory.ProjectiveResolution.ofComplex', 'CochainComplex.isKProjective_of_projective', 'CategoryTheory.ProjectiveResolution.projective', 'Rep.standardComplex.x_projective', 'CategoryTheory.ProjectiveResolution.of_def', 'CategoryTheory.ProjectiveResolution.of', 'CategoryTheory.ProjectiveResolution.instHasProjectiveResolution']",
+   "date": "2026-10-13",
+   "verdict": "No matching filtered free K-projectivity theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "isKProjective.*[Ff]ilter|[Ff]ilter.*isKProjective|k[Pp]rojective.*[Cc]oproduct",
+   "results": "[]",
+   "date": "2026-10-13",
+   "verdict": "No matching filtered free K-projectivity theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedExtensionResolution",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 06Y6 derived base change: supply resolving models by the ordinary-module filtered free resolution and its K-projectivity",
+   "via": [
+    "lem-pc-base-derived-extension-resolution",
+    "lem-pc-base-derived-extension-linear",
+    "lem-pc-base-derived-tensor-cohomology-action",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredFreeKProjective",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjective.lean",
+  "declaration": "CochainComplex.isKProjective_of_filtered_free",
+  "statement": "theorem isKProjective_of_filtered_free {A : Type u} [CommRing A]\n    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))\n    (hzero : IsZero (F 0)) (hmono : ∀ n, Mono (ι n))\n    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)\n    (hexhaustive : ∀ (k : ℤ) (x : P.X k),\n      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)\n    (hsplit : ∀ (n : ℕ) (k : ℤ),\n      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n        (step n).f k ≫ r = 𝟙 ((F n).X k))\n    (hquot : ∀ n, ∃ (I : Type (max u v)) (degree : I → ℤ),\n      Nonempty (cokernel (step n) ≅\n        ∐ (fun i : I ↦\n          (HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) (degree i)).obj\n            (ModuleCat.of A (ULift.{v} A))))) :\n    P.IsKProjective",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T173915-L-3309410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T173915-L-3309410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
