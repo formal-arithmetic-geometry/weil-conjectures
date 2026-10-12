@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "*Reduction to one piece.* By [def-weil-constructible-subset] write $E=\\bigcup_{i=1}^{n}U_i\\cap(X\\setminus V_i)$ with $U_i,V_i\\subseteq X$ open and retrocompact ($n\\ge 0$; for $n=0$, $E=\\emptyset$). Fix a quasi-compact open $W\\subseteq X$. Distributing the intersection over the finite union gives $E\\cap W=\\bigcup_{i=1}^{n}P_i$ with $P_i=U_i\\cap(X\\setminus V_i)\\cap W=(U_i\\cap W)\\setminus V_i$. So it suffices to show each $P_i$ is quasi-compact (step 2) and that a finite union of quasi-compact subsets is quasi-compact (step 3).",
+   "text": "*Reduction to one piece.* By [def-weil-constructible-subset] write $E=\\bigcup_{i=1}^{n}U_i\\cap(X\\setminus V_i)$ with $U_i,V_i\\subseteq X$ open and retrocompact ($n\\ge 0$; for $n=0$, $E=\\emptyset$). Fix a quasi-compact open $W\\subseteq X$. Distributing the intersection over the finite union gives $E\\cap W=\\bigcup_{i=1}^{n}P_i$ with $P_i=U_i\\cap(X\\setminus V_i)\\cap W=(U_i\\cap W)\\setminus V_i$. So it suffices to show each $P_i$ is quasi-compact (step 2) and that a finite union of quasi-compact subsets is quasi-compact (step 3). Lean implementation: use BooleanSubalgebra.closure_sdiff_sup_induction. Its sublattice hypotheses follow from IsOpen.union/inter and IsRetrocompact.union/inter_isOpen; empty and univ supply bottom and top. This implements the finite-union-of-differences description without adding a theorem.",
    "uses": [
     "def-weil-constructible-subset"
    ],
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "*Each piece is quasi-compact.* Fix $i$. Since $U_i$ is retrocompact and $W$ is a quasi-compact open of $X$, the set $Q=U_i\\cap W$ is quasi-compact in its induced topology [def-weil-constructible-subset]. Since $V_i$ is open in $X$, $Q\\cap V_i$ is open in the subspace $Q$, so $P_i=Q\\setminus(Q\\cap V_i)$ is closed in $Q$. By [lem-weil-pbc-closed-in-quasi-compact] (Stacks 005C) applied to the quasi-compact space $Q$ and its closed subset $P_i$, $P_i$ is quasi-compact in the topology induced from $Q$, which equals the topology induced from $X$ (the subspace topology of a subspace of a subspace is the subspace topology). Hence $P_i$ is a quasi-compact subset of $X$. (Only openness of $V_i$ is used here, not its retrocompactness.)",
+   "text": "*Each piece is quasi-compact.* Fix $i$. Since $U_i$ is retrocompact and $W$ is a quasi-compact open of $X$, the set $Q=U_i\\cap W$ is quasi-compact in its induced topology [def-weil-constructible-subset]. Since $V_i$ is open in $X$, $Q\\cap V_i$ is open in the subspace $Q$, so $P_i=Q\\setminus(Q\\cap V_i)$ is closed in $Q$. By [lem-weil-pbc-closed-in-quasi-compact] (Stacks 005C) applied to the quasi-compact space $Q$ and its closed subset $P_i$, $P_i$ is quasi-compact in the topology induced from $Q$, which equals the topology induced from $X$ (the subspace topology of a subspace of a subspace is the subspace topology). Hence $P_i$ is a quasi-compact subset of $X$. (Only openness of $V_i$ is used here, not its retrocompactness.) Lean implementation: for compact open W, hU.2 hWcomp hWopen proves IsCompact (U ∩ W). Apply IsCompact.diff with hV.1, then rewrite with Set.sdiff_eq and Set.inter_right_comm. IsCompact.diff is the closed-in-compact argument already proved in Mathlib (it uses IsCompact.inter_right), so no subspace topology transport has to be formalized separately.",
    "uses": [
     "def-weil-constructible-subset",
     "lem-weil-pbc-closed-in-quasi-compact"
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "*Finite unions.* A finite union $P_1\\cup\\dots\\cup P_n$ of quasi-compact subsets of $X$ is quasi-compact: given a family of open subsets of $X$ covering the union, each $P_i$ is covered by finitely many of its members, and the union of these $n$ finite subfamilies is a finite subfamily covering $P_1\\cup\\dots\\cup P_n$ (for $n=0$ the empty set is quasi-compact). With step 1 and step 2, $E\\cap W$ is quasi-compact for every quasi-compact open $W\\subseteq X$, i.e. $E$ is retrocompact in $X$ [def-weil-constructible-subset].",
+   "text": "*Finite unions.* A finite union $P_1\\cup\\dots\\cup P_n$ of quasi-compact subsets of $X$ is quasi-compact: given a family of open subsets of $X$ covering the union, each $P_i$ is covered by finitely many of its members, and the union of these $n$ finite subfamilies is a finite subfamily covering $P_1\\cup\\dots\\cup P_n$ (for $n=0$ the empty set is quasi-compact). With step 1 and step 2, $E\\cap W$ is quasi-compact for every quasi-compact open $W\\subseteq X$, i.e. $E$ is retrocompact in $X$ [def-weil-constructible-subset]. Lean implementation: the sup case is IsRetrocompact.union. The induction principle includes the empty union through the difference of empty with empty. All cases are valid in arbitrary topological spaces, with no separation, compactness or nonemptiness assumption on X.",
    "uses": [
     "def-weil-constructible-subset"
    ],
@@ -187,5 +187,15 @@
   "group": "M1",
   "result": "pass",
   "note": "X arbitrary TopologicalSpace (any universe, no extra hyps); E : Set X; constructible = Mathlib Topology.IsConstructible (recorded dep decl); conclusion root IsRetrocompact = forall W compact open, IsCompact (E ∩ W), matches node verbatim; Mathlib Topology/Constructible.lean has only the open converse and Noetherian variant, no existing statement"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085338-L-39020",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

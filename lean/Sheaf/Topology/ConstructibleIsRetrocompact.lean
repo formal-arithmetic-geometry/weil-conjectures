@@ -37,6 +37,15 @@ subcover. Thus the intersection of the constructible set with every quasi-compac
 `W` is quasi-compact, which is retrocompactness. -/
 theorem IsConstructible.isRetrocompact {X : Type u} [TopologicalSpace X] {E : Set X}
     (hE : IsConstructible E) : IsRetrocompact E := by
-  sorry
+  induction E, hE using BooleanSubalgebra.closure_sdiff_sup_induction with
+  | isSublattice =>
+    exact ⟨fun s hs t ht ↦ ⟨hs.1.union ht.1, hs.2.union ht.2⟩,
+      fun s hs t ht ↦ ⟨hs.1.inter ht.1, hs.2.inter_isOpen ht.2 ht.1⟩⟩
+  | bot_mem => exact ⟨isOpen_empty, IsRetrocompact.empty⟩
+  | top_mem => exact ⟨isOpen_univ, IsRetrocompact.univ⟩
+  | sdiff U hU V hV =>
+    intro W hWcomp hWopen
+    simpa only [Set.sdiff_eq, Set.inter_right_comm] using (hU.2 hWcomp hWopen).diff hV.1
+  | sup s _ t _ hs ht => exact hs.union ht
 
 end Topology
