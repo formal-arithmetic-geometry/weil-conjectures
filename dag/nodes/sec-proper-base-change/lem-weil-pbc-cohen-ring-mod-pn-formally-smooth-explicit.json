@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-explicit",
+ "kind": "statement",
+ "title": "Explicit lifting clause for a Cohen ring modulo a prime power",
+ "statement": "Let p be prime and Λ a Cohen ring [def-weil-pbc-cohen-ring]. For n≥1, every ring homomorphism Λ/(p^n) → D/J lifts to D whenever D is any commutative ring with p^n=0 and J is an ideal satisfying J²=0, in any target universe.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0329"
+ },
+ "proof": [
+  {
+   "text": "p^n vanishes in Q=Λ/(p^n), so its characteristic divides p^n. Use the canonical ZMod.algebra' structure, and [lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-core] to obtain formal smoothness of Q. The assumption p^n=0 similarly gives a ZMod (p^n)-algebra structure on D. Each ring map Q→D/J is linear because every scalar is an integer cast. Apply Algebra.FormallySmooth.exists_lift to J with nilpotence exponent 2 and forget the algebra structure of the resulting lift. This construction also covers the zero ring D.",
+   "uses": [
+    "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-core"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0329; E2 second reading, using the existing field-lifting theorem and Mathlib lifting API"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CohenRingModPowFormallySmooth",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+   "place": "Stage-3 reduction of the formal smoothness and explicit lifting clauses"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CohenRingModPowFormallySmoothExplicit",
+  "file": "lean/Sheaf/RingTheory/CohenRingModPowFormallySmoothExplicit.lean",
+  "declaration": "IsDiscreteValuationRing.cohenRing_mod_pow_formallySmooth_explicit",
+  "statement": "theorem cohenRing_mod_pow_formallySmooth_explicit (p : ℕ) (Λ : Type u) [CommRing Λ] (hΛ : IsCohenRing p Λ) (n : ℕ) (hn : 1 ≤ n) : ∀ (D : Type v) [CommRing D], (p : D) ^ n = 0 → ∀ (J : Ideal D), J ^ 2 = ⊥ → ∀ (g : (Λ ⧸ Ideal.span {(p : Λ) ^ n}) →+* D ⧸ J), ∃ f : (Λ ⧸ Ideal.span {(p : Λ) ^ n}) →+* D, (Ideal.Quotient.mk J).comp f = g",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.exists_lift",
+   "results": "Algebra.FormallySmooth.exists_lift",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal smoothness unramified discrete valuation ring reduction modulo powers of uniformizer",
+   "results": "PreTilt, PreTilt.untiltFun, PreTilt.exists_smodEq_untiltAux, HenselianLocalRing, PreTilt.mk_untilt_eq_coeff_zero, Algebra.instFormallyUnramifiedResidueField, PreTilt.untiltAux_smodEq_untiltFun, PreTilt.instPerfectRing",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohenRing_mod_pow",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat square zero ideal reduction preserves formal smoothness",
+   "results": "Algebra.Smooth.formallySmooth, RingHom.FormallySmooth.toAlgebra, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.of_split, Algebra.FormallySmooth.exists_lift, RingHom.formallySmooth_algebraMap, Algebra.FormallySmooth.comp, Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat",
+   "results": "Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*ZMod",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of an unramified discrete valuation ring with uniformizer p by p to the n plus one is formally smooth over ZMod p to the n plus one if its reduction modulo p to the n is formally smooth.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T211613-L-1056869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T211613-L-1056869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

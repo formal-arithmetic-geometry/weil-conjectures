@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth-step",
+ "kind": "statement",
+ "title": "Successor step for formal smoothness of a Cohen ring modulo p powers",
+ "statement": "Let p be prime and Λ a Cohen ring [def-weil-pbc-cohen-ring]. Let n≥1 and suppose that Λ/(p^n) is formally smooth over ZMod (p^n) for every ZMod-algebra structure. Then Λ/(p^(n+1)) is formally smooth over ZMod (p^(n+1)) for every such algebra structure.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 0329 induction step, applying Tag 031L; verified at https://stacks.math.columbia.edu/tag/0329 and https://stacks.math.columbia.edu/tag/031L"
+ },
+ "proof": [
+  {
+   "text": "A Cohen ring is torsion-free over ℤ: factor a nonzero integer as ±p^a b with p not dividing b. Bezout makes b a unit in the local ring with maximal ideal (p); p is nonzero since a DVR has nonzero maximal ideal. The domain property then makes each nonzero integer a nonzerodivisor. Apply [lem-weil-pbc-pid-torsion-free-module-flat] and [lem-weil-pbc-flat-module-quotient-flat] to obtain flatness of Z/p^(n+1)→Λ/(p^(n+1)).",
+   "uses": [
+    "def-weil-pbc-cohen-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-module-quotient-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In R=Z/p^(n+1) set I=(p^n). Since n≥1, 2n≥n+1, so I²=0. Reduction gives R/I=Z/p^n and S/IS=Λ/(p^n), since p^(n+1) is a multiple of p^n. Transport the hypothesis along these quotient isomorphisms and apply [lem-weil-pbc-lift-formal-smoothness-flat-square-zero]. All ZMod-algebra structures agree since every element of ZMod is an integer cast.",
+   "uses": [
+    "lem-weil-pbc-lift-formal-smoothness-flat-square-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-weil-pbc-lift-formal-smoothness-flat-square-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0329 successor step and Tag 031L; torsion-freeness and flatness verification written out by E2"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CohenRingModPowFormallySmooth",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+   "place": "Step 5, the induction step"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CohenRingModPowFormallySmoothStep",
+  "file": "lean/Sheaf/RingTheory/CohenRingModPowFormallySmoothStep.lean",
+  "declaration": "IsDiscreteValuationRing.cohenRing_mod_pow_formallySmooth_step",
+  "statement": "theorem cohenRing_mod_pow_formallySmooth_step\n    (p : ℕ) (Λ : Type u) [CommRing Λ] (hΛ : IsCohenRing p Λ)\n    (n : ℕ) (hn : 1 ≤ n)\n    (ih : ∀ [Algebra (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})],\n      Algebra.FormallySmooth (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})) :\n    ∀ [Algebra (ZMod (p ^ (n + 1))) (Λ ⧸ Ideal.span {(p : Λ) ^ (n + 1)})],\n      Algebra.FormallySmooth (ZMod (p ^ (n + 1)))\n        (Λ ⧸ Ideal.span {(p : Λ) ^ (n + 1)})",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.exists_lift",
+   "results": "Algebra.FormallySmooth.exists_lift",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal smoothness unramified discrete valuation ring reduction modulo powers of uniformizer",
+   "results": "PreTilt, PreTilt.untiltFun, PreTilt.exists_smodEq_untiltAux, HenselianLocalRing, PreTilt.mk_untilt_eq_coeff_zero, Algebra.instFormallyUnramifiedResidueField, PreTilt.untiltAux_smodEq_untiltFun, PreTilt.instPerfectRing",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohenRing_mod_pow",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat square zero ideal reduction preserves formal smoothness",
+   "results": "Algebra.Smooth.formallySmooth, RingHom.FormallySmooth.toAlgebra, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.of_split, Algebra.FormallySmooth.exists_lift, RingHom.formallySmooth_algebraMap, Algebra.FormallySmooth.comp, Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat",
+   "results": "Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*ZMod",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "API found; no direct Cohen-ring successor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of an unramified discrete valuation ring with uniformizer p by p to the n plus one is formally smooth over ZMod p to the n plus one if its reduction modulo p to the n is formally smooth.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T211613-L-1056869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T211613-L-1056869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

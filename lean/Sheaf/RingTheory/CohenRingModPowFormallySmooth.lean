@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.Data.ZMod.Basic
 public import Sheaf.RingTheory.CohenRing
-import Sheaf.RingTheory.ExistsLiftOfFieldCharP
-import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.CohenRingModPowFormallySmoothCore
+import Sheaf.RingTheory.CohenRingModPowFormallySmoothExplicit
 
 /-!
 # Formal smoothness of a Cohen ring modulo a prime power
@@ -62,6 +62,7 @@ theorem cohenRing_mod_pow_formallySmooth
         ∀ (g : (Λ ⧸ Ideal.span {(p : Λ) ^ n}) →+* D ⧸ J),
           ∃ f : (Λ ⧸ Ideal.span {(p : Λ) ^ n}) →+* D,
             (Ideal.Quotient.mk J).comp f = g) := by
-  sorry
+  exact ⟨cohenRing_mod_pow_formallySmooth_core p Λ hΛ n hn,
+    cohenRing_mod_pow_formallySmooth_explicit p Λ hΛ n hn⟩
 
 end IsDiscreteValuationRing
