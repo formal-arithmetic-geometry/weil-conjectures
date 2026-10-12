@@ -7,8 +7,8 @@ module
 
 public import Sheaf.RingTheory.PopescuResolution
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations
-import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.PopescuAuxiliaryQuotientSmooth
+import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
@@ -71,6 +71,117 @@ theorem exists_popescu_height_zero_auxiliary_witnesses
         FinitePresentation R B ∧ δ.comp β' = α ∧
         (∃ b ∈ singularIdeal R B, δ b = (∏ a : s, ell a) * γ c) ∧
         (∀ a : s, ∃ d ∈ singularIdeal R B, δ d = α a.val ^ (n a + 1)) := by
-  sorry
+  classical
+  by_cases hs0 : s = ∅
+  · subst s
+    refine ⟨C, inferInstance, inferInstance, β, γ, inferInstance, hcomp, ?_, ?_⟩
+    · exact ⟨c, hc, by simp⟩
+    · intro a
+      exact False.elim (Finset.notMem_empty a.val a.property)
+  have : Nonempty s := Finset.nonempty_coe_sort.mpr (Finset.nonempty_iff_ne_empty.mpr hs0)
+  let : Algebra A C := β.toRingHom.toAlgebra
+  let : IsScalarTower R A C := IsScalarTower.of_algHom β
+  let : FinitePresentation A C :=
+    FinitePresentation.of_restrict_scalars_finitePresentation R A C
+  obtain ⟨k, q, hq, hqker⟩ := FinitePresentation.out (R := A) (A := C)
+  obtain ⟨m, f, hker⟩ := Submodule.fg_iff_exists_fin_generating_family.mp hqker
+  obtain ⟨p, hp⟩ := hq c
+  let P := PopescuAuxPoly.{u} A s k m
+  let I : Ideal P := popescuAuxIdeal A s k m f
+  let B := P ⧸ I
+  let mk : P →ₐ[A] B := Ideal.Quotient.mkₐ A I
+  let z : P := MvPolynomial.X (Sum.inr (Sum.inr (Sum.inl ⟨()⟩)))
+  let y : s → P := fun a ↦ MvPolynomial.X (Sum.inr (Sum.inl a))
+  let L : Λ := ∏ a : s, ell a
+  let vals : PopescuAuxVars.{u} s k m → Λ := fun j ↦
+    match j with
+    | Sum.inl j => γ (q (MvPolynomial.X j))
+    | Sum.inr (Sum.inl a) => α a.val ^ n a
+    | Sum.inr (Sum.inr (Sum.inl _)) => L
+    | Sum.inr (Sum.inr (Sum.inr _)) => 0
+  let ev : P →ₐ[R] Λ := MvPolynomial.aevalTower α vals
+  have hevX (j : PopescuAuxVars.{u} s k m) : ev (MvPolynomial.X j) = vals j := by
+    exact MvPolynomial.aevalTower_X α vals j
+  have hevIncl : ev.comp ((popescuAuxIncl A s k m).restrictScalars R) =
+      γ.comp (q.restrictScalars R) := by
+    apply MvPolynomial.algHom_ext'
+    · ext a
+      change ev (popescuAuxIncl A s k m (MvPolynomial.C a)) = γ (q (MvPolynomial.C a))
+      simp only [popescuAuxIncl, MvPolynomial.algHom_C]
+      change ev (MvPolynomial.C a) = γ (β a)
+      rw [show ev (MvPolynomial.C a) = α a from MvPolynomial.aevalTower_C α vals a]
+      exact (AlgHom.congr_fun hcomp a).symm
+    · intro j
+      change ev (popescuAuxIncl A s k m (MvPolynomial.X j)) = γ (q (MvPolynomial.X j))
+      simp only [popescuAuxIncl, MvPolynomial.aeval_X]
+      rw [hevX]
+  have hevf (j : Fin m) : ev (popescuAuxIncl A s k m (f j)) = 0 := by
+    have hf : f j ∈ RingHom.ker q.toRingHom := by
+      rw [← hker]
+      exact Submodule.subset_span ⟨j, rfl⟩
+    have hf0 : q (f j) = 0 := RingHom.mem_ker.mp hf
+    have h := AlgHom.congr_fun hevIncl (f j)
+    change ev (popescuAuxIncl A s k m (f j)) = γ (q (f j)) at h
+    rw [h, hf0, map_zero]
+  have hL (a : s) : L * α a.val ^ n a = 0 := by
+    obtain ⟨l, hl⟩ := Finset.dvd_prod_of_mem ell (Finset.mem_univ a)
+    change (∏ a : s, ell a) * α a.val ^ n a = 0
+    rw [hl]
+    calc
+      ell a * l * α a.val ^ n a = l * (ell a * α a.val ^ n a) := by ring
+      _ = 0 := by rw [hkill, mul_zero]
+  have hI : ∀ x ∈ I, ev x = 0 := by
+    apply (Ideal.span_le.mpr ?_ : I ≤ RingHom.ker ev.toRingHom)
+    rintro x (⟨j, rfl⟩ | ⟨a, rfl⟩)
+    · change ev (popescuAuxIncl A s k m (f j) -
+        ∑ a : s, MvPolynomial.X (Sum.inr (Sum.inl a)) *
+          MvPolynomial.X (Sum.inr (Sum.inr (Sum.inr (a, j))))) = 0
+      rw [map_sub, hevf, map_sum]
+      simp only [map_mul, hevX, vals, mul_zero, Finset.sum_const_zero, sub_zero]
+    · change ev (z * y a) = 0
+      rw [map_mul]
+      change ev (MvPolynomial.X _) * ev (MvPolynomial.X _) = 0
+      rw [hevX, hevX]
+      exact hL a
+  let δ : B →ₐ[R] Λ := Ideal.Quotient.liftₐ I ev hI
+  let β' : A →ₐ[R] B := IsScalarTower.toAlgHom R A B
+  have hδmk (x : P) : δ (mk x) = ev x := by
+    exact Ideal.Quotient.lift_mk I ev.toRingHom hI
+  have hδβ : δ.comp β' = α := by
+    ext a
+    change δ (mk (MvPolynomial.C a)) = α a
+    rw [hδmk]
+    exact MvPolynomial.aevalTower_C α vals a
+  let : FinitePresentation R P := FinitePresentation.mvPolynomial R A _
+  let : IsNoetherianRing P := FiniteType.isNoetherianRing R P
+  have hfp : FinitePresentation R B := FinitePresentation.quotient
+    ((inferInstance : IsNoetherianRing P).noetherian I)
+  have hsmooth := popescuAuxQuot_smooth_localizations R A C s k m f q hq hker p
+    (by rw [hp]; exact smooth_localization_of_mem_singularIdeal R C c hc)
+    (fun a : s ↦ a.val)
+    (fun a ↦ smooth_localization_of_mem_singularIdeal R A a.val (hs a.val a.property))
+  refine ⟨B, inferInstance, inferInstance, β', δ, hfp, hδβ, ?_, ?_⟩
+  · refine ⟨mk z * mk (popescuAuxIncl A s k m p), ?_, ?_⟩
+    · apply Ideal.le_radical
+      apply Ideal.subset_span
+      exact hsmooth.1
+    · rw [map_mul, hδmk, hδmk]
+      have hpe := AlgHom.congr_fun hevIncl p
+      change ev (popescuAuxIncl A s k m p) = γ (q p) at hpe
+      change ev (MvPolynomial.X _) * ev (popescuAuxIncl A s k m p) = L * γ c
+      rw [hevX, hpe, hp]
+  · intro a
+    refine ⟨β' a.val * mk (y a), ?_, ?_⟩
+    · apply Ideal.le_radical
+      apply Ideal.subset_span
+      exact hsmooth.2 a
+    · rw [map_mul, hδmk]
+      have hβ := AlgHom.congr_fun hδβ a.val
+      change δ (β' a.val) = α a.val at hβ
+      rw [hβ]
+      change α a.val * ev (MvPolynomial.X _) = α a.val ^ (n a + 1)
+      rw [hevX]
+      change α a.val * α a.val ^ n a = α a.val ^ (n a + 1)
+      rw [pow_succ, mul_comm]
 
 end Algebra

@@ -1,0 +1,216 @@
+{
+ "id": "lem-weil-pbc-popescu-auxiliary-quotient-smooth",
+ "kind": "statement",
+ "title": "Smooth localizations of the explicit Popescu auxiliary quotient",
+ "statement": "Let $R,A,C$ be commutative rings, with compatible $R$-algebra structures on $A,C$ and an $A$-algebra structure on $C$. Let $\\iota$ be a nonempty finite type, $k,m\\geq0$, $f_j\\in A[x_1,\\ldots,x_k]$ [def-weil-pbc-mv-polynomial-ring], and $q:A[x_1,\\ldots,x_k]\\to C$ a surjective $A$-algebra map whose kernel is $(f_j)$ [def-weil-pbc-algebra-hom-quotient]. Let $p\\in A[x]$, and let $a_i\\in A$ for $i\\in\\iota$. Assume $C_{q(p)}$ and every $A_{a_i}$ are smooth over $R$ [def-weil-pbc-smooth-ring-map]. Define the actual quotient $B=A[x_k,y_i,z,t_{ij}]/(f_j-\\sum_i y_i t_{ij},zy_i)$, with its induced $R$-algebra structure. Then $B_{z\\bar p}$ and every $B_{a_i y_i}$ are smooth over $R$. Here $\\bar p$ is the class of the inclusion of $p$. The index of $z$ is a universe lift of a singleton, so that $B$ has carrier in $\\operatorname{Type}(\\max(u,v))$ when $R:\\operatorname{Type}(u)$ and $A,\\iota:\\operatorname{Type}(v)$. The carrier of $C$ is in the same maximum universe.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+ },
+ "proof": [
+  {
+   "text": "Use the finite equivalence iota = Fin(card iota) and the lift equivalence for z to rename the polynomial variables. Evaluation on each x-generator shows that the renaming respects the inclusion of A[x]. Map the defining ideal: the f_j relations are preserved by reindexing the finite sum, and the zy_i relations by the finite equivalence. The quotient equivalence follows from Ideal.quotientEquivAlg.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+   }
+  },
+  {
+   "text": "The presentation q induces Cp = A[x]/(f_j) isomorphic to C. Localize this equivalence at the class of p. Its image is q(p), so smoothness of C_(q(p)) transports to Cp_p. No object is selected from an unproved existence assertion.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+   }
+  },
+  {
+   "text": "Apply the first auxiliary localization equivalence (the index type is nonempty, hence card(iota) >= 1). The recorded images of x imply, by polynomial homomorphism extensionality, that the class of p maps to its constant image in Cp[t,z]_z.",
+   "uses": [
+    "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+   }
+  },
+  {
+   "text": "The polynomial algebra Cp[t,z] is smooth over Cp, as is its localization at z. Base change this smooth map along Cp -> Cp_p, use the tensor-localization equivalence, and compose with the smooth map R -> Cp_p. Transport through the auxiliary equivalence and the iterated-localization equivalence to conclude that the standard auxiliary quotient localized at z*p is smooth over R.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-tensor",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+   }
+  },
+  {
+   "text": "For each index i, the second auxiliary equivalence identifies B_(y_i) with a localized polynomial algebra over A. This is smooth over A. Base change along A -> A_(a_i), identify the tensor product with localization at the image of a_i, and compose with the assumed smooth map R -> A_(a_i). Iterated localization identifies the result with B_(a_i*y_i).",
+   "uses": [
+    "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-tensor",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+   }
+  },
+  {
+   "text": "Localize the renaming-induced quotient equivalence at z*p and at each a_i*y_i. Its images are exactly the elements in the stated explicit lifted quotient. Algebra.Smooth.of_equiv transports the two results. Empty x and f lists, zero a_i, zero q(p), and zero rings require no extra hypotheses.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-localization-of-localization",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-localization-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FA (lemma-delocalize-height-zero), auxiliary quotient and the two localizations; read at https://stacks.math.columbia.edu/tag/07FA. The first localization uses t_ij and smoothness over C, then localization at the chosen element of C, as corrected in the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth localizations at z times p and a times y in the Popescu auxiliary polynomial quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of principal localizations of auxiliary quotient by f minus sum y t and z y",
+   "results": "Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.Smooth.of_isLocalization_Away, Algebra.IsStandardSmooth.localization_away, RingHom.Smooth.holdsForLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget, Algebra.basicOpen_subset_smoothLocus_iff_smooth; no auxiliary-quotient smoothness theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "auxiliary.*smooth|popescuAuxQuot",
+   "results": "Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean, Mathlib/Topology/MetricSpace/PartitionOfUnity.lean; no auxiliary-quotient smoothness theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuHeightZeroAuxiliaryWitnesses",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FA, the auxiliary quotient localization calculations (steps 5-6 of height-zero delocalization), including the corrected localization at z times the class of c.",
+   "via": [
+    "lem-weil-pbc-popescu-height-zero-auxiliary-witnesses",
+    "lem-weil-pbc-popescu-delocalize-height-zero-data",
+    "lem-weil-pbc-popescu-delocalize-height-zero",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuAuxiliaryQuotientSmooth",
+  "file": "lean/Sheaf/RingTheory/PopescuAuxiliaryQuotientSmooth.lean",
+  "declaration": "Algebra.popescuAuxQuot_smooth_localizations",
+  "declarations": [
+   "Algebra.PopescuAuxVars",
+   "Algebra.PopescuAuxPoly",
+   "Algebra.popescuAuxIncl",
+   "Algebra.popescuAuxIdeal",
+   "Algebra.PopescuAuxQuot",
+   "Algebra.popescuAuxQuot_smooth_localizations"
+  ],
+  "statement": "theorem popescuAuxQuot_smooth_localizations (R : Type u) (A : Type v) (C : Type (max u v)) [CommRing R] [CommRing A] [CommRing C] [Algebra R A] [Algebra R C] [Algebra A C] [IsScalarTower R A C] (ι : Type v) [Fintype ι] [Nonempty ι] (k m : ℕ) (f : Fin m → MvPolynomial (Fin k) A) (q : MvPolynomial (Fin k) A →ₐ[A] C) (hq : Function.Surjective q) (hker : Ideal.span (Set.range f) = RingHom.ker q.toRingHom) (p : MvPolynomial (Fin k) A) (hp : Smooth R (Localization.Away (q p))) (a : ι → A) (ha : ∀ i, Smooth R (Localization.Away (a i))) : Smooth R (Localization.Away (Ideal.Quotient.mkₐ A (popescuAuxIdeal.{u} A ι k m f) (MvPolynomial.X (Sum.inr (Sum.inr (Sum.inl ⟨()⟩)))) * Ideal.Quotient.mkₐ A (popescuAuxIdeal.{u} A ι k m f) (popescuAuxIncl.{u} A ι k m p))) ∧ (∀ i : ι, Smooth R (Localization.Away (algebraMap A (PopescuAuxQuot.{u} A ι k m f) (a i) * Ideal.Quotient.mkₐ A (popescuAuxIdeal.{u} A ι k m f) (MvPolynomial.X (Sum.inr (Sum.inl i))))))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T184300-L-4003403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T184300-L-4003403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
