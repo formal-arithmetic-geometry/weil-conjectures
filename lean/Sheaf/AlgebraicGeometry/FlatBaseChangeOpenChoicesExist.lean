@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
-import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # FlatBaseChangeOpenChoicesExist
 
@@ -23,6 +22,51 @@ open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
+
+private theorem restrictedResolutionSections_nonempty {X : Scheme.{uBC}} {F : X.Modules}
+    (I : InjectiveResolution F) (U : X.Opens) :
+    Nonempty (RestrictedResolutionSections I U) := by
+  let R := restrictFunctor U.ι
+  let : PreservesFiniteLimits (SheafOfModules.overFunctor X.ringCatSheaf U) :=
+    moduleOverFunctor_limits_proof X.toRingedSpace U
+  let : PreservesFiniteColimits (SheafOfModules.overFunctor X.ringCatSheaf U) :=
+    moduleOverFunctor_colimits_proof X.toRingedSpace U
+  let : PreservesFiniteLimits R := preservesFiniteLimits_of_natIso (overFunctorEquiv U)
+  let : PreservesFiniteColimits R := preservesFiniteColimits_of_natIso (overFunctorEquiv U)
+  let : R.Additive := Functor.additive_of_preserves_binary_products R
+  let : R.PreservesInjectiveObjects :=
+    { injective_obj := fun {M} hM ↦ by
+        let : Injective ((SheafOfModules.overFunctor X.ringCatSheaf U).obj M) :=
+          (module_open_restriction_injectives X U).2.2.1 M hM
+        exact Injective.of_iso ((overFunctorEquiv U).app M)
+          ((overEquiv U).functor.injective_obj_of_injective inferInstance) }
+  let e := (HomologicalComplex.singleMapHomologicalComplex R (ComplexShape.up ℕ) 0).app F
+  let J : InjectiveResolution (R.obj F) :=
+    { cocomplex := (R.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+      injective := fun n ↦ R.injective_obj_of_injective (I.injective n)
+      ι := e.inv ≫ (R.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι
+      quasiIso := by infer_instance }
+  let c : ((RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        J.cocomplex ≅
+      ((RingedSpace.openModuleSections X.toRingedSpace U).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj I.cocomplex :=
+    HomologicalComplex.Hom.isoOfComponents (fun n ↦
+      (I.cocomplex.X n).restrictAppIso U.ι ⊤ ≪≫
+        (I.cocomplex.X n).presheaf.mapIso (eqToIso (congrArg op U.ι_image_top))) (by
+          intro i j hij
+          dsimp [J, R, RingedSpace.globalSectionsFunctor, RingedSpace.openModuleSections]
+          simp only [restrictAppIso, Iso.refl_hom, Category.assoc]
+          exact (I.cocomplex.d i j).mapPresheaf.naturality
+            ((eqToIso (congrArg op U.ι_image_top)).hom))
+  refine ⟨{ resolution := J
+            comparison := Iso.refl _
+            augmentation := ?_
+            sections := c
+            components := ?_ }⟩
+  · simp [J, e, R, HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
+  · intro n
+    simp [c, HomologicalComplex.Hom.isoOfComponents, Iso.refl_hom]
 
 /-- Compatible restricted resolutions and the restricted adjunction unit exist.
 Source: Stacks, Cohomology, Tags 01E1, 01FB, 01E4; Modules, Tag 01AJ.
@@ -45,7 +89,33 @@ theorem flatBaseChangeMap_sections_choices {X S S' : Scheme.{uBC}} (f : X ⟶ S)
     ∀ (I : InjectiveResolution F)
       (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (V : S.Opens),
       Nonempty (FlatBaseChangeOpenChoices f g F I J V) := by
-  sorry
+  intro I J V
+  let U := f ⁻¹ᵁ V
+  let h := pullback.snd g f
+  let W := h ⁻¹ᵁ U
+  let r := h.resLE U W le_rfl
+  let F' := (tensorPullback h).obj F
+  let E : pushforward r ⋙ pushforward U.ι ≅ pushforward (W.ι ≫ h) :=
+    pushforwardComp r U.ι ≪≫ pushforwardCongr (h.resLE_comp_ι le_rfl)
+  let a : F ⟶ (pushforward (W.ι ≫ h)).obj ((restrictFunctor W.ι).obj F') :=
+    (Classical.choose (exists_tensorPullbackAdjunction h)).unit.app F ≫
+      (pushforward h).map ((restrictAdjunction W.ι).unit.app F') ≫
+        (pushforwardComp W.ι h).hom.app ((restrictFunctor W.ι).obj F')
+  let psi := ((restrictAdjunction U.ι).homEquiv _ _).symm
+    (a ≫ E.inv.app ((restrictFunctor W.ι).obj F'))
+  obtain ⟨source⟩ := restrictedResolutionSections_nonempty I U
+  obtain ⟨target⟩ := restrictedResolutionSections_nonempty J W
+  refine ⟨{ psi := psi, source := source, target := target, unit_square := ?_ }⟩
+  change (restrictAdjunction U.ι).unit.app F ≫ (pushforward U.ι).map psi ≫
+    (pushforwardComp r U.ι).hom.app _ ≫
+      (pushforwardCongr (h.resLE_comp_ι le_rfl)).hom.app _ = a
+  have hp := ((restrictAdjunction U.ι).homEquiv _ _).apply_symm_apply
+    (a ≫ E.inv.app ((restrictFunctor W.ι).obj F'))
+  rw [Adjunction.homEquiv_unit] at hp
+  change ((restrictAdjunction U.ι).unit.app F ≫ (pushforward U.ι).map psi) ≫
+    E.hom.app _ = a
+  rw [hp]
+  simp
 
 
 end AlgebraicGeometry.Scheme.Modules
