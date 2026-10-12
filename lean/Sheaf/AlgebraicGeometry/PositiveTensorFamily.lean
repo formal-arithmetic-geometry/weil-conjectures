@@ -39,7 +39,12 @@ theorem tensorGlobalSections_naturality {X : Scheme.{u}} {M N : X.Modules}
     (s : M.sections) (t : N.sections) {U V : X.Opensᵒᵖ} (f : U ⟶ V) :
     (M ⊗ N).val.map f (tmulSection (s.val U) (t.val U)) =
       tmulSection (s.val V) (t.val V) := by
-  sorry
+  have hf : (homOfLE (leOfHom f.unop)).op = f := Subsingleton.elim _ _
+  have h := tmulSection_map (leOfHom f.unop) (s.val U) (t.val U)
+  rw [hf] at h
+  change (M ⊗ N).val.map f (tmulSection (s.val U) (t.val U)) =
+    tmulSection (M.val.map f (s.val U)) (N.val.map f (t.val U)) at h
+  simpa only [PresheafOfModules.sections_property] using h
 
 /-- Tensor product of two global sections, evaluated on every open.
 Source: Stacks, Tag 09NC (blueprint: def-sc-positive-tensor-family). -/
