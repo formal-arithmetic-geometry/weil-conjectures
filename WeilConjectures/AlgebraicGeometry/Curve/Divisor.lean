@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import Mathlib.Topology.JacobsonSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 
 /-!
 # Divisors, principal divisors and the divisor class group of a curve
@@ -187,5 +188,66 @@ variable (X) in
 The *divisor class group* `Cl(X) = Div(X) / {div f : f ∈ k(X)ˣ}`. -/
 abbrev DivisorClassGroup : Type u :=
   X.Divisor ⧸ X.principalDivisors
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+section OpenImmersion
+
+variable {U X : Scheme.{u}} (i : U ⟶ X) [IsOpenImmersion i] [JacobsonSpace X]
+
+/-- An open immersion into a Jacobson scheme maps closed points to closed points. -/
+noncomputable def Hom.closedPointsMap (P : closedPoints U) : closedPoints X :=
+  ⟨i P.1, by
+    have h : P.1 ∈ i ⁻¹' closedPoints X := by
+      rw [i.isOpenEmbedding.preimage_closedPoints]; exact P.2
+    exact h⟩
+
+lemma Hom.closedPointsMap_injective : Function.Injective i.closedPointsMap :=
+  fun _ _ h ↦ Subtype.ext (i.isOpenEmbedding.injective (congrArg Subtype.val h))
+
+/-- The restriction `Div(X) → Div(U)` of divisors along an open immersion `i : U ⟶ X`. -/
+noncomputable def Divisor.comap : X.Divisor →+ U.Divisor :=
+  Finsupp.comapDomain.addMonoidHom i.closedPointsMap_injective
+
+@[simp]
+lemma Divisor.comap_apply (D : X.Divisor) (P : closedPoints U) :
+    Divisor.comap i D P = D (i.closedPointsMap P) :=
+  rfl
+
+lemma Divisor.surjective_comap : Function.Surjective (Divisor.comap i) := by
+  intro D
+  refine ⟨Finsupp.mapDomain i.closedPointsMap D, ?_⟩
+  ext P
+  rw [comap_apply, Finsupp.mapDomain_apply i.closedPointsMap_injective]
+
+/-- A divisor restricts to zero on `U` iff it is supported outside the image of `U`. -/
+lemma Divisor.comap_eq_zero_iff (D : X.Divisor) :
+    Divisor.comap i D = 0 ↔ ∀ P : closedPoints X, D P ≠ 0 → P.1 ∉ Set.range i := by
+  constructor
+  · rintro h P hP ⟨y, hy⟩
+    have hy' : y ∈ i ⁻¹' closedPoints X := by rw [Set.mem_preimage, hy]; exact P.2
+    rw [i.isOpenEmbedding.preimage_closedPoints] at hy'
+    have hP' : i.closedPointsMap ⟨y, hy'⟩ = P := Subtype.ext hy
+    exact hP (by simpa [hP'] using DFunLike.congr_fun h ⟨y, hy'⟩)
+  · intro h
+    ext P
+    by_contra hP
+    exact h _ hP ⟨P.1, rfl⟩
+
+variable [IsIntegral X] [IsNoetherian X] [IsIntegral U] [IsNoetherian U]
+
+/-- Restriction of divisors along an open immersion commutes with taking divisors of rational
+functions. -/
+theorem Divisor.comap_div (g : Additive X.functionFieldˣ) :
+    Divisor.comap i (X.div g) =
+      U.div (.ofMul (Units.map i.functionFieldIso.commRingCatIsoToRingEquiv.toMonoidHom
+        g.toMul)) := by
+  ext P
+  rw [comap_apply, div_apply, div_apply]
+  exact (ord_functionFieldIso i P.1 _).symm
+
+end OpenImmersion
 
 end AlgebraicGeometry.Scheme
