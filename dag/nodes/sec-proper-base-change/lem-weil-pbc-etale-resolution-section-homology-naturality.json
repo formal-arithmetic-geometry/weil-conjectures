@@ -1,0 +1,110 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-resolution-section-homology",
+   "place": "The target proof split below the unit into construction and compatibility components.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-etale-resolution-section-homology-naturality",
+ "kind": "statement",
+ "title": "Naturality of resolution section homology equivalences",
+ "statement": "For the four equivalences supplied by the underlying resolution-section comparison, all six prescribed identities hold: whole-to-open restriction, restriction along inclusions on X and Y, and the global and open transfer identities for α, with the stated cohomologyMap, openCohomologyRestriction, and openCohomologyPullback maps.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof (naturality of the resolution-section comparison)."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-etale-resolution-section-homology-data",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Verify the six identities by naturality of the adjunction unit, localization comparisons, and the chain map induced by α.",
+   "uses": [
+    "lem-weil-pbc-etale-resolution-section-homology-data",
+    "def-weil-pbc-etale-resolution-section-transfer",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-resolution-section-homology-data",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, compatibility calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective resolution section homology Ext additive equivalence",
+   "results": "No exact declaration for the fixed scheme section comparison.",
+   "verdict": "No exact match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution homology section Ext equivalence",
+   "results": "No exact declaration found.",
+   "verdict": "No exact match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etaleSectionFunctor homology equivalence in Mathlib and lean/",
+   "results": "Existing APIs construct section complexes but do not provide this simultaneous comparison.",
+   "verdict": "No duplicate.",
+   "date": "2026-10-12"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionHomologyNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionSection_homology_naturality",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12",
+  "statement": "theorem resolutionSection_homology_naturality\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution G)\n    (J : InjectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G))\n    (α : I.cocomplex ⟶\n      ((lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℕ)).obj J.cocomplex)\n    (hα : I.ι.f 0 ≫ α.f 0 =\n      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app G ≫\n        (lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0))\n    (eX : ∀ q : ℕ,\n      (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 X))).mapHomologicalComplex (.up ℕ)).obj\n        I.cocomplex).homology q ≃+ Sheaf.H G q)\n    (eOX : ∀ (W : X.Opens) (q : ℕ),\n      (((etaleSectionFunctor (Scheme.Etale.mk W.ι)).mapHomologicalComplex (.up ℕ)).obj\n        I.cocomplex).homology q ≃+\n          Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj G) q)\n    (eY : ∀ q : ℕ,\n      (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 Y))).mapHomologicalComplex (.up ℕ)).obj\n        J.cocomplex).homology q ≃+\n          Sheaf.H ((upperStar AddCommGrpCat.{u + 1} g).obj G) q)\n    (eOY : ∀ (W : Y.Opens) (q : ℕ),\n      (((etaleSectionFunctor (Scheme.Etale.mk W.ι)).mapHomologicalComplex (.up ℕ)).obj\n        J.cocomplex).homology q ≃+\n          Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj\n            ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q)\n    : (∀ W q x, eOX W q (HomologicalComplex.homologyMap (etaleSectionMap\n      (MorphismProperty.Over.homMk W.ι (Category.comp_id _) :\n        Scheme.Etale.mk W.ι ⟶ Scheme.Etale.mk (𝟙 X)) I.cocomplex) q x) =\n      cohomologyMap W.ι G q (eX q x)) ∧\n    (∀ (A B : X.Opens) (h : A ≤ B) q x,\n      eOX A q (HomologicalComplex.homologyMap (etaleSectionMap\n        (MorphismProperty.Over.homMk (X.homOfLE h) (X.homOfLE_ι _) :\n          Scheme.Etale.mk A.ι ⟶ Scheme.Etale.mk B.ι) I.cocomplex) q x) =\n        openCohomologyRestriction h G q (eOX B q x)) ∧\n    (∀ W q x, eOY W q (HomologicalComplex.homologyMap (etaleSectionMap\n      (MorphismProperty.Over.homMk W.ι (Category.comp_id _) :\n        Scheme.Etale.mk W.ι ⟶ Scheme.Etale.mk (𝟙 Y)) J.cocomplex) q x) =\n      cohomologyMap W.ι ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eY q x)) ∧\n    (∀ (A B : Y.Opens) (h : A ≤ B) q x,\n      eOY A q (HomologicalComplex.homologyMap (etaleSectionMap\n        (MorphismProperty.Over.homMk (Y.homOfLE h) (Y.homOfLE_ι _) :\n          Scheme.Etale.mk A.ι ⟶ Scheme.Etale.mk B.ι) J.cocomplex) q x) =\n        openCohomologyRestriction h ((upperStar AddCommGrpCat.{u + 1} g).obj G) q\n          (eOY B q x)) ∧\n    (∀ q x, eY q (HomologicalComplex.homologyMap\n      (globalResolutionSectionTransfer g I.cocomplex J.cocomplex α) q x) =\n      cohomologyMap g G q (eX q x)) ∧\n    (∀ W q x, eOY (g ⁻¹ᵁ W) q (HomologicalComplex.homologyMap\n      (openResolutionSectionTransfer g I.cocomplex J.cocomplex α W) q x) =\n      openCohomologyPullback g W G q (eOX W q x)) "
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T160823-L-2609539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T160823-L-2609539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

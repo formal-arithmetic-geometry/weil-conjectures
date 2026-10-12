@@ -1,0 +1,107 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-resolution-section-homology",
+   "place": "The target proof split below the unit into construction and compatibility components.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-etale-resolution-section-homology-data",
+ "kind": "statement",
+ "title": "Underlying resolution section homology equivalences",
+ "statement": "For a scheme morphism g, an abelian étale sheaf G, injective resolutions I and J, and an augmentation-preserving cochain map α, there exist degreewise additive equivalences from the global and every open resolution-section homology complex to the corresponding sheaf cohomology groups. The statement records no compatibility identities beyond the four equivalence families.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof (resolution sections)."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct the four degreewise comparisons by identifying the Hom complexes computing Ext with sections of the prescribed injective resolutions, including each open localization.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, resolution-section comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective resolution section homology Ext additive equivalence",
+   "results": "No exact declaration for the fixed scheme section comparison.",
+   "verdict": "No exact match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution homology section Ext equivalence",
+   "results": "No exact declaration found.",
+   "verdict": "No exact match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etaleSectionFunctor homology equivalence in Mathlib and lean/",
+   "results": "Existing APIs construct section complexes but do not provide this simultaneous comparison.",
+   "verdict": "No duplicate.",
+   "date": "2026-10-12"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyData",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionHomologyData.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_resolutionSection_homology_data",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12",
+  "statement": "theorem exists_resolutionSection_homology_data\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution G)\n    (J : InjectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G))\n    (α : I.cocomplex ⟶\n      ((lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℕ)).obj J.cocomplex)\n    (hα : I.ι.f 0 ≫ α.f 0 =\n      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app G ≫\n        (lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0)) :\n    ∃ eX : ∀ q : ℕ,\n      (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 X))).mapHomologicalComplex (.up ℕ)).obj\n        I.cocomplex).homology q ≃+ Sheaf.H G q,\n    ∃ eOX : ∀ (W : X.Opens) (q : ℕ),\n      (((etaleSectionFunctor (Scheme.Etale.mk W.ι)).mapHomologicalComplex (.up ℕ)).obj\n        I.cocomplex).homology q ≃+\n          Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj G) q,\n    ∃ eY : ∀ q : ℕ,\n      (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 Y))).mapHomologicalComplex (.up ℕ)).obj\n        J.cocomplex).homology q ≃+\n          Sheaf.H ((upperStar AddCommGrpCat.{u + 1} g).obj G) q,\n    ∃ eOY : ∀ (W : Y.Opens) (q : ℕ),\n      (((etaleSectionFunctor (Scheme.Etale.mk W.ι)).mapHomologicalComplex (.up ℕ)).obj\n        J.cocomplex).homology q ≃+\n          Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj\n            ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q, True"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T160823-L-2609539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T160823-L-2609539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
