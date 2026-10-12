@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Finite.Exact
@@ -72,6 +73,22 @@ theorem HasConstructibleDirectImages.of_comp_of_isFinite_of_isConstructibleSheaf
   exact ⟨_, _, mono_unit_app_of_surjective Λ π hπ Q, hc _ hG,
     (Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S).prop_of_iso
       (rightDerivedLowerStarSingleLowerStarIso π f _).symm (h _ hG)⟩
+
+/-- Blueprint `lem-finrepair-finite-surjection-cancellation`: Constructibility descends through
+a finite surjection.
+
+Let `f : X ⟶ S` be a morphism with `X` of finite type over a field `k`, and let `π : Y ⟶ X` be
+finite and surjective. If `𝒞(π ≫ f)` holds, then `𝒞(f)` holds. Here `Λ` is a finite ring. The
+blueprint assumes `S` of finite type over `k` as well; this is not needed. -/
+theorem HasConstructibleDirectImages.of_comp_of_isFinite {k : Type u} [Field k]
+    {X Y S : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    (f : X ⟶ S) (π : Y ⟶ X) [IsFinite π] [Surjective π]
+    (h : HasConstructibleDirectImages Λ (π ≫ f)) : HasConstructibleDirectImages Λ f := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := {}
+  exact of_comp_of_isFinite_of_isConstructibleSheaf f π π.surjective
+    (fun G _ ↦ Scheme.IsConstructibleSheaf.lowerStar_of_isFinite π G) h
 
 end Etale
 
