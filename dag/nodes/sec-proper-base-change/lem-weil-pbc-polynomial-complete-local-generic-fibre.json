@@ -1,117 +1,151 @@
 {
- "id": "lem-weil-pbc-polynomial-complete-local-generic-fibre",
- "kind": "statement",
- "title": "Generic polynomial formal fibres over complete local domains",
- "statement": "Let $A$ be a Noetherian complete local domain [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring], and $q$ a maximal ideal of $A[x]$ [def-weil-polynomial-ring] contracting to the maximal ideal of $A$. The generic formal fibre $\\kappa(0)\\otimes_{A[x]}(A[x]_q)^\\wedge$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion] is geometrically regular over $\\kappa(0)$ [def-weil-pbc-g-ring].",
- "source": {
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proof of Proposition 07PV, paragraphs 3--5, restricted to the zero prime; uses 032D, 07PP(1), 07NF, 07NY, 07PR."
- },
- "stmt_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-adically-complete-ring",
-  "def-weil-pbc-adic-completion",
-  "def-weil-polynomial-ring",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-g-ring"
- ],
- "proof": [
-  {
-   "text": "Polynomial localization is Noetherian. Apply the adic-completion Noetherian theorem and the proved Noetherian fibre theorem. Combine this with the remaining regularity-after-finite-purely-inseparable-extension component using the definition of geometric regularity.",
-   "uses": [
+  "id": "lem-weil-pbc-polynomial-complete-local-generic-fibre",
+  "kind": "statement",
+  "title": "Generic polynomial formal fibres over complete local domains",
+  "statement": "Let $A$ be a Noetherian complete local domain [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring], and $q$ a maximal ideal of $A[x]$ [def-weil-polynomial-ring] contracting to the maximal ideal of $A$. The generic formal fibre $\\kappa(0)\\otimes_{A[x]}(A[x]_q)^\\wedge$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion] is geometrically regular over $\\kappa(0)$ [def-weil-pbc-g-ring].",
+  "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proof of Proposition 07PV, paragraphs 3--5, restricted to the zero prime; uses 032D, 07PP(1), 07NF, 07NY, 07PR."
+  },
+  "stmt_deps": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-adic-completion",
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-g-ring"
+  ],
+  "proof": [
+    {
+      "text": "1. Choose a regular complete local subring A₀ of A with A finite over A₀, by 032D.\n   The polynomial extension is finite too. The contraction q₀ of q is maximal and\n   lies over the maximal ideal of A₀: finite integral extensions contract maximal\n   ideals to maximal ideals. The finite polynomial map is quasi-finite at q.",
+      "uses": [
+        "lem-weil-pbc-complete-local-domain-finite-over-regular",
+        "lem-weil-pbc-finite-algebra-is-integral",
+        "pqf-def-quasifinite"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "2. Apply 07PP(1) to the zero primes of A₀[X] and A[X]; injectivity gives contraction\n   zero. It reduces this fibre to the generic formal fibre for A₀ at q₀.",
+      "uses": [
+        "lem-weil-pbc-formal-fibre-quasi-finite-ascent"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "3. A₀[X] is regular by smooth ascent (07NF). Its local ring at q₀ and its completion\n   are regular, by regular local localization and completion regularity (07NY).\n   Its generic fibre is a localization of that completion, so is regular and\n   Noetherian. In characteristic zero, finite purely inseparable field extensions\n   are trivial, giving geometric regularity.",
+      "uses": [
+        "lem-weil-pbc-regular-ring-smooth-ascent",
+        "lem-weil-pbc-regular-local-localization",
+        "lem-weil-pbc-completion-regular-local",
+        "lem-weil-pbc-adic-completion-noetherian",
+        "def-weil-pbc-finite-purely-inseparable-extension"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "4. In positive characteristic the coefficient subring cannot be a power series\n   ring over a Cohen ring, whose nonzero prime-number uniformizer forces\n   characteristic zero. Thus A₀ is a finite-variable power series ring over a field.\n   Apply 07PR with one polynomial variable, and transport the result along the\n   coefficient and univariate/multivariate polynomial isomorphisms. Then 07PP(1)\n   gives the original generic fibre. This covers both characteristics.",
+      "uses": [
+        "lem-weil-pbc-helper-g-ring-char-p",
+        "def-weil-pbc-g-ring"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-completion-regular-local",
     "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-fibre-ring-noetherian",
-    "lem-weil-pbc-polynomial-complete-local-generic-fibre-regular-part"
-   ],
-   "elementary": false
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-helper-g-ring-char-p",
+    "def-weil-pbc-g-ring"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Proof of Proposition 07PV, paragraphs 3--5, restricted to the zero prime; uses 032D, 07PP(1), 07NF, 07NY, 07PR."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "generic formal fibre of a polynomial ring over a complete local Noetherian domain is geometrically regular",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "AdicCompletion, Polynomial",
+      "results": "No hits.",
+      "date": "2026-10-12",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "formal.?fib|geometrically.?regular",
+      "results": "No hits.",
+      "date": "2026-10-12",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres",
+    "date": "2026-10-12",
+    "group": "P1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-etale-lifting",
+      "place": "Proof of Proposition 07PV, paragraphs 3--5, restricted to the zero prime; uses 032D, 07PP(1), 07NF, 07NY, 07PR.",
+      "via": [
+        "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+        "lem-weil-pbc-finite-type-over-g-ring",
+        "lem-weil-pbc-finite-type-z-g-ring",
+        "lem-weil-pbc-finite-etale-lifting-limit-descent",
+        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre",
+    "file": "lean/Sheaf/RingTheory/PolynomialCompleteLocalGenericFibre.lean",
+    "declaration": "Polynomial.completeLocalGenericFibre",
+    "statement": "theorem completeLocalGenericFibre\n    (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]\n    [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\n    (q : Ideal (Polynomial A)) [q.IsMaximal]\n    (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) :\n    Algebra.IsGeometricallyRegular (⊥ : Ideal (Polynomial A)).ResidueField\n      ((⊥ : Ideal (Polynomial A)).Fiber\n        (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n          (Localization.AtPrime q)))",
+    "branch": "sheaf-dag",
+    "by": "P1",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "P1",
+    "result": "pass",
+    "landing": "20261012T095917-L-322327",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "P1",
+    "result": "pass",
+    "landing": "20261012T095917-L-322327",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-fibre-ring-noetherian",
-  "lem-weil-pbc-polynomial-complete-local-generic-fibre-regular-part"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "K3",
-  "date": "2026-10-12",
-  "note": "Proved Noetherian component from existing library declarations; regularity component remains a split obligation following Stacks 07PV."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "generic formal fibre of a polynomial ring over a complete local Noetherian domain is geometrically regular",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "AdicCompletion, Polynomial",
-   "results": "No hits.",
-   "date": "2026-10-12",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "formal.?fib|geometrically.?regular",
-   "results": "No hits.",
-   "date": "2026-10-12",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres",
-  "date": "2026-10-12",
-  "group": "P1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "Proof of Proposition 07PV, paragraphs 3--5, restricted to the zero prime; uses 032D, 07PP(1), 07NF, 07NY, 07PR.",
-   "via": [
-    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
-    "lem-weil-pbc-finite-type-over-g-ring",
-    "lem-weil-pbc-finite-type-z-g-ring",
-    "lem-weil-pbc-finite-etale-lifting-limit-descent",
-    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre",
-  "file": "lean/Sheaf/RingTheory/PolynomialCompleteLocalGenericFibre.lean",
-  "declaration": "Polynomial.completeLocalGenericFibre",
-  "statement": "theorem completeLocalGenericFibre\n    (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]\n    [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\n    (q : Ideal (Polynomial A)) [q.IsMaximal]\n    (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) :\n    Algebra.IsGeometricallyRegular (⊥ : Ideal (Polynomial A)).ResidueField\n      ((⊥ : Ideal (Polynomial A)).Fiber\n        (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n          (Localization.AtPrime q)))",
-  "branch": "sheaf-dag",
-  "by": "P1",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261012T095917-L-322327",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K3",
-  "result": "pass",
-  "landing": "20261012T125027-L-1204004",
-  "kind": "interface"
- }
 }

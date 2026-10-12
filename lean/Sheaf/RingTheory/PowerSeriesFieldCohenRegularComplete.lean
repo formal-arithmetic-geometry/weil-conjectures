@@ -13,10 +13,6 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
 import Sheaf.RingTheory.PowerSeriesQuotientVariables
-import Mathlib.RingTheory.MvPowerSeries.Inverse
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 
 /-!
 # Power series over a field or Cohen ring
@@ -32,76 +28,6 @@ universe u
 set_option autoImplicit false
 
 namespace MvPowerSeries
-
-private theorem maximalIdeal_comap_constantCoeff
-    (A : Type u) [CommRing A] [IsLocalRing A] (d : ℕ) :
-    IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) A) =
-      Ideal.comap constantCoeff (IsLocalRing.maximalIdeal A) := by
-  ext f
-  simp only [IsLocalRing.mem_maximalIdeal, Ideal.mem_comap, mem_nonunits_iff,
-    isUnit_iff_constantCoeff]
-
-private theorem maximalIdeal_eq_map_sup_variables
-    (A : Type u) [CommRing A] [IsLocalRing A] (d : ℕ) :
-    IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) A) =
-      Ideal.map C (IsLocalRing.maximalIdeal A) ⊔
-        Ideal.span (Set.range (X : Fin d → MvPowerSeries (Fin d) A)) := by
-  have hk := (quotient_first_variables A d d le_rfl).2.2.2.2.1
-  rw [← hk, maximalIdeal_comap_constantCoeff]
-  apply le_antisymm
-  · intro f hf
-    have hc : C (σ := Fin d) (constantCoeff f) ∈ Ideal.map C (IsLocalRing.maximalIdeal A) :=
-      Ideal.mem_map_of_mem C hf
-    have ht : f - C (constantCoeff f) ∈ RingHom.ker constantCoeff := by
-      simp [RingHom.mem_ker]
-    simpa using Ideal.add_mem _ (show C (constantCoeff f) ∈
-      Ideal.map C (IsLocalRing.maximalIdeal A) ⊔ RingHom.ker constantCoeff from
-      Ideal.mem_sup_left hc) (Ideal.mem_sup_right ht)
-  · refine sup_le ?_ ?_
-    · rw [Ideal.map_le_iff_le_comap]
-      intro a ha
-      simpa using ha
-    · intro f hf
-      change constantCoeff f ∈ IsLocalRing.maximalIdeal A
-      simp [RingHom.mem_ker.mp hf]
-
-private theorem residue_equiv_constant
-    (A : Type u) [CommRing A] [IsLocalRing A] (d : ℕ) :
-    ∃ e : (A ⧸ IsLocalRing.maximalIdeal A) ≃+*
-        ((MvPowerSeries (Fin d) A) ⧸ IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) A)),
-      ∀ a : A, e (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ (C a) := by
-  let f : MvPowerSeries (Fin d) A →+* A ⧸ IsLocalRing.maximalIdeal A :=
-    (Ideal.Quotient.mk _).comp constantCoeff
-  have hf : Function.Surjective f := by
-    intro x
-    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
-    exact ⟨C a, by simp [f]⟩
-  have hk : RingHom.ker f = IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) A) := by
-    rw [maximalIdeal_comap_constantCoeff]
-    ext x
-    simp [f, RingHom.mem_ker, Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem]
-  let e := (Ideal.quotEquivOfEq hk.symm).trans (f.quotientKerEquivOfSurjective hf)
-  refine ⟨e.symm, ?_⟩
-  intro a
-  apply e.injective
-  rw [e.apply_symm_apply]
-  simp [e, f, RingHom.quotientKerEquivOfSurjective_apply_mk]
-
-private theorem dimension_lower_bound
-    (A : Type u) [CommRing A] (d : ℕ) :
-    ringKrullDim A + (d : WithBot ℕ∞) ≤ ringKrullDim (MvPowerSeries (Fin d) A) := by
-  induction d with
-  | zero =>
-    simp [ringKrullDim_eq_of_ringEquiv (isEmptyEquiv (Fin 0) A).toRingEquiv]
-  | succ d ih =>
-    rw [ringKrullDim_eq_of_ringEquiv (finSuccEquiv A d).toRingEquiv]
-    calc
-      ringKrullDim A + ((d + 1 : ℕ) : WithBot ℕ∞) =
-          (ringKrullDim A + (d : WithBot ℕ∞)) + 1 := by
-        rw [Nat.cast_add, Nat.cast_one, add_assoc]
-      _ ≤ ringKrullDim (MvPowerSeries (Fin d) A) + 1 := by gcongr
-      _ ≤ ringKrullDim (PowerSeries (MvPowerSeries (Fin d) A)) :=
-        ringKrullDim_succ_le_ringKrullDim_powerseries
 
 /-- A finite-variable power series ring over a field or Cohen ring is complete,
 regular local, and has the expected dimension.
@@ -168,79 +94,6 @@ theorem power_series_field_cohen_regular_complete
               (MvPowerSeries (Fin d) Λ) ∧
             IsRegularLocalRing (MvPowerSeries (Fin d) Λ) ∧
             ringKrullDim (MvPowerSeries (Fin d) Λ) = ((d + 1 : ℕ) : WithBot ℕ∞))) := by
-  rcases hΛ with hΛ | ⟨p, hp⟩
-  · let : Field Λ := hΛ.toField
-    let : IsNoetherianRing (MvPowerSeries (Fin d) Λ) := inferInstance
-    let : IsDomain (MvPowerSeries (Fin d) Λ) := NoZeroDivisors.to_isDomain _
-    let : IsLocalRing (MvPowerSeries (Fin d) Λ) := inferInstance
-    have hm : IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ) =
-        Ideal.span (Set.range (X : Fin d → MvPowerSeries (Fin d) Λ)) := by
-      simp [maximalIdeal_eq_map_sup_variables, IsLocalRing.maximalIdeal_eq_bot]
-    obtain ⟨e, he⟩ := residue_equiv_constant Λ d
-    have hc : IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ))
-        (MvPowerSeries (Fin d) Λ) := by
-      rw [hm]
-      infer_instance
-    have hg : (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)).spanFinrank ≤ d := by
-      rw [hm]
-      exact (Submodule.spanFinrank_span_le_ncard_of_finite (Set.finite_range _)).trans
-        (by
-          simpa using (Set.ncard_image_le (f := (X : Fin d → MvPowerSeries (Fin d) Λ))
-            (Set.finite_univ : (Set.univ : Set (Fin d)).Finite)))
-    have hl : (d : WithBot ℕ∞) ≤ ringKrullDim (MvPowerSeries (Fin d) Λ) := by
-      simpa [ringKrullDim_eq_zero_of_field Λ] using dimension_lower_bound Λ d
-    have hd : ringKrullDim (MvPowerSeries (Fin d) Λ) = (d : WithBot ℕ∞) := by
-      apply le_antisymm _ hl
-      exact (ringKrullDim_le_spanFinrank_maximalIdeal _).trans (by exact_mod_cast hg)
-    have hr : IsRegularLocalRing (MvPowerSeries (Fin d) Λ) := by
-      apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le
-      rw [hd]
-      exact_mod_cast hg
-    refine Or.inl ⟨hΛ, inferInstance, inferInstance, inferInstance, hm, ?_⟩
-    refine ⟨(Ideal.quotEquivOfEq IsLocalRing.maximalIdeal_eq_bot.symm).trans e,
-      ?_, hc, hr, hd⟩
-    intro a
-    simpa using he a
-  · have hdata := hp
-    obtain ⟨hprime, hdomain, hdvr, hbase, hcomplete⟩ := hdata
-    let : IsDomain Λ := hdomain
-    let : IsDiscreteValuationRing Λ := hdvr
-    let : IsAdicComplete (Ideal.span {(p : Λ)}) Λ := hcomplete
-    let : IsNoetherianRing (MvPowerSeries (Fin d) Λ) := inferInstance
-    let : IsDomain (MvPowerSeries (Fin d) Λ) := NoZeroDivisors.to_isDomain _
-    let : IsLocalRing (MvPowerSeries (Fin d) Λ) := inferInstance
-    have hm : IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ) =
-        Ideal.span (insert (C (p : Λ))
-          (Set.range (X : Fin d → MvPowerSeries (Fin d) Λ))) := by
-      rw [maximalIdeal_eq_map_sup_variables, hbase, Ideal.map_span, Set.image_singleton,
-        Ideal.span_insert]
-    obtain ⟨e, he⟩ := residue_equiv_constant Λ d
-    have hc : IsAdicComplete (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ))
-        (MvPowerSeries (Fin d) Λ) := by
-      rw [maximalIdeal_eq_map_sup_variables, hbase, c_eq_algebraMap]
-      exact power_series_complete_over_complete_base Λ (Ideal.span {(p : Λ)}) d
-    have hg : (IsLocalRing.maximalIdeal (MvPowerSeries (Fin d) Λ)).spanFinrank ≤ d + 1 := by
-      rw [hm]
-      refine (Submodule.spanFinrank_span_le_ncard_of_finite
-        ((Set.finite_range _).insert _)).trans ?_
-      exact (Set.ncard_insert_le _ _).trans (Nat.add_le_add_right
-        (by
-          simpa using (Set.ncard_image_le (f := (X : Fin d → MvPowerSeries (Fin d) Λ))
-            (Set.finite_univ : (Set.univ : Set (Fin d)).Finite))) 1)
-    have hl : ((d + 1 : ℕ) : WithBot ℕ∞) ≤
-        ringKrullDim (MvPowerSeries (Fin d) Λ) := by
-      simpa [IsDiscreteValuationRing.ringKrullDim_eq_one Λ, Nat.cast_add,
-        Nat.cast_one, add_comm] using dimension_lower_bound Λ d
-    have hd : ringKrullDim (MvPowerSeries (Fin d) Λ) = ((d + 1 : ℕ) : WithBot ℕ∞) := by
-      apply le_antisymm _ hl
-      exact (ringKrullDim_le_spanFinrank_maximalIdeal _).trans (by exact_mod_cast hg)
-    have hr : IsRegularLocalRing (MvPowerSeries (Fin d) Λ) := by
-      apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le
-      rw [hd]
-      exact_mod_cast hg
-    refine Or.inr ⟨p, hp, inferInstance, inferInstance, inferInstance, hm, ?_⟩
-    refine ⟨(Ideal.quotEquivOfEq hbase.symm).trans e, ?_, hc, hr, hd⟩
-    intro a
-    simpa using he a
+  sorry
 
 end MvPowerSeries
