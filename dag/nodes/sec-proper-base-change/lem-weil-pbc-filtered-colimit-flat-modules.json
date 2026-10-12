@@ -28,50 +28,33 @@
  ],
  "proof": [
   {
-   "text": "Let $u:N_1\\to N_2$ be an injective $R$-linear map. By [def-weil-pbc-flat-ring-map] we must show that $u\\otimes1_M:N_1\\otimes_RM\\to N_2\\otimes_RM$ is injective. Composing with the canonical isomorphisms $N_k\\otimes_RM\\cong M\\otimes_RN_k$, $n\\otimes m\\mapsto m\\otimes n$, which commute with $u\\otimes1$ and $1\\otimes u$, it is equivalent to show that $1_M\\otimes u:M\\otimes_RN_1\\to M\\otimes_RN_2$ is injective; likewise, for each $i$, flatness of $M_i$ says that $f_i:=1_{M_i}\\otimes u:M_i\\otimes_RN_1\\to M_i\\otimes_RN_2$ is injective.",
+   "text": "Raise the module universe from v to max(u,v) using ModuleCat.uliftFunctor. This functor preserves these filtered colimits: compose with the forgetful functor to types, use preservation of filtered colimits by the module forgetful functor and preservation of all colimits by the type ULift functor, and reflect colimits using the larger module forgetful functor. Restrict scalars along ULift.ringEquiv : ULift R ≃+* R, an equivalence of module categories preserving colimits. Reindex along the equivalence AsSmall I -> I, making the index category small in max(u,v). This gives a colimit presentation P of ULift(colimit F) over ULift R in the same universe.",
    "uses": [
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660, with Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, line 1934) and Lemma 10.8.8 (Tag 00DB, lemma-directed-colimit-exact, line 908)"
-   }
-  },
-  {
-   "text": "Put $P_i=M_i\\otimes_RN_1$ and $Q_i=M_i\\otimes_RN_2$, functors of $i$ with transition maps $M(a)\\otimes1$. By [lem-weil-pbc-tensor-commutes-with-colimits] (applied with $N=N_1$ and with $N=N_2$), $M\\otimes_RN_1$ with the maps $p_i=\\mu_i\\otimes1:P_i\\to M\\otimes_RN_1$ is a colimit of $(P_i)$, and $M\\otimes_RN_2$ with $q_i=\\mu_i\\otimes1:Q_i\\to M\\otimes_RN_2$ is a colimit of $(Q_i)$ in the category of $R$-modules [def-weil-pbc-category-colimit]. The maps $f_i$ form a morphism of diagrams: $f_j\\circ(M(a)\\otimes1)=M(a)\\otimes u=(M(a)\\otimes1)\\circ f_i$ for $a:i\\to j$, checked on pure tensors; and $f:=1_M\\otimes u$ satisfies $f\\circ p_i=\\mu_i\\otimes u=q_i\\circ f_i$ for all $i$.",
-   "uses": [
-    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-flat-ring-map",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660, with Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, line 1934) and Lemma 10.8.8 (Tag 00DB, lemma-directed-colimit-exact, line 908)"
-   }
+   "elementary": true
   },
   {
-   "text": "$f$ is injective (directed/filtered colimits are exact, Tag 00DB, in the case of a left-exact sequence $0\\to P_i\\to Q_i$). Let $x\\in M\\otimes_RN_1$ with $f(x)=0$. Since $I$ is filtered, by [lem-weil-pbc-filtered-colimit-modules-elementwise](1) applied to the colimit $(M\\otimes_RN_1,(p_i))$ of step 2, $x=p_i(y)$ for some $i$ and $y\\in P_i$. Then $0=f(p_i(y))=q_i(f_i(y))$, so by [lem-weil-pbc-filtered-colimit-modules-elementwise](2) (the case $\\iota_i(x)=0$) applied to the colimit $(M\\otimes_RN_2,(q_i))$ there is a morphism $a:i\\to k$ with $(M(a)\\otimes1)(f_i(y))=0$, i.e. $f_k((M(a)\\otimes1)(y))=0$ by the naturality of step 2. As $f_k$ is injective (step 1), $(M(a)\\otimes1)(y)=0$, hence $x=p_i(y)=p_k((M(a)\\otimes1)(y))=0$. So $1_M\\otimes u$ is injective, and by step 1 $M$ is flat.",
+   "text": "Each lifted stage is flat over the lifted ring by Module.Flat.ulift_left_iff and the flatness instance for ULift of a module. Apply [lem-weil-pbc-flat-colimit-presentation-same-universe] to P. Transfer the conclusion back first across the ring lift by Module.Flat.ulift_left_iff, then across the module lift by Module.Flat.ulift_right_iff. This proves the original statement with both universes unchanged.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+    "lem-weil-pbc-flat-colimit-presentation-same-universe",
+    "def-weil-pbc-flat-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660, with Lemma 10.12.9 (Tag 00DD, lemma-tensor-products-commute-with-limits, line 1934) and Lemma 10.8.8 (Tag 00DB, lemma-directed-colimit-exact, line 908)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-tensor-commutes-with-colimits",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+  "lem-weil-pbc-flat-colimit-presentation-same-universe"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 10.39.3 (Tag 05UT, lemma-colimit-flat), line 8660; the exactness step written out after the proof of Lemma 10.8.8 (Tag 00DB), stated in the DAG for filtered index categories"
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-12",
+  "document": "lean/WeilConjectures/RingTheory/ProEtale/FaithfullyFlat.lean",
+  "place": "ModuleCat.flat_of_colimitPresentation, lines 57-81; universe lifting written by V3 using Mathlib ModuleCat.Ulift, ChangeOfRings, Limits.Preserves.Ulift and Flat.Stability"
  },
  "mathlib_searches": [
   {
@@ -176,5 +159,15 @@
   "group": "H1",
   "result": "fix",
   "note": "CommRing R; small filtered I (IsFiltered incl. nonempty); F : I ⥤ ModuleCat R; colimit as [HasColimit F]/colimit F per FILTERED COLIMITS convention (was explicit Cocone+IsColimit, FIX); hflat ∀ i Module.Flat; conclusion Module.Flat R (colimit F); no Mathlib lemma (grep Flat/directLimit/colimit), existing:false kept"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085354-L-45694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

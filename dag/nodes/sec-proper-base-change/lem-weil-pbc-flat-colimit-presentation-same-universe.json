@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-flat-colimit-presentation-same-universe",
+ "kind": "statement",
+ "title": "Flatness from a same-universe filtered colimit presentation",
+ "statement": "Let R be a commutative ring in Type w, J a small filtered category in Type w, M an object of ModuleCat.{w} R, and P a colimit presentation of M indexed by J. If every P.diag.obj j is flat over R [def-weil-pbc-flat-ring-map], then M is flat over R. A colimit presentation is a diagram with a cocone of vertex M whose cocone is a colimit [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "lean/WeilConjectures/RingTheory/ProEtale/FaithfullyFlat.lean",
+  "place": "ModuleCat.flat_of_colimitPresentation, lines 57-81; existing proof of Stacks 05UT by exactness of filtered colimits"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Use Module.Flat.iff_lTensor_preserves_shortComplex_exact. For an exact short complex C, form the short complex of J-diagrams whose three terms are pres.diag tensor C.X_k. The arrows are obtained by whiskering the curried tensor functor maps of C.f and C.g. Their composite is zero by C.zero and functoriality. Evaluation at each j is exact by Module.Flat.lTensor_shortComplex_exact and the given flatness hypothesis. The diagram short complex is exact by ShortComplex.exact_iff_evaluation.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensoring on the right preserves the three colimit cocones of pres by [lem-weil-pbc-tensor-commutes-with-colimits]. Apply Mathlib CategoryTheory.Limits.colim.exact_mapShortComplex using exactness of filtered colimits in ModuleCat (ModuleCat.AB). The compatibility equations are the whisker_exchange identities. Thus tensoring C on the left with M is exact, which gives flatness. The cited existing Lean declaration is already completely proved, with no sorry.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "library",
+  "document": "lean/WeilConjectures/RingTheory/ProEtale/FaithfullyFlat.lean",
+  "place": "ModuleCat.flat_of_colimitPresentation, lines 57-81"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a colimit presentation by flat modules is flat",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of flat modules is flat",
+   "results": "Filtered module colimit construction and direct-sum flatness only.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.flat_of_colimitPresentation",
+   "results": "Unknown identifier in Mathlib; theorem found in the source library.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg colimit|filter Mathlib/RingTheory/Flat/*.lean; rg flat_of_colimitPresentation lean/WeilConjectures",
+   "results": "No flatness theorem for filtered colimits in Mathlib. Existing completely proved same-universe theorem in WeilConjectures.RingTheory.ProEtale.FaithfullyFlat. Blueprint search filtered colimit flat returned zero matches; no DAG node records flat_of_colimitPresentation.",
+   "date": "2026-10-12",
+   "verdict": "source library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-weil-pbc-henselization-flat-quotients",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.ProEtale.FaithfullyFlat",
+  "declaration": "ModuleCat.flat_of_colimitPresentation",
+  "statement": "lemma flat_of_colimitPresentation {R : Type u} [CommRing R] {M : ModuleCat.{u} R} {J : Type u} [SmallCategory J] [IsFiltered J] (pres : ColimitPresentation J M) (h : ∀ j, Module.Flat R (pres.diag.obj j)) : Module.Flat R M",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "ModuleCat.flat_of_colimitPresentation"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085354-L-45694",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085354-L-45694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
