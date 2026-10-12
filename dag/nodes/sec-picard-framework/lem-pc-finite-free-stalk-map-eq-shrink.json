@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-finite-free-stalk-map-eq-shrink",
+ "kind": "statement",
+ "title": "Equality of sheaf maps with finite free source near a stalk",
+ "statement": "Let Y be a scheme [def-pc-scheme], r a natural number, y∈V an open neighbourhood, and M,N sheaves of modules on V [def-weil-sheaf-of-modules-category]. Suppose M is isomorphic to the restriction to V of the free rank-r module on Y [def-weil-pbc-free-module]. If maps f,g:M→N become equal after module pullback [def-pc-module-pullback] along V.fromSpecStalkOfMem y hyV, then for every open U≤V containing y there is an open W≤U containing y such that the direct restrictions of f,g from V to W are equal.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "finite matrix germ argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The source isomorphism supplies r generating sections on V, carried to generators by restriction. Apply the natural pullback stalk comparison at the closed point of Spec O_{Y,y}; the local ring map there is an isomorphism. Hence equality of pullback maps implies equality of the germs in N of the two images of each generator. The comparison applies to the Mathlib pullback by the canonical isomorphism between left adjoints of the same pushforward.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the germ equality criterion to the two images of each of the finitely many generators and intersect the resulting opens with U. Both maps agree on the restricted generators and hence everywhere. For r=0 take W=U.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Finite-generator equality portion of the finite germ argument; complex and homotopy reduction proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms of sheaves of modules with finitely generated free source equal on the stalk agree on a neighborhood",
+   "results": "Eight hits: hom_ext_iff (equality on every open), generating-section data and sheafification local injectivity. None gives equality near one point.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.germ, _ = _",
+   "results": "12 hits, including exists_germ_eq (representation) and germ_res (naturality). Local source inspection finds germ_eq, the elementwise ingredient, not the required morphism statement.",
+   "date": "2026-10-13",
+   "verdict": "partial ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(eq|zero)|germ|stalk in Mathlib/AlgebraicGeometry/Modules, lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules, and lean/Sheaf/AlgebraicGeometry",
+   "results": "Found restrictStalkNatIso, germ_eq, free_hom_ext and TensorPullbackStalk comparison. No same local-equality theorem. The old helper in this sandbox was discarded as a restatement of the complex-level problem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphisms from a finite free sheaf equal at one stalk agree on a neighborhood",
+   "results": "UNAVAILABLE: Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-stalk-homotopy-q-inside",
+   "place": "Finite-generator sheaf-map equality, strictly below the single-complex homotopy reduction"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkMapEquality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_eq_of_pullback_eq",
+  "statement": "theorem exists_restrict_eq_of_pullback_eq\n    {Y : Scheme.{u}} (r : ℕ) (y : Y) (V : Y.Opens) (hyV : y ∈ V)\n    (M N : V.toScheme.Modules)\n    (hM : Nonempty (M ≅ (restrictFunctor V.ι).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r)))))\n    (f g : M ⟶ N)\n    (hfg : (Modules.pullback (V.fromSpecStalkOfMem y hyV)).map f =\n      (Modules.pullback (V.fromSpecStalkOfMem y hyV)).map g)\n    (U : Y.Opens) (hUV : U ≤ V) (hyU : y ∈ U) :\n    ∃ (W : Y.Opens) (hWU : W ≤ U), y ∈ W ∧\n      (restrictFunctor (Y.homOfLE (hWU.trans hUV))).map f =\n      (restrictFunctor (Y.homOfLE (hWU.trans hUV))).map g",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "state": "none"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2fe15",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T205158-L-906519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2fe15",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T205158-L-906519",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures and proofs with both DAG nodes; both delivered modules and the sole direct importer FiniteFreeStalkHomotopyPairShrink compile cleanly; axioms are the permitted three plus sorryAx from the documented lower lemma."
+ }
+}

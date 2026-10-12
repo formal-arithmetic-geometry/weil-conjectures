@@ -5,11 +5,12 @@ Authors: SHEAF group U1
 -/
 module
 
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.AlgebraicGeometry.Stalk
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Shrinking equality for a single finite free complex
 
@@ -63,7 +64,25 @@ theorem exists_shrink_homotopy_Q_inside_of_stalk
       Nonempty (Homotopy
         (((restrictFunctor (Y.homOfLE (hWU.trans hUV))).mapHomologicalComplex _).map c)
         (((restrictFunctor (Y.homOfLE (hWU.trans hUV))).mapHomologicalComplex _).map e)) := by
-  sorry
+  obtain ⟨h⟩ := hQ
+  have hi : (Modules.pullback (V.fromSpecStalkOfMem y hyV)).map (c.f i) =
+      (Modules.pullback (V.fromSpecStalkOfMem y hyV)).map (e.f i) := by
+    simpa [dNext, prevD,
+      Functor.mapHomologicalComplex, HomologicalComplex.single_obj_d] using h.comm i
+  obtain ⟨W, hWU, hyW, heq⟩ := exists_restrict_eq_of_pullback_eq
+    r y V hyV _ _
+    ⟨(restrictFunctor V.ι).mapIso
+      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) i _)⟩
+    (c.f i) (e.f i) hi U hUV hyU
+  refine ⟨W, hWU, hyW, ⟨Homotopy.ofEq ?_⟩⟩
+  apply HomologicalComplex.hom_ext
+  intro n
+  by_cases hn : n = i
+  · subst n
+    exact heq
+  · exact ((restrictFunctor (Y.homOfLE (hWU.trans hUV))).map_isZero
+      ((restrictFunctor V.ι).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) i _ n hn))).eq_of_src _ _
 
 
 end AlgebraicGeometry.Scheme.Modules
