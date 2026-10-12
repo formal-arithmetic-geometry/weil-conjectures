@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-constant-module-transition-coefficients",
+ "kind": "statement",
+ "title": "Forgetting scalars commutes with the constant-sheaf adjoint transition",
+ "statement": "Let $Z,W$ be schemes [def-weil-pbc-scheme-conventions] with small etale sites [def-weil-pbc-etale-site], $g:W\\to Z$, $\\Lambda$ a commutative ring and $M$ a $\\Lambda$-module [def-weil-pbc-etale-sheaves]. Write $V:\\Lambda\\text{-Mod}\\to\\mathrm{Ab}$ for forgetting scalars [def-weil-pbc-abelian-etale-sheaves], $M_T$ and $(VM)_T$ for the constant sheaves [def-weil-pbc-constant-sheaf], $g^*$ for inverse image with unit $\\eta_g$ [def-weil-pbc-inverse-image], and $g_*$ for direct image [def-weil-pbc-direct-image]. Assume $V$ preserves sheafification on both sites. Let $e_T:V(M_T)\\to(VM)_T$ be the canonical constantCommuteCompose comparison and let $a_g^M:g^*M_Z\\to M_W$ and $a_g^{VM}:g^*(VM)_Z\\to(VM)_W$ be the canonical constant-sheaf pullback comparisons. Then $g_*(e_W)\\circ V(g_*(a_g^M)\\circ\\eta_g)=g_*(a_g^{VM})\\circ\\eta_g\\circ e_Z$ as morphisms from $V(M_Z)$ to $g_*((VM)_W)$, with the definitional identification of forgetting scalars and direct image.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 03DB and 03CO: coefficient forgetting and sheafification; Tag 0B65: uniqueness of adjoints, applied to the canonical constant comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For either module or abelian coefficients, the unit equation for the canonical constant pullback comparison sends a sheafification generator at the terminal object to the equal-valued generator after base change. Naturality along the unique map to the terminal object gives this equality at every etale object, as in the defining adjoint comparison [lemma-constructible-pullback-constant].",
+   "uses": [
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient comparison preserves generators by Mathlib constantCommuteCompose_hom_app_hom, sheafComposeIso_inv_fac and naturality of toSheafify. Thus the two composites agree on every generator. Since coefficient forgetting preserves sheafification, precompose by the inverse coefficient comparison and use the sheafification universal property [def-weil-pbc-sheafification] to conclude equality of sheaf morphisms. This uses one scheme morphism only, without any composition comparison or section coefficient equivalence.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 03DB and 03CO: coefficient forgetting and sheafification; Tag 0B65: uniqueness of adjoints, applied to the canonical constant comparison.",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of the unique left adjoint constant sheaf comparison with composition and a change of coefficients",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.constantCommuteCompose; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.sheafComposeNatIso; CategoryTheory.sheafComposeNatTrans; CategoryTheory.sheafComposeNatTrans_app_uniq; SheafOfModules.PullbackConstruction.adjunction; LightCondMod.LocallyConstant.adjunction",
+   "verdict": "partial matches only; no one-morphism constant-module transition coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*(comp|trans)|constantCommuteCompose|sheafifyComposeIso",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+   "verdict": "partial matches only; no one-morphism constant-module transition coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantCommuteCompose\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.constantCommuteCompose; CategoryTheory.constantCommuteCompose_hom_app_hom",
+   "verdict": "partial matches only; no one-morphism constant-module transition coefficient square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical constant sheaf inverse image comparison respects composition of pullbacks and forgetful functors",
+   "date": "2026-10-12",
+   "results": "service unavailable: ",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantModuleSectionCoefficients",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Tag 09Z6 finite approximation paragraph, the constant-module section comparison: coefficient forgetting across the single-morphism constant transition, before the inverse-image composition square.",
+   "via": [
+    "lem-weil-pbc-constant-module-section-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModuleTransitionCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModuleTransitionCoefficients.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantModuleTransition_coefficients",
+  "statement": "theorem constantModuleTransition_coefficients\n    (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)\n    {Z W : Scheme.{u}} (g : W ⟶ Z)\n    [Z.smallEtaleTopology.PreservesSheafification\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})]\n    [W.smallEtaleTopology.PreservesSheafification\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})] :\n    let V := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}\n    let A := AddCommGrpCat.{u + 1}\n    (sheafCompose Z.smallEtaleTopology V).map\n        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _ ≫\n          (lowerStar (ModuleCat.{u + 1} Λ) g).map\n            ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) g).hom.app M)) ≫\n      (lowerStar A g).map ((constantCommuteCompose W.smallEtaleTopology V).hom.app M) =\n    (constantCommuteCompose Z.smallEtaleTopology V).hom.app M ≫\n      (upperStarLowerStarAdjunction A g).unit.app _ ≫\n      (lowerStar A g).map ((Scheme.upperStarConstantSheafIso A g).hom.app (V.obj M))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-41715",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T165509-L-2932268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-41715",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T165509-L-2932268",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivery 41715e9cc7af against packet, DAG, clone, and lcompile checks; all delivered modules and the direct importer compile cleanly."
+ }
+}

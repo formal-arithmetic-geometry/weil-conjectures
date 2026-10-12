@@ -27,17 +27,26 @@
    "elementary": false
   },
   {
-   "text": "The constantCommuteCompose comparison preserves sheafification generators. The constant pullback comparison is the uniqueness isomorphism of left adjoints to terminal evaluation, so its unit equation identifies its adjoint on each generator. Naturality of the unit moves j_f past the g-adjunction unit; the unit equation for inverse-image composition identifies the resulting composite with j_h. Apply lowerStar and the canonical direct-image composition comparison, then evaluate at U. This is precisely c_h T_M = T_A c_f. The construction also covers zero coefficients and empty schemes.",
+   "text": "Apply constantModuleTransition_coefficients to g. Apply the proved constantPullbackCompositionCoherence to g and f, transporting along g followed by f = h. Cancel the constant comparison and composition isomorphisms to express the abelian constant transition followed by j_h as the inverse-image unit transition applied after j_f. Use naturality of that unit to move the inverse constant comparison past it.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-constant-module-transition-coefficients",
+    "lem-weil-pbc-constant-pullback-composition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lowerStar along f to this equality. Naturality of lowerStarComp moves j_h across the direct-image composition comparison, and naturality again moves the inverse-image composition map to its required position. Evaluate the resulting equality of abelian sheaf morphisms at U and z; forgetting scalars commutes definitionally with direct image and lowerStarComp. This proves the original signature unchanged. The definition of the module transition is constantModulePushforwardMap, and the composition comparisons are those of the inverse-image composition node.",
+   "uses": [
     "lem-weil-pbc-constant-module-pushforward-functoriality",
-    "lemma-constructible-pullback-constant"
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-constant-module-pushforward-functoriality",
+  "lem-weil-pbc-constant-module-transition-coefficients",
+  "lem-weil-pbc-constant-pullback-composition-coherence",
   "lem-weil-pbc-inverse-image-composition",
   "lemma-constructible-pullback-constant"
  ],
@@ -45,7 +54,7 @@
   "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-modules.tex",
   "place": "Tags 03DB and 03CO: coefficient forgetting and sheafification; Tag 09Z1: canonical transitions. Original comparison node, steps 1 and 3 (coefficient and unit square).",
   "by": "worker",
-  "note": "Extracted from the original comparison proof plan; the explicit Lean construction fixes the equivalences."
+  "note": "Second reader E1: real reduction to a one-morphism coefficient square, combined with the existing proved constantPullbackCompositionCoherence and unit/direct-image naturality; no function-equality restatement."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -123,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
+  "reviewer": "X-41715",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T144132-L-2102944",
+  "landing": "20261012T165509-L-2932268",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivery 41715e9cc7af against packet, DAG, clone, and lcompile checks; all delivered modules and the direct importer compile cleanly."
  }
 }
