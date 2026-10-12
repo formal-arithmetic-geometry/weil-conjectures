@@ -2,32 +2,34 @@
  "id": "lem-sc-p1-tor-kernel-boundary-naturality-of",
  "kind": "statement",
  "title": "lem-sc-p1-tor-kernel-boundary-naturality-of",
- "statement": "Let R be a commutative ring, M an R-module, and δ a family assigning to every surjective R-linear map q:F → N an R-linear map δ_q : Tor₁^R(N,M) → ker(q) ⊗_R M. Assume each pair (Tor₁(q,M),δ_q) and (δ_q, ker(q) inclusion ⊗ 1_M) is exact. For commuting squares of surjections q,q′ with maps a,b and a kernel map c compatible with the inclusions, δ_{q′} ∘ Tor₁(b,M) = (c ⊗ 1_M) ∘ δ_q.",
+ "statement": "For every commutative ring R and module M, the explicitly constructed family δ_q of [def-sc-p1-tor-kernel-boundary-construction] is natural in surjective presentations: for q:F → N, q′:F′ → N′, maps a:F → F′, b:N → N′, c:ker(q) → ker(q′) with q′a=bq and inclusion c=a inclusion, δ_q′ Tor₁(b,M)=(c tensor 1_M)δ_q. No arbitrary family δ or exactness-only hypothesis is quantified.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Section 00LY, Tags 00M0 (Tor exact sequence), 00LZ (resolution functoriality), 00M3 (Tor symmetry); https://stacks.math.columbia.edu/tag/00LY"
  },
  "stmt_deps": [
-  "def-weil-pbc-tor-modules"
+  "def-sc-p1-tor-kernel-boundary-construction"
  ],
  "proof": [
   {
-   "text": "Lift each compatible square of short exact kernel sequences to a morphism between the chosen degreewise split free resolutions. Naturality of the homology connecting morphism, together with the Tor and tensor augmentation identifications, yields the displayed equality; the exactness hypothesis is carried along from the family δ.",
+   "text": "Lift b between the chosen projective resolutions. Let e,e′ be the chosen augmentation lifts. The difference ea-φ₀e′ factors uniquely through k:P₀ → ker(q′). Compatibility of c and the chain-map identity imply c(e d₁)-(e′d′₁)φ₁=k d₁. Tensoring and restricting to degree-one cycles kills the right-hand side, so the cycle maps of the constructed boundary commute. Cancel the epimorphic projection from cycles to homology and use the cokernel defining equation for the two boundaries. Finally apply [lem-weil-pbc-tor-map-via-resolution-lift], implemented by Mathlib ProjectiveResolution.isoLeftDerivedObj_hom_naturality, to identify the degree-one homology map with Tor₁(b,M).",
    "uses": [
-    "lem-sc-p1-tor-kernel-boundary-natural"
+    "def-sc-p1-tor-kernel-boundary-construction",
+    "lem-weil-pbc-tor-map-via-resolution-lift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-tor-kernel-boundary-natural"
+  "def-sc-p1-tor-kernel-boundary-construction",
+  "lem-weil-pbc-tor-map-via-resolution-lift"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "N2",
+  "by": "agent",
+  "agent": "F3 repair worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Section 00LY",
-  "note": "Intermediate decomposition."
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0",
+  "note": "Complete Lean proof using augmentation-lift differences and cokernel descent; no exactness assumption and no sorry."
  },
  "mathlib_searches": [
   {
@@ -80,10 +82,10 @@
   "module": "Sheaf.RingTheory.TorKernelBoundaryNaturalityOf",
   "file": "lean/Sheaf/RingTheory/TorKernelBoundaryNaturalityOf.lean",
   "declaration": "CategoryTheory.tor_kernel_boundary_naturality_of",
-  "statement": "theorem tor_kernel_boundary_naturality_of\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (δ : ∀ (F N : ModuleCat.{u} R) (q : F →ₗ[R] N),\n      Function.Surjective q →\n        (((Tor' (ModuleCat.{u} R) 1).obj N).obj M) →ₗ[R]\n          (LinearMap.ker q ⊗[R] M)) :\n    (∀ (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q),\n      Function.Exact (((Tor' (ModuleCat.{u} R) 1).map\n        (ModuleCat.ofHom q)).app M).hom (δ F N q hq) ∧\n      Function.Exact (δ F N q hq) ((LinearMap.ker q).subtype.rTensor M)) →\n    ∀ (F N F' N' : ModuleCat.{u} R) (q : F →ₗ[R] N) (q' : F' →ₗ[R] N')\n        (hq : Function.Surjective q) (hq' : Function.Surjective q')\n        (a : F →ₗ[R] F') (b : N →ₗ[R] N')\n        (c : LinearMap.ker q →ₗ[R] LinearMap.ker q'),\n      q'.comp a = b.comp q →\n      (∀ x : LinearMap.ker q, (c x : F') = a (x : F)) →\n      ∀ t : (((Tor' (ModuleCat.{u} R) 1).obj N).obj M),\n        δ F' N' q' hq' ((((Tor' (ModuleCat.{u} R) 1).map\n          (ModuleCat.ofHom b)).app M).hom t) =\n        c.rTensor M (δ F N q hq t)",
+  "statement": "theorem tor_kernel_boundary_naturality_of\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R) :\n    ∀ (F N F' N' : ModuleCat.{u} R) (q : F →ₗ[R] N) (q' : F' →ₗ[R] N')\n        (hq : Function.Surjective q) (hq' : Function.Surjective q')\n        (a : F →ₗ[R] F') (b : N →ₗ[R] N')\n        (c : LinearMap.ker q →ₗ[R] LinearMap.ker q'),\n      q'.comp a = b.comp q →\n      (∀ x : LinearMap.ker q, (c x : F') = a (x : F)) →\n      ∀ t : (((Tor' (ModuleCat.{u} R) 1).obj N).obj M),\n        torKernelBoundary M F' N' q' hq' ((((Tor' (ModuleCat.{u} R) 1).map\n          (ModuleCat.ofHom b)).app M).hom t) =\n        c.rTensor M (torKernelBoundary M F N q hq t)",
   "branch": "sheaf-dag",
-  "by": "N2",
-  "date": "2026-10-12"
+  "by": "F3",
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -98,11 +100,37 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
+  "reviewer": "X-d5720",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T112846-L-770148",
+  "landing": "20261012T212721-L-1130977",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean declarations and proofs with corrected nodes, change record, source arguments, pruning report, and independently reproduced compilation and axiom checks."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "F3 stage 2",
+  "old_statement": "Let R be a commutative ring, M an R-module, and δ a family assigning to every surjective R-linear map q:F → N an R-linear map δ_q : Tor₁^R(N,M) → ker(q) ⊗_R M. Assume each pair (Tor₁(q,M),δ_q) and (δ_q, ker(q) inclusion ⊗ 1_M) is exact. For commuting squares of surjections q,q′ with maps a,b and a kernel map c compatible with the inclusions, δ_{q′} ∘ Tor₁(b,M) = (c ⊗ 1_M) ∘ δ_q.",
+  "what": "Repair required by reviewer X-75668: exactness does not imply naturality for an arbitrary boundary family (Z/3 sign counterexample). Replace that false universal assertion by naturality of torKernelBoundary, whose data are constructed from a projective resolution and whose naturality is fully proved. Caller signature unchanged.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-weil-pbc-tor-modules"
+  ],
+  "old_proof": [
+   {
+    "text": "Lift each compatible square of short exact kernel sequences to a morphism between the chosen degreewise split free resolutions. Naturality of the homology connecting morphism, together with the Tor and tensor augmentation identifications, yields the displayed equality; the exactness hypothesis is carried along from the family δ.",
+    "uses": [
+     "lem-sc-p1-tor-kernel-boundary-natural"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sc-p1-tor-kernel-boundary-natural"
+  ]
  }
 }

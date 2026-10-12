@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-import Sheaf.Paper.TorLongExactFirstVariable
-import Sheaf.RingTheory.TorKernelBoundaryExact
+import Sheaf.RingTheory.TorKernelBoundaryConstructionExact
 import Sheaf.RingTheory.TorKernelBoundaryNaturalityOf
 
 @[expose] public section
@@ -72,8 +71,8 @@ theorem exists_tor_kernel_boundary_natural
           δ F' N' q' hq' ((((Tor' (ModuleCat.{u} R) 1).map
             (ModuleCat.ofHom b)).app M).hom t) =
           c.rTensor M (δ F N q hq t)) := by
-  obtain ⟨δ, hδ⟩ := exists_tor_kernel_boundary_exact R M
-  refine ⟨δ, hδ, ?_⟩
-  exact tor_kernel_boundary_naturality_of R M δ hδ
+  refine ⟨torKernelBoundary M, ?_, tor_kernel_boundary_naturality_of R M⟩
+  intro F N q hq
+  exact tor_kernel_boundary_construction_exact R M F N q hq
 
 end CategoryTheory

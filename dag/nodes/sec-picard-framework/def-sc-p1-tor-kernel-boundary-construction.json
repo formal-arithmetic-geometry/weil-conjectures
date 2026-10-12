@@ -1,0 +1,97 @@
+{
+ "id": "def-sc-p1-tor-kernel-boundary-construction",
+ "kind": "definition",
+ "title": "Kernel connecting map constructed from a projective resolution",
+ "statement": "For a commutative ring R, modules M,F,N, and a surjective q:F → N, construct δ_q : Tor₁(N,M) → ker(q) tensor M, using Tor from [def-weil-pbc-tor-modules]. Choose Mathlib's projective resolution P of N and lift its augmentation ε:P₀ → N through q to e:P₀ → F by projectivity. The composite e d₁ factors through ker(q); tensor it with M and restrict to cycles in degree one. It kills boundaries because d₁d₂=0, so descend along the cokernel presentation of H₁. Precompose with P.isoLeftDerivedObj to obtain torKernelBoundary. No witness of an unproved existence theorem supplies any data.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor connecting homomorphism from a projective resolution exact at the tensor product of the kernel",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error (recorded by msearch.py)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connecting map from first homology of a projective resolution tensored with a module to the tensor of a kernel is exact",
+   "date": "2026-10-13",
+   "results": "Rep.torIso, groupHomology.mapShortComplex₁_exact, groupHomology.mapShortComplex₃_exact; no ModuleCat connecting map construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyDesc",
+   "date": "2026-10-13",
+   "results": "Unknown identifier; local search found ShortComplex.descHomology and HomologicalComplex.homologyIsCokernel instead."
+  },
+  {
+   "tool": "grep",
+   "query": "descHomology|homologyπ|factorThru|isoLeftDerivedObj",
+   "date": "2026-10-13",
+   "results": "Mathlib ShortComplex/Homology.lean: descHomology, π_descHomology; ShortComplex/HomologicalComplex.lean: homologyIsCokernel; CategoryTheory/Abelian/LeftDerived.lean: isoLeftDerivedObj_hom_naturality; no existing constructed Tor kernel boundary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorKernelBoundaryNaturalityOf",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, graded Nakayama criterion: identify the kernel of a minimal free presentation by first Tor using the exact natural connecting map",
+   "via": [
+    "lem-sc-p1-tor-kernel-boundary-naturality-of",
+    "lem-sc-p1-tor-kernel-boundary-natural",
+    "lem-sc-p1-minimal-presentation-tor",
+    "lem-sc-p1-graded-nakayama-free",
+    "lem-sc-p1-graded-syzygy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorKernelBoundaryConstruction",
+  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryConstruction.lean",
+  "declaration": "CategoryTheory.torKernelBoundary",
+  "statement": "def torKernelBoundary {R : Type u} [CommRing R]\n    (M : ModuleCat.{u} R) (F N : ModuleCat.{u} R)\n    (q : F →ₗ[R] N) (hq : Function.Surjective q) :\n    (((Tor' (ModuleCat.{u} R) 1).obj N).obj M) →ₗ[R]\n      (LinearMap.ker q ⊗[R] M)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d5720",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d5720",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130977",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean declarations and proofs with corrected nodes, change record, source arguments, pruning report, and independently reproduced compilation and axiom checks."
+ }
+}

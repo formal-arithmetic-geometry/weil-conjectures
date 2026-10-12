@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-p1-tor-kernel-boundary-construction-exact",
+ "kind": "statement",
+ "title": "Exactness of the constructed kernel boundary",
+ "statement": "For every commutative ring R, modules M,F,N and surjective q:F → N, the map δ_q of [def-sc-p1-tor-kernel-boundary-construction] satisfies exactness of (Tor₁(q,M),δ_q) and (δ_q,inclusion tensor 1_M). This makes no naturality assertion.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0"
+ },
+ "stmt_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction"
+ ],
+ "proof": [
+  {
+   "text": "Resolve 0 → ker(q) → F → N → 0 by degreewise split free resolutions using [lem-weil-pbc-free-resolution-ses-split]. Tensor with M and apply [lem-weil-pbc-complex-ses-homology-long-exact] to obtain the two exact pairs adjacent to the homology boundary.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the chosen projective resolution P of N with the right horseshoe resolution by [lem-weil-pbc-tor-map-via-resolution-lift]. Lift the degree-zero comparison through the split middle term. Its augmentation e₀:P₀ → F lifts ε. The snake cycle formula identifies the horseshoe boundary with (e₀d₁) tensor 1, with codomain restricted to the kernel. The difference e-e₀ factors through a map k:P₀ → ker(q); its boundary contribution (kd₁) tensor 1 vanishes on cycles. Hence this is exactly the map of [def-sc-p1-tor-kernel-boundary-construction]. Identify H₀ with tensor using [lem-weil-pbc-tensor-right-exact], and transport the exact pairs. This comparison proves exactness of the fixed construction without assuming arbitrary exact boundaries are natural.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-sc-p1-tor-kernel-boundary-construction",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-free-resolution-ses-split",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tor-map-via-resolution-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3 repair worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0",
+  "note": "Expanded horseshoe comparison proof of the cited Tor exact sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor connecting homomorphism from a projective resolution exact at the tensor product of the kernel",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error (recorded by msearch.py)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connecting map from first homology of a projective resolution tensored with a module to the tensor of a kernel is exact",
+   "date": "2026-10-13",
+   "results": "Rep.torIso, groupHomology.mapShortComplex₁_exact, groupHomology.mapShortComplex₃_exact; no ModuleCat connecting map construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyDesc",
+   "date": "2026-10-13",
+   "results": "Unknown identifier; local search found ShortComplex.descHomology and HomologicalComplex.homologyIsCokernel instead."
+  },
+  {
+   "tool": "grep",
+   "query": "descHomology|homologyπ|factorThru|isoLeftDerivedObj",
+   "date": "2026-10-13",
+   "results": "Mathlib ShortComplex/Homology.lean: descHomology, π_descHomology; ShortComplex/HomologicalComplex.lean: homologyIsCokernel; CategoryTheory/Abelian/LeftDerived.lean: isoLeftDerivedObj_hom_naturality; no existing constructed Tor kernel boundary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorKernelBoundaryNaturalityOf",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, graded Nakayama criterion: identify the kernel of a minimal free presentation by first Tor using the exact natural connecting map",
+   "via": [
+    "lem-sc-p1-tor-kernel-boundary-naturality-of",
+    "lem-sc-p1-tor-kernel-boundary-natural",
+    "lem-sc-p1-minimal-presentation-tor",
+    "lem-sc-p1-graded-nakayama-free",
+    "lem-sc-p1-graded-syzygy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorKernelBoundaryConstructionExact",
+  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryConstructionExact.lean",
+  "declaration": "CategoryTheory.tor_kernel_boundary_construction_exact",
+  "statement": "theorem tor_kernel_boundary_construction_exact\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q) :\n    Function.Exact (((Tor' (ModuleCat.{u} R) 1).map\n      (ModuleCat.ofHom q)).app M).hom (torKernelBoundary M F N q hq) ∧\n    Function.Exact (torKernelBoundary M F N q hq)\n      ((LinearMap.ker q).subtype.rTensor M)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d5720",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d5720",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130977",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean declarations and proofs with corrected nodes, change record, source arguments, pruning report, and independently reproduced compilation and axiom checks."
+ }
+}
