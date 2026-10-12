@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-polynomial-nonzero-fibre-hypersurface",
+ "kind": "statement",
+ "title": "Hypersurface presentation of a nonzero polynomial fibre",
+ "statement": "Let A be a domain of characteristic zero, S an A[X]-algebra, and r a nonzero prime of A[X] contracting to zero in A. Let M be the image in S of the nonzero elements of A, and R = Localization M. There exists f in A[X] such that the residue-field fibre r.Fiber S is ring-isomorphic to R/(image f), and the image of the polynomial derivative f′ is a unit in that quotient. The polynomial ring and localization use [def-weil-polynomial-ring] and [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraph 4, and proof of Lemma 07PU, second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Extend r to the fraction field polynomial ring. Since that ring is a PID, choose an irreducible generator and clear denominators to obtain f in r whose localization generates the extended prime.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Localizing the quotient A[X]/r at the nonzero constants identifies the fibre with the quotient of the explicit localization R by the image of f.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "In characteristic zero the irreducible generator is separable, so f and f' are coprime. A Bezout identity makes the image of f' invertible modulo f.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraph 4",
+  "note": "Agent adaptation of the quotient presentation in 07PU from a linear equation to an irreducible equation over a characteristic-zero fraction field. Mathlib Ideal.exists_mem_span_singleton_map_residueField_eq supplies the denominator-cleared generator; Irreducible.separable supplies coprimality. The source does not state this general packaging verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Residue field of a nonzero prime ideal in a polynomial ring over a domain as quotient over the fraction field",
+   "results": "8 hits; residueFieldMapCAlgEquiv treats primes extended from the base, fiberEquivQuotient treats a fibre over the base prime, not this fibre over a polynomial prime. No complete match.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Irreducible",
+   "results": "11 hits including Irreducible.separable and separable_iff_derivative_ne_zero. These close the separability ingredient, not the localization and fibre equivalence.",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "algEquivAux|isCoprime.*derivative|separable_of_irreducible",
+   "results": "21 hits; Ideal.Fiber.algEquivAux₁ gives a quotient of localization at r complement. Additional work identifies it with localization at base constants modulo f. No full packaged theorem.",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero prime of A[X] lying over zero for a domain A becomes a principal ideal over the fraction field and its fiber is a hypersurface quotient of a localization",
+   "results": "Recorded first-worker query returned Internal Server Error. No mathematical search result was obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialRegularBaseFormalFibre",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-polynomial-regular-base-formal-fibre",
+   "place": "nonzero-prime case",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialNonzeroFibreHypersurface",
+  "file": "lean/Sheaf/RingTheory/PolynomialNonzeroFibreHypersurface.lean",
+  "declaration": "Polynomial.nonzero_fibre_hypersurface_presentation",
+  "statement": "theorem nonzero_fibre_hypersurface_presentation\n    (A : Type u) [CommRing A] [IsDomain A] [CharZero A]\n    (S : Type v) [CommRing S] [Algebra (Polynomial A) S]\n    (r : Ideal (Polynomial A)) [r.IsPrime] (hr : r ≠ ⊥)\n    (hrA : r.comap (C : A →+* Polynomial A) = ⊥) :\n    let M := Submonoid.map\n      ((algebraMap (Polynomial A) S).comp C).toMonoidHom (nonZeroDivisors A)\n    let R := Localization M\n    ∃ f : Polynomial A,\n      Nonempty (r.Fiber S ≃+* R ⧸ Ideal.span ({algebraMap (Polynomial A) R f} : Set R)) ∧\n      IsUnit (Ideal.Quotient.mk (Ideal.span ({algebraMap (Polynomial A) R f} : Set R))\n        (algebraMap (Polynomial A) R (derivative f)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T153013-L-2351563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T153013-L-2351563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
