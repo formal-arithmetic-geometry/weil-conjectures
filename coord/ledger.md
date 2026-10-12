@@ -8965,3 +8965,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/H3/Sheaf.RingTheory.EquationCountFibreDimensionFlat (stage 3; reviewer PASS; first push; landing 20261012T184307-L-4006038 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/J1/Sheaf.AlgebraicGeometry.AmpleProjCompatibleCharts (stage 3; reviewer PASS; first push; landing 20261012T184308-L-4006137 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImageExact (stage 3; reviewer PASS; first push; landing 20261012T184308-L-4006328 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:43 L: merged deliver/J1/Sheaf.AlgebraicGeometry.EtaleLimitBinaryComparisonLadder (stage 3; reviewer PASS; first push; landing 20261012T184308-L-4006481 (interface); batch 20261012T184234; modules 4; new nodes 3)

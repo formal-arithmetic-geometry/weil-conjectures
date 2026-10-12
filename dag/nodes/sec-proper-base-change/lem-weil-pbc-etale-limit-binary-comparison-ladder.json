@@ -19,58 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Pass to the directed cofinal tail above the union stage i0. Transport U,V to that stage using its supplied isomorphism, and restrict the cone to their inverse images. Apply Mathlib isLimitOpensCone directly to the supplied limiting cone and the transported opens. Mathlib isAffineHom_π_app gives affine projections, and the opensDiagram affine-transition instance gives affine restricted transitions. No construction of a new ambient scheme limit is needed. Opens inherit quasi-separatedness, affine inverse images of compact opens are compact, and the intersection is compact because the union stage is quasi-separated. Inverse image restricts the coefficients and preserves the sheaf colimit; its composition comparisons give the transition coherence. Pullback functoriality identifies the new comparison legs. Apply C(U), C(V) and C(U intersection V) in all degrees.",
+   "text": "Obtain the pointwise exact stage diagram, cofinality isomorphism, commuting comparison squares and certified neighboring maps from the geometric ladder construction. This construction assumes no continuity.",
    "uses": [
-    "def-weil-pbc-etale-cohomology-stage-continuity",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-limit-cone-affine-projections-opens",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-limit-binary-geometric-ladder"
    ],
    "elementary": false
   },
   {
-   "text": "In positive degree p=q+1, form the stage and limit Mayer--Vietoris sequences, using the supplied isomorphism to transfer the two-open cover. Naturality in scheme pullback and in coefficients makes their filtered-colimit comparison a commuting ladder with the actual bottom restriction r'. Take A1,A2,A4 to be the colimits of H^q(U) times H^q(V), H^q(U intersection V), H^p(U) times H^p(V); B1,B2 are the corresponding limit groups, while B4 and r' are exactly those fixed in the statement. Filtered abelian-group colimits preserve exactness and finite products. Thus Exact a b, Exact b r and Exact a' b' hold. The continuity statements from step 1 give surjectivity of v1 and injectivity of v2,v4. The three squares commute by the pullback and coefficient naturality of Mayer--Vietoris and the supplied comparison-leg equation hB. Finality transfers the top middle term from the tail colimit to Q.",
-   "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-etale-mayer-vietoris-pullback",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-   ],
-   "elementary": false
+   "text": "Exactness of the filtered-colimit pairs follows by the elementwise representative argument. A class killed by the colimit map is represented at a stage; equality to zero holds at a later stage, where pointwise exactness supplies a preimage. Conversely represent a preimage class and use stage exactness. Transport middle exactness through eQ and use injectivity of its hom for the other pair. This is implemented by the proved private exact_colimMap and exact_transport_middle lemmas, using Mathlib Concrete.colimit_exists_rep and Concrete.colimit_exists_of_rep_eq.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For p=0 take A1,A2,B1,B2 to be zero groups and a,b,a',b',v1,v2 to be zero maps. Take A4 to be the filtered colimit of the degree-zero stage product groups, and r to be the induced restriction. Initial injectivity in Mayer--Vietoris, preserved by filtered exactness, makes r injective, which is precisely Exact b r. Exact a b and Exact a' b' and the first two squares are automatic. Continuity on the two opens makes v4 an isomorphism, hence injective, and restriction naturality gives v4 r=r' m. This uses neither negative degree nor eventual-zero detection. Empty and coincident opens use the same restriction and difference maps.",
+   "text": "Case analysis on membership in the three allowed schemes supplies their continuity hypotheses. Apply the certificate bijectivity theorem to the three neighboring comparisons and take its surjective or injective component. Combine those components, the two proved colimit-exactness pairs, bottom exactness and the three supplied squares into the original unchanged existential conclusion.",
    "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-etale-mayer-vietoris-pullback",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "lem-weil-pbc-stage-cohomology-comparison-bijective"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-cohomology-stage-continuity",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lem-weil-pbc-etale-mayer-vietoris-pullback",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-limit-cone-affine-projections-opens"
+  "lem-weil-pbc-etale-limit-binary-geometric-ladder",
+  "lem-weil-pbc-stage-cohomology-comparison-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09YQ (theorem-colimit) and 0A50 (lemma-mayer-vietoris); geometric restriction and exact-ladder steps 1--2 of lem-weil-pbc-etale-limit-binary-eventual-zero, before its group chase."
+  "place": "Tags 09YQ and 0A50; geometric stage-diagram construction separated from the proved filtered-colimit representative chase and continuity of neighboring comparisons."
  },
  "mathlib_searches": [
   {
@@ -156,9 +131,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T154244-L-2435043",
+  "landing": "20261012T184308-L-4006481",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
