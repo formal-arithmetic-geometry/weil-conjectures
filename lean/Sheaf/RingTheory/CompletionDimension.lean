@@ -9,7 +9,8 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionDimensionEquality
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Dimension of the completion of a Noetherian local ring
@@ -51,6 +52,10 @@ theorem completion_dimension (A : Type u) [CommRing A] [IsNoetherianRing A]
     ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = ringKrullDim A ∧
       ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) < ⊤ ∧
       ringKrullDim A < ⊤ := by
-  sorry
+  have hA : ringKrullDim A < ⊤ := ringKrullDim_lt_top
+  have heq := completion_dimension_eq A
+  have hB : ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) < ⊤ :=
+    heq ▸ hA
+  exact ⟨heq, hB, hA⟩
 
 end RingTheory
