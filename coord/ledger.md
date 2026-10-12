@@ -8294,3 +8294,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:11 L: returned deliver/C2/Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel (reviewer RETURN: (reviewer X-d0021, head d0021c00f) 8: `lcompile.py --all /home/ubuntu/weil-launcher/xreviews/C2__Sheaf.AlgebraicGeometry)
 - 15:16 L: returned deliver/J3/Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence (reviewer RETURN: (reviewer X-60362, head 60362b59c) E2: `Sheaf.Paper.StrictHenselizationPointedMap.strictHenselizationPointedMap_factoriz)
 - 15:19 L: returned deliver/A2/Sheaf.RingTheory.MinimalGradedPresentationExists (reviewer RETURN: (the landing tools, head c1043495b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
+- 15:19 L: returned deliver/F3/Sheaf.Topology.CompactCechDirectedColimit (reviewer RETURN: (the landing tools, head a2880eeae) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
