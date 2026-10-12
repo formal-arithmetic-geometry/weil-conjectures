@@ -8456,3 +8456,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/P2/Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete (stage 3; reviewer PASS; first push; landing 20261012T160140-L-2565778 (interface); batch 20261012T160131; modules 2; new nodes 1)
 - 16:01 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompactAux (stage 3; reviewer PASS; first push; landing 20261012T160141-L-2565877 (interface); batch 20261012T160131; modules 2; new nodes 1)
 - 16:01 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit (stage 3; reviewer PASS; first push; landing 20261012T160141-L-2565977 (interface); batch 20261012T160131; modules 3; new nodes 2)
+- 16:01 L: merged deliver/R2/Sheaf.Algebra.FiniteTypeLiftNilpotent (stage 3; reviewer PASS; first push; landing 20261012T160141-L-2566076 (proof); batch 20261012T160131; modules 1; new nodes 0)

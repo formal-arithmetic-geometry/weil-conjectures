@@ -24,4 +24,39 @@ theorem finiteType_of_quotient_finiteType_nilpotent
     (hquot : RingHom.FiniteType
       (Ideal.quotientMap (I.map φ) φ (Ideal.le_comap_map))) :
     RingHom.FiniteType φ := by
-  sorry
+  classical
+  let : Algebra A B := φ.toAlgebra
+  have hcomp := hquot.comp (RingHom.FiniteType.of_surjective (Ideal.Quotient.mk I)
+    (Ideal.Quotient.mk_surjective))
+  rw [Ideal.quotientMap_comp_mk] at hcomp
+  have hft : Algebra.FiniteType A (B ⧸ I.map φ) := by
+    apply (RingHom.finiteType_algebraMap).mp
+    exact hcomp
+  obtain ⟨n, f, hf⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp hft
+  choose b hb using fun j : Fin n ↦ Ideal.Quotient.mk_surjective (f (MvPolynomial.X j))
+  let g : MvPolynomial (Fin n) A →ₐ[A] B := MvPolynomial.aeval b
+  have hfg : (Ideal.Quotient.mkₐ A (I.map φ)).comp g = f := by
+    ext j
+    simpa [g] using hb j
+  have hmod : Function.Surjective
+      ((I • ⊤ : Submodule A (MvPolynomial (Fin n) A)).mapQ
+        (I • ⊤ : Submodule A B) g.toLinearMap
+        (Submodule.smul_top_le_comap_smul_top I g.toLinearMap)) := by
+    intro y
+    obtain ⟨c, rfl⟩ := Submodule.Quotient.mk_surjective (I • ⊤ : Submodule A B) y
+    obtain ⟨p, hp⟩ := hf (Ideal.Quotient.mk (I.map φ) c)
+    refine ⟨Submodule.Quotient.mk p, ?_⟩
+    rw [Submodule.mapQ_apply, Submodule.Quotient.eq]
+    rw [Ideal.smul_top_eq_map]
+    change g p - c ∈ I.map φ
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    rw [map_sub]
+    have heq : Ideal.Quotient.mk (I.map φ) (g p) = f p :=
+      DFunLike.congr_fun hfg p
+    rw [heq, hp, sub_self]
+  have hsur : Function.Surjective g := by
+    apply RingTheory.surjective_of_surjective_mod_nilpotent A
+      (MvPolynomial (Fin n) A) B I g.toLinearMap _ hmod
+    obtain ⟨k, hk⟩ := hI
+    exact ⟨k + 1, Nat.succ_pos k, hk⟩
+  exact Algebra.FiniteType.iff_quotient_mvPolynomial''.mpr ⟨n, g, hsur⟩
