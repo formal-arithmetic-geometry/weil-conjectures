@@ -31,7 +31,7 @@ The proof of proper base change for the projective line rests on eight assertion
 They are bundled in `AlgebraicGeometry.IsCurve.Assertions`. The coefficient sheaf is a
 sheaf of `Λ`-modules and `Hᵠ(X, F)` is the cohomology of its underlying abelian sheaf; the
 torsion conditions are conditions on the geometric stalks
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`,
+(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`,
 `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`). The field extension in `C₆` and
 `C₇` is given by an arbitrary cartesian square
 

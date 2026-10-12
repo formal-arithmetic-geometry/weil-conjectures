@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -33,7 +34,7 @@ blow-up is not yet available along an arbitrary closed subscheme of a non-affine
 deformation space cannot be constructed here. As for the normal cone in
 `WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion`, it is carried as *data*: the
 structure `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` bundles the deformation
-space, the two structure morphisms and the four clauses of `sk-lem-geometry`, and the
+space, the two structure morphisms and the clauses of `sk-lem-geometry`, and the
 blueprint lemma is the statement that such a datum exists.
 
 The punctured trivialisation `κ°` of `sk-lem-geometry` (3) — the identification of the
@@ -98,9 +99,19 @@ complement of the zero section, there is a cartesian square
      𝔾_{m,B} -----------> 𝔸¹_B
 ```
 
-identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`.
+identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`, under which `s̃` is `s × 1`.
+
+Étale-locally on `B` the deformation has coordinates (clauses (2), (4) and (5)): over a
+surjective étale `v : B' ⟶ B`, an open neighbourhood of the section in the base change
+`𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` maps étale to `𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}`, carrying the section to
+the zero section (`exists_etale_coordinates`).
 
 The normal cone datum `N` is not yet tied to `s`; see the TODO in the module documentation.
+
+In the purity conventions every scheme is separated of finite type over the base field, so
+`g̃` and the coordinate chart are moreover separated and compactifiable, and every open
+immersion is quasi-compact; this is recorded, compactifiability being what makes the dualizing
+complexes defined.
 
 Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
 arbitrary closed subscheme, so the datum cannot be constructed here; existence is
@@ -118,6 +129,13 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   sect_comp_proj : sect ≫ proj = 𝟙 _
   /-- `g̃` is again smooth of pure relative dimension `d`. -/
   smoothOfRelativeDimension_proj : SmoothOfRelativeDimension d proj
+  /-- `g̃` is separated: in the purity conventions every scheme is separated of finite type
+  over the base field. -/
+  isSeparated_proj : IsSeparated proj
+  /-- `g̃` is compactifiable, as every separated morphism of finite type between schemes of
+  finite type over a field is (Nagata). This is what makes the dualizing complex `ω_{g̃}`,
+  and with it the family object of the deformation, defined. -/
+  hasCompactification_proj : HasCompactification proj
   /-- The inclusion `ι₁ : V ⟶ 𝒟_s V` of the fibre over `t = 1`. -/
   oneFibre : V ⟶ scheme
   /-- The fibre of `g̃` over the unit section is `g`. -/
@@ -143,8 +161,34 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   /-- Over `𝔾_{m,B}` the deformation is `V ×_B 𝔾_{m,B}`: the square formed by `κ°`, the
   projection to `𝔾_{m,B}`, `g̃` and the inclusion `𝔾_{m,B} ⊆ 𝔸¹_B` is cartesian. -/
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
+  /-- Over `𝔾_{m,B}` the section `s̃` is `s × 1` (clause (3)): its restriction to the punctured
+  line is `κ° ∘ (s × 1)`, for the section `s × 1 : 𝔾_{m,B} ⟶ V ×_B 𝔾_{m,B}`. -/
+  exists_sect_generic : ∃ σ : puncturedLine.toScheme ⟶
+      pullback g (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B),
+    σ ≫ pullback.fst _ _ = (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s ∧
+      σ ≫ pullback.snd _ _ = 𝟙 _ ∧ σ ≫ generic = puncturedLine.ι ≫ sect
+  /-- Clauses (2), (4) and (5): étale-local coordinates on the deformation. There are a
+  separated surjective étale `v : B' ⟶ B` and, writing `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` for its base change
+  and `𝒟' = 𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` for the base change of the deformation (5), a quasi-compact
+  open `j : W ⟶ 𝒟'` containing the base-changed section `σ` together with a quasi-compact
+  étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Here `c` is the
+  chart `u_i = x_i / t` of the deformation of the standard pair `(𝔸^d_{B'} → B', 0)`, which is
+  `𝔸^d_{B'} ×_{B'} 𝔸¹_{B'}` (4), for étale coordinates `x₁, …, x_d` of `(g, s)` over `B'` (2). -/
+  exists_etale_coordinates : ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
+      (j : W ⟶ pullback proj (AffineSpace.map (ULift.{u} (Fin 1)) v))
+      (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))
+      (σ : 𝔸(ULift.{u} (Fin 1); B') ⟶ W),
+    _root_.AlgebraicGeometry.Etale v ∧ Surjective v ∧ IsSeparated v ∧ IsOpenImmersion j ∧
+      QuasiCompact j ∧ _root_.AlgebraicGeometry.Etale c ∧ QuasiCompact c ∧
+      HasCompactification c ∧
+      j ≫ pullback.snd _ _ =
+        c ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')) ↘ 𝔸(ULift.{u} (Fin 1); B') ∧
+      σ ≫ j ≫ pullback.fst _ _ = AffineSpace.map (ULift.{u} (Fin 1)) v ≫ sect ∧
+      σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B')
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
+  DeformationToNormalConeData.isSeparated_proj
+  DeformationToNormalConeData.hasCompactification_proj
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
@@ -158,6 +202,10 @@ smoothness of `g̃` and the two cartesian squares.
 
 All of this commutes with base change in `B` and with étale localization.
 
+Since `g` is separated and compactifiable, so is `g̃`: the deformation space is open in the
+blow-up of `V̄ ×_B 𝔸¹_B` along `s(B) × {0}`, for a compactification `V̄` of `g`, and this
+blow-up is proper over `𝔸¹_B`.
+
 As long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not tied to `s` (see the TODO in the
 module documentation), this statement, which quantifies over every datum `N`, is false. Let `B`
 be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
@@ -166,7 +214,8 @@ be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, 
 contradicting `Pic(𝔸¹_B) = Pic(B)`. It becomes the blueprint lemma once `N` is the normal cone of
 `s`. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
+    [SmoothOfRelativeDimension d g] [IsSeparated g] [HasCompactification g] (s : B ⟶ V)
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     (N : NormalConeData d s) :
     Nonempty (DeformationToNormalConeData d g s N) :=
   sorry
