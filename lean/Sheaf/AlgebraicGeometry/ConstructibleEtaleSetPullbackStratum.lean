@@ -3,17 +3,22 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import all Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 public import WeilConjectures.ConstructibleSheaf.Pullback
+
+/-!
+# Finite local constancy on pulled-back strata
+
+Source: the fixed-stratum proof of `lem-weil-pbc-constructible-etale-set-pullback`,
+using Stacks Project, Tags 095A, 03Q1 (3), and 03CB.
+(blueprint: lem-stage3-finite-lc-pullback-stratum).
+-/
 
 @[expose] public section
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
+
 /-- The pullback of each stratum in a constructible set sheaf remains finite locally constant.
 Source: the three-step proof of `lem-weil-pbc-constructible-etale-set-pullback`, with the
 stratification fixed.  Pull back the trivializing covers and use the inverse-image
@@ -35,5 +40,20 @@ theorem finiteLocallyConstant_pullback_stratum
         ((sheafCompose Y.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
           ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj E))) := by
-  sorry
+  intro i
+  obtain ⟨_, ea, _⟩ := etaleInverseImageAlgebraicStructures (S.domain i) X (S.immersion i)
+  have hi := finiteLocallyConstant_of_iso (ea.app E).symm (hS i)
+  have hp := (pullback_finite_locally_constant
+    (CategoryTheory.Limits.pullback.fst (S.immersion i) g) (S.immersion i) E hi).2
+  let e := eqToIso (congrArg
+      (fun m ↦ (Etale.upperStar AddCommGrpCat.{u + 1} m).obj E)
+      (CategoryTheory.Limits.pullback.condition (f := S.immersion i) (g := g))) ≪≫
+    (Etale.upperStarComp AddCommGrpCat.{u + 1}
+      (CategoryTheory.Limits.pullback.snd (S.immersion i) g) g).app E
+  have ht := finiteLocallyConstant_of_iso
+    ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso e) hp
+  obtain ⟨_, eb, _⟩ := etaleInverseImageAlgebraicStructures
+    ((S.pullback g).domain i) Y ((S.pullback g).immersion i)
+  exact finiteLocallyConstant_of_iso
+    (eb.app ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj E)) ht
 end AlgebraicGeometry.Scheme
