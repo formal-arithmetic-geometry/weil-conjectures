@@ -30,88 +30,52 @@
  ],
  "proof": [
   {
-   "text": "*The covering.* Let $\\mathcal A$ be the set of pairs $(n,s)$ with $n\\ge1$, $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ and $X_s$ an affine open of $X$, where $X_s=\\{x\\in X:\\ s_x\\notin\\mathfrak m_x(\\mathcal L^{\\otimes n})_x\\}$, equivalently the set of $x$ where the value $s(x)\\in(\\mathcal L^{\\otimes n})(x)=(\\mathcal L^{\\otimes n})_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$ is nonzero, as in [def-weil-pbc-ample-invertible-module]. By condition (2) of that definition (or by the hypothesis of the more general statement) every $x\\in X$ lies in some $X_s$ with $(n,s)\\in\\mathcal A$, so the affine opens $X_s$, $(n,s)\\in\\mathcal A$, cover $X$. Condition (1) (quasi-compactness) is not used anywhere below.",
+   "text": "Extract one affine nonvanishing chart U_x containing each x from the covering hypothesis, using choice. These opens cover X since x belongs to its own chart. For ampleness use only the second conjunct of its definition, converting the pointwise locus equivalence to equality of sets.",
    "uses": [
     "def-weil-pbc-ample-invertible-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Definition 01PS (definition-ample) (2); proof of Lemma 01PY, first sentence ('By assumption we can find a covering of X by affine opens of the form X_s')"
-   }
+   "elementary": true
   },
   {
-   "text": "*Bringing two sections to a common degree.* Fix $(p,s),(q,t)\\in\\mathcal A$ and put $U=X_s$, $V=X_t$, $\\mathcal M=\\mathcal L^{\\otimes pq}$. By [lem-weil-pbc-invertible-pullback-tensor] (1) and (2) (applied with $f=\\mathrm{id}_X$: tensor products of invertible modules are invertible, and the factors of a finite tensor product may be regrouped and reordered by canonical isomorphisms) the $q$-fold tensor power of $\\mathcal L^{\\otimes p}$ and the $p$-fold tensor power of $\\mathcal L^{\\otimes q}$ are both canonically isomorphic to $\\mathcal M$; let $s'\\in\\Gamma(X,\\mathcal M)$ be the image of $s\\otimes\\cdots\\otimes s$ ($q$ factors) and $t'\\in\\Gamma(X,\\mathcal M)$ the image of $t\\otimes\\cdots\\otimes t$ ($p$ factors). By part (3) of the same lemma, for $x\\in X$ the value of a tensor product of sections is the tensor product of the values, $(u\\otimes v)(x)=u(x)\\otimes v(x)$ in the tensor product over $\\kappa(x)$ of two one-dimensional $\\kappa(x)$-vector spaces, which is nonzero iff $u(x)\\neq0$ and $v(x)\\neq0$; an isomorphism of invertible modules induces an isomorphism on the fibres at $x$, so it preserves (non)vanishing of values. By induction on the number of factors, $s'(x)\\neq0$ iff $s(x)\\neq0$ and $t'(x)\\neq0$ iff $t(x)\\neq0$, i.e. $X_{s'}=X_s=U$ and $X_{t'}=X_t=V$ (Stacks 01PT: $X_{s^n}=X_s$). So we may compare $s'$ and $t'$ as sections of the one invertible module $\\mathcal M$.",
+   "text": "For each pair of charts, apply [lem-weil-pbc-nonvanishing-common-degree] to their positive-degree sections. The resulting sections of the same invertible module have precisely the original chart loci.",
    "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-weil-pbc-nonvanishing-common-degree"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, proof of Lemma 01PY, second paragraph ('We now replace s by s^q, t by t^p, and L by L^{pq}. This is harmless as X_s = X_{s^q} and X_t = X_{t^p}'); proof of Lemma 01PT ('X_{s^n} = X_s'); Section 01PR ('X_s cap X_{s'} = X_{ss'}')"
-   }
+   "elementary": false
   },
   {
-   "text": "*$U\\cap V$ is a principal open of $U$ and of $V$.* Write $A=\\mathcal O_X(U)$, $B=\\mathcal O_X(V)$, $W=U\\cap V$. By [lem-weil-pbc-nonvanishing-section-trivializes] applied to $(X,\\mathcal M,s')$, the open $X_{s'}=U$ carries the isomorphism $\\mathcal O_U\\to\\mathcal M|_U$, $a\\mapsto a\\,s'|_U$; hence there is a unique $f\\in A$ with $t'|_U=f\\cdot s'|_U$. Likewise, applied to $(X,\\mathcal M,t')$, there is a unique $g\\in B$ with $s'|_V=g\\cdot t'|_V$. For $x\\in U$, taking values at $x$ (the map $\\mathcal M(U)\\to\\mathcal M(x)$ is linear over $A\\to\\kappa(x)$) gives $t'(x)=f(x)\\,s'(x)$ with $s'(x)\\neq0$, so $t'(x)\\neq0$ iff $f(x)\\neq0$. Hence $W=U\\cap X_{t'}=\\{x\\in U: f(x)\\neq0\\}=D(f)$, the principal open of the affine open $U$ defined by $f$ [lem-weil-pbc-affine-open-section-vanishing-prime]; symmetrically $W=D(g)\\subseteq V$.",
+   "text": "Apply [lem-weil-pbc-nonvanishing-transition-functions] to these two sections. Obtain f on U and g on V, with W=U intersect V equal to the basic open of f in U and with their restrictions satisfying fg=1.",
    "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-affine-open-section-vanishing-prime"
+    "lem-weil-pbc-nonvanishing-transition-functions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01CY (lemma-s-open: L|_{X_s} is trivialized by s); Properties, proof of Lemma 01PV (lemma-affine-cap-s-open: U cap X_s is the principal open of U where the coordinate of s is invertible) and proof of Lemma 01PY, first paragraph (the intersection of two affine X_s is affine)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$W$ is affine with ring $A_f$.* By [lem-weil-pbc-affine-open-section-vanishing-prime] (b) applied to the affine open $U$ and $f\\in A=\\mathcal O_X(U)$, the open $W=D(f)$ is an affine open of $X$ and the restriction $A\\to\\mathcal O_X(W)$ is a localization of $A$ at $\\{1,f,f^2,\\dots\\}$: $f|_W$ is a unit and every element of $\\mathcal O_X(W)$ is $a|_W\\cdot(f|_W)^{-k}$ for some $a\\in A$, $k\\ge0$.",
+   "text": "Since U is affine, [lem-weil-pbc-affine-open-section-vanishing-prime] makes W affine and its section ring a localization of O(U) away from f. IsLocalization.Away.surj writes each z with z*f^n=a after restriction. Multiply this equality by g^n and use fg=1 to obtain z=a*g^n. Transport along Opens.topIso; both restriction images are in their subring closure, which is closed under multiplication and powers. Thus the two restriction images generate the entire overlap ring, i.e. IsSeparatingPair X U V. This is the proved private helper separatingPair_of_basicOpen.",
    "uses": [
     "lem-weil-pbc-affine-open-section-vanishing-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, proof of Lemma 01PV (U cap X_s is affine) and proof of Lemma 01PY, first paragraph; Schemes, Lemma 01HS (lemma-standard-open: O(D(f)) = A_f)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Surjectivity of $A\\otimes_{\\mathbf Z}B\\to\\mathcal O_X(W)$.* On $W=U\\cap V$ step 3 gives $t'|_W=f|_W\\,s'|_W=f|_W\\,g|_W\\,t'|_W$. Since $W\\subseteq V=X_{t'}$ and $a\\mapsto a\\,t'|_V$ is an isomorphism $\\mathcal O_V\\to\\mathcal M|_V$ [lem-weil-pbc-nonvanishing-section-trivializes], the coefficient of $t'|_W$ is unique, so $f|_W\\,g|_W=1$ in $\\mathcal O_X(W)$, i.e. $(f|_W)^{-1}=g|_W$. By step 4 every element of $\\mathcal O_X(W)$ has the form $a|_W(f|_W)^{-k}=a|_W\\cdot(g^k)|_W$ with $a\\in A$, $g^k\\in B$, which is the image of $a\\otimes g^k$ under the ring map $A\\otimes_{\\mathbf Z}B\\to\\mathcal O_X(W)$, $x\\otimes y\\mapsto x|_W\\,y|_W$ [lem-weil-pbc-affine-open-section-vanishing-prime]. Hence this map is surjective. (This is the computation of Stacks Constructions 01MC for $D_+(f)\\cap D_+(g)=D_+(fg)$ in $\\operatorname{Proj}$: an element of the intersection is an element of one chart times a power of the inverse of the transition function, which is a function on the other chart.)",
+   "text": "Apply the proved source-library affine-cover criterion [lem-weil-pbc-separated-separating-pair-cover] to the point-indexed affine cover, the affine-overlap results and the separating-pair results. It gives X.IsSeparated. The ample theorem is then the covering theorem applied to the cover extracted from hL.2; quasi-compactness is unused.",
    "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-affine-open-section-vanishing-prime"
+    "lem-weil-pbc-separated-separating-pair-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, proof of Lemma 01MC (lemma-proj-separated: surjectivity of S_(f) (x)_Z S_(g) -> S_(fg)), whose argument is transposed here to the charts X_s, X_t; Schemes, Lemma 01KP (2)(b)"
-   }
-  },
-  {
-   "text": "*Conclusion.* Apply [lem-weil-pbc-separated-affine-cover-criterion] to the affine scheme $S=\\operatorname{Spec}\\mathbf Z$, the structure morphism $X\\to\\operatorname{Spec}\\mathbf Z$, and the covering of $X$ by the affine opens $V_{(n,s)}=X_s$, $(n,s)\\in\\mathcal A$ (step 1): for any two members $X_s,X_t$ the intersection is affine (step 4) and $\\mathcal O_X(X_s)\\otimes_{\\mathbf Z}\\mathcal O_X(X_t)\\to\\mathcal O_X(X_s\\cap X_t)$ is surjective (step 5). Hence $X\\to\\operatorname{Spec}\\mathbf Z$ is separated [def-weil-proper-morphism], i.e. $X$ is separated. Only the covering hypothesis of step 1 was used, which proves the more general statement as well.",
-   "uses": [
-    "lem-weil-pbc-separated-affine-cover-criterion",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01KP (lemma-characterize-separated) (2), as used in Constructions, proof of Lemma 01MC; Properties, Lemma 09MP (lemma-ample-separated: 'Follows immediately from Lemma 01PY and Definition 01PS')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ample-invertible-module",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-nonvanishing-common-degree",
+  "lem-weil-pbc-nonvanishing-transition-functions",
   "lem-weil-pbc-affine-open-section-vanishing-prime",
-  "lem-weil-pbc-separated-affine-cover-criterion",
-  "def-weil-proper-morphism"
+  "lem-weil-pbc-separated-separating-pair-cover"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 09MP from Lemma 01PY. Stacks proves the separatedness in 01PY by the valuative criterion (Schemes 01L0) after quasi-separatedness (Schemes 01KO); this proof instead checks the affine-cover criterion Schemes 01KP (2) directly, transposing the computation of Constructions 01MC (Proj is separated) to the charts X_s; the reduction to one degree and the affineness of X_s cap X_t follow 01PY and 01PV."
+  "document": "literature/stacks-project/properties.tex; literature/stacks-project/constructions.tex; literature/stacks-project/schemes.tex",
+  "place": "Existing node affine-cover route for 09MP/01PY, with step 2 and coefficient calculations split into two local lemmas. The localization/subring argument is proved in Lean and the conclusion uses the already proved source separating-pair cover criterion for 01KP (2), instead of the tensor-product wrapper. No unit statement or step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -216,5 +180,15 @@
   "group": "C1",
   "result": "pass",
   "note": "X:Scheme.{u}; L:X.Modules [L.IsInvertible]; hL:L.IsAmple = K1 Scheme.Modules.IsAmple (absolute, #check'd); conclusion X.IsSeparated (terminal.from X separated); general clause: 0<n, s global section of tensorPow n, affine U = nonvanishingLocus, no quasi-compactness"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085215-L-3729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

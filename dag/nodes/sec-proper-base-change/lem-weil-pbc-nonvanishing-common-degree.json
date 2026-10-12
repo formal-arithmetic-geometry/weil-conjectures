@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-nonvanishing-common-degree",
+ "kind": "statement",
+ "title": "Positive tensor-power sections can be compared in one invertible module",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and $p,q\\geq1$ integers. Let $s\\in\\Gamma(X,\\mathcal L^{\\otimes p})$ and $t\\in\\Gamma(X,\\mathcal L^{\\otimes q})$. For a module section $a$ write $X_a=\\{x:a_x\\notin\\mathfrak m_x\\mathcal N_x\\}$, using the tensor powers and nonvanishing loci of [def-weil-pbc-ample-invertible-module]. There exist an invertible module $\\mathcal M$ and $s\\prime,t\\prime\\in\\Gamma(X,\\mathcal M)$ with $X_{s\\prime}=X_s$ and $X_{t\\prime}=X_t$. No covering, affineness or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, proof of Lemma 01PY (lemma-affine-s-opens-cover-quasi-separated), second paragraph; Lemma 01PT (lemma-ample-power), proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-invertible-pullback-tensor], set $\\mathcal M=\\mathcal L^{\\otimes pq}$, which is invertible, and use the exponent-law isomorphisms to transport $s^{\\otimes q}$ and $t^{\\otimes p}$ into sections $s\\prime,t\\prime$ of $\\mathcal M$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same lemma identifies fibre values of tensor sections with tensors of fibre values, in one-dimensional residue-field vector spaces. Choose bases: a positive power of the scalar coordinate is nonzero exactly when that scalar is nonzero. The canonical isomorphisms preserve nonzero fibre values. The nonvanishing predicate of [def-weil-pbc-ample-invertible-module] is precisely nonzero fibre value. Hence $X_{s\\prime}=X_s$ and $X_{t\\prime}=X_t$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, proof of Lemma 01PY (lemma-affine-s-opens-cover-quasi-separated), second paragraph; Lemma 01PT (lemma-ample-power), proof; extracted local step of lem-weil-pbc-ample-scheme-separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonvanishing loci of positive tensor powers of a line bundle section are equal",
+   "results": "LeanSearch returned Internal Server Error; no absence conclusion drawn.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive tensor powers of sections of an invertible sheaf have the same nonvanishing locus",
+   "results": "Scheme.basicOpen_pow and RingedSpace.basicOpen_pow treat structure-sheaf sections, not sections of arbitrary invertible modules. Source grep also found compl_support_zeroLocus_tensorPowSection in WeilConjectures.AlgebraicGeometry.Modules.AffineComplement, but its locus is the complement of Hom.zeroLocus support, not nonvanishingLocus. Identifying these notions is additional work.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishing|tensorPowSection|basicOpen_coeff|transition.*section",
+   "results": "No hits in Mathlib/AlgebraicGeometry. Separately read the source-library tensor power and zero-locus lemmas; no lemma with this nonvanishingLocus predicate.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleSeparated",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 2 of lem-weil-pbc-ample-scheme-separated, reducing the positive degrees of two chart sections to one degree; the ancestor finite-etale-lifting proof needs separatedness in step 7",
+   "via": [
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonvanishingCommonDegree",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonvanishingCommonDegree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_common_degree_nonvanishing",
+  "statement": "theorem exists_common_degree_nonvanishing {X : Scheme.{u}} (L : X.Modules) [L.IsInvertible] (p q : ℕ) (hp : 0 < p) (hq : 0 < q) (s : (L.tensorPow p).val.presheaf.obj (Opposite.op ⊤)) (t : (L.tensorPow q).val.presheaf.obj (Opposite.op ⊤)) : ∃ M : X.Modules, M.IsInvertible ∧ ∃ s' t' : M.val.presheaf.obj (Opposite.op ⊤), nonvanishingLocus M s' = nonvanishingLocus (L.tensorPow p) s ∧ nonvanishingLocus M t' = nonvanishingLocus (L.tensorPow q) t",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085215-L-3729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085215-L-3729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

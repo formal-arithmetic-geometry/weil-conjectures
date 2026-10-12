@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-nonvanishing-transition-functions",
+ "kind": "statement",
+ "title": "Transition coefficients on two nonvanishing opens are reciprocal on their intersection",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal M$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Let $s,t\\in\\Gamma(X,\\mathcal M)$ and let $U,V$ be opens with underlying sets $X_s,X_t$, respectively, where $X_a=\\{x:a_x\\notin\\mathfrak m_x\\mathcal M_x\\}$ [def-weil-pbc-ample-invertible-module]. There exist $f\\in\\Gamma(U,\\mathcal O_X)$ and $g\\in\\Gamma(V,\\mathcal O_X)$ such that $U\\cap V=D_U(f)$ [lem-weil-pbc-basic-open-function] and $f|_{U\\cap V}g|_{U\\cap V}=1$ in $\\Gamma(U\\cap V,\\mathcal O_X)$. Neither open need be affine; $X$ need not be quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex; literature/stacks-project/properties.tex",
+  "place": "Modules, Lemma 01CY (lemma-s-open); Properties, proofs of Lemma 01PV (lemma-affine-cap-s-open) and Lemma 01PY"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-nonvanishing-section-trivializes] to $s$ and $t$. On $U$ and $V$ their multiplication maps from the structure sheaf are isomorphisms. The inverse maps applied to the other section give the unique coefficients $f,g$ with $t|_U=f s|_U$ and $s|_V=g t|_V$.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At $x\\in U$, $s(x)$ is a basis of the residue fibre, so $t(x)=f(x)s(x)$ is nonzero exactly when $f(x)$ is nonzero. Thus $U\\cap V=D_U(f)$. Both sets have no points outside $U$. This uses the basic-open residue-field criterion in [lem-weil-pbc-affine-open-section-vanishing-prime], locally on affine subopens of $U$, and the nonvanishing predicate [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the coefficient equations to $W=U\\cap V$ and substitute to get $t|_W=f|_Wg|_Wt|_W$. Uniqueness of the coefficient of the generator $t|_W$ gives $f|_Wg|_W=1$. If $W$ is empty its ring is the zero ring and the equality still holds.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex; literature/stacks-project/properties.tex",
+  "place": "Modules, Lemma 01CY (lemma-s-open); Properties, proofs of Lemma 01PV (lemma-affine-cap-s-open) and Lemma 01PY; extracted local step of lem-weil-pbc-ample-scheme-separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two global sections of an invertible sheaf trivialize it on their nonvanishing opens and their transition functions multiply to one on the intersection",
+   "results": "LeanSearch returned Internal Server Error; no absence conclusion drawn.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.basicOpen",
+   "results": "Scheme.mem_basicOpen identifies membership with invertibility of the germ of a function; basicOpen_le and basicOpen_pow also returned. None identifies nonvanishing of a module section with the basic open of its coefficient.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishing|tensorPowSection|basicOpen_coeff|transition.*section",
+   "results": "No hits in Mathlib/AlgebraicGeometry. Source basicOpen_coeff_eq uses Hom.zeroLocus instead of this module-section locus. Existing nonvanishing_section_trivializes provides unique coefficients but does not state their nonvanishing comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleSeparated",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 3 and the coefficient-uniqueness part of step 5 of lem-weil-pbc-ample-scheme-separated; the ancestor finite-etale-lifting proof needs separatedness in step 7",
+   "via": [
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonvanishingTransitionFunctions",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonvanishingTransitionFunctions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_nonvanishing_transition_functions",
+  "statement": "theorem exists_nonvanishing_transition_functions {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible] (s t : M.val.presheaf.obj (Opposite.op ⊤)) (U V : X.Opens) (hU : (U : Set X) = nonvanishingLocus M s) (hV : (V : Set X) = nonvanishingLocus M t) : ∃ (f : Γ(X, U)) (g : Γ(X, V)), U ⊓ V = X.basicOpen f ∧ (X.presheaf.map (homOfLE inf_le_left).op) f * (X.presheaf.map (homOfLE inf_le_right).op) g = 1",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085215-L-3729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085215-L-3729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
