@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "Unramified ring map. Since $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ is the morphism induced by the structure map $k\\to C$ and is unramified, [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] (direction 'only if') shows that $C$ is a finitely generated $k$-algebra and $\\Omega_{C/k}=0$; that is, $k\\to C$ is an unramified ring map in the sense of Algebra, Definition 00UT. (In Stacks, Morphisms, Lemma 02G7 this is the passage from the scheme to the ring map via Definition 02G4 and Lemma 02G6; in the proof of Lemma 00UW the fibre ring is unramified over $\\kappa(\\mathfrak p)$ by Lemma 00UV.)",
+   "text": "Translate the two affine hypotheses by the Mathlib match of [lem-weil-pbc-unramified-ring-map-iff-unramified-affine]. LocallyOfFiniteType gives Algebra.FiniteType k C by HasRingHomProperty.Spec_iff and RingHom.finiteType_algebraMap. The open diagonal supplies AlgebraicGeometry.FormallyUnramified by its Mathlib instance; HasRingHomProperty.Spec_iff and RingHom.formallyUnramified_algebraMap then give Algebra.FormallyUnramified k C.",
    "uses": [
     "lem-weil-pbc-unramified-ring-map-iff-unramified-affine"
    ],
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "Étale. A finitely generated $k$-algebra with $\\Omega_{C/k}=0$ over the field $k$ is étale over $k$ by [lem-weil-pbc-unramified-ring-map-over-field-etale]: $C$ is finitely presented over $k$, $H_1(L_{C/k})=0$ and $\\Omega_{C/k}=0$. (Stacks: 'By Lemma 00TT it is smooth hence étale over $\\kappa(\\mathfrak p)$'.)",
+   "text": "Use [lem-weil-pbc-unramified-ring-map-over-field-etale] directly on the algebra: Algebra.FormallyEtale.of_formallyUnramified_of_field k C gives formal etaleness, while Algebra.FinitePresentation.of_finiteType.mp gives finite presentation because k is a field. These form Algebra.Etale k C. No conversion back to a scheme morphism is needed.",
    "uses": [
     "lem-weil-pbc-unramified-ring-map-over-field-etale"
    ],
@@ -52,19 +52,7 @@
    }
   },
   {
-   "text": "Back to schemes. By [lem-weil-pbc-etale-ring-map-iff-etale-affine] (direction 'if'), applied to $\\varphi:k\\to C$, the morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ is étale [def-weil-etale-morphism].",
-   "uses": [
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591 (the étale ring map is then fed to Lemma 00U3)"
-   }
-  },
-  {
-   "text": "Product decomposition. By [lem-weil-pbc-etale-algebra-over-field-product] applied to the étale morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}k$ there are $n\\ge0$, field extensions $L_1,\\dots,L_n$ of $k$, each finite and separable algebraic [def-weil-pbc-separable-algebraic-extension], and an isomorphism of $k$-algebras $C\\cong L_1\\times\\cdots\\times L_n$ (the zero ring for $n=0$). This is the assertion.",
+   "text": "Apply the ring-level Mathlib match Algebra.Etale.iff_exists_algEquiv_prod of [lem-weil-pbc-etale-algebra-over-field-product]. It gives a finite index type I, fields L i with k-algebra structures, an algebra equivalence C ≃ₐ[k] Π i, L i, and finiteness and separability of every factor. Equip I with Fintype.ofFinite I and reindex by f = (Fintype.equivFin I).symm : Fin (Fintype.card I) ≃ I. Compose the supplied equivalence with (AlgEquiv.piCongrLeft k L f).symm; transport each field, algebra, finiteness and separability witness by evaluating it at f j. This also handles the empty index type and hence the zero ring.",
    "uses": [
     "lem-weil-pbc-etale-algebra-over-field-product",
     "def-weil-pbc-separable-algebraic-extension",
@@ -80,8 +68,6 @@
  "proof_deps": [
   "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
   "lem-weil-pbc-unramified-ring-map-over-field-etale",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "def-weil-etale-morphism",
   "lem-weil-pbc-etale-algebra-over-field-product",
   "def-weil-pbc-separable-algebraic-extension",
   "def-pc-field-extension"
@@ -89,7 +75,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591 (for the fibre ring F over kappa(p); here the ring C over k), as used in Morphisms, Lemma 02G7 part (1)"
+  "place": "Algebra, proof of Lemma 00UW (algebra-lemma-unramified-at-prime, line 41568), lines 41579-41591 (for the fibre ring F over kappa(p); here the ring C over k), as used in Morphisms, Lemma 02G7 part (1); M1 stage 3 realizes the ring-level route directly with Mathlib, omitting the unnecessary return to schemes."
  },
  "mathlib_searches": [
   {
@@ -171,5 +157,15 @@
   "reviewer": "R-uap",
   "group": "C1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T184316-L-4009201",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
