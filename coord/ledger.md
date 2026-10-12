@@ -7832,3 +7832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/J1/Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons (stage 3; reviewer PASS; first push; landing 20261012T135242-L-1669085 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/J1/Sheaf.AlgebraicGeometry.AffineModuleTensorExtensionUnit (stage 3; reviewer PASS; first push; landing 20261012T135243-L-1669448 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated (stage 3; reviewer PASS; after a return; landing 20261012T135243-L-1669750 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/J1/Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty (stage 3; reviewer PASS; first push; landing 20261012T135243-L-1670143 (proof); batch 20261012T135212; modules 1; new nodes 0)

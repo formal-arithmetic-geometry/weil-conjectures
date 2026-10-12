@@ -22,24 +22,33 @@
  ],
  "proof": [
   {
-   "text": "The intersection is quasi-compact by quasi-separatedness and finite affine cover criteria, and separated as an open subscheme of the affine scheme V. Apply separated_quasiCompact_open_induction.",
+   "text": "Set W = U ∩ V. Apply Mathlib QuasiSeparatedSpace.inter_isCompact to the open sets U and V, using hU and IsAffineOpen.isCompact hV. This proves compactness of W directly, without choosing a finite affine cover.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inclusion f : W.toScheme → V.toScheme is X.homOfLE inf_le_right and is an open immersion, hence a monomorphism and separated by Mathlib IsSeparated.isSeparated_of_mono. Since V is affine, its terminal morphism is separated. Compose these separated morphisms and use terminal.comp_from to obtain W.toScheme.IsSeparated. This is the composition form of lem-sc-separated-over-affine-scheme-separated.",
    "uses": [
-    "lem-sc-invert-s-cohomology-separated-induction",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
     "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply separated_quasiCompact_open_induction with the unchanged ambient scheme, property, affine hypothesis and gluing hypothesis, to W and the compactness and separatedness proved above.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-separated-induction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-invert-s-cohomology-separated-induction",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-sc-separated-over-affine-scheme-separated"
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-sc-invert-s-cohomology-separated-induction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 08DR proof, second paragraph"
+  "place": "Lemma 08DR proof, second paragraph; compactness implemented directly using Mathlib QuasiSeparatedSpace.inter_isCompact, and separatedness by composition into the affine open."
  },
  "mathlib_searches": [
   {
@@ -96,10 +105,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T110309-L-618002",
-  "kind": "interface",
+  "landing": "20261012T135243-L-1670143",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

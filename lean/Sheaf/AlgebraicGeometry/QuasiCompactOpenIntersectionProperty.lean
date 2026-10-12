@@ -28,6 +28,17 @@ theorem property_intersection_of_quasiCompact_affine
       P U → P V → P (U ⊓ V) → P (U ⊔ V))
     (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) :
     P (U ⊓ V) := by
-  sorry
+  have hW_qc : IsCompact ((U ⊓ V : X.Opens) : Set X) := by
+    change IsCompact ((U : Set X) ∩ (V : Set X))
+    exact QuasiSeparatedSpace.inter_isCompact _ _ U.2 hU V.2 hV.isCompact
+  let : IsAffine V.toScheme := hV
+  let f : (U ⊓ V).toScheme ⟶ V.toScheme :=
+    X.homOfLE (show U ⊓ V ≤ V from inf_le_right)
+  have hW_sep : (U ⊓ V).toScheme.IsSeparated := by
+    constructor
+    simpa only [CategoryTheory.Limits.terminal.comp_from] using
+      (inferInstance : IsSeparated (CategoryTheory.CategoryStruct.comp f
+        (CategoryTheory.Limits.terminal.from V.toScheme)))
+  exact separated_quasiCompact_open_induction X P h_affine h_union (U ⊓ V) hW_qc hW_sep
 
 end AlgebraicGeometry
