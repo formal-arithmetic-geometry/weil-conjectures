@@ -218,6 +218,48 @@ lemma leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit
           ((mapHomotopyCategorySheafExtendScalarsCompUpperStarIso R S g).hom.app K) :=
   Functor.leftDerivedNatTrans_app _ _ _ _ (HomotopyCategory.quasiIso _ (.up ℤ)) _ K
 
+/-- `leftDerivedUpperStarExtendScalarsIso` is compatible with the identifications
+`L(𝟙 Y)^* ≅ 𝟭`. -/
+@[reassoc]
+lemma leftDerivedUpperStarExtendScalarsIso_hom_app_id
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))) :
+    (leftDerivedUpperStarExtendScalarsIso R S (𝟙 Y)).hom.app K ≫
+        L(sheafExtendScalars (algebraMap R S) Y).map
+          ((leftDerivedUpperStarId (ModuleCat.{u + 1} R) Y).hom.app K) =
+      (leftDerivedUpperStarId (ModuleCat.{u + 1} S) Y).hom.app
+        (L(sheafExtendScalars (algebraMap R S) Y).obj K) := by
+  sorry
+
+/-- `leftDerivedUpperStarExtendScalarsIso` is compatible with the composition isomorphisms
+`L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`. -/
+@[reassoc]
+lemma leftDerivedUpperStarExtendScalarsIso_hom_app_comp {T : Scheme.{u}} (g₁ : T ⟶ Z)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))) :
+    (leftDerivedUpperStarExtendScalarsIso R S (g₁ ≫ g)).hom.app K ≫
+        L(sheafExtendScalars (algebraMap R S) T).map
+          ((leftDerivedUpperStarComp (ModuleCat.{u + 1} R) g₁ g).hom.app K) =
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} S) g₁ g).hom.app
+          (L(sheafExtendScalars (algebraMap R S) Y).obj K) ≫
+        L((g₁)^*[ModuleCat.{u + 1} S]).map
+          ((leftDerivedUpperStarExtendScalarsIso R S g).hom.app K) ≫
+        (leftDerivedUpperStarExtendScalarsIso R S g₁).hom.app
+          (L((g)^*[ModuleCat.{u + 1} R]).obj K) := by
+  sorry
+
+/-- `leftDerivedUpperStarExtendScalarsIso` is compatible with the transport
+`leftDerivedUpperStarCongr` along an equality of morphisms. -/
+@[reassoc]
+lemma leftDerivedUpperStarExtendScalarsIso_hom_app_congr {g' : Z ⟶ Y} (h : g = g')
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))) :
+    (leftDerivedUpperStarExtendScalarsIso R S g).hom.app K ≫
+        L(sheafExtendScalars (algebraMap R S) Z).map
+          ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} R) h).hom.app K) =
+      (leftDerivedUpperStarCongr (ModuleCat.{u + 1} S) h).hom.app
+          (L(sheafExtendScalars (algebraMap R S) Y).obj K) ≫
+        (leftDerivedUpperStarExtendScalarsIso R S g').hom.app K := by
+  subst h
+  simp
+
 end Pullback
 
 end AlgebraicGeometry.ProEtale
