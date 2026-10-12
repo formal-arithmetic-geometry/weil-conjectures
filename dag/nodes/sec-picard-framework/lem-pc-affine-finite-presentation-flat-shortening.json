@@ -15,35 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Identify S with Spec A. Affine quasi-coherent sheaves are modules, and evaluation is exact on this subcategory. The section terms of B are finitely presented flat A-modules, hence finite projective. The section complex P is concentrated in [0,b], and its associated-sheaf complex recovers B and its differentials. Ordinary residue pullback is tensor with κ(p).",
+   "text": "Apply the cancellation construction to obtain D supported in [0,d], flat, quasi-coherent, finitely presented, and a homotopy equivalence e:D≃B.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-pc-affine-finite-presentation-flat-shortening-construction"
    ],
    "elementary": false
   },
   {
-   "text": "Run descending induction on the top degree m>d of P. Fibre homology at m is coker(d^{m-1}⊗κ(p)). This is zero for every prime by the hypothesis. The finite cokernel of d^{m-1} therefore has zero localization at every prime by local Nakayama and is zero. Thus d^{m-1} is surjective and splits since P^m is projective. Decompose P^{m-1}=ker(d^{m-1})⊕P^m; the kernel is finite projective. The complex relation forces the preceding differential into the kernel. The two copies of P^m give an identity-differential contractible summand, so cancelling it gives a chain homotopy equivalence to a complex with lower top degree. Repeat until the top is at most d. This is the bounded-projective special case of the residue criterion 068V, with its cancellation argument written explicitly. Nonnegative support is preserved because m>d≥0 implies m-1≥0. If b≤d no cancellation is required.",
-   "uses": [],
+   "text": "Apply the bounded-above affine finite-presentation flat pseudo-coherence lemma to D.",
+   "uses": [
+    "lem-pc-affine-finite-presentation-flat-pseudo-coherent"
+   ],
    "elementary": false
   },
   {
-   "text": "Associate sheaves to the shortened finite-projective complex. Its terms are flat and quasi-coherent. It is pseudo-coherent in the ring definition: choose finite-projective complements in finite free modules, add the complements as identity-differential contractible pairs, and descend from the highest degree. This constructs a bounded-above finite free complex with the same derived image; it may continue indefinitely to the left, which the definition allows. This is the finite-projective-to-finite-free part of Tag 064U.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Each chain homotopy equivalence obtained by cancelling a contractible pair is preserved by tensor and by ordinary sheaf pullback. Take homology after arbitrary g:T′→S to obtain the asserted comparisons, with no affineness assumption on T′. All steps kept S fixed. The zero-ring case uses the zero complex; at d=0 the resulting representative is a finite projective module in degree zero.",
+   "text": "For each g:T′→S map e using Functor.mapHomotopyEquiv for the additive pullback functor, and apply HomotopyEquiv.toHomologyIso in integer degree q. This proves the universal pullback comparison without any exactness assumption on pullback.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-pc-affine-finite-presentation-flat-shortening-construction",
+  "lem-pc-affine-finite-presentation-flat-pseudo-coherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 068V (residue criterion, specialized to bounded projective complexes), 064U (finite free representatives), 08EB (affine model); source checked online, interface and cancellation details written by G3"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 068V, 064U, 08EB; Functor.mapHomotopyEquiv and HomotopyEquiv.toHomologyIso; repaired second reading Q3"
  },
  "mathlib_searches": [
   {
@@ -114,9 +112,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T184302-L-4004112",
+  "landing": "20261012T214712-L-1272031",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

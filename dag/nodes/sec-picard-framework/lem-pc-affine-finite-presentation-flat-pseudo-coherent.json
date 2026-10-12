@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-affine-finite-presentation-flat-pseudo-coherent",
+ "kind": "statement",
+ "title": "Pseudo-coherence of affine bounded-above finite-presentation flat complexes",
+ "statement": "Let S be affine and D a cochain complex of O_S-modules, strictly zero above b∈ℕ and termwise flat over id_S, quasi-coherent and finitely presented. With A=Γ(S,⊤) and the standard derived category of A-modules, Q of the termwise global-section complex of D is pseudo-coherent in the ring sense (has a bounded-above finite-free representative). No residue vanishing or lower degree bound is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 064U, implication (3) to (1); affine identification as in 08EB"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The affine quasi-coherent equivalence together with the affine finite-presentation sections criterion makes every global-section term finitely presented. The hypothesis IsFlatOver (𝟙 S) specializes to flatness over the section ring, so Module.Flat.projective_of_finitePresentation gives finite projectivity.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Starting at b, choose finite-projective complements so F^n=P^n⊕C^(n+1)⊕C^n is finite free. The F differential is the P differential plus the identity on C^(n+1). Projection to P and inclusion are homotopy inverse using the contractions of the identity pairs, so Q(F)≅Q(P). F is zero above b and finite free termwise, which witnesses ring pseudo-coherence. The descending complement construction need not stop below.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 064U, implication (3) to (1); affine identification as in 08EB; detailed argument checked and written by second reader Q3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above finite projective complex admits finite free representative pseudo coherent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded complex of finitely presented flat modules on affine scheme has pseudo coherent global sections",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "partial search; affine sections and exact projectivity declaration cited explicitly"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.FinitePresentation",
+   "results": "Module.Flat.projective_of_finitePresentation (exact)",
+   "date": "2026-10-13",
+   "verdict": "exact match: Module.Flat.projective_of_finitePresentation"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPseudoCoherent",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "partial tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Flat.projective_of_finitePresentation",
+   "results": "Mathlib/RingTheory/Flat/EquationalCriterion.lean:287",
+   "date": "2026-10-13",
+   "verdict": "exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShortening",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence proof part (a): cancel the upper terms of the affine flat model; pseudo-coherence of its finite projective section complex",
+   "via": [
+    "lem-pc-affine-finite-presentation-flat-shortening",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatPseudoCoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFinitePresentationFlatPseudoCoherent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_finitePresentation_flat_pseudoCoherent",
+  "statement": "theorem affine_finitePresentation_flat_pseudoCoherent (S : Scheme.{u})\n    (hS : IsAffine S) (D : CochainComplex S.Modules ℤ) (b : ℕ)\n    (hDle : D.IsStrictlyLE b)\n    (hDflat : ∀ n : ℤ, (D.X n).IsFlatOver (𝟙 S))\n    (hDqc : ∀ n : ℤ, (D.X n).IsQuasicoherent)\n    (hDfp : ∀ n : ℤ, (D.X n).IsFinitePresentation) :\n      (letI : CommRing (S.ringCatSheaf.obj.obj (.op ⊤)) :=\n        inferInstanceAs (CommRing Γ(S, ⊤));\n        letI := HasDerivedCategory.standard (ModuleCat.{u} (S.ringCatSheaf.obj.obj (.op ⊤)));\n        DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj\n          (((SheafOfModules.evaluation.{u} S.ringCatSheaf (.op ⊤)).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj D)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T214712-L-1272031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T214712-L-1272031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

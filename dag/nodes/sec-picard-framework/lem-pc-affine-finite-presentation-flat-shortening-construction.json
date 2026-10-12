@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-affine-finite-presentation-flat-shortening-construction",
+ "kind": "statement",
+ "title": "Split cancellation above the residue homology bound",
+ "statement": "Let S be affine and B a cochain complex of quasi-coherent finitely presented modules flat over id_S, supported in [0,b] for b∈ℕ. If its residue-field pullback homology vanishes in every natural degree q>d, then there exists D supported in [0,d], still termwise flat, quasi-coherent and finitely presented, with a chain homotopy equivalence D ≃ B. Pseudo-coherence and pullback homology comparisons are not conclusions of this cancellation lemma.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 068V and 08EB; bounded finite-projective specialization with explicit split cancellation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine tilde/global-sections equivalence and the affine finite-presentation sections criterion to identify every section module of B as finitely presented; the terms are flat by the identity-IsFlatOver specialization, so Module.Flat.projective_of_finitePresentation makes them finite projective. Residue pullback is tensor with the residue field.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a top degree m>d the cokernel of the preceding differential is finite with zero fibres. Local Nakayama (Mathlib.RingTheory.Nakayama) makes each localization zero, and Module.eq_zero_of_localization_maximal detects that the finite module itself is zero. The surjection onto the finite projective top term splits by Projective.factorThru (equivalently Finite.exists_comp_eq_id_of_projective). Its kernel is a finite projective direct summand, using Retract.projective and finite generation. The removed identity pair is contractible, giving a homotopy equivalence. Descending induction stops at d; m-1 ≥ 0 preserves the lower bound. Transport the resulting complex and homotopies back by associated sheaves. The b≤d and zero-ring cases give identity and zero models.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 068V and 08EB; bounded finite-projective specialization with explicit split cancellation; detailed argument checked and written by second reader Q3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cancel top terms of bounded finite projective complex using residue field homology vanishing",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cancel split surjection at top degree bounded finite projective complex residue fields homotopy equivalence",
+   "results": "8 hits: CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CategoryTheory.ProjectiveResolution.homotopyEquiv, CochainComplex.IsKProjective.homotopyZero, CochainComplex.IsKProjective.homotopyZero_def, CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π, HomotopyEquiv.isKProjective, CochainComplex.IsKProjective.nonempty_homotopy_zero, CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π_assoc",
+   "date": "2026-10-13",
+   "verdict": "partial search, with exact declarations recorded from Mathlib source"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv",
+   "results": "Module.Flat.projective_of_finitePresentation; Projective.factorThru; Finite.exists_comp_eq_id_of_projective; Module.eq_zero_of_localization_maximal",
+   "date": "2026-10-13",
+   "verdict": "exact matches for the projectivity, splitting, and localization steps"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyEquiv|toHomologyIso|finite.*projective",
+   "results": "3 hits: Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean",
+   "date": "2026-10-13",
+   "verdict": "partial tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Nakayama; Module.eq_zero_of_localization_maximal; Projective.factorThru; Retract.projective",
+   "results": "Mathlib/RingTheory/Nakayama.lean; Mathlib/RingTheory/LocalProperties/Submodule.lean; Mathlib/CategoryTheory/Projective/Basic.lean; Mathlib/CategoryTheory/Retract.lean",
+   "date": "2026-10-13",
+   "verdict": "exact declarations used in step 2"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShortening",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence proof part (a): cancel the upper terms of the affine flat model; pseudo-coherence of its finite projective section complex",
+   "via": [
+    "lem-pc-affine-finite-presentation-flat-shortening",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFinitePresentationFlatShorteningConstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_finitePresentation_flat_shortening_construction",
+  "statement": "theorem affine_finitePresentation_flat_shortening_construction (S : Scheme.{u})\n    (hS : IsAffine S) (B : CochainComplex S.Modules ℤ) (b d : ℕ)\n    (hBge : B.IsStrictlyGE 0) (hBle : B.IsStrictlyLE b)\n    (hBflat : ∀ n : ℤ, (B.X n).IsFlatOver (𝟙 S))\n    (hBqc : ∀ n : ℤ, (B.X n).IsQuasicoherent)\n    (hBfp : ∀ n : ℤ, (B.X n).IsFinitePresentation)\n    (hvan : ∀ (s : S) (q : ℕ), d < q →\n      IsZero ((((Modules.pullback (S.fromSpecResidueField s)).mapHomologicalComplex _).obj\n        B).homology q)) :\n    ∃ D : CochainComplex S.Modules ℤ,\n      D.IsStrictlyGE 0 ∧ D.IsStrictlyLE d ∧\n      (∀ n : ℤ, (D.X n).IsFlatOver (𝟙 S)) ∧\n      (∀ n : ℤ, (D.X n).IsQuasicoherent) ∧\n      (∀ n : ℤ, (D.X n).IsFinitePresentation) ∧\n      Nonempty (HomotopyEquiv D B)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T214712-L-1272031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T214712-L-1272031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

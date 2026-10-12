@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction
+import Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatPseudoCoherent
 
 /-! # Shortening a finite-presentation flat complex on an affine scheme -/
 
@@ -73,6 +75,13 @@ theorem exists_affine_finitePresentation_flat_shortening (S : Scheme.{u})
             (ComplexShape.up ℤ)).obj D))) ∧
       ∀ {T' : Scheme.{u}} (g : T' ⟶ S) (q : ℕ),
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj D).homology q ≅
-          (((Modules.pullback g).mapHomologicalComplex _).obj B).homology q) := by sorry
+          (((Modules.pullback g).mapHomologicalComplex _).obj B).homology q) := by
+  obtain ⟨D, hDge, hDle, hDflat, hDqc, hDfp, ⟨e⟩⟩ :=
+    affine_finitePresentation_flat_shortening_construction S hS B b d hBge hBle
+      hBflat hBqc hBfp hvan
+  refine ⟨D, hDge, hDle, hDflat, hDqc,
+    affine_finitePresentation_flat_pseudoCoherent S hS D d hDle hDflat hDqc hDfp, ?_⟩
+  intro T' g q
+  exact ⟨((Modules.pullback g).mapHomotopyEquiv e).toHomologyIso (q : ℤ)⟩
 
 end AlgebraicGeometry.Scheme.Modules
