@@ -1,0 +1,189 @@
+{
+ "id": "lem-pc-r2-integral-ideals-common-generic-lattice",
+ "kind": "statement",
+ "title": "A coherent common generic lattice of two integral ideals",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] and $i:W\\to X$ a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme]. Let $I,J$ be quasi-coherent ideals represented by $W.\\mathrm{IdealSheafData}$ with $i_*I$ nonzero [def-pc-module-pullback] and $J\\ne 0$. The pushforward $i_*I$ is coherent, and there exist a coherent $\\mathcal O_X$-module $K$ [pqf-def-coherent] and monomorphisms $b:K\\to i_*J$ and $d:K\\to i_*I$ such that both maps on module stalks [def-weil-pbc-module-stalk] at $i(\\operatorname{genericPoint}(W))$ are isomorphisms. No assertion about cokernels is made.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YH, lemma-property-irreducible, proof: intersection comparison in the paragraph beginning Next, suppose"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "pqf-def-locnoeth"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "proof": [
+  {
+   "text": "The zero ideal has zero affine sections, hence a zero module; pushforward preserves zero objects. Thus nonzero i_*I implies I is nonzero. W is locally Noetherian as a closed subscheme. Quasi-coherence of ideals follows from their kernel construction; coherent submodule closure inside the coherent structure module gives coherence of I.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct L as the kernel of I -> O_W -> (W/J)_* O_(W/J). Its kernel arrow b_0 embeds it into I. The composite b_0 followed by I -> O_W lifts to J by the universal property of the kernel defining J. Its composite with J -> O_W is b_0 followed by I -> O_W, so the lift d_0 is mono. L is quasi-coherent and is a submodule of coherent I, hence coherent. This kernel is the actual intersection, without selecting an existence witness.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both ideals have full generic stalk. The generic map O_W -> (W/J)_* O_(W/J) is zero because its composite with the surjective generic inclusion of J is zero. Stalk exactness of the kernel sequence then makes b_0 surjective and injective at the generic point. The equality of the two composites and bijectivity of both ideal inclusions make d_0 bijective too. Push forward L and the two maps; finite pushforward preserves coherence and monomorphisms. Naturality of the bijective closed-pushforward stalk comparison transfers the two generic bijections.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YH, lemma-property-irreducible, proof: intersection comparison in the paragraph beginning Next, suppose"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two nonzero quasi coherent ideals on an integral locally Noetherian scheme have coherent intersection and invertible generic inclusion maps",
+   "results": {
+    "t": "2026-10-12T21:33:39Z",
+    "tool": "leansearch",
+    "query": "Two nonzero quasi coherent ideals on an integral locally Noetherian scheme have coherent intersection and invertible generic inclusion maps",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection inclusions of two nonzero ideal sheaves on an integral scheme are isomorphisms at the generic point",
+   "results": {
+    "t": "2026-10-12T21:46:10Z",
+    "tool": "leanfinder",
+    "query": "The intersection inclusions of two nonzero ideal sheaves on an integral scheme are isomorphisms at the generic point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.supportSet_inter",
+     "AlgebraicGeometry.Scheme.IdealSheafData.coe_support_inter",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_inf",
+     "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso",
+     "AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint",
+     "AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι",
+     "AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet"
+    ],
+    "digest": "0ab06bb3778270b5"
+   },
+   "date": "2026-10-13",
+   "verdict": "No complete scheme-module statement matching this lemma; use the named elementary algebraic results and the project stalk interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*(coproduct|directSum)|ideal.*intersection.*stalk|pullback.*stalk",
+   "results": {
+    "t": "2026-10-12T21:31:36Z",
+    "tool": "grep",
+    "query": "finrank.*(coproduct|directSum)|ideal.*intersection.*stalk|pullback.*stalk",
+    "sub": "",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean",
+     "Mathlib/LinearAlgebra/FreeModule/IdealQuotient.lean",
+     "Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+     "Mathlib/LinearAlgebra/Dimension/Constructions.lean",
+     "Mathlib/Topology/Sheaves/Stalks.lean",
+     "Mathlib/Topology/Sheaves/Stalks.lean",
+     "Mathlib/Topology/Sheaves/Stalks.lean",
+     "Mathlib/Topology/Sheaves/Stalks.lean"
+    ],
+    "digest": "a84c2021e9ed73d8"
+   },
+   "date": "2026-10-13",
+   "verdict": "No complete scheme-module statement matching this lemma; use the named elementary algebraic results and the project stalk interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealCommonSubmodule",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YH, lemma-property-irreducible, proof: intersection comparison in the paragraph beginning Next, suppose",
+   "via": [
+    "lem-pc-e2-integral-ideal-proper-cohomology",
+    "lem-pc-v3-integral-ideal-comparison-filtrations",
+    "lem-pc-a2-integral-ideal-common-submodule"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralIdealsCommonGenericLattice.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.integral_ideals_common_generic_lattice",
+  "statement": "theorem integral_ideals_common_generic_lattice {X W : Scheme.{u}}\n    [IsLocallyNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (I J : W.IdealSheafData) (hI : ¬ IsZero ((pushforward i).obj I.toModules))\n    (hJ : J ≠ ⊥) :\n    ∃ (K : X.Modules) (b : K ⟶ (pushforward i).obj J.toModules)\n      (d : K ⟶ (pushforward i).obj I.toModules),\n      RingedSpace.IsCoherent X.toRingedSpace ((pushforward i).obj I.toModules) ∧\n      RingedSpace.IsCoherent X.toRingedSpace K ∧ Mono b ∧ Mono d ∧\n      IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).map b) ∧\n      IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).map d)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T234223-L-2126560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T234223-L-2126560",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,13 +11,16 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+
+import Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusion
+import Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # A common submodule with generically vanishing cokernels
 
@@ -33,6 +36,56 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+/-- A quasi-coherent module with finitely presented sections on every affine open
+is finitely presented. No Noetherian or coherence hypothesis is required. -/
+private theorem finitePresentation_of_affine_sections (X : Scheme.{u}) (F : X.Modules)
+    [F.IsQuasicoherent]
+    (hF : ∀ U : X.affineOpens, Module.FinitePresentation Γ(X, U.1) Γ(F, U.1)) :
+    F.IsFinitePresentation := by
+  have (U : X.affineOpens) : (F.over U.1).IsFinitePresentation := by
+    exact (((quasicoherent_finite_type_affine.{u, u} X).2 F inferInstance).1
+      U.1 U.2).2.mpr (hF U)
+  exact SheafOfModules.IsFinitePresentation.of_coversTop F (fun U : X.affineOpens ↦ U.1)
+    ((Opens.coversTop_iff X _).mpr
+      (TopologicalSpace.IsOpenCover.mk (iSup_affineOpens_eq_top X)))
+
+/-- A generically surjective map to a sheaf supported in S has cokernel support
+strictly inside S whenever the chosen point belongs to S. -/
+private theorem cokernel_support_ssubset (X : Scheme.{u}) {K F : X.Modules}
+    (f : K ⟶ F) (S : Set X) (ξ : X) (hξ : ξ ∈ S)
+    (hF : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ S)
+    (hf : Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map f)) :
+    {x : X | ¬ Subsingleton ((cokernel f).presheaf.stalk x)} ⊂ S := by
+  have qsurj (x : X) : Function.Surjective
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map (cokernel.π f)) := by
+    have : Epi ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map
+      (cokernel.π f)) := ((RingedSpace.module_stalk_exact X.toRingedSpace f).2.2.1 x).1
+    exact (ModuleCat.epi_iff_surjective _).mp inferInstance
+  have hQξ : Subsingleton ((cokernel f).presheaf.stalk ξ) := by
+    have hz (v : (cokernel f).presheaf.stalk ξ) : v = 0 := by
+      obtain ⟨v', rfl⟩ := qsurj ξ v
+      obtain ⟨v'', rfl⟩ := hf v'
+      have hc := congrArg (fun g ↦ g v'')
+        ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map_comp f (cokernel.π f))
+      rw [cokernel.condition, Functor.map_zero] at hc
+      exact hc.symm
+    exact ⟨fun a b ↦ (hz a).trans (hz b).symm⟩
+  have hsub : {x : X | ¬ Subsingleton ((cokernel f).presheaf.stalk x)} ⊆ S := by
+    intro x hx
+    apply hF
+    intro hFx
+    have : Subsingleton ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) := hFx
+    exact hx ((qsurj x).subsingleton)
+  apply Set.ssubset_iff_subset_ne.mpr
+  refine ⟨hsub, ?_⟩
+  intro heq
+  have : ξ ∈ {x : X | ¬ Subsingleton ((cokernel f).presheaf.stalk x)} := by
+    rw [heq]
+    exact hξ
+  exact this hQξ
+
+-- The residue-field instance is used implicitly by finrank.
+set_option linter.unusedVariables false in
 /-- A nonzero ideal pushforward and a coherent module of generic rank one admit
 monomorphisms from a common module, with coherent cokernels of strictly smaller support.
 No filtration is asserted here.
@@ -82,7 +135,66 @@ theorem exists_integral_ideal_common_submodule (X W : Scheme.{u})
       RingedSpace.IsCoherent X.toRingedSpace (cokernel d) ∧
       (cokernel a).IsFinitePresentation ∧ (cokernel d).IsFinitePresentation ∧
       {x : X | ¬ Subsingleton ((cokernel a).presheaf.stalk x)} ⊂ Set.range i.base ∧
-      {x : X | ¬ Subsingleton ((cokernel d).presheaf.stalk x)} ⊂ Set.range i.base := by sorry
+      {x : X | ¬ Subsingleton ((cokernel d).presheaf.stalk x)} ⊂ Set.range i.base  := by
+  classical
+  obtain ⟨J, hJ, α, hα, hαξ⟩ :=
+    rank_one_generic_ideal_inclusion i G hGcoh hGann hGrank
+  have : Mono α := hα
+  have : IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+    (i.base (genericPoint W))).map α) := hαξ
+  obtain ⟨K, b, d, hIpcoh, hK, hb, hd, hbξ, hdξ⟩ :=
+    integral_ideals_common_generic_lattice i I J hI hJ
+  have : Mono b := hb
+  have : Mono d := hd
+  have : IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+    (i.base (genericPoint W))).map b) := hbξ
+  have : IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+    (i.base (genericPoint W))).map d) := hdξ
+  let a : K ⟶ G := b ≫ α
+  have ha : Mono a := inferInstanceAs (Mono (b ≫ α))
+  have haξ : Function.Surjective
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).map a) := by
+    dsimp only [a]
+    rw [Functor.map_comp]
+    exact (ConcreteCategory.bijective_of_isIso
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+        (i.base (genericPoint W))).map α)).2.comp
+      (ConcreteCategory.bijective_of_isIso
+        ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+          (i.base (genericPoint W))).map b)).2
+  have hQa := ((isCoherent_kernel_cokernel_biprod_and_submodule X).1
+    K G hK hGcoh).1 a |>.2
+  have hQd := ((isCoherent_kernel_cokernel_biprod_and_submodule X).1
+    K ((pushforward i).obj I.toModules) hK hIpcoh).1 d |>.2
+  have : (cokernel a).IsQuasicoherent :=
+    ((isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp hQa).1
+  have : (cokernel d).IsQuasicoherent :=
+    ((isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp hQd).1
+  have hQafp : (cokernel a).IsFinitePresentation :=
+    finitePresentation_of_affine_sections X _ fun U ↦ by
+      have : IsNoetherianRing Γ(X, U.1) := IsLocallyNoetherian.component_noetherian U
+      have : Module.Finite Γ(X, U.1) Γ(cokernel a, U.1) :=
+        coherent_affine_sections_finite X _ hQa U.1 U.2
+      exact Module.finitePresentation_of_finite Γ(X, U.1) Γ(cokernel a, U.1)
+  have hQdfp : (cokernel d).IsFinitePresentation :=
+    finitePresentation_of_affine_sections X _ fun U ↦ by
+      have : IsNoetherianRing Γ(X, U.1) := IsLocallyNoetherian.component_noetherian U
+      have : Module.Finite Γ(X, U.1) Γ(cokernel d, U.1) :=
+        coherent_affine_sections_finite X _ hQd U.1 U.2
+      exact Module.finitePresentation_of_finite Γ(X, U.1) Γ(cokernel d, U.1)
+  refine ⟨K, a, d, ha, hd, hQa, hQd, hQafp, hQdfp, ?_, ?_⟩
+  · exact cokernel_support_ssubset X a (Set.range i.base) (i.base (genericPoint W))
+      ⟨genericPoint W, rfl⟩ (by rw [hGsupp]) haξ
+  · apply cokernel_support_ssubset X d (Set.range i.base) (i.base (genericPoint W))
+      ⟨genericPoint W, rfl⟩
+    · intro x hx
+      by_contra hxout
+      exact hx ((closedImmersion_pushforward_stalks i i.isClosedEmbedding I.toModules).1
+        x hxout)
+    · exact (ConcreteCategory.bijective_of_isIso
+        ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+          (i.base (genericPoint W))).map d)).2
+
 
 
 end AlgebraicGeometry.Scheme.Modules

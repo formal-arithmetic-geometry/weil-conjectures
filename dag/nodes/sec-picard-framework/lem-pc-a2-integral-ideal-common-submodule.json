@@ -21,31 +21,35 @@
  "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], let $i:W\\to X$ be a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme], and let $\\xi=i(\\operatorname{genericPoint}W)$. Let $G$ be a coherent module [pqf-def-coherent] with $\\operatorname{Supp}(G)=i(W)$ [def-weil-pbc-module-stalk], whose stalk at $\\xi$ is killed by the ambient maximal ideal and is a one-dimensional module over $\\kappa(\\xi)$ [def-weil-residue-field], compatibly with the residue map. Let $I$ be a quasi-coherent ideal on $W$, represented by $W.\\mathrm{IdealSheafData}$, and assume its pushforward [def-pc-module-pullback] $i_*I$ is nonzero. Then there exist a module $K$ and monomorphisms $a:K\\to G$ and $d:K\\to i_*I$ such that both canonical cokernels are coherent and finitely presented and each has nonzero-stalk support strictly contained in $i(W)$. No filtration is asserted.",
  "proof": [
   {
-   "text": "The closed subscheme W is Noetherian. Ideals on W are quasi-coherent finite type, hence coherent, and their closed pushforwards are coherent. If I were zero then its module and pushforward would be zero, contrary to the hypothesis.",
+   "text": "Apply rank_one_generic_ideal_inclusion to G, its coherence, annihilation and compatible residue-field rank-one hypotheses. This supplies a nonzero ideal J and a monomorphism from i_*J to G with invertible generic stalk.",
    "uses": [
+    "lem-pc-r2-rank-one-generic-ideal-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral_ideals_common_generic_lattice to I and J. It supplies coherence of i_*I, a coherent K and monomorphisms into both ideal pushforwards with invertible generic maps. Compose the J map with the monomorphism i_*J -> G. Monomorphisms compose and the generic composite is surjective.",
+   "uses": [
+    "lem-pc-r2-integral-ideals-common-generic-lattice"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coherent cokernel closure makes both canonical cokernels coherent, hence quasi-coherent. Their affine sections are finite over Noetherian affine rings and therefore finitely presented. Apply the general affine-section criterion: on any scheme, a quasi-coherent module with finitely presented sections on every affine open is finitely presented, by the affine criterion and locality. This helper does not assume coherence or Noetherianity.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-pc-closed-immersion-coherent-cohomology"
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sc-noetherian-finite-module-finite-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the generic-point ideal inclusion to G. The generic stalk is a residue-field line. The generic stalk of the source is a direct sum of copies of the generic ideal stalk, which is either zero or the generic field. Since the inclusion is an isomorphism near xi, that ideal J is nonzero and the number of summands is exactly one. Obtain an inclusion i_*J into G with invertible generic stalk.",
+   "text": "Each cokernel projection is surjective on stalks, so its support is contained in the support of its target. The target G has support i(W); i_*I vanishes outside i(W) by closed-pushforward stalk comparison. The generic surjectivity of the two constructed maps forces both cokernel stalks there to be zero. That point belongs to i(W), so each subset is strict. No closedness-of-support assertion is needed.",
    "uses": [
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Form L = I intersection J as IdealSheafData. On any nonempty affine open, nonzero elements from I and J have nonzero product in the integral domain, lying in L. Thus L is nonzero; all three generic stalk ideals equal the generic field. Set K = i_*L. Its inclusions into i_*I and i_*J, followed in the latter case by the inclusion into G, are monomorphisms. Coherent kernel/cokernel closure gives coherent cokernels. On a locally Noetherian scheme quasi-coherent finite-type modules are finitely presented, so both cokernels are finitely presented. Closed-pushforward stalk comparison and stalk exactness show both vanish outside i(W) and at xi, since the generic maps are isomorphisms. Each support is closed and contained in i(W) while omitting xi, hence strictly contained. Zero cokernels have empty support and satisfy the same conclusion.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-intersection",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-    "lem-weil-pbc-closed-pushforward-stalks",
     "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-finite-type-module-support-closed"
+    "lem-weil-pbc-closed-pushforward-stalks"
    ],
    "elementary": false
   }
@@ -53,7 +57,7 @@
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tag 01YH, lemma-property-irreducible, proof: generic-point inclusion and intersection comparison"
+  "place": "Tag 01YH, lemma-property-irreducible, proof: rank-one ideal inclusion and comparison through the intersection; kernel construction and stalkwise assembly formalized by R2; duplicate coherent finite-presentation helper generalized in place to the affine-section criterion by R2 during repair"
  },
  "mathlib_match": null,
  "status": "split",
@@ -76,15 +80,15 @@
   "same_as": []
  },
  "proof_deps": [
-  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-r2-rank-one-generic-ideal-inclusion",
+  "lem-pc-r2-integral-ideals-common-generic-lattice",
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-  "lem-weil-pbc-quasi-coherent-ideal-intersection",
-  "lem-weil-pbc-closed-pushforward-stalks",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sc-noetherian-finite-module-finite-presentation",
   "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-finite-type-module-support-closed"
+  "lem-weil-pbc-closed-pushforward-stalks"
  ],
  "mathlib_searches": [
   {
@@ -172,9 +176,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T212206-L-1096684",
+  "landing": "20261012T234223-L-2126560",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

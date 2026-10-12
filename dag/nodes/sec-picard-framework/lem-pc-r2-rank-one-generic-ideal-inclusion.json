@@ -1,0 +1,180 @@
+{
+ "id": "lem-pc-r2-rank-one-generic-ideal-inclusion",
+ "kind": "statement",
+ "title": "A rank-one generic ideal inclusion",
+ "statement": "Let $X$ be Noetherian [pqf-def-locnoeth] and $i:W\\to X$ a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme]. Let $G$ be a coherent module [pqf-def-coherent] whose stalk at $\\xi=i(\\operatorname{genericPoint}(W))$ [def-weil-pbc-module-stalk] is annihilated by the maximal ideal of $\\mathcal O_{X,\\xi}$, and has a $\\kappa(\\xi)$-module structure [def-weil-residue-field] of dimension one compatible with the residue map. There exist a nonzero quasi-coherent ideal $J$ on $W$, represented by $W.\\mathrm{IdealSheafData}$, and a monomorphism $\\alpha:i_*J\\to G$ [def-pc-module-pullback] whose stalk at $\\xi$ is invertible. There is no global support hypothesis and no conclusion about cokernels.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YH, lemma-property-irreducible, proof: the rank calculation immediately following the ideal-sum inclusion of Tag 01YE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "pqf-def-locnoeth"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "proof": [
+  {
+   "text": "Apply the generic-point ideal inclusion of Tag 01YE to G and the annihilation hypothesis. It gives a coherent ideal, r summands, and a monomorphism invertible near the generic point. This result is used mathematically; the present library import route through cohomological pushforward is cyclic, so its ideal-lattice construction must be formalized through stalk extension and clearing denominators without that route.",
+   "uses": [
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invertibility on the open neighbourhood gives a bijective generic stalk map. Closed pushforward identifies the source stalk with the finite direct sum of r generic ideal stalks. Zero J or r = 0 gives a zero source, contradicting target dimension one.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-pc-stalk-direct-sums",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonzero J its generic inclusion is bijective, so its stalk is the generic local field of W. The closed-immersion surjective local-ring map onto this field has maximal kernel and induces an isomorphism with the ambient residue field. With these identifications the generic map is a residue-field linear isomorphism from r copies of that field to the target line. Mathlib Module.finrank_directSum and invariance under linear equivalence give r = 1.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-pc-stalk-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the single coproduct summand with the ideal. Compose its pushforward isomorphism with the inclusion. Monomorphisms compose, and the generic stalk of the composite is invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-pc-stalk-direct-sums",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YH, lemma-property-irreducible, proof: the rank calculation immediately following the ideal-sum inclusion of Tag 01YE"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*ideal.*inclusion|ideal.*generic.*mono|rank.one.*ideal",
+   "results": {
+    "t": "2026-10-12T22:25:21Z",
+    "tool": "grep",
+    "query": "generic.*ideal.*inclusion|ideal.*generic.*mono|rank.one.*ideal",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/PicardGroup.lean"
+    ],
+    "digest": "d449f1da7e344149"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching rank-one ideal inclusion for module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf with a rank one generic stalk contains a nonzero ideal lattice isomorphic at the generic point",
+   "results": {
+    "t": "2026-10-12T22:25:21Z",
+    "tool": "leanfinder",
+    "query": "A coherent sheaf with a rank one generic stalk contains a nonzero ideal lattice isomorphic at the generic point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.rankAtStalk_pos_iff_mem_support",
+     "Module.rankAtStalk_self",
+     "Module.rankAtStalk_eq_zero_iff_notMem_support",
+     "Module.isLocallyConstant_rankAtStalk_freeLocus",
+     "ModuleCat.Tilde.smul_stalk_no_nonzero_divisor",
+     "AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral",
+     "Module.nontrivial_of_rankAtStalk_pos",
+     "ModuleCat.Tilde.isLocallyFraction_pred"
+    ],
+    "digest": "7daabf7ac5350a06"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching rank-one ideal inclusion for module sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf with residue field dimension one at a closed integral generic point admits a nonzero ideal pushforward monomorphism isomorphic at that point",
+   "results": {
+    "t": "2026-10-12T22:25:22Z",
+    "tool": "leansearch",
+    "query": "A coherent sheaf with residue field dimension one at a closed integral generic point admits a nonzero ideal pushforward monomorphism isomorphic at that point",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealCommonSubmodule",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YH, lemma-property-irreducible, proof: the rank calculation immediately following the ideal-sum inclusion of Tag 01YE",
+   "via": [
+    "lem-pc-e2-integral-ideal-proper-cohomology",
+    "lem-pc-v3-integral-ideal-comparison-filtrations",
+    "lem-pc-a2-integral-ideal-common-submodule"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RankOneGenericIdealInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/RankOneGenericIdealInclusion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.rank_one_generic_ideal_inclusion",
+  "statement": "theorem rank_one_generic_ideal_inclusion {X W : Scheme.{u}} [IsNoetherian X]\n    (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]\n    (G : X.Modules) (hGcoh : RingedSpace.IsCoherent X.toRingedSpace G)\n    (hGann : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))),\n      ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace\n        (i.base (genericPoint W))).obj G, a • v = 0)\n    (hGrank : ∃ inst : Module (X.residueField (i.base (genericPoint W)))\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G),\n      (∀ (a : X.presheaf.stalk (i.base (genericPoint W)))\n        (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).obj G),\n        a • v = (X.residue (i.base (genericPoint W))) a • v) ∧\n      Module.finrank (X.residueField (i.base (genericPoint W)))\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G)\n        = 1) :\n    ∃ (J : W.IdealSheafData), J ≠ ⊥ ∧\n      ∃ (α : (pushforward i).obj J.toModules ⟶ G), Mono α ∧\n        IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace\n          (i.base (genericPoint W))).map α)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T234223-L-2126560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T234223-L-2126560",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
