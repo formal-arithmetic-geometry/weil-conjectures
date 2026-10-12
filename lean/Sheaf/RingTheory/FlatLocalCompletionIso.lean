@@ -7,8 +7,8 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.FiniteAfterCompletion
-import Sheaf.RingTheory.FlatModuleCompletion
+import Sheaf.RingTheory.FlatCompletion
+import Sheaf.RingTheory.CompletionMapBijective
 
 /-!
 # Flat local maps induce isomorphisms on adic completions
@@ -62,6 +62,14 @@ theorem flat_local_completion_iso
       Function.Bijective φhat ∧
         φhat.comp (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) =
           (algebraMap B (AdicCompletion (IsLocalRing.maximalIdeal B) B)).comp φ := by
-  sorry
+  obtain ⟨φhat, heval, hcomp, hflat⟩ :=
+    flat_adicCompletion_of_flat_local A B φ hflat (fun x hx => map_nonunit φ x hx)
+  have hbij := completion_map_bijective φ hmax hres φhat hcomp hflat
+  refine ⟨φhat, ?_, hbij, hcomp⟩
+  intro n x a hx
+  have hx' := congrArg (fun f => f x) (heval n)
+  dsimp at hx'
+  rw [hx] at hx'
+  exact hx'
 
 end RingHom
