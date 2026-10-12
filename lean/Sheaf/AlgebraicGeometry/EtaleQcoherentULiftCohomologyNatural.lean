@@ -5,9 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Sheaf.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNaturalSucc
 
 /-! # Naturality of the finite-cover coefficient comparison
 
@@ -54,6 +52,29 @@ theorem exists_etaleTensorSectionsSheaf_cohomology_ulift_natural
         e (Sheaf.H.map (L.map θ) q x) =
           @Sheaf.H.map.{u + 1, u, u, u + 1} _ _ X.smallEtaleTopology
             inferInstance (HasExt.standard _)
-            _ _ θ q (e x) := by sorry
+            _ _ θ q (e x) := by
+  dsimp
+  cases q with
+  | zero =>
+      let E := etaleTensorSectionsSheaf F
+      let L := sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}
+      let eL := Sheaf.H.equiv₀ (L.obj E) CategoryTheory.Limits.terminalIsTerminal
+      let eS := @Sheaf.H.equiv₀.{u + 1, u, u, u + 1} _ _ X.smallEtaleTopology inferInstance
+        (HasExt.standard _) E _ CategoryTheory.Limits.terminalIsTerminal
+      refine ⟨eL.trans (AddEquiv.ulift.trans eS.symm), ?_⟩
+      intro θ x
+      change eS.symm (AddEquiv.ulift (eL (Sheaf.H.map (L.map θ) 0 x))) =
+        @Sheaf.H.map.{u + 1, u, u, u + 1} _ _ X.smallEtaleTopology
+          inferInstance (HasExt.standard _) _ _ θ 0 (eS.symm (AddEquiv.ulift (eL x)))
+      rw [@Sheaf.H.equiv₀_symm_naturality.{u + 1, u, u, u + 1} _ _
+        X.smallEtaleTopology inferInstance (HasExt.standard _) _
+        CategoryTheory.Limits.terminalIsTerminal E E θ]
+      apply congrArg eS.symm
+      change AddEquiv.ulift (Sheaf.H.equiv₀ (L.obj E)
+        CategoryTheory.Limits.terminalIsTerminal (Sheaf.H.map (L.map θ) 0 x)) = _
+      rw [← Sheaf.H.equiv₀_naturality]
+      rfl
+  | succ n =>
+      exact exists_etaleTensorSectionsSheaf_cohomology_ulift_natural_succ X F n
 
 end AlgebraicGeometry.Scheme.Modules
