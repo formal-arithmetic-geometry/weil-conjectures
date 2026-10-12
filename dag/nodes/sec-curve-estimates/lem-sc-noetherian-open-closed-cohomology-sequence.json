@@ -25,82 +25,46 @@
  ],
  "proof": [
   {
-   "text": "The open inclusion gives the adjunction map $a:j_!j^*F\\to F$ of [lem-sc-topological-extension-by-zero-stalks], where $j^*F=F|_U$. Let $i^*F=i^{-1}F$ be the inverse image along $i:Z\\to X$ and $b=\\eta_F:F\\to i_*i^*F$ the unit of $i^{-1}\\dashv i_*$ [def-weil-pbc-topological-inverse-image], so $b_V=\\eta_{F,V}:F(V)\\to(i^*F)(V\\cap Z)$ for $V\\subseteq X$ open, $i_*$ being the direct-image formula of [lem-sc-closed-pushforward-abelian-stalks]. At each point of $U$, the stalk of $a$ is the identity on $F_x$ by the extension-by-zero stalk formula, and the stalk of $i_*i^*F$ is zero by the closed-pushforward formula applied to $Z$; hence the stalk sequence is $0\\to F_x\\xrightarrow{1}F_x\\to0\\to0$.",
+   "text": "Construct the presheaf counit q by summing identity maps over inclusions V→U. Naturality is proved on direct-sum injections using the restriction formula. Lift q through sheafification to a:G→F. The toSheafify_sheafifyLift identity gives the required formula on every injection.",
    "uses": [
-    "lem-sc-topological-extension-by-zero-stalks",
-    "def-weil-pbc-topological-inverse-image",
-    "lem-sc-closed-pushforward-abelian-stalks"
+    "def-weil-pbc-site-extension-by-zero-presheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Lemma 02UT (lemma-canonical-exact-sequence), proof at points of the open; Sheaves, Lemmas 00A5 and 00AE"
-   }
+   "elementary": true
   },
   {
-   "text": "At each $z\\in Z$, the stalk of $j_!j^*F$ is zero by [lem-sc-topological-extension-by-zero-stalks]. The natural germ map $(i_*i^*F)_z\\to(i^*F)_z$ is an isomorphism by [lem-sc-closed-pushforward-abelian-stalks]. By [lem-weil-pbc-topological-inverse-image-stalk] applied to $i$ and $F$, the isomorphism $c_F:F_z\\to(i^*F)_z$ sends $s_z$ to $(\\eta_{F,V}(s))_z$ for $s\\in F(V)$, $V\\ni z$. Under these identifications $b_z$ sends $s_z$ to the germ of $b_V(s)=\\eta_{F,V}(s)$, hence is the identity on $F_z$. Thus the stalk sequence is $0\\to0\\to F_z\\xrightarrow{1}F_z\\to0$.",
+   "text": "Apply the canonical slice-site open-closed exactness lemma to a and its injection formula.",
    "uses": [
-    "lem-sc-topological-extension-by-zero-stalks",
-    "lem-sc-closed-pushforward-abelian-stalks",
-    "lem-weil-pbc-topological-inverse-image-stalk"
+    "lem-sc-slice-open-closed-short-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Lemma 02UT (lemma-canonical-exact-sequence), proof at points of the closed complement; Sheaves, Lemma 00AE"
-   }
+   "elementary": false
   },
   {
-   "text": "The two stalk calculations cover all points of $X$ and give short exact sequences. By [lem-sc-abelian-sheaf-short-exact-stalkwise], the maps $a,b$ therefore form the asserted short exact sequence of abelian sheaves. The construction by restriction is natural in $F$.",
+   "text": "Put i:closure(U)→X and F′=i^{-1}G. The proved closure-unit theorem gives an isomorphism e:G≅i_*F′.",
    "uses": [
-    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+    "lem-sc-slice-open-extension-closure-unit",
+    "def-weil-pbc-topological-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Lemma 02UT (lemma-canonical-exact-sequence), proof using stalkwise exactness"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $G=j_!j^*F$ and let $Z'=\\overline U$, a closed subset with inclusion $i':Z'\\to X$. Every $x\\notin Z'$ lies outside $U$, so $G_x=0$ by [lem-sc-topological-extension-by-zero-stalks]. Let $F'=i'^{-1}G$ and $c=\\eta_G:G\\to i'_*F'$ the unit [def-weil-pbc-topological-inverse-image], $c_V:G(V)\\to F'(V\\cap Z')$. For $x\\notin Z'$ both stalks are zero by [lem-sc-closed-pushforward-abelian-stalks]; for $x\\in Z'$, that node identifies $(i'_*F')_x$ with $F'_x$ by germs, and [lem-weil-pbc-topological-inverse-image-stalk] identifies $G_x$ with $F'_x$ by $s_x\\mapsto(\\eta_{G,V}(s))_x$. On these germs $c_x$ is the identity. Apply [lem-weil-pbc-sets-sheaf-iso-on-stalks] to the underlying sheaves of sets; the inverse of a bijective additive map on every open is additive, so $c$ is an isomorphism of abelian sheaves.",
-   "uses": [
-    "lem-sc-topological-extension-by-zero-stalks",
-    "def-weil-pbc-topological-inverse-image",
-    "lem-sc-closed-pushforward-abelian-stalks",
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ (proposition-vanishing-Noetherian), first paragraph of proof: support on the closure of U and closed pushforward"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-cohomology-closed-immersion-pushforward] to $i':Z'\\to X$ and $F'$ from Step 4. It gives $H^p(Z',F')\\cong H^p(X,i'_*F')$ for every $p\\geq0$. The isomorphism $G\\cong i'_*F'$ of Step 4 identifies the right side with $H^p(X,j_!j^*F)$, as claimed.",
+   "text": "The closure inclusion is a closed embedding. Apply closed-immersion cohomology comparison to F′. Compose its degree-p isomorphism with the map of e inverse under the cohomology presheaf functor evaluated at the top open. This yields precisely the requested cohomology isomorphism with G.",
    "uses": [
     "lem-sc-cohomology-closed-immersion-pushforward"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ (proposition-vanishing-Noetherian), first paragraph and Lemma 02UV"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-topological-extension-by-zero-stalks",
-  "lem-sc-closed-pushforward-abelian-stalks",
-  "lem-sc-abelian-sheaf-short-exact-stalkwise",
-  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
-  "lem-sc-cohomology-closed-immersion-pushforward",
+  "def-weil-pbc-site-extension-by-zero-presheaf",
   "def-weil-pbc-topological-inverse-image",
-  "lem-weil-pbc-topological-inverse-image-stalk"
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-slice-open-closed-short-exact",
+  "lem-sc-slice-open-extension-closure-unit"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Lemma 02UT, with the closure-support observation in Cohomology Proposition 02UZ"
+  "document": "literature/stacks-project/modules.tex and cohomology.tex",
+  "place": "Lemma 02UT and Proposition 02UZ, steps 1–5, formalized by V1 via the canonical sheafification lift and cohomology functoriality"
  },
  "mathlib_searches": [
   {
@@ -201,5 +165,15 @@
   "group": "U1",
   "result": "pass",
   "note": "headless review: Noetherian X ↔ [NoetherianSpace X]; open j:U→X ↔ U : Opens X; closed complement i:Z→X ↔ subtype inclusion of (U:Set X)ᶜ; abelian sheaf F ↔ TopCat.Sheaf AddCommGrpCat X; j_!j^*F ↔ presheafToSheaf of the landed siteExtensionByZeroPresheaf U applied to F.over U (direct sum over V⟶U); 0→j_!j^*F→F→i_*i^*F→0 ↔ a (pinned as the canonical map by the DirectSum.of equation), the unit of pullbackPushforwardAdjunction for the complement, ShortComplex.ShortExact (composite zero, mono, exact, epi); closed direct image from the closure ↔ ∃ F' on closure U with an iso to its pushforward; cohomology computed on the closure ↔ ∀ p, Sheaf.H' (HasExt.standard) iso at ⊤, same form as cohomology_closed_immersion_pushforward; stmt_deps only gained a landed def; compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

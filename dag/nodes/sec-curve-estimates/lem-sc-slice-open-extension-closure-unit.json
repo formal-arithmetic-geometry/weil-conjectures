@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-slice-open-extension-closure-unit",
+ "kind": "statement",
+ "title": "The slice-site open extension is recovered from its closure",
+ "statement": "Let X be any topological space, U an open subset, F an abelian sheaf, and G the sheafification of the slice-site extension-by-zero presheaf of F.over U [def-weil-pbc-site-extension-by-zero-presheaf]. Let i:closure(U)→X be the inclusion. The inverse-image adjunction unit G→i_*i^{-1}G [def-weil-pbc-topological-inverse-image] is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ, first paragraph: closure-support observation; Sheaves Lemma 00AE"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Outside U every neighbourhood V has no inclusion V→U, so every section of the extension presheaf is zero. Represent each stalk element by a germ; it is zero. The sheafification unit is a stalk isomorphism, so the sheafified stalk is zero outside U and therefore outside closure(U).",
+   "uses": [
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put F′=i^{-1}G. Outside closure(U), both stalks of the unit are zero, by the preceding calculation and the closed-pushforward zero-stalk formula. On the closure, compose the unit stalk map with the closed-pushforward germ comparison. The resulting map equals the inverse-image stalk isomorphism: apply the germ formula of both maps, and then stalk hom extensionality. Since the latter two maps are isomorphisms, the unit stalk map is an isomorphism.",
+   "uses": [
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic stalkwise isomorphism criterion (directly in AddCommGrpCat) to the unit of abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "lem-weil-pbc-topological-inverse-image-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ, first paragraph: closure-support observation; Sheaves Lemma 00AE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence of abelian sheaves for an open subset and its closed complement",
+   "results": "MayerVietorisSquare.shortComplex_shortExact is for an open cover; no complementary open-closed comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "results": "Found the adjunction, not a support-unit or short-exactness theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian sheaf supported on a closed subset is the direct image of its inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "open_closed|openClosed|support.*closed|IsIso.*unit|isIso.*unit",
+   "results": "No matching theorem for the slice extension in lean/WeilConjectures/Topology, lean/Sheaf/Topology, or Mathlib/Topology/Sheaves. Generic stalkwise isomorphism, sheafification-stalk, and closed/inverse-image comparisons are available.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.NoetherianOpenClosedCohomologySequence",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-noetherian-open-closed-cohomology-sequence",
+   "place": "Stage-3 reduction of the canonical exactness and closure-support steps",
+   "via": [
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.Topology.SliceOpenExtensionClosureUnit",
+  "file": "lean/Sheaf/Topology/SliceOpenExtensionClosureUnit.lean",
+  "declaration": "TopCat.slice_open_extension_closure_unit_isIso",
+  "statement": "theorem slice_open_extension_closure_unit_isIso (X : TopCat.{u}) (U : Opens X) (F : TopCat.Sheaf AddCommGrpCat.{u} X) : IsIso ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ : TopCat.of ↥(closure (U : Set X)) ⟶ X)).unit.app ((presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj ((siteExtensionByZeroPresheaf U).obj (F.over U).obj)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

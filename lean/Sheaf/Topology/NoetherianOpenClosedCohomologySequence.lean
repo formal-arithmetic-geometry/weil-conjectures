@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
 public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Topology.SliceOpenClosedShortExact
+import Sheaf.Topology.SliceOpenExtensionClosureUnit
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import Sheaf.Topology.AbelianSheafShortExactStalkwise
 import Sheaf.Topology.ClosedPushforwardAbelianStalks
@@ -86,6 +88,63 @@ theorem noetherian_open_closed_cohomology_sequence
               (HasExt.standard _)
               ((presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
                 ((siteExtensionByZeroPresheaf U).obj (F.over U).obj)) p ⊤) := by
-  sorry
+  classical
+  let P := (siteExtensionByZeroPresheaf U).obj (F.over U).obj
+  let q : P ⟶ F.obj :=
+    { app := fun V ↦ AddCommGrpCat.ofHom
+        (DirectSum.toAddMonoid fun _ : V.unop ⟶ U ↦ AddMonoidHom.id _)
+      naturality := by
+        intro V W f
+        let : DecidableEq (V.unop ⟶ U) := Classical.decEq _
+        let : DecidableEq (W.unop ⟶ U) := Classical.decEq _
+        apply AddCommGrpCat.hom_ext
+        apply DirectSum.addHom_ext
+        intro φ s
+        simp only [AddCommGrpCat.hom_comp, ConcreteCategory.hom_ofHom,
+          AddMonoidHom.coe_comp, Function.comp_apply]
+        erw [DirectSum.toAddMonoid_of, AddMonoidHom.comp_apply,
+          DirectSum.toAddMonoid_of, DirectSum.toAddMonoid_of]
+        rfl }
+  let a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj P ⟶ F :=
+    ObjectProperty.homMk (sheafifyLift (Opens.grothendieckTopology X) q F.property)
+  have ha : ∀ (V : Opens X) (φ : V ⟶ U) (s : F.obj.obj (Opposite.op V)),
+      (a.hom.app (Opposite.op V))
+        ((toSheafify (Opens.grothendieckTopology X) P).app (Opposite.op V)
+          (DirectSum.of (fun ψ : V ⟶ U ↦
+            (F.over U).obj.obj (Opposite.op (Over.mk ψ))) φ s)) = s := by
+    intro V φ s
+    have h := NatTrans.congr_app
+      (toSheafify_sheafifyLift (Opens.grothendieckTopology X) q F.property)
+      (Opposite.op V)
+    have hs := ConcreteCategory.congr_hom h
+      (DirectSum.of (fun ψ : V ⟶ U ↦
+        (F.over U).obj.obj (Opposite.op (Over.mk ψ))) φ s)
+    change (a.hom.app (Opposite.op V))
+      ((toSheafify (Opens.grothendieckTopology X) P).app (Opposite.op V)
+        (DirectSum.of (fun ψ : V ⟶ U ↦
+          (F.over U).obj.obj (Opposite.op (Over.mk ψ))) φ s)) =
+        (q.app (Opposite.op V))
+          (DirectSum.of (fun ψ : V ⟶ U ↦
+            (F.over U).obj.obj (Opposite.op (Over.mk ψ))) φ s) at hs
+    rw [hs]
+    dsimp [q]
+    exact DirectSum.toAddMonoid_of _ _ _
+  refine ⟨a, ha, ?_, ?_⟩
+  · exact slice_open_closed_short_exact X U F a ha
+  · let i : TopCat.of ↥(closure (U : Set X)) ⟶ X :=
+      TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩
+    let G := (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj P
+    let F' := (TopCat.Sheaf.pullback AddCommGrpCat.{u} i).obj G
+    have hi : IsIso ((TopCat.Sheaf.pullbackPushforwardAdjunction
+        AddCommGrpCat.{u} i).unit.app G) := by
+      exact slice_open_extension_closure_unit_isIso X U F
+    let e : G ≅ (TopCat.Sheaf.pushforward AddCommGrpCat.{u} i).obj F' :=
+      asIso ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} i).unit.app G)
+    refine ⟨F', ⟨e⟩, fun p ↦ ?_⟩
+    obtain ⟨c⟩ := cohomology_closed_immersion_pushforward i
+      (Topology.IsClosedEmbedding.subtypeVal isClosed_closure) F' p
+    exact ⟨c ≪≫ ((@CategoryTheory.Sheaf.cohomologyPresheafFunctor
+      (Opens X) _ (Opens.grothendieckTopology X) _ (HasExt.standard _) p ⋙
+      (evaluation (Opens X)ᵒᵖ AddCommGrpCat).obj (Opposite.op ⊤)).mapIso e.symm)⟩
 
 end TopCat

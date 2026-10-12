@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-slice-open-closed-short-exact",
+ "kind": "statement",
+ "title": "Exactness for the canonical slice-site open counit",
+ "statement": "Let X be any topological space, U an open subset, and F an abelian sheaf. Let G be the sheafification of the slice-site extension-by-zero presheaf of F.over U [def-weil-pbc-site-extension-by-zero-presheaf]. Suppose a:G→F sends the sheafified direct-sum injection of every s∈F(V), for every inclusion V→U, to s. Let b:F→i_*i^{-1}F be the inverse-image adjunction unit for the closed complement inclusion i:X\\U→X [def-weil-pbc-topological-inverse-image]. Then a composed with b is zero, and the resulting short complex G→F→i_*i^{-1}F is short exact [def-sc-topological-abelian-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 02UT, stalkwise proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-pbc-topological-inverse-image",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The slice of opens over U is equivalent to opens of U. Each V contained in U has a unique inclusion into U, so the direct sum has one summand F(V); otherwise it is zero. The formula for a identifies the pre-sheafification composite with the canonical counit on every summand, and sheafification uniqueness identifies a with the topological extension counit. At x in U its stalk is an isomorphism; outside U its source stalk is zero.",
+   "uses": [
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in U, the closed-complement pushforward has zero stalk. For z in the complement, the closed-pushforward germ map is an isomorphism and the inverse-image stalk comparison sends each germ to the germ of the unit image. Thus the stalk of b is an isomorphism there. The two stalk sequences are identity followed by zero, or zero followed by identity.",
+   "uses": [
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite has zero stalk maps, hence is zero by joint faithfulness of stalk functors. Form the short complex. Each stalk complex is short exact by the two cases above, and apply the stalkwise short-exactness criterion.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-sc-topological-extension-by-zero-stalks",
+  "lem-weil-pbc-topological-inverse-image-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 02UT, stalkwise proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence of abelian sheaves for an open subset and its closed complement",
+   "results": "MayerVietorisSquare.shortComplex_shortExact is for an open cover; no complementary open-closed comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullbackPushforwardAdjunction",
+   "results": "Found the adjunction, not a support-unit or short-exactness theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian sheaf supported on a closed subset is the direct image of its inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "open_closed|openClosed|support.*closed|IsIso.*unit|isIso.*unit",
+   "results": "No matching theorem for the slice extension in lean/WeilConjectures/Topology, lean/Sheaf/Topology, or Mathlib/Topology/Sheaves. Generic stalkwise isomorphism, sheafification-stalk, and closed/inverse-image comparisons are available.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.NoetherianOpenClosedCohomologySequence",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-noetherian-open-closed-cohomology-sequence",
+   "place": "Stage-3 reduction of the canonical exactness and closure-support steps",
+   "via": [
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.Topology.SliceOpenClosedShortExact",
+  "file": "lean/Sheaf/Topology/SliceOpenClosedShortExact.lean",
+  "declaration": "TopCat.slice_open_closed_short_exact",
+  "statement": "theorem slice_open_closed_short_exact (X : TopCat.{u}) (U : Opens X) (F : TopCat.Sheaf AddCommGrpCat.{u} X) (a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj ((siteExtensionByZeroPresheaf U).obj (F.over U).obj) ⟶ F) (ha : ∀ (V : Opens X) (φ : V ⟶ U) (s : F.obj.obj (Opposite.op V)), (a.hom.app (Opposite.op V)) ((toSheafify (Opens.grothendieckTopology X) ((siteExtensionByZeroPresheaf U).obj (F.over U).obj)).app (Opposite.op V) (DirectSum.of (fun ψ : V ⟶ U ↦ (F.over U).obj.obj (Opposite.op (Over.mk ψ))) φ s)) = s) : ∃ h : a ≫ (TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ : TopCat.of ↥((U : Set X)ᶜ) ⟶ X)).unit.app F = 0, (ShortComplex.mk a ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ : TopCat.of ↥((U : Set X)ᶜ) ⟶ X)).unit.app F) h).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

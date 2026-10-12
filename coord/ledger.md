@@ -6018,3 +6018,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/V1/Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract (stage 3; reviewer PASS; first push; landing 20261012T042423-L-1822760 (interface); batch 20261012T042402; modules 2; new nodes 1)
 - 04:24 L: merged deliver/V1/Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift (stage 3; reviewer PASS; first push; landing 20261012T042423-L-1822866 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/V1/Sheaf.Topology.ClosedUnionCohomologyVanishing (stage 3; reviewer PASS; first push; landing 20261012T042424-L-1822962 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/V1/Sheaf.Topology.NoetherianOpenClosedCohomologySequence (stage 3; reviewer PASS; first push; landing 20261012T042424-L-1823057 (interface); batch 20261012T042402; modules 3; new nodes 2)
