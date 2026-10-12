@@ -8,7 +8,6 @@ module
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
-import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.SmoothAtGenericPointOverField
 
 /-!
@@ -41,6 +40,52 @@ theorem exists_smooth_subalgebra_fraction_field
     (hfg : (⊤ : IntermediateField k K).FG) (hsep : Algebra.IsSeparableExtension k K) :
     ∃ B : Subalgebra k K,
       Algebra.Smooth k B ∧ IsFractionRing B K := by
-  sorry
+  classical
+  obtain ⟨t, ht⟩ := hfg
+  let A : Subalgebra k K := Algebra.adjoin k (↑t : Set K)
+  have : Algebra.FiniteType k A := Algebra.FiniteType.adjoin_of_finite t.finite_toSet
+  have : IsFractionRing A K := by
+    apply IsFractionRing.of_field
+    intro z
+    have hz : z ∈ IntermediateField.adjoin k (↑t : Set K) := by rw [ht]; trivial
+    obtain ⟨a, ha, b, hb, hab⟩ := IntermediateField.mem_adjoin_iff_div.mp hz
+    exact ⟨⟨a, ha⟩, ⟨b, hb⟩, hab⟩
+  have hsm : Algebra.IsSmoothAtPrime k
+      (⟨(⊥ : Ideal A), inferInstance⟩ : PrimeSpectrum A) :=
+    Algebra.smoothAtPrime_bot_of_isSeparable_fractionRing k A K hsep
+  obtain ⟨g, hg, hgs⟩ := hsm
+  have hg0 : g ≠ 0 := by simpa using hg
+  let f : A →ₐ[k] K := A.val
+  have hunit : IsUnit (f g) := isUnit_iff_ne_zero.mpr
+    (fun hz ↦ hg0 (Subtype.ext hz))
+  let φ : Localization.Away g →ₐ[k] K :=
+    IsLocalization.Away.liftAlgHom g hunit
+  have hφ : Function.Injective φ := by
+    change Function.Injective (IsLocalization.Away.lift g hunit)
+    apply (IsLocalization.lift_injective_iff _).mpr
+    intro x y
+    constructor
+    · intro h
+      exact Subtype.ext_iff.mp
+        (IsLocalization.injective (Localization.Away g)
+          (powers_le_nonZeroDivisors_of_noZeroDivisors hg0) h)
+    · intro h
+      exact congrArg (algebraMap A (Localization.Away g)) (Subtype.ext h)
+  let B : Subalgebra k K := φ.range
+  let e : Localization.Away g ≃ₐ[k] B :=
+    AlgEquiv.ofBijective φ.rangeRestrict
+      ⟨fun x y h ↦ hφ (congrArg Subtype.val h), φ.rangeRestrict_surjective⟩
+  have : Algebra.Smooth k (Localization.Away g) := hgs
+  refine ⟨B, Algebra.Smooth.of_equiv e, ?_⟩
+  apply IsFractionRing.of_field
+  intro z
+  obtain ⟨a, b, hb, hz⟩ := IsFractionRing.div_surjective A z
+  have haB : (a : K) ∈ B := by
+    refine ⟨algebraMap A (Localization.Away g) a, ?_⟩
+    exact IsLocalization.Away.lift_eq g hunit a
+  have hbB : (b : K) ∈ B := by
+    refine ⟨algebraMap A (Localization.Away g) b, ?_⟩
+    exact IsLocalization.Away.lift_eq g hunit b
+  exact ⟨⟨a, haB⟩, ⟨b, hbB⟩, hz.symm⟩
 
 end FieldTheory
