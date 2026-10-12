@@ -1,0 +1,104 @@
+{
+ "id": "lem-sp-truncation-abutment-cocone-aux",
+ "kind": "statement",
+ "title": "Compatibility equations for truncation cocone",
+ "statement": "For the canonical truncation maps j and c into derived cohomology, c is invertible, j satisfies the alpha diagonal cocone equation, and j equals the incoming alpha iterate followed by c for every nonnegative page.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof steps 5--7"
+ },
+ "stmt_deps": [
+  "def-sp-truncation-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Expand the definitions of alpha and j, cancel the bridge isomorphism with its inverse, and use transition_comp_ιTruncLE. The isomorphism of the degree-zero component follows from the truncation cohomology isomorphism. Induct on the natural number p for the incoming iterate, using the cocone equation at the successor step.",
+   "uses": [
+    "def-sp-truncation-couple",
+    "def-sp-convergence",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-truncation-couple",
+  "def-sp-convergence",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G2",
+  "date": "2026-10-12",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof steps 5--7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "truncation cocone derived cohomology",
+   "results": "No exact declaration; only truncation inclusion naturality and quasi-isomorphism lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.ιTruncLE",
+   "results": "Found transition and truncation inclusion lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "alphaDiagonal incomingAlphaIter",
+   "results": "Only exact-couple definitions and downstream uses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationAbutmentCocone",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-truncation-abutment-cocone",
+   "place": "proof steps 5--7",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TruncationAbutmentCoconeAux",
+  "file": "lean/Sheaf/CategoryTheory/TruncationAbutmentCoconeAux.lean",
+  "declaration": "CategoryTheory.truncation_abutment_cocone_aux",
+  "statement": "theorem truncation_abutment_cocone_aux\n    {A : Type u₁} [Category.{v₁} A] [Abelian A]\n    [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (K : CochainComplex.Plus A) (X : BigradedExactCouple B 0)\n    (hD : X.D = TruncationCouple.D F K)\n    (halpha : ∀ p q : ℤ, X.alpha p q =\n      eqToHom (by rw [hD]) ≫ TruncationCouple.alpha F K p q ≫\n        eqToHom (by rw [hD]))\n    (H : ℤ → B) (hH : H = fun n : ℤ ↦ (DerivedCategory.homologyFunctor B n).obj\n      (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K.obj)))\n    (j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n)\n    (c : ∀ n : ℤ, X.D 0 n ⟶ H n)\n    (hj : ∀ n q, j n q = eqToHom (by rw [hD]; unfold TruncationCouple.D; congr 1; omega) ≫\n      (TruncationCouple.bridgeIso F (TruncationCouple.truncation K q) n).inv ≫\n      (DerivedCategory.homologyFunctor B n).map\n        (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q))) ≫\n      eqToHom (by rw [hH]))\n    (hc : ∀ n, c n = eqToHom (by congr 1; omega) ≫ j n n) :\n    (∀ n, IsIso (c n)) ∧\n    (∀ n p, X.alphaDiagonal n p ≫ eqToHom (by congr 1; omega) ≫ j n (n-p) =\n      eqToHom (by congr 1; omega) ≫ j n (n-(p+1))) ∧\n    (∀ (n p : ℤ) (_ : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n-p) =\n      X.incomingAlphaIter p.toNat 0 n ≫ c n)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T184300-L-4003303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T184300-L-4003303",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

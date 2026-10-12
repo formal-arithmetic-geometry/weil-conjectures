@@ -7,8 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.TruncationAbutmentCoconeAux
 
 /-! Canonical maps from a truncation diagonal to derived cohomology. -/
 
@@ -65,6 +64,28 @@ theorem truncation_abutment_cocone
             eqToHom (by congr 1; omega) ≫ j n (n - (p + 1))) ∧
         (∀ (n p : ℤ) (hp : 0 ≤ p),
           eqToHom (by congr 1 <;> omega) ≫ j n (n - p) =
-            X.incomingAlphaIter p.toNat 0 n ≫ c n) := by sorry
+            X.incomingAlphaIter p.toNat 0 n ≫ c n)  := by
+  classical
+  let H : ℤ → B := fun n ↦ (DerivedCategory.homologyFunctor B n).obj
+    (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K.obj))
+  let j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n := fun n q ↦
+    eqToHom (by rw [hD]; unfold TruncationCouple.D; congr 1; omega) ≫
+      (TruncationCouple.bridgeIso F (TruncationCouple.truncation K q) n).inv ≫
+      (DerivedCategory.homologyFunctor B n).map
+        (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q)))
+  let c : ∀ n : ℤ, X.D 0 n ⟶ H n := fun n ↦
+    eqToHom (by congr 1; omega) ≫ j n n
+  refine ⟨H, rfl, j, c, ?_, ?_, ?_, ?_, ?_⟩
+  · intro n q; simp only [j, eqToHom_refl, Category.comp_id]
+  · intro n; rfl
+  · have haux := truncation_abutment_cocone_aux F K X hD halpha H rfl j c
+      (by intro n q; dsimp [j]; simp) (by intro n; rfl)
+    exact haux.1
+  · have haux := truncation_abutment_cocone_aux F K X hD halpha H rfl j c
+      (by intro n q; dsimp [j]; simp) (by intro n; rfl)
+    exact haux.2.1
+  · have haux := truncation_abutment_cocone_aux F K X hD halpha H rfl j c
+      (by intro n q; dsimp [j]; simp) (by intro n; rfl)
+    exact haux.2.2
 
 end CategoryTheory

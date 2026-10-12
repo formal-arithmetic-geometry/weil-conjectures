@@ -8939,3 +8939,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/G2/Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality (stage 3; reviewer PASS; first push; landing 20261012T184259-L-4002963 (proof); batch 20261012T184234; modules 1; new nodes 1)
 - 18:42 L: merged deliver/G2/Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale (stage 3; reviewer PASS; first push; landing 20261012T184259-L-4003061 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/G2/Sheaf.CategoryTheory.ArrowProductTransitionsCocycle (stage 3; reviewer PASS; first push; landing 20261012T184259-L-4003204 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/G2/Sheaf.CategoryTheory.TruncationAbutmentCocone (stage 3; reviewer PASS; first push; landing 20261012T184300-L-4003303 (interface); batch 20261012T184234; modules 2; new nodes 1)
