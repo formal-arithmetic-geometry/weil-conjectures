@@ -5,7 +5,11 @@
   "place": "Stacks Etale Morphisms, Lemma 04HJ, line 1758"
  },
  "status": "split",
- "proof_origin": "worker reduction of existing blueprint proof",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Proof of Lemma 04HJ (lemma-finite-unramified-etale-local), following Lemma 04HI; Lean realization by R2, 2026-10-12."
+ },
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal",
@@ -28,14 +32,37 @@
  "statement": "Intermediate theorem stated in the Lean module; see declaration for the complete type.",
  "proof": [
   {
-   "text": "The result is the corresponding group of geometric shrinking and finite coproduct steps in the proof of Lemma 04HJ.",
+   "text": "Use Scheme.Hom.finite_preimage_singleton to put a Fintype structure on the set-theoretic fibre. The inverse of Fintype.equivFin enumerates its points, including an empty fibre.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the whole source as each unramified open neighbourhood. The open diagonal gives FormallyUnramified f; composition with the top-open inclusion preserves formal unramifiedness, and FormallyUnramified.isOpenImmersion_diagonal gives the required open diagonal of the restriction.",
+   "uses": [
+    "lem-weil-pbc-unramified-formally-unramified",
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_etale_closed_immersion_decomposition_of_unramified_at_points to the enumerated fibre.",
    "uses": [
     "lem-weil-pbc-unramified-etale-local-decomposition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Discard only the final implication about exhaustive lists and return the remaining decomposition data unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-unramified-formally-unramified",
+  "lem-weil-pbc-lft-formally-unramified-unramified",
   "lem-weil-pbc-unramified-etale-local-decomposition"
  ],
  "lean": {
@@ -88,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T044745-L-2035986",
-  "kind": "interface",
+  "landing": "20261012T053952-L-2644971",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
