@@ -1,14 +1,14 @@
 # Work queue
 
-42 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `prop-weil-pbc-strict-local-exchange` | 1003 | sorry_here |
-| `lemma-weil-pbc-smooth-curve-artin-schreier` | 1006 | sorry_here |
-| `lemma-weil-pbc-smooth-curve-kummer-localization` | 1006 | sorry_here |
+| `lemma-weil-pbc-smooth-curve-artin-schreier` | 1007 | sorry_here |
+| `lemma-weil-pbc-smooth-curve-kummer-localization` | 1007 | sorry_here |
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (32)
+## Stage 3: modules to prove (34)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,7 +33,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.Curve.SepClosedComparison` | 1 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial` | 1 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
-| `Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison` | 2 | 1 | proof |
@@ -46,12 +45,15 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionFilteredUnion` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
+| `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison` | 4 | 1 | proof |
