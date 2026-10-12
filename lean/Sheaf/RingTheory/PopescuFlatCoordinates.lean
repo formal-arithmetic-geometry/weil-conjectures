@@ -10,15 +10,8 @@ public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.Algebra.MvPolynomial.Basic
-import Sheaf.RingTheory.ArtinianFlatSubalgebras
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.GeometricallyRegularH1Injective
-import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
-import Sheaf.RingTheory.LocalizationOfRegularRing
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
-import Sheaf.RingTheory.PopescuSolutionModuloChoose
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.PopescuFlatCoordinatesA0
+import Sheaf.RingTheory.PopescuFlatCoordinatesGivenAdmissible
 
 /-!
 # Flat coordinates adapted to an Artinian subalgebra
@@ -94,6 +87,10 @@ theorem exists_popescu_flat_coordinates
           Submodule.span (IsLocalRing.ResidueField A)
             (Set.range (fun j ↦ KaehlerDifferential.D k (IsLocalRing.ResidueField A)
               (IsLocalRing.residue A (a j)))) = ⊤ := by
-  sorry
+  obtain ⟨A₀, hA₀loc, hA₀, hE⟩ :=
+    exists_popescu_admissible_containing_finset k Λ p hp hreg q n hn E
+  obtain ⟨A, hAloc, hA, hmA, hle, hcoords⟩ :=
+    exists_popescu_flat_coordinates_given_admissible k Λ p hp hreg q n hn A₀ hA₀loc hA₀
+  exact ⟨A, hAloc, hA, hmA, (fun e he ↦ hle (hE e he)), hcoords⟩
 
 end Algebra

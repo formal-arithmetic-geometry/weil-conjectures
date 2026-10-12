@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-popescu-flat-coordinates-a0",
+ "kind": "statement",
+ "title": "Admissible subalgebra containing a finite set",
+ "statement": "Let k be a field of characteristic p > 0, Λ a Noetherian geometrically regular k-algebra [def-weil-pbc-g-ring], q a prime ideal, n ≥ 1, B = Λ_q/(qΛ_q)^n and E a finite subset of B. There exists a local k-subalgebra A of B containing E and Popescu-admissible for qB [def-weil-pbc-popescu-admissible-subalgebra].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "*Setup.* $\\Lambda_{\\mathfrak q}$ is a local ring with maximal ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$ and residue field $K=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime], Noetherian as a localization of the Noetherian ring $\\Lambda$ [lem-weil-pbc-localization-noetherian], and $\\mathfrak q\\Lambda_{\\mathfrak q}\\cap\\Lambda=\\mathfrak q$. It is geometrically regular over $k$ [def-weil-pbc-g-ring]: for a finite purely inseparable $k'/k$, $k'\\otimes_k\\Lambda_{\\mathfrak q}$ is the localization of the regular ring $k'\\otimes_k\\Lambda$ at the image of $\\Lambda\\setminus\\mathfrak q$ (tensor products commute with localization), hence regular [lem-weil-pbc-localization-of-regular-ring]. Set $\\bar\\Lambda=\\Lambda_{\\mathfrak q}/\\mathfrak q^n\\Lambda_{\\mathfrak q}$ (Stacks' notation); it is an Artinian local $k$-algebra with maximal ideal $\\bar{\\mathfrak m}=\\mathfrak q\\bar\\Lambda$, $\\bar{\\mathfrak m}^n=0$, and residue field $K$ [lem-weil-pbc-noetherian-local-quotient-artinian-local].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Set Lambda-bar = Lambda_q/q^n Lambda_q'"
+   }
+  },
+  {
+   "text": "*$\\dim_KH_1(L_{K/k})<\\infty$.* By [lem-weil-pbc-geometrically-regular-h1-injective] applied to the Noetherian local $k$-algebra $\\Lambda_{\\mathfrak q}$, geometrically regular over $k$ (step 1), the canonical map $H_1(L_{K/k})\\to\\mathfrak q\\Lambda_{\\mathfrak q}/\\mathfrak q^2\\Lambda_{\\mathfrak q}$ [def-weil-pbc-smooth-ring-map] is injective. The target is a finite dimensional $K$-vector space, since the ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$ of the Noetherian ring $\\Lambda_{\\mathfrak q}$ is finitely generated. Hence $H_1(L_{K/k})$ is finite dimensional.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Note that dim H_1(L_{kappa(q)/k}) < infinity by More on Algebra, Proposition 07E5'"
+   }
+  },
+  {
+   "text": "*A first subring $A_0\\supseteq E$.* By [lem-weil-pbc-popescu-artinian-flat-subalgebras] (Stacks 07FG) applied to the Artinian local $k$-algebra $\\bar\\Lambda$ with residue field $K$ (steps 1, 2), $\\bar\\Lambda$ is a filtered colimit of Artinian local $k$-algebras $A_i$, essentially of finite type over $k$, with flat maps $A_i\\to\\bar\\Lambda$ and $\\mathfrak m_{A_i}\\bar\\Lambda=\\bar{\\mathfrak m}$. Each $A_i\\to\\bar\\Lambda$ maps $\\mathfrak m_{A_i}$ into $\\bar{\\mathfrak m}$, so it is a flat local homomorphism, hence faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat] and injective [lem-weil-pbc-faithfully-flat-ideal-contraction] ($I=0$); identify $A_i$ with its image, a $k$-subalgebra of $\\bar\\Lambda$, flat over $A_i$ [def-weil-pbc-flat-ring-map]. Every element of $\\bar\\Lambda$ lies in some $A_i$ and the system is filtered, so the finite set $E$ lies in one of them, $A_0$. In the terminology of [lem-weil-pbc-popescu-solution-modulo-choose], $A_0$ is admissible.",
+   "uses": [
+    "lem-weil-pbc-popescu-artinian-flat-subalgebras",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Pick A in Lambda-bar containing E such that A is local Artinian, essentially of finite type over k, the map A -> Lambda-bar is flat, and m_A generates the maximal ideal of Lambda-bar, see Lemma 07FG'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-geometrically-regular-h1-injective",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-popescu-artinian-flat-subalgebras"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FG and first paragraph of proof of Tag 07FH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite subset of a directed union of subalgebras is contained in one subalgebra",
+   "results": "UNAVAILABLE: service returned Internal Server Error; recorded by msearch.py; no verdict asserted."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a directed union is contained in one member",
+   "results": "DirectedOn.exists_mem_subset_of_finset_subset_biUnion supplies finite-set extraction only."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mem_subset_of_finset_subset_biUnion",
+   "results": "8 source hits, including Mathlib/Data/Set/Finite/Lattice.lean:470; finite-set extraction only."
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuFlatCoordinates",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-popescu-flat-coordinates"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuFlatCoordinatesA0",
+  "file": "lean/Sheaf/RingTheory/PopescuFlatCoordinatesA0.lean",
+  "declaration": "Algebra.exists_popescu_admissible_containing_finset",
+  "statement": "theorem exists_popescu_admissible_containing_finset\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime]\n    (n : ℕ) (hn : 1 ≤ n)\n    (E : Finset (Localization.AtPrime q ⧸\n      (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) :\n    ∃ (A : Subalgebra k (Localization.AtPrime q ⧸\n        (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) (_ : IsLocalRing A),\n      A.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map\n        (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))) ∧\n      ∀ e ∈ E, e ∈ A",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T212209-L-1097864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T212209-L-1097864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
