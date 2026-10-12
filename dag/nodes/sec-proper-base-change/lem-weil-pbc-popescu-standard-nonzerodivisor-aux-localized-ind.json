@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-popescu-standard-nonzerodivisor-aux-localized-ind",
+ "kind": "statement",
+ "title": "Ind-smoothness after total-fraction localization",
+ "statement": "Assume that every regular map from a field k in universe u to a Noetherian k-algebra L in universe max(u,v) presents L as a filtered colimit of smooth k-algebras [def-weil-pbc-filtered-colimit-smooth-algebras]. For a nonzero reduced Noetherian ring R in universe u and a regular R-algebra Λ in universe max(u,v), with Λ Noetherian [def-weil-pbc-g-ring, def-weil-pbc-noetherian-ring], let S be the nonzerodivisors of R. Then S^{-1}Λ is a filtered colimit of smooth S^{-1}R-algebras [def-weil-pbc-smooth-ring-map, def-weil-pbc-module-localization], with the algebras and index category in universe max(u,v).",
+ "stmt_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07F5, proof"
+ },
+ "proof": [
+  {
+   "text": "PT over the total ring of fractions. Let $S\\subset R$ be the set of nonzerodivisors and $Q=S^{-1}R$. $R$ is reduced, Noetherian and nonzero, so it has finitely many minimal primes $\\mathfrak q_1,\\dots,\\mathfrak q_t$ [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $t\\ge1$ (a nonzero ring has a prime, and every prime contains a minimal prime), and by [lem-weil-pbc-reduced-noetherian-total-ring-fractions] each $K_i=R_{\\mathfrak q_i}=\\kappa(\\mathfrak q_i)$ is a field and $Q\\to K_1\\times\\cdots\\times K_t$ is an isomorphism. Tensoring with $\\Lambda$ over $R$: $S^{-1}\\Lambda\\cong\\Lambda\\otimes_RQ\\cong\\prod_i\\Lambda\\otimes_RK_i=:\\prod_i\\Lambda_i$ (localization is base change to $S^{-1}R$, and $\\otimes$ commutes with finite products), compatibly with $Q\\cong\\prod_iK_i$. Each $\\Lambda_i=\\Lambda\\otimes_R\\kappa(\\mathfrak q_i)$ [def-weil-pbc-localization-at-prime] is the fibre ring of $R\\to\\Lambda$ at $\\mathfrak q_i$, so it is Noetherian and geometrically regular over $\\kappa(\\mathfrak q_i)=K_i$ by regularity [def-weil-pbc-g-ring]. Hence $K_i\\to\\Lambda_i$ is a regular ring map of Noetherian rings: it is flat, every module over a field being free [def-weil-pbc-flat-ring-map], and its only fibre ring, over the prime $(0)$ of $K_i$ with $\\kappa((0))=K_i$, is $\\Lambda_i\\otimes_{K_i}K_i\\cong\\Lambda_i$. By the field-case hypothesis PT holds for each $K_i\\to\\Lambda_i$, so by [lem-weil-pbc-popescu-product], applied $t-1$ times ($(K_1\\times\\cdots\\times K_{s})\\times K_{s+1}$ for $s=1,\\dots,t-1$), PT holds for $\\prod_iK_i\\to\\prod_i\\Lambda_i$, hence, transporting along the isomorphisms $Q\\cong\\prod_iK_i$, $S^{-1}\\Lambda\\cong\\prod_i\\Lambda_i$, for $Q\\to S^{-1}\\Lambda$ [def-weil-pbc-filtered-colimit-smooth-algebras].",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-popescu-product",
+    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F5 (lemma-reduce-to-field, lines 2011-2064), third paragraph ('Q = K_1 x ... x K_n is a product of fields, see Algebra, Lemmas 02LX and 00FR. By Lemma 07F3 and our assumption PT holds for S^{-1}R -> S^{-1}Lambda'; the regularity of K_i -> Lambda_i, which Stacks leaves implicit, is written out here)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-popescu-product",
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07F5 (lemma-reduce-to-field), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ind_smooth|total.*fraction|fraction.*product",
+   "results": "10 hits: Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/FractionalIdeal/Basic.lean, Mathlib/RingTheory/DedekindDomain/Factorization.lean, Mathlib/RingTheory/DedekindDomain/Factorization.lean, Mathlib/RingTheory/DedekindDomain/Factorization.lean.  No exact theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced Noetherian ring has total quotient ring a finite product of fields and localizing a regular algebra at nonzerodivisors gives ind smoothness from the field case",
+   "results": "8 hits: Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.of_isLocalization_Away, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.IsStandardSmooth.localization_away, Algebra.IsSmoothAt, Algebra.Smooth.exists_span_eq_top_isStandardSmooth.  No exact theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FractionRing, IsReduced",
+   "results": "0 hits: .  No exact theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total ring of fractions of a reduced Noetherian ring is a finite product of fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuStandardNonzerodivisorAux",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Total-fraction smooth factorization and elementary-to-strict conversion in Lemma 07F5, serving step 7 of the finite-etale lifting split.",
+   "via": [
+    "lem-weil-pbc-popescu-standard-nonzerodivisor-aux",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuLocalizedIndSmooth",
+  "file": "lean/Sheaf/RingTheory/PopescuLocalizedIndSmooth.lean",
+  "declaration": "localized_target_is_ind_smooth",
+  "statement": "theorem localized_target_is_ind_smooth\n    (h : ∀ (k : Type u) (Λ : Type (max u v)) [Field k] [CommRing Λ] [Algebra k Λ]\n      [IsNoetherianRing Λ],\n      RingHom.IsRegular (algebraMap k Λ) →\n        ObjectProperty.ind.{max u v}\n          (fun B : CommAlgCat.{max u v} k ↦ Algebra.Smooth k B)\n          (CommAlgCat.of k Λ))\n    (R : Type u) (Λ : Type (max u v)) [CommRing R] [CommRing Λ] [Algebra R Λ]\n    [IsNoetherianRing R] [IsNoetherianRing Λ] [Nontrivial R] [IsReduced R]\n    (hreg : RingHom.IsRegular (algebraMap R Λ)) :\n    ObjectProperty.ind.{max u v}\n      (fun B : CommAlgCat.{max u v} (Localization R⁰) ↦\n        Algebra.Smooth (Localization R⁰) B)\n      (CommAlgCat.of (Localization R⁰)\n        (Localization (Algebra.algebraMapSubmonoid Λ R⁰)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T173902-L-3305548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T173902-L-3305548",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
