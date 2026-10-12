@@ -7,12 +7,7 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.FiniteFreeResolution
-import Sheaf.RingTheory.GlobalDimension
-import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
-import Sheaf.RingTheory.RegularLocalFiniteGlobalDimension
-import Sheaf.RingTheory.ResidueFieldProjectiveDimension
-import Sheaf.RingTheory.ResidueFieldProjectiveDimensionLowerBound
+import WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension
 
 /-!
 # Regularity descends along flat local homomorphisms
@@ -47,6 +42,19 @@ same statement for an algebra structure with both rings in one universe. -/
 theorem of_ringHom_flat {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsLocalRing R]
     [IsNoetherianRing R] [IsRegularLocalRing S] (φ : R →+* S) [IsLocalHom φ] (hφ : φ.Flat) :
     IsRegularLocalRing R := by
-  sorry
+  let φ' : ULift.{v} R →+* ULift.{u} S := φ.ulift
+  let : IsLocalRing (ULift.{v} R) := ULift.ringEquiv.symm.isLocalRing
+  let : IsNoetherianRing (ULift.{v} R) :=
+    isNoetherianRing_of_ringEquiv R ULift.ringEquiv.symm
+  let : IsRegularLocalRing (ULift.{u} S) := of_ringEquiv ULift.ringEquiv.symm
+  let : Algebra (ULift.{v} R) (ULift.{u} S) := φ'.toAlgebra
+  have : IsLocalHom φ' := by
+    dsimp [φ', RingHom.ulift]
+    infer_instance
+  have : IsLocalHom (algebraMap (ULift.{v} R) (ULift.{u} S)) := ‹IsLocalHom φ'›
+  have : Module.Flat (ULift.{v} R) (ULift.{u} S) :=
+    (RingHom.Flat.ulift_iff).mpr hφ
+  have : IsRegularLocalRing (ULift.{v} R) := of_flat (S := ULift.{u} S)
+  exact of_ringEquiv ULift.ringEquiv
 
 end IsRegularLocalRing
