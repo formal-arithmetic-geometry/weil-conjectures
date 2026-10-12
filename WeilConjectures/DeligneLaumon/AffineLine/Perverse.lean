@@ -521,6 +521,84 @@ theorem simple_punctualObj_iff (G : WeilSheaf k₀ l X) (hG : G.support.Finite) 
       have : IsIso ((ObjectProperty.ι _).map f) :=
         (Pretriangulated.Triangle.isZero₃_iff_isIso₁ T hT).1 hCz
       exact isIso_of_fully_faithful (ObjectProperty.ι _) f
+
+/-- **Simple objects of the heart are pure** (`prop-a1-curve-perverse-simples`): a simple curve
+perverse object `P` has `𝓗⁻¹P = 0` or `𝓗⁰P = 0`. The truncation triangle
+`(𝓗⁻¹P)[1] ⟶ P ⟶ (𝓗⁰P)[0] ⟶` is a short exact sequence of the heart
+(`thm-a1-curve-perverse-heart`, part (5)), and the subobject `(𝓗⁻¹P)[1]` of the simple `P` is
+zero or all of `P`. -/
+theorem isZero_homologySheaf_neg_one_or_zero_of_simple
+    (P : ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X)))
+    [Simple P] :
+    IsZero ((homologySheaf (-1 : ℤ)).obj P.obj) ∨ IsZero ((homologySheaf (0 : ℤ)).obj P.obj) := by
+  have hP := P.property
+  have hle : P.obj.obj.IsLE 0 := (_root_.DerivedCategory.isLE_iff _ _).2 fun a ha ↦
+    (isZero_homologySheaf_obj_iff a P.obj).1 (hP.1.1 a ha)
+  obtain ⟨K₁, K₃, f, g, h, hT, h₁, h₃le, h₃ge, ⟨e₃⟩⟩ := exists_distTriang_of_isLE P.obj 0 hle
+  set T := Pretriangulated.Triangle.mk f g h
+  have hK₃ (a : ℤ) (ha : a ≠ 0) : IsZero ((homologySheaf a).obj K₃) := by
+    rw [isZero_homologySheaf_obj_iff]
+    obtain ha | ha := ha.lt_or_gt
+    · exact (_root_.DerivedCategory.isGE_iff _ 0).1 h₃ge a ha
+    · exact (_root_.DerivedCategory.isLE_iff _ 0).1 h₃le a ha
+  have hK₁ (a : ℤ) (ha : -1 < a) : IsZero ((homologySheaf a).obj K₁) := by
+    rw [isZero_homologySheaf_obj_iff]
+    exact (_root_.DerivedCategory.isLE_iff _ (0 - 1)).1 h₁ a (by omega)
+  have hiso (a : ℤ) (ha : a ≤ -1) : IsIso ((homologySheaf a).map f) := by
+    have : Mono ((homologySheaf a).map f) :=
+      (homologySheaf_exact₁ T (a - 1) a hT (by omega)).mono_g
+        ((hK₃ (a - 1) (by omega)).eq_of_src _ _)
+    have : Epi ((homologySheaf a).map f) :=
+      (homologySheaf_exact₂ T a hT).epi_f ((hK₃ a (by omega)).eq_of_tgt _ _)
+    exact isIso_of_mono_of_epi _
+  have hK₁P : K₁.IsCurvePerverse := by
+    have hz (a : ℤ) (ha : a ≠ -1) : IsZero ((homologySheaf a).obj K₁) := by
+      obtain ha | ha := ha.lt_or_gt
+      · have := hiso a ha.le
+        exact (hP.2.1 a ha).of_iso (asIso ((homologySheaf a).map f))
+      · exact hK₁ a ha
+    refine ⟨⟨fun a ha ↦ hz a (by omega), ?_⟩, ⟨fun a ha ↦ hz a (by omega), fun G i _ hG ↦ ?_⟩⟩
+    · rw [WeilSheaf.support_eq_empty_of_isZero (hz 0 (by norm_num))]
+      exact Set.finite_empty
+    · have := hiso (-1) le_rfl
+      exact hP.2.2 G (i ≫ (homologySheaf (-1 : ℤ)).map f) inferInstance hG
+  have hK₃L : K₃.IsCurvePerverseLower :=
+    ⟨fun a ha ↦ hK₃ a (by omega), fun G i _ _ ↦ IsZero.of_mono i (hK₃ (-1) (by norm_num))⟩
+  let f' : (⟨K₁, hK₁P⟩ : ObjectProperty.FullSubcategory
+      (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))) ⟶ P := ObjectProperty.homMk f
+  have : Mono f' := mono_homMk_of_distinguished (Q := ⟨K₁, hK₁P⟩) f g h hT hK₃L
+  by_cases hf : f' = 0
+  · left
+    have := hiso (-1) le_rfl
+    have hf0 : f = 0 := congrArg (fun φ ↦ φ.hom) hf
+    exact IsZero.of_epi_eq_zero ((homologySheaf (-1 : ℤ)).map f) (by rw [hf0, Functor.map_zero])
+  · right
+    have : IsIso f' := (Simple.mono_isIso_iff_nonzero f').2 hf
+    have : IsIso f := inferInstanceAs (IsIso ((ObjectProperty.ι _).map f'))
+    have hz : IsZero K₃ := (Pretriangulated.Triangle.isZero₃_iff_isIso₁ T hT).2 this
+    exact ((homologySheaf (0 : ℤ)).map_isZero hz).of_iso e₃.symm
+
+/-- A simple curve perverse object with `𝓗⁻¹P = 0` is a simple Weil sheaf of finite support,
+`𝓗⁰P`, placed in degree zero (`prop-a1-curve-perverse-simples`). -/
+theorem exists_simple_of_simple_of_isZero_homologySheaf_neg_one
+    (P : ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X)))
+    [Simple P] (h : IsZero ((homologySheaf (-1 : ℤ)).obj P.obj)) :
+    ∃ G : WeilSheaf k₀ l X, Simple G ∧ G.support.Finite ∧
+      Nonempty (P.obj ≅ WeilSheaf.toComplex.obj G) := by
+  have hP := P.property
+  set G := (homologySheaf (0 : ℤ)).obj P.obj
+  have hz (a : ℤ) (ha : a ≠ 0) : IsZero ((homologySheaf a).obj P.obj) := by
+    obtain ha | ha := ha.lt_or_gt
+    · obtain ha' | rfl := lt_or_eq_of_le (show a ≤ -1 by omega)
+      · exact hP.2.1 a ha'
+      · exact h
+    · exact hP.1.1 a ha
+  obtain ⟨e⟩ := nonempty_iso_of_homologySheaf_iso 0 hz
+    (fun a ha ↦ isZero_homologySheaf_singleComplex ha G)
+    (WeilSheaf.toComplexCompHomologySheafIso.app G).symm
+  have hG : G.support.Finite := hP.1.2
+  have : Simple (punctualObj G hG) := Simple.of_iso (ObjectProperty.isoMk _ e).symm
+  exact ⟨G, (simple_punctualObj_iff G hG).1 this, hG, ⟨e⟩⟩
 end Heart
 
 end WeilComplex
