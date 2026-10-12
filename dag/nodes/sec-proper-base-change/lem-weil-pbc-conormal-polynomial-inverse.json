@@ -1,0 +1,112 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-conormal-polynomial-inverse",
+ "kind": "statement",
+ "title": "Polynomial witnesses for a conormal inverse",
+ "statement": "Let R and S be commutative rings and α : R[x₁,…,xₙ] → S a surjective R-algebra map. Let f₁,…,fₘ span its kernel J. Give J/J² its S-action via the quotient isomorphism. For every S-linear map d : J/J² → Sⁿ satisfying d([g])ᵢ = α(∂ᵢg), d is bijective if and only if f satisfies the two polynomial inverse identities [def-weil-pbc-etale-polynomial-certificate].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07RI (lemma-colimit-etale), proof, lines 47640-47661, and the inverse check at line 47662"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-polynomial-certificate"
+ ],
+ "proof": [
+  {
+   "text": "write J = ker α = (f_j). If d is bijective, lift each inverse image of the\ncoordinate vector e_k to an element g_k of J. Express g_k = sum_j c_jk f_j using\nfinite ideal generation. The equality d([g_k]) = e_k says exactly that the first\ncertificate expressions lie in J. Applying injectivity of d to the relation\nclasses gives [sum_k (∂_k f_j)g_k] = [f_j]. Equality in J/J² is precisely the\nsecond certificate membership.\nConversely, given c, put g_k = sum_j c_jk f_j and define the S-linear map\nh(v) = sum_k v_k [g_k]. The first certificate gives d(h(e_k)) = e_k, hence\nd composed with h is the identity on the free module. The second gives\nh(d([f_j])) = [f_j]. The classes [f_j] generate J/J² over S, since α is\nsurjective and f_j generate J. Thus h composed with d is also the identity.\nThe two identities imply bijectivity. No independence of the relations is\nassumed. If n or m is zero the corresponding generator check is empty;\nif S is the zero ring both modules vanish and the same argument applies.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07RI (lemma-colimit-etale), proof, lines 47640-47661, and the inverse check at line 47662"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A conormal differential from I modulo I squared to a finite free module is bijective iff polynomial coefficients give its two sided inverse",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conormal differential from I modulo I squared to a finite free module is bijective iff polynomial coefficients give its two sided inverse",
+   "results": "Cotangent.map_toInfinitesimal_bijective; submersive presentation cotangent equivalences; no exact match",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "toCotangent_eq|mem_span_range_iff_exists_fun|span_range_relation_eq_ker_baseChange",
+   "results": "Ideal.toCotangent_eq; Ideal.mem_span_range_iff_exists_fun; ingredients",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleBaseChangePolynomialCertificate",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Inverse differential polynomial witness calculation",
+   "via": [
+    "lem-weil-pbc-etale-base-change-polynomial-certificate",
+    "lem-weil-pbc-colimit-etale-ring-map",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConormalPolynomialInverse",
+  "file": "lean/Sheaf/RingTheory/ConormalPolynomialInverse.lean",
+  "declaration": "Algebra.conormal_bijective_iff_polynomialCertificate",
+  "statement": "theorem conormal_bijective_iff_polynomialCertificate\n    {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]\n    {n m : ℕ} (α : MvPolynomial (Fin n) R →ₐ[R] S)\n    (hα : Function.Surjective α) (f : Fin m → MvPolynomial (Fin n) R)\n    (hker : RingHom.ker α.toRingHom = Ideal.span (Set.range f)) :\n    let J := RingHom.ker α.toRingHom\n    let e := RingHom.quotientKerEquivOfSurjective hα\n    letI : Module S J.Cotangent := Module.compHom J.Cotangent e.symm.toRingHom\n    ∀ (d : J.Cotangent →ₗ[S] (Fin n → S)),\n      (∀ (g : J) (i : Fin n),\n        d (Ideal.toCotangent J g) i = α (MvPolynomial.pderiv i g.1)) →\n      (Function.Bijective d ↔ EtalePolynomialCertificate f)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3476107",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3476107",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,8 +9,8 @@ public import Sheaf.RingTheory.EtalePolynomialCertificate
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.RingTheory.EtaleRingMapConormalCriterion
-import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import Mathlib.RingTheory.TensorProduct.Quotient
+import Sheaf.AlgebraicGeometry.TensorMapPolynomialPresentation
+import Sheaf.RingTheory.ConormalPolynomialInverse
 
 /-! # A uniform polynomial certificate for etaleness of a base-changed presentation
 
@@ -59,6 +59,28 @@ theorem exists_etale_baseChange_polynomialCertificate
         Algebra.EtalePolynomialCertificate
           (fun j ↦ MvPolynomial.map
             (Algebra.TensorProduct.includeRight.toRingHom : B₀ →+* T ⊗[A₀] B₀) (f j)) := by
-  sorry
+  classical
+  let : Algebra B₀ C₀ := φ₀.toRingHom.toAlgebra
+  have : Algebra.FinitePresentation B₀ C₀ := hfp
+  obtain ⟨n, m, ⟨P⟩⟩ := Algebra.Presentation.exists_presentation_fin B₀ C₀
+  refine ⟨n, m, P.relation, ?_⟩
+  intro T _ _
+  let ψ := Algebra.TensorProduct.map (AlgHom.id A₀ T) φ₀
+  let : Algebra (T ⊗[A₀] B₀) (T ⊗[A₀] C₀) := ψ.toRingHom.toAlgebra
+  obtain ⟨Q, hQ⟩ := Algebra.tensorMap_polynomialPresentation φ₀ P T
+  let α : MvPolynomial (Fin n) (T ⊗[A₀] B₀) →ₐ[T ⊗[A₀] B₀] T ⊗[A₀] C₀ :=
+    MvPolynomial.aeval Q.val
+  have hα : Function.Surjective α := Q.toGenerators.aeval_val_surjective
+  have hker : RingHom.ker α.toRingHom = Ideal.span (Set.range Q.relation) := by
+    rw [Q.span_range_relation_eq_ker, Q.toGenerators.ker_eq_ker_aeval_val]
+    rfl
+  have hfg : (RingHom.ker α.toRingHom).FG := by
+    rw [hker]
+    exact ⟨Finset.univ.image Q.relation, by simp⟩
+  obtain ⟨d, hd, he⟩ := Algebra.etale_ring_map_conormal_criterion n α hα hfg
+  have hc := Algebra.conormal_bijective_iff_polynomialCertificate α hα Q.relation hker d hd
+  change Etale (Spec.map (CommRingCat.ofHom (algebraMap (T ⊗[A₀] B₀)
+    (T ⊗[A₀] C₀)))) ↔ _
+  rw [he, hc, hQ]
 
 end AlgebraicGeometry
