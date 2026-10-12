@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # Affine pullback comparison through spectrum charts
 
@@ -31,6 +33,28 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem tensorPullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (Scheme.Modules.tensorPullback f).Additive := by
+  let : (Scheme.Modules.tensorPullback f).IsLeftAdjoint :=
+    ⟨_, Scheme.Modules.nonempty_tensorPullbackAdjunction f⟩
+  exact CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ _
+    (by rw [CategoryTheory.rightExactFunctor_iff]; infer_instance)
+
+private noncomputable def tensorPullbackRestrictIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsOpenImmersion f] :
+    Scheme.Modules.tensorPullback f ≅ Scheme.Modules.restrictFunctor f :=
+  (Scheme.Modules.nonempty_tensorPullbackAdjunction f).some.leftAdjointUniq
+    (Scheme.Modules.restrictAdjunction f)
+
+private theorem isKFlat_of_iso {X : Scheme.{u}}
+    {K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ}
+    (e : K ≅ L) (hK : CochainComplex.IsKFlat (R := X.sheaf) K) :
+    CochainComplex.IsKFlat (R := X.sheaf) L := by
+  let := SheafOfModules.monoidalCategory X.sheaf
+  intro F hF i
+  exact (hK F hF i).of_iso
+    (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e)
 
 /-- Transport the affine derived pullback calculation through canonical spectrum charts.
 Source: Stacks Project, Tag 08DW(2), using Tag 08DV.
@@ -80,6 +104,82 @@ theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
                   (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
                   (((ModuleCat.extendScalars f.appTop.hom).mapHomologicalComplex
                     (.up ℤ)).obj P)))) := by
-  sorry
+  classical
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let B := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let TY := tilde.functor Γ(Y, ⊤)
+  let TX := tilde.functor Γ(X, ⊤)
+  have : TY.Additive := ⟨by intros; exact tilde.map_add _ _⟩
+  have : TX.Additive := ⟨by intros; exact tilde.map_add _ _⟩
+  let RY := Scheme.Modules.restrictFunctor Y.toSpecΓ
+  let RX : SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) ⥤ B :=
+    Scheme.Modules.restrictFunctor X.toSpecΓ
+  have : RX.Additive := by
+    change (Scheme.Modules.restrictFunctor X.toSpecΓ).Additive
+    infer_instance
+  have : PreservesFiniteLimits RX := by
+    change PreservesFiniteLimits (Scheme.Modules.restrictFunctor X.toSpecΓ)
+    infer_instance
+  have : PreservesFiniteColimits RX := by
+    change PreservesFiniteColimits (Scheme.Modules.restrictFunctor X.toSpecΓ)
+    infer_instance
+  let S := Spec.map f.appTop
+  let E := Scheme.Modules.tensorPullback f
+  have : E.Additive := tensorPullback_additive f
+  have : (Scheme.Modules.tensorPullback S).Additive := tensorPullback_additive S
+  have : (Scheme.Modules.tensorPullback Y.toSpecΓ).Additive :=
+    tensorPullback_additive Y.toSpecΓ
+  have : (Scheme.Modules.tensorPullback X.toSpecΓ).Additive :=
+    tensorPullback_additive X.toSpecΓ
+  let K := (TY.mapHomologicalComplex (.up ℤ)).obj P
+  let C := (RY.mapHomologicalComplex (.up ℤ)).obj K
+  have hK : CochainComplex.IsKFlat (R := (Spec Γ(Y, ⊤)).sheaf) K := by
+    apply isKFlat_tilde Γ(Y, ⊤) P
+    intro F hF
+    have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)).mp
+        ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+      (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
+  have hC : CochainComplex.IsKFlat (R := Y.sheaf) C := by
+    have h := CochainComplex.isKFlat_pullback Y.toSpecΓ.base Y.sheaf
+      (Spec Γ(Y, ⊤)).sheaf ⟨Y.toSpecΓ.c⟩ K hK
+    apply isKFlat_of_iso
+      ((NatIso.mapHomologicalComplex (tensorPullbackRestrictIso Y.toSpecΓ) (.up ℤ)).app K)
+    convert h using 1
+    rfl
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    F, hF, hFmap, hFadd, ε, hL, htri, hflat⟩ :=
+    Classical.choose_spec (exists_derivedPullback f)
+  have hEq : F = E := CategoryTheory.Functor.ext hF (fun _ _ a ↦ hFmap a)
+  subst F
+  have : IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj C)) := hflat C hC
+  let e : (derivedPullback f).obj (DerivedCategory.Q.obj C) ≅
+      DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj C) :=
+    (derivedPullback f).mapIso ((DerivedCategory.quotientCompQhIso A).app C).symm ≪≫
+      asIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj C)) ≪≫
+      DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app C) ≪≫
+      (DerivedCategory.quotientCompQhIso B).app _
+  let square : RY ⋙ E ≅ Scheme.Modules.tensorPullback S ⋙ RX :=
+    Functor.isoWhiskerRight (tensorPullbackRestrictIso Y.toSpecΓ).symm E ≪≫
+      (Scheme.Modules.nonempty_tensorPullbackComp f Y.toSpecΓ).some.symm ≪≫
+      eqToIso (congrArg Scheme.Modules.tensorPullback (Scheme.toSpecΓ_naturality f)) ≪≫
+      (Scheme.Modules.nonempty_tensorPullbackComp X.toSpecΓ S).some ≪≫
+      Functor.isoWhiskerLeft _ (tensorPullbackRestrictIso X.toSpecΓ)
+  obtain ⟨θ, _⟩ := Scheme.Modules.exists_tensorPullback_tilde_iso f.appTop
+  let comparison : (TY ⋙ RY) ⋙ E ≅
+      (ModuleCat.extendScalars f.appTop.hom ⋙ TX) ⋙ RX :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft TY square ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight θ RX
+  let : (ModuleCat.extendScalars f.appTop.hom).IsLeftAdjoint :=
+    ⟨_, ⟨ModuleCat.extendRestrictScalarsAdj f.appTop.hom⟩⟩
+  have : (ModuleCat.extendScalars f.appTop.hom).Additive :=
+    CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ _
+      (by rw [CategoryTheory.rightExactFunctor_iff]; infer_instance)
+  let δ := (NatIso.mapHomologicalComplex comparison (.up ℤ)).app P
+  refine ⟨e ≪≫ DerivedCategory.Q.mapIso δ ≪≫ ?_⟩
+  exact ((Functor.mapDerivedCategoryFactors.{wS, w} RX).app
+    ((TX.mapHomologicalComplex (.up ℤ)).obj
+      (((ModuleCat.extendScalars f.appTop.hom).mapHomologicalComplex (.up ℤ)).obj P))).symm
 
 end AlgebraicGeometry

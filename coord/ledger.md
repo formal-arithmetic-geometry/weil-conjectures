@@ -8431,3 +8431,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/C1/Sheaf.CategoryTheory.ColimitSiteCoveringConstruction (stage 3; reviewer PASS; first push; landing 20261012T160133-L-2562837 (interface); batch 20261012T160131; modules 2; new nodes 2)
 - 16:01 L: merged deliver/C3/Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSheafification (stage 3; reviewer PASS; after a return; landing 20261012T160133-L-2562941 (proof); batch 20261012T160131; modules 1; new nodes 0)
 - 16:01 L: merged deliver/D3/Sheaf.ConstructibleSheaf.TorsorOrdinaryEvaluation (stage 3; reviewer PASS; first push; landing 20261012T160133-L-2563089 (proof); batch 20261012T160131; modules 1; new nodes 0)
+- 16:01 L: merged deliver/E2/Sheaf.AlgebraicGeometry.AffineKFlatPullbackChartComparison (stage 3; reviewer PASS; first push; landing 20261012T160133-L-2563191 (proof); batch 20261012T160131; modules 1; new nodes 0)

@@ -15,33 +15,52 @@
  ],
  "proof": [
   {
-   "text": "Naturality of toSpecΓ gives the commutative square f;Y.toSpecΓ = X.toSpecΓ;Spec.map(f.appTop). Restriction along either canonical chart is an exact equivalence of module categories.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Use the literal-spectrum affine formula derivedPullback_tilde_iso on the identity resolution of P. Tilde(P) is K-flat, so its derived pullback is computed termwise and identified with tilde of extension of scalars.",
+   "text": "Translate the abstract module kFlat hypothesis into acyclicity of tensor with every acyclic complex using HomotopyCategory.kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic. Apply isKFlat_tilde to the termwise associated sheaf K on Spec Γ(Y,⊤).",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-tilde-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback commutes with restriction along the chart isomorphisms, by its inverse-image and change-of-rings formula. Chart restriction preserves K-flatness since it is a ringed-space isomorphism. Evaluate the counit of exists_derivedPullback on the chart-restricted K-flat complex; it is invertible. These identifications and the square of step 1 transport the spectrum formula to f. The exact restriction localization factors give the displayed right-hand side. If the spectrum localization universe differs, the canonical equivalence between the two localizations transports the same factors; uniqueness of localization lifts identifies their comparisons.",
+   "text": "For an open immersion j, tensorPullback j and restrictFunctor j are left adjoints to the same pushforward, so Adjunction.leftAdjointUniq supplies a natural isomorphism. Pull back K along Y.toSpecΓ using isKFlat_pullback and transport through that natural isomorphism mapped to complexes. K-flatness is invariant under a complex isomorphism because total tensor maps that isomorphism to an isomorphism and acyclicity is invariant under isomorphism. Thus the chart-restricted complex C is K-flat.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the chosen derivedPullback counit from exists_derivedPullback f. Its functor is tensorPullback f by the specified object and map equalities. The counit is invertible at C. Compose with quotientCompQhIso and mapHomotopyCategoryFactors to identify Lf*Q(C) with Q(f*C).",
    "uses": [
     "def-pc-derived-pullback"
    ],
    "elementary": false
+  },
+  {
+   "text": "Naturality f;Y.toSpecΓ = X.toSpecΓ;Spec.map f.appTop, tensorPullback composition, and the restriction comparisons give RY followed by f* isomorphic to (Spec.map f.appTop)* followed by RX. Whisker by tilde and compose with exists_tensorPullback_tilde_iso f.appTop to obtain (tilde;RY);f* ≅ (extendScalars;tilde);RX. Map this natural isomorphism termwise to complexes and evaluate at P.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Q to the complex isomorphism and compose with step 3. Finish with the inverse component of RX.mapDerivedCategoryFactors, explicitly using source localization universe wS and target universe w. No derived category on Spec Γ(Y,⊤) or comparison of localization universes is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-affine-tilde-kflat",
+  "def-pc-module-pullback",
+  "lem-pc-kflat-pullback-preservation",
   "def-pc-derived-pullback",
-  "lem-pc-affine-derived-pullback-tensor-tilde"
+  "lem-weil-pbc-tilde-pullback-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Tag 08DW(2) (perfect-lemma-pullback), affine computation using Tag 08DV and canonical chart transport"
+  "place": "Tag 08DW(2), with 08DV, 06YC and the underived affine tilde pullback comparison (01I9); E2 transports the underived formula before localization."
  },
  "mathlib_searches": [
   {
@@ -113,10 +132,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T095924-L-324819",
-  "kind": "interface",
+  "landing": "20261012T160133-L-2563191",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
