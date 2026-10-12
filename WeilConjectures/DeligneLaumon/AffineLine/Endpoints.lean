@@ -317,6 +317,12 @@ theorem subsingleton_compactlySupportedCohomology_directImage (_hF : F.IsLisse) 
 /-- In the situation of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`
 the degree-zero compactly supported cohomology `H_c^0(C, j_*F)` vanishes, because a nonzero
 global section of a lisse sheaf on a connected open has full support on a nonproper curve.
+
+Concretely, for a compactification `C ⟶[i] Z ⟶ Spec k₀`, `H_c^0(C, j_*F) = Γ(Z̄, ī_! j̄_* F)`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_forall_eq_zero`).
+Such a section vanishes near the boundary `Z̄ \ C̄`, which is in the closure of the generic point
+of the irreducible curve `C̄` since `C̄` is affine and not finite; as `F` is lisse, it vanishes
+(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_specializes_notMem_range`).
 (blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
