@@ -10,14 +10,14 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.IsLimit
-import Sheaf.FieldTheory.SeparableExtension
+import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+import Mathlib.CategoryTheory.Filtered.Connected
+import Mathlib.FieldTheory.SeparablyGenerated
 import Sheaf.RingTheory.FilteredColimitOfFactorization
 import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuReduceToField
-import Sheaf.RingTheory.PopescuResolution
 import Sheaf.RingTheory.PopescuResolveCharP
 import Sheaf.RingTheory.PopescuResolveSeparable
-import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Popescu smoothing
@@ -33,6 +33,112 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace RingHom
+
+-- Stacks 07GC: maximize the radicals of extended singular ideals over all
+-- finitely presented factorizations, then apply 07EU.
+private theorem smooth_factorization_of_resolutions
+    {k Λ : Type u} [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ]
+    (hresolve : ∀ (A : CommAlgCat.{u} k) [Algebra.FinitePresentation k A]
+      (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ),
+      q.asIdeal ∈ (Algebra.popescuIdeal α).minimalPrimes →
+        Algebra.CanBePopescuResolved α q)
+    (A : CommAlgCat.{u} k) [Algebra.FinitePresentation k A] (α : A →ₐ[k] Λ) :
+    ∃ (D : CommAlgCat.{u} k), Algebra.Smooth k D ∧
+      ∃ (β : A →ₐ[k] D) (γ : D →ₐ[k] Λ), γ.comp β = α := by
+  classical
+  let Φ : Set (Ideal Λ) := {I | ∃ (B : CommAlgCat.{u} k),
+    Algebra.FinitePresentation k B ∧ ∃ (β : A →ₐ[k] B) (γ : B →ₐ[k] Λ),
+      γ.comp β = α ∧ Algebra.popescuIdeal γ = I}
+  have hΦ : Φ.Nonempty :=
+    ⟨Algebra.popescuIdeal α, A, inferInstance, AlgHom.id k A, α, by simp, rfl⟩
+  obtain ⟨I, hI, hmax⟩ :=
+    (set_has_maximal_iff_noetherian.mpr (inferInstance : IsNoetherian Λ Λ)) Φ hΦ
+  obtain ⟨B, hB, β, γ, hcomp, rfl⟩ := hI
+  have := hB
+  have htop : Algebra.popescuIdeal γ = ⊤ := by
+    by_contra hproper
+    obtain ⟨q, hq⟩ := Ideal.nonempty_minimalPrimes hproper
+    let Q : PrimeSpectrum Λ := ⟨q, hq.isPrime⟩
+    obtain ⟨C, hC, aC, δ, ε, hfp, hε, hle, hnot⟩ := hresolve B γ Q hq
+    let D : CommAlgCat.{u} k := CommAlgCat.of k C
+    have hmem : Algebra.popescuIdeal ε ∈ Φ := by
+      refine ⟨D, hfp, δ.comp β, ε, ?_, rfl⟩
+      rw [← AlgHom.comp_assoc, hε, hcomp]
+    apply hmax _ hmem
+    refine lt_of_le_of_ne hle ?_
+    intro heq
+    apply hnot
+    exact heq ▸ hq.le
+  have hunit : Ideal.map γ.toRingHom (Algebra.singularIdeal k B) = ⊤ :=
+    Ideal.radical_eq_top.mp htop
+  obtain ⟨D, hD, aD, hsmooth, δ, ε, hε⟩ :=
+    Algebra.exists_smooth_factorization_of_singularIdeal_map_eq_top γ hunit
+  refine ⟨CommAlgCat.of k D, hsmooth, δ.comp β, ε, ?_⟩
+  rw [← AlgHom.comp_assoc, hε, hcomp]
+
+-- Identify the residue field of the zero ideal of k with k. For each finite purely
+-- inseparable extension L/k, cancel the residue-field base change in its regular fibre.
+private theorem geometricallyRegular_of_regular_field
+    (k Λ : Type u) [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ]
+    (hreg : (algebraMap k Λ).IsRegular) : Algebra.IsGeometricallyRegular k Λ := by
+  classical
+  let p : Ideal k := ⊥
+  let K := p.ResidueField
+  let e : k ≃ₐ[k] K := p.algEquivResidueFieldOfField
+  have hfiber : Algebra.IsGeometricallyRegular K (p.Fiber Λ) := by
+    rw [RingHom.IsRegular, toAlgebra_algebraMap] at hreg
+    exact hreg.2 p
+  refine ⟨inferInstance, ?_⟩
+  intro L hL aL hfinite hpure
+  let : Algebra K L := ((algebraMap k L).comp e.symm.toRingHom).toAlgebra
+  have : IsScalarTower k K L := IsScalarTower.of_algebraMap_eq' (by
+    ext x
+    change algebraMap k L x = algebraMap k L (e.symm (e x))
+    rw [e.symm_apply_apply])
+  have : Module.Finite K L := Module.Finite.of_restrictScalars_finite k K L
+  have : IsPurelyInseparable K L := IsPurelyInseparable.tower_top k K L
+  have : IsRegularRing (TensorProduct K L (p.Fiber Λ)) := hfiber.2 L
+  exact IsRegularRing.of_ringEquiv
+    (Algebra.TensorProduct.cancelBaseChange k K L L Λ).toRingEquiv
+
+-- Stacks 07GC: resolve at minimal primes by 07FE or 07FJ and apply criterion 07C3.
+private theorem field_ind_smooth
+    (k Λ : Type u) [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ]
+    (hreg : (algebraMap k Λ).IsRegular) :
+    ObjectProperty.ind.{u} (fun B : CommAlgCat.{u} k ↦ Algebra.Smooth k B)
+      (CommAlgCat.of k Λ) := by
+  have hresolve : ∀ (A : CommAlgCat.{u} k) [Algebra.FinitePresentation k A]
+      (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ),
+      q.asIdeal ∈ (Algebra.popescuIdeal α).minimalPrimes →
+        Algebra.CanBePopescuResolved α q := by
+    have hgeom := geometricallyRegular_of_regular_field k Λ hreg
+    have : IsRegularRing (TensorProduct k k Λ) := hgeom.2 k
+    have : IsRegularRing Λ :=
+      IsRegularRing.of_ringEquiv (Algebra.TensorProduct.lid k Λ).toRingEquiv
+    intro A hA α q hq
+    obtain hzero | ⟨p, hp, hchar⟩ := CharP.exists' k
+    · have : CharZero k := hzero
+      have hsep : Algebra.IsSeparableExtension k q.asIdeal.ResidueField := by
+        intro F hF
+        have : Algebra.EssFiniteType k F := IntermediateField.essFiniteType_iff.mpr hF
+        obtain ⟨s, hs, hsep⟩ :=
+          exists_isTranscendenceBasis_and_isSeparable_of_perfectField k F
+        exact ⟨(s : Set F), hs, hsep⟩
+      exact Algebra.canBePopescuResolved_of_regularLocalRing_separable α q hq hsep
+    · have : CharP k p := hchar
+      exact Algebra.canBePopescuResolved_of_char_pos p hp.out.pos α q hgeom hq
+  obtain ⟨J, hcat, hfilt, B, ι, hB, hc⟩ :=
+    CommAlgCat.exists_filtered_colimit_of_factorization k (CommAlgCat.of k Λ)
+      {B | Algebra.Smooth k B}
+      (fun B hB ↦ by
+        have : Algebra.Smooth k B := hB
+        infer_instance) (by
+        intro A hA α
+        have := hA
+        obtain ⟨D, hD, β, γ, heq⟩ := smooth_factorization_of_resolutions hresolve A α.hom
+        exact ⟨D, hD, CommAlgCat.ofHom β, CommAlgCat.ofHom γ,
+          CommAlgCat.hom_ext heq⟩)
+  exact ⟨J, hcat, hfilt, ⟨B, ι, hc.some⟩, hB⟩
 
 /-- A regular map of Noetherian rings presents its target as a filtered colimit of smooth
 algebras, with the colimit universal property in commutative rings. The regular map
@@ -72,6 +178,20 @@ theorem popescu_smoothing {R Λ : Type u} [CommRing R] [CommRing Λ] [Algebra R 
       ∃ ι : B ⟶ (Functor.const J).obj (CommAlgCat.of R Λ),
         Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) CommRingCat.{u}).mapCocone
           { pt := CommAlgCat.of R Λ, ι := ι })) := by
-  sorry
+  obtain ⟨J, hcat, hfilt, pres, hB⟩ :=
+    popescu_reduce_to_field.{u, u} field_ind_smooth R Λ hφ
+  let _ := hcat
+  have := hfilt
+  refine ⟨J, hcat, hfilt, pres.diag, ?_, pres.ι, ?_⟩
+  · intro j
+    have := hB j
+    apply (HasRingHomProperty.Spec_iff (P := @AlgebraicGeometry.Smooth)).mpr
+    exact (RingHom.smooth_algebraMap).mpr inferInstance
+  · let E := (commAlgCatEquivUnder (CommRingCat.of R)).functor
+    have : IsConnected J := IsFiltered.isConnected J
+    have : E.IsEquivalence := inferInstance
+    have : PreservesColimit pres.diag
+        (E ⋙ Under.forget (CommRingCat.of R)) := inferInstance
+    exact ⟨isColimitOfPreserves (E ⋙ Under.forget (CommRingCat.of R)) pres.isColimit⟩
 
 end RingHom
