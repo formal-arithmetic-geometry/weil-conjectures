@@ -2,7 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.SmoothStageAffineModel
+import Sheaf.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
 import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
 
 @[expose] public section
@@ -29,6 +29,11 @@ theorem Scheme.NoetherianApproximation.smooth_stage_of_affine_models
       (_ : LocallyOfFinitePresentation q) (_ : QuasiCompact q) (_ : QuasiSeparated q),
       Smooth q ∧ Nonempty (Z ≅ Limits.pullback p (N.D.map j.hom))) :
     ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom)) := by
-  sorry
+  have _ := hmodel
+  apply Scheme.exists_smooth_stage_of_affine_limit N.D N.π N.isLimit
+    (fun g => N.isAffineHom_map g)
+    (fun k => N.isNoetherian_obj k)
+    (fun k => inferInstance)
+    p f a H
 
 end AlgebraicGeometry

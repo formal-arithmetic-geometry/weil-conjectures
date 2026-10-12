@@ -16,22 +16,26 @@
  ],
  "proof": [
   {
-   "text": "Use cofilteredness to choose one common refinement of the finitely many chart stages. Smoothness is preserved by pullback and is local on source and target; the descended chart comparisons therefore glue to smoothness of the projection.",
+   "text": "Use the noetherian approximation diagram N.D and its limiting cone N.π. Its index category is small and cofiltered, its transition maps are affine, and every stage is Noetherian and consequently quasi-separated. These properties are already supplied by NoetherianApproximation and the Mathlib Noetherian instances.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Scheme.exists_smooth_stage_of_affine_limit to this diagram, p, the smooth limit morphism f, and the given pullback square H. It returns exactly a j : Over i for which pullback.snd p (N.D.map j.hom) is smooth. This argument does not need hmodel or transport smoothness along its bare scheme isomorphism.",
    "uses": [
-    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
-    "thm-pd-spreading-out"
+    "lem-sbc-affine-limit-smooth-stage"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
-  "thm-pd-spreading-out"
+  "lem-sbc-affine-limit-smooth-stage"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0C0C, expanding the affine-local reduction using Tags 0CAQ and 01ZM(2)-(3)"
+  "place": "Tag 0C0C, specialized from the existing general affine-transition-limit theorem lem-sbc-affine-limit-smooth-stage",
+  "note": "A2: the original affine-model compatibility is not needed; the existing general theorem applies to f and H."
  },
  "mathlib_searches": [
   {
@@ -117,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T173838-L-3299008",
-  "kind": "interface",
+  "landing": "20261012T202228-L-700093",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

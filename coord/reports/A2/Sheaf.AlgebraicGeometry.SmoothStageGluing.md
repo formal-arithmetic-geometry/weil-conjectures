@@ -1,0 +1,27 @@
+## What changed
+
+Replaced the proof of `AlgebraicGeometry.Scheme.NoetherianApproximation.smooth_stage_of_affine_models` with a direct application of the existing theorem `AlgebraicGeometry.Scheme.exists_smooth_stage_of_affine_limit` from `Sheaf.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage`. The noetherian approximation supplies the diagram, limit cone, affine transition maps, noetherian stages, and quasi-separated instances; the pullback hypotheses supply the remaining arguments. The theorem signature and `hmodel` argument are unchanged.
+
+## Proved and sorry left
+
+Closed the one local sorry: `AlgebraicGeometry.Scheme.NoetherianApproximation.smooth_stage_of_affine_models`. No sorry remains in this delivered module and no new holes were added. The imported affine-limit theorem retains its existing sorry in its own node.
+
+Second-reader validation: the delivered module compiles without errors or warnings through `lcompile.py`. A scratch copy with `#print axioms AlgebraicGeometry.Scheme.NoetherianApproximation.smooth_stage_of_affine_models` reports only `propext`, `Classical.choice`, `Quot.sound`, and `sorryAx` from existing open dependencies. This closes a local hole, not the transitive proof of eventual smoothness.
+
+## No longer needed
+
+The proof does not import or use `Sheaf.AlgebraicGeometry.SmoothStageAffineModel`, nor its node `lem-sbc-noetherian-approximation-smooth-stage-affine-model`. The old proof dependencies `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` and `thm-pd-spreading-out` are no longer direct dependencies of this node: the existing `lem-sbc-affine-limit-smooth-stage` packages that argument and retains them in its own proof plan. No global pruning is claimed because those modules remain used elsewhere.
+
+## Where the brief, the DAG or earlier work was wrong
+
+The earlier local attempt was blocked only because the compiled object for `AffineLimitSmoothStage` was absent from the local published build. Compiling that dependency in the sandbox resolved the tool issue. The direct general theorem applies and makes the extra `hmodel` hypothesis unused; this is valid because the target signature is preserved.
+
+## Second reading by A2
+
+1. **Interface: PASS.** Compared the only delivered module with the repository using `diff -u`, and independently checked its declaration table. The existing signature (including `hmodel`), docstring, namespace, universes, visibility, and public imports are byte for byte unchanged. Only the proof and a private proof import changed. No definitions or change records are added.
+2. **Proof: PASS, relative to existing open dependencies.** Compiled through `lcompile.py` without errors or warnings. No local `sorry`, axiom, unsafe declaration, opaque declaration, external implementation, or kernel-check bypass occurs. The scratch `#print axioms` check gives precisely the three permitted axioms and `sorryAx`; the imported general affine-limit theorem is still open. The application specializes the index, diagram, limiting cone, affine transitions, Noetherian stages, and quasi-separated instances to N, and supplies exactly p, f, a, and H. No witness is chosen and no data construction is added.
+3. **Split statements: PASS (none).** No statement or hole is split off. Read the existing general theorem and its complete docstring proof; its finitely presented, quasi-compact and quasi-separated hypotheses match the supplied data. Empty sources/stages are allowed, and cofilteredness supplies a nonempty index category. Searched local Sheaf and upstream declarations with limit/descent/eventual-smoothness terms, searched Mathlib's algebraic-geometry and algebra-descent sources, and ran Loogle with `"Smooth", "pullback.snd"` (zero hits). Faithfully flat smooth descent requires a hypothesis absent here; there is no shorter proved result found. The general theorem is pre-existing, not a newly introduced restatement.
+4. **Route and pruning: PASS.** Both public imports provide signature vocabulary and the new private import provides the applied theorem. Removed `SmoothStageAffineModel` from this module's imports. Listed every removed old direct proof dependency above; those remain beneath the general theorem rather than globally pruned. Read `dag/units/sk-prop-normal-form.json`: its realized statement and both realized steps are empty, and this auxiliary node does not realize a prescribed unit step. The generic affine-limit descent tool preserves eventual smoothness, makes no change to the normal-form/slicing unit route, and has its own affine-descent/comparison/locality proof plan. No unit record changes.
+5. **Nodes: PASS.** The only delivered node changes only `proof`, `proof_deps`, and `proof_origin`. Its two steps exactly describe the approximation instances and the application of `lem-sbc-affine-limit-smooth-stage`; their uses have union equal to `proof_deps`. The existing statement and Lean signature record agree with the unchanged declaration. No new node is needed.
+
+**Changes by the second reader:** added `have _ := hmodel` inside the proof to explicitly reference the preserved hypothesis and eliminate the unused-variable warning (clearing the hypothesis alone does not satisfy this linter). Completed `## No longer needed` with both old DAG dependency IDs, replaced the earlier failed-warning validation with the clean compile and axiom results, and recorded this review. The mathematical reduction is unchanged. Holes closed: one; holes added: zero; split off: zero. No global module-pruning claim.
