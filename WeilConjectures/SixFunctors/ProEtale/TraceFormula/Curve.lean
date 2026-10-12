@@ -99,7 +99,8 @@ Frobenius on the geometric stalk,
 
 `LT_x̄(φ_m) = tr_A(F_{x,m} ∣ K_x̄)`, where `F_{x,m}` is `W.stalkFrobenius m x hx`.
 
-No local constancy of `K` at `x̄` is assumed (blueprint: `sk-p-frob`). -/
+No local constancy of `K` at `x̄` is assumed (blueprint: `thm-trf-frobenius-local-term`, subsection
+`sk-p-frob`). -/
 theorem localTerm_traceClass_eq_trace [SmoothOfRelativeDimension 1 aX]
     (G : GeometricOperations A s)
     [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]

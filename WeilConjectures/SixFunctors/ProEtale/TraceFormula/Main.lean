@@ -68,7 +68,8 @@ localization triangle satisfy
 `tr_A(F_{c,m}, RΓ_c(X, K)) = tr_A(F_{c,m}, RΓ_c(U, j^* K)) + tr_A(F_{c,m}, RΓ_c(Z, i^* K))`.
 
 Invertibility of the coefficient morphism is unnecessary, so the statement is for plain
-`WeilComplex`es (blueprint: `sk-i-global-additivity`). -/
+`WeilComplex`es (blueprint: `prop-trf-trace-additivity-open-closed`, subsection
+`sk-i-global-additivity`). -/
 theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
     {U Z : Scheme.{u}} {aX : X ⟶ s} {aU : U ⟶ s} {aZ : Z ⟶ s}
     [IsGeometric aX] [IsGeometric aU] [IsGeometric aZ]
@@ -131,7 +132,7 @@ and every `m ≥ 1`,
 `tr_A(F_{c,m} ∣ RΓ_c(X, K)) = ∑_{x ∈ X₀(𝐅_{q^m})} tr_A(F_{x,m} ∣ K_x̄)`,
 
 the sum running over the sections `x` of `a_X` fixed by `Φ_m`
-(blueprint: `sk-thm-trace-formula`). -/
+(blueprint: `thm-trf-grothendieck-lefschetz-finite-ring`, subsection `sk-thm-trace-formula`). -/
 theorem trace_globalOperator_eq_sum_trace_stalkFrobenius {Ω : Type u} [Field Ω]
     [IsAlgClosed Ω]
     (G : GeometricOperations A (Spec (.of Ω))) {aX : X ⟶ Spec (.of Ω)} [HasCompactification aX]
