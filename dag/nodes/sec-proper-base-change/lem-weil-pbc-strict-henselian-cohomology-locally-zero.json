@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-strict-henselian-cohomology-locally-zero",
+ "kind": "statement",
+ "title": "Positive etale object cohomology classes vanish on Zariski neighbourhoods",
+ "statement": "Let X be a scheme [def-pc-scheme] whose local rings are strictly henselian [def-weil-pbc-henselian-terminology]. Let i from its small Zariski site [def-sc-zariski-site] to its small etale site [def-weil-pbc-etale-site] be a functor whose underlying scheme functor is the open-restriction functor. Let F be an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves], q>0, U an open, and xi in H^q(i(U),F), with object cohomology and restrictions as in [def-weil-pbc-sites-and-cohomology]. For every point x in U, there is an open V containing x with V contained in U such that the restriction of xi along i(V)->i(U) is zero. Cohomology may be encoded in any Ext universe for which HasExt is supplied; the coefficient category is AddCommGrpCat in the scheme morphism universe.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09AX (lemma-local-rings-strictly-henselian), proof, third and fourth sentences; Tags 03Q6 and 03QO, with the section-complex/Ext comparison in Cohomology on Sites 03F3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-henselian-terminology",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The free abelian sheaf on a representable represents evaluation on that object. Apply Hom from it to an injective resolution of F: Ext is the cohomology of the resulting section complex. Functoriality in the representable identifies restriction maps, so this is an identification of presheaves, not just of their values. Restriction to an etale object preserves injectives by its exact extension-by-zero left adjoint. Restrict first to i(top), whose underlying scheme is X. The underlying functor equality identifies every i(U) with its open restriction. Bounded-below injective complexes are K-injective, so this Ext description agrees with derived etale cohomology.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in U, apply the local-ring colimit theorem to the sheaf restricted to i(top). Its canonical pullback legs identify the colimit over Zariski neighbourhoods with cohomology on Spec(O_X,x). Work with section complexes in a sufficiently large universe and transport along their natural Ext comparison; this is required because the existing colimit declaration uses uliftYoneda and coefficients one universe above the scheme.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "O_X,x is strictly henselian, so exactness of sections at the closed geometric point annihilates every positive cohomology group of the pulled-back sheaf. By the K-injective comparison this also annihilates the section-complex cohomology used in the previous step.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The class xi therefore has zero image in that colimit. The elementwise zero-detection clause of the local-ring colimit theorem gives a smaller neighbourhood on which its restriction is zero. Transport back through the natural object-cohomology comparison. Empty U gives no x and q=0 is excluded.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09AX (lemma-local-rings-strictly-henselian), proof, third and fourth sentences; Tags 03Q6 and 03QO, with the section-complex/Ext comparison in Cohomology on Sites 03F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Positive etale cohomology classes restrict to zero near each point on schemes with strictly henselian local rings",
+   "results": "Service returned Internal Server Error (UNAVAILABLE); no absence verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive etale cohomology classes restrict to zero near each point on schemes with strictly henselian local rings",
+   "results": "LeanFinder returned etaleLocus and formally-etale algebra declarations only, not etale-cohomology local vanishing.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i strictly.henselian|leray|cohomology.*locally.zero Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; rg on lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search locally zero and Leray",
+   "results": "No matching Mathlib statement. Existing project local-ring colimit and acyclicity have incompatible universe encodings; existing Leray only supplies an unspecified invertible family. The Zariski locally-zero lemma is for Zariski cohomology, not etale object cohomology. No imported blueprint duplicate.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale cohomology class dies after shrinking a Zariski neighbourhood of a point with strictly henselian local ring",
+   "results": "Eight etale-locus and formally-etale ring results; none concerns cohomology restriction. Independent second reading by H2.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselianZariskiEtaleComparison",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "step 7 of its split (source: Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), etale-cohomology.tex line 14900, proof, second paragraph; Lemma 09ZD (label lemma-integral-cover-trivial-cohomology, line 14467) part (2)); intermediary for lem-weil-pbc-gabber-strict-henselian-zariski-comparison (step 3)",
+   "via": [
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictHenselianCohomologyLocallyZero",
+  "file": "lean/Sheaf/Paper/StrictHenselianCohomologyLocallyZero.lean",
+  "declaration": "strictHenselian_cohomology_locally_zero",
+  "statement": "theorem strictHenselian_cohomology_locally_zero\n    {X : Scheme.{u + 1}}\n    (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x))\n    (i : X.Opens ⥤ X.Etale)\n    (hi_inclusion : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ) (hq : 0 < q) (U : X.Opens)\n    (ξ : (i.op ⋙ Sheaf.cohomologyPresheaf F q).obj (op U))\n    (x : X) (hx : x ∈ U) :\n    ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      (i.op ⋙ Sheaf.cohomologyPresheaf F q).map (homOfLE hVU).op ξ = 0",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085247-L-18079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085247-L-18079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

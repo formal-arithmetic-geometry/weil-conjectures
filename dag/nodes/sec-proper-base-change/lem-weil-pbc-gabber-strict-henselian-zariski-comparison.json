@@ -34,89 +34,28 @@
  ],
  "proof": [
   {
-   "text": "*The morphism of sites and the groups.* By [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites] the inclusion functor $u:X_{\\rm Zar}\\to X_{\\Et}$ is continuous and defines a morphism of sites $\\epsilon:X_{\\Et}\\to X_{\\rm Zar}$, with $\\epsilon_*\\mathcal F=\\mathcal F\\circ u$; $X$ is a final object of $X_{\\rm Zar}$ and $u(X)=\\mathrm{id}_X$ is the final object of $X_{\\Et}$. The group $H^q(X_{\\rm Zar},\\mathcal G)$ of [def-sc-zariski-cohomology] is by definition $R^q$ of $\\mathcal G\\mapsto\\mathcal G(X)$ on $\\textit{Ab}(X_{\\rm Zar})$, i.e. the group $H^q(X,\\mathcal G)$ over the object $X$ of [def-weil-pbc-sites-and-cohomology] (2). The group $H^q(X_{\\Et},\\mathcal F)$ of [def-weil-pbc-etale-cohomology] is computed from a K-injective resolution of $\\mathcal F[0]$; an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ is one, since a bounded below complex of injectives is K-injective [lem-sp-kinjective-computes] (2), so $H^q(X_{\\Et},\\mathcal F)=H^q(\\Gamma(X,\\mathcal I^\\bullet))=H^q(u(X),\\mathcal F)$ in the notation of [def-weil-pbc-sites-and-cohomology] (2). Hence $c^q$ is the edge map $e^q_{X,\\mathcal F}=H^q(u(X),\\varepsilon_{\\mathcal F})\\circ\\epsilon^*$ of [lem-weil-pbc-site-leray-degenerate] for the morphism of sites $\\epsilon$ and the object $V=X$ of $X_{\\rm Zar}$, with $\\epsilon^*$ the pullback of [lem-weil-pbc-site-cohomology-pullback].",
+   "text": "Apply strictHenselian_cohomology_locally_zero to the difference s-t in positive object cohomology on U, at each x in U. It supplies x in V subset U with restriction(s-t)=0. Restriction is additive, so restriction(s)=restriction(t). These witnesses show that the equalizer sieve of any two sections is covering, which is precisely local injectivity of the zero endomorphism.",
    "uses": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "def-sc-zariski-cohomology",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-etale-cohomology",
-    "lem-sp-kinjective-computes",
-    "lem-weil-pbc-site-cohomology-pullback"
+    "lem-weil-pbc-strict-henselian-cohomology-locally-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14205), proof, first sentence: 'Let epsilon : S_etale -> S_Zar be the morphism of sites given by the inclusion functor'; the identification of the statement's H^i(S_Zar, F) with Zariski cohomology of epsilon_* F"
-   }
+   "elementary": false
   },
   {
-   "text": "*Higher direct images as sheafified presheaves.* For $q\\ge0$ let $\\mathcal P^q$ be the presheaf of abelian groups on $X_{\\rm Zar}$ with $\\mathcal P^q(U)=H^q(u(U),\\mathcal F)=H^q(U,\\mathcal F)$, the cohomology of $\\mathcal F$ over the object $U\\hookrightarrow X$ of $X_{\\Et}$, with restrictions induced by those of an injective resolution of $\\mathcal F$. By [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf], applied to $\\epsilon$ (given by $u$), $R^q\\epsilon_*\\mathcal F\\cong(\\mathcal P^q)^\\#$, the Zariski sheafification [def-weil-pbc-sheafification]; in particular $R^q\\epsilon_*\\mathcal F=0$ as soon as $(\\mathcal P^q)^\\#=0$.",
+   "text": "Use zariski_etale_canonical_leray with the resulting local-injectivity family, the supplied functor, underlying-functor equality, continuity, and the three characterizing clauses hfstar. It proves that pullback followed by the counit is invertible on every open in every degree. Set V=top and rewrite c q using hc q.",
    "uses": [
-    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-    "def-weil-pbc-sheafification"
+    "lem-weil-pbc-zariski-etale-canonical-leray"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX, proof, second sentence: 'The Zariski sheaf R^p epsilon_* F is the sheaf associated to the presheaf U -> H^p_etale(U, F)' (Cohomology on Sites, Lemma Tag 072W, sites-cohomology.tex line 747)"
-   }
-  },
-  {
-   "text": "*Every class of positive degree is Zariski locally zero.* Let $q\\ge1$, $U\\subseteq X$ open, $\\xi\\in\\mathcal P^q(U)=H^q(U,\\mathcal F)$ and $x\\in U$. By [lem-weil-pbc-etale-cohomology-local-ring-colimit] the class $\\xi$ has an image in $H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$, $g_x:\\operatorname{Spec}\\mathcal O_{X,x}\\to X$ the canonical morphism, and the induced map $\\varinjlim_{W\\ni x}H^q(W,\\mathcal F)\\to H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$ is an isomorphism. By hypothesis $\\mathcal O_{X,x}$ is a strictly henselian local ring [def-weil-pbc-henselian-terminology], so the target is $0$ by [lem-weil-pbc-strictly-henselian-etale-acyclic] ($q\\ge1$). Hence the image of $\\xi$ in the directed colimit is $0$, and by the last assertion of [lem-weil-pbc-etale-cohomology-local-ring-colimit] there is an open $W$ with $x\\in W\\subseteq U$ and $\\xi|_W=0$ in $\\mathcal P^q(W)$.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-local-ring-colimit",
-    "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-strictly-henselian-etale-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX, proof, third and fourth sentences: the stalk at x is colim H^p_etale(U, F) = H^p_etale(Spec(O_{X,x}), G_x) (Lemma Tag 03Q6, line 7464) and these vanish by Lemma Tag 03QO (line 8207)"
-   }
-  },
-  {
-   "text": "*Vanishing of $R^q\\epsilon_*\\mathcal F$ for $q>0$.* Fix $q\\ge1$ and consider the morphism of presheaves $\\varphi:\\mathcal P^q\\to0$ to the zero presheaf on $X_{\\rm Zar}$. It is locally surjective trivially (the only section $0$ is the image of $0$). It is locally injective: if $s,t\\in\\mathcal P^q(U)$, apply step 3 to $\\xi=s-t$ at every $x\\in U$; the opens $W_x$ obtained form a Zariski covering $\\{W_x\\subseteq U\\}_{x\\in U}$ with $s|_{W_x}=t|_{W_x}$ (restriction is additive). By [lem-weil-pbc-site-sheafification-iso-locally-bijective] $\\varphi^\\#:(\\mathcal P^q)^\\#\\to0^\\#$ is an isomorphism. The zero presheaf is a sheaf, so $0\\to0^\\#$ is an isomorphism (the identity $0\\to0$ factors through it uniquely, [def-weil-pbc-sheafification]) and $0^\\#=0$; thus $(\\mathcal P^q)^\\#=0$ and, by step 2, $R^q\\epsilon_*\\mathcal F=0$ for all $q>0$.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX, proof, fourth sentence: 'Thus the higher direct images of R^p epsilon_* F are zero' (read: the higher direct images R^p epsilon_* F, p > 0, are zero), the stalkwise vanishing being turned into the vanishing of the sheaf"
-   }
-  },
-  {
-   "text": "*Conclusion by the degenerate Leray spectral sequence.* By step 4, $R^q\\epsilon_*\\mathcal F=0$ for all $q>0$. Hence [lem-weil-pbc-site-leray-degenerate], applied to the morphism of sites $\\epsilon$, the sheaf $\\mathcal F$ and the object $V=X$ of $X_{\\rm Zar}$, shows that the edge map $e^q_{X,\\mathcal F}:H^q(X,\\epsilon_*\\mathcal F)\\to H^q(u(X),\\mathcal F)$ is an isomorphism for every $q\\ge0$; by step 1 this is $c^q:H^q(X_{\\rm Zar},\\epsilon_*\\mathcal F)\\to H^q(X_{\\Et},\\mathcal F)$. In degree $0$ it is the identity of $(\\epsilon_*\\mathcal F)(X)=\\mathcal F(X)$, as recorded there.",
-   "uses": [
-    "lem-weil-pbc-site-leray-degenerate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX, proof, last clause: 'and we conclude by the Leray spectral sequence' (Cohomology on Sites, Lemma Tag 0733 (1), sites-cohomology.tex line 2347)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "def-sc-zariski-cohomology",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-etale-cohomology",
-  "lem-sp-kinjective-computes",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-etale-cohomology-local-ring-colimit",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-strictly-henselian-etale-acyclic",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "lem-weil-pbc-site-leray-degenerate"
+  "lem-weil-pbc-strict-henselian-cohomology-locally-zero",
+  "lem-weil-pbc-zariski-etale-canonical-leray"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14205) and its proof, with Lemma Tag 03Q6 (line 7464), Lemma Tag 03QO (line 8207), sites-cohomology.tex Lemmas Tag 072W (line 747) and 0733 (line 2347), sites.tex Proposition Tag 00X6 (line 2827)"
+  "place": "Tag 09AX, proof; the Lean reduction proves local injectivity from local annihilation of differences, then applies canonical Leray. The remaining universe/resolution and canonical-map bridges are the two new nodes."
  },
  "mathlib_searches": [
   {
@@ -204,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-5306b",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T063524-L-3161736",
+  "landing": "20261012T085247-L-18079",
   "kind": "interface",
-  "note": "independent Codex review: Matched the repaired inclusion and canonical comparison signature with the unchanged node, pullback characterization, change record, downstream users, and earlier return; delivered module compiles cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

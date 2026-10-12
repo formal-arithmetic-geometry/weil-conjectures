@@ -5,14 +5,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit
-import Sheaf.CategoryTheory.KInjectiveComputes
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.SiteLerayDegenerate
-import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
-import Sheaf.Paper.StrictlyHenselianEtaleAcyclic
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Mathlib.CategoryTheory.Sites.LocallyInjective
+import Sheaf.Paper.StrictHenselianCohomologyLocallyZero
+import Sheaf.Paper.ZariskiEtaleCanonicalLeray
 
 /-!
 # Étale and Zariski cohomology over strictly henselian schemes
@@ -119,4 +114,19 @@ theorem strictHenselian_zariski_etale_comparison
             (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).counit.app F)).app
               (op (i.obj ⊤))) :
     ∀ q : ℕ, IsIso (c q) := by
-  sorry
+  have hvan : ∀ q : ℕ, 0 < q →
+      Presheaf.IsLocallyInjective (Opens.grothendieckTopology X.carrier)
+        (0 : i.op ⋙ Sheaf.cohomologyPresheaf F q ⟶
+          i.op ⋙ Sheaf.cohomologyPresheaf F q) := by
+    intro q hq
+    constructor
+    intro U s t _ x hx
+    obtain ⟨V, hVU, hxV, hzero⟩ := strictHenselian_cohomology_locally_zero
+      hX i hi_inclusion F q hq U.unop (s - t) x hx
+    refine ⟨V, homOfLE hVU, ?_, hxV⟩
+    change (i.op ⋙ Sheaf.cohomologyPresheaf F q).map (homOfLE hVU).op s =
+      (i.op ⋙ Sheaf.cohomologyPresheaf F q).map (homOfLE hVU).op t
+    exact sub_eq_zero.mp (by simpa only [map_sub] using hzero)
+  intro q
+  rw [hc q]
+  exact zariski_etale_canonical_leray i hi_inclusion hi fstar hfstar F hvan q ⊤
