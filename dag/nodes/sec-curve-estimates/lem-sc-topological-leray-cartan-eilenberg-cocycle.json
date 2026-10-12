@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-topological-leray-cartan-eilenberg-cocycle",
+ "kind": "statement",
+ "title": "Cartan--Eilenberg Leray construction and bottom cocycle computation",
+ "statement": "For a continuous map f:Z -> X with additive direct image, let HX and HZ be terminal-open abelian-sheaf cohomology functors with the specified equalities [def-sc-topological-abelian-cohomology]. Let KX and KZ be the sheafifications of the free abelian representables of the terminal opens. Let a:KX -> f_*KZ have the displayed inverse-image generator formula. There exists a first-quadrant cohomological spectral sequence E in the category of functors from abelian sheaves on Z to abelian groups. Its second-page comparisons are e2_(p,q):E2^(p,q) -> R^q f_* followed by HX^p, each an isomorphism. For each p,q its entries stabilize to Einfinity^(p,q), read at page p+q+2: some integer R>=2 has E_r^(p,q) isomorphic to this entry for every r>=R. There is a decreasing filtration T of HZ [def-sp-filtration] with T^0 HZ^n=top and T^(n+1) HZ^n=bottom, and graded comparisons g_(p,q):T^p HZ^(p+q)/T^(p+1) HZ^(p+q) -> Einfinity^(p,q). There are isomorphisms e0_p:f_* followed by HX^p -> E2^(p,0), whose forward maps are the right-derived-zero transformation of f_* whiskered by HX^p followed by e2_(p,0)^(-1). There are transitions t_(p,r):E_r^(p,0) -> E_(r+1)^(p,0) for r>=2 such that iCycles followed by t equals homology projection followed by the next-page comparison. Their iterates b_(p,r):E2^(p,0) -> E_r^(p,0) satisfy b_(p,2)=id and b_(p,r+1)=b_(p,r) followed by t_(p,r). There are isomorphisms k_p:Einfinity^(p,0) -> T^p HZ^p such that the cokernel projection from T^p HZ^p followed by g_(p,0) equals k_p^(-1). There is a natural bottom map equal to e0 followed by b_(p+2), k and the filtration inclusion. For any sheaf F, resolutions I of F and J of f_*F, comparison phi:J -> f_*I over f_*F, and cocycles s:KX -> J^p and z:KZ -> I^p with a followed by f_*z equal to s followed by phi^p, this bottom map sends J.extMk(s) to I.extMk(z), after transport by hX and hZ. No prescribed cohomology map or characterization of one is an input or a conclusion.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015N, 015J and 01F2; second Cartan--Eilenberg filtration and degree-zero augmentation"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Cartan--Eilenberg Grothendieck construction to direct image and terminal sections. Use injective preservation to check the acyclicity condition. Regard abelian sheaves as modules over the constant integer ring sheaf to supply the Grothendieck abelian hypotheses. Transport the canonical E2 and abutment comparisons along hX,hZ and the equality of terminal sections before and after direct image. Resolution and Cartan--Eilenberg comparisons are independent up to homotopy from page two, preserving the filtration, so this gives spectral-sequence data in the functor category.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-sc-topological-pushforward-injective",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The second total-complex filtration gives T and its graded comparisons. First-quadrant bounds give top at zero, bottom at n+1, and stabilization for r>max(p,q+1), in particular at p+q+2. The bottom outgoing differential is zero, so the cycles inclusion is invertible. Compose its inverse with homology projection and the next-page comparison to form t; iterate from the identity to obtain b. The denominator of the bottom graded quotient is zero, yielding k with its quotient equation. The derived-zero comparison gives e0. Define bottom as their displayed composite.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the total-complex augmentation in resolution degree zero on s. Comparison into f_*I sends it to s followed by phi^p. Terminal-section representation identifies this with z precisely by the given equation with a; the generator formula for a fixes the terminal-section identification. The canonical resolution abutment computation identifies this total cohomology class with I.extMk(z). This proves the asserted bottom-cocycle equation without comparing any supplied cohomology map.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-grothendieck",
+  "lem-sc-topological-pushforward-injective",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015N",
+  "place": "Tags 015N, 015J and 01F2; second Cartan--Eilenberg filtration and degree-zero augmentation; explicit specialization of the parent proof step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartan--Eilenberg Leray construction and bottom cocycle computation",
+   "results": "Search service returned Internal Server Error; no absence verdict inferred.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartan--Eilenberg Leray construction and bottom cocycle computation",
+   "results": "InjectiveResolution.desc, descFZero, descFOne and descFSucc found. They compare two injective resolutions; f_*I need not resolve f_*F. No theorem combines the required direct-image comparison with terminal-section cocycle lifting, or provides the natural Leray construction with its cocycle equation.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Grothendieck bottom edge, resolution lift, free Yoneda and terminal sections across Mathlib/CategoryTheory and both source roots",
+   "results": "Objectwise Cartan--Eilenberg construction, extMk_surjective, sheafification and free-forgetful adjunctions, and injective preservation exist. No exact statement for this intermediate step was found.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalLerayBottomRealization",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "proof of Cohomology Lemma 02UV invokes Leray; Leray spectral sequence construction and bottom filtration edge",
+   "via": [
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.TopologicalLerayCartanEilenbergCocycle",
+  "file": "lean/Sheaf/Topology/TopologicalLerayCartanEilenbergCocycle.lean",
+  "declaration": "CategoryTheory.exists_topological_leray_cartan_eilenberg_cocycle",
+  "statement": "theorem exists_topological_leray_cartan_eilenberg_cocycle\n    {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]\n    (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙\n      (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))\n    (hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙\n      (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))\n    (a : (presheafToSheaf (Opens.grothendieckTopology X)\n        AddCommGrpCat.{u}).obj\n        (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n      (TopCat.Sheaf.pushforwardAb f).obj\n        ((presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)))\n    (ha : (∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)),\n        a.hom.app (op U)\n          ((toSheafify (Opens.grothendieckTopology X)\n            (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app\n              (op U) (FreeAbelianGroup.of h)) =\n          (toSheafify (Opens.grothendieckTopology Z)\n            (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app\n              (op ((Opens.map f).obj U))\n              (FreeAbelianGroup.of ((Opens.map f).map h ≫\n                eqToHom (Opens.map_top f)))))\n :\n    ∃ E : E₂CohomologicalSpectralSequenceNat\n        (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}),\n      ∃ e₂ : ∀ a b : ℕ, (E.page 2).X (a, b) ≅\n          (TopCat.Sheaf.pushforwardAb f).rightDerived b ⋙ HX a,\n        (∀ a b : ℕ, ∃ (R : ℤ) (_hR : 2 ≤ R), ∀ (r : ℤ) (hr : R ≤ r),\n          Nonempty ((E.page r (by omega)).X (a, b) ≅ E.pageInfinity (a, b))) ∧\n        ∃ T : ∀ n : ℕ, DecreasingFiltration (HZ n),\n          (∀ n, (T n).step 0 = ⊤) ∧\n          (∀ n, (T n).step (n + 1) = ⊥) ∧\n          ∃ g : ∀ p q : ℕ, (T (p + q)).gradedPiece p ≅ E.pageInfinity (p, q),\n            ∃ e₀ : ∀ p : ℕ,\n                TopCat.Sheaf.pushforwardAb f ⋙ HX p ≅ (E.page 2).X (p, 0),\n              (∀ p, (e₀ p).hom =\n                Functor.whiskerRight (TopCat.Sheaf.pushforwardAb f).toRightDerivedZero\n                  (HX p) ≫ (e₂ p 0).inv) ∧\n              ∃ t : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),\n                  (E.page r hr).X (p, 0) ⟶ (E.page (r + 1) (by omega)).X (p, 0),\n                (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),\n                  (E.page r hr).iCycles (p, 0) ≫ t p r hr =\n                    (E.page r hr).homologyπ (p, 0) ≫ (E.iso r (r + 1) (p, 0) rfl hr).hom) ∧\n                ∃ b : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),\n                    (E.page 2).X (p, 0) ⟶ (E.page r hr).X (p, 0),\n                  (∀ p, b p 2 (by omega) = 𝟙 _) ∧\n                  (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),\n                    b p (r + 1) (by omega) = b p r hr ≫ t p r hr) ∧\n                  ∃ k : ∀ p : ℕ, E.pageInfinity (p, 0) ≅ ((T p).step p :\n                      Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤\n                        AddCommGrpCat.{u}),\n                    (∀ p, cokernel.π (Subobject.ofLE ((T p).step (p + 1))\n                      ((T p).step p) ((T p).antitone_step (by omega))) ≫\n                        (g p 0).hom = (k p).inv) ∧\n                    ∃ bottom : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,\n                      (∀ p, bottom p = (e₀ p).hom ≫ b p (p + 2) (by omega) ≫\n                        (k p).hom ≫ ((T p).step p).arrow) ∧\n                    (∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})\n        (I : InjectiveResolution F)\n        (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F))\n        (φ : J.cocomplex ⟶\n          ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj I.cocomplex)\n        (_hφ : J.ι.f 0 ≫ φ.f 0 =\n          (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ)\n        (s : (presheafToSheaf (Opens.grothendieckTopology X)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n            J.cocomplex.X p)\n        (hs : s ≫ J.cocomplex.d p (p + 1) = 0)\n        (z : (presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶\n            I.cocomplex.X p)\n        (hz : z ≫ I.cocomplex.d p (p + 1) = 0)\n        (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),\n        (eqToHom (congrArg (fun Q ↦ Q.obj F) (hZ p)))\n          ((bottom p).app F\n            ((eqToHom (congrArg (fun Q ↦ Q.obj\n              ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)\n              (J.extMk s (p + 1) rfl hs))) =\n            I.extMk z (p + 1) rfl hz)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ed741",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ed741",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655634",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged parent signature and proof to its node, both new cocycle lemmas to their nodes and sources; all three modules and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx from the two recorded holes."
+ }
+}

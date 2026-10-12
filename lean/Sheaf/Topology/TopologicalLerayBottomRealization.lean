@@ -10,12 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.Topology.TopologicalInducedCohomologyCocycle
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.Topology.TopologicalLerayCartanEilenbergCocycle
+import Sheaf.Topology.TopologicalResolutionCocycleLift
 
 /-! # Realization of the canonical Leray bottom edge -/
 
@@ -27,6 +23,18 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace CategoryTheory
 
+private theorem eqToHom_apply_injective {A B : AddCommGrpCat.{u}} (h : A = B) :
+    Function.Injective (eqToHom h) := by
+  subst B
+  exact fun _ _ h ↦ h
+
+private theorem eqToHom_apply_symm {A B : AddCommGrpCat.{u}} (h : A = B) (x : A) :
+    (eqToHom h.symm) ((eqToHom h) x) = x := by
+  subst B
+  rfl
+
+set_option maxHeartbeats 400000 in
+-- The dependent cocycle transports and spectral-sequence witness require extra elaboration.
 /-- Realize a cohomology map already characterized on resolution cocycles as the bottom
 edge of a functorial Leray spectral sequence. The induced map and its cocycle computation
 are inputs; this statement constructs only the spectral sequence and its finite filtration.
@@ -147,6 +155,34 @@ theorem exists_topological_leray_bottom_realization
                       ((T p).step p) ((T p).antitone_step (by omega))) ≫
                         (g p 0).hom = (k p).inv) ∧
                     (∀ p, edge p = (e₀ p).hom ≫ b p (p + 2) (by omega) ≫
-                      (k p).hom ≫ ((T p).step p).arrow) := by sorry
+                      (k p).hom ≫ ((T p).step p).arrow) := by
+  obtain ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hbt, k, hk,
+    bottom, hbottom, computation⟩ :=
+    exists_topological_leray_cartan_eilenberg_cocycle f HX HZ hX hZ a ha
+  refine ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hbt, k, hk, ?_⟩
+  intro p
+  rw [← hbottom p]
+  apply NatTrans.ext
+  funext F
+  apply ConcreteCategory.hom_ext
+  intro x
+  let I := injectiveResolution F
+  let J := injectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F)
+  let α := (eqToHom (congrArg (fun Q ↦ Q.obj
+    ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p))) x
+  obtain ⟨s, hs, hclass⟩ := J.extMk_surjective α (p + 1) rfl
+  obtain ⟨φ, hφ, z, hz, hsz⟩ :=
+    exists_topological_resolution_cocycle_lift f a ha F I J p s hs
+  have input : (eqToHom (congrArg (fun Q ↦ Q.obj
+      ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
+        (J.extMk s (p + 1) rfl hs) = x := by
+    rw [hclass]
+    dsimp [α]
+    exact eqToHom_apply_symm _ x
+  have hgiven := hedge F I J φ hφ p s hs z hz hsz
+  have hcomputed := computation F I J φ hφ p s hs z hz hsz
+  rw [input] at hgiven hcomputed
+  have transported := hgiven.trans hcomputed.symm
+  exact eqToHom_apply_injective _ transported
 
 end CategoryTheory

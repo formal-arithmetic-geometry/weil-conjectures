@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-topological-resolution-cocycle-lift",
+ "kind": "statement",
+ "title": "Terminal-section lift of a topological resolution cocycle",
+ "statement": "Let f:Z -> X be continuous, with additive direct image on abelian sheaves [def-sc-topological-abelian-cohomology]. Let KX and KZ be the sheafifications of the free abelian terminal representables and let a:KX -> f_*KZ send their generators to the inverse-image generators. For every sheaf F on Z, injective resolutions I of F and J of f_*F [def-sp-injective-resolutions], degree p, and cocycle s:KX -> J^p, there exist a chain map phi:J -> f_*I satisfying J.ι^0 followed by phi^0 equals f_*(I.ι^0), and a cocycle z:KZ -> I^p such that a followed by f_*z equals s followed by phi^p. This asserts only the existence of a resolution comparison and compatible cocycle, not any spectral-sequence or cohomology-map equality.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F2 and the injective-resolution comparison argument; Tag 01DZ terminal-section representation"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Every term of f_*I is injective by injective preservation. Extend f_*(I.ι^0) across the mono J.ι^0 using injectivity. For the induction, exactness of the augmented resolution J makes the preceding chain-map composite factor through the image of the next source differential, which is a subobject of the next term of J. Extend from that subobject into the corresponding injective term of f_*I. These extensions define phi, its chain-map identities and its augmentation equation. No exactness of f_*I is needed.",
+   "uses": [
+    "lem-sc-topological-pushforward-injective",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification adjunction, free-forgetful adjunction and Yoneda give Hom(KZ,M)=M(Z) and Hom(KX,f_*M)=(f_*M)(X)=M(Z). The resulting bijection sends z to a followed by f_*z: check on the prescribed sheafification generators using their naturality, which determines the sheaf map. Apply its inverse to s followed by phi^p to obtain z. Naturality of this bijection for I.d, the chain-map equation and the cocycle equation for s imply that z followed by I.d is zero. This gives both required equations, including degree zero and the zero sheaf.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-topological-pushforward-injective",
+  "def-sp-injective-resolutions",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F2",
+  "place": "Tag 01F2 and the injective-resolution comparison argument; Tag 01DZ terminal-section representation; explicit specialization of the parent proof step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Terminal-section lift of a topological resolution cocycle",
+   "results": "Search service returned Internal Server Error; no absence verdict inferred.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Terminal-section lift of a topological resolution cocycle",
+   "results": "InjectiveResolution.desc, descFZero, descFOne and descFSucc found. They compare two injective resolutions; f_*I need not resolve f_*F. No theorem combines the required direct-image comparison with terminal-section cocycle lifting, or provides the natural Leray construction with its cocycle equation.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Grothendieck bottom edge, resolution lift, free Yoneda and terminal sections across Mathlib/CategoryTheory and both source roots",
+   "results": "Objectwise Cartan--Eilenberg construction, extMk_surjective, sheafification and free-forgetful adjunctions, and injective preservation exist. No exact statement for this intermediate step was found.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalLerayBottomRealization",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "proof of Cohomology Lemma 02UV invokes Leray; Leray spectral sequence construction and bottom filtration edge",
+   "via": [
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.TopologicalResolutionCocycleLift",
+  "file": "lean/Sheaf/Topology/TopologicalResolutionCocycleLift.lean",
+  "declaration": "CategoryTheory.exists_topological_resolution_cocycle_lift",
+  "statement": "theorem exists_topological_resolution_cocycle_lift\n    {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]\n    (a : (presheafToSheaf (Opens.grothendieckTopology X)\n        AddCommGrpCat.{u}).obj\n        (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n      (TopCat.Sheaf.pushforwardAb f).obj\n        ((presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)))\n    (ha : (∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)),\n        a.hom.app (op U)\n          ((toSheafify (Opens.grothendieckTopology X)\n            (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app\n              (op U) (FreeAbelianGroup.of h)) =\n          (toSheafify (Opens.grothendieckTopology Z)\n            (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app\n              (op ((Opens.map f).obj U))\n              (FreeAbelianGroup.of ((Opens.map f).map h ≫\n                eqToHom (Opens.map_top f)))))\n    (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F))\n    (p : ℕ)\n    (s : (presheafToSheaf (Opens.grothendieckTopology X)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n            J.cocomplex.X p)\n    (hs : s ≫ J.cocomplex.d p (p + 1) = 0) :\n    ∃ (φ : J.cocomplex ⟶\n          ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj I.cocomplex),\n      J.ι.f 0 ≫ φ.f 0 = (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0) ∧\n      ∃ (z : (presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶\n            I.cocomplex.X p),\n        z ≫ I.cocomplex.d p (p + 1) = 0 ∧\n        a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ed741",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ed741",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655634",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged parent signature and proof to its node, both new cocycle lemmas to their nodes and sources; all three modules and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx from the two recorded holes."
+ }
+}
