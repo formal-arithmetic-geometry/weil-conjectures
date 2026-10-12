@@ -194,6 +194,50 @@ theorem nonempty_verdierDual_upperStar_derivedLowerStar_iso
 
 end Localization
 
+section SmoothLisse
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- The tensor product of a lisse Weil sheaf `L` with a Weil sheaf `G` placed in degree zero is
+the tensor product sheaf `L ⊗ G` placed in degree zero: the internal hom out of the lisse
+`L^∨` is exact. -/
+noncomputable def tensorLisseToComplexIso (L : WeilSheaf k₀ l X) (hL : L.IsLisse)
+    (G : WeilSheaf k₀ l X) :
+    (tensorLisse L hL).obj (WeilSheaf.toComplex.obj G) ≅
+      WeilSheaf.toComplex.obj (L.tensorObj G hL) :=
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (L.dual hL).obj hL.dual
+  ObjectProperty.isoMk _
+    ((ProEtaleWeilSheaf.ihomFunctor k₀ l X (L.dual hL).obj).singleFunctorCompRightDerivedFunctorIso
+      |>.app G.obj)
+
+variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- **The Verdier dual of a lisse sheaf on a smooth scheme** (blueprint:
+`lem-a1-local-boundary-duality`, "`𝔻_U F ≅ F^∨(1)[2]`"): if `X` is smooth of pure dimension `d`
+over `k₀` and `P` is a lisse Weil sheaf on `X`, then `𝔻_X P ≅ (P^∨ ⊗ (ℚ̄_ℓ(d) ⊗ ℚ̄_ℓ))[2d]`,
+from `ω_X ≅ ℚ̄_ℓ(d)[2d]` and `RHom(P, N) ≅ P^∨ ⊗ N`. -/
+theorem nonempty_verdierDual_toComplex_iso_of_isLisse (d : ℕ)
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+    (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
+    Nonempty ((verdierDual k₀ l X).obj (op (WeilSheaf.toComplex.obj P)) ≅
+      (WeilSheaf.toComplex.obj ((P.dual hP).tensorObj
+        ((WeilSheaf.tateTwistSheaf k₀ l X d).tensorObj (WeilSheaf.adicConstant k₀ l X)
+          (WeilSheaf.isLisse_tateTwistSheaf k₀ l X d)) hP.dual))⟦(2 * d : ℤ)⟧) := by
+  obtain ⟨e₁⟩ := nonempty_tensorLisse_dual_iso_derivedHom P hP (dualizingComplex k₀ l X)
+  obtain ⟨e₂⟩ := nonempty_dualizingComplex_iso (k₀ := k₀) (l := l) (X := X) d
+  let T := tensorLisse (P.dual hP) hP.dual
+  let E₁ : (verdierDual k₀ l X).obj (op (WeilSheaf.toComplex.obj P)) ≅
+      T.obj (dualizingComplex k₀ l X) :=
+    ObjectProperty.isoMk _ e₁.symm
+  exact ⟨E₁ ≪≫ T.mapIso e₂ ≪≫ (T.commShiftIso (2 * d : ℤ)).app _ ≪≫
+    (shiftFunctor _ (2 * d : ℤ)).mapIso
+      (T.mapIso (tensorLisseToComplexIso (WeilSheaf.tateTwistSheaf k₀ l X d)
+        (WeilSheaf.isLisse_tateTwistSheaf k₀ l X d) _) ≪≫ tensorLisseToComplexIso _ _ _)⟩
+
+end SmoothLisse
+
 end WeilComplex
 
 end AlgebraicGeometry
