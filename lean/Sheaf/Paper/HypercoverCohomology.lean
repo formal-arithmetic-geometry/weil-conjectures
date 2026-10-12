@@ -6,15 +6,9 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.Paper.HypercoverCohomologyColimit
+import Sheaf.Paper.HypercoverCohomologyAbelian
+import Sheaf.Paper.HypercoverCohomologyModule
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.Paper.FiniteSplitEtaleHypercover
-import Sheaf.Paper.FiniteSplitHypercoverRefinement
-import Sheaf.Paper.HypercoverFreeResolution
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-
 /-!
 # Derived étale cohomology computed by finite split hypercovers
 
@@ -80,6 +74,9 @@ theorem hypercover_cohomology (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparat
       FiniteSplitEtaleHypercover.IsCohomologyColimit (ModuleCat.{u₁ + 1} R) q
         (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u₁ + 1} R)) 0 ⋙
           Etale.cohomology (ModuleCat.{u₁ + 1} R) X (q : ℤ)) := by
-  sorry
+  refine ⟨hypercover_cohomology_abelian_part X q, ?_⟩
+  intro R _
+  exact hypercover_cohomology_module_part X q R
+
 
 end AlgebraicGeometry

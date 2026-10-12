@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-hypercover-cohomology",
+   "place": "the abelian/module clause of the item statement",
+   "via": [
+    "thm-weil-pbc-hypercover-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+  "place": "Proof split into abelian and module coefficient clauses"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+  "place": "Proof steps 1-5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "hypercover cohomology colimit derived sheaf",
+   "results": "No exact theorem found; the comparison is project-specific.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCohomologyColimit hypercover",
+   "results": "No matching declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover.*cohomology",
+   "results": "Only project definitions and the parent target; no proof theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.HypercoverCohomology",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "id": "thm-weil-pbc-hypercover-cohomology-module-part",
+ "title": "Module coefficient clause of hypercover cohomology",
+ "statement": "The module coefficient clause of thm-weil-pbc-hypercover-cohomology: for every qcqs scheme X, q and ring R, FiniteSplitEtaleHypercover.IsCohomologyColimit (ModuleCat R) q (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat R)) 0 ⋙ Etale.cohomology (ModuleCat R) X q).",
+ "stmt_deps": [
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-hypercover-cohomology-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The corresponding coefficient-category comparison follows by the injective-resolution double-complex argument, successive finite refinement corrections, and the colimit universal property described in the parent theorem.",
+   "uses": [
+    "lem-weil-pbc-hypercover-free-resolution",
+    "lem-weil-pbc-hypercover-refinement",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hypercover-free-resolution",
+  "lem-weil-pbc-hypercover-refinement",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.HypercoverCohomologyModule",
+  "file": "lean/Sheaf/Paper/HypercoverCohomologyModule.lean",
+  "declaration": "AlgebraicGeometry.hypercover_cohomology_module_part",
+  "statement": "theorem hypercover_cohomology_module_part (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X] (q : ℕ) (R : Type (u₁ + 1)) [Ring R] : FiniteSplitEtaleHypercover.IsCohomologyColimit (ModuleCat.{u₁ + 1} R) q (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u₁ + 1} R)) 0 ⋙ Etale.cohomology (ModuleCat.{u₁ + 1} R) X (q : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

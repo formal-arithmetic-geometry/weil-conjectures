@@ -25,91 +25,22 @@
  ],
  "proof": [
   {
-   "text": "The abelian and constant-ring module sheaf categories have enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. Choose a nonnegative injective resolution $F\\hookrightarrow I^0\\to I^1\\to\\cdots$. It is K-injective by [prop-weil-pbc-kinjective-resolutions-exist], so $H^q(\\Gamma(X,I^\\bullet))$ is the group in [def-weil-pbc-etale-cohomology]. For a finite split hypercover $U$ [def-weil-pbc-finite-split-hypercover], put $D^{p,r}=I^r(U_p)$ and use the total differential $d(x)=\\delta x+(-1)^p d_Ix$ on $D^{p,r}$. Each total degree has only finitely many bidegrees, so its totalization uses a finite direct sum.",
+   "text": "Apply the abelian coefficient clause to the first conjunct. For the second conjunct, introduce an arbitrary ring R and apply the module coefficient clause.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-finite-split-hypercover",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "prop-weil-pbc-kinjective-resolutions-exist"
+    "thm-weil-pbc-hypercover-cohomology-abelian-part",
+    "thm-weil-pbc-hypercover-cohomology-module-part"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Theorem 01H0 (theorem-cohomology-hypercoverings), comparison with injective sheaf cohomology; injective resolutions from Injectives, Theorem 01DU (theorem-sheaves-modules-injectives)"
-   }
-  },
-  {
-   "text": "For each injective $I^r$, [lem-weil-pbc-hypercover-free-resolution] identifies the horizontal cohomology of $I^r(U_\\bullet)$ with $I^r(X)$ in degree zero and zero in higher degrees. The horizontal-first spectral sequence of [thm-sp-double-complex-spectral-sequences] therefore has only its degree-zero column; its remaining differential is $d_I$ on $I^\\bullet(X)$. Its finite filtration in each total degree shows that the augmentation $\\Gamma(X,I^\\bullet)\\to\\operatorname{Tot}D$ is a quasi-isomorphism. The maps $F(U_p)\\to I^0(U_p)$ define a cochain map $C^\\bullet(U,F)\\to\\operatorname{Tot}D$: its vertical component vanishes because $F=\\ker(I^0\\to I^1)$. Thus we obtain a map $H^q(C^\\bullet(U,F))\\to H^q(X_{\\Et},F)$, compatible with refinements and maps of sheaves.",
-   "uses": [
-    "lem-weil-pbc-hypercover-free-resolution",
-    "thm-sp-double-complex-spectral-sequences",
-    "def-weil-pbc-etale-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
-    "place": "Proof, first paragraph: augmented injective double complex; compare Stacks 01H0 (theorem-cohomology-hypercoverings)"
-   }
-  },
-  {
-   "text": "For surjectivity, let $z=\\sum_{p+r=q}z^{p,r}$ be a total cocycle. If $q>0$, its component $z^{0,q}$ is $d_I$-closed. Exactness of the sheaf resolution says that $I^{q-1}\\to\\ker(d_I:I^q\\to I^{q+1})$ is an epimorphism; by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] its sections lift on an etale cover of each component of $U_0$. Use [lem-weil-pbc-hypercover-refinement] to make these finitely many local lifts into sections on a refinement and subtract the total boundary of a cochain in bidegree $(0,q-1)$, with the sign chosen to cancel $z^{0,q}$. Inductively, if components $(0,q),\\ldots,(p-1,q-p+1)$ vanish, the bidegree $(p,q-p+1)$ cocycle equation makes $z^{p,q-p}$ vertically closed. When $q-p>0$, lift it locally through $I^{q-p-1}\\to\\ker d_I$, refine, and subtract the total boundary of a cochain in bidegree $(p,q-p-1)$; its horizontal term affects only bidegree $(p+1,q-p-1)$, so earlier zeros persist. After $p=q-1$, only $z^{q,0}$ remains. Its vertical differential is zero, so it is a section of $F(U_q)$, and its horizontal differential is zero, so it is a Cech cocycle. If $q=0$, the original total cocycle is already a section of $F(U_0)$ satisfying the Cech cocycle equation. This proves surjectivity after passage to refinements.",
-   "uses": [
-    "lem-weil-pbc-hypercover-refinement",
-    "def-weil-pbc-finite-split-hypercover",
-    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
-    "place": "Proof, second paragraph: successive removal of positive vertical degrees; compare Stacks 01H0 (theorem-cohomology-hypercoverings), first proof, successive killing of obstruction classes"
-   }
-  },
-  {
-   "text": "For injectivity in degree $q>0$, let $a\\in F(U_q)$ be a Cech cocycle whose image in total cohomology vanishes. After a common refinement if needed, choose $b=\\sum_{p+r=q-1}b^{p,r}$ with $db=a$. If $q>1$, $b^{0,q-1}$ is vertically closed because $db$ has no positive vertical component. Lift it locally from $I^{q-2}$, refine using [lem-weil-pbc-hypercover-refinement] and [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], and subtract a total boundary from $b$. Repeat with $(p,q-1-p)$ while its vertical degree is positive; the horizontal part of each correction affects only the next bidegree. At the end $b=b^{q-1,0}$, and the positive-vertical component of $db=a$ says $d_Ib=0$. Hence $b\\in F(U_{q-1})$ and $a=\\delta b$ after refinement. For $q=1$, this final argument applies directly to the sole component $b^{0,0}$. For $q=0$ there are no degree-minus-one boundaries, and $F(U_0)\\hookrightarrow I^0(U_0)$ is injective. Thus a class mapping to zero vanishes in the colimit.",
-   "uses": [
-    "lem-weil-pbc-hypercover-refinement",
-    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
-    "place": "Proof, third paragraph: injectivity by successive corrections of a total primitive; compare Stacks 01H0 (theorem-cohomology-hypercoverings), first proof, injectivity paragraph"
-   }
-  },
-  {
-   "text": "The homotopy category of finite split hypercovers is cofiltered by [lem-weil-pbc-hypercover-refinement]. Thus two representatives of the same derived class have a common refinement, where their difference maps to zero, and step 4 makes that difference a boundary after another refinement. The same node's prism identity makes homotopic refinement maps equal on cohomology, so the maps of step 2 define the displayed colimit map. The construction is natural in $F$: a map of sheaves extends to a map between injective resolutions up to chain homotopy [prop-weil-pbc-kinjective-resolutions-exist], and homotopic maps induce the same cohomology map. Each calculation involves only $U_0,\\ldots,U_{q+1}$ (and a primitive through $q-1$), with finite choices at each refinement stage as in [def-weil-pbc-finite-split-hypercover]. For $R$-module sheaves, choose the resolution in that module category [lem-weil-pbc-module-sheaves-enough-injectives] and use the free-module assertion of [lem-weil-pbc-hypercover-free-resolution]. The module epimorphisms used for local lifts remain epimorphisms of underlying abelian sheaves because the forgetful functor is exact [lem-weil-pbc-module-sheaves-colimits-forgetful], then [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] supplies those lifts. The same finite corrections prove the module clause.",
-   "uses": [
-    "lem-weil-pbc-hypercover-refinement",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-finite-split-hypercover",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-hypercover-free-resolution",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/hypercovering.tex",
-    "place": "Theorem 01H0 (theorem-cohomology-hypercoverings), preamble on cofiltered homotopy category and first proof; finite-refinement and module details as in the blueprint node proof, third paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-hypercover-free-resolution",
-  "lem-weil-pbc-hypercover-refinement",
-  "def-weil-pbc-finite-split-hypercover",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "thm-sp-double-complex-spectral-sequences",
-  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+  "thm-weil-pbc-hypercover-cohomology-abelian-part",
+  "thm-weil-pbc-hypercover-cohomology-module-part"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/HypercoverCohomology.lean",
+  "place": "direct combination of the abelian and module coefficient clauses"
  },
  "mathlib_searches": [
   {
@@ -207,5 +138,15 @@
   "group": "M1",
   "result": "pass",
   "note": "X qcqs (CompactSpace, QuasiSeparatedSpace), q:Nat, all F by naturality; index = all FiniteSplitEtaleHypercover with Refinement, homotopic refinements give equal maps; cocone direction K_V->K_U, pointwise unique factorisation = colimit; vertex singleFunctor 0 then Etale.cohomology q; module clause for every ring R in ModuleCat R; new def node: cohomologyFunctor is rfl-equal to the landed U.cohomology on AddCommGrpCat (scratch compile), no category instance on hypercovers so no IsColimit duplicate; finitely-many-degrees sentence intrinsic to degree-q homology"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
