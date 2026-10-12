@@ -164,6 +164,7 @@ public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
+public import WeilConjectures.AlgebraicGeometry.FinitePresentationModel
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
@@ -512,6 +513,7 @@ public import WeilConjectures.Blowup.Affine.Projective
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.Blowup.Affine.ReesPieceLocalization
+public import WeilConjectures.Blowup.Affine.StrictTransformChart
 public import WeilConjectures.Blowup.BaseChange
 public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
@@ -539,6 +541,7 @@ public import WeilConjectures.Blowup.FiniteDegree.Generation
 public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
 public import WeilConjectures.Blowup.FiniteDegree.Main
 public import WeilConjectures.Blowup.FiniteDegree.UniformNumerator
+public import WeilConjectures.Blowup.FlatBaseChange
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.GluingOverlap
 public import WeilConjectures.Blowup.GraphQuasiFinite
@@ -773,6 +776,7 @@ public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformBlowup
+public import WeilConjectures.Compactification.StrictTransformChartModel
 public import WeilConjectures.Compactification.Tower
 public import WeilConjectures.Compactification.Triangle
 public import WeilConjectures.Compactification.TwoOpen
@@ -1161,6 +1165,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Presheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
