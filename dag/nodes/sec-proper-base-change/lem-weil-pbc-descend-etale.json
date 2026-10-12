@@ -30,108 +30,47 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (finitely many affine triples).* Write $g_0:Y_0\\to S_0$ for the structure morphism of $Y_0$ (so $g_0\\circ f_0$ is that of $X_0$), $p_i:S\\to S_i$ for the projections of the limit and $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) for the transition morphisms, $f_{00}=\\mathrm{id}$. Let $x\\in X_0$. Choose an affine open $W\\subseteq S_0$ containing $g_0(f_0(x))$, an affine open $V\\subseteq g_0^{-1}(W)$ containing $f_0(x)$, and an affine open $U\\subseteq f_0^{-1}(V)$ containing $x$ (every point of a scheme has an affine open neighbourhood inside any given open neighbourhood: [lem-weil-pbc-affine-open-spec-points] identifies an affine open with a spectrum, whose principal opens $D(h)$ form a basis of affine opens). Since $X_0$ is quasi-compact [def-weil-pbc-scheme-conventions], finitely many such triples $(W_b,V_b,U_b)$, $b=1,\\dots,m$, satisfy $X_0=\\bigcup_bU_b$, $f_0(U_b)\\subseteq V_b$, $g_0(V_b)\\subseteq W_b$. Put $A_0^b=\\mathcal O_{S_0}(W_b)$, $B_0^b=\\mathcal O_{Y_0}(V_b)$, $C_0^b=\\mathcal O_{X_0}(U_b)$, with the ring maps $A_0^b\\to B_0^b$ induced by $g_0$ and $\\varphi_0^b:B_0^b\\to C_0^b$ induced by $f_0$ (so $C_0^b$ is an $A_0^b$-algebra via $\\varphi_0^b$ and $\\varphi_0^b$ is an $A_0^b$-algebra map). By [lem-weil-pbc-morphism-into-affine-scheme], under the identifications $W_b=\\operatorname{Spec}A_0^b$, $V_b=\\operatorname{Spec}B_0^b$, $U_b=\\operatorname{Spec}C_0^b$ of [lem-weil-pbc-affine-open-spec-points] the restrictions $U_b\\to V_b\\to W_b$ of $f_0$ and $g_0$ are $\\operatorname{Spec}$ of these ring maps. Since $f_0$ is locally of finite presentation, $\\varphi_0^b$ is of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. (Only the quasi-compactness of $X_0$ is used; the quasi-separatedness assumptions of Situation 081D are not needed for this lemma.)",
+   "text": "For each x in X₀ choose an affine W around g₀(f₀(x)), an affine V inside g₀⁻¹(W) around f₀(x), and an affine U inside f₀⁻¹(V) around x, using [lem-weil-pbc-affine-opens-basis]. The restriction of the étale limit map to the preimage of U is étale by composition with its open inclusion [lem-weil-pbc-etale-composition-cancellation]. Apply [lem-weil-pbc-etale-affine-chart-descent] to get an index k(x) and étaleness on this chart at all later indices.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 07RP (lemma-descend-etale, line 1949), proof: 'Being etale is local on the source and the target (Morphisms, Lemma 02GJ) hence we may assume $S_0,X_0,Y_0$ affine (details omitted)'; the finite affine covering as in the proof of Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1760: 'Let $Y_0=\\bigcup V_{j,0}$ be a finite affine open covering'); Morphisms, Lemma Tag 01TQ (morphisms.tex line 4096) (1)$\\Rightarrow$(2)"
-   }
-  },
-  {
-   "text": "*Step 2 (the base over $W_b$ as a colimit of rings).* Fix $b$ and drop it from the notation. For $i\\ge0$ put $W_i=f_{i0}^{-1}(W)\\subseteq S_i$; it is an affine open since $f_{i0}$ is affine [pqf-def-affine-morphism]; put $A_i=\\mathcal O_{S_i}(W_i)$ (for $i=0$ this is $A_0$). For $i\\ge i'\\ge0$ the morphism $f_{ii'}$ maps $W_i$ into $W_{i'}$ and induces a ring map $A_{i'}\\to A_i$; these make $(A_i)_{i\\in I_{\\ge0}}$ a directed system of rings over the directed set $I_{\\ge0}=\\{i\\in I:i\\ge0\\}$, and by [lem-weil-pbc-morphism-into-affine-scheme] the restricted transition morphism $W_i\\to W_{i'}$ is $\\operatorname{Spec}(A_{i'}\\to A_i)$. Let $A=\\varinjlim_{i\\ge0}A_i$ [def-weil-pbc-category-colimit] with coprojections $A_i\\to A$. Put $W_S=p_0^{-1}(W)\\subseteq S$. By [lem-weil-pbc-limit-affine-transition] (clause on open subschemes of a stage, with $U_0=W$), $W_S$ with the restricted projections $W_S\\to W_i$ is the limit of the inverse system $(W_i)_{i\\ge0}$; by [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}A$ with the morphisms $\\operatorname{Spec}A\\to\\operatorname{Spec}A_i=W_i$ induced by the coprojections is also its limit. A limit is unique up to unique isomorphism compatible with the projections, so there is an isomorphism $W_S\\cong\\operatorname{Spec}A$ under which $p_0|_{W_S}:W_S\\to W$ becomes $\\operatorname{Spec}(A_0\\to A)$; in particular $W_S$ is an affine open of $S$ and $\\mathcal O_S(W_S)\\cong A$ as $A_0$-algebras.",
-   "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 07RP (lemma-descend-etale, line 1949), proof: 'Being etale is local on the source and the target (Morphisms, Lemma 02GJ) hence we may assume $S_0,X_0,Y_0$ affine (details omitted)'; Lemma Tag 01YX (lemma-directed-inverse-system-has-limit, line 58) and Lemma Tag 01YW (line 42); written out by the agent (the reduction is 'details omitted' in the source)"
-   }
-  },
-  {
-   "text": "*Step 3 (the pieces of $X_T$, $Y_T$ and of $f_T$ are spectra).* Let $T$ be either $S_i$ for some $i\\ge0$, with $q=f_{i0}:S_i\\to S_0$, $W_T=W_i$ and $A_T=A_i$, or $S$ itself, with $q=p_0$, $W_T=W_S$ and $A_T=A$ (step 2); in both cases $W_T=q^{-1}(W)$ and $W_T=\\operatorname{Spec}A_T$ over $W=\\operatorname{Spec}A_0$. Let $X_T=X_0\\times_{S_0}T$, $Y_T=Y_0\\times_{S_0}T$ with first projections $\\mathrm{pr}_1$ and second projections $\\mathrm{pr}_2$ [def-pc-fibre-product], and $f_T=f_0\\times\\mathrm{id}_T:X_T\\to Y_T$ (so $f_T=f_i$ for $T=S_i$ and $f_T=f$ for $T=S$). Put $U_T=\\mathrm{pr}_1^{-1}(U)\\subseteq X_T$ and $V_T=\\mathrm{pr}_1^{-1}(V)\\subseteq Y_T$. Since $q\\circ\\mathrm{pr}_2=g_0f_0\\circ\\mathrm{pr}_1$ maps $U_T$ into $W$, $\\mathrm{pr}_2(U_T)\\subseteq q^{-1}(W)=W_T$, so $U_T=\\mathrm{pr}_1^{-1}(U)\\cap\\mathrm{pr}_2^{-1}(W_T)$, and [lem-weil-pbc-open-fibre-product] (opens $W\\subseteq S_0$, $U\\subseteq X_0$, $W_T\\subseteq T$) identifies $U_T$ with $U\\times_WW_T$, compatibly with the projections; by [lem-weil-pbc-fibre-product-affine-spectra] (and the identifications of steps 1 and 2) $U_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_0}C_0)$, with $\\mathrm{pr}_1,\\mathrm{pr}_2$ becoming $\\operatorname{Spec}$ of $c\\mapsto1\\otimes c$ and $a\\mapsto a\\otimes1$ (tensor factors written in the order of [lem-weil-pbc-colimit-etale-ring-map]; the swap $C_0\\otimes_{A_0}A_T\\cong A_T\\otimes_{A_0}C_0$ is the symmetry of the tensor product). In the same way $V_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_0}B_0)$. Since $\\mathrm{pr}_1\\circ f_T=f_0\\circ\\mathrm{pr}_1$ and $f_0(U)\\subseteq V$, $f_T(U_T)\\subseteq V_T$. The restriction $f_T|:U_T\\to V_T$ and $\\operatorname{Spec}(\\mathrm{id}_{A_T}\\otimes\\varphi_0)$ are two morphisms into $V_T\\cong V\\times_WW_T$ with the same components: the first projection gives $f_0|_U\\circ\\mathrm{pr}_1$ for both (as $(\\mathrm{id}\\otimes\\varphi_0)(1\\otimes b)=1\\otimes\\varphi_0(b)$ and $f_0|_U=\\operatorname{Spec}\\varphi_0$ by step 1), the second gives $\\mathrm{pr}_2$ for both (as $(\\mathrm{id}\\otimes\\varphi_0)(a\\otimes1)=a\\otimes1$); by the uniqueness in the universal property of the fibre product they are equal. So $f_T|:U_T\\to V_T$ is, up to these isomorphisms, $\\operatorname{Spec}$ of $\\mathrm{id}_{A_T}\\otimes\\varphi_0:A_T\\otimes_{A_0}B_0\\to A_T\\otimes_{A_0}C_0$. Finally, for $T=S_i$ the opens $U^b_{S_i}=\\mathrm{pr}_1^{-1}(U_b)$, $b=1,\\dots,m$, cover $X_i$, being the preimages of the covering $X_0=\\bigcup_bU_b$ of step 1.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-colimit-etale-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 07RP (lemma-descend-etale, line 1949), proof: 'Being etale is local on the source and the target (Morphisms, Lemma 02GJ) hence we may assume $S_0,X_0,Y_0$ affine (details omitted)'; Schemes, Lemma Tag 01JR (open-fibre-product) and Tag 01I4 (fibre product of affine schemes); written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 4 (the hypothesis on the piece over $S$).* Put $B=A\\otimes_{A_0}B_0$, $C=A\\otimes_{A_0}C_0$ and $\\varphi=\\mathrm{id}_A\\otimes\\varphi_0$. Let $j_U:U_S\\to X$ and $j_V:V_S\\to Y$ be the inclusions (step 3 with $T=S$). They are open immersions, hence etale by [lem-weil-pbc-etale-composition-cancellation](1); $f\\circ j_U$ is etale by part (2), since $f$ is etale by hypothesis; and $f\\circ j_U=j_V\\circ(f|:U_S\\to V_S)$, so $f|$ is etale by part (3) (with $g=j_V$). Isomorphisms are open immersions, hence etale, and composites of etale morphisms are etale (parts (1), (2)); so by step 3 the morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ induced by $\\varphi$ is etale. By step 1, $\\varphi_0:B_0\\to C_0$ is a homomorphism of $A_0$-algebras of finite presentation.",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 07RP (line 1949), hypotheses (1) and (2), carried to an affine piece; Morphisms, Lemma Tag 02GJ 'Moreover' clause (restriction of an etale morphism to opens is etale; morphisms.tex line 8107)"
-   }
-  },
-  {
-   "text": "*Step 5 (the algebra fact, and larger indices).* By step 4 the data $(A_i)_{i\\ge0}$, $A$, $\\varphi_0:B_0\\to C_0$ satisfy the hypotheses of [lem-weil-pbc-colimit-etale-ring-map] (over the directed set $I_{\\ge0}$, which contains $0$); so there is $i_b\\ge0$ such that $\\operatorname{Spec}C_{i_b}\\to\\operatorname{Spec}B_{i_b}$, induced by $\\varphi_{i_b}=\\mathrm{id}\\otimes\\varphi_0$, is etale, where $B_i=A_i\\otimes_{A_0}B_0$, $C_i=A_i\\otimes_{A_0}C_0$. This persists for every $i\\ge i_b$. Indeed, write $k=i_b$, regard $B_i$ as a $B_k$-algebra via the transition map $A_k\\to A_i$ tensored with $B_0$, and $C_k$ via $\\varphi_k$. By [lem-weil-pbc-tensor-cancel-base-change] (with $R=A_0$, $S=B_0$, $B=A_k$, and the $B_0$-algebra $C_0$) $C_k\\cong B_k\\otimes_{B_0}C_0$ as $B_k$-algebras, and the same at $i$; by [lem-weil-pbc-tensor-cancel-base-change] again (with $R=B_0$, $S=B_k$, $B=C_0$ and the $B_k$-algebra $B_i$) $B_i\\otimes_{B_k}(B_k\\otimes_{B_0}C_0)\\cong B_i\\otimes_{B_0}C_0$. Composing, $B_i\\otimes_{B_k}C_k\\cong C_i$ as $B_i$-algebras, by $\\beta\\otimes(a\\otimes c)\\mapsto\\varphi_i(\\beta)\\cdot(\\bar a\\otimes c)$ with $\\bar a$ the image of $a\\in A_k$ in $A_i$ (checked on the generators $\\beta\\otimes(a\\otimes c)$). By [lem-weil-pbc-etale-ring-base-change] (with $R=B_k$, $A=C_k$, $S=B_i$) the morphism $\\operatorname{Spec}(B_i\\otimes_{B_k}C_k)\\to\\operatorname{Spec}B_i$ is etale; composing with the isomorphism $\\operatorname{Spec}C_i\\cong\\operatorname{Spec}(B_i\\otimes_{B_k}C_k)$, which is compatible with the maps from $B_i$ (since $\\beta\\otimes1\\mapsto\\varphi_i(\\beta)$), [lem-weil-pbc-etale-composition-cancellation](1),(2) give that $\\operatorname{Spec}C_i\\to\\operatorname{Spec}B_i$, induced by $\\varphi_i$, is etale.",
-   "uses": [
-    "lem-weil-pbc-colimit-etale-ring-map",
-    "lem-weil-pbc-tensor-cancel-base-change",
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 07RI (lemma-colimit-etale, line 47626), cited in the proof of Lemma 07RP ('The corresponding algebra fact'); the persistence to larger indices is written out by the agent (base change, Algebra Lemma Tag 00U2 (2))"
-   }
-  },
-  {
-   "text": "*Step 6 (a common index; $f_i$ is etale).* The set $I$ is directed and there are finitely many $b$, so there is $i\\in I$ with $i\\ge0$ and $i\\ge i_b$ for $b=1,\\dots,m$. For each $b$, step 5 gives that $\\operatorname{Spec}C^b_i\\to\\operatorname{Spec}B^b_i$, induced by $\\mathrm{id}_{A^b_i}\\otimes\\varphi^b_0$, is etale; by step 3 (with $T=S_i$) and [lem-weil-pbc-etale-composition-cancellation](1),(2) (isomorphisms are etale, composites of etale morphisms are etale), the restriction $f_i|:U^b_{S_i}\\to V^b_{S_i}$ is etale, and hence so is $f_i\\circ j_b=j'_b\\circ f_i|$, where $j_b:U^b_{S_i}\\to X_i$ and $j'_b:V^b_{S_i}\\to Y_i$ are the inclusions (open immersions, etale by part (1)). The opens $U^b_{S_i}$ cover $X_i$ (step 3), so $f_i$ is etale by [lem-weil-pbc-etale-local-on-source].",
-   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
     "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-affine-chart-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen U(x) cover X₀ because each contains x. Quasi-compactness [def-weil-pbc-quasi-compact-scheme] gives a finite subcover indexed by a finite subset s⊆X₀. This is exactly IsCompact.elim_finite_subcover applied to the chosen family.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Directedness gives an upper bound i of the finite set {i₀}∪{k(x) | x∈s}. Formally this is Finset.exists_le, proved by induction on the finite set using the directed common-upper-bound property; inserting i₀ also handles the empty-source case. Inverse images of the finite covering under Xᵢ→X₀ cover Xᵢ, because preimage preserves unions and the top open. Each resulting chart map to Yᵢ is étale by the all-later clause of [lem-weil-pbc-etale-affine-chart-descent].",
+   "uses": [
+    "lem-weil-pbc-etale-affine-chart-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-local-on-source] to the covering of Xᵢ just constructed. This proves étaleness of the full Over.pullback morphism at i, with the required proof i₀≤i.",
+   "uses": [
     "lem-weil-pbc-etale-local-on-source"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 07RP (lemma-descend-etale, line 1949), proof: 'Being etale is local on the source and the target (Morphisms, Lemma 02GJ) hence we may assume $S_0,X_0,Y_0$ affine (details omitted)'; Morphisms, Lemma Tag 02GJ (morphisms.tex line 8090), (3)$\\Rightarrow$(1); the choice of one index for finitely many pieces as in the proof of Lemma Tag 01ZN (line 1770: 'As there are finitely many $j$ we can pick an $i$ which works for all $j$')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "pqf-def-affine-morphism",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-spec-colimit-limit",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-colimit-etale-ring-map",
+  "lem-weil-pbc-affine-opens-basis",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-tensor-cancel-base-change",
-  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-affine-chart-descent",
+  "def-weil-pbc-quasi-compact-scheme",
   "lem-weil-pbc-etale-local-on-source"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "proof of Lemma Tag 07RP (lemma-descend-etale, line 1949), with Algebra Lemma Tag 07RI and Morphisms Lemma Tag 02GJ; the reduction to the affine case, which the source omits ('details omitted'), is written out by the agent after the pattern of the proof of Lemma Tag 01ZN (line 1760)"
+  "place": "Lemma Tag 07RP (lemma-descend-etale): affine chart descent through lem-weil-pbc-etale-affine-chart-descent, finite subcover and simultaneous upper bound, then Morphisms Tag 02GJ; upper-tail ring comparison through lem-weil-pbc-affine-chart-directed-ring-model; persistence proved directly by cartesian-square pasting and étale scheme base change"
  },
  "mathlib_searches": [
   {
@@ -221,5 +160,15 @@
   "group": "J1",
   "result": "pass",
   "note": "I : Type u (same universe as Scheme.{u}, #check confirms) Preorder+IsDirected, i0 gives nonemptiness; D : Iop => Scheme with IsAffineHom transitions; Cone+IsLimit; S0,X0,Y0 qcqs via CompactSpace/QuasiSeparatedSpace; X0,Y0 : Over S0, f0 over S0 with LocallyOfFinitePresentation f0.left; X_i,Y_i,f_i and f via Over.pullback (= pullback g.hom f, Over.pullback_obj_left); hf Etale at limit; conclusion exists i >= i0 with Etale f_i; no hollow hyps, no duplicate (grep 07RP/descend-etale), only file+item record in diff"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0a859",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914545",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged item signature and both new Lean statements with their nodes and Stacks 07RP/07RI; all three modules compile cleanly, axiom checks are expected, import pruning passes, and the unit route is preserved."
  }
 }

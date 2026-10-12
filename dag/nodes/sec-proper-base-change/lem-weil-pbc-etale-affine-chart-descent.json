@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-etale-affine-chart-descent",
+ "kind": "statement",
+ "title": "Étale descent and persistence on one affine triple",
+ "statement": "Let $I$ be a directed preordered set, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ an inverse system with affine transition morphisms [pqf-def-affine-morphism], and $c$ a limiting cone with apex $S$ [def-weil-pbc-category-colimit]. Fix $i_0\\in I$, schemes $X_0,Y_0$ over $S_{i_0}$ [def-pc-scheme], and an $S_{i_0}$-morphism $f_0:X_0\\to Y_0$ locally of finite presentation [def-sbc-locally-finite-presentation]. Let $W\\subseteq S_{i_0}$, $V\\subseteq Y_0$, $U\\subseteq X_0$ be affine opens with $V\\subseteq g_0^{-1}(W)$ and $U\\subseteq f_0^{-1}(V)$, where $g_0:Y_0\\to S_{i_0}$ is the structure map. Write $X_T=X_0\\times_{S_{i_0}}T$, $Y_T=Y_0\\times_{S_{i_0}}T$, $f_T$ for the base changed map and $U_T$ for the inverse image of $U$ under $X_T\\to X_0$ [def-pc-fibre-product]. If $U_S\\hookrightarrow X_S\\xrightarrow{f_S}Y_S$ is étale [def-weil-etale-morphism], then some $i\\ge i_0$ has the following property: for every $j\\ge i$ and every chosen proof $i_0\\le j$, $U_{S_j}\\hookrightarrow X_{S_j}\\xrightarrow{f_{S_j}}Y_{S_j}$ is étale. No quasi-compactness or quasi-separatedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 07RP (lemma-descend-etale), affine reduction; Algebra, Lemma Tag 07RI (lemma-colimit-etale); Morphisms, Lemma Tag 02GO (lemma-base-change-etale)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-affine-chart-directed-ring-model] for the fixed affine triple. It supplies a directed ring system on the upper tail J = {i | i₀ ≤ i}, algebras B,C, a finitely presented algebra map φ, and the comparisons at the limit and at individual stages. Apply the limit equivalence to the hypothesis.",
+   "uses": [
+    "lem-weil-pbc-affine-chart-directed-ring-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upper tail is directed: an upper bound of a,b in I belongs to the tail since i₀ ≤ a ≤ bound. Its distinguished object is i₀.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-colimit-etale-ring-map] to F, B,C,φ and the transported limit étaleness. It gives i in J with the tensor-product map at i étale. The stage comparison from [lem-weil-pbc-affine-chart-directed-ring-model] gives étaleness of Uᵢ → Yᵢ.",
+   "uses": [
+    "lem-weil-pbc-colimit-etale-ring-map",
+    "lem-weil-pbc-affine-chart-directed-ring-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For j ≥ i, the Over.pullback maps at i and j form cartesian squares with f₀. Cancel the lower square by pullback pasting to obtain a cartesian square between fⱼ and fᵢ. The projection a:Xⱼ→Xᵢ satisfies a ≫ prᵢ = prⱼ, so a⁻¹(Uᵢ)=Uⱼ. Paste the pullback square for restriction to Uᵢ with this square. This identifies Uⱼ→Yⱼ as the base change of Uᵢ→Yᵢ, hence it is étale by [lem-weil-pbc-etale-scheme-base-change]. The composition equality of the transition morphisms is functoriality of D; choices of inequality proofs agree by proof irrelevance.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-chart-directed-ring-model",
+  "lem-weil-pbc-colimit-etale-ring-map",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 07RP (lemma-descend-etale), affine reduction; Algebra, Lemma Tag 07RI (lemma-colimit-etale); Morphisms, Lemma Tag 02GO (lemma-base-change-etale); the affine reduction omitted there is written out here using the cited existing nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_stage|descend.*etale|etale.*descend",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; the hits are ingredients, not the combined chart statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Limits.IsLimit",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match; the hits are ingredients, not the combined chart statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_stage|descend.*etale|etale.*descend",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; the hits are ingredients, not the combined chart statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etaleness of a finitely presented morphism restricted to one affine chart over an inverse limit of schemes descends to a stage and holds at all later stages",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'); affine reduction in the descendant lem-weil-pbc-descend-etale, steps 2–5",
+   "via": [
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineChartDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineChartDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_stage_on_affine_chart",
+  "statement": "theorem Etale.exists_stage_on_affine_chart {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) [LocallyOfFinitePresentation f₀.left] (W : (D.obj (op i₀)).Opens) (hW : IsAffineOpen W) (V : Y₀.left.Opens) (hV : IsAffineOpen V) (eV : V ≤ Y₀.hom ⁻¹ᵁ W) (U : X₀.left.Opens) (hU : IsAffineOpen U) (eU : U ≤ f₀.left ⁻¹ᵁ V) (hf : Etale (((pullback.fst X₀.hom (c.π.app (op i₀))) ⁻¹ᵁ U).ι ≫ ((Over.pullback (c.π.app (op i₀))).map f₀).left)) : ∃ (i : I) (_ : i₀ ≤ i), ∀ (j : I) (_ : i ≤ j) (hj : i₀ ≤ j), Etale (((pullback.fst X₀.hom (D.map (homOfLE hj).op)) ⁻¹ᵁ U).ι ≫ ((Over.pullback (D.map (homOfLE hj).op)).map f₀).left)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0a859",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914545",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0a859",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914545",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged item signature and both new Lean statements with their nodes and Stacks 07RP/07RI; all three modules compile cleanly, axiom checks are expected, import pruning passes, and the unit route is preserved."
+ }
+}

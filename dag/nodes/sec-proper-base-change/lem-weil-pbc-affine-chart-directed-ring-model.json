@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-affine-chart-directed-ring-model",
+ "kind": "statement",
+ "title": "Coordinate-ring comparisons for one affine triple",
+ "statement": "Let $I,D,c,S,i_0,X_0,Y_0,f_0,g_0,W,V,U$ have the following properties: $I$ is a directed preordered set; $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ has affine transition morphisms [pqf-def-affine-morphism]; $c$ is a limiting cone with apex $S$ [def-weil-pbc-category-colimit]; $i_0\\in I$; $X_0,Y_0$ are schemes over $S_{i_0}$ [def-pc-scheme]; $f_0:X_0\\to Y_0$ is a morphism over $S_{i_0}$ locally of finite presentation [def-sbc-locally-finite-presentation]; $g_0:Y_0\\to S_{i_0}$ is the structure map; and $W\\subseteq S_{i_0},V\\subseteq Y_0,U\\subseteq X_0$ are affine opens with $V\\subseteq g_0^{-1}(W)$ and $U\\subseteq f_0^{-1}(V)$. Put $J=\\{i\\in I\\mid i_0\\le i\\}$ and $o=(i_0,i_0\\le i_0)$. For a scheme $T\\to S_{i_0}$ write $f_T:X_T\\to Y_T$ for the base change of $f_0$ and $U_T\\subseteq X_T$ for the inverse image of $U$ [def-pc-fibre-product]. There exist a functor $F:J\\to\\mathrm{CommRing}$, commutative $F(o)$-algebras $B,C$, and a homomorphism $\\varphi:B\\to C$ of $F(o)$-algebras of finite presentation (a quotient of a polynomial ring in finitely many variables by a finitely generated ideal), such that: (1) $U_S\\to Y_S$ is étale [def-weil-etale-morphism] if and only if the spectrum morphism induced by $\\mathrm{id}_{\\operatorname{colim}F}\\otimes\\varphi$ is étale, with the $F(o)$-algebra structure on $\\operatorname{colim}F$ induced by its coprojection; (2) for every $i\\in J$, if the spectrum morphism induced by $\\mathrm{id}_{F(i)}\\otimes\\varphi$ is étale, then $U_{S_i}\\to Y_{S_i}$ is étale, with $F(i)$ regarded as an $F(o)$-algebra via $F(o\\to i)$. Here tensor products are over $F(o)$, and spectrum reverses ring maps. No étaleness hypothesis or existence of an étale stage is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 07RP (lemma-descend-etale), affine reduction omitted in its proof; Limits Tags 01YX/01YW; Schemes Tags 01JR/01I4; Morphisms Tags 01TQ/02GJ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For i in J let Wᵢ be the inverse image of W in Sᵢ. Affineness of transition maps makes every Wᵢ affine [pqf-def-affine-morphism]. Restricted transition maps make the coordinate rings F(i)=Γ(Wᵢ) a covariant functor. Identify F(o) with Γ(W) using D.map(id)=id and the induced identification Wₒ=W. Take B=Γ(V), C=Γ(U), with their F(o)-algebra structures from the structure maps. The map φ is induced by the restriction of f₀; its compatibility with the base algebra follows from f₀ being a morphism over Sᵢ₀. It is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation].",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The opens diagram over i₀ is equivalent to the upper-tail inverse system. By [lem-weil-pbc-limit-cone-affine-projections-opens] its restricted cone with apex W_S is limiting. By [lem-weil-pbc-spec-colimit-limit], Spec(colim F) is another limit with the coprojection legs. The unique comparison isomorphism identifies W_S with Spec(colim F), compatibly with the projections and especially its map to W. Thus its Γ(W)-algebra structure agrees with the coprojection F(o)→colim F.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For T=S or Sᵢ, let W_T be the inverse image of W. The equality of structure morphisms and U⊆f₀⁻¹(V), V⊆g₀⁻¹(W) show that the inverse image of U in X_T is also the intersection of that inverse image with the inverse image of W_T. By [lem-weil-pbc-open-fibre-product] it is U×_W W_T. Likewise the inverse image of V is V×_W W_T. Under the affine spectrum identifications and [lem-weil-pbc-fibre-product-affine-spectra], these are Spec(A_T⊗C) and Spec(A_T⊗B), with A_T=F(i) or colim F. The restricted map is Spec(id⊗φ): both morphisms have the same projections, since id⊗φ sends 1⊗b to 1⊗φ(b) and a⊗1 to a⊗1. Pullback uniqueness identifies the maps.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map from the source chart into Y_T is the restricted affine map followed by the open inclusion of the target chart. That inclusion is étale, so composition and cancellation in [lem-weil-pbc-etale-composition-cancellation] give an equivalence between their étaleness. Isomorphisms preserve étaleness. Apply the identifications of the preceding step to obtain clause (1) and, taking the forward implication from ring-model étaleness, clause (2).",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-spec-colimit-limit",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 07RP (lemma-descend-etale), affine reduction omitted in its proof; Limits Tags 01YX/01YW; Schemes Tags 01JR/01I4; Morphisms Tags 01TQ/02GJ; the affine reduction omitted there is written out here using the cited existing nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The base changes of a fixed affine scheme chart along an inverse limit of schemes are spectra of tensor products over a directed colimit of coordinate rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.pullbackSpecIso",
+   "results": "AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match; the hits are ingredients, not the combined chart statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|opensCone|isLimit.*[Oo]pens",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; the hits are ingredients, not the combined chart statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate rings of inverse images of an affine open in a directed inverse system of schemes have a colimit identifying its inverse image in the limit, compatibly with base changes of affine chart morphisms",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, AlgebraicGeometry.Scheme.AffineZariskiSite.cocone, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.AffineZariskiSite.cocone_ι_app, AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-12",
+   "verdict": "no exact match; the hits are ingredients, not the combined chart statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'); affine reduction in the descendant lem-weil-pbc-descend-etale, steps 2–5",
+   "via": [
+    "lem-weil-pbc-etale-affine-chart-descent",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartDirectedRingModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartDirectedRingModel.lean",
+  "declaration": "AlgebraicGeometry.exists_affineChart_directedRingModel",
+  "statement": "theorem exists_affineChart_directedRingModel {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) [LocallyOfFinitePresentation f₀.left] (W : (D.obj (op i₀)).Opens) (hW : IsAffineOpen W) (V : Y₀.left.Opens) (hV : IsAffineOpen V) (eV : V ≤ Y₀.hom ⁻¹ᵁ W) (U : X₀.left.Opens) (hU : IsAffineOpen U) (eU : U ≤ f₀.left ⁻¹ᵁ V) : ∃ (F : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u}) (B C : CommRingCat.{u}) (aB : Algebra (F.obj ⟨i₀, le_rfl⟩) B) (aC : Algebra (F.obj ⟨i₀, le_rfl⟩) C), letI := aB letI := aC ∃ φ : B →ₐ[F.obj ⟨i₀, le_rfl⟩] C, φ.FinitePresentation ∧ (letI : Algebra (F.obj ⟨i₀, le_rfl⟩) (colimit F : CommRingCat.{u}) := (colimit.ι F ⟨i₀, le_rfl⟩).hom.toAlgebra Etale (((pullback.fst X₀.hom (c.π.app (op i₀))) ⁻¹ᵁ U).ι ≫ ((Over.pullback (c.π.app (op i₀))).map f₀).left) ↔ Etale (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.map (AlgHom.id (F.obj ⟨i₀, le_rfl⟩) (colimit F : CommRingCat.{u})) φ).toRingHom))) ∧ ∀ i : {i : I // i₀ ≤ i}, (letI : Algebra (F.obj ⟨i₀, le_rfl⟩) (F.obj i) := (F.map (homOfLE i.property)).hom.toAlgebra Etale (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.map (AlgHom.id (F.obj ⟨i₀, le_rfl⟩) (F.obj i)) φ).toRingHom))) → Etale (((pullback.fst X₀.hom (D.map (homOfLE i.property).op)) ⁻¹ᵁ U).ι ≫ ((Over.pullback (D.map (homOfLE i.property).op)).map f₀).left)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0a859",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914545",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0a859",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914545",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged item signature and both new Lean statements with their nodes and Stacks 07RP/07RI; all three modules compile cleanly, axiom checks are expected, import pruning passes, and the unit route is preserved."
+ }
+}

@@ -5,11 +5,11 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent
+import Sheaf.AlgebraicGeometry.EtaleAffineChartDescent
+import Mathlib.Data.Finset.Order
 
 /-!
 # Descent of étaleness to a stage of an inverse limit
@@ -71,6 +71,43 @@ theorem Etale.exists_stage_of_inverseLimit
     (hf : Etale (((Over.pullback (c.π.app (op i₀))).map f₀).left)) :
     ∃ (i : I) (h : i₀ ≤ i),
       Etale (((Over.pullback (D.map (homOfLE h).op)).map f₀).left) := by
-  sorry
+  classical
+  have local_chart (x : X₀.left) :
+      ∃ (U : X₀.left.Opens), x ∈ U ∧
+        ∃ (i : I) (_ : i₀ ≤ i), ∀ (j : I) (_ : i ≤ j) (hj : i₀ ≤ j),
+          Etale (((pullback.fst X₀.hom (D.map (homOfLE hj).op)) ⁻¹ᵁ U).ι ≫
+            ((Over.pullback (D.map (homOfLE hj).op)).map f₀).left) := by
+    obtain ⟨W, hW, hxW, _⟩ := exists_isAffineOpen_mem_and_subset
+      (X := D.obj (op i₀)) (x := Y₀.hom (f₀.left x)) (U := ⊤) (by simp)
+    obtain ⟨V, hV, hxV, eV⟩ := exists_isAffineOpen_mem_and_subset
+      (X := Y₀.left) (x := f₀.left x) (U := Y₀.hom ⁻¹ᵁ W) hxW
+    obtain ⟨U, hU, hxU, eU⟩ := exists_isAffineOpen_mem_and_subset
+      (X := X₀.left) (x := x) (U := f₀.left ⁻¹ᵁ V) hxV
+    refine ⟨U, hxU, Etale.exists_stage_on_affine_chart D c hc i₀ X₀ Y₀ f₀
+      W hW V hV eV U hU eU ?_⟩
+    have := hf
+    infer_instance
+  choose U hxU k hk hstage using local_chart
+  have hcover : (Set.univ : Set X₀.left) ⊆ ⋃ x, (U x : Set X₀.left) := by
+    intro x _
+    exact Set.mem_iUnion.mpr ⟨x, hxU x⟩
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
+    (fun x ↦ (U x : Set X₀.left)) (fun x ↦ (U x).isOpen) hcover
+  have : Nonempty I := ⟨i₀⟩
+  obtain ⟨i, hi⟩ := (insert i₀ (s.image k)).exists_le
+  have hi₀ : i₀ ≤ i := hi i₀ (Finset.mem_insert_self _ _)
+  refine ⟨i, hi₀, ?_⟩
+  let q := D.map (homOfLE hi₀).op
+  have hU : (⨆ x : s, U x) = ⊤ := by
+    apply top_unique
+    intro x _
+    obtain ⟨y, hy, hxy⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨y, hy⟩, hxy⟩
+  apply IsZariskiLocalAtSource.of_iSup_eq_top (P := @Etale)
+    (fun x : s ↦ (pullback.fst X₀.hom q) ⁻¹ᵁ U x)
+    ((pullback.fst X₀.hom q).iSup_preimage_eq_top hU)
+  intro x
+  exact hstage x i (hi (k x) (Finset.mem_insert_of_mem
+    (Finset.mem_image.mpr ⟨x, x.property, rfl⟩))) hi₀
 
 end AlgebraicGeometry
