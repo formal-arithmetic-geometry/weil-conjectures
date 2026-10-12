@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-module-sheaf-colimit-constructible-data",
+ "kind": "statement",
+ "title": "Filtered constructible maps with factorization and relations",
+ "statement": "Let X be a qcqs scheme and Lambda a finite commutative ring, and F a Lambda-module sheaf on its small etale site [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category], [def-weil-pbc-scheme-conventions]. There exist a small filtered category A, a diagram D of constructible module sheaves [def-weil-pbc-etale-constructible-sheaf], and a cocone iota to F. Every map p:G -> F with G constructible factors as q followed by iota_a. If p:G -> D_a and q:G -> D_b have equal composites to F, there exist c and arrows f:a -> c, g:b -> c with D(f) p = D(g) q. This asserts a construction with factorization and refinement of relations, not its colimit universal property.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 095N (lemma-category-constructible-modules), 03RZ (lemma-constructible-abelian), 03SA(3); categorical construction in Lean docstring"
+ },
+ "proof": [
+  {
+   "text": "Constructible module sheaves have finite presentations by affine etale free sheaves. Choose a small skeleton of the affine etale objects; their finite sums and the sets of maps between these sums give a set of cokernels representing every constructible sheaf.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-presentation",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+   }
+  },
+  {
+   "text": "Take representatives of constructible sheaves with maps to F and commuting triangles. Zero gives nonemptiness, direct sums give common successors, and cokernels of differences equalize parallel arrows. These objects are constructible by finite-sum and cokernel closure. The forgetful functor and the maps to F define D and iota.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+   }
+  },
+  {
+   "text": "Every constructible map to F appears up to isomorphism, giving factorization. For maps p and q with equal composites, take the cokernel of (p,-q):G -> D_a plus D_b. Its map to F is induced by the equality; the two inclusions induce the common refinement and its relation.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-module-finite-presentation",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "thm-constructible-serre",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Explicit categorical reduction of the construction in 03SA(3), using 095N, 03RZ and 09Z4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StructuredArrow.*[Ff]iltered|[Ff]iltered.*StructuredArrow|constructible",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Comma/Final.lean, Mathlib/CategoryTheory/Comma/Final.lean, Mathlib/CategoryTheory/Comma/Final.lean, Mathlib/CategoryTheory/Comma/Final.lean, Mathlib/CategoryTheory/Comma/Final.lean; generic tools only, no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of constructible module sheaves equipped with a map to a fixed sheaf is essentially small and filtered",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of constructible module sheaves equipped with a map to a fixed sheaf is essentially small and filtered",
+   "results": "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, LightCondensed.instIsGrothendieckAbelianLightCondMod, PresheafOfModules.wellPowered, CondensedMod.ofSheafCompHaus, CondensedMod, LightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; generic tools only, no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules')",
+   "via": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleFilteredData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleFilteredData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_filtered_constructible_data",
+  "statement": "theorem exists_filtered_constructible_data\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ (A : Type (u + 1)) (_ : SmallCategory A) (_ : IsFiltered A)\n      (D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n      (ι : D ⟶ (Functor.const A).obj F),\n      (∀ a : A, IsConstructibleEtaleModuleSheaf (D.obj a)) ∧\n      (∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n        IsConstructibleEtaleModuleSheaf G → ∀ p : G ⟶ F,\n          ∃ (a : A) (q : G ⟶ D.obj a), q ≫ ι.app a = p) ∧\n      (∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n        IsConstructibleEtaleModuleSheaf G → ∀ (a b : A)\n          (p : G ⟶ D.obj a) (q : G ⟶ D.obj b),\n          p ≫ ι.app a = q ≫ ι.app b →\n          ∃ (c : A) (f : a ⟶ c) (g : b ⟶ c), p ≫ D.map f = q ≫ D.map g)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-72c2e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T023314-L-1110539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-72c2e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T023314-L-1110539",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes, dependencies and cited Stacks arguments; compilation and scratch axiom checks pass; earlier B5 return is repaired."
+ }
+}

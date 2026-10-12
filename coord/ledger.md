@@ -5852,3 +5852,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:32 L: returned deliver/M1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints (reviewer RETURN: (reviewer X-9d0ed, head 9d0ed174b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ze)
 - 02:32 L: returned deliver/T1/WeilConjectures.ConstructibleSheaf.KernelCokernel (reviewer RETURN: (reviewer X-be294, head be29498f0) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.Constructi)
 - 02:33 L: returned deliver/V1/Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1 (reviewer RETURN: (reviewer X-b2afc, head b2afcd9c8) H9 (brief point 5, unused imports): In lean/Sheaf/AlgebraicGeometry/EtaleSectionsSurj)
+- 02:34 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit (stage 3; reviewer PASS; after a return; landing 20261012T023314-L-1110539 (interface); modules 3; new nodes 2)

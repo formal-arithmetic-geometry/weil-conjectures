@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleFilteredData
+import Sheaf.AlgebraicGeometry.ConstructibleColimitCocone
 
 /-!
 # Constructible filtered presentations of etale module sheaves
@@ -58,6 +60,12 @@ theorem exists_filtered_colimit_constructible
       (D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       (∀ a : A, IsConstructibleEtaleModuleSheaf (D.obj a)) ∧
         ∃ ι : D ⟶ (Functor.const A).obj F,
-          Nonempty (IsColimit (Cocone.mk F ι)) := sorry
+          Nonempty (IsColimit (Cocone.mk F ι)) := by
+  obtain ⟨A, hA, hfiltered, D, ι, hconstructible, hfactor, hrelations⟩ :=
+    exists_filtered_constructible_data F
+  let := hA
+  let := hfiltered
+  exact ⟨A, hA, hfiltered, D, hconstructible, ι,
+    exists_constructible_colimit_cocone F A D ι hfactor hrelations⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-module-sheaf-colimit-constructible-cocone",
+ "kind": "statement",
+ "title": "Recognizing a colimit by constructible-source tests",
+ "statement": "Let X be qcqs, Lambda a finite commutative ring, and F a module sheaf on the small etale site [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category]. Let A be small filtered, D a diagram of module sheaves, and iota a cocone to F [def-weil-pbc-category-colimit]. Suppose every map from a constructible G [def-weil-pbc-etale-constructible-sheaf] to F factors through iota_a, and any two maps G -> D_a, G -> D_b with equal composites to F become equal after a common refinement in A. Then this given cocone is colimiting. Diagram objects need not be constructible.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09Z4 (lemma-constructible-is-compact), 03SA(3), 03EW(3); categorical recognition argument in Lean docstring"
+ },
+ "proof": [
+  {
+   "text": "Form L = colim D and its comparison t:L -> F. Finite presentation of every constructible G identifies Hom(G,L) with colim Hom(G,D_a). Factorization and refinement are respectively surjectivity and injectivity of Hom(G,t), by the equality criterion for filtered colimits of sets.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-constructible-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+   }
+  },
+  {
+   "text": "Constructible generation implies these G separate morphisms. Injectivity makes t monic. Surjectivity lets every summand of the generating epimorphism onto F lift to L, so that epimorphism factors through t; thus t is epic.",
+   "uses": [
+    "lem-weil-pbc-constructible-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+   }
+  },
+  {
+   "text": "The module-sheaf category is abelian, so the monic and epic comparison is an isomorphism. Transport the existing colimit cocone along it; its legs become exactly iota.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-constructible-finitely-presented",
+  "lem-weil-pbc-constructible-generation",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Explicit categorical reduction of the construction in 03SA(3), using 095N, 03RZ and 09Z4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible|IsSeparating|isColimitOf",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean; generic categorical tools, no exact constructible sheaf result",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "recognize colimit cocone using generators and factorization of morphisms with eventual equality",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.isColimitOf, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf', CategoryTheory.Limits.Concrete.isColimit_exists_of_rep_eq, CategoryTheory.Functor.CoconeTypes.IsColimit.isColimitCore, CategoryTheory.Functor.CoconeTypes.IsColimitCore.isColimit, CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists, CategoryTheory.Functor.CoconeTypes.IsColimitCore, CategoryTheory.Limits.IsColimit.ofExistsUnique; generic categorical tools, no exact constructible sheaf result",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit",
+   "results": "CategoryTheory.Limits.IsColimit, CategoryTheory.Limits.IsColimit.subsingleton, CategoryTheory.Limits.IsColimit.ofCorepresentableBy, CategoryTheory.Limits.IsColimit.corepresentableBy, CategoryTheory.Limits.IsColimit.desc, CategoryTheory.Limits.IsColimit.ofIsoColimit, CategoryTheory.Limits.IsColimit.uniqueUpToIso, CategoryTheory.Limits.IsColimit.equivIsoColimit; generic categorical tools, no exact constructible sheaf result",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered cocone of sheaves is a colimit if morphisms from constructible generators factor through it and equalities hold after refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 2 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules')",
+   "via": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleColimitCocone",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleColimitCocone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_constructible_colimit_cocone",
+  "statement": "theorem exists_constructible_colimit_cocone\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (A : Type (u + 1)) [SmallCategory A] [IsFiltered A]\n    (D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (ι : D ⟶ (Functor.const A).obj F)\n    (hfactor : ∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      IsConstructibleEtaleModuleSheaf G → ∀ p : G ⟶ F,\n        ∃ (a : A) (q : G ⟶ D.obj a), q ≫ ι.app a = p)\n    (hrelations : ∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      IsConstructibleEtaleModuleSheaf G → ∀ (a b : A)\n        (p : G ⟶ D.obj a) (q : G ⟶ D.obj b),\n        p ≫ ι.app a = q ≫ ι.app b →\n        ∃ (c : A) (f : a ⟶ c) (g : b ⟶ c), p ≫ D.map f = q ≫ D.map g) :\n    Nonempty (IsColimit (Cocone.mk F ι))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-72c2e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T023314-L-1110539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-72c2e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T023314-L-1110539",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes, dependencies and cited Stacks arguments; compilation and scratch axiom checks pass; earlier B5 return is repaired."
+ }
+}

@@ -25,55 +25,36 @@
  ],
  "proof": [
   {
-   "text": "Constructible Lambda-module sheaves generate Mod(X_Et,Lambda): by the constructible generation lemma, choose an epimorphism from a coproduct of constructible sheaves onto F. The finite-presentation property of each constructible sheaf ensures that maps from it into a filtered colimit factor through one stage and become equal after a common refinement.",
+   "text": "Construct a small filtered diagram of constructible maps to F, with factorization of constructible-source maps and refinement of their relations.",
    "uses": [
-    "lem-weil-pbc-constructible-generation",
-    "lem-weil-pbc-constructible-finitely-presented"
+    "lem-weil-pbc-module-sheaf-colimit-constructible-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03SA, proof of (1), and Lemma 09Z4"
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
    }
   },
   {
-   "text": "Let A be the category whose objects are pairs (G,u) with G constructible and u:G -> F, and whose morphisms commute with the maps to F. The preceding generation and finite-presentation statements imply that A is nonempty, any two objects admit a common refinement, and parallel morphisms become equal after a further refinement; thus A is filtered. The canonical cocone from A to F is a colimit: a compatible family of maps out of the G's descends uniquely through the epimorphism coproduct -> F, and uniqueness follows from local epimorphism detection.",
+   "text": "Apply the constructible-source cocone recognition theorem to the supplied factorization and relation conditions, then package the same A, D and iota with its colimit structure.",
    "uses": [
-    "lem-weil-pbc-constructible-generation",
-    "lem-weil-pbc-constructible-finitely-presented",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03SA, proof of (1), final paragraph; Categories, Lemma 04AX on filtered categories"
-   }
-  },
-  {
-   "text": "The same construction is internal to Lambda-module sheaves because Lambda is finite and all maps in the diagram are Lambda-linear. Therefore the colimit cocone is a colimit in Mod(X_Et,Lambda), and every object of the filtered diagram is constructible, which proves the assertion.",
-   "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-module-sheaf-colimit-constructible-cocone"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03SA, part (3), and Categories, Lemma 04AX"
+    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constructible-generation",
-  "lem-weil-pbc-constructible-finitely-presented",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-module-sheaf-colimit-constructible-data",
+  "lem-weil-pbc-module-sheaf-colimit-constructible-cocone"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03SA (lemma-torsion-colimit-constructible), part (3), and proof of part (1)"
+  "place": "Categorical construction and recognition reduction of Tag 03SA(3), using 095N, 03RZ and 09Z4"
  },
  "mathlib_searches": [
   {
@@ -157,5 +138,15 @@
   "group": "J1",
   "result": "pass",
   "note": "qcqs X = [CompactSpace X][QuasiSeparatedSpace X] (not inferable, inferInstance fails); finite comm Λ : Type (u+1); F : Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) (constructible encoding); A : Type (u+1) SmallCategory IsFiltered = objects' universe; stages landed IsConstructibleEtaleModuleSheaf (#check unique); cocone D ⟶ const F with IsColimit; same shape as landed lem-kun-03sa"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-72c2e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T023314-L-1110539",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes, dependencies and cited Stacks arguments; compilation and scratch axiom checks pass; earlier B5 return is repaired."
  }
 }
