@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-proj-twist-local-overlap-compatibility",
+ "kind": "statement",
+ "title": "Overlap compatibility of finite twist representatives",
+ "statement": "In the setting of the finite principal representatives above, assume each t_i has the canonical evaluation at every homogeneous prime where g_i is invertible. Then the canonical module-localization images of t_i and t_j agree after localizing at g_i g_j.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4 and its preceding construction, specialized to the shift A(k); this split separates ordinary gluing from degree detection"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof": [
+  {
+   "text": "On the overlap of the two chart opens, both local evaluations equal the section value. The homogeneous element f times the two chart numerators defines a basic open on which the values agree. Apply homogeneous-prime localization detection and identify the iterated localization with localization at the product.",
+   "uses": [
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proj-basic-open-localization-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Finite basic-open refinement and local fractions from the construction preceding Definition 27.8.3; overlap equality via homogeneous-prime localization detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally homogeneous fraction section of a Proj twist gives compatible ordinary module fractions on a finite principal cover of the homogeneous basic open",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisting sheaf locally homogeneous fractions finite principal open cover compatible module localization sections",
+   "results": "Found ModuleCat.Tilde.exists_const and StructureSheaf.normalize_finite_fraction_representation, both over affine Spec with different section and stalk types; no Proj twist finite chart-data statement.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite|compact|isLocallyFraction|coverModuleExact in Mathlib ProjectiveSpectrum/Basic, the source twist sheaf module, and Sheaf/RingTheory/CoverModuleExact; finite principal twist and localization data in the entire DAG",
+   "results": "Local homogeneous-fraction predicate and the existing finite module gluing theorem. No statement extracting the finite compatible data from these twist sections.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-proj-twist-finite-localization-data",
+   "place": "Overlap compatibility of finite twist representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistLocalOverlapCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Proj.twist_localOverlap_compatibility",
+  "statement": "theorem twist_localOverlap_compatibility\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)\n    (hb : 0 < b) (hf : f ∈ 𝒜 b)\n    (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))) :\n    let B := HomogeneousLocalization.Away 𝒜 f\n    let M := LocalizedModule.Away f A\n    letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f))\n    ∀ (n : ℕ) (g : Fin n → B) (t : ∀ i : Fin n, LocalizedModule.Away (g i) M),\n      (∀ (i : Fin n) (p : basicOpen 𝒜 f),\n      let F := IsLocalization.map (M := Submonoid.powers f)\n        (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n        (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n        (Submonoid.powers_le.mpr p.2)\n      IsUnit (F (algebraMap B (Localization.Away f) (g i))) →\n      ∃ e : LocalizedModule.Away (g i) M →+\n          Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal,\n        (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers (g i)) M z) = F z) ∧\n        (∀ (a : B) (x : LocalizedModule.Away (g i) M),\n          e (a • x) = F (algebraMap B (Localization.Away f) a) * e x) ∧\n        e (t i) = (s.1 p).1) →\n      let ρ := fun (a h : B) (ha : a ∣ h) ↦\n        IsLocalizedModule.lift (Submonoid.powers a)\n          (LocalizedModule.mkLinearMap (Submonoid.powers a) M)\n          (LocalizedModule.mkLinearMap (Submonoid.powers h) M)\n          (RingTheory.localizationAway_map_units_of_dvd (M := M) a h ha)\n      ∀ i j : Fin n,\n        ρ (g i) (g i * g j) (dvd_mul_right (g i) (g j)) (t i) =\n          ρ (g j) (g i * g j) (dvd_mul_left (g j) (g i)) (t j)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T173813-L-3291843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T173813-L-3291843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
