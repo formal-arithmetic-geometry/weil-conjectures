@@ -96,7 +96,6 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] {Λ : C}
 namespace StrictPerfectPackage
 
 include P in
-
 /-- Let `S` be a triangulated subcategory of `D(C)`, closed under isomorphisms and stable under
 retracts, which contains `Λ` placed in degree `0`. Then it contains every complex admitting a
 strict-perfect package with respect to `Λ`. -/

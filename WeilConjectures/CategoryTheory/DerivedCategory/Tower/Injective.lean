@@ -43,22 +43,33 @@ inclusion of `X` as the summand of `(Lₙ₊₁ X)ₙ` indexed by the transition
 noncomputable def towerLeftAdjointSucc (n : ℕ) (X : A) :
     (evaluationLeftAdjoint A (op n)).obj X ⟶ (evaluationLeftAdjoint A (op (n + 1))).obj X :=
   ((evaluationAdjunctionRight A (op n)).homEquiv _ _).symm
-    (Sigma.ι (fun _ : op (n + 1) ⟶ op n ↦ X) (homOfLE n.le_succ).op)
-
-omit [HasZeroMorphisms A] in
-lemma evaluationAdjunctionRight_homEquiv_apply (c : ℕᵒᵖ) (X : A) (E : ℕᵒᵖ ⥤ A)
-    (f : (evaluationLeftAdjoint A c).obj X ⟶ E) :
-    (evaluationAdjunctionRight A c).homEquiv X E f = Sigma.ι (fun _ ↦ X) (𝟙 c) ≫ f.app c := by
-  simp [evaluationAdjunctionRight]
+    ((evaluationAdjunctionRight A (op (n + 1))).unit.app X ≫
+      ((evaluationLeftAdjoint A (op (n + 1))).obj X).map (homOfLE n.le_succ).op)
 
 omit [HasZeroMorphisms A] in
 lemma towerLeftAdjointSucc_app (n : ℕ) (X : A) (m : ℕᵒᵖ) :
     (towerLeftAdjointSucc A n X).app m =
       Sigma.desc fun g ↦ Sigma.ι (fun _ ↦ X) ((homOfLE n.le_succ).op ≫ g) := by
   refine Sigma.hom_ext _ _ fun g ↦ ?_
-  simp only [towerLeftAdjointSucc, evaluationAdjunctionRight]
-  simp only [Adjunction.mkOfHomEquiv_homEquiv, Equiv.coe_fn_symm_mk]
-  erw [Sigma.ι_desc, Sigma.ι_desc, Sigma.ι_desc]
+  rw [towerLeftAdjointSucc, Adjunction.homEquiv_counit]
+  simp only [NatTrans.comp_app, evaluationLeftAdjoint_map_app,
+    evaluationAdjunctionRight_counit_app_app, evaluationAdjunctionRight_unit_app]
+  erw [Sigma.ι_desc_assoc, Sigma.ι_desc, Category.assoc, Sigma.ι_desc,
+    evaluationLeftAdjoint_obj_map, Sigma.ι_desc, Sigma.ι_desc]
+  rfl
+
+omit [HasZeroMorphisms A] in
+/-- Maps out of `towerLeftAdjointSucc A n X` correspond to the transition maps: for
+`g : Lₙ₊₁ X ⟶ E`, the map `Lₙ X ⟶ Lₙ₊₁ X ⟶ E` corresponds under `Lₙ ⊣ evₙ` to the map
+`X ⟶ Eₙ₊₁ ⟶ Eₙ` obtained from the map corresponding to `g` under `Lₙ₊₁ ⊣ evₙ₊₁`. -/
+lemma towerLeftAdjointSucc_homEquiv (n : ℕ) (X : A) (E : ℕᵒᵖ ⥤ A)
+    (g : (evaluationLeftAdjoint A (op (n + 1))).obj X ⟶ E) :
+    (evaluationAdjunctionRight A (op n)).homEquiv _ _ (towerLeftAdjointSucc A n X ≫ g) =
+      (evaluationAdjunctionRight A (op (n + 1))).homEquiv _ _ g ≫
+        E.map (homOfLE n.le_succ).op := by
+  rw [Adjunction.homEquiv_naturality_right, towerLeftAdjointSucc, Equiv.apply_symm_apply,
+    Adjunction.homEquiv_unit]
+  simp only [evaluation_obj_map, Category.assoc, NatTrans.naturality]
 
 instance mono_towerLeftAdjointSucc (n : ℕ) (X : A) : Mono (towerLeftAdjointSucc A n X) := by
   suffices ∀ m, Mono ((towerLeftAdjointSucc A n X).app m) from NatTrans.mono_of_mono_app _
@@ -69,7 +80,8 @@ instance mono_towerLeftAdjointSucc (n : ℕ) (X : A) : Mono (towerLeftAdjointSuc
     exact SplitMono.mono
       ⟨Sigma.desc fun (_ : op (n + 1) ⟶ m) ↦ Sigma.ι (fun _ : op n ⟶ m ↦ X) g₀,
         Sigma.hom_ext _ _ fun g ↦ by
-          erw [Sigma.ι_desc_assoc, Sigma.ι_desc, Subsingleton.elim g g₀]; exact (Category.comp_id _).symm⟩
+          erw [Sigma.ι_desc_assoc, Sigma.ι_desc, Subsingleton.elim g g₀]
+          exact (Category.comp_id _).symm⟩
   · have : IsEmpty (op n ⟶ m) := not_nonempty_iff.mp hm
     have hZ : IsZero (∐ fun _ : op n ⟶ m ↦ X) :=
       (IsZero.iff_id_eq_zero _).mpr (Sigma.hom_ext _ _ fun g ↦ isEmptyElim g)
@@ -84,16 +96,7 @@ lemma isSplitEpi_map_of_injective (E : ℕᵒᵖ ⥤ A) [Injective E] (n : ℕ) 
   let f := ((evaluationAdjunctionRight A (op n)).homEquiv _ _).symm (𝟙 (E.obj (op n)))
   let g := Injective.factorThru f (towerLeftAdjointSucc A n (E.obj (op n)))
   have hg : towerLeftAdjointSucc A n (E.obj (op n)) ≫ g = f := Injective.comp_factorThru _ _
-  refine IsSplitEpi.mk' ⟨Sigma.ι (fun _ ↦ E.obj (op n)) (𝟙 (op (n + 1))) ≫ g.app _, ?_⟩
-  have h := congr_arg (fun φ ↦ ((evaluationAdjunctionRight A (op n)).homEquiv _ _) φ) hg
-  simp only [f, Equiv.apply_symm_apply, evaluationAdjunctionRight_homEquiv_apply,
-    NatTrans.comp_app, towerLeftAdjointSucc_app] at h
-  have hn := g.naturality (homOfLE n.le_succ).op
-  rw [← h]
-  simp only [Category.assoc]
-  rw [← hn]
-  erw [Sigma.ι_desc_assoc, Sigma.ι_desc_assoc]
-  congr 2
-  exact Subsingleton.elim _ _
+  refine IsSplitEpi.mk' ⟨(evaluationAdjunctionRight A (op (n + 1))).homEquiv _ _ g, ?_⟩
+  rw [← towerLeftAdjointSucc_homEquiv, hg, Equiv.apply_symm_apply]
 
 end CategoryTheory

@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Tower.Products
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-!
 # The Roos sequence of a tower and derived limits of towers of K-injective complexes
@@ -104,19 +105,20 @@ end CategoryTheory.Limits
 namespace DerivedCategory
 
 variable {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
-  [Abelian.HasKInjectiveResolutions A] [HasCountableProducts A]
+  [Abelian.HasKInjectiveResolutions A] [HasLimitsOfShape (Discrete ℕ) A]
 
+omit [HasDerivedCategory A] [Abelian.HasKInjectiveResolutions A] in
 /-- The degree `p` component of the transition endomorphism of a product of complexes is the
 transition endomorphism of the product of the degree `p` components. -/
-lemma towerShift_f {G : ℕᵒᵖ ⥤ CochainComplex A ℤ} {P : Fan fun n : ℕ ↦ G.obj (op n)}
-    (hP : IsLimit P) (p : ℤ) :
+lemma towerShift_f {G : ℕᵒᵖ ⥤ CochainComplex A ℤ} {X : CochainComplex A ℤ}
+    {π : ∀ n : ℕ, X ⟶ G.obj (op n)} (hP : IsLimit (Fan.mk X π)) (p : ℤ) :
     (towerShift hP).f p = towerShift (F := G ⋙ HomologicalComplex.eval A _ p)
       (isLimitFanMkObjOfIsLimit (HomologicalComplex.eval A _ p) _ _ hP) :=
   Fan.IsLimit.hom_ext (isLimitFanMkObjOfIsLimit (HomologicalComplex.eval A _ p) _ _ hP) _ _
     fun n ↦ by
-      rw [towerShift_proj]
-      change _ = ((towerShift hP) ≫ P.proj n).f p
-      rw [towerShift_proj]
+      change (towerShift hP).f p ≫ (π n).f p = _ ≫ (π n).f p
+      rw [← HomologicalComplex.comp_f]
+      erw [towerShift_proj, towerShift_proj]
       rfl
 
 /-- **Derived limits of towers of K-injective complexes.** Let `G` be a tower of K-injective
@@ -136,7 +138,7 @@ theorem isHomotopyLimit_mapCone_Q {G : ℕᵒᵖ ⥤ CochainComplex A ℤ}
     have := isSplitEpi_sub_towerShift (F := G ⋙ HomologicalComplex.eval A _ p)
       (isLimitFanMkObjOfIsLimit (HomologicalComplex.eval A _ p) _ _ hP) fun n ↦ hG n p
     rw [HomologicalComplex.sub_f_apply, HomologicalComplex.id_f, towerShift_f]
-    infer_instance
+    exact @IsSplitEpi.epi _ _ _ _ _ this
   have hS := shortExact_towerShift hP hc hepi
   have hPD := isLimitFanQOfIsKInjective hP
   refine ⟨_, hPD, triangleOfSESδ hS, ?_⟩
@@ -144,13 +146,17 @@ theorem isHomotopyLimit_mapCone_Q {G : ℕᵒᵖ ⥤ CochainComplex A ℤ}
       Q.map (Fan.IsLimit.lift hP fun n ↦ c.π.app (op n)) :=
     Fan.IsLimit.hom_ext hPD _ _ fun n ↦ by
       rw [Fan.IsLimit.fac]
-      simp only [fan_mk_proj, Functor.mapCone_π_app, ← Functor.map_comp, Fan.IsLimit.fac]
-  have h₂ : 𝟙 _ - towerShift hPD = Q.map (𝟙 P.pt - towerShift hP) := by
-    rw [Functor.map_sub, Functor.map_id]
+      simp only [fan_mk_proj, Functor.mapCone_π_app, ← Functor.map_comp]
+      congr 1
+      exact (Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n).symm
+  have h₂ : 𝟙 _ - towerShift (F := G ⋙ Q) hPD = Q.map (𝟙 P.pt - towerShift hP) := by
+    rw [Functor.map_sub, CategoryTheory.Functor.map_id]
     congr 1
     refine Fan.IsLimit.hom_ext hPD _ _ fun n ↦ ?_
     rw [towerShift_proj]
-    simp only [fan_mk_proj, Functor.comp_map, ← Functor.map_comp, towerShift_proj]
+    simp only [fan_mk_proj, Functor.comp_map, ← Functor.map_comp]
+    congr 1
+    exact (towerShift_proj hP n).symm
   rw [h₁, h₂]
   exact triangleOfSES_distinguished hS
 

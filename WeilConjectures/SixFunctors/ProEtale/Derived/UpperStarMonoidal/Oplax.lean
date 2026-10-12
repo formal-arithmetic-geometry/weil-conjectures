@@ -101,8 +101,8 @@ lemma exists_kFlatUpperStar_iso (X : DerivedCategory (Sheaf (Scheme.ProEt.topolo
     (HomotopyCategory.quasiIso _ (.up ℤ))
   obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
     (Φ := HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) (Qh.objPreimage X)
-  have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
-  exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
+  have hR : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
+  exact ⟨R.X₁.obj, R.X₁.property, ⟨@asIso _ _ _ _ (Qh.map R.w) hR ≪≫ Qh.objObjPreimageIso X⟩⟩
 
 /-- The oplax monoidal structure on the derived pullback `Lg^* : D(Y_proét) ⥤ D(Z_proét)`, whose
 comonoidal structure is the tensor comparison `leftDerivedUpperStarTensorComparison`. It is
@@ -131,7 +131,8 @@ lemma isIso_leftDerivedUpperStarOplaxMonoidal_η :
   have := DerivedCategory.isIso_ε_Qh (Sheaf (Scheme.ProEt.topology Y) A)
   have : IsIso (η ((g)^*[A].mapHomotopyCategory (.up ℤ))) := by
     rw [Functor.mapHomotopyCategory_η]
-    infer_instance
+    exact (HomotopyCategory.quotient _ _).map_isIso
+      (η ((g)^*[A].mapHomologicalComplex (.up ℤ)))
   exact inferInstanceAs (IsIso (L((g)^*[A]).map (ε Qh) ≫
     (g)^*[A].leftDerivedFunctorCounit.app (𝟙_ _) ≫
       Qh.map (η ((g)^*[A].mapHomotopyCategory (.up ℤ))) ≫ CategoryTheory.inv (ε Qh)))

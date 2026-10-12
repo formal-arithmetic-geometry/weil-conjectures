@@ -46,7 +46,7 @@ variable (C) in
 noncomputable def homologySingleFunctor (q : ℤ) : Plus C ⥤ Plus C :=
   (DerivedCategory.TStructure.t (C := C)).plus.lift
     (ι ⋙ DerivedCategory.homologySingleFunctor C q)
-    (fun X ↦ ⟨q, inferInstanceAs (((DerivedCategory.singleFunctor C q).obj _).IsGE q)⟩)
+    (fun _ ↦ ⟨q, inferInstanceAs (((DerivedCategory.singleFunctor C q).obj _).IsGE q)⟩)
 
 @[simp]
 lemma ι_obj_truncLE_obj (n : ℤ) (X : Plus C) :
@@ -121,20 +121,27 @@ noncomputable def truncLEδ :
     homologySingleFunctor C q ⟶ truncLE C q₀ ⋙ shiftFunctor (Plus C) (1 : ℤ) where
   app X := ObjectProperty.homMk ((DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) ≫
     (ι.commShiftIso (1 : ℤ)).inv.app ((truncLE C q₀).obj X))
-  naturality _ _ f := by
-    ext
+  naturality X Y f := by
+    apply ι.map_injective
+    rw [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
     have h₁ := (DerivedCategory.truncLEδ q₀ q hq).naturality (ι.map f)
     have h₂ := (ι.commShiftIso (1 : ℤ)).inv.naturality ((truncLE C q₀).map f)
-    dsimp at h₁ h₂ ⊢
-    simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom]
-    rw [reassoc_of% h₁]
-    exact congrArg (fun φ ↦ _ ≫ φ) h₂.symm
+    dsimp at h₁ h₂
+    change (DerivedCategory.homologySingleFunctor C q).map (ι.map f) ≫
+        (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj Y) ≫
+          (ι.commShiftIso (1 : ℤ)).inv.app ((truncLE C q₀).obj Y) =
+      (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) ≫
+        (ι.commShiftIso (1 : ℤ)).inv.app ((truncLE C q₀).obj X) ≫
+          ι.map (((truncLE C q₀).map f)⟦(1 : ℤ)⟧')
+    erw [reassoc_of% h₁, ← h₂]
+    rfl
 
 lemma ι_map_truncLEδ_app (X : Plus C) :
     ι.map ((truncLEδ q₀ q hq).app X) ≫ (ι.commShiftIso (1 : ℤ)).hom.app ((truncLE C q₀).obj X) =
       (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) := by
   change (_ ≫ _) ≫ _ = _
-  rw [assoc, Iso.inv_hom_id_app, comp_id]
+  rw [assoc]
+  erw [Iso.inv_hom_id_app, comp_id]
 
 /-- The truncation triangles `τ_{≤ q₀} X ⟶ τ_{≤ q} X ⟶ H^q(X)[-q] ⟶ (τ_{≤ q₀} X)⟦1⟧` in the
 bounded below derived category, as a functor `D⁺(C) ⥤ Triangle D⁺(C)`. -/
@@ -146,11 +153,12 @@ noncomputable def truncLETriangle : Plus C ⥤ Triangle (Plus C) :=
 noncomputable def mapTriangleιTruncLETriangleIso (X : Plus C) :
     ι.mapTriangle.obj ((truncLETriangle q₀ q hq).obj X) ≅
       (DerivedCategory.truncLETriangle q₀ q hq).obj (ι.obj X) :=
-  Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp [truncLETriangle,
-    DerivedCategory.truncLETriangle]) (by simp [truncLETriangle,
-    DerivedCategory.truncLETriangle]) (by
-      dsimp [truncLETriangle, DerivedCategory.truncLETriangle]
-      rw [Functor.map_id, comp_id, id_comp, ι_map_truncLEδ_app])
+  Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    ((comp_id _).trans (id_comp _).symm) ((comp_id _).trans (id_comp _).symm) (by
+      change (ι.map ((truncLEδ q₀ q hq).app X) ≫
+          (ι.commShiftIso (1 : ℤ)).hom.app ((truncLE C q₀).obj X)) ≫
+            (shiftFunctor _ (1 : ℤ)).map (𝟙 _) = 𝟙 _ ≫ (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X)
+      rw [CategoryTheory.Functor.map_id, comp_id, id_comp, ι_map_truncLEδ_app])
 
 /-- This is blueprint `lem-weil-pbc-truncation-triangle` in `D⁺(C)`: the truncation triangles of
 a bounded below object are distinguished triangles of the bounded below derived category. -/

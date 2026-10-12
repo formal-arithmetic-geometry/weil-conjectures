@@ -402,6 +402,9 @@ theorem IsLocallyConstantSheaf.of_shortExact [IsNoetherianRing Λ]
     have : Module.FinitePresentation Λ N := Module.finitePresentation_of_finite Λ N
     have hS' : (S.map (Etale.upperStar (ModuleCat.{u + 1} Λ) g)).ShortExact :=
       hS.map_of_exact _
+    have : ∀ (V : Y.Etale) (M : ModuleCat.{u + 1} Λ),
+        IsIso (constantSheafOverHom Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) V M) :=
+      fun V M ↦ inferInstance
     obtain ⟨R, hR, hmem⟩ := Sheaf.exists_mem_forall_isConstant_over Y.smallEtaleTopology hS' M N
       eM.symm eN.symm (Etale.mk (𝟙 Y))
     refine ⟨Cover.ofSieve R hR, fun y ↦ ?_⟩
@@ -410,6 +413,9 @@ theorem IsLocallyConstantSheaf.of_shortExact [IsNoetherianRing Λ]
     have := Cover.nonempty_ofSieveObj R hR y
     have h := hmem a (Cover.ofSieveHom_mem R hR y) (bot_not_mem_smallEtaleTopology V)
     rw [isConstant_over_iff_upperStar] at h ⊢
+    have h : ((Etale.upperStar (ModuleCat.{u + 1} Λ) V.hom).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj S.X₂)).IsConstant
+          V.left.smallEtaleTopology := h
     change ((Etale.upperStar (ModuleCat.{u + 1} Λ) (a.left ≫ g)).obj S.X₂).IsConstant
       V.left.smallEtaleTopology
     refine Sheaf.isConstant_congr _

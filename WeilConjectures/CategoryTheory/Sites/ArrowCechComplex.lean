@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.SingleHomology
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 
@@ -75,12 +76,9 @@ lemma cechComplex_X (P : Cᵒᵖ ⥤ A) (n : ℕ) :
 
 lemma cechComplex_d (P : Cᵒᵖ ⥤ A) (n : ℕ) :
     (f.cechComplex P).d n (n + 1) =
-      ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • P.map (f.cechNerve.δ i).op := by
-  dsimp only [cechComplexFunctor, Functor.comp_obj, Functor.whiskeringLeft_obj_obj,
-    AlgebraicTopology.alternatingCofaceMapComplex_obj,
-    AlgebraicTopology.AlternatingCofaceMapComplex.obj]
-  rw [CochainComplex.of_d]
-  rfl
+      ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • P.map (f.cechNerve.δ i).op :=
+  CochainComplex.of_d _ (AlgebraicTopology.AlternatingCofaceMapComplex.objD
+    (f.cechNerve.rightOp ⋙ P)) n
 
 lemma cechComplexFunctor_map_f {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) (n : ℕ) :
     (f.cechComplexFunctor.map φ).f n = φ.app (op (f.cechNerve.obj (op ⦋n⦌))) := rfl
@@ -110,11 +108,13 @@ noncomputable def copowerYonedaHom {Z : C} {P : Cᵒᵖ ⥤ A} :
   map_zero' := by simp
   map_add' _ _ := by simp
 
+omit [Preadditive A] in
 lemma ι_copowerYoneda_obj_map {Z W W' : C} (g : W' ⟶ W) (h : W ⟶ Z) :
     Sigma.ι (fun _ : (W ⟶ Z) ↦ T) h ≫ ((copowerYoneda T).obj Z).map g.op =
       Sigma.ι (fun _ : (W' ⟶ Z) ↦ T) (g ≫ h) := by
   simp
 
+omit [Preadditive A] in
 lemma ι_copowerYoneda_map_app {Z Z' W : C} (g : Z ⟶ Z') (h : W ⟶ Z) :
     Sigma.ι (fun _ : (W ⟶ Z) ↦ T) h ≫ ((copowerYoneda T).map g).app (op W) =
       Sigma.ι (fun _ : (W ⟶ Z') ↦ T) (h ≫ g) := by
@@ -163,13 +163,14 @@ section ExtraDegeneracy
 variable (W : C)
 
 /-- The morphisms `W ⟶ f.right` which lift along `f`. -/
-def LiftableHom : Type v := {a : W ⟶ f.right // ∃ l : W ⟶ f.left, l ≫ f.hom = a}
+abbrev LiftableHom : Type v := {a : W ⟶ f.right // ∃ l : W ⟶ f.left, l ≫ f.hom = a}
 
 variable {f W} in
 /-- A chosen lift of a liftable morphism. -/
 noncomputable def LiftableHom.lift (a : f.LiftableHom W) : W ⟶ f.left := a.2.choose
 
 variable {f W} in
+omit [∀ n : ℕ, HasWidePullback.{0} f.right (fun _ : Fin (n + 1) => f.left) fun _ => f.hom] in
 @[reassoc (attr := simp)]
 lemma LiftableHom.lift_hom (a : f.LiftableHom W) : a.lift ≫ f.hom = a.1 := a.2.choose_spec
 
@@ -178,6 +179,7 @@ noncomputable def cechNerveToLiftableHom (n : SimplexCategoryᵒᵖ)
     (x : W ⟶ f.cechNerve.obj n) : f.LiftableHom W :=
   ⟨x ≫ WidePullback.base _, x ≫ WidePullback.π _ 0, by simp⟩
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The Čech nerve of `f` evaluated at `W`, augmented by the liftable morphisms `W ⟶ V`. It is
 the Čech nerve of the map of sets `Hom(W, U) → Hom(W, V)`, corestricted to its image. -/
 @[simps]
@@ -189,6 +191,10 @@ noncomputable def augmentedCechNerveHom : SimplicialObject.Augmented (Type v) wh
       naturality n m g := by
         ext x
         exact Subtype.ext (by simp [cechNerveToLiftableHom]) }
+
+lemma augmentedCechNerveHom_left_map_apply {n m : SimplexCategoryᵒᵖ} (g : n ⟶ m)
+    (x : (f.augmentedCechNerveHom W).left.obj n) :
+    (f.augmentedCechNerveHom W).left.map g x = (x : W ⟶ _) ≫ f.cechNerve.map g := rfl
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The extra degeneracy of the Čech nerve of `f` evaluated at `W`: it inserts, as first
@@ -206,40 +212,54 @@ noncomputable def augmentedCechNerveHom.extraDegeneracy :
         · simp [cechNerveToLiftableHom]
         · simp) : W ⟶ f.cechNerve.obj (op ⦋n + 1⦌))
   s'_comp_ε := by
-    ext a
-    exact Subtype.ext (by simp [cechNerveToLiftableHom])
+    refine ConcreteCategory.hom_ext _ _ fun a ↦ Subtype.ext ?_
+    simp [cechNerveToLiftableHom]
   s₀_comp_δ₁ := by
-    ext x
-    dsimp [SimplicialObject.δ, SimplexCategory.δ]
-    ext j
-    · fin_cases j
-      simp [cechNerveToLiftableHom]
+    refine ConcreteCategory.hom_ext _ _ fun x ↦ ?_
+    simp only [types_comp_apply, SimplicialObject.δ, augmentedCechNerveHom_left_map_apply,
+      TypeCat.ofHom_apply, augmentedCechNerveHom_hom_app]
+    apply WidePullback.hom_ext
+    · intro j
+      fin_cases j
+      simp [cechNerveToLiftableHom, SimplexCategory.δ]
     · simp [cechNerveToLiftableHom]
   s_comp_δ₀ n := by
-    ext x
-    dsimp [SimplicialObject.δ, SimplexCategory.δ]
-    ext j
-    · simp
+    refine ConcreteCategory.hom_ext _ _ fun x ↦ ?_
+    simp only [types_comp_apply, SimplicialObject.δ, augmentedCechNerveHom_left_map_apply,
+      TypeCat.ofHom_apply, types_id_apply]
+    apply WidePullback.hom_ext
+    · intro j
+      simp [SimplexCategory.δ]
     · simp
   s_comp_δ n i := by
-    ext x
-    dsimp [SimplicialObject.δ, SimplexCategory.δ]
-    ext j
-    · induction j using Fin.cases
-      · simp only [WidePullback.lift_π, Category.assoc]
-        congr 2
+    refine ConcreteCategory.hom_ext _ _ fun x ↦ ?_
+    simp only [types_comp_apply, SimplicialObject.δ, augmentedCechNerveHom_left_map_apply,
+      TypeCat.ofHom_apply]
+    apply WidePullback.hom_ext
+    · intro j
+      induction j using Fin.cases
+      · simp only [Arrow.cechNerve_map, Category.assoc, WidePullback.lift_π]
+        have h0 : (SimplexCategory.Hom.toOrderHom (SimplexCategory.δ i.succ).op.unop) 0 = 0 := by
+          simp [SimplexCategory.δ]
+        rw [h0, Fin.cases_zero, Fin.cases_zero]
+        congr 1
         exact Subtype.ext (by simp [cechNerveToLiftableHom])
-      · simp
+      · simp [SimplexCategory.δ]
     · simp
   s_comp_σ n i := by
-    ext x
-    dsimp [SimplicialObject.σ, SimplexCategory.σ]
-    ext j
-    · induction j using Fin.cases
-      · simp only [WidePullback.lift_π, Category.assoc]
-        congr 2
+    refine ConcreteCategory.hom_ext _ _ fun x ↦ ?_
+    simp only [types_comp_apply, SimplicialObject.σ, augmentedCechNerveHom_left_map_apply,
+      TypeCat.ofHom_apply]
+    apply WidePullback.hom_ext
+    · intro j
+      induction j using Fin.cases
+      · simp only [Arrow.cechNerve_map, Category.assoc, WidePullback.lift_π]
+        have h0 : (SimplexCategory.Hom.toOrderHom (SimplexCategory.σ i.succ).op.unop) 0 = 0 := by
+          simp [SimplexCategory.σ]
+        rw [h0, Fin.cases_zero, Fin.cases_zero]
+        congr 1
         exact Subtype.ext (by simp [cechNerveToLiftableHom])
-      · simp
+      · simp [SimplexCategory.σ]
     · simp
 
 end ExtraDegeneracy
@@ -291,25 +311,32 @@ theorem exactAt_cechComplex_of_injective (P : Cᵒᵖ ⥤ A) [Injective P] (q : 
   let K := (AlgebraicTopology.alternatingFaceMapComplex _).obj (f.copowerCechNerve T)
   have hK := (f.exactAt_alternatingFaceMapComplex_copowerCechNerve T q)
   rw [HomologicalComplex.exactAt_iff' _ (q + 2) (q + 1) q (by simp) (by simp)] at hK
-  let φ : K.X (q + 1) ⟶ P := copowerYonedaDesc c
   have hd (n : ℕ) : K.d (n + 1) n =
       ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • (copowerYoneda T).map (f.cechNerve.δ i) :=
     AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq _ n
-  have hcomp (n : ℕ) (ψ : K.X n ⟶ P) : copowerYonedaHom (K.d (n + 1) n ≫ ψ) =
-      copowerYonedaHom ψ ≫ (f.cechComplex P).d n (n + 1) := by
-    rw [hd, cechComplex_d, Preadditive.sum_comp, Preadditive.comp_sum, map_sum]
+  have key (n : ℕ) (ψ : K.X n ⟶ P) : copowerYonedaHom (K.d (n + 1) n ≫ ψ) =
+      ∑ i : Fin (n + 2),
+        (-1 : ℤ) ^ (i : ℕ) • (copowerYonedaHom ψ ≫ P.map (f.cechNerve.δ i).op) := by
+    rw [hd, Preadditive.sum_comp, map_sum]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
-    rw [Preadditive.zsmul_comp, Preadditive.comp_zsmul, map_zsmul, copowerYonedaHom_map_comp]
-  have hφ : K.d (q + 2) (q + 1) ≫ φ = 0 := by
+    rw [Preadditive.zsmul_comp, map_zsmul, copowerYonedaHom_map_comp]
+  have key' (n : ℕ) (x : T ⟶ (f.cechComplex P).X n) : x ≫ (f.cechComplex P).d n (n + 1) =
+      ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • (x ≫ P.map (f.cechNerve.δ i).op) :=
+    (congrArg (x ≫ ·) (f.cechComplex_d P n)).trans ((Preadditive.comp_sum _ _ _).trans
+      (Finset.sum_congr rfl fun i _ ↦ Preadditive.comp_zsmul _ _ _))
+  let φ : K.X (q + 1) ⟶ P := copowerYonedaDesc c
+  have hφc : copowerYonedaHom φ = c := copowerYonedaHom_desc c
+  have hφ : K.d (q + 1 + 1) (q + 1) ≫ φ = 0 := by
     refine copowerYonedaHom_injective ?_
-    rw [hcomp, map_zero, copowerYonedaHom_desc]
-    exact hc
+    rw [key, map_zero, hφc]
+    exact (key' (q + 1) c).symm.trans hc
   let ψ : K.X q ⟶ P := hK.descToInjective φ hφ
   have hψ : K.d (q + 1) q ≫ ψ = φ := hK.comp_descToInjective φ hφ
   refine ⟨T, 𝟙 T, inferInstance, copowerYonedaHom ψ, ?_⟩
-  rw [Category.id_comp]
-  change c = copowerYonedaHom ψ ≫ (f.cechComplex P).d q (q + 1)
-  rw [← hcomp, hψ, copowerYonedaHom_desc]
+  refine (Category.id_comp c).trans ?_
+  have h₁ := key q ψ
+  rw [hψ, hφc] at h₁
+  exact h₁.trans (key' q (copowerYonedaHom ψ)).symm
 
 end Exact
 

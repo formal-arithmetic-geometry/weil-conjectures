@@ -128,6 +128,13 @@ lemma commShift_derivedUpperStarLowerStarAdjunction' :
     Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
   exact Adjunction.commShift_ofNatIsoLeft _ _
 
+/-- Tensoring on the left with a fixed complex, `M ↦ K ⊗ᴸ M`, commutes with shifts. -/
+noncomputable instance commShiftDerivedTensorObj {X : Scheme.{u}}
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    ((derivedTensor A X).obj K).CommShift ℤ :=
+  inferInstanceAs
+    (((curriedTensor (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))).obj K).CommShift ℤ)
+
 open DerivedCategory
 
 /-- The counit `Qh ⋙ Lg^* ⟶ g^* ⋙ Qh` of the derived pullback commutes with the shifts. -/

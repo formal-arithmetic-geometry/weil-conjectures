@@ -55,8 +55,17 @@ namespace CochainComplex
 variable (C : Type*) [Category* C] [Abelian C]
 
 /-- The canonical truncation functor `K ↦ τ_{≤ n} K` on cochain complexes. -/
-noncomputable abbrev truncLEFunctor (n : ℤ) : CochainComplex C ℤ ⥤ CochainComplex C ℤ :=
-  (ComplexShape.embeddingUpIntLE n).truncLEFunctor C
+noncomputable abbrev truncLEFunctor (n : ℤ) : CochainComplex C ℤ ⥤ CochainComplex C ℤ where
+  obj K := K.truncLE n
+  map φ := truncLEMap φ n
+  map_id K := HomologicalComplex.truncLEMap_id K _
+  map_comp φ ψ := HomologicalComplex.truncLEMap_comp φ ψ _
+
+/-- The inclusions `τ_{≤ n} K ⟶ K`, as a natural transformation. -/
+@[simps]
+noncomputable def ιTruncLENatTrans (n : ℤ) : truncLEFunctor C n ⟶ 𝟭 _ where
+  app K := K.ιTruncLE n
+  naturality _ _ φ := CochainComplex.ιTruncLE_naturality φ n
 
 /-- The inclusions `τ_{≤ a} K ⟶ τ_{≤ b} K` for `a ≤ b`, as a natural transformation. -/
 @[simps]
@@ -81,12 +90,14 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
 section Descent
 
+omit [HasDerivedCategory C] in
 /-- This is blueprint `lem-weil-pbc-truncation-descends` (a) for `τ_{≤ n}`: the canonical
 truncation of a quasi-isomorphism is a quasi-isomorphism. -/
 lemma quasiIso_truncLEMap {K L : CochainComplex C ℤ} (φ : K ⟶ L) [QuasiIso φ] (n : ℤ) :
     QuasiIso (CochainComplex.truncLEMap φ n) :=
   (CochainComplex.quasiIso_truncLEMap_iff (φ := φ) (n := n)).2 (fun _ _ ↦ inferInstance)
 
+omit [HasDerivedCategory C] in
 /-- This is blueprint `lem-weil-pbc-truncation-descends` (a) for `H^q(-)[-q]`: for a
 quasi-isomorphism `φ`, the morphism `H^q(φ)[-q]` is an isomorphism of complexes. -/
 lemma isIso_single_map_homologyMap {K L : CochainComplex C ℤ} (φ : K ⟶ L) [QuasiIso φ]
@@ -108,15 +119,21 @@ of cochain complexes (blueprint `lem-weil-pbc-truncation-descends` (b)). -/
 noncomputable def truncLE (n : ℤ) : DerivedCategory C ⥤ DerivedCategory C :=
   Localization.lift _ (quasiIso_isInvertedBy_truncLEFunctor C n) Q
 
-instance (n : ℤ) : Localization.Lifting Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
-    (CochainComplex.truncLEFunctor C n ⋙ Q) (truncLE C n) :=
+noncomputable instance (n : ℤ) :
+    Localization.Lifting Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (CochainComplex.truncLEFunctor C n ⋙ Q) (truncLE C n) :=
   Localization.liftingLift _ _ _
 
 variable (C) in
-/-- The isomorphism `τ_{≤ n}(Q K) ≅ Q(τ_{≤ n} K)`. -/
+/-- The isomorphism `τ_{≤ n}(Q K) ≅ Q(τ_{≤ n} K)`, natural in `K`. -/
 noncomputable def truncLEFactors (n : ℤ) :
     Q ⋙ truncLE C n ≅ CochainComplex.truncLEFunctor C n ⋙ Q :=
   Localization.Lifting.iso _ (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) _ _
+
+/-- The isomorphism `τ_{≤ n}(Q K) ≅ Q(τ_{≤ n} K)`. -/
+noncomputable def truncLEFactorsApp (n : ℤ) (K : CochainComplex C ℤ) :
+    (truncLE C n).obj (Q.obj K) ≅ Q.obj (K.truncLE n) :=
+  (truncLEFactors C n).app K
 
 variable (C) in
 /-- The functor `X ↦ H^q(X)[-q]` on the derived category. -/
@@ -124,7 +141,7 @@ noncomputable abbrev homologySingleFunctor (q : ℤ) : DerivedCategory C ⥤ Der
   homologyFunctor C q ⋙ singleFunctor C q
 
 variable (C) in
-/-- The isomorphism `H^q(Q K)[-q] ≅ Q(H^q(K)[-q])`. -/
+/-- The isomorphism `H^q(Q K)[-q] ≅ Q(H^q(K)[-q])`, natural in `K`. -/
 noncomputable def homologySingleFunctorFactors (q : ℤ) :
     Q ⋙ homologySingleFunctor C q ≅
       HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q ⋙
@@ -132,8 +149,15 @@ noncomputable def homologySingleFunctorFactors (q : ℤ) :
   (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (homologyFunctorFactors C q) _ ≪≫
     Functor.isoWhiskerLeft _ (singleFunctorIsoCompQ C q)
 
-instance (q : ℤ) : Localization.Lifting Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
-    (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q ⋙
+/-- The isomorphism `H^q(Q K)[-q] ≅ Q(H^q(K)[-q])`. -/
+noncomputable def homologySingleFunctorFactorsApp (q : ℤ) (K : CochainComplex C ℤ) :
+    (homologySingleFunctor C q).obj (Q.obj K) ≅
+      Q.obj ((HomologicalComplex.single C (ComplexShape.up ℤ) q).obj (K.homology q)) :=
+  (homologySingleFunctorFactors C q).app K
+
+noncomputable instance (q : ℤ) :
+    Localization.Lifting Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q ⋙
         HomologicalComplex.single C (ComplexShape.up ℤ) q ⋙ Q) (homologySingleFunctor C q) :=
   ⟨homologySingleFunctorFactors C q⟩
 
@@ -149,8 +173,7 @@ variable (C) in
 noncomputable def truncLEι (n : ℤ) : truncLE C n ⟶ 𝟭 _ :=
   Localization.liftNatTrans Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
     (CochainComplex.truncLEFunctor C n ⋙ Q) Q _ _
-    (Functor.whiskerRight ((ComplexShape.embeddingUpIntLE n).ιTruncLENatTrans C) Q ≫
-      (Functor.leftUnitor Q).hom)
+    (Functor.whiskerRight (CochainComplex.ιTruncLENatTrans C n) Q ≫ (Functor.leftUnitor Q).hom)
 
 variable (C) in
 /-- The projection `j : τ_{≤ q} ⟶ H^q(-)[-q]` of functors on the derived category (blueprint
@@ -166,30 +189,29 @@ noncomputable def truncLEToHomologySingle (q : ℤ) : truncLE C q ⟶ homologySi
 inclusion `τ_{≤ a} ⟶ τ_{≤ b}` is `Q` of the inclusion of complexes. -/
 @[reassoc]
 lemma truncLEMapOfLE_app_Q (a b : ℤ) (h : a ≤ b) (K : CochainComplex C ℤ) :
-    (truncLEMapOfLE C a b h).app (Q.obj K) = (truncLEFactors C a).hom.app K ≫
-      Q.map (K.truncLEMapOfLE a b h) ≫ (truncLEFactors C b).inv.app K := by
+    (truncLEMapOfLE C a b h).app (Q.obj K) = (truncLEFactorsApp a K).hom ≫
+      Q.map (K.truncLEMapOfLE a b h) ≫ (truncLEFactorsApp b K).inv := by
   rw [truncLEMapOfLE, Localization.liftNatTrans_app]
   rfl
 
 @[reassoc]
 lemma truncLEι_app_Q (n : ℤ) (K : CochainComplex C ℤ) :
-    (truncLEι C n).app (Q.obj K) = (truncLEFactors C n).hom.app K ≫ Q.map (K.ιTruncLE n) := by
+    (truncLEι C n).app (Q.obj K) = (truncLEFactorsApp n K).hom ≫ Q.map (K.ιTruncLE n) := by
   rw [truncLEι, Localization.liftNatTrans_app]
   dsimp
-  rw [id_comp, comp_id]
+  erw [comp_id, comp_id]
   rfl
 
 /-- This is blueprint `lem-weil-pbc-truncation-descends` (b): on the image of a complex `K`, the
 projection `τ_{≤ q} ⟶ H^q(-)[-q]` is `Q` of the projection of complexes. -/
 @[reassoc]
 lemma truncLEToHomologySingle_app_Q (q : ℤ) (K : CochainComplex C ℤ) :
-    (truncLEToHomologySingle C q).app (Q.obj K) ≫ (homologySingleFunctorFactors C q).hom.app K =
-      (truncLEFactors C q).hom.app K ≫ Q.map (K.truncLEToSingle q) := by
-  rw [truncLEToHomologySingle, Localization.liftNatTrans_app]
+    (truncLEToHomologySingle C q).app (Q.obj K) ≫ (homologySingleFunctorFactorsApp q K).hom =
+      (truncLEFactorsApp q K).hom ≫ Q.map (K.truncLEToSingle q) := by
+  rw [truncLEToHomologySingle, Localization.liftNatTrans_app, assoc, assoc]
+  erw [Iso.inv_hom_id_app, comp_id]
   dsimp
-  rw [comp_id, assoc, assoc]
-  erw [Iso.inv_hom_id_app]
-  rw [comp_id]
+  erw [comp_id]
   rfl
 
 end Descent
@@ -197,9 +219,10 @@ end Descent
 section Cohomology
 
 /-- The truncation `τ_{≤ n} X` is `≤ n` for the canonical t-structure. -/
-instance isLE_truncLE_obj (X : DerivedCategory C) (n : ℤ) : ((truncLE C n).obj X).IsLE n :=
-  TStructure.t.isLE_of_iso
-    (((truncLEFactors C n).app (Q.objPreimage X)).symm ≪≫
+instance isLE_truncLE_obj (X : DerivedCategory C) (n : ℤ) : ((truncLE C n).obj X).IsLE n := by
+  have : (Q.obj ((Q.objPreimage X).truncLE n)).IsLE n := inferInstance
+  exact TStructure.t.isLE_of_iso
+    ((truncLEFactorsApp n (Q.objPreimage X)).symm ≪≫
       (truncLE C n).mapIso (Q.objObjPreimageIso X)) n
 
 /-- This is blueprint `lem-weil-pbc-truncation-cohomology` in the derived category: the morphism
@@ -210,8 +233,9 @@ lemma isIso_homologyFunctor_map_truncLEι_app (X : DerivedCategory C) (n i : ℤ
   let e : Q.obj K ≅ X := Q.objObjPreimageIso X
   have h : (truncLEι C n).app X =
       (truncLE C n).map e.inv ≫ (truncLEι C n).app (Q.obj K) ≫ e.hom := by
-    rw [← (truncLEι C n).naturality_assoc]
-    simp
+    have := (truncLEι C n).naturality e.inv
+    dsimp at this
+    rw [reassoc_of% this, e.inv_hom_id, comp_id]
   have : IsIso ((homologyFunctor C i).map (Q.map (K.ιTruncLE n))) :=
     (NatIso.isIso_map_iff (homologyFunctorFactors C i) (K.ιTruncLE n)).2
       (K.isIso_homologyMap_ιTruncLE n i hi)
@@ -232,7 +256,8 @@ lemma isGE_truncLE_obj (X : DerivedCategory C) (a n : ℤ) [X.IsGE a] :
   intro i hi
   by_cases h : i ≤ n
   · have := isIso_homologyFunctor_map_truncLEι_app X n i h
-    exact (isZero_of_isGE X a i hi).of_iso (asIso _)
+    exact (isZero_of_isGE X a i hi).of_iso
+      (asIso ((homologyFunctor C i).map ((truncLEι C n).app X)))
   · exact isZero_homologyFunctor_obj_truncLE X n i (by lia)
 
 end Cohomology
@@ -247,10 +272,10 @@ the image of a complex `K`: the connecting morphism of the short exact sequence
 `M_q(K) ⟶ H^q(K)[-q]`. -/
 noncomputable def truncLEδOfComplex (K : CochainComplex C ℤ) :
     (homologySingleFunctor C q).obj (Q.obj K) ⟶ ((truncLE C q₀).obj (Q.obj K))⟦(1 : ℤ)⟧ :=
-  (homologySingleFunctorFactors C q).hom.app K ≫
+  (homologySingleFunctorFactorsApp q K).hom ≫
     inv (Q.map (K.truncLEStepToSingle q₀ q hq)) ≫
     triangleOfSESδ (K.truncLEStep_shortExact q₀ q hq) ≫
-    ((truncLEFactors C q₀).inv.app K)⟦(1 : ℤ)⟧'
+    (truncLEFactorsApp q₀ K).inv⟦(1 : ℤ)⟧'
 
 /-- The truncation triangle of the image of a complex `K`. -/
 noncomputable def truncLETriangleOfComplex (K : CochainComplex C ℤ) :
@@ -262,18 +287,23 @@ lemma truncLETriangleOfComplex_distinguished (K : CochainComplex C ℤ) :
     truncLETriangleOfComplex q₀ q hq K ∈ distTriang _ := by
   refine isomorphic_distinguished _
     (triangleOfSES_distinguished (K.truncLEStep_shortExact q₀ q hq)) _ ?_
-  refine Triangle.isoMk _ _ ((truncLEFactors C q₀).app K) ((truncLEFactors C q).app K)
-    ((homologySingleFunctorFactors C q).app K ≪≫
+  refine Triangle.isoMk _ _ (truncLEFactorsApp q₀ K) (truncLEFactorsApp q K)
+    (homologySingleFunctorFactorsApp q K ≪≫
       (asIso (Q.map (K.truncLEStepToSingle q₀ q hq))).symm) ?_ ?_ ?_
-  · dsimp [truncLETriangleOfComplex]
-    rw [truncLEMapOfLE_app_Q, assoc, assoc, Iso.inv_hom_id_app, comp_id]
-    rfl
-  · dsimp [truncLETriangleOfComplex]
-    rw [truncLEToHomologySingle_app_Q_assoc, ← Q.map_comp_assoc,
-      ← CochainComplex.truncLEStep_g_truncLEStepToSingle K q₀ q hq, Q.map_comp_assoc,
+  · change (truncLEMapOfLE C q₀ q (by lia)).app (Q.obj K) ≫ (truncLEFactorsApp q K).hom =
+      (truncLEFactorsApp q₀ K).hom ≫ Q.map (K.truncLEMapOfLE q₀ q (by lia))
+    rw [truncLEMapOfLE_app_Q, assoc, assoc, Iso.inv_hom_id, comp_id]
+  · change (truncLEToHomologySingle C q).app (Q.obj K) ≫ (homologySingleFunctorFactorsApp q K).hom ≫
+      inv (Q.map (K.truncLEStepToSingle q₀ q hq)) =
+        (truncLEFactorsApp q K).hom ≫ Q.map (K.truncLEStep q₀ q hq).g
+    rw [truncLEToHomologySingle_app_Q_assoc,
+      ← CochainComplex.truncLEStep_g_truncLEStepToSingle K q₀ q hq, Q.map_comp, assoc,
       IsIso.hom_inv_id, comp_id]
-  · dsimp [truncLETriangleOfComplex, truncLEδOfComplex]
-    rw [assoc, assoc, assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id, comp_id]
+  · change truncLEδOfComplex q₀ q hq K ≫ (truncLEFactorsApp q₀ K).hom⟦(1 : ℤ)⟧' =
+      ((homologySingleFunctorFactorsApp q K).hom ≫ inv (Q.map (K.truncLEStepToSingle q₀ q hq))) ≫
+        triangleOfSESδ (K.truncLEStep_shortExact q₀ q hq)
+    simp only [truncLEδOfComplex, assoc, ← Functor.map_comp, Iso.inv_hom_id]
+    erw [CategoryTheory.Functor.map_id, comp_id]
 
 /-- The connecting morphism `H^q(X)[-q] ⟶ (τ_{≤ q₀} X)⟦1⟧` of the truncation triangle, at an
 object `X`, obtained by transporting `DerivedCategory.truncLEδOfComplex` along a choice of a
@@ -298,10 +328,10 @@ lemma truncLETriangleObj_distinguished (X : DerivedCategory C) :
     ((homologySingleFunctor C q).mapIso e.symm) ?_ ?_ ?_
   · exact ((truncLEMapOfLE C q₀ q (by lia)).naturality e.inv).symm
   · exact ((truncLEToHomologySingle C q).naturality e.inv).symm
-  · dsimp [truncLETriangleObj, truncLETriangleOfComplex, truncLEδApp]
-    rw [assoc, assoc, ← Functor.map_comp, ← Functor.map_comp, e.hom_inv_id, Functor.map_id,
-      Functor.map_id, comp_id]
-    rfl
+  · change truncLEδApp q₀ q hq X ≫ ((truncLE C q₀).map e.inv)⟦(1 : ℤ)⟧' =
+      (homologySingleFunctor C q).map e.inv ≫ truncLEδOfComplex q₀ q hq (Q.objPreimage X)
+    simp only [truncLEδApp, assoc, ← Functor.map_comp, e, Iso.hom_inv_id]
+    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, comp_id]
 
 include hq in
 lemma subsingleton_shift_truncLE_hom_homologySingle (X Y : DerivedCategory C) :
@@ -315,8 +345,8 @@ lemma subsingleton_shift_truncLE_hom_homologySingle (X Y : DerivedCategory C) :
 
 /-- The connecting morphism `δ : H^q(-)[-q] ⟶ τ_{≤ q₀}(-)⟦1⟧` of the truncation triangles, a
 natural transformation (blueprint `lem-weil-pbc-truncation-triangle`). -/
-noncomputable def truncLEδ : homologySingleFunctor C q ⟶ truncLE C q₀ ⋙ shiftFunctor _ (1 : ℤ)
-    where
+noncomputable def truncLEδ :
+    homologySingleFunctor C q ⟶ truncLE C q₀ ⋙ shiftFunctor _ (1 : ℤ) where
   app X := truncLEδApp q₀ q hq X
   naturality X Y f := by
     have : Subsingleton ((truncLETriangleObj q₀ q hq X).obj₁⟦(1 : ℤ)⟧ ⟶

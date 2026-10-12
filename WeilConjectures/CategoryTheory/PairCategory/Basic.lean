@@ -143,6 +143,16 @@ lemma transitionComp_id_left {i j : ι} (h₁ : i ≤ i) (h : i ≤ j) (A : F.ob
   have := F.mapComp'_id_comp_hom_app (homOfLE h).toLoc A
   simpa [transitionComp, transitionId, mapId'_eq_mapId] using this
 
+
+/-- The unit law of the composition isomorphisms, for `i ≤ i ≤ j`, inverse form. -/
+@[reassoc]
+lemma transitionComp_id_left_inv {i j : ι} (h₁ : i ≤ i) (h : i ≤ j) (A : F.obj ⟨i⟩) :
+    (F.transitionComp h₁ h h).inv.app A =
+      (F.transition h).map ((F.transitionId i h₁).hom.app A) := by
+  rw [← cancel_epi ((F.transitionComp h₁ h h).hom.app A), transitionComp_hom_inv_id_app,
+    transitionComp_id_left, ← Functor.map_comp, Iso.inv_hom_id_app]
+  exact (Functor.map_id _ _).symm
+
 /-- The unit law of the composition isomorphisms, for `i ≤ j ≤ j`. -/
 @[reassoc]
 lemma transitionComp_id_right {i j : ι} (h : i ≤ j) (h₂ : j ≤ j) (A : F.obj ⟨i⟩) :
@@ -474,14 +484,16 @@ lemma id_eq_homMk (X : PairCategory F) : 𝟙 X = homMk (le_refl X.idx) le_rfl (
 
 /-- Any two parallel morphisms are represented at a common stage. -/
 lemma exists_homMk₂ {X Y : PairCategory F} (f g : X ⟶ Y) :
-    ∃ (k : ι) (hX : X.idx ≤ k) (hY : Y.idx ≤ k) (u v : X.at_ hX ⟶ Y.at_ hY), f = homMk hX hY u ∧ g = homMk hX hY v := by
+    ∃ (k : ι) (hX : X.idx ≤ k) (hY : Y.idx ≤ k) (u v : X.at_ hX ⟶ Y.at_ hY),
+      f = homMk hX hY u ∧ g = homMk hX hY v := by
   obtain ⟨k₁, -, hX, hY, u, rfl⟩ := exists_homMk_ge f X.idx
   obtain ⟨k, h, hX', hY', v, rfl⟩ := exists_homMk_ge g k₁
   exact ⟨k, hX', hY', _, v, (homMk_trHom h hX hY hX' hY' u).symm, rfl⟩
 
 /-- Any three morphisms `f, g : X ⟶ Y`, `h : Y ⟶ Z` are represented at a common stage. -/
 lemma exists_homMk₃ {X Y Z : PairCategory F} (f g : X ⟶ Y) (h : Y ⟶ Z) :
-    ∃ (k : ι) (hX : X.idx ≤ k) (hY : Y.idx ≤ k) (hZ : Z.idx ≤ k) (u v : X.at_ hX ⟶ Y.at_ hY) (w : Y.at_ hY ⟶ Z.at_ hZ),
+    ∃ (k : ι) (hX : X.idx ≤ k) (hY : Y.idx ≤ k) (hZ : Z.idx ≤ k)
+      (u v : X.at_ hX ⟶ Y.at_ hY) (w : Y.at_ hY ⟶ Z.at_ hZ),
       f = homMk hX hY u ∧ g = homMk hX hY v ∧ h = homMk hY hZ w := by
   obtain ⟨k₁, hX, hY, u, v, rfl, rfl⟩ := exists_homMk₂ f g
   obtain ⟨k, hk, hY', hZ, w, rfl⟩ := exists_homMk_ge h k₁
@@ -490,7 +502,8 @@ lemma exists_homMk₃ {X Y Z : PairCategory F} (f g : X ⟶ Y) (h : Y ⟶ Z) :
 
 /-- Any three morphisms `f : X ⟶ Y`, `g h : Y ⟶ Z` are represented at a common stage. -/
 lemma exists_homMk₃' {X Y Z : PairCategory F} (f : X ⟶ Y) (g h : Y ⟶ Z) :
-    ∃ (k : ι) (hX : X.idx ≤ k) (hY : Y.idx ≤ k) (hZ : Z.idx ≤ k) (u : X.at_ hX ⟶ Y.at_ hY) (v w : Y.at_ hY ⟶ Z.at_ hZ),
+    ∃ (k : ι) (hX : X.idx ≤ k) (hY : Y.idx ≤ k) (hZ : Z.idx ≤ k)
+      (u : X.at_ hX ⟶ Y.at_ hY) (v w : Y.at_ hY ⟶ Z.at_ hZ),
       f = homMk hX hY u ∧ g = homMk hY hZ v ∧ h = homMk hY hZ w := by
   obtain ⟨k₁, hY, hZ, v, w, rfl, rfl⟩ := exists_homMk₂ g h
   obtain ⟨k, hk, hX, hY', u, rfl⟩ := exists_homMk_ge f k₁
@@ -534,6 +547,20 @@ lemma homMk_eq {X Y : PairCategory F} {k : ι} (hX : X.idx ≤ k) (hY : Y.idx �
     (u : X.at_ hX ⟶ Y.at_ hY) :
     homMk hX hY u = (isoToStage X hX).hom ≫ (incl F k).map u ≫ (isoToStage Y hY).inv := by
   simp [isoToStage, incl, homMk_comp_homMk]
+
+/-- The image under the stage inclusion `j_i` of a morphism `a : A ⟶ B` of `F i` is represented,
+at any further stage `k`, by `T_{k/i}(a)`. -/
+lemma incl_map_eq_homMk {i k : ι} (h : i ≤ k) {A B : F.obj ⟨i⟩} (a : A ⟶ B) :
+    (incl F i).map a = homMk (X := (⟨i, A⟩ : PairCategory F)) (Y := ⟨i, B⟩) h h
+      ((F.transition h).map a) := by
+  refine ((homMk_trHom (X := (⟨i, A⟩ : PairCategory F)) (Y := ⟨i, B⟩) h le_rfl le_rfl h h
+    _).symm).trans ?_
+  congr 1
+  simp only [trHom]
+  rw [transitionComp_id_left F le_rfl h A, transitionComp_id_left_inv F le_rfl h B,
+    ← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  simp
 
 end PairCategory
 

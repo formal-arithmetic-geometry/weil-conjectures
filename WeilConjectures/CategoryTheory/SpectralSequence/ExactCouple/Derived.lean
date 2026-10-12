@@ -101,7 +101,8 @@ lemma αbar_ι' (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' :
     X.αbar p q p' q' ≫ X.ι' p' q' = X.α p q p' q' :=
   kernel.lift_ι _ _ _
 
-instance (p q p' q' : ℤ) (hp : p' + 1 = p) (hq : q + 1 = q') : Epi (X.αbar p q p' q' hp hq) :=
+instance epi_αbar (p q p' q' : ℤ) (hp : p' + 1 = p) (hq : q + 1 = q') :
+    Epi (X.αbar p q p' q' hp hq) :=
   (X.exact_α_g p q p' q' (p' + s) (q' - s)).epi_kernelLift
 
 /-- The restriction `α' : D'^{p,q} ⟶ D'^{p-1,q+1}` of `α`. -/
