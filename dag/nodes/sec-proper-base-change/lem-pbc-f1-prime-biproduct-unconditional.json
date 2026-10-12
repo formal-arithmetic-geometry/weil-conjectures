@@ -14,26 +14,37 @@
  ],
  "proof": [
   {
-   "text": "Forgetting coefficients, inverse image, and every cohomology functor are additive, so they carry the given finite biproduct to a finite biproduct. Naturality identifies cohomology pullback and restriction with sums of the component maps. A finite sum of abelian groups is subsingleton or finite iff all its components are, and a diagonal finite sum of maps is bijective or surjective iff every component map is. Apply these facts degree by degree to C1, C2, C5, C7 and C8. The affine and proper hypotheses are common to all components. Constructibility of H follows from constructibility of all G a, closure under finite sums and transport along e; thus the conditional C5 hypotheses can be applied in both directions. Empty sums give the zero sheaf and zero cohomology, while an empty conjunction of component assertions is true. Here cohomology means the Ext-based Sheaf.H occurring in the eight predicates: Sheaf.functorH is additive, and Ext.addEquivBiproduct gives the finite product of component groups. No identification with derived global sections is used.",
+   "text": "Taking underlying abelian sheaves is additive by reflexivity, and Sheaf.functorH is additive. For their composite F, identify F(H) with the product of F(G i) using F.mapIso(e), Functor.mapBiproduct and AddCommGrpCat.biproductIsoPi. The coordinate at i is F.map(e.hom composed with biproduct.π G i). This is a product equivalence also for the empty index type. Subsingleton and finiteness are equivalent to their coordinatewise versions: evaluation is surjective because every factor contains zero; conversely products of subsingletons are subsingletons and finite products of finite types are finite.",
+   "uses": [
+    "def-weil-additive-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any scheme map a and degree q, form the natural transformation with components Etale.cohomologyMap a (-) q from the underlying-sheaf cohomology functor to its inverse-image counterpart. Both functors are additive; naturality is the existing Etale.cohomologyMap_map. In the product coordinates, surjectivity implies surjectivity of each factor by lifting a vector supported at that factor, and the converse follows by choosing coordinate preimages. Injectivity implies factorwise injectivity because each summand has injection biproduct.ι G i composed with e.inv, retracted by e.hom composed with biproduct.π G i, and the square commutes by naturality. The converse follows by the joint injectivity of coordinates. Combine injectivity and surjectivity for bijectivity.",
    "uses": [
     "def-weil-additive-category",
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "def-weil-pbc-cohomology-pullback"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Unfold C1, C2, C5, C7 and C8 and apply the coordinatewise tests degree by degree. For C2 and C7 the affine or proper instance is shared. For C5 use the assumed constructibility of H in the forward direction and hGc i in the reverse direction; no constructibility-of-biproduct theorem is required. Assemble the five implications into the stated equivalence by introducing or projecting the five conjunctions.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-additive-category",
-  "def-weil-pbc-eight-curve-assertions",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-cohomology-pullback-functorial"
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-eight-curve-assertions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Agent expansion of the finite-sum comparison in Stacks 03SC; elementary common-prime exceptions as in the parent node."
+  "place": "Q2 Lean proof of the finite-sum argument in Theorem 03SC, fourth paragraph; Lemma 0A5C. Uses the existing Ext-based functor and naturality API directly."
  },
  "mathlib_searches": [
   {
@@ -111,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T053927-L-2633522",
-  "kind": "interface",
+  "landing": "20261012T063518-L-3158640",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
