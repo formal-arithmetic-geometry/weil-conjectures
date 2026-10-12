@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-affine-derived-unit-isomorphism",
+ "kind": "statement",
+ "title": "The unit of the affine derived adjunction is invertible",
+ "statement": "Let A be a commutative ring and adj : F ⊣ G with F : D(A) → D_QCoh(Spec A), G : D_QCoh(Spec A) → D(A), using [def-pc-derived-category]. Assume Q followed by F and inclusion is naturally isomorphic to termwise tilde followed by Q, and G is naturally isomorphic to derived global sections with scalar transport [def-pc-ringed-spaces-derived-direct-image], [def-sc-ringed-space-module-cohomology], [lem-weil-pbc-affine-tilde-gamma-adjunction]. For every M in D(A), adj.unit_M is invertible.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.3, Lemma 36.3.5 (Tag 06Z0), proof"
+ },
+ "proof": [
+  {
+   "text": "Proof: Construct the canonical sections comparison as follows. Global sections\npreserves products as a right adjoint, and scalar transport through ΓSpecIso is\nexact and preserves products. Affine vanishing gives cohomological bound one.\nApply the unbounded bound to τ_{≤ -1}E: derived sections vanish in degrees zero\nand one. The truncation triangle identifies H^0(RΓ(E)) with H^0(RΓ(τ_{≥ 0}E));\nleft exactness identifies the latter with Γ(H^0(E)). These identifications come\nfrom the truncation maps and the right-derived-functor unit on complexes, and\nare natural. Shifts give them in every degree. This constructs the comparison\nwith its canonical maps, rather than selecting an arbitrary natural isomorphism.\nFor a complex P of A-modules choose a K-injective resolution s : tilde(P) → I.\nThe canonical derived unit is represented by the ordinary termwise unit\nP → Γ(tilde(P)), followed by Γ(s). The truncation comparison is induced by the\nright-derived-functor unit on complexes. Its naturality for s identifies the map\non H^n with H^n(P) → Γ(tilde(H^n(P))) → Γ(H^n(I)). Here the first map is the\nordinary module unit and the second is Γ(H^n(s)), after the exact tilde\ncomparison of `affineDerivedTilde_homology_comparison`. Both maps are invertible:\ntilde is fully faithful, and s is a quasi-isomorphism. Thus the derived unit\ninduces an isomorphism in every degree and is itself invertible by the derived\ncohomology criterion. Every object of D(A) is represented by a complex P.\nDescend hF through the localization Q and transport the canonical adjunction\nusing hG. Uniqueness of right adjoints identifies any adjunction on F and G with\nthis one and preserves invertibility of its unit. No counit invertibility is\nused. The truncation comparison applies to unbounded complexes; the zero ring\nand zero complex are included.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0, module-unit calculation following the derived-sections cohomology comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine derived sections commute with cohomology and the affine derived unit is invertible",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine derived global sections compute global sections of cohomology",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H, affine Zariski sheaf equivalence; no unbounded derived comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*rightDerived|rightDerived.*homology|isIso.*unit",
+   "results": "Mathlib Abelian.RightDerived treats natural degrees; source PlusAdjunctionAcyclic treats bounded below units only. No affine unbounded statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedCounitHomologyFactorization",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Tag 06Z0 affine derived equivalence: truncation sections comparison and invertibility of the module unit",
+   "via": [
+    "new-affine-derived-counit-homology-factorization",
+    "new-affine-qcoh-derived-adjunction-unit-counit",
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedUnitIsomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedUnitIsomorphism.lean",
+  "declaration": "AlgebraicGeometry.affineDerivedUnit_isIso",
+  "statement": "theorem affineDerivedUnit_isIso (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (F : DerivedCategory (ModuleCat.{u} A) ⥤ schemeDerivedQCohCategory (Spec (.of A))) (G : schemeDerivedQCohCategory (Spec (.of A)) ⥤ DerivedCategory (ModuleCat.{u} A)) (adj : F ⊣ G) (hF : Nonempty (DerivedCategory.Q ⋙ F ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι ≅ @Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)) (hG : Nonempty (G ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙ ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor)) (M : DerivedCategory (ModuleCat.{u} A)) : IsIso (adj.unit.app M)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T095850-L-311508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T095850-L-311508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

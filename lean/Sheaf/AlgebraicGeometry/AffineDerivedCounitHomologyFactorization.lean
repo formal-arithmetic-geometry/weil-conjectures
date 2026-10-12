@@ -6,9 +6,8 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Adjunction.Basic
 
-import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import Sheaf.AlgebraicGeometry.AffineDerivedUnitIsomorphism
+import Sheaf.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison
 
 /-! # The derived affine counit on cohomology
 
@@ -75,6 +74,52 @@ theorem affineDerivedCounit_homology_factorization (A : Type u) [CommRing A]
         e.hom ≫ Scheme.Modules.fromTildeΓ (R := .of A)
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).obj K.obj) := by
-  sorry
+  have hreflect {M N : schemeDerivedQCohCategory (Spec (.of A))} (f : M ⟶ N)
+      (hf : IsIso (G.map f)) : IsIso f := by
+    suffices h : IsIso ((schemeDerivedQCohProperty (Spec (.of A))).ι.map f) from
+      isIso_of_reflects_iso _ (schemeDerivedQCohProperty (Spec (.of A))).ι
+    apply (DerivedCategory.isIso_iff _ _).2
+    intro i
+    obtain ⟨e⟩ := affineDerivedSections_homology_comparison A G hG i
+    have hmap : IsIso ((G ⋙ DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).map f) := by
+      change IsIso ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).map (G.map f))
+      infer_instance
+    have hΓ := (NatIso.isIso_map_iff e f).1 hmap
+    let H := DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i
+    let g := H.map ((schemeDerivedQCohProperty (Spec (.of A))).ι.map f)
+    have hM := M.property i
+    have hN := N.property i
+    have : IsIso (Scheme.Modules.fromTildeΓ (R := .of A) (H.obj M.obj)) :=
+      Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := .of A) _
+    have : IsIso (Scheme.Modules.fromTildeΓ (R := .of A) (H.obj N.obj)) :=
+      Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := .of A) _
+    change IsIso ((moduleSpecΓFunctor (R := .of A)).map g) at hΓ
+    let : IsIso ((moduleSpecΓFunctor (R := .of A)).map g) := hΓ
+    have heq := (tilde.adjunction (R := .of A)).counit.naturality g
+    have ht : IsIso ((tilde.functor (.of A)).map
+        ((moduleSpecΓFunctor (R := .of A)).map g)) :=
+      Functor.map_isIso (tilde.functor (.of A)) _
+    change (tilde.functor (.of A)).map ((moduleSpecΓFunctor (R := .of A)).map g) ≫
+      Scheme.Modules.fromTildeΓ (R := .of A) (H.obj N.obj) =
+      Scheme.Modules.fromTildeΓ (R := .of A) (H.obj M.obj) ≫ g at heq
+    have : IsIso g := IsIso.of_isIso_fac_left heq.symm
+    exact this
+  have hu := affineDerivedUnit_isIso A F G adj hF hG (G.obj K)
+  have hGc : IsIso (G.map (adj.counit.app K)) :=
+    isIso_of_hom_comp_eq_id _ (adj.right_triangle_components K)
+  have hc := hreflect (adj.counit.app K) hGc
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n
+  let c := H.map ((schemeDerivedQCohProperty (Spec (.of A))).ι.map (adj.counit.app K))
+  have hK := K.property n
+  have : IsIso (Scheme.Modules.fromTildeΓ (R := .of A) (H.obj K.obj)) :=
+    Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := .of A) _
+  refine ⟨asIso c ≪≫ (asIso (Scheme.Modules.fromTildeΓ (R := .of A)
+    (H.obj K.obj))).symm, ?_⟩
+  change c = (c ≫ inv (Scheme.Modules.fromTildeΓ (R := .of A) (H.obj K.obj))) ≫
+    Scheme.Modules.fromTildeΓ (R := .of A) (H.obj K.obj)
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+
 
 end AlgebraicGeometry
