@@ -1,0 +1,147 @@
+{
+ "id": "lem-sp-second-filtration-signed-first-page",
+ "kind": "statement",
+ "title": "Signed row comparison for one concrete first-page quotient",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian, def-sp-abelian], and let $F:\\mathcal A\\to\\mathcal B$ be additive and left exact [def-sp-left-exact-additive]. Let $I$ be a bicomplex indexed by $s\\in\\mathbf Z$ and $r\\in\\mathbf N$, with $I^s=0$ for $s<b$ for some $b\\in\\mathbf Z$. Form the mapped extended flipped bicomplex $J$ [def-sp-cartan-eilenberg-presentation]. Let $L$ be a decreasing subcomplex filtration of $\\operatorname{Tot}(J)$ [def-sp-filtration] whose degreewise steps equal the second-filtration sums [def-sp-double-complex-total]. Let $D$ be any FilteredComplexPageDifferential for this filtered total at page 1 [lem-sp-filtered-complex-page-differential]; in particular its objects are the actual cokernels $Q_1^{s,r}=\\operatorname{coker}(B_1^{s,r}\\hookrightarrow Z_1^{s,r})$ [def-sp-filtered-complex-subquotients], and its differential is specified on representatives by $z\\mapsto dz$. There are isomorphisms $e_{r,s}:Q_1^{s,r}\\cong H^r(F(I^s))$ for all $r\\in\\mathbf N$, $s\\in\\mathbf Z$, satisfying $D.d_{(s,r),(s+1,r)}e_{r,s+1}=(-1)^r e_{r,s}H^r(F(I.d_{s,s+1}))$. This assertion concerns one concrete page and has no spectral-sequence existence or higher-page assertion.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clauses 2 and 4; Tag 012K, representative differential formula"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-double-complex-total",
+  "lem-sp-filtered-complex-page-differential",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Put J = flip(mappedFunctor F(I)) and n = s+r. Lift the diagonal coprojection J^(r,s) -> Tot(J)^n through the monomorphism L^s K^n -> K^n. This is possible since the image of that coprojection is one of the summands of the second-filtration step. The projection of this lift to gr^s L is an isomorphism: the projection from the total coproduct to J^(r,s) restricts to L^s and kills L^(s+1), and gives its inverse. Check the two identities on each diagonal coprojection. The finite interval [s,n] is exactly the surviving diagonal range, since the resolution coordinate n-j is nonnegative. The lower bound on the complex coordinate permits finite diagonal coproducts, including negative s.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total differential on the chosen diagonal inclusion is its resolution differential plus (-1)^r times its complex-coordinate differential. The latter lands in the next filtration step and is killed in gr^s L. Thus the isomorphisms of the previous step intertwine the graded differential and the row resolution differential. Apply the first-page cycles-boundaries identities to identify the filtered Z_1 and B_1 with that row differential kernel and image. Taking the cokernel of B_1 -> Z_1 gives the canonical row-homology isomorphism from the concrete page object. Extension by zero along Nat -> Int preserves homology at every natural degree; at r=0 the incoming term is zero.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-first-page-cycles-boundaries"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the diagonal lift to the row-cycle object at r. Its resolution differential is zero, so its total differential is (-1)^r times the diagonal lift of the complex-coordinate map into the row at s+1. That image is a row cycle because the two bicomplex differentials commute. Substitute these lifts and their graded cycle classes into D.on_representatives. Compose with the canonical quotient comparisons and cancel the epimorphism from row cycles onto row homology. The resulting equation is exactly d_1 followed by the target comparison equals (-1)^r times the source comparison followed by homologyMap of F(I.d s (s+1)). The map of row cycles sends row boundaries to row boundaries since I.d is a chain map. Preadditivity moves the unit scalar through the quotient maps. No higher-page construction or arbitrary page-object isomorphism is used.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-first-page-cycles-boundaries",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clauses 2 and 4; Tag 012K, representative differential formula",
+  "note": "The source states the signed double-complex calculation with proof omitted. The diagonal-summand, quotient, and representative argument is written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "secondFiltration|filteredComplexPage|spectralSequence",
+   "results": "25 hits; top: Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No theorem for this concrete filtered quotient and its signed row comparison; total differential and general homology tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyIsoSc'",
+   "results": "11 hits; top: HomologicalComplex.homologyIsoSc', HomologicalComplex.homologyIsoSc'_eq_refl, HomologicalComplex.homologyIsoSc'_inv_ι, HomologicalComplex.π_homologyIsoSc'_hom, HomologicalComplex.homologyIsoSc'_hom_ι, HomologicalComplex.π_homologyIsoSc'_inv, HomologicalComplex.homologyIsoSc'_inv_ι_assoc, HomologicalComplex.π_homologyIsoSc'_hom_assoc",
+   "date": "2026-10-12",
+   "verdict": "No theorem for this concrete filtered quotient and its signed row comparison; total differential and general homology tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first page of the spectral sequence of the second filtration of a double complex is row cohomology with signed differential",
+   "results": "8 hits; top: HomologicalComplex₂.d₁_eq, HomologicalComplex₂.totalAux.d₁_eq, HomologicalComplex.mapBifunctor.d₁_eq', HomologicalComplex₂.totalAux.d₂_eq, HomologicalComplex.mapBifunctor.d₂_eq', HomologicalComplex.mapBifunctor₂₃.d₁_eq, HomologicalComplex.mapBifunctor.d₁_eq, HomologicalComplex₂.d₂_eq",
+   "date": "2026-10-12",
+   "verdict": "No theorem for this concrete filtered quotient and its signed row comparison; total differential and general homology tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first page of the second filtration of a double complex is row cohomology with differential given by the sign of the row degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SecondFiltrationRowCohomology",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 1: the second-filtration first-page row identification, before sign correction; concrete page-one calculation only",
+   "via": [
+    "lem-sp-second-filtration-row-cohomology",
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SecondFiltrationSignedFirstPage",
+  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationSignedFirstPage.lean",
+  "declaration": "CategoryTheory.Functor.secondFiltration_signed_firstPage",
+  "statement": "theorem secondFiltration_signed_firstPage\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p)\n    (D : FilteredComplexPageDifferential\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)) L 1) :\n    ∃ e : ∀ (r : ℕ) (s : ℤ), D.page.X (s, (r : ℤ)) ≅\n        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).homology r,\n      ∀ (r : ℕ) (s : ℤ),\n        D.page.d (s, (r : ℤ)) (s + 1, (r : ℤ)) ≫ (e r (s + 1)).hom =\n          (r : ℤ).negOnePow • ((e r s).hom ≫ HomologicalComplex.homologyMap\n            ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map (I.d s (s + 1))) r)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ec08e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T202235-L-702851",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ec08e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T202235-L-702851",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records and source formulas; both modules and direct importer CartanEilenbergRowPages compile cleanly against the delivery; axioms and pruning match the report."
+ }
+}

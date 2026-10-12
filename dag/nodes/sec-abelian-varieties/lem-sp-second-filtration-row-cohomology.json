@@ -17,26 +17,57 @@
  ],
  "proof": [
   {
-   "text": "Build the spectral sequence of the filtration by the differential-object self-map construction, retaining the page-zero and cycle/boundary identifications. The graded complex at s is the row F(I.X s), extended by zero and placed in degrees s+r: the component raising s disappears on taking the quotient. Thus page one is its cohomology. To compute d₁, lift a row cocycle to L^s/L^(s+2). Its total differential has only the component raising complex degree, with coefficient (-1)^r. The connecting map is consequently (-1)^r times the map of row cohomology induced by I.d s (s+1). The extended row is zero in negative resolution degrees, so its cohomology there vanishes. This proves the negative-degree page-one clause.",
+   "text": "Construct the page-zero bigraded complex P directly from the terms of gr^p L in degree p+q. Its differential is the graded differential when the first coordinates agree and zero otherwise. The shape and square-zero identities follow from the graded complex and integer arithmetic. The page-zero comparisons are identity isomorphisms. Apply filteredComplex_graded_homology to identify its homology at each bidegree with the concrete first-page quotient.",
    "uses": [
-    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-    "def-sp-double-complex-total",
-    "def-sp-cartan-eilenberg-presentation",
+    "lem-sp-filtered-complex-graded-homology",
+    "def-sp-filtration",
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For each r >= 1 choose the unique FilteredComplexPageDifferential on the actual quotient objects. Use its page as page r. The page-zero homology comparison from step 1 and filteredComplex_page_homology for each positive page supply all successor-page isomorphisms, transporting the integer index r+1 = rprime. This constructs the full Mathlib spectral-sequence record. Every positive-page quotient comparison is the identity isomorphism.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-page-homology",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply secondFiltration_signed_firstPage to the chosen concrete first-page differential. Its row comparisons and signed differential identity give exactly the required natural-degree clause for the assembled spectral sequence.",
+   "uses": [
+    "lem-sp-second-filtration-signed-first-page",
+    "def-sp-cartan-eilenberg-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For q<0, the interval [p,p+q] is empty. The second-filtration formula and hL give L.complexStep p (p+q)=bottom. Factor the subcomplex inclusion through its image subobject to show its component is zero; since the inclusion is mono, the degreewise step object is zero. The graded projection is degreewise epic, so the graded term is zero. Its cycle subobject is zero by monicity, and the concrete first-page quotient is zero by its epic cokernel projection. This proves the negative-resolution-degree clause without any additional hole.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-  "def-sp-double-complex-total",
   "def-sp-cartan-eilenberg-presentation",
-  "def-sp-filtered-complex-subquotients"
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-boundaries-le-cycles",
+  "lem-sp-filtered-complex-graded-homology",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-page-homology",
+  "lem-sp-second-filtration-signed-first-page"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 0130; thm-sp-if-e1 proof paragraph 1, row computation before sign correction"
+  "place": "Tags 012K and 0130, representative quotient construction and second-filtration row computation",
+  "note": "E1 constructs page zero and all positive pages explicitly, proves negative-degree vanishing, and reduces only the signed concrete first-page row comparison to one new node."
  },
  "mathlib_searches": [
   {
@@ -112,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W3",
+  "reviewer": "X-ec08e",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T095930-L-327103",
+  "landing": "20261012T202235-L-702851",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records and source formulas; both modules and direct importer CartanEilenbergRowPages compile cleanly against the delivery; axioms and pruning match the report."
  }
 }
