@@ -8,6 +8,10 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 
+import Mathlib.CategoryTheory.Monoidal.Closed.Braided
+import Mathlib.LinearAlgebra.Dual.Lemmas
+import Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernel
+
 /-! # Dual of a finite constant module sheaf
 
 Source: the finite presentation argument in the docstring of
@@ -44,6 +48,36 @@ theorem nonempty_constantModuleDualIso
     Nonempty ((ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).obj
       (𝟙_ _) ≅ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (M →ₗ[Λ] Λ))) := by
-  sorry
+  classical
+  have : Module.FinitePresentation Λ M := Module.finitePresentation_of_finite Λ M
+  obtain ⟨n, m, f, g, hf, hgf⟩ := Module.FinitePresentation.exists_fin' Λ M
+  let C := constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  let D := MonoidalClosed.internalHom.flip.obj
+    (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+  let a : ModuleCat.of Λ (Fin m → Λ) ⟶ ModuleCat.of Λ (Fin n → Λ) :=
+    ModuleCat.ofHom g
+  have hker : LinearMap.ker f = LinearMap.range g := LinearMap.exact_iff.mp hgf
+  let eM : Limits.cokernel a ≅ M :=
+    (Limits.cokernelIsCokernel a).coconePointUniqueUpToIso
+      (ModuleCat.isColimitCokernelCofork a (ModuleCat.ofHom f) hgf hf)
+  let eC : C.obj M ≅ Limits.cokernel (C.map a) :=
+    C.mapIso eM.symm ≪≫ Limits.PreservesCokernel.iso C a
+  have hrange : LinearMap.range f.dualMap = LinearMap.ker g.dualMap := by
+    rw [LinearMap.range_dualMap_eq_dualAnnihilator_ker_of_surjective f hf,
+      LinearMap.ker_dualMap_eq_dualAnnihilator_range, hker]
+  let eA : ModuleCat.of Λ (M →ₗ[Λ] Λ) ≅ ModuleCat.of Λ (LinearMap.ker g.dualMap) :=
+    ((LinearEquiv.ofInjective f.dualMap (LinearMap.dualMap_injective_of_surjective hf))
+      ≪≫ₗ LinearEquiv.ofEq _ _ hrange).toModuleIso
+  let eD : D.obj (Opposite.op (C.obj M)) ≅
+      Limits.kernel (D.map (C.map a).op) := by
+    calc
+      D.obj (Opposite.op (C.obj M)) ≅
+          D.obj (Opposite.op (Limits.cokernel (C.map a))) := D.mapIso eC.symm.op
+      _ ≅ D.obj (Limits.kernel (C.map a).op) :=
+        D.mapIso (kernelOpOp (C.map a)).symm
+      _ ≅ Limits.kernel (D.map (C.map a).op) :=
+        Limits.PreservesKernel.iso D (C.map a).op
+  obtain ⟨eF⟩ := nonempty_constantFiniteMatrixDualKernelIso X n m g
+  exact ⟨eD ≪≫ eF ≪≫ C.mapIso eA.symm⟩
 
 end AlgebraicGeometry.Scheme
