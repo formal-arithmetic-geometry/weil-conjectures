@@ -82,6 +82,7 @@ noncomputable def Etale.upperStarSectionsMap (G : Sheaf S.smallEtaleTopology A) 
 
 variable {A} {p : X ⟶ S}
 
+omit [HasSmallSiteSheafify A] in
 /-- The maps `Etale.upperStarSectionsMap` are natural: for `f : V' ⟶ V`, `ψ : W' ⟶ W` and
 `φ' : W' ⟶ V' ×_S X` compatible with `φ`, restricting along `f` and then mapping by `φ'` is
 mapping by `φ` and then restricting along `ψ`. -/
@@ -278,6 +279,48 @@ lemma Etale.isPullback_chart :
   rw [Etale.chartProj_chartφ, Etale.chartι_left]
   exact IsPullback.of_hasPullback _ _
 
+
+lemma Etale.chartProj_comp_map {W' : X.Etale}
+    (α : W' ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V') :
+    Etale.chartProj p (α ≫ (MorphismProperty.Over.pullback @Etale ⊤ p).map f) =
+      Etale.chartProj p α ≫ f.left := by
+  change (α ≫ _).left ≫ _ = _
+  rw [MorphismProperty.Comma.comp_left_assoc, MorphismProperty.Over.pullback_map_left,
+    pullback.lift_fst, Category.assoc]
+
+lemma Etale.chartProj_comp {W' : X.Etale} (θ : W' ⟶ W) :
+    Etale.chartProj p (θ ≫ φ) = θ.left ≫ Etale.chartProj p φ := by
+  change (θ ≫ φ).left ≫ _ = _
+  rw [MorphismProperty.Comma.comp_left_assoc]
+
+/-- The morphism `W ×_V V'' ⟶ W ×_V V'` induced by `g : V'' ⟶ V'` over `V`. -/
+noncomputable def Etale.chartMap {V'' : S.Etale} (g : V'' ⟶ V') (h : V'' ⟶ V)
+    (hgf : g ≫ f = h) : Etale.chart φ h ⟶ Etale.chart φ f :=
+  MorphismProperty.Over.homMk
+    (pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ g.left) (by
+      rw [pullback.condition, Category.assoc, ← hgf]
+      rfl))
+    (by simp [Etale.chart_hom])
+
+@[reassoc (attr := simp)]
+lemma Etale.chartMap_chartι {V'' : S.Etale} (g : V'' ⟶ V') (h : V'' ⟶ V)
+    (hgf : g ≫ f = h) :
+    Etale.chartMap φ f g h hgf ≫ Etale.chartι φ f = Etale.chartι φ h := by
+  apply MorphismProperty.Over.Hom.ext
+  rw [MorphismProperty.Comma.comp_left]
+  simp [Etale.chartMap, Etale.chartι]
+
+lemma Etale.chartφ_chartMap {V'' : S.Etale} (g : V'' ⟶ V') (h : V'' ⟶ V)
+    (hgf : g ≫ f = h) :
+    Etale.chartφ φ h ≫ (MorphismProperty.Over.pullback @Etale ⊤ p).map g =
+      Etale.chartMap φ f g h hgf ≫ Etale.chartφ φ f := by
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext
+  all_goals rw [MorphismProperty.Comma.comp_left_assoc, MorphismProperty.Comma.comp_left_assoc,
+    MorphismProperty.Over.pullback_map_left]
+  · simp [Etale.chartφ, Etale.chartMap]
+  · simp [Etale.chartφ, Etale.chartMap]
+
 end Chart
 
 section Local
@@ -305,7 +348,7 @@ lemma Etale.exists_mem_agreementLocus_chart
   obtain ⟨V₀, v₀, c₀, hc₀⟩ :=
     (pointSmallEtale (s ≫ p)).toPresheafFiber_jointly_surjective (P := G.obj) (e.hom germσ)
   -- a common refinement of the pointed étale neighbourhoods `(V₀, v₀)` and `(V, x ≫ q)`
-  haveI : IsCofiltered (pointSmallEtale (s ≫ p)).fiber.Elements :=
+  have : IsCofiltered (pointSmallEtale (s ≫ p)).fiber.Elements :=
     inferInstanceAs (IsCofiltered
       (Scheme.Etale.forget S ⋙ coyoneda.obj (op (Over.mk (s ≫ p)))).Elements)
   let a₀ : (pointSmallEtale (s ≫ p)).fiber.Elements := ⟨V₀, v₀⟩
@@ -461,6 +504,121 @@ lemma Etale.mem_agreementLocus_of_chartProj_eq
   rcases isClopen_iff.1 hA with h | h
   · exact absurd (h ▸ (show (⟨z, rfl⟩ : Fb) ∈ A from hz)) (Set.notMem_empty _)
   · exact (h.symm ▸ Set.mem_univ (⟨z', hzz'⟩ : Fb) : (⟨z', hzz'⟩ : Fb) ∈ A)
+/-- **Local surjectivity.** If `q : W ⟶ V` is flat, quasi-compact with geometrically connected
+fibres, every section `σ` of `p^* G` over `W` is, near every point `v` of `V`, after base change
+along an étale `f : V' ⟶ V` whose image contains `v`, the image of a section of `G` over
+`V'`. -/
+lemma Etale.exists_chartι_map_eq_upperStarSectionsMap
+    (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    [Flat (Etale.chartProj p φ)] [QuasiCompact (Etale.chartProj p φ)]
+    [GeometricallyConnected (Etale.chartProj p φ)]
+    (σ : ((p)^*[_].obj G).obj.obj (op W)) (v : V.left) :
+    ∃ (V' : S.Etale) (f : V' ⟶ V) (c : G.obj.obj (op V')), v ∈ Set.range f.left ∧
+      ((p)^*[_].obj G).obj.map (Etale.chartι φ f).op σ =
+        Etale.upperStarSectionsMap _ p G (Etale.chartφ φ f) c := by
+  let H := ((p)^*[ModuleCat.{u + 1} Λ].obj G)
+  obtain ⟨x, rfl⟩ := (Etale.chartProj p φ).surjective v
+  obtain ⟨V₁, f₁, c, x₁, hx₁, hc⟩ := Etale.exists_mem_agreementLocus_chart G φ σ x
+  let ψ₁ := Etale.chartι φ f₁
+  let φ₁ := Etale.chartφ φ f₁
+  let q₁ := Etale.chartProj p φ₁
+  have hq₁ : q₁ = pullback.snd (Etale.chartProj p φ) f₁.left := Etale.chartProj_chartφ φ f₁
+  have : Flat q₁ := by rw [hq₁]; infer_instance
+  have : QuasiCompact q₁ := by rw [hq₁]; infer_instance
+  have : GeometricallyConnected q₁ := by rw [hq₁]; infer_instance
+  let U := Etale.agreementLocus H (H.obj.map ψ₁.op σ) (Etale.upperStarSectionsMap _ p G φ₁ c)
+  have hsat {u u'} (h : q₁ u' = q₁ u) (hu : u ∈ U) : u' ∈ U :=
+    Etale.mem_agreementLocus_of_chartProj_eq G φ₁
+      (fun y ↦ (q₁.isConnected_preimage_singleton y).isPreconnected) _ _ h hu
+  have hpre : q₁ ⁻¹' (q₁ '' U) = U := by
+    refine Set.Subset.antisymm ?_ (Set.subset_preimage_image _ _)
+    rintro u' ⟨u, hu, hq⟩
+    exact hsat hq.symm hu
+  have hopen : IsOpen (q₁ '' U) := by
+    rw [← (Flat.isQuotientMap_of_surjective q₁).isOpen_preimage, hpre]
+    exact Etale.isOpen_agreementLocus _ _
+  let O : V₁.left.Opens := ⟨q₁ '' U, hopen⟩
+  let ι := Etale.ofOpensι V₁ O
+  refine ⟨Etale.ofOpens V₁ O, ι ≫ f₁, G.obj.map ι.op c, ⟨⟨q₁ x₁, x₁, hc, rfl⟩, ?_⟩, ?_⟩
+  · change f₁.left (q₁ x₁) = _
+    rw [Etale.chartProj_chartφ_comp, hx₁]
+  let θ := Etale.chartMap φ f₁ ι (ι ≫ f₁) rfl
+  have h₁ : H.obj.map (Etale.chartι φ (ι ≫ f₁)).op σ = H.obj.map θ.op (H.obj.map ψ₁.op σ) := by
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, Etale.chartMap_chartι]
+  have h₂ : Etale.upperStarSectionsMap _ p G (Etale.chartφ φ (ι ≫ f₁)) (G.obj.map ι.op c) =
+      H.obj.map θ.op (Etale.upperStarSectionsMap _ p G φ₁ c) := by
+    have := congrArg (fun h ↦ h c) (Etale.upperStarSectionsMap_naturality G φ₁
+      (Etale.chartφ φ (ι ≫ f₁)) ι θ (Etale.chartφ_chartMap φ f₁ ι (ι ≫ f₁) rfl))
+    simpa only [ConcreteCategory.comp_apply] using this
+  rw [h₁, h₂]
+  refine Etale.eq_of_agreementLocus_eq_univ (Set.eq_univ_iff_forall.2 fun o ↦ ?_)
+  rw [Etale.mem_agreementLocus_map_iff]
+  have hθ : q₁ (θ.left o) = ι.left (Etale.chartProj p (Etale.chartφ φ (ι ≫ f₁)) o) := by
+    have := congrArg (Etale.chartProj p) (Etale.chartφ_chartMap φ f₁ ι (ι ≫ f₁) rfl)
+    rw [Etale.chartProj_comp_map, Etale.chartProj_comp] at this
+    exact (congrArg (fun h ↦ h o) this).symm.trans (Scheme.Hom.comp_apply _ _ _) |>.symm.trans
+      (Scheme.Hom.comp_apply _ _ _) |>.symm
+  obtain ⟨u, hu, hqu⟩ : ι.left (Etale.chartProj p (Etale.chartφ φ (ι ≫ f₁)) o) ∈ q₁ '' U :=
+    (Etale.chartProj p (Etale.chartφ φ (ι ≫ f₁)) o).2
+  exact hsat (hθ.trans hqu.symm) hu
+
+variable (Λ p) in
+/-- **[Stacks 0A3H].** Let `φ : W ⟶ V ×_S X` be a morphism of étale `X`-schemes such that the
+induced morphism `q : W ⟶ V` is flat, quasi-compact and has geometrically connected fibres.
+Then for every sheaf `G` of `Λ`-modules on `S_ét` the map `G(V) ⟶ (p^* G)(W)` of
+`AlgebraicGeometry.Etale.upperStarSectionsMap` is bijective.
+
+Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = q ≫ r` and `r` is
+étale, so `(p^* G)(W) = Γ(W, q^* (G|_V))`, and this is the statement that for a flat
+quasi-compact `q` with geometrically connected fibres the global sections of an inverse image
+agree with the global sections downstairs. This is Step 2 of the blueprint proof of
+`sk-prop-deg0`.
+
+Injectivity holds as `q` is surjective
+(`AlgebraicGeometry.Etale.upperStarSectionsMap_injective`). For surjectivity, a section `σ` is
+locally the image of sections `c_i` of `G` over an étale covering `V_i ⟶ V`
+(`AlgebraicGeometry.Etale.exists_chartι_map_eq_upperStarSectionsMap`, which uses the
+connectedness of the fibres), and the `c_i` glue by injectivity over `V_i ×_V V_j`. -/
+@[stacks 0A3H]
+theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    [Flat (φ.left ≫ pullback.fst V.hom p)]
+    [QuasiCompact (φ.left ≫ pullback.fst V.hom p)]
+    [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] :
+    IsIso (Etale.upperStarSectionsMap _ p G φ) := by
+  let H := ((p)^*[ModuleCat.{u + 1} Λ].obj G)
+  have hinj {V' : S.Etale} (h : V' ⟶ V) :
+      Function.Injective (Etale.upperStarSectionsMap _ p G (Etale.chartφ φ h)) := by
+    refine Etale.upperStarSectionsMap_injective G _ ?_
+    rw [Etale.chartProj_chartφ]
+    exact Scheme.Hom.surjective _
+  refine (ConcreteCategory.isIso_iff_bijective _).2 ⟨?_, fun σ ↦ ?_⟩
+  · exact Etale.upperStarSectionsMap_injective G φ (Scheme.Hom.surjective _)
+  choose V' f c hv hσ using Etale.exists_chartι_map_eq_upperStarSectionsMap G φ σ
+  obtain ⟨s, hs⟩ := Etale.exists_eq_map_of_compatible f
+    (Set.eq_univ_iff_forall.2 fun v ↦ Set.mem_iUnion.2 ⟨v, hv v⟩) c
+    (fun i j Z g₁ g₂ hg ↦ by
+      apply hinj (g₁ ≫ f i)
+      have e₁ := congrArg (fun h ↦ h (c i)) (Etale.upperStarSectionsMap_naturality G
+        (Etale.chartφ φ (f i)) (Etale.chartφ φ (g₁ ≫ f i)) g₁ _
+        (Etale.chartφ_chartMap φ (f i) g₁ (g₁ ≫ f i) rfl))
+      have e₂ := congrArg (fun h ↦ h (c j)) (Etale.upperStarSectionsMap_naturality G
+        (Etale.chartφ φ (f j)) (Etale.chartφ φ (g₁ ≫ f i)) g₂ _
+        (Etale.chartφ_chartMap φ (f j) g₂ (g₁ ≫ f i) hg.symm))
+      simp only [ConcreteCategory.comp_apply] at e₁ e₂
+      rw [e₁, e₂, ← hσ i, ← hσ j, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+        ← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp, Etale.chartMap_chartι,
+        Etale.chartMap_chartι])
+  refine ⟨s, Etale.eq_of_forall_map_eq (fun v ↦ Etale.chartι φ (f v))
+    (Set.eq_univ_iff_forall.2 fun x ↦ Set.mem_iUnion.2 ⟨Etale.chartProj p φ x, ?_⟩) fun v ↦ ?_⟩
+  · obtain ⟨v', hv'⟩ := hv (Etale.chartProj p φ x)
+    obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback x v' hv'.symm
+    exact ⟨z, hz⟩
+  · have := congrArg (fun h ↦ h s) (Etale.upperStarSectionsMap_naturality G φ
+      (Etale.chartφ φ (f v)) (f v) (Etale.chartι φ (f v)) (Etale.chartφ_comp φ (f v)))
+    simp only [ConcreteCategory.comp_apply] at this
+    rw [← this, hs, hσ]
 
 end Local
 
