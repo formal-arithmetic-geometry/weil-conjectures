@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "Since $\\ker\\pi=IA^\\wedge\\subseteq\\mathfrak m'$ and $\\pi$ is surjective, $\\bar{\\mathfrak m}=\\pi(\\mathfrak m')$ is a maximal ideal of $A/I$ and $\\mathfrak m'=\\pi^{-1}(\\bar{\\mathfrak m})$. Then $\\mathfrak m=\\iota^{-1}(\\mathfrak m')=(\\pi\\circ\\iota)^{-1}(\\bar{\\mathfrak m})=q^{-1}(\\bar{\\mathfrak m})$ is a maximal ideal of $A$ containing $I$, with $q(\\mathfrak m)=\\bar{\\mathfrak m}$. Since $\\pi(\\mathfrak mA^\\wedge)\\supseteq\\pi\\iota(\\mathfrak m)=\\bar{\\mathfrak m}$ we get $\\mathfrak m'=\\mathfrak mA^\\wedge+\\ker\\pi=\\mathfrak mA^\\wedge+IA^\\wedge=\\mathfrak mA^\\wedge$ (as $I\\subseteq\\mathfrak m$). Finally $\\iota$ induces an isomorphism $A/\\mathfrak m\\to A^\\wedge/\\mathfrak m'$, both being identified with $(A/I)/\\bar{\\mathfrak m}$ via $q$ and $\\pi$, and $\\pi\\circ\\iota=q$.",
+   "text": "For each b in the completion, choose a in A whose image in A/I equals the projection of b. Then b - iota(a) lies in the projection kernel IAhat. If b belongs to the maximal ideal mprime, then iota(a) belongs to mprime, hence a belongs to its contraction m. Since IAhat is contained in mprime, I is contained in m, and this proves mprime = mAhat. These representatives also prove surjectivity on the residue fields of the localized rings: every element of the residue field at the maximal ideal mprime is represented by b in Ahat, and then by iota(a). The localized map is local, so its residue-field map is injective. No maximality assertion about m is needed for the subsequent argument.",
    "uses": [
     "lem-weil-pbc-adic-completion-mod-ideal"
    ],
@@ -74,7 +74,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-flat-local-ring-maps] applied to the flat map $\\iota$ between the Noetherian rings $A$ and $A^\\wedge$ (Step 1), $\\iota_{\\mathfrak m'}:A_{\\mathfrak m}\\to B$ is a flat local homomorphism of Noetherian local rings. Localizing $\\mathfrak m'=\\mathfrak mA^\\wedge$ (Step 4) gives $\\mathfrak mB=\\mathfrak m'B$, the maximal ideal of $B$. The residue fields are $A_{\\mathfrak m}/\\mathfrak mA_{\\mathfrak m}=A/\\mathfrak m$ and $B/\\mathfrak m'B=A^\\wedge/\\mathfrak m'$ (localization at a maximal ideal does not change the quotient by it [def-weil-pbc-localization-at-prime]), and the map between them induced by $\\iota_{\\mathfrak m'}$ is the isomorphism of Step 4.",
+   "text": "Localize iota at mprime. By [lem-weil-pbc-flat-local-ring-maps] this gives a flat local homomorphism phi : A_m -> B between Noetherian local rings. The equality mprime = mAhat, mapped into B and combined with the localization formula for maximal ideals [def-weil-pbc-localization-at-prime], gives phi(m A_m) B = maximalIdeal(B). Its residue-field map is bijective by the representatives in step 4 and the maximal-ideal contraction identity for a local map.",
    "uses": [
     "lem-weil-pbc-flat-local-ring-maps",
     "def-weil-pbc-localization-at-prime"
@@ -98,7 +98,7 @@
    }
   },
   {
-   "text": "Since $A$ is a G-ring and $\\mathfrak m$ is a prime ideal, $c_A:A_{\\mathfrak m}\\to(A_{\\mathfrak m})^\\wedge$ is regular [def-weil-pbc-g-ring]. Hence $c_B\\circ\\iota_{\\mathfrak m'}=\\psi\\circ c_A:A_{\\mathfrak m}\\to B^\\wedge$ is regular: $\\psi$ is an isomorphism of $A_{\\mathfrak m}$-algebras, so $B^\\wedge$ is flat over $A_{\\mathfrak m}$ because $(A_{\\mathfrak m})^\\wedge$ is, and for each prime $\\mathfrak p$ of $A_{\\mathfrak m}$, $\\psi\\otimes\\kappa(\\mathfrak p)$ is an isomorphism of $\\kappa(\\mathfrak p)$-algebras between the fibre rings, so the fibre rings of $A_{\\mathfrak m}\\to B^\\wedge$ are Noetherian and geometrically regular (both are properties invariant under isomorphism of $\\kappa(\\mathfrak p)$-algebras by the definitions).",
+   "text": "Let e : completion(A_m) -> completion(B) be the ring isomorphism obtained in step 6, and define g : B -> completion(A_m) as the completion map of B followed by e inverse. The compatibility from step 6 gives g composed with phi equal to the canonical completion map of A_m. This composite is regular by the G-ring hypothesis [def-weil-pbc-g-ring] at the prime m. Thus no transport theorem for regularity is required.",
    "uses": [
     "def-weil-pbc-g-ring"
    ],
@@ -109,7 +109,7 @@
    }
   },
   {
-   "text": "$B$ is a Noetherian local ring (Step 5), so $c_B:B\\to B^\\wedge$ is flat and $\\operatorname{Spec}B^\\wedge\\to\\operatorname{Spec}B$ is surjective [lem-weil-pbc-local-completion-faithfully-flat].",
+   "text": "The completion map of the Noetherian local ring B is flat [lem-weil-pbc-local-completion-faithfully-flat]. Its composite g with the bijective ring map e inverse is flat, since bijective maps are flat and flatness is closed under composition. Both factors are local homomorphisms, so g is local. Flatness and locality imply faithful flatness, and therefore the induced map on prime spectra is surjective, using the same Mathlib faithful-flatness criterion as [lem-weil-pbc-local-completion-faithfully-flat].",
    "uses": [
     "lem-weil-pbc-local-completion-faithfully-flat"
    ],
@@ -120,7 +120,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-regular-permanence] to $A_{\\mathfrak m}\\xrightarrow{\\iota_{\\mathfrak m'}}B\\xrightarrow{c_B}B^\\wedge$: the composite is regular (Step 7) and $c_B$ is flat and surjective on spectra (Step 8), so $\\iota_{\\mathfrak m'}:A_{\\mathfrak m}\\to(A^\\wedge)_{\\mathfrak m'}$ is regular. As $\\mathfrak m'$ was an arbitrary maximal ideal, Step 2 shows that $\\iota:A\\to A^\\wedge$ is regular.",
+   "text": "Use phi to equip B with its A_m-algebra structure and g to equip completion(A_m) with its B-algebra structure. The commuting triangle from step 7 gives the scalar-tower identity with the canonical A_m-algebra structure on completion(A_m). Apply [lem-weil-pbc-regular-permanence]: its regular composite is the G-ring completion map from step 7 and its flat spectrum-surjective second map is g from step 8. This proves phi regular. For every maximal mprime the same argument applies, so [lem-weil-pbc-regular-local-maximal] proves the original completion map regular.",
    "uses": [
     "lem-weil-pbc-regular-permanence"
    ],
@@ -148,7 +148,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 0AH2 (lemma-map-G-ring-to-completion-regular, line 12694), proof lines 12704-12740 (Matsumura, Theorem 79)"
+  "place": "More on Algebra, Lemma Tag 0AH2, proof; formalized by X2 using the inverse completion isomorphism in the displayed descent diagram, with the quotient and localization calculations proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -231,5 +231,15 @@
   "group": "J1",
   "result": "pass",
   "note": "A:Type u CommRing; hA: recorded IsGRing (Noetherian conjunct included, no extra instance); I arbitrary Ideal A; AdicCompletion I A with algebraMap (=AdicCompletion.of); conclusion recorded RingHom.IsRegular = Flat + all primes p.Fiber IsGeometricallyRegular (Noetherian+regular after finite purely insep k'); I=top/bot, A=0 edge cases fine; matches landed DVRCompletionRegular form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070559-L-3480772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

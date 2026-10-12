@@ -6683,3 +6683,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionTorsion (stage 3; reviewer PASS; first push; landing 20261012T070558-L-3480430 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange (stage 3; reviewer PASS; first push; landing 20261012T070559-L-3480530 (interface); batch 20261012T070523; modules 2; new nodes 1)
 - 07:05 L: merged deliver/X2/Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite (stage 3; reviewer PASS; first push; landing 20261012T070559-L-3480670 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/X2/Sheaf.RingTheory.GRingCompletionRegular (stage 3; reviewer PASS; first push; landing 20261012T070559-L-3480772 (proof); batch 20261012T070523; modules 1; new nodes 0)
