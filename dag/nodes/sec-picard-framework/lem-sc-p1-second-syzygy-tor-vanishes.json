@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-p1-second-syzygy-tor-vanishes",
+ "kind": "statement",
+ "title": "First Tor vanishes for the second syzygy over two variables",
+ "statement": "Let k be a field, S=k[x_0,x_1], and let k as an S-module mean restriction of scalars along constant coefficient. Use Tor as in [def-weil-pbc-tor-modules]. Let F_0 and F_1 be S-modules in the ring universe with specified finite bases, q_0:F_0 to M a surjective S-linear map, and q_1:F_1 to ker(q_0) a surjective S-linear map. M may have a different universe. Then Tor_1^S(ker(q_1),k) has subsingleton carrier. No grading assumptions are required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Replace M by F_0/ker(q_0) via the first isomorphism theorem when its universe differs. The maps yield two short exact sequences with free middle modules. The natural-isomorphism clause of [lem-sc-p1-tor-dimension-shifting] identifies Tor_1(ker(q_1),k) with Tor_3(M,k).",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-tor-symmetry] to replace Tor_3(M,k) by Tor_3(k,M).",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  },
+  {
+   "text": "The exact free Koszul complex in [lem-sc-p1-koszul-resolution] resolves S/(X_0,X_1) in degrees 0,1,2. The quotient is the constant-coefficient S-module k: constant coefficient is surjective, and its kernel is the variable ideal because each nonconstant monomial is divisible by a variable. Package the Koszul complex as a projective resolution. By [def-weil-pbc-tor-modules], Tor_3(k,M) is its third homology after tensoring with M. There is no degree-three term, hence this homology is zero.",
+   "uses": [
+    "lem-sc-p1-koszul-resolution",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  },
+  {
+   "text": "Transport the zero object through symmetry and dimension shifting. A zero ModuleCat object has subsingleton carrier, giving the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-tor-dimension-shifting",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-sc-p1-koszul-resolution",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The second syzygy over a polynomial ring in two variables has vanishing first Tor with the residue field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The second syzygy over a polynomial ring in two variables has vanishing first Tor with the residue field",
+   "results": "8 hits: Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, Ideal.ResidueField.exists_smul_eq_tmul_one, Algebra.smoothLocus_eq_compl_support_inter, Algebra.Extension.tensorH1Cotangent",
+   "date": "2026-10-12",
+   "verdict": "no exact match; returned general results do not give this graded construction or Tor bound"
+  },
+  {
+   "tool": "grep",
+   "query": "syzygy|Tor.*IsZero|HasProjectiveDimensionLE.*Tor",
+   "results": "21 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Triangulated/TStructure/ETrunc.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact second-syzygy Tor bound for the two-variable polynomial ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GradedSyzygy",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)",
+   "via": [
+    "lem-sc-p1-graded-syzygy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SecondSyzygyTorVanishes",
+  "file": "lean/Sheaf/RingTheory/SecondSyzygyTorVanishes.lean",
+  "declaration": "MvPolynomial.second_syzygy_tor_vanishes",
+  "statement": "theorem second_syzygy_tor_vanishes {k : Type u} [Field k]\n    {M : Type v} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]\n    (F₀ F₁ : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (r₀ r₁ : ℕ)\n    (b₀ : Module.Basis (Fin r₀) (MvPolynomial (Fin 2) k) F₀)\n    (b₁ : Module.Basis (Fin r₁) (MvPolynomial (Fin 2) k) F₁)\n    (q₀ : F₀ →ₗ[MvPolynomial (Fin 2) k] M) (hq₀ : Function.Surjective q₀)\n    (q₁ : F₁ →ₗ[MvPolynomial (Fin 2) k] q₀.ker) (hq₁ : Function.Surjective q₁) :\n    Subsingleton (((Tor' (ModuleCat.{u} (MvPolynomial (Fin 2) k)) 1).obj\n      (ModuleCat.of (MvPolynomial (Fin 2) k) q₁.ker)).obj\n      ((ModuleCat.restrictScalars\n        (MvPolynomial.constantCoeff : MvPolynomial (Fin 2) k →+* k)).obj\n        (ModuleCat.of k k)))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085211-L-1989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085211-L-1989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

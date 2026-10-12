@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-p1-graded-free-cover",
+ "kind": "statement",
+ "title": "Finite graded free cover with an internal shifted grading",
+ "statement": "Let k be a field, S=k[x_0,x_1] with its total-degree grading, and M a finitely generated internally integer-graded S-module with S_n M_j contained in M_(n+j). With the shift convention of [def-weil-pbc-proj-twisting-sheaf] (2), there exist a free S-module F in the ring universe, a finite basis b indexed by Fin r, an internal integer grading G compatible with homogeneous scalar multiplication, integer shifts d with b_a in G_(-d_a), and a degree-zero surjective S-linear map F to M. The universe of M can be different from that of k.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-p1-finite-homogeneous-generators] to choose m_a of degrees e_a and a surjection from Fin r →₀ S.",
+   "uses": [
+    "lem-sc-p1-finite-homogeneous-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  },
+  {
+   "text": "Define the degree-j part of Fin r →₀ S coefficientwise: the coefficient at a has polynomial degree j-e_a, with zero component if this difference is negative. Decompose each of the finitely many coefficients into its finite total-degree components; collect their shifted degrees. Coefficientwise uniqueness gives an internal grading. Multiplication by a degree-n polynomial raises every shifted degree by n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  },
+  {
+   "text": "The canonical basis at a has degree e_a. Set d_a=-e_a. By linearity and the degree formula for the generator map, every finite sum in source degree j maps to target degree j; surjectivity is the original generator surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-finite-homogeneous-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite graded module has a finite graded free cover with a homogeneous basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite graded module has a finite graded free cover with a homogeneous basis",
+   "results": "8 hits: GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, Module.Finite.instDirectSum, Module.finite_finsupp_iff, HomogeneousLocalization.Away.finiteType, FGModuleRepr.S, Module.finite_finsupp_self_iff, Module.Finite",
+   "date": "2026-10-12",
+   "verdict": "no exact match; returned general results do not give this graded construction or Tor bound"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*free.*(cover|presentation)|homogeneous.*basis",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match; returned general results do not give this graded construction or Tor bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GradedSyzygy",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)",
+   "via": [
+    "lem-sc-p1-graded-syzygy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.GradedFreeCover",
+  "file": "lean/Sheaf/RingTheory/GradedFreeCover.lean",
+  "declaration": "MvPolynomial.exists_graded_free_cover",
+  "statement": "theorem exists_graded_free_cover {k : Type u} [Field k]\n    {M : Type v} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]\n    [Module.Finite (MvPolynomial (Fin 2) k) M]\n    (ℳ : ℤ → AddSubgroup M) (hℳ : DirectSum.IsInternal ℳ)\n    (hsmul : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : M),\n      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → s • x ∈ ℳ ((n : ℤ) + j)) :\n    ∃ (F : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n      (𝒢 : ℤ → AddSubgroup F) (r : ℕ) (d : Fin r → ℤ)\n      (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) F)\n      (q : F →ₗ[MvPolynomial (Fin 2) k] M),\n      DirectSum.IsInternal 𝒢 ∧\n      (∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : F),\n        s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ 𝒢 j → s • x ∈ 𝒢 ((n : ℤ) + j)) ∧\n      (∀ a : Fin r, b a ∈ 𝒢 (-(d a))) ∧\n      (∀ (j : ℤ) (x : F), x ∈ 𝒢 j → q x ∈ ℳ j) ∧ Function.Surjective q",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085211-L-1989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085211-L-1989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

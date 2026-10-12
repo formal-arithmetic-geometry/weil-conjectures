@@ -22,68 +22,45 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-p1-finite-homogeneous-generators], choose homogeneous generators m_1,...,m_r of M and a surjective graded map F_0=direct sum_j S(-deg m_j) \\to M. The grading here is the total-degree grading: S_d is the k-span of monomials of degree d.",
+   "text": "Apply [lem-sc-p1-graded-free-cover] to M to construct F_0, its homogeneous basis and the graded surjection q_0.",
    "uses": [
-    "lem-sc-p1-finite-homogeneous-generators"
+    "lem-sc-p1-graded-free-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, choose finitely many homogeneous generators and form F_0"
-   }
+   "elementary": false
   },
   {
-   "text": "Let K_1=ker(F_0 \\to M). It is graded, and [lem-sc-p1-graded-kernel-finite] makes it finitely generated as a graded S-module. Applying [lem-sc-p1-finite-homogeneous-generators] to K_1 gives a finite graded free F_1 \\to K_1 and hence an exact sequence F_1 \\to F_0 \\to M \\to 0.",
+   "text": "Apply [lem-sc-p1-graded-kernel-internal] to q_0. Scalar compatibility is inherited through the kernel inclusion. Apply [lem-sc-p1-graded-free-cover] to ker(q_0), producing F_1 and q_1:F_1 to ker(q_0).",
    "uses": [
-    "lem-sc-p1-graded-kernel-finite",
-    "lem-sc-p1-finite-homogeneous-generators"
+    "lem-sc-p1-graded-kernel-internal",
+    "lem-sc-p1-graded-free-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, repeat the construction for the first kernel"
-   }
+   "elementary": false
   },
   {
-   "text": "Let K_2=ker(F_1 \\to F_0). It is a finitely generated graded module by [lem-sc-p1-graded-kernel-finite]. The Koszul complex in [lem-sc-p1-koszul-resolution] is an exact graded free resolution of k of length two, so by [lem-weil-pbc-tor-symmetry] Tor_3^S(M,k) is isomorphic to Tor_3^S(k,M), which by [def-weil-pbc-tor-modules] is H_3 of that resolution tensored with M, a complex that is zero in degree 3; hence Tor_3^S(M,k)=0, and [lem-sc-p1-tor-dimension-shifting] therefore gives Tor_1^S(K_2,k)=0.",
+   "text": "Apply [lem-sc-p1-graded-kernel-internal] to q_1 and [lem-sc-p1-second-syzygy-tor-vanishes] to the two finite free covers. Apply [lem-sc-p1-graded-nakayama-free] to ker(q_1), using its inherited grading and finite homogeneous spanning set, to obtain a finite homogeneous basis.",
    "uses": [
-    "lem-sc-p1-graded-kernel-finite",
-    "lem-sc-p1-koszul-resolution",
-    "lem-sc-p1-tor-dimension-shifting",
-    "lem-weil-pbc-tor-symmetry",
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, use the Koszul resolution and dimension shifting"
-   }
-  },
-  {
-   "text": "By [lem-sc-p1-graded-nakayama-free], the finitely generated graded module K_2 with Tor_1^S(K_2,k)=0 is a finite direct sum of shifts S(d), hence graded free. Calling this module F_2 gives the exact sequence 0\\to F_2\\to F_1\\to F_0\\to M\\to0, and every F_i is a finite direct sum of graded shifts S(d), as required.",
-   "uses": [
+    "lem-sc-p1-graded-kernel-internal",
+    "lem-sc-p1-second-syzygy-tor-vanishes",
     "lem-sc-p1-graded-nakayama-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, graded Nakayama concludes that the second syzygy is free"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Set F_2=ker(q_1), f_2 to its subtype inclusion, f_1 to the composite of q_1 with the inclusion of ker(q_0), and f_0=q_0. Prove range(f_1)=ker(f_0) by surjectivity of q_1, and range(f_2)=ker(f_1) by injectivity of the first-kernel inclusion. The second-kernel inclusion is injective. All maps preserve inherited degrees. Package the objects, gradings, ranks, shifts and bases by dependent case analysis on Fin 3; negate the third basis degrees for the shift convention.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-finite-homogeneous-generators",
-  "lem-sc-p1-graded-kernel-finite",
-  "lem-sc-p1-koszul-resolution",
-  "lem-sc-p1-tor-dimension-shifting",
-  "lem-sc-p1-graded-nakayama-free",
-  "lem-weil-pbc-tor-symmetry",
-  "def-weil-pbc-tor-modules"
+  "lem-sc-p1-graded-free-cover",
+  "lem-sc-p1-graded-kernel-internal",
+  "lem-sc-p1-second-syzygy-tor-vanishes",
+  "lem-sc-p1-graded-nakayama-free"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "node proof, first sentence"
+  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
  },
  "mathlib_searches": [
   {
@@ -164,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085211-L-1989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -6733,3 +6733,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/A2/Sheaf.Topology.ConstantSubsheafPeelLayer (stage 3; reviewer PASS; first push; landing 20261012T085210-L-1639 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential (stage 3; reviewer PASS; first push; landing 20261012T085210-L-1783 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/A3/Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration (stage 3; reviewer PASS; first push; landing 20261012T085211-L-1886 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/A3/Sheaf.RingTheory.GradedSyzygy (stage 3; reviewer PASS; first push; landing 20261012T085211-L-1989 (interface); batch 20261012T085205; modules 4; new nodes 3)
