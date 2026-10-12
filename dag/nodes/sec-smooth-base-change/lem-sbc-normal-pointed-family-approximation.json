@@ -15,34 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Apply absolute Noetherian approximation to S. Replace every stage by the normalization of its integral scheme-theoretic image in its own fraction field. Finiteness of normalization over the integers gives Noetherian normal integral stages. Normality of S factors its projections through these stages; uniqueness supplies transition maps, and dominance follows from the image construction. The affine chart rings embed in the rings of S, contain the old image rings, and their union is the ring of S, so the new affine transition system still has limit S.",
+   "text": "Take the existing absolute Noetherian approximation of S [prop-nagata-noetherian-inverse-system] and apply [lem-sbc-normal-noetherian-refinement] to obtain a normal integral Noetherian system with dominant projections.",
    "uses": [
     "prop-nagata-noetherian-inverse-system",
-    "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+    "lem-sbc-normal-noetherian-refinement"
    ],
    "elementary": false
   },
   {
-   "text": "Descend the finitely presented smooth family and its section, including its section equation, to one stage; smoothness descends by Tag 0C0C. Restrict to the open component through the section. On every geometric fibre the original connected fibre meets this component and therefore maps into it; hence its pullback is all of C. This open model is quasi-compact since it is an open of a Noetherian family. Descend the inverse of n on a finite affine cover, and agreement on affine covers of overlaps. Pass to a cofiltered tail and take all later families and sections by base change. Their transition squares and comparison squares are cartesian; base change preserves smoothness and geometric connectedness and preserves the unit n. Base change of the fixed family gives its limit cone and the section compatibility.",
+   "text": "Apply [lem-sbc-pointed-smooth-family-stage] to obtain one pointed smooth geometrically connected model at an index i, with n invertible.",
    "uses": [
-    "thm-pd-spreading-out",
-    "lem-sbc-smooth-section-component-geometrically-irreducible"
+    "lem-sbc-pointed-smooth-family-stage"
    ],
    "elementary": false
+  },
+  {
+   "text": "Restrict the base diagram to Over i and use baseChangeDiagram for the family. The forgetful functor Over i to I is initial, so the base cone stays limiting. Transport baseChangeCone along the supplied cartesian comparison isomorphism; isLimitBaseChangeCone proves the family cone limiting. Define the later sections by pullback.lift and prove naturality using pullback.hom_ext. Pullback pasting and cancellation prove comparison squares cartesian, and isPullback_baseChangeDiagram_map proves transition squares cartesian. The projection equations prove compatibility with the original section. Base change preserves the four morphism properties; map the unit of n along each transition appTop ring map. Normality, integrality, Noetherianity, quasi-separatedness and dominance are inherited from the restricted base stages.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-smooth-section-component-geometrically-irreducible",
-  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
-  "prop-nagata-noetherian-inverse-system",
-  "thm-pd-spreading-out"
+  "lem-sbc-normal-noetherian-refinement",
+  "lem-sbc-pointed-smooth-family-stage",
+  "prop-nagata-noetherian-inverse-system"
  ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "F2",
+  "by": "document",
   "document": "Stacks Project",
-  "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal approximation through descent of the section and the invertible order",
-  "note": "The categorical steps in CartesianFamilyGenericLimit are proved in Lean; the geometric existence steps are separated with their full source argument."
+  "place": "Tag 0EZJ, normal approximation and pointed family descent paragraphs",
+  "note": "S1 decomposed the two geometric existence steps and proved all tail/base-change assembly in Lean, using the existing absolute approximation and base-change limit constructions."
  },
  "mathlib_searches": [
   {
@@ -122,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-af525",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T135233-L-1665220",
+  "landing": "20261012T154246-L-2435413",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet statements and compiled successfully, including direct importer NoetherianSpreadingData; interface, proof, DAG, residual-sorry, report, and reader-gate checks passed."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
