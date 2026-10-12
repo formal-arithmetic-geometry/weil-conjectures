@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-roos-comparison-homotopies",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-roos-comparison-homotopy-retract",
+   "place": "Stage-3 decomposition"
+  }
+ },
+ "kind": "statement",
+ "title": "Homotopies for Roos comparison maps",
+ "statement": "In an abelian category with countable products [def-sp-abelian], let I,J be integer complexes of towers [def-weil-inverse-system], with chain maps u:I\\to J and r:J\\to I and a homotopy ur\\sim id_I [def-weil-abstract-derived-category]. Choose termwise-product complexes P,PJ, termwise kernels L,LJ of their transition endomorphisms [def-weil-tower-transition-endomorphism], and signed cones C,CJ with differential (y,x)\\mapsto(-dy-sx,dx). Given lU,cU,lR,cR whose components are the induced kernel and diagonal cone maps of Pi.map(u) and Pi.map(r) under these presentations (the four component equations in lean.statement), there are homotopies lU lR\\sim id_L and cU cR\\sim id_C. No comparison map eta, splitting or K-injectivity is assumed.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "source": {
+  "document": "lean/Sheaf/Algebra/Homology/RoosComparisonHomotopyRetract.lean",
+  "place": "Existing docstring: agent-written naturality/homotopy extension of lem-weil-derived-limit-roos-complex; background Stacks Project Tag 070M."
+ },
+ "proof": [
+  {
+   "text": "Conjugate the product of each component of hr through eP to obtain H_pq. The product homotopy equation gives U R - id = d H + H d. Naturality of hr with the transitions gives s_p H_pq=H_pq s_q.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Factor iota_p H_pq through the limiting kernel fork hL_q and set nonadjacent components zero. Compose the homotopy equation with the monomorphism iota_p. The specified components of lU,lR reduce it to the product equation, giving the kernel homotopy.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Under eC define the cone homotopy in degree p+1 to be diag(-H_(p,p-1),H_(p+1,p)). The four component hypotheses identify the composites with the diagonal product of U R. Matrix multiplication with the signed cone differential gives the two diagonal homotopy equations; the off-diagonal term -s_(p+1) H_(p+1,p)+H_(p+1,p) s_p vanishes. The remaining degrees vanish by shape.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Algebra/Homology/RoosComparisonHomotopyRetract.lean",
+  "place": "Existing docstring: agent-written naturality/homotopy extension of lem-weil-derived-limit-roos-complex; background Stacks Project Tag 070M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a mapping cone comparison with a degreewise kernel under chain homotopy",
+   "results": "CochainComplex.mappingConeCompTriangleh_comm₁, CochainComplex.mappingCone.map_inr, CochainComplex.mappingConeCompTriangle_mor₃_naturality, CochainComplex.mappingConeCompHomotopyEquiv_comm₁, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingConeCompHomotopyEquiv_comm₂_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingConeCompHomotopyEquiv_comm₂",
+   "date": "2026-10-13",
+   "verdict": "No exact result for these supplied kernel and signed-cone presentations; generic mapHomotopy/mapArrowHom constructions are related."
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, Functor.map",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No exact result for these supplied kernel and signed-cone presentations; generic mapHomotopy/mapArrowHom constructions are related."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopy|mapArrowHom|kernel.*map|Pi.map_comp",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact result for these supplied kernel and signed-cone presentations; generic mapHomotopy/mapArrowHom constructions are related."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy of chain maps of inverse systems induces homotopies on the degreewise kernel of one minus transition and on its shifted signed cone, with prescribed component maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.Algebra.Homology.RoosComparisonHomotopyRetract",
+  "by": "worker",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RoosComparisonHomotopies",
+  "file": "lean/Sheaf/Algebra/Homology/RoosComparisonHomotopies.lean",
+  "declaration": "CategoryTheory.roos_comparison_homotopies",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13",
+  "statement": "theorem roos_comparison_homotopies\n    (A : Type u) [Category.{v} A] [Abelian A]\n    [HasLimitsOfShape (Discrete ℕ) A]\n    (I J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)\n    (u : I ⟶ J) (r : J ⟶ I) (hr : Homotopy (u ≫ r) (𝟙 I))\n    (P L C : CochainComplex A ℤ)\n    (eP : ∀ p : ℤ, P.X p ≅ ∏ᶜ (fun n : ℕ ↦ (I.X p).obj (Opposite.op n)))\n    (hP : ∀ p q : ℤ, P.d p q ≫ (eP q).hom =\n      (eP p).hom ≫ Limits.Pi.map (fun n ↦ (I.d p q).app (Opposite.op n)))\n    (oneSubS : P ⟶ P)\n    (hS : ∀ p : ℤ, oneSubS.f p = (eP p).hom ≫\n      towerTransitionEndomorphism\n        (fun n ↦ (I.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (eP p).inv)\n    (iota : L ⟶ P)\n    (hKernel : ∀ p : ℤ, iota.f p ≫ oneSubS.f p = 0)\n    (hL : ∀ p : ℤ, IsLimit (KernelFork.ofι (iota.f p) (hKernel p)))\n    (eC : ∀ p : ℤ, C.X (p + 1) ≅ P.X p ⊞ P.X (p + 1))\n    (hC : ∀ p : ℤ, C.d (p + 1) (p + 1 + 1) ≫ (eC (p + 1)).hom =\n      (eC p).hom ≫ biprod.lift\n        (-(biprod.fst ≫ P.d p (p + 1)) - biprod.snd ≫ oneSubS.f (p + 1))\n        (biprod.snd ≫ P.d (p + 1) (p + 1 + 1)))\n    (PJ LJ CJ : CochainComplex A ℤ)\n    (ePJ : ∀ p : ℤ, PJ.X p ≅ ∏ᶜ (fun n : ℕ ↦ (J.X p).obj (Opposite.op n)))\n    (hPJ : ∀ p q : ℤ, PJ.d p q ≫ (ePJ q).hom =\n      (ePJ p).hom ≫ Limits.Pi.map (fun n ↦ (J.d p q).app (Opposite.op n)))\n    (sJ : PJ ⟶ PJ)\n    (hSJ : ∀ p : ℤ, sJ.f p = (ePJ p).hom ≫\n      towerTransitionEndomorphism\n        (fun n ↦ (J.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (ePJ p).inv)\n    (iJ : LJ ⟶ PJ)\n    (hKJ : ∀ p : ℤ, iJ.f p ≫ sJ.f p = 0)\n    (hLJ : ∀ p : ℤ, IsLimit (KernelFork.ofι (iJ.f p) (hKJ p)))\n    (eCJ : ∀ p : ℤ, CJ.X (p + 1) ≅ PJ.X p ⊞ PJ.X (p + 1))\n    (hCJ : ∀ p : ℤ, CJ.d (p + 1) (p + 1 + 1) ≫ (eCJ (p + 1)).hom =\n      (eCJ p).hom ≫ biprod.lift\n        (-(biprod.fst ≫ PJ.d p (p + 1)) - biprod.snd ≫ sJ.f (p + 1))\n        (biprod.snd ≫ PJ.d (p + 1) (p + 1 + 1)))\n    (lU : L ⟶ LJ) (cU : C ⟶ CJ) (lR : LJ ⟶ L) (cR : CJ ⟶ C)\n    (hlU : ∀ p : ℤ, lU.f p ≫ iJ.f p = iota.f p ≫ (eP p).hom ≫\n      Limits.Pi.map (fun n ↦ (u.f p).app (Opposite.op n)) ≫ (ePJ p).inv)\n    (hcU : ∀ p : ℤ, cU.f (p + 1) ≫ (eCJ p).hom = (eC p).hom ≫ biprod.map\n      ((eP p).hom ≫ Limits.Pi.map (fun n ↦ (u.f p).app (Opposite.op n)) ≫ (ePJ p).inv)\n      ((eP (p + 1)).hom ≫\n        Limits.Pi.map (fun n ↦ (u.f (p + 1)).app (Opposite.op n)) ≫ (ePJ (p + 1)).inv))\n    (hlR : ∀ p : ℤ, lR.f p ≫ iota.f p = iJ.f p ≫ (ePJ p).hom ≫\n      Limits.Pi.map (fun n ↦ (r.f p).app (Opposite.op n)) ≫ (eP p).inv)\n    (hcR : ∀ p : ℤ, cR.f (p + 1) ≫ (eC p).hom = (eCJ p).hom ≫ biprod.map\n      ((ePJ p).hom ≫ Limits.Pi.map (fun n ↦ (r.f p).app (Opposite.op n)) ≫ (eP p).inv)\n      ((ePJ (p + 1)).hom ≫\n        Limits.Pi.map (fun n ↦ (r.f (p + 1)).app (Opposite.op n)) ≫ (eP (p + 1)).inv))\n    : Nonempty (Homotopy (lU ≫ lR) (𝟙 L)) ∧\n      Nonempty (Homotopy (cU ≫ cR) (𝟙 C))"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

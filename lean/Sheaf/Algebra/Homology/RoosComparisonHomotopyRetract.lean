@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
+import Sheaf.Algebra.Homology.RoosComparisonMaps
+import Sheaf.Algebra.Homology.RoosComparisonHomotopies
 
 /-! # Homotopy retract diagrams for Roos comparisons
 
@@ -90,6 +92,16 @@ theorem roos_comparison_homotopy_retract
       lU ≫ etaJ = eta ≫ cU ∧ lR ≫ eta = etaJ ≫ cR ∧
       Nonempty (Homotopy (lU ≫ lR) (𝟙 L)) ∧
       Nonempty (Homotopy (cU ≫ cR) (𝟙 C)) := by
-  sorry
+  obtain ⟨lU, cU, hU, hlU, hcU⟩ := roos_comparison_maps A I J u
+    P L C eP hP oneSubS hS iota hKernel hL eC hC eta hEta
+    PJ LJ CJ ePJ hPJ sJ hSJ iJ hKJ hLJ eCJ hCJ etaJ hEtaJ
+  obtain ⟨lR, cR, hR, hlR, hcR⟩ := roos_comparison_maps A J I r
+    PJ LJ CJ ePJ hPJ sJ hSJ iJ hKJ hLJ eCJ hCJ etaJ hEtaJ
+    P L C eP hP oneSubS hS iota hKernel hL eC hC eta hEta
+  obtain ⟨hKernelRetract, hConeRetract⟩ := roos_comparison_homotopies A I J u r hr
+    P L C eP hP oneSubS hS iota hKernel hL eC hC
+    PJ LJ CJ ePJ hPJ sJ hSJ iJ hKJ hLJ eCJ hCJ
+    lU cU lR cR hlU hcU hlR hcR
+  exact ⟨lU, cU, lR, cR, hU, hR, hKernelRetract, hConeRetract⟩
 
 end CategoryTheory

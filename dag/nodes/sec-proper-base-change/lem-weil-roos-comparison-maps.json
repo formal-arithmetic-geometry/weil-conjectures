@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-roos-comparison-maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-roos-comparison-homotopy-retract",
+   "place": "Stage-3 decomposition"
+  }
+ },
+ "kind": "statement",
+ "title": "Existence of natural Roos comparison maps",
+ "statement": "Let A be an abelian category [def-sp-abelian] with countable products, and I,J integer cochain complexes of towers [def-weil-inverse-system]. For a chain map u:I\\to J choose termwise-product presentations P,PJ, kernel presentations L,LJ for the transition endomorphisms [def-weil-tower-transition-endomorphism], signed cones C,CJ with differential (y,x)\\mapsto(-dy-sx,dx), and comparisons eta,etaJ with components (0,iota),(0,iJ). Put U_p=eP_p.hom \\circ Pi.map(u_p) \\circ ePJ_p.inv (composition read in traversal order). There exist chain maps lU:L\\to LJ and cU:C\\to CJ with lU etaJ=eta cU, lU_p iJ_p=iota_p U_p, and cU_{p+1} eCJ_p.hom=eC_p.hom diag(U_p,U_{p+1}). No reverse map or homotopy is assumed.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "source": {
+  "document": "lean/Sheaf/Algebra/Homology/RoosComparisonHomotopyRetract.lean",
+  "place": "Existing docstring: agent-written naturality/homotopy extension of lem-weil-derived-limit-roos-complex; background Stacks Project Tag 070M."
+ },
+ "proof": [
+  {
+   "text": "Define U_p by the product map of u conjugated through the given product isomorphisms. Product projections give its chain-map equation. Naturality with the tower transitions and towerTransitionEndomorphism_natural_backward give s U = U sJ.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Factor iota_p U_p through the limiting kernel fork hLJ_p. Monicity of iJ_q gives the chain-map equation for the resulting lU. Define cU in degree p+1 by the diagonal biproduct of U_p and U_(p+1). Check the signed differential after its two projections using the two commutation equations. Other differentials vanish by complex shape.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "After eCJ_p.hom both sides of the comparison square have first component zero and second component iota_(p+1) U_(p+1). This proves the square as well as the specified kernel and cone components.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Algebra/Homology/RoosComparisonHomotopyRetract.lean",
+  "place": "Existing docstring: agent-written naturality/homotopy extension of lem-weil-derived-limit-roos-complex; background Stacks Project Tag 070M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a mapping cone comparison with a degreewise kernel under chain homotopy",
+   "results": "CochainComplex.mappingConeCompTriangleh_comm₁, CochainComplex.mappingCone.map_inr, CochainComplex.mappingConeCompTriangle_mor₃_naturality, CochainComplex.mappingConeCompHomotopyEquiv_comm₁, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingConeCompHomotopyEquiv_comm₂_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingConeCompHomotopyEquiv_comm₂",
+   "date": "2026-10-13",
+   "verdict": "No exact result for these supplied kernel and signed-cone presentations; generic mapHomotopy/mapArrowHom constructions are related."
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, Functor.map",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "No exact result for these supplied kernel and signed-cone presentations; generic mapHomotopy/mapArrowHom constructions are related."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopy|mapArrowHom|kernel.*map|Pi.map_comp",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact result for these supplied kernel and signed-cone presentations; generic mapHomotopy/mapArrowHom constructions are related."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy of chain maps of inverse systems induces homotopies on the degreewise kernel of one minus transition and on its shifted signed cone, with prescribed component maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.Algebra.Homology.RoosComparisonHomotopyRetract",
+  "by": "worker",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RoosComparisonMaps",
+  "file": "lean/Sheaf/Algebra/Homology/RoosComparisonMaps.lean",
+  "declaration": "CategoryTheory.roos_comparison_maps",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13",
+  "statement": "theorem roos_comparison_maps\n    (A : Type u) [Category.{v} A] [Abelian A]\n    [HasLimitsOfShape (Discrete ℕ) A]\n    (I J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)\n    (u : I ⟶ J)\n    (P L C : CochainComplex A ℤ)\n    (eP : ∀ p : ℤ, P.X p ≅ ∏ᶜ (fun n : ℕ ↦ (I.X p).obj (Opposite.op n)))\n    (hP : ∀ p q : ℤ, P.d p q ≫ (eP q).hom =\n      (eP p).hom ≫ Limits.Pi.map (fun n ↦ (I.d p q).app (Opposite.op n)))\n    (oneSubS : P ⟶ P)\n    (hS : ∀ p : ℤ, oneSubS.f p = (eP p).hom ≫\n      towerTransitionEndomorphism\n        (fun n ↦ (I.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (eP p).inv)\n    (iota : L ⟶ P)\n    (hKernel : ∀ p : ℤ, iota.f p ≫ oneSubS.f p = 0)\n    (hL : ∀ p : ℤ, IsLimit (KernelFork.ofι (iota.f p) (hKernel p)))\n    (eC : ∀ p : ℤ, C.X (p + 1) ≅ P.X p ⊞ P.X (p + 1))\n    (hC : ∀ p : ℤ, C.d (p + 1) (p + 1 + 1) ≫ (eC (p + 1)).hom =\n      (eC p).hom ≫ biprod.lift\n        (-(biprod.fst ≫ P.d p (p + 1)) - biprod.snd ≫ oneSubS.f (p + 1))\n        (biprod.snd ≫ P.d (p + 1) (p + 1 + 1)))\n    (eta : L ⟶ C)\n    (hEta : ∀ p : ℤ, eta.f (p + 1) ≫ (eC p).hom =\n      biprod.lift 0 (iota.f (p + 1)))\n    (PJ LJ CJ : CochainComplex A ℤ)\n    (ePJ : ∀ p : ℤ, PJ.X p ≅ ∏ᶜ (fun n : ℕ ↦ (J.X p).obj (Opposite.op n)))\n    (hPJ : ∀ p q : ℤ, PJ.d p q ≫ (ePJ q).hom =\n      (ePJ p).hom ≫ Limits.Pi.map (fun n ↦ (J.d p q).app (Opposite.op n)))\n    (sJ : PJ ⟶ PJ)\n    (hSJ : ∀ p : ℤ, sJ.f p = (ePJ p).hom ≫\n      towerTransitionEndomorphism\n        (fun n ↦ (J.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (ePJ p).inv)\n    (iJ : LJ ⟶ PJ)\n    (hKJ : ∀ p : ℤ, iJ.f p ≫ sJ.f p = 0)\n    (hLJ : ∀ p : ℤ, IsLimit (KernelFork.ofι (iJ.f p) (hKJ p)))\n    (eCJ : ∀ p : ℤ, CJ.X (p + 1) ≅ PJ.X p ⊞ PJ.X (p + 1))\n    (hCJ : ∀ p : ℤ, CJ.d (p + 1) (p + 1 + 1) ≫ (eCJ (p + 1)).hom =\n      (eCJ p).hom ≫ biprod.lift\n        (-(biprod.fst ≫ PJ.d p (p + 1)) - biprod.snd ≫ sJ.f (p + 1))\n        (biprod.snd ≫ PJ.d (p + 1) (p + 1 + 1)))\n    (etaJ : LJ ⟶ CJ)\n    (hEtaJ : ∀ p : ℤ, etaJ.f (p + 1) ≫ (eCJ p).hom =\n      biprod.lift 0 (iJ.f (p + 1)))\n    : ∃ (lU : L ⟶ LJ) (cU : C ⟶ CJ),\n      lU ≫ etaJ = eta ≫ cU ∧\n      (∀ p : ℤ, lU.f p ≫ iJ.f p = iota.f p ≫ (eP p).hom ≫\n        Limits.Pi.map (fun n ↦ (u.f p).app (Opposite.op n)) ≫ (ePJ p).inv) ∧\n      (∀ p : ℤ, cU.f (p + 1) ≫ (eCJ p).hom = (eC p).hom ≫ biprod.map\n        ((eP p).hom ≫ Limits.Pi.map (fun n ↦ (u.f p).app (Opposite.op n)) ≫\n          (ePJ p).inv)\n        ((eP (p + 1)).hom ≫\n          Limits.Pi.map (fun n ↦ (u.f (p + 1)).app (Opposite.op n)) ≫\n          (ePJ (p + 1)).inv))"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
