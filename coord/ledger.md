@@ -7072,3 +7072,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/U1/Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications (stage 3; reviewer PASS; first push; landing 20261012T085345-L-41856 (interface); batch 20261012T085205; modules 5; new nodes 4)
 - 08:53 L: merged deliver/U1/Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegreeTrace (stage 3; reviewer PASS; first push; landing 20261012T085345-L-41958 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/U1/Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover (stage 3; reviewer PASS; first push; landing 20261012T085345-L-42055 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/U1/Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover (stage 3; reviewer PASS; first push; landing 20261012T085346-L-42204 (proof); batch 20261012T085205; modules 1; new nodes 0)

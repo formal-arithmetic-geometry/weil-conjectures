@@ -7,8 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import Sheaf.AlgebraicGeometry.FiberDegreeBound
-import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
 import Sheaf.AlgebraicGeometry.FlatOfFpqcCover
 import Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover
 import Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
@@ -58,6 +56,20 @@ theorem isFiniteLocallyFreeOfDegree_of_etale_cover
     (hcover : ∀ t : T, ∃ (i : I) (t' : T' i), φ i t' = t)
     (hdegree : ∀ i : I, (pullback.snd h (φ i)).IsFiniteLocallyFreeOfDegree d) :
     h.IsFiniteLocallyFreeOfDegree d := by
-  sorry
+  let (i : I) : Etale (φ i) := hφ i
+  let (i : I) : (pullback.snd h (φ i)).IsFiniteLocallyFreeOfDegree d := hdegree i
+  have hfpqc : Presieve.ofArrows T' φ ∈ Scheme.fpqcPrecoverage T := by
+    apply Scheme.fppfPrecoverage_le_fpqcPrecoverage
+    rw [Scheme.fppfPrecoverage, Scheme.ofArrows_mem_precoverage_iff]
+    exact ⟨hcover, fun i ↦ ⟨inferInstance, inferInstance⟩⟩
+  let : IsFinite h := isFinite_of_fpqc_cover h T' φ hfpqc (fun i ↦ inferInstance)
+  let : Flat h := flat_of_fpqc_cover h T' φ hfpqc (fun i ↦ inferInstance)
+  let : LocallyOfFinitePresentation h :=
+    locallyOfFinitePresentation_of_fpqc_cover h T' φ hfpqc (fun i ↦ inferInstance)
+  refine { fiberDegree_eq := ?_ }
+  intro t
+  obtain ⟨i, t', rfl⟩ := hcover t
+  rw [← h.fiberDegree_of_isPullback (IsPullback.of_hasPullback h (φ i)) t']
+  exact IsFiniteLocallyFreeOfDegree.fiberDegree_eq t'
 
 end AlgebraicGeometry.Scheme.Hom
