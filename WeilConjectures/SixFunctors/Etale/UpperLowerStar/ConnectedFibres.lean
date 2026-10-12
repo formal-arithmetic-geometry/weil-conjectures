@@ -349,6 +349,118 @@ lemma Etale.exists_mem_agreementLocus_chart
   change germσ = (e.hom ≫ e.inv) germσ
   rw [e.hom_inv_id]
   rfl
+lemma Etale.chartProj_chartφ_comp {V V' : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V) (f : V' ⟶ V)
+    (z : (Etale.chart φ f).left) :
+    f.left (Etale.chartProj p (Etale.chartφ φ f) z) =
+      Etale.chartProj p φ ((Etale.chartι φ f).left z) := by
+  rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, (Etale.isPullback_chart φ f).w]
+
+/-- **Local constancy of agreement along the fibres.** For sections `a, b` of `p^* G` over `W`
+and a point `z` of `W`, there is an open neighbourhood `O` of `z` such that a point of `O` in
+the fibre of `q` through `z` lies in the agreement locus of `a` and `b` iff `z` does. -/
+lemma Etale.exists_isOpen_mem_agreementLocus_iff
+    (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    (a b : ((p)^*[_].obj G).obj.obj (op W)) (z : W.left) :
+    ∃ O : Set W.left, IsOpen O ∧ z ∈ O ∧ ∀ z' ∈ O,
+      Etale.chartProj p φ z' = Etale.chartProj p φ z →
+        (z' ∈ Etale.agreementLocus ((p)^*[_].obj G) a b ↔
+          z ∈ Etale.agreementLocus ((p)^*[_].obj G) a b) := by
+  let H := ((p)^*[ModuleCat.{u + 1} Λ].obj G)
+  obtain ⟨V₁, f₁, c, z₁, hz₁, hc⟩ := Etale.exists_mem_agreementLocus_chart G φ a z
+  let ψ₁ := Etale.chartι φ f₁
+  let φ₁ := Etale.chartφ φ f₁
+  obtain ⟨V₂, f₂, d, z₂, hz₂, hd⟩ :=
+    Etale.exists_mem_agreementLocus_chart G φ₁ (H.obj.map ψ₁.op b) z₁
+  let ψ₂ := Etale.chartι φ₁ f₂
+  let φ₂ := Etale.chartφ φ₁ f₂
+  let Ψ := ψ₂ ≫ ψ₁
+  let c₂ := G.obj.map f₂.op c
+  let q₂ := Etale.chartProj p φ₂
+  have hΨ (σ : H.obj.obj (op W)) : H.obj.map Ψ.op σ = H.obj.map ψ₂.op (H.obj.map ψ₁.op σ) := by
+    simp only [Ψ, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+  have hc₂ : Etale.upperStarSectionsMap _ p G φ₂ c₂ =
+      H.obj.map ψ₂.op (Etale.upperStarSectionsMap _ p G φ₁ c) := by
+    have := congrArg (fun h ↦ h c)
+      (Etale.upperStarSectionsMap_naturality G φ₁ φ₂ f₂ ψ₂ (Etale.chartφ_comp φ₁ f₂))
+    simpa only [ConcreteCategory.comp_apply] using this
+  have hq (o : (Etale.chart φ₁ f₂).left) :
+      f₁.left (f₂.left (q₂ o)) = Etale.chartProj p φ (Ψ.left o) := by
+    rw [Etale.chartProj_chartφ_comp, Etale.chartProj_chartφ_comp]
+    rfl
+  -- the key equivalence on `N₁ ∩ N₂`
+  let N₁ := Etale.agreementLocus H (H.obj.map Ψ.op a) (Etale.upperStarSectionsMap _ p G φ₂ c₂)
+  let N₂ := Etale.agreementLocus H (H.obj.map Ψ.op b) (Etale.upperStarSectionsMap _ p G φ₂ d)
+  have key (o) (h₁ : o ∈ N₁) (h₂ : o ∈ N₂) :
+      Ψ.left o ∈ Etale.agreementLocus H a b ↔ q₂ o ∈ Etale.agreementLocus G c₂ d := by
+    rw [← Etale.mem_agreementLocus_map_iff, Etale.mem_agreementLocus_congr h₁ h₂,
+      Etale.mem_agreementLocus_upperStarSectionsMap_iff]
+  have hz₂₁ : z₂ ∈ N₁ := by
+    change z₂ ∈ Etale.agreementLocus H _ _
+    rw [hΨ, hc₂, Etale.mem_agreementLocus_map_iff, hz₂]
+    exact hc
+  have hz₂₂ : z₂ ∈ N₂ := by
+    change z₂ ∈ Etale.agreementLocus H _ _
+    rw [hΨ]
+    exact hd
+  have hΨz : Ψ.left z₂ = z := by
+    change ψ₁.left (ψ₂.left z₂) = z
+    rw [hz₂, hz₁]
+  -- the fibre of `V₂ ⟶ V` through `q₂ z₂` is discrete
+  let F := f₂ ≫ f₁
+  have := Etale.etale_left F
+  have hdisc := F.left.isDiscrete_preimage_singleton (Etale.chartProj p φ z)
+  have hmem : q₂ z₂ ∈ F.left ⁻¹' {Etale.chartProj p φ z} := by
+    change f₁.left (f₂.left (q₂ z₂)) = _
+    rw [hq, hΨz]
+  have := isDiscrete_iff_discreteTopology.1 hdisc
+  obtain ⟨D, hD, hDeq⟩ := isOpen_induced_iff.1
+    (isOpen_discrete ({⟨_, hmem⟩} : Set (F.left ⁻¹' {Etale.chartProj p φ z})))
+  have := Etale.etale_left Ψ
+  refine ⟨Ψ.left '' (N₁ ∩ N₂ ∩ q₂ ⁻¹' D),
+    Ψ.left.isOpenMap _ (((Etale.isOpen_agreementLocus _ _).inter
+      (Etale.isOpen_agreementLocus _ _)).inter (hD.preimage q₂.continuous)),
+    ⟨z₂, ⟨⟨hz₂₁, hz₂₂⟩, ?_⟩, hΨz⟩, ?_⟩
+  · have : (⟨q₂ z₂, hmem⟩ : F.left ⁻¹' {Etale.chartProj p φ z}) ∈
+        (Subtype.val ⁻¹' D : Set _) := by rw [hDeq]; rfl
+    exact this
+  rintro _ ⟨o, ⟨⟨ho₁, ho₂⟩, hoD⟩, rfl⟩ hoq
+  have homem : q₂ o ∈ F.left ⁻¹' {Etale.chartProj p φ z} := by
+    change f₁.left (f₂.left (q₂ o)) = _
+    rw [hq, hoq]
+  have hoeq : q₂ o = q₂ z₂ := by
+    have : (⟨q₂ o, homem⟩ : F.left ⁻¹' {Etale.chartProj p φ z}) ∈
+        (Subtype.val ⁻¹' D : Set _) := hoD
+    rw [hDeq] at this
+    exact congrArg Subtype.val (Set.mem_singleton_iff.1 this)
+  rw [key o ho₁ ho₂, hoeq, ← key z₂ hz₂₁ hz₂₂, hΨz]
+
+/-- **Agreement is constant on connected fibres.** If the fibres of `q : W ⟶ V` are
+preconnected, two sections of `p^* G` over `W` agreeing at a point of a fibre agree at every
+point of this fibre. -/
+lemma Etale.mem_agreementLocus_of_chartProj_eq
+    (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    (hq : ∀ y, _root_.IsPreconnected (Etale.chartProj p φ ⁻¹' {y}))
+    (a b : ((p)^*[_].obj G).obj.obj (op W)) {z z' : W.left}
+    (hzz' : Etale.chartProj p φ z' = Etale.chartProj p φ z)
+    (hz : z ∈ Etale.agreementLocus ((p)^*[_].obj G) a b) :
+    z' ∈ Etale.agreementLocus ((p)^*[_].obj G) a b := by
+  let Fb := Etale.chartProj p φ ⁻¹' {Etale.chartProj p φ z}
+  have : PreconnectedSpace Fb := isPreconnected_iff_preconnectedSpace.1 (hq _)
+  let A : Set Fb := {x | x.1 ∈ Etale.agreementLocus ((p)^*[_].obj G) a b}
+  have hA : IsClopen A := by
+    refine ⟨⟨?_⟩, (Etale.isOpen_agreementLocus _ _).preimage continuous_subtype_val⟩
+    rw [isOpen_iff_forall_mem_open]
+    intro x hx
+    obtain ⟨O, hO, hxO, hO'⟩ := Etale.exists_isOpen_mem_agreementLocus_iff G φ a b x.1
+    refine ⟨Subtype.val ⁻¹' O, fun y hy hyA ↦ hx ?_, hO.preimage continuous_subtype_val, hxO⟩
+    have h := hO' y.1 hy (y.2.trans x.2.symm)
+    exact h.1 hyA
+  rcases isClopen_iff.1 hA with h | h
+  · exact absurd (h ▸ (show (⟨z, rfl⟩ : Fb) ∈ A from hz)) (Set.notMem_empty _)
+  · exact (h.symm ▸ Set.mem_univ (⟨z', hzz'⟩ : Fb) : (⟨z', hzz'⟩ : Fb) ∈ A)
 
 end Local
 
