@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-compatible-pullback-sheaf-system",
+ "kind": "statement",
+ "title": "Compatible pullback sheaves form a system and become constant on a cone",
+ "statement": "Let $I$ be a preordered set and $D:I^{op}\\to\\mathrm{Sch}$ an inverse diagram of schemes [def-pc-scheme], with an arbitrary cone $(X,(p_i:X\\to D_i))$ [def-weil-pbc-category-colimit]. Let $T$ be a scheme, $G$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], and $v_i:D_i\\to T$ morphisms satisfying $v_j=v_i\\circ D(f^{op})$ for every $f:i\\to j$. Let $v:X\\to T$ satisfy $v=v_i\\circ p_i$. Use inverse images [def-weil-pbc-inverse-image] and their canonical composition comparisons [lem-weil-pbc-inverse-image-composition]. Put $F_i=v_i^{-1}G$, and let $a_f:D(f^{op})^{-1}F_i\\xrightarrow{\\sim}F_j$ be the inverse of the composition comparison transported by the specified equation for $v_j$. Let $b_i:v^{-1}G\\xrightarrow{\\sim}p_i^{-1}F_i$ be the forward composition comparison transported by the specified equation for $v$. Then (1) $a_{1_i}$ equals the inverse-image identity comparison, with transport along $D(1_i)=1_{D_i}$; (2) the $a_f$ satisfy the inverse-image cocycle law for every composable pair, including the comparison between the inverse image along the composite transition and $D(g^{op})^{-1}D(f^{op})^{-1}$; (3) the transition $p_i^{-1}F_i\\to p_j^{-1}F_j$ obtained from the cone equation and $p_j^{-1}(a_f)$ becomes the identity of $v^{-1}G$ under $b_i,b_j$. Equivalently these comparisons present the pulled-back sheaves as the constant diagram with value $v^{-1}G$. No limiting, directedness, compactness or separatedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), with its unit and associativity coherence; etale-cohomology.tex, inverse-system-of-sheaves construction preceding Theorem Tag 09YQ (theorem-colimit), and step 9 of lem-weil-pbc-etale-cohomology-limit-of-schemes"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "For the identity arrow apply the left unit law of the canonical inverse-image composition comparison [lem-weil-pbc-inverse-image-composition]. Transport along D.map_id. Whiskering the identity comparison by v_i inverse image and evaluating at G gives precisely the first equation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f:i->j and g:j->k, apply the associativity law from [lem-weil-pbc-inverse-image-composition] to D(g^op), D(f^op), and v_i. Identify the indicated composites with D((f followed by g)^op), v_j and v_k using D.map_comp and the specified compatibility equations. Take inverse components and multiply by the forward comparison for the first pair. Cancellation of that comparison proves the second equation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same associativity identity to p_j, D(f^op), and v_i. The cone equation identifies the first composite with p_i; compatibility identifies the remaining composites with v_j and v. The identity then equates the transition followed by b_j inverse with b_i inverse. Composing on the left with b_i and cancelling b_i with its inverse gives the identity, the third equation. All transports use the specified equalities; uniqueness of canonical comparisons makes them compatible.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), with its unit and associativity coherence; etale-cohomology.tex, inverse-system-of-sheaves construction preceding Theorem Tag 09YQ (theorem-colimit), and step 9 of lem-weil-pbc-etale-cohomology-limit-of-schemes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "upperStarComp|upperStarId",
+   "date": "2026-10-12",
+   "results": "No matches.",
+   "verdict": "No exact scheme-diagram coherence statement; the local inverse-image composition node supplies the required elementary comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible maps from an inverse diagram of schemes to a fixed scheme induce coherent pullback sheaves and a constant diagram on a cone",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image composition isomorphisms give the identity and cocycle laws for pullbacks of a fixed sheaf along compatible maps from a diagram",
+   "date": "2026-10-12",
+   "results": "TopCat.Sheaf.pullbackIso; CategoryTheory.Presieve.isSheafFor_over_map_op_comp_iff; CategoryTheory.Presieve.isSheafFor_pullback_iff; CategoryTheory.Meq.pullback_apply; SheafOfModules.conjugateEquiv_pullbackComp_inv; CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app; CategoryTheory.GrothendieckTopology.overMapPullbackCongr_inv_app_val_app; SheafOfModules.pullback_assoc",
+   "verdict": "No exact scheme-diagram coherence statement; the local inverse-image composition node supplies the required elementary comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Proof of the cohomology continuity theorem used in step 5: step 9 of lem-weil-pbc-etale-cohomology-limit-of-schemes, construction of the compatible inverse images of G and identification of their pullbacks on the limit with a constant system",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatiblePullbackSheafSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatiblePullbackSheafSystem.lean",
+  "declaration": "AlgebraicGeometry.Etale.compatiblePullbackSheafSystem",
+  "statement": "theorem compatiblePullbackSheafSystem\n    {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (d : Cone D)\n    (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (v : ∀ i : I, D.obj (op i) ⟶ T)\n    (wv : ∀ (i j : I) (f : i ⟶ j), v j = D.map f.op ≫ v i)\n    (vLimit : d.pt ⟶ T) (wLimit : ∀ i : I, vLimit = d.π.app (op i) ≫ v i) :\n    let F := fun i : I ↦ (upperStar AddCommGrpCat.{u + 1} (v i)).obj G\n    let φ := fun {i j : I} (f : i ⟶ j) ↦\n      (upperStarComp AddCommGrpCat.{u + 1} (D.map f.op) (v i)\n        (v j) (wv i j f)).inv.app G\n    let K := (upperStar AddCommGrpCat.{u + 1} vLimit).obj G\n    let S : I ⥤ Sheaf d.pt.smallEtaleTopology AddCommGrpCat.{u + 1} :=\n      (Functor.const I).obj K\n    let eS := fun i : I ↦\n      (upperStarComp AddCommGrpCat.{u + 1} (d.π.app (op i)) (v i)\n        vLimit (wLimit i)).app G\n    (∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) ∧\n    (∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) =\n      (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n        (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n      (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) ∧\n    (∀ (i j : I) (f : i ⟶ j), S.map f =\n      (eS i).hom ≫\n      (upperStarComp AddCommGrpCat.{u + 1} (d.π.app (op j)) (D.map f.op)\n        (d.π.app (op i)) (d.w f.op).symm).hom.app (F i) ≫\n      (upperStar AddCommGrpCat.{u + 1} (d.π.app (op j))).map (φ f) ≫ (eS j).inv)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

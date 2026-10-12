@@ -17,6 +17,9 @@ import Sheaf.CategoryTheory.CohomologyColimitSites
 import Sheaf.CategoryTheory.ColimitSites
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.CompatiblePullbackSheafSystem
+import Mathlib.CategoryTheory.Limits.Connected
+import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Etale cohomology of limits of schemes
 
@@ -38,6 +41,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
+
 
 /-- Cohomology continuity for a system of abelian sheaves on a directed inverse system
 of qcqs schemes with affine transition maps. Source: Stacks Project, Tag 09YQ
@@ -104,6 +108,61 @@ theorem nonempty_isColimit_etale_cohomology_of_isLimit
     Nonempty (IsColimit B) := by
   sorry
 
+private theorem continuity_constant_pullback
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
+    (D : Iᵒᵖ ⥤ Scheme.{u}) (d : Cone D) (hd : IsLimit d)
+    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]
+    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]
+    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]
+    (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (v : ∀ i : I, D.obj (op i) ⟶ T)
+    (wv : ∀ (i j : I) (f : i ⟶ j), v j = D.map f.op ≫ v i)
+    (vLimit : d.pt ⟶ T) (wLimit : ∀ i : I, vLimit = d.π.app (op i) ≫ v i)
+    (p : ℕ) (H : I ⥤ AddCommGrpCat.{u + 1})
+    (eH : ∀ i : I, H.obj i ≅
+      AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p))
+    (hH : ∀ (i j : I) (f : i ⟶ j), H.map f =
+      (eH i).hom ≫ AddCommGrpCat.ofHom
+        (cohomologyMap (D.map f.op)
+          ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map
+          ((upperStarComp AddCommGrpCat.{u + 1} (D.map f.op) (v i)
+            (v j) (wv i j f)).inv.app G) p) ≫ (eH j).inv)
+    (B : Cocone H) (eB : B.pt ≅
+      AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} vLimit).obj G) p))
+    (hB : ∀ i : I, B.ι.app i ≫ eB.hom =
+      (eH i).hom ≫ AddCommGrpCat.ofHom
+        (cohomologyMap (d.π.app (op i))
+          ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map
+          ((upperStarComp AddCommGrpCat.{u + 1} (d.π.app (op i)) (v i)
+            vLimit (wLimit i)).inv.app G) p)) :
+    Nonempty (IsColimit B) := by
+  set_option backward.isDefEq.respectTransparency true in
+    let : IsConnected I := IsFiltered.isConnected I
+    let F := fun i : I ↦ (upperStar AddCommGrpCat.{u + 1} (v i)).obj G
+    let φ := fun {i j : I} (f : i ⟶ j) ↦
+      (upperStarComp AddCommGrpCat.{u + 1} (D.map f.op) (v i)
+        (v j) (wv i j f)).inv.app G
+    let K := (upperStar AddCommGrpCat.{u + 1} vLimit).obj G
+    let S : I ⥤ Sheaf d.pt.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+      (Functor.const I).obj K
+    let eS := fun i : I ↦
+      (upperStarComp AddCommGrpCat.{u + 1} (d.π.app (op i)) (v i)
+        vLimit (wLimit i)).app G
+    obtain ⟨hidentity, hcomposition, hS⟩ :=
+      compatiblePullbackSheafSystem D d T G v wv vLimit wLimit
+    apply nonempty_isColimit_etale_cohomology_of_isLimit D d hd F φ
+      hidentity hcomposition S eS hS (constCocone I K) (isColimitConstCocone I K)
+      p H eH hH B eB ?_
+    intro i
+    change B.ι.app i ≫ eB.hom = (eH i).hom ≫
+      AddCommGrpCat.ofHom (cohomologyMap (d.π.app (op i)) (F i) p) ≫
+      AddCommGrpCat.ofHom (Sheaf.H.map ((eS i).inv ≫ 𝟙 K) p)
+    rw [Category.comp_id]
+    exact hB i
+
+
 /-- The affine ring case: for a directed system of rings with colimit `C`, the compatible
 pullbacks of one abelian sheaf to `Spec C_i` satisfy continuity at `Spec C`.
 Source: Stacks Project, Tags 01YW and 09YQ
@@ -143,6 +202,18 @@ theorem nonempty_isColimit_etale_cohomology_spec_ring_colimit
           ((upperStarComp AddCommGrpCat.{u + 1} (Spec.map (c.ι.app i)) (v i)
             vLimit (wLimit i)).inv.app G) p)) :
     Nonempty (IsColimit B) := by
-  sorry
+  let D : Iᵒᵖ ⥤ Scheme.{u} := R.op ⋙ Scheme.Spec
+  let d : Cone D := Scheme.Spec.mapCone c.op
+  have hd : IsLimit d := isLimitOfPreserves Scheme.Spec hc.op
+  let (i : Iᵒᵖ) : CompactSpace (D.obj i) := by
+    dsimp [D]
+    infer_instance
+  let (i : Iᵒᵖ) : QuasiSeparatedSpace (D.obj i) := by
+    dsimp [D]
+    infer_instance
+  let (i j : Iᵒᵖ) (f : i ⟶ j) : IsAffineHom (D.map f) := by
+    dsimp [D]
+    infer_instance
+  exact continuity_constant_pullback D d hd T G v wv vLimit wLimit p H eH hH B eB hB
 
 end AlgebraicGeometry.Etale

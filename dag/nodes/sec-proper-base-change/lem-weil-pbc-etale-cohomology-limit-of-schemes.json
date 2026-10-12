@@ -138,10 +138,10 @@
    }
   },
   {
-   "text": "*The case of rings.* Let $(C_i)$ be a directed system of rings with colimit $C$. By [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}C=\\varprojlim\\operatorname{Spec}C_i$ with affine transition maps, and the affine schemes $\\operatorname{Spec}C_i$ are quasi-compact and quasi-separated. Given $G$ on $T_{\\Et}$ and $v_i:\\operatorname{Spec}C_i\\to T$ with $v_i=v_{i'}$-compatible ($v_{i'}=v_i\\circ f_{i'i}$) and limit $v=v_i\\circ f_i$, put $\\mathcal F_i=v_i^{-1}G$ and $\\varphi_{i'i}=c:f_{i'i}^{-1}v_i^{-1}G\\xrightarrow{\\sim}v_{i'}^{-1}G$ of [lem-weil-pbc-inverse-image-composition]; its compatibility with triple composites gives the cocycle condition. Then each $f_i^{-1}\\mathcal F_i\\cong v^{-1}G$ via $c$, and the transition maps $\\psi_{i'i}$ of step 1 become the identity of $v^{-1}G$ under these isomorphisms, so $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i\\cong v^{-1}G$ by [lem-weil-pbc-colimit-constant-connected-diagram] ($I$ is directed, hence connected). The theorem gives $\\varinjlim_iH^p(\\operatorname{Spec}C_i,v_i^{-1}G)\\cong H^p(\\operatorname{Spec}C,v^{-1}G)$, the maps being the pullbacks $f_i^*$ followed by $H^p(c)$.",
+   "text": "*The case of rings.* Let $(C_i)$ be a directed system of rings with colimit $C$. By [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}C=\\varprojlim\\operatorname{Spec}C_i$ with affine transition maps, and the affine schemes $\\operatorname{Spec}C_i$ are quasi-compact and quasi-separated. Given $G$ on $T_{\\Et}$ and $v_i:\\operatorname{Spec}C_i\\to T$ with $v_i=v_{i'}$-compatible ($v_{i'}=v_i\\circ f_{i'i}$) and limit $v=v_i\\circ f_i$, put $\\mathcal F_i=v_i^{-1}G$ and $\\varphi_{i'i}=c:f_{i'i}^{-1}v_i^{-1}G\\xrightarrow{\\sim}v_{i'}^{-1}G$ of [lem-weil-pbc-inverse-image-composition]; its compatibility with triple composites gives the cocycle condition. Then each $f_i^{-1}\\mathcal F_i\\cong v^{-1}G$ via $c$, and the transition maps $\\psi_{i'i}$ of step 1 become the identity of $v^{-1}G$ under these isomorphisms, so $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i\\cong v^{-1}G$ by [lem-weil-pbc-colimit-constant-connected-diagram] ($I$ is directed, hence connected). The theorem gives $\\varinjlim_iH^p(\\operatorname{Spec}C_i,v_i^{-1}G)\\cong H^p(\\operatorname{Spec}C,v^{-1}G)$, the maps being the pullbacks $f_i^*$ followed by $H^p(c)$. In Lean the identity, cocycle and constant-diagram comparison equations are supplied by [lem-weil-pbc-compatible-pullback-sheaf-system]; the remaining proof constructs the constant cocone, invokes steps 1-8, and checks that its cohomology legs are the prescribed comparisons.",
    "uses": [
     "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-compatible-pullback-sheaf-system",
     "lem-weil-pbc-colimit-constant-connected-diagram"
    ],
    "elementary": false,
@@ -175,12 +175,13 @@
   "lem-weil-pbc-five-lemma",
   "lem-weil-pbc-separated-affine-open-intersection",
   "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-compatible-pullback-sheaf-system",
   "lem-weil-pbc-colimit-constant-connected-diagram"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem Tag 09YQ (theorem-colimit, line 7400) and its proof (line 7413) for the affine case (steps 3-4); the reduction of the quasi-compact quasi-separated case to the affine case (steps 5-8) is agent-written, since Lemma 09YP applies to objects of the site and a non-affine $X_i$ is not an object of $(X_i)_{affine,\\etale}$"
+  "place": "Theorem Tag 09YQ (theorem-colimit, line 7400) and its proof (line 7413) for the affine case (steps 3-4); the reduction of the quasi-compact quasi-separated case to the affine case (steps 5-8) is agent-written, since Lemma 09YP applies to objects of the site and a non-affine $X_i$ is not an object of $(X_i)_{affine,\\etale}$; step 9 reduced in Lean by M1 to compatiblePullbackSheafSystem, the constant-diagram colimit, and the general continuity theorem"
  },
  "mathlib_searches": [
   {
@@ -282,5 +283,15 @@
   "group": "J1",
   "result": "fix",
   "note": "directed preorder I:Type u nonempty; D:Iᵒᵖ⥤Scheme.{u} cone+IsLimit; qcqs stages; IsAffineHom transitions; F_i abelian etale sheaves, φ via upperStar with id/comp laws; G,L colimit of f_i⁻¹F_i tied by eG/hG; H,B tied by cohomologyMap+Sheaf.H.map; Nonempty IsColimit B; ring case: removed Spec-limit and IsAffineHom conjuncts (clauses of lem-weil-pbc-spec-colimit-limit)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
