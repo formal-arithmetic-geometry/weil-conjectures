@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.GlobalDimension
 import Sheaf.RingTheory.ResidueFieldProjectiveDimension
 import Sheaf.RingTheory.ResidueFieldProjectiveDimensionLowerBound
+import Sheaf.RingTheory.ResidueFieldFiniteProjectiveDimensionOfGlobalDimension
 
 /-!
 # Regularity from finite global dimension
@@ -43,6 +44,23 @@ Proof:
 theorem of_hasFiniteGlobalDimension (R : Type u) [CommRing R] [IsNoetherianRing R]
     [IsLocalRing R] (h : Ring.HasFiniteGlobalDimension.{u, max u v} R) :
     IsRegularLocalRing R := by
-  sorry
+  have hres : ModuleCat.HasFiniteProjectiveDimension
+      (ModuleCat.of R (IsLocalRing.ResidueField R)) :=
+    Ring.residueField_hasFiniteProjectiveDimension R h
+  obtain ⟨a, ha⟩ : ∃ a : ℕ∞, (a : WithBot ℕ∞) = ringKrullDim R :=
+    WithBot.ne_bot_iff_exists.mp (ringKrullDim_ne_bot (R := R))
+  obtain ⟨D, hDa⟩ : ∃ D : ℕ, (D : ℕ∞) = a := ENat.ne_top_iff_exists.mp (by
+    intro haTop
+    exact (ringKrullDim_ne_top (R := R)) (ha.symm.trans (by simp [haTop])) )
+  have hD : ringKrullDim R = (D : WithBot ℕ∞) := by
+    exact ha.symm.trans (congrArg (fun x : ℕ∞ => (x : WithBot ℕ∞)) hDa.symm)
+  have hle := (Ring.residueField_projectiveDimension_le_ringKrullDim R hres).2 D hD
+  have hcot := IsLocalRing.finrank_cotangentSpace_le_of_hasProjectiveResolutionLE R D hle
+  apply (IsRegularLocalRing.iff_finrank_cotangentSpace R).2
+  apply le_antisymm
+  · rw [hD]
+    exact_mod_cast hcot
+  · rw [← IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace]
+    exact ringKrullDim_le_spanFinrank_maximalIdeal R
 
 end IsRegularLocalRing
