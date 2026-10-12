@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-truncated-direct-image-affine-finite-support",
+ "kind": "statement",
+ "title": "Affine finite-support representatives for truncated direct image",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], $I$ a set, and $E_i\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category] for $i\\in I$. Let $S\\in D(\\mathcal O_X)$ and $\\iota_i:E_i\\to S$ exhibit an ambient coproduct. Write $F_q=H^q\\circ Rf_*$ [def-pc-derived-direct-image]. For all integers $a,q$ and all affine opens $U\\subseteq Y$, the linear map $\\bigoplus_{i\\in I}\\Gamma(U,F_q(\\tau_{\\ge a}E_i))\\to\\Gamma(U,F_q(\\tau_{\\ge a}S))$, whose restriction to the $i$th summand is $\\Gamma(U,F_q(\\tau_{\\ge a}\\iota_i))$, is surjective. Here $\\tau_{\\ge a}$ is canonical lower truncation for the standard cohomological t-structure.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Proof. Choose termwise representatives of the ambient coproduct. Exact sums compute\nits cohomology as the sum of the summands' cohomology, and these sums are quasi-coherent.\nExact sums commute with lower truncation, so the truncated family and its coproduct\nhave the common lower bound a. Over an affine open U of Y, the inverse image is qcqs.\nThe natural bounded-below hypercohomology spectral sequences have second pages\nH^p(f⁻¹U,H^r(τ≥a E)). Cohomology of module sheaves on this qcqs inverse image commutes\nwith sums. Thus the second-page comparison is bijective. Exact sums commute with the\nkernels and images of differentials, so all page comparisons are bijective. In total\ndegree q there are only the finitely many indices 0 ≤ p ≤ q-a. The finite convergent\nfiltrations therefore give surjectivity on the abutment: lift a section of the top\nnonzero graded piece, subtract its image, and repeat in the next filtration step.\nEach lift has finite support; the union of the finitely many supports is finite.\nFor the second-page terms, cohomology of a quasi-coherent module on the qcqs preimage of an affine open V commutes with localization at a pulled-back section: affine acyclicity and section localization give the affine case, and finite affine covers with quasi-compact overlaps give the general case by Mayer--Vietoris. Compatibility with restriction to principal opens of V and the higher-direct-image presheaf description prove quasi-coherence of the second-page sheaves. Kernel and cokernel closure give quasi-coherence of each later page by induction. Starting at the zero last filtration step, extension closure along the short exact sequences of the finite convergent filtration gives quasi-coherence of the abutment. This derives the required bounded-below quasi-coherence locally inside the spectral-sequence argument; it does not invoke the derived-direct-image bounded-below quasi-coherence theorem, whose imports reach the original truncated-coproduct comparison.\nConsequently, exact sections on the affine open U identify the sheaf abutments with\nthe displayed section modules. Naturality identifies the map with the displayed\nlinear map. If q<a the target is zero. If I is empty the ambient coproduct and its\nlower truncation are zero, so the target is zero as well.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-pc-quasicoherent-module-coproducts",
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sp-couple-morphism",
+    "lem-sp-finite-filtration-induction",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasi-coherent-extension",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-quasicoherent-module-coproducts",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sp-couple-morphism",
+  "lem-sp-finite-filtration-induction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/08DZ",
+  "place": "Bounded-below spectral-sequence paragraph, with Tag 015J; extract the surjectivity and affine-section clauses. Repair: derive abutment quasi-coherence using page kernel/cokernel closure and finite extension induction, avoiding the cyclic bounded-below quasi-coherence import."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjectivity of cohomology direct sum comparison for bounded below quasi coherent complexes",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every section of higher direct image of bounded below coproduct comes from finitely many summands",
+   "results": "Eight hits on finite presheaves and condensed colimits; none addresses derived direct image.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology.*sum|directSum.*[Ss]urject|coproduct.*[Ss]urject",
+   "results": "Only finiteCoproduct jointly surjective in CompHausLike; no match. Repository search found moduleCohomology_directSum_bijective for individual sheaves, not bounded-below complexes. Blueprint direct sums search has no bounded-below affine finite-support assertion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ bounded-below spectral-sequence paragraph: affine-section surjectivity of the abutment comparison",
+   "via": [
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TruncatedDirectImageAffineFiniteSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncatedDirectImageAffineFiniteSupport.lean",
+  "declaration": "AlgebraicGeometry.truncated_directImage_affine_finiteSupport",
+  "statement": "theorem truncated_directImage_affine_finiteSupport\n    {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))]\n    (I : Type u₁) (E : I → schemeDerivedQCohCategory X)\n    (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S)\n    (hc : IsColimit (Cofan.mk S ι)) (a q : ℤ) (U : Y.Opens) (hU : IsAffineOpen U) :\n    Function.Surjective\n      (DirectSum.toModule ((moduleRings Y.toRingedSpace).obj.obj (op U)) I\n        (((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).obj\n          ((schemeHigherDirectImage f q).obj\n            ((DerivedCategory.TStructure.t.truncGE a).obj S))))\n        (fun i ↦ ((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).map\n          ((schemeHigherDirectImage f q).map\n            ((DerivedCategory.TStructure.t.truncGE a).map (ι i)))).hom))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T095927-L-325898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T095927-L-325898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
