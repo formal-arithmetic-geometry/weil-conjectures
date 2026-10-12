@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "*Affine description.* Write $X=\\operatorname{Spec}R$ with $R=\\mathcal O_X(X)$ [def-pc-scheme]. By part (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] applied to the closed immersion $Z\\to X$ and the affine open $V=X$, the scheme $Z$ is affine and $R\\to\\mathcal O_Z(Z)$ is surjective; with $I$ its kernel, $Z\\cong\\operatorname{Spec}(R/I)$ over $X$, the morphism $Z\\to X$ corresponding to $R\\to R/I$ [lem-weil-pbc-morphism-into-affine-scheme]. Likewise $V=\\operatorname{Spec}\\overline C$ with $\\overline C=\\mathcal O_V(V)$, and the morphism $V\\to Z$ of affine schemes is $\\operatorname{Spec}$ of a ring map $R/I\\to\\overline C$ [lem-weil-pbc-morphism-into-affine-scheme]. Since $V\\to Z$ is etale, $R/I\\to\\overline C$ is an etale ring map [lem-weil-pbc-etale-ring-map-iff-etale-affine].",
+   "text": "Compose i with X.isoSpec.hom. IsClosedImmersion.Spec_iff supplies an ideal I of Γ(X, ⊤), an isomorphism eZ : Z ≅ Spec(Γ(X, ⊤)/I), and the factorization of i. Write V as Spec Γ(V, ⊤) using V.isoSpec and use Spec.map_surjective to express eV.inv ≫ p ≫ eZ.hom as Spec.map f. HasRingHomProperty.Spec_iff identifies its étaleness with that of f.",
    "uses": [
     "def-pc-scheme",
     "lem-weil-pbc-closed-immersion-affine-cover-criterion",
@@ -34,22 +34,33 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, first sentence (the affine set-up implicit in 'lift V')"
+    "place": "Stacks Tag 09ZA, proof, first paragraph; https://stacks.math.columbia.edu/tag/09ZA"
    }
   },
   {
-   "text": "*Lift $V$ to $U$ etale over $X$ (Stacks: 'By Algebra, Lemma 04D1 we can lift $V$ to an affine scheme $U$ etale over $X$').* By [lem-exc-etale-algebra-lift] (Algebra 04D1: etale ring maps lift along surjections) there is an etale ring map $R\\to C$ with $C/IC\\cong\\overline C$ as $R/I$-algebras. Put $U=\\operatorname{Spec}C$; then $U\\to X$ is etale [lem-weil-pbc-etale-ring-map-iff-etale-affine]. Moreover $U\\times_XZ\\cong\\operatorname{Spec}(C\\otimes_R R/I)$ [lem-weil-pbc-fibre-product-affine-spectra] and $C\\otimes_R R/I\\cong C/IC\\cong\\overline C$ [lem-weil-pbc-tensor-quotient-base-change], all as $R/I$-algebras, so $U\\times_XZ\\cong V$ as schemes over $Z$.",
+   "text": "Apply Algebra.exists_etale_coefficientLift to f.hom.toAlgebra. Its explicit Jacobian lift C has an étale algebraMap Γ(X, ⊤) C and a reduction L.reduction, with a ring equivalence e : C/IC ≃+* Γ(V, ⊤) agreeing with L.reduction after the quotient map. Compose the inverse of quotIdealMapEquivTensorQuot with e to obtain E : C ⊗[Γ(X, ⊤)] (Γ(X, ⊤)/I) ≃+* Γ(V, ⊤). On c ⊗ 1 this equals L.reduction c. Evaluate polynomialReduction on constants to show L.reduction(algebraMap r) = f(mk I r). Quotient surjectivity and the tensor balancing identity establish the second structural-map compatibility. Transport CommRingCat.isPushout_tensorProduct along E to give a pushout with arrows algebraMap, mk I, L.reduction and f.",
    "uses": [
     "lem-exc-etale-algebra-lift",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "lem-weil-pbc-fibre-product-affine-spectra",
     "lem-weil-pbc-tensor-quotient-base-change",
     "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, first sentence; literature/stacks-project/algebra.tex Lemma 04D1 (label lemma-lift-etale)"
+    "place": "Stacks Tag 09ZA, proof, first paragraph; https://stacks.math.columbia.edu/tag/09ZA"
+   }
+  },
+  {
+   "text": "Apply isPullback_SpecMap_of_isPushout to the constructed ring square. Set U = Spec C, q = Spec.map(algebraMap) ≫ X.isoSpec.inv, and a = eV.hom ≫ Spec.map(L.reduction). The Spec étale criterion and composition with an isomorphism show q is étale. IsPullback.of_iso' transports the square using eV, the identity of U, eZ, and X.isoSpec; its four compatibility equations follow from the definitions, Spec.map_surjective, and the factorization of i.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Tag 09ZA, proof, first paragraph; https://stacks.math.columbia.edu/tag/09ZA"
    }
   }
  ],
@@ -59,14 +70,16 @@
   "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "lem-exc-etale-algebra-lift",
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-tensor-quotient-base-change",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "W2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Tag 09ZA, proof, first paragraph; https://stacks.math.columbia.edu/tag/09ZA"
+  "place": "Stacks Tags 09ZA and 04D1; implemented using Mathlib Spec, tensor quotient, and pushout transport"
  },
  "mathlib_searches": [
   {
@@ -153,10 +166,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T060739-L-2908239",
-  "kind": "interface",
+  "landing": "20261012T110324-L-624255",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
