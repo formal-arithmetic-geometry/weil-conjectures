@@ -127,7 +127,7 @@ one, compatibly with the morphism.
 (blueprint: `lem-sp-page-induction`) -/
 theorem SpectralSequence.Hom.isIso_hom {E E' : SpectralSequence C c r₀} (φ : E ⟶ E')
     (h : IsIso (φ.hom r₀)) (r : ℤ) (hr : r₀ ≤ r) : IsIso (φ.hom r) := by
-  induction r, hr using Int.le_induction with
+  induction r, hr using Int.leInduction with
   | base => exact h
   | succ r hr ih =>
     have : ∀ pq, IsIso ((φ.hom (r + 1)).f pq) := fun pq ↦ by

@@ -57,6 +57,7 @@ namespace DecreasingFiltration
 
 variable {A} (F : DecreasingFiltration A)
 
+omit [Abelian C] in
 lemma antitone : Antitone F.F :=
   antitone_int_of_succ_le F.F_succ_le
 
