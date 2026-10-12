@@ -1,0 +1,109 @@
+{
+ "id": "lem-pbc-u2-module-sheaf-underlying-preserves-colimit",
+ "kind": "statement",
+ "title": "Underlying sheaf forgetful functor preserves module-sheaf colimits",
+ "statement": "For a scheme X, a commutative ring Λ, and a small diagram D of Λ-module sheaves on the small etale site of X, the sheafCompose functor induced by ModuleCat Λ → AddCommGrpCat preserves colimits of D.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03CO(4) and 03CY(2),(3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Form presheaf colimits sectionwise, use preservation of colimits by the module forgetful functor, and compare module and abelian sheafification after forgetting scalars.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03CO(4) and 03CY(2),(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "PreservesColimit sheafCompose forget ModuleCat AddCommGrpCat",
+   "results": "No direct matching theorem returned.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "sheafCompose PreservesColimit",
+   "results": "No direct matching theorem returned.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*colimit|PreservesColimit.*sheafCompose",
+   "results": "Local search found no direct theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingColimit",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-u2-module-sheaf-underlying-colimit",
+   "place": "proof bridge",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingPreservesColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ModuleSheafUnderlyingPreservesColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.moduleSheaf_underlying_preserves_colimit",
+  "statement": "theorem moduleSheaf_underlying_preserves_colimit {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] {A : Type (u + 1)} [SmallCategory A] {D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} : PreservesColimit D (sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053925-L-2632605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053925-L-2632605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingPreservesColimit
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Colimits under the constant-coefficient module forgetful functor -/
@@ -21,6 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
 
 /-- Forgetting constant-ring module structures preserves a module-sheaf colimit cocone.
 Source: Stacks Project, Tags 03CO and 03CY.
@@ -42,6 +44,8 @@ theorem moduleSheaf_underlying_isColimit
     {D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {c : Cocone D} (hc : IsColimit c) :
     Nonempty (IsColimit ((sheafCompose X.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapCocone c)) := by sorry
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapCocone c)) := by
+  let _ := moduleSheaf_underlying_preserves_colimit (X := X) (Λ := Λ) (D := D)
+  exact PreservesColimit.preserves hc
 
 end AlgebraicGeometry.Scheme
