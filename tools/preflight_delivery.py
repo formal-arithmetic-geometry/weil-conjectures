@@ -92,7 +92,7 @@ WeilConjectures.<...>):
      every sorry the delivery leaves elsewhere), `## No longer needed`, `## Where the brief, the DAG or earlier work
      was wrong` (roles/worker.md §3), `## Second reading by <group>`, `## New nodes` naming each new node, and the
      path of each change record;
-  f. on the server: each module compiled with tools/lean_file.sh (120 s) with a probe appended that lists, for every
+  f. on the server: each module compiled with tools/lean_file.sh (60 s) with a probe appended that lists, for every
      constant the file adds, its axioms beyond propext, Classical.choice, Quot.sound, sorryAx (any is a failure) and
      the constants whose own term uses sorryAx (each must be one the text check allowed).
 Prints the review class (AUTO: landed by a script; CODEX: <reasons>: read by the independent Codex reviewer) and

@@ -1174,7 +1174,7 @@ def can_compile(root: pathlib.Path) -> str | None:
     return None
 
 
-def compile_text(text: str, group: str, item: str, root: pathlib.Path | None = None, timeout: int = 120) -> tuple[bool, int, str]:
+def compile_text(text: str, group: str, item: str, root: pathlib.Path | None = None, timeout: int = 60) -> tuple[bool, int, str]:
     """Write `text` to lean/.sandbox/<group>/<item>.lean of `root` and compile it with tools/lean_file.sh.
     Returns (ran, exit code, output); ran is False when Lean does not run on this machine."""
     root = root or compile_root()
@@ -1200,7 +1200,7 @@ def landed_same(root: pathlib.Path, module: str, text: str) -> bool:
         return False
 
 
-def compile_modules(D: dict, group: str, root: pathlib.Path | None = None, timeout: int = 120) -> list[dict]:
+def compile_modules(D: dict, group: str, root: pathlib.Path | None = None, timeout: int = 60) -> list[dict]:
     """Compile every module of the delivery in dependency order, each on its own in lean/.sandbox/<group>/<node>.lean.
     A module that imports a sibling module of the delivery which is not yet in the library is not compiled: its status
     is "deferred" (the merge lands the modules in order, and each landing compiles in the library, where the sibling then

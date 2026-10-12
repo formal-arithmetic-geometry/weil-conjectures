@@ -451,7 +451,7 @@ def check_report(D, f, group):
 
 # ---------------------------------------------------------------- check f: compile with the probe
 
-def probe(D: dict, group: str, root: pathlib.Path | None = None, timeout: int = 120) -> list[dict]:
+def probe(D: dict, group: str, root: pathlib.Path | None = None, timeout: int = 60) -> list[dict]:
     """Compile each module with PROBE appended (s2.compile_text), in import order, deferring a module that imports a
     delivered sibling not yet in the library. Returns [{file, status, out, axioms: [(decl, axiom)], sorry: [owner]}]."""
     root = root or s2.compile_root()

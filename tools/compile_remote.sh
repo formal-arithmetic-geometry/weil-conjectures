@@ -6,7 +6,7 @@
 # <item> is a node id (stage 2) or a module name (stage 3), written with dots or with `_` for every dot:
 # Sheaf.Paper.Foo and Sheaf_Paper_Foo both give lean/.sandbox/<group>/Sheaf_Paper_Foo.lean.
 # The file is written to lean/.sandbox/<group>/<item>.lean and compiled with tools/lean_file.sh (time limit
-# SHEAF_FILE_TIMEOUT, default 120 s here) against the last green global build plus the group's own landings.
+# SHEAF_FILE_TIMEOUT, default 60 s) against the last green global build plus the group's own landings.
 # Prints the compiler's messages and "Compiled in N s" or the errors; the exit code is lean's (124 on timeout).
 set -u
 G=${1:?usage: compile_remote.sh <group> <item> [file.lean]}; I=${2:?usage: compile_remote.sh <group> <item> [file.lean]}
@@ -17,4 +17,4 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd); D="$ROOT/lean/.sandbox/$G"; mkdir -p "$D
 if [ -n "${3:-}" ]; then cp "$3" "$F"; else cat > "$F"; fi
 [ -s "$F" ] || { echo "empty file"; exit 2; }
 echo "== $F ($(wc -l < "$F") lines)"
-SHEAF_GROUP="$G" SHEAF_FILE_TIMEOUT="${SHEAF_FILE_TIMEOUT:-120}" "$ROOT/tools/lean_file.sh" "$F"
+SHEAF_GROUP="$G" SHEAF_FILE_TIMEOUT="${SHEAF_FILE_TIMEOUT:-60}" "$ROOT/tools/lean_file.sh" "$F"
