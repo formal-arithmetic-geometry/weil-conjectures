@@ -6853,3 +6853,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.PicardLift (stage 3; reviewer PASS; first push; landing 20261012T085244-L-16790 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions (stage 3; reviewer PASS; first push; landing 20261012T085244-L-16937 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.QuasiFiniteAffineOpenInFinite (stage 3; reviewer PASS; first push; landing 20261012T085244-L-17044 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineEtaleDescentData (stage 3; reviewer PASS; first push; landing 20261012T085245-L-17144 (interface); batch 20261012T085205; modules 3; new nodes 2)

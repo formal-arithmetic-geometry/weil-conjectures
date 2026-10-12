@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-affine-etale-covering-eventually",
+ "kind": "statement",
+ "title": "AffineEtaleCoveringEventually",
+ "statement": "Let I be a nonempty directed preorder, D : I^op → Scheme a diagram of qcqs schemes with affine transitions, and c a limiting cone. Let U_ij and v_i be functors between the full affine étale categories [def-weil-pbc-full-affine-etale-site], with natural first projections p_ij and q_i whose squares over D_ji and c_i are pullbacks [def-pc-fibre-product]. Given a stage i, n : N, objects Ai and Bi_a indexed by Fin n, and arrows fi_a : Bi_a → Ai, if the finite family v_i(fi_a) covers v_i(Ai), then there exist j ≥ i and h : i ≤ j such that U_ij(fi_a) covers U_ij(Ai). Empty families are included.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, qcqs case; Limits 07RR, 05F4, 01YZ; Morphisms 054K"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Let E be the finite union of the stage arrows images. The arrows are étale between affine schemes, so their images are constructible by Chevalley. Naturality of q and the target q-pullback isomorphism show the canonical limit pullback projection has image in E.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the canonical base-change diagram by the equivalence from the directed upper tail to Over (op i). Apply the limit-contained-in-constructible theorem to the pullback of E at its initial stage. Projection identities yield a later stage whose projection to Ai has image in E.",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-limit-contained-in-constructible",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The p-pullback isomorphism transfers containment to the chosen U-image. Naturality and pullback cancellation give a pullback square for each arrow. Lift points through it to prove joint surjectivity. With n = 0, E is empty, forcing the target empty.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-base-change-image",
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-full-affine-etale-site",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Adaptation of 0EYL to chosen functors; source read at https://stacks.math.columbia.edu/tag/0EYL and https://stacks.math.columbia.edu/tag/07RR on 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite diagram of affine etale schemes descends to a stage of an inverse limit",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "descent of affine etale objects and finite covering families over inverse limits of schemes",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and exists_isOpenCover_and_isAffine; no direct chosen-functor finite diagram or eventual-cover theorem. Loogle FullAffineEtale is unknown.",
+   "date": "2026-10-12",
+   "verdict": "no direct match in returned results"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists.*(surjective|finitePresentation)|ofArrows.*(iso|cover); rg affineEtale_descent|finite.*descent|etale.*descent in Mathlib and both library roots; blueprint_refs.py search affine etale and 07RR",
+   "results": "Existing spreading-out, étaleness descent, surjectivity descent, constructible-image and point-lifting tools found. Paper.EtaleFiniteDataDescent does not retain affine models. No blueprint duplicate of either chosen-functor statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact duplicate; use the existing tools in the proof plans"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleDescentData",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof of restriction acyclicity: passage to cohomology of the limit via 09YQ; affine objects and finite covering descent; eventual covering",
+   "via": [
+    "lem-weil-pbc-affine-etale-descent-data",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleCoveringEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleCoveringEventually.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_covering_eventually",
+  "statement": "theorem affineEtale_covering_eventually {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)] [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤ (D.obj (op j)).FullAffineEtale) (v : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ c.pt.FullAffineEtale) (p : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ fullAffineEtaleInclusion (D.obj (op j)) ⋙ Etale.forget (D.obj (op j)) ⋙ Over.forget (D.obj (op j)) ⟶ fullAffineEtaleInclusion (D.obj (op i)) ⋙ Etale.forget (D.obj (op i)) ⋙ Over.forget (D.obj (op i))) (q : ∀ i : I, v i ⋙ fullAffineEtaleInclusion c.pt ⋙ Etale.forget c.pt ⋙ Over.forget c.pt ⟶ fullAffineEtaleInclusion (D.obj (op i)) ⋙ Etale.forget (D.obj (op i)) ⋙ Over.forget (D.obj (op i))) (h1 : (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale), IsPullback ((p i j h).app A) ((U i j h).obj A).obj.hom A.obj.hom (D.map (homOfLE h).op))) (h2 : (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale), IsPullback ((q i).app A) ((v i).obj A).obj.hom A.obj.hom (c.π.app (op i)))) : ∀ (i : I) (n : ℕ) (Ai : (D.obj (op i)).FullAffineEtale) (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (fi : ∀ a : Fin n, Bi a ⟶ Ai), Presieve.ofArrows (fun a ↦ (v i).obj (Bi a)) (fun a ↦ (v i).map (fi a)) ∈ fullAffineEtalePrecoverage c.pt ((v i).obj Ai) → ∃ (j : I) (h : i ≤ j), Presieve.ofArrows (fun a ↦ (U i j h).obj (Bi a)) (fun a ↦ (U i j h).map (fi a)) ∈ fullAffineEtalePrecoverage (D.obj (op j)) ((U i j h).obj Ai)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085245-L-17144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085245-L-17144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

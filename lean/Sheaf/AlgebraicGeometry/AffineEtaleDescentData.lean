@@ -8,11 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Category.Cat
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.AlgebraicGeometry.DescendSurjective
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+
+import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramDescent
+import Sheaf.AlgebraicGeometry.AffineEtaleCoveringEventually
 
 /-!
 # AffineEtaleDescentData
@@ -28,6 +26,45 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem covering_iff_jointly_surjective
+    {S : Scheme.{u}} {n : ℕ} {A : S.FullAffineEtale}
+    (B : Fin n → S.FullAffineEtale) (f : ∀ a, B a ⟶ A) :
+    Presieve.ofArrows B f ∈ fullAffineEtalePrecoverage S A ↔
+      ∀ x : A.obj.left, ∃ (a : Fin n) (y : (B a).obj.left), (f a).hom.left y = x := by
+  constructor
+  · rintro ⟨m, V, g, heq, _, hsurj⟩ x
+    obtain ⟨a, y, hy⟩ := hsurj x
+    have hg : Presieve.ofArrows B f (g a) := heq ▸ Presieve.ofArrows.mk a
+    have hfactor : ∀ {W : S.FullAffineEtale} {g : W ⟶ A},
+        Presieve.ofArrows B f g → ∀ y : W.obj.left,
+          ∃ b z, (f b).hom.left z = g.hom.left y := by
+      intro W g hg
+      cases hg with
+      | mk b => intro y; exact ⟨b, y, rfl⟩
+    obtain ⟨b, z, hz⟩ := hfactor hg y
+    exact ⟨b, z, hz.trans hy⟩
+  · intro hsurj
+    exact ⟨n, B, f, rfl, fun _ ↦ inferInstance, hsurj⟩
+
+private theorem covering_of_comparison
+    {S : Scheme.{u}} {n : ℕ} {A A' : S.FullAffineEtale}
+    (B B' : Fin n → S.FullAffineEtale) (f : ∀ a, B a ⟶ A) (f' : ∀ a, B' a ⟶ A')
+    (t : A' ≅ A) (s : ∀ a, B' a ≅ B a)
+    (h : ∀ a, f' a ≫ t.hom = (s a).hom ≫ f a)
+    (hcov : Presieve.ofArrows B' f' ∈ fullAffineEtalePrecoverage S A') :
+    Presieve.ofArrows B f ∈ fullAffineEtalePrecoverage S A := by
+  rw [covering_iff_jointly_surjective] at hcov ⊢
+  intro x
+  obtain ⟨a, y, hy⟩ := hcov (t.inv.hom.left x)
+  refine ⟨a, (s a).hom.hom.left y, ?_⟩
+  have heq := congrArg (fun g ↦ g.hom.left y) (h a)
+  change t.hom.hom.left ((f' a).hom.left y) =
+    (f a).hom.left ((s a).hom.hom.left y) at heq
+  rw [hy] at heq
+  have ht := congrArg (fun g ↦ g.hom.left x) t.inv_hom_id
+  change t.hom.hom.left (t.inv.hom.left x) = x at ht
+  exact heq.symm.trans ht
 
 /-- Source: Stacks Project, Étale Cohomology 0EYL, proof of the qcqs case;
 Limits 01ZM, 01YZ, 01Z6, 07RP, and 07RR.
@@ -98,6 +135,46 @@ theorem affineEtale_descent_data
             (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (fi : ∀ a : Fin n, Bi a ⟶ Ai)
             (t : (v i).obj Ai ≅ A) (s : ∀ a : Fin n, (v i).obj (Bi a) ≅ B a),
             Presieve.ofArrows Bi fi ∈ fullAffineEtalePrecoverage (D.obj (op i)) Ai ∧
-              ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a) := by sorry
+              ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a) := by
+  have _ := gamma
+  have _ := h7
+  have _ := h10
+  have hdiag := affineEtale_finite_diagram_descent D c hc v q h2
+  constructor
+  · intro A
+    obtain ⟨i, Ai, _, _, t, _, _⟩ :=
+      hdiag 0 A (fun a ↦ Fin.elim0 a) (fun a ↦ Fin.elim0 a)
+    exact ⟨i, Ai, ⟨t⟩⟩
+  · intro n A B f
+    constructor
+    · intro hcov
+      obtain ⟨i, Ai, Bi, fi, t, s, heq⟩ := hdiag n A B f
+      have hlim : Presieve.ofArrows (fun a ↦ (v i).obj (Bi a))
+          (fun a ↦ (v i).map (fi a)) ∈ fullAffineEtalePrecoverage c.pt ((v i).obj Ai) := by
+        apply covering_of_comparison (fun a ↦ (v i).obj (Bi a)) B
+          (fun a ↦ (v i).map (fi a)) f t.symm (fun a ↦ (s a).symm) _ hcov
+        intro a
+        apply (cancel_mono t.hom).1
+        simpa only [Iso.symm_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+          Iso.inv_hom_id_assoc] using
+            (congrArg (fun g ↦ (s a).inv ≫ g) (heq a)).symm
+      obtain ⟨j, hij, hj⟩ := affineEtale_covering_eventually D c hc U v p q h1 h2 i n Ai Bi fi hlim
+      refine ⟨j, (U i j hij).obj Ai, (fun a ↦ (U i j hij).obj (Bi a)),
+        (fun a ↦ (U i j hij).map (fi a)), (delta i j hij).app Ai ≪≫ t,
+        (fun a ↦ (delta i j hij).app (Bi a) ≪≫ s a), hj, ?_⟩
+      intro a
+      change (v j).map ((U i j hij).map (fi a)) ≫
+          (delta i j hij).hom.app Ai ≫ t.hom =
+        (delta i j hij).hom.app (Bi a) ≫ (s a).hom ≫ f a
+      have hn := (delta i j hij).hom.naturality (fi a)
+      change (v j).map ((U i j hij).map (fi a)) ≫ (delta i j hij).hom.app Ai =
+        (delta i j hij).hom.app (Bi a) ≫ (v i).map (fi a) at hn
+      rw [← Category.assoc, hn, Category.assoc, heq a]
+    · rintro ⟨i, Ai, Bi, fi, t, s, hcov, heq⟩
+      have hv := h12 i Ai (Presieve.ofArrows Bi fi) hcov
+      rw [Presieve.map_ofArrows] at hv
+      exact covering_of_comparison B (fun a ↦ (v i).obj (Bi a)) f
+        (fun a ↦ (v i).map (fi a)) t s heq hv
+
 
 end AlgebraicGeometry.Scheme
