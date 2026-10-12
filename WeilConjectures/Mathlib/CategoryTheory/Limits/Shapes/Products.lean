@@ -7,18 +7,22 @@ module
 
 public import Mathlib.CategoryTheory.HomCongr
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 
 /-!
 # Recognising (co)fans as (co)limits
 
 A cofan (resp. fan) is a colimit (resp. limit) if and only if the induced maps on morphisms are
-bijective, and limit fans are stable under isomorphisms of families.
+bijective, and limit fans are stable under isomorphisms of families. If all factors of a product
+but one are zero objects, then a morphism into the product is an isomorphism as soon as its
+component in the remaining factor is.
 
 ## Main statements
 
 - `CategoryTheory.Limits.Cofan.IsColimit.ofBijective`,
   `CategoryTheory.Limits.Fan.IsLimit.ofBijective`.
 - `CategoryTheory.Limits.Fan.IsLimit.ofIsos`.
+- `CategoryTheory.Limits.isIso_pi_lift_of_isZero`.
 -/
 
 @[expose] public section
@@ -110,5 +114,21 @@ lemma Fan.IsLimit.isIso_of_isos {s : Fan X} {t : Fan Y} (hs : IsLimit s) (ht : I
   ⟨Fan.IsLimit.lift hs fun j ↦ t.proj j ≫ (e j).inv,
     Fan.IsLimit.hom_ext hs _ _ fun j ↦ by simp [reassoc_of% (w j)],
     Fan.IsLimit.hom_ext ht _ _ fun j ↦ by simp [w]⟩
+
+end CategoryTheory.Limits
+
+namespace CategoryTheory.Limits
+
+/-- A morphism `Pi.lift g` into a product `∏ᶜ f` is an isomorphism if its component `g t` is an
+isomorphism and all other factors `f b`, `b ≠ t`, are zero objects. -/
+lemma isIso_pi_lift_of_isZero {β : Type*} {C : Type*} [Category* C] {f : β → C}
+    [HasProduct f] {A : C} (g : ∀ b, A ⟶ f b) (t : β) (ht : IsIso (g t))
+    (hz : ∀ b, b ≠ t → IsZero (f b)) : IsIso (Pi.lift g) := by
+  classical
+  refine ⟨⟨Pi.π f t ≫ inv (g t), by simp, Pi.hom_ext _ _ fun b ↦ ?_⟩⟩
+  by_cases h : b = t
+  · subst h
+    simp
+  · exact (hz b h).eq_of_tgt _ _
 
 end CategoryTheory.Limits

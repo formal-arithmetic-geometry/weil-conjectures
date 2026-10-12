@@ -253,7 +253,7 @@ This is the co-projection `AlgebraicGeometry.Etale.derivedTensorRightCompRightDe
 (blueprint `lem-pur-coprojection`) for the invertible object `L = Λ_X(m)[2m]`, followed by the
 identification `Li^* (Λ_X(m)[2m]) ≅ Λ_Z(m)[2m]` of the Tate twist datum. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject (i : Z ⟶ X)
-    [HasCompactification i]
+    [HasCompactification i] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ) :
     Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj ((tateObject Λ X m)⟦2 * m⟧)) ≅

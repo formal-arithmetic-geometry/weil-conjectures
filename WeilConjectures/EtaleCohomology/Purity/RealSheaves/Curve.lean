@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGroup
 
 /-!
 # Purity of Weil sheaves on actual curves
