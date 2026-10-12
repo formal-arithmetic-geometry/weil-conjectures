@@ -6,6 +6,7 @@ Authors: SHEAF lead L
 module
 
 public import Mathlib.AlgebraicGeometry.Fiber
+import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Topology.KrullDimension
@@ -62,7 +63,11 @@ Krull dimension of the specialization order of `X`; conclude by
 `Order.krullDim_eq_iSup_coheight`. Both sides are `⊥` for the empty scheme. -/
 theorem Scheme.dim_eq_topologicalKrullDim (X : Scheme.{u}) :
     X.dim = topologicalKrullDim X := by
-  sorry
+  rw [topologicalKrullDim, Order.krullDim_eq_of_orderIso irreducibleSetEquivPoints]
+  rw [Order.krullDim_eq_iSup_coheight]
+  apply iSup_congr
+  intro x
+  exact ringKrullDim_stalk_eq_coheight (X := X) x
 
 /-- (blueprint: def-pc-dimension) The *relative dimension* of a morphism `f : X ⟶ S` over a point
 `s : S`: the dimension `Scheme.dim` of the scheme-theoretic fibre `X_s = f.fiber s`

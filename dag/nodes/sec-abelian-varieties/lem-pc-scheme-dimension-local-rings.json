@@ -23,52 +23,35 @@
  ],
  "proof": [
   {
-   "text": "For a point $x\\in X$, the Krull dimension of the stalk $\\mathcal O_{X,x}$ is the supremum of the lengths of chains of generalizations $x=x_0,\\ldots,x_n$ with $x_{i-1}\\in\\overline{\\{x_i\\}}$ and $x_{i-1}\\ne x_i$ [lem-sc-scheme-stalk-dimension-generalization-chains].",
+   "text": "Unfold topologicalKrullDim [def-kun-topological-krull-dimension]. A scheme is quasi-sober and T0 [lem-sc-scheme-sober], so Mathlib irreducibleSetEquivPoints identifies its irreducible closed subsets with its points in the specialization order. Apply Order.krullDim_eq_of_orderIso to this order isomorphism.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Order.krullDim_eq_iSup_coheight to express the Krull dimension of the specialization order as the supremum of the coheights of its points. This theorem includes the empty case, where the supremum is bottom.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every point x, Mathlib ringKrullDim_stalk_eq_coheight [lem-sc-scheme-stalk-dimension-generalization-chains] identifies the Krull dimension of the stalk with the coheight of x. Taking the supremum over x (iSup_congr) gives Scheme.dim = topologicalKrullDim X, since Scheme.dim is definitionally the supremum of these stalk dimensions.",
    "uses": [
     "lem-sc-scheme-stalk-dimension-generalization-chains"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma Tag 02IZ (properties-lemma-codimension-local-ring), applied to the closure of the point x"
-   }
-  },
-  {
-   "text": "The assignments $x\\mapsto\\overline{\\{x\\}}$ and $Z\\mapsto\\xi_Z$, where $\\xi_Z$ is the unique generic point of an irreducible closed subset $Z$ [lem-sc-scheme-sober], identify points of $X$ with irreducible closed subsets. A singleton is irreducible, and the closure of an irreducible subset is irreducible [lem-weil-pbc-irreducible-closure]. Under this identification, $x_{i-1}\\in\\overline{\\{x_i\\}}$ with $x_{i-1}\\ne x_i$ is equivalent to the strict inclusion $\\overline{\\{x_{i-1}\\}}\\subsetneq\\overline{\\{x_i\\}}$: inclusion follows by monotonicity of closure, and equality would contradict the uniqueness of generic points. Conversely, if $Z_{i-1}\\subsetneq Z_i$ is a chain of irreducible closed subsets, then their generic points satisfy $\\xi_{Z_{i-1}}\\in Z_i=\\overline{\\{\\xi_{Z_i}\\}}$ and are distinct. Thus chains of generalizations based at any point correspond exactly to chains of irreducible closed subsets of the same length whose first member is the closure of that point.",
-   "uses": [
-    "lem-sc-scheme-sober",
-    "lem-weil-pbc-irreducible-closure",
-    "def-weil-irreducible-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma Tag 04MU (properties-lemma-dimension), equality of (1) and (2), using the generic-point correspondence of Schemes Lemma Tag 01IS"
-   }
-  },
-  {
-   "text": "By the definition of topological Krull dimension [def-kun-topological-krull-dimension], its value is the supremum of lengths of all chains of irreducible closed subsets. By step 2, every such chain is counted by the generalization-chain supremum for its first generic point, while every generalization chain gives such a closed-subset chain. Step 1 therefore identifies this supremum with $\\sup_{x\\in X}\\dim\\mathcal O_{X,x}$. If $X$ is empty, both suprema are $-\\infty$ by the stated conventions; otherwise the same chain correspondence applies, so the equality holds in all cases.",
-   "uses": [
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma Tag 04MU (properties-lemma-dimension), equality of (1) and (2)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
   "lem-sc-scheme-sober",
-  "lem-weil-pbc-irreducible-closure",
-  "def-weil-irreducible-components",
-  "def-kun-topological-krull-dimension"
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma Tag 04MU (lemma-dimension), equality of (1) and (2), with the chain correspondence written out"
+  "document": "Mathlib/AlgebraicGeometry/Properties.lean; Mathlib/Topology/Sober.lean; Mathlib/Order/KrullDimension.lean",
+  "place": "ringKrullDim_stalk_eq_coheight (Stacks 02IZ), irreducibleSetEquivPoints, krullDim_eq_of_orderIso, krullDim_eq_iSup_coheight; composed in Scheme.dim_eq_topologicalKrullDim by V1 on 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -155,5 +138,15 @@
   "group": "L",
   "result": "pass",
   "note": "the theorem in the definition module states this lemma as written"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648127",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
