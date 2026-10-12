@@ -17,49 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Scalar restriction is exact. The K-injective formula [def-pc-ringed-spaces-derived-direct-image] computes Rg_* and Rf_* by the same pushforward complex, only with different scalar structures. Retain the natural localization comparisons and descend their identity, yielding c on the whole D(O_X).",
+   "text": "Obtain the whole-derived-category factorization c from lem-sc-finite-affine-derived-factorization.",
    "uses": [
-    "def-pc-ringed-spaces-derived-direct-image",
-    "def-pc-derived-direct-image",
-    "def-pc-derived-rhom-algebra-module"
+    "lem-sc-finite-affine-derived-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Use [lem-sc-finite-affine-derived-equivalence] to identify D_QCoh(X) with D_QCoh(A). Lift comparison to the full quasi-coherent subcategories, and transport R ⊣ a to the scalar-restriction functor. Its counit on K is comparison.inv followed by adj.counit.",
+   "text": "Use the functor comparison of finite_affine_derived_equivalence to show T=inclusion_X followed by Rg_* is fully faithful. Quasi-coherence of rhoR(K) from lem-sc-finite-scalar-right-adjoint-qcoh makes it an object B of D_QCoh(A). Take N=E.inverse(B); the comparison and the equivalence counit give T(N) ≅ rhoR(K).",
    "uses": [
-    "lem-sc-finite-affine-derived-equivalence"
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-scalar-right-adjoint-qcoh"
    ],
    "elementary": false
   },
   {
-   "text": "The ambient adjunction [lem-sc-finite-sheafhom-affine-adjoint] identifies the scalar right adjoint with algebra-valued derived Hom. The finite pseudo-coherence argument [lem-sc-finite-pushforward-derived-hom-qcoherent] puts its image of bounded-below K in D+_QCoh(A); uniqueness of ambient right adjoints transfers that membership to the specified rhoR. Exact scalar restriction preserves and detects vanishing of cohomology. The affine cohomology formula [lem-sc-affine-derived-cohomology] makes the affine equivalence preserve lower bounds; its inverse, computed by localization pullback on quasi-coherent modules, is exact and preserves lower bounds too. Hence the explicit bound on a(K) puts E(a(K)) in D+_QCoh(A).",
-   "uses": [
-    "lem-sc-finite-sheafhom-affine-adjoint",
-    "lem-sc-finite-pushforward-derived-hom-qcoherent",
-    "lem-sc-affine-derived-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For the fixed object K, the given geometric adjunction, affine equivalence, and chosen comparison give natural bijections Hom_A(M,E(a(K))) ≅ Hom_Y(rho(M),K) for M in D+_QCoh(A). The ambient scalar adjunction gives Hom_A(M,rhoR(K)) ≅ Hom_Y(rho(M),K). Both representing objects belong to this full subcategory by Step 3. Yoneda full faithfulness gives their unique comparison isomorphism preserving the represented counit; transport it through the Rg_* comparison to obtain phi. The pointwise right-adjoint uniqueness equation is exactly the asserted equation after insertion of c. Only the single bound on a(K), not any unstated global restriction of a, is used.",
+   "text": "Whisker c inverse with inclusion_X and compose with the specified comparison to obtain beta:R followed by inclusion_Y ≅ T followed by rho. Put u=beta inverse at a(K) followed by inclusion_Y of the geometric counit, and g=adjA.homEquiv(u). For each M, full faithfulness of T, the geometric adjunction, full faithfulness of inclusion_Y and beta give a composite Hom equivalence q. Naturality of beta and the counit formula prove q(h)=adjA.homEquiv.symm(h followed by g). Hence postcomposition by g is bijective on Hom(T(M),T(a(K))). Apply surjectivity at N to the isomorphism e:T(N) ≅ rhoR(K), obtaining v with v followed by g=e.hom. Set t=e.inv followed by v. Then t followed by g=id; injectivity at a(K) gives g followed by t=id. Thus phi=asIso(g), with rho(phi.hom) followed by the ambient counit=u. Expand beta inverse and cancel c inverse followed by c hom to obtain exactly the required counit equation. No boundedness of a(K), global restriction of a, or t-exactness is used.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-direct-image",
-  "def-pc-derived-rhom-algebra-module",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-sc-affine-derived-cohomology",
   "lem-sc-finite-affine-derived-equivalence",
-  "lem-sc-finite-pushforward-derived-hom-qcoherent",
-  "lem-sc-finite-sheafhom-affine-adjoint"
+  "lem-sc-finite-affine-derived-factorization",
+  "lem-sc-finite-scalar-right-adjoint-qcoh"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Section 48.11, Tags 0BV0, 0AX2 and 0AX3; localization glue written by H2"
+  "place": "Tag 0AX2; T1 categorical uniqueness proof on the unbounded quasi-coherent full subcategory, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -140,9 +126,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T063510-L-3155338",
+  "landing": "20261012T085340-L-39895",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-finite-affine-derived-factorization",
+ "kind": "statement",
+ "title": "Derived pushforward factors through the direct-image algebra",
+ "statement": "For a finite morphism f:X -> Y of schemes [def-pc-scheme, def-weil-finite-integral-morphism], assume the derived module categories of X, Y and A=f_*O_X exist [def-pc-derived-category]. With g:X -> (Y,A) [def-sc-direct-image-algebra-derived-category], rho the right derived scalar restriction along f.c, and the derived direct images [def-pc-ringed-spaces-derived-direct-image, def-pc-derived-direct-image], there is a natural isomorphism Rg_* followed by rho ≅ Rf_* on the entire derived category D(O_X). No boundedness or quasi-coherence hypothesis on its input is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, proof, K-injective pushforward computation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-finite-integral-morphism",
+  "def-pc-derived-direct-image",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Scalar restriction is exact: kernels and cokernels have unchanged underlying abelian sheaves. Apply the finite limit and colimit preservation results for algebra scalar restriction in def-pc-derived-rhom-algebra-module; termwise scalar restriction therefore descends through localization and agrees with its right derived functor.",
+   "uses": [
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise definitions make F followed by scalar restriction S definitionally equal to scheme module direct image (Iso.refl). Apply the upstream Functor.rightDerivedFunctorIsoMapDerivedCategory for exact S, rightDerivedFunctorCompMapDerivedCategoryIso for F followed by S, and rightDerivedFunctorNatIso to this underived identity. Their composite is the asserted isomorphism on the entire derived category, without any bound or quasi-coherence restriction.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-rhom-algebra-module",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW; T1 second reading: exact-functor composition and definitional underived factorization, 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar restriction composed with derived pushforward to the direct image algebra equals derived scheme pushforward",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error (msearch.py, 2026-10-12).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar restriction composed with derived pushforward to the direct image algebra equals derived scheme pushforward",
+   "results": "Pushforward factorization search returned Scheme.Modules.pushforwardComp and underived formulas only; right-adjoint quasi-coherence search returned underived adjunctions and QCoh predicates only.",
+   "date": "2026-10-12",
+   "verdict": "No direct derived match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Generic rightAdjointUniq and its counit identities; no geometric factorization or quasi-coherence result.",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*restrictScalars|restrictScalars.*rightDerivedFunctor",
+   "results": "msearch returned zero hits. Local rg in both Lean roots and DAG found the parent comparison and existing affine equivalence, sheaf-Hom adjunction and finite derived-Hom membership; none separately asserts this statement. Blueprint search found no same statement.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineAdjointCounitComparison",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof Step 1: global comparison of pushforward through the direct-image algebra",
+   "via": [
+    "lem-sc-finite-affine-adjoint-counit-comparison",
+    "lem-sc-finite-duality-derived-hom",
+    "lem-sc-finite-flat-duality-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineDerivedFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineDerivedFactorization.lean",
+  "declaration": "AlgebraicGeometry.finite_affine_derived_factorization",
+  "statement": "theorem finite_affine_derived_factorization {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsFinite f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))]\n    : Nonempty (RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f) ⋙\n        (SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ≅\n          schemeDerivedDirectImage f)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085340-L-39895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085340-L-39895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

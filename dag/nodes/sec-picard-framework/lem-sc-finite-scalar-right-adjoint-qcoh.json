@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-finite-scalar-right-adjoint-qcoh",
+ "kind": "statement",
+ "title": "Quasi-coherence of a specified finite scalar right adjoint",
+ "statement": "Let f:X -> Y be a finite morphism [def-weil-finite-integral-morphism] of Noetherian schemes [def-pc-scheme], put A=f_*O_X with the algebra structure f.c [def-sc-direct-image-algebra-derived-category], and assume D(O_Y) and D(A) exist [def-pc-derived-category]. Let rho be the specified right derived scalar restriction and let rhoR:D(O_Y) -> D(A) carry a specified adjunction rho ⊣ rhoR. For K in D_QCoh(Y) with a lower cohomological bound, rhoR(K) has quasi-coherent cohomology over A in every degree, i.e. lies in directImageAlgebraDerivedQCohProperty f. No geometric right adjoint or geometric counit comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AX2, first assertion, with Tag 0BV0 scalar adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-finite-integral-morphism",
+  "def-pc-derived-direct-image",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The affine sheaf-Hom adjunction computes an ambient scalar right adjoint by Hom(A,I(K)) with its natural A-action. Exactness of scalar restriction identifies its derived restriction functor with rho. The construction of derivedRHomAlgebraModule computes this same A-valued Hom on a K-injective resolution. The canonical localization comparisons identify these functors; uniqueness of right adjoints then gives an isomorphism of this value with the value of the specified rhoR.",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine-adjoint",
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the finite Noetherian morphism and bounded-below K, finite_pushforward_derivedHom_qcoherent gives quasi-coherent cohomology of the A-valued derived Hom. Its algebra B is Under.mk f.c, not merely an isomorphic underlying module, so its property is the direct-image-algebra property by the definitions. Transport each cohomology module through the isomorphism from Step 1; quasi-coherence is closed under module isomorphism. This proves the required membership. Zero objects, arbitrary shifts with shifted bounds, and identity finite morphisms satisfy the same calculation; no choice of an isomorphism changes the property.",
+   "uses": [
+    "lem-sc-finite-pushforward-derived-hom-qcoherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-rhom-algebra-module",
+  "lem-sc-finite-pushforward-derived-hom-qcoherent",
+  "lem-sc-finite-sheafhom-affine-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AX2, first assertion, with Tag 0BV0 scalar adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint to scalar restriction of a finite algebra sends bounded below quasi coherent complexes to quasi coherent complexes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error (msearch.py, 2026-10-12).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint to scalar restriction of a finite algebra sends bounded below quasi coherent complexes to quasi coherent complexes",
+   "results": "Pushforward factorization search returned Scheme.Modules.pushforwardComp and underived formulas only; right-adjoint quasi-coherence search returned underived adjunctions and QCoh predicates only.",
+   "date": "2026-10-12",
+   "verdict": "No direct derived match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Generic rightAdjointUniq and its counit identities; no geometric factorization or quasi-coherence result.",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*restrictScalars|restrictScalars.*rightDerivedFunctor",
+   "results": "msearch returned zero hits. Local rg in both Lean roots and DAG found the parent comparison and existing affine equivalence, sheaf-Hom adjunction and finite derived-Hom membership; none separately asserts this statement. Blueprint search found no same statement.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineAdjointCounitComparison",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof Step 3: quasi-coherence of the specified ambient scalar right adjoint",
+   "via": [
+    "lem-sc-finite-affine-adjoint-counit-comparison",
+    "lem-sc-finite-duality-derived-hom",
+    "lem-sc-finite-flat-duality-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteScalarRightAdjointQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteScalarRightAdjointQCoh.lean",
+  "declaration": "AlgebraicGeometry.finite_scalar_right_adjoint_qcoh",
+  "statement": "theorem finite_scalar_right_adjoint_qcoh {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))]\n    (ρR : DerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ⥤\n      DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))))\n    (adjA : (SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ⊣ ρR)\n    (K : schemeDerivedQCohCategory Y) (hK : ∃ n : ℤ, K.obj.IsGE n) :\n    directImageAlgebraDerivedQCohProperty f (ρR.obj K.obj)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085340-L-39895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085340-L-39895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
