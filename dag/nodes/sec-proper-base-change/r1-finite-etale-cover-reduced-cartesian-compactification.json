@@ -18,39 +18,59 @@
  ],
  "proof": [
   {
-   "text": "Apply Zariski main theorem to j composed with v and replace the finite compactification by the reduced closure of V. Etale over reduced implies V reduced, so V remains a dense open in the reduced compactification Y. Finiteness gives the separated finite-type curve structure and the dimension bound by integral incomparability. The inclusion V -> p^{-1}(U) is finite by permanence over a separated scheme; hence its dense open image is closed and is all of p^{-1}(U). A surjective open immersion is an isomorphism, giving the cartesian square.",
+   "text": "The curve morphism f makes X locally Noetherian and quasi-compact. Therefore j is quasi-compact, and v followed by j is separated, quasi-compact, locally of finite type and locally quasi-finite. Apply Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite to obtain i : V -> T open and quasi-compact and q : T -> X finite with i followed by q = v followed by j.",
    "uses": [
     "thm-pqf-zmt-factorization",
-    "etale-proposition-etale-reduced",
-    "def-nagata-scheme-theoretic-closure",
-    "def-weil-pbc-scheme-reduction",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-over-separated-finite-type",
-    "lem-weil-pbc-integral-incomparability",
-    "lem-weil-pbc-finite-permanence-over-separated",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "U is reduced since it is open in X; V is reduced by isReduced_of_etale. Take Y = i.image, a = i.toImage, p = i.imageι followed by q. The factor map a is a quasi-compact scheme-theoretically dominant open immersion. Mathlib IsSchemeTheoreticallyDominant.isReduced gives reducedness of Y (inject its section rings into the reduced section rings of V). The closed immersion i.imageι is finite, so p is finite, and composition with f is separated and of finite type.",
+   "uses": [
+    "etale-proposition-etale-reduced",
+    "def-nagata-scheme-theoretic-closure",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-over-separated-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite morphism p has discrete fibres and identifies no distinct specializing points: use the proved upstream Scheme.Hom.eq_of_specializes_of_apply_eq. Apply the proved topologicalKrullDim_le_of_continuous to obtain dim Y <= dim X <= 1. Together with separatedness and finite type this gives IsCurve (p followed by f). This replaces the planned affine integral-incomparability calculation by the existing quasi-finite topological comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let b : V -> Y times_X U be the pullback lift of a and v. Its composite with the first projection is a, and that projection is open, so b is an open immersion. Its composite with the second projection is the finite map v; the second projection is finite and thus separated, so IsFinite.of_comp makes b finite. Hence its range is closed. The inverse image under the first projection of range a equals range b, by injectivity of that open projection. Since range a is dense in Y, the open-map preimage-closure inclusion makes range b dense in the pullback. Closedness then makes b surjective. The surjective open immersion b is an isomorphism. IsPullback.of_iso_pullback gives the requested square. This argument uses no nonemptiness assumptions and includes the empty cover.",
+   "uses": [
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lemma-nagata-immersion-open-in-scheme-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "thm-pqf-zmt-factorization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
   "etale-proposition-etale-reduced",
   "def-nagata-scheme-theoretic-closure",
-  "def-weil-pbc-scheme-reduction",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-immersion-open-in-scheme-image",
   "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-finite-composition",
   "lem-weil-pbc-finite-over-separated-finite-type",
-  "lem-weil-pbc-integral-incomparability",
-  "lem-weil-pbc-finite-permanence-over-separated",
   "lem-weil-pbc-finite-closed-map-finite-fibres",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-qc-open-immersion-finite-type"
+  "lem-weil-pbc-finite-permanence-over-separated"
  ],
- "proof_origin": "Stacks proof, expanded into an interface by R1; see declaration docstring.",
+ "proof_origin": "Stacks Project 03SD compactification paragraph and 05K0; formal proof by F3 using the scheme-theoretic image and the existing quasi-finite dimension comparison. The pullback comparison is proved open, finite and surjective in Lean.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -149,10 +169,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T153650-L-2395509",
-  "kind": "interface",
+  "landing": "20261012T160826-L-2610748",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
