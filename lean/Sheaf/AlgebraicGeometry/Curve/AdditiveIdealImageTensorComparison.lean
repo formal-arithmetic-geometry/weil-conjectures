@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelPresentation
+import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # The additive ideal image and tensor sections
 
@@ -51,6 +53,21 @@ theorem nonempty_additiveIdealImageTensorIso (X : Scheme.{u}) (I J : X.IdealShea
         etaleAdditiveSheafToLowerStar J.subschemeι) ≅
       ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (Modules.etaleTensorSectionsSheaf
-          (cokernel (IdealSheafData.toModulesOfLE hJI))))) := by sorry
+          (cokernel (IdealSheafData.toModulesOfLE hJI))))) := by
+  let T := Modules.etaleTensorSectionsFunctor X
+  let a := IdealSheafData.toModulesOfLE hJI
+  let f := kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) ≫
+    etaleAdditiveSheafToLowerStar J.subschemeι
+  obtain ⟨e, hz, ⟨hk⟩⟩ := exists_etaleIdealKernelPresentation X I J hJI
+  let S := ShortComplex.mk (T.map a ≫ e.hom) f hz
+  have hS : S.Exact := ShortComplex.exact_of_f_is_kernel S hk
+  let e₁ : cokernel (T.map a ≫ e.hom) ≅ image f :=
+    IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel _) hS.isColimitImage
+  let e₂ : cokernel (T.map a) ≅ cokernel (T.map a ≫ e.hom) :=
+    cokernel.mapIso _ _ (Iso.refl _) e (by simp)
+  have : PreservesColimitsOfShape WalkingParallelPair T :=
+    Modules.preservesCokernels_etaleTensorSectionsFunctor X
+  exact ⟨e₁.symm ≪≫ e₂.symm ≪≫ (PreservesCokernel.iso T a).symm ≪≫
+    Modules.etaleTensorSectionsFunctorObjIso (cokernel a)⟩
 
 end AlgebraicGeometry.Scheme

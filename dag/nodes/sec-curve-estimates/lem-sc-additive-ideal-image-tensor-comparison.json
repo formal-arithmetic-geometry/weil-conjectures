@@ -15,39 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Refine by affine etale V over affine U=Spec A. With B=Gamma(V,O), the additive kernel for I is I_B and its restriction into B/J_B has kernel J_B. Hence its sectionwise image is I_B/J_B. These are the ideals cut out by the specified subscheme restrictions.",
-   "uses": [
-    "def-sc-etale-additive-structure-restriction",
-    "def-sbc-ideal-sheaf-powers"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Flatness of B over A identifies I_B/J_B with B tensor_A coker(J(U) to I(U)). The specified ideal modules are the kernels of the same structure-module maps and the specified morphism is their inclusion. Affine sections of the tensor pullback of their specified cokernel are thus precisely this quotient.",
+   "text": "Define a as the specified ideal-module inclusion and f as restriction of additive vanishing functions to Z_J. Use the tensor ideal kernel presentation for J contained in I: choose e:T(I) to ker(r_I) and the limiting kernel fork T(J) to ker(r_I) to (i_J)_*A. Exactness follows from this limiting kernel fork.",
    "uses": [
     "def-sbc-ideal-sheaf-powers",
-    "def-sc-etale-qcoherent-module"
+    "def-sc-etale-additive-structure-restriction",
+    "lem-sc-etale-ideal-kernel-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The quotient maps, inclusion maps, and tensor base change commute with restriction ring maps; the local identifications and their inverses therefore glue. Categorical sheaf images are sheafifications of the presheaf images, giving the required isomorphism with tensor sections. Lift additive coefficients to the Gm universe. If I=J, I=0, or X is empty the same comparison is between zero sheaves.",
+   "text": "In the abelian category of etale additive sheaves, the image of the second map is the cokernel of the first map. This is ShortComplex.Exact.isColimitImage. Compare the two categorical cokernels using coconePointUniqueUpToIso and transport along e using cokernel.mapIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The right-exact tensor-sections functor identifies the cokernel of T(a) with T(cokernel a), by PreservesCokernel.iso. Quasi-coherence of the specified cokernel identifies the latter sheafification with the given lifted tensor-sections sheaf, via sheafificationIso. Compose these isomorphisms.",
    "uses": [
-    "def-sc-etale-additive-structure-restriction",
+    "lem-sc-etale-tensor-sections-right-exact",
     "def-sc-etale-qcoherent-module"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-etale-additive-structure-restriction",
   "def-sbc-ideal-sheaf-powers",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-sc-etale-ideal-kernel-presentation",
+  "lem-sc-etale-tensor-sections-right-exact",
   "def-sc-etale-qcoherent-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; the existing affine argument is separated into additive and multiplicative comparisons"
+  "place": "T2 stage-3 reduction: kernel presentation, abelian image-cokernel theorem, and right exactness of sheafified tensor sections; preserves the affine argument of Steps 1-3."
  },
  "mathlib_searches": [
   {
@@ -127,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T194118-L-457376",
+  "landing": "20261012T232144-L-1994028",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

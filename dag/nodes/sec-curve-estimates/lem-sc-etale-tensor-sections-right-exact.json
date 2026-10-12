@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-etale-tensor-sections-right-exact",
+ "kind": "statement",
+ "title": "Sheafified tensor sections preserve cokernels",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Define $T_X$ on every module $F$ by sheafifying the presheaf $U\\mapsto\\operatorname{ULift}\\Gamma(U,u^*F)$, with the normalized tensor restrictions [lem-sc-etale-qcoherent-presheaf-functorial] and with maps $\\varphi\\mapsto\\Gamma(U,u^*\\varphi)$; their naturality is [lem-sc-etale-tensor-sections-map-naturality]. Then $T_X$ preserves colimits of parallel pairs, in particular categorical cokernels. For quasi-coherent $F$, its value is canonically the lifted specified tensor-sections sheaf [def-sc-etale-qcoherent-module].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/070S",
+  "place": "Lemma 35.8.5 (2); see also Tag 03FH (1), and the original additive comparison Step 2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-tensor-sections-map-naturality",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Construct the module-variable functor using componentwise tensor-pullback maps; the named naturality theorem supplies its natural-transformation proof. Its identity, composition, and additive laws follow from those of tensor pullback, and its coefficients are lifted before sheafification.",
+   "uses": [
+    "lem-sc-etale-tensor-sections-map-naturality",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor pullback preserves cokernels because it is left adjoint. On each etale object, sections of the resulting module cokernel locally lift to the middle module on a Zariski cover; sections mapping to zero locally come from the source module. These covers are etale covers, so sheafification gives the cokernel on the etale site. Equivalently apply the ringed-site pullback description of Stacks 070S(2), which is right exact, and then forget to abelian sheaves.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor is additive, so a coequalizer of two maps is the cokernel of their difference. Thus preservation of cokernels implies preservation of all parallel-pair colimits. The additive universe lift preserves colimits.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-tensor-sections-map-naturality",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/070S",
+  "place": "Lemma 35.8.5 (2); see also Tag 03FH (1), and the original additive comparison Step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafified sections of pullback of modules preserve cokernels",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesCokernel.iso",
+   "results": "Found the generic preserved-cokernel comparison; it requires preservation of the parallel-pair colimit, and does not prove tensor-section exactness.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorSectionsFunctor|etaleTensorSectionsMap|additiveIdealKernel",
+   "results": "msearch.py grep returned zero existing matches in the library. Direct rg also found no etale tensor-section cokernel comparison.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a scheme, sheafified pullback sections on the small etale site form a right exact functor",
+   "results": "Generic sheaf-module pullback adjunction and sheafification comparison exist; a comparison with these specified etale tensor-section maps is still required. No direct match.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveIdealImageTensorComparison",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-additive-ideal-image-tensor-comparison",
+   "place": "Lemma 35.8.5 (2); see also Tag 03FH (1), and the original additive comparison Step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsRightExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.preservesCokernels_etaleTensorSectionsFunctor",
+  "statement": "theorem preservesCokernels_etaleTensorSectionsFunctor (X : Scheme.{u}) :\n    PreservesColimitsOfShape WalkingParallelPair (etaleTensorSectionsFunctor X)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T232144-L-1994028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T232144-L-1994028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
