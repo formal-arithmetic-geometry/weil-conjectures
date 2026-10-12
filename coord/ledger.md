@@ -9980,3 +9980,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/X2/Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts (stage 3; reviewer PASS; first push; landing 20261012T225338-L-1816023 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/X3/Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlap (stage 3; reviewer PASS; first push; landing 20261012T225339-L-1816126 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/X3/Sheaf.FieldTheory.MatrixDescentScalarMapBijective (stage 3; reviewer PASS; first push; landing 20261012T225339-L-1816266 (interface); batch 20261012T225253; modules 3; new nodes 2)
+- 22:53 L: merged deliver/Y3/Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeft (stage 3; reviewer PASS; first push; landing 20261012T225339-L-1816367 (interface); batch 20261012T225253; modules 3; new nodes 2)

@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-p1-tor-kernel-boundary-construction-exact-left-range",
+ "kind": "statement",
+ "title": "Constructed Tor boundary vanishes on the quotient image",
+ "statement": "For every commutative ring R, modules M,F,N and surjective q:F → N, the constructed boundary vanishes on the image of Tor₁(q,M).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0"
+ },
+ "stmt_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-p1-tor-kernel-boundary-naturality-of] to id_F:F -> F and q:F -> N, with middle map id_F, quotient map q, and zero kernel map. The inclusion square holds because ker(id_F)=0. Tensoring the zero kernel map gives zero, yielding the claimed vanishing.",
+   "uses": [
+    "lem-sc-p1-tor-kernel-boundary-naturality-of"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-tor-kernel-boundary-naturality-of"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Y3 second reader",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0",
+  "note": "Lean proof by naturality from the identity presentation; no sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor connecting homomorphism from a projective resolution exact at the tensor product of the kernel",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error (recorded by msearch.py)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connecting map from first homology of a projective resolution tensored with a module to the tensor of a kernel is exact",
+   "date": "2026-10-13",
+   "results": "Rep.torIso, groupHomology.mapShortComplex₁_exact, groupHomology.mapShortComplex₃_exact; no ModuleCat connecting map construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyDesc",
+   "date": "2026-10-13",
+   "results": "Unknown identifier; local search found ShortComplex.descHomology and HomologicalComplex.homologyIsCokernel instead."
+  },
+  {
+   "tool": "grep",
+   "query": "descHomology|homologyπ|factorThru|isoLeftDerivedObj",
+   "date": "2026-10-13",
+   "results": "Mathlib ShortComplex/Homology.lean: descHomology, π_descHomology; ShortComplex/HomologicalComplex.lean: homologyIsCokernel; CategoryTheory/Abelian/LeftDerived.lean: isoLeftDerivedObj_hom_naturality; no existing constructed Tor kernel boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "long exact sequence of left derived functors connecting morphism of tensor product kernel",
+   "date": "2026-10-13",
+   "results": "Tor definitions and map formulas; no exactness theorem for this explicit boundary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"exact\"",
+   "date": "2026-10-13",
+   "results": "ShortComplex exactness characterizations; no comparison with the explicit boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "connectingHom.*exact|homologySequence.*exact; torKernelBoundary|tor_kernel_boundary in lean/",
+   "date": "2026-10-13",
+   "results": "Mathlib homology_exact1/3 give exactness for homology connecting maps; Sheaf.Paper.TorLongExactFirstVariable constructs an existential exact boundary but does not identify it with torKernelBoundary. No duplicate of this fixed-map assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of a connecting homomorphism vanishes on image of the quotient map via identity short exact sequence",
+   "date": "2026-10-13",
+   "results": "ShortExact.comp_δ and related snake lemmas; no direct theorem for torKernelBoundary. Local search found tor_kernel_boundary_naturality_of, which proves the range half."
+  },
+  {
+   "tool": "grep",
+   "query": "torKernelBoundary|torKernelDifferential|torKernelHomologyBoundary in lean/Sheaf; homology_exact₃|isoLeftDerivedObj_hom_naturality in Mathlib",
+   "date": "2026-10-13",
+   "results": "No existing kernel-to-range theorem for the fixed constructed map. NaturalityOf supplies a complete naturality proof and is used for the range half; homology_exact₃ supplies the horseshoe exactness step for the kernel plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeft",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-tor-kernel-boundary-construction-exact-left",
+   "place": "strict half of exactness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeftRange",
+  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryConstructionExactLeftRange.lean",
+  "declaration": "CategoryTheory.tor_kernel_boundary_construction_exact_left_range",
+  "statement": "theorem tor_kernel_boundary_construction_exact_left_range\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q) :\n    ∀ x, torKernelBoundary M F N q hq\n      ((((Tor' (ModuleCat.{u} R) 1).map\n        (ModuleCat.ofHom q)).app M).hom x) = 0",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T225339-L-1816367",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T225339-L-1816367",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

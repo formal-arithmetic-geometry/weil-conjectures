@@ -1,7 +1,8 @@
 module
 
 public import Sheaf.RingTheory.TorKernelBoundaryConstruction
-import Sheaf.Algebra.Homology.FreeResolutionSesSplit
+import Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeftKernel
+import Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeftRange
 
 @[expose] public section
 universe u
@@ -53,6 +54,10 @@ theorem tor_kernel_boundary_construction_exact_left
     (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q) :
     Function.Exact (((Tor' (ModuleCat.{u} R) 1).map
       (ModuleCat.ofHom q)).app M).hom (torKernelBoundary M F N q hq) := by
-  sorry
+  intro y
+  constructor
+  · exact tor_kernel_boundary_construction_exact_left_kernel R M F N q hq y
+  · rintro ⟨x, rfl⟩
+    exact tor_kernel_boundary_construction_exact_left_range R M F N q hq x
 
 end CategoryTheory
