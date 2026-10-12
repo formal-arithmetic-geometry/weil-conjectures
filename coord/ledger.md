@@ -8813,3 +8813,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/T2/Sheaf.AlgebraicGeometry.AffineModuleTensorAlgebraQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261012T173905-L-3306292 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:39 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport (stage 3; reviewer PASS; first push; landing 20261012T173906-L-3306506 (interface); batch 20261012T173801; modules 4; new nodes 3)
 - 17:39 L: merged deliver/T3/Sheaf.AlgebraicGeometry.EtaleUnitsStalkGalois (stage 3; reviewer PASS; first push; landing 20261012T173906-L-3306636 (interface); batch 20261012T173801; modules 4; new nodes 3)
+- 17:39 L: merged deliver/T3/Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingTerm (stage 3; reviewer PASS; first push; landing 20261012T173907-L-3306802 (interface); batch 20261012T173801; modules 2; new nodes 1)
