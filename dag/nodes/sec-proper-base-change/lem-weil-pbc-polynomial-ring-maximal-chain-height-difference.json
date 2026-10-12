@@ -45,12 +45,13 @@
    }
   },
   {
-   "text": "Each $P_{\\mathfrak r}$ is Cohen–Macaulay in the sense of [lem-weil-pbc-cm-local-maximal-chain-length], i.e. $\\operatorname{depth}(P_{\\mathfrak r})\\ge d_{\\mathfrak r}$ [def-weil-pbc-depth]: by [lem-weil-pbc-regular-local-generators-regular-sequence] (Lemma 00NQ) the generators $y_1,\\dots,y_{d_{\\mathfrak r}}\\in\\mathfrak rP_{\\mathfrak r}$ of step 1 form a regular sequence [def-weil-pbc-regular-sequence] in the maximal ideal, of length $d_{\\mathfrak r}$ (for $d_{\\mathfrak r}=0$ the empty sequence).",
+   "text": "Choose a finite generating set of the maximal ideal of each regular local ring $P_{\\mathfrak r}$ from step 1 of cardinality its spanFinrank, using Mathlib Submodule.FG.exists_span_finset_card_eq_spanFinrank. Its list is a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. By [lem-weil-pbc-regular-local-generators-regular-sequence] this list is a regular sequence [def-weil-pbc-regular-sequence]. Unfolding [def-weil-pbc-depth], its length is a member of the supremum defining depth (or depth is infinity). Thus depth is at least the dimension, including dimension zero. This supplies the hypothesis of [lem-weil-pbc-cm-local-maximal-chain-length].",
    "uses": [
     "lem-weil-pbc-regular-local-generators-regular-sequence",
     "def-weil-pbc-depth",
     "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-cm-local-maximal-chain-length"
+    "lem-weil-pbc-cm-local-maximal-chain-length",
+    "def-weil-pbc-regular-system-of-parameters"
    ],
    "elementary": false,
    "source": {
@@ -72,18 +73,16 @@
    }
   },
   {
-   "text": "A saturated chain from $(0)$ to $\\mathfrak p$ of length $h=\\operatorname{ht}(\\mathfrak p)$. Now let $\\mathfrak p\\subseteq\\mathfrak q$ be primes and $\\mathfrak p=\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_t=\\mathfrak q$ a maximal chain between them as in the statement. Since $h=\\operatorname{ht}(\\mathfrak p)$ is a finite integer (step 3) and a supremum of integers, there is a chain $\\mathfrak r_0\\subsetneq\\mathfrak r_1\\subsetneq\\cdots\\subsetneq\\mathfrak r_h$ of primes of $P$ with $\\mathfrak r_h\\subseteq\\mathfrak p$. Then: (a) $\\mathfrak r_h=\\mathfrak p$, since otherwise appending $\\mathfrak p$ gives a chain of length $h+1$ ending inside $\\mathfrak p$; (b) $\\mathfrak r_0=(0)$, since $P$ is an integral domain by [lem-weil-pbc-polynomial-ring-domain], so $(0)$ is a prime ideal contained in every prime, and if $\\mathfrak r_0\\neq(0)$ prepending $(0)$ gives a chain of length $h+1$; (c) for $1\\le i\\le h$ no prime lies strictly between $\\mathfrak r_{i-1}$ and $\\mathfrak r_i$, since inserting it gives a chain of length $h+1$. Each case contradicts the definition of $h$ as the supremum.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-domain"
-   ],
-   "elementary": false,
+   "text": "For the lower prime p, use Mathlib Ideal.exists_ltSeries_length_eq_height to choose an LTSeries a ending at p of length ht(p). In a maximally long series Mathlib Order.height_eq_index_of_length_eq_height_last identifies the height of every element with its index. Consequently its head has height zero and is minimal (Order.height_eq_zero). Each consecutive pair is a cover: a prime strictly between them would increase height at least once on each side by Order.height_add_one_le, forcing i+2 <= i+1. This constructs the saturated prefix without needing that P is a domain or identifying its head explicitly with (0). The private Lean helper saturated_of_full_height proves these order facts; no unproved helper is introduced.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Algebra, Lemma Tag 00OR (lemma-dimension-height-polynomial-ring, line 27737), proof, fourth sentence: 'Hence every maximal chain of primes between (0) and p has length height(p)' (only the existence of one such chain of length height(p) is needed, and it is written out here from the definition of the height instead of through Lemma 00NA)"
    }
   },
   {
-   "text": "The concatenated chain is a maximal chain of $P_{\\mathfrak q}$. Concatenate: $(0)=\\mathfrak r_0\\subsetneq\\cdots\\subsetneq\\mathfrak r_h=\\mathfrak p=\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_t=\\mathfrak q$, a chain of $h+t$ strict inclusions of primes of $P$, all contained in $\\mathfrak q$, with no prime of $P$ strictly between two consecutive members (step 4 (c) and the maximality of the given chain). By [lem-weil-pbc-primes-of-localization] (1), $\\mathfrak r\\mapsto\\mathfrak rP_{\\mathfrak q}$ is an inclusion-preserving bijection from the primes of $P$ contained in $\\mathfrak q$ onto the primes of $P_{\\mathfrak q}$, with inverse given by contraction (so it also reflects inclusions and strict inclusions). Hence the image chain $\\mathfrak r_0P_{\\mathfrak q}\\subsetneq\\cdots\\subsetneq\\mathfrak r_hP_{\\mathfrak q}=\\mathfrak p_0P_{\\mathfrak q}\\subsetneq\\cdots\\subsetneq\\mathfrak p_tP_{\\mathfrak q}$ has length $h+t$; its last member is $\\mathfrak qP_{\\mathfrak q}$, the maximal ideal, so nothing can be appended; its first member is $(0)P_{\\mathfrak q}$, below which there is no prime (one would contract to a prime strictly inside $(0)$); and a prime $Q$ of $P_{\\mathfrak q}$ strictly between two consecutive members would contract to a prime of $P$ strictly between the corresponding members of the concatenated chain. So it is a maximal chain of prime ideals of $P_{\\mathfrak q}$ in the sense of [lem-weil-pbc-cm-local-maximal-chain-length].",
+   "text": "Concatenate the prefix a from step 4 with the given chain c using RelSeries.smash; the endpoint equalities identify a.last with c.head. The length is a.length+c.length. The private helper smash_saturated proves saturation by splitting the indices with Fin.addCases and applying the cover hypotheses on the two pieces. All primes in the concatenated chain are below its last prime q. By [lem-weil-pbc-primes-of-localization], in the PrimeSpectrum form IsLocalization.AtPrime.primeSpectrumOrderIso, map this chain from the interval of primes below q to PrimeSpectrum of P_q [def-weil-pbc-localization-at-prime]. The mapped chain still has a minimal head, maximal last element, and covers between consecutive elements. The private helper saturated_isMaxChain shows that it is a maximal chain: any point comparable with its entire range is below the last point; take the least index j whose value is above the point. At j=0 minimality forces equality. Otherwise comparability and minimality of j put the point strictly above the predecessor, and the cover condition forces equality with the jth element. Therefore no larger chain exists. This is precisely the maximal-chain hypothesis of [lem-weil-pbc-cm-local-maximal-chain-length].",
    "uses": [
     "lem-weil-pbc-primes-of-localization",
     "def-weil-pbc-localization-at-prime",
@@ -116,16 +115,16 @@
   "def-weil-pbc-depth",
   "def-weil-pbc-regular-sequence",
   "lem-weil-pbc-cm-local-maximal-chain-length",
+  "def-weil-pbc-regular-system-of-parameters",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
   "lem-weil-pbc-proper-ideal-contained-in-maximal",
   "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "lem-weil-pbc-polynomial-ring-domain",
   "lem-weil-pbc-primes-of-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00OR (lemma-dimension-height-polynomial-ring, line 27737) and its proof, citing Proposition 00OQ (line 27723), Lemma 00NQ (lemma-regular-ring-CM, line 25732), Lemma 00N9 (lemma-maximal-chain-CM, line 25345), Lemma 00NA (lemma-CM-dim-formula, line 25358; its use is replaced by the direct application of 00N9 in P_q, which 00NA's own proof also is); the bound ht(q) <= n from Lemma 00OP (line 27660)"
+  "place": "Algebra, Lemma Tag 00OR (lemma-dimension-height-polynomial-ring, line 27737) and its proof, citing Proposition 00OQ (line 27723), Lemma 00NQ (lemma-regular-ring-CM, line 25732), Lemma 00N9 (lemma-maximal-chain-CM, line 25345), Lemma 00NA (lemma-CM-dim-formula, line 25358; its use is replaced by the direct application of 00N9 in P_q, which 00NA's own proof also is); the bound ht(q) <= n from Lemma 00OP (line 27660); Lean implementation follows these steps, with finite-set generators and elementary LTSeries height/index arguments in place of the explicit domain argument in step 4, and a least-index proof of maximality in step 5 (A2 stage 3)."
  },
  "mathlib_searches": [
   {
@@ -212,5 +211,15 @@
   "group": "K1",
   "result": "fix",
   "note": "k field {k:Type u}; n:ℕ incl. 0; P = MvPolynomial (Fin n) k; q prime [q.IsPrime]; ht = Ideal.height (prime case = sup of strict chains below q); ht(q) ≤ n first conjunct; p prime, p ≤ q; chain as LTSeries (PrimeSpectrum P) head p last q; saturation as CovBy (Iff.rfl to no prime strictly between); t = c.length; (t:ℕ∞) = q.height - p.height truncated sub safe as both ≤ n; t=0/p=q covered"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T194056-L-450624",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9150,3 +9150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:40 L: returned deliver/R1/Sheaf.CategoryTheory.DerivedCoupleMapExactness (reviewer RETURN: (the landing tools, head ea1cdc12d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 19:40 L: returned deliver/U3/Sheaf.CategoryTheory.ColimitSiteAbelianSectionRepresentatives (reviewer RETURN: (the landing tools, head 368ab096f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 19:40 L: merged deliver/A2/Sheaf.AlgebraicGeometry.SemilocalDimOneConductor (stage 3; reviewer PASS; first push; landing 20261012T194055-L-450485 (interface); batch 20261012T194054; modules 2; new nodes 1)
+- 19:40 L: merged deliver/A2/Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference (stage 3; reviewer PASS; first push; landing 20261012T194056-L-450624 (proof); batch 20261012T194054; modules 1; new nodes 0)
