@@ -23,66 +23,32 @@
  ],
  "proof": [
   {
-   "text": "Fix a closed point $x\\in X$ and an affine open neighbourhood $U=\\operatorname{Spec}A$ of $x$, with $\\mathfrak m\\subset A$ the maximal ideal corresponding to $x$. Put $Z=X\\setminus U$ and $Z'=Z\\cup\\{x\\}$; both are closed because $x$ is a closed point. Let $\\mathcal I=\\mathcal I_Z$ and $\\mathcal I'=\\mathcal I_{Z'}$ be the quasi-coherent ideal sheaves of the reduced induced closed subschemes on $Z$ and $Z'$ [lem-weil-pbc-reduced-induced-closed-subscheme]; since $Z\\subseteq Z'$, the defining vanishing condition gives $\\mathcal I'\\subseteq\\mathcal I$. By part (1) of that lemma, on $U$ they are $\\widetilde I$ and $\\widetilde{I'}$ for the radical ideals with $V(I)=Z\\cap U=\\emptyset$ and $V(I')=\\{x\\}$, i.e. $I=A$ and $I'=\\mathfrak m$; so $(\\mathcal I/\\mathcal I')|_U\\cong\\widetilde{A/\\mathfrak m}$. On the open $X\\setminus\\{x\\}$ one has $Z\\cap(X\\setminus\\{x\\})=Z'\\cap(X\\setminus\\{x\\})$, so $\\mathcal I$ and $\\mathcal I'$ agree there and $\\mathcal I/\\mathcal I'$ is supported at $x$. Since $U$ and $X\\setminus\\{x\\}$ cover $X$, $\\Gamma(X,\\mathcal I/\\mathcal I')=\\Gamma(U,\\mathcal I/\\mathcal I')=A/\\mathfrak m$. Apply the long exact cohomology sequence to $0\\to\\mathcal I'\\to\\mathcal I\\to\\mathcal I/\\mathcal I'\\to0$ [lem-weil-pbc-derived-functor-long-exact]: the hypothesis $H^1(X,\\mathcal I')=0$ makes $\\Gamma(X,\\mathcal I)\\to\\Gamma(X,\\mathcal I/\\mathcal I')$ surjective, so $1\\in A/\\mathfrak m$ lifts to $f\\in\\Gamma(X,\\mathcal I)\\subseteq\\Gamma(X,\\mathcal O_X)$. Its image $f_A\\in A$ is not in $\\mathfrak m$, so $x\\in X_f$; and $f(z)=0$ for $z\\in Z$, so $X_f\\subseteq U$. Hence $X_f=D(f_A)\\subseteq\\operatorname{Spec}A$ is affine.",
+   "text": "For each closed point, apply the split closed-point lifting lemma to obtain a section whose affine basic open contains that point. Let W be the union of all affine basic opens. The complement is closed; compactness and the T₀ property imply that a nonempty complement contains a closed point, contradiction. Compactness extracts a finite subcover.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-derived-functor-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XF, proof lines 323-352"
-   }
-  },
-  {
-   "text": "Let $W$ be the union of all $X_f$, $f\\in\\Gamma(X,\\mathcal O_X)$, with $X_f$ affine. It is open and contains every closed point of $X$ by Step 1. If $X\\setminus W$ were nonempty, it would be a closed subset of the quasi-compact space $X$, which is Kolmogorov since $X$ is a scheme, so it would contain a point closed in $X$ [lem-sc-quasi-compact-kolmogorov-closed-point], contradicting that all closed points lie in $W$. Thus $W=X$, and by quasi-compactness there are $f_1,\\dots,f_n\\in\\Gamma(X,\\mathcal O_X)$ with $X=X_{f_1}\\cup\\dots\\cup X_{f_n}$ and each $X_{f_i}$ affine.",
-   "uses": [
+    "lem-pqf-h1-closed-point-affine-basic-open",
     "lem-sc-quasi-compact-kolmogorov-closed-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XF, proof lines 353-364"
-   }
+   "elementary": false
   },
   {
-   "text": "The sections $f_1,\\dots,f_n$ define $\\mathcal O_X^{\\oplus n}\\to\\mathcal O_X$, $e_i\\mapsto f_i$, which is surjective: at each point some $f_i$ is a unit in the stalk because the $X_{f_i}$ cover $X$. Let $\\mathcal F$ be its kernel (quasi-coherent) and $\\mathcal F_i=\\mathcal F\\cap(\\mathcal O_X^{\\oplus i}\\oplus0^{\\oplus(n-i)})$, so $0=\\mathcal F_0\\subseteq\\mathcal F_1\\subseteq\\dots\\subseteq\\mathcal F_n=\\mathcal F$. Projection to the $i$-th summand identifies $\\mathcal F_i/\\mathcal F_{i-1}$ with a quasi-coherent subsheaf of $\\mathcal O_X$, i.e. a quasi-coherent sheaf of ideals, so $H^1(X,\\mathcal F_i/\\mathcal F_{i-1})=0$ by hypothesis. By induction on $i$, the long exact sequence of $0\\to\\mathcal F_{i-1}\\to\\mathcal F_i\\to\\mathcal F_i/\\mathcal F_{i-1}\\to0$ [lem-weil-pbc-derived-functor-long-exact] gives the exact segment $H^1(X,\\mathcal F_{i-1})\\to H^1(X,\\mathcal F_i)\\to H^1(X,\\mathcal F_i/\\mathcal F_{i-1})$ with both ends zero, hence $H^1(X,\\mathcal F_i)=0$; in particular $H^1(X,\\mathcal F)=0$.",
+   "text": "For the resulting finite set s of sections, apply the split finite-basic-cover cohomological lemma to obtain Ideal.span s = ⊤.",
    "uses": [
-    "lem-weil-pbc-derived-functor-long-exact"
+    "lem-pqf-h1-finite-basic-cover-unit-ideal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XF, proof lines 365-378"
-   }
+   "elementary": false
   },
   {
-   "text": "The long exact cohomology sequence of $0\\to\\mathcal F\\to\\mathcal O_X^{\\oplus n}\\to\\mathcal O_X\\to0$ [lem-weil-pbc-derived-functor-long-exact] and $H^1(X,\\mathcal F)=0$ make $\\Gamma(X,\\mathcal O_X)^{\\oplus n}\\to\\Gamma(X,\\mathcal O_X)$, $(a_i)\\mapsto\\sum a_if_i$, surjective. Therefore $f_1,\\dots,f_n$ generate the unit ideal of $\\Gamma(X,\\mathcal O_X)$.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XF, proof lines 375-388"
-   }
-  },
-  {
-   "text": "Apply the affine criterion [lem-weil-pbc-affine-unit-ideal-basic-opens] to $f_1,\\dots,f_n$, which generate the unit ideal of $\\Gamma(X,\\mathcal O_X)$ (Step 4) and have affine $X_{f_i}$ (Step 2): $X$ is affine.",
+   "text": "Apply the affine basic-open unit-ideal criterion to the finite family and its affine basic opens to conclude IsAffine X.",
    "uses": [
     "lem-weil-pbc-affine-unit-ideal-basic-opens"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XF, proof lines 375-388"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pqf-h1-closed-point-affine-basic-open",
   "lem-sc-quasi-compact-kolmogorov-closed-point",
-  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-pqf-h1-finite-basic-cover-unit-ideal",
   "lem-weil-pbc-affine-unit-ideal-basic-opens"
  ],
  "proof_origin": {
@@ -160,7 +126,7 @@
   "module": "Sheaf.Paper.QuasiCompactH1Zero",
   "declaration": "AlgebraicGeometry.quasiCompact_affine_of_h1_ideal_zero",
   "file": "lean/Sheaf/Paper/QuasiCompactH1Zero.lean",
-  "statement": "theorem quasiCompact_affine_of_h1_ideal_zero (X : Scheme.{u}) [QuasiCompact (𝟙 X)] (hI : ∀ (I : X.IdealSheafData), I.toModules.IsQuasicoherent → Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules)) : IsAffine X",
+  "statement": "theorem quasiCompact_affine_of_h1_ideal_zero (X : Scheme.{u})\n    [CompactSpace X]\n    (hI : ∀ (I : X.IdealSheafData), I.toModules.IsQuasicoherent →\n      Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules)) :\n    IsAffine X",
   "by": "U1",
   "date": "2026-10-11",
   "existing": false,
@@ -185,5 +151,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-05611",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T202252-L-708722",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proof, imports and node records against the clone, Stacks 01XF, change record and earlier return; delivery and sole direct importer compile cleanly; axioms conform."
  }
 }

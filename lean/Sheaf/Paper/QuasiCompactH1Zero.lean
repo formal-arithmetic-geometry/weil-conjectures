@@ -1,14 +1,20 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group S2
+-/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+
+import Sheaf.Paper.H1ClosedPointAffineBasicOpen
+import Sheaf.Paper.H1FiniteBasicCoverUnitIdeal
 
 /-! # Serre's quasi-compact vanishing criterion
 
-Source: Stacks Project, Cohomology of Schemes, Lemma Tag 01XF
+Source: Stacks Project, Tag 01XF, label lemma-quasi-compact-h1-zero-covering
 (blueprint: lem-pqf-quasicompact-h1-zero).
 -/
 
@@ -17,7 +23,6 @@ Source: Stacks Project, Cohomology of Schemes, Lemma Tag 01XF
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
-open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
@@ -49,10 +54,30 @@ concludes that `X` is affine.  The proof uses
 `lem-weil-pbc-affine-unit-ideal-basic-opens`.
 -/
 theorem quasiCompact_affine_of_h1_ideal_zero (X : Scheme.{u})
-    [QuasiCompact (𝟙 X)]
+    [CompactSpace X]
     (hI : ∀ (I : X.IdealSheafData), I.toModules.IsQuasicoherent →
       Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules)) :
     IsAffine X := by
-  sorry
+  classical
+  let s : Set Γ(X, ⊤) := {f | IsAffineOpen (X.basicOpen f)}
+  let W : Set X := ⋃ f ∈ s, (X.basicOpen f : Set X)
+  have hW : IsOpen W := isOpen_iUnion fun f ↦ isOpen_iUnion fun _ ↦
+    (X.basicOpen f).isOpen
+  have hcover : (Set.univ : Set X) ⊆ W := by
+    intro x _
+    by_contra hx
+    obtain ⟨y, hy, hyclosed⟩ := hW.isClosed_compl.exists_closed_singleton ⟨x, hx⟩
+    obtain ⟨f, hyf, hf⟩ :=
+      exists_affineBasicOpen_of_isClosed_singleton_of_h1_ideal_zero X hI y hyclosed
+    exact hy (Set.mem_iUnion.mpr ⟨f, Set.mem_iUnion.mpr ⟨hf, hyf⟩⟩)
+  obtain ⟨t, hts, htfinite, htcover⟩ := isCompact_univ.elim_finite_subcover_image
+    (fun f (_ : f ∈ s) ↦ (X.basicOpen f).isOpen) hcover
+  have ht : Ideal.span t = ⊤ :=
+    span_eq_top_of_finite_basicOpen_cover_of_h1_ideal_zero X hI t htfinite (by
+      intro x
+      rcases Set.mem_iUnion.mp (htcover (Set.mem_univ x)) with ⟨f, hf⟩
+      rcases Set.mem_iUnion.mp hf with ⟨hft, hxf⟩
+      exact ⟨f, hft, hxf⟩)
+  exact isAffine_of_isAffineOpen_basicOpen t ht (fun f hf ↦ hts hf)
 
 end AlgebraicGeometry

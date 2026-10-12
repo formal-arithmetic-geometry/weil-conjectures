@@ -1,0 +1,134 @@
+{
+ "id": "lem-pqf-h1-closed-point-affine-basic-open",
+ "kind": "statement",
+ "title": "Closed points have affine basic neighbourhoods under ideal H1 vanishing",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] such that $H^1(X,\\mathcal I)=0$ for every quasi-coherent ideal sheaf $\\mathcal I\\subseteq\\mathcal O_X$ [pqf-def-coherent, pqf-def-cohomology]. For every point $x\\in X$ whose singleton is closed, there is $f\\in\\Gamma(X,\\mathcal O_X)$ with $x\\in X_f$ and $X_f$ affine. Here $X_f$ is the locus where the germ of $f$ is a unit.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering; first paragraph of proof, lines 323-352"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$, and its maximal ideal $\\mathfrak m$. Put $Z=X\\setminus U$ and $Z\\prime=Z\\cup\\{x\\}$. The reduced-induced construction gives quasi-coherent ideals $\\mathcal I\\prime\\subseteq\\mathcal I$ defining $Z\\prime$ and $Z$. Their restrictions to $U$ are $\\mathfrak m$ and $A$, and their restrictions to $X\\setminus\\{x\\}$ agree.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient $\\mathcal I/\\mathcal I\\prime$ restricts to $\\widetilde{A/\\mathfrak m}$ on $U$ and zero on $X\\setminus\\{x\\}$. Gluing over these two opens gives global sections $A/\\mathfrak m$. The long exact sequence and the assumed vanishing of $H^1(X,\\mathcal I\\prime)$ lift its section $1$ to $f\\in\\Gamma(X,\\mathcal I)$.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Viewed as a structure-sheaf section, $f$ vanishes on $Z$ and its residue at $x$ is $1$. Hence $x\\in X_f\\subseteq U$. The basic-open construction identifies $X_f$ with $D(f|_U)$ in the affine scheme $U$, so it is affine.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering; first paragraph of proof, lines 323-352"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact scheme with vanishing H1 for ideal sheaves has affine principal neighborhoods of closed points",
+   "results": "Service returned HTTP 500: Internal Server Error; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi compact scheme first cohomology ideal sheaves vanishes affine principal open cover",
+   "results": "Quasi-separated restriction/localization lemmas, no H1-to-principal-neighbourhood theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen",
+   "results": "Definition and ordinary affine basic-open lemmas, no cohomological lifting theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isAffine_of_isAffineOpen_basicOpen|h1_ideal_zero",
+   "results": "Final affineness criterion in Morphisms/Affine.lean; no ideal H1 lifting theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuasiCompactH1Zero",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-serre-criterion",
+   "place": "proof's final sentence applying lemma-quasi-compact-h1-zero-covering; first paragraph of proof, lines 323-352",
+   "via": [
+    "lem-pqf-quasicompact-h1-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.H1ClosedPointAffineBasicOpen",
+  "file": "lean/Sheaf/Paper/H1ClosedPointAffineBasicOpen.lean",
+  "declaration": "AlgebraicGeometry.exists_affineBasicOpen_of_isClosed_singleton_of_h1_ideal_zero",
+  "statement": "theorem exists_affineBasicOpen_of_isClosed_singleton_of_h1_ideal_zero (X : Scheme.{u})\n    (hI : ∀ (I : X.IdealSheafData), I.toModules.IsQuasicoherent →\n      Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules))\n    (x : X) (hx : IsClosed ({x} : Set X)) :\n    ∃ f : Γ(X, ⊤), x ∈ X.basicOpen f ∧ IsAffineOpen (X.basicOpen f)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-05611",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T202252-L-708722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-05611",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T202252-L-708722",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures, proof, imports and node records against the clone, Stacks 01XF, change record and earlier return; delivery and sole direct importer compile cleanly; axioms conform."
+ }
+}
