@@ -9687,3 +9687,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:51 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechStageData (stage 3; reviewer PASS; first push; landing 20261012T215152-L-1303443 (interface); batch 20261012T215151; modules 3; new nodes 2)
 - 21:51 L: merged deliver/C2/Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteEquations (stage 3; reviewer PASS; first push; landing 20261012T215153-L-1303544 (proof); batch 20261012T215151; modules 1; new nodes 0)
 - 21:51 L: merged deliver/F2/Sheaf.RingTheory.FiniteCoefficientTensorKernelReduction (stage 3; reviewer PASS; first push; landing 20261012T215153-L-1303644 (proof); batch 20261012T215151; modules 1; new nodes 1)
+- 21:51 L: merged deliver/G1/Sheaf.AlgebraicGeometry.CoherentFormalModulesIsoInvariant (stage 3; reviewer PASS; first push; landing 20261012T215153-L-1303747 (proof); batch 20261012T215151; modules 1; new nodes 0)

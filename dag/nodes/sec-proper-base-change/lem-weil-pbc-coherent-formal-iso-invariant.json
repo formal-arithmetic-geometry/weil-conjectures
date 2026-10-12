@@ -5,21 +5,34 @@
  },
  "proof": [
   {
-   "text": "Transport coherence of each component along the component isomorphisms.",
+   "text": "Transport finite local generators by GeneratingSections.ofEpi along each component isomorphism. For each finite free map into the new component restricted to an open, use kernelCompMono with the inverse restricted component to identify its kernel with the old finite type kernel. The same finite-generator transport proves that this kernel is finite type.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply formalModuleQuotient_factor to the inverse component and equal exponents. The original ideal-product inclusion is zero because its source is zero. The factorization and cancellation of the monic inverse component make the new product inclusion zero. This inclusion is monic as an image inclusion, so IsZero.of_mono_eq_zero proves the new product zero.",
+   "uses": [
+    "lem-weil-pbc-formal-module-ideal-power-factor"
+   ],
    "elementary": false
   },
   {
-   "text": "Transport the annihilation and quotient-transition conditions using naturality of the inverse-system isomorphism.",
-   "uses": [],
-   "elementary": false
+   "text": "Reduce the component isomorphism and its inverse modulo the fixed ideal power using formalModuleQuotientMap. Its identity and composition laws prove the reductions inverse. Compose the inverse reduction with the old quotient-transition isomorphism and the component isomorphism at the lower level. By cokernel.π_desc the quotient projection followed by the inverse reduction equals the inverse component followed by the original quotient projection. The old quotient-transition equality and naturality of the system isomorphism yield the new transition equality.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "def-weil-pbc-coherent-formal-module"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X"
+  "by": "agent",
+  "agent": "G1",
+  "date": "2026-10-13",
+  "based_on": "The existing two-step isomorphism transport plan, Stacks Lemma 087X and the defining conditions of Section 0EHN; categorical implementation using finite generators, image inclusions, and cokernel universal properties."
  },
  "mathlib_searches": [
   {
@@ -108,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T203943-L-830628",
-  "kind": "interface",
+  "landing": "20261012T215153-L-1303747",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
