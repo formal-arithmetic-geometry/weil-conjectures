@@ -14,22 +14,21 @@
  ],
  "proof": [
   {
-   "text": "Apply ChowModification.nonempty_data to f over the Noetherian scheme Spec A. Extract its source Y, proper surjective map q, finite coordinate type N, immersion into ProjectiveSpace N (Spec A), equation over Spec A, and dense open U on which the restriction of q is an isomorphism. Since Z is nonempty and q is surjective, Y is nonempty. Projective space with an empty coordinate type is empty, so N is nonempty. Choose a finite enumeration N ≃ ULift (Fin (n + 1)), with n one less than its positive cardinality. Renaming homogeneous variables induces an isomorphism of projective spaces over Spec A. Compose the extracted immersion with this isomorphism to obtain e; composition preserves immersion and the equation over Spec A. Take L to be the vanishing ideal of the reduced closed complement of U. The reduced complement theorem identifies its support with that complement, hence L.support.compl with U. Density of U and nonemptiness of Z imply U is nonempty. Finally the canonical isomorphism from the pullback along U.ι to the restricted source identifies pullback.snd with q restricted to U. Transport the restriction isomorphism along this identification and the equality U = L.support.compl. These constructions supply all asserted data.",
+   "text": "Use the proper surjective ChowModification.modificationMap and its immersion to projective space from ChowModification.nonempty_data. Choose its dense isomorphism open U, which is nonempty because Z is nonempty. Set L to the explicitly constructed vanishingIdeal of the closed complement of U. Mathlib coe_support_vanishingIdeal identifies L.support.compl with U, and pullbackRestrictIsoRestrict_hom_morphismRestrict identifies the second pullback projection with an isomorphism followed by q restricted to U. Surjectivity gives a point of the Chow modification; its projective immersion then forces the coordinate type to be nonempty, since projective space with no coordinates is empty. Apply new-projective-reindex-immersion to that finite nonempty type. Assemble these data.",
    "uses": [
     "lem-weil-pbc-chow-noetherian",
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
+    "new-projective-reindex-immersion"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-chow-noetherian",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "new-projective-reindex-immersion"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E; corrected projective-immersion route in repair of X-85771"
+  "by": "worker",
+  "note": "R3 direct assembly from the proved Chow modification, Mathlib vanishing ideal support and restriction/pullback interface, and proved coordinate reindexing."
  },
  "mathlib_searches": [
   {
@@ -102,9 +101,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T194153-L-469364",
+  "landing": "20261012T220525-L-1395049",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
