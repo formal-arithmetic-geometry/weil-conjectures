@@ -45,6 +45,12 @@ theorem existsUnique_open_of_etale_fpqc_baseChange
       (pullback.fst (pullback.snd (g i) f) (pullback.snd (g j) f)) ⁻¹ᵁ W i =
         (pullback.snd (pullback.snd (g i) f) (pullback.snd (g j) f)) ⁻¹ᵁ W j) :
     ∃! U : V.Opens, ∀ i, (pullback.snd (g i) f) ⁻¹ᵁ U = W i := by
-  sorry
+  have hcover' :
+      Presieve.ofArrows (fun i => pullback (g i) f)
+          (fun i => pullback.snd (g i) f) ∈ Scheme.fpqcPrecoverage V := by
+    rw [Presieve.ofArrows_pullback]
+    exact Precoverage.pullbackArrows_mem f hcover
+  exact openSubscheme_existsUnique_of_fpqc
+    (g := fun i => pullback.snd (g i) f) hcover' W hcompat
 
 end AlgebraicGeometry

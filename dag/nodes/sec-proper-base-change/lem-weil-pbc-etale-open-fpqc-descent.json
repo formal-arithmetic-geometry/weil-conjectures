@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "By stability of fpqc coverings under base change [lem-galois-fpqc-covering-base-change], the family of first projections $T_i\\times_S V\\to V$ is an fpqc covering of $V$.",
+   "text": "By stability of fpqc coverings under base change [lem-galois-fpqc-covering-base-change], the family of second projections $T_i\\times_S V\\to V$ is an fpqc covering of $V$. In Lean, Presieve.ofArrows_pullback identifies this family with the pullback presieve, and Precoverage.pullbackArrows_mem transports the covering hypothesis.",
    "uses": [
     "lem-galois-fpqc-covering-base-change"
    ],
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Apply the compatible-open descent statement [lem-weil-pbc-open-subscheme-fpqc-descent] to this base-changed covering and the opens $W_i\\subset T_i\\times_S V$. The assumed equality of their pullbacks to $T_i\\times_S T_j\\times_S V$ is exactly the compatibility hypothesis after identifying the iterated fibre products, so it yields a unique open $W\\subset V$ with the required pullbacks.",
+   "text": "Apply the compatible-open descent statement [lem-weil-pbc-open-subscheme-fpqc-descent] to this base-changed covering and the opens $W_i\\subset T_i\\times_S V$. The Lean hypothesis already uses the double pullbacks of the second projections, so it is exactly the compatibility hypothesis of openSubscheme_existsUnique_of_fpqc. These pullbacks [def-pc-fibre-product] identify canonically with the triple products in the node statement. The descent theorem supplies existence and uniqueness together.",
    "uses": [
     "lem-weil-pbc-open-subscheme-fpqc-descent",
     "def-pc-fibre-product"
@@ -146,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T044753-L-2039356",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
