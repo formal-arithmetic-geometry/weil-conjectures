@@ -1,6 +1,6 @@
 # Work queue
 
-1059 items; claim with `tools/claim.py next <group> [--stage N]`.
+1060 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (19)
 
@@ -34,7 +34,7 @@
 
 Not open yet: 41 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (1039)
+## Stage 3: modules to prove (1040)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -165,6 +165,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstantModuleSectionCoefficients` | 12 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedSingleHomEvaluation` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology` | 12 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNatural` | 12 | 1 | proof |
