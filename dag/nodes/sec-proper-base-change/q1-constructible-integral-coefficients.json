@@ -1,0 +1,146 @@
+{
+ "id": "q1-constructible-integral-coefficients",
+ "kind": "statement",
+ "title": "Constructibility of torsion sheaves with canonical integral coefficients",
+ "statement": "Let $X$ be a scheme and $F$ a torsion abelian sheaf on its small etale site [def-weil-pbc-etale-sheaves], [def-weil-pbc-torsion-etale-sheaf]. Regard $F$ as a sheaf $M$ of modules over $\\operatorname{ULift}\\mathbf Z$ by the canonical equivalence from abelian groups to integral modules and restriction of scalars along $\\operatorname{ULift}\\mathbf Z\\simeq\\mathbf Z$. Then $M$ is constructible in the finite-stratification, locally constant, finitely-generated-stalk sense of [def-weil-pbc-etale-constructible-sheaf] if and only if the underlying sheaf of sets of $F$ has a finite constructible stratification on each of whose strata it is locally constant with finite geometric stalks [def-weil-pbc-etale-sheaves]. Both predicates use global finite stratifications. No quasi-compactness, connectedness or nonemptiness hypothesis on $X$ is needed. Torsion is essential for the implication from finitely generated integral stalks to finite sets.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW (definition-constructible), parts (2) and (3), and Lemma 095E (lemma-constructible-quasi-compact-quasi-separated); integral torsion specialization and underlying-set comparison written by Q1 for step 5 of lem-weil-pbc-curve-assertions-retract. Read the public Stacks pages for Tags 03RW and 095E."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Keep the same finite constructible stratification in both directions. Changing from abelian groups to canonical modules over ULift Z is an equivalence of coefficient categories, so it commutes with inverse image and constant sheaves. Forgetting module structure commutes with inverse image by [lemma-weil-pbc-etale-pullback-forget-modules], and with constant sheaves by [lem-weil-pbc-constant-module-sheaf-underlying]. Restriction to an etale object is evaluated sectionwise. Forgetting groups to sets commutes with geometric stalks and inverse image by the construction of the latter as left Kan extension and sheafification with the induced algebraic operations.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "lem-weil-pbc-constant-module-sheaf-underlying"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Suppose the module sheaf is constructible. Each stratum restriction is locally constant, so its underlying set sheaf is locally constant by step 1. Its geometric stalks are finitely generated integral modules by the definition. They are torsion: use the stalk characterization [lem-weil-pbc-torsion-sheaf-characterizations] and the inverse-image stalk identification [lem-weil-pbc-inverse-image-stalk-germ]. A finitely generated torsion abelian group is finite: choose a finite generating set and positive annihilators of its generators; it is a quotient of the finite product of the cyclic groups of these orders. Thus every stratum is finite locally constant as a set sheaf, proving the forward implication.",
+   "uses": [
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, suppose the underlying set sheaf is constructible. On each stratum take its locally constant set trivializations and discard empty members. At a geometric point on such a member, the constant value A is its finite stalk. For each of the finitely many pairs in A x A choose an etale neighbourhood where its sum equals the section given by the corresponding stalk value; do the same for zero and negatives. Equality in a stalk means equality in some pointed etale neighbourhood. Their finite fiber product gives a refinement on which the whole group operation table is constant. Repeating at every geometric point gives a jointly surjective etale cover. The resulting trivializations are group isomorphisms to finite constant abelian groups, hence integral-linear for the canonical integral actions. Their stalks are finite and therefore finitely generated. They witness IsFiniteLocallyConstantSheaf on every stratum. The same partition then witnesses module constructibility. Empty strata have no stalk conditions and the zero sheaf has the singleton group as constant value. For the separably closed fields in IsFiniteSheaf, pass to the algebraic closure: this is purely inseparable, and both fields have only split finite etale algebras. The etale lifts of the point therefore coincide, so the pointed-neighbourhood colimits giving the two stalks coincide. This is also a special case of [lemma-weil-pbc-universal-homeomorphism-site-equivalence]. Consequently finite stalks at algebraically closed fields give finite stalks at all separably closed fields.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW (definition-constructible), parts (2) and (3), and Lemma 095E (lemma-constructible-quasi-compact-quasi-separated); integral torsion specialization and underlying-set comparison written by Q1 for step 5 of lem-weil-pbc-curve-assertions-retract. Read the public Stacks pages for Tags 03RW and 095E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torsion abelian etale sheaf is constructible if and only if its canonical integral module sheaf is constructible",
+   "results": "CondensedMod.ofSheafCompHaus; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor; SheafOfModules.IsFiniteType; CondensedMod.ofSheafStonean; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-12",
+   "verdict": "related, no exact comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isConstant_iff_forget",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_forget",
+   "date": "2026-10-12",
+   "verdict": "related, no exact comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*integral|integral.*constructible",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsion abelian etale sheaf is constructible if and only if its canonical integral module sheaf is constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.RetractAssertions",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "Step 5 of its split, descent to the summand; step 5 of lem-weil-pbc-curve-assertions-retract, transferring the constructibility hypotheses for C4 and C5.",
+   "via": [
+    "lem-weil-pbc-curve-assertions-retract"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleIntegralCoefficients.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleSheaf_integral_iff",
+  "statement": "theorem isConstructibleSheaf_integral_iff {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : X.IsTorsionAbelianSheaf F) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom IsConstructibleSheaf ((sheafCompose X.smallEtaleTopology E).obj F) ↔ IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038576",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038576",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

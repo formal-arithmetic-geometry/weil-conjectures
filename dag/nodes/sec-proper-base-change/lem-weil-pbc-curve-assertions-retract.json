@@ -25,133 +25,81 @@
  ],
  "proof": [
   {
-   "text": "*Retraction.* Let $c=b\\circ a$, an automorphism of $G$, and put $r=c^{-1}\\circ b:H\\to G$. Then $r\\circ a=c^{-1}\\circ(b\\circ a)=c^{-1}\\circ c=\\mathrm{id}_G$, so $G$ is a retract of $H$ with section $a$ and retraction $r$. (Equivalently $e=a\\circ r$ is an idempotent endomorphism of $H$ and $(r,\\mathrm{id}-e):H\\xrightarrow{\\sim}G\\oplus\\ker r$, $a$ identifying $G$ with $a(G)=\\operatorname{im}e$; only the identity $r\\circ a=\\mathrm{id}_G$ is used below.)",
+   "text": "Normalize the composite: put r = b >> inv(a >> b). Associativity and hom_inv_id prove a >> r = identity. Map a and r through the two sheafCompose functors (the coefficient equivalence and then underlying abelian groups); map_comp and map_id preserve this identity.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Cohomology and inverse images carry the retraction.* For a scheme $T$ and morphisms $\\varphi:F\\to F'$, $\\varphi':F'\\to F''$ of abelian sheaves on $T_{\\Et}$, the maps $H^q(\\varphi)$ of [lem-weil-pbc-cohomology-pullback-functorial] (computed on fixed K-injective resolutions $s:F\\to I^\\bullet$, $s':F'\\to I'^\\bullet$, $s'':F''\\to I''^\\bullet$ of [def-weil-pbc-etale-cohomology] by lifts $\\tilde\\varphi$ with $\\tilde\\varphi s\\simeq s'\\varphi$, independent of the lift) satisfy $H^q(\\varphi'\\circ\\varphi)=H^q(\\varphi')\\circ H^q(\\varphi)$ and $H^q(\\mathrm{id}_F)=\\mathrm{id}$: $\\tilde\\varphi'\\tilde\\varphi s\\simeq\\tilde\\varphi's'\\varphi\\simeq s''\\varphi'\\varphi$, so $\\tilde\\varphi'\\circ\\tilde\\varphi$ is a lift of $\\varphi'\\varphi$, and $\\mathrm{id}_{I^\\bullet}$ is a lift of $\\mathrm{id}_F$, and $\\mathcal H^q(\\Gamma(T,-))$ preserves composites and identities. So $H^q(T_{\\Et},-)$ is a functor $\\Ab(T_{\\Et})\\to\\Ab$, and by [lem-weil-pbc-functor-preserves-retract] $H^q(X_{\\Et},G)$ is a retract of $H^q(X_{\\Et},H)$, with section $\\alpha_q=H^q(a)$ and retraction $\\beta_q=H^q(r)$, $\\beta_q\\alpha_q=\\mathrm{id}$. Likewise, for a morphism of schemes $u:Y\\to X$, the inverse image $u^{-1}$ [def-weil-pbc-inverse-image] is a functor, so (same lemma) $u^{-1}G$ is a retract of $u^{-1}H$ with section $u^{-1}a$ and retraction $u^{-1}r$, and applying the functor $H^q(Y_{\\Et},-)$ once more, $H^q(Y_{\\Et},u^{-1}G)$ is a retract of $H^q(Y_{\\Et},u^{-1}H)$ with section $\\alpha'_q=H^q(u^{-1}a)$ and retraction $\\beta'_q=H^q(u^{-1}r)$, $\\beta'_q\\alpha'_q=\\mathrm{id}$.",
+   "text": "For every q, Sheaf.H.map r q is a left inverse of Sheaf.H.map a q, by Sheaf.H.map_comp_apply and Sheaf.H.map_id_apply. Thus the latter is injective. The assertions use this Ext-valued Sheaf.H directly; no comparison with derived global sections or K-injective resolutions is used.",
    "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-functor-preserves-retract",
-    "def-weil-pbc-inverse-image"
+    "def-weil-pbc-eight-curve-assertions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
+   "elementary": true
   },
   {
-   "text": "*The pullback maps form a retract of arrows.* Let $u:Y\\to X$ be a morphism of schemes and $u^*_G:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$, $u^*_H$ the pullback maps of [def-weil-pbc-cohomology-pullback] (independent of the resolutions, clause 1 of [lem-weil-pbc-cohomology-pullback-functorial]). Clause 3 (naturality) of [lem-weil-pbc-cohomology-pullback-functorial], applied to $\\varphi=a$ and to $\\varphi=r$, gives $u^*_H\\circ\\alpha_q=\\alpha'_q\\circ u^*_G$ and $u^*_G\\circ\\beta_q=\\beta'_q\\circ u^*_H$. Together with $\\beta_q\\alpha_q=\\mathrm{id}$ and $\\beta'_q\\alpha'_q=\\mathrm{id}$ (step 2), $u^*_G$ is a retract of $u^*_H$ in the category of arrows of $\\Ab$.",
-   "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
-  },
-  {
-   "text": "*Vanishing: $\\mathcal C_1$, $\\mathcal C_2$, $\\mathcal C_3$.* Let $q$ be in the range of one of these assertions for $(X,G)$: $q>2$ for [def-weil-pbc-C1]; $q>1$ with $X$ affine for [def-weil-pbc-C2]; $q>1$ with $\\operatorname{char}k=p>0$ and $G$ $p$-primary for [def-weil-pbc-C3], in which case $H$ is $p$-primary by hypothesis [def-weil-pbc-primary-torsion]. In each case the hypotheses of the same assertion for $(X,H)$ hold (the condition on $X$ is the same; the torsion condition passes to $H$), so $H^q(X_{\\Et},H)=0$. By step 2, $H^q(X_{\\Et},G)$ is a retract of the zero object $H^q(X_{\\Et},H)$ of the abelian category $\\Ab$, hence is zero by [lem-weil-pbc-retract-of-zero-object].",
+   "text": "For C1 and C2 install the Subsingleton instance supplied by the assertion for H; injectivity from step 2 gives Subsingleton for G. For C3 first pass the primary condition to H using the hypothesis, then apply the same argument.",
    "uses": [
     "def-weil-pbc-C1",
     "def-weil-pbc-C2",
     "def-weil-pbc-C3",
-    "def-weil-pbc-primary-torsion",
-    "lem-weil-pbc-retract-of-zero-object"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
-  },
-  {
-   "text": "*Finiteness: $\\mathcal C_4$, $\\mathcal C_5$.* If $G$ is constructible [def-weil-pbc-constructible-torsion] and prime to $\\operatorname{char}k$ [def-weil-pbc-primary-torsion] (for [def-weil-pbc-C4]), resp. $X$ is proper over $k$ and $G$ is constructible (for [def-weil-pbc-C5]), then by hypothesis $H$ is constructible, resp. constructible and prime to $\\operatorname{char}k$, so the same assertion for $(X,H)$ says that $H^q(X_{\\Et},H)$ is finite for every $q\\ge0$. Since $\\beta_q\\circ\\alpha_q=\\mathrm{id}$ (step 2), $\\alpha_q:H^q(X_{\\Et},G)\\to H^q(X_{\\Et},H)$ is injective, so $H^q(X_{\\Et},G)$ is isomorphic to the subgroup $\\alpha_q(H^q(X_{\\Et},G))$ of a finite group and is finite.",
-   "uses": [
-    "def-weil-pbc-C4",
-    "def-weil-pbc-C5",
-    "def-weil-pbc-constructible-torsion",
     "def-weil-pbc-primary-torsion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Isomorphism: $\\mathcal C_6$, $\\mathcal C_7$.* Let $k'/k$ be an algebraically closed extension, $\\pi:X_{k'}\\to X$ the projection, and assume $G$ prime to $\\operatorname{char}k$ (for [def-weil-pbc-C6]; then $H$ is prime to $\\operatorname{char}k$ by hypothesis) or $X$ proper over $k$ (for [def-weil-pbc-C7]). The map $\\rho^q_{k'/k}(X,F)$ of [def-weil-pbc-extension-pullback] is the pullback map $\\pi^*_F$ of [def-weil-pbc-cohomology-pullback] for $u=\\pi$, $F=G,H$. By the same assertion for $(X,H)$, $\\rho_H=\\pi^*_H$ is an isomorphism. With $\\alpha=\\alpha_q,\\beta=\\beta_q,\\alpha'=\\alpha'_q,\\beta'=\\beta'_q$ of step 2 for $u=\\pi$ and $\\rho_G=\\pi^*_G$, step 3 gives $\\rho_H\\alpha=\\alpha'\\rho_G$ and $\\rho_G\\beta=\\beta'\\rho_H$. Put $\\sigma=\\beta\\circ\\rho_H^{-1}\\circ\\alpha'$. Then $\\sigma\\rho_G=\\beta\\rho_H^{-1}\\alpha'\\rho_G=\\beta\\rho_H^{-1}\\rho_H\\alpha=\\beta\\alpha=\\mathrm{id}$ and $\\rho_G\\sigma=\\rho_G\\beta\\rho_H^{-1}\\alpha'=\\beta'\\rho_H\\rho_H^{-1}\\alpha'=\\beta'\\alpha'=\\mathrm{id}$, so $\\rho_G=\\rho^q_{k'/k}(X,G)$ is an isomorphism, for every $q\\ge0$. (A retract of an isomorphism is an isomorphism; Mathlib: MorphismProperty.IsStableUnderRetracts.isomorphisms.)",
+   "text": "For C4 and C5 apply [q1-constructible-integral-coefficients] to P.F with P.isTorsion, pass the resulting P.IsConstructible through hconstructible, and apply the reverse implication to H with hH. This supplies module constructibility of H. For C4 also pass the invertible-order condition to H. The assertion for H supplies Finite on its cohomology; Finite.of_injective and step 2 yield finiteness for G.",
+   "uses": [
+    "q1-constructible-integral-coefficients",
+    "def-weil-pbc-constructible-torsion",
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-C4",
+    "def-weil-pbc-C5"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any scheme morphism f, the existing proved Etale.cohomologyMap_map gives naturality for a and r. Surjectivity descends: for y with coefficients G, lift H.map(f^*a)(y) along the map for H to x, and use H.map r(x). Naturality, map_comp, and the retraction identity show its pullback equals y. Injectivity descends by applying H.map a to equality of pullbacks, using naturality, injectivity of the map for H, and step 2. This is implemented in the two private pullback helpers.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For C6 transfer invertible order and apply the bijective helper to the field-extension projection. For C7 apply it under the shared properness hypothesis. For C8 apply the surjective helper to the open immersion in degree 2. Assemble these with steps 3 and 4 as the eight fields of Assertions.",
    "uses": [
     "def-weil-pbc-C6",
     "def-weil-pbc-C7",
-    "def-weil-pbc-primary-torsion",
     "def-weil-pbc-extension-pullback",
-    "def-weil-pbc-cohomology-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
-  },
-  {
-   "text": "*Surjectivity: $\\mathcal C_8$.* Let $w:W\\hookrightarrow X$ be an open immersion; the restriction map $w^*:H^2(X_{\\Et},F)\\to H^2(W_{\\Et},w^{-1}F)$ of [def-weil-pbc-C8] is the pullback map of [def-weil-pbc-cohomology-pullback] for $u=w$ (clause 5 of [lem-weil-pbc-cohomology-pullback-functorial] identifies it with $\\mathcal H^2$ of the restriction of an injective resolution). By $\\mathcal C_8(X,H)$, $w^*_H$ is surjective (no hypothesis on the sheaf). Let $y\\in H^2(W_{\\Et},w^{-1}G)$; then $\\alpha'_2(y)=w^*_H(x)$ for some $x\\in H^2(X_{\\Et},H)$, and by step 3 $w^*_G(\\beta_2(x))=\\beta'_2(w^*_H(x))=\\beta'_2\\alpha'_2(y)=y$. So $w^*_G$ is surjective. (A retract of an epimorphism is one; Mathlib: MorphismProperty.IsStableUnderRetracts.epimorphisms.)",
-   "uses": [
     "def-weil-pbc-C8",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
-  },
-  {
-   "text": "*Conclusion.* Steps 4 to 7 give each of the eight assertions for $(X,G)$ whenever its hypotheses are met, i.e. $\\mathcal C(X,G)$ [def-weil-pbc-eight-curve-assertions].",
-   "uses": [
     "def-weil-pbc-eight-curve-assertions"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph: 'maps G -> f_*f^{-1}G -> G whose composition is an isomorphism. Hence it suffices to prove the lemma with F = j_!f_*f^{-1}G' (the passage to the summand, left implicit there and written out here)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-functor-preserves-retract",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-eight-curve-assertions",
   "def-weil-pbc-C1",
   "def-weil-pbc-C2",
   "def-weil-pbc-C3",
   "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-retract-of-zero-object",
+  "q1-constructible-integral-coefficients",
+  "def-weil-pbc-constructible-torsion",
   "def-weil-pbc-C4",
   "def-weil-pbc-C5",
-  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-inverse-image",
   "def-weil-pbc-C6",
   "def-weil-pbc-C7",
   "def-weil-pbc-extension-pullback",
-  "def-weil-pbc-C8",
-  "def-weil-pbc-eight-curve-assertions"
+  "def-weil-pbc-C8"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 03SD (lemma-vanishing-easier), first paragraph; the passage from the summand, which Stacks leaves implicit, is written out"
+  "place": "Proof of Lemma 03SD, first paragraph, the retract argument; direct Ext cohomology maps replace the K-injective-resolution detour."
  },
  "mathlib_searches": [
   {
@@ -268,5 +216,15 @@
   "group": "J1",
   "result": "pass",
   "note": "k alg closed; X,G = P (CurveCoefficientPair: P.isCurve, P.F, P.isTorsion); H torsion via hH on same P.C/P.toSpec; a,b with IsIso (a≫b) = b∘a automorphism; constructibility transfer via recorded CurveCoefficientPair.IsConstructible; prime-to-char via IsTorsionSheafOfInvertibleOrder (Spec k) as in C4/C6; p-primary over [Fact p.Prime][CharP k p] as in C3; C(X,H)->C(X,G) via IsCurve.Assertions through E1's E bridge verbatim; no new defs, no hollow hyps"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038576",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
