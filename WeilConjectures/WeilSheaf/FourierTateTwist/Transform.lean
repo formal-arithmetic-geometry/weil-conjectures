@@ -14,6 +14,8 @@ public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 
 - `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist` (`prop-base-linear`, clause (2)):
   `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`, naturally in the Weil complex `K`.
+- `AlgebraicGeometry.nonempty_iso_fourierTransform_of_iso_constantTwist`: the Fourier transform
+  commutes with constant twists `- ⊗ 𝓑_b`.
 -/
 
 @[expose] public section
@@ -77,6 +79,22 @@ private noncomputable def constantTwistCompFourierTransformDerivedIso
           (affinePlane.snd k₀) b _)
         (((ProEtaleWeilSheaf.constantTwist k₀ l (affineLine k₀) b).mapDerivedCategory.commShiftIso
           (1 : ℤ)).symm)))
+
+/-- The Fourier–Deligne transform of Weil complexes on the affine line commutes with constant
+twists, on underlying objects of the derived category of pro-étale Weil sheaves: if the
+underlying object of `K'` is the constant twist by `b` of that of `K`, then the same holds for
+their Fourier transforms. -/
+theorem nonempty_iso_fourierTransform_of_iso_constantTwist (ψ : AddChar k₀ (PadicAlgCl l))
+    (b : (PadicAlgCl l)ˣ) {K K' : WeilComplex k₀ l (affineLine k₀)}
+    (e : K'.obj ≅
+      (ProEtaleWeilSheaf.constantTwist k₀ l (affineLine k₀) b).mapDerivedCategory.obj K.obj) :
+    Nonempty (((fourierTransform ψ).obj K').obj ≅
+      (ProEtaleWeilSheaf.constantTwist k₀ l (affineLine k₀) b).mapDerivedCategory.obj
+        ((fourierTransform ψ).obj K).obj) :=
+  ⟨(fourierTransformCompιIso ψ).app K' ≪≫ (fourierTransformDerived ψ).mapIso e ≪≫
+    (constantTwistCompFourierTransformDerivedIso ψ b).app K.obj ≪≫
+    (ProEtaleWeilSheaf.constantTwist k₀ l (affineLine k₀) b).mapDerivedCategory.mapIso
+      ((fourierTransformCompιIso ψ).app K).symm⟩
 
 -- TODO(unify): sk-prop-base-linear
 /-- The Fourier–Deligne transform of Weil complexes on the affine line commutes with the Tate
