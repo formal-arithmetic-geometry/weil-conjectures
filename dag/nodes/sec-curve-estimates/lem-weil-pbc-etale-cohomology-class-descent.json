@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-etale-cohomology-class-descent",
+ "kind": "statement",
+ "title": "Descent of an etale cohomology class to a finite stage",
+ "statement": "Let J be a small cofiltered category and D:J→Sch a diagram of quasi-compact quasi-separated schemes with affine transition maps [def-weil-pbc-scheme-conventions]. Let c be a limit cone with vertex X, i∈J, F a torsion abelian etale sheaf on D_i [def-weil-pbc-etale-sheaves], and q≥0. Every class x∈H^q(X,c_i^*F) descends: there exist j∈J, f:j→i and y∈H^q(D_j,(D(f))^*F) whose pullback along c_j, followed by the canonical inverse-image composition isomorphism c_j^*(D(f))^*F≅c_i^*F, is x. This is only surjectivity; no assertion about a class vanishing eventually is made.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Proof step 1 (surjectivity); blueprint_sketch proof paragraph beginning Let alpha; Stacks Project Tags 03Q6 and 09YQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Restrict D to the category Over i of arrows into i. The forgetful functor is initial for a cofiltered category (Mathlib Over.initial_forget), so its whiskered cone is still a limit (Functor.Initial.isLimitWhiskerEquiv). Its stages are qcqs and its transitions affine. The limit projections are affine (Mathlib isAffineHom_π_app), hence the limit is qcqs. This reduction keeps the chosen coefficient sheaf on the fixed stage.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compute Sheaf.H using an injective resolution of F, taking Hom from the constant integer sheaf. By the constant-sheaf adjunction this is the global-section complex. Thus this Ext encoding agrees with the derived-global-sections encoding of hypercover_cohomology. The identification is natural for the inverse-image adjunction, so its pullback is cohomologyMap followed by the indicated inverse-image composition comparison. Apply hypercover_cohomology to represent x by a degree-q cocycle on a finite split hypercover. Only degrees through q+1 are involved.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "thm-weil-pbc-hypercover-cohomology",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the finite split skeleton through degree q+1, including the matching covering maps, to one stage by finite_hypercover_descent. Extend the descended skeleton to a finite split hypercover by the matching-object induction of hypercover-refinement: choose finitely many affine etale covering pieces in every next degree, retaining the already chosen lower skeleton.",
+   "uses": [
+    "lemma-weil-pbc-finite-hypercover-descent",
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each component of the degree-q cocycle is a section of the limit inverse image on a descended qcqs etale object. Section continuity gives a stage representative, after the finite refinement needed for local representatives. Choose a common stage for the finitely many components. The finitely many equations δz=0 hold on the limit. Apply injectivity in section continuity to their differences, and choose one further common stage where all differences vanish. The resulting finite list is a stage cocycle.",
+   "uses": [
+    "lem-weil-pbc-etale-section-continuity",
+    "lem-weil-pbc-hypercover-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stage cocycle gives y by the same hypercover comparison. Pullback recovers the original cocycle, so naturality of the comparison gives the displayed equation, with the inverse upperStarComp transporting iterated inverse images. In degree zero this is a section with its degree-one gluing equations; no negative-degree cochain occurs. The zero sheaf and empty schemes give only the zero class.",
+   "uses": [
+    "thm-weil-pbc-hypercover-cohomology",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "thm-weil-pbc-hypercover-cohomology",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lemma-weil-pbc-finite-hypercover-descent",
+  "lem-weil-pbc-hypercover-refinement",
+  "lem-weil-pbc-etale-section-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
+  "place": "Proof step 1, expanded finite hypercover cocycle descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every etale cohomology class on a cofiltered limit of quasi compact quasi separated schemes with affine transition maps descends to a finite stage",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology at an inverse limit of qcqs schemes with affine transition maps is the filtered colimit of stage cohomology",
+   "date": "2026-10-12",
+   "results": "Eight hits: global sections of the structure sheaf at affine-transition limits (nonempty_isColimit_Γ_mapCocone, exists_appTop_π_eq_of_isLimit and related variants), not abelian etale sheaf cohomology. Existing Sheaf theorem EtaleCohomologyLimitOfSchemes requires a directed index plus explicit compatible diagrams; CofilteredEtaleCohomologyCocone only specifies comparison on fixed-base restriction images. Neither supplies the stated arbitrary class descent.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg cohomology.*continu|cohomology.*[Dd]escen|cohomology.*isLimit in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites/SheafCohomology; corresponding searches in lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search cohomology continuity",
+   "date": "2026-10-12",
+   "results": "No Mathlib inverse-limit etale class-descent theorem. Sheaf.EtaleCohomologyContinuity is the parent conjunction; source CohomologyContinuity only proves a vanishing criterion. Blueprint search finds the parent and fixed-scheme coefficient-colimit continuity, not a separate surjectivity theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology element of the inverse image of an abelian etale sheaf on a projective limit is represented at a finite level",
+   "date": "2026-10-12",
+   "results": "Second reader: eight hits, including Sheaf.H, cohomologyPresheaf, nonabelian H1 and Hilbert90. None supplies inverse-system class descent.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "date": "2026-10-12",
+   "results": "Second reader: twelve hits, including H.map, H.equiv₀ and subsingleton_H_of_isZero. No inverse-system class-descent theorem. An earlier query AlgebraicGeometry.Etale.cohomologyMap was rejected as an unknown identifier, and is not an absence verdict.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists.*[Cc]ohomology|[Cc]ohomology.*[Ll]imit|[Hh]_map_isColimit|[Cc]ohomology.*[Cc]ontinu in lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures/SixFunctors/Etale",
+   "date": "2026-10-12",
+   "results": "Second reader inspected EtaleCohomologyLimitOfSchemes, CofilteredEtaleCohomologyCocone and Gabber. The directed-limit theorem requires complete compatible diagrams and canonical legs. The cofiltered cocone only identifies its legs on fixed-base images r_j, so its surjectivity does not give canonical pullback representatives for arbitrary stage classes. Gabber provides the same finite-stage vanishing argument, but importing it creates a cycle through its existing dependencies.",
+   "verdict": "no usable exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-cohomology-continuity",
+   "place": "Proof step 1: finite hypercover cocycle descent proving surjectivity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyClassDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyClassDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_cohomology_class_of_isLimit",
+  "statement": "theorem exists_cohomology_class_of_isLimit\n    {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})\n    [∀ j : J, CompactSpace (D.obj j)] [∀ j : J, QuasiSeparatedSpace (D.obj j)]\n    [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]\n    (c : Cone D) (hc : IsLimit c) (i : J)\n    (F : Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hF : F.IsTorsion) (q : ℕ) :\n    (∀ x : Sheaf.H (((c.π.app i)^*[AddCommGrpCat.{u + 1}]).obj F) q,\n      ∃ (j : J) (f : j ⟶ i)\n        (y : Sheaf.H (((D.map f)^*[AddCommGrpCat.{u + 1}]).obj F) q),\n        Sheaf.H.map\n          ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm).inv.app F) q\n          (cohomologyMap (c.π.app j) _ q y) = x)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

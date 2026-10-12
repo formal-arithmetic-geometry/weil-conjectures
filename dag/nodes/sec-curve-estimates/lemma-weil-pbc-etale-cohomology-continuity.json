@@ -24,35 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Let a class in $H^q(X,F)$ be given. By\n[thm-weil-pbc-hypercover-cohomology], it is represented by a cocycle in\n$C^q(U,F)$ on a hypercover finite in each degree. Descend the truncation\nthrough degree $q+1$ using [lemma-weil-pbc-finite-hypercover-descent]. By\n[lem-weil-pbc-etale-section-continuity], its cocycle descends to a section at\na later stage, and the equation $\\delta z=0$ holds at a further stage. That\ncocycle represents a class in $H^q(X_j,F_j)$. This proves surjectivity of the\ncomparison.",
+   "text": "Apply [lem-weil-pbc-etale-cohomology-class-descent] to obtain the surjectivity conjunct with exactly the canonical comparison in the statement.",
    "uses": [
-    "thm-weil-pbc-hypercover-cohomology",
-    "lemma-weil-pbc-finite-hypercover-descent",
-    "lem-weil-pbc-etale-section-continuity"
+    "lem-weil-pbc-etale-cohomology-class-descent"
    ],
    "elementary": false
   },
   {
-   "text": "For injectivity, represent a stagewise class by a hypercover cocycle, again\nusing [thm-weil-pbc-hypercover-cohomology]. If its pullback vanishes on $X$,\nthat theorem and [lem-weil-pbc-hypercover-refinement] give a refinement of\nthe pulled-back hypercover on which the cocycle is a boundary. Descend the\ntruncation of the refinement, its map to the original hypercover, its\nprimitive, and the boundary equation, using the same two descent lemmas. The\nclass is then zero at a later stage. For degree zero, replace the primitive\nby the assertion that the section is zero; section continuity applies\ndirectly. All the maps are pullbacks of sections, so the isomorphism is the\ncanonical restriction map in the statement and is natural in the sheaf and in\nthe inverse system.",
+   "text": "For a stage class y killed by the canonical comparison, the upperStarComp inverse is an isomorphism and induces an injective map on Sheaf.H. Hence cohomologyMap along c_j kills y. Restrict D to Over j, with structure map at a:j′→j given by D(a). Mathlib Over.initial_forget and Functor.Initial.isLimitWhiskerEquiv preserve the limit. At its identity stage c_j followed by D(id_j) is c_j.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-cofiltered-etale-cohomology-cocone] to this restricted system and the abelian sheaf (D(f))^*F on D_j. Its compatibility equations identify the limit image of r_id(y) with zero. Injectivity of the comparison isomorphism identifies its cocone image with that of zero. The forgetful functor on abelian groups preserves filtered colimits; Mathlib IsColimit.eq_iff' supplies a later arrow where the two stage images agree. Compatibility of r identifies the image with r_a(y), and the stage isomorphism identifies this with cohomologyMap D(a) y, hence that pullback vanishes.",
    "uses": [
-    "thm-weil-pbc-hypercover-cohomology",
-    "lem-weil-pbc-hypercover-refinement",
-    "lemma-weil-pbc-finite-hypercover-descent",
-    "lem-weil-pbc-etale-section-continuity"
+    "lem-weil-pbc-cofiltered-etale-cohomology-cocone"
    ],
    "elementary": false
+  },
+  {
+   "text": "The resulting object a of Over j supplies k=a.left and g=a.hom:k→j. Apply Sheaf.H.map of the upperStarComp inverse to the zero pullback. Additive maps preserve zero, proving the second conjunct; pair both conjuncts.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-hypercover-cohomology",
-  "lemma-weil-pbc-finite-hypercover-descent",
-  "lem-weil-pbc-etale-section-continuity",
-  "lem-weil-pbc-hypercover-refinement"
+  "lem-weil-pbc-etale-cohomology-class-descent",
+  "lem-weil-pbc-cofiltered-etale-cohomology-cocone"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
-  "place": "## Proof"
+  "place": "Surjectivity split off as proof step 1; injectivity proved by filtered-colimit element criterion applied to the existing cofiltered cocone (Stacks 09YQ) over Over j."
  },
  "mathlib_searches": [
   {
@@ -156,5 +159,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
