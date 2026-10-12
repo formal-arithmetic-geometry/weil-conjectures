@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-finite-free-stalk-degreewise-lift-core-aux",
+ "kind": "statement",
+ "title": "Finite intersection gluing with outside witnesses",
+ "statement": "For a scheme Y, complexes P and Q, a point y, a family t of maps between stalk pullbacks, and a finite set I of degrees, assume that every n in I has a local representative satisfying the stalkRestrictionComplexIso equation and every n outside I has a representative on the top open satisfying that equation. Then there is one open neighbourhood U of y such that every degree n has a representative on U satisfying the same equation.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "finite intersection step"
+ },
+ "proof": [
+  {
+   "text": "Choose the finitely many local neighbourhoods for degrees in I, intersect them, and transport each representative along restriction and pullback composition. For degrees outside I use the supplied top-open witnesses. Naturality of stalkRestrictionComplexIso preserves each equation.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "finite intersection step"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given finitely many local stalk representatives, can they be glued on one neighbourhood?",
+   "results": "No direct theorem returned.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite intersection of neighbourhoods with stalk pullback representative",
+   "results": "No direct theorem found; only stalk and pullback ingredients.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecStalk\" \"Finset\"",
+   "results": "No direct theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkRestrictionComplexIso pullback restriction",
+   "results": "Only component naturality lemmas; no finite gluing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftCore",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-stalk-degreewise-lift-core",
+   "place": "finite intersection reduction",
+   "via": [
+    "lem-pc-finite-free-stalk-degreewise-lift-core"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLiftAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkDegreewiseLiftAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_degreewise_finite_aux",
+  "statement": "theorem exists_degreewise_finite_aux\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (y : Y) (t : ∀ n : ℤ,\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P).X n ⟶\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj Q).X n)\n    (I : Finset ℤ)\n    (hlocal : ∀ n : ℤ, n ∈ I → ∃ (U : Y.Opens), ∃ (hyU : y ∈ U), ∃ (g :\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n ⟶\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).X n),\n      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map g =\n        ((stalkRestrictionComplexIso U y hyU).app P).hom.f n ≫ t n ≫\n          ((stalkRestrictionComplexIso U y hyU).app Q).inv.f n)\n    (hout : ∀ n : ℤ, n ∉ I → ∃ (g :\n      (((restrictFunctor (⊤ : Y.Opens).ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n ⟶\n      (((restrictFunctor (⊤ : Y.Opens).ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).X n),\n      (Modules.pullback ((⊤ : Y.Opens).fromSpecStalkOfMem y (by simp))).map g =\n        ((stalkRestrictionComplexIso (⊤ : Y.Opens) y (by simp)).app P).hom.f n ≫ t n ≫\n          ((stalkRestrictionComplexIso (⊤ : Y.Opens) y (by simp)).app Q).inv.f n) :\n    ∃ (U : Y.Opens), ∃ (hyU : y ∈ U), ∀ n : ℤ, ∃ (g :\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n ⟶\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).X n),\n      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map g =\n        ((stalkRestrictionComplexIso U y hyU).app P).hom.f n ≫ t n ≫\n          ((stalkRestrictionComplexIso U y hyU).app Q).inv.f n",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T234217-L-2124511",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T234217-L-2124511",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
