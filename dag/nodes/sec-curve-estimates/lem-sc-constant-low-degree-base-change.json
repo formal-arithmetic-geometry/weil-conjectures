@@ -15,63 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Use baseChange_curve to obtain the smooth connected curve over K. Split into proper and affine cases by the proper-or-affine dichotomy. Choose a primitive root in k; its image is primitive in K. The primitive-root trivializations commute with pullback, and transport the canonical map to the roots-of-unity comparison.",
+   "text": "In degree zero lift the n-killed constant sheaf to Z/n-module coefficients. Algebraically closed extension preserves module sections, and the degree-zero cohomology comparison is therefore bijective. Transport through the coefficient-forgetting isomorphism using naturality, then compose with the constant-sheaf comparison isomorphism.",
    "uses": [
-    "lem-sc-base-change-curve",
-    "lem-sc-proper-or-affine",
+    "lem-weil-pbc-killed-sheaf-module-lift",
+    "lem-sc-algclosed-extension-module-sections",
+    "new-module-acyclic-comparison-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree one choose a primitive root in k and its primitive image in K. Obtain the Kummer comparison morphism. The proper-or-affine dichotomy and the two Kummer degree-one comparison theorems give bijectivity on roots-of-unity cohomology.",
+   "uses": [
     "lem-sc-primitive-root",
+    "lem-sc-kummer-base-change-compatibility",
+    "lem-sc-proper-or-affine",
+    "lem-sc-proper-kummer-degree-one-base-change",
+    "lem-sc-affine-kummer-degree-one-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomology to the primitive-root compatibility square and use pullback naturality. This conjugates r in degree one with the bijective roots-of-unity comparison. The two trivialization isomorphisms give injectivity and surjectivity. Every natural degree at most one is zero or one.",
+   "uses": [
     "lem-sc-root-trivialization-base-change"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In degree zero, sections are the nth roots of unity in the ground field. Every root is a unique power of the chosen primitive root, and extension sends that power to the corresponding power. Consequently the pullback in these coordinates is the identity.",
-   "uses": [
-    "lem-sc-kummer-les",
-    "lem-sc-primitive-root"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For proper C, the units are the ground-field units and are n-divisible; the Kummer sequence identifies H1(mu_n) with Pic(C)[n]. Since integer degree is torsion-free this torsion lies in Picard degree zero. The Jacobian representing isomorphism identifies it with the Jacobian n-torsion points; genus/Jacobian base change and the abelian-variety estimate say their canonical extension map is bijective. Kummer naturality identifies this map with cohomology pullback.",
-   "uses": [
-    "lem-sc-kummer-les",
-    "lem-sc-pic-proper-ntorsion",
-    "thm-sc-jacobian-representability",
-    "lem-sc-genus-invariant",
-    "thm-av-final",
-    "lem-sc-kummer-base-change-compatibility"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For affine C, affine cohomology gives the short exact degree-one Kummer sequence. Its units-quotient map is bijective by units_quotient_base_change and its Picard-torsion map is bijective by the affine clause of kummer_base_change_compatibility. The short five lemma makes the degree-one map bijective. The degree-zero calculation is already done.",
-   "uses": [
-    "thm-sc-affine-cohomology",
-    "lem-sc-units-quotient-base-change",
-    "lem-sc-kummer-base-change-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-base-change-curve",
-  "lem-sc-proper-or-affine",
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "lem-sc-algclosed-extension-module-sections",
+  "new-module-acyclic-comparison-zero",
   "lem-sc-primitive-root",
-  "lem-sc-root-trivialization-base-change",
-  "lem-sc-kummer-les",
-  "lem-sc-pic-proper-ntorsion",
-  "thm-sc-jacobian-representability",
-  "lem-sc-genus-invariant",
-  "thm-av-final",
   "lem-sc-kummer-base-change-compatibility",
-  "thm-sc-affine-cohomology",
-  "lem-sc-units-quotient-base-change"
+  "lem-sc-proper-or-affine",
+  "lem-sc-proper-kummer-degree-one-base-change",
+  "lem-sc-affine-kummer-degree-one-base-change",
+  "lem-sc-root-trivialization-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "proof, proper and affine cases, degrees 0 and 1; formalized reduction by C2"
+  "place": "T1 Lean proof: degree-zero module sections; proper/affine Kummer degree one; primitive-root transport"
  },
  "mathlib_searches": [
   {
@@ -210,9 +195,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T053923-L-2631271",
+  "landing": "20261012T085339-L-39455",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

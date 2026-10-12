@@ -1,0 +1,194 @@
+{
+ "id": "lem-sc-proper-pic-torsion-base-change",
+ "kind": "statement",
+ "title": "ProperPicTorsionBaseChange",
+ "statement": "Let $k\\subseteq K$ be algebraically closed fields [def-sc-field-extension], and let $f:C\\to\\operatorname{Spec}k$ be a smooth separated connected proper curve [def-sc-curves]. Let $n\\geq1$ be nonzero in $k$. For the Picard groups of invertible modules [def-sc-picard-group], there is a bijection $F:\\operatorname{Pic}(C)[n]\\to\\operatorname{Pic}(C_K)[n]$ with $F(L)=\\pi^*L$ for every line bundle class, where $\\pi:C_K\\to C$ is the projection.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proper-case degree-one paragraph: Jacobian n-torsion comparison"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "BaseChange_curve and genus_jacobian_invariant supply smooth proper geometrically integral connected curves over both fields. Proper dimension-one curves are projective, so Jacobian representability applies.",
+   "uses": [
+    "lem-sc-base-change-curve",
+    "lem-sc-genus-invariant",
+    "lem-sc-proper-dim-one-projective",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree homomorphism takes values in the torsion-free integers, so nth-torsion line bundles have degree zero. Jacobian representability identifies Picard-zero torsion with torsion rational points, respecting the group laws.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The classifying-map equation of genus_jacobian_invariant identifies canonical Picard pullback with extension of Jacobian points. Restrict this identity to nth torsion.",
+   "uses": [
+    "lem-sc-genus-invariant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For invertible n, Jacobian nth torsion is finite etale. Clause (c) of abelianVariety_estimate_of_isAlgClosed makes its canonical extension map bijective. Transport through the representing identifications to obtain F with its equation on each line bundle.",
+   "uses": [
+    "thm-av-final",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-base-change-curve",
+  "lem-sc-genus-invariant",
+  "lem-sc-proper-dim-one-projective",
+  "thm-sc-jacobian-representability",
+  "lem-sc-pic-proper-decomposition",
+  "thm-av-final"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proper-case degree-one paragraph: Jacobian n-torsion comparison"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T06:35:23Z",
+   "tool": "grep",
+   "query": "Pic.*torsion|torsion.*Pic|[Jj]acobian",
+   "sub": "AlgebraicGeometry",
+   "ok": true,
+   "n_hits": 20,
+   "note": "",
+   "top": [
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean"
+   ],
+   "digest": "bbed0f7446447ac8",
+   "date": "2026-10-12",
+   "results": [
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean",
+    "Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean"
+   ],
+   "verdict": "No matching general scheme Picard/Kummer base-change result."
+  },
+  {
+   "t": "2026-10-12T06:35:24Z",
+   "tool": "leansearch",
+   "query": "Pullback on n-torsion Picard groups of smooth proper connected curves under extension of algebraically closed fields",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T06:35:24Z",
+   "tool": "leanfinder",
+   "query": "Picard torsion group of smooth proper curve bijective under algebraically closed field extension via Jacobian",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "WeierstrassCurve.Affine.Point.toClass_some",
+    "WeierstrassCurve.Affine.Point.toClass_apply",
+    "WeierstrassCurve.Affine.Point.toClass",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+    "WeierstrassCurve.Jacobian.Point.toAffineAddEquiv",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+    "WeierstrassCurve.Affine.Point.toClass_injective",
+    "WeierstrassCurve.Jacobian.PointClass"
+   ],
+   "digest": "8dc8c134193e5c69",
+   "date": "2026-10-12",
+   "results": [
+    "WeierstrassCurve.Affine.Point.toClass_some",
+    "WeierstrassCurve.Affine.Point.toClass_apply",
+    "WeierstrassCurve.Affine.Point.toClass",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+    "WeierstrassCurve.Jacobian.Point.toAffineAddEquiv",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+    "WeierstrassCurve.Affine.Point.toClass_injective",
+    "WeierstrassCurve.Jacobian.PointClass"
+   ],
+   "verdict": "No matching general scheme Picard/Kummer base-change result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstantLowDegreeBaseChange",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "proper-case degree-one paragraph: Jacobian n-torsion comparison",
+   "via": [
+    "lem-sc-constant-low-degree-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ProperPicTorsionBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ProperPicTorsionBaseChange.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.proper_pic_torsion_baseChange_bijective",
+  "statement": "theorem IsConnectedCurve.proper_pic_torsion_baseChange_bijective {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0) : ∃ F : {L : C.Pic // L ^ n = 1} → {L : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Pic // L ^ n = 1}, Function.Bijective F ∧ ∀ L, (F L).val = Scheme.Pic.map (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L.val",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085339-L-39455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085339-L-39455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
