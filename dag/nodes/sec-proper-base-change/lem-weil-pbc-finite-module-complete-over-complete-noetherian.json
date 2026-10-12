@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "Write $R^\\wedge=\\varprojlim_nR/J^n$ and $\\iota_R:R\\to R^\\wedge$, $a\\mapsto(a\\bmod J^n)_n$. By hypothesis ($R$ is $J$-adically complete [def-weil-pbc-adically-complete-ring]) $\\iota_R$ is bijective; it is a ring map, hence $R$-linear, and so is its inverse $\\iota_R^{-1}$. Base change along the $R$-linear maps $\\iota_R$ and $\\iota_R^{-1}$ [def-weil-module-base-change] gives $R$-linear maps $\\iota_R\\otimes\\mathrm{id}_N:R\\otimes_RN\\to R^\\wedge\\otimes_RN$ and $\\iota_R^{-1}\\otimes\\mathrm{id}_N$ in the other direction, inverse to each other by functoriality of $-\\otimes_RN$ ($(\\iota_R^{-1}\\otimes\\mathrm{id})\\circ(\\iota_R\\otimes\\mathrm{id})=(\\iota_R^{-1}\\iota_R)\\otimes\\mathrm{id}=\\mathrm{id}$ and symmetrically). Hence $\\beta:N\\to R^\\wedge\\otimes_RN$, $x\\mapsto1\\otimes x$, the composite of the isomorphism $N\\cong R\\otimes_RN$, $x\\mapsto1\\otimes x$, with $\\iota_R\\otimes\\mathrm{id}_N$ (note $\\iota_R(1)=1$), is bijective. This is the identification $M=M\\otimes_RR=M\\otimes_RR^\\wedge$ in the proof of Stacks 031B.",
+   "text": "Write $R^\\wedge=\\varprojlim_nR/J^n$ and $\\iota_R:R\\to R^\\wedge$, $a\\mapsto(a\\bmod J^n)_n$. By hypothesis ($R$ is $J$-adically complete [def-weil-pbc-adically-complete-ring]) $\\iota_R$ is bijective; it is a ring map, hence $R$-linear, and so is its inverse $\\iota_R^{-1}$. Base change along the $R$-linear maps $\\iota_R$ and $\\iota_R^{-1}$ [def-weil-module-base-change] gives $R$-linear maps $\\iota_R\\otimes\\mathrm{id}_N:R\\otimes_RN\\to R^\\wedge\\otimes_RN$ and $\\iota_R^{-1}\\otimes\\mathrm{id}_N$ in the other direction, inverse to each other by functoriality of $-\\otimes_RN$ ($(\\iota_R^{-1}\\otimes\\mathrm{id})\\circ(\\iota_R\\otimes\\mathrm{id})=(\\iota_R^{-1}\\iota_R)\\otimes\\mathrm{id}=\\mathrm{id}$ and symmetrically). Hence $\\beta:N\\to R^\\wedge\\otimes_RN$, $x\\mapsto1\\otimes x$, the composite of the isomorphism $N\\cong R\\otimes_RN$, $x\\mapsto1\\otimes x$, with $\\iota_R\\otimes\\mathrm{id}_N$ (note $\\iota_R(1)=1$), is bijective. This is the identification $M=M\\otimes_RR=M\\otimes_RR^\\wedge$ in the proof of Stacks 031B. In Lean, first carry out these steps when the module and ring have the same universe, in the proved private helper finiteModuleCompleteSameUniverse.",
    "uses": [
     "def-weil-pbc-adically-complete-ring",
     "def-weil-module-base-change"
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "For $x\\in N$, $c_N(\\beta(x))=c_N(1\\otimes x)=1\\cdot\\iota_N(x)=\\iota_N(x)$, so $\\iota_N=c_N\\circ\\beta$ is a composite of two bijections (steps 1 and 2) and is bijective: the canonical map $N\\to\\varprojlim_nN/J^nN$ is bijective, i.e. $N$ is $J$-adically complete. (In Stacks 031B surjectivity of this map comes from Lemma 0315 and injectivity from $\\bigcap_nJ^nN=0$; over a Noetherian $R$ both are contained in the bijectivity of $c_N$, so neither Lemma 0315 nor the Krull intersection theorem with Lemma 05GI is needed.)",
+   "text": "For $x\\in N$, $c_N(\\beta(x))=c_N(1\\otimes x)=1\\cdot\\iota_N(x)=\\iota_N(x)$, so $\\iota_N=c_N\\circ\\beta$ is a composite of two bijections (steps 1 and 2) and is bijective: the canonical map $N\\to\\varprojlim_nN/J^nN$ is bijective, i.e. $N$ is $J$-adically complete. (In Stacks 031B surjectivity of this map comes from Lemma 0315 and injectivity from $\\bigcap_nJ^nN=0$; over a Noetherian $R$ both are contained in the bijectivity of $c_N$, so neither Lemma 0315 nor the Krull intersection theorem with Lemma 05GI is needed.) For a module N in an arbitrary universe, Module.Finite.small makes N small in the universe of R. Apply the same-universe result to Shrink N and transport its canonical completion equivalence along Shrink.linearEquiv and AdicCompletion.congr (restricted to R-scalars). AdicCompletion.map_of identifies this transported equivalence with the canonical map of N, so its bijectivity gives the desired completeness.",
    "uses": [
     "lem-weil-pbc-completion-finite-module-tensor"
    ],
@@ -183,5 +183,15 @@
   "group": "M1",
   "result": "pass",
   "note": "R CommRing+IsNoetherianRing; J : Ideal R; [IsAdicComplete J R]; N AddCommGroup+Module R+Module.Finite R N; concl IsAdicComplete J N (= bijective of J N by of_bijective_iff); no hollow binders; no Mathlib/landed duplicate (only ofTensorProductEquivOfFiniteNoetherian)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T144135-L-2103841",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
