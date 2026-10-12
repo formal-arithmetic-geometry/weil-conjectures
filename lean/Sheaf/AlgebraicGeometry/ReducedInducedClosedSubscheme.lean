@@ -8,7 +8,8 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Coherent
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # The reduced induced closed subscheme
@@ -85,6 +86,66 @@ theorem reduced_induced_closed_subscheme (X : Scheme.{u}) (T : TopologicalSpace.
         i'.ker = vanishingIdeal T ∧
           ∃! φ : Z' ≅ (vanishingIdeal T).subscheme,
             φ.hom ≫ (vanishingIdeal T).subschemeι = i') := by
-  sorry
+  classical
+  have hrange : Set.range (vanishingIdeal T).subschemeι = (T : Set X) := by
+    simp
+  refine ⟨?_, ?_, inferInstance, inferInstance, ker_subschemeι _, hrange,
+    fun U ↦ isPullback_subschemeCover_map _ U, ?_⟩
+  · intro U f
+    rw [mem_idealOfOpens_iff, ← basicOpen_eq_bot_iff, ← Scheme.preimage_basicOpen]
+    constructor
+    · intro h t ht hT
+      rw [X.evaluation_eq_zero_iff_notMem_basicOpen]
+      have hT' : t ∈ Set.range (vanishingIdeal T).subschemeι := by
+        change t ∈ (T : Set X) at hT
+        rwa [hrange]
+      obtain ⟨z, rfl⟩ := hT'
+      intro hz
+      have : z ∈ (vanishingIdeal T).subschemeι ⁻¹ᵁ X.basicOpen f := hz
+      rw [h] at this
+      exact this
+    · intro h
+      apply le_antisymm _ bot_le
+      intro z hz
+      exact (X.evaluation_eq_zero_iff_notMem_basicOpen _
+        (X.basicOpen_le f hz) f).mp
+          (h _ (X.basicOpen_le f hz) (by
+            change (vanishingIdeal T).subschemeι z ∈ (T : Set X)
+            rw [← hrange]
+            exact Set.mem_range_self z)) hz
+  · intro U
+    refine ⟨?_, rfl, fun g ↦ (vanishingIdeal T).map_ideal_basicOpen U g⟩
+    let S := U.2.fromSpec ⁻¹' (T : Set X)
+    have hc : IsClosed S := T.isClosed.preimage U.2.fromSpec.continuous
+    have hv : PrimeSpectrum.zeroLocus (PrimeSpectrum.vanishingIdeal S :
+        Set Γ(X, U)) = S := by
+      rw [PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, hc.closure_eq]
+    refine ⟨PrimeSpectrum.vanishingIdeal S,
+      ⟨PrimeSpectrum.isRadical_vanishingIdeal _, hv⟩, ?_⟩
+    intro I hI
+    calc
+      I = I.radical := hI.1.radical.symm
+      _ = PrimeSpectrum.vanishingIdeal (PrimeSpectrum.zeroLocus (I : Set Γ(X, U))) :=
+        (PrimeSpectrum.vanishingIdeal_zeroLocus_eq_radical I).symm
+      _ = PrimeSpectrum.vanishingIdeal S := congrArg _ hI.2
+  · intro Z' i' _ _ hi
+    have hk : i'.ker = vanishingIdeal T := by
+      rw [i'.ker_eq_vanishingIdeal]
+      congr 1
+      apply TopologicalSpace.Closeds.ext
+      change closure (Set.range i') = (T : Set X)
+      rw [hi, T.isClosed.closure_eq]
+    refine ⟨hk, ?_⟩
+    let l := IsClosedImmersion.lift (vanishingIdeal T).subschemeι i'
+      (by rw [ker_subschemeι, hk])
+    have hl : l ≫ (vanishingIdeal T).subschemeι = i' :=
+      IsClosedImmersion.lift_fac _ _ _
+    have : IsIso l := IsClosedImmersion.isIso_of_ker_eq i' _ l hl
+      (by rw [ker_subschemeι, hk])
+    refine ⟨asIso l, hl, ?_⟩
+    intro φ hφ
+    apply Iso.ext
+    apply (cancel_mono (vanishingIdeal T).subschemeι).mp
+    exact hφ.trans hl.symm
 
 end AlgebraicGeometry.Scheme.IdealSheafData

@@ -31,147 +31,83 @@
  ],
  "proof": [
   {
-   "text": "$\\mathcal I_T$ is a sheaf of ideals of $\\mathcal O_X$. For $x\\in U$ the map $f\\mapsto f(x)$, $\\mathcal O_X(U)\\to\\mathcal O_{X,x}\\to\\kappa(x)$ (germ followed by the residue map) [def-weil-residue-field] is a ring homomorphism and is compatible with restriction ($f|_V(x)=f(x)$ for $x\\in V\\subseteq U$, since germs are). Hence $\\mathcal I_T(U)$ is an ideal of $\\mathcal O_X(U)$ (if $f(t)=g(t)=0$ then $(f+g)(t)=0$ and $(af)(t)=a(t)f(t)=0$), and restriction maps $\\mathcal I_T(U)$ into $\\mathcal I_T(V)$, so $\\mathcal I_T$ is a sub-presheaf of ideals. It is a sheaf: $\\mathcal O_X$ is a sheaf, and if $U=\\bigcup U_k$ and $f\\in\\mathcal O_X(U)$ has $f|_{U_k}\\in\\mathcal I_T(U_k)$ for all $k$, then every $t\\in T\\cap U$ lies in some $U_k$ and $f(t)=f|_{U_k}(t)=0$, so $f\\in\\mathcal I_T(U)$; the condition being pointwise, local sections of $\\mathcal I_T$ that agree on overlaps glue in $\\mathcal O_X$ to a section of $\\mathcal I_T$.",
-   "uses": [
-    "def-weil-residue-field"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), first paragraph: 'Because of the local nature of the condition it is clear that I is a sheaf of ideals'"
-   }
-  },
-  {
-   "text": "Let $U\\subseteq X$ be an affine open, $R=\\mathcal O_X(U)$, $\\iota_U:\\operatorname{Spec}R\\to X$ the open immersion with image $U$ and $\\mathfrak p_t$ the prime of $t\\in U$ [lem-weil-pbc-affine-open-spec-points]; $t\\mapsto\\mathfrak p_t$ is the homeomorphism $U\\cong\\operatorname{Spec}R$. The closed subset $T\\cap U$ of $U$ corresponds to a closed subset of $\\operatorname{Spec}R$, which by the definition of the Zariski topology [def-weil-affine-spectrum] is $V(J)=\\{\\mathfrak p: J\\subseteq\\mathfrak p\\}$ for some ideal $J$. Put $I=\\sqrt J$: it is radical, and $V(I)=V(J)$ by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] ($\\sqrt{\\sqrt J}=\\sqrt J$). If $I'$ is another radical ideal with $V(I')=T\\cap U$, then $V(I')=V(I)$ and $I'=I$ by the 'in particular' of [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. So there is a unique radical ideal $I\\subseteq R$ with $V(I)=T\\cap U$, i.e. $\\{\\mathfrak p_t: t\\in T\\cap U\\}=V(I)$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), first paragraph: 'We may write T cap U = V(I) for a unique radical ideal I', with Algebra Lemma 10.17.2 (Tag 00E0, algebra-lemma-Zariski-topology)"
-   }
-  },
-  {
-   "text": "$\\mathcal I_T(U)=I$ for $U,R,I$ as in the previous step. For $f\\in R$ and $t\\in T\\cap U$ one has $f(t)=0$ iff $f\\in\\mathfrak p_t$ [lem-weil-pbc-affine-open-section-vanishing-prime](a). Hence $f\\in\\mathcal I_T(U)$ iff $f\\in\\mathfrak p$ for every $\\mathfrak p\\in V(I)$ (these are exactly the $\\mathfrak p_t$, $t\\in T\\cap U$), i.e. $\\mathcal I_T(U)=\\bigcap_{\\mathfrak p\\in V(I)}\\mathfrak p=\\sqrt I=I$ by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] and $I$ radical.",
-   "uses": [
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), first paragraph: 'f(t)=0 iff f in p. Hence I(U) = intersection of the p in V(I) = I by Algebra, Lemma 00E0'"
-   }
-  },
-  {
-   "text": "Standard opens. Let $g\\in R$ and $D(g)=\\{t\\in U: g(t)\\neq0\\}$ [lem-weil-pbc-basic-open-function]; by [lem-weil-pbc-affine-open-section-vanishing-prime](b) the restriction $\\rho:R\\to\\mathcal O_X(D(g))$ is a localization of $R$ at the powers of $g$, so $\\mathcal O_X(D(g))=R_g$, and we claim $\\mathcal I_T(D(g))=I_g=\\{a/g^m: a\\in I\\}$. Every $s\\in\\mathcal O_X(D(g))$ is $s=\\rho(f)\\rho(g)^{-n}$ with $f\\in R$; for $t\\in T\\cap D(g)$ we get $s(t)=f(t)g(t)^{-n}$ (evaluation is a ring map compatible with restriction, step 1), and $g(t)\\ne0$, so $s(t)=0$ iff $f(t)=0$ iff $f\\in\\mathfrak p_t$ [lem-weil-pbc-affine-open-section-vanishing-prime](a), and $t\\in D(g)$ iff $g\\notin\\mathfrak p_t$. Hence $s\\in\\mathcal I_T(D(g))$ iff $f\\in\\mathfrak p$ for all $\\mathfrak p\\in V(I)$ with $g\\notin\\mathfrak p$ iff $gf\\in\\mathfrak p$ for all $\\mathfrak p\\in V(I)$ ($\\mathfrak p$ prime) iff $gf\\in I$ (step 3: $I=\\bigcap_{V(I)}\\mathfrak p$). If $gf\\in I$ then $s=\\rho(gf)\\rho(g)^{-n-1}\\in I_g$. Conversely if $s=\\rho(a)\\rho(g)^{-m}$ with $a\\in I$, then $g^k(g^mf-g^na)=0$ in $R$ for some $k$, so $g^{k+m}f\\in I$, hence $(gf)^{k+m}\\in I$ (or $f\\in I$ if $k+m=0$), and $gf\\in I$ as $I$ is radical. So $\\mathcal I_T(D(g))=I_g\\subseteq R_g$, compatibly with the restriction maps $R_g\\to R_{gh}$ (both are restrictions in $\\mathcal O_X$).",
-   "uses": [
-    "lem-weil-pbc-basic-open-function",
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), first paragraph: 'for any standard open D(g) of Spec(R) = U we have I(D(g)) = I_g by the same reasoning' (the reasoning written out)"
-   }
-  },
-  {
-   "text": "Clause (1): $\\mathcal I_T|_U=\\widetilde I$ and $\\mathcal I_T$ is quasi-coherent. Identify $U$ with $\\operatorname{Spec}R$ by $\\iota_U$ [lem-weil-pbc-affine-open-spec-points]; then $\\mathcal O_X|_U=\\mathcal O_{\\operatorname{Spec}R}\\cong\\widetilde R$ [lem-weil-pbc-spec-tilde-free-module] (rank $n=1$), with $\\widetilde R(D(g))=R_g$ [lem-weil-pbc-spec-module-tilde-sections]. The inclusion $I\\to R$ induces $\\widetilde I\\to\\widetilde R$ [lem-weil-pbc-affine-tilde-gamma-adjunction](1), which on each $D(g)$ is the inclusion $I_g\\to R_g$ [lem-weil-pbc-spec-module-tilde-sections] (localization is exact), hence injective on a basis of opens and therefore injective (a section killed by the map has zero restrictions to a cover by standard opens, so is zero); thus $\\widetilde I$ is the subsheaf of $\\mathcal O_U$ whose sections over $D(g)$ are $I_g$. By step 4, $\\mathcal I_T|_U$ is a subsheaf of $\\mathcal O_U$ with the same sections $I_g$ over every $D(g)$. Two subsheaves of a sheaf with the same sections on a basis of opens are equal (a section lies in a subsheaf iff its restrictions to an open cover do, and every open is covered by standard opens). Hence $\\mathcal I_T|_U=\\widetilde I$ and $\\mathcal I_T(U)=I$ (step 3). Since $\\widetilde I$ is quasi-coherent [lem-weil-pbc-spec-module-tilde-sections] and every point of $X$ has an affine open neighbourhood [def-pc-scheme], $\\mathcal I_T$ is quasi-coherent [pqf-def-coherent].",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-spec-tilde-free-module",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pc-scheme",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), first paragraph: 'Thus I~ and I|_U agree (as ideals) on a basis of opens and hence are equal. Therefore I is a quasi-coherent sheaf of ideals'"
-   }
-  },
-  {
-   "text": "Clause (2), construction and image. By [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme] applied to the quasi-coherent sheaf of ideals $\\mathcal I_T$ there is a closed immersion $i_T:T_{\\mathrm{red}}\\to X$ [def-weil-closed-immersion] with ideal sheaf $\\mathcal I_T$ [def-sbc-closed-immersion-ideal-sheaf], and for every affine open $U=\\operatorname{Spec}R$ the morphism $i_T^{-1}(U)\\to U$ is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ with $I=\\mathcal I_T(U)$ the radical ideal of steps 2-3. The image of $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ is the set of primes of $R$ containing $I$ (primes of $R/I$ are $\\mathfrak p/I$ with $\\mathfrak p\\supseteq I$), i.e. $V(I)=T\\cap U$. So $i_T(T_{\\mathrm{red}})\\cap U=T\\cap U$ for every affine open $U$; the affine opens cover $X$ [def-pc-scheme], so $i_T(T_{\\mathrm{red}})=T$.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), second paragraph: 'we may define Z as the closed subspace associated to I ... Z cap U = Spec(R/I) ... By construction the underlying closed subset of Z is T'"
-   }
-  },
-  {
-   "text": "Clause (2), reducedness. For an affine open $U=\\operatorname{Spec}R$, $I=\\mathcal I_T(U)$ is radical, so $R/I$ is a reduced ring ($\\bar f^n=0$ means $f^n\\in I$, so $f\\in I$), and $i_T^{-1}(U)\\cong\\operatorname{Spec}(R/I)$ (step 6) is a reduced scheme by [lem-weil-pbc-affine-scheme-reduced-iff]. The opens $i_T^{-1}(U)$, $U$ affine, cover $T_{\\mathrm{red}}$, and the local ring of $T_{\\mathrm{red}}$ at a point $z$ is the local ring at $z$ of any open subscheme containing $z$; so every local ring of $T_{\\mathrm{red}}$ is reduced and $T_{\\mathrm{red}}$ is reduced [def-pc-reduced-scheme].",
+   "text": "Use the existing source instance isReduced_subscheme_vanishingIdeal, proved affine-locally from radical quotients. Mathlib ker_subschemeι, range_subschemeι and coe_support_vanishingIdeal give the kernel and image; source isPullback_subschemeCover_map gives the affine quotient pullback.",
    "uses": [
     "lem-weil-pbc-affine-scheme-reduced-iff",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme) with its proof (construction of the ideal sheaf, affine-local description, reducedness by Lemma 01J2 lemma-affine-reduced, uniqueness by Algebra Lemma 00E0 lemma-Zariski-topology); Definition 26.12.5 (Tag 01J4, label definition-reduced-induced-scheme)"
+   }
+  },
+  {
+   "text": "On arbitrary opens, mem_idealOfOpens_iff identifies membership with the pullback section being zero. Since the subscheme is reduced, basicOpen_eq_bot_iff converts this to an empty basic open. Scheme.preimage_basicOpen identifies that open with the inverse image of the ambient basic open. Using the computed range T and evaluation_eq_zero_iff_notMem_basicOpen gives precisely vanishing at every point of T in U.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-basic-open-function",
     "def-pc-reduced-scheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), second paragraph: 'Z cap U = Spec(R/I) where I is a radical ideal and hence Z is reduced (by Lemma 01J2 lemma-affine-reduced)'"
+    "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme) with its proof (construction of the ideal sheaf, affine-local description, reducedness by Lemma 01J2 lemma-affine-reduced, uniqueness by Algebra Lemma 00E0 lemma-Zariski-topology); Definition 26.12.5 (Tag 01J4, label definition-reduced-induced-scheme)"
    }
   },
   {
-   "text": "Clause (3), the ideal sheaf. Let $i':Z'\\to X$ be a closed immersion with $Z'$ reduced and $i'(Z')=T$, and $\\mathcal I'$ its ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]: a quasi-coherent sheaf of ideals such that, for every affine open $U=\\operatorname{Spec}R$, $i'^{-1}(U)\\to U$ is $\\operatorname{Spec}(R/I')\\to\\operatorname{Spec}R$ with $I'=\\mathcal I'(U)$. The open subscheme $i'^{-1}(U)$ of the reduced scheme $Z'$ is reduced (its local rings are local rings of $Z'$) [def-pc-reduced-scheme], so $R/I'$ is reduced [lem-weil-pbc-affine-scheme-reduced-iff], i.e. $I'$ is radical. The image of $\\operatorname{Spec}(R/I')\\to\\operatorname{Spec}R$ is $V(I')$ (as in step 6) and equals $i'(Z')\\cap U=T\\cap U=V(I)$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $I'=I=\\mathcal I_T(U)$ (step 3). Thus $\\mathcal I'$ and $\\mathcal I_T$ are subsheaves of $\\mathcal O_X$ with the same sections on every affine open; affine opens form a basis of the topology of $X$ [def-pc-scheme] (an open subset of an affine open contains a standard open around each of its points, affine by [lem-weil-pbc-affine-open-section-vanishing-prime](b)), so $\\mathcal I'=\\mathcal I_T$ (as in step 5).",
+   "text": "On an affine open put S = fromSpec inverse image of T. This is closed by continuity. PrimeSpectrum.isRadical_vanishingIdeal and zeroLocus_vanishingIdeal_eq_closure give the desired radical ideal. For any other radical ideal I, vanishingIdeal_zeroLocus_eq_radical and IsRadical.radical give equality. The affine vanishing-ideal identity is definitional and basic-open localization is IdealSheafData.map_ideal_basicOpen.",
    "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-reduced-scheme",
-    "lem-weil-pbc-affine-scheme-reduced-iff",
     "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-    "def-pc-scheme",
-    "lem-weil-pbc-affine-open-section-vanishing-prime"
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), third paragraph: 'Z' cap U = Spec(R/I') ... By Lemma 01J2 the ring R/I' is reduced and hence I' is radical. Since V(I') = T cap U = V(I) we deduce I = I' by Algebra Lemma 00E0. Hence Z' and Z are defined by the same sheaf of ideals'"
+    "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme) with its proof (construction of the ideal sheaf, affine-local description, reducedness by Lemma 01J2 lemma-affine-reduced, uniqueness by Algebra Lemma 00E0 lemma-Zariski-topology); Definition 26.12.5 (Tag 01J4, label definition-reduced-induced-scheme)"
    }
   },
   {
-   "text": "Clause (3), the isomorphism. $i'$ and $i_T$ are closed immersions into $X$ with the same ideal sheaf (step 8 and step 6), so by [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic] there is a unique morphism $\\varphi:Z'\\to T_{\\mathrm{red}}$ with $i_T\\circ\\varphi=i'$, and it is an isomorphism. This is the uniqueness of the reduced closed subscheme structure on $T$; $T_{\\mathrm{red}}$ is called the reduced induced closed subscheme structure (Schemes, Definition 26.12.5, Tag 01J4).",
+   "text": "For another reduced closed immersion i, the proved source lemma Scheme.Hom.ker_eq_vanishingIdeal identifies its kernel with the vanishing ideal of the closure of its image. The image is T, which is closed, so its kernel equals vanishingIdeal T.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme) with its proof (construction of the ideal sheaf, affine-local description, reducedness by Lemma 01J2 lemma-affine-reduced, uniqueness by Algebra Lemma 00E0 lemma-Zariski-topology); Definition 26.12.5 (Tag 01J4, label definition-reduced-induced-scheme)"
+   }
+  },
+  {
+   "text": "Use IsClosedImmersion.lift and lift_fac for the resulting equality of kernels. IsClosedImmersion.isIso_of_ker_eq proves the lift is invertible. Any other isomorphism over X has the same hom by cancellation against the closed immersion, hence is equal by Iso.ext.",
    "uses": [
     "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme), third paragraph: '...and hence are equal'; Schemes Lemma 26.4.5 (Tag 01HO, lemma-closed-immersion) for 'equal ideal sheaves gives a unique isomorphism over X'; Definition 26.12.5 (Tag 01J4, definition-reduced-induced-scheme)"
+    "place": "Schemes, Lemma 26.12.4 (Tag 01J3, label lemma-reduced-closed-subscheme) with its proof (construction of the ideal sheaf, affine-local description, reducedness by Lemma 01J2 lemma-affine-reduced, uniqueness by Algebra Lemma 00E0 lemma-Zariski-topology); Definition 26.12.5 (Tag 01J4, label definition-reduced-induced-scheme)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-residue-field",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
-  "lem-weil-pbc-basic-open-function",
-  "lem-weil-pbc-spec-tilde-free-module",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "def-pc-scheme",
-  "pqf-def-coherent",
-  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
-  "def-weil-closed-immersion",
-  "def-sbc-closed-immersion-ideal-sheaf",
   "lem-weil-pbc-affine-scheme-reduced-iff",
   "def-pc-reduced-scheme",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-sbc-closed-immersion-ideal-sheaf",
   "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 26.12.4 (Tag 01J3, lemma-reduced-closed-subscheme) with its proof; Definition 26.12.5 (Tag 01J4, definition-reduced-induced-scheme)"
+  "place": "Schemes Lemma 26.12.4 (01J3); reduced quotient and kernel arguments reused from the proved source library; local section criterion via basic opens"
  },
  "mathlib_searches": [
   {
@@ -282,5 +218,15 @@
   "group": "H1",
   "result": "pass",
   "note": "X Scheme.{u}, T Closeds X; I_T on every open = idealOfOpens (ker of subschemeι.app, STATE QC IDEAL line) iff evaluation in residue fields vanishes on T∩U; affine: unique radical I with zeroLocus = fromSpec⁻¹'T, ideal U = vanishingIdeal of it, basic-open localization; IsClosedImmersion, IsReduced, ker, range = T, IsPullback with Spec(R/I)→Spec R over fromSpec; clause 3 over Z' : Scheme.{u} with [IsClosedImmersion i'] [IsReduced Z'], range = T ⇒ i'.ker = vanishingIdeal T ∧ ∃! iso over X; single universe, no hollow hyps, no let/show, no duplicate notion"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053928-L-2633719",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
