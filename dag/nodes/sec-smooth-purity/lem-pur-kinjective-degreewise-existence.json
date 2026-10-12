@@ -27,81 +27,29 @@
  ],
  "proof": [
   {
-   "text": "Theorem 079P constructs the functor M that, for a chosen set of bounded-above acyclic complexes, sends every map from one of them to a null-homotopic map after a termwise monomorphic quasi-isomorphism. This is exactly [lem-pur-kinjective-functorial-homotopies].",
+   "text": "Use the proved functor kInjectiveResolutionFunctor and natural transformation toKInjectiveResolution. The two projections of monoQuasiIso_toKInjectiveResolution_app give termwise monomorphisms and quasi-isomorphisms, and isKInjective_kInjectiveResolutionFunctor_obj gives K-injectivity. These are the witnesses of [lem-weil-pbc-kinjective-functorial-existence].",
    "uses": [
-    "lem-pur-kinjective-functorial-homotopies"
+    "lem-weil-pbc-kinjective-functorial-existence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Lemma lemma-functorial-homotopies"
-   }
+   "elementary": false
   },
   {
-   "text": "The same construction supplies N, a functorial termwise monomorphic quasi-isomorphism through injective subobjects in every degree, as stated in [lem-pur-kinjective-functorial-injective].",
-   "uses": [
-    "lem-pur-kinjective-functorial-injective"
-   ],
-   "elementary": false,
+   "text": "For the same chosen functor, the source theorem injective_kInjectiveResolutionFunctor_obj_X proves every term injective. Its proof tests the right lifting property of the replacement-to-zero map against the acyclic identity disk on a monomorphism X → Y. A map from the disk on X to the replacement is equivalent to a map from X to its degree-n term; lifting gives the extension to Y required by injectivity. Package the functor, transformation and four properties.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Lemma lemma-functorial-injective"
-   }
-  },
-  {
-   "text": "The Baer argument in [lem-pur-kinjective-characterize-injective] identifies the lifting condition on subobjects of a generator with injectivity, and [prop-pur-kinjective-objects-small] makes maps from each term factor through an earlier stage of a sufficiently long transfinite chain.",
-   "uses": [
-    "lem-pur-kinjective-characterize-injective",
-    "prop-pur-kinjective-objects-small"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Lemma lemma-characterize-injective and Proposition proposition-objects-are-small"
-   }
-  },
-  {
-   "text": "The bounded-size acyclic complexes generated in the proof are detected by the criterion [lem-pur-kinjective-characterize-K-injective]: injective terms together with vanishing homotopy-category maps from those complexes imply K-injectivity.",
-   "uses": [
-    "lem-pur-kinjective-characterize-K-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Lemma lemma-characterize-K-injective"
-   }
-  },
-  {
-   "text": "Choose a cardinal $\\kappa$ as in [lem-pur-kinjective-acyclic-quotient-complexes-bounded-size]; enlarging it keeps both clauses, so take $\\kappa\\ge\\aleph_0$. By [lem-pur-kinjective-set-iso-classes-bounded-size] (2), applied termwise, choose a set $(K_i^\\bullet)_{i\\in I}$ of bounded-above acyclic complexes such that every bounded-above acyclic complex $P^\\bullet$ with $|P^n|\\le\\kappa$ for all $n$ is isomorphic to some $K_i^\\bullet$. Let $\\mathbf M$ be the functor of [lem-pur-kinjective-functorial-homotopies] for this set and $\\mathbf N$ the functor of [lem-pur-kinjective-functorial-injective]. Define functors $\\mathbf T_\\gamma$ with transformations $\\mathrm{id}\\Rightarrow\\mathbf T_\\gamma$ by transfinite recursion: $\\mathbf T_0=\\mathrm{id}$, $\\mathbf T_{\\gamma+1}=\\mathbf N\\circ\\mathbf M\\circ\\mathbf T_\\gamma$, and $\\mathbf T_\\lambda=\\operatorname{colim}_{\\gamma<\\lambda}\\mathbf T_\\gamma$ (termwise) for limit $\\lambda$. The transition maps are termwise monomorphisms and quasi-isomorphisms by those two lemmas; since filtered colimits in $\\mathcal A$ are exact (AB5), each $K\\to\\mathbf T_\\gamma(K)$ is again a termwise monomorphism and a quasi-isomorphism (elementary, Stacks 079P). Fix a generator $U$ and an ordinal $\\alpha$ whose cofinality is greater than $\\max(\\kappa,|U|)$, hence uncountable; set $I(K)=\\mathbf T_\\alpha(K)$. Injective terms: a subobject $M\\subset U$ has $|M|\\le|U|$ (its subobjects are subobjects of $U$), so by [prop-pur-kinjective-objects-small] a morphism $\\varphi:M\\to\\mathbf T_\\alpha^n(K)$ factors through $\\mathbf T_\\gamma^n(K)$ for some $\\gamma<\\alpha$, hence through the injective subobject of $\\mathbf T_{\\gamma+1}^n(K)=\\mathbf N^n(\\mathbf M(\\mathbf T_\\gamma(K)))$ given by [lem-pur-kinjective-functorial-injective] (2), and so extends to $U$; by [lem-pur-kinjective-characterize-injective] each $\\mathbf T_\\alpha^n(K)$ is injective. K-injectivity: let $w:P^\\bullet\\to\\mathbf T_\\alpha(K)$ with $P^\\bullet$ bounded above, acyclic, $|P^n|\\le\\kappa$; then $P^\\bullet\\cong K_i^\\bullet$ for some $i$. By [prop-pur-kinjective-objects-small] each $w^n$ factors through some stage $\\gamma_n<\\alpha$; as there are countably many $n$ and the cofinality of $\\alpha$ is uncountable, one $\\gamma<\\alpha$ serves all $n$, and since the transition maps are monomorphisms these factorizations commute with the differentials, so $w$ factors through a morphism of complexes $P^\\bullet\\to\\mathbf T_\\gamma(K)$. By [lem-pur-kinjective-functorial-homotopies] (2) its composite into $\\mathbf M(\\mathbf T_\\gamma(K))$, hence into $\\mathbf T_\\alpha(K)$, is homotopic to zero, so $w$ is homotopic to zero. Hence [lem-pur-kinjective-characterize-K-injective], whose hypotheses on $\\kappa$ are the two clauses of [lem-pur-kinjective-acyclic-quotient-complexes-bounded-size], shows that $\\mathbf T_\\alpha(K)$ is K-injective. Thus $I=\\mathbf T_\\alpha$ with $\\eta:\\mathrm{id}\\Rightarrow\\mathbf T_\\alpha$ satisfies every clause of the statement.",
-   "uses": [
-    "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
-    "lem-pur-kinjective-set-iso-classes-bounded-size",
-    "lem-pur-kinjective-functorial-homotopies",
-    "lem-pur-kinjective-functorial-injective",
-    "lem-pur-kinjective-characterize-K-injective",
-    "lem-pur-kinjective-characterize-injective",
-    "prop-pur-kinjective-objects-small"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Theorem theorem-K-injective-embedding-grothendieck, transfinite recursion and the two final criterion checks"
+    "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolutionInjective.lean",
+    "place": "injective_X_of_rlp and injective_kInjectiveResolutionFunctor_obj_X"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
-  "lem-pur-kinjective-set-iso-classes-bounded-size",
-  "lem-pur-kinjective-characterize-K-injective",
-  "lem-pur-kinjective-characterize-injective",
-  "lem-pur-kinjective-functorial-homotopies",
-  "lem-pur-kinjective-functorial-injective",
-  "prop-pur-kinjective-objects-small"
+  "lem-weil-pbc-kinjective-functorial-existence"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/injectives.tex",
-  "place": "Theorem 079P (theorem-K-injective-embedding-grothendieck)"
+  "by": "existing Lean proof",
+  "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolutionInjective.lean",
+  "place": "injective_X_of_rlp and injective_kInjectiveResolutionFunctor_obj_X; functor and transformation from KInjectiveResolution.lean"
  },
  "mathlib_searches": [
   {
@@ -166,14 +114,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kde0014 (reviewer sub-agent of L); spot-checked: Read Stacks definition-size, lemma-set-iso-classes-bounded-size, proposition-objects-are-small, lemma-characterize-injective, lemma-acyclic-quotient-complexes-bounded-size, lemma-characterize-K-injective, lemma-functorial-homotopies, lemma-functorial-injective and 079P; all three points of R-kde3151 repaired (kappa clauses and size defined, two new nodes cited in step 5, objects-small with kappa=|M|; stmt_deps only definitions). No duplicate of lem-weil-pbc-kinjective-functorial-existence or other injective/K-injective node (grep of sources and ids). FIX more, RETURN less: (1) B4/B3: step 5 rewritten in TeX (plain-text arrow removed) and all seven new statements restated in TeX clause by clause as their Stacks lemmas, with acyclic/quasi-iso/cochain-complex/homotopy definitions cited and stmt_deps corrected; objects-small now Stacks' alpha-small wrt monomorphisms without the extra continuity hypothesis; K-injective criterion's condition (2) stated as maps homotopic to zero, matching def-pur-kinjective-complex. (2) E (fixable): step 5 claimed cof(alpha) uncountable from cof > max(kappa,|U|) without kappa infinite; now takes kappa >= aleph_0 (both clauses are monotone in kappa). (3) C1/E: step 5 now names which lemma clause each check uses (set of representatives K_i, N clause (2) for injective subobject, M clause (2), AB5 for termwise mono and quasi-iso at limit stages, |M|<=|U| for M subset U), and separates the input complex from the small acyclic complex P. Second reading by F1 missed (2) and the non-TeX statements.; 8 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence",
-  "declaration": "CochainComplex.exists_functorial_kInjective_resolution_with_injective_terms",
-  "file": "lean/Sheaf/CategoryTheory/GrothendieckAbelian/KInjectiveDegreewiseExistence.lean",
-  "statement": "theorem exists_functorial_kInjective_resolution_with_injective_terms (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C] : ∃ (I : CochainComplex C ℤ ⥤ CochainComplex C ℤ) (η : 𝟭 (CochainComplex C ℤ) ⟶ I), ∀ (K : CochainComplex C ℤ), (∀ (n : ℤ), Mono ((η.app K).f n)) ∧ QuasiIso (η.app K) ∧ IsKInjective (I.obj K) ∧ (∀ (n : ℤ), Injective ((I.obj K).X n))",
-  "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
-  "existing": false
+  "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective",
+  "declaration": "CochainComplex.injective_kInjectiveResolutionFunctor_obj_X",
+  "declarations": [
+   "CochainComplex.kInjectiveResolutionFunctor",
+   "CochainComplex.toKInjectiveResolution",
+   "CochainComplex.monoQuasiIso_toKInjectiveResolution_app",
+   "CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj",
+   "CochainComplex.injective_kInjectiveResolutionFunctor_obj_X"
+  ],
+  "statement": "instance injective_kInjectiveResolutionFunctor_obj_X [IsGrothendieckAbelian.{w} C] (K : CochainComplex C ℤ) (n : ℤ) : Injective (((kInjectiveResolutionFunctor.{w} C).obj K).X n)",
+  "branch": "slopmaster2",
+  "by": "T2",
+  "date": "2026-10-12",
+  "existing": true,
+  "note": "These five existing declarations jointly realize the unchanged existential statement, including termwise monomorphisms and injective terms. The first four are imported from KInjectiveResolution; the last is proved in KInjectiveResolutionInjective. The old Sheaf statement module is no longer required for this node. No source declaration is changed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -194,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060756-L-2916411",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

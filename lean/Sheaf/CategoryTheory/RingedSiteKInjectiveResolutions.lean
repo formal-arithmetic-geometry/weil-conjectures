@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
@@ -44,10 +44,12 @@ Proof:
 1. Apply `lem-pur-ringed-site-grothendieck-abelian` to obtain the Grothendieck
    property and the stated generator: sheafify the extension-by-zero presheaf
    of the unit module on each localized site and take their coproduct.
-2. Apply `lem-pur-kinjective-degreewise-existence` to this Grothendieck abelian
-   category. Its functor I and transformation eta provide quasi-isomorphisms
-   into K-injective complexes with injective terms. Naturality of eta and the
-   functor's action on chain maps give precisely the asserted functoriality. -/
+2. Use the source-library `kInjectiveResolutionFunctor` and `toKInjectiveResolution`
+   on this Grothendieck abelian category. `monoQuasiIso_toKInjectiveResolution_app`
+   supplies the quasi-isomorphisms, and the source instances give K-injectivity
+   and injective terms. These realize `lem-pur-kinjective-degreewise-existence`
+   without its separate statement module. Naturality of the transformation and
+   the functor's action on chain maps give precisely the asserted functoriality. -/
 theorem grothendieckAbelian_and_functorial_kInjective_resolutions
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u}) :
@@ -69,6 +71,14 @@ theorem grothendieckAbelian_and_functorial_kInjective_resolutions
           (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ),
           QuasiIso (η.app M) ∧ (I.obj M).IsKInjective ∧
             ∀ n : ℤ, Injective ((I.obj M).X n) := by
-  sorry
+  obtain ⟨hGrothendieck, hGenerator⟩ :=
+    grothendieckAbelian_with_localized_generator J O
+  let _ := hGrothendieck
+  let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)
+  refine ⟨hGrothendieck, hGenerator, CochainComplex.kInjectiveResolutionFunctor.{u} A,
+    CochainComplex.toKInjectiveResolution.{u} A, ?_⟩
+  intro M
+  exact ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+    inferInstance, fun n ↦ inferInstance⟩
 
 end SheafOfModules
