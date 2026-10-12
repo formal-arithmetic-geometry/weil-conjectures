@@ -17,6 +17,7 @@ namespace SymmetricAlgebra
 
 open scoped TensorProduct
 
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Algebra, Lemma 00DO
 (blueprint: lem-weil-pbc-symmetric-degree-exact).
 The induced map on the degree-`n` submodules exists; this auxiliary statement
@@ -29,7 +30,24 @@ theorem degree_map_exists (R : Type u) (M₁ M : Type v) [CommRing R]
       (lift ((ι R M).comp p)).toLinearMap x ∈
         ((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ n).map
           (algHom R M).toLinearMap, True := by
-  sorry
+  let f := lift ((ι R M).comp p)
+  have hdegree (N : Type v) [AddCommGroup N] [Module R N] (k : ℕ) :
+      ((TensorAlgebra.ι R : N →ₗ[R] TensorAlgebra R N).range ^ k).map
+        (algHom R N).toLinearMap = (ι R N).range ^ k := by
+    rw [Submodule.map_pow, ← LinearMap.range_comp]
+    rfl
+  have hmap : ((ι R M₁).range).map f.toLinearMap ≤ (ι R M).range := by
+    rintro z ⟨x, ⟨y, rfl⟩, rfl⟩
+    exact ⟨p y, (lift_ι_apply ((ι R M).comp p) y).symm⟩
+  refine ⟨?_, trivial⟩
+  intro x
+  have hx : (x : SymmetricAlgebra R M₁) ∈ (ι R M₁).range ^ n := by
+    simpa only [hdegree] using x.property
+  rw [hdegree]
+  have hm : ((ι R M₁).range ^ n).map f.toLinearMap ≤ (ι R M).range ^ n := by
+    rw [Submodule.map_pow]
+    exact pow_le_pow_left' hmap n
+  exact hm ⟨x, hx, rfl⟩
 
 /-- Source: Stacks Project, Algebra, Lemma 00DO
 (blueprint: lem-weil-pbc-symmetric-degree-exact).

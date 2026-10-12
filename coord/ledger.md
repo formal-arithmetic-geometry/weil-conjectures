@@ -9471,3 +9471,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:45 L: returned deliver/M2/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel (reviewer RETURN: (the landing tools, head 951851b9b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 20:45 L: merged deliver/C1/Sheaf.RingTheory.RegularLocalFiniteModuleResolution (stage 3; reviewer PASS; first push; landing 20261012T204505-L-868010 (proof); batch 20261012T204504; modules 1; new nodes 0)
 - 20:45 L: merged deliver/C3/Sheaf.AlgebraicGeometry.KoszulDualConormalRankStratum (stage 3; reviewer PASS; after a return; landing 20261012T204505-L-868131 (interface); batch 20261012T204504; modules 2; new nodes 1)
+- 20:45 L: merged deliver/C3/Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact (stage 3; reviewer PASS; first push; landing 20261012T204505-L-868248 (proof); batch 20261012T204504; modules 1; new nodes 0)
