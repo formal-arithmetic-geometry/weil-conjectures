@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-colimit-site-unit-zero-detection",
+ "kind": "statement",
+ "title": "Zero detection for a single colimit-site inverse-image unit",
+ "statement": "Let J be a small filtered category, F : J → Cat a diagram of small categories, and P_j precoverages satisfying the site axioms and finite covering condition of [lem-weil-pbc-colimit-of-sites]. Suppose the transition functors preserve coverings and covering pullbacks, are continuous, and have set-valued inverse image preserving finite limits and finite colimits. Let V be a cocone with object and arrow colimit witnesses [def-weil-pbc-category-colimit]. Let Q be a precoverage on V.pt satisfying the same site axioms, with covering presieves exactly the images of stage coverings. Suppose the canonical stage functors preserve coverings and covering pullbacks, are continuous, and have set-valued inverse image preserving finite limits and finite colimits. Fix j, an abelian sheaf G on P_j [def-weil-pbc-sites-and-cohomology], X in F_j, and z in G(X). If the canonical unit G(X) → (V_j^*G)(V_j X) sends z to zero, then there are k and d : j → k such that the canonical unit G(X) → (F_d^*G)(F_d X) sends z to zero. There is no coefficient system or outer colimit in this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit, the identity representative and filtered equality criterion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The object and arrow colimit witnesses identify the supplied V with the constructed filtered colimit category. The characterization hQ of image coverings identifies the topology. Transport the inverse-image section formula of 0A35 across this equivalence, identifying the unit by uniqueness of left adjoints.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent z and zero at the identity stage through its inverse-image unit, an isomorphism. Apply the same-stage equality clause of lem-weil-pbc-filtered-colimit-sets-elementwise to the underlying-set colimit over Under j. It gives one arrow from the identity presentation, hence d : j → k, killing the representative. The transition unit equation identifies this image with the unit along d on z. Abelian filtered colimits are computed on underlying sets; additive endpoint transports preserve zero.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit, the identity representative and filtered equality criterion",
+  "note": "Read equation-compute-pullback-to-limit in the local Stacks source; the supplied-cocone transport and formal unit coherence are made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of an abelian sheaf killed by inverse image to a filtered colimit site is killed at a later stage",
+   "results": "Service returned Internal Server Error; unavailable, no absence verdict from this service",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an abelian sheaf killed by inverse image to a filtered colimit of sites vanishes after a finite stage transition",
+   "results": "Concrete.colimit_rep_eq_zero for ModuleCat and plusPlusSheaf_preservesZeroMorphisms; no site unit detection theorem",
+   "verdict": "no exact match; concrete filtered equality is a tool for the section formula",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Concrete.colimit_exists_of_rep_eq",
+   "results": "Concrete.colimit_exists_of_rep_eq in Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic",
+   "verdict": "filtered equality criterion, but not the inverse-image section formula",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*zero|unit.*zero_detection; rg inverse-image section formula in both library roots; blueprint_refs.py search 0A35",
+   "results": "Mathlib: only ObjectProperty zero matches. Project: original varyingSite_inverseImage_zero_detection, ColimitSites existence theorem, degree-zero representative; no supplied-site single-unit kernel theorem. No blueprint node matches 0A35.",
+   "verdict": "no exact existing statement",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.VaryingSiteInverseImageZeroDetection",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Tag 0A35, equation-compute-pullback-to-limit, the identity representative and filtered equality criterion",
+   "via": [
+    "lem-weil-pbc-varying-site-inverse-image-zero-detection",
+    "lem-weil-pbc-colimit-sites-zero-comparison-injective",
+    "lem-weil-pbc-colimit-sites-eventual-vanishing",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteUnitZeroDetection",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteUnitZeroDetection.lean",
+  "declaration": "CategoryTheory.colimitSite_unit_zero_detection",
+  "statement": "theorem colimitSite_unit_zero_detection (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (P : ∀ j : J, Precoverage (F.obj j)) [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition] [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks] (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry) (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X)) (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (F.map a).toFunctor) [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V)) (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt) [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks] (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔ ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y), S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R) (hVcover : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (V.ι.app j).toFunctor ∈ Q ((V.ι.app j).toFunctor.obj X)) (hVpullback : ∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (V.ι.app j).toFunctor) [∀ j : J, (V.ι.app j).toFunctor.IsContinuous (P j).toGrothendieck Q.toGrothendieck] [∀ j : J, PreservesFiniteLimits (sheafPullback (V.ι.app j).toFunctor (Type u) (P j).toGrothendieck Q.toGrothendieck)] [∀ j : J, PreservesFiniteColimits (sheafPullback (V.ι.app j).toFunctor (Type u) (P j).toGrothendieck Q.toGrothendieck)] (j : J) (G : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (X : F.obj j) (z : G.obj.obj (op X)) (hz : (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X)).hom z = 0) : ∃ (k : J) (d : j ⟶ k), (((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).unit.app G).hom.app (op X)).hom z = 0",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T151909-L-2288903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T151909-L-2288903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

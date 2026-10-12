@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-varying-site-intermediate-unit-zero",
+ "kind": "statement",
+ "title": "Zero of the intermediate section under a later stage unit",
+ "statement": "In the same filtered diagram of sites and supplied colimit site as [lem-weil-pbc-colimit-site-unit-zero-detection], let eV_a identify V_j^* with V_k^* F_a^* and satisfy the displayed adjunction-unit equation. Let Fs_j be abelian sheaves [def-weil-pbc-sites-and-cohomology], let phi_a : F_a^* Fs_j → Fs_k be coefficient maps, and let S be a diagram of sheaves on Q with its objects identified with V_j^*Fs_j and its arrows identified in Arrow with eV_a followed by V_k^*(phi_a). Fix j, X in F_j, z in Fs_j(X), and a : j → j'. If the limit unit of z followed by the specified identification and S(a) is zero, there are k and d : j' → k such that the unit along a, followed by phi_a and then the unit along d for Fs_j', sends z to zero. No map phi_d or composition cocycle is needed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 0A35 and 09YN: coefficient naturality and the inner inverse-image colimit"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-site-unit-zero-detection",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Correct the source of the system arrow using hSobj and its Arrow equality hSmap, evaluate at V_j(X), and precompose by the unit. This preserves the zero equation, including its endpoint transport.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cocone naturality gives V_j(X)=V_j'(F_a X). Compose heV with the inverse image of phi_a at these equal objects. The Arrow equality preserves the zero kernel. Naturality of the adjunction unit identifies the resulting composite with the canonical limit unit applied to w=(unit_a followed by phi_a)(z).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply single-sheaf colimit-site unit zero detection to Fs_j' at F_a(X) and the explicitly constructed section w. The resulting d gives the asserted composite-unit zero equation.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-unit-zero-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-site-unit-zero-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 0A35 and 09YN: coefficient naturality and the inner inverse-image colimit",
+  "note": "Read equation-compute-pullback-to-limit in the local Stacks source; the supplied-cocone transport and formal unit coherence are made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of an abelian sheaf killed by inverse image to a filtered colimit site is killed at a later stage",
+   "results": "Service returned Internal Server Error; unavailable, no absence verdict from this service",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an abelian sheaf killed by inverse image to a filtered colimit of sites vanishes after a finite stage transition",
+   "results": "Concrete.colimit_rep_eq_zero for ModuleCat and plusPlusSheaf_preservesZeroMorphisms; no site unit detection theorem",
+   "verdict": "no exact match; concrete filtered equality is a tool for the section formula",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Concrete.colimit_exists_of_rep_eq",
+   "results": "Concrete.colimit_exists_of_rep_eq in Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic",
+   "verdict": "filtered equality criterion, but not the inverse-image section formula",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*zero|unit.*zero_detection; rg inverse-image section formula in both library roots; blueprint_refs.py search 0A35",
+   "results": "Mathlib: only ObjectProperty zero matches. Project: original varyingSite_inverseImage_zero_detection, ColimitSites existence theorem, degree-zero representative; no supplied-site single-unit kernel theorem. No blueprint node matches 0A35.",
+   "verdict": "no exact existing statement",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.VaryingSiteInverseImageZeroDetection",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Tags 0A35 and 09YN: coefficient naturality and the inner inverse-image colimit",
+   "via": [
+    "lem-weil-pbc-varying-site-inverse-image-zero-detection",
+    "lem-weil-pbc-colimit-sites-zero-comparison-injective",
+    "lem-weil-pbc-colimit-sites-eventual-vanishing",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.VaryingSiteIntermediateUnitZero",
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteIntermediateUnitZero.lean",
+  "declaration": "CategoryTheory.varyingSite_inverseImage_intermediate_unit_zero",
+  "statement": "theorem varyingSite_inverseImage_intermediate_unit_zero (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (P : ∀ j : J, Precoverage (F.obj j)) [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition] [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks] (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry) (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X)) (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (F.map a).toFunctor) [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V)) (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt) [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks] (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔ ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y), S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R) (hVcover : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (V.ι.app j).toFunctor ∈ Q ((V.ι.app j).toFunctor.obj X)) (hVpullback : ∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (V.ι.app j).toFunctor) [∀ j : J, (V.ι.app j).toFunctor.IsContinuous (P j).toGrothendieck Q.toGrothendieck] [∀ j : J, PreservesFiniteLimits (sheafPullback (V.ι.app j).toFunctor (Type u) (P j).toGrothendieck Q.toGrothendieck)] [∀ j : J, PreservesFiniteColimits (sheafPullback (V.ι.app j).toFunctor (Type u) (P j).toGrothendieck Q.toGrothendieck)] (eV : ∀ {j k : J} (a : j ⟶ k), (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck) ≅ (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck) ⋙ (sheafPullback (V.ι.app k).toFunctor AddCommGrpCat.{u} (P k).toGrothendieck Q.toGrothendieck)) (heV : ∀ {j k : J} (a : j ⟶ k) (G : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (X : F.obj j), Arrow.mk (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X) ≫ ((eV a).hom.app G).hom.app (op ((V.ι.app j).toFunctor.obj X))) = Arrow.mk (((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).unit.app G).hom.app (op X) ≫ ((sheafAdjunctionContinuous (V.ι.app k).toFunctor AddCommGrpCat.{u} (P k).toGrothendieck Q.toGrothendieck).unit.app ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).obj G)).hom.app (op ((F.map a).toFunctor.obj X)))) (Fs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (φ : ∀ {j k : J} (a : j ⟶ k), (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).obj (Fs j) ⟶ Fs k) (S : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u}) (hSobj : ∀ j : J, S.obj j = (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).obj (Fs j)) (hSmap : ∀ {j k : J} (a : j ⟶ k), Arrow.mk (S.map a) = Arrow.mk ((eV a).hom.app (Fs j) ≫ (sheafPullback (V.ι.app k).toFunctor AddCommGrpCat.{u} (P k).toGrothendieck Q.toGrothendieck).map (φ a))) (j : J) (X : F.obj j) (z : (Fs j).obj.obj (op X)) (j' : J) (a : j ⟶ j') (hz : ((((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).unit.app (Fs j)).hom.app (op X)) ≫ (eqToHom (hSobj j).symm ≫ S.map a).hom.app (op ((V.ι.app j).toFunctor.obj X))).hom z = 0) : ∃ (k : J) (d : j' ⟶ k), ((((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P j').toGrothendieck).unit.app (Fs j)).hom.app (op X)) ≫ (φ a).hom.app (op ((F.map a).toFunctor.obj X)) ≫ ((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u} (P j').toGrothendieck (P k).toGrothendieck).unit.app (Fs j')).hom.app (op ((F.map a).toFunctor.obj X))).hom z = 0",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "declarations": [
+   "CategoryTheory.varyingSite_inverseImage_intermediate_unit_zero",
+   "CategoryTheory.arrow_comp_app_eq",
+   "CategoryTheory.arrow_zero"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T151909-L-2288903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T151909-L-2288903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

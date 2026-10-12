@@ -6,6 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.CategoryTheory.ColimitSites
+import Sheaf.CategoryTheory.VaryingSiteIntermediateUnitZero
 
 /-! # Detection of zero for sections on varying sites
 
@@ -155,7 +156,79 @@ theorem varyingSite_inverseImage_zero_detection
           (P t.right).toGrothendieck (P t'.right).toGrothendieck).unit.app
             (Fs t.right)).hom.app (op ((F.map t.hom).toFunctor.obj X_i))) ≫
         (φ b.right).hom.app (op ((F.map b.right).toFunctor.obj
-          ((F.map t.hom).toFunctor.obj X_i)))).hom z = 0 := by sorry
-
+          ((F.map t.hom).toFunctor.obj X_i)))).hom z = 0 := by
+  obtain ⟨k, d, hd⟩ := varyingSite_inverseImage_intermediate_unit_zero
+    J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+    eV heV Fs φ S hSobj hSmap t.right ((F.map t.hom).toFunctor.obj X_i) z j' a hz
+  let t' : Under i := Under.mk (t.hom ≫ a ≫ d)
+  let b : t ⟶ t' := Under.homMk (a ≫ d) (by simp [t'])
+  refine ⟨t', b, ?_⟩
+  change ((((sheafAdjunctionContinuous (F.map (a ≫ d)).toFunctor AddCommGrpCat.{u}
+    (P t.right).toGrothendieck (P k).toGrothendieck).unit.app (Fs t.right)).hom.app
+    (op ((F.map t.hom).toFunctor.obj X_i))) ≫
+    (φ (a ≫ d)).hom.app (op ((F.map (a ≫ d)).toFunctor.obj
+      ((F.map t.hom).toFunctor.obj X_i)))).hom z = 0
+  let X := (F.map t.hom).toFunctor.obj X_i
+  let ua : (Fs t.right).obj.obj (op X) ⟶
+      ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}
+        (P t.right).toGrothendieck (P j').toGrothendieck).obj
+          (Fs t.right)).obj.obj (op ((F.map a).toFunctor.obj X)) :=
+    ((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u}
+      (P t.right).toGrothendieck (P j').toGrothendieck).unit.app
+        (Fs t.right)).hom.app (op X)
+  let uad : (Fs t.right).obj.obj (op X) ⟶
+      ((sheafPullback (F.map (a ≫ d)).toFunctor AddCommGrpCat.{u}
+        (P t.right).toGrothendieck (P k).toGrothendieck).obj
+          (Fs t.right)).obj.obj (op ((F.map (a ≫ d)).toFunctor.obj X)) :=
+    ((sheafAdjunctionContinuous (F.map (a ≫ d)).toFunctor AddCommGrpCat.{u}
+      (P t.right).toGrothendieck (P k).toGrothendieck).unit.app
+        (Fs t.right)).hom.app (op X)
+  change (uad ≫ (φ (a ≫ d)).hom.app
+    (op ((F.map (a ≫ d)).toFunctor.obj X))).hom z = 0
+  rw [hφ a d]
+  have hh := he a d (Fs t.right) X
+  change Arrow.mk (uad ≫ ((e a d).hom.app (Fs t.right)).hom.app
+      (op ((F.map (a ≫ d)).toFunctor.obj X))) =
+    Arrow.mk (ua ≫
+      ((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u}
+        (P j').toGrothendieck (P k).toGrothendieck).unit.app
+          ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}
+            (P t.right).toGrothendieck (P j').toGrothendieck).obj
+              (Fs t.right))).hom.app (op ((F.map a).toFunctor.obj X))) at hh
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at *
+  have hX : (F.map (a ≫ d)).toFunctor.obj X =
+      (F.map d).toFunctor.obj ((F.map a).toFunctor.obj X) := by
+    rw [F.map_comp]
+    rfl
+  have hh' := arrow_comp_app_eq _ _ hh
+    ((sheafPullback (F.map d).toFunctor AddCommGrpCat.{u}
+      (P j').toGrothendieck (P k).toGrothendieck).map (φ a) ≫ φ d).hom
+    (congrArg op hX)
+  apply (arrow_zero _ _ hh' z).mpr
+  have hn := congrArg (fun m ↦ m.hom.app (op ((F.map a).toFunctor.obj X)))
+    ((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u}
+      (P j').toGrothendieck (P k).toGrothendieck).unit.naturality (φ a))
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at hn ⊢
+  let A := (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}
+    (P t.right).toGrothendieck (P j').toGrothendieck).obj (Fs t.right)
+  let Y := (F.map a).toFunctor.obj X
+  let Z := (F.map d).toFunctor.obj Y
+  let L := sheafPullback (F.map d).toFunctor AddCommGrpCat.{u}
+    (P j').toGrothendieck (P k).toGrothendieck
+  let udA : A.obj.obj (op Y) ⟶ (L.obj A).obj.obj (op Z) :=
+    ((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u}
+      (P j').toGrothendieck (P k).toGrothendieck).unit.app A).hom.app (op Y)
+  let udF : (Fs j').obj.obj (op Y) ⟶ (L.obj (Fs j')).obj.obj (op Z) :=
+    ((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u}
+      (P j').toGrothendieck (P k).toGrothendieck).unit.app (Fs j')).hom.app (op Y)
+  let f := (φ a).hom.app (op Y)
+  let g := (L.map (φ a)).hom.app (op Z)
+  let q := (φ d).hom.app (op Z)
+  change f ≫ udF = udA ≫ g at hn
+  change ((ua ≫ udA) ≫ g ≫ q).hom z = 0
+  rw [Category.assoc, ← Category.assoc udA g q, ← hn]
+  change q.hom ((ua ≫ f ≫ udF).hom z) = 0
+  have hd' : (ua ≫ f ≫ udF).hom z = 0 := hd
+  rw [hd', map_zero]
 
 end CategoryTheory
