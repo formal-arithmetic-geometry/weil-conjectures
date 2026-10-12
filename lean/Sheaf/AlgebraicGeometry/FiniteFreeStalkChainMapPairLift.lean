@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLift
 
 /-! # Lifting a pair of finite free chain maps from a stalk
 
@@ -66,6 +66,27 @@ theorem exists_restrict_chainMap_pair_of_stalk
       ∃ (eP : S.obj (R.obj P) ≅ T.obj P) (eQ : S.obj (R.obj Q) ≅ T.obj Q)
         (fV : R.obj P ⟶ R.obj Q) (gV : R.obj Q ⟶ R.obj P),
         S.map fV = eP.hom ≫ f ≫ eQ.inv ∧ S.map gV = eQ.hom ≫ g ≫ eP.inv := by
-  sorry
+  let Q := (CochainComplex.singleFunctor Y.Modules i).obj
+    (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r)))
+  have hPfree : ∀ n : ℤ, IsZero (P.X n) ∨ ∃ s : ℕ, Nonempty
+      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))) :=
+    fun n ↦ Or.inr (hfree n)
+  have hQfree : ∀ n : ℤ, IsZero (Q.X n) ∨ ∃ s : ℕ, Nonempty
+      (Q.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))) := by
+    intro n
+    by_cases hn : n = i
+    · subst n
+      exact Or.inr ⟨r, ⟨HomologicalComplex.singleObjXSelf _ _ _⟩⟩
+    · exact Or.inl (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn)
+  obtain ⟨U, hyU, hf⟩ := exists_restrict_chainMap_of_stalk_eventually
+    P Q 0 d i i hge hle (by infer_instance) (by infer_instance) hPfree hQfree y f
+  obtain ⟨W, hyW, hg⟩ := exists_restrict_chainMap_of_stalk_eventually
+    Q P i i 0 d (by infer_instance) (by infer_instance) hge hle hQfree hPfree y g
+  let V := U ⊓ W
+  have hyV : y ∈ V := ⟨hyU, hyW⟩
+  obtain ⟨fV, hfV⟩ := hf V hyV inf_le_left
+  obtain ⟨gV, hgV⟩ := hg V hyV inf_le_right
+  exact ⟨V, hyV, (stalkRestrictionComplexIso V y hyV).app P,
+    (stalkRestrictionComplexIso V y hyV).app Q, fV, gV, hfV, hgV⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,143 @@
+{
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix coefficient extension and chain equations"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "id": "lem-pc-finite-free-stalk-chain-map-lift",
+ "kind": "statement",
+ "title": "Hereditary local extension of one finite free stalk chain map",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $P,Q$ cochain complexes of $\\mathcal O_Y$-modules [def-pc-derived-category], with $P$ supported in $[a,b]$ and $Q$ in $[c,e]$, where $a,b,c,e\\in\\mathbf Z$. Assume every term of each complex is either a zero object or isomorphic to a finite rank free sheaf [def-weil-pbc-free-module]. For $y\\in Y$ let $T$ be termwise pullback along $Y.\\mathrm{fromSpecStalk}(y)$ [def-pc-derived-pullback]. For one prescribed chain map $f:TP\\to TQ$, there is an open $U$ containing $y$ such that for every open $V\\subseteq U$ containing $y$, there exists a chain map $f_V:R_VP\\to R_VQ$ whose pullback satisfies $S_V(f_V)=E_V(P).\\mathrm{hom};f;E_V(Q).\\mathrm{inv}$, with the canonical comparison $E_V$ of [def-pc-stalk-restriction-complex-iso]. No second map or homotopy identity is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite bases in the nonzero terms of the bounded complexes P and Q. There are finitely many potentially nonzero components of the single prescribed map. Pullback of free sheaves identifies these with finite matrices over the stalk ring. The zero terms have unique source or target maps.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent every matrix entry by a section near y. Intersect these finitely many neighbourhoods. Each entry of every differential-commutativity defect has zero germ because f is a chain map; shrink again using the germ equality criterion so all defects vanish. The represented matrices now assemble to a chain map on U.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use E_U from [def-pc-stalk-restriction-complex-iso] to identify the stalk pullback of the restricted complexes with their original stalk pullbacks. The represented entries give S_U(f_U)=E_U(P).hom;f;E_U(Q).inv.",
+   "uses": [
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each V contained in U and containing y, restrict f_U along V -> U, then conjugate by restrictFunctorComp to identify the twice restricted source and target with P and Q restricted to V. The restriction-to-pullback isomorphisms commute with the adjunction units; pullback composition satisfies pseudofunctor_associativity. Together with V.fromSpecStalkOfMem_ι and the corresponding equality for U, these identify the composite comparison with E_V. Naturality then gives S_V(f_V)=E_V(P).hom;f;E_V(Q).inv. This proves the asserted stability on every smaller V.",
+   "uses": [
+    "def-pc-stalk-restriction-complex-iso",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-stalk-restriction-complex-iso",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Expanded one-map finite-matrix extension and restriction stability from lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A stalk morphism between bounded finite free complexes of sheaves extends to every sufficiently small open neighbourhood",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between bounded complexes of finite free sheaves at a stalk extends to a neighbourhood",
+   "results": "exists_lift_of_germInjective_aux; exists_lift_of_germInjective; RingedSpace.exists_res_eq_zero_of_germ_eq_zero; ModuleCat.Tilde.exists_const; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+   "date": "2026-10-13",
+   "verdict": "No direct chain-map extension theorem found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecStalk\", \"mapHomologicalComplex\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(lift|restrict).*([Cc]hainMap|[Cc]omplex)|stalkRestrictionComplexIso|fromSpecStalkOfMem.*Iso",
+   "results": "Search of Mathlib AlgebraicGeometry and Algebra/Homology, and both library roots: no one-map local extension. Existing pair lift is the parent; resolution and injective-complex lifts address different hypotheses. InternalHom finite presentation gives stalk linear maps, not maps between these pullback complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, extension of the finite calculation to a neighbourhood: extend one prescribed chain map and then restrict it to smaller opens",
+   "via": [
+    "lem-pc-finite-free-stalk-chain-map-pair-lift",
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkChainMapLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_chainMap_of_stalk_eventually",
+  "statement": "theorem exists_restrict_chainMap_of_stalk_eventually\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (a b c e : ℤ)\n    (hPa : P.IsStrictlyGE a) (hPb : P.IsStrictlyLE b)\n    (hQc : Q.IsStrictlyGE c) (hQe : Q.IsStrictlyLE e)\n    (hPfree : ∀ n : ℤ, IsZero (P.X n) ∨ ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (hQfree : ∀ n : ℤ, IsZero (Q.X n) ∨ ∃ s : ℕ, Nonempty\n      (Q.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (y : Y)\n    (f : ((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P ⟶\n      ((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj Q) :\n    ∃ (U : Y.Opens), y ∈ U ∧ ∀ (V : Y.Opens) (hyV : y ∈ V), V ≤ U →\n      let R := (restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)\n      let S := (Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let eP := (stalkRestrictionComplexIso V y hyV).app P\n      let eQ := (stalkRestrictionComplexIso V y hyV).app Q\n      ∃ (fV : R.obj P ⟶ R.obj Q), S.map fV = eP.hom ≫ f ≫ eQ.inv",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T173852-L-3302657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T173852-L-3302657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
