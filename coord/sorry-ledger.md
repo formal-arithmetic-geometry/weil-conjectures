@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **2406**, closure **1616**, holes in definitions **9**, definitions with undetermined data **8** (closure **6**).
+Holes now: library **2362**, closure **1582**, holes in definitions **9**, definitions with undetermined data **4** (closure **2**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -20,100 +20,96 @@ Definitions with holes (def/instance/structure field):
 
 Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):
 
-- `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap::AlgebraicGeometry.affineDerivedExtensionAdjunction` (line 117), chosen from `AlgebraicGeometry.exists_affineDerivedExtension`
-- `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap::AlgebraicGeometry.canonicalPullbackAdjunction` (line 127), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
-- `Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap::AlgebraicGeometry.dualityEquationBaseChangeMap` (line 49), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
-- `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso::AlgebraicGeometry.schemeHomPullbackAdjunction` (line 105), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
+- `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap::AlgebraicGeometry.affineDerivedExtensionAdjunction` (line 119), chosen from `AlgebraicGeometry.exists_affineDerivedExtension`
 - `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso::AlgebraicGeometry.schemeHomTensorPullbackIso` (line 128), chosen from `AlgebraicGeometry.exists_schemeHomTensorPullbackIso`
-- `Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap::AlgebraicGeometry.schemeDerivedBaseChangeMap` (line 89), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
 - `Sheaf.Paper.LisseAdicFiberFunctors::AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor` (line 144), chosen from `AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists`
 - `Sheaf.Paper.LisseAdicSheaves::AlgebraicGeometry.Scheme.lisseCoefficientDiagramData` (line 527), chosen from `AlgebraicGeometry.Scheme.lisseCoefficientDiagram_exists`
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 2146 | 1573 |
-| WeilConjectures | 260 | 43 |
+| Sheaf | 2103 | 1540 |
+| WeilConjectures | 259 | 42 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 900 | 377 | 523 | 0 | 0 |
-| 660345513 (Application of proof-dependency imports) | library | 824 | 357 | 467 | 0 | 0 |
-| 660345513 (Application of proof-dependency imports) | closure | 813 | 338 | 475 | 0 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 979 | 412 | 567 | 0 | 0 |
+| 660345513 (Application of proof-dependency imports) | library | 904 | 393 | 511 | 0 | 0 |
+| 660345513 (Application of proof-dependency imports) | closure | 888 | 372 | 516 | 0 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 637 |
-| decomposed | 6 |
-| moved | 554 |
-| pruned | 30 |
+| proved | 708 |
+| decomposed | 8 |
+| moved | 638 |
+| pruned | 32 |
 | other | 4 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
-| A2 | 25 | 25 | 16 | 9 | 14/25 (56.0%) |
-| A3 | 21 | 24 | 19 | 5 | 10/21 (47.6%) |
-| B2 | 21 | 22 | 15 | 7 | 11/21 (52.4%) |
-| B3 | 32 | 36 | 19 | 17 | 12/32 (37.5%) |
-| C1 | 35 | 39 | 29 | 10 | 20/35 (57.1%) |
-| C2 | 21 | 21 | 17 | 4 | 12/21 (57.1%) |
-| C3 | 7 | 7 | 5 | 2 | 4/7 (57.1%) |
-| D2 | 27 | 31 | 20 | 11 | 14/27 (51.9%) |
-| D3 | 7 | 7 | 1 | 6 | 1/7 (14.3%) |
-| E1 | 37 | 47 | 23 | 24 | 17/37 (45.9%) |
-| E2 | 29 | 28 | 26 | 2 | 17/29 (58.6%) |
-| E3 | 5 | 5 | 0 | 5 | 0/5 (0.0%) |
-| F1 | 33 | 37 | 25 | 12 | 14/33 (42.4%) |
-| F2 | 21 | 36 | 12 | 24 | 9/21 (42.9%) |
-| F3 | 6 | 10 | 2 | 8 | 1/6 (16.7%) |
-| G1 | 30 | 33 | 30 | 3 | 16/30 (53.3%) |
-| G2 | 22 | 25 | 23 | 2 | 12/22 (54.5%) |
-| G3 | 6 | 6 | 4 | 2 | 3/6 (50.0%) |
-| H1 | 25 | 26 | 17 | 9 | 12/25 (48.0%) |
-| H2 | 24 | 26 | 18 | 8 | 14/24 (58.3%) |
-| H3 | 9 | 17 | 3 | 14 | 2/9 (22.2%) |
-| J1 | 30 | 37 | 17 | 20 | 13/30 (43.3%) |
-| J2 | 23 | 24 | 22 | 2 | 14/23 (60.9%) |
-| J3 | 7 | 7 | 2 | 5 | 2/7 (28.6%) |
-| K1 | 32 | 36 | 27 | 9 | 17/32 (53.1%) |
-| K2 | 31 | 34 | 24 | 10 | 18/31 (58.1%) |
-| K3 | 7 | 7 | 0 | 7 | 0/7 (0.0%) |
-| M1 | 30 | 35 | 19 | 16 | 11/30 (36.7%) |
-| M2 | 23 | 30 | 15 | 15 | 8/23 (34.8%) |
-| M3 | 7 | 8 | 1 | 7 | 1/7 (14.3%) |
-| N1 | 32 | 33 | 24 | 9 | 17/32 (53.1%) |
-| N2 | 21 | 27 | 9 | 18 | 8/21 (38.1%) |
-| N3 | 8 | 8 | 5 | 3 | 3/8 (37.5%) |
-| P1 | 32 | 49 | 24 | 25 | 16/32 (50.0%) |
-| P2 | 29 | 30 | 17 | 13 | 8/29 (27.6%) |
-| P3 | 8 | 8 | 11 | -3 | 5/8 (62.5%) |
+| A2 | 27 | 27 | 20 | 7 | 16/27 (59.3%) |
+| A3 | 26 | 29 | 20 | 9 | 11/26 (42.3%) |
+| B2 | 25 | 26 | 21 | 5 | 14/25 (56.0%) |
+| B3 | 34 | 38 | 20 | 18 | 13/34 (38.2%) |
+| C1 | 38 | 42 | 32 | 10 | 22/38 (57.9%) |
+| C2 | 23 | 23 | 19 | 4 | 13/23 (56.5%) |
+| C3 | 10 | 10 | 8 | 2 | 6/10 (60.0%) |
+| D2 | 29 | 33 | 23 | 10 | 16/29 (55.2%) |
+| D3 | 11 | 11 | 2 | 9 | 2/11 (18.2%) |
+| E1 | 40 | 50 | 25 | 25 | 19/40 (47.5%) |
+| E2 | 31 | 30 | 27 | 3 | 18/31 (58.1%) |
+| E3 | 8 | 8 | 2 | 6 | 2/8 (25.0%) |
+| F1 | 35 | 39 | 27 | 12 | 15/35 (42.9%) |
+| F2 | 23 | 38 | 13 | 25 | 10/23 (43.5%) |
+| F3 | 10 | 14 | 2 | 12 | 1/10 (10.0%) |
+| G1 | 35 | 38 | 37 | 1 | 20/35 (57.1%) |
+| G2 | 26 | 29 | 27 | 2 | 15/26 (57.7%) |
+| G3 | 10 | 11 | 7 | 4 | 5/10 (50.0%) |
+| H1 | 28 | 29 | 19 | 10 | 14/28 (50.0%) |
+| H2 | 26 | 28 | 20 | 8 | 16/26 (61.5%) |
+| H3 | 13 | 21 | 5 | 16 | 4/13 (30.8%) |
+| J1 | 34 | 41 | 17 | 24 | 13/34 (38.2%) |
+| J2 | 26 | 29 | 26 | 3 | 16/26 (61.5%) |
+| J3 | 11 | 11 | 2 | 9 | 2/11 (18.2%) |
+| K1 | 34 | 38 | 29 | 9 | 19/34 (55.9%) |
+| K2 | 34 | 37 | 27 | 10 | 21/34 (61.8%) |
+| K3 | 10 | 11 | 0 | 11 | 0/10 (0.0%) |
+| M1 | 32 | 37 | 20 | 17 | 12/32 (37.5%) |
+| M2 | 25 | 33 | 17 | 16 | 9/25 (36.0%) |
+| M3 | 11 | 12 | 4 | 8 | 4/11 (36.4%) |
+| N1 | 33 | 34 | 25 | 9 | 18/33 (54.5%) |
+| N2 | 23 | 29 | 10 | 19 | 9/23 (39.1%) |
+| N3 | 9 | 9 | 6 | 3 | 4/9 (44.4%) |
+| P1 | 37 | 57 | 27 | 30 | 17/37 (45.9%) |
+| P2 | 32 | 35 | 19 | 16 | 9/32 (28.1%) |
+| P3 | 11 | 11 | 12 | -1 | 6/11 (54.5%) |
 | Q1 | 24 | 26 | 16 | 10 | 11/24 (45.8%) |
-| Q2 | 22 | 22 | 15 | 7 | 10/22 (45.5%) |
-| Q3 | 8 | 8 | 6 | 2 | 4/8 (50.0%) |
-| R1 | 31 | 41 | 21 | 20 | 13/31 (41.9%) |
+| Q2 | 24 | 25 | 15 | 10 | 10/24 (41.7%) |
+| Q3 | 11 | 12 | 8 | 4 | 4/11 (36.4%) |
+| R1 | 34 | 44 | 21 | 23 | 13/34 (38.2%) |
 | R2 | 26 | 29 | 19 | 10 | 13/26 (50.0%) |
-| R3 | 8 | 11 | 0 | 11 | 0/8 (0.0%) |
-| S1 | 29 | 32 | 27 | 5 | 16/29 (55.2%) |
-| S2 | 26 | 27 | 20 | 7 | 13/26 (50.0%) |
-| S3 | 8 | 10 | 2 | 8 | 2/8 (25.0%) |
+| R3 | 9 | 12 | 0 | 12 | 0/9 (0.0%) |
+| S1 | 31 | 34 | 30 | 4 | 17/31 (54.8%) |
+| S2 | 29 | 31 | 26 | 5 | 15/29 (51.7%) |
+| S3 | 9 | 11 | 2 | 9 | 2/9 (22.2%) |
 | T1 | 34 | 35 | 27 | 8 | 16/34 (47.1%) |
-| T2 | 24 | 34 | 14 | 20 | 9/24 (37.5%) |
-| T3 | 6 | 6 | 4 | 2 | 2/6 (33.3%) |
-| U1 | 34 | 40 | 31 | 9 | 20/34 (58.8%) |
-| U2 | 30 | 30 | 16 | 14 | 11/30 (36.7%) |
-| U3 | 6 | 6 | 3 | 3 | 2/6 (33.3%) |
-| V1 | 32 | 31 | 13 | 18 | 10/32 (31.2%) |
-| V2 | 23 | 24 | 18 | 6 | 11/23 (47.8%) |
-| V3 | 8 | 9 | 5 | 4 | 3/8 (37.5%) |
+| T2 | 25 | 35 | 14 | 21 | 9/25 (36.0%) |
+| T3 | 8 | 8 | 7 | 1 | 4/8 (50.0%) |
+| U1 | 37 | 43 | 34 | 9 | 23/37 (62.2%) |
+| U2 | 32 | 32 | 20 | 12 | 13/32 (40.6%) |
+| U3 | 8 | 8 | 3 | 5 | 2/8 (25.0%) |
+| V1 | 35 | 34 | 15 | 19 | 12/35 (34.3%) |
+| V2 | 26 | 27 | 23 | 4 | 14/26 (53.8%) |
+| V3 | 14 | 18 | 8 | 10 | 6/14 (42.9%) |
 | W2 | 25 | 27 | 10 | 17 | 8/25 (32.0%) |
-| W3 | 7 | 7 | 1 | 6 | 1/7 (14.3%) |
-| X2 | 26 | 26 | 24 | 2 | 13/26 (50.0%) |
-| X3 | 4 | 5 | 3 | 2 | 1/4 (25.0%) |
-| Y2 | 23 | 25 | 12 | 13 | 8/23 (34.8%) |
-| Y3 | 3 | 4 | 1 | 3 | 1/3 (33.3%) |
+| W3 | 11 | 11 | 5 | 6 | 3/11 (27.3%) |
+| X2 | 28 | 28 | 28 | 0 | 15/28 (53.6%) |
+| X3 | 7 | 8 | 4 | 4 | 2/7 (28.6%) |
+| Y2 | 25 | 27 | 15 | 12 | 10/25 (40.0%) |
+| Y3 | 7 | 8 | 6 | 2 | 5/7 (71.4%) |
 | Z2 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
@@ -134,9 +130,9 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore | 4 | 1 | V1 |
 | Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres | 4 | 1 | ORCHESTRA |
 | Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore | 4 | 2 | R2 |
-| Sheaf.AlgebraicGeometry.StrictHenselization | 4 | 2 | H2 |
+| Sheaf.AlgebraicGeometry.StrictHenselization | 4 | 2 | K2 |
 | Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime | 4 | 1 | ORCHESTRA |
-| Sheaf.Paper.StrictHenselizationPointedMap | 4 | 2 | U2 |
+| Sheaf.Paper.StrictHenselizationPointedMap | 4 | 2 | W2 |
 | Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles | 5 | 1 | T2 |
 | Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux | 5 | 2 | W2 |
 | Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit | 5 | 1 | U2 |
@@ -159,7 +155,9 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial`
 - `Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric`
+- `Sheaf.AlgebraicGeometry.Curve.ProperProjective`
 - `Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra`
+- `Sheaf.AlgebraicGeometry.DiagonalBaseChangeUpperShriek`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
 - `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
@@ -182,6 +180,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FpqcAffineDescent`
 - `Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement`
 - `Sheaf.AlgebraicGeometry.FpqcFinerThanEtale`
+- `Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion`
 - `Sheaf.AlgebraicGeometry.FpqcTensorSections`
 - `Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence`
 - `Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer`
@@ -193,6 +192,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest`
 - `Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting`
 - `Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex`
+- `Sheaf.AlgebraicGeometry.KoszulRegularImmersionDerivedHom`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.LimitFibreProducts`
 - `Sheaf.AlgebraicGeometry.LimitResidueField`
@@ -205,6 +205,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage`
 - `Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents`
 - `Sheaf.AlgebraicGeometry.NormalizationProperties`
+- `Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition`
 - `Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage`
 - `Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.ProperNormalizedFibres`
@@ -228,6 +229,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.UniversalThickeningFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces`
 - `Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestriction`
+- `Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint`
 - `Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction`
 - `Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact`
@@ -241,12 +243,16 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
 - `Sheaf.CategoryTheory.BoundedSubobjectSurjection`
+- `Sheaf.CategoryTheory.CohomologyColimitSites`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification`
 - `Sheaf.CategoryTheory.DiscreteModulesAbelian`
 - `Sheaf.CategoryTheory.EdgeCollapse`
+- `Sheaf.CategoryTheory.EquivalenceInternalModule`
 - `Sheaf.CategoryTheory.EssentiallyConstantSplitting`
 - `Sheaf.CategoryTheory.EssentiallyConstantSystem`
+- `Sheaf.CategoryTheory.FiniteContinuousModule`
+- `Sheaf.CategoryTheory.FirstQuadrantRowCollapse`
 - `Sheaf.CategoryTheory.Galois.AbstractEquivalence`
 - `Sheaf.CategoryTheory.Galois.CoproductMorphismComponents`
 - `Sheaf.CategoryTheory.Galois.GaloisTransitive`
@@ -262,10 +268,12 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.HomotopyHomExactOfInjective`
 - `Sheaf.CategoryTheory.HomotopyLimitVanishing`
 - `Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator`
+- `Sheaf.CategoryTheory.InternalModule`
 - `Sheaf.CategoryTheory.MatchingObjectCoskeleton`
 - `Sheaf.CategoryTheory.MittagLefflerExactSequence`
 - `Sheaf.CategoryTheory.MittagLefflerLimitExact`
 - `Sheaf.CategoryTheory.ProperFaceMatchingObject`
+- `Sheaf.CategoryTheory.QuotientJShriek`
 - `Sheaf.CategoryTheory.SimplicialMatchingObject`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension`
@@ -306,7 +314,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.LisseAdicFiberFunctors`
 - `Sheaf.Paper.LisseAdicSheaves`
 - `Sheaf.Paper.LisseTensorScalarExtension`
-- `Sheaf.Paper.NormalLocusOpen`
 - `Sheaf.Paper.PlusConstructionFunctorial`
 - `Sheaf.Paper.SheavesKilledByNZmodModules`
 - `Sheaf.Paper.SimplicialSetAddSimplices`
@@ -330,36 +337,13 @@ Modules pruned since the imports baseline:
 - `Sheaf.RepresentationTheory.LAdic`
 - `Sheaf.RepresentationTheory.OpenStabilizerAdjunction`
 - `Sheaf.RepresentationTheory.ProfiniteStableLattice`
-- `Sheaf.RingTheory.AnalyticallyUnramified`
-- `Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion`
-- `Sheaf.RingTheory.AnnihilatorAssociatedPrimes`
-- `Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence`
-- `Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange`
-- `Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime`
-- `Sheaf.RingTheory.CodimensionOneAnalyticallyUnramified`
 - `Sheaf.RingTheory.FlatModuleCompletion`
-- `Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes`
 - `Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent`
 - `Sheaf.RingTheory.HenselianPairPrimeConnected`
-- `Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes`
-- `Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing`
-- `Sheaf.RingTheory.IsN1AdjoinSingleton`
-- `Sheaf.RingTheory.IsN1OfFiniteDomainExtension`
-- `Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified`
-- `Sheaf.RingTheory.IsN1OfLocalCharacterization`
-- `Sheaf.RingTheory.IsN2OfFiniteExtension`
 - `Sheaf.RingTheory.LimitFlatModules`
-- `Sheaf.RingTheory.LocalizationJapaneseDomain`
 - `Sheaf.RingTheory.MapIntoHenselianColimit`
-- `Sheaf.RingTheory.NagataLocalization`
-- `Sheaf.RingTheory.NagataOfCompleteLocal`
-- `Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight`
-- `Sheaf.RingTheory.PowerSeriesN2`
-- `Sheaf.RingTheory.PowerSeriesNormalDomain`
 - `Sheaf.RingTheory.PrincipalMaximalDimOneRegular`
 - `Sheaf.RingTheory.QuasiFiniteIntegralClosureOpen`
-- `Sheaf.RingTheory.RegularLocalDimOneIffNormal`
-- `Sheaf.RingTheory.TateN2CompletePrincipal`
 - `Sheaf.RingTheory.TorStrictlyProZero`
 - `Sheaf.RingTheory.UniversalFirstOrderThickening`
 - `Sheaf.RingTheory.ValuationRingNormal`
