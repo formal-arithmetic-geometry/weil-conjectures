@@ -7254,3 +7254,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/P1/Sheaf.CategoryTheory.SiteSesCechH1Surjective (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322040 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/P1/Sheaf.RingTheory.GradedFreeCover (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322135 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/P1/Sheaf.RingTheory.NormalLocalDepthTwo (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322230 (proof); batch 20261012T095846; modules 1; new nodes 0)
+- 09:59 L: merged deliver/P1/Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322327 (interface); batch 20261012T095846; modules 4; new nodes 3)

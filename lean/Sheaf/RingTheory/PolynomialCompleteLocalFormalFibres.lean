@@ -4,20 +4,11 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.GRing
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
-import Sheaf.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.LocalCompletionQuotient
+import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+import Sheaf.RingTheory.PolynomialCompleteLocalFibreReduction
+import Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre
+import Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero
 import Sheaf.RingTheory.PolynomialFormalFiber
-import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
-import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularRingSmoothAscent
 
 @[expose] public section
 
@@ -58,6 +49,27 @@ theorem completeLocalFormalFibres
       (algebraMap (Localization.AtPrime Q)
         (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime Q))
           (Localization.AtPrime Q))) := by
-  sorry
+  classical
+  rw [RingHom.IsRegular, toAlgebra_algebraMap]
+  refine ⟨RingHom.flat_algebraMap_iff.mpr inferInstance, ?_⟩
+  intro s hs
+  obtain ⟨A, hA, hdom, hnoeth, hlocal, hcomplete, q, r, hqmax, hrprime,
+    hq, hrq, hrA, htransfer⟩ := exists_completeLocalDomain_fibre_reduction S Q hQ s
+  let := hA
+  let := hdom
+  let := hnoeth
+  let := hlocal
+  let := hcomplete
+  let := hqmax
+  let := hrprime
+  apply htransfer
+  by_cases hr : r = ⊥
+  · subst r
+    exact completeLocalGenericFibre A q hq
+  · rcases CharP.exists' (Localization.AtPrime (⊥ : Ideal A)) with hzero | ⟨p, hp, hchar⟩
+    · let := hzero
+      exact completeLocalNonzeroFibreCharZero A q hq r hrq hr hrA
+    · let := hchar
+      exact (formalFiber_isGeometricallyRegular A p hp.out q hq r hrq hr hrA).2
 
 end Polynomial

@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-polynomial-complete-local-fibre-reduction",
+ "kind": "statement",
+ "title": "Reduction of polynomial completion fibres to complete local domains",
+ "statement": "Let $S$ be a Noetherian complete local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring], $Q$ a maximal ideal of $S[x]$ [def-weil-polynomial-ring] contracting to the maximal ideal of $S$, and $s$ a prime of $S[x]_Q$ [def-weil-pbc-localization-at-prime]. There exist a Noetherian complete local domain $A$, a maximal ideal $q$ of $A[x]$ contracting to its maximal ideal, and a prime $r\\subseteq q$ contracting to zero in $A$, such that geometric regularity [def-weil-pbc-g-ring] of $\\kappa(r)\\otimes_{A[x]}(A[x]_q)^\\wedge$ implies geometric regularity of $\\kappa(s)\\otimes_{S[x]_Q}(S[x]_Q)^\\wedge$ [def-weil-pbc-adic-completion].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraph 2 (reduction modulo the contraction), and proof of 07PN; Algebra Tags 00E3, 00C9, 00MA, 0325, 07BH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "1. Contract the given prime s of T = S[X]_Q to r in S[X]. Prime correspondence\n   for localization gives r ≤ Q and canonically identifies the residue fields.\n   As all denominators of T act invertibly on both factors, tensoring over S[X]\n   or T gives the same fibre over this identified residue field (00E3, 00C9, 07BH).",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Put p = r intersect S and A = S/p. Primality makes A a domain; 0325 makes it\n   a Noetherian complete local ring. The coefficient quotient map S[X] → A[X]\n   is surjective with kernel pS[X]. Its images q and r' of Q and r are maximal\n   and prime respectively; q lies over the maximal ideal of A, r' ≤ q and\n   r' intersects A in zero. Take this actual quotient ring as the witness A.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Localizing the coefficient quotient identifies A[X]_q with T/pT, preserving\n   maximal ideals. Completion of a quotient (00MA) identifies its completion\n   with C/pC, where C is the completion of T. At r the quotient-localization\n   identity identifies the residue field with that of r' as an S[X]-algebra.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. Since p annihilates the residue field, tensoring C with it is unchanged by\n   replacing C with C/pC and the base S[X] with A[X]. Tensor associativity and\n   step 1 give an isomorphism of fibres compatible with the residue-field\n   isomorphism. Noetherianity and regularity after every finite purely inseparable\n   field extension transport across these isomorphisms. This is precisely the\n   implication below; no arbitrary object is used in a definition.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-local-completion-quotient",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraph 2 (reduction modulo the contraction), and proof of 07PN; Algebra Tags 00E3, 00C9, 00MA, 0325, 07BH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "completion fibre of polynomial localization is geometrically regular if fibre over quotient by contracted prime is geometrically regular",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Polynomial",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.?fib|geometrically.?regular",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Proposition 07PV, paragraph 2 (reduction modulo the contraction), and proof of 07PN; Algebra Tags 00E3, 00C9, 00MA, 0325, 07BH.",
+   "via": [
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCompleteLocalFibreReduction",
+  "file": "lean/Sheaf/RingTheory/PolynomialCompleteLocalFibreReduction.lean",
+  "declaration": "Polynomial.exists_completeLocalDomain_fibre_reduction",
+  "statement": "theorem exists_completeLocalDomain_fibre_reduction\n    (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S]\n    [IsAdicComplete (IsLocalRing.maximalIdeal S) S]\n    (Q : Ideal (Polynomial S)) [Q.IsMaximal]\n    (hQ : Q.comap (Polynomial.C : S →+* Polynomial S) = IsLocalRing.maximalIdeal S)\n    (s : Ideal (Localization.AtPrime Q)) [s.IsPrime] :\n    ∃ (A : Type u) (_ : CommRing A) (_ : IsDomain A) (_ : IsNoetherianRing A)\n      (_ : IsLocalRing A) (_ : IsAdicComplete (IsLocalRing.maximalIdeal A) A)\n      (q r : Ideal (Polynomial A)) (_ : q.IsMaximal) (_ : r.IsPrime),\n      q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A ∧\n      r ≤ q ∧ r.comap (Polynomial.C : A →+* Polynomial A) = ⊥ ∧\n      (Algebra.IsGeometricallyRegular r.ResidueField\n        (r.Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n          (Localization.AtPrime q))) →\n        Algebra.IsGeometricallyRegular s.ResidueField\n          (s.Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime Q))\n            (Localization.AtPrime Q))))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T095917-L-322327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T095917-L-322327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -31,153 +31,42 @@
  ],
  "proof": [
   {
-   "text": "(Flatness, Noetherian fibres, reduction to the formal fibres.) Put $T=S[x]_{\\mathfrak Q}$ and $C=T^\\wedge$. $S[x]$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], hence so is its localization $T$ (every ideal of $T$ is extended from an ideal of $S[x]$ [def-weil-pbc-noetherian-ring]), a local ring with maximal ideal $\\mathfrak QT$ [def-weil-pbc-localization-at-prime]. So $T\\to C$ is flat [lem-weil-pbc-noetherian-completion-flat], $C$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], and every fibre ring $C\\otimes_T\\kappa(\\mathfrak s)$, $\\mathfrak s$ a prime of $T$, is Noetherian [lem-weil-pbc-fibre-ring-noetherian]. The primes of $T$ are the $\\mathfrak rT$ with $\\mathfrak r\\subseteq\\mathfrak Q$ a prime of $S[x]$, and $\\kappa(\\mathfrak rT)=\\kappa(\\mathfrak r)$ as $T$-algebras [def-weil-pbc-localization-at-prime]; for $T$-modules $M,N$ one has $M\\otimes_{S[x]}N=M\\otimes_TN$ (for $u\\notin\\mathfrak Q$: $mu^{-1}\\otimes n=mu^{-1}\\otimes uu^{-1}n=m\\otimes u^{-1}n$), so $C\\otimes_T\\kappa(\\mathfrak rT)=C\\otimes_{S[x]}\\kappa(\\mathfrak r)$. By the definition of a regular ring map [def-weil-pbc-g-ring] it remains to show: for every prime $\\mathfrak r\\subseteq\\mathfrak Q$ of $S[x]$ the $\\kappa(\\mathfrak r)$-algebra $C\\otimes_{S[x]}\\kappa(\\mathfrak r)$ is geometrically regular over $\\kappa(\\mathfrak r)$.",
+   "text": "Mathlib AdicCompletion.flat_of_isNoetherian supplies flatness of the completion of the Noetherian polynomial localization. Unfold RingHom.IsRegular and toAlgebra_algebraMap.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-localization-at-prime",
     "lem-weil-pbc-noetherian-completion-flat",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-fibre-ring-noetherian",
     "def-weil-pbc-g-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring), second paragraph, lines 12596-12602 ('Let r subset q be a prime ideal. We want to show that R[x]_q^ (x)_{R[x]} kappa(r) is a geometrically regular algebra over kappa(r)'); flatness of the completion and Noetherian fibres (Definition 07BZ of a regular ring map) written out"
-   }
+   "elementary": false
   },
   {
-   "text": "(Reduction to a complete local domain.) Fix $\\mathfrak r$. Let $\\mathfrak p=\\mathfrak r\\cap S$, a prime of $S$ contained in $\\mathfrak Q\\cap S=\\mathfrak n$, $A=S/\\mathfrak p$, and $\\pi:S[x]\\to A[x]$ the map reducing coefficients mod $\\mathfrak p$ [def-weil-polynomial-ring]: it is surjective with kernel $\\mathfrak pS[x]$ (a polynomial maps to $0$ iff all its coefficients lie in $\\mathfrak p$). By [lem-weil-pbc-complete-local-quotient] $A$ is a Noetherian local ring, complete with respect to its maximal ideal $\\mathfrak m_A=\\mathfrak n/\\mathfrak p$, and it is a domain. As $\\mathfrak pS[x]\\subseteq\\mathfrak r\\subseteq\\mathfrak Q$, $\\bar{\\mathfrak Q}=\\pi(\\mathfrak Q)$ and $\\bar{\\mathfrak r}=\\pi(\\mathfrak r)$ are primes of $A[x]$ with $\\pi^{-1}(\\bar{\\mathfrak Q})=\\mathfrak Q$, $\\pi^{-1}(\\bar{\\mathfrak r})=\\mathfrak r$; $A[x]/\\bar{\\mathfrak Q}\\cong S[x]/\\mathfrak Q$ is a field, so $\\bar{\\mathfrak Q}$ is maximal; $\\bar{\\mathfrak Q}\\cap A=(\\mathfrak Q\\cap S)/\\mathfrak p=\\mathfrak m_A$ and $\\bar{\\mathfrak r}\\cap A=(\\mathfrak r\\cap S)/\\mathfrak p=(0)$. By [lem-weil-pbc-localization-at-prime-of-quotient] (with $I=\\mathfrak pS[x]$) the map $\\lambda:T\\to A[x]_{\\bar{\\mathfrak Q}}$ is surjective with kernel $\\mathfrak pT$, and it maps the maximal ideal $\\mathfrak QT$ onto the maximal ideal of $A[x]_{\\bar{\\mathfrak Q}}$; the same lemma at $\\mathfrak r$ gives $A[x]_{\\bar{\\mathfrak r}}\\cong S[x]_{\\mathfrak r}/\\mathfrak pS[x]_{\\mathfrak r}$, and dividing by the maximal ideals (note $\\mathfrak pS[x]_{\\mathfrak r}\\subseteq\\mathfrak rS[x]_{\\mathfrak r}$) an isomorphism of $S[x]$-algebras $\\kappa(\\mathfrak r)\\cong\\kappa(\\bar{\\mathfrak r})$ [def-weil-pbc-localization-at-prime]. By [lem-weil-pbc-local-completion-quotient] applied to the Noetherian local ring $T$ (Step 1) and $\\lambda$, $(A[x]_{\\bar{\\mathfrak Q}})^\\wedge\\cong C/\\mathfrak pC$ compatibly with the maps from $S[x]$. Since $\\mathfrak p$ annihilates $\\kappa(\\mathfrak r)$, we get isomorphisms of $\\kappa(\\mathfrak r)$-algebras $(A[x]_{\\bar{\\mathfrak Q}})^\\wedge\\otimes_{A[x]}\\kappa(\\bar{\\mathfrak r})\\cong(C/\\mathfrak pC)\\otimes_{S[x]/\\mathfrak pS[x]}\\kappa(\\mathfrak r)\\cong C\\otimes_{S[x]}\\kappa(\\mathfrak r)$, and geometric regularity [def-weil-pbc-g-ring] only depends on the algebra up to isomorphism. So it suffices to prove: $(\\dagger)$ if $(A,\\mathfrak m_A)$ is a Noetherian local domain which is $\\mathfrak m_A$-adically complete [def-weil-pbc-adically-complete-ring], $\\mathfrak Q\\subset A[x]$ a maximal ideal with $\\mathfrak Q\\cap A=\\mathfrak m_A$ and $\\mathfrak r\\subseteq\\mathfrak Q$ a prime with $\\mathfrak r\\cap A=(0)$, then $(A[x]_{\\mathfrak Q})^\\wedge\\otimes_{A[x]}\\kappa(\\mathfrak r)$ is geometrically regular over $\\kappa(\\mathfrak r)$.",
+   "text": "For an arbitrary prime s of the polynomial localization, use exists_completeLocalDomain_fibre_reduction to obtain a complete local domain A and polynomial primes r ≤ q with r contracting to zero. Apply its transport implication.",
    "uses": [
-    "def-weil-polynomial-ring",
-    "lem-weil-pbc-complete-local-quotient",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-local-completion-quotient",
-    "def-weil-pbc-g-ring",
-    "def-weil-pbc-adically-complete-ring"
+    "lem-weil-pbc-polynomial-complete-local-fibre-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV, second paragraph, lines 12602-12607 ('Set p = R cap r. Then we can replace R by R/p and q and r by their images in R/p[x], see Lemma 07PN. Hence we may assume that R is a domain and that r cap R = (0)'); the identity used is the one in the proof of Lemma Tag 07PN (lemma-check-G-ring-easy, line 12194), here for the ideal pS[x] contained in r, written out with Algebra Lemma Tag 00MA (lemma-completion-tensor) and Proposition 00CT; quotient: Algebra Lemma Tag 0325"
-   }
+   "elementary": false
   },
   {
-   "text": "(Passing to a regular subring.) Let $A,\\mathfrak Q,\\mathfrak r$ be as in $(\\dagger)$. By [lem-weil-pbc-complete-local-domain-finite-over-regular] there is a subring $A_0\\subseteq A$ which is a regular local ring [def-weil-regular-scheme] (in particular a Noetherian domain), complete with respect to $\\mathfrak m_0=\\mathfrak m_A\\cap A_0$, such that $A=\\sum_{i=1}^sA_0a_i$ is a finitely generated $A_0$-module, and $A_0\\cong k[[X_1,\\ldots,X_d]]$ for a field $k$ or $A_0\\cong\\Lambda[[X_1,\\ldots,X_d]]$ for a Cohen ring $\\Lambda$. Then $A_0[x]\\subseteq A[x]$ and $A[x]=\\sum_iA_0[x]a_i$ is a finite $A_0[x]$-module, in particular a finitely generated $A_0[x]$-algebra; $A_0[x]$ and $A[x]$ are Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. Put $\\mathfrak Q_0=\\mathfrak Q\\cap A_0[x]$ and $\\mathfrak r_0=\\mathfrak r\\cap A_0[x]$: primes with $\\mathfrak r_0\\subseteq\\mathfrak Q_0$, $\\mathfrak Q_0\\cap A_0=\\mathfrak m_A\\cap A_0=\\mathfrak m_0$ and $\\mathfrak r_0\\cap A_0=(0)$. $\\mathfrak Q_0$ is maximal: $D=A_0[x]/\\mathfrak Q_0$ is a subring of the field $L=A[x]/\\mathfrak Q$, which is a finite $D$-module, hence integral over $D$ [lem-weil-pbc-finite-algebra-is-integral]; for $0\\ne y\\in D$ the element $y^{-1}\\in L$ satisfies $y^{-n}+d_1y^{-n+1}+\\dots+d_n=0$ with $d_j\\in D$, and multiplying by $y^{n-1}$ gives $y^{-1}=-(d_1+d_2y+\\dots+d_ny^{n-1})\\in D$. The map $A_0[x]\\to A[x]$ is quasi-finite at $\\mathfrak Q$ [pqf-def-quasifinite]: the fibre ring $F=A[x]\\otimes_{A_0[x]}\\kappa(\\mathfrak Q_0)$ is spanned over the field $\\kappa(\\mathfrak Q_0)$ by the images of $a_1,\\ldots,a_s$, so $\\dim_{\\kappa(\\mathfrak Q_0)}F<\\infty$; for each prime $P$ of $F$ the domain $F/P$ is a finite-dimensional $\\kappa(\\mathfrak Q_0)$-algebra, hence a field (multiplication by a nonzero element is injective, hence surjective), so every prime of $F$ is maximal; distinct maximal ideals $P_1,\\ldots,P_t$ give a surjection $F\\to\\prod_iF/P_i$ (Chinese remainder theorem), so $t\\le\\dim F$; thus $\\operatorname{Spec}F$ is finite with all points closed, hence discrete, and the point of $\\mathfrak Q$ is isolated. Apply [lem-weil-pbc-formal-fibre-quasi-finite-ascent] to $R=A_0[x]$, $R'=A[x]$ and the primes $\\mathfrak q'=\\mathfrak r\\subseteq\\mathfrak p'=\\mathfrak Q$ of $A[x]$, lying over $\\mathfrak q=\\mathfrak r_0\\subseteq\\mathfrak p=\\mathfrak Q_0$: if $(\\ddagger)$ the $\\kappa(\\mathfrak r_0)$-algebra $(A_0[x]_{\\mathfrak Q_0})^\\wedge\\otimes_{A_0[x]}\\kappa(\\mathfrak r_0)$ is geometrically regular over $\\kappa(\\mathfrak r_0)$ [def-weil-pbc-g-ring], then $(\\dagger)$ holds. So it suffices to prove $(\\ddagger)$ for the regular complete local domain $A_0$, the maximal ideal $\\mathfrak Q_0$ of $A_0[x]$ over $\\mathfrak m_0$ and the prime $\\mathfrak r_0\\subseteq\\mathfrak Q_0$ with $\\mathfrak r_0\\cap A_0=(0)$. Let $K_0=(A_0)_{(0)}$ be the fraction field of $A_0$ [def-weil-pbc-localization-at-prime].",
+   "text": "If r is zero apply completeLocalGenericFibre. Otherwise split the characteristic of the fraction field of A using CharP.exists′. In characteristic zero apply completeLocalNonzeroFibreCharZero. In positive prime characteristic apply Polynomial.formalFiber_isGeometricallyRegular and project its geometric-regularity component. These cases conclude the original fibre assertion.",
    "uses": [
-    "lem-weil-pbc-complete-local-domain-finite-over-regular",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "pqf-def-quasifinite",
-    "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
-    "def-weil-pbc-g-ring",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-polynomial-complete-local-generic-fibre",
+    "lem-weil-pbc-polynomial-complete-local-nonzero-fibre-char-zero",
+    "lem-weil-pbc-another-helper-g-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV, third paragraph, lines 12609-12615 ('By Algebra, Lemma 032D we can find R_0 subset R which is regular and such that R is finite over R_0. Applying Lemma 07PP we see that it suffices to prove ... when, in addition to the above, R is a regular complete local ring'); Algebra Lemma Tag 032D (line 45065); More on Algebra Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite, line 12214), item (1); finite implies quasi-finite (Algebra 00PL, 00PM) and maximality of Q_0 written out"
-   }
-  },
-  {
-   "text": "(The completion is regular.) Put $C_0=(A_0[x]_{\\mathfrak Q_0})^\\wedge$. The regular local ring $A_0$ is a regular ring [lem-weil-pbc-regular-local-localization], $A_0\\to A_0[x]$ is smooth [lem-weil-pbc-polynomial-ring-smooth] (case $n=1$), so $A_0[x]$ is a regular ring [lem-weil-pbc-regular-ring-smooth-ascent] and $A_0[x]_{\\mathfrak Q_0}$ is a regular local ring [def-weil-regular-scheme]. Its completion $C_0$ is a Noetherian local ring [lem-weil-pbc-adic-completion-noetherian] [lem-weil-pbc-local-completion-local-ring] which is regular local [lem-weil-pbc-completion-regular-local], hence a regular ring [lem-weil-pbc-regular-local-localization]. Consequently, for every multiplicative subset $V\\subseteq A_0[x]$, the ring $V^{-1}C_0=C_0\\otimes_{A_0[x]}V^{-1}A_0[x]$ (localization at the image of $V$ [def-weil-pbc-localization-at-prime]) is a regular ring: it is Noetherian (its ideals are extended from $C_0$ [def-weil-pbc-noetherian-ring]), its primes are the $V^{-1}P$ with $P$ a prime of $C_0$ not meeting the image of $V$, and $(V^{-1}C_0)_{V^{-1}P}\\cong(C_0)_P$ is a regular local ring.",
-   "uses": [
-    "lem-weil-pbc-regular-local-localization",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-regular-ring-smooth-ascent",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-completion-regular-local",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV, fourth paragraph, lines 12617-12626 ('Since R is regular the ring R[x] is regular (Algebra, Lemma 07NF). Hence the localization R[x]_q is regular. Hence the completions R[x]_q^ are regular, see Lemma 07NY'); Algebra Lemma Tag 07NF (lemma-regular-goes-up, line 46610), Algebra Lemma Tag 0AFS (line 27126), More on Algebra Lemma Tag 07NY (line 10668); smoothness of R -> R[x]: Algebra Definition 00T6 and Lemma 00T7"
-   }
-  },
-  {
-   "text": "(Characteristic $0$, $\\mathfrak r_0=(0)$.) Suppose $\\mathfrak r_0=(0)$. $A_0[x]$ is a domain [lem-weil-pbc-polynomial-ring-domain], so with $V=A_0[x]\\setminus\\{0\\}$ we have $\\kappa((0))=V^{-1}A_0[x]$ [def-weil-pbc-localization-at-prime] and the fibre is $C_0\\otimes_{A_0[x]}\\kappa((0))=V^{-1}C_0$, a regular ring by Step 4. If moreover $K_0$ has characteristic $0$, so does $\\kappa((0))\\supseteq K_0$, whose only finite purely inseparable extension is itself [def-weil-pbc-finite-purely-inseparable-extension]; hence the fibre is geometrically regular over $\\kappa((0))$ [def-weil-pbc-g-ring], which is $(\\ddagger)$ in this case.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-domain",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-pbc-g-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV, fourth paragraph, lines 12627-12629 ('Hence the fibre R[x]_q^ (x)_{R[x]} kappa(r) is, as a localization of R[x]_q^, also regular. Thus we are done if the characteristic of the fraction field of R is 0'); this sentence is correct as written only for r = (0), see Step 6"
-   }
-  },
-  {
-   "text": "(Characteristic $0$, $\\mathfrak r_0\\ne(0)$; written by an agent, the source's sentence does not cover this case.) Suppose $K_0$ has characteristic $0$ and $\\mathfrak r_0\\ne(0)$. Let $W=A_0\\setminus\\{0\\}$, so $W^{-1}A_0[x]=K_0[x]$. Since $\\mathfrak r_0\\cap W=\\emptyset$, $\\mathfrak r_0K_0[x]$ is a nonzero prime of the principal ideal domain $K_0[x]$, hence $=fK_0[x]$ with $f$ irreducible of degree $\\ge1$, maximal, and $\\mathfrak r_0K_0[x]\\cap A_0[x]=\\mathfrak r_0$; clearing denominators we take $f\\in\\mathfrak r_0$. Then $W^{-1}(A_0[x]/\\mathfrak r_0)=K_0[x]/(f)$ is a field which contains the domain $A_0[x]/\\mathfrak r_0$ and consists of fractions of it, so it is $\\kappa(\\mathfrak r_0)$ [def-weil-pbc-localization-at-prime], and $C_0\\otimes_{A_0[x]}\\kappa(\\mathfrak r_0)=(C_0\\otimes_{A_0[x]}K_0[x])\\otimes_{K_0[x]}K_0[x]/(f)=R/fR$ with $R=W^{-1}C_0$, a regular ring by Step 4. Let $\\partial=d/dx$, a derivation of $A_0[x]$. It extends to $A_0[x]_{\\mathfrak Q_0}$, then to its completion $C_0$ compatibly with $A_0[x]\\to C_0$, then to $R=W^{-1}C_0$ [lem-weil-pbc-derivation-extends]; call the result $D$. Writing $\\iota:A_0[x]\\to R$ for the canonical map, the construction gives $D\\circ\\iota=\\iota\\circ\\partial$; for $w\\in W$ we have $\\partial(w)=0$, so by the formula in [lem-weil-pbc-derivation-extends](2) $D(\\iota(g)/w)=\\iota(\\partial g)/w$ for $g\\in A_0[x]$, i.e. on the image of $K_0[x]=W^{-1}A_0[x]$ the derivation $D$ is the image of $d/dx$; in particular $D(f)=\\iota(f')$. As $K_0$ has characteristic $0$ and $\\deg f\\ge1$, $f'\\ne0$ has degree $<\\deg f$, so $f$ irreducible gives $\\gcd(f,f')=1$ and $af+bf'=1$ with $a,b\\in K_0[x]$; mapping to $R$, the image of $D(f)$ in $R/fR$ is a unit. By [lem-weil-pbc-hypersurface-derivation-regular] $R/fR$ is a regular ring. As $\\kappa(\\mathfrak r_0)\\supseteq K_0$ has characteristic $0$, its only finite purely inseparable extension is itself [def-weil-pbc-finite-purely-inseparable-extension], so $C_0\\otimes_{A_0[x]}\\kappa(\\mathfrak r_0)$ is geometrically regular over $\\kappa(\\mathfrak r_0)$ [def-weil-pbc-g-ring], which is $(\\ddagger)$ in this case.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-derivation-extends",
-    "lem-weil-pbc-hypersurface-derivation-regular",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-pbc-g-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Written by an agent: the source (proof of Proposition Tag 07PV, fourth paragraph, lines 12627-12629) calls the fibre a localization of R[x]_q^, which holds only for r = (0); the argument here is the second paragraph of the proof of Lemma Tag 07PU (lemma-another-helper-G-ring, line 12494, lines 12528-12545: 'r K[x] is generated by x - f ... The derivation D = d/dx of A[x] extends ... We conclude by Lemma 07PF'), with the irreducible polynomial f in place of x - f and the regularity of R = W^{-1}C_0 from Step 4 in place of Proposition 07PM; More on Algebra Lemmas Tag 07PE (line 11754) and 07PF (line 11798)"
-   }
-  },
-  {
-   "text": "(Characteristic $p>0$, and conclusion.) Suppose $K_0$ has characteristic $p>0$. Then $A_0\\not\\cong\\Lambda[[X_1,\\ldots,X_d]]$ for a Cohen ring $\\Lambda$: such a ring contains $\\Lambda$, a domain which is not a field and whose maximal ideal is generated by a prime number $\\ell$, so $\\ell\\ne0$ in $\\Lambda$; if $\\Lambda$ had characteristic a prime $r$, then $r=\\ell$ would give $\\ell=0$, and $r\\ne\\ell$ would make $\\ell$ a unit ($1=ar+b\\ell$ with $a,b\\in\\mathbf Z$); so $\\Lambda$, hence $A_0$ and $K_0$, would have characteristic $0$. Hence (Step 3) there is a ring isomorphism $\\sigma:k[[X_1,\\ldots,X_d]]\\xrightarrow{\\sim}A_0$ for a field $k$, of characteristic $p$ as $k\\subseteq K_0$; it extends to $\\sigma[x]:k[[X_1,\\ldots,X_d]][y]\\xrightarrow{\\sim}A_0[x]$, $y\\mapsto x$. If $\\mathfrak r_0=(0)$, apply [lem-weil-pbc-helper-g-ring-char-p] with $n=d$, $m=1$ and the prime $\\sigma[x]^{-1}(\\mathfrak Q_0)$: transported along $\\sigma[x]$ (which induces isomorphisms of localizations, completions and fraction fields) it says that $C_0\\otimes_{A_0[x]}\\kappa((0))$ is geometrically regular over the fraction field $\\kappa((0))$ of $A_0[x]$. If $\\mathfrak r_0\\ne(0)$, apply [lem-weil-pbc-another-helper-g-ring] to the Noetherian complete local domain $A_0$ (fraction field of characteristic $p$), $\\mathfrak q=\\mathfrak Q_0$ (maximal, over $\\mathfrak m_0$) and $\\mathfrak r=\\mathfrak r_0$. With Steps 5 and 6, $(\\ddagger)$ holds in all cases; hence $(\\dagger)$ by Step 3, hence by Step 2 every $C\\otimes_{S[x]}\\kappa(\\mathfrak r)$ is geometrically regular, and by Step 1 the map $S[x]_{\\mathfrak Q}\\to(S[x]_{\\mathfrak Q})^\\wedge$ is regular [def-weil-pbc-g-ring].",
-   "uses": [
-    "lem-weil-pbc-helper-g-ring-char-p",
-    "lem-weil-pbc-another-helper-g-ring",
-    "def-weil-pbc-g-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV, fifth paragraph, lines 12631-12639 ('If the characteristic of R is positive, then R = k[[x_1, ..., x_n]] ... The case r = (0). The result is a direct consequence of Lemma 07PR. The case r != (0). This is Lemma 07PU'); More on Algebra Lemmas Tag 07PR (lemma-helper-G-ring, line 12306) and Tag 07PU (lemma-another-helper-G-ring, line 12494); Cohen ring: Algebra Definition Tag 0327 (line 44872)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-noetherian-completion-flat",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-fibre-ring-noetherian",
   "def-weil-pbc-g-ring",
-  "def-weil-polynomial-ring",
-  "lem-weil-pbc-complete-local-quotient",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-local-completion-quotient",
-  "def-weil-pbc-adically-complete-ring",
-  "lem-weil-pbc-complete-local-domain-finite-over-regular",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "pqf-def-quasifinite",
-  "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
-  "lem-weil-pbc-regular-local-localization",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-regular-ring-smooth-ascent",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-completion-regular-local",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "lem-weil-pbc-derivation-extends",
-  "lem-weil-pbc-hypersurface-derivation-regular",
-  "lem-weil-pbc-helper-g-ring-char-p",
+  "lem-weil-pbc-polynomial-complete-local-fibre-reduction",
+  "lem-weil-pbc-polynomial-complete-local-generic-fibre",
+  "lem-weil-pbc-polynomial-complete-local-nonzero-fibre-char-zero",
   "lem-weil-pbc-another-helper-g-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), paragraphs 2-5 (lines 12596-12639); Step 6 (characteristic 0, r != (0)) written by an agent after the proof of Lemma Tag 07PU, because the source's sentence covers only r = (0)"
+  "place": "Proof of Proposition 07PV, paragraphs 2--5; Lean case split using the three extracted subarguments and the existing 07PU declaration. Unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -268,5 +157,15 @@
   "group": "E1",
   "result": "fix",
   "note": "S Noetherian local, IsAdicComplete at maximalIdeal; Q maximal in Polynomial S; hQ comap C = n (not hollow: Z_p, Q=(px-1) has Q∩S=0); conclusion RingHom.IsRegular of algebraMap to AdicCompletion at maximalIdeal of Localization.AtPrime Q, verbatim the IsGRing form of GRing.lean; formal-fibre clause is the unfolding of IsRegular; node statement unchanged; docstring proof added"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T095917-L-322327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
