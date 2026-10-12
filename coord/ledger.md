@@ -8369,3 +8369,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:33 L: merged deliver/S1/Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding (stage 3; reviewer PASS; first push; landing 20261012T153300-L-2370590 (interface); batch 20261012T153257; modules 3; new nodes 2)
 - 15:33 L: merged deliver/S2/Sheaf.Algebra.Module.GradedModuleAwayClearing (stage 3; reviewer PASS; first push; landing 20261012T153300-L-2370691 (interface); batch 20261012T153257; modules 3; new nodes 2)
 - 15:33 L: merged deliver/S3/Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianGeneralization (stage 3; reviewer PASS; after a return; landing 20261012T153300-L-2370790 (interface); batch 20261012T153257; modules 4; new nodes 3)
+- 15:34 L: returned deliver/Q3/Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise (reviewer RETURN: (reviewer X-ce97d, head ce97d49b2) G1: In dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-colimit-algebras-tensor)
