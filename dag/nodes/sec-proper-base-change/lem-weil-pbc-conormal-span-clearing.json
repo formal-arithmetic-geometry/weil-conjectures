@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-conormal-span-clearing",
+ "kind": "statement",
+ "title": "Clear a finite ideal from localized conormal spanning",
+ "statement": "Let A be a commutative ring, m a natural number, f:Fin(m)->A a finite family, x in A and E a finite subset of Fin(m). Put I=(f_j) and q:A->A/I. Suppose the localized classes of f_j for j in E span (I/I^2)_(q(x)) [def-weil-pbc-module-localization-away]. There exist a in A, h:Fin(m)->Fin(m)->A, and s>0 such that q(a)=q(x)^s and a*f_l=sum_{j in E} h_lj*f_j for every l. No smoothness, linear independence, differential basis, or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CP (https://stacks.math.columbia.edu/tag/07CP), proof between preparation (2) and equation (4); Tag 00DV for Nakayama"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Put I=(f_j), J=(f_j, j in E), and q:A->A/I. Lift linear combinations of selected conormal classes to elements of J. Localized spanning, together with the equality criterion for module localization, gives for each l an exponent k_l with x^k_l f_l in J+I^2. The Lean proof explicitly constructs these lifts and clears both the spanning denominator and the conormal equality denominator.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In T=A_x let I_T and J_T be the mapped ideals. The previous memberships give I_T <= J_T + I_T^2. I_T is finitely generated. Apply the quotient form of Nakayama to I_T/J_T to obtain e with e-1 in I_T and e I_T contained in J_T. This is Mathlib Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup, derived from the one-plus-ideal annihilator theorem.",
+   "uses": [
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write (e-1)x^N=b with b in I by the localization ideal membership criterion. Thus e*x^N=x^N+b in T, and each (x^N+b)f_l belongs to J_T. Clear the localization membership denominators to obtain x^k_l(x^N+b)f_l in J. Choose K=1+max_l k_l, where the maximum of an empty family is zero. Then a=x^K(x^N+b) satisfies af_l in J for every l, and q(a)=q(x)^(K+N) with K+N>0.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Ideal.mem_span_range_iff_exists_fun to express each af_l as a sum over E. Extend the coefficient functions by zero to Fin m, and convert the subtype sum to the finite-set sum. This also handles E empty, m=0, x=0, and the zero ring without extra hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CP, preparation (2)--(4); explicitly clear denominators before lifting modulo pi^2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_sub_one_mem_and_smul|exists_presentation_of_basis_cotangent",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/Finiteness/Nakayama.lean; Mathlib/RingTheory/Finiteness/Nakayama.lean; Mathlib/RingTheory/Finiteness/Nakayama.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Extension/Cotangent/Basis.lean; Mathlib/RingTheory/Extension/Cotangent/Basis.lean; Mathlib/RingTheory/Extension/Cotangent/Basis.lean; Mathlib/RingTheory/Extension/Cotangent/Basis.lean",
+   "verdict": "Ingredients only; no exact chart-clearing result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite ideal whose selected conormal generators span after localization has a multiplier congruent to a positive power of the chart element, expressing every generator in the selected generators",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.FG, _ ≤ _ ⊔ _ • _",
+   "date": "2026-10-13",
+   "results": "Submodule.le_of_le_smul_of_le_jacobson_bot; Submodule.smul_le_of_le_smul_of_le_jacobson_bot; Submodule.sup_eq_sup_smul_of_le_smul_of_le_jacobson; Submodule.sup_smul_eq_sup_smul_of_le_smul_of_le_jacobson; Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup",
+   "verdict": "Ingredients only; no exact chart-clearing result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuClearConormalChart",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP, preparation (2)--(4): clear the finite ideal from its selected localized conormal generators",
+   "via": [
+    "lem-weil-pbc-popescu-clear-conormal-chart",
+    "lem-weil-pbc-popescu-lift-preparation",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ConormalSpanClearing",
+  "file": "lean/Sheaf/RingTheory/ConormalSpanClearing.lean",
+  "declaration": "Ideal.exists_conormal_span_clearing",
+  "statement": "theorem exists_conormal_span_clearing\n    {A : Type u} [CommRing A] (m : ℕ) (f : Fin m → A)\n    (x : A) (E : Finset (Fin m)) :\n    let I := Ideal.span (Set.range f)\n    let q := Ideal.Quotient.mk I\n    Submodule.span (Localization.Away (q x))\n      (Set.range (fun j : E ↦ LocalizedModule.mkLinearMap (Submonoid.powers (q x))\n        I.Cotangent (I.toCotangent ⟨f j, Ideal.subset_span ⟨j, rfl⟩⟩))) = ⊤ →\n    ∃ (a : A) (h : Fin m → Fin m → A) (s : ℕ),\n      0 < s ∧ q a = q x ^ s ∧\n      ∀ l : Fin m, a * f l = ∑ j ∈ E, h l j * f j",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T225323-L-1810696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T225323-L-1810696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

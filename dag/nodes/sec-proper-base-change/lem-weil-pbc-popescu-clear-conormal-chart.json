@@ -13,45 +13,35 @@
  ],
  "proof": [
   {
-   "text": "In Pbar=(R/pi^2)[x], write I=(red(f_j)) and I_E=(red(f_j), j in E). The given localized conormal basis spans (I/I^2)_a0, so I_a0=(I_E)_a0+(I^2)_a0. The finitely generated module M=(I/I_E)_a0 therefore satisfies M=I_a0 M. Apply Nakayama to obtain e with e-1 in I_a0 annihilating M.",
+   "text": "Use the prescribed basis to obtain localized conormal spanning, and apply Ideal.exists_conormal_span_clearing over (R/pi^2)[x]. This yields a reduced polynomial abar, reduced coefficients, and a positive power equality in the quotient.",
    "uses": [
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+    "lem-weil-pbc-conormal-span-clearing"
    ],
    "elementary": false
   },
   {
-   "text": "Write e=1+b/a0^N with b in I. Lift b to a linear combination of the original f_j and let a1=a0*(a0^N+b). Its image in Pbar/I is val(a0)^(N+1). After localizing at red(a1), the annihilator becomes invertible and I and I_E agree.",
-   "uses": [
-    "def-weil-pbc-module-localization-away"
-   ],
+   "text": "Lift abar and all coefficients through the surjective polynomial reduction map. Each residual a*f_l-sum h_lj*f_j reduces to zero. MvPolynomial.C_dvd_iff_map_hom_eq_zero and the principal quotient kernel criterion give residuals C(pi^2)*g_l. The Lean proof assembles the exact polynomial equalities.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "For each f_l express its reduction using the selected generators in the localization at a1. Clear all coefficient denominators and kill the residual localization kernel. Choose a common positive exponent t over the finite family and put a=a1^t. Lift the resulting coefficient polynomials to R[x]. The residual maps to zero modulo pi^2, hence is C(pi^2)*g_l; this yields the displayed identities. Empty families use t=1.",
+   "text": "The private helpers away_pow and module_away_pow show that localization at x^s for s>0 is also localization at x, using the specialized localization constructors. transfer_chart constructs the canonical algebra equivalence, transports smoothness by Smooth.of_equiv, transports the specified conormal basis using IsLocalizedModule.linearEquiv and Basis.mapCoeffs, and transports the differential basis using the localization of Kahler differentials. Combine these properties with the cleared polynomial identities.",
    "uses": [
-    "def-weil-pbc-module-localization-away"
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-smooth-ring-map"
    ],
-   "elementary": true
-  },
-  {
-   "text": "Set s=(N+1)*t, a positive integer. The equality val(a)=val(a0)^s identifies the quotient localizations canonically. Transport smoothness, the conormal basis and its prescribed generator equalities, and the differential basis through these algebra and module localization equivalences. No prime, covering, or finite-presentation assertion is made by this lemma.",
-   "uses": [
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+  "lem-weil-pbc-conormal-span-clearing"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07CP, preparation (3)--(4); same denominator correction as the parent node"
+  "place": "Tag 07CP, preparation (2)--(4); compiled proof with generalized finite-ideal clearing and explicit positive-power chart transport"
  },
  "mathlib_searches": [
   {
@@ -129,7 +119,7 @@
   "reviewer": "COMPILER",
   "group": "N3",
   "result": "pass",
-  "landing": "20261012T212722-L-1131362",
+  "landing": "20261012T225323-L-1810696",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
