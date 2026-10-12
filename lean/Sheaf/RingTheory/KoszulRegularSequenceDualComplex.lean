@@ -10,6 +10,10 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.RingTheory.Localization.Defs
+import Sheaf.RingTheory.KoszulCoefficientExtension
+import Sheaf.RingTheory.KoszulRegularFlatBaseChange
+import Mathlib.RingTheory.Flat.Localization
+import Sheaf.RingTheory.KoszulExtDualHomology
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
@@ -387,7 +391,27 @@ theorem intrinsic_ext_determinant_multiplication
           (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) =
           @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent))
             inferInstance b (e x) := by
-  sorry
+  obtain ⟨f, hreg, hf⟩ := hex
+  obtain ⟨d⟩ := exists_koszul_ext_dual_homology_equiv A I r f hreg hf
+  obtain ⟨φ, hφ⟩ := exists_koszul_conormal_comparison A I r f hreg hf
+  have : QuasiIso φ := hφ.2
+  let e := d.trans (CategoryTheory.Iso.toLinearEquiv
+    (asIso (HomologicalComplex.homologyMap φ r) ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) r
+        (koszulNormalDeterminant A I r)))
+  refine ⟨e, ?_⟩
+  intro b x
+  obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective b
+  have hm : ModuleCat.ofHom
+      (Ideal.Quotient.mk I c • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))) =
+      c • 𝟙 (ModuleCat.of A (A ⧸ I)) := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro y
+    rfl
+  rw [hm, Abelian.Ext.mk₀_smul, Abelian.Ext.smul_comp,
+    Abelian.Ext.mk₀_id_comp, map_smul]
+  rfl
 
 /-- The intrinsic Ext determinant satisfies the normalized Koszul roof formula.
 Source: Stacks Project, Tag 0BQZ.
@@ -395,6 +419,8 @@ Source: Stacks Project, Tag 0BQZ.
 Proof: evaluate the determinant pairing on the finite Koszul roof, use the
 augmentation formula, and apply the ordered contraction sign. This is the roof
 part separated from quotient linearity above. -/
+-- STATEMENT-DISPUTED: quotient linearity does not determine normalization.
+-- Replacing e by -e preserves hmul but flips the left side.
 theorem intrinsic_ext_determinant_roof
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
     (I : Ideal A) (r : ℕ)
@@ -543,6 +569,7 @@ theorem koszul_conormal_comparison_change_generators
       simpa only [LinearMap.compAlternatingMap_apply, hv] using
         (hψ x (fun i ↦ t (w i))).symm
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Localization preserves regularity and the determinant-normalized comparison.
 The maps `χ` and `ν` are the coefficient-extension maps on the degree-`r` dual
 and normal determinant. Their evaluation equations specify the canonical maps,
@@ -600,6 +627,45 @@ theorem koszul_conormal_comparison_localization
               koszulComparisonValue S (I.map (algebraMap A S)) r
                 (algebraMap A S ∘ f) ψ (χ.f r x) =
               ν (koszulComparisonValue A I r f φ x)) := by
-  sorry
+  classical
+  have : Module.Flat A S := IsLocalization.flat S T
+  have hregs := RingTheory.Sequence.isKoszulRegular_of_flat A S r f hreg
+  have hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S) := by
+    rw [← hf, Ideal.map_span, Set.range_comp]
+  let q := Ideal.quotientMap (I.map (algebraMap A S)) (algebraMap A S)
+    Ideal.le_comap_map
+  have hq (a : A) : q (Ideal.Quotient.mk I a) =
+      Ideal.Quotient.mk (I.map (algebraMap A S)) (algebraMap A S a) := rfl
+  refine ⟨hregs, hs, q, hq, ?_⟩
+  intro φ ψ hφ hψ
+  obtain ⟨χ, ν, hχ, hν⟩ := exists_koszul_coefficient_extension A I r f hreg hf
+    T S hs q hq
+  refine ⟨χ, ν, hχ, hν, ?_⟩
+  intro x
+  obtain ⟨b, hb⟩ := exists_koszul_conormal_basis S (I.map (algebraMap A S)) r
+    (algebraMap A S ∘ f) hregs hs
+  apply pairingDual_injective_of_basis b r
+  apply (b.exteriorPower r).ext
+  intro t
+  let k : Fin r → Fin r := fun i ↦ Set.powersetCard.ofFinEmbEquiv.symm t i
+  let v : Fin r → (Fin r →₀ A) := fun i ↦ Finsupp.single (k i) 1
+  have hv : (fun i ↦ koszulConormalVector S (I.map (algebraMap A S)) r
+      (algebraMap A S ∘ f) hs ((v i).mapRange (algebraMap A S) (map_zero _))) =
+      fun i ↦ b (k i) := by
+    funext i
+    rw [hb]
+    simp only [v, Finsupp.mapRange_single, map_one]
+  rw [exteriorPower.basis_apply]
+  change exteriorPower.pairingDual (S ⧸ I.map (algebraMap A S))
+      (I.map (algebraMap A S)).Cotangent r
+      (koszulComparisonValue S (I.map (algebraMap A S)) r
+        (algebraMap A S ∘ f) ψ (χ.f r x))
+      (exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r (fun i ↦ b (k i))) =
+      exteriorPower.pairingDual (S ⧸ I.map (algebraMap A S))
+        (I.map (algebraMap A S)).Cotangent r
+        (ν (koszulComparisonValue A I r f φ x))
+        (exteriorPower.ιMulti (S ⧸ I.map (algebraMap A S)) r (fun i ↦ b (k i)))
+  rw [← hv, hψ, hχ, hν, hφ]
+  simp only [map_mul, map_pow, map_neg, map_one, hq]
 
 end ExteriorAlgebra

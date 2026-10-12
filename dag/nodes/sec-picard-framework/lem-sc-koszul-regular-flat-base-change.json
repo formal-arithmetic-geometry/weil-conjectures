@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-koszul-regular-flat-base-change",
+ "kind": "statement",
+ "title": "Flat base change preserves Koszul regularity",
+ "statement": "Let A and S be commutative rings and S a flat A-algebra [def-weil-pbc-flat-ring-map]. For a finite sequence f:Fin r -> A, if f is Koszul-regular [def-weil-pbc-koszul-regular-sequence], then its image under A -> S is Koszul-regular. The Koszul complex is [def-weil-pbc-koszul-complex].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/062H",
+  "place": "Lemma 15.31.5, flat base change"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "In the standard exterior basis, use the contraction formula to express the boundary as a sum over removal of one generator, with coefficient (-1)^(i+2) f_i. Base change the basis and identify it with the exterior basis over S. Applying the ring map to the coefficients identifies the differentials and constructs a complex isomorphism from the tensor product complex to the restriction of the Koszul complex over S.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each positive degree, the original short complex is exact by Koszul regularity. Tensoring with the flat module S preserves this exactness. Transport exactness through the complex isomorphism, then reflect it along faithful restriction of scalars. The resulting short complex over S is exact, so its homology is zero.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/062H",
+  "place": "Lemma 15.31.5, flat base change; the source argument made explicit in exterior basis coordinates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat base change preserves vanishing of positive Koszul homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a Koszul regular sequence and base change of the dual Koszul complex",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule; RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem; KaehlerDifferential.isLocalizedModule_map; RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange; KaehlerDifferential.isLocalizedModule; Algebra.H1Cotangent.isLocalizedModule; exact_of_isLocalized_span; RingTheory.Sequence.IsWeaklyRegular.of_isLocalization",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*localiz|Koszul.*[Bb]ase[Cc]hange|ext.*[Hh]omology",
+   "results": "Mathlib/RingTheory/Extension/ExtendScalars.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/GroupTheory/GroupExtension/Defs.lean; Mathlib/GroupTheory/GroupExtension/Defs.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine dual Koszul calculation: Flat base change preserves Koszul regularity",
+   "via": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulRegularFlatBaseChange",
+  "file": "lean/Sheaf/RingTheory/KoszulRegularFlatBaseChange.lean",
+  "declaration": "RingTheory.Sequence.isKoszulRegular_of_flat",
+  "statement": "theorem isKoszulRegular_of_flat (A S : Type u) [CommRing A] [CommRing S] [Algebra A S] [Module.Flat A S] (r : ℕ) (f : Fin r → A) (hreg : IsKoszulRegular f) : IsKoszulRegular (algebraMap A S ∘ f)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3c5c",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223424-L-1643422",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3c5c",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223424-L-1643422",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, node metadata, report, and lcompile.py --all result matched; the roof theorem’s STATEMENT-DISPUTED sign counterexample is valid."
+ }
+}

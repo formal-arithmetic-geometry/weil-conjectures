@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-koszul-ext-dual-homology",
+ "kind": "statement",
+ "title": "Ext is computed by the signed dual Koszul cohomology",
+ "statement": "Let A be a commutative ring whose module category has a derived category, I an ideal, and f:Fin r -> A a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] generating I. There is an A-linear equivalence Ext^r_A(A/I,A) -> H^r(L), where L is the signed dual Koszul complex [def-sc-koszul-dual-complex]. This assertion does not mention the conormal module or a determinant identification.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, computation of derived Hom by a finite free Koszul resolution"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-koszul-dual-complex"
+ ],
+ "proof": [
+  {
+   "text": "Construct the quotient augmentation of the Koszul complex. The image of d_1 is I, hence degree zero homology is A/I; higher homology vanishes. Each term has the finite exterior basis, so this is a projective resolution.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib ProjectiveResolution.extEquivCohomologyClass to this resolution and A. A cocycle into A[0] has a single component in nonnegative degree n, namely a functional on K_n. Its total Hom differential is (-1)^(n+1) times precomposition with d_(n+1). Identifying that component identifies cycles, coboundaries and their quotient with homology of the signed dual complex, A-linearly. Take degree r.",
+   "uses": [
+    "def-sc-koszul-dual-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-dual-complex",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, computation of derived Hom by a finite free Koszul resolution; the source argument made explicit in exterior basis coordinates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext of a quotient computed by the cohomology of the signed dual Koszul resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext computed by cohomology of Hom from a projective resolution",
+   "results": "CategoryTheory.ProjectiveResolution.extMk; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.ProjectiveResolution.isoExt; CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.Abelian.Ext; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*localiz|Koszul.*[Bb]ase[Cc]hange|ext.*[Hh]omology",
+   "results": "Mathlib/RingTheory/Extension/ExtendScalars.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/GroupTheory/GroupExtension/Defs.lean; Mathlib/GroupTheory/GroupExtension/Defs.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine dual Koszul calculation: Ext is computed by the signed dual Koszul cohomology",
+   "via": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulExtDualHomology",
+  "file": "lean/Sheaf/RingTheory/KoszulExtDualHomology.lean",
+  "declaration": "ExteriorAlgebra.exists_koszul_ext_dual_homology_equiv",
+  "statement": "theorem exists_koszul_ext_dual_homology_equiv (A : Type u) [CommRing A] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) : Nonempty (Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A] (koszulDualComplex A r f).homology r)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3c5c",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223424-L-1643422",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3c5c",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223424-L-1643422",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, node metadata, report, and lcompile.py --all result matched; the roof theorem’s STATEMENT-DISPUTED sign counterexample is valid."
+ }
+}

@@ -9833,3 +9833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/V1/Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover (stage 3; reviewer PASS; after a return; landing 20261012T223423-L-1643086 (interface); batch 20261012T223357; modules 4; new nodes 3)
 - 22:34 L: merged deliver/V1/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenToOpenCycle (stage 3; reviewer PASS; first push; landing 20261012T223423-L-1643208 (proof); batch 20261012T223357; modules 1; new nodes 0)
 - 22:34 L: merged deliver/V1/Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackComposition (stage 3; reviewer PASS; first push; landing 20261012T223423-L-1643324 (interface); batch 20261012T223357; modules 2; new nodes 1)
+- 22:34 L: merged deliver/V1/Sheaf.RingTheory.KoszulRegularSequenceDualComplex (stage 3; reviewer PASS; first push; landing 20261012T223424-L-1643422 (interface); batch 20261012T223357; modules 4; new nodes 3)
