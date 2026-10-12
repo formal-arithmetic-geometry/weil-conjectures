@@ -1,0 +1,123 @@
+{
+ "id": "def-sbc-raw-restricted-cohomology-comparison-map",
+ "kind": "definition",
+ "title": "Canonical restricted derived-Hom evaluation map",
+ "statement": "For schemes $S,Y$, $h:Y\\to S$, $U\\in S_{et}$, an abelian etale sheaf $F$ and $p\\in\\mathbb N$, let $A$ be the raw derived-Hom group of [lem-sbc-abelian-higher-direct-image-natural-comparison] and $R$ the restricted cohomology of [def-sbc-raw-affine-restricted-cohomology]. Construct an additive morphism $c:A\\to R$ as follows: put $V=U\\times_S Y$ and $r:V\\to Y$, and pull the represented identity section of the free abelian sheaf on $U$ back using the unit of $h^*\\dashv h_*$. Identify this section with an element of $H^0(R\\Gamma(V,r^*h^*\\mathbb Z[U][0]))$. Apply $H^0(R\\Gamma(V,r^*(-)))$ to a raw morphism $t:h^*\\mathbb Z[U][0]\\to F[0][p]$, evaluate at that element, and use the single-complex and shift isomorphisms to obtain an element of $R$. This construction chooses no arbitrary witness.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8 with Cohomology on Sites Tags 072W, 0BKV and 0D6F; explicit evaluation construction"
+ },
+ "stmt_deps": [
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a free abelian representable sheaf computes cohomology of restriction to an etale scheme naturally under pullback",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.homEquivOfIsLocallyBijective",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only; no complete comparison or pullback compatibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyRightDerivedFunctorObjSingleFunctorIso|singleFunctorCompHomologyFunctorIso|sectionsEquiv|Qh_map_bijective",
+   "results": "14 hits: Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only; no complete comparison or pullback compatibility theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a free abelian representable sheaf computes restricted cohomology naturally under pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 03Q8 with Cohomology on Sites Tags 072W, 0BKV and 0D6F; explicit evaluation construction",
+   "via": [
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedCohomologyComparisonMap.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawRestrictedCohomologyComparison",
+  "statement": "def rawRestrictedCohomologyComparison {S Y : Scheme.{v}} (h : Y ⟶ S) (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) : (abelianHigherDirectImageRawPresheaf h p F).obj (op U) ⟶ rawAffineRestrictedCohomology h p F U",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.etaleComposition",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.etaleIdentities",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.etalePullbacks",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.etaleBaseChange",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.sheafifyInstance",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.weakSheafifyInstance",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.freeSheaf",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.sectionsIso",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.generator",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.Evaluation.functor",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.Evaluation.singleIso",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.Evaluation.zeroIso",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.Evaluation.shiftIso",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.Evaluation.evaluate",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.sectionsFunctor",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.zeroIso",
+   "AlgebraicGeometry.Etale.RawRestrictedComparison.shiftIso",
+   "AlgebraicGeometry.Etale.rawRestrictedCohomologyComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T223400-L-1634888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T223400-L-1634888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

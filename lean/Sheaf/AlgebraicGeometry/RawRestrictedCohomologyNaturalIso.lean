@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonNaturality
 
 /-! # Raw derived Hom equals restricted single-complex cohomology
 
@@ -62,6 +61,12 @@ theorem exists_raw_restricted_cohomology_natural_iso (S : Scheme.{v}) (p : ℕ)
         (t : (abelianHigherDirectImageRawPresheaf h p F).obj (op U)),
         rawAffineRestrictedCohomologyMap a h h' w p F F' φ U ((e h F).hom t) =
           (e h' F').hom (abelianHigherDirectImageRawPullback a h h' w p F F' φ U t) := by
-  sorry
+  have hi {Y : Scheme.{v}} (h : Y ⟶ S)
+      (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
+      IsIso (rawRestrictedCohomologyComparison h p F U) :=
+    isIso_rawRestrictedCohomologyComparison h p F U
+  refine ⟨fun h F ↦ asIso (rawRestrictedCohomologyComparison h p F U), ?_⟩
+  intro Y Y' a h h' w F F' φ t
+  exact rawRestrictedCohomologyComparison_naturality a h h' w p F F' φ U t
 
 end AlgebraicGeometry.Etale
