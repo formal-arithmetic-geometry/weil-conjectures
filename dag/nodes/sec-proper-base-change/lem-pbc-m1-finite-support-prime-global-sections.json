@@ -1,0 +1,112 @@
+{
+ "id": "lem-pbc-m1-finite-support-prime-global-sections",
+ "kind": "statement",
+ "title": "Finite global sections of a prime-annihilated boundary sheaf",
+ "statement": "Let k be algebraically closed, Λ a commutative ring, and f:X → Spec k a curve. Let Q be a constructible étale Λ-module sheaf killed by a prime ℓ, with Λ/(ℓ) finite. If Q restricts to zero on a dense open V, then H⁰(X,Q) is finite.",
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 0GJA, finite product of boundary stalks"
+ },
+ "proof": [
+  {
+   "text": "The complement of V is finite and zero-dimensional. The open-closed exact sequence identifies Q with the closed direct image of its restriction to this complement. Zero-dimensional etale cohomology identifies global sections with a finite product of stalks. Constructibility makes each stalk finitely generated over Λ; annihilation by ℓ makes it a finitely generated module over the finite quotient Λ/(ℓ), hence finite. A finite product is finite.",
+   "uses": [
+    "def-weil-pbc-curve-setting",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 0GJA, finite product of boundary stalks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite degree zero cohomology constructible etale sheaf finite support",
+   "results": "Service unavailable; no exact match could be checked.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite global sections of constructible etale sheaf supported on finite complement",
+   "results": "No exact match; only generic finite products and sheaf cohomology declarations.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finite (Sheaf.H _ 0)",
+   "results": "No exact match for finite degree-zero etale cohomology of finite-support sheaves.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_support|zero_dimensional_etale_cohomology|constructible sheaf finite stalk",
+   "results": "Found zero_dimensional_etale_cohomology and finite sheaf fiber lemmas used in the proof; no existing theorem with this statement.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "b3-finite-support-mono-assertions",
+   "place": "finite degree-zero cohomology step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.FiniteSupportPrimeGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteSupportPrimeGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.finite_support_prime_global_sections",
+  "statement": "theorem finite_support_prime_global_sections (Λ : Type (u + 1)) [CommRing Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f]\n    (Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    [Scheme.IsConstructibleSheaf Q] (ℓ : ℕ) [Fact ℓ.Prime]\n    [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})] (hℓ : ℓ • 𝟙 Q = 0)\n    (V : X.Opens) (hV : Dense (V : Set X))\n    (hQ : IsZero (((V.ι)^*[ModuleCat.{u + 1} Λ]).obj Q)) :\n    Finite (Sheaf.H ((sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj Q) 0)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T154832-L-2473564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T154832-L-2473564",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
