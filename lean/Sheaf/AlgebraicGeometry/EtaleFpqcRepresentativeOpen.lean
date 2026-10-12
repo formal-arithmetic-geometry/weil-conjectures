@@ -7,10 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
-import Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
+import Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility
+import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-! # Descending the agreement open of a single local representative
 
@@ -25,6 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Source: Stacks Project, Tag 09XN, paragraphs beginning "Let V" and
 "By construction", and Tag 09XM, the largest agreement-open universal property.
 (blueprint: lem-weil-pbc-etale-fpqc-representative-open).
@@ -120,6 +121,63 @@ theorem etaleFpqcSections_descend_representative_open
         η.hom.app (op W) (F.obj.map b.op t) =
           H.obj.map (MorphismProperty.Over.homMk (β.obj W).hom
             (Category.comp_id _) : β.obj W ⟶ Scheme.Etale.mk (𝟙 (T j))).op (s j) := by
-  sorry
+  classical
+  let H (j : I) := (Scheme.etaleSetPullback (g j)).obj F
+  let β (j : I) := MorphismProperty.Over.pullback @Etale ⊤ (g j)
+  let η (j : I) := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (β j) (Type (u + 1)) (S.smallGrothendieckTopology @Etale)
+    ((T j).smallGrothendieckTopology @Etale)).unit.app F
+  let q (j : I) : (β j).obj V ⟶ Scheme.Etale.mk (𝟙 (T j)) :=
+    MorphismProperty.Over.homMk (pullback.snd V.hom (g j)) (Category.comp_id _)
+  obtain ⟨E, hE⟩ := Classical.axiomOfChoice (fun j ↦
+    exists_etaleSections_equal_open_etale_criterion (T j) (H j) ((β j).obj V)
+      ((η j).hom.app (op V) t) ((H j).obj.map (q j).op (s j)))
+  have hE' : ∀ j (A : (T j).Etale) (m : A ⟶ (β j).obj V),
+      Set.range m.left ⊆ (E j : Set ((β j).obj V).left) ↔
+        (H j).obj.map m.op ((η j).hom.app (op V) t) =
+          (H j).obj.map (m ≫ q j).op (s j) := by
+    intro j A m
+    simpa only [op_comp, Functor.map_comp, types_comp_apply] using hE j A m
+  have hcompatE := etaleFpqcAgreementOpens_compatible T g F s hcompat V t E hE'
+  have hcover' : Presieve.ofArrows (fun j ↦ pullback V.hom (g j))
+      (fun j ↦ pullback.fst V.hom (g j)) ∈ Scheme.fpqcPrecoverage V.left :=
+    Precoverage.mem_coverings_of_isPullback g hcover V.hom
+      (fun j ↦ pullback.fst V.hom (g j)) (fun j ↦ pullback.snd V.hom (g j))
+      (fun j ↦ IsPullback.of_hasPullback V.hom (g j))
+  obtain ⟨U, hU, _⟩ := openSubscheme_existsUnique_of_fpqc
+    (fun j ↦ pullback.fst V.hom (g j)) hcover' E hcompatE
+  refine ⟨U, ?_, ?_⟩
+  · have ha : a ≫ q i = π := by
+      apply MorphismProperty.Over.Hom.ext
+      exact (a ≫ q i).w.trans π.w.symm
+    have hrange : Set.range a.left ⊆ (E i : Set ((β i).obj V).left) :=
+      (hE' i Z a).mpr (by rw [ha]; exact hrep.symm)
+    rintro x ⟨z, rfl⟩
+    have hz := hrange ⟨z, rfl⟩
+    rw [← hU i] at hz
+    exact hz
+  · dsimp only
+    intro j
+    let W : S.Etale := Scheme.Etale.mk (U.ι ≫ V.hom)
+    let b : W ⟶ V := MorphismProperty.Over.homMk U.ι rfl
+    let m : (β j).obj W ⟶ (β j).obj V := (β j).map b
+    have hrange : Set.range m.left ⊆ (E j : Set ((β j).obj V).left) := by
+      rw [← hU j]
+      rintro x ⟨z, rfl⟩
+      change (m.left ≫ pullback.fst V.hom (g j)) z ∈ U
+      have hm : m.left ≫ pullback.fst V.hom (g j) =
+          pullback.fst W.hom (g j) ≫ U.ι := by
+        simp [m, β, b, MorphismProperty.Over.pullback_map_left]
+      rw [hm, Scheme.Hom.comp_apply]
+      exact (pullback.fst W.hom (g j) z).property
+    have heq := (hE' j ((β j).obj W) m).mp hrange
+    have hn := ConcreteCategory.congr_hom ((η j).hom.naturality b.op) t
+    have hq : m ≫ q j =
+        (MorphismProperty.Over.homMk ((β j).obj W).hom (Category.comp_id _) :
+          (β j).obj W ⟶ Scheme.Etale.mk (𝟙 (T j))) := by
+      apply MorphismProperty.Over.Hom.ext
+      exact (m ≫ q j).w.trans (Category.comp_id _).symm
+    rw [hq] at heq
+    exact hn.trans heq
 
 end AlgebraicGeometry

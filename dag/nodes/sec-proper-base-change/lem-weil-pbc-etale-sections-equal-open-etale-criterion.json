@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-etale-sections-equal-open-etale-criterion",
+ "kind": "statement",
+ "title": "Agreement opens via ordinary etale restriction",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ a sheaf of sets on its small étale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets], $Q$ an étale object over $S$, and $s,t\\in F(Q)$. There exists an open $E\\subset Q$ such that, for every étale object $A/S$ and morphism $m:A\\to Q$ over $S$, $\\operatorname{range}(m)\\subset E$ if and only if $F(m)(s)=F(m)(t)$. Here restriction is the ordinary presheaf map on the small étale site, not an untyped inverse-image identification.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), specialized to etale test objects; Tag 03S2 restriction identification"
+ },
+ "proof": [
+  {
+   "text": "Take the canonical agreement open from Tag 09XM. For an etale test object A, m.left composed with Q.hom is A.hom. Use canonicalSection_eq_iff to substitute this structure map without dependent rewriting. The restriction isomorphism for A.hom, evaluated at its identity object, is injective. Its naturality and its counit/unit formula send the canonical restriction of each section to its ordinary restriction along m followed by the isomorphism from that identity object to A. That last map is also injective. Hence canonical equality is equivalent to ordinary equality. Factorization through E is equivalent to range containment by the open immersion lift and its pointwise inclusion formula.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), specialized to etale test objects; Tag 03S2 restriction identification; Lean glue by P1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open locus where two sections of a sheaf on the small etale site agree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Étale sheaf sections have an open agreement locus whose pullbacks descend under an fpqc cover",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; Algebra.isOpen_etaleLocus",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equal_open|representative_open|of_etale_fpqc",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFpqcRepresentativeOpen",
+  "group": "P1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XM (lemma-where-sections-are-equal), specialized to etale test objects; Tag 03S2 restriction identification",
+   "via": [
+    "lem-weil-pbc-etale-fpqc-representative-open",
+    "lem-weil-pbc-etale-fpqc-matching-family",
+    "lem-weil-pbc-etale-sections-fpqc-existence",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsEqualOpenEtaleCriterion.lean",
+  "declaration": "AlgebraicGeometry.exists_etaleSections_equal_open_etale_criterion",
+  "statement": "theorem exists_etaleSections_equal_open_etale_criterion\n    (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (Q : S.Etale) (s t : F.obj.obj (op Q)) :\n    ∃ E : Q.left.Opens, ∀ (A : S.Etale) (m : A ⟶ Q),\n      Set.range m.left ⊆ (E : Set Q.left) ↔ F.obj.map m.op s = F.obj.map m.op t",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T165527-L-2938143",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T165527-L-2938143",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

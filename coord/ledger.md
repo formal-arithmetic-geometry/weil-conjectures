@@ -8653,3 +8653,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/N3/Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop (stage 3; reviewer PASS; first push; landing 20261012T165525-L-2937714 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/N3/Sheaf.AlgebraicGeometry.DescendedQCNeighborhoodCore (stage 3; reviewer PASS; first push; landing 20261012T165526-L-2937839 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/N3/Sheaf.RingTheory.FirstOrderPowerSeriesComparison (stage 3; reviewer PASS; first push; landing 20261012T165526-L-2937992 (interface); batch 20261012T165503; modules 4; new nodes 3)
+- 16:55 L: merged deliver/P1/Sheaf.AlgebraicGeometry.EtaleFpqcRepresentativeOpen (stage 3; reviewer PASS; first push; landing 20261012T165527-L-2938143 (interface); batch 20261012T165503; modules 3; new nodes 2)

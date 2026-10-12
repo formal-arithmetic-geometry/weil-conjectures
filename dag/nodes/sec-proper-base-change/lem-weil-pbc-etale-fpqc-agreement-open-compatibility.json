@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-etale-fpqc-agreement-open-compatibility",
+ "kind": "statement",
+ "title": "Overlap compatibility of agreement opens",
+ "statement": "Let $S$ and $T_j$ be schemes [def-pc-scheme], $g_j:T_j\\to S$ arbitrary morphisms, and $F$ a sheaf of sets on $S_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets]. Let $s_j\\in(g_j^{-1}F)(T_j)$ have equal double-overlap pullbacks under the unit-compatible composition isomorphisms [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Fix an étale $V/S$ and $t\\in F(V)$. Put $Q_j=V\\times_S T_j$ [def-pc-fibre-product] and let $q_j:Q_j\\to T_j$. Suppose opens $E_j\\subset Q_j$ satisfy, for every étale object $A/T_j$ and $m:A\\to Q_j$, that $\\operatorname{range}(m)\\subset E_j$ if and only if $m^*\\eta_{g_j,V}(t)=(m q_j)^*s_j$ by ordinary étale restriction. Then on $Q_j\\times_V Q_k$, the inverse images of $E_j$ and $E_k$ under its first and second projections are equal. No covering, representative, or image-inclusion hypothesis is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), paragraph beginning Let V: because s_i and s_j agree their agreement opens pull back to the same open; Tag 09XM"
+ },
+ "proof": [
+  {
+   "text": "Identify E_j with the canonical largest agreement open of the unit section and the restriction of s_j on Q_j. Test the own open immersions of both candidates: they are etale objects over T_j. The ordinary etale criterion and the restriction isomorphism identify their two factorization criteria and yield both inclusions. This extends the criterion to arbitrary scheme maps.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open-etale-criterion",
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set D=Q_j times_V Q_k and let p_j,p_k be its projections. D maps to T_j times_S T_k by its two structure maps. Compose the inverse-image units along D to Q_j to T_j and along D to Q_k to T_k. The composition-unit formula and naturality send both unit sections of t to the same canonical section pulled back along D to V to S. Pull back the specified overlap equality for s_j,s_k along D to T_j times_S T_k; it identifies their two canonical restrictions. The iterated fibre-product identifications have equal projections, hence agree by the fibre-product universal property. All comparison maps are isomorphisms. Therefore the two section pairs on D have the same equality after every scheme-map restriction, and the inverse images of E_j,E_k satisfy the same agreement-open criterion. Uniqueness in Tag 09XM gives equality of these two opens.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-etale-sections-equal-open-etale-criterion",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), paragraph beginning Let V: because s_i and s_j agree their agreement opens pull back to the same open; Tag 09XM; Lean glue by P1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible agreement opens for inverse image etale sheaf sections on fibre products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Étale sheaf sections have an open agreement locus whose pullbacks descend under an fpqc cover",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; Algebra.isOpen_etaleLocus",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equal_open|representative_open|of_etale_fpqc",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFpqcRepresentativeOpen",
+  "group": "P1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XN (lemma-describe-pullback), paragraph beginning Let V: because s_i and s_j agree their agreement opens pull back to the same open; Tag 09XM",
+   "via": [
+    "lem-weil-pbc-etale-fpqc-representative-open",
+    "lem-weil-pbc-etale-fpqc-matching-family",
+    "lem-weil-pbc-etale-sections-fpqc-existence",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFpqcAgreementOpenCompatibility.lean",
+  "declaration": "AlgebraicGeometry.etaleFpqcAgreementOpens_compatible",
+  "statement": "theorem etaleFpqcAgreementOpens_compatible\n    {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (s : ∀ i, ((Scheme.etaleSetPullback (g i)).obj F).obj.obj\n      (op (Scheme.Etale.mk (𝟙 (T i)))))\n    (hcompat : ∀ i j,\n      ((Classical.choose etaleSetInverseImageCompositionUnits.2.2\n          S (T i) (pullback (g i) (g j)) (g i) (pullback.fst (g i) (g j))).hom.app F).hom.app\n        (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j)))))\n        (((Scheme.etaleSetPullback (pullback.fst (g i) (g j))).obj\n            ((Scheme.etaleSetPullback (g i)).obj F)).obj.map\n          (MorphismProperty.Over.homMk\n            (pullback.lift (pullback.fst (g i) (g j)) (𝟙 (pullback (g i) (g j)))\n              ((Category.comp_id _).trans (Category.id_comp _).symm))\n            (by simp) :\n            Scheme.Etale.mk (𝟙 (pullback (g i) (g j))) ⟶\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst (g i) (g j))).obj\n                (Scheme.Etale.mk (𝟙 (T i)))).op\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst (g i) (g j))) _\n            ((T i).smallGrothendieckTopology @Etale)\n            ((pullback (g i) (g j)).smallGrothendieckTopology @Etale)).unit.app\n              ((Scheme.etaleSetPullback (g i)).obj F)).hom.app\n            (op (Scheme.Etale.mk (𝟙 (T i)))) (s i))) =\n        Eq.mp (congrArg (fun k : pullback (g i) (g j) ⟶ S ↦\n          ((Scheme.etaleSetPullback k).obj F).obj.obj\n            (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j))))))\n          (pullback.condition (f := g i) (g := g j)).symm)\n        (((Classical.choose etaleSetInverseImageCompositionUnits.2.2\n            S (T j) (pullback (g i) (g j)) (g j) (pullback.snd (g i) (g j))).hom.app F).hom.app\n          (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j)))))\n          (((Scheme.etaleSetPullback (pullback.snd (g i) (g j))).obj\n              ((Scheme.etaleSetPullback (g j)).obj F)).obj.map\n            (MorphismProperty.Over.homMk\n              (pullback.lift (pullback.snd (g i) (g j)) (𝟙 (pullback (g i) (g j)))\n                ((Category.comp_id _).trans (Category.id_comp _).symm))\n              (by simp) :\n              Scheme.Etale.mk (𝟙 (pullback (g i) (g j))) ⟶\n                (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd (g i) (g j))).obj\n                  (Scheme.Etale.mk (𝟙 (T j)))).op\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd (g i) (g j))) _\n              ((T j).smallGrothendieckTopology @Etale)\n              ((pullback (g i) (g j)).smallGrothendieckTopology @Etale)).unit.app\n                ((Scheme.etaleSetPullback (g j)).obj F)).hom.app\n              (op (Scheme.Etale.mk (𝟙 (T j)))) (s j)))))\n    (V : S.Etale) (t : F.obj.obj (op V))\n    (E : ∀ j, (pullback V.hom (g j)).Opens)\n    (hE : ∀ j (A : (T j).Etale)\n      (m : A ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (g j)).obj V),\n      Set.range m.left ⊆ (E j : Set (pullback V.hom (g j) : Scheme.{u})) ↔\n        ((Scheme.etaleSetPullback (g j)).obj F).obj.map m.op\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ (g j)) (Type (u + 1))\n            (S.smallGrothendieckTopology @Etale)\n            ((T j).smallGrothendieckTopology @Etale)).unit.app F).hom.app (op V) t) =\n        ((Scheme.etaleSetPullback (g j)).obj F).obj.map\n          (m ≫ MorphismProperty.Over.homMk\n            (pullback.snd V.hom (g j)) (Category.comp_id _) :\n            A ⟶ Scheme.Etale.mk (𝟙 (T j))).op (s j)) :\n    ∀ j k,\n      (pullback.fst (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))) ⁻¹ᵁ E j =\n        (pullback.snd (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))) ⁻¹ᵁ E k",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T165527-L-2938143",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T165527-L-2938143",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
