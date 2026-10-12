@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-presheaf-cech-ext-edge-injective",
+ "kind": "statement",
+ "title": "The presheaf Cech Ext edge map is injective after lower rows vanish",
+ "statement": "Let $(\\mathcal C,J)$, $F$, sheafification, value universe $v$ and Ext universe $w$ be as in [def-weil-pbc-sites-and-cohomology]. Write $Z[P]=(\\mathbb Z[P])^\\#$ for a $v$-small presheaf of sets. Let $f:E\\to P$ be a locally surjective map of such presheaves and $q>0$. Suppose $\\mathrm{Ext}^b(Z[Q],F)=0$ for every $v$-small presheaf $Q$ and every $0<b<q$. Suppose also $H^q(\\check C^\\bullet(f,F))=0$ for the complex of [def-sc-presheaf-cech-complex]. Then pullback along $Z[f]$ is injective from $\\mathrm{Ext}^q(Z[P],F)$ to $\\mathrm{Ext}^q(Z[E],F)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 079Z (presheaf Cech descent), and hypercovering.tex Tag 01GC (exact augmented free nerve); read at https://stacks.math.columbia.edu/tag/079Z and https://stacks.math.columbia.edu/tag/01GC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Objectwise replace the target of f by its image. The nerve is unchanged and the map onto that image is surjective. Apply the set free-nerve resolution with ring Z. Exact sheafification and local surjectivity identify the sheafified augmentation with Z[P]. This gives an exact augmented sheafified free nerve.",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite-degree derived Hom filtration of this resolution, as in Tag 079Z, with E1^(a,b)=Ext^b(Z[E_a],F), converging to Ext^(a+b)(Z[P],F). Here E_a is the (a+1)-fold presheaf fibre product. It can be constructed through Yoneda Ext and the syzygies of the exact augmentation, without enough injectives. The adjunctions identify its zero row and differential with presheafCechComplex f F.obj.",
+   "uses": [
+    "def-sc-presheaf-cech-complex",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lower-row assumption kills 0<b<q; the Cech assumption kills E2^(q,0). Thus all associated graded pieces of total degree q except (0,q) vanish. The finite filtration embeds Ext^q(Z[P],F) into E-infinity^(0,q). No differential enters column zero, so this embeds into E1^(0,q)=Ext^q(Z[E],F). The augmentation identifies this composite with pullback along Z[f], proving injectivity. For q=1 the lower-row condition is vacuous. Equivalently, set A_i=Z[E_i], K_(-1)=Z[P], and K_i=ker(A_i -> K_(i-1)). For a class in the kernel of pullback to A_0, the Yoneda Ext long exact sequences of 0 -> K_i -> A_i -> K_(i-1) -> 0 and the lower Ext vanishing lift it successively to g:K_(q-1) -> F. Its composite with A_q -> K_(q-1) is a degree-q cocycle. Cech vanishing makes this a coboundary t d_q. Cancelling the epimorphism A_q -> K_(q-1) shows that g extends to A_(q-1), so its connecting class and the original class vanish. This direct argument justifies the consequence without enough injectives or the construction of an infinite spectral sequence, and includes q=1.",
+   "uses": [
+    "def-sc-presheaf-cech-complex",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 079Z (presheaf Cech descent), and hypercovering.tex Tag 01GC (exact augmented free nerve); read at https://stacks.math.columbia.edu/tag/079Z and https://stacks.math.columbia.edu/tag/01GC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A positive Ext class from a free abelian sheaf is killed by a locally surjective presheaf map",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of all presheaf Cech nerve cohomology implies vanishing of higher sheaf cohomology",
+   "results": "Eight hits including Sheaf.cohomologyPresheaf, Sheaf.H, MayerVietorisSquare.shortComplex_exact, and K-injectivity; none states local killing or the presheaf Cech Ext edge injection.",
+   "verdict": "No exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp",
+   "results": "Ext.comp, mk₀_comp_mk₀, comp_zero and the associativity API are available. No local-killing or positive-degree edge injectivity theorem.",
+   "verdict": "No exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "efface|exists.*[Ee]pi|[Ee]pi.*exists; 079Z|06XU|Yoneda extension|Cech.*[Ee]xt",
+   "results": "Read Mathlib DerivedCategory/Ext/Basic, ExactSequences, EnoughInjectives, EnoughProjectives, Sites/LocallySurjective and EpiMono. No local-killing or presheaf descent edge theorem. WeilConjectures.CategoryTheory.Sites.CechCriterion requires EnoughInjectives, larger coefficient universe and slice finite products. The DAG has no separate node for these two steps.",
+   "verdict": "No exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.PresheafCechVanishingCriterion",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "Second paragraph, via the presheaf-nerve vanishing criterion; its local-killing and edge-injection steps.",
+   "via": [
+    "lem-sc-presheaf-cech-vanishing-criterion",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafCechExtEdgeInjective",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafCechExtEdgeInjective.lean",
+  "declaration": "CategoryTheory.Sheaf.presheafCech_ext_edge_injective",
+  "statement": "theorem presheafCech_ext_edge_injective\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{v}]\n    [HasExt.{w'} (Sheaf J AddCommGrpCat.{v})]\n    (F : Sheaf J AddCommGrpCat.{v}) (f : Arrow (Cᵒᵖ ⥤ Type v))\n    (hf : Presheaf.IsLocallySurjective J f.hom) (q : ℕ) (hq : 0 < q)\n    (hlower : ∀ (P : Cᵒᵖ ⥤ Type v) (b : ℕ), 0 < b → b < q →\n      Subsingleton\n        (Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F b))\n    (hcech : IsZero ((presheafCechComplex f F.obj).homology q)) :\n    Function.Injective (fun x :\n      Ext ((presheafToSheaf J AddCommGrpCat).obj (f.right ⋙ AddCommGrpCat.free)) F q ↦\n        (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map\n          (Functor.whiskerRight f.hom AddCommGrpCat.free))).comp x (Nat.zero_add q))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135325-L-1696627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135325-L-1696627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

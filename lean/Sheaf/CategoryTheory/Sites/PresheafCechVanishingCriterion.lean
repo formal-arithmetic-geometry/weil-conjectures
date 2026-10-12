@@ -7,7 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.Sites.PresheafCechComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicTopology.SetCechNerveFreeResolution
+import Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling
+import Sheaf.CategoryTheory.Sites.PresheafCechExtEdgeInjective
 
 /-!
 # A vanishing criterion using Čech nerves of presheaf maps
@@ -67,6 +68,25 @@ theorem isZero_H'_of_presheafCech_vanishing
     (hcech : ∀ (f : Arrow (Cᵒᵖ ⥤ Type v)) (q : ℕ), 0 < q →
       IsZero ((presheafCechComplex f F.obj).homology q))
     (U : C) (q : ℕ) (hq : 0 < q) : IsZero (H' F q U) := by
-  sorry
+  have hfree (n : ℕ) : ∀ (P : Cᵒᵖ ⥤ Type v), 0 < n →
+      Subsingleton
+        (Abelian.Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F n) := by
+    induction n using Nat.strong_induction_on with
+    | h n ih =>
+      intro P hn
+      apply subsingleton_of_forall_eq 0
+      intro x
+      obtain ⟨E, f, hf, hx⟩ := exists_presheaf_ext_local_killing F P n hn x
+      have hinj := presheafCech_ext_edge_injective F (Arrow.mk f) hf n hn
+        (fun Q b hb hbn ↦ ih b hbn Q hb) (hcech (Arrow.mk f) n hn)
+      apply hinj
+      change (Abelian.Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
+        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add n) =
+          (Abelian.Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
+            (Functor.whiskerRight f AddCommGrpCat.free))).comp 0 (Nat.zero_add n)
+      rw [Abelian.Ext.comp_zero]
+      exact hx
+  have : Subsingleton (H' F q U) := hfree q (yoneda.obj U) hq
+  exact AddCommGrpCat.isZero_of_subsingleton (H' F q U)
 
 end CategoryTheory.Sheaf

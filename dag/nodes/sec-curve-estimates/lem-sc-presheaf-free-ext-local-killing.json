@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-presheaf-free-ext-local-killing",
+ "kind": "statement",
+ "title": "Positive Ext classes from free abelian sheaves are killed by presheaf covers",
+ "statement": "Let $(\\mathcal C,J)$ be a site with $\\mathcal C:\\mathrm{Type}\\,u$ and morphisms in $\\mathrm{Type}\\,v$, admitting sheafification of $v$-small abelian presheaves and $\\mathrm{Ext}$ in universe $w$ [def-weil-pbc-sites-and-cohomology]. For a $v$-small presheaf of sets $P$, write $Z[P]=(\\mathbb Z[P])^\\#$, where $\\mathbb Z[P]$ is the objectwise free abelian presheaf and $(-)^\\#$ is sheafification. For every abelian sheaf $F$, $q>0$, and $x\\in\\mathrm{Ext}^q(Z[P],F)$ there are a $v$-small presheaf $E$ and a locally surjective map $f:E\\to P$ such that pullback along $Z[f]:Z[E]\\to Z[P]$ sends $x$ to zero.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU (Yoneda representatives), with the generator-lifting construction in the parent node proof step 1, following sites-cohomology.tex Tag 03F9; read at https://stacks.math.columbia.edu/tag/06XU and https://stacks.math.columbia.edu/tag/03F9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Represent x by a finite degree-q Yoneda extension (Tag 06XU). Let G -> Z[P] be its final epimorphism. For each V form E(V)={(p,g) in P(V) times G(V) | image(g)=generator(p)}. The restriction maps act coordinatewise, and naturality preserves this equality. Thus E is a presheaf in the same value universe.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Projection f:E -> P is locally surjective by local lifting along the epimorphism of abelian sheaves G -> Z[P]. The second projection extends, by the free abelian and sheafification adjunctions, to Z[E] -> G over Z[P]. Hence the last short exact sequence of the Yoneda extension splits after pullback along Z[f]. Its class is zero, and composing with the remaining extension class yields zero. Degree one uses just the split last sequence.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU (Yoneda representatives), with the generator-lifting construction in the parent node proof step 1, following sites-cohomology.tex Tag 03F9; read at https://stacks.math.columbia.edu/tag/06XU and https://stacks.math.columbia.edu/tag/03F9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A positive Ext class from a free abelian sheaf is killed by a locally surjective presheaf map",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of all presheaf Cech nerve cohomology implies vanishing of higher sheaf cohomology",
+   "results": "Eight hits including Sheaf.cohomologyPresheaf, Sheaf.H, MayerVietorisSquare.shortComplex_exact, and K-injectivity; none states local killing or the presheaf Cech Ext edge injection.",
+   "verdict": "No exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp",
+   "results": "Ext.comp, mk₀_comp_mk₀, comp_zero and the associativity API are available. No local-killing or positive-degree edge injectivity theorem.",
+   "verdict": "No exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "efface|exists.*[Ee]pi|[Ee]pi.*exists; 079Z|06XU|Yoneda extension|Cech.*[Ee]xt",
+   "results": "Read Mathlib DerivedCategory/Ext/Basic, ExactSequences, EnoughInjectives, EnoughProjectives, Sites/LocallySurjective and EpiMono. No local-killing or presheaf descent edge theorem. WeilConjectures.CategoryTheory.Sites.CechCriterion requires EnoughInjectives, larger coefficient universe and slice finite products. The DAG has no separate node for these two steps.",
+   "verdict": "No exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.PresheafCechVanishingCriterion",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "Second paragraph, via the presheaf-nerve vanishing criterion; its local-killing and edge-injection steps.",
+   "via": [
+    "lem-sc-presheaf-cech-vanishing-criterion",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafFreeExtLocalKilling.lean",
+  "declaration": "CategoryTheory.Sheaf.exists_presheaf_ext_local_killing",
+  "statement": "theorem exists_presheaf_ext_local_killing\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{v}]\n    [HasExt.{w'} (Sheaf J AddCommGrpCat.{v})]\n    (F : Sheaf J AddCommGrpCat.{v}) (P : Cᵒᵖ ⥤ Type v)\n    (q : ℕ) (hq : 0 < q)\n    (x : Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F q) :\n    ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P), Presheaf.IsLocallySurjective J f ∧\n      (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map\n        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135325-L-1696627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135325-L-1696627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
