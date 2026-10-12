@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Ideal.Colon
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.LocalCompletionQuotient
+import Sheaf.RingTheory.FlatAssociatedPrimeDVR
+import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 
 /-!
 # DVR localizations of the completion at associated primes
@@ -67,6 +69,18 @@ theorem isDiscreteValuationRing_atPrime_of_isAnalyticallyUnramified
           p.map (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)))).colon {z}) :
     ∃ (_ : IsDomain (Localization.AtPrime q)),
       IsDiscreteValuationRing (Localization.AtPrime q) := by
-  sorry
+  let A := AdicCompletion (IsLocalRing.maximalIdeal R) R
+  have : IsNoetherianRing A := AdicCompletion.isNoetherianRing _
+  obtain ⟨_, _, _, _, _, _, e, _⟩ :=
+    exists_local_completion_quotient R (R ⧸ p) (Ideal.Quotient.mk p)
+      Ideal.Quotient.mk_surjective
+  have : IsReduced
+      (AdicCompletion ((IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk p))
+        (R ⧸ p)) := hp.2
+  have : IsReduced (A ⧸ p.map (algebraMap R A)) := by
+    have h := isReduced_of_injective e e.injective
+    rw [Ideal.mk_ker] at h
+    exact h
+  exact isDiscreteValuationRing_atPrime_of_flat_reduced_quotient R A p q hq
 
 end AdicCompletion

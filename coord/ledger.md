@@ -10158,3 +10158,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:51 L: merged deliver/D3/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison (stage 3; reviewer PASS; after a return; landing 20261012T235110-L-2171290 (proof); batch 20261012T235109; modules 1; new nodes 0)
 - 23:51 L: merged deliver/E2/Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDepthTwoPurity (stage 3; reviewer PASS; first push; landing 20261012T235110-L-2171388 (interface); batch 20261012T235109; modules 3; new nodes 2)
 - 23:51 L: merged deliver/F1/Sheaf.AlgebraicGeometry.IdealPowersReesMultiplicationComponent (stage 3; reviewer PASS; after a return; landing 20261012T235111-L-2171533 (proof); batch 20261012T235109; modules 1; new nodes 0)
+- 23:51 L: merged deliver/G2/Sheaf.RingTheory.CodimensionOneAnalyticallyUnramified (stage 3; reviewer PASS; first push; landing 20261012T235111-L-2171634 (interface); batch 20261012T235109; modules 2; new nodes 1)

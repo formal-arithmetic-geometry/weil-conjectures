@@ -32,107 +32,40 @@
  ],
  "proof": [
   {
-   "text": "Set-up. The ring $R^\\wedge$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian], and the canonical map $R\\to R^\\wedge$ is flat by [lem-weil-pbc-noetherian-completion-flat]. Fix an associated prime $\\mathfrak q\\subset R^\\wedge$ of $B:=R^\\wedge/\\mathfrak pR^\\wedge$ and put $C=(R^\\wedge)_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]: a local ring with maximal ideal $\\mathfrak qC$, and Noetherian by [lem-weil-pbc-localization-noetherian] (applied to $R^\\wedge$ and $S=R^\\wedge\\setminus\\mathfrak q$).",
+   "text": "Put A = the maximal-ideal-adic completion. AdicCompletion.isNoetherianRing supplies its Noetherian instance. AdicCompletion.flat_of_isNoetherian supplies its flat R-module instance.",
    "uses": [
     "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-noetherian-completion-flat",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-noetherian"
+    "lem-weil-pbc-noetherian-completion-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'As R -> R^ is faithfully flat' (Lemma 00MB, lemma-completion-flat; Lemma 0316, lemma-completion-Noetherian-Noetherian, for R^ Noetherian, used implicitly)"
-   }
+   "elementary": false
   },
   {
-   "text": "$B=R^\\wedge/\\mathfrak pR^\\wedge$ is a reduced ring. Apply [lem-weil-pbc-local-completion-quotient] to the Noetherian local ring $(R,\\mathfrak m)$ and the quotient map $\\lambda:R\\to R/\\mathfrak p$ (kernel $J=\\mathfrak p$, $\\mathfrak n=\\mathfrak m/\\mathfrak p$): it gives a ring isomorphism $R^\\wedge/\\mathfrak pR^\\wedge\\xrightarrow{\\sim}(R/\\mathfrak p)^\\wedge$ onto the $(\\mathfrak m/\\mathfrak p)$-adic completion of $R/\\mathfrak p$. The latter is reduced since $\\mathfrak p$ is analytically unramified (hypothesis (2), [def-weil-pbc-analytically-unramified]); a ring isomorphic to a reduced ring is reduced.",
+   "text": "Apply exists_local_completion_quotient to R -> R/p. It supplies an isomorphism from A/pA to the completion of R/p at the image of the maximal ideal. Ideal.mk_ker identifies the quotient-map kernel with p. Analytic unramifiedness makes the target reduced; isReduced_of_injective transports reducedness to A/pA along this isomorphism.",
    "uses": [
     "lem-weil-pbc-local-completion-quotient",
     "def-weil-pbc-analytically-unramified"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'Assumption (2) says that R^/pR^ is a reduced ring' (the identification (R/p)^ = R^/pR^ is Lemma 00MA (3), lemma-completion-tensor, here through the existing node lem-weil-pbc-local-completion-quotient)"
-   }
+   "elementary": false
   },
   {
-   "text": "The maximal ideal of $C$ is $\\mathfrak pC$. Write $\\mathfrak q=\\operatorname{Ann}_{R^\\wedge}(\\bar z)$ with $\\bar z\\in B$; $\\bar z\\neq0$ since $\\mathfrak q\\neq R^\\wedge$, and $\\mathfrak pR^\\wedge\\subseteq\\mathfrak q$ since $\\mathfrak pR^\\wedge$ kills $B$. Let $z\\in R^\\wedge$ be a lift of $\\bar z$. Then $z\\notin\\mathfrak q$: otherwise $z\\bar z=\\bar z^2=0$ in $B$, so $\\bar z=0$ because $B$ is reduced (Step 2), a contradiction. For $a\\in\\mathfrak q$ we have $a\\bar z=0$, i.e. $az\\in\\mathfrak pR^\\wedge$, so in $C$ the element $a/1=(az/1)(z/1)^{-1}$ lies in $\\mathfrak pC$ ($z/1$ is a unit as $z\\notin\\mathfrak q$). Hence $\\mathfrak qC\\subseteq\\mathfrak pC\\subseteq\\mathfrak qC$. (This replaces the source's detour 'an associated prime is the same thing as a minimal prime over pR^': only the consequence $\\mathfrak qC=\\mathfrak pC$ is used.)",
+   "text": "Apply the algebraic flat-associated-prime theorem to R, A, p and q, using the just-established Noetherianity, flatness and reducedness and the unchanged annihilator witness hq.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-flat-associated-prime-dvr"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'Hence an associated prime q ... is the same thing as a minimal prime over pR^. In particular we see that the maximal ideal of (R^)_q is p(R^)_q'"
-   }
-  },
-  {
-   "text": "Every $s\\in R\\setminus\\mathfrak p$ has image outside $\\mathfrak q$, hence a unit in $C$. Since $R/\\mathfrak p$ is a domain, multiplication by $s$ is an injective $R$-linear map $R/\\mathfrak p\\to R/\\mathfrak p$; tensoring with the flat $R$-module $R^\\wedge$ (Step 1, [def-weil-pbc-flat-ring-map]) keeps it injective, and $(R/\\mathfrak p)\\otimes_RR^\\wedge\\cong R^\\wedge/\\mathfrak pR^\\wedge=B$ (right exactness of $-\\otimes_RR^\\wedge$ on $\\mathfrak p\\to R\\to R/\\mathfrak p\\to0$), compatibly with multiplication by $s$. So $s$ is a nonzerodivisor on $B$. If $s\\in\\mathfrak q=\\operatorname{Ann}_{R^\\wedge}(\\bar z)$ then $s\\bar z=0$ with $\\bar z\\neq0$, impossible. Hence $s\\notin\\mathfrak q$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-completion-flat",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'By the above we see that x in (R^)_q generates the maximal ideal' (the fact q lies over p which this needs is written out from the flatness of R -> R^, Lemma 00MB)"
-   }
-  },
-  {
-   "text": "Choice of $x$ and $\\mathfrak qC=xC$. By hypothesis (1) $\\mathfrak pR_{\\mathfrak p}=\\pi R_{\\mathfrak p}$ with $\\pi\\neq0$; write $\\pi=y/t$ with $y\\in\\mathfrak p$, $t\\in R\\setminus\\mathfrak p$ [def-weil-pbc-localization-at-prime]; as $t/1$ is a unit, $x:=y\\in\\mathfrak p$ satisfies $xR_{\\mathfrak p}=\\mathfrak pR_{\\mathfrak p}$ and $x/1\\neq0$. As $R$ is Noetherian [def-weil-pbc-noetherian-ring], $\\mathfrak p=(p_1,\\dots,p_k)$. For each $i$, $p_i/1=x\\,r_i/t_i$ in $R_{\\mathfrak p}$, so $u_i(t_ip_i-xr_i)=0$ for some $u_i\\notin\\mathfrak p$. Put $s=\\prod_iu_it_i\\in R\\setminus\\mathfrak p$ ($\\mathfrak p$ prime); then $sp_i=x\\,r_iu_i\\prod_{j\\neq i}u_jt_j\\in xR$ for all $i$, so $s\\mathfrak p\\subseteq xR$, hence $s\\,\\mathfrak pR^\\wedge\\subseteq xR^\\wedge$. By Step 4, $s$ is a unit in $C$, so $\\mathfrak pC=xC$, and by Step 3 the maximal ideal of $C$ is $\\mathfrak qC=xC$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'Choose x in R such that xR_p = pR_p. By the above we see that x in (R^)_q generates the maximal ideal'"
-   }
-  },
-  {
-   "text": "$x$ is a nonzerodivisor of $C$. Let $K=\\operatorname{Ann}_R(x)$. Since $R_{\\mathfrak p}$ is a domain and $x/1\\neq0$, every $k\\in K$ has $k/1=0$, i.e. $uk=0$ for some $u\\notin\\mathfrak p$ [def-weil-pbc-localization-at-prime]; $K$ is finitely generated ($R$ Noetherian, [def-weil-pbc-noetherian-ring]), so taking the product of such $u$ for generators gives $t\\in R\\setminus\\mathfrak p$ with $tK=0$. Multiplication by $x$ induces an injective $R$-linear map $R/K\\to R$; tensoring with the flat $R^\\wedge$ ([lem-weil-pbc-noetherian-completion-flat], [def-weil-pbc-flat-ring-map]) and using $(R/K)\\otimes_RR^\\wedge\\cong R^\\wedge/KR^\\wedge$ shows that multiplication by $x$ on $R^\\wedge/KR^\\wedge$ is injective, i.e. $\\operatorname{Ann}_{R^\\wedge}(x)=KR^\\wedge$; hence $t\\operatorname{Ann}_{R^\\wedge}(x)=0$. Now if $(x/1)(a/v)=0$ in $C$, then $wxa=0$ for some $w\\notin\\mathfrak q$, so $wa\\in\\operatorname{Ann}_{R^\\wedge}(x)$ and $twa=0$; since $t\\notin\\mathfrak q$ (Step 4) and $\\mathfrak q$ is prime, $tw\\notin\\mathfrak q$ and $a/v=0$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-noetherian-completion-flat",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'As R -> R^ is faithfully flat we see that x is a nonzerodivisor in (R^)_q' (written out: only flatness of R -> R^, Lemma 00MB, and x/1 != 0 in the domain R_p are used)"
-   }
-  },
-  {
-   "text": "$C$ is a discrete valuation ring. $C$ is a nonzero Noetherian local ring (Step 1) whose maximal ideal is $xC$ (Step 5) with $x$ a nonzerodivisor (Step 6); in particular $x\\neq0$ in $C$ since $x\\cdot1\\neq0$. $C$ is a domain: $xC$ lies in the maximal ideal, which is the Jacobson radical of the local ring $C$, so [lem-weil-pbc-krull-intersection-jacobson] (ring $C$, ideal $xC$, module $C$) gives $\\bigcap_{n\\ge0}x^nC=0$. For $a\\neq0$ in $C$ there is thus a largest $n\\ge0$ with $a\\in x^nC$; write $a=x^nu$; then $u\\notin xC$ (else $a\\in x^{n+1}C$), so $u$ is a unit, $C$ being local with maximal ideal $xC$. Likewise $b=x^mv$ with $v$ a unit for $b\\neq0$. Then $ab=x^{n+m}uv$, and $x^{n+m}$ is a nonzerodivisor (a product of nonzerodivisors), so $ab=0$ would give $uv=0$, impossible for a unit in the nonzero ring $C$. Hence $C$ is a Noetherian local integral domain whose maximal ideal $\\mathfrak qC$ is generated by the single nonzero element $x$, i.e. a discrete valuation ring in the sense of the statement.",
-   "uses": [
-    "lem-weil-pbc-krull-intersection-jacobson"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), lines 45906-45914: 'Hence we win' (written out: a Noetherian local ring whose maximal ideal is generated by a nonzerodivisor is a domain by Krull's intersection theorem, Lemma 00IP, here in its Jacobson-radical form 00IQ (2); then it is a DVR by the definition used in the statement, Lemma 00PD (4))"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-weil-pbc-noetherian-completion-flat",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-noetherian",
   "lem-weil-pbc-local-completion-quotient",
   "def-weil-pbc-analytically-unramified",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-krull-intersection-jacobson"
+  "lem-weil-pbc-flat-associated-prime-dvr"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 032Z (lemma-codimension-1-analytically-unramified), proof, lines 45906-45914; the steps the source compresses ('by the above', 'faithfully flat', 'hence we win') are written out"
+  "place": "Tag 032Z: completion and reduced-quotient reduction; the remaining algebraic argument is recorded as lem-weil-pbc-flat-associated-prime-dvr"
  },
  "mathlib_searches": [
   {
@@ -204,5 +137,15 @@
   "group": "F1",
   "result": "pass",
   "note": "Noetherian local R, m-adic AdicCompletion; p prime, IsDomain+IsDVR R_p = node (1) via TFAE; hp = landed Ideal.IsAnalyticallyUnramified (R/p at image of m); q prime with q = (⊥).colon {z} in R^/pR^ = literal Ann(z) (#check mem_colon_singleton, a•z=0); conclusion ∃ IsDomain, IsDVR (R^)_q"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T235111-L-2171634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
