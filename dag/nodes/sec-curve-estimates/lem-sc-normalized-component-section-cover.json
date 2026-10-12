@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Let T be the union of pairwise intersections of the finite closed cover. It is closed. Each constituent is a closed discrete subset; a finite union of closed discrete subsets is discrete (around a point remove the finitely many other closed subsets and isolate it in those containing it). Away from T the components are disjoint open subschemes, with the structure-section product bijection.",
+   "text": "Let T be the finite union of pairwise intersections. Use glue_component_reduced_cover_sections to obtain the open, pairwise disjoint component pieces off T and the structure-section product bijection. Closed immersion images are closed. Apply Mathlib IsDiscrete.iUnion three times to the finite closed discrete pairwise intersections, obtaining that T is discrete.",
    "uses": [
     "lem-sc-glue-component-reduced-cover-sections"
    ],
@@ -39,12 +39,13 @@
    }
   },
   {
-   "text": "Around each t in T choose U_t meeting T only at t. Remove the components not containing t. Each prescribed section on an incident component is nonzero in the residue-field fibre, hence, for an invertible module, a free generator on a neighborhood. Shrink U_t simultaneously for the finitely many incident components and use these sections as frames. Cover the complement of T by component trivializing opens. Index the disjoint collection of point neighborhoods and component opens by a type in universe max(u,v), using points and finite-component trivializing opens. For components with empty preimages use their unique section as the vacuous free generator.",
+   "text": "For t in T, isolate t by an ambient open V using Mathlib isDiscrete_iff_forall_mem_exists_isOpen. On every component incident to t, the prescribed section generates at its unique preimage, by the nonvanishing/local-generation equivalence. Set B_a to the closed image of the complement of the generating locus of s_a, and take U_t = V intersect the complement of the finite union of B_a. This open contains t, meets T only at t, and each component preimage lies in its generating locus. Restrict the free generator s_a on its generating locus to obtain all normalized frames, including the empty component preimages.",
    "uses": [
     "def-sc-invertible-module",
     "def-sc-local-free-generator",
     "def-weil-pbc-ample-invertible-module",
-    "lem-sc-nonvanishing-iff-generates-at"
+    "lem-sc-nonvanishing-iff-generates-at",
+    "def-sc-section-generating-locus"
    ],
    "elementary": false,
    "source": {
@@ -53,10 +54,11 @@
    }
   },
   {
-   "text": "On a point neighborhood U_t all nonempty component preimages have their frame equal to the restricted prescribed section, so the single function 1 expresses every s_a. On a component open away from T, take its unique frame coefficient and transfer the family of coefficients (including the unique empty-component values) to a function f_b by the reduced-cover bijection. Distinct point neighborhoods intersect away from T, and every other member avoids T; therefore every open W in a distinct overlap avoids T and the reduced-cover bijection applies. There are at most a family indexed by points of Y and a family indexed by a component and one of its points; this index lies in universe max(u,v). With empty Y choose the empty cover.",
+   "text": "For each x off T, choose a component a and its unique preimage z. The component piece D_a = T-complement intersect image(i_a) is open. Choose a free-generator neighborhood W of z contained in the preimage of D_a. The ambient open U_x = D_a intersect the complement of image(i_a)(W-complement) contains x and has component-a preimage contained in W. Restrict its frame. Every other component preimage is empty by pairwise disjointness; use its zero section, proved to be a free generator by sheaf separatedness on the empty open. Use the coefficients of the prescribed sections in these frames and the reduced-cover surjection to obtain f_x. On U_t use f_t = 1. Index both families by ULift(T) plus ULift(T-complement), a type in max(u,v), and prove they cover by membership cases. Distinct point neighborhoods overlap off T because each meets T only at its distinguished point. All other members avoid T. Therefore any open in a distinct overlap avoids T, and the reduced-cover section bijection proves the final clause. The same construction handles empty T, empty Y and an empty component index.",
    "uses": [
     "lem-sc-glue-component-reduced-cover-sections",
-    "def-sc-local-free-generator"
+    "def-sc-local-free-generator",
+    "def-sc-invertible-module"
    ],
    "elementary": false,
    "source": {
@@ -68,6 +70,7 @@
  "proof_deps": [
   "def-sc-invertible-module",
   "def-sc-local-free-generator",
+  "def-sc-section-generating-locus",
   "def-weil-pbc-ample-invertible-module",
   "lem-sc-glue-component-reduced-cover-sections",
   "lem-sc-nonvanishing-iff-generates-at"
@@ -134,10 +137,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T144149-L-2108631",
-  "kind": "interface",
+  "landing": "20261012T184344-L-4020117",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
