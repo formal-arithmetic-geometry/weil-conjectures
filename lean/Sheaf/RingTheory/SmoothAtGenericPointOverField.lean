@@ -1,51 +1,46 @@
-/-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group E1
--/
 module
-
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Sheaf.FieldTheory.SeparableExtension
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
 
-/-!
-# Smoothness at the generic point over a field
-
-Source: Stacks Project, Algebra, Lemma 07ND, separable fraction field implies smoothness,
-specialized to a field base; Lemma 00TV and Definition 00TB
-(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field).
--/
-
 @[expose] public section
-
 universe u v w
-
 namespace Algebra
 
-/-- A finite type domain over a field with separable fraction field is smooth at the zero prime.
-Here `IsSmoothAtPrime` means that there is a nonzero `g : S` with `Localization.Away g`
-smooth over `k`, as in Stacks Project, Algebra, Definition 00TB.
-Source: Stacks Project, Algebra, Lemma 07ND, the reverse implication with field base
-(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field).
+/-- Separability of the fraction field transfers to the residue field at the generic point.
+Source: Stacks Project, Algebra, Lemma 07ND. The proof identifies the residue field at
+the zero prime with the fraction field through the localization and residue-field
+isomorphisms for a domain, then transports `IsSeparableExtension` across that
+field isomorphism. The required compatibility with the given `k`-algebra structures
+follows from the canonical maps in the localization construction.
+(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field-residue-separable) -/
+theorem separableExtension_bot_residueField
+    (k : Type u) (S : Type v) (L : Type w)
+    [Field k] [CommRing S] [IsDomain S] [Field L]
+    [Algebra k S] [Algebra S L] [Algebra k L] [IsScalarTower k S L]
+    [FiniteType k S] [IsFractionRing S L] (hsep : IsSeparableExtension k L) :
+    IsSeparableExtension k (⊥ : Ideal S).ResidueField := by
+  sorry
 
-Proof, step 1: localization of the domain at the zero prime is its fraction field `L`,
-and its residue field is also `L` (`def-weil-pbc-localization-at-prime`). A field is
-regular local (`lem-weil-pbc-field-regular-ring`), and the residue extension is separable
-by `hsep` (`def-weil-pbc-separable-field-extension`).
-Step 2: apply `lem-weil-pbc-regular-local-separable-residue-smooth`, the regular-to-smooth
-direction of Stacks 00TV, using finite type, regularity, and separability from step 1.
-This gives smoothness at the zero prime (`def-weil-pbc-singular-ideal`), namely a
-principal localization at a nonzero element which is smooth over `k`
-(`def-weil-pbc-smooth-ring-map`). -/
+/-- A finite type domain over a field with separable fraction field is smooth at the zero prime.
+Source: Stacks Project, Algebra, Lemma 07ND.
+(blueprint: lem-weil-pbc-smooth-at-generic-point-over-field) -/
 theorem smoothAtPrime_bot_of_isSeparable_fractionRing
     (k : Type u) (S : Type v) (L : Type w)
     [Field k] [CommRing S] [IsDomain S] [Field L]
     [Algebra k S] [Algebra S L] [Algebra k L] [IsScalarTower k S L]
     [FiniteType k S] [IsFractionRing S L] (hsep : IsSeparableExtension k L) :
     IsSmoothAtPrime k (⟨(⊥ : Ideal S), inferInstance⟩ : PrimeSpectrum S) := by
-  sorry
-
+  let _ : IsLocalization (⊥ : Ideal S).primeCompl (FractionRing S) := by
+    rw [Ideal.primeCompl_bot]
+    infer_instance
+  let e : Localization.AtPrime (⊥ : Ideal S) ≃+* FractionRing S :=
+    (IsLocalization.algEquiv (⊥ : Ideal S).primeCompl
+      (Localization.AtPrime (⊥ : Ideal S)) (FractionRing S)).toRingEquiv
+  have hreg : IsRegularLocalRing (Localization.AtPrime (⊥ : Ideal S)) :=
+    IsRegularLocalRing.of_ringEquiv (R := FractionRing S) e.symm
+  exact (regularLocal_iff_smoothAtPrime k S (⊥ : Ideal S)
+    (separableExtension_bot_residueField k S L hsep)).mpr hreg
 end Algebra
