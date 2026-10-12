@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-etale-complex-graded-class-descent",
+ "kind": "lemma",
+ "title": "Stage representatives on the finite hypercohomology graded pieces",
+ "statement": "Let I be a small cofiltered category, D:I→Scheme a diagram of quasi-compact quasi-separated schemes with affine transitions and limit cone c. Let F_i be complexes of abelian etale sheaves with compatible unital inverse-image transitions and F_i^n=0 for n<a, using the canonical composition isomorphisms. Let G:I^op→CochainComplex on c.pt be the inverse-image diagram with its compatible isomorphisms eG, and L its colimit cocone. Fix p in Z. Let P be canonical degree-p derived pullback (specified by the derived adjunction unit), H:I^op→AddCommGrpCat the degree-p stage hypercohomology diagram via compatible isomorphisms eH, and B a cocone on H with an isomorphism eB to the degree-p hypercohomology of L.pt intertwining its legs with P and the colimit complex maps. Set N=max(p+1-a,0). There is an antitone sequence S_n of additive subgroups of B.pt, S_0=B.pt and S_N=0, such that for n<N and x in S_n there exist i and y in H(i) with x-B_i(y) in S_(n+1). This lifts one coset, before combining the graded pieces. The notions are those of [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-sheaves], [def-weil-pbc-inverse-image], [def-weil-pbc-etale-cohomology], and [lem-weil-pbc-inverse-image-composition].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), lines 7783-7828"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Choose a directed cofinal reindexing. Sheaf continuity for each term identifies the first-page colimits with the first page of the limit complex. The common lower bound is preserved by pullback and termwise colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose functorial termwise hypercohomology spectral sequences using the cited first-page, convergence and pullback-functoriality statements. By lem-weil-pbc-filtered-colimit-abelian-groups-exact, filtered colimits preserve homology. Induct on r: the comparison is an isomorphism at r=1 by termwise continuity; if it is an isomorphism at page r in every bidegree, compatibility with differentials identifies the colimit short complex of incoming and outgoing differentials with the target short complex. Preservation of homology and the spectral-sequence page isomorphisms therefore give the comparison isomorphism at page r+1. Vanishing outside s>=a and t>=0 persists because each next page is homology. In (complex,resolution) coordinates the outgoing differential lands at (s+r,t-r+1), and the incoming differential starts at (s-r,t+r-1). Both vanish for r>max(t+1,s-a), uniformly over the stages. Hence the stable-page colimit comparison is an isomorphism.",
+   "uses": [
+    "thm-sp-if-e1",
+    "def-sp-etale-dictionary",
+    "def-sp-kinjective-bridge",
+    "thm-sp-spectral-object-yields",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the degree-p target abutment filtration along eB and let S_n be its step at a+n. Its bounds are whole at a and zero at p+1. If p<a, all degree-p abutments vanish, giving the length-zero case. Otherwise convergence identifies S_n/S_(n+1) with the stable page (a+n,p-a-n). A class there has a stage representative by the stable-page colimit isomorphism. Lift the corresponding stage graded class to its stage filtration step. Pullback functoriality and hP,hH,hB identify its image with B_i(y), and equality of cosets says x-B_i(y) belongs to S_(n+1). No finite abutment induction is used in this step.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-sp-kinjective-bridge",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-etale-dictionary",
+  "def-sp-kinjective-bridge",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "thm-sp-if-e1",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "worker D2 (second reading)",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZM and Tag 015J; graded lifting part only; page and representative details expanded by D2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered cocone abelian groups jointly surjective on associated graded finite filtration surjective",
+   "results": "ModuleCat.FilteredColimits.M.mk_surjective; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity; CategoryTheory.Functor.surjective_toEventualRanges; CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone.surjective; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.epi_f; CategoryTheory.Functor.isMittagLeffler_of_surjective; AddMonCat.FilteredColimits.M.mk_surjective; AdicCompletion.map_surjective_of_mkQ_comp_surjective",
+   "date": "2026-10-12",
+   "verdict": "No matching etale graded-piece descent theorem. Generic colimit representatives do not establish the spectral-sequence comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubgroup, Antitone",
+   "results": "fixingAddSubgroup_antitone; fixedPoints_addSubgroup_antitone; ArchimedeanClass.ballAddSubgroup_antitone; ArchimedeanClass.addSubgroup_antitone; AddSubgroup.lowerCentralSeries_antitone",
+   "date": "2026-10-12",
+   "verdict": "No matching etale graded-piece descent theorem. Generic colimit representatives do not establish the spectral-sequence comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*(surject|descent)|finite.*filtration.*(surject|cocone)",
+   "results": "Mathlib/RingTheory/GradedAlgebra/Noetherian.lean; Mathlib/RingTheory/GradedAlgebra/Basic.lean; Mathlib/RingTheory/GradedAlgebra/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching etale graded-piece descent theorem. Generic colimit representatives do not establish the spectral-sequence comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a uniformly bounded below diagram of etale complexes on an inverse limit of schemes, the finite hypercohomology filtration has stage representatives modulo the next step",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexClassDescent",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "second Proof, sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; complex continuity, specifically stable-page comparison and lifting one abutment graded piece before the final finite induction",
+   "via": [
+    "lem-weil-pbc-etale-complex-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": "none",
+  "slopmaster2": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexGradedClassDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexGradedClassDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_complex_graded_class_rep",
+  "statement": "theorem exists_etale_complex_graded_class_rep\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) ℤ)\n    (φ : ∀ {i j : I} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (F i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))\n        (ComplexShape.up ℤ)).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),\n      φ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ φ g)\n    (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))\n    (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    (eG : ∀ i : I, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i))\n    (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)\n    (p : ℤ)\n    (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      (cohomology AddCommGrpCat.{u + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶\n      (cohomology AddCommGrpCat.{u + 1} X p).obj\n        (DerivedCategory.Q.obj\n          (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K)))\n    (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map\n        ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map\n          ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app\n            (DerivedCategory.Q.obj K)) ≫\n        (Functor.rightDerivedFunctorCompIso'\n          (lowerStar AddCommGrpCat.{u + 1} f)\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1})\n          (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f)\n              (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}\n                terminalIsTerminal) ≪≫\n            lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫\n            (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}\n              terminalIsTerminal).symm)).hom.app\n                ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj\n                  (DerivedCategory.Q.obj K)) ≫\n        (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map\n          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K)))\n    (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj (op i) ≅\n      (cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i)))\n    (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =\n      (eH i).hom ≫ P (D.map f) (F i) ≫\n        (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map\n          (DerivedCategory.Q.map (φ f)) ≫ (eH j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (B : Cocone H)\n    (eB : B.pt ≅ (cohomology AddCommGrpCat.{u + 1} c.pt p).obj\n      (DerivedCategory.Q.obj L.pt))\n    (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom =\n      (eH i).hom ≫ P (c.π.app i) (F i) ≫\n        (cohomology AddCommGrpCat.{u + 1} c.pt p).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :\n    ∃ S : ℕ → AddSubgroup B.pt,\n      S 0 = ⊤ ∧ S (p + 1 - a).toNat = ⊥ ∧ Antitone S ∧\n      ∀ (n : ℕ), n < (p + 1 - a).toNat → ∀ x : B.pt, x ∈ S n →\n        ∃ (i : I) (y : H.obj (op i)),\n          @Sub.sub B.pt inferInstance x (B.ι.app (op i) y) ∈ S (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9a491",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T070532-L-3468502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9a491",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T070532-L-3468502",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged main signature and finite-filtration proof with its node, the graded lifting statement with its node and Stacks 0EZM/015J, and the import changes with downstream source; both modules compile cleanly and axiom checks show only standard axioms plus expected sorryAx."
+ }
+}

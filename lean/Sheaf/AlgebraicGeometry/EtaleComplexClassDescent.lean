@@ -7,15 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Sheaf.CategoryTheory.SpectralSequenceComparison
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleComplexGradedClassDescent
 
 /-! # Etale complex class descent
 
@@ -136,6 +128,46 @@ theorem exists_etale_complex_class_rep
       (eH i).hom ≫ P (c.π.app i) (F i) ≫
         (cohomology AddCommGrpCat.{u + 1} c.pt p).map
           (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :
-    ∀ x : B.pt, ∃ (i : I) (y : H.obj (op i)), B.ι.app (op i) y = x := by sorry
+    ∀ x : B.pt, ∃ (i : I) (y : H.obj (op i)), B.ι.app (op i) y = x := by
+  classical
+  obtain ⟨S, htop, hbot, _hanti, hgraded⟩ := exists_etale_complex_graded_class_rep
+    D c hc F φ hidentity hcomposition a hbelow G eG hG p P hP H eH hH L hL B eB hB
+  let N := (p + 1 - a).toNat
+  -- Descend through the finite filtration. Two representatives can be added
+  -- after moving to a common stage of the filtered opposite category.
+  have hstep : ∀ k : ℕ, k ≤ N → ∀ x : B.pt, x ∈ S (N - k) →
+      ∃ (i : I) (y : H.obj (op i)), B.ι.app (op i) y = x := by
+    intro k
+    induction k with
+    | zero =>
+      intro _ x hx
+      have hx0 : x = 0 := by simpa [N, hbot] using hx
+      obtain ⟨i⟩ := IsCofiltered.nonempty (C := I)
+      refine ⟨i, 0, ?_⟩
+      rw [hx0]
+      exact map_zero (B.ι.app (op i)).hom
+    | succ k ih =>
+      intro hk x hx
+      have hn : N - (k + 1) < N := by omega
+      obtain ⟨i, y, hy⟩ := hgraded (N - (k + 1)) hn x hx
+      have heq : N - (k + 1) + 1 = N - k := by omega
+      rw [heq] at hy
+      obtain ⟨j, z, hz⟩ := ih (by omega) (@Sub.sub B.pt inferInstance x (B.ι.app (op i) y)) hy
+      let t := IsFiltered.max (op i) (op j)
+      let f : op i ⟶ t := IsFiltered.leftToMax (op i) (op j)
+      let g : op j ⟶ t := IsFiltered.rightToMax (op i) (op j)
+      refine ⟨t.unop, H.map f y + H.map g z, ?_⟩
+      have hf : B.ι.app t (H.map f y) = B.ι.app (op i) y :=
+        congrArg (fun e : H.obj (op i) ⟶ B.pt ↦ e y) (B.w f)
+      have hg : B.ι.app t (H.map g z) = B.ι.app (op j) z :=
+        congrArg (fun e : H.obj (op j) ⟶ B.pt ↦ e z) (B.w g)
+      change B.ι.app t (H.map f y + H.map g z) = x
+      rw [map_add, hf, hg, hz]
+      let w : B.pt := B.ι.app (op i) y
+      change w + (x - w) = x
+      exact add_sub_cancel w x
+  intro x
+  apply hstep N (le_refl N) x
+  simp [htop]
 
 end AlgebraicGeometry.Etale
