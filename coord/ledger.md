@@ -8744,3 +8744,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/F2/Sheaf.AlgebraicGeometry.PerfectRHomEvaluationIsomorphisms (stage 3; reviewer PASS; first push; landing 20261012T173823-L-3294822 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/F2/Sheaf.Paper.StrictHenselizationPointedMap (stage 3; reviewer PASS; first push; landing 20261012T173824-L-3295166 (interface); batch 20261012T173801; modules 5; new nodes 4)
 - 17:38 L: merged deliver/F3/Sheaf.Algebra.Homology.UnitEntrySplits (stage 3; reviewer PASS; first push; landing 20261012T173825-L-3295447 (interface); batch 20261012T173801; modules 3; new nodes 2)
+- 17:38 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffineTensorUnitSectionPresentation (stage 3; reviewer PASS; first push; landing 20261012T173825-L-3295697 (interface); batch 20261012T173801; modules 2; new nodes 1)

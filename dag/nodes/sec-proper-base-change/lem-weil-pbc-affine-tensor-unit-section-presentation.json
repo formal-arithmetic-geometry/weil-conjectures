@@ -18,39 +18,41 @@
  ],
  "proof": [
   {
-   "text": "For an affine open V let W=f^{-1}V, D=O_X(V), C=O_U(W), and N=G(V). W is affine. Push forward the structure-sheaf unit along the affine, hence qcqs, morphism. This gives the quasi-coherent O_X-algebra A=f_*O_U. Apply quasi-coherence under scalar restriction and the canonical affine pullback section formula to obtain C tensor_D N, carrying 1 tensor n to the pullback adjunction unit.",
+   "text": "Apply the affine pushout first-tensor section comparison to obtain delta and p with the two actions, additive generation and normalized unit formula. These data concern B and P only, before extension along epsilon.",
    "uses": [
-    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-pushout-first-tensor-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing affine pushout-algebra theorem makes B quasi-coherent. Pushforward of the structure-sheaf unit gives quasi-coherence of A; scalar restriction makes SG quasi-coherent. Compare tensorPullback with the ordinary module pullback by uniqueness of left adjoints and transfer pullback quasi-coherence through kappa to the underlying P(G). For the O_U-algebra map epsilon:(B,b)->(O_U,1), the affine change-of-rings theorem gives a bijective sheafification map on W. Transport its additive equivalence through hobj to obtain e:C tensor_E M -> H(G)(W).",
+   "uses": [
+    "lem-weil-pbc-affine-module-tensor-algebra-quasi-coherent",
     "pqf-lem-pushforward-qcoh",
     "lem-weil-pbc-quasi-coherence-scalar-restriction",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
+    "pqf-def-affine-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "The pushout B is O_U tensor_{f^{-1}O_X} f^{-1}A. Its underlying O_U-module is the pullback of A and hence quasi-coherent. The affine formula identifies B(W) with C tensor_D C, with b the first factor and t followed by the inverse-image unit the second. The two counit equations make epsilon multiplication. Kappa identifies the underlying P(G) with the quasi-coherent pullback of SG. Apply quasi-coherent algebra change of rings to epsilon between B and O_U; its affine sheafification map is bijective. Transport with hobj to identify H(G)(W) with C tensor_{C tensor_D C}(C tensor_D N).",
-   "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Map c tensor n to 1 tensor (c tensor n) in the double tensor product to define q. Outer scalars move inward by balancing with a tensor 1, so q is surjective. Balancing with 1 tensor c gives the relation c tensor n - 1 tensor (cn). To see these are all relations, send a tensor (c tensor n) to the class of ac tensor n modulo their D-span. For an element x tensor y of C tensor_D C, balancing compares axcy tensor n with acx tensor yn; their difference is a consequence of the displayed relations. D-balancing and additivity give a well-defined inverse quotient map, and pure-tensor induction proves the two composites are identities. Hence ker q is exactly the stated span.",
+   "text": "Define q=gamma_W kappa_W p; it is D-linear. The hH formula identifies q(z)=e(1 tensor p(z)). In the proved private scalar_tensor_presentation, define a(c tensor n)=cn and tau=a p inverse. The two action formulas give tau(b(c)m)=c tau(m) and tau(delta(c)m)=c tau(m); finite additive generation makes tau epsilon-balanced for all E-scalars. Thus c tensor m maps additively to c tau(m) in N, showing ker(q) is contained in ker(a). Delta-balancing kills each c tensor n - 1 tensor cn. Tensor induction shows z - 1 tensor a(z) belongs to their D-span, so ker(q) is exactly that span. Balancing with b(c) rewrites c tensor p(z)=1 tensor p(c z), making q surjective by double tensor induction. This is a complete Lean proof using TensorProduct.liftAddHom and Submodule.span_le, with no new algebraic hole.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The formula for kappa inverse on the pullback unit, followed by the section formula for gamma in hH, shows that q(1 tensor n)=gamma(unit(n)). This uses no beta and no equation identifying its adjoint. All constructions and relations are valid for zero rings, zero modules, and empty affine opens.",
-   "uses": [
-    "lem-pc-module-pullback-adjunction"
-   ],
+   "text": "The unit formula for p and kappa hom-inv imply q(1 tensor n)=gamma_W(unit(n)). No beta and no adjoint comparison are used. All constructions work with zero modules, zero rings and the empty affine open.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-module-pullback-adjunction",
-  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-module-tensor-algebra-quasi-coherent",
+  "lem-weil-pbc-affine-pushout-first-tensor-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
   "lem-weil-pbc-quasi-coherence-scalar-restriction",
   "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
   "pqf-def-affine-morphism",
@@ -59,7 +61,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Tag 01SB",
-  "place": "Construction of h and key algebra observation; details omitted in the source expanded into a kernel presentation"
+  "place": "Affine first-tensor comparison followed by explicit balancing kernel calculation and the existing affine change-of-rings bijection"
  },
  "mathlib_searches": [
   {
@@ -137,9 +139,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T154827-L-2471868",
+  "landing": "20261012T173825-L-3295697",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

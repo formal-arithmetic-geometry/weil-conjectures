@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-affine-pushout-first-tensor-sections",
+ "kind": "statement",
+ "title": "Affine pushout ring and first tensor sections with both actions",
+ "statement": "Let $f:U\\to X$ be an affine morphism of schemes [def-pc-scheme, pqf-def-affine-morphism]. Put $A=f_*\\mathcal O_U$, $\\rho:\\mathcal O_X\\to A$, and let $r_0:f^{-1}\\mathcal O_X\\to\\mathcal O_U$, $t_0=f^{-1}\\rho$, and $e:f^{-1}A\\to\\mathcal O_U$ be the structure map, inverse-image map and counit. Let $B$ be a commutative ring sheaf, with $b:\\mathcal O_U\\to B$, $t:f^{-1}A\\to B$, $\\epsilon:B\\to\\mathcal O_U$, such that $(r_0,t_0,b,t)$ is a pushout and $b\\epsilon=1$, $t\\epsilon=e$. Sheaves of modules and tensor pullback are those of [def-weil-sheaf-of-modules-category, def-pc-module-pullback, def-pur-sheaf-tensor-product], with the canonical adjunction of [lem-pc-module-pullback-adjunction]. Write $S=\\operatorname{res}_{\\rho}$ and $I=f^{-1}$. Let $P:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(B)$ agree on objects and maps with change of rings along $t$ after $I$. Let $\\kappa:P\\operatorname{res}_b\\simeq Sf^*$ satisfy, after this object identification, $\\kappa_G^{-1}(\\operatorname{unit}_{SG}(n))=\\operatorname{sheafify}(1\\otimes\\eta_G(n))$ on each inverse-image open, where $\\eta_G$ is the additive inverse-image unit. For a quasi-coherent $A$-module $G$ [pqf-def-coherent] and affine open $V\\subseteq X$, put $W=f^{-1}V$, $D=\\mathcal O_X(V)$, $C=\\mathcal O_U(W)$, $N=G(V)$, $E=B(W)$ and $M=P(G)(W)$. The $D$-actions on $N$ and $M$ are restricted along $f^\\sharp_V$ and $b_W f^\\sharp_V$ respectively. There exist a ring homomorphism $\\delta:C\\to E$ and a $D$-linear equivalence $p:C\\otimes_D N\\simeq M$ such that $\\epsilon_W\\delta=1_C$, every $r\\in E$ is a finite sum $\\sum_i b_W(c_i)\\delta(d_i)$ with $c_i,d_i\\in C$, and for all $c,d\\in C$, $n\\in N$ one has $b_W(c)p(d\\otimes n)=p(cd\\otimes n)$, $\\delta(c)p(d\\otimes n)=p(d\\otimes cn)$, and $p(1\\otimes n)=\\kappa_G^{-1}(\\operatorname{unit}_{SG,V}(n))$. No final extension module or gamma occurs in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, lemma-affine-equivalence-modules, last two paragraphs and key algebra observation; expanded canonical unit calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Pushforward of the unit module along affine f makes A quasi-coherent over O_X. Restriction of scalars makes G quasi-coherent over O_X. On the affine preimage W, apply the canonical affine pullback-section comparison to SG, commute its tensor factors, and follow by kappa inverse. This gives the D-linear equivalence p; its C-linearity is the b-action formula and its unit formula is the canonical pullback unit.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherence-scalar-restriction",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same affine comparison to the algebra A. The pushout universal property identifies B with the sheafification of O_U tensor over f inverse O_X with f inverse A. The canonical section map is multiplicative and sends the two inclusions to b and t after the inverse-image unit, so on W it gives B(W) = C tensor_D C. Let delta be the second inclusion. The equation t followed by epsilon = e and the inverse-image triangle identity give epsilon(delta(c)) = c. Tensor induction gives a finite additive sum of b(c)delta(d) for every section of B(W), including negative terms by putting the minus sign in the first factor.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the unsheafified section tensor product the two actions are b(c)(d tensor n)=cd tensor n and delta(c)(d tensor n)=d tensor cn. The inverse-image unit is compatible with the A-action. The hP normalization identifies kappa inverse of the canonical pullback unit with sheafification of 1 tensor eta(n), and C-linearity extends that equality to all pure tensors. The actions therefore transfer through p with exactly the displayed formulas. All identities are additive and balanced, so they extend through sheafification and to the empty open and zero rings.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherence-scalar-restriction",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01SB",
+  "place": "Construction of h and affine reduction; expanded ring-section and action calculation omitted in the source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of pushout of ring sheaves on affine open and two actions on tensor pullback modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of pushout of ring sheaves on affine open identify B with C tensor D C and first pullback module with C tensor D N with two commuting actions",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr; AlgebraicGeometry.isPullback_SpecMap_pushout; AlgebraicGeometry.isPullback_Spec_map_pushout; AlgebraicGeometry.Scheme.Pullback.Triplet.tensor; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.isPullback_Spec_map_isPushout",
+   "date": "2026-10-12",
+   "verdict": "no exact match: ring pushouts and affine scheme pullbacks do not give this sheaf-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*(section|tensor)|tensor.*pushout",
+   "results": "Mathlib/Algebra/Category/Ring/Constructions.lean; Mathlib/Algebra/Category/Ring/Constructions.lean; Mathlib/Algebra/Category/Ring/Constructions.lean; Mathlib/Algebra/Category/Ring/Constructions.lean; Mathlib/Algebra/Category/Ring/Constructions.lean; Mathlib/Algebra/Category/Ring/Under/Basic.lean; Mathlib/Algebra/Category/Ring/Under/Basic.lean; Mathlib/Algebra/Category/Ring/Under/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match: ring pushouts and affine scheme pullbacks do not give this sheaf-module comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineTensorUnitSectionPresentation",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence steps 4–7: affine tensor computation and invertibility; canonical unit map on an affine base open (01SB key algebra observation); affine tensor unit section calculation: affine identifications and diagonal balancing-relation quotient, before proving bijectivity; affine section presentation steps 1 and 2 only: pushout ring and first tensor module with its two actions, before extension by epsilon",
+   "via": [
+    "lem-weil-pbc-affine-tensor-unit-section-presentation",
+    "lem-weil-pbc-affine-module-tensor-unit-sections",
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePushoutFirstTensorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushoutFirstTensorSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_pushout_first_tensor_sections",
+  "statement": "theorem affine_pushout_first_tensor_sections [IsAffineHom f]\n     (B : U.toTopCat.Sheaf CommRingCat.{u})\n      (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)\n    (hring : IsPushout r₀ t₀ b t ∧ b ≫ ε = 𝟙 U.sheaf ∧ t ≫ ε = e₀)\n     (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))\n        (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G))\n        (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f)\n    (hP : (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n          P.map a = eqToHom (pobj G) ≫\n            SheafOfModules.changeOfRingsHom.{u, u, u} t (I G)\n              (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫\n            eqToHom (pobj G').symm) ∧\n        (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V),\n          ((eqToHom (pobj G)).val.app (fV V))\n            ((κ.inv.app G).val.app (fV V)\n              (((adj₀).unit.app ((S).obj G)).val.app V g)) =\n            ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n              (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app\n                (fV V)\n                ((1 : B.obj.obj (fV V)) ⊗ₜ[(IA).obj.obj (fV V),(t.hom.app (fV V)).hom]\n                  (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n                    (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app\n                      ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g))))\n    (G : SheafOfModules.{u} (𝓡 A)) (hG : G.IsQuasicoherent)\n    (V : X.Opens) (hV : IsAffineOpen V) :\n    letI : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra\n    letI : Module Γ(X, V) (G.val.obj (op V)) :=\n      Module.compHom _ (f.app V).hom\n    letI : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=\n      Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)\n    ∃ δ : Γ(U, f ⁻¹ᵁ V) →+* B.obj.obj (op (f ⁻¹ᵁ V)),\n      (∀ c, (ε.hom.app (op (f ⁻¹ᵁ V))).hom (δ c) = c) ∧\n      (∀ r : B.obj.obj (op (f ⁻¹ᵁ V)),\n        ∃ l : List (Γ(U, f ⁻¹ᵁ V) × Γ(U, f ⁻¹ᵁ V)),\n          r = (l.map fun x ↦ (b.hom.app (op (f ⁻¹ᵁ V))).hom x.1 * δ x.2).sum) ∧\n      ∃ p : (Γ(U, f ⁻¹ᵁ V) ⊗[Γ(X, V)] (G.val.obj (op V))) ≃ₗ[Γ(X, V)]\n          ((P.obj G).val.obj (op (f ⁻¹ᵁ V))),\n        (∀ (c d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)),\n          (b.hom.app (op (f ⁻¹ᵁ V))).hom c • p (d ⊗ₜ[Γ(X, V)] n) =\n          p ((c * d) ⊗ₜ[Γ(X, V)] n)) ∧\n        (∀ (c d : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)), δ c • p (d ⊗ₜ[Γ(X, V)] n) =\n          p (d ⊗ₜ[Γ(X, V)] (c • n))) ∧\n        ∀ n, p ((1 : Γ(U, f ⁻¹ᵁ V)) ⊗ₜ[Γ(X, V)] n) =\n          (κ.inv.app G).val.app (fV (op V))\n            (((adj₀).unit.app ((S).obj G)).val.app (op V) n)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T173825-L-3295697",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T173825-L-3295697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
