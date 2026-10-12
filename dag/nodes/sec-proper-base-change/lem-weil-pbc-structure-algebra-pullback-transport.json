@@ -1,0 +1,175 @@
+{
+ "id": "lem-weil-pbc-structure-algebra-pullback-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Transport along alpha in steps 2--3 of lem-weil-pbc-relative-spec-base-change, serving the henselian idempotent argument.",
+   "via": [
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-weil-pbc-stein-universally-closed-factor",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Transport of structure algebras along an invertible module base-change comparison",
+ "statement": "Let $g:S'\\to S$, $\\pi:X\\to S$, $\\pi':X'\\to S'$ and $g':X'\\to X$ be scheme morphisms [def-pc-scheme] with $\\pi\\circ g'=g\\circ\\pi'$. Let $\\mathcal A$ be a commutative $\\mathcal O_S$-algebra sheaf [def-weil-pbc-comm-algebra-sheaf], with module multiplication $\\mu:\\mathcal A\\otimes\\mathcal A\\to\\mathcal A$ [def-pur-sheaf-tensor-product] and unit $e:\\mathcal O_S\\to\\mathcal A$ agreeing on sections with its ring multiplication and structure map. Fix an algebra isomorphism $\\alpha:\\mathcal A\\cong\\pi_*\\mathcal O_X$. Let $g^*$ be module pullback [def-pc-module-pullback], let $t$ be its natural tensor comparison [lem-weil-pbc-module-pullback-tensor], and let $\\epsilon$ be the structure-sheaf comparison [lem-weil-pbc-module-pullback-structure-sheaf]. Assume the canonical module morphism $\\delta:\\ g^*\\pi_*\\mathcal O_X\\to\\pi'_*\\mathcal O_{X'}$, given by the base-change map followed by $\\pi'_*(\\epsilon_{g'})$ [lem-weil-pbc-module-base-change-map-algebra], is invertible. Write $\\mathcal B'=\\pi'_*\\mathcal O_{X'}$ with its actual algebra structure. Then there exist a module isomorphism $h:\\mathcal B'\\cong g^*\\mathcal A$, a multiplication $\\mu'$ on $\\mathcal B'$ agreeing on pure section tensors with ring multiplication, and a unit $e'$ agreeing with its structure map, such that $g^*(\\mu)=h\\circ\\mu'\\circ(h^{-1}\\otimes h^{-1})\\circ t$ and $h^{-1}\\circ g^*(e)=e'\\circ\\epsilon_g$. For every open $V\\subseteq S$ and section $s\\in\\mathcal A(V)$, $h^{-1}(\\eta_{g,\\mathcal A}(s))=g'^\\sharp(\\alpha(s))$ over $\\pi'^{-1}g^{-1}V$, using the commuting square to identify this open with $g'^{-1}\\pi^{-1}V$. No cartesianness, affineness, or quasi-coherence hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01LQ, pullback algebra structures and adjunction; Cohomology Remark 08HY, canonical base-change comparison. Agent-written transport calculation, parent steps 2--3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-module-base-change-map-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Let B = pi_* O_X and B' = pi'_* O_X'. The ring-sheaf isomorphism alpha determines the module isomorphism a: A.toModule ≅ B by its section maps. Linearity follows by multiplying the structure-map commutation identity by a section; naturality and both inverse identities follow from alpha. Define c = g^*a followed by the assumed invertible comparison delta, and set hA' = c inverse. These are actual morphisms constructed from the given data.",
+   "uses": [
+    "def-weil-pbc-comm-algebra-sheaf",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01LQ, pullback algebra structures and adjunction; Cohomology Remark 08HY, canonical base-change comparison. Agent-written transport calculation, parent steps 2--3."
+   }
+  },
+  {
+   "text": "Apply the structure-module algebra compatibility theorem to the commuting square. It supplies the genuine sectionwise multiplications m on B and m' on B', and gives delta's multiplication, unit, and adjoint identities. Set mu' = m' and e' = pi'-sharp. Their section formulas are respectively the theorem's formula and the definition of the unit-to-pushforward morphism.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01LQ, pullback algebra structures and adjunction; Cohomology Remark 08HY, canonical base-change comparison. Agent-written transport calculation, parent steps 2--3."
+   }
+  },
+  {
+   "text": "The sheaf tensor universal property identifies mu followed by a with (a tensor a) followed by m: evaluate on pure section tensors and use hmu and alpha's preservation of products. The same calculation on sections using he and alpha's commutation with the structure map identifies e followed by a with pi-sharp. Apply g^*. Naturality of the pullback tensor comparison and the multiplication identity of delta give g^*mu followed by c = t_A followed by (c tensor c) followed by m'. Cancel c to obtain the asserted multiplication transport equation. The unit identity follows by functoriality and delta's unit identity.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01LQ, pullback algebra structures and adjunction; Cohomology Remark 08HY, canonical base-change comparison. Agent-written transport calculation, parent steps 2--3."
+   }
+  },
+  {
+   "text": "Evaluate naturality of the g^* adjunction unit at alpha's underlying module map: g^*a(eta_A(s)) = eta_B(alpha(s)). Evaluate the adjoint identity for delta on alpha(s) and simplify the canonical pushforward composition and square identifications. It reads delta(eta_B(alpha(s))) = g'-sharp(alpha(s)) on the indicated inverse image open. This is precisely the final section formula for hA' inverse.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-base-change-map-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Section 01LQ, pullback algebra structures and adjunction; Cohomology Remark 08HY, canonical base-change comparison. Agent-written transport calculation, parent steps 2--3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-base-change-map-algebra",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01LQ, pullback algebra structures and adjunction; Cohomology Remark 08HY, canonical base-change comparison. Agent-written transport calculation, parent steps 2--3.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport multiplication and unit along an isomorphism of algebra sheaves through tensor pullback and an invertible base change map",
+   "results": "Service unavailable (Internal Server Error), both in the earlier attempt and on retry after completing the Lean proof.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport multiplication and unit along an isomorphism of algebra sheaves through tensor pullback and an invertible base change map",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv; Algebra.IsPushout.cancelBaseChange; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; Algebra.IsPushout.cancelBaseChangeAux; CommRingCat.tensorProdIsoPushout; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr; KaehlerDifferential.tensorKaehlerEquiv",
+   "date": "2026-10-12",
+   "verdict": "No exact match; existing moduleBaseChangeMap_algebra supplies algebra compatibility, not transport along arbitrary alpha."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"moduleBaseChangeMap_algebra\"",
+   "results": "No matching declaration",
+   "date": "2026-10-12",
+   "verdict": "No exact match; existing moduleBaseChangeMap_algebra supplies algebra compatibility, not transport along arbitrary alpha."
+  },
+  {
+   "tool": "grep",
+   "query": "structure_algebra_pullback_transport|algebraModuleIso",
+   "results": "No matching declaration",
+   "date": "2026-10-12",
+   "verdict": "No exact match; existing moduleBaseChangeMap_algebra supplies algebra compatibility, not transport along arbitrary alpha."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeSpecBaseChange",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StructureAlgebraPullbackTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/StructureAlgebraPullbackTransport.lean",
+  "declaration": "AlgebraicGeometry.structure_algebra_pullback_transport",
+  "statement": "theorem structure_algebra_pullback_transport (S S' : Scheme.{u}) (g : S' ⟶ S) (A : S.CommAlgebraSheaf) (μ : (SheafOfModules.monoidalCategory S.sheaf).tensorObj A.toModule A.toModule ⟶ A.toModule) (e : (SheafOfModules.unit S.ringCatSheaf : S.Modules) ⟶ (A.toModule : S.Modules)) (hμ : ∀ (V : S.Opens) (a b : A.right.obj.obj (op V)), μ.val.app (op V) (tmulSection (M := A.toModule) (N := A.toModule) (U := V) a b) = a * b) (he : ∀ (V : S.Opens) (r : Γ(S, V)), e.val.app (op V) r = A.hom.hom.app (op V) r) (X : Scheme.{u}) (π : X ⟶ S) (α : A ≅ Under.mk (⟨π.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} π.base).obj (Scheme.sheaf _))) (X' : Scheme.{u}) (π' : X' ⟶ S') (g' : X' ⟶ X) (w : g' ≫ π = π' ≫ g) [IsIso (moduleBaseChangeMap π π' g g' w (SheafOfModules.unit X.ringCatSheaf) ≫ (pushforward π').map (tensorPullbackObjUnitToUnit g'))] : let A' : S'.CommAlgebraSheaf := Under.mk (⟨π'.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} π'.base).obj (Scheme.sheaf _)) ∃ (hA' : (A'.toModule : S'.Modules) ≅ (tensorPullback g).obj (A.toModule : S.Modules)) (μ' : (SheafOfModules.monoidalCategory S'.sheaf).tensorObj A'.toModule A'.toModule ⟶ A'.toModule) (e' : (SheafOfModules.unit S'.ringCatSheaf : S'.Modules) ⟶ (A'.toModule : S'.Modules)), (∀ (W : S'.Opens) (a b : A'.right.obj.obj (op W)), μ'.val.app (op W) (tmulSection (M := A'.toModule) (N := A'.toModule) (U := W) a b) = a * b) ∧ (∀ (W : S'.Opens) (r : Γ(S', W)), e'.val.app (op W) r = A'.hom.hom.app (op W) r) ∧ (tensorPullback g).map μ = (Classical.choose (module_pullback_tensor g) (A.toModule : S.Modules) (A.toModule : S.Modules)).hom ≫ (SheafOfModules.monoidalCategory S'.sheaf).tensorHom hA'.inv hA'.inv ≫ μ' ≫ hA'.hom ∧ (tensorPullback g).map e ≫ hA'.inv = tensorPullbackObjUnitToUnit g ≫ e' ∧ (∀ (V : S.Opens) (a : A.right.obj.obj (op V)), hA'.inv.val.app (op (g ⁻¹ᵁ V)) (((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app (A.toModule : S.Modules)).val.app (op V) a) = g'.appLE (π ⁻¹ᵁ V) (π' ⁻¹ᵁ (g ⁻¹ᵁ V)) (by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, w]) (α.hom.right.hom.app (op V) a))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T160144-L-2567268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T160144-L-2567268",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

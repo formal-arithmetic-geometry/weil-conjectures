@@ -12,9 +12,8 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.StructureAlgebraPullbackTransport
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Relative Spec commutes with base change
 
@@ -34,6 +33,71 @@ namespace AlgebraicGeometry
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+private theorem sheaf_eqToHom_app {T : TopCat.{u}}
+    {B C : TopCat.Sheaf CommRingCat.{u} T} (e : B = C)
+    (V : TopologicalSpace.Opens T) :
+    (eqToHom e).hom.app (op V) = eqToHom (by cases e; rfl) := by
+  cases e
+  rfl
+
+private theorem affine_comparison {S X Y : Scheme.{u}}
+    (f : X ⟶ S) (k : Y ⟶ S) [IsAffineHom f] [IsAffineHom k]
+    (α : (Under.mk (⟨f.c⟩ : Scheme.sheaf _ ⟶
+      (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj (Scheme.sheaf _)) :
+        S.CommAlgebraSheaf) ≅ Under.mk (⟨k.c⟩ : Scheme.sheaf _ ⟶
+      (TopCat.Sheaf.pushforward CommRingCat.{u} k.base).obj (Scheme.sheaf _))) :
+    ∃ (Φ : Y ⟶ X) (hΦ : Φ ≫ f = k),
+      (∀ (W : S.Opens), Φ.appLE (f ⁻¹ᵁ W) (k ⁻¹ᵁ W)
+        (by rw [← Scheme.Hom.comp_preimage, hΦ]) = α.hom.right.hom.app (op W)) ∧
+      IsIso Φ ∧
+      ∀ (Ψ : Y ⟶ X) (hΨ : Ψ ≫ f = k),
+        (∀ (W : S.Opens), Ψ.appLE (f ⁻¹ᵁ W) (k ⁻¹ᵁ W)
+          (by rw [← Scheme.Hom.comp_preimage, hΨ]) = α.hom.right.hom.app (op W)) →
+        Ψ = Φ := by
+  classical
+  obtain ⟨_, E, hobj, _, hmap, _⟩ := affine_morphism_relative_spec S
+  let FX : ObjectProperty.FullSubcategory (fun Z : Over S ↦ IsAffineHom Z.hom) :=
+    ⟨Over.mk f, ‹IsAffineHom f›⟩
+  let FY : ObjectProperty.FullSubcategory (fun Z : Over S ↦ IsAffineHom Z.hom) :=
+    ⟨Over.mk k, ‹IsAffineHom k›⟩
+  let a : E.functor.obj (op FX) ≅ E.functor.obj (op FY) :=
+    ObjectProperty.isoMk _ ((eqToIso (hobj FX)) ≪≫ α ≪≫ (eqToIso (hobj FY)).symm)
+  let b := E.functor.preimageIso a
+  let Φ : Y ⟶ X := b.hom.unop.hom.left
+  have hΦ : Φ ≫ f = k := Over.w b.hom.unop.hom
+  have hb : E.functor.map b.hom = a.hom := by simp [b]
+  have ha (W : S.Opens) : Φ.appLE (f ⁻¹ᵁ W) (k ⁻¹ᵁ W)
+      (by rw [← Scheme.Hom.comp_preimage, hΦ]) = α.hom.right.hom.app (op W) := by
+    have hm := hmap FY FX b.hom.unop W
+    have hh := congrArg (fun t ↦ t.hom.right.hom.app (op W)) hb
+    simp only [Quiver.Hom.op_unop] at hm
+    rw [hm] at hh
+    change _ = (eqToHom (hobj FX) ≫ α.hom ≫
+      eqToHom (hobj FY).symm).right.hom.app (op W) at hh
+    simp only [Under.comp_right, Under.eqToHom_right, TopCat.Sheaf.comp_app,
+      sheaf_eqToHom_app] at hh
+    simp only [cancel_epi, cancel_mono] at hh
+    exact hh
+  have hIso : IsIso Φ := by
+    change IsIso ((ObjectProperty.ι _ ⋙ Over.forget S).map b.hom.unop)
+    infer_instance
+  refine ⟨Φ, hΦ, ha, hIso, ?_⟩
+  intro Ψ hΨ hsections
+  let c : FY ⟶ FX := ⟨Over.homMk Ψ hΨ⟩
+  have hc : E.functor.map c.op = E.functor.map b.hom := by
+    apply ObjectProperty.hom_ext
+    apply Under.UnderMorphism.ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext W
+    have hm := hmap FY FX b.hom.unop W.unop
+    simp only [Quiver.Hom.op_unop] at hm
+    rw [hmap FY FX c W.unop, hm]
+    apply congrArg (fun t ↦ eqToHom _ ≫ t ≫ eqToHom _)
+    exact (hsections W.unop).trans (ha W.unop).symm
+  have he := E.functor.map_injective hc
+  exact congrArg (fun t ↦ t.unop.hom.left) he
 
 /-- Relative Spec commutes with arbitrary base change. An affine morphism with an algebra
 identification is a relative spectrum by the anti-equivalence of
@@ -113,6 +177,37 @@ theorem relative_spec_base_change
               Ψ.appLE (π' ⁻¹ᵁ W) (ρ ⁻¹ᵁ W)
                 (by rw [← Scheme.Hom.comp_preimage, hΨ]) =
                 γ.inv.right.hom.app (op W) ≫ α'.hom.right.hom.app (op W)) → Ψ = Φ) := by
-  sorry
+  classical
+  let : IsAffineHom π' :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback sq ‹IsAffineHom π›
+  have := SheafOfModules.isQuasicoherent_unit.{u, u, u} (R := X.ringCatSheaf)
+  have := (affinePushforward_baseChange π π' g g' sq
+    (SheafOfModules.unit X.ringCatSheaf)).2
+  have := (tensorPullbackObjUnitToUnit_isIso g').1
+  have : IsIso (moduleBaseChangeMap π π' g g' sq.w
+      (SheafOfModules.unit X.ringCatSheaf) ≫
+      (pushforward π').map (tensorPullbackObjUnitToUnit g')) := inferInstance
+  obtain ⟨hA', μ', e', hm, he', ht, hu, hs⟩ :=
+    structure_algebra_pullback_transport S S' g A μ e hμ he X π α X' π' g' sq.w
+  let A' : S'.CommAlgebraSheaf := Under.mk (⟨π'.c⟩ : Scheme.sheaf _ ⟶
+    (TopCat.Sheaf.pushforward CommRingCat.{u} π'.base).obj (Scheme.sheaf _))
+  refine ⟨inferInstance, A', hA', μ', e', Iso.refl _,
+    (affine_morphism_relative_spec S').1 π' inferInstance, hm, he', ht, hu, ?_, ?_⟩
+  · exact hs
+  · intro Y ρ hρ α'
+    let : IsAffineHom ρ := hρ
+    obtain ⟨Φ, hΦ, hsections, hIso, huniq⟩ := affine_comparison π' ρ α'
+    refine ⟨Φ, hΦ, ?_, hIso, ?_⟩
+    · intro W
+      change _ = 𝟙 _ ≫ α'.hom.right.hom.app (op W)
+      rw [Category.id_comp]
+      exact hsections W
+    · intro Ψ hΨ hs'
+      apply huniq Ψ hΨ
+      intro W
+      have h := hs' W
+      change _ = 𝟙 _ ≫ α'.hom.right.hom.app (op W) at h
+      rw [Category.id_comp] at h
+      exact h
 
 end AlgebraicGeometry
