@@ -11,7 +11,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/012Z",
-  "place": "Direct verification from Definition 12.18.3, by J2"
+  "place": "Direct verification of the diagonal totalization formula in Definition 12.18.3; complete Lean proof by G1, 2026-10-13"
  },
  "mathlib_match": null,
  "status": "split",
@@ -45,23 +45,28 @@
  "statement": "Let C be an abelian category [def-sp-abelian], K,L natural-number-indexed double cochain complexes [def-sp-double-complex-total], and f:K→L. Let E extend the inner index by zero along ℕ→ℤ, then extend the outer index by zero along the same embedding. Assuming the integer total complexes of E(K) and E(L) exist, the arrow Tot(E(f)) is isomorphic to the extension by zero of the arrow Tot(f). There are no row bounds or columnwise quasi-isomorphism assumptions.",
  "proof": [
   {
-   "text": "In negative total degree every diagonal pair has a negative coordinate, so all summands are zero. In nonnegative degree restrict the integer diagonal to nonnegative pairs and identify it with the natural diagonal. On the surviving summands the two extendXIso isomorphisms give mutually inverse maps of coproducts; maps involving zero summands are unique. Coprojection extensionality proves the inverse equations.",
+   "text": "Construct the summand isomorphism termIso by evaluating the outer extendXIso and composing with the inner extendXIso. In each nonnegative degree define mapNat by totalDesc from their inverses followed by the integer diagonal coprojections. Define inverseNat by totalDesc on the integer diagonal: on nonnegative coordinates use XXIsoOfEq, termIso.hom and the natural diagonal coprojection, and on a negative coordinate use zero. Coprojection extensionality proves both inverse identities. For negative integer total degree, extension in a negative coordinate is a zero object, so coprojection extensionality shows the integer total object is zero; the extended natural total object is also zero. Thus mapX, equal to extendXIso.hom followed by mapNat in nonnegative degrees and zero otherwise, is an isomorphism in every degree.",
    "uses": [
     "def-sp-double-complex-total"
    ],
    "elementary": true
   },
   {
-   "text": "Check the differential on each surviving summand. Both extension steps preserve its horizontal and vertical differentials and the sign (-1)^p agrees with its natural-degree sign. At negative degrees and the boundary -1→0 the source is zero. Other differentials vanish by the shape. Thus these maps give complex isomorphisms. Their components are natural in f because extendXIso and diagonal coprojections are natural; the resulting square yields Arrow.isoMk.",
+   "text": "The extend_d_eq and extendMap_f formulas prove separately that termIso intertwines the horizontal and vertical differentials. On each natural diagonal coprojection, expand the total differential into D1 and D2 using total_d and the iota_D formulas. The horizontal coefficient is 1 on both index sets; the vertical coefficients agree by the integer negOnePow formula for a natural cast. Coprojection extensionality proves mapNat_comm in all adjacent natural degrees. Negative source degrees are zero, including the boundary -1 to 0. Hom.isoOfComponents therefore assembles the degreewise mapX isomorphisms into complex isomorphisms.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply extendMap_f twice and cancel the evaluated outer and inner extension isomorphisms to prove termIso_naturality. Apply total.hom_ext, iotaTotal_map and iota_totalDesc to obtain mapNat_naturality; extendMap_f transports it to mapX_naturality in nonnegative degrees, and in negative degrees both comparison components are zero. Use this componentwise naturality square with Arrow.isoMk, and take its inverse to get the arrow-isomorphism orientation of the statement.",
    "uses": [
     "def-sp-double-complex-total"
    ],
    "elementary": true
   }
  ],
- "proof_deps": [
-  "def-sp-double-complex-total"
- ],
+ "proof_deps": [],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -114,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J2",
+  "reviewer": "X-27984",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T173836-L-3298505",
+  "landing": "20261012T204508-L-869070",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, change record, report, compilation, axioms, target signature, and direct importer all match the stage-3 review requirements."
  }
 }
