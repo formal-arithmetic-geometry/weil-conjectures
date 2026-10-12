@@ -9,9 +9,10 @@
   "def-pc-module-pullback"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "P3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 02OD"
+  "place": "Lemma 02OD degree-zero specialization; canonical augmentation and unit-transition calculation formalized by P3"
  },
  "mathlib_searches": [
   {
@@ -58,21 +59,42 @@
  "statement": "∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅ formalFibreSectionsSystem f y, True",
  "proof": [
   {
-   "text": "Use the degree-zero augmentation for module cohomology together with the tensor pullback structure-sheaf unit isomorphism. Naturality in the infinitesimal fibre index gives the displayed inverse-system isomorphism.",
+   "text": "At each fibre level use Mathlib rightDerivedZeroIsoSelf for the left exact global-sections functor. Compose with global sections of tensorPullbackObjUnitToUnit, then restrict scalars along the completed-local-ring action. This constructs levelIso with no choice of arbitrary witnesses.",
    "uses": [
     "def-weil-pbc-formal-fibre-cohomology",
     "def-pc-module-pullback",
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the projection adjunction Hom equivalence to the transition h-map composed with pushforward of the earlier unit isomorphism. Naturality of pushforwardCongr and pushforwardComp moves that isomorphism across the composition comparison. The adjunction unit characterization reduces the result to functoriality of the structure-sheaf map. This proves unitTransition.",
+   "uses": [
+    "def-weil-pbc-formal-fibre-cohomology",
     "lem-weil-pbc-module-pullback-structure-sheaf"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Specialize ModuleCohomologyFMapData.map_zero_augmentation to the resolution data chosen in moduleCohomologyFMap. The restriction along inverse-image top = top is the identity by the presheaf map_id law. Cancel the canonical augmentation isomorphisms to obtain degreeZero_naturality. Evaluate unitTransition on top sections, use naturality of the unit morphism under restriction, and combine the two squares to prove levelIso_naturality.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-zero-augmentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "NatTrans.ofOpSequence assembles levelIso.hom using adjacent transition naturality. Every component is an isomorphism, so NatIso.isIso_of_isIso_app gives the required system isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-formal-fibre-cohomology",
   "def-pc-module-pullback",
-  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-  "lem-weil-pbc-module-pullback-structure-sheaf"
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-cohomology-fmap-zero-augmentation"
  ],
  "lean": {
   "existing": false,
@@ -108,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-c318e",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T154242-L-2434262",
+  "landing": "20261012T194130-L-461549",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature to its node, the canonical level comparisons and transition naturality to the recorded proof dependencies, and the repair to the earlier return; delivery and both direct importers compile cleanly, with only permitted axioms and inherited sorryAx."
  }
 }
