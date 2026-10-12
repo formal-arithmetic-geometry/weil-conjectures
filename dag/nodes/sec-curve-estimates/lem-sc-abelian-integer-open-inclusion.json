@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-abelian-integer-open-inclusion",
+ "kind": "statement",
+ "title": "Integer open extensions admit a nested-open inclusion",
+ "statement": "Let X be a topological space and V⊆U open subsets. For extension by zero [def-sc-abelian-open-extension-by-zero] of constant integer sheaves [def-weil-pbc-constant-sheaf], there exists f:j_V!Z_V→j_U!Z_U such that its stalk map [def-weil-pbc-module-stalk] at each x∈V is an isomorphism. No compactness or quotient sheaf is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Lemma 0A38, final paragraph, and Lemma 00A5(3); https://stacks.math.columbia.edu/tag/0A38 and https://stacks.math.columbia.edu/tag/00A5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Identify j_V!Z and j_U!Z with sheafifications of the slice extension presheaves of C=Z_X, by the constant integer open-extension comparison. On an open W, send the summand indexed by an arrow W→V to the summand indexed by W→V→U, acting identically on C(W). Naturality follows because both restriction operations precompose the arrow and restrict the same section. Thus there is a morphism of extension presheaves.",
+   "uses": [
+    "new-node-constant-integer-open-extension-comparison",
+    "def-weil-pbc-site-extension-by-zero-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For W⊆V, both sums have one summand C(W), and the index map identifies them by the identity. At x∈V, neighborhoods contained in V are cofinal, hence the induced presheaf stalk map is an isomorphism. The sheafification units are stalk isomorphisms, naturally in the presheaf. Conjugate the sheafified map by the two comparison isomorphisms to obtain f. Its stalk map is an isomorphism at every point of V. V empty gives a vacuous condition, and V=U gives the identity index map.",
+   "uses": [
+    "new-node-constant-integer-open-extension-comparison",
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "new-node-constant-integer-open-extension-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Lemma 0A38, final paragraph, and Lemma 00A5(3); https://stacks.math.columbia.edu/tag/0A38 and https://stacks.math.columbia.edu/tag/00A5",
+  "note": "Follows the parent node plan; interface and expanded glue argument written by A2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The extension by zero sheaves of integers on nested open subsets admit an inclusion isomorphic on interior stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of the constant integer sheaf on nested open subsets has an inclusion which is an isomorphism on stalks of the smaller open",
+   "results": "Eight hits on restriction stalk isomorphisms, including PresheafedSpace.restrictStalkIso, but no nested integer extension morphism.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.id",
+   "results": "DirectSum.id, id_apply, id_symm_apply; these handle the one-summand calculation, not the complete sheaf statement.",
+   "date": "2026-10-12",
+   "verdict": "useful tool, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianIntegerOpen_exists_inclusion|lower_layer_generator",
+   "results": "No matching Mathlib declaration. Local blueprint searches for nested opens and lower layer also returned no duplicates.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafPeelLayer",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite filtration of a finitely generated subsheaf of the constant sheaf in the proof of Lemma 02UX: Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph and filtration/final paragraphs",
+   "via": [
+    "lem-sc-constant-subsheaf-peel-layer",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianIntegerOpenInclusion",
+  "file": "lean/Sheaf/Topology/AbelianIntegerOpenInclusion.lean",
+  "declaration": "TopCat.Sheaf.abelianIntegerOpen_exists_inclusion",
+  "statement": "theorem abelianIntegerOpen_exists_inclusion\n    (X : TopCat.{u}) (U V : Opens X) (hVU : V ≤ U) :\n    ∃ f : (abelianOpenExtensionByZero V).obj\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj V))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶\n      (abelianOpenExtensionByZero U).obj\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))),\n      ∀ x : X, x ∈ V →\n        IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map f.hom)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085210-L-1639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085210-L-1639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
