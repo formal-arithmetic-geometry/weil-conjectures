@@ -6472,3 +6472,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/E1/Sheaf.Algebra.Homology.ModuleStalkExact (stage 3; reviewer PASS; first push; landing 20261012T063506-L-3153709 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/E1/Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact (stage 3; reviewer PASS; first push; landing 20261012T063507-L-3153850 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ClosedChowStage (stage 3; reviewer PASS; first push; landing 20261012T063507-L-3153993 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant (stage 3; reviewer PASS; after a return; landing 20261012T063507-L-3154100 (proof); batch 20261012T063502; modules 1; new nodes 0)

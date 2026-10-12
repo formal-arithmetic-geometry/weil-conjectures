@@ -62,34 +62,25 @@
  ],
  "proof": [
   {
-   "text": "Because f is finite, flat and locally of finite presentation, the rank lemma applies to f. It gives a finite-valued rank function r_f on X, locally constant on X, and identifies r_f(x) with the dimension over kappa(x) of Gamma(Y_x, O_{Y_x}). Thus delta_f is finite everywhere and equals r_f.",
+   "text": "For each s, the fibre morphism is finite by base change. Its map on global sections is finite by Scheme.Hom.finite_appTop. Composing with the residue field spectrum global-sections isomorphism preserves finiteness; RingHom.finite_algebraMap gives the required finite module. For the rank function r(s) = f.finrank s, Mathlib Scheme.Hom.isLocallyConstant_finrank gives local constancy. A local proved rank/fibre comparison inside the theorem identifies r(s) with delta(s), by reducing along an affine chart, expressing the morphism as Spec.map, and using Module.rankAtStalk_eq. Here fiberDegree and finrankGamma of the fibre morphism are definitionally equal.",
    "uses": [
     "lem-weil-pbc-finite-flat-rank-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 04MH together with Definition 02KA; the Mathlib rank API packages the stalk-rank/fibre-dimension identification"
+    "place": "Stacks Morphisms, Section 02K9 (section-finite-locally-free): Definition 02KA (rank/degree), Lemma 02KB (lemma-finite-flat: finite, flat, lfp iff affine with f_*O_X finite locally free), Lemma 04MH (lemma-finite-locally-free: decomposition S = coprod S_d, proof 'a finite locally free sheaf locally has a well defined rank. Details omitted.')"
    }
   },
   {
-   "text": "For each d >= 0, let X_d = delta_f^{-1}(d). Since delta_f is locally constant, X_d is open; its complement is the union of the other fibres and is open, so X_d is also closed. The X_d are pairwise disjoint and cover X. For the restriction f_d over X_d, finite, flat, and locally finitely presented are preserved by restricting to an open subscheme, while the rank lemma's base-change statement gives rank d at every point of X_d. Hence f_d is finite locally free of degree d.",
+   "text": "Let U_d be the open fibre r inverse of {d}. The locally constant rank API shows it is closed as well. Finite, flat, and locally of finite presentation restrict to every target open, giving the finite locally free restriction. The upstream fiberDegree_morphismRestrict theorem identifies the restricted fibre degree at s with f.fiberDegree at its underlying point; the local equality hEq and membership in U_d show this is d. The equality delta = r yields the specified membership equivalence.",
    "uses": [
     "lem-weil-pbc-finite-flat-rank-iso"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 04MH (the decomposition into open and closed subschemes on which the finite locally free morphism has fixed degree)"
-   }
-  },
-  {
-   "text": "The equality delta_f = r_f from Step 1 shows that the sets X_d and the degrees of the restricted morphisms in Step 2 are exactly those in the asserted equivalent formulation. Therefore delta_f is locally constant and the stated open-and-closed decomposition holds.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Definition 02KA and Lemma 04MH"
+    "place": "Stacks Morphisms, Section 02K9 (section-finite-locally-free): Definition 02KA (rank/degree), Lemma 02KB (lemma-finite-flat: finite, flat, lfp iff affine with f_*O_X finite locally free), Lemma 04MH (lemma-finite-locally-free: decomposition S = coprod S_d, proof 'a finite locally free sheaf locally has a well defined rank. Details omitted.')"
    }
   }
  ],
@@ -97,9 +88,9 @@
   "lem-weil-pbc-finite-flat-rank-iso"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "E1 repair worker",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Definition 02KA and Lemma 04MH; the fibre-dimension identification is supplied by the finite-flat rank lemma"
+  "place": "Definition 02KA and Lemma 04MH; Mathlib locally constant rank and local proofs of rank equals fibre degree using affine spectra and pullback; fibre restriction API"
  },
  "mathlib_match": null,
  "status": "split",
@@ -154,5 +145,15 @@
   "group": "J1",
   "result": "fix",
   "note": "[f.IsFiniteLocallyFree] = finite+flat+lfp (upstream class); delta = finrankΓ(fiberToSpecResidueField) rfl-equal to recorded fiberDegree; Module.Finite via upstream fiberAlgebra (rfl); IsLocallyConstant; clopen level sets; U d exact level sets with f ∣_ U d IsFiniteLocallyFreeOfDegree d; no upstream locally-constant fiberDegree lemma (existing:false); fix: dropped ∃ _h, True wrapper"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T063507-L-3154100",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
