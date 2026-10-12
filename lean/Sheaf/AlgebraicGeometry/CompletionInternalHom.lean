@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentSheafHom
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CompletionInternalHomSectionsLift
+import Sheaf.AlgebraicGeometry.CompletionInternalHomQuotient
 
 /-! # Internal Hom and coherent formal completion
 
@@ -33,6 +29,19 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem homObjSectionsEquiv_map {X : Scheme.{u}}
+    {M N M' N' : X.Modules} (f : M' ⟶ M) (g : N ⟶ N')
+    (s : (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) M N).sections) :
+    SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf) M' N'
+        (SheafOfModules.sectionsMap
+          (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) f g) s) =
+      f ≫ SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf) M N s ≫ g := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical map from completed global internal Hom to morphisms of completions is
 bijective. The first two clauses express annihilation and unique local factorization.
 The maps `e` factor postcomposition with the quotient projection through both quotients;
@@ -113,6 +122,117 @@ theorem completion_internal_hom_bijective {X : Scheme.{u}} [IsNoetherian X]
             (formalModuleQuotient I (n.unop + 1) F.obj)
             (SheafOfModules.sectionsMap (e n) (s.val n))) ∧
         Function.Bijective Φ := by
-  sorry
+  have hz (n : ℕ) := (completion_internal_hom_quotient I F.obj G.obj
+    (n + 1) (n + 1) le_rfl).1
+  have hi (n : ℕ) := (completion_internal_hom_quotient I F.obj G.obj
+    (n + 1) (n + 1) le_rfl).2
+  refine ⟨hz, hi, ?_⟩
+  let e (n : ℕᵒᵖ) :=
+    let q := SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+      (formalModuleQuotientπ I (n.unop + 1) G.obj)
+      (𝟙 (formalModuleQuotient I (n.unop + 1) F.obj))
+    have : IsIso q := hi n.unop
+    cokernel.desc (Scheme.idealModuleProductι
+      (Scheme.idealSheafPower I.toModulesι (n.unop + 1)).2
+      (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G.obj F.obj))
+      (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+        (𝟙 G.obj) (formalModuleQuotientπ I (n.unop + 1) F.obj)) (hz n.unop) ≫ inv q
+  have he (n : ℕᵒᵖ) :
+      formalModuleQuotientπ I (n.unop + 1) (SheafOfModules.homObj
+        (R := X.toRingedSpace.sheaf) G.obj F.obj) ≫
+        e n ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+          (formalModuleQuotientπ I (n.unop + 1) G.obj)
+          (𝟙 (formalModuleQuotient I (n.unop + 1) F.obj)) =
+      SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+        (𝟙 G.obj) (formalModuleQuotientπ I (n.unop + 1) F.obj) := by
+    have := hi n.unop
+    simp [e, formalModuleQuotientπ]
+  have hπ (M : X.Modules) (a b : ℕᵒᵖ) (f : a ⟶ b) :
+      formalModuleQuotientπ I (a.unop + 1) M ≫
+        (formalCompletionSystem I M).map f =
+      formalModuleQuotientπ I (b.unop + 1) M := by
+    simp [formalCompletionSystem, formalModuleQuotientMap, formalModuleQuotientπ]
+  have hc (a b : ℕᵒᵖ) (f : a ⟶ b) :
+      e a ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+        (𝟙 (formalModuleQuotient I (a.unop + 1) G.obj))
+        ((formalCompletionSystem I F.obj).map f) =
+      (formalCompletionSystem I (SheafOfModules.homObj
+        (R := X.toRingedSpace.sheaf) G.obj F.obj)).map f ≫
+        e b ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+          ((formalCompletionSystem I G.obj).map f)
+          (𝟙 (formalModuleQuotient I (b.unop + 1) F.obj)) := by
+    have := (completion_internal_hom_quotient I F.obj G.obj
+      (a.unop + 1) (b.unop + 1) (Nat.succ_le_succ (leOfHom f.unop))).2
+    apply (cancel_mono (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+      (formalModuleQuotientπ I (a.unop + 1) G.obj)
+      (𝟙 (formalModuleQuotient I (b.unop + 1) F.obj)))).1
+    apply coequalizer.hom_ext
+    have hs :
+        SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+          (𝟙 (formalModuleQuotient I (a.unop + 1) G.obj))
+          ((formalCompletionSystem I F.obj).map f) ≫
+          SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+            (formalModuleQuotientπ I (a.unop + 1) G.obj)
+            (𝟙 (formalModuleQuotient I (b.unop + 1) F.obj)) =
+        SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+          (formalModuleQuotientπ I (a.unop + 1) G.obj)
+          (𝟙 (formalModuleQuotient I (a.unop + 1) F.obj)) ≫
+          SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
+            (𝟙 G.obj) ((formalCompletionSystem I F.obj).map f) := by
+      rfl
+    have hea := congrArg (fun k ↦ k ≫ SheafOfModules.homObjMap
+      (R := X.toRingedSpace.sheaf) (𝟙 G.obj)
+      ((formalCompletionSystem I F.obj).map f)) (he a)
+    simp only [Category.assoc] at hea
+    simp only [Category.assoc]
+    rw [hs]
+    dsimp only [formalModuleQuotientπ] at hea
+    erw [hea]
+    simp only [SheafOfModules.homObjMap_comp_homObjMap, Category.comp_id, hπ]
+    dsimp only [formalModuleQuotientπ] at hπ he
+    erw [hπ, ← Category.assoc, hπ, he]
+  refine ⟨e, he, hc, ?_⟩
+  let Φ : {s : ∀ n : ℕᵒᵖ,
+          (formalModuleQuotient I (n.unop + 1) (SheafOfModules.homObj
+            (R := X.toRingedSpace.sheaf) G.obj F.obj)).sections //
+          ∀ (a b : ℕᵒᵖ) (f : a ⟶ b),
+            SheafOfModules.sectionsMap
+              ((formalCompletionSystem I (SheafOfModules.homObj
+                (R := X.toRingedSpace.sheaf) G.obj F.obj)).map f)
+              (s a) = s b} → ((completion X I).obj G ⟶ (completion X I).obj F) :=
+    fun s ↦ ObjectProperty.homMk
+    { app := fun n ↦ SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf)
+        (formalModuleQuotient I (n.unop + 1) G.obj)
+        (formalModuleQuotient I (n.unop + 1) F.obj)
+        (SheafOfModules.sectionsMap (e n) (s.val n))
+      naturality := by
+        intro a b f
+        have h := congrArg
+          (fun k ↦ SheafOfModules.sectionsMap k (s.val a)) (hc a b f)
+        have h' := congrArg
+          (SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf)
+            (formalModuleQuotient I (a.unop + 1) G.obj)
+            (formalModuleQuotient I (b.unop + 1) F.obj)) h
+        dsimp only [Scheme.Modules] at h'
+        simp only [SheafOfModules.sectionsMap_comp, homObjSectionsEquiv_map,
+          Category.id_comp, Category.comp_id, s.property] at h'
+        exact h'.symm }
+  refine ⟨Φ, fun _ _ ↦ rfl, ?_, ?_⟩
+  · intro s s' h
+    obtain ⟨s₀, _, hu⟩ := completion_internal_hom_sections_lift I F G e he
+      (fun n ↦ (Φ s).hom.app n) (fun a b f ↦ ((Φ s).hom.naturality f).symm)
+    apply (hu s (fun _ ↦ rfl)).trans
+    symm
+    apply hu s'
+    intro n
+    exact congrArg (fun α ↦ α.hom.app n) h.symm
+  · intro α
+    obtain ⟨s, hs, _⟩ := completion_internal_hom_sections_lift I F G e he
+      (fun n ↦ α.hom.app n) (fun a b f ↦ (α.hom.naturality f).symm)
+    refine ⟨s, ?_⟩
+    apply ObjectProperty.hom_ext
+    apply NatTrans.ext
+    funext n
+    exact hs n
 
 end AlgebraicGeometry

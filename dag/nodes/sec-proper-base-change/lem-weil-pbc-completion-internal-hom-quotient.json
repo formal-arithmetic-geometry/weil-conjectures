@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-completion-internal-hom-quotient",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); internal-Hom comparison, finite-level map construction (parent step 1)",
+   "via": [
+    "lem-weil-pbc-completion-internal-hom",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-level annihilation and internal Hom quotient factorization",
+ "statement": "Let $X$ be a scheme, $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal sheaf, and $\\mathcal F,\\mathcal G$ arbitrary $\\mathcal O_X$-modules [def-weil-pbc-coherent-formal-module]. Write $\\mathcal F_n=\\mathcal F/\\mathcal I^n\\mathcal F$ and $q_n^\\mathcal F$ for its cokernel projection, and let $\\mathcal H=\\mathcal Hom(\\mathcal G,\\mathcal F)$ [def-pur-sheaf-hom]. For integers $0\\leq n\\leq m$, postcomposition with $q_n^\\mathcal F$ annihilates $\\mathcal I^n\\mathcal H$, and precomposition with $q_m^\\mathcal G$ is an isomorphism of sheaves $\\mathcal Hom(\\mathcal G_m,\\mathcal F_n)\\to\\mathcal Hom(\\mathcal G,\\mathcal F_n)$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0882 (lemma-completion-internal-hom, line 6438); the map is left implicit in Stacks and is written out here; the proof there works affine-locally via Lemma 087W (lemma-inverse-systems-affine) and Algebra, Lemma 00MB (lemma-completion-flat) with More on Algebra, Lemma 087R (more-algebra-lemma-pseudo-coherence-and-base-change-ext) for Hom_A(M,N) (x) A^ = Hom_{A^}(M (x) A^, N (x) A^)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Let J=I^n. The ideal-module product is the image of the multiplication map J tensor F → F. Its cokernel Q is annihilated by J: tensoring the quotient projection is epi, multiplication is natural, and multiplication into Q is zero after this epi because the cokernel projection kills the product image.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On any open, an O-linear map G → F/I^n F sends a product ax with a in I^m to a times the image of x, which is zero because I^m is contained in I^n when n≤m. Local finite sums generate the ideal product sheaf, so this map kills I^m G and factors uniquely through its cokernel G/I^m G. Restriction to an open preserves cokernels; uniqueness ensures the local factorizations respect restriction and addition and scalar multiplication. Thus the resulting inverse on each open is an inverse of the indicated internal-Hom sheaf map.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcomposition sends a local product ah in I^n Hom(G,F) to the map x ↦ a times the class of h(x) in F/I^n F, which is zero by the first step. Locally these products generate the ideal product; hence the composite from that sheaf is zero.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Detailed construction and finite-level universal property following Tag 0882 and the parent proof; the local checkout omits the literature file; the published Tag 0882 was read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom sheaf into a module annihilated by an ideal is unchanged by quotienting the source by the ideal",
+   "results": "HTTP 500 Internal Server Error; service unavailable. No absence conclusion from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules maps into a quotient annihilated by an ideal factor uniquely through quotient of source module",
+   "results": "SheafOfModules.generatorsOfIsCokernelFree_π and related presentation lemmas in Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent; none is internal-Hom quotient factorization.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*(Hom|hom)|homObj.*quotient",
+   "results": "AdicCompletion ring/AlgHom lifting results, no internal-Hom quotient theorem. Also read cokernel.desc and cokernel.π_desc in Mathlib.CategoryTheory.Limits.Shapes.Kernels (lines 811-819), which construct a factorization once annihilation is known.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompletionInternalHom",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompletionInternalHomQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionInternalHomQuotient.lean",
+  "declaration": "AlgebraicGeometry.completion_internal_hom_quotient",
+  "statement": "theorem completion_internal_hom_quotient {X : Scheme.{u}} (I : X.IdealSheafData) (F G : X.Modules) (m n : ℕ) (h : n ≤ m) : (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G F) ≫ SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (𝟙 G) (formalModuleQuotientπ I n F) = 0) ∧ IsIso (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf) (formalModuleQuotientπ I m G) (𝟙 (formalModuleQuotient I n F)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T194152-L-468849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T194152-L-468849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
