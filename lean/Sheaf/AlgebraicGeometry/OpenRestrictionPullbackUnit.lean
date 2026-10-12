@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.EtaleRestrictionPullbackUnit
 
 /-!
 # Open restriction and pullback units
@@ -97,6 +97,24 @@ theorem open_restriction_pullback_unit {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.O
           (by simp) :
           Scheme.Etale.mk (g ⁻¹ᵁ W).ι ⟶
             (MorphismProperty.Over.pullback @Etale ⊤ g).obj (Scheme.Etale.mk W.ι)).op := by
-  sorry
+  let p : W.toScheme ⟶ X := W.ι
+  let p' : (g ⁻¹ᵁ W).toScheme ⟶ Y := (g ⁻¹ᵁ W).ι
+  let g' := morphismRestrict g W
+  let ι := pullback.lift g' p' (morphismRestrict_ι g W)
+  have hι : IsIso ι := by
+    have he : (isPullback_morphismRestrict g W).isoPullback.hom = ι := by
+      apply pullback.hom_ext <;> simp [ι, g', p']
+    rw [← he]
+    infer_instance
+  let _ : IsIso ι := hι
+  have hι₁ : ι ≫ pullback.fst p g = g' := by simp [ι, p, g']
+  have hι₂ : ι ≫ pullback.snd p g = p' := by simp [ι, p, p']
+  have h := etale_restriction_pullback_unit g p g' p' (by simp [p, p', g']) ι hι₁ hι₂
+  obtain ⟨hp', h⟩ := h
+  convert h F using 1 <;>
+    simp [p, p', g', ι, MorphismProperty.Over.isoMk, MorphismProperty.Comma.isoMk,
+    MorphismProperty.Comma.isoFromComma, CategoryTheory.Comma.isoMk,
+    MorphismProperty.Comma.homFromCommaOfIsIso, MorphismProperty.Over.homMk,
+    CategoryTheory.Over.homMk] <;> rfl
 
 end AlgebraicGeometry

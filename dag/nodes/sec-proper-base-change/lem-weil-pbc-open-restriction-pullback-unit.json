@@ -31,84 +31,35 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (the objects over $W'$ and their identifications).** Two facts from the universal property of the fibre product [def-pc-fibre-product]: (a) if $m:A\\to C$ is a monomorphism, then for every $B\\to C$ the projection $A\\times_CB\\to B$ is a monomorphism (two maps into $A\\times_CB$ with equal second components have first components with equal composites with $m$); (b) if moreover $B\\to C$ factors as $m\\circ t$, the projection $A\\times_CB\\to B$ is an isomorphism with inverse $(t,\\mathrm{id}_B)$. The open immersions $j_W$, $j_{W'}$ are monomorphisms [lem-weil-pbc-open-immersion-monomorphism]. The sections occurring in the proof are taken at the following schemes, read off from the formula $(u_*H)(T)=H(T\\times_{\\text{target}}\\text{source})$ [def-weil-pbc-direct-image]: $P_0=W\\times_XW$ (object $b_{j_W}(W)$ of $W_{\\Et}$, via its second projection), $P_1=W\\times_XY$ (in $(g_*H)(W)$), $P_2=W'\\times_YW'$ (object $b_{j_{W'}}(W')$ of $Y_{\\Et}$), $P_3=(W\\times_XY)\\times_YW'$ (in $(g_*j_{W'*}H)(W)$), $P_4=W\\times_XW'$, fibre product of $j_W$ and $h$ (in $(h_*H)(W)$), $P_5=(W\\times_XW)\\times_WW'$ (in $(j_{W*}g_{W*}H)(W)$) and $P_6=W\\times_WW'$ (in $\\Gamma(W,g_{W*}H)$). By (b), the projection $\\pi_0:P_0\\to W$ is an isomorphism (both projections, being equal after composing with the monomorphism $j_W$, are equal); $\\pi_1:P_1\\to W'$ is the isomorphism of [lem-weil-pbc-open-fibre-product] fixed in the statement (so $P_1\\to Y$ is $j_{W'}\\circ\\pi_1$, a monomorphism); and the projections $\\pi_2:P_2\\to W'$, $\\pi_3:P_3\\to W'$, $\\pi_4:P_4\\to W'$, $\\pi_5:P_5\\to W'$, $\\pi_6:P_6\\to W'$ are isomorphisms by (b), applied to the monomorphisms $j_{W'}$, $P_1\\to Y$, $j_W$, $\\mathrm{pr}_2:P_0\\to W$ (an isomorphism), $\\mathrm{id}_W$, through which $j_{W'}$, $j_{W'}$, $h=j_W\\circ g_W$, $g_W$, $g_W$ factor. Regard each $P_k$ ($1\\le k\\le6$) as a $Y$-scheme via $j_{W'}\\circ\\pi_k$, a monomorphism. Then between two of them there is exactly one $Y$-morphism, $\\pi_l^{-1}\\circ\\pi_k:P_k\\to P_l$ (any $Y$-morphism agrees with it after composing with the monomorphism $P_l\\to Y$). In particular every canonical morphism between them used below that commutes with the maps to $W'$ (hence to $Y$) — the isomorphisms $\\phi:P_5\\to P_4$ and $\\phi':P_3\\to P_4$ of [lem-weil-pbc-inverse-image-composition] (1) for $(u,v)=(j_W,g_W)$ and $(g,j_{W'})$ (morphisms over $Z=W'$), and $\\pi_0\\times_WW':P_5\\to P_6$ — is $\\pi_l^{-1}\\pi_k$. For a sheaf $H$ on $Y_{\\Et}$ or $W'_{\\Et}$ (each $P_k$ an object via $\\pi_k$, isomorphic to $W'$ by $\\pi_k$, a morphism of the site [def-weil-pbc-etale-site]) we identify $H(P_k)$ with $H(W')$ through the bijection $H(\\pi_k)$, and $F'(P_0)$ with $F'(W)$ through $F'(\\pi_0)$ for a sheaf $F'$ on $W_{\\Et}$ or $X_{\\Et}$. These identifications are compatible with each other and with $H(\\phi),H(\\phi'),H(\\pi_0\\times_WW')$ (all are $H$ of the unique $Y$-isomorphisms), and with every morphism of sheaves $\\alpha:H\\to H'$ ($\\alpha(P_k)\\circ H(\\pi_k)=H'(\\pi_k)\\circ\\alpha(W')$, naturality). This is how the statement reads $(g^{-1}F)(W\\times_XY)$ as $(g^{-1}F)(W')$ and $\\Gamma(W,g_{W*}H)$ as $H(W')$; below, an equality 'under the identifications' means equality after composing with these bijections.",
+   "text": "The square with g_W = morphismRestrict g W, j_W = W.ι and j_W′ = (g ⁻¹ᵁ W).ι is cartesian by AlgebraicGeometry.isPullback_morphismRestrict. Its isoPullback.hom equals the explicit pullback.lift(g_W,j_W′) by pullback.hom_ext and the two projection identities. Hence that lift is an isomorphism.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-immersion-monomorphism",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "not in the source (agent-written); the uniqueness-of-adjoints argument is that of Sites, Lemma Tag 03CB and Categories, Lemma Tag 0B65, as used in lem-weil-pbc-inverse-image-composition"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 2 (the units of the open immersions at $W$ and $W'$).** By [lem-weil-pbc-etale-inverse-image-restriction] (2) for $j=j_W$, $G=F$ and the object $W$ of $X_{\\Et}$: $\\rho_F(P_0)\\circ\\eta_{j_W,F}(W)=F(\\pi_0):F(W)\\to F(P_0)$ (the projection $P_0\\to W$ is $\\pi_0$, step 1). By naturality of the morphism of sheaves $\\rho_F:j_W^{-1}F\\to F|_W$ along the morphism $\\pi_0:P_0\\to W$ of $W_{\\Et}$, $\\rho_F(P_0)\\circ(j_W^{-1}F)(\\pi_0)=F|_W(\\pi_0)\\circ\\rho_F(W)=F(\\pi_0)\\circ\\rho_F(W)$. Since $F(\\pi_0)$, $(j_W^{-1}F)(\\pi_0)$ and $\\rho_F(W)$ are bijective, $\\eta_{j_W,F}(W)=(j_W^{-1}F)(\\pi_0)\\circ\\rho_F(W)^{-1}$; under the identifications of step 1: $\\eta_{j_W,F}(W)=\\rho_F(W)^{-1}$ (E1). The same argument for $j=j_{W'}$, $G=g^{-1}F$ and the object $W'$ of $Y_{\\Et}$ (projection $\\pi_2$) gives $\\eta_{j_{W'},g^{-1}F}(W')=(j_{W'}^{-1}g^{-1}F)(\\pi_2)\\circ\\rho_{g^{-1}F}(W')^{-1}$, i.e. $\\eta_{j_{W'},g^{-1}F}(W')=\\rho_{g^{-1}F}(W')^{-1}$ under the identifications (E2).",
+   "text": "Apply lem-weil-pbc-etale-restriction-pullback-unit to this square with p = j_W, p′ = j_W′ and g′ = g_W. The open inclusion j_W is étale. The projection identities supply hι₁ and hι₂, and morphismRestrict_ι supplies hcomm. Evaluate the resulting universal equality at F.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction"
+    "lem-weil-pbc-etale-restriction-pullback-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "not in the source (agent-written); the uniqueness-of-adjoints argument is that of Sites, Lemma Tag 03CB and Categories, Lemma Tag 0B65, as used in lem-weil-pbc-inverse-image-composition"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 3 (the unit of $h$ through $h=j_W\\circ g_W$).** Apply [lem-weil-pbc-inverse-image-composition] (2) with $u=j_W$, $v=g_W$, $G=F$: $j_{W*}g_{W*}(c_{j_W,g_W,F})\\circ j_{W*}(\\eta_{g_W,j_W^{-1}F})\\circ\\eta_{j_W,F}=d_{j_W,g_W,h^{-1}F}\\circ\\eta_{h,F}$. Evaluate at the object $W$ of $X_{\\Et}$, using that a direct image acts on morphisms of sheaves componentwise, $(u_*\\alpha)(T)=\\alpha(T\\times\\ldots)$ [def-weil-pbc-direct-image], and $d(W)=(h^{-1}F)(\\phi)$ (lemma (1)): $c_{j_W,g_W,F}(P_5)\\circ\\eta_{g_W,j_W^{-1}F}(P_0)\\circ\\eta_{j_W,F}(W)=(h^{-1}F)(\\phi)\\circ\\eta_{h,F}(W)$ as maps $F(W)\\to(h^{-1}F)(P_5)$. By naturality of the unit $\\eta_{g_W}$ [def-weil-pbc-inverse-image] in the object, along $\\pi_0:P_0\\to W$ of $W_{\\Et}$ (on $g_{W*}K$ this is $K(\\pi_0\\times_WW')$), and (E1): $\\eta_{g_W,j_W^{-1}F}(P_0)\\circ\\eta_{j_W,F}(W)=K(\\pi_0\\times_WW')\\circ\\eta_{g_W,j_W^{-1}F}(W)\\circ\\rho_F(W)^{-1}$, $K=g_W^{-1}j_W^{-1}F$. Passing to $W'$ with step 1 (the morphism of sheaves $c_{j_W,g_W,F}$ commutes with the identifications, and $\\pi_0\\times_WW'$, $\\phi$ are the unique $Y$-isomorphisms): $c_{j_W,g_W,F}(W')\\circ\\eta_{g_W,j_W^{-1}F}(W)\\circ\\rho_F(W)^{-1}=\\eta_{h,F}(W)$ as maps $F(W)\\to(h^{-1}F)(W')$ (E3).",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "not in the source (agent-written); the uniqueness-of-adjoints argument is that of Sites, Lemma Tag 03CB and Categories, Lemma Tag 0B65, as used in lem-weil-pbc-inverse-image-composition"
-   }
-  },
-  {
-   "text": "**Step 4 (the unit of $h$ through $h=g\\circ j_{W'}$).** Apply [lem-weil-pbc-inverse-image-composition] (2) with $u=g$, $v=j_{W'}$, $G=F$: $g_*j_{W'*}(c_{g,j_{W'},F})\\circ g_*(\\eta_{j_{W'},g^{-1}F})\\circ\\eta_{g,F}=d_{g,j_{W'},h^{-1}F}\\circ\\eta_{h,F}$. At the object $W$, as in step 3: $c_{g,j_{W'},F}(P_3)\\circ\\eta_{j_{W'},g^{-1}F}(P_1)\\circ\\eta_{g,F}(W)=(h^{-1}F)(\\phi')\\circ\\eta_{h,F}(W)$, with $\\eta_{g,F}(W):F(W)\\to(g^{-1}F)(P_1)$. By naturality of $\\eta_{j_{W'}}$ [def-weil-pbc-inverse-image] along the isomorphism $\\pi_1:P_1\\to W'$ of $Y_{\\Et}$ (on $j_{W'*}K'$ this is $K'(\\pi_1\\times_YW')$, the unique $Y$-isomorphism $P_3\\to P_2$) and (E2), and with step 1: $c_{g,j_{W'},F}(W')\\circ\\rho_{g^{-1}F}(W')^{-1}\\circ\\eta_{g,F}(W)=\\eta_{h,F}(W)$ as maps $F(W)\\to(h^{-1}F)(W')$, where $\\eta_{g,F}(W)$ is read in $(g^{-1}F)(W')$ as in the statement (E4).",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "not in the source (agent-written); the uniqueness-of-adjoints argument is that of Sites, Lemma Tag 03CB and Categories, Lemma Tag 0B65, as used in lem-weil-pbc-inverse-image-composition"
-   }
-  },
-  {
-   "text": "**Step 5 (conclusion).** By (E3) and (E4), $c_{j_W,g_W,F}(W')\\circ\\eta_{g_W,j_W^{-1}F}(W)\\circ\\rho_F(W)^{-1}=c_{g,j_{W'},F}(W')\\circ\\rho_{g^{-1}F}(W')^{-1}\\circ\\eta_{g,F}(W)$. Apply $c_{g,j_{W'},F}(W')^{-1}$ (the component of the inverse of the isomorphism $c_{g,j_{W'}}$ of [lem-weil-pbc-inverse-image-composition] (2)); by the definition $\\kappa_F=c_{g,j_{W'},F}^{-1}\\circ c_{j_W,g_W,F}$ this reads $\\kappa_F(W')\\circ\\eta_{g_W,j_W^{-1}F}(W)\\circ\\rho_F(W)^{-1}=\\rho_{g^{-1}F}(W')^{-1}\\circ\\eta_{g,F}(W)$. Composing with $\\rho_{g^{-1}F}(W')$ on the left and $\\rho_F(W)$ on the right gives $\\rho_{g^{-1}F}(W')\\circ\\kappa_F(W')\\circ\\eta_{g_W,j_W^{-1}F}(W)=\\eta_{g,F}(W)\\circ\\rho_F(W)$, which evaluated at $a\\in\\Gamma(W,j_W^{-1}F)$ is the assertion.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "not in the source (agent-written); the uniqueness-of-adjoints argument is that of Sites, Lemma Tag 03CB and Categories, Lemma Tag 0B65, as used in lem-weil-pbc-inverse-image-composition"
-   }
+   "text": "Unfold the two identity-scheme comparison isomorphisms eW and eW′. Their inverses are the explicit Over.homMk identity morphisms in the statement; the other site maps are the same pullback lifts. Proof irrelevance identifies the étaleness witnesses and commutativity proofs. Thus the specialized equality is exactly the required equality of homomorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-open-preimage-fibre-product",
   "def-pc-fibre-product",
-  "lem-weil-pbc-open-immersion-monomorphism",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-weil-pbc-inverse-image"
+  "lem-weil-pbc-etale-restriction-pullback-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "not in the source (agent-identified gap needed by lem-weil-pbc-etale-mayer-vietoris-pullback step 4); written by the agent from the characterizations by unit equations of c (lem-weil-pbc-inverse-image-composition (2), after Sites Tag 03CB / Categories Tag 0B65) and of rho (lem-weil-pbc-etale-inverse-image-restriction (2), after Sites Tags 00XX/00XY)"
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites Tags 03CF and 03EF, as formalized by lem-weil-pbc-etale-restriction-pullback-unit; specialized to the cartesian open-restriction square of Schemes Tag 01JR. U1, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -213,5 +164,15 @@
   "group": "C1",
   "result": "fix",
   "note": "g:Y->X, open W, W'=g^-1 W, jW=W.ι, jW'=(g⁻¹ᵁW).ι, gW=morphismRestrict; F arbitrary Ab sheaf; units of upperStarLowerStarAdjunction; kappa = upperStarComp(gW,jW).inv ≫ upperStarComp(jW',g).hom (orientation checked vs node c); rho = upperStarIsoLocalizationRestriction (leftAdjointUniq); open-fibre-product identification via pullback.lift (gW,jW'); lets inlined, equivalence to delivered form checked by defeq both ways"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T060756-L-2916655",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
