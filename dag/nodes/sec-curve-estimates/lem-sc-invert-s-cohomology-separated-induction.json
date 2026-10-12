@@ -27,39 +27,28 @@
  ],
  "proof": [
   {
-   "text": "Let W be a separated quasi-compact open subscheme of X. By the finite-affine-cover statement, choose a finite affine open cover W = U_1 \\cup \\cdots \\cup U_n. Induct on n. For n > 1 set U = U_1 \\cup \\cdots \\cup U_{n-1} and V = U_n. Since W is separated over Spec Z, the affine-intersection statement applied with A = Z shows that each U_i \\cap V is affine; hence U \\cap V is a finite union of affine opens and is quasi-compact. The inclusions U \\hookrightarrow W and U \\cap V \\hookrightarrow W are open immersions and therefore separated by separated cancellation, while W \\to Spec Z is separated; separatedness of composites makes U and U \\cap V separated.",
+   "text": "Inside the separated open W, intersections of affine opens A,B contained in W are affine: pull back along W.ι, use IsAffineOpen.inf in W.toScheme, then map the intersection back along the open immersion. This is the absolute case of the affine-intersection statement.",
    "uses": [
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-separated-affine-open-intersection",
-    "lem-weil-pbc-separated-cancellation",
-    "lem-weil-pbc-proper-fp-permanence"
+    "lem-weil-pbc-separated-affine-open-intersection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first paragraph (separated quasi-compact opens)"
-   }
+   "elementary": false
   },
   {
-   "text": "The case n = 1 is the affine hypothesis. For n > 1, the induction hypothesis applies to the separated quasi-compact opens U and U \\cap V, and the affine hypothesis applies to V. The assumed gluing implication for U and V therefore gives P(U \\cup V) = P(W). This proves P(W) for every separated quasi-compact open W.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first paragraph (separated quasi-compact opens)"
-   }
+   "text": "Use Mathlib compact_open_induction_on, whose proof is induction on a finite affine cover, for the strengthened property Q(U): if U is contained in W, then P(U) and P(U intersect T) for every affine T contained in W. The empty case is the affine hypothesis. At a step U union V contained in W, the inductive hypothesis gives P(U), P(U intersect V), and P(U intersect T). The gluing hypothesis gives P(U union V). For each affine T contained in W, V intersect T is affine by the preceding step; U intersect T is quasi-compact by IsCompact.inter_of_isOpen using quasi-separatedness of X. The inductive hypothesis with the affine V intersect T gives P(U intersect V intersect T). Apply the gluing hypothesis to U intersect T and V intersect T, and distribute intersection over union. Finally Q(W) implies P(W).",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
   "lem-weil-pbc-separated-affine-open-intersection",
-  "lem-weil-pbc-separated-cancellation",
-  "lem-weil-pbc-proper-fp-permanence"
+  "lem-weil-pbc-qcqs-finite-affine-open-cover"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first paragraph"
+  "place": "Lemma 08DR, first induction paragraph; implemented with Mathlib compact_open_induction_on and an inductive invariant also carrying intersections with affine opens inside W"
  },
  "mathlib_searches": [
   {
@@ -137,5 +126,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-05fee",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T150949-L-2229206",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, node statement/metadata, change record, and report matched; module plus both direct importers compiled successfully and axioms were permitted."
  }
 }
