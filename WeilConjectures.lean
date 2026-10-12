@@ -410,10 +410,12 @@ public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
+public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
+public import WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
@@ -1848,7 +1850,9 @@ public import WeilConjectures.Topology.Sheaves.CechCohomology
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Topology.Sheaves.CechCriterion
 public import WeilConjectures.Topology.Sheaves.CechFlasque
+public import WeilConjectures.Topology.Sheaves.GrothendieckVanishing
 public import WeilConjectures.Topology.Sheaves.MayerVietorisVanishing
+public import WeilConjectures.Topology.Sheaves.NoetherianColimit
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
