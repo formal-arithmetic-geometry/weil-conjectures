@@ -8,7 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Sheaf.RingTheory.SmoothLocalizationConormalSplit
+import Sheaf.RingTheory.SmoothStableConormalBasisAux
+import Sheaf.RingTheory.PresentationLocalizedConormalSplit
 
 /-!
 # A polynomial presentation with a basis of its localized conormal module
@@ -56,6 +57,31 @@ theorem exists_presentation_localized_conormal_basis
       ∀ j : Fin c, b j = 1 ⊗ₜ[A]
         (Extension.Cotangent.mk (P := P.toExtension)
           ⟨P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j),
-            P.relation_mem_ker _⟩) := by sorry
+            P.relation_mem_ker _⟩) := by
+  classical
+  cases subsingleton_or_nontrivial (Localization.Away a) with
+  | inl hzero =>
+    let b : Module.Basis (Fin 0) (Localization.Away a)
+        (Localization.Away a ⊗[A] P₀.toExtension.Cotangent) := Module.Basis.empty _
+    refine ⟨n₀, m₀, 0, P₀, Nat.zero_le _, b, ?_⟩
+    intro j
+    exact Fin.elim0 j
+  | inr hnonzero =>
+    obtain ⟨m, P, hqm, b, hb⟩ :=
+      exists_stabilized_presentation_localized_conormal_basis R A a P₀ r q hstable
+    obtain ⟨e⟩ := P.localized_conormal_equiv a
+    let f := e.toLinearMap.comp
+      (LinearMap.inl (Localization.Away a)
+        (Localization.Away a ⊗[A] P.toExtension.Cotangent)
+        (KaehlerDifferential R (Localization.Away a)))
+    have hf : Function.Injective f := e.injective.comp LinearMap.inl_injective
+    have hqn : q ≤ n₀ + r := by
+      simpa using
+        (Pi.basisFun (Localization.Away a) (Fin (n₀ + r))).card_le_card_of_linearIndependent
+          (b.linearIndependent.map_injOn f hf.injOn)
+    have hc : q ≤ min (n₀ + r) m := Nat.le_min.mpr ⟨hqn, hqm⟩
+    refine ⟨n₀ + r, m, q, P, hc, b, ?_⟩
+    intro j
+    simpa using hb j
 
 end Algebra

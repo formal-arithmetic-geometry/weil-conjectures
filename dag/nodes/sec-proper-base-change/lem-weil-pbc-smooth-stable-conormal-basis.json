@@ -15,38 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Adjoin r variables z_i sent to zero to P_0, obtaining P_1 with kernel J=(I_0,z_i). Constant term and linear coefficients in the z_i define J/J^2 -> (I_0/I_0^2) plus A^r. Conversely lift coefficients and send (g,(b_i)) to g+sum lift(b_i)z_i mod J^2. Changes of coefficient lifts contribute elements of J^2. The constant and linear coefficients of a product of two kernel elements vanish in their respective quotients. These maps therefore descend, are A-linear, and are inverse.",
+   "text": "If B=A_a is the zero ring, retain P₀ and choose the empty basis of its zero localized conormal module, with c=0. The two size inequalities and all basis-value assertions are then vacuous.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If B is nonzero, apply the fixed-size stabilization and numerator-relation construction. It supplies n=n₀+r, c=q, a presentation P, q≤m and a Fin q basis consisting of its initial relation classes.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-smooth-stable-conormal-basis-unbounded"
    ],
    "elementary": false
   },
   {
-   "text": "Localize the equivalence. The given stable trivialization now makes (J/J^2)_a free of finite rank q. Lift its basis to elements g_j/a^(u_j) with g_j in J. Multiplying each basis vector by the unit a^(u_j) preserves a basis. Use those numerator elements as the initial relations, then append a finite generating family of J, which exists from the original presentation and the added variables. This gives P and c<=m.",
+   "text": "Apply the existing Presentation.localized_conormal_equiv to P, and compose the resulting equivalence with the injection of the conormal module into the first factor. Map the Fin q basis through this injection. Mathlib Module.Basis.card_le_card_of_linearIndependent applied to Pi.basisFun gives q≤n₀+r over the nonzero commutative ring B. Combine with q≤m to get q≤min(n₀+r,m). The initial-relation equality is unchanged by proof irrelevance for Fin.castLE.",
    "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For nonzero B, the localized conormal differential is split injective by the smooth-localization conormal-split theorem, transported from the polynomial quotient to A. Reduce its left inverse modulo a maximal ideal of B. The resulting injection k^c -> k^n gives c<=n by dimension. For B=0 choose c=0 and the empty basis of its zero module. Thus c<=min(n,m).",
-   "uses": [
-    "lem-weil-pbc-smooth-localization-conormal-split"
+    "lem-weil-pbc-presentation-localized-conormal-split"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-smooth-localization-conormal-split"
+  "lem-weil-pbc-smooth-stable-conormal-basis-unbounded",
+  "lem-weil-pbc-presentation-localized-conormal-split"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07EZ (lemma-compare-standard), proof of (e), stabilization by zero variables and selection of the initial relations; rank bound made explicit"
+  "place": "Tag 07EZ part (e), stabilization construction and proved rank estimate, with a separate empty-basis zero-localization case"
  },
  "mathlib_searches": [
   {
@@ -128,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-026d3",
-  "group": "Y2",
+  "reviewer": "COMPILER",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261012T184401-L-4025999",
+  "landing": "20261012T230753-L-1907525",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, proof, two remaining lemmas, node records and change record; compilation and axiom checks passed, including both direct importers."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
