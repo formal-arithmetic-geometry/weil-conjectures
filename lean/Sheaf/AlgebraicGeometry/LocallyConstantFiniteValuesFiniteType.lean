@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.LinearAlgebra.Pi
+import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-!
 # Locally constant sheaves with finitely generated values are of finite type
@@ -65,6 +66,31 @@ theorem locallyConstant_finiteValues_isFiniteType
               (ModuleCat.ofHom
                 (∑ j : Fin n, (LinearMap.proj j).smulRight (x j) :
                   (Fin n → Λ) →ₗ[Λ] M i)) ≫ (α i).inv) := by
-  sorry
+  classical
+  have hEpi : ∀ (i : 𝒰.I₀) (n : ℕ) (x : Fin n → M i),
+      Submodule.span Λ (Set.range x) = ⊤ →
+        Epi ((constantSheaf
+          (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))
+          (ModuleCat.{u + 1} Λ)).map
+            (ModuleCat.ofHom
+              (∑ j : Fin n, (LinearMap.proj j).smulRight (x j) :
+                (Fin n → Λ) →ₗ[Λ] M i)) ≫ (α i).inv) := by
+    intro i n x hx
+    let f : (Fin n → Λ) →ₗ[Λ] M i :=
+      ∑ j : Fin n, (LinearMap.proj j).smulRight (x j)
+    have hf : f = Fintype.linearCombination Λ x := by
+      ext c
+      simp [f, Fintype.linearCombination_apply]
+    have hfepi : Epi (ModuleCat.ofHom f) := by
+      apply (ModuleCat.epi_iff_surjective _).mpr
+      change Function.Surjective f
+      rw [hf]
+      exact (span_range_eq_top_iff_surjective_fintypeLinearCombination Λ x).mp hx
+    infer_instance
+  refine ⟨⟨𝒰, ?_⟩, hEpi⟩
+  intro i
+  let := hfinite i
+  obtain ⟨n, x, hx⟩ := Module.Finite.exists_fin (R := Λ) (M := M i)
+  exact ⟨n, _, hEpi i n x hx⟩
 
 end AlgebraicGeometry.Scheme
