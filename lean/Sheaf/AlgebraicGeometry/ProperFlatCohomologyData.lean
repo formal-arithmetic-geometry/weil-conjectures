@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.ProperFlatCohomologyDataConstruction
+import Sheaf.AlgebraicGeometry.ProperFlatCohomologyDataBaseChange
 
 /-! # Bounded flat models for quasi-compact separated cohomology -/
 
@@ -47,6 +49,10 @@ theorem exists_proper_flat_cohomology_model_data {X T : Scheme.{u}} (f : X ⟶ T
       ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by sorry
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
+  obtain ⟨U, C, d, ht, hU, hCge, hCle, hCflat, hCqc⟩ :=
+    exists_proper_flat_cohomology_model_data_construction f F hF t
+  refine ⟨U, C, d, ht, hU, hCge, hCle, hCflat, hCqc, ?_⟩
+  exact proper_flat_cohomology_model_data_base_change f F hF t U C d ht hU hCge hCle hCflat hCqc
 
 end AlgebraicGeometry.Scheme.Modules
