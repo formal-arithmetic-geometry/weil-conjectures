@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-etale-inverse-image-joint-representatives",
+ "kind": "statement",
+ "title": "Simultaneous local unit representatives of etale inverse-image sections",
+ "statement": "Let f:Y→X be a scheme morphism [def-pc-scheme], G an abelian sheaf on X_et [def-weil-pbc-inverse-image], F a set sheaf on X_et [def-weil-pbc-etale-sheaves], and U an etale Y-object. For any a in (f^-1 G)(U) and t in (f^-1 F)(U), there is a covering sieve R on U such that for every i:V→U in R there are a common etale X-object W, k:V→b(W), g in G(W), and s in F(W) with a|_V=(η_G(g))|_k and t|_V=(η_F(s))|_k, where b is base change and η_G and η_F are the abelian and set inverse-image adjunction units.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09XN",
+  "place": "Lemma 59.39.2, proof paragraph beginning By construction: local sections from the inverse-image construction, applied to a product.",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/00YV",
+    "place": "Proposition 7.44.3, compatibility of inverse image with forgetting algebraic structures and adjunctions"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Set inverse image is left exact: unfold its Kan-extension/sheafification construction and use Mathlib finite-limit-preservation instances, with AB5OfSize for sets and flatness of etale base change. Its composite with sheaf inclusion and evaluation therefore preserves binary products. The categorical product comparison and Types.binaryProductIso give a section of f^-1(FG×F) whose projections are the compared a and t. Here FG is G with its abelian structure forgotten.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the hom-set-compatible comparison ea supplied by etaleInverseImageAbelianLift_hom. Apply its hom-set equation to the identity, rewrite homEquiv_id and homEquiv_unit, and cancel ea.inv followed by ea.hom. This proves that ea maps the abelian adjunction unit to the set adjunction unit.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image sieve of the sheafification unit at the product section is covering by Mathlib Presheaf.imageSieve_mem. For each arrow of this sieve choose a Kan representative and apply etaleInverseImageSectionDescription_representation to obtain a single W, k, and product section z.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-section-description-representation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project z to g and s. Naturality of the inverse images of the two projections moves each projection past restriction. Naturality of the set adjunction unit computes both projected unit images. For the group coordinate use the unit equation from step 2 and naturality of ea, then cancel the sectionwise isomorphism. The second coordinate is exactly t by the product choice.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+  "lem-weil-pbc-etale-inverse-image-section-description-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/09XN",
+   "place": "Lemma 59.39.2, proof paragraph beginning By construction: local sections from the inverse-image construction, applied to a product.",
+   "external": [
+    {
+     "document": "https://stacks.math.columbia.edu/tag/00YV",
+     "place": "Proposition 7.44.3, compatibility of inverse image with forgetting algebraic structures and adjunctions"
+    }
+   ]
+  },
+  "why": "Elaboration of the cited construction; checked against the source and made into the Lean proof where closed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pairs of sections of sheaf inverse images are locally represented on one object by the adjunction unit",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pairs of sections of sheaf inverse images are locally represented on one object by the adjunction unit",
+   "results": "Eight results about local sheafification and presheaf module adjunctions; none gives simultaneous etale unit representatives.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSieve|prodComparison|sheafAdjunctionContinuous",
+   "results": "Mathlib provides product comparisons and locally surjective sheafification units; no combined etale section theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackEquivariant",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Proof, third step: Kummer naturality and Picard pullback; generator-torsor naturality, extension of the identity from simultaneous local unit representatives",
+   "via": [
+    "lem-sc-etale-generators-pullback-equivariant",
+    "lem-sc-h1-gm-pic-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageJointRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageJointRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImage_joint_representatives",
+  "statement": "theorem etaleInverseImage_joint_representatives\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (U : Y.Etaleᵒᵖ)\n    (a : ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj G).obj.obj U)\n    (t : ((Scheme.etaleSetPullback f).obj F).obj.obj U) :\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let η := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (X.smallGrothendieckTopology @Etale)\n      (Y.smallGrothendieckTopology @Etale)).unit.app F\n    let ηG := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G\n    ∃ R : Sieve U.unop, R ∈ Y.smallEtaleTopology U.unop ∧\n      ∀ (V : Y.Etale) (i : V ⟶ U.unop), R i →\n        ∃ (W : X.Etale) (k : V ⟶ b.obj W)\n          (g : G.obj.obj (op W)) (s : F.obj.obj (op W)),\n          ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj G).obj.map i.op a =\n            ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj G).obj.map k.op\n              (ηG.hom.app (op W) g) ∧\n          ((Scheme.etaleSetPullback f).obj F).obj.map i.op t =\n            ((Scheme.etaleSetPullback f).obj F).obj.map k.op\n              (η.hom.app (op W) s)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

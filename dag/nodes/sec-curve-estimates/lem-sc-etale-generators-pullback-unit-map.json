@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-etale-generators-pullback-unit-map",
+ "kind": "statement",
+ "title": "Generator pullback map equivariant on adjunction-unit sections",
+ "statement": "For a scheme morphism f:Y→X [def-pc-scheme] and an invertible X-module L [def-sc-invertible-module] whose tensor pullback f*L [def-pc-module-pullback] is invertible, write T_L and T_f*L for the etale generator torsors [def-sc-gm-torsor], b(W)=W×_X Y, η_T for the set inverse-image unit [def-weil-pbc-etale-sheaves], η_G for the abelian inverse-image unit [def-weil-pbc-inverse-image], and c_f for the map from f^-1 Gm_X to Gm_Y adjoint to pullback of units. There is a sheaf morphism ρ:f^-1 T_L→T_f*L such that for every etale W→X, g in Gm_X(W), and generator s in T_L(W), ρ(η_T(g s))=c_f(η_G(g)) ρ(η_T(s)), evaluated on b(W). This asserts equivariance only on unit images, without a transported torsor or an assertion about arbitrary inverse-image sections.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/040E",
+  "place": "Lemma 21.6.1, construction of the generator torsor; pullback naturality from original item proof steps 1 and 2 and step 3 on unit sections.",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0097",
+    "place": "Lemma 6.26.3, composition of module pullbacks"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-gm-torsor",
+  "def-pc-module-pullback",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Compare tensorPullback with module pullback using its adjunction to module pushforward. Pull a trivialisation O_W→L|_W along the first projection W×_X Y→W; composition of module pullbacks and the structure-module comparison identify it as a trivialisation of the restriction of f*L. Isomorphisms remain isomorphisms under functors.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composition comparison normalized by the pullback adjunctions satisfies coherence, so these maps commute with restrictions of etale objects. Assemble the resulting sheaf morphism T_L→f_*T_f*L and transpose it under the set inverse-image adjunction to obtain ρ. The adjunction unit equation computes ρ on η_T(s).",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback of multiplication by the unit g is multiplication by its pulled-back unit: on tensors 1⊗(g s)=f(g)(1⊗s). The defining adjunction of c_f identifies c_f(η_G(g)) with that pulled-back unit. Substitute these two unit equations to obtain the asserted equality.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-gm-torsor",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/040E",
+   "place": "Lemma 21.6.1, construction of the generator torsor; pullback naturality from original item proof steps 1 and 2 and step 3 on unit sections.",
+   "external": [
+    {
+     "document": "https://stacks.math.columbia.edu/tag/0097",
+     "place": "Lemma 6.26.3, composition of module pullbacks"
+    }
+   ]
+  },
+  "why": "Elaboration of the cited construction; checked against the source and made into the Lean proof where closed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of generators of an invertible module induces an equivariant map on etale torsors",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of generators of an invertible module induces an equivariant map on etale torsors",
+   "results": "Eight results about standard etale algebras, affine-space maps, and ring Picard groups; none gives generator torsors.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleIsoTorsor.*pullback|pullback.*etaleIsoTorsor",
+   "results": "No generator-torsor theorem in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackEquivariant",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Proof, third step: Kummer naturality and Picard pullback; generator-torsor naturality, construction and equivariance on adjunction units",
+   "via": [
+    "lem-sc-etale-generators-pullback-equivariant",
+    "lem-sc-h1-gm-pic-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackUnitMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeneratorsPullbackUnitMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_etale_generators_pullback_unit_map",
+  "statement": "theorem exists_etale_generators_pullback_unit_map\n    {X Y : Scheme.{u}} (f : Y ⟶ X) (L : X.Modules)\n    [SheafOfModules.IsInvertible.{u, u, u} L]\n    [SheafOfModules.IsInvertible.{u, u, u} ((tensorPullback f).obj L)] :\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let η := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (X.smallGrothendieckTopology @Etale)\n      (Y.smallGrothendieckTopology @Etale)).unit.app (etaleIsoTorsor L).sheaf\n    let ηG := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app\n      X.gmSheaf\n    ∃ ρ : (Scheme.etaleSetPullback f).obj (etaleIsoTorsor L).sheaf ⟶\n        (etaleIsoTorsor ((tensorPullback f).obj L)).sheaf,\n      ∀ (W : X.Etale) (g : X.gmSheaf.obj.obj (op W))\n        (s : (etaleIsoTorsor L).sheaf.obj.obj (op W)),\n        ρ.hom.app (op (b.obj W))\n            (η.hom.app (op W) ((etaleIsoTorsor L).vadd (op W) g s)) =\n          (etaleIsoTorsor ((tensorPullback f).obj L)).vadd (op (b.obj W))\n            ((upperStarGmSheafToGmSheaf f).hom.app (op (b.obj W))\n              (ηG.hom.app (op W) g))\n            (ρ.hom.app (op (b.obj W)) (η.hom.app (op W) s))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
