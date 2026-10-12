@@ -11,16 +11,31 @@
  "unit": "sk-lem-universal-datum",
  "proof": [
   {
-   "text": "Decompose the finite additive group of M into a finite direct sum of cyclic prime-power groups. The annihilator hypothesis makes each occurring prime divide n, and a nonzero element in each nontrivial summand shows multiplication by that prime on M is noninjective. Apply the prime-power step to each summand, then induct over the finite direct sum using split short exact sequences, starting with the zero object, and transport across the decomposition isomorphism.",
+   "text": "Use AddCommGroup.equiv_directSum_zmod_of_finite on M, then DirectSum.addEquivProd and coordinatewise ULift to get an additive equivalence from M to a finite product of lifted ZMod(p_i^e_i). Every additive equivalence between lifted-integer modules is linear: each lifted integer is the integer cast of its down value, and map_intCast_smul supplies compatibility. This gives the module isomorphism used for transport.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each index with e_i=0, the cyclic module is zero and hzero applies. For e_i nonzero, compose the direct-sum injection with the inverse decomposition to obtain an injective additive homomorphism g:ZMod(p_i^e_i) -> M. Apply hM to g(1) and use injectivity and map_nsmul to obtain (n:ZMod(p_i^e_i))=0. ZMod.natCast_eq_zero_iff gives p_i^e_i dividing n; since e_i is nonzero, p_i divides n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If multiplication by p_i on M were injective, induction on the exponent using mul_nsmul would make multiplication by p_i^e_i injective. But p_i^e_i kills g(1), so g(1)=0 and injectivity of g gives 1=0 in ZMod(p_i^e_i). The same cast-divisibility criterion would give p_i^e_i dividing 1, contradicting 1<p_i^e_i. Thus hp applies to every nontrivial factor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove extension-closed properties are closed under finite products by Fintype.induction_empty_option. The empty product is zero; reindexing is transported by LinearEquiv.piCongrLeft; adjoining one factor is transported by LinearEquiv.piOptionEquivProd from a binary product. The binary product is a biproduct via ModuleCat.biprodIsoProd, and ShortComplex.Splitting.ofHasBinaryBiproduct.shortExact supplies its split short exact sequence. Apply hext and finally transport along the inverse module isomorphism from the first step.",
    "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project Tag 0F08",
-  "place": "cyclic coefficient reduction"
+  "by": "worker M3",
+  "document": "Stacks Project Tag 0F08; Mathlib.GroupTheory.FiniteAbelian.Basic; Mathlib.Algebra.Homology.ShortComplex.Exact",
+  "place": "cyclic-coefficient reduction; equiv_directSum_zmod_of_finite; Splitting.ofHasBinaryBiproduct; explicit finite-product assembly"
  },
  "mathlib_searches": [
   {
@@ -83,17 +98,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T151910-L-2289205",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "ModuleCat.finite_torsion_assemble_prime_powers",
-   "ModuleCat.finite_torsion_prime_power_step"
-  ],
-  "sorry_after": [
-   "ModuleCat.finite_torsion_assemble_prime_powers"
-  ]
+  "landing": "20261012T160829-L-2611848",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
