@@ -10088,3 +10088,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:28 L: merged deliver/E3/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonDiagrams (stage 3; reviewer PASS; first push; landing 20261012T232857-L-2041164 (interface); batch 20261012T232855; modules 3; new nodes 2)
 - 23:28 L: merged deliver/E4/Sheaf.AlgebraicGeometry.CoherentKernelConditionDescent (stage 3; reviewer PASS; first push; landing 20261012T232857-L-2041305 (interface); batch 20261012T232855; modules 2; new nodes 1)
 - 23:28 L: merged deliver/E4/Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQC (stage 3; reviewer PASS; first push; landing 20261012T232858-L-2041420 (interface); batch 20261012T232855; modules 2; new nodes 1)
+- 23:28 L: merged deliver/F4/Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseImage (stage 3; reviewer PASS; first push; landing 20261012T232858-L-2041527 (interface); batch 20261012T232855; modules 2; new nodes 1)

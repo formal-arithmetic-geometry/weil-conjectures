@@ -1,0 +1,104 @@
+{
+ "id": "lem-sc-primary-fixed-field-pullback-iso",
+ "kind": "statement",
+ "title": "Fixed-field pullback agrees with the transported restricted representation",
+ "statement": "Under the fields, separable-closure, algebraic-closure, fixed-field equivalence, stalk isomorphism, and germ-action hypotheses of primary_inverseImage_restriction, the pullback of M along Spec(Ks^H) -> Spec K is isomorphic to C.inverse applied to the restricted representation R.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QT, 03QW and 04JQ; blueprint lem-sc-primary-inverse-image-restriction, proof paragraph 1"
+ },
+ "stmt_deps": [
+  "lem-exc-galois-automorphism-extension",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof": [
+  {
+   "text": "Use the stalk pullback comparison to identify the geometric stalk of the fixed-field pullback with the given stalk of M. The supplied germ-action formula and extension of every Galois automorphism to Omega make this comparison equivariant for the H-action. The equivalence C and its unit/counit then turn the equivariant stalk isomorphism into the displayed sheaf isomorphism.",
+   "uses": [
+    "lem-exc-galois-automorphism-extension",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-galois-automorphism-extension",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QT, 03QW and 04JQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivariant geometric stalk isomorphism determines etale sheaf under equivalence",
+   "results": "No direct theorem; the result is split from the represented-germ argument.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf equivalence stalk isomorphism",
+   "results": "No direct theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PrimaryFixedFieldComparison",
+   "results": "Only the supplied comparison structure was found.",
+   "date": "2026-10-13",
+   "verdict": "no direct existing proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationInverseImage",
+  "date": "2026-10-13",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-primary-inverse-image-restriction",
+   "place": "proof paragraph 1",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimaryModuleFiltrationBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.primary_fixedField_pullback_iso",
+  "statement": "theorem primary_fixedField_pullback_iso\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (R : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))\n    (i : AddCommGrpCat.of R.obj.V ≅\n      ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj M)\n    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (_hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (_hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : M.obj.obj (op X)),\n      i.hom (R.obj.ρ g (i.inv ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x M.obj z))) =\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' M.obj z)\n    (H : OpenSubgroup (Gal(Ks/K)))\n    [FiniteDimensional K (IntermediateField.fixedField H.toSubgroup)]\n    (C : PrimaryFixedFieldEquivalence K Ks H)\n    (hC : PrimaryFixedFieldComparison K Ks H Ω C)\n    : Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1}\n      (Spec.map (CommRingCat.ofHom\n        (algebraMap K (IntermediateField.fixedField H.toSubgroup))))).obj M ≅\n      C.inverse.obj (primaryRestrictedModule K Ks H R))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261012T232858-L-2041527",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261012T232858-L-2041527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

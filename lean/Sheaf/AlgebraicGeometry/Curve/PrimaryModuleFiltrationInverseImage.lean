@@ -6,6 +6,7 @@ Authors: SHEAF worker R3
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationFixedFieldComparison
+import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationBaseChange
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
 
@@ -73,6 +74,12 @@ theorem primary_inverseImage_restriction
       (e.inv ≫ Spec.map (CommRingCat.ofHom
         (algebraMap K (IntermediateField.fixedField H.toSubgroup))))).obj M ≅
       primaryAssociatedSheaf K Ks H Ω C T e (primaryRestrictedModule K Ks H R)) := by
-  sorry
+  obtain ⟨hM⟩ := primary_fixedField_pullback_iso K Ks Ω M R i haction H C hC
+  let f := e.inv
+  let g := Spec.map (CommRingCat.ofHom
+    (algebraMap K (IntermediateField.fixedField H.toSubgroup)))
+  let fg := f ≫ g
+  let hc := Etale.upperStarComp AddCommGrpCat.{u + 1} f g fg (by rfl)
+  exact ⟨(hc.app M) ≪≫ (Etale.upperStar AddCommGrpCat.{u + 1} f).mapIso hM⟩
 
 end AlgebraicGeometry.Scheme
