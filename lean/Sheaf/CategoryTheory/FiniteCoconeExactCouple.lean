@@ -6,7 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.FiniteCoconeLimits
+import Sheaf.CategoryTheory.FiniteCoconeWeakMaps
 
 /-!
 # Exact couples with finite diagonal cocones
@@ -50,6 +51,8 @@ theorem finiteCocone_weakConvergence
     (hA : ∀ n : ℤ, ∃ a b : ℤ,
       (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧
       (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)))) :
-    ∃ L : X.LimitSubobjects, X.IsRegular ∧ X.WeaklyConvergesTo L A := by sorry
+    ∃ L : X.LimitSubobjects, X.IsRegular ∧ X.WeaklyConvergesTo L A := by
+  obtain ⟨L, hreg⟩ := finiteCocone_limits X A hA
+  exact ⟨L, hreg, finiteCocone_weakMaps X A hA L hreg⟩
 
 end CategoryTheory.BigradedExactCouple
