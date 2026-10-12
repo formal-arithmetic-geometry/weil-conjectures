@@ -48,100 +48,34 @@
    }
   },
   {
-   "text": "Coherence is local on S, so take S=Spec(A). The ring A is Noetherian by [pqf-lem-affine-open-locnoeth]; f is of finite type [pqf-lem-proper-basic], so X is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply the devissage criterion [lem-pc-coherent-property-devissage] (Tag 01YI) to P(F) := \"R^p f_*F is coherent for all p>=0\". (0): R^pf_*0=0. (1): for 0->F_1->F_2->F_3->0 exact, [lem-weil-pbc-derived-functor-long-exact] (v=f_*, Mod(O_X) having enough injectives) gives the long exact sequence ... -> R^{p-1}f_*F_3 -> R^pf_*F_1 -> R^pf_*F_2 -> R^pf_*F_3 -> R^{p+1}f_*F_1 -> ...; if two of the F_i have P, each R^pf_* of the third sits in a five-term window whose four outer terms are coherent, so it is an extension of a kernel of a map of coherent modules by a cokernel of a map of coherent modules, hence coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum] (1),(2). Hypothesis (2) of the criterion is supplied in steps 3 and 4.",
+   "text": "Over the affine Noetherian T, the proper source X is Noetherian. Apply the finite-presentation integral filtration to F. Zero cohomology gives the initial factor; each quotient has finite cohomology by the integral-ideal proper-cohomology input. Transport along the quotient isomorphism and induct along Fin(m+1), using the explicit short exact sequence from a subobject inclusion and its cokernel.",
    "uses": [
-    "pqf-lem-affine-open-locnoeth",
-    "pqf-lem-proper-basic",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-pc-coherent-property-devissage",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+    "lem-pc-e2-finite-presentation-integral-filtration",
+    "lem-pc-e2-integral-ideal-proper-cohomology",
+    "lem-pc-e2-cohomology-finite-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "proof of Proposition 30.19.1 (02O5), first two paragraphs; Lemma 01YI (lemma-property)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let i:Z->X be an integral closed subscheme with generic point xi and g=f o i, proper by [lem-weil-pbc-closed-immersion-proper] (b); Z is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-chow-noetherian] (g is separated of finite type by [pqf-lem-proper-basic]) there are a proper surjection pi:Z'->Z, a dense open U of Z with pi^{-1}(U)->U an isomorphism, and an immersion j:Z'->P^m_S over S. With g'=g o pi, proper by [lem-weil-pbc-proper-composition], [lem-pc-chow-relative-ample] makes j a closed immersion, g' and pi projective, and L=j^*O(1) ample over affine opens of S and of Z. Z' is Noetherian [lem-weil-pbc-finite-type-over-noetherian], so O_{Z'} is coherent [pqf-lem-coherent-ft-locnoeth]; [lem-pc-relative-kill-by-twisting] for g' over S and for pi over Z (F=O_{Z'}) gives n with R^p g'_*L^n=0 and R^q pi_*L^n=0 for p,q>0. Put G=pi_*L^n; it is coherent by [lem-pc-projective-coherent-higher-images] for the projective pi over the Noetherian Z (L^n is coherent by [pqf-lem-coherent-ft-locnoeth]). Since Rpi_*L^n has cohomology only in degree 0 it is G[0], and [lem-pc-derived-direct-image-composition] gives Rg'_*L^n = Rg_*G; hence R^pg_*G=R^pg'_*L^n=0 for p>0 and g_*G=g'_*L^n, which is coherent by [lem-pc-projective-coherent-higher-images] for g'.",
+   "text": "Transport from the top subobject to F. Restrict scalars along f.appTop and turn the existing bijective semilinear affine-base cohomology comparison into a linear equivalence. Finiteness transfers to Gamma(T,R^q f_* F). The existing affine-local argument then gives finite presentation of higher direct images.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-chow-noetherian",
-    "pqf-lem-proper-basic",
-    "lem-weil-pbc-proper-composition",
-    "lem-pc-chow-relative-ample",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-pc-relative-kill-by-twisting",
-    "lem-pc-projective-coherent-higher-images",
-    "lem-pc-derived-direct-image-composition"
+    "lem-pc-cohomology-sections-affine-base"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "proof of Proposition 30.19.1 (02O5), Chow and twisting paragraphs; Remark 30.18.2 (remark-chow-Noetherian)"
-   }
-  },
-  {
-   "text": "Put E=i_*G. It is coherent by [lem-pc-closed-immersion-coherent-cohomology]. The closed immersion i is affine [lem-weil-pbc-closed-immersion-finite], so R^qi_*G=0 for q>0 [lem-pc-affine-morphism-hi], Ri_*G=E[0], and [lem-pc-derived-direct-image-composition] gives Rf_*E=Rg_*G: R^pf_*E=R^pg_*G is 0 for p>0 and coherent for p=0 by step 3, so P(E) holds. Over U, G is isomorphic to the invertible module L^n on pi^{-1}(U)=U, so G_z is nonzero for z in U; Supp(G) is closed [lem-weil-pbc-finite-type-module-support-closed] and contains the dense U, so Supp(G)=Z and Supp(E)=i(Z). The generic point xi lies in U, so G_xi is free of rank one over O_{Z,xi}, which is the field kappa(xi) because Z is integral [def-pc-integral-scheme]; E_xi=G_xi as an O_{X,xi}-module through the surjection O_{X,xi}->O_{Z,xi}=kappa(xi), so it is annihilated by m_xi and has dimension 1. This is hypothesis (2) of [lem-pc-coherent-property-devissage], which therefore gives P(F) for every coherent F, i.e. all R^pf_*F are coherent.",
-   "uses": [
-    "lem-pc-closed-immersion-coherent-cohomology",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-pc-affine-morphism-hi",
-    "lem-pc-derived-direct-image-composition",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "def-pc-integral-scheme",
-    "lem-pc-coherent-property-devissage"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "proof of Proposition 30.19.1 (02O5), paragraph on (Z -> X)_*G and the final sentences"
-   }
-  },
-  {
-   "text": "For S=Spec(A), properness supplies separatedness and quasi-compactness by [pqf-lem-proper-basic], and [lem-pc-cohomology-sections-affine-base] identifies H^i(X,F) with Gamma(S,R^i f_*F); its quasi-coherent hypothesis on F holds since F is coherent. By step 4 R^if_*F is coherent, hence quasi-coherent of finite type on the Noetherian S [pqf-lem-coherent-ft-locnoeth], so its module of sections over the affine S is a finitely generated A-module [lem-weil-pbc-finite-type-module-support-closed]. This proves the 02O6 finiteness clause.",
-   "uses": [
-    "pqf-lem-proper-basic",
-    "lem-pc-cohomology-sections-affine-base",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-finite-type-module-support-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.19.2 (02O6)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "pqf-lem-proper-basic",
   "lem-pc-finite-support-hi",
-  "pqf-lem-affine-open-locnoeth",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-pc-coherent-property-devissage",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-chow-noetherian",
-  "lem-weil-pbc-proper-composition",
-  "lem-pc-chow-relative-ample",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-relative-kill-by-twisting",
-  "lem-pc-projective-coherent-higher-images",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-pc-affine-morphism-hi",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "def-pc-integral-scheme",
+  "lem-pc-e2-finite-presentation-integral-filtration",
+  "lem-pc-e2-integral-ideal-proper-cohomology",
+  "lem-pc-e2-cohomology-finite-extension",
   "lem-pc-cohomology-sections-affine-base"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-coherent-hi.md",
-  "place": "proof"
+  "document": "Stacks Project",
+  "place": "Tags 01YF, 01YH, 02O5 and 02O6; filtration induction and affine comparison implemented by E2"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -329,17 +263,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T144108-L-2094105",
+  "landing": "20261012T163614-L-2785106",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
-   "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11,6 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.ProperFlatCechModel
 import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeShortening
 import Sheaf.AlgebraicGeometry.FiniteFreeResidueLocusOpen
+import Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration
+import Sheaf.AlgebraicGeometry.IntegralIdealProperCohomology
+import Sheaf.AlgebraicGeometry.CohomologyFiniteExtension
 import Sheaf.AlgebraicGeometry.FiniteFreePullbackResidueCriterion
 
 /-!
@@ -172,8 +175,63 @@ properties of the higher direct images.
 (blueprint: `lem-pc-coherent-hi`) -/
 theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
-  sorry
+    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) := by
+  classical
+  have : IsLocallyNoetherian T := isLocallyNoetherian_of_isOpenImmersion T.isoSpec.hom
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := {}
+  let R := Γ(T, ⊤)
+  let P (M : X.Modules) : Prop := ∀ n : ℕ,
+    letI : Module R (M.H n) := Module.compHom _ f.appTop.hom
+    Module.Finite R (M.H n)
+  have hzero (M : X.Modules) (hM : IsZero M) : P M := by
+    intro n
+    let : Module R (M.H n) := Module.compHom _ f.appTop.hom
+    have hz (x : M.H n) : x = 0 := by
+      have h := congrArg (fun φ ↦ H.map φ n x) (hM.eq_of_src (𝟙 M) 0)
+      simpa only [H.map_id_apply, H.map_zero_apply] using h
+    have : Subsingleton (M.H n) := ⟨fun x y ↦ (hz x).trans (hz y).symm⟩
+    infer_instance
+  have hiso {M N : X.Modules} (e : M ≅ N) (hM : P M) : P N := by
+    intro n
+    let : Module R (M.H n) := Module.compHom _ f.appTop.hom
+    let : Module R (N.H n) := Module.compHom _ f.appTop.hom
+    let eR : M.H n ≃ₗ[R] N.H n :=
+      { H.mapLinearEquiv e n with
+        map_smul' := fun a x ↦ (H.mapLinearEquiv e n).map_smul (f.appTop a) x }
+    have := hM n
+    exact Module.Finite.equiv eR
+  obtain ⟨m, c, hc, hbot, htop, hpieces⟩ :=
+    exists_finitePresentation_integral_filtration X ℱ
+  have hpc : ∀ j : Fin (m + 1), P (c j : X.Modules) := by
+    intro j
+    induction j using Fin.induction with
+    | zero =>
+      apply hzero
+      exact (Subobject.isoOfEq _ _ hbot ≪≫ Subobject.botCoeIsoZero).isZero_iff.mpr
+        (isZero_zero X.Modules)
+    | succ j ih =>
+      let a := Subobject.ofLE (c j.castSucc) (c j.succ) (hc j.castSucc_le_succ)
+      let S := ShortComplex.mk a (cokernel.π a) (cokernel.condition a)
+      have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel a }
+      obtain ⟨Z, i, hi, hZ, I, ⟨e⟩⟩ := hpieces j
+      have := hi
+      have := hZ
+      have hI : P ((pushforward i).obj I.toModules) := by
+        intro n
+        exact finite_H_pushforward_integral_ideal f Z i I n
+      have hQ : P (cokernel a) := hiso e.symm hI
+      intro n
+      exact finite_H_of_shortExact R f.appTop.hom S hS n (ih n) (hQ n)
+  have hF : P ℱ := hiso
+    (Subobject.isoOfEq _ _ htop ≪≫ asIso (⊤ : Subobject ℱ).arrow) (hpc _)
+  let : Module R (ℱ.H q) := Module.compHom _ f.appTop.hom
+  have := hF q
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H f ℱ q
+  let eR : Γ((higherDirectImage f q).obj ℱ, ⊤) →ₗ[R] ℱ.H q :=
+    { e.toAddMonoidHom with map_smul' := fun a x ↦ e.map_smulₛₗ a x }
+  exact Module.Finite.equiv (LinearEquiv.ofBijective eR he).symm
 
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct
