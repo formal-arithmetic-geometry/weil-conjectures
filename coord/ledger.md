@@ -9778,3 +9778,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/E3/Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep (stage 3; reviewer PASS; first push; landing 20261012T223402-L-1635539 (interface); batch 20261012T223357; modules 3; new nodes 2)
 - 22:34 L: merged deliver/F1/Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingReverse (stage 3; reviewer PASS; first push; landing 20261012T223402-L-1635701 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/F2/Sheaf.RingTheory.CompletionTensorLocalMapsSurjective (stage 3; reviewer PASS; first push; landing 20261012T223403-L-1635893 (interface); batch 20261012T223357; modules 2; new nodes 1)
+- 22:34 L: merged deliver/F3/Sheaf.Algebra.Homology.OpenCoverMateComplexShortExact (stage 3; reviewer PASS; first push; landing 20261012T223403-L-1636018 (interface); batch 20261012T223357; modules 2; new nodes 1)

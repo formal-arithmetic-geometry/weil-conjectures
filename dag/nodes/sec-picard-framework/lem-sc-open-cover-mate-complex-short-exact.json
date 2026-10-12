@@ -12,9 +12,9 @@
  "mathlib_match": null,
  "proof_origin": {
   "by": "agent",
-  "group": "S3",
-  "date": "2026-10-12",
-  "note": "Source argument made explicit; localized-unit/counit compatibility supplies the categorical calculation."
+  "group": "F3",
+  "date": "2026-10-13",
+  "note": "Complete Lean proof from a strictly smaller module-sheaf exactness theorem: construct natural mates, prove their counit identities and zero composite, and transport degreewise short exactness through evaluation/biproduct isomorphisms. One module-level exactness hole is split off."
  },
  "id": "lem-sc-open-cover-mate-complex-short-exact",
  "title": "Termwise open-cover short exact sequence with prescribed adjunction mates",
@@ -25,30 +25,25 @@
  ],
  "proof": [
   {
-   "text": "Construct actual extension by zero as extensionByZeroPresheaf followed by module sheafification; [lem-pur-site-restriction-module-adjunction-exact] provides its exact adjunction. Nested extension maps are natural and their transposes are the restricted unit conjugated by overFunctorMap, as follows sectionwise from the extension-presheaf/sheafification adjunction. Applying them degreewise yields complex morphisms.",
+   "text": "Construct the nested mate natural transformations from overFunctorMap and the adjunction units. Naturality of inverse homEquiv gives their naturality; apply them degreewise to build complex morphisms iU and iV. Set f=biprod.lift iU (-iV). The biproduct projection identities and the component definition prove both required mate formulas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove each nested mate followed by its counit equals the overlap counit, using homEquiv naturality, overFunctorMap naturality and the right triangle identities. Apply this degreewise to the two complex maps. Expanding biprod.lift_desc proves the complex composite is zero and its degreewise counterpart is zero. Apply the module-level mate short exactness theorem with this proved zero relation to K.X n in each degree.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "lem-sc-open-cover-mate-module-short-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Use [lem-sc-module-extension-by-zero-stalk-maps] for the canonical maps. On the overlap, f and the counits give m↦(m,−m) and (m,n)↦m+n; in either open minus the other the sole nonzero summand maps identically to the stalk. The covering assumption rules out a point outside both. These are short exact module sequences; [lem-weil-pbc-module-stalk-exact] reflects exactness. Monicity of the first map and epicity of the second follow from the corresponding stalk maps.",
-   "uses": [
-    "lem-sc-module-extension-by-zero-stalk-maps",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply HomologicalComplex.shortExact_of_degreewise_shortExact (Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean:56). Transport to any other chosen left adjoints by leftAdjointUniq; its unit and counit identities preserve the component formulas, and short exactness is invariant under isomorphism. The formulas also cover empty or coinciding opens.",
+   "text": "The evaluation functor preserves the biproduct. Its mapBiprod comparison, with identity isomorphisms at the two ends, identifies the evaluated short complex with the module-level one. Transport short exactness along this isomorphism and use HomologicalComplex.shortExact_of_degreewise_shortExact.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-module-extension-by-zero-stalk-maps",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-sc-open-cover-mate-module-short-exact"
  ],
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
@@ -124,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T173903-L-3305888",
+  "landing": "20261012T223403-L-1636018",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
