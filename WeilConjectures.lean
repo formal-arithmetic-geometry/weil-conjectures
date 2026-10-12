@@ -212,8 +212,11 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Finite
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Comparison
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.LieSubalgebra
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Representation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
@@ -1384,6 +1387,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
+public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
 public import WeilConjectures.Mathlib.Data.Nat.Factorization.Induction
 public import WeilConjectures.Mathlib.Data.Set.Image
@@ -1417,6 +1421,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.De
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
+public import WeilConjectures.Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
@@ -1588,9 +1593,16 @@ public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PointCount
 public import WeilConjectures.PointCountBound
 public import WeilConjectures.RepresentationTheory.Clifford
+public import WeilConjectures.RepresentationTheory.CompositionSeries
+public import WeilConjectures.RepresentationTheory.Constituents
+public import WeilConjectures.RepresentationTheory.ExteriorPower
+public import WeilConjectures.RepresentationTheory.ExteriorPowerDirectSum
+public import WeilConjectures.RepresentationTheory.ExteriorPowerFiltration
+public import WeilConjectures.RepresentationTheory.Filtration
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.GeometricConstituents
 public import WeilConjectures.RepresentationTheory.IntegralModel
+public import WeilConjectures.RepresentationTheory.PiTensorProduct
 public import WeilConjectures.RingTheory.BertiniNoether
 public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.Dehomogenization
@@ -1612,6 +1624,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdea
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Stabilizer
 public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
