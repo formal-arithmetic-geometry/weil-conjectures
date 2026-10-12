@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-etale-positive-direct-image-object-acyclic",
+ "kind": "statement",
+ "title": "Positive direct image vanishes from affine-open object acyclicity",
+ "statement": "For a scheme X, a continuous additive inclusion i of its Zariski opens into its small etale site satisfying i followed by forget equals the restriction functor, a small-coefficient etale abelian sheaf F with sheafification, Ext and injective resolutions as in the Lean signature, and n a natural number: if the degree n+1 etale object cohomology of F vanishes on every affine open, then the degree n+1 right derived continuous direct image of F along i is zero.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 072W and 0733(1)"
+ },
+ "proof": [
+  {
+   "text": "The inclusion equality identifies i(U) with the canonical etale open object. Every point of an open has an affine neighbourhood inside it, so affine object acyclicity makes the zero endomorphism of the restricted object-cohomology presheaf locally injective. Compare this presheaf, after coefficient universe lifts, with the homology presheaf of an injective resolution using objectCohomologyPresheaf_resolution. Exact precomposition preserves homology. Local injectivity descends through ULift and natural isomorphisms. Exact additive sheafification sends the zero endomorphism to a zero monomorphism, forcing the sheafified homology to be zero. The sheafification counit and homology comparison identify it with homology of the pushed resolution; isoRightDerivedObj then gives the claimed zero derived direct image.",
+   "uses": [
+    "lem-weil-pbc-object-cohomology-presheaf-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-object-cohomology-presheaf-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 072W and 0733(1)",
+  "note": "Second reading by V3: corrected to affine-open acyclicity; generic direct-image criterion is now proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image object cohomology sheafification vanishing",
+   "results": "service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rightDerived direct image vanishing sheafified presheaf",
+   "results": "no exact match",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "positiveDirectImageOfObjectAcyclic",
+   "results": "no existing declaration",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification zero cohomology presheaf affine basis higher direct image",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H and AffineZariskiSite.sheafEquiv; no exact vanishing criterion",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H', CategoryTheory.Limits.IsZero",
+   "results": "0 hits",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|isZero.*rightDerived|affine.*cohomology",
+   "results": "Mathlib supplies cohomologyPresheaf and local-injectivity/sheafification tools. Repository supplies etale_affine_qcoherent_succ and objectCohomologyPresheaf_resolution. PushedResolutionPositiveHomologyZero is a related proved argument, but its Scheme.{u+1} interface does not instantiate at arbitrary Scheme.{u}; this criterion uses its generic resolution dependency and the same universe-transport argument. No duplicate of affine-open tensor object acyclicity found.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-tensor-positive-direct-image-vanishing",
+   "place": "proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PositiveDirectImageOfObjectAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveDirectImageOfObjectAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.positiveDirectImageOfObjectAcyclic",
+  "statement": "theorem positiveDirectImageOfObjectAcyclic\n    (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)\n    [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]\n    [(i.sheafPushforwardContinuous AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u}]\n    [HasExt.{u} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u})]\n    [HasInjectiveResolutions (Sheaf X.smallEtaleTopology AddCommGrpCat.{u})]\n    (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (n : ℕ)\n    (hF : ∀ U : X.Opens, IsAffineOpen U → IsZero\n      (Sheaf.H' F (n + 1) (Scheme.Etale.mk U.ι))) :\n    IsZero ((((i.sheafPushforwardContinuous AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).rightDerived\n      (n + 1)).obj F))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cd9a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T225336-L-1815156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cd9a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T225336-L-1815156",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match the delivered nodes and cited sources; all three delivery modules and sole direct importer compile cleanly; axiom checks confirm only standard axioms plus the declared affine-lemma sorry dependency."
+ }
+}

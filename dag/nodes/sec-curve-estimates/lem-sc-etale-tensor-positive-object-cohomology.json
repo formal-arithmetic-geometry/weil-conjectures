@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-etale-tensor-positive-object-cohomology",
+ "kind": "statement",
+ "title": "Positive object cohomology of tensor-sections sheaves vanishes on affine opens",
+ "statement": "For a scheme X with small-coefficient sheafification and Ext as in the Lean signature, a quasi-coherent module F on X, a natural number n and every affine open U of X, the (n+1)-st etale object cohomology of the associated tensor-sections sheaf at the etale object U is zero. No vanishing on non-affine opens is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-affine-qcoherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P2 (affine case); sites-cohomology.tex, Tag 03F3; official source https://stacks.math.columbia.edu/tag/03P2"
+ },
+ "proof": [
+  {
+   "text": "Fix an affine open U. The localization comparison, with coefficient-lift injective-resolution comparison when necessary, identifies object cohomology with global etale cohomology of the restricted tensor-sections sheaf on U. The normalized tensor-pullback composition identifies that restriction with the sheaf associated to the restricted quasi-coherent module. Apply affine etale quasi-coherent acyclicity and reflect vanishing from lifted coefficients. No affine-cover descent to global cohomology on an arbitrary open is used.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-open-object-cohomology-natural",
+    "lem-sc-etale-ulift-injective-resolution",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-etale-open-qcoherent-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-open-object-cohomology-natural",
+  "lem-sc-etale-ulift-injective-resolution",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-etale-open-qcoherent-identification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P2 (affine case); sites-cohomology.tex, Tag 03F3; official source https://stacks.math.columbia.edu/tag/03P2",
+  "note": "Second reading by V3: removed the false global-vanishing claim; retained only the affine localization and acyclicity step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive étale object cohomology quasi coherent affine",
+   "results": "service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing sheaf cohomology affine étale",
+   "results": "no exact match",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorPositiveObjectCohomology",
+   "results": "no existing declaration",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology quasi coherent sheaf affine open restriction localization",
+   "results": "AffineZariskiSite.sheafEquiv and standard affine section localization lemmas; no object-cohomology affine acyclicity theorem",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H', CategoryTheory.Limits.IsZero",
+   "results": "0 hits",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|isZero.*rightDerived|affine.*cohomology",
+   "results": "Mathlib supplies cohomologyPresheaf and local-injectivity/sheafification tools. Repository supplies etale_affine_qcoherent_succ and objectCohomologyPresheaf_resolution. PushedResolutionPositiveHomologyZero is a related proved argument, but its Scheme.{u+1} interface does not instantiate at arbitrary Scheme.{u}; this criterion uses its generic resolution dependency and the same universe-transport argument. No duplicate of affine-open tensor object acyclicity found.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorPositiveDirectImageVanishing",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-tensor-positive-direct-image-vanishing",
+   "place": "proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorPositiveObjectCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorPositiveObjectCohomology",
+  "statement": "theorem etaleTensorPositiveObjectCohomology\n    (X : Scheme.{u})\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u}]\n    [HasExt.{u} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u})]\n    (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :\n    ∀ U : X.Opens, IsAffineOpen U → IsZero\n      (Sheaf.H' (etaleTensorSectionsSheaf F) (n + 1)\n        (Scheme.Etale.mk U.ι))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cd9a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T225336-L-1815156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cd9a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T225336-L-1815156",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match the delivered nodes and cited sources; all three delivery modules and sole direct importer compile cleanly; axiom checks confirm only standard axioms plus the declared affine-lemma sorry dependency."
+ }
+}

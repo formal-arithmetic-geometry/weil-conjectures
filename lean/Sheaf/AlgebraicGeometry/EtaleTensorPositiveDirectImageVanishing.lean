@@ -6,20 +6,15 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
-import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
-import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+import Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology
+import Sheaf.AlgebraicGeometry.PositiveDirectImageOfObjectAcyclic
 
 /-! # Positive direct-image vanishing
 
@@ -62,6 +57,8 @@ theorem etaleTensorPositiveDirectImageVanishing
     (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :
     IsZero ((((i.sheafPushforwardContinuous AddCommGrpCat.{u}
       (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).rightDerived (n + 1)).obj
-      (etaleTensorSectionsSheaf F))) := by sorry
+      (etaleTensorSectionsSheaf F))) := by
+  apply positiveDirectImageOfObjectAcyclic X i hi (etaleTensorSectionsSheaf F) n
+  exact etaleTensorPositiveObjectCohomology X F n
 
 end AlgebraicGeometry.Scheme.Modules
