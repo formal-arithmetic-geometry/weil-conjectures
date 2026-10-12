@@ -355,6 +355,25 @@ lemma bijective_cohomologyPresheafRestrict (V : S.Etale) :
   exact (Functor.mapExtPrecomp_bijective _ _
     (fun I _ ↦ Etale.injective_upperStar_obj_of_etale Λ t I) hu F q).comp
     (DerivedCategory.Plus.shiftedHomAddEquivExt _ _ q).bijective
+
+lemma cohomologyPresheafRestrict_congr {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale)
+    {b b' : T ⟶ V.left} (hb : b ≫ V.hom = t ≫ f) (h : b = b') :
+    cohomologyPresheafRestrict Λ f F q t V b hb =
+      cohomologyPresheafRestrict Λ f F q t V b' (h ▸ hb) := by
+  subst h
+  rfl
+
+/-- `cohomologyPresheafRestrict_comp` with the composite morphisms given up to equality. -/
+lemma cohomologyPresheafRestrict_comp' {T T' : Scheme.{u}} (t : T ⟶ X) (h : T' ⟶ T)
+    (V : S.Etale) (b : T ⟶ V.left) (hb : b ≫ V.hom = t ≫ f) (t' : T' ⟶ X) (ht' : h ≫ t = t')
+    (b' : T' ⟶ V.left) (hb' : h ≫ b = b')
+    (p : (Etale.higherDirectImagePresheaf Λ f q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
+    cohomologyPresheafRestrict Λ f F q t' V b' (by rw [← ht', ← hb', Category.assoc, hb,
+        Category.assoc]) p =
+      cohomologyRestrictOver Λ t' t h ht' F q (cohomologyPresheafRestrict Λ f F q t V b hb p) := by
+  subst ht' hb'
+  exact cohomologyPresheafRestrict_comp Λ f F q t h V b hb p
 end Restrict
 
 section Stalk
@@ -386,6 +405,64 @@ noncomputable def presheafFiberHigherDirectImagePresheafAddEquiv (q : ℤ)
     (((Scheme.pointSmallEtale s).sheafFiberCompIso
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app _).addCommGroupIsoToAddEquiv
 
+
+/-- The point `S_(s) ×_S X ⟶ V` of a pointed étale neighbourhood `(V, v)` of `s`, through the
+strict localization. -/
+noncomputable def stalkPoint (x : Scheme.PointedEtaleNeighborhood s) :
+    pullback (Scheme.strictLocalizationToBase s) f ⟶ x.1.left :=
+  pullback.fst _ _ ≫ (Scheme.strictLocalizationConeAll s).π.app x
+
+lemma stalkPoint_w (x : Scheme.PointedEtaleNeighborhood s) :
+    stalkPoint f s x ≫ x.1.hom = pullback.snd _ _ ≫ f := by
+  rw [stalkPoint, Category.assoc, ← pullback.condition]
+  congr 1
+  exact (Scheme.strictLocalizationConeAll s).w (Scheme.PointedEtaleNeighborhood.toBase s x)
+
+lemma stalkPoint_map {x y : Scheme.PointedEtaleNeighborhood s} (g : x ⟶ y) :
+    stalkPoint f s x ≫ g.1.left = stalkPoint f s y := by
+  rw [stalkPoint, stalkPoint, Category.assoc]
+  congr 1
+  exact (Scheme.strictLocalizationConeAll s).w g
+
+variable (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
+
+lemma cohomologyPresheafRestrict_stalkPoint_map {V V' : S.Etale} (a : V ⟶ V')
+    (v : (Scheme.pointSmallEtale s).fiber.obj V)
+    (p : (Etale.higherDirectImagePresheaf Λ f q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V')) :
+    cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩)
+        ((Etale.higherDirectImagePresheaf Λ f q
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).map a.op p) =
+      cohomologyPresheafRestrict Λ f F q _ V' (stalkPoint f s ⟨V', _⟩)
+        (stalkPoint_w f s ⟨V', (Scheme.pointSmallEtale s).fiber.map a v⟩) p := by
+  have e : stalkPoint f s ⟨V, v⟩ ≫ a.left =
+      stalkPoint f s ⟨V', (Scheme.pointSmallEtale s).fiber.map a v⟩ :=
+    stalkPoint_map f s (CategoryOfElements.homMk ⟨V, v⟩ ⟨V', _⟩ a rfl)
+  rw [cohomologyPresheafRestrict_map, cohomologyPresheafRestrict_congr Λ f F q _ V' _ e]
+
+/-- The comparison map from the fibre at `s` of the cohomology presheaf `V ↦ Hᵠ(V ×_S X, F|)`
+to the cohomology `Hᵠ(S_(s) ×_S X, F|)`: restriction along the points `S_(s) ×_S X ⟶ V`. -/
+noncomputable def stalkComparison :
+    ((Scheme.pointSmallEtale s).presheafFiber (A := AddCommGrpCat.{u + 1})).obj
+      (Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶
+      AddCommGrpCat.of (Ext (SemiSimplicialObject.constSheaf
+          (pullback (Scheme.strictLocalizationToBase s) f).smallEtaleTopology Λ)
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ)
+          (pullback.snd (Scheme.strictLocalizationToBase s) f)).obj F) q) :=
+  (Scheme.pointSmallEtale s).presheafFiberDesc
+    (fun V v ↦ AddCommGrpCat.ofHom (cohomologyPresheafRestrict Λ f F q _ V
+      (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩)))
+    (fun V V' a v ↦ AddCommGrpCat.ext fun p ↦
+      cohomologyPresheafRestrict_stalkPoint_map Λ f s F q a v p)
+
+lemma toPresheafFiber_stalkComparison (V : S.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V)
+    (p : (Etale.higherDirectImagePresheaf Λ f q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
+    stalkComparison Λ f s F q ((Scheme.pointSmallEtale s).toPresheafFiber V v
+      (Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) p) =
+      cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩) p :=
+  ConcreteCategory.congr_hom
+    ((Scheme.pointSmallEtale s).toPresheafFiber_presheafFiberDesc _ _ V v) p
 end Stalk
 
 /-- **Strict-henselization stalk formula** (blueprint
