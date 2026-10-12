@@ -9488,3 +9488,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:45 L: merged deliver/V3/Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T204511-L-870458 (interface); batch 20261012T204504; modules 3; new nodes 2)
 - 20:45 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent (stage 3; reviewer PASS; first push; landing 20261012T204511-L-870585 (proof); batch 20261012T204504; modules 1; new nodes 0)
 - 20:45 L: returned deliver/J2/Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective (reviewer RETURN: (reviewer X-c51e3, head c51e33f6d) D2: In lean/Sheaf/AlgebraicGeometry/StrictHenselianIntegralSectionsInjective.lean:58–)
+- 20:47 L: returned deliver/J3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison (reviewer RETURN: (reviewer X-2cc31, head 2cc3152b0) F: In coord/reports/J3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison)
