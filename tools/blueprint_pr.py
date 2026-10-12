@@ -112,11 +112,11 @@ def classify(ns, bp):
         elif imported and not present:
             state = 'upstream-absent'
         elif present:
-            if correction(node) and node.get('statement', '').strip() != present[2]:
+            if correction(node) and rendered(node.get('statement', '').strip(), ns) != present[2]:
                 state = 'ask-statement' if high(present[0]) else 'statement'
             if not state and node.get('proof'):
                 proof = bp.get(ident + '.proof')
-                if proof_body(node).strip() != (proof[2] if proof else ''):
+                if rendered(proof_body(node), ns).strip() != (proof[2] if proof else ''):
                     state = 'ask-proof' if high(present[0]) else 'proof'
         if state:
             rows.append({'chapter': node.get('chapter', ''), 'sketch': node.get('unit', ''), 'id': ident, 'kind': node.get('kind', ''), 'change': state})
@@ -161,9 +161,17 @@ def rendered(text, ns):
             found = {}
         decl = found.get('declaration') or ident
         file = found.get('file', '')
-        if file.startswith('Mathlib/'):
-            return '[' + str(decl) + '](https://leanprover-community.github.io/mathlib4_docs/' + file.removesuffix('.lean') + '.html#' + str(decl) + ')'
-        return '`' + str(decl) + '` (Mathlib)'
+        paths = sorted(set(re.findall(r'Mathlib/[A-Za-z0-9_/]+\.lean', str(file))))
+        label = '`' + str(decl).replace('`', '') + '`'
+        if paths:
+            links = ', '.join('[Mathlib source](https://github.com/leanprover-community/mathlib4/blob/master/' + path + ')' for path in paths)
+            return label + ' (' + links + ')'
+        return label + ' (Mathlib)'
+    # Expand grouped blueprint citations before substituting Mathlib leaves.
+    def group(match):
+        ids = [part.strip() for part in match.group(1).split(',')]
+        return ', '.join('[' + ident + ']' for ident in ids)
+    text = re.sub(r'\[([A-Za-z0-9_.-]+(?:,\s*[A-Za-z0-9_.-]+)+)\](?!\()', group, text)
     return re.sub(r'\[([A-Za-z0-9_.-]+)\](?!\()', replace, text)
 
 

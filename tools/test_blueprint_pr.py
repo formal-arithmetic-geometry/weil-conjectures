@@ -74,5 +74,31 @@ class RulesTests(unittest.TestCase):
         self.assertIn('missing dependency lem-absent', self.check()[1])
 
 
+class CitationTests(unittest.TestCase):
+    def setUp(self):
+        self.nodes = {'lem-leaf': {'status': 'mathlib', 'blueprint': {'is': None},
+            'mathlib_match': {'declaration': 'A.foo, B.bar (instances)',
+                             'file': 'Mathlib/A.lean, Mathlib/B.lean'}}}
+
+    def test_multiple_mathlib_sources_have_individual_urls(self):
+        text = bp.rendered('[lem-leaf]', self.nodes)
+        self.assertIn('blob/master/Mathlib/A.lean)', text)
+        self.assertIn('blob/master/Mathlib/B.lean)', text)
+        self.assertNotIn('.lean, Mathlib/', text)
+        self.assertNotIn('[lem-leaf]', text)
+
+    def test_grouped_citation_resolves_each_leaf(self):
+        text = bp.rendered('[lem-internal, lem-leaf]', self.nodes)
+        self.assertTrue(text.startswith('[lem-internal], `A.foo'))
+        self.assertNotIn('lem-leaf', text)
+
+    def test_imported_mathlib_node_keeps_internal_reference(self):
+        self.nodes['lem-leaf']['blueprint']['is'] = 'lem-leaf'
+        self.assertEqual(bp.rendered('[lem-leaf]', self.nodes), '[lem-leaf]')
+
+    def test_mathlib_leaf_removed_from_structural_dependencies(self):
+        self.assertEqual(bp.dependencies(['lem-leaf', 'lem-other'], self.nodes), ['lem-other'])
+
+
 if __name__ == '__main__':
     unittest.main()
