@@ -27,76 +27,57 @@
  ],
  "proof": [
   {
-   "text": "The coproduct $V=\\coprod_{i\\in I}U_i$ is affine because it is a finite disjoint union of affine schemes, by clause (4) of [lem-weil-pbc-affine-morphism-permanence]. The induced map $u:V\\to X$ is etale by [lem-sc-etale-coproduct-etale]. It is surjective because the images of the coproduct summands are the images of the $u_i$, whose union is all of $X$ by joint surjectivity. Since an etale morphism is flat by [def-weil-etale-morphism], the induced ring map $A\\to\\Gamma(V,\\mathcal O_V)$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. The surjectivity of $u$ says that the induced map on the points of the affine spectra is surjective; hence this flat ring map is faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat].",
+   "text": "Construct u as Sigma.desc of the U_i structure maps and V as Scheme.Etale.mk u. Etaleness follows from IsZariskiLocalAtSource.sigmaDesc [lem-sc-etale-coproduct-etale]; finite coproduct affineness follows from the Mathlib instance [lem-weil-pbc-affine-morphism-permanence]. The covering criterion [def-weil-pbc-etale-site] gives the union of the images of the f_i; the over-category equations identify these with the structure maps, and Surjective.sigmaDesc_of_union_range_eq_univ proves u surjective. Since X is Spec A and hence affine, Mathlib Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine proves faithful flatness on global sections, using flatness of etale maps [def-weil-etale-morphism], [lem-weil-pbc-flat-ring-map-iff-flat-affine], [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat].",
    "uses": [
-    "lem-weil-pbc-affine-morphism-permanence",
     "lem-sc-etale-coproduct-etale",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-etale-site",
     "def-weil-etale-morphism",
     "lem-weil-pbc-flat-ring-map-iff-flat-affine",
     "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03OZ (lemma-cech-complex), proof: finite coproduct of affine schemes; the induced map is etale and surjective; faithful flatness of the corresponding ring map"
-   }
+   "elementary": false
   },
   {
-   "text": "For every $p\\ge0$, the fibre-product distribution isomorphism [lem-sc-etale-fibre-product-coproduct] gives $$V\\times_X\\cdots\\times_XV\\cong\\coprod_{(i_0,\\ldots,i_p)\\in I^{p+1}}U_{i_0}\\times_X\\cdots\\times_XU_{i_p}.$$ Each summand is an object of $X_{\\mathrm{et}}$ by [def-weil-pbc-etale-site], since it is an iterated fibre product of etale objects.",
+   "text": "Surjectivity makes the singleton family a small-etale covering by the same covering criterion. Apply SiteCechComplex.exists_of_covering to both families. Lift the scheme coprojections to maps c_i:U_i→V in X.Etale, and use the universal property of S_2 to construct g(p,t) with projections S_1.pr(p,t,k) followed by c_(t(k)). All their composites to X agree by the defining over equations. The universal property is proved and characterizes these chosen maps uniquely; no data is chosen from an unproved mere existence result.",
    "uses": [
-    "lem-sc-etale-fibre-product-coproduct",
-    "def-weil-pbc-etale-site"
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03OZ (lemma-cech-complex), proof and equation label equation-sheaf-coprod"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-weil-pbc-scheme-coproduct-family] the coproduct summands of the right-hand side of step 2 map to it by open immersions whose images cover it; open immersions are etale by clause (1) of [lem-weil-pbc-etale-composition-cancellation], so these inclusions form a finite covering in $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site]. Apply the equalizer sheaf axiom in [def-weil-pbc-abelian-etale-sheaves] to this covering. Distinct summands have empty fibre product by [lem-weil-pbc-scheme-coproduct-family], and an abelian sheaf takes the empty object to the zero group (the empty covering equalizer). Therefore the equalizer is the product of the section groups on the summands, giving $$F(V\\times_X\\cdots\\times_XV)\\cong\\prod_{(i_0,\\ldots,i_p)\\in I^{p+1}}F(U_{i_0}\\times_X\\cdots\\times_XU_{i_p}).$$",
+   "text": "For each p, form the actual additive restriction map m_p(s)(t)=F(g(p,t))(s(0)); its zero and addition laws are the functor maps laws. The scheme coprojections form the coproduct cocone, so apply [lem-sc-etale-coproduct-cech-restriction-bijective] to show m_p bijective. AddEquiv.ofBijective turns these maps into degreewise isomorphisms, retaining the exact displayed forward maps.",
    "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03OZ, equation label equation-sheaf-coprod and the sheaf axiom for the covering by coproduct summands"
-   }
-  },
-  {
-   "text": "The isomorphisms in step 3 commute with the face restrictions: by [lem-sc-etale-fibre-product-coproduct], the face projection of the coproduct fibre product restricts on each indexed summand to the face projection of the corresponding $U_{i_0}\\times_X\\cdots\\times_XU_{i_p}$. Contravariance of $F$ therefore carries the componentwise product identification through every restriction map. By the definition of the Cech complex in [def-weil-pbc-site-cech-complex], the degreewise products and alternating face maps are exactly the Cech complexes of the one-map cover $\\{V\\to X\\}$ and of the family $(u_i)$, so the identifications give an isomorphism of Cech complexes.",
-   "uses": [
-    "lem-sc-etale-fibre-product-coproduct",
+    "lem-sc-etale-coproduct-cech-restriction-bijective",
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03OZ (lemma-cech-complex), proof: compatibility with face maps after equation-sheaf-coprod"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each omitted factor j, prove S_1.indexMap(t,j.succAbove) followed by g(p,t∘j.succAbove) equals g(p+1,t) followed by S_2.indexMap(0,j.succAbove). Both composites have the same projections by indexMap_pr and the defining projection equations for g, so the universal property gives equality. Apply F contravariantly to this equality. Distribute its additive maps through the finite signed sum defining the differential; each term agrees, proving m_p d_1=d_2 m_(p+1). HomologicalComplex.Hom.isoOfComponents assembles the degreewise isomorphisms into the required complex isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-morphism-permanence",
   "lem-sc-etale-coproduct-etale",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-etale-site",
   "def-weil-etale-morphism",
   "lem-weil-pbc-flat-ring-map-iff-flat-affine",
   "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-  "lem-sc-etale-fibre-product-coproduct",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-site-cech-complex",
   "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-site-cech-complex"
+  "lem-sc-etale-coproduct-cech-restriction-bijective"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 03OZ (label lemma-cech-complex), proof including equation label equation-sheaf-coprod"
+  "place": "Tag 03OZ, refinement map followed by equation-sheaf-coprod; face compatibility proved directly by chosen-product universality"
  },
  "mathlib_searches": [
   {
@@ -176,5 +157,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085220-L-6143",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
