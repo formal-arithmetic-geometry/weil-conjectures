@@ -69,14 +69,14 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ModuleAcyclicUnderlyingSections` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechMathlibComparison` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic` | 6 | 1 | proof |
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechComplex` | 7 | 14 | proof |
 | `Sheaf.Topology.ClosedUnionCohomologyVanishing` | 7 | 1 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
