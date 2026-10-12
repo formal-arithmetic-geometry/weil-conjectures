@@ -8534,3 +8534,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:15 L: merged deliver/W3/Sheaf.AlgebraicGeometry.PicardProductOpen (stage 3; reviewer PASS; first push; landing 20261012T161506-L-2649745 (interface); batch 20261012T161459; modules 2; new nodes 1)
 - 16:16 L: returned deliver/Q3/Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise (reviewer RETURN: (reviewer X-66e61, head 66e618bbc) G1/H7: In dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-colimit-algebras-ten)
 - 16:18 L: returned deliver/Q2/Sheaf.Topology.TopologicalInducedEdgeAndMap (reviewer RETURN: (reviewer X-c5168, head c5168021b) H3: lean/Sheaf/Topology/TopologicalInducedEdgeAndMap.lean, declaration beginning at l)
+- 16:18 L: returned deliver/K2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTower (reviewer RETURN: (reviewer X-c1a18, head c1a184386) B2: Make both new node statements self-contained. In dag/nodes/sec-proper-base-change)
