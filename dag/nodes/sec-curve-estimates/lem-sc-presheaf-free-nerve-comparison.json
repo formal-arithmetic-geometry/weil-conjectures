@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-presheaf-free-nerve-comparison",
+ "kind": "statement",
+ "title": "Additive comparison of free module nerve Hom with abelian Cech cochains",
+ "statement": "Let $\\mathcal C$ be a category, $R$ a presheaf of rings, $M$ an $R$-module presheaf, and $f:P\\to Q$ a map of set presheaves, all with values in universe $v$. Write $K$ for the free module nerve complex [lem-sc-presheaf-free-nerve-exact] and $L=\\check C^\\bullet(f,M_{ab})$ [def-sc-presheaf-cech-complex]. There are additive equivalences $e_n:\\operatorname{Hom}_R(K_n,M)\\cong L^n$, simultaneously for every $n$, satisfying $e_{n+1}(\\partial_{n+1}\\circ b)=d^n(e_n(b))$ for each $b:K_n\\to M$. No injectivity assumption on $M$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FC (lemma-injective-module-trivial-cech), 03AS (lemma-cech-map-into), 03AT (lemma-homology-complex), and 03F5 (lemma-complex-tensored-still-exact); presheaf nerve version of Hypercoverings 01GC"
+ },
+ "stmt_deps": [
+  "lem-sc-presheaf-free-nerve-exact",
+  "def-sc-presheaf-cech-complex",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Compose PresheafOfModules.freeHomEquiv with the inverse of the free abelian adjunction whiskered over C^op. This is the bijection between free module and free abelian maps. On a basis generator x its value is a.app X (ModuleCat.freeMk x).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-sc-presheaf-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Equality on free abelian generators proves additivity of this bijection. Equality on generators also shows naturality under maps of set presheaves: precomposition by the free module map equals precomposition by the free abelian map. Apply this to each nerve face.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In every degree use the additive equivalence just constructed. Expand both alternating differentials as sums of faces, commute the additive equivalence through the sum and integer scalar multiples, and apply the generator-level naturality identity termwise. This proves the stated differential compatibility.",
+   "uses": [
+    "lem-sc-presheaf-free-nerve-exact",
+    "def-sc-presheaf-cech-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-sc-presheaf-cech-complex",
+  "def-weil-pbc-free-module",
+  "lem-sc-presheaf-free-nerve-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FC (lemma-injective-module-trivial-cech), 03AS (lemma-cech-map-into), 03AT (lemma-homology-complex), and 03F5 (lemma-complex-tensored-still-exact); presheaf nerve version of Hypercoverings 01GC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv|descToInjective|comp_descToInjective",
+   "results": "25 hits; Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact nerve theorem; generic adjunction and injectivity tools used in the compiled proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free module presheaf Cech nerve is exact in positive degrees and maps into an injective object give vanishing cohomology",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, CochainComplex.cm5b.instInjectiveXIntI",
+   "date": "2026-10-12",
+   "verdict": "No exact nerve theorem; generic adjunction and injectivity tools used in the compiled proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.descToInjective",
+   "results": "3 hits; CategoryTheory.ShortComplex.Exact.descToInjective, CategoryTheory.ShortComplex.Exact.comp_descToInjective, CategoryTheory.ShortComplex.Exact.comp_descToInjective_assoc",
+   "date": "2026-10-12",
+   "verdict": "No exact nerve theorem; generic adjunction and injectivity tools used in the compiled proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free module presheaf Cech nerve is exact in positive degrees and maps into an injective object give vanishing cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: injective module sheaves are acyclic after forgetting module structure; the free-nerve exactness and Hom comparison steps of Tags 03FC and 03AS",
+   "via": [
+    "lem-sc-injective-presheaf-module-nerve-acyclic",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafFreeNerveComparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafFreeNerveComparison.lean",
+  "declaration": "CategoryTheory.presheafFreeNerveComplex_comparison",
+  "statement": "theorem presheafFreeNerveComplex_comparison {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v}) (M : PresheafOfModules.{v} R) (f : Arrow (Cᵒᵖ ⥤ Type v)) : ∃ e : ∀ n : ℕ, ((presheafFreeNerveComplex R f).X n ⟶ M) ≃+ (presheafCechComplex f M.presheaf).X n, ∀ (n : ℕ) (b : (presheafFreeNerveComplex R f).X n ⟶ M), e (n + 1) ((presheafFreeNerveComplex R f).d (n + 1) n ≫ b) = (presheafCechComplex f M.presheaf).d n (n + 1) (e n b)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135335-L-1700830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135335-L-1700830",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

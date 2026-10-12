@@ -14,38 +14,40 @@
  ],
  "proof": [
   {
-   "text": "Apply the free R-module presheaf functor to the Čech nerve. At each object, replace the target by the image of f, which leaves the nerve unchanged. The map onto its image is surjective. Apply the set-level free nerve resolution with the ring R(X) to prove exactness in every positive chain degree. Empty image fibres contribute zero.",
+   "text": "Write q=n+1. Use positive exactness of the free module presheaf nerve K and the additive comparison e between Hom(K_i,M) and abelian Cech cochains.",
    "uses": [
-    "lem-weil-pbc-set-cech-nerve-free-resolution"
+    "lem-sc-presheaf-free-nerve-exact",
+    "lem-sc-presheaf-free-nerve-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03F5, fibrewise contraction in Tag 03AT; Hypercoverings 01GC"
-   }
+   "elementary": false
   },
   {
-   "text": "Exactness is objectwise in module presheaves. A cocycle into M factors through the image of the outgoing chain differential. Injectivity extends it to the preceding term, by Mathlib ShortComplex.Exact.descToInjective and comp_descToInjective. Free module and free abelian adjunctions identify these Hom groups and their differentials with the complex of def-sc-presheaf-cech-complex. Thus every positive cocycle is a coboundary.",
+   "text": "For a cocycle c, its inverse under e is a map a:K_(n+1)->M killing K_(n+2)->K_(n+1), by boundary compatibility and injectivity of e. Apply Mathlib ShortComplex.Exact.descToInjective to the exact short complex K_(n+2)->K_(n+1)->K_n. The identity comp_descToInjective shows that its extension b:K_n->M pulls back to a. Boundary compatibility sends b to a cochain whose differential is c.",
    "uses": [
-    "def-sc-presheaf-cech-complex",
-    "def-sp-injective-resolutions"
+    "def-sp-injective-resolutions",
+    "lem-sc-presheaf-free-nerve-exact",
+    "lem-sc-presheaf-free-nerve-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FC proof, following 03FB, via Tag 03AS"
-   }
+   "elementary": true
+  },
+  {
+   "text": "ShortComplex.ab_exact_iff converts this cocycle lifting into ExactAt of the abelian Cech complex at n+1. ExactAt.isZero_homology gives the asserted zero homology.",
+   "uses": [
+    "def-sc-presheaf-cech-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-set-cech-nerve-free-resolution",
-  "def-sc-presheaf-cech-complex",
-  "def-sp-injective-resolutions"
+  "lem-sc-presheaf-free-nerve-exact",
+  "lem-sc-presheaf-free-nerve-comparison",
+  "def-sp-injective-resolutions",
+  "def-sc-presheaf-cech-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Proof of Tag 03FC, using 03F5, 03AT, 03AS; presheaf nerve version from Hypercoverings 01GC"
+  "place": "Tags 03FC (lemma-injective-module-trivial-cech), 03AS (lemma-cech-map-into), 03AT (lemma-homology-complex), and 03F5 (lemma-complex-tensored-still-exact); presheaf nerve version of Hypercoverings 01GC"
  },
  "mathlib_searches": [
   {
@@ -134,9 +136,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T112828-L-763599",
+  "landing": "20261012T135335-L-1700830",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

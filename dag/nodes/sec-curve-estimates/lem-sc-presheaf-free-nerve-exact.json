@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-presheaf-free-nerve-exact",
+ "kind": "statement",
+ "title": "Positive exactness of the free module presheaf nerve",
+ "statement": "Let $\\mathcal C$ be a category, $R$ a presheaf of rings and $f:P\\to Q$ a map of set presheaves. All values lie in the same universe $v$. Let $K_n=R[N_n(f)]$ be the free module presheaf on the $(n+1)$-fold presheaf fibre product, with alternating deletion boundary [def-weil-pbc-free-module, def-weil-presheaf-modules-sheafification, def-sc-presheaf-cech-complex]. Then $K$ is exact at $n+1$ for every natural number $n$. No surjectivity of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FC (lemma-injective-module-trivial-cech), 03AS (lemma-cech-map-into), 03AT (lemma-homology-complex), and 03F5 (lemma-complex-tensored-still-exact); presheaf nerve version of Hypercoverings 01GC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate at X. The universal property of the objectwise wide pullback identifies the degree-n basis with tuples (a_0,...,a_n) with common image under f(X). Delete entries to identify the evaluated alternating differential with setCechDifferential over R(X). Replacing the target by the range of f(X) preserves these tuples and deletion maps.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-sc-presheaf-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The induced set map P(X) to range(f(X)) is surjective. The last conjunct of setCechNerve_free_resolution gives equality of image and kernel in each positive degree. Empty fibres and empty P(X) contribute zero. Thus each evaluated module complex is exact at n+1.",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module presheaf kernels and cokernels are objectwise; evaluations jointly reflect exactness. The objectwise exactness therefore gives exactness of K at n+1. All free terms have values in universe v.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-sc-presheaf-cech-complex",
+  "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FC (lemma-injective-module-trivial-cech), 03AS (lemma-cech-map-into), 03AT (lemma-homology-complex), and 03F5 (lemma-complex-tensored-still-exact); presheaf nerve version of Hypercoverings 01GC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv|descToInjective|comp_descToInjective",
+   "results": "25 hits; Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact nerve theorem; generic adjunction and injectivity tools used in the compiled proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free module presheaf Cech nerve is exact in positive degrees and maps into an injective object give vanishing cohomology",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, CochainComplex.cm5b.instInjectiveXIntI",
+   "date": "2026-10-12",
+   "verdict": "No exact nerve theorem; generic adjunction and injectivity tools used in the compiled proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.descToInjective",
+   "results": "3 hits; CategoryTheory.ShortComplex.Exact.descToInjective, CategoryTheory.ShortComplex.Exact.comp_descToInjective, CategoryTheory.ShortComplex.Exact.comp_descToInjective_assoc",
+   "date": "2026-10-12",
+   "verdict": "No exact nerve theorem; generic adjunction and injectivity tools used in the compiled proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free module presheaf Cech nerve is exact in positive degrees and maps into an injective object give vanishing cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: injective module sheaves are acyclic after forgetting module structure; the free-nerve exactness and Hom comparison steps of Tags 03FC and 03AS",
+   "via": [
+    "lem-sc-injective-presheaf-module-nerve-acyclic",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafFreeNerveExact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafFreeNerveExact.lean",
+  "declaration": "CategoryTheory.presheafFreeNerveComplex_exactAt",
+  "statement": "theorem presheafFreeNerveComplex_exactAt {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v}) (f : Arrow (Cᵒᵖ ⥤ Type v)) (n : ℕ) : (presheafFreeNerveComplex R f).ExactAt (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135335-L-1700830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135335-L-1700830",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
