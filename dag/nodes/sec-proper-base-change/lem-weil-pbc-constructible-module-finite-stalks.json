@@ -28,70 +28,42 @@
  ],
  "proof": [
   {
-   "text": "*The stratum through $t$.* Let $t\\in T$ be the point under $\\bar t$. Choose a stratification $(\\iota_k:Z_k\\to T)_{k<n}$ with strata $T_k=\\iota_k(Z_k)$ as in the definition of constructibility [def-weil-pbc-etale-constructible-sheaf], [def-constructible-stratification]. The $T_k$ cover $T$, so $t\\in T_k$ for some $k$; fix such $k$ and $z\\in Z_k$ with $\\iota_k(z)=t$.",
+   "text": "Unpack the constructibility witness S. Since its strata cover T, the image of the unique point of Spec Omega belongs to a stratum k. Rewrite membership using range_immersion to choose z in S.domain k above that image.",
    "uses": [
     "def-weil-pbc-etale-constructible-sheaf",
     "def-constructible-stratification",
     "def-weil-geometric-point"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RW (definition-constructible): a finite partition of T into locally closed (constructible) strata"
-   }
+   "elementary": true
   },
   {
-   "text": "*$\\bar t$ factors through the stratum.* Since $\\iota_k$ is an immersion and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ maps the unique point to $t=\\iota_k(z)\\in\\iota_k(Z_k)$, [lem-weil-pbc-field-point-factors-through-immersion] (2) gives a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to Z_k$ (same algebraically closed field $\\Omega$) with $\\iota_k\\circ\\bar z=\\bar t$.",
+   "text": "Install the immersion instance of S.immersion k. Apply fieldPoint_factorsThrough_immersion to z and s to obtain s' : Spec Omega -> S.domain k with s' followed by S.immersion k equal to s.",
    "uses": [
-    "lem-weil-pbc-field-point-factors-through-immersion",
-    "def-weil-geometric-point"
+    "lem-weil-pbc-field-point-factors-through-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, discussion before Lemma 01J9 (lemma-characterize-points) with Definition 01IO (definition-immersion)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Stalk of the inverse image.* Let $G=\\iota_k^{-1}\\mathcal F$, the inverse image of $\\mathcal F$ [def-weil-pbc-inverse-image]; its underlying abelian sheaf is the inverse image of the underlying abelian sheaf of $\\mathcal F$ (the inverse image of module sheaves is the same functor, by the convention of [def-weil-pbc-inverse-image]). By [lem-weil-pbc-inverse-image-stalk-germ] applied to $f=\\iota_k:Z_k\\to T$, the geometric point $\\bar y=\\bar z$ of $Z_k$ and the underlying abelian sheaf of $\\mathcal F$, whose image point is $\\iota_k\\circ\\bar z=\\bar t$ (Step 2), there is an isomorphism of abelian groups, in particular a bijection of sets, $G_{\\bar z}\\xrightarrow{\\sim}\\mathcal F_{\\bar t}$, stalks taken as in [def-weil-pbc-geometric-stalks].",
+   "text": "Apply the first equivalence of finite_locally_constant_module_values_iff to the finite-value trivialization of the pullback G supplied by constructibility. Its IsFiniteSheaf field gives ConcreteCategory.IsFinitelyGenerated for the module stalk of G at s'.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03Q1 (lemma-stalk-pullback) (3): (f^{-1}G)_{\\bar y} = G_{f(\\bar y)}"
-   }
-  },
-  {
-   "text": "*The stalk on the stratum is finite.* By clause (b) of [def-weil-pbc-etale-constructible-sheaf], $G=\\iota_k^{-1}\\mathcal F$ is a sheaf of $\\Lambda_{Z_k}$-modules on $(Z_k)_{\\Et}$ with an etale covering $\\{U_i\\to Z_k\\}$ and finite $\\Lambda$-modules $M_i$ such that $G|_{U_i}\\cong\\underline{M_i}$; this is condition (1) of [lem-weil-pbc-finite-locally-constant-module-values] for $Y=Z_k$, $\\mathcal G=G$. By (1)$\\Rightarrow$(2) of that lemma, $G$ is finite [def-constructible-finite]: the underlying set of its stalk at every geometric point is finite; $\\bar z$ is such a point, an algebraically closed field being separably closed. The stalk there is the stalk of $G$ as a sheaf of $\\Lambda$-modules, the colimit in $\\Lambda$-modules of $G(V)$ over the pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar z$; this index category is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so by [lem-weil-pbc-filtered-colimit-modules-elementwise] (1), (2), applied with $R=\\Lambda$ and with $R=\\mathbf Z$, the colimit in $\\Lambda$-modules and the colimit in abelian groups (the stalk $G_{\\bar z}$ of the underlying abelian sheaf, [def-weil-pbc-geometric-stalks]) are both the set of germs $(V,\\bar v,a)$, $a\\in G(V)$, modulo the same relation (equal after pulling back to a common refinement), so they have the same underlying set. Hence $G_{\\bar z}$ is a finite set.",
-   "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
     "lem-weil-pbc-finite-locally-constant-module-values",
     "def-constructible-finite",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-inverse-image",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RU (definition-finite-locally-constant) and Definition 03RW (definition-constructible); the stalk as a colimit over etale neighbourhoods, Section 03PN (section-stalks)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Conclusion.* By Steps 3 and 4, $\\mathcal F_{\\bar t}$ is in bijection with the finite set $G_{\\bar z}$, so it is finite. With its $\\Lambda$-module structure (the colimit of the $\\Lambda$-modules $\\mathcal F(U)$, whose underlying abelian group is $\\mathcal F_{\\bar t}$ by the comparison of Step 4 applied to $\\mathcal F$ and $\\bar t$) it is generated by its finitely many elements, hence a finitely generated $\\Lambda$-module.",
+   "text": "Apply the existing module-valued Etale.upperStarCompSheafFiberIso to the immersion and s', then ConcreteCategory.IsFinitelyGenerated.of_iso. Rewrite s' followed by the immersion as s. This works directly in ModuleCat, so no passage to the underlying abelian sheaf or germ compatibility is needed.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+    "lemma-openclosed-stalk-upperstar"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 095N (lemma-category-constructible-modules): 'every stalk F_x is a finite type Lambda-module'"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Convert concrete finite generation to Module.Finite using ModuleCat.isFinitelyGenerated_iff. Mathlib Module.finite_of_finite gives a finite underlying set over the finite ring Lambda. Return both conclusions.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -99,18 +71,16 @@
   "def-constructible-stratification",
   "def-weil-geometric-point",
   "lem-weil-pbc-field-point-factors-through-immersion",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "def-weil-pbc-geometric-stalks",
   "lem-weil-pbc-finite-locally-constant-module-values",
   "def-constructible-finite",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 095N (line 12412 ff.), the sentence 'every stalk F_x is a finite type Lambda-module', which the source states without proof; written out from Definitions 03RU, 03RW and Lemma 03Q1"
+  "place": "Proof of Lemma 095N, via Definitions 03RU and 03RW and Lemma 03Q1; stage-3 K1 uses the existing module-valued pullback-stalk isomorphism directly, avoiding the underlying-group comparison."
  },
  "mathlib_searches": [
   {
@@ -186,5 +156,15 @@
   "group": "H1",
   "result": "pass",
   "note": "T:Scheme.{u}; Λ:Type(u+1) CommRing+Finite; F ModuleCat sheaf with recorded IsConstructibleEtaleModuleSheaf; geometric point Ω:Type u Field+IsAlgClosed, s:Spec Ω⟶T; plain (pointSmallEtale s).sheafFiber; Finite ∧ Module.Finite Λ; #check names resolve to AlgebraicGeometry.Scheme.*"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T042410-L-1816651",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
