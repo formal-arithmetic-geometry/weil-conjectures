@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "how": "Exact, one existing instance per clause. Both are used by instance synthesis in the fpqc-family descent theorem."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 3 ('Both properties are Zariski-local on the target and hold after the base change Y_i -> Y'), the property 'etale' (Stacks 02VN for the fpqc covering {Y' -> Y}); this node is the unramified part of 02VN's proof ('flat and G-unramified are fpqc local on the base', Lemma 02VM)",
+   "via": [
+    "lem-galois-fpqc-descend-unramified",
+    "lem-galois-fpqc-descend-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-galois-lft-formally-unramified-single-fpqc-descent",
+ "title": "Mathlib descent of local finite type and formal unramifiedness along one fpqc morphism",
+ "statement": "Let f: X -> S and g: T -> S be morphisms of schemes [def-pc-scheme], with g surjective [def-weil-surjective-morphism], flat [def-weil-flat-morphism], and quasi-compact [def-weil-finite-type-morphism]. Each of the two properties P = locally of finite type [def-weil-finite-type-morphism] and P = formally unramified [def-weil-pbc-formally-unramified-morphism] descends along g: for any fibre product square [def-pc-fibre-product] with second projection f_T, P(f_T) implies P(f). These are separate descent assertions; neither assumes the other property.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "place": "instances at lines 35-36 and 44-45; HasRingHomProperty.descendsAlong_flat applied to RingHom.FiniteType.codescendsAlong_faithfullyFlat and RingHom.FormallyUnramified.codescendsAlong_faithfullyFlat"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-surjective-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For each property use its ring-hom characterization and Zariski locality to reduce to affine schemes. A flat surjective map of affine schemes induces a faithfully flat ring map. RingHom.FiniteType.codescendsAlong_faithfullyFlat gives finite-type descent; RingHom.FormallyUnramified.codescendsAlong_faithfullyFlat gives formal-unramified descent. HasRingHomProperty.descendsAlong_flat performs the affine-to-scheme passage for each property. These are the two existing instances of Mathlib LocalFlatDescent.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-formally-unramified-morphism",
+    "def-weil-flat-morphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "place": "lines 35-36 and 44-45"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally of finite type and formally unramified morphisms descend along surjective flat quasi-compact morphisms",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unramified morphism descends along an fpqc covering family",
+   "results": "AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "The source library supplies covering-family descent; Mathlib LocalFlatDescent supplies the two single-morphism instances, as verified by reading the sources and Lean compilation."
+  },
+  {
+   "tool": "grep",
+   "query": "DescendsAlong.*(LocallyOfFiniteType|FormallyUnramified)|of_isPullback_of_ofArrows_mem_fpqcTopology",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-12",
+   "verdict": "The source library supplies covering-family descent; Mathlib LocalFlatDescent supplies the two single-morphism instances, as verified by reading the sources and Lean compilation."
+  }
+ ],
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact",
+    "AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact"
+   ],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent",
+  "declaration": "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact",
+  "declarations": [
+   "AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact",
+   "AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact"
+  ],
+  "statement": "instance : DescendsAlong @LocallyOfFiniteType (@Surjective ⊓ @Flat ⊓ @QuasiCompact)",
+  "branch": "mathlib",
+  "by": "B3",
+  "date": "2026-10-12",
+  "existing": true,
+  "note": "Two already proved instances, one per independent clause; second signature: instance : DescendsAlong @FormallyUnramified (@Surjective ⊓ @Flat ⊓ @QuasiCompact). Both names verified by #check."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053921-L-2630587",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053921-L-2630587",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

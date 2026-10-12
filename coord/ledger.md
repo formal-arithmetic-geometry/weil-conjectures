@@ -6156,3 +6156,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit (stage 3; reviewer PASS; first push; landing 20261012T053920-L-2630140 (proof); batch 20261012T053916; modules 1; new nodes 1)
 - 05:39 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange (stage 3; reviewer PASS; first push; landing 20261012T053921-L-2630248 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/B3/Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent (stage 3; reviewer PASS; first push; landing 20261012T053921-L-2630441 (proof); batch 20261012T053916; modules 1; new nodes 1)
+- 05:39 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent (stage 3; reviewer PASS; first push; landing 20261012T053921-L-2630587 (proof); batch 20261012T053916; modules 1; new nodes 2)
