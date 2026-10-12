@@ -14,35 +14,32 @@
  },
  "proof": [
   {
-   "text": "Choose an affine neighbourhood W of x inside U and restrict P and its termwise finite free splittings to W. The restricted term is the image of an idempotent on a finite free sheaf. On W, tilde-Gamma identifies the idempotent with its matrix of global sections. Splitting this matrix in modules and applying tilde identifies the term with the sheaf of a finite projective module. Restriction preserves the bounds and zero terms.",
+   "text": "Extract bounds a,b and splitting maps from IsStrictlyPerfect. Apply simultaneous affine trivialization to the sheaf family P.X indexed by the finite interval Icc a b.",
    "uses": [
     "def-pc-perfect-complex",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-pc-finite-retract-sheaves-affine-trivialization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the finite projective standard free cover to each of the finitely many terms inside the bounds. Choose a principal open containing x for each term. Their finite intersection is an affine neighbourhood V of x inside U. Restrict P and its differential termwise to V to obtain F. Every term inside the bounds is free of finite rank by the chosen trivializations; every other term is zero, hence free of rank zero. This also covers an empty degree interval.",
-   "uses": [
-    "lem-weil-pbc-finite-projective-standard-free-cover"
-   ],
-   "elementary": false
+   "text": "Construct F as termwise restriction of P along the resulting inclusion. The additive restriction functor preserves zero objects, hence the same bounds hold. Inside Icc a b use the selected trivializations. Outside it, use the zero-object isomorphism to the free sheaf on ULift(Fin 0); its identity is zero by freeHomEquiv on an empty index type.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Restrict the given derived isomorphism to V. Exact-functor localization (mapDerivedCategoryFactors) identifies restriction of Q(P) with Q(F). The nested-open comparison overFunctorMap, transported by mapDerivedCategoryCompIso and mapDerivedCategoryNatIso, identifies the other endpoint with E restricted directly to V. Composing gives E|V isomorphic to Q(F).",
+   "text": "Map hEP by derived restriction along V <= U. Compose overFunctorMap transported by mapDerivedCategoryNatIso and mapDerivedCategoryCompIso with this mapped isomorphism and mapDerivedCategoryFactors at P. This identifies direct restriction of E to V with Q(F).",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-finite-projective-standard-free-cover"
+  "lem-pc-finite-retract-sheaves-affine-trivialization"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Definitions 08C4 and 08CM; algebra.tex Tag 00NX (3) implies (7); schemes.tex Tags 01IA and 01IB"
+  "place": "Definitions 08C4 and 08CM; termwise reduction to Tag 00NX. Derived transport follows the proved private restrict_model in Sheaf.AlgebraicGeometry.PerfectCommonAffineModels."
  },
  "mathlib_searches": [
   {
@@ -126,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T184359-L-4025278",
+  "landing": "20261012T215157-L-1305258",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

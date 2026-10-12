@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.FiniteRetractSheavesAffineTrivialization
+import Mathlib.Data.Int.Interval
 
 /-! # Finite free refinement of a strictly perfect local model
 
@@ -62,6 +62,37 @@ theorem exists_finiteFree_refinement_of_isStrictlyPerfect
           (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin r)))) ∧
         Nonempty ((SheafOfModules.overFunctor.{u}
           (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅
-            DerivedCategory.Q.obj F) := by sorry
+            DerivedCategory.Q.obj F) := by
+  classical
+  obtain ⟨⟨a, b, hb⟩, hp⟩ := hP
+  obtain ⟨V, hxV, hVU, hAffine, hfree⟩ :=
+    exists_affine_trivialization_of_finite_retracts X U (Finset.Icc a b) P.X
+      (fun n _ ↦ hp n) x hx
+  let R := SheafOfModules.overMap (moduleRings X.toRingedSpace) (homOfLE hVU)
+  let F := (R.mapHomologicalComplex (.up ℤ)).obj P
+  refine ⟨V, hxV, hVU, hAffine, F, ⟨a, b, fun n hn ↦ R.map_isZero (hb n hn)⟩, ?_, ?_⟩
+  · intro n
+    by_cases hn : n ∈ Finset.Icc a b
+    · exact hfree n hn
+    · have hz : IsZero (F.X n) := R.map_isZero (hb n (by
+        simp only [Finset.mem_Icc, not_and_or, not_le] at hn
+        exact hn))
+      let Z := SheafOfModules.free
+        (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin 0))
+      have hZ : IsZero Z := by
+        apply (IsZero.iff_id_eq_zero Z).2
+        apply (SheafOfModules.freeHomEquiv Z).injective
+        funext i
+        exact Fin.elim0 i.down
+      exact ⟨0, ⟨hz.iso hZ⟩⟩
+  · obtain ⟨e⟩ := hEP
+    let G := SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U
+    have : PreservesFiniteLimits (G ⋙ R) := comp_preservesFiniteLimits _ _
+    have : PreservesFiniteColimits (G ⋙ R) := comp_preservesFiniteColimits _ _
+    exact ⟨(Functor.mapDerivedCategoryNatIso
+      (SheafOfModules.overFunctorMap (moduleRings X.toRingedSpace)
+        (homOfLE hVU))).symm.app E ≪≫
+      (Functor.mapDerivedCategoryCompIso G R).app E ≪≫ R.mapDerivedCategory.mapIso e ≪≫
+        R.mapDerivedCategoryFactors.app P⟩
 
 end AlgebraicGeometry.Scheme
