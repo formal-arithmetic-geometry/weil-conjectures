@@ -7,12 +7,8 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.RegularThroughLocalization
+import Sheaf.RingTheory.GRingPairsForward
+import Sheaf.RingTheory.GRingPairsBackward
 
 /-!
 # The G-ring criterion using pairs of prime ideals
@@ -66,4 +62,4 @@ theorem isGRing_iff_pairsOfPrimes (R : Type u) [CommRing R] [IsNoetherianRing R]
       let C := AdicCompletion (IsLocalRing.maximalIdeal L) L
       let F := TensorProduct (R ⧸ q) q.ResidueField C
       IsNoetherianRing F ∧ Algebra.IsGeometricallyRegular q.ResidueField F := by
-  sorry
+  exact ⟨isGRing_pairsOfPrimes_forward R, isGRing_pairsOfPrimes_backward R⟩
