@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Fix distinct components $Z_i\\neq Z_j$. By [lem-sc-scheme-sober] $Z_i$ has a generic point $\\eta_i$ with $Z_i=\\overline{\\{\\eta_i\\}}$, and generic points are unique; hence two distinct points of $Y$ have distinct closures, so $Y$ is Kolmogorov, and so is its subspace $Z_i$ (an open of $Z_i$ is the trace of an open of $Y$). The point $\\eta_i$ is not in $Z_j$, since otherwise $Z_i=\\overline{\\{\\eta_i\\}}\\subseteq Z_j$, and maximality of the irreducible subset $Z_i$ would give $Z_i=Z_j$. Thus $U=Z_i\\setminus Z_j$ is a nonempty open subset of $Z_i$, which is irreducible [def-weil-irreducible-components], and $\\dim Z_i\\le\\dim Y\\le1$ because a chain of irreducible closed subsets of the closed subspace $Z_i$ is such a chain in $Y$ [def-kun-topological-krull-dimension]. Every point $x$ of $Z_i\\cap Z_j$ lies outside $U$, so [lem-sc-dim-one-point-outside-open-closed], applied to $Z_i$, says that $\\{x\\}$ is closed in $Z_i$; because $Z_i$ is closed in $Y$, $\\{x\\}$ is closed in $Y$.",
+   "text": "Fix distinct components $Z_1,Z_2$. If $Z_1\\subseteq Z_2$, maximality of $Z_1$ gives equality, a contradiction. Thus the open subset $U=Z_1\\setminus Z_2$ of the irreducible subspace $Z_1$ is nonempty. The closed subspace $Z_1$ is sober and T0 by [lem-sc-scheme-sober], Noetherian, and has dimension at most one by the subspace dimension inequality. Apply IsOpen.isClosed_singleton_of_mem_compl from WeilConjectures.Mathlib.Topology.KrullDimension, which realizes [lem-sc-dim-one-point-outside-open-closed], to each point of the complement. The closed embedding of $Z_1$ in $Y$ transports its closed singletons to $Y$. No choice of generic points is needed to prove that U is nonempty.",
    "uses": [
     "lem-sc-scheme-sober",
     "lem-sc-dim-one-point-outside-open-closed"
@@ -48,13 +48,15 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX proof, first paragraph: distinct components have proper intersections and points in them are closed; the generic-point argument is written out here"
+    "place": "Varieties Lemma 09NX proof, first paragraph: distinct components have proper intersections and points in them are closed; non-containment follows directly from maximality"
    }
   },
   {
-   "text": "The intersection $Z_i\\cap Z_j$ is a closed subset of $Y$ and all its points are closed in $Y$ by step 2. Therefore [lem-sc-noetherian-closed-points-finite] makes $Z_i\\cap Z_j$ finite. Taking the finite union over the finite family of ordered pairs $i\\neq j$ (step 1) gives a finite set $T$ of closed points. Every point $y\\in Y$ lies on some irreducible component by [lem-sc-irreducible-components-cover]; if $y\\notin T$ lay on two distinct components, it would belong to their intersection and hence to $T$; therefore $y$ lies on exactly one component.",
+   "text": "The already proved source theorem IsOpen.finite_compl_of_topologicalKrullDim_le_one, applied to U inside $Z_1$, shows that $Z_1\\cap Z_2$ is finite after mapping along the subtype inclusion. Its proof decomposes the closed complement into finitely many irreducible closed subsets by [lem-sc-noetherian-closed-subset-finite-components]; sobriety [lem-sc-scheme-sober] provides their generic points, and [lem-sc-dim-one-point-outside-open-closed] makes these closed, so each piece is a singleton. Thus the separate holed theorem lem-sc-noetherian-closed-points-finite is not needed. Take the finite union over distinct ordered component pairs. Every point belongs to irreducibleComponent y by [lem-sc-irreducible-components-cover]. If a point outside T belonged to a different component, that pair of components would witness its membership in T; this gives uniqueness.",
    "uses": [
-    "lem-sc-noetherian-closed-points-finite",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "lem-sc-dim-one-point-outside-open-closed",
     "lem-sc-irreducible-components-cover"
    ],
    "elementary": false,
@@ -68,13 +70,13 @@
   "lem-weil-pbc-noetherian-finitely-many-components",
   "lem-sc-scheme-sober",
   "lem-sc-dim-one-point-outside-open-closed",
-  "lem-sc-noetherian-closed-points-finite",
+  "lem-sc-noetherian-closed-subset-finite-components",
   "lem-sc-irreducible-components-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NX (lemma-dim-1-noetherian-reduced-separated-has-ample), proof, first paragraph"
+  "place": "Varieties Lemma 09NX (varieties-lemma-dim-1-noetherian-reduced-separated-has-ample), proof, first paragraph, finiteness and closedness of T; P2 Lean proof using the already proved source-library finite-complement theorem"
  },
  "mathlib_searches": [
   {
@@ -162,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T085317-L-30835",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
