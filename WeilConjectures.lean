@@ -1934,6 +1934,7 @@ public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.Defs
+public import WeilConjectures.WeilSheaf.DirectImageStalk
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.EulerSeries
 public import WeilConjectures.WeilSheaf.Finiteness
