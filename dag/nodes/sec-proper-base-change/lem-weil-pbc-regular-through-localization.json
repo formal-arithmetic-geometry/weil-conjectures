@@ -27,76 +27,35 @@
  ],
  "proof": [
   {
-   "text": "Write $A'=W^{-1}A$ and $\\varphi=\\psi\\circ\\lambda$. The $A$-module structure of $C$ given by $\\varphi$ is the restriction along $\\lambda$ of its $A'$-module structure given by $\\psi$. Since $\\varphi$ is regular, it is flat [def-weil-pbc-g-ring], i.e. $C$ is a flat $A$-module [def-weil-pbc-flat-ring-map]. By [lem-weil-pbc-flat-over-localization] (with $M=C$; $\\lambda$ satisfies (a)-(c) of that node by the definition of $W^{-1}A$), $C$ is a flat $A'$-module, i.e. $\\psi$ is flat.",
+   "text": "Unfold RingHom.IsRegular and normalize algebraMap.toAlgebra. Flatness over A follows from the first conjunct of hpsi. Module.flat_iff_of_isLocalization A\\prime W C gives flatness over A\\prime.",
    "uses": [
     "def-weil-pbc-g-ring",
     "def-weil-pbc-flat-ring-map",
     "lem-weil-pbc-flat-over-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00HT (2) (algebra-lemma-flat-localization, line 9196)"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a prime ideal $\\mathfrak q'\\subset A'$, put $\\mathfrak q=\\lambda^{-1}(\\mathfrak q')$ and $k=\\kappa(\\mathfrak q')=A'_{\\mathfrak q'}/\\mathfrak q'A'_{\\mathfrak q'}$ [def-weil-pbc-localization-at-prime], an $A'$-algebra and, via $\\lambda$, an $A$-algebra. By [lem-weil-pbc-localization-prime-residue-field-iso], $\\mathfrak q$ is a prime ideal of $A$ with $\\mathfrak q\\cap W=\\emptyset$, and $\\lambda$ induces an isomorphism of fields and of $A$-algebras $\\sigma:\\kappa(\\mathfrak q)=A_{\\mathfrak q}/\\mathfrak qA_{\\mathfrak q}\\xrightarrow{\\sim}k$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00E3 (algebra-lemma-spec-localization, line 3163) and basic notion Tag 00C9 (algebra-item-localization-localization, line 223)"
-   }
-  },
-  {
-   "text": "The ring map $\\ell:C\\otimes_Ak\\to C\\otimes_{A'}k$, $c\\otimes x\\mapsto c\\otimes x$, is an isomorphism of $k$-algebras ($k$ acting on the right factor). Apply [lem-weil-pbc-localization-tensor-product] with $R=A$, $S=W$, the localization $\\lambda:A\\to A'$, $M=M'=C$, $N=N'=k$ and $\\ell_M=\\mathrm{id}_C$, $\\ell_N=\\mathrm{id}_k$. These identities are localizations at $W$: (a) $w\\in W$ acts on $C$ as multiplication by $\\psi(\\lambda(w))$ and on $k$ as multiplication by the image of $\\lambda(w)$, both invertible because $\\lambda(w)$ is a unit of $A'$; (b) and (c) hold with $s=1$. Hence $\\ell$, which is $m\\otimes n\\mapsto\\ell_M(m)\\otimes\\ell_N(n)$, is a localization of $C\\otimes_Ak$ at $W$. Every $w\\in W$ acts bijectively on $C\\otimes_Ak$: it acts as $\\mu_w\\otimes\\mathrm{id}$, $\\mu_w$ the multiplication by $\\psi(\\lambda(w))$ on $C$, whose inverse is $\\mu_w^{-1}\\otimes\\mathrm{id}$ ($\\mu_w^{-1}$, multiplication by $\\psi(\\lambda(w)^{-1})$, is $A$-linear). So by (c), $\\ell(t)=0$ gives $wt=0$ for some $w$, hence $t=0$; and by (b) every element of $C\\otimes_{A'}k$ is $w^{-1}\\ell(t)=\\ell(w^{-1}t)$. Thus $\\ell$ is bijective; it is multiplicative and unital on pure tensors, hence a ring isomorphism, and $\\ell(1\\otimes x)=1\\otimes x$, so it is $k$-linear.",
-   "uses": [
-    "lem-weil-pbc-localization-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00DL (algebra-lemma-tensor-product-localization); the deduction M (x)_R N = M (x)_{S^{-1}R} N for S^{-1}R-modules written out by the agent"
-   }
-  },
-  {
-   "text": "Let $F=C\\otimes_A\\kappa(\\mathfrak q)$, the fibre ring of $\\varphi$ at $\\mathfrak q$, and $F'=C\\otimes_{A'}k$, the fibre ring of $\\psi$ at $\\mathfrak q'$ [def-weil-pbc-localization-at-prime]. Since $\\sigma$ is an isomorphism of $A$-algebras (Step 2), $\\mathrm{id}_C\\otimes\\sigma:F\\to C\\otimes_Ak$ is a ring isomorphism with inverse $\\mathrm{id}_C\\otimes\\sigma^{-1}$. Composing with $\\ell$ of Step 3 gives a ring isomorphism $\\Theta:F\\to F'$, $c\\otimes x\\mapsto c\\otimes\\sigma(x)$; in particular $\\Theta(x f)=\\sigma(x)\\Theta(f)$ for $x\\in\\kappa(\\mathfrak q)$, $f\\in F$.",
+   "text": "For a prime q\\prime of A\\prime, contraction q is prime by Ideal.IsPrime.comap. A localization map is surjective on stalks (RingHom.surjectiveOnStalks_of_isLocalization), so its canonical residue-field map is bijective (RingHom.SurjectiveOnStalks.residueFieldMap_bijective). AlgEquiv.ofBijective gives an A-algebra isomorphism sigma: kappa(q) to kappa(q\\prime). No prime-ideal correspondence or local-ring comparison theorem is needed.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Definition Tag 07BZ (more-algebra-definition-regular): the fibre rings; functoriality of the tensor product, written out by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "$F'$ is Noetherian [def-weil-pbc-noetherian-ring] and geometrically regular over $k$ [def-weil-pbc-g-ring]. Since $\\varphi$ is regular, $F$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak q)$ [def-weil-pbc-g-ring]; $F'\\cong F$ as rings (Step 4), so $F'$ is Noetherian. Let $k'/k$ be a finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension] and regard $k'$ as an extension of $\\kappa(\\mathfrak q)$ via $\\kappa(\\mathfrak q)\\xrightarrow{\\sigma}k\\subseteq k'$. As $\\sigma$ is a field isomorphism, $k'/\\kappa(\\mathfrak q)$ is again finite purely inseparable (the same degree; every element of $k'$ has a $p$-th power iterate in $k=\\sigma(\\kappa(\\mathfrak q))$, resp. $k'=k$ in characteristic $0$). The maps $k'\\times F\\to k'\\otimes_kF'$, $(y,f)\\mapsto y\\otimes\\Theta(f)$, and $k'\\times F'\\to k'\\otimes_{\\kappa(\\mathfrak q)}F$, $(y,f')\\mapsto y\\otimes\\Theta^{-1}(f')$, are balanced over $\\kappa(\\mathfrak q)$ resp. $k$ because $\\Theta(xf)=\\sigma(x)\\Theta(f)$, and induce mutually inverse ring isomorphisms $k'\\otimes_{\\kappa(\\mathfrak q)}F\\cong k'\\otimes_kF'$. The left side is a regular ring by the geometric regularity of $F$ over $\\kappa(\\mathfrak q)$, and regularity [def-weil-regular-scheme] (Noetherian with regular local rings at all primes) is invariant under ring isomorphisms, so $k'\\otimes_kF'$ is regular.",
+   "text": "Tensor sigma with the identity on C using Algebra.TensorProduct.congr. The localization gives IsLocalization.tensorProduct_compatibleSMul; Algebra.TensorProduct.equivOfCompatibleSMul identifies kappa(q\\prime) tensor_A C with kappa(q\\prime) tensor_A\\prime C. Composing gives the fibre-ring isomorphism. Tensor induction proves its compatibility with sigma on residue-field scalars (zero and sums by additivity; pure tensors by map_mul and scalar multiplication).",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-g-ring",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-regular-scheme"
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 0382 (algebra-definition-geometrically-regular), transport of structure along the isomorphism (sigma, Theta), written out by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "By Step 1 $\\psi$ is flat, and by Steps 2-5 the fibre ring $C\\otimes_{A'}\\kappa(\\mathfrak q')$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak q')$ for every prime $\\mathfrak q'\\subset A'$; so $\\psi$ is a regular ring map by definition [def-weil-pbc-g-ring].",
+   "text": "The composite map supplies geometric regularity of q.Fiber C. Apply [lem-weil-pbc-geometric-regularity-field-iso] to sigma and the compatible fibre-ring isomorphism to obtain geometric regularity of q\\prime.Fiber C. Together with flatness, this is exactly RingHom.IsRegular for algebraMap A\\prime C.",
    "uses": [
+    "lem-weil-pbc-geometric-regularity-field-iso",
     "def-weil-pbc-g-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Definition Tag 07BZ (more-algebra-definition-regular)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -104,16 +63,12 @@
   "def-weil-pbc-flat-ring-map",
   "lem-weil-pbc-flat-over-localization",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-localization-tensor-product",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-weil-regular-scheme"
+  "lem-weil-pbc-geometric-regularity-field-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "proof of Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), sentence at line 12423 'Since it factors through the localization R_p, also the ring map R_p -> (R_m^)_{p'}^ is regular', stated without proof; steps written by the agent from Algebra 00HT (2), 00E3, 00C9, 00DL, 0382 and More on Algebra 07BZ"
+  "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals), factor-through-localization sentence; Lean proof follows the original flatness and fibre comparison route, replacing the broad residue-field lemma and tensor localization argument with proved Mathlib maps. Geometric-regularity transport is proved in lem-weil-pbc-geometric-regularity-field-iso."
  },
  "mathlib_searches": [
   {
@@ -197,5 +152,15 @@
   "group": "E1",
   "result": "fix",
   "note": "A comm ring, W Submonoid, W^-1 A as [IsLocalization W A'] with lambda = algebraMap A A'; psi = algebraMap A' C with IsScalarTower A A' C (fixed from bare RingHom per the RingHom.IsRegular-on-algebraMap convention); hyp IsRegular (algebraMap A C), concl IsRegular (algebraMap A' C); universes independent, no hollow binders"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T095901-L-316062",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

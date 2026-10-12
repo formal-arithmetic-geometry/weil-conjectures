@@ -7,7 +7,9 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.Basic
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.Flat.Localization
+import Mathlib.RingTheory.Localization.BaseChange
+import Sheaf.RingTheory.GeometricRegularityFieldIso
 
 /-!
 # Regularity through localization
@@ -61,6 +63,34 @@ theorem isRegular_of_comp_algebraMap_localization
     (W : Submonoid A) [IsLocalization W A']
     (hψ : (algebraMap A C).IsRegular) :
     (algebraMap A' C).IsRegular := by
-  sorry
+  rw [RingHom.IsRegular, toAlgebra_algebraMap] at hψ ⊢
+  refine ⟨?_, ?_⟩
+  · rw [RingHom.flat_algebraMap_iff]
+    have hflat : Module.Flat A C := (RingHom.flat_algebraMap_iff).mp hψ.1
+    exact (Module.flat_iff_of_isLocalization A' W C).mpr hflat
+  · intro q' hq'
+    let q := q'.comap (algebraMap A A')
+    have : q.IsPrime := Ideal.IsPrime.comap (algebraMap A A')
+    let σ : q.ResidueField ≃ₐ[A] q'.ResidueField :=
+      AlgEquiv.ofBijective (Ideal.ResidueField.mapₐ q q' (Algebra.ofId A A') rfl)
+        ((RingHom.surjectiveOnStalks_of_isLocalization W A').residueFieldMap_bijective
+          q q' rfl)
+    let e₁ := Algebra.TensorProduct.congr σ (AlgEquiv.refl : C ≃ₐ[A] C)
+    have : TensorProduct.CompatibleSMul A A' q'.ResidueField C :=
+      IsLocalization.tensorProduct_compatibleSMul W A' q'.ResidueField C
+    let e₂ := Algebra.TensorProduct.equivOfCompatibleSMul A A' q'.ResidueField
+      q'.ResidueField C
+    exact Algebra.isGeometricallyRegular_of_fieldIso σ.toRingEquiv
+      (e₁.toRingEquiv.trans e₂.symm.toRingEquiv) (by
+        intro x y
+        induction y using TensorProduct.induction_on with
+        | zero => simp
+        | tmul a c =>
+          change e₂.symm (σ (x * a) ⊗ₜ[A] c) =
+            σ x • e₂.symm (σ a ⊗ₜ[A] c)
+          simp [e₂, Algebra.TensorProduct.equivOfCompatibleSMul,
+            Algebra.TensorProduct.mapOfCompatibleSMul,
+            Algebra.smul_def]
+        | add a b ha hb => simp_all) (hψ.2 q)
 
 end RingHom
