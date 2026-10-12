@@ -129,7 +129,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 4 | — |
 | Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore | 4 | 1 | V1 |
 | Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres | 4 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore | 4 | 2 | R2 |
+| Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore | 4 | 2 | X2 |
 | Sheaf.AlgebraicGeometry.StrictHenselization | 4 | 2 | K2 |
 | Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime | 4 | 1 | ORCHESTRA |
 | Sheaf.Paper.StrictHenselizationPointedMap | 4 | 2 | W2 |
