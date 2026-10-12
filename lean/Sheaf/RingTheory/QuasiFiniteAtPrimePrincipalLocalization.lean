@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 
 /-!
 # Quasi-finiteness at a prime and principal localization
@@ -21,6 +21,40 @@ Source: Stacks Project, Algebra, Lemma 10.122.6 (Tag 077H)
 universe u v
 
 namespace Algebra
+
+private theorem isOpen_singleton_fiber_iff
+    {X X' Y Y' : Type*} [TopologicalSpace X] [TopologicalSpace X']
+    (a : X → Y) (b : X' → Y') (i : X' → X) (j : Y' → Y)
+    (hi : Topology.IsOpenEmbedding i) (hj : Function.Injective j)
+    (hsq : ∀ x, a (i x) = j (b x)) (x : X') :
+    IsOpen (X := a ⁻¹' {a (i x)}) {⟨i x, rfl⟩} ↔
+      IsOpen (X := b ⁻¹' {b x}) {⟨x, rfl⟩} := by
+  -- Injectivity on the base identifies the localized fibre with an inverse image.
+  let A := a ⁻¹' {a (i x)}
+  let B := b ⁻¹' {b x}
+  have hB : B = i ⁻¹' A := by
+    ext z
+    change b z = b x ↔ a (i z) = a (i x)
+    rw [hsq z, hsq x]
+    exact hj.eq_iff.symm
+  -- Restrict the open embedding and transport along that equality of sets.
+  let e := Homeomorph.setCongr hB
+  let k : B → A := (A.restrictPreimage i) ∘ e
+  have hk : Topology.IsOpenEmbedding k := (hi.restrictPreimage A).comp e.isOpenEmbedding
+  have hx : k ⟨x, rfl⟩ = ⟨i x, rfl⟩ := by rfl
+  simpa only [Set.image_singleton, hx] using
+    (hk.isOpen_iff_image_isOpen (s := {⟨x, rfl⟩})).symm
+
+private theorem isQuasiFiniteAtPrime_iff_isOpen_fiber
+    (R : Type*) (S : Type*) [CommRing R] [CommRing S]
+    [Algebra R S] [FiniteType R S] (q : PrimeSpectrum S) :
+    IsQuasiFiniteAtPrime R S q ↔
+      IsOpen (X := PrimeSpectrum.comap (algebraMap R S) ⁻¹'
+        {q.comap (algebraMap R S)}) {⟨q, rfl⟩} := by
+  unfold IsQuasiFiniteAtPrime
+  let e := PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S))
+  simpa only [Set.image_singleton] using
+    (e.isOpen_image (s := {⟨q, rfl⟩}))
 
 /-- (blueprint: lem-weil-pbc-quasi-finite-at-prime-principal-localization)
 Stacks Project, Algebra, Lemma 10.122.6 (Tag 077H): quasi-finiteness at a prime is
@@ -67,6 +101,48 @@ theorem isQuasiFiniteAtPrime_iff_principalLocalization
         @IsQuasiFiniteAtPrime (Localization.Away f)
           (Localization.Away (algebraMap R S f * g)) _ _ φ'.toAlgebra hft
           ⟨q.asIdeal.map (algebraMap S (Localization.Away (algebraMap R S f * g))), hq'⟩) := by
-  sorry
+  let h := algebraMap R S f * g
+  let T := Localization.Away h
+  let : Algebra (Localization.Away f) T := φ'.toAlgebra
+  have htower : IsScalarTower R (Localization.Away f) T := by
+    apply IsScalarTower.of_algebraMap_eq
+    intro r
+    exact (RingHom.congr_fun hφ' r).symm
+  let : FiniteType R T := inferInstance
+  have hft : FiniteType (Localization.Away f) T :=
+    FiniteType.of_restrictScalars_finiteType R (Localization.Away f) T
+  have hh : h ∉ q.asIdeal := q.isPrime.mul_notMem hf hg
+  have hd : Disjoint (Submonoid.powers h : Set S) (q.asIdeal : Set S) := by
+    rw [Set.disjoint_left]
+    rintro z ⟨n, rfl⟩ hz
+    exact hh (q.isPrime.mem_of_pow_mem n hz)
+  have hq' : (q.asIdeal.map (algebraMap S T)).IsPrime :=
+    IsLocalization.isPrime_of_isPrime_disjoint (Submonoid.powers h) T q.asIdeal q.isPrime hd
+  let q' : PrimeSpectrum T := ⟨q.asIdeal.map (algebraMap S T), hq'⟩
+  have hq : q'.comap (algebraMap S T) = q := by
+    apply PrimeSpectrum.ext
+    exact IsLocalization.under_map_of_isPrime_disjoint
+      (Submonoid.powers h) T q.isPrime hd
+  refine ⟨hft, hq', ?_⟩
+  rw [isQuasiFiniteAtPrime_iff_isOpen_fiber R S q,
+    isQuasiFiniteAtPrime_iff_isOpen_fiber (Localization.Away f) T q']
+  have hsq : ∀ x : PrimeSpectrum T,
+      (x.comap (algebraMap S T)).comap (algebraMap R S) =
+        (x.comap φ').comap (algebraMap R (Localization.Away f)) := by
+    intro x
+    change x.comap ((algebraMap S T).comp (algebraMap R S)) =
+      x.comap (φ'.comp (algebraMap R (Localization.Away f)))
+    rw [hφ']
+  have hi := PrimeSpectrum.localization_away_isOpenEmbedding T h
+  have hj := PrimeSpectrum.localization_comap_injective (Localization.Away f)
+    (Submonoid.powers f)
+  change IsOpen (X := PrimeSpectrum.comap (algebraMap R S) ⁻¹'
+      {q.comap (algebraMap R S)}) {⟨q, rfl⟩} ↔
+    IsOpen (X := PrimeSpectrum.comap φ' ⁻¹' {q'.comap φ'}) {⟨q', rfl⟩}
+  rw [← hq]
+  exact isOpen_singleton_fiber_iff
+    (PrimeSpectrum.comap (algebraMap R S)) (PrimeSpectrum.comap φ')
+    (PrimeSpectrum.comap (algebraMap S T))
+    (PrimeSpectrum.comap (algebraMap R (Localization.Away f))) hi hj hsq q'
 
 end Algebra
