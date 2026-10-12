@@ -1,0 +1,55 @@
+## What changed
+
+Replaced the hole in `CategoryTheory.colimit_site_abelian_inverse_image` by a compiling reduction. Its signature and all existing public imports are unchanged. Added two private proof imports: `Sheaf.CategoryTheory.ColimitSiteAbelianSectionDiagram` and `Sheaf.CategoryTheory.ColimitSiteAbelianSectionUniversality`.
+
+The original module constructs both families of sheaf maps as actual adjuncts of units, using the strict cocone equation and the under-category composition equation. The adjunction hom-equivalence identity proves both required unit equations. The new section-diagram module proves the identity and composition laws by injectivity of adjuncts, constructs its objects and additive maps explicitly, proves the comparison cocone natural, and proves both section-map equations. All endpoint transports are explicit `eqToHom` maps, removed only in the arrow-category equalities that record their endpoints.
+
+Only the presentation-sheaf/colimit universal property remains open, isolated as a theorem about already supplied diagram and cocone data. It asserts no existence of groups, functors or sheaves. The main theorem combines this property with the constructed data and the proved equations. Updated the original node's proof route and added nodes for both new modules. No existing definition, statement, visibility or target changes; no forced adaptations.
+
+## Proved and sorry left
+
+Closed the original direct hole in `CategoryTheory.colimit_site_abelian_inverse_image` (node `lem-weil-pbc-colimit-site-abelian-inverse-image`) by decomposition, not a complete proof independent of remaining holes.
+
+Fully proved `CategoryTheory.colimit_site_abelian_section_diagram` (node `lem-weil-pbc-colimit-site-abelian-section-diagram`) from Mathlib. Its three private helpers `sheaf_unit_unique`, `sheaf_triangle_comp`, and `sheaf_triangle_id` are also proved; the original module's private `sheaf_triangle_unit` is proved. The diagram and cocone contain no holes and no objects selected from an unproved existence theorem.
+
+Added exactly one hole: `CategoryTheory.colimit_site_abelian_section_universality` (node `lem-weil-pbc-colimit-site-abelian-section-universality`), in its own new module, with proof exactly `:= by sorry`. There are no other remaining holes in the delivery. Thus one original hole closed, one lower hole added: a decomposition with net hole change zero. The remaining task is strictly the colimit property; the existence, coherence and unit equations formerly bundled with it are now proved.
+
+All three modules compile without warnings through `lcompile.py --all`. Explicit axiom probes confirm that the diagram theorem and private helpers use only `propext`, `Classical.choice`, `Quot.sound`; the main and universality theorems additionally use `sorryAx` from the sole named hole. The diagram proof needs no filteredness or finite-cover hypotheses. Edge checks: when J is empty there is no i; when F(i) is empty there is no U; identity transitions are handled by the proved identity lemma; empty covers enter only the remaining universal-property argument and impose zero sections.
+
+## No longer needed
+
+The second reader removed redundant imports `Mathlib.CategoryTheory.Category.Cat`, `Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck`, and `Mathlib.CategoryTheory.Comma.Over.Basic` from the new section-diagram module; their required declarations are already publicly available through its remaining statement imports. The reduced module and the entire delivery compile.
+
+No existing import was removed: they support the unchanged statement and its chosen inverse-image adjunctions. In particular the abelian-group colimit and filtered-colimit imports are required for the left Kan extension and sheafification instances, respectively; removing them was tested and fails elaboration.
+
+The route no longer needs `lem-weil-pbc-filtered-colimit-categories`, or its module `Sheaf.CategoryTheory.FilteredColimitCategories`. The input already supplies a category and its object/arrow colimit cocones. Representatives and eventual equality can be taken directly from those supplied set colimits; constructing another colimit category is unnecessary. Consequently this item's route does not need the constructor's `Sheaf.CategoryTheory.FilteredColimitCategoryStructure`, `Sheaf.CategoryTheory.FilteredColimitCategoryDescent`, or `Sheaf.CategoryTheory.FilteredColimitCategoryIso` dependencies either. These may remain needed by other items; no global-unreachability claim is made.
+
+The original node's remaining former proof dependencies (`def-weil-pbc-category-colimit`, `def-weil-pbc-finite-precoverage`, `def-weil-pbc-sites-and-cohomology`, `lem-weil-pbc-conjugate-iso-unit-equation`, `lem-weil-pbc-filtered-colimit-sets-elementwise`, `lem-weil-pbc-filtered-colimits-commute-finite-limits`, and `lem-weil-pbc-initial-functor-cofiltered-criterion`) are still needed by the new universal-property node, rather than the already proved transition/diagram construction. None is claimed pruned. No unit-level statement or proof step was bypassed.
+
+## Where the brief, the DAG or earlier work was wrong
+
+The planned dependency `exists_filteredColimit_category` constructs a canonical category; it is unnecessary here, where the theorem takes an existing cocone V and object/arrow colimit proofs as inputs. The proof now works directly with these inputs in the remaining presentation step.
+
+No disputed statement or counterexample was found. The new universal-property statement includes both the unit characterizations and the leg/transition identifications, so it cannot be applied to an arbitrary unrelated cocone. The coherence statement deliberately drops the geometric hypotheses it does not need.
+
+LeanSearch returned Internal Server Error; the actual failed attempts, LeanFinder/Loogle results, and source searches are recorded in `searches.jsonl` and the new nodes. No exact theorem was found. The local literature files are absent in this read-only clone; the canonical Stacks pages https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO were read online. Expanded endpoint/coherence details are marked as agent-written. The existing parent ancestry has no blueprint ancestor recorded (`blueprint_refs.py ancestor` returns None), so the new nodes preserve that absence and identify the parent chain explicitly.
+
+## New nodes
+
+`lem-weil-pbc-colimit-site-abelian-section-diagram`, in `dag/nodes/sec-proper-base-change/`, records the fully proved construction `CategoryTheory.colimit_site_abelian_section_diagram`, module `Sheaf.CategoryTheory.ColimitSiteAbelianSectionDiagram`. It uses only continuous functors, supplied unit-characterized maps, and a cocone; it constructs the diagram and comparison cocone without asserting universality.
+
+`lem-weil-pbc-colimit-site-abelian-section-universality`, in the same directory, records `CategoryTheory.colimit_site_abelian_section_universality`, module `Sheaf.CategoryTheory.ColimitSiteAbelianSectionUniversality`. It leaves precisely the presentation-colimit/sheaf-adjunction argument as a named, sourced hole about supplied data, with the full proof in words. There are no change records because no existing interface changes.
+
+## Second reading by C3
+
+1. Compared the item module with the repository by diff and by extracting its complete existing theorem signature: byte-for-byte identical. Only private helpers, proof bodies and private proof imports are added. The two other modules are new; no existing definition or public visibility changes, and no change record is needed. Verdict: pass.
+
+2. Independently compiled all three modules with lcompile.py. Read each proof, including adjunct uniqueness and the explicit eqToHom transports in identity, composition and cocone naturality. Scratch copies with #print axioms checked every public theorem and all four private helpers. Only the three allowed axioms occur in proved helpers and diagram; sorryAx occurs in the main theorem through the sole named universality hole. There is no forbidden declaration, hollow definition or arbitrary object selected from an unproved existence assertion. Alpha and theta are chosen from proved adjunction existence results; D and K are real constructions. Verdict: pass as a decomposition, not a completed inverse-image proof.
+
+3. Read the sole split-off theorem, its full proof docstring and node against Stacks 0A35 and 03CO. It asserts only universality of supplied compatible data, strictly removing the existence and coherence portions of the parent. The unit equations force the maps by adjunction; E and e plus hD and hK exclude unrelated diagrams and cocones. Checked singleton/identity indexing (the diagram is isomorphic to the identity-stage value), empty source (no U), zero sheaf, and empty covers (zero sections). No counterexample or added geometric hypothesis was found. Repeated searches with Loogle `CategoryTheory.Limits.IsColimit, CategoryTheory.Sheaf`, grep `sheafPullback.*colimit|colimit.*sheafPullback`, and repository searches for inverse-image/section formulas. Results concern colimits on a fixed site, sheafification, or downstream uses of this item, not the required changing-site property. The hole is substantial and cannot be closed in a few minutes. Verdict: pass.
+
+4. The parent now actually constructs the two map families and applies the fully proved section-diagram construction before using only its remaining universality part. This is a real reduction, not a renamed restatement. Checked all old proof dependencies: the filtered-category constructor is bypassed; the others are retained through the universality node, with sites additionally used directly. The conjugate-isomorphism theorem is not used in the proved adjunct/coherence arguments, which use Mathlib homEquiv directly; corrected those proof dependency lists. Tested import removal in the diagram module and removed the three redundant imports listed above. Remaining group colimit/limit/filtered-colimit imports supply instances required by the public sheafPullback signatures. Read sk-thm-p1.json realized: this below-unit reduction bypasses none of its realized nodes or steps. Verdict: pass.
+
+5. Checked that each of the three node lean.statement fields equals its full Lean theorem signature verbatim, and that only permitted proof fields of the existing node changed. New nodes include source, complete proof steps, dependency unions, proof_origin, searches, split status, creation, blueprint ancestry, chapter, unit and Lean records. The route matches the Lean construction and the sole remaining universal-property hole. Verdict: pass after correcting the direct adjunct proof dependencies.
+
+Second-reading changes: removed three redundant imports in the new diagram module, corrected two nodes to record direct Mathlib adjunct proofs, expanded axiom/pruning evidence, and added this review. No theorem statement or proof body was changed. One upper hole closed and one lower hole added; net hole change zero.
