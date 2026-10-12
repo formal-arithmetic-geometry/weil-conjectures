@@ -10174,3 +10174,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: returned deliver/M3/Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingPrefixContribution (reviewer RETURN: (the landing tools, head b1c15460a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 23:55 L: merged deliver/B4/Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero (stage 3; reviewer PASS; first push; landing 20261012T235553-L-2200899 (proof); batch 20261012T235552; modules 1; new nodes 0)
 - 23:55 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties (stage 3; reviewer PASS; first push; landing 20261012T235553-L-2200999 (proof); batch 20261012T235552; modules 1; new nodes 0)
+- 23:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel (stage 3; reviewer PASS; first push; landing 20261012T235554-L-2201107 (proof); batch 20261012T235552; modules 1; new nodes 0)
