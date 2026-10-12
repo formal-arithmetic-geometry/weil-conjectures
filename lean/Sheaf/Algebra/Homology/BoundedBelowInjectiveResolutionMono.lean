@@ -47,6 +47,12 @@ theorem exists_mono_quasiIso_injective_boundedBelow
       (∀ n : ℤ, n < a → IsZero (I.X n)) ∧
       (∀ n : ℤ, Injective (I.X n)) ∧
       (∀ n : ℤ, Mono (α.f n)) ∧ QuasiIso α := by
-  sorry
+  classical
+  obtain ⟨I, α, hα, hmono, hinj, hbound⟩ :=
+    exists_mono_quasiIso_in_subcategory C {X : C | Injective X}
+      (by dsimp; infer_instance)
+      (fun X ↦ ⟨Injective.under X, Injective.ι X, by dsimp; infer_instance, inferInstance⟩)
+      a K hK
+  exact ⟨I, α, hbound, hinj, hmono, hα⟩
 
 end CochainComplex
