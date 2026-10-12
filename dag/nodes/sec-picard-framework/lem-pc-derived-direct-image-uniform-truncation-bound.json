@@ -26,72 +26,40 @@
  ],
  "proof": [
   {
-   "text": "Choose the uniform integer $n_0$ supplied by clause 2 of [lem-pc-finite-support-hi] for $f$, and put $N=\\max(1,n_0)$. The same bound holds for every base change of $f$, in particular for $f_U:f^{-1}U\\to U$ over each affine open $U\\subseteq S$. For every quasi-coherent module $\\mathcal F$ on $f^{-1}U$, all $R^pf_{U,*}\\mathcal F$ are quasi-coherent and vanish for $p\\ge N$.",
+   "text": "Choose N>0 from the uniform nonpositive derived-image bound. Retain this bound as the first conjunct.",
    "uses": [
-    "lem-pc-finite-support-hi"
+    "lem-pc-uniform-direct-image-bound-core"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5 proof, choice of N from Tag 01XJ; Tag 01XJ clauses 1-3"
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), parts (2) and proof"
    }
   },
   {
-   "text": "For an affine open $U\\subseteq S$, each $R^pf_{U,*}\\mathcal F$ in Step 1 is quasi-coherent, so its higher cohomology on $U$ vanishes by [lem-pc-affine-vanishing]. Clause 2 of [lem-pc-leray-degenerate-sections] then identifies $H^p(f^{-1}U,\\mathcal F)$ with $\\Gamma(U,R^pf_{U,*}\\mathcal F)$ for every $p\\ge0$. The latter group is zero for $p\\ge N$ by Step 1. Thus the right derived functors of $\\Gamma(f^{-1}U,-)$ vanish in degrees $p\\ge N$ on every quasi-coherent module. By [pqf-def-cohomology], these cohomology groups are the right derived functors of global sections. The functor $\\Gamma(f^{-1}U,-)=\\operatorname{Hom}(\\mathcal O_{f^{-1}U},-)$ commutes with countable products because a morphism into a product is uniquely a family of morphisms into its factors; this is a direct check from the product universal property.",
+   "text": "For fixed E,q choose n0=N-q. If n>=n0, then N<=q+n+1 and N<=(q+1)+n+1. Apply the shifted truncation tail bound in degrees q and q+1. Apply the triangulated derived direct-image functor to the standard truncation triangle. The proved upstream lemma DerivedCategory.isIso_homologyMap_mor₂, which packages the Mathlib long exact homology sequence and the mono/epi criterion in an abelian category, makes the second arrow an isomorphism from these two vanishings. The second arrow is exactly the canonical lower-truncation map under higher direct image.",
    "uses": [
-    "lem-pc-finite-support-hi",
-    "lem-pc-affine-vanishing",
-    "lem-pc-leray-degenerate-sections",
-    "pqf-def-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5 proof of part (2), Tag 01XK and Tag 08D4 hypotheses"
-   }
-  },
-  {
-   "text": "Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ have $H^i(E)=0$ for $i>0$. Its restriction to $f^{-1}U$ has the same property and quasi-coherent cohomology. Apply [lem-pc-unbounded-derived-functor-cohomological-bound] to $F=\\Gamma(f^{-1}U,-)$ with $b=0$ and the $N$ of Step 1; Step 2 checks its product and acyclicity hypotheses. Hence $H^i(R\\Gamma(f^{-1}U,E))=0$ for $i>N-1$, equivalently $i\\ge N$. By [lem-pc-derived-sections-pushforward-comparison] this equals $H^i(R\\Gamma(U,Rf_*E))$. These vanishings on every affine $U$ imply $H^i(Rf_*E)=0$: take a K-injective representative $I$ of $Rf_*E$; its cohomology sheaf is the sheafification of $U\\mapsto H^i(\\Gamma(U,I))$, and derived sections compute those groups. Thus the affine-basis sections of that presheaf vanish, and so does its sheafification. For the restriction identification, choose a K-injective representative of $E$; [lem-sc-derived-k-injective-restrict-open] keeps its restriction K-injective, and the equality of direct-image sections on $U$ follows termwise from $(f_*I)|_U=(f_U)_*(I|_{f^{-1}U})$. Hence $Rf_*E|_U\\simeq R(f_U)_*(E|_{f^{-1}U})$.",
-   "uses": [
-    "lem-pc-unbounded-derived-functor-cohomological-bound",
-    "lem-pc-derived-sections-pushforward-comparison",
+    "lem-pc-direct-image-truncation-tail-bound",
     "def-pc-derived-direct-image",
-    "lem-sc-derived-k-injective-restrict-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5 proof of part (2), application of Tag 08D4 to Gamma(f^{-1}U,-) and displayed derived-sections identity"
-   }
-  },
-  {
-   "text": "For arbitrary $E$ and $q$, use the canonical truncation triangle $T=\\tau_{\\le -n-1}E\\to E\\to\\tau_{\\ge -n}E\\to T[1]$ from [def-sbc-standard-tstructure-derived-category]. The shifted object $T[-n-1]$ has no positive cohomology, since $H^m(T[-n-1])=H^{m-n-1}(T)=0$ for $m>0$. Step 3 and shift-commutation of the derived functor give $H^j(Rf_*T)=H^{j+n+1}(Rf_*(T[-n-1]))=0$ when $j+n+1\\ge N$. If $n\\ge N-q$, both $H^q(Rf_*T)$ and $H^{q+1}(Rf_*T)$ vanish. The long exact cohomology sequence of the image triangle therefore makes $H^q(Rf_*E)\\to H^q(Rf_*\\tau_{\\ge -n}E)$ an isomorphism. The same $N$ works for all $E$.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-pc-derived-direct-image"
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5 proof, final truncation triangle and consequence of part (2)"
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), parts (2) and proof"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-support-hi",
-  "lem-pc-affine-vanishing",
-  "lem-pc-leray-degenerate-sections",
-  "pqf-def-cohomology",
-  "lem-pc-unbounded-derived-functor-cohomological-bound",
-  "lem-pc-derived-sections-pushforward-comparison",
+  "lem-pc-uniform-direct-image-bound-core",
+  "lem-pc-direct-image-truncation-tail-bound",
   "def-pc-derived-direct-image",
-  "lem-sc-derived-k-injective-restrict-open",
   "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D5, proof; local source checkout unavailable, checked against the published Stacks page"
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), parts (2) and proof"
  },
  "mathlib_searches": [
   {
@@ -204,5 +172,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T070550-L-3476861",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9,12 +9,10 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.UniformDirectImageBoundCore
+import Sheaf.AlgebraicGeometry.DirectImageTruncationTailBound
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Uniform truncation bound for derived direct image
 
@@ -77,6 +75,24 @@ theorem exists_schemeDerivedDirectImage_uniform_truncation_bound
       ∃ n₀ : ℤ, ∀ n : ℤ, n₀ ≤ n →
         IsIso ((schemeHigherDirectImage f q).map
           ((DerivedCategory.TStructure.t.truncGEπ (-n)).app E.obj))) := by
-  sorry
+  obtain ⟨N, hpos, hN⟩ := uniform_bound_core f
+  refine ⟨⟨N, hpos, hN⟩, ?_⟩
+  intro E q
+  refine ⟨N - q, ?_⟩
+  intro n hn
+  let T := (schemeDerivedDirectImage f).mapTriangle.obj
+    ((DerivedCategory.TStructure.t.triangleLTGE (-n)).obj E.obj)
+  have hT : T ∈ CategoryTheory.Pretriangulated.distinguishedTriangles :=
+    (schemeDerivedDirectImage f).map_distinguished _
+      (DerivedCategory.TStructure.t.triangleLTGE_distinguished (-n) E.obj)
+  have hz : IsZero ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).obj T.obj₁) :=
+    directImage_truncation_tail_bound f N hN E n q (by omega)
+  have hz' : IsZero ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q + 1)).obj T.obj₁) :=
+    directImage_truncation_tail_bound f N hN E n (q + 1) (by omega)
+  change IsIso ((DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).map T.mor₂)
+  exact DerivedCategory.isIso_homologyMap_mor₂ T hT q (q + 1) rfl hz hz'
 
 end AlgebraicGeometry

@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-direct-image-truncation-tail-bound",
+ "kind": "statement",
+ "title": "DirectImageTruncationTailBound",
+ "statement": "Let $f:X\\to S$ be any morphism of schemes [def-pc-scheme], and let $N$ be an integer such that $H^m(Rf_*K)=0$ for $m\\ge N$ whenever $K\\in D_{QCoh}(O_X)$ [def-pc-derived-category] has no positive cohomology [def-pc-derived-direct-image]. For every $E\\in D_{QCoh}(O_X)$ and integers $n,j$ with $N\\le j+n+1$, one has $H^j(Rf_*\\tau_{<-n}E)=0$ [def-sbc-standard-tstructure-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), parts (2) and proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put T = tau_{<-n}E. Its cohomology is either zero or the corresponding cohomology of E, so T and its shift T[-n-1] have quasi-coherent cohomology. The standard truncation bound gives H^m(T[-n-1])=H^{m-n-1}(T)=0 for m>0. Apply the supplied bound in degree j+n+1, then transport along shift compatibility of derived direct image and homology to obtain H^j(Rf_*T)=0. This argument works for arbitrary integer n,j,N, including negative values.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 proof, final truncation triangle and consequence of part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), parts (2) and proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound derived direct image cohomology schemes and truncation tail",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology map is isomorphism distinguished triangle zero adjacent cohomology",
+   "results": "Generic derived-category triangles and long exact sequence; no scheme bound",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "uniform.*truncation|cohomological_bound",
+   "results": "No shorter scheme result; Mathlib homology sequence used for final assembly",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomological dimension higher direct image quasi compact quasi separated schemes uniformly bounded above",
+   "results": "DerivedCategory.isLE_iff/isGE_iff and quasi-compact morphism lemmas only; no scheme-derived uniform bound or shifted-tail specialization",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.truncLT",
+   "results": "truncLT, its IsLE instances, truncLTι and isZero_truncLT_obj_of_isGE; none supplies quasi-coherence preservation or the derived-image tail bound",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg cohomological_bound|uniform.*bound|truncation_tail lean/Sheaf lean/WeilConjectures; inspect Mathlib DerivedCategory/TStructure and Sheaf/Quasicoherent",
+   "results": "Existing general unbounded functor bound requires sections functor hypotheses and affine restriction glue; finite-cohomological-dimension result has extra field and affine-diagonal assumptions. No duplicate or direct specialization closes either new statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-direct-image-uniform-truncation-bound",
+   "place": "proof, step 4, shifted truncation tail",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DirectImageTruncationTailBound",
+  "declaration": "AlgebraicGeometry.directImage_truncation_tail_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageTruncationTailBound.lean",
+  "statement": "theorem directImage_truncation_tail_bound\n    {X S : Scheme.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    (f : X ⟶ S) (N : ℤ)\n    (hN : ∀ E : schemeDerivedQCohCategory X,\n      (∀ m : ℤ, 0 < m → IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) m).obj E.obj)) →\n      ∀ m : ℤ, N ≤ m → IsZero ((schemeHigherDirectImage f m).obj E.obj))\n    (E : schemeDerivedQCohCategory X) (n j : ℤ) (hj : N ≤ j + n + 1) :\n    IsZero ((schemeHigherDirectImage f j).obj\n      ((DerivedCategory.TStructure.t.truncLT (-n)).obj E.obj))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T070550-L-3476861",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T070550-L-3476861",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
