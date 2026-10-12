@@ -20,24 +20,44 @@
  "statement": "Let $f:U\\to X$ be a scheme morphism, $A=f_*O_U$, $r_0:f^{-1}O_X\\to O_U$ its structure map and $t_0:f^{-1}O_X\\to f^{-1}A$ the inverse-image algebra map. For any pushout with maps $b:O_U\\to B$, $t:f^{-1}A\\to B$, there is a functor $P(G)=B\\otimes_{f^{-1}A}f^{-1}G$ with the sheafified tensor map formula and a natural isomorphism $\\kappa:P\\operatorname{Res}_b\\simeq Sf^*$. On the canonical pullback unit, its inverse gives the sheafification of $1\\otimes\\eta(g)$ for every local section $g$. Here $S$ is scalar restriction along $O_X\\to A$. Conventions: [def-pc-scheme], [pqf-def-affine-morphism], [def-weil-sheaf-of-modules-category], [pqf-def-coherent], [def-pc-module-pullback], [def-pur-sheaf-tensor-product], [lem-pc-module-pullback-adjunction].",
  "proof": [
   {
-   "text": "Form the inverse-image module functor and extend along t, with the sheafified\nsectionwise map id tensor inverse-image(a). These maps preserve identity and composition.\nOn stalks the pushout identifies B with O_U tensor over inverse-image O_X with\ninverse-image A. The balanced tensor universal property gives inverse maps between\nB tensor over inverse-image A with inverse-image G and O_U tensor over inverse-image O_X\nwith inverse-image G, sending (b tensor a) tensor g to b tensor ag and b tensor g to\n(b tensor 1) tensor g. They commute with restriction and sheafification and hence give\nthe natural isomorphism κ. The canonical unit formula for the chosen pullback adjunction\nthen gives κ inverse applied to the unit as the sheafification of 1 tensor η(g).\nThis argument includes the zero ring and zero module: both inverse maps are still given\nby the balanced universal property.",
+   "text": "Construct the inverse-image functor using inverseImageModuleMap, and the scalar-extension functor using changeOfRingsHom. Their identities and composition follow from the abelian inverse-image, sectionwise extension-of-scalars and sheafification functor laws. Their composite P has exactly the required objects and map formula.",
    "uses": [
+    "def-pc-topological-inverse-image-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the inverse-image module of Res_ρ G with Res_(inverse-image ρ)(inverse-image G). Their abelian sheaves are definitionally identical. For the two scalar actions, the inverse-image unit formulas and naturality of the ring unit give equality on unit images; inverseImageOperation_ext extends equality to every open. The identity abelian maps therefore form mutually inverse linear maps, natural in G.",
+   "uses": [
+    "def-pc-topological-inverse-image-module",
+    "lem-pc-inverse-image-operation-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sheafTensorPushoutCancellation to r₀,t₀,b,t and I(G). Its naturality assembles the objectwise comparisons into a natural isomorphism. Compose with scalar extension of the inverse-image/scalar-restriction isomorphism to obtain κ. For the unit, rewrite by the chosen tensorPullbackAdjunction unit formula, apply sheafification-unit naturality and reduce extension of scalars on a pure tensor, and use the identity action of the inverse-image comparison and the cancellation inverse formula.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-pushout-cancellation",
+    "lem-pc-module-pullback-adjunction",
     "def-pc-module-pullback",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-module-pullback-adjunction"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
+  "def-pc-topological-inverse-image-module",
   "def-pur-sheaf-tensor-product",
-  "lem-pc-module-pullback-adjunction"
+  "lem-pc-inverse-image-operation-ext",
+  "lem-weil-pbc-sheaf-tensor-pushout-cancellation",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemma 01SB; tensor construction and elucidation, extracted stage by D3"
+  "place": "Tag 01SB, tensor construction and elucidation; Lean reduction through sheafified pushout tensor cancellation, with inverse-image scalar compatibility proved directly"
  },
  "mathlib_searches": [
   {
@@ -133,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-cf5bf",
-  "group": "D3",
+  "reviewer": "X-1bc79",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T112833-L-765501",
+  "landing": "20261012T135226-L-1659217",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet and node statements; all four modules and direct importer AffineModuleCorrespondence compile successfully, with only permitted named sorry declarations remaining."
+  "note": "independent Codex review: Lean signatures match both nodes; existing signature unchanged; proof dependencies match the proof; delivered modules and direct importer compile; axioms match the named remaining sorry."
  }
 }

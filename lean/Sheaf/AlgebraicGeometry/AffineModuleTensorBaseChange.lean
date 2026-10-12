@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Topology.InverseImageOperationExt
+import Sheaf.AlgebraicGeometry.SheafTensorPushoutCancellation
 /-! # Affine module tensor BaseChange
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
@@ -61,6 +61,122 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
+private def extensionFunctor {T : TopCat.{u}} {C D : T.Sheaf CommRingCat.{u}}
+    (α : C ⟶ D) : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj C) ⥤
+      SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj D) where
+  obj M := SheafOfModules.changeOfRings.{u, u, u} α M
+  map a := SheafOfModules.changeOfRingsHom.{u, u, u} α _ a
+  map_id M := by
+    unfold SheafOfModules.changeOfRingsHom
+    have hp : (show SheafOfModules.changeOfRingsPresheaf.{u, u, u} α M ⟶
+        SheafOfModules.changeOfRingsPresheaf.{u, u, u} α M from
+      { app := fun W ↦ (ModuleCat.extendScalars (α.hom.app W).hom).map
+          ((show M ⟶ M from 𝟙 M).val.app W)
+        naturality := SheafOfModules.changeOfRingsHom_naturality α M (𝟙 M) }) = 𝟙 _ := by
+      apply PresheafOfModules.hom_ext
+      intro W
+      exact (ModuleCat.extendScalars (α.hom.app W).hom).map_id _
+    exact (congrArg
+      (fun q ↦ (PresheafOfModules.sheafification
+        (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj D).obj)).map q)
+      hp).trans (CategoryTheory.Functor.map_id _ _)
+  map_comp a c := by
+    unfold SheafOfModules.changeOfRingsHom
+    rw [← CategoryTheory.Functor.map_comp]
+    congr 1
+    apply PresheafOfModules.hom_ext
+    intro W
+    exact (ModuleCat.extendScalars (α.hom.app W).hom).map_comp _ _
+
+private def inverseFunctor {T T' : TopCat.{u}} (g : T ⟶ T')
+    (C : T'.Sheaf CommRingCat.{u}) : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj C) ⥤
+      SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj
+        (TopCat.Sheaf.inverseImageRing g C)) where
+  obj M := TopCat.Sheaf.inverseImageModule g C M
+  map a := TopCat.Sheaf.inverseImageModuleMap g C _ a
+  map_id M := by
+    ext W m
+    simp [TopCat.Sheaf.inverseImageModuleMap, PresheafOfModules.homMk]
+    rfl
+  map_comp a c := by
+    ext W m
+    simp [TopCat.Sheaf.inverseImageModuleMap, PresheafOfModules.homMk]
+    rfl
+
+private theorem inverseRestrict_smul (G : SheafOfModules.{u} (𝓡 A))
+    (W : (Opens U)ᵒᵖ) (r : (TopCat.Sheaf.inverseImageRing f.base X.sheaf).obj.obj W)
+    (m : (I G).val.obj W) :
+    @SMul.smul _ _ (TopCat.Sheaf.inverseImageModuleInstances f.base X.sheaf
+      ((S).obj G) W).toSMul r m =
+    @SMul.smul _ _ (TopCat.Sheaf.inverseImageModuleInstances f.base A G W).toSMul
+      ((t₀).hom.app W r) m := by
+  let M := (S).obj G
+  let hM := Classical.choose_spec (TopCat.Sheaf.exists_inverseImageModuleInstances
+    f.base X.sheaf M)
+  let hG := Classical.choose_spec (TopCat.Sheaf.exists_inverseImageModuleInstances
+    f.base A G)
+  apply TopCat.Sheaf.inverseImageOperation_ext f.base X.sheaf
+    ((SheafOfModules.toSheaf _).obj M) (TopCat.Sheaf.inverseImageAb f.base A G)
+    (fun W r m ↦ @SMul.smul _ _
+      (TopCat.Sheaf.inverseImageModuleInstances f.base X.sheaf M W).toSMul r m)
+    (fun W r m ↦ @SMul.smul _ _
+      (TopCat.Sheaf.inverseImageModuleInstances f.base A G W).toSMul ((t₀).hom.app W r) m)
+    (by
+      intro V W i r m
+      exact hM.1 i r m)
+    (by
+      intro V W i r m
+      erw [hG.1]
+      congr 1
+      exact ConcreteCategory.congr_hom ((t₀).hom.naturality i).symm r)
+    (by
+      intro V r m
+      let adjR := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)
+      have hn : (t₀).hom.app ((Opens.map f.base).op.obj V)
+          ((adjR.unit.app X.sheaf).hom.app V r) =
+          (adjR.unit.app A).hom.app V ((ρ).hom.app V r) :=
+        congrArg (fun a ↦ a.hom.app V r) (adjR.unit_naturality ρ)
+      erw [hn]
+      exact (hM.2 V r m).symm.trans (hG.2 V ((ρ).hom.app V r) m)
+      )
+    W r m
+
+private def inverseRestrictIso (G : SheafOfModules.{u} (𝓡 A)) :
+    (SheafOfModules.restrictScalars (𝓻 t₀)).obj (I G) ≅
+      TopCat.Sheaf.inverseImageModule f.base X.sheaf ((S).obj G) where
+  hom := ⟨PresheafOfModules.homMk (𝟙 _) (fun W r m ↦ by
+    exact (inverseRestrict_smul f G W r m).symm)⟩
+  inv := ⟨PresheafOfModules.homMk (𝟙 _) (fun W r m ↦ by
+    exact inverseRestrict_smul f G W r m)⟩
+  hom_inv_id := by ext W m; rfl
+  inv_hom_id := by ext W m; rfl
+
+private theorem extensionFunctor_unit {T : TopCat.{u}} {C D : T.Sheaf CommRingCat.{u}}
+    (α : C ⟶ D) {M N : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj C)}
+    (a : M ⟶ N) (W : (TopologicalSpace.Opens T)ᵒᵖ)
+    (x : (SheafOfModules.changeOfRingsPresheaf.{u, u, u} α M).obj W) :
+    ((extensionFunctor α).map a).val.app W
+      (((PresheafOfModules.sheafificationAdjunction
+        (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj D).obj)).unit.app
+          (SheafOfModules.changeOfRingsPresheaf.{u, u, u} α M)).app W x) =
+    ((PresheafOfModules.sheafificationAdjunction
+      (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj D).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{u, u, u} α N)).app W
+          ((ModuleCat.extendScalars (α.hom.app W).hom).map (a.val.app W) x) := by
+  let p : SheafOfModules.changeOfRingsPresheaf.{u, u, u} α M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{u, u, u} α N :=
+    { app := fun V ↦ (ModuleCat.extendScalars (α.hom.app V).hom).map (a.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality α M a }
+  exact congrArg (fun q ↦ q.app W x)
+    ((PresheafOfModules.sheafificationAdjunction
+      (𝟙 ((sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj D).obj)).unit_naturality p)
+
+set_option maxHeartbeats 800000 in
+-- The unit calculation unfolds two scalar restrictions and the chosen adjunction.
 /-- Base change across the ring-sheaf pushout identifies extension of the inverse-image
 algebra module with tensor pullback after scalar restriction.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
@@ -100,7 +216,41 @@ theorem affine_module_tensor_baseChange
                   (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
                     (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
                       ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g))) := by
-  sorry
+  classical
+  let F := inverseFunctor f.base A
+  let E := extensionFunctor t
+  let P := F ⋙ E
+  let Q := F ⋙ SheafOfModules.restrictScalars (𝓻 t₀)
+  let J := S ⋙ inverseFunctor f.base X.sheaf
+  let j : Q ≅ J := NatIso.ofComponents (inverseRestrictIso f) (by
+    intro G G' a
+    ext W m
+    rfl)
+  obtain ⟨e, he, hu⟩ := SheafOfModules.sheafTensorPushoutCancellation r₀ t₀ b t hpush
+  let c : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ Q ⋙ extensionFunctor r₀ :=
+    NatIso.ofComponents (fun G ↦ e (F.obj G)) (fun a ↦ he _ _ (F.map a))
+  let κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f :=
+    c ≪≫ Functor.isoWhiskerRight j (extensionFunctor r₀)
+  refine ⟨P, fun _ ↦ rfl, κ, ?_, ?_⟩
+  · intro G G' a
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  · intro G V g
+    let W := (Opens.map f.base).op.obj V
+    change (e (I G)).inv.val.app W
+      (((extensionFunctor r₀).map (inverseRestrictIso f G).inv).val.app W
+        (((adj₀).unit.app ((S).obj G)).val.app V g)) = _
+    have hv := Classical.choose_spec (exists_tensorPullbackAdjunction f) ((S).obj G) V g
+    refine (congrArg (fun x ↦ (e (I G)).inv.val.app W
+      (((extensionFunctor r₀).map (inverseRestrictIso f G).inv).val.app W x)) hv).trans ?_
+    let m := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
+        ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g
+    have hθ := extensionFunctor_unit r₀ (inverseRestrictIso f G).inv W
+      ((1 : U.sheaf.obj.obj W) ⊗ₜ[
+        (TopCat.Sheaf.inverseImageRing f.base X.sheaf).obj.obj W,
+        ((r₀).hom.app W).hom] m)
+    exact (congrArg (fun x ↦ (e (I G)).inv.val.app W x) hθ).trans (hu (I G) W m)
 
 end
 end AlgebraicGeometry.Scheme.Modules
