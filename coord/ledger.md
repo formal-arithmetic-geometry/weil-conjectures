@@ -8013,3 +8013,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: returned deliver/A3/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (reviewer RETURN: (the landing tools, head 5710c65e4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 14:40 L: returned deliver/A3/Sheaf.RingTheory.IntegralOverHenselianPair (reviewer RETURN: (the landing tools, head 6da3eb3ca) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 14:40 L: returned deliver/C3/Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSheafification (reviewer RETURN: (the landing tools, head 3e351ddaf) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 14:40 L: returned deliver/G3/Sheaf.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso (reviewer RETURN: (the landing tools, head bafd04a4c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
