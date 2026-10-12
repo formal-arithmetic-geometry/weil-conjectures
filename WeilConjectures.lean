@@ -112,6 +112,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.AffineBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineCore
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineCount
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineGeneric
+public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Curve.AssertionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Curve.BaseChange
@@ -447,6 +448,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.ConnectedConstant
+public import WeilConjectures.AlgebraicGeometry.Sites.ConstantModSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
