@@ -15,39 +15,30 @@
  ],
  "proof": [
   {
-   "text": "The tensor-formula pullback and the usual Scheme.Modules.pullback are left adjoints of the same pushforward [def-pc-module-pullback]. Uniqueness of left adjoints identifies them. The usual pullback has the proved monoidal structure and unit comparison (WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf, pullbackObjUnitIso). Induct on n, using the binary tensor comparison [lem-weil-pbc-invertible-pullback-tensor] and this unit comparison, to identify g^*(L^{tensor n}) with (g^*L)^{tensor n}. Tensor powers are invertible by induction on n using the unit and the tensor-invertibility clause of the same lemma. Pull back s via the adjunction unit, restrict from the inverse image of the top open to the top open, and transport along this power isomorphism to obtain t.",
+   "text": "Choose the canonical adjunction of tensorPullback to pushforward from [lem-pc-module-pullback-adjunction], whose unit is fixed sectionwise by its tensor formula. Uniqueness of left adjoints gives an isomorphism to the usual pullback. Apply the proved source theorem nonempty_pullback_tensorPow_iso (WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula) and inductively tensor the inverse comparison on L to identify tensorPullback(L.tensorPow n) with (tensorPullback(L)).tensorPow n. The proved source instance IsInvertible.tensorPow supplies invertibility of L.tensorPow n. Apply the chosen adjunction unit to s and transport its section by this isomorphism.",
    "uses": [
     "def-pc-module-pullback",
-    "lem-weil-pbc-invertible-pullback-tensor"
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": true
   },
   {
-   "text": "At each stalk, extending scalars to the residue field is quotienting by the maximal ideal times the module [lem-weil-pbc-tensor-over-quotient-ring, clause (1)]. The quotient isomorphism sends 1 tensor v to v modulo that submodule. Consequently the nonvanishing predicate of [def-weil-pbc-ample-invertible-module] is precisely that the residue value is nonzero. An isomorphism of modules induces an isomorphism of these quotients, preserving whether this value is zero.",
+   "text": "An isomorphism of modules induces mutually inverse linear maps on stalks; each preserves the maximal ideal times the whole stalk, so it preserves nonvanishing. Apply [lem-sc-nonvanishing-tensor-pullback] to the canonical pulled-back section of L.tensorPow n, pointwise at y, to obtain the claimed inverse-image equality.",
    "uses": [
-    "lem-weil-pbc-tensor-over-quotient-ring",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-sc-nonvanishing-tensor-pullback"
    ],
-   "elementary": true
-  },
-  {
-   "text": "Apply the fibre-value clause of [lem-weil-pbc-invertible-pullback-tensor] to L^{tensor n}. The value of the pulled-back s at y is 1 tensor s(g(y)) over the residue-field map. This map is injective since it is a unital field homomorphism. A nonzero vector remains nonzero after field extension: extend it to a basis and take its coordinate functional; after base extension this functional takes 1 tensor v to 1. A zero vector stays zero by bilinearity. Transporting through the power isomorphism preserves zero by step 2. Thus y belongs to Y_t if and only if g(y) belongs to X_s, proving equality of sets.",
-   "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-module-pullback",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-tensor-over-quotient-ring",
-  "def-weil-pbc-ample-invertible-module"
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-nonvanishing-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0892, proof: inverse-image nonvanishing equality, with tensor-power transport and the residue-fibre criterion written out"
+  "place": "Lean proof by transport through the usual pullback tensor-power comparison, reducing pointwise nonvanishing to lem-sc-nonvanishing-tensor-pullback"
  },
  "mathlib_searches": [
   {
@@ -130,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T085246-L-17727",
-  "kind": "interface",
+  "landing": "20261012T120457-L-956794",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
