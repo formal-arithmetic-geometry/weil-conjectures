@@ -35,4 +35,4 @@ Proof:
    to the canonical integer algebra structure to conclude that `R` is a G-ring. -/
 theorem isGRing_of_finiteType_int (R : Type u) [CommRing R] [Algebra.FiniteType ℤ R] :
     IsGRing R := by
-  sorry
+  exact isGRing_of_finiteType (R := ℤ) (S := R) Int.isGRing
