@@ -11,11 +11,12 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.LocallyInjective
-import Mathlib.CategoryTheory.Sites.LocallyBijective
-import Sheaf.CategoryTheory.SiteLerayDegenerate
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.Paper.ZariskiEtalePushedResolution
+import Sheaf.Paper.ZariskiEtaleResolutionMap
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Canonical Leray comparison for the Zariski-to-étale morphism
 
@@ -125,4 +126,47 @@ theorem zariski_etale_canonical_leray
         ((Sheaf.cohomologyPresheafFunctor X.smallEtaleTopology q).map
           ((sheafAdjunctionContinuous i AddCommGrpCat.{u + 1}
             (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).counit.app F)).app
-              (op (i.obj V))) := by sorry
+              (op (i.obj V))) := by
+  let := hi
+  obtain ⟨hlex, hquasi⟩ :=
+    zariski_etale_pushed_resolution i hi_inclusion hi F hvan
+  let := hlex
+  let G := i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+    (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology
+  let : G.PreservesInjectiveObjects :=
+    (sheafAdjunctionContinuous i AddCommGrpCat.{u + 1}
+      (Opens.grothendieckTopology X.carrier)
+      X.smallEtaleTopology).preservesInjectiveObjects_of_preservesFiniteLimits
+  let I := InjectiveResolution.of F
+  let a := (HomologicalComplex.singleMapHomologicalComplex G
+      (ComplexShape.up ℕ) 0).inv.app F ≫
+    (G.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι
+  let R : InjectiveResolution (G.obj F) :=
+    { cocomplex := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+      injective n := G.injective_obj_of_injective (I.injective n)
+      ι := a
+      quasiIso := hquasi I }
+  have he : R.ι.f 0 ≫ HomologicalComplex.Hom.f (𝟙 R.cocomplex) 0 = G.map (I.ι.f 0) := by
+    simp [R, a, HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
+  intro q V
+  obtain ⟨e₁, e₂, hcomp⟩ :=
+    zariski_etale_resolution_map i hi fstar hfstar F I R (𝟙 R.cocomplex) he q V
+  let E := sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
+    (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)
+  let b := HomologicalComplex.homologyMap
+    ((E.mapHomologicalComplex (ComplexShape.up ℕ)).map (𝟙 R.cocomplex)) q
+  have hb : IsIso b := inferInstance
+  have hbij : Function.Bijective b.hom :=
+    (ConcreteCategory.isIso_iff_bijective b).mp hb
+  apply (ConcreteCategory.isIso_iff_bijective _).mpr
+  constructor
+  · intro x y h
+    apply e₁.injective
+    apply hbij.1
+    rw [← hcomp x, ← hcomp y, h]
+  · intro y
+    obtain ⟨z, hz⟩ := hbij.2 (e₂ y)
+    obtain ⟨x, rfl⟩ := e₁.surjective z
+    refine ⟨x, e₂.injective ?_⟩
+    rw [hcomp x]
+    exact hz
