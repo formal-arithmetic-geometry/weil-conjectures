@@ -1,0 +1,99 @@
+{
+ "id": "q3-ringed-space-tensor-pullback-absolute-postcomposition",
+ "kind": "statement",
+ "title": "Absoluteness of tensor pullback derived comparison",
+ "statement": "The K-flat derived comparison remains a left derived comparison after postcomposition with every functor out of the target derived category.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06XN"
+ },
+ "stmt_deps": [
+  "q3-ringed-space-tensor-pullback-left-derived"
+ ],
+ "proof": [
+  {
+   "text": "The K-flat resolution diagram is cofinal and essentially constant; its limiting cone is absolute, so every postcomposition functor preserves the comparison.",
+   "uses": [
+    "q3-ringed-space-tensor-pullback-left-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "q3-ringed-space-tensor-pullback-left-derived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06XN"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ringed-space-tensor-pullback-absolute",
+   "place": "proof step 1"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackAbsoluteAux.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.leftDerived_tensorPullback_absolute",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12",
+  "statement": "theorem leftDerived_tensorPullback_absolute\n    {X Y : RingedSpace.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]\n    (g : X ⟶ Y)\n    (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))\n    (h : ∀ M : SheafOfModules.{u} (moduleRings Y),\n      P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M))\n    (hm : ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N),\n      P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)\n        (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) ≫\n        eqToHom (h N).symm)\n    [P.Additive]\n    (L : DerivedCategory (SheafOfModules.{u} (moduleRings Y)) ⥤\n      DerivedCategory (SheafOfModules.{u} (moduleRings X)))\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      P.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))\n        (ComplexShape.up ℤ)))\n    (hK : ∀ K : CochainComplex (SheafOfModules.{u} (moduleRings Y)) ℤ,\n      K.IsKFlat → IsIso\n        (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) :\n    ∀ H : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤\n        DerivedCategory (SheafOfModules.{u} (moduleRings Y)),\n      (L ⋙ H).IsLeftDerivedFunctor\n        ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε H)\n        (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))\n          (ComplexShape.up ℤ))"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor pullback left derived functor K-flat resolutions",
+   "results": "LeanSearch service unavailable (Internal Server Error); no exact match.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor",
+   "results": "Unknown identifier; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback|leftDerived_from_resolvingClass|whiskerRight",
+   "results": "Existing generic resolving-class and derived declarations found; no concrete absolute result.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T112848-L-770947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T112848-L-770947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

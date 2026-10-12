@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux
 
 /-! # Absolute left derived tensor pullback via K-flat resolutions
 
@@ -78,6 +79,7 @@ theorem exists_absolute_leftDerived_tensorModulePullback
           ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight ε H)
           (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))
             (ComplexShape.up ℤ)) := by
-  sorry
+  obtain ⟨L, ε, hL, hK⟩ := exists_tensorPullback_leftDerived g P h hm
+  exact ⟨L, ε, hL, hK, leftDerived_tensorPullback_absolute g P h hm L ε hL hK⟩
 
 end AlgebraicGeometry.RingedSpace
