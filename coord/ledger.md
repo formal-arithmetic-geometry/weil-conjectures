@@ -9124,3 +9124,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:44 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.GenericProductKernelBound (stage 3; reviewer PASS; first push; landing 20261012T184402-L-4026480 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:44 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology (stage 3; reviewer PASS; first push; landing 20261012T184403-L-4026619 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:44 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono (stage 3; reviewer PASS; first push; landing 20261012T184403-L-4026765 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:48 L: returned deliver/R3/Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport (reviewer RETURN: (reviewer X-d476b, head d476b2b5e) E2: PrimaryModuleFiltrationSheafTransportTerminal.lean, lines 40–49: the arbitrary F )
