@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-picard-h1-local-section-base-descent",
+ "kind": "statement",
+ "title": "Local H1 fibre-generator lifting after base descent",
+ "statement": "Let $f:X\\to S$ and $f_i:X_i\\to S$ for $i\\in\\operatorname{Fin}(n)$ be flat, proper morphisms locally of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], with morphisms $u_i:X_i\\to X$ satisfying $u_i f=f_i$. Assume that their structure pushforwards are universally the structure module, expressed by invertibility of the canonical unit maps after every base change [def-pc-base-change, def-pc-module-pullback]. Let $L$ be invertible on $X$ [def-sc-invertible-module], let $k:W\\to S$ be an immersion, and let $w\\in W$, $s\\in S$ satisfy $k(w)=s$ [def-weil-residue-field]. Assume that each pullback of $u_i^*L$ to $X_i\\times_S W$ is isomorphic to the pullback of a finite locally free module on $W$, and that $L$ on $X\\times_S\\operatorname{Spec}\\kappa(s)$ is isomorphic to the pullback of a finite locally free module on $\\operatorname{Spec}\\kappa(s)$ [def-amb-finite-locally-free-module]. If the joint canonical structure-sheaf cohomology map $H^1(X_s,\\mathcal O)\\to\\prod_i H^1(X_{i,s},\\mathcal O)$ is injective [def-sc-structure-sheaf-cohomology-pullback], then there is an open $V\\subset W$ containing $w$, and a global section of the pullback of $L$ on $X\\times_S V$, whose nonvanishing locus contains every point over the point $(w,w\\in V)$ of $V$ [def-weil-pbc-ample-invertible-module]. No Picard locus or intersection representation is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, proof after replacing S by the intersection, through d = 0 and lifting the fibre generator; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-amb-finite-locally-free-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Base change the proper flat finitely presented families and the invertible module along k. Since k is an immersion and k(w) = s, the residue fields at w and s are canonically isomorphic. Thus the fibre-descent hypothesis and the joint H1 injection transport to w. The structure-pushforward hypotheses hold after this base change.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each hLi exhibits the target bundle as the pullback of a finite locally free N. Faithfully flat descent applies: the universal structure-pushforward isomorphism makes every target family surjective, hence its flat structure map is faithfully flat. Consequently N is invertible. Shrink to a common affine neighbourhood of w on which these finitely many N are trivial. The same argument over the residue field makes the original fibre bundle trivial by hLs.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply perfect_derivedDirectImage_baseChange to the base-changed bundles. Invertibility supplies finite presentation and relative flatness. Their derived direct images are perfect, their formation commutes with residue-field base change, H0 has rank one, and negative fibre cohomology vanishes.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_finiteFreeResidueModel to all these perfect complexes and shrink to a common affine neighbourhood. They have degree-zero term O, degree-j ranks equal to the fibre Betti numbers, and all residue differentials are zero. Represent the derived pullback maps by chain maps between these fixed bounded finite free models: on the affine base their terms are projective and their Hom complexes compute derived morphisms. The degree-zero residue maps are isomorphisms because pullback takes a fibre generator to a generator; shrink to invert these maps.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The joint degree-one residue map is injective by hH. If its source rank is positive, apply finiteFreeMap_residue_localization to the joint degree-one map, inverting a nonzero maximal minor to make that map injective (in fact split injective). If the rank is zero it is already injective; this also handles an empty family. Each target H0 is O. Its generator embeds into the degree-zero term O by a scalar which is nonzero modulo the marked prime, by H0 base change. Invert that scalar; the generator spans the whole term, so its degree-zero differential is zero. The chain-map identities then force the source degree-zero differential to be zero.",
+   "uses": [
+    "lem-pc-finite-free-map-residue-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generator of that source term is an H0 class, hence a global section of the base-changed L on this neighbourhood V. Its residue is the original trivializing fibre section, so its germs generate L at every point over the marked point of V. This is precisely membership in Modules.nonvanishingLocus.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-finite-free-map-residue-localization",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, proof after replacing S by the intersection, through d = 0 and lifting the fibre generator; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a proper flat scheme has a section lifting its fibre generator when the joint pullback on H1 is injective",
+   "results": "8 hits: ModuleCat.Tilde.exists_const, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, ModuleCat.Tilde.res_const",
+   "date": "2026-10-13",
+   "verdict": "No local H1 fibre-generator lifting theorem. Related affine section facts only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a proper flat scheme has a section lifting a fibre generator if its pullbacks descend to the base and the joint map on H1 is injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|fibre generator|finiteFreeResidueModel|derivedDirectImage",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-13",
+   "verdict": "No local H1 fibre-generator lifting theorem. Related affine section facts only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1IntersectionSection",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, perfect-complex and degree-one minor argument giving d = 0",
+   "via": [
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardH1LocalSectionBaseDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1LocalSectionBaseDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_local_section_of_base_descent",
+  "statement": "theorem picard_h1_local_section_of_base_descent {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (hOi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd (fi i) g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (hLi : ∀ i, ∃ (N : W.Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n        ((Modules.tensorPullback (ui i)).obj L) ≅\n        (Modules.tensorPullback (pullback.snd (fi i) k)).obj N))\n    (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n        (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N))\n    (hH : Function.Injective (fun x :\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1 ↦ fun i ↦\n      structureSheafCohomologyPullback\n        (((Over.pullback (S.fromSpecResidueField s)).map\n          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 x)) :\n    ∃ (V : W.Opens) (hwV : w ∈ V),\n      ∃ σ : Γ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L, ⊤),\n        ∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),\n          (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →\n            x ∈ Modules.nonvanishingLocus\n              ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) σ",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T203950-L-832860",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T203950-L-832860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
