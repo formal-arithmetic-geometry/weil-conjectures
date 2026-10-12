@@ -4,6 +4,8 @@ public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FibreRingNoetherian
 
 /-! Noetherianity of the generic formal fibre of a regular power-series model.
 (blueprint: new-lem-weil-pbc-generic-formal-fibre-noetherian) -/
@@ -29,6 +31,13 @@ theorem isNoetherian_genericFormalFiber_of_regular_powerSeries
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
       (Localization.AtPrime P)
     IsNoetherianRing ((⊥ : Ideal A).Fiber C) := by
-  sorry
+  have _ := hmodel
+  let R := Localization.AtPrime P
+  let I := IsLocalRing.maximalIdeal R
+  let C := AdicCompletion I R
+  let : IsNoetherianRing R := inferInstance
+  let : IsNoetherianRing C := AdicCompletion.isNoetherianRing I
+  change IsNoetherianRing ((⊥ : Ideal A).Fiber C)
+  exact Ideal.isNoetherianRing_fiber (B := C) (⊥ : Ideal A)
 
 end
