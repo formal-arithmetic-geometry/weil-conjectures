@@ -76,6 +76,6 @@ theorem isFinitePresentation_cokernel_of_both_isFinitePresentation
     (X : RingedSpace.{u}) {G H : SheafOfModules.{u} (moduleRings X)}
     (f : G ⟶ H) [G.IsFinitePresentation] [H.IsFinitePresentation] :
     (cokernel f).IsFinitePresentation := by
-  sorry
+  exact isFinitePresentation_cokernel_of_isFiniteType X f
 
 end AlgebraicGeometry.RingedSpace
