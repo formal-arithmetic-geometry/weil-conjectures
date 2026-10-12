@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-flat-truncation-tower",
+ "kind": "statement",
+ "title": "Compatible bounded-above flat replacements of good truncations",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 077J (sites-cohomology-lemma-resolution-by-direct-sums-extensions-by-zero), using Derived Categories, Lemma 06XX (derived-lemma-special-direct-system)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 077J via 06XX"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatResolution",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "The existence of a K-flat resolution: compatible bounded-above replacements and their telescope comparison",
+   "via": [
+    "lem-pc-kflat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatTruncationTower",
+  "file": "lean/Sheaf/Algebra/Homology/FlatTruncationTower.lean",
+  "declaration": "CochainComplex.exists_flat_truncation_tower",
+  "statement": "theorem exists_flat_truncation_tower {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}} (G : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) : ∃ (E : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : ∀ n : ℕ, E n ⟶ E (n + 1)) (q : ∀ n : ℕ, E n ⟶ G.truncLE (n : ℤ)), (∀ n : ℕ, ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((E n).X i)) ∧ (∀ (n : ℕ) (i : ℤ), SheafOfModules.IsFlat ((E n).X i)) ∧ (∀ n : ℕ, QuasiIso (q n)) ∧ (∀ (n : ℕ) (i : ℤ), Epi ((q n).f i)) ∧ (∀ n : ℕ, t n ≫ q (n + 1) ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ G.ιTruncLE (n : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "statement": "Let $(C,J)$ be a small site and $R$ a sheaf of commutative rings. For every cochain complex $G$ of $R$-modules [def-pc-cochain-complex-modules], there exist complexes $E_n$, maps $t_n:E_n\\to E_{n+1}$, and termwise epimorphic quasi-isomorphisms $q_n:E_n\\to\\tau_{\\le n}G$ [def-pc-quasi-iso-modules], for all $n\\in\\mathbf N$, such that every $E_n$ is bounded above, every term $E_n^i$ is flat [def-pc-flat-sheaf-modules], and $t_n q_{n+1}\\iota_{n+1}=q_n\\iota_n$ as maps into $G$, where $\\iota_n:\\tau_{\\le n}G\\to G$ is the good truncation inclusion. Bounded above means that for each $n$ some integer $b_n$ has $E_n^i=0$ for $i>b_n$.",
+ "proof": [
+  {
+   "text": "Use flat module sheaves as the resolving class. Zero and finite sums are flat [lem-pc-sites-modules-coproduct-flat]. Every module has a flat epimorphic cover by sums of $j_{U!}R_U$ [lem-pc-sites-modules-quotient-j-shriek], using [lem-pc-sites-modules-j-shriek-flat] and [lem-pc-sites-modules-coproduct-flat]. The bounded-above flat replacement theorem [lem-pc-kflat-bounded-flat-replacement] resolves bounded-above complexes in this class. Start with a replacement of $\\tau_{\\le0}G$.",
+   "uses": [
+    "lem-pc-sites-modules-quotient-j-shriek",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sites-modules-coproduct-flat",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inductively resolve the cone of $E_n\\to\\tau_{\\le n+1}G$ by a bounded-above flat complex. Its map to $E_n[1]$ gives an extension complex $E_{n+1}$, degreewise split over $E_n$. Lift and subtract the homotopy of the augmentation square using these splittings, so the square commutes strictly. The long exact cohomology sequences show that the new augmentation is a quasi-isomorphism. Add the contractible two-term complex from a flat cover of $G^n$ in degrees $n,n+1$. Its map covers degree n and the boundaries in degree n+1. Surjectivity of the augmentation on cohomology supplies the remaining cycles in degree n+1, making the new augmentation epimorphic there as well. In other degrees epimorphisms follow from the preceding augmentation. The contractible addition preserves the quasi-isomorphism; terms remain finite sums of flat objects and bounded above. This is the induction in Derived Categories, lemma-special-direct-system, applied to the flat resolving class.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-sites-modules-quotient-j-shriek",
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the strictly commuting squares with the truncation inclusions $\\iota_{n+1}$ to obtain $t_n q_{n+1}\\iota_{n+1}=q_n\\iota_n$. Retain boundedness, flatness, epimorphisms and quasi-isomorphisms from the construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sites-modules-quotient-j-shriek"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible bounded above flat resolutions of good truncations of an unbounded complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible bounded above flat resolutions of good truncations of an unbounded complex",
+   "results": "HomologicalComplex.πTruncGE, HomologicalComplex.instIsStrictlySupportedStupidTrunc_1, HomologicalComplex.instIsStrictlySupportedStupidTrunc, HomologicalComplex.stupidTrunc, HomologicalComplex.truncGE'.X, ComplexShape.Embedding.stupidTruncFunctor_obj, HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside, HomologicalComplex.truncGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "specialDirectSystem|flat.*trunc|quasiIso.*telescope|telescope.*QuasiIso",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085341-L-40495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085341-L-40495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7057,3 +7057,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/T1/Sheaf.AlgebraicGeometry.IntegralDimOneAmple (stage 3; reviewer PASS; first push; landing 20261012T085340-L-40138 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/T1/Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange (stage 3; reviewer PASS; first push; landing 20261012T085341-L-40235 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/T1/Sheaf.FieldTheory.BrauerGaloisComparison (stage 3; reviewer PASS; first push; landing 20261012T085341-L-40370 (interface); batch 20261012T085205; modules 5; new nodes 4)
+- 08:53 L: merged deliver/T2/Sheaf.Algebra.Homology.KFlatResolution (stage 3; reviewer PASS; first push; landing 20261012T085341-L-40495 (interface); batch 20261012T085205; modules 3; new nodes 2)

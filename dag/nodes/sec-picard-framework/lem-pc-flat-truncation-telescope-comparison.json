@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-flat-truncation-telescope-comparison",
+ "kind": "statement",
+ "title": "Quasi-isomorphism comparison for telescopes of truncation replacements",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of Lemma 06YS, via Lemma 077J; Derived Categories, Lemma 0949"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of Lemma 06YS, telescope form"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatResolution",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "The existence of a K-flat resolution: compatible bounded-above replacements and their telescope comparison",
+   "via": [
+    "lem-pc-kflat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FlatTruncationTelescopeComparison.lean",
+  "declaration": "CochainComplex.quasiIso_flat_truncation_telescope",
+  "statement": "theorem quasiIso_flat_truncation_telescope {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}} (G : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (E : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : ∀ n : ℕ, E n ⟶ E (n + 1)) (q : ∀ n : ℕ, E n ⟶ G.truncLE (n : ℤ)) (hq : ∀ n : ℕ, QuasiIso (q n)) (hcompat : ∀ n : ℕ, t n ≫ q (n + 1) ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q n ≫ G.ιTruncLE (n : ℤ)) (f : mappingCone (𝟙 (∐ E) - Sigma.desc (fun n : ℕ ↦ t n ≫ Sigma.ι E (n + 1))) ⟶ G) (hinr : mappingCone.inr _ ≫ f = Sigma.desc (fun n : ℕ ↦ q n ≫ G.ιTruncLE (n : ℤ))) (hinl : (mappingCone.inl _).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0) : QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "statement": "Let $(C,J)$ be a small site and $R$ a sheaf of commutative rings. Let $G$ and $E_n$ ($n\\in\\mathbf N$) be cochain complexes of $R$-modules [def-pc-cochain-complex-modules], with maps $t_n:E_n\\to E_{n+1}$ and quasi-isomorphisms $q_n:E_n\\to\\tau_{\\le n}G$ [def-pc-quasi-iso-modules]. Assume $t_n q_{n+1}\\iota_{n+1}=q_n\\iota_n$, where $\\iota_n$ is the good truncation inclusion into $G$. Set $B=\\bigoplus_nE_n$ and $\\phi=1-\\operatorname{shift}_t:B\\to B$, with shift given on the $n$th summand by $t_n$ into summand $n+1$. If $f:\\operatorname{Cone}(\\phi)\\to G$ is a chain map whose restriction to the unshifted summand is $\\sum_n q_n\\iota_n$ and whose restriction to the shifted summand is zero, then $f$ is a quasi-isomorphism. No flatness, boundedness or epimorphism assumption is imposed on $E_n$ or $q_n$.",
+ "proof": [
+  {
+   "text": "Use the compatible truncation transition maps and the canonical quasi-isomorphism $g$ from their telescope to $G$ in [lem-pc-kflat-hocolim-truncations]. Since each truncation inclusion is monic, the compatibility after inclusion into $G$ implies that the maps $q_n$ commute with the truncation transitions.",
+   "uses": [
+    "lem-pc-kflat-hocolim-truncations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sheaves of modules form a Grothendieck abelian category [lem-pur-ringed-site-grothendieck-abelian], so coproducts are exact. The source-library declaration HomologicalComplex.isStableUnderColimitsOfShape_quasiIso makes the coproduct $\\sigma=\\bigoplus_n q_n$ a quasi-isomorphism. Compatibility gives a square between the two one-minus-shift maps, with both vertical maps equal to $\\sigma$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The square induces a map of cone triangles. Apply the standard derived localization functor to it. The first two maps are isomorphisms, so Pretriangulated.isIso₃_of_isIso₁₂ makes the map on cones an isomorphism in the derived category, hence a quasi-isomorphism of complexes. The composite with $g$ agrees with $f$ on the shifted and unshifted summands; mapping-cone extensionality identifies them. Composition of quasi-isomorphisms gives the conclusion.",
+   "uses": [
+    "def-pc-quasi-iso-modules",
+    "lem-pc-kflat-hocolim-truncations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-quasi-iso-modules",
+  "lem-pc-kflat-hocolim-truncations",
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "telescope of degreewise epimorphic quasi-isomorphisms to good truncations maps quasi-isomorphically and epimorphically to the original complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "telescope of degreewise epimorphic quasi-isomorphisms to good truncations maps quasi-isomorphically and epimorphically to the original complex",
+   "results": "HomologicalComplex.instQuasiIsoAtπTruncGEF, HomologicalComplex.quasiIsoAt_πTruncGE, HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g, HomologicalComplex.instEpiFπTruncGE, HomologicalComplex.quasiIsoAt_ιTruncLE, HomologicalComplex.instQuasiIsoAtιTruncLEF, HomologicalComplex.epi_homologyMap_shortComplexTruncLE_g, HomologicalComplex.instEpiπTruncGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "specialDirectSystem|flat.*trunc|quasiIso.*telescope|telescope.*QuasiIso",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085341-L-40495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085341-L-40495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -24,58 +24,36 @@
  ],
  "proof": [
   {
-   "text": "For each integer $N$, take the good truncation $\\tau_{\\le N}\\mathcal G^\\bullet$. It is bounded above, so [lem-pc-kflat-bounded-flat-replacement] gives a bounded-above complex $\\mathcal E_N^\\bullet$ of flat $\\mathcal O$-modules and a termwise surjective quasi-isomorphism $\\mathcal E_N^\\bullet\\to\\tau_{\\le N}\\mathcal G^\\bullet$. Functoriality of the replacements supplies compatible maps $\\mathcal E_N^\\bullet\\to\\mathcal E_{N+1}^\\bullet$.",
+   "text": "Choose a tower $E_n,t_n,q_n$ from [lem-pc-flat-truncation-tower]. Each $E_n$ is bounded above with flat terms, and $q_n:E_n\\to\\tau_{\\le n}G$ is a degreewise epimorphic quasi-isomorphism. The compositions $q_n\\iota_n$ commute strictly with $t_n$.",
    "uses": [
-    "lem-pc-kflat-bounded-flat-replacement"
+    "lem-pc-flat-truncation-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS"
-   }
+   "elementary": false
   },
   {
-   "text": "Form the homotopy colimit $\\mathcal K^\\bullet=\\operatorname{hocolim}_N\\mathcal E_N^\\bullet$, represented by the cone of $1-\\operatorname{shift}\\colon\\bigoplus_N\\mathcal E_N^\\bullet\\to\\bigoplus_N\\mathcal E_N^\\bullet$. By [lem-pc-kflat-closure], bounded-above flat complexes are K-flat, cones and countable direct sums of K-flat complexes are K-flat, and countable direct sums of flat sheaves are flat; hence $\\mathcal K^\\bullet$ is K-flat and every term $\\mathcal K^i=\\bigoplus_N\\mathcal E_N^{i+1}\\oplus\\bigoplus_N\\mathcal E_N^i$ is flat. Since the maps $\\mathcal E_N^\\bullet\\to\\tau_{\\le N}\\mathcal G^\\bullet$ commute strictly with the transition maps, they induce a map of cones $\\mathcal K^\\bullet\\to\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet$, which in each degree is a direct sum of the termwise surjective maps of [lem-pc-kflat-bounded-flat-replacement], hence termwise surjective. The canonical map $\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet\\to\\mathcal G^\\bullet$ is $(x,y)\\mapsto\\sum_N y_N$ in degree $i$; it is surjective because $(\\tau_{\\le N}\\mathcal G^\\bullet)^i=\\mathcal G^i$ for $N>i$. So the composite $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ is termwise surjective.",
+   "text": "Let $B=\\bigoplus_nE_n$, $\\phi=1-\\operatorname{shift}_t$, and $s=\\sum_nq_n\\iota_n:B\\to G$. Coproduct extensionality and the strict compatibility give $\\phi s=0$. The mapping-cone desc construction, with zero shifted component and unshifted component $s$, therefore gives $f:\\operatorname{Cone}(\\phi)\\to G$. By [lem-pc-kflat-closure], each bounded-above flat $E_n$ is K-flat and its telescope is K-flat. Evaluation preserves coproducts, so each $B^i$ is flat by the coproduct clause of that same lemma. Each cone term is isomorphic to $B^{i+1}\\oplus B^i$, hence flat by the same clause for a two-element indexing set. Transport flatness across the tensor-right isomorphism. Reindex the small indexing types by ULift into the site universe when applying the countable coproduct clause.",
    "uses": [
-    "lem-pc-kflat-closure",
-    "lem-pc-kflat-bounded-flat-replacement"
+    "lem-pc-kflat-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $\\mathcal E_N^\\bullet\\to\\tau_{\\le N}\\mathcal G^\\bullet$ is a quasi-isomorphism. A countable direct sum is the filtered colimit of its finite partial sums, so by [lem-pc-kflat-hocolim-truncations] (filtered colimits of quasi-isomorphisms are quasi-isomorphisms) the map $\\bigoplus_N\\mathcal E_N^\\bullet\\to\\bigoplus_N\\tau_{\\le N}\\mathcal G^\\bullet$ is a quasi-isomorphism. The map $\\mathcal K^\\bullet\\to\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet$ of Step 2 is a map of cones whose two components are this quasi-isomorphism; the long exact cohomology sequences of the cones and the five lemma show it is a quasi-isomorphism. By [lem-pc-kflat-hocolim-truncations] the canonical map $\\operatorname{hocolim}_N\\tau_{\\le N}\\mathcal G^\\bullet\\to\\mathcal G^\\bullet$ is a quasi-isomorphism; composing, $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ is a quasi-isomorphism.",
+   "text": "Apply [lem-pc-flat-truncation-telescope-comparison] to $f$, whose restrictions to the shifted and unshifted summands are those of the cone desc construction. This makes $f$ a quasi-isomorphism. In a fixed degree $i$, choose $n=i_{\\ge0}+1$ so that $i<n$. The component of the truncation inclusion $\\iota_n$ in degree $i$ is an isomorphism. Hence $q_n^i\\iota_n^i$ is epi. It factors through $f^i$ by the coproduct inclusion followed by the unshifted cone inclusion, so $f^i$ is epi. These give all four asserted properties of the explicitly constructed telescope.",
    "uses": [
-    "lem-pc-kflat-hocolim-truncations"
+    "lem-pc-flat-truncation-telescope-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS"
-   }
-  },
-  {
-   "text": "Steps 2 and 3 give a K-flat complex $\\mathcal K^\\bullet$ with flat terms and a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ which, by Step 2, is surjective in every degree, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-flat-truncation-tower",
   "lem-pc-kflat-closure",
-  "lem-pc-kflat-hocolim-truncations"
+  "lem-pc-flat-truncation-telescope-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 06YS"
+  "place": "Lemmas 06YS and 077J, using the telescope comparison of Derived Categories, Lemma 0949; formal assembly by T2"
  },
  "mathlib_searches": [
   {
@@ -175,5 +153,15 @@
   "group": "C1",
   "result": "pass",
   "note": "site (C,J) small as IsKFlat; R sheaf of comm rings via sheafCompose forget2; arbitrary G: CochainComplex SheafOfModules Z; exists K, f:K->G; K.IsKFlat (landed def, = QuasiIso f ∧ IsKFlat of landed IsKFlatResolution); all K.X i SheafOfModules.IsFlat; QuasiIso f; Epi (f.f i) = sheaf surjectivity; FromJoel kFlat_resolutionFunctor needs flat left resolution input + different predicate, so existing:false correct"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085341-L-40495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

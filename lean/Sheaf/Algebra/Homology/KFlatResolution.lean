@@ -7,9 +7,10 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.FlatTruncationTower
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import Sheaf.Algebra.Homology.TruncationTelescope
+import Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison
+import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 
 /-!
 # K-flat resolutions on a ringed site
@@ -25,6 +26,49 @@ universe u
 open CategoryTheory
 
 namespace CochainComplex
+
+private theorem flat_of_iso
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J CommRingCat.{u}}
+    {X Y : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    (e : X ≅ Y) (hY : SheafOfModules.IsFlat Y) : SheafOfModules.IsFlat X := by
+  let := SheafOfModules.monoidalCategory R
+  change exactFunctor _ _ (MonoidalCategory.tensorRight Y) at hY
+  change exactFunctor _ _ (MonoidalCategory.tensorRight X)
+  exact ObjectProperty.prop_of_iso _ ((MonoidalCategory.curriedTensor _).flip.mapIso e.symm) hY
+
+private theorem flat_small_coproduct
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J CommRingCat.{u}} {I : Type}
+    (M : I → SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+    (hM : ∀ j : I, SheafOfModules.IsFlat (M j)) [Countable I] :
+    SheafOfModules.IsFlat (∐ M) := by
+  have h := (kFlat_closure R).2.2.2.2 (ULift.{u} I)
+    (fun j ↦ M j.down) (fun j ↦ hM j.down)
+  exact flat_of_iso (Limits.Sigma.reindex (Equiv.ulift : ULift.{u} I ≃ I) M).symm h
+
+private theorem flat_terms_mappingCone
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    {R : Sheaf J CommRingCat.{u}}
+    {F G : CochainComplex
+      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (φ : F ⟶ G) (hF : ∀ i : ℤ, SheafOfModules.IsFlat (F.X i))
+    (hG : ∀ i : ℤ, SheafOfModules.IsFlat (G.X i))
+    (i : ℤ) : SheafOfModules.IsFlat ((mappingCone φ).X i) := by
+  let M : Limits.WalkingPair → SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) :=
+    fun j ↦ Limits.WalkingPair.casesOn j (F.X (i + 1)) (G.X i)
+  have hM : ∀ j : Limits.WalkingPair, SheafOfModules.IsFlat (M j) := by
+    intro j
+    cases j
+    · exact hF (i + 1)
+    · exact hG i
+  have hsum := flat_small_coproduct M hM
+  exact flat_of_iso
+    (HomologicalComplex.homotopyCofiber.XIsoBiprod φ i (i + 1) rfl ≪≫
+      Limits.biprod.isoCoprod (F.X (i + 1)) (G.X i)) hsum
 
 /-- Every complex of modules over a sheaf of commutative rings on a site admits a K-flat
 resolution with flat terms and a degreewise surjective augmentation. Surjectivity is in the
@@ -55,6 +99,52 @@ theorem exists_isKFlatResolution
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
       (f : K ⟶ G), K.IsKFlat ∧ (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) ∧
         QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i)) := by
-  sorry
+  obtain ⟨E, t, q, hbounded, hflat, hq, hepi, hcompat⟩ := exists_flat_truncation_tower G
+  let s : (∐ E) ⟶ G := Limits.Sigma.desc (fun n : ℕ ↦ q n ≫ G.ιTruncLE (n : ℤ))
+  let φ : (∐ E) ⟶ (∐ E) :=
+    𝟙 (∐ E) - Limits.Sigma.desc (fun n : ℕ ↦ t n ≫ Limits.Sigma.ι E (n + 1))
+  have hzero : φ ≫ s = 0 := by
+    dsimp [φ, s]
+    rw [Preadditive.sub_comp, Category.id_comp]
+    apply sub_eq_zero.mpr
+    apply Limits.Sigma.hom_ext
+    intro n
+    simp only [Category.assoc, Limits.Sigma.ι_desc_assoc, Limits.Sigma.ι_desc]
+    exact (hcompat n).symm
+  have hdesc : HomComplex.δ (-1) 0 (0 : HomComplex.Cochain (∐ E) G (-1)) =
+      HomComplex.Cochain.ofHom (φ ≫ s) := by
+    rw [hzero]
+    simp
+  let f : mappingCone φ ⟶ G := mappingCone.desc φ 0 s hdesc
+  have hinr : mappingCone.inr φ ≫ f = s := mappingCone.inr_desc φ 0 s hdesc
+  have hinl : (mappingCone.inl φ).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0 :=
+    mappingCone.inl_desc φ 0 s hdesc
+  have hk : (mappingCone φ).IsKFlat := by
+    apply (kFlat_closure R).2.2.2.1 E t
+    intro n
+    exact (kFlat_closure R).1 (E n) (hbounded n) (hflat n)
+  have hsum : ∀ i : ℤ, SheafOfModules.IsFlat ((∐ E).X i) := by
+    intro i
+    exact flat_of_iso
+      (Limits.PreservesCoproduct.iso (HomologicalComplex.eval _ (ComplexShape.up ℤ) i) E)
+      (flat_small_coproduct (fun n ↦ (E n).X i) (fun n ↦ hflat n i))
+  refine ⟨mappingCone φ, f, hk, flat_terms_mappingCone φ hsum hsum, ?_, ?_⟩
+  · exact quasiIso_flat_truncation_telescope G E t q hq hcompat f hinr hinl
+  · intro i
+    let n : ℕ := i.toNat + 1
+    have hi : i < (n : ℤ) := by dsimp [n]; omega
+    have : Epi ((q n).f i) := hepi n i
+    have : IsIso ((G.ιTruncLE (n : ℤ)).f i) := G.isIso_ιTruncLE_f (n : ℤ) i hi
+    have hcomp : (Limits.Sigma.ι E n).f i ≫ (mappingCone.inr φ).f i ≫ f.f i =
+        (q n).f i ≫ (G.ιTruncLE (n : ℤ)).f i := by
+      have h := congrArg (fun g ↦ g.f i)
+        (show Limits.Sigma.ι E n ≫ mappingCone.inr φ ≫ f = q n ≫ G.ιTruncLE (n : ℤ) by
+          rw [hinr]
+          exact Limits.Sigma.ι_desc _ _)
+      exact h
+    have : Epi (((Limits.Sigma.ι E n).f i ≫ (mappingCone.inr φ).f i) ≫ f.f i) := by
+      rw [Category.assoc, hcomp]
+      infer_instance
+    exact epi_of_epi ((Limits.Sigma.ι E n).f i ≫ (mappingCone.inr φ).f i) (f.f i)
 
 end CochainComplex
