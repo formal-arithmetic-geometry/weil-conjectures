@@ -64,7 +64,8 @@ a ring endomorphism `σ` of `Ω` with `Spec σ ≫ s = s`: on fibre functors it 
 noncomputable def pointSmallEtaleHom (σ : Ω →+* Ω)
     (hσ : Spec.map (CommRingCat.ofHom σ) ≫ s = s) : pointSmallEtale s ⟶ pointSmallEtale s where
   hom :=
-    { app V := TypeCat.ofHom fun (t : (pointSmallEtale s).fiber.obj V) ↦ Over.homMk (Spec.map (CommRingCat.ofHom σ) ≫ t.left) (by
+    { app V := TypeCat.ofHom fun (t : (pointSmallEtale s).fiber.obj V) ↦
+        Over.homMk (Spec.map (CommRingCat.ofHom σ) ≫ t.left) (by
         have := Over.w t
         dsimp at this ⊢
         rw [Category.assoc, this, hσ])
@@ -79,7 +80,8 @@ lemma pointSmallEtaleHom_hom_app_left (σ : Ω →+* Ω)
     ((pointSmallEtaleHom s σ hσ).hom.app V t).left = Spec.map (CommRingCat.ofHom σ) ≫ t.left :=
   rfl
 
-/-- On germs, the endomorphism of the stalks induced by `AlgebraicGeometry.Scheme.pointSmallEtaleHom`
+/-- On germs, the endomorphism of the stalks induced by
+`AlgebraicGeometry.Scheme.pointSmallEtaleHom`
 moves the geometric point. -/
 @[reassoc]
 lemma toPresheafFiber_pointSmallEtaleHom_sheafFiber_app {C : Type*} [Category* C]
@@ -93,6 +95,24 @@ lemma toPresheafFiber_pointSmallEtaleHom_sheafFiber_app {C : Type*} [Category* C
     GrothendieckTopology.Point.Hom.presheafFiber_app]
   exact GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc _ _ _ _ _
 
+
+lemma pointSmallEtaleHom_hom_app_eq_self (σ : Ω →+* Ω) (hσ' : ∀ x, σ x = x)
+    (hσ : Spec.map (CommRingCat.ofHom σ) ≫ s = s) (V : S.Etale)
+    (t : (pointSmallEtale s).fiber.obj V) : (pointSmallEtaleHom s σ hσ).hom.app V t = t := by
+  obtain rfl : σ = RingHom.id Ω := RingHom.ext hσ'
+  exact Over.OverMorphism.ext (by
+    rw [pointSmallEtaleHom_hom_app_left]
+    exact (congrArg (· ≫ t.left) (Spec.map_id (CommRingCat.of Ω))).trans (Category.id_comp _))
+
+/-- An endomorphism of `Ω` acting trivially induces the identity on stalks. -/
+lemma pointSmallEtaleHom_sheafFiber_app_eq_id {C : Type*} [Category* C]
+    [HasColimitsOfSize.{u, u} C] (σ : Ω →+* Ω) (hσ' : ∀ x, σ x = x)
+    (hσ : Spec.map (CommRingCat.ofHom σ) ≫ s = s) (G : Sheaf S.smallEtaleTopology C) :
+    (pointSmallEtaleHom s σ hσ).sheafFiber.app G = 𝟙 _ := by
+  refine GrothendieckTopology.Point.presheafFiber_hom_ext _ fun V t ↦ ?_
+  rw [toPresheafFiber_pointSmallEtaleHom_sheafFiber_app,
+    pointSmallEtaleHom_hom_app_eq_self s σ hσ' hσ V t]
+  exact (Category.comp_id _).symm
 end Aut
 
 section Specialization

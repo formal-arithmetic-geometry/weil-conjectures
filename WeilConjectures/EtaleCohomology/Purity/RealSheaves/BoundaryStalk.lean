@@ -1,0 +1,304 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.InertiaNeighbourhood
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
+public import WeilConjectures.ConstructibleSheaf.LowerStarSpecialization
+
+/-!
+# Boundary stalks of direct images as inertia invariants
+
+Let `j : U ⟶ C` be an open immersion into an integral scheme, `W` an affine open with Dedekind
+ring of sections `R = Γ(C, W)` and `W ∩ U = D(ϖ)`, `Ω` a separable closure of the function field
+`K = k(C)` and `Q` a maximal ideal of the integral closure `B` of `R` in `Ω` over a maximal
+ideal `m` of `R` (the boundary point). The local ring `A = B_Q` is strictly henselian with
+fraction field `Ω`; its closed geometric point `x̄ : Spec κ(A) ⟶ Spec A ⟶ C` is a geometric point
+over the boundary point and `η : Spec Ω ⟶ Spec A` lies over the generic geometric point of `U`.
+The inertia group `I = {σ ∈ Gal(Ω / K) | σ ≡ id mod Q}` acts on the geometric generic stalk `F_η`
+of a sheaf `F` on `U`.
+
+For `F` finite locally constant (blueprint `lem-wf-boundary-stalk-invariants`, at a finite
+coefficient level), the specialization map
+`(j_* F)_x̄ ⟶ F_η` (`AlgebraicGeometry.Etale.boundarySpecialization`) is injective with image the
+inertia invariants `F_η^I`, and it intertwines the action of an element `σ` of the decomposition
+group (the stabiliser of `Q`) on `F_η` with the action on `(j_* F)_x̄` of the automorphism of the
+geometric point `x̄` induced by the residue automorphism of `σ`
+(`AlgebraicGeometry.Etale.boundaryStalkMap_comp_boundarySpecialization`). In particular
+`(j_* F)_x̄ ≅ F_η^I` (`AlgebraicGeometry.Etale.boundaryStalkLinearEquiv`).
+
+* Injectivity is `AlgebraicGeometry.Etale.injective_specializationStalk`.
+* The image consists of invariants since an inertia element induces an automorphism of `A` over
+  `C` acting trivially on the residue field.
+* Conversely, an invariant `m ∈ F_η` is a point over `η` of the finite étale `U`-scheme `P`
+  representing `F`, fixed by inertia; it extends to an étale neighbourhood `V` of `x̄`
+  together with a `U`-morphism `V ×_C U ⟶ P`
+  (`AlgebraicGeometry.Scheme.FiniteEtale.exists_etale_lift_of_forall_inertia`), that is a section
+  of `j_* F` over `V` specializing to `m`.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits Opposite
+
+namespace AlgebraicGeometry
+
+open Scheme Scheme.FiniteEtale
+
+namespace Scheme
+
+section Germs
+
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+lemma FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber {Λ : Type (u + 1)}
+    [CommRing Λ] [Finite Λ] (F : Y.FiniteLocallyConstantModule Λ) (V : Y.Etale)
+    (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :
+    FiniteLocallyConstantModule.forgetStalkEquiv s F
+        ((pointSmallEtale s).toPresheafFiber V v ((FiniteLocallyConstantModule.forget Y Λ).obj
+          F).obj.obj z) =
+      (pointSmallEtale s).toPresheafFiber V v F.obj.obj z :=
+  ConcreteCategory.congr_hom
+    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
+      (FiniteLocallyConstantModule.forgetModule Λ) V v F.obj.obj) z
+
+lemma FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber {F : Y.FiniteLocallyConstant}
+    {P : Y.FiniteEtale} (i : F ≅ (FiniteEtale.toFiniteLocallyConstant Y).obj P) (V : Y.Etale)
+    (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :
+    FiniteLocallyConstant.isoStalkEquiv s i ((pointSmallEtale s).toPresheafFiber V v F.obj.obj z) =
+      ULift.up ((pointSmallEtale s).fiber.map (i.hom.hom.hom.app (op V) z).down v) := by
+  change FiniteEtale.sheafFiberToSheafEquiv s P
+    ((pointSmallEtale s).presheafFiber.map i.hom.hom.hom
+      ((pointSmallEtale s).toPresheafFiber V v F.obj.obj z)) = _
+  rw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
+  exact FiniteEtale.presheafFiberUliftYonedaEquiv_toPresheafFiber s P.obj v _
+
+end Germs
+
+end Scheme
+
+namespace Etale
+
+variable {C U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] [IsIntegral C]
+  [Nonempty U] {W : C.Opens} [Fact (IsAffineOpen W)] [Nonempty W]
+  {Ω : Type u} [Field Ω] [Algebra C.functionField Ω] [Algebra Γ(C, W) Ω]
+  [IsScalarTower Γ(C, W) C.functionField Ω] [IsGalois C.functionField Ω] [IsSepClosed Ω]
+  (Q : Ideal (integralClosure Γ(C, W) Ω)) [Q.IsMaximal] {Λ : Type (u + 1)} [Ring Λ]
+
+/-- The generic geometric point `η : Spec Ω ⟶ U`. -/
+noncomputable abbrev genericGeometricPoint : Spec (.of Ω) ⟶ U :=
+  pointOfAlgebra Ω (genericPointLift j)
+
+/-- The geometric point `x̄ : Spec κ(B_Q) ⟶ Spec B_Q ⟶ C` over the boundary point. -/
+noncomputable abbrev boundaryGeometricPoint :
+    Spec (.of (IsLocalRing.ResidueField (Localization.AtPrime Q))) ⟶ C :=
+  closedGeometricPoint (Localization.AtPrime Q) ≫ specAtPrime Fact.out Q
+
+omit [IsGalois C.functionField Ω] [IsSepClosed Ω] in
+lemma specMap_comp_genericGeometricPoint (σ : Ω ≃ₐ[C.functionField] Ω) :
+    Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ genericGeometricPoint (Ω := Ω) j =
+      genericGeometricPoint j := by
+  rw [← Category.assoc, ← Spec.map_comp]
+  congr 2
+  ext a
+  exact σ.commutes a
+
+variable {j} in
+/-- The action of `σ ∈ Gal(Ω / k(C))` on the geometric generic stalk `F_η`. -/
+noncomputable def galoisStalkMap (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (σ : Ω ≃ₐ[C.functionField] Ω) :
+    (pointSmallEtale (genericGeometricPoint (Ω := Ω) j)).sheafFiber.obj F ⟶
+      (pointSmallEtale (genericGeometricPoint (Ω := Ω) j)).sheafFiber.obj F :=
+  (pointSmallEtaleHom (genericGeometricPoint j) (σ : Ω →+* Ω)
+    (specMap_comp_genericGeometricPoint j σ)).sheafFiber.app F
+
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (the comparison map): the specialization map
+`(j_* F)_x̄ ⟶ F_η` from the stalk of the direct image at the geometric point over the boundary
+point to the geometric generic stalk, sending the germ of a section of `F` over `V ×_C U`, for an
+étale neighbourhood `V` of `x̄`, to its germ at the lift of `η` through `Spec B_Q ⟶ V`. -/
+noncomputable def boundarySpecialization (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (pointSmallEtale (boundaryGeometricPoint Q)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) ⟶
+      (pointSmallEtale (genericGeometricPoint (Ω := Ω) j)).sheafFiber.obj F :=
+  specializationStalk j (specAtPrime Fact.out Q) (CommRingCat.ofHom (Ideal.atPrimeToField Q)) _
+    (pointOfAlgebra_comp_eq_specAtPrime j Fact.out Q) F
+
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (injectivity): for `F` locally constant and `C`
+locally noetherian with étale local rings that are domains (e.g. regular), the specialization
+map of the boundary stalk is injective. -/
+theorem injective_boundarySpecialization
+    (hC : ∀ (V : C.Etale) (v : V.left), IsDomain (V.left.presheaf.stalk v))
+    [IsLocallyNoetherian C] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsLocallyConstantSheaf F] :
+    Function.Injective (boundarySpecialization j Q F) :=
+  injective_specializationStalk j _ _ _ _ hC F
+
+section Decomposition
+
+open scoped Pointwise
+
+variable {σ : Ω ≃ₐ[C.functionField] Ω}
+  (hσ : σ ∈ MulAction.stabilizer (Ω ≃ₐ[C.functionField] Ω) Q)
+
+omit [IsGalois C.functionField Ω] [IsSepClosed Ω] in
+lemma specMap_atPrimeMap_comp_specAtPrime :
+    Spec.map (CommRingCat.ofHom (Ideal.atPrimeMap Q σ hσ)) ≫ specAtPrime Fact.out Q =
+      specAtPrime Fact.out Q := by
+  rw [specAtPrime, ← Category.assoc, ← Spec.map_comp]
+  congr 2
+  ext r
+  exact Ideal.atPrimeMap_algebraMap_base Q σ hσ r
+
+/-- The automorphism of the residue field `κ(B_Q)` induced by an element `σ` of the decomposition
+group. -/
+noncomputable abbrev residueAut : IsLocalRing.ResidueField (Localization.AtPrime Q) →+*
+    IsLocalRing.ResidueField (Localization.AtPrime Q) :=
+  IsLocalRing.ResidueField.map (Ideal.atPrimeMap Q σ hσ)
+
+omit [Fact (IsAffineOpen W)] [IsGalois C.functionField Ω] [IsSepClosed Ω] in
+lemma closedGeometricPoint_comp_specMap_atPrimeMap :
+    closedGeometricPoint (Localization.AtPrime Q) ≫
+        Spec.map (CommRingCat.ofHom (Ideal.atPrimeMap Q σ hσ)) =
+      Spec.map (CommRingCat.ofHom (residueAut Q hσ)) ≫
+        closedGeometricPoint (Localization.AtPrime Q) := by
+  rw [← Spec.map_comp, ← Spec.map_comp]
+  congr 1
+
+lemma specMap_residueAut_comp_boundaryGeometricPoint :
+    Spec.map (CommRingCat.ofHom (residueAut Q hσ)) ≫ boundaryGeometricPoint Q =
+      boundaryGeometricPoint Q :=
+  comp_closedGeometricPoint_comp_eq _ _ (specMap_atPrimeMap_comp_specAtPrime Q hσ) _
+    (closedGeometricPoint_comp_specMap_atPrimeMap Q hσ)
+
+omit [Fact (IsAffineOpen W)] [IsGalois C.functionField Ω] [IsSepClosed Ω] in
+lemma atPrimeToField_comp_eq :
+    CommRingCat.ofHom (Ideal.atPrimeToField Q) ≫ CommRingCat.ofHom (σ : Ω →+* Ω) =
+      CommRingCat.ofHom (Ideal.atPrimeMap Q σ hσ) ≫ CommRingCat.ofHom (Ideal.atPrimeToField Q) := by
+  ext x
+  exact (Ideal.atPrimeToField_atPrimeMap Q σ hσ x).symm
+
+variable {j} in
+/-- The action of an element `σ` of the decomposition group on the boundary stalk `(j_* F)_x̄`,
+through the automorphism of the geometric point `x̄` given by the residue automorphism of `σ`. -/
+noncomputable def boundaryStalkMap (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (pointSmallEtale (boundaryGeometricPoint Q)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) ⟶
+      (pointSmallEtale (boundaryGeometricPoint Q)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) :=
+  (pointSmallEtaleHom _ (residueAut Q hσ)
+    (specMap_residueAut_comp_boundaryGeometricPoint Q hσ)).sheafFiber.app _
+
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (Frobenius equivariance): the specialization
+map intertwines the action of an element `σ` of the decomposition group on `F_η` with the action
+on `(j_* F)_x̄` of its residue automorphism. For a lift of the geometric Frobenius of `κ(x)` this is
+the compatibility of the geometric Frobenius on the boundary stalk with the residue Frobenius
+lift on the inertia invariants. -/
+theorem boundaryStalkMap_comp_boundarySpecialization
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    boundaryStalkMap Q hσ F ≫ boundarySpecialization j Q F =
+      boundarySpecialization j Q F ≫ galoisStalkMap F σ :=
+  stalkHom_comp_specializationStalk j (specAtPrime Fact.out Q)
+    (CommRingCat.ofHom (Ideal.atPrimeToField Q)) (genericGeometricPoint j)
+    (pointOfAlgebra_comp_eq_specAtPrime j Fact.out Q) (Ideal.atPrimeMap Q σ hσ)
+    (specMap_atPrimeMap_comp_specAtPrime Q hσ) (residueAut Q hσ)
+    (closedGeometricPoint_comp_specMap_atPrimeMap Q hσ) σ (atPrimeToField_comp_eq Q hσ)
+    (specMap_comp_genericGeometricPoint j σ) F
+
+omit [Fact (IsAffineOpen W)] [IsGalois C.functionField Ω] [IsSepClosed Ω] in
+lemma residueAut_apply_of_mem_inertia (hσ' : σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω))
+    (x : IsLocalRing.ResidueField (Localization.AtPrime Q)) :
+    residueAut Q (Ideal.inertia_le_stabilizer Q hσ') x = x := by
+  obtain ⟨y, rfl⟩ := IsLocalRing.residue_surjective x
+  rw [IsLocalRing.ResidueField.map_residue]
+  exact Ideal.residue_atPrimeMap_of_mem_inertia Q hσ' y
+
+omit [IsOpenImmersion j] [Nonempty U] in
+/-- Inertia acts trivially on the boundary stalk. -/
+lemma boundaryStalkMap_eq_id_of_mem_inertia (hσ' : σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω))
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    boundaryStalkMap (j := j) Q (Ideal.inertia_le_stabilizer Q hσ') F = 𝟙 _ :=
+  pointSmallEtaleHom_sheafFiber_app_eq_id _ _ (residueAut_apply_of_mem_inertia Q hσ') _ _
+
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (the image consists of invariants): the image of
+the specialization map is fixed by the inertia group. -/
+theorem galoisStalkMap_boundarySpecialization (hσ' : σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω))
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (x : ToType ((pointSmallEtale (boundaryGeometricPoint Q)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F))) :
+    galoisStalkMap F σ (boundarySpecialization j Q F x) = boundarySpecialization j Q F x := by
+  have h := boundaryStalkMap_comp_boundarySpecialization j Q (Ideal.inertia_le_stabilizer Q hσ') F
+  rw [boundaryStalkMap_eq_id_of_mem_inertia j Q hσ', Category.id_comp] at h
+  exact (ConcreteCategory.congr_hom h x).symm
+
+end Decomposition
+
+section Surjective
+
+variable [QuasiCompact j] [IsDedekindDomain Γ(C, W)] (ϖ : Γ(C, W)) (hϖ : ϖ ≠ 0)
+  (hWU : j.opensRange ⊓ W = C.basicOpen ϖ) (m : Ideal Γ(C, W)) [m.IsMaximal]
+  [PerfectField m.ResidueField] [Q.LiesOver m]
+
+include hϖ hWU m in
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (the inertia invariants lie in the image): for `F`
+finite locally constant, every inertia invariant of the geometric generic stalk `F_η` comes from
+the boundary stalk `(j_* F)_x̄`. -/
+theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    [ConnectedSpace U]
+    (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
+    (x : ToType ((pointSmallEtale (genericGeometricPoint (Ω := Ω) j)).sheafFiber.obj F))
+    (hx : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω), galoisStalkMap F σ x = x) :
+    ∃ y, boundarySpecialization j Q F y = x := by
+  let F₀ : U.FiniteLocallyConstantModule Λ := ⟨F, inferInstance⟩
+  let F' := (FiniteLocallyConstantModule.forget U Λ).obj F₀
+  let P := FiniteLocallyConstant.rep U F'
+  let i := FiniteLocallyConstant.repIso F'
+  let η := genericGeometricPoint (Ω := Ω) j
+  -- `x` as a germ, and the corresponding point `t` of `P` over `η`
+  obtain ⟨V₀, v₀, z₀, hz₀⟩ := (pointSmallEtale η).toPresheafFiber_jointly_surjective
+    (P := F'.obj.obj) ((FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm x)
+  have hx₀ : (pointSmallEtale η).toPresheafFiber V₀ v₀ F.obj z₀ = x := by
+    rw [← FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber η F₀]
+    exact (congrArg (FiniteLocallyConstantModule.forgetStalkEquiv η F₀) hz₀).trans
+      (Equiv.apply_symm_apply _ x)
+  let f₀ := (i.hom.hom.hom.app (op V₀) z₀).down
+  let t : (fiber η).obj P := (pointSmallEtale η).fiber.map f₀ v₀
+  have hgerm (V : U.Etale) (v : (pointSmallEtale η).fiber.obj V)
+      (z : ToType (F'.obj.obj.obj (op V))) :
+      FiniteLocallyConstant.isoStalkEquiv η i
+        ((FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm
+          ((pointSmallEtale η).toPresheafFiber V v F.obj z)) =
+        ULift.up ((pointSmallEtale η).fiber.map (i.hom.hom.hom.app (op V) z).down v) := by
+    rw [← FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber η F₀, Equiv.symm_apply_apply,
+      FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber]
+  have ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
+      (galoisToAut (genericPointLift j) σ).hom.app P t = t := by
+    intro σ hσ
+    have h := hx σ hσ
+    rw [← hx₀, galoisStalkMap] at h
+    have h' := ConcreteCategory.congr_hom (toPresheafFiber_pointSmallEtaleHom_sheafFiber_app η
+      (σ : Ω →+* Ω) (specMap_comp_genericGeometricPoint j σ) F V₀ v₀) z₀
+    rw [ConcreteCategory.comp_apply] at h'
+    replace h := h'.symm.trans h
+    have h'' : (pointSmallEtale η).fiber.map f₀ ((pointSmallEtaleHom η (σ : Ω →+* Ω)
+        (specMap_comp_genericGeometricPoint j σ)).hom.app V₀ v₀) =
+          (pointSmallEtale η).fiber.map f₀ v₀ := by
+      apply ULift.up_injective
+      rw [← hgerm, ← hgerm]
+      exact congrArg (fun y ↦ FiniteLocallyConstant.isoStalkEquiv η i
+        ((FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm y)) h
+    refine fiber_ext _ ?_
+    rw [galoisToAut_hom_app_left]
+    exact (Category.assoc _ _ _).symm.trans (congrArg Over.Hom.left h'')
+  sorry
+
+end Surjective
+
+end Etale
+
+end AlgebraicGeometry
