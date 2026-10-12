@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-p1-proj-twist-transported-data",
+ "kind": "statement",
+ "title": "Standard twist data on the transported polynomial Proj twist",
+ "statement": "Let k be a field, d an integer, P=Proj k[x₀,x₁] with the standard grading [def-weil-pbc-proj-twisting-sheaf], Q=P¹_k with its standard charts [def-sc-p1-standard], and C:P≅Q a chart-compatible isomorphism [def-sc-p1-proj-chart-isomorphism]. The ordinary module pullback (C.iso.inv)^* O_P(d), namely the source library left adjoint to module pushforward (equivalently the tensor-formula pullback [def-pc-module-pullback]), admits TwistData of degree d: sections g₀,g₁ on U₀,U₁ freely generating on every subopen, with g₀=t^(-d)g₁ on U₀∩U₁. No other module L, isomorphism to L, or uniqueness assertion occurs.",
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-p1-standard",
+  "def-sc-p1-proj-chart-isomorphism",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
+ },
+ "proof": [
+  {
+   "text": "On each D₊(xᵢ), take the section xᵢ^d of O_P(d). For d ≥ 0 this is the fraction xᵢ^d/1 and for d < 0 it is 1/xᵢ^(-d). The degree-d locally homogeneous fractions are multiplied by xᵢ^(-d) to degree-zero fractions, with inverse multiplication by xᵢ^d. These maps commute with all restrictions. Thus xᵢ^d is a free generator on every subopen. In Lean the existing proved declarations Proj.twistPowSection and Proj.isFreeGenerator_twistPowSection supply this step directly, including negative d.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
+   }
+  },
+  {
+   "text": "C.chart_eq identifies the chart D₊(xᵢ) with Uᵢ and its ratio coordinates with those of the glued line. In particular (C.iso.inv)⁻¹(D₊(xᵢ))=Uᵢ. Pull back xᵢ^d along C.iso.inv, using the unit of the ordinary Scheme.Modules pullback adjunction, to obtain gᵢ. The proved source lemma Scheme.Modules.IsFreeGenerator.pullback_unit_app says these sections are free generators on the preimage opens, hence on Uᵢ. Its bijectivity conclusion on every subopen is exactly bijective_smul_g₀ or bijective_smul_g₁. Ordinary pullback is the source library left adjoint to module pushforward; it agrees with the tensor-formula pullback by uniqueness of left adjoints, as explicitly proved in the parent module.",
+   "uses": [
+    "def-sc-p1-proj-chart-isomorphism",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
+   }
+  },
+  {
+   "text": "On D₊(x₀)∩D₊(x₁), x₀ and x₁ are units. The identity x₀^d=(x₀/x₁)^d x₁^d follows from multiplication and inversion of units, for every integer d. The chart equations send x₀/x₁ to t⁻¹, so the induced ring map sends its d-th power to transitionUnit(d,0,1). The pullback unit commutes with restriction and scalar multiplication. Applying it to the identity therefore gives map_g₀ for g₀,g₁. Assemble the two sections, the two free-generator conclusions and this equation into TwistData. For d=0 this is 1=1; for d=-1 it is x₀⁻¹=(x₀/x₁)⁻¹x₁⁻¹. No arbitrary module or global comparison is constructed in this step.",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-sc-p1-proj-chart-isomorphism",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-p1-proj-chart-isomorphism",
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Explicit chart and unit-power argument from 01M7 (2),(3) and the parent blueprint final clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a polynomial Proj twisting sheaf along a chart compatible projective line isomorphism has generators whose transition is the negative integer power of the chart coordinate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse pullback of the polynomial Proj twist along a chart compatible isomorphism carries the standard projective line generators with transition t to the negative integer power",
+   "results": "Proj.pullbackAwayιIso and its component identities; AffineSpace.SpecIso_inv_appTop_coord; elliptic curve coordinate changes. None asserts twist generators or TwistData.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFreeGenerator_twistPowSection|TwistData|chart_eq",
+   "results": "5 hits, all chart_eq in Mathlib/Geometry/Manifold/HasGroupoid.lean; no twist data. Local repository rg finds the original comparison and twist existence, neither supplies these canonical transported generators.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistGluedComparison",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause S(d)~ = O(d), chart trivializations xᵢ^d and their overlap relation; only the construction of TwistData",
+   "via": [
+    "lem-sc-p1-proj-twist-glued-comparison",
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistTransportedData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistTransportedData.lean",
+  "declaration": "AlgebraicGeometry.Proj.nonempty_twistData_pullback_inv",
+  "statement": "theorem nonempty_twistData_pullback_inv (k : Type v) [Field k]\n    (d : ℤ) (C : ProjectiveLine.ProjChartIsomorphism k) :\n    Nonempty (ProjectiveLine.TwistData (Spec (.of k)) d\n      ((Scheme.Modules.pullback C.iso.inv).obj\n        (twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085250-L-19238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085250-L-19238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

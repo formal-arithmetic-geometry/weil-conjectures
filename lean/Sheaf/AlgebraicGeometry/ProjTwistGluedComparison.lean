@@ -9,7 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
-import Sheaf.Topology.GlueSheavesOfModules
+import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
+import Sheaf.AlgebraicGeometry.ProjTwistTransportedData
 
 /-!
 # Comparing a Proj twist with a prescribed glued twist
@@ -51,6 +52,26 @@ theorem nonempty_twist_iso_tensorPullback_of_twistData (k : Type v) [Field k]
     (L : (ProjectiveLine (Spec (.of k))).Modules)
     (T : ProjectiveLine.TwistData (Spec (.of k)) d L) :
     Nonempty (twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d ≅
-      (Scheme.Modules.tensorPullback C.iso.hom).obj L) := by sorry
+      (Scheme.Modules.tensorPullback C.iso.hom).obj L) := by
+  classical
+  let M := twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d
+  let N := (Scheme.Modules.pullback C.iso.inv).obj M
+  obtain ⟨TN⟩ := nonempty_twistData_pullback_inv k d C
+  obtain ⟨L₀, T₀, _, huniq⟩ := ProjectiveLine.exists_twistData_unique_iso k d
+  obtain ⟨eN, _, _⟩ := huniq N TN
+  obtain ⟨eL, _, _⟩ := huniq L T
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction C.iso.inv
+  let epb := adj.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction C.iso.inv)
+  let e : (Scheme.Modules.tensorPullback C.iso.inv).obj M ≅ L :=
+    epb.app M ≪≫ eN.symm ≪≫ eL
+  obtain ⟨ecomp⟩ := Scheme.Modules.nonempty_tensorPullbackComp C.iso.hom C.iso.inv
+  obtain ⟨eid⟩ := Scheme.Modules.nonempty_tensorPullbackId
+    (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k))
+  have einv : (Scheme.Modules.tensorPullback C.iso.hom).obj
+      ((Scheme.Modules.tensorPullback C.iso.inv).obj M) ≅ M := by
+    have ec := ecomp.symm.app M
+    rw [C.iso.hom_inv_id] at ec
+    exact ec ≪≫ eid.app M
+  exact ⟨einv.symm ≪≫ (Scheme.Modules.tensorPullback C.iso.hom).mapIso e⟩
 
 end AlgebraicGeometry.Proj

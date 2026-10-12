@@ -6871,3 +6871,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists (stage 3; reviewer PASS; first push; landing 20261012T085249-L-18897 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ProjStandardOpenProperties (stage 3; reviewer PASS; first push; landing 20261012T085249-L-19030 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ProjTildeFunctorial (stage 3; reviewer PASS; first push; landing 20261012T085249-L-19126 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ProjTwistGluedComparison (stage 3; reviewer PASS; first push; landing 20261012T085250-L-19238 (interface); batch 20261012T085205; modules 2; new nodes 1)
