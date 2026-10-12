@@ -23,40 +23,51 @@
  ],
  "proof": [
   {
-   "text": "For each degree r, define the termwise direct sum by $(\\bigoplus_i K_i)^r=\\bigoplus_i K_i^r$ and take the direct sum of the differentials. The differential squares to zero and the canonical inclusions are chain maps, by the cochain-complex definition.",
+   "text": "The coproduct of cochain complexes is computed degreewise by Mathlib HomologicalComplexLimits. Given chain maps f,g from this coproduct and homotopies between their restrictions to each summand, descend each component of the homotopies through the degreewise coproduct. The vanishing and homotopy equations hold after precomposition with each coprojection, so degreewise colimit extensionality proves them. This is the fully proved private helper coproduct_homotopy.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 07D9 (lemma-derived-products), construction of the direct-sum complex"
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), applied to the Grothendieck abelian category of A-modules"
    }
   },
   {
-   "text": "By [lem-weil-pbc-ring-modules-grothendieck-abelian], the category of $A$-modules is Grothendieck abelian, so filtered colimits of $A$-modules are exact. A set-indexed direct sum $\\bigoplus_{i\\in I}$ is the filtered colimit over finite subsets $J\\subseteq I$ of the finite direct sums $\\bigoplus_{i\\in J}$, which are exact in any abelian category; hence set-indexed direct sums of $A$-modules are exact. Therefore kernels, images and cohomology of the termwise differential commute with the direct sum, $H^r(\\bigoplus_iK_i^\\bullet)\\cong\\bigoplus_iH^r(K_i^\\bullet)$, and a family of quasi-isomorphisms [def-weil-abstract-derived-category] has a quasi-isomorphic termwise direct sum.",
+   "text": "The category ModuleCat.{max u v} R is Grothendieck abelian: transport the Mathlib instance for modules over ULift.{v} R through restriction of scalars along the ring equivalence ULift R ≃ R. Apply the existing Grothendieck K-injective resolution theorem to a complex representing an arbitrary object X of the derived category, obtaining an isomorphism e : X ≅ Q L with L K-injective.",
    "uses": [
     "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-kinjective-functorial-existence",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), exactness of direct sums in A-Mod"
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), applied to the Grothendieck abelian category of A-modules"
    }
   },
   {
-   "text": "Let $X$ be an object of $D(A)$. By [lem-weil-pbc-kinjective-functorial-existence] ($\\operatorname{Mod}(A)$ is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian]) there is a quasi-isomorphism $X\\to I^\\bullet$ with $I^\\bullet$ K-injective, i.e. $\\operatorname{Hom}^\\bullet(N,I^\\bullet)$ is acyclic for every acyclic $N$; taking $H^0$, every chain map from an acyclic complex to $I^\\bullet$ is null-homotopic, which is the K-injectivity hypothesis of [lem-weil-pbc-kinjective-hom-derived]. So $X\\cong QI^\\bullet$ in $D(A)$ and it suffices to treat $X=QI^\\bullet$. By [lem-weil-pbc-kinjective-hom-derived], applied to $\\bigoplus_iK_i^\\bullet$ and to each $K_i^\\bullet$, $\\operatorname{Hom}_{D(A)}(\\bigoplus_iK_i^\\bullet,I^\\bullet)=\\operatorname{Hom}_{K(A)}(\\bigoplus_iK_i^\\bullet,I^\\bullet)$ and $\\operatorname{Hom}_{K(A)}(K_i^\\bullet,I^\\bullet)=\\operatorname{Hom}_{D(A)}(K_i^\\bullet,I^\\bullet)$, compatibly with composition with the coprojections. The middle identification $\\operatorname{Hom}_{K(A)}(\\bigoplus_iK_i^\\bullet,I^\\bullet)=\\prod_i\\operatorname{Hom}_{K(A)}(K_i^\\bullet,I^\\bullet)$ is the degreewise coproduct universal property for chain maps and for homotopies (a homotopy out of the direct sum is a family of homotopies). Hence the images of the coprojections satisfy the coproduct universal property in $D(A)$ [def-weil-abstract-derived-category].",
+   "text": "For K-injective L, Qh_map_bijective and fullness of the homotopy quotient imply that each morphism Q K → Q L has a chain-map representative, and that two chain maps with equal Q-images are homotopic. Transport through quotientCompQhIso using its naturality. These assertions are the fully proved private helpers derived_map_surjective and derived_map_homotopy.",
    "uses": [
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "lem-weil-pbc-ring-modules-grothendieck-abelian",
     "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), coproduct universal property"
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), applied to the Grothendieck abelian category of A-modules"
+   }
+  },
+  {
+   "text": "Given arrows a_i : Q K_i → X, lift a_i followed by e.hom to chain maps f_i : K_i → L and descend them to Sigma.desc f. Compose its Q-image with e.inv to obtain d; the coprojection equations follow from Sigma.ι_desc. For uniqueness, lift m followed by e.hom to g : ∐ K → L. The coprojection equations imply that each restriction of g is homotopic to the corresponding restriction of Sigma.desc f. Assemble these homotopies with coproduct_homotopy and use Q_map_eq_of_homotopy. Cancellation of e.hom proves uniqueness. Cofan.IsColimit.mk packages this existence and uniqueness into the required colimit.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2), applied to the Grothendieck abelian category of A-modules"
    }
   }
  ],
@@ -67,9 +78,9 @@
   "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "F2 stage-3 worker",
   "document": "literature/stacks-project/injectives.tex",
-  "place": "Injectives, Lemma 07D9 (lemma-derived-products), clauses (1)-(2)"
+  "place": "Injectives, Lemma 07D9 clauses (1)-(2), K-injective universal-property proof; Lean implementation verified locally. The separate exactness/cohomology calculation in the previous node plan is not needed."
  },
  "mathlib_searches": [
   {
@@ -143,5 +154,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T060736-L-2906697",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
