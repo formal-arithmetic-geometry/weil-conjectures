@@ -7,13 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
+import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import Sheaf.Paper.InverseImageStalkGerm
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! Lissity on the union of the interiors of lisse strata. -/
 
@@ -24,6 +20,59 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
+
+/-- Transport finite local constancy along a set-sheaf isomorphism. -/
+private theorem finiteLisse_of_iso {X : Scheme.{u}}
+    {F G : Sheaf X.smallEtaleTopology (Type (u + 1))} (e : F ≅ G)
+    (hF : IsFiniteLocallyConstantEtaleSheafOfSets F) :
+    IsFiniteLocallyConstantEtaleSheafOfSets G := by
+  obtain ⟨⟨𝒰, h𝒰⟩, hf⟩ := hF
+  refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
+  · have := h𝒰 i
+    exact Sheaf.isConstant_congr _ ((X.smallEtaleTopology.overPullback _ _).mapIso e)
+  · intro Ω _ _ s
+    have := hf Ω s
+    exact Finite.of_equiv _ (((pointSmallEtale s).sheafFiber.mapIso e).toEquiv)
+
+/-- Lissity of an abelian restriction depends only on containment in an immersed image. -/
+private theorem finiteLisse_of_range_subset {X Y Z : Scheme.{u}}
+    (a : Y ⟶ X) (b : Z ⟶ X) [IsImmersion b]
+    (hr : Set.range a ⊆ Set.range b)
+    (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hb : IsFiniteLocallyConstantEtaleSheafOfSets
+      ((sheafCompose Z.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} b).obj E))) :
+    IsFiniteLocallyConstantEtaleSheafOfSets
+      ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E)) := by
+  have : Surjective (Limits.pullback.fst a b) :=
+    surjective_pullback_fst_of_range_subset a b hr
+  have : IsClosedImmersion (Limits.pullback.fst a b) :=
+    IsClosedImmersion.of_isImmersion_of_surjective _
+  have hp := (pullback_finite_locally_constant (Limits.pullback.snd a b) b E hb).2
+  rw [← Limits.pullback.condition] at hp
+  let c := (Etale.upperStarComp AddCommGrpCat.{u + 1}
+    (Limits.pullback.fst a b) a).app E
+  have hp' := finiteLisse_of_iso
+    ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso c) hp
+  have hlc : IsLocallyConstantSheaf
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (Limits.pullback.fst a b)).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E)) :=
+    ((finite_local_abelian_forget_iff _).mp hp').1
+  have hfin := ((finite_local_abelian_forget_iff _).mp hp').2
+  have hlocal : IsLocallyConstantSheaf ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E) :=
+    IsLocallyConstantSheaf.of_upperStar (Limits.pullback.fst a b) _
+  apply (finite_local_abelian_forget_iff _).mpr
+  refine ⟨hlocal, ?_⟩
+  intro Ω _ _ s
+  obtain ⟨t, rfl⟩ := exists_comp_eq_of_surjective (Limits.pullback.fst a b) s
+  have hfinite : Finite (((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (Limits.pullback.fst a b)).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E))) := hfin Ω t
+  exact @Finite.of_equiv _ _ hfinite
+    ((Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1}
+      (Limits.pullback.fst a b) t).app
+        ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj E)).addCommGroupIsoToAddEquiv.toEquiv
 
 /-- Finite set-stalk lissity on each stratum implies lissity on the union of their interiors.
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof paragraphs 1--3 of
@@ -59,6 +108,53 @@ theorem lisse_on_stratum_interiors
     IsLisseEtaleSheafOfSets
       ((sheafCompose T.interiorUnion.toScheme.smallEtaleTopology
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
-          ((Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E)) := by sorry
+          ((Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E)) := by
+  classical
+  have hstratum (i : Fin T.n) : IsFiniteLocallyConstantEtaleSheafOfSets
+      ((sheafCompose (T.domain i).smallEtaleTopology
+        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+          ((Etale.upperStar AddCommGrpCat.{u + 1} (T.immersion i)).obj E)) := by
+    let e := (AlgebraicGeometry.etaleInverseImageAlgebraicStructures
+      (T.domain i) Z (T.immersion i)).2.choose
+    exact finiteLisse_of_iso (e.app E).symm (hT i)
+  let G := (Etale.upperStar AddCommGrpCat.{u + 1} T.interiorUnion.ι).obj E
+  have hcover (i : ULift.{u} (Fin T.n)) : IsFiniteLocallyConstantEtaleSheafOfSets
+      ((sheafCompose (T.interiorOpens i.down).toScheme.smallEtaleTopology
+        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+          ((Etale.upperStar AddCommGrpCat.{u + 1} (T.interiorUnionCover.f i)).obj G)) := by
+    have hi : IsFiniteLocallyConstantEtaleSheafOfSets
+        ((sheafCompose (T.interiorOpens i.down).toScheme.smallEtaleTopology
+          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+            ((Etale.upperStar AddCommGrpCat.{u + 1} (T.interiorOpens i.down).ι).obj E)) := by
+      apply finiteLisse_of_range_subset _ (T.immersion i.down) _ E (hstratum i.down)
+      rw [Scheme.Opens.range_ι, T.range_immersion]
+      exact interior_subset
+    let e := eqToIso (congrArg (fun m ↦ (Etale.upperStar AddCommGrpCat.{u + 1} m).obj E)
+      (Scheme.homOfLE_ι Z (le_iSup T.interiorOpens i.down)).symm) ≪≫
+        (Etale.upperStarComp AddCommGrpCat.{u + 1}
+          (T.interiorUnionCover.f i) T.interiorUnion.ι).app E
+    exact finiteLisse_of_iso
+      ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso e) hi
+  have hlocal (i : ULift.{u} (Fin T.n)) :
+      IsLocallyConstantSheaf
+        ((Etale.upperStar AddCommGrpCat.{u + 1} (T.interiorUnionCover.f i)).obj G) :=
+    ((finite_local_abelian_forget_iff _).mp (hcover i)).1
+  apply (finite_local_abelian_forget_iff G).mpr
+  refine ⟨?_, ?_⟩
+  · let 𝒰 : Cover.{u} etalePrecoverage T.interiorUnion.toScheme :=
+      T.interiorUnionCover.changeProp (Q := @Etale) fun _ ↦ inferInstance
+    have : ∀ i : 𝒰.I₀,
+        IsLocallyConstantSheaf ((Etale.upperStar AddCommGrpCat.{u + 1} (𝒰.f i)).obj G) :=
+      hlocal
+    exact IsLocallyConstantSheaf.of_cover 𝒰 G
+  · intro Ω _ _ s
+    obtain ⟨i, x, hx⟩ := T.interiorUnionCover.exists_eq (s (IsLocalRing.closedPoint _))
+    obtain ⟨t, rfl⟩ := exists_comp_eq_of_mem_range (T.interiorUnionCover.f i) s ⟨x, hx⟩
+    have hfinite : Finite (((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} (T.interiorUnionCover.f i)).obj G)) :=
+      ((finite_local_abelian_forget_iff _).mp (hcover i)).2 Ω t
+    exact @Finite.of_equiv _ _ hfinite
+      ((Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1}
+        (T.interiorUnionCover.f i) t).app G).addCommGroupIsoToAddEquiv.toEquiv
 
 end AlgebraicGeometry.Scheme

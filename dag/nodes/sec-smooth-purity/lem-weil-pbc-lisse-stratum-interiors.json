@@ -15,45 +15,56 @@
  ],
  "proof": [
   {
-   "text": "For each interior V_i form P_i=V_i times_Z T.domain i. The first projection is a surjective immersion by base change and image containment. An immersion with full image is closed (factor it as a closed immersion into an open subscheme; that open must be the whole target). It is therefore a universal homeomorphism.",
+   "text": "Transport each given set restriction through etaleInverseImageAlgebraicStructures to the underlying set sheaf of the abelian inverse image. Finite local constancy is invariant under isomorphism: use the same trivializing cover, apply overPullback.mapIso on its members, and apply sheafFiber.mapIso on geometric stalks.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an interior V_i and the stratum immersion b form P=V_i times_Z T.domain i, with projections p and q. The range of the open immersion a:V_i to Z lies in the range of b since interior(T_i) is contained in T_i. Hence p is surjective by surjective_pullback_fst_of_range_subset. It is an immersion by base change, and IsClosedImmersion.of_isImmersion_of_surjective makes it closed, hence a universal homeomorphism. These geometry helpers are already proved in WeilConjectures.ConstructibleSheaf.Refinement.",
    "uses": [
     "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Convert the lisse set restriction on T.domain i to the underlying abelian restriction by the inverse-image/forget comparison. Pull back along the second projection and identify the two composite inverse images. The site equivalence along the first projection transports etale covers and constant objects; it descends the trivialization to V_i. Geometric points lift along the surjective closed immersion and inverse-image stalks identify the finite stalks. This proves lissity on each V_i without requiring a scheme factorization V_i to T.domain i.",
+   "text": "Pull back b inverse image E along q with pullback_finite_locally_constant. Rewrite q followed by b as p followed by a and use upperStarComp to obtain finite local constancy of the underlying set sheaf of p inverse image(a inverse image E). Apply finite_local_abelian_forget_iff to obtain abelian local constancy and actual finite abelian stalks. The already proved IsLocallyConstantSheaf.of_upperStar descends local constancy along p. For an algebraically closed geometric point s of V_i, exists_comp_eq_of_surjective lifts s to t of P. upperStarCompSheafFiberIso identifies the finite stalk at t with the stalk at s. Apply finite_local_abelian_forget_iff in the reverse direction. This proves lissity on each interior without assuming factorization through its stratum.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
     "lem-weil-pbc-pullback-finite-locally-constant",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
     "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lemma-constructible-universal-homeomorphism-invariance",
+    "lemma-openclosed-stalk-upperstar"
    ],
    "elementary": false
   },
   {
-   "text": "The V_i cover W. Compose the trivializing etale covers of their restrictions with this open cover to obtain a trivializing etale cover of W. Lift each geometric point of W to one V_i; its stalk is the finite stalk there. For empty W use the empty cover and the vacuous stalk condition.",
+   "text": "Use Stratification.interiorUnionCover. The equality homOfLE followed by the union inclusion equals the interior inclusion, together with upperStarComp, transports the preceding result to the restriction of G=E restricted to the union on every cover member. Apply finite_local_abelian_forget_iff on each member. IsLocallyConstantSheaf.of_cover from GenericConstancy glues their abelian local constancy after changing the open cover to an etale cover. For each algebraically closed geometric point s of the union, choose a cover member containing its image, lift s using exists_comp_eq_of_mem_range, and transport the finite abelian stalk through upperStarCompSheafFiberIso. Apply finite_local_abelian_forget_iff to G. The interior cover can be empty, and no point or cover member is chosen unless one is given.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lemma-constructible-universal-homeomorphism-invariance",
+    "lemma-openclosed-stalk-upperstar",
+    "prop-constructible-generic-constancy"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
   "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
   "lem-weil-pbc-pullback-finite-locally-constant",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-etale-inverse-image-restriction"
+  "lem-weil-pbc-finite-local-abelian-forget",
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-constructible-generic-constancy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "Proof paragraphs 1--3; specialized to the stratum interiors, with details in the Lean docstring."
+  "place": "Proof paragraphs 1--3; C2 formalization follows the same fibre-product and interior-open-cover route, using the existing finite abelian/set comparison and proved abelian local-constancy descent; finite stalks are carried separately and never replaced by finite generation."
  },
  "mathlib_searches": [
   {
@@ -130,10 +141,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T070540-L-3472411",
-  "kind": "interface",
+  "landing": "20261012T085219-L-5791",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
