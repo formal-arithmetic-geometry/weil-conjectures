@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.LinearAlgebra.MatrixRankFieldExtension
+import Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty
 
 /-! # Local block normal form of a constant rank sheaf map
 
@@ -61,6 +62,13 @@ theorem exists_local_normal_form_of_constantRank
         (eT : ((Modules.pullback j).obj N).restrict U.ι ≅
           free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),
         (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =
-          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv := by sorry
+          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv := by
+  classical
+  by_cases hZ : Nonempty Z
+  · exact @exists_local_normal_form_of_constantRank_nonempty Y Z inferInstance hZ M N m n
+      eM eN φ j inferInstance a hrank
+  · have h : IsEmpty Z := ⟨fun z => hZ ⟨z⟩⟩
+    intro z
+    exact h.elim z
 
 end AlgebraicGeometry.Scheme.Modules

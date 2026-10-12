@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-constant-rank-map-local-normal-form-nonempty",
+ "kind": "statement",
+ "title": "Local block normal form for a nonempty open subscheme",
+ "statement": "Let the hypotheses of lem-pc-constant-rank-map-local-normal-form hold, and assume in addition that Z is nonempty. Then for every z in Z there are an open neighbourhood U of z and isomorphisms eS and eT of the restricted finite free modules with the (m-a) plus a and a plus (n-a) biproducts, respectively, such that the restricted map is eS.hom followed by the projection to the second source summand, the inclusion of the first target summand, and eT.inv.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "normal-form claim and local kernel/image splitting"
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-weil-matrix-rank",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "On an affine neighbourhood of any point of Z, use the field-valued points in hrank and invariance of matrix rank under residue-field extension to see that every residue-field matrix has rank a.",
+   "uses": [
+    "lem-weil-matrix-rank-field-extension",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All (a+1)-minors vanish modulo every prime and hence vanish in the reduced affine ring. At the chosen point a nonzero a-minor exists; after shrinking to its principal open it is invertible. Permuting rows and columns and applying invertible block operations gives diag(I_a,0), since the Schur-complement entries are (a+1)-minors divided by the pivot determinant.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-matrix-rank",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reorder the resulting free bases and transport them through restriction and pullback to obtain the displayed biproduct factorization. The empty minor handles a=0.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), normal-form claim; existing lem-pc-constant-rank-map-kernel-image proof steps 1 and 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant rank matrix over a reduced ring is locally equivalent to an identity block and a zero block",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant rank matrix over a reduced ring is locally equivalent to a block identity matrix and its kernel and image are locally free",
+   "results": "LinearEquiv.mem_dilatransvections_iff_rank; rankCondition_iff_matrix; rankCondition_iff_le_of_comp_eq_one; invariantBasisNumber_iff_matrix; LinearEquiv.mem_dilatransvections_iff_finrank; instRankConditionOfIsStablyFiniteRingOfNontrivial; HasRankNullity; LinearMap.rank_diagonal",
+   "date": "2026-10-12",
+   "verdict": "No reduced-ring local normal form; division-ring and rank-condition results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.rank, Matrix.submatrix",
+   "results": "Matrix.rank_submatrix_le; Matrix.rank_submatrix; Matrix.exists_rank_normal_form",
+   "date": "2026-10-12",
+   "verdict": "The last theorem requires a square matrix over a field; not this reduced-ring, rectangular local statement."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*rank|rank.*constant|kernelBiprodSndIso",
+   "results": "Generic free-locus, flat-rank, rank-nullity and Picard-group results; no local constant rank block form over a reduced ring.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalForm",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3): over a reduced base a map of finite free modules of locally constant fibre rank has locally the normal form diag(I,0)",
+   "via": [
+    "lem-pc-constant-rank-map-kernel-image",
+    "lem-pc-constant-rank-complex-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ConstantRankMapNormalFormNonempty.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_normal_form_of_constantRank_nonempty",
+  "statement": "theorem exists_local_normal_form_of_constantRank_nonempty\n    {Y Z : Scheme.{u}} [IsReduced Y] [Nonempty Z] {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ)\n    (hrank : ∀ z : Z, ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y),\n      Set.range g.base = {j.base z} ∧\n      ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map g.appTop).rank = a) :\n    ∀ z : Z, ∃ U : Z.Opens, z ∈ U ∧\n      ∃ (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n          free (ULift.{u} (Fin (m - a))) ⊞ free (ULift.{u} (Fin a)))\n        (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),\n        (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =\n          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-matrix-rank",
+  "def-weil-pbc-free-module",
+  "lem-weil-matrix-rank-field-extension",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135249-L-1675741",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135249-L-1675741",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
