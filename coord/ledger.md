@@ -6389,3 +6389,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients (stage 3; reviewer PASS; first push; landing 20261012T060745-L-2911122 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/M2/Sheaf.CategoryTheory.Galois.AbstractEquivalence (stage 3; reviewer PASS; first push; landing 20261012T060745-L-2911293 (interface); batch 20261012T060728; modules 2; new nodes 1)
 - 06:07 L: merged deliver/M2/Sheaf.RingTheory.IntGRing (stage 3; reviewer PASS; first push; landing 20261012T060745-L-2911397 (proof); batch 20261012T060728; modules 1; new nodes 0)
+- 06:07 L: merged deliver/N1/Sheaf.AlgebraicGeometry.Curve.BrauerReductionInjection (stage 3; reviewer PASS; first push; landing 20261012T060746-L-2911492 (interface); batch 20261012T060728; modules 3; new nodes 2)

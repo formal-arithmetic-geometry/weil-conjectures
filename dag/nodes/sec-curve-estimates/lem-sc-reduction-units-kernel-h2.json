@@ -1,0 +1,173 @@
+{
+ "id": "lem-sc-reduction-units-kernel-h2",
+ "kind": "statement",
+ "title": "Degree-two vanishing for the infinitesimal units kernel",
+ "statement": "Let $k$ be a field and $f:C\\to\\operatorname{Spec}k$ a separated finite-type scheme of dimension at most one [def-sc-curves]. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction [def-weil-pbc-scheme-reduction] and $\\varphi:i^{-1}\\mathbf G_{m,C}\\to\\mathbf G_{m,C_{\\mathrm{red}}}$ the transpose of restriction of units [def-sc-gm-torsor] under the adjunction [def-weil-pbc-inverse-image]. Let $K=\\ker\\varphi$ be its kernel in the category of abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves] (sections mapped to the identity). Then $H^2((C_{\\mathrm{red}})_{\\mathrm{Et}},K)=0$ [def-weil-pbc-etale-cohomology]. Empty, zero-dimensional and disconnected curves are allowed; no smoothness, properness or reducedness is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and the following Claim; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over a field makes C Noetherian; its coherent nilradical N is nilpotent with a uniform exponent m obtained on a finite affine cover. Etale flatness identifies the pulled-back nilradical on an affine etale object with its reduction ideal, since the quotient is etale over a reduced scheme and is reduced. Thus the kernel K of G_m,C -> i_*G_m,C_red is the sheaf 1+N_et.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "etale-proposition-etale-reduced",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For j≥1 the formula 1+a ↦ a induces (1+N^j)/(1+N^(j+1)) ≅ (N^j/N^(j+1))_et. The cross term ab lies in N^(2j)⊆N^(j+1). Flat pullback to an affine etale object preserves the exact sequence of the ideals, so the formula is surjective there and has the indicated kernel; sheafification preserves these identities.",
+   "uses": [
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every quasi-coherent etale sheaf has vanishing H^q for q≥2 on C. Choose a finite affine cover; separatedness makes its finite intersections affine. Affine etale vanishing and the Cech spectral sequence identify its etale cohomology with the Cech groups of this cover. Affine Zariski vanishing and the same spectral sequence identify those groups with Zariski cohomology. Noetherian cohomology vanishes above dimension, and dim C≤1.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-cech-spectral",
+    "pqf-lem-affine-vanishing",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend from N^m=0 using the filtration short exact sequences. At each j the long exact sequence is exact at H^2(1+N^j); both the H^2 of the next filtration piece and the H^2 of the additive quotient vanish. Therefore H^2(1+N_et)=0.",
+   "uses": [
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reduction is a universal homeomorphism. Its inverse image is an exact equivalence and its counit is an isomorphism, so i^{-1}K identifies with ker(varphi). Topological invariance identifies H^2(C,K) with H^2(C_red,i^{-1}K), proving the stated vanishing.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "etale-proposition-etale-reduced",
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-cech-spectral",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and the following Claim, nilpotent-units filtration and cohomology vanishing; N1 stage 3 extraction of the reduction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjectivity units nilpotent ideal and etale cohomology kernel reduction curve",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology multiplicative group reduction nilpotent ideal injective Brauer group",
+   "results": "8 hits; Results concern ring nilpotence and cotangent groups, not the stated sheaf comparison or its kernel cohomology.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nilradical|brauer.*reduction|reduction.*brauer",
+   "results": "25 hits; Results concern ring nilpotence and cotangent groups, not the stated sheaf comparison or its kernel cohomology.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "units.*(nilpotent|nilradical|isNil)|((nilpotent|nilradical|isNil).*units)",
+   "results": "Three polynomial and zero-dimensional ring hits; no matching scheme or sheaf theorem.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Units\", \"surjective\"",
+   "results": "Six ring/group-level hits. IsLocalRing.surjective_units_map_of_local_ringHom can support local unit lifting, but does not supply the sheaf comparison or its transport through reduction.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "epimorphism of sheaves of invertible sections under a nil immersion; cohomology of the infinitesimal multiplicative group on a one dimensional scheme",
+   "results": "Eight hits on formal unramifiedness, structure sheaves and residue maps; none proves either units-comparison epimorphy or infinitesimal-kernel cohomology vanishing.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.BrauerReductionInjection",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and the following Claim, nilpotent-units filtration and cohomology vanishing",
+   "via": [
+    "lem-sc-brauer-reduction-injection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsKernelVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReductionUnitsKernelVanishing.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.subsingleton_H_two_reduction_units_kernel",
+  "statement": "theorem subsingleton_H_two_reduction_units_kernel {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] : Subsingleton (Sheaf.H (kernel (Scheme.upperStarGmSheafToGmSheaf C.nilradical.subschemeι)) 2)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T060746-L-2911492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T060746-L-2911492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
