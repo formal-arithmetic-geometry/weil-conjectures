@@ -9,12 +9,8 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-import Sheaf.Algebra.ChangeIdealCompletion
-import Sheaf.RingTheory.ExistsCoefficientSubring
-import Sheaf.RingTheory.FiniteOverCompleteRing
-import Sheaf.RingTheory.IntegralExtensionDimension
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesOntoCompletion
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegularCore
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegularResidue
 
 /-!
 # Complete local domains finite over regular subrings
@@ -150,7 +146,7 @@ theorem complete_local_domain_finite_over_regular
       Module.Finite R₀ R ∧
       IsLocalRing.maximalIdeal R₀ =
         Ideal.comap R₀.subtype (IsLocalRing.maximalIdeal R) ∧
-      ∃ e : (R₀ ⧸ IsLocalRing.maximalIdeal R₀) ≃+*
+    ∃ e : (R₀ ⧸ IsLocalRing.maximalIdeal R₀) ≃+*
           (R ⧸ IsLocalRing.maximalIdeal R),
         (∀ x : R₀,
           e (Ideal.Quotient.mk (IsLocalRing.maximalIdeal R₀) x) =
@@ -162,6 +158,12 @@ theorem complete_local_domain_finite_over_regular
           let _ := h
           ∃ p : ℕ, IsCohenRing p Λ ∧
           Nonempty (R₀ ≃+* MvPowerSeries (Fin d) Λ))) := by
-  sorry
+      obtain ⟨R₀, hreg, hcore⟩ :=
+        complete_local_domain_finite_over_regular_core R
+      let _ := hreg.toIsLocalRing
+      obtain ⟨hcomplete, hfinite⟩ := hcore
+      obtain ⟨hcomap, e, he, hmodel⟩ :=
+        complete_local_domain_finite_over_regular_residue R R₀ hreg hfinite hcomplete
+      exact ⟨R₀, hreg, hcomplete, hfinite, hcomap, e, he, hmodel⟩
 
 end IsLocalRing
