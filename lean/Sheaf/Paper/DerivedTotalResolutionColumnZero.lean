@@ -7,6 +7,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.Paper.TotalResolutionCycleReduction
+import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-! # Column-zero representatives in a total complex
 
@@ -64,6 +66,29 @@ theorem total_resolution_column_zero_surjective
       Function.Exact
         (HomologicalComplex.homologyMap (K.d p (p + 1)) q).hom
         (HomologicalComplex.homologyMap (K.d (p + 1) (p + 2)) q).hom) :
-    Function.Surjective (HomologicalComplex.homologyMap j n).hom := by sorry
+    Function.Surjective (HomologicalComplex.homologyMap j n).hom := by
+  let A := K.X 0
+  let B := K.total (ComplexShape.up ℤ)
+  have hred := total_resolution_column_zero_cycle_reduction K j n h_positive hj h_homology
+  intro x
+  obtain ⟨z, rfl⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ n)).mp inferInstance x
+  obtain ⟨y, b, hb⟩ := hred z
+  have hz : z = HomologicalComplex.cyclesMap j n y + B.toCycles (n - 1) n b := by
+    apply (ModuleCat.mono_iff_injective (B.iCycles n)).mp inferInstance
+    rw [map_add]
+    have hj := congr($(HomologicalComplex.cyclesMap_i j n) y)
+    have hd := congr($(B.toCycles_i (n - 1) n) b)
+    change B.iCycles n (HomologicalComplex.cyclesMap j n y) =
+      j.f n (A.iCycles n y) at hj
+    change B.iCycles n (B.toCycles (n - 1) n b) = B.d (n - 1) n b at hd
+    rw [hj, hd]
+    exact hb
+  refine ⟨A.homologyπ n y, ?_⟩
+  have hn := congr($(HomologicalComplex.homologyπ_naturality j n) y)
+  change HomologicalComplex.homologyMap j n (A.homologyπ n y) =
+    B.homologyπ n (HomologicalComplex.cyclesMap j n y) at hn
+  have hb0 := congr($(B.toCycles_comp_homologyπ (n - 1) n) b)
+  change B.homologyπ n (B.toCycles (n - 1) n b) = 0 at hb0
+  rw [hn, hz, map_add, hb0, add_zero]
 
 end WeilConjectures.DerivedTotalResolution

@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-derived-total-resolution-column-zero-cycle-reduction",
+ "kind": "statement",
+ "title": "Finite-support cycle reduction in a total resolution",
+ "statement": "theorem total_resolution_column_zero_cycle_reduction (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) [K.HasTotal (ComplexShape.up ℤ)] (j : K.X 0 ⟶ K.total (ComplexShape.up ℤ)) [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i] [∀ p q, (K.X p).HasHomology q] (n : ℤ) (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p)) (hj : ∀ q, j.f q = K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp)) (h_homology : ∀ (p q : ℤ), p < -1 → Function.Exact (HomologicalComplex.homologyMap (K.d p (p + 1)) q).hom (HomologicalComplex.homologyMap (K.d (p + 1) (p + 2)) q).hom) : ∀ z : (K.total (ComplexShape.up ℤ)).cycles n, ∃ y : (K.X 0).cycles n, ∃ b : (K.total (ComplexShape.up ℤ)).X (n - 1), (K.total (ComplexShape.up ℤ)).iCycles n z = j.f n ((K.X 0).iCycles n y) + (K.total (ComplexShape.up ℤ)).d (n - 1) n b",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Put A_i = K.X (-i). Represent a total homology class by a cocycle x. The coproduct of modules is their direct sum, so x has finite support. Positive columns vanish, hence x is supported in A_0 through A_r for some natural number r.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "If r > 0, the cocycle equations in columns r and r-1 show that x_r is a vertical cycle whose horizontal image is a vertical boundary. Exactness of the horizontal homology row lifts its class to a class in A_(r+1) in vertical degree n+r. Represent that class by a vertical cycle y; its total degree is n-1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Subtract the total boundary of y, adjusting by the horizontal unit sign, to turn x_r into a vertical boundary. Choose a primitive t in A_r of vertical degree n+r-1 and subtract its appropriately signed total boundary. This kills x_r; the only other column affected is r-1. Induction on r gives a homologous cocycle supported in column zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The resulting column-zero component is a vertical cycle y. Sum the finitely many signed correction terms into b in total degree n-1; linearity gives iCycles(z) = j(iCycles(y)) + d(b). The support-zero and zero-cycle cases need no corrections.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cycle in the direct sum total complex of a left half plane double complex with exact horizontal cohomology rows is homologous to a cycle in column zero",
+   "results": "8 hits: HomComplex.leftHomologyData', i_cyclesMk, liftCycles_homologyπ_eq_zero_of_boundary and its assoc lemma, liftCycles_shift_homologyπ, pOpcycles_opcyclesToCycles_iCycles, toCycles_eq_zero, groupHomology.cyclesMkOfCompEqD. None gives the finite-support reduction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ, HomologicalComplex.toCycles",
+   "results": "5 hits including toCycles_comp_homologyπ and homologyIsCokernel; these finish the quotient argument but do not reduce total-cycle support.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*(surjective|epi|quasiIso)|cycle.*reduction",
+   "results": "Read total_resolution_homology_surjective (cycle lifts along an augmentation), total_resolution_homology_injective (uses this item), and total_resolution_quasiIso (uses injectivity). None provides this reduction; no match in upstream algebra modules.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every cocycle of a direct sum total complex of a left half plane bicomplex with exact horizontal homology rows is the sum of a column zero cocycle and a total boundary",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedTotalResolutionColumnZero",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-resolution-column-zero",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TotalResolutionCycleReduction",
+  "file": "lean/Sheaf/Paper/TotalResolutionCycleReduction.lean",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_column_zero_cycle_reduction",
+  "statement": "theorem total_resolution_column_zero_cycle_reduction (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) [K.HasTotal (ComplexShape.up ℤ)] (j : K.X 0 ⟶ K.total (ComplexShape.up ℤ)) [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i] [∀ p q, (K.X p).HasHomology q] (n : ℤ) (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p)) (hj : ∀ q, j.f q = K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp)) (h_homology : ∀ (p q : ℤ), p < -1 → Function.Exact (HomologicalComplex.homologyMap (K.d p (p + 1)) q).hom (HomologicalComplex.homologyMap (K.d (p + 1) (p + 2)) q).hom) : ∀ z : (K.total (ComplexShape.up ℤ)).cycles n, ∃ y : (K.X 0).cycles n, ∃ b : (K.total (ComplexShape.up ℤ)).X (n - 1), (K.total (ComplexShape.up ℤ)).iCycles n z = j.f n ((K.X 0).iCycles n y) + (K.total (ComplexShape.up ℤ)).d (n - 1) n b",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-4000167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-4000167",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
