@@ -1,0 +1,137 @@
+{
+ "id": "lem-pd-raw-monoid-operations-descent",
+ "kind": "statement",
+ "title": "Multiplication and unit descend as morphisms before their laws",
+ "statement": "Let $p:X\\to Y$ be a flat, surjective, quasi-compact morphism of schemes. Let $V$ over $X$ be a monoid object (the multiplication, unit, associativity and unit-law part of [def-sc-group-scheme]), with transport descent datum $D$ [def-pd-descent-datum]. Let $V_0$ be a scheme over $Y$ and let $q:V\\to V_0$ make the square over $p$ cartesian [def-pc-base-change]. Assume that $q$ is invariant under transport and transport preserves multiplication and the unit. Then there exist morphisms $m:V_0\\times_Y V_0\\to V_0$ and $e:Y\\to V_0$ over $Y$ such that, for every $T\\to X$ and every two $V$-points $a,b$ over this map, $q(ab)=m(q(a),q(b))$ and $q(1)=e$ as $V_0$-points over $T\\to X\\to Y$. No associativity, unit law, commutativity or inverse of these descended operations is part of this conclusion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/lem-pd-group-scheme-descent.md",
+  "place": "multiplication and unit descent step, via Stacks Tag 02W0"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For an object A over Y, the projection A times_Y X to A is flat, surjective and quasi-compact by the Mathlib base-change instances. Mathlib.AlgebraicGeometry.Sites.Fpqc supplies EffectiveEpi for this projection. Any map from the cover to V whose composite with q is equal on pairs with the same projection therefore descends, using EffectiveEpi.desc and EffectiveEpi.fac. The descended morphism is over Y: its structure-map equation is checked on the cover and the projection is cancelled.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set A = V0 times_Y V0 and lift its two universal projections on A times_Y X to V using the cartesian square. For two maps into the cover with the same projection to A, their base maps f1 and f2 have the same composite to Y. By hDV and cartesian uniqueness, D.transport sends each first lifted input to its second lifted input. Apply h_mu and then hDV to their product. This proves that multiplication followed by q is invariant on these pairs. Descend the morphism as in step 1. For any two V-points over T to X, the pair of their images in V0 defines a map T to A times_Y X. Cartesian uniqueness identifies the pullbacks of the universal lifted inputs with the original points. Pull back the factorization equation to obtain preservation of multiplication.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-sc-group-scheme",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set A equal to the terminal Y-scheme. On its pullback to X use the unit point of V. For pairs with the same projection, h_eta and hDV show equality of the two images under q. Descend by step 1. Pull back its factorization equation along the map induced by a test point f:T to X to obtain preservation of the unit. No monoid law or commutativity of the descended operations is asserted or used.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pd-descent-datum",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/lem-pd-group-scheme-descent.md",
+  "place": "Multiplication and unit descent step, implemented directly with Mathlib EffectiveEpi.desc, completed C1 Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of commutative monoid object multiplication and unit along faithfully flat morphism of schemes",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.Flat.instSndScheme; AlgebraicGeometry.Scheme.monObjAsOverPullback_mul; AlgebraicGeometry.instBraidedCategoryScheme; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Flat",
+   "verdict": "No exact operation-descent theorem. EffectiveEpi.desc and its factorization theorem provide the descent tool; Flat pullback instances provide stability under base change. Their source signatures were read and they are used in the completed Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "CommMon.*descend|descend.*CommMon|EffectiveEpi.desc",
+   "date": "2026-10-12",
+   "results": "Mathlib/Topology/Category/Profinite/EffectiveEpi.lean; Mathlib/Topology/Category/Stonean/EffectiveEpi.lean; Mathlib/Topology/Category/CompHaus/EffectiveEpi.lean; Mathlib/CategoryTheory/Limits/Shapes/RegularMono.lean; Mathlib/CategoryTheory/EffectiveEpi/Coproduct.lean; Mathlib/CategoryTheory/EffectiveEpi/Coproduct.lean; Mathlib/CategoryTheory/EffectiveEpi/Extensive.lean; Mathlib/CategoryTheory/EffectiveEpi/Extensive.lean",
+   "verdict": "No exact operation-descent theorem. EffectiveEpi.desc and its factorization theorem provide the descent tool; Flat pullback instances provide stability under base change. Their source signatures were read and they are used in the completed Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of compatible multiplication and unit morphisms on schemes along flat surjective quasi compact base change",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CommMonoidDescent",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-group-scheme-descent",
+   "place": "multiplication and unit descent step, before checking the monoid laws",
+   "via": [
+    "lem-pd-comm-monoid-operations-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommMonoidOperationsDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommMonoidOperationsDescent.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_raw_monoid_operations_of_effective_projection",
+  "statement": "theorem exists_raw_monoid_operations_of_effective_projection\n    {X Y : Scheme.{u}} {p : X ⟶ Y} [Flat p] [Surjective p] [QuasiCompact p]\n    {V : Over X} [MonObj V] (D : Over.DescentDatum p V)\n    {V₀ : Over Y} (qV : V.left ⟶ V₀.left) (hqV : IsPullback qV V.hom V₀.hom p)\n    (hDV : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p)\n      (a : Over.mk f₁ ⟶ V), (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV)\n    (hμ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p)\n      (a b : Over.mk f₁ ⟶ V), D.transport f₁ f₂ h (lift a b ≫ μ[V]) =\n        lift (D.transport f₁ f₂ h a) (D.transport f₁ f₂ h b) ≫ μ[V])\n    (hη : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p),\n      D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) :\n    let q : (Over.map p).obj V ⟶ V₀ := Over.homMk qV hqV.w;\n    ∃ (m : V₀ ⊗ V₀ ⟶ V₀) (e : 𝟙_ (Over Y) ⟶ V₀),\n      (∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),\n        (Over.map p).map (lift a b ≫ μ[V]) ≫ q =\n          lift ((Over.map p).map a ≫ q) ((Over.map p).map b ≫ q) ≫ m) ∧\n      (∀ {T : Scheme.{u}} (f : T ⟶ X),\n        (Over.map p).map (toUnit (Over.mk f) ≫ η[V]) ≫ q =\n          toUnit (Over.mk (f ≫ p)) ≫ e)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T085217-L-4808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T085217-L-4808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

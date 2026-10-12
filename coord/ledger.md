@@ -6757,3 +6757,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/C1/Sheaf.Algebra.Homology.HomComplex (stage 3; reviewer PASS; first push; landing 20261012T085217-L-4317 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/C1/Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData (stage 3; reviewer PASS; first push; landing 20261012T085217-L-4528 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/C1/Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact (stage 3; reviewer PASS; first push; landing 20261012T085217-L-4687 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:52 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CommMonoidDescent (stage 3; reviewer PASS; first push; landing 20261012T085217-L-4808 (interface); batch 20261012T085205; modules 2; new nodes 1)
