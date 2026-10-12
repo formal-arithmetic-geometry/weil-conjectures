@@ -3,8 +3,7 @@ module
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
-import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkInside
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence
 
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
@@ -78,6 +77,41 @@ theorem ModuleExtensionByZeroStalkTransitions (X : RingedSpace.{u}) :
           (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W),
             (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) =
               (e W' x (h hx)).hom)) := by
-  sorry
+  intro F
+  refine ⟨?_, ?_⟩
+  · let ff : (SheafOfModules.overFunctor.{u} (moduleRings X) ⊤).FullyFaithful :=
+      { preimage := fun g ↦
+          { val :=
+              { app := fun U ↦ g.val.app (op (Over.mk (homOfLE (le_top : U.unop ≤ ⊤))))
+                naturality := by
+                  intro U V f
+                  exact g.val.naturality
+                    (Over.homMk (U := Over.mk (homOfLE (le_top : V.unop ≤ ⊤)))
+                      (V := Over.mk (homOfLE (le_top : U.unop ≤ ⊤)))
+                      f.unop (by subsingleton)).op } }
+        map_preimage := by
+          intro M N g
+          ext U x
+          rfl
+        preimage_map := by
+          intro M N g
+          ext U x
+          rfl }
+    let := ff.full
+    let := ff.faithful
+    infer_instance
+  · let iota := fun (W W' : Opens X) (h : W ≤ W') ↦
+        ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).homEquiv _ _).symm
+          ((SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).inv.app F ≫
+            (SheafOfModules.overMap (moduleRings X) (homOfLE h)).map
+              ((Classical.choice (open_restriction_adjunction_exact X W').2.2.2.2).unit.app
+                ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)) ≫
+            (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).hom.app
+              ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙
+                PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj
+                  ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)))
+    refine ⟨iota, ?_, ModuleExtensionByZeroStalkTransitionCoherence X F⟩
+    intro W W' h
+    exact Equiv.apply_symm_apply _ _
 
 end AlgebraicGeometry

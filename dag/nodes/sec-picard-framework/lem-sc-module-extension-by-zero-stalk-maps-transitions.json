@@ -24,28 +24,22 @@
  ],
  "proof": [
   {
-   "text": "Proof: Use the inside-open stalk calculation and adjunction triangle identities to see that the counit for F restricted to W induces an isomorphism at every x in W: the restriction-stalk comparison identifies its composition with the unit with identity. For W=top this proves the counit is an isomorphism of sheaves by the stalk criterion. For W <= W', define iota as the inverse homEquiv image of the displayed transported restriction of the W' unit. This gives the first equation by inverse cancellation. At W=W', the restriction transport is identity, so homEquiv sends both iota and identity to the W unit; injectivity proves their equality. For W <= W' <= W'', restrict the transpose equations to W and use naturality of the units and coherence of overFunctorMap. Their composite is the restriction of the W'' unit; homEquiv injectivity gives composition. Applying counits to the same equations and using the triangle identities gives iota(W,W') followed by the W' counit equals the W counit; specialize W'=top. Finally take e(W,x) to be the inverse of the counit's stalk isomorphism already obtained. Functoriality on stalks applied to that counit compatibility says iota_x followed by e(W',x).inv equals e(W,x).inv. Cancel these isomorphisms to get the final equation. This construction works for independently chosen adjunctions because only their own units, counits and triangle identities are used. Source: Stacks Project, Sheaves Lemma 00A7 (2)-(4) and Lemma 00A5.",
+   "text": "Restriction to the top open is fully faithful: recover every module-sheaf morphism by its component at V -> top; naturality and both inverse laws follow sectionwise. Mathlib then makes the counit of the chosen adjunction an isomorphism. Define each transition explicitly by the inverse hom-equivalence applied to the transported later unit. Its required transpose formula is Equiv.apply_symm_apply. The remaining equations and stalk isomorphisms are the coherence lemma for exactly this explicit family.",
    "uses": [
     "lem-sc-derived-open-restriction-adjunction-exact",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-sc-topological-extension-by-zero-stalks",
-    "def-pc-module-stalk-functor",
-    "lem-sc-module-extension-by-zero-stalk-maps-inside"
+    "new-module-extension-by-zero-coherence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-sc-topological-extension-by-zero-stalks",
-  "def-pc-module-stalk-functor",
-  "lem-sc-module-extension-by-zero-stalk-maps-inside"
+  "new-module-extension-by-zero-coherence"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves Tag 00A7"
+  "document": "Mathlib.CategoryTheory.Adjunction.FullyFaithful and literature/stacks-project/sheaves.tex",
+  "place": "fully faithful right adjoint counit; Tags 00A7, 00A5 via the coherence lemma"
  },
  "mathlib_searches": [
   {
@@ -107,9 +101,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T131559-L-1374052",
-  "kind": "interface"
+  "landing": "20261012T161504-L-2648950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
