@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.PicardProductOpenData
 import Sheaf.AlgebraicGeometry.PicardH1MultipleLocus
 import Sheaf.AlgebraicGeometry.PicardH1ProductInjective
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
@@ -66,7 +67,9 @@ theorem picard_product_open_core
           N) ∧
       Nonempty (N ≅ SheafOfModules.unit
         (pullback (pullback.fst f g ≫ f) U.ι).ringCatSheaf) := by
-  sorry
+  obtain ⟨U, hsU, N, eL, eN, _⟩ :=
+    picard_product_open_data f g σ τ hσ hτ s L hO hO' h₁ h₂ hs
+  exact ⟨U, hsU, N, ⟨eL⟩, ⟨eN⟩⟩
 
 /-- Triviality on the two section slices and the fibre at `s` extends to an open
 neighbourhood of `s`. Source: Stacks Project, More on Morphisms, Lemma pic-of-product,
@@ -119,7 +122,8 @@ theorem picard_product_open
       Nonempty ((Scheme.Modules.tensorPullback
         (pullback.fst (pullback.fst f g ≫ f) U.ι)).obj L ≅
           SheafOfModules.unit (pullback (pullback.fst f g ≫ f) U.ι).ringCatSheaf) := by
-  obtain ⟨U, hsU, N, eL, eN⟩ := picard_product_open_core f g σ τ hσ hτ s L hO hO' h₁ h₂ hs
-  refine ⟨U, hsU, ⟨eL.some ≪≫ eN.some⟩⟩
+  rcases picard_product_open_core f g σ τ hσ hτ s L hO hO' h₁ h₂ hs with
+    ⟨U, hsU, N, ⟨eL⟩, ⟨eN⟩⟩
+  exact ⟨U, hsU, ⟨eL ≪≫ eN⟩⟩
 
 end AlgebraicGeometry.Scheme
