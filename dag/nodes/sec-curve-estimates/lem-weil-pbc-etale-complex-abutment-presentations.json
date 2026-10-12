@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-etale-complex-abutment-presentations",
+ "kind": "lemma",
+ "title": "Functorial etale complex abutment presentations",
+ "statement": "theorem exists_etale_complex_abutment_presentations\n{I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) ℤ)\n    (φ : ∀ {i j : I} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (F i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))\n        (ComplexShape.up ℤ)).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),\n      φ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ φ g)\n    (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))\n    (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    (eG : ∀ i : I, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i))\n    (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)\n    (p : ℤ)\n    (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      (cohomology AddCommGrpCat.{u + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶\n      (cohomology AddCommGrpCat.{u + 1} X p).obj\n        (DerivedCategory.Q.obj\n          (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K)))\n    (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map\n        ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map\n          ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app\n            (DerivedCategory.Q.obj K)) ≫\n        (Functor.rightDerivedFunctorCompIso'\n          (lowerStar AddCommGrpCat.{u + 1} f)\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1})\n          (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f)\n              (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}\n                terminalIsTerminal) ≪≫\n            lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫\n            (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}\n              terminalIsTerminal).symm)).hom.app\n                ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj\n                  (DerivedCategory.Q.obj K)) ≫\n        (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map\n          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K)))\n    (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj (op i) ≅\n      (cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i)))\n    (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =\n      (eH i).hom ≫ P (D.map f) (F i) ≫\n        (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map\n          (DerivedCategory.Q.map (φ f)) ≫ (eH j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (B : Cocone H)\n    (eB : B.pt ≅ (cohomology AddCommGrpCat.{u + 1} c.pt p).obj\n      (DerivedCategory.Q.obj L.pt))\n    (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom =\n      (eH i).hom ≫ P (c.π.app i) (F i) ≫\n        (cohomology AddCommGrpCat.{u + 1} c.pt p).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :\n    ∃ (J : Type (u + 1)) (_ : Preorder J) (_ : IsDirected J (· ≤ ·))\n      (_ : Nonempty J) (R : J ⥤ Iᵒᵖ) (_ : R.Final)\n      (E0 : Iᵒᵖ ⥤ SpectralSequence AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n      (E' : SpectralSequence AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n      (v0 : ∀ i : Iᵒᵖ, E0.obj i ⟶ E')\n      (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E0.map f ≫ v0 j = v0 i)\n      (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ),\n      ((E0.obj (op i)).page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))\n      (firstIsoLimit : ∀ (r : ℕ) (s : ℤ),\n      (E'.page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))\n      (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),\n      ((E0.map f.op).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =\n        (firstIso i r s).hom ≫ complexTermCohomologyMap (D.map f) (F i) (F j) (φ f) r s)\n      (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),\n      ((v0 (op i)).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =\n        (firstIso i r s).hom ≫ complexTermCohomologyMap (c.π.app i) (F i) L.pt\n          ((eG i).inv ≫ L.ι.app (op i)) r s)\n      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E0.obj i).page 1).X ⟨r, s⟩))\n      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1).X ⟨r, s⟩))\n      (S : ℕ → AddSubgroup B.pt),\n      S 0 = ⊤ ∧ S (p + 1 - a).toNat = ⊥ ∧ Antitone S ∧\n      ∀ n : ℕ, n < (p + 1 - a).toNat →\n        ∃ (r : ℤ) (hr : 1 ≤ r) (T : ∀ j : J, AddSubgroup (H.obj (R.obj j)))\n          (q : S n →+ (E'.page r hr).X ⟨p - a - n, a + n⟩)\n          (t : ∀ j : J, T j →+ ((E0.obj (R.obj j)).page r hr).X ⟨p - a - n, a + n⟩),\n          (∀ x : S n, q x = 0 ↔ (x : B.pt) ∈ S (n + 1)) ∧\n          (∀ j : J, Function.Surjective (t j)) ∧\n          ∀ (j : J) (y : T j),\n            ∃ hy : B.ι.app (R.obj j) (y : H.obj (R.obj j)) ∈ S n,\n              q ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩ =\n                ((v0 (R.obj j)).hom r hr).f ⟨p - a - n, a + n⟩ (t j y)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0032, 015J, 015K and 0EZM; functorial first-page and abutment construction"
+ },
+ "stmt_deps": [
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Apply directed final reindexing to the filtered opposite of I, with index A in universe u. Put J=ULift A in universe u+1 and compose the equivalence to A with the final functor into I.op to obtain R. This step uses no continuity theorem or geometric limit assumption. Degreewise colimits of complexes and exact inverse image preserve the common lower bound a.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the functorial termwise hypercohomology presentations and maps for the stage transitions and limit legs. The specified identity and composition equations on φ and G and the corresponding laws for the spectral maps assemble E and the compatible v. Swap coordinates so that page-r differentials have bidegree (1-r,r). The resolution/derived-global-sections comparison fixes the abutment identifications.",
+   "uses": [
+    "thm-sp-if-e1",
+    "def-sp-kinjective-bridge",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first page is supported in resolution degree t≥0 and complex degree s≥a. The next page is homology, so vanishing off this region persists. At (t,s), the outgoing differential has target (t+1-r,s+r) and the incoming source is (t+r-1,s-r). Both are zero for r>max(t+1,s-a), uniformly over stages and target. The canonical subquotient convergence descriptions identify this common stationary page with the abutment graded pieces, compatibly with v. This uses no assertion that the page-r comparison is an isomorphism.",
+   "uses": [
+    "def-sp-spectral-sequence",
+    "thm-sp-spectral-object-yields",
+    "thm-sp-if-e1",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the degree-p target abutment filtration along eB and put S_n at a+n. The support implies the whole bound at a and zero bound at p+1. For p<a the abutment is zero and N=0, giving both bounds at the same step. Otherwise use N=(p+1-a).toNat and antitonicity. At each n<N, let T_j be the stage step a+n, pulled back along eH. The quotient projections followed by the inverse common-page convergence isomorphisms define q and t_j. Quotient exactness gives ker(q)=S_(n+1) and surjectivity of every t_j. Filtered pullback functoriality preserves the steps and commutes with the quotient projections. Its abutment clause, hP, hH and hB identify the underlying stage-to-limit map with B_j, proving the last equation. This step does not lift a target page class from any stage.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "def-sp-spectral-sequence",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "thm-sp-if-e1",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0032, 015J, 015K and 0EZM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "final functor preserves colimit comparison",
+   "results": "No direct complete theorem found; search completed",
+   "date": "2026-10-12",
+   "verdict": "No direct theorem; existing filtered spectral sequence interfaces used"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit whisker final",
+   "results": "Functor.Final.isColimitWhiskerEquiv; search completed",
+   "date": "2026-10-12",
+   "verdict": "Existing final-colimit API used"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.pre final",
+   "results": "Mathlib CategoryTheory.Limits.Final; search completed",
+   "date": "2026-10-12",
+   "verdict": "No stronger existing construction found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexFirstPageAbutment",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-complex-first-page-abutment",
+   "place": "proof steps 1-5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexAbutmentPresentations",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexAbutmentPresentations.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_complex_abutment_presentations",
+  "statement": "theorem exists_etale_complex_abutment_presentations\n{I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) ℤ)\n    (φ : ∀ {i j : I} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (F i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))\n        (ComplexShape.up ℤ)).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),\n      φ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ φ g)\n    (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))\n    (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    (eG : ∀ i : I, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i))\n    (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)\n    (p : ℤ)\n    (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      (cohomology AddCommGrpCat.{u + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶\n      (cohomology AddCommGrpCat.{u + 1} X p).obj\n        (DerivedCategory.Q.obj\n          (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K)))\n    (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map\n        ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map\n          ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app\n            (DerivedCategory.Q.obj K)) ≫\n        (Functor.rightDerivedFunctorCompIso'\n          (lowerStar AddCommGrpCat.{u + 1} f)\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1})\n          (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f)\n              (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}\n                terminalIsTerminal) ≪≫\n            lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫\n            (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}\n              terminalIsTerminal).symm)).hom.app\n                ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj\n                  (DerivedCategory.Q.obj K)) ≫\n        (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map\n          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K)))\n    (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj (op i) ≅\n      (cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i)))\n    (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =\n      (eH i).hom ≫ P (D.map f) (F i) ≫\n        (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map\n          (DerivedCategory.Q.map (φ f)) ≫ (eH j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (B : Cocone H)\n    (eB : B.pt ≅ (cohomology AddCommGrpCat.{u + 1} c.pt p).obj\n      (DerivedCategory.Q.obj L.pt))\n    (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom =\n      (eH i).hom ≫ P (c.π.app i) (F i) ≫\n        (cohomology AddCommGrpCat.{u + 1} c.pt p).map\n          (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :\n    ∃ (J : Type (u + 1)) (_ : Preorder J) (_ : IsDirected J (· ≤ ·))\n      (_ : Nonempty J) (R : J ⥤ Iᵒᵖ) (_ : R.Final)\n      (E0 : Iᵒᵖ ⥤ SpectralSequence AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n      (E' : SpectralSequence AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n      (v0 : ∀ i : Iᵒᵖ, E0.obj i ⟶ E')\n      (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E0.map f ≫ v0 j = v0 i)\n      (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ),\n      ((E0.obj (op i)).page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))\n      (firstIsoLimit : ∀ (r : ℕ) (s : ℤ),\n      (E'.page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))\n      (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),\n      ((E0.map f.op).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =\n        (firstIso i r s).hom ≫ complexTermCohomologyMap (D.map f) (F i) (F j) (φ f) r s)\n      (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),\n      ((v0 (op i)).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =\n        (firstIso i r s).hom ≫ complexTermCohomologyMap (c.π.app i) (F i) L.pt\n          ((eG i).inv ≫ L.ι.app (op i)) r s)\n      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E0.obj i).page 1).X ⟨r, s⟩))\n      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1).X ⟨r, s⟩))\n      (S : ℕ → AddSubgroup B.pt),\n      S 0 = ⊤ ∧ S (p + 1 - a).toNat = ⊥ ∧ Antitone S ∧\n      ∀ n : ℕ, n < (p + 1 - a).toNat →\n        ∃ (r : ℤ) (hr : 1 ≤ r) (T : ∀ j : J, AddSubgroup (H.obj (R.obj j)))\n          (q : S n →+ (E'.page r hr).X ⟨p - a - n, a + n⟩)\n          (t : ∀ j : J, T j →+ ((E0.obj (R.obj j)).page r hr).X ⟨p - a - n, a + n⟩),\n          (∀ x : S n, q x = 0 ↔ (x : B.pt) ∈ S (n + 1)) ∧\n          (∀ j : J, Function.Surjective (t j)) ∧\n          ∀ (j : J) (y : T j),\n            ∃ hy : B.ι.app (R.obj j) (y : H.obj (R.obj j)) ∈ S n,\n              q ⟨B.ι.app (R.obj j) (y : H.obj (R.obj j)), hy⟩ =\n                ((v0 (R.obj j)).hom r hr).f ⟨p - a - n, a + n⟩ (t j y)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135324-L-1695902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135324-L-1695902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

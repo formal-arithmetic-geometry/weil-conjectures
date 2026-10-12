@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-pbc-etale-complex-first-page-reindexing",
+ "kind": "lemma",
+ "title": "Final reindexing preserves first-page comparison",
+ "statement": "theorem reindex_first_page_comparison\n{I : Type u} [SmallCategory I] {J : Type (u + 1)} [SmallCategory J]\n    (R : J ⥤ I) (hR : R.Final)\n    (E : I ⥤ SpectralSequence AddCommGrpCat.{u + 1}\n      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n    (E' : SpectralSequence AddCommGrpCat.{u + 1}\n      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n    (v : ∀ i, E.obj i ⟶ E')\n    (hcomp : ∀ {i j : I} (f : i ⟶ j), E.map f ≫ v j = v i)\n    (hfirst : ∀ (s t : ℤ)\n      (ψ : colimit (E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 1 ⋙\n        HomologicalComplex.eval _ _ ⟨s, t⟩) ⟶ (E'.page 1).X ⟨s, t⟩),\n      (∀ i, colimit.ι _ i ≫ ψ = ((v i).hom 1 (by omega)).f ⟨s, t⟩) → IsIso ψ) :\n    ∀ (s t : ℤ)\n      (ψ : colimit ((R ⋙ E) ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 1 ⋙\n        HomologicalComplex.eval _ _ ⟨s, t⟩) ⟶ (E'.page 1).X ⟨s, t⟩),\n      (∀ j, colimit.ι _ j ≫ ψ = ((v (R.obj j)).hom 1 (by omega)).f ⟨s, t⟩) → IsIso ψ",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0032, 015J, 015K and 0EZM; functorial first-page and abutment construction"
+ },
+ "stmt_deps": [
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the spectral diagram at page one and the given bidegree. The compatible maps define a cocone Q. Its colimit descent is an isomorphism by hfirst. Finality makes colimit.pre A R an isomorphism. Colimit hom-extensionality and the leg equations identify psi with colimit.pre A R followed by colimit.desc A Q, hence psi is an isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0032; Mathlib Functor.Final.colimit_pre_isIso, colimit.ι_pre and colimit.ι_desc"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "final functor preserves colimit comparison",
+   "results": "No direct complete theorem found; search completed",
+   "date": "2026-10-12",
+   "verdict": "No direct theorem; existing filtered spectral sequence interfaces used"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit whisker final",
+   "results": "Functor.Final.isColimitWhiskerEquiv; search completed",
+   "date": "2026-10-12",
+   "verdict": "Existing final-colimit API used"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.pre final",
+   "results": "Mathlib CategoryTheory.Limits.Final; search completed",
+   "date": "2026-10-12",
+   "verdict": "No stronger existing construction found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexFirstPageAbutment",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-complex-first-page-abutment",
+   "place": "proof steps 1-5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexAbutmentPresentations",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexAbutmentPresentations.lean",
+  "declaration": "AlgebraicGeometry.Etale.reindex_first_page_comparison",
+  "statement": "theorem reindex_first_page_comparison\n{I : Type u} [SmallCategory I] {J : Type (u + 1)} [SmallCategory J]\n    (R : J ⥤ I) (hR : R.Final)\n    (E : I ⥤ SpectralSequence AddCommGrpCat.{u + 1}\n      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n    (E' : SpectralSequence AddCommGrpCat.{u + 1}\n      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n    (v : ∀ i, E.obj i ⟶ E')\n    (hcomp : ∀ {i j : I} (f : i ⟶ j), E.map f ≫ v j = v i)\n    (hfirst : ∀ (s t : ℤ)\n      (ψ : colimit (E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 1 ⋙\n        HomologicalComplex.eval _ _ ⟨s, t⟩) ⟶ (E'.page 1).X ⟨s, t⟩),\n      (∀ i, colimit.ι _ i ≫ ψ = ((v i).hom 1 (by omega)).f ⟨s, t⟩) → IsIso ψ) :\n    ∀ (s t : ℤ)\n      (ψ : colimit ((R ⋙ E) ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u + 1}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 1 ⋙\n        HomologicalComplex.eval _ _ ⟨s, t⟩) ⟶ (E'.page 1).X ⟨s, t⟩),\n      (∀ j, colimit.ι _ j ≫ ψ = ((v (R.obj j)).hom 1 (by omega)).f ⟨s, t⟩) → IsIso ψ",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135324-L-1695902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135324-L-1695902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

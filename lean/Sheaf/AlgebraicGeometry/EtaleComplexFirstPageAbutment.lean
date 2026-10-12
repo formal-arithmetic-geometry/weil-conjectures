@@ -9,12 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
+import Sheaf.AlgebraicGeometry.EtaleComplexAbutmentPresentations
+import Sheaf.AlgebraicGeometry.EtaleComplexFirstPageContinuity
 
 /-! # First-page comparison and abutment quotient models
 
@@ -172,6 +168,28 @@ theorem exists_etale_complex_first_page_and_abutment
             ∃ hy : B.ι.app (op (k j)) (y : H.obj (op (k j))) ∈ S n,
               q ⟨B.ι.app (op (k j)) (y : H.obj (op (k j))), hy⟩ =
                 ((v j).hom r hr).f ⟨p - a - n, a + n⟩ (t j y) := by
-  sorry
+  classical
+  obtain ⟨J, hJ, hd, hn, R, hR, E0, E', v0, hv0,
+    firstIso, firstIsoLimit, first_transition, first_comparison, negative, negativeLimit,
+    S, htop, hbot, hanti, hmodels⟩ :=
+    exists_etale_complex_abutment_presentations
+      D c F φ hidentity hcomposition a hbelow G eG hG p P hP H eH hH L hL B eB hB
+  let := hJ
+  let := hd
+  let := hn
+  let := hR
+  refine ⟨J, hJ, hd, hn, (fun j ↦ (R.obj j).unop), R ⋙ E0, E',
+    (fun j ↦ v0 (R.obj j)), S, ?_, ?_, htop, hbot, hanti, hmodels⟩
+  · intro i j f
+    exact hv0 (R.map f)
+  · intro s t ψ hψ
+    apply reindex_first_page_comparison R hR E0 E' v0 hv0
+    · intro s t ψ hψ
+      exact etale_complex_first_page_continuity
+        D c hc F φ hidentity hcomposition a hbelow G eG hG p P hP H eH hH L hL a
+        E0 E' v0 hv0 firstIso firstIsoLimit first_transition first_comparison
+        negative negativeLimit s t ψ hψ
+    · exact hψ
+
 
 end AlgebraicGeometry.Etale
