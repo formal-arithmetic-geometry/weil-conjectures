@@ -25,57 +25,33 @@
  ],
  "proof": [
   {
-   "text": "Because X is quasi-compact, choose finitely many affine opens covering X\\setminus U and induct on their number. The induction reduces to X=U\\cup V with V affine; restriction to the smaller overlaps preserves quasi-compactness and all hypotheses.",
+   "text": "Use the finite affine-cover stabilized construction on the recursively defined S(0)=P and S(k+1)=S(k) plus S(k)[1], with a(0)=alpha and a(k+1)=first projection followed by a(k). It gives n, R, beta, perfectness, support and an isomorphism e: R|U ≅ S(n) satisfying beta|U=e followed by a(n).",
+   "uses": [
+    "lem-sc-perfect-supported-stabilized-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove by induction on n that P is a compatible summand of S(n). At zero take the identity. At the successor compose the old inclusion with biproduct inclusion, and compose biproduct projection with the old projection. The equation inl followed by fst = identity proves the retraction equation and compatibility with a(n). This is stabilization_split in Lean, using Mathlib biprod.inl_fst_assoc.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IM (Lemma 36.13.11), proof, first paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "On the affine open V, apply the affine support-extension lemma [lem-sc-affine-perfect-support-extension] to P|_{U\\cap V} and T\\cap V. It gives a perfect Q on V supported on T\\cap V and an isomorphism Q|_{U\\cap V}\\simeq(P\\oplus P[1])|_{U\\cap V}. Compose this with projection to P|_{U\\cap V} and the given map \\alpha to obtain a map Q|_{U\\cap V}\\to E|_{U\\cap V}.",
-   "uses": [
-    "lem-sc-affine-perfect-support-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IM (Lemma 36.13.11), proof"
-   }
-  },
-  {
-   "text": "Apply the affine perfect-map lifting lemma [lem-sc-affine-perfect-map-lift] on V to replace Q by Q'=Q\\otimes^L I, still perfect and supported on T\\cap V, so that the map Q'|_{U\\cap V}\\to E|_{U\\cap V} lifts to a morphism Q'\\to E|_V.",
-   "uses": [
-    "lem-sc-affine-perfect-map-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IM (Lemma 36.13.11), proof"
-   }
-  },
-  {
-   "text": "Let a:P\\oplus P[1]\\to E|_U be \\alpha\\circ\\mathrm{pr}_P (zero on P[1]). Compose the isomorphism Q|_{U\\cap V}\\simeq(P\\oplus P[1])|_{U\\cap V} from Step 2 with the inverse of \\beta|_{U\\cap V}:Q'|_{U\\cap V}\\to Q|_{U\\cap V} to identify Q'|_{U\\cap V} with (P\\oplus P[1])|_{U\\cap V}; the map \\gamma|_V from Step 3 is compatible with a on the overlap by its defining lifting equation. Apply [lem-sc-derived-open-gluing] to these two objects, this transition isomorphism, and the maps a and \\gamma. It gives R and \\beta:R\\to E restricting (up to the gluing isomorphisms) to a and \\gamma. Perfectness and support on T are local on U\\cup V, so R is perfect and supported on T because P\\oplus P[1] and Q' are. The inclusion P\\to P\\oplus P[1] and projection P\\oplus P[1]\\to P exhibit P as a direct summand of R|_U, and the definition of a gives the required compatibility with \\alpha and \\beta|_U.",
-   "uses": [
-    "lem-sc-derived-open-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IM (Lemma 36.13.11), proof"
-   }
+   "text": "Compose the inclusion into S(n) with e inverse and compose e with the projection from S(n). The iso inverse-hom identity proves the retraction equation. Substitution of the construction map equation followed by the same iso identity proves compatibility with alpha.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-perfect-support-extension",
-  "lem-sc-affine-perfect-map-lift",
-  "lem-sc-derived-open-gluing"
+  "lem-sc-perfect-supported-stabilized-lift"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "E3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IM (Lemma 36.13.11)"
+  "place": "Tag 09IM, proof of Lemma 36.13.11; Remark 36.13.12",
+  "note": "The original finite affine attachment route is retained in the new construction node. The categorical summand induction and iso transport are complete Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -160,5 +136,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

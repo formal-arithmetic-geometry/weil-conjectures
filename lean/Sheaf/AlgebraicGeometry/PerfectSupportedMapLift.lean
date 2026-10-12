@@ -6,9 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
-import Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension
-import Sheaf.AlgebraicGeometry.DerivedOpenGluing
+import Sheaf.AlgebraicGeometry.PerfectSupportedStabilizedLift
 
 /-! # Lifting maps from perfect complexes with support
 
@@ -28,6 +26,27 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem stabilization_split
+    {C : Type*} [Category C] [HasZeroMorphisms C] [HasBinaryBiproducts C]
+    [HasShift C ℤ] (P E : C) (α : P ⟶ E)
+    (S : ℕ → C) (e0 : S 0 ≅ P)
+    (e : ∀ k : ℕ, S (k + 1) ≅ S k ⊞ (S k)⟦(1 : ℤ)⟧)
+    (a : ∀ k : ℕ, S k ⟶ E)
+    (ha0 : a 0 = e0.hom ≫ α)
+    (ha : ∀ k : ℕ, a (k + 1) = (e k).hom ≫ biprod.fst ≫ a k)
+    (n : ℕ) : ∃ (i : P ⟶ S n) (p : S n ⟶ P),
+      i ≫ p = 𝟙 P ∧ i ≫ a n = α := by
+  induction n with
+  | zero =>
+    refine ⟨e0.inv, e0.hom, e0.inv_hom_id, ?_⟩
+    simp [ha0]
+  | succ k ih =>
+    obtain ⟨i, p, hip, hia⟩ := ih
+    refine ⟨i ≫ biprod.inl ≫ (e k).inv, (e k).hom ≫ biprod.fst ≫ p, ?_, ?_⟩
+    · simpa only [Category.assoc, Iso.inv_hom_id_assoc, biprod.inl_fst_assoc] using hip
+    · rw [ha]
+      simpa only [Category.assoc, Iso.inv_hom_id_assoc, biprod.inl_fst_assoc] using hia
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A map from a perfect complex on a quasi-compact open extends as a direct summand
@@ -91,6 +110,25 @@ theorem exists_perfect_supported_map_lift
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
             (Modules.overEquiv U)).mapDerivedCategory.map β = α :=
-  sorry
+  by
+    let F := ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+      Equivalence.functor
+          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+          (Modules.overEquiv U)).mapDerivedCategory
+    let S : ℕ → schemeDerivedCategory.{u, w} U.toScheme :=
+      Nat.rec P (fun _ Q ↦ Q ⊞ Q⟦(1 : ℤ)⟧)
+    let a : ∀ n : ℕ, S n ⟶ F.obj E.obj :=
+      Nat.rec α (fun _ f ↦ biprod.fst ≫ f)
+    obtain ⟨n, R, β, hR, hRT, e, he⟩ :=
+      exists_perfect_supported_stabilized_lift X U hU T hT hTc E S
+        (fun _ ↦ Iso.refl _) hP hPT a (fun _ ↦ by simp [a, S])
+    obtain ⟨i, p, hip, hia⟩ := stabilization_split P (F.obj E.obj) α S
+      (Iso.refl _) (fun _ ↦ Iso.refl _) a (by simp [a]) (fun _ ↦ by simp [a, S]) n
+    refine ⟨R, β, hR, hRT, i ≫ e.inv, e.hom ≫ p, ?_, ?_⟩
+    · simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hip
+    · change (i ≫ e.inv) ≫ F.map β = α
+      rw [he]
+      simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hia
 
 end AlgebraicGeometry.Scheme

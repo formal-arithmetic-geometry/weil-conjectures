@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-perfect-supported-stabilized-lift",
+ "kind": "statement",
+ "title": "Finite stabilized construction for supported perfect maps",
+ "statement": "Let X be a quasi-compact quasi-separated scheme [def-pc-scheme], U a quasi-compact open, and T a closed subset with quasi-compact complement. Let E belong to D_QCoh(O_X) [def-pc-derived-category]. Let S_n be a sequence in D(O_U), with isomorphisms h_n: S_(n+1) ≅ S_n ⊕ S_n[1]. Assume S_0 is perfect [def-pc-perfect-complex] and supported on T intersect U. Let a_n: S_n → E|U satisfy a_(n+1) = a_n composed with the first projection composed with h_n. Then there exist n, a perfect R on X supported on T, beta: R → E, and e: R|U ≅ S_n such that beta|U = a_n composed with e. No retraction is part of this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IM, proof of Lemma 36.13.11; Remark 36.13.12"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many affine opens whose union with U is X. Attach them successively, maintaining a global-on-the-current-union perfect supported source and a map to the restricted E. Initially these are S(0) and a(0). The intersections and the complements of T in the affines are quasi-compact by quasi-separatedness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At one attachment V, apply affine supported extension to the current source on the overlap. Its extension Q is supported on T intersect V and restricts to the overlap source plus its shift. Compose the overlap isomorphism, the first projection, and the current map to E.",
+   "uses": [
+    "lem-sc-affine-perfect-support-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use affine perfect map lifting on V to replace Q by a perfect tensor augmentation, invertible on the overlap, retaining support on T intersect V and lifting this map to E restricted to V.",
+   "uses": [
+    "lem-sc-affine-perfect-map-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Glue this map on V with the first-projection map on the old union using derived open gluing. The affine lifting equation gives compatibility. Perfectness and support of the glued source are local; canonical iterated restriction comparisons identify its restriction on U with S(k+1), and ha identifies the restricted map with a(k+1). Repeat over the finite cover. The resulting n, R, beta and isomorphism satisfy the construction equation; no summand maps are asserted or used.",
+   "uses": [
+    "lem-sc-derived-open-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-sc-derived-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IM, proof of Lemma 36.13.11; Remark 36.13.12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a perfect complex on a quasi compact open extends after finitely many direct sums with its shift",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend morphism from perfect complex on quasi compact open with closed support",
+   "results": "Eight scheme section-localization results, none about derived perfect complexes. No matching stabilized construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*support.*lift|supported.*extension; iterated.*shift|stabiliz.*lift|finite.*stabiliz",
+   "results": "No Mathlib matching declaration. The existing Sheaf declarations are the affine inputs and the parent summand theorem. Blueprint search stabiliz and node search found no finite stabilized map construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSupportedMapLift",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 09IM affine-cover construction, before the direct-summand calculation",
+   "via": [
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectSupportedStabilizedLift",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfect_supported_stabilized_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectSupportedStabilizedLift.lean",
+  "statement": "theorem exists_perfect_supported_stabilized_lift (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens) (hU : IsCompact (U : Set X)) (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (E : schemeDerivedQCohCategory X) (S : ℕ → schemeDerivedCategory U.toScheme) (hS : ∀ n : ℕ, S (n + 1) ≅ S n ⊞ (S n)⟦(1 : ℤ)⟧) (hP : IsPerfect U.toScheme (S 0)) (hPT : ∀ (n : ℤ) (x : U.toScheme), x.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj (S 0)).val.presheaf x))) (a : ∀ n : ℕ, S n ⟶ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj E.obj) (ha : ∀ n : ℕ, a (n + 1) = (hS n).hom ≫ biprod.fst ≫ a n) : ∃ (n : ℕ) (R : schemeDerivedCategory X) (β : R ⟶ E.obj), IsPerfect X R ∧ (∀ (i : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R).val.presheaf x))) ∧ ∃ e : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj R ≅ S n, ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.map β = e.hom ≫ a n",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

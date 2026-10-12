@@ -8072,3 +8072,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/E2/Sheaf.RingTheory.GenericFormalFiberNoetherian (stage 3; reviewer PASS; first push; landing 20261012T144104-L-2092365 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/E3/Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion (stage 3; reviewer PASS; first push; landing 20261012T144104-L-2092464 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/E3/Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv (stage 3; reviewer PASS; first push; landing 20261012T144104-L-2092562 (interface); batch 20261012T144049; modules 4; new nodes 3)
+- 14:41 L: merged deliver/E3/Sheaf.AlgebraicGeometry.PerfectSupportedMapLift (stage 3; reviewer PASS; first push; landing 20261012T144104-L-2092666 (interface); batch 20261012T144049; modules 2; new nodes 1)
