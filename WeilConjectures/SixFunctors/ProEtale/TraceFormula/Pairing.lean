@@ -350,7 +350,7 @@ on `Z = Y × X` (`GeometricOperations.supportedClass`), and
 `GeometricOperations.pairingOfSquare` contracts them, through the projection formula,
 `!`-base change, the two Verdier evaluations and `ω_Y ⊠ ω_X ⟶ ω_Z`, to a Borel-Moore
 section `⟨u, v⟩_LV : A_E ⟶ ω_E` on the intersection `E = E(C, D)`
-(blueprint: `sk-d-pairing`). -/
+(blueprint: `def-trf-supported-pairing`, subsection `sk-d-pairing`). -/
 noncomputable def supportedPairing (c : Correspondence aX aY K L)
     (d : Correspondence aY aX L K) [IsGeometric c.str] [IsGeometric d.str] (hK : G.ctf X K)
     (hL : G.ctf Y L) [HasCompactification c.toProd] [HasCompactification d.toProdSwap]
@@ -433,7 +433,8 @@ theorem integral_traceClass_eq_trace [s.IsSpecOfField]
 disjoint union `E = ∐_{β ∈ B} β` of clopen subschemes and `E` is geometric and proper over
 `s`, then the integral of the section is the sum of its local terms, `∫_E α = ∑_β LT_β(α)`.
 In particular this applies to the Lefschetz-Verdier pairing `α = ⟨u, v⟩_LV`; the empty support
-gives the empty sum `0` (blueprint: `sk-p-local`). -/
+gives the empty sum `0` (blueprint: `lem-trf-integration-component-sum`, with the local terms
+in the idempotent form `∫_E e_β · α` of `localTerm`; subsection `sk-p-local`). -/
 theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [IsGeometric aE]
     [HasCompactification aE] [IsProper aE] {ι : Type u} [Fintype ι] {B : ι → Scheme.{u}}
     (j : ∀ i, B i ⟶ E)

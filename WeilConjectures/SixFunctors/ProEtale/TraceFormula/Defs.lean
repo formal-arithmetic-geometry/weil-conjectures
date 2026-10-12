@@ -815,7 +815,8 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
           ((rightDerivedLowerShriek A f).obj K.obj) ≫
         ((lowerShriekComp f g hf hg hfg).hom.app K).hom⟦n⟧'
   /-- `!`-base change along a Cartesian square of geometric schemes: `Lg^* Rf_! ≃ Rf'_! Lg'^*`
-  on `Dᵇctf`, for
+  on `Dᵇctf` (for open immersions `f`, `f'` this is the exchange isomorphism
+  `b_g : Lg^* j_! ≃ j'_! Lg_U^*` of blueprint `lem-trf-open-square-exchange`), for
 
   ```
      X' ──g'──→ X

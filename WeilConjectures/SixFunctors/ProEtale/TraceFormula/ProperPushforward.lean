@@ -237,7 +237,7 @@ composite
 `b₂^* Rf_* K ⟶ Rg_* g^* b₂^* Rf_* K ≃ Rg_* c₂^* f^* Rf_* K ⟶ Rg_* c₂^* K`
 
 of the unit of `g^* ⊣ Rg_*`, the leg relation and the counit of `f^* ⊣ Rf_*`
-(part of blueprint `sk-d-proper-pushforward`). -/
+(blueprint `def-trf-coefficient-pushforward` (1), subsection `sk-d-proper-pushforward`). -/
 noncomputable def pushforwardCoeffUnit :
     ((upperStar A P.snd).leftDerivedFunctor).obj
         (((lowerStar A P.f).rightDerivedFunctor).obj K) ⟶
@@ -258,7 +258,7 @@ variable [IsGeometric aX] [IsGeometric P.tgtStr] [IsGeometric c.str] [IsGeometri
 `Rb_{1!} Rg_* c₁^! K ≃ Rf_! Rc_{1!} c₁^! K ⟶ Rf_! K ≃ Rf_* K`,
 
 properness identifying `Rg_* = Rg_!` and `Rf_* = Rf_!`
-(part of blueprint `sk-d-proper-pushforward`). -/
+(blueprint `def-trf-coefficient-pushforward` (2), subsection `sk-d-proper-pushforward`). -/
 noncomputable def pushforwardCoeffCounit (G : GeometricOperations A s) (hK : G.ctf X K) :
     ((lowerStar A P.g).rightDerivedFunctor).obj ((rightDerivedUpperShriek A c.fst).obj K) ⟶
       (rightDerivedUpperShriek A P.fst).obj
@@ -280,7 +280,8 @@ noncomputable def pushforwardCoeffCounit (G : GeometricOperations A s) (hK : G.c
 
 /-- The coefficient map `[f, g]_! u = δ ∘ Rg_* u ∘ γ : b₂^* K' ⟶ b₁^! K'` of the pushed
 correspondence, where `K' = Rf_* K`, `γ` is `pushforwardCoeffUnit` and `δ` is
-`pushforwardCoeffCounit` (part of blueprint `sk-d-proper-pushforward`). -/
+`pushforwardCoeffCounit` (blueprint `def-trf-coefficient-pushforward` (3), subsection
+`sk-d-proper-pushforward`). -/
 noncomputable def pushforwardCoeff (G : GeometricOperations A s) (hK : G.ctf X K) :
     ((upperStar A P.snd).leftDerivedFunctor).obj
         (((lowerStar A P.f).rightDerivedFunctor).obj K) ⟶

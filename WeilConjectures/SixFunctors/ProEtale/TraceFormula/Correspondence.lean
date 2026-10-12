@@ -884,7 +884,7 @@ of geometric schemes over `s`: the composite
 ```
 of the unit of `h^* ⊣ Rh_*`, the proper identification `Rh_* = Rh_!`, the dualizing
 composition `h^! ω_{T'} ≃ ω_T` and the counit of `Rh_! ⊣ h^!`
-(blueprint: `sk-d-integral`). -/
+(blueprint: `def-trf-borel-moore-pushforward`, subsection `sk-d-integral`). -/
 noncomputable def borelMoorePushforward {T T' : Scheme.{u}} (h : T ⟶ T') (a : T' ⟶ s)
     [IsGeometric a] [IsGeometric (h ≫ a)] [HasCompactification h] [IsProper h]
     (α : G.borelMooreSections (h ≫ a)) :
