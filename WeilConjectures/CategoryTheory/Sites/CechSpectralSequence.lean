@@ -35,9 +35,10 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C]
   [HasSheafify J AddCommGrpCat.{v}]
 
-/-- **The Čech-to-derived spectral sequence, with enough injectives.** The special case of
-`Sheaf.exists_cechToDerivedSpectralSequence` where abelian sheaves on `C` have enough injectives,
-the covering is indexed by `ι : Type v` and cohomology is computed in `AddCommGrpCat.{v}`.
+/-- **The Čech-to-derived spectral sequence, with enough injectives.** The variant of
+`Sheaf.exists_cechToDerivedSpectralSequence` where, instead of the site being essentially small,
+abelian sheaves on `C` are assumed to have enough injectives, the covering is indexed by
+`ι : Type v` and cohomology is computed in `AddCommGrpCat.{v}`.
 
 It is the first spectral sequence of the double complex `Sheaf.exists_cechDoubleComplex`.
 

@@ -1070,6 +1070,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.EquivalenceGroupAddGroup
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Injective
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -1117,6 +1118,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
@@ -1157,6 +1159,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Transport
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
 public import WeilConjectures.Mathlib.Algebra.Lie.Engel

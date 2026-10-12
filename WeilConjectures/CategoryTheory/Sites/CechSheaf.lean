@@ -29,14 +29,14 @@ the augmented Čech complex of an injective abelian sheaf is exact.
 
 @[expose] public section
 
-universe v u
+universe w v u
 
 open CategoryTheory Limits Opposite
 
 namespace CategoryTheory.Presheaf
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {X : C}
-  [HasFiniteProducts (Over X)] {ι : Type v} (V : ι → Over X) (P : Cᵒᵖ ⥤ AddCommGrpCat.{v})
+  [HasFiniteProducts (Over X)] {ι : Type w} (V : ι → Over X) (P : Cᵒᵖ ⥤ AddCommGrpCat.{max v w})
 
 /-- Components of Čech cochains attached to equal tuples agree after restriction along morphisms
 with matching projections. -/
