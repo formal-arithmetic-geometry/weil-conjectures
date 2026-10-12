@@ -124,6 +124,8 @@ end CategoryTheory
 
 namespace CategoryTheory
 
+open Limits
+
 /-- **Presheaf pullback of presheaves of sets.** For a functor `b : C ⥤ D` between small
 categories, the left Kan extension `b.op.lan` along `bᵒᵖ` (the presheaf pullback
 `b_p F (Y) = colim_{(X, Y ⟶ b X)} F X`) is left adjoint to precomposition with `bᵒᵖ`; if moreover

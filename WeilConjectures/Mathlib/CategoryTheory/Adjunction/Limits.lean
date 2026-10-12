@@ -81,7 +81,8 @@ theorem nonempty_isLimit_mapCone (adj : F ⊣ G) {J : Type u₃} [Category.{v₃
     Nonempty (IsLimit (G.mapCone c)) ∧
       (∀ {T : D}, IsTerminal T → Nonempty (IsTerminal (G.obj T))) ∧
       ∀ [HasBinaryProducts C] [HasBinaryProducts D] (Y Y' : D), IsIso (prodComparison G Y Y') := by
-  have := adj.rightAdjoint_preservesLimits
+  have := adj.rightAdjoint_preservesLimits.{v₃, u₃}
+  have : PreservesLimitsOfSize.{0, 0} G := adj.rightAdjoint_preservesLimits
   refine ⟨⟨isLimitOfPreserves G hc⟩, fun hT ↦ ⟨IsTerminal.isTerminalObj G _ hT⟩, ?_⟩
   intros
   infer_instance

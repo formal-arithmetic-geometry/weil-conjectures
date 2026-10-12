@@ -106,13 +106,16 @@ theorem toSheaf_exact_and_preservesLimitsColimits :
       ∀ {K : Type v} [SmallCategory K] (F : K ⥤ SheafOfModules.{v} R),
         Nonempty (colimit F ≅
           (PresheafOfModules.sheafification (𝟙 R.obj)).obj (colimit (F ⋙ forget R))) := by
+  have : PreservesLimitsOfSize.{v, v} (toSheaf.{v} R ⋙ sheafToPresheaf J AddCommGrpCat.{v}) :=
+    inferInstanceAs (PreservesLimitsOfSize (forget.{v} R ⋙ PresheafOfModules.toPresheaf R.obj))
   refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, ⟨fun {K} _ ↦ inferInstance⟩, fun {K} _ F ↦ ?_⟩
+    preservesLimits_of_reflects_of_preserves _ (sheafToPresheaf J AddCommGrpCat.{v}),
+    ⟨fun {K} _ ↦ inferInstance⟩, fun {K} _ F ↦ ?_⟩
   let L := PresheafOfModules.sheafification.{v} (𝟙 R.obj)
   let adj := PresheafOfModules.sheafificationAdjunction.{v} (𝟙 R.obj)
   have : PreservesColimitsOfSize.{v, v} L := adj.leftAdjoint_preservesColimits
   let e : F ≅ (F ⋙ forget R) ⋙ L :=
     (F.rightUnitor.symm ≪≫ Functor.isoWhiskerLeft F (asIso adj.counit).symm)
-  exact ⟨HasColimit.isoOfNatIso e ≪≫ preservesColimitIso L (F ⋙ forget R)⟩
+  exact ⟨HasColimit.isoOfNatIso e ≪≫ (preservesColimitIso L (F ⋙ forget R)).symm⟩
 
 end SheafOfModules
