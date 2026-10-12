@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "*The decomposition $U\\times_SX=W\\sqcup V$ with $V\\to U$ finite.* Put $V=V_1\\cup\\dots\\cup V_n$, an open subscheme of $X_U$. Since $W,V_1,\\dots,V_n$ are pairwise disjoint and cover $X_U$, $W$ and $V$ are disjoint opens with $W\\cup V=X_U$, so each is the complement of the other and both are open and closed: $X_U=W\\amalg V$. The open subscheme $V$ is the union of the pairwise disjoint opens $V_i$, so it is the coproduct $V_1\\amalg\\dots\\amalg V_n$ of schemes (a morphism out of $V$ is the same as a family of morphisms out of the $V_i$, since morphisms of schemes glue along an open cover and the $V_i$ do not meet), and $q|_V:V\\to U$ is the morphism induced by the finite morphisms $q|_{V_i}$. By [lem-weil-pbc-finite-coproduct] (a coproduct of two finite morphisms to $U$ is finite), applied $n-1$ times by induction on $n$ to $(V_1\\amalg\\dots\\amalg V_{k})\\amalg V_{k+1}$, $q|_V$ is finite when $n\\ge1$. If $n=0$ then $V=\\emptyset$, and $\\emptyset\\to U$ is finite [def-weil-finite-integral-morphism]: it is affine, the preimage of every affine open $\\operatorname{Spec}R$ being $\\emptyset=\\operatorname{Spec}0$, and $0$ is a finite $R$-module.",
+   "text": "Take V to be the supremum of the finite family of opens V_i. The disjointness and cover clauses give IsCompl W V by disjoint_iSup_iff and codisjoint_iff. For two disjoint opens, Mathlib nonempty_isColimit_binaryCofanMk_of_isCompl identifies their union with their scheme coproduct; finiteness of the induced morphism follows from lem-weil-pbc-finite-coproduct and cancellation of the coproduct isomorphism. Induct over Fin n. In the zero case the empty open has empty underlying space, its morphism is a closed immersion by Mathlib, and hence finite by def-weil-finite-integral-morphism.",
    "uses": [
     "lem-weil-pbc-finite-coproduct",
     "def-weil-finite-integral-morphism"
@@ -83,10 +83,10 @@
    }
   },
   {
-   "text": "*$W_u$ as an open of $(X_U)_u$; its points.* The fibre $W_u=W\\times_U\\operatorname{Spec}\\kappa(u)$ of $q|_W$ at $u$ is, by pasting cartesian squares [def-pc-fibre-product], $W\\times_{X_U}(X_U)_u$, and since $W\\subseteq X_U$ is an open subscheme, by [lem-weil-pbc-open-preimage-fibre-product] it is the open subscheme $\\iota'^{-1}(W)$ of $(X_U)_u$, with the restriction of $\\iota'$ as its projection to $W$. Key claim: for every $w\\in W_u$, the point $h(w)\\in X_s$ is not isolated in $X_s$. Indeed $\\iota'(w)\\in W$ and $q(\\iota'(w))=u$, so by step 2 (iv) $p(\\iota'(w))\\notin\\{x_1,\\dots,x_n\\}$; as $p(\\iota'(w))=\\iota(h(w))$ (step 4), step 1 shows $h(w)$ is not isolated in $X_s$.",
+   "text": "Construct the map from W_u to (X_U)_u using pullback.lift. Cancelling the right fibre pullback square with IsPullback.of_right shows that this map is the base change of the open immersion W.ι, hence an open immersion. Compose with the isomorphism (X_U)_u to X_s from step 4. The resulting open immersion j satisfies j ≫ f.fiberι s = (W.ι ≫ q).fiberι u ≫ W.ι ≫ p. If j(w) were isolated, the enumeration in step 1 would contain it; this equality and the avoidance clause from step 2 contradict one another. Thus no image j(w) is isolated.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-weil-pbc-open-preimage-fibre-product"
+    "lem-weil-pbc-fibre-of-base-change"
    ],
    "elementary": false,
    "source": {
@@ -104,14 +104,11 @@
    }
   },
   {
-   "text": "*If $f^{-1}(s)$ is finite, every point of $X_s$ is isolated.* Assume $f^{-1}(\\{s\\})$ is a finite set. Then $X_s$ is finite, as $\\iota$ is a bijection onto $f^{-1}(s)$ [def-pc-scheme-fibre]. The projection $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of $f$, hence locally of finite type [lem-weil-pbc-lft-base-change]. Let $\\xi\\in X_s$. By the definition of locally of finite type [def-weil-finite-type-morphism] applied to the affine $\\operatorname{Spec}\\kappa(s)$ there is an affine open $\\xi\\in Y=\\operatorname{Spec}B\\subseteq X_s$ [def-weil-affine-spectrum] with $B$ a finitely generated $\\kappa(s)$-algebra [def-weil-pbc-finite-type-algebra]; $Y$ is a finite set. Let $\\mathfrak p\\subset B$ be a prime. By [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal], $\\mathfrak p$ is the intersection of the maximal ideals containing it; there are finitely many, $\\mathfrak m_1,\\dots,\\mathfrak m_r$, and $r\\ge1$ (else the intersection is $B\\ne\\mathfrak p$). Then $\\mathfrak m_1\\cdots\\mathfrak m_r\\subseteq\\mathfrak m_1\\cap\\dots\\cap\\mathfrak m_r=\\mathfrak p$, so the prime $\\mathfrak p$ contains some $\\mathfrak m_j$, and $\\mathfrak p=\\mathfrak m_j$ is maximal. So every point of $Y$ is closed in $Y$ ($V(\\mathfrak m)=\\{\\mathfrak m\\}$), and $Y\\setminus\\{\\xi\\}$, a finite union of closed points, is closed in $Y$; thus $\\{\\xi\\}$ is open in $Y$, hence in $X_s$. (This is the argument of Stacks Morphisms, Lemma 02NG: $X_s$ is a finite Jacobson space, hence discrete.)",
+   "text": "If f^{-1}({s}) is finite, use f.fiberHomeo s to transport its finite type instance to X_s. Mathlib Fiber already supplies JacobsonSpace X_s for locally finite type f; this instance uses lem-weil-pbc-lft-base-change and def-weil-finite-type-morphism. Mathlib Topology.JacobsonSpace supplies DiscreteTopology for every finite Jacobson space. Thus every singleton of X_s is open. No separate affine-chart algebra or prime-intersection proof is required.",
    "uses": [
     "def-pc-scheme-fibre",
     "lem-weil-pbc-lft-base-change",
-    "def-weil-finite-type-morphism",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+    "def-weil-finite-type-morphism"
    ],
    "elementary": false,
    "source": {
@@ -139,16 +136,13 @@
   "lem-weil-pbc-fibre-of-base-change",
   "def-pc-fibre-product",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-open-preimage-fibre-product",
   "lem-weil-pbc-lft-base-change",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+  "def-weil-finite-type-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma Tag 02LP (lemma-etale-splits-off-quasi-finite-part), proof at lines 12190-12194, from Lemma 02LN (lines 12093-12131); the 'in particular' via Morphisms, Lemma 02NG (morphisms.tex lines 3729-3749); the details of the one-line proof (fibre identification, W_u open in the fibre, finiteness of V) written out by the agent"
+  "place": "Tag 02LP proof, using Tag 02LN; final clause by Tag 02NG, implemented with Mathlib Fiber JacobsonSpace and Topology.JacobsonSpace finite discreteness. Coproduct and fibre comparison glue written by R3."
  },
  "mathlib_searches": [
   {
@@ -245,5 +239,15 @@
   "group": "J1",
   "result": "pass",
   "note": "X S : Scheme.{v}, f LocallyOfFiniteType+IsSeparated, s; finitely many isolated points = Set.Finite {x : f.fiber s | IsOpen {x}}; ∃ U φ u Etale φ, φ u = s, IsIso residueFieldMap (elementary); W V : (pullback φ f).Opens IsCompl (U×_S X = W ⊔ V clopen); IsFinite (V.ι ≫ fst); W_u = (W.ι ≫ fst).fiber u no open singletons; f⁻¹'{s} finite → IsEmpty W_u; #check coercions φ u, f ⁻¹' via base; no H1 02LN dependency, no new definitions"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T085331-L-36295",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
