@@ -361,6 +361,7 @@ public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximationFamily
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineRestriction
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
+public import WeilConjectures.AlgebraicGeometry.Picard.AlgebraPicardFunctor
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
