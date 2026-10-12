@@ -69,6 +69,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChang
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
@@ -97,6 +98,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericModel
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
@@ -324,6 +326,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.FiniteMorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
@@ -339,7 +342,9 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SpreadFinite
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
@@ -676,6 +681,7 @@ public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
+public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
 public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -1521,6 +1527,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
