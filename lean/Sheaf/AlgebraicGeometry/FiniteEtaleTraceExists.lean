@@ -8,8 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExistsExistence
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExistsUniqueness
 
 /-!
 # Existence and uniqueness of the finite étale trace
@@ -112,6 +112,9 @@ theorem existsUnique_finiteEtaleTrace :
             (pullback.lift (𝟙 W.left) (W.hom ≫ t j ≫ i j)
               (by simp [Category.assoc, hinv₁]))
             (by simp [B, Category.assoc, hinv₁])).op) := by
-  sorry
+  have he := finiteEtaleTrace_exists
+  have hu := finiteEtaleTrace_unique
+  rcases he with ⟨tr, htr⟩
+  exact ⟨tr, htr, fun tr' h' => (hu tr tr' htr h').symm⟩
 
 end AlgebraicGeometry.Etale
