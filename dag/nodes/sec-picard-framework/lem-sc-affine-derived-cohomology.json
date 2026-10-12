@@ -25,11 +25,13 @@
  ],
  "proof": [
   {
-   "text": "Since $f$ is affine, the affine higher-direct-image statement [lem-pc-affine-morphism-hi] gives $R^pf_*\\mathcal F=0$ for all $p>0$ and every quasi-coherent $\\mathcal O_X$-module $\\mathcal F$. This is exactly the hypothesis of the cohomology comparison for derived direct images with quasi-coherently acyclic pushforward [lem-sc-qcoh-acyclic-derived-pushforward-cohomology], which applies to every (possibly unbounded) $E\\in D_{\\mathrm{QCoh}}(X)$ and gives a natural isomorphism $H^i(Rf_*E)\\cong f_*H^i(E)$ for every integer $i$, where $Rf_*$ and its cohomology sheaves are those of [def-pc-derived-direct-image]. (A representative of $E$ need not have quasi-coherent terms, and for unbounded $E$ termwise pushforward does not compute $Rf_*E$; this is why the comparison is a cited statement, Stacks Tag 08D4 applied to $\\Gamma(f^{-1}V,-)$ for affine opens $V\\subseteq Y$, the 'small detail omitted' of Tag 0AVW.)",
+   "text": "For each positive integer p, write p as the natural-number degree n. The scheme module category is Grothendieck abelian (Scheme.Modules.isGrothendieckAbelian); [lem-sp-grothendieck-enough-injectives] supplies enough injectives and hence injective resolutions. The single-object cohomology comparison homologyRightDerivedFunctorObjSingleFunctorIso, a corollary of bounded-below/unbounded compatibility [src-right-derived-functor-plus-compatibility], identifies H^n(Rf_*(F[0])) with the classical higherDirectImage f n applied to F. The ringed-space moduleDirectImage and scheme pushforward are definitionally equal. Transport affine higher-direct-image vanishing [lem-pc-affine-morphism-hi] through this isomorphism to obtain the hacyc hypothesis of [lem-sc-qcoh-acyclic-derived-pushforward-cohomology], using the derived direct image of [def-pc-derived-direct-image]. Apply that comparison theorem, which handles possibly unbounded complexes via Stacks Tag 08D4, and evaluate its natural isomorphism at the full-subcategory object (E,hE). This gives H^i(Rf_*E) isomorphic to f_*H^i(E) for every integer i.",
    "uses": [
     "lem-pc-affine-morphism-hi",
     "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
-    "def-pc-derived-direct-image"
+    "def-pc-derived-direct-image",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-sp-grothendieck-enough-injectives"
    ],
    "elementary": false,
    "source": {
@@ -50,14 +52,16 @@
   }
  ],
  "proof_deps": [
-  "def-pc-derived-direct-image",
   "lem-pc-affine-morphism-hi",
-  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "def-pc-derived-direct-image",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sp-grothendieck-enough-injectives"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, proof"
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean",
+  "place": "Tag 0AVW, proof; homologyRightDerivedFunctorObjSingleFunctorIso. Original two-step route implemented in Lean by A3, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -151,5 +155,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070525-L-3464841",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

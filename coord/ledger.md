@@ -6563,3 +6563,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/A2/Sheaf.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization (stage 3; reviewer PASS; after a return; landing 20261012T070524-L-3464338 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleInverseImageModuleConstruction (stage 3; reviewer PASS; first push; landing 20261012T070524-L-3464509 (interface); batch 20261012T070523; modules 3; new nodes 2)
 - 07:05 L: merged deliver/A2/Sheaf.Topology.ConstructibleInConstructible (stage 3; reviewer PASS; first push; landing 20261012T070525-L-3464674 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/A3/Sheaf.AlgebraicGeometry.AffineDerivedCohomology (stage 3; reviewer PASS; first push; landing 20261012T070525-L-3464841 (proof); batch 20261012T070523; modules 1; new nodes 0)
