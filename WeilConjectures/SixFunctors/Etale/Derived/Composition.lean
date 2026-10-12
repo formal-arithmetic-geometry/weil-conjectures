@@ -191,6 +191,7 @@ lemma map_rightDerivedUpperShriekCompIso_inv_app_counit (f : X ⟶ Y) (g : Y ⟶
   rw [rightDerivedUpperShriekCompIso, Iso.symm_inv, conjugateIsoEquiv_apply_hom]
   exact conjugateEquiv_counit _ _ _ L
 
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
 
 **The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S` and
