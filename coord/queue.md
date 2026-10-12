@@ -1,6 +1,6 @@
 # Work queue
 
-43 items; claim with `tools/claim.py next <group> [--stage N]`.
+44 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,13 +24,14 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (33)
+## Stage 3: modules to prove (34)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.SepClosedComparison` | 1 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial` | 1 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
