@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Properness over Spec A makes X and all its closed subschemes Noetherian. Proper full faithfulness identifies failure of equivalence with failure of essential surjectivity. The kernel ideal of Spec(A/I) equals the ideal associated to I: on global sections use the naturality of the Gamma-Spec isomorphism and ker(A -> A/I)=I.",
+   "text": "Properness makes X Noetherian. Identify the kernel ideal of Spec(A/I) with the ideal sheaf of I: compose the map on global sections with the Gamma-Spec isomorphism, apply naturality, ker(A -> A/I)=I, and ideal map/comap along a ring equivalence. Proper full faithfulness and the definition of equivalence imply that failure of equivalence supplies a coherent formal object outside the essential image.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-formal-completion-fully-faithful-proper"
@@ -28,36 +28,39 @@
    "elementary": false
   },
   {
-   "text": "Let Xi be the ideals whose closed quotient has essentially surjective completion. The zero quotient is X, so the set of ideals not in Xi is nonempty. Noetherian ACC chooses a maximal failing ideal L. Its closed quotient Z is proper over A. Identify the zero quotient and alternative models by equal defining ideals, and extended ideals by ideal comap composition.",
+   "text": "Let S be the set of kernels of closed immersions j:Z -> X with proper composite j followed by f and failing completion on Z. The identity immersion gives a member of S. Apply the ideal-sheaf maximal-element clause of Noetherian ACC, using the coherent first term of the failing formal object as its ambient coherent module argument. Obtain a maximal kernel L and an immersion j realizing it; the proper composite supplies Noetherianity on Z.",
    "uses": [
     "lem-weil-pbc-noetherian-acc-quasi-coherent",
-    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
-    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-module-pullback-ideal-quotient"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false
   },
   {
-   "text": "The quotient Z is nonempty, since the empty scheme has only zero modules and zero formal systems, and the zero module algebraizes the zero system. Failure of essential surjectivity supplies M. A nonzero ideal K on Z lifts by inverse image along O_X -> j_*O_Z to an ideal strictly containing L. Its quotient agrees with V(K) over Z. Maximality yields essential surjectivity on it; proper full faithfulness gives equivalence. This correspondence and compatibility of completion use the closed-immersion coherent and formal equivalences.",
+   "text": "If Z were empty, its unique map into projective space of dimension zero would be a closed immersion. Uniqueness of maps from an empty scheme identifies its composite structural map with j followed by f. The projective existence theorem gives an equivalence for precisely the kernel completion ideal, contradicting failure. Apply proper full faithfulness again to obtain M outside the essential image.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonzero K on Z, compose its canonical closed immersion with j. The composite kernel contains j.ker. If the kernels were equal, the equal-ideal closed-immersion isomorphism theorem would make K.subschemeι an isomorphism, whose kernel is zero; ker_subschemeι=K contradicts nonzero K. Hence the composite kernel strictly exceeds L. Failure of completion on this quotient would put that larger kernel in S, contradicting maximality. The comap composition formula gives the stated completion ideal. Proof irrelevance identifies all Noetherian witnesses.",
+   "uses": [
     "lem-weil-pbc-closed-immersion-comp",
     "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
-    "lem-weil-pbc-formal-completion-fully-faithful-proper"
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
   "lem-weil-pbc-closed-immersion-comp",
-  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
   "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-formal-completion-fully-faithful-proper",
-  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lem-weil-pbc-grothendieck-existence-projective",
   "lem-weil-pbc-noetherian-acc-quasi-coherent",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme"
@@ -65,7 +68,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/088C",
-  "place": "Proposition 30.25.4 (088C), first two paragraphs of the proof; maximal failing ideal and replacement by its closed subscheme"
+  "place": "First two paragraphs: maximal failing ideal reduction; realized by kernels of failing closed immersions, using 0883 for full faithfulness and 0885 for the empty case."
  },
  "mathlib_searches": [
   {
@@ -138,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-ad4ec",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T184357-L-4024740",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T202233-L-702187",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the delivered Lean proof and unchanged signature with the node, updated proof dependencies, Stacks 088C, clean compilation, and axiom audit."
  }
 }
