@@ -1,6 +1,6 @@
 # Work queue
 
-57 items; claim with `tools/claim.py next <group> [--stage N]`.
+56 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (47)
+## Stage 3: modules to prove (46)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -49,7 +49,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks` | 3 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
@@ -57,12 +56,13 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
+| `Sheaf.Paper.InverseImageStalkGerm` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder` | 5 | 1 | proof |
@@ -74,7 +74,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
-| `Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf` | 8 | 6 | proof |
 
 Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
