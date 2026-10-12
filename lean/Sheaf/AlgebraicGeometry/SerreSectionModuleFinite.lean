@@ -10,16 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
-import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
-import Sheaf.Paper.PQFCohomology
-import Sheaf.RingTheory.GradedSubmoduleFinite
-import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
-import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+
+import Sheaf.AlgebraicGeometry.SerreSectionModuleConstruction
+import Sheaf.AlgebraicGeometry.SerreSectionModuleTailFinite
+import Sheaf.AlgebraicGeometry.SerreSectionModuleComponentFinite
+import Mathlib.RingTheory.Finiteness.Basic
+import Mathlib.Algebra.DirectSum.Decomposition
 
 /-!
 # Finite generation of the graded section module
@@ -79,6 +75,45 @@ theorem serreSectionModuleFinite (k : Type u) [Field k]
         (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)),
         φ (z + e) hze ⟨a • (y : M), hay⟩ =
           Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y) := by
-  sorry
+  classical
+  obtain ⟨M, 𝓜, h𝓜, hsmul, hneg, φ, hφ⟩ := serreSectionModuleConstruction k G
+  obtain ⟨N, htail⟩ := serreSectionModuleTailFinite k G hG M 𝓜 hsmul φ hφ
+  have hpiece := serreSectionModuleComponentFinite k G hG M 𝓜 hsmul φ hφ
+  let T := Submodule.span (MvPolynomial (Fin 2) k)
+    {y : M | ∃ z : ℤ, (N : ℤ) ≤ z ∧ y ∈ 𝓜 z}
+  let L := ⨆ i : Fin N,
+    Submodule.span (MvPolynomial (Fin 2) k) (𝓜 (i : ℤ) : Set M)
+  have hL : L.FG := Submodule.fg_iSup _ (fun i ↦ hpiece i)
+  have htop : T ⊔ L = ⊤ := by
+    let : DirectSum.Decomposition 𝓜 := h𝓜.chooseDecomposition
+    apply Submodule.eq_top_iff'.mpr
+    refine DirectSum.Decomposition.inductionOn 𝓜
+      (motive := fun x ↦ x ∈ T ⊔ L) ?_ ?_ ?_
+    · exact Submodule.zero_mem _
+    · intro z y
+      by_cases hz : z < 0
+      · have hy : (y : M) = 0 := by
+          exact (hneg z hz).le y.property
+        rw [hy]
+        exact Submodule.zero_mem _
+      · by_cases hNz : (N : ℤ) ≤ z
+        · exact Submodule.mem_sup_left (Submodule.subset_span ⟨z, hNz, y.property⟩)
+        · have hzn : (z.toNat : ℤ) = z := Int.toNat_of_nonneg (by omega)
+          have hi : z.toNat < N := by omega
+          apply Submodule.mem_sup_right
+          apply (le_iSup (fun i : Fin N ↦
+            Submodule.span (MvPolynomial (Fin 2) k) (𝓜 (i : ℤ) : Set M))
+            ⟨z.toNat, hi⟩)
+          apply Submodule.subset_span
+          change (y : M) ∈ 𝓜 (z.toNat : ℤ)
+          rw [hzn]
+          exact y.property
+    · intro x y hx hy
+      exact Submodule.add_mem _ hx hy
+  have hfinite : Module.Finite (MvPolynomial (Fin 2) k) M := by
+    apply Module.Finite.of_fg_top
+    rw [← htop]
+    exact htail.sup hL
+  exact ⟨M, hfinite, 𝓜, h𝓜, hsmul, hneg, φ, hφ⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-p1-section-module-component-finite",
+ "kind": "statement",
+ "title": "SerreSectionModuleComponentFinite",
+ "statement": "Let k be a field, S=k[x_0,x_1], P=Proj S as in [def-sc-p1-standard], and G a coherent O_P-module [pqf-def-coherent]. Let M be an S-module with additive subgroups M_z, with S_e M_z contained in M_(e+z), and additive isomorphisms phi_z:M_z -> Gamma(P,G tensor O_P(z)) for z>=0 respecting homogeneous multiplication via twistMul of [def-weil-pbc-proj-twisting-sheaf]. For each n>=0, the S-submodule spanned by M_n is finitely generated. This is a separate statement for each degree and supplies no bound on generators of the whole M.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS (https://stacks.math.columbia.edu/tag/01YS), proof of (5); online text read because the local checkout is absent"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Each twist is invertible, so G tensor O(n) is coherent by local triviality. Transport to the standard projective line using the Proj chart isomorphism and twist comparison. Identify H^0 with global sections and apply finiteDimensional_H to obtain a finite k-basis.",
+   "uses": [
+    "lem-sc-p1-twist-exists",
+    "lem-sc-p1-proj-shifted-free-twist",
+    "pqf-def-coherent",
+    "lem-sc-p1-coherent-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar-compatibility formula with a=C(c), degree e=0, says phi_n is k-linear for restriction of scalars on M_n; on local fractions twistMul by C(c) is exactly multiplication by c. Pull back the finite basis. Its S-span contains M_n and is contained in the S-span of M_n, hence is equal to that span. Thus the span is finitely generated. The zero section space uses an empty basis, and n=0 needs no separate case.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-coherent-finite",
+  "lem-sc-p1-proj-shifted-free-twist",
+  "lem-sc-p1-twist-exists",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS (https://stacks.math.columbia.edu/tag/01YS), proof of (5); online text read because the local checkout is absent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of global sections of twists is a graded polynomial module and its individual degrees are finite dimensional",
+   "results": "Service unavailable: HTTP 500. No mathematical verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections coherent sheaf projective line finite dimensional each twist",
+   "results": "Proj local finite type and sheaf finite type declarations; no matching graded-section finiteness theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Gamma.*twist|twist.*Gamma|graded.*section' Mathlib/AlgebraicGeometry (with Γ notation)",
+   "results": "No results. Project-local search found the parent statement and the chart/comparison statements, none supplies this step. Blueprint searches for section module and finite generation graded sections found no same-statement node.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleFinite",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, first sentence: finite generation of the representing graded section module; individual lower degrees",
+   "via": [
+    "lem-sc-p1-serre-section-module-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleComponentFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleComponentFinite.lean",
+  "declaration": "AlgebraicGeometry.serreSectionModuleComponentFinite",
+  "statement": "theorem serreSectionModuleComponentFinite (k : Type u) [Field k] (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (hG : RingedSpace.IsCoherent (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).toRingedSpace G) (M : ModuleCat.{u} (MvPolynomial (Fin 2) k)) (𝓜 : ℤ → AddSubgroup M) (hsmul : ∀ (e : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M), a ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k e → y ∈ 𝓜 z → a • y ∈ 𝓜 (e + z)) (φ : ∀ z : ℤ, 0 ≤ z → (𝓜 z ≃+ Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z, ⊤))) (hφ : ∀ (z : ℤ) (hz : 0 ≤ z) (e : ℕ) (hze : 0 ≤ z + e) (a : MvPolynomial (Fin 2) k) (ha : a ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k e) (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)), φ (z + e) hze ⟨a • (y : M), hay⟩ = Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y)) : ∀ n : ℕ, (Submodule.span (MvPolynomial (Fin 2) k) (𝓜 (n : ℤ) : Set M)).FG",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

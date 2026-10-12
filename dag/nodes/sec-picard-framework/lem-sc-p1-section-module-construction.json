@@ -1,0 +1,104 @@
+{
+ "id": "lem-sc-p1-section-module-construction",
+ "kind": "statement",
+ "title": "SerreSectionModuleConstruction",
+ "statement": "Let k be a field, S=k[x_0,x_1] with its total-degree grading, and P=Proj S as in [def-sc-p1-standard]. For every O_P-module G, there is an S-module M internally graded by additive subgroups M_z (z in Z), vanishing for z<0, with additive isomorphisms M_z to Gamma(P,G tensor O_P(z)) for z>=0, intertwining multiplication by every homogeneous polynomial a in S_e with G tensor twistMul(z,a). Here O_P(z) and twistMul are the twisting sheaves and multiplication maps of [def-weil-pbc-proj-twisting-sheaf]. No coherence or finite generation is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS (https://stacks.math.columbia.edu/tag/01YS), proof of (5); online text read because the local checkout is absent"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Form the additive direct sum of Gamma(P,G tensor O_P(n)) for n>=0. Define homogeneous scalar multiplication by the global-sections map induced by G tensor twistMul(n,a), and extend to all polynomials by homogeneous decomposition. The formula for twistMul in local fractions proves additivity, identity, and product compatibility, hence the module laws. Each summand image gives M_n; put M_z=0 in negative degrees. The summand identifications give the internal grading, phi and the compatibility.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS (https://stacks.math.columbia.edu/tag/01YS), proof of (5); online text read because the local checkout is absent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The direct sum of global sections of twists is a graded polynomial module and its individual degrees are finite dimensional",
+   "results": "Service unavailable: HTTP 500. No mathematical verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct polynomial module direct sum sections of twists multiplication homogeneous polynomials",
+   "results": "MvPolynomial.gradedAlgebra and MvPolynomial.decomposition; no action on twisted sections.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Gamma.*twist|twist.*Gamma|graded.*section' Mathlib/AlgebraicGeometry (with Γ notation)",
+   "results": "No results. Project-local search found the parent statement and the chart/comparison statements, none supplies this step. Blueprint searches for section module and finite generation graded sections found no same-statement node.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleFinite",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, first sentence: construction of the graded section module",
+   "via": [
+    "lem-sc-p1-serre-section-module-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleConstruction.lean",
+  "declaration": "AlgebraicGeometry.serreSectionModuleConstruction",
+  "statement": "theorem serreSectionModuleConstruction (k : Type u) [Field k] (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) : ∃ (M : ModuleCat.{u} (MvPolynomial (Fin 2) k)), ∃ (𝓜 : ℤ → AddSubgroup M), DirectSum.IsInternal 𝓜 ∧ (∀ (e : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M), a ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k e → y ∈ 𝓜 z → a • y ∈ 𝓜 (e + z)) ∧ (∀ z : ℤ, z < 0 → 𝓜 z = ⊥) ∧ ∃ (φ : ∀ z : ℤ, 0 ≤ z → (𝓜 z ≃+ Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z, ⊤))), ∀ (z : ℤ) (hz : 0 ≤ z) (e : ℕ) (hze : 0 ≤ z + e) (a : MvPolynomial (Fin 2) k) (ha : a ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k e) (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)), φ (z + e) hze ⟨a • (y : M), hay⟩ = Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
