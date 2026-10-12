@@ -58,6 +58,7 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : Scheme.{u})
+  [HasInvertibleExponent Λ Y]
   [HasCompactification (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
     {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))]
 
@@ -96,7 +97,8 @@ noncomputable def affineLineFundamentalClass
 
 /-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
 
-**The trace of the fundamental class is invertible.** For every purity isomorphism
+**The trace of the fundamental class is invertible.** For `Y` separated and locally
+of finite type over a field and every purity isomorphism
 `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` of the affine line `p : 𝔸¹_Y ⟶ Y`, the composite
 `Tr^sm_{p,Λ} ∘ cl ∘ ψ : Λ_Y ⟶ Λ_Y` is an isomorphism. Writing `u = γ ∘ ι⁻¹ : Λ(1)[2] ≅ Rp^! Λ`,
 the composite is the adjoint, for the composite adjunction `Rs_! ⋙ Rp_! ⊣ Rp^! ⋙ Rs^!`, of the
@@ -114,7 +116,7 @@ and the counit of the composite adjunction is an isomorphism because `s ≫ p : 
 isomorphism (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso`),
 through `α : R(s ≫ p)_! ≅ Rs_! ⋙ Rp_!`. -/
 theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.IsNormalized Λ]
-    [HasInvertibleExponent Λ Y]
+    {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (α : R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))_![ModuleCat.{u + 1} Λ] ≅
       R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -133,7 +135,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.
       (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
         (affineLineTwistShiftIso Λ Y).inv ≫
       smoothPurityTrace Λ ((1 : ℕ) : ℤ) _ γ) := by
-  have := isIso_affineLineOrientation Λ Y
+  have := isIso_affineLineOrientation Λ Y aY
   have : IsIso (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)) :=
     inferInstanceAs (IsIso (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) Y
@@ -219,7 +221,8 @@ theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [F
     (twistShift Λ _ _).mapIso
       (leftDerivedUpperStarConstantComplexIso Λ (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)))
       ≪≫ θ.symm
-  have hu := isIso_affineLineFundamentalClass_comp_smoothPurityTrace Λ (Spec (.of k)) α ψ γ₀
+  have hu :=
+    isIso_affineLineFundamentalClass_comp_smoothPurityTrace Λ (Spec (.of k)) (𝟙 _) α ψ γ₀
   refine ⟨γ₀ ≪≫
     (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![ModuleCat.{u + 1} Λ]).mapIso
       (asIso (ψ.hom ≫ affineLineFundamentalClass Λ (Spec (.of k)) α ≫

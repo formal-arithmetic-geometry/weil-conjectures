@@ -191,7 +191,7 @@ lemma rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit
     conjugateEquiv_counit, Adjunction.comp_counit_app]
   rfl
 
-variable {Λ f g}
+variable {Λ f g} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 variable (Λ f g) in
 /-- The pullback-composition and twist-additivity identification
@@ -314,6 +314,8 @@ lemma rightDerivedLowerShriek_map_upperShriekBaseChangeOfLowerShriek_comp_counit
   have h := ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv_counit
     (g := upperShriekBaseChangeOfLowerShriek Λ β K)).symm
   rwa [upperShriekBaseChangeOfLowerShriek, Equiv.symm_apply_apply] at h
+
+variable [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X']
 
 /-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
 
