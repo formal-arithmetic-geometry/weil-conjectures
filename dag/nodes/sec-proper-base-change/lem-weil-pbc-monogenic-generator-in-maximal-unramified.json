@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-monogenic-generator-in-maximal-unramified",
+ "kind": "statement",
+ "title": "A generator-containing maximal localization is analytically unramified",
+ "statement": "Let $R$ be a normal Nagata domain [def-weil-pbc-normal-ring] [def-weil-pbc-nagata-ring], let $K$ be its fraction field, and let $x\\in K$. Put $S=R[x]\\subseteq K$, and assume explicitly that $R$ and $S$ are Noetherian [def-weil-pbc-noetherian-ring]. For every maximal ideal $\\mathfrak m$ of $S$ containing $x$, the local domain $S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] is analytically unramified [def-weil-pbc-analytically-unramified]: its maximal-ideal-adic completion is reduced.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5, lines 46169--46221, local calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-analytically-unramified"
+ ],
+ "proof": [
+  {
+   "text": "If x=0 it is integral, so S=R[x] is finite over R. The finite-over-Nagata theorem and Nagata localization show that A=S_m is Nagata; the local-Nagata-domain theorem makes A analytically unramified.",
+   "uses": [
+    "lem-weil-pbc-finite-over-nagata-nagata",
+    "lem-weil-pbc-nagata-localization",
+    "lem-weil-pbc-local-nagata-domain-analytically-unramified"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If x is nonzero, injectivity of S into its prime localization makes t=x/1 nonzero, and the image of m is the local maximal ideal, so t belongs to it. The principal-quotient-conditions lemma supplies no embedded primes, regular associated-prime localizations, and analytically unramified prime quotients. Apply the principal-quotient criterion.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-monogenic-principal-quotient-conditions",
+    "lem-weil-pbc-analytic-unramified-principal-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-nagata-nagata",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-local-nagata-domain-analytically-unramified",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-monogenic-principal-quotient-conditions",
+  "lem-weil-pbc-analytic-unramified-principal-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5, lines 46169--46221, local calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a normal Nagata domain and a fraction x lying in a maximal ideal of R[x], the completion of R[x] at that maximal ideal is reduced",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite domain extension of R[x] localized at a maximal ideal whose maximal localizations have reduced completion",
+   "results": "8 hits: isLocalRing_of_isAdicComplete_maximal, IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_maximal, IsLocalization.AtPrime.isLocalRing, isIntegrallyClosed_ofLocalizationMaximal, Module.Finite.of_isLocalized_maximal, OfLocalizationMaximal, Localization.AtPrime.isLocalRing; no matching monogenic Nagata statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "analytically.unramified|IsAnalyticallyUnramified|Nagata",
+   "results": "3 hits: Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/Algebra/EuclideanDomain/Defs.lean, Mathlib/Algebra/EuclideanDomain/Defs.lean; no matching monogenic Nagata statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.IsN1AdjoinSingleton",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); Tag 0334, proposition-nagata-universally-japanese, Step 5, lines 46169--46221, local calculation",
+   "via": [
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.AdjoinSingletonLocalUnramified",
+  "declaration": "isAnalyticallyUnramified_adjoin_singleton_atPrime_of_mem",
+  "file": "lean/Sheaf/RingTheory/AdjoinSingletonLocalUnramified.lean",
+  "statement": "theorem isAnalyticallyUnramified_adjoin_singleton_atPrime_of_mem (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K) [IsNoetherianRing (Algebra.adjoin R ({x} : Set K))] (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] (hx : (⟨x, Algebra.subset_adjoin (Set.mem_singleton x)⟩ : Algebra.adjoin R ({x} : Set K)) ∈ m) : IsAnalyticallyUnramified (Localization.AtPrime m)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T202255-L-709694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T202255-L-709694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
