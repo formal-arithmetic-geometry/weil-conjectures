@@ -32,6 +32,8 @@ public import WeilConjectures.Algebra.Homology.ExactCouple.TruncationCouple
 public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
 public import WeilConjectures.Algebra.Homology.FlatComplex
 public import WeilConjectures.Algebra.Homology.FlatComplexBaseChange
+public import WeilConjectures.Algebra.Homology.HomologyBaseChange
+public import WeilConjectures.Algebra.Homology.HomologyBaseChangeReduced
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
@@ -95,11 +97,13 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Pullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModule
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechPerfect
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
