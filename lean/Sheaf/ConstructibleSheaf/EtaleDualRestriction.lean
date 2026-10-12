@@ -8,6 +8,9 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 
+import Sheaf.ConstructibleSheaf.EtalePullbackInternalHom
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+
 /-! # Étale restriction of coefficient duals
 
 Source: the local internal Hom argument in the docstring of
@@ -41,6 +44,8 @@ theorem nonempty_etaleDualRestrictionIso
     Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj
       ((ihom F).obj (𝟙_ _)) ≅
       (ihom ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)).obj (𝟙_ _)) := by
-  sorry
+  obtain ⟨e⟩ := nonempty_etale_upperStar_ihom_iso U.hom F (𝟙_ _)
+  exact ⟨e ≪≫ (ihom ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)).mapIso
+    (Functor.Monoidal.εIso (Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom)).symm⟩
 
 end AlgebraicGeometry.Scheme

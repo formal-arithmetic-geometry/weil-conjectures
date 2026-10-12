@@ -12,26 +12,27 @@
  },
  "proof": [
   {
-   "text": "Identify the small étale site of U with the slice of the small étale site of X at the object U. For an object V of this slice, the iterated slice (X_et/U)/V is canonically equivalent to X_et/V.",
-   "uses": [],
+   "text": "Apply lem-weil-pbc-etale-pullback-internal-hom to the etale morphism U.hom and the pair (F, the monoidal unit), obtaining an isomorphism from restriction of the coefficient dual to internalHom of the restricted F into the restricted unit. In Lean, obtain its witness with nonempty_etale_upperStar_ihom_iso U.hom F (𝟙_ _).",
+   "uses": [
+    "lem-weil-pbc-etale-pullback-internal-hom"
+   ],
    "elementary": false
   },
   {
-   "text": "Describe sections of the coefficient internal Hom over V as the module of morphisms between the two sheaves restricted to X_et/V. The preceding slice equivalence therefore identifies the restrictions of internal Hom with internal Hom of the restrictions, compatibly with further restriction maps. This description follows from the tensor-Hom adjunction applied to the free coefficient sheaf represented by V.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The unit restricts to the unit. Transport the internal Hom identification across the slice-site equivalence to obtain the coefficient-dual isomorphism. No local constancy or finiteness is used and no assertion is made about non-étale pullback.",
-   "uses": [],
-   "elementary": false
+   "text": "The proved strong monoidal structure Etale.monoidal_upperStar supplies Functor.Monoidal.εIso, whose inverse identifies the restricted unit with the unit on U. Apply the functor ihom of the restricted F to this inverse isomorphism with mapIso, compose with the previous isomorphism, and introduce Nonempty. This is the two-line isomorphism composition in the Lean proof.",
+   "uses": [
+    "lem-weil-pbc-etale-pullback-internal-hom"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-pullback-internal-hom"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "G1 stage 3 worker",
   "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
-  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring"
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit local internal Hom argument; specialize the existing general comparison and compose with Functor.Monoidal.εIso from WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal"
  },
  "mathlib_searches": [
   {
@@ -103,10 +104,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T095926-L-325413",
-  "kind": "interface",
+  "landing": "20261012T110302-L-615058",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
