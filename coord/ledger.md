@@ -5950,3 +5950,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/C2/Sheaf.AlgebraicGeometry.FiniteTypeEtaleModuleStalk (stage 3; reviewer PASS; first push; landing 20261012T042405-L-1814085 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814229 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814333 (proof); batch 20261012T042402; modules 1; new nodes 1)
+- 04:24 L: merged deliver/F1/Sheaf.CategoryTheory.InjectiveSheafCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814454 (proof); batch 20261012T042402; modules 1; new nodes 0)

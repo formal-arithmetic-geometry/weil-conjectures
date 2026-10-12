@@ -8,7 +8,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.Paper.FreeCechComplexExact
+import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
+import Sheaf.CategoryTheory.SiteCechMathlibComparison
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # Injective abelian étale sheaves are Čech-acyclic
@@ -54,6 +56,27 @@ theorem injective_sheaf_cech_acyclic
     ∀ (p : ℕ), 0 < p →
       IsZero (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj
         ((Over.forget U).op ⋙ 𝓘.obj)).homology p) := by
-  sorry
+  classical
+  let J := X.smallEtaleTopology.toPrecoverage
+  have hJ : J.toGrothendieck = X.smallEtaleTopology := by
+    apply le_antisymm (GrothendieckTopology.toGrothendieck_toPrecoverage_le _)
+    intro W R hR
+    have h : R.arrows ∈ J W := by
+      exact (GrothendieckTopology.arrows_mem_toPrecoverage_iff _ _).2 hR
+    simpa using J.generate_mem_toGrothendieck h
+  have hcover : Presieve.ofArrows V f ∈ J U := hc
+  obtain ⟨S⟩ := SiteCechComplex.exists_of_covering J hcover
+  have hacyclic : ∀ p : ℕ, 0 < p →
+      IsZero ((S.cohomologyFunctor p).obj 𝓘.obj) := by
+    have h : ∀ (A : Sheaf J.toGrothendieck AddCommGrpCat.{u + 1}),
+        Injective A → ∀ p : ℕ, 0 < p →
+          IsZero ((S.cohomologyFunctor p).obj A.obj) := by
+      intro A hA
+      exact (site_injective_cech_acyclic V f hcover S A).1
+    rw [hJ] at h
+    exact h 𝓘 inferInstance
+  obtain ⟨e⟩ := S.mathlib_complex_iso_exists V f 𝓘.obj
+  intro p hp
+  exact (hacyclic p hp).of_iso (HomologicalComplex.homologyMapIso e p).symm
 
 end CategoryTheory
