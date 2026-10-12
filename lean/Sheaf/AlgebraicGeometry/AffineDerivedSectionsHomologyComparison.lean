@@ -4,8 +4,8 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncationIso
+import Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom
 
 /-! # Cohomology of derived affine sections
 
@@ -48,6 +48,19 @@ theorem affineDerivedSections_homology_comparison (A : Type u) [CommRing A]
         DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n ⋙
         moduleSpecΓFunctor (R := .of A)) := by
-  sorry
+  let S := (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
+    ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor
+  let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) n
+  let ι := (schemeDerivedQCohProperty (Spec (.of A))).ι
+  let τ := Functor.whiskerLeft ι
+    (Functor.whiskerRight (Functor.whiskerRight
+      (DerivedCategory.TStructure.t.truncGEπ n) S) H)
+  have (K : schemeDerivedQCohCategory (Spec (.of A))) : IsIso (τ.app K) :=
+    affineDerivedSections_truncGE_isIso A K n
+  have : IsIso τ := NatIso.isIso_of_isIso_app τ
+  obtain ⟨eG⟩ := hG
+  obtain ⟨eB⟩ := affineDerivedSections_truncated_bottom A n
+  exact ⟨Functor.isoWhiskerRight eG H ≪≫ asIso τ ≪≫
+    Functor.isoWhiskerLeft ι eB⟩
 
 end AlgebraicGeometry

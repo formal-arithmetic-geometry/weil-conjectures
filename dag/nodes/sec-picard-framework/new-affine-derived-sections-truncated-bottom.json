@@ -1,0 +1,113 @@
+{
+ "id": "new-affine-derived-sections-truncated-bottom",
+ "kind": "statement",
+ "title": "Lowest cohomology of truncated derived affine sections",
+ "statement": "For any commutative ring A and integer n, on the entire derived category D(O_Spec A) [def-pc-derived-category], canonical τ≥n [def-sbc-standard-tstructure-derived-category] followed by derived sections [def-pc-ringed-spaces-derived-direct-image] and H^n is naturally isomorphic to H^n followed by ordinary affine sections [def-sc-ringed-space-module-cohomology], with ΓSpecIso scalar transport. No quasi-coherence hypothesis is needed.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 06Z0, second equality of the cohomology calculation; Tag 05TC (2)"
+ },
+ "proof": [
+  {
+   "text": "Write S for sections followed by scalar transport; it preserves finite\nlimits. Lift truncGE n into the bounded below derived category. The canonical\nmap truncLT (n + 1) -> identity becomes invertible on H^n after derived S,\nby isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι. On this lifted\nfunctor, truncGE n after truncLT (n + 1) is already invertible, since the\nobjects have no cohomology below n. The natural isomorphism\nDerivedCategory.Plus.eTruncLTCompETruncGEIso identifies this double truncation\nwith H^n followed by the single functor in degree n. Commutation of single\nfunctors, derived S and homology with shifts reduces its cohomology to the\nsingle functor in degree zero. Compose the single-functor derived comparison\nwith rightDerivedZeroIsoSelf. Finally use compatibility of bounded below\nand unbounded derived S and the canonical H^n truncGE projection isomorphism.\nOrdinary S is definitionally moduleSpecΓFunctor. Every map is natural, and no\nquasi-coherence, boundedness of the original object, or nonzero-ring hypothesis\nis needed.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 06Z0, second equality of the cohomology calculation; Tag 05TC (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lowest cohomology of truncated derived affine sections",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections and cohomology of canonical truncation",
+   "results": "Canonical truncation homology comparisons and DerivedCategory.homologyFunctorFactors; no single affine derived comparison.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*homology|homology.*rightDerived; truncGEπ",
+   "results": "Source PlusCompatibility, PlusSingle and library RightDerivedFunctorTruncationIso supply bounded below factors; UnboundedDerivedFunctorCohomologicalBound supplies tail vanishing. No single exact match.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Tag 06Z0, second equality of the cohomology calculation; Tag 05TC (2)",
+   "via": [
+    "lem-pc-affine-derived-sections-homology-comparison",
+    "new-affine-derived-counit-homology-factorization",
+    "new-affine-qcoh-derived-adjunction-unit-counit",
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedSectionsTruncatedBottom.lean",
+  "declaration": "AlgebraicGeometry.affineDerivedSections_truncated_bottom",
+  "statement": "theorem affineDerivedSections_truncated_bottom (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (n : ℤ) : Nonempty ((DerivedCategory.TStructure.t.truncGE n) ⋙ (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙ ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor (ModuleCat.{u} A) n ≅ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n ⋙ moduleSpecΓFunctor (R := .of A))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

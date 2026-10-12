@@ -1,0 +1,113 @@
+{
+ "id": "new-affine-derived-sections-truncation-iso",
+ "kind": "statement",
+ "title": "Canonical affine lower truncation induces an isomorphism on derived sections",
+ "statement": "For any commutative ring A, integer n and K in D_QCoh(Spec A) [def-pc-derived-category], put S = global sections [def-sc-ringed-space-module-cohomology] followed by ΓSpecIso scalar transport. The canonical projection K → τ≥n K [def-sbc-standard-tstructure-derived-category] induces an isomorphism H^n(RS(K)) → H^n(RS(τ≥n K)), with RS as in [def-pc-ringed-spaces-derived-direct-image].",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 06Z0, first equality of the displayed cohomology calculation; Tag 08D4 (3)"
+ },
+ "proof": [
+  {
+   "text": "Let S be global sections followed by scalar transport through ΓSpecIso.\nSections is right adjoint to tilde and preserves products. Scalar transport along\nthis ring isomorphism is exact and preserves products. Affine vanishing gives\nR^p S(M) = 0 for quasi-coherent M and p >= 1; after the exact conservative\nforgetful functor to abelian groups, apply the unbounded cohomological bound\nwith N = 1 to the strictly lower truncation of K at n. Truncation preserves\nquasi-coherent cohomology. This truncation is supported in degrees <= n - 1,\nso its derived sections have zero cohomology in degrees n and n + 1.\nApply derived sections to the canonical truncation triangle. The homology\nexact sequence now makes H^n of its projection K -> truncGE n K invertible.\nConservativity of forgetting modules detects invertibility before forgetting.\nThese are the canonical maps, so the conclusion concerns the stated projection.\nThe zero ring and zero complex require no exception, and K is unbounded.",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 06Z0, first equality of the displayed cohomology calculation; Tag 08D4 (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical affine lower truncation induces an isomorphism on derived sections",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections and cohomology of canonical truncation",
+   "results": "Canonical truncation homology comparisons and DerivedCategory.homologyFunctorFactors; no single affine derived comparison.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*homology|homology.*rightDerived; truncGEπ",
+   "results": "Source PlusCompatibility, PlusSingle and library RightDerivedFunctorTruncationIso supply bounded below factors; UnboundedDerivedFunctorCohomologicalBound supplies tail vanishing. No single exact match.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Tag 06Z0, first equality of the displayed cohomology calculation; Tag 08D4 (3)",
+   "via": [
+    "lem-pc-affine-derived-sections-homology-comparison",
+    "new-affine-derived-counit-homology-factorization",
+    "new-affine-qcoh-derived-adjunction-unit-counit",
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedSectionsTruncationIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedSectionsTruncationIso.lean",
+  "declaration": "AlgebraicGeometry.affineDerivedSections_truncGE_isIso",
+  "statement": "theorem affineDerivedSections_truncGE_isIso (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (K : schemeDerivedQCohCategory (Spec (.of A))) (n : ℤ) : IsIso ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) n).map ((RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙ ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor.map ((DerivedCategory.TStructure.t.truncGEπ n).app K.obj)))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
