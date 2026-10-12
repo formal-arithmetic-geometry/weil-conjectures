@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-free-cech-tuple-basis",
+ "kind": "statement",
+ "title": "Bijectivity of the explicit tuple-generator map",
+ "statement": "For a scheme $X$, a family $f_i:U_i\\to U_0$ in its small etale site [def-weil-pbc-etale-site], a presheaf of rings $O$ [def-weil-presheaf-modules-sheafification], and an object $W$, put $S_\\varphi=\\coprod_i\\{g:W\\to U_i\\mid g f_i=\\varphi\\}$. In degree $n$, the map from $\\bigoplus_\\varphi O(W)[S_\\varphi^{n+1}]$ to the evaluated free representable Cech module sending a tuple to the coproduct injection of its free product-map generator is bijective.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AT (lemma-cech-exact): direct-sum decomposition before the contracting homotopy; Tag 03F5 (lemma-cech-exact-modules): first proof, coefficients O(W). Sources read at https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation preserves coproducts, and an evaluated free representable has basis the maps from W. Hence the degree n module is the free module on pairs of index tuples and maps to their product over U_0.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Associate to a product map its common composite phi and its n+1 projections. Conversely lift the tuple in Over U_0 by Pi.lift. Pi.lift_π and product uniqueness give inverse functions. Extend linearly and regroup finite support over phi. The inverse is the explicit tuple-generator map, proving bijectivity also for an empty index family or zero ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AT (lemma-cech-exact): direct-sum decomposition before the contracting homotopy; Tag 03F5 (lemma-cech-exact-modules): first proof, coefficients O(W). Sources read at https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TupleMap|tuple.*[Bb]asis|[Cc]ech.*[Dd]ifferential",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; coproduct evaluation API found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormalCoproduct\", \"eval\"",
+   "results": "CategoryTheory.Limits.FormalCoproduct.eval, CategoryTheory.Limits.FormalCoproduct.evalOp, CategoryTheory.Limits.FormalCoproduct.instPreservesColimitsOfShapeDiscreteObjFunctorEval, CategoryTheory.Limits.FormalCoproduct.instPreservesColimitDiscreteFunctorObjFunctorEval, CategoryTheory.Limits.FormalCoproduct.eval_obj_obj, CategoryTheory.Limits.FormalCoproduct.instPreservesLimitOppositeDiscreteFunctorCompOpObjFunctorEvalOp, CategoryTheory.Limits.FormalCoproduct.evalOp_obj_obj, CategoryTheory.Limits.FormalCoproduct.isColimitEvalMapCoconeCofan",
+   "date": "2026-10-12",
+   "verdict": "no exact match; coproduct evaluation API found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tuple-generator map from the direct sum of free modules on lifts to the evaluation of the free Cech complex is bijective and commutes with alternating differentials",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no verdict)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FreeCechComplexBlockEquiv",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-free-cech-complex-fibre-comparison",
+   "place": "degreewise tuple basis and differential compatibility in the comparison of complexes",
+   "via": [
+    "lem-weil-pbc-free-cech-block-equiv"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FreeCechTupleBasis",
+  "file": "lean/Sheaf/Paper/FreeCechTupleBasis.lean",
+  "declaration": "AlgebraicGeometry.freeCechTupleMap_bijective",
+  "statement": "theorem freeCechTupleMap_bijective (n : ℕ) : Function.Bijective (freeCechTupleMap X ι U₀ U f O W n)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T070549-L-3476650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T070549-L-3476650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

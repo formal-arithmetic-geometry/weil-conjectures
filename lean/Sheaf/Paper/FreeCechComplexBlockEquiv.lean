@@ -8,6 +8,7 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Sheaf.Paper.PowerSetComplexContractible
 
 public import Mathlib.LinearAlgebra.DFinsupp
+import Sheaf.Paper.FreeCechTupleDifferential
 
 @[expose] public section
 
@@ -49,6 +50,27 @@ theorem freeCechComplex_block_equiv (X : Scheme.{u}) (ι : Type u) (U₀ : X.Eta
         (DFinsupp.mapRange.linearMap
           (fun φ => Algebra.powerSetComplexDifferential (O.obj (op W)) (S φ) n)).comp
             (e (n + 1)).toLinearMap = (e n).toLinearMap.comp (K.d (n + 1) n).hom := by
-  sorry
+  classical
+  dsimp
+  let b := freeCechTupleMap X ι U₀ U f O W
+  let e := fun n ↦ LinearEquiv.ofBijective (b n)
+    (freeCechTupleMap_bijective X ι U₀ U f O W n)
+  refine ⟨fun n ↦ (e n).symm, ?_⟩
+  intro n
+  have h := freeCechDifferential_compatibility X ι U₀ U f O W n
+  dsimp [e, b] at h ⊢
+  apply LinearMap.ext
+  intro v
+  apply (e n).injective
+  have hv := LinearMap.congr_fun h ((e (n + 1)).symm v)
+  let K := (((PresheafOfModules.evaluation O (op W)).mapHomologicalComplex _).obj
+    ((AlgebraicTopology.alternatingFaceMapComplex _).obj
+      (freeCechModule X ι U₀ U f O)))
+  change (e n) ((DFinsupp.mapRange.linearMap _)
+      ((e (n + 1)).symm v)) = (e n) ((e n).symm ((K.d (n + 1) n).hom v))
+  rw [LinearEquiv.apply_symm_apply]
+  have hv' : (K.d (n + 1) n).hom ((e (n + 1)) ((e (n + 1)).symm v)) =
+      (e n) ((DFinsupp.mapRange.linearMap _ ) ((e (n + 1)).symm v)) := hv
+  simpa only [LinearEquiv.apply_symm_apply] using hv'.symm
 
 end AlgebraicGeometry
