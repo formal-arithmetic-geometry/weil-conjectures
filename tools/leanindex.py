@@ -345,6 +345,10 @@ def library_files():
 
 def scan():
     """decls: qualified name -> {modules declaring it}; imports: module -> {imported modules}."""
+    from delivery_cache import declarations, imports as cached_imports
+    cached_decls = declarations(ROOT, library_dirs())
+    if cached_decls is not None:
+        return cached_decls, cached_imports(ROOT, library_dirs())
     decls, imports = collections.defaultdict(set), {}
     for p in library_files():
         try:

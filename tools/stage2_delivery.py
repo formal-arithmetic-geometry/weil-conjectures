@@ -1229,6 +1229,12 @@ _NODE_CACHE = {}
 
 
 def nodes_at(git: Git, ref: str) -> dict[str, dict]:
+    from delivery_cache import node_index
+    cached = node_index(git.root, ref, lambda commit: _uncached_nodes_at(git, commit))
+    return cached if cached is not None else _uncached_nodes_at(git, ref)
+
+
+def _uncached_nodes_at(git: Git, ref: str) -> dict[str, dict]:
     """Every node of dag/nodes on `ref`, read with one `git cat-file --batch`."""
     # Immutable subtree ids also share the reading across ledger-only commits.
     tree = git.run("rev-parse", f"{ref}:dag/nodes").strip()

@@ -110,9 +110,10 @@ def decl_table(text: str) -> dict[str, dict]:
     """key -> {kw, name, statement, body (normalized), sorry (count in signature and body), private, doc}; anonymous
     instances keyed by their statement."""
     out = {}
+    masked = s2.mask(text or "")
     for d in s2.declarations(text or ""):
         key = d["name"] or f"instance {d['statement']}"
-        sig = s2.mask(text)[d["kw_pos"]:d["sig_end"]]
+        sig = masked[d["kw_pos"]:d["sig_end"]]
         head = text[d["start"]:d["kw_pos"]]
         out[key] = {"kw": d["kw"], "name": d["name"], "statement": d["statement"], "body": s2.normalize(d["body"]),
                     "sorry": len(SORRY.findall(sig)) + len(SORRY.findall(d["body"])),
@@ -158,6 +159,10 @@ def scan_imports() -> dict:
     """leanindex.scan()'s import table, read once per process (it reads the whole library: about 13 s)."""
     global _SCAN
     if _SCAN is None:
+        from delivery_cache import imports as cached_imports
+        _SCAN = cached_imports(ROOT, library_roots())
+        if _SCAN is not None:
+            return _SCAN
         _SCAN = {}
         # Only imports are needed here; avoid parsing all library declarations.
         for p in li.library_files():
@@ -173,12 +178,16 @@ def downstream_users(changed: dict[str, list[str]]) -> dict[str, list[str]]:
     tools/downstream.py --uses; textual, an over-approximation the record may answer with 'not affected')."""
     imports = scan_imports()
     out = collections.defaultdict(list)
+    from delivery_cache import load, working_modules
+    cached = load(ROOT, library_roots())
+    modified = working_modules(ROOT, cached) if cached is not None else {}
     for mod, names in changed.items():
         for u in sorted(li.downstream({mod}, imports)):
             p = li.file_of(u)
             if not p.is_file():
                 continue
-            t = li.strip(p.read_text(errors="ignore"))
+            entry = cached["modules"].get(u) if cached is not None and u not in modified else None
+            t = entry["text"] if entry is not None else li.strip(p.read_text(errors="ignore"))
             for n in names:
                 seg = n.split(".")[-1]
                 if re.search(r"(?<![\w'])" + re.escape(seg) + r"(?![\w'])", t):
