@@ -17,8 +17,18 @@ public import WeilConjectures.Mathlib.RingTheory.Kaehler.LocalizationPolynomial
 
 Let `A` be a commutative ring and `ℙ = ℙ(n; Spec A)` with `Nat.card n = d + 1`. The canonical
 sheaf `ω_ℙ = ⋀ᵈ Ω¹_{ℙ/A}` is invertible, with free generator
-`ηᵢ = ± ⋀_{k ≠ i} d(x_k / xᵢ)` on the standard open `Uᵢ = D₊(xᵢ)`, and `ω_ℙ ≅ 𝒪(-d-1)`,
-`ηᵢ ↦ eᵢ^{(-d-1)}`.
+`ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)` on the standard open `Uᵢ = D₊(xᵢ)`, and `ω_ℙ ≅ 𝒪(-d-1)`,
+`ηᵢ ↦ eᵢ^{(-d-1)}`. The signs and the order of the wedge products refer to an enumeration
+`e : n ≃ Fin (d + 1)`.
+
+## Main declarations
+
+- `AlgebraicGeometry.ProjectiveSpace.canonicalModule`: `ω_ℙ = ⋀ᵈ Ω¹_{ℙ/S}`.
+- `AlgebraicGeometry.ProjectiveSpace.canonicalGenerator`: the local generator `ηᵢ` on `Uᵢ`, a
+  free generator by `isFreeGenerator_canonicalGenerator`.
+- `AlgebraicGeometry.ProjectiveSpace.map_canonicalGenerator_eq_transitionUnit_smul`: the
+  transition rule `ηᵢ = (xᵢ / xⱼ)^{-(d+1)} ηⱼ` on `Uᵢ ∩ Uⱼ`.
+- `AlgebraicGeometry.ProjectiveSpace.canonicalModuleIsoTwist`: `ω_ℙ ≅ 𝒪(-d-1)`, `ηᵢ ↦ eᵢ^{(-d-1)}`.
 
 (blueprint: `lem-pc-projective-space-canonical`)
 -/
