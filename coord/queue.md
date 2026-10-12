@@ -40,9 +40,9 @@ Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations` | 2 | 2 | proof |
 | `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
-| `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 4 | proof |
+| `Sheaf.AlgebraicGeometry.ConstantExtensionCover` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 3 | 1 | proof |
