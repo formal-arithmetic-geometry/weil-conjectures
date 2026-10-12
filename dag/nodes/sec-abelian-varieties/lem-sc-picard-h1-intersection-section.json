@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-picard-h1-intersection-section",
+ "kind": "statement",
+ "title": "H1 injectivity lifts a generator over the Picard intersection",
+ "statement": "Let $f:X\\to S$ and $f_i:X_i\\to S$ ($1\\le i\\le n$) be flat, proper morphisms of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-weil-scheme-over-base, def-sbc-locally-finite-presentation], and let $u_i:X_i\\to X$ be morphisms over $S$. Assume that for every morphism $T\\to S$, the canonical maps $\\mathcal O_T\\to (f_T)_*\\mathcal O_{X_T}$ and $\\mathcal O_T\\to ((f_i)_T)_*\\mathcal O_{(X_i)_T}$ are isomorphisms [def-pc-base-change, lem-sc-picard-diagonal-locally-closed]. Let $\\mathcal L$ be an invertible module on $X$ [def-sc-invertible-module], let $\\mathcal L_i=u_i^*\\mathcal L$ be its pullback to $X_i$ [def-pc-module-pullback], and let $Z$ and $Z_i$ be the locally closed subschemes of $S$ representing the loci where $\\mathcal L$ and $\\mathcal L_i$ are pulled back from the base. Suppose $s\\in Z$ and $s\\in Z_i$ for every $i$, and the joint pullback map $H^1(X_s,\\mathcal O_{X_s})\\to\\prod_i H^1(X_{i,s},\\mathcal O_{X_{i,s}})$ is injective [def-sc-structure-sheaf-cohomology-pullback]. Then there are an open $U\\subset S$ containing $s$, a scheme $W$, an immersion $k:W\\to S$ and $w\\in W$ with $k(w)=s$, such that for every $g:T\\to S$ whose image lies in $U$, factorization through $k$ is equivalent to factorization through all $Z_i$. On $X_W=X\\times_S W$ [def-pc-base-change, def-pc-fibre-product], writing $L_W=\\mathrm{pr}_X^*L$ [def-pc-module-pullback], there is a section $\\sigma\\in\\Gamma(X_W,L_W)$ nonvanishing at every $x$ with $\\mathrm{pr}_W(x)=w$ [def-weil-pbc-ample-invertible-module]. No local triviality or equality with $Z$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, first paragraph through d = 0 and lifting the fibre generator; ambient-open extension of the local intersection"
+ },
+ "stmt_deps": [
+  "lem-sc-picard-diagonal-locally-closed",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-pc-fibre-product",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Form the finite scheme-theoretic intersection of ji by successive fibre products; for n=0 use S. The universal property is simultaneous factorization through ji. The points over s lift to w with residue field kappa(s), since immersions preserve residue fields. Pull back the families and L, preserving their hypotheses and H1 injection. By hZi the pulled-back Li come from finite locally free base modules; invertibility and universal structure pushforward make these rank one. Trivialize them on a common affine neighbourhood of w. By hs and hZ the marked fibre of L is trivial.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply perfect_derivedDirectImage_baseChange to L and the target structure modules. Invertibility gives finite presentation and relative flatness. The direct images are perfect and their derived fibres identify with RGamma of the marked fibres. Universal structure pushforward gives rank one H0 and negative cohomology vanishes.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_finiteFreeResidueModel finitely many times to obtain fixed models with ranks equal to marked-fibre Betti numbers. On the common affine base, represent the derived pullback maps by chain maps between the fixed models, using bounded finite free source terms and affine acyclicity. The degree-zero residue maps take fibre generators to generators and are isomorphisms.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The H1 injection gives a nonzero maximal minor of the joint degree-one residue map. Shrink so that minor is invertible and the joint map is injective; for source rank zero no minor is needed. The target degree-zero differentials vanish because each target bundle is trivial and its structure pushforward is O. The chain-map equations force the source differential to be zero. Its degree-zero generator defines a section lifting the fibre generator, nonvanishing on the entire marked fibre.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "All shrinkings are opens of the intersection containing w. Since its immersion is a topological embedding, extend this open to an ambient open U containing s and restrict the intersection to its inverse image. The restricted immersion still represents the intersection for all maps with image in U, and the section restricts.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-finite-free-residue-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, first paragraph through d = 0 and lifting the fibre generator; ambient-open extension of the local intersection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "injectivity of H1 on proper flat fibers implies local triviality of a line bundle",
+   "results": "Eight vector bundle trivialization hits, no scheme section-lifting theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1 injectivity lifts a fibre generator of an invertible sheaf over an intersection of Picard loci",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*(locus|trivial)|nonvanishing.*section; nonvanishing_tensorPullback; nonempty_tensorPullbackComp; Scheme.Hom.isClosedMap in Mathlib, WeilConjectures and Sheaf",
+   "results": "Only parent PicardH1MultipleLocus and the planned perfect-complex inputs; no independent section-lifting theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; ingredients available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1MultipleLocus",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, first paragraph through d = 0 and lifting the fibre generator; ambient-open extension of the local intersection",
+   "via": [
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardH1IntersectionSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1IntersectionSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_intersection_section",
+  "statement": "theorem picard_h1_intersection_section {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (hOi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd (fi i) g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (L : X.Modules) [L.IsInvertible] (Z : Scheme.{v}) (j : Z ⟶ S) [IsImmersion j] (Zi : Fin n → Scheme.{v}) (ji : ∀ i, Zi i ⟶ S) [∀ i, IsImmersion (ji i)] (hZ : ∀ {T : Scheme.{v}} (g : T ⟶ S), (∃ h : T ⟶ Z, h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst f g)).obj L ≅ (Modules.tensorPullback (pullback.snd f g)).obj N)) (hZi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S), (∃ h : T ⟶ Zi i, h ≫ ji i = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst (fi i) g)).obj ((Modules.tensorPullback (ui i)).obj L) ≅ (Modules.tensorPullback (pullback.snd (fi i) g)).obj N)) (s : S) (hs : s ∈ Set.range j) (hsi : ∀ i, s ∈ Set.range (ji i)) (hH : Function.Injective (fun x : Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1 ↦ fun i ↦ structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 x)) : ∃ (U : S.Opens), s ∈ U ∧ ∃ (W : Scheme.{v}) (k : W ⟶ S), IsImmersion k ∧ ∃ (w : W), k w = s ∧ (∀ {T : Scheme.{v}} (g : T ⟶ S), Set.range g ⊆ U → ((∃ h : T ⟶ W, h ≫ k = g) ↔ ∀ i, ∃ h : T ⟶ Zi i, h ≫ ji i = g)) ∧ ∃ σ : Γ((Modules.tensorPullback (pullback.fst f k)).obj L, ⊤), ∀ x : (pullback f k : Scheme.{v}), (pullback.snd f k) x = w → x ∈ Modules.nonvanishingLocus ((Modules.tensorPullback (pullback.fst f k)).obj L) σ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184302-L-4004312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184302-L-4004312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-proper-fibre-generator-pullback-locus",
+ "kind": "statement",
+ "title": "Proper fibrewise generator gives universal local pullback triviality",
+ "statement": "Let $f:X\\to S$ be proper [def-weil-proper-morphism], $L$ an invertible module on $X$ [def-sc-invertible-module], $k:W\\to S$ any morphism and $w\\in W$. Let $X_W=X\\times_S W$ with projection $p:X_W\\to W$ and $L_W=\\mathrm{pr}_X^*L$ [def-pc-base-change, def-pc-module-pullback]. Suppose $\\sigma\\in\\Gamma(X_W,L_W)$ is nonvanishing at every point above $w$ [def-weil-pbc-ample-invertible-module]. There is an open $V\\subset W$ containing $w$ such that for every scheme $T$ and $h:T\\to W$ with image in $V$, there is a finite locally free module $N$ on $T$ for which $\\mathrm{pr}_X^*L\\cong\\mathrm{pr}_T^*N$ on $X\\times_S T$, using the map $h\\circ k:T\\to S$. In fact the proof takes $N=\\mathcal O_T$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0BF1 and 0BF2, final topological shrinking argument; Modules Tag 01CY"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Compare tensor pullback with usual pullback by uniqueness of left adjoints, using the tensor-pullback adjunction and pullbackPushforwardAdjunction. Transport IsInvertible.pullback across the comparison to make M invertible. The nonvanishing section theorem gives its open nonvanishing locus D. Since p is proper, V = W minus p(X_W minus D) is open. The marked-fibre hypothesis says w lies in V.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any h with image in V construct q:X_T -> X_W by pullback.lift, with second projection pr_T followed by h. A point outside D would map to the removed closed image, contradicting the image assumption. Thus q has image in D and q inverse(D)=top.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the unique division conclusion of nonvanishing_section_trivializes to prove sigma restricted to D is a free generator: existence gives surjectivity and uniqueness gives injectivity of multiplication on every subopen. IsFreeGenerator.pullback_unit_app carries this generator to q inverse(D). Restrict it to top using the equality of these opens. Its homOfGlobalSection is an isomorphism. Compare tensor pullback with usual pullback by uniqueness of left adjoints again, and compose this isomorphism with tensor pullback composition and the equality q followed by pr_X = pr_X. The structure-sheaf pullback isomorphism identifies pr_T^*O_T with O_X_T. Take N=O_T and compose the three isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "def-sc-local-free-generator",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-proper-closed-image",
+  "def-pc-fibre-product",
+  "def-sc-local-free-generator",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0BF1 and 0BF2, final topological shrinking argument; Modules Tag 01CY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism section of a line bundle nonvanishing on a fibre trivializes the bundle near that fibre",
+   "results": "Eight basic-open evaluation and affine section representation hits, no proper fibre-generator shrinking theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism nonvanishing section of invertible module trivializes near fiber",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*(locus|trivial)|nonvanishing.*section; nonvanishing_tensorPullback; nonempty_tensorPullbackComp; Scheme.Hom.isClosedMap in Mathlib, WeilConjectures and Sheaf",
+   "results": "Found nonvanishing_section_trivializes, IsFreeGenerator.pullback_unit_app, tensor pullback composition and proper closed-map ingredients. Combined in the Lean proof. No whole-statement duplicate; blueprint search for fibre generator found zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; ingredients available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1MultipleLocus",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tags 0BF1 and 0BF2, final topological shrinking argument; Modules Tag 01CY",
+   "via": [
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFibreGeneratorPullbackLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFibreGeneratorPullbackLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proper_fibre_generator_pullback_locus",
+  "statement": "theorem proper_fibre_generator_pullback_locus {X S : Scheme.{v}} (f : X ⟶ S) [IsProper f] (L : X.Modules) [L.IsInvertible] {W : Scheme.{v}} (k : W ⟶ S) (w : W) (σ : Γ((Modules.tensorPullback (pullback.fst f k)).obj L, ⊤)) (hσ : ∀ x : (pullback f k : Scheme.{v}), (pullback.snd f k) x = w → x ∈ Modules.nonvanishingLocus ((Modules.tensorPullback (pullback.fst f k)).obj L) σ) : ∃ V : W.Opens, w ∈ V ∧ ∀ {T : Scheme.{v}} (h : T ⟶ W), Set.range h ⊆ V → ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst f (h ≫ k))).obj L ≅ (Modules.tensorPullback (pullback.snd f (h ≫ k))).obj N)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184302-L-4004312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184302-L-4004312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

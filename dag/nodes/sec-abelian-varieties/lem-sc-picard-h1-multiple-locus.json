@@ -31,69 +31,33 @@
  ],
  "proof": [
   {
-   "text": "Replace the base by the scheme-theoretic intersection of the $Z_i$, and then by an affine neighbourhood of $s$ on which every $\\mathcal L_i$ is trivial. The inclusion $Z\\subseteq\\bigcap_i Z_i$ and the universal Picard-locus construction [lem-sc-picard-diagonal-locally-closed] justify this replacement; the desired equality is now the assertion that $\\mathcal L$ becomes pulled back from the base.",
+   "text": "Apply hsub to the identity of Z, obtaining morphisms Z -> Zi. Evaluate them at a point of Z above s to prove s belongs to every Zi. Apply picard_h1_intersection_section to obtain an ambient U, the locally represented intersection k:W -> S, w over s, and a section on X_W nonvanishing on the marked fibre.",
    "uses": [
-    "lem-sc-picard-diagonal-locally-closed"
+    "lem-sc-picard-h1-intersection-section"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, first proof paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $E=Rf_*\\mathcal L$ and $E_i=Rf_{i,*}\\mathcal O_{X_i}$. The proper flat finite-presentation hypotheses and the universal pushforward assumptions give perfect complexes and arbitrary base-change isomorphisms; in particular the fibre of $E$ at $s$ is $R\\Gamma(X_s,\\mathcal L_s)=R\\Gamma(X_s,\\mathcal O_{X_s})$ because $s\\in Z$.",
+   "text": "Apply proper_fibre_generator_pullback_locus to obtain V open in W containing w and the universal pulled-back-from-base property for all maps to W with image in V.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-proper-fibre-generator-pullback-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, definition of E and E_i"
-   }
+   "elementary": false
   },
   {
-   "text": "After shrinking the affine base, apply the finite-free residue model [lem-sc-perfect-finite-free-residue-model] to $E$ and each $E_i$; by step 2 the ranks are $h_j=\\dim_{\\kappa(s)}H^j(X_s,\\mathcal O_{X_s})$ and $h_{i,j}=\\dim_{\\kappa(s)}H^j(X_{i,s},\\mathcal O_{X_{i,s}})$, which vanish for $j<0$, and $h_0=h_{i,0}=1$ by the pushforward hypothesis for $T=\\operatorname{Spec}\\kappa(s)$. Since the model of $E$ is a bounded complex of finite free modules on an affine scheme and the model of $E_i$ is a bounded complex of quasi-coherent modules, the map $E\\to E_i$ in the derived category (functoriality of $Rf_*$ along $u_i$, compatible with base change) is represented by a chain map $(a_i,b_i,c_i,\\ldots)$ between these two fixed models (higher cohomology of quasi-coherent modules on an affine vanishes, so derived-category maps out of a bounded finite free complex are chain maps up to homotopy). The degree-zero residue maps $a_i\\otimes\\kappa(s)$ are isomorphisms because the chosen fibre trivializing section pulls back to the chosen trivializing section on every $X_{i,s}$.",
-   "uses": [
-    "lem-sc-perfect-finite-free-residue-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, finite-free complexes and chain-map diagram"
-   }
-  },
-  {
-   "text": "The injectivity hypothesis on $H^1$ says that the direct-sum degree-one residue map $(b_1,\\ldots,b_n):\\kappa(s)^{h_1}\\to\\bigoplus_i\\kappa(s)^{h_{i,1}}$ has rank $h_1$. A nonzero $h_1\\times h_1$ minor therefore remains invertible after shrinking, so the direct-sum map of free modules is injective (for $h_1=0$ this is vacuous). Since each pulled-back line bundle is trivial, the degree-zero differentials $d_i$ vanish, and the degree-zero maps $a_i$ are isomorphisms after shrinking because their residue maps are. The chain-map identity gives $(\\oplus_i b_i)d=(\\oplus_i d_i)(a_1,\\ldots,a_n)=0$, hence $d=0$ by injectivity.",
+   "text": "Extend V along the embedding k to an open O of S with k inverse(O)=V, using k.isEmbedding.isInducing.isOpen_iff. Take U intersect O. For g:T -> U intersect O, hsub gives the forward implication. For the reverse, the intersection universal property gives h:T -> W with h followed by k equal to g followed by the open inclusion. Evaluate this equation at each point to prove image(h) lies in V. Apply the universal pullback property, rewrite by the factorization equality and use hZ to factor through Z. All test schemes, including nonreduced ones, are covered.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, injective minor and d=0 paragraphs"
-   }
-  },
-  {
-   "text": "The equality $d=0$ means that the chosen trivializing section of $\\mathcal L_s$ lifts to a global section $\\sigma$ of $\\mathcal L$ on $X$. Its zero locus is closed; by [lem-weil-pbc-proper-closed-image] its image under the proper morphism $f$ is closed in $S$. Since the zero locus misses the fibre over $s$, an open neighbourhood $U$ of $s$ avoids that image. Thus $\\sigma|_{X_U}$ is nowhere vanishing and, by the defining local property of an invertible module, gives a trivialization of $\\mathcal L|_{X_U}$. The universal property of $Z$ then identifies $Z$ with the scheme-theoretic intersection of the $Z_i$ on $U.",
-   "uses": [
-    "lem-weil-pbc-proper-closed-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, final paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-picard-diagonal-locally-closed",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-weil-pbc-proper-closed-image"
+  "lem-sc-picard-h1-intersection-section",
+  "lem-sc-proper-fibre-generator-pullback-locus"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2"
+  "place": "Tag 0BF2; cohomological section lift separated from proper shrinking; ambient-open and universal-factorization glue proved in Lean by H1"
  },
  "mathlib_searches": [
   {
@@ -189,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184302-L-4004312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

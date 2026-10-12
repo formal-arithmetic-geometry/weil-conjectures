@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
+import Sheaf.AlgebraicGeometry.PicardH1IntersectionSection
+import Sheaf.AlgebraicGeometry.ProperFibreGeneratorPullbackLocus
 
 /-!
 # H¹ injectivity and the multiple Picard triviality locus
@@ -89,6 +89,44 @@ theorem picard_h1_multiple_locus {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}
     ∃ U : S.Opens, s ∈ U ∧ ∀ {T : Scheme.{v}} (g : T ⟶ U.toScheme),
       (∃ h : T ⟶ Z, h ≫ j = g ≫ U.ι) ↔
         ∀ i, ∃ h : T ⟶ Zi i, h ≫ ji i = g ≫ U.ι := by
-  sorry
+  classical
+  have hsi : ∀ i, s ∈ Set.range (ji i) := by
+    obtain ⟨z, hz⟩ := hs
+    intro i
+    obtain ⟨a, ha⟩ := hsub j ⟨𝟙 Z, by simp⟩ i
+    refine ⟨a z, ?_⟩
+    change (a ≫ ji i) z = s
+    rw [ha]
+    exact hz
+  obtain ⟨U, hsU, W, k, hk, w, hw, hW, σ, hσ⟩ :=
+    picard_h1_intersection_section f Xi fi ui hui hO hOi L Z j Zi ji hZ hZi s hs hsi hH
+  let : IsImmersion k := hk
+  obtain ⟨V, hwV, hV⟩ := proper_fibre_generator_pullback_locus f L k w σ hσ
+  obtain ⟨O, hOopen, hOV⟩ := k.isEmbedding.isInducing.isOpen_iff.mp V.isOpen
+  let O' : S.Opens := ⟨O, hOopen⟩
+  have hsO : s ∈ O' := by
+    rw [← hw]
+    change w ∈ k ⁻¹' O
+    rw [hOV]
+    exact hwV
+  refine ⟨U ⊓ O', ⟨hsU, hsO⟩, ?_⟩
+  intro T g
+  constructor
+  · exact hsub (g ≫ (U ⊓ O').ι)
+  · intro hgi
+    have hgU : Set.range (g ≫ (U ⊓ O').ι) ⊆ U := by
+      rintro _ ⟨t, rfl⟩
+      exact (g t).property.1
+    obtain ⟨h, hh⟩ := (hW (g ≫ (U ⊓ O').ι) hgU).mpr hgi
+    have hhV : Set.range h ⊆ V := by
+      rintro _ ⟨t, rfl⟩
+      rw [← hOV]
+      change k (h t) ∈ O'
+      change (h ≫ k) t ∈ O'
+      rw [hh]
+      exact (g t).property.2
+    have hL := hV h hhV
+    rw [hh] at hL
+    exact (hZ (g ≫ (U ⊓ O').ι)).mpr hL
 
 end AlgebraicGeometry.Scheme
