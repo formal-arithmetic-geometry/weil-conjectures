@@ -7733,3 +7733,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: returned deliver/T2/Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection (reviewer RETURN: (the landing tools, head 255a590a3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 13:52 L: returned deliver/V2/Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty (reviewer RETURN: (the landing tools, head 9c7122e2b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 13:52 L: returned deliver/V3/Sheaf.Topology.ConstantSubsheafQuotientGluing (reviewer RETURN: (the landing tools, head 989c5ce08) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
+- 13:52 L: returned deliver/V3/Sheaf.Topology.ConstantSubsheafQuotientStalkIso (reviewer RETURN: (the landing tools, head 49fbe3bae) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
