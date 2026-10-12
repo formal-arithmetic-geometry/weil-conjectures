@@ -3,6 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.ThickeningSystemHomTransportCore
+import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
 import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Transport of compatible morphism families
@@ -69,6 +71,12 @@ theorem thickeningSystem_hom_transport
       ∀ w : G ⟶ F, e (R.map w) =
         ⟨fun n ↦ (Scheme.Modules.tensorPullback (j n)).map w.hom,
           fun n ↦ ((c n).hom.naturality w.hom).symm⟩ := by
-  sorry
+  obtain ⟨ed, hed⟩ := thickeningSystem_hom_transport_d j d R r hr F G
+  obtain ⟨ec, hec⟩ := compatible_family_comparison_equiv j hj c d F G
+  refine ⟨ed.trans ec, ?_⟩
+  intro w
+  apply Subtype.ext
+  change (ec (ed (R.map w))).val = _
+  rw [hec, hed]
 
 end AlgebraicGeometry
