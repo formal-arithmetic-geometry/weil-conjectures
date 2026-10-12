@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-pbc-monogenic-maximal-finite-cover-core",
+ "kind": "statement",
+ "title": "Finite monogenic cover with normal principal open",
+ "statement": "Let R be a normal Nagata domain [def-weil-pbc-normal-ring] [def-weil-pbc-nagata-ring], K its fraction field, x in K, S=R[x], m a maximal ideal of S, and A=S_m [def-weil-pbc-localization-at-prime]. There exists a Noetherian domain B [def-weil-pbc-noetherian-ring] with an injective finite A-algebra map [def-weil-finitely-generated-module] and a nonzero f such that every prime localization of B_f [def-weil-ring-localization-away] is a normal domain. For every maximal ideal q of B there exist a normal Noetherian Nagata domain Rprime, its fraction field Kprime, y in Kprime, a Noetherian monogenic algebra Rprime[y], and a maximal ideal n containing y, together with a ring isomorphism B_q ≅ Rprime[y]_n. The quantified rings lie in Type(max u v). This construction does not assume or conclude analytic unramifiedness.",
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-finitely-generated-module",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5, lines 46137--46173 and the finite-extension descent setup"
+ },
+ "proof": [
+  {
+   "text": "Fix $\\mathfrak m$ and set $\\mathfrak n=R\\cap\\mathfrak m$. The field $\\kappa(\\mathfrak m)$ is generated as a $\\kappa(\\mathfrak n)$-algebra by the residue of $x$, because $S=R[x]$; it is finite over $\\kappa(\\mathfrak n)$ by [lem-weil-pbc-zariski-lemma]. Let $\\bar f(T)=T^d+\\sum_{i=1}^d\\bar c_iT^{d-i}\\in\\kappa(\\mathfrak n)[T]$ be the monic minimal polynomial of the residue of $x$. Lift each $\\bar c_i$ to a fraction $c_i/s_i\\in R_{\\mathfrak n}$ with $s_i\\in R\\setminus\\mathfrak n$; localize $R$ and $S$ at the product $s=\\prod_i s_i$, so all lifts lie in $R_s$. The resulting monic $f(T)\\in R_s[T]$ has $f(x)\\in\\mathfrak mS_s$, since its residue in $\\kappa(\\mathfrak m)$ is $\\bar f(\\bar x)=0$. The maximal ideal $\\mathfrak mS_s$ and its localization of $S$ still give the original $S_{\\mathfrak m}$.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Proposition Tag 0334 (proposition-nagata-universally-japanese), Step 5, lines 46137-46144 ('details omitted' for the monic polynomial); the denominator lift is written here"
+   }
+  },
+  {
+   "text": "Work over the localized $R_s$ and rename it $R$. Adjoin roots of $f$ successively to $K$; at most $d$ finite algebraic extensions give a finite splitting field $K''/K$. Let $R'$ be the integral closure of $R$ in $K''$. The Nagata property of $R$ [lem-weil-pbc-nagata-localization] makes $R'$ a finite $R$-module by the N-2 clause of [def-weil-pbc-nagata-ring] and [def-weil-pbc-japanese-domain]; it is a normal domain with fraction field $K''$ by [lem-weil-pbc-integral-closure-finite-extension-normal], and Nagata by [lem-weil-pbc-finite-over-nagata-nagata]. Every root of the monic polynomial $f$ is integral over $R$, so lies in $R'$ [def-weil-pbc-integral-closure]. Put $S'=R'[x]\\subset K''$. The same finitely many $R$-module generators of $R'$ generate $S'$ as an $S$-module, so $S\\subseteq S'$ is finite [def-weil-finitely-generated-module], hence integral by [lem-weil-pbc-finite-algebra-is-integral]. Every maximal ideal $\\mathfrak m$ of $S$ has a prime ideal of $S'$ above it by [lem-weil-pbc-integral-injective-lying-over], and that prime is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal].",
+   "uses": [
+    "lem-weil-pbc-nagata-localization",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-over-nagata-nagata",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Proposition Tag 0334 (proposition-nagata-universally-japanese), Step 5, lines 46143-46157"
+   }
+  },
+  {
+   "text": "Set A=S_m and B=(S\\setminus m)^{-1}S' after the denominator localization and splitting extension. The denominator localization is already inverted in A, so B is finite over A, injective, and a Noetherian domain. Every maximal ideal of B comes from a maximal ideal m' of S' over m, because a finite extension is integral and maximal ideals contract to maximal ideals.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every maximal ideal of B, its corresponding maximal ideal mprime in Sprime contains the evaluation of the split polynomial. Since the polynomial is monic of positive degree and splits, primality gives a root r with x-r in mprime. The equality Rprime[x]=Rprime[x-r] gives a ring equivalence of their maximal localizations. Iterated localization identifies B_q with this localization. This is the required presentation with y=x-r; no analytic-unramified assertion is made.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Writing the original x=b/a with a nonzero, inverting its image identifies S'_a with R'_a. Thus B_a is a localization of the normal domain R', and all its prime localizations are normal domains. Injectivity makes the image of a nonzero.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-nagata-localization",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-over-nagata-nagata",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-normal-domain"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0334, proposition-nagata-universally-japanese, Step 5, lines 46137--46173 and the finite-extension descent setup"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite cover fractional monogenic normal Nagata domain generator maximal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite domain cover of a fractional monogenic algebra with local presentations after splitting the residue polynomial",
+   "results": "8 hits on smooth covers, finite presentation, universal factorization, local residue fields; no match for the finite monogenic structural cover.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.adjoin, IsLocalization",
+   "results": "8 hits on essentially finite type, fractional ideals, and denominator-clearing in adjoins; none constructs a finite cover with generator-containing maximal local presentations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAnalyticallyUnramified|Nagata|splitting.*adjoin",
+   "results": "22 hits: splitting fields and adjoin root sets; Nagata only in Noether normalization and Euclidean domain documentation. No direct structural cover theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinSingletonMaximalFiniteCover",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-monogenic-maximal-finite-cover",
+   "place": "Tag 0334, Step 5, finite splitting and integral closure",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinSingletonFiniteCoverCore",
+  "file": "lean/Sheaf/RingTheory/AdjoinSingletonFiniteCoverCore.lean",
+  "declaration": "exists_finite_cover_adjoin_singleton_core",
+  "statement": "theorem exists_finite_cover_adjoin_singleton_core\n    (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]\n    [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)\n    (m : Ideal (Algebra.adjoin R ({x} : Set K))) [m.IsMaximal] :\n    ∃ (B : Type (max u v)) (_ : CommRing B) (_ : IsDomain B)\n      (_ : Algebra (Localization.AtPrime m) B) (_ : IsNoetherianRing B),\n      Function.Injective (algebraMap (Localization.AtPrime m) B) ∧\n      Module.Finite (Localization.AtPrime m) B ∧\n      (∃ f : B, f ≠ 0 ∧ ∀ (p : Ideal (Localization.Away f)) [p.IsPrime],\n        IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧\n      (∀ (q : Ideal B) [q.IsMaximal],\n        ∃ (R' K' : Type (max u v)) (_ : CommRing R') (_ : IsDomain R')\n          (_ : IsIntegrallyClosed R') (_ : IsNoetherianRing R') (_ : Field K')\n          (_ : Algebra R' K') (_ : IsFractionRing R' K'),\n          IsNagataRing R' ∧ ∃ (y : K')\n            (_ : IsNoetherianRing (Algebra.adjoin R' ({y} : Set K')))\n            (n : Ideal (Algebra.adjoin R' ({y} : Set K'))) (_ : n.IsMaximal),\n            (⟨y, Algebra.subset_adjoin (Set.mem_singleton y)⟩ :\n              Algebra.adjoin R' ({y} : Set K')) ∈ n ∧\n              Nonempty (Localization.AtPrime q ≃+* Localization.AtPrime n))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T220530-L-1397223",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T220530-L-1397223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

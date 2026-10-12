@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.RingTheory.AdjoinSingletonFiniteCoverCore
+import Sheaf.RingTheory.AdicCompletionRingEquiv
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # A finite cover of a maximal localization of a fractional monogenic algebra
@@ -22,6 +25,16 @@ Source: Stacks Project, Algebra, Tag 0334, Step 5, residue-polynomial splitting 
 @[expose] public section
 
 universe u v
+
+/-- Transport analytic unramifiedness along a local ring isomorphism. -/
+private theorem unramified_of_equiv {C D : Type*} [CommRing C] [CommRing D]
+    [IsLocalRing C] [IsLocalRing D] [IsNoetherianRing C] [IsNoetherianRing D]
+    (e : C ≃+* D) (h : IsAnalyticallyUnramified D) : IsAnalyticallyUnramified C := by
+  obtain ⟨E, _⟩ := AdicCompletion.exists_ringEquiv
+    (IsLocalRing.maximalIdeal C) (IsLocalRing.maximalIdeal D) e
+    (IsLocalRing.map_ringEquiv_maximalIdeal e).symm
+  have : IsReduced (AdicCompletion (IsLocalRing.maximalIdeal D) D) := h
+  exact isReduced_of_injective E.toRingHom E.injective
 
 /-- The generator-in-maximal local calculation produces a finite domain cover whose
 maximal localizations are analytically unramified and which has a normal principal open.
@@ -67,4 +80,25 @@ theorem exists_finite_cover_adjoin_singleton_atPrime
       (∃ f : B, f ≠ 0 ∧ ∀ (p : Ideal (Localization.Away f)) [p.IsPrime],
         IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧
       (∀ (q : Ideal B) [q.IsMaximal],
-        IsAnalyticallyUnramified (Localization.AtPrime q)) := by sorry
+        IsAnalyticallyUnramified (Localization.AtPrime q))  := by
+  obtain ⟨B, hBCR, hBDom, hBAlg, hBNoeth, hinj, hfin, hnormalB, hpresent⟩ :=
+    exists_finite_cover_adjoin_singleton_core R K hR x m
+  let : CommRing B := hBCR
+  let : IsDomain B := hBDom
+  let : Algebra (Localization.AtPrime m) B := hBAlg
+  let : IsNoetherianRing B := hBNoeth
+  refine ⟨B, hBCR, hBDom, hBAlg, hBNoeth, hinj, hfin, hnormalB, ?_⟩
+  intro q hq
+  obtain ⟨R', K', hCR, hDom, hNormal, hNoeth, hField, hAlg, hFrac,
+    hNagata, y, hSNoeth, n, hn, hy, ⟨e⟩⟩ := hpresent q
+  let : CommRing R' := hCR
+  let : IsDomain R' := hDom
+  let : IsIntegrallyClosed R' := hNormal
+  let : IsNoetherianRing R' := hNoeth
+  let : Field K' := hField
+  let : Algebra R' K' := hAlg
+  let : IsFractionRing R' K' := hFrac
+  let : IsNoetherianRing (Algebra.adjoin R' ({y} : Set K')) := hSNoeth
+  let : n.IsMaximal := hn
+  exact unramified_of_equiv e (hLocal R' K' hNagata y n hy)
+
