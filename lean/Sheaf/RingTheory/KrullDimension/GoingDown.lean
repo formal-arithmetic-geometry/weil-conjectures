@@ -43,4 +43,13 @@ theorem ringKrullDim_le_of_goingDown_of_surjective
     (hgoing : letI := φ.toAlgebra; Algebra.HasGoingDown R S)
     (hsurjective : Function.Surjective (PrimeSpectrum.comap φ)) :
     ringKrullDim R ≤ ringKrullDim S := by
-  sorry
+  let := φ.toAlgebra
+  have : Algebra.HasGoingDown R S := hgoing
+  unfold ringKrullDim Order.krullDim
+  refine iSup_le fun l => ?_
+  obtain ⟨Q, hQ⟩ := hsurjective l.last
+  have : Q.asIdeal.LiesOver l.last.asIdeal := by
+    constructor
+    exact (congrArg PrimeSpectrum.asIdeal hQ).symm
+  obtain ⟨L, hlength, _, _⟩ := Ideal.exists_ltSeries_of_hasGoingDown l Q.asIdeal
+  exact hlength ▸ Order.LTSeries.length_le_krullDim L

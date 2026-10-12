@@ -26,44 +26,37 @@
  ],
  "proof": [
   {
-   "text": "If $R=0$, then it has no prime ideals and $\\dim R=-\\infty$, so the conclusion is immediate. Otherwise, let $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ be any finite strictly increasing chain of prime ideals of $R$. By surjectivity of $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, choose a prime $\\mathfrak q_n$ of $S$ with $\\varphi^{-1}(\\mathfrak q_n)=\\mathfrak p_n$.",
+   "text": "Unfold `ringKrullDim` and `Order.krullDim`, then prove the supremum inequality pointwise for an arbitrary finite strict chain `l` of primes of `R`.",
    "uses": [
     "def-weil-pbc-krull-dimension-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up), proof: choose a prime over the final member of a chain"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply going down successively to the inclusions $\\mathfrak p_{n-1}\\subsetneq\\mathfrak p_n,\\ldots,\\mathfrak p_0\\subsetneq\\mathfrak p_1$. This produces primes $\\mathfrak q_i\\subseteq\\mathfrak q_{i+1}$ with $\\varphi^{-1}(\\mathfrak q_i)=\\mathfrak p_i$. Each inclusion is strict, because equality would imply equal contractions while $\\mathfrak p_i\\subsetneq\\mathfrak p_{i+1}$. Thus $S$ has a strictly increasing prime chain of length $n$.",
+   "text": "Use spectrum surjectivity to choose `Q : PrimeSpectrum S` contracting to `l.last`; this gives `Q.asIdeal.LiesOver l.last.asIdeal` by congruence of `PrimeSpectrum.asIdeal`.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up), proof: repeated going down and strictness from distinct contractions"
-   }
+   "elementary": true
   },
   {
-   "text": "Every finite prime-chain length occurring in $R$ therefore occurs in $S$. Taking suprema of the chain lengths and using the definition of Krull dimension [def-weil-pbc-krull-dimension-ring] gives $\\dim R\\le\\dim S$ (and the same inequality is automatic in the $R=0$ case).",
+   "text": "Apply Mathlib theorem `Ideal.exists_ltSeries_of_hasGoingDown` under the algebra structure induced by `φ`. It constructs a strict ideal chain `L` in `S` with the same length as `l`, starting below `Q` and lying over the chain `l`.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The bound `Order.LTSeries.length_le_krullDim L`, rewritten by the equal lengths, gives `l.length ≤ ringKrullDim S`; taking the supremum proves the result, including empty and unbounded cases.",
    "uses": [
     "def-weil-pbc-krull-dimension-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00OH (lemma-dimension-going-up), conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-krull-dimension-ring"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-tags-cited.tsv",
-  "place": "Algebra Lemma Tag 00OH; proof reconstructed from the cited chain argument because algebra.tex is unavailable locally"
+  "by": "F1",
+  "document": "Mathlib.RingTheory.Ideal.GoingDown",
+  "place": "Ideal.exists_ltSeries_of_hasGoingDown together with Order.LTSeries.length_le_krullDim; direct proof in the delivered module"
  },
  "mathlib_searches": [
   {
@@ -148,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T184355-L-4024007",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

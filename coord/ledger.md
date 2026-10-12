@@ -9101,3 +9101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/V3/Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductEpi (stage 3; reviewer PASS; first push; landing 20261012T184354-L-4023672 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/V3/Sheaf.CategoryTheory.MittagLefflerLimitExact (stage 3; reviewer PASS; first push; landing 20261012T184354-L-4023772 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ThickeningCompletionHomDictionary (stage 3; reviewer PASS; first push; landing 20261012T184355-L-4023877 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:43 L: merged deliver/W2/Sheaf.RingTheory.KrullDimension.GoingDown (stage 3; reviewer PASS; first push; landing 20261012T184355-L-4024007 (proof); batch 20261012T184234; modules 1; new nodes 0)
