@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-torsor-cohomology-lift-criterion",
+ "kind": "statement",
+ "title": "A representing torsor detects vanishing after arbitrary pullback",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $M$ a finite abelian group, and $\\xi\\in H^1(Y_{\\mathrm{Et}},\\underline M)$, with cohomology as in [def-weil-pbc-etale-cohomology]. There exists an $M$-torsor $t:P\\to Y$ [def-weil-pbc-finite-torsors], represented by a finite etale scheme as in [sbc-prop-torsors-h1], such that for every scheme $Y\\prime$ and morphism $f:Y\\prime\\to Y$, the pullback $f^*\\xi$ [def-weil-pbc-cohomology-pullback] is zero if and only if there is a morphism $s:Y\\prime\\to P$ with $t\\circ s=f$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-torsors/thm-galois-torsor-h1.md",
+  "place": "Step 3, well-definedness and naturality; specialized to the zero-class/section criterion of sbc-prop-torsors-h1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-finite-torsors",
+  "sbc-prop-torsors-h1",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "By [sbc-prop-torsors-h1], choose an isomorphism class q with classH1(q)=ξ, and choose a representative t by quotient induction. This uses the existing bijective_classH1 from EtaleTorsorDescent, retaining the unit's torsor classification and finite-etale representability route.",
+   "uses": [
+    "sbc-prop-torsors-h1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f:Y′→Y, apply the inverse-image clause (1) of [lem-sc-etale-torsor-h1-functoriality] to t.toSheafTorsor. It provides a torsor T′ under f* of the constant abelian sheaf, an isomorphism from set inverse image of t.toSheafTorsor.sheaf to T′.sheaf, and equality of its class with f*ξ. By [thm-galois-torsor-h1], T′ has class zero exactly when it has a global section. No identification of the pulled-back coefficient sheaf with a constant sheaf is necessary.",
+   "uses": [
+    "lem-sc-etale-torsor-h1-functoriality",
+    "thm-galois-torsor-h1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put F=base change along f on small etale sites. The existing sheaf t.toSheafTorsor.sheaf is the lifted Yoneda sheaf of t.toEtale. Mathlib Presheaf.compULiftYonedaIsoULiftYonedaCompLan (Mathlib/CategoryTheory/Limits/Presheaf.lean, lines 454–458), applied at t.toEtale and then sheafified, identifies its inverse image with the sheafification of the lifted Yoneda presheaf of F(t.toEtale). This representable is a sheaf, and Mathlib sheafificationIso (Mathlib/CategoryTheory/Sites/Sheafification.lean, line 231) identifies its sheafification with itself. Compose the two isomorphisms and the isomorphism from Step 2 and evaluate at the terminal object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resulting sections are lifted morphisms from the terminal etale object to F(t.toEtale), whose total space is P×_Y Y′ and structure morphism is the second projection. Replace the chosen terminal object by the identity Y′→Y′ using uniqueness of terminal objects. A section φ gives s=φ composed with the first projection; the pullback equation and φ composed with the second projection=id give s composed with π=f. Conversely, from s composed with π=f form pullback.lift s id; its second projection is id. Transport these sections through the evaluated isomorphism. This proves both implications for every f.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-prop-torsors-h1",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "thm-galois-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/EtaleTorsorCohomology.lean",
+  "place": "Compiling proof from existing torsor classification, inverse-image functoriality, and Mathlib representable Kan extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the classification of finite etale torsors by first cohomology under pullback",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Pullback.cocycle, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "classH1.*(pullback|map)|Torsor.*pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every class of first etale cohomology of a finite constant abelian group is represented by a torsor whose pullback is zero exactly when the morphism lifts to the torsor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-torsor-h1",
+   "place": "Step 3: functoriality of pullback gives naturality, followed by the zero-class criterion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-torsors",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/EtaleTorsorCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff",
+  "statement": "theorem exists_forall_cohomologyMap_eq_zero_iff {Y : Scheme.{u}}\n    (ξ : Sheaf.H ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n      (AddCommGrpCat.of M)) 1) :\n    ∃ t : EtaleTorsor M Y, ∀ ⦃Y' : Scheme.{u}⦄ (f : Y' ⟶ Y),\n      Etale.cohomologyMap f _ 1 ξ = 0 ↔ ∃ s : Y' ⟶ t.P, s ≫ t.π = f",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T042427-L-1824421",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T042427-L-1824421",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
