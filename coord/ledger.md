@@ -6135,3 +6135,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:25 L: returned deliver/H2/Sheaf.AlgebraicGeometry.StrictHenselization (reviewer RETURN: (reviewer X-bf72e, head bf72eb880) F (brief point 2): Complete coord/changes/strictHenselization-proof-imports.md. Befor)
 - 05:32 L: took deliver/F2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket out of the library again (batch landing 20261012T044743-L-2034714 reverted: WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket: probe)
 - 05:32 L: returned deliver/F2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (reviewer RETURN: (the batch landing, head a10cc5b60) the global build refused the delivery; it was taken out of the library again (landin)
+- 05:36 L: returned deliver/V1/Sheaf.Paper.StrictHenselianZariskiEtaleComparison (reviewer RETURN: (reviewer X-bac03, head bac0379e6) E2 / H3 (review point 4): lean/Sheaf/Paper/StrictHenselianZariskiEtaleComparison.lean)
