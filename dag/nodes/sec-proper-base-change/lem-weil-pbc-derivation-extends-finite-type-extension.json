@@ -29,74 +29,29 @@
  ],
  "proof": [
   {
-   "text": "(Generators; the maps into the fractions.) By [def-weil-pbc-finite-type-algebra] there are $x_1,\\ldots,x_m\\in R'$ such that every element of $R'$ is a polynomial in $x_1,\\ldots,x_m$ with coefficients in $R$. Let $\\iota':R'\\to R'_g$, $t\\mapsto t/1$, and $\\iota:R\\to R_g$, $r\\mapsto r/1$; both are ring maps. $\\iota'$ is injective: $t/1=0/1$ means $g^ut=0$ for some $u\\ge0$, hence $t=0$ as $g$ is a nonzerodivisor in $R'$; likewise $\\iota$ is injective, since $R\\subseteq R'$. Let $\\varphi:R_g\\to R'_g$, $r/g^n\\mapsto r/g^n$, be the map of the hypothesis; it is a ring map and bijective, hence a ring isomorphism, and $\\varphi(\\iota(r))=\\iota'(r)$ for $r\\in R$.",
+   "text": "Apply RingTheory.exists_derivation_away_transport to D and the bijective canonical localization map, obtaining a derivation δ on R'_g agreeing with D on R.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra"
+    "lem-weil-pbc-derivation-away-transport"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
-   }
+   "elementary": false
   },
   {
-   "text": "(The derivation $\\delta$ of $R'_g$.) The powers $W=\\{1,g,g^2,\\ldots\\}$ form a multiplicative subset of $R$, and $W^{-1}R$ as defined in [lem-weil-pbc-derivation-extends] (2) is the ring $R_g$ of the statement ($a/g^n=a'/g^m$ iff $g^u(ag^m-a'g^n)=0$ for some $u\\ge0$). By [lem-weil-pbc-derivation-extends] (2) there is a derivation $D_g:R_g\\to R_g$ with $D_g(a/g^n)=D(a)/g^n-aD(g^n)/g^{2n}$ for $a\\in R$, $n\\ge0$; in particular $D_g(\\iota(r))=\\iota(D(r))$. Since $\\varphi$ is a ring isomorphism (Step 1), $\\delta:=\\varphi\\circ D_g\\circ\\varphi^{-1}:R'_g\\to R'_g$ is additive and satisfies $\\delta(st)=s\\delta(t)+t\\delta(s)$ (apply $\\varphi$ to the Leibniz rule of $D_g$ at $\\varphi^{-1}(s),\\varphi^{-1}(t)$), so $\\delta$ is a derivation of $R'_g$, and $\\delta(\\iota'(r))=\\varphi(D_g(\\iota(r)))=\\iota'(D(r))$ for $r\\in R$. (This is the source's 'By (2) this extends to $R_g$', with $R_g=R'_g$.)",
+   "text": "Apply RingTheory.exists_derivation_of_finiteType_away_extension to δ, its agreement with D, finite type, and regularity of g. It gives N and D' with the unchanged required equality on R.",
    "uses": [
-    "lem-weil-pbc-derivation-extends"
+    "lem-weil-pbc-derivation-away-finite-type-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
-   }
-  },
-  {
-   "text": "(A common $N$ with $g^Nx_i\\in R$.) Fix $i$. As $\\varphi$ is surjective, $\\iota'(x_i)=x_i/1=\\varphi(r_i/g^{n_i})=r_i/g^{n_i}$ in $R'_g$ for some $r_i\\in R$, $n_i\\ge0$, i.e. $g^u(g^{n_i}x_i-r_i)=0$ in $R'$ for some $u\\ge0$. As $g$ is a nonzerodivisor in $R'$, $g^{n_i}x_i=r_i\\in R$. Put $N=\\max(n_1,\\ldots,n_m)$ ($N=0$ if $m=0$) and $a_i:=g^Nx_i=g^{N-n_i}r_i\\in R$. Then $\\iota'(x_i)=\\varphi(a_i/g^N)$, since $\\varphi(a_i/g^N)=a_i/g^N=x_i/1$ in $R'_g$ ($g^Nx_i-a_i=0$). (The source says only 'choose an $N$ such that $g^Nx_i\\in R$'.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
-   }
-  },
-  {
-   "text": "($g^{N+1}\\delta(x_i)$ comes from $R$.) By induction on $N$ with the Leibniz rule, $D(g^N)=Ng^{N-1}D(g)$ for $N\\ge1$, and $D(g^0)=D(1)=0$ ($D(1)=D(1\\cdot1)=2D(1)$). With the formula of Step 2, $D_g(a_i/g^N)=D(a_i)/g^N-a_iD(g^N)/g^{2N}=D(a_i)/g^N-Na_iD(g)/g^{N+1}$ (for $N\\ge1$, $a_iNg^{N-1}D(g)/g^{2N}=Na_iD(g)/g^{N+1}$ as $g^{N-1}g^{N+1}=g^{2N}$; for $N=0$ both second terms are $0$). Multiplying by $g^{N+1}/1$: $g^{N+1}D_g(a_i/g^N)=\\iota(c_i)$ with $c_i:=gD(a_i)-Na_iD(g)\\in R$, which is the source's $g^{N+1}D(x_i)=-Ng^Nx_iD(g)+gD(g^Nx_i)$. Applying $\\varphi$ and Step 3: $g^{N+1}\\delta(\\iota'(x_i))=\\varphi(g^{N+1}D_g(a_i/g^N))=\\iota'(c_i)\\in\\iota'(R')$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
-   }
-  },
-  {
-   "text": "($\\Delta=g^{N+1}\\delta$ preserves $R'$.) $\\Delta:=g^{N+1}\\delta:R'_g\\to R'_g$ is additive and $\\Delta(st)=g^{N+1}(s\\delta(t)+t\\delta(s))=s\\Delta(t)+t\\Delta(s)$, so $\\Delta$ is a derivation of $R'_g$. Let $S=\\{t\\in R':\\Delta(\\iota'(t))\\in\\iota'(R')\\}$. $S$ is closed under sums and differences ($\\Delta$ is additive and $\\iota'(R')$ is a subgroup) and under products: for $t,t'\\in S$, $\\Delta(\\iota'(tt'))=\\iota'(t)\\Delta(\\iota'(t'))+\\iota'(t')\\Delta(\\iota'(t))\\in\\iota'(R')$, as $\\iota'(R')$ is a subring. $S\\supseteq R$: $\\Delta(\\iota'(r))=g^{N+1}\\iota'(D(r))=\\iota'(g^{N+1}D(r))$ (Step 2). $x_i\\in S$ (Step 4). Hence $S$ contains every polynomial in $x_1,\\ldots,x_m$ with coefficients in $R$ (built from elements of $R$ and the $x_i$ by sums and products), i.e. $S=R'$ by the choice of the $x_i$ [def-weil-pbc-finite-type-algebra]. (The source's monomial formula, written for all elements via the subring $S$; the source leaves out the terms where $\\Delta$ falls on the coefficients in $R$, which $S\\supseteq R$ covers.)",
-   "uses": [
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
-   }
-  },
-  {
-   "text": "(The derivation $D'$.) For $t\\in R'$ let $D'(t)$ be the element of $R'$ with $\\iota'(D'(t))=\\Delta(\\iota'(t))$; it exists by Step 5 and is unique as $\\iota'$ is injective (Step 1). Since $\\iota'$ is an injective ring map and $\\Delta$ is a derivation, $\\iota'(D'(t+t'))=\\iota'(D'(t)+D'(t'))$ and $\\iota'(D'(tt'))=\\iota'(tD'(t')+t'D'(t))$, so $D':R'\\to R'$ is a derivation. For $r\\in R$, $\\iota'(D'(r))=\\iota'(g^{N+1}D(r))$ (Step 5), so $D'(r)=g^{N+1}D(r)$. This proves the statement with the integer $N+1\\ge0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of the final statement"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-derivation-extends"
+  "lem-weil-pbc-derivation-away-transport",
+  "lem-weil-pbc-derivation-away-finite-type-core"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "A2",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), paragraph 'Proof of the final statement' (line 11785); the choice of N (via the nonzerodivisor g), the transport of D_g to R'_g along R_g = R'_g, the formula for D(g^N), and the closure under sums and products (the coefficients in R) that the source leaves out are written out"
+  "place": "Tag 07PE, final statement; two-stage localization transport and denominator clearing reduction, fully proved by the second reader"
  },
  "mathlib_searches": [
   {
@@ -215,5 +170,15 @@
   "group": "J1",
   "result": "fix",
   "note": "R,R' CommRing + Algebra + injective algebraMap (R ⊆ R'); Algebra.FiniteType; g nonzerodivisor in R'; Localization.Away map bijective; D, D' Derivation ℤ; D' ∘ algebraMap = algebraMap ∘ g^N D; N=0, empty generators, universes"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T205627-L-931402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

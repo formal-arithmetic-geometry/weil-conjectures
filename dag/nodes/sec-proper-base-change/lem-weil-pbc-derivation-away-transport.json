@@ -1,0 +1,119 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derivation-extends-finite-type-extension",
+   "place": "step 2: transport the localized derivation",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PE, proof of the final statement"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the localization clause of Derivation.exists_completion_and_unique_localization for the powers of g to obtain Dw on R_g with Dw(r/1)=D(r)/1.",
+   "uses": [
+    "lem-weil-pbc-derivation-extends"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bijective canonical map gives a ring isomorphism e : R_g ≃ R'_g. Define δ=e ∘ Dw ∘ e⁻¹ as a composition of additive homomorphisms. Its integer-linearity follows from additivity, it sends one to zero, and the Leibniz identity follows by applying e to the identity for Dw.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "IsLocalization.map_eq gives e(r/1)=ι'(r). Substitute into the formula for δ, cancel e⁻¹ ∘ e, and use the extension identity for Dw to obtain δ(ι'(r))=ι'(D(r)).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derivation-extends"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A2",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PE, part (2) and final statement; direct denominator clearing variant for the finite type restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport an absolute derivation through an isomorphism between localizations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate an absolute ring derivation by a ring equivalence and extend it to a localization",
+   "results": "8 hits: Derivation.compAlgebraMap, Differential.algEquiv_deriv', Derivation.compAlgebraMapL_apply_apply, Derivation.compAlgebraMap_apply, Derivation.compAlgebraMapL, algebraMap.coe_deriv, Derivation.apply_aeval_eq', Differential.algEquiv_deriv; inspected, no theorem with this conclusion",
+   "date": "2026-10-13",
+   "verdict": "no exact match; construction uses elementary ring identities and proved localization API"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, RingEquiv",
+   "results": "2 hits: MvPolynomial.pderiv_sumRingEquiv, MvPolynomial.pderiv_sumToIter; inspected, no theorem with this conclusion",
+   "date": "2026-10-13",
+   "verdict": "no exact match; construction uses elementary ring identities and proved localization API"
+  },
+  {
+   "tool": "grep",
+   "query": "liftOfSurjective|extendDerivation|ext_of_adjoin_eq_top",
+   "results": "24 hits: Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean; inspected, no theorem with this conclusion",
+   "date": "2026-10-13",
+   "verdict": "no exact match; construction uses elementary ring identities and proved localization API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivationExtendsFiniteType",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-derivation-away-transport",
+ "title": "Transport of a derivation across an away-localization isomorphism",
+ "statement": "Let R and R' be commutative rings with an injective algebra map R → R', let g ∈ R, and assume the induced canonical map R_g → R'_g is bijective. For every absolute derivation D : R → R, there exists an absolute derivation δ : R'_g → R'_g with δ(ι'(r)) = ι'(D(r)) for every r ∈ R. No finite type or regularity assumption is needed.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivationAwayTransport",
+  "file": "lean/Sheaf/Paper/DerivationAwayTransport.lean",
+  "declaration": "RingTheory.exists_derivation_away_transport",
+  "statement": "theorem exists_derivation_away_transport\n    (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R']\n    (_hinj : Function.Injective (algebraMap R R')) (g : R)\n    (hiso : Function.Bijective\n      (IsLocalization.Away.map (Localization.Away g)\n        (Localization.Away (algebraMap R R' g)) (algebraMap R R') g))\n    (D : Derivation ℤ R R) :\n    ∃ δ : Derivation ℤ (Localization.Away (algebraMap R R' g))\n        (Localization.Away (algebraMap R R' g)),\n      ∀ r : R, δ (algebraMap R' (Localization.Away (algebraMap R R' g))\n        (algebraMap R R' r)) =\n        algebraMap R' (Localization.Away (algebraMap R R' g))\n          (algebraMap R R' (D r))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T205627-L-931402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T205627-L-931402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

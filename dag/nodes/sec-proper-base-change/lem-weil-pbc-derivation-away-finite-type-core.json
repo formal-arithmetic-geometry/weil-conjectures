@@ -1,0 +1,126 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derivation-extends-finite-type-extension",
+   "place": "steps 3–6: integrality on generators, closure, and restriction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PE, proof of the final statement"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The localization ring map ι : R' → R'_g is injective since all powers of g are nonzerodivisors. Finite type gives a finset s with Algebra.adjoin R s = ⊤.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each x ∈ R', use IsLocalization.Away.surj on δ(ι(x)) to choose n(x),a(x) with δ(ι(x))*ι(g)^n(x)=ι(a(x)). Set N=max_{x∈s} n(x), with N=0 for empty s. The scaled derivation Δ=ι(g)^N δ sends a generator x to ι(a(x)*g^(N-n(x))).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a coefficient r ∈ R, Δ(ι(r))=ι(g^N D(r)) by the agreement hypothesis. Algebra.adjoin_induction shows that Δ(ι(x)) is in the image of ι for every x: for sums add preimages; for products of x,y use x*D'(y)+y*D'(x) as a preimage by Leibniz.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each x let d(x) be the unique preimage of Δ(ι(x)). Injectivity of ι proves additivity, integer-linearity, vanishing at one, and Leibniz for d. These laws define a derivation D'. Applying injectivity once more to its value on the image of r proves D'(r)=g^N D(r). All choices are from proved existence results, and these final preimages are unique.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A2",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PE, part (2) and final statement; direct denominator clearing variant for the finite type restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given a derivation on a localization of a finitely generated algebra, multiply by a power of the denominator so that it preserves the algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clear denominators of the values of a derivation on finitely many algebra generators to restrict it from an away localization to the algebra",
+   "results": "8 hits: KaehlerDifferential.span_range_map_derivation_of_isLocalization, Algebra.PreSubmersivePresentation.localizationAway_jacobian, Algebra.Generators.cotangentCompAwaySec, Algebra.Generators.cMulXSubOneCotangent, Algebra.Generators.localizationAway, Algebra.SubmersivePresentation.basisCotangent_localizationAway_apply, Algebra.Generators.cMulXSubOneCotangent_eq, Algebra.SubmersivePresentation.localizationAway; inspected, no theorem with this conclusion",
+   "date": "2026-10-13",
+   "verdict": "no exact match; construction uses elementary ring identities and proved localization API"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, Algebra.FiniteType",
+   "results": "0 hits: ; inspected, no theorem with this conclusion",
+   "date": "2026-10-13",
+   "verdict": "no exact match; construction uses elementary ring identities and proved localization API"
+  },
+  {
+   "tool": "grep",
+   "query": "liftOfSurjective|extendDerivation|ext_of_adjoin_eq_top",
+   "results": "24 hits: Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean, Mathlib/RingTheory/Perfectoid/FontaineTheta.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean; inspected, no theorem with this conclusion",
+   "date": "2026-10-13",
+   "verdict": "no exact match; construction uses elementary ring identities and proved localization API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivationExtendsFiniteType",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-derivation-away-finite-type-core",
+ "title": "Restriction of a localized derivation to a finite type algebra",
+ "statement": "Let R and R' be commutative rings with an injective algebra map and let R' be of finite type over R [def-weil-pbc-finite-type-algebra]. Let g ∈ R have nonzerodivisor image in R', and let D : R → R be an absolute derivation. Suppose an absolute derivation δ on the away localization R'_g satisfies δ(ι'(r))=ι'(D(r)) for all r ∈ R. Then there exist N ≥ 0 and an absolute derivation D' : R' → R' with D'(r)=g^N D(r) for all r ∈ R. No isomorphism R_g ≃ R'_g is assumed.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivationAwayFiniteTypeCore",
+  "file": "lean/Sheaf/Paper/DerivationAwayFiniteTypeCore.lean",
+  "declaration": "RingTheory.exists_derivation_of_finiteType_away_extension",
+  "statement": "theorem exists_derivation_of_finiteType_away_extension\n    (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R']\n    (hfinite : Algebra.FiniteType R R')\n    (_hinj : Function.Injective (algebraMap R R'))\n    (g : R) (hreg : algebraMap R R' g ∈ nonZeroDivisors R')\n    (D : Derivation ℤ R R)\n    (δ : Derivation ℤ (Localization.Away (algebraMap R R' g))\n      (Localization.Away (algebraMap R R' g)))\n    (hδ : ∀ r : R, δ (algebraMap R' (Localization.Away (algebraMap R R' g))\n      (algebraMap R R' r)) =\n      algebraMap R' (Localization.Away (algebraMap R R' g))\n        (algebraMap R R' (D r))) :\n    ∃ N : ℕ, ∃ D' : Derivation ℤ R' R',\n      ∀ r : R, D' (algebraMap R R' r) = algebraMap R R' (g ^ N * D r)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T205627-L-931402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T205627-L-931402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

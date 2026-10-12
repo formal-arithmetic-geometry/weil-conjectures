@@ -3,7 +3,8 @@ module
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.Paper.DerivationAwayTransport
+import Sheaf.Paper.DerivationAwayFiniteTypeCore
 
 /-!
 # Derivations after finite type localization extensions
@@ -27,18 +28,16 @@ the canonical map `R_g → R'_g` is bijective. Then for every derivation `D` of 
 derivations are represented as derivations over `ℤ`, as in
 `Derivation.exists_completion_and_unique_localization`.
 
-Proof, following the node's steps:
-1. Choose generators `x₁, …, xₘ` of `R'` over `R`; the maps `R → R_g`, `R' → R'_g` are
-   injective (`g` is a nonzerodivisor in `R'` and `R ⊆ R'`), and the bijective map
-   `φ : R_g → R'_g` is a ring isomorphism compatible with `R ⊆ R'`.
-2. By `Derivation.exists_completion_and_unique_localization` (2), `D` extends to a derivation
-   `D_g` of `R_g`; transporting along `φ` gives a derivation `δ` of `R'_g` extending `D`.
-3. By surjectivity of `φ` and since `g` is a nonzerodivisor, `g ^ nᵢ * xᵢ ∈ R`; take
-   `N = max nᵢ` and `aᵢ = g ^ N * xᵢ ∈ R`.
-4. By the Leibniz rule, `g ^ (N+1) δ(xᵢ) = -N g ^ N xᵢ D(g) + g D(aᵢ)` comes from `R'`.
-5. The elements `t ∈ R'` with `g ^ (N+1) δ(t) ∈ R'` form a subring containing `R` and the
-   `xᵢ` (Leibniz rule), hence all of `R'`.
-6. Restricting `g ^ (N+1) δ` to `R'` gives the derivation `D'` with `D' r = g ^ (N+1) D r`.
+Proof:
+1. By `exists_derivation_away_transport`, extend `D` to `R_g` using
+   `Derivation.exists_completion_and_unique_localization`, then conjugate along the
+   bijective localization map to obtain a derivation `δ` on `R'_g` extending `D`.
+2. By `exists_derivation_of_finiteType_away_extension`, clear the denominators of the
+   values of `δ` on finitely many algebra generators of `R'`. A common power of `g`
+   makes those values integral. Additivity and the Leibniz rule show that the scaled
+   derivation preserves all of `R'`, including the coefficients from `R`.
+3. The map `R' → R'_g` is injective since `g` is regular. Restrict the scaled derivation
+   using unique preimages to obtain `D'` and its asserted values on `R`.
 -/
 theorem derivation_extends_finite_type_extension
     (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R']
@@ -51,6 +50,7 @@ theorem derivation_extends_finite_type_extension
     (D : Derivation ℤ R R) :
     ∃ N : ℕ, ∃ D' : Derivation ℤ R' R',
       ∀ r : R, D' (algebraMap R R' r) = algebraMap R R' (g ^ N * D r) := by
-  sorry
+  obtain ⟨δ, hδ⟩ := exists_derivation_away_transport R R' hinj g hiso D
+  exact exists_derivation_of_finiteType_away_extension R R' hfinite hinj g hreg D δ hδ
 
 end RingTheory
