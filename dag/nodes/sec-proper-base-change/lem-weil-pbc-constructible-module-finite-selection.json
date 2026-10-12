@@ -21,11 +21,10 @@
  ],
  "proof": [
   {
-   "text": "Forget modules to abelian sheaves. Finite module trivializations on the same stratification give constructible underlying sheaves of sets. Forgetting commutes with restriction, inverse image, constants and geometric stalks (filtered colimits), so the hypothesis gives injective abelian stalk tests.",
+   "text": "Apply the underlying-set constructibility comparison to the source. Install the Mathlib colimit-preservation instance for ModuleCat.forget₂. Convert the injective module stalk map to a monomorphism; forgetting to abelian groups preserves it. The natural sheafFiberCompIso identifies this arrow with the geometric stalk of the forgotten sheaf map. Transport monomorphy along its induced arrow isomorphism and use AddCommGrpCat.mono_iff_injective.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-module-underlying-sets",
     "def-weil-pbc-geometric-stalks",
-    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false
@@ -38,18 +37,16 @@
    "elementary": false
   },
   {
-   "text": "Forgetting modules preserves finite biproducts and is faithful, hence reflects monomorphisms. Its biproduct comparison identifies the image of the module lift with the abelian lift. Enumerate the finite selected set by Fin n and reindex the biproduct; n=0 is allowed.",
+   "text": "Enumerate the selected Finset subtype by Fintype.equivFin. To show the module lift is monomorphic, take two arrows with equal composites. Project their equality onto the coordinate corresponding to each selected index. Apply the faithful sheafCompose forgetful functor to these component equalities. Biproduct hom_ext makes their composites with the selected abelian lift equal, and cancellation of that monomorphism gives equality after forgetting. Faithfulness gives equality of the original arrows. This avoids any biproduct-preservation comparison; the empty index set works as well.",
    "uses": [
-    "def-weil-additive-category",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-additive-category"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-module-underlying-sets",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-constructible-noetherian-finite-selection",
   "def-weil-additive-category"
@@ -131,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f722",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T022144-L-1050150",
+  "landing": "20261012T034201-L-1510264",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean declarations with their nodes and the Stacks 09Z6/09Z1 route; existing signature unchanged, node changes confined to proof fields, compilation clean, axioms limited to the standard three plus sorryAx from recorded open obligations."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

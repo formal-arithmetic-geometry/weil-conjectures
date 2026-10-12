@@ -5910,3 +5910,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:39 L: merged deliver/N1/Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T033900-L-1493291 (interface); modules 2; new nodes 1)
 - 03:40 L: merged deliver/Z2/def-nagata-separated-descent-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataSeparatedDescentStage AlgebraicGeometry.nagataSeparatedDescentStage)
 - 03:41 L: merged deliver/N1/WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale (stage 3; reviewer PASS; first push; landing 20261012T034034-L-1502684 (interface); modules 3; new nodes 2)
+- 03:42 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection (stage 3; reviewer PASS; first push; landing 20261012T034201-L-1510264 (interface); modules 2; new nodes 1)

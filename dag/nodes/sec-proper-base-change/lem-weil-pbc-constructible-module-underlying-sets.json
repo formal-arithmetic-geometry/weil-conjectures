@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-constructible-module-underlying-sets",
+ "kind": "statement",
+ "title": "Underlying set sheaf of a constructible module sheaf",
+ "statement": "Let X be a scheme and Lambda a finite commutative ring. If F is a constructible sheaf of Lambda-modules on the small etale site [def-weil-pbc-etale-constructible-sheaf], then forgetting its module structure to abelian groups and then to sets gives a constructible sheaf of sets [def-weil-pbc-etale-sheaves]. The same finite constructible locally closed stratification witnesses the conclusion; no Noetherian hypothesis on X is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 095E(3), 03RU and 09Z6: forgetting finite module trivializations in the partition argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite constructible locally closed stratification and finite constant-module trivializations supplied by module constructibility. Copy the domains, immersions and topological stratification into Scheme.Stratification. Forget modules first to abelian groups and then to sets. Inverse image commutes with this composite forgetful functor: underlying sets preserve finite limits and filtered colimits, so they commute with the local equivalence relation construction of inverse image and sheafification. Restriction to an object is computed sectionwise and commutes with forgetting. Constant sheaves are locally constant functions with values in the coefficient object, so forgetting a constant module sheaf gives the constant set sheaf of the same underlying finite set. Apply these comparisons to each trivializing isomorphism to obtain local constancy of the set pullback to every stratum.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-stratification",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each geometric point of a stratum choose a lift to a member of its jointly surjective etale trivializing cover. Restriction does not change its geometric stalk, and the stalk of a constant set sheaf is its constant value. The chosen finite module therefore supplies a finite set stalk. This proves finite local constancy on each stratum, hence constructibility of the underlying set sheaf. The empty scheme permits an empty partition, and the zero module has a singleton underlying set, so neither case needs an additional assumption.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 095E(3), 03RU and 09Z6: forgetting finite module trivializations in the partition argument",
+  "note": "Comparison of the two formal definitions, expanding the forgetful step of the item plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "underlying set sheaf of a constructible sheaf of modules is constructible",
+   "results": "; CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod, SheafOfModules.IsFiniteType, CondensedMod.LocallyConstant.functor, LightCondMod, CondensedMod.ofSheafStonean",
+   "date": "2026-10-12",
+   "verdict": "general categorical tools only; no constructibility comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "underlying set sheaf of a constructible sheaf of modules is constructible",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*forget|forget.*constructible",
+   "results": "; ",
+   "date": "2026-10-12",
+   "verdict": "general categorical tools only; no constructibility comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafCompose",
+   "results": "; CategoryTheory.sheafCompose, CategoryTheory.fullyFaithfulSheafCompose, CategoryTheory.instFaithfulSheafSheafCompose, CategoryTheory.instReflectsIsomorphismsSheafSheafCompose, CategoryTheory.instFullSheafSheafComposeOfFaithful, CategoryTheory.fullyFaithfulSheafComposeCompSheafToPresheaf, CategoryTheory.instFaithfulSheafFunctorOppositeCompSheafComposeSheafToPresheaf, CategoryTheory.sheafCompose_obj_obj",
+   "date": "2026-10-12",
+   "verdict": "general categorical tools only; no constructibility comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "constructible finite-pushforward reduction: forgetting finite module trivializations before finite selection",
+   "via": [
+    "lem-weil-pbc-constructible-module-finite-selection",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleUnderlyingSets.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleSheafOfSets_of_module",
+  "statement": "theorem isConstructibleEtaleSheafOfSets_of_module (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleEtaleModuleSheaf F) : IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T034201-L-1510264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T034201-L-1510264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
