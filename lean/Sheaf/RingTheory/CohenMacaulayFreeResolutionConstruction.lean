@@ -12,6 +12,38 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace IsLocalRing
 
+/-- The zero-step truncation in the finite-free resolution construction.
+Source: Stacks Project, Algebra, Tag 00LP, part (2).
+The identity complex with zero endpoints supplies the base case.
+(blueprint: lem-weil-pbc-cm-local-free-resolution-construction-zero) -/
+theorem exists_finite_free_resolution_data_zero
+    {R : Type u} [CommRing R] [IsNoetherianRing R]
+    (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] :
+    ∃ S : ComposableArrows (ModuleCat.{max u v} R) (0 + 3),
+      S.Exact ∧ IsZero (S.obj' 0) ∧ IsZero (S.obj' (0 + 3)) ∧
+      Nonempty ((S.obj' (0 + 2)) ≃ₗ[R] M) ∧
+      (∀ i : Fin 0,
+        Module.Free R (S.obj' (i.val + 2) (by omega)) ∧
+        Module.Finite R (S.obj' (i.val + 2) (by omega))) := by
+  sorry
+
+/-- The successor step, adjoining one finite-free presentation to a truncation.
+Source: Stacks Project, Algebra, Tag 00LP, part (2).
+The kernel of a finite free surjection is finite over a Noetherian ring and the
+induction truncation is spliced to that presentation.
+(blueprint: lem-weil-pbc-cm-local-free-resolution-construction-succ) -/
+theorem exists_finite_free_resolution_data_succ
+    {R : Type u} [CommRing R] [IsNoetherianRing R]
+    (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M]
+    (k : ℕ) :
+    ∃ S : ComposableArrows (ModuleCat.{max u v} R) (k + 1 + 3),
+      S.Exact ∧ IsZero (S.obj' 0) ∧ IsZero (S.obj' (k + 1 + 3)) ∧
+      Nonempty ((S.obj' (k + 1 + 2)) ≃ₗ[R] M) ∧
+      (∀ i : Fin (k + 1),
+        Module.Free R (S.obj' (i.val + 2) (by omega)) ∧
+        Module.Finite R (S.obj' (i.val + 2) (by omega))) := by
+  sorry
+
 /-- A finite free sequence of any prescribed length, with an unrestricted left kernel.
 Source: Stacks Project, Algebra, Tag 00LP, part (2), the finite truncation of its
 successive finite-free-surjection construction
@@ -40,6 +72,10 @@ theorem exists_finite_free_resolution_data
       (∀ i : Fin k,
         Module.Free R (S.obj' (i.val + 2) (by omega)) ∧
         Module.Finite R (S.obj' (i.val + 2) (by omega))) := by
-  sorry
+  induction k with
+  | zero => simpa using exists_finite_free_resolution_data_zero M
+  | succ k =>
+      simpa [Nat.succ_eq_add_one, Nat.add_assoc, Nat.add_left_comm, Nat.add_comm] using
+        exists_finite_free_resolution_data_succ M k
 
 end IsLocalRing

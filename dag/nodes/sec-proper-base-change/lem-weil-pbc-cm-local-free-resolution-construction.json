@@ -25,39 +25,28 @@
  },
  "proof": [
   {
-   "text": "For k=0 use the identity on a universe lift of M between zero endpoints. It is exact; there are no finite free terms to check.",
+   "text": "Induct on the prescribed length k. At k = 0, apply the zero-step finite-free truncation construction.",
    "uses": [
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For k+1 choose finite generators of M and the associated surjection F → M from a finite free module. Its kernel N is finite because R is Noetherian.",
-   "uses": [
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-noetherian-submodule-finite"
+    "lem-weil-pbc-cm-local-free-resolution-construction-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the induction hypothesis for k to N, and replace its terminal N → 0 by the kernel inclusion N → F, followed by F → M → 0. Injectivity of the inclusion preserves exactness at N, the image-kernel equality proves exactness at F, and surjectivity proves exactness at M. Preceding terms are unchanged. Universe lifts and conjugation preserve all these properties.",
+   "text": "For k+1, apply the successor construction to the same finite module M and simplify the arithmetic indices.",
    "uses": [
-    "def-weil-pbc-exact-sequence"
+    "lem-weil-pbc-cm-local-free-resolution-construction-succ"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-exact-sequence",
-  "def-weil-finitely-generated-module",
-  "def-weil-pbc-free-module",
-  "lem-weil-pbc-noetherian-submodule-finite"
+  "lem-weil-pbc-cm-local-free-resolution-construction-zero",
+  "lem-weil-pbc-cm-local-free-resolution-construction-succ"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 00LP (lemma-resolution-by-finite-free), part (2), finite truncations of the successive-surjection construction; https://stacks.math.columbia.edu/tag/00LP; finite truncation/depth induction written out by E1 second reader"
+  "document": "lean/Sheaf/RingTheory/CohenMacaulayFreeResolutionConstruction.lean",
+  "place": "the induction proof using the zero and successor construction declarations"
  },
  "mathlib_searches": [
   {
@@ -123,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T194107-L-453882",
-  "kind": "interface",
+  "landing": "20261012T225308-L-1804445",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
