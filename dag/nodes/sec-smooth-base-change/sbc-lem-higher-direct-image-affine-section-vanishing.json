@@ -17,33 +17,35 @@
  ],
  "proof": [
   {
-   "text": "By the higher direct image presheaf theorem, locally lift a stage sheaf section to restricted cohomology. Naturality of the derived adjunction comparison identifies the maps with the canonical cohomology comparisons specified by hK and hη. Since the limit sheaf section is zero, refine the neighborhood to make the limit cohomology representative zero. Refine further by affine etale objects.",
+   "text": "Apply local eventual vanishing to obtain a covering sieve R on V with a stage zero witness for every restriction of z.",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf"
+    "lem-sbc-higher-direct-image-local-section-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "On each affine member U, base change of the scheme diagram and cone preserves the limit and affine transitions. The maps to affine U are qcqs, hence the stages and limit are qcqs schemes. Exact inverse image preserves the colimit and degree-zero complexes. Apply complex cohomology continuity with lower bound zero. Its injectivity and the filtered-colimit equality criterion imply that the restricted cohomology representative vanishes at a later stage.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
-   ],
-   "elementary": false
+   "text": "Present R by its arrow category. Scheme.ofArrows_mem_smallEtaleTopology_iff identifies the covering condition with jointly surjective ranges. Etale arrows have open images. Since affine V is compact, isCompact_univ.elim_finite_subcover selects a finite subfamily whose generated sieve still covers V.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The affine V is quasi-compact, so finitely many of these etale neighborhoods cover it. Choose a common later stage for their finitely many indices and compose transitions. There the original section is zero on the cover by naturality of the presheaf comparison, hence zero by separatedness of the higher direct image sheaf.",
+   "text": "Choose a stage and transition for each member of that finite subfamily. IsFiltered.wideSpan supplies a common target l, transition g from i, and factorizations through the chosen transitions. Naturality of K.map and preservation of zero show that K(g)(z) restricts to zero on every member.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Map the lifted integer group to K_l(V) by sending n to n times K(g)(z). Its composites with every covering restriction vanish. Apply Presheaf.IsSheaf.hom_ext_ofArrows to equate this morphism with zero; evaluate at the lifted integer 1 to conclude K(g)(z)=0. This also covers the empty covering, without assuming a member exists.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+  "lem-sbc-higher-direct-image-local-section-vanishing"
  ],
  "proof_origin": {
-  "by": "worker J1",
-  "document": "Stacks Project, Etale Cohomology",
-  "place": "Tag 09Z1: local cohomology comparison and finite covering assembly"
+  "by": "worker A2",
+  "document": "Stacks Project, Etale Cohomology; Mathlib",
+  "place": "Tag 09Z1 local comparison split from finite-cover assembly. Compact finite subcover, IsFiltered.wideSpan, naturality, and IsSheaf.hom_ext_ofArrows are proved in the assigned module."
  },
  "mathlib_searches": [
   {
@@ -127,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T070538-L-3471784",
+  "landing": "20261012T085208-L-993",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

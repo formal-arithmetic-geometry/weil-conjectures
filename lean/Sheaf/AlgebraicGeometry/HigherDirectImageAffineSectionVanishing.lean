@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageLocalSectionVanishing
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
@@ -97,6 +96,60 @@ theorem exists_higherDirectImage_affine_section_eq_zero {S : Scheme.{v}}
     ∀ (i : I) (z : (K.obj i).obj.obj (op V)),
       (η.app i).hom.app (op V) z = 0 →
       ∃ (j : I) (f : i ⟶ j), (K.map f).hom.app (op V) z = 0 := by
-  sorry
+  classical
+  intro i z hz
+  obtain ⟨R, hR, hlocal⟩ := exists_higherDirectImage_local_section_eq_zero
+    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη V i z hz
+  let A := R.arrows.category
+  let W (a : A) : S.Etale := a.obj.left
+  let q (a : A) : W a ⟶ V := a.obj.hom
+  have hq : Sieve.ofArrows W q ∈ S.smallEtaleTopology V := by
+    rw [show Sieve.ofArrows W q = R from Sieve.ofArrows_category R]
+    exact hR
+  have hcover := (Scheme.ofArrows_mem_smallEtaleTopology_iff q).mp hq
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
+    (fun a ↦ Set.range (q a).left)
+    (fun a ↦ (q a).left.isOpenMap.isOpen_range) (by rw [hcover])
+  have htcover : Sieve.ofArrows (fun a : t ↦ W a.val) (fun a : t ↦ q a.val) ∈
+      S.smallEtaleTopology V := by
+    apply (Scheme.ofArrows_mem_smallEtaleTopology_iff _).mpr
+    apply Set.eq_univ_of_forall
+    intro x
+    obtain ⟨a, ha, hx⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
+    exact Set.mem_iUnion.mpr ⟨⟨a, ha⟩, hx⟩
+  have hzero : ∀ a : t, ∃ (j : I) (f : i ⟶ j),
+      (K.map f).hom.app (op (W a.val))
+        ((K.obj i).obj.map (q a.val).op z) = 0 := by
+    intro a
+    exact hlocal (W a.val) (q a.val) a.val.property
+  choose j f hf using hzero
+  obtain ⟨l, g, b, hb⟩ := IsFiltered.wideSpan f
+  have hres : ∀ a : t, (K.obj l).obj.map (q a.val).op
+      ((K.map g).hom.app (op V) z) = 0 := by
+    intro a
+    have hnat := congrArg (fun k ↦ k z) ((K.map g).hom.naturality (q a.val).op)
+    simp only [AddCommGrpCat.comp_apply] at hnat
+    rw [← hnat, ← hb a, K.map_comp]
+    change (K.map (b a)).hom.app (op (W a.val))
+      ((K.map (f a)).hom.app (op (W a.val))
+        ((K.obj i).obj.map (q a.val).op z)) = 0
+    rw [hf a, map_zero]
+  refine ⟨l, g, ?_⟩
+  let e : AddCommGrpCat.of (ULift.{v + 1} ℤ) ⟶ (K.obj l).obj.obj (op V) :=
+    AddCommGrpCat.ofHom
+      { toFun := fun n ↦ n.down • ((K.map g).hom.app (op V) z)
+        map_zero' := zero_zsmul _
+        map_add' := fun m n ↦ add_zsmul _ _ _ }
+  have he : e = 0 := by
+    apply (K.obj l).property.hom_ext_ofArrows (fun a : t ↦ q a.val) htcover
+    intro a
+    rw [Limits.zero_comp]
+    ext n
+    change (K.obj l).obj.map (q a.val).op
+      (n.down • ((K.map g).hom.app (op V) z)) = 0
+    rw [map_zsmul, hres a, zsmul_zero]
+  have h := congrArg (fun k ↦ k (ULift.up (1 : ℤ))) he
+  change (1 : ℤ) • ((K.map g).hom.app (op V) z) = 0 at h
+  simpa only [one_zsmul] using h
 
 end AlgebraicGeometry.Etale
