@@ -30,73 +30,45 @@
  ],
  "proof": [
   {
-   "text": "Let $j:U\\hookrightarrow X$ be the inclusion of an affine open. By clause (1) of lem-weil-pbc-module-restriction-open-immersion-colimits, $j^*$ is a left adjoint and preserves all colimits, hence it preserves the cokernel of $\\varphi$; by clause (2) of that node and the affine-local definition pqf-def-coherent, $j^*\\mathcal F$ and $j^*\\mathcal G$ are quasi-coherent. After choosing $U\\cong\\operatorname{Spec}R$, the restricted map is therefore a morphism of quasi-coherent modules on $\\operatorname{Spec}R$.",
+   "text": "Apply the already proved isQuasicoherent_cokernel to φ. The abelian image is definitionally the kernel of its cokernel projection, so isQuasicoherent_kernel proves its quasi-coherence. Abelian.image.fac, cokernel.condition and the categorical mono/epi instances give the structural assertions.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AJ (tag 01AJ, f^* is left adjoint to f_* and preserves colimits) and Lemma 01BG (tag 01BG, pullback of a quasi-coherent module is quasi-coherent); for an open immersion j, j^* is restriction; the affine-local criterion is pqf-def-coherent."
-   }
-  },
-  {
-   "text": "On $U=\\operatorname{Spec}R$, apply clauses (3), (4), and (2) of lem-weil-pbc-affine-tilde-gamma-adjunction. Clause (3) identifies each restricted quasi-coherent module with the tilde of its global-sections module; under these identifications $j^*\\varphi$ corresponds to the induced $R$-linear map on global sections. Clause (4) says that tilde preserves colimits, so the cokernel is the tilde of the module cokernel; clause (2) identifies its global sections with that module cokernel. Thus $q_U$ is surjective with kernel $\\varphi_U(\\mathcal F(U))$ and $\\operatorname{Coker}\\varphi(U)=\\mathcal G(U)/\\varphi_U(\\mathcal F(U))$.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemmas 01IC (tag 01IC, cokernel of M~ -> N~ is the tilde of the module cokernel), 01IB (tag 01IB, affine quasi-coherent equivalence), and 01I7 (tag 01I7, affine tilde/global-sections comparison); the DAG formulation is lem-weil-pbc-affine-tilde-gamma-adjunction clauses (2), (3), and (4)."
-   }
-  },
-  {
-   "text": "Because every point of $X$ has an affine open neighbourhood and quasi-coherence is local by pqf-def-coherent, the cokernel is quasi-coherent on $X$. The kernel of its quotient map is quasi-coherent by lem-weil-pbc-quasi-coherent-module-kernel, so the image is quasi-coherent once the local-image identification in Step 4 is made.",
-   "uses": [
-    "def-pc-scheme",
-    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
     "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 01LA item (5), tag 01LB (kernels and cokernels of morphisms of quasi-coherent modules are quasi-coherent), together with the affine-neighbourhood criterion pqf-def-coherent."
-   }
+   "elementary": false
   },
   {
-   "text": "By the sheafified-quotient local-image criterion, a section of $\\mathcal G$ lies in the kernel exactly when it is locally in the image of $\\varphi$. Thus this kernel is $\\operatorname{Im}\\varphi$, the map $\\varphi$ factors through it, and $q$ is an epimorphism with $q\\varphi=0$. The affine formulas of Step 2 give $(\\operatorname{Im}\\varphi)(U)=\\varphi_U(\\mathcal F(U))$ and $\\operatorname{Coker}\\varphi(U)=\\mathcal G(U)/\\varphi_U(\\mathcal F(U))$.",
+   "text": "The proved source-library range_map_kernelι identifies sections of the abelian image with the sectionwise kernel of the cokernel projection. The forgetful functor to abelian sheaves preserves finite colimits and hence epimorphisms. Apply TopCat.Sheaf.isLocallySurjective_iff_epi to the image factor map: every image section locally lifts to F, and naturality gives the asserted local-image formula. Conversely, a section locally in the image maps locally to zero in the cokernel; the sheaf uniqueness axiom makes it zero globally, so range_map_kernelι supplies an image section. This also covers the empty open.",
    "uses": [
-    "lem-weil-pbc-sheaf-cokernel-local-image",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-pbc-sheafification"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (tag 01AH, colimits in modules are sheafified presheaf colimits), applied to the quotient presheaf; its kernel consists exactly of sections locally in the image."
-   }
+   "elementary": false
+  },
+  {
+   "text": "For an epimorphism f between quasi-coherent modules, its kernel is quasi-coherent. Map its short exact kernel sequence to abelian sheaves with the exact forgetful functor. The already proved cechAcyclicOnAffines_of_isQuasicoherent and surjective_app_of_cechAcyclicOnAffines show that f is surjective on every affine open: the kernel has exact positive-degree standard affine Cech complexes, and local lifts of a target section glue after correcting their Cech 1-cocycle. Apply this both to factorThruImage φ and to cokernel.π φ. Factorization gives equality of the affine image and the range of φ; the sectionwise kernel description gives the affine kernel formula.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pc-affine-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply LinearMap.quotKerEquivOfSurjective to the sectionwise cokernel projection. Transport its source quotient along the proved equality between its kernel and the range of φ using Submodule.quotEquivOfEq. The resulting linear equivalence sends the class of every section s to q(s), by quotKerEquivOfSurjective_apply_mk.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-pc-scheme",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-sheaf-cokernel-local-image",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-affine-cech-complex"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas 01IC (tag 01IC), 01IB (tag 01IB), Section 01LA item (5) (tag 01LB); Modules, Lemma 01AH (tag 01AH)."
+  "by": "agent",
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentCokernel.lean; WeilConjectures/AlgebraicGeometry/Cohomology/Affine/CechAcyclic.lean; Mathlib/Topology/Sheaves/LocallySurjective.lean",
+  "place": "S2 stage 3: existing proved source-library cokernel/kernel closure and affine Cech lifting; Mathlib local surjectivity and first isomorphism theorem. All glue checked by Lean."
  },
  "mathlib_searches": [
   {
@@ -187,5 +159,15 @@
   "group": "H1",
   "result": "pass",
   "note": "X : Scheme.{u}, F G : X.Modules, φ, [IsQuasicoherent] x2 (Mathlib SheafOfModules.IsQuasicoherent on X.ringCatSheaf, #check); Coker = cokernel/cokernel.π, Im = Abelian.image (= kernel (cokernel.π φ) by rfl, as H1 ModuleStalkExact/ModuleFiniteTypeImageExtension); (1) mono, sectionwise range=ker on all opens, local-image iff with arbitrary V ≤ W, factorization, epi, zero; (2) both QC; (3) all affine U: range eq, q_U surjective, ker=range, Γ(X,U)-linear e tied to mkQ/q_U; one universe, no let/show, no hollow hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T085335-L-37786",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
