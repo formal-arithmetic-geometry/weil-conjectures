@@ -9678,3 +9678,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:47 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FiniteFreeChainMapStalkEquality (stage 3; reviewer PASS; first push; landing 20261012T214714-L-1272916 (proof); batch 20261012T214703; modules 1; new nodes 0)
 - 21:47 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.GrothendieckExistenceEasyTorsionTriple (stage 3; reviewer PASS; first push; landing 20261012T214715-L-1273107 (interface); batch 20261012T214703; modules 3; new nodes 2)
 - 21:49 L: returned deliver/A3/Sheaf.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation (reviewer RETURN: (reviewer X-a35c2, head a35c2ea78) d: In coord/changes/etale-tensor-unit-restriction-equation-proof.md replace heading `)
+- 21:49 L: returned deliver/V2/Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral (reviewer RETURN: (reviewer X-a400d, head a400d7bfa) E2: `CechGeneralModel.lean` leaves `exists_cechDerivedSectionModel_general` as `by so)
