@@ -30,130 +30,56 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (comparison of resolutions; $\\sigma$ on a K-injective complex).** Notation as in [prop-weil-pbc-derived-inverse-image-adjunction]: every $K\\in\\Dplus(U_{\\Et})$ comes with a bounded below K-injective complex $I(K)$ and an isomorphism $\\rho_K:K\\xrightarrow{\\sim}QI(K)$ (the class of the resolution), $Ru_*K=Q(u_*I(K))$, and for $a:K\\to K'$, $Ru_*(a)=Q(u_*\\tilde a)$ with $\\tilde a$ the unique homotopy class with $Q(\\tilde a)\\rho_K=\\rho_{K'}a$ [def-weil-pbc-direct-image], [lem-weil-pbc-derived-direct-image-triangulated]. (i) *Comparisons.* If $t:N\\to J$ and $t':N\\to J'$ are quasi-isomorphisms into K-injective complexes, then by [lem-weil-pbc-kinjective-hom-derived] there is a unique homotopy class $c:J\\to J'$ with $Q(c)=Q(t')Q(t)^{-1}$, i.e. with $ct\\simeq t'$ as maps in $D$ (and then in $K$, again by that lemma if $N$ is K-injective; in general $ct$ and $t'$ have the same class in $D$); $c$ is a homotopy equivalence (its inverse class is the comparison the other way); comparisons compose, and the comparison of $t[1],t'[1]$ is $c[1]$ (uniqueness, $Q(c[1])=Q(c)[1]$). (ii) *Shifts.* $J[1]$ is K-injective and $t[1]$ is a K-injective resolution of $N[1]$ [lem-weil-pbc-kinjective-shift]; the localization $Q$ commutes with $[1]$, $Q(N[1])=Q(N)[1]$, $Q(f[1])=Q(f)[1]$ [def-weil-abstract-derived-category]; and the termwise functors $u_*,u^{-1}$ commute with $[1]$ on the nose: $u_*(J[1])=(u_*J)[1]$, $u_*(f[1])=u_*(f)[1]$, since $u_*(-d)=-u_*(d)$ by additivity, and they carry homotopic maps to homotopic maps [lem-weil-pbc-termwise-adjunction-homotopy] (b). By definition [lem-weil-pbc-derived-direct-image-triangulated], $\\sigma_K=Q(u_*c_K):Ru_*(K[1])=Q(u_*I(K[1]))\\to Q(u_*(I(K)[1]))=(Ru_*K)[1]$, where $c_K:I(K[1])\\to I(K)[1]$ is the comparison of the resolutions $\\rho_{K[1]}$ and $\\rho_K[1]$ of $K[1]$. (iii) *$\\sigma$ on a K-injective complex.* Let $I$ be a bounded below K-injective complex and $K=QI$; let $h_I:I\\to I(K)$ be the homotopy equivalence with $Q(h_I)=\\rho_K$ and $\\lambda_I=Q(u_*h_I):Q(u_*I)\\xrightarrow{\\sim}Ru_*(QI)$ the identification under which '$u_*I$ represents $Ru_*I$' [prop-weil-pbc-derived-inverse-image-adjunction] (step 'Property (1)' there). Then $I[1]$ is bounded below and K-injective, and\n$$\\sigma_{QI}\\circ\\lambda_{I[1]}=\\lambda_I[1]\\qquad(\\ast)$$\nas maps $Q(u_*(I[1]))=Q(u_*I)[1]\\to(Ru_*QI)[1]$: indeed $c_K\\circ h_{I[1]}$ and $h_I[1]$ are both maps $I[1]\\to I(K)[1]$ between K-injective complexes whose classes in $D$ agree after the identifications with $K[1]$ ($Q(c_K)Q(h_{I[1]})=Q(c_K)\\rho_{K[1]}=\\rho_K[1]=Q(h_I)[1]$), so they are homotopic by [lem-weil-pbc-kinjective-hom-derived]; applying $u_*$ and $Q$ gives $(\\ast)$. In words: on K-injective complexes, with $u_*I$ representing $Ru_*I$, the isomorphism $\\sigma$ is the identity $u_*(I[1])=(u_*I)[1]$.",
+   "text": "Use the existing proved upstream instance Adjunction.commShift_mapHomotopyCategory_unit from WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift. Its proof computes the termwise unit degreewise and descends through the homotopy quotient, so it gives shift compatibility for the homotopy-category unit for every integer shift.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-shift",
-    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the homotopy unit to the bounded below subcategory: under its faithful inclusion the unit is the homotopy-category unit composed with the canonical lift comparison isomorphisms. These isomorphisms, associators and unitors commute with shifts. NatTrans.CommShift.of_whiskerRight detects compatibility through the faithful inclusion. This calculation is the proved private helper plusHomotopyUnit_commShift.",
+   "uses": [
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "def-weil-pbc-kinjective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Section 070G (section-K-injective, line 9612): Definition 070H and the remark after it (line 9624, translates), Lemma 070I (lemma-K-injective, line 9632: Hom_K(N,I)=Hom_D(N,I) for I K-injective); Lemma 05SU (lemma-derived-shift, line 4657: canonical isomorphism RF(X)[n]=RF(X[n]), proof omitted in Stacks; written out here)"
-   }
-  },
-  {
-   "text": "**Step 2 (part (a) on a K-injective complex).** Let $I$ be a bounded below K-injective complex on $U_{\\Et}$, $K=QI$. By property (1) of [prop-weil-pbc-derived-inverse-image-adjunction], read through the identifications $\\lambda_I$ of Step 1 and $\\varphi$ of [def-weil-pbc-derived-inverse-image] (under which $u^{-1}Q(u_*I)$ is represented by the termwise complex $u^{-1}u_*I$),\n$$\\varepsilon^D_{u,QI}\\circ u^{-1}(\\lambda_I)=Q(\\varepsilon_{u,I}),\\qquad\\varepsilon_{u,I}=(\\varepsilon_{u,I^r})_r:u^{-1}u_*I\\to I,\\qquad(1')$$\nand the same for the bounded below K-injective complex $I[1]$ [lem-weil-pbc-kinjective-shift]. The termwise counit of $I[1]$ has components $\\varepsilon_{u,(I[1])^r}=\\varepsilon_{u,I^{r+1}}$, which are the components of the shifted morphism $\\varepsilon_{u,I}[1]$; and $u^{-1}u_*(I[1])=(u^{-1}u_*I)[1]$ as complexes (termwise additive functors, Step 1 (ii)). So $\\varepsilon_{u,I[1]}=\\varepsilon_{u,I}[1]$ as morphisms of complexes. The isomorphism $\\iota_{u_*I}:u^{-1}((u_*I)[1])\\to(u^{-1}u_*I)[1]$ is the identity of this complex [def-weil-pbc-derived-inverse-image]. Now compute the right-hand side of (a) at $K=QI$, precomposed with the isomorphism $u^{-1}(\\lambda_{I[1]})$:\n$$\\varepsilon^D_{u,QI}[1]\\circ\\iota_{Ru_*QI}\\circ u^{-1}(\\sigma_{QI})\\circ u^{-1}(\\lambda_{I[1]})\\overset{(\\ast)}=\\varepsilon^D_{u,QI}[1]\\circ\\iota_{Ru_*QI}\\circ u^{-1}(\\lambda_I[1])=\\varepsilon^D_{u,QI}[1]\\circ u^{-1}(\\lambda_I)[1]\\circ\\iota_{Q(u_*I)}=Q(\\varepsilon_{u,I})[1]\\circ\\mathrm{id}=Q(\\varepsilon_{u,I[1]}),$$\nusing naturality of $\\iota$ for $\\lambda_I$, then $(1')$ shifted. By $(1')$ for $I[1]$, $Q(\\varepsilon_{u,I[1]})=\\varepsilon^D_{u,QI[1]}\\circ u^{-1}(\\lambda_{I[1]})$, and $QI[1]=K[1]$. Cancelling the isomorphism $u^{-1}(\\lambda_{I[1]})$ gives (a) at $K=QI$. (The counit at a K-injective complex is the termwise sheaf counit, which commutes termwise with the shift.)",
-   "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570) and its proof through Lemma 0FND (line 9517): the adjunction on derived functors is computed on K-injective resolutions; Stacks states neither the counit formula nor its compatibility with shifts; written out here"
-   }
-  },
-  {
-   "text": "**Step 3 (part (a) in general).** Let $K\\in\\Dplus(U_{\\Et})$. Its chosen resolution gives a bounded below K-injective complex $I=I(K)$ and an isomorphism $\\alpha=\\rho_K:K\\xrightarrow{\\sim}QI$ [def-weil-pbc-direct-image], [prop-weil-pbc-derived-inverse-image-adjunction] (such a representative exists by [lem-weil-pbc-dplus-injective-representative]: every object of $\\Dplus$ is isomorphic to $Q$ of a bounded below complex of injectives, which is K-injective). Both sides of (a) are the components at $K$ of natural transformations $u^{-1}Ru_*\\circ[1]\\to[1]$: the left side is $\\varepsilon^D_u$ whiskered by $[1]$, the right side the composite of $u^{-1}(\\sigma)$, $\\iota Ru_*$ and $\\varepsilon^D_u[1]$, each natural ($\\sigma$ by [lem-weil-pbc-derived-direct-image-triangulated], $\\iota$ by [def-weil-pbc-derived-inverse-image], $\\varepsilon^D_u$ as the counit of an adjunction [prop-weil-pbc-derived-inverse-image-adjunction]). For natural transformations $\\tau,\\tau'$ and an isomorphism $\\alpha$, $\\tau_K=(\\alpha[1])^{-1}\\circ\\tau_{QI}\\circ u^{-1}Ru_*(\\alpha[1])$ and likewise for $\\tau'$; since $\\tau_{QI}=\\tau'_{QI}$ by Step 2, $\\tau_K=\\tau'_K$. This proves (a).",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-derived-inverse-image",
-    "prop-weil-pbc-derived-inverse-image-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 013K (lemma-injective-resolutions-exist, line 6280) and Lemma 070J (lemma-bounded-below-injectives-K-injective, line 9688) for the representative; the naturality argument is written out here"
-   }
-  },
-  {
-   "text": "**Step 4 (part (b) on a bounded below complex).** Let $M$ be a bounded below complex on $V_{\\Et}$ and $j:u^{-1}M\\to J$ a K-injective resolution with $J$ bounded below. By property (2) of [prop-weil-pbc-derived-inverse-image-adjunction] (the identification '$Ru_*u^{-1}M=u_*J$' being $\\mu_j=Q(u_*c_j)$, $c_j:J\\to I(u^{-1}QM)$ the comparison of Step 1 (i) of $j$ with the chosen resolution, read through $\\varphi_M$ of [def-weil-pbc-derived-inverse-image]),\n$$\\eta^D_{u,QM}=\\mu_j\\circ Q\\bigl(u_*(j)\\circ\\eta_{u,M}\\bigr),\\qquad\\eta_{u,M}=(\\eta_{u,M^r})_r:M\\to u_*u^{-1}M.\\qquad(2')$$\nShift: $u^{-1}(M[1])=(u^{-1}M)[1]$ as complexes and $\\iota_M$ is its identity [def-weil-pbc-derived-inverse-image]; $j[1]:(u^{-1}M)[1]\\to J[1]$ is a K-injective resolution with $J[1]$ bounded below [lem-weil-pbc-kinjective-shift]; the termwise unit of $M[1]$ has components $\\eta_{u,M^{r+1}}$, so $\\eta_{u,M[1]}=\\eta_{u,M}[1]$, and $u_*(j[1])=u_*(j)[1]$ (Step 1 (ii)). Hence by $(2')$ for $M[1]$ and $j[1]$: $\\eta^D_{u,QM[1]}=\\mu_{j[1]}\\circ Q(u_*(j)\\circ\\eta_{u,M})[1]$. Next, $Ru_*(\\iota_M)\\circ\\mu_{j[1]}$ is $Q(u_*)$ of the comparison $J[1]\\to I((u^{-1}M)[1])$ of $j[1]$ with the chosen resolution ($Ru_*$ of a morphism is $u_*$ of the comparison, and comparisons compose, Step 1 (i)); and $\\sigma_{u^{-1}QM}=Q(u_*c)$ with $c:I((u^{-1}M)[1])\\to I(u^{-1}M)[1]$ the comparison of the resolutions of $(u^{-1}M)[1]$ (Step 1 (ii)). The composite $J[1]\\to I(u^{-1}M)[1]$ is a comparison of $j[1]$ with $\\rho[1]$, so it is homotopic to $c_j[1]$ (Step 1 (i), uniqueness); therefore\n$$\\sigma_{u^{-1}QM}\\circ Ru_*(\\iota_M)\\circ\\mu_{j[1]}=Q(u_*(c_j[1]))=\\mu_j[1].$$\nComposing: $\\sigma_{u^{-1}QM}\\circ Ru_*(\\iota_M)\\circ\\eta^D_{u,QM[1]}=\\mu_j[1]\\circ Q(u_*(j)\\circ\\eta_{u,M})[1]=\\eta^D_{u,QM}[1]$ by $(2')$ and functoriality of $[1]$. This is (b) at $QM$. (The unit is the termwise sheaf unit followed by $u_*$ of the resolution $u^{-1}M\\to J$; both commute with the shift termwise, and $\\sigma$ is the comparison of resolutions.)",
-   "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570), Lemma 05SU (lemma-derived-shift, line 4657), Lemma 070I (lemma-K-injective, line 9632); the compatibility is not stated in Stacks and is written out here"
-   }
-  },
-  {
-   "text": "**Step 5 (part (b) in general).** Every $X\\in\\Dplus(V_{\\Et})$ is isomorphic to $QM$ for a bounded below complex $M$ (even one of injectives) by [lem-weil-pbc-dplus-injective-representative] ($\\Ab(V_{\\Et})$ has enough injectives, [lem-weil-pbc-module-sheaves-enough-injectives]). Both sides of (b) are components at $X$ of natural transformations from the functor $X\\mapsto X[1]$ to the functor $X\\mapsto(Ru_*u^{-1}X)[1]$: the left side composes $\\eta^D_u$ at $X[1]$, $Ru_*(\\iota_X)$ and $\\sigma_{u^{-1}X}$, all natural ([prop-weil-pbc-derived-inverse-image-adjunction], [def-weil-pbc-derived-inverse-image], [lem-weil-pbc-derived-direct-image-triangulated]); the right side is $\\eta^D_u$ shifted. As in Step 3, equality at $QM$ (Step 4) transports along an isomorphism $X\\cong QM$ to equality at $X$. This proves (b).",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-derived-direct-image-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 013K (lemma-injective-resolutions-exist, line 6280); naturality argument written out here"
-   }
-  },
-  {
-   "text": "**Step 6 (the composite isomorphisms, and iteration).** The shift-commutation isomorphism of the composite $Ru_*u^{-1}$ is $\\chi_M=\\sigma_{u^{-1}M}\\circ Ru_*(\\iota_M)$ and that of $u^{-1}Ru_*$ is $\\chi'_K=\\iota_{Ru_*K}\\circ u^{-1}(\\sigma_K)$ [lem-weil-pbc-triangulated-functor-composite], [lem-weil-pbc-commshift-nattrans-comp-whisker], the identity functor carrying the identity; so (a) and (b) say that $\\varepsilon^D_u$ and $\\eta^D_u$ are compatible with the shift in the sense of [lem-weil-pbc-commshift-nattrans-comp-whisker]. For $n\\in\\mathbf Z$ the iterated isomorphisms are $\\iota^{(0)}=\\sigma^{(0)}=\\mathrm{id}$, $\\sigma^{(n+1)}_K=\\sigma^{(n)}_K[1]\\circ\\sigma_{K[n]}$ for $n\\ge0$, and $\\sigma^{(-m)}_K=((\\sigma^{(m)}_{K[-m]})^{-1})[-m]$, likewise for $\\iota,\\chi,\\chi'$; by naturality of $\\sigma$ and $\\iota$ and induction, $\\chi^{(n)}_M=\\sigma^{(n)}_{u^{-1}M}\\circ Ru_*(\\iota^{(n)}_M)$ and $\\chi'^{(n)}_K=\\iota^{(n)}_{Ru_*K}\\circ u^{-1}(\\sigma^{(n)}_K)$ (the composite structure for all $n$, [lem-weil-pbc-commshift-nattrans-comp-whisker]). For a natural transformation $\\tau:F_1\\to F_2$ with $\\psi_X\\circ\\tau_{X[1]}=\\tau_X[1]\\circ\\varphi_X$, induction gives $\\psi^{(n+1)}_X\\circ\\tau_{X[n+1]}=\\psi^{(n)}_X[1]\\circ\\psi_{X[n]}\\circ\\tau_{X[n][1]}=\\psi^{(n)}_X[1]\\circ\\tau_{X[n]}[1]\\circ\\varphi_{X[n]}=(\\tau_X[n]\\circ\\varphi^{(n)}_X)[1]\\circ\\varphi_{X[n]}=\\tau_X[n+1]\\circ\\varphi^{(n+1)}_X$, and for $n=-m<0$ the case $m$ at $X[-m]$, $\\psi^{(m)}_{X[-m]}\\circ\\tau_X=\\tau_{X[-m]}[m]\\circ\\varphi^{(m)}_{X[-m]}$, rearranges to $(\\psi^{(m)}_{X[-m]})^{-1}\\circ\\tau_{X[-m]}[m]=\\tau_X\\circ(\\varphi^{(m)}_{X[-m]})^{-1}$, and applying $[-m]$ (with $[m][-m]=\\mathrm{id}$ on complexes) gives the case $-m$. Applied to $\\tau=\\eta^D_u$ ($\\varphi=\\mathrm{id}$, $\\psi=\\chi$) and $\\tau=\\varepsilon^D_u$ ($\\varphi=\\chi'$, $\\psi=\\mathrm{id}$) this is the last sentence of the statement.",
-   "uses": [
-    "lem-weil-pbc-triangulated-functor-composite",
     "lem-weil-pbc-commshift-nattrans-comp-whisker"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 014V (definition-exact-functor-triangulated-categories, line 191) for the shift isomorphisms; the induction is written out here, as in lem-weil-pbc-derived-exchange-triangulated Step 5"
-   }
+   "elementary": true
   },
   {
-   "text": "**Step 7 (the abstract reading: $\\sigma$ is the shift structure induced by the adjunction).** By [lem-weil-pbc-adjunction-shift-compatibility-unique] (ii), for the adjunction $u^{-1}\\dashv Ru_*$ and the shift isomorphism $\\iota$ of $u^{-1}$ there is at most one shift isomorphism of $Ru_*$ compatible with the unit, and by (iii) there is one (Mathlib's `Adjunction.rightAdjointCommShift`), for which the adjunction is compatible with the shifts (`Adjunction.CommShift`). Part (b) (Step 5) says that $\\sigma$ is compatible with the unit; hence $\\sigma$ is that induced structure, $\\sigma_K^{-1}=Ru_*(\\varepsilon^D_{u,K}[1])\\circ Ru_*(\\iota_{Ru_*K})\\circ\\eta^D_{u,(Ru_*K)[1]}$, which is the isomorphism of Stacks 0A8D (the adjoint of $\\varepsilon[1]\\circ\\xi_{G(A)}$). By (i), part (a) also follows from part (b), which gives a second proof of (a) independent of Steps 2-3. For a formalization this means that the content of the node is that the resolution-comparison isomorphism $\\sigma$ (in Lean the shift structure of `rightDerivedFunctorPlus` transported from $K^+(\\mathrm{Inj})$) is compatible with the unit, i.e. Step 4; (a) and the iteration then come from Mathlib.",
+   "text": "Use Adjunction.derivedPlus_unit_app_fac to identify the derived unit after precomposition with Qh: it is Qh of the bounded below homotopy unit, followed by R.rightDerivedFunctorPlusUnit at L(K), then R.rightDerivedFunctorPlus of the inverse of L.mapDerivedCategoryPlusFactorsh. To prove this equality, postcompose with R.rightDerivedFunctorPlus of the forward exact-functor comparison, use derivedPlus_unit_app_fac, and cancel the inverse/forward comparison. The first factor commutes with shifts by the preceding step; the right-derived comparison commutes with its existing resolution-comparison shift structure by Functor.commShift_rightDerivedFunctorPlusUnit; the exact-functor comparison also commutes with its existing termwise shift structure. Whiskering and composition preserve compatibility. Since Qh is essentially surjective, apply NatTrans.CommShift.of_whiskerLeft using the inverse of its object-preimage isomorphism. This proves the private helper derivedUnit_commShift for arbitrary exact additive left adjoints with enough injectives on their target.",
    "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedUnit_commShift to upperStarLowerStarAdjunction AddCommGrpCat f. The standard upstream sheaf Grothendieck-abelian instances supply enough injectives. Finally apply Adjunction.CommShift.mk' to the derived-unit compatibility. This proves compatibility of both unit and counit for every integer shift without transporting or replacing either functor's specified shift structure.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
     "lem-weil-pbc-adjunction-shift-compatibility-unique"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 0A8D (lemma-adjoint-is-exact, line 2290): the shift isomorphism of the right adjoint G is the one adjoint to eps_A[1] o xi_{G(A)}; Kashiwara-Schapira, Categories and Sheaves, Section 10.1 (WANTED, not obtained: adjoints of triangulated functors are triangulated, with the shift isomorphism defined from the adjunction so that unit and counit are morphisms of triangulated functors)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-shift",
-  "def-weil-abstract-derived-category",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-derived-inverse-image",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-triangulated-functor-composite",
   "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
   "lem-weil-pbc-adjunction-shift-compatibility-unique"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Section 070G (K-injective complexes, line 9612; Lemmas 070I, 070J), Lemma 05SU (lemma-derived-shift, line 4657, proof omitted), Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9570), Lemma 0A8D (lemma-adjoint-is-exact, line 2290); Stacks does not state the compatibility of the derived unit and counit with the resolution-comparison shift isomorphism. Kashiwara-Schapira, Categories and Sheaves, Section 10.1 is WANTED (literature/LIST.md): from it the proof would take the statement that the right adjoint of a triangulated functor is triangulated with the shift isomorphism defined through the adjunction, so that unit and counit are morphisms of triangulated functors (here Step 7 via Mathlib), leaving only the identification of that isomorphism with sigma, which is Steps 1 and 4."
+  "place": "Tags 0DVC, 05SU and 0A8D (read at https://stacks.math.columbia.edu/tag/0DVC, /05SU and /0A8D). Shorter proof written by S1 using the existing library formulas: Adjunction.derivedPlus_unit_app_fac in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction; Functor.commShift_rightDerivedFunctorPlusUnit in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus; faithful/essentially-surjective compatibility descent in WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift; Mathlib Adjunction.CommShift.mk'. All local glue lemmas are proved, and no new axiom or unresolved statement is introduced. Second reading by S1 reused the existing commShift_mapHomotopyCategory_unit instance and removed two duplicate private helpers; its import is proof-only."
  },
  "mathlib_searches": [
   {
@@ -247,5 +173,15 @@
   "group": "F1",
   "result": "pass",
   "note": "U,V,u:U⟶V arbitrary (no extra hyps); Ab(T_et)=Sheaf smallEtaleTopology AddCommGrpCat.{u+1}; u⁻¹⊣Ru_* = recorded Adjunction.derivedPlus of upperStarLowerStarAdjunction; ι = instCommShiftPlusMapDerivedCategoryPlusInt, σ = recorded instCommShiftPlusRightDerivedFunctorPlusInt_weilConjectures (pp.explicit); (a)/(b) = commShift_counit/commShift_unit of Adjunction.CommShift ℤ with Functor.CommShift.comp composites = node's χ; all n∈ℤ"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225327-L-1812250",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
