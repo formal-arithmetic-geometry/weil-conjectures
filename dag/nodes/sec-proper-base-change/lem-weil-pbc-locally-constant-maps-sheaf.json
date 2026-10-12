@@ -29,33 +29,33 @@
  ],
  "proof": [
   {
-   "text": "Let $V=\\bigcup_{i\\in I}V_i$ be an open covering and let $f_i:V_i\\to R$ be locally constant maps whose restrictions to every $V_i\\cap V_j$ agree. Define $f:V\\to R$ pointwise by $f(x)=f_i(x)$ for any $i$ with $x\\in V_i$. Such an $i$ exists because the $V_i$ cover $V$, and compatibility on $V_i\\cap V_j$ makes the value independent of the choice. By construction $f|_{V_i}=f_i$ for every $i$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Example 6.4 (example-basic-continuous-maps), gluing construction"
-   }
+   "text": "Apply the unique-gluing characterization of sheaves for types to reduce the goal to existence and uniqueness of a gluing for every compatible family.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-maps-gluing-exists"
+   ],
+   "elementary": false
   },
   {
-   "text": "For $x\\in V$, choose $i$ with $x\\in V_i$. Since $f_i$ is locally constant, there is an open neighbourhood $W\\subseteq V_i$ of $x$ on which $f_i$ is constant; because $V_i$ is open in $V$, $W$ is also open in $V$, and $f|_W=f_i|_W$ is constant. Thus $f$ is locally constant. If $g:V\\to R$ is another gluing, then for each $x$ and any $i$ containing it, $g(x)=f_i(x)=f(x)$, so $g=f$. Existence and uniqueness give the sheaf condition.",
+   "text": "Use the compatible-family gluing theorem to obtain a locally constant section satisfying all restriction equations.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-locally-constant-maps-gluing-exists"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Example 6.4 and the paragraph preceding Definition 6.5 (Tag 006W)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, two gluings agree at each point by choosing a cover member containing that point and comparing the corresponding restriction equations; extensionality for LocallyConstant concludes equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-locally-constant-maps-gluing-exists"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Example 6.4 and Definition 6.5 (Tag 006W)"
+  "by": "worker",
+  "worker": "Q2",
+  "date": "2026-10-12",
+  "route": "Mathlib unique-gluing characterization followed by the split gluing-existence theorem and pointwise extensionality"
  },
  "mathlib_searches": [
   {
@@ -131,5 +131,15 @@
   "reviewer": "R-lcm",
   "group": "P1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T053950-L-2643885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

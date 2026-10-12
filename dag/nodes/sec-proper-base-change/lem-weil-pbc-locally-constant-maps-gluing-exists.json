@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-locally-constant-maps-gluing-exists",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-locally-constant-maps-sheaf"
+ },
+ "kind": "statement",
+ "title": "Compatible locally constant maps admit a gluing",
+ "statement": "For an open cover of a topological space, every compatible family of locally constant maps into a set has a locally constant map on the union restricting to the family.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Example 6.4 and Definition 6.5 (Tag 006W): continuous maps form a sheaf; for a discrete target these are the locally constant maps"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define the glued map pointwise by choosing a cover member containing each point; compatibility makes the value independent of the choice.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At each point, local constancy of the chosen member gives an open neighbourhood on which the glued map agrees with a constant map, hence is locally constant; the restriction equations are immediate.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Example 6.4 (Tag 006W)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf of locally constant maps from open subsets to a set is a sheaf",
+   "results": "Topology.LocallyConstant.Basic supplies locally constant maps, but no sheaf theorem for this presheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of locally constant functions to a set",
+   "results": "TopCat.Presheaf.SheafForPairwiseIntersections and Topology.IsLocallyConstant, with no combined declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'locally constant.*sheaf|IsLocallyConstant.*Sheaf' Mathlib/Topology Mathlib/Topology/Sheaves",
+   "results": "no declaration identifying this presheaf as a sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.LocallyConstantMapsSheaf",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-locally-constant-maps-sheaf",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Sheaves Example 6.4 and Definition 6.5 (Tag 006W), and replaced the empty imported proof by the explicit pointwise gluing argument: compatibility makes the glued map well-defined, local constancy is checked on a covering member around each point, and uniqueness is pointwise. No new nodes are needed because every inference is an immediate use of the definitions. The existing three-way Mathlib search finds the locally constant map API and generic sheaf machinery but no declaration for this sheaf."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T053950-L-2643885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.LocallyConstantMapsGluing",
+  "declaration": "TopCat.locallyConstantMaps_gluing_exists",
+  "file": "lean/Sheaf/Topology/LocallyConstantMapsGluing.lean",
+  "statement": "theorem locallyConstantMaps_gluing_exists (X : TopCat.{w}) (R : Type z) : ∀ {ι : Type w} (U : ι → Opens X) (sf : ∀ i, ToType ((locallyConstantMapsPresheaf X R).obj (op (U i)))), Presheaf.IsCompatible (locallyConstantMapsPresheaf X R) U sf → ∃ s : ToType ((locallyConstantMapsPresheaf X R).obj (op (iSup U))), Presheaf.IsGluing (locallyConstantMapsPresheaf X R) U sf s",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcm",
+  "group": "P1",
+  "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T053950-L-2643885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Topology.LocallyConstantMapsPresheaf
+import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+import Sheaf.Topology.LocallyConstantMapsGluing
 public import Mathlib.Topology.Sheaves.Sheaf
 
 /-!
@@ -29,6 +31,18 @@ The glued map is locally constant because each point lies in a covering member,
 and uniqueness is pointwise. -/
 theorem locallyConstantMapsPresheaf_isSheaf (X : TopCat.{w}) (R : Type z) :
     Presheaf.IsSheaf (locallyConstantMapsPresheaf X R) := by
-  sorry
+  apply (Presheaf.isSheaf_iff_isSheafUniqueGluing_types _).2
+  intro ι U sf hsf
+  obtain ⟨s, hs⟩ := locallyConstantMaps_gluing_exists X R U sf hsf
+  refine ⟨s, hs, ?_⟩
+  intro t ht
+  apply LocallyConstant.ext
+  intro x
+  obtain ⟨i, hxi⟩ := Opens.mem_iSup.mp x.2
+  have hst := congrArg (fun q : LocallyConstant {x : X // x ∈ U i} R =>
+    q.toFun ⟨x.1, hxi⟩) (ht i)
+  have hss := congrArg (fun q : LocallyConstant {x : X // x ∈ U i} R =>
+    q.toFun ⟨x.1, hxi⟩) (hs i)
+  exact (hst.trans hss.symm)
 
 end TopCat
