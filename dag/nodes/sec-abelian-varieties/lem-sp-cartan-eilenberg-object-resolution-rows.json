@@ -1,0 +1,136 @@
+{
+ "id": "lem-sp-cartan-eilenberg-object-resolution-rows",
+ "kind": "statement",
+ "title": "Compatible injective resolutions of boundary-cycle-homology rows",
+ "statement": "Let $B$ be an abelian category [def-sp-abelian] with enough injectives [def-sp-enough-injectives], and $K$ an integer-indexed cochain complex with $K^p=0$ for $p<0$. There exist injective resolutions [def-sp-injective-resolutions] $I_Z^p,I_D^p,I_H^p$ of $Z^p(K),\\operatorname{im}(d^{p-1}),H^p(K)$ respectively and maps $w^p:I_D^p\\to I_Z^p$, $x^p:I_Z^p\\to I_H^p$. Each row $0\\to I_D^p\\to I_Z^p\\to I_H^p\\to0$ is short exact, and both squares with the original boundary-to-cycle inclusion [def-sp-cartan-eilenberg-boundary-projection] and homology projection commute after applying the single-degree-zero functor. Moreover $I_Z^p=0$ for $p<0$ and $I_D^p=0$ for $p\\le0$. This statement makes no choice of resolutions of $K^p$ or of cycle-term-boundary rows.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I, proof Steps 1--4; prescribed-end horseshoe Lemma 013T"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-cartan-eilenberg-boundary-projection"
+ ],
+ "proof": [
+  {
+   "text": "The boundary inclusion is mono because its composite with the cycle inclusion is image.ι. The projection to homology is epi. Comparing the boundary-cycle-homology short complex with toCycles followed by homologyπ, using the epi factorThruImage, transfers exactness from the defining cokernel of homology. This proves the source row is short exact.",
+   "uses": [
+    "def-sp-cartan-eilenberg-boundary-projection",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For p<=0, the boundary object is zero since the source K^(p-1) of its epi image factor is zero. For p<0, homology is zero since K^p is zero. Use InjectiveResolution.self for these zero objects, whose injectivity follows from IsZero.injective; elsewhere use InjectiveResolution.of. The single-degree-zero functor carries a zero object to a zero complex.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the prescribed-end horseshoe theorem to the source row independently for each p, with the chosen boundary and homology resolutions. Choose the resulting middle resolution and maps. The theorem gives both augmentation squares and degreewise short exactness; shortExact_of_degreewise_shortExact gives a short exact row of complexes. When p<0 its two end complexes are zero. The inclusion of the boundary resolution is then an isomorphism, so the middle cycle resolution is zero.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-boundary-projection",
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-horseshoe-prescribed-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I alternating rows, with independent choices of both end resolutions using the project prescribed-end form of 013T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective resolutions of boundaries cycles and homology compatible short exact sequence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible injective resolutions of cycle boundary homology rows of a bounded below complex",
+   "results": "Eight ordinary injective-resolution hits, including InjectiveResolution.of_def and descFSucc; no compatible row system.",
+   "verdict": "Use the project prescribed-end horseshoe theorem; construct the compatible rows.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "CartanEilenberg|cartanEilenberg|horseshoe",
+   "results": "No Mathlib Cartan-Eilenberg row construction. Project HorseshoePrescribedResolutions is proved and usable.",
+   "verdict": "The project horseshoe theorem supplies both row constructions.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"ShortComplex\"",
+   "results": "0 hits.",
+   "verdict": "No Mathlib theorem for prescribed compatible injective-resolution rows; use the project horseshoe theorem.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergRowsExists",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "proof, first paragraph: choose a Cartan-Eilenberg resolution of F(I bullet); alternating rows in the proof of Lemma 015I",
+   "via": [
+    "lem-sp-cartan-eilenberg-rows-exists",
+    "lem-sp-cartan-eilenberg-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergObjectResolutionRows",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergObjectResolutionRows.lean",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_object_resolution_rows",
+  "statement": "theorem exists_cartanEilenberg_object_resolution_rows\n    (B : Type u) [Category.{v} B] [Abelian B] [EnoughInjectives B]\n    (K : CochainComplex B ℤ) (hK : ∀ p : ℤ, p < 0 → IsZero (K.X p)) :\n    ∃ (IZ : ∀ p, InjectiveResolution (K.cycles p))\n      (ID : ∀ p, InjectiveResolution (image (K.d (p - 1) p)))\n      (IH : ∀ p, InjectiveResolution (K.homology p))\n      (w : ∀ p, (ID p).cocomplex ⟶ (IZ p).cocomplex)\n      (x : ∀ p, (IZ p).cocomplex ⟶ (IH p).cocomplex),\n      (∀ p, p < 0 → IsZero (IZ p).cocomplex) ∧\n      (∀ p, p ≤ 0 → IsZero (ID p).cocomplex) ∧\n      (∃ hwx : ∀ p, w p ≫ x p = 0,\n        ∀ p, (ShortComplex.mk (w p) (x p) (hwx p)).ShortExact) ∧\n      (∀ p, (CochainComplex.single₀ B).map (cartanEilenbergBoundaryInclusion K p) ≫\n        (IZ p).ι = (ID p).ι ≫ w p) ∧\n      (∀ p, (CochainComplex.single₀ B).map (K.homologyπ p) ≫ (IH p).ι =\n        (IZ p).ι ≫ x p)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T202243-L-705834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T202243-L-705834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

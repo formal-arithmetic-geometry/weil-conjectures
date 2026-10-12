@@ -1,0 +1,118 @@
+{
+ "id": "def-sp-cartan-eilenberg-boundary-projection",
+ "kind": "definition",
+ "title": "Boundary factorization maps with integer indexing",
+ "statement": "Let $B$ be an abelian category [def-sp-abelian] and $K$ an integer-indexed cochain complex. The boundary factorization consists of the projection $K^p\\to\\operatorname{im}(d^{p})$ indexed as $B^{p+1}=\\operatorname{im}(d^{(p+1)-1})$, and the inclusion $B^p\\to Z^p(K)$. The first is the canonical image factor, with the equality $(p+1)-1=p$ transported on its source. The second is the lift of the image inclusion through the kernel of the next differential. Composing them with the respective inclusions gives $d^p$ and the image inclusion.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I, proof Steps 1--4; prescribed-end horseshoe Lemma 013T"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Define the projection by eqToHom followed by factorThruImage. The image factorization identity gives its displayed composite. Define the inclusion by liftCycles on image.ι: cancellation of the epi image factor reduces its zero-composite proof to d_comp_d. The liftCycles_i identity gives its displayed composite.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I alternating rows, with independent choices of both end resolutions using the project prescribed-end form of 013T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "injective resolutions of boundaries cycles and homology compatible short exact sequence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the image of a differential maps into cycles and the differential factors through its image",
+   "results": "HomologicalComplex.toCycles, toCycles_i and ShortComplex.toCycles_i; these provide the factorization through cycles but not the image-indexed maps.",
+   "verdict": "Use image factorization and liftCycles directly.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex.liftCycles\"",
+   "results": "HomologicalComplex.liftCycles and liftCycles_i, plus reassociated and boundary variants.",
+   "verdict": "The boundary inclusion is the specialization to image.ι.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "factorThruImage|liftCycles",
+   "results": "Limits.image.fac, image_ι_comp_eq_zero, and HomologicalComplex.liftCycles_i found in the pinned Mathlib sources.",
+   "verdict": "All construction and factorization proofs use Mathlib.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergRowsExists",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "proof, first paragraph: choose a Cartan-Eilenberg resolution of F(I bullet); alternating rows in the proof of Lemma 015I",
+   "via": [
+    "lem-sp-cartan-eilenberg-rows-exists",
+    "lem-sp-cartan-eilenberg-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergBoundaryProjection",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergBoundaryProjection.lean",
+  "declaration": "CategoryTheory.cartanEilenbergBoundaryProjection",
+  "statement": "def cartanEilenbergBoundaryProjection\n    {B : Type u} [Category.{v} B] [Abelian B] (K : CochainComplex B ℤ) (p : ℤ) :\n    K.X p ⟶ image (K.d ((p + 1) - 1) (p + 1))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13",
+  "declarations": [
+   "CategoryTheory.cartanEilenbergBoundaryProjection",
+   "CategoryTheory.cartanEilenbergBoundaryProjection_fac",
+   "CategoryTheory.cartanEilenbergBoundaryInclusion",
+   "CategoryTheory.cartanEilenbergBoundaryInclusion_fac"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T202243-L-705834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T202243-L-705834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
