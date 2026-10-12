@@ -20,24 +20,26 @@
  },
  "proof": [
   {
-   "text": "This is the corresponding construction/annihilator argument from the source proof; the remaining proof is recorded for a later worker.",
-   "uses": [
-    "lem-exc-abelian-sheaves-gmodules",
-    "lem-exc-etale-open-subgroup-fixed-field",
-    "lem-sc-sylow-module-filtration"
-   ],
-   "elementary": false
+   "text": "Apply Mathlib isPGroup_iff_exists_pow_pow_eq_one to the finite multiplicative version of the stalk. Applying Multiplicative.toAdd yields an exponent e with ell^e times every stalk element equal to zero. This includes the trivial stalk and does not need primality beyond the unchanged statement hypotheses.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved sheafFiber_map_smul lemma in WeilConjectures.CategoryTheory.Sites.Point.Linear identifies the image of ell^e times the identity with ell^e times the identity of the stalk. Extensionality of AddCommGrpCat morphisms and the preceding elementwise equality show that this image equals the image of zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Spec of a field is a singleton, so the displayed geometric point covers it. Apply the proved isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ and jointlyFaithful to this PUnit-indexed covering family. Transfer the equality of maps to its universe-lifted stalk via uliftSheafFiberIso naturality and cancel its isomorphism component. Joint faithfulness gives ell^e times the identity of M equal to zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-exc-abelian-sheaves-gmodules",
-  "lem-exc-etale-open-subgroup-fixed-field",
-  "lem-sc-sylow-module-filtration"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
-  "place": "proof paragraphs 1--2"
+  "place": "proof paragraphs 1--2; direct finite-exponent and conservative-point proof in Lean by T2, using Mathlib PGroup and the proved source-library Point.Linear and EtalePoint lemmas"
  },
  "mathlib_searches": [
   {
@@ -103,10 +105,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T150948-L-2228963",
-  "kind": "interface",
+  "landing": "20261012T163621-L-2787839",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
