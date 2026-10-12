@@ -1,0 +1,131 @@
+{
+ "id": "new-local-stalk-sections-cocone-colimit",
+ "kind": "statement",
+ "title": "Degree-zero continuity for affine open inverse systems",
+ "statement": "Let X be a scheme in universe u+1 [def-pc-scheme], J a small cofiltered category in universe u+1 [def-weil-pbc-category-colimit], and D:J → X.Etale [def-weil-pbc-etale-site] a diagram whose objects have affine underlying schemes [def-weil-pbc-scheme-conventions] and open-immersion structural maps to X [def-weil-open-immersion]. Let c be a limit cone for the underlying scheme diagram, and p:c.pt → X a morphism such that c.π_j followed by the structural map of D_j equals p. Let H be a functor between abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], from X to c.pt, supplied with an adjunction hH to direct image along p. For any abelian etale sheaf F on X, let ν be a cocone on D.op ⋙ F.obj with point the sections of H(F) on the terminal etale object of c.pt. Assume that its j-th leg is the hH unit at D_j followed by restriction along the map from the terminal etale object into p-base-change of D_j whose underlying map is pullback.lift(c.π_j, identity) [def-pc-fibre-product]. Then Cocone.mk _ ν is a colimit cocone.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree-zero continuity on affine neighbourhoods"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-open-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix a stage and restrict to its cofinal upper tail. All tail maps are open immersions into an affine scheme. The coordinate rings give a filtered diagram, and Spec of their colimit is the scheme limit; uniqueness of limits identifies it with c.pt.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Stacks Tag 03Q6 in degree zero over that fixed affine stage, to the restriction of F and the identity of the stage. Keep the coefficient universe fixed in this affine-site argument. It identifies the filtered colimit of stage sections with sections of the inverse image at c.pt. This geometric continuity step is the remaining hole, not a use of the upstream theorem whose coefficients live one universe higher.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image along an open immersion is restriction, so the stage values are F(D_j). Uniqueness of left adjoints identifies the inverse image on c.pt with H and intertwines units. The pullback lift in hν then identifies all the continuity legs with ν. The induced colimit comparison is an isomorphism, hence ν has the colimit universal property.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree-zero continuity on affine neighbourhoods"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of an inverse image abelian etale sheaf along a cofiltered limit of affine open immersions form the colimit of stage sections",
+   "results": "Service unavailable: Internal Server Error; no verdict assigned.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of pullback etale sheaf to a localization are a filtered colimit over principal open subschemes",
+   "results": "Eight hits, including Scheme.preservesLocalization_toOpensFunctor and StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux. They concern structure sheaves or localization, not arbitrary supplied abelian inverse-image adjunctions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq_unit",
+   "results": "Unknown identifier; no hits. Existing leftAdjointUniq and its unit compatibility provide categorical transport only.",
+   "date": "2026-10-13",
+   "verdict": "tool match only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.*sheaf|sections.*limit|affine.*colimit; rg on lean/WeilConjectures/AlgebraicGeometry/Sites and lean/Sheaf/AlgebraicGeometry",
+   "results": "Mathlib affine transition limits concern schemes and structure sheaves. Upstream unitComparison_app_isColimit_of_isLimit and Sheaf globalSections_limit_comparison use AddCommGrpCat one universe above the schemes, so cannot be applied to the supplied same-universe H and F. etaleRestrictedCohomology_neighbourhood_colimit has that same universe gap and prescribed standard inverse images. No exact supplied-adjunction affine-open continuity theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalStalkSectionsDescentSections",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+   "place": "Degree-zero local-scheme comparison: continuity at the affine neighbourhood inverse limit, before neighbourhood representative extraction",
+   "via": [
+    "new-local-stalk-sections-descent-sections",
+    "new-strict-henselian-stalk-sections-comparison-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalStalkSectionsCoconeColimit",
+  "file": "lean/Sheaf/Paper/LocalStalkSectionsCoconeColimit.lean",
+  "declaration": "affineOpenSections_cocone_isColimit",
+  "statement": "theorem affineOpenSections_cocone_isColimit {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J] (D : J ⥤ X.Etale) [∀ j, IsAffine (D.obj j).left] [∀ j, IsOpenImmersion (D.obj j).hom] (c : Cone (D ⋙ Scheme.Etale.forget X ⋙ Over.forget X)) (p : c.pt ⟶ X) (hp : ∀ j, c.π.app j ≫ (D.obj j).hom = p) (hc : IsLimit c) (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : H ⊣ p.Etale.sheafPushforwardContinuous AddCommGrpCat.{u + 1} X.smallEtaleTopology c.pt.smallEtaleTopology) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (ν : D.op ⋙ F.obj ⟶ (Functor.const Jᵒᵖ).obj ((H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))) (hν : ∀ j, ν.app (op j) = (hH.unit.app F).hom.app (op (D.obj j)) ≫ (H.obj F).obj.map (MorphismProperty.Over.homMk (B := p.Etale.obj (D.obj j)) (pullback.lift (c.π.app j) (𝟙 c.pt) (by change c.π.app j ≫ (D.obj j).hom = 𝟙 c.pt ≫ p rw [Category.id_comp] exact hp j)) (by exact pullback.lift_snd _ _ _)).op) : Nonempty (IsColimit (Cocone.mk _ ν))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T210408-L-969646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T210408-L-969646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
