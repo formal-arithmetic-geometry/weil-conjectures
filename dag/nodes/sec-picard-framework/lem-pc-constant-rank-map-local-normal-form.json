@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-constant-rank-map-local-normal-form",
+ "kind": "statement",
+ "title": "Local block normal form of a constant rank map",
+ "statement": "Let $Y$ be a reduced scheme [def-pc-reduced-scheme], let $j:Z\\to Y$ be an open immersion [def-weil-open-immersion], and let $M,N$ be sheaves of modules [def-weil-sheaf-of-modules-category] with chosen isomorphisms $M\\simeq\\mathcal O_Y^m$, $N\\simeq\\mathcal O_Y^n$ [def-weil-pbc-free-module]. Let $\\varphi:M\\to N$ and $a\\in\\mathbb N$. Assume that for every $z\\in Z$ there exist a field $K$ and $g:\\operatorname{Spec}K\\to Y$ with image exactly $\\{j(z)\\}$ such that the matrix of $\\varphi$ in the chosen bases, evaluated along $g$, has rank $a$ [def-weil-matrix-rank]. Set $\\psi=j^*\\varphi$ [def-pc-module-pullback]. For every $z\\in Z$ there is an open neighbourhood $U$ of $z$, an isomorphism $e_S:(j^*M)|_U\\simeq\\mathcal O_U^{m-a}\\oplus\\mathcal O_U^a$, and an isomorphism $e_T:(j^*N)|_U\\simeq\\mathcal O_U^a\\oplus\\mathcal O_U^{n-a}$, such that $\\psi|_U=e_T^{-1}\\circ\\mathrm{inl}\\circ\\mathrm{snd}\\circ e_S$. Here restriction is [lem-weil-pbc-module-restriction-open-immersion-colimits], snd is projection onto the second direct summand of the source, and inl is inclusion into the first direct summand of the target.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "normal-form claim and local kernel/image splitting"
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-weil-matrix-rank",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to affine opens in Z. Open pullback is restriction [lem-weil-pbc-open-immersion-module-pullback-restriction], so the given source and target bases restrict. The rings of sections on Z are reduced [def-pc-reduced-scheme]. A field-valued point with image j(z) induces an extension of the residue field at z. Rank is invariant under this extension [lem-weil-matrix-rank-field-extension], so every residue-field matrix has rank a.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-reduced-scheme",
+    "lem-weil-matrix-rank-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All (a+1)-minors vanish modulo every prime. The intersection of the primes is the nilradical [lem-weil-pbc-zero-locus-eq-iff-radical-eq], so these minors vanish over the reduced affine ring. At each point a nonzero a-minor exists by the rank-minor criterion [def-weil-matrix-rank]. Invert this minor; for a=0 use the empty determinant 1. Permute rows and columns and perform invertible block row and column operations to get diag(I_a,S). Each entry of the Schur complement S is, up to sign, an (a+1)-minor divided by the invertible a-minor; hence S=0.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-matrix-rank",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Order the zero source coordinates first and the a pivot source coordinates last, and order the a pivot target coordinates first. The block row and column operations of the preceding step yield isomorphisms to these decompositions into free sheaves [def-weil-pbc-free-module]. In these coordinates the matrix sends (v,w) to (w,0), which is precisely inl composed with snd. Transport through the restricted given bases [lem-weil-pbc-open-immersion-module-pullback-restriction]. If Z is empty the assertion is vacuous; rank zero uses the empty unit minor and the zero matrix.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), normal-form claim; existing lem-pc-constant-rank-map-kernel-image proof steps 1 and 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant rank matrix over a reduced ring is locally equivalent to an identity block and a zero block",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant rank matrix over a reduced ring is locally equivalent to a block identity matrix and its kernel and image are locally free",
+   "results": "LinearEquiv.mem_dilatransvections_iff_rank; rankCondition_iff_matrix; rankCondition_iff_le_of_comp_eq_one; invariantBasisNumber_iff_matrix; LinearEquiv.mem_dilatransvections_iff_finrank; instRankConditionOfIsStablyFiniteRingOfNontrivial; HasRankNullity; LinearMap.rank_diagonal",
+   "date": "2026-10-12",
+   "verdict": "No reduced-ring local normal form; division-ring and rank-condition results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.rank, Matrix.submatrix",
+   "results": "Matrix.rank_submatrix_le; Matrix.rank_submatrix; Matrix.exists_rank_normal_form",
+   "date": "2026-10-12",
+   "verdict": "The last theorem requires a square matrix over a field; not this reduced-ring, rectangular local statement."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*rank|rank.*constant|kernelBiprodSndIso",
+   "results": "Generic free-locus, flat-rank, rank-nullity and Picard-group results; no local constant rank block form over a reduced ring.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapKernelImage",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3): over a reduced base a map of finite free modules of locally constant fibre rank has locally the normal form diag(I,0)",
+   "via": [
+    "lem-pc-constant-rank-map-kernel-image",
+    "lem-pc-constant-rank-complex-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ConstantRankMapNormalForm.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_normal_form_of_constantRank",
+  "statement": "theorem exists_local_normal_form_of_constantRank\n    {Y Z : Scheme.{u}} [IsReduced Y] {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ)\n    (hrank : ∀ z : Z, ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y),\n      Set.range g.base = {j.base z} ∧\n      ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map g.appTop).rank = a) :\n    ∀ z : Z, ∃ U : Z.Opens, z ∈ U ∧\n      ∃ (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n          free (ULift.{u} (Fin (m - a))) ⊞ free (ULift.{u} (Fin a)))\n        (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),\n        (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =\n          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-pc-reduced-scheme",
+  "lem-weil-matrix-rank-field-extension",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-matrix-rank",
+  "def-weil-pbc-free-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T110259-L-613916",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T110259-L-613916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
