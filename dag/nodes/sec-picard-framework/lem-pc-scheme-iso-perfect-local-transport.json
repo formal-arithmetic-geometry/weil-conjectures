@@ -14,9 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Use the localization comparison for pushforward along the scheme isomorphism and its inverse on corresponding open sites. Transport the strictly perfect complex termwise; finite free modules, splittings, zero terms and degree bounds are preserved. Apply the induced localized functor to the given local model isomorphism.",
+   "text": "Reuse the private moduleIsoEquivalence from SchemeIsoDerivedRestrictionSquare via import all to construct the module pushforward equivalences of the scheme isomorphism and its restriction to the inverse-image open. Identify pushforward with inverse restriction by adjunction uniqueness, compose restriction comparisons, and descend the comparison by localization. The private localRestrictionSquare proves this with independent localization universes and identifies the inverse localized module equivalence with Modules.localizedPullback.",
    "uses": [
     "def-pc-scheme",
+    "def-pc-derived-category",
+    "lem-pc-scheme-iso-derived-restriction-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, local transport argument"
+   }
+  },
+  {
+   "text": "Use AlgebraicGeometry.localizedPullbackStrictlyPerfect from DerivedPullbackPerfect, imported with import all because the proved theorem is private. It preserves strict perfectness for the concrete termwise localized pullback. No duplicate unit, finite-free or strict-perfectness helper is declared here.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-derived-pullback-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, local transport argument"
+   }
+  },
+  {
+   "text": "Compose the privately constructed restriction square, the supplied local model isomorphism, the derived equivalence unit and counit, and the inverse-functor comparison to obtain the required local derived isomorphism.",
+   "uses": [
     "def-pc-derived-category",
     "def-pc-perfect-complex"
    ],
@@ -30,13 +54,15 @@
  "proof_deps": [
   "def-pc-derived-category",
   "def-pc-perfect-complex",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "lem-pc-derived-pullback-perfect",
+  "lem-pc-scheme-iso-derived-restriction-square"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EB",
-  "group": "U2",
+  "place": "Tag 08EB, restriction square; reuse the proved strict-perfectness helper in DerivedPullbackPerfect (Tag 09UA); reuse the private moduleIsoEquivalence from SchemeIsoDerivedRestrictionSquare",
+  "group": "C3",
   "date": "2026-10-13"
  },
  "mathlib_searches": [
@@ -108,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U2",
+  "reviewer": "X-802cf",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T173910-L-3307820",
+  "landing": "20261012T230753-L-1907282",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature matched the node; proof, dependency records, scoped commands and report agree. Delivery and sole direct importer compile cleanly; both proved declarations use only permitted axioms."
  }
 }
