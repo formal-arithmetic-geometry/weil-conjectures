@@ -25,32 +25,32 @@
  },
  "proof": [
   {
-   "text": "Choose the affine basis cover of X. Local finite type gives finite type k-algebra structures on its coordinate rings. Inverse images along the first pullback projection cover Y; the open fibre-product and affine fibre-product lemmas identify them with Spec(A_i tensor_k K). Spec K → Spec k is surjective, hence its base change is surjective and Y is nonempty.",
+   "text": "Spec K is nonempty and Spec k is a singleton, so the field-extension map is surjective. Mathlib PullbackCarrier gives surjectivity of pullback.fst, hence nonemptiness of Y. Choose Mathlib Scheme.affineCover C of X and its pullback cover D = Scheme.Pullback.openCoverOfLeft C f g. Let A_i be the global sections of C.X i, with k-algebra structure induced by (GammaSpecIso k).inv followed by (C.f i composed with f).appTop. HasRingHomProperty.appTop for LocallyOfFiniteType and composition with the finite-type ring isomorphism GammaSpecIso show each A_i is finite type over k. Take U_i and V_i to be the opensRange of C.f i and D.f i; OpenCover.iSup_opensRange proves both covering equalities. isoOpensRange and isoSpec identify U_i with Spec A_i. Naturality of toSpecGamma identifies the chart structure map with Spec of the algebra map. The isomorphism induced on pullbacks by isoSpec, composed with pullbackSpecIso, identifies V_i with Spec(A_i tensor_k K).",
    "uses": [
     "def-weil-finite-type-morphism",
     "def-weil-pbc-finite-type-algebra",
-    "def-pc-base-change",
+    "def-pc-fibre-product",
     "lem-weil-pbc-open-fibre-product",
     "lem-weil-pbc-fibre-product-affine-spectra"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Lemmas 01JR and 01JQ"
+    "place": "Tags 01JR and 01JQ; finite-type chart property: Stacks Tag 01T0"
    }
   }
  ],
  "proof_deps": [
   "def-weil-finite-type-morphism",
   "def-weil-pbc-finite-type-algebra",
-  "def-pc-base-change",
+  "def-pc-fibre-product",
   "lem-weil-pbc-open-fibre-product",
   "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-dim-base-change.md",
-  "place": "proof paragraphs 2-3, using Stacks 01JR, 01JQ, 01T0"
+  "place": "proof paragraphs 2-3, implemented directly from Mathlib by T1"
  },
  "mathlib_searches": [
   {
@@ -116,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T060729-L-2903137",
-  "kind": "interface",
+  "landing": "20261012T085340-L-39800",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
