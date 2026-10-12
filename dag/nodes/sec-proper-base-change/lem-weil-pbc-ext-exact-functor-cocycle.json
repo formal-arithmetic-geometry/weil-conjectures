@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-ext-exact-functor-cocycle",
+ "kind": "statement",
+ "title": "Exact functor on an Ext cocycle representative",
+ "statement": "Let C and D be abelian categories [def-sp-abelian] with Ext groups [def-pc-ext], L:C→D an additive exact functor, A,B objects of C, A′ an object of D, and α:A′→L(A). Let R and R′ be injective resolutions [def-sp-injective-resolutions] of B and L(B). Suppose φ:L(R)→R′ is a cochain-complex map for which L(ι_R);φ is homotopic to the augmentation ι_R′ after the canonical single-complex comparison. For q≥0 and a:A→R^q with a;d_R=0, set a′=α;L(a);φ^q and suppose a′;d_R′=0. Then the Ext class represented by a′ in R′ equals Ext.mk₀(α) composed with L applied to the Ext class represented by a in R. This is a formula for individual cocycles, without a statement about Hom-complex homology or a map of quotient groups.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Lemma 13.27.2(1), roof description of Ext; functoriality as in Tag 01F8 and equations 01F9/01FA"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Use extEquivCohomologyClass_symm_mk_hom to express the Ext class of a as its roof with the inverse augmentation as denominator. An exact functor preserves quasi-isomorphisms and sends this roof to the image roof. Precompose its numerator with α. The supplied augmentation homotopy becomes equality after localization, so cancel the invertible augmentations to obtain the roof of α;L(a);φ. The inverse-image single-complex comparison identifies the sources of these roofs. Equality of derived morphisms gives equality of Ext classes by Ext.hom injectivity. This computation includes q=0 and zero cocycles; no injectivity of L(R) is assumed.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "T3 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Lemma 13.27.2(1); cocycle roof step of lem-weil-pbc-ext-pullback-hom-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor maps Ext cocycle representatives using an augmentation-compatible map of injective resolutions",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext exact functor map computed by a map between injective resolutions and cocycles",
+   "date": "2026-10-13",
+   "results": "mapExactFunctor_hom, extMk_hom, extMk_comp_mk₀ and mk₀_comp_extMk; no formula for cross-category resolution comparison",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass",
+   "date": "2026-10-13",
+   "results": "Ext/cohomology-class equivalence and extMk formula; no exact-functor cocycle formula",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyIso_inv_naturality|homologyMap|mapExactFunctor_hom",
+   "date": "2026-10-13",
+   "results": "Generic homology naturality and derived morphism formula are available, but not the cross-category cocycle formula",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExtPullbackHomComplex",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ext-pullback-hom-complex",
+   "place": "Cocycle-level roof calculation, before quotient descent and Hom-complex homology.",
+   "via": [
+    "lem-weil-pbc-ext-pullback-hom-complex",
+    "lem-weil-pbc-ext-pullback-resolution-sections",
+    "lem-weil-pbc-sheafH-right-derived-pullback",
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExtExactFunctorCocycle",
+  "file": "lean/Sheaf/CategoryTheory/ExtExactFunctorCocycle.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.ext_mapExactFunctor_cocycle",
+  "statement": "theorem ext_mapExactFunctor_cocycle\n    {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v} D]\n    [Abelian C] [Abelian D] [HasExt.{v} C] [HasExt.{v} D]\n    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    {A B : C} {A' : D} (α : A' ⟶ L.obj A)\n    (R : InjectiveResolution B) (R' : InjectiveResolution (L.obj B))\n    (φ : (L.mapHomologicalComplex (.up ℤ)).obj R.cochainComplex ⟶ R'.cochainComplex)\n    (hφ : Nonempty (Homotopy\n      ((L.mapHomologicalComplex (.up ℤ)).map R.ι' ≫ φ)\n      ((HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).hom.app B ≫ R'.ι')))\n    (q : ℕ) (a : A ⟶ R.cochainComplex.X (q : ℤ))\n    (ha : a ≫ R.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0)\n    (ha' : (α ≫ L.map a ≫ φ.f (q : ℤ)) ≫\n      R'.cochainComplex.d (q : ℤ) ((q : ℤ) + 1) = 0) :\n    (Ext.mk₀ α).comp\n      ((R.extEquivCohomologyClass.symm\n        (.mk (Cocycle.fromSingleMk a (zero_add (q : ℤ)) _ rfl ha))).mapExactFunctor L)\n      (zero_add q) =\n    R'.extEquivCohomologyClass.symm\n      (.mk (Cocycle.fromSingleMk (α ≫ L.map a ≫ φ.f (q : ℤ))\n        (zero_add (q : ℤ)) _ rfl ha'))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T223420-L-1641998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T223420-L-1641998",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
