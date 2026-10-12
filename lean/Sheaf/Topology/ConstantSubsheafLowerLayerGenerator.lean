@@ -8,9 +8,10 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.ConstantSheafLocallyConstantComparison
-import Sheaf.Topology.PresheafModuleStalkFunctor
+
+import Sheaf.Topology.ConstantSubsheafNormalizedPresentation
+import Sheaf.Topology.ConstantSubsheafLowerImageStalks
+import Sheaf.Topology.ConstantSubsheafQuotientSection
 
 /-! # The lower integer layer and its quotient generator
 
@@ -89,6 +90,43 @@ theorem constantSubsheaf_lower_layer_generator
             IsZero (TopCat.Presheaf.stalk (cokernel l).obj x)) ∧
           (∀ x : X, x ∈ U → x ∉ V →
             IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom)) := by
-  sorry
+  classical
+  obtain ⟨isoC⟩ := hC
+  obtain ⟨n, A, hA, c, hc, g, hg, s, hsection, hvalue, hgcd⟩ :=
+    constantSubsheaf_normalized_presentation X K C ι isoC hqc hgen e b hb
+  let := hg
+  let D := fun i => (abelianOpenExtensionByZero (A i)).obj
+    ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))
+      AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))
+  let f : (∐ D) ⟶ K := Sigma.desc (fun i ↦
+    if c i ≤ b then Sigma.ι D i ≫ g else 0)
+  let L := image f
+  let l : L ⟶ K := image.ι f
+  let U := iSup A
+  let V := ⨆ i : Fin n, if c i ≤ b then A i else ⊥
+  obtain ⟨hbound, hzero, hLzero⟩ :=
+    constantSubsheaf_lower_image_stalks X K C ι isoC n A c g s hsection hvalue b hc hgcd e
+  obtain ⟨q, hq⟩ :=
+    constantSubsheaf_quotient_section X K C ι isoC n A c g s hsection hvalue b hc
+      (fun x hx ↦ hzero x (Or.inl hx)) hLzero
+  have hU : IsCompact (U : Set X) := by
+    change IsCompact ((iSup A : Opens X) : Set X)
+    simpa only [Opens.coe_iSup] using isCompact_iUnion hA
+  have hV : IsCompact (V : Set X) := by
+    change IsCompact ((⨆ i : Fin n, if c i ≤ b then A i else ⊥ : Opens X) : Set X)
+    rw [Opens.coe_iSup]
+    apply isCompact_iUnion
+    intro i
+    split_ifs
+    · exact hA i
+    · exact isCompact_empty
+  have hVU : V ≤ U := by
+    apply iSup_le
+    intro i
+    split_ifs
+    · exact le_iSup A i
+    · exact bot_le
+  refine ⟨L, l, inferInstance, ?_, hbound, U, V, hU, hV, hVU, q, hzero, hq⟩
+  exact ⟨n, A, hA, factorThruImage f, inferInstance⟩
 
 end TopCat.Sheaf
