@@ -96,6 +96,26 @@ def inventory(upstream):
             out[u]['ready']=True; out[u]['order']=len(order); order.append(out[u]); emitted.add(u)
     for u in sorted(set(out)-emitted):
         out[u]['ready']=False; out[u]['order']=None; order.append(out[u])
+    # A module attached to multiple blueprint units is exported only by its
+    # earliest unit in dependency order. Persisted assignment wins on later scans.
+    rank = {s['section']: i for i, s in enumerate(order)}
+    assigned = {}
+    if mapfile.exists():
+        for line in mapfile.read_text().splitlines()[1:]:
+            fields = line.split('\t')
+            if len(fields) == 4 and fields[2] in out:
+                assigned[fields[0]] = fields[2]
+    for m, units_for_module in owners.items():
+        assigned.setdefault(m, min(units_for_module, key=lambda u: (rank.get(u, len(rank)), u)))
+    for s in order:
+        s['modules'] = [m for m in s['modules'] if assigned.get(m, s['section']) == s['section']]
+        rows = [r for m in s['modules'] for r in scan(modules[m])]
+        s.update(declarations=len(rows),
+                 proved=sum(not r['markers'] and r['kind'] != 'structure field' for r in rows),
+                 holes=sum(bool(r['markers']) for r in rows),
+                 fields=sum(r['kind'] == 'structure field' for r in rows),
+                 lines=sum(len(modules[m].splitlines()) for m in s['modules']))
+    owners = {m: {u} for m, u in assigned.items()}
     return order, modules, owners, available, destinations
 
 
@@ -155,7 +175,19 @@ def cut(args):
     up=args.upstream.resolve(); out=args.out.resolve()
     order,mods,owners,available,destinations=inventory(up); sections={s['section']:s for s in order}
     if args.section not in sections: raise ValueError('unknown section '+args.section)
-    s=sections[args.section]; selected=set(s['modules']); todo=list(selected)
+    s=sections[args.section]
+    unit_names = [args.section] + (getattr(args, 'also', None) or [])
+    if any(u not in sections for u in unit_names): raise ValueError('unknown grouped section')
+    if any(sections[u]['chapter'] != s['chapter'] for u in unit_names):
+        raise ValueError('cannot group across blueprint chapters')
+    selected = {m for u in unit_names for m in sections[u]['modules']}
+    module_file = getattr(args, 'modules_file', None)
+    if module_file:
+        requested = {l.strip() for l in module_file.read_text().splitlines() if l.strip()}
+        if not requested <= selected:
+            raise ValueError('module filter contains modules outside assigned sections: ' + ', '.join(sorted(requested-selected)))
+        selected = requested
+    todo=list(selected)
     while todo:
         m=todo.pop()
         for d in IMPORT.findall(mods[m]):
@@ -189,7 +221,7 @@ def cut(args):
     omitted=[n['id'] for n in s['nodes'] if not n['module'] and n['upstream'].get('state') != 'closed']
     tags=sorted(set(re.findall(r'(?:Tag|tag/)\s*([0-9A-Z]{4})','\n'.join(files.values()))))
     description=(f"feat({s['chapter'].removeprefix('sec-')}): {s['title']}\n\n"
-                 f"Add definitions and statements for the blueprint section `{args.section}` ({s['title']}).\n\n"
+                 f"Add definitions and statements for blueprint sections {', '.join('`'+u+'`' for u in unit_names)} ({s['title']}).\n\n"
                  f"Covers {len(selected)} modules and {len(rows)} declarations: "
                  f"{sum(not r['markers'] and r['kind'] != 'structure field' for r in rows)} without direct holes, "
                  f"{sum(bool(r['markers']) for r in rows)} with `sorry`, "
@@ -201,7 +233,7 @@ def cut(args):
     if retained:description+='\nUpstream declarations retained: '+ '; '.join(retained)+'.\n'
     description+='\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n'
     (out/'PR.md').write_text(description)
-    metadata=dict(section=args.section,base_files=sorted(str(p.relative_to(up)) for p in up.rglob('*') if p.is_file() and '.git' not in p.relative_to(up).parts and '.lake' not in p.relative_to(up).parts),files=sorted(files),new_files=sorted(p for p in files if not (up/p).exists()),
+    metadata=dict(section=args.section,sections=unit_names,base_files=sorted(str(p.relative_to(up)) for p in up.rglob('*') if p.is_file() and '.git' not in p.relative_to(up).parts and '.lake' not in p.relative_to(up).parts),files=sorted(files),new_files=sorted(p for p in files if not (up/p).exists()),
                   retained=retained,accepted=accepted,mapping={m:str(path(mapping[m])) for m in sorted(selected) if m in mapping})
     # Metadata stays outside the prospective PR tree.
     out.with_suffix('.cut.json').write_text(json.dumps(metadata,indent=2)+'\n')
@@ -209,7 +241,7 @@ def cut(args):
     existing={}
     if mapfile.exists():
         for line in mapfile.read_text().splitlines()[1:]:existing[line.split('\t')[0]]=line
-    for m,p in metadata['mapping'].items():existing[m]='\t'.join((m,p,args.section,'prepared'))
+    for m,p in metadata['mapping'].items():existing[m]='\t'.join((m,p,next(iter(owners.get(m,{args.section}))), 'prepared'))
     mapfile.write_text('module\tupstream_path\tsection\tpr_state\n'+'\n'.join(existing[m] for m in sorted(existing))+'\n')
     print(json.dumps(metadata,indent=2))
 
@@ -255,7 +287,7 @@ def check(directory):
 def main():
     p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='command',required=True)
     q=sub.add_parser('sections');q.add_argument('--upstream',type=pathlib.Path,required=True);q.add_argument('--json',action='store_true')
-    q=sub.add_parser('cut');q.add_argument('section');q.add_argument('--with-deps',action='store_true');q.add_argument('--upstream',type=pathlib.Path,required=True);q.add_argument('--out',type=pathlib.Path,required=True)
+    q=sub.add_parser('cut');q.add_argument('section');q.add_argument('--also',action='append',default=[],help='another section of the same chapter');q.add_argument('--modules-file',type=pathlib.Path,help='exact module subset for a planned layer');q.add_argument('--with-deps',action='store_true');q.add_argument('--upstream',type=pathlib.Path,required=True);q.add_argument('--out',type=pathlib.Path,required=True)
     q=sub.add_parser('check');q.add_argument('directory',type=pathlib.Path)
     a=p.parse_args()
     try:
