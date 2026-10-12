@@ -11,11 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.FiniteType
-import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import all Sheaf.AlgebraicGeometry.FiniteEtaleAlgebraStage
+import Sheaf.AlgebraicGeometry.ProperClosedFibreApproximation
 
 /-!
 # Finite-type descent of a finite étale closed-fibre cover
@@ -74,6 +71,36 @@ theorem exists_finiteEtale_finiteType_closedFibre_stage
           (Ideal.Quotient.mk (I.comap α)))) =
           pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫
             Spec.map (CommRingCat.ofHom (Ideal.quotientMap I α le_rfl)) ∧
-        Nonempty (Over.mk (pullback.snd U.hom q) ≅ Over.mk V.hom) := by sorry
+        Nonempty (Over.mk (pullback.snd U.hom q) ≅ Over.mk V.hom) := by
+  classical
+  obtain ⟨Λ, hpre, hne, hdir, D, π, ⟨hc⟩, htrans, hcompact, hqs, hstage⟩ :=
+    exists_proper_closedFibre_approximation I f
+  let := hpre
+  let := hne
+  let := hdir
+  let : ∀ {i j : Λᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a) := htrans
+  let : ∀ i, CompactSpace (D.obj i) := hcompact
+  let : ∀ i, QuasiSeparatedSpace (D.obj i) := hqs
+  have : IsFinite V.hom := V.prop.1
+  have : Etale V.hom := V.prop.2
+  obtain ⟨i, W, g, hfin, het, v, H⟩ :=
+    exists_finiteEtale_limit_stage D (Cone.mk _ π) hc V.hom
+  obtain ⟨R, hR, hft, α, X, h, hproper, p, e, hp, hfst, hsnd⟩ :=
+    hstage (Opposite.op i)
+  let := hR
+  have := hft
+  have := hproper
+  have := hfin
+  have := het
+  let q := π.app (Opposite.op i) ≫ e.hom
+  let U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤
+      (pullback h (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap α))))) :=
+    MorphismProperty.Over.mk _ (g ≫ e.hom) ⟨inferInstance, inferInstance⟩
+  have H' : IsPullback v V.hom U.hom q := by
+    apply H.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _) e <;> simp [U, q]
+  refine ⟨R, hR, hft, α, X, h, hproper, p, hp, q, U, hfst, hsnd, ?_⟩
+  refine ⟨Over.isoMk H'.isoPullback.symm ?_⟩
+  exact H'.isoPullback_inv_snd
+
 
 end AlgebraicGeometry.Scheme

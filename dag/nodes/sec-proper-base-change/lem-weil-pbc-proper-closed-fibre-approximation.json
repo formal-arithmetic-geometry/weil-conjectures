@@ -1,0 +1,180 @@
+{
+ "id": "lem-weil-pbc-proper-closed-fibre-approximation",
+ "kind": "statement",
+ "title": "Closed-fibre inverse system of proper finite-type integer models",
+ "statement": "Let A be a commutative ring, I an ideal, and f:Y\\to\\operatorname{Spec}A proper [def-weil-proper-morphism]. Put Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I) [def-pc-fibre-product]. There are a nonempty directed preordered set \\Lambda, an inverse system D:\\Lambda^{op}\\to\\mathrm{Sch}, and a limiting cone \\pi:Y_0\\to D [def-weil-pbc-category-colimit], with affine transitions [pqf-def-affine-morphism] and quasi-compact quasi-separated stages [def-weil-pbc-scheme-conventions]. For each i there are a commutative finite-type integer algebra R_i, \\alpha_i:R_i\\to A, a proper h_i:X_i\\to\\operatorname{Spec}R_i, p_i:Y\\to X_i, and an isomorphism e_i:D_i\\cong X_i\\times_{\\operatorname{Spec}R_i}\\operatorname{Spec}(R_i/\\alpha_i^{-1}I). They satisfy p_i;h_i=f;\\operatorname{Spec}\\alpha_i, j_Y;p_i=(\\pi_i;e_i);j_i, and (\\pi_i;e_i);\\operatorname{pr}_i=\\operatorname{pr}_{A/I};\\operatorname{Spec}\\bar\\alpha_i, where \\bar\\alpha_i is the induced quotient map and j_Y,j_i are the first pullback projections. No finite etale cover is an input or output.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair), proof, General case, approximation and closed-fibre limit paragraph; Tag 0A0P (limits.tex). Official online text read."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Noetherian approximation of $Y\\to\\operatorname{Spec}A$. $\\operatorname{Spec}A$ is affine, hence quasi-compact and quasi-separated, and $f$ is proper. By [lem-weil-pbc-proper-limit-noetherian] (affine clause) there are a directed set $\\Lambda$ and an inverse system $(f_\\lambda:Y_\\lambda\\to S_\\lambda)_{\\lambda\\in\\Lambda}$ with affine transition morphisms, $f_\\lambda$ proper, $S_\\lambda=\\operatorname{Spec}A_\\lambda$ with $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra, $Y=\\varprojlim_\\lambda Y_\\lambda$ (projections $p_\\lambda:Y\\to Y_\\lambda$), $\\operatorname{Spec}A=\\varprojlim_\\lambda S_\\lambda$ and $A=\\varinjlim_\\lambda A_\\lambda$ with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$ [lem-weil-pbc-limit-affine-transition], and $f_\\lambda\\circ p_\\lambda=(\\operatorname{Spec}\\alpha_\\lambda)\\circ f$.",
+   "uses": [
+    "lem-weil-pbc-proper-limit-noetherian",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
+   }
+  },
+  {
+   "text": "The ideals. Put $I_\\lambda=\\alpha_\\lambda^{-1}(I)\\subseteq A_\\lambda$. For $\\mu\\le\\lambda$ the transition map $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ satisfies $\\alpha_\\lambda\\varphi_{\\mu\\lambda}=\\alpha_\\mu$, so $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$ and $(A_\\lambda,I_\\lambda)$ is a directed system of pairs. Every $x\\in A$ is $\\alpha_\\lambda(a)$ for some $\\lambda$ and $a\\in A_\\lambda$ [lem-weil-pbc-filtered-colimit-algebras-elementwise]; if $x\\in I$ then $a\\in I_\\lambda$. Hence $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$, i.e. $(A,I)=\\varinjlim_\\lambda(A_\\lambda,I_\\lambda)$ as pairs, and the induced maps $A_\\lambda/I_\\lambda\\to A/I$ are injective with union $A/I$, so $A/I=\\varinjlim_\\lambda A_\\lambda/I_\\lambda$. (Stacks: 'Thus we also have $I=\\colim I_i$ and $A/I=\\colim A_i/I_i$'.)",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
+   }
+  },
+  {
+   "text": "The closed fibres form an inverse system with limit $Y_0$. Put $S_{\\lambda,0}=\\operatorname{Spec}(A_\\lambda/I_\\lambda)$, $Y_{\\lambda,0}=Y_\\lambda\\times_{S_\\lambda}S_{\\lambda,0}$ and $S_0=\\operatorname{Spec}(A/I)$. (a) By step 2 and [lem-weil-pbc-spec-colimit-limit], $S_0=\\varprojlim_\\lambda S_{\\lambda,0}$. (b) For $\\mu\\le\\lambda$ the morphism $Y_{\\lambda,0}\\to Y_{\\mu,0}$ induced by $Y_\\lambda\\to Y_\\mu$ and $S_{\\lambda,0}\\to S_{\\mu,0}$ factors as $Y_{\\lambda,0}=Y_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}(A_\\lambda/I_\\lambda)\\to Y_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}(A_\\lambda/I_\\mu A_\\lambda)=Y_\\lambda\\times_{Y_\\mu}Y_{\\mu,0}\\to Y_{\\mu,0}$: the first arrow is a base change of the closed immersion $\\operatorname{Spec}(A_\\lambda/I_\\lambda)\\to\\operatorname{Spec}(A_\\lambda/I_\\mu A_\\lambda)$ ($I_\\mu A_\\lambda\\subseteq I_\\lambda$ by step 2), hence a closed immersion [lem-weil-pbc-closed-immersion-base-change], hence affine [pqf-def-affine-morphism]; the second is a base change of the affine $Y_\\lambda\\to Y_\\mu$, hence affine [lem-weil-pbc-affine-morphism-permanence]; a composite of affine morphisms is affine (preimages of affine opens stay affine). So $(Y_{\\lambda,0})$ is an inverse system with affine transition morphisms, and its limit exists [lem-weil-pbc-limit-affine-transition]. (c) Each $Y_{\\lambda,0}\\to S_{\\lambda,0}$ is proper [lem-weil-pbc-proper-base-change], hence quasi-compact and separated [def-weil-proper-morphism]; as $S_{\\lambda,0}$ is affine, $Y_{\\lambda,0}$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence]. (d) $Y_0=\\varprojlim_\\lambda Y_{\\lambda,0}$ with projections $q_\\lambda=p_\\lambda\\times(S_0\\to S_{\\lambda,0}):Y_0\\to Y_{\\lambda,0}$: for every scheme $T$, $\\operatorname{Mor}(T,\\varprojlim Y_{\\lambda,0})=\\varprojlim_\\lambda\\big(\\operatorname{Mor}(T,Y_\\lambda)\\times_{\\operatorname{Mor}(T,S_\\lambda)}\\operatorname{Mor}(T,S_{\\lambda,0})\\big)$ [def-pc-fibre-product], and since limits commute with limits this is $\\operatorname{Mor}(T,Y)\\times_{\\operatorname{Mor}(T,\\operatorname{Spec}A)}\\operatorname{Mor}(T,S_0)=\\operatorname{Mor}(T,Y_0)$ by step 1 and (a), naturally in $T$; conclude by Yoneda. (Stacks: 'The same thing is true for schemes finite etale over $X_0=\\lim(X_i\\times_{S_i}S_{i,0})$'.) The cone projection composed with the chosen stage isomorphism gives the two displayed projection identities by the pullback lift equations. This proves only the approximation system, independently of any cover.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-limit-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-spec-colimit-limit",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair), proof, General case, approximation and closed-fibre limit paragraph; Tag 0A0P (limits.tex). Official online text read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed fibres of a proper scheme are an inverse limit of closed fibres of finite type integer models",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed fibre of a proper scheme over a ring is a directed inverse limit of closed fibres of proper schemes over finite type integer rings",
+   "results": "AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[fF]ibre.*[lL]imit|closed.*fiber.*limit|exists_proper_limit_noetherian",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation proper scheme inverse system quotient of base ring by inverse image of ideal",
+   "results": "Second reading: eight hits, including exists_appTop_map_eq_zero_of_isLimit, Scheme.exists_isAffine_of_isLimit and Scheme.Hom.liftQuotient. None constructs the proper models and the compatible closed-fibre limit.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap",
+   "results": "Second reading: quotientMap_injective verifies that R_i / comap(alpha_i,I) embeds in A/I; quotientMap_comp_mk and comp_quotientMap_eq_of_comp_eq verify quotient compatibility. These are ingredients, not a replacement for the approximation statement.",
+   "date": "2026-10-12",
+   "verdict": "useful ingredients; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0GS2 General case: approximation and construction of the inverse system of closed fibres; excludes descent of the finite etale cover",
+   "via": [
+    "lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage",
+    "lem-weil-pbc-finite-etale-henselian-g-ring-stage",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent-core",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperClosedFibreApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperClosedFibreApproximation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_proper_closedFibre_approximation",
+  "statement": "theorem exists_proper_closedFibre_approximation {A : Type u} [CommRing A] (I : Ideal A) {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] : ∃ (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (D : Λᵒᵖ ⥤ Scheme.{u}) (π : (Functor.const Λᵒᵖ).obj (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) ⟶ D), Nonempty (IsLimit (Cone.mk _ π)) ∧ (∀ {i j : Λᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)) ∧ (∀ i, CompactSpace (D.obj i)) ∧ (∀ i, QuasiSeparatedSpace (D.obj i)) ∧ ∀ i : Λᵒᵖ, ∃ (R : Type u) (_ : CommRing R) (_ : Algebra.FiniteType ℤ R) (α : R →+* A) (X : Scheme.{u}) (h : X ⟶ Spec (.of R)) (_ : IsProper h) (p : Y ⟶ X) (e : D.obj i ≅ pullback h (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap α))))), p ≫ h = f ≫ Spec.map (CommRingCat.ofHom α) ∧ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫ p = (π.app i ≫ e.hom) ≫ pullback.fst h (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap α)))) ∧ (π.app i ≫ e.hom) ≫ pullback.snd h (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap α)))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫ Spec.map (CommRingCat.ofHom (Ideal.quotientMap I α le_rfl))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T110325-L-624658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T110325-L-624658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
