@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-etale-pullback-unit-pointed-witness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 09ZF injectivity on stalks: equality is witnessed on a pointed etale neighbourhood",
+   "via": [
+    "lem-weil-pbc-gabber-zariski-etale-local-agreement"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointed etale witness for equality of inverse-image unit sections",
+ "statement": "Let $i:Z\\to X$ be a morphism of schemes [def-pc-scheme]. Let $F$ be a sheaf of sets on the small etale site of $X$ [def-weil-pbc-etale-sheaf-of-sets], and write $b_i$ for base change [lem-weil-pbc-etale-base-change-finite-limits] and $i^*F$ for the constructed sheaf pullback with unit $\\eta$ [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. For objects $W\\to X$ and $V\\to Z$ of the small etale sites [def-weil-pbc-etale-site], a $Z$-morphism $f:V\\to b_i(W)$, a point $z\\in V$, and sections $s,t\\in F(W)$, suppose $(i^*F)(f)(\\eta_W(s))=(i^*F)(f)(\\eta_W(t))$. Then there exist an object $U\\to X$ of the small etale site, an $X$-morphism $g:U\\to W$, and $u\\in U$ whose image in $X$ is $i(V\\to Z)(z)$, such that $F(g)(s)=F(g)(t)$. The universe of section sets is at least the universe of the site.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
+ },
+ "proof": [
+  {
+   "text": "Unfold the constructed pullback adjunction unit: it is the left Kan extension unit followed by the sheafification unit. Naturality of the latter rewrites the assumed equality as equality of sheafification images of two Kan-extension sections indexed by (W,f).",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF (lemma-gabber-h0), proof, first paragraph (the description of the stalk on the right hand side as a colimit over etale neighbourhoods $(U,u)\\to(X,z)$ with a section of $U\\times_XZ\\to Z$ near $z$); the unit as in Sites, Lemma Tag 00WX and the paragraph 'we denote $i^{-1}s$' of the same proof"
+   }
+  },
+  {
+   "text": "Prove local injectivity of the sheafification unit in the specified universe. For the plus construction, equality of two constant matching-family representatives is equality after a common refinement (GrothendieckTopology.Plus.eq_mk_iff_exists). That refinement is a covering sieve of arrows on which the sections agree. Apply this to both plus operations; local injectivity is closed under composition. The natural isomorphism from plus-plus to the chosen sheafification identifies their units, and postcomposition by an isomorphism preserves local injectivity. Thus the equalizer sieve of the two Kan-extension sections is covering.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WB and 00WK; Mathlib Sites/ConcreteSheafification.lean eq_mk_iff_exists, Sites/LeftExact.lean toSheafify_plusPlusIsoSheafify_hom"
+   }
+  },
+  {
+   "text": "The equality in the sheaf pullback is equality of sheafification images of the two presheaf coprojections indexed by (W,f). Local injectivity of sheafification gives a covering sieve where these coprojections restrict equally. Use the small etale covering criterion to choose an arrow Vprime to V and a point above z. The restricted coprojections have the same index (W, f composed with Vprime to V). Filtered-colimit eventual equality supplies one index U receiving an arrow from this common index in the opposite category, with equal restrictions of s,t. Opposing gives g:U to W and a map Vprime to U times_X Z. Project the chosen point to U; the commuting pullback square identifies its image with i(V.hom(z)).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of inverse image etale sheaf sections on an open near z implies equality on an open near its image in X because etale maps are open",
+   "results": "Etale locus and IsEtale.of_comp results, no local-agreement match",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff'",
+   "results": "FilteredColimit.isColimit_eq_iff': equality is eventual",
+   "date": "2026-10-12",
+   "verdict": "ingredient, not statement match"
+  },
+  {
+   "tool": "grep",
+   "query": "germ_stalkPullbackHom|stalkFunctor_map_unit_toSheafify_isIso|gabber.*local|inverse_image_stalk_pair",
+   "results": "Stalks.lean:242 germ_stalkPullbackHom; Sheafify.lean:137 stalkFunctor_map_unit_toSheafify_isIso. Repository search found no local-agreement or pair-representative declaration.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality after etale sheaf pullback is witnessed on an etale neighbourhood of the image point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberZariskiEtaleLocalAgreement",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtalePullbackUnitPointedWitness",
+  "file": "lean/Sheaf/Paper/EtalePullbackUnitPointedWitness.lean",
+  "declaration": "AlgebraicGeometry.etale_pullback_unit_pointed_witness",
+  "statement": "theorem etale_pullback_unit_pointed_witness\n    {X Z : Scheme.{u}} (i : Z ⟶ X)\n    (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))\n    (W : X.Etale) (V : Z.Etale)\n    (f : V ⟶ (MorphismProperty.Over.pullback @Etale ⊤ i).obj W)\n    (z : V.left) (s t : F.obj.obj (op W))\n    (heq :\n      ((Functor.sheafPullbackConstruction.sheafPullback\n        (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v))\n        (X.smallGrothendieckTopology @Etale)\n        (Z.smallGrothendieckTopology @Etale)).obj F).obj.map f.op\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v))\n          (X.smallGrothendieckTopology @Etale)\n          (Z.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op W) s) =\n      ((Functor.sheafPullbackConstruction.sheafPullback\n        (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v))\n        (X.smallGrothendieckTopology @Etale)\n        (Z.smallGrothendieckTopology @Etale)).obj F).obj.map f.op\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v))\n          (X.smallGrothendieckTopology @Etale)\n          (Z.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op W) t)) :\n    ∃ (U : X.Etale) (g : U ⟶ W) (u : U.left),\n      U.hom u = i (V.hom z) ∧ F.obj.map g.op s = F.obj.map g.op t",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085354-L-45598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085354-L-45598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
