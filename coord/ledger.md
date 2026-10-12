@@ -9533,3 +9533,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:05 L: merged deliver/K3/Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing (stage 3; reviewer PASS; first push; landing 20261012T210533-L-976089 (proof); batch 20261012T210532; modules 1; new nodes 0)
 - 21:05 L: merged deliver/T2/Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax (stage 3; reviewer PASS; first push; landing 20261012T210533-L-976187 (proof); batch 20261012T210532; modules 1; new nodes 0)
 - 21:06 L: returned deliver/C1/Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial (reviewer RETURN: (reviewer X-541e6, head 541e66a02) F (incomplete interface review record; brief points 2 and 7): coord/changes/closedImm)
+- 21:09 L: returned deliver/U3/Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImage (reviewer RETURN: (reviewer X-9e11a, head 9e11addd9) E1 (stage-3 point 4): both new theorem signatures claim compatibility with the suppli)
