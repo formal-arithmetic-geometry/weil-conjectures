@@ -115,6 +115,36 @@ theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : 
       ProjectiveSpace.monomialCechComplex n k m) :=
   ⟨ProjectiveSpace.cechComplexTwistIso n k m⟩
 
+private def opensSiteCech (X : Scheme.{u}) (U : n → X.Opens) :
+    SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)) where
+  W p t := ⨅ k, U (t k)
+  pr p t k := homOfLE (iInf_le _ k)
+  comm _ _ _ := Subsingleton.elim _ _
+  universal p t Z a _ := by
+    refine ⟨homOfLE (le_iInf fun k ↦ (a k).le), ?_, ?_⟩
+    · intro k
+      apply Subsingleton.elim
+    · intro b _
+      apply Subsingleton.elim
+  W_zero t := by simp
+  pr_zero _ := Subsingleton.elim _ _
+  indexMap t α := homOfLE (le_iInf fun k ↦ iInf_le _ (α k))
+  indexMap_pr _ _ _ := Subsingleton.elim _ _
+
+private noncomputable def opensSiteCechIso (X : Scheme.{u}) (U : n → X.Opens)
+    (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    (opensSiteCech n X U).complex F ≅ (TopCat.Presheaf.cechComplex U).obj F :=
+  HomologicalComplex.Hom.isoOfComponents (fun _ ↦ Iso.refl _) (by
+    intro p q hpq
+    obtain rfl : p + 1 = q := hpq
+    simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+    apply AddCommGrpCat.ext
+    intro s
+    funext t
+    rw [TopCat.Presheaf.cechComplex_d_apply]
+    simp only [SiteCechComplex.complex, CochainComplex.of_d]
+    rfl)
+
 /-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
 ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,
 `H^q(ℙᵈ_A, ℱ) = 0` for `q > d`: the alternating Čech complex of the `d + 1` standard opens,
@@ -125,8 +155,39 @@ degree `d`.
 theorem ProjectiveSpace.subsingleton_H_of_lt (A : Type u) [CommRing A] [Finite n] {d : ℕ}
     (hn : Nat.card n = d + 1) (ℱ : (ℙ(n; Spec (.of A))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] {q : ℕ}
-    (hq : d < q) : Subsingleton (ℱ.H q) :=
-  sorry
+    (hq : d < q) : Subsingleton (ℱ.H q) := by
+  classical
+  have := Fintype.ofFinite n
+  let : LinearOrder n := LinearOrder.lift' (Fintype.equivFin n) (Fintype.equivFin n).injective
+  let U := ProjectiveSpace.standardOpen n (Spec (.of A))
+  let P := ℱ.presheafModuleCat ⋙ forget₂ (ModuleCat Γ(ℙ(n; Spec (.of A)), ⊤)) AddCommGrpCat
+  obtain ⟨K, e, r, -, -, hr⟩ := Scheme.alternatingCechComputes
+    (ℙ(n; Spec (.of A))) U (ProjectiveSpace.iSup_standardOpen n _) P
+      (opensSiteCech n _ U)
+  have hempty : IsEmpty {t : Fin (q + 1) → n // StrictMono t} := by
+    refine ⟨fun t ↦ ?_⟩
+    have hc := Fintype.card_le_of_injective t.1 t.2.injective
+    rw [Fintype.card_fin, ← Nat.card_eq_fintype_card, hn] at hc
+    omega
+  have hz : IsZero (K.X q) := by
+    exact ((AddCommGrpCat.isZero_iff_subsingleton).mpr inferInstance).of_iso (e q)
+  have hh : IsZero (K.homology q) :=
+    ShortComplex.isZero_homology_of_isZero_X₂ (K.sc q) hz
+  have := hr q
+  have hz' : IsZero (((opensSiteCech n _ U).complex P).homology q) :=
+    hh.of_iso (asIso (HomologicalComplex.homologyMap r q))
+  have hcech : IsZero (((TopCat.Presheaf.cechComplex U).obj P).homology q) :=
+    hz'.of_iso (HomologicalComplex.homologyMapIso (opensSiteCechIso n _ U P) q).symm
+  let ec := TopCat.Presheaf.cechComplexFunctorHomologyIso U ℱ.presheafModuleCat q
+  have : Subsingleton (((TopCat.Presheaf.cechComplex U).obj P).homology q) :=
+    (AddCommGrpCat.isZero_iff_subsingleton).mp hcech
+  have : Subsingleton (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) :=
+    ec.addCommGroupIsoToAddEquiv.toEquiv.subsingleton
+  obtain ⟨el⟩ := Scheme.Modules.nonempty_cechComplex_linearEquiv_H_of_isSeparated
+    (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) U
+    (fun i ↦ ProjectiveSpace.isAffineOpen_standardOpen n _ i)
+    (ProjectiveSpace.iSup_standardOpen n _) ℱ q
+  exact el.symm.toEquiv.subsingleton
 
 /-- **The cohomology of `𝒪(m)` on `ℙ(n; Spec k)` is that of the monomial Čech complex**,
 as `k`-vector spaces: Leray's theorem for the standard affine covering of the separated scheme

@@ -19,17 +19,37 @@
  ],
  "proof": [
   {
-   "text": "Let $P=\\mathbf P^n_A$ and cover it by the $n+1$ standard opens $U_i=D_+(x_i)$ from [def-pc-projective-space-twist]. Each $U_i$ is affine by [def-pc-proj]. Any finite intersection is $D_+(\\prod_{i\\in J}x_i)$ (a homogeneous prime avoids a product iff it avoids each factor), and $\\prod_{i\\in J}x_i$ is homogeneous of positive degree, hence the intersection is affine by the same standard-open description. Therefore [lem-pc-cech-computes] identifies $H^q(P,\\mathcal F)$ with the Cech cohomology $\\check H^q(\\mathcal U,\\mathcal F)$ of this cover, and [lem-pc-alternating-cech-computes] (with the order $0<1<\\dots<n$ on the indices) identifies $\\check H^q(\\mathcal U,\\mathcal F)$ with the cohomology of the alternating Cech complex. In degree $r$, that complex is the product over strictly increasing $(r+1)$-tuples, i.e. $(r+1)$-element subsets, of the $n+1$ indices. If $r>n$, there are no such subsets, so the degree-$r$ term is zero; all subsequent terms and differentials are zero, and the cohomology in degree $r$ is zero. Thus $H^q(P,\\mathcal F)=0$ for every $q>n$.",
+   "text": "Take the standard affine covering of projective space from [def-pc-projective-space-twist] and [def-pc-proj]. The scheme is separated over Spec A, so its finite intersections are affine. Apply [lem-pc-cech-computes], in its separated affine-base specialization, to identify the homology of the module-valued Cech complex with H^q of the quasi-coherent module. Forget scalars and use the already proved comparison with the explicit abelian-group Cech complex.",
    "uses": [
     "def-pc-projective-space-twist",
     "def-pc-proj",
-    "lem-pc-cech-computes",
+    "lem-pc-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-cohomology-bound.md",
+    "place": "node lem-pc-projective-space-cohomology-bound, order 621"
+   }
+  },
+  {
+   "text": "Give the finite coordinate type an order by an equivalence with Fin of its cardinality. Construct the chosen intersections of [def-weil-pbc-site-cech-complex] as finite infima of the standard opens. The universal properties hold because morphisms of opens are inclusions. The resulting complex is degreewise identical to the explicit Cech complex: both differentials are the signed sum of the omitted-coordinate restrictions. Apply [lem-pc-alternating-cech-computes] to obtain a complex with degree-q group the product over strictly increasing maps from Fin(q+1) to the coordinate type, and an isomorphism on homology.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
     "lem-pc-alternating-cech-computes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-cohomology-bound.md",
-    "place": "## Proof"
+    "place": "node lem-pc-projective-space-cohomology-bound, order 621"
+   }
+  },
+  {
+   "text": "A strictly increasing map Fin(q+1) to the coordinate type is injective, forcing q+1 <= card(n) = d+1, contrary to q>d. The index type is therefore empty and the alternating degree-q term is the zero group. Its homology in degree q is zero because it is a subquotient of that term. Transport zero homology back along the alternating comparison and the two encoding isomorphisms, then along the affine Cech-to-H linear equivalence. This gives Subsingleton of H^q without any field or noetherian hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-cohomology-bound.md",
+    "place": "node lem-pc-projective-space-cohomology-bound, order 621"
    }
   }
  ],
@@ -37,12 +57,13 @@
   "def-pc-projective-space-twist",
   "def-pc-proj",
   "lem-pc-cech-computes",
+  "def-weil-pbc-site-cech-complex",
   "lem-pc-alternating-cech-computes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/lem-pc-projective-space-cohomology-bound.md",
-  "place": "## Proof"
+  "place": "## Proof; formalized by Q2 using the existing alternating Cech comparison"
  },
  "mathlib_searches": [
   {
@@ -166,12 +187,22 @@
  "lean": {
   "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Serre",
   "declaration": "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt",
-  "branch": "slopmaster2",
-  "line": 116,
+  "branch": "sheaf-dag",
+  "line": 154,
   "declarations": [
    "AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt"
   ],
-  "sorry_free": false,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  "sorry_free": true,
+  "note": "Q2 second reading: the declaration has no local sorry; its proof reduces to the existing affine and alternating Cech comparisons. The latter still contributes sorryAx transitively."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819827",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
