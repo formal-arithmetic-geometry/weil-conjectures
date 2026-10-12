@@ -15,37 +15,27 @@
  ],
  "proof": [
   {
-   "text": "The quotient factor map $A/I^{n+2}\\to A/I^{n+1}$ is surjective and its kernel is the image of $I^{n+1}$. The square of this kernel is zero because $n+2\\le 2(n+1)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
-   }
+   "text": "Apply quotientBaseChange_nestedIdeals to J=I^(n+2) and J'=I^(n+1). Its uniqueness clause identifies its closed immersion i with the displayed pullback.map, since both projection identities follow from pullback.map_fst and pullback.map_snd. Its kernel is the extension of J' along p ≫ f, where p is the projection X_(n+1) → X.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+   ],
+   "elementary": false
   },
   {
-   "text": "Apply the nested-ideal quotient base-change description with $J=I^{n+2}$ and $J^\\prime=I^{n+1}$. Its unique transition is the displayed pullback.map (both projection identities agree). It is a closed immersion. On an affine open with ring $B$ the transition is the quotient $B/I^{n+2}B\\to B/I^{n+1}B$, with kernel $I^{n+1}B/I^{n+2}B$. This kernel has square zero by the preceding inequality. Thus its defining ideal sheaf has square zero on an affine basis, hence globally, and it is a finite order thickening.",
+   "text": "Write E(K) for the ideal sheaf of K on Spec A. The quotientBaseChange_closedImmersion_ideal formula identifies E(J).comap f with p.ker. Pulling back along p gives zero: comap_comp and comap_map_le applied to the bottom ideal show p.ker.comap p = bottom. The power clause quotientBaseChange_extendedIdeal_mul_pow gives i.ker^2 = E((J')^2).comap (p ≫ f). Since (J')^2=I^(2(n+1)) ≤ I^(n+2)=J, monotonicity of ideal extension and ideal-sheaf comap makes this square ≤ E(J).comap (p ≫ f)=bottom. Thus the square is bottom, giving an nth order thickening for n=1 and hence a finite order thickening.",
    "uses": [
     "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
     "def-sbc-first-order-thickening"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
-   }
+   "elementary": false
   },
   {
-   "text": "Every prime of each affine coordinate ring contains the square-zero kernel. The zero-locus description of the image of a closed immersion therefore makes the transition surjective. A surjective closed immersion is a universal homeomorphism.",
+   "text": "Mathlib support_pow_succ and support_bot show that i.ker.support is the whole target. Hom.support_ker identifies this support with the closure of the image; the image of the closed immersion is closed, so its image is the whole target. Package surjectivity and apply the existing surjective-closed-immersion universal-homeomorphism instance.",
    "uses": [
     "lem-weil-pbc-closed-immersion-image-zero-locus",
     "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -55,9 +45,12 @@
   "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
+  "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization",
+  "note": "The existing nested-ideal and extended-power interfaces implement the source argument; ideal-sheaf order and support formulas supply the glue."
  },
  "mathlib_searches": [
   {
@@ -136,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T063512-L-3156081",
-  "kind": "interface",
+  "landing": "20261012T095852-L-312245",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
