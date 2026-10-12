@@ -1,6 +1,6 @@
 # Work queue
 
-49 items; claim with `tools/claim.py next <group> [--stage N]`.
+50 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (39)
+## Stage 3: modules to prove (40)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -41,7 +41,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
@@ -51,12 +50,14 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `Sheaf.Topology.FiniteClosedCoverCohomologyVanishing` | 6 | 1 | proof |
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
