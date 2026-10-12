@@ -35,84 +35,57 @@
  ],
  "proof": [
   {
-   "text": "(Preliminaries: $M\\neq0$, depth via regular sequences.) Let $N$ be any finite $R$-module having an associated prime $\\mathfrak p'$, i.e. some $z\\in N$ with $\\operatorname{Ann}_R(z)=\\mathfrak p'$. Since $\\mathfrak p'$ is a prime ideal, $1\\notin\\mathfrak p'$, so $z\\neq0$ and $N\\neq0$. Since $\\mathfrak m$ is the only maximal ideal of $R$, it is the Jacobson radical of $R$, and [lem-weil-pbc-nakayama-jacobson] (with $I=\\mathfrak m$, $N$ finite and nonzero) gives $\\mathfrak mN\\neq N$. Hence case (1) of [def-weil-pbc-depth] applies: $\\operatorname{depth}(N)$ is the supremum of the lengths of the $N$-regular sequences in $\\mathfrak m$ [def-weil-pbc-regular-sequence].",
+   "text": "An associated prime makes M nonzero: in a subsingleton module no ideal is associated (Mathlib not_isAssociatedPrime_of_subsingleton). Nakayama implies m M != M. Unfold depth as the supremum of lengths of regular sequences in m.",
    "uses": [
-    "lem-weil-pbc-nakayama-jacobson",
-    "def-weil-pbc-depth",
-    "def-weil-pbc-regular-sequence"
+    "def-weil-pbc-depth"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, implicit in the first paragraph ('there is a nonzero element x in M')"
+    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
    }
   },
   {
-   "text": "(If $\\mathfrak m$ is associated, the depth is $0$.) Let $N$ be a finite $R$-module with $\\mathfrak m\\in\\operatorname{Ass}(N)$: some $z\\in N$ has $\\operatorname{Ann}_R(z)=\\mathfrak m$, so $z\\neq0$ and $fz=0$ for every $f\\in\\mathfrak m$. Then no $N$-regular sequence $f_1,\\dots,f_r$ in $\\mathfrak m$ has $r\\ge1$: condition (1) of [def-weil-pbc-regular-sequence] for $i=1$ asks that multiplication by $f_1$ on $N/0\\cdot N=N$ be injective, but $f_1z=0=f_1\\cdot0$ with $z\\neq0$. The empty sequence is $N$-regular since $N\\neq0$. By Step 1, $\\operatorname{depth}(N)=0$. In particular for $N=M$ and $\\mathfrak p\\in\\operatorname{Ass}(M)$: if $\\mathfrak m\\in\\operatorname{Ass}(M)$ then $\\operatorname{depth}(M)=0\\le\\dim(R/\\mathfrak p)$, the latter being $\\ge0$ because $R/\\mathfrak p$ is a nonzero ring (it has the prime ideal $\\mathfrak p/\\mathfrak p$, a chain of length $0$ in [def-weil-pbc-krull-dimension-ring]).",
+   "text": "If m is associated, every x in m is a zerodivisor by the union-of-associated-primes characterization. The first member of any nonempty regular sequence would be regular, a contradiction. Every sequence contributing to depth is therefore empty, and the supremum is zero. Otherwise choose a regular x in m; the depth-drop theorem supplies a finite natural-number depth. Induct on d, uniformly over all nonzero finite R-modules of depth d and all their associated primes.",
    "uses": [
-    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
     "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "lem-weil-pbc-depth-drops-by-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
+   }
+  },
+  {
+   "text": "The base d=0 follows because p is prime and R/p is nonzero, so its Krull dimension is nonnegative.",
+   "uses": [
     "def-weil-pbc-krull-dimension-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, first paragraph (lines 17991-17993)"
+    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
    }
   },
   {
-   "text": "(The depth is a finite integer, and the induction.) Let $N$ be a finite $R$-module with $\\operatorname{Ass}(N)\\neq\\emptyset$. If $\\mathfrak m\\in\\operatorname{Ass}(N)$, then $\\operatorname{depth}(N)=0$ by Step 2. Otherwise [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] gives $x\\in\\mathfrak m$ which is a nonzerodivisor on $N$, and since $N\\neq0$ (Step 1) [lem-weil-pbc-depth-drops-by-one] says that $\\operatorname{depth}(N)$ is a finite integer $\\ge1$. So $\\operatorname{depth}(N)\\in\\{0,1,2,\\dots\\}$ in all cases. For an integer $d\\ge0$ let $Q(d)$ be the claim: for every finite $R$-module $N$ and every $\\mathfrak p'\\in\\operatorname{Ass}(N)$ with $\\operatorname{depth}(N)=d$ one has $\\dim(R/\\mathfrak p')\\ge d$. The lemma is $Q(\\operatorname{depth}(M))$ for $N=M$ (if $\\operatorname{Ass}(M)=\\emptyset$ there is nothing to prove). We prove $Q(d)$ by induction on $d$. Base $d=0$: $\\dim(R/\\mathfrak p')\\ge0$ as in Step 2. In Steps 4-7 let $d\\ge1$, assume $Q(d-1)$, and let $N$ be finite, $\\mathfrak p'=:\\mathfrak p\\in\\operatorname{Ass}(N)$, $\\operatorname{depth}(N)=d$. (The source proves the case $d=1$ separately and inducts from $d>1$; the argument of Steps 4-7 covers $d=1$ as well, the inductive hypothesis $Q(0)$ being the base case.)",
+   "text": "For depth d+1, m cannot be associated by the zero-depth argument. Choose x in m regular on N; the zero-divisor characterization implies x not in p. Since p+(x) is contained in m, choose a prime q minimal over p+(x), contained in m. No maximal-dimension choice of q is required.",
    "uses": [
     "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
-    "lem-weil-pbc-depth-drops-by-one",
-    "def-weil-pbc-krull-dimension-ring"
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "lem-weil-pbc-depth-drops-by-one"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, second and third paragraphs ('If depth(M) = 1 ...', 'We will prove the lemma in general by induction on depth(M)')"
+    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
    }
   },
   {
-   "text": "(A nonzerodivisor $x\\notin\\mathfrak p$.) Since $\\operatorname{depth}(N)=d\\ge1$, Step 2 shows $\\mathfrak m\\notin\\operatorname{Ass}(N)$, so by [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] there is $x\\in\\mathfrak m$ which is a nonzerodivisor on $N$. By [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes] ($R$ Noetherian) the zerodivisors on $N$ are exactly $\\bigcup_{\\mathfrak q'\\in\\operatorname{Ass}(N)}\\mathfrak q'$; as $x$ is not a zerodivisor on $N$, $x\\notin\\mathfrak p$.",
-   "uses": [
-    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
-    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, third paragraph: 'Pick x in m which is a nonzerodivisor on M. Note x not in p (Lemma 00LD)'"
-   }
-  },
-  {
-   "text": "(The dimension drops by one: $\\dim R/(\\mathfrak p+(x))=\\dim(R/\\mathfrak p)-1$.) Put $\\bar R=R/\\mathfrak p$. It is Noetherian [def-weil-pbc-noetherian-ring] (its ideals are the images of the ideals of $R$ containing $\\mathfrak p$, so an ascending chain of them lifts to one in $R$) and local with maximal ideal $\\mathfrak m/\\mathfrak p$ (its maximal ideals are the images of the maximal ideals of $R$ containing $\\mathfrak p$); it is a domain since $\\mathfrak p$ is prime. The image $\\bar x$ of $x$ lies in $\\mathfrak m/\\mathfrak p$ and is nonzero by Step 4, hence is a nonzerodivisor of the domain $\\bar R$. By [lem-weil-pbc-noetherian-local-finite-krull-dimension] $\\dim\\bar R$ is a finite integer, and by [lem-weil-pbc-dimension-quotient-nonzerodivisor] (Tag 00KW) $\\dim(\\bar R/\\bar x\\bar R)+1=\\dim\\bar R$. Let $A=R/(\\mathfrak p+(x))$; the surjection $R\\to\\bar R/\\bar x\\bar R$ has kernel $\\mathfrak p+(x)$, so $A\\cong\\bar R/\\bar x\\bar R$ and $e:=\\dim A=\\dim(R/\\mathfrak p)-1$, a finite integer. As $x\\in\\mathfrak m$ and $\\mathfrak p\\subseteq\\mathfrak m$, $\\mathfrak p+(x)\\subseteq\\mathfrak m\\neq R$, so $A\\neq0$ and $e\\ge0$.",
-   "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, third paragraph: 'By Lemma 00KW we have dim(R/p + (x)) = dim(R/p) - 1'"
-   }
-  },
-  {
-   "text": "(The omitted small argument: a prime $\\mathfrak q$ minimal over $\\mathfrak p+(x)$ with $\\dim(R/\\mathfrak q)=\\dim(R/\\mathfrak p)-1$.) The prime ideals of $A=R/(\\mathfrak p+(x))$ are the $\\mathfrak Q/(\\mathfrak p+(x))$ with $\\mathfrak Q\\supseteq\\mathfrak p+(x)$ a prime of $R$, inclusions preserved both ways; so the minimal prime ideals of $A$ are the images of the primes of $R$ minimal over $\\mathfrak p+(x)$, and for such a prime $\\mathfrak q$ one has $A/(\\mathfrak q/(\\mathfrak p+(x)))\\cong R/\\mathfrak q$. Since $e=\\dim A$ is a finite integer $\\ge0$ (Step 5) there is a chain $Q_0\\subsetneq Q_1\\subsetneq\\cdots\\subsetneq Q_e$ of primes of $A$ [def-weil-pbc-krull-dimension-ring]. By [lem-weil-pbc-prime-contains-minimal-prime] (with $I=0$ in $A$) there is a minimal prime $Q'\\subseteq Q_0$ of $A$; then $Q'\\subsetneq Q_1\\subsetneq\\cdots\\subsetneq Q_e$ (for $e=0$: just $Q'$) is a chain of length $e$ of primes of $A$ containing $Q'$, whose images form a chain of length $e$ in $A/Q'$; so $\\dim(A/Q')\\ge e$. Conversely the primes of $A/Q'$ are the images of the primes of $A$ containing $Q'$, so a chain in $A/Q'$ gives one of the same length in $A$, and $\\dim(A/Q')\\le\\dim A=e$. Let $\\mathfrak q\\subset R$ be the inverse image of $Q'$: a prime of $R$ minimal over $\\mathfrak p+(x)$, with $R/\\mathfrak q\\cong A/Q'$, hence $\\dim(R/\\mathfrak q)=e=\\dim(R/\\mathfrak p)-1$. (This is the hint of the source: the dimension of the Noetherian local ring $A$ is the maximum of $\\dim A/\\mathfrak r$ over its minimal primes $\\mathfrak r$.)",
-   "uses": [
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-prime-contains-minimal-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, third paragraph: 'Thus there exists a prime q minimal over p + (x) with dim(R/q) = dim(R/p) - 1 (small argument omitted; hint: ...)'"
-   }
-  },
-  {
-   "text": "(Passing to $N/x^nN$ and concluding.) By [lem-weil-pbc-associated-prime-power-quotient] (Tag 0CN5) applied to $N$, $x\\in\\mathfrak m$, $\\mathfrak p\\in\\operatorname{Ass}(N)$ and $\\mathfrak q$ minimal over $\\mathfrak p+(x)$ (Step 6), there is $n\\ge1$ with $\\mathfrak q\\in\\operatorname{Ass}(N/x^nN)$. The element $x^n\\in\\mathfrak m$ is a nonzerodivisor on $N$ (multiplication by $x^n$ is the $n$-fold composite of the injective multiplication by $x$), and $N\\neq0$ (Step 1), so by [lem-weil-pbc-depth-drops-by-one] applied to $x^n$: $\\operatorname{depth}(N/x^nN)=\\operatorname{depth}(N)-1=d-1$. $N/x^nN$ is a finite $R$-module (a quotient of $N$). By the inductive hypothesis $Q(d-1)$ applied to $N/x^nN$ and $\\mathfrak q$: $\\dim(R/\\mathfrak q)\\ge d-1$. With Step 6, $\\dim(R/\\mathfrak p)=\\dim(R/\\mathfrak q)+1\\ge d$. This proves $Q(d)$, hence $Q(d)$ for all $d\\ge0$, and with Step 3 the lemma: $\\dim(R/\\mathfrak p)\\ge\\operatorname{depth}(M)$ for every $\\mathfrak p\\in\\operatorname{Ass}(M)$.",
+   "text": "The associated-prime power-quotient theorem gives n>=1 with q associated to Q=N/x^n N. The power x^n remains regular and in m. The depth-drop theorem gives Q nonzero and depth(Q)=d. Q is finite as a quotient, so induction gives d<=dim(R/q).",
    "uses": [
     "lem-weil-pbc-associated-prime-power-quotient",
     "lem-weil-pbc-depth-drops-by-one"
@@ -120,28 +93,33 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020, third paragraph: 'Pick n as in Lemma 0CN5 so that q is an associated prime of M/x^nM. We may apply induction hypothesis to M/x^nM and q because depth(M/x^nM) = depth(M) - 1 by Lemma 090R ... and we win'"
+    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
+   }
+  },
+  {
+   "text": "The quotient factor map R/p onto R/q kills the image of x. This image is nonzero because x is outside p, hence a nonzerodivisor in the domain R/p. The inequality direction of the nonzerodivisor dimension-drop argument gives dim(R/q)+1<=dim(R/p): first quotient R/p by the image of x, then use monotonicity for the further quotient R/q. Lean uses Mathlib ringKrullDim_succ_le_of_surjective (Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:61-65), which packages exactly these two inequalities, and does not require localness or finiteness. Adding one to the induction bound now gives d+1<=dim(R/p). This replaces the original equality and maximal-chain-attainment argument with only the inequality needed for induction.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-nakayama-jacobson",
   "def-weil-pbc-depth",
-  "def-weil-pbc-regular-sequence",
-  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
   "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
   "lem-weil-pbc-depth-drops-by-one",
-  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-weil-pbc-krull-dimension-ring",
   "lem-weil-pbc-associated-prime-power-quotient"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; cited lemmas: Tag 00LD (lemma-ass-zero-divisors, line 15278), Tag 00KW (lemma-one-equation, line 14694), Tag 0CN5 (lemma-inherit-minimal-primes, line 17961), Tag 090R (lemma-depth-drops-by-one, line 17940); tags verified in tags/tags"
+  "place": "Stacks Algebra Tag 0BK4 induction, as recorded in the original node; U1 formalization simplifies the dimension step to the inequality direction of Tag 00KW, using Mathlib ringKrullDim_succ_le_of_surjective, NonZeroDivisors.lean:61-65. No maximal-chain-attainment argument is required."
  },
  "mathlib_searches": [
   {
@@ -236,5 +214,15 @@
   "group": "K1",
   "result": "fix",
   "note": "Noetherian local R (IsNoetherianRing, IsLocalRing), finite M (Module.Finite), associated prime p (Mathlib associatedPrimes, = prime Ann(z) under Noetherian, equivalence checked in Lean), conclusion depth(M) <= ringKrullDim (R/p) with recorded IsLocalRing.depth cast to WithBot; zero module vacuous (no associated primes)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T112851-L-772101",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
