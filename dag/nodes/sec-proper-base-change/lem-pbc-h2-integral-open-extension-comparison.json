@@ -1,0 +1,130 @@
+{
+ "id": "lem-pbc-h2-integral-open-extension-comparison",
+ "kind": "statement",
+ "title": "Integral encoding commutes with open extension by zero",
+ "statement": "For any scheme X and abelian etale sheaf A [def-weil-pbc-abelian-etale-sheaves], let E be the canonical equivalence from abelian groups to modules over ULift Z, obtained by the inverse of the forgetful Z-module equivalence and restriction along ULift Z = Z. For any open inclusion j:U -> X [def-weil-pbc-extension-by-zero], E(j_!j^*A) is isomorphic to j_!j^*E(A) [def-weil-pbc-inverse-image]. No curve, density, torsion or constructibility hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S5 (proposition-stalk-j-shriek), 0GJA (lemma-restrict-to-open), integral encoding of the extension by zero"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Replace upperStar on both coefficient categories by upperStarIsoOpenImmersionRestriction. Restriction is precomposition, so it commutes with the coefficient functor sectionwise.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold extension by zero as left Kan extension followed by sheafification. E preserves limits and colimits. The existing Mathlib Functor.lanCompIsoOfPreserves and sheafComposeNatIso commute E with these operations. Compose their isomorphisms and the restriction comparisons to obtain the displayed isomorphism.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S5 (proposition-stalk-j-shriek), 0GJA (lemma-restrict-to-open), integral encoding of the extension by zero; explicit integral-coefficient Lean reduction by H2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of left Kan extension and a colimit preserving functor is isomorphic to left Kan extension of the composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left Kan extension commutes with a coefficient functor preserving colimits",
+   "results": "Eight Kan-extension hits including Functor.lanCompColimIso; no full integral sheaf comparison.",
+   "date": "2026-10-12",
+   "verdict": "Generic Kan-extension tools support the proof; no duplicate full theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "lanCompIsoOfPreserves|ab_finite",
+   "results": "Mathlib CategoryTheory/Functor/KanExtension/Preserves.lean:280 defines lanCompIsoOfPreserves. Searches of repository coefficient comparisons found pullback_forget_modules_iso for forgetting arbitrary modules, not this encoding and lower shriek.",
+   "date": "2026-10-12",
+   "verdict": "Use the generic comparison; new sheaf theorem is proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenFinitenessComparison",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "proof, dense-open reduction: Tags 03S5 (proposition-stalk-j-shriek), 0GJA (lemma-restrict-to-open), integral encoding of the extension by zero",
+   "via": [
+    "lem-pbc-j2-dense-open-finiteness-comparison",
+    "lem-weil-pbc-curve-assertions-dense-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/IntegralOpenExtensionComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.integral_open_extension_comparison",
+  "statement": "theorem integral_open_extension_comparison {X : Scheme.{u}}\n    (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :\n    let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙\n      ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom\n    let F := (sheafCompose X.smallEtaleTopology E).obj A\n    let B := (openImmersionLowerShriek AddCommGrpCat.{u + 1} U.ι).obj\n      ((upperStar AddCommGrpCat.{u + 1} U.ι).obj A)\n    Nonempty ((sheafCompose X.smallEtaleTopology E).obj B ≅\n      (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).obj\n        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).obj F))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T070538-L-3471476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T070538-L-3471476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
