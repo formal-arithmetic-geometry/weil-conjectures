@@ -24,6 +24,33 @@ open scoped AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+/-- The coefficient comparison supplies isomorphisms on the source and target of the
+base-change arrow, and these isomorphisms intertwine the two arrows.  This is the
+derived-functor comparison part; the arrow-category packaging is proved below.
+
+Source: Stacks Project, Lemma 21.20.7(3), Tag 0D6J, and Remark 21.19.3, Tag 07A7.
+Proof: compare inverse and direct images sectionwise, derive the comparison using an
+injective resolution, and check compatibility with the adjunction units and counits.
+(blueprint: lem-sbc-base-change-restrict-scalars-comparison) -/
+theorem restrictScalars_baseChange_comparison
+    {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
+    {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+    (sq : IsPullback e h g p) [QuasiCompact g] [QuasiSeparated g] (q : ℤ)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
+    ∃ (a : (baseChangeSourceFunctor Λ p g q).obj
+        ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≅
+        (Sheaf.restrictScalars X.smallEtaleTopology φ).obj
+          ((baseChangeSourceFunctor Λ' p g q).obj G))
+      (b : (baseChangeTargetFunctor Λ e h q).obj
+        ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≅
+        (Sheaf.restrictScalars X.smallEtaleTopology φ).obj
+          ((baseChangeTargetFunctor Λ' e h q).obj G)),
+      a.hom ≫ (Sheaf.restrictScalars X.smallEtaleTopology φ).map
+          (baseChangeHomologyMap Λ' sq q G) =
+        baseChangeHomologyMap Λ sq q
+          ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≫ b.hom := by
+  sorry
+
 /-- Restriction of coefficients identifies the degreewise base-change arrows.
 
 Sources: Stacks Project, Lemma 21.20.7(3), Tag 0D6J
@@ -57,6 +84,8 @@ theorem exists_baseChangeHomologyMap_restrictScalars_arrow_iso
     Nonempty (Arrow.mk (baseChangeHomologyMap Λ sq q
       ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G)) ≅
       Arrow.mk ((Sheaf.restrictScalars X.smallEtaleTopology φ).map
-        (baseChangeHomologyMap Λ' sq q G))) := by sorry
+        (baseChangeHomologyMap Λ' sq q G))) := by
+  obtain ⟨a, b, hab⟩ := restrictScalars_baseChange_comparison φ sq q G
+  exact ⟨Arrow.isoMk' _ _ a b hab⟩
 
 end AlgebraicGeometry.Etale
