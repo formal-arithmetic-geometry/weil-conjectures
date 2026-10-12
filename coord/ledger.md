@@ -8687,3 +8687,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/X3/Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproduct (stage 3; reviewer PASS; first push; landing 20261012T165541-L-2942588 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/X3/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (stage 3; reviewer PASS; first push; landing 20261012T165541-L-2942732 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.FlatModelFiniteFreeStructuralData (stage 3; reviewer PASS; first push; landing 20261012T165542-L-2942956 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/Y2/Sheaf.CategoryTheory.ColimitSiteSetSectionPresentation (stage 3; reviewer PASS; first push; landing 20261012T165542-L-2943109 (interface); batch 20261012T165503; modules 4; new nodes 3)

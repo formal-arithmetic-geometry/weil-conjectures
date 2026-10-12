@@ -10,7 +10,11 @@ public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
-import Sheaf.CategoryTheory.FilteredColimitCategories
+import Sheaf.CategoryTheory.ColimitSiteSetSectionCoherence
+import Sheaf.CategoryTheory.ColimitSiteSetSectionRepresentatives
+import Sheaf.CategoryTheory.ColimitSiteSetSectionEventualEquality
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Stage section colimit presentation
 
@@ -133,6 +137,82 @@ theorem colimit_site_set_section_presentation
                     ∀ (t t' : Under i) (b : t ⟶ t'),
                         Arrow.mk ((E t).hom ≫
                           (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) =
-                        Arrow.mk (D.map b ≫ (E t').hom) := by sorry
+                        Arrow.mk (D.map b ≫ (E t').hom) := by
+  classical
+  let S (t : Under i) : Type u :=
+    ((sheafPullback (F.map t.hom).toFunctor (Type u)
+      (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj
+        (op ((F.map t.hom).toFunctor.obj U))
+  let T : Type u :=
+    ((sheafPullback (V.ι.app i).toFunctor (Type u)
+      (P i).toGrothendieck Q.toGrothendieck).obj G).obj.obj
+        (op ((V.ι.app i).toFunctor.obj U))
+  have hstage (t t' : Under i) (b : t ⟶ t') :
+      (F.map t.hom).toFunctor ⋙ (F.map b.right).toFunctor =
+        (F.map t'.hom).toFunctor := by
+    rw [← Cat.Hom.comp_toFunctor, ← F.map_comp, Under.w b]
+  have hlimit (t : Under i) :
+      (F.map t.hom).toFunctor ⋙ (V.ι.app t.right).toFunctor =
+        (V.ι.app i).toFunctor :=
+    congrArg Cat.Hom.toFunctor (V.w t.hom)
+  let m (t t' : Under i) (b : t ⟶ t') : S t ⟶ S t' :=
+    (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U)) ≫
+      eqToHom (congrArg
+        (fun X ↦ ((sheafPullback (F.map t'.hom).toFunctor (Type u)
+          (P i).toGrothendieck (P t'.right).toGrothendieck).obj G).obj.obj (op X))
+        (congrArg (fun f : F.obj i ⥤ F.obj t'.right ↦ f.obj U) (hstage t t' b)))
+  let c (t : Under i) : S t ⟶ T :=
+    (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) ≫
+      eqToHom (congrArg
+        (fun X ↦ ((sheafPullback (V.ι.app i).toFunctor (Type u)
+          (P i).toGrothendieck Q.toGrothendieck).obj G).obj.obj (op X))
+        (congrArg (fun f : F.obj i ⥤ V.pt ↦ f.obj U) (hlimit t)))
+  have hm (t t' : Under i) (b : t ⟶ t') :
+      Arrow.mk (m t t' b) =
+        Arrow.mk ((θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) := by
+    dsimp [m]
+    simp only [Arrow.arrow_mk_comp_eqToHom]
+  have hc (t : Under i) :
+      Arrow.mk (c t) =
+        Arrow.mk ((α t).hom.app (op ((F.map t.hom).toFunctor.obj U))) := by
+    dsimp [c]
+    simp only [Arrow.arrow_mk_comp_eqToHom]
+  obtain ⟨hid, hcomp, hcone⟩ := colimit_site_set_section_coherence
+    J F P V Q i G α hα θ hθ U m c hm hc
+  let D : Under i ⥤ Type u :=
+    { obj := S
+      map := fun b ↦ m _ _ b
+      map_id := hid
+      map_comp := fun b b' ↦ hcomp _ _ _ b b' }
+  let E (t : Under i) : D.obj t ≅ S t := Iso.refl _
+  let K : Cocone D :=
+    { pt := T
+      ι :=
+        { app := c
+          naturality := fun t t' b ↦ by
+            change m t t' b ≫ c t' = c t ≫ 𝟙 T
+            rw [Category.comp_id]
+            exact hcone t t' b } }
+  let e : K.pt ≅ T := Iso.refl _
+  have hι (t : Under i) : Arrow.mk (K.ι.app t ≫ e.hom) =
+      Arrow.mk ((E t).hom ≫
+        (α t).hom.app (op ((F.map t.hom).toFunctor.obj U))) := by
+    change Arrow.mk (c t ≫ 𝟙 T) =
+      Arrow.mk (𝟙 (S t) ≫
+        (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)))
+    simpa only [Category.comp_id, Category.id_comp] using hc t
+  have hmap (t t' : Under i) (b : t ⟶ t') :
+      Arrow.mk ((E t).hom ≫
+        (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) =
+      Arrow.mk (D.map b ≫ (E t').hom) := by
+    simpa only [D, E, Iso.refl_hom, Category.comp_id, Category.id_comp] using
+      (hm t t' b).symm
+  have hsurj := colimit_site_set_section_representatives
+    J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback
+    i G α hα U D E K e hι
+  have hinj := colimit_site_set_section_eventual_equality
+    J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback
+    i G α hα θ hθ U D E K e hι hmap
+  exact ⟨D, E, K, e, ⟨Types.FilteredColimit.isColimitOf' D K hsurj hinj⟩, hι, hmap⟩
 
 end CategoryTheory

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-colimit-site-set-section-coherence",
+ "kind": "statement",
+ "title": "Unit-compatible section maps satisfy the functor and cocone laws.",
+ "statement": "Let $J$ be a small category and $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit]. Let $P_j$ be a precoverage on $F(j)$, let $V$ be a cocone with vertex $C$, and let $Q$ be a precoverage on $C$. Assume every transition $F(a)$ and every $V_j$ is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology]. Fix $i\\in J$, a set-valued sheaf $G$ on $P_i$, and $U\\in F(i)$. For $t=(i\\to j)$ in $\\mathrm{Under}(i)$ put $G_t=F(t.hom)_sG$, $S_t=G_t(F(t.hom)U)$, $H=V_{i,s}G$, and $T=H(V_iU)$. Write $\\eta_t$ and $\\eta_i^V$ for the inverse-image adjunction units. Suppose sheaf maps $\\alpha_t:G_t\\to V_j^sH$ and $\\theta_b:G_t\\to F(b.right)^sG_{t'}$ are given for each $b:t\\to t'$, and for every $X\\in F(i)$ their composites with $\\eta_t(X)$ equal $\\eta_i^V(X)$ and $\\eta_{t'}(X)$, respectively, as objects of the arrow category. Suppose functions $m_b:S_t\\to S_{t'}$ and $c_t:S_t\\to T$ equal the evaluated $\\theta_b$ and $\\alpha_t$ as arrow objects (so endpoint identifications are included). Then $m_{\\mathrm{id}_t}=\\mathrm{id}_{S_t}$, $m_{b'b}=m_{b'}m_b$, and $c_{t'}m_b=c_t$. No category-colimit, filteredness, or covering-finiteness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the stage adjunction hom equivalence: its value on a sheaf map is composition with the unit. Equality of its components gives equality of natural transformations, and injectivity gives uniqueness of the sheaf map. Identify composite restriction functors using F.map_id, F.map_comp, Under.w and V.w.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  },
+  {
+   "text": "The identity map and the composite of two transitions satisfy the required unit equations. For composition, first compose the unit with the first transition, use its unit equation, and then the second transition unit equation, transporting along the strict functor equality. The same calculation with the later alpha yields the earlier alpha. Uniqueness proves the sheaf-level identity, composition and cocone laws.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  },
+  {
+   "text": "Evaluate at the image of U. The given Arrow equalities identify each m and c with the corresponding section map, including their endpoint transports. These transports preserve identity and composition; the evaluated three sheaf equalities give the stated laws.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit compatible inverse image sheaf maps satisfy identity composition and cocone equations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit compatible inverse image sheaf maps satisfy identity composition and cocone equations",
+   "results": "Supporting APIs only: CategoryTheory.Equivalence.sheafCongr.unitIso_inv_app_val_app, CategoryTheory.Functor.IsCoverDense.presheafIso_inv, CategoryTheory.Functor.IsCoverDense.Types.presheafIso_inv_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_inv_app_val_app, CategoryTheory.Functor.IsCoverDense.Types.appIso_inv, CategoryTheory.Functor.IsCoverDense.sheafIso_inv_val, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, CategoryTheory.Equivalence.sheafCongrPreregular_unitIso_inv_app_val_app; no theorem for the specified colimit-site section maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|sheafAdjunctionContinuous|homEquiv_unit",
+   "results": "Supporting APIs only: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean; no theorem for the specified colimit-site section maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteSetSectionPresentation",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-of-sites-reduced",
+   "place": "Tag 0A35: adjunction-unit uniqueness and coherence",
+   "via": [
+    "lem-weil-pbc-colimit-site-set-section-presentation",
+    "lem-weil-pbc-colimit-site-set-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteSetSectionCoherence",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteSetSectionCoherence.lean",
+  "declaration": "CategoryTheory.colimit_site_set_section_coherence",
+  "statement": "theorem colimit_site_set_section_coherence\n    (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (Q : Precoverage V.pt)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck (Type u))\n    (α : ∀ t : Under i,\n                (sheafPullback (F.map t.hom).toFunctor (Type u)\n                  (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous (Type u)\n                  (P t.right).toGrothendieck Q.toGrothendieck).obj\n                  ((sheafPullback (V.ι.app i).toFunctor (Type u)\n                    (P i).toGrothendieck Q.toGrothendieck).obj G))\n    (hα : (∀ (t : Under i) (X : F.obj i),\n                  Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                    (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app\n                      (op X) ≫ (α t).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                  Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor (Type u)\n                    (P i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X))))\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor (Type u)\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor (Type u)\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (∀ X : F.obj i,\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app\n                                G).hom.app (op X) ≫\n                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app\n                                G).hom.app (op X))))\n    (U : F.obj i)\n    (m : ∀ (t t' : Under i) (b : t ⟶ t'), ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj\n          (op ((F.map t.hom).toFunctor.obj U)) ⟶ ((sheafPullback (F.map t'.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t'.right).toGrothendieck).obj G).obj.obj\n          (op ((F.map t'.hom).toFunctor.obj U)))\n    (c : ∀ t : Under i, ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj\n          (op ((F.map t.hom).toFunctor.obj U)) ⟶ ((sheafPullback (V.ι.app i).toFunctor (Type u)\n        (P i).toGrothendieck Q.toGrothendieck).obj G).obj.obj\n          (op ((V.ι.app i).toFunctor.obj U)))\n    (hm : ∀ (t t' : Under i) (b : t ⟶ t'),\n      Arrow.mk (m t t' b) =\n        Arrow.mk ((θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))))\n    (hc : ∀ t : Under i,\n      Arrow.mk (c t) =\n        Arrow.mk ((α t).hom.app (op ((F.map t.hom).toFunctor.obj U)))) :\n    (∀ t : Under i, m t t (𝟙 t) = 𝟙 _) ∧\n    (∀ (t t' t'' : Under i) (b : t ⟶ t') (b' : t' ⟶ t''),\n      m t t'' (b ≫ b') = m t t' b ≫ m t' t'' b') ∧\n    (∀ (t t' : Under i) (b : t ⟶ t'), m t t' b ≫ c t' = c t)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T165542-L-2943109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T165542-L-2943109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
