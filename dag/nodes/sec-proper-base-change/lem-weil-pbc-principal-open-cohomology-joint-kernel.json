@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-principal-open-cohomology-joint-kernel",
+ "kind": "statement",
+ "title": "Joint kernel in a principal two-open etale cohomology cover",
+ "statement": "Let R be a commutative ring, X=Spec R [def-weil-affine-spectrum], and F an abelian sheaf on the small etale site [def-weil-pbc-abelian-etale-sheaves]. For a,b in R and n>=0, assume H^n(D(ab(a+b)),F restricted to that open)=0 [def-weil-pbc-etale-cohomology] [def-weil-pbc-inverse-image]. If x in H^(n+1)(D(a+b),F restricted to that open) has zero pullback [def-weil-pbc-cohomology-pullback] along each inclusion D(a(a+b))->D(a+b) and D(b(a+b))->D(a+b), then x=0. These are the actual cohomologyMap maps to iterated inverse-image coefficients; no assumption about vanishing on the two cover members is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GY0, displayed Mayer--Vietoris exact segment and its final paragraph; Tag 0A50, construction of the etale Mayer--Vietoris sequence. Read at https://stacks.math.columbia.edu/tag/0GY0."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Set W=D(a+b), U=W inverse image D(a), and V=W inverse image D(b). A prime avoiding a+b cannot contain both a and b, so U and V cover W. The isoImage and isoOfEq isomorphisms identify U with D(a(a+b)), V with D(b(a+b)), and their intersection with D(ab(a+b)). Compose with the open immersion W to Spec R to check these identifications.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Functoriality shows the two maps on W have zero images: each relative open inclusion factors as its isoImage isomorphism followed by the specified ambient homOfLE. The inverse-image composition comparison preserves and reflects zero. Apply the existing cohomologyPullbackFunctorial identity directly to each factorization and cancel the upperStarComp coefficient isomorphism; no duplicate composite-zero theorem is declared.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use upperStarComp to identify the coefficients on the relative intersection with pullback of F restricted to D(ab(a+b)) along its scheme isomorphism. Cohomology is bijective along that isomorphism (a universal homeomorphism), and cohomology of isomorphic coefficient sheaves is isomorphic. Transport hprev to obtain a subsingleton intersection group.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etale_mayerVietoris_connecting_pullback with g the identity of W and take its X-side exact segment in degrees n and n+1. Exactness writes x as delta(y). Since the intersection group is subsingleton, y=0, and additivity gives delta(0)=0. This works also for n=0 and for empty or repeated cover members.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J1",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GY0, displayed Mayer--Vietoris exact segment and its final paragraph; Tag 0A50, construction of the etale Mayer--Vietoris sequence. Read at https://stacks.math.columbia.edu/tag/0GY0.",
+  "note": "Agent-written specialization with explicit relative-open and coefficient identifications of the source exact-segment argument. Repair: removed the duplicate private composite-zero theorem and instantiated the existing pullback functoriality identity directly at the two cover members."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris injectivity of restriction maps when previous degree cohomology on intersection vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris injectivity of restriction maps when previous degree cohomology on intersection vanishes",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mono_f₁₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext; groupCohomology.instMonoModuleCatFH1InfRes; groupCohomology.instMonoModuleCatFShortComplexH0; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the Sheaf.H joint-kernel statement with actual etale pullback maps; use the existing library etale Mayer--Vietoris exact segment."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|mayer_vietoris",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the Sheaf.H joint-kernel statement with actual etale pullback maps; use the existing library etale Mayer--Vietoris exact segment."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberPrincipalVanishingIdeal",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Gabber criterion (Stacks 0GY0), higher-degree addition-closure exact segment",
+   "via": [
+    "lem-weil-pbc-gabber-principal-vanishing-ideal",
+    "lem-weil-pbc-gabber-criterion-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCohomologyJointKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCohomologyJointKernel.lean",
+  "declaration": "AlgebraicGeometry.Etale.principalOpenCohomology_joint_kernel",
+  "statement": "theorem principalOpenCohomology_joint_kernel\n    (R : Type u) [CommRing R]\n    (F : Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a b : R) (n : ℕ)\n    (hprev : Subsingleton (Sheaf.H\n      (((Scheme.Opens.ι (X := Spec (CommRingCat.of R))\n        (PrimeSpectrum.basicOpen (a * b * (a + b))))^*[AddCommGrpCat.{u + 1}]).obj F) n))\n    (x : Sheaf.H\n      (((Scheme.Opens.ι (X := Spec (CommRingCat.of R))\n        (PrimeSpectrum.basicOpen (a + b)))^*[AddCommGrpCat.{u + 1}]).obj F) (n + 1))\n    (ha : cohomologyMap\n      (Scheme.homOfLE (X := Spec (CommRingCat.of R))\n        (PrimeSpectrum.basicOpen_mul_le_right a (a + b)))\n      (((Scheme.Opens.ι (X := Spec (CommRingCat.of R))\n        (PrimeSpectrum.basicOpen (a + b)))^*[AddCommGrpCat.{u + 1}]).obj F) (n + 1) x = 0)\n    (hb : cohomologyMap\n      (Scheme.homOfLE (X := Spec (CommRingCat.of R))\n        (PrimeSpectrum.basicOpen_mul_le_right b (a + b)))\n      (((Scheme.Opens.ι (X := Spec (CommRingCat.of R))\n        (PrimeSpectrum.basicOpen (a + b)))^*[AddCommGrpCat.{u + 1}]).obj F) (n + 1) x = 0) :\n    x = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T095908-L-318831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T095908-L-318831",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
