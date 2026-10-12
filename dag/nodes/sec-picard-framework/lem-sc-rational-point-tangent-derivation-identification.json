@@ -27,49 +27,41 @@
  ],
  "proof": [
   {
-   "text": "Because $k[\\epsilon]$ has the unique expression $u+v\\epsilon$ with $\\epsilon^2=0$, and the reduction of $\\theta^\\sharp$ modulo $(\\epsilon)$ is the residue map $a\\mapsto\\bar a$ (the composite of $\\theta$ with the closed point $\\operatorname{Spec}k\\to\\operatorname{Spec}k[\\epsilon]$ is the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$ by [def-sc-scheme-tangent-space], whose local homomorphism in the correspondence of [lem-weil-pbc-morphism-from-spec-local-ring] is the residue map, and stalk maps of a composite compose by [lem-weil-pbc-scheme-stalk-map-composition]), there is a unique function $D_\\theta$ with $\\theta^\\sharp(a)=\\bar a+D_\\theta(a)\\epsilon$. Additivity of $\\theta^\\sharp$ gives additivity of $D_\\theta$, and multiplicativity gives $D_\\theta(ab)=\\bar aD_\\theta(b)+\\bar bD_\\theta(a)$. Since $\\theta$ is a $k$-morphism, $D_\\theta$ is $k$-linear on the structure-field copy of $k$ (and hence is a derivation relative to the residue map).",
+   "text": "Extract the linear coefficient map L using linear descent. Its coefficients D are additive and vanish on the structural field.",
    "uses": [
-    "def-sc-scheme-tangent-space",
-    "lem-weil-pbc-morphism-from-spec-local-ring",
-    "lem-weil-pbc-scheme-stalk-map-composition"
+    "lem-sc-rational-tangent-coefficient-linear-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2D, proof: every element has the form c(a)+D(a) epsilon"
-   }
+   "elementary": false
   },
   {
-   "text": "If $a\\in\\mathfrak m_x$, then $\\bar a=0$, so the coefficient $D_\\theta(a)$ depends only on the class of $a$ in $\\mathfrak m_x/\\mathfrak m_x^2$: for a product $ab$ of two elements of $\\mathfrak m_x$, the derivation formula from step 1 gives $D_\\theta(ab)=0$, and additivity handles finite sums. Thus $D_\\theta$ vanishes on $\\mathfrak m_x^2$ and induces $\\ell_\\theta(a\\bmod\\mathfrak m_x^2)=D_\\theta(a)$. The same additivity and scalar calculation show that $\\ell_\\theta$ is $k$-linear.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2E, proof of the tangent-space rational-point identification"
-   }
-  },
-  {
-   "text": "The assignment $\\theta\\mapsto\\ell_\\theta$ is injective because the stalk map $\\theta^\\sharp$ is recovered from its residue part and the coefficients $D_\\theta$ (and a morphism from $\\operatorname{Spec}k[\\epsilon]$ is determined by the corresponding local homomorphism by [lem-weil-pbc-morphism-from-spec-local-ring]). For surjectivity, given a $k$-linear $\\ell:\\mathfrak m_x/\\mathfrak m_x^2\\to k$, write each $a\\in\\mathcal O_{X,x}$ as its structure-field residue $\\bar a$ plus an element of $\\mathfrak m_x$ and define $D(a)$ to be $\\ell$ of the latter class. The identities $D(a+b)=D(a)+D(b)$ and $D(ab)=\\bar aD(b)+\\bar bD(a)$ follow by expanding products into residue-field and maximal-ideal parts; hence $a\\mapsto\\bar a+D(a)\\epsilon$ is a local $k$-algebra map to $k[\\epsilon]$, since it sends $\\mathfrak m_x$ into $(\\epsilon)$. The cited Spec-local-ring correspondence yields a unique tangent vector inducing this map, and its associated functional is $\\ell$. Finally, scaling $\\epsilon\\mapsto\\lambda\\epsilon$ scales all coefficients by $\\lambda$, while the pushout definition of tangent-vector addition adds coefficients, so the bijection is $k$-linear.",
+   "text": "Equality of L values gives equality of D on m. For arbitrary a, choose c with r(c)=res(a). The element a-s(c) is in m, so additivity and vanishing on s(k) give equality of D(a). Thus the entire stalk maps agree. The Spec-local-ring correspondence recovers the tangent vectors, proving injectivity.",
    "uses": [
-    "def-sc-scheme-tangent-space",
     "lem-weil-pbc-morphism-from-spec-local-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0B2C and 0B2E, dual-number construction and rational-point tangent-space lemma"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Realize any cotangent functional ell. Its coefficient D equals the coefficient from linear descent by taking second coordinates and using injectivity of r. Equality on maximal-ideal representatives gives L(theta)=ell, proving surjectivity.",
+   "uses": [
+    "lem-sc-rational-cotangent-functional-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bundle the bijective linear map as a linear equivalence. Take the coefficient function supplied by linear descent. Any competing function has the same r-valued second coordinates, hence is equal by injectivity of r. This gives the exists-unique clause with the prescribed functional values.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-scheme-tangent-space",
-  "lem-weil-pbc-morphism-from-spec-local-ring",
-  "lem-weil-pbc-scheme-stalk-map-composition"
+  "lem-sc-rational-cotangent-functional-realization",
+  "lem-sc-rational-tangent-coefficient-linear-map",
+  "lem-weil-pbc-morphism-from-spec-local-ring"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0B2D and 0B2E (varieties-lemma-tangent-space-cotangent-space, varieties-lemma-tangent-space-rational-point): the agent-written proof argues directly with the dual-number derivation phi(a)=c(a)+D(a)epsilon of the proof of 0B2D, without passing through Omega"
+  "document": "Stacks Project, Tags 0B2B, 0B2D and 0B2E",
+  "place": "J1: explicit descent, vector-operation compatibility and inverse construction; injectivity and uniqueness combined in Lean; repair: apply Mathlib Scheme.Spec_stalkClosedPointTo_fromSpecStalk directly with dependent point transport; duplicate private reconstruction helpers removed"
  },
  "mathlib_searches": [
   {
@@ -156,5 +148,15 @@
   "group": "H1",
   "result": "pass",
   "note": "field k; X with recorded p (schemeTangentSpace takes p); point x; kappa(x)=k as Bijective of the structural k->stalk->residue composite r (equivalent to M1's Bijective p.residueFieldMap form); T = schemeTangentSpace with its K-module restricted along r; theta-sharp = Scheme.stalkClosedPointTo (stalk map then inverse germ iso) transported by hx; (a) exists-unique D:R->k with sharp a = inl(abar)+inr(r(D a)) (uniqueness under the conjunction is equivalent: r, inr injective); (b) e theta k-linear on IsLocalRing.CotangentSpace R with [a]->D a for a in m; (c) e k-linear equiv T -> Hom_k(m/m^2,k); no dependence on K1 duality; no new definitions; recompiled clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T153011-L-2350727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
