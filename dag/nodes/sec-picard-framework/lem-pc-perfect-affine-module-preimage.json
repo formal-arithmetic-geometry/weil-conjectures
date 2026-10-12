@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-perfect-affine-module-preimage",
+ "kind": "statement",
+ "title": "Perfect affine objects have pseudo-coherent finite-Tor module preimages",
+ "statement": "Let $A$ be a commutative ring and $Y=\\operatorname{Spec}(A)$ [def-pc-scheme]. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category] be perfect [def-pc-perfect-complex]. There exist an affine derived equivalence $e:D(A)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and an object $C\\in D(A)$ such that $C$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], $C$ has Tor amplitude in some interval $[a,b]$ with $a\\le b$ (meaning $H^i(C\\otimes_A^L N)=0$ for every $A$-module $N$ and $i\\notin[a,b]$), $E\\cong e(C)$ in $D(\\mathcal O_Y)$, and $Q\\circ e$ followed by the inclusion is naturally isomorphic to termwise associated sheaf followed by $Q$. No bounded projective representative is asserted.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma perfect-lemma-perfect-affine (Tag 08EB), with More on Algebra, Definition 0656 (a perfect object of D(A) is one isomorphic to a bounded complex of finite projective A-modules)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-affine-qcoh-derived-equivalence] and its comparison with termwise tilde; take C=e.inverse(E). The counit gives the asserted isomorphism. Choose a complex M representing C by essential surjectivity of the derived localization Q.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Perfectness gives pseudo-coherence and local finite Tor dimension by [lem-pc-perfect-pseudo-coherent-locally-finite-tor]. On the quasi-compact affine spectrum choose a finite cover and take the minimum lower bound and maximum upper bound. Restriction commutes with derived tensor and restriction detects vanishing of cohomology sheaves, giving global finite Tor amplitude; on the empty spectrum take [0,0].",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-affine-pseudo-coherent-criterion] and [lem-pc-affine-tor-amplitude-criterion] to M and transfer the properties along Q(M) ≅ C. This stops before the ring perfectness criterion.",
+   "uses": [
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-affine-tor-amplitude-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-tor-amplitude-criterion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB proof, intermediate step before ring criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect affine scheme derived object pseudo coherent finite Tor amplitude module model",
+   "results": "Eight results, including derived-category bounded representative lemmas; none states the affine perfect preimage or tilde strict-perfect comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapIso",
+   "results": "No hits; identifier unavailable in this Loogle index.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictlyPerfect|perfect_iff_affine|isPerfect_of_pseudoCoherent",
+   "results": "No Mathlib hits. Repository rg found the existing ring criterion and the original affine theorem, but no local strict-model comparison or affine finite-Tor preimage declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pseudo coherent finite Tor amplitude affine perfect complex",
+   "results": "Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof, affine case: perfect objects come from bounded complexes of finite projective modules",
+   "via": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineModulePreimage.lean",
+  "declaration": "AlgebraicGeometry.perfect_affine_module_preimage",
+  "statement": "theorem perfect_affine_module_preimage (A : Type u) [CommRing A] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] (E : schemeDerivedQCohCategory (Spec (.of A))) (hE : Scheme.IsPerfect (Spec (.of A)) E.obj) : ∃ e : DerivedCategory (ModuleCat.{u} A) ≌ schemeDerivedQCohCategory (Spec (.of A)), ∃ C : DerivedCategory (ModuleCat.{u} A), DerivedCategory.IsPseudoCoherent C ∧ (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} A) a b C) ∧ Nonempty (E.obj ≅ ((schemeDerivedQCohProperty (Spec (.of A))).ι).obj (e.functor.obj C)) ∧ Nonempty (DerivedCategory.Q ⋙ e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι ≅ @Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T110314-L-620079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T110314-L-620079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

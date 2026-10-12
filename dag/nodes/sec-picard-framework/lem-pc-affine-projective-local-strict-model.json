@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-affine-projective-local-strict-model",
+ "kind": "statement",
+ "title": "Local strictly perfect models of tilde of a bounded projective complex",
+ "statement": "Let $A$ be a commutative ring, $Y=\\operatorname{Spec}(A)$ [def-pc-scheme], and $P^\\bullet$ a complex of $A$-modules, zero outside some finite interval, whose terms are finite and projective (equivalently retracts of finite free modules). For every $x\\in Y$ there is an open $U\\ni x$ and a strictly perfect complex $K$ of $\\mathcal O_U$-modules [def-pc-perfect-complex] on the localized site such that the derived restriction of $Q(\\widetilde P)$ to $U$ is isomorphic to $Q(K)$ [def-pc-derived-category]. The statement concerns only a complex and restriction, with no arbitrary derived object or perfectness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma perfect-lemma-perfect-affine (Tag 08EB), with More on Algebra, Definition 0656 (a perfect object of D(A) is one isomorphic to a bounded complex of finite projective A-modules)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "In each degree choose a splitting of the finite projective module P^n from a finite free A-module. Applying tilde preserves the splitting equations and identifies tilde(A^m) with the finite free structure-sheaf module by [lem-weil-pbc-affine-tilde-gamma-adjunction].",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take U=Y, and K equal to termwise restriction of tilde(P) to the localized site. Restriction preserves the finite free modules and the splitting equations, and additive functors preserve zero objects, so K satisfies the given boundedness and retract definition of strictly perfect.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction preserves quasi-isomorphisms, so its derived functor agrees on Q(tilde(P)) with Q of the restricted complex; this gives the required isomorphism. For an empty spectrum the pointwise conclusion is vacuous.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB reverse implication, termwise restriction comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect affine scheme derived object pseudo coherent finite Tor amplitude module model",
+   "results": "Eight results, including derived-category bounded representative lemmas; none states the affine perfect preimage or tilde strict-perfect comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapIso",
+   "results": "No hits; identifier unavailable in this Loogle index.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictlyPerfect|perfect_iff_affine|isPerfect_of_pseudoCoherent",
+   "results": "No Mathlib hits. Repository rg found the existing ring criterion and the original affine theorem, but no local strict-model comparison or affine finite-Tor preimage declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pseudo coherent finite Tor amplitude affine perfect complex",
+   "results": "Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof, affine case: perfect objects come from bounded complexes of finite projective modules",
+   "via": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineProjectiveLocalStrictModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineProjectiveLocalStrictModel.lean",
+  "declaration": "AlgebraicGeometry.affine_projective_local_strict_model",
+  "statement": "theorem affine_projective_local_strict_model (A : Type u) [CommRing A] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] (P : CochainComplex (ModuleCat.{u} A) ℤ) (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) (hfinite : ∀ n : ℤ, Module.Finite A (P.X n)) (hprojective : ∀ n : ℤ, Module.Projective A (P.X n)) : ∀ x : Spec (.of A), ∃ U : (Spec (.of A)).Opens, x ∈ U ∧ ∃ K : CochainComplex (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) ℤ, Scheme.IsStrictlyPerfect (Spec (.of A)) U K ∧ Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj P)) ≅ DerivedCategory.Q.obj K)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T110314-L-620079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T110314-L-620079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

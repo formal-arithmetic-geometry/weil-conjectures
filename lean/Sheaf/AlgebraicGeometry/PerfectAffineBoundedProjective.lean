@@ -7,11 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
-import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+import Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage
+import Sheaf.AlgebraicGeometry.AffineProjectiveLocalStrictModel
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 
 /-! # Perfect objects on affine schemes
@@ -59,6 +56,24 @@ theorem perfect_iff_affine_bounded_projective (A : Type u) [CommRing A]
             (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
             _ _ _ _ (tilde.functor (.of A))
             ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  constructor
+  · intro hE
+    let : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
+      HasDerivedCategory.standard (ModuleCat.{u} A)
+    obtain ⟨e, C, hPC, hTor, ⟨hEC⟩, ⟨hcompare⟩⟩ :=
+      perfect_affine_module_preimage A E hE
+    obtain ⟨P, hb, hf, hp, ⟨hP⟩⟩ :=
+      DerivedCategory.isPerfect_of_pseudoCoherent_finiteTorAmplitude C hPC hTor
+    refine ⟨P, hb, hf, hp, ?_⟩
+    exact ⟨hEC ≪≫
+      ((schemeDerivedQCohProperty (Spec (.of A))).ι.mapIso
+        (e.functor.mapIso hP.symm)) ≪≫ hcompare.app P⟩
+  · rintro ⟨P, hb, hf, hp, ⟨hEP⟩⟩ x
+    obtain ⟨U, hx, K, hK, ⟨hmodel⟩⟩ :=
+      affine_projective_local_strict_model A P hb hf hp x
+    refine ⟨U, hx, K, hK, ?_⟩
+    exact ⟨(SheafOfModules.overFunctor.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.mapIso hEP ≪≫
+      hmodel⟩
 
 end AlgebraicGeometry

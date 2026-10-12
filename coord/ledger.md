@@ -7394,3 +7394,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/N3/Sheaf.AlgebraicGeometry.SerreSectionModuleComponentFinite (stage 3; reviewer PASS; first push; landing 20261012T110313-L-619757 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/P2/Sheaf.AlgebraicGeometry.NonvanishingTransitionFunctions (stage 3; reviewer PASS; after a return; landing 20261012T110314-L-619885 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/P3/Sheaf.AlgebraicGeometry.FiniteFreeConstantMapOpenFactorization (stage 3; reviewer PASS; first push; landing 20261012T110314-L-619982 (interface); batch 20261012T110249; modules 2; new nodes 2)
+- 11:03 L: merged deliver/P3/Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective (stage 3; reviewer PASS; first push; landing 20261012T110314-L-620079 (interface); batch 20261012T110249; modules 3; new nodes 2)
