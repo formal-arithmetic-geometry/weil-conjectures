@@ -267,7 +267,7 @@ noncomputable abbrev constantSingle (X : Scheme.{u}) (M : A) :
 `f^*` is exact, so `Lf^*` is computed termwise
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`), and `f^*` carries
 constant sheaves to constant sheaves (`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`). -/
-noncomputable def leftDerivedUpperStarConstantSingleIso (f : X ⟶ Y) (M : A) :
+noncomputable def leftDerivedUpperStarSingleConstantSheafIso (f : X ⟶ Y) (M : A) :
     L((f)^*[A]).obj (constantSingle A Y M) ≅ constantSingle A X M :=
   (leftDerivedUpperStarIsoMapDerivedCategory A f).app _ ≪≫
     ((f)^*[A].mapDerivedCategorySingleFunctor 0).app _ ≪≫
@@ -334,8 +334,8 @@ reduction of the coefficients along `Λ ⟶ Λ/J`, kept in `D(-, Λ)`
 Rf_!K ⊗ᴸ ρL ---PF_{K, ρL}---> Rf_!(K ⊗ᴸ Lf^*ρL) ---≅---> Rf_!(ρ(K ⊗ᴸ Lf^*L))
 ```
 commutes. Here the comparison of `Rf_!` with `ρ` is the projection map at `(-, M_Y)` followed by
-`Lf^*M_Y ≅ M_X` (`AlgebraicGeometry.Etale.leftDerivedUpperStarConstantSingleIso`), and the bottom
-right isomorphism is built from the comparison of `Lf^*` with `ρ` (the tensor comparison of
+`Lf^*M_Y ≅ M_X` (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`), and the
+bottom right isomorphism is built from the comparison of `Lf^*` with `ρ` (the tensor comparison of
 `Lf^*` followed by the same isomorphism) and the associator. Read in `D(-, Λ)`, `PF_{K, ρL}` is
 the projection map `PF_{K_m, L_m}` of the reductions, since `K_m ⊗ᴸ_{Λ/J} L_m = K ⊗ᴸ_Λ L_m`.
 
@@ -350,11 +350,11 @@ theorem projectionMapOfCompactification_constantSingle (M : A)
     (derivedTensorRight A Y (constantSingle A Y M)).map
         (((projectionMapOfCompactification A c).app K).app L) ≫
         (rightDerivedLowerShriekDerivedTensorRightMap A c
-          (leftDerivedUpperStarConstantSingleIso A f M).hom).app (K ⊗ L((f)^*[A]).obj L) =
+          (leftDerivedUpperStarSingleConstantSheafIso A f M).hom).app (K ⊗ L((f)^*[A]).obj L) =
       (derivedTensorRightTensorIso A (constantSingle A Y M) ((Rf_!(c)[A]).obj K) L).hom ≫
         ((projectionMapOfCompactification A c).app K).app (L ⊗ constantSingle A Y M) ≫
         Rf_!(c)[A].map (K ◁ (leftDerivedUpperStarDerivedTensorRightIso A f
-          (leftDerivedUpperStarConstantSingleIso A f M)).hom.app L) ≫
+          (leftDerivedUpperStarSingleConstantSheafIso A f M)).hom.app L) ≫
         Rf_!(c)[A].map
           (derivedTensorRightTensorIso A (constantSingle A X M) K (L((f)^*[A]).obj L)).inv :=
   projectionMapOfCompactification_derivedTensorRight A c _ K L
@@ -384,7 +384,7 @@ noncomputable def leftDerivedUpperStarReductionModIdealIso (f : X ⟶ Y) :
       L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
         derivedTensorRight _ X (constantSingle _ X (ModuleCat.of Λ (Λ ⧸ J))) :=
   leftDerivedUpperStarDerivedTensorRightIso _ f
-    (leftDerivedUpperStarConstantSingleIso _ f (ModuleCat.of Λ (Λ ⧸ J)))
+    (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J)))
 
 attribute [local instance] Scheme.Etale.essentiallySmall
 
@@ -397,7 +397,7 @@ noncomputable def rightDerivedLowerStarReductionModIdealMap {Z : Scheme.{u}} (g 
       derivedTensorRight _ Z (constantSingle _ Z (ModuleCat.of Λ (Λ ⧸ J))) ⋙
         R((g)_*[ModuleCat.{u + 1} Λ]) :=
   rightDerivedLowerStarDerivedTensorRightMap _ g
-    (leftDerivedUpperStarConstantSingleIso _ g (ModuleCat.of Λ (Λ ⧸ J))).hom
+    (leftDerivedUpperStarSingleConstantSheafIso _ g (ModuleCat.of Λ (Λ ⧸ J))).hom
 
 variable {Λ} in
 /-- For a nonzerodivisor `ϖ` of `Λ`, the constant complex `(Λ/ϖⁿ)_X` is dualizable: the constant
@@ -452,7 +452,7 @@ noncomputable def rightDerivedLowerShriekReductionModIdealMap :
       derivedTensorRight _ X (constantSingle _ X (ModuleCat.of Λ (Λ ⧸ J))) ⋙
         Rf_!(c)[ModuleCat.{u + 1} Λ] :=
   rightDerivedLowerShriekDerivedTensorRightMap _ c
-    (leftDerivedUpperStarConstantSingleIso _ f (ModuleCat.of Λ (Λ ⧸ J))).hom
+    (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J))).hom
 
 /-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
 compact-support direct image between finite levels.
@@ -501,7 +501,7 @@ theorem isIso_reductionModIdeal_map_projectionMapOfCompactification_iff [Finite 
       IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app
         ((reductionModIdeal Λ Y J).obj L)) :=
   isIso_derivedTensorRight_map_projectionMapOfCompactification_iff' _ c
-    (leftDerivedUpperStarConstantSingleIso _ f (ModuleCat.of Λ (Λ ⧸ J))) K L
+    (leftDerivedUpperStarSingleConstantSheafIso _ f (ModuleCat.of Λ (Λ ⧸ J))) K L
     (inferInstanceAs (IsIso ((rightDerivedLowerShriekReductionModIdealMap Λ J c).app _))) _ rfl
 
 /-- Blueprint `sk-prop-sf-pf-reduction`, with its detailed node `prop-sf-pf-reduction`:
