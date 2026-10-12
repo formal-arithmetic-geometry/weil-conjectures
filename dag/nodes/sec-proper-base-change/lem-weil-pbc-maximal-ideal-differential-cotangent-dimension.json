@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Algebra, Lemma 00TR (lemma-rank-omega), with Lemma 00RT (localization)",
+   "via": [
+    "lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound",
+    "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The differential fibre and local cotangent space have equal dimension at a closed point",
+ "statement": "Let k be an algebraically closed field [def-weil-algebraic-closure], S a finite type k-algebra [def-weil-pbc-finite-type-algebra], and m a maximal ideal of S. Put R=S_m and K=kappa(m)=R/n, where n is the maximal ideal of R [def-weil-pbc-localization-at-prime]. Then the finite dimension over K of n/n^2 is equal to the finite dimension over K of K tensor_S Omega_{S/k} [def-weil-pbc-kahler-differentials]. This equality is independent of any bound involving Krull dimension.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00TR (lemma-rank-omega), with Lemma 00RT (localization)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "The map S -> K is surjective because m is maximal; hence K is finite type over k. Zariski's lemma makes K finite over k, and algebraic closedness makes k -> K bijective. Its inverse followed by k -> R is a k-algebra section of R -> K.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00TR, residue-field identification"
+   }
+  },
+  {
+   "text": "Reduce the section modulo n^2. The split conormal construction gives a retraction of n/n^2 -> K tensor_R Omega_{R/k}. Mathlib packages the square-zero retraction and the differential comparison modulo the square in retractionKerCotangentToTensorEquivSection. This proves injectivity. Exactness of the conormal sequence and Omega_{K/k}=0 prove surjectivity. Since R -> K is surjective, the resulting R-linear isomorphism is K-linear.",
+   "uses": [
+    "lem-weil-pbc-square-zero-section-conormal-retraction",
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00TR, split conormal sequence; Lemmas 02HP, 02HQ and 00RU"
+   }
+  },
+  {
+   "text": "Localization gives Omega_{R/k} = R tensor_S Omega_{S/k}. Tensoring this linear equivalence with K and using tensor cancellation gives K tensor_R Omega_{R/k} = K tensor_S Omega_{S/k}. Taking finranks of the two K-linear equivalences yields the claimed equality.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00RT, applied to S_m; Lemma 00TR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-square-zero-section-conormal-retraction",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00TR (lemma-rank-omega), with Lemma 00RT (localization)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cotangent space dimension equals dimension of differential fiber at a maximal ideal over an algebraically closed field",
+   "results": "IsLocalRing.finrank_cotangentSpace_eq_zero, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, IsLocalRing.finrank_CotangentSpace_eq_one, IsLocalRing.finrank_cotangentSpace_le_one_iff, IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing, IsLocalRing.finrank_CotangentSpace_eq_one_iff, Ideal.inertiaDeg_algebraMap, Ideal.finrank_quotient_map",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem; relevant general constructions are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, ringKrullDim",
+   "results": "IsRegularLocalRing.spanFinrank_maximalIdeal, isRegularLocalRing_iff, IsRegularLocalRing.of_spanFinrank_maximalIdeal_le, IsRegularLocalRing.mk, IsRegularLocalRing.iff_finrank_cotangentSpace",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem; relevant general constructions are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_cotangentSpace|exists_notMem_smooth|Smooth.of_equiv",
+   "results": "Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Etale/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem; relevant general constructions are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent space dimension equals differential fiber dimension at a closed point over an algebraically closed field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothAtMaximalIdeal",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MaximalIdealDifferentialCotangentDimension",
+  "file": "lean/Sheaf/Paper/MaximalIdealDifferentialCotangentDimension.lean",
+  "declaration": "Algebra.finrank_cotangentSpace_atMaximal_eq_differentials",
+  "statement": "theorem finrank_cotangentSpace_atMaximal_eq_differentials\n    (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]\n    [IsAlgClosed k] [Algebra.FiniteType k S]\n    (m : Ideal S) (hm : m.IsMaximal) :\n    Module.finrank (IsLocalRing.ResidueField (Localization.AtPrime m))\n        (IsLocalRing.CotangentSpace (Localization.AtPrime m)) =\n      Module.finrank m.ResidueField (TensorProduct S m.ResidueField\n        (KaehlerDifferential k S))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T203947-L-831775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T203947-L-831775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
