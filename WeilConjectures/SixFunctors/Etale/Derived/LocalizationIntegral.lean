@@ -117,6 +117,88 @@ lemma DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
         (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso
           ((reductionModIdeal Λ X _).mapIso e) (h n).2⟩⟩
 
+variable [IsNoetherianRing Λ]
+  [(constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions]
+
+/-- The reductions of a zero object of `D(X_ét, Λ)` are bounded constructible, of Tor amplitude
+in any interval. -/
+lemma DerivedCategory.boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_isZero
+    {K : 𝐃(X, Λ)} (hK : IsZero K) (J : Ideal Λ) (a b : ℤ) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X J).obj K) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X J).obj K) := by
+  have hR := (reductionModIdeal Λ X J).map_isZero hK
+  refine ⟨(DerivedCategory.boundedConstructible _ X).prop_of_isZero hR, fun F ↦ ?_⟩
+  have hG := (MonoidalCategory.tensorRight ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).map_isZero hR
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_isZero hG a,
+    _root_.DerivedCategory.TStructure.t.isLE_of_isZero hG b⟩
+
+open ZeroObject in
+/-- `Dᵇc(X, Λ)` contains the zero object. -/
+lemma DerivedCategory.containsZero_boundedConstructibleIntegral (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (hI : I = Ideal.span {ϖ}) :
+    (DerivedCategory.boundedConstructibleIntegral I X).ContainsZero := by
+  have := _root_.DerivedCategory.isClosedUnderIsomorphisms_derivedComplete (X := X) hϖ hI
+  have := _root_.DerivedCategory.isTriangulated_derivedComplete
+    (J := X.smallEtaleTopology) hϖ hI
+  exact ⟨⟨0, isZero_zero _, (_root_.DerivedCategory.derivedComplete _ I).prop_of_isZero
+    (isZero_zero _), 0, 0, fun _ ↦
+      boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_isZero (isZero_zero _) _ 0 0⟩⟩
+
+/-- `Dᵇc(X, Λ)` is stable under the shifts. -/
+lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
+    (DerivedCategory.boundedConstructibleIntegral I X).IsStableUnderShift ℤ := by
+  have := _root_.DerivedCategory.isTriangulated_derivedComplete
+    (J := X.smallEtaleTopology) hϖ hI
+  refine ⟨fun m ↦ ⟨fun K ⟨hc, a, b, h⟩ ↦
+    ⟨(_root_.DerivedCategory.derivedComplete _ I).le_shift m K hc, a - m, b - m, fun n ↦ ?_⟩⟩⟩
+  have e := ((reductionModIdeal Λ X (I ^ (n + 1))).commShiftIso m).app K
+  exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso e.symm
+      ((DerivedCategory.boundedConstructible _ X).le_shift m _ (h n).1),
+    (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso e.symm
+      (DerivedCategory.torAmplitudeIn.shift (h n).2 m)⟩
+
+/-- `Dᵇc(X, Λ)` is closed under extensions: the reduction of a distinguished triangle is
+distinguished, and the Tor amplitude interval is widened. -/
+lemma DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
+    (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulatedClosed₂ := by
+  have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral (X := X) hϖ hI
+  have := _root_.DerivedCategory.isTriangulated_derivedComplete
+    (J := X.smallEtaleTopology) hϖ hI
+  refine .mk' fun T hT ⟨hc₁, a, b, h₁⟩ ⟨hc₃, c, d, h₃⟩ ↦
+    ⟨(_root_.DerivedCategory.derivedComplete _ I).ext_of_isTriangulatedClosed₂ T hT hc₁ hc₃,
+      min a c, max b d, fun n ↦ ?_⟩
+  have hT' := (reductionModIdeal Λ X (I ^ (n + 1))).map_distinguished T hT
+  exact ⟨(DerivedCategory.boundedConstructible _ X).ext_of_isTriangulatedClosed₂ _ hT'
+      (h₁ n).1 (h₃ n).1, DerivedCategory.torAmplitudeIn_obj₂ _ hT' (h₁ n).2 (h₃ n).2⟩
+
+/-- `Dᵇc(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`, for `I = (ϖ)` with `ϖ` a
+nonzerodivisor, `Λ` noetherian, and constructible sheaves of `Λ`-modules on `X` closed under
+extensions: derived complete objects form a triangulated subcategory
+(`DerivedCategory.isTriangulated_derivedComplete`), the reductions are triangulated functors,
+bounded constructible complexes then form a triangulated subcategory, and Tor amplitude is stable
+under shifts and, with the interval widened, under extensions. -/
+lemma DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
+    (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulated :=
+  have := DerivedCategory.containsZero_boundedConstructibleIntegral (X := X) hϖ hI
+  have := DerivedCategory.isStableUnderShift_boundedConstructibleIntegral (X := X) hϖ hI
+  have := DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral (X := X) hϖ hI
+  {}
+
+/-- Blueprint `prop-sf-localization-all-stages`, integral stage `𝒪_E`: `Dᵇc(X, Λ)` is a
+triangulated subcategory of `D(X_ét, Λ)` when `I = (ϖ)` for a nonzerodivisor `ϖ`
+(`DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span`). The hypothesis on `I`
+is recorded as a `Fact`, so that this is an instance. -/
+instance DerivedCategory.isTriangulated_boundedConstructibleIntegral
+    [h : Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})] :
+    (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulated :=
+  have ⟨_, hϖ, hI⟩ := h.out
+  DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span hϖ hI
+
 end Triangulated
 
 /-! ### Derived completeness through adjunctions
@@ -174,6 +256,20 @@ lemma derivedComplete_leftDerivedUpperStar_obj (j : X ⟶ Y) [IsOpenImmersion j]
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).ofNatIsoRight
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm) hK
 
+/-- A faithful `Λ`-linear functor `F` between the derived categories of étale sheaves of
+`Λ`-modules reflects derived completeness: a map `f : L ⟶ Q` from an object on which `ϖ` acts
+invertibly is sent to a map `F L ⟶ F Q` from an object on which `ϖ` acts invertibly. -/
+lemma derivedComplete_of_faithful {F : 𝐃(Y, Λ) ⥤ 𝐃(X, Λ)} [F.Faithful] [F.Additive]
+    [F.Linear Λ] {Q : 𝐃(Y, Λ)}
+    (hQ : _root_.DerivedCategory.derivedComplete X.smallEtaleTopology I (F.obj Q)) :
+    _root_.DerivedCategory.derivedComplete Y.smallEtaleTopology I Q := by
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI] at hQ ⊢
+  intro L f (hL : IsIso (ϖ • 𝟙 L))
+  have : IsIso (ϖ • 𝟙 (F.obj L)) := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  exact F.map_injective (by rw [hQ (F.map f) this, F.map_zero])
+
 end DerivedComplete
 
 /-! ### The reductions of the operations -/
@@ -212,6 +308,23 @@ theorem boundedConstructibleIntegral_leftDerivedUpperStar (j : X ⟶ Y) [IsOpenI
   exact ⟨derivedComplete_leftDerivedUpperStar_obj hϖ hI j hc, a, b, fun n ↦
     boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI j n
       (h n)⟩
+
+/-- For a closed immersion `i : Z ⟶ X`, an object `Q` of `D(Z_ét, Λ)` lies in `Dᵇc(Z, Λ)` as soon
+as `Ri_* Q` lies in `Dᵇc(X, Λ)`: `Ri_*` is faithful and `Λ`-linear, so it reflects derived
+completeness, and `Q ≅ i^* Ri_* Q`, whose reductions are the pullbacks of those of `Ri_* Q`. -/
+theorem boundedConstructibleIntegral_of_rightDerivedLowerStar_obj (i : X ⟶ Y)
+    [IsClosedImmersion i] {Q : 𝐃(X, Λ)}
+    (hQ : DerivedCategory.boundedConstructibleIntegral I Y ((R((i)_*[ModuleCat.{u + 1} Λ])).obj Q)) :
+    DerivedCategory.boundedConstructibleIntegral I X Q := by
+  obtain ⟨hc, a, b, h⟩ := hQ
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i
+  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
+  refine ⟨derivedComplete_of_faithful hϖ hI hc, a, b, fun n ↦ ?_⟩
+  have e := (reductionModIdeal Λ X (I ^ (n + 1))).mapIso (asIso (adj.counit.app Q))
+  have h' := boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI
+    i n (h n)
+  exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso e h'.1,
+    (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso e h'.2⟩
 
 variable [IsNoetherianRing Λ] {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
