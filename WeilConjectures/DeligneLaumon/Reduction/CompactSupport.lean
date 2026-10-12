@@ -88,6 +88,16 @@ end WeilSheaf
 
 section CompactSupport
 
+/-- Isomorphic Weil sheaves have isomorphic compactly supported cohomology, with its
+Frobenius. -/
+theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_of_iso {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F G : WeilSheaf k₀ l X} (e : F ≅ G) (r : ℤ) :
+    Nonempty ((F.compactlySupportedCohomology r).Equiv (G.compactlySupportedCohomology r)) :=
+  ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf r).mapIso
+    ((WeilComplex.derivedLowerShriek k₀ l _).mapIso (WeilSheaf.toComplex.mapIso e)))⟩
+
 /-- **Compactly supported cohomology as a direct image to the point.** For a separated
 `k₀`-scheme `X` of finite type and a morphism `f : X ⟶ Spec k₀` over `k₀` (that is, the structure
 morphism), `H_c^0(Spec k₀, Rʳf₀!F) ≅ H_c^r(X, F)` as Frobenius modules: `R(id)₀!` is concentrated

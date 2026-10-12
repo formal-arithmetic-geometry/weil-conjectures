@@ -48,16 +48,6 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Isomorphic Weil sheaves have isomorphic compactly supported cohomology, with its
-Frobenius. -/
-theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_of_iso {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F G : WeilSheaf k₀ l X} (e : F ≅ G) (r : ℤ) :
-    Nonempty ((F.compactlySupportedCohomology r).Equiv (G.compactlySupportedCohomology r)) :=
-  ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf r).mapIso
-    ((WeilComplex.derivedLowerShriek k₀ l _).mapIso (WeilSheaf.toComplex.mapIso e)))⟩
-
 /-- **Compact-support upper bound for a middle extension on a curve** (blueprint:
 `prop-a1-middle-extension-curve-upper`): let `j : U ⟶ C` be a dense open immersion of smooth
 geometrically connected curves over `k₀` and let `F` be a lisse Weil sheaf on `U`, punctually

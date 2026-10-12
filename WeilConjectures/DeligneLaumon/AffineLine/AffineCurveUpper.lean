@@ -11,6 +11,8 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
+public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
@@ -253,6 +255,44 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
   have hK := WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar_of_isOpenImmersion
     W.ι (by rwa [Scheme.Opens.range_ι]) _ Nat.one_pos hW
   exact FrobeniusModule.HasWeightsAtMost.of_equiv E hK
+
+/-- **Restricting a quasi-finite direct image to where the map is finite étale.** Let
+`H : U ⟶ Y` be a separated quasi-finite morphism of separated `k₀`-schemes of finite type, and
+`W ⊆ Y` an open over which `H` is finite étale. If `𝓕` is a lisse Weil sheaf on `U`, then the
+restriction `(H₀!𝓕)|_W` is lisse: by base change it is `(H|_W)₀!(𝓕|_{H⁻¹W}) = (H|_W)_*(𝓕|_{H⁻¹W})`,
+the direct image of a lisse sheaf along a finite étale morphism.
+(blueprint: `lem-a1-reduction-lisse-pure`, lissity) -/
+theorem isLisse_upperStar_higherLowerShriek_zero_of_isFinite_of_etale
+    {U Y : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    (H : U ⟶ Y) [H.IsOver (Spec (CommRingCat.of k₀))]
+    [IsSeparated H] [LocallyQuasiFinite H] [LocallyOfFiniteType H] [QuasiCompact H]
+    (W : Y.Opens) [IsFinite (H ∣_ W)] [Etale (H ∣_ W)] {F : WeilSheaf k₀ l U}
+    (hF : F.IsLisse) :
+    ((upperStar W.ι).obj ((higherLowerShriek k₀ l H 0).obj F)).IsLisse := by
+  have : (H ∣_ W).IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← comp_over W.ι, morphismRestrict_ι_assoc, comp_over H, comp_over (H ⁻¹ᵁ W).ι]⟩
+  have := W.isSeparated (k₀ := k₀)
+  have := W.locallyOfFiniteType (k₀ := k₀)
+  have := (H ⁻¹ᵁ W).isSeparated (k₀ := k₀)
+  have := (H ⁻¹ᵁ W).locallyOfFiniteType (k₀ := k₀)
+  have := isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))
+  have := isNoetherian_of_locallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))
+  have : QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over W.ι]
+    infer_instance
+  have : QuasiCompact ((H ⁻¹ᵁ W).toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over (H ⁻¹ᵁ W).ι]
+    infer_instance
+  obtain ⟨e⟩ := nonempty_upperStar_higherLowerShriek_zero_iso
+    (isPullback_morphismRestrict H W).flip F
+  exact ((hF.upperStar _).lowerStar_of_finite_etale (H ∣_ W)).of_iso
+    ((higherLowerShriekZeroObjIsoLowerStar (H ∣_ W) _).symm ≪≫ e.symm)
 
 end WeilSheaf
 

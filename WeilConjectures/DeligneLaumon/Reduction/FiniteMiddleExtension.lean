@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
-public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
+public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.WeilSheaf.Finiteness
