@@ -5754,3 +5754,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:30 L: merged deliver/T1/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct (stage 3; reviewer PASS; first push; landing 20261012T003034-L-577946 (proof); modules 1; new nodes 0)
 - 00:33 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass (stage 3; reviewer PASS; after a return; landing 20261012T003231-L-586136 (interface); modules 2; new nodes 2)
 - 00:37 L: merged deliver/C1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian (stage 3; reviewer PASS; first push; landing 20261012T003530-L-597800 (interface); modules 4; new nodes 3)
+- 00:37 L: returned deliver/G1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image (reviewer RETURN: (reviewer X-708cd, head 708cda526) H8: In HenselianFinitePushforwardH1Lift.lean, add the required module docstring `/-! )
