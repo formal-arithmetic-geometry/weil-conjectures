@@ -1,6 +1,6 @@
 # Work queue
 
-43 items; claim with `tools/claim.py next <group> [--stage N]`.
+42 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (33)
+## Stage 3: modules to prove (32)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 4 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
@@ -56,7 +56,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 6 | proof |
-| `Sheaf.AlgebraicGeometry.TorsionEtaleSheaf` | 4 | 3 | proof |
 | `Sheaf.Topology.InverseImageModule` | 5 | 2 | proof |
 | `Sheaf.Topology.NoetherianVanishingByIrreducibleComponents` | 5 | 2 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
