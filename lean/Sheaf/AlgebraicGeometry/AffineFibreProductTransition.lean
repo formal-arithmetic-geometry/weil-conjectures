@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Affine transitions between fibre products
@@ -46,6 +47,13 @@ theorem isAffineHom_pullback_map
     (ha : f' ≫ h = a ≫ f) (hc : g' ≫ h = c ≫ g)
     [IsAffineHom a] [IsAffineHom h] [IsAffineHom c] :
     IsAffineHom (pullback.map f' g' f g a c h ha hc) := by
-  sorry
+  let k := pullback.map (f' ≫ h) (g' ≫ h) f g a c (𝟙 S)
+    ((Category.comp_id _).trans ha) ((Category.comp_id _).trans hc)
+  have : IsAffineHom k :=
+    MorphismProperty.pullbackMap (P := @IsAffineHom) inferInstance inferInstance ha hc
+  have heq : pullback.map f' g' f g a c h ha hc = pullback.mapDesc f' g' h ≫ k := by
+    ext <;> simp [k, pullback.mapDesc, pullback.map]
+  rw [heq]
+  infer_instance
 
 end AlgebraicGeometry
