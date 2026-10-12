@@ -19,7 +19,21 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The equality is the unit compatibility argument of the parent node, with hp' supplied. Expand the definitions of the restriction isomorphisms, composition comparison and adjunction units, then compare the two factorizations of h = p ≫ g' = p' ≫ g through the cartesian square.",
+   "text": "Apply the unit equation for the uniqueness-of-left-adjoint restriction comparison. Naturality at a morphism psi:c -> pullback(f)(b) identifies the unit followed by restriction and rho_f(c) with F applied to the adjoint transpose of psi. This is the private proved helper restriction_unit; at the two diagonal maps it gives hδ and hσ, including the terminal-object isomorphisms eW and eW'.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate Etale.upperStarComp_hom_app_unit_app at an étale object b and restrict along psi into the pullback along the composite. Naturality of the composition comparison gives the private proved helper composition_unit. Construct gamma=(g',id) over wx, delta=(id,id) over wx, and sigma=(id,id) over wy'. The two identities hχq and hχj with the pullback-pasting maps follow by extensionality on each projection, using hι₁ and hι₂.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply composition_unit to (g',p) and (p',g), with common composite g' ≫ p and equality hcomm for the second pair. Rewrite the pasting identities and use naturality of the units, then hδ and hσ. The resulting equalities hq and hj express the two routes in terms of the same restricted composite unit. Cancel the first composition isomorphism and compare with the second. Precompose by rhoF and F(eW.inv), postcompose by rhoG and gF(eW'.inv), and cancel the four inverse pairs to obtain the stated equality.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-etale-inverse-image-restriction"
@@ -32,9 +46,9 @@
   "lem-weil-pbc-etale-inverse-image-restriction"
  ],
  "proof_origin": {
-  "by": "worker E1",
+  "by": "worker N2",
   "document": "literature/stacks-project/sites.tex",
-  "place": "split from parent unit proof"
+  "place": "agent-written five-step unit compatibility argument recorded in the declaration docstring; formalized using the existing restriction and composition unit equations, with pointwise helper proofs adapted from Sheaf.AlgebraicGeometry.EtaleChartSectionsObjectComparison"
  },
  "mathlib_searches": [
   {
@@ -100,10 +114,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T053926-L-2632863",
-  "kind": "interface",
+  "landing": "20261012T144131-L-2102742",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
