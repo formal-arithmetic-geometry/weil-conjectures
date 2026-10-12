@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-affine-etale-restriction-composition",
+ "kind": "statement",
+ "title": "Composition coherence of unit-preserving affine etale restriction comparisons",
+ "statement": "Let U_h,t_h,L_h,a_h be families of continuous affine-site functors, identifications with ordinary etale base change, inverse-image functors and adjunctions, as in the restriction-unit statement. Fix natural comparisons e_h satisfying its section unit formula, and full-site composition isomorphisms c_f,g satisfying the ordinary iterated-pullback unit formula. There are gamma_f,g: U_f U_g isomorphic to U_(gf) lifting the conjugated canonical small-site pullback comparison, and d_f,g: L_f L_g isomorphic to L_(gf) satisfying the affine iterated-unit formula. Restriction of c_f,g followed by e_(gf) equals e_g followed by L_g(e_f) followed by d_f,g. The gamma lift equation, affine section-unit equation, and natural sheaf-morphism equality are exactly those displayed in Lean. This statement assumes e and c and proves no existence of them, no continuity or covering preservation, and no finite-limit preservation.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB (lemma-composition-morphisms-sites), 03CC (definition-composition-morphisms-sites), and Categories 0B65; unit-compatible refinement of the affine-site comparison used in 09YQ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-affine-etale-restriction-unit",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "Write i_S for affine inclusion. For f,g the small-site pullback comparison has orientation b_g b_f to b_(gf). Conjugate it by t_f, t_g and t_(gf) to obtain an isomorphism between i_Z U_g U_f and i_Z U_(gf). As i_Z is fully faithful, lift its hom and inverse componentwise to gamma. Faithfulness checks naturality and the inverse identities. By construction i_Z(gamma_V) followed by t_(gf)(V) equals t_g(U_f V), then b_g(t_f(V)), then the inverse pullbackComp component, the first displayed equation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precomposition on sheaves applied to gamma yields the isomorphism between the composite affine direct image and the affine direct image for gf. Compose a_f and a_g. Taking the unit-compatible mate of the right-adjoint isomorphism gives d: L_f L_g isomorphic to L_(gf). Evaluate its mate equation at V and s. The composite unit is eta_f followed by U_f^s(eta_g), and the map on sections induced by gamma is restriction along gamma_V. These are exactly the two sides of the affine composition-unit formula.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let E_G be the iterated restriction comparison e_g on the full f-inverse image followed by L_g applied to e_f. Precompose both routes in the final square by E_G inverse, obtaining two morphisms from L_g L_f rho_X G to L_(gf) rho_X G, one of which is d. Transpose both by the composed affine adjunction. At an affine V and s in G(V), the transpose starts with eta_f(s) followed by eta_g. The unit equations for e_f and e_g identify this with the iterated full-site unit after applying E_G inverse. The assumed equation for c identifies its image with restriction of the composite full-site unit along pullbackComp inverse. The equation defining gamma rewrites those restrictions as restriction along gamma_V; the unit equation for e_(gf) then identifies the result with the affine composite unit. This is the transpose of d by the previous step. The transposes agree at every V and s, hence agree as sheaf morphisms. Injectivity of the adjunction Hom equivalence and cancellation of E_G give the final square. Choose gamma and d for every pair f,g.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB (lemma-composition-morphisms-sites), 03CC (definition-composition-morphisms-sites), and Categories 0B65; unit-compatible refinement of the affine-site comparison used in 09YQ",
+  "note": "C1 spells out the unit and coherence calculations in the original comparison-node plan using the adjoint uniqueness argument of the cited sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction equivalence sheaves comparison left adjoints unit and composition",
+   "results": "Service returned Internal Server Error on two attempts; search unavailable, no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction isomorphisms preserve units and commute with restriction equivalences and composition",
+   "results": "Adjunction.restrictFullyFaithful and its unit equations are generic tools; they require comparison data and do not supply the affine-etale comparison or its composite square. No exact match among eight hits.",
+   "verdict": "no direct match; generic tools only",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPushforwardContinuousIso",
+   "results": "Service returned unknown identifier for this unqualified query. Source grep locates the generic isomorphism.",
+   "verdict": "no conclusion from service query",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*unit|sheafPullback.*[Cc]omp|conjugateIsoEquiv; affineEtaleBaseChange|affineEtale_inverseImage|fullAffineEtale.*[Cc]omp",
+   "results": "Mathlib.Adjunction.Mates, CompositionIso, Restrict and Sites.Continuous supply mate bijections, composition of adjunctions and induced sheaf pushforward isomorphisms. Project grep finds only the original comparison and affine base-change theorem for the affine-specific comparison. SiteMorphismComposition has strict precoverage and coefficient-universe restrictions and gives no restriction square.",
+   "verdict": "no existing statement for either intermediate theorem",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley comparison for sheaf inverse image along an equivalence of sites",
+   "results": "Second reading: eight generic equivalence-of-sites hits; no unit-compatible affine inverse-image comparison.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "Second reading: five hits in Mathlib.CategoryTheory.Adjunction.Mates; these supply the generic mate isomorphism and component formulas, not the affine restriction comparison or coherence square.",
+   "verdict": "generic tools only",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Original affine-etale inverse-image comparison proof, composition part of step 3",
+   "via": [
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleRestrictionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleRestrictionComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_inverseImage_restriction_composition",
+  "statement": "theorem affineEtale_inverseImage_restriction_composition (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], X.FullAffineEtale ⥤ Y.FullAffineEtale) (t : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], U h ⋙ fullAffineEtaleInclusion Y ≅ fullAffineEtaleInclusion X ⋙ (MorphismProperty.Over.pullback @Etale ⊤ h)) [hu : ∀ (X Y : Scheme.{u}) (h : Y ⟶ X) [IsAffineHom h], (U h).IsContinuous (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)] (L : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], Sheaf (fullAffineEtaleTopology X) (Type (u + 1)) ⥤ Sheaf (fullAffineEtaleTopology Y) (Type (u + 1))) (a : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], L h ⊣ (U h).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)) (e : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], etaleSetPullback h ⋙ ((fullAffineEtaleInclusion Y).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology Y) Y.smallEtaleTopology) ≅ ((fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) X.smallEtaleTopology) ⋙ L h) (he : (∀ (X Y : Scheme.{u}) (h : Y ⟶ X) [IsAffineHom h] (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (V : X.FullAffineEtale) (s : G.obj.obj (op V.obj)), ((e h).hom.app G).hom.app (op ((U h).obj V)) (((etaleSetPullback h).obj G).obj.map ((t h).hom.app V).op ((((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).unit).app G).hom.app (op V.obj) s)) = ((a h).unit.app (((fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)).hom.app (op V) s)) (c : ∀ {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g], etaleSetPullback f ⋙ etaleSetPullback g ≅ etaleSetPullback (g ≫ f)) (hc : (∀ (X Y Z : Scheme.{u}) (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g] (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (V : X.Etale) (s : G.obj.obj (op V)), ((c f g).hom.app G).hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V))) ((((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1)) (Y.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).unit).app ((etaleSetPullback f).obj G)).hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V)) ((((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).unit).app G).hom.app (op V) s)) = ((etaleSetPullback (g ≫ f)).obj G).obj.map ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).inv.app V).op ((((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ (g ≫ f)) (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).unit).app G).hom.app (op V) s))) : ∃ (gamma : ∀ {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g], U f ⋙ U g ≅ U (g ≫ f)) (d : ∀ {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g], L f ⋙ L g ≅ L (g ≫ f)), (∀ (X Y Z : Scheme.{u}) (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g] (V : X.FullAffineEtale), (fullAffineEtaleInclusion Z).map ((gamma f g).hom.app V) ≫ (t (g ≫ f)).hom.app V = (t g).hom.app ((U f).obj V) ≫ (MorphismProperty.Over.pullback @Etale ⊤ g).map ((t f).hom.app V) ≫ (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).inv.app V.obj) ∧ (∀ (X Y Z : Scheme.{u}) (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g] (F : Sheaf (fullAffineEtaleTopology X) (Type (u + 1))) (V : X.FullAffineEtale) (s : F.obj.obj (op V)), ((d f g).hom.app F).hom.app (op ((U g).obj ((U f).obj V))) (((a g).unit.app ((L f).obj F)).hom.app (op ((U f).obj V)) (((a f).unit.app F).hom.app (op V) s)) = ((L (g ≫ f)).obj F).obj.map ((gamma f g).hom.app V).op (((a (g ≫ f)).unit.app F).hom.app (op V) s)) ∧ (∀ (X Y Z : Scheme.{u}) (f : Y ⟶ X) (g : Z ⟶ Y) [IsAffineHom f] [IsAffineHom g] (G : Sheaf X.smallEtaleTopology (Type (u + 1))), ((fullAffineEtaleInclusion Z).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology Z) Z.smallEtaleTopology).map ((c f g).hom.app G) ≫ (e (g ≫ f)).hom.app G = (e g).hom.app ((etaleSetPullback f).obj G) ≫ (L g).map ((e f).hom.app G) ≫ (d f g).hom.app (((fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044738-L-2032075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044738-L-2032075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

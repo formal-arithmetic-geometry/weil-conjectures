@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-affine-etale-restriction-unit",
+ "kind": "statement",
+ "title": "Affine etale restriction comparison preserving the adjunction unit",
+ "statement": "For every family U_h of continuous functors between the full affine etale sites of schemes (for affine morphisms h:Y to X), natural identifications t_h: U_h followed by affine inclusion isomorphic to affine inclusion followed by ordinary etale base change, and left adjoints L_h with specified adjunctions a_h to affine precomposition on sheaves of Type(u+1), there are natural isomorphisms e_h: full-site inverse image followed by affine restriction isomorphic to affine restriction followed by L_h. On an affine object V and section s of a full-site sheaf G, e_h at U_h V carries the restriction along t_h(V) of the full-site unit on s to the affine unit on s. All these data and the explicit section formula are quantified in the Lean statement; no preservation or composition conclusion is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Tag 04HR (lemma-alternative), with Sites 00WX, 00X1 and Categories 0B65; the adjoint transport implicit in the use of 04HR in Etale Cohomology 09YQ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme S, restriction rho_S along the full affine inclusion is an equivalence of sheaf categories by 04HR. Use its quasi-inverse q_S and the units/counits of the adjoint equivalence. This holds for sets in the universe u+1 as well: the special-cocontinuity assertion is independent of the coefficient universe.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write R_h for the full-site direct image and A_h for affine direct image. The natural isomorphism t_h induces R_h followed by rho_X isomorphic to rho_Y followed by A_h: on a sheaf F and affine V, the component is F applied contravariantly to t_h(V). Naturality follows from naturality of t_h. Compose the adjunction L_h -| A_h with the adjoint equivalences. In function-composition notation this makes q_Y L_h rho_X left adjoint to q_X A_h rho_Y. The preceding comparison and the equivalence counit identify this right adjoint with R_h. The conjugated inverse image and the full-site inverse image thus have isomorphic right adjoints.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply uniqueness of unit-compatible left-adjoint isomorphisms to obtain full-site inverse image isomorphic to q_Y L_h rho_X. Whisker with rho_Y and cancel q_Y using the equivalence counit to obtain e_h. The mate equation evaluated at the affine object V and section s is precisely e_h at U_h V applied to restriction along t_h(V) of the full-site unit, equal to the affine unit at V. This gives the displayed formula simultaneously for every h by choice.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Tag 04HR (lemma-alternative), with Sites 00WX, 00X1 and Categories 0B65; the adjoint transport implicit in the use of 04HR in Etale Cohomology 09YQ",
+  "note": "C1 spells out the unit and coherence calculations in the original comparison-node plan using the adjoint uniqueness argument of the cited sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction equivalence sheaves comparison left adjoints unit and composition",
+   "results": "Service returned Internal Server Error on two attempts; search unavailable, no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction isomorphisms preserve units and commute with restriction equivalences and composition",
+   "results": "Adjunction.restrictFullyFaithful and its unit equations are generic tools; they require comparison data and do not supply the affine-etale comparison or its composite square. No exact match among eight hits.",
+   "verdict": "no direct match; generic tools only",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPushforwardContinuousIso",
+   "results": "Service returned unknown identifier for this unqualified query. Source grep locates the generic isomorphism.",
+   "verdict": "no conclusion from service query",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*unit|sheafPullback.*[Cc]omp|conjugateIsoEquiv; affineEtaleBaseChange|affineEtale_inverseImage|fullAffineEtale.*[Cc]omp",
+   "results": "Mathlib.Adjunction.Mates, CompositionIso, Restrict and Sites.Continuous supply mate bijections, composition of adjunctions and induced sheaf pushforward isomorphisms. Project grep finds only the original comparison and affine base-change theorem for the affine-specific comparison. SiteMorphismComposition has strict precoverage and coefficient-universe restrictions and gives no restriction square.",
+   "verdict": "no existing statement for either intermediate theorem",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley comparison for sheaf inverse image along an equivalence of sites",
+   "results": "Second reading: eight generic equivalence-of-sites hits; no unit-compatible affine inverse-image comparison.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "Second reading: five hits in Mathlib.CategoryTheory.Adjunction.Mates; these supply the generic mate isomorphism and component formulas, not the affine restriction comparison or coherence square.",
+   "verdict": "generic tools only",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Original affine-etale inverse-image comparison proof, step 2 and the single-morphism unit part of step 3",
+   "via": [
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleRestrictionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleRestrictionUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_inverseImage_restriction_unit",
+  "statement": "theorem affineEtale_inverseImage_restriction_unit (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], X.FullAffineEtale ⥤ Y.FullAffineEtale) (t : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], U h ⋙ fullAffineEtaleInclusion Y ≅ fullAffineEtaleInclusion X ⋙ (MorphismProperty.Over.pullback @Etale ⊤ h)) [hu : ∀ (X Y : Scheme.{u}) (h : Y ⟶ X) [IsAffineHom h], (U h).IsContinuous (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)] (L : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], Sheaf (fullAffineEtaleTopology X) (Type (u + 1)) ⥤ Sheaf (fullAffineEtaleTopology Y) (Type (u + 1))) (a : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], L h ⊣ (U h).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)) : ∃ (e : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h], etaleSetPullback h ⋙ ((fullAffineEtaleInclusion Y).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology Y) Y.smallEtaleTopology) ≅ ((fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) X.smallEtaleTopology) ⋙ L h), (∀ (X Y : Scheme.{u}) (h : Y ⟶ X) [IsAffineHom h] (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (V : X.FullAffineEtale) (s : G.obj.obj (op V.obj)), ((e h).hom.app G).hom.app (op ((U h).obj V)) (((etaleSetPullback h).obj G).obj.map ((t h).hom.app V).op ((((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).unit).app G).hom.app (op V.obj) s)) = ((a h).unit.app (((fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1)) (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)).hom.app (op V) s)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044738-L-2032075",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044738-L-2032075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

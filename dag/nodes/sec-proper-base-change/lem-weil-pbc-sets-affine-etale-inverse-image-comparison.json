@@ -28,62 +28,38 @@
  ],
  "proof": [
   {
-   "text": "For an affine morphism $h:T'\\to T$, base change carries affine etale objects to affine etale objects and standard finite coverings to standard coverings, so the functor $u$ is continuous and gives the morphism of affine etale sites $g$.",
+   "text": "Take U_h to be the existing affineEtaleBaseChange. Its composite with inclusion is definitionally ordinary base change after inclusion, so t_h is Iso.refl. For each h use affineEtaleSiteBaseChange for covering preservation and continuity; take its canonical sheafPullback and sheafAdjunctionContinuous for L_h and a_h. The same theorem supplies PreservesFiniteLimits L_h. Assemble the families by choice for continuity and the explicit canonical constructions for the other data.",
    "uses": [
     "lem-weil-pbc-affine-etale-site-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Tag 0EYL, proof of clause (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\rho_T:\\Sh(T_{\\Et})\\to\\Sh(T_{affine,\\Et})$ and $\\rho_{T'}:\\Sh(T'_{\\Et})\\to\\Sh(T'_{affine,\\Et})$ be restriction along the affine-site inclusions; by [lem-weil-pbc-affine-etale-site-topos] they are equivalences of categories of sheaves of sets; fix quasi-inverses $\\rho_T^{-1},\\rho_{T'}^{-1}$. By [lem-weil-pbc-etale-base-change-continuous] (3), $(h_*H)(W)=H(W\\times_TT')$ for every sheaf of sets $H$ on $T'_{\\Et}$, and by step 1 and [def-weil-pbc-sites-and-cohomology] (3), $g_*=u^s$ is precomposition with $u$ and $g^{-1}=u_s$ is its left adjoint. Hence $(\\rho_Th_*H)(V)=H(V\\times_TT')=(g_*\\rho_{T'}H)(V)$ for affine etale $V\\to T$, i.e. $\\rho_Th_*=g_*\\rho_{T'}$, naturally in $H$. Composing with the adjoint equivalences (elementary), $L_2=\\rho_{T'}^{-1}g^{-1}\\rho_T$ is left adjoint to $R_2=\\rho_T^{-1}g_*\\rho_{T'}$, and $\\delta:R_2=\\rho_T^{-1}\\rho_Th_*\\cong h_*$. With $L_1=h^{-1}\\dashv R_1=h_*$ and its unit $s\\mapsto h^*s$ ([lem-weil-pbc-sets-etale-inverse-image-composition-units], first paragraph), [lem-weil-pbc-conjugate-iso-unit-equation] gives a unique natural isomorphism $c:h^{-1}\\xrightarrow{\\sim}\\rho_{T'}^{-1}g^{-1}\\rho_T$ satisfying its unit equation; applying $\\rho_{T'}$ and $\\rho_{T'}\\rho_{T'}^{-1}\\cong\\mathrm{id}$ gives the natural isomorphism $(h^{-1}G)|_{aff}\\cong g^{-1}(G|_{aff})$.",
+   "text": "Apply the restriction-unit theorem to these U,t,L,a to obtain e and its affine section-unit formula. Extract c and its section-unit formula from etaleSetInverseImageCompositionUnits, restrict c to affine pairs of morphisms, and retain the formula.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-affine-etale-site-base-change",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-affine-etale-restriction-unit",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies Tag 04HR, with Sites Tags 00WX and 00X1"
-   }
+   "elementary": false
   },
   {
-   "text": "Evaluating the unit equation of [lem-weil-pbc-conjugate-iso-unit-equation] for $c$ of step 2 at an affine $V$, using $\\rho_Th_*=g_*\\rho_{T'}$, shows that the isomorphism of step 2 on sections over $V\\times_TT'$ sends $h^*s$ to $g^*s$ for every $s\\in G(V)$, where $g^*s$ is the image of $s$ under the unit of $g^{-1}\\dashv g_*$: the isomorphism carries the unit of $h^{-1}\\dashv h_*$ over affine $V$ to the unit of $g^{-1}\\dashv g_*$. For composable affine $h_a:T_1\\to T$, $h_b:T_2\\to T_1$ and $h_{ab}=h_a\\circ h_b$ (affine), with $u_b\\circ u_a\\cong u_{ab}$ by the canonical isomorphism of iterated fibre products [def-pc-fibre-product], consider the two isomorphisms $g_b^{-1}g_a^{-1}(G|_{aff})\\to(h_{ab}^{-1}G)|_{aff}$: the comparisons for $h_a$ and $h_b$ followed by $c_{h_a,h_b,G}|_{aff}$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and the canonical isomorphism $g_b^{-1}g_a^{-1}\\cong g_{ab}^{-1}$ of [lem-weil-pbc-site-morphism-composition] (3) followed by the comparison for $h_{ab}$. By the unit statement just proved, clauses (0) and (1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] and the unit compatibility in [lem-weil-pbc-site-morphism-composition] (3), both send $g_b^*(g_a^*s)$ to the section corresponding to $h_{ab}^*s$ for every affine $V$ and $s\\in G(V)$, i.e. both are compatible with the units of $g_b^{-1}g_a^{-1}\\dashv g_{a*}g_{b*}$ and $g_{ab}^{-1}\\dashv g_{ab*}$ under the identification $g_{a*}g_{b*}\\cong g_{ab*}$; the uniqueness clause of [lem-weil-pbc-conjugate-iso-unit-equation] shows they are equal.",
+   "text": "Apply the composition-coherence theorem to U,t,L,a,e and the chosen full-site c with their unit formulas. This supplies gamma,d, the lift equation, the affine composition-unit equation and the restriction square. Construct the existential tuple and all conjunctions using these results together with covering preservation, continuity and finite-limit preservation from step 1.",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-site-morphism-composition",
-    "lem-weil-pbc-affine-etale-site-base-change",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-affine-etale-restriction-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Tag 09YQ proof, using Topologies Tag 04HR"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-affine-etale-restriction-composition",
+  "lem-weil-pbc-affine-etale-restriction-unit",
   "lem-weil-pbc-affine-etale-site-base-change",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-site-morphism-composition",
-  "def-pc-fibre-product"
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Tag 09YQ proof of the sets comparison, via Topologies Tag 04HR"
+  "by": "agent",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "04HR and Sites 03CB, following the original node plan, now assembled as Lean from affine-site base change, full-site composition units, and two strictly smaller unit/coherence intermediates."
  },
  "mathlib_searches": [
   {
@@ -186,5 +162,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044738-L-2032075",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

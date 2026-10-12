@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange
-import Sheaf.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionUnit
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionComposition
 
 /-!
 # Comparison of inverse images on the full and affine étale sites
@@ -136,6 +136,36 @@ theorem exists_affineEtale_inverseImage_comparison :
           (L g).map ((e f).hom.app G) ≫ (d f g).hom.app (((fullAffineEtaleInclusion
           X).sheafPushforwardContinuous (Type (u + 1))
           (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)) := by
-  sorry
+  classical
+  let U := fun {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] ↦
+    affineEtaleBaseChange h
+  let t : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
+      U h ⋙ fullAffineEtaleInclusion Y ≅
+        fullAffineEtaleInclusion X ⋙ MorphismProperty.Over.pullback @Etale ⊤ h :=
+    fun h ↦ Iso.refl _
+  have hu : ∀ (X Y : Scheme.{u}) (h : Y ⟶ X) [IsAffineHom h],
+      (U h).IsContinuous (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y) :=
+    fun X Y h ↦ (affineEtaleSiteBaseChange h).2.2.choose
+  let L := fun {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] ↦
+    Functor.sheafPullbackConstruction.sheafPullback (U h) (Type (u + 1))
+      (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)
+  let a : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
+      L h ⊣ (U h).sheafPushforwardContinuous (Type (u + 1))
+        (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y) :=
+    fun h ↦ Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (U h) _ _ _
+  obtain ⟨e, he⟩ := affineEtale_inverseImage_restriction_unit U t L a
+  obtain ⟨c, hc, _⟩ := AlgebraicGeometry.etaleSetInverseImageCompositionUnits.2.2
+  let c' := fun {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
+    [IsAffineHom f] [IsAffineHom g] ↦ c X Y Z f g
+  obtain ⟨gamma, d, hgamma, hd, hcompat⟩ :=
+    affineEtale_inverseImage_restriction_composition U t L a e he c'
+      (fun X Y Z f g _ _ G V s ↦ hc X Y Z f g G V s)
+  refine ⟨U, t, ?_, hu, L, a, e, ?_, he, gamma, c', d, hgamma, ?_, hd, hcompat⟩
+  · intro X Y h _ V R hR
+    exact (affineEtaleSiteBaseChange h).1 V R hR
+  · intro X Y h _
+    exact (affineEtaleSiteBaseChange h).2.2.choose_spec.2.1
+  · intro X Y Z f g _ _ G V s
+    exact hc X Y Z f g G V s
 
 end AlgebraicGeometry.Scheme
