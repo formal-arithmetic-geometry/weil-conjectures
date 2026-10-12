@@ -8,11 +8,8 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.LocalDirectImageStalkClassEquiv
+import Sheaf.AlgebraicGeometry.LocalDirectImageStalkNormalization
 
 /-! # Local direct-image stalks and total cohomology
 
@@ -93,7 +90,13 @@ theorem localDirectImage_stalk_cohomology {X Y : Scheme.{u}} (f : X ⟶ Y) (y : 
               (((Scheme.Modules.pushforward (pullback.fst (Y.fromSpecStalk y) f)).rightDerived
                 p).obj
                 ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj
-                  F))).presheaf V y hy (D.targetClass p xi))) = xi := by sorry
+                  F))).presheaf V y hy (D.targetClass p xi))) = xi := by
+  have h := localDirectImage_stalk_cohomology_equiv f y F p
+  cases h with
+  | intro e he =>
+    refine ⟨e.symm, ?_⟩
+    intro I K V hy D xi
+    exact localDirectImage_stalk_cohomology_normalization f y F p e he I K V hy D xi
 
 
 end AlgebraicGeometry
