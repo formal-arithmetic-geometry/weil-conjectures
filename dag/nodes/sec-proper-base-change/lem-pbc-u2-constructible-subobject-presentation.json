@@ -1,0 +1,136 @@
+{
+ "id": "lem-pbc-u2-constructible-subobject-presentation",
+ "kind": "statement",
+ "title": "Constructible subobject presentation on a Noetherian scheme",
+ "statement": "Let $X$ be a Noetherian scheme [def-weil-pbc-scheme-conventions], let $\\Lambda$ be a finite commutative ring, and let $F$ be a sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves]. There exist a small filtered category $A$ of universe $u+1$, a diagram $D:A\\to\\operatorname{Sheaf}(X_{\\mathrm{et}},\\operatorname{Mod}\\Lambda)$, and a natural transformation $\\iota:D\\to\\operatorname{const}(F)$ such that each $D(a)$ is constructible [def-constructible-constructible], every $\\iota_a$ is a monomorphism, and $(F,\\iota)$ is a colimit cocone [def-weil-pbc-category-colimit]. No torsion, curve, field or properness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03SA(3) (lemma-colimit-constructible), 09BH(3) (proposition-constructible-noetherian), and 03SC, first proof paragraph; read at https://stacks.math.columbia.edu/tag/03SA, /09BH and /03SC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-constructible",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-weil-pbc-module-sheaf-colimit-constructible to obtain a filtered constructible module-sheaf diagram D with cocone ι and vertex F. Noetherian schemes are qcqs. Convert the diagram objects to the source IsConstructibleSheaf predicate using lem-weil-pbc-constructible-etale-module-sheaf-comparison.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace D(a) by image(ι_a). Use Mathlib image.map on the square with left edge D(φ) and right edge id_F. Cancellation against the monic image inclusions and image.map_homMk'_ι proves the identity and composition laws. The inclusions ε_a:image(ι_a)→F are natural, and image.factor_map makes factorThruImage(ι_a) into a natural transformation π:D→E.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The finite ring Λ is Noetherian. The kernel inclusion ker(ι_a)→D(a) is mono, so lem-weil-pbc-constructible-module-subobject-noetherian makes its source constructible. Apply the cokernel clause of thm-constructible-serre to this inclusion. Transfer constructibility through Mathlib Abelian.coimageIsoImage' to image(ι_a).",
+   "uses": [
+    "lem-weil-pbc-constructible-module-subobject-noetherian",
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a cocone s on E, compose its legs with π to obtain a cocone on D and use the original colimit descent map F→s.pt. Cancel the epimorphism factorThruImage(ι_a) to prove that this descent restricts to s on E(a). For uniqueness, use the original colimit hom_ext after factoring each ι_a through its image and applying the assumed equalities on ε_a. This proves the actual cocone colimit universal property, not merely an isomorphism of vertices.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-module-subobject-noetherian",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03SA(3) (lemma-colimit-constructible), 09BH(3) (proposition-constructible-noetherian), and 03SC, first proof paragraph; read at https://stacks.math.columbia.edu/tag/03SA, /09BH and /03SC; U2 image-cocone universal-property proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf of modules over a finite ring on a Noetherian scheme is a filtered colimit of constructible subobjects",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a sheaf of modules on a Noetherian scheme is a filtered union of constructible subobjects",
+   "results": "Eight hits: finite-type SheafOfModules generator predicates and Noetherian scheme definitions; no exact constructible subobject presentation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.image.map",
+   "results": "Nine hits including image.map, image.map_id, image.map_comp, image.factor_map, image.map_ι and image.map_homMk'_ι. These build the image diagram and its factor maps, but do not assert constructibility or the cocone colimit. Used in the proved lemma.",
+   "date": "2026-10-12",
+   "verdict": "tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*[Cc]olimit|[Cc]olimit.*image",
+   "results": "Twenty-five hits about inverse image, image preservation and other colimits; no exact presentation theorem. Local source search found the constructible cokernel and Noetherian module-subobject declarations used in the proof. Blueprint searches for constructible subobject (zero hits) and filtered union (three unrelated algebra/support nodes) found no duplicate.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "03SC first proof paragraph, replacing constructible presentation stages by their images; parent lem-weil-pbc-constructible-approximation-assertions",
+   "via": [
+    "lem-weil-pbc-constructible-approximation-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleSubobjectPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleSubobjectPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_filtered_colimit_constructible_subobjects",
+  "statement": "theorem exists_filtered_colimit_constructible_subobjects\n    {X : Scheme.{u}} [IsNoetherian X]\n    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ (A : Type (u + 1)) (_ : SmallCategory A) (_ : IsFiltered A)\n      (D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n      (ι : D ⟶ (Functor.const A).obj F),\n      (∀ a, IsConstructibleSheaf (D.obj a)) ∧\n      (∀ a, Mono (ι.app a)) ∧ Nonempty (IsColimit (Cocone.mk F ι))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3bf73",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2916829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3bf73",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2916829",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG statements, change record, report, and compilation matched the stage-3 review requirements"
+ }
+}

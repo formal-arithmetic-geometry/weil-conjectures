@@ -24,32 +24,55 @@
  ],
  "proof": [
   {
-   "text": "By 03SA(3), write F as a filtered colimit of constructible Λ-module sheaves.\nReplace each stage by its image in F. The kernel of its map to F is a subsheaf of\na constructible sheaf on the Noetherian curve, hence constructible over the finite\n(and thus Noetherian) ring Λ. Its cokernel, the image, is therefore constructible.\nThese images form a filtered union equal to F: every local section of F locally\ncomes from a stage. Thus we may use constructible Λ-submodule sheaves of F.\nForgetting scalars preserves this filtered colimit, as does inverse image.\nCohomology on the curve and its field extensions commutes with these filtered colimits\n(03Q5; equivalently the Ext-to-derived comparison followed by derived continuity).\nVanishing C1,C2 is inherited from the constructible stages. If F is p-primary,\nits subsheaves are p-primary, giving C3. If F has invertible torsion orders, so do\nits subsheaves; naturality identifies its comparison map with the colimit of the\nbijective stagewise maps, giving C6. The same argument without the order condition\nand with properness gives C7. For C8, each class on the open comes from a stage;\nlift it there by C8 and map the lift into H2(X,F). For C4,C5 the conclusion is\nconditional on F itself being constructible, so use H on F directly: finiteness\nis not inferred from a filtered colimit of finite groups. The filtered system\nincludes the zero subsheaf, so the empty scheme and zero sheaf cause no exception.",
+   "text": "The curve is Noetherian, quasi-compact and quasi-separated by its finite-type structure morphism. Use lem-pbc-u2-constructible-subobject-presentation to obtain a filtered diagram of constructible module subobjects of F, with actual colimit vertex F. Apply H at each stage. Forgetting coefficients preserves the cocone by lem-weil-pbc-constant-module-sheaves-forget-colimits.",
    "uses": [
-    "lem-kun-03sa",
-    "lemma-weil-pbc-curve-filtered-cohomology",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-primary-torsion",
-    "lem-weil-pbc-constructible-module-subobject-noetherian",
-    "thm-constructible-serre"
+    "lem-pbc-u2-constructible-subobject-presentation",
+    "lem-weil-pbc-constant-module-sheaves-forget-colimits"
    ],
    "elementary": false
+  },
+  {
+   "text": "For any qcqs scheme, reindex an abelian filtered cocone of universe u+1 along the directed final functor of lem-weil-pbc-filtered-category-exists-directed-final. Apply lem-weil-pbc-etale-directed-cohomology-colimit and transfer its colimit property to Sheaf.functorH by lem-weil-pbc-sheafH-ext-derived-comparison. Reflect back along the final functor. This is the proved private helper sheafH_colimit; it keeps each canonical leg.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For C1 and C2 every class comes from a stage by Mathlib Concrete.isColimit_exists_rep; that stage is subsingleton, so the class is zero. For C3, the stalk functor preserves monomorphisms. Injectivity of the stalk map transfers p-power annihilation from F to each stage, giving the same class argument. The two stalk inheritance lemmas are proved directly using finite-limit preservation and ModuleCat.mono_iff_injective. C4 and C5 assume F itself is constructible; obtain these fields directly from H(F), without any finite-colimit claim.",
+   "uses": [
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For C6 and C7, the base-changed scheme is qcqs by pullback stability of separation and quasi-compactness. Abelian inverse image is a left adjoint, hence preserves the supplied cocone. The closed source lemma Etale.cohomologyMap_map gives a natural transformation between the two cohomology functors. Both preserve this diagram's colimit by the private continuity helper. Stagewise bijectivity gives stagewise IsIso, then Mathlib isIso_app_coconePt_of_preservesColimit gives IsIso at F, hence bijectivity. For C6, stalk injectivity transfers invertible-order torsion to each constructible subobject; C7 needs no order restriction.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For C8 every open subscheme is Noetherian, hence qcqs. Inverse image and cohomology send the supplied diagram to a colimit on that open. Represent a target H2 class at one stage, lift it by the stage's C8, and map the lift into H2(C,F). Etale.cohomologyMap_map identifies its restriction with the represented target class. Assemble these eight fields in the unchanged Assertions structure. No arbitrary construction of elements, finiteness of a filtered colimit, or new cohomology axiom is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-kun-03sa",
-  "lemma-weil-pbc-curve-filtered-cohomology",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-pbc-u2-constructible-subobject-presentation",
+  "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-etale-directed-cohomology-colimit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-constructible-module-subobject-noetherian",
-  "thm-constructible-serre"
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "03SC proof, first two paragraphs; detailed module-coefficient adaptation by Q2"
+  "place": "03SC first proof paragraph; U2 Lean image presentation, directed continuity, stalk inheritance, and explicit eight-field assembly. Read sources at https://stacks.math.columbia.edu/tag/03SC, /03SA and /09BH."
  },
  "mathlib_searches": [
   {
@@ -107,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q2",
+  "reviewer": "X-3bf73",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T042417-L-1819931",
+  "landing": "20261012T060757-L-2916829",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, DAG statements, change record, report, and compilation matched the stage-3 review requirements"
  }
 }
