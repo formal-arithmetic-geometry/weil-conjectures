@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-coherent-kernel-condition-descent-local-generators",
+ "kind": "statement",
+ "title": "Local generators for a kernel from kernel conditions on an open cover",
+ "statement": "Let X be a scheme, F an O_X-module, U an open cover, and f : O_W^{⊕ n} → F|_W. If for every member U_i, open V ⊆ U_i, rank m and map O_V^{⊕ m} → (F|_{U_i})|_V the kernel is of finite type, then the kernel of f admits finite local-generators data on W.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definitions 01BV and 01B5 and Section 01AF, section-kernels and the locality argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Intersect W with each U_i. Restriction preserves the structure module, finite sums and kernels sectionwise, so the local hypothesis gives finite generators for the restricted kernels. For each point choose a cover member and a neighbourhood carrying those generators; the resulting neighbourhoods and generators form finite local-generators data for the global kernel.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definitions 01BV and 01B5 and Section 01AF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite local generators kernel open cover sheaf modules",
+   "results": "No exact theorem found; IsFiniteType and LocalGeneratorsData are available.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "SheafOfModules.LocalGeneratorsData IsFiniteType kernel",
+   "results": "Service returned no exact theorem; no local kernel descent result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocalGeneratorsData.*kernel|IsFiniteType.*cover",
+   "results": "No local kernel descent theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentKernelConditionDescent",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-kernel-condition-descent",
+   "place": "the local gluing step",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentKernelConditionGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentKernelConditionGluing.lean",
+  "declaration": "AlgebraicGeometry.coherent_kernel_condition_local_generators",
+  "statement": "theorem coherent_kernel_condition_local_generators\n    (X : Scheme.{u}) (F : X.Modules)\n    (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)\n    (hK : ∀ (i : I) (V : (U i).toScheme.Opens) (n : ℕ)\n      (f : SheafOfModules.free (R := (U i).toScheme.ringCatSheaf.over V)\n        (ULift.{u} (Fin n)) ⟶ ((Scheme.Modules.restrictFunctor (U i).ι).obj F).over V),\n      (kernel f).IsFiniteType)\n    (W : X.Opens) (n : ℕ)\n    (f : SheafOfModules.free (R := X.ringCatSheaf.over W) (ULift.{u} (Fin n)) ⟶\n      F.over W) :\n    ∃ σ : (kernel f).LocalGeneratorsData, σ.IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T232857-L-2041305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T232857-L-2041305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

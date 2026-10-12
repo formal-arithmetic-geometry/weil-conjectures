@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.AlgebraicGeometry.CoherentKernelConditionGluing
 
 /-! # Descent of finite type for a kernel on an open cover
 
@@ -51,6 +52,10 @@ theorem coherent_kernel_condition_descent (X : Scheme.{u}) (F : X.Modules)
       (kernel f).IsFiniteType)
     (W : X.Opens) (n : ℕ)
     (f : SheafOfModules.free (R := X.ringCatSheaf.over W) (ULift.{u} (Fin n)) ⟶
-      F.over W) : (kernel f).IsFiniteType := by sorry
+      F.over W) : (kernel f).IsFiniteType := by
+  obtain ⟨σ, hσ⟩ := coherent_kernel_condition_local_generators X F I U hU hK W n f
+  apply SheafOfModules.IsFiniteType.mk
+  show ∃ τ : SheafOfModules.LocalGeneratorsData.{u} (kernel f), τ.IsFiniteType
+  exact ⟨σ, hσ⟩
 
 end AlgebraicGeometry
