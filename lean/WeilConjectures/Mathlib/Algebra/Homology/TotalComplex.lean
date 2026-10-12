@@ -8,8 +8,9 @@ module
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
+import Sheaf.Algebra.Homology.DoubleComplexVerticalSpectralObject
+import Sheaf.Algebra.Homology.DoubleComplexVerticalWindowHomology
 
 /-!
 # Total complexes of first quadrant double complexes
@@ -62,7 +63,16 @@ theorem exists_spectralSequence {C : Type*} [Category* C] [Abelian C]
       (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
         (((HomologicalComplex.homologyFunctor C (ComplexShape.up ℕ) q).mapHomologicalComplex
           (ComplexShape.up ℕ)).obj K).homology p)) ∧
-      E.AbutsTo fun n ↦ (K.total (ComplexShape.up ℕ)).homology n :=
-  sorry
+      E.AbutsTo fun n ↦ (K.total (ComplexShape.up ℕ)).homology n := by
+  let : ∀ L : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ),
+      L.HasTotal (ComplexShape.up ℕ) := fun L ↦ hasTotal_up_nat L
+  obtain ⟨Y, hY, hwindow, htotal⟩ := exists_verticalSpectralObject K
+  let := hY
+  refine ⟨Y.E₂SpectralSequenceNat, ?_, ?_⟩
+  · intro p q
+    obtain ⟨e⟩ := hwindow (q : ℤ) (q + 1) (by omega) (p + q)
+    obtain ⟨f⟩ := verticalWindow_total_homology_iso K p q
+    exact ⟨Y.E₂SpectralSequenceNatPageTwoXIso p q ≪≫ e ≪≫ f⟩
+  · exact Y.abutsTo_E₂SpectralSequenceNat.of_nonempty_iso htotal
 
 end HomologicalComplex₂

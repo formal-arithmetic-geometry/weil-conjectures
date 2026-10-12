@@ -19,39 +19,36 @@
  ],
  "proof": [
   {
-   "text": "By [def-sp-double-complex-total], ${}'F$ and ${}''F$ are decreasing\nfiltrations of $\\operatorname{Tot}(D)$ by subcomplexes with\n$F^0\\operatorname{Tot}(D)^n=\\operatorname{Tot}(D)^n$ and\n$F^{n+1}\\operatorname{Tot}(D)^n=0$, hence bounded in each degree. So\n[thm-sp-spectral-object-yields] applies to each of them: item (a) of that\ntheorem gives a spectral sequence with\n$E_1^{p,q}=H^{p+q}(\\operatorname{gr}^p\\operatorname{Tot}D)$, $d_1$ the\nboundary map of $0\\to\\operatorname{gr}^{p+1}\\to F^p/F^{p+2}\\to\n\\operatorname{gr}^p\\to0$, and $E_{r+1}\\cong\\mathcal H(E_r,d_r)$; item (b) of\nthat theorem gives convergence to $H^\\bullet(\\operatorname{Tot}D)$ with the\ndisplayed image filtration, which is finite and separated, and item (c)\ngives functoriality in the filtered complex, hence in $D$ (a morphism of\ndouble complexes preserves both filtrations).",
+   "text": "For the first sequence, use [lem-sp-double-complex-vertical-spectral-object]. Its finite interval cohomology is the total cohomology of the corresponding columnwise smart truncation, and its whole-interval cohomology is total cohomology.",
    "uses": [
-    "def-sp-double-complex-total",
-    "thm-sp-spectral-object-yields"
+    "lem-sp-double-complex-vertical-spectral-object"
    ],
    "elementary": false
   },
   {
-   "text": "*The first sequence.* The graded piece $\\operatorname{gr}^p_{'F}$ is the\ncolumn $D^{p,\\bullet}$ placed in total degrees $p+\\bullet$, with\ndifferential $(-1)^pd_{II}$; a sign does not change kernels or images, so\n${}'E_1^{p,q}=H^{p+q}(\\operatorname{gr}^p_{'F})=H^q_{II}(D^{p,\\bullet})$.\nFor $d_1$: a class in ${}'E_1^{p,q}$ is represented by $x\\in D^{p,q}$ with\n$d_{II}x=0$; viewed in $F^p/F^{p+2}$ its total differential is\n$dx=d_Ix+(-1)^pd_{II}x=d_Ix\\in D^{p+1,q}=\\operatorname{gr}^{p+1}$, so the\nboundary map sends $[x]$ to $[d_Ix]$. Hence $d_1$ is the map induced by\n$d_I$ on $H^q_{II}$, and ${}'E_2^{p,q}=\\mathcal H({}'E_1,d_1)^{p,q}=\nH^p_IH^q_{II}(D)$.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "*The second sequence.* The graded piece $\\operatorname{gr}^q_{''F}$ is the\nrow $D^{\\bullet,q}$ placed in total degrees $\\bullet+q$, with differential\n$d_I$, so ${}''E_1^{q,p}=H^{p+q}(\\operatorname{gr}^q_{''F})=\nH^p_I(D^{\\bullet,q})$. A class is represented by $y\\in D^{p,q}$ with\n$d_Iy=0$; in ${}''F^q/{}''F^{q+2}$ one has $dy=(-1)^pd_{II}y\\in\nD^{p,q+1}=\\operatorname{gr}^{q+1}$, so $d_1[y]=(-1)^p[d_{II}y]$. The sign\ndepends only on $p$, which is constant along the complex\n$\\bigl(H^p_I(D^{\\bullet,q})\\bigr)_q$ being formed, so it changes neither\nkernels nor images, and ${}''E_2^{q,p}=H^q_{II}H^p_I(D)$.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "*Bounds.* In both cases the $E_1$-terms vanish outside the first quadrant\n(${}'E_1^{p,q}$ is a subquotient of $D^{p,q}$, ${}''E_1^{q,p}$ one of\n$D^{p,q}$), and so do all later pages, which are subquotients of $E_1$. On\npage $r$ the differential leaving $(p,q)$ lands in $(p+r,q-r+1)$, outside\nthe quadrant once $r>q+1$, and the one arriving comes from $(p-r,q+r-1)$,\noutside once $r>p$; for $r>\\max(p,q+1)$ the page identification\n$E_{r+1}\\cong\\mathcal H(E_r)$ from [thm-sp-spectral-object-yields]\nidentifies the entry $(p,q)$ with its successor, which is the stated\nstabilization. For the second sequence the same argument is applied to its\nindices $(q,p)$, so the displayed bound is read in that sequence's own\nindexing. Finally $F^0H^n=H^n$ and $F^{n+1}H^n=0$ because\n$F^0\\operatorname{Tot}(D)=\\operatorname{Tot}(D)$ and\n$F^{n+1}\\operatorname{Tot}(D)^m=0$ for $m\\leq n$, so that\n$H^n(F^{n+1}\\operatorname{Tot}D)$ is the cohomology of a complex whose\ndegree-$n$ term vanishes.\n\n(*References: Stacks Project, Homological Algebra, the spectral sequences of\na double complex; Weibel, An Introduction to Homological Algebra, 5.6.*)",
+   "text": "The existing first-page spectral-object comparison identifies page two at (p,q) with H^(p+q)_Y(q,q+1). Compose the interval comparison with [lem-sp-double-complex-vertical-window-homology] to get H^p_I H^q_II(K). This composition is written in Lean.",
    "uses": [
-    "thm-sp-spectral-object-yields"
+    "lem-sp-double-complex-vertical-window-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sp-first-quadrant-spectral-object-abutment] and transport the abutment along the whole-interval comparisons by AbutsTo.of_nonempty_iso. The unchanged Lean declaration formalizes only the first sequence, as before this delivery.",
+   "uses": [
+    "lem-sp-first-quadrant-spectral-object-abutment"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-total",
-  "thm-sp-spectral-object-yields"
+  "lem-sp-double-complex-vertical-spectral-object",
+  "lem-sp-double-complex-vertical-window-homology",
+  "lem-sp-first-quadrant-spectral-object-abutment"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
-  "place": "## Proof"
+  "place": "Proof steps 1 and 2, first sequence; spectral-object reformulation"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -124,5 +121,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
