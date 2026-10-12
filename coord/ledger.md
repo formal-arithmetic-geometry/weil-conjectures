@@ -7266,3 +7266,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAcyclic (stage 3; reviewer PASS; first push; landing 20261012T095920-L-323251 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/Q3/Sheaf.Topology.SheafOfModulesFromBasis (stage 3; reviewer PASS; first push; landing 20261012T095920-L-323347 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/Q3/Sheaf.Topology.TopologicalLeraySpectralSequence (stage 3; reviewer PASS; first push; landing 20261012T095920-L-323475 (interface); batch 20261012T095846; modules 3; new nodes 2)
+- 09:59 L: merged deliver/R1/Sheaf.CategoryTheory.SiteCechMathlibComparison (stage 3; reviewer PASS; first push; landing 20261012T095921-L-323572 (proof); batch 20261012T095846; modules 1; new nodes 0)
