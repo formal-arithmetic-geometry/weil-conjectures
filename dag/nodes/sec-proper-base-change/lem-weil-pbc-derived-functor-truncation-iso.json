@@ -26,82 +26,38 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (the cone of $c$ has no cohomology in degrees $\\leq n$).** $D^+(\\mathcal A)$ is a full triangulated subcategory of $D(\\mathcal A)$, closed under isomorphisms and containing the third vertex of a distinguished triangle of $D(\\mathcal A)$ whose other two vertices lie in it [def-weil-pbc-bounded-derived-subcategories]; by axiom TR1 of the triangulated category $D(\\mathcal A)$ [def-weil-triangulated-category] complete $c$ to a distinguished triangle $L\\xrightarrow{c}M\\xrightarrow{p}C\\xrightarrow{w}L[1]$, so $C\\in D^+(\\mathcal A)$. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains, for each $j$, the exact piece $\\mathcal H^j(L)\\xrightarrow{\\mathcal H^j(c)}\\mathcal H^j(M)\\xrightarrow{\\mathcal H^j(p)}\\mathcal H^j(C)\\xrightarrow{\\delta^j}\\mathcal H^{j+1}(L)\\xrightarrow{\\mathcal H^{j+1}(c)}\\mathcal H^{j+1}(M)$. Let $j\\leq n$. Since $\\mathcal H^j(c)$ is an isomorphism, in particular an epimorphism, exactness at $\\mathcal H^j(M)$ gives $\\Ker\\mathcal H^j(p)=\\Im\\mathcal H^j(c)=\\mathcal H^j(M)$, so $\\mathcal H^j(p)=0$; exactness at $\\mathcal H^j(C)$ then gives $\\Ker\\delta^j=\\Im\\mathcal H^j(p)=0$, so $\\delta^j$ is a monomorphism. Since $j+1\\leq n+1$, $\\mathcal H^{j+1}(c)$ is a monomorphism (an isomorphism if $j+1\\leq n$, a monomorphism by hypothesis if $j+1=n+1$), so exactness at $\\mathcal H^{j+1}(L)$ gives $\\Im\\delta^j=\\Ker\\mathcal H^{j+1}(c)=0$, i.e. $\\delta^j=0$. A monomorphism that is zero has zero source: $\\mathcal H^j(C)=0$ for all $j\\leq n$, i.e. $\\mathcal H^i(C)=0$ for all $i<n+1$. (This is where both hypotheses are used: surjectivity of $\\mathcal H^j(c)$ for $j\\leq n$ and injectivity of $\\mathcal H^{j+1}(c)$ for $j+1\\leq n+1$; in the source's case $C=\\tau_{\\geq n+1}K$ this vanishing holds by construction.)",
+   "text": "**Step 1 (general map theorem).** The isomorphism conclusion for the right derived functor follows by applying the separately stated monomorphism and epimorphism halves degreewise and using that a morphism in an abelian category which is both monic and epic is an isomorphism.",
    "uses": [
-    "def-weil-pbc-bounded-derived-subcategories",
-    "def-weil-triangulated-category",
-    "lem-sf-derived-homology-long-exact"
+    "lem-weil-pbc-derived-functor-truncation-iso-mono",
+    "lem-weil-pbc-derived-functor-truncation-iso-epi"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (label lemma-negative-vanishing, lines 5497-5541), proof of part (2): the distinguished triangle $\\tau_{\\leq a}K\\to K\\to\\tau_{\\geq a+1}K\\to$ of Remark 08J5 (label remark-truncation-distinguished-triangle, line 4076), here replaced by the cone triangle of $c$; long exact sequence: Lemma 05RS (label lemma-cohomology-homological, line 3618)"
+    "document": "lean/Sheaf/CategoryTheory/RightDerivedFunctorTruncationIso.lean",
+    "place": "theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map"
    }
   },
   {
-   "text": "**Step 2 ($Rv$ of the triangle is distinguished).** The right derived functor $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$, $RvK=v(I(K))$ for a K-injective resolution $K\\to I(K)$ [def-sp-kinjective-bridge] (a Grothendieck abelian category has enough injectives and K-injective resolutions of bounded below complexes [def-sp-grothendieck-abelian]; any two K-injective resolutions, in particular a bounded below complex of injectives, are homotopy equivalent over $K$, so this is the functor of the cited lemma), is a triangulated functor with its shift isomorphism $\\sigma$ [lem-weil-pbc-derived-direct-image-triangulated]. Hence $RvL\\xrightarrow{Rv(c)}RvM\\xrightarrow{Rv(p)}RvC\\xrightarrow{\\sigma_L\\circ Rv(w)}(RvL)[1]$ is a distinguished triangle of $D^+(\\mathcal B)$, hence of $D(\\mathcal B)$ ($D^+(\\mathcal B)$ being a full triangulated subcategory [def-weil-pbc-bounded-derived-subcategories]).",
-   "uses": [
-    "def-sp-kinjective-bridge",
-    "def-sp-grothendieck-abelian",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-bounded-derived-subcategories"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (label lemma-negative-vanishing, lines 5497-5541), proof of part (2): 'we have a distinguished triangle $RF(\\tau_{\\leq a}K^\\bullet)\\to RF(K^\\bullet)\\to RF(\\tau_{\\geq a+1}K^\\bullet)\\to$ in $D(\\mathcal B)$' (via Lemma 05SC, label lemma-2-out-of-3-defined, and Proposition 05SE, label proposition-derived-functor, line 4895); here $Rv$ is everywhere defined on $D^+(\\mathcal A)$"
-   }
-  },
-  {
-   "text": "**Step 3 ($Rv C$ has no cohomology in degrees $\\leq n$).** By Step 1, $C\\in D^+(\\mathcal A)$ satisfies $\\mathcal H^i(C)=0$ for all $i<n+1$. By [lem-weil-pbc-derived-functor-negative-vanishing] with $b=n+1$, $\\mathcal H^j(RvC)=0$ for all $j<n+1$, i.e. for all $j\\leq n$.",
+   "text": "**Step 2 (canonical truncation).** Apply `DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app` to `v.rightDerivedFunctorPlus`. Its lower-degree vanishing hypothesis is exactly `v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE`, the negative-vanishing theorem, instantiated with the truncation lower bound and the requested degree. This directly proves the degree-`n` cohomology map for the canonical lower truncation.",
    "uses": [
     "lem-weil-pbc-derived-functor-negative-vanishing"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (label lemma-negative-vanishing, lines 5497-5541), proof of part (2): 'By part (1) we see that $RF(\\tau_{\\geq a+1}K^\\bullet)$ has vanishing cohomology in degrees $<a+1$'"
-   }
-  },
-  {
-   "text": "**Step 4 (the long exact sequence of $Rv$ of the triangle).** Apply [lem-sf-derived-homology-long-exact] to the distinguished triangle of Step 2 in $D(\\mathcal B)$: for every $j$ the sequence $\\mathcal H^{j-1}(RvC)\\xrightarrow{\\delta^{j-1}}\\mathcal H^j(RvL)\\xrightarrow{\\mathcal H^j(Rv(c))}\\mathcal H^j(RvM)\\xrightarrow{\\mathcal H^j(Rv(p))}\\mathcal H^j(RvC)$ is exact. Let $j\\leq n$. Exactness at $\\mathcal H^j(RvL)$ gives $\\Ker\\mathcal H^j(Rv(c))=\\Im\\delta^{j-1}$, which is $0$ because $\\mathcal H^{j-1}(RvC)=0$ by Step 3 ($j-1<n$); so $\\mathcal H^j(Rv(c))$ is a monomorphism. Exactness at $\\mathcal H^j(RvM)$ gives $\\Im\\mathcal H^j(Rv(c))=\\Ker\\mathcal H^j(Rv(p))=\\mathcal H^j(RvM)$, because $\\mathcal H^j(RvC)=0$ by Step 3 ($j\\leq n$); so $\\mathcal H^j(Rv(c))$ is an epimorphism. A monomorphism and epimorphism in the abelian category $\\mathcal B$ is an isomorphism: $\\mathcal H^j(Rv(c))$ is an isomorphism for every $j\\leq n$.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-derived-functor-negative-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (label lemma-negative-vanishing, lines 5497-5541), proof of part (2): 'The long exact cohomology sequence of this distinguished triangle then shows what we want'"
-   }
-  },
-  {
-   "text": "**Step 5 (the truncation).** Let $K\\in D^+(\\mathcal A)$, represented by a bounded below complex $K$, and $c_n:\\tau_{\\leq n}K\\to K$ the inclusion of the canonical truncation. By [lem-weil-pbc-truncation-cohomology], $\\tau_{\\leq n}K$ is bounded below (so $c_n$ is a morphism of $D^+(\\mathcal A)$ [def-weil-pbc-bounded-derived-subcategories]), $\\mathcal H^i(c_n)$ is an isomorphism for every $i\\leq n$, and $\\mathcal H^{n+1}(\\tau_{\\leq n}K)=0$, so $\\mathcal H^{n+1}(c_n)$, a morphism out of a zero object, is a monomorphism. Steps 1-4 applied to $c=c_n$ give that $\\mathcal H^j(Rv(c_n))$ is an isomorphism for $j\\leq n$, in particular $\\mathcal H^n(Rv\\,\\tau_{\\leq n}K)\\to\\mathcal H^n(RvK)$ for $j=n$.",
-   "uses": [
-    "lem-weil-pbc-truncation-cohomology",
-    "def-weil-pbc-bounded-derived-subcategories"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (label lemma-negative-vanishing, line 5497), statement of part (2) with $a=n$; cohomology of $\\tau_{\\leq n}$: literature/stacks-project/homology.tex, Section 12.15 (Tag 0118), lines 3777-3804"
+    "document": "lean/Sheaf/CategoryTheory/RightDerivedFunctorTruncationIso.lean",
+    "place": "theorem isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι; PlusDevissage lemma isIso_homologyFunctor_map_map_truncLEι_app"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-triangulated-category",
-  "lem-sf-derived-homology-long-exact",
-  "def-sp-kinjective-bridge",
-  "def-sp-grothendieck-abelian",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-weil-pbc-truncation-cohomology"
+  "lem-weil-pbc-derived-functor-truncation-iso-mono",
+  "lem-weil-pbc-derived-functor-truncation-iso-epi",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05TC (label lemma-negative-vanishing, line 5497), part (2) and its proof (lines 5525-5541), with the cone of $c$ in place of $\\tau_{\\geq a+1}K^\\bullet$; the vanishing of the cohomology of the cone (Step 1) is written out by the worker from the long exact sequence"
+  "by": "library",
+  "document": "lean/Sheaf/CategoryTheory/RightDerivedFunctorTruncationIso.lean",
+  "place": "theorems isIso_homologyFunctor_rightDerivedFunctorPlus_map and isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι; truncation proof uses existing PlusDevissage criterion"
  },
  "mathlib_searches": [
   {
@@ -227,19 +183,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T173844-L-3300735",
+  "landing": "20261012T184359-L-4025378",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_map",
-   "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι"
-  ],
-  "sorry_after": [
-   "CategoryTheory.Functor.epi_homologyFunctor_rightDerivedFunctorPlus_map",
-   "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι",
-   "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

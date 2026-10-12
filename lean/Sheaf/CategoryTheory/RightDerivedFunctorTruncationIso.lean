@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
-import Sheaf.CategoryTheory.KInjectiveBridge
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
 
 /-!
 # Low-degree cohomology of a right derived functor
@@ -137,6 +137,10 @@ theorem isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι
     (n : ℤ) (K : DerivedCategory.Plus A) :
     IsIso ((DerivedCategory.Plus.homologyFunctor B n).map
       (v.rightDerivedFunctorPlus.map ((DerivedCategory.TStructure.t.onPlus.truncLEι n).app K))) :=
-  sorry
+  by
+    refine DerivedCategory.Plus.isIso_homologyFunctor_map_map_truncLEι_app
+      (v.rightDerivedFunctorPlus) ?_ K n
+    intro X a _ q hq
+    exact v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X a hq
 
 end CategoryTheory.Functor
