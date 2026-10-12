@@ -7802,3 +7802,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.GenericOpenFiniteEtaleModel (stage 3; reviewer PASS; first push; landing 20261012T135233-L-1664799 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Morphisms.NormalFamilyGenericLimit (stage 3; reviewer PASS; first push; landing 20261012T135233-L-1665220 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/F3/Sheaf.Algebra.Homology.CyclePullbackResolution (stage 3; reviewer PASS; first push; landing 20261012T135233-L-1665507 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:52 L: merged deliver/F3/Sheaf.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover (stage 3; reviewer PASS; first push; landing 20261012T135234-L-1665608 (proof); batch 20261012T135212; modules 1; new nodes 0)
