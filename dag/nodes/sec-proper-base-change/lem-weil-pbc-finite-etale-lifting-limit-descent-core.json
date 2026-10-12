@@ -21,20 +21,36 @@
  ],
  "proof": [
   {
-   "text": "Apply the general limit descent construction of the parent statement and retain the canonical identity compatibility witness.",
+   "text": "Apply [lem-weil-pbc-finite-etale-henselian-g-ring-stage] to obtain a henselian G-ring pair (B,J), proper g:Z -> Spec B, W over Z_0, maps s and k with j_Y followed by s equal to k followed by j_Z, and an isomorphism W pulled back along k with V over Y_0.",
    "uses": [
-    "lem-weil-pbc-finite-etale-lifting-limit-descent"
+    "lem-weil-pbc-finite-etale-henselian-g-ring-stage"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the hypothesis H to B, J, g and W, obtaining finite etale T over Z and an isomorphism of its closed fibre with W. Set U to the pullback of T along s. Finiteness and etaleness are stable under base change by [def-weil-pbc-finite-etale-category].",
+   "uses": [
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Paste the pullback of T along s with the closed fibre of Y. The canonical pullbackLeftPullbackSndIso identifies this with T pulled back along j_Y followed by s. Rewrite this composite using the compatibility equality, then apply the inverse pasting isomorphism to obtain the pullback along k of the closed fibre of T. Each isomorphism respects the projection to Y_0 by the projection equations for pullback pasting and pullback.congrHom. Apply the ordinary Over.pullback k functor to the isomorphism supplied by H and compose with the stage-cover isomorphism to V. This gives the required isomorphism over Y_0. Supply Iso.refl Y for the final compatibility witness.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-etale-lifting-limit-descent"
+  "def-weil-pbc-finite-etale-category",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-finite-etale-henselian-g-ring-stage"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Fundamental Groups, Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), proof, paragraph 'General case', essential surjectivity (Limits 0A0P, More on Algebra 07PX, 0A04, 0AH3, Limits 01ZM, 01ZO, 07RP)"
+  "place": "Tag 0GS2, proof, General case, final formal deduction via the compatible stage; implemented using Mathlib pullback pasting and the Over.pullback functor"
  },
  "mathlib_searches": [
   {
@@ -94,9 +110,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T044741-L-2033780",
+  "landing": "20261012T053951-L-2644784",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

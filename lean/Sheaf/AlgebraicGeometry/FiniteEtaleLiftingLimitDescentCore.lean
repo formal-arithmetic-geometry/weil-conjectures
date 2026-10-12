@@ -1,7 +1,9 @@
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
-import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.FiniteEtaleHenselianGRingStage
+import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 @[expose] public section
 
@@ -36,6 +38,31 @@ theorem exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting_core
         (Over.mk (pullback.snd U.hom
           (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅
           Over.mk V.hom) ∧ Nonempty (Y ≅ Y) := by
-  sorry
+  obtain ⟨B, hB, hGR, J, hJ, Z, g, hg, s, k, W, hsk, ⟨e⟩⟩ :=
+    exists_finiteEtale_henselian_gRing_stage I f V
+  let : CommRing B := hB
+  let : HenselianRing B J := hJ
+  let : IsProper g := hg
+  obtain ⟨T, ⟨eT⟩⟩ := H B hGR J Z g W
+  have : IsFinite T.hom := T.prop.1
+  have : Etale T.hom := T.prop.2
+  let qA := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+  let qB := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J))
+  let jA := pullback.fst f qA
+  let jB := pullback.fst g qB
+  let U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y :=
+    MorphismProperty.Over.mk ⊤ (pullback.snd T.hom s) ⟨inferInstance, inferInstance⟩
+  refine ⟨U, ⟨?_⟩, ⟨Iso.refl Y⟩⟩
+  let a := pullbackLeftPullbackSndIso T.hom s jA
+  let d : pullback T.hom (jA ≫ s) ≅ pullback T.hom (k ≫ jB) :=
+    pullback.congrHom rfl hsk
+  let b := pullbackLeftPullbackSndIso T.hom jB k
+  have ea : Over.mk (pullback.snd U.hom jA) ≅
+      Over.mk (pullback.snd (pullback.snd T.hom jB) k) :=
+    Over.isoMk (a ≪≫ d ≪≫ b.symm) (by
+      dsimp [a, d, b]
+      simp [U, jA, jB, qA, qB]
+      rfl)
+  exact ea ≪≫ (Over.pullback k).mapIso eT ≪≫ e
 
 end AlgebraicGeometry.Scheme
