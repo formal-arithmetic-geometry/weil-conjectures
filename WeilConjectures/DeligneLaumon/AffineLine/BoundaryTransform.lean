@@ -105,6 +105,80 @@ namespace WeilSheaf
 
 open WeilComplex
 
+/-- **The transform of the direct image of a sheaf on a closed subscheme** (Steps 2–3 of
+`prop-fd-zero-extension-comparison`). Let `i : Z₀ ↪ 𝔸¹` be a closed immersion, `X'` the base change
+of `i` along the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and
+`i' : X' ⟶ 𝔸¹ × 𝔸¹`, and `π = pr₂ ∘ i'` finite. For a Weil sheaf `E` on `Z₀`,
+`FT_ψ(i_! E) ≅ (π_*(i'^* 𝓚_ψ ⊗ q^* E))[1]`: compact support base change, the projection formula
+and the composition law give `FT_ψ(i_! E) ≅ Rπ_!(i'^*𝓚_ψ ⊗ q^*E)[1]`, and `Rπ_!` of a sheaf is
+the sheaf `π_*` in degree zero since `π` is finite. -/
+theorem nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback
+    (ψ : AddChar k₀ (PadicAlgCl l))
+    {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [X'.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀))]
+    (i : Z ⟶ affineLine k₀) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+    (q : X' ⟶ Z) [q.IsOver (Spec (CommRingCat.of k₀))]
+    (i' : X' ⟶ affinePlane k₀) [i'.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated i']
+    [LocallyOfFiniteType i'] [QuasiCompact i']
+    (π : X' ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))] [IsFinite π]
+    (hπ : i' ≫ affinePlane.snd k₀ = π) (hP : IsPullback q i' i (affinePlane.fst k₀))
+    (E : WeilSheaf k₀ l Z) :
+    Nonempty ((fourierTransform ψ).obj
+        ((derivedLowerShriek k₀ l i).obj (WeilSheaf.toComplex.obj E)) ≅
+      WeilSheaf.toShiftedComplex.obj ((WeilSheaf.lowerStar π).obj
+        (((WeilSheaf.upperStar i').obj (fourierKernel ψ)).tensorObj
+          ((WeilSheaf.upperStar q).obj E)
+          (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ))))) := by
+  have : QuasiCompact (affinePlane.fst k₀) := MorphismProperty.pullback_fst _ _ inferInstance
+  have : QuasiSeparated (affinePlane.fst k₀) := MorphismProperty.pullback_fst _ _ inferInstance
+  have : QuasiCompact (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiCompact (affinePlane.fst k₀ ≫ _))
+  have : QuasiSeparated (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (QuasiSeparated (affinePlane.fst k₀ ≫ _))
+  set K := (derivedLowerShriek k₀ l i).obj (WeilSheaf.toComplex.obj E)
+  -- Step 2: base change, the projection formula and composition
+  obtain ⟨e₂⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback hP
+    (WeilSheaf.toComplex.obj E)
+  obtain ⟨e₃⟩ := nonempty_tensorLisseDerivedLowerShriekIso i' (fourierKernel ψ)
+    (isLisse_fourierKernel ψ) ((WeilComplex.upperStar q).obj (WeilSheaf.toComplex.obj E))
+  obtain ⟨eC⟩ := nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) i'
+    (affinePlane.snd k₀) π hπ
+  let L : WeilSheaf k₀ l X' := (WeilSheaf.upperStar i').obj (fourierKernel ψ)
+  have hL : L.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ)
+  let E' : WeilSheaf k₀ l X' := (WeilSheaf.upperStar q).obj E
+  let G : WeilSheaf k₀ l X' := L.tensorObj E' hL
+  let e₅ : (WeilComplex.upperStar q).obj (WeilSheaf.toComplex.obj E) ≅
+      WeilSheaf.toComplex.obj E' :=
+    (toComplexCompUpperStarIso q).app _
+  let Kπ := (derivedLowerShriek k₀ l π).obj (WeilSheaf.toComplex.obj G)
+  let e : (fourierTransform ψ).obj K ≅ Kπ⟦(1 : ℤ)⟧ :=
+    (shiftFunctor _ (1 : ℤ)).mapIso
+      ((derivedLowerShriek k₀ l (affinePlane.snd k₀)).mapIso
+          ((tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ)).mapIso e₂ ≪≫ e₃) ≪≫
+        (eC.app _).symm ≪≫
+        (derivedLowerShriek k₀ l π).mapIso
+          ((tensorLisse L hL).mapIso e₅ ≪≫ tensorLisseObjToComplexIso L hL E'))
+  -- Step 3: `Rπ_! G` is the sheaf `π_* G` in degree zero
+  have hneg (r : ℤ) (hr : r < 0) : IsZero ((homologySheaf r).obj Kπ) :=
+    isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg π G hr
+  have hpos (r : ℕ) (hr : 0 < r) : IsZero ((homologySheaf r).obj Kπ) :=
+    isZero_higherLowerShriek_of_quasiFinite π r hr G
+  obtain ⟨eP⟩ := nonempty_derivedLowerShriekIsoDerivedLowerStar (l := l) π
+    (WeilSheaf.toComplex.obj G)
+  let e₀ : (homologySheaf 0).obj Kπ ≅ (WeilSheaf.lowerStar π).obj G :=
+    (homologySheaf 0).mapIso eP ≪≫ homologySheafZeroDerivedLowerStarIso π G
+  have hFT (a : ℤ) (ha : a ≠ -1) :
+      IsZero ((homologySheaf a).obj ((fourierTransform ψ).obj K)) := by
+    refine IsZero.of_iso ?_ ((homologySheaf a).mapIso e ≪≫ homologySheafShiftIso Kπ 1 a (1 + a) rfl)
+    rcases lt_or_gt_of_ne (show 1 + a ≠ 0 by omega) with h | h
+    · exact hneg _ h
+    · obtain ⟨n, hn⟩ := Int.eq_ofNat_of_zero_le h.le
+      rw [hn]
+      exact hpos n (by omega)
+  obtain ⟨eF⟩ := nonempty_iso_toShiftedComplex _ hFT
+  exact ⟨eF ≪≫ WeilSheaf.toShiftedComplex.mapIso ((homologySheaf (-1)).mapIso e ≪≫
+    homologySheafShiftIso Kπ 1 (-1) 0 rfl ≪≫ e₀)⟩
+
 /-- **The transform of a punctual sheaf, explicitly** (Steps 1–3 of
 `prop-fd-zero-extension-comparison`). Let `F` be a Weil sheaf on the affine line vanishing on a
 dense open `U₀` with closed complement `i : Z₀ ↪ 𝔸¹`, and let `X'` be the base change of `i` along
@@ -149,50 +223,10 @@ theorem nonempty_iso_fourierTransform_toComplex_of_isPullback
   obtain ⟨eId⟩ := nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l) (affineLine k₀)
   let e₁ : K ≅ (derivedLowerShriek k₀ l i).obj ((WeilComplex.upperStar i).obj K) :=
     (eId.app K).symm ≪≫ asIso β
-  -- Step 2: base change, the projection formula and composition
-  obtain ⟨e₂⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback hP
-    ((WeilComplex.upperStar i).obj K)
-  obtain ⟨e₃⟩ := nonempty_tensorLisseDerivedLowerShriekIso i' (fourierKernel ψ)
-    (isLisse_fourierKernel ψ) ((WeilComplex.upperStar q).obj ((WeilComplex.upperStar i).obj K))
-  obtain ⟨eC⟩ := nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) i'
-    (affinePlane.snd k₀) π hπ
-  let L : WeilSheaf k₀ l X' := (WeilSheaf.upperStar i').obj (fourierKernel ψ)
-  have hL : L.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ)
-  let E : WeilSheaf k₀ l X' := (WeilSheaf.upperStar q).obj ((WeilSheaf.upperStar i).obj F)
-  let G : WeilSheaf k₀ l X' := L.tensorObj E hL
-  let e₅ : (WeilComplex.upperStar q).obj ((WeilComplex.upperStar i).obj K) ≅
-      WeilSheaf.toComplex.obj E :=
-    (WeilComplex.upperStar q).mapIso ((toComplexCompUpperStarIso i).app F) ≪≫
-      (toComplexCompUpperStarIso q).app _
-  let Kπ := (derivedLowerShriek k₀ l π).obj (WeilSheaf.toComplex.obj G)
-  let e : (fourierTransform ψ).obj K ≅ Kπ⟦(1 : ℤ)⟧ :=
-    (shiftFunctor _ (1 : ℤ)).mapIso
-      ((derivedLowerShriek k₀ l (affinePlane.snd k₀)).mapIso
-          ((tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ)).mapIso
-            ((WeilComplex.upperStar (affinePlane.fst k₀)).mapIso e₁ ≪≫ e₂) ≪≫ e₃) ≪≫
-        (eC.app _).symm ≪≫
-        (derivedLowerShriek k₀ l π).mapIso
-          ((tensorLisse L hL).mapIso e₅ ≪≫ tensorLisseObjToComplexIso L hL E))
-  -- Step 3: `Rπ_! G` is the sheaf `π_* G` in degree zero
-  have hneg (r : ℤ) (hr : r < 0) : IsZero ((homologySheaf r).obj Kπ) :=
-    isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg π G hr
-  have hpos (r : ℕ) (hr : 0 < r) : IsZero ((homologySheaf r).obj Kπ) :=
-    isZero_higherLowerShriek_of_quasiFinite π r hr G
-  obtain ⟨eP⟩ := nonempty_derivedLowerShriekIsoDerivedLowerStar (l := l) π
-    (WeilSheaf.toComplex.obj G)
-  let e₀ : (homologySheaf 0).obj Kπ ≅ (WeilSheaf.lowerStar π).obj G :=
-    (homologySheaf 0).mapIso eP ≪≫ homologySheafZeroDerivedLowerStarIso π G
-  have hFT (a : ℤ) (ha : a ≠ -1) :
-      IsZero ((homologySheaf a).obj ((fourierTransform ψ).obj K)) := by
-    refine IsZero.of_iso ?_ ((homologySheaf a).mapIso e ≪≫ homologySheafShiftIso Kπ 1 a (1 + a) rfl)
-    rcases lt_or_gt_of_ne (show 1 + a ≠ 0 by omega) with h | h
-    · exact hneg _ h
-    · obtain ⟨n, hn⟩ := Int.eq_ofNat_of_zero_le h.le
-      rw [hn]
-      exact hpos n (by omega)
-  obtain ⟨eF⟩ := nonempty_iso_toShiftedComplex _ hFT
-  exact ⟨eF ≪≫ WeilSheaf.toShiftedComplex.mapIso ((homologySheaf (-1)).mapIso e ≪≫
-    homologySheafShiftIso Kπ 1 (-1) 0 rfl ≪≫ e₀)⟩
+  exact ⟨(fourierTransform ψ).mapIso (e₁ ≪≫ (derivedLowerShriek k₀ l i).mapIso
+      ((toComplexCompUpperStarIso i).app F)) ≪≫
+    (nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback ψ i q i' π hπ hP
+      ((WeilSheaf.upperStar i).obj F)).some⟩
 
 /-- **The transform of a punctual sheaf** (Steps 1–3 of `prop-fd-zero-extension-comparison`).
 Let `F` be a Weil sheaf on the affine line vanishing on a dense open `U₀`. Then

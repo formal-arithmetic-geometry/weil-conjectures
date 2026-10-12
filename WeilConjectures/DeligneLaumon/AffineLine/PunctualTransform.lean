@@ -143,6 +143,114 @@ namespace WeilSheaf
 
 variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
+/-- **The inverse transform of a punctual sheaf, geometrically, explicitly** (blueprint
+`prop-a1-fourier-middle-extension`, Step 2). In the situation of
+`AlgebraicGeometry.WeilSheaf.exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv`, the
+geometric sheaf underlying `π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E)` is a finite direct sum
+`⨁ₖ ℒ_{ψ(-ξₖ x)}^{mₖ}` over the geometric points `tₖ` of `Z`, where `ξₖ` is the coordinate of
+the image of `tₖ` in `𝔸¹`. -/
+theorem exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv
+    (ψ : AddChar k₀ (PadicAlgCl l)) {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+    [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [X'.Over (Spec (CommRingCat.of k₀))]
+    (i : Z ⟶ affineLine k₀) [i.IsOver (Spec (CommRingCat.of k₀))]
+    (q : X' ⟶ Z) [q.IsOver (Spec (CommRingCat.of k₀))]
+    (i' : X' ⟶ affinePlane k₀) [i'.IsOver (Spec (CommRingCat.of k₀))]
+    (π : X' ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact π]
+    [QuasiSeparated π] [LocallyOfFiniteType π]
+    (hπ : i' ≫ affinePlane.snd k₀ = π) (hw : i' ≫ affinePlane.fst k₀ = q ≫ i)
+    (hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    (E : WeilSheaf k₀ l Z) :
+    ∃ (n : ℕ) (t : Fin n → (Spec (.of (AlgebraicClosure k₀)) ⟶
+        (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)) (m : Fin n → ℕ),
+      (∀ k, t k ≫ (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure = 𝟙 _) ∧
+      Nonempty (((WeilSheaf.lowerStar π).obj
+        (((WeilSheaf.upperStar i').obj (fourierKernel ψ⁻¹)).tensorObj
+          ((WeilSheaf.upperStar q).obj E)
+          (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹)))).obj.carrier ≅
+        ⨁ fun k ↦ ⨁ fun _ : Fin (m k) ↦ (affineLine.geometricSMul k₀ (-affineLine.coordOfPoint
+          (t k ≫ (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ i)))^*ᵃ[l].obj
+            (artinSchreier ψ 1).obj.carrier) := by
+  subst hπ
+  obtain ⟨n, t, ht, hiso⟩ :=
+    exists_isIso_sigmaDesc_geometricFiber_of_isFinite (Z ↘ Spec (CommRingCat.of k₀))
+  have hπS : (i' ≫ affinePlane.snd k₀) ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀) =
+      X' ↘ Spec (CommRingCat.of k₀) := comp_over _ _
+  have hqS : q ≫ Z ↘ Spec (CommRingCat.of k₀) = X' ↘ Spec (CommRingCat.of k₀) := hP.w.trans hπS
+  have : IsFinite (i' ≫ affinePlane.snd k₀) := MorphismProperty.of_isPullback hP inferInstance
+  have hP' : IsPullback (Scheme.Hom.geometricFiberMap q hqS)
+      (Scheme.Hom.geometricFiberMap (i' ≫ affinePlane.snd k₀) hπS)
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure := by
+    refine IsPullback.of_right (h₁₂ := (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)
+      (h₂₂ := (Scheme.specAlgebraicClosure k₀).hom) (v₁₃ := Z ↘ Spec (CommRingCat.of k₀))
+      ?_ (by simp) (IsPullback.of_hasPullback _ _)
+    rw [Scheme.Hom.geometricFiberMap_comp_geometricFiberProj,
+      ← Scheme.Hom.geometricFiber_condition]
+    exact (Scheme.Hom.isPullback_geometricFiberMap _ hπS).flip.paste_horiz hP
+  have := FinitaryPreExtensive.isIso_sigmaDesc_isPullback_lift hP' t ht
+  set σ : Fin n → ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶
+      (X' ↘ Spec (CommRingCat.of k₀)).geometricFiber) := fun k ↦
+    hP'.lift ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ≫ t k)
+      (𝟙 _) (by simp [ht])
+  set H := ((WeilSheaf.upperStar i').obj (fourierKernel ψ⁻¹)).tensorObj
+    ((WeilSheaf.upperStar q).obj E)
+    (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹))
+  obtain ⟨e₁⟩ := ProEtale.nonempty_adicLowerStar_iso_biproduct_of_isIso_sigmaDesc σ
+    (Scheme.Hom.geometricFiberMap _ hπS) (fun k ↦ hP'.lift_snd _ _ _) H.obj.carrier
+  have hE : ProEtale.IsAdicLisseSheaf E.obj.carrier := isLisse_of_isFinite_of_isReduced E
+  set U₁ := ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber
+  have hk (k : Fin n) : ∃ m : ℕ,
+      Nonempty ((σ k)^*ᵃ[l].obj H.obj.carrier ≅ ⨁ fun _ : Fin m ↦
+        (affineLine.geometricSMul k₀ (-affineLine.coordOfPoint
+          (t k ≫ (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ i)))^*ᵃ[l].obj
+            (artinSchreier ψ 1).obj.carrier) := by
+    have : IsOpenImmersion (σ k) := ProEtale.isOpenImmersion_of_isIso_sigmaDesc σ k
+    have hsq : σ k ≫ Scheme.Hom.geometricFiberMap q hqS =
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ≫ t k :=
+      hP'.lift_fst _ _ _
+    have hmul := geometricFiberMap_mul_eq_geometricSMul i q i' hw (t k) (σ k) hsq
+      (hP'.lift_snd _ _ _)
+    set b := affineLine.coordOfPoint
+      (t k ≫ (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ i)
+    have hcomp : (σ k ≫ Scheme.Hom.geometricFiberMap i' (comp_over i' _)) ≫
+        Scheme.Hom.geometricFiberMap (affinePlane.mul k₀) (comp_over (affinePlane.mul k₀) _) =
+          affineLine.geometricSMul k₀ b := by
+      rw [Category.assoc, ← Scheme.Hom.geometricFiberMap_comp]
+      exact hmul
+    let ig := Scheme.Hom.geometricFiberMap i' (comp_over i' (Spec (CommRingCat.of k₀)))
+    let mg := Scheme.Hom.geometricFiberMap (affinePlane.mul k₀)
+      (comp_over (affinePlane.mul k₀) (Spec (CommRingCat.of k₀)))
+    let A := (artinSchreier ψ⁻¹ 1).obj.carrier
+    let Lc := (ig)^*ᵃ[l].obj ((mg)^*ᵃ[l].obj A)
+    let eL : (σ k)^*ᵃ[l].obj Lc ≅ (affineLine.geometricSMul k₀ b)^*ᵃ[l].obj A :=
+      ((ProEtale.adicUpperStarComp l (σ k) ig).app ((mg)^*ᵃ[l].obj A)).symm ≪≫
+        ((ProEtale.adicUpperStarComp l (σ k ≫ ig) mg).app A).symm ≪≫
+        (ProEtale.adicUpperStarCongr l hcomp).app A
+    let eD : (σ k)^*ᵃ[l].obj ((ProEtale.AdicSheaf.ihom Lc).obj (ProEtale.AdicSheaf.unit l _)) ≅
+        (ProEtale.AdicSheaf.ihom ((affineLine.geometricSMul k₀ b)^*ᵃ[l].obj
+          (artinSchreier ψ⁻¹ 1).obj.carrier)).obj U₁ :=
+      (ProEtale.adicUpperStarIhomIso l (σ k) Lc).app _ ≪≫
+        (ProEtale.AdicSheaf.ihom _).mapIso (ProEtale.adicUpperStarUnitIso l (σ k)) ≪≫
+        (Mod.ihomMapIso eL.symm).app U₁
+    obtain ⟨m, ⟨eV⟩⟩ := (hE.upperStar (t k)).exists_iso_biproduct_of_isAlgClosed
+    let toAC := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+    let qg := Scheme.Hom.geometricFiberMap q hqS
+    let Ec := E.obj.carrier
+    let eE : (σ k)^*ᵃ[l].obj ((qg)^*ᵃ[l].obj Ec) ≅ ⨁ fun _ : Fin m ↦ U₁ :=
+      ((ProEtale.adicUpperStarComp l (σ k) qg).app Ec).symm ≪≫
+        (ProEtale.adicUpperStarCongr l hsq).app Ec ≪≫
+        (ProEtale.adicUpperStarComp l toAC (t k)).app Ec ≪≫ (toAC)^*ᵃ[l].mapIso eV ≪≫
+        (toAC)^*ᵃ[l].mapBiproduct _ ≪≫
+        biproduct.mapIso fun _ ↦ ProEtale.adicUpperStarUnitIso l toAC
+    obtain ⟨eA⟩ :=
+      nonempty_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv (l := l) ψ b
+    exact ⟨m, ⟨(ProEtale.adicUpperStarIhomIso l (σ k) _).app _ ≪≫
+      (ProEtale.AdicSheaf.ihom _).mapIso eE ≪≫ (ProEtale.AdicSheaf.ihom _).mapBiproduct _ ≪≫
+      biproduct.mapIso fun _ ↦ (Mod.ihomMapIso eD.symm).app U₁ ≪≫ eA⟩⟩
+  choose m e using hk
+  exact ⟨n, t, m, ht, ⟨e₁ ≪≫ biproduct.mapIso fun k ↦ (e k).some⟩⟩
+
 /-- **The inverse transform of a punctual sheaf, geometrically** (blueprint
 `prop-a1-fourier-middle-extension`, Step 2). Let `i : Z₀ ⟶ 𝔸¹` be a finite reduced `k₀`-scheme
 over the line and `X' = Z₀ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and `π : X' ⟶ 𝔸¹` and

@@ -76,19 +76,20 @@ geometric sheaf `ℒ_{ψ⁻¹(b x)}` on `𝔸¹_{k̄}` is a geometric linear cha
 for `a = -b`. For `b = 0` both are the constant sheaf; for `b ≠ 0` the multiplication by `b` is
 an automorphism, along which pullback commutes with internal homs, and the double dual of
 `ℒ_{ψ⁻¹(x)}` is `ℒ_{ψ(-x)}`. -/
-theorem exists_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv
+theorem nonempty_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv
     (ψ : AddChar k₀ (PadicAlgCl l)) (b : AlgebraicClosure k₀) :
-    ∃ a : AlgebraicClosure k₀, Nonempty
+    Nonempty
       ((ProEtale.AdicSheaf.ihom ((ProEtale.AdicSheaf.ihom
           ((affineLine.geometricSMul k₀ b)^*ᵃ[l].obj (artinSchreier ψ⁻¹ 1).obj.carrier)).obj
             (ProEtale.AdicSheaf.unit l _))).obj (ProEtale.AdicSheaf.unit l _) ≅
-        (affineLine.geometricSMul k₀ a)^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier) := by
+        (affineLine.geometricSMul k₀ (-b))^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier) := by
   rcases eq_or_ne b 0 with rfl | hb
   · obtain ⟨e₁⟩ := WeilSheaf.nonempty_iso_upperStar_geometricSMul_zero_artinSchreier (l := l)
       ψ⁻¹ 1
     obtain ⟨e₂⟩ := WeilSheaf.nonempty_iso_upperStar_geometricSMul_zero_artinSchreier (l := l)
       ψ 1
-    refine ⟨0, ⟨?_⟩⟩
+    rw [neg_zero]
+    refine ⟨?_⟩
     set U := ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber
     have e₃ : (ProEtale.AdicSheaf.ihom ((affineLine.geometricSMul k₀ 0)^*ᵃ[l].obj
         (artinSchreier ψ⁻¹ 1).obj.carrier)).obj U ≅ U :=
@@ -112,9 +113,21 @@ theorem exists_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv
       rw [affineLine.geometricSMul_comp_geometricFiberMap_smul,
         affineLine.geometricSMul_comp_geometricFiberMap_smul]
       simp
-    refine ⟨-b, ⟨?_⟩⟩
+    refine ⟨?_⟩
     exact (Mod.ihomMapIso (eD _)).symm.app U ≪≫ eD _ ≪≫
       (g)^*ᵃ[l].mapIso ((WeilSheaf.carrierFunctor k₀ l _).mapIso eW) ≪≫
       (ProEtale.adicUpperStarCompIso l hs).app _
+
+/-- The double dual of the geometric sheaf `ℒ_{ψ⁻¹(b x)}` on `𝔸¹_{k̄}` is a geometric linear
+character `ℒ_{ψ(a x)}`
+(`AlgebraicGeometry.nonempty_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv`). -/
+theorem exists_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv
+    (ψ : AddChar k₀ (PadicAlgCl l)) (b : AlgebraicClosure k₀) :
+    ∃ a : AlgebraicClosure k₀, Nonempty
+      ((ProEtale.AdicSheaf.ihom ((ProEtale.AdicSheaf.ihom
+          ((affineLine.geometricSMul k₀ b)^*ᵃ[l].obj (artinSchreier ψ⁻¹ 1).obj.carrier)).obj
+            (ProEtale.AdicSheaf.unit l _))).obj (ProEtale.AdicSheaf.unit l _) ≅
+        (affineLine.geometricSMul k₀ a)^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier) :=
+  ⟨-b, nonempty_iso_ihom_ihom_upperStar_geometricSMul_artinSchreier_inv ψ b⟩
 
 end AlgebraicGeometry
