@@ -35,64 +35,62 @@
  ],
  "proof": [
   {
-   "text": "*The choices exist.* $\\Mod(\\mathcal O_X)$ and $\\Mod(\\mathcal O_Y)$ have enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]. Applying [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ to the complex $\\mathcal F[0]$ ($\\mathcal F$ in degree $0$) gives a complex $\\mathcal I^\\bullet$ of injectives with $\\mathcal I^n=0$ for $n<0$ and a quasi-isomorphism $\\mathcal F[0]\\to\\mathcal I^\\bullet$, i.e. $0\\to\\mathcal F\\to\\mathcal I^0\\to\\mathcal I^1\\to\\cdots$ exact: an injective resolution [def-sp-injective-resolutions]; likewise $\\mathcal G\\to\\mathcal J^\\bullet$. The direct image $h_*$ is an additive functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_Y)$ [def-pc-module-pullback], so $h_*\\mathcal I^\\bullet$ (termwise, $h_*(d)$ as differentials, $h_*(d)h_*(d)=h_*(dd)=0$) is a cochain complex with $h_*\\mathcal I^n=0$ for $n<0$, and [lem-weil-pbc-complex-injective-resolution-mono] with $a=0$ gives $\\lambda:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$, a quasi-isomorphism into a complex of injectives vanishing in negative degrees.",
+   "text": "Choose I = injectiveResolution F and J = injectiveResolution G using enoughInjectives for X.Modules and Y.Modules. For A = h_*I, extend A by zero along embeddingUpNat. Apply Mathlib CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective with lower bound zero. Its target L is strictly supported in nonnegative degrees. The canonical projection to truncGE along embeddingUpNat is therefore an isomorphism. Fullness of extendFunctor gives a natural-indexed map A -> L.truncGE' whose extension is the composite replacement. quasiIso_extendMap_iff reflects its quasi-isomorphism, and the component isomorphisms of restrictionToTruncGE' transfer injectivity. This is the proved private helper nat_complex_injective_resolution; no degreewise monomorphism is needed by ModuleCohomologyFMapData.",
    "uses": [
     "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-complex-injective-resolution-mono",
-    "def-sp-injective-resolutions",
-    "def-pc-module-pullback"
+    "def-sp-injective-resolutions"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'Choose a resolution $\\mathcal F\\to\\mathcal I^\\bullet$ by a complex of injective $\\mathcal O_X$-modules. Choose resolutions $\\mathcal G\\to\\mathcal J^\\bullet$ and $f_*\\mathcal I^\\bullet\\to(\\mathcal J')^\\bullet$ by complexes of injective $\\mathcal O_Y$-modules'; existence by Injectives Lemma 01DI and Derived Categories Lemma 013K (3)"
+    "document": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "place": "CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective; Embedding.TruncGE and Embedding.ExtendHomology for the change of indices"
    }
   },
   {
-   "text": "*$\\beta$ exists and is unique up to homotopy.* Let $K^\\bullet=\\mathcal G[0]$ and $\\alpha:K^\\bullet\\to\\mathcal J^\\bullet$ the augmentation ($\\alpha^0=s_{\\mathcal G}$). It is a quasi-isomorphism (the augmented complex is exact) and a monomorphism in every degree ($s_{\\mathcal G}$ is injective by exactness at $\\mathcal G$, and $\\alpha^n:0\\to\\mathcal J^n$ for $n\\ne0$). Let $\\gamma:K^\\bullet\\to\\mathcal J'^\\bullet$ be the morphism of complexes with $\\gamma^0=\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi$ (a morphism of complexes since $d_{\\mathcal J'}\\lambda^0h_*(s_{\\mathcal F})=\\lambda^1h_*(d_{\\mathcal I}s_{\\mathcal F})=0$). By [lem-weil-pbc-lift-along-injective-quasi-iso] there is $\\beta:\\mathcal J^\\bullet\\to\\mathcal J'^\\bullet$ with $\\beta\\circ\\alpha=\\gamma$, i.e. $\\beta^0\\circ s_{\\mathcal G}=\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi$. Two such $\\beta_1,\\beta_2$ satisfy $\\beta_1\\alpha=\\beta_2\\alpha$, so they are chain-homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] ($\\mathcal J'^\\bullet$ bounded below of injectives); hence $H^p(\\Gamma(Y,\\beta))$ does not depend on the choice of $\\beta$ ($\\Gamma(Y,-)$ is additive and carries homotopies to homotopies).",
+   "text": "Form gamma = phi >> h_*(I.augmentation in degree zero) >> lambda in degree zero. The chain-map equation for lambda and the augmentation equation for I show gamma is a cycle. Extend gamma along the monomorphic augmentation J.ι.f 0 using Injective.factorThru. The resulting degree-zero map composed with the differential kills the augmentation. J.exact₀.descToInjective supplies the degree-one map. Inductively J.exact_succ.descToInjective supplies each next map; the preceding chain equation and d squared equal zero verify its compatibility. CochainComplex.mkHom packages the maps as beta. Its degree-zero component gives exactly the required augmentation equation. This is lift_to_nat_injectives, a specialization of the augmentation-lifting argument, proved directly rather than using the general lift or homotopy uniqueness theorem.",
    "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+    "def-sp-injective-resolutions"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'By Derived Categories, Lemma 013P there exists a map of complexes $\\beta$ such that the diagram (equation-choice) commutes'; uniqueness up to homotopy: literature/stacks-project/derived.tex Lemma 013S (lemma-morphisms-equal-up-to-homotopy)"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 013P (lemma-morphisms-lift), specialized to the augmentation of an injective resolution"
    }
   },
   {
-   "text": "*$\\mu$ is a morphism of complexes.* For each $n$, $\\Gamma(Y,h_*\\mathcal I^n)=(h_*\\mathcal I^n)(Y)=\\mathcal I^n(h^{-1}(Y))=\\mathcal I^n(X)=\\Gamma(X,\\mathcal I^n)$ by the definition of the direct image [def-pc-module-pullback], and the differential $\\Gamma(Y,h_*d^n)=(h_*d^n)_Y=d^n_X$ is that of $\\Gamma(X,\\mathcal I^\\bullet)$; so $\\mu^n=\\lambda^n_Y$ defines a morphism of complexes $\\Gamma(X,\\mathcal I^\\bullet)\\to\\Gamma(Y,\\mathcal J'^\\bullet)$, $\\Gamma(Y,-)$ applied to the morphism of complexes $\\lambda$.",
+   "text": "For every term I^n use the presheaf.mapIso of the equality h inverse-image of the whole Y equals the whole X. These component isomorphisms commute with the differentials by naturality of the underlying presheaf morphism. HomologicalComplex.Hom.isoOfComponents makes the canonical complex isomorphism a, with its inverse components definitionally the specified restriction maps. This is pushforward_sections_iso.",
    "uses": [
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): the equality $\\Gamma(Y,f_*\\mathcal I^\\bullet)=\\Gamma(X,\\mathcal I^\\bullet)$ in the second diagram; Remark 01F0 (remark-elucidate-lemma): 'the trivial observation that $\\Gamma(X,\\mathcal I^\\bullet)=\\Gamma(Y,f_*\\mathcal I^\\bullet)$'"
+    "place": "Remark 01FB (remark-explain-arrow), equality of global sections of the direct image and of the original complex"
    }
   },
   {
-   "text": "*$\\mu$ is a quasi-isomorphism, so $\\varphi^*$ is defined.* By [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso] (applied to $\\mathcal I^\\bullet$, $\\mathcal J'^\\bullet$, $\\lambda$) $\\mu=\\Gamma(Y,\\lambda)$ is a quasi-isomorphism, so $H^p(\\mu):H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))\\to H^p(\\Gamma(Y,\\mathcal J'^\\bullet))$ is a bijective homomorphism of abelian groups and has an inverse; with Step 2, $\\varphi^*=H^p(\\mu)^{-1}\\circ H^p(\\Gamma(Y,\\beta))$ is a well-defined homomorphism $H^p(\\Gamma(Y,\\mathcal J^\\bullet))=H^p(Y,\\mathcal G)\\to H^p(X,\\mathcal F)$ for the chosen resolutions $\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet,\\lambda$.",
+   "text": "Extend I and K by zero to integer indices. Compose mapExtendIso for h_* with extendMap lambda to obtain an integer-indexed quasi-isomorphism h_*(extend I) -> extend K. Apply quasiIso_globalSections_pushforward_injectives: all terms of the extended complexes are injective, and negative terms are zero. Application of sections to mapExtendIso is an isomorphism, so remove it from the composite. The natural isomorphism embeddingUpNat.mapExtendFunctorNatIso for the additive abelian-group-valued global-sections functor identifies the remaining map with extension of the natural-indexed sections map. Transfer quasi-isomorphism by Arrow.isoMk and quasiIso_of_arrow_mk_iso, then reflect by quasiIso_extendMap_iff. Thus Γ(Y,lambda) induces invertible homology maps. The isomorphism a also induces invertible homology maps, and Functor.map_comp proves invertibility of the composite. This is nat_quasiIso_globalSections_pushforward_injectives followed by the final record construction.",
    "uses": [
     "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'The vertical arrow is a quasi-isomorphism by Lemma 01EZ ... The arrow is given by the composition of the horizontal map by the inverse of the vertical map'; Equation 01FA (equation-functorial)"
+    "place": "Remark 01FB and Lemma 01EZ; WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap.mapExtendFunctorNatIso provides the reindexing comparison"
    }
   },
   {
-   "text": "*The named $h$-maps are morphisms of $\\mathcal O_Y$-modules.* (a) The unit $\\eta_{\\mathcal G}:\\mathcal G\\to h_*h^*\\mathcal G$ of the adjunction $h^*\\dashv h_*$ [def-pc-module-pullback] is a morphism of $\\mathcal O_Y$-modules. (b) For $U\\subseteq Y$ open, $(j_*(\\mathcal G|_U))(V)=(\\mathcal G|_U)(j^{-1}V)=\\mathcal G(V\\cap U)$ [lem-weil-pbc-module-restriction-open-immersion-colimits], [def-pc-module-pullback]; the restriction maps $\\rho_V:\\mathcal G(V)\\to\\mathcal G(V\\cap U)$ are $\\mathcal O_Y(V)$-linear ($\\mathcal O_Y(V)$ acting on $\\mathcal G(V\\cap U)$ through $\\mathcal O_Y(V)\\to\\mathcal O_Y(V\\cap U)$, the module axiom of [def-weil-sheaf-of-modules-category]) and commute with restriction along $V'\\subseteq V$ (both composites are the restriction $\\mathcal G(V)\\to\\mathcal G(V'\\cap U)$), so $\\rho_{\\mathcal G}$ is a morphism of $\\mathcal O_Y$-modules. (c) $\\mathrm{id}_{h_*\\mathcal F}$ is one. So the three names are instances of the construction.",
+   "text": "Package I, J, K, lambda, beta, a and the homology-isomorphism proofs into ModuleCohomologyFMapData. Its map remains the horizontal homology map followed by the inverse vertical homology map, with the existing resolution comparison isomorphisms. Pullback, restriction and the edge map retain their original definitions, using the tensor-pullback unit, the open-restriction unit and the identity respectively.",
    "uses": [
     "def-pc-module-pullback",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality), the paragraph before Equation 01F9: an $f$-map is a map $\\mathcal G\\to f_*\\mathcal F$ or equivalently $f^*\\mathcal G\\to\\mathcal F$; literature/stacks-project/sheaves.tex Lemma 00A0 (lemma-j-pullback) and Definition 00A1 (definition-restriction) for $\\mathcal G|_U$"
+    "place": "Section 01F7, Equation 01FA, Remark 01FB"
    }
   }
  ],
@@ -100,9 +98,7 @@
   "def-pc-module-pullback",
   "def-sp-injective-resolutions",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-complex-injective-resolution-mono",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-pc-module-pullback-adjunction",
   "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-scheme-modules-enough-injectives"
@@ -110,7 +106,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8, Equations 01F9/01FA and Remark 01FB (remark-explain-arrow), whose construction the definition and Steps 1-4 follow; Step 5 (the named special cases) written out by the agent"
+  "place": "Remark 01FB and Lemma 01EZ, implemented by R1 using Mathlib injective replacement, the direct inductive augmentation lift of Derived Categories 013P, and extension-by-zero comparisons. All glue helpers are proved; the sections quasi-isomorphism is supplied by its existing named dependency, whose compiled transitive closure still includes sorryAx."
  },
  "mathlib_searches": [
   {
@@ -218,5 +214,15 @@
   "group": "G1",
   "result": "fix",
   "note": "h:X⟶Y, G/F SheafOfModules over ringCatSheaf, φ:G⟶h_*F, p:ℕ; I,J InjectiveResolution, K ℕ-complex of injectives, λ:h_*I⟶K QuasiIso, β with β⁰s_G=λ⁰h_*(s_F)φ, a pinned to restriction along h⁻¹⊤=⊤; φ*=H(μ)⁻¹∘H(Γβ) on RingedSpace.moduleCohomology; (a) unit of choose exists_tensorPullbackAdjunction, (b) restrictAdjunction U.ι unit, (c) 𝟙 h_*F; fix: let/letI removed, formula as ModuleCohomologyFMapData.map"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T151913-L-2290293",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
