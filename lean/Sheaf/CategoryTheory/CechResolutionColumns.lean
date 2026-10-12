@@ -5,6 +5,8 @@ Released under Apache 2.0 license.
 module
 
 public import Sheaf.CategoryTheory.CechResolutionDoubleComplex
+import Sheaf.CategoryTheory.CechComplexHomology
+import Sheaf.CategoryTheory.InjectiveResolutionCohomologyPresheaf
 
 /-!
 # Column cohomology of the Čech resolution double complex
@@ -50,6 +52,13 @@ theorem Sheaf.cechResolutionDoubleComplex_columns
         (ComplexShape.up ℕ)).obj (Sheaf.cechResolutionDoubleComplex I X π) ≅
       (cechComplexFunctor fun i ↦ Over.mk (π i)).obj
         ((Over.forget X).op ⋙ F.cohomologyPresheaf q)) := by
-  sorry
+  let A := (sheafToPresheaf J AddCommGrpCat.{v} ⋙
+    (Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op)
+  let R := (A.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+  obtain ⟨e⟩ :=
+    cechComplexFunctor_homology (fun i ↦ Over.mk (π i)) R q
+  obtain ⟨h⟩ := Sheaf.injectiveResolution_cohomologyPresheaf I q
+  refine ⟨e ≪≫ (cechComplexFunctor fun i ↦ Over.mk (π i)).mapIso ?_⟩
+  exact ((Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op).mapIso h
 
 end CategoryTheory
