@@ -9273,3 +9273,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/T1/Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261012T194141-L-465082 (interface); batch 20261012T194054; modules 2; new nodes 1)
 - 19:41 L: merged deliver/T1/Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality (stage 3; reviewer PASS; first push; landing 20261012T194141-L-465180 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/T1/Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceTransition (stage 3; reviewer PASS; first push; landing 20261012T194141-L-465286 (interface); batch 20261012T194054; modules 3; new nodes 2)
+- 19:41 L: merged deliver/T2/Sheaf.AlgebraicGeometry.KoszulRegularImmersionDerivedHom (stage 3; reviewer PASS; first push; landing 20261012T194142-L-465385 (interface); batch 20261012T194054; modules 3; new nodes 2)

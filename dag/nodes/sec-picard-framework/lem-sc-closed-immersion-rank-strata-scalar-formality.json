@@ -1,0 +1,169 @@
+{
+ "id": "lem-sc-closed-immersion-rank-strata-scalar-formality",
+ "kind": "statement",
+ "title": "Scalar derived reconstruction on disjoint closed rank supports",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme], [def-weil-closed-immersion], and choose $D(\\mathcal O_Y)$ [def-pc-derived-category]. Let $r:Z\\to\\mathbb N$ be locally constant. Write $Z_n=\\{r=n\\}$ using [def-sc-locally-ranked-exterior-complex], with inclusion $j_n:Z_n\\to Z$. For every $n\\geq0$ let $E_n$ be an arbitrary module sheaf on $Z_n$. Set $T^q=j_{q,*}E_q$ for $q\\geq0$ and $T^q=0$ for $q<0$, and let $C$ be the zero-differential complex with these terms. For any $K\\in D(\\mathcal O_Y)$ with $H^q(K)\\cong i_*T^q$ as scalar module sheaves for all $q\\in\\mathbb Z$, there is an isomorphism $K\\cong Q(i_*C)$, where direct image is applied termwise. No finite-image assumption on r, no regularity assumption on i, and no action of $i_*\\mathcal O_Z$ on K is required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, single-degree truncation in the parent step 3, made explicit by closed rank supports, exact extension by zero (Tags 08BS, 08BT), and derived coproducts (Tag 07D9)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-derived-category",
+  "def-sc-locally-ranked-exterior-complex"
+ ],
+ "proof": [
+  {
+   "text": "Each rank fiber Z_n and its complement are closed in Z. Since i is closed, V_n=Y minus i(Z minus Z_n) is open, and V_out=Y minus i(Z) is open. They cover Y, and V_m intersect V_n is contained in V_out for m≠n. Each i*T^q is supported on the closed image of its own stratum, so restriction to V_n leaves only degree n and restriction to V_out is zero. The rank supports are locally finite, even if r has infinite image.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+   }
+  },
+  {
+   "text": "Exact restriction commutes with cohomology. On V_n the object K has cohomology only in degree n, isomorphic to the restriction of i*T^n. The canonical upper and lower truncation maps identify it in the derived category with that cohomology sheaf placed in degree n. The zero-differential comparison complex restricted to V_n has the same cohomology and the same single-degree reconstruction. These operations can be carried out in standard derived categories on the opens, then transported through their representative localizations.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+   }
+  },
+  {
+   "text": "Apply exact extension by zero from V_n and use the derived shriek/restriction adjunction to obtain counit maps from these extended restrictions to K. Form their derived coproduct using termwise representatives. Homology commutes with this coproduct. In each degree and at each point of i(Z), exactly one relevant rank support contributes, and the counit is the identity under the open restriction comparison. Outside i(Z) every cohomology stalk is zero, including every summand. Hence the coproduct counit is an isomorphism on all cohomology stalks and is a derived isomorphism. Apply the same argument to Q(i*C). Compose the coproduct of the extended single-degree isomorphisms with the two counit isomorphisms. Empty Z gives zero objects and rank zero gives the degree-zero case; no finite sum of idempotents and no gluing of arbitrary derived maps is used.",
+   "uses": [
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-pc-derived-ambient-direct-sums-cofan",
+    "lem-pc-derived-ambient-direct-sums-homology",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-locally-ranked-exterior-complex",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-pc-derived-ambient-direct-sums-cofan",
+  "lem-pc-derived-ambient-direct-sums-homology",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "T2",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, single-degree truncation in the parent step 3, made explicit by closed rank supports, exact extension by zero (Tags 08BS, 08BT), and derived coproducts (Tag 07D9)"
+  },
+  "note": "Strict part of the parent calculation; the detailed rank-support assembly is written by the worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular closed immersion Ext sheaves determinant conormal, reconstruction on disjoint rank strata",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of a Koszul regular closed immersion; derived reconstruction on disjoint rank strata",
+   "results": "Differential and cotangent declarations; generic single-degree derived reconstruction; no exact match. Existing ClopenRankStrataFormality and ClosedImmersionRankedCohomologyReconstruction require finite rank image and an algebra-valued object, absent here.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsGE\", \"IsLE\"",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE and exists_iso_Q_obj_of_isGE_of_isLE: generic one-degree reconstruction, not rank-stratum assembly.",
+   "verdict": "partial match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*Hom|homology.*single|single.*homology; clopen.*formal|rank.*strata|[Hh]omology.*[Rr]econstruct; rg on lean/Sheaf and lean/WeilConjectures",
+   "results": "No Mathlib rank-stratum assembly. Library algebra-valued homology and reconstruction depend on this parent or require finite rank image; using them would give a cycle or add hypotheses. blueprint_refs search found no equivalent blueprint node.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDerivedHom",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BQZ, single-degree truncation in the parent step 3, made explicit by closed rank supports, exact extension by zero (Tags 08BS, 08BT), and derived coproducts (Tag 07D9)",
+   "via": [
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionRankStrataScalarFormality.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_rankStrata_scalar_formality",
+  "statement": "theorem closedImmersion_rankStrata_scalar_formality {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (r : LocallyConstant Z ℕ) (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules) (T : ℤ → Z.Modules) (hT : ∀ n : ℤ, T n = if 0 ≤ n then (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj (E n.toNat) else 0) (K : DerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace))) (hK : ∀ n : ℤ, Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj K ≅ (Scheme.Modules.pushforward i).obj (T n))) : Nonempty (K ≅ DerivedCategory.Q.obj (((Scheme.Modules.pushforward i).mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp))))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194142-L-465385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194142-L-465385",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

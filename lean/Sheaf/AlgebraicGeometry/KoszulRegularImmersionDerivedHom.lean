@@ -10,10 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtSheaf
+import Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormality
 
 /-!
 # Derived Hom for a Koszul-regular closed immersion
@@ -37,11 +36,18 @@ power of the dual conormal sheaf.
 Source: Stacks Project, Duality for Schemes, Tag 0BQZ, lemma-regular-immersion-ext
 (blueprint: lem-sc-koszul-regular-immersion-derived-hom).
 
-The proof uses the local finite-free Koszul model, the affine dual-Koszul
-calculation, and restriction of derived internal Hom to opens.  The local
-isomorphisms agree under localization and changes of regular generators; their
-cohomology-sheaf identifications therefore glue, and the truncation of the
-resulting object gives the displayed global isomorphism.
+Proof:
+1. Apply koszulRegularImmersion_extSheaf in every integer degree. It computes the
+   cohomology sheaves by finite free Koszul resolutions, the affine dual comparison,
+   restriction to opens, and gluing the intrinsic determinant identification.
+2. On each rank-n open take the nth exterior power of the restricted dual conormal.
+   The degree terms of locallyRankedExteriorComplex are definitionally the direct
+   images of these sheaves for nonnegative degrees and zero for negative degrees.
+3. Apply closedImmersion_rankStrata_scalar_formality to this family and the
+   degreewise cohomology isomorphisms. It assembles single-degree truncations on
+   neighborhoods isolating the closed rank supports by extension by zero and derived
+   coproducts. This allows arbitrary locally constant rank, without finite image.
+The resulting comparison complex is exactly the termwise pushforward displayed here.
 -/
 theorem koszulRegularImmersion_derivedInternalHom
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
@@ -72,6 +78,14 @@ theorem koszulRegularImmersion_derivedInternalHom
               (SheafOfModules.homObj (R := Z.sheaf)
                 ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
                 (SheafOfModules.unit Z.ringCatSheaf)) r)))) := by
-  sorry
+  let N := SheafOfModules.homObj (R := Z.sheaf)
+    ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
+    (SheafOfModules.unit Z.ringCatSheaf)
+  let E (n : ℕ) := Scheme.Modules.exteriorSheaf
+    ((Scheme.Modules.restrictFunctor (Scheme.Modules.exteriorRankOpen r n).ι).obj N) n
+  apply closedImmersion_rankStrata_scalar_formality i r E
+    (Scheme.Modules.locallyRankedExteriorTerm N r) (fun _ => rfl)
+  intro q
+  exact koszulRegularImmersion_extSheaf i hregular r hr q
 
 end AlgebraicGeometry
