@@ -23,96 +23,59 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (the inclusion $i_q$).** By the definition of $\\tau_{\\leq q}$ applied to $q$ and to $q-1$: $(\\tau_{\\leq q-1}K)^r=K^r$ for $r\\leq q-2$, $=\\Ker d^{q-1}$ for $r=q-1$, $=0$ for $r\\geq q$; and $(\\tau_{\\leq q}K)^r=K^r$ for $r\\leq q-1$, $=\\Ker d^q$ for $r=q$, $=0$ for $r>q$. Define $i_q^r$ as the identity of $K^r$ for $r\\leq q-2$, the inclusion $\\Ker d^{q-1}\\hookrightarrow K^{q-1}$ for $r=q-1$, and $0$ for $r\\geq q$. Both complexes are subcomplexes of $K$ and $i_q$ commutes with these inclusions into $K$ in every degree, so $i_q$ commutes with the differentials (they are restrictions of those of $K$): $\\tau_{\\leq q-1}K$ is a subcomplex of $\\tau_{\\leq q}K$. Each $i_q^r$ is a monomorphism of $\\mathcal A$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section Tag 0118 (section-truncations, line 3612), canonical truncation $\\tau_{\\leq n}A^\\bullet$ of a cochain complex (line 3777)"
-   }
-  },
-  {
-   "text": "**Step 2 (the complex $M_q(K)$).** Let $\\pi:K^{q-1}\\to K^{q-1}/\\Ker d^{q-1}$ be the cokernel of $\\Ker d^{q-1}\\hookrightarrow K^{q-1}$. Since $d^{q-1}$ vanishes on $\\Ker d^{q-1}$, $d^{q-1}=\\overline{d}\\circ\\pi$ for a unique $\\overline d:K^{q-1}/\\Ker d^{q-1}\\to K^q$, which is a monomorphism by [lem-weil-pbc-coimage-mono]. Since $d^q\\circ\\overline d\\circ\\pi=d^qd^{q-1}=0$ and $\\pi$ is an epimorphism, $d^q\\circ\\overline d=0$, so $\\overline d$ factors as $\\Ker d^q\\hookrightarrow K^q$ composed with a unique $\\delta:K^{q-1}/\\Ker d^{q-1}\\to\\Ker d^q$; $\\delta$ is a monomorphism because its composite with the inclusion is the monomorphism $\\overline d$. Let $M_q(K)$ be the complex with $M_q(K)^{q-1}=K^{q-1}/\\Ker d^{q-1}$, $M_q(K)^q=\\Ker d^q$, differential $\\delta$ from degree $q-1$ to $q$, and $0$ in all other degrees and differentials; it is a complex since at most one differential is nonzero, so all composites of two differentials are $0$. Moreover the image of $\\delta$ in $\\Ker d^q$ is $\\Im d^{q-1}$ (viewed in $\\Ker d^q$): $\\pi$ is an epimorphism, so $\\delta$ and $\\delta\\circ\\pi$ (the corestriction of $d^{q-1}$ to $\\Ker d^q$) have the same image.",
-   "uses": [
-    "lem-weil-pbc-coimage-mono",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0109 (definition-abelian-category, line 608: Coim(f) -> Im(f) is an isomorphism); Tag 0118 (section-truncations)"
-   }
-  },
-  {
-   "text": "**Step 3 (the morphism $p_q$).** Define $p_q:\\tau_{\\leq q}K\\to M_q(K)$ by $p_q^{q-1}=\\pi$, $p_q^q=\\mathrm{id}_{\\Ker d^q}$, and $p_q^r=0$ for $r\\neq q-1,q$. It is a morphism of complexes: the only square whose two paths are not both through a zero object is the one from degree $q-1$ to degree $q$, where the differential of $\\tau_{\\leq q}K$ is the corestriction $d^{q-1}:K^{q-1}\\to\\Ker d^q$, and $\\delta\\circ\\pi$ equals that corestriction by Step 2, i.e. $\\delta\\circ p_q^{q-1}=p_q^q\\circ d^{q-1}$. Also $p_q\\circ i_q=0$: in degree $q-1$ it is $\\pi\\circ(\\Ker d^{q-1}\\hookrightarrow K^{q-1})=0$, in degree $q$ the source $(\\tau_{\\leq q-1}K)^q$ is $0$, in degrees $\\leq q-2$ and $>q$ the target is $0$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (section-truncations); Tag 010V (section-complexes, morphisms of complexes)"
-   }
-  },
-  {
-   "text": "**Step 4 (clause (a): short exactness and the cokernel).** In each degree $r$ the sequence $0\\to(\\tau_{\\leq q-1}K)^r\\xrightarrow{i_q^r}(\\tau_{\\leq q}K)^r\\xrightarrow{p_q^r}M_q(K)^r\\to0$ is short exact in $\\mathcal A$: for $r\\leq q-2$ it is $0\\to K^r\\xrightarrow{\\mathrm{id}}K^r\\to0\\to0$; for $r=q-1$ it is $0\\to\\Ker d^{q-1}\\to K^{q-1}\\xrightarrow{\\pi}K^{q-1}/\\Ker d^{q-1}\\to0$, short exact since $\\pi$ is the cokernel of a monomorphism (abelian category [def-sp-abelian]); for $r=q$ it is $0\\to0\\to\\Ker d^q\\xrightarrow{\\mathrm{id}}\\Ker d^q\\to0$; for $r>q$ all terms are $0$. By [lem-weil-pbc-cochain-complexes-degreewise-exact] (2), $0\\to\\tau_{\\leq q-1}K\\xrightarrow{i_q}\\tau_{\\leq q}K\\xrightarrow{p_q}M_q(K)\\to0$ is a short exact sequence of complexes; in particular $i_q$ is a monomorphism, and by (3) $p_q$ is an epimorphism and a cokernel of $i_q$, so $M_q(K)=\\tau_{\\leq q}K/\\tau_{\\leq q-1}K$ with $p_q$ the quotient map, and its terms are the degreewise quotients computed above.",
-   "uses": [
-    "lem-weil-pbc-cochain-complexes-degreewise-exact",
-    "def-sp-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma Tag 0114 (lemma-cat-cochain-abelian, line 3113), (1)-(4)"
-   }
-  },
-  {
-   "text": "**Step 5 (clause (b): the factorization $j_q=\\bar j_q\\circ p_q$).** Let $\\rho:\\Ker d^q\\to H^q(K)=\\Ker d^q/\\Im d^{q-1}$ be the projection [def-weil-abstract-derived-category]. Define $\\bar j_q:M_q(K)\\to H^q(K)[-q]$ by $\\bar j_q^q=\\rho$ and $\\bar j_q^r=0$ for $r\\neq q$. It is a morphism of complexes: the only square to check is from degree $q-1$ to $q$, where it says $\\rho\\circ\\delta=0$, which holds because the image of $\\delta$ is $\\Im d^{q-1}$ (Step 2) and $\\rho$ kills $\\Im d^{q-1}$; the square from $q$ to $q+1$ has target $0$. Degreewise $\\bar j_q^q\\circ p_q^q=\\rho\\circ\\mathrm{id}=\\rho=j_q^q$ and both sides are $0$ in the other degrees (the target $H^q(K)[-q]$ is $0$ there), so $\\bar j_q\\circ p_q=j_q$. The factorization is unique because $p_q$ is an epimorphism of complexes (Step 4).",
+   "text": "Construct the step inclusion by inv(iota_q of truncLE(q-1) K) followed by truncLEMap(iota_(q-1), q). The inner inclusion is an isomorphism since truncLE(q-1) K is strictly supported at most q. Truncation naturality gives compatibility into K. This makes the step inclusion mono because its composite into K is mono. The cokernel sequence of a mono in an abelian category is short exact. These are the proved private helpers stepInclusion, stepInclusion_comp, stepInclusion_mono, stepInclusion_shortExact.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+    "def-sp-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076: the map factors through a quasi-isomorphism from the quotient, 'in a similar way')"
-   }
+   "elementary": true
   },
   {
-   "text": "**Step 6 (clause (b): $\\bar j_q$ is a quasi-isomorphism).** Cohomology is $H^r=\\Ker d^r/\\Im d^{r-1}$ [def-weil-abstract-derived-category]. For $M_q(K)$: if $r\\notin\\{q-1,q\\}$ then $M_q(K)^r=0$ and $H^r(M_q(K))=0$; $H^{q-1}(M_q(K))=\\Ker\\delta/\\Im(0)=0$ because $\\delta$ is a monomorphism (Step 2); $H^q(M_q(K))=\\Ker(\\Ker d^q\\to0)/\\Im\\delta=\\Ker d^q/\\Im d^{q-1}=H^q(K)$, using $\\Im\\delta=\\Im d^{q-1}$ (Step 2). For $H^q(K)[-q]$: $H^q=\\Ker(H^q(K)\\to0)/\\Im(0\\to H^q(K))=H^q(K)$ and $H^r=0$ for $r\\neq q$. Hence $H^r(\\bar j_q)$ is a map between zero objects for $r\\neq q$, and $H^q(\\bar j_q)$ is the map $\\Ker d^q/\\Im d^{q-1}\\to H^q(K)$ induced by $\\bar j_q^q=\\rho$, which is the identity of $H^q(K)$. So $H^r(\\bar j_q)$ is an isomorphism for every $r$, i.e. $\\bar j_q$ is a quasi-isomorphism.",
+   "text": "Identify the q-th truncation term with cycles and its inclusion with iCycles, using the opposite-category truncation formulas and the cycles/opcycles isomorphism. Cancel iCycles in the chain-map equation to show that the incoming truncation differential followed by this identification is iota in the preceding degree followed by toCycles. Since toCycles followed by homology projection is zero, mkHomToSingle constructs the projection. Its q-th component has the required normalization; the other components vanish. The composite of the step inclusion with this projection is zero: its source in degree q is zero and the target in other degrees is zero.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section Tag 010V (section-complexes): cohomology $H^i(A^\\bullet)=\\Ker(d^i)/\\Im(d^{i-1})$ and Definition 'quasi-isomorphism' (definition-quasi-isomorphism-cochain, line 3159); Tag 0118 for the truncation"
-   }
+   "elementary": true
   },
   {
-   "text": "**Step 7 (clause (c): naturality).** Let $f:K\\to L$ be a morphism of complexes. Since $d_L^rf^r=f^{r+1}d_K^r$, $f^r$ maps $\\Ker d_K^r$ into $\\Ker d_L^r$ and $\\Im d_K^{r-1}$ into $\\Im d_L^{r-1}$. So $\\tau_{\\leq q}f$ ($f^r$ for $r<q$, the restriction $\\Ker d_K^q\\to\\Ker d_L^q$ for $r=q$, $0$ for $r>q$) and likewise $\\tau_{\\leq q-1}f$ are morphisms of complexes (restrictions of $f$ to subcomplexes), and $\\tau_{\\leq q}f\\circ i_q=i_q\\circ\\tau_{\\leq q-1}f$ since both are restrictions of $f$. Define $M_q(f)$ in degree $q-1$ as the map $K^{q-1}/\\Ker d_K^{q-1}\\to L^{q-1}/\\Ker d_L^{q-1}$ induced by $f^{q-1}$ (it maps the kernel into the kernel), in degree $q$ as the restriction $\\Ker d_K^q\\to\\Ker d_L^q$, and $0$ elsewhere. Then $M_q(f)\\circ p_q=p_q\\circ\\tau_{\\leq q}f$ degreewise by construction, and $M_q(f)$ commutes with $\\delta$ because, after composing with the epimorphism $\\pi_K$, both sides are the corestriction of $d_L^{q-1}f^{q-1}=f^qd_K^{q-1}$. So $(\\tau_{\\leq q-1}f,\\tau_{\\leq q}f,M_q(f))$ is a morphism of short exact sequences. Finally, in degree $q$, $H^q(f)\\circ\\rho_K$ and $\\rho_L\\circ(f^q|_{\\Ker d^q_K})$ agree by the definition of $H^q(f)$ as the map induced by $f^q$ on $\\Ker/\\Im$, and both sides are $0$ in other degrees; hence $H^q(f)[-q]\\circ\\bar j_q=\\bar j_q\\circ M_q(f)$.",
+   "text": "Apply [lem-weil-pbc-upper-step-quotient-coordinates] to the constructed inclusion and its proved compatibility. Obtain the support, e0 and e1, the projection and differential equations, and monicity of the quotient differential.",
+   "uses": [
+    "lem-weil-pbc-upper-step-quotient-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define barj by cokernel.desc of the constructed projection and its proved annihilation. The cokernel equation gives the factorization. Cancel the epi cokernel projection to prove uniqueness. At q its component is epi; cancel it after composing with e1 to derive the required normalization for barj from that for the projection and the projection equation for e1.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section Tag 010V (section-complexes; line 3146: $f^i(\\Ker d^i)\\subset\\Ker d^i$ and similarly for $\\Im d^{i-1}$, giving $H^i(f)$); Tag 0118"
-   }
+   "elementary": true
+  },
+  {
+   "text": "In degree q-1 use zero support in degree q-2 and the mono quotient differential: ShortComplex.exact_iff_mono gives exactness and hence zero homology. Apply [lem-weil-pbc-two-term-coimage-quasiiso] with the obtained coordinate isomorphisms, support, differential equation, monicity and the proved barj normalization. This gives the quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-two-term-coimage-quasiiso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the mono inclusion into L in truncation naturality to prove naturality of the step inclusion. To prove naturality of the projection, first cancel iCycles to establish naturality of the truncation cycles identification. Then use homology projection naturality at q; in other degrees the target term is zero. Define g by cokernel.map of the naturality square for the inclusions. Its projection equation is the universal-property equation of cokernel.map. Finally cancel the epi cokernel projection, use both factorization equations and projection naturality, to prove naturality of barj.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sp-abelian",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-coimage-mono",
-  "lem-weil-pbc-cochain-complexes-degreewise-exact",
-  "def-sp-abelian"
+  "lem-weil-pbc-two-term-coimage-quasiiso",
+  "lem-weil-pbc-upper-step-quotient-coordinates"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Remark 08J5 (remark-truncation-distinguished-triangle, line 4076: second triangle, the quotient tau_{<=a+1}K/tau_{<=a}K quasi-isomorphic to H^{a+1}(K)[-a-1], 'in a similar way'); the omitted degreewise computations written out from literature/stacks-project/homology.tex Tags 010V, 0114 (lemma-cat-cochain-abelian), 0118 (section-truncations) and 0109 (definition-abelian-category)"
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Remark 08J5, second truncation triangle, with the canonical constructions of Tag 0118. F2 implements inclusion, projection, descent, uniqueness, vanishing and naturality in Lean; quotient coordinates and two-term quasi-isomorphism are split into two named nodes."
  },
  "mathlib_searches": [
   {
@@ -209,5 +172,15 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-afb21",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T194109-L-454497",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and two remaining obligations with their DAG nodes and sources; verified axioms and clean compilation of all three delivered modules and direct importers TruncationCouple, TruncationDescends, and TruncationTriangle."
  }
 }

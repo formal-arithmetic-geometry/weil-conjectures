@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-two-term-coimage-quasiiso",
+ "kind": "statement",
+ "title": "The cohomology projection of an arbitrary two-term coimage complex is a quasi-isomorphism",
+ "statement": "Let $\\mathcal A$ be abelian [def-sp-abelian], $K,M$ cochain complexes [def-weil-abstract-derived-category], and $q\\in\\mathbf Z$. Suppose $M^r$ is zero for $r\\ne q-1,q$, with isomorphisms $e_0:M^{q-1}\\cong\\operatorname{coker}(\\ker d_K^{q-1}\\hookrightarrow K^{q-1})$ and $e_1:M^q\\cong\\ker d_K^q$. Let $\\pi$ be the coimage projection. Assume $d_M^{q-1}$ is mono and $(\\ker d_K^q\\hookrightarrow K^q)e_1d_M^{q-1}e_0^{-1}\\pi=d_K^{q-1}$. Let $b:M\\to H^q(K)[-q]$ be a chain map such that its degree-q component, after precomposing with $e_1^{-1}$ and identifying the degree-q object of the single complex with $H^q(K)$, is the canonical projection $\\rho:\\ker d_K^q\\to H^q(K)$. Then $b$ is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle, quotient quasi-isomorphism; original node step 6, expanded via Tag 010V (section-complexes) and Tag 0118 (section-truncations)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "At r distinct from q-1 and q the term of M is zero, hence its homology is zero. At q-1 the incoming term M^(q-2) is zero and the outgoing differential is mono, so its kernel and homology vanish. The target single complex has zero homology in all these degrees, so the induced maps there are isomorphisms of zero objects.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At q the outgoing term is zero, so cycles are M^q. Cancel the mono inclusion of K cycles in the given differential equation: e1 d_M e0^(-1) pi is the corestriction of d_K into its cycles. The coimage projection pi is epi, so this identifies the boundary image of M under e1 with the boundary image of K. Consequently its homology cokernel identifies with the cokernel of K boundaries in K cycles, that is H^q(K).",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization of b identifies the degree-q map with rho after identifying cycles. Therefore its induced map on the cokernel of boundaries is the identity of H^q(K), by uniqueness of cokernel descent. The single-complex homology at q is H^q(K). The map is an isomorphism at q and, by the first step, in all other degrees. This is exactly the definition of quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle, quotient quasi-isomorphism; original node step 6, expanded via Tag 010V (section-complexes) and Tag 0118 (section-truncations).; degreewise details expanded by F2 from Tags 010V, 0114, 0118."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "two term complex coimage of differential to cycles quasi isomorphism to single homology object",
+   "results": "quasiIsoAt_iff and quasiIsoAt_iff', HomologicalComplex.isoHomologyπ and isoHomologyι; chain/cochain quasiIsoAt₀_iff.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients but no exact theorem for the specified arbitrary two-term complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.QuasiIsoAt",
+   "results": "0 hits; unknown identifier 'HomologicalComplex.QuasiIsoAt'.",
+   "date": "2026-10-13",
+   "verdict": "No result under this qualified name."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyIsoCokernelLift|singleObjHomologySelfIso|quasiIso.*single",
+   "results": "ShortComplex.homologyIsoCokernelLift, singleObjHomologySelfIso and its homologyπ normalization, projective/injective resolution quasi-isomorphisms.",
+   "date": "2026-10-13",
+   "verdict": "Cokernel and single-homology ingredients; no exact two-term coimage comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "two term complex coimage of differential to cycles quasi isomorphism to single homology object",
+   "results": "Service unavailable (empty response); actual attempt recorded in searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UpperTruncationStepSES",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-truncation-exact-couples",
+   "place": "The truncation triangle used to construct the truncation exact couple: Remark 08J5 (remark-truncation-distinguished-triangle), second triangle, quotient quasi-isomorphism; original node step 6, expanded via Tag 010V (section-complexes) and Tag 0118 (section-truncations).",
+   "via": [
+    "lem-weil-pbc-truncation-step-ses",
+    "lem-weil-pbc-truncation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TwoTermCoimageQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/TwoTermCoimageQuasiIso.lean",
+  "declaration": "CochainComplex.twoTermCoimage_quasiIso",
+  "statement": "theorem twoTermCoimage_quasiIso\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K M : CochainComplex C ℤ) (q : ℤ)\n    (hM : ∀ r : ℤ, r ≠ q - 1 → r ≠ q → IsZero (M.X r))\n    (e₀ : M.X (q - 1) ≅ cokernel (kernel.ι (K.d (q - 1) q)))\n    (e₁ : M.X q ≅ K.cycles q)\n    (hd : cokernel.π (kernel.ι (K.d (q - 1) q)) ≫ e₀.inv ≫\n      M.d (q - 1) q ≫ e₁.hom ≫ K.iCycles q = K.d (q - 1) q)\n    (hm : Mono (M.d (q - 1) q))\n    (b : M ⟶ (singleFunctor C q).obj (K.homology q))\n    (hb : e₁.inv ≫ b.f q ≫\n      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom =\n      K.homologyπ q) : QuasiIso b",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-afb21",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T194109-L-454497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-afb21",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T194109-L-454497",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and two remaining obligations with their DAG nodes and sources; verified axioms and clean compilation of all three delivered modules and direct importers TruncationCouple, TruncationDescends, and TruncationTriangle."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-upper-step-quotient-coordinates",
+ "kind": "statement",
+ "title": "Degreewise coordinates of the cokernel of successive upper truncations",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], $K$ a cochain complex [def-weil-abstract-derived-category], and $q\\in\\mathbf Z$. Write $T_n=\\tau_{\\le n}K$ for the canonical upper truncation, whose terms are $K^r$ for $r<n$, $\\ker d^n$ for $r=n$, and zero for $r>n$, with inclusion $\\iota_n:T_n\\to K$. Let $i:T_{q-1}\\to T_q$ satisfy $\\iota_q i=\\iota_{q-1}$, let $M=\\operatorname{coker}i$, and $p:T_q\\to M$ its projection. Then $M^r=0$ up to zero-object isomorphism for $r\\ne q-1,q$. There are isomorphisms $e_0:M^{q-1}\\cong\\operatorname{coker}(\\ker d^{q-1}\\hookrightarrow K^{q-1})$ and $e_1:M^q\\cong\\ker d^q$ such that $e_0p^{q-1}=\\pi\\iota_q^{q-1}$, $e_1p^q$ is the canonical identification $T_q^q\\cong\\ker d^q$, and $(\\ker d^q\\hookrightarrow K^q)e_1d_M^{q-1}e_0^{-1}\\pi=d_K^{q-1}$. The differential $d_M^{q-1}$ is mono. Here $\\pi$ denotes the coimage projection.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle; original node steps 2-4. Canonical truncation: Tag 0118 (section-truncations); degreewise cokernels: Tag 0114 (lemma-cat-cochain-abelian)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "The inclusion into K is mono, so the compatibility determines i uniquely. Below q-1 identify the two truncations with K; i is the identity. At q-1 it is the kernel inclusion, at q its source is zero, and above q both terms are zero. These identifications follow degreewise from the canonical truncation definition.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The category of complexes is abelian and kernels and cokernels are computed degreewise. Evaluate the cokernel sequence of i. Cokernels of the identity and of maps between zero objects vanish; the cokernel of zero into cycles is cycles; and in degree q-1 it is the cokernel of the kernel inclusion. The unique isomorphisms of these cokernel cocones give e0, e1 and the two projection identities.",
+   "uses": [
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the chain-map equation for p from q-1 to q and the two projection identities. The component p at q-1 is epi, so cancelling it yields the stated differential equation. Its composite with the cycles inclusion, after e0, is the induced map from the coimage of d_K to K^q. This is mono by the coimage-mono lemma. Cancel the isomorphism e0 to conclude that the differential of M is mono.",
+   "uses": [
+    "lem-weil-pbc-coimage-mono"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-coimage-mono"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle; original node steps 2-4. Canonical truncation: Tag 0118 (section-truncations); degreewise cokernels: Tag 0114 (lemma-cat-cochain-abelian).; degreewise details expanded by F2 from Tags 010V, 0114, 0118."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degreewise cokernel of successive canonical upper truncation inclusions has two terms coimage and cycles",
+   "results": "HomologicalComplex.shortComplexTruncLE and shortComplexTruncLEX₃ToTruncGE, CochainComplex.shortComplexTruncLEX₃ToTruncGE; truncGE homology constructions.",
+   "date": "2026-10-13",
+   "verdict": "No exact match: none supplies the successor-inclusion degreewise cokernel isomorphisms and their normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cokernel",
+   "results": "0 hits; unknown identifier 'HomologicalComplex.cokernel'.",
+   "date": "2026-10-13",
+   "verdict": "No result for this name; other searches supply cokernel-preservation ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(eval|truncLE)|truncLE.*cokernel",
+   "results": "CochainComplex.shortComplexTruncLE, AreComplementary, and PreservesCokernel.iso in FunctorCategory.lean.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only, not the stated two-coordinate identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "degreewise cokernel of successive canonical upper truncation inclusions has two terms coimage and cycles",
+   "results": "Service unavailable (empty response); actual attempt recorded in searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UpperTruncationStepSES",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-truncation-exact-couples",
+   "place": "The truncation triangle used to construct the truncation exact couple: Remark 08J5 (remark-truncation-distinguished-triangle), second triangle; original node steps 2-4. Canonical truncation: Tag 0118 (section-truncations); degreewise cokernels: Tag 0114 (lemma-cat-cochain-abelian).",
+   "via": [
+    "lem-weil-pbc-truncation-step-ses",
+    "lem-weil-pbc-truncation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.UpperTruncationStepQuotient",
+  "file": "lean/Sheaf/Algebra/Homology/UpperTruncationStepQuotient.lean",
+  "declaration": "CochainComplex.upperTruncationStep_quotientCoordinates",
+  "statement": "theorem upperTruncationStep_quotientCoordinates\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (q : ℤ)\n    (i : K.truncLE (q - 1) ⟶ K.truncLE q)\n    (hi : i ≫ K.ιTruncLE q = K.ιTruncLE (q - 1)) :\n    (∀ r : ℤ, r ≠ q - 1 → r ≠ q → IsZero ((cokernel i).X r)) ∧\n    ∃ (e₀ : (cokernel i).X (q - 1) ≅ cokernel (kernel.ι (K.d (q - 1) q)))\n      (e₁ : (cokernel i).X q ≅ K.cycles q),\n      (cokernel.π i).f (q - 1) ≫ e₀.hom =\n        (K.ιTruncLE q).f (q - 1) ≫ cokernel.π (kernel.ι (K.d (q - 1) q)) ∧\n      (cokernel.π i).f q ≫ e₁.hom = (K.truncLEXIsoCycles q).hom ∧\n      cokernel.π (kernel.ι (K.d (q - 1) q)) ≫ e₀.inv ≫\n          (cokernel i).d (q - 1) q ≫ e₁.hom ≫ K.iCycles q = K.d (q - 1) q ∧\n      Mono ((cokernel i).d (q - 1) q)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-afb21",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T194109-L-454497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-afb21",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T194109-L-454497",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and two remaining obligations with their DAG nodes and sources; verified axioms and clean compilation of all three delivered modules and direct importers TruncationCouple, TruncationDescends, and TruncationTriangle."
+ }
+}
