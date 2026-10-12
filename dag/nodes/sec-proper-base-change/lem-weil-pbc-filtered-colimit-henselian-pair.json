@@ -26,89 +26,46 @@
  ],
  "proof": [
   {
-   "text": "*Elementwise description of the colimit; $I$ is an ideal.* View $\\Lambda$ as a category with one arrow $\\mu\\to\\lambda$ when $\\mu\\le\\lambda$; as $\\Lambda$ is nonempty and directed and parallel arrows are equal, it is a filtered category [def-weil-pbc-category-colimit], and $A=\\varinjlim A_\\lambda$ is a filtered colimit of commutative rings with $\\alpha_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\alpha_\\mu$. Commutative rings are the same as commutative $\\mathbf Z$-algebras (every ring map is $\\mathbf Z$-linear), so [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) with $R=\\mathbf Z$ gives: (a) every $a\\in A$ is $\\alpha_\\lambda(a_\\lambda)$ for some $\\lambda$ and $a_\\lambda\\in A_\\lambda$; since $\\Lambda$ is directed and $\\alpha_\\nu\\circ\\varphi_{\\lambda\\nu}=\\alpha_\\lambda$, finitely many elements of $A$ come from one common stage. By [lem-weil-pbc-filtered-colimit-rings-zero] (in $\\Lambda$ a pair of arrows $\\lambda\\to\\nu$, $\\mu\\to\\nu$ is just an upper bound $\\nu$): (b) if $x\\in A_\\lambda$, $y\\in A_\\mu$ and $\\alpha_\\lambda(x)=\\alpha_\\mu(y)$, then $\\varphi_{\\lambda\\nu}(x)=\\varphi_{\\mu\\nu}(y)$ for some $\\nu\\ge\\lambda,\\mu$. (c) $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$ is an ideal: $0=\\alpha_\\lambda(0)\\in I$ for any $\\lambda\\in\\Lambda\\neq\\emptyset$; for $x\\in I_\\lambda$, $y\\in I_\\mu$ and $\\nu\\ge\\lambda,\\mu$, $\\alpha_\\lambda(x)+\\alpha_\\mu(y)=\\alpha_\\nu(\\varphi_{\\lambda\\nu}(x)+\\varphi_{\\mu\\nu}(y))$ with $\\varphi_{\\lambda\\nu}(x)+\\varphi_{\\mu\\nu}(y)\\in I_\\nu$ (as $\\varphi_{\\lambda\\nu}(I_\\lambda)\\subseteq I_\\nu$); and for $a=\\alpha_\\mu(b)\\in A$ (by (a)), $a\\,\\alpha_\\lambda(x)=\\alpha_\\nu(\\varphi_{\\mu\\nu}(b)\\varphi_{\\lambda\\nu}(x))\\in\\alpha_\\nu(I_\\nu)$. (d) If $x\\in A_\\lambda$ and $\\alpha_\\lambda(x)\\in I$, then $\\varphi_{\\lambda\\nu}(x)\\in I_\\nu$ for some $\\nu\\ge\\lambda$: write $\\alpha_\\lambda(x)=\\alpha_\\mu(y)$ with $y\\in I_\\mu$ and take $\\nu$ from (b), so $\\varphi_{\\lambda\\nu}(x)=\\varphi_{\\mu\\nu}(y)\\in I_\\nu$; by directedness, for finitely many such $x$ one $\\nu$ serves all. (e) Since $\\alpha_\\lambda(I_\\lambda)\\subseteq I$, $\\alpha_\\lambda$ induces a ring map $\\bar\\alpha_\\lambda:A_\\lambda/I_\\lambda\\to A/I$ with $\\bar\\alpha_\\lambda(x\\bmod I_\\lambda)=\\alpha_\\lambda(x)\\bmod I$, and coefficientwise maps of polynomial rings $A_\\lambda[T]\\to A[T]$, $(A_\\lambda/I_\\lambda)[T]\\to(A/I)[T]$ (still written $\\alpha_\\lambda$, $\\bar\\alpha_\\lambda$) commuting with reduction; these send monic polynomials to monic polynomials of the same degree when the target ring is nonzero, since they send $1$ to $1$.",
+   "text": "Construct I with carrier the union of the stage ideals. Zero belongs by nonemptiness. Move two ideal representatives to a common stage to add them. Represent any scalar at a stage and move it together with an ideal element to a common stage to prove absorption.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero"
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885), proof, 'If $u\\in1+I$ then for some $j\\in J$ we see that $u$ is the image of some $u_j\\in1+I_j$' and 'Since $A=\\colim A_j$ and $A/I=\\colim A_j/I_j$ are filtered colimits we can find a $j\\in J$ ...' (the elementwise facts Stacks uses without proof, written out)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Each stage satisfies the factorization criterion.* Since $(A_\\lambda,I_\\lambda)$ is henselian [def-weil-pbc-henselian-terminology], [lem-weil-pbc-henselian-factorization-criterion] ($\\Rightarrow$) gives for every $\\lambda$: (i$_\\lambda$) $I_\\lambda$ is contained in the Jacobson radical of $A_\\lambda$; (ii$_\\lambda$) for every monic $F\\in A_\\lambda[T]$ and every factorization $\\overline F=G_0H_0$ in $(A_\\lambda/I_\\lambda)[T]$ into monic polynomials generating the unit ideal there are monic $G,H\\in A_\\lambda[T]$ with $F=GH$ reducing to $G_0,H_0$ modulo $I_\\lambda$.",
+   "text": "For x in I and y in A, represent xy by c in some Jᵢ. HenselianRing.jac gives c in the stage radical, hence c+1 is a unit by Ideal.mem_jacobson_bot. Map that unit to A to show xy+1 is a unit. Thus I is contained in the radical, again by Ideal.mem_jacobson_bot.",
    "uses": [
     "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-henselian-factorization-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885), proof (Stacks' definition 09XE of henselian pair is (i)+(ii); here it is obtained from the DAG's idempotent definition by Lemma Tag 09XI (3)$\\Rightarrow$(1))"
-   }
-  },
-  {
-   "text": "*$I$ lies in the Jacobson radical of $A$.* Let $u\\in1+I$, $u=1+\\alpha_\\lambda(x)$ with $x\\in I_\\lambda$ (definition of $I$). By (i$_\\lambda$) of step 2 and [lem-weil-pbc-jacobson-radical-one-plus-units] ($\\Rightarrow$) for $(A_\\lambda,I_\\lambda)$, $u_\\lambda=1+x$ is a unit of $A_\\lambda$, say $u_\\lambda v=1$; then $u=\\alpha_\\lambda(u_\\lambda)$ and $u\\,\\alpha_\\lambda(v)=\\alpha_\\lambda(1)=1$, so $u$ is a unit of $A$. As $I$ is an ideal (step 1 (c)) and every element of $1+I$ is a unit, [lem-weil-pbc-jacobson-radical-one-plus-units] ($\\Leftarrow$) gives $I\\subseteq\\operatorname{rad}(A)$. This is the first assertion of the statement, and condition (i) of [lem-weil-pbc-henselian-factorization-criterion] for $(A,I)$.",
-   "uses": [
     "lem-weil-pbc-jacobson-radical-one-plus-units"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885), proof, first paragraph ('Then $u_j$ is invertible in $A_j$ by Algebra, Lemma 0AME ... Hence $u$ is invertible in $A$. Thus $I$ is contained in the Jacobson radical of $A$')"
-   }
+   "elementary": false
   },
   {
-   "text": "*Descending a coprime monic factorization to a stage.* Let $f\\in A[T]$ be monic of degree $n$ and $\\overline f=g_0h_0$ with $g_0,h_0\\in(A/I)[T]$ monic generating the unit ideal; write $1=g_0g_0'+h_0h_0'$ with $g_0',h_0'\\in(A/I)[T]$. If $A/I=0$, then $1\\in I\\subseteq\\operatorname{rad}(A)$ by step 3, so $A$ has no maximal ideal and $A=0$ (a nonzero ring has a maximal ideal); then $g=h=f$ satisfy $f=gh$ in the zero ring $A[T]$, are monic, and reduce to $g_0,h_0$ in the zero ring $(A/I)[T]$; so assume $A/I\\neq0$ (hence $A\\neq0$). Write $f=T^n+\\sum_{k<n}a_kT^k$, $g_0=T^r+\\sum_{k<r}c_kT^k$, $h_0=T^s+\\sum_{k<s}d_kT^k$, and choose preimages in $A$ of the $c_k$, $d_k$ and of the coefficients of $g_0',h_0'$. By step 1 (a) all these finitely many elements of $A$, together with the $a_k$, are images under $\\alpha_\\lambda$ of elements of one $A_\\lambda$. This gives $F=T^n+\\sum_{k<n}b_kT^k\\in A_\\lambda[T]$ with $\\alpha_\\lambda(F)=f$, monic $G\\in A_\\lambda[T]$ of degree $r$ and $H$ of degree $s$, and $G',H'\\in A_\\lambda[T]$, such that the reductions modulo $I$ of $\\alpha_\\lambda(G),\\alpha_\\lambda(H),\\alpha_\\lambda(G'),\\alpha_\\lambda(H')$ are $g_0,h_0,g_0',h_0'$. The finitely many coefficients of $P=F-GH$ and $Q=1-GG'-HH'$ in $A_\\lambda$ are mapped by $\\alpha_\\lambda$ into $I$, because $\\alpha_\\lambda(P)$ and $\\alpha_\\lambda(Q)$ reduce to $\\overline f-g_0h_0=0$ and $1-g_0g_0'-h_0h_0'=0$. By step 1 (d) there is $\\nu\\ge\\lambda$ with all of them mapped into $I_\\nu$ by $\\varphi_{\\lambda\\nu}$. Let $f_\\nu,G_\\nu,H_\\nu,G'_\\nu,H'_\\nu\\in A_\\nu[T]$ be the images of $F,G,H,G',H'$ under $\\varphi_{\\lambda\\nu}$; $f_\\nu$ is monic of degree $n$ with $\\alpha_\\nu(f_\\nu)=\\alpha_\\lambda(F)=f$, and $G_\\nu,H_\\nu$ are monic. Put $g_{\\nu,0}=G_\\nu\\bmod I_\\nu$, $h_{\\nu,0}=H_\\nu\\bmod I_\\nu$ (monic). Since the coefficients of $\\varphi_{\\lambda\\nu}(P)$ and $\\varphi_{\\lambda\\nu}(Q)$ lie in $I_\\nu$: $\\overline{f_\\nu}=g_{\\nu,0}h_{\\nu,0}$ and $1=g_{\\nu,0}\\overline{G'_\\nu}+h_{\\nu,0}\\overline{H'_\\nu}$ in $(A_\\nu/I_\\nu)[T]$, so $g_{\\nu,0},h_{\\nu,0}$ generate the unit ideal; and by step 1 (e), $\\bar\\alpha_\\nu(g_{\\nu,0})=\\alpha_\\nu(G_\\nu)\\bmod I=\\alpha_\\lambda(G)\\bmod I=g_0$ and likewise $\\bar\\alpha_\\nu(h_{\\nu,0})=h_0$.",
+   "text": "Descend a given coprime monic factorization modulo I to one stage, using the finite-data descent theorem (no henselian hypothesis).",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero"
+    "lem-weil-pbc-filtered-colimit-factorization-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885), proof, second paragraph ('Write $1=g_0g_0'+h_0h_0'$ ... we can find a $j\\in J$ and $f_j\\in A_j$ and a factorization $\\overline f_j=g_{j,0}h_{j,0}$ ... mapping to $f,g_0,h_0,g_0',h_0'$'); the choice of monic lifts, the zero-ring case and the passage from $I$ to $I_\\nu$ are written out"
-   }
+   "elementary": false
   },
   {
-   "text": "*Lifting at the stage and mapping to $A$: condition (ii) for $(A,I)$.* By (ii$_\\nu$) of step 2 applied to $F=f_\\nu$ and the factorization $\\overline{f_\\nu}=g_{\\nu,0}h_{\\nu,0}$ of step 4, there are monic $g_\\nu,h_\\nu\\in A_\\nu[T]$ with $f_\\nu=g_\\nu h_\\nu$, $g_\\nu\\bmod I_\\nu=g_{\\nu,0}$, $h_\\nu\\bmod I_\\nu=h_{\\nu,0}$. Put $g=\\alpha_\\nu(g_\\nu)$, $h=\\alpha_\\nu(h_\\nu)\\in A[T]$: they are monic ($\\alpha_\\nu$ is a ring map, so it keeps the leading coefficient $1$), $gh=\\alpha_\\nu(f_\\nu)=f$, and by step 1 (e) $g\\bmod I=\\bar\\alpha_\\nu(g_\\nu\\bmod I_\\nu)=\\bar\\alpha_\\nu(g_{\\nu,0})=g_0$ and likewise $h\\bmod I=h_0$. Together with the case $A/I=0$ of step 4, every coprime monic factorization of $\\overline f$ lifts: condition (ii) of [lem-weil-pbc-henselian-factorization-criterion] holds for $(A,I)$.",
+   "text": "Apply the factorization criterion to the henselian stage pair to lift its factorization. Map the lifted factors to A. Construct the induced quotient map F(i)/Jᵢ → A/I and use its commutation with reduction to verify the prescribed reductions. The factorization criterion at (A,I), together with the proved radical inclusion, yields henselianity.",
    "uses": [
     "lem-weil-pbc-henselian-factorization-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885), proof, second paragraph ('Since $(A_j,I_j)$ is a henselian pair, we can lift $\\overline f_j=g_{j,0}h_{j,0}$ to a factorization over $A_j$ and taking the image in $A$ we obtain a corresponding factorization in $A$')"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 3 and 5, $(A,I)$ satisfies (i) and (ii) of [lem-weil-pbc-henselian-factorization-criterion], so by its direction ($\\Leftarrow$) $(A,I)$ is henselian [def-weil-pbc-henselian-terminology]; with step 1 (c) ($I$ is an ideal) and step 3 ($I\\subseteq\\operatorname{rad}(A)$) this proves the statement.",
-   "uses": [
-    "lem-weil-pbc-henselian-factorization-criterion",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0FWT (lemma-filtered-colimits-henselian, line 2885), proof, last sentence ('Hence $(A,I)$ is henselian'), with Lemma Tag 09XI (lemma-characterize-henselian-pair) (1)$\\Rightarrow$(3) translating Stacks' Definition Tag 09XE to the DAG's idempotent definition"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-filtered-colimit-rings-zero",
   "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-henselian-factorization-criterion",
-  "lem-weil-pbc-jacobson-radical-one-plus-units"
+  "lem-weil-pbc-jacobson-radical-one-plus-units",
+  "lem-weil-pbc-filtered-colimit-factorization-descent",
+  "lem-weil-pbc-henselian-factorization-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 0FWT (lemma-filtered-colimits-henselian), proof; with Lemma Tag 09XI (3)$\\Leftrightarrow$(1) and Definition Tag 09XE, Algebra Lemma Tag 0AME"
+  "place": "Lemma Tag 0FWT proof; union ideal and radical argument formalized, finite descent isolated, stage lifting and conclusion via Tag 09XI criterion"
  },
  "mathlib_searches": [
   {
@@ -199,5 +156,15 @@
   "group": "K1",
   "result": "fix",
   "note": "nonempty directed set Λ (Preorder+IsDirected+Nonempty, needed: empty Λ makes I empty), F : Λ ⥤ CommRingCat, stage ideals J with Ideal.map transition inclusion, HenselianRing stages; conclusion: ideal with carrier = ⋃ ι_λ(J λ), ≤ jacobson ⊥, HenselianRing (colimit F) I; fixed Cocone/IsColimit to [HasColimit F]/colimit F/colimit.ι per landed directed form, added proof sketch to docstring"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0837d",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T063504-L-3152655",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged target signature, delivered proof and descent lemma with their nodes and [Stacks 0FWT](https://stacks.math.columbia.edu/tag/0FWT); both modules compile cleanly with only permitted axioms and expected sorryAx."
  }
 }

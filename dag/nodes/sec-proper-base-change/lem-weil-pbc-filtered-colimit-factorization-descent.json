@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-factorization-descent",
+ "kind": "lemma",
+ "title": "Finite monic factorization data descends in a filtered colimit of pairs",
+ "statement": "Let Λ be a nonempty directed preorder, F : Λ ⥤ CommRingCat a diagram with colimit A [def-weil-pbc-category-colimit], and Jᵢ compatible ideals. Suppose I is an ideal of A whose elements are exactly the images of elements of the Jᵢ. Given a monic polynomial f over A and coprime monic polynomials g₀,h₀ over A/I with f mod I = g₀h₀, there exist a stage i and monic polynomials Fᵢ,Gᵢ,Hᵢ over F(i) such that Fᵢ maps to f, the reductions of Gᵢ,Hᵢ modulo Jᵢ are coprime and multiply to Fᵢ mod Jᵢ, and the images of Gᵢ,Hᵢ modulo I are g₀,h₀. No stage pair is assumed henselian.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0FWT, proof, second paragraph (finite descent before applying henselianity)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Represent finitely many coefficients at a common stage using the elementwise colimit description; write monic polynomials with leading coefficient exactly 1.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An element mapping into the union ideal eventually lies in a stage ideal: compare it with an ideal representative using eventual equality. Move finitely many such membership conditions to one common stage.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-rings-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose coefficient lifts of the two monic factors and their Bezout witnesses. The coefficients of F-GH and 1-GGprime-HHprime map into I, so the preceding step puts them in a stage ideal. Reduce there to obtain factorization and coprimality, with the required images. If A/I is zero, eventually 1 lies in the stage ideal; take both stage factors to be 1 and any monic descent of f (F=1 if A=0). Both quotients are zero and all required equalities hold.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-rings-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0FWT, second proof paragraph; finite coefficient expansion and zero-quotient case spelled out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsCoprime|exists.*map",
+   "results": "Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean",
+   "date": "2026-10-12",
+   "verdict": "Candidates checked: no exact finite factorization descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coprime monic polynomial factorization modulo a compatible union of ideals descends to a stage of a filtered colimit",
+   "results": "Polynomial.instFinitePresentationUniversalFactorizationRing, Polynomial.UniversalCoprimeFactorizationRing.factor₂, Polynomial.UniversalCoprimeFactorizationRing.factor₁, Polynomial.instCommRingUniversalFactorizationRing, Polynomial.UniversalCoprimeFactorizationRing, Polynomial.UniversalFactorizationRing.presentation, Polynomial.UniversalCoprimeFactorizationRing.homEquiv, Polynomial.instFiniteUniversalFactorizationRing",
+   "date": "2026-10-12",
+   "verdict": "Candidates checked: no exact finite factorization descent statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Polynomial.map",
+   "results": "Polynomial.map_monic_ne_zero, Polynomial.map_monic_eq_zero_iff, Polynomial.Monic.map, Polynomial.Monic.natDegree_map, Polynomial.Monic.degree_map, Polynomial.monic_of_injective, Function.Injective.monic_map_iff, Polynomial.Monic.eq_one_of_map_eq_one",
+   "date": "2026-10-12",
+   "verdict": "Candidates checked: no exact finite factorization descent statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient equations for monic polynomial factorizations modulo ideals descend in a directed colimit of rings",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FilteredColimitHenselianPair",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-filtered-colimit-henselian-pair",
+   "place": "proof step 4",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FilteredColimitFactorizationDescent",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitFactorizationDescent.lean",
+  "declaration": "filteredColimit_factorization_descent",
+  "statement": "theorem filteredColimit_factorization_descent\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (F : Λ ⥤ CommRingCat.{u}) [HasColimit F]\n    (J : ∀ i : Λ, Ideal (F.obj i))\n    (hJ : ∀ {i j : Λ} (f : i ⟶ j), Ideal.map (F.map f).hom (J i) ≤ J j)\n    (I : Ideal (colimit F : CommRingCat.{u}))\n    (hI : ∀ x, x ∈ I ↔\n      ∃ (i : Λ) (a : F.obj i), (colimit.ι F i).hom a = x ∧ a ∈ J i)\n    (f : (colimit F : CommRingCat.{u})[X]) (hf : f.Monic)\n    (g₀ h₀ : ((colimit F : CommRingCat.{u}) ⧸ I)[X])\n    (hg₀ : g₀.Monic) (hh₀ : h₀.Monic) (hcop : IsCoprime g₀ h₀)\n    (hfact : f.map (Ideal.Quotient.mk I) = g₀ * h₀) :\n    ∃ (i : Λ) (fᵢ gᵢ hᵢ : (F.obj i)[X]),\n      fᵢ.Monic ∧ gᵢ.Monic ∧ hᵢ.Monic ∧ fᵢ.map (colimit.ι F i).hom = f ∧\n      IsCoprime (gᵢ.map (Ideal.Quotient.mk (J i))) (hᵢ.map (Ideal.Quotient.mk (J i))) ∧\n      fᵢ.map (Ideal.Quotient.mk (J i)) =\n        gᵢ.map (Ideal.Quotient.mk (J i)) * hᵢ.map (Ideal.Quotient.mk (J i)) ∧\n      (gᵢ.map (colimit.ι F i).hom).map (Ideal.Quotient.mk I) = g₀ ∧\n      (hᵢ.map (colimit.ι F i).hom).map (Ideal.Quotient.mk I) = h₀",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0837d",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T063504-L-3152655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0837d",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T063504-L-3152655",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged target signature, delivered proof and descent lemma with their nodes and [Stacks 0FWT](https://stacks.math.columbia.edu/tag/0FWT); both modules compile cleanly with only permitted axioms and expected sorryAx."
+ }
+}
