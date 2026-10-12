@@ -20,7 +20,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZM (2),(3), closing categorical assertion; step 4 of lem-weil-pbc-etale-finite-data-descent; checked at https://stacks.math.columbia.edu/tag/01ZM"
+  "place": "Tag 01ZM (2),(3); finite-generator and finite-relation argument, with the canonical pullback comparisons checked in Lean; source checked at https://stacks.math.columbia.edu/tag/01ZM"
  },
  "mathlib_searches": [
   {
@@ -60,28 +60,28 @@
  ],
  "proof": [
   {
-   "text": "Conjugate the finitely many generating arrows of F by the supplied alpha_a. Apply 01ZM (2) to each resulting map between pullbacks of V_a. Choose a common refinement of these stages and i, using directedness; base-change the maps there.",
+   "text": "The private finite_generators_lift lemma conjugates each generator by alpha, composes with the target pullback first projection, and applies Scheme.exists_pullback_hom_of_isLimit. IsCofiltered.wideCospan provides a common refinement for the finite type of generators. Compose each lifted scheme map with the pullback.map to its individual stage; check the structure and limit equations on the two projections. Form the Over morphisms with pullback.lift. The private pullbackComp_inv_fst and comparison_fst lemmas compute the canonical comparison via conjugateEquiv_counit, and the generator compatibility is checked by pullback.hom_ext.",
    "uses": [
-    "thm-pd-spreading-out"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the generating arrows through the canonical iterated-pullback identifications, so their objects are exactly the pullbacks of the prescribed V_a. Extend the quiver map using Paths.lift. The supplied comparisons are natural on generators, hence on every path by induction (identity paths use identity maps, and concatenation uses functoriality).",
-   "uses": [
+    "thm-pd-spreading-out",
     "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "For each r, naturality and F(p_r)=F(q_r) imply equality of the two composites after limit pullback. Apply 01ZM (3) to those maps and choose a common refinement of the finitely many relation stages.",
+   "text": "Extend the resulting prefunctor by Paths.lift. Prove naturality for every path with Paths.induction: identities use functoriality, and the successor case uses the generator compatibility and the inductive hypothesis. NatIso.ofComponents then gives the comparison with F.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality and the given relation equality imply that H.map(p r) and H.map(q r) have equal limit pullbacks, by cancellation of the target comparison isomorphism. Apply the private finite_morphism_equalities_lift lemma: each equality descends by Scheme.exists_pullback_fst_comp_eq_of_isLimit and pullback.hom_ext; IsCofiltered.wideCospan supplies one common stage; naturality of Over.pullbackComp transports all pulled-back equalities to the direct transition pullback. The objects satisfy the needed finite-presentation hypotheses by base change.",
    "uses": [
-    "thm-pd-spreading-out"
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "Base-change the functor to the common relation stage; functoriality preserves every relation. Transport this functor along objectwise canonical pullback-composition isomorphisms to obtain objects literally equal to the direct pullbacks of V_a, and transport its natural comparison at the same time. Empty vertex, arrow and relation sets impose no stage choices; use i or the current stage.",
+   "text": "Base change H to the common relation stage. Use Over.pullbackComp and D.map_comp to identify its objects with the specified direct pullbacks of V. Functor.copyObj transports the functor to these objects, and Functor.isoCopyObj transports the natural comparison; pullback composition and the cone equation identify its limit pullback with F. Conjugating each relation by the objectwise isomorphisms preserves equality. Empty finite families are covered by IsCofiltered.wideCospan; identity paths are covered by Paths.induction.",
    "uses": [
     "def-pc-fibre-product"
    ],
@@ -126,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T212210-L-1097990",
-  "kind": "interface",
+  "landing": "20261012T232141-L-1993060",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

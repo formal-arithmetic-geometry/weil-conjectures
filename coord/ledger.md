@@ -10072,3 +10072,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:21 L: merged deliver/F1/Sheaf.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel (stage 3; reviewer PASS; first push; landing 20261012T232140-L-1992650 (interface); batch 20261012T232138; modules 3; new nodes 2)
 - 23:21 L: merged deliver/J2/Sheaf.RingTheory.KoszulConormalComparisonMap (stage 3; reviewer PASS; first push; landing 20261012T232140-L-1992767 (proof); batch 20261012T232138; modules 1; new nodes 0)
 - 23:21 L: merged deliver/M1/Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions (stage 3; reviewer PASS; first push; landing 20261012T232141-L-1992950 (interface); batch 20261012T232138; modules 3; new nodes 2)
+- 23:21 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels (stage 3; reviewer PASS; after a return; landing 20261012T232141-L-1993060 (proof); batch 20261012T232138; modules 1; new nodes 0)
