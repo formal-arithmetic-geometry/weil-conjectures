@@ -5855,3 +5855,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:34 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit (stage 3; reviewer PASS; after a return; landing 20261012T023314-L-1110539 (interface); modules 3; new nodes 2)
 - 02:35 L: merged deliver/S1/Sheaf.AlgebraicGeometry.TensorPullback (stage 3; reviewer PASS; after a return; landing 20261012T023506-L-1118981 (interface); modules 1; new nodes 0; change records: coord/changes/TensorPullback-scope.md)
 - 02:35 L: returned deliver/C1/Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic (reviewer RETURN: (reviewer X-4111d, head 4111d9dda) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.In)
+- 02:35 L: returned deliver/M1/Sheaf.Topology.CohomologyReductionConstantSubsheaves (reviewer RETURN: (reviewer X-86a05, head 86a05e638) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Topology.CohomologyR)
