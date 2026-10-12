@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.CategoryTheory.QuotientJShriek
+import Mathlib.Algebra.DirectSum.Finsupp
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Sheaves of modules on a small ringed site
@@ -34,6 +34,47 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 local notation "R" => Functor.obj (sheafCompose J (forget₂ CommRingCat RingCat)) O
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Sectionwise the free Yoneda module and the localized-unit extension are
+`(V ⟶ U) →₀ R(V)` and `⨁ (V ⟶ U), R(V)`. The standard linear equivalence
+commutes with restrictions because both compose the index and restrict coefficients.
+Source: Stacks Project, Modules on Sites, Tag 03DI, explicit direct-sum construction.
+(blueprint: lem-pur-ringed-site-grothendieck-abelian). -/
+private noncomputable def freeYonedaExtensionIso (U : C) :
+    (PresheafOfModules.free (R).obj).obj (yoneda.obj U) ≅
+      (extensionByZeroPresheaf R U).obj (unit ((R).over U)) := by
+  classical
+  refine PresheafOfModules.isoMk (fun V ↦ ?_) ?_
+  · exact (finsuppLEquivDirectSum ((R).obj.obj V) ((R).obj.obj V)
+      (V.unop ⟶ U)).toModuleIso
+  · intro V W a
+    apply ModuleCat.free_hom_ext
+    intro φ
+    dsimp
+    change (finsuppLEquivDirectSum ((R).obj.obj W) ((R).obj.obj W) (W.unop ⟶ U))
+        (ModuleCat.freeDesc (M :=
+          (ModuleCat.restrictScalars ((R).obj.map a).hom).obj
+            ((ModuleCat.free ((R).obj.obj W)).obj (W.unop ⟶ U)))
+          (↾fun x ↦ ModuleCat.freeMk (a.unop ≫ x)) (ModuleCat.freeMk φ)) = _
+    rw [ModuleCat.freeDesc_apply]
+    change (finsuppLEquivDirectSum ((R).obj.obj W) ((R).obj.obj W) (W.unop ⟶ U))
+        (Finsupp.single (a.unop ≫ φ) 1) =
+      extensionByZeroPresheafRestrictAdd R U (unit ((R).over U)) a
+        ((finsuppLEquivDirectSum ((R).obj.obj V) ((R).obj.obj V) (V.unop ⟶ U))
+          (Finsupp.single φ 1))
+    rw [finsuppLEquivDirectSum_single, finsuppLEquivDirectSum_single]
+    change DirectSum.of _ (a.unop ≫ φ) (1 : (R).obj.obj W) =
+      extensionByZeroPresheafRestrictAdd R U (unit ((R).over U)) a
+        (DirectSum.of _ φ (1 : (R).obj.obj V))
+    dsimp [extensionByZeroPresheafRestrictAdd]
+    erw [DirectSum.toAddMonoid_of]
+    change DirectSum.of (fun _ : W.unop ⟶ U ↦ (R).obj.obj W)
+        (a.unop ≫ φ) (1 : (R).obj.obj W) =
+      DirectSum.of (fun _ : W.unop ⟶ U ↦ (R).obj.obj W)
+        (a.unop ≫ φ) (((R).obj.map a).hom (1 : (R).obj.obj V))
+    rw [((R).obj.map a).hom.map_one]
+
+
 set_option synthInstance.maxHeartbeats 100000 in
 -- Inferring the coproduct reduces the repeated sheaf-compose expression in the summands.
 /-- Sheaves of modules over a sheaf of commutative rings on a small site form a
@@ -45,25 +86,31 @@ Source: Stacks Project, Section 07A5 and Lemmas 03DA, 03DB, 03EW
 (blueprint: lem-pur-ringed-site-grothendieck-abelian).
 
 Proof:
-1. The category is abelian by `lem-pur-ringed-site-module-category-abelian`.
-2. By `lem-weil-pbc-module-sheaves-colimits-forgetful`, small colimits are
-   obtained by sheafifying sectionwise colimits; forgetting to abelian sheaves
-   is faithful and exact and commutes with colimits.
-3. For a filtered diagram of short exact sequences, that forgetful functor
-   reduces exactness to `lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact`.
-4. `lem-pc-sites-modules-quotient-j-shriek` gives an epimorphism onto every
-   module sheaf from a sum of the localized rank-one extensions indexed by
-   sections. A nonzero quotient is nonzero on some summand. Extend the
-   corresponding map by zero on the other summands of the coproduct indexed
-   by objects. Thus this fixed coproduct is a generator.
-5. These properties give `def-sp-grothendieck-abelian`. The summands use
-   `def-pur-localized-ringed-site`, `def-weil-presheaf-modules-sheafification`
-   and `def-weil-extension-by-zero-presheaf` exactly as in the statement. -/
+1. Apply the source library's `SheafOfModules.isGrothendieckAbelian`, which
+   proves existence of colimits, exact filtered colimits and a separator.
+2. Identify the free Yoneda presheaf at each object with the extension-by-zero
+   presheaf of the localized unit using `finsuppLEquivDirectSum`. On basis
+   vectors, naturality is precomposition of the index and preservation of `1`
+   by the ring restriction. Apply sheafification to this isomorphism.
+3. Transport `SheafOfModules.isSeparating_sheafification_freeYoneda` along
+   these isomorphisms. A map from a free Yoneda sheaf is precomposed with the
+   inverse isomorphism; cancellation of that inverse gives the required
+   separating-family equality. Its coproduct is a separator by
+   `ObjectProperty.IsSeparating.isSeparator_coproduct`. -/
 theorem grothendieckAbelian_with_localized_generator :
     IsGrothendieckAbelian.{u} (SheafOfModules.{u} R) ∧
       IsSeparator (∐ fun U : C ↦
         (PresheafOfModules.sheafification.{u} (𝟙 (R).obj)).obj
           ((extensionByZeroPresheaf.{u} R U).obj (unit ((R).over U)))) := by
-  sorry
+  classical
+  refine ⟨isGrothendieckAbelian R, ?_⟩
+  apply ObjectProperty.IsSeparating.isSeparator_coproduct
+  intro M N f g h
+  apply isSeparating_sheafification_freeYoneda R f g
+  rintro _ ⟨U⟩ a
+  let e := (PresheafOfModules.sheafification (𝟙 (R).obj)).mapIso
+    (freeYonedaExtensionIso J O U)
+  have he := h _ (ObjectProperty.ofObj_apply _ U) (e.inv ≫ a)
+  simpa only [Category.assoc, Iso.cancel_iso_inv_left] using he
 
 end SheafOfModules

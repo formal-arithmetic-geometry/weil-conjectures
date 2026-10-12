@@ -27,80 +27,42 @@
  ],
  "proof": [
   {
-   "text": "The category $\\Mod(\\mathcal O)$ is abelian by [lem-pur-ringed-site-module-category-abelian], applied to the small site $\\mathcal C$ and the sheaf of commutative rings $\\mathcal O$.",
+   "text": "Apply the already proved SheafOfModules.isGrothendieckAbelian from WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian to the underlying sheaf of rings. This supplies all small colimits, exact filtered colimits, and a separator; Mathlib supplies abelianness [lem-pur-ringed-site-module-category-abelian].",
    "uses": [
-    "lem-pur-ringed-site-module-category-abelian"
+    "lem-pur-ringed-site-module-category-abelian",
+    "def-sp-grothendieck-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
-    "place": "instance SheafOfModules.instAbelian, lines 40-42"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-weil-pbc-module-sheaves-colimits-forgetful], all small colimits in $\\Mod(\\mathcal O)$ exist and are computed by sheafifying sectionwise colimits; the forgetful functor to abelian sheaves is faithful, exact, and commutes with these colimits.",
+   "text": "Identify the free Yoneda presheaf with the explicit extension-by-zero presheaf of the localized unit [def-weil-extension-by-zero-presheaf] over [def-pur-localized-ringed-site]. At V, use finsuppLEquivDirectSum to identify finitely supported functions on Hom(V,U) with the direct sum of copies of R(V). On a basis vector restriction in both constructions precomposes the index and takes coefficient 1 to 1. This proves naturality and gives a genuine presheaf isomorphism; applying module sheafification [def-weil-presheaf-modules-sheafification] gives the sheaf isomorphism.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemmas 03DA and 03DB"
-   }
-  },
-  {
-   "text": "For a filtered diagram of short exact sequences in $\\Mod(\\mathcal O)$, exactness of the forgetful functor and its commutation with colimits reduce exactness to filtered colimits in $\\Ab(\\mathcal C)$, which are exact by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. Thus filtered colimits in $\\Mod(\\mathcal O)$ are exact.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DB, exact filtered colimits clause"
-   }
-  },
-  {
-   "text": "Let $G=\\bigoplus_{U\\in\\operatorname{Ob}\\mathcal C}j_{U!}\\mathcal O_U$, which exists by step 2. If $q:\\mathcal M\\to\\mathcal Q$ is a nonzero quotient, the epimorphism supplied by [lem-pc-sites-modules-quotient-j-shriek] for $\\mathcal M$ implies that some component $h_{U,s}:j_{U!}\\mathcal O_U\\to\\mathcal M$ has $q h_{U,s}\\ne0$ (otherwise $q$ would vanish on the coproduct and hence be zero). Extend $h_{U,s}$ by zero on the other summands to a map $G\\to\\mathcal M$; its composite with $q$ is nonzero. Thus $G$ is a generator.",
-   "uses": [
-    "lem-pc-sites-modules-quotient-j-shriek",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EW, clause (3), generator construction"
-   }
-  },
-  {
-   "text": "The abelian category $\\Mod(\\mathcal O)$ has all small colimits, exact filtered colimits, and the generator $G$ from step 4, so it is Grothendieck abelian by [def-sp-grothendieck-abelian]. The descriptions of $\\mathcal O_U$ and $j_{U!}\\mathcal O_U$ are exactly the localized-site restriction and sheafified extension-by-zero presheaf in the statement.",
-   "uses": [
-    "def-sp-grothendieck-abelian",
+    "def-weil-extension-by-zero-presheaf",
     "def-pur-localized-ringed-site",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the source library theorem SheafOfModules.isSeparating_sheafification_freeYoneda. To test equality with each free Yoneda sheaf, precompose a test map with the inverse of the isomorphism from step 2, apply the localized-family hypothesis, and cancel the inverse. Apply ObjectProperty.IsSeparating.isSeparator_coproduct to the resulting separating family. Together with step 1 this proves both conjuncts with the original generator.",
+   "uses": [
     "def-weil-presheaf-modules-sheafification",
     "def-weil-extension-by-zero-presheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 07A5, first paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pur-ringed-site-module-category-abelian",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-pc-sites-modules-quotient-j-shriek",
   "def-sp-grothendieck-abelian",
+  "def-weil-extension-by-zero-presheaf",
   "def-pur-localized-ringed-site",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-extension-by-zero-presheaf"
+  "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemmas 03DA, 03DB, 03EW, together with Cohomology on Sites Section 07A5"
+  "place": "Tag 03DI direct-sum construction and Tag 03EW generator argument, using the proved source library SheafOfModules.isGrothendieckAbelian and isSeparating_sheafification_freeYoneda"
  },
  "mathlib_searches": [
   {
@@ -188,5 +150,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085310-L-27816",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
