@@ -46,6 +46,54 @@ theorem localization_hom_colimit
           (uliftCoyoneda.{u} (C := C)).obj (Opposite.op Y)) s (ULift.up f)) =
           (MorphismProperty.LeftFraction.mk f s.hom s.prop).map Q
             (Localization.inverts Q S) := by
-  sorry
+  classical
+  let F := (MorphismProperty.Under.forget S ⊤ X ⋙ Under.forget X) ⋙
+    (uliftCoyoneda.{u} (C := C)).obj (Opposite.op Y)
+  let c : F.CoconeTypes :=
+    { pt := Q.obj Y ⟶ Q.obj X
+      ι s f := (MorphismProperty.LeftFraction.mk f.down s.hom s.prop).map Q
+        (Localization.inverts Q S)
+      ι_naturality := by
+        intro s t a
+        funext f
+        have := Localization.inverts Q S _ s.prop
+        have := Localization.inverts Q S _ t.prop
+        apply (cancel_mono (Q.map t.hom)).1
+        change (MorphismProperty.LeftFraction.mk (f.down ≫ a.right) t.hom t.prop).map
+            Q (Localization.inverts Q S) ≫ Q.map t.hom =
+          (MorphismProperty.LeftFraction.mk f.down s.hom s.prop).map
+            Q (Localization.inverts Q S) ≫ Q.map t.hom
+        simp only [MorphismProperty.LeftFraction.map, Functor.map_comp,
+          Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+        rw [← MorphismProperty.Under.w a, Q.map_comp]
+        simp only [IsIso.inv_hom_id_assoc] }
+  have hc : c.IsColimit := by
+    constructor
+    constructor
+    · intro x y h
+      obtain ⟨s, f, rfl⟩ := F.ιColimitType_jointly_surjective x
+      obtain ⟨t, g, rfl⟩ := F.ιColimitType_jointly_surjective y
+      change (MorphismProperty.LeftFraction.mk f.down s.hom s.prop).map Q
+          (Localization.inverts Q S) =
+        (MorphismProperty.LeftFraction.mk g.down t.hom t.prop).map Q
+          (Localization.inverts Q S) at h
+      obtain ⟨J, a, b, hs, hf, ha⟩ :=
+        (MorphismProperty.LeftFraction.map_eq_iff Q S _ _).mp h
+      let r : S.Under ⊤ X := MorphismProperty.Under.mk ⊤ (s.hom ≫ a) ha
+      let α : s ⟶ r := MorphismProperty.Under.homMk a rfl
+      let β : t ⟶ r := MorphismProperty.Under.homMk b hs.symm
+      apply F.ιColimitType_eq_of_map_eq_map f g α β
+      change ULift.up (f.down ≫ a) = ULift.up (g.down ≫ b)
+      exact congrArg ULift.up hf
+    · intro g
+      obtain ⟨φ, hφ⟩ := Localization.exists_leftFraction Q S g
+      exact ⟨F.ιColimitType (MorphismProperty.Under.mk ⊤ φ.s φ.hs)
+        (ULift.up φ.f), hφ.symm⟩
+  refine ⟨(Types.colimitEquivColimitType F).trans hc.equiv, ?_⟩
+  intro s f
+  change hc.equiv ((Types.colimitEquivColimitType F)
+    (colimit.ι F s (ULift.up f))) = _
+  rw [Types.colimitEquivColimitType_apply]
+  rfl
 
 end CategoryTheory
