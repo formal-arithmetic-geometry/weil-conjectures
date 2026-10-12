@@ -32,65 +32,56 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (part (1)).* By [lem-weil-pbc-finite-type-module-support-closed], applied to the quasi-coherent finite type module $\\mathcal F$, $\\operatorname{Supp}(\\mathcal F)$ is a closed subset of $X$. (Stacks deduces (1) from Modules 01BA, or from 056I, 01PB and 00L2; the cited node carries the second route.)",
+   "text": "Apply [lem-weil-pbc-finite-type-module-support-closed] for the closedness clause.",
    "uses": [
     "lem-weil-pbc-finite-type-module-support-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: part (1), via Modules Lemma 01BA (modules-lemma-support-finite-type-closed)"
+    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof"
    }
   },
   {
-   "text": "*Step 2 (first equivalence of (2)).* $x\\in\\operatorname{Supp}(\\mathcal F)\\iff\\mathcal F_x\\neq0$ is the definition of the support [def-weil-pbc-closed-subset-proper-over-base](2).",
+   "text": "For any sheaf of rings on the open-set site of an arbitrary topological space, finite type restricts to every open (the proved helper finiteType_over_ringSheaf, generalizing the scheme-only private helper). Specialize this to the scheme structure sheaf: pull the local generating cover back along the slice-site forgetful functor; the induced local pushforward preserves colimits and the unit, hence preserves the finite generating epimorphisms. Choose an affine neighbourhood U of x [def-pc-scheme]. By [lem-weil-pbc-quasi-coherent-finite-type-affine], F(U) is finite. Take a finite spanning family and its germs. Span induction using compatibility of germs with addition and scalar multiplication shows that every section germ lies in their stalk-ring span. The additive localization isomorphism and denominator formula of [lem-weil-pbc-finite-type-module-support-closed] express each stalk element as e(m/s). The image of s in the stalk ring is a unit (the affine stalk ring is the localization at the corresponding prime). Since s times e(m/s) is the germ of m, the span contains e(m/s). Thus the germs generate the stalk finitely.",
    "uses": [
-    "def-weil-pbc-closed-subset-proper-over-base"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: 'The first equivalence in (2) is the definition of support'"
-   }
-  },
-  {
-   "text": "*Step 3 ($\\mathcal F_x$ is a finitely generated $\\mathcal O_{X,x}$-module).* Let $x\\in X$ and choose an affine open $U\\ni x$ [def-pc-scheme], $A=\\mathcal O_X(U)$, $M=\\mathcal F(U)$. By [lem-weil-pbc-finite-type-module-support-closed] $M$ is a finitely generated $A$-module, say by $m_1,\\dots,m_r$, and there is an $A$-linear isomorphism $M_{\\mathfrak p_x}\\cong\\mathcal F_x$ compatible with the ring isomorphism $A_{\\mathfrak p_x}\\cong\\mathcal O_{X,x}$ (its Step 3). Every element of $M_{\\mathfrak p_x}$ is $m/s=\\sum_i(a_i/s)(m_i/1)$, so $m_1/1,\\dots,m_r/1$ generate $M_{\\mathfrak p_x}$ over $A_{\\mathfrak p_x}$, and their images generate $\\mathcal F_x$ over $\\mathcal O_{X,x}$.",
-   "uses": [
+    "pqf-def-coherent",
     "def-pc-scheme",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
     "lem-weil-pbc-finite-type-module-support-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: implicit in the appeal to Nakayama's lemma for (2): $\\mathcal F_x$ must be a finite $\\mathcal O_{X,x}$-module (written out by the agent)"
+    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof"
    }
   },
   {
-   "text": "*Step 4 (second equivalence of (2), Nakayama).* $\\mathcal O_{X,x}$ is a local ring with maximal ideal $\\mathfrak m_x$ and $\\kappa(x)=\\mathcal O_{X,x}/\\mathfrak m_x$ [def-weil-residue-field]; $\\mathcal F_x$ is finitely generated (Step 3). Apply [lem-weil-pbc-nakayama-local-generators] to $M=\\mathcal F_x$ and the empty family ($r=0$), in its tensor form: the empty family generates $\\mathcal F_x$ (i.e. $\\mathcal F_x=0$) if and only if it generates $\\kappa(x)\\otimes_{\\mathcal O_{X,x}}\\mathcal F_x\\cong\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$ (i.e. that module is $0$). Hence $\\mathcal F_x\\neq0\\iff\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)\\neq0$. With Step 2 this proves (2).",
+   "text": "Apply the zero-module tensor form of Nakayama [lem-weil-pbc-nakayama-local-generators], Mathlib IsLocalRing.subsingleton_tensorProduct, to the finite stalk and its residue field [def-weil-residue-field]. Taking negations gives the second conjunct.",
    "uses": [
-    "def-weil-residue-field",
-    "lem-weil-pbc-nakayama-local-generators"
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-residue-field"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: 'the second equivalence follows from Nakayama's lemma, see Algebra, Lemma 00DV (algebra-lemma-NAK)'"
+    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof"
    }
   },
   {
-   "text": "*Step 5 ($f^*\\mathcal F$ is quasi-coherent of finite type).* Let $f:Y\\to X$ be a morphism of schemes. $f^*\\mathcal F$ is of finite type by [lem-weil-pbc-module-pullback-finite-type] and quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. This is the first claim of (3), and it allows applying (2) (Steps 2--4) to $f^*\\mathcal F$ on $Y$.",
+   "text": "The pullback is finite type by [lem-weil-pbc-module-pullback-finite-type]. For its stalk at y use [lem-weil-pbc-module-stalk-pullback]. Finite generation is preserved by scalar extension (Mathlib Module.Finite.base_change) and by a linear isomorphism, so this stalk is finite without using quasi-coherence of the pullback.",
    "uses": [
     "lem-weil-pbc-module-pullback-finite-type",
-    "lem-weil-pbc-module-pullback-quasi-coherent"
+    "lem-weil-pbc-module-stalk-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: '$f^*\\mathcal F$ is of finite type by Modules, Lemma 01B6'; quasi-coherence (Modules, Lemma 01BG), needed to apply (2) to $f^*\\mathcal F$, is left implicit in the source"
+    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof"
    }
   },
   {
-   "text": "*Step 6 (the fibre of the pullback).* Let $y\\in Y$, $x=f(y)$, $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{Y,y}$ and $\\varphi=f^\\sharp_y:A\\to B$, a local homomorphism since $f$ is a morphism of locally ringed spaces [def-weil-locally-ringed-space-morphism], so $\\varphi(\\mathfrak m_x)\\subseteq\\mathfrak m_y$ and $\\varphi$ induces the field map $\\bar\\varphi:\\kappa(x)\\to\\kappa(y)$ [def-weil-residue-field]. By [lem-weil-pbc-module-stalk-pullback] $(f^*\\mathcal F)_y\\cong\\mathcal F_x\\otimes_AB$ as $B$-modules. Hence, by associativity of the tensor product and $B\\otimes_B\\kappa(y)=\\kappa(y)$, $(f^*\\mathcal F)_y\\otimes_B\\kappa(y)\\cong\\mathcal F_x\\otimes_A\\kappa(y)$, where $\\kappa(y)$ is an $A$-algebra through $A\\to B\\to\\kappa(y)$; this map factors as $A\\to\\kappa(x)\\xrightarrow{\\bar\\varphi}\\kappa(y)$, so again by associativity $\\mathcal F_x\\otimes_A\\kappa(y)\\cong(\\mathcal F_x\\otimes_A\\kappa(x))\\otimes_{\\kappa(x)}\\kappa(y)$.",
+   "text": "Let a be the local stalk map and b the residue map upstairs, and c the residue map downstairs and d the induced residue-field map. Locality [def-weil-locally-ringed-space-morphism] gives b composed with a = d composed with c (Mathlib Scheme.residue_residueFieldMap). Extend the stalk isomorphism to the upstairs residue field, and apply ModuleCat.extendScalarsComp to both compositions. This identifies the pullback residue fibre with extension of the original residue fibre along d. Scalar extension of vector spaces to a field is faithfully flat, hence reflects and preserves the zero module (Mathlib Module.FaithfullyFlat.subsingleton_tensorProduct_iff_right).",
    "uses": [
     "def-weil-locally-ringed-space-morphism",
     "def-weil-residue-field",
@@ -99,43 +90,34 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: '$(f^*\\mathcal F)_y=\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Y,y}$, see Sheaves, Lemma 0098 (sheaves-lemma-stalk-pullback-modules)'"
+    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof"
    }
   },
   {
-   "text": "*Step 7 (extension of scalars along a field extension).* Let $V=\\mathcal F_x\\otimes_A\\kappa(x)$, a $\\kappa(x)$-vector space with a basis $(e_i)_{i\\in I}$. Then $V\\otimes_{\\kappa(x)}\\kappa(y)\\cong\\kappa(y)^{(I)}$, which is nonzero iff $I\\neq\\emptyset$ iff $V\\neq0$. With Step 6: $(f^*\\mathcal F)_y\\otimes_{\\mathcal O_{Y,y}}\\kappa(y)\\neq0\\iff\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)\\neq0$.",
+   "text": "Apply Nakayama to both finite stalks. Compose the resulting nonzero-stalk/residue-fibre equivalences with the fibre comparison. Set extensionality gives precisely the inverse-image equality.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: 'Hence $(f^*\\mathcal F)_y\\otimes\\kappa(y)$ is nonzero if and only if $\\mathcal F_x\\otimes\\kappa(x)$ is nonzero'"
-   }
-  },
-  {
-   "text": "*Step 8 (conclusion of (3)).* By (2) for $f^*\\mathcal F$ on $Y$ (Steps 2--4, applicable by Step 5), $y\\in\\operatorname{Supp}(f^*\\mathcal F)\\iff(f^*\\mathcal F)_y\\otimes\\kappa(y)\\neq0$; by Step 7 this holds iff $\\mathcal F_{f(y)}\\otimes\\kappa(f(y))\\neq0$, which by (2) for $\\mathcal F$ holds iff $f(y)\\in\\operatorname{Supp}(\\mathcal F)$. So $\\operatorname{Supp}(f^*\\mathcal F)=f^{-1}(\\operatorname{Supp}\\mathcal F)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof: 'By (2) this implies $x\\in\\operatorname{Supp}(\\mathcal F)$ iff $y\\in\\operatorname{Supp}(f^*\\mathcal F)$'"
+    "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-module-support-closed",
-  "def-weil-pbc-closed-subset-proper-over-base",
+  "pqf-def-coherent",
   "def-pc-scheme",
-  "def-weil-residue-field",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-residue-field",
   "lem-weil-pbc-module-pullback-finite-type",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "def-weil-locally-ringed-space-morphism",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-weil-locally-ringed-space-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms of Schemes, Lemma 056J (lemma-support-finite-type) and its proof"
+  "place": "Morphisms of Schemes, Lemma 056J and proof; restriction/localization glue formalized by Q2, 2026-10-12; returned duplicate restriction helper generalized to arbitrary topological ring sheaves"
  },
  "mathlib_searches": [
   {
@@ -216,5 +198,15 @@
   "group": "T1",
   "result": "fix",
   "note": "X scheme, F X.Modules [IsQuasicoherent] [IsFiniteType]; (1) IsClosed of inline support; (2) nonzero stalk iff nonzero residueFiber F x (membership clause definitional); (3) all f : Y ⟶ X, tensorPullback finite type and support = f.base preimage; reverted the delivery's statement correction of the item (stmt_deps kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370490",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
