@@ -1,0 +1,159 @@
+{
+ "id": "lem-pc-grothendieck-resolution-unit-comparison",
+ "kind": "statement",
+ "title": "Compatibility of prescribed resolutions with the composite derived unit",
+ "statement": "Let $A,B,C$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] with bounded below derived categories [def-weil-pbc-bounded-derived-subcategories]. Let $F:A\\to B$ and $G:B\\to C$ be additive left exact functors [def-sp-left-exact-additive], and suppose $F$ sends injective objects to $G$-acyclic objects [def-sp-composite-acyclicity]. Let $X\\in A$, let $I$ be a prescribed injective resolution of $X$ [def-sp-injective-resolutions], and let $n\\geq 0$. Put $K=F(I)$, indexed by the natural numbers, and let $L$ be its extension by zero to an integer-indexed bounded below complex. Write $Q$ for passage to the bounded below derived category, $\\theta_F:H^n(RF(X[0]))\\simeq R^nF(X)$ for the canonical single-object comparison [lem-sp-derived-functor-single-identification], $\\iota_F:R^nF(X)\\simeq H^n(K)$ and $\\iota_{GF}:R^n(GF)(X)\\simeq H^n(GK)$ for the resolution comparisons [lem-sp-derived-well-defined], and $b:H^n(RG(RF(X[0])))\\simeq R^n(GF)(X)$ for the canonical Grothendieck abutment comparison [lem-sp-grothendieck-edge-maps]. Then there is an isomorphism $e:RF(X[0])\\simeq QL$ such that $\\theta_F\\iota_F=H^n(e)\\,\\rho_L\\,\\epsilon_K$ and $\\iota_{GF}^{-1}b^{-1}H^n(RG(e))=\\epsilon_{GK}^{-1}H^n(\\mu_{G,K}^{-1})\\rho_{GL}^{-1}H^n(\\eta_G(L))$. Here $\\rho$ is the canonical comparison $H^n(QM)\\simeq H^n(M)$, $\\epsilon$ is the canonical homology comparison for extension by zero, $\\mu_{G,K}:G(K^{\\mathrm{ext}})\\simeq (GK)^{\\mathrm{ext}}$ is the map/extension comparison, and $\\eta_G(L):Q(GL)\\to RG(QL)$ is the derived unit. Composites in these equations are read from left to right. This asserts only source and ordinary-homology comparisons; there is no edge map. The two equations determine exactly the homology components used downstream. The complete transported formulas are the Lean statement below.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015M (lemma-compose-derived-functors), proof describing the canonical map on an injective resolution; Tag 015N (lemma-grothendieck-spectral-sequence), abutment identification. Canonical homology factors expanded from the resolution-identification step of lem-pc-grothendieck-hypercohomology-edge."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-left-exact-additive",
+  "def-sp-composite-acyclicity",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof": [
+  {
+   "text": "Extend the prescribed injective resolution $I$ by zero. Its augmentation is a quasi-isomorphism $X[0]\\to I^{\\mathrm{ext}}$, so it becomes an isomorphism after $Q$. Apply $RF$ and invert its unit at $I^{\\mathrm{ext}}$, which is invertible on bounded below complexes of injectives. Compose with $Q$ of the map/extension isomorphism. This explicitly constructs $e$; it is not an arbitrary object chosen from mere existence.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the chosen injective resolution, the definition of the canonical single-object comparison gives the first equation. For the prescribed resolution, choose a comparison lifting $\\mathrm{id}_X$. Comparisons of injective resolutions are homotopy equivalences; their images under additive functors induce the canonical resolution comparison on homology. Naturality of the derived unit and of the quotient-homology comparison transfers the chosen-resolution equation to $I$.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The abutment comparison uses the composition isomorphism $R(GF)\\simeq RG\\,RF$. Its defining right-derived uniqueness equation carries the $GF$ unit to the composite unit. Evaluate this equation at the bounded below complex of injectives $I^{\\mathrm{ext}}$; the $F$ unit there is invertible. Naturality along the augmentation of $X[0]$ and cancellation of that $F$ unit leaves exactly the $G$ unit at $F(I^{\\mathrm{ext}})$. This is the representative calculation in Tag 015M (lemma-compose-derived-functors), implemented by rightDerivedNatTrans_fac, rightDerivedFunctorPlusCompUnit_app, and the definition of grothendieckSpectralObjectHBotTopIso in the already proved source library.",
+   "uses": [
+    "def-sp-composite-acyclicity",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply degree-$n$ homology to the last unit equation. Expand the canonical quotient-homology, map/extension and extension-homology isomorphisms. Their factors give precisely the second displayed equation. All shifts are absent from this calculation, so the same argument applies at $n=0$.",
+   "uses": [
+    "lem-sp-derived-well-defined",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-composite-acyclicity",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015M (lemma-compose-derived-functors), proof; Tag 015N (lemma-grothendieck-spectral-sequence), proof",
+  "note": "Explicit unit and homology equations expand the canonical resolution calculation in these proofs; the source-library definitions fix every comparison. Sources read online and downloaded to the item scratchpad."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral sequence left edge equals hypercohomology edge of injective resolution",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1; CategoryTheory.InjectiveResolution.descFOne_zero_comm; CategoryTheory.InjectiveResolution.descFSucc; CategoryTheory.InjectiveResolution.descFOne; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.InjectiveResolution.ι'_f_zero; CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc; CategoryTheory.InjectiveResolution.ι'_f_zero_assoc",
+   "verdict": "no match: returned classical resolution and unit declarations do not assert the paired canonical unit-comparison equations",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "verdict": "no match: returned classical resolution and unit declarations do not assert the paired canonical unit-comparison equations",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerivedUnique",
+   "results": "7 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "verdict": "no match: returned classical resolution and unit declarations do not assert the paired canonical unit-comparison equations",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of injective resolution comparison isomorphism with composition of bounded below right derived functors and the derived unit",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of degree zero right derived functor isomorphism and Grothendieck spectral sequence target comparison",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "verdict": "no match: returned classical resolution and unit declarations do not assert the paired canonical unit-comparison equations",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckHypercohomologyEdge",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Resolution-identification part of the Grothendieck hypercohomology edge, source comparison; the target comparison and edge naturality remain proved in the parent module.",
+   "via": [
+    "lem-pc-grothendieck-hypercohomology-edge",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckResolutionUnitComparison",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckResolutionUnitComparison.lean",
+  "declaration": "CategoryTheory.exists_grothendieck_resolution_unit_comparison",
+  "statement": "theorem exists_grothendieck_resolution_unit_comparison\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]\n    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]\n    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteLimits G]\n    (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics)\n    (X : A) (I : InjectiveResolution X) (n : ℕ) :\n    let K := (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let L : CochainComplex.Plus B := ⟨K.extend ComplexShape.embeddingUpNat, 0,\n      inferInstance⟩\n    ∃ e : F.rightDerivedFunctorPlus.obj\n        ((DerivedCategory.Plus.singleFunctor A 0).obj X) ≅ DerivedCategory.Plus.Q.obj L,\n      (F.homologyRightDerivedFunctorPlusObjSingleFunctorIso X n).hom ≫\n          (I.isoRightDerivedObj F n).hom =\n        (DerivedCategory.Plus.homologyFunctor B n).map e.hom ≫\n          (DerivedCategory.Plus.homologyFunctorObjQIso L n).hom ≫\n          (K.extendHomologyIso ComplexShape.embeddingUpNat\n            (rfl : (n : ℤ) = n)).hom ∧\n      (I.isoRightDerivedObj (F ⋙ G) n).inv ≫\n          (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv.app X ≫\n          (DerivedCategory.Plus.homologyFunctor C n).map\n            (G.rightDerivedFunctorPlus.map e.hom) =\n        (((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).extendHomologyIso\n          ComplexShape.embeddingUpNat (rfl : (n : ℤ) = n)).inv ≫\n        HomologicalComplex.homologyMap\n          (HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat G).inv (n : ℤ) ≫\n        (DerivedCategory.Plus.homologyFunctorObjQIso\n          (G.mapCochainComplexPlus.obj L) n).inv ≫\n        (DerivedCategory.Plus.homologyFunctor C n).map\n          (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj L))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T113949-L-821880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T113949-L-821880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
