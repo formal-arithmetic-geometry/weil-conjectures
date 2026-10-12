@@ -17,53 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Choose a small directed final presentation of I^op. Its opposite is initial, so reindexing preserves the underlying scheme limit. After base change to an affine etale U over S, the stage schemes and limit are qcqs and the transitions affine. The coefficient diagram on the limit is canonically constant with value the pullback of G, by inverse-image composition, and its colimit is that value since I^op is nonempty and connected.",
+   "text": "Build the opposite-indexed higher-image functor K and the cone-induced cocone B. The canonical transition coherence gives both functor laws and cone naturality.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-inverse-image-composition"
+    "sbc-lem-higher-image-over-transition-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Use an injective module resolution and its underlying abelian-section acyclicity to compute abelian cohomology after forgetting scalars (03FD), without ring flatness. Apply continuity for degree-zero sheaves as complexes (0EZM) to each system of the preceding step. This gives cohomology-presheaf continuity on the affine basis; all maps are the canonical derived-unit maps, hence commute with restrictions and agree with t. The higher-image presheaf description (03Q8) and sheafification of presheaf colimits identify the limit higher image with the sheaf colimit of the stage higher images. For q<0 the resolutions have zero cohomology.",
+   "text": "On any affine etale object, represent a section of colimit K by a stage section using the filtered sheaf-colimit representative theorem. If its canonical image is zero, affine eventual vanishing kills the stage representative at a later stage. The colimit cocone relation gives that the original section was zero. This proves the comparison monic on the affine basis.",
    "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-sheaves-colimit-sheafification"
+    "lem-weil-pbc-etale-section-colimit-representative",
+    "sbc-lem-higher-image-affine-class-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "Represent the given limit section locally by stage sections. Refine its cover to a finite affine cover of V with quasi-compact pairwise fibre products. On each overlap, matching in the sheaf colimit is locally witnessed by equality at later stages. Quasi-compactness gives finitely many witnesses per overlap, and there are finitely many overlaps. Filteredness supplies one stage for every representative and matching equality. The stage sheaf condition glues the representatives on V, and their limit image equals the original section on the cover, hence on V. This is the surjectivity argument in 0738(4).",
+   "text": "Restrict to the dense affine etale subsite. Its sheaf restriction functor is an equivalence by Mathlib Functor.isEquivalence_of_isOneHypercoverDense applied to Scheme.AffineEtale.Spec. Pointwise monomorphisms give a monomorphism of presheaves; the faithful sheaf inclusion and restriction reflect it. Use the local-surjectivity lemma to make the same comparison epic. Since module sheaves are abelian and hence balanced, Mathlib isIso_of_mono_of_epi makes it an isomorphism. IsColimit.ofPointIso transports the colimit universal property to B.",
    "uses": [
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "sbc-lem-higher-image-colimit-comparison-epi"
    ],
    "elementary": false
   },
   {
-   "text": "The reindexed stage is already an original stage. Naturality of the presheaf comparison identifies its section map with t(c_i). Thus the representative has the required displayed image.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the filtered sheaf-colimit representative theorem to B and the given affine section. Unop the resulting stage index. By construction its cocone leg is exactly the displayed canonical higherDirectImageOverMap, so its equality is the requested one.",
+   "uses": [
+    "lem-weil-pbc-etale-section-colimit-representative"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-sheaves-colimit-sheafification",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "sbc-lem-higher-image-over-transition-coherence",
+  "lem-weil-pbc-etale-section-colimit-representative",
+  "sbc-lem-higher-image-affine-class-vanishing",
+  "sbc-lem-higher-image-colimit-comparison-epi"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Specialization of 09Z1 and the surjectivity part of 0738 to constant-ring module sheaves; affine section assembly by C3"
+  "place": "H2 reduction: 09Z1 local-surjectivity comparison plus existing affine eventual vanishing and 0738(4) finite-cover gluing; dense affine etale comparison via Mathlib"
  },
  "mathlib_searches": [
   {
@@ -140,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T085221-L-6622",
+  "landing": "20261012T095906-L-318074",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
