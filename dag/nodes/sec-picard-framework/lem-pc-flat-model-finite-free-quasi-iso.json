@@ -8,7 +8,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project",
-  "place": "Tags 064U, 0653, 00NX, 06YD and 06YJ"
+  "place": "Tags 0653 and 00NX for local freeness; Mathlib canonical truncation for the comparison maps"
  },
  "mathlib_searches": [
   {
@@ -57,12 +57,21 @@
  "statement": "Under the hypotheses of lem-pc-flat-model-finite-free-shortening and a point t ∈ U, there exist V ≤ U and a complex P supported in [0,d] with finite-free terms, with quasi-isomorphisms eQ : (V → U)^*Q ⟶ P and eP : P ⟶ (V → U)^*C such that eQ ≫ eP = (V → U)^*e.",
  "proof": [
   {
-   "text": "restrict to an affine neighbourhood of t and set M = coker(Q^{-1} → Q^0).\nThe finite-free terms of Q are quasi-coherent, hence so is M, and M is finitely\npresented. At each stalk, C is bounded and flat in [0,d], so it has Tor amplitude\n[0,d]. The bounded-above free complex Q is K-flat at each stalk, and its\nquasi-isomorphism to C implies negative tensor cohomology vanishes. Tag 0653\nthen gives flatness of M at every stalk. Thus the affine module associated to M\nis finitely presented and flat, hence finite projective by Tag 00NX. Shrink\naround t until M is finite free. No quasi-coherence of C is assumed.\nDefine P by the quotient truncation of Q: zero in negative degrees, M in degree\nzero, and Q in positive degrees. It vanishes above d and all terms are finite free.\nThe quotient Q → P is a quasi-isomorphism because Q has no negative cohomology.\nSince C^{-1} = 0, the chain map e kills the image of Q^{-1} → Q^0 and factors\nthrough P. This factor is a quasi-isomorphism by two-out-of-three. Open restriction\nis exact, so the same argument and comparison hold on the shrunken neighbourhood.\nThe witnesses are constructed simultaneously; no assertion concerns an arbitrary P.\nRetain the quotient map eQ from the restricted Q to P. The degree-zero cokernel universal property and identity maps in positive degrees give eQ ≫ eP = (V → U)^*e. Thus this theorem constructs a compatible quasi-isomorphism factorization, strictly stronger than the existing construction theorem.",
-   "uses": [],
+   "text": "Use exists_local_finiteFree_truncation_zero to choose V and a finite-free isomorphism in degree zero. Set P to the explicit Mathlib quotient truncation at zero of the restriction of Q. Negative terms are zero and hence rank-zero free, positive terms retain the restricted finite-free terms of Q by truncGEXIso and pullbackFreeIso. Strict upper support is preserved by restriction and truncation; strict lower support is built into truncGE.",
+   "uses": [
+    "lem-pc-flat-model-finite-free-truncation-zero"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Open pullback is exact: transfer finite-limit preservation from restrictFunctor via restrictFunctorIsoPullback; colimits are preserved by its adjunction. Thus the restricted map is a quasi-isomorphism. Transfer IsGE 0 from the restricted C to the restricted Q with isSupported_iff_of_quasiIso. Take eQ = πTruncGE 0 and eP = truncGEMap of the restricted e followed by the inverse of the isomorphism C → C.truncGE 0. Mathlib quasiIso_πTruncGE_iff and quasiIso_truncGEMap_iff give both quasi-isomorphisms. πTruncGE_naturality followed by cancellation of the inverse gives the required equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-flat-model-finite-free-truncation-zero"
+ ],
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso",
@@ -86,12 +95,12 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-153cd",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T194116-L-456828",
+  "landing": "20261012T211612-L-1056488",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures match both node records; factorization agrees with the cited Stacks argument. Both modules and direct importer compile; original caller reproduces the reported failure. Adaptation is minimal, target statements unchanged, and axioms are standard plus the documented sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-13",

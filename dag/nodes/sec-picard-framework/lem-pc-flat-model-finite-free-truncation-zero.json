@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-flat-model-finite-free-truncation-zero",
+ "kind": "statement",
+ "title": "Local finite freeness of the canonical truncation in degree zero",
+ "statement": "Let T be a scheme, U an open subscheme, d a natural number, C a flat complex strictly supported in [0,d], Q a complex of finite-free modules strictly bounded above by d, and e : Q → C a quasi-isomorphism. For each t ∈ U, there is an open neighbourhood V ≤ U and a natural rank r such that degree zero of the canonical quotient truncation at zero of the restriction of Q to V is isomorphic to the rank-r free structure-sheaf module. The complex is fixed by Mathlib truncGE, not quantified as an arbitrary P.",
+ "source": {
+  "document": "literature/stacks-project",
+  "place": "Tags 0653 and 00NX; degree-zero cokernel in the local finite-free replacement"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood of t. The degree-zero opcycles of Q are quasi-coherent and finitely presented, being the cokernel of a map between finite-free sheaves. At each stalk the quasi-isomorphism to the bounded flat complex C gives Q Tor amplitude [0,d]. The bounded-above free complex is K-flat, so tensoring with any module has zero negative cohomology. Apply the opcycles Tor criterion at zero to obtain flatness of the cokernel.",
+   "uses": [
+    "lem-pc-module-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the affine neighbourhood, the corresponding finitely presented flat module is finite projective (Mathlib Module.Flat.projective_of_finitePresentation, Stacks 00NX). Its standard free cover contains a neighbourhood of t on which the cokernel is finite free. Exact open restriction commutes with this cokernel; CochainComplex.truncGEXIsoOpcycles identifies it with degree zero of the explicit restricted quotient truncation.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project",
+  "place": "Tags 0653 and 00NX, applied to the canonical quotient truncation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degree zero opcycles of bounded above finite free resolution of bounded flat complex locally finite free",
+   "results": "K-projective and derived-category support results; no matching scheme local-freeness theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Projective",
+   "results": "Module.Flat.projective_of_finitePresentation supplies the affine algebra step, not the stalkwise Tor argument or sheaf transport",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGEXIsoOpcycles|cokernel.*flat|opcycles.*free",
+   "results": "Mathlib truncGEXIsoOpcycles identifies the object. Library FlatOpcyclesTorCriterion and FiniteProjectiveStandardFreeCover supply strict substeps. AffineTruncationKernelFiniteLocallyFree concerns a lower-degree image with different derived hypotheses, not this cokernel.",
+   "date": "2026-10-13",
+   "verdict": "partial matches; no duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cokernel at degree zero of a bounded above finite free complex quasi-isomorphic to a bounded nonnegative flat complex is locally finite free",
+   "results": "Service unavailable: Internal Server Error. The failed request is recorded in searches.jsonl; leanfinder, loogle and grep were used instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-model-finite-free-quasi-iso",
+   "place": "Local finite freeness of degree-zero quotient truncation; maps proved separately in the parent",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeTruncation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModelFiniteFreeTruncation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_finiteFree_truncation_zero",
+  "statement": "theorem exists_local_finiteFree_truncation_zero {T : Scheme.{u}} (U : T.Opens)\n    (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)\n    (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)\n    (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme))\n    (hQle : Q.IsStrictlyLE d)\n    (hQfree : ∀ n : ℤ, ∃ r : ℕ,\n      Nonempty (Q.X n ≅ SheafOfModules.free\n        (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))\n    (e : Q ⟶ C) (he : QuasiIso e) (t : T) (ht : t ∈ U) :\n    ∃ (V : T.Opens) (hVU : V ≤ U), t ∈ V ∧ ∃ r : ℕ,\n      Nonempty ((CochainComplex.truncGE\n        (((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj Q) 0).X 0 ≅\n          SheafOfModules.free\n          (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T211612-L-1056488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T211612-L-1056488",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
