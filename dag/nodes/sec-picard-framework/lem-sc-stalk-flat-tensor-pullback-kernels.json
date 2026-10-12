@@ -15,7 +15,12 @@
  ],
  "proof": [
   {
-   "text": "Use the inverse-image ring/module stalk comparisons and change-of-rings tensor stalk comparison, naturally on maps, to identify the stalk of P(M) at x with extension of scalars of M at g(x). The adjunction-unit germ formula identifies the resulting ring map with g.hom.stalkMap x.",
+   "text": "For each point x, form k as the presheaf inverse-image stalk map followed by the stalk of sheafification, and psi as the stalk of the adjoint structure-ring map. On germs, the sheaf adjunction unit is the presheaf unit followed by sheafification. The hom-equivalence identity then gives k followed by psi equal to g.hom.stalkMap x. This is proved directly in Lean using stalk_hom_ext and the adjunction identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply inverse-image stalk scalar transport and the natural change-of-rings stalk comparison. Compose their isomorphisms to obtain delta M from extension of scalars of the original stalk to the stalk of the tensor pullback. Check naturality on generators 1 tensor m using ExtendScalars.hom_ext, the tensor map formula, and both stated naturality formulas. Transport delta through the given object equalities and map equality hm to obtain a natural isomorphism of functors.",
    "uses": [
     "lem-pc-ringed-inverse-image-stalk-scalar-transport",
     "lem-weil-pbc-stalk-change-of-rings-tensor"
@@ -23,31 +28,26 @@
    "elementary": false
   },
   {
-   "text": "Stalks preserve the original kernel. Flat extension of scalars preserves its kernel, so P(kernel a) and the stalks of P(kernel.ι a) give the kernel of the stalk of P.map a.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-flat-tensor-exact"
-   ],
-   "elementary": false
+   "text": "Stalk functors preserve finite limits: compose the sheaf-of-modules forgetful functor with the abelian-sheaf stalk functor and reflect preservation through the module-to-abelian-group forgetful functor. Flat extension of scalars preserves finite limits, by ModuleCat.preservesFiniteLimits_extendScalars_of_flat. The preceding natural isomorphism therefore makes P followed by each stalk functor preserve finite limits.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The canonical kernel comparison is therefore an isomorphism at every stalk, hence an isomorphism of module sheaves. This is preservation of parallelPair a 0; additivity supplies preservation of the zero map. This also handles empty X and zero stalk rings.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact"
-   ],
+   "text": "The stalk functors jointly reflect isomorphisms: forget to abelian sheaves, use Presheaf.isIso_of_stalkFunctor_map_iso, and reflect through SheafOfModules.toSheaf. Apply Mathlib JointlyReflectIsomorphisms.jointlyReflectsLimit to the P-image of the chosen limit cone of parallelPair a 0. Each stalk image is limiting by the preceding preservation instance. Finally preservesLimit_of_preserves_limit_cone gives the required preservation. The argument applies also to empty X and zero stalk rings.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-ringed-inverse-image-stalk-scalar-transport",
-  "lem-weil-pbc-stalk-change-of-rings-tensor",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-weil-pbc-stalk-change-of-rings-tensor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Tag 02N4, lemma-pullback-flat, kernel part of exactness; read at https://stacks.math.columbia.edu/tag/02N4"
+  "place": "Tag 02N4, lemma-pullback-flat; stalkwise finite-limit proof assembled from the existing comparison declarations and Mathlib limit reflection",
+  "group": "T1",
+  "date": "2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -119,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-e18d6",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T112853-L-772992",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T144146-L-2107827",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature and proof against the node, dependency declarations, source, report, and unit route; compiled the delivery and direct importer and checked axioms."
  }
 }
