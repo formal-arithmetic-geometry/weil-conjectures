@@ -56,7 +56,21 @@ lemma finite_fiber_degree_pullback {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶
     IsFinite ((pullback.snd f g).fiberToSpecResidueField t) ∧
       ((pullback.snd f g).fiberToSpecResidueField t).finrankΓ =
         (f.fiberToSpecResidueField (g t)).finrankΓ := by
-  sorry
+  let := hf
+  have H := isPullback_fiberToSpecResidueField_of_isPullback
+    (IsPullback.of_hasPullback f g) t
+  refine ⟨MorphismProperty.of_isPullback H hf, ?_⟩
+  let : IsAffine (pullback f (S.fromSpecResidueField (g t))) :=
+    isAffine_of_isAffineHom (f.fiberToSpecResidueField (g t))
+  let := (f.fiberToSpecResidueField (g t)).ΓAlgebra
+  let := ((pullback.snd f g).fiberToSpecResidueField t).ΓAlgebra
+  let := (g.residueFieldMap t).hom.toAlgebra
+  obtain ⟨e⟩ := nonempty_algEquiv_tensorProduct_Γ_of_isPullback (g.residueFieldMap t) H
+  have e' : TensorProduct (S.residueField (g t)) (T.residueField t) Γ(f.fiber (g t), ⊤)
+      ≃ₐ[T.residueField t] Γ((pullback.snd f g).fiber t, ⊤) := e
+  change Module.finrank _ _ = Module.finrank _ _
+  rw [← e'.toLinearEquiv.finrank_eq]
+  exact Module.finrank_baseChange
 
 /-- A bound on all finite fibre degrees is preserved by arbitrary base change.
 Source: Stacks Project, Morphisms, Tag 03J7
