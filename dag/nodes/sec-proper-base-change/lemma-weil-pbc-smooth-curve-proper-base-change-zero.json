@@ -15,16 +15,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Split the proper base-change argument by the displayed degree restriction and apply the corresponding intermediate theorem.",
+   "text": "Write the bottom map as Spec.map of a field homomorphism and install the induced k-algebra structure on k'. The quotient coefficient module is annihilated by r, since r belongs to its defining ideal. The constant-sheaf functor preserves this equation, as does inverse image along the identity of C.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "For any module sheaf F annihilated by r, evaluate the annihilation equation sectionwise to obtain the same equation for its underlying abelian sheaf. Lift that sheaf to ULift(Z/r)-modules, retaining an isomorphism to the original underlying abelian sheaf.",
+   "uses": [
+    "lem-weil-pbc-killed-sheaf-module-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Along the standard scalar-extension projection, global sections of every ULift(Z/r)-module sheaf are preserved. The degree-zero comparison therefore makes its underlying cohomology pullback bijective. Naturality of cohomology pullback with respect to the underlying-sheaf isomorphism transports both injectivity and surjectivity to F. Apply this to the identity pullback of the constant quotient sheaf.",
+   "uses": [
+    "lem-sc-algclosed-extension-module-sections",
+    "new-module-acyclic-comparison-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the restriction square with top morphism the given projection, left restriction the identity of C, and right restriction the inverse of the canonical isomorphism C' to the standard pullback. Both restrictions are isomorphisms and hence induce bijective cohomology maps. The restriction-square transport gives additive equivalences b1 and b2 intertwining the given map and the standard scalar-extension map. Prove injectivity by b1.injective and the standard map's injectivity; prove surjectivity by applying the standard map's surjectivity to b2(y) and then b2.injective.",
+   "uses": [
+    "lem-weil-pbc-cohomology-restriction-square-transport"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "lem-sc-algclosed-extension-module-sections",
+  "new-module-acyclic-comparison-zero",
+  "lem-weil-pbc-cohomology-restriction-square-transport"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "stage-3 decomposition",
-  "place": "C7 degree split"
+  "document": "Stacks Project, Tags 0A3I, 095T and 01FA; existing library coefficient and restriction-square comparisons",
+  "place": "M3: scalar-extension invariance of global sections, degree-zero cohomology comparison, and transport through the canonical pullback isomorphism"
  },
  "mathlib_searches": [
   {
@@ -88,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T184343-L-4019871",
-  "kind": "interface",
+  "landing": "20261012T194125-L-459763",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
