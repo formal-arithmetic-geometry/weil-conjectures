@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Form the explicitly defined polynomial quotient B=A[X_i,Z_ij]/(X_i^n−Σ_j Z_ij a_j). Combine a finite presentation of A over k with the finitely many auxiliary variables and equations to obtain finite presentation over R=k[X_i].",
+   "text": "The finitely generated relation ideal is the span of a finite range. The polynomial ring over A is finitely presented over k by Mathlib instances, and its quotient is finitely presented by FinitePresentation.quotient. The base evaluation map commutes with k, giving a scalar tower. Since k[X_i] is finite type over k, FinitePresentation.of_restrict_scalars_finitePresentation gives finite presentation over k[X_i].",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
     "def-weil-pbc-mv-polynomial-ring"
@@ -26,19 +26,18 @@
    "elementary": false
   },
   {
-   "text": "Each a_j belongs to H_{A/k}, so A_(a_j) is smooth over k. After inverting a_j, solve all equations for Z_ij; B_(a_j) is a polynomial algebra in the remaining Z variables over A_(a_j)[X_i]. Smoothness follows by base change and composition.",
+   "text": "Each generator a_j lies in the singular ideal by the span equality. Apply smooth_localization_of_mem_singularIdeal to A_(a_j), then popescuPolynomialCoefficientLocalization_smooth to obtain smoothness of B_(a_j).",
    "uses": [
     "lem-weil-pbc-singular-ideal-localization-smooth",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+    "lem-weil-pbc-popescu-polynomial-coefficient-localization-smooth"
    ],
    "elementary": false
   },
   {
-   "text": "The relation for X_i implies that the a_j generate the unit ideal in B_(X_i). Apply smoothness locality on this cover, using smoothness of the doubly localized a_j opens. If m=0 the localization is zero. If d=0 there are no X opens or relations.",
+   "text": "In B_(X_i), map the quotient relation X_i^n=Σ_j Z_(i,j)a_j. The left side is a unit, and the right side lies in the ideal spanned by the images of a_j, so that ideal is top. Localize each smooth B_(a_j) at X_i. The two iterated localizations are both localizations of B at X_i*a_j, giving a canonical equivalence over k[X_i]. Transport smoothness and apply smooth_of_localization_span_universes on the resulting cover. Empty families and zero rings are handled by the same unit-in-ideal proof. The positive exponent hypothesis is unnecessary for this argument but its binder is unchanged.",
    "uses": [
     "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+    "lem-weil-pbc-smooth-of-localization-span-universes"
    ],
    "elementary": false
   }
@@ -46,16 +45,15 @@
  "proof_deps": [
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-popescu-polynomial-coefficient-localization-smooth",
   "lem-weil-pbc-singular-ideal-localization-smooth",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+  "lem-weil-pbc-smooth-of-localization-span-universes",
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "proof of Lemma 07FE, first paragraph"
+  "place": "proof of Lemma 07FE, first paragraph (https://stacks.math.columbia.edu/tag/07FE)"
  },
  "mathlib_searches": [
   {
@@ -126,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c5ea2",
-  "group": "S3",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T184345-L-4020641",
+  "landing": "20261012T204507-L-868893",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered proof and two helper statements with their DAG nodes, source arguments, unchanged interfaces, clean compilation and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

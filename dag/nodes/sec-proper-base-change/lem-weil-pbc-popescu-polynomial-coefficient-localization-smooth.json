@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-popescu-polynomial-coefficient-localization-smooth",
+ "kind": "statement",
+ "title": "Smooth coefficient localization of the explicit Popescu polynomial quotient",
+ "statement": "Let k and A be commutative rings with a k-algebra structure on A. Let d,n,m be natural numbers, a:Fin m→A, and j:Fin m. Suppose A_(a j) is smooth over k [def-weil-pbc-smooth-ring-map]. Define P=A[X_i,Z_(i,l)] [def-weil-pbc-mv-polynomial-ring] and B=P/(X_i^n−Σ_l Z_(i,l)a_l) [def-weil-pbc-algebra-hom-quotient], with k[X_i]-algebra structure sending each X_i to its quotient class. Then B_(a j) is smooth over k[X_i]. No finite-presentation assumption on A, singular-ideal generation, or positive exponent is required.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "proof of Lemma 07FE, first paragraph (https://stacks.math.columbia.edu/tag/07FE)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Fix j and invert a_j. For each row i, solve uniquely for Z_(i,j) as a_j inverse times (X_i^n minus the sum over l distinct from j of Z_(i,l) a_l). Evaluation on these formulas and inclusion of the other variables induce mutually inverse maps between the localized quotient and A_(a_j)[X_i,Z_(i,l), l distinct from j]. Verify the equations and compositions on coefficients and variables by the universal properties of quotients, polynomials, and localization. These maps preserve the k[X_i] structure.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The algebra A_(a_j)[X_i] is obtained by base change from the assumed smooth k-algebra A_(a_j). The remaining finite polynomial algebra is smooth over that algebra. Compose these smooth maps and transport across the equivalence. Empty row sets and zero localizations are included; the elimination formula works for n=0 as well.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-polynomial-ring-smooth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "proof of Lemma 07FE, first paragraph (https://stacks.math.columbia.edu/tag/07FE)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Polynomial quotient by linear relations is a polynomial algebra after inverting a coefficient",
+   "results": "Unavailable: Internal Server Error. No conclusion about absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a polynomial quotient by equations linear in auxiliary variables at an invertible coefficient is smooth",
+   "results": "Eight hits on standard smooth algebras and the smooth locus; none constructs the displayed variable-elimination equivalence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*linear|linear.*quotient|eliminat.*variable|variable.*eliminat",
+   "results": "msearch grep returned 25 unrelated hits (number theory, linear algebra, and generic quotients). Local inspection of MvPolynomial quotient modules and Popescu auxiliary modules found no coefficient-localization theorem for these displayed equations.",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuPolynomialQuotientSmooth",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-polynomial-quotient-smooth",
+   "place": "coefficient-localization step of proof of Lemma 07FE"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuPolynomialCoefficientLocalizationSmooth",
+  "file": "lean/Sheaf/RingTheory/PopescuPolynomialCoefficientLocalizationSmooth.lean",
+  "declaration": "Algebra.popescuPolynomialCoefficientLocalization_smooth",
+  "statement": "theorem popescuPolynomialCoefficientLocalization_smooth\n    {k : Type u} {A : Type v} [CommRing k] [CommRing A] [Algebra k A]\n    (d n : ℕ) {m : ℕ} (a : Fin m → A) (j : Fin m)\n    (hj : Smooth k (Localization.Away (a j))) :\n    let P := MvPolynomial (Fin d ⊕ (Fin d × Fin m)) A\n    let B := P ⧸ Ideal.span (Set.range (fun i : Fin d ↦\n      MvPolynomial.X (Sum.inl i) ^ n -\n        ∑ l : Fin m, MvPolynomial.X (Sum.inr (i, l)) * MvPolynomial.C (a l)))\n    let f : MvPolynomial (Fin d) k →ₐ[k] B :=\n      MvPolynomial.aeval (fun i ↦ Ideal.Quotient.mk _ (MvPolynomial.X (Sum.inl i)))\n    letI := f.toRingHom.toAlgebra\n    Smooth (MvPolynomial (Fin d) k) (Localization.Away (algebraMap A B (a j)))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T204507-L-868893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T204507-L-868893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

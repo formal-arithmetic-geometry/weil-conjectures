@@ -8,7 +8,10 @@ module
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+
+import Sheaf.RingTheory.PopescuPolynomialCoefficientLocalizationSmooth
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import Sheaf.RingTheory.SmoothOfLocalizationSpanUniverses
 
 /-!
 # The polynomial quotient used in separable Popescu preparation
@@ -71,6 +74,71 @@ theorem popescuPolynomialQuotient_smooth
         (Localization.Away (algebraMap A B (a j)))) ∧
       ∀ i : Fin d, Smooth (MvPolynomial (Fin d) k)
         (Localization.Away
-          (algebraMap (MvPolynomial (Fin d) k) B (MvPolynomial.X i))) := by sorry
+          (algebraMap (MvPolynomial (Fin d) k) B (MvPolynomial.X i))) := by
+  classical
+  let B := PopescuPolynomialQuotient d n a
+  let : Algebra (MvPolynomial (Fin d) k) B :=
+    (popescuPolynomialBaseMap (k := k) d n a).toRingHom.toAlgebra
+  have : IsScalarTower k (MvPolynomial (Fin d) k) B :=
+    IsScalarTower.of_algebraMap_eq fun r ↦ by
+      exact (popescuPolynomialBaseMap (k := k) d n a).commutes r |>.symm
+  have : FinitePresentation k B :=
+    FinitePresentation.quotient (Submodule.fg_span (Set.finite_range _))
+  have hfp : FinitePresentation (MvPolynomial (Fin d) k) B :=
+    FinitePresentation.of_restrict_scalars_finitePresentation k (MvPolynomial (Fin d) k) B
+  have hj : ∀ j : Fin m, Smooth (MvPolynomial (Fin d) k)
+      (Localization.Away (algebraMap A B (a j))) := by
+    intro j
+    have hmem : a j ∈ singularIdeal k A := by
+      rw [← ha]
+      exact Ideal.subset_span (Set.mem_range_self j)
+    exact popescuPolynomialCoefficientLocalization_smooth d n a j
+      (smooth_localization_of_mem_singularIdeal k A (a j) hmem)
+  refine ⟨hfp, hj, ?_⟩
+  intro i
+  let x : B := algebraMap (MvPolynomial (Fin d) k) B (MvPolynomial.X i)
+  let C := Localization.Away x
+  let s : Set C := Set.range (fun j : Fin m ↦ algebraMap A C (a j))
+  have hrel : x ^ n = ∑ j : Fin m,
+      Ideal.Quotient.mk _ (MvPolynomial.X (Sum.inr (i, j))) * algebraMap A B (a j) := by
+    have hzero := Ideal.Quotient.eq_zero_iff_mem.mpr
+      (Ideal.subset_span (Set.mem_range_self (f := popescuPolynomialRelations d n a) i))
+    have hx : x = Ideal.Quotient.mk _ (MvPolynomial.X (Sum.inl i)) := by
+      change (popescuPolynomialBaseMap (k := k) d n a) (MvPolynomial.X i) = _
+      exact MvPolynomial.aeval_X _ i
+    change Ideal.Quotient.mk _ (popescuPolynomialRelations d n a i) = 0 at hzero
+    rw [popescuPolynomialRelations, map_sub, sub_eq_zero, map_pow, map_sum] at hzero
+    rw [hx]
+    simpa only [map_mul, ← MvPolynomial.algebraMap_eq,
+      Ideal.Quotient.mk_algebraMap] using hzero
+  have hs : Ideal.span s = ⊤ := by
+    have hmem : algebraMap B C (x ^ n) ∈ Ideal.span s := by
+      rw [hrel, map_sum]
+      apply Ideal.sum_mem
+      intro j _
+      rw [map_mul, ← IsScalarTower.algebraMap_apply A B C]
+      exact Ideal.mul_mem_left _ _ (Ideal.subset_span (Set.mem_range_self j))
+    exact (Ideal.span s).eq_top_of_isUnit_mem hmem
+      (by simpa only [map_pow, Nat.sub_add_cancel hn] using
+        (IsLocalization.Away.algebraMap_isUnit (S := C) x).pow (n - 1 + 1))
+  apply smooth_of_localization_span_universes (MvPolynomial (Fin d) k) C s hs
+  rintro ⟨c, hc⟩
+  obtain ⟨j, rfl⟩ := hc
+  let b : B := algebraMap A B (a j)
+  have : Smooth (MvPolynomial (Fin d) k) (Localization.Away b) := hj j
+  let D := Localization.Away (algebraMap B (Localization.Away b) x)
+  let E := Localization.Away (algebraMap B C b)
+  have : Smooth (Localization.Away b) D :=
+    Smooth.of_isLocalization_Away (algebraMap B (Localization.Away b) x)
+  have : Smooth (MvPolynomial (Fin d) k) D :=
+    Smooth.comp (MvPolynomial (Fin d) k) (Localization.Away b) D
+  have : IsLocalization.Away (x * b) D := inferInstance
+  have : IsLocalization.Away (x * b) E := inferInstance
+  have hE : Smooth (MvPolynomial (Fin d) k) E := Smooth.of_equiv
+    ((IsLocalization.algEquiv (Submonoid.powers (x * b)) D E).restrictScalars
+      (MvPolynomial (Fin d) k))
+  change Smooth (MvPolynomial (Fin d) k)
+    (Localization.Away (algebraMap B C (algebraMap A B (a j)))) at hE
+  rwa [← IsScalarTower.algebraMap_apply A B C] at hE
 
 end Algebra
