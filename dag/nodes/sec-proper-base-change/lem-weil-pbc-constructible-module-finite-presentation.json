@@ -28,138 +28,42 @@
  ],
  "proof": [
   {
-   "text": "*Setting; finite sums of extensions by zero of $\\Lambda$ from affine objects are constructible.* Write $\\Mod=\\Mod(X_{\\Et},\\Lambda)$; it is an abelian category [def-weil-sheaf-of-modules-category] (kernels sectionwise, cokernels the sheafified sectionwise cokernels), so it has finite direct sums, and for an object $W$ of $X_{\\Et}$ write $P_W=j_{W!}\\Lambda_W$ for the sheafification of $\\Lambda_X[h_W]$ as in the statement. Let $U$ be an object of $X_{\\Et}$ whose scheme is affine. Then $U$ is quasi-compact (the spectrum of a ring is quasi-compact) and quasi-separated (the diagonal of an affine scheme is a closed immersion, hence quasi-compact) [def-weil-pbc-scheme-conventions], $X$ is quasi-compact and quasi-separated, and $\\Lambda$ is a finite $\\Lambda$-module, so $P_U$ (which is $j_!\\underline\\Lambda_U$, the case $M=\\Lambda$) is a constructible sheaf of $\\Lambda$-modules [lem-weil-pbc-etale-free-sheaf-constructible]. For finitely many affine objects $U_1,\\dots,U_n$ the sum $\\bigoplus_{i=1}^nP_{U_i}$ is constructible, by induction on $n$: for $n=0$ the sum is the zero sheaf, which is constructible by [def-weil-pbc-etale-constructible-sheaf] (the stratification with the single stratum $X$, if $X\\neq\\emptyset$, or the empty one, the restriction being the constant sheaf with value the finite module $0$); for $n\\ge1$ the split short exact sequence $0\\to\\bigoplus_{i<n}P_{U_i}\\to\\bigoplus_{i\\le n}P_{U_i}\\to P_{U_n}\\to0$ of $\\Mod$ has constructible outer terms, so the middle term is constructible since constructible sheaves of $\\Lambda$-modules are closed under extensions in $\\Mod$ [thm-constructible-serre].",
+   "text": "Apply [lem-weil-pbc-constructible-module-finite-epimorphism] to F to obtain an epi g from a finite coproduct A of affine free generators. Each generator is constructible by [lem-weil-pbc-free-etale-module-shriek-comparison] and [lem-weil-pbc-etale-free-sheaf-constructible]. Using [lem-weil-pbc-constructible-etale-module-sheaf-comparison], convert to IsConstructibleSheaf, apply the source finite biproduct theorem and transport along biproduct.isoCoproduct to prove A constructible.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-constructible-module-finite-epimorphism",
+    "lem-weil-pbc-free-etale-module-shriek-comparison",
     "lem-weil-pbc-etale-free-sheaf-constructible",
-    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "thm-constructible-serre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N ('In the proof of Lemma 03SA we have seen modules of this form are constructible'), which uses Lemma 03S8 (lemma-jshriek-constructible) and Lemma 03RZ (lemma-constructible-abelian)"
-   }
+   "elementary": false
   },
   {
-   "text": "*A section gives a map from an extension by zero.* Let $\\mathcal G\\in\\Mod$, $U$ an object of $X_{\\Et}$ and $s\\in\\mathcal G(U)$. Regard $\\mathcal G$ as a presheaf of $\\Lambda_X$-modules; by [lem-weil-pbc-free-yoneda-presheaf-module] (with $\\mathcal O=\\Lambda_X$) there is a morphism of presheaves of modules $\\beta:\\Lambda_X[h_U]\\to\\mathcal G$ with $\\beta_U(e_{\\mathrm{id}_U})=s$, and by the universal property of the sheafification $\\theta:\\Lambda_X[h_U]\\to P_U$ [def-weil-presheaf-modules-sheafification] there is a unique morphism $\\sigma_s:P_U\\to\\mathcal G$ in $\\Mod$ with $\\sigma_s\\circ\\theta=\\beta$. Put $e_U=\\theta_U(e_{\\mathrm{id}_U})\\in P_U(U)$; then $(\\sigma_s)_U(e_U)=s$. Consequently, for every geometric point $\\bar x$ of $X$ and every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar x$, the induced map on stalks $(\\sigma_s)_{\\bar x}:(P_U)_{\\bar x}\\to\\mathcal G_{\\bar x}$ [def-weil-pbc-geometric-stalks] (the map of colimits induced by the components of $\\sigma_s$) sends the germ of $e_U$ at $(U,\\bar u)$ to the germ of $s$ at $(U,\\bar u)$.",
-   "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Modules on Sites, Lemma 093B (sites-modules-lemma-module-quotient-direct-sum) and the equation after Lemma 03DI (Hom(j_{U!}O_U, F) = F(U)), which give the surjection Psi of the proof of Etale Cohomology Lemma 095N (via 093C)"
-   }
-  },
-  {
-   "text": "*Stalkwise surjectivity at one geometric point from finitely many affine objects.* Let $\\mathcal G\\in\\Mod$ be constructible and $\\bar x$ a geometric point of $X$. The stalk $\\mathcal G_{\\bar x}$ is a finite set [lem-weil-pbc-constructible-module-finite-stalks]; write $\\mathcal G_{\\bar x}=\\{t_1,\\dots,t_r\\}$. The pointed etale neighbourhoods of $\\bar x$ form a cofiltered category [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so the stalk is a filtered colimit and each $t_k$ is the germ of a section $s_k'\\in\\mathcal G(V_k)$ at some pointed etale neighbourhood $(V_k,\\bar v_k)$ [lem-weil-pbc-filtered-colimit-modules-elementwise] (1). By [lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink] (with $W=V_k$) there is an affine pointed etale neighbourhood $(U_k,\\bar u_k)$ with a morphism $(U_k,\\bar u_k)\\to(V_k,\\bar v_k)$; the restriction $s_k=s_k'|_{U_k}$ has the same germ $t_k$ (compatibility of the colimit coprojections with the transition maps). By step 2 we get $\\sigma_k=\\sigma_{s_k}:P_{U_k}\\to\\mathcal G$ whose stalk map at $\\bar x$ hits $t_k$. Let $g=(\\sigma_1,\\dots,\\sigma_r):\\bigoplus_{k=1}^rP_{U_k}\\to\\mathcal G$ be the induced morphism, so $g\\circ\\mathrm{in}_k=\\sigma_k$ for the coprojections; by functoriality of stalks $(\\sigma_k)_{\\bar x}=g_{\\bar x}\\circ(\\mathrm{in}_k)_{\\bar x}$, so every $t_k$ lies in the image of $g_{\\bar x}$, i.e. $g_{\\bar x}$ is surjective. (If $\\mathcal G_{\\bar x}=0$ one may take $r=0$.)",
-   "uses": [
-    "lem-weil-pbc-constructible-module-finite-stalks",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N: 'Since every stalk F_x is a finite type Lambda-module and since Psi is surjective, for every x in X there is an I' such that x is not in T_{I'}' (here the finitely many summands of Psi = sum over pairs (U,s) with U affine are chosen directly)"
-   }
-  },
-  {
-   "text": "*The sets $T_\\sigma$.* Let $\\mathcal G\\in\\Mod$ be constructible. For a finite family $\\sigma=(U_k,\\sigma_k)_{k\\in K}$ of affine objects $U_k$ of $X_{\\Et}$ and morphisms $\\sigma_k:P_{U_k}\\to\\mathcal G$ let $g_\\sigma:\\bigoplus_{k\\in K}P_{U_k}\\to\\mathcal G$ be the induced morphism, $C_\\sigma=\\operatorname{Coker}(g_\\sigma)$ in $\\Mod$ and $T_\\sigma=\\operatorname{Supp}(C_\\sigma)=\\{y\\in X: (C_\\sigma)_{\\bar y}\\neq0$ for some geometric point $\\bar y$ over $y\\}$. (a) $C_\\sigma$ is constructible, as the cokernel of a morphism between constructible sheaves (step 1 and the hypothesis on $\\mathcal G$) [thm-constructible-serre]; hence $T_\\sigma$ is a constructible subset of $X$ [lem-weil-pbc-constructible-module-support-constructible]. (b) The underlying abelian sheaf of $C_\\sigma$ is the cokernel of the underlying morphism of abelian sheaves: in $\\Mod$ the cokernel is the sheafification of the sectionwise cokernel [def-weil-sheaf-of-modules-category], whose underlying abelian sheaf is the sheafification as a presheaf of abelian groups [def-weil-presheaf-modules-sheafification], which is the cokernel in $\\Ab(X_{\\Et})$ [def-weil-pbc-etale-sheaves]; and the stalk functor at a geometric point $\\bar y$ is exact [prop-weil-pbc-geometric-stalks-exact], so $(C_\\sigma)_{\\bar y}=\\operatorname{Coker}((g_\\sigma)_{\\bar y})$; thus $(C_\\sigma)_{\\bar y}=0$ iff $(g_\\sigma)_{\\bar y}$ is surjective. (c) If $\\sigma\\subseteq\\sigma'$ (a subfamily), then $g_\\sigma=g_{\\sigma'}\\circ\\iota$ with $\\iota$ the inclusion of the partial sum, so the image of $(g_\\sigma)_{\\bar y}$ is contained in that of $(g_{\\sigma'})_{\\bar y}$ (functoriality of stalks); by (b), $(C_\\sigma)_{\\bar y}=0$ implies $(C_{\\sigma'})_{\\bar y}=0$, hence $T_{\\sigma'}\\subseteq T_\\sigma$.",
+   "text": "The source IsConstructibleSheaf.kernel g realizes [thm-constructible-serre]. Transfer its conclusion back through [lem-weil-pbc-constructible-etale-module-sheaf-comparison], obtaining constructibility of kernel g. Apply [lem-weil-pbc-constructible-module-finite-epimorphism] again to get an epi h from a finite affine free coproduct B onto kernel g.",
    "uses": [
     "thm-constructible-serre",
-    "lem-weil-pbc-constructible-module-support-constructible",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-constructible-module-finite-epimorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N: 'T_{I'} = Supp(Coker(...)). By the very definition of constructible sheaves, the set T_{I'} is a constructible subset of X' (this is Lemma 09YS (3), lemma-support-constructible, with Lemma 03RZ for the cokernel)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Every point is avoided by some finite family.* Let $\\mathcal G$ be constructible and $x\\in X$; choose a geometric point $\\bar x$ of $X$ lying over $x$ (e.g. $\\operatorname{Spec}$ of an algebraic closure of $\\kappa(x)$) [def-weil-geometric-point]. By step 3 there is a finite family $\\sigma^x$ as in step 4 with $(g_{\\sigma^x})_{\\bar x}$ surjective, so $(C_{\\sigma^x})_{\\bar x}=0$ by step 4 (b). By [lem-weil-pbc-constructible-module-support-constructible] (i), applied to the constructible sheaf $C_{\\sigma^x}$ (step 4 (a)), the stalk of $C_{\\sigma^x}$ then vanishes at every geometric point lying over $x$, i.e. $x\\notin T_{\\sigma^x}$.",
-   "uses": [
-    "def-weil-geometric-point",
-    "lem-weil-pbc-constructible-module-support-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N ('for every x in X there is an I' such that x is not in T_{I'}'), with the independence of the support from the geometric point (paragraph before Definition 04FS, Remark 04FN)"
-   }
-  },
-  {
-   "text": "*Quasi-compactness of the constructible topology.* With the families $\\sigma^x$ of step 5, $(T_{\\sigma^x})_{x\\in X}$ is a family of constructible subsets of $X$ (step 4 (a)) with $\\bigcap_{x\\in X}T_{\\sigma^x}=\\emptyset$ (step 5: $x\\notin T_{\\sigma^x}$). The underlying space of $X$ is spectral, $X$ being quasi-compact and quasi-separated [lem-weil-pbc-qcqs-scheme-spectral], so there are finitely many points $x_1,\\dots,x_p$ with $\\bigcap_{l=1}^pT_{\\sigma^{x_l}}=\\emptyset$ [lem-weil-pbc-spectral-constructible-finite-intersection]. Let $\\sigma$ be the concatenation of the finite families $\\sigma^{x_1},\\dots,\\sigma^{x_p}$ (a finite family of affine objects $U_1,\\dots,U_n$ with morphisms $P_{U_i}\\to\\mathcal G$). Each $\\sigma^{x_l}$ is a subfamily of $\\sigma$, so $T_\\sigma\\subseteq T_{\\sigma^{x_l}}$ for all $l$ by step 4 (c), hence $T_\\sigma\\subseteq\\bigcap_lT_{\\sigma^{x_l}}=\\emptyset$ (if $p=0$, then $X=\\emptyset$, $\\sigma$ is empty and $T_\\sigma\\subseteq X=\\emptyset$).",
-   "uses": [
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-weil-pbc-spectral-constructible-finite-intersection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N: 'we have emptyset = intersection of the T_{I'}. Since X is a spectral space by Properties, Lemma 094L the constructible topology on X is quasi-compact by Topology, Lemma 0901. Thus T_{I'} = emptyset for some I' finite'"
-   }
-  },
-  {
-   "text": "*A finite surjection onto every constructible sheaf.* With $\\sigma$ of step 6, every geometric stalk of $C_\\sigma$ is $0$ ($T_\\sigma=\\emptyset$). The morphism $0\\to C_\\sigma$ of underlying abelian sheaves is therefore an isomorphism at every geometric stalk, hence an isomorphism [lemma-weil-pbc-geometric-stalk-conservative]; so the identity of $C_\\sigma$ and the zero endomorphism agree after forgetting the module structure, and since a morphism of sheaves of $\\Lambda_X$-modules is a morphism of the underlying abelian sheaves with a linearity property [def-weil-sheaf-of-modules-category] (two morphisms with the same underlying morphism are equal), $C_\\sigma=0$ in $\\Mod$. In the abelian category $\\Mod$ a morphism with zero cokernel is an epimorphism. Conclusion: for every constructible $\\mathcal G\\in\\Mod$ there are $n\\ge0$, affine objects $U_1,\\dots,U_n$ of $X_{\\Et}$ and an epimorphism $\\bigoplus_{i=1}^nP_{U_i}\\to\\mathcal G$.",
-   "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N: 'it suffices to prove that given a constructible module F there is a surjection (+)_{i=1..n} j_{U_i!}Lambda_{U_i} -> F for some affine objects U_i'"
-   }
-  },
-  {
-   "text": "*The presentation.* Apply step 7 to $\\mathcal G=\\mathcal F$: there are affine objects $U_1,\\dots,U_n$ and an epimorphism $g:\\bigoplus_{i=1}^nP_{U_i}\\to\\mathcal F$. Let $\\kappa:\\mathcal K\\to\\bigoplus_iP_{U_i}$ be the kernel of $g$ in $\\Mod$; $\\mathcal K$ is constructible, as the kernel of a morphism between constructible sheaves (step 1 and the hypothesis) [thm-constructible-serre]. Apply step 7 to $\\mathcal G=\\mathcal K$: there are affine objects $V_1,\\dots,V_m$ and an epimorphism $h:\\bigoplus_{j=1}^mP_{V_j}\\to\\mathcal K$. Put $f=\\kappa\\circ h$. In the abelian category $\\Mod$: $g\\circ f=0$; the image of $f$ equals the image of $\\kappa$, which is $\\operatorname{Ker}(g)$, because $h$ is an epimorphism; and $g$ is an epimorphism. Hence $\\bigoplus_jP_{V_j}\\xrightarrow{f}\\bigoplus_iP_{U_i}\\xrightarrow{g}\\mathcal F\\to0$ is exact, i.e. $g$ is a cokernel of $f$ (an epimorphism is the cokernel of its kernel, and $\\operatorname{Coker}(\\kappa\\circ h)=\\operatorname{Coker}(\\kappa)$ as $h$ is an epimorphism).",
-   "uses": [
-    "thm-constructible-serre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 095N: 'Since the category of constructible modules is abelian (Lemma 03RZ) it suffices to prove ... a surjection', written out"
-   }
+   "text": "Set f = h ≫ kernel.ι g. kernel.condition and associativity give f ≫ g = 0. Abelian.epiIsCokernelOfKernel says g is a cokernel of kernel.ι g; isCokernelEpiComp precomposes that kernel arrow by the epi h, giving IsColimit (CokernelCofork.ofπ g w). Package n,m,U,V,affineness,f,g,w and this colimit witness.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-constructible-module-finite-epimorphism",
+  "lem-weil-pbc-free-etale-module-shriek-comparison",
   "lem-weil-pbc-etale-free-sheaf-constructible",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "thm-constructible-serre",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-constructible-module-finite-stalks",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-  "lem-weil-pbc-constructible-module-support-constructible",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-geometric-point",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-spectral-constructible-finite-intersection",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 095N (lemma-category-constructible-modules), proof, line 12428 ff., direction 'constructible implies cokernel'"
+  "place": "Tag 095N, final presentation step: apply the finite epimorphism twice, then use the abelian cokernel-of-kernel universal property. Lean implementation by S1 on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -243,5 +147,15 @@
   "group": "M1",
   "result": "pass",
   "note": "qcqs X as CompactSpace/QuasiSeparatedSpace; finite comm Λ (zero ring allowed); F in recorded ModuleCat encoding with IsConstructibleEtaleModuleSheaf; j_{W!}Λ_W = sheafified uliftYoneda ⋙ ModuleCat.free (no landed ModuleCat-encoding j_! exists; SheafOfModules ExtensionByZeroPresheaf/QuotientJShriek are the ring-sheaf encoding); Fin n/Fin m families with IsAffine .left; ∐ finite sums; g cokernel of f via IsColimit CokernelCofork; full names #checked"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

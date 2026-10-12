@@ -9,9 +9,14 @@ public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteEpimorphism
+import Sheaf.AlgebraicGeometry.FreeEtaleModuleShriekComparison
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.ConstructibleSheaf.Monoidal
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
 import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -81,6 +86,36 @@ theorem exists_affine_free_etale_presentation
       ∃ (f : (∐ fun j : Fin m => P (V j)) ⟶ (∐ fun i : Fin n => P (U i)))
         (g : (∐ fun i : Fin n => P (U i)) ⟶ F)
         (w : f ≫ g = 0), Nonempty (IsColimit (CokernelCofork.ofπ g w)) := by
-  sorry
+  classical
+  let P : X.Etale → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) := fun W ↦
+    (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)
+  have hP (W : X.Etale) (hW : IsAffine W.left) :
+      IsConstructibleSheaf (P W) := by
+    have : IsAffine W.left := hW
+    obtain ⟨e⟩ := free_etale_module_shriek_comparison X Λ W
+    have hc := isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
+      (X := X) (U := W.left) W.hom (ModuleCat.of Λ Λ)
+    have := (isConstructibleEtaleModuleSheaf_iff _).mp hc
+    exact IsConstructibleSheaf.of_iso e.symm
+  obtain ⟨n, U, hU, g, hg⟩ := exists_affine_free_etale_epimorphism X Λ F hF
+  have : Epi g := hg
+  have : ∀ i : Fin n, IsConstructibleSheaf (P (U i)) := fun i ↦ hP (U i) (hU i)
+  have := Abelian.hasFiniteBiproducts
+    (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  have := IsConstructibleSheaf.biproduct (fun i : Fin n ↦ P (U i))
+  have := IsConstructibleSheaf.of_iso
+    (biproduct.isoCoproduct (fun i : Fin n ↦ P (U i)))
+  have := (isConstructibleEtaleModuleSheaf_iff F).mp hF
+  have := IsConstructibleSheaf.kernel g
+  have hK := (isConstructibleEtaleModuleSheaf_iff (kernel g)).mpr
+    (inferInstance : IsConstructibleSheaf (kernel g))
+  obtain ⟨m, V, hV, h, hh⟩ := exists_affine_free_etale_epimorphism X Λ (kernel g) hK
+  have : Epi h := hh
+  refine ⟨n, m, U, V, hU, hV, h ≫ kernel.ι g, g, ?_, ?_⟩
+  · simp
+  · exact ⟨isCokernelEpiComp
+      (Abelian.epiIsCokernelOfKernel
+        (KernelFork.ofι (kernel.ι g) (kernel.condition g)) (kernelIsKernel g)) h rfl⟩
 
 end AlgebraicGeometry.Scheme

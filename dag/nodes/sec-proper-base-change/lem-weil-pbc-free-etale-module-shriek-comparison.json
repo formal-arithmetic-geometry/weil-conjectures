@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-free-etale-module-shriek-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-finitely-presented",
+   "place": "Proof of 09Z4, finite-presentation input 095N; identification of the free generators with extensions by zero",
+   "via": [
+    "lem-weil-pbc-constructible-module-finite-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Free representable module sheaves are etale extensions by zero",
+ "statement": "Let $X$ be a scheme and $W$ an object of its small etale site [def-weil-pbc-etale-site]. Let $\\Lambda$ be a commutative ring, with sheaves encoded as $\\operatorname{Sheaf}(X_{\\mathrm{et}},\\operatorname{ModuleCat}\\Lambda)$ [def-weil-pbc-etale-sheaves]. Write $P_W$ for the sheafification [def-weil-presheaf-modules-sheafification] of the presheaf $V\\mapsto\\Lambda^{(\\operatorname{Hom}_X(V,W))}$, with restriction induced by precomposition. There is an isomorphism $P_W\\cong j_{W!}\\underline{\\Lambda}_{W}$, where $j_{W!}$ is etale extension by zero [def-weil-pbc-etale-sum-extension] and $\\underline{\\Lambda}_W$ is the constant rank-one module sheaf [def-weil-pbc-constant-sheaf]. No quasi-compactness, affineness, separatedness, or finiteness of $\\Lambda$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero and equation-map-lower-shriek-OU-into-module immediately following it; natural representing-object argument realized with Mathlib adjunctions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The free-forgetful adjunction for ModuleCat, whiskered over the site, and ulift Yoneda identify presheaf maps from the free representable with sections of F on W. Compose with sheafificationAdjunction to obtain the natural equivalence Hom(P_W,F) ≃ F(W). This is sectionEquiv in Lean.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The etale extension-by-zero/pullback adjunction, followed by upperStarIsoLocalizationRestriction, identifies Hom(j_! constant Λ,F) with Hom(constant Λ,F restricted to W). The constant-sheaf adjunction evaluates at the terminal etale W-object (W,id). The restriction there is F evaluated at the localization image of (W,id), canonically isomorphic to W. Finally linear maps Λ → F(W) are identified with F(W) by evaluation at 1. This is shriekSectionEquiv in Lean.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both equivalences commute with postcomposition. For the second, use naturality of the pullback/restriction comparison, naturality of the constant-sheaf adjunction, and naturality of F→G along the inverse of the localization-terminal isomorphism. Combine the equivalences and apply Coyoneda.ext to obtain the isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero and equation-map-lower-shriek-OU-into-module immediately following it; natural representing-object argument realized with Mathlib adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheafification of the free module on an etale representable is extension by zero of the constant rank one module sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of a free module on an etale representable is isomorphic to the etale extension by zero of the constant rank one module sheaf",
+   "results": "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.mapFree, SheafOfModules.freeHomEquiv, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree, SheafOfModules.Presentation.mapGenerators, PresheafOfModules.sheafificationCompToSheaf",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "uliftYonedaEquiv|constantSheafAdj|freeYoneda",
+   "results": "Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Generator/Presheaf.lean, Mathlib/CategoryTheory/Generator/Presheaf.lean, Mathlib/CategoryTheory/Generator/Presheaf.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison; the found adjunctions and Yoneda equivalence are used to prove it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FreeEtaleModuleShriekComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeEtaleModuleShriekComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.free_etale_module_shriek_comparison",
+  "statement": "theorem free_etale_module_shriek_comparison (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (W : X.Etale) : Nonempty ((presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ) ≅ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) W.hom inferInstance).obj ((constantSheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
