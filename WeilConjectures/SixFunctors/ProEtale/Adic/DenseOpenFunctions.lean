@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 
 /-!
@@ -27,7 +28,9 @@ from its value at `x` form a relatively clopen set whose closure does not contai
 
 @[expose] public section
 
-open Topology
+universe u
+
+open CategoryTheory Limits Topology
 
 namespace PadicAlgCl
 
@@ -104,3 +107,68 @@ theorem bijective_locallyFiniteFunctionsComp_of_isOpenEmbedding (e : C(T', T))
   exact ⟨y z, (hy z).mem_open hN hz, rfl⟩
 
 end PadicAlgCl
+
+namespace AlgebraicGeometry
+
+variable {l : ℕ} [Fact l.Prime]
+
+/-- For a quasi-compact open immersion `j` into `C` and any morphism `f : W ⟶ C`, the preimage
+of the range of `j` meets every affine open of `W` in a quasi-compact set. -/
+lemma isCompact_preimage_range_inter_of_isAffineOpen {W C U : Scheme.{u}} (f : W ⟶ C)
+    (j : U ⟶ C) [QuasiCompact j] {N : W.Opens} (hN : IsAffineOpen N) :
+    IsCompact (f ⁻¹' Set.range j ∩ N) := by
+  have h := ((pullback.fst f j).isCompact_preimage (U := N) hN.isCompact).image
+    (pullback.fst f j).continuous
+  change IsCompact (pullback.fst f j '' (pullback.fst f j ⁻¹' (N : Set W))) at h
+  rwa [Set.image_preimage_eq_inter_range, Scheme.Pullback.range_fst, Set.inter_comm] at h
+
+/-- **Locally finite functions extend uniquely over the preimage of a dense open.** Let
+`f : W ⟶ C` be flat with integral local rings on `W`, `j : U ⟶ C` a quasi-compact open immersion
+with dense image and `ι : W' ⟶ W` an open immersion onto `f⁻¹(j(U))`. Then restriction along `ι`
+is a bijection on locally finite continuous `ℓ`-adic functions.
+
+Every point of `W` generizes into `W'`, the open `j(U)` being dense and quasi-compact and `f`
+lifting generizations; the generizations of a point have a common generization, the local
+rings being domains; and closures of quasi-compact opens in affine opens are detected by
+specializations (`AlgebraicGeometry.Scheme.exists_specializes_of_mem_closure`). -/
+theorem bijective_locallyFiniteFunctionsComp_of_isOpenImmersion {W W' C U : Scheme.{u}}
+    (f : W ⟶ C) [Flat f] (hW : ∀ w : W, IsDomain (W.presheaf.stalk w)) (j : U ⟶ C)
+    [IsOpenImmersion j] [QuasiCompact j] (hj : Dense (Set.range j)) (ι : W' ⟶ W)
+    [IsOpenImmersion ι] (hι : Set.range ι = f ⁻¹' Set.range j) :
+    Function.Bijective (PadicAlgCl.locallyFiniteFunctionsComp l ι.base.hom) := by
+  have he : IsOpenEmbedding ι := ι.isOpenEmbedding
+  -- the preimages in `W'` of affine opens of `W` are quasi-compact
+  have hcpt {N : W.Opens} (hN : IsAffineOpen N) : IsCompact (ι ⁻¹' N) := by
+    rw [he.isInducing.isCompact_iff, Set.image_preimage_eq_inter_range, hι, Set.inter_comm]
+    exact isCompact_preimage_range_inter_of_isAffineOpen f j hN
+  have haff (x : W) : ∃ N : W.Opens, IsAffineOpen N ∧ x ∈ N := by
+    obtain ⟨_, ⟨N, hN, rfl⟩, hxN, -⟩ :=
+      W.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+    exact ⟨N, hN, hxN⟩
+  refine PadicAlgCl.bijective_locallyFiniteFunctionsComp_of_isOpenEmbedding _ he
+    (fun x ↦ ?_) (fun x y₁ y₂ h₁ h₂ ↦
+      Scheme.exists_specializes_and_specializes_of_isDomain_stalk (hW x) h₁ h₂)
+    (fun B hB x hx ↦ ?_) (fun x ↦ ?_)
+  · -- every point of `W` generizes into `W'`
+    obtain ⟨_, ⟨N, hN, rfl⟩, hxN, -⟩ :=
+      C.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+    have hc : IsCompact (Set.range j ∩ N) := by
+      have h := (j.isCompact_preimage (U := N) hN.isCompact).image j.continuous
+      change IsCompact (j '' (j ⁻¹' (N : Set C))) at h
+      rwa [Set.image_preimage_eq_inter_range, Set.inter_comm] at h
+    obtain ⟨u, hu, hux⟩ := Scheme.exists_specializes_of_mem_closure
+      j.isOpenEmbedding.isOpen_range hN hxN hc (hj.closure_eq ▸ Set.mem_univ _)
+    obtain ⟨x', hx'x, rfl⟩ := Flat.generalizingMap f hux
+    obtain ⟨y, rfl⟩ : x' ∈ Set.range ι := by rw [hι]; exact hu
+    exact ⟨y, hx'x⟩
+  · obtain ⟨N, hN, hxN⟩ := haff x
+    have hc : IsCompact (ι '' B ∩ N) := by
+      rw [← Set.image_inter_preimage]
+      exact ((hcpt hN).inter_left hB.isClosed).image ι.continuous
+    obtain ⟨_, ⟨b, hb, rfl⟩, hbx⟩ :=
+      Scheme.exists_specializes_of_mem_closure (he.isOpenMap B hB.isOpen) hN hxN hc hx
+    exact ⟨b, hb, hbx⟩
+  · obtain ⟨N, hN, hxN⟩ := haff x
+    exact ⟨N, N.isOpen, hxN, hcpt hN⟩
+
+end AlgebraicGeometry
