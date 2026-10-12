@@ -191,6 +191,22 @@ lemma extendRestrict_smul (A V : Z.Opens) (r : Γ(Z, V))
 
 variable {ι : Type u} (U : ι → Z.Opens)
 
+/-- The sections of the Čech resolution in explicit cochains, through the restriction maps of the
+presheaf `V ↦ j_{V,*} (M|_V)`. -/
+lemma sectionsCechResolutionIso_hom_f_apply' (V : Z.Opens) (k : ℕ)
+    (x : Γ((cechResolution U M).X k, V)) (y : Fin (k + 1) → ι) :
+    (sectionsCechResolutionIso U M V).hom.f k x y =
+      Hom.app ((cechPresheaf M).map (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op) V
+        (Hom.app (Pi.π (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l))))
+          y) V x) := by
+  change cechComplexFunctorXAddEquiv U (cechPresheaf M ⋙ sectionsModuleFunctor V) k
+    ((cechComplexFunctorMapIso U (sectionsModuleFunctor V) (cechPresheaf M)).hom.f k x) y = _
+  rw [cechComplexFunctorXAddEquiv_apply, cechComplexFunctorMapIso_hom_f, cechComplexFunctorπ]
+  have h := ConcreteCategory.congr_hom (piComparison_comp_π (sectionsModuleFunctor V)
+    (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y) x
+  rw [ConcreteCategory.comp_apply] at h
+  exact congrArg _ h
+
 /-- The sections of the Čech resolution in explicit cochains. -/
 lemma sectionsCechResolutionIso_hom_f_apply (V : Z.Opens) (k : ℕ)
     (x : Γ((cechResolution U M).X k, V)) (y : Fin (k + 1) → ι) :
@@ -198,16 +214,133 @@ lemma sectionsCechResolutionIso_hom_f_apply (V : Z.Opens) (k : ℕ)
       M.presheaf.map (homOfLE (ι_image_preimage_mono (TopCat.Presheaf.iInf_le_piObj U y) V)).op
         ((Pi.π (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y).app
           V x) := by
-  change cechComplexFunctorXAddEquiv U (cechPresheaf M ⋙ sectionsModuleFunctor V) k
-    ((cechComplexFunctorMapIso U (sectionsModuleFunctor V) (cechPresheaf M)).hom.f k x) y = _
-  rw [cechComplexFunctorXAddEquiv_apply, cechComplexFunctorMapIso_hom_f, cechComplexFunctorπ]
-  have h := ConcreteCategory.congr_hom (piComparison_comp_π (sectionsModuleFunctor V)
-    (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y) x
-  rw [ConcreteCategory.comp_apply] at h
-  refine (congrArg _ h).trans ?_
+  rw [sectionsCechResolutionIso_hom_f_apply']
   exact ConcreteCategory.congr_hom
     (cechPresheaf_map_app M (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op V) _
 
+/-- The identification of the sections of the Čech resolution with explicit cochains is linear
+over the functions. -/
+lemma sectionsCechResolutionIso_hom_f_smul (V : Z.Opens) (k : ℕ) (r : Γ(Z, V))
+    (x : Γ((cechResolution U M).X k, V)) (y : Fin (k + 1) → ι) :
+    (sectionsCechResolutionIso U M V).hom.f k (r • x) y =
+      (show Γ((cechPresheaf M).obj (op (⨅ l, U (y l))), V) from
+        r • (show Γ((cechPresheaf M).obj (op (⨅ l, U (y l))), V) from
+          (sectionsCechResolutionIso U M V).hom.f k x y)) := by
+  rw [sectionsCechResolutionIso_hom_f_apply', sectionsCechResolutionIso_hom_f_apply',
+    Hom.app_smul, Hom.app_smul]
+
+/-- The restriction of a section of the Čech resolution, in explicit cochains. -/
+lemma sectionsCechResolutionIso_hom_f_presheaf_map {V V' : Z.Opens} (h : V' ≤ V) (k : ℕ)
+    (x : Γ((cechResolution U M).X k, V)) (y : Fin (k + 1) → ι) :
+    (sectionsCechResolutionIso U M V').hom.f k
+        (((cechResolution U M).X k).presheaf.map (homOfLE h).op x) y =
+      ((cechPresheaf M).obj (op (⨅ l, U (y l)))).presheaf.map (homOfLE h).op
+        ((sectionsCechResolutionIso U M V).hom.f k x y) := by
+  rw [sectionsCechResolutionIso_hom_f_apply', sectionsCechResolutionIso_hom_f_apply']
+  erw [Hom.app_presheaf_map (Pi.π _ y) (homOfLE h) x]
+  exact Hom.app_presheaf_map _ (homOfLE h) _
+
+lemma sectionsCechResolutionIso_inv_hom_f_apply (V : Z.Opens) (k : ℕ)
+    (x : Γ((cechResolution U M).X k, V)) :
+    (sectionsCechResolutionIso U M V).inv.f k ((sectionsCechResolutionIso U M V).hom.f k x) =
+      x := by
+  change ((sectionsCechResolutionIso U M V).hom.f k ≫
+    (sectionsCechResolutionIso U M V).inv.f k) x = x
+  rw [← HomologicalComplex.comp_f, Iso.hom_inv_id, HomologicalComplex.id_f]
+  rfl
+
+lemma sectionsCechResolutionIso_hom_inv_f_apply (V : Z.Opens) (k : ℕ) (c) :
+    (sectionsCechResolutionIso U M V).hom.f k ((sectionsCechResolutionIso U M V).inv.f k c) =
+      c := by
+  change ((sectionsCechResolutionIso U M V).inv.f k ≫
+    (sectionsCechResolutionIso U M V).hom.f k) c = c
+  rw [← HomologicalComplex.comp_f, Iso.inv_hom_id, HomologicalComplex.id_f]
+  rfl
+
+lemma cechPresheaf_obj_presheaf_map_apply (A : Z.Opens) {V V' : Z.Opens} (h : V' ≤ V)
+    (x : Γ(M, A.ι ''ᵁ A.ι ⁻¹ᵁ V)) :
+    ((cechPresheaf M).obj (op A)).presheaf.map (homOfLE h).op x =
+      M.presheaf.map (homOfLE (by
+          rw [ι_image_preimage, ι_image_preimage]; exact inf_le_inf_left A h :
+        A.ι ''ᵁ A.ι ⁻¹ᵁ V' ≤ A.ι ''ᵁ A.ι ⁻¹ᵁ V)).op x :=
+  rfl
+
 end Sections
+
+/-! ### Linearity and restriction of the base change map -/
+
+section Linear
+
+lemma sectionsBaseChangeOpen_smul {UX : X.Opens} {Z : Y.Opens} (hZ : Z ≤ g' ⁻¹ᵁ UX ⊓ f' ⁻¹ᵁ W)
+    (b : Γ(T, W)) (w : Γ(T, W) ⊗[Γ(S, ⊤)] sectionsModule f ℱ UX) :
+    sectionsBaseChangeOpen H ℱ W hg hZ (b • w) =
+      f'.appLE W Z (hZ.trans inf_le_right) b • sectionsBaseChangeOpen H ℱ W hg hZ w := by
+  induction w using TensorProduct.induction_on with
+  | zero => simp only [smul_zero, map_zero]
+  | add x y hx hy => rw [smul_add, map_add, map_add, hx, hy, smul_add]
+  | tmul b' m =>
+    rw [TensorProduct.smul_tmul', smul_eq_mul, sectionsBaseChangeOpen_tmul,
+      sectionsBaseChangeOpen_tmul, map_mul, mul_smul]
+
+/-- **The base change map of Čech cochains is semilinear**, once identified with the sections of
+the Čech resolution: `b • w ↦ f'^♯ b • (…)`. -/
+lemma sectionsCechResolutionIso_inv_cechSectionsBaseChangeX_smul (k : ℕ) (b : Γ(T, W))
+    (w : Γ(T, W) ⊗[Γ(S, ⊤)] (∀ y : Fin (k + 1) → ι, sectionsModule f ℱ (⨅ l, U (y l)))) :
+    (sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ) (f' ⁻¹ᵁ W)).inv.f k
+        (cechSectionsBaseChangeX H ℱ U W hg k (b • w)) =
+      (show Γ((cechResolution (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)).X k, f' ⁻¹ᵁ W) from
+        f'.app W b •
+          (show Γ((cechResolution (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)).X k, f' ⁻¹ᵁ W)
+            from (sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)
+              (f' ⁻¹ᵁ W)).inv.f k (cechSectionsBaseChangeX H ℱ U W hg k w))) := by
+  set iso := sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ) (f' ⁻¹ᵁ W)
+  set s : Γ((cechResolution (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)).X k, f' ⁻¹ᵁ W) :=
+    iso.inv.f k (cechSectionsBaseChangeX H ℱ U W hg k w)
+  have hs : iso.hom.f k s = cechSectionsBaseChangeX H ℱ U W hg k w :=
+    sectionsCechResolutionIso_hom_inv_f_apply _ _ _ _ _
+  have key : cechSectionsBaseChangeX H ℱ U W hg k (b • w) = iso.hom.f k (f'.app W b • s) := by
+    funext y
+    rw [sectionsCechResolutionIso_hom_f_smul, hs]
+    change sectionsBaseChangeOpen H ℱ W hg (cech_image_preimage_le U W y)
+      (((LinearMap.proj (R := Γ(S, ⊤)) y).baseChange Γ(T, W)) (b • w)) = _
+    rw [LinearMap.map_smul, sectionsBaseChangeOpen_smul]
+    exact (extendRestrict_smul _ _ _ _ _).symm
+  rw [key]
+  exact sectionsCechResolutionIso_inv_hom_f_apply _ _ _ _ _
+
+/-- **The base change map of Čech cochains is compatible with restriction** from `W'` to
+`W ≤ W'`, on the cochains `1 ⊗ m`. -/
+lemma presheaf_map_sectionsCechResolutionIso_inv_one_tmul {W' : T.Opens} (hW : W ≤ W')
+    [Algebra Γ(S, ⊤) Γ(T, W')]
+    (hg' : algebraMap Γ(S, ⊤) Γ(T, W') = (g.appLE ⊤ W' (le_top.trans g.preimage_top.ge)).hom)
+    (k : ℕ) (m : ∀ y : Fin (k + 1) → ι, sectionsModule f ℱ (⨅ l, U (y l))) :
+    ((cechResolution (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)).X k).presheaf.map
+        (homOfLE (f'.preimage_mono hW)).op
+        ((sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)
+          (f' ⁻¹ᵁ W')).inv.f k (cechSectionsBaseChangeX H ℱ U W' hg' k (1 ⊗ₜ m))) =
+      (sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)
+          (f' ⁻¹ᵁ W)).inv.f k (cechSectionsBaseChangeX H ℱ U W hg k (1 ⊗ₜ m)) := by
+  set iso' := sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ) (f' ⁻¹ᵁ W')
+  set s' : Γ((cechResolution (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)).X k, f' ⁻¹ᵁ W') :=
+    iso'.inv.f k (cechSectionsBaseChangeX H ℱ U W' hg' k (1 ⊗ₜ m))
+  have hs' : iso'.hom.f k s' = cechSectionsBaseChangeX H ℱ U W' hg' k (1 ⊗ₜ m) :=
+    sectionsCechResolutionIso_hom_inv_f_apply _ _ _ _ _
+  set iso := sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ) (f' ⁻¹ᵁ W)
+  have key : iso.hom.f k
+      (((cechResolution (fun i ↦ g' ⁻¹ᵁ U i) ((pullback g').obj ℱ)).X k).presheaf.map
+        (homOfLE (f'.preimage_mono hW)).op s') =
+      cechSectionsBaseChangeX H ℱ U W hg k (1 ⊗ₜ m) := by
+    funext y
+    rw [sectionsCechResolutionIso_hom_f_presheaf_map, hs', cechSectionsBaseChangeX_tmul,
+      cechSectionsBaseChangeX_tmul]
+    erw [sectionsBaseChangeOpen_tmul, sectionsBaseChangeOpen_tmul]
+    simp only [map_one, one_smul]
+    erw [cechPresheaf_obj_presheaf_map_apply]
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+    rfl
+  rw [← key]
+  exact (sectionsCechResolutionIso_inv_hom_f_apply _ _ _ _ _).symm
+
+end Linear
 
 end AlgebraicGeometry.Scheme.Modules

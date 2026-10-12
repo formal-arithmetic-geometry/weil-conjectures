@@ -190,6 +190,27 @@ instance : Mono (torsionι M) :=
     inferInstanceAs (Mono (torsionSubmodule M).ι)
   Functor.mono_of_mono_map (SheafOfModules.forget _) this
 
+variable (M) in
+/-- The torsion-free quotient `M / M_tors` of `M`. On a smooth curve it is locally free of rank
+`rk M` for coherent `M`. -/
+noncomputable def torsionQuotient : X.Modules :=
+  cokernel (torsionι M)
+
+variable (M) in
+/-- The projection `M ⟶ M / M_tors`. -/
+noncomputable def torsionπ : M ⟶ torsionQuotient M :=
+  cokernel.π (torsionι M)
+
+variable (M) in
+/-- The short exact sequence `0 ⟶ M_tors ⟶ M ⟶ M / M_tors ⟶ 0`. -/
+noncomputable def torsionShortComplex : ShortComplex X.Modules :=
+  ShortComplex.mk (torsionι M) (torsionπ M) (cokernel.condition _)
+
+variable (M) in
+lemma shortExact_torsionShortComplex : (torsionShortComplex M).ShortExact :=
+  .mk' (ShortComplex.exact_cokernel _) (inferInstanceAs (Mono (torsionι M)))
+    (inferInstanceAs (Epi (cokernel.π _)))
+
 lemma torsion_presheaf_map_val {U V : X.Opens} (i : V ⟶ U) (s : Γ(torsion M, U)) :
     ((torsion M).presheaf.map i.op s).1 = M.presheaf.map i.op s.1 :=
   rfl
