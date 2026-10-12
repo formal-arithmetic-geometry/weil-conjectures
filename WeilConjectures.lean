@@ -185,6 +185,7 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Invariant
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Projective
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteBound
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FinitePresentation

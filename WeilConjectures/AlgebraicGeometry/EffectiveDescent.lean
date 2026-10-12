@@ -90,7 +90,8 @@ This is Stacks 0CCJ: finitely many points of `V` lie in an affine open (Stacks 0
 `exists_isAffineOpen_superset_of_isImmersion_of_isAffine`), which is the hypothesis of
 `isEffective_of_isFinite`. The blueprint states this for an arbitrary base; here `X`, hence the
 projective space `ℙ(α; X)`, is assumed affine, which covers the case of a finite extension of
-fields used for the Jacobian.
+fields used for the Jacobian. The general case is
+`CategoryTheory.Over.DescentDatum.isEffective_of_isHProjective`.
 
 (blueprint: `thm-pd-effective-descent`) -/
 theorem isEffective_of_isClosedImmersion [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
