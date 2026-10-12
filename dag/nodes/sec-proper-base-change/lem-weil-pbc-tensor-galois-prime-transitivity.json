@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-tensor-galois-prime-transitivity",
+ "kind": "statement",
+ "title": "Galois transitivity on primes of a tensor scalar extension",
+ "statement": "Let k and K be fields and K/k a possibly infinite Galois extension. Let A be a commutative k-algebra. For any prime-spectrum points x,y of A tensor_k K [def-weil-affine-spectrum] with equal contractions along a maps to a tensor 1, there exists a k-algebra automorphism sigma of K such that comap(id_A tensor sigma)(x)=y. The tensor ring maps are those of [lem-weil-pbc-algebra-tensor-map-ring-hom].",
+ "source": {
+  "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+  "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite; tensor invariants as in Stacks Tag 038B"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-map-ring-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct the action on the right tensor factor by the monoid homomorphism sigma maps to Algebra.TensorProduct.congr refl sigma. Tensor induction proves openness of stabilizers: zero is fixed by all automorphisms, a pure tensor is fixed by the open stabilizer of its right coefficient, and the intersection of two open stabilizers fixes a sum. Apply continuousSMul_iff_stabilizer_isOpen to the discrete tensor ring. Tensor induction also proves that the action commutes with A-scalars.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-map-ring-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+    "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite; tensor invariants as in Stacks Tag 038B"
+   }
+  },
+  {
+   "text": "InfiniteGalois.mem_range_algebraMap_iff_fixed identifies the fixed field of the full Galois group with k. Apply TensorProduct.injective_and_range_eq_invariants to the top subgroup. Its range equality supplies Algebra.IsInvariant A (A tensor K) Gal(K/k).",
+   "uses": [
+    "lem-weil-pbc-tensor-field-extension-galois-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+    "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite; tensor invariants as in Stacks Tag 038B"
+   }
+  },
+  {
+   "text": "Apply Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite to the two prime ideals, using congrArg PrimeSpectrum.asIdeal on the equality of contractions. The resulting equality y.asIdeal = sigma smul x.asIdeal means membership is pulled back by sigma inverse. Choose sigma inverse and use PrimeSpectrum.ext and Ideal.mem_pointwise_smul_iff_inv_smul_mem.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+    "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite; tensor invariants as in Stacks Tag 038B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-map-ring-hom",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+  "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite; tensor invariants as in Stacks Tag 038B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois group transitive on prime spectrum of tensor product scalar extension with equal contraction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois automorphisms act transitively on primes of a tensor product over a field with equal contraction",
+   "results": "Algebra.IsInvariant.exists_smul_of_under_eq and Ideal.exists_map_eq_of_isGalois handle ring actions; no tensor specialization for infinite extensions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smul_of_under_eq_of_profinite|continuousSMul_iff_stabilizer_isOpen in Mathlib; rg in RingTheory/TensorProduct and LinearAlgebra/TensorProduct",
+   "results": "Profinite ring-action transitivity exists. No automatic right tensor Galois action or its continuous/invariant instances. Blueprint search Galois transitive returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "general ring tool found; tensor specialization requires a proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGaloisBaseChangeFiberTransitivity",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Fibre saturation in the affine Galois base-change argument: steps 2-4, tensor-ring profinite prime transitivity.",
+   "via": [
+    "lem-weil-pbc-affine-galois-base-change-fiber-transitivity",
+    "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "lem-weil-pbc-geometrically-connected-finite-separable-test",
+    "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorGaloisPrimeTransitivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGaloisPrimeTransitivity.lean",
+  "declaration": "Algebra.TensorProduct.exists_comap_eq_of_galois",
+  "statement": "theorem exists_comap_eq_of_galois\n    (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]\n    (A : Type u) [CommRing A] [Algebra k A]\n    (x y : PrimeSpectrum (A ⊗[k] K))\n    (hxy : PrimeSpectrum.comap\n      (includeLeft : A →ₐ[k] A ⊗[k] K).toRingHom x =\n      PrimeSpectrum.comap (includeLeft : A →ₐ[k] A ⊗[k] K).toRingHom y) :\n    ∃ σ : K ≃ₐ[k] K,\n      PrimeSpectrum.comap (map (AlgHom.id k A) σ.toAlgHom).toRingHom x = y",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T173909-L-3307481",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T173909-L-3307481",
+  "kind": "interface"
+ }
+}

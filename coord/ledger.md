@@ -8816,3 +8816,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/T3/Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingTerm (stage 3; reviewer PASS; first push; landing 20261012T173907-L-3306802 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:39 L: merged deliver/T3/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhoodSpreading (stage 3; reviewer PASS; first push; landing 20261012T173908-L-3307011 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:39 L: merged deliver/T3/Sheaf.RingTheory.FiniteRingMapQuasiFinite (stage 3; reviewer PASS; first push; landing 20261012T173908-L-3307211 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:39 L: merged deliver/U1/Sheaf.AlgebraicGeometry.AffineGaloisBaseChangeFiberTransitivity (stage 3; reviewer PASS; first push; landing 20261012T173909-L-3307481 (interface); batch 20261012T173801; modules 2; new nodes 1)
