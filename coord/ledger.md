@@ -7660,3 +7660,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:48 L: returned deliver/K3/Sheaf.RingTheory.HenselizationPairGRingCore (reviewer RETURN: (reviewer X-43dae, head 43dae26ba) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.Henseliza)
 - 12:49 L: merged deliver/J3/Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree (stage 3; reviewer PASS; first push; landing 20261012T124923-L-1197109 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:50 L: merged deliver/K3/Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre (stage 3; reviewer PASS; first push; landing 20261012T125027-L-1204004 (interface); batch 20261012T120425; modules 2; new nodes 1)
+- 12:51 L: merged deliver/M1/Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete (stage 3; reviewer PASS; first push; landing 20261012T125114-L-1209137 (proof); batch 20261012T120425; modules 1; new nodes 0)
