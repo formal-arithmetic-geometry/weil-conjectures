@@ -1,6 +1,6 @@
 # Work queue
 
-62 items; claim with `tools/claim.py next <group> [--stage N]`.
+61 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -12,13 +12,12 @@
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
-## Stage 2: nodes to state (4)
+## Stage 2: nodes to state (3)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-nagata-relative-gluing-valid-stage` | 2 | state | 5 |
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
-| `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 
 Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
@@ -46,8 +45,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks` | 3 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
@@ -62,6 +59,8 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` | 5 | 1 | proof |
+| `Sheaf.RingTheory.StrictlyHenselianOfDimensionZero` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale` | 5 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent` | 6 | 1 | proof |
