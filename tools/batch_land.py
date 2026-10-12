@@ -47,6 +47,7 @@ import landing as ld  # noqa: E402
 import stage2_delivery as s2  # noqa: E402
 import stage3_delivery as s3  # noqa: E402
 import review_class as rc  # noqa: E402
+import sorry_ledger as sl  # noqa: E402
 
 ROOT = md.ROOT
 BD = ROOT / "local" / "batch"
@@ -256,6 +257,12 @@ def check(c: dict, classify: bool = True) -> dict:
         raise Refuse(f"base {base[:7]} is too far behind {md.MAIN}: pull, rebase, push again")
     if D["fails"]:
         raise Refuse("; ".join(f"({L}) {x}" for L, x in D["fails"][:6]))
+    # stage3_delivery already refuses ordinary definition holes and new forbidden
+    # keyword kinds. Supplement only its admit, quoted-name and data-field gaps.
+    for module in D["modules"]:
+        missing = sl.missing_gate(module["old"], module["text"])
+        if missing:
+            raise Refuse(module["file"] + ": " + "; ".join(missing[:6]))
     why3 = s3.classify(D, g, item)
     if reviewer == "AUTO" and why3:
         raise Refuse("not AUTO: " + "; ".join(why3))
