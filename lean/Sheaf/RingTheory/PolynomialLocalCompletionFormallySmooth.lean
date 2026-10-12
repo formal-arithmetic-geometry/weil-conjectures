@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicCompletion
+import Mathlib.RingTheory.Smooth.Basic
 
 /-!
 # Adic formal smoothness of a completed polynomial local ring
@@ -43,10 +44,10 @@ Proof:
 3. Discrete formal smoothness implies formal smoothness for the `qT`-adic topology:
    it supplies a lift even without requiring the initial map to kill a power of `qT`
    (`def-weil-pbc-formally-smooth-adic`; Tag 07EC(1)).
-4. The polynomial ring is a finite type algebra over the Noetherian ring `A`, hence
-   Noetherian, and so is its localization. Thus `qT` is finitely generated
-   (`lem-weil-pbc-finite-type-algebra-noetherian`,
-   `lem-weil-pbc-localization-noetherian`, `def-weil-pbc-noetherian-ring`).
+4. The polynomial ring over the Noetherian ring `A` is Noetherian, so `q` is
+   finitely generated (`lem-weil-pbc-finite-type-algebra-noetherian`,
+   `def-weil-pbc-noetherian-ring`). By `Ideal.FG.map`, its extension `qT` is
+   finitely generated as well; Noetherianity of the localization is not needed.
 5. Apply `lem-weil-pbc-fs-adic-completion` (Tag 07ED(1) implies (2)) to obtain formal
    smoothness of the completion for the extended ideal `(qT)C`. This equals `qC`:
    elements of `qT` are fractions with numerator in `q` and denominator outside `q`,
@@ -62,6 +63,13 @@ theorem polynomial_local_completion_formallySmoothAdic
       (q.map (algebraMap (Polynomial A)
         (AdicCompletion (q.map (algebraMap (Polynomial A) (Localization.AtPrime q)))
           (Localization.AtPrime q)))) := by
-  sorry
+  let T := Localization.AtPrime q
+  let n : Ideal T := q.map (algebraMap (Polynomial A) T)
+  have hT : FormallySmoothAdic A T n := by
+    intro D _ _ J hJ g _
+    exact FormallySmooth.comp_surjective A T J hJ g
+  have hn : n.FG := q.fg_of_isNoetherianRing.map _
+  have hC := FormallySmoothAdic.adicCompletion A T n hn hT
+  simpa only [n, Ideal.map_map, ← IsScalarTower.algebraMap_eq] using hC
 
 end Algebra
