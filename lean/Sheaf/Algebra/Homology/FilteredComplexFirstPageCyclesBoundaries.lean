@@ -6,6 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The first-page cycles and boundaries of a filtered complex
 

@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Algebra.Homology.FilteredComplexZBDescription
 import Sheaf.CategoryTheory.ExactCoupleMorphism
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Canonical bounded filtered pages and their finite abutment

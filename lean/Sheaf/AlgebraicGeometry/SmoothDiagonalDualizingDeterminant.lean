@@ -14,6 +14,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DiagonalConormalDifferentials
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing
 import Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 
 /-! # The dualizing object of a smooth diagonal in constant rank
 

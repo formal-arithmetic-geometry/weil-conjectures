@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Derived internal Hom from the structure sheaf
 

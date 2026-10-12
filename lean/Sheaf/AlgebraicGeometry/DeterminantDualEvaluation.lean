@@ -11,6 +11,8 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Mathlib.LinearAlgebra.ExteriorPower.Pairing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Ordinary determinant evaluation
 

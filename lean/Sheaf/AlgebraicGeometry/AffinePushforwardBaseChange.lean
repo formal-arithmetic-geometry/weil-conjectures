@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Affine pushforward and arbitrary base change
 

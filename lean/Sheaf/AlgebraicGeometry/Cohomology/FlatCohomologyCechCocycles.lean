@@ -6,6 +6,10 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
 /-! # The inverse-image Cech comparison on cocycles
 

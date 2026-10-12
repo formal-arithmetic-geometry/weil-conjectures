@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Eventual vanishing of constant-module direct-image germs
 

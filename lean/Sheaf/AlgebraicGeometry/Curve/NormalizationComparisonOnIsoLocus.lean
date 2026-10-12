@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Normalization comparison objects on the isomorphism locus

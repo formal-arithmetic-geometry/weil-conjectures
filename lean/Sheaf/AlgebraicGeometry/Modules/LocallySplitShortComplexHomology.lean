@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Homology of a short complex with locally split boundaries
 

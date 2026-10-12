@@ -12,6 +12,9 @@ import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.PQFCohomology
 
 /-! # Scalar-compatible comparison for additive first cohomology -/
 

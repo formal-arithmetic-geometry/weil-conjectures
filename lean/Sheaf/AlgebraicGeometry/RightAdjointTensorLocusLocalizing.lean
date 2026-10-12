@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Localizing operations on the right-adjoint tensor-comparison locus
 

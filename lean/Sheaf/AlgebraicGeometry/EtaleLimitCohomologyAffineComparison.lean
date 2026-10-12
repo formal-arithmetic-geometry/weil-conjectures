@@ -10,6 +10,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.CategoryTheory.CohomologyColimitSites
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.CategoryTheory.ColimitSites
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Affine-stage cohomology continuity
 

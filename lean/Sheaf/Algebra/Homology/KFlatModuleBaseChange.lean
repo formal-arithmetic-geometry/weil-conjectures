@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-!
 # K-flat base change over commutative rings

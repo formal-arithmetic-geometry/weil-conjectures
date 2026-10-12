@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The natural quotient-complex image comparison
 

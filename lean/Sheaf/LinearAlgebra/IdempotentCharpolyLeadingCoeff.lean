@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.LinearAlgebra.IdempotentCharpoly
+import Sheaf.LinearAlgebra.IdempotentImageBaseChange
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-! # Idempotent leading coefficient of a summand determinant
 

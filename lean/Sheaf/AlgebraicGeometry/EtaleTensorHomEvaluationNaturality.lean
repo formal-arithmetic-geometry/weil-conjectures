@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Naturality of the tensor-sections evaluation map

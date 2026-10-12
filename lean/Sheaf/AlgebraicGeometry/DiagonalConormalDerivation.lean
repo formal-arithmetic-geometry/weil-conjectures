@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.DiagonalConormal
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 import Sheaf.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # The difference derivation into the diagonal conormal

@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Restriction of morphisms on a common proper closed support
 

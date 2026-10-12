@@ -6,6 +6,9 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Finite affine étale diagram descent

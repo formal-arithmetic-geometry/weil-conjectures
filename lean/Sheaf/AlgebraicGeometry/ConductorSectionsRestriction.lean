@@ -14,6 +14,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 import Sheaf.AlgebraicGeometry.ConductorIdealRestriction
 import Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Additive restriction on conductor tensor sections -/
 

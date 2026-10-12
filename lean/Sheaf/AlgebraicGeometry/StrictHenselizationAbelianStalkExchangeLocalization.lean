@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.Paper.InverseImageStalkGerm
 import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Localization of an abelian stalk exchange to strict henselian bases
 

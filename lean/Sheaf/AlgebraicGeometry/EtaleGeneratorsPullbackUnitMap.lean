@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Pullback of generators on adjunction-unit sections

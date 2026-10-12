@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Tensor construction for affine module correspondence
 

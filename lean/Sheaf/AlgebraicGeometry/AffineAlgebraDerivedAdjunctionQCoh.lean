@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Quasi-coherence in the affine algebra derived adjunction
 

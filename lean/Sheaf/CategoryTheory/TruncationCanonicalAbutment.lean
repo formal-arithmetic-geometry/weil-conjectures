@@ -13,6 +13,8 @@ import Sheaf.CategoryTheory.HalfPlaneConvergence
 import Sheaf.CategoryTheory.DerivedCoupleExact
 import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-! Canonical truncation-couple proof step. -/
 

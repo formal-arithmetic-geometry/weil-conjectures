@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceProper
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Algebraization of a system on a fixed proper closed subscheme
 

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # Pullback of tensor-power sections and their nonvanishing loci
 

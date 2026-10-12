@@ -7,6 +7,8 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import Mathlib.AlgebraicGeometry.Cover.Sigma
+import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 /-!
 # Assembly of the finite etale local representatives
 

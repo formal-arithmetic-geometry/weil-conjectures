@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 
 /-! # Stalkwise Tor bounds for a perfect closed immersion
 

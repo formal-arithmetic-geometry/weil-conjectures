@@ -11,6 +11,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
 import Mathlib.Topology.Sheaves.Stalks
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # ProjGradedModuleSheafStalks

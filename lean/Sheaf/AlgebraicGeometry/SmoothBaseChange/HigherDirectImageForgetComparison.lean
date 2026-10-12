@@ -10,6 +10,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology
 import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Forgetting coefficients in higher direct images

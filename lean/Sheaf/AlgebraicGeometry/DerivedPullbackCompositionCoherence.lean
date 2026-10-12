@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-! Canonical derived pullback comparison: Stacks Project, Tag 0D5S. -/
 

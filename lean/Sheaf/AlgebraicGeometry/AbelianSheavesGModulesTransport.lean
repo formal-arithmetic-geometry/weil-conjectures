@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 import Sheaf.CategoryTheory.EquivalenceInternalModule
+import Sheaf.CategoryTheory.InternalModule
 
 /-!
 # Transport of abelian group objects across a set-valued sheaf equivalence

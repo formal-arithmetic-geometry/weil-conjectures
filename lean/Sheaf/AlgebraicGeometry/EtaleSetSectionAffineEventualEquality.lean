@@ -15,6 +15,8 @@ import Sheaf.CategoryTheory.ColimitSiteSections
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Limits.Types.Filtered
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-! # Eventual equality on an affine étale object
 Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN.

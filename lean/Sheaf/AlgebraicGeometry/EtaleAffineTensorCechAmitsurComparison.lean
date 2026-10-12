@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.Paper.EtaleStandardCoverCech
 import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Affine tensor-section Čech complexes as Amitsur complexes
 Source: Stacks Project, Tags 03OZ and 03P2, affine-case proof.

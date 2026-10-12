@@ -6,6 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.LocalizationOfRegularRing
 
 /-!
 # Geometric regularity of a fibre from maximal target localizations

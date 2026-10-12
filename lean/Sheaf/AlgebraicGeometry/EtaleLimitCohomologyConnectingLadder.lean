@@ -6,6 +6,19 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.CategoryTheory.SiteCechVanishingCriterion
+import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Paper.ColimitSitesInjectiveSystem
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Degree reduction for etale limit cohomology
 

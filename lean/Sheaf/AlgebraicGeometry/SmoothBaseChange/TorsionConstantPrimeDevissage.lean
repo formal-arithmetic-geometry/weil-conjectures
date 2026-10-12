@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 
 /-!
 # Prime-coefficient vanishing for a constant bounded torsion group

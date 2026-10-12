@@ -8,6 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import Sheaf.Paper.SiteRestrictionInjectives
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Natural comparison for cohomology over open étale objects
 
 Source: Stacks Project, Cohomology on Sites, Tag 03F3, and Étale Cohomology, Tag 09AX.

@@ -8,6 +8,10 @@ module
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-! # The counit at the generic point of an integral scheme
 

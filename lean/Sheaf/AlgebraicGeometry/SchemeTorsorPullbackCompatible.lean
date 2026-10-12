@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
 import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Compatibility of an equivariant representative with inverse image

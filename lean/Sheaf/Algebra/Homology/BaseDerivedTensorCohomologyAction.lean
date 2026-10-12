@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-!
 # Derived base tensor cohomology with its coefficient action

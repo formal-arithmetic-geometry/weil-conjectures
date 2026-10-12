@@ -10,6 +10,8 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 
 /-! # Localization of the affine sheaf-Hom evaluation counit
 

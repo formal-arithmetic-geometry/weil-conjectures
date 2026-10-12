@@ -9,6 +9,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Compactness.Compact
 public import Sheaf.Topology.AbelianOpenExtensionByZero
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Finite-generator stages covering every stalk
 

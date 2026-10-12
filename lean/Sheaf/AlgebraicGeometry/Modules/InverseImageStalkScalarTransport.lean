@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.Topology.InverseImageStalk
+import Sheaf.Topology.InverseImageModule
 
 /-!
 # Scalar transport for inverse-image module stalks

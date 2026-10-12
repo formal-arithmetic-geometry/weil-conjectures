@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 
 /-! # Inverse image of a lifting torsor
 

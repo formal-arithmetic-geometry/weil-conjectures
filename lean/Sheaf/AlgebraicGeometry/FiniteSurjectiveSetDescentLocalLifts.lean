@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
+import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 /-! # Compatible finite-descent sections lift étale locally
 

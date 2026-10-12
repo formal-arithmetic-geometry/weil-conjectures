@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # SerreSectionModuleComponentFinite
 

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Standard generators of the transported polynomial Proj twist

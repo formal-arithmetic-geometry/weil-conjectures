@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Proper closed support for a coherent thickening system
 

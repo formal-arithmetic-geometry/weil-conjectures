@@ -6,6 +6,8 @@ Authors: SHEAF group C2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-! # Invertibility of the coordinate reindexing morphism
 

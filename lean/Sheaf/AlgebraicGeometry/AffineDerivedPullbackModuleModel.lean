@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # A module-complex model for affine derived pullback
 

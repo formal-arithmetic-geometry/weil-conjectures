@@ -8,6 +8,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
+import WeilConjectures.ConstructibleSheaf.OpenClosed
 
 /-!
 # Constructibility of finite pushforward of open quotient constants

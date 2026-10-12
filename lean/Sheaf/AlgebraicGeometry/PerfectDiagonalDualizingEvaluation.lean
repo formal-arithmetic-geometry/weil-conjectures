@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Evaluation against the dualizing object of a perfect diagonal
 

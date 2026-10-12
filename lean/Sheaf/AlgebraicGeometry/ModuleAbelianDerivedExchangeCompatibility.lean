@@ -6,6 +6,9 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Compatibility of canonical coefficient comparisons with derived exchange
 

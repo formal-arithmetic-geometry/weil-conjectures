@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Compactness of the derived structure sheaf
 

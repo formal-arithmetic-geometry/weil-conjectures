@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Lifted étale cohomology computed by a finite affine section complex
 

@@ -6,6 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Existence of contracted products of étale torsors
 

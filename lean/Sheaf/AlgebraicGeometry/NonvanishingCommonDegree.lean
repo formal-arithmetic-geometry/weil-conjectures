@@ -6,6 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # Two nonvanishing loci represented in a common tensor degree
 

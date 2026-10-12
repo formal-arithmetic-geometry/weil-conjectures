@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Sheaf.CategoryTheory.ExistsDirectedReindexing
 import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import Sheaf.CategoryTheory.KInjectiveBridge
 
 /-! # First-page comparison and abutment quotient models
 

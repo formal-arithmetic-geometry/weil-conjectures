@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
 import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Étale neighbourhoods of points of maximal fibre degree

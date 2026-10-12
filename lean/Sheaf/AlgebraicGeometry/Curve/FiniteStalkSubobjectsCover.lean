@@ -7,6 +7,9 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.CategoryTheory.Galois.AutProfinite
 
 /-!
 # Finite-stalk subobjects cover a torsion sheaf over a field

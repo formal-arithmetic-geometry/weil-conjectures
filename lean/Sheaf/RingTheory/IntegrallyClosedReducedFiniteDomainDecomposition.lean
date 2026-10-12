@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Domain factors from integral closedness in total fractions

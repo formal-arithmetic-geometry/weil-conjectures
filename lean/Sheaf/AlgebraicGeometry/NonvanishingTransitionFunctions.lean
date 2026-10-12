@@ -6,6 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # Transition functions between section trivializations
 

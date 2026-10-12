@@ -2,6 +2,7 @@ module
 
 public import Sheaf.Paper.FreeCechTupleBasis
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
+import Sheaf.Paper.PowerSetComplexContractible
 
 /-! # Differential compatibility of the free Čech tuple map
 

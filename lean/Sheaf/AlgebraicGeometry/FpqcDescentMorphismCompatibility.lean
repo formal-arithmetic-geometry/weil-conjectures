@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDescentDataCategory
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-! Auxiliary steps for Stacks Project, Descent, Lemma 0241. -/
 

@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
+import Sheaf.Paper.PQFCohomology
 
 /-! # Comparison of the cocycle Leray edge with the Grothendieck edge
 

@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.Dual.Defs
 import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
+import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 
 /-!
 # The Lie algebra and the cotangent dual at the identity

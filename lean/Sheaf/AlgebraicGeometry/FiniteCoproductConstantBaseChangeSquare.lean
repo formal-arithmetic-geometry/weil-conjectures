@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Product coordinates for constant-coefficient base change
 

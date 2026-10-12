@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 /-! # Comparing geometric stalks over the same scheme point
 

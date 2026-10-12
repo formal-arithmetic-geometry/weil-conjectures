@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 
 /-! # Derived pullback restriction with independent localization universes
 

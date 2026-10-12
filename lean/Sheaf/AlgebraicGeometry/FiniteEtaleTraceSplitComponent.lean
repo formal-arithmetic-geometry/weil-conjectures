@@ -6,6 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # The trace composite on a split étale-site object

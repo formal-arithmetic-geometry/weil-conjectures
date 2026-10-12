@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Positive pages of a filtered complex

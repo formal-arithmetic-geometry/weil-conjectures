@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import Mathlib.Algebra.Category.Grp.Ulift
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
 
 /-!
 # Canonical sections of the lifted étale structure-module sheaf

@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.CategoryTheory.ColimitSiteSections
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Sites.Equivalence
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Affine stage lifting of étale inverse-image sections
 Source: Stacks Project, Étale Cohomology, Tag 09YQ, using Sites Tag 09YN. -/

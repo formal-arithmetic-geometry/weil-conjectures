@@ -11,6 +11,13 @@ import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import Sheaf.AlgebraicGeometry.JacobianBaseChangeCompatible
 import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
 # Degree-zero Picard points under algebraically closed field extension

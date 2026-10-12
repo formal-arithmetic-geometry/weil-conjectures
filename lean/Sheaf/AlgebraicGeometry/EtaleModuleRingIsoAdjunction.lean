@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # EtaleModuleRingIsoAdjunction
 

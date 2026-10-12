@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # The stalk map above a rational closed point under field extension

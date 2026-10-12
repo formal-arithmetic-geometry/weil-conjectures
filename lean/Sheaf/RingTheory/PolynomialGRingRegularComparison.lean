@@ -7,6 +7,12 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.Algebra.Polynomial.Basic
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.LocalizationRegular
+import Sheaf.RingTheory.RegularBaseChange
+import Sheaf.RingTheory.RegularComposition
+import Sheaf.RingTheory.RegularThroughLocalization
 
 /-!
 # The regular comparison localization for a polynomial ring over a G-ring

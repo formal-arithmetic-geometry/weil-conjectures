@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Sheaf.Topology.AbelianOpenExtensionByZero
+import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
+import Sheaf.Topology.ConstantIntegerOpenExtensionComparison
 
 /-! # Inclusion between constant integer extensions on nested opens
 

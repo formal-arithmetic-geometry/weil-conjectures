@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.RingTheory.EtaleResidueTriplesFiltered
 
 /-!
 # EtaleResidueTriplesRepresentatives
