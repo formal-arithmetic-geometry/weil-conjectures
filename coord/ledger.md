@@ -6441,3 +6441,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/X2/Sheaf.AlgebraicGeometry.LimitAffineTransition (stage 3; reviewer PASS; first push; landing 20261012T060759-L-2918593 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:08 L: merged deliver/X2/Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists (stage 3; reviewer PASS; first push; landing 20261012T060800-L-2918698 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:08 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AbelianSheavesGModules (stage 3; reviewer PASS; first push; landing 20261012T060800-L-2918866 (interface); batch 20261012T060728; modules 3; new nodes 2)
+- 06:08 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineDerivedConcentration (stage 3; reviewer PASS; first push; landing 20261012T060800-L-2918973 (proof); batch 20261012T060728; modules 1; new nodes 0)
