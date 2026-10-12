@@ -31,162 +31,78 @@
  ],
  "proof": [
   {
-   "text": "(Setup.) Write $\\bar\\Lambda=\\Lambda_{\\mathfrak q}/\\mathfrak q^n\\Lambda_{\\mathfrak q}$, $\\psi:D\\to\\bar\\Lambda$ for the given flat local homomorphism, $\\mathfrak m_D$ and $F=D/\\mathfrak m_D$ for the maximal ideal and residue field of $D$. $\\Lambda_{\\mathfrak q}$ is local with maximal ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$ and residue field $\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime], so $\\bar\\Lambda$ is local with maximal ideal $\\mathfrak m_{\\bar\\Lambda}=\\mathfrak q\\bar\\Lambda$, $\\mathfrak m_{\\bar\\Lambda}^n=0$, and residue field $\\kappa(\\mathfrak q)$. Since $\\psi$ is local it induces a field homomorphism $F\\to\\kappa(\\mathfrak q)$, through which we regard $F\\subseteq\\kappa(\\mathfrak q)$ (Stacks: $k\\subset F\\subset\\kappa(\\mathfrak q)$). $\\bar\\Lambda$ is a $k$-algebra, so $p\\cdot1=0$ in $\\bar\\Lambda$. Let $\\bar\\lambda$ be the image of $\\lambda$ in $\\bar\\Lambda$ and $\\alpha\\in\\kappa(\\mathfrak q)$ the image of $\\lambda$; $\\alpha\\neq0$ as $\\lambda\\notin\\mathfrak q$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent] $D$ and $\\bar\\Lambda$ are Noetherian and $\\mathfrak m_D$ is nilpotent; by [lem-weil-pbc-artinian-local-unique-prime] their only primes are their maximal ideals. Exactly one of three cases occurs: $\\alpha\\in F$; $\\alpha$ algebraic over $F$ but not in $F$; $\\alpha$ transcendental over $F$ (not a root of a nonzero polynomial over $F$ [def-weil-algebraic-element]).",
+   "text": "Put $S=\\Lambda_{\\mathfrak q}/(\\mathfrak q\\Lambda_{\\mathfrak q})^n$ and $x$ equal to the image of $\\lambda$. The given hypotheses make $D$ and $S$ local Artinian rings and $g:D\\to S$ flat and local. The injective $k\\to S$ makes $S$ have characteristic $p$. Its residue field $K$ also has characteristic $p$, and the embedding $F=D/\\mathfrak m_D\\to K$ makes $F$ have characteristic $p$. Since $k$ is a field and $p>0$, $p$ is prime. Split into algebraic and transcendental cases for $\\operatorname{res}_S(x)$ over $F$.",
    "uses": [
     "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-    "lem-weil-pbc-artinian-local-unique-prime",
     "def-weil-algebraic-element"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
-   }
-  },
-  {
-   "text": "(Claim, the first part of the Stacks argument.) Let $D_1$ be a local ring with residue field $F_1$ and $\\psi_1:D_1\\to\\bar\\Lambda$ a local homomorphism, and let $\\mu\\in\\bar\\Lambda$ have residue $\\mu_0\\in\\kappa(\\mathfrak q)$ with $\\mu_0\\neq0$ and $\\mu_0$ in the image of $F_1\\to\\kappa(\\mathfrak q)$. Then $\\mu^{q}\\in\\psi_1(D_1)$ for every power $q=p^e$ of $p$ with $q\\ge n$. Proof: choose $x\\in D_1$ whose residue maps to $\\mu_0^{-1}$; then $x\\notin\\mathfrak m_{D_1}$, so $x$ is a unit of $D_1$, and $\\varepsilon=\\psi_1(x)\\mu-1$ has residue $0$, i.e. $\\varepsilon\\in\\mathfrak m_{\\bar\\Lambda}$ (Stacks: $x\\bar\\lambda=1\\bmod\\mathfrak q$). As $p=0$ in $\\bar\\Lambda$, $(a+b)^p=a^p+b^p$, hence by induction on $e$ $(1+\\varepsilon)^{p^e}=1+\\varepsilon^{p^e}$, and $\\varepsilon^{q}\\in\\mathfrak m_{\\bar\\Lambda}^{q}\\subseteq\\mathfrak m_{\\bar\\Lambda}^n=0$. So $(\\psi_1(x)\\mu)^q=1$ and $\\mu^q=\\psi_1(x)^{-q}=\\psi_1(x^{-q})\\in\\psi_1(D_1)$. (Stacks says '$q$ divisible by $p$'; what is needed is a $p$-power $q\\ge n$.)",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
    }
   },
   {
-   "text": "(Case $\\alpha\\in F$.) Take $D'=D$ with the identity $D\\to D$ and $D'\\to\\bar\\Lambda$ equal to $\\psi$ (flat by hypothesis). The identity is $D\\to D[y_1,\\dots,y_0]=D$, smooth by [lem-weil-pbc-polynomial-ring-smooth] with $n=0$, hence essentially smooth (take $P=D$, $S=\\{1\\}$ in [def-weil-pbc-essentially-smooth-ring-map]). By the Claim (step 2) with $D_1=D$, $\\mu=\\bar\\lambda$, $\\mu_0=\\alpha$, the image of $\\lambda^q$ lies in $\\psi(D)$ for $q=p^e\\ge n$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "def-weil-pbc-essentially-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
-   }
-  },
-  {
-   "text": "(Case $\\alpha$ transcendental: $D[\\bar\\lambda]$ is a polynomial algebra over $D$; Stacks: 'this works because $D[\\bar\\lambda]$ is in fact a polynomial algebra over $D$ in this case', written out.) Let $\\theta:D[t]\\to\\bar\\Lambda$ be the $D$-algebra map $t\\mapsto\\bar\\lambda$. The $F$-vector space $V=\\bar\\Lambda/\\mathfrak m_D\\bar\\Lambda$ maps $F$-linearly onto $\\kappa(\\mathfrak q)$ (as $\\mathfrak m_D\\bar\\Lambda\\subseteq\\mathfrak m_{\\bar\\Lambda}$), sending the class $v_i$ of $\\bar\\lambda^i$ to $\\alpha^i$; the $\\alpha^i$ ($i\\ge0$) are $F$-linearly independent because $\\alpha$ is transcendental over $F$, hence so are the $v_i$. Extend $(v_i)_{i\\ge0}$ to an $F$-basis $(v_i)_{i\\ge0}\\cup(w_\\beta)_{\\beta\\in B}$ of $V$ and lift each $w_\\beta$ to $\\bar\\Lambda$. $D$ is local with nilpotent maximal ideal (step 1) and $\\bar\\Lambda$ is a flat $D$-module, so by [lem-weil-pbc-local-artinian-basis-when-flat] the family $(\\bar\\lambda^i)_{i\\ge0}$ together with the lifts is a $D$-basis of $\\bar\\Lambda$. In particular the $\\bar\\lambda^i$ are $D$-linearly independent, i.e. $\\theta$ is injective: $D[\\bar\\lambda]=\\theta(D[t])\\cong D[t]$.",
-   "uses": [
-    "lem-weil-pbc-local-artinian-basis-when-flat",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
-   }
-  },
-  {
-   "text": "(Case $\\alpha$ transcendental: the ring $D'$.) Let $\\mathfrak m=\\theta^{-1}(\\mathfrak m_{\\bar\\Lambda})$ (Stacks: $\\mathfrak m=D[\\bar\\lambda]\\cap\\mathfrak q\\bar\\Lambda$). Since $\\psi$ is local, $\\mathfrak m_D[t]\\subseteq\\mathfrak m$, and modulo $\\mathfrak m_D[t]$ the map $D[t]\\to\\kappa(\\mathfrak q)$ is $F[t]\\to\\kappa(\\mathfrak q)$, $t\\mapsto\\alpha$, which is injective as $\\alpha$ is transcendental; hence $\\mathfrak m=\\mathfrak m_D[t]$, a prime ideal ($D[t]/\\mathfrak m=F[t]$ is a domain). Set $D'=D[t]_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] (Stacks: $D'=(D[\\bar\\lambda])_{\\mathfrak m}$, the same ring by step 4). $D[t]$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian] and so is $D'$ [lem-weil-pbc-localization-noetherian]; $D'$ is local with maximal ideal $\\mathfrak mD'=\\mathfrak m_DD'$, which is nilpotent because $\\mathfrak m_D$ is (step 1), so $D'$ is an Artinian local ring by [lem-weil-pbc-noetherian-local-quotient-artinian-local] (with $K=0$); its residue field is $D'/\\mathfrak m_DD'=F[t]_{(0)}=F(t)$. $D\\to D[t]$ is smooth [lem-weil-pbc-polynomial-ring-smooth], so $D\\to D'$, a localization of it, is essentially smooth [def-weil-pbc-essentially-smooth-ring-map], and it is local ($\\mathfrak m_D\\mapsto\\mathfrak m_DD'$). Every $s\\in D[t]\\setminus\\mathfrak m$ has $\\theta(s)\\notin\\mathfrak m_{\\bar\\Lambda}$, a unit of the local ring $\\bar\\Lambda$, so $\\theta$ extends uniquely to $\\psi':D'\\to\\bar\\Lambda$ [def-weil-pbc-localization-at-prime]; $\\psi'$ is local ($\\psi'^{-1}(\\mathfrak m_{\\bar\\Lambda})=\\mathfrak mD'$), its composite with $D\\to D'$ is $\\psi$, and $\\psi'(t/1)=\\bar\\lambda$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "def-weil-pbc-essentially-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
-   }
-  },
-  {
-   "text": "(Case $\\alpha$ transcendental: flatness and conclusion.) Apply [lem-weil-pbc-criterion-flatness-fibre-noetherian] to $R=D$, $S=D'$, $S'=M=\\bar\\Lambda$: these are Noetherian local rings (steps 1 and 5) and $D\\to D'\\to\\bar\\Lambda$ are local homomorphisms; $M$ is finitely generated (by $1$) and nonzero over $\\bar\\Lambda$; $M/\\mathfrak m_DM$ is a module over the field $D'/\\mathfrak m_DD'=F(t)$, hence free and so flat [def-weil-pbc-flat-ring-map]; $M$ is flat over $D$ by hypothesis. Hence $\\psi':D'\\to\\bar\\Lambda$ is flat. With $q=1$, $\\bar\\lambda=\\psi'(t/1)$ lies in the image of $D'$.",
-   "uses": [
-    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
-   }
-  },
-  {
-   "text": "(Case $\\alpha$ algebraic: a $p$-power making $\\alpha$ separable; Stacks cites Fields, Section 'algebraic' (Tag 037H, a label no longer in fields.tex).) $F(\\alpha)/F$ is algebraic, so by [lem-weil-pbc-separable-first-purely-inseparable] there is $e\\ge0$ with $\\beta:=\\alpha^q$, $q=p^e$, separable over $F$ [def-weil-pbc-separable-algebraic-extension]; let $\\bar g\\in F[T]$ be its minimal polynomial, separable and irreducible, so $F(\\beta)\\cong F[T]/(\\bar g)$ is a finite field extension of $F$ inside $\\kappa(\\mathfrak q)$. The elements of $F(\\beta)$ separable over $F$ form a subfield containing $F$ and $\\beta$ [lem-weil-pbc-separable-first-purely-inseparable], so $F(\\beta)/F$ is finite and separable algebraic; hence $\\operatorname{Spec}F(\\beta)\\to\\operatorname{Spec}F$ is etale [lem-weil-pbc-finite-separable-extension-etale], i.e. $F(\\beta)$ is a finite etale $F$-algebra.",
+   "text": "In the algebraic case, apply separable-first/purely-inseparable to the finite simple extension $F(\\operatorname{res}_S(x))/F$. Some $p$-power $p^e$ makes $b=\\operatorname{res}_S(x)^{p^e}$ separable over $F$. In Lean this is proved using the separable closure of the simple intermediate field and then mapping back into $K$.",
    "uses": [
     "lem-weil-pbc-separable-first-purely-inseparable",
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-finite-separable-extension-etale"
+    "def-weil-pbc-separable-algebraic-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675); Fields, Lemma Tag 030K (lemma-separable-first) proof and Lemma Tag 09H0 (lemma-irreducible-polynomials)"
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
    }
   },
   {
-   "text": "(Case $\\alpha$ algebraic: the finite etale extension $D\\to D'$.) $D$ and $\\bar\\Lambda$ are local rings whose only prime is the maximal ideal (step 1), hence henselian [lem-weil-pbc-local-dimension-zero-henselian] (Stacks: Algebra, Lemma 06RS). By the essential surjectivity in [lem-weil-pbc-henselian-finite-etale-equivalence] (Stacks: Algebra, Lemma 04GK) applied to $D$ and the finite etale $F$-algebra $F(\\beta)$ (step 7) there is a finite etale $D$-algebra $D'$ with an $F$-algebra isomorphism $D'/\\mathfrak m_DD'\\cong F(\\beta)$. $D'$ is a finite $D$-algebra, hence of finite type and Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]; $\\mathfrak m_DD'$ is nilpotent (step 1) and $D'/\\mathfrak m_DD'$ is a field, so every element outside $\\mathfrak m_DD'$ is a unit modulo a nilpotent ideal, hence a unit: $D'$ is local with maximal ideal $\\mathfrak m_DD'$, residue field $F(\\beta)$, and Artinian [lem-weil-pbc-noetherian-local-quotient-artinian-local] (with $K=0$). $D\\to D'$ is local, and it is etale, hence essentially smooth [def-weil-pbc-essentially-smooth-ring-map] (remark (a) there).",
+   "text": "Apply the separable residue-lifting lemma to $b$, obtaining finite étale local Artinian $D_1$ and a flat local map $g_1:D_1\\to S$ factoring $g$, with $\\operatorname{res}_S(g_1(d))=b$ for some $d$. Étale implies smooth; smooth implies essentially smooth by taking the algebra itself as the smooth presentation and localizing at $\\{1\\}$.",
    "uses": [
-    "lem-weil-pbc-local-dimension-zero-henselian",
-    "lem-weil-pbc-henselian-finite-etale-equivalence",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "lem-weil-pbc-artinian-separable-residue-lift",
     "def-weil-pbc-essentially-smooth-ring-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
    }
   },
   {
-   "text": "(Case $\\alpha$ algebraic: the factorization $D'\\to\\bar\\Lambda$; Stacks: 'since $\\bar\\Lambda$ is henselian and $F(\\alpha^q)$ is contained in its residue field we can find a factorization', written out.) Let $B=D'\\otimes_D\\bar\\Lambda$; $\\bar\\Lambda\\to B$ is etale [lem-weil-pbc-etale-ring-base-change]. Its fibre is $B/\\mathfrak m_{\\bar\\Lambda}B=D'\\otimes_D\\kappa(\\mathfrak q)=(D'/\\mathfrak m_DD')\\otimes_F\\kappa(\\mathfrak q)\\cong F(\\beta)\\otimes_F\\kappa(\\mathfrak q)\\cong\\kappa(\\mathfrak q)[T]/(\\bar g)$, and $\\bar g(\\alpha^q)=0$ in $\\kappa(\\mathfrak q)$, so $T\\mapsto\\alpha^q$ gives a surjective $\\kappa(\\mathfrak q)$-algebra map $\\pi:B\\to\\kappa(\\mathfrak q)$, $b\\otimes1\\mapsto$ (image of $b$ in $F(\\beta)\\subseteq\\kappa(\\mathfrak q)$). Its kernel $\\mathfrak q'$ is a prime of $B$ over $\\mathfrak m_{\\bar\\Lambda}$ with $\\kappa(\\mathfrak q)\\to\\kappa(\\mathfrak q')$ an isomorphism. As $\\bar\\Lambda$ is henselian (step 8), [lem-weil-pbc-henselian-etale-retraction] gives a $\\bar\\Lambda$-algebra map $\\sigma:B\\to\\bar\\Lambda$ with $\\sigma^{-1}(\\mathfrak m_{\\bar\\Lambda})=\\mathfrak q'$. Put $\\psi'(b)=\\sigma(b\\otimes1)$, $\\psi':D'\\to\\bar\\Lambda$. For $d\\in D$, $\\psi'(d)=\\sigma(1\\otimes\\psi(d))=\\psi(d)$: $\\psi'$ factors $\\psi$. Reducing $\\sigma$ modulo $\\mathfrak m_{\\bar\\Lambda}$ gives a $\\kappa(\\mathfrak q)$-algebra map $B/\\mathfrak q'\\to\\kappa(\\mathfrak q)$, necessarily the inverse of the isomorphism induced by $\\pi$; so $\\psi'(b)\\bmod\\mathfrak m_{\\bar\\Lambda}=\\pi(b\\otimes1)$, and the residue field $F(\\beta)$ of $D'$ maps onto $F(\\beta)=F(\\alpha^q)\\subseteq\\kappa(\\mathfrak q)$; in particular $\\alpha^q$ is in its image. $\\psi'^{-1}(\\mathfrak m_{\\bar\\Lambda})$ is a prime of $D'$, hence $\\mathfrak m_DD'$ [lem-weil-pbc-artinian-local-unique-prime]: $\\psi'$ is local.",
+   "text": "The difference $g_1(d)-x^{p^e}$ lies in $\\mathfrak m_S$. Choose $N$ with $\\mathfrak m_S^N=0$. Since $p$ is prime, $p\\ge2$ and $p^N\\ge N$. Thus $(g_1(d)-x^{p^e})^{p^N}=0$. Frobenius gives $g_1(d)^{p^N}=(x^{p^e})^{p^N}$. Set $r=p^e p^N>0$ and use $d^{p^N}$ as the preimage of $x^r$. Ring homomorphisms commute with powers, so $x^r$ is exactly the displayed image of $\\lambda^r$ in the original theorem.",
    "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-henselian-etale-retraction",
-    "lem-weil-pbc-local-dimension-zero-henselian",
-    "lem-weil-pbc-artinian-local-unique-prime"
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
    }
   },
   {
-   "text": "(Case $\\alpha$ algebraic: flatness and conclusion.) As in step 6, [lem-weil-pbc-criterion-flatness-fibre-noetherian] applied to $D\\to D'\\to\\bar\\Lambda$ and $M=\\bar\\Lambda$ (Noetherian local rings and local maps by steps 1, 8, 9; $M/\\mathfrak m_DM$ is a module over the field $D'/\\mathfrak m_DD'\\cong F(\\beta)$, hence flat [def-weil-pbc-flat-ring-map]; $M$ flat over $D$) shows that $\\psi'$ is flat. Now apply the Claim (step 2) to $D_1=D'$, $\\psi_1=\\psi'$ and $\\mu=\\bar\\lambda^q$, whose residue $\\alpha^q\\neq0$ lies in the image of the residue field of $D'$ (step 9): $(\\bar\\lambda^q)^{q'}\\in\\psi'(D')$ for a $p$-power $q'\\ge n$. So the integer $qq'>0$ and the factorization $D\\to D'\\to\\bar\\Lambda$ (step 8: $D\\to D'$ essentially smooth; $D'\\to\\bar\\Lambda$ flat) satisfy the lemma. Together with steps 3 and 6 this covers all three cases of step 1.",
+   "text": "In the transcendental case use the concrete polynomial localization lemma. It supplies an Artinian local essentially smooth factorization with $x$ itself in the image. Take $r=1$ and simplify $\\lambda^1=\\lambda$. These two cases prove the unchanged statement. No basis-lifting lemma or identification of $D[x]$ with $D[t]$ is used.",
    "uses": [
-    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-    "def-weil-pbc-flat-ring-map"
+    "lem-weil-pbc-artinian-transcendental-localization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FI (lemma-enlarge-solution-modulo, lines 2642-2675)"
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-  "lem-weil-pbc-artinian-local-unique-prime",
   "def-weil-algebraic-element",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "def-weil-pbc-essentially-smooth-ring-map",
-  "lem-weil-pbc-local-artinian-basis-when-flat",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
   "lem-weil-pbc-separable-first-purely-inseparable",
   "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-local-dimension-zero-henselian",
-  "lem-weil-pbc-henselian-finite-etale-equivalence",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-henselian-etale-retraction"
+  "lem-weil-pbc-artinian-separable-residue-lift",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-artinian-transcendental-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma Tag 07FI (lemma-enlarge-solution-modulo, line 2624) and its proof (lines 2642-2675); the steps Stacks leaves implicit (polynomial algebra, the factorization through the henselian ring, flatness of D' -> Lambda-bar) are written out with Algebra, Lemmas 051F, 00MP, 04GG(8)"
+  "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675; algebraic and transcendental constructions split off; Frobenius, separable-power reduction and the assembly are proved in Lean by X3"
  },
  "mathlib_searches": [
   {
@@ -262,5 +178,15 @@
   "group": "F1",
   "result": "pass",
   "note": "k field CharP p>0, Λ Noetherian geom. regular, q prime, n≥1, φ/ψ/hψ/hideal/hflat and Pbar/Lbar local Artinian exactly the J1 sibling's conclusion (tied obtain-and-apply test compiles); D local Artinian, Pbar→D local ess. smooth, g local flat, hfactor; l∉q; ∃ r>0, tied ∃ D' : Type (max u v w) CommRing Algebra D D' g', local Artinian, local homs, EssentiallySmooth D D', g'.Flat, g'∘alg = g, image of l^r in range g'; no let; Pbar/Lbar instances not inferInstance; node unchanged except lean; 10 proof steps verbatim"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184400-L-4025524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

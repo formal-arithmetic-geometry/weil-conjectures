@@ -1,0 +1,189 @@
+{
+ "id": "lem-weil-pbc-artinian-separable-residue-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of the split of finite étale lifting (Tag 0GS2), via Tag 07FI: finite étale extension and henselian factorization paragraphs, parent steps 8–9 and the flatness part of step 10",
+   "via": [
+    "lem-weil-pbc-popescu-enlarge-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite étale Artinian lift of a separable residue element",
+ "statement": "Let $D$ and $S$ be commutative local Artinian rings (each has a unique maximal ideal and every descending chain of ideals stabilizes), and let $g:D\\to S$ be a flat [def-weil-pbc-flat-ring-map] local homomorphism. It induces an embedding of residue fields $F=D/\\mathfrak m_D\\to K=S/\\mathfrak m_S$ [def-weil-residue-field]. For every $b\\in K$ separable over $F$ [def-weil-pbc-separable-algebraic-extension], there are a commutative local Artinian $D$-algebra $D_1$ and a local homomorphism $g_1:D_1\\to S$ such that $D_1$ is finite as a $D$-module [def-weil-finitely-generated-module] and étale over $D$ (its affine spectrum map is étale [def-weil-affine-spectrum], [def-weil-etale-morphism]), $D\\to D_1$ is local, $g_1$ is flat, $g_1\\circ(D\\to D_1)=g$, and there is $d\\in D_1$ with $\\operatorname{res}_S(g_1(d))=b$. If $D:\\mathrm{Type}(u)$ and $S:\\mathrm{Type}(v)$, one may take $D_1:\\mathrm{Type}(\\max(u,v,z))$ for any ambient universe $z$. This asserts only capture in the residue field, not capture of a specified lift in $S$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $F=D/\\mathfrak m_D$, $K=S/\\mathfrak m_S$ and $E=F(b)\\subseteq K$. Since $b$ is separable over $F$, the simple extension $E/F$ is finite separable and therefore finite étale.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+   }
+  },
+  {
+   "text": "Artinian local rings $D$ and $S$ are Noetherian with nilpotent maximal ideals and only one prime, hence are henselian. Apply the essential-surjectivity clause of the finite étale equivalence for $D$ to $E$. It gives a finite étale $D$-algebra $D_1$ with $D_1/\\mathfrak m_DD_1\\cong E$. The ideal $\\mathfrak m_DD_1$ is nilpotent and the quotient is a field, so the elements outside it are units; $D_1$ is local and $D\\to D_1$ is local. Finiteness makes $D_1$ Noetherian, and the nilpotent maximal ideal makes it Artinian.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-local-dimension-zero-henselian",
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+   }
+  },
+  {
+   "text": "Form the étale $S$-algebra $B=S\\otimes_D D_1$. Its reduction maps onto $K$ using $E\\hookrightarrow K$ and the residue map $S\\to K$; the kernel $Q$ is prime over $\\mathfrak m_S$ and its residue field is $K$. Henselian étale retraction supplies $B\\to S$ reducing to this map. Restriction to $D_1$ gives a map $g_1:D_1\\to S$ factoring $D\\to S$. It is local because $D_1$ has only one prime; it induces the specified embedding $E\\to K$. Lift $b\\in E$ through the quotient map of $D_1$ to an element $d$, so $\\operatorname{res}_S(g_1(d))=b$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-artinian-local-unique-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+   }
+  },
+  {
+   "text": "Apply the Noetherian fibre flatness criterion to $D\\to D_1\\to S$ and $M=S$. The maps are local, $M$ is finite and nonzero over $S$, and is flat over $D$ by hypothesis. Its fibre is a module over $D_1/\\mathfrak m_DD_1=E$, a field, hence flat. Thus $g_1$ is flat. Replace $D_1$ by its canonical universe lift if necessary, transporting the ring, algebra, maps and properties through the ring equivalence.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "lem-weil-pbc-local-dimension-zero-henselian",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale local Artinian algebra lifting a prescribed separable element in the target residue field of a flat local ring map",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.IsEtaleAt; StandardEtalePair.instFormallyEtaleRing; Algebra.Etale; RingHom.Etale.toAlgebra; Algebra.Etale.exists_subalgebra_fg; RingHom.Etale; Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparable, IsLocalRing",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ranscendental.*[Ll]ocal|[Ll]ocal.*[Tt]ranscendental|[Ss]eparable.*residue.*lift",
+   "results": "Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean; Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean; Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean; Mathlib/RingTheory/Algebraic/StronglyTranscendental.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separable element of the residue field of a flat local map of Artinian rings lifts to a finite etale extension of the source with a flat map to the target",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuEnlargeSolutionModulo",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ArtinianSeparableResidueLift",
+  "file": "lean/Sheaf/RingTheory/ArtinianSeparableResidueLift.lean",
+  "declaration": "Algebra.exists_finiteEtale_artinian_residue_lift",
+  "statement": "theorem exists_finiteEtale_artinian_residue_lift\n    (D : Type u) (S : Type v) [CommRing D] [CommRing S]\n    [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]\n    [Algebra D S] [IsLocalHom (algebraMap D S)]\n    (hflat : (algebraMap D S).Flat) (b : IsLocalRing.ResidueField S)\n    (hb : IsSeparable (IsLocalRing.ResidueField D) b) :\n    ∃ (D' : Type (max u v z)) (_ : CommRing D') (_ : Algebra D D') (g' : D' →+* S),\n      IsLocalRing D' ∧ IsArtinianRing D' ∧\n      IsLocalHom (algebraMap D D') ∧ IsLocalHom g' ∧\n      Etale D D' ∧ Module.Finite D D' ∧ g'.Flat ∧\n      g'.comp (algebraMap D D') = algebraMap D S ∧\n      ∃ d : D', IsLocalRing.residue S (g' d) = b",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184400-L-4025524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184400-L-4025524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,13 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
-import Sheaf.RingTheory.EssentiallySmooth
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.HenselianEtaleRetraction
-import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
-import Sheaf.RingTheory.LocalDimensionZeroHenselian
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.RingTheory.ArtinianSeparableResidueLift
+import Sheaf.RingTheory.ArtinianTranscendentalLocalization
+import Mathlib.RingTheory.HopkinsLevitzki
+import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # Enlarging a solution modulo a prime power
@@ -29,6 +26,45 @@ universe u v w
 
 namespace Algebra
 
+private theorem pow_eq_of_residue_eq
+    {S : Type u} [CommRing S] [IsLocalRing S] [IsArtinianRing S]
+    (p : ℕ) [Fact p.Prime] [CharP S p] {x y : S}
+    (h : IsLocalRing.residue S x = IsLocalRing.residue S y) :
+    ∃ e : ℕ, x ^ p ^ e = y ^ p ^ e := by
+  obtain ⟨N, hN⟩ := (isArtinianRing_iff_isNilpotent_maximalIdeal S).mp inferInstance
+  have hmem : x - y ∈ IsLocalRing.maximalIdeal S := by
+    apply (IsLocalRing.residue_eq_zero_iff _).mp
+    rw [map_sub, h, sub_self]
+  have hbound : N ≤ p ^ N := (Nat.lt_pow_self (Fact.out : p.Prime).one_lt).le
+  have hz := Ideal.pow_eq_zero_of_mem hN hbound hmem
+  rw [sub_pow_char_pow x y N] at hz
+  exact ⟨N, sub_eq_zero.mp hz⟩
+
+private theorem exists_separable_pow
+    {F : Type u} {E : Type v} [Field F] [Field E] [Algebra F E]
+    (p : ℕ) [Fact p.Prime] [CharP F p] {a : E} (ha : IsAlgebraic F a) :
+    ∃ e : ℕ, IsSeparable F (a ^ p ^ e) := by
+  let K := IntermediateField.adjoin F {a}
+  have : FiniteDimensional F K := IntermediateField.adjoin.finiteDimensional ha.isIntegral
+  let aK : K := ⟨a, IntermediateField.mem_adjoin_simple_self F a⟩
+  obtain ⟨e, b, hb⟩ := IsPurelyInseparable.pow_mem (separableClosure F K) p aK
+  have hsep : IsSeparable F (aK ^ p ^ e) := by
+    rw [← hb]
+    exact (Algebra.IsSeparable.isSeparable F b).map
+      (IsScalarTower.toAlgHom F (separableClosure F K) K)
+        (IsScalarTower.toAlgHom F (separableClosure F K) K).injective
+  refine ⟨e, ?_⟩
+  exact hsep.map K.val K.val.injective
+
+private theorem essentiallySmooth_of_smooth
+    {R : Type u} [CommRing R] (S : Type (max u v)) [CommRing S] [Algebra R S]
+    [Algebra.Smooth R S] : Algebra.EssentiallySmooth R S := by
+  refine ⟨S, inferInstance, inferInstance, inferInstance, ⊥, ?_⟩
+  exact ⟨(IsLocalization.atUnits S (⊥ : Submonoid S) (S := Localization (⊥ : Submonoid S))
+    (bot_le : (⊥ : Submonoid S) ≤ IsUnit.submonoid S)).restrictScalars R⟩
+
+
+set_option linter.unusedVariables false in
 /-- Enlarge the given local Artinian factorization so that a positive power of the specified
 unit lies in its image. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FI
 (blueprint: lem-weil-pbc-popescu-enlarge-solution-modulo).
@@ -239,6 +275,45 @@ theorem exists_essentiallySmooth_artinian_enlargement
         g'.comp (algebraMap D D') = g ∧
         (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))
           ((algebraMap Λ (Localization.AtPrime q)) (l ^ r)) ∈ Set.range g' := by
-  sorry
+  classical
+  let S := Localization.AtPrime q ⧸
+    (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n
+  let x : S := Ideal.Quotient.mk
+    ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)
+    (algebraMap Λ (Localization.AtPrime q) l)
+  let : Algebra D S := g.toAlgebra
+  have : IsLocalHom (algebraMap D S) := ‹IsLocalHom g›
+  have hprime : p.Prime := (CharP.char_is_prime_or_zero k p).resolve_right hp.ne'
+  have : Fact p.Prime := ⟨hprime⟩
+  have : CharP S p :=
+    charP_of_injective_algebraMap (algebraMap k S).injective p
+  have : CharP (IsLocalRing.ResidueField S) p :=
+    charP_of_injective_algebraMap (algebraMap k (IsLocalRing.ResidueField S)).injective p
+  have : CharP (IsLocalRing.ResidueField D) p :=
+    (IsLocalRing.ResidueField.map g).charP (IsLocalRing.ResidueField.map g).injective p
+  by_cases ha : IsAlgebraic (IsLocalRing.ResidueField D) (IsLocalRing.residue S x)
+  · obtain ⟨e, hsep⟩ := exists_separable_pow p ha
+    obtain ⟨D', hD', hDD', g', hlocal, hart, hmap, hg', het, hfin, hflat', hcomp,
+      d, hd⟩ := exists_finiteEtale_artinian_residue_lift.{w, v, u}
+        D S hgflat ((IsLocalRing.residue S x) ^ p ^ e) hsep
+    let : CommRing D' := hD'
+    let : Algebra D D' := hDD'
+    have : IsLocalRing D' := hlocal
+    have : IsArtinianRing D' := hart
+    have : IsLocalHom (algebraMap D D') := hmap
+    have : IsLocalHom g' := hg'
+    have : Etale D D' := het
+    obtain ⟨f, hf⟩ := pow_eq_of_residue_eq p
+      (x := g' d) (y := x ^ p ^ e) (by simpa only [map_pow] using hd)
+    refine ⟨p ^ e * p ^ f, Nat.mul_pos (pow_pos hp e) (pow_pos hp f),
+      D', hD', hDD', g', hlocal, hart, hmap, hg',
+      essentiallySmooth_of_smooth D', hflat', hcomp, ?_⟩
+    refine ⟨d ^ p ^ f, ?_⟩
+    simpa only [map_pow, ← pow_mul] using hf
+  · obtain ⟨hlocal, hart, hmap, hsmooth', g', hg', hflat', hcomp, hx⟩ :=
+      artinian_transcendental_polynomial_localization.{w, v, u} D S hgflat x ha
+    refine ⟨1, Nat.zero_lt_one, _, inferInstance, inferInstance, g',
+      hlocal, hart, hmap, hg', hsmooth', hflat', hcomp, ?_⟩
+    simpa only [pow_one] using hx
 
 end Algebra
