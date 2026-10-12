@@ -27,12 +27,13 @@
  ],
  "proof": [
   {
-   "text": "At each point choose a Zariski neighbourhood on which $\\mathcal L$ is free by [def-sc-invertible-module], and an affine neighbourhood on which $\\mathcal F$ is a tilde module by [pqf-def-coherent]. Choose a principal open inside the affine presentation neighbourhood and the trivializing neighbourhood; [lem-weil-pbc-spec-module-tilde-sections] identifies the restriction of the tilde module there with the localization of its presenting module, so both properties hold on this principal open. These opens cover $X$, so quasi-compactness [def-weil-pbc-quasi-compact-scheme] gives a finite subcover $X=\\bigcup_{i=1}^r V_i$ on which both properties hold. Write $e_i$ for a generator and $s|_{V_i}=f_i e_i$. For a point of $V_i=\\operatorname{Spec}A_i$, the image of $s$ in $\\mathcal L_x\\otimes\\kappa(x)$ is nonzero exactly when $f_i\\notin\\mathfrak p_x$; hence $X_s\\cap V_i=D(f_i)$. Write $\\mathcal F|_{V_i}=\\widetilde M_i$; identifying $M_i$ with $\\Gamma(V_i,\\mathcal F)$ by the $r=1$ case of [lem-weil-pbc-spec-module-tilde-sections], that same node identifies $\\Gamma(D(f_i),\\mathcal F)$ with $(M_i)_{f_i}$. Write $u|_{D(f_i)}=v_i/f_i^{a_i}$, choose $a\\ge a_i$ for every $i$, and set $w_i=f_i^{a-a_i}v_i\\otimes e_i^{\\otimes a}\\in\\Gamma(V_i,\\mathcal F\\otimes\\mathcal L^{\\otimes a})$. Then $w_i|_{D(f_i)}=u|_{D(f_i)}\\otimes s^{\\otimes a}$.",
+   "text": "At each point choose a Zariski neighbourhood on which $\\mathcal L$ is free by [def-sc-invertible-module], and an affine neighbourhood on which $\\mathcal F$ is a tilde module by [pqf-def-coherent]. Choose a principal open inside the affine presentation neighbourhood and the trivializing neighbourhood; [lem-weil-pbc-spec-module-tilde-sections] identifies the restriction of the tilde module there with the localization of its presenting module, so both properties hold on this principal open. These opens cover $X$, so quasi-compactness [def-weil-pbc-quasi-compact-scheme] gives a finite subcover $X=\\bigcup_{i=1}^r V_i$ on which both properties hold. Write $e_i$ for a generator and $s|_{V_i}=f_i e_i$. For a point of $V_i=\\operatorname{Spec}A_i$, the image of $s$ in $\\mathcal L_x\\otimes\\kappa(x)$ is nonzero exactly when $f_i\\notin\\mathfrak p_x$; hence $X_s\\cap V_i=D(f_i)$. Write $\\mathcal F|_{V_i}=\\widetilde M_i$; identifying $M_i$ with $\\Gamma(V_i,\\mathcal F)$ by the $r=1$ case of [lem-weil-pbc-spec-module-tilde-sections], that same node identifies $\\Gamma(D(f_i),\\mathcal F)$ with $(M_i)_{f_i}$. Write $u|_{D(f_i)}=v_i/f_i^{a_i}$, choose $a\\ge a_i$ for every $i$, and set $w_i=f_i^{a-a_i}v_i\\otimes e_i^{\\otimes a}\\in\\Gamma(V_i,\\mathcal F\\otimes\\mathcal L^{\\otimes a})$. Then $w_i|_{D(f_i)}=u|_{D(f_i)}\\otimes s^{\\otimes a}$. Identify the specified nonvanishing open with the complement of the zero-locus support using [lem-weil-pbc-section-nonvanishing-zero-locus], so basicOpen_coeff_eq supplies the chart equality.",
    "uses": [
     "def-sc-invertible-module",
     "def-weil-pbc-quasi-compact-scheme",
     "pqf-def-coherent",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
    ],
    "elementary": false,
    "source": {
@@ -41,10 +42,9 @@
    }
   },
   {
-   "text": "For each pair $i,j$, put $W_{ij}=V_i\\cap V_j$. It is quasi-compact by quasi-separatedness of $X$; it is quasi-separated since every two affine opens of the open subscheme $W_{ij}$ are affine opens of $X$ and have quasi-compact intersection. The difference $d_{ij}=w_i|_{W_{ij}}-w_j|_{W_{ij}}$ is a section of $\\mathcal G_{ij}=(\\mathcal F\\otimes\\mathcal L^{\\otimes a})|_{W_{ij}}$, which is quasi-coherent by [lem-sc-invertible-tensor-qcoherent]. On $(W_{ij})_s=W_{ij}\\cap X_s$ both restrictions equal $u\\otimes s^{\\otimes a}$ by Step 1, so $d_{ij}$ restricts to zero. Apply [lem-sc-p1-section-restriction-s-torsion] to the qcqs scheme $W_{ij}$, its invertible module $\\mathcal L|_{W_{ij}}$, its section $s|_{W_{ij}}$, and $\\mathcal G_{ij}$: for some $b_{ij}\\ge0$, multiplication by $s^{\\otimes b_{ij}}$ kills $d_{ij}$ on $W_{ij}$.",
+   "text": "Quasi-separatedness makes W_ij = V_i intersect V_j quasi-compact. The difference d_ij of the two local twisted lifts restricts to zero on W_ij intersect X_s by Step 1. The basis E_i of L^a on V_i identifies d_ij uniquely with dprime_ij tensor E_i for a section dprime_ij of F on W_ij. Tensoring with the restricted basis is injective, so dprime_ij vanishes on D(f_i|W_ij). Apply [pqf-lem-qcoh-compact-section-power-torsion] to F on the compact open W_ij to obtain f_i^b_ij dprime_ij = 0. Tensoring back with E_i gives f_i^b_ij d_ij = 0. This uses quasi-coherence only for F, not for the twisted module, and does not require affine overlaps.",
    "uses": [
-    "lem-sc-invertible-tensor-qcoherent",
-    "lem-sc-p1-section-restriction-s-torsion"
+    "pqf-lem-qcoh-compact-section-power-torsion"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "There are finitely many pairs, so choose $b\\ge b_{ij}$ for all of them. Multiplying each $w_i$ by $s^{\\otimes b}$ gives $z_i\\in\\Gamma(V_i,\\mathcal F\\otimes\\mathcal L^{\\otimes(a+b)})$. On $W_{ij}$ their difference is $s^{\\otimes(b-b_{ij})}(s^{\\otimes b_{ij}}d_{ij})=0$ by Step 2. The sheaf gluing axiom gives a global section $t$ restricting to $z_i$ on every $V_i$. On $D(f_i)$, Step 1 gives $z_i=u\\otimes s^{\\otimes(a+b)}$; these opens cover $X_s$, so $t|_{X_s}=u\\otimes s^{\\otimes(a+b)}$. Take $m=a+b$.",
+   "text": "Take the maximum b of the finitely many b_ij, with b=0 when the index set is empty. Let z_i be the image of w_i under mulTensorPowSection s F a b. On each overlap, tensorPowSectionOne s b is the restricted basis E_i^b multiplied by f_i^b; mulTensorPowSection_app_eq_zero and f_i^b d_ij = 0 show that z_i and z_j agree. Glue z_i by the sheaf axiom to a global section u of F tensor L^(a+b). The identity mulTensorPowSection_app_tmulSection and Step 1 show that u restricts to t tensor s^(a+b) on each V_i intersect X_s. Sheaf uniqueness on their cover of X_s proves the required equality.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -67,13 +67,13 @@
   "def-weil-pbc-quasi-compact-scheme",
   "pqf-def-coherent",
   "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-sc-invertible-tensor-qcoherent",
-  "lem-sc-p1-section-restriction-s-torsion"
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "pqf-lem-qcoh-compact-section-power-torsion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PW (lemma-invert-s-sections), part (2); proof reconstructed from the source theorem's route and WeilConjectures/AlgebraicGeometry/Modules/ClearDenominators.lean:263-384 because the Stacks source tree is absent locally"
+  "document": "literature/stacks-project/properties.tex; WeilConjectures/AlgebraicGeometry/Modules/ClearDenominators.lean",
+  "place": "Properties Lemma 01PW, part (2); adapted the existing separated affine-base Lean proof using the proved compact-open module torsion theorem for qcqs overlaps."
  },
  "mathlib_searches": [
   {
@@ -146,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T110324-L-624024",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
