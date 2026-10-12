@@ -24,45 +24,47 @@
  ],
  "proof": [
   {
-   "text": "*The canonical map.* The semilinearity hypotheses make $m\\otimes n\\mapsto\\mu_{ij}(m)\\otimes\\nu_{ij}(n)$ balanced over $A_i$, so the displayed maps define a directed system $(T_i)$. The maps $(m,n)\\mapsto\\mu_i(m)\\otimes\\nu_i(n)$ are $A_i$-balanced: for $a\\in A_i$, both sides are $\\alpha_i(a)(\\mu_i(m)\\otimes\\nu_i(n))$. They therefore induce compatible homomorphisms $T_i\\to M\\otimes_A N$, and the universal property of the colimit [def-weil-pbc-category-colimit] gives the unique $A$-linear map $\\psi:T\\to M\\otimes_A N$ with the stated formula. The same balancedness check shows that the displayed formulas define the claimed $A$-module structures on $M$, $N$, and $T$; directedness supplies a common later stage whenever two representatives are compared.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 007K; the universal-property construction is the first part of the omitted algebraic proof"
-   }
-  },
-  {
-   "text": "*Surjectivity.* Every pure tensor in $M\\otimes_A N$ is represented by $\\mu_i(m)\\otimes\\nu_j(n)$ for some stages $i,j$. Choose $k$ receiving maps from both stages. Then this tensor equals $\\mu_k(\\mu_{ik}(m))\\otimes\\nu_k(\\nu_{jk}(n))$, which is the image under $\\psi$ of the class of $\\mu_{ik}(m)\\otimes\\nu_{jk}(n)\\in T_k$. Since pure tensors generate the tensor product, $\\psi$ is surjective.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof: generators of a tensor product and a common later index"
-   }
-  },
-  {
-   "text": "*Injectivity: relations from one stage.* Represent an element of $T$ by a finite sum of tensors from finitely many stages, and move all terms to one common stage $k$. If its image under $\\psi$ is zero, the resulting finite sum in $M\\otimes_A N$ is a finite consequence of additivity and of relations $ar\\otimes s-r\\otimes as$ with $a$ represented at some stage. Move the finitely many coefficients and tensors occurring in this relation to one still later stage $\\ell$. Semilinearity identifies the original element with the image of the corresponding balanced relation in $T_\\ell$, hence its class in $T$ is zero. This is exactly the common-stage argument in Tag 00DD, with the coefficient ring allowed to advance along the directed system; the colimit universal property [def-weil-pbc-category-colimit] identifies the common-stage class with the original class.",
+   "text": "Construct the stage balanced additive maps with TensorProduct.liftAddHom: hAM and hAN identify moving a stage scalar between the tensor factors. Compose with e_i inverse. Tensor induction and hT prove compatibility of these maps with T transitions; colimit.w identifies the M and N coprojections. The colimit universal property [def-weil-pbc-category-colimit] produces an additive comparison p with the prescribed formula.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to a directed system of coefficient rings"
+    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to varying rings; Sheaves Tag 007K is the stalk application. Source texts checked online at https://stacks.math.columbia.edu/tag/00DD and https://stacks.math.columbia.edu/tag/007K."
    }
   },
   {
-   "text": "*Inverse and naturality.* The preceding construction gives a two-sided inverse by sending a pure tensor $\\mu_i(m)\\otimes\\nu_i(n)$ to the class of $m\\otimes n$ in $T$; the common-stage argument proves that this is well defined and balanced over $A$. It is inverse to $\\psi$ on the generators of both tensor products, so $\\psi$ is an isomorphism. For compatible $A_i$-linear maps $f_i,g_i$, both composites in the naturality square send the generator $\\lambda_i(m\\otimes n)$ to $\\mu'_i(f_i(m))\\otimes\\nu'_i(g_i(n))$; generation by such elements proves equality.",
-   "uses": [],
-   "elementary": true,
+   "text": "Construct the inverse pairing directly. If I is empty choose zero. Otherwise Mathlib Concrete.isColimit_exists_rep and Concrete.isColimit_exists_of_rep_eq give representatives and eventual equality. To use these with arbitrary independent index and group universes, first apply AddCommGrpCat.uliftFunctor, which preserves all colimits, and shrink the filtered-colimit preservation instance of the forgetful functor. Two inputs have representatives at a common upper stage. Define their pairing to be the colimit class of the stage pure tensor. For any two presentations, find eventual equalities of the two factors and advance both to one common upper stage; functoriality and hT show equality of the tensor classes. Move three representatives to a common stage to prove additivity in each factor. Zero follows from the stage zero tensor identities.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 007K; naturality follows from the same generator calculation"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to varying rings; Sheaves Tag 007K is the stalk application. Source texts checked online at https://stacks.math.columbia.edu/tag/00DD and https://stacks.math.columbia.edu/tag/007K."
+   }
+  },
+  {
+   "text": "Prove scalar linearity of the pairing for every stage coefficient by moving both module inputs beyond that stage and applying hAM, hAN, hAT, smul_tmul and tmul_smul. For arbitrary coefficients, the elements of colimit A for which both scalar identities hold form a subring: zero and one use the module laws; addition and negation use additivity of the pairing; multiplication uses mul_smul twice. Every coprojection lands in this subring, so the ring colimit universal property [def-weil-pbc-category-colimit] yields a map into the subring. The composite with the inclusion is the identity by colimit.hom_ext. Thus every coefficient belongs to this subring, proving bilinearity over colimit A. Lift this bilinear pairing using TensorProduct.lift to obtain q.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to varying rings; Sheaves Tag 007K is the stalk application. Source texts checked online at https://stacks.math.columbia.edu/tag/00DD and https://stacks.math.columbia.edu/tag/007K."
+   }
+  },
+  {
+   "text": "Prove q p = id on the stage pure tensors. Additive maps out of a colimit are determined by coprojections even into a different universe: use the surjectivity of Colimits.Quot.desc from AddCommGrpCat.isColimit_iff_bijective_desc and Quot.addMonoidHom_ext. Tensor induction then gives the required determination by stage pure tensors. For p q = id, use tensor induction, extend the pure-tensor equality separately in each variable by this colimit extensionality, and advance the two remaining stage indices to a common upper stage. The identities give bijectivity. As q is linear and injective, applying q proves that p is linear too. Uniqueness among additive comparisons uses the same stage pure tensor extensionality. For naturality, both composites agree on these generators by hH, the comparison formula for psi prime, TensorProduct.map_tmul, hF and hG. No separate finite-relations injectivity lemma is required.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to varying rings; Sheaves Tag 007K is the stalk application. Source texts checked online at https://stacks.math.columbia.edu/tag/00DD and https://stacks.math.columbia.edu/tag/007K."
    }
   }
  ],
@@ -72,7 +74,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, with the coefficient ring advanced to a common stage; the application to sheaf stalks is Sheaves Lemma 007K"
+  "place": "Lemma 10.12.9 (Tag 00DD), second direct proof, adapted to varying rings; Sheaves Tag 007K is the stalk application. Source texts checked online at https://stacks.math.columbia.edu/tag/00DD and https://stacks.math.columbia.edu/tag/007K."
  },
  "mathlib_searches": [
   {
@@ -156,5 +158,15 @@
   "group": "F1",
   "result": "pass",
   "note": "directed set as Preorder+IsDirected (DIRECTED SETS line, as G1 85ed66817); A: I⥤CommRingCat, M,N: I⥤AddCommGrpCat with stage Module instances and semilinear hM/hN; colimit/colimit.ι of def-weil-pbc-category-colimit; colimit actions via instances+hAM/hAN/hAT; T presented by e,hT; psi linear with generator formula, uniqueness among additive maps, bijective; naturality square with F,G,H,psi' characterised on coprojections; empty I harmless"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T044753-L-2039727",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

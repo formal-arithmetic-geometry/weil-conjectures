@@ -6097,3 +6097,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/R1/Sheaf.ConstructibleSheaf.SylowCoverAssociatedSheaf (stage 3; reviewer PASS; first push; landing 20261012T044752-L-2039147 (interface); batch 20261012T044734; modules 2; new nodes 1)
 - 04:47 L: merged deliver/R2/Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent (stage 3; reviewer PASS; first push; landing 20261012T044753-L-2039356 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/R2/Sheaf.AlgebraicGeometry.FiniteCoverKillsConstantCohomology (stage 3; reviewer PASS; first push; landing 20261012T044753-L-2039518 (proof); batch 20261012T044734; modules 1; new nodes 0)
+- 04:47 L: merged deliver/R2/Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings (stage 3; reviewer PASS; first push; landing 20261012T044753-L-2039727 (proof); batch 20261012T044734; modules 1; new nodes 0)
