@@ -66,6 +66,25 @@ theorem tor_dimension_shifting
           (θ N).hom ≫ ((Tor' (ModuleCat.{u} S) 3).obj E₀.X₃).map g) ∧
     (HasProjectiveDimensionLE E₀.X₃ 2 →
       IsZero (((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).obj k)) := by
-  sorry
+  have h₁ := tor_dimension_shift_natural E₁ hE₁ 1 (by omega)
+  rw [hK₁] at h₁
+  obtain ⟨θ₁, hθ₁⟩ := h₁
+  obtain ⟨θ₂, hθ₂⟩ := tor_dimension_shift_natural E₀ hE₀ 2 (by omega)
+  let e₁ := NatIso.ofComponents θ₁ (fun {N N'} g ↦ hθ₁ N N' g)
+  let e₂ := NatIso.ofComponents θ₂ (fun {N N'} g ↦ hθ₂ N N' g)
+  let e := e₁.symm ≪≫ e₂.symm
+  refine ⟨⟨(fun N ↦ e.app N), ?_⟩, ?_⟩
+  · intro N N' g
+    exact e.hom.naturality g
+  · intro hpd
+    have hpd₁ : HasProjectiveDimensionLT E₀.X₁ 2 :=
+      hE₀.hasProjectiveDimensionLT_X₁ 2 inferInstance hpd
+    have hpd₁' : HasProjectiveDimensionLT E₁.X₃ 2 := by
+      rw [hK₁]
+      exact hpd₁
+    have hpd₂ : HasProjectiveDimensionLT E₁.X₁ 1 :=
+      hE₁.hasProjectiveDimensionLT_X₁ 1 inferInstance hpd₁'
+    let := hpd₂
+    exact isZero_Tor'_succ_of_projective (ModuleCat.{u} S) E₁.X₁ k 0
 
 end CategoryTheory

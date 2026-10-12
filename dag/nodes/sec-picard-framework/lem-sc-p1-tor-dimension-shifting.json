@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "Apply [lem-sc-p1-tor-dimension-shift-natural] to the exact sequence 0 \\to K_1 \\to F_0 \\to M \\to 0 (F_0 free) with i=2. It gives isomorphisms Tor_3^S(M,N) \\cong Tor_2^S(K_1,N), natural in N. Composing at N=k the isomorphism of Step 1 with the inverse of this one yields an isomorphism Tor_1^S(K_2,k) \\cong Tor_3^S(M,k); as a composite of isomorphisms natural in N (the inverse of a natural isomorphism is natural), it is natural in k.",
+   "text": "Apply [lem-sc-p1-tor-dimension-shift-natural] to E₀ with i=2. Rewrite the middle module in the first shift using hK₁. Package the two natural families as natural isomorphisms using NatIso.ofComponents, invert each, and compose them. Their composite gives Tor₁(K₂,N) ≅ Tor₃(M,N), with naturality supplied by the composite natural transformation.",
    "uses": [
     "lem-sc-p1-tor-dimension-shift-natural"
    ],
@@ -43,10 +43,8 @@
    }
   },
   {
-   "text": "If M has a projective resolution of length at most two, choose one concentrated in degrees 0, 1, and 2. By [def-weil-pbc-tor-modules], Tor_3^S(M,k) is the third homology of the resolution tensored with k; the degree-3 and degree-4 terms are zero, so this homology vanishes. The isomorphism of Step 2 then gives Tor_1^S(K_2,k)=0.",
-   "uses": [
-    "def-weil-pbc-tor-modules"
-   ],
+   "text": "For the vanishing clause, use Mathlib ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁ twice. Since the free middle modules are projective, the first short exact sequence lowers projective dimension <3 of M to <2 of K₁, and the second lowers it to <1 of K₂. Mathlib infers Projective K₂ from HasProjectiveDimensionLT K₂ 1. Apply isZero_Tor'_succ_of_projective at n=0 to obtain IsZero Tor₁(K₂,k) directly. This avoids constructing a bounded projective resolution or computing Tor₃.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
@@ -55,13 +53,12 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-tor-dimension-shift-natural",
-  "def-weil-pbc-tor-modules"
+  "lem-sc-p1-tor-dimension-shift-natural"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00S2 together with Section Tag 00LY"
+  "place": "Tags 00S2 and 00LY; two natural dimension shifts, with the vanishing clause implemented by Mathlib projective-dimension descent along the given short exact sequences (V2, 2026-10-12)."
  },
  "mathlib_searches": [
   {
@@ -140,5 +137,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3479687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
