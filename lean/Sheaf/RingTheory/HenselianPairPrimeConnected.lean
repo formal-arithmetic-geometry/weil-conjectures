@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.Topology.Connected.Basic
 import Sheaf.RingTheory.IntegralOverHenselianPair
+import Sheaf.RingTheory.HenselianPairDomainConnected
 
 /-!
 # Connected zero loci over a henselian pair
@@ -29,20 +30,28 @@ Source: Stacks Project, More on Algebra, Lemma 15.11.16 (Tag 09Y6)
 (blueprint: lem-weil-pbc-henselian-pair-prime-connected).
 
 Proof:
-1. The integral quotient map `A → A/p` preserves henselian pairs by
-   `lem-weil-pbc-integral-over-henselian-pair`. The quotient is a nonzero domain, and
-   `lem-weil-pbc-spec-quotient-closed-immersion` together with `def-weil-affine-spectrum`
-   identifies the spectrum of its quotient by the image of `I` with `V(p + I)`.
-2. For a nonzero domain with a henselian ideal, the quotient is nonzero: otherwise the
-   idempotent in the zero quotient would have the two distinct lifts `0` and `1`, contrary
-   to uniqueness in `def-weil-pbc-henselian-terminology` applied to the finite algebra `A`.
-3. A disconnection of the quotient spectrum gives a nontrivial idempotent by
-   `lem-weil-pbc-spec-clopen-idempotent`. Henselian lifting supplies an idempotent in the
-   domain, necessarily `0` or `1`, a contradiction. Transport this connectedness, including
-   nonemptiness as in `def-weil-connected-scheme`, through the homeomorphism in step 1. -/
+1. Apply `henselianRing_of_isIntegral` to the integral quotient A → A/p.
+   The quotient is a nonzero domain because p is prime.
+2. Apply `connectedSpace_zeroLocus_of_henselian_domain` to the image of I in A/p.
+   That theorem lifts roots of X(X - 1), making every quotient idempotent zero or one,
+   and uses the clopen-idempotent criterion for connectedness, including nonemptiness.
+3. Take the continuous image under the quotient-spectrum map. Mathlib's
+   `image_comap_zeroLocus_eq_zeroLocus_comap` and the ideal comap-map identity
+   identify this image with V(p ⊔ I). -/
 theorem connectedSpace_zeroLocus_sup_of_henselian {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] (p : Ideal A) [p.IsPrime] :
-    ConnectedSpace (zeroLocus ((p ⊔ I : Ideal A) : Set A)) :=
-  sorry
+    ConnectedSpace (zeroLocus ((p ⊔ I : Ideal A) : Set A)) := by
+  have : HenselianRing (A ⧸ p) (I.map (algebraMap A (A ⧸ p))) :=
+    henselianRing_of_isIntegral A I (A ⧸ p)
+  have hconn := isConnected_iff_connectedSpace.mpr
+    (connectedSpace_zeroLocus_of_henselian_domain (I.map (algebraMap A (A ⧸ p))))
+  have himage := hconn.image (comap (Ideal.Quotient.mk p))
+    (continuous_comap _).continuousOn
+  apply isConnected_iff_connectedSpace.mp
+  simpa [Ideal.Quotient.algebraMap_eq,
+    image_comap_zeroLocus_eq_zeroLocus_comap (A ⧸ p) (Ideal.Quotient.mk p)
+      Ideal.Quotient.mk_surjective,
+    Ideal.comap_map_of_surjective (Ideal.Quotient.mk p) Ideal.Quotient.mk_surjective,
+    ← RingHom.ker_eq_comap_bot, Ideal.mk_ker, sup_comm] using himage
 
 end PrimeSpectrum

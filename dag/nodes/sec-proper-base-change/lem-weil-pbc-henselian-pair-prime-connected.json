@@ -25,55 +25,38 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (reduce to a domain).* The quotient map $A\\to A/\\mathfrak p$ is integral, and [lem-weil-pbc-integral-over-henselian-pair] therefore makes $(A/\\mathfrak p,(I+\\mathfrak p)/\\mathfrak p)$ a henselian pair. Since $\\mathfrak p$ is prime, $A/\\mathfrak p$ is a nonzero domain. The quotient-spectrum description identifies $\\operatorname{Spec}((A/\\mathfrak p)/((I+\\mathfrak p)/\\mathfrak p))$ homeomorphically with the subspace $V(\\mathfrak p+I)\\subseteq\\operatorname{Spec}A$: the map for a quotient is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], and its image consists exactly of primes containing the quotient ideal by [def-weil-affine-spectrum]. Thus it is enough to prove that if $(A,I)$ is henselian and $A$ is a nonzero domain, then $\\operatorname{Spec}(A/I)$ is connected.",
+   "text": "The quotient A/p is a nonzero domain since p is prime. Apply henselianRing_of_isIntegral to obtain the henselian pair (A/p,I.map(algebraMap A (A/p))).",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair",
-    "lem-weil-pbc-spec-quotient-closed-immersion",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-integral-over-henselian-pair"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6), proof: first paragraph, using Lemma 15.11.8 (Tag 09XK)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (the quotient is nonzero).* The quotient $A/I$ cannot be the zero ring. Otherwise, applying the henselian lifting condition [def-weil-pbc-henselian-terminology] to the finite $A$-algebra $B=A$, the unique idempotent of $B/IB=0$ would have the two distinct lifts $0$ and $1$ in the nonzero domain $A$, contradicting uniqueness. Hence the hypothesis needed for the affine connectedness criterion applies to $A/I$.",
+   "text": "Apply PrimeSpectrum.connectedSpace_zeroLocus_of_henselian_domain to the extended ideal. This proves connectedness and nonemptiness of its zero locus.",
    "uses": [
-    "def-weil-pbc-henselian-terminology"
+    "lem-weil-pbc-henselian-pair-prime-connected-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6), proof together with the nonzero-ring hypothesis of Algebra, Lemma 10.21.2 (Tag 00E9)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (idempotent contradiction).* If $\\operatorname{Spec}(A/I)$ were disconnected, the affine clopen-idempotent correspondence [lem-weil-pbc-spec-clopen-idempotent] would give a nontrivial idempotent $\\bar e\\in A/I$: choose a nonempty proper clopen piece of the disconnection, and its corresponding idempotent is neither $0$ nor $1$. Apply the henselian condition to $B=A$ to lift $\\bar e$ to an idempotent $e\\in A$. Since $A$ is a domain, $e(e-1)=0$ forces $e=0$ or $e=1$, whose reductions are respectively $0$ or $1$, contrary to the choice of $\\bar e$. Therefore $\\operatorname{Spec}(A/I)$ is connected, and Step 1 transports this connectedness (including nonemptiness) to $V(\\mathfrak p+I)$.",
+   "text": "Take the continuous image under PrimeSpectrum.comap of Ideal.Quotient.mk p. Mathlib image_comap_zeroLocus_eq_zeroLocus_comap identifies it with V(comap(map I)), and Ideal.comap_map_of_surjective together with Ideal.mk_ker gives comap(map I)=I ⊔ p. Transport IsConnected to ConnectedSpace of V(p ⊔ I). The full scheme closed-immersion theorem is unnecessary.",
    "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "def-weil-pbc-henselian-terminology",
+    "def-weil-affine-spectrum",
     "def-weil-connected-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6), proof: second paragraph, using Algebra, Lemma 10.21.2 (Tag 00E9) and the characterization of henselian pairs in Lemma 15.11.6 (Tag 09XI)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-integral-over-henselian-pair",
-  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-henselian-pair-prime-connected-domain",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-spec-clopen-idempotent",
   "def-weil-connected-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6, lemma-irreducible-henselian-pair-connected)"
+  "place": "More on Algebra, Lemma 15.11.16 (Tag 09Y6, lemma-irreducible-henselian-pair-connected); stage-3 proof uses simple-root lifting in the proved domain lemma and Mathlib continuous image/comap identities"
  },
  "mathlib_searches": [
   {
@@ -150,5 +133,15 @@
   "group": "K1",
   "result": "pass",
   "note": "A:Type u CommRing; (A,I) henselian = recorded HenselianRing A I (#print: jac + simple-root lifting, 09XE); p prime = [p.IsPrime]; p+I = p ⊔ I; V(p+I) = PrimeSpectrum.zeroLocus ((p ⊔ I):Set A) (#check resolves to PrimeSpectrum.zeroLocus); connected incl. nonempty = ConnectedSpace on the subtype (toNonempty field); statement true per 09Y6 (I ⊆ Jac so p+I proper)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T144136-L-2104337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
