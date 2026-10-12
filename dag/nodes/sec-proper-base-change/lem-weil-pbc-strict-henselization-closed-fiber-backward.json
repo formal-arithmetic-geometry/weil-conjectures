@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GW, 04GP and 04HX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "H3",
+  "date": "2026-10-12",
+  "note": "Second reading: proved from existing strictHenselizationResidue and uniqueness of the closed point under an isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict henselization singleton fibre closed point",
+   "results": "No exact match; no strict henselization fibre theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.closedPoint Spec.map",
+   "results": "Only generic local-ring APIs; no exact strict henselization result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization fiber closedPoint",
+   "results": "No existing declaration beyond this target and downstream uses.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a point under the morphism from a strict henselization of a scheme consists of its unique closed point",
+   "results": "Spec_closedPoint, SpecToEquivOfLocalRing, and fromSpecStalk_closedPoint are generic tools, not the singleton-fibre theorem. Independent source search found strictHenselizationResidue in Sheaf.Paper.StrictHenselizationFunctoriality; used it to prove the backward lemma.",
+   "date": "2026-10-13",
+   "verdict": "no exact match for forward; backward proved from existing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.closedPoint, PrimeSpectrum.comap",
+   "results": "comap_residue, comap_closedPoint, isLocalHom_iff_comap_closedPoint: generic tools only; no forward-fibre assertion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselization-closed-fiber",
+   "place": "forward/backward decomposition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-strict-henselization-closed-fiber-backward",
+ "title": "The closed point lies over the distinguished point",
+ "statement": "Let S be a scheme, Ω an algebraically closed field, s : Spec Ω → S a geometric point, A a commutative local ring, and e : Spec A ≅ S_(s), where S_(s) is [def-weil-pbc-strict-henselization-limit] and its structural map ρ_s is [def-weil-pbc-strict-henselization-structural-map]. Then ρ_s(e(closedPoint A)) = s(closedPoint Ω).",
+ "proof": [
+  {
+   "text": "Equip Ω with the algebra structure given by the geometric-point residue map; the required compatibility is reflexivity. Apply AlgebraicGeometry.strictHenselizationResidue, the residue clause of the existing functoriality node, to get a local-ring structure on C and the structural-image equation for closedPoint C.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every point of a local spectrum specializes to its closed point. Apply this in C to e(closedPoint A), and in A to e.inv(closedPoint C); map the latter specialization by e.hom. The inverse identity and T0 separation give e(closedPoint A)=closedPoint C. Substitute into the structural-image equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberBackward",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedFiberBackward.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap_closedPoint_eq",
+  "statement": "theorem strictHenselizationStructuralMap_closedPoint_eq\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme s) :\n    (e.hom ≫ strictHenselizationStructuralMap s) (IsLocalRing.closedPoint A) =\n      s (IsLocalRing.closedPoint Ω)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T161500-L-2647619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T161500-L-2647619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

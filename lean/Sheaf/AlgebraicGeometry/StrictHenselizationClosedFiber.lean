@@ -6,6 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberForward
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberBackward
 
 /-!
 # The fibre of a strict henselization over its distinguished point
@@ -44,6 +46,11 @@ theorem strictHenselizationStructuralMap_fiber_eq_closedPoint
     (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme s)
     (x : Spec (.of A)) :
     (e.hom ≫ strictHenselizationStructuralMap s) x = s (IsLocalRing.closedPoint Ω) ↔
-      x = IsLocalRing.closedPoint A := by sorry
+      x = IsLocalRing.closedPoint A := by
+  constructor
+  · exact strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq s e x
+  · intro hx
+    subst x
+    exact strictHenselizationStructuralMap_closedPoint_eq s e
 
 end AlgebraicGeometry.Scheme
