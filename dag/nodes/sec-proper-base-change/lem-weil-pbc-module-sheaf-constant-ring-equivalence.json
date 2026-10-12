@@ -20,25 +20,33 @@
  ],
  "proof": [
   {
-   "text": "Construct the ring sheaf as the sheafification of the constant CommRingCat-valued presheaf. For a ModuleCat-valued sheaf, a ring-sheaf scalar is locally represented by constants. Act on the restricted section with these constants and glue. Local equality of representatives and separatedness give independence; module identities and restriction compatibility follow locally and hence globally. Lambda-linear morphisms respect the glued action.",
+   "text": "Encode ModuleCat-valued presheaves as modules over the constant RingCat presheaf by retaining each module and restriction map. The componentwise inverse on morphisms proves this encoding fully faithful; composing with the fully faithful sheaf inclusion yields moduleEmbedding. Define scalarUnit by forgetting the CommRingCat sheafification unit. The underlying-set sheafification instances make it locally injective and locally surjective. Apply the Mathlib module-sheafification functor along scalarUnit to moduleEmbedding to obtain moduleExtension.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
-    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-pc-sites-module-sheafification-interface"
    ],
    "elementary": false
   },
   {
-   "text": "In the other direction restrict the ring-sheaf action along the constant-presheaf sheafification unit at every object. The underlying additive sheaf and restriction maps are retained, so this gives a ModuleCat-valued sheaf. Ring-linear morphisms become Lambda-linear natural transformations. Restriction after gluing gives the original Lambda-action. Gluing after restriction gives the original ring-sheaf action, since scalars are locally constant representatives and the additive sheaf is separated. These identities give the equivalence unit and counit with triangle identities. Identity additive components form the natural isomorphism of forgetful functors. All carriers are in Type (u+1) and the site belongs to X : Scheme.{u}.",
+   "text": "The unit of the module-sheafification adjunction at moduleEmbedding(F) underlies the ordinary abelian-presheaf sheafification unit. Since F is a sheaf, its underlying additive presheaf is a sheaf and this unit is invertible. The forgetful functor to additive presheaves reflects isomorphisms, so the module unit is invertible too. Whiskering gives moduleEmbeddingUnitIso. Fullness and faithfulness of moduleExtension follow by cancellation against restriction of scalars, using the fully faithful moduleEmbedding and the faithful right adjoint. These are Functor.Faithful.of_comp_iso and Functor.Full.of_comp_faithful_iso.",
    "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an R-module sheaf M, restrict its scalars along scalarUnit. The resulting constant-ring module presheaf encodes a ModuleCat-valued presheaf F, whose underlying additive presheaf is definitionally M.val.presheaf. Reflection of the sheaf property by ModuleCat-to-AddCommGrpCat therefore gives moduleRestrictionObj(M). Its image under moduleEmbedding is definitionally the restricted module presheaf. The invertible counit of Mathlib module sheafification consequently gives moduleExtension(moduleRestrictionObj(M)) isomorphic to M, proving essential surjectivity. Use Functor.asEquivalence for the resulting fully faithful essentially surjective functor. The ordinary additive-sheafification counit, evaluated at the underlying additive sheaf of F, defines moduleExtensionForgetIso; counit naturality proves its naturality. This is the required compatibility, with the original universes and without extra hypotheses.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
     "def-weil-pbc-sheafification",
     "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-pc-sites-module-sheafification-interface"
    ],
    "elementary": false
   }
@@ -49,13 +57,13 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-sheafification",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ring-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-ring-sheafification-underlying-sets"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/093I",
-  "place": "Modules on Sites, Section 18.42, opening paragraph; underlying-abelian convention in Cohomology on Sites, Lemma 21.12.4 (03FD). Encoding construction written by the worker from these definitions."
+  "place": "Constant-coefficient encoding argument, implemented using the module-sheafification adjunction of Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification (Stacks Tag 03CY), its invertible counit, and its unit on an already sheaf-valued object; additive compatibility uses the ordinary sheafification counit."
  },
  "mathlib_searches": [
   {
@@ -130,10 +138,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T030019-L-1269397",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042408-L-1815532",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
