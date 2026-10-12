@@ -13,22 +13,43 @@
  ],
  "proof": [
   {
-   "text": "represent z by a/f^r and decompose a into its finitely many homogeneous\ncomponents. This gives components of degrees i-r*b. At a homogeneous prime p away from f,\nlocalize first at just the homogeneous elements outside p. This localization is Z-graded.\nIt injects into A_p: for an ordinary denominator outside p, some homogeneous component\nis outside p and becomes a unit. The grading map sends that denominator to a Laurent\npolynomial with a unit coefficient. McCoy's criterion makes this polynomial regular.\nThe grading map is multiplicative and injective (evaluation at 1 is a left inverse),\nso the denominator acts injectively on the graded localization. Further localization\nat all ordinary denominators outside p is consequently injective. The degree-k fraction\nsupplied by hz is already in this graded localization. Equality there and independence\nof homogeneous components force every component of z of degree different from k to vanish.\nFor such a numerator component a_i, consider I = {x in A | some power of f kills x*a_i}.\nIf a_i/f^r is nonzero, I is proper, homogeneous, and disjoint from powers of f. Choose\nan ordinary prime containing I and avoiding f, then take its homogeneous core; the core\nis prime, still contains I, and avoids f. It is relevant because f has positive degree.\nVanishing of the component at this point supplies a homogeneous denominator outside the\ncore killing a_i after multiplication by a power of f. That denominator belongs to I,\na contradiction. Thus only the degree-k component survives globally. Increase r if\nnecessary until k+r*b is nonnegative, multiplying the numerator by the same power of f.\nThe resulting numerator and f^r have degree difference k and exhibit membership. If all\ncomponents vanish, use the zero numerator; if f is nilpotent, A_f is the zero module.",
+   "text": "Use the existing proved localization_kernel_isHomogeneous from ProjBasicOpenLocalizationDetection [lem-sc-proj-basic-open-localization-detection], brought into proof scope by import all. It states that ker(A → A_p) is homogeneous for every homogeneous prime p. No duplicate polynomial construction or kernel theorem is needed.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "def-sc-degree-zero-module-fractions"
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write z=a/s with s=f^r, of degree n=r*b. At each p avoiding f use hz and the definition of the degree part [def-weil-pbc-proj-twisting-sheaf]. If z maps to zero, homogeneousness of the kernel kills every component of a. Otherwise write its value as u/h with u homogeneous of degree l, h homogeneous of degree j outside p, and l=j+k. Clearing denominators gives h*a−s*u in the homogeneous kernel. Its component of degree j+i is h*a_i when i≠k+n, because s*u has degree n+l≠j+i. Since h is a unit in A_p, a_i maps to zero. This is the fully proved private helper twist_local_component_zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply basicOpen_localization_detection [lem-sc-proj-basic-open-localization-detection] to the image of each unwanted component a_i and zero in A_f. Step 2 shows their images agree in every A_p on D_+(f), hence every component with i≠k+r*b vanishes in A_f.",
+   "uses": [
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sum the finite homogeneous decomposition using DirectSum.sum_support_decompose. If k+r*b≥0, only its component in degree (k+r*b).toNat survives. Use that component as numerator and the original s=f^r as denominator. Their fraction equals z by IsLocalization.mk'_eq_iff_eq and LocalizedModule.mk_cancel, yielding membership in degreeZeroFractions [def-sc-degree-zero-module-fractions]. If k+r*b<0, every component vanishes, z=0, and the zero numerator with the same denominator is permitted by the shifted grading. Thus no denominator enlargement, auxiliary Z-graded localization, or Laurent-polynomial construction is needed; nilpotent f and an empty basic open are covered by the existing detection theorem.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proj-twisting-sheaf",
-  "def-sc-degree-zero-module-fractions"
+  "def-sc-degree-zero-module-fractions",
+  "lem-sc-proj-basic-open-localization-detection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01M7",
-  "place": "Detailed algebraic expansion of the finite-cover localization argument and the homogeneous localization degree test"
+  "place": "Tag 01M7, Lemma 27.8.4 and the preceding homogeneous-fraction construction; full Lean proof by K3 reusing the existing private localization_kernel_isHomogeneous via import all and the existing basicOpen_localization_detection. Local shifted-degree separation and finite-sum reconstruction are proved directly. Repair removes the duplicate kernel proof and its polynomial helpers."
  },
  "mathlib_searches": [
   {
@@ -110,10 +131,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T135259-L-1682214",
-  "kind": "interface",
+  "landing": "20261012T160828-L-2611613",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

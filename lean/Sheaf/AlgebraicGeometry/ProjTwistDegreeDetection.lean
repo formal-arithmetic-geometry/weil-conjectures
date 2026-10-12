@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import Sheaf.Algebra.Module.DegreeZeroFractions
+import all Sheaf.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-!
 # Detection of homogeneous degree on a Proj basic open
@@ -20,6 +21,44 @@ Source: Stacks Project, Tags 01MN and 01M7.
 universe v
 open CategoryTheory Opposite LocalizedModule
 namespace AlgebraicGeometry.Proj
+
+/-- Clearing homogeneous denominators and projecting kills every component of the wrong degree. -/
+private theorem twist_local_component_zero
+    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
+    (𝒜 : ℕ → σ) [GradedRing 𝒜] (p : HomogeneousIdeal 𝒜) [p.toIdeal.IsPrime]
+    (k : ℤ) (a d : A) (n : ℕ) (hd : d ∈ 𝒜 n) (hdp : d ∈ p.toIdeal.primeCompl)
+    (hz : IsLocalization.mk' (Localization.AtPrime p.toIdeal) a ⟨d, hdp⟩ ∈
+      HomogeneousLocalization.degreePart 𝒜 p.toIdeal.primeCompl k)
+    (i : ℕ) (hi : (i : ℤ) ≠ k + n) :
+    algebraMap A (Localization.AtPrime p.toIdeal) (DirectSum.decompose 𝒜 a i : A) = 0 := by
+  classical
+  let R := Localization.AtPrime p.toIdeal
+  let g := algebraMap A R
+  have hproj {x : A} (hx : g x = 0) (j : ℕ) :
+      g (DirectSum.decompose 𝒜 x j : A) = 0 :=
+    localization_kernel_isHomogeneous 𝒜 p j hx
+  rcases hz with hz | ⟨l, j, u, h, hp, hu, hh, hlj, hz⟩
+  · apply hproj
+    exact (IsLocalization.map_eq_zero_iff p.toIdeal.primeCompl R a).mpr
+      ((IsLocalization.mk'_eq_zero_iff a ⟨d, hdp⟩).mp hz)
+  · have heq : g (h * a - d * u) = 0 := by
+      have hfrac : IsLocalization.mk' R a ⟨d, hdp⟩ =
+          IsLocalization.mk' R u ⟨h, hp⟩ := hz.trans (Localization.mk_eq_mk'_apply _ _)
+      have hcross := (IsLocalization.mk'_eq_iff_eq' (S := R)).mp hfrac
+      simpa [g, map_sub, map_mul, mul_comm] using sub_eq_zero.mpr hcross
+    have hcomp := hproj heq (j + i)
+    have hne : n + l ≠ j + i := by omega
+    have hdu : (DirectSum.decompose 𝒜 (d * u) (j + i) : A) = 0 :=
+      DirectSum.decompose_of_mem_ne 𝒜 (SetLike.mul_mem_graded hd hu) hne
+    have hha : (DirectSum.decompose 𝒜 (h * a) (j + i) : A) =
+        h * (DirectSum.decompose 𝒜 a i : A) :=
+      DirectSum.coe_decompose_mul_add_of_left_mem 𝒜 hh
+    have hmul : g h * g (DirectSum.decompose 𝒜 a i : A) = 0 := by
+      simp only [DirectSum.decompose_sub, DirectSum.sub_apply,
+        AddSubgroupClass.coe_sub, hha, hdu, sub_zero, map_mul] at hcomp
+      exact hcomp
+    exact (IsLocalization.map_units R (⟨h, hp⟩ : p.toIdeal.primeCompl)).mul_left_cancel
+      (hmul.trans (mul_zero (g h)).symm)
 
 /-- An ordinary fraction whose values at all homogeneous primes have degree k itself has
 an equal-degree numerator and denominator for the shifted grading.
@@ -62,6 +101,63 @@ theorem twist_degree_detection
           p.1.asHomogeneousIdeal.toIdeal.primeCompl k) :
     z ∈ degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set A))
       (fun n : ℕ ↦ {y : A | if 0 ≤ k + n then y ∈ 𝒜 (k + n).toNat else y = 0})
-      (Submonoid.powers f) := by sorry
+      (Submonoid.powers f) := by
+  classical
+  let S := LocalizedModule.Away f A
+  obtain ⟨a, s, has⟩ := IsLocalization.exists_mk'_eq (Submonoid.powers f) z
+  obtain ⟨r, hr⟩ := s.prop
+  have hsr : (s : A) = f ^ r := hr.symm
+  have hsdeg : (s : A) ∈ 𝒜 (r * b) := by
+    rw [hsr]
+    simpa using SetLike.pow_mem_graded r hf
+  have hcomp (i : ℕ) (hi : (i : ℤ) ≠ k + (r * b : ℕ)) :
+      algebraMap A S (DirectSum.decompose 𝒜 a i : A) = 0 := by
+    apply basicOpen_localization_detection 𝒜 f b hb hf _ 0
+    intro p
+    have hp := hz p
+    rw [← has, IsLocalization.map_mk'] at hp
+    have hi0 := twist_local_component_zero 𝒜 p.1.asHomogeneousIdeal k a s (r * b)
+      hsdeg ((Submonoid.powers_le.mpr p.2) s.prop) hp i hi
+    rw [map_zero, IsLocalization.map_eq, RingHom.id_apply]
+    exact hi0
+  by_cases hk : 0 ≤ k + (r * b : ℕ)
+  · let i := (k + (r * b : ℕ)).toNat
+    have hi : (i : ℤ) = k + (r * b : ℕ) := Int.toNat_of_nonneg hk
+    have ha : algebraMap A S a = algebraMap A S (DirectSum.decompose 𝒜 a i : A) := by
+      conv_lhs => rw [← DirectSum.sum_support_decompose 𝒜 a, map_sum]
+      apply Finset.sum_eq_single i
+      · intro j _ hji
+        exact hcomp j (by intro h; exact hji (Int.natCast_inj.mp (h.trans hi.symm)))
+      · intro hin
+        have hzero := DFinsupp.notMem_support_iff.mp hin
+        rw [hzero, ZeroMemClass.coe_zero, map_zero]
+    refine ⟨r * b, (DirectSum.decompose 𝒜 a i : A), s, ?_, hsdeg, ?_⟩
+    · change if 0 ≤ k + (r * b : ℕ) then _ else _
+      rw [if_pos hk]
+      exact (DirectSum.decompose 𝒜 a i).prop
+    · rw [← has]
+      have heq : IsLocalization.mk' S (DirectSum.decompose 𝒜 a i : A) s =
+          IsLocalization.mk' S a s := by
+        apply IsLocalization.mk'_eq_iff_eq.mpr
+        simpa only [map_mul] using congrArg (fun x : S ↦ algebraMap A S (s : A) * x) ha.symm
+      rw [← heq]
+      symm
+      apply IsLocalization.mk'_eq_iff_eq_mul.mpr
+      change LocalizedModule.mk (DirectSum.decompose 𝒜 a i : A) 1 =
+        LocalizedModule.mk (DirectSum.decompose 𝒜 a i : A) s * LocalizedModule.mk (s : A) 1
+      rw [LocalizedModule.mk_mul_mk, mul_one]
+      simpa only [Submonoid.smul_def, smul_eq_mul, mul_comm] using
+        (LocalizedModule.mk_cancel s (DirectSum.decompose 𝒜 a i : A)).symm
+  · have ha : algebraMap A S a = 0 := by
+      rw [← DirectSum.sum_support_decompose 𝒜 a, map_sum]
+      exact Finset.sum_eq_zero fun i _ ↦ hcomp i (by omega)
+    have hz0 : z = 0 := by
+      rw [← has]
+      exact (IsLocalization.mk'_eq_zero_iff (S := S) a s).mpr
+        ((IsLocalization.map_eq_zero_iff (Submonoid.powers f) S a).mp ha)
+    refine ⟨r * b, 0, s, ?_, hsdeg, ?_⟩
+    · change if 0 ≤ k + (r * b : ℕ) then _ else _
+      rw [if_neg hk]
+    · rw [LocalizedModule.zero_mk, hz0]
 
 end AlgebraicGeometry.Proj
