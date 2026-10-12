@@ -14,22 +14,26 @@
  ],
  "proof": [
   {
-   "text": "Apply Spec to the supplied A-prime-algebra isomorphism R_red = product_j D_j. The finite affine coproduct-spectrum isomorphism makes the factor spectra pairwise disjoint open-and-closed subschemes covering Spec R_red, and identifies their maps to T with the supplied universal homeomorphisms. Pull the opens across the reduction homeomorphism to get W_j in Spec R. The zero-factor case is the empty spectrum of the zero ring, so the same covering statement holds.",
-   "uses": [
-    "lem-weil-pbc-finite-affine-coproduct-spectrum",
-    "lem-weil-pbc-reduction-universal-homeomorphism"
-   ],
-   "elementary": false
+   "text": "For the quotient map q: Spec(R/nilradical R) -> Spec R, use Mathlib IsClosedImmersion.spec_of_surjective and PrimeSpectrum.comap_quotientMk_bijective_of_le_nilradical to obtain an embedding and surjectivity. Thus q is a homeomorphism by isHomeomorph_iff_isEmbedding_surjective. Compose it with PrimeSpectrum.homeomorphOfRingEquiv for the supplied algebra equivalence and PrimeSpectrum.sigmaToPiHomeo D. This explicitly gives a homeomorphism H from the disjoint union of the factor prime spectra to Spec R, whose restriction to factor i is Spec of eval_i composed with the equivalence and quotient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set W_i to the range of the factor map g_i. Under H this is the image of the open range of Sigma.mk i, so it is open by isOpenMap_sigmaMk and H.isOpenMap. Surjectivity of H proves the supremum of these opens is top; injectivity of H and equality of sigma first coordinates prove pairwise disjointness. The same argument works when the index type is empty and when factors are zero rings.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The composite ring map k_i: R -> D_i is surjective, so g_i is a closed immersion by Mathlib IsClosedImmersion.spec_of_surjective. Apply IsOpenImmersion.lift to the open inclusion W_i -> Spec R and g_i, whose range is W_i. The factorization identity and the definition of W_i show the lift a_i is surjective. IsPreimmersion.of_comp gives that a_i is a preimmersion, and its range is the whole target, a closed set. Apply IsClosedImmersion.of_isPreimmersion. Finally rewrite the structural-map composite with Spec.map_comp and check equality of ring maps on elements using e.commutes and the quotient algebra structure.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-finite-affine-coproduct-spectrum",
-  "lem-weil-pbc-reduction-universal-homeomorphism"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "Proof, finite-algebra calculation: after the reduced tensor algebra is split, take factor spectra and lift their open-and-closed components through reduction."
+  "place": "Proof, finite-algebra calculation: after the reduced tensor algebra is split, take factor spectra and lift their open-and-closed components through reduction. Direct Mathlib proof by E2: prime-spectrum homeomorphisms, image opens, and cancellation of preimmersions."
  },
  "mathlib_searches": [
   {
@@ -97,9 +101,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T130809-L-1320319",
-  "kind": "interface"
+  "landing": "20261012T144103-L-2092264",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
