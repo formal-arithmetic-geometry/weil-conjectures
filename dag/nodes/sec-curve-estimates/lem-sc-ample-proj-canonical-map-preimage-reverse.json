@@ -16,10 +16,45 @@
  ],
  "proof": [
   {
-   "text": "Proof: write y = f(x). The homogeneous prime y does not contain the irrelevant\nideal, so choose a positive-degree homogeneous t, of degree e, outside that prime.\nThus y lies in D_+(t). Trivialize L near x and pass to the residue-field fibre.\nThe value of s^e is nonzero, since s is nonvanishing and e > 0. Specialize hformula\non the t-chart to n = d and numerator s^e, using e*d = d*e to match degrees.\nIt gives alpha times the value of t^d equals the nonzero value of s^e. Hence alpha\nand the value of t^d are both nonzero. Here alpha is the residue of the pullback of\nthe chart function s^e/t^d. Thus its pullback germ is a unit in O_X,x. The stalk\nhomomorphism O_Proj,y to O_X,x is local and reflects units, so the original germ of\ns^e/t^d is a unit. The Proj stalk identification with homogeneous localization and\nthe unit criterion in localization at a prime imply that s^e is outside the prime y.\nPrimality, or just closure of an ideal under multiplication, implies that s is outside\ny as well. This is y in D_+(s). The hypothesis hx is harmless and is not needed for\nthis direction. All positive-power tests occur over residue fields, including for\nnonreduced X.",
+   "text": "For a homogeneous component, choose its DirectSum.of preimage. DirectSum.of_mul_of and DirectSum.of_eq_same identify the component of a product with tmulSection followed by tensorPowAddIso.inv. If both component sections generate at x, intersect their generator neighbourhoods; restriction preserves free generators, IsFreeGenerator.tmulSection gives a generator of the tensor product, and IsFreeGenerator.app_hom transports it along tensorPowAddIso.symm. Induction using pow_succ and succ_nsmul proves that every positive power of a nonvanishing homogeneous section is nonvanishing in its corresponding tensor degree. Convert nonvanishing to GeneratesAt and back with mem_nonvanishingLocus_iff_generatesAt. These are the three proved private helpers sectionRing_component_mul, sectionRing_generatesAt_mul, and sectionRing_power_nonvanishing.",
    "uses": [
     "def-sc-invertible-module",
     "def-sc-invertible-section-ring",
+    "lem-sc-nonvanishing-iff-generates-at"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
+   }
+  },
+  {
+   "text": "Put y=f(x). The point y does not contain the irrelevant ideal. HomogeneousIdeal.irrelevant_le implies that there are e>0 and t in degree e with y in D_+(t); this is the proved private helper exists_sectionRing_chart. Set xi=s^e in degree d*e, using e*d=d*e. The preceding induction proves that xi is nonvanishing at x. Specialize hformula to this t, exponent d, and numerator xi.",
+   "uses": [
+    "def-pc-proj",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
+   }
+  },
+  {
+   "text": "In the stalk of X at x, the fraction formula reads alpha times the germ of t^d equals the germ of xi. If alpha belonged to the maximal ideal, Submodule.smul_mem_smul would put the latter germ in the maximal ideal times the module, contradicting nonvanishing. PresheafOfModules.germ_smul and TopCat.Presheaf.germ_res_apply identify these germs. Thus alpha is a unit; this is scalar_isUnit_of_nonvanishing, which works for every module without requiring invertibility. Scheme.Hom.germ_stalkMap_apply and isUnit_map_iff for the local stalk homomorphism reflect this unit back to the Proj stalk.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
+   }
+  },
+  {
+   "text": "ProjectiveSpectrum.Proj.awayToSection_germ identifies the fraction germ with the image of xi/t^d in homogeneous localization. Transport the unit along Proj.stalkIso', apply HomogeneousLocalization.isUnit_iff_isUnit_val, then Localization.mk_eq_mk' and IsLocalization.AtPrime.isUnit_mk'_iff. This proves that xi=s^e is outside the homogeneous prime y (private helper chart_fraction_numerator_notMem). Proj.basicOpen_pow for e>0 identifies D_+(s^e) with D_+(s), giving the desired preimage membership. The hypotheses hx and hd are not needed for this direction, and remain unchanged in the signature.",
+   "uses": [
     "def-pc-proj"
    ],
    "elementary": false,
@@ -32,12 +67,17 @@
  "proof_deps": [
   "def-sc-invertible-module",
   "def-sc-invertible-section-ring",
-  "def-pc-proj"
+  "lem-sc-nonvanishing-iff-generates-at",
+  "def-pc-proj",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
+  "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)",
+  "note": "Lean proof follows the chart/stalk argument of the source, replacing residue-field power calculations by the existing local-free-generator API."
  },
  "mathlib_searches": [
   {
@@ -143,10 +183,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T165523-L-2936827",
-  "kind": "interface",
+  "landing": "20261012T194135-L-463144",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
