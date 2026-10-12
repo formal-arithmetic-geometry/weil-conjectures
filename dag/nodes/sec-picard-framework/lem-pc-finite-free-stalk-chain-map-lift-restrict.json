@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Proof: Fix V <= U containing y and let j : V.toScheme -> U.toScheme be the open\ninclusion. Let R_U, R_V and R_j denote termwise restriction. The identity\nj >> U.ι = V.ι and restrictFunctorComp give a natural isomorphism\nC : R_V ~= R_U >> R_j. Define\nfV = C(P).hom >> R_j.map fU >> C(Q).inv.\nWrite S_U and S_V for the corresponding termwise stalk pullbacks. Since the\nmap Spec O_{Y,y} -> U factors through V, restriction followed by stalk pullback\ngives a natural isomorphism D : R_j >> S_V ~= S_U (with the same source Spec).\nThe composite S_V.mapIso C(M) followed by D(R_U M) equals E_V(M) followed by\nE_U(M).symm. Indeed replace each restriction by pullback using\nrestrictFunctorIsoPullback, use pullback composition, and apply\npseudofunctor_associativity to the three scheme maps from the stalk through V\nand U to Y. The equality of their composites is fromSpecStalkOfMem_ι;\ncompatibility of restrictFunctorIsoPullback with composition follows from the\nuniqueness of left adjoints to the composite pushforward, or its adjunction units.\nNaturality of D gives\nS_V.map fV = E_V(P).hom >> E_U(P).inv >> S_U.map fU >>\n  E_U(Q).hom >> E_V(Q).inv.\nSubstitute the hypothesis h and cancel the E_U inverse/hom pairs to obtain the\nrequired equation. For V = U this is the same cancellation; zero complexes need\nno additional hypotheses. No boundedness or finite freeness is used.\n",
+   "text": "Let j:Y|V -> Y|U be Y.homOfLE hVU. Cancel U.ι to prove sV ; j = sU, using homOfLE_ι and fromSpecStalkOfMem_ι. Convert the prescribed chain map fU from restriction to pullback along U.ι using restrictFunctorIsoPullback. Pull it back along j and conjugate by the inverse of pullbackComp j U.ι followed by pullbackCongr (j ; U.ι = V.ι); then convert back to restriction along V.ι. The pullback composition triangle commutes: substitute the equal scheme morphisms, apply pseudofunctor_associativity at each term, and cancel its first comparison isomorphism. Lift this identity termwise to complexes. Naturality of pullbackComp sV j gives the stalk image of the resulting chain map. Substitute the assumed stalk equation, use the triangle identity, and cancel the comparison isomorphisms. This proves the required equation for all complexes, including zero complexes and V=U. The compatibility of restrictFunctorComp with restriction-to-pullback comparison is unnecessary because the construction uses pullback throughout.",
    "uses": [
     "def-pc-stalk-restriction-complex-iso",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
@@ -40,7 +40,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Restriction stability on smaller opens (step 4)"
+  "place": "Restriction stability on smaller opens (step 4), implemented by pullback composition and Mathlib pseudofunctor_associativity; Q2"
  },
  "mathlib_searches": [
   {
@@ -132,10 +132,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T184257-L-4002507",
-  "kind": "interface",
+  "landing": "20261012T203947-L-831887",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
