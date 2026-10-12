@@ -1,0 +1,133 @@
+{
+ "id": "lem-pd-descended-overlap-glue-data",
+ "kind": "statement",
+ "title": "Descended overlap transitions and cartesian intersection lifts",
+ "statement": "Let $p:X\\to Y$ be an fpqc singleton of schemes [def-pc-scheme, def-weil-pbc-fpqc-covering], let $V\\to X$ have a transport descent datum $D$ [def-pd-descent-datum], and let $(U_i)_{i\\in I}$ be any family of open subschemes of $V$ (not necessarily covering). Suppose $E_i$ is a descent datum on $U_i\\to X$, its transports followed by $U_i\\to V$ equal the transports of $D$ followed from the same test point, and there are schemes $W_i\\to Y$ and maps $q_i:U_i\\to W_i$ with cartesian squares over $p$ [def-pc-fibre-product], such that each $q_i$ is invariant under all transports of $E_i$. Then there exist schemes $Z_{ik}$, open immersions $f_{ik}:Z_{ik}\\to W_i$ [def-weil-open-immersion], and maps $t_{ik}:Z_{ik}\\to Z_{ki}$, with $f_{ii}$ an isomorphism and $t_{ii}$ the identity. There exist maps $t'_{ikl}:Z_{ik}\\times_{W_i}Z_{il}\\to Z_{kl}\\times_{W_k}Z_{ki}$ whose second projection equals the first projection followed by $t_{ik}$, and $t'_{ikl}t'_{kli}t'_{lik}$ is the identity (composition in the order traversed). For each $i,k$ there is a map $r_{ik}:U_i\\times_V U_k\\to Z_{ik}$ making the square with first projection to $U_i$, $f_{ik}$ and $q_i$ cartesian, and $r_{ik}$ followed by $t_{ik}$ and $f_{ki}$ equals the second projection followed by $q_k$. No ambient scheme or its structure map is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Descent, Tag 0AP4, proof constructing U_ij and transitions before gluing; Tags 03N0 and 02W0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For each i,k take the open inverse image of U_k in U_i. Compatibility with D and inverse transport show this open is invariant under E_i. The pullback square identifies E_i with the canonical datum because transport preserves q_i. Base change of the singleton p makes q_i fpqc. Descent of opens gives a unique open O_ik in W_i whose pullback is the intersection. Put Z(i,k)=O_ik and f i k its open inclusion. Uniqueness for the diagonal gives O_ii=W_i, so f i i is an isomorphism. The descended-open pullback square gives r i k and its cartesian square.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity on the common intersection identifies the pullbacks of Z(i,k) and Z(k,i), compatibly with the canonical data. Apply the morphism descent bijection to descend this identity to t i k and its inverse to t k i. Injectivity proves the inverse equations and t i i=identity. By construction r i k followed by t i k and f k i equals the second projection followed by q k.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of descended opens identifies the triple-overlap domains after restricting the transitions. Their cartesian universal properties define the maps t prime with the required second-projection equation. After fpqc base change their cyclic composite is the identity on the triple intersection; injectivity of morphism descent gives the cyclic cocycle. Empty index sets and empty opens give empty families and empty descended opens, respectively. This constructs local overlap data only, without taking a colimit or constructing its map to the base.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-covering-base-change",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0AP4, overlap construction and omitted coherence verification, expanded using Tags 03N0 and 02W0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue locally descended schemes from compatible fpqc descent data on an open covering",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.Cover.fromGlued, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued, AlgebraicGeometry.Scheme.Cover.RelativeGluingData, AlgebraicGeometry.Scheme.Cover.glueMorphisms, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.GlueData.toGlueData, AlgebraicGeometry.Scheme.GlueData; general gluing APIs need overlap data, none constructs it from fpqc transports.",
+   "date": "2026-10-12",
+   "verdict": "no exact match after inspecting signatures"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*glue|glue.*descent|exists.*overlap",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match after inspecting signatures"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct open overlap transitions satisfying the cocycle by fpqc descent from compatible local effective descent data",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData",
+   "results": "12 hits: AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.GlueData.openCover, AlgebraicGeometry.Scheme.GlueData.toGlueData, AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram; inspected GlueData, gluing and chart signatures; no descent construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match after inspecting signatures"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GluedModelStructure",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-pd-glued-model-compatible-charts, proof steps 1 and 2 and the intersection factorization of step 4; local overlap data before taking the gluing colimit",
+   "via": [
+    "lem-pd-glued-model-compatible-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescendedOverlapGlueData",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendedOverlapGlueData.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_descended_overlap_glue_data",
+  "statement": "theorem exists_descended_overlap_glue_data\n    {X Y : Scheme.{u}} {p : X ⟶ Y}\n    (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y)\n    {V : Over X} (D : Over.DescentDatum p V)\n    {I : Type u} (U : I → V.left.Opens)\n    (E : ∀ i, Over.DescentDatum p (Over.mk ((U i).ι ≫ V.hom)))\n    (hcompat : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)\n      (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)),\n      ((E i).transport f₁ f₂ h a).left ≫ (U i).ι =\n        (D.transport f₁ f₂ h (Over.homMk (a.left ≫ (U i).ι)\n          (by simpa only [Over.mk_hom, Category.assoc] using Over.w a))).left)\n    (W : I → Over Y) (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (hcart : ∀ i, IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hinv : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)\n      (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)),\n      ((E i).transport f₁ f₂ h a).left ≫ q i = a.left ≫ q i) :\n    ∃ (Z : I × I → Scheme.{u}) (f : ∀ i k, Z (i, k) ⟶ (W i).left)\n      (t : ∀ i k, Z (i, k) ⟶ Z (k, i)),\n      (∀ i k, IsOpenImmersion (f i k)) ∧\n      (∀ i, IsIso (f i i)) ∧\n      (∀ i, t i i = 𝟙 _) ∧\n      (∃ (t' : ∀ i k l, Limits.pullback (f i k) (f i l) ⟶ Limits.pullback (f k l) (f k i)),\n        (∀ i k l, t' i k l ≫ pullback.snd _ _ = pullback.fst _ _ ≫ t i k) ∧\n        (∀ i k l, t' i k l ≫ t' k l i ≫ t' l i k = 𝟙 _)) ∧\n      (∀ i k, ∃ (r : Limits.pullback (U i).ι (U k).ι ⟶ Z (i, k)),\n        IsPullback r (pullback.fst (U i).ι (U k).ι) (f i k) (q i) ∧\n        r ≫ t i k ≫ f k i = pullback.snd (U i).ι (U k).ι ≫ q k)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T173900-L-3304840",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T173900-L-3304840",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

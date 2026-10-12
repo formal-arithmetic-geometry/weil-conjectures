@@ -9,8 +9,8 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.AlgebraicGeometry.DescendedOverlapGlueData
 
 /-!
 # Descended charts with compatible local maps
@@ -23,6 +23,14 @@ Source: Stacks Project, Descent, Tag 0AP4, construction of the descended overlap
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
+
+/-- An fpqc singleton is flat and surjective, hence an epimorphism (Stacks Tag 02VW). -/
+private theorem epi_of_fpqc_singleton {A B : Scheme.{u}} (r : A ⟶ B)
+    (hr : Presieve.singleton r ∈ Scheme.fpqcPrecoverage B) : Epi r := by
+  obtain ⟨hsurj, hflat⟩ := (Scheme.singleton_mem_precoverage_iff (P := @Flat) r).mp hr.2
+  have : Surjective r := ⟨hsurj⟩
+  have : Flat r := hflat
+  exact Flat.epi_of_flat_of_surjective r
 
 /-- Descended local models admit covering open embeddings for which the local maps agree.
 
@@ -68,6 +76,73 @@ theorem exists_glued_model_structure
       (∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w) ∧
       (∀ i, j i ≫ W₀.hom = (W i).hom) ∧
       (∀ i k, pullback.fst (U i).ι (U k).ι ≫ q i ≫ j i =
-        pullback.snd (U i).ι (U k).ι ≫ q k ≫ j k) := by sorry
+        pullback.snd (U i).ι (U k).ι ≫ q k ≫ j k) := by
+  have _cover := hcover
+  obtain ⟨Z, f, t, hf, hdiag, ht, ⟨t', ht', hcoc⟩, hlift⟩ :=
+    exists_descended_overlap_glue_data hp D U E hcompat W q hcart hinv
+  have hq (i : I) : Presieve.singleton (q i) ∈ Scheme.fpqcPrecoverage (W i).left := by
+    rw [← Presieve.ofArrows_pUnit.{0}] at hp ⊢
+    exact Precoverage.mem_coverings_of_isPullback (fun _ : PUnit.{1} => p) hp
+      (W i).hom (fun _ => q i) (fun _ => (U i).ι ≫ V.hom) (fun _ => hcart i)
+  have hbase (i k : I) : f i k ≫ (W i).hom = t i k ≫ f k i ≫ (W k).hom := by
+    obtain ⟨r, hr, hr₂⟩ := hlift i k
+    have hqr : Presieve.singleton r ∈ Scheme.fpqcPrecoverage (Z (i, k)) := by
+      have hqi := hq i
+      rw [← Presieve.ofArrows_pUnit.{0}] at hqi ⊢
+      exact Precoverage.mem_coverings_of_isPullback (fun _ : PUnit.{1} => q i) hqi
+        (f i k) (fun _ => r) (fun _ => pullback.fst (U i).ι (U k).ι) (fun _ => hr)
+    have : Epi r := epi_of_fpqc_singleton r hqr
+    apply (cancel_epi r).mp
+    calc
+      r ≫ f i k ≫ (W i).hom =
+          pullback.fst (U i).ι (U k).ι ≫ q i ≫ (W i).hom := by
+        simpa only [Category.assoc] using congrArg (fun a => a ≫ (W i).hom) hr.w
+      _ = pullback.fst (U i).ι (U k).ι ≫ (U i).ι ≫ V.hom ≫ p := by
+        rw [(hcart i).w]; simp only [Category.assoc]
+      _ = pullback.snd (U i).ι (U k).ι ≫ (U k).ι ≫ V.hom ≫ p := by
+        rw [pullback.condition_assoc]
+      _ = pullback.snd (U i).ι (U k).ι ≫ q k ≫ (W k).hom := by
+        rw [(hcart k).w]; simp only [Category.assoc]
+      _ = r ≫ t i k ≫ f k i ≫ (W k).hom := by
+        simpa only [Category.assoc] using congrArg (fun a => a ≫ (W k).hom) hr₂.symm
+  let G : Scheme.GlueData := {
+    J := I
+    U := fun i => (W i).left
+    V := Z
+    f := f
+    f_open := hf
+    f_mono := fun i k => by
+      have := hf i k
+      infer_instance
+    f_id := hdiag
+    t := t
+    t_id := ht
+    t' := t'
+    t_fac := ht'
+    cocycle := hcoc }
+  have : HasMulticoequalizer G.toGlueData.diagram :=
+    Scheme.GlueData.instHasMulticoequalizerDiagram G
+  let a : G.glued ⟶ Y := Multicoequalizer.desc G.toGlueData.diagram Y
+    (fun i => (W i).hom) (fun ik => hbase ik.1 ik.2)
+  refine ⟨Over.mk a, G.ι, ?_, ?_, ?_, ?_⟩
+  · intro i
+    exact G.ι_isOpenImmersion i
+  · intro w
+    exact G.ι_jointly_surjective w
+  · intro i
+    exact Multicoequalizer.π_desc G.toGlueData.diagram Y
+      (fun i => (W i).hom) (fun ik => hbase ik.1 ik.2) i
+  · intro i k
+    obtain ⟨r, hr, hr₂⟩ := hlift i k
+    have hr₁ := hr.w
+    calc
+      pullback.fst (U i).ι (U k).ι ≫ q i ≫ G.ι i =
+          r ≫ f i k ≫ G.ι i := by
+        simpa only [Category.assoc] using congrArg (fun a => a ≫ G.ι i) hr₁.symm
+      _ = r ≫ t i k ≫ f k i ≫ G.ι k := by
+        rw [← G.glue_condition i k]
+      _ = pullback.snd (U i).ι (U k).ι ≫ q k ≫ G.ι k := by
+        simpa only [Category.assoc] using congrArg (fun a => a ≫ G.ι k) hr₂
+
 
 end CategoryTheory.Over.DescentDatum

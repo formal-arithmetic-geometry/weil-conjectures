@@ -13,46 +13,45 @@
  ],
  "proof": [
   {
-   "text": "For each i,k, take the open preimage of U_k inside U_i. Compatibility of E_i and E_k with D makes this intersection invariant. The cartesian square for q_i and transport invariance identify E_i with the canonical descent datum on the pullback of W_i. Base change makes q_i fpqc. Apply descent of compatible opens to obtain W_ik in W_i pulling back to the intersection.",
+   "text": "Obtain only the local overlap schemes, open inclusions, diagonal identities, transition and triple-cocycle maps, and cartesian intersection lifts from exists_descended_overlap_glue_data. No glued scheme is supplied by this theorem.",
    "uses": [
-    "lem-weil-pbc-open-subscheme-fpqc-descent"
+    "lem-pd-descended-overlap-glue-data"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the effective data to the intersection and the descended opens. Use the cartesian comparison isomorphisms to express both presentations as canonical pullbacks; transport invariance and the pullback universal property identify the restricted transports with the canonical isomorphisms. The identity between the two presentations of U_i intersect U_k is compatible with these canonical data. The fpqc morphism descent bijection descends it and its inverse to transitions W_ik to W_ki over Y. Injectivity gives inverse identities and the triple cocycle; uniqueness of descended opens gives equality of their triple-overlap domains. This uses singleton fpqc coverage, without assuming that p itself is quasi-compact.",
+   "text": "Base change p along each W_i to show q_i is an fpqc singleton, then base change q_i along f i k using the cartesian intersection lift r. The singleton is flat and surjective, so Flat.epi_of_flat_of_surjective (Stacks Tag 02VW) makes r an epimorphism. Cancel r in the equation f i k followed by W_i to Y = t i k followed by f k i and W_k to Y. The remaining equation follows from the two lift factorizations, the original cartesian squares, and pullback.condition. This is the fully proved private helper epi_of_fpqc_singleton and the local proof hbase.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "lem-weil-pbc-open-subscheme-fpqc-descent"
+    "lem-galois-fpqc-covering-base-change"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Glue W_i along these open transitions. Scheme.GlueData gives open chart inclusions which jointly cover the glued scheme. Glue the maps to Y, whose restrictions agree because the descended transitions are over Y, obtaining W_0 in Over Y.",
+   "text": "Construct Scheme.GlueData explicitly from the supplied local overlap data. Its glued scheme and chart inclusions are provided by Mathlib. The inclusions are open immersions and jointly surjective. The previous base equations give a multicofork of maps to Y, so Multicoequalizer.desc constructs its structure map a. Multicoequalizer.pi_desc proves each inclusion is over Y. Set W_0=Over.mk a.",
    "uses": [
     "lem-weil-pbc-glue-schemes",
     "lem-weil-pbc-scheme-morphism-gluing"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On the pullback of U_i and U_k over V, the two projections present the same intersection. Their composites with q_i and q_k factor through W_ik and W_ki, related by the descended transition. Compose the Scheme.GlueData.glue_condition with the intersection projection to obtain equality of the maps into W_0. This asserts overlap agreement without constructing a map V to W_0. Empty I is handled by the empty gluing, while hcover forces V empty.",
+   "text": "For each i,k precompose Scheme.GlueData.glue_condition with r i k. Substitute the first-projection factorization from its pullback square and its second-projection transition equation. Associativity gives exactly the required overlap equation. No global map from V is constructed. The original covering assumption is retained in the signature but is not needed for gluing this family; empty I is covered by the same construction.",
    "uses": [
     "lem-weil-pbc-glue-schemes"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-galois-fpqc-morphisms-descend",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pd-descended-overlap-glue-data",
   "lem-weil-pbc-glue-schemes",
-  "lem-weil-pbc-open-subscheme-fpqc-descent",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "Stacks Project",
-  "place": "Tag 0AP4, descended overlap construction and gluing; overlap equation spelled out by G3"
+  "document": "Stacks Project; Mathlib/AlgebraicGeometry/Gluing.lean",
+  "place": "Tag 0AP4: local overlap construction isolated as lem-pd-descended-overlap-glue-data; fpqc cancellation, colimit gluing, base map and overlap equality formalized by R2"
  },
  "mathlib_searches": [
   {
@@ -120,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T144115-L-2096892",
+  "landing": "20261012T173900-L-3304840",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
