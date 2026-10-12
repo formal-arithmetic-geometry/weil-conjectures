@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageLimitClassDescent
+import Sheaf.AlgebraicGeometry.HigherDirectImageLimitClassVanishing
 
 /-!
 # Higher direct images and inverse limits of schemes
@@ -90,7 +90,43 @@ theorem isIso_higherDirectImage_limit_system {S : Scheme.{v}}
       abelianHigherDirectImageMap (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom
         (Over.w (c.π.app (op i))) p (F i) (colimit H)
         ((eH i).inv ≫ colimit.ι H i)) :
-    IsIso (colimit.desc K (Cocone.mk _ η)) :=
-  sorry
+    IsIso (colimit.desc K (Cocone.mk _ η)) := by
+  classical
+  apply Scheme.isIso_of_isIso_sheafFiber_map
+  intro s
+  let T := (S.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})
+  let B := T.mapCocone (Cocone.mk _ η)
+  have hsurj := exists_higherDirectImage_limit_fiber_rep
+    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη s
+  have hzero := exists_higherDirectImage_limit_fiber_eq_zero
+    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη s
+  have := preservesFilteredColimitsOfSize_shrink.{v, v + 1, v, v + 1}
+    (forget AddCommGrpCat.{v + 1})
+  have := reflectsColimit_of_reflectsIsomorphisms (K ⋙ T) (forget AddCommGrpCat)
+  have hB : IsColimit B := by
+    apply isColimitOfReflects (forget AddCommGrpCat)
+    apply Types.FilteredColimit.isColimitOf'
+    · intro x
+      obtain ⟨i, y, hy⟩ := hsurj x
+      exact ⟨i, y, hy.symm⟩
+    · intro i x y hxy
+      change (T.map (η.app i)) x = (T.map (η.app i)) y at hxy
+      have hz : (T.map (η.app i)) (x - y) = 0 := by
+        rw [map_sub, hxy, sub_self]
+      obtain ⟨j, f, hf⟩ := hzero i (x - y) hz
+      refine ⟨j, f, ?_⟩
+      change (T.map (K.map f)) x = (T.map (K.map f)) y
+      exact sub_eq_zero.mp (by simpa only [map_sub] using hf)
+  let hC := isColimitOfPreserves T (colimit.isColimit K)
+  have heq : T.map (colimit.desc K (Cocone.mk _ η)) =
+      (hC.coconePointUniqueUpToIso hB).hom := by
+    apply hC.hom_ext
+    intro i
+    change T.map (colimit.ι K i) ≫ T.map (colimit.desc K (Cocone.mk _ η)) = _
+    rw [← T.map_comp, colimit.ι_desc]
+    exact (hC.comp_coconePointUniqueUpToIso_hom hB i).symm
+  change IsIso (T.map (colimit.desc K (Cocone.mk _ η)))
+  rw [heq]
+  infer_instance
 
 end AlgebraicGeometry.Etale
