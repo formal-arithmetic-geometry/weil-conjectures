@@ -11,12 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineChartComparison
+import Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction
 
 /-! # Affine locality for relatively flat canonical module base change
 
@@ -90,6 +86,28 @@ theorem canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases
       (schemeDerivedBaseChangeMap f f' g g' sq.w
         ((DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
-        (schemeDerivedDirectImage f').map c)) := by sorry
+        (schemeDerivedDirectImage f').map c)) := by
+  classical
+  let U := f ⁻¹ᵁ V.1
+  let fA := (f ∣_ V.1) ≫ V.2.isoSpec.hom
+  let gA := W.2.isoSpec.inv ≫ g.resLE V.1 W.1 hWV ≫ V.2.isoSpec.hom
+  let H := (schemeOpenRestriction X U).obj G
+  have : QuasiCompact fA := by dsimp [fA]; infer_instance
+  have : IsSeparated fA := by dsimp [fA]; infer_instance
+  have : SheafOfModules.IsQuasicoherent.{u} H :=
+    (SheafOfModules.isQuasicoherent U.toScheme.ringCatSheaf).prop_of_iso
+      ((Scheme.Modules.overFunctorEquiv U).app G).symm
+      (Scheme.Modules.isQuasicoherent_restrictFunctor U.ι G)
+  have hH : Scheme.Modules.IsFlatOver H fA :=
+    isFlatOver_affineOpenRestriction f G hflat V
+  let (Y Z : Scheme.{u}) (a : Y ⟶ Z) : (Scheme.Modules.tensorPullback a).Additive :=
+    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction a)).left_adjoint_additive
+  obtain ⟨c0, hc0, a, b, hab⟩ :=
+    exists_canonicalModuleBaseChange_affineChart_comparison f g g' f' sq G c hc V W hWV
+  have := haffine fA gA H hH c0 hc0
+  have h := congrArg (fun k ↦ k ≫ b.inv) hab
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id] at h
+  rw [h]
+  infer_instance
 
 end AlgebraicGeometry

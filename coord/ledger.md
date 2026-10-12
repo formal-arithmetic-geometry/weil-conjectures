@@ -8613,3 +8613,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/C2/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyData (stage 3; reviewer PASS; first push; landing 20261012T165507-L-2931646 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.GenericFibreComponentSpread (stage 3; reviewer PASS; first push; landing 20261012T165508-L-2931768 (interface); batch 20261012T165503; modules 3; new nodes 3)
 - 16:55 L: merged deliver/D2/Sheaf.ConstructibleSheaf.TorsorNormalizedGraphEvaluation (stage 3; reviewer PASS; first push; landing 20261012T165508-L-2931914 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/D3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality (stage 3; reviewer PASS; first push; landing 20261012T165509-L-2932087 (interface); batch 20261012T165503; modules 3; new nodes 2)

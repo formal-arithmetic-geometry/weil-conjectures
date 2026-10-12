@@ -21,38 +21,30 @@
  ],
  "proof": [
   {
-   "text": "Transport the square through its projection-preserving isomorphism to the chosen pullback. Derived pullback composition and derived direct-image composition, with their adjunction mates, identify the maps as well as the objects.",
+   "text": "Construct U=f⁻¹(V), fA=(f restricted to V)≫V.isoSpec.hom, gA=W.isoSpec.inv≫g.resLE≫V.isoSpec.hom, and H=schemeOpenRestriction(X,U)(G). Mathlib supplies quasi-compactness and separatedness of fA; ordinary restriction preserves quasi-coherence and overFunctorEquiv transfers it to H. Apply the affine-open flatness theorem to H. Obtain tensor-pullback additivity from the tensor-pullback adjunction.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-direct-image-composition",
-    "def-pc-derived-base-change-map"
+    "lem-pc-flat-over-affine-open-restriction",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict to the specified affine V and W. Derived pullback and direct image commute with exact open restriction. The underived base-change restriction identity and the derived counit give the restricted canonical map and comparison. Quasi-coherence, relative flatness, quasi-compactness and separatedness restrict to these open squares. Transport via the affine spectrum charts and apply the supplied affine calculation. Invertible source and target comparisons imply invertibility of the restricted original map.",
+   "text": "Use the arrow-level affine-chart comparison to obtain c0 with its comparison predicate and a commuting square with isomorphisms a,b. Apply the supplied haffine to fA,gA,H,c0. Derived direct image of W.isoSpec.inv maps this affine isomorphism to an isomorphism in D(W). Postcompose the square equality with b.inv, cancel b.hom≫b.inv, and rewrite the restricted original arrow as a.hom≫T(affine composite)≫b.inv. Every factor is invertible.",
    "uses": [
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-weil-pbc-module-base-change-map-open-restriction",
-    "def-pc-derived-module-base-change-map"
+    "lem-pc-canonical-module-base-change-affine-chart-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-derived-module-base-change-map",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
+  "lem-pc-canonical-module-base-change-affine-chart-comparison",
+  "lem-pc-flat-over-affine-open-restriction",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "agent D3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-  "place": "Step 1: restriction to affine opens; transport of the cartesian square"
+  "place": "Step 1, explicit chart construction and arrow-square conjugation; geometric flatness transport proved separately"
  },
  "mathlib_searches": [
   {
@@ -138,7 +130,7 @@
   "reviewer": "COMPILER",
   "group": "D3",
   "result": "pass",
-  "landing": "20261012T144100-L-2091236",
+  "landing": "20261012T165509-L-2932087",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
