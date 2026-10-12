@@ -232,6 +232,8 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified)
   (i : ULift.{u} (Fin 2)) {g : k[X]} (hg : g ≠ 0)
 
+omit [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [f.IsOver (Spec (.of k))] in
 /-- `Γ(X, f⁻¹ Dᵢ(g))` is finite free over `Γ(ℙ¹_k, Dᵢ(g)) = k[t]_g`. -/
 lemma free_finite_chartBasicOpen :
     (letI := (f.app (chartBasicOpen k i g)).hom.toAlgebra;
