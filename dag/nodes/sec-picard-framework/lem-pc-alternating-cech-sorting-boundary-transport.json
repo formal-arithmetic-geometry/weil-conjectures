@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-first-sorting-identity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cech sorting repeated tuple",
+   "results": "No matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cochain repeated tuple contraction",
+   "results": "No matching declaration.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech repeated tuple boundary contraction",
+   "results": "service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSecondSortingIdentity",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "proof: ordered restriction is a homotopy equivalence; repeated-tuple contraction and sorting transport of Stacks 01FM",
+   "via": [
+    "lem-pc-alternating-cech-second-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-pc-alternating-cech-sorting-boundary-transport",
+ "title": "Stable-sorting transport of the second boundary",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I → Opens(X), F an abelian-group presheaf, and S the chosen Čech product complex over the terminal open. Let p ≥ 0, s be a degree-p cochain, and t a tuple of p+1 indices. The second sorting boundary is the signed stable-sorting transport of the sorted contraction boundary.",
+ "proof": [
+  {
+   "text": "Write kappa for signed stable sorting. The first sorting identity and\nsquare-zero of the differential imply d kappa = kappa d. Stable sorting is\nidempotent: sorting a sorted tuple is identity, including its equal-label order.\nThe repeated-tuple homotopy is the sorted contraction precomposed with kappa:\nits formula sorts t and duplicates its first repeat, with the sorting sign.\nDuplicating a nondecreasing tuple leaves it nondecreasing. Hence pulling the\nsorted contraction back once more by kappa leaves this formula unchanged.\nCommute d through kappa in each of the two boundary terms. Both become signed\npullbacks of the boundary at the sorted tuple. The stable-sort filter has one\npermutation, characterized by ordering the pairs (t(k), k). Restriction maps\ncompose by the universal property of the chosen products, so the transports in\nthese two expansions coincide. Summing over the filter gives the stated formula.\nDegree zero has zero contraction. With empty I there are no coordinates.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-alternating-cech-first-sorting-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSortingBoundaryTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSortingBoundaryTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechSortingBoundaryTransport",
+  "statement": "theorem cechSortingBoundaryTransport (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w}) (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) (s : S.cochains F p) (t : Fin (p + 1) → I) : ((Homotopy.nullHomotopicMap' (cechSecondSortingFamily X U F S)).f p) s t = ∑ σ : Equiv.Perm (Fin (p + 1)), if cechStableSort t σ then (Equiv.Perm.sign σ : ℤ) • F.map (S.indexMap t σ).op (((Homotopy.nullHomotopicMap' (cechSecondSortingFamily X U F S)).f p) s (t ∘ σ)) else 0",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T163617-L-2786246",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T163617-L-2786246",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
