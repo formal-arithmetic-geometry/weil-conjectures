@@ -171,6 +171,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Curve.ResidueSequence
+public import WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality

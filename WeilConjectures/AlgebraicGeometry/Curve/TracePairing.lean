@@ -32,8 +32,10 @@ locally free modules (`ω` is itself finite locally free) is determined by the i
 `𝟙 ω`, and naturality forces it to be `φ ↦ t ∘ H¹(φ)`
 (`AlgebraicGeometry.Scheme.Modules.dualPairing`).
 
-The form `t` is obtained abstractly; it is not identified here with the residue trace
-`H¹(X, ω) → k` of the blueprint (sum of Tate residues over the closed points).
+The form `t` is obtained abstractly. For `X` integral, the same duality statements with the
+residue trace `H¹(X, ω) → k` of the blueprint (sum of Tate residues over the closed points) in
+place of `t` are proved in `WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace`
+(`AlgebraicGeometry.Scheme.serreDuality_residueTrace`), deduced from the results here.
 
 ## Main statements
 
@@ -84,7 +86,8 @@ trace pairing `H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ω) → k` (cup
 global section `b` of `Hom(ℱ, ω)`, cup product with `b` followed by evaluation is `H¹(b)`.
 
 The form `t` is the image of `𝟙 ω` under the natural isomorphism `Hom(-, ω) ≅ H¹(X, -)^∨` of
-`nonempty_dual_H_one_iso`; it is not identified with the residue trace of the blueprint.
+`nonempty_dual_H_one_iso`. For `X` integral, the statement for the residue trace of the blueprint
+is `bijective_dualPairing_residueTrace` (file `Curve/ResidueTrace`).
 
 (blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`, case `q = n = 1`) -/
 theorem exists_trace_bijective_dualPairing :
@@ -128,8 +131,8 @@ such that for every finite locally free `ℱ` the `k`-bilinear pairing
 is perfect: both `H⁰(X, Hom(ℱ, ω)) → H¹(X, ℱ)^∨` (the case `q = 1` of duality) and
 `H¹(X, ℱ) → H⁰(X, Hom(ℱ, ω))^∨` (the case `q = 0` of duality for `ℱᵛ ⊗ ω`, as
 `Hom(ℱ, ω) ≅ ℱᵛ ⊗ ω`) are bijective. As explained in `exists_trace_bijective_dualPairing`,
-this is the cup-product / evaluation / trace pairing of the blueprint; `t` is not identified
-with the residue trace.
+this is the cup-product / evaluation / trace pairing of the blueprint. For `X` integral, the
+statement for the residue trace is `bijective_dualPairingH_residueTrace`.
 
 (blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
 theorem exists_trace_bijective_dualPairingH :
@@ -164,7 +167,8 @@ curve over `k` with canonical module `ω = Ω¹_{X/k}`. There is a `k`-linear fo
 (`Modules.cupPairing`: cup product `Modules.cupH0`, evaluation `Modules.evalTensor`) is perfect:
 both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and `H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. This is
 `exists_trace_bijective_dualPairingH` transported along `ℱᵛ ⊗ ω ≅ Hom(ℱ, ω)`
-(`Modules.cupPairing_eq`). The form `t` is not identified with the residue trace.
+(`Modules.cupPairing_eq`). For `X` integral, the statement for the residue trace of the
+blueprint is `serreDuality_residueTrace` (file `Curve/ResidueTrace`).
 
 (blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
 theorem exists_trace_perfect_cupPairing :
