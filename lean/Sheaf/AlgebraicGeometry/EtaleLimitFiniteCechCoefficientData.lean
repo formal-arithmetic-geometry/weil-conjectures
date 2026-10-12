@@ -9,7 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientDifferential
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLaws
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
@@ -21,6 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+-- The fixed interface names geometric hypotheses outside their conclusion.
+set_option linter.unusedVariables false in
 /-- Fixed descended geometry gives a complex diagram and a compatible cocone.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical maps in its
 Čech comparison; Tag 09YQ for the étale realization.
@@ -153,6 +156,116 @@ theorem exists_etale_limit_finite_cech_coefficient_data
             (L.ι.app j.val).hom.app
               (op ((MorphismProperty.Over.pullback @Etale ⊤
                 (c.π.app (op j.val))).obj (Wj j n t))) ≫
-            L.pt.obj.map (δ j n t).inv.op) := by sorry
+            L.pt.obj.map (δ j n t).inv.op) := by
+  dsimp only
+  intro eNj eNlim γ δ hNj hNlim hγ hδ
+  let J := {j : I // i₀ ≤ j}
+  let B := fun j : J ↦
+    MorphismProperty.Over.pullback @Etale ⊤ (D.map (homOfLE j.property).op)
+  let Uj := fun j : J ↦ (B j).obj U₀
+  let fj := fun (j : J) (k : K) ↦ (B j).map (f₀ k)
+  let W₀ := fun (n : ℕ) (t : Fin (n + 1) → K) ↦
+    (∏ᶜ fun a ↦ Over.mk (f₀ (t a))).left
+  let Wj := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦ (B j).obj (W₀ n t)
+  let Nj := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦
+    (∏ᶜ fun a ↦ Over.mk (fj j (t a))).left
+  let Nlim := fun (n : ℕ) (t : Fin (n + 1) → K) ↦
+    (∏ᶜ fun a ↦ Over.mk (f (t a))).left
+  let Pj := fun (j : J) (n : ℕ) ↦
+    fun t : Fin (n + 1) → K ↦ (F j.val).obj.obj (op (Nj j n t))
+  let Plim := fun (n : ℕ) ↦
+    fun t : Fin (n + 1) → K ↦ L.pt.obj.obj (op (Nlim n t))
+  let Cj := fun j : J ↦
+    (cechComplexFunctor (fun k : K ↦ Over.mk (fj j k))).obj
+      ((Over.forget (Uj j)).op ⋙ (F j.val).obj)
+  let CX := (cechComplexFunctor (fun k : K ↦ Over.mk (f k))).obj
+    ((Over.forget U).op ⋙ L.pt.obj)
+  let m (j k : J) (a : j ⟶ k) (n : ℕ) : (Cj j).X n ⟶ (Cj k).X n :=
+    Pi.lift (fun t ↦
+      Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+          (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app
+            (op (Wj j n t)) ≫
+        (φ (show j.val ⟶ k.val from a)).hom.app
+          (op ((MorphismProperty.Over.pullback @Etale ⊤
+            (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j n t))) ≫
+        (F k.val).obj.map (γ j k a n t).inv.op ≫
+        (F k.val).obj.map (eNj k n t).inv.op)
+  let l (j : J) (n : ℕ) : (Cj j).X n ⟶ CX.X n :=
+    Pi.lift (fun t ↦
+      Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+          (c.π.app (op j.val))).unit.app (F j.val)).hom.app (op (Wj j n t)) ≫
+        (eG j.val).inv.hom.app
+          (op ((MorphismProperty.Over.pullback @Etale ⊤
+            (c.π.app (op j.val))).obj (Wj j n t))) ≫
+        (L.ι.app j.val).hom.app
+          (op ((MorphismProperty.Over.pullback @Etale ⊤
+            (c.π.app (op j.val))).obj (Wj j n t))) ≫
+        L.pt.obj.map (δ j n t).inv.op ≫
+        L.pt.obj.map (eNlim n t).inv.op)
+  have hm (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K) :
+      m j k a n ≫ Pi.π (Pj k n) t ≫ (F k.val).obj.map (eNj k n t).hom.op =
+    Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app
+          (op (Wj j n t)) ≫
+      (φ (show j.val ⟶ k.val from a)).hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤
+          (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j n t))) ≫
+      (F k.val).obj.map (γ j k a n t).inv.op := by
+    dsimp only [m]
+    erw [Pi.lift_π_assoc]
+    simp only [Category.assoc, ← Functor.map_comp, ← op_comp,
+      Iso.hom_inv_id_assoc]
+  have hl (j : J) (n : ℕ) (t : Fin (n + 1) → K) :
+      l j n ≫ Pi.π (Plim n) t ≫ L.pt.obj.map (eNlim n t).hom.op =
+    Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (c.π.app (op j.val))).unit.app (F j.val)).hom.app (op (Wj j n t)) ≫
+      (eG j.val).inv.hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤
+          (c.π.app (op j.val))).obj (Wj j n t))) ≫
+      (L.ι.app j.val).hom.app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤
+          (c.π.app (op j.val))).obj (Wj j n t))) ≫
+      L.pt.obj.map (δ j n t).inv.op := by
+    dsimp only [l]
+    erw [Pi.lift_π_assoc]
+    simp only [Category.assoc, ← Functor.map_comp, ← op_comp,
+      Iso.hom_inv_id_assoc]
+  obtain ⟨hdm, hdl⟩ := etale_limit_finite_cech_coefficient_differential
+    D c F φ G eG L U K V f i₀ U₀ V₀ f₀ eU eV he
+    eNj eNlim γ δ hNj hNlim hγ hδ m l ⟨hm, hl⟩
+  let M (j k : J) (a : j ⟶ k) : Cj j ⟶ Cj k :=
+    { f := m j k a
+      comm' := fun n r _ ↦ hdm j k a n r }
+  let R (j : J) : Cj j ⟶ CX :=
+    { f := l j
+      comm' := fun n r _ ↦ hdl j n r }
+  obtain ⟨hid, hcomp, hleg⟩ := etale_limit_finite_cech_coefficient_laws
+    D c F φ hidentity hcomposition G eG hG L U K V f i₀ U₀ V₀ f₀ eU eV he
+    eNj eNlim γ δ hNj hNlim hγ hδ M R ⟨hm, hl⟩
+  let A : J ⥤ CochainComplex AddCommGrpCat.{u + 1} ℕ :=
+    { obj := Cj
+      map := fun {j k} a ↦ M j k a
+      map_id := hid
+      map_comp := fun a b ↦ hcomp _ _ _ a b }
+  let cA : Cocone A :=
+    { pt := CX
+      ι := { app := R
+             naturality := by
+               intro j k a
+               simpa only [Functor.const_obj_obj, Functor.const_obj_map,
+                 Category.comp_id] using hleg j k a } }
+  refine ⟨A, fun _ ↦ Iso.refl _, cA, Iso.refl _, ?_, ?_⟩
+  · intro j k a n t
+    dsimp only [A, M, Iso.refl_inv, Iso.refl_hom, HomologicalComplex.id_f]
+    erw [Category.id_comp, Category.id_comp]
+    exact hm j k a n t
+  · intro j n t
+    dsimp only [A, M, cA, R, Iso.refl_inv, Iso.refl_hom, HomologicalComplex.id_f]
+    erw [Category.id_comp, Category.id_comp]
+    exact hl j n t
 
 end AlgebraicGeometry.Etale

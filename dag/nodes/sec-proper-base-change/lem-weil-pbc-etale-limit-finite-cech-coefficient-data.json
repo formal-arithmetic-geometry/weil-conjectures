@@ -20,40 +20,38 @@
  ],
  "proof": [
   {
-   "text": "Take each object A_j to be the actual Cech complex of f_j with coefficients F_j, and the cocone point to be the actual Cech complex of f with coefficients H. The complex identifications are identities. In each degree prescribe every tuple component by the stated unit/coefficient/pasting formulas, conjugating by z_j,z_k,z_X as appropriate. Product universality defines these homomorphisms.",
+   "text": "Take the actual Cech complexes Cj and CX. In degree n define m and l with Pi.lift of the displayed component formulas, followed by the presheaf image of the inverse target nerve isomorphism. Pi.lift_pi and cancellation of the nerve isomorphism images prove the required component identities hm and hl.",
    "uses": [
     "def-weil-pbc-cech-complex",
     "def-weil-pbc-inverse-image"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Projection identities for z_j and z_X imply compatibility with every coordinate-deletion map in the nerves: both composites have the same retained coordinate projections. The first-projection equations for gamma and delta imply their identity, composition and mixed coherence laws by pullback uniqueness. Naturality of the units and the coefficient maps therefore commutes with each Cech face. Additivity gives commutation with the alternating differential, making each degreewise map a cochain map.",
+   "text": "Apply the differential-compatibility lemma to m and l and the proved component identities. Define the cochain morphisms M and R using these degree maps and commutation proofs.",
    "uses": [
-    "def-weil-pbc-cech-complex",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-differential"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Check each tuple component to prove A.map_id and A.map_comp, using the given identity/composition laws for phi, the inverse-image composition/unit laws, and the geometric coherence just established. Use the specified equation for G(a) and L.w to prove the cocone law in the same manner. Product extensionality proves equality of the complex morphisms. The definitions give the two required component identities. For empty K every tuple index set is empty, and the same product maps define zero complexes.",
+   "text": "Apply the coefficient-laws lemma to M and R with hm and hl. Assemble the functor A using its identity and composition equations; assemble cA using the leg equation. Choose identity isomorphisms eA and eK. Removing identity maps from hm and hl yields exactly the two required equations.",
    "uses": [
-    "def-weil-pbc-cech-complex",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-laws"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-cech-complex",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "lem-weil-pbc-etale-limit-finite-cech-coefficient-differential",
+  "lem-weil-pbc-etale-limit-finite-cech-coefficient-laws"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP, lemma-colimit, proof: canonical Cech comparison maps; parent stage-data step 3. Etale realization in Tag 09YQ. Expanded as the corresponding part of the parent stage-data plan."
+  "place": "Tag 09YP, displayed Cech comparison; agent Lean reduction: explicit product-lift degree maps, two separate compatibility lemmas, and complete cochain-map/functor/cocone assembly."
  },
  "mathlib_searches": [
   {
@@ -124,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T215152-L-1303443",
+  "landing": "20261012T231636-L-1962474",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
