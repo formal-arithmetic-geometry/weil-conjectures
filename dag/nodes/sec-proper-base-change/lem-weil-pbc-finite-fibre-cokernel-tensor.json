@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-finite-fibre-cokernel-tensor",
+ "kind": "statement",
+ "title": "Residue-field tensor of the affine section-map cokernel vanishes",
+ "statement": "Let $f:X\\to S$ be a finite morphism of schemes [def-pc-scheme] [def-weil-finite-integral-morphism], $U\\subseteq S$ an affine open, and $s\\in U$. Set $A=\\Gamma(U,\\mathcal O_S)$, $B=\\Gamma(f^{-1}U,\\mathcal O_X)$, and let $\\varphi:A\\to B$ be the section map. Let $\\mathfrak p\\in\\operatorname{Spec}A$ correspond to $s$ [def-weil-affine-spectrum]. If $X_s\\to\\operatorname{Spec}\\kappa(s)$ is a closed immersion [def-pc-scheme-fibre] [def-weil-residue-field] [def-weil-closed-immersion], then $\\kappa(\\mathfrak p)\\otimes_A (B/\\operatorname{im}\\varphi)=0$, where the image is taken as an $A$-submodule.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
+ },
+ "proof": [
+  {
+   "text": "Identify the affine fibre with the spectrum of the residue-field tensor algebra using the affine pullback and residue-field identifications. The closed-immersion criterion gives surjectivity of its scalar map.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the cokernel sequence A → B → B/im(φ) → 0 with κ(p). Right exactness makes the last tensor zero because the first tensor map is surjective (Mathlib TensorProduct.lTensor_exact).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-residue-field-identification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion of a fibre implies residue field tensor of section map cokernel is zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of fibre implies residue field tensor of affine section cokernel vanishes",
+   "results": "AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Ideal.ResidueField.exists_smul_eq_tmul_one, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff, PrimeSpectrum.mem_image_comap_basicOpen",
+   "date": "2026-10-12",
+   "verdict": "no direct match; relevant building blocks found"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberToSpecResidueFieldIso|appBasicOpenIsoAwayMap|localizedMap_surjective_iff_subsingleton_localized_coker",
+   "results": "Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/RingTheory/Support.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean",
+   "date": "2026-10-12",
+   "verdict": "no direct match; relevant building blocks found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine fibre coordinate ring scalar surjectivity implies tensor cokernel vanishing",
+   "results": "RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, Ideal.Fiber.exists_smul_eq_one_tmul, Ideal.pi_tensorProductMk_quotient_surjective, KaehlerDifferential.tensorProductTo_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, RingHom.SurjectiveOnStalks.baseChange', Algebra.Extension.tensorH1Cotangent, Ideal.ResidueField.exists_smul_eq_tmul_one",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, Function.Surjective",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(surjective|coker)|residue.*tensor.*(range|quotient)",
+   "results": "Mathlib/GroupTheory/Coset/Basic.lean, Mathlib/GroupTheory/Coset/Basic.lean, Mathlib/GroupTheory/Coset/Basic.lean, Mathlib/GroupTheory/Coset/Basic.lean, Mathlib/GroupTheory/Coset/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteClosedImmersionNearFibre",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "04DG affine fibre/cokernel step",
+   "via": [
+    "lem-weil-pbc-finite-closed-immersion-near-fibre",
+    "lem-weil-pbc-finite-unramified-one-point-closed",
+    "lem-weil-pbc-unramified-etale-local-decomposition",
+    "lem-weil-pbc-finite-unramified-etale-local",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFibreCokernelTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFibreCokernelTensor.lean",
+  "declaration": "AlgebraicGeometry.subsingleton_fibreTensor_sectionCokernel",
+  "statement": "theorem subsingleton_fibreTensor_sectionCokernel\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsFinite f]\n    (U : S.Opens) (hU : IsAffineOpen U) (s : U)\n    (hf : IsClosedImmersion (f.fiberToSpecResidueField s.1)) :\n    letI := (f.app U).hom.toAlgebra\n    Subsingleton ((hU.primeIdealOf s).asIdeal.ResidueField ⊗[Γ(S, U)]\n      (Γ(X, f ⁻¹ᵁ U) ⧸ (Algebra.linearMap Γ(S, U) Γ(X, f ⁻¹ᵁ U)).range))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

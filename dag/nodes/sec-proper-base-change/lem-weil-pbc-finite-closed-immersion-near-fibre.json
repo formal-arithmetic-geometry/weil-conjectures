@@ -16,73 +16,46 @@
  },
  "proof": [
   {
-   "text": "Choose an affine neighbourhood Spec A of s, with corresponding prime p. Its inverse image under the finite morphism is Spec B, with B a finite A-module. The affine fibre-product and residue-field identifications identify the fibre map with Spec of κ(p) → κ(p) ⊗[A] B. Since this is a closed immersion, the ring map is surjective.",
+   "text": "Choose an affine neighbourhood U of s. Form the section-map cokernel Q and the prime p corresponding to s. Finiteness of f makes Q a finite module. The affine fibre calculation makes κ(p) tensor Q zero.",
    "uses": [
     "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-spec-residue-field-identification",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-fibre-cokernel-tensor",
     "def-weil-affine-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let N be the A-submodule image of A → B and Q = B/N, a finite A-module. Right exactness of tensor product shows κ(p) ⊗[A] Q = 0. After localizing at p this is the quotient of Q_p by the maximal ideal of A_p times Q_p. Nakayama gives Q_p = 0. Equivalently, A_p → B_p is surjective.",
+   "text": "Mathlib Module.mem_support_iff_nontrivial_residueField_tensorProduct is the Nakayama criterion: p lies outside support Q. Thus Q_p is zero. LinearMap.localizedMap_surjective_iff_subsingleton_localized_coker gives surjectivity of the localized section map, and Module.exists_localizedMap_away_surjective_of_localizedMap_atPrime_surjective produces a outside p with surjective localized map on D(a).",
    "uses": [
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-nakayama-local-generators"
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
-   }
+   "elementary": false
   },
   {
-   "text": "The support of the finite module Q is the zero locus of its annihilator. As Q_p = 0, choose a in Ann(Q) outside p. Then Q_a = 0 and right exactness of localization makes A_a → B_a surjective.",
+   "text": "Apply the localized section-map criterion to obtain a closed immersion over S.basicOpen a. The prime avoids a, so fromSpec_preimage_basicOpen and fromSpec_primeIdealOf show this open contains s.",
    "uses": [
-    "lem-weil-pbc-finite-module-support-annihilator"
+    "lem-weil-pbc-closed-immersion-localized-section-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
-   }
-  },
-  {
-   "text": "The principal open U = D(a) contains s. The principal-localization open immersions identify f restricted over U with Spec(B_a) → Spec(A_a). The surjective ring map A_a → B_a makes this a closed immersion. Composing U with the original affine neighbourhood inclusion produces the required open of S. The empty fibre is allowed: its zero ring gives the same vanishing of κ(p) ⊗ Q.",
-   "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-affine-spectrum",
   "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-spec-residue-field-identification",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-closed-immersion-localized-section-map",
+  "lem-weil-pbc-finite-fibre-cokernel-tensor",
   "lem-weil-pbc-finite-module-support-annihilator",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "def-weil-affine-spectrum"
+  "lem-weil-pbc-nakayama-local-generators"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale.tex",
-  "place": "Lemma 04DG proof, lines 738-743"
+  "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
  },
  "mathlib_searches": [
   {
@@ -164,9 +137,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T060744-L-2910545",
+  "landing": "20261012T085349-L-43703",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

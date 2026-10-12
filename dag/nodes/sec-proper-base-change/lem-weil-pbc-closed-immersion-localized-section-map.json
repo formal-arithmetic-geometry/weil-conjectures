@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-localized-section-map",
+ "kind": "statement",
+ "title": "A surjective localized section map gives a closed immersion on a basic open",
+ "statement": "Let $f:X\\to S$ be an affine morphism of schemes [def-pc-scheme], meaning that inverse images of affine opens are affine. Let $U\\subseteq S$ be affine, $A=\\Gamma(U,\\mathcal O_S)$, $B=\\Gamma(f^{-1}U,\\mathcal O_X)$, and $\\varphi:A\\to B$ its section map. For $a\\in A$, suppose that the localization at $\\{1,a,a^2,\\ldots\\}$ of the $A$-linear map $\\varphi$ is surjective. Then the restriction of $f$ over the principal open $D_U(a)\\subseteq S$ is a closed immersion [def-weil-closed-immersion].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
+ },
+ "proof": [
+  {
+   "text": "The basic opens have localized section rings. The universal property identifies localization of the A-linear section map with the ring map on the localized rings; this identification and its preservation of surjectivity are proved by the private helper in the Lean module.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine criterion turns surjectivity of the map on basic-open sections into a closed immersion of the restriction, using morphismRestrict_appTop and the isomorphism on restricted sections.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-principal-localization-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Lemma 04DG proof, Nakayama and spreading-out sentences (lines 734-743)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion of a fibre implies residue field tensor of section map cokernel is zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of fibre implies residue field tensor of affine section cokernel vanishes",
+   "results": "AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Ideal.ResidueField.exists_smul_eq_tmul_one, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff, PrimeSpectrum.mem_image_comap_basicOpen",
+   "date": "2026-10-12",
+   "verdict": "no direct match; relevant building blocks found"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberToSpecResidueFieldIso|appBasicOpenIsoAwayMap|localizedMap_surjective_iff_subsingleton_localized_coker",
+   "results": "Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/RingTheory/Support.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean",
+   "date": "2026-10-12",
+   "verdict": "no direct match; relevant building blocks found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of localized module section map gives closed immersion on affine basic open",
+   "results": "AlgebraicGeometry.Scheme.Hom.app_surjective, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective, AlgebraicGeometry.IsClosedImmersion.spec_of_surjective, AlgebraicGeometry.specTargetImageRingHom_surjective",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, LocalizedModule.map",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedImmersion|surjective|app_basicOpen_eq_away_map (ClosedImmersion.lean and AffineScheme.lean); localizedMap|localiz.*surj|surj.*localiz|basicOpen.*ClosedImmersion (lean/Sheaf and lean/WeilConjectures)",
+   "results": "IsClosedImmersion.of_surjective_of_isAffine; IsAffineOpen.app_basicOpen_eq_away_map. No duplicate bridge in project roots.",
+   "date": "2026-10-12",
+   "verdict": "second reading: building blocks already used in proof; no direct replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteClosedImmersionNearFibre",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "04DG final principal localization and closed-immersion step",
+   "via": [
+    "lem-weil-pbc-finite-closed-immersion-near-fibre",
+    "lem-weil-pbc-finite-unramified-one-point-closed",
+    "lem-weil-pbc-unramified-etale-local-decomposition",
+    "lem-weil-pbc-finite-unramified-etale-local",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionOfLocalizedSectionMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionOfLocalizedSectionMap.lean",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_restrict_basicOpen_of_localizedMap_surjective",
+  "statement": "theorem isClosedImmersion_restrict_basicOpen_of_localizedMap_surjective\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsAffineHom f]\n    (U : S.Opens) (hU : IsAffineOpen U) (a : Γ(S, U))\n    (ha : letI := (f.app U).hom.toAlgebra\n      Function.Surjective (LocalizedModule.map (Submonoid.powers a)\n        (Algebra.linearMap Γ(S, U) Γ(X, f ⁻¹ᵁ U)))) :\n    IsClosedImmersion (f ∣_ S.basicOpen a)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

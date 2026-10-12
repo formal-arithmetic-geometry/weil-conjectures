@@ -7086,3 +7086,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/U2/Sheaf.RingTheory.PairHenselizationCompletionFaithfullyFlat (stage 3; reviewer PASS; first push; landing 20261012T085349-L-43396 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EventuallyAffine (stage 3; reviewer PASS; first push; landing 20261012T085349-L-43491 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence (stage 3; reviewer PASS; first push; landing 20261012T085349-L-43586 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:53 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FiniteClosedImmersionNearFibre (stage 3; reviewer PASS; first push; landing 20261012T085349-L-43703 (interface); batch 20261012T085205; modules 3; new nodes 2)
