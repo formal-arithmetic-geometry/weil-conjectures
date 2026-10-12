@@ -11,11 +11,10 @@ public import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Grp.Colimits
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.AlgebraicGeometry.EtaleComplexUniformPages
+import Sheaf.AlgebraicGeometry.EtalePresentationImageFiltration
+import Mathlib.Algebra.Homology.ShortComplex.Ab
+import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Stable-page representatives of the etale image filtration
 
@@ -43,8 +42,38 @@ noncomputable def complexTermCohomologyMap
     AddCommGrpCat.of (Sheaf.H (K.X s) r) ⟶ AddCommGrpCat.of (Sheaf.H (L.X s) r) :=
   AddCommGrpCat.ofHom ((Sheaf.H.map (v.f s) r).comp (cohomologyMap f (K.X s) r))
 
+private theorem step_quotient_zero_iff {A : AddCommGrpCat.{u + 1}}
+    (B : DecreasingFiltration A) (q : ℤ) (y : (B.step q : AddCommGrpCat.{u + 1})) :
+    cokernel.π (Subobject.ofLE (B.step (q + 1)) (B.step q)
+      (B.antitone_step (Int.le_add_one (le_refl _)))) y = 0 ↔
+        ∃ z : (B.step (q + 1) : AddCommGrpCat.{u + 1}),
+          (B.step (q + 1)).arrow z = (B.step q).arrow y := by
+  let j := Subobject.ofLE (B.step (q + 1)) (B.step q) (B.antitone_step (Int.le_add_one (le_refl _)))
+  constructor
+  · intro h
+    obtain ⟨z, hz⟩ := (ShortComplex.ab_exact_iff _).mp (ShortComplex.exact_cokernel j) y h
+    refine ⟨z, ?_⟩
+    calc
+      (B.step (q + 1)).arrow z = (B.step q).arrow (j z) := by
+        exact (ConcreteCategory.congr_hom (Subobject.ofLE_arrow _) z).symm
+      _ = (B.step q).arrow y := congrArg _ hz
+  · rintro ⟨z, hz⟩
+    have hy : j z = y := (AddCommGrpCat.mono_iff_injective (B.step q).arrow).mp
+      inferInstance (by
+        simpa only [← ConcreteCategory.comp_apply, j, Subobject.ofLE_arrow] using hz)
+    rw [← hy]
+    exact ConcreteCategory.congr_hom (cokernel.condition j) z
+
+private theorem cokernel_map_apply
+    {A B A' B' : AddCommGrpCat.{u + 1}} (f : A ⟶ B) (g : A' ⟶ B')
+    (a : A ⟶ A') (b : B ⟶ B') (h : f ≫ b = a ≫ g) (x : B) :
+    (cokernel.map f g a b h) (cokernel.π f x) = cokernel.π g (b x) := by
+  exact ConcreteCategory.congr_hom (cokernel.π_desc f (b ≫ cokernel.π g) _) x
+
+set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
 -- The dependent first-page and graded-class witnesses are elaborated together.
+set_option maxRecDepth 1000000 in
 set_option linter.unusedVariables false in
 /-- Functorial hypercohomology pages identify image-filtration classes with stable pages.
 This constructs the pages and their graded-class dictionary; it does not assert
@@ -146,18 +175,18 @@ theorem exists_etaleComplexFiltrationPageData
       (v : ∀ i : Iᵒᵖ, E.obj i ⟶ E')
       (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E.map f ≫ v j = v i)
       (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ),
-      ((E.obj (op i)).page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))
+      ((E.obj (op i)).page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))
       (firstIsoLimit : ∀ (r : ℕ) (s : ℤ),
-      (E'.page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))
+      (E'.page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))
       (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
-      ((E.map f.op).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =
+      ((E.map f.op).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =
         (firstIso i r s).hom ≫ complexTermCohomologyMap (D.map f) (F i) (F j) (φ f) r s)
       (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
-      ((v (op i)).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =
+      ((v (op i)).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =
         (firstIso i r s).hom ≫ complexTermCohomologyMap (c.π.app i) (F i) L.pt
           ((eG i).inv ≫ L.ι.app (op i)) r s)
-      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1).X ⟨r, s⟩))
-      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1).X ⟨r, s⟩))
+      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1 (le_refl 1)).X ⟨r, s⟩))
+      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1 (le_refl 1)).X ⟨r, s⟩))
       (N : ℤ)
       (one_le : 1 ≤ N)
       (classMap : ∀ (i : I) (x : H.obj (op i)),
@@ -181,7 +210,94 @@ theorem exists_etaleComplexFiltrationPageData
     ((eH i).hom ≫ P (c.π.app i) (F i) ≫
       (cohomology AddCommGrpCat.{u + 1} c.pt p).map
         (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) x = 0 →
-    (((v (op i)).hom N one_le).f ⟨p - q, q⟩) (classMap i x hx) = 0 := by sorry
-
+    (((v (op i)).hom N one_le).f ⟨p - q, q⟩) (classMap i x hx) = 0 := by
+  classical
+  obtain ⟨E, E', v, compatible, firstIso, firstIsoLimit, first_transition,
+    first_comparison, negative, negativeLimit, hFK, hLK, T, T', N, one_le,
+    e, e', ht, ht'⟩ := exists_etaleComplex_uniform_pages D c F φ hidentity
+      hcomposition a hbelow G eG hG p P hP L hL q
+  clear hidentity hcomposition hbelow hG hP hL a
+  have mem : ∀ (i : I) (z : ℤ) (x : H.obj (op i)),
+      InEtaleHypercohomologyFiltration (D.obj i) (F i) p z ((eH i).hom x) ↔
+        ∃ y : (((T i).H p).step z : AddCommGrpCat.{u + 1}),
+          (((T i).H p).step z).arrow y = (eH i).hom x := by
+    intro i z x
+    exact etalePresentation_image_filtration (D.obj i) ⟨F i, hFK i⟩ (T i) p z _
+  let y (i : I) (x : H.obj (op i))
+      (hx : InEtaleHypercohomologyFiltration (D.obj i) (F i) p q ((eH i).hom x)) :
+      (((T i).H p).step q : AddCommGrpCat.{u + 1}) :=
+    Classical.choose ((mem i q x).mp hx)
+  have hy (i : I) (x : H.obj (op i))
+      (hx : InEtaleHypercohomologyFiltration (D.obj i) (F i) p q ((eH i).hom x)) :
+      (((T i).H p).step q).arrow (y i x hx) = (eH i).hom x :=
+    Classical.choose_spec ((mem i q x).mp hx)
+  let classMap := fun i x hx ↦ (e i).inv
+    (cokernel.π (Subobject.ofLE (((T i).H p).step (q + 1)) (((T i).H p).step q)
+      (((T i).H p).antitone_step (Int.le_add_one (le_refl _)))) (y i x hx))
+  have transition_mem : ∀ (i j : I) (f : j ⟶ i) (x : H.obj (op i)),
+      InEtaleHypercohomologyFiltration (D.obj i) (F i) p q ((eH i).hom x) →
+        InEtaleHypercohomologyFiltration (D.obj j) (F j) p q
+          ((eH j).hom (H.map f.op x)) := by
+    intro i j f x hx
+    obtain ⟨t, ht, hc, hs⟩ := ht i j f
+    apply (mem j q _).mpr
+    refine ⟨t q (y i x hx), ?_⟩
+    have hh := ConcreteCategory.congr_hom (ht q) (y i x hx)
+    simp only [ConcreteCategory.comp_apply] at hh
+    rw [hh, hy i x hx, hH]
+    simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+  refine ⟨E, E', v, compatible, firstIso, firstIsoLimit, first_transition,
+    first_comparison, negative, negativeLimit, N, one_le, classMap, transition_mem,
+    ?_, ?_, ?_⟩
+  · intro i j f x hx
+    obtain ⟨t, ht, hc, hs⟩ := ht i j f
+    have hrep : t q (y i x hx) = y j (H.map f.op x) (transition_mem i j f x hx) := by
+      apply (AddCommGrpCat.mono_iff_injective (((T j).H p).step q).arrow).mp
+        inferInstance
+      have hh := ConcreteCategory.congr_hom (ht q) (y i x hx)
+      simp only [ConcreteCategory.comp_apply] at hh
+      rw [hh, hy i x hx, hy j (H.map f.op x) (transition_mem i j f x hx), hH]
+      simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+    apply (AddCommGrpCat.mono_iff_injective (e j).hom).mp inferInstance
+    have hh := ConcreteCategory.congr_hom hs (classMap i x hx)
+    simp only [classMap, ConcreteCategory.comp_apply,
+      Iso.inv_hom_id_apply] at hh ⊢
+    let j' := Subobject.ofLE (((T j).H p).step (q + 1)) (((T j).H p).step q)
+      (((T j).H p).antitone_step (Int.le_add_one (le_refl q)))
+    exact hh.trans ((cokernel_map_apply _ _ (t (q + 1)) (t q) (hc q)
+      (y i x hx)).trans (congrArg (fun z ↦ cokernel.π j' z) hrep))
+  · intro i x hx
+    have hz : classMap i x hx = 0 ↔
+        cokernel.π (Subobject.ofLE (((T i).H p).step (q + 1)) (((T i).H p).step q)
+          (((T i).H p).antitone_step (Int.le_add_one (le_refl _)))) (y i x hx) = 0 := by
+      change (e i).inv.hom _ = 0 ↔ _
+      exact map_eq_zero_iff (e i).inv.hom
+        ((AddCommGrpCat.mono_iff_injective (e i).inv).mp inferInstance)
+    rw [hz, step_quotient_zero_iff, mem]
+    constructor
+    · rintro ⟨z, hz⟩
+      exact ⟨z, hz.trans (hy i x hx)⟩
+    · rintro ⟨z, hz⟩
+      exact ⟨z, hz.trans (hy i x hx).symm⟩
+  · intro i x hx hzero
+    obtain ⟨t, ht, hc, hs⟩ := ht' i
+    have hty : t q (y i x hx) = 0 := by
+      apply (AddCommGrpCat.mono_iff_injective ((T'.H p).step q).arrow).mp inferInstance
+      have hh := ConcreteCategory.congr_hom (ht q) (y i x hx)
+      simp only [ConcreteCategory.comp_apply] at hh
+      rw [hh, map_zero]
+      rw [hy i x hx]
+      simpa only [ConcreteCategory.comp_apply, Functor.const_obj_obj] using hzero
+    apply (AddCommGrpCat.mono_iff_injective e'.hom).mp inferInstance
+    have hh := ConcreteCategory.congr_hom hs (classMap i x hx)
+    simp only [classMap, ConcreteCategory.comp_apply,
+      Iso.inv_hom_id_apply] at hh
+    have hk := cokernel_map_apply _ _ (t (q + 1)) (t q) (hc q) (y i x hx)
+    let j' := Subobject.ofLE ((T'.H p).step (q + 1)) ((T'.H p).step q)
+      ((T'.H p).antitone_step (Int.le_add_one (le_refl q)))
+    have hz : cokernel.π j' (t q (y i x hx)) = 0 := by
+      rw [hty]
+      exact (cokernel.π j').hom.map_zero
+    exact hh.trans (hk.trans (hz.trans e'.hom.hom.map_zero.symm))
 
 end AlgebraicGeometry.Etale

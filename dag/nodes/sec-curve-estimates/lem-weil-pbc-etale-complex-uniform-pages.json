@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-etale-complex-uniform-pages",
+ "kind": "statement",
+ "title": "Uniform stable pages and natural graded comparisons for etale complexes",
+ "statement": "Let $I$ be a small cofiltered category, $D:I\\to\\mathrm{Sch}$ a diagram [def-weil-pbc-scheme-conventions], and $c$ a cone. Let $F_i$ be complexes of abelian etale sheaves [def-weil-pbc-etale-sheaves], uniformly zero below $a$, with inverse-image maps satisfying identity and composition. Let $G$ identify with their pullbacks to $c$ compatibly, and $L$ be a colimit cocone. For integers $p,q$ and the canonical derived cohomology pullback $P$, there are spectral sequences for the stages and $L$, compatible maps to the limit sequence, ordinary cohomology first-page identifications and their naturality equations, and vanishing in negative resolution degree. There are bounded-below presentations $T_i,T$ and one integer $N\\ge1$ identifying the $(p-q,q)$ terms with the $q$-th graded pieces of their degree-$p$ filtrations [def-weil-pbc-termwise-hypercohomology-presentation]. Transition and comparison maps restrict to all filtration steps, commute with their successive-step inclusions, and under these stable-page identifications induce the corresponding cokernel maps. This statement makes no assertion identifying the filtration with the image-filtration predicate.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Lemma 13.21.3, first spectral sequence and finite induced filtration; Tag 0EZM, proof of Lemma 59.52.1, uniform support bound"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-hypercohomology-filtration-zero",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the functorial Cartan--Eilenberg presentations of\n`exists_etaleHypercohomology_pullback_functorial`. Give each F_i its bounded-below\nstructure with bound a. Inverse image is exact, and colimits of complexes are degreewise,\nso L.pt has the same lower bound. The identity and composition equations for φ make\nits page maps a functor; the equations for G and the cocone make the limit maps compatible.\nSwap the two bidegree coordinates to put the resolution degree first. The first-page\nidentifications and their two naturality equations are the corresponding equations of\nthe pullback presentations. Their negative resolution degrees vanish. In bidegree\n(p-q,q), incoming and outgoing differentials vanish once the page exceeds both the\nresolution degree and the distance q-a to the bottom row. This bound depends only on\np,q,a, and therefore works simultaneously for all stages and the limit. Functorial\nconvergence identifies this page with the q-th graded piece of each presentation's\ncanonical image filtration. The filtered total maps restrict to all filtration steps;\ntheir inclusion equations identify the abutment maps with P followed by the coefficient\nmap. Monicity gives the square for successive steps. Naturality of the stable-page\nidentification gives precisely cokernel.map on the associated graded pieces.",
+   "uses": [
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "thm-sp-if-e1",
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "thm-sp-if-e1",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "worker E2",
+  "document": "Stacks Project, Tags 015J and 0EZM",
+  "place": "Details of the page/filtration argument separated from the representative algebra"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cokernel.*(exact|ker)|mem.*range.*cokernel|DecreasingFiltration",
+   "results": "Mathlib/Algebra/Category/Grp/Colimits.lean; Mathlib/Algebra/Category/Grp/Kernels.lean; Mathlib/Algebra/Category/Grp/Kernels.lean",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial hypercohomology spectral sequence stable page identified with associated graded image filtration of bounded below complexes",
+   "results": "CochainComplex.ConnectData.homologyIsoPos; DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; CochainComplex.cm5b; CochainComplex.cm5b.instQuasiIsoIntP; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of the quotient map from a filtration step to its associated graded is the next filtration step",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel.π",
+   "results": "CategoryTheory.Limits.cokernel.π; CategoryTheory.Limits.eq_zero_of_mono_cokernel; CategoryTheory.Limits.cokernel.π_of_zero; CategoryTheory.Limits.cokernel_not_iso_of_nonzero; CategoryTheory.Limits.cokernel_not_mono_of_nonzero; CategoryTheory.Limits.cokernel.of_kernel_of_mono; CategoryTheory.Limits.kernel.of_cokernel_of_epi; CategoryTheory.Limits.cokernel.π_of_epi",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel.π_map",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.cokernel.π_map'",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedPiece|H_formula|firstPageIso",
+   "results": "No hits.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial hypercohomology spectral sequence uniformly stable pages for bounded below complexes identified with associated graded filtration",
+   "results": "DerivedCategory.isZero_of_isLE; DerivedCategory.isZero_of_isGE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; DerivedCategory.isGE_Q_obj_iff; CochainComplex.cm5b; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image filtration on hypercohomology equals the image of the stupid truncation inclusion",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical filtration on hypercohomology equals image from the stupid truncation of a bounded below complex",
+   "results": "Second reader found CochainComplex.truncGE/truncLE and derived t-structure vanishing APIs, not the stupid-truncation image or uniform page dictionary. Local searches of HypercohomologyFirstPage, EtaleHypercohomologyPullbackFunctorial and EtaleTermwiseHypercohomology found ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercohomology filtration by images of complexes concentrated in degrees at least q equals the filtration induced by a Cartan Eilenberg resolution",
+   "results": "Ideal.Filtration.Stable and CochainComplex.cm5b: no matching hypercohomology theorem. Independent E2 second reading also inspected EtaleTermwiseHypercohomology.H_formula, EtaleHypercohomologyPullbackFunctorial and upstream ιStupidTrunc; these give ingredients, not either complete reduction.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexFiltrationPageData",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original page-data proof: uniform support and canonical filtration identification",
+   "via": [
+    "lem-weil-pbc-etale-complex-filtration-page-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexUniformPages",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexUniformPages.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleComplex_uniform_pages",
+  "statement": "theorem exists_etaleComplex_uniform_pages {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u}) (c : Cone D) (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (φ : ∀ {i j : I} (f : j ⟶ i), ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (F i) ⟶ F j) (hidentity : ∀ i : I, φ (𝟙 i) = (NatIso.mapHomologicalComplex (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i))) (ComplexShape.up ℤ)).hom.app (F i) ≫ (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i)) (ComplexShape.up ℤ)).hom.app (F i)) (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j), φ (g ≫ f) = (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f) (D.map (g ≫ f)) (D.map_comp g f)) (ComplexShape.up ℤ)).hom.app (F i) ≫ ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex (ComplexShape.up ℤ)).map (φ f) ≫ φ g) (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n)) (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (eG : ∀ i : I, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (F i)) (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op = (eG i).hom ≫ (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f) (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫ ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv) (p : ℤ) (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), (cohomology AddCommGrpCat.{u + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶ (cohomology AddCommGrpCat.{u + 1} X p).obj (DerivedCategory.Q.obj (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app (DerivedCategory.Q.obj K)) ≫ (Functor.rightDerivedFunctorCompIso' (lowerStar AddCommGrpCat.{u + 1} f) (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f) (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal) ≪≫ lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫ (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).symm)).hom.app ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫ (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K))) (L : Cocone G) (hL : IsColimit L) (q : ℤ) : ∃ (E : Iᵒᵖ ⥤ SpectralSequence AddCommGrpCat.{u + 1} (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1) (E' : SpectralSequence AddCommGrpCat.{u + 1} (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1) (v : ∀ i : Iᵒᵖ, E.obj i ⟶ E') (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E.map f ≫ v j = v i) (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ), ((E.obj (op i)).page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r)) (firstIsoLimit : ∀ (r : ℕ) (s : ℤ), (E'.page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r)) (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ), ((E.map f.op).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom = (firstIso i r s).hom ≫ AddCommGrpCat.ofHom ((Sheaf.H.map ((φ f).f s) r).comp (cohomologyMap (D.map f) ((F i).X s) r))) (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ), ((v (op i)).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom = (firstIso i r s).hom ≫ AddCommGrpCat.ofHom ((Sheaf.H.map (((eG i).inv ≫ L.ι.app (op i)).f s) r).comp (cohomologyMap (c.π.app i) ((F i).X s) r))) (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1 (le_refl 1)).X ⟨r, s⟩)) (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1 (le_refl 1)).X ⟨r, s⟩)) (hFK : ∀ i : I, CochainComplex.plus (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (F i)) (hLK : CochainComplex.plus (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) L.pt) (T : ∀ i : I, EtaleTermwiseHypercohomology (D.obj i) ⟨F i, hFK i⟩) (T' : EtaleTermwiseHypercohomology c.pt ⟨L.pt, hLK⟩) (N : ℤ) (one_le : 1 ≤ N) (e : ∀ i : I, ((E.obj (op i)).page N one_le).X ⟨p - q, q⟩ ≅ ((T i).H p).gradedPiece q) (e' : (E'.page N one_le).X ⟨p - q, q⟩ ≅ (T'.H p).gradedPiece q), (∀ (i j : I) (f : j ⟶ i), ∃ (t : ∀ z : ℤ, (((T i).H p).step z : AddCommGrpCat.{u + 1}) ⟶ (((T j).H p).step z : AddCommGrpCat.{u + 1})) (ht : ∀ z : ℤ, t z ≫ (((T j).H p).step z).arrow = (((T i).H p).step z).arrow ≫ P (D.map f) (F i) ≫ (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map (DerivedCategory.Q.map (φ f))) (hc : ∀ z : ℤ, Subobject.ofLE (((T i).H p).step (z + 1)) (((T i).H p).step z) (((T i).H p).antitone_step (Int.le_add_one (le_refl _))) ≫ t z = t (z + 1) ≫ Subobject.ofLE (((T j).H p).step (z + 1)) (((T j).H p).step z) (((T j).H p).antitone_step (Int.le_add_one (le_refl _)))), ((E.map f.op).hom N one_le).f ⟨p - q, q⟩ ≫ (e j).hom = (e i).hom ≫ cokernel.map _ _ (t (q + 1)) (t q) (hc q)) ∧ (∀ i : I, ∃ (t : ∀ z : ℤ, (((T i).H p).step z : AddCommGrpCat.{u + 1}) ⟶ ((T'.H p).step z : AddCommGrpCat.{u + 1})) (ht : ∀ z : ℤ, t z ≫ ((T'.H p).step z).arrow = (((T i).H p).step z).arrow ≫ P (c.π.app i) (F i) ≫ (cohomology AddCommGrpCat.{u + 1} c.pt p).map (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) (hc : ∀ z : ℤ, Subobject.ofLE (((T i).H p).step (z + 1)) (((T i).H p).step z) (((T i).H p).antitone_step (Int.le_add_one (le_refl _))) ≫ t z = t (z + 1) ≫ Subobject.ofLE ((T'.H p).step (z + 1)) ((T'.H p).step z) ((T'.H p).antitone_step (Int.le_add_one (le_refl _)))), ((v (op i)).hom N one_le).f ⟨p - q, q⟩ ≫ e'.hom = (e i).hom ≫ cokernel.map _ _ (t (q + 1)) (t q) (hc q))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8c782",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T150951-L-2230001",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8c782",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T150951-L-2230001",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node records, report, compilation, importer checks, and axiom checks match the stage-3 brief."
+ }
+}
