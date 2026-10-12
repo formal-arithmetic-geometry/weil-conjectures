@@ -25,50 +25,38 @@
  ],
  "proof": [
   {
-   "text": "By the definition of the constant sheaf, each $K_X$, $L_X$, and $N_X$ is the sheafification of the corresponding constant presheaf on the small etale site of $X$, and the maps are the sheafifications of the maps of constant presheaves.",
+   "text": "The functor `constantSheaf X.smallEtaleTopology (ModuleCat Λ)` preserves finite limits and finite colimits: the constant presheaf functor preserves all limits and colimits, and sheafification is left exact and a left adjoint. These are provided by `preservesFiniteLimits_constantSheaf` and `preservesFiniteColimits_constantSheaf`.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-etale-site"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Example sites-example-constant-sheaf (Tag 0H7J)"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma Tags 03CS and 03EI"
    }
   },
   {
-   "text": "The sequence of constant presheaves is sectionwise the given exact sequence $0\\to K\\to L\\to N\\to0$: evaluation at every etale object $U\\to X$ gives exactly the module sequence. Therefore it is exact in the category of presheaves of $\\Lambda$-modules, since kernels and cokernels of presheaves of modules are computed sectionwise.",
+   "text": "A functor preserving finite limits and finite colimits maps every short exact complex to a short exact complex. Applying `ShortComplex.ShortExact.map_of_exact` to `hS` and the constant-sheaf functor gives the asserted exact sequence, with the same mapped objects and arrows as in the statement.",
    "uses": [
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-etale-site"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section Tag 03CS (section-presheaves-modules)"
-   }
-  },
-  {
-   "text": "Applying the exact sheafification functor to this presheaf exact sequence preserves its kernels and cokernels, so the resulting sequence of sheaves is exact; by Step 1 its terms and maps are precisely $0\\to K_X\\to L_X\\to N_X\\to0$.",
-   "uses": [
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma Tag 03EI (lemma-sheafification-exact)"
+    "document": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+    "place": "ShortComplex.ShortExact.map_of_exact"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+  "def-weil-pbc-etale-site"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Modules on Sites, Lemma Tags 03CS and 03EI"
+  "by": "mathlib",
+  "document": "Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "place": "ShortComplex.ShortExact.map_of_exact, using constant-sheaf preservation instances"
  },
  "mathlib_searches": [
   {
@@ -148,5 +136,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T042406-L-1814229",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

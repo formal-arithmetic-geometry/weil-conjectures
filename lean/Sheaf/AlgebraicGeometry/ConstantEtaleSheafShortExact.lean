@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+
 /-!
 # Short exact sequences of finite constant etale sheaves
 
@@ -44,6 +46,6 @@ theorem constantEtaleSheaf_shortExact (X : Scheme.{u}) (Λ : Type (u + 1)) [Ring
     (S : ShortComplex (ModuleCat.{u + 1} Λ)) [Finite S.X₁] [Finite S.X₂] [Finite S.X₃]
     (hS : S.ShortExact) :
     (S.map (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).ShortExact := by
-  sorry
+  exact hS.map_of_exact (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
 end AlgebraicGeometry.Scheme
