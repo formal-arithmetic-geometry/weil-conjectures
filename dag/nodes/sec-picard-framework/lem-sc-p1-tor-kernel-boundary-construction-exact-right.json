@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-p1-tor-kernel-boundary-construction-exact-right",
+ "kind": "statement",
+ "title": "Exactness of constructed kernel boundary at kernel tensor",
+ "statement": "For every commutative ring R, modules M,F,N and surjective q:F → N, the constructed boundary has exactness of (δ_q,inclusion tensor 1_M).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0"
+ },
+ "stmt_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction"
+ ],
+ "proof": [
+  {
+   "text": "Choose augmentation-compatible degreewise split free resolutions of 0 -> ker(q) -> F -> N -> 0. Tensor with M; apply the homology long exact sequence for exactness at H0 of the kernel resolution.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proof: Put K = ker(q), and let P be the projective resolution of N used by\n`torKernelBoundary`, with augmentation epsilon. Choose free resolutions A, B, C\nof K, F, N in an augmentation-compatible degreewise split short exact sequence\n0 -> A -> B -> C -> 0. Tensor with M; the splitting identities ensure that this\nis still a short exact sequence of complexes. The homology sequence is exact.\nThe augmentations and right exactness of tensor identify H0(A tensor M) with\nK tensor M and H0(B tensor M) with F tensor M.\n\nChoose an augmentation-compatible comparison a : P -> C. In degree zero,\nlift a0 to B0 through the split quotient, and compose with B's augmentation\nto obtain e0 : P0 -> F. Choose lifts b0 : P0 -> B0 and b1 : P1 -> B1 of a0 and a1\nthrough the split quotient maps. The chain map identity for a implies that\ndB b1 - b0 dP factors uniquely through A0; call the factor t : P1 -> A0.\nWriting i : K -> F, augmentation compatibility and epsilonB dB = 0 give\ni epsilonA t = -e0 dP, so epsilonA t is the negative of the kernel restriction\nof e0 dP. For a cycle z of P tensor M, (b1 tensor 1)(z) lifts\n(a1 tensor 1)(z), and its differential is (alpha0 tensor 1)(t tensor 1)(z),\nsince (dP tensor 1)(z) = 0. The snake formula therefore sends its class to\n[(t tensor 1)(z)]. Applying epsilonA identifies this with the negative of\nthe explicit cycle boundary for e0. The chosen lift e in `torKernelLift`\ndiffers from e0 by a map k : P0 -> K. The two explicit cycle boundaries differ\nby (k tensor 1)(dP tensor 1)(z), which is zero. Boundaries also map to zero by\n`torKernelTensor_boundary`, so this comparison descends to homology. Thus the\ntransported homology connecting map is the negative of `torKernelBoundary`\nfor the snake convention just described. Negation changes neither the kernel\nnor the image of a linear map, so both adjacent exact pairs remain exact\nwhen the connecting map is replaced by `torKernelBoundary`.\n\nAugmentation compatibility identifies H0(A tensor M) -> H0(B tensor M)\nwith the kernel inclusion tensor 1. Exactness at H0(A tensor M), and the\ncomparison isomorphism H1(P tensor M) -> H1(C tensor M), show that every element\nof K tensor M killed by that inclusion is the boundary of a class of\nP tensor M, and every boundary is killed by the inclusion. Transporting through\nthe resolution identification of Tor1(N,M) proves the displayed pair.\nNo projectivity of F is required.",
+   "uses": [
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "def-sc-p1-tor-kernel-boundary-construction",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-tor-kernel-boundary-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-free-resolution-ses-split",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tor-map-via-resolution-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C3 second reader",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0",
+  "note": "Expanded the parent horseshoe argument for this strict conjunct, with no dependency on the parent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor connecting homomorphism from a projective resolution exact at the tensor product of the kernel",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error (recorded by msearch.py)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connecting map from first homology of a projective resolution tensored with a module to the tensor of a kernel is exact",
+   "date": "2026-10-13",
+   "results": "Rep.torIso, groupHomology.mapShortComplex₁_exact, groupHomology.mapShortComplex₃_exact; no ModuleCat connecting map construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyDesc",
+   "date": "2026-10-13",
+   "results": "Unknown identifier; local search found ShortComplex.descHomology and HomologicalComplex.homologyIsCokernel instead."
+  },
+  {
+   "tool": "grep",
+   "query": "descHomology|homologyπ|factorThru|isoLeftDerivedObj",
+   "date": "2026-10-13",
+   "results": "Mathlib ShortComplex/Homology.lean: descHomology, π_descHomology; ShortComplex/HomologicalComplex.lean: homologyIsCokernel; CategoryTheory/Abelian/LeftDerived.lean: isoLeftDerivedObj_hom_naturality; no existing constructed Tor kernel boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "long exact sequence of left derived functors connecting morphism of tensor product kernel",
+   "date": "2026-10-13",
+   "results": "Tor definitions and map formulas; no exactness theorem for this explicit boundary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"exact\"",
+   "date": "2026-10-13",
+   "results": "ShortComplex exactness characterizations; no comparison with the explicit boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "connectingHom.*exact|homologySequence.*exact; torKernelBoundary|tor_kernel_boundary in lean/",
+   "date": "2026-10-13",
+   "results": "Mathlib homology_exact1/3 give exactness for homology connecting maps; Sheaf.Paper.TorLongExactFirstVariable constructs an existential exact boundary but does not identify it with torKernelBoundary. No duplicate of this fixed-map assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorKernelBoundaryConstructionExact",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-tor-kernel-boundary-construction-exact",
+   "place": "decomposition of the conjunction into its two exactness assertions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorKernelBoundaryConstructionExactRight",
+  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryConstructionExactRight.lean",
+  "declaration": "CategoryTheory.tor_kernel_boundary_construction_exact_right",
+  "statement": "theorem tor_kernel_boundary_construction_exact_right\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q) :\n    Function.Exact (torKernelBoundary M F N q hq)\n      ((LinearMap.ker q).subtype.rTensor M)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T220517-L-1392291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T220517-L-1392291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

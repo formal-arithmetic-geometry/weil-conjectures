@@ -12,36 +12,22 @@
  ],
  "proof": [
   {
-   "text": "Resolve 0 → ker(q) → F → N → 0 by degreewise split free resolutions using [lem-weil-pbc-free-resolution-ses-split]. Tensor with M and apply [lem-weil-pbc-complex-ses-homology-long-exact] to obtain the two exact pairs adjacent to the homology boundary.",
+   "text": "Combine the exactness assertion at Tor from the left component with the assertion at the kernel tensor from the right component by conjunction introduction.",
    "uses": [
-    "lem-weil-pbc-free-resolution-ses-split",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
+    "lem-sc-p1-tor-kernel-boundary-construction-exact-left",
+    "lem-sc-p1-tor-kernel-boundary-construction-exact-right"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Compare the chosen projective resolution P of N with the right horseshoe resolution by [lem-weil-pbc-tor-map-via-resolution-lift]. Lift the degree-zero comparison through the split middle term. Its augmentation e₀:P₀ → F lifts ε. The snake cycle formula identifies the horseshoe boundary with (e₀d₁) tensor 1, with codomain restricted to the kernel. The difference e-e₀ factors through a map k:P₀ → ker(q); its boundary contribution (kd₁) tensor 1 vanishes on cycles. Hence this is exactly the map of [def-sc-p1-tor-kernel-boundary-construction]. Identify H₀ with tensor using [lem-weil-pbc-tensor-right-exact], and transport the exact pairs. This comparison proves exactness of the fixed construction without assuming arbitrary exact boundaries are natural.",
-   "uses": [
-    "lem-weil-pbc-tor-map-via-resolution-lift",
-    "def-sc-p1-tor-kernel-boundary-construction",
-    "lem-weil-pbc-tensor-right-exact"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-p1-tor-kernel-boundary-construction",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-free-resolution-ses-split",
-  "lem-weil-pbc-tensor-right-exact",
-  "lem-weil-pbc-tor-map-via-resolution-lift"
+  "lem-sc-p1-tor-kernel-boundary-construction-exact-left",
+  "lem-sc-p1-tor-kernel-boundary-construction-exact-right"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "F3 repair worker",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00M0 and 00LZ; Homology Tag 0111; https://stacks.math.columbia.edu/tag/00M0",
-  "note": "Expanded horseshoe comparison proof of the cited Tor exact sequence."
+  "agent": "C3",
+  "note": "Decomposition of the two exactness positions; both component proofs remain open. No net hole reduction."
  },
  "mathlib_searches": [
   {
@@ -117,11 +103,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-d5720",
-  "group": "F3",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T212721-L-1130977",
+  "landing": "20261012T220517-L-1392291",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean declarations and proofs with corrected nodes, change record, source arguments, pruning report, and independently reproduced compilation and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

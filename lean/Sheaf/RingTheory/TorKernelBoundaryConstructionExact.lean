@@ -6,6 +6,8 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.RingTheory.TorKernelBoundaryConstruction
+import Sheaf.RingTheory.TorKernelBoundaryConstructionExactLeft
+import Sheaf.RingTheory.TorKernelBoundaryConstructionExactRight
 
 /-!
 # Exactness for the constructed kernel connecting map
@@ -33,17 +35,22 @@ by their augmentations and right exactness of tensor. Compare the chosen
 projective resolution P of N used in torKernelBoundary with the right horseshoe
 resolution by an augmentation-compatible chain map. Lift its degree-zero map to
 the middle resolution using the splitting. Composing with the middle augmentation
-gives a lift e₀ : P₀ → F of P's augmentation. The connecting map on a tensor
-cycle z is the class of a left degree-zero element w whose image is the
-differential of that middle lift of z. Applying the left augmentation identifies
-this class with (e₀ d₁) tensor 1 evaluated at z, with codomain restricted to K.
-The lift e used in torKernelBoundary differs from e₀ by an R-linear map k : P₀ → K.
-The difference of the two resulting degree-one maps is k d₁; after tensoring
-this vanishes on cycles. Thus the transported horseshoe connecting map is exactly
-torKernelBoundary, not just some exact map. Resolution comparison identifies the
-preceding homology map with Tor₁(q,M); augmentation compatibility identifies the
-following homology map with the kernel inclusion tensor 1. Transport the two
-exact pairs along these isomorphisms to obtain the displayed assertions.
+gives a lift e₀ : P₀ → F of P's augmentation. The snake connecting map on a tensor
+cycle z uses a degree-one lift b₁ of the comparison map and a degree-zero lift b₀.
+The difference d_B b₁ - b₀ d_P factors through the left degree-zero term A₀.
+After its augmentation to K, this factor is the negative of the kernel
+restriction of e₀ d₁, because the middle augmentation kills d_B. On cycles,
+the b₀ d_P term vanishes after tensoring, so this factor computes the connecting
+map. Thus, with this snake convention, the transported connecting map is the
+negative of the explicit cycle boundary for e₀. The lift e used in
+torKernelBoundary differs from e₀ by a map k : P₀ → K. The difference of the
+explicit degree-one boundaries is k d₁; after tensoring this vanishes on cycles.
+Negation preserves both kernel and image, so the two exact pairs hold for
+torKernelBoundary as well. Resolution comparison identifies the preceding
+homology map with Tor₁(q,M); augmentation compatibility identifies the following
+homology map with the kernel inclusion tensor 1. Transport the exact pairs
+along these isomorphisms. The two component lemmas below isolate the respective
+positions of this argument; their Lean proofs remain open.
 
 This holds also for zero modules, identity surjections (zero kernel), and
 nonprojective F: the free resolutions, not F, supply the projectivity.
@@ -54,6 +61,8 @@ theorem tor_kernel_boundary_construction_exact
     Function.Exact (((Tor' (ModuleCat.{u} R) 1).map
       (ModuleCat.ofHom q)).app M).hom (torKernelBoundary M F N q hq) ∧
     Function.Exact (torKernelBoundary M F N q hq)
-      ((LinearMap.ker q).subtype.rTensor M) := by sorry
+      ((LinearMap.ker q).subtype.rTensor M) := by
+  exact ⟨tor_kernel_boundary_construction_exact_left R M F N q hq,
+    tor_kernel_boundary_construction_exact_right R M F N q hq⟩
 
 end CategoryTheory
