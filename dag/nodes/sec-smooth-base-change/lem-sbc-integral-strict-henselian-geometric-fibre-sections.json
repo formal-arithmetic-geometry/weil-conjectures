@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-integral-strict-henselian-geometric-fibre-sections",
+ "kind": "statement",
+ "title": "Invertibility of integral sections on a closed geometric fibre",
+ "statement": "Let A be a strictly henselian local ring and Λ a commutative ring. Let p:Z→Spec A be integral [def-weil-finite-integral-morphism], Ω algebraically closed, and t:Spec Ω→Spec A send its unique point to the closed point. For any Cartesian square (i:Z′→Z,p′:Z′→Spec Ω,p,t) [def-weil-pbc-cartesian-square] and every sheaf F of Λ-modules [def-weil-pbc-etale-sheaves], the canonical global-section restriction globalSectionsUpperStarMap along i is an isomorphism. No strict-henselization construction, stalk comparison, or neighbourhood formula occurs in this statement.",
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XK, 09ZH and 0A3I; canonical inverse-image composition"
+ },
+ "proof": [
+  {
+   "text": "Integrality over affine Spec A makes Z affine Spec B, with B integral over A. Set J=m_A B. The pair (A,m_A) is henselian, and the integral-over-henselian-pair theorem gives HenselianRing B J.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the degree-zero henselian comparison to the proper identity of Spec B and the ideal J. Restriction to Spec(B/J) is an isomorphism.",
+   "uses": [
+    "lemma-weil-pbc-etale-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed-image condition gives kernel m_A for A→Ω, hence a factorization through the separably closed residue field k=A/m_A. Pullback pasting identifies Z′ with the base change of Spec(B/J) to Ω. The field-extension section theorem gives a set bijection; the module/set comparison, including its unit equation, transports this to the module restriction.",
+   "uses": [
+    "lem-weil-pbc-sections-base-field-extension",
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition of inverse-image units and the global-section composition formula identify the composite of these two restrictions with the displayed map, up to the canonical isomorphisms. A bijective module homomorphism is invertible. The same argument includes B=0 and Λ=0.",
+   "uses": [
+    "lemma-weil-pbc-finite-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lemma-weil-pbc-finite-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XK, 09ZH and 0A3I; canonical inverse-image composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale module sheaf sections over an integral strictly henselian scheme agree with its closed geometric fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale module sheaf sections over an integral strictly henselian scheme agree with its closed geometric fibre",
+   "results": "8 hits: etale algebra locus and ring-local-map lemmas; no exact section comparison or inverse-image unit formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*section|strictHenselization|upperStarComp",
+   "results": "msearch: 0 Mathlib hits. Local rg: the source library contains the general globalSectionsUpperStarMap_comp and upperStarComp_hom_app_unit_app identities, but not this assembled interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-integral-strict-local-fibre-comparison",
+   "place": "Invertibility of integral sections on a closed geometric fibre"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralStrictHenselianGeometricFibreSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_integralStrictHenselianGeometricFibreRestriction",
+  "statement": "theorem isIso_integralStrictHenselianGeometricFibreRestriction\n    (Λ : Type (u + 1)) [CommRing Λ]\n    (A : Type u) [CommRing A] [IsStrictlyHenselianLocalRing A]\n    {Z Z' : Scheme.{u}} (p : Z ⟶ Spec (.of A)) [IsIntegralHom p]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶ Spec (.of A))\n    (ht : t (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint A)\n    {i : Z' ⟶ Z} {p' : Z' ⟶ Spec (.of Ω)} (sq : IsPullback i p' p t)\n    (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-strict-local-fibre-restriction-compatibility",
+ "kind": "statement",
+ "title": "Compatibility of the explicitly constructed strict-local restriction",
+ "statement": "Let (g′,f′,f,s) be a commutative square of schemes [def-weil-pbc-cartesian-square], with s:Spec Ω→Y a geometric point. Let t:Spec Ω→S_(s) have all the prescribed pointed limit legs [def-weil-pbc-strict-henselization-limit]. Let i:X′→X×_Y S_(s) have projections g′ and f′ followed by t. Define strictLocalFibreRestriction by the actual globalSectionsUpperStarMap along i, the inverse-image composition isomorphism for i followed by the projection to X, and the global-sections/evaluation isomorphism at the identity etale object. For every small-model pointed neighbourhood j, qcqsStrictLocalSectionRestriction followed by this explicitly defined map equals geometricFibreSectionRestriction. There is no integral, proper, local-ring, continuity, or invertibility hypothesis or conclusion.",
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "lem-sbc-geometric-fibre-exchange-germs"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYP, canonical restrictions; Tag 03Q9; inverse-image unit coherence"
+ },
+ "proof": [
+  {
+   "text": "Expand the two section restriction constructions and cancel the global-section/terminal-section isomorphisms. Transport between any two terminal objects using the unique terminal-object isomorphism. Naturality of the unit along i moves it past the strict-local neighbourhood section.",
+   "uses": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image composition coherence equation combines the unit of the projection to X and the unit of i into the unit of g′. Evaluation of that identity gives the same unit appearing in geometricFibreSectionRestriction.",
+   "uses": [
+    "lemma-weil-pbc-finite-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two projections of the remaining iterated pullback lift are g′ and f′ followed by the selected neighbourhood point: use hi, hi′ and the pointed leg identity ht. Pullback uniqueness identifies it with geometricFibreSectionLift. Conclude by the definition of geometricFibreSectionRestriction.",
+   "uses": [
+    "lem-sbc-geometric-fibre-exchange-germs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-geometric-fibre-exchange-germs",
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "lemma-weil-pbc-finite-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYP, canonical restrictions; Tag 03Q9; inverse-image unit coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of inverse image units under composition gives compatibility of etale section restriction along a map to a limit of pointed neighbourhoods",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse image units under composition gives compatibility of etale section restriction along a map to a limit of pointed neighbourhoods",
+   "results": "8 hits: etale algebra locus and ring-local-map lemmas; no exact section comparison or inverse-image unit formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*section|strictHenselization|upperStarComp",
+   "results": "msearch: 0 Mathlib hits. Local rg: the source library contains the general globalSectionsUpperStarMap_comp and upperStarComp_hom_app_unit_app identities, but not this assembled interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-integral-strict-local-fibre-comparison",
+   "place": "Compatibility of the explicitly constructed strict-local restriction"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalFibreRestrictionCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalFibreRestriction_compatibility",
+  "statement": "theorem strictLocalFibreRestriction_compatibility\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s)\n    (t : Spec (.of Ω) ⟶ strictHenselizationScheme s)\n    (ht : ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s),\n      t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫\n        (Spec (unop ((equivSmallModel.{u}\n          (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv =\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2.left)\n    (i : X' ⟶ pullback f (strictHenselizationStructuralMap s))\n    (hi : i ≫ pullback.fst f (strictHenselizationStructuralMap s) = g')\n    (hi' : i ≫ pullback.snd f (strictHenselizationStructuralMap s) = f' ≫ t)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :\n    qcqsStrictLocalSectionRestriction Λ f s F j ≫ strictLocalFibreRestriction Λ i hi F =\n      geometricFibreSectionRestriction Λ sq F\n        ((AffineEtale.Spec Y).obj\n          ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n        ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

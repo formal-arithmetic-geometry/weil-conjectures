@@ -3,11 +3,11 @@ module
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.RingTheory.IntegralOverHenselianPair
 import Sheaf.Paper.StrictHenselizationLocalStructure
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import Sheaf.Paper.StrictHenselizationPointedMap
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber
+import Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility
+import Sheaf.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 
@@ -70,6 +70,58 @@ theorem exists_integralStrictLocalFibreComparison
             ((AffineEtale.Spec Y).obj
               ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)
             ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2 := by
-  sorry
+  classical
+  obtain ⟨hl, hs⟩ := strictHenselizationLocalStructure s
+  let := hl
+  let := hs
+  let : Algebra (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
+    (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
+  obtain ⟨ψ, hsurj, hker, hpoint⟩ := strictHenselizationPointedMap s (by rfl)
+  let t : Spec (.of Ω) ⟶ strictHenselizationScheme s := Spec.map (CommRingCat.ofHom
+    ((IntermediateField.val
+      (separableClosure (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp ψ))
+  have ht : t ≫ strictHenselizationStructuralMap s = s := by
+    let := (strictHenselization_properties s).2.1
+    let j := Classical.choice (IsCofiltered.nonempty (C :=
+      SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+    have hp := hpoint j
+    rw [isoSpec_Spec_inv] at hp
+    have hstr := Classical.choose_spec (exists_strictHenselizationStructuralMap s) j
+    change _ = strictHenselizationStructuralMap s at hstr
+    rw [← hstr, ← Category.assoc, ← Category.assoc]
+    exact (congrArg (fun a ↦ a ≫ ((AffineEtale.Spec Y).obj
+      ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1).hom)
+      hp).trans ((equivSmallModel.{u}
+        (strictHenselizationNeighbourhoods s)).inverse.obj j).2.w
+  set_option backward.isDefEq.respectTransparency false in
+  have hclosed : t (IsLocalRing.closedPoint Ω) =
+      IsLocalRing.closedPoint (strictHenselizationRing s) := by
+    apply (strictHenselizationStructuralMap_fiber_eq_closedPoint
+      (A := strictHenselizationRing s) s (Iso.refl _)
+      (t (IsLocalRing.closedPoint Ω))).mp
+    change (t ≫ strictHenselizationStructuralMap s) (IsLocalRing.closedPoint Ω) = _
+    rw [ht]
+  let i : X' ⟶ pullback f (strictHenselizationStructuralMap s) :=
+    pullback.lift g' (f' ≫ t) (by rw [Category.assoc, ht]; exact sq.w)
+  have hi : i ≫ pullback.fst f (strictHenselizationStructuralMap s) = g' :=
+    pullback.lift_fst _ _ _
+  have hi' : i ≫ pullback.snd f (strictHenselizationStructuralMap s) = f' ≫ t :=
+    pullback.lift_snd _ _ _
+  have hsq : IsPullback i f' (pullback.snd f (strictHenselizationStructuralMap s)) t := by
+    apply IsPullback.of_right _ hi'
+      (IsPullback.of_hasPullback f (strictHenselizationStructuralMap s))
+    simpa only [hi, ht] using sq
+  have hc : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i
+      ((upperStar (ModuleCat.{u + 1} Λ)
+        (pullback.fst f (strictHenselizationStructuralMap s))).obj F)) :=
+    isIso_integralStrictHenselianGeometricFibreRestriction Λ (strictHenselizationRing s)
+      (pullback.snd f (strictHenselizationStructuralMap s)) t hclosed hsq _
+  let := hc
+  have : IsIso (strictLocalFibreRestriction Λ i hi F) := by
+    unfold strictLocalFibreRestriction
+    infer_instance
+  refine ⟨asIso (strictLocalFibreRestriction Λ i hi F), ?_⟩
+  intro j
+  exact strictLocalFibreRestriction_compatibility Λ sq.toCommSq t hpoint i hi hi' F j
 
 end AlgebraicGeometry.Etale

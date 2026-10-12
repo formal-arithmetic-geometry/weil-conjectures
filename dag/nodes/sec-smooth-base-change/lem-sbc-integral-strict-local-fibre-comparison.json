@@ -18,46 +18,42 @@
  },
  "proof": [
   {
-   "text": "The geometric-point maps to the affine pointed neighbourhoods give a cone. The limit constructs their unique map t into the strict henselization, and the structural-map equation identifies its composite with s. Pullback constructs q:X'→Z=X×_Y Spec A. Integrality makes Z=Spec B with B integral over A. Local structure makes A strictly henselian and the selected residue embeddings factor A→Omega through its separably closed residue field k.",
+   "text": "Obtain the strict henselization local structure. Equip the geometric field with its residue-field algebra via descResidueField. The pointed-map theorem supplies the compatible ring map; construct t by Spec.map. Its pointed leg identity and the structural-map equation imply t followed by the structural map is s. The closed-fibre characterization then puts its image at the closed point.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-pointed-map",
     "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-strict-henselization-local-structure"
+    "lem-weil-pbc-strict-henselization-closed-fiber"
    ],
    "elementary": false
   },
   {
-   "text": "For the maximal ideal m of A, the integral henselian-pair theorem makes (B,mB) henselian. Apply the henselian degree-zero theorem to the proper identity of Spec B to compare sections with Spec(B/mB). Field-extension invariance from k to Omega compares this closed fibre with X'. The module/set inverse-image comparison transports the set bijection to module coefficients. Compose with the composition and terminal-section isomorphisms to get e.",
+   "text": "Construct i by pullback.lift from g′ and f′ followed by t. Its two projection equations follow by pullback.lift_fst and pullback.lift_snd. Pullback pasting yields the closed geometric fibre square. Integrality survives base change, and the integral strictly-henselian fibre restriction theorem makes the global-section map along i invertible.",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair",
-    "lemma-weil-pbc-etale-degree-zero",
-    "lem-weil-pbc-sections-base-field-extension",
-    "lem-sc-etale-module-set-pullback-comparison"
+    "lem-sbc-integral-strict-henselian-geometric-fibre-sections"
    ],
    "elementary": false
   },
   {
-   "text": "For each small-model neighbourhood j the defining limit-leg equation for t identifies its point with the selected point v_j. The two pullback projections identify the induced iterated lift with geometricFibreSectionLift. Composition of inverse-image units and naturality give r_j followed by e.hom equal to the geometric-fibre restriction. This uses only the definition of r_j, not continuity or representative existence.",
+   "text": "The definition strictLocalFibreRestriction composes this invertible map with the inverse-image composition and terminal-section isomorphisms. Take its asIso. The compatibility theorem gives exactly the required neighbourhood restriction formula.",
    "uses": [
-    "lem-weil-pbc-qcqs-strict-local-module-comparison"
+    "lem-sbc-strict-local-fibre-restriction-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sbc-integral-strict-henselian-geometric-fibre-sections",
+  "lem-sbc-strict-local-fibre-restriction-compatibility",
+  "lem-weil-pbc-strict-henselization-closed-fiber",
   "lem-weil-pbc-strict-henselization-local-structure",
-  "lem-weil-pbc-integral-over-henselian-pair",
-  "lemma-weil-pbc-etale-degree-zero",
-  "lem-weil-pbc-sections-base-field-extension",
-  "lem-sc-etale-module-set-pullback-comparison",
-  "lem-weil-pbc-qcqs-strict-local-module-comparison"
+  "lem-weil-pbc-strict-henselization-pointed-map"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09XK, 09ZH and 0A3I, with the inverse-image unit compatibility in the parent argument"
+  "place": "Tags 09XK, 09ZH and 0A3I, together with explicit pointed-map construction and inverse-image-unit compatibility; J1"
  },
  "mathlib_searches": [
   {
@@ -131,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T173849-L-3301806",
+  "landing": "20261012T194118-L-457477",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
