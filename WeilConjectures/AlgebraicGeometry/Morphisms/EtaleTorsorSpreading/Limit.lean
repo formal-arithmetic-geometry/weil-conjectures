@@ -36,10 +36,21 @@ integral of finite type over `ℤ` (Nagata: `ℤ` is universally Japanese, [Stac
 `S = lim S'_i`. For some `i`, `c` descends to a smooth `C_i ⟶ S_i` of finite presentation
 ([Stacks 01ZM] and Limits, Section 32.8), `σ` to a section `σ_i`, and after replacing
 `C_i` by the open union `C_i^0` of the connected components of the fibres meeting `σ_i`
-([Stacks 055R]) the fibres are geometrically connected; `|G|` becomes invertible on `S_i`. The generic fibre `C_η` is the limit of the
-`C_{i, η_i}`, so `Z` with its `G`-action and its rational point over `σ(η)` descend to a Galois
-cover `Z_i` of `C_{i, η_i}`. The Noetherian case gives a finite étale extension `Y_i` of `Z_i`
-over `C_i`, and `Y_i ×_{C_i} C` extends `Z`. -/
+([Stacks 055R]) the fibres are geometrically connected; `|G|` becomes invertible on `S_i`.
+The generic fibre `C_η` is the limit of the `C_{i, η_i}`, so `Z` with its `G`-action and its
+rational point over `σ(η)` descend to a Galois cover `Z_i` of `C_{i, η_i}`. The Noetherian case
+gives a finite étale extension `Y_i` of `Z_i` over `C_i`, and `Y_i ×_{C_i} C` extends `Z`.
+
+Status: this step is left open. The base cannot be taken Noetherian in the application: the
+vanishing theorem (`AlgebraicGeometry.Etale.exists_etaleTorsor_cohomologyMap_eq_zero`) applies it
+to the base of a curve-test datum, which is the spectrum of the integral closure of an arbitrary
+ring in an algebraically closed field. Even for affine `S` and `C` the argument needs
+infrastructure that is not available: that finitely generated `ℤ`-domains are Japanese
+([Stacks 0335], to keep the approximating `S'_i` Noetherian *and* normal), the descent of
+smooth morphisms with geometrically connected fibres and of Galois covers of the generic fibre
+along the limit, and the general (non-affine) absolute Noetherian approximation. Only its affine
+case `AlgebraicGeometry.exists_isLimit_isNoetherian_Spec` and the descent of finite étale
+algebras (`AlgebraicGeometry.exists_finset_algEquiv_tensorProduct_of_finite_of_etale`) exist. -/
 theorem exists_isFinite_etale_isPullback_of_isNoetherian
     (H : ∀ D' : SpreadingDatum.{u} G, IsNoetherian D'.S →
       ∃ (Y : Scheme.{u}) (p : Y ⟶ D'.C) (_ : IsFinite p) (_ : Etale p) (ψ : D'.Z.P ⟶ Y),
