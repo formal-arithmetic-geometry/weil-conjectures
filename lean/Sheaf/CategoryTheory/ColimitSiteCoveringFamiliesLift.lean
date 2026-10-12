@@ -3,6 +3,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Precoverage
+import Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesAtStage
 
 @[expose] public section
 universe u
@@ -62,6 +63,37 @@ theorem colimit_site_covering_families_lift
       (∀ i, Presieve.ofArrows (B i) (b i) ∈ P j (A i)) ∧
       (∀ i, Arrow.mk ((V.ι.app j).toFunctor.map (a i)) = Arrow.mk (f i)) ∧
       (∀ i k, Arrow.mk ((V.ι.app j).toFunctor.map (b i k)) = Arrow.mk (g i k)) := by
-  sorry
+  obtain ⟨j₀, T₀, R₀, hT₀, _, _⟩ := (hQ S _).mp hf
+  obtain ⟨j₁, e₁, A₁, a₁, ha₁, himage₁⟩ :=
+    colimit_site_covering_families_at_stage J F P hfinite hcover V hobjects harrows Q hQ
+      (κ := PUnit.{u + 1}) j₀ (fun _ => T₀) (fun _ => hT₀)
+      (τ := fun _ => ι) (X := fun _ => X) (fun _ => f) (fun _ => hf)
+  let T₁ := (F.map e₁).toFunctor.obj T₀
+  have hA₁ : ∀ i, (V.ι.app j₁).toFunctor.obj (A₁ PUnit.unit i) = X i := by
+    intro i
+    exact congrArg Arrow.left (himage₁ PUnit.unit i)
+  obtain ⟨j₂, e₂, B₂, b₂, hb₂, himage₂⟩ :=
+    colimit_site_covering_families_at_stage J F P hfinite hcover V hobjects harrows Q hQ
+      j₁ (A₁ PUnit.unit) hA₁ g hg
+  refine ⟨j₂, (F.map e₂).toFunctor.obj T₁,
+    fun i => (F.map e₂).toFunctor.obj (A₁ PUnit.unit i), B₂,
+    fun i => (F.map e₂).toFunctor.map (a₁ PUnit.unit i), b₂, ?_, ?_, hb₂, ?_, himage₂⟩
+  · calc
+      (V.ι.app j₂).toFunctor.obj ((F.map e₂).toFunctor.obj T₁) =
+          (V.ι.app j₁).toFunctor.obj T₁ :=
+        congrArg (fun H : F.obj j₁ ⟶ V.pt => H.toFunctor.obj T₁) (V.w e₂)
+      _ = (V.ι.app j₀).toFunctor.obj T₀ :=
+        congrArg (fun H : F.obj j₀ ⟶ V.pt => H.toFunctor.obj T₀) (V.w e₁)
+      _ = S := hT₀
+  · simpa only [Presieve.map_ofArrows] using
+      hcover j₁ j₂ e₂ T₁ _ (ha₁ PUnit.unit)
+  · intro i
+    calc
+      Arrow.mk ((V.ι.app j₂).toFunctor.map
+          ((F.map e₂).toFunctor.map (a₁ PUnit.unit i))) =
+          Arrow.mk ((V.ι.app j₁).toFunctor.map (a₁ PUnit.unit i)) :=
+        congrArg (fun H : F.obj j₁ ⟶ V.pt =>
+          Arrow.mk (H.toFunctor.map (a₁ PUnit.unit i))) (V.w e₂)
+      _ = Arrow.mk (f i) := himage₁ PUnit.unit i
 
 end CategoryTheory

@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-colimit-site-covering-families-at-stage",
+ "kind": "statement",
+ "title": "Finite one-layer covering lifting over fixed stage targets",
+ "statement": "Let $J$ be a small filtered category and $F : J \\to \\mathrm{Cat}$ a diagram [def-weil-pbc-category-colimit]. Let $P_j$ be precoverages with finite uncurried covering arrow sets, preserved by every transition functor. Let $V$ be a cocone whose object and arrow cocones [def-weil-pbc-arrows-functor] are colimits of sets. Let $Q$ be a precoverage on its vertex such that a presieve belongs to $Q$ exactly when it is the equality-transported cocone image of a stage covering presieve. Fix a stage $j_0$, a finite target index set $K$, stage targets $T_i$ for $i \\in K$, and target equalities $V_{j_0}(T_i)=S_i$. For each $i$ let $f_{it}:X_{it}\\to S_i$ be a finite indexed $Q$-cover. Then there exist a stage $j$, a transition $e:j_0\\to j$, and arrows $a_{it}:A_{it}\\to F(e)(T_i)$ such that each indexed presieve of $a_i$ is $P_j$-covering and each cocone image arrow equals $f_{it}$ as an object of the arrow category. No nested coverings are part of the data.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram observation and verification of axiom (2); https://stacks.math.columbia.edu/tag/09YL"
+ },
+ "proof": [
+  {
+   "text": "Choose stage presieves via hQ and both finite directions of their indexed arrow comparisons. Move these stages and the fixed initial stage to a common successor. Use eventual object equality to align targets with the transitioned fixed targets, and eventual arrow equality to impose the comparisons. The resulting indexed presieves are transition images of the original covers, hence cover by hcover. Cocone naturality gives the image equalities. Empty families require only their targets; repeated indices add finitely many comparisons.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL; E1 second reader expanded the finite-presieve indexing argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite collection of finite presieves in a filtered colimit lifts to covering families over targets at a specified stage",
+   "results": "CategoryTheory.Precoverage.mem_finite_iff, CategoryTheory.Precoverage.finite, CategoryTheory.Presieve.Extensive.arrows_nonempty_isColimit, CategoryTheory.Precoverage.ofArrows_mem_finite, CategoryTheory.extensiveTopology.mem_sieves_iff_contains_colimit_cofan, CategoryTheory.IsFiltered.sup_objs_exists, CategoryTheory.Pretopology.ofArrows_mem_finite, CategoryTheory.IsFiltered.sup",
+   "date": "2026-10-13",
+   "verdict": "No exact fixed-stage one-layer covering lift. Mapping and finite upper-stage tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "cover.*(lift|stage)|presieve.*(lift|stage)|map_ofArrows",
+   "results": "Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean, Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean, Mathlib/CategoryTheory/Sites/EffectiveEpimorphic.lean, Mathlib/CategoryTheory/Sites/Canonical.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact fixed-stage one-layer covering lift. Mapping and finite upper-stage tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_ofArrows\"",
+   "results": "CategoryTheory.Presieve.map_ofArrows",
+   "date": "2026-10-13",
+   "verdict": "No exact fixed-stage one-layer covering lift. Mapping and finite upper-stage tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift finite independent covering families in a filtered category colimit over targets fixed at an initial stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesLift",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-families-lift",
+   "place": "Tag 09YL finite covering lifting",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesAtStage",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringFamiliesAtStage.lean",
+  "declaration": "CategoryTheory.colimit_site_covering_families_at_stage",
+  "statement": "theorem colimit_site_covering_families_at_stage\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt)\n    (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n      ∃ (j : J) (X : F.obj j) (S : Presieve X)\n        (h : (V.ι.app j).toFunctor.obj X = Y),\n        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)\n    {κ : Type u} [Finite κ] (j₀ : J) (T₀ : κ → F.obj j₀)\n    {S : κ → V.pt} (hT₀ : ∀ i, (V.ι.app j₀).toFunctor.obj (T₀ i) = S i)\n    {τ : κ → Type u} [∀ i, Finite (τ i)] {X : ∀ i, τ i → V.pt}\n    (f : ∀ i t, X i t ⟶ S i)\n    (hf : ∀ i, Presieve.ofArrows (X i) (f i) ∈ Q (S i)) :\n    ∃ (j : J) (e : j₀ ⟶ j) (A : ∀ i, τ i → F.obj j)\n      (a : ∀ i t, A i t ⟶ (F.map e).toFunctor.obj (T₀ i)),\n      (∀ i, Presieve.ofArrows (A i) (a i) ∈ P j ((F.map e).toFunctor.obj (T₀ i))) ∧\n      (∀ i t, Arrow.mk ((V.ι.app j).toFunctor.map (a i t)) = Arrow.mk (f i t))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097023",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097023",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
