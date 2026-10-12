@@ -9,15 +9,11 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Mathlib.RingTheory.Polynomial.Basic
+import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
-import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
-import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.PolynomialCompleteLocalGenericFibreRegularPart
 
 /-!
 # Generic polynomial formal fibres of complete local domains
@@ -62,6 +58,12 @@ theorem completeLocalGenericFibre
     Algebra.IsGeometricallyRegular (⊥ : Ideal (Polynomial A)).ResidueField
       ((⊥ : Ideal (Polynomial A)).Fiber
         (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
-          (Localization.AtPrime q))) := by sorry
+          (Localization.AtPrime q))) := by
+  have : IsNoetherianRing (Localization.AtPrime q) := inferInstance
+  have := AdicCompletion.isNoetherianRing
+    (IsLocalRing.maximalIdeal (Localization.AtPrime q))
+  refine ⟨Ideal.isNoetherianRing_fiber (⊥ : Ideal (Polynomial A)), ?_⟩
+  intro k' _ _ _ _
+  exact completeLocalGenericFibre_regularPart A q hq k'
 
 end Polynomial
