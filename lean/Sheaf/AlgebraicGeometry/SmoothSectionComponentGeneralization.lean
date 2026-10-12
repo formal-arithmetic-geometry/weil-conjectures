@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModel
+import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianGeneralization
 
 /-!
 # Generalization stability of a smooth section component
@@ -41,6 +43,21 @@ theorem Smooth.stableUnderGeneralization_section_component {P T : Scheme.{u}} (g
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
     StableUnderGeneralization
       {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))} := by
-  sorry
+  intro x y hxy hx
+  obtain ⟨W, hxW, P₀, T₀, g₀, σ₀, a, hT₀, hg₀, hqc, hqs, hσ₀, hcomp⟩ :=
+    Smooth.exists_section_component_noetherian_model g σ hσ x
+  let : IsNoetherian T₀ := hT₀
+  let : Smooth g₀ := hg₀
+  let : QuasiCompact g₀ := hqc
+  let : QuasiSeparated g₀ := hqs
+  have hyW : y ∈ W := hxy.mem_open W.isOpen hxW
+  let xW : W.toScheme := ⟨x, hxW⟩
+  let yW : W.toScheme := ⟨y, hyW⟩
+  have hxyW : yW ⤳ xW := (subtype_specializes_iff yW xW).mpr hxy
+  have hx₀ : a xW ∈ connectedComponentIn (g₀ ⁻¹' {g₀ (a xW)}) (σ₀ (g₀ (a xW))) :=
+    (hcomp xW).mp hx
+  exact (hcomp yW).mpr
+    (Smooth.section_component_generalization_of_isNoetherian g₀ σ₀ hσ₀
+      (hxyW.map a.continuous) hx₀)
 
 end AlgebraicGeometry

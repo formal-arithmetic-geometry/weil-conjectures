@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-smooth-section-component-noetherian-model",
+ "kind": "statement",
+ "title": "The section component locus admits local smooth noetherian models",
+ "statement": "Let g:P→T be smooth, quasi-compact and quasi-separated [def-sbc-smooth-morphisms], with a section σ satisfying σ≫g=id. For every x∈P there is an open W containing x, schemes P₀,T₀ with T₀ noetherian, a smooth quasi-compact quasi-separated g₀:P₀→T₀ with a section σ₀, and a scheme morphism a:W→P₀ such that, for every w∈W, w belongs to the component of σ(g(w)) in its g-fibre if and only if a(w) belongs to the component of σ₀(g₀(a(w))) in its g₀-fibre.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055Q, first two paragraphs (noetherian approximation), and Tag 055M (base change)"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood V of g(x) and W=g⁻¹(V). Restrict the section and finitely presented smooth morphism to V; this leaves each fibre and its section point unchanged.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Descend the restricted morphism and section to a finitely generated Z-algebra. Increase the stage to descend the section identity and smoothness. The resulting base T₀ is noetherian and the morphism g₀ is finitely presented, hence quasi-compact and quasi-separated. The base-change projection gives a:W→P₀.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The connected component of the section point in each fibre is geometrically connected. Base change therefore preserves precisely that component (Tag 055M). This gives the membership equivalence for every w.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 055Q, first two paragraphs (noetherian approximation), and Tag 055M (base change)",
+  "note": "Source read online; formal decomposition written by C1. Local literature source is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth section fibre connected components: The section component locus admits local smooth noetherian models",
+   "results": "Search service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local noetherian approximation for a smooth morphism of finite presentation of schemes with a section preserving fibre connected components by base change",
+   "results": "Smooth.exists_isStandardSmooth and Algebra.Smooth.exists_finiteType are local affine algebra results; no scheme-level model preserving the component locus.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"connectedComponentIn\"",
+   "results": "0 hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "055Q|055M|noetherian.*model|section.*noetherian in Mathlib AlgebraicGeometry and project sources",
+   "results": "Mathlib has no global theorem. SlicingFlat has an affine case but imports Slicing, which reaches the current item. RelativeComponentGeneralization concerns affine ring spectra only. The existing NoetherianSpreadingData node requires integral bases, Galois covers and geometrically connected families and cannot specialize here.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionComponentGeneralization",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055Q, first two paragraphs (noetherian approximation), and Tag 055M (base change)",
+   "via": [
+    "lem-sbc-smooth-section-component-generalization",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionComponentNoetherianModel.lean",
+  "declaration": "AlgebraicGeometry.Smooth.exists_section_component_noetherian_model",
+  "statement": "theorem Smooth.exists_section_component_noetherian_model {P T : Scheme.{u}} (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (x : P) : ∃ (W : P.Opens) (_ : x ∈ W) (P₀ T₀ : Scheme.{u}) (g₀ : P₀ ⟶ T₀) (σ₀ : T₀ ⟶ P₀) (a : W.toScheme ⟶ P₀), IsNoetherian T₀ ∧ Smooth g₀ ∧ QuasiCompact g₀ ∧ QuasiSeparated g₀ ∧ σ₀ ≫ g₀ = 𝟙 T₀ ∧ ∀ w : W.toScheme, (W.ι w ∈ connectedComponentIn (g ⁻¹' {g (W.ι w)}) (σ (g (W.ι w)))) ↔ a w ∈ connectedComponentIn (g₀ ⁻¹' {g₀ (a w)}) (σ₀ (g₀ (a w)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095853-L-312961",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095853-L-312961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
