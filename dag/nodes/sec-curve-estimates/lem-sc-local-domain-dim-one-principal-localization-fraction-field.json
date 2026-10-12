@@ -24,49 +24,29 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathfrak m$ be the unique maximal ideal of the local ring $B$. Since $B$ is a domain, $(0)$ is prime. If a prime $\\mathfrak q$ is nonzero, then $(0)\\subsetneq\\mathfrak q$; the dimension-one hypothesis, interpreted through the definition of Krull dimension, rules out any further strict prime inclusion above $\\mathfrak q$, so $\\mathfrak q$ is maximal. Locality then gives $\\mathfrak q=\\mathfrak m$. Thus the only primes of $B$ are $(0)$ and $\\mathfrak m$.",
+   "text": "Apply Mathlib ringKrullDim_eq_one_iff_of_isLocalRing_isDomain to obtain, for each nonzero b in B, that the maximal ideal is contained in the radical of (b). Since f belongs to the maximal ideal, Ideal.mem_radical_iff and Ideal.mem_span_singleton give a natural number n with b dividing f^n. Every power of f is a non-zero-divisor because B is a domain and f is nonzero.",
    "uses": [
     "def-weil-pbc-krull-dimension-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemmas Tags 00CM and 00C8; the prime-chain argument specializes the definition of Krull dimension"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the prime correspondence for localization [lem-weil-pbc-primes-of-localization](2) with $R=B$, $\\mathfrak p=\\mathfrak m$ and $t=f$: since $B$ is local, every element outside $\\mathfrak m$ is a unit, so the localization map $B\\to B_{\\mathfrak m}$ is an isomorphism and $A=B_{\\mathfrak m}$ is $B$ itself, with $A[1/f]=B_f$. Thus the primes of $B_f$ correspond, by contraction, to the primes of $B$ not containing $f$. The maximal ideal $\\mathfrak m$ is excluded because $f\\in\\mathfrak m$, while $(0)$ is allowed because $f\\ne0$ and $B$ is a domain. Hence $(0)$ is the only prime of $B_f$.",
-   "uses": [
-    "lem-weil-pbc-primes-of-localization",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00C8 (prime correspondence for a localization), with the powers of $f$"
-   }
-  },
-  {
-   "text": "The localization $B_f$ is a domain because $B$ is a domain and $f\\ne0$, and its only prime is $(0)$. If a nonzero element of $B_f$ were not a unit, it would lie in a maximal ideal, which would be a nonzero prime; therefore every nonzero element is a unit and $B_f$ is a field. The localization map into $K=\\operatorname{Frac}(B)$ is injective (a power of the nonzero element $f$ cannot annihilate a nonzero numerator). Since $B_f$ is a field containing the image of $B$, every fraction $a/b$ with $0\\ne b\\in B$ belongs to $B_f$ because the image of $b$ is nonzero and hence invertible. Thus the injective localization map $B_f\\to K$ is surjective and is an isomorphism.",
+   "text": "The divisibility just established and IsLocalization.of_le_of_exists_dvd show that the explicit ring Localization.Away f is also the localization at the non-zero-divisors of B. Both it and K are therefore fraction rings of B. The given Away.lift commutes with the maps from B by IsLocalization.Away.lift_comp, so IsLocalization.bijective at the non-zero-divisors proves it bijective. No field structure or arbitrary witness is chosen.",
    "uses": [
     "def-weil-ring-localization-away"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemmas Tags 00CM and 00C8; the remaining field and fraction-field identifications are the standard localization calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-primes-of-localization",
   "def-weil-ring-localization-away"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemmas Tags 00CM and 00C8"
+  "by": "agent",
+  "date": "2026-10-13",
+  "group": "X2",
+  "note": "Direct Mathlib proof using the radical characterization of dimension one and uniqueness of localization; replaces the prime-spectrum argument below the unit level."
  },
  "mathlib_searches": [
   {
@@ -159,5 +139,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T194155-L-470046",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

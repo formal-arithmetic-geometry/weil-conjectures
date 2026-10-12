@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.KrullDimension.LocalRing
 
 /-!
 # A principal localization of a one-dimensional local domain is its fraction field
@@ -49,6 +50,17 @@ theorem bijective_away_lift_fractionRing_of_ringKrullDim_eq_one
     Function.Bijective
       (IsLocalization.Away.lift (S := Localization.Away f) f (g := algebraMap B K)
         (IsUnit.mk0 _ ((map_ne_zero_iff _ (IsFractionRing.injective B K)).mpr hf_ne))) := by
-  sorry
+  have hle : Submonoid.powers f ≤ nonZeroDivisors B :=
+    powers_le_nonZeroDivisors_of_noZeroDivisors hf_ne
+  let : IsFractionRing B (Localization.Away f) :=
+    IsLocalization.of_le_of_exists_dvd (Submonoid.powers f) (nonZeroDivisors B) hle
+      (fun b hb ↦ by
+        have hb_ne : b ≠ 0 := mem_nonZeroDivisors_iff_ne_zero.mp hb
+        have hf_rad := (ringKrullDim_eq_one_iff_of_isLocalRing_isDomain.mp hdim).2
+          b hb_ne hf_mem
+        obtain ⟨n, hn⟩ := Ideal.mem_radical_iff.mp hf_rad
+        exact ⟨f ^ n, ⟨n, rfl⟩, Ideal.mem_span_singleton.mp hn⟩)
+  exact IsLocalization.bijective (nonZeroDivisors B) _
+    (IsLocalization.Away.lift_comp f _)
 
 end IsLocalRing
