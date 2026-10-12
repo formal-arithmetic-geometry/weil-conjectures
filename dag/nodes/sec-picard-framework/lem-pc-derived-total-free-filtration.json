@@ -12,38 +12,39 @@
  ],
  "proof": [
   {
-   "text": "Transport the chosen left term in column $-i$ to a subcomplex $U_i$ of that column. It and its quotient have zero differential, since their decompositions are sums of single-degree complexes. Set $F_0=0$. In total degree $k$, let $F_{2i+1}$ contain the full terms of columns $-j$ for $j<i$ and the term $U_i^{k+i}$ in column $-i$. Let $F_{2i+2}$ contain the full terms of columns $-j$ for $j\\le i$, in vertical degree $k+j$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
-   }
+   "text": "Construct explicit alternating column submodules and restricted complexes; obtain stage zero, monomorphic inclusions and compatibility from their concrete helpers.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable"
+   ],
+   "elementary": false
   },
   {
-   "text": "The horizontal differential lowers $j$ by one, hence lands in an earlier full column; for $j=0$ it lands in a zero positive column. The vertical differential on $U_i$ vanishes and preserves each full column. Thus these submodules are subcomplexes and their inclusions are compatible and monic. Direct-sum elements have finite support, and all positive columns vanish. Taking $i$ at least every $j$ in the support places any element in $F_{2i+2}$; zero already lies in $F_0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
-   }
+   "text": "Use the finite-support exhaustiveness lemma for total-degree elements.",
+   "uses": [
+    "lem-pc-derived-total-filtration-exhaustive"
+   ],
+   "elementary": false
   },
   {
-   "text": "The new piece of $F_{2i+1}/F_{2i}$ is $U_i$, with vertical degrees shifted in total degree by $-i$; that of $F_{2i+2}/F_{2i+1}$ is $V_i$ with the same degree adjustment. Horizontal differentials are zero on these quotients because they land in earlier columns, and vertical differentials are zero by the single-degree decompositions. A summand in vertical degree $d$ becomes a summand in total degree $d-i$. Projecting away new summands, and using the given degreewise splitting within column $-i$, gives retractions of the inclusions. This also handles the inclusion out of zero. These quotient identifications give the categorical cokernel isomorphisms.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
-   }
+   "text": "Use the split-free quotient lemma for degreewise retractions and coproduct cokernel descriptions.",
+   "uses": [
+    "lem-pc-derived-total-filtration-quotients"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-derived-total-filtration-stable",
+  "lem-pc-derived-total-filtration-exhaustive",
+  "lem-pc-derived-total-filtration-quotients"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/dga.tex",
-  "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+  "by": "worker",
+  "group": "Q3",
+  "date": "2026-10-12",
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, proof, alternating two-step column filtration (https://stacks.math.columbia.edu/tag/09KP)",
+  "note": "Explicit alternating image submodules, their restrictions, and a Lean combination of stability, proved exhaustiveness, and split-free quotients."
  },
  "mathlib_searches": [
   {
@@ -126,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T054000-L-2648627",
+  "landing": "20261012T110316-L-620628",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

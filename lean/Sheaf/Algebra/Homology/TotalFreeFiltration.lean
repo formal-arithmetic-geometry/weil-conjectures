@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
+import Sheaf.Algebra.Homology.TotalFreeFiltrationExhaustive
+import Sheaf.Algebra.Homology.TotalFreeFiltrationQuotients
 
 /-!
 # A free filtration on a direct-sum total complex
@@ -85,10 +87,28 @@ theorem exists_totalFreeFiltration {A : Type u} [CommRing A]
         (∀ (n : ℕ) (k : ℤ),
           ∃ r : (F (n + 1)).X k ⟶ (F n).X k,
             (step n).f k ≫ r = 𝟙 ((F n).X k)) ∧
-        (∀ n, ∃ (I : Type u) (degree : I → ℤ),
+      (∀ n, ∃ (I : Type u) (degree : I → ℤ),
           Nonempty (cokernel (step n) ≅
             ∐ (fun i : I ↦
               (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) (degree i)).obj
-                (ModuleCat.of A A)))) := by sorry
+                (ModuleCat.of A A)))) := by
+  classical
+  have hc (j : ℕ) := h_columns (-(j : ℤ)) (by omega)
+  choose S he h_exact h_split h_free using hc
+  let e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)) := fun j ↦ (he j).some
+  let F := TotalFreeFiltration.complex K S e h_positive
+  let ι := TotalFreeFiltration.inclusion K S e h_positive
+  let step := TotalFreeFiltration.step K S e h_positive
+  obtain ⟨hretract, hcoker⟩ :=
+    TotalFreeFiltration.quotients K S e h_positive h_exact h_split h_free
+  refine ⟨F, ι, step, ?_, ?_, ?_, ?_, hretract, hcoker⟩
+  · exact TotalFreeFiltration.restrict_zero _ _ _
+      (TotalFreeFiltration.term_zero K S e)
+  · intro n
+    exact TotalFreeFiltration.restrict_mono _ _ _
+  · intro n
+    exact TotalFreeFiltration.restrict_comp _ _ _ _ _ _
+  · exact TotalFreeFiltration.restrict_surjective _ _ _
+      (TotalFreeFiltration.exhaustive K S e h_positive)
 
 end CochainComplex
