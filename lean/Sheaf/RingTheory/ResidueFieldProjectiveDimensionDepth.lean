@@ -6,6 +6,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
 import Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 @[expose] public section
 
@@ -42,6 +43,115 @@ theorem residueField_projectiveDimension_le_depth
     (ModuleCat.projectiveDimension
       (ModuleCat.of R (IsLocalRing.ResidueField R)) h : ℕ∞) ≤
         IsLocalRing.depth (R := R) R := by
-  sorry
+  classical
+  let M := ModuleCat.of R (IsLocalRing.ResidueField R)
+  let d := ModuleCat.projectiveDimension M h
+  change (d : ℕ∞) ≤ _
+  by_cases hd0 : d = 0
+  · simp [hd0]
+  have hd : 1 ≤ d := by omega
+  have hres : ModuleCat.HasProjectiveResolutionLE M d := Nat.find_spec h
+  obtain ⟨P, hzero, hfree, hminimal⟩ :=
+    ModuleCat.exists_minimal_finite_free_resolution M d hres
+  let (i : ℕ) : Module.Finite R (P.complex.X i) := (hfree i).1
+  let (i : ℕ) : Module.Free R (P.complex.X i) := (hfree i).2
+  let n : ℕ → ℕ := fun i ↦ Fintype.card (Module.Free.ChooseBasisIndex R (P.complex.X i))
+  let b (i : ℕ) : Module.Basis (Fin (n i)) R (P.complex.X i) :=
+    (Module.Free.chooseBasis R (P.complex.X i)).reindex (Fintype.equivFin _)
+  let c (i : ℕ) : P.complex.X i ≃ₗ[R] (Fin (n i) → R) := (b i).equivFun
+  -- A zero last term would contradict the least possible resolution length.
+  have hn : n d ≠ 0 := by
+    intro hn
+    have hz : CategoryTheory.Limits.IsZero (P.complex.X d) := by
+      apply ModuleCat.isZero_iff_subsingleton.mpr
+      refine ⟨fun x y ↦ (c d).injective ?_⟩
+      ext j
+      exact (Fin.elim0 (hn ▸ j))
+    have hshort : ModuleCat.HasProjectiveResolutionLE M (d - 1) := by
+      refine ⟨P, fun i hi ↦ ?_⟩
+      by_cases hid : i = d
+      · simpa [hid] using hz
+      · exact hzero i (by omega)
+    have : d ≤ d - 1 := Nat.find_min' h hshort
+    omega
+  let f (i : ℕ) : (Fin (n i) → R) →ₗ[R] (Fin (n (i - 1)) → R) :=
+    (c (i - 1)).toLinearMap ∘ₗ (P.complex.d i (i - 1)).hom ∘ₗ (c i).symm.toLinearMap
+  let φ (i : ℕ) : Matrix (Fin (n (i - 1))) (Fin (n i)) R := LinearMap.toMatrix' (f i)
+  have hφ (i : ℕ) (v : Fin (n i) → R) :
+      (φ i).mulVec v = c (i - 1) ((P.complex.d i (i - 1)).hom ((c i).symm v)) := by
+    exact LinearMap.toMatrix'_mulVec (f i) v
+  have hpexact (i : ℕ) (hi : 1 ≤ i) :
+      Function.Exact (P.complex.d (i + 1) i).hom (P.complex.d i (i - 1)).hom := by
+    obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : i ≠ 0)
+    exact (CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).mp
+      (P.exact_succ j)
+  have hexact (i : ℕ) (hi : 1 ≤ i) (_hie : i + 1 ≤ d) :
+      Function.Exact (φ (i + 1)).mulVec (φ i).mulVec := by
+    intro v
+    constructor
+    · intro hv
+      have hv' : (P.complex.d i (i - 1)).hom ((c i).symm v) = 0 := by
+        apply (c (i - 1)).injective
+        simpa only [map_zero, ← hφ] using hv
+      obtain ⟨x, hx⟩ := (hpexact i hi _).mp hv'
+      refine ⟨c (i + 1) x, ?_⟩
+      simp only [hφ, Nat.add_one_sub_one, LinearEquiv.symm_apply_apply, hx,
+        LinearEquiv.apply_symm_apply]
+    · rintro ⟨x, rfl⟩
+      rw [hφ, hφ]
+      simp only [Nat.add_one_sub_one, LinearEquiv.symm_apply_apply]
+      rw [(hpexact i hi).apply_apply_eq_zero, map_zero]
+  have hcomplex (i : ℕ) (hi : 1 ≤ i) (hie : i + 1 ≤ d)
+      (v : Fin (n (i + 1)) → R) :
+      (φ i).mulVec ((φ (i + 1)).mulVec v) = 0 :=
+    (hexact i hi hie).apply_apply_eq_zero v
+  have hdinj : Function.Injective (P.complex.d d (d - 1)).hom := by
+    have hp := hpexact d hd
+    have hz : P.complex.d (d + 1) d = 0 :=
+      (hzero (d + 1) (by omega)).eq_of_src _ _
+    rw [hz] at hp
+    exact (LinearMap.exact_zero_iff_injective _ _).mp hp
+  have hinjective : Function.Injective (φ d).mulVec := by
+    intro x y hxy
+    rw [hφ, hφ] at hxy
+    exact (c d).symm.injective (hdinj ((c (d - 1)).injective hxy))
+  have hentries (i : Fin (n (d - 1))) (j : Fin (n d)) :
+      φ d i j ∈ IsLocalRing.maximalIdeal R := by
+    change LinearMap.toMatrix' (f d) i j ∈ _
+    rw [LinearMap.toMatrix'_apply]
+    let l : P.complex.X (d - 1) →ₗ[R] R :=
+      (LinearMap.proj i) ∘ₗ (c (d - 1)).toLinearMap
+    have hm : (P.complex.d d (d - 1)).hom ((c d).symm (Pi.single j 1)) ∈
+        IsLocalRing.maximalIdeal R • (⊤ : Submodule R (P.complex.X (d - 1))) := by
+      have hm := hminimal (d - 1) (by omega)
+      have heq : d - 1 + 1 = d := by omega
+      rw [heq] at hm
+      exact hm (LinearMap.mem_range_self _ _)
+    have hl := Submodule.smul_top_le_comap_smul_top (IsLocalRing.maximalIdeal R) l hm
+    simpa [l, f, Submodule.mem_comap, Ideal.smul_eq_mul, Ideal.mul_top] using hl
+  let I : Ideal R := Ideal.span {z : R | ∃ r : Fin (n d) → Fin (n (d - 1)),
+    StrictMono r ∧ z = ((φ d).submatrix r id).det}
+  -- Modulo the maximal ideal the last matrix is zero, hence so are its nonempty minors.
+  have hI : I ≤ IsLocalRing.maximalIdeal R := by
+    apply Ideal.span_le.mpr
+    rintro z ⟨r, _hr, rfl⟩
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    rw [(Ideal.Quotient.mk (IsLocalRing.maximalIdeal R)).map_det]
+    have hmat : (Ideal.Quotient.mk (IsLocalRing.maximalIdeal R)).mapMatrix
+        ((φ d).submatrix r id) = 0 := by
+      ext i j
+      exact Ideal.Quotient.eq_zero_iff_mem.mpr (hentries (r i) j)
+    rw [hmat]
+    let : Nonempty (Fin (n d)) := ⟨⟨0, Nat.pos_of_ne_zero hn⟩⟩
+    exact Matrix.det_zero
+  obtain htop | ⟨rs, hlen, hmem, hreg⟩ :=
+    exact_free_complex_last_minors_regular_sequence R d hd n φ hcomplex hexact hinjective
+  · exact ((IsLocalRing.maximalIdeal.isMaximal R).ne_top
+      (top_le_iff.mp (htop ▸ hI))).elim
+  · unfold IsLocalRing.depth Ideal.depth
+    split_ifs
+    · exact le_top
+    · apply le_sSup
+      exact ⟨rs, hreg, fun x hx ↦ hI (hmem x hx), by simp [hlen]⟩
 
 end Ring
