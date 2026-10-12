@@ -8256,3 +8256,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:09 L: returned deliver/Q2/Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback (reviewer RETURN: (the landing tools, head 5c019555d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 15:09 L: returned deliver/S2/Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule (reviewer RETURN: (the landing tools, head 89784038e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 15:09 L: merged deliver/A2/Sheaf.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends (stage 3; reviewer PASS; first push; landing 20261012T150948-L-2228794 (proof); batch 20261012T150947; modules 1; new nodes 0)
+- 15:09 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationData (stage 3; reviewer PASS; first push; landing 20261012T150948-L-2228963 (interface); batch 20261012T150947; modules 3; new nodes 2)

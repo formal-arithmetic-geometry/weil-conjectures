@@ -17,6 +17,8 @@ public import Mathlib.GroupTheory.PGroup
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.RepresentationTheory.SylowModuleFiltration
 import Sheaf.FieldTheory.OpenSubgroupFixedField
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationCore
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryAnnihilator
 
 /-! # Generic primary filtration with its terminal identification
 
@@ -95,6 +97,11 @@ theorem exists_generic_primary_coarse_filtration_data
           ∃ (d : ℕ), q.IsFiniteLocallyFreeOfDegree d ∧ d.Coprime ℓ ∧
           ∃ (e : ℕ), (ℓ ^ e) • 𝟙 M = 0 ∧
             Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1} q).obj M ≅ F n) := by
-  sorry
+  obtain ⟨D, π, hπ, hconn, hsmooth, haff, hIntegral, n, F, hzero, hchain,
+    q, hsquare, hqetale, d, hdegree, hcop, hterm⟩ :=
+    exists_generic_primary_coarse_filtration_core f hmodel M ℓ hℓ hfinite hprimary
+  obtain ⟨e, hkill⟩ := exists_primary_annihilator f M ℓ hℓ hfinite hprimary
+  exact ⟨D, π, hπ, hconn, hsmooth, haff, hIntegral, n, F, hzero, hchain,
+    q, hsquare, hqetale, d, hdegree, hcop, e, hkill, hterm⟩
 
 end AlgebraicGeometry.IsConnectedCurve
