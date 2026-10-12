@@ -294,7 +294,7 @@ theorem _root_.AlgebraicGeometry.Etale.cohomologyRestrict_cohomologyClass
     (hz : U.IsCocycle F q z) :
     Etale.cohomologyRestrict Λ g F q (hU.cohomologyClass F q z hz) =
       (hU.baseChange g).cohomologyClass _ q (Etale.pullbackSection Λ g F (U.obj q) z)
-        (by sorry) :=
+        (hz.map ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F)) :=
   sorry
 
 end BaseChange

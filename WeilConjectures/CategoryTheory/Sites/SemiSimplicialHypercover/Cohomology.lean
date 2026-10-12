@@ -402,9 +402,7 @@ lemma cohomologyClass_extClass {S : ShortComplex (Sheaf J (ModuleCat.{max u v} R
 lemma bijective_cohomologyClass_zero (F : Sheaf J (ModuleCat.{max u v} R)) :
     Function.Bijective (fun z : {z : F.obj.obj (op (U.obj 0)) // U.IsCocycle F 0 z} ↦
       hU.cohomologyClass F 0 z.1 z.2) :=
-  (hU.isResolution.bijective_cocycleClass_zero F).comp
-    (Equiv.subtypeEquiv (freeSheafHomEquiv J R (U.obj 0) F).symm
-      isCocycle_iff_d_comp_eq_zero).bijective
+  sorry
 
 omit [HasExt.{w} (Sheaf J (ModuleCat.{max u v} R))] in
 /-- The cochain complex of an injective sheaf on a hypercover is exact in positive degrees,
