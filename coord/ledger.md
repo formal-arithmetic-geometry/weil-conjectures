@@ -6328,3 +6328,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: returned deliver/S1/Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound (reviewer RETURN: (the landing tools, head 32e310a8d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 06:07 L: merged deliver/A2/Sheaf.AlgebraicGeometry.DimensionBaseChange (stage 3; reviewer PASS; first push; landing 20261012T060729-L-2903137 (interface); batch 20261012T060728; modules 2; new nodes 1)
 - 06:07 L: merged deliver/A2/Sheaf.AlgebraicGeometry.DivisorClassCurve (stage 3; reviewer PASS; first push; landing 20261012T060729-L-2903279 (interface); batch 20261012T060728; modules 2; new nodes 2)
+- 06:07 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent (stage 3; reviewer PASS; first push; landing 20261012T060729-L-2903388 (proof); batch 20261012T060728; modules 1; new nodes 0)
