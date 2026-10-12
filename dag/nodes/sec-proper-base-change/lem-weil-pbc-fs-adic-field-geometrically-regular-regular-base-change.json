@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-fs-adic-field-geometrically-regular-regular-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-fs-adic-field-geometrically-regular",
+   "place": "intermediate theorem extracted from steps 1--4",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite purely inseparable base change of a formally smooth adic local algebra is regular",
+ "statement": "Let k be a field and C a Noetherian local k-algebra formally smooth for its maximal-ideal-adic topology. For every finite purely inseparable field extension k' / k, the ring k' tensor_k C is regular.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Theorem Tag 07EL, implication (2) => (1), proof lines 9894--9907"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "lem-weil-pbc-fs-adic-base-change",
+  "lem-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-field-regular-local",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "proof": [
+  {
+   "text": "Base change formal smoothness to the tensor product, upgrade from the extended maximal ideal to the unique maximal ideal using ideal containment and the square-zero lifting criterion, then apply Tag 07EI and localize at primes. Transport regularity across the canonical tensor-factor swap.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+    "lem-weil-pbc-fs-adic-base-change",
+    "lem-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-fs-adic-field-regular-local",
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Theorem Tag 07EL, implication (2) => (1), proof lines 9894--9907"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "lem-weil-pbc-fs-adic-base-change",
+  "lem-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-field-regular-local",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Theorem Tag 07EL, implication (2) => (1), lines 9894--9907"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local algebra over a field formally smooth for the maximal ideal adic topology is regular local ring",
+   "results": "RingHom.FormallySmooth, Algebra.IsSmoothAt (Mathlib.RingTheory.Smooth.Locus), Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.iff_comp_surjective, Algebra.Smooth.formallySmooth (Mathlib.RingTheory.Smooth.Basic), Algebra.FormallySmooth.exists_kerProj_comp_eq_id (Mathlib.RingTheory.Smooth.AdicCompletion), Algebra.Smooth.flat_of_isNoetherianRing: nothing on regularity",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local ring formally smooth over a field is geometrically regular; regular local ring from formal smoothness",
+   "results": "Algebra.instSmoothOfIsStandardSmooth (Mathlib.RingTheory.Smooth.StandardSmoothCotangent), Algebra.IsSmoothAt, Algebra.smoothLocus_eq_univ_iff (Mathlib.RingTheory.Smooth.Locus), Algebra.Smooth, Algebra.smooth_iff (Mathlib.RingTheory.Smooth.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsRegularLocalRing",
+   "results": "none (no declaration mentions both)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'GeometricallyRegular|geometrically regular|IsGeometricallyRegular' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn FormallySmooth /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RegularLocalRing/",
+   "results": "none: Mathlib has no geometrically regular algebras, and RegularLocalRing/ (Defs.lean, Polynomial.lean) never mentions formal smoothness",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsRegularLocalRing (project ~/weil-conjectures-slopmaster2)",
+   "results": "IsRegularLocalRing (Mathlib/RingTheory/RegularLocalRing/Defs.lean), IsRegularLocalRing.of_isRegularRing_of_isLocalRing (Mathlib), and slopmaster2 lemmas isDomain, isIntegrallyClosed, isDiscreteValuationRing, quotient_span_singleton (WeilConjectures/Mathlib/RingTheory/RegularLocalRing/Defs.lean): no formal smoothness; index unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fs-adic-field-geometrically-regular",
+  "worker": "stage1",
+  "summary": "Read Stacks 07EL (theorem-regular-fs), 07EG (lemma-base-change-fs), and 07EI (lemma-fs-implies-regular). Kept the statement and its dependencies. Reused the existing purely inseparable base-change locality node, adic base-change node, regular-local localization node, and tensor-product public universal property. Wrote the needed topology change directly as a square-zero lifting argument from I contained in the new maximal ideal; no cofinality claim is assumed. Created only the strictly smaller 07EI regular-local helper, with three kinds of Mathlib search and no proof. The argument handles both characteristics and the degree-one extension."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularTensorProductOfFormallySmoothAdic",
+  "declaration": "Algebra.isRegularRing_tensorProduct_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/RegularTensorProductOfFormallySmoothAdic.lean",
+  "statement": "theorem isRegularRing_tensorProduct_of_formallySmoothAdic (k : Type u) (C : Type v) (k' : Type (max u v)) [Field k] [CommRing C] [Algebra k C] [IsNoetherianRing C] [IsLocalRing C] [Field k'] [Algebra k k'] [Module.Finite k k'] [IsPurelyInseparable k k'] (h : FormallySmoothAdic k C (IsLocalRing.maximalIdeal C)) : IsRegularRing (k' ⊗[k] C)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194138-L-464329",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194138-L-464329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

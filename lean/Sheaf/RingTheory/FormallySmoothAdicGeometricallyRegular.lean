@@ -7,10 +7,7 @@ module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.FormallySmoothAdicBaseChange
-import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
-import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
+import Sheaf.RingTheory.RegularTensorProductOfFormallySmoothAdic
 
 /-!
 # Geometric regularity from maximal-ideal-adic formal smoothness
@@ -52,6 +49,8 @@ theorem isGeometricallyRegular_of_formallySmoothAdic (k : Type u) (C : Type v)
     [Field k] [CommRing C] [Algebra k C] [IsNoetherianRing C] [IsLocalRing C]
     (h : FormallySmoothAdic k C (IsLocalRing.maximalIdeal C)) :
     IsGeometricallyRegular k C := by
-  sorry
+  refine ⟨inferInstance, ?_⟩
+  intro k' _ _ _ _
+  exact isRegularRing_tensorProduct_of_formallySmoothAdic k C k' h
 
 end Algebra
