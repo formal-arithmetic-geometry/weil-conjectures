@@ -177,9 +177,10 @@ theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLower
       ((leftDerivedUpperStarIsoMapDerivedCategory _ _).symm.app _ ≪≫
         asIso ((derivedBaseChangeMap _ sq.toCommSq).app N))
 
-/-- **The comparison of unbounded derived lower shrieks along a refinement is an
-isomorphism** for torsion coefficients: for a refinement `r : c.Refinement d` whose square over
-`X` is cartesian, the comparison `Rf_!(d)[Λ] ⟶ Rf_!(c)[Λ]` is an isomorphism. The composition
+/-- Blueprint `lem-amb-etale-compact-comparisons` (isomorphism clause; the blueprint states it
+for Noetherian schemes): **the comparison of unbounded derived lower shrieks along a refinement
+is an isomorphism** for torsion coefficients: for a refinement `r : c.Refinement d` whose square
+over `X` is cartesian, the comparison `Rf_!(d)[Λ] ⟶ Rf_!(c)[Λ]` is an isomorphism. The composition
 and base change factors of the comparison are isomorphisms, and so is the unit factor, by
 `isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek`, which rests
 on proper base change for `r.hom`. This is the unbounded form of `BA43-RHO`. -/

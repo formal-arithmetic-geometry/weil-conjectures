@@ -140,7 +140,7 @@ change property for `pₙ` comes from that of `ℙ¹` by the symmetric-product m
 transfers to `f` because it composes and cancels along proper surjections. See the module
 docstring for the steps, and for the noetherian-freeness of the Chow factorisation the
 statement uses.
-(blueprint: `prop:weil-pbc-reduction-to-projective-line`) -/
+(blueprint: `prop-weil-pbc-reduction-to-projective-line`) -/
 @[stacks 0A4F]
 theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
     (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
