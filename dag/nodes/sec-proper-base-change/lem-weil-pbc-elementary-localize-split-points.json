@@ -1,0 +1,197 @@
+{
+ "id": "lem-weil-pbc-elementary-localize-split-points",
+ "kind": "statement",
+ "title": "Elementary localization of enumerated purely inseparable fibre points",
+ "statement": "Let f:X→S be locally of finite type [def-weil-finite-type-morphism], let φ:U→S be any scheme morphism, let u∈U and x:Fin n→X, and put P=X×_S U [def-pc-fibre-product] with projections p,q. Fix integers m_i≥0 and points y_{i,j}∈P. Assume that p(y_{i,j})=x_i; q(y_{i,j})=u with κ(u)→κ(y_{i,j}) [def-weil-residue-field] finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]; each y_{i,j} is isolated in its q-fibre [def-pc-scheme-fibre]; the whole sigma family (i,j)↦y_{i,j} is injective; and these points exhaust all w with q(w)=u and p(w)=x_i. There exist an étale ψ:U'→U [def-weil-etale-morphism] and u'∈U' with ψ(u')=u, and opens V_{i,j}⊆X×_S U' with distinguished points v_{i,j}∈V_{i,j}, indexed by the SAME m_i, such that each V_{i,j}→U' is finite [def-weil-finite-integral-morphism]; v_{i,j} is its unique point above u'; the induced extension κ(u')→κ(v_{i,j}) is finite purely inseparable; the projection to X sends v_{i,j} to x_i; the images of all v_{i,j} in X×_S U' are distinct; and every point there over u' mapping to x_i is one of these images. The map X×_S U'→X is the first projection of the pullback of f and ψ followed by φ. No étaleness assumption on φ is used.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LM, proof lines 12056--12089; the final verification uses Schemes, Lemma 01JT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The projection q:P→U is locally of finite type by base change. Enumerate the finite sigma family y by Fin N. Apply the elementary simultaneous finite-open theorem to q, u and this list, using the assumed isolatedness. This gives ψ:U′→U with ψ(u′)=u, κ(u)→κ(u′) an isomorphism, and finite opens in P×_U U′ with unique points over u′, mapping to each y and with unchanged residue field.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-etale-local-finite-multiple-points-elementary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  },
+  {
+   "text": "Use pullback pasting to identify P×_U U′ with X×_S U′ for f and ψ≫φ. Transport the opens, points and morphisms along this scheme isomorphism. Finiteness and uniqueness over u′ are preserved. The first projection sends the chosen point to y_{i,j} and then x_i.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  },
+  {
+   "text": "Apply Scheme.residueFieldMap_comp to the equality of the two composites in the pullback square, with residueFieldCongr for the displayed point equalities. This gives a commuting square κ(u)→κ(y) and κ(u′)→κ(v). Its vertical maps are isomorphisms by the elementary theorem used in step 1. Under these identifications, the images of a finite generating set still generate; if a p-power of an element lies in the base, its image has the same p-power in the identified base. Thus finiteness and pure inseparability transport. This is an elementary transport of the assumed extension properties, not an additional residue-field theorem.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  },
+  {
+   "text": "Project equality of two output points to P: the assumed injectivity of the sigma family forces equality of their indices. For exhaustion, a final point w over u′ and x_i projects to y_{i,j} by the given exhaustion. The lifts over (y_{i,j},u′) correspond to primes of κ(y_{i,j})⊗_{κ(u)}κ(u′). The base residue map is an isomorphism, so this tensor ring is the field κ(y_{i,j}) and has exactly one prime. The distinguished point is one such lift, hence w is that point.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-fibre-product-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 02LM; extracted subargument with the omitted verification written out from Schemes 01JT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_etale|quasiFiniteAt_iff_isOpen|PurelyInseparable",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of isolated fiber points admits an etale neighborhood with finite open pieces and purely inseparable residue fields",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.isOpen_etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt.comp, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsFinite",
+   "results": "1 hits: AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "grep",
+   "query": "Triplet|ofPointTensor|primeSpectrum|residueField",
+   "results": "5 hits: 9, 39, 41, 53, 56",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite residue extensions admit an etale neighborhood whose fiber product points form finite lists with purely inseparable residue fields",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.IsEtaleAt.comp, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFormallyUnramifiedResidueField_1, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.Etale.exists_subalgebra_fg, RingHom.EssFiniteType.residueFieldMap",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsPurelyInseparable",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There is an etale neighborhood splitting finitely many finite residue extensions so all lifted points have purely inseparable residue fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elementary etale neighborhood makes a finite family of isolated fiber points into finite open subschemes preserving residue fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "step 3, 6 of its split (source: Stacks Lemma 0A3R, proof ('We claim that $T=Y/H\\to S$ works'); Fundamental Groups Section 03SF (pione-section-finite-etale-under-galois) and Theorem 0BND (pione-theorem-fundamental-group))",
+   "via": [
+    "lem-weil-pbc-etale-local-finite-multiple-points",
+    "lem-weil-pbc-unramified-etale-local-decomposition",
+    "lem-weil-pbc-finite-unramified-etale-local",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ElementaryLocalizeSplitPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/ElementaryLocalizeSplitPoints.lean",
+  "declaration": "AlgebraicGeometry.exists_elementary_localize_split_points",
+  "statement": "theorem exists_elementary_localize_split_points\n    {X S U : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]\n    (φ : U ⟶ S) (u : U) (n : ℕ) (x : Fin n → X) (m : Fin n → ℕ)\n    (y : (i : Fin n) → Fin (m i) → ↥(pullback f φ))\n    (hyx : ∀ i j, pullback.fst f φ (y i j) = x i)\n    (hy : ∀ i j, ∃ (h : pullback.snd f φ (y i j) = u),\n      letI := ((U.residueFieldCongr h.symm).hom ≫\n        (pullback.snd f φ).residueFieldMap (y i j)).hom.toAlgebra\n      Module.Finite (U.residueField u) ((pullback f φ).residueField (y i j)) ∧\n        IsPurelyInseparable (U.residueField u) ((pullback f φ).residueField (y i j)))\n    (hisolated : ∀ i j, IsOpen ({(pullback.snd f φ).asFiber (y i j)} :\n      Set ((pullback.snd f φ).fiber ((pullback.snd f φ) (y i j)))))\n    (hinj : Function.Injective (fun a : (i : Fin n) × Fin (m i) ↦ y a.1 a.2))\n    (hex : ∀ (i : Fin n) (w : ↥(pullback f φ)),\n      pullback.snd f φ w = u → pullback.fst f φ w = x i →\n        ∃ j : Fin (m i), w = y i j) :\n    ∃ (U' : Scheme.{u}) (ψ : U' ⟶ U) (u' : U'), Etale ψ ∧ ψ u' = u ∧\n      ∃ (V : (i : Fin n) → Fin (m i) → (pullback f (ψ ≫ φ)).Opens)\n        (v : (i : Fin n) → (j : Fin (m i)) → (V i j).toScheme),\n        (∀ (i : Fin n) (j : Fin (m i)),\n          IsFinite ((V i j).ι ≫ pullback.snd f (ψ ≫ φ)) ∧\n          ∃ (hv : ((V i j).ι ≫ pullback.snd f (ψ ≫ φ)) (v i j) = u'),\n            (∀ w : (V i j).toScheme,\n              ((V i j).ι ≫ pullback.snd f (ψ ≫ φ)) w = u' → w = v i j) ∧\n            (letI := ((U'.residueFieldCongr hv.symm).hom ≫\n              ((V i j).ι ≫ pullback.snd f (ψ ≫ φ)).residueFieldMap (v i j)).hom.toAlgebra\n             Module.Finite (U'.residueField u') ((V i j).toScheme.residueField (v i j)) ∧\n               IsPurelyInseparable (U'.residueField u')\n                 ((V i j).toScheme.residueField (v i j))) ∧\n            ((V i j).ι ≫ pullback.fst f (ψ ≫ φ)) (v i j) = x i) ∧\n        Function.Injective\n          (fun a : (i : Fin n) × Fin (m i) ↦ (V a.1 a.2).ι (v a.1 a.2)) ∧\n        (∀ (i : Fin n) (w : ↥(pullback f (ψ ≫ φ))),\n          pullback.snd f (ψ ≫ φ) w = u' → pullback.fst f (ψ ≫ φ) w = x i →\n            ∃ j : Fin (m i), w = (V i j).ι (v i j))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

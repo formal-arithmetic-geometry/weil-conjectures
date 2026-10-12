@@ -1,0 +1,192 @@
+{
+ "id": "lem-weil-pbc-etale-split-residue-points",
+ "kind": "statement",
+ "title": "Finite residue extensions split into purely inseparable fibre-product points",
+ "statement": "Let f:X→S be any morphism of schemes [def-pc-scheme], s∈S, n≥0 and points x:Fin n→X with f(x_i)=s. Assume that for every i the induced extension κ(f(x_i))→κ(x_i) [def-weil-residue-field] is finite. There exist a scheme U, an étale morphism φ:U→S [def-weil-etale-morphism], u∈U with φ(u)=s, integers m_i≥0 and points y_{i,j}∈X×_S U [def-pc-fibre-product], j∈Fin(m_i), such that each list j↦y_{i,j} is injective; p(y_{i,j})=x_i; q(y_{i,j})=u and the induced extension κ(u)→κ(y_{i,j}) is finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]; and for every point w of X×_S U with q(w)=u and p(w)=x_i there is j with w=y_{i,j}. No local-finite-type or isolatedness assumption is needed beyond the stated finiteness of the residue extensions; the input points need not be distinct.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02LM, proof lines 12056--12089; the final verification uses Schemes, Lemma 01JT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Identify κ(f(x_i)) with κ(s) using f(x_i)=s. Transport the finite extensions to κ(s), and apply the common separable splitting theorem to obtain a finite separable L/κ(s) such that every prime quotient of L⊗κ(x_i) is a finite purely inseparable field over L.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  },
+  {
+   "text": "Realize L as κ(u) in an étale neighborhood φ:U→S, compatibly with the map from κ(s). Transport the tensor products, their spectra and the quotient extension properties across this field isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  },
+  {
+   "text": "The points over each pair (x_i,u) are in bijection with the primes of κ(x_i)⊗κ(u). Commute the tensor factors to compare with the tensors from the splitting theorem. The prime spectra are finite. Choose a bijection from Fin(m_i) for each i, giving y_{i,j}, injectivity of each list, the two projection identities and exhaustion.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  },
+  {
+   "text": "The tensor prime quotient is already a field. Identify it with κ(y_{i,j}) compatibly with q by the fibre-product residue-field theorem. Transport finite-module generation and pure inseparability across that compatible field isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+  "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 02LM; extracted subargument with the omitted verification written out from Schemes 01JT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_etale|quasiFiniteAt_iff_isOpen|PurelyInseparable",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of isolated fiber points admits an etale neighborhood with finite open pieces and purely inseparable residue fields",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.isOpen_etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt.comp, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsFinite",
+   "results": "1 hits: AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "grep",
+   "query": "Triplet|ofPointTensor|primeSpectrum|residueField",
+   "results": "5 hits: 9, 39, 41, 53, 56",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite residue extensions admit an etale neighborhood whose fiber product points form finite lists with purely inseparable residue fields",
+   "results": "8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.IsEtaleAt.comp, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFormallyUnramifiedResidueField_1, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.Etale.exists_subalgebra_fg, RingHom.EssFiniteType.residueFieldMap",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsPurelyInseparable",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No matching scheme-level theorem; the quasi-finite finite-open result needs separatedness and does not supply this simultaneous residue splitting and exhaustion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There is an etale neighborhood splitting finitely many finite residue extensions so all lifted points have purely inseparable residue fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elementary etale neighborhood makes a finite family of isolated fiber points into finite open subschemes preserving residue fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "step 3, 6 of its split (source: Stacks Lemma 0A3R, proof ('We claim that $T=Y/H\\to S$ works'); Fundamental Groups Section 03SF (pione-section-finite-etale-under-galois) and Theorem 0BND (pione-theorem-fundamental-group))",
+   "via": [
+    "lem-weil-pbc-etale-local-finite-multiple-points",
+    "lem-weil-pbc-unramified-etale-local-decomposition",
+    "lem-weil-pbc-finite-unramified-etale-local",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSplitResiduePoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSplitResiduePoints.lean",
+  "declaration": "AlgebraicGeometry.exists_etale_split_residue_points",
+  "statement": "theorem exists_etale_split_residue_points\n    {X S : Scheme.{u}} (f : X ⟶ S) (s : S) (n : ℕ) (x : Fin n → X)\n    (hx : ∀ i, f (x i) = s)\n    (hfinite : ∀ i, letI := (f.residueFieldMap (x i)).hom.toAlgebra\n      Module.Finite (S.residueField (f (x i))) (X.residueField (x i))) :\n    ∃ (U : Scheme.{u}) (φ : U ⟶ S) (u : U), Etale φ ∧ φ u = s ∧\n      ∃ (m : Fin n → ℕ) (y : (i : Fin n) → Fin (m i) → ↥(pullback f φ)),\n        (∀ i, Function.Injective (y i)) ∧\n        (∀ i j, pullback.fst f φ (y i j) = x i) ∧\n        (∀ i j, ∃ (hy : pullback.snd f φ (y i j) = u),\n          letI := ((U.residueFieldCongr hy.symm).hom ≫\n            (pullback.snd f φ).residueFieldMap (y i j)).hom.toAlgebra\n          Module.Finite (U.residueField u) ((pullback f φ).residueField (y i j)) ∧\n            IsPurelyInseparable (U.residueField u)\n              ((pullback f φ).residueField (y i j))) ∧\n        (∀ (i : Fin n) (w : ↥(pullback f φ)),\n          pullback.snd f φ w = u → pullback.fst f φ w = x i →\n            ∃ j : Fin (m i), w = y i j)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -33,113 +33,81 @@
  ],
  "proof": [
   {
-   "text": "Residue fields. For each $i$ the morphism $f$ is locally of finite type and $x_i$ is isolated in $X_s$, so by [lem-weil-pbc-isolated-fibre-point-residue-finite] the extension $\\kappa(s)\\to\\kappa(x_i)$ is finite [def-weil-residue-field]. (Stacks phrases this as: $f$ is quasi-finite at $x_i$ (Morphisms 01TH), hence $\\kappa(x_i)/\\kappa(s)$ is finite (Morphisms 01TG).)",
+   "text": "For each i use isolated-fibre residue finiteness to obtain Module.Finite for κ(f(x_i))→κ(x_i).",
    "uses": [
-    "lem-weil-pbc-isolated-fibre-point-residue-finite",
-    "def-weil-residue-field"
+    "lem-weil-pbc-isolated-fibre-point-residue-finite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 02LM, lines 12056-12059"
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
    }
   },
   {
-   "text": "Choice of the etale neighbourhood $(U,u)$. Apply [lem-weil-pbc-separable-split-purely-inseparable-residue-fields] to $k=\\kappa(s)$ and $K_i=\\kappa(x_i)$ (finite over $\\kappa(s)$ by step 1): it gives a finite separable algebraic extension $L/\\kappa(s)$ [def-weil-pbc-separable-algebraic-extension] such that for every $i$ the ring $L\\otimes_{\\kappa(s)}\\kappa(x_i)$ has finitely many primes and each of its quotients by a prime is a field, finite purely inseparable over $L$ [def-weil-pbc-finite-purely-inseparable-extension]. (In Stacks: $L_i\\subseteq\\kappa(x_i)$ the separable closure of $\\kappa(s)$, $L$ a finite Galois extension receiving every $L_i$.) Apply [lem-weil-pbc-etale-neighbourhood-prescribed-residue-field] to $s$ and $L$: there are an etale morphism $\\varphi:U\\to S$ [def-weil-etale-morphism] and $u\\in U$ with $\\varphi(u)=s$ and a $\\kappa(s)$-isomorphism $L\\cong\\kappa(u)$. Transporting along this isomorphism (which induces a ring isomorphism $L\\otimes_{\\kappa(s)}\\kappa(x_i)\\cong\\kappa(u)\\otimes_{\\kappa(s)}\\kappa(x_i)$ compatible with the maps from $L$ and $\\kappa(u)$), for every $i$ the ring $\\kappa(u)\\otimes_{\\kappa(s)}\\kappa(x_i)$ has finitely many primes, and the quotient by any prime $\\mathfrak p$ is a field which is a finite purely inseparable extension of $\\kappa(u)$.",
+   "text": "Apply exists_etale_split_residue_points to the input family and its finite residue extensions. Obtain φ:U→S, u above s and the enumerated lifts y with finite purely inseparable residue extensions and exact exhaustion.",
    "uses": [
-    "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
-    "def-weil-etale-morphism"
+    "lem-weil-pbc-etale-split-residue-points"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 02LM, lines 12060-12068 (choice of L_i, L, and (U,u) by Lemma 02LF, more-morphisms-lemma-realize-prescribed-residue-field-extension-etale, line 10138); the field theory is packaged in the new node"
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
    }
   },
   {
-   "text": "The points $y_{i,j}$. Let $X_U=X\\times_SU$ [def-pc-fibre-product] with projections $p:X_U\\to X$ and $q:X_U\\to U$. By [lem-weil-pbc-fibre-product-points] the points $y\\in X_U$ with $p(y)=x_i$ and $q(y)=u$ are in bijection with the primes of $\\kappa(x_i)\\otimes_{\\kappa(s)}\\kappa(u)\\cong\\kappa(u)\\otimes_{\\kappa(s)}\\kappa(x_i)$, a finite set by step 2; enumerate them as $y_{i,1},\\dots,y_{i,m_i}$ ($m_i\\ge0$). Points with different $i$ are different since their images under $p$ are, so all the $y_{i,j}$ are pairwise distinct, and they are exactly the points of $X_U$ over $u$ mapping to some $x_i$. For the prime $\\mathfrak p_{i,j}$ attached to $y_{i,j}$ the quotient $(\\kappa(x_i)\\otimes_{\\kappa(s)}\\kappa(u))/\\mathfrak p_{i,j}$ is a field (step 2), so by [lem-weil-pbc-fibre-product-point-residue-field] it is isomorphic to $\\kappa(y_{i,j})$ compatibly with the maps from $\\kappa(u)$; hence $\\kappa(u)\\to\\kappa(y_{i,j})$ (induced by $q$) is finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension].",
+   "text": "Use isolated_fiber_point_base_change and p(y_{i,j})=x_i to transport the input isolatedness to the lifts.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-points",
-    "lem-weil-pbc-fibre-product-point-residue-field",
-    "def-weil-pbc-finite-purely-inseparable-extension"
+    "lem-weil-pbc-isolated-fibre-point-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 02LM, lines 12070-12079 (points of X_U over x_i and u via Schemes, Lemma 01JT, schemes-lemma-points-fibre-product, line 3265, including its residue field clause)"
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
    }
   },
   {
-   "text": "Hypotheses for the elementary case. The second projection $q:X_U\\to U$ is locally of finite type by [lem-weil-pbc-lft-base-change]. Each $y_{i,j}$ lies over $x_i$ and $u$, and $x_i$ is isolated in $X_s$; by [lem-weil-pbc-isolated-fibre-point-base-change] (with $g=\\varphi:U\\to S$) the point $y_{i,j}$ is isolated in the fibre $(X_U)_u$ of $q$ [def-pc-scheme-fibre].",
-   "uses": [
-    "lem-weil-pbc-lft-base-change",
-    "lem-weil-pbc-isolated-fibre-point-base-change",
-    "def-pc-scheme-fibre"
-   ],
-   "elementary": false,
+   "text": "Prove global injectivity of the sigma family: equality of two lifts gives equality of x_i under p, hence equality of i by input injectivity, then equality of j by list injectivity.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 02LM, lines 12079-12081 (Morphisms, Lemma 01TM, morphisms-lemma-base-change-quasi-finite, with 01TH)"
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
    }
   },
   {
-   "text": "Application of the elementary case. Apply [lem-weil-pbc-etale-local-finite-multiple-points-elementary] to $q:X_U\\to U$, the point $u$ and the finitely many points $y_{i,j}$: there are an etale morphism $\\psi:U'\\to U$ and $u'\\in U'$ with $\\psi(u')=u$ and $\\kappa(u)\\to\\kappa(u')$ an isomorphism, and open subschemes $V_{i,j}$ of $X_U\\times_UU'$, each finite over $U'$ [def-weil-finite-integral-morphism], with exactly one point $v_{i,j}\\in V_{i,j}$ over $u'$, which maps to $y_{i,j}$ with $\\kappa(y_{i,j})\\to\\kappa(v_{i,j})$ an isomorphism. By [lem-weil-pbc-cartesian-square-pasting] (lower square $X_U\\to X$ over $U\\to S$, upper square $X_U\\times_UU'\\to X_U$ over $U'\\to U$), $X_U\\times_UU'$ with the composite projection to $X$ and its projection to $U'$ is a fibre product $X\\times_SU'$ of $f$ and $\\varphi\\circ\\psi$ [def-pc-fibre-product]; so the $V_{i,j}$ are open subschemes of $X\\times_SU'$, finite over $U'$. By [lem-weil-pbc-etale-composition-cancellation] (2) the composite $\\varphi\\circ\\psi:U'\\to S$ is etale [def-weil-etale-morphism], and it maps $u'$ to $s$: $(U',u')$ is an etale neighbourhood of $(S,s)$. This is the neighbourhood and these are the opens of the statement.",
+   "text": "Apply exists_elementary_localize_split_points to these isolated, enumerated purely inseparable points and their exhaustive distinct lists. Obtain ψ:U′→U, u′ and finite opens with all required point and residue properties.",
    "uses": [
-    "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-etale-morphism"
+    "lem-weil-pbc-elementary-localize-split-points"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 02LM, lines 12083-12089 (application of Lemma 02LL, more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points, line 11974); the identification X_U x_U U' = X x_S U' is implicit there"
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
    }
   },
   {
-   "text": "Verification (omitted in Stacks; written by the agent). Property (i) and the uniqueness in (ii) hold by step 5. Residue fields: the square formed by $\\kappa(u)\\to\\kappa(y_{i,j})$, $\\kappa(u)\\to\\kappa(u')$, $\\kappa(y_{i,j})\\to\\kappa(v_{i,j})$, $\\kappa(u')\\to\\kappa(v_{i,j})$ commutes [def-weil-residue-field] and its two maps out of $\\kappa(u)$, $\\kappa(y_{i,j})$ to the primed fields are isomorphisms, so $\\kappa(u')\\to\\kappa(v_{i,j})$ is isomorphic to $\\kappa(u)\\to\\kappa(y_{i,j})$, finite purely inseparable by step 3 [def-weil-pbc-finite-purely-inseparable-extension]; this is (ii). The point $v_{i,j}$ maps to $y_{i,j}$ and hence to $x_i$ in $X$; distinct pairs $(i,j)$ give distinct $y_{i,j}$ (step 3), hence distinct $v_{i,j}$; this is (iv) and the first half of (iii). Finally let $w$ be a point of $X\\times_SU'=X_U\\times_UU'$ over $u'$ mapping to $x_i$; it corresponds to a point of the fibre $(X\\times_SU')_{u'}$ and conversely [def-pc-scheme-fibre]. Its image $y$ in $X_U$ lies over $u$ and $x_i$, so $y=y_{i,j}$ for some $j$ (step 3). By [lem-weil-pbc-fibre-product-points] for $X_U\\times_UU'$, the points over $(y_{i,j},u')$ correspond to the primes of $\\kappa(y_{i,j})\\otimes_{\\kappa(u)}\\kappa(u')\\cong\\kappa(y_{i,j})$ (as $\\kappa(u)\\to\\kappa(u')$ is an isomorphism), a field with exactly one prime; since $v_{i,j}$ is such a point, $w=v_{i,j}$. So no other point of $(X\\times_SU')_{u'}$ maps to $x_i$: this is the second half of (iii).",
+   "text": "Compose the two étale maps using the Mathlib instance Etale.etale_comp. Evaluate (ψ≫φ)(u′) as φ(ψ(u′)) and substitute the two base-point equalities. Supply the SAME m_i and the resulting opens and points to the original existential conclusion.",
    "uses": [
-    "def-weil-residue-field",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-fibre-product-points"
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 02LM, line 12089 ('We omit the verifications'); the verification is written by the agent from Schemes, Lemma 01JT"
+    "place": "Proof of Lemma 02LM, lines 12056--12089"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-isolated-fibre-point-residue-finite",
-  "def-weil-residue-field",
-  "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
-  "def-weil-pbc-separable-algebraic-extension",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field",
-  "def-weil-etale-morphism",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-points",
-  "lem-weil-pbc-fibre-product-point-residue-field",
-  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-etale-split-residue-points",
   "lem-weil-pbc-isolated-fibre-point-base-change",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-elementary-localize-split-points",
   "lem-weil-pbc-etale-composition-cancellation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 02LM (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points-var, line 12019), proof lines 12053-12089; the final verification, which Stacks omits, is written by the agent (step 6)"
+  "place": "Lean reduction of Lemma 02LM into its residue-splitting and elementary-localization subarguments, preserving all original clauses"
  },
  "mathlib_searches": [
   {
@@ -241,5 +209,15 @@
     "note": "Apply to the finite set of distinct input points (deduplicate the list); assign m_i=0 to redundant indices in the decomposition. The exclusion and disjointness uses remain valid."
    }
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
