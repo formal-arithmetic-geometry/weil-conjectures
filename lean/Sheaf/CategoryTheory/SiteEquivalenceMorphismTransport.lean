@@ -1,9 +1,9 @@
 module
 
-public import Sheaf.CategoryTheory.SiteMorphismComposition
+import Sheaf.CategoryTheory.SiteMorphismComposition
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
 import Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites
+import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.Paper.SiteCoveringIsomorphicFamily
 
 /-!
@@ -72,6 +72,64 @@ theorem site_equivalence_morphism_transport
         JA.toGrothendieck JB.toGrothendieck) ∧
       PreservesFiniteColimits (sheafPullback u' (Type u)
         JA.toGrothendieck JB.toGrothendieck) := by
-  sorry
+  obtain ⟨_, hpull, _, hp, _, _, _, _, _, hplim, hpcolim, _⟩ :=
+    site_equivalence_is_morphism_of_sites JA JC p p.inv
+      p.asEquivalence.unitIso p.asEquivalence.counitIso hpcover
+  obtain ⟨hqcover', _, hqpull', _, hq', _, _, _, _, _, _, hqlim', hqcolim', _⟩ :=
+    site_equivalence_is_morphism_of_sites JB JD q q.inv
+      q.asEquivalence.unitIso q.asEquivalence.counitIso hqcover
+  have := hplim
+  have := hpcolim
+  have := hqlim'
+  have := hqcolim'
+  have : PreservesFiniteLimits (sheafPullback p (Type u)
+      JA.toGrothendieck JC.toGrothendieck) :=
+    preservesFiniteLimits_of_natIso (sheafPullbackIso p (Type u) _ _)
+  have : PreservesFiniteColimits (sheafPullback p (Type u)
+      JA.toGrothendieck JC.toGrothendieck) :=
+    preservesFiniteColimits_of_natIso (sheafPullbackIso p (Type u) _ _)
+  have : PreservesFiniteLimits (sheafPullback q.inv (Type u)
+      JD.toGrothendieck JB.toGrothendieck) :=
+    preservesFiniteLimits_of_natIso (sheafPullbackIso q.inv (Type u) _ _)
+  have : PreservesFiniteColimits (sheafPullback q.inv (Type u)
+      JD.toGrothendieck JB.toGrothendieck) :=
+    preservesFiniteColimits_of_natIso (sheafPullbackIso q.inv (Type u) _ _)
+  obtain ⟨hpucover, hpupull, hpu, _, _, _, _, ⟨hpulim⟩, ⟨hpucolim⟩⟩ :=
+    siteMorphism_composition JD JC JA u p hucover hupullback
+      (fun X R hR => (hpcover X R).mp hR) hpull
+  have := hpulim
+  have := hpucolim
+  obtain ⟨hwcover, hwpull, hw, _, _, _, _, ⟨hwlim⟩, ⟨hwcolim⟩⟩ :=
+    siteMorphism_composition JB JD JA q.inv (p ⋙ u)
+      (fun X R hR => (hqcover' X R).mp hR) hqpull' hpucover hpupull
+  have := hwlim
+  have := hwcolim
+  let θ : u' ≅ (p ⋙ u) ⋙ q.inv :=
+    u'.rightUnitor.symm ≪≫ Functor.isoWhiskerLeft u' q.asEquivalence.unitIso ≪≫
+      (Functor.associator u' q q.inv).symm ≪≫ Functor.isoWhiskerRight α q.inv
+  have hcover : ∀ (X : A) (R : Presieve X), R ∈ JA X →
+      R.map u' ∈ JB (u'.obj X) := by
+    intro X R hR
+    obtain ⟨ι, Y, f, rfl⟩ := R.exists_eq_ofArrows
+    have hf := hwcover X (Presieve.ofArrows Y f) hR
+    rw [Presieve.map_ofArrows] at hf ⊢
+    exact (site_covering_isomorphic_family JB (fun i => ((p ⋙ u) ⋙ q.inv).map (f i))
+      hf (θ.hom.app X) (fun i => u'.map (f i)) (fun i => θ.hom.app (Y i))
+      (fun i => inferInstance) (fun i => (θ.hom.naturality (f i)).symm)).2
+  have hpull' : ∀ (X Y Z : A) (R : Presieve X), R ∈ JA X →
+      ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) u' := by
+    intro X Y Z R hR f g hf
+    have := hwpull X Y Z R hR f g hf
+    exact preservesLimit_of_natIso (cospan f g) θ.symm
+  have hu' : u'.IsContinuous JA.toGrothendieck JB.toGrothendieck :=
+    Functor.isContinuous_of_iso θ.symm JA.toGrothendieck JB.toGrothendieck
+  let δ := Functor.sheafPushforwardContinuousIso θ (Type u)
+    JA.toGrothendieck JB.toGrothendieck
+  let e := ((sheafAdjunctionContinuous u' (Type u)
+      JA.toGrothendieck JB.toGrothendieck).ofNatIsoRight δ).leftAdjointUniq
+    (sheafAdjunctionContinuous ((p ⋙ u) ⋙ q.inv) (Type u)
+      JA.toGrothendieck JB.toGrothendieck)
+  exact ⟨hcover, hpull', hu', preservesFiniteLimits_of_natIso e.symm,
+    preservesFiniteColimits_of_natIso e.symm⟩
 
 end CategoryTheory

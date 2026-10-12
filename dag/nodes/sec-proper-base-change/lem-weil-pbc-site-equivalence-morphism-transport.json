@@ -25,96 +25,84 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the equivalences are morphisms of sites).* By [lem-weil-pbc-site-equivalence-is-morphism-of-sites], applied to $p:\\mathcal A\\to\\mathcal C$, $p$ is continuous and defines a morphism of sites $\\mathcal C\\to\\mathcal A$ ($p_s$ exact). Choose a quasi-inverse $q':\\mathcal D\\to\\mathcal B$ of $q$ with a natural isomorphism $\\eta:\\mathrm{id}_{\\mathcal B}\\xrightarrow{\\sim}q'\\circ q$; by the same node applied to $q:\\mathcal B\\to\\mathcal D$ (clauses (2), (4) for the quasi-inverse), $q'$ is continuous and defines a morphism of sites $\\mathcal B\\to\\mathcal D$ ($q'_s$ exact).",
+   "text": "Apply site_equivalence_is_morphism_of_sites to p and q with their canonical inverses. Retain continuity and exactness for p and q.inv, and the covering and pullback conditions. Transport the abstract pullback exactness to the constructed pullback via Mathlib sheafPullbackIso.",
    "uses": [
     "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
    }
   },
   {
-   "text": "*Step 2 ($u'\\cong q'\\circ u\\circ p$).* Let $\\alpha:q\\circ u'\\xrightarrow{\\sim}u\\circ p$ be the given natural isomorphism and put $w=q'\\circ u\\circ p:\\mathcal A\\to\\mathcal B$. Then $\\theta=(q'\\alpha)\\circ(\\eta u'):u'\\to q'qu'\\to q'up=w$, with components $\\theta_X=q'(\\alpha_X)\\circ\\eta_{u'(X)}$, is a natural isomorphism $u'\\cong w$ (a composite of whiskerings of natural isomorphisms).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
-   }
-  },
-  {
-   "text": "*Step 3 ($w$ is continuous and defines a morphism of sites).* Apply [lem-weil-pbc-site-morphism-composition] (Sites, Lemma 03CB) with $\\mathcal C_3=\\mathcal A$, $\\mathcal C_2=\\mathcal C$, $\\mathcal C_1=\\mathcal D$, $v=p$ (Step 1) and $u$ (continuous with $u_s$ exact by hypothesis): $u\\circ p:\\mathcal A\\to\\mathcal D$ is continuous and $(u\\circ p)_s$ is exact. Apply it again with $\\mathcal C_3=\\mathcal A$, $\\mathcal C_2=\\mathcal D$, $\\mathcal C_1=\\mathcal B$, $v=u\\circ p$ and $q'$ in place of $u$ (Step 1): $w=q'\\circ(u\\circ p)$ is continuous, $w_s$ on sheaves of sets is exact, and $w^s=p^s u^s q'^s$.",
+   "text": "Apply siteMorphism_composition first to p followed by u, then to p ⋙ u followed by q.inv. Obtain covering preservation, pullback preservation, continuity and exactness for w := (p ⋙ u) ⋙ q.inv.",
    "uses": [
     "lem-weil-pbc-site-morphism-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites, line 2764), applied twice"
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
    }
   },
   {
-   "text": "*Step 4 ($u'$ is continuous).* Let $\\{g_a:V_a\\to V\\}_{a\\in I}$ be a covering of $\\mathcal A$. (a) By Step 3 $\\{w(g_a):w(V_a)\\to w(V)\\}$ is a covering of $\\mathcal B$; by naturality of $\\theta$ (Step 2), $w(g_a)\\circ\\theta_{V_a}=\\theta_V\\circ u'(g_a)$ with $\\theta_{V_a}$, $\\theta_V$ isomorphisms, so by [lem-weil-pbc-site-covering-isomorphic-family] (with $\\varphi=\\theta_V$, $\\sigma_a=\\theta_{V_a}$) $\\{u'(g_a):u'(V_a)\\to u'(V)\\}$ is a covering of $\\mathcal B$. (b) Let $T\\to V$ be a morphism of $\\mathcal A$ and $P=T\\times_VV_a$ (it exists by axiom (iii) of 00VH). By Step 3 a fibre product $Q=w(T)\\times_{w(V)}w(V_a)$ exists in $\\mathcal B$ and the canonical $c_w:w(P)\\to Q$ is an isomorphism. The cospans $u'(T)\\to u'(V)\\leftarrow u'(V_a)$ and $w(T)\\to w(V)\\leftarrow w(V_a)$ are isomorphic through $(\\theta_T,\\theta_V,\\theta_{V_a})$ (naturality), so $Q$ with the projections composed with $\\theta_T^{-1}$, $\\theta_{V_a}^{-1}$ is a fibre product $u'(T)\\times_{u'(V)}u'(V_a)$, and the canonical morphism $c_{u'}:u'(P)\\to Q$ for $u'$ equals $c_w\\circ\\theta_P$ (both have projections $\\theta_T^{-1}w(\\mathrm{pr}_1)\\theta_P=u'(\\mathrm{pr}_1)$ and $\\theta_{V_a}^{-1}w(\\mathrm{pr}_2)\\theta_P=u'(\\mathrm{pr}_2)$), an isomorphism. Hence $u'$ satisfies (a), (b) of Definition 00WV [def-weil-pbc-sites-and-cohomology](3).",
+   "text": "Construct θ : u' ≅ w by the right unitor, whiskering the unit isomorphism of q, the associator, and whiskering α with q.inv.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
+   }
+  },
+  {
+   "text": "Present R as Presieve.ofArrows. The w-image family covers by step 2. Apply site_covering_isomorphic_family with target and source isomorphisms θ.hom.app; its compatibility is the symmetry of naturality. This gives covering preservation by u'.",
    "uses": [
-    "lem-weil-pbc-site-covering-isomorphic-family",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-site-covering-isomorphic-family"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
    }
   },
   {
-   "text": "*Step 5 ($u'^s\\cong w^s$).* Since $u'$ and $w$ are continuous (Steps 3, 4), $u'^s\\mathcal G=\\mathcal G\\circ u'$ and $w^s\\mathcal G=\\mathcal G\\circ w$ are sheaves on $\\mathcal A$ for every sheaf of sets (resp. abelian sheaf) $\\mathcal G$ on $\\mathcal B$ [lem-weil-pbc-site-continuous-pushforward-sheaf]. The maps $\\mathcal G(\\theta_X):\\mathcal G(w(X))\\to\\mathcal G(u'(X))$ are bijections (group isomorphisms), natural in $X$ by naturality of $\\theta$ and in $\\mathcal G$ by naturality of morphisms of sheaves; so they form a natural isomorphism $\\delta:w^s\\xrightarrow{\\sim}u'^s$ of functors from sheaves on $\\mathcal B$ to sheaves on $\\mathcal A$.",
-   "uses": [
-    "lem-weil-pbc-site-continuous-pushforward-sheaf"
-   ],
+   "text": "For each covering arrow, apply Mathlib preservesLimit_of_natIso to θ.symm and the preserved cospan of w. Apply Mathlib Functor.isContinuous_of_iso to θ.symm for continuity.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
    }
   },
   {
-   "text": "*Step 6 ($u'_s\\cong w_s$).* By [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (Sites, Lemma 00WX) $u'_s\\dashv u'^s$ and $w_s\\dashv w^s$ on sheaves of sets. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=w_s$, $R_1=w^s$, $L_2=u'_s$, $R_2=u'^s$ and the natural isomorphism $\\delta^{-1}:u'^s\\xrightarrow{\\sim}w^s$ of Step 5 (uniqueness of adjoints, Categories, Lemma 0B65): there is a natural isomorphism $w_s\\cong u'_s$.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00WX (lemma-adjoint-sheaves); literature/stacks-project/categories.tex Lemma Tag 0B65"
-   }
-  },
-  {
-   "text": "*Step 7 ($u'_s$ is exact).* $w_s$ commutes with finite limits and finite colimits (Step 3). For a finite diagram in $\\Sh(\\mathcal A)$ with limit cone $\\lambda$, the cone $u'_s(\\lambda)$ is isomorphic, through the components of the isomorphism $w_s\\cong u'_s$ of Step 6, to the limit cone $w_s(\\lambda)$, and a cone isomorphic to a limit cone is a limit cone; dually for colimits. Hence $u'_s$ is exact, and with Step 4 the continuous functor $u'$ defines a morphism of sites $\\mathcal B\\to\\mathcal A$ (Sites, Definition 00X1, [def-weil-pbc-sites-and-cohomology](3)).",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
+   "text": "Mathlib Functor.sheafPushforwardContinuousIso θ identifies the continuous pushforwards. Transport the constructed adjunction for u' along this isomorphism using Adjunction.ofNatIsoRight. Apply Adjunction.leftAdjointUniq to the constructed adjunction for w, obtaining e : sheafPullback u' ≅ sheafPullback w.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Definitions Tag 00VH (line 679), 00WV (line 2524), 00X1 (line 2687), Lemmas 00WW, 00WX, 03CB"
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
+   }
+  },
+  {
+   "text": "Use Mathlib preservesFiniteLimits_of_natIso and preservesFiniteColimits_of_natIso with e.symm and the instances from step 2. Combine with the covering, pullback and continuity conclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definitions 00VH, 00WV, 00X1; Lemmas 00WW, 00WX, 03CB; Mathlib adjunction uniqueness and natural-isomorphism transport"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
   "lem-weil-pbc-site-morphism-composition",
-  "lem-weil-pbc-site-covering-isomorphic-family",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-continuous-pushforward-sheaf",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-weil-pbc-site-covering-isomorphic-family"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "no Stacks lemma states it; built from Definitions 00VH, 00WV, 00X1, Lemmas 00WW, 00WX, 03CB and Categories Lemma 0B65; written by an agent"
+  "place": "Original equivalence/composition route realized in Lean by U1 second reader; uses Mathlib sheafPullbackIso, sheafPushforwardContinuousIso, ofNatIsoRight, leftAdjointUniq and preservation under natural isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -211,5 +199,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-21de0",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T135322-L-1694923",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and complete proof with the node and its three dependencies; DAG edits and import pruning agree; delivery and both direct importers compile cleanly; axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
