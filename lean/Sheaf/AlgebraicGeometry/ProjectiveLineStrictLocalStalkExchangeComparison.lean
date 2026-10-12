@@ -8,12 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.AlgebraicGeometry.ProjectiveLineOriginalStalkTotalCohomologyExchange
+import Sheaf.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
 
 /-! # Stalk exchange under compatible strict localization
 
@@ -104,6 +100,24 @@ theorem Etale.projectiveLine_strictLocal_stalkExchangeComparison
                     (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
                   ((t₀.sheafFiber (A := ModuleCat.{u + 1} Λ)).map
                     (Etale.baseChangeHomologyMap Λ
-                      (ProjectiveSpace.isPullback_map _ g₀) q F₀)).hom (a₁ x)) := by sorry
+                      (ProjectiveSpace.isPullback_map _ g₀) q F₀)).hom (a₁ x)) := by
+  let F₀ := (ProjectiveSpace.map _
+    (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[
+    ModuleCat.{u + 1} Λ].obj F
+  let g₀ := Spec.map (CommRingCat.ofHom φ)
+  obtain ⟨c₁, c₂, hc⟩ :=
+    Etale.projectiveLine_originalStalk_totalCohomologyExchange Λ sq σ τ ι hι ν
+      eA eB φ ρA ρB hφ hρA hρB hρ F q
+  obtain ⟨d₁, d₂, hd⟩ :=
+    Etale.exists_addEquiv_strictLocal_totalCohomology_exchange Λ φ
+      (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+      (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B))
+      (ProjectiveSpace.map _ g₀) (ProjectiveSpace.isPullback_map _ g₀) F₀ q
+  refine ⟨c₁.trans d₁.symm, c₂.trans d₂.symm, ?_⟩
+  intro x
+  apply d₂.injective
+  simp only [AddEquiv.trans_apply]
+  rw [hc, hd, AddEquiv.apply_symm_apply]
+  simp [F₀, g₀]
 
 end AlgebraicGeometry
