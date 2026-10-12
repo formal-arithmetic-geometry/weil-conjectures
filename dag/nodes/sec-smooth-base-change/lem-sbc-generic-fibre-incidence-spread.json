@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-generic-fibre-incidence-spread",
+ "kind": "statement",
+ "title": "Generic component covers spread with their incidence edges",
+ "statement": "Let f:X\\to S be finite type [def-weil-finite-type-morphism], with S irreducible and generic point eta. There exist a field L and a morphism y_eta:Spec L\\to Spec kappa(eta), a finite index type I, closed irreducible nonempty subsets A_i of the generic pullback G=X_eta times_{kappa(eta)} Spec L [def-pc-scheme-fibre, def-pc-fibre-product], and an open W containing eta, such that the A_i cover G. For every s in W and every field-valued point y:Spec K\\to Spec kappa(s), there are a scheme Z, a surjective morphism p:Z\\to X_s times_{kappa(s)} Spec K, and irreducible nonempty subsets B_i covering Z, with (A_i intersect A_j) nonempty implying (B_i intersect B_j) nonempty for every i,j. No connectedness assumption or connectedness conclusion on a whole fibre is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055G, geometric component-cover and intersection-persistence portion of the proof, using Tags 0551, 054Y, 0559, 052A, 01UA and 054W."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If the generic fibre is empty, Tag 054W gives an open on which all fibres are empty. Choose any generic residue-field extension, an empty finite index type, the empty generic cover, and the empty special fibre with its identity map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Otherwise apply Tag 0551 to obtain an irreducible affine finite étale surjective model of a finite separable extension L of the generic residue field such that every irreducible component of the generic pullback is geometrically irreducible. Reduce the model; reduction does not change its points or generic fibre. The generic pullback is noetherian because f is finite type, so index its finitely many irreducible components by a finite type I. The resulting A_i are closed, nonempty and irreducible and cover the generic pullback.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take the reduced closures of A_i in the pulled back total space. Tag 054Y gives a generic neighbourhood where they cover all fibres, even over a nonnoetherian base. For each i use Tag 0559 to shrink so its closure has geometrically irreducible fibres. For every pair with nonempty generic intersection, put the reduced closed-subscheme structure on the intersection and apply generic flatness, Tag 052A, to make its map flat and finitely presented. Its image is an open containing the generic point by Tag 01UA. Intersect these finitely many opens. Empty generic intersections need not be removed: only preservation of edges is asserted.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transfer this open from the reduced model to the original finite étale model using the reduction homeomorphism. Its image W is open by openness of the finite étale map and contains the original generic point. For s in W choose a model point over s in the chosen open. Given a test field K over kappa(s), take a residue field E of kappa(model point) tensor over kappa(s) K. Both fields embed into E, which can be chosen in the same universe. Let Z be the fibre over E and p its map to the K-test fibre. A field extension is faithfully flat, so p is surjective. The base changed reduced closures give irreducible nonempty subsets B_i covering Z. Each required intersection has a point over the model point, and faithful flatness keeps it nonempty over E. This gives every clause without assuming generic connectedness.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 055G, proof before the connected-graph argument.",
+  "note": "Only generic incidence edges are preserved; auxiliary field fibres retain irreducible component covers. The topology and descent of connectedness are proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type scheme morphism spread irreducible components generic fibre preserve intersections on dense open",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type morphism geometric generic irreducible components spread finite cover and nonempty intersections",
+   "digest": "4ae97bdde8605cb4",
+   "results": "8 hits: AlgebraicGeometry.IsDominant, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite, genericPoints.finite, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain, AlgebraicGeometry.LocallyQuasiFinite; no component-incidence spreading theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(irreducible|component)|component.*generic",
+   "digest": "2f13b04c2bf280c1",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; no component-incidence spreading theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericGeometricallyConnectedSpread",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055G, splitting generic components, spreading their closures and retaining nonempty intersections; the last connected-graph step is not part of this node.",
+   "via": [
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreIncidenceSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreIncidenceSpread.lean",
+  "declaration": "AlgebraicGeometry.exists_open_generic_fibre_incidence_spread",
+  "statement": "theorem exists_open_generic_fibre_incidence_spread {X S : Scheme.{u}}\n    [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :\n    ∃ (L : Type u) (_ : Field L)\n      (yη : Spec (CommRingCat.of L) ⟶\n        Spec (CommRingCat.of (S.residueField (genericPoint S))))\n      (I : Type u) (_ : Finite I)\n      (A : I → Set ↥(pullback\n        (f.fiberToSpecResidueField (genericPoint S)) yη)) (W : Set S),\n      (∀ i, IsClosed (A i)) ∧ (∀ i, IsIrreducible (A i)) ∧\n      (⋃ i, A i) = Set.univ ∧ IsOpen W ∧ genericPoint S ∈ W ∧\n      ∀ s ∈ W, ∀ (K : Type u) (_ : Field K)\n        (y : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of (S.residueField s))),\n        ∃ (Z : Scheme.{u}) (p : Z ⟶ pullback (f.fiberToSpecResidueField s) y)\n          (B : I → Set Z), Surjective p ∧\n          (∀ i, IsIrreducible (B i)) ∧ (⋃ i, B i) = Set.univ ∧\n          ∀ i j, (A i ∩ A j).Nonempty → (B i ∩ B j).Nonempty",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T220517-L-1392192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T220517-L-1392192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
