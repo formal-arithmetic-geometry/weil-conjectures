@@ -78,6 +78,6 @@ theorem sheafAlgebras_directed_colimit
   obtain ⟨σP, σ, ι, hP, hσ, hι, hc⟩ :=
     sheafAlgebras_directed_colimit_algebra_core X O I F p hp
   refine ⟨σP, σ, ι, hP, hσ, hι, hc, ?_⟩
-  exact sheafAlgebras_directed_colimit_module_core X O I F p σ ι
+  exact sheafAlgebras_directed_colimit_module_core X O I F p σ ι hp hι
 
 end CategoryTheory

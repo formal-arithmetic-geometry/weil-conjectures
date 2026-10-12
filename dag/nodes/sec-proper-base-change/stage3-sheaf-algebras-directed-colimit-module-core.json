@@ -7,7 +7,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the sectionwise filtered colimit and sheafify it, then verify the stated universal property.",
+   "text": "Directedness makes all structure-map composites into p equal. Use their common value to give p its presheaf O-module structure; the Under identities and hι identify its sheafified structure map with σ.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The sectionwise ring colimit hypothesis hp gives stage representatives and eventual equality. Descend a compatible family of O-linear maps on representatives; a common upper bound proves additivity and linearity. Uniqueness proves compatibility with restriction, giving the presheaf module colimit.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Module sheafification preserves that colimit. Compare ring and module sheafifications through their underlying abelian sheafification; local representatives prove O-linearity and hι identifies the legs. Transport the colimit along the resulting cocone isomorphism.",
    "uses": [],
    "elementary": false
   }
@@ -67,13 +77,13 @@
   "module": "Sheaf.CategoryTheory.SheafAlgebrasDirectedColimitModuleCore",
   "declaration": "CategoryTheory.sheafAlgebras_directed_colimit_module_core",
   "file": "lean/Sheaf/CategoryTheory/SheafAlgebrasDirectedColimitModuleCore.lean",
-  "statement": "theorem sheafAlgebras_directed_colimit_module_core (X : Type u) [TopologicalSpace X] (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ Under O) (p : Cocone (F ⋙ Under.forget O ⋙ sheafToPresheaf (Opens.grothendieckTopology X) CommRingCat)) (σ : O ⟶ (presheafToSheaf (Opens.grothendieckTopology X) CommRingCat).obj p.pt) (ι : F ⟶ (Functor.const I).obj (Under.mk σ)) : Nonempty (IsColimit ((commAlgebraSheafModuleFunctor O).mapCocone (Cocone.mk (Under.mk σ) ι)))",
+  "statement": "theorem sheafAlgebras_directed_colimit_module_core (X : Type u) [TopologicalSpace X] (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ Under O) (p : Cocone (F ⋙ Under.forget O ⋙ sheafToPresheaf (Opens.grothendieckTopology X) CommRingCat)) (σ : O ⟶ (presheafToSheaf (Opens.grothendieckTopology X) CommRingCat).obj p.pt) (ι : F ⟶ (Functor.const I).obj (Under.mk σ)) (hp : ∀ U : Opens X, Nonempty (IsColimit (((evaluation (Opens X)ᵒᵖ CommRingCat).obj (Opposite.op U)).mapCocone p))) (hι : ∀ i : I, (ι.app i).right.hom = p.ι.app i ≫ toSheafify (Opens.grothendieckTopology X) p.pt) : Nonempty (IsColimit ((commAlgebraSheafModuleFunctor O).mapCocone (Cocone.mk (Under.mk σ) ι)))",
   "branch": "sheaf-dag",
   "by": "K2",
   "date": "2026-10-12",
   "existing": false
  },
- "statement": "Underlying module colimit of sheafified algebra colimit.",
+ "statement": "Underlying module colimit of sheafified algebra colimit, assuming that p is a sectionwise ring colimit and that the algebra cocone legs are its canonical sheafified coprojections.",
  "reviewed": {
   "date": "2026-10-12",
   "by": "L",
@@ -87,11 +97,29 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "X-119d0",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T053938-L-2638101",
+  "landing": "20261012T135330-L-1698480",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Lean signature matches the corrected node and prior E7 return; delivery and sole direct importer compile cleanly; original caller fails as reported, confirming the minimal forced adaptation; axioms and change record agree."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "V3 stage 2",
+  "old_statement": "Underlying module colimit of sheafified algebra colimit.",
+  "what": "E7 repair: the original universally quantified cocone statement was false. Add sectionwise colimit hypothesis hp and canonical-leg hypothesis hι, as requested by reviewer X-e2fff; the caller already has both.",
+  "source": {
+   "document": "literature/stacks-project/sheaves.tex",
+   "place": "Sections 009D and 009E; Modules 01AH"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Construct the sectionwise filtered colimit and sheafify it, then verify the stated universal property.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }
