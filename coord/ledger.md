@@ -9606,3 +9606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:33 L: returned deliver/T2/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData (reviewer RETURN: (reviewer X-5d4a2, head 5d4a29b51) A (change-record shape, brief §6): In coord/changes/etale-resolution-section-canonica)
 - 21:34 L: merged deliver/A3/Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal (stage 3; reviewer PASS; first push; landing 20261012T213435-L-1177513 (interface); batch 20261012T213434; modules 2; new nodes 1)
 - 21:34 L: merged deliver/G1/Sheaf.Paper.GradedCohomologyModuleStructure (stage 3; reviewer PASS; first push; landing 20261012T213435-L-1177619 (proof); batch 20261012T213434; modules 1; new nodes 0)
+- 21:34 L: merged deliver/G3/Sheaf.RingTheory.FiniteCoefficientTensorReductionSurjective (stage 3; reviewer PASS; first push; landing 20261012T213435-L-1177788 (proof); batch 20261012T213434; modules 1; new nodes 0)
