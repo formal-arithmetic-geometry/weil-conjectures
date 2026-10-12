@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-site-cech-free-complex-exact-fibrewise",
+ "kind": "statement",
+ "title": "Objectwise contracting identity for the chosen-product free Cech complex",
+ "statement": "For a category C with hom-sets in universe v, a family f(i)→U and chosen site Cech products S [def-weil-pbc-site-cech-complex], a ring presheaf R:Cᵒᵖ→RingCat.{v} [def-weil-presheaf-modules-sheafification], n:ℕ and X:Cᵒᵖ, there are R(X)-linear maps h:K(n+1)(X)→K(n+2)(X) and k:K(n)(X)→K(n+1)(X), where K is the constructed alternating free complex on tuple representable sums, with h≫d(n+2,n+1)(X)+d(n+1,n)(X)≫k=id. No naturality in X is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AT and 03F5, fibre decomposition and prefix contracting homotopy"
+ },
+ "proof": [
+  {
+   "text": "Partition the tuple basis at X by its composite φ to U. Product uniqueness identifies the φ-part with positive-length tuples in the lift set Lφ, compatibly with coordinate deletion by indexMap_pr. Extend this identification R(X)-linearly.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each nonempty lift set choose a lift and use prefixing; use zero maps in the empty case. The power-set contracting homotopy identity, transported through the basis identification and summed over φ, yields the stated two maps and identity at degree n+1. No naturality is needed.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03F5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "presheaf module contracting homotopy",
+   "results": "0 hits: . None constructs a contraction for chosen site products; generic exactness machinery is used in the target proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness from a contracting homotopy identity on an evaluated complex of module presheaves",
+   "results": "8 hits: ChainComplex.exactAt_succ_single_obj, ChainComplex.alternatingConst_exactAt, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, HomologicalComplex.exact_iff_degreewise_exact, HomologicalComplex.exact_of_degreewise_exact, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CochainComplex.exactAt_succ_single_obj, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ. None constructs a contraction for chosen site products; generic exactness machinery is used in the target proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.comp, LinearMap.id",
+   "results": "12 hits: LinearMap.comp_id, LinearMap.id_comp, LinearMap.injective_of_comp_eq_id, LinearMap.surjective_of_comp_eq_id, LinearMap.surjective_comp_left_of_exists_rightInverse, LinearEquiv.comp_symm, LinearEquiv.symm_comp, LinearEquiv.ofLinear. None constructs a contraction for chosen site products; generic exactness machinery is used in the target proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Objectwise contracting homotopy for free modules on tuples of maps to chosen fibre products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.SiteCechFreeComplexExact",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-cech-free-complex-exact",
+   "place": "fibrewise part of proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.SiteCechFreeComplexExactAux",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SiteCechFreeComplexExactAux.lean",
+  "declaration": "CategoryTheory.SiteCechComplex.freeComplex_evaluation_contracting",
+  "statement": "theorem freeComplex_evaluation_contracting (R : Cᵒᵖ ⥤ RingCat.{v})\n    (n : ℕ) (X : Cᵒᵖ) :\n    ∃ h : ((S.freeComplex R).X (n + 1)).obj X ⟶\n        ((S.freeComplex R).X (n + 2)).obj X,\n      ∃ k : ((S.freeComplex R).X n).obj X ⟶\n          ((S.freeComplex R).X (n + 1)).obj X,\n        h ≫ ((S.freeComplex R).d (n + 2) (n + 1)).app X +\n          ((S.freeComplex R).d (n + 1) n).app X ≫ k = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4150",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T173914-L-3309198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4150",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T173914-L-3309198",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet matched baseline signatures, recorded changes, forced adaptation, and all lcompile checks; original importer failed as reported and adapted importer compiled."
+ }
+}

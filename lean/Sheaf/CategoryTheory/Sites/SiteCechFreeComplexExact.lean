@@ -5,11 +5,9 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.CategoryTheory.SiteCechComplex
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
-public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
-public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Sheaf.Paper.PowerSetComplexContractible
+public import Sheaf.CategoryTheory.Sites.SiteCechFreeComplexExactAux
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Free module chains on chosen site Čech products
@@ -27,96 +25,6 @@ namespace CategoryTheory.SiteCechComplex
 
 variable {C : Type u} [Category.{v} C] {T : Type v} {U : C}
   {f : T → C} {hom : ∀ t, f t ⟶ U} (S : SiteCechComplex f hom)
-
-/-- The coproduct of representables on the degree-p products, as a presheaf of sets.
-Source: Stacks 03AT (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
-def tuplePresheaf (p : ℕ) : Cᵒᵖ ⥤ Type v where
-  obj X := Σ t : Fin (p + 1) → T, X.unop ⟶ S.W p t
-  map g := ↾fun x ↦ ⟨x.1, g.unop ≫ x.2⟩
-  map_id X := by
-    apply ConcreteCategory.hom_ext
-    intro x
-    change (⟨x.1, (𝟙 X.unop) ≫ x.2⟩ :
-      Σ t : Fin (p + 1) → T, X.unop ⟶ S.W p t) = x
-    rw [Category.id_comp]
-  map_comp g h := by
-    apply ConcreteCategory.hom_ext
-    intro x
-    change (⟨x.1, (h.unop ≫ g.unop) ≫ x.2⟩ :
-      Σ t : Fin (p + 1) → T, _ ⟶ S.W p t) = ⟨x.1, h.unop ≫ (g.unop ≫ x.2)⟩
-    rw [Category.assoc]
-
-/-- A map of tuple indices induces a map of the corresponding representable sums.
-Source: Stacks 03AT (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
-def tupleMap {p q : ℕ} (α : Fin (q + 1) → Fin (p + 1)) :
-    S.tuplePresheaf p ⟶ S.tuplePresheaf q where
-  app X := ↾fun x ↦ ⟨x.1 ∘ α, x.2 ≫ S.indexMap x.1 α⟩
-  naturality X Y g := by
-    apply ConcreteCategory.hom_ext
-    intro x
-    change (⟨x.1 ∘ α, (g.unop ≫ x.2) ≫ S.indexMap x.1 α⟩ :
-      Σ t : Fin (q + 1) → T, Y.unop ⟶ S.W q t) =
-      ⟨x.1 ∘ α, g.unop ≫ (x.2 ≫ S.indexMap x.1 α)⟩
-    rw [Category.assoc]
-
-/-- The simplicial representable sums; index-map laws follow from product uniqueness.
-Source: Stacks 03AT (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
-abbrev tupleSimplicial : SimplicialObject (Cᵒᵖ ⥤ Type v) where
-  obj n := S.tuplePresheaf n.unop.len
-  map α := S.tupleMap α.unop.toOrderHom
-  map_id n := by
-    have hi (t : Fin (n.unop.len + 1) → T) : S.indexMap t id = 𝟙 _ := by
-      obtain ⟨c, _, hu⟩ := S.universal n.unop.len t (S.W n.unop.len t)
-        (S.pr n.unop.len t) (S.comm n.unop.len t)
-      apply (hu _ ?_).trans (hu _ (fun k ↦ Category.id_comp _)).symm
-      intro k
-      exact S.indexMap_pr t id k
-    apply NatTrans.ext
-    funext X
-    apply ConcreteCategory.hom_ext
-    intro x
-    change (⟨x.1 ∘ id, x.2 ≫ S.indexMap x.1 id⟩ :
-      Σ t : Fin (n.unop.len + 1) → T, X.unop ⟶ S.W n.unop.len t) = x
-    rw [hi, Category.comp_id]
-    cases x
-    rfl
-  map_comp α β := by
-    have hi (t) : S.indexMap t (α.unop.toOrderHom ∘ β.unop.toOrderHom) =
-        S.indexMap t α.unop.toOrderHom ≫
-          S.indexMap (t ∘ α.unop.toOrderHom) β.unop.toOrderHom := by
-      let b := S.indexMap t α.unop.toOrderHom ≫
-        S.indexMap (t ∘ α.unop.toOrderHom) β.unop.toOrderHom
-      obtain ⟨c, _, hu⟩ := S.universal _ _ _
-        (fun k ↦ b ≫ S.pr _ _ k)
-        (fun k ↦ by simp only [Category.assoc, S.comm])
-      apply (hu _ ?_).trans (hu b (fun _ ↦ rfl)).symm
-      intro k
-      dsimp [b]
-      symm
-      rw [Category.assoc]
-      exact (congrArg (fun h ↦ S.indexMap t α.unop.toOrderHom ≫ h)
-        (S.indexMap_pr (t ∘ α.unop.toOrderHom) β.unop.toOrderHom k)).trans
-        ((S.indexMap_pr t α.unop.toOrderHom (β.unop.toOrderHom k)).trans
-          (S.indexMap_pr t (α.unop.toOrderHom ∘ β.unop.toOrderHom) k).symm)
-    apply NatTrans.ext
-    funext X
-    apply ConcreteCategory.hom_ext
-    intro x
-    change (⟨x.1 ∘ (α.unop.toOrderHom ∘ β.unop.toOrderHom),
-      x.2 ≫ S.indexMap x.1 (α.unop.toOrderHom ∘ β.unop.toOrderHom)⟩ :
-      Σ t : Fin (_ + 1) → T, X.unop ⟶ S.W _ t) =
-      ⟨(x.1 ∘ α.unop.toOrderHom) ∘ β.unop.toOrderHom,
-        (x.2 ≫ S.indexMap x.1 α.unop.toOrderHom) ≫
-          S.indexMap (x.1 ∘ α.unop.toOrderHom) β.unop.toOrderHom⟩
-    rw [hi, Category.assoc]
-    rfl
-
-/-- The actual alternating chain complex of free module presheaves on the tuple sums.
-Source: Stacks 03F5 (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
-noncomputable abbrev freeComplex (R : Cᵒᵖ ⥤ RingCat.{v}) :
-    ChainComplex (PresheafOfModules.{v} R) ℕ :=
-  (AlgebraicTopology.alternatingFaceMapComplex _).obj
-    (S.tupleSimplicial ⋙ PresheafOfModules.free R)
 
 /-- The free Čech chain complex is exact in every positive degree, without a covering.
 Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03F5.
@@ -137,6 +45,27 @@ module-presheaf kernels and cokernels are objectwise, so evaluation jointly
 reflects exactness. All basis sets and free module values lie in universe v;
 no natural choice of a lift across objects is needed. -/
 theorem freeComplex_exactAt (R : Cᵒᵖ ⥤ RingCat.{v}) (n : ℕ) :
-    (S.freeComplex R).ExactAt (n + 1) := by sorry
+    (S.freeComplex R).ExactAt (n + 1) := by
+  rw [HomologicalComplex.exactAt_iff' _ (n + 2) (n + 1) n (by simp) (by simp)]
+  let L := (S.freeComplex R).sc' (n + 2) (n + 1) n
+  have he (X : Cᵒᵖ) : (L.map (PresheafOfModules.evaluation R X)).Exact := by
+    obtain ⟨h, k, hk⟩ := freeComplex_evaluation_contracting S R n X
+    rw [ShortComplex.moduleCat_exact_iff]
+    intro x hx
+    refine ⟨h x, ?_⟩
+    have hid := ConcreteCategory.congr_hom hk x
+    change ((S.freeComplex R).d (n + 1) n).app X x = 0 at hx
+    change ((S.freeComplex R).d (n + 2) (n + 1)).app X (h x) +
+      k (((S.freeComplex R).d (n + 1) n).app X x) = x at hid
+    change ((S.freeComplex R).d (n + 2) (n + 1)).app X (h x) = x
+    simpa only [hx, map_zero, add_zero] using hid
+  rw [ShortComplex.exact_iff_isZero_homology]
+  rw [IsZero.iff_id_eq_zero]
+  apply PresheafOfModules.hom_ext
+  intro X
+  have hz : IsZero ((PresheafOfModules.evaluation R X).obj L.homology) :=
+    ((L.mapHomologyIso (PresheafOfModules.evaluation R X)).isZero_iff).mp
+      ((L.map (PresheafOfModules.evaluation R X)).exact_iff_isZero_homology.mp (he X))
+  exact hz.eq_of_src _ _
 
 end CategoryTheory.SiteCechComplex
