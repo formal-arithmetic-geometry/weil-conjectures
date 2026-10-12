@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project; Mathlib.GroupTheory.FiniteAbelian.Basic",
+  "place": "Tag 0F08 cyclic-coefficient paragraph; equiv_directSum_zmod_of_finite at Basic.lean:135-149"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "id": "lem-sbc-finite-torsion-extension-induction",
+ "title": "Finite torsion module induction from prime cyclic factors",
+ "statement": "Let $P$ be a property of modules over the universe lift of $\\mathbf Z$. Suppose $P$ holds for zero objects, is invariant under module isomorphisms, and satisfies $P(A)\\land P(C)\\Rightarrow P(B)$ for every short exact sequence $0\\to A\\to B\\to C\\to0$. Let $M$ be a finite such module, $n\\in\\mathbf N\\setminus\\{0\\}$, and assume $nx=0$ for all $x\\in M$. Suppose $P(\\mathbf Z/r\\mathbf Z)$ holds for every prime $r\\mid n$ such that multiplication by $r$ on $M$ is not injective, with the cyclic module lifted to the same universe. Then $P(M)$ holds.",
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Decompose the finite underlying abelian group as a finite direct sum of Z/r^e using equiv_directSum_zmod_of_finite. The additive equivalence is automatically integer-linear, also for the lifted integer action. Remove zero summands. In a remaining summand the generator has order r^e, which divides the annihilator n. The nonzero element r^(e-1) is killed by r, giving noninjectivity of multiplication by r on M. Therefore P holds for each relevant prime cyclic module.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on e using the short exact sequence Z/r^(e-1) -> Z/r^e -> Z/r. The first map is multiplication by r on residue classes, which is injective; the second is reduction modulo r, which is surjective, with kernel exactly the multiples of r. For e=0 the group is Z/1=0. Extension closure proves P for each prime-power summand. Assemble the finite direct sum inductively using split short exact sequences, starting with zero. Finally use isomorphism invariance. The zero module and n=1 produce no nonzero summands.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finitely-generated-abelian-group-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project; Mathlib.GroupTheory.FiniteAbelian.Basic",
+  "place": "Tag 0F08 cyclic-coefficient paragraph; equiv_directSum_zmod_of_finite at Basic.lean:135-149"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite abelian group property closed under extensions and isomorphisms follows from vanishing on its prime composition factors",
+   "date": "2026-10-12",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property of abelian groups closed under extensions and filtered colimits holds for bounded torsion groups if it holds for prime cyclic groups",
+   "date": "2026-10-12",
+   "results": "CommGroup.finite_of_fg_torsion, AddIsTorsion.extension_closed, IsTorsion.extension_closed, AddCommGroup.finite_of_fg_torsion, AddCommGrpCat.instIsSerreClassIsFinite, ExponentExists.isTorsion, AddMonoid.isTorsion_iff_isTorsion_int, IsTorsion.quotient_iff.",
+   "verdict": "Algebraic ingredients; no general finite-module property induction."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(induction|devissage)|isZero.*finite.*submodule|map_exact_of_isHomological",
+   "date": "2026-10-12",
+   "results": "25 hits, principally finite-set/type induction lemmas; no finite module prime-factor property induction.",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothBaseChange.TorsionConstantPrimeDevissage",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Cyclic-coefficient reduction on the geometric point in the proof of the universal test datum",
+   "via": [
+    "lem-sbc-torsion-constant-prime-devissage",
+    "lem-sbc-prime-cyclic-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FiniteTorsionExtensionInduction",
+  "file": "lean/Sheaf/Algebra/FiniteTorsionExtensionInduction.lean",
+  "declaration": "ModuleCat.finite_torsion_property_of_prime",
+  "statement": "theorem finite_torsion_property_of_prime (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop) (hzero : ∀ A, IsZero A → P A) (hiso : ∀ {A B}, (A ≅ B) → P A → P B) (hext : ∀ (S : ShortComplex (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂) (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) [Finite M] (n : ℕ) (hn : n ≠ 0) (hM : ∀ x : M, n • x = 0) (hprime : ∀ r : ℕ, r.Prime → r ∣ n → ¬ Function.Injective (fun x : M ↦ r • x) → P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))) : P M",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T110326-L-624937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T110326-L-624937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

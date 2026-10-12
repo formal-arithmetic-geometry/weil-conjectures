@@ -7,10 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Sheaf.Algebra.FiniteTorsionExtensionInduction
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.ConstantFiniteSubmoduleVanishing
 
 /-!
 # Prime-coefficient vanishing for a constant bounded torsion group
@@ -31,29 +30,23 @@ namespace AlgebraicGeometry.Etale
 cyclic coefficients do. A prime is irrelevant if multiplication by it is injective.
 
 Source: Stacks Project, Tag 0F08, proof's cyclic-coefficient reduction; Tag 0739,
-cohomology and filtered colimits. The finite primary decomposition is
-`Submodule.torsionBy_isInternal` over the integers.
+cohomology and filtered colimits; Mathlib.GroupTheory.FiniteAbelian.Basic.
 (blueprint: lem-sbc-torsion-constant-prime-devissage)
 
 Proof:
-1. Factor the nonzero annihilator n into its finitely many prime powers. Bezout
-idempotents give the internal direct sum of the primary subgroups. If multiplication
-by r is injective on M, repeated injectivity shows that its r-primary subgroup is zero.
-2. Each other primary subgroup is the filtered union of its finitely generated
-subgroups. Each such subgroup is finite: it is a quotient of a finite sum of copies
-of Z/r^k for a common exponent k. The finite abelian group structure theorem expresses
-it as a finite direct sum of cyclic groups Z/r^j. Every prime here divides n.
-3. Constant sheafification is exact, using preservesFiniteLimits_constantSheaf and
-preservesFiniteColimits_constantSheaf from ConstantSheafOver (no finite-ring hypothesis).
-Apply it to
-0 -> Z/r^(j-1) -> Z/r^j -> Z/r -> 0. In degree q the long exact higher-direct-image
-sequence is exact at the middle term. If its two outer terms vanish, the middle term
-vanishes. Starting with j = 0 (the zero group), induction therefore gives vanishing
-for every cyclic prime power. Finite additivity gives vanishing for each finite subgroup.
-4. The constant sheaf functor preserves colimits, and higher direct image along the
-qcqs map h preserves filtered colimits. Thus the image of each primary subgroup is
-zero, and finite additivity gives the result for M. In negative degrees all images of
-sheaves vanish. If n = 1, M is zero directly; the primary sum is empty. -/
+1. Let P(A) mean that the degree-q higher image of the constant sheaf on A is zero.
+The composite functor preserves zero objects and isomorphisms. Constant sheafification
+is exact by the arbitrary-coefficient instances in ConstantSheafOver. Map a short exact
+sequence through it, and then use map_exact_of_isHomological for the derived pushforward
+followed by degree-q homology. Exactness at the middle term shows P is extension closed.
+2. Apply isZero_higherDirectImage_constant_of_finite_submodules, which reduces the
+claim to P(N) for every finite submodule N of M, including the filtered-index universe
+obligation. The nonzero annihilator n restricts to N along its subtype inclusion.
+3. Apply finite_torsion_property_of_prime to N with the property from step 1.
+For each prime required by that theorem, noninjectivity on N implies noninjectivity
+on M: an injective multiplication map on M restricts to an injective map on N.
+Thus hprime supplies every required prime cyclic case. The finite induction includes
+zero modules and n=1; both reductions also apply in negative degrees. -/
 theorem isZero_higherDirectImage_constant_of_prime_vanishing
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]
     (q : ℤ) (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
@@ -65,6 +58,39 @@ theorem isZero_higherDirectImage_constant_of_prime_vanishing
           (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))))) :
     IsZero (higherDirectImage (ULift.{u + 1} ℤ) h q
       ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj M)) := by
-  sorry
+  let C := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
+  let G := DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctorPlus ⋙
+      DerivedCategory.Plus.homologyFunctor _ q
+  have hzero (A : ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (hA : IsZero A) :
+      IsZero ((C ⋙ G).obj A) := (C ⋙ G).map_isZero hA
+  have hiso {A B : ModuleCat.{u + 1} (ULift.{u + 1} ℤ)} (e : A ≅ B)
+      (hA : IsZero ((C ⋙ G).obj A)) : IsZero ((C ⋙ G).obj B) :=
+    hA.of_iso ((C ⋙ G).mapIso e).symm
+  have hext (S : ShortComplex (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))
+      (hS : S.ShortExact) (h₁ : IsZero ((C ⋙ G).obj S.X₁))
+      (h₃ : IsZero ((C ⋙ G).obj S.X₃)) : IsZero ((C ⋙ G).obj S.X₂) := by
+    have hSC : (S.map C).ShortExact := hS.map_of_exact C
+    have hSG := hSC.map_exact_of_isHomological
+      ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctorPlus ⋙
+        DerivedCategory.Plus.homologyFunctor _ q) G rfl
+    exact hSG.isZero_X₂ (h₁.eq_of_src _ _) (h₃.eq_of_tgt _ _)
+  apply isZero_higherDirectImage_constant_of_finite_submodules h q M n hn hM
+  intro N hN
+  let : Finite N := hN
+  apply ModuleCat.finite_torsion_property_of_prime
+    (fun A ↦ IsZero ((C ⋙ G).obj A)) hzero (fun e hA ↦ hiso e hA) hext
+    (ModuleCat.of (ULift.{u + 1} ℤ) N) n hn
+  · intro x
+    apply Subtype.ext
+    exact hM x.val
+  · intro r hr hrn hrN
+    apply hprime r hr hrn
+    intro hrM
+    apply hrN
+    intro x y hxy
+    apply Subtype.ext
+    apply hrM
+    exact congrArg Subtype.val hxy
 
 end AlgebraicGeometry.Etale

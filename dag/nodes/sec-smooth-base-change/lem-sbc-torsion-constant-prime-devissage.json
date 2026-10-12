@@ -15,48 +15,27 @@
  ],
  "proof": [
   {
-   "text": "Factor the nonzero annihilator n into prime powers. The integer Bezout idempotents give the finite internal direct sum of the primary subgroups. If multiplication by r is injective on M, iterated injectivity forces every element killed by a power of r to be zero.",
-   "uses": [
-    "lem-sc-coprime-torsion-decomposition"
-   ],
-   "elementary": false
+   "text": "For the property P(A) = IsZero(R^q h_* constant(A)), prove that zero objects satisfy P and that P is isomorphism invariant using Functor.map_isZero and mapIso. Constant sheafification is exact by the existing arbitrary-coefficient exactness instances. The source-library map_exact_of_isHomological applies to the derived pushforward followed by degree-q homology, giving middle exactness for the mapped short exact sequence. Exact.isZero_X₂ makes P extension closed. These are direct applications of proved library declarations, valid in every integer degree.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Each remaining primary subgroup is the filtered union of its finitely generated subgroups. Such a subgroup is finite because it is a quotient of a finite sum of Z/r^k for a common exponent k. Use the finite abelian group structure theorem (or equiv_free_prod_directSum_zmod, whose free part is zero for a bounded torsion group) to write it as a finite sum of cyclic prime-power groups. Nonzero cyclic orders involve only its primary prime, which divides n.",
+   "text": "Apply the finite-submodule colimit reduction. For each finite submodule N, apply the finite torsion property induction to P and the inherited annihilator n. If multiplication by r is noninjective on N, then it is noninjective on M: otherwise restriction along the injective subtype map gives injectivity on N. Thus the original prime-vanishing hypothesis supplies the prime clause for N. This proves the required vanishing for every finite submodule.",
    "uses": [
-    "lem-sbc-finitely-generated-abelian-group-structure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The existing preservesFiniteLimits_constantSheaf and preservesFiniteColimits_constantSheaf instances in WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver make constant sheafification exact over the integers; apply ShortComplex.ShortExact.map_of_exact directly. The finite-ring theorem constantEtaleSheaf_shortExact is not applicable here. Apply higher direct image to the short exact sequences 0 -> Z/r^(j-1) -> Z/r^j -> Z/r -> 0. The exact sequence is exact at the middle degree-q term; if its outer terms are zero, so is that middle term. Induct on j starting from j=0, where the cyclic group is zero. Finite additivity then gives vanishing for each finite subgroup.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-long-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Constant sheaves preserve colimits. On each affine etale object of X its inverse image under h is qcqs. Apply the filtered-colimit cohomology theorem there, then the sheafified higher-direct-image formula, to commute higher direct image with the subgroup union. This argument must handle the subgroup index universe, not just diagrams in Type 0. Thus each primary subgroup has zero image; finite additivity gives the conclusion. Negative degrees vanish for a sheaf placed in degree zero. If n=1, M=0 and the primary sum is empty.",
-   "uses": [
-    "lemma-weil-pbc-direct-image-filtered-colimit",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "sbc-lem-higher-direct-image-presheaf"
+    "lem-sbc-constant-finite-submodule-vanishing",
+    "lem-sbc-finite-torsion-extension-induction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-finitely-generated-abelian-group-structure",
-  "lem-sc-coprime-torsion-decomposition",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "sbc-lem-higher-direct-image-presheaf"
+  "lem-sbc-constant-finite-submodule-vanishing",
+  "lem-sbc-finite-torsion-extension-induction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project; Mathlib.GroupTheory.FiniteAbelian.Basic",
-  "place": "Tag 0F08, proof of Lemma 59.88.7, cyclic-coefficient paragraph; Tag 0739 (lemma-colimit); Basic.lean:119-166 for finite generation and finite cyclic decomposition; the injective-prime exclusion follows from iterated injectivity"
+  "document": "Stacks Project Tags 0F08 and 0739; source-library SingleTriangle.lean",
+  "place": "Cyclic-coefficient paragraph; lemma-colimit; map_exact_of_isHomological"
  },
  "mathlib_searches": [
   {
@@ -139,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T085324-L-33645",
+  "landing": "20261012T110326-L-624937",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
