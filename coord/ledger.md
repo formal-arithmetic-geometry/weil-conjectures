@@ -7507,3 +7507,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare (stage 3; reviewer PASS; first push; landing 20261012T112839-L-767645 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/G2/Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T112839-L-767744 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/G2/Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer (stage 3; reviewer PASS; first push; landing 20261012T112840-L-767849 (interface); batch 20261012T112824; modules 2; new nodes 1)
+- 11:28 L: merged deliver/G2/Sheaf.RingTheory.SeparateImageClosedFromClosed (stage 3; reviewer PASS; first push; landing 20261012T112840-L-767950 (proof); batch 20261012T112824; modules 1; new nodes 0)

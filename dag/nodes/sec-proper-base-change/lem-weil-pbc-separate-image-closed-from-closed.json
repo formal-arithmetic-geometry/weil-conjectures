@@ -23,45 +23,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*The closure of the image.* Put $I'=\\varphi^{-1}(J)$, an ideal of $R$. The closure in $\\operatorname{Spec}R$ of the image of $V(J)$ under $\\operatorname{Spec}\\varphi$ is $V(I')$ [lem-weil-pbc-closure-image-spec-zero-locus]. (Stacks takes any ideal $I'$ with $V(I')$ equal to that closure, which exists since closed subsets of $\\operatorname{Spec}R$ are of the form $V(I')$; we take this particular one.)",
-   "uses": [
-    "lem-weil-pbc-closure-image-spec-zero-locus"
-   ],
+   "text": "Rewrite the closure of the image as the zero locus of the comap ideal using Mathlib `PrimeSpectrum.closure_image_comap_zeroLocus`.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M3 (lemma-separate-image-closed-from-closed), first sentence ('Let I' be an ideal such that V(I') is the closure of the image of V(J)'), with the choice I' = phi^{-1}(J) made by the agent (Algebra, proof of Lemma Tag 00FL)"
+    "document": "Mathlib.RingTheory.Spectrum.Prime.Topology",
+    "place": "declaration closure_image_comap_zeroLocus"
    }
   },
   {
-   "text": "*$I+I'=R$.* By hypothesis $V(I)\\cap V(I')=\\emptyset$ (step 1). Hence $I+I'=R$ [lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal], and there are $g\\in I$ and $f\\in I'$ with $1=g+f$.",
-   "uses": [
-    "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal"
-   ],
+   "text": "Apply Mathlib `Ideal.coprime_of_no_prime_ge` to the disjoint zero loci. A common prime would give a point in both zero loci, contradicting disjointness; hence I and J.comap φ are coprime.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M3, second and third sentences ('hence I + I' = R by Algebra, Lemma lemma-Zariski-topology. Write 1 = g + f with g in I and f in I'') (Algebra Lemma Tag 00E0, parts (8), (10))"
+    "document": "Mathlib.RingTheory.Ideal.Operations",
+    "place": "declaration Ideal.coprime_of_no_prime_ge"
    }
   },
   {
-   "text": "*Conclusion.* $f=1-g$ with $g\\in I$, so the image of $f$ in $R/I$ is $1$. And $f\\in I'=\\varphi^{-1}(J)$ means $\\varphi(f)\\in J$. (Stacks, with an arbitrary $I'$, only gets $V(\\varphi(f))\\supseteq V(J)$, hence $\\varphi(f)^n\\in J$ for some $n$ by Algebra 00E0 (7), and replaces $f$ by $f^n$, still $\\equiv1$ mod $I$; with $I'=\\varphi^{-1}(J)$ one has $n=1$ and this step is not needed.)",
+   "text": "Use `IsCoprime.exists` to obtain 1 = g + f with g ∈ I and f ∈ J.comap φ. Applying the quotient map to this equality gives the image of f equal to 1 modulo I, while comap membership gives φ f ∈ J.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M3, last three sentences ('We have V(f') ⊃ V(J) ... Replacing f by f^n we win'), simplified to n = 1 by the choice of I' in step 1"
+    "document": "Mathlib.RingTheory.Ideal.Operations",
+    "place": "declaration IsCoprime.exists"
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-closure-image-spec-zero-locus",
-  "lem-weil-pbc-spec-zero-loci-disjoint-unit-ideal"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07M3 (lemma-separate-image-closed-from-closed), proof (more-algebra.tex lines 1947-1957)"
+  "by": "mathlib",
+  "document": "Mathlib.RingTheory.Spectrum.Prime.Topology and Mathlib.RingTheory.Ideal.Operations",
+  "place": "closure_image_comap_zeroLocus, Ideal.coprime_of_no_prime_ge, IsCoprime.exists"
  },
  "mathlib_searches": [
   {
@@ -151,5 +144,15 @@
   "group": "E1",
   "result": "pass",
   "note": "R,S arbitrary CommRing in independent universes; phi : R →+* S; ideals I,J; hypothesis Disjoint (closure (comap phi '' zeroLocus J)) (zeroLocus I); conclusion ∃ f, mk I f = 1 ∧ phi f ∈ J; no extra hypotheses, edge cases I/J = ⊤/⊥ fine"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T112840-L-767950",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
