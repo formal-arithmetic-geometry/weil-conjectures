@@ -7998,3 +7998,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull (stage 3; reviewer PASS; first push; landing 20261012T135337-L-1701801 (proof); batch 20261012T135212; modules 1; new nodes 2)
 - 13:53 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.SpreadPurelyInseparableFactors (stage 3; reviewer PASS; first push; landing 20261012T135337-L-1701943 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/Y2/Sheaf.CategoryTheory.Abelian.HorseshoePrescribedRows (stage 3; reviewer PASS; first push; landing 20261012T135338-L-1702106 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:53 L: merged deliver/Y2/Sheaf.FieldTheory.GenericSeparableAlgebraSplitting (stage 3; reviewer PASS; first push; landing 20261012T135338-L-1702253 (proof); batch 20261012T135212; modules 1; new nodes 0)

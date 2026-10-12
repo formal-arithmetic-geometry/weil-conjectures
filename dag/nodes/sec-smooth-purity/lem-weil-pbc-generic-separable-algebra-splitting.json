@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] applied with the base field $K$ (a local ring whose only prime is $(0)$) and $B=C$, the ring $C$ has finitely many prime ideals $\\mathfrak m_1,\\dots,\\mathfrak m_r$, each maximal, with $\\mathfrak m_1\\cap\\dots\\cap\\mathfrak m_r=N:=\\sqrt{(0)}$. Distinct maximal ideals are pairwise comaximal, so [lem-pc-crt-ideal-quotient-product] gives $C_{\\mathrm{red}}=C/N\\cong E_1\\times\\cdots\\times E_r$ with $E_i=C/\\mathfrak m_i$, a field which is finite over $K$ as a quotient of the finite-dimensional $C$ ($r=0$ when $C=0$). If $N^m=0$, then the image of $N\\otimes_KK'$ in $C\\otimes_KK'$ has $m$th power zero, and by right exactness of $-\\otimes_KK'$ the quotient by it is $C_{\\mathrm{red}}\\otimes_KK'\\cong\\prod_i E_i\\otimes_KK'$; hence $(C\\otimes_KK')_{\\mathrm{red}}\\cong\\prod_i(E_i\\otimes_KK')_{\\mathrm{red}}$, since an element of a finite product is nilpotent exactly when each component is nilpotent.",
+   "text": "Apply the finite-over-zero-dimensional-field Artinian argument of [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] to C. Mathlib isArtinian_of_tower makes C an Artinian ring, and IsArtinianRing.quotNilradicalEquivPi packages its finite maximal spectrum, nilradical intersection, and the Chinese remainder theorem [lem-pc-crt-ideal-quotient-product] into C/nilradical(C) ≃ product of C/m. Quotients are finite K-modules and maximal-ideal quotients have the canonical field structure Ideal.Quotient.field. Reindex MaximalSpectrum C by Fin(card) using Fintype.equivFin; this also covers the zero ring with its empty maximal spectrum.",
    "uses": [
     "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
     "lem-pc-crt-ideal-quotient-product"
@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-separable-split-purely-inseparable-residue-fields] to the finite extensions $E_1,\\dots,E_r$ of $K$. It gives a finite separable field extension $K'/K$ such that every prime of each finite $K'$-algebra $K'\\otimes_KE_i$ has residue field finite purely inseparable over $K'$.",
+   "text": "Apply [lem-weil-pbc-separable-split-purely-inseparable-residue-fields], Algebra.exists_separable_split_purelyInseparable_prime_quotients, to the finite family E_i = C/m_i. Obtain K′/K finite separable, and for every prime of K′ tensor E_i a finite purely inseparable quotient over K′. Only this part of its conclusion is needed; the extra Galois and embedding conclusions are discarded.",
    "uses": [
     "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
    ],
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "For each $i$, the finite $K'$-algebra $K'\\otimes_KE_i$ has finitely many maximal ideals and nilradical equal to their intersection, by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] with the base ring $K'$. The maximal ideals are pairwise comaximal, so [lem-pc-crt-ideal-quotient-product] identifies its reduction with the finite product of its residue fields. Each such residue field is finite purely inseparable over $K'$ by step 2.",
+   "text": "The image I of nilradical(C) in K′ tensor C is contained in its nilradical: nilpotent elements map to nilpotent elements, and Ideal.map_le_iff_le_comap extends this to their generated ideal. A surjective algebra map with kernel in the nilradical induces a bijection on reductions: if f(x) is nilpotent, some x^n is in the kernel, hence x^n and therefore x are nilpotent. Apply this to the quotient by I; Mathlib Algebra.TensorProduct.tensorQuotientEquiv identifies that quotient with K′ tensor C_red. Tensor the original decomposition using TensorProduct.congr and TensorProduct.piRight. Reduction respects algebra equivalences and finite products: the componentwise quotient map is surjective, and a tuple of nilpotent elements is nilpotent because Finite.exists_le gives a common bound on their exponents. Each K′ tensor E_i is Artinian by module-finiteness and isArtinian_of_tower. Apply IsArtinianRing.quotNilradicalEquivPi, which implements the finite-spectrum and Chinese-remainder calculations of [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] and [lem-pc-crt-ideal-quotient-product]. The factors are exactly its maximal-ideal quotients, whose finiteness and pure inseparability come from [lem-weil-pbc-separable-split-purely-inseparable-residue-fields]. All these reduction and tensor identifications are proved by private Lean helpers in this module.",
    "uses": [
     "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
     "lem-pc-crt-ideal-quotient-product",
@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "Taking the product over $i$ and using the last isomorphism of step 1 yields $(C\\otimes_KK')_{\\mathrm{red}}\\cong\\prod_jL_j$, where every $L_j/K'$ is finite purely inseparable. The extension $K'/K$ is finite separable by construction, which proves the statement.",
+   "text": "Flatten the product indexed by i and MaximalSpectrum(K′ tensor E_i) into a product over their finite dependent sum, then reindex it by Fin(card) using AlgEquiv.piCongrLeft′. Use Ideal.Quotient.field for each factor and the field-splitting theorem for its finite-dimensionality and pure inseparability. Swap C tensor K′ to K′ tensor C with TensorProduct.comm, checking that this is a K′-algebra equivalence for the original rightAlgebra structure. Compose the proved algebra equivalences and retain the chosen extension’s finite-dimensionality and separability.",
    "uses": [
     "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
    ],
@@ -75,9 +75,9 @@
   "lem-pc-crt-ideal-quotient-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Proof of Lemma 02LM, finite-algebra calculation, with Algebra Lemmas 00KH, 00E0 and 00DT"
+  "place": "Proof of Lemma 02LM, finite-algebra calculation; implemented using Mathlib Artinian CRT, tensor quotient and finite-product equivalences. Nilradical transport and finite-product reduction are proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -172,5 +172,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T135338-L-1702253",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
