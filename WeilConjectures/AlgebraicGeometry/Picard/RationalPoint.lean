@@ -32,6 +32,11 @@ hold as soon as `X` has a `k`-rational point `σ`.  Consequently the `σ`-normal
   `lem-pc-rational-hyp`).
 - `AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor`: for a smooth projective
   curve with a rational point `σ`, `Pic_{X/k,σ} ≅ Pic_{X/k}` (blueprint `cor-pc-sigma-pic-iso`).
+- `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_section`: an integral proper `k`-scheme
+  with a `k`-rational point has `H⁰(X, 𝒪_X) = k`.
+- `AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_section` and
+  `AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor_of_isIntegral`: the two
+  results above for an integral proper `X` with a rational point, as in the blueprint.
 
 ## Implementation notes
 
@@ -85,6 +90,37 @@ theorem isIso_pushforwardUnitMap_of_bijective_app {Z B : Scheme.{u}} (g : Z ⟶ 
   exact hg A hA
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+/-- **A rational point forces `H⁰(X, 𝒪_X) = k`.** Let `X` be an integral proper scheme over a
+field `k` with a `k`-rational point `σ`.  Then `k → H⁰(X, 𝒪_X)` is bijective: `H⁰(X, 𝒪_X)` is a
+domain integral over `k`, hence a field, and evaluation at `σ` is a ring homomorphism
+`H⁰(X, 𝒪_X) → k` retracting `k → H⁰(X, 𝒪_X)`; being a homomorphism out of a field it is
+injective, so both maps are bijective.
+
+(blueprint: `lem-pc-rational-hyp`) -/
+theorem Scheme.GlobalSectionsBijective.of_section [IsIntegral X]
+    [UniversallyClosed (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
+    (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) : GlobalSectionsBijective k X := by
+  let ι := globalSectionsRingHom k (X := X)
+  let r : Γ(X, ⊤) →+* k := (σ.appTop ≫ (Scheme.ΓSpecIso (.of k)).hom).hom
+  have hr (c : k) : r (ι c) = c := by
+    change ((Scheme.ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop ≫ σ.appTop ≫
+      (Scheme.ΓSpecIso (.of k)).hom).hom c = c
+    rw [← Category.assoc (X ↘ Spec (.of k)).appTop, ← Scheme.Hom.comp_appTop, hσ]
+    simp
+  let := ι.toAlgebra
+  have : Algebra.IsIntegral k Γ(X, ⊤) := ⟨isIntegral_globalSectionsRingHom (k := k) (X := X)⟩
+  have hF : IsField Γ(X, ⊤) := isField_of_isIntegral_of_isField' (Field.toIsField k)
+  have hrinj : Function.Injective r := by
+    rw [injective_iff_map_eq_zero]
+    intro a ha
+    by_contra h0
+    obtain ⟨b, hb⟩ := hF.mul_inv_cancel h0
+    have := congrArg r hb
+    rw [map_mul, ha, zero_mul, map_one] at this
+    exact zero_ne_one this
+  refine ⟨⟨fun a b h ↦ by rw [← hr a, ← hr b]; exact congrArg r h, fun a ↦ ⟨r a, ?_⟩⟩⟩
+  exact hrinj (hr (r a))
 
 /-- **`f_* 𝒪_X = 𝒪_k`.** For a quasi-compact quasi-separated `k`-scheme `X` with
 `H⁰(X, 𝒪_X) = k`, e.g. a smooth proper connected scheme over a separably closed field
@@ -187,6 +223,46 @@ theorem nonempty_picardFunctorNormalized_iso_picardFunctor
     rw [isIso_iff_bijective]
     exact bijective_toPicardFunctor_picardFunctorNormalized _ σ hσ
       isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T.unop
+  exact ⟨asIso ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).ι ≫
+    toPicardFunctor (X ↘ Spec (.of k)))⟩
+
+
+/-- **Curves with a rational point satisfy the hypotheses of the split exact sequence.** Let `X`
+be an integral proper scheme over a field `k` (e.g. a smooth projective curve) with a `k`-rational
+point `σ`.  Then `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `k`-scheme `T`: the rational
+point forces `H⁰(X, 𝒪_X) = k`
+(`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_section`), and this is
+`AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd`.  Together with the section `σ`, these
+are the hypotheses of `AlgebraicGeometry.bijective_pic_split` (Stacks 0B9U).
+
+(blueprint: `lem-pc-rational-hyp`) -/
+theorem isIso_pushforwardUnitMap_pullback_snd_of_section [IsIntegral X]
+    [IsProper (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
+    (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) (T : Over (Spec (.of k))) :
+    IsIso (pushforwardUnitMap (pullback.snd (X ↘ Spec (.of k)) T.hom)) :=
+  have := Scheme.GlobalSectionsBijective.of_section σ hσ
+  isIso_pushforwardUnitMap_pullback_snd T
+
+/-- **`Pic_{X/k,σ}` is isomorphic to `Pic_{X/k}`.** Let `X` be an integral proper scheme over a
+field `k` (e.g. a smooth projective curve) with a `k`-rational point `σ`.  Then the inclusion of
+the `σ`-normalized Picard functor followed by the sheafification map, `Pic_{X/k,σ} ⟶ Pic_{X/k}`,
+is an isomorphism of functors on `(Sch/k)_fppf`, by
+`AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_section` and
+`AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized`.
+
+(blueprint: `cor-pc-sigma-pic-iso`) -/
+theorem nonempty_picardFunctorNormalized_iso_picardFunctor_of_isIntegral [IsIntegral X]
+    [IsProper (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
+    (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) :
+    Nonempty ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).toFunctor ≅
+      (picardFunctor (X ↘ Spec (.of k))).obj) := by
+  have : IsIso ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).ι ≫
+      toPicardFunctor (X ↘ Spec (.of k))) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro T
+    rw [isIso_iff_bijective]
+    exact bijective_toPicardFunctor_picardFunctorNormalized _ σ hσ
+      (isIso_pushforwardUnitMap_pullback_snd_of_section σ hσ) T.unop
   exact ⟨asIso ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).ι ≫
     toPicardFunctor (X ↘ Spec (.of k)))⟩
 
