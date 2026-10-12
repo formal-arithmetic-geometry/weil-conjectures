@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "The square $(X_{U'},\\pi,q')$ is cartesian over $(q,\\psi)$. Consider the commutative diagram with rows $X_{U'}\\xrightarrow{\\pi}X_U\\xrightarrow{p}X$ and $U'\\xrightarrow{\\psi}U\\xrightarrow{\\varphi}S$ and columns $q'$, $q$, $f$: it commutes since $q\\circ\\pi=\\psi\\circ q'$ and $f\\circ p=\\varphi\\circ q$. Apply [lem-weil-pbc-cartesian-square-pasting] to it, read with $X'=X_{U'}$, $X=U'$, $Y'=X_U$, $Y=U$, $Z'=X$, $Z=S$ and $a=q'$, $f'=\\pi$, $f=\\psi$, $b=q$, $h'=p$, $h=\\varphi$, $c=f$ (so $fa=bf'$ is $\\psi q'=q\\pi$ and $hb=ch'$ is $\\varphi q=fp$). The lower square is cartesian: $(X_U,q,p)$ is the fibre product of $\\varphi$ and $f$ [def-pc-fibre-product]. The outer rectangle is cartesian: $(X_{U'},q',p\\circ\\pi)=(X_{U'},q',p')$ is the fibre product of $\\varphi\\circ\\psi$ and $f$ by definition of $X_{U'}$. Hence the upper square is cartesian: $(X_{U'},\\pi,q')$ is a fibre product $X_U\\times_UU'$ of $q:X_U\\to U$ and $\\psi:U'\\to U$, with first projection $\\pi$ and second projection $q'$.",
+   "text": "The square $(X_{U'},\\pi,q')$ is cartesian over $(q,\\psi)$. Consider the commutative diagram with rows $X_{U'}\\xrightarrow{\\pi}X_U\\xrightarrow{p}X$ and $U'\\xrightarrow{\\psi}U\\xrightarrow{\\varphi}S$ and columns $q'$, $q$, $f$: it commutes since $q\\circ\\pi=\\psi\\circ q'$ and $f\\circ p=\\varphi\\circ q$. Apply [lem-weil-pbc-cartesian-square-pasting] to it, read with $X'=X_{U'}$, $X=U'$, $Y'=X_U$, $Y=U$, $Z'=X$, $Z=S$ and $a=q'$, $f'=\\pi$, $f=\\psi$, $b=q$, $h'=p$, $h=\\varphi$, $c=f$ (so $fa=bf'$ is $\\psi q'=q\\pi$ and $hb=ch'$ is $\\varphi q=fp$). The lower square is cartesian: $(X_U,q,p)$ is the fibre product of $\\varphi$ and $f$ [def-pc-fibre-product]. The outer rectangle is cartesian: $(X_{U'},q',p\\circ\\pi)=(X_{U'},q',p')$ is the fibre product of $\\varphi\\circ\\psi$ and $f$ by definition of $X_{U'}$. Hence the upper square is cartesian: $(X_{U'},\\pi,q')$ is a fibre product $X_U\\times_UU'$ of $q:X_U\\to U$ and $\\psi:U'\\to U$, with first projection $\\pi$ and second projection $q'$. Lean implementation: IsPullback.paste_horiz_iff applied to IsPullback.of_hasPullback f φ, using hπq for commutativity and hπp to identify the outer square.",
    "uses": [
     "lem-weil-pbc-cartesian-square-pasting",
     "def-pc-fibre-product"
@@ -43,10 +43,9 @@
    }
   },
   {
-   "text": "(i') $V'\\to U'$ is finite. Apply [lem-weil-pbc-open-fibre-product] to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 (morphisms $q:X_U\\to U$, $\\psi:U'\\to U$, projections $\\pi$, $q'$) with the open subschemes $U\\subseteq U$, $V\\subseteq X_U$, $U'\\subseteq U'$ ($q(V)\\subseteq U$ and $\\psi(U')\\subseteq U$ trivially): the canonical morphism $V\\times_UU'\\to X_{U'}$ is an open immersion [def-weil-open-immersion] with image $\\pi^{-1}(V)\\cap q'^{-1}(U')=\\pi^{-1}(V)=V'$, compatibly with the projections. So the open subscheme $V'$, with the morphism $V'\\hookrightarrow X_{U'}\\xrightarrow{q'}U'$, is isomorphic over $U'$ to $V\\times_UU'$ with its second projection, i.e. to the base change of $q|_V:V\\to U$ along $\\psi$. By hypothesis (i) $q|_V$ is finite [def-weil-finite-integral-morphism], so by [lem-weil-pbc-finite-morphism-permanence] (a) the projection $V\\times_UU'\\to U'$ is finite, and hence so is $V'\\to U'$ (composing with the isomorphism $V'\\cong V\\times_UU'$ over $U'$, an isomorphism being finite).",
+   "text": "(i') The restriction r: V'=pi^{-1}(V) -> V forms a cartesian square with the two open inclusions and pi. Indeed a morphism into X_{U'} whose composite with pi factors through V has image in pi^{-1}(V), so factors uniquely through V'; the projections agree by restriction. This is Mathlib isPullback_morphismRestrict pi V. Paste this square vertically with the cartesian square of step 1 to obtain IsPullback r q' (q|_V) psi. Since q|_V is finite [def-weil-finite-integral-morphism], stability under base change [lem-weil-pbc-finite-morphism-permanence] gives finiteness of q':V' -> U', directly by MorphismProperty.of_isPullback. This argument uses the defining universal property of restriction and fibre products [def-pc-fibre-product], without constructing the separate open immersion from V times_U U' into X_{U'}.",
    "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion",
+    "def-pc-fibre-product",
     "def-weil-finite-integral-morphism",
     "lem-weil-pbc-finite-morphism-permanence"
    ],
@@ -57,7 +56,7 @@
    }
   },
   {
-   "text": "(ii') Exactly one point $v'$ of $V'$ over $u'$, and $\\pi(v')=v$. Let $z\\in V'$ with $q'(z)=u'$. Then $y=\\pi(z)\\in V$ and $q(y)=\\psi(q'(z))=\\psi(u')=u$, so $y=v$ by (ii). Conversely every $z\\in X_{U'}$ with $\\pi(z)=v$ lies in $\\pi^{-1}(V)=V'$. Hence $\\{z\\in V':q'(z)=u'\\}=\\pi^{-1}(v)\\cap q'^{-1}(u')$. By [lem-weil-pbc-fibre-product-points], applied to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 (with the points $v\\in X_U$, $u'\\in U'$, $q(v)=u=\\psi(u')$), this set is in bijection with $\\operatorname{Spec}(\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u'))$, the maps $\\kappa(u)\\to\\kappa(v)$, $\\kappa(u)\\to\\kappa(u')$ being induced by $q$ and $\\psi$ [def-weil-residue-field]. Since $r:\\kappa(u)\\to\\kappa(u')$ is an isomorphism by hypothesis, $\\kappa(v)\\to\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u')$, $a\\mapsto a\\otimes1$, is a ring isomorphism (inverse $a\\otimes b\\mapsto a\\,r^{-1}(b)$), so the tensor product is a field and its spectrum has exactly one point (the zero ideal). Therefore there is exactly one $v'\\in V'$ with $q'(v')=u'$, and $\\pi(v')=v$.",
+   "text": "(ii') Exactly one point $v'$ of $V'$ over $u'$, and $\\pi(v')=v$. Let $z\\in V'$ with $q'(z)=u'$. Then $y=\\pi(z)\\in V$ and $q(y)=\\psi(q'(z))=\\psi(u')=u$, so $y=v$ by (ii). Conversely every $z\\in X_{U'}$ with $\\pi(z)=v$ lies in $\\pi^{-1}(V)=V'$. Hence $\\{z\\in V':q'(z)=u'\\}=\\pi^{-1}(v)\\cap q'^{-1}(u')$. By [lem-weil-pbc-fibre-product-points], applied to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 (with the points $v\\in X_U$, $u'\\in U'$, $q(v)=u=\\psi(u')$), this set is in bijection with $\\operatorname{Spec}(\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u'))$, the maps $\\kappa(u)\\to\\kappa(v)$, $\\kappa(u)\\to\\kappa(u')$ being induced by $q$ and $\\psi$ [def-weil-residue-field]. Since $r:\\kappa(u)\\to\\kappa(u')$ is an isomorphism by hypothesis, $\\kappa(v)\\to\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u')$, $a\\mapsto a\\otimes1$, is a ring isomorphism (inverse $a\\otimes b\\mapsto a\\,r^{-1}(b)$), so the tensor product is a field and its spectrum has exactly one point (the zero ideal). Therefore there is exactly one $v'\\in V'$ with $q'(v')=u'$, and $\\pi(v')=v$. Lean implementation: Scheme.exists_preimage_of_isPullback supplies existence. In the private proved helper pullback_point_unique, Triplet.tensorInl is an isomorphism by IsPushout.isIso_inl_of_isIso because the right residue-field map is an isomorphism. Spec.map tensorInl is therefore an isomorphism to a field spectrum, so its injectivity and the uniqueness of the point of the latter identify the primes in carrierEquiv. The isomorphism hr.isoPullback transfers this conclusion to the inverse-image open.",
    "uses": [
     "lem-weil-pbc-fibre-product-points",
     "def-weil-residue-field"
@@ -69,7 +68,7 @@
    }
   },
   {
-   "text": "(iii') $p'(v')=x$ and $\\kappa(x)\\cong\\kappa(v')$. First $p'(v')=p(\\pi(v'))=p(v)=x$ by step 3 and (iii). Apply [lem-weil-pbc-fibre-product-point-residue-field] to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 and the point $z=v'$ (so $\\pi(z)=v$, $q'(z)=u'$, over $u$): with $R=\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u')$ and $\\mathfrak p$ the kernel of $R\\to\\kappa(v')$, $a\\otimes b\\mapsto\\pi^\\sharp(a)q'^\\sharp(b)$. By step 3, $R$ is a field, so $\\mathfrak p=0$ and $R/\\mathfrak p=R$ is a field; hence $R\\to\\kappa(v')$ is an isomorphism compatible with the maps from $\\kappa(v)$, i.e. $\\pi^\\sharp:\\kappa(v)\\to\\kappa(v')$ is the composite of the isomorphism $\\kappa(v)\\to R$, $a\\mapsto a\\otimes1$, of step 3 and the isomorphism $R\\to\\kappa(v')$, so $\\pi^\\sharp$ is an isomorphism. The map $\\kappa(x)\\to\\kappa(v')$ induced by $p'=p\\circ\\pi$ is the composite of $\\kappa(x)\\to\\kappa(v)$ induced by $p$ and $\\pi^\\sharp$ (the maps on residue fields [def-weil-residue-field] come from the maps of local rings $\\mathcal O_{X,x}\\to\\mathcal O_{X_U,v}\\to\\mathcal O_{X_{U'},v'}$, whose composite is the map of $p'$); the first is an isomorphism by (iii), so the composite is an isomorphism.",
+   "text": "(iii') $p'(v')=x$ and $\\kappa(x)\\cong\\kappa(v')$. First $p'(v')=p(\\pi(v'))=p(v)=x$ by step 3 and (iii). Apply [lem-weil-pbc-fibre-product-point-residue-field] to the fibre product $X_{U'}=X_U\\times_UU'$ of step 1 and the point $z=v'$ (so $\\pi(z)=v$, $q'(z)=u'$, over $u$): with $R=\\kappa(v)\\otimes_{\\kappa(u)}\\kappa(u')$ and $\\mathfrak p$ the kernel of $R\\to\\kappa(v')$, $a\\otimes b\\mapsto\\pi^\\sharp(a)q'^\\sharp(b)$. By step 3, $R$ is a field, so $\\mathfrak p=0$ and $R/\\mathfrak p=R$ is a field; hence $R\\to\\kappa(v')$ is an isomorphism compatible with the maps from $\\kappa(v)$, i.e. $\\pi^\\sharp:\\kappa(v)\\to\\kappa(v')$ is the composite of the isomorphism $\\kappa(v)\\to R$, $a\\mapsto a\\otimes1$, of step 3 and the isomorphism $R\\to\\kappa(v')$, so $\\pi^\\sharp$ is an isomorphism. The map $\\kappa(x)\\to\\kappa(v')$ induced by $p'=p\\circ\\pi$ is the composite of $\\kappa(x)\\to\\kappa(v)$ induced by $p$ and $\\pi^\\sharp$ (the maps on residue fields [def-weil-residue-field] come from the maps of local rings $\\mathcal O_{X,x}\\to\\mathcal O_{X_U,v}\\to\\mathcal O_{X_{U'},v'}$, whose composite is the map of $p'$); the first is an isomorphism by (iii), so the composite is an isomorphism. Lean implementation: the private proved helper pullback_fst_residue_iso transports the field structure through tensorInl, identifies the kernel of ofPointTensor with zero by injectivity of field maps, and applies the quotient-field clause of exists_residueField_equiv_ofPointTensor. Its left-factor compatibility proves surjectivity of the first residue-field map; injectivity follows because its source is a field. Transfer through hr.isoPullback and residueFieldMap_comp gives the residue-field isomorphism of the restricted projection and then the composite to X. morphismRestrict_ι and hπp prove both point-image equalities.",
    "uses": [
     "lem-weil-pbc-fibre-product-point-residue-field",
     "def-weil-residue-field"
@@ -84,8 +83,6 @@
  "proof_deps": [
   "lem-weil-pbc-cartesian-square-pasting",
   "def-pc-fibre-product",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-open-immersion",
   "def-weil-finite-integral-morphism",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-fibre-product-points",
@@ -95,7 +92,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954, stated there without proof; the proof is the agent's, from the fibre-product nodes (points of a fibre product, Stacks 01JT; residue fields of its points)"
+  "place": "More on Morphisms, Lemma 02LK (more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point), final assertion, lines 11951-11954, stated there without proof; the proof is the agent's, from the fibre-product nodes (points of a fibre product, Stacks 01JT; residue fields of its points); R2 stage-3 implementation, 2026-10-12: all four planned steps compiled in Lean, with two fully proved private helpers; no new holes. Second reading by R2: step 2 records the direct restriction-square argument; open-fibre-product and open-immersion dependencies pruned."
  },
  "mathlib_searches": [
   {
@@ -171,5 +168,15 @@
   "group": "F1",
   "result": "pass",
   "note": "f,phi,u0,x,hx; X_U=pullback f phi, p/q=fst/snd; V Opens; (i) IsFinite V.ι≫snd; (ii) v,hv,hunique over all w; (iii) hvx + IsIso residueFieldMap of V.ι≫fst (open-immersion residue field = ambient); psi,u1,hu,hbase IsIso residueFieldMap; X_U'=pullback f (psi≫phi), pi by hπp/hπq; V'=π⁻¹ᵁV; (i')(ii')(iii') and π(V'.ι v')=V.ι v; no etaleness, as node generalizes"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T135308-L-1688811",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
