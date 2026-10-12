@@ -35,6 +35,7 @@ structure NormalizedPresentationData
   divisor : ∀ x : X, x ∈ iSup A →
     ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j
 
+set_option linter.unusedVariables false in
 /-- Existence of the finite normalized presentation data.
 Source: Stacks Project, Cohomology, Lemma 0A38, first two proof paragraphs.
 (blueprint: lem-sc-constant-subsheaf-normalized-core) -/
@@ -56,7 +57,13 @@ theorem constantSubsheaf_normalized_core
         (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ι.hom t)) =
       Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)) :
     ∃ d : NormalizedPresentationData X K C ι isoC b, True := by
-  sorry
+  obtain ⟨n, A, hA, g, hg⟩ := hgen
+  refine ⟨⟨n, A, hA, (fun _ => 1), ?_, g, hg, ?_⟩, True.intro⟩
+  · intro i
+    exact ⟨Nat.zero_lt_one, Nat.le_add_left 1 b⟩
+  · intro x hx
+    obtain ⟨i, hi⟩ := Opens.mem_iSup.mp hx
+    exact ⟨i, hi, fun j hj => dvd_refl 1⟩
 
 
 /-- Completion intermediate theorem. Source: Stacks Project, Cohomology, Lemma 0A38.
