@@ -31,11 +31,11 @@
  ],
  "proof": [
   {
-   "text": "(Limit comparison.) Apply the universal-property lemma [lem-kun-fibre-product-limits] to the compatible inverse systems $(X_i)$, $(S_i)$ and $(T_i)$. The canonical map from the limit of the fibre products to the fibre product of the three limits is an isomorphism. Inverting it and using the given identifications of $X$, $S$, and $T$ with their limits gives $X\\times_ST\\cong\\varprojlim_i(X_i\\times_{S_i}T_i)$, with the stated projections.",
+   "text": "(Limit comparison by universal properties.) Construct the functor of chosen stage pullbacks and its two natural projections. For each stage, pullback.lift of the projections from X times_S T gives a cone. For an arbitrary cone q over the stage pullbacks, compose with the two projections and use the limiting cones of X and T to obtain maps q.pt to X and T. Their composites to S agree: at every stage this is the pullback condition, hence equality follows from the limit universal property for S. The pullback universal property [def-pc-fibre-product] gives the lift q.pt to X times_S T. Its two projection identities give factorization at each stage. Uniqueness follows by checking the two projections, then checking all stage projections into X and T. Thus this explicitly constructed cone is limiting, with exactly the prescribed projections.",
    "uses": [
-    "lem-kun-fibre-product-limits"
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-fibre-product-limits.md",
     "place": "node lem-kun-fibre-product-limits, proof; Stacks Categories Tag 002M as cited in perfect.tex proof of Lemma Tag 0G7X, line 8166"
@@ -53,10 +53,10 @@
    }
   },
   {
-   "text": "(Scheme-theoretic fibres.) For $s\\in S$ with images $s_i\\in S_i$, the residue-field limit [lem-weil-pbc-limit-residue-field] identifies $\\operatorname{Spec}\\kappa(s)$ with $\\varprojlim_i\\operatorname{Spec}\\kappa(s_i)$ over the $S_i$. Apply the same limit-comparison argument of the first step to the diagrams $X_i\\to S_i\\leftarrow\\operatorname{Spec}\\kappa(s_i)$. It gives $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)\\cong\\varprojlim_i(X_i\\times_{S_i}\\operatorname{Spec}\\kappa(s_i))=\\varprojlim_iX_{s_i}$. The transition maps of these fibres are affine by the affine-transition lemma in the second step (with $T_i=\\operatorname{Spec}\\kappa(s_i)$), so they form the asserted affine inverse system.",
+   "text": "(Scheme-theoretic fibres.) Apply [lem-weil-pbc-limit-residue-field] to S, its given limit cone, and s. Its stated object equalities and HEq transition and projection identities identify the spectra diagram with the exact objects Spec kappa(s_i); transport along these equalities using Functor.copyObj and along the cone-point equality. The canonical-map identities in that same theorem make the maps Spec kappa(s_i) to S_i natural and identify their limit map with S.fromSpecResidueField s. The transported cone is limiting and its transition maps are affine. Apply the explicit pullback-cone argument of step 1 and the affine-transition result of step 2 to X_i -> S_i <- Spec kappa(s_i). The resulting stage pullbacks are definitionally X_{s_i}, the limit pullback is definitionally X_s, and the first projection identities are exactly the requested fibre-embedding identities.",
    "uses": [
     "lem-weil-pbc-limit-residue-field",
-    "lem-kun-fibre-product-limits",
+    "def-pc-fibre-product",
     "lem-weil-pbc-fibre-product-affine-transition"
    ],
    "elementary": false,
@@ -67,7 +67,7 @@
   }
  ],
  "proof_deps": [
-  "lem-kun-fibre-product-limits",
+  "def-pc-fibre-product",
   "lem-weil-pbc-fibre-product-affine-transition",
   "lem-weil-pbc-limit-residue-field"
  ],
@@ -154,5 +154,15 @@
   "group": "F1",
   "result": "pass",
   "note": "I:Type u nonempty directed, Scheme.{u}; X,S,T functors with f,g nat (commuting with f_i,g_i); three IsAffineHom transition instances; cones+IsLimit for X,S,T; F,G tied by hF/hG; P.obj=pullback(f_i,g_i), a,b HEq fst/snd (jointly mono => P.map = pullback.map), IsAffineHom P.map, cP.pt=pullback F G with tied projections, IsLimit; fibre clause Q.obj=(f_i).fiber s_i, a=fiberι (mono, checked inferInstance) ties Q.map, cQ.pt=F.fiber s, IsLimit; no let, no hollow hyp"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d6662",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T150957-L-2232215",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered LimitFibreProducts proof and node route match the unchanged theorem; delivered module and direct importer compile cleanly."
  }
 }
