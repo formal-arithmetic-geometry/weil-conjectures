@@ -7,7 +7,6 @@ module
 
 public import Sheaf.RingTheory.EtalePolynomialCertificate
 public import Mathlib.RingTheory.Ideal.Cotangent
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Polynomial witnesses for an inverse conormal differential
 
@@ -53,6 +52,122 @@ theorem conormal_bijective_iff_polynomialCertificate
       (∀ (g : J) (i : Fin n),
         d (Ideal.toCotangent J g) i = α (MvPolynomial.pderiv i g.1)) →
       (Function.Bijective d ↔ EtalePolynomialCertificate f) := by
-  sorry
+  classical
+  dsimp only
+  intro d hd
+  let J := RingHom.ker α.toRingHom
+  let e := RingHom.quotientKerEquivOfSurjective hα
+  let : Module S J.Cotangent := Module.compHom J.Cotangent e.symm.toRingHom
+  have hsmul (r : MvPolynomial (Fin n) R) (x : J.Cotangent) :
+      α r • x = r • x := by
+    change e.symm (α r) • x = r • x
+    rw [show e.symm (α r) = Ideal.Quotient.mk J r from
+      RingHom.quotientKerEquivOfSurjective_symm_apply hα r]
+    exact IsScalarTower.algebraMap_smul (MvPolynomial (Fin n) R ⧸ J) r x
+  have hf (j : Fin m) : f j ∈ J := by
+    rw [show J = Ideal.span (Set.range f) from hker]
+    exact Ideal.subset_span (Set.mem_range_self j)
+  let F : Fin m → J := fun j ↦ ⟨f j, hf j⟩
+  have hdF (j : Fin m) (l : Fin n) :
+      d (J.toCotangent (F j)) l = α (MvPolynomial.pderiv l (f j)) := hd (F j) l
+  have hsum (c : Fin m → MvPolynomial (Fin n) R) :
+      J.toCotangent (∑ j, c j • F j) =
+        ∑ j, α (c j) • J.toCotangent (F j) := by
+    simp only [map_sum, map_smul, hsmul]
+  have hgen (x : J.Cotangent) :
+      ∃ c : Fin m → MvPolynomial (Fin n) R,
+        x = ∑ j, α (c j) • J.toCotangent (F j) := by
+    obtain ⟨g, rfl⟩ := J.toCotangent_surjective x
+    obtain ⟨c, hc⟩ := Ideal.mem_span_range_iff_exists_fun.mp
+      (show g.val ∈ Ideal.span (Set.range f) by
+        rw [← hker]; exact g.property)
+    refine ⟨c, ?_⟩
+    rw [← hsum]
+    congr 1
+    apply Subtype.ext
+    simpa [F, Submodule.coe_sum, Submodule.coe_smul, smul_eq_mul] using hc.symm
+  let G (c : Fin m → Fin n → MvPolynomial (Fin n) R) (k : Fin n) : J :=
+    ∑ j, c j k • F j
+  have hG (c : Fin m → Fin n → MvPolynomial (Fin n) R) (k : Fin n) :
+      (G c k).val = ∑ j, c j k * f j := by
+    simp [G, F, smul_eq_mul]
+  have hGc (c : Fin m → Fin n → MvPolynomial (Fin n) R) (k : Fin n) :
+      J.toCotangent (G c k) = ∑ j, α (c j k) • J.toCotangent (F j) :=
+    hsum (fun j ↦ c j k)
+  have hdG (c : Fin m → Fin n → MvPolynomial (Fin n) R) (k l : Fin n) :
+      d (J.toCotangent (G c k)) l =
+        α (∑ j, c j k * MvPolynomial.pderiv l (f j)) := by
+    rw [hGc, map_sum]
+    simp only [map_smul, Finset.sum_apply, Pi.smul_apply, smul_eq_mul,
+      hdF, map_sum, map_mul]
+  have hsecond (c : Fin m → Fin n → MvPolynomial (Fin n) R) (j : Fin m) :
+      (∑ k, MvPolynomial.pderiv k (f j) * ∑ j', c j' k * f j') - f j ∈ J ^ 2 ↔
+        (∑ k, α (MvPolynomial.pderiv k (f j)) • J.toCotangent (G c k)) =
+          J.toCotangent (F j) := by
+    let z : J := ∑ k, MvPolynomial.pderiv k (f j) • G c k
+    have hz : z.val = ∑ k, MvPolynomial.pderiv k (f j) * ∑ j', c j' k * f j' := by
+      simp [z, smul_eq_mul, hG]
+    rw [← hz]
+    change (z.val - (F j).val ∈ J ^ 2) ↔ _
+    rw [← J.toCotangent_eq]
+    simp only [z, map_sum, map_smul, hsmul]
+  constructor
+  · intro hb
+    have hx (k : Fin n) : ∃ c : Fin m → MvPolynomial (Fin n) R,
+        d (∑ j, α (c j) • J.toCotangent (F j)) = Pi.single k 1 := by
+      obtain ⟨x, hx⟩ := hb.2 (Pi.single k 1)
+      obtain ⟨c, hc⟩ := hgen x
+      exact ⟨c, hc ▸ hx⟩
+    choose c hc using hx
+    refine ⟨fun j k ↦ c k j, ?_, ?_⟩
+    · intro k l
+      rw [← hker, RingHom.mem_ker, map_sub]
+      have he := congrFun (hc k) l
+      rw [← hGc (fun j k ↦ c k j) k] at he
+      rw [hdG (fun j k ↦ c k j) k l] at he
+      simpa [Pi.single_apply, eq_comm, apply_ite] using sub_eq_zero.mpr he
+    · intro j
+      rw [← hker, hsecond]
+      apply hb.1
+      rw [map_sum]
+      simp only [map_smul, hGc, hc]
+      ext l
+      simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Pi.single_apply,
+        mul_ite, mul_one, mul_zero,
+        Finset.sum_ite_eq, Finset.mem_univ, ite_true]
+      exact (hdF j l).symm
+  · rintro ⟨c, hc₁, hc₂⟩
+    have hright (v : Fin n → S) :
+        d (∑ k, v k • J.toCotangent (G c k)) = v := by
+      ext l
+      rw [map_sum]
+      simp only [map_smul, Finset.sum_apply, Pi.smul_apply, smul_eq_mul, hdG]
+      have hfirst (k : Fin n) :
+          α (∑ j, c j k * MvPolynomial.pderiv l (f j)) =
+            (if k = l then 1 else 0) := by
+        have hz : α ((∑ j, c j k * MvPolynomial.pderiv l (f j)) -
+            (if k = l then 1 else 0)) = 0 := by
+          exact hc₁ k l |> (hker ▸ ·) |> RingHom.mem_ker.mp
+        rw [map_sub] at hz
+        exact (by simpa only [apply_ite, map_one, map_zero] using sub_eq_zero.mp hz)
+      simp only [hfirst]
+      simp
+    have hleft (x : J.Cotangent) :
+        (∑ k, d x k • J.toCotangent (G c k)) = x := by
+      obtain ⟨a, rfl⟩ := hgen x
+      have hj (j : Fin m) :
+          (∑ k, d (J.toCotangent (F j)) k • J.toCotangent (G c k)) =
+            J.toCotangent (F j) := by
+        simpa only [hdF] using (hsecond c j).mp
+          (show _ ∈ J ^ 2 by simpa only [J, hker] using hc₂ j)
+      simp only [map_sum, map_smul, Finset.sum_apply, Pi.smul_apply]
+      simp only [Finset.sum_smul]
+      rw [Finset.sum_comm]
+      simp_rw [smul_eq_mul, ← smul_smul, ← Finset.smul_sum, hj]
+    constructor
+    · intro x y hxy
+      rw [← hleft x, ← hleft y, hxy]
+    · intro v
+      exact ⟨∑ k, v k • J.toCotangent (G c k), hright v⟩
 
 end Algebra
