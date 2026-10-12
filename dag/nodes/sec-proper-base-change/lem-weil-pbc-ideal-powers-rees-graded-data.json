@@ -37,31 +37,39 @@
  ],
  "proof": [
   {
-   "text": "A proper scheme over Spec A is Noetherian. Coherence of F gives quasi-coherence and finite type. Apply the affine extended-ideal and ideal-product formulas to identify the images of G_m(U) in F(U) with the span of f^sharp(a)s, a in I^m, including m=0. All G_m are quasi-coherent.",
+   "text": "Properness gives locally finite type; Mathlib supplies local Noetherianity of X. Apply the coherent/quasi-coherent finite-type equivalence to F. Prove quasi-coherence of J^m by two-step induction, starting with O_X and J, and prove quasi-coherence of G_m using the tensor multiplication image. The image is isomorphic to the kernel of its cokernel.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-module-pullback-ideal-quotient",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "def-weil-pbc-coherent-formal-module"
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
    ],
    "elementary": false
   },
   {
-   "text": "For a homogeneous b=a t^k, multiply sections by f^sharp(a). On an affine cover products a a_j lie in I^(m+k), so this maps G_m into G_(m+k). The local lifts are unique under the monomorphic image inclusion and glue on arbitrary opens. Additivity, composition and the degree-zero scalar formula follow by composing with the inclusions into F and using the identities in F.",
+   "text": "Obtain the multiplication maps and their section formula from the strictly smaller multiplication theorem, which requires only quasi-coherence, not finite type, properness or Noetherianity.",
+   "uses": [
+    "lem-weil-pbc-ideal-powers-rees-multiplication"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each ideal-product inclusion is a categorical image inclusion, hence monic and sectionwise injective. For additivity, apply the inclusion and use the coefficient formula, polynomial coefficient additivity, and add_smul. For composition, compare both morphisms after their inclusions into F; rewrite the three coefficient formulas, write both homogeneous polynomials as monomials, and apply monomial multiplication, coefficient evaluation, map_mul and mul_smul. A private cancellation helper eliminates the equal target degrees before cancelling the mono, giving HEq. For degree zero, evaluate the formula on the image of a∈A, use its constant polynomial coefficient, and move the scalar through the linear inclusion. The base-map restriction identity is definitional.",
    "uses": [
     "prop-nagata-rees-graded",
+    "lemma-nagata-rees-piece-membership",
     "lemma-nagata-rees-degree-zero",
+    "def-weil-pbc-coherent-formal-module",
     "def-pc-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "Choose finite local generators of F on U and transport them through G_0 isomorphic to F; set all d_i=0. A section of G_m near y is a finite sum f^sharp(a_j)u_j, a_j in I^m. Shrink once for the finitely many u_j to express them in the chosen generators. The resulting sum c_ij mu_(0,m)(a_j t^m)(s_i) is the required local span. This works for the empty scheme, zero module, I=0, I=A and m=0.",
+   "text": "Apply the degree-zero local generation theorem to F and the coefficient formula. Choose the original theorem’s degree function constantly zero and retain its generating sections and span witnesses.",
    "uses": [
-    "pqf-def-coherent",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "def-pc-scheme"
+    "lem-weil-pbc-ideal-powers-rees-zero-generators"
    ],
    "elementary": false
   }
@@ -69,18 +77,22 @@
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-ideal-powers-rees-multiplication",
   "prop-nagata-rees-graded",
+  "lemma-nagata-rees-piece-membership",
   "lemma-nagata-rees-degree-zero",
   "def-pc-scheme",
-  "pqf-def-coherent"
+  "lem-weil-pbc-ideal-powers-rees-zero-generators"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400"
+  "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400",
+  "note": "Lean reduction of the original statement to multiplication and degree-zero generation; quasi-coherence and all action laws proved in the item."
  },
  "mathlib_searches": [
   {
@@ -148,9 +160,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T153648-L-2394931",
+  "landing": "20261012T194156-L-470313",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

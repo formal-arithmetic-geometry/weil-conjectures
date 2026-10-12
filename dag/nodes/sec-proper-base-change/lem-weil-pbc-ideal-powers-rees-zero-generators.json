@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-ideal-powers-rees-zero-generators",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400: Finite local generators in degree zero for the ideal-power Rees action",
+   "via": [
+    "lem-weil-pbc-ideal-powers-rees-graded-data",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite local generators in degree zero for the ideal-power Rees action",
+ "statement": "Let A be a commutative ring, f:X→Spec A a scheme morphism [def-pc-scheme], I⊂A an ideal, J=I O_X [def-nagata-extended-ideal], and F a quasi-coherent O_X-module of finite type [pqf-def-coherent]. Write G_m=J^m F with its image inclusion j_m [def-weil-pbc-coherent-formal-module], and B_k=I^k t^k [def-nagata-rees-algebra], [def-nagata-rees-piece]. Suppose maps μ_(m,k)(b):G_m→G_(m+k) satisfy j_(m+k)(μ_(m,k)(b)(s))=f^sharp(coeff_k(b)) j_m(s) on every open. Then each x∈X has an open U containing x and finitely many sections s_i∈G_0(U) such that, for every m, V⊂U, t∈G_m(V), and y∈V, some neighbourhood W⊂V of y has t|_W in the O_X(W)-span of μ_(0,m)(b)(s_i|_W), b∈B_m. The empty family is allowed. In particular all generating degrees are zero.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-rees-algebra",
+  "def-nagata-rees-piece"
+ ],
+ "proof": [
+  {
+   "text": "Finite type gives finitely many local generators u_i of F near x. The product with the zeroth ideal power is the image of the left unitor, so j_0:G_0→F is an isomorphism. Lift each u_i to a unique section s_i of G_0 on the same neighbourhood.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given t∈G_m(V) and y∈V, choose an affine neighbourhood of y inside V. The affine product and extended-ideal formulas express j_m(t) there as a finite sum of images of a_j∈I^m times sections v_j of F. Shrink once for the finitely many v_j to express each in the u_i. For each a_j, the monomial a_j t^m belongs to B_m. The assumed coefficient formula identifies its action on s_i with a_j u_i. The resulting expression lies in the required span, and injectivity of j_m gives the equality in G_m. For m=0 use I^0=A; for I=0 all positive components vanish. The zero module and empty scheme impose no extra condition.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lemma-nagata-rees-piece-membership",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lemma-nagata-rees-piece-membership"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400",
+  "note": "Expansion of the multiplication and finite-type assertions in Tag 02O8; source read from the local literature mirror."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous Rees algebra coefficients act on the sheaf of ideal powers times a module; finite type sheaves generate all ideal powers in degree zero",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite local generators of a sheaf generate its ideal powers as a graded Rees module in degree zero",
+   "results": "SheafOfModules.IsFiniteType.exists_localGeneratorsData; Ideal.Filtration.submodule_span_single; reesAlgebra.fg. None supplies the sheaf ideal-power action or its local generation formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.coeff, Polynomial.monomial",
+   "results": "Polynomial.coeff_monomial_same, Polynomial.coeff_mul_monomial, Polynomial.as_sum_support. These concern polynomials, not the required module-sheaf morphisms.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rees|Rees|idealModuleProduct in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Category/ModuleCat/Sheaf; idealPowers|Rees.*action in lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing sheaf action or degree-zero generation theorem. Blueprint searches Rees graded and degree-zero generators return no match; the sheaf Rees algebra and formal-kernel Rees nodes concern different objects.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "second-reader: leanfinder, loogle, grep",
+   "query": "Morphisms of sheaves of modules given by multiplication by a section factoring through an ideal power submodule; SheafOfModules.IsFiniteType; idealModuleProduct|idealSheafPower",
+   "results": "Lean Finder returned local cohomology, tilde sections, sheafification, and adic completion, not the sheaf action. Loogle returned the finite-type predicate and exists_localGeneratorsData, which supply only the choice of generators of F. Repository rg found no existing action or degree-zero Rees-generation result. The quasi-coherence helpers in CoherentFormalModule are private, so cannot be reused directly.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowersReesGradedData",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowersReesZeroGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersReesZeroGenerators.lean",
+  "declaration": "AlgebraicGeometry.idealPowersReesZeroGenerators",
+  "statement": "theorem idealPowersReesZeroGenerators {A : Type v} [CommRing A]\n    {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))\n    (I : Ideal A) (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] :\n    let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F\n    let graded := reesGrading I\n    ∀ (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k))),\n      (∀ (m k : ℕ) (b : graded k) (U : X.Opens) (s : (G m).val.obj (op U)),\n        ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app\n          U).hom ((mu m k b).app U s) =\n        (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom\n          (b.val.val.coeff k)) •\n        ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app\n          U).hom s) →\n      (∀ x : X, ∃ (U : X.Opens), x ∈ U ∧\n      ∃ (r : ℕ) (s : Fin r → (G 0).val.obj (op U)),\n        ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V))\n          (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n            (G m).val.map (homOfLE hWV).op t ∈\n              Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W))\n                {z | ∃ (i : Fin r), 0 ≤ m ∧\n                  ∃ b : graded (m - 0),\n                    HEq z ((mu (0) (m - 0) b).val.app (op W)\n                      ((G (0)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194156-L-470313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194156-L-470313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

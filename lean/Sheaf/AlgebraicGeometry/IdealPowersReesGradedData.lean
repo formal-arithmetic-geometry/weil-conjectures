@@ -11,8 +11,12 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.IdealPowersReesMultiplication
+import Sheaf.AlgebraicGeometry.IdealPowersReesZeroGenerators
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 
 /-! # Graded sheaf data for powers of an extended ideal
 
@@ -27,6 +31,49 @@ universe v
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+private theorem reesProduct_quasicoherent {X : Scheme.{v}} {J : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules)
+    [J.IsQuasicoherent] [F.IsQuasicoherent] :
+    (Scheme.idealModuleProduct ι F).IsQuasicoherent := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  have := (Scheme.Modules.quasiCoherent_tensor_product_affine_sections J F).1
+  let a := MonoidalCategoryStruct.whiskerRight ι F ≫
+    (MonoidalCategoryStruct.leftUnitor F).hom
+  have := Scheme.Modules.isQuasicoherent_cokernel a
+  have := Scheme.Modules.isQuasicoherent_kernel (CategoryTheory.Limits.cokernel.π a)
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+    (CategoryTheory.Abelian.imageIsoImage a) inferInstance
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem reesPower_quasicoherent {X : Scheme.{v}} (J : X.IdealSheafData)
+    (n : ℕ) : (Scheme.idealSheafPower J.toModulesι n).1.IsQuasicoherent := by
+  have := Scheme.Modules.isQuasicoherent_toModules J
+  induction n using Nat.twoStepInduction with
+  | zero =>
+    change (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent
+    exact @SheafOfModules.isQuasicoherent_unit _ _ _ _ X.ringCatSheaf _ _ _ _
+  | one => assumption
+  | more n ih₁ ih₂ => exact reesProduct_quasicoherent J.toModulesι _
+
+private theorem reesProduct_injective {X : Scheme.{v}} {J : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) (U : X.Opens) :
+    Function.Injective ((Scheme.idealModuleProductι ι F).app U) := by
+  have : CategoryTheory.Mono (Scheme.idealModuleProductι ι F) := by
+    dsimp [Scheme.idealModuleProductι]
+    infer_instance
+  have : CategoryTheory.Mono (Scheme.idealModuleProductι ι F).val :=
+    (SheafOfModules.forget _).map_mono _
+  exact (ModuleCat.mono_iff_injective _).mp
+    (inferInstanceAs (Mono ((Scheme.idealModuleProductι ι F).val.app (op U))))
+
+private theorem reesHom_heq {C : Type*} [Category C] (G : ℕ → C) (F : C)
+    (j : ∀ n, G n ⟶ F) [∀ n, Mono (j n)] {a b c : ℕ}
+    (hab : a = b) (u : G c ⟶ G a) (w : G c ⟶ G b)
+    (h : u ≫ j a = w ≫ j b) : HEq u w := by
+  subst b
+  exact heq_of_eq ((cancel_mono (j a)).mp h)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The powers of an extended ideal times a coherent module form a quasi-coherent graded
 sheaf, locally generated in degree zero over the Rees algebra.
 
@@ -88,6 +135,68 @@ theorem idealPowersReesGradedData {A : Type v} [CommRing A] [IsNoetherianRing A]
                   ∃ b : graded (m - d i),
                     HEq z ((mu (d i) (m - d i) b).val.app (op W)
                       ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))}) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  obtain ⟨hqc, hft⟩ :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF
+  let := hqc
+  let := hft
+  let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F
+  let φ (U : X.Opens) :=
+    ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom
+  obtain ⟨mu, hmu⟩ := idealPowersReesMultiplication f I J hJ F
+  refine ⟨mu, hmu, ?_, ?_, ?_, ?_, ?_⟩
+  · intro m
+    have := reesPower_quasicoherent J m
+    exact reesProduct_quasicoherent _ F
+  · intro m k b b'
+    ext U s
+    apply reesProduct_injective _ F U
+    change ((Scheme.idealModuleProductι
+      (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app U).hom
+        ((mu m k (b + b')).app U s) =
+      ((Scheme.idealModuleProductι
+        (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app U).hom
+          ((mu m k b).app U s + (mu m k b').app U s)
+    rw [map_add, hmu, hmu, hmu]
+    simp [add_smul]
+  · intro m k l b b'
+    let j (n : ℕ) := Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F
+    have (n : ℕ) : Mono (j n) := by
+      dsimp [j, Scheme.idealModuleProductι]
+      infer_instance
+    apply reesHom_heq G F j (by omega)
+    ext U s
+    change (j ((m + l) + k)).app U ((mu (m + l) k b).app U ((mu m l b').app U s)) =
+      (j (m + (k + l))).app U ((mu m (k + l)
+        ⟨b.val * b'.val, SetLike.mul_mem_graded b.property b'.property⟩).app U s)
+    dsimp only [j]
+    rw [hmu, hmu, hmu]
+    obtain ⟨a, ha, hb⟩ := (mem_reesGrading_iff_exists I).mp b.property
+    obtain ⟨a', ha', hb'⟩ := (mem_reesGrading_iff_exists I).mp b'.property
+    simp only [hb, hb', reesMonomial_mul, coe_reesMonomial,
+      Polynomial.coeff_monomial_same, map_mul, mul_smul]
+  · intro m a U t
+    apply heq_of_eq
+    apply reesProduct_injective _ F U
+    change ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app
+      U).hom ((mu m 0 ⟨algebraMap A (reesAlgebra I) a,
+        algebraMap_mem_reesGrading_zero I a⟩).app U t) = _
+    have ht := hmu m 0 ⟨algebraMap A (reesAlgebra I) a,
+      algebraMap_mem_reesGrading_zero I a⟩ U t
+    calc
+      _ = φ U a • ((Scheme.idealModuleProductι
+          (Scheme.idealSheafPower J.toModulesι m).2 F).app U).hom t := by
+        simpa [φ] using ht
+      _ = _ := by
+        change _ = ((Scheme.idealModuleProductι
+          (Scheme.idealSheafPower J.toModulesι m).2 F).val.app (op U)).hom
+            ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom
+              (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t)
+        rw [map_smul]
+        rfl
+  · intro x
+    obtain ⟨U, hxU, r, s, hs⟩ := idealPowersReesZeroGenerators f I J hJ F mu hmu x
+    exact ⟨U, hxU, r, fun _ ↦ 0, s, hs⟩
 
 end AlgebraicGeometry
