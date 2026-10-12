@@ -9,7 +9,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Continuous
 import Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites
-import Sheaf.Paper.SiteCoveringIsomorphicFamily
+import Sheaf.CategoryTheory.Sites.CohomologySiteEquivalenceFixedDegree
+import Sheaf.CategoryTheory.Sites.CohomologySiteEquivalenceCovering
 
 /-!
 # Cohomology over corresponding objects of equivalent sites
@@ -25,6 +26,7 @@ universe u
 
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Cohomology on Sites, Section 01FT and Lemmas 03F3, 03YU
 (agent extension to equivalences of sites).
 (blueprint: lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence)
@@ -70,6 +72,14 @@ theorem cohomology_site_equivalence
             K.toGrothendieck J.toGrothendieck ⋙
           Sheaf.cohomologyPresheafFunctor K.toGrothendieck q ⋙
           (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ AddCommGrpCat.{u}).obj e.functor.op) := by
-  sorry
+  have hiff : ∀ (W : C) (R : Presieve W), R ∈ J W ↔
+      R.map e.functor ∈ K (e.functor.obj W) :=
+    covering_iff_of_equivalence J K e hcover hcover_inv
+  obtain ⟨_, _, _, _, hi', _⟩ :=
+    site_equivalence_is_morphism_of_sites J K e.functor e.inverse e.unitIso
+      e.counitIso hiff
+  refine ⟨hi', ?_⟩
+  intro q
+  exact cohomology_presheaf_iso_fixed_degree J K e hiff hi' q
 
 end CategoryTheory

@@ -1,0 +1,119 @@
+{
+ "id": "cohomology-site-equivalence-fixed-degree",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+   "place": "proof decomposition",
+   "via": [
+    "cohomology_site_equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fixed-degree cohomology comparison for an equivalence of sites",
+ "statement": "Let C and D be small categories with precoverages J and K satisfying the four site axioms [def-weil-pbc-sites-and-cohomology], with abelian-group sheafification and HasExt in the common universe u on both sites. Let e : C ≌ D satisfy, for every W and R, R in J W iff R.map e.functor in K(e(W)). Let hi witness continuity of e.inverse from K.toGrothendieck to J.toGrothendieck. For every q : ℕ there exists a natural isomorphism from the degree-q cohomology presheaf functor on J to precomposition of sheaves by e.inverse followed by the degree-q cohomology presheaf functor on K and restriction of presheaves along e.functor.op. It is natural in sheaves and objects.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03YU",
+  "place": "Cohomology on Sites Lemma 03YU, specialized using Sites Lemma 03A0, Homology Lemma 015Z, Cohomology on Sites Section 01FT and Lemma 03F3; Ext-to-derived-sections identification by lem-sc-site-cohomology-right-derived-sections"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply site_equivalence_is_morphism_of_sites to J, K, e.functor, e.inverse,\ne.unitIso, e.counitIso and hcover_iff. It supplies continuity in both directions and\nquasi-inverse functors on abelian sheaves. The forward sheaf functor E is precisely\nprecomposition with e.inverse, the pushforward in the conclusion using hi. Continuity\nis a proposition, so the supplied continuity proof and hi give the same functor by\nproof irrelevance. Its quasi-inverse is precomposition with e.functor; their composite\nisomorphisms come from the unit and counit. E is additive since sheaf morphisms add\nsectionwise. As an equivalence it preserves kernels and cokernels, hence is exact.\nIts exact quasi-inverse is a left adjoint, so 015Z gives preservation of injectives.\nThese are the clauses of lem-weil-pbc-equivalence-injective-resolutions.\n\nFor an abelian sheaf G choose an injective resolution G to I. Such resolutions exist\nby lem-weil-pbc-site-sheaves-enough-injectives for the small site. Applying E termwise\ntherefore gives an injective resolution of E(G). Additivity also transports chain\nmaps, equations defining lifts, and homotopies. At W the transported section complex\nhas terms I^n(e.inverse(e(W))). The restriction map I^n(e.unitIso.hom.app W) gives an\nisomorphism to I^n(W), with inverse induced by the inverse unit component. Naturality\nof each differential and the augmentation makes these maps a complex isomorphism\ncompatible with the augmentation.\n\nTaking degree-q cohomology of the inverse of this complex isomorphism gives the map\nfrom H'(G,q,W) to H'(E(G),q,e(W)). The Lean H' is Ext from the sheafified free abelian\nrepresentable, not a definition by resolutions: the sheafification/free adjunctions\nand Yoneda identify Hom from this object with sections at W. The comparison\nlem-sc-site-cohomology-right-derived-sections identifies its Ext cohomology naturally\nwith derived sections, so the section-complex computation applies to the exact\ncohomologyPresheafFunctor in the signature, including q = 0.\n\nFor a morphism G to G', lift it to a map of injective resolutions. The termwise unit\nmaps commute with that lift because its components are sheaf morphisms. The induced\ncohomology square therefore commutes; independence of lifts follows because homotopic\nlifts induce the same map, as in lem-weil-pbc-derived-functor-map-via-lift. For a morphism\nW' to W, naturality of the unit makes the corresponding restriction square commute\nin every degree, hence on cohomology. The representation of sections by free sheafified\nrepresentables is likewise natural in W, so these squares are the restrictions of\ncohomologyPresheafFunctor itself. Thus for each G the objectwise isomorphisms assemble\ninto an isomorphism of presheaves on C, and the squares in G assemble these into the\nnatural isomorphism of functors asserted by Nonempty. The last whiskering evaluates\nat e(W) and on e of each object morphism, exactly as in those restriction squares.",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03YU",
+  "place": "Cohomology on Sites Lemma 03YU, specialized using Sites Lemma 03A0, Homology Lemma 015Z, Cohomology on Sites Section 01FT and Lemma 03F3; Ext-to-derived-sections identification by lem-sc-site-cohomology-right-derived-sections; explicit complex and naturality argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology presheaf functor invariant under equivalence of sites",
+   "results": "No exact theorem found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.cohomologyPresheafFunctor",
+   "results": "Basic cohomology declarations only; no site-equivalence comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "covering presieve transported by categorical equivalence",
+   "results": "No exact theorem for this precoverage statement",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'cohomologyPresheafFunctor|covering_iff_of_equivalence' lean/Sheaf .lake/packages/mathlib/Mathlib",
+   "results": "Only this split module defines the comparison; no existing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CohomologySiteEquivalenceFixedDegree",
+  "declaration": "CategoryTheory.cohomology_presheaf_iso_fixed_degree",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CohomologySiteEquivalenceFixedDegree.lean",
+  "statement": "theorem cohomology_presheaf_iso_fixed_degree\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : Precoverage C) (K : Precoverage D) [J.HasIsos]\n    [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange]\n    [K.HasPullbacks]\n    [HasSheafify J.toGrothendieck AddCommGrpCat.{u}]\n    [HasSheafify K.toGrothendieck AddCommGrpCat.{u}]\n    [HasExt.{u} (Sheaf J.toGrothendieck AddCommGrpCat.{u})]\n    [HasExt.{u} (Sheaf K.toGrothendieck AddCommGrpCat.{u})]\n    (e : C ≌ D)\n    (hcover_iff : ∀ (W : C) (R : Presieve W), R ∈ J W ↔\n      R.map e.functor ∈ K (e.functor.obj W))\n    (hi : e.inverse.IsContinuous K.toGrothendieck J.toGrothendieck)\n    (q : ℕ) : Nonempty\n      (Sheaf.cohomologyPresheafFunctor J.toGrothendieck q ≅\n        e.inverse.sheafPushforwardContinuous AddCommGrpCat.{u}\n          K.toGrothendieck J.toGrothendieck ⋙\n        Sheaf.cohomologyPresheafFunctor K.toGrothendieck q ⋙\n        (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ AddCommGrpCat.{u}).obj e.functor.op)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5276a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5276a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666002",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, compilation, axioms, and direct importer matched the stage-3 review requirements."
+ }
+}

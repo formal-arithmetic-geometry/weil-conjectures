@@ -1,0 +1,111 @@
+{
+ "id": "cohomology-site-equivalence-covering-iff",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+   "place": "proof decomposition",
+   "via": [
+    "cohomology_site_equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Covering preservation and reflection under a site equivalence",
+ "statement": "Let C and D be small categories with precoverages J and K, each satisfying HasIsos, composition stability, base-change stability and HasPullbacks [def-weil-pbc-sites-and-cohomology]. Let e : C ≌ D. Assume for every object W of C and presieve R on W that R in J W implies R.map e.functor in K(e(W)), and for every V of D and presieve S on V that S in K V implies S.map e.inverse in J(e.inverse(V)). Then for every W and R, R in J W iff R.map e.functor in K(e(W)).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00VH",
+  "place": "Sites Definition 00VH and Definition 00VU; covering-reflection argument in proof step 1 of lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Fix W and R. The forward implication is hcover. For the reverse, apply hcover_inv at e(W) to R.map e.functor, obtaining that its further image under e.inverse is J-covering. Present R as ofArrows Y f using Presieve.exists_eq_ofArrows and rewrite both images with Presieve.map_ofArrows. Set eta = e.unitIso.hom. Naturality gives eta(Y_i) followed by e.inverse(e(f_i)) equal to f_i followed by eta(W). Apply site_covering_isomorphic_family for J to the covering family g_i = e.inverse(e(f_i)), target isomorphism phi = eta(W), domain isomorphisms sigma_i = eta(Y_i), and new family f_i. Its final clause says ofArrows Y f is J-covering, which is R. No cohomology or sheaf equivalence is used.",
+   "uses": [
+    "lem-weil-pbc-site-covering-isomorphic-family"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-covering-isomorphic-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00VH",
+  "place": "Sites Definition 00VH and Definition 00VU; covering-reflection argument in proof step 1 of lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence; explicit unit-naturality specialization of the site axioms; formal Lean proof by G1 second reader using the proved isomorphic-family theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology presheaf functor invariant under equivalence of sites",
+   "results": "No exact theorem found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.cohomologyPresheafFunctor",
+   "results": "Basic cohomology declarations only; no site-equivalence comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "covering presieve transported by categorical equivalence",
+   "results": "No exact theorem for this precoverage statement",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'cohomologyPresheafFunctor|covering_iff_of_equivalence' lean/Sheaf .lake/packages/mathlib/Mathlib",
+   "results": "Only this split module defines the comparison; no existing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CohomologySiteEquivalenceCovering",
+  "declaration": "CategoryTheory.covering_iff_of_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CohomologySiteEquivalenceCovering.lean",
+  "statement": "theorem covering_iff_of_equivalence\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : Precoverage C) (K : Precoverage D) [J.HasIsos]\n    [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange]\n    [K.HasPullbacks] (e : C ≌ D)\n    (hcover : ∀ (W : C) (R : Presieve W), R ∈ J W →\n      R.map e.functor ∈ K (e.functor.obj W))\n    (hcover_inv : ∀ (V : D) (R : Presieve V), R ∈ K V →\n      R.map e.inverse ∈ J (e.inverse.obj V)) :\n    ∀ (W : C) (R : Presieve W), R ∈ J W ↔\n      R.map e.functor ∈ K (e.functor.obj W)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5276a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5276a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666002",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, compilation, axioms, and direct importer matched the stage-3 review requirements."
+ }
+}

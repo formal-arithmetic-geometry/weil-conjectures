@@ -24,53 +24,36 @@
  ],
  "proof": [
   {
-   "text": "Let $e':\\mathcal D\\to\\mathcal C$ be the inverse functor, with natural isomorphisms $\\eta:\\mathrm{id}_{\\mathcal C}\\cong e'\\circ e$ and $\\varepsilon:e\\circ e'\\cong\\mathrm{id}_{\\mathcal D}$. First, a family $\\{f_a:X_a\\to X\\}_{a\\in A}$ of $\\mathcal C$ is a covering iff $\\{e(f_a)\\}_{a\\in A}$ is a covering of $\\mathcal D$: 'only if' is the hypothesis on $e$; if $\\{e(f_a)\\}$ is a covering, so is $\\{e'e(f_a)\\}$ by the hypothesis on $e'$, and $e'e(f_a)\\circ\\eta_{X_a}=\\eta_X\\circ f_a$ with $\\eta_{X_a},\\eta_X$ isomorphisms, so $\\{f_a\\}$ is a covering by [lem-weil-pbc-site-covering-isomorphic-family] (with $g_a=e'e(f_a)$, $\\sigma_a=\\eta_{X_a}$, $\\varphi=\\eta_X$, and the reindexing convention of [def-weil-pbc-sites-and-cohomology](1)). Hence [lem-weil-pbc-site-equivalence-is-morphism-of-sites](3), applied to $p=e$, $p'=e'$, shows that $e_*:=e'^s$, $G\\mapsto G\\circ e'$, is an equivalence $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$ with quasi-inverse $e^s$; it is additive since sums of morphisms of abelian sheaves are computed sectionwise. For every abelian sheaf $G$ on $\\mathcal C$ and object $W$ of $\\mathcal C$, $(e_*G)(e(W))=G(e'e(W))$, and $G(\\eta_W):G(e'e(W))\\to G(W)$ is an isomorphism, natural in $G$ and in $W$ by naturality of $\\eta$.",
+   "text": "Apply covering_iff_of_equivalence to the two covering-preservation hypotheses, obtaining hiff for all W and R.",
    "uses": [
-    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
-    "lem-weil-pbc-site-covering-isomorphic-family",
-    "def-weil-pbc-sites-and-cohomology"
+    "cohomology-site-equivalence-covering-iff"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma Tag 03A0 (lemma-equivalence), specialized to an equivalence of sites carrying coverings to coverings in both directions"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose an injective resolution $s:G\\to I^\\bullet$ in $\\operatorname{Ab}(\\mathcal C)$. The additive equivalence $e_*$ carries it to an injective resolution $e_*G\\to e_*I^\\bullet$ in $\\operatorname{Ab}(\\mathcal D)$, since it carries injectives to injectives and exact sequences to exact sequences; it also carries morphisms of resolutions and their homotopies.",
+   "text": "Apply site_equivalence_is_morphism_of_sites to e.functor, e.inverse, e.unitIso, e.counitIso and hiff. Extract the continuity witness hi' for e.inverse.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-equivalence-injective-resolutions"
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, Lemma Tag 015Z (lemma-adjoint-preserve-injectives), as used in Cohomology on Sites, Lemma Tag 03YU"
-   }
+   "elementary": false
   },
   {
-   "text": "Evaluation on the corresponding objects gives an isomorphism of cochain complexes $\\Gamma(e(W),e_*I^\\bullet)=I^\\bullet(e'e(W))\\xrightarrow{I^\\bullet(\\eta_W)}I^\\bullet(W)=\\Gamma(W,I^\\bullet)$ (a map of complexes since the differentials are morphisms of sheaves, step 1), and it is compatible with the augmentation and with morphisms $W'\\to W$. By the definition of cohomology over an object as the cohomology of sections of an injective resolution, taking cohomology yields natural isomorphisms $H^q(W,G)\\cong H^q(e(W),e_*G)$ for every $q\\ge0$; the degree-zero map is the canonical identification of sections.",
+   "text": "Use hi' as the existential witness. For each natural number q apply cohomology_presheaf_iso_fixed_degree with hiff and hi'. This yields exactly the required Nonempty natural isomorphism.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-equivalence-injective-resolutions"
+    "cohomology-site-equivalence-fixed-degree"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Cohomology on Sites, Lemma Tag 03YU (lemma-cohomology-bigger-site), injective-resolution calculation and functoriality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-equivalence-injective-resolutions",
-  "lem-weil-pbc-site-covering-isomorphic-family",
-  "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+  "cohomology-site-equivalence-covering-iff",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "cohomology-site-equivalence-fixed-degree"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03YU (lemma-cohomology-bigger-site), with the equivalence-of-sites specialization of Lemma Tag 03A0"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03YU",
+  "place": "Original equivalence-of-sites route decomposed into covering iff and fixed-degree transport; corrected covering-compatibility hypothesis supplied by hiff"
  },
  "mathlib_searches": [
   {
@@ -153,5 +136,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5276a",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666002",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, compilation, axioms, and direct importer matched the stage-3 review requirements."
  }
 }
