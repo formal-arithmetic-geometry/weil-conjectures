@@ -22,54 +22,42 @@
  ],
  "proof": [
   {
-   "text": "Use the algebra-valued affine derived Hom adjunction for i (a closed immersion is affine), then uniqueness of right adjoints to pass to H. The precomposition action is the i_*OZ-module action on Hom(i_*OZ,J). Restrict the derived internal Hom calculation to affine open charts using the open restriction comparison.",
+   "text": "The private scalar-cohomology helper uses the existing scalar Koszul derived-Hom isomorphism in the standard derived universe. Represent both single-degree arguments by their actual single cochain complexes and resolve the second by the canonical K-injective resolution. derivedInternalHom_obj_iso compares to the same Hom complex in the standard universe and in the given universe wY. Take homology of the standard Koszul isomorphism. The ordinary pushed-forward exterior complex has zero differentials; ShortComplex.HomologyData.ofZeros identifies its homology with its degree term. Transport via DerivedCategory.homologyFunctorFactors and the common Hom complex. This requires no chosen derived category on Z in universe wY.",
    "uses": [
-    "lem-sc-affine-derived-hom-evaluation-counit",
-    "lem-sc-derived-internal-hom-restrict-open"
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "def-pur-derived-internal-hom"
    ],
    "elementary": false
   },
   {
-   "text": "Choose the Koszul generators supplied by hregular near a point of Z. The quotient augmentation from the dual-Koszul node is a quasi-isomorphism; its finite free bounded Koszul model computes derived Hom by the bounded-above finite-free model theorem. Dual-Koszul cohomology vanishes away from the length, and the intrinsic Ext determinant comparison is linear for precomposition by multiplication in the quotient.",
+   "text": "Write T for scalar restriction from i_*OZ to OY. It is exact by sheafAlgebraRestrictScalars_preservesFiniteLimits and sheafAlgebraRestrictScalars_preservesFiniteColimits. For every neighborhood of a point of Y choose an affine subneighborhood. Scheme.Hom.app_surjective supplies a lift of every quotient ring section there. TopCat.Presheaf.isLocallySurjective_iff gives local surjectivity of the ring-sheaf map. PresheafOfModules.restrictHomEquivOfIsLocallySurjective and sheaf morphism extensionality construct a fully faithful T. This holds on empty neighborhoods and does not require global section surjectivity.",
    "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-sc-derived-hom-finite-free-model"
+    "def-pc-derived-rhom-algebra-module"
    ],
    "elementary": false
   },
   {
-   "text": "On the quotient chart the conormal is I/I². Vanishing of positive Koszul homology shows that the regular generator classes give a quotient-module basis. Its stalk finrank equals the length, hence hr identifies this with r. Affine module correspondence identifies the top exterior dual conormal module with the exterior sheaf in the statement.",
+   "text": "The closed immersion is affine. Apply exists_affine_derivedHom_evaluation_counit to obtain H0 and its scalar derived-Hom comparison. Adjunction.rightAdjointUniq identifies the given H with H0. The exact-functor rightDerivedFunctorHomologyFunctorIso identifies T(H^n(H(OY))) with H^n(RT(H(OY))). Compose the adjoint-uniqueness isomorphism, the affine derived-Hom comparison, and the scalar cohomology helper. The scalar restriction of ordinary direct image to the algebra space is definitionally the ordinary scheme module pushforward. Lift the composed scalar isomorphism by FullyFaithful.preimageIso. This proves the requested algebra-module isomorphism in every integer degree without reconstructing an algebra-valued derived object.",
    "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-weil-pbc-affine-module-correspondence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The intrinsic Ext identifications commute with changes of regular generators and localization. Glue their algebra-linear cohomology sheaf maps on chart intersections. On the clopen fiber of r at n only degree n survives, giving g_* locallyRankedExteriorTerm in that degree. Off Z, i_*OZ has zero stalks and so does every module over it. Negative degrees vanish. Empty Z and rank zero give the zero calculation and Hom(A,A)=A respectively. This proves only the cohomology comparison, with no derived reconstruction.",
-   "uses": [
-    "lem-sc-koszul-regular-sequence-dual-complex"
+    "lem-sc-affine-derived-hom-evaluation-counit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-derived-hom-evaluation-counit",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-koszul-regular-sequence-dual-complex",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-weil-pbc-affine-module-correspondence"
+  "lem-sc-koszul-regular-immersion-derived-hom",
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-rhom-algebra-module",
+  "lem-sc-affine-derived-hom-evaluation-counit"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "V2",
+  "agent": "J1",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
    "place": "Tag 0BQZ cohomology calculation and localization; Tag 0AX3 algebra action; parent proof steps 1, 2 and the cohomology gluing in step 3"
   },
-  "note": "Makes the indicated steps of the parent plan precise; source pages obtained in scratchpad/sources.",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BQZ cohomology calculation and localization; Tag 0AX3 algebra action; parent proof steps 1, 2 and the cohomology gluing in step 3"
+  "note": "Reuse the existing scalar Koszul derived-Hom theorem; actual Lean glue transports cohomology between derived universes, compares right adjoints and lifts along fully faithful scalar restriction. No new unproved statement."
  },
  "mathlib_searches": [
   {
@@ -153,10 +141,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T144154-L-2110126",
-  "kind": "interface",
+  "landing": "20261012T173835-L-3298286",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
