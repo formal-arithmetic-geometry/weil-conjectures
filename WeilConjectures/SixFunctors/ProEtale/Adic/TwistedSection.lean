@@ -157,8 +157,10 @@ lemma globalSectionsTransport_comp_germ {S Y Y' : Scheme.{u}} {L : Type u} [Fiel
       Category.comp_id]
     rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
     simp
+    exact Category.comp_id _
   · rw [upperStarComp_id_left]
     simp
+    exact Category.comp_id _
 
 /-- The transport along `z' ≫ w = π ≫ z` of the section of an isomorphism `θ : ℚ̄_ℓ ≅ w^* N`
 to the spectrum of a field is nonzero. -/
@@ -181,7 +183,7 @@ lemma globalSectionsTransport_globalSectionOfModHom_ne_zero {S Y Y' : Scheme.{u}
   have h0 : globalSectionOfModHom E.hom = globalSectionOfModHom 0 := by
     rw [globalSectionOfModHom_zero, ← hres]
     refine hinj ?_
-    rw [map_zero, ← ModuleCat.comp_apply, ← hT]
+    rw [map_zero]
     exact he0
   have hφ : E.hom = 0 := (bijective_globalSectionOfModHom _).1 h0
   have hone : 𝟙 (AdicSheaf.unit l (Spec (.of L))) = 0 := by
@@ -254,7 +256,8 @@ theorem not_epi_of_mono_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type 
       rw [← Category.comp_id m, ← biproduct.total, Preadditive.comp_sum, Functor.map_sum,
         Preadditive.comp_sum]
       refine Finset.sum_eq_zero fun i _ ↦ ?_
-      rw [Functor.map_comp, ← Category.assoc, hvi, zero_comp]
+      rw [← Category.assoc m, Functor.map_comp, ← Category.assoc, hvi,
+        zero_comp]
     have hv0 : v = 0 := (cancel_mono ((π)^*ᵃ[l].map m)).1 (by rw [hvm, zero_comp])
     rw [← sub_eq_zero, ← hv, hv0, globalSectionOfModHom_zero]
   -- hence it fixes `e`
