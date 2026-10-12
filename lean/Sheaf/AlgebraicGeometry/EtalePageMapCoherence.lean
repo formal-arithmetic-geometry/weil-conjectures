@@ -21,6 +21,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+private theorem apply_eq_index {A : Sort*} {B : A → Sort*} {R : Sort*}
+    (m : ∀ a, B a → R) {a b : A} (h : a = b)
+    (v : ∀ a, a = b → B a) : m a (v a h) = m b (v b rfl) := by
+  subst a
+  rfl
+
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent inverse-image and spectral-page map families.
@@ -123,6 +129,68 @@ theorem etale_page_map_coherence
         M (c.π.app j) ⟨F j, hFK j⟩ ⟨L.pt, hLK⟩
           ((eG j).inv ≫ L.ι.app (op j)) =
       M (c.π.app i) ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩
-        ((eG i).inv ≫ L.ι.app (op i))) := by sorry
+        ((eG i).inv ≫ L.ι.app (op i))) := by
+  have identity_law (X : Scheme.{u})
+      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (a : X ⟶ X) (ha : a = 𝟙 X) :
+      M a K K
+        ((NatIso.mapHomologicalComplex
+          (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) ha))
+          (ComplexShape.up ℤ)).hom.app K.obj ≫
+        (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} X)
+          (ComplexShape.up ℤ)).hom.app K.obj) = 𝟙 (T₀ X K).sequence := by
+    refine (apply_eq_index (fun a v ↦ M a K K v) ha (fun a ha ↦
+      (NatIso.mapHomologicalComplex
+        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) ha))
+        (ComplexShape.up ℤ)).hom.app K.obj ≫
+      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} X)
+        (ComplexShape.up ℤ)).hom.app K.obj)).trans ?_
+    have hrefl : (NatIso.mapHomologicalComplex
+        (Iso.refl (upperStar AddCommGrpCat.{u + 1} (𝟙 X)))
+        (ComplexShape.up ℤ)).hom.app K.obj = 𝟙 _ := by
+      change (NatTrans.mapHomologicalComplex (𝟙 _) _).app _ = _
+      rw [NatTrans.mapHomologicalComplex_id, NatTrans.id_app]
+    erw [hrefl, Category.id_comp]
+    have hunit : (Functor.mapHomologicalComplexIdIso
+        (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+        (ComplexShape.up ℤ)).hom.app K.obj = 𝟙 _ := rfl
+    simpa only [Iso.trans_hom, NatTrans.comp_app, hunit, Category.comp_id] using hid X K
+  have composition_law {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
+      (a : Z ⟶ X) (ha : a = g ≫ f)
+      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (J : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (N : CochainComplex.Plus (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj K.obj ⟶ J.obj)
+      (w : ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj J.obj ⟶ N.obj) :
+      M a K N
+        ((NatIso.mapHomologicalComplex
+          (upperStarComp AddCommGrpCat.{u + 1} g f a ha)
+          (ComplexShape.up ℤ)).hom.app K.obj ≫
+          ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex
+            (ComplexShape.up ℤ)).map v ≫ w) = M f K J v ≫ M g J N w := by
+    exact (apply_eq_index (fun a v ↦ M a K N v) ha (fun a ha ↦
+      (NatIso.mapHomologicalComplex
+        (upperStarComp AddCommGrpCat.{u + 1} g f a ha)
+        (ComplexShape.up ℤ)).hom.app K.obj ≫
+      ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex
+        (ComplexShape.up ℤ)).map v ≫ w)).trans (hcomp f g K J N v w)
+  refine ⟨?_, ?_, ?_⟩
+  · intro i
+    rw [hidentity i]
+    exact identity_law (D.obj i) ⟨F i, hFK i⟩ _ (D.map_id i)
+  · intro i j k f g
+    rw [hcomposition i j k f g]
+    exact composition_law (D.map f) (D.map g) _ (D.map_comp g f)
+      ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ ⟨F k, hFK k⟩ (φ f) (φ g)
+  · intro i j f
+    rw [← composition_law (D.map f) (c.π.app j) (c.π.app i) (c.w f).symm
+      ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ ⟨L.pt, hLK⟩ (φ f)
+      ((eG j).inv ≫ L.ι.app (op j))]
+    apply congrArg (M (c.π.app i) ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩)
+    have hw := congrArg (fun t ↦ (eG i).inv ≫ t) (L.w f.op)
+    rw [hG i j f] at hw
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hw
 
 end AlgebraicGeometry.Etale
