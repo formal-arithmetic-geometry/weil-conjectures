@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-formal-module-cover-from-lifted-sections",
+ "kind": "statement",
+ "title": "A completed formal cover from liftable finite generating sections",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], $K$ a quasi-coherent ideal sheaf, and $(F_n)_{n\\geq1}$ a coherent formal module for $K$ [def-weil-pbc-coherent-formal-module]. Let $L$ be an invertible module [def-sc-invertible-module] and $d\\geq0$ an integer. Assume $H^1(X,\\ker(F_{n+1}\\to F_n)\\otimes L^{\\otimes d})=0$ for every $n\\geq1$, with cohomology as in [def-sc-ringed-space-module-cohomology] and tensor as in [def-pur-sheaf-tensor-product]. Suppose $F_1\\otimes L^{\\otimes d}$ has a specified finite family of generating global sections [def-weil-pbc-generating-sections]. Then there exist a coherent module $G$ [pqf-def-coherent] and a formal morphism $\\alpha:G^\\wedge\\to(F_n)$ whose first component $G/KG\\to F_1$ is epimorphic.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0885 (lemma-existence-projective), first essential-surjectivity paragraph, from the chosen generating sections through the compatible maps and completed surjection"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-coherent-formal-module",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-generating-sections",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "The formal-system quotient condition makes every transition epimorphic. Tensoring by the invertible power L^d is an equivalence, so it preserves kernels and short exact sequences.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the long exact sequence of derived global sections to each twisted transition. The assumed vanishing of H^1 of its kernel makes the global-section map surjective. Recursively choose lifts of each member of the given finite generating family; this gives compatible sections at every level.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set P=L^d. Via the tensor-dual adjunction, each lifted section defines a map P dual to F_n. Take the finite direct sum G of these copies of P dual. It is coherent: its summands are locally free of rank one on a Noetherian scheme, and finite sums preserve coherence. The maps G to F_n commute with the transitions.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The annihilation condition K^(n+1)F_n=0 implies that G to F_n kills the ideal-product inclusion. The universal property of its cokernel produces a unique map G/K^(n+1)G to F_n. Uniqueness proves naturality, so these maps form a morphism alpha from completion(G) to F.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the first level the map G to F_1 becomes the evaluation epimorphism of the given generating family after tensoring by P. Tensor equivalence reflects epimorphisms. Since G to F_1 factors through G/KG, its induced map G/KG to F_1 is epi as well.",
+   "uses": [
+    "def-weil-pbc-generating-sections",
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "def-weil-pbc-generating-sections",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 0885, first essential-surjectivity paragraph; explicit quotient-factorization details by H3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent formal module on a proper scheme with an ample invertible sheaf is a quotient of a completed coherent module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family generating the first term of a coherent adic system lifts to an epimorphism from a completed finite sum of negative line bundle twists when first cohomology of every twisted transition kernel vanishes",
+   "results": "LightCondensed.epi_π_app_zero_of_epi, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, LightCondensed.instEpiLightCondModMapNat, SheafOfModules.GeneratingSections.opEpi_comp, groupCohomology.cochainsMap_f_map_epi, SheafOfModules.GeneratingSections.epi, SheafOfModules.GeneratingSections.ofEpi_I, SheafOfModules.GeneratingSections.ofEpi",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalModule.*cover|formal.*lifted.*sections|completion.*GeneratingSections",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective",
+  "group": "H3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalModuleCoverFromLiftedSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalModuleCoverFromLiftedSections.lean",
+  "declaration": "AlgebraicGeometry.formalModule_cover_from_lifted_sections",
+  "statement": "theorem formalModule_cover_from_lifted_sections {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData) (F : CoherentFormalModule X K) (L : X.Modules) [L.IsInvertible] (d : ℕ) (hvan : ∀ k : ℕ, IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj (Scheme.Modules.tensorObj (kernel (F.obj.map (homOfLE (Nat.le_succ k)).op)) (L.tensorPow d)))) (σ : (Scheme.Modules.tensorObj (F.obj.obj (op 0)) (L.tensorPow d)).GeneratingSections) (hσ : σ.IsFiniteType) : ∃ G : CoherentModules X, ∃ α : (completion X K).obj G ⟶ F, Epi (α.hom.app (op 0))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T203943-L-830505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T203943-L-830505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
