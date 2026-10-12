@@ -6,14 +6,8 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
-import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
+import Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso
 
 /-!
 # Unrestricted strict-henselization stalk formula
@@ -40,21 +34,15 @@ Source: Stacks Project, Tag 03Q9, first assertion and proof
 (blueprint: lem-weil-pbc-unrestricted-strict-henselization-stalk).
 
 Proof:
-1. By `sbc-lem-higher-direct-image-presheaf`, the higher direct image is the sheafification
-of the cohomology presheaf. By `lem-weil-pbc-sheafification-geometric-stalk`, its stalk is
-the filtered colimit of neighbourhood cohomology groups.
-2. By `lemma-weil-pbc-affine-neighbourhood-cofinal`, restrict to affine pointed
-neighbourhoods. Their limit is the strict henselization
-(`def-weil-pbc-strict-henselization-limit`), and fibre products commute with this limit
-(`lemma-weil-pbc-fibre-product-limit`). Quasi-compactness and quasi-separatedness of `f`
-give qcqs base changes, and the transition maps are affine.
-3. Fix one affine pointed neighbourhood and restrict to the cofinal system over it.
-Apply `lem-weil-pbc-derived-etale-cohomology-limit` to the restricted sheaf in degree zero.
-Exact inverse image keeps it in degree zero (`def-weil-pbc-derived-inverse-image`), and
-inverse images compose (`lem-weil-pbc-inverse-image-composition`). Its degree-q cohomology
-is the sheaf cohomology (`def-weil-pbc-etale-cohomology`). The continuity isomorphism is
-induced by restriction along the projections, so its composite with the stalk-colimit
-identification is precisely the canonical restriction in the statement. -/
+1. Choose the unique germ restriction supplied by
+`existsUnique_strictHenselizationStalkRestriction`.
+2. The strict-local germ restriction is an isomorphism by
+`isIso_strictHenselizationStalkRestriction`.
+3. Apply `isIso_strictHenselization_baseChange_globalHomology` to `F` in degree zero.
+The cohomology comparison is the composite of the exact inverse-image/homology
+isomorphism, this base-change map on global homology, the strict-local Leray isomorphism,
+and the inverse-image/single-complex isomorphism. Each factor is invertible, so its
+composite with the germ restriction is invertible. -/
 theorem unrestricted_strictHenselization_stalk
     {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {Ω : Type w} [Field Ω] [IsAlgClosed Ω]
@@ -75,6 +63,9 @@ theorem unrestricted_strictHenselization_stalk
             ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj
               ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) r ∧
         IsIso (r ≫ strictHenselizationCohomologyComparison xbar f F q) := by
-  sorry
+  obtain ⟨r, hr, _⟩ := existsUnique_strictHenselizationStalkRestriction xbar _
+  have hriso : IsIso r := isIso_strictHenselizationStalkRestriction xbar _ r hr
+  exact ⟨r, hr, IsIso.comp_isIso' hriso
+    (isIso_strictHenselizationCohomologyComparison f xbar F q)⟩
 
 end AlgebraicGeometry.Etale
