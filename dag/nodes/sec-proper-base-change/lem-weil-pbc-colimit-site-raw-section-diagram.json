@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Construct each B_t by the left Kan extension of A_t along V_t.op. Its universal unit beta_t is a genuine categorical construction, not data chosen from mere existence. Extend theta_b followed by beta_tprime along this universal property after transporting V.w. Uniqueness of adjuncts under the given theta unit equations proves identity and composition, so these extensions form the presheaf diagram B.",
+   "text": "Construct each B_t explicitly as Mathlib leftKanExtension of the underlying stage pullback sheaf along V_t.op, and beta_t as leftKanExtensionUnit. Use V.w to transport theta_b followed by beta_tprime to the restriction along V_t.op, and define the transition by descOfIsLeftKanExtension. First prove the identity and composition equations for theta as sheaf morphisms: apply injectivity of the stage adjunction homEquiv, use htheta at objects of F(i), and transport along F.map_id, F.map_comp and Under.w. Next use the Kan factorization equations and Arrow equality under precomposition and postcomposition to transfer these two equations to the transitions B.map. Kan hom_ext_of_isLeftKanExtension proves map_id and map_comp. The factorization equation gives exactly the required Arrow equation for beta and B.map.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-sites-and-cohomology",
@@ -26,7 +26,7 @@
    }
   },
   {
-   "text": "Extend alpha_t by the Kan universal property to gamma_t. The composite of theta_b and the later alpha has the same composite with the stage unit as the earlier alpha by htheta and halpha. Injectivity of the stage adjunction hom equivalence proves these sheaf maps equal. Kan uniqueness then proves the extensions gamma_t natural in t. The factorization equation is precisely the Kan-unit equation. This finishes construction of B, beta, and gamma; neither sheafness nor a sheafification comparison is claimed here.",
+   "text": "Define delta_t explicitly by descOfIsLeftKanExtension applied to alpha_t.hom; descOfIsLeftKanExtension_fac_app gives its component factorization. For b from t to tprime, beta_t followed by B.map b and delta_tprime is a map between underlying sheaves. Regard it as a sheaf morphism and compare it with alpha_t using injectivity of the stage adjunction homEquiv. After precomposing with the stage unit, the B.map factorization, htheta, the delta_tprime factorization and halpha identify both maps with the original cocone unit. Transport endpoints with V.w, F.map_comp and Under.w; Arrow equalities can be precomposed, and postcomposed with components of a natural transformation at equal source-category objects. Thus these two sheaf morphisms agree. Kan hom_ext_of_isLeftKanExtension then gives B.map b followed by delta_tprime equals delta_t, proving naturality of gamma. Set gamma.app to delta; its factorization is the existing Kan lift equation. No sheaf condition or sheafification comparison is used.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-sites-and-cohomology",
@@ -47,7 +47,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph; explicit raw Kan-extension realization of the presentation construction"
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph; E1 explicit Mathlib Kan-extension construction, stage-adjunction coherence, and Kan uniqueness"
  },
  "mathlib_searches": [
   {
@@ -128,10 +128,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T202238-L-703900",
-  "kind": "interface",
+  "landing": "20261012T211613-L-1056764",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
