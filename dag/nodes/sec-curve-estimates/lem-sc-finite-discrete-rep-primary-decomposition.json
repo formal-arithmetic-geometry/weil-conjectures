@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-finite-discrete-rep-primary-decomposition",
+ "kind": "statement",
+ "title": "Primary decomposition of a finite discrete representation",
+ "statement": "Let G be a topological group, and M a discrete continuous integral representation [def-exc-discrete-modules-category] whose underlying abelian group is finite. There exist a natural number r, primes p_i for i in Fin r, and discrete continuous integral representations N_i with finite underlying groups, such that every element of the multiplicative version of N_i has p_i-power order. There are equivariant integral linear maps a_i from M to N_i and b_i from N_i to M for which the sum of a_i followed by b_i is the identity of M. The zero representation permits r = 0.",
+ "stmt_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraph 1"
+ },
+ "proof": [
+  {
+   "text": "Take the exponent n of the finite underlying group. For n = 1 the group is zero, and the empty sum is its identity. Otherwise enumerate the prime factors p_i of n, with q_i the corresponding prime powers. Take N_i to be the subgroup killed by q_i, with the restricted integral action. The subgroup is invariant because linear maps commute with multiplication by q_i. Its stabilizers equal those in M, so they are open. Its group is finite and p_i-primary. Chinese remainder gives integers c_i congruent to one modulo q_i and zero modulo the other prime powers. Multiplication by c_i takes M into N_i and commutes with the action. Together with subgroup inclusion these give the required maps. Their composite on M is multiplication by c_i. Since the sum of c_i is one modulo n and n annihilates M, their composites sum to identity.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraph 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite discrete continuous representation primary decomposition",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.exists_isInternal_prime_power_torsion",
+   "date": "2026-10-12",
+   "results": "Submodule.exists_isInternal_prime_power_torsion; no exact representation result",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "primaryComponent|exists_isInternal_prime_power_torsion",
+   "date": "2026-10-12",
+   "results": "Mathlib group torsion primary components and Dedekind module theorem; no exact representation result",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "proof paragraph 1: decomposition of the finite Galois module into primary parts",
+   "via": [
+    "lem-sc-generic-finite-primary-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.FinitePrimaryDecomposition",
+  "file": "lean/Sheaf/RepresentationTheory/FinitePrimaryDecomposition.lean",
+  "declaration": "Rep.exists_finite_primary_decomposition",
+  "statement": "theorem exists_finite_primary_decomposition\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    (M : DiscreteContinuousRep.{0, u, v} ℤ G) [Finite M.obj.V] :\n    ∃ (r : ℕ) (p : Fin r → ℕ) (N : Fin r → DiscreteContinuousRep.{0, u, v} ℤ G),\n      (∀ i, (p i).Prime) ∧ (∀ i, Finite (N i).obj.V) ∧\n      (∀ i, IsPGroup (p i) (Multiplicative (N i).obj.V)) ∧\n      ∃ (a : ∀ i, M ⟶ N i) (b : ∀ i, N i ⟶ M),\n        ∑ i, a i ≫ b i = 𝟙 M",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135323-L-1695655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135323-L-1695655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
