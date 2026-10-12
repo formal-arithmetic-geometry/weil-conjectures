@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.AssociatedModule
+import Sheaf.AlgebraicGeometry.AssociatedModuleHomParts
 
 /-!
 # Morphisms out of the sheaf associated to a module
@@ -44,7 +45,7 @@ theorem associatedModuleHom_bijective
       (fun (φ : associatedModule X M ⟶ G) =>
         associatedModuleCanonicalSection X M ≫
           φ.val.app (op (⊤ : Opens (X : Type u)))) := by
-  sorry
+  exact ⟨associatedModuleHom_injective X M G, associatedModuleHom_surjective X M G⟩
 
 /-- Naturality of the associated-module Hom bijection `φ ↦ φ_X ∘ c_M`: it carries
 `β ∘ φ` to `β_X ∘ (φ_X ∘ c_M)` for `O_X`-linear `β : G → G'`, and `φ ∘ F_u` to
@@ -71,6 +72,14 @@ theorem associatedModuleHom_natural
           (op (⊤ : Opens (X : Type u))) =
       u ≫ associatedModuleCanonicalSection X M ≫
         φ.val.app (op (⊤ : Opens (X : Type u)))) := by
-  sorry
+  constructor
+  · intro φ
+    rfl
+  · intro φ
+    change associatedModuleCanonicalSection X M' ≫
+      ((associatedModuleFunctor X).map u).val.app (op (⊤ : Opens (X : Type u))) ≫
+      φ.val.app (op (⊤ : Opens (X : Type u))) = _
+    have h := associatedModuleCanonicalSection_natural (X := X) u
+    exact congrArg (fun k => k ≫ φ.val.app (op (⊤ : Opens (X : Type u)))) h
 
 end AlgebraicGeometry
