@@ -472,6 +472,7 @@ noncomputable def localTermPair {B : Scheme.{u}} (jB : B ⟶ c.intersection d)
     End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
   G.localTerm (c.intersectionStr d) jB hB (G.supportedPairing c d hK hL)
 
+omit [IsGeometric aX] [IsGeometric aY] in
 /-- Blueprint `prop-trf-pairing-local-decomposition`: if the intersection support `E(C, D)` of
 an opposite pair is proper over `s` and a finite disjoint union of clopen pieces `β`, the
 integral of the Lefschetz-Verdier pairing is the sum of the local terms of the pair,
