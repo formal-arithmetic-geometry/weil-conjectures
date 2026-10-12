@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-supported-thickening-dictionary",
+ "kind": "statement",
+ "title": "Annihilation and completion-isomorphism transport through the thickening dictionary",
+ "statement": "Let A be a Noetherian ring, I an ideal, and f:X → Spec A a finite type morphism. Put X_n = X × Spec(A/I^(n+1)), with canonical transition maps i_n:X_n → X_(n+1) specified by their two projections, and j_n:X_n → X. Let c_n be the specified canonical tensor-pullback composition comparisons and let (F_n,φ_n) be a coherent thickening system [lem-weil-pbc-thickening-systems-dictionary]. Let j:Z → X be a closed immersion whose kernel ideal annihilates every j_(n,*)F_n sectionwise. Then X is Noetherian and there is a coherent formal module M on (X,(ker(Spec(A/I) → Spec A)).comap f) [def-weil-pbc-coherent-formal-module] supported on Z. For every coherent G on X and every isomorphism completion(G) ≅ M there are isomorphisms ψ_n:j_n^*G ≅ F_n satisfying i_n^*(ψ_(n+1)) ≫ φ_n = c_(n,G) ≫ ψ_n. Completeness of A, separatedness of f, and properness of Z are not assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F, Lemma 087T, equation 0880, and Theorem 088E first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-thickening-systems-dictionary",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply thickeningSystems_dictionary to F, φ, hF with the tensor-pullback adjunctions. It gives Noetherian X, the formal object, and evaluation isomorphisms with pushed terms.",
+   "uses": [
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the kernel ideal of Spec(A/I) → Spec A with the ideal sheaf associated to I, and extend along f. This changes the dictionary ideal to the displayed one.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport sectionwise annihilation through the linear evaluation isomorphisms. Multiplication of the ideal with a formal term has zero image precisely because every local product is zero; hence SupportedOn holds.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the dictionary comparison d. Normalize the system comparisons by the inverse of the automorphism d.inv ≫ c.hom of j_n^*: transport it to modules on X_n by the invertible counit of fully faithful closed pushforward. Concretely the transported automorphism is ε_H.inv ≫ t_(j_n,*H) ≫ ε_H.hom. Naturality against the adjunction unit and the triangle identity identify its component on j_n^*G with t_G. Apply the dictionary to this modified system. Full faithfulness and the completion comparison recover compatible restriction isomorphisms. Naturality of the transported automorphism changes their equation back to the original φ and the specified c. This does not identify arbitrary adjunction choices by uniqueness alone.",
+   "uses": [
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-thickening-systems-dictionary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F, Lemma 087T, equation 0880, and Theorem 088E first paragraph; categorical transport and dictionary specialization expanded by H3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of coherent formal modules supported on a proper closed subscheme",
+   "results": "8 hits; existence of vanishing powers on qcqs schemes, IdealSheafData constructions, and ideal section formulas. No formal algebraization or supported dictionary match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "completion IsEquivalence",
+   "results": "0 hits; service reported unknown identifier completion.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedOn|coherentFormal_equivalence",
+   "results": "msearch Mathlib grep: 0 hits. Local library rg and full-file reads found the formal closed-immersion equivalence and thickeningSystems_dictionary, used below.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules annihilated by the ideal of a closed subscheme can be algebraized from completion on that closed subscheme, and completion isomorphisms give compatible restrictions to infinitesimal thickenings",
+   "results": "Service unavailable: Internal Server Error. No verdict on absence from this search; LeanFinder, Loogle and source grep were also run.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedSystem",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-grothendieck-existence-supported-system",
+   "place": "Steps 1--4, splitting dictionary transport from closed-supported algebraization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedThickeningDictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedThickeningDictionary.lean",
+  "declaration": "AlgebraicGeometry.supportedThickening_dictionary",
+  "statement": "theorem supportedThickening_dictionary\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A)\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A))\n    [LocallyOfFiniteType f] [QuasiCompact f]\n    (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶\n      pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))\n    (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))))\n    (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I :=\n      I) (Nat.le_succ (n + 1))))))\n    (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅\n      Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1)))))))\n    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +\n      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))\n    (F : ∀ n : ℕ, (pullback f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1)))))).Modules)\n    (φ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).obj (F (n + 1)) ≅ F n)\n    (hF : ∀ n : ℕ, RingedSpace.IsCoherent (pullback f (Spec.map (CommRingCat.ofHom\n      (Ideal.Quotient.mk (I ^ (n + 1)))))).toRingedSpace (F n))\n    (Z : Scheme.{u}) (j : Z ⟶ X) [IsClosedImmersion j]\n    (hkill : ∀ (n : ℕ) (V : X.Opens) (a : Γ(X, V)),\n        a ∈ j.ker.idealOfOpens V →\n        ∀ t : Γ((Scheme.Modules.pushforward (pullback.fst f\n          (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj (F n), V),\n          a • t = 0) :\n    ∃ hX : IsNoetherian X,\n      ∃ M : @CoherentFormalModule X hX\n          ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f),\n        @SupportedOn X Z hX\n          ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f) M j _ ∧\n        ∀ G : CoherentModules X,\n          Nonempty ((@completion X hX\n            ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)).obj G ≅ M) →\n          ∃ ψ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f\n            (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G.obj ≅ F n,\n            ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫\n              (φ n).hom = (c n).hom.app G.obj ≫ (ψ n).hom",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
