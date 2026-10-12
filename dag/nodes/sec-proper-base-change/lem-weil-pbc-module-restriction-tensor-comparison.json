@@ -15,24 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Construct the comparison by the sheafification universal property: restriction of the sectionwise tensor presheaf is the tensor presheaf of the restrictions, and restriction commutes with sheafification by the restriction/direct-image adjunction. The universal maps agree on pure tensors, giving the displayed formula.",
+   "text": "By the sheaf tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal], two morphisms out of a tensor product are equal if they agree on every pure tensor section. On Y, send sections s,t of the restrictions over V to their original pure tensor over j(V), regarded as a section of the restricted tensor product. The inverse structure-ring isomorphism makes this pairing O_Y(V)-bilinear; naturality of pure tensor sections makes it compatible with restriction. Extend it uniquely to c: F|_Y tensor G|_Y -> (F tensor G)|_Y.",
    "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
+  },
+  {
+   "text": "On each open U of X, tensor the images of s and t under the units F -> j_*(F|_Y) and G -> j_*(G|_Y) of restriction adjunction [lem-weil-pbc-module-restriction-open-immersion-colimits]. Linearity and naturality of those units give a restriction-compatible bilinear pairing into j_*(F|_Y tensor G|_Y). Extend it by [lem-pc-sites-sheaf-tensor-bilinear-universal] to b: F tensor G -> j_*(F|_Y tensor G|_Y), and take its adjoint d: (F tensor G)|_Y -> F|_Y tensor G|_Y.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check c followed by d on pure tensor sections on Y. The adjoint d is restriction of b followed by the counit; the counit is restriction from j^(-1)(j(V)) to V. Compatibility of pure tensors with restriction reduces the result to the two left triangle identities, giving the original s and t. To check d followed by c, use injectivity of the restriction adjunction hom equivalence and pure tensor extensionality on X. Its adjoint sends a pure tensor to the tensor of the restrictions along j(j^(-1)(U)) -> U, which equals restriction of the original pure tensor. Thus both composites are identities. The isomorphism with hom d and inv c has the stated section formula by the construction of c.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification"
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Agent-written adjunction proof of the open-immersion specialization of Modules, Lemma 17.16.4 (Tag 01CD); the cited Stacks lemma omits its proof"
+  "place": "Tag 01CD, lemma-tensor-product-pullback, open-immersion case: implemented using the tensor bilinear universal property (Modules on Sites, Section 03EK, display after Tag 0GMW) and the restriction/direct-image adjunction"
  },
  "mathlib_searches": [
   {
@@ -101,10 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T095859-L-315198",
-  "kind": "interface",
+  "landing": "20261012T173912-L-3308376",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
