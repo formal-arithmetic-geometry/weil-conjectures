@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "For x in X, restrict the section ring presheaves and module presheaf to the directed poset of neighborhoods of x with reverse inclusion. Put A_U=R₁(U), M_U=R₂(U) with R₁(U)-action through α_U, N_U=F(U), and T_U=M_U tensor over A_U with N_U, the coefficient-first sectionwise change of rings of [def-pur-sheaf-tensor-product]. Restrictions of M are semilinear by naturality of α, those of N by the presheaf module laws. The transition maps of T send pure tensors to tensors of restrictions. The colimit module actions are the stalk actions of [def-weil-pbc-module-stalk]. Their equations on coprojections are exactly the scalar action formula on germs.",
+   "text": "Construct the additive natural transformation F(U) → R₂(U) tensor over R₁(U) F(U), s ↦ 1 tensor s. Naturality follows from the characterized tensor restrictions in changeOfRingsMap. Take its additive stalk map h. For scalar and vector germs restrict to a common neighborhood; germ_smul and the stalk map formula for α show h is linear from F_x to the restriction of (P_F)_x along α_x. The extend/restrict scalars adjunction gives an R₂,x-linear map ψ_F. On a tensor of germs on U its value is germ(a) times germ(1 tensor s), hence germ(a tensor s).",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-pbc-module-stalk"
@@ -21,16 +21,17 @@
    "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-filtered-colimit-tensor-varying-rings] to these systems. Its bijective comparison ψ sends the germ of a coefficient-first pure tensor to the tensor of its two germs. The R₁,x-action on R₂,x is the action via α_x because α_x sends germ(r) to germ(α_U(r)). Thus the tensor carrier is precisely extension of scalars along α_x.",
+   "text": "Construct an additive left inverse Q of ψ_F by the stalk colimit universal property. On a neighborhood U the two germ maps are semilinear over the ring germ R₁(U) → R₁,x; semilinearity of the coefficient germ follows from α_x(germ(r)) = germ(α_U(r)). TensorProduct.map therefore gives an additive map from P_F(U) to R₂,x tensor over R₁,x F_x. These maps commute with restrictions: check on pure tensors using the restriction formula and germ_res_apply, then use tensor induction. They give a cocone on the neighborhood diagram and hence colimit.desc gives Q. On a pure tensor of arbitrary stalk elements, choose section representatives and restrict both to a common neighborhood. The germ formula for ψ_F and the defining equation for colimit.desc give Q(ψ_F(a tensor s)) = a tensor s. Tensor induction gives the left inverse identity on all tensors, proving injectivity.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+    "def-pur-sheaf-tensor-product",
     "def-weil-pbc-module-stalk"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The comparison ψ is R₂,x-linear. For a scalar germ and a germ of a pure tensor choose representatives on one common neighborhood. Scalar multiplication on the section tensor multiplies its coefficient factor, and ψ sends that to multiplication on the stalk coefficient factor. Tensor induction proves this for any section tensor, and every stalk element has a section representative. Hence ψ and its inverse are R₂,x-linear. Invert ψ, regard the resulting linear equivalence as a ModuleCat isomorphism, and obtain the stated germ formula by applying the inverse to the equation for ψ. Choose these isomorphisms for every F; their germ formula determines them uniquely, since pure tensors generate and any pair of germs can be represented on a common neighborhood.",
+   "text": "Every element of (P_F)_x has a section representative t in P_F(U). Induct on the section tensor t. Zero lifts to zero, a pure tensor a tensor s lifts to the tensor of its germs by the formula for ψ_F, and a sum lifts to the sum of the lifts. Thus ψ_F is surjective. Use LinearEquiv.ofBijective and toModuleIso for each F. Its forward map is ψ_F, so its germ formula is exactly the one already proved.",
    "uses": [
+    "def-pur-sheaf-tensor-product",
     "def-weil-pbc-module-stalk"
    ],
    "elementary": true
@@ -38,13 +39,12 @@
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+  "def-weil-pbc-module-stalk"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tag 007K (omitted proof), supplied from the existing varying-ring tensor-colimit theorem; specialization of step 3 of lem-weil-pbc-stalk-change-of-rings-tensor."
+  "place": "Tag 007K (omitted proof), direct neighborhood-colimit construction using semilinear TensorProduct.map and the extend/restrict scalars adjunction; B3 stage 3, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -150,10 +150,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T095928-L-326380",
-  "kind": "interface",
+  "landing": "20261012T135219-L-1656638",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
