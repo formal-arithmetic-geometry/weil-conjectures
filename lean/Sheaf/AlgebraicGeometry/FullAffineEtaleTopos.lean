@@ -21,20 +21,42 @@ Cohomology on Sites 03YU (blueprint: lem-weil-pbc-affine-etale-site-topos).
 
 @[expose] public section
 
+
 universe u w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
-Proof: standard coverings are étale coverings and affine pullbacks are computed in the
-small étale site, so the sheaf equalizer condition restricts to the affine site. -/
+/-- P. (blueprint: lem-weil-pbc-affine-etale-inclusion-continuity_sheaf_condition) -/
+theorem fullAffineEtaleInclusion_continuity_sheaf_condition (S : Scheme.{u}) :
+    ∀ G : Sheaf S.smallEtaleTopology (Type (u + 1)),
+      Presieve.IsSheaf
+        (fullAffineEtaleTopology S)
+        ((fullAffineEtaleInclusion S).op ⋙ G.obj) := by sorry
+
+/-- Source: Stacks 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos). -/
 theorem fullAffineEtaleInclusion_isContinuous (S : Scheme.{u}) :
     (fullAffineEtaleInclusion S).IsContinuous
-      (fullAffineEtaleTopology S) S.smallEtaleTopology := by sorry
+      (fullAffineEtaleTopology S) S.smallEtaleTopology := by
+  exact { op_comp_isSheaf_of_types := fullAffineEtaleInclusion_continuity_sheaf_condition S }
 
 attribute [instance] fullAffineEtaleInclusion_isContinuous
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-special_cocontinuity) -/
+theorem fullAffineEtale_special_cocontinuity (S : Scheme.{u}) :
+    (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings
+      (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage := by sorry
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-sets_equivalence) -/
+theorem fullAffineEtale_sets_equivalence (S : Scheme.{u}) :
+    ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type u)
+      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by sorry
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-ab_equivalence) -/
+theorem fullAffineEtale_ab_equivalence (S : Scheme.{u}) :
+    ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by sorry
 
 /-- Source: Stacks 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
 Proof:
@@ -56,7 +78,43 @@ theorem fullAffineEtaleInclusion_special_equivalences (S : Scheme.{u}) :
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type u)
       (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence ∧
     ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
-      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by sorry
+      (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence := by
+  exact ⟨fullAffineEtale_special_cocontinuity S,
+    fullAffineEtale_sets_equivalence S, fullAffineEtale_ab_equivalence S⟩
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_data) -/
+theorem fullAffineEtale_cohomology_comparison_data (S : Scheme.{u})
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
+    (U : S.FullAffineEtale) :
+    ∃ e : ∀ p : ℕ,
+      ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) ≅
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+        (CategoryTheory.evaluation _ _).obj (op U.obj)), True := by sorry
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-cohomology_comparison_point) -/
+theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]
+    (U : S.FullAffineEtale) (e : ∀ p : ℕ,
+      (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+          (CategoryTheory.evaluation _ _).obj (op U) ≅
+      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+        (CategoryTheory.evaluation _ _).obj (op U.obj))
+      (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u})
+      (x : Sheaf.H'.{w}
+        (((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+          (fullAffineEtaleTopology S) S.smallEtaleTopology).obj G) 0 U) :
+      (((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u}).homEquiv _ _
+        (Ext.homEquiv₀ (((e 0).app G).hom x))).app (op U.obj))
+          (FreeAbelianGroup.of (𝟙 U.obj)) =
+      (((sheafificationAdjunction (fullAffineEtaleTopology S) AddCommGrpCat.{u}).homEquiv
+        _ _ (Ext.homEquiv₀ x)).app (op U)) (FreeAbelianGroup.of (𝟙 U)) := by sorry
 
 /-- Source: Stacks 03YU, applied to the equivalence of 04HR
 (blueprint: lem-weil-pbc-affine-etale-site-topos).
@@ -88,6 +146,24 @@ theorem fullAffineEtale_cohomology_comparison (S : Scheme.{u})
           (FreeAbelianGroup.of (𝟙 U.obj)) =
       (((sheafificationAdjunction (fullAffineEtaleTopology S) AddCommGrpCat.{u}).homEquiv
         _ _ (Ext.homEquiv₀ x)).app (op U)) (FreeAbelianGroup.of (𝟙 U)) := by sorry
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-cohomology_base_left) -/
+theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S]
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
+    Nonempty (Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙
+      (CategoryTheory.evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 S))) ≅
+      Sheaf.functorH.{w, u} S.smallEtaleTopology p) := by sorry
+
+/-- P. (blueprint: lem-weil-pbc-affine-etale-cohomology_base_right) -/
+theorem fullAffineEtale_cohomology_base_right (S : Scheme.{u}) [IsAffine S]
+    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]
+    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) :
+    Nonempty ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}
+      (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙
+      Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙
+        (CategoryTheory.evaluation _ _).obj (op (⟨Scheme.Etale.mk (𝟙 S), ‹IsAffine S›⟩ :
+          S.FullAffineEtale)) ≅ Sheaf.functorH.{w, u} S.smallEtaleTopology p) := by sorry
 
 /-- Source: Stacks 03YU and 04HR (blueprint: lem-weil-pbc-affine-etale-site-topos).
 Proof (step 6): the identity of S is terminal in the small étale site. Thus cohomology over

@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-affine-etale-cohomology_base_left",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero')",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Intermediate result fullAffineEtale_cohomology_base_left",
+ "statement": "Intermediate theorem used by lem-weil-pbc-affine-etale-site-topos.",
+ "source": {
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-full-affine-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "The result is the corresponding component of the site comparison argument described in the parent node; the remaining construction is deferred as this named obligation.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Lemma Tag 04HR"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Reduction of lem-weil-pbc-affine-etale-site-topos"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of sheaves on small affine étale site equivalent to sheaves on small étale site",
+   "results": "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv (Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv), Equivalence.sheafCongr, Functor.sheafInducedTopologyEquivOfIsCoverDense",
+   "date": "2026-10-09",
+   "verdict": "generalization candidate (dense subsite comparison lemma)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv",
+   "results": "AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv : Sheaf (AffineEtale.topology S) A ≌ Sheaf S.smallEtaleTopology A; sheafEquiv_inverse = (AffineEtale.Spec S).sheafPushforwardContinuous (Mathlib.AlgebraicGeometry.Sites.AffineEtale)",
+   "date": "2026-10-09",
+   "verdict": "close candidate: Mathlib's affine etale site carries the topology induced from S_et (AffineEtale.topology, line 75), not the one of standard etale coverings; that the two topologies agree is Topologies Lemma 0218 (lemma-etale-affine), a theorem; and the cohomology clause is not in Mathlib (Sheaf.H' is Ext from free sheaves, compared nowhere across sheafEquiv). Not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,200p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; grep -rn 'sheafEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "AffineEtale.lean: def AffineEtale (CostructuredArrow of Spec over S), instance IsCoverDense, def topology := inducedTopology, IsDenseSubsite, def AffineEtale.sheafEquiv (line 140); no cohomology statement in SheafCohomology/",
+   "date": "2026-10-09",
+   "verdict": "no exact match: the equivalence exists for the induced topology; cohomology comparison absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FullAffineEtaleTopos",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-affine-etale-site-topos",
+  "worker": "stage1",
+  "summary": "Unsplit node with no proof (previous worker died). Statement kept; stmt_deps gained def-weil-pbc-special-cocontinuous-functor (new definition node: cocontinuous, Sites 00XJ, and conditions (1)-(5) of Sites 03A0 / Definition 03CG; the notion was used without a node) and def-weil-pbc-etale-sheaf-of-sets (the 'sheaves of sets' clause). Six steps: (1) S_aff,et is a site (Topologies 021B(4), 021C/021D) from existing leaves (etale finite limits, affine fibre products, covering base change, etale composition); (2) the five conditions of Sites 03A0 for the inclusion, after the proof of 021E, with Topologies 0218 as the new Mathlib leaf lem-weil-pbc-etale-covering-affine-refinement (QuasiCompactCover.exists_hom); (3) the topology generated by standard etale coverings is the topology induced from S_et (written out), with sheaves on a site = sheaves for the generated topology (new Mathlib leaf lem-weil-pbc-pretopology-sheaf-condition, Presieve.isSheaf_pretopology); (4) the equivalence by restriction, for sets and abelian groups, deduced from Mathlib: AffineEtale.sheafEquiv (new leaf lem-weil-pbc-affine-etale-induced-sheaf-equivalence, stated for Mathlib's category of pairs (R, Spec R -> S etale) with the induced topology) and Equivalence.sheafCongr (new leaf lem-weil-pbc-site-equivalence-sheaf-transport) through the equivalence pairs -> affine objects; decision: the node keeps the standard-covering site (lem-weil-pbc-affine-etale-site-colimit needs finite coverings), and the identification with Mathlib's induced topology is step 3, so no Stacks 03A0 node is needed; (5) cohomology over affine U (Cohomology on Sites 03YU written out: restriction is an additive equivalence, so injective resolutions go to injective resolutions, new Mathlib leaf lem-weil-pbc-equivalence-injective-resolutions; sections agree; functoriality; identity in degree 0); (6) for U = S affine, H^p(S_et, G) of def-weil-pbc-etale-cohomology (K-injective) is cohomology over the final object (prop-weil-pbc-kinjective-resolutions-exist). Source repository: no declaration named AffineEtale/affineEtale in WeilConjectures (only an import of Mathlib.AlgebraicGeometry.Sites.AffineEtale in Morphisms/EtaleTorsor.lean)."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038357",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FullAffineEtaleTopos",
+  "file": "lean/Sheaf/AlgebraicGeometry/FullAffineEtaleTopos.lean",
+  "declaration": "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_base_left",
+  "statement": "theorem fullAffineEtale_cohomology_base_left (S : Scheme.{u}) [IsAffine S] [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})] [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (p : ℕ) : Nonempty (Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙ (CategoryTheory.evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 S))) ≅ Sheaf.functorH.{w, u} S.smallEtaleTopology p)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aet",
+  "group": "K1",
+  "result": "pass",
+  "note": "S arbitrary; S_aff,et = full subcategory IsAffine U.left of S.Etale with Fin-n etale jointly surjective coverings (0219/021B(4)); special cocontinuity via dependency module (landed IsSpecialCocontinuous needs Precoverage.IsStableUnderComposition, false for finite coverings: repeated-index counterexample verified against Mathlib's indexed class); sets and Ab restriction equivalences via sheafPushforwardContinuous; natural H^p comparison at each affine U with degree-0 identity on sections; U=S affine via Sheaf.functorH (stage-3 bridge per def-weil-pbc-etale-cohomology note); check_dag clean on branch"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
