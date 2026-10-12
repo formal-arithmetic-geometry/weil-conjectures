@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "(The inductive claim and its base.) For an integer $d\\ge1$ let $P(d)$ be the assertion: for every field $F$ of characteristic $p$ and every finite purely inseparable extension $E/F$ [def-weil-pbc-finite-purely-inseparable-extension] with $[E:F]=d$ there are $\\alpha_1,\\dots,\\alpha_n\\in E$ as in the first sentence of the statement. We prove $P(d)$ by strong induction on $d$, assuming $P(d')$ for all $1\\le d'<d$. If $d=1$, then $F\\subseteq E$ is a nonzero $F$-subspace of the $1$-dimensional $F$-space $E$, so $E=F$, and $n=0$ does the job ($E=F_0=F$, no conditions). From now on $d>1$, so $E\\ne F$.",
+   "text": "(The inductive claim and its base.) For an integer $d\\ge1$ let $P(d)$ be the assertion: for every field $F$ of characteristic $p$ and every finite purely inseparable extension $E/F$ [def-weil-pbc-finite-purely-inseparable-extension] with $[E:F]=d$ there are $\\alpha_1,\\dots,\\alpha_n\\in E$ as in the first sentence of the statement. We prove $P(d)$ by strong induction on $d$, assuming $P(d')$ for all $1\\le d'<d$. If $d=1$, then $F\\subseteq E$ is a nonzero $F$-subspace of the $1$-dimensional $F$-space $E$, so $E=F$, and $n=0$ does the job ($E=F_0=F$, no conditions). From now on $d>1$, so $E\\ne F$. Lean implementation: strong induction on Module.finrank K E, generalizing the intermediate field K of E/F. This keeps the base field of recursive calls in the same universe. The trivial extension branch uses the empty tower.",
    "uses": [
     "def-weil-pbc-finite-purely-inseparable-extension"
    ],
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "(An element $\\alpha_1\\notin F$ with $\\alpha_1^p\\in F$, and $t=\\alpha_1^p$ is not a $p$-th power in $F$.) Choose $\\alpha\\in E$ with $\\alpha\\notin F$. By [def-weil-pbc-finite-purely-inseparable-extension] there is $m\\ge0$ with $\\alpha^{p^m}\\in F$; $m\\ne0$ since $\\alpha\\notin F$. Let $r\\ge1$ be the least integer with $\\alpha^{p^r}\\in F$ and put $\\alpha_1=\\alpha^{p^{r-1}}$. Then $\\alpha_1\\notin F$ (for $r=1$, $\\alpha_1=\\alpha$; for $r>1$ by minimality of $r$) and $\\alpha_1^p=\\alpha^{p^r}\\in F$. Put $t=\\alpha_1^p$. If $t=c^p$ with $c\\in F$, then, since $p=0$ in $E$ and $p$ divides $\\binom pj$ for $0<j<p$, $(\\alpha_1-c)^p=\\alpha_1^p-c^p=0$, so $\\alpha_1-c=0$ in the field $E$ and $\\alpha_1=c\\in F$, a contradiction. So $t$ is not a $p$-th power in $F$. (The source refers here to Lemma 09H4 'or its proof'; the computation just made is that proof in this case.)",
+   "text": "(An element $\\alpha_1\\notin F$ with $\\alpha_1^p\\in F$, and $t=\\alpha_1^p$ is not a $p$-th power in $F$.) Choose $\\alpha\\in E$ with $\\alpha\\notin F$. By [def-weil-pbc-finite-purely-inseparable-extension] there is $m\\ge0$ with $\\alpha^{p^m}\\in F$; $m\\ne0$ since $\\alpha\\notin F$. Let $r\\ge1$ be the least integer with $\\alpha^{p^r}\\in F$ and put $\\alpha_1=\\alpha^{p^{r-1}}$. Then $\\alpha_1\\notin F$ (for $r=1$, $\\alpha_1=\\alpha$; for $r>1$ by minimality of $r$) and $\\alpha_1^p=\\alpha^{p^r}\\in F$. Put $t=\\alpha_1^p$. If $t=c^p$ with $c\\in F$, then, since $p=0$ in $E$ and $p$ divides $\\binom pj$ for $0<j<p$, $(\\alpha_1-c)^p=\\alpha_1^p-c^p=0$, so $\\alpha_1-c=0$ in the field $E$ and $\\alpha_1=c\\in F$, a contradiction. So $t$ is not a $p$-th power in $F$. (The source refers here to Lemma 09H4 'or its proof'; the computation just made is that proof in this case.) Lean helper first_root implements the least exponent with Nat.find and uses frobenius_inj for injectivity.",
    "uses": [
     "def-weil-pbc-finite-purely-inseparable-extension"
    ],
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "($[F(\\alpha_1):F]=p$.) The element $\\alpha_1$ is algebraic over $F$ [def-weil-algebraic-element], a root of the nonzero polynomial $x^p-t\\in F[x]$ [def-weil-polynomial-ring]. By [lem-weil-pbc-simple-algebraic-extension-power-basis] (fields $F\\subseteq E$, $\\theta=\\alpha_1$), $F(\\alpha_1)$ is finite over $F$ and, with $e=[F(\\alpha_1):F]\\ge1$, the elements $1,\\alpha_1,\\dots,\\alpha_1^{e-1}$ form an $F$-basis of $F(\\alpha_1)$. Writing $\\alpha_1^e=\\sum_{j<e}c_j\\alpha_1^j$ in this basis gives the monic polynomial $m=x^e-\\sum_{j<e}c_jx^j\\in F[x]$ of degree $e\\ge1$ with $m(\\alpha_1)=0$. Every $g\\in F[x]$ with $g(\\alpha_1)=0$ is divisible by $m$: division by the monic $m$ gives $g=qm+s$ with $\\deg s<e$, and $s(\\alpha_1)=0$ forces $s=0$ by the linear independence of $1,\\dots,\\alpha_1^{e-1}$. So $x^p-t=qm$ for some $q\\in F[x]$. By [lem-weil-pbc-x-pow-p-minus-t-irreducible] (applicable by Step 2) $x^p-t$ is irreducible; $m$ has degree $e\\ge1$, so it is not a nonzero constant, hence $q$ is a nonzero constant. Comparing leading coefficients of the monic polynomials $x^p-t$ and $m$ gives $q=1$, so $m=x^p-t$ and $e=\\deg m=p$.",
+   "text": "($[F(\\alpha_1):F]=p$.) The element $\\alpha_1$ is algebraic over $F$ [def-weil-algebraic-element], a root of the nonzero polynomial $x^p-t\\in F[x]$ [def-weil-polynomial-ring]. By [lem-weil-pbc-simple-algebraic-extension-power-basis] (fields $F\\subseteq E$, $\\theta=\\alpha_1$), $F(\\alpha_1)$ is finite over $F$ and, with $e=[F(\\alpha_1):F]\\ge1$, the elements $1,\\alpha_1,\\dots,\\alpha_1^{e-1}$ form an $F$-basis of $F(\\alpha_1)$. Writing $\\alpha_1^e=\\sum_{j<e}c_j\\alpha_1^j$ in this basis gives the monic polynomial $m=x^e-\\sum_{j<e}c_jx^j\\in F[x]$ of degree $e\\ge1$ with $m(\\alpha_1)=0$. Every $g\\in F[x]$ with $g(\\alpha_1)=0$ is divisible by $m$: division by the monic $m$ gives $g=qm+s$ with $\\deg s<e$, and $s(\\alpha_1)=0$ forces $s=0$ by the linear independence of $1,\\dots,\\alpha_1^{e-1}$. So $x^p-t=qm$ for some $q\\in F[x]$. By [lem-weil-pbc-x-pow-p-minus-t-irreducible] (applicable by Step 2) $x^p-t$ is irreducible; $m$ has degree $e\\ge1$, so it is not a nonzero constant, hence $q$ is a nonzero constant. Comparing leading coefficients of the monic polynomials $x^p-t$ and $m$ gives $q=1$, so $m=x^p-t$ and $e=\\deg m=p$. Lean uses X_pow_sub_C_irreducible_of_prime, minpoly.eq_of_irreducible_of_monic and IntermediateField.adjoin.finrank, avoiding a second formalization of polynomial division.",
    "uses": [
     "def-weil-algebraic-element",
     "def-weil-polynomial-ring",
@@ -79,7 +79,7 @@
    }
   },
   {
-   "text": "(Concatenating the towers.) By $P([E:F_1])$ (Step 4) applied to $E/F_1$ there are $\\gamma_1,\\dots,\\gamma_{k}\\in E$ with $E=F_1(\\gamma_1,\\dots,\\gamma_k)$ such that, with $G_{j-1}=F_1(\\gamma_1,\\dots,\\gamma_{j-1})$, $\\gamma_j^p\\in G_{j-1}$ is not a $p$-th power in $G_{j-1}$ and $[G_{j-1}(\\gamma_j):G_{j-1}]=p$. Put $n=k+1$ and $\\alpha_{j+1}=\\gamma_j$ for $1\\le j\\le k$. For $1\\le i\\le n$, $F(\\alpha_1,\\dots,\\alpha_{i-1})$ and $F_1(\\gamma_1,\\dots,\\gamma_{i-2})$ are both the smallest subfield of $E$ containing $F$ and $\\alpha_1,\\dots,\\alpha_{i-1}$ (for $i\\ge2$; for $i=1$ the field is $F$), so $F_{i-1}=G_{i-2}$ for $i\\ge2$, and $E=F_1(\\gamma_1,\\dots,\\gamma_k)=F(\\alpha_1,\\dots,\\alpha_n)$. The conditions for $i=1$ are Steps 2 and 3 ($F_0=F$), those for $i\\ge2$ are those for $j=i-1$ just obtained. This proves $P(d)$, hence the first assertion for every finite purely inseparable $E/F$.",
+   "text": "(Concatenating the towers.) By $P([E:F_1])$ (Step 4) applied to $E/F_1$ there are $\\gamma_1,\\dots,\\gamma_{k}\\in E$ with $E=F_1(\\gamma_1,\\dots,\\gamma_k)$ such that, with $G_{j-1}=F_1(\\gamma_1,\\dots,\\gamma_{j-1})$, $\\gamma_j^p\\in G_{j-1}$ is not a $p$-th power in $G_{j-1}$ and $[G_{j-1}(\\gamma_j):G_{j-1}]=p$. Put $n=k+1$ and $\\alpha_{j+1}=\\gamma_j$ for $1\\le j\\le k$. For $1\\le i\\le n$, $F(\\alpha_1,\\dots,\\alpha_{i-1})$ and $F_1(\\gamma_1,\\dots,\\gamma_{i-2})$ are both the smallest subfield of $E$ containing $F$ and $\\alpha_1,\\dots,\\alpha_{i-1}$ (for $i\\ge2$; for $i=1$ the field is $F$), so $F_{i-1}=G_{i-2}$ for $i\\ge2$, and $E=F_1(\\gamma_1,\\dots,\\gamma_k)=F(\\alpha_1,\\dots,\\alpha_n)$. The conditions for $i=1$ are Steps 2 and 3 ($F_0=F$), those for $i\\ge2$ are those for $j=i-1$ just obtained. This proves $P(d)$, hence the first assertion for every finite purely inseparable $E/F$. Lean helper cons_range proves the range equality after prepending the root; IntermediateField.adjoin_adjoin_left identifies each successor prefix. Nonmembership in a prefix is transported by this equality, and Frobenius injectivity then gives the no-pth-root assertion.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "(In particular: $M$.) Let $E\\ne F$ and take $\\alpha_1,\\dots,\\alpha_n$ as in the first assertion. If $n=0$ then $E=F_0=F$; so $n\\ge1$. Put $M=F_{n-1}$ and $\\beta=\\alpha_n$: $F\\subseteq M\\subseteq E$, $E=F_n=M(\\beta)$, $\\beta^p\\in M$ is not a $p$-th power in $M$, and $[E:M]=p$ (clause $i=n$). $M$ is an $F$-subspace of the finite-dimensional $F$-space $E$, hence finite over $F$, and each element of $M$ is an element of $E$, so has a $p$-power power in $F$ [def-weil-pbc-finite-purely-inseparable-extension]: $M/F$ is finite purely inseparable. By [lem-weil-pbc-field-degree-multiplicativity] for $F\\subseteq M\\subseteq E$, $[E:F]=[E:M][M:F]=p[M:F]>[M:F]$ since $p\\ge2$; in particular $M\\ne E$.",
+   "text": "(In particular: $M$.) Let $E\\ne F$ and take $\\alpha_1,\\dots,\\alpha_n$ as in the first assertion. If $n=0$ then $E=F_0=F$; so $n\\ge1$. Put $M=F_{n-1}$ and $\\beta=\\alpha_n$: $F\\subseteq M\\subseteq E$, $E=F_n=M(\\beta)$, $\\beta^p\\in M$ is not a $p$-th power in $M$, and $[E:M]=p$ (clause $i=n$). $M$ is an $F$-subspace of the finite-dimensional $F$-space $E$, hence finite over $F$, and each element of $M$ is an element of $E$, so has a $p$-power power in $F$ [def-weil-pbc-finite-purely-inseparable-extension]: $M/F$ is finite purely inseparable. By [lem-weil-pbc-field-degree-multiplicativity] for $F\\subseteq M\\subseteq E$, $[E:F]=[E:M][M:F]=p[M:F]>[M:F]$ since $p\\ge2$; in particular $M\\ne E$. Lean takes k = n - 1 and rewrites the final prefix with adjoin_adjoin_left. The degree-p assertion gives M < top since p is not one, and finrank_mul_finrank gives the strict degree inequality.",
    "uses": [
     "def-weil-pbc-finite-purely-inseparable-extension",
     "lem-weil-pbc-field-degree-multiplicativity"
@@ -100,7 +100,7 @@
    }
   },
   {
-   "text": "(In particular: $E\\cong M[z]/(z^p-\\beta^p)$.) Let $\\varphi:M[z]\\to E$ be the $M$-algebra homomorphism $g\\mapsto g(\\beta)$ of the polynomial ring [def-weil-polynomial-ring]. By [lem-weil-pbc-simple-algebraic-extension-power-basis] (fields $M\\subseteq E$, $\\theta=\\beta$, a root of $z^p-\\beta^p\\in M[z]$) and $[M(\\beta):M]=p$ (Step 6), the elements $1,\\beta,\\dots,\\beta^{p-1}$ form an $M$-basis of $M(\\beta)=E$; they are $\\varphi(1),\\dots,\\varphi(z^{p-1})$, so $\\varphi$ is surjective. Its kernel contains $z^p-\\beta^p$. Conversely let $g\\in\\ker\\varphi$; division by the monic $z^p-\\beta^p$ gives $g=q\\,(z^p-\\beta^p)+s$ with $\\deg s<p$, and $s(\\beta)=g(\\beta)=0$ forces $s=0$ by the linear independence of $1,\\dots,\\beta^{p-1}$. So $\\ker\\varphi=(z^p-\\beta^p)$, and $\\varphi$ induces an isomorphism of $M$-algebras $M[z]/(z^p-\\beta^p)\\cong E$ (first isomorphism theorem).",
+   "text": "(In particular: $E\\cong M[z]/(z^p-\\beta^p)$.) Let $\\varphi:M[z]\\to E$ be the $M$-algebra homomorphism $g\\mapsto g(\\beta)$ of the polynomial ring [def-weil-polynomial-ring]. By [lem-weil-pbc-simple-algebraic-extension-power-basis] (fields $M\\subseteq E$, $\\theta=\\beta$, a root of $z^p-\\beta^p\\in M[z]$) and $[M(\\beta):M]=p$ (Step 6), the elements $1,\\beta,\\dots,\\beta^{p-1}$ form an $M$-basis of $M(\\beta)=E$; they are $\\varphi(1),\\dots,\\varphi(z^{p-1})$, so $\\varphi$ is surjective. Its kernel contains $z^p-\\beta^p$. Conversely let $g\\in\\ker\\varphi$; division by the monic $z^p-\\beta^p$ gives $g=q\\,(z^p-\\beta^p)+s$ with $\\deg s<p$, and $s(\\beta)=g(\\beta)=0$ forces $s=0$ by the linear independence of $1,\\dots,\\beta^{p-1}$. So $\\ker\\varphi=(z^p-\\beta^p)$, and $\\varphi$ induces an isomorphism of $M$-algebras $M[z]/(z^p-\\beta^p)\\cong E$ (first isomorphism theorem). Lean identifies minpoly M beta with X^p-C b using irreducibility, then uses minpoly.equivAdjoin and Subalgebra.topEquiv for the quotient presentation. The coefficient b is constructed directly as the subtype element beta^p of M, not chosen from an existence theorem.",
    "uses": [
     "def-weil-polynomial-ring",
     "lem-weil-pbc-simple-algebraic-extension-power-basis"
@@ -121,9 +121,9 @@
   "lem-weil-pbc-field-degree-multiplicativity"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/fields.tex",
-  "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable, line 1669) and its proof, with Lemma 09HF (lemma-take-pth-root, line 1617); the 'in particular' clause (steps 6-7) written by an agent"
+  "place": "Fields, Lemma Tag 09HI and its proof (read at https://stacks.math.columbia.edu/tag/09HI); the same induction and final-step route implemented in Lean by C1, using Mathlib minimal-polynomial and quotient equivalences for the power-basis argument."
  },
  "mathlib_searches": [
   {
@@ -236,5 +236,15 @@
   "group": "M1",
   "result": "pass",
   "note": "F,E fields + Algebra, p prime [Fact] + CharP F p, IsPurelyInseparable + FiniteDimensional (=Module.Finite); alpha generation as adjoin of Fin n range (n=0 gives bot); per-step alpha_i^p in F_{i-1}, not a p-th power in F_{i-1}, finrank F_{i-1} F_{i-1}(alpha_i)=p tied to the same adjoins; E!=F as bot!=top; M=F_{n-1}, beta=alpha_{n-1}, M<top, finite+PI, [M:F]<[E:F], E=M(beta), beta^p in M not p-th power, E ≃ₐ[M] M[X]/(X^p - C b) with algebraMap b = beta^p; names #check'd with pp.fullNames"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T194103-L-452389",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
