@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "*The retraction.* $(R',\\mathfrak m')$ satisfies the hypothesis of the statement ($\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale, $\\mathfrak m'$ over $\\mathfrak m$, $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism, by step 1), so there is an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$.",
+   "text": "*The retraction.* $(R',\\mathfrak m')$ satisfies the hypothesis of the statement ($\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale, $\\mathfrak m'$ over $\\mathfrak m$, $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism, by step 1), so there is an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$. In Lean the neighborhood is first replaced by its ULift to Type (max u v). The induced residue-field map is an isomorphism: the maps induced by the lift and its inverse compose to the identity, checked on elements of the ring. Compose its map with the original residue-field map, apply the hypothesis upstairs, and compose the resulting retraction with the lift to recover a retraction of the original neighborhood.",
    "uses": [
     "def-weil-etale-morphism",
     "def-weil-residue-field"
@@ -69,7 +69,7 @@
    }
   },
   {
-   "text": "*The factors.* For an idempotent $f$ of $B$, the ideal $fB$ is a ring with unit $f$ and an $R$-algebra, and $\\pi_f:B\\to fB$, $b\\mapsto fb$, is a surjective $R$-algebra homomorphism with kernel $(1-f)B$ (if $fb=0$ then $b=(1-f)b$). So $fB$ is a finite $R$-algebra (images of $R$-module generators of $B$ generate it), and $\\mathfrak n\\mapsto\\pi_f^{-1}(\\mathfrak n)$ is a bijection from the primes of $fB$ to the primes of $B$ containing $1-f$, which are exactly the primes of $B$ not containing $f$ (as $f(1-f)=0$, a prime contains $f$ or $1-f$, and not both since $f+(1-f)=1$); since $R\\to fB$ is $\\pi_f\\circ(R\\to B)$, $\\mathfrak n$ and $\\pi_f^{-1}(\\mathfrak n)$ have the same preimage in $R$. If $fB\\neq0$ it has a maximal ideal, and every maximal ideal of the finite $R$-algebra $fB$ has preimage $\\mathfrak m$ in $R$ [lem-weil-pbc-finite-algebra-local-radical]. Apply this to $f_\\infty$: a maximal ideal of $f_\\infty B$ would give a prime of $B$ over $\\mathfrak m$ not containing $f_\\infty$, impossible by step 4; so $f_\\infty B=0$, i.e. $f_\\infty=0$. Apply it to $f_i$ with $f_i\\neq0$: every maximal ideal of $f_iB$ corresponds to a prime of $B$ over $\\mathfrak m$ not containing $f_i$, of which there is at most one (step 4), and the correspondence is injective; so $f_iB$ has exactly one maximal ideal, i.e. is a local ring.",
+   "text": "*Maximal-ideal separation and local quotient factors.* Every maximal ideal of the finite R-algebra B lies over the maximal ideal of R, by [lem-weil-pbc-finite-algebra-local-radical]. Thus, by step 4, for each idempotent f_i at most one maximal ideal misses f_i; no maximal ideal misses f_infinity. For any finite complete orthogonal family (f_j) with this maximal-ideal separation property, retain J = {j | f_j != 0}. Put K_j = (1-f_j)B. The idempotency identity proves f_j is not in K_j: if f_j=(1-f_j)b, multiplication by f_j gives f_j=0. Hence B/K_j is nonzero. A maximal ideal of B/K_j pulls back to a maximal ideal of B containing 1-f_j and therefore missing f_j. Surjectivity of the quotient map makes this pullback injective, so B/K_j has exactly one maximal ideal and is local. The last idempotent cannot be nonzero, since its quotient would have a maximal ideal whose pullback misses f_infinity. This is implemented by the proved private helper product_local_of_separating_idempotents, applied to the entire family including the last idempotent.",
    "uses": [
     "lem-weil-pbc-finite-algebra-local-radical"
    ],
@@ -80,7 +80,7 @@
    }
   },
   {
-   "text": "*Conclusion.* Let $i_1<\\dots<i_r$ be the indices $i\\in\\{1,\\dots,n\\}$ with $f_i\\neq0$ ($r\\ge0$). Since $f_\\infty=0$ and $f_i=0$ for the other $i$, $f_{i_1},\\dots,f_{i_r}$ are orthogonal idempotents with sum $1$, so $B\\to f_{i_1}B\\times\\dots\\times f_{i_r}B$, $b\\mapsto(f_{i_1}b,\\dots,f_{i_r}b)$, is an $R$-algebra isomorphism (its inverse is $(b_1,\\dots,b_r)\\mapsto b_1+\\dots+b_r$: $\\sum_kf_{i_k}b=b$, and $f_{i_k}(\\sum_lb_l)=b_k$ for $b_l\\in f_{i_l}B$ by orthogonality). By step 5 each $B_k=f_{i_k}B$ is a local ring. (If $B=0$, then $r=0$ and $B$ is the empty product.)",
+   "text": "*Product isomorphism and finite indexing.* Removing the zero terms preserves orthogonality and the sum 1. Mathlib's CompleteOrthogonalIdempotents.bijective_pi gives a bijective ring map B -> product_{j in J} B/(1-f_j)B. Its components are R-algebra quotient maps, so AlgEquiv.ofBijective upgrades this map to an R-algebra isomorphism. Reindex the finite subtype J by Fin (Fintype.card J) using AlgEquiv.piCongrLeft'. The factors are the local quotient rings from step 5 and all lie in the universe of B. For B=0, J is empty and the same construction gives the empty product.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -98,7 +98,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10, with Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite) for finite $S$ (Mathlib's 00UL form); the base change along $\\tau$, the exclusion of the last factor, the locality of the factors and the discarding of zero factors written out by the agent (steps 3-6)"
+  "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8$\\Rightarrow$10, with Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite) for finite $S$ (Mathlib's 00UL form); the base change along $\\tau$, the exclusion of the last factor, the locality of the factors and the discarding of zero factors written out by the agent (steps 3-6); stage-3 Lean realization by H2 uses ULift for the neighborhood universe, contracts maximal ideals of B itself, and realizes the idempotent factors as B/(1-f)B using Mathlib CompleteOrthogonalIdempotents.bijective_pi"
  },
  "mathlib_searches": [
   {
@@ -216,5 +216,15 @@
   "group": "M1",
   "result": "pass",
   "note": "local R (CommRing+IsLocalRing); hR over all R' : Type (max u v) with Algebra.Etale, prime p, comap p = m, Ideal.ResidueField.mapₐ bijective => tau : R' →ₐ[R] R with p = m.comap tau; B Module.Finite; conclusion n:ℕ (n=0 allowed), local factors A : Fin n → Type v, B ≃ₐ[R] Π A i; hR satisfiable (fields, henselian), not hollow"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T044745-L-2035601",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
