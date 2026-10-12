@@ -48,6 +48,11 @@ theorem site_covering_isomorphic_family
     (∃ (A' : Type (max u v)) (β : A' ≃ A),
       Presieve.ofArrows (fun a' => Vₐ (β a')) (fun a' => f (β a')) ∈ J V) ∧
       Presieve.ofArrows Vₐ f ∈ J V := by
-  sorry
+  have hf : Presieve.ofArrows Vₐ f ∈ J V := by
+    refine Precoverage.mem_coverings_of_isPullback g hg φ f σ ?_
+    intro a
+    have : IsIso (σ a) := hσ a
+    exact IsPullback.of_vert_isIso ⟨(compat a).symm⟩
+  exact ⟨⟨A, Equiv.refl A, hf⟩, hf⟩
 
 end CategoryTheory
