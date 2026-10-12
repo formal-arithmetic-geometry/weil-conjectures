@@ -12,29 +12,27 @@
  },
  "proof": [
   {
-   "text": "In every degree form A_n = the sum of E_j for j < n and B_n = the sum of E_j for j ≤ n. Define u_n by ι_j minus the transition to summand j+1. Project onto the first n summands. The composite is 1 minus a nilpotent lower triangular shift, with inverse the finite geometric sum. Thus u_n is split monic, including n=0. The u_n commute with inclusions of initial sums.",
+   "text": "For a sequential system E in a preadditive category, define q_j from its coproduct to E_j by the transition E_k → E_j on k ≤ j and zero on k > j. The k-th component of one minus shift followed by q_j is the identity for k = j and zero otherwise, by functoriality when k < j. For each finite set S of indices, the finite sum of q_j followed by the j-th inclusion into the finite subcoproduct is an explicit retraction of the restriction of one minus shift. This includes the empty set. The restrictions form a natural transformation from Mathlib's liftToFinsetObj finite-subcoproduct diagram to the constant coproduct diagram.",
    "uses": [
     "def-pc-cochain-complex-modules"
    ],
    "elementary": true
   },
   {
-   "text": "Sheaves of modules form a Grothendieck abelian category, so the sequential colimit of these monomorphisms is monic. The two colimits of finite initial sums are the coproduct of all terms: maps out of either colimit are exactly compatible maps out of finite sums, hence families of maps out of all summands. Checking each coproduct injection identifies the colimit map with 1-shift. Evaluation computes coproducts degreewise, so the map is monic in each cochain degree and hence in the category of complexes.",
+   "text": "Use the already proved source theorem SheafOfModules.isGrothendieckAbelian for the underlying sheaf of rings directly; the separate localized-generator theorem is not used. Shrink AB5 to universe zero using AB5OfSize_of_univLE. Mathlib.Algebra.Homology.GrothendieckAbelian supplies exact filtered colimits for complexes by degreewise evaluation. The finite-subcoproduct cocone is a colimit by CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone, and a filtered constant cocone is a colimit by isColimitConstCocone. Apply NatTrans.mono_of_mono_app to the split monic finite restrictions and colim.map_mono' to these two colimit cocones, obtaining precisely the displayed Sigma.desc morphism.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
     "def-pc-cochain-complex-modules"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "lem-pur-ringed-site-grothendieck-abelian"
+  "def-pc-cochain-complex-modules"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 093W proof, with the finite split monomorphism verified by a finite geometric sum"
+  "place": "Tag 093W (lemma-colim-sequence), finite split restrictions and exact filtered colimits; explicit retractions by transition-map sums, with the target diagram kept constant"
  },
  "mathlib_searches": [
   {
@@ -104,11 +102,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-1976a",
-  "group": "U3",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T135324-L-1696045",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly, target signatures and node statements match, and the required direct importer compiles against the delivery."
+  "landing": "20261012T161500-L-2647413",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
