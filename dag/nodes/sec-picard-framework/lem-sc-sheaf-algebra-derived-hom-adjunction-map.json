@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-sheaf-algebra-derived-hom-adjunction-map",
+ "kind": "statement",
+ "title": "Derived scalar restriction mapDerivedCategory adjunction",
+ "statement": "Let Y be a scheme [def-pc-scheme] and B a commutative algebra sheaf on Y whose underlying O_Y-module B.toModule is quasi-coherent [def-weil-pbc-comm-algebra-sheaf]. Choose derived categories D(O_Y) and D(B), with arbitrary morphism universes w and wB [def-pc-derived-category]. Let F be scalar restriction SheafOfModules.restrictScalars along the ring-sheaf morphism induced by B.hom. Then its termwise localization F.mapDerivedCategory is left adjoint to the explicit functor derivedRHomAlgebraModule Y B hB, defined by localizing Hom(B,I(-)) with its multiplication B-action [def-pc-derived-rhom-algebra-module]. No boundedness, finiteness or Noetherianity is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pc-derived-category",
+  "def-pc-derived-rhom-algebra-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0BV0 and 0BV1, together with Derived Categories Tag 09T5"
+ },
+ "proof": [
+  {
+   "text": "Obtain the underived adjunction sheafAlgebraHom_adjunction, with exact scalar restriction from the two exactness theorems of DerivedRHomAlgebraModule. Apply CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction (the unbounded exact-left-adjoint specialization of Adjunction.derived) to obtain F.mapDerivedCategory left adjoint to (sheafAlgebraHom Y B).rightDerivedFunctor.",
+   "uses": [
+    "lem-sc-sheaf-algebra-hom-adjunction",
+    "def-pc-derived-rhom-algebra-module",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put R = sheafAlgebraHom Y B and I = sheafAlgebraHomResolution Y. Q inverts toSheafAlgebraHomResolution since monoQuasiIso_toKInjectiveResolution_app supplies a quasi-isomorphism at every complex. The right-derived unit is invertible on I(K), since isKInjective_kInjectiveResolutionFunctor_obj supplies K-injectivity. Whisker this unit by I followed by the homotopy quotient. Compose the resolution isomorphism, quotientCompQhIso, this inverse unit and mapHomotopyCategoryFactors to construct Q followed by R.rightDerivedFunctor isomorphic to I followed by termwise R and Q_B. Compose with derivedRHomAlgebraModule_comparison inverse. Descend through Q using Localization.fullyFaithfulWhiskeringLeft.preimageIso, then transport the derived adjunction by ofNatIsoRight. All transformations retain the algebra-module category and hence its B-action.",
+   "uses": [
+    "def-pc-derived-rhom-algebra-module",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-sheaf-algebra-hom-adjunction",
+  "def-pc-derived-rhom-algebra-module",
+  "lem-sc-derived-adjunction-from-underived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0BV0 and 0BV1 with Modules 0A6F and Derived Categories 09T5; repaired X3 route: derive the underived adjunction, explicitly compare the resolution localization, and transport the right functor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction between mapDerivedCategory and derived right adjoint",
+   "results": "No direct match found.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor.mapDerivedCategory adjunction derived category",
+   "results": "No direct match found.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*adjunction|derivedRHomAlgebraModule.*adjunction",
+   "results": "Repository search found no existing declaration.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafAlgebraDerivedHomAdjunction",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-sheaf-algebra-derived-hom-adjunction",
+   "place": "proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafAlgebraMapDerivedAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafAlgebraMapDerivedAdjunction.lean",
+  "declaration": "AlgebraicGeometry.sheafAlgebra_mapDerivedCategory_adjunction",
+  "statement": "theorem sheafAlgebra_mapDerivedCategory_adjunction\n    (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wB} (SheafOfModules.{u}\n      ((sheafCompose (Opens.grothendieckTopology Y)\n        (forget₂ CommRingCat RingCat)).obj B.right))] :\n    Nonempty ((SheafOfModules.restrictScalars.{u}\n      ((sheafCompose (Opens.grothendieckTopology Y)\n        (forget₂ CommRingCat RingCat)).map B.hom)).mapDerivedCategory ⊣\n          derivedRHomAlgebraModule Y B hB)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e966",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135336-L-1701452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e966",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135336-L-1701452",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements/proofs, report, and change record match the stage-3 requirements; all three modules compile in order."
+ }
+}

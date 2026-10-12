@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.SheafAlgebraMapDerivedAdjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # The constructed algebra-valued derived Hom adjunction
 
@@ -22,7 +22,7 @@ and Derived Categories Tag 09T5
 
 universe u w wB
 
-open CategoryTheory TopologicalSpace
+open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 attribute [local instance] SheafOfModules.isGrothendieckAbelian
 
@@ -65,6 +65,13 @@ theorem sheafAlgebraDerivedHom_adjunction
     Nonempty ((SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom)).rightDerivedFunctor ⊣
-          derivedRHomAlgebraModule Y B hB) := by sorry
+          derivedRHomAlgebraModule Y B hB) := by
+  let F := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).map B.hom)
+  have : PreservesFiniteLimits F := sheafAlgebraRestrictScalars_preservesFiniteLimits Y B
+  have : PreservesFiniteColimits F := sheafAlgebraRestrictScalars_preservesFiniteColimits Y B
+  obtain ⟨adj⟩ := sheafAlgebra_mapDerivedCategory_adjunction Y B hB
+  exact ⟨adj.ofNatIsoLeft F.rightDerivedFunctorIsoMapDerivedCategory.symm⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-sheaf-algebra-hom-adjunction",
+ "kind": "statement",
+ "title": "Underived scalar restriction and algebra-valued sheaf Hom adjunction",
+ "statement": "Let Y be a scheme [def-pc-scheme] and B a commutative algebra sheaf on Y [def-weil-pbc-comm-algebra-sheaf]. Write O for the ring sheaf obtained from Y.sheaf and B_R for the ring sheaf obtained from B.right. Scalar restriction from sheaves of B_R-modules to sheaves of O-modules along the ring-sheaf morphism induced by B.hom is left adjoint to the explicit functor sheafAlgebraHom Y B [def-pc-derived-rhom-algebra-module]. The latter has sections given by O-linear morphisms from B restricted to smaller opens into F, and B acts by precomposition with multiplication. No quasi-coherence hypothesis or derived category is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pc-derived-rhom-algebra-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0A6F; specialized to the construction of Duality for Schemes Tags 0BV0 and 0BV1"
+ },
+ "proof": [
+  {
+   "text": "For a B-module sheaf M and an O-module sheaf F, send phi: F_restr(M) -> F to psi_U(m)_V(b)=phi_V(b times res_UV(m)), for each V contained in U. Conversely evaluate psi_U(m) at 1 on U. Additivity and O-linearity follow from distributivity and phi being O-linear; B-linearity in m follows from associativity and commutativity and sheafAlgebraHom_smul. Restriction compatibility follows since ring restrictions preserve products and 1 and module restrictions preserve scalar multiplication. sheafAlgebraHom_underlying_linear gives O-linearity of the evaluation map. The composites are phi(1m)=phi(m) and psi(bm)(1)=(b psi(m))(1)=psi(m)(b). Precomposition in M and postcomposition in F commute with both formulas, and sheafAlgebraHomMap is postcomposition. Thus form natural Hom equivalences and apply CategoryTheory.Adjunction.mkOfHomEquiv. The formulas require neither a nonzero unit nor a nonempty open, so zero B and empty Y are included.",
+   "uses": [
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-rhom-algebra-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0A6F; explicit sectionwise inverse maps specialized to sheafAlgebraHom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules is left adjoint to algebra-valued internal Hom",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error (msearch.py). The successful LeanFinder and local source searches above supply the alternate search.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules restriction of scalars right adjoint internal Hom",
+   "results": "Eight hits: sheafification, module pullback and restriction interfaces, but no adjunction for the explicit variable algebra sheaf Hom construction.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction",
+   "results": "Search service does not know this source-library declaration; local source inspection verifies its signature. It derives an adjunction but does not construct the underived one.",
+   "verdict": "no underived match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafAlgebraHom.*adjunction|restrict.*[Aa]dj|[Aa]dj.*restrict|coextend",
+   "results": "Local search finds constant-ring CategoryTheory.Sheaf.restrictCoextendScalarsAdj, not an adjunction for variable ring-sheaf SheafOfModules.restrictScalars and the specified sheafAlgebraHom.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafAlgebraDerivedHomAdjunction",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-sheaf-algebra-derived-hom-adjunction",
+   "place": "proof step 1: construct the underived sheaf-Hom adjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafAlgebraHomAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafAlgebraHomAdjunction.lean",
+  "declaration": "AlgebraicGeometry.sheafAlgebraHom_adjunction",
+  "statement": "theorem sheafAlgebraHom_adjunction (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) :\n    Nonempty ((SheafOfModules.restrictScalars.{u}\n      ((sheafCompose (Opens.grothendieckTopology Y)\n        (forget₂ CommRingCat RingCat)).map B.hom)) ⊣ sheafAlgebraHom Y B)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e966",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135336-L-1701452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e966",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135336-L-1701452",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements/proofs, report, and change record match the stage-3 requirements; all three modules compile in order."
+ }
+}
