@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkFunctor
@@ -230,14 +231,6 @@ end WeilSheaf
 
 namespace WeilComplex
 
-/-- The cohomology sheaves of a shift are shifted: `𝓗ʲ(K[a]) ≅ 𝓗^{a + j}(K)`. -/
-noncomputable def homologySheafShiftIso (K : WeilComplex k₀ l X) (a j : ℤ) :
-    (homologySheaf j).obj ((shiftFunctor (WeilComplex k₀ l X) a).obj K) ≅
-      (homologySheaf (a + j)).obj K :=
-  ObjectProperty.isoMk _ ((_root_.DerivedCategory.homologyFunctor _ j).mapIso
-      (((ObjectProperty.ι _).commShiftIso a).app K) ≪≫
-    ((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso a j (a + j) rfl).app K.obj)
-
 /-- The underlying object of the cohomology sheaf `𝓗ʲ(K)` is the cohomology object of the
 underlying object of `K`. -/
 noncomputable def homologySheafObjIso (j : ℤ) (K : WeilComplex k₀ l X) :
@@ -280,12 +273,12 @@ theorem traceFunction_shift (K : WeilComplex k₀ l X) (a : ℤ) (n : ℕ)
   have hS' (j : ℤ) (hj : j ∉ S.map (Equiv.subRight a).toEmbedding) :
       IsZero ((homologySheaf j).obj ((shiftFunctor (WeilComplex k₀ l X) a).obj K)) :=
     (hS (a + j) fun h ↦ hj (Finset.mem_map.2 ⟨a + j, h, by simp⟩)).of_iso
-      (homologySheafShiftIso K a j)
+      (homologySheafShiftIso K a j (a + j) rfl)
   rw [traceFunction_eq_sum _ _ hS', traceFunction_eq_sum _ _ hS, Finset.sum_map,
     Finset.smul_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [Equiv.coe_toEmbedding, Equiv.subRight_apply,
-    WeilSheaf.traceFunction_congr (homologySheafShiftIso K a (i - a)), add_sub_cancel,
+    WeilSheaf.traceFunction_congr (homologySheafShiftIso K a (i - a) _ rfl), add_sub_cancel,
     Int.negOnePow_sub, Units.val_mul, mul_comm, mul_smul]
 
 /-- The trace function of a pullback is the composite with the morphism on rational points:

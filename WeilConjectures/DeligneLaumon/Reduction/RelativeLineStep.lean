@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.RelativeAffineLine
+public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -24,16 +25,15 @@ decompositions. The direct-image bound holds on each piece — by the quasi-fini
 the relative affine-line proposition `sk-p-dl-general-relative-line` — and passes through the
 gluing by the long exact sequences of the open–closed triangles.
 
-## Main definitions
-
-- `AlgebraicGeometry.WeilSheaf.HasRelativeLineStratification`: a stratification of a Weil sheaf
-  over `S` into quasi-finite pieces and pure lisse relative-line pieces, glued along open–closed
-  decompositions.
+The stratification itself (`AlgebraicGeometry.WeilSheaf.HasRelativeLineStratification` and
+`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`, blueprint
+`thm-zl-relative-line-stratification`) is constructed in
+`WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification`.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`: blueprint
-  `thm-zl-relative-line-stratification`.
+- `AlgebraicGeometry.WeilSheaf.HasRelativeLineStratification.isMixedOfWeightsAtMost`: the weight
+  bound on a stratified sheaf.
 - `AlgebraicGeometry.hasDirectImageWeightBound_affineLine` and
   `AlgebraicGeometry.hasDirectImageComplexWeightBound_affineLine`: blueprint
   `thm-zl-relative-line-step`, in its sheaf and its complex form.
@@ -58,65 +58,12 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 section Stratification
 
-variable (ι) (w : ℝ) {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))]
-
-/-- A Weil sheaf `F` on a `k₀`-scheme `X` over `S` (through `h : X ⟶ S`) *has a relative-line
-stratification with pure pieces of weight `w`* if it is built, by finitely many open–closed
-decompositions `U ↪ X ↩ Z` of the source, from pieces of the following two kinds:
-
-- `h` is separated and quasi-finite, and `F` is mixed of weights at most `w`;
-- `h` factors as an open immersion `v : X ⟶ 𝔸¹_V` with surjective projection to `V`, followed by
-  the projection `𝔸¹_V ⟶ V` and an immersion `c : V ⟶ S`, and `F` is lisse and punctually pure of
-  weight `w`:
-
-```
-X --- v ---> 𝔸¹_V --- ↘ ---> V --- c ---> S
-```
-
-(blueprint: `thm-zl-relative-line-stratification`, the finite stratifications of source and target
-refined to open–closed filtrations). -/
-inductive WeilSheaf.HasRelativeLineStratification :
-    ∀ {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : X ⟶ S)
-      [h.IsOver (Spec (CommRingCat.of k₀))], WeilSheaf k₀ l X → Prop
-  /-- A separated quasi-finite piece. -/
-  | quasiFinite {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : X ⟶ S)
-      [h.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated h] [LocallyQuasiFinite h]
-      [LocallyOfFiniteType h] [QuasiCompact h] (F : WeilSheaf k₀ l X)
-      (hF : F.IsMixedOfWeightsAtMost ι w) :
-      WeilSheaf.HasRelativeLineStratification h F
-  /-- A piece open in a relative affine line, carrying a lisse sheaf punctually pure of
-  weight `w`. -/
-  | affineLine {X V : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-      [V.Over (Spec (CommRingCat.of k₀))] [IsSeparated (V ↘ Spec (CommRingCat.of k₀))]
-      [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
-      [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] (v : X ⟶ 𝔸(PUnit.{u + 1}; V))
-      [IsOpenImmersion v] [QuasiCompact v] [v.IsOver (Spec (CommRingCat.of k₀))]
-      (hv : Surjective (v ≫ 𝔸(PUnit.{u + 1}; V) ↘ V)) (c : V ⟶ S) [IsImmersion c]
-      [QuasiCompact c] [c.IsOver (Spec (CommRingCat.of k₀))] (h : X ⟶ S)
-      [h.IsOver (Spec (CommRingCat.of k₀))] (hh : h = (v ≫ 𝔸(PUnit.{u + 1}; V) ↘ V) ≫ c)
-      (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (hpure : F.IsPunctuallyPureOfWeight ι w) :
-      WeilSheaf.HasRelativeLineStratification h F
-  /-- Gluing along an open immersion `j` and its closed complement `i`. -/
-  | openClosed {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType
-  (U ↘ Spec (CommRingCat.of k₀))]
-      [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-      [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
-      (j : U ⟶ X)
-      [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X)
-      [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
-      (hij : IsCompl (Set.range j.base) (Set.range i.base)) (h : X ⟶ S)
-      [h.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X) :
-      WeilSheaf.HasRelativeLineStratification (j ≫ h) ((WeilSheaf.upperStar j).obj F) →
-      WeilSheaf.HasRelativeLineStratification (i ≫ h) ((WeilSheaf.upperStar i).obj F) →
-      WeilSheaf.HasRelativeLineStratification h F
+variable {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))]
 
 variable [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (S ↘ Spec (CommRingCat.of k₀))]
 
-variable {ι w} in
+variable {w : ℝ} in
 /-- If `F` has a relative-line stratification over `S` with pure pieces of weight `w`, then
 `Rʳh₀!F` is mixed of weights at most `w + r` for every `r`: on a quasi-finite piece by
 `sk-l-dl-general-quasifinite`, on a relative-line piece by `sk-p-dl-general-relative-line`
@@ -151,26 +98,6 @@ variable {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (S ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))]
-
-instance : LocallyOfFiniteType (𝔸(PUnit.{u + 1}; S) ↘ Spec (CommRingCat.of k₀)) := by
-  rw [← CategoryTheory.comp_over (𝔸(PUnit.{u + 1}; S) ↘ S) (Spec (CommRingCat.of k₀))]
-  infer_instance
-
-/-- Let `S` be a separated `k₀`-scheme of finite type and `F` a Weil sheaf on the relative affine
-line `𝔸¹_S`, punctually `ι`-pure of weight `w`. Then `F` has a relative-line stratification over
-`S` with pure pieces of weight `w`: there are finite stratifications of source and target, refined
-to open–closed filtrations, such that each source stratum is either separated quasi-finite over
-its target stratum, or open in its relative affine line with surjective projection and carries a
-lisse restriction of `F` (blueprint: `thm-zl-relative-line-stratification`).
-
-Over an integral affine open `Spec B` of `S`, the complement of the lissity locus of `F` is cut
-out by an ideal of `B[T]` containing a nonzero polynomial; over the principal open of its leading
-coefficient it is finite, and its complement is open in the relative affine line with nonempty
-fibres. Noetherian induction on `S` covers the rest. -/
-theorem WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification {w : ℝ}
-    {F : WeilSheaf k₀ l 𝔸(PUnit.{u + 1}; S)} (hF : F.IsPunctuallyPureOfWeight ι w) :
-    F.HasRelativeLineStratification ι w (𝔸(PUnit.{u + 1}; S) ↘ S) :=
-  sorry
 
 variable (S) in
 /-- For the projection `p : 𝔸¹_S ⟶ S` of the relative affine line over a separated `k₀`-scheme

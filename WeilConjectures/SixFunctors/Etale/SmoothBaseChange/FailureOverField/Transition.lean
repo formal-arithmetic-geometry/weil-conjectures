@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 
 /-!
 # Transition maps of the base-change map
@@ -197,13 +198,8 @@ noncomputable def Etale.baseChangeSourceTransition (p : X ⟶ S) (g : T ⟶ S) (
 instances at the concrete derived functors are checked syntactically (see the implementation
 notes of `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality`). -/
 omit [CommRing Λ] in
-private lemma whiskerLeft_whiskerRight_app' {𝒜 ℬ 𝒞 𝒟 : Type*} [Category* 𝒜] [Category* ℬ]
-    [Category* 𝒞] [Category* 𝒟] (E : 𝒜 ⥤ ℬ) {P Q : ℬ ⥤ 𝒞} (α : P ⟶ Q) (Hh : 𝒞 ⥤ 𝒟) (X : 𝒜) :
-    (Functor.whiskerLeft E (Functor.whiskerRight α Hh)).app X = Hh.map (α.app (E.obj X)) :=
-  rfl
-
-omit [CommRing Λ] in
-private lemma natTrans_app_comp_map_map_iso_hom_app {𝒜 𝒜' ℬ ℬ' 𝒞 𝒞' 𝒟 : Type*} [Category* 𝒜]
+/-- The naturality of `β` along the hom of an isomorphism `E ⋙ G ≅ G' ⋙ E'`. -/
+lemma natTrans_app_comp_map_map_iso_hom_app {𝒜 𝒜' ℬ ℬ' 𝒞 𝒞' 𝒟 : Type*} [Category* 𝒜]
     [Category* 𝒜'] [Category* ℬ] [Category* ℬ'] [Category* 𝒞] [Category* 𝒞'] [Category* 𝒟]
     {E : 𝒜 ⥤ ℬ} {G : ℬ ⥤ ℬ'} {G' : 𝒜 ⥤ 𝒜'} {E' : 𝒜' ⥤ ℬ'} (s : E ⋙ G ≅ G' ⋙ E')
     {P₁ : ℬ' ⥤ 𝒞} {P₂ : 𝒞 ⥤ 𝒟} {Q₁ : ℬ' ⥤ 𝒞'} {Q₂ : 𝒞' ⥤ 𝒟} (β : P₁ ⋙ P₂ ⟶ Q₁ ⋙ Q₂)
@@ -251,7 +247,7 @@ theorem Etale.baseChangeHomologyMap_comp_baseChangeTargetTransition (sq : IsPull
         Etale.baseChangeHomologyMap Λ sq' q (((π)^*[ModuleCat.{u + 1} Λ]).obj F) := by
   rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyMap,
     Etale.baseChangeHomologyNatTrans_eq, Etale.baseChangeHomologyNatTrans_eq,
-    whiskerLeft_whiskerRight_app', whiskerLeft_whiskerRight_app',
+    Functor.whiskerLeft_whiskerRight_app, Functor.whiskerLeft_whiskerRight_app,
     Etale.baseChangeTargetTransition, Etale.baseChangeSourceTransition, ← Functor.map_comp,
     ← Functor.map_comp]
   congr 1
