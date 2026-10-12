@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-constant-module-higher-direct-image-local-vanishing",
+ "kind": "statement",
+ "title": "Vanishing for constant module coefficients from local cyclic cohomology annihilation",
+ "statement": "Let $h:Y\\to X$ be quasi-compact and quasi-separated, let $\\Lambda$ be a commutative ring and $d,q\\in\\mathbf N$. Suppose that for each $e\\mid d$, each affine etale $U\\to X$, and each $\\xi\\in H^q(Y\\times_X U,\\mathbf Z/e)$ there is a jointly surjective etale family $V_i\\to U$ on which the pullback of $\\xi$ vanishes. Then $R^q h_*\\underline{\\Lambda/d\\Lambda}=0$.\nDefinitions: [def-pc-scheme], [def-weil-pbc-etale-site], [def-weil-pbc-direct-image], [def-weil-pbc-etale-cohomology], [def-weil-pbc-constant-sheaf], [def-weil-pbc-quotient-module], [def-weil-pbc-etale-sheaves].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Docstring of AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists: the combination of local cyclic vanishing and constant-module coefficient reduction; Stacks 03Q8 (https://stacks.math.columbia.edu/tag/03Q8), with 03Q5 for filtered cohomology and 03FD for the module/abelian comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For each e dividing d, specialize H to e. The local cyclic vanishing criterion makes R^q h_* Z/e a zero object.",
+   "uses": [
+    "lem-sbc-cyclic-higher-direct-image-local-vanishing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the constant-module coefficient reduction to this family of cyclic higher-direct-image vanishings.",
+   "uses": [
+    "lem-sbc-constant-module-higher-direct-image-cyclic-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-constant-module-higher-direct-image-cyclic-reduction",
+  "lem-sbc-cyclic-higher-direct-image-local-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Existing declaration docstring, the combination of local cyclic vanishing and constant-module coefficient reduction; formalized as a separate step by Q1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image of a constant sheaf is zero when every cohomology class dies on an etale cover",
+   "results": "HTTP 500 Internal Server Error; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Sheaf.H, Sheaf.H.map, Sheaf.H.equiv₀, subsingleton_H_of_isZero; no local vanishing theorem for higher direct images",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*higherDirectImage|higherDirectImage.*isZero",
+   "results": "msearch returned zero hits; repository rg also found injective-module acyclicity and unrelated coherent-sheaf vanishing, not this local criterion",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "The extra constant-coefficient vanishing consequence in its adopted source module: the combination of local cyclic vanishing and constant-module coefficient reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists",
+  "statement": "theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ) (H : ∀ e : ℕ, e ∣ d → ∀ ⦃U : Scheme.{u}⦄ (u : U ⟶ X) [Etale u] [IsAffine U] (ξ : Sheaf.H ((pullback h u).constantZMod e) q), ∃ (ι : Type u) (V : ι → Scheme.{u}) (v : ∀ i, V i ⟶ U), (∀ i, Etale (v i)) ∧ (∀ x : U, ∃ i y, (v i).base y = x) ∧ ∀ i, Etale.cohomologyMap (pullback.map h (v i ≫ u) h u (𝟙 Y) (v i) (𝟙 X) (by simp) (by simp)) _ q ξ = 0) : IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proofs and signatures with all four nodes, the declared definition changes and downstream users; compilation, axiom checks, API conversion checks, and the C1 citation repair pass."
+ }
+}

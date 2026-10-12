@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-cyclic-higher-direct-image-local-vanishing",
+ "kind": "statement",
+ "title": "Local annihilation of cyclic cohomology classes kills their higher direct image",
+ "statement": "Let $h:Y\\to X$ be any morphism of schemes, and $e,q\\in\\mathbf N$. Suppose that for every affine etale $U\\to X$ and every class in $H^q(Y\\times_X U,\\mathbf Z/e)$ there is a jointly surjective etale family $V_i\\to U$ on which its cohomology pullback is zero. Then $R^q h_*\\underline{\\mathbf Z/e}$, computed as the homology of the bounded-below derived pushforward in abelian sheaves, is a zero object. Here $\\mathbf Z/0$ means $\\mathbf Z$.\nDefinitions: [def-pc-scheme], [def-weil-pbc-etale-site], [def-weil-pbc-direct-image], [def-weil-pbc-etale-cohomology], [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Docstring of AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists: the local-vanishing argument for Z/e on the affine etale basis; Stacks 03Q8 (https://stacks.math.columbia.edu/tag/03Q8)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "By 03Q8 identify the higher direct image with the sheafified cohomology presheaf. Restrictions agree with cohomologyMap followed by the constant-coefficient comparison, which preserves zero.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine opens cover every etale object. Restrict a class to this affine cover and apply the hypothesized cover on each affine object; composition of covers shows that every presheaf section is locally zero.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every section of the sheafification locally comes from the presheaf. Refine that cover to kill those representatives. Separatedness then forces the section to be zero. All section groups vanish, so the sheaf and its isomorphic higher direct image are zero. Only the local-representative (local-surjectivity) clause of the cited node is used, at the adequate value universe Type (u+1). Its unrestricted-universe local-injectivity clause is disputed and is not used; Mathlib Presheaf.isLocallySurjective_toSheafify′ (CategoryTheory/Sites/LocallySurjective.lean:308-315) supplies the needed clause for abelian sheafification directly.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Existing declaration docstring, the local-vanishing argument for Z/e on the affine etale basis; formalized as a separate step by Q1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image of a constant sheaf is zero when every cohomology class dies on an etale cover",
+   "results": "HTTP 500 Internal Server Error; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Sheaf.H, Sheaf.H.map, Sheaf.H.equiv₀, subsingleton_H_of_isZero; no local vanishing theorem for higher direct images",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*higherDirectImage|higherDirectImage.*isZero",
+   "results": "msearch returned zero hits; repository rg also found injective-module acyclicity and unrelated coherent-sheaf vanishing, not this local criterion",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "The extra constant-coefficient vanishing consequence in its adopted source module: the local-vanishing argument for Z/e on the affine etale basis",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CyclicHigherDirectImageLocalVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_cyclicHigherDirectImage_of_locally_zero",
+  "statement": "theorem isZero_cyclicHigherDirectImage_of_locally_zero {X Y : Scheme.{u}} (h : Y ⟶ X) (e q : ℕ) (H : ∀ ⦃U : Scheme.{u}⦄ (u : U ⟶ X) [Etale u] [IsAffine U] (ξ : Sheaf.H ((pullback h u).constantZMod e) q), ∃ (ι : Type u) (V : ι → Scheme.{u}) (v : ∀ i, V i ⟶ U), (∀ i, Etale (v i)) ∧ (∀ x : U, ∃ i y, (v i).base y = x) ∧ ∀ i, Etale.cohomologyMap (pullback.map h (v i ≫ u) h u (𝟙 Y) (v i) (𝟙 X) (by simp) (by simp)) _ q ξ = 0) : IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj ((DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (Y.constantZMod e))))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proofs and signatures with all four nodes, the declared definition changes and downstream users; compilation, axiom checks, API conversion checks, and the C1 citation repair pass."
+ }
+}

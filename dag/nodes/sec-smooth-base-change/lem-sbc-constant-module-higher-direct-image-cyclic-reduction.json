@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-constant-module-higher-direct-image-cyclic-reduction",
+ "kind": "statement",
+ "title": "Transfer higher-direct-image vanishing from cyclic groups to constant module coefficients",
+ "statement": "Let $h:Y\\to X$ be quasi-compact and quasi-separated, let $\\Lambda$ be an arbitrary commutative ring, and let $d,q\\in\\mathbf N$. If $R^q h_*\\underline{\\mathbf Z/e}=0$ as an abelian sheaf for every $e\\mid d$, then $R^q h_*\\underline{\\Lambda/d\\Lambda}=0$ as a sheaf of $\\Lambda$-modules. Divisibility includes $0\\mid0$ and $\\mathbf Z/0=\\mathbf Z$.\nDefinitions: [def-pc-scheme], [def-weil-pbc-etale-site], [def-weil-pbc-direct-image], [def-weil-pbc-etale-cohomology], [def-weil-pbc-constant-sheaf], [def-weil-pbc-quotient-module], [def-weil-pbc-etale-sheaves].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Docstring of AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists: the filtered-union, cyclic-decomposition and forgetting-coefficients argument; Stacks 03Q8 (https://stacks.math.columbia.edu/tag/03Q8), with 03Q5 for filtered cohomology and 03FD for the module/abelian comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Express the underlying additive group of Lambda/dLambda as the filtered union of its finitely generated subgroups. The structure theorem AddCommGroup.equiv_free_prod_directSum_zmod (Mathlib.GroupTheory.FiniteAbelian.Basic) writes each as a finite sum of cyclic groups. Every finite cyclic order divides d because d kills the subgroup. A nonzero free part is possible only when d=0, when it consists of copies of Z=ZMod 0 and 0 divides 0. The zero subgroup is the empty finite sum. The structure theorem is the existing Mathlib declaration at Basic.lean:119-132; the additional check is elementary: d kills the generator of Z/e exactly when e divides d, and kills a nonzero free generator only if d=0.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant abelian sheaf is the filtered colimit of the constant sheaves of these subgroups. On affine etale U the scheme Y x_X U is qcqs, so cohomology commutes with this filtered colimit by 03Q5. Use 03Q8 and colimit-preserving sheafification to deduce that higher direct images commute with this coefficient colimit. Additivity deals with each finite sum, whose higher direct image is zero by the hypothesis. The colimit is therefore zero.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underlying constant module sheaf is the constant abelian sheaf of its additive group. Use the natural module/abelian cohomology comparison on every Y x_X U, with its compatibility in U, and the sheafified-presheaf formula to identify underlying module higher direct images with abelian higher direct images (03FD and 03Q8). The comparison node is already proved for Lambda : Type (u+1), exactly the coefficient universe here; no conversion to the smaller-universe SheafOfModules statement is needed. Forgetting reflects zero objects.",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-sbc-finitely-generated-abelian-group-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Existing declaration docstring, the filtered-union, cyclic-decomposition and forgetting-coefficients argument; formalized as a separate step by Q1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If higher direct images of all cyclic constant abelian sheaves with order dividing d vanish then higher direct image of constant module Lambda modulo d vanishes",
+   "results": "HTTP 500 Internal Server Error; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of derived pushforward constant module from cyclic abelian groups using filtered colimits",
+   "results": "8 unrelated Tor and derived vanishing declarations; no coefficient-reduction theorem",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "constantMod.*cyclic|cyclic.*higherDirect|IsZero.*constantMod",
+   "results": "msearch returned zero hits; repository searches found no matching declaration. Mathlib GroupTheory/FiniteAbelian/Basic.lean contains AddCommGroup.equiv_free_prod_directSum_zmod and equiv_directSum_zmod_of_finite for the algebraic step, but no higher-direct-image reduction.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "The extra constant-coefficient vanishing consequence in its adopted source module: the filtered-union, cyclic-decomposition and forgetting-coefficients argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModuleHigherDirectImageCyclicReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModuleHigherDirectImageCyclicReduction.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_constantModHigherDirectImage_of_cyclic",
+  "statement": "theorem isZero_constantModHigherDirectImage_of_cyclic (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ) (H : ∀ e : ℕ, e ∣ d → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj ((DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (Y.constantZMod e))))) : IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proofs and signatures with all four nodes, the declared definition changes and downstream users; compilation, axiom checks, API conversion checks, and the C1 citation repair pass."
+ }
+}

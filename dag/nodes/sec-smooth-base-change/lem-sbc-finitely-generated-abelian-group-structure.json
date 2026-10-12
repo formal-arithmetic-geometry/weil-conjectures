@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-finitely-generated-abelian-group-structure",
+ "kind": "statement",
+ "title": "Structure theorem of finitely generated abelian groups",
+ "statement": "Let G be a finitely generated additive commutative group. There exist n : ℕ, an index type ι : Type with Fintype ι, functions p,e : ι → ℕ with Nat.Prime (p i) for every i, and an additive group isomorphism G ≃+ (Fin n →₀ ℤ) × ⨁ i : ι, ZMod (p i ^ e i). No positivity assumption on e is imposed.",
+ "source": {
+  "document": "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+  "place": "AddCommGroup.equiv_free_prod_directSum_zmod, lines 119-132 (statement at 119-122, proof at 123-132)."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the existing Mathlib theorem AddCommGroup.equiv_free_prod_directSum_zmod to G with its AddCommGroup and AddGroup.FG instances. Its existential witnesses and additive equivalence are exactly the conclusion, including Fintype ι and Nat.Prime (p i). This is a direct Mathlib leaf, not a new Lean proof obligation.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every finitely generated abelian group is isomorphic to a free abelian group times a finite direct sum of prime power cyclic groups",
+   "results": "msearch returned UNAVAILABLE, 0 hits: service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structure theorem of finitely generated abelian groups as a product of a free abelian group and a finite direct sum of prime power cyclic groups",
+   "results": "8 hits including Submodule.quotientEquivPiZMod, Module.Finite.iff_addGroup_fg and AddGroup.FG; the exact structure theorem was not among the returned hits.",
+   "verdict": "no exact match in these results",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.equiv_free_prod_directSum_zmod",
+   "results": "1 hit: AddCommGroup.equiv_free_prod_directSum_zmod in Mathlib.GroupTheory.FiniteAbelian.Basic, with the free-product/finite-direct-sum signature.",
+   "verdict": "exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "equiv_free_prod_directSum_zmod",
+   "results": "msearch returned 4 hits in Mathlib/GroupTheory/FiniteAbelian/Basic.lean at lines 15,119,139,193. Read lines 119-132 in the pinned Mathlib source: AddGroup.FG G, finite index type, prime p i, and exactly the stated additive equivalence.",
+   "verdict": "exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AddCommGroup.equiv_free_prod_directSum_zmod",
+  "file": "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+  "line": 119,
+  "how": "Exact declaration at lines 119-132: for G : Type u with AddCommGroup G and AddGroup.FG G, provides n, ι : Type, Fintype ι, p : ι → ℕ with prime values, e : ι → ℕ, and Nonempty (G ≃+ (Fin n →₀ ℤ) × ⨁ i : ι, ZMod (p i ^ e i)). No duplicate Lean theorem is introduced."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "The filtered-union and cyclic-decomposition argument for constant coefficient vanishing, made explicit in step 1 of lem-sbc-constant-module-higher-direct-image-cyclic-reduction.",
+   "via": [
+    "lem-sbc-constant-module-higher-direct-image-cyclic-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.GroupTheory.FiniteAbelian.Basic",
+  "declaration": "AddCommGroup.equiv_free_prod_directSum_zmod",
+  "statement": "theorem equiv_free_prod_directSum_zmod (G : Type u) [AddCommGroup G] [hG : AddGroup.FG G] : ∃ (n : ℕ) (ι : Type) (_ : Fintype ι) (p : ι → ℕ) (_ : ∀ i, Nat.Prime <| p i) (e : ι → ℕ), Nonempty <| G ≃+ (Fin n →₀ ℤ) × ⨁ i : ι, ZMod (p i ^ e i)",
+  "branch": "mathlib",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dccd0",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070548-L-3475998",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean proofs and signatures with all four nodes, the declared definition changes and downstream users; compilation, axiom checks, API conversion checks, and the C1 citation repair pass."
+ }
+}
