@@ -1,9 +1,6 @@
 /- helper construction -/
 module
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange
+public import Sheaf.AlgebraicGeometry.EtaleSheaves
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -39,11 +36,36 @@ def etaleSetInverseImageConstantSheafCondition
           (P := @AlgebraicGeometry.Etale) (Q := ⊤) v).obj
               (Scheme.Etale.mk (𝟙 U)))) ⟨e⟩)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Construction of the canonical isomorphism and its section equations.
 (blueprint: new-etaleSetInverseImageConstantSheaf-existence) -/
 theorem etaleSetInverseImageConstantSheaf_exists
     (U V : Scheme.{u}) (v : V ⟶ U) (E : Type u) :
     ∃ γ : etaleSetInverseImageConstantSheafHom U V v E,
       etaleSetInverseImageConstantSheafCondition U V v E γ ∧ IsIso γ := by
-  sorry
+  let T := Scheme.Etale.mk (𝟙 U)
+  let hT : IsTerminal T := IsTerminal.ofUniqueHom
+    (fun W ↦ MorphismProperty.Over.homMk W.hom) (fun W f ↦ by
+      apply MorphismProperty.Over.Hom.ext
+      change f.left = W.hom
+      rw [← MorphismProperty.Over.w f]
+      exact (Category.comp_id _).symm)
+  let hBT : IsTerminal
+      ((MorphismProperty.Over.pullback @Etale ⊤ v).obj T) :=
+    hT.isTerminalObj (MorphismProperty.Over.pullback @Etale ⊤ v) T
+  let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ v) (Type (u + 1))
+    (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale)
+  let a₁ := ((constantSheafAdj U.smallEtaleTopology (Type (u + 1)) hT).comp a).ofNatIsoRight
+    (Functor.sheafPushforwardContinuousCompSheafSectionsObjIso
+      (MorphismProperty.Over.pullback @Etale ⊤ v) (Type (u + 1))
+      (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale) (op T))
+  let a₂ := constantSheafAdj V.smallEtaleTopology (Type (u + 1)) hBT
+  let i := a₁.leftAdjointUniq a₂
+  refine ⟨i.hom.app (ULift.{u + 1, u} E), ?_, inferInstance⟩
+  intro e
+  have h := a₁.unit_leftAdjointUniq_hom_app a₂ (ULift.{u + 1, u} E)
+  have he := congrArg (fun f ↦ f (ULift.up e)) h
+  convert he using 1 <;> simp [a₁, a₂, a, i, T, constantSheafAdj, constantPresheafAdj,
+    Functor.sheafPushforwardContinuousCompSheafSectionsObjIso] <;> rfl
 end AlgebraicGeometry

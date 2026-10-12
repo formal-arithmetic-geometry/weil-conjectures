@@ -10,24 +10,42 @@
  },
  "proof": [
   {
-   "text": "Apply the representation of constant sheaves by indexed coproducts, inverse-image representability, and the base-change coproduct isomorphism; verify the canonical-section equations and the isomorphism property.",
+   "text": "The identity étale object U/U is terminal: the unique map from W/U has underlying morphism W.hom. Base change preserves this terminal object by its finite-limit-preservation instance.",
    "uses": [
-    "lem-galois-constant-sheaf-sets-representable",
-    "lem-galois-inverse-image-representable",
-    "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose constantSheafAdj at U/U with the continuous-functor inverse-image adjunction. The pushforward followed by sections at U/U is naturally isomorphic to sections at its base change, by the definition of continuous pushforward. Transport the composite adjunction along this natural isomorphism. Its right adjoint now equals that of constantSheafAdj on V at the base-changed terminal object.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Adjunction.leftAdjointUniq to these two adjunctions and evaluate its isomorphism on ULift E. The identity-right-adjoint case of the conjugate-isomorphism unit equation is Mathlib Adjunction.unit_leftAdjointUniq_hom_app. Evaluate this equation at ULift.up e. Unfolding the constant-sheaf unit and composite adjunction unit identifies its two sides with exactly the canonical-section equation in etaleSetInverseImageConstantSheafCondition.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-galois-constant-sheaf-sets-representable",
-  "lem-galois-inverse-image-representable",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 093R"
+  "document": "Mathlib.CategoryTheory.Sites.ConstantSheaf; Mathlib.CategoryTheory.Adjunction.Unique; WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf",
+  "place": "constantSheafAdj; Adjunction.leftAdjointUniq and unit_leftAdjointUniq_hom_app; sheafPushforwardContinuousCompSheafSectionsObjIso (the same adjunction construction as constantSheafsheafPullbackIso, specialized to the explicit sheafPullbackConstruction)"
  },
  "mathlib_searches": [
   {
@@ -130,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-ec13c",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T053932-L-2635628",
+  "landing": "20261012T085333-L-37199",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered proof and unchanged signatures/definitions with the node, cited adjunction declarations, unit route, import-change record, and report; delivery and both direct importers compile cleanly, and all three declarations use only permitted axioms."
  }
 }
