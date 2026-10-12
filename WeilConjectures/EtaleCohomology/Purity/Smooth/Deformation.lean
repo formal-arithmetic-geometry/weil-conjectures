@@ -13,6 +13,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothn
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
@@ -239,7 +240,7 @@ separated `g̃` (`sk-prop-cohsm` (a)), and derived pullback along `s̃` preserve
 theorem isInvertible_familyObject :
     Etale.DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); B) (D.familyObject Λ) :=
   have := D.hasInvertibleExponent_scheme Λ
-  Etale.DerivedCategory.isInvertible_leftDerivedUpperStar_obj Λ D.sect
+  Etale.DerivedCategory.isInvertible.leftDerivedUpperStar D.sect
     (isInvertible_dualizingComplex Λ (d := d) D.proj)
 
 variable [HasCompactification g]
@@ -577,7 +578,7 @@ theorem leftDerivedUpperStar_familyObject_iso_baseChange
       (AffineSpace.map_over (n := ULift.{u} (Fin 1)) u)).app _
   have : HasInvertibleExponent Λ B' := .of_hom u
   have := eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _
-    (DerivedCategory.isInvertible_leftDerivedUpperStar_obj Λ _ (D.isInvertible_familyObject Λ))
+    (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
     κ' κr (by rw [← cancel_mono (ε'.hom.app _)]; exact h.trans hres.symm)
   exact congrArg Iso.hom this
 end Scheme.Hom.DeformationToNormalConeData
@@ -670,7 +671,7 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
   have hκr : κr = e ≪≫
       (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁.symm := by
     refine eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _
-      (DerivedCategory.isInvertible_leftDerivedUpperStar_obj Λ _ (D.isInvertible_familyObject Λ))
+      (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
       _ _ (leftDerivedUpperStar_map_eq_of_sectionRestrictionIso_eq _ u _
         (AffineSpace.oneSection_comp_map u) (AffineSpace.oneSection_comp_over _ B') θ₁ _ _ ?_)
     rw [sectionRestrictionIso_trans_right, hθ₁, sectionRestrictionIso_restrict _ u _ _ _ hv
@@ -687,7 +688,7 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
     simp
   have hinv : DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) :=
     DerivedCategory.isInvertible.of_iso θ₁
-      (DerivedCategory.isInvertible_leftDerivedUpperStar_obj Λ _ (D.isInvertible_familyObject Λ))
+      (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
   have key : sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
         (AffineSpace.zeroSection_comp_over _ B') θ₀ e =
       (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso (θ₀'.symm ≪≫ θ₀).symm ≪≫ φ₁ := by
