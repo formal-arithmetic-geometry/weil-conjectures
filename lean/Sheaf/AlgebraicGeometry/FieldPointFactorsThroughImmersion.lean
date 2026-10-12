@@ -21,7 +21,7 @@ Lemmas 01HI, 0356, and 01L7, and the discussion before Lemma 01J9
 @[expose] public section
 
 universe u
-
+set_option linter.style.haveILetI false
 open CategoryTheory
 open AlgebraicGeometry
 
@@ -50,6 +50,59 @@ theorem fieldPoint_factorsThrough_immersion
           (∃! s' : Spec (.of K) ⟶ Z, s' ≫ iota = s) ∧
             ∀ s' : Spec (.of K) ⟶ Z,
               s' ≫ iota = s → s'.base ((default : Spec (.of K))) = z := by
-  sorry
+  let c := iota.liftCoborder
+  let o := iota.coborderRange.ι
+  have hfac : c ≫ o = iota := iota.liftCoborder_ι
+  letI : IsClosedImmersion c := inferInstance
+  letI : IsOpenImmersion o := inferInstance
+  letI : IsIso (c.residueFieldMap z) :=
+    Scheme.Hom.isIso_residueFieldMap_of_isClosedImmersion c z
+  letI : IsIso (o.residueFieldMap (c.base z)) := inferInstance
+  have hres : IsIso (iota.residueFieldMap z) := by
+    rw [← hfac, Scheme.residueFieldMap_comp]
+    infer_instance
+  refine ⟨hres, ?_⟩
+  intro K _ s hs
+  have hrange : Set.range s.base ⊆ Set.range o.base := by
+    intro x hx
+    rcases hx with ⟨y, rfl⟩
+    have hy : y = (default : Spec (.of K)) := Subsingleton.elim _ _
+    subst hy
+    exact ⟨c.base z, by simpa [← hfac] using hs.symm⟩
+  let t : Spec (.of K) ⟶ iota.coborderRange := IsOpenImmersion.lift o s hrange
+  have ht : t ≫ o = s := IsOpenImmersion.lift_fac o s hrange
+  have htz : t.base (default : Spec (.of K)) = c.base z := by
+    apply o.isEmbedding.injective
+    have hto : o.base (t.base (default : Spec (.of K))) = s.base default := by
+      simpa only [← Scheme.Hom.comp_base, Scheme.Hom.comp_apply] using
+        congrArg (fun f : Spec (.of K) ⟶ X => f.base default) ht
+    have hoc : o.base (c.base z) = iota.base z := by
+      simpa only [← Scheme.Hom.comp_base, Scheme.Hom.comp_apply] using
+        congrArg (fun f : Z ⟶ X => f.base z) hfac
+    exact hto.trans (hs.trans hoc.symm)
+  obtain ⟨⟨u, hu, huuniq⟩, hupt⟩ := field_point_factors_through_closed_immersion
+    c t z htz
+  refine ⟨⟨u, ?_, ?_⟩, ?_⟩
+  · calc
+      u ≫ iota = (u ≫ c) ≫ o := by simp only [Category.assoc, hfac]
+      _ = t ≫ o := by rw [hu]
+      _ = s := ht
+  · intro v hv
+    apply huuniq v
+    apply (cancel_mono o).1
+    calc
+      (v ≫ c) ≫ o = v ≫ iota := by simp only [Category.assoc, hfac]
+      _ = s := hv
+      _ = t ≫ o := ht.symm
+  · intro v hv
+    have hvu : v = u := by
+      apply huuniq v
+      apply (cancel_mono o).1
+      calc
+        (v ≫ c) ≫ o = v ≫ iota := by simp only [Category.assoc, hfac]
+        _ = s := hv
+        _ = t ≫ o := ht.symm
+    rw [hvu]
+    exact hupt u hu
 
 end AlgebraicGeometry

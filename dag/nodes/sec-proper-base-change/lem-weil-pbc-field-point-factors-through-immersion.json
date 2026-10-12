@@ -28,77 +28,35 @@
  ],
  "proof": [
   {
-   "text": "*Residue fields.* By the definition of an immersion, write $\\iota=o\\circ c$ with $c:Z\\to W$ a closed immersion and $o:W\\to X$ an open immersion. The map $\\kappa(x)\\to\\kappa(c(z))$ induced by $o$ is an isomorphism by [lem-weil-pbc-residue-field-point-naturality], and the map $\\kappa(c(z))\\to\\kappa(z)$ induced by $c$ is an isomorphism by [lem-weil-pbc-closed-immersion-residue-field-iso].",
+   "text": "Factor the immersion using Mathlib `Scheme.Hom.liftCoborder_ι` as a closed immersion c followed by an open immersion o. The residue-field map of the composite is the composite of the residue-field maps, and the closed and open factors induce isomorphisms by the imported residue-field lemmas and Mathlib.",
    "uses": [
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "def-weil-residue-field",
-    "lem-weil-pbc-residue-field-point-naturality",
     "lem-weil-pbc-closed-immersion-residue-field-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Definition Tag 01IO and Definition Tag 01HK, with the residue-field discussion before Lemma Tag 01J9"
-   }
+   "elementary": false
   },
   {
-   "text": "The residue-field map induced by the composite $\\iota=o\\circ c$ is the composite of the two maps in Step 1, because the local homomorphisms on stalks and their residue maps compose. A composite of isomorphisms is an isomorphism, proving (1).",
+   "text": "For a field-valued point s whose unique point is iota(z), its image lies in the range of o because Spec K has a unique point. Mathlib `IsOpenImmersion.lift` gives t with t ≫ o = s; injectivity of o on points shows t maps the unique point to c(z). Apply the closed-immersion factorization theorem to obtain u with u ≫ c = t and point z.",
    "uses": [
-    "lem-weil-pbc-residue-field-point-naturality",
-    "lem-weil-pbc-closed-immersion-residue-field-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, the commutative residue-field diagram in the discussion before Lemma Tag 01J9"
-   }
-  },
-  {
-   "text": "*Existence of the lift.* Keep the factorization $\\iota=o\\circ c$ from Step 1. Since the unique point of $\\operatorname{Spec}K$ maps under $s$ to $x=o(c(z))\\in o(W)$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $t:\\operatorname{Spec}K\\to W$ with $o\\circ t=s$. The point of $\\operatorname{Spec}K$ maps under $t$ to $c(z)$. The new statement [lem-weil-pbc-field-point-factors-through-closed-immersion] therefore gives a unique $s':\\operatorname{Spec}K\\to Z$ with $c\\circ s'=t$, and its point is $z$. Thus $\\iota\\circ s'=s$.",
-   "uses": [
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
     "lem-weil-pbc-field-point-factors-through-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01HI, Lemma Tag 0356, and Definition Tag 01IO"
-   }
+   "elementary": false
   },
   {
-   "text": "*Uniqueness and geometric points.* If $u:\\operatorname{Spec}K\\to Z$ also satisfies $\\iota\\circ u=s$, the monomorphism $o$ gives $c\\circ u=t$; the uniqueness clause of [lem-weil-pbc-field-point-factors-through-closed-immersion] gives $u=s'$. For an algebraically closed $K$, this is exactly the stated factorization of a geometric point, with the same field.",
+   "text": "The composite u ≫ c ≫ o equals s by the factorization equalities. Any other lift v has v ≫ c = t after cancelling the monomorphism o, hence equals u by uniqueness for the closed factor. The point conclusion follows from the closed-factor theorem.",
    "uses": [
-    "lem-weil-pbc-open-immersion-monomorphism",
-    "lem-weil-pbc-field-point-factors-through-closed-immersion",
-    "def-weil-geometric-point"
+    "lem-weil-pbc-field-point-factors-through-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01L7 and the discussion before Lemma Tag 01J9"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "def-weil-residue-field",
-  "lem-weil-pbc-residue-field-point-naturality",
   "lem-weil-pbc-closed-immersion-residue-field-iso",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-field-point-factors-through-closed-immersion",
-  "lem-weil-pbc-open-immersion-monomorphism",
-  "def-weil-geometric-point"
+  "lem-weil-pbc-field-point-factors-through-closed-immersion"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Definition Tag 01IO, Definition Tag 01HK, Lemma Tags 0356, 01HI, and 01L7, and the discussion before Lemma Tag 01J9; the composite residue-field argument is written out from the stalk maps"
+  "by": "worker",
+  "document": "Mathlib.AlgebraicGeometry.Morphisms.Immersion and source theorem modules",
+  "place": "Scheme.Hom.liftCoborder_ι, IsOpenImmersion.lift/lift_fac, Scheme.residueFieldMap_comp, and the two imported closed-immersion theorems"
  },
  "mathlib_searches": [
   {
@@ -197,5 +155,15 @@
   "group": "H1",
   "result": "fix",
   "note": "Z X schemes, iota immersion [IsImmersion], z, x=iota.base z; (1) IsIso (iota.residueFieldMap z) kappa(x)->kappa(z); (2) all fields K, s : Spec K -> X with s(default)=x; FIX: ∃! over the conjunction (unique only among lifts at z) replaced by literal (∃! s', s' ≫ iota = s) ∧ every lift maps default to z; geometric point = K alg. closed specialization"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d74d9",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T060758-L-2918037",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature and proof to the node, dependencies, unit route, change record and report; compilation is clean, and axioms are standard plus sorryAx from existing unfinished dependencies."
  }
 }
