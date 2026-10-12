@@ -32,87 +32,24 @@
  ],
  "proof": [
   {
-   "text": "*Etale/Zariski comparison on principal opens.* By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}(R_h)\\to S=\\operatorname{Spec}R$ is an open immersion with image $D(h)$, so we identify $D(h)$ with $\\operatorname{Spec}(R_h)$. A prime of $R_h$ is a prime $\\mathfrak p\\subset R$ with $h\\notin\\mathfrak p$; [lem-weil-pbc-spec-domain-stalks-function-field] identifies the local ring of $\\operatorname{Spec}(R_h)$ at this prime with $(R_h)_{\\mathfrak pR_h}\\cong R_{\\mathfrak p}$. Hence every local ring of $D(h)$ is one of the strictly henselian local rings assumed for $R$. Apply [lem-weil-pbc-gabber-strict-henselian-zariski-comparison] (Stacks 09AX) to $D(h)$ and to $S$. Thus etale cohomology on $S$ and on every $D(h)$ is canonically identified with the corresponding Zariski cohomology, with the comparison maps induced by the etale-to-Zariski site morphism.",
+   "text": "For each positive degree q, apply the fixed-degree theorem gabberCriterion_degree.",
    "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison"
+    "lem-weil-pbc-gabber-criterion-degree"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 (label lemma-gabber-criterion), line 14228, proof: first sentence, applying Lemma 09AX on each open of Spec(R)"
-   }
-  },
-  {
-   "text": "*Induction statement with the original ring fixed.* For an integer $i\\ge0$, let $P(i)$ assert that for every $h\\in R$ and every $q$ with $1\\le q\\le i$, $H^q(D(h)_{\\Et},\\mathcal F|_{D(h)})=0$. We prove $P(i)$ by induction. $P(0)$ is vacuous. Assume $P(i-1)$ and fix $h\\in R$ and $\\xi\\in H^i(D(h)_{\\Et},\\mathcal F|_{D(h)})$ for $i\\ge1$. We work directly on $D(h)$, so no localization transport is assumed. For later use, an element $a/h^n\\in R_h$ has principal open $D_{\\operatorname{Spec}(R_h)}(a/h^n)=D_S(ah)\\subseteq D(h)$ by the identification in step 1; thus the induction is already quantified over all principal opens of every $R_h$ without changing the original ring or its hypotheses.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-principal-localization-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 proof, induction paragraph (line 14228): prove vanishing simultaneously on all D(h); the localization identification is made explicit here so the degree-one hypothesis remains the stated hypothesis over R"
-   }
-  },
-  {
-   "text": "*The vanishing ideal on a fixed principal open.* Define $I_h=\\{f\\in R\\mid \\xi|_{D(hf)}=0\\}$. By step 1 and [lem-weil-pbc-zariski-cohomology-locally-zero], $\\xi$ is locally zero on the Zariski space $D(h)$. Principal opens form a basis, so for every prime $\\mathfrak p$ with $h\\notin\\mathfrak p$ there is $f\\notin\\mathfrak p$ with $f\\in I_h$ (shrink a neighbourhood of $\\mathfrak p$ to $D(hf)$). If $f\\in I_h$ and $r\\in R$, then $rf\\in I_h$ because $D(hrf)\\subseteq D(hf)$. We prove closure under addition next.",
-   "uses": [
-    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
-    "lem-weil-pbc-zariski-cohomology-locally-zero",
-    "def-sc-zariski-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 proof, paragraph defining I (line 14228): Zariski local triviality and the observation that I is closed under multiplication"
-   }
-  },
-  {
-   "text": "*Addition in degree one.* If $i=1$ and $f,g\\in I_h$, apply the assumed kernel condition to the two elements $hf$ and $hg$. Their sum is $h(f+g)$, and the two target opens are $D(h^2f(f+g))=D(hf(f+g))$ and $D(h^2g(f+g))=D(hg(f+g))$. The class $\\xi|_{D(h(f+g))}$ restricts to zero on both because these opens lie in $D(hf)$ and $D(hg)$, respectively. The assumed injectivity therefore gives $\\xi|_{D(h(f+g))}=0$, so $f+g\\in I_h$.",
-   "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-cohomology-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 proof, paragraph after definition of I (line 14228): for q=i=1 this is exactly the hypothesis"
-   }
-  },
-  {
-   "text": "*Addition in higher degree and conclusion.* Suppose $i>1$ and $f,g\\in I_h$. The identity $D(h(f+g))=D(hf(f+g))\\cup D(hg(f+g))$ has intersection $D(hfg(f+g))$. Apply [lem-weil-pbc-etale-mayer-vietoris] to this cover. The class $\\xi|_{D(h(f+g))}$ restricts to zero on both degree-$i$ terms because the first open lies in $D(hf)$ and the second in $D(hg)$. Exactness reduces it to the preceding group $H^{i-1}(D(hfg(f+g))_{\\Et},\\mathcal F|)$, which is zero by $P(i-1)$; hence $f+g\\in I_h$. Thus $I_h$ is an ideal. Every prime containing $I_h$ contains $h$, because every prime avoiding $h$ avoids some element of $I_h$. The prime-ideal characterization of radicals gives $h\\in\\sqrt{I_h}$, so $h^N\\in I_h$ for some $N$ (with the case $h=0$ immediate). Then $D(h)=D(h^{N+1})$, and the definition of $I_h$ gives $\\xi=0$. This proves $P(i)$, and induction gives $H^q(S_{\\Et},\\mathcal F)=0$ for every $q>0$.",
-   "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-cohomology-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GY0 proof, paragraphs after the definition of I (line 14228): Mayer-Vietoris for i>1 and the induction conclusion"
+    "place": "Lemma 0GY0 (label lemma-gabber-criterion), line 14228; fixed-degree induction split into node lem-weil-pbc-gabber-criterion-degree"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-zariski-cohomology-locally-zero",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-inverse-image",
-  "def-sc-zariski-cohomology",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-etale-mayer-vietoris"
+  "lem-weil-pbc-gabber-criterion-degree"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0GY0 (label lemma-gabber-criterion), line 14228, proof: comparison by Lemma 09AX, induction on the degree, the ideal of principal opens where a class vanishes, and Mayer-Vietoris"
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/GabberCriterionDegree.lean",
+  "place": "Reduction of the all-positive-degree conclusion to the fixed-degree split theorem."
  },
  "mathlib_searches": [
   {
@@ -188,5 +125,15 @@
   "reviewer": "R-gbc",
   "group": "K1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053928-L-2633918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

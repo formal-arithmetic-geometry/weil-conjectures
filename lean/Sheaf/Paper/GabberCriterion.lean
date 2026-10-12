@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.ZariskiCohomologyLocallyZero
 import Sheaf.Paper.StrictHenselianZariskiEtaleComparison
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.GabberCriterionDegree
 
 /-!
 # Gabber's criterion for vanishing of higher etale cohomology
@@ -86,6 +87,7 @@ theorem gabberCriterion
               (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 →
         x = 0) :
     ∀ (q : ℕ), 0 < q → Subsingleton (Sheaf.H F q) := by
-  sorry
+  intro q hq
+  exact gabberCriterion_degree R hR F hfg q hq
 
 end AlgebraicGeometry.Etale

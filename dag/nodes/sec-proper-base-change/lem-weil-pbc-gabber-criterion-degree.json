@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-gabber-criterion-degree",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-criterion",
+   "place": "fixed-degree induction step"
+  }
+ },
+ "kind": "statement",
+ "title": "Gabber criterion fixed-degree vanishing",
+ "statement": "Under the hypotheses of Gabber criterion, for each fixed positive q, Subsingleton (Sheaf.H F q).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0GY0 (label lemma-gabber-criterion), line 14228, and its proof (uses Lemma 09AX, label lemma-local-rings-strictly-henselian, line 14205: etale cohomology equals Zariski cohomology on a scheme with strictly henselian local rings; Cohomology Lemma 01E9 Mayer-Vietoris; induction on the degree). Stacks writes $H^1_{\\Et}(D(f),\\mathcal F)$ for the cohomology of the object $D(f)$ of $S_{\\Et}$, which is $H^1(D(f)_{\\Et},\\mathcal F|_{D(f)})$ by Cohomology on Sites Lemma 03F3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-open-immersion",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Simultaneous induction on principal opens using the comparison, local vanishing, kernel condition, and Mayer–Vietoris.",
+   "uses": [
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-zariski-cohomology-locally-zero",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-inverse-image",
+    "def-sc-zariski-cohomology",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0GY0 (label lemma-gabber-criterion), line 14228, and its proof (uses Lemma 09AX, label lemma-local-rings-strictly-henselian, line 14205: etale cohomology equals Zariski cohomology on a scheme with strictly henselian local rings; Cohomology Lemma 01E9 Mayer-Vietoris; induction on the degree). Stacks writes $H^1_{\\Et}(D(f),\\mathcal F)$ for the cohomology of the object $D(f)$ of $S_{\\Et}$, which is $H^1(D(f)_{\\Et},\\mathcal F|_{D(f)})$ by Cohomology on Sites Lemma 03F3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-zariski-cohomology-locally-zero",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-sc-zariski-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-etale-mayer-vietoris"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0GY0 (label lemma-gabber-criterion), line 14228, proof: comparison by Lemma 09AX, induction on the degree, the ideal of principal opens where a class vanishes, and Mayer-Vietoris"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ring all of whose local rings are strictly henselian, Mayer-Vietoris, cohomology vanishes on Spec R",
+   "results": "HenselianLocalRing, HenselianLocalRing.TFAE, HenselianLocalRing.toIsLocalRing, HenselianRing, instHenselianRingMaximalIdeal (Mathlib.RingTheory.Henselian), AlgebraicGeometry.LocallyRingedSpace: definitions only, no cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if all local rings of R are strictly henselian then étale cohomology equals Zariski cohomology; vanishing of H^q on Spec R from vanishing of H^1 on principal opens",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff, Algebra.Etale.formallyEtale: unrelated (cotangent complex)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'StrictlyHenselian\\|strictly henselian\\|strictly Henselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln smallEtaleTopology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no strictly henselian rings in Mathlib; smallEtaleTopology only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, no cohomology computation",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberCriterion",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-gabber-criterion",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 0GY0 (etale-cohomology.tex line 14228) into five steps: identify each D(h) with Spec(R_h), identify its local rings with R_p, and apply the 09AX comparison; induct simultaneously over all principal opens D(h), avoiding an unproved localization transport; define I_h as the elements f for which the class vanishes on D(hf), use local Zariski triviality, and show every prime avoiding h avoids I_h; prove closure under addition in degree one by applying the stated kernel hypothesis to hf and hg; and prove higher-degree addition by Mayer-Vietoris, then use h in the radical of I_h to conclude the class vanishes. The proof and source places are recorded directly from the cited Stacks route."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053928-L-2633918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GabberCriterionDegree",
+  "file": "lean/Sheaf/Paper/GabberCriterionDegree.lean",
+  "declaration": "AlgebraicGeometry.Etale.gabberCriterion_degree",
+  "statement": "theorem gabberCriterion_degree (R : Type u) [CommRing R] (hR : ∀ (p : Ideal R) [p.IsPrime], IsStrictlyHenselianLocalRing (Localization.AtPrime p)) (F : Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u + 1}) (hfg : ∀ (f g : R) (x : Sheaf.H (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1), (AlgebraicGeometry.Etale.cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right f (f + g))) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 → (AlgebraicGeometry.Etale.cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right g (f + g))) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 → x = 0) (q : ℕ) (hq : 0 < q) : Subsingleton (Sheaf.H F q)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gbc",
+  "group": "K1",
+  "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053928-L-2633918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
