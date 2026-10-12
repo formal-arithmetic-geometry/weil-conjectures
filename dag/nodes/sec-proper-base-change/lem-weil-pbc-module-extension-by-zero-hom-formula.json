@@ -19,20 +19,35 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use the direct-sum universal property to identify maps out of the extension presheaf with maps on the open. Compose this bijection with the sheafification Hom equivalence and evaluate on the canonical injection.",
+   "text": "Use the explicit direct-sum presheaf of def-weil-extension-by-zero-presheaf. Its restriction on a summand is computed using DirectSum.toAddMonoid_of. Restrict a presheaf morphism to each canonical injection to construct a sheaf-module morphism on Over U; its naturality is presheaf-morphism naturality and Over.w.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conversely, apply DirectSum.toModule to the components of a morphism on Over U. Naturality is checked by DirectSum.induction_on, using the restriction formula and the given morphism naturality. DirectSum.toModule.unique and DirectSum.toModule_lof prove the two inverse identities. Right naturality is componentwise reflexivity; left naturality follows on injections from DirectSum.lmap_of.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Definition 00A4 and Lemma 00A7 (2)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Compose this natural Hom equivalence with Mathlib PresheafOfModules.sheafificationHomEquiv. The naturality identities of PresheafOfModules.sheafificationAdjunction supply the remaining naturality, so Adjunction.mkOfHomEquiv constructs the adjunction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize to the structure ring sheaf of X. Rewrite Adjunction.mkOfHomEquiv_homEquiv and the forward map, and evaluate the linear-map composite with DirectSum.lof_eq_of. The only residual difference is the DecidableEq instance on V → U; Subsingleton.elim identifies these instances.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Definition 00A4 and Lemma 00A7 (2)"
+  "place": "Definition 00A4 and Lemma 00A7 (2); adapts the private Hom-equivalence construction from Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact, inlining the direct-sum restriction and naturality calculations locally"
  },
  "mathlib_searches": [
   {
@@ -100,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "X-63f9b",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T144148-L-2108324",
+  "landing": "20261012T202253-L-708930",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly; target statement/signature unchanged; proof axioms permitted; sole direct importer compiles; imports and DAG proof metadata agree."
  }
 }
