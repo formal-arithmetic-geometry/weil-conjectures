@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
+import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
 /-!
 # Generic lissity on the source of a finite morphism

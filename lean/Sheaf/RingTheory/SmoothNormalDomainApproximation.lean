@@ -12,6 +12,8 @@ public import Mathlib.RingTheory.RingHom.Smooth
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
+import Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite
 
 /-!
 # Noetherian approximation of smooth algebras over normal domains

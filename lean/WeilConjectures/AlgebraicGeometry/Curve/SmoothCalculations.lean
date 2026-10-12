@@ -28,6 +28,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
 
 /-!
 # The curve assertions for constant coefficients on smooth curves

@@ -8,6 +8,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
+import Sheaf.AlgebraicGeometry.Curve.RootTrivializationBaseChange
+import Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange
+import Sheaf.AlgebraicGeometry.GenusInvariant
+import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Canonical pullback in degrees zero and one

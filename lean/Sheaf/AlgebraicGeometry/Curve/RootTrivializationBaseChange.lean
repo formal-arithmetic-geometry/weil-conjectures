@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Primitive-root trivializations commute with field extension

@@ -8,6 +8,12 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Module and abelian stalk exchange comparison
 

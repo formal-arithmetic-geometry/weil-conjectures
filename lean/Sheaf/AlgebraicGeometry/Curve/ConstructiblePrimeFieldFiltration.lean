@@ -6,6 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.PrimeFieldFiltration
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Constructible sheaves over finite rings have finite prime-field filtrations
 

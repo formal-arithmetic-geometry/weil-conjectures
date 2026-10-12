@@ -6,6 +6,9 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Componentwise curve assertions for finite biproducts
 

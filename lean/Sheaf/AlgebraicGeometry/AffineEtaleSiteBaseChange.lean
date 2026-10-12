@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Base change on the full affine étale sites

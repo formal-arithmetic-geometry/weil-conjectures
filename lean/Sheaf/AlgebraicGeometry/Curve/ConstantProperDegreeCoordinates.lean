@@ -9,6 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.ConstantKummerNaturality
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+import WeilConjectures.AlgebraicGeometry.DensePoints
 
 /-!
 # Degree-normalized proper cohomology coordinates

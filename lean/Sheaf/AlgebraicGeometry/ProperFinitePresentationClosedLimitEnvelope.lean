@@ -2,6 +2,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.ChowFiniteType
+import Sheaf.AlgebraicGeometry.EventuallyClosedImmersion
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! The proper finitely presented closed envelope clause of Lemma 09ZR.
 (blueprint: lem-weil-pbc-proper-closed-in-proper-fp-envelope-part)

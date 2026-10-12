@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.FinitePresentation
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Descent to a finitely presented algebra

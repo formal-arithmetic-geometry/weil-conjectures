@@ -6,6 +6,13 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
+import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Compatible connecting maps for the two étale Mayer–Vietoris sequences

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.LinearAlgebra.IdempotentCharpoly
 public import Mathlib.RingTheory.Jacobson.Ideal
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-! # Monicity of the determinant on an idempotent summand
 

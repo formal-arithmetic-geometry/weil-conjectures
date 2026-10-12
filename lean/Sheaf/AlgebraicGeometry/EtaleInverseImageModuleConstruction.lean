@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Transporting modules through the etale inverse image
 
 Source: Stacks Project, Tags 03D1 and 03D2

@@ -12,6 +12,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
+import Sheaf.RingTheory.FiniteTypeIntGRing
+import Sheaf.RingTheory.HenselizationPairGRing
+import Sheaf.RingTheory.HenselizationUniversalProperty
+import Sheaf.RingTheory.PairHenselization
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # A compatible henselian G-ring stage for a finite étale closed-fibre cover

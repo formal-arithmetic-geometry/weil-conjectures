@@ -5,6 +5,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 @[expose] public section
 

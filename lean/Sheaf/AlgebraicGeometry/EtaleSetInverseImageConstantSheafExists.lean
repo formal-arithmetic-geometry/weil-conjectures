@@ -1,6 +1,9 @@
 /- helper construction -/
 module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

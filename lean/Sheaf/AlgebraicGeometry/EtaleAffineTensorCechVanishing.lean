@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.Paper.EtaleStandardCoverCech
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
 
 /-! # Čech vanishing for lifted tensor-section sheaves
 Source: Stacks Project, Tags 03P2 and 03OZ.

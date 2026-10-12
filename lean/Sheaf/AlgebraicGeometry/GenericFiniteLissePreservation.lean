@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
+import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # A generic locus where a finite map preserves lissity

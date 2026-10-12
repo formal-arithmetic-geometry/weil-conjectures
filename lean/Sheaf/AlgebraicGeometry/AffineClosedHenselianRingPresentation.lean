@@ -7,6 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.RingTheory.PairHenselization
 
 /-! # A directed ring presentation of a closed affine henselian neighborhood
 

@@ -9,6 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 @[expose] public section
 

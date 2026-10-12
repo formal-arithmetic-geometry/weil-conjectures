@@ -6,6 +6,11 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Affine sections of higher images under inverse limits
 

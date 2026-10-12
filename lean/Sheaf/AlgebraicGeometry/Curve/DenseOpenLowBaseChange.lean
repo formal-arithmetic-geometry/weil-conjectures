@@ -7,6 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
+import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-! # Dense-open field-extension comparison ingredients -/
 

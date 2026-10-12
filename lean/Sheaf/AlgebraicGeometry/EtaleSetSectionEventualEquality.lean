@@ -15,6 +15,7 @@ import Sheaf.CategoryTheory.ColimitSiteSections
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Sites.EqualizerSheafCondition
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 
 /-! # An intermediate step in continuity of étale sections
 Source: Stacks Project, Tag 09YQ. -/

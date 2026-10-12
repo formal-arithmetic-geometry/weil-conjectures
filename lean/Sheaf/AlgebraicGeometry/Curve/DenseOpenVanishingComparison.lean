@@ -11,6 +11,17 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
+import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.Finite.Stalk
+import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-!
 # DenseOpenVanishingComparison

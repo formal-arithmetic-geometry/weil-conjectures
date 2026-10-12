@@ -2,6 +2,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.FiniteEtaleDescent
 
 @[expose] public section
 

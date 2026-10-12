@@ -6,6 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # An intermediate step in continuity of étale sections
 Source: Stacks Project, Tag 09YQ. -/

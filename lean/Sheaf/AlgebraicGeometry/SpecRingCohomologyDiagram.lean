@@ -6,6 +6,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The canonical cohomology diagram of a ring system
 

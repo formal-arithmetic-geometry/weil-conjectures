@@ -4,6 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 @[expose] public section
 

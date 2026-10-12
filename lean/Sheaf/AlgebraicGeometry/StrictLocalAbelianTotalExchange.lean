@@ -9,6 +9,12 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Strict-local exchange with abelian coefficients
 

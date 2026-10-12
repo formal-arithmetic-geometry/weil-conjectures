@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 @[expose] public section
 

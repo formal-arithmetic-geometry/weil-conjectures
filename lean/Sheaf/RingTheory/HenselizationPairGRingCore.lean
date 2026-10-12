@@ -2,6 +2,9 @@ module
 
 public import Sheaf.RingTheory.GRingMaximalIdealCriterion
 public import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
+import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
+import Sheaf.RingTheory.FlatLocalCompletionIso
+import Sheaf.RingTheory.GeometricRegularitySeparableExtension
 
 @[expose] public section
 

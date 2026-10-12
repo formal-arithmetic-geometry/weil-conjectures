@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraAffineInclusion
 
 /-! # Existence of an affine realization of a quasi-coherent algebra
 

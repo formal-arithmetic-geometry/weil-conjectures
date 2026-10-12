@@ -2,6 +2,12 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.FiniteType
+import Sheaf.RingTheory.FlatCompletion
+import Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres
+import Sheaf.RingTheory.QuotientGRing
+import Sheaf.RingTheory.RegularBaseChange
+import Sheaf.RingTheory.RegularComposition
+import Sheaf.RingTheory.RegularPermanence
 
 /-! Auxiliary formal-fibre step for finite type algebras over G-rings.
 

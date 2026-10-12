@@ -2,6 +2,15 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
+import Sheaf.CategoryTheory.KInjectiveComputes
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
 
 @[expose] public section

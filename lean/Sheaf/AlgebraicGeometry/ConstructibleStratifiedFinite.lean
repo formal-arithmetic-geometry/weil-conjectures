@@ -6,6 +6,8 @@ public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
+import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
 
 @[expose] public section
 

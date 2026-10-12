@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Compatible pullbacks of a fixed sheaf
 

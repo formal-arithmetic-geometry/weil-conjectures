@@ -6,6 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Functoriality of higher-image transitions
 
