@@ -8555,3 +8555,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/E2/Sheaf.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk (stage 3; reviewer PASS; first push; landing 20261012T163613-L-2784978 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/E2/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex (stage 3; reviewer PASS; first push; landing 20261012T163614-L-2785106 (interface); batch 20261012T163610; modules 4; new nodes 3)
 - 16:36 L: merged deliver/F1/Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueImage (stage 3; reviewer PASS; first push; landing 20261012T163614-L-2785234 (interface); batch 20261012T163610; modules 2; new nodes 1)
+- 16:36 L: merged deliver/F3/Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T163614-L-2785334 (interface); batch 20261012T163610; modules 3; new nodes 2)

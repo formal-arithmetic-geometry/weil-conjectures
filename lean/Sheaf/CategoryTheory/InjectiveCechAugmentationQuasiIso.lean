@@ -9,6 +9,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.CategoryTheory.SmallInjectivePresheafCechExact
+import Sheaf.CategoryTheory.SheafCechAugmentationDegreeZero
+import Mathlib.Algebra.Homology.SingleHomology
 
 /-!
 # The canonical augmented Čech row of an injective sheaf
@@ -63,6 +66,13 @@ theorem injective_cech_augmentation_quasiIso
       e.f 0 ≫ Pi.π (fun s : Fin 1 → ι ↦
         I.obj.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)) t =
           I.obj.map (∏ᶜ (fun k ↦ Over.mk (π (t k)))).hom.op) : QuasiIso e := by
-  sorry
+  have : Injective I.obj := (sheafificationAdjunction _ _).map_injective I inferInstance
+  refine ⟨fun p ↦ ?_⟩
+  cases p with
+  | zero => exact sheaf_cech_augmentation_quasiIsoAt_zero I X π hπ e he
+  | succ q =>
+    rw [quasiIsoAt_iff_exactAt e (q + 1)
+      (CochainComplex.exactAt_succ_single_obj _ q)]
+    exact small_injective_presheaf_cech_exact I.obj X U π q
 
 end CategoryTheory

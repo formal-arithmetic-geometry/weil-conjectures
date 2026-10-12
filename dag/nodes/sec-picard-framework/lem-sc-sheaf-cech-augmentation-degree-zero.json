@@ -1,0 +1,100 @@
+{
+ "id": "lem-sc-sheaf-cech-augmentation-degree-zero",
+ "kind": "statement",
+ "title": "Degree-zero descent for the categorical Cech augmentation",
+ "statement": "theorem sheaf_cech_augmentation_quasiIsoAt_zero {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C] (I : Sheaf J AddCommGrpCat.{v}) (X : C) {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) (e : (CochainComplex.single₀ AddCommGrpCat.{v}).obj (I.obj.obj (op X)) ⟶ (cechComplexFunctor (fun i ↦ Over.mk (π i))).obj ((Over.forget X).op ⋙ I.obj)) (he : ∀ t : Fin 1 → ι, e.f 0 ≫ Pi.π (fun s : Fin 1 → ι ↦ I.obj.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)) t = I.obj.map (∏ᶜ (fun k ↦ Over.mk (π (t k)))).hom.op) : QuasiIsoAt e 0",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Tags 03AW and 03AN"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing injective-presheaf/Cech exactness or sheaf gluing argument stated in the source, with the categorical product universal property and the indicated universe bounds.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Tags 03AW and 03AN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree-zero descent for the categorical Cech augmentation",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree-zero descent for the categorical Cech augmentation",
+   "date": "2026-10-12",
+   "results": "No direct theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Degree-zero descent for the categorical Cech augmentation",
+   "date": "2026-10-12",
+   "results": "Generic exactness infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "cech injective augmentation",
+   "date": "2026-10-12",
+   "results": "No direct theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-injective-cech-augmentation-quasi-iso",
+   "place": "positive and degree-zero components",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafCechAugmentationDegreeZero",
+  "file": "lean/Sheaf/CategoryTheory/SheafCechAugmentationDegreeZero.lean",
+  "declaration": "CategoryTheory.sheaf_cech_augmentation_quasiIsoAt_zero",
+  "statement": "theorem sheaf_cech_augmentation_quasiIsoAt_zero {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C] (I : Sheaf J AddCommGrpCat.{v}) (X : C) {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) (e : (CochainComplex.single₀ AddCommGrpCat.{v}).obj (I.obj.obj (op X)) ⟶ (cechComplexFunctor (fun i ↦ Over.mk (π i))).obj ((Over.forget X).op ⋙ I.obj)) (he : ∀ t : Fin 1 → ι, e.f 0 ≫ Pi.π (fun s : Fin 1 → ι ↦ I.obj.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)) t = I.obj.map (∏ᶜ (fun k ↦ Over.mk (π (t k)))).hom.op) : QuasiIsoAt e 0",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T163614-L-2785334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T163614-L-2785334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
