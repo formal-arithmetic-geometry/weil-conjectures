@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-perfect-lowest-rank-bound-open",
+ "kind": "statement",
+ "title": "Rank-bound open and factorization for perfect lowest cohomology",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $E$ a perfect complex in its derived category [def-pc-perfect-complex, def-pc-derived-category], $a\\in\\mathbf Z$, and $r\\in\\mathbf N$. Write $\\beta_a(x)$ for the derived fibre Betti number [def-sc-derived-fiber-betti]. There exists an open subscheme $U\\subset S$ with quasi-compact inclusion $u:U\\to S$ [def-weil-open-immersion] such that $x\\in U$ if and only if $\\beta_a(x)\\le r$. For every $h:T\\to S$, if $H^a(L(h\\circ v)^*E)$ is finite locally free of rank $r$ [def-amb-finite-locally-free-module, def-pc-derived-pullback] for every $v:T\\prime\\to T$, then $h$ factors through $U$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, first proof paragraph: the rank-bound open, its quasi-compactness, and factorization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-sc-derived-fiber-betti",
+  "def-weil-open-immersion",
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "1. A perfect complex is pseudo-coherent. Apply the jump-loci lemma in degree `a`.\n   Upper semicontinuity makes `U = {x | β_a(x) < r + 1}` open. The same lemma makes\n   each level set locally constructible; their finite union for `0 ≤ n ≤ r` is `U`.",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-sc-perfect-jump-loci"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Restrict the locally constructible set to each affine open. It is constructible\n   there by quasi-compactness of the affine scheme, and hence retrocompact by\n   Tag 09YH. In particular it is compact. Transport compactness along the two open\n   embeddings to show that the inclusion of `U` is quasi-compact. No global\n   quasi-separatedness hypothesis on `S` is needed.",
+   "uses": [
+    "lem-weil-pbc-constructible-is-retrocompact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Given the universal condition for `h`, test it on `T.fromSpecResidueField y`.\n   Its lowest cohomology has dimension `r`. The base-change equality of Betti numbers\n   gives `β_a(h y) = r`. Hence the range of `h` lies in `U` and the open-immersion\n   lifting property gives the required factorization.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-amb-finite-locally-free-module",
+    "lem-sc-perfect-jump-loci"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-sc-perfect-jump-loci",
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0BDL, first proof paragraph: the rank-bound open, its quasi-compactness, and factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complex lowest cohomology rank bound open quasi compact and universal locally free maps factor through this open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex lowest fibre rank sublevel is quasi compact open",
+   "results": "Candidates: AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.isRetrocompact_basicOpen, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, AlgebraicGeometry.exists_of_res_eq_of_qcqs. No theorem stating this scheme-level result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedFiberBetti|[Bb]etti.*[Ll]ocally|[Rr]ank.*[Ss]ublevel",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free; first proof paragraph: the rank-bound open, its quasi-compactness, and factorization",
+   "via": [
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectLowestRankBoundOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectLowestRankBoundOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfectLowestRankBoundOpen",
+  "statement": "theorem exists_perfectLowestRankBoundOpen\n    [∀ T : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    (S : Scheme.{u})\n    [∀ U : S.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    (E : schemeDerivedCategory S) (hE : IsPerfect S E) (a : ℤ)\n    (r : ℕ) :\n    ∃ U : S.Opens, QuasiCompact U.ι ∧\n      (∀ x : S, x ∈ U ↔ derivedFiberBetti S E a x ≤ r) ∧\n      (∀ (T : Scheme.{u}) (h : T ⟶ S),\n        (∀ (T' : Scheme.{u}) (u' : T' ⟶ T),\n        SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj\n              ((derivedPullback (u' ≫ h)).obj E)) r) →\n          ∃ hU : T ⟶ U.toScheme, hU ≫ U.ι = h)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T215158-L-1305559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T215158-L-1305559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9701,3 +9701,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:51 L: merged deliver/V2/Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement (stage 3; reviewer PASS; first push; landing 20261012T215157-L-1305258 (interface); batch 20261012T215151; modules 2; new nodes 1)
 - 21:51 L: merged deliver/W3/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationAdicReduction (stage 3; reviewer PASS; after a return; landing 20261012T215158-L-1305361 (proof); batch 20261012T215151; modules 1; new nodes 0)
 - 21:51 L: merged deliver/X3/Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit (stage 3; reviewer PASS; first push; landing 20261012T215158-L-1305460 (interface); batch 20261012T215151; modules 2; new nodes 1)
+- 21:51 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus (stage 3; reviewer PASS; first push; landing 20261012T215158-L-1305559 (interface); batch 20261012T215151; modules 4; new nodes 3)

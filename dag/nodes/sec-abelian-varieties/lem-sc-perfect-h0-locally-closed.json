@@ -29,74 +29,38 @@
  ],
  "proof": [
   {
-   "text": "For each integer $i$ let $\\beta_i(x)=\\dim_{\\kappa(x)}H^i(Li_x^*E)$. By the jump-loci lemma [lem-sc-perfect-jump-loci], these functions are upper semicontinuous, locally constructible, and pull back along every base change. Let $U\\subseteq S$ be the open locus where $\\beta_a\\le r$. Any morphism satisfying the universal condition in the statement has fibre dimension exactly $r$, hence factors through $U$; replace $S$ by $U$.",
+   "text": "Apply the rank-bound open lemma to obtain U, its quasi-compact inclusion, and factorization of all maps satisfying universal lowest-rank freeness. Apply the closed-matrix-locus lemma on U using its bound beta_a <= r. Put j = i followed by the open inclusion. A closed immersion and an open immersion compose to an immersion; local finite presentation and quasi-compactness are preserved by composition (Mathlib instances IsImmersion.comp, locallyOfFinitePresentation_comp, quasiCompact_comp).",
    "uses": [
-    "lem-sc-perfect-jump-loci"
+    "lem-sc-perfect-lowest-rank-bound-open",
+    "lem-sc-perfect-lowest-matrix-closed-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, first paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "After this replacement, at every point $x$ one has $0\\le\\beta_a(x)\\le r$. The locus where $\\beta_a<r$ is open by [lem-sc-perfect-jump-loci], so the desired locus is set-theoretically closed in $S$. At a point with $\\beta_a(x)=r$, apply [lem-sc-perfect-finite-free-residue-model] to obtain an affine neighbourhood and a bounded finite-free representative whose degree-$a$ term is $\\mathcal O^{\\oplus r}$ and whose degree-$(a+1)$ term has rank $\\beta_{a+1}(x)$. Since $E$ has tor-amplitude in $[a,b]$, $\\beta_i(x)=0$ for $i<a$, so the complex is zero below degree $a$ and $H^a$ is the kernel of the outgoing matrix. The closed subscheme on which all entries of that matrix vanish is cut out by finitely many functions; there the kernel is the whole degree-$a$ term, so $H^a$ is finite locally free of rank $r$. These local constructions restrict to the same matrix equations on smaller affine neighbourhoods.",
+   "text": "If h = g followed by j, for every further map v apply the single-pullback matrix-locus criterion to (v followed by g) followed by i, with the exhibited factorization v followed by g. Associativity identifies its cohomology with the test for v followed by h. Conversely, universal freeness makes h factor through U; specialize the universal condition to the identity of its source and apply the single-pullback matrix-locus criterion. Compose its lift with the open inclusion to obtain h.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-sc-perfect-jump-loci",
-    "lem-sc-perfect-finite-free-residue-model"
+    "lem-sc-perfect-lowest-rank-bound-open",
+    "lem-sc-perfect-lowest-matrix-closed-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, local finite-free model and matrix equations"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $Z$ be the resulting closed subscheme of $U$, glued from the affine constructions. If $h:T\\to S$ factors through $Z$, the matrix equations remain zero after every further base change, so the finite-free complex has zero outgoing differential in degree $a$ and $H^a(L(h\\circ u)^*E)\\cong\\mathcal O_{T'}^{\\oplus r}$ for every $u:T'\\to T$. Conversely, assume this module is finite locally free of rank $r$ after every further base change. Applying the condition to residue-field maps gives $\\beta_a=r$ by the base-change clause of [lem-sc-perfect-jump-loci], so the map lands in the closed set where the charts apply. Take an affine open $V=\\mathrm{Spec}(B)\\subseteq T$ mapping into a chart, small enough that $K=\\ker(\\varphi:B^{\\oplus r}\\to B^{\\oplus m})=H^a$ of the pulled-back finite-free complex is free of rank $r$. The composite $\\psi:B^{\\oplus r}\\cong K\\subseteq B^{\\oplus r}$ is an injective map of finite free modules of the same rank, so $\\mathrm{Hom}_B(\\mathrm{Coker}(\\psi),B)=0$ by [lem-sc-square-injective-free-map-dual-coker-zero]. Now $\\varphi$ induces an injection $\\mathrm{Coker}(\\psi)=B^{\\oplus r}/K\\hookrightarrow B^{\\oplus m}$; each coordinate projection of it lies in $\\mathrm{Hom}_B(\\mathrm{Coker}(\\psi),B)=0$, so the image of $\\varphi$ is zero, i.e. all entries of the outgoing matrix vanish in $B$. (An injective map of free modules of equal rank need not be split, e.g. $2:\\mathbf Z\\to\\mathbf Z$, so this lemma, Stacks More on Algebra Tag 0EWY as cited in Tag 0BDL, is what is needed.) The universal property of the affine closed subscheme then forces the chart map, and hence $h$, to factor through $Z$.",
+   "text": "The identity of Z factors through j. The proved universal criterion therefore supplies universal lowest-rank freeness along j. Specializing to the identity of Z gives the required finite locally free cohomology on Z. Apply the universal lowest-cohomology pullback lemma to this universal condition for each g:T->Z to get the final isomorphism.",
    "uses": [
-    "lem-sc-perfect-jump-loci",
-    "lem-sc-perfect-finite-free-residue-model",
-    "lem-sc-square-injective-free-map-dual-coker-zero"
+    "lem-sc-perfect-universal-lowest-cohomology-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, conditions (1), (2), and matrix-locus argument"
-   }
-  },
-  {
-   "text": "Only finitely many matrix entries occur on each affine chart, so the defining ideal is of finite type; hence the immersion $j:Z\\to S$ is of finite presentation. On $Z$, the outgoing differential is zero and there is no preceding term, so the degree-$a$ cohomology is the degree-$a$ finite-free term, of rank $r$. Pulling the same finite-free representative and its zero matrix along any $h:T\\to Z$ identifies $H^a(Lh^*E)$ canonically with $h^*H^a(Lj^*E)$, proving pullback compatibility.",
-   "uses": [
-    "def-pc-perfect-complex",
-    "lem-sc-perfect-finite-free-residue-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, finite-presentation and compatibility clauses"
-   }
-  },
-  {
-   "text": "The construction is independent of the chosen finite-free charts: on overlaps both closed subschemes represent exactly the same functor of morphisms satisfying the condition in Step 3, so their canonical identifications glue. Thus $j:Z\\to S$ is an immersion of finite presentation with precisely the factorization property and the asserted finite locally free degree-$a$ cohomology module.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-perfect-jump-loci",
-  "def-pc-perfect-complex",
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-sc-square-injective-free-map-dual-coker-zero"
+  "lem-sc-perfect-lowest-rank-bound-open",
+  "lem-sc-perfect-lowest-matrix-closed-locus",
+  "lem-sc-perfect-universal-lowest-cohomology-pullback"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL"
+  "document": "Stacks Project",
+  "place": "Tag 0BDL; rank-bound open, single-pullback matrix criterion on that open, and universal lowest-cohomology comparison, assembled in Lean by Y2"
  },
  "mathlib_searches": [
   {
@@ -181,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T215158-L-1305559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11,8 +11,9 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.AlgebraicGeometry.PerfectJumpLoci
+import Sheaf.AlgebraicGeometry.PerfectLowestRankBoundOpen
+import Sheaf.AlgebraicGeometry.PerfectLowestMatrixClosedLocus
+import Sheaf.AlgebraicGeometry.PerfectUniversalLowestCohomologyPullback
 
 /-! # The locally closed locus of free lowest cohomology of a perfect complex
 
@@ -92,6 +93,39 @@ theorem exists_perfectLowestCohomologyLocus
             (DerivedCategory.homologyFunctor
               (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj
                 ((derivedPullback (g ≫ j)).obj E))) := by
-  sorry
+  obtain ⟨U, hUqc, hUrank, hUfactor⟩ :=
+    exists_perfectLowestRankBoundOpen S E hE a r
+  obtain ⟨Z, i, hi, hifp, hifactor⟩ :=
+    exists_perfectLowestMatrixClosedLocus S E hE a b hamp r U
+      (fun x hx ↦ (hUrank x).1 hx)
+  let j : Z ⟶ S := i ≫ U.ι
+  have : IsClosedImmersion i := hi
+  have : LocallyOfFinitePresentation i := hifp
+  have : QuasiCompact U.ι := hUqc
+  have hfactor : ∀ (T : Scheme.{u}) (h : T ⟶ S),
+      (∃ g : T ⟶ Z, g ≫ j = h) ↔
+        ∀ (T' : Scheme.{u}) (u' : T' ⟶ T),
+          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+            ((DerivedCategory.homologyFunctor
+              (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj
+                ((derivedPullback (u' ≫ h)).obj E)) r := by
+    intro T h
+    constructor
+    · rintro ⟨g, rfl⟩ T' u'
+      have hfree := (hifactor T' ((u' ≫ g) ≫ i)).1 ⟨u' ≫ g, rfl⟩
+      simpa only [j, Category.assoc] using hfree
+    · intro hfree
+      obtain ⟨hU, hhU⟩ := hUfactor T h hfree
+      have hsingle := hfree T (𝟙 T)
+      simp only [Category.id_comp] at hsingle
+      obtain ⟨g, hg⟩ := (hifactor T hU).2 (hhU.symm ▸ hsingle)
+      refine ⟨g, ?_⟩
+      dsimp only [j]
+      rw [← Category.assoc, hg, hhU]
+  have hZ := (hfactor Z j).1 ⟨𝟙 Z, Category.id_comp j⟩
+  refine ⟨Z, j, inferInstance, inferInstance, inferInstance, hfactor, ?_, ?_⟩
+  · simpa only [Category.id_comp] using hZ Z (𝟙 Z)
+  · intro T g
+    exact perfectUniversalLowestCohomology_pullback S E hE a b hamp r Z j hZ T g
 
 end AlgebraicGeometry.Scheme
