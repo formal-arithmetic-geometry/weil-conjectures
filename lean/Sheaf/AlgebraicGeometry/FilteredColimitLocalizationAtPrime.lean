@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrimeData
 
 
 /-!
@@ -78,6 +79,23 @@ theorem filteredColimitLocalizationAtPrime
             ι i ≫ CommRingCat.ofHom
               (algebraMap ((colimit F : CommRingCat) : Type v) (Localization.AtPrime p))) ∧
         Nonempty (IsColimit c) := by
-  sorry
+  dsimp
+  let ι : ∀ i : I, (F.obj i) ⟶ colimit F := fun i => colimit.ι F i
+  let pᵢ : ∀ i : I, Ideal ((F.obj i : CommRingCat) : Type v) :=
+    fun i => Ideal.comap (ι i).hom p
+  have hprime : ∀ i : I, (pᵢ i).IsPrime := by
+    intro i
+    exact Ideal.IsPrime.comap _
+  have hcompat : ∀ (i j : I) (a : i ⟶ j),
+      Ideal.comap (F.map a).hom (pᵢ j) = pᵢ i := by
+    intro i j a
+    ext x
+    change (ι j).hom ((F.map a).hom x) ∈ p ↔ (ι i).hom x ∈ p
+    have heq : (ι j).hom ((F.map a).hom x) = (ι i).hom x := by
+      change (F.map a ≫ ι j).hom x = (ι i).hom x
+      rw [colimit.w]
+    exact heq ▸ Iff.rfl
+  have hdata := filteredColimitLocalizationAtPrime_data (F := F) (p := p)
+  exact ⟨hprime, hcompat, hdata⟩
 
 end AlgebraicGeometry
