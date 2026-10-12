@@ -6,11 +6,11 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.CategoryTheory.FiniteAcyclicResolution
-import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.CechSheafResolution
+import Sheaf.AlgebraicGeometry.AffineOpenPushforwardAcyclic
 
 /-!
 # Čech resolution and derived direct image
@@ -31,6 +31,61 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private theorem derived_iso_of_acyclic_resolution
+    {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
+    (D : CochainComplex X.Modules ℕ)
+    (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D) [QuasiIso ε]
+    (hD : ∀ p, (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightAcyclic (D.X p)) :
+    Nonempty ((schemeDerivedDirectImage f).obj
+        ((DerivedCategory.singleFunctor
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F) ≅
+      DerivedCategory.Q.obj
+        (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj (D.extend ComplexShape.embeddingUpNat))) := by
+  let G := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+  have : PreservesFiniteLimits G := by
+    change PreservesFiniteLimits (Scheme.Modules.pushforward f)
+    have := (Scheme.Modules.pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits.{0, 0}
+    infer_instance
+  let K := D.extend ComplexShape.embeddingUpNat
+  let L : CochainComplex.Plus (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    ⟨K, 0, inferInstance⟩
+  have hL : ∀ n, G.rightAcyclic (L.obj.X n) :=
+    HomologicalComplex.prop_extend_X _ ComplexShape.embeddingUpNat hD
+  have hunit := G.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic L hL
+  let H := (HomotopyCategory.Plus.quotient (SheafOfModules.{u} (moduleRings X.toRingedSpace))).obj L
+  let eu : (DerivedCategory.Plus.ι (C := SheafOfModules.{u}
+        (moduleRings S.toRingedSpace))).obj
+        (G.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Qh.obj H)) ≅
+      DerivedCategory.Qh.obj ((G.mapHomotopyCategory (ComplexShape.up ℤ)).obj
+        ((HomotopyCategory.quotient
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)).obj K)) :=
+    (DerivedCategory.Plus.ι (C := SheafOfModules.{u}
+      (moduleRings S.toRingedSpace))).mapIso
+        (asIso (G.rightDerivedFunctorPlusUnit.app H)).symm
+  let e : G.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) ≅
+      DerivedCategory.Q.obj ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) :=
+    G.rightDerivedFunctor.mapIso
+      ((DerivedCategory.quotientCompQhIso
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace))).symm.app K) ≪≫
+      (G.rightDerivedFunctorPlusCompatibility.app (DerivedCategory.Plus.Qh.obj H)).symm ≪≫
+      eu ≪≫ (DerivedCategory.quotientCompQhIso
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace))).app _
+  have hε : QuasiIso (HomologicalComplex.extendMap ε ComplexShape.embeddingUpNat) :=
+    (HomologicalComplex.quasiIso_extendMap_iff ε ComplexShape.embeddingUpNat).2 inferInstance
+  let eF : (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F ≅
+        DerivedCategory.Q.obj K :=
+    (DerivedCategory.singleFunctorIsoCompQ
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).app F ≪≫
+      DerivedCategory.Q.mapIso
+        (HomologicalComplex.extendSingleIso ComplexShape.embeddingUpNat F 0 0 rfl).symm ≪≫
+      asIso (DerivedCategory.Q.map (HomologicalComplex.extendMap ε
+        ComplexShape.embeddingUpNat))
+  exact ⟨G.rightDerivedFunctor.mapIso eF ≪≫ e⟩
 
 /-- The finite affine Čech resolution is exact and computes the derived direct image.
 Let `S = Spec A`, `f : X ⟶ S` separated and quasi-compact, `U` a finite affine open cover of
@@ -90,6 +145,27 @@ theorem cech_resolution_derived_direct_image
         DerivedCategory.Q.obj
           (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
             (ComplexShape.up ℤ)).obj (D.extend ComplexShape.embeddingUpNat))) := by
-  sorry
+  obtain ⟨D, ε, e, hd, hε, hterms, hqi⟩ := exists_cech_sheaf_resolution U hU F
+  have : QuasiIso ε := hqi
+  have : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from f]
+    infer_instance
+  let G := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+  have : G.rightAcyclic.IsClosedUnderFiniteProducts :=
+    ObjectProperty.IsClosedUnderFiniteProducts.mk'
+  have hD : ∀ p, G.rightAcyclic (D.X p) := by
+    intro p
+    obtain ⟨ep⟩ := hterms p
+    apply G.rightAcyclic.prop_of_iso ep.symm
+    apply G.rightAcyclic.prop_product
+    intro y
+    exact affine_open_pushforward_rightAcyclic f (⨅ l, U (y l))
+      (IsAffineOpen.iInf (fun l ↦ haffine (y l))) F
+  refine ⟨D, ε, e, hd, hε, hterms, hqi, ?_, ?_⟩
+  · intro p q hq
+    obtain ⟨n, rfl⟩ : ∃ n, q = n + 1 := ⟨q - 1, by omega⟩
+    exact (hD p n).of_iso
+      (Functor.homologyRightDerivedFunctorObjSingleFunctorIso G (D.X p) (n + 1))
+  · exact derived_iso_of_acyclic_resolution f F D ε hD
 
 end AlgebraicGeometry

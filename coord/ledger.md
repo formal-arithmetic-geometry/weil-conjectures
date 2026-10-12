@@ -8302,3 +8302,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/D2/Sheaf.RingTheory.QuasiFiniteMonogenicIntegralClosure (stage 3; reviewer PASS; first push; landing 20261012T151905-L-2287197 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/D3/Sheaf.Paper.DerivedUnitLerayId (stage 3; reviewer PASS; first push; landing 20261012T151906-L-2287325 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/E2/Sheaf.AlgebraicGeometry.DescentNormLocusAffine (stage 3; reviewer PASS; first push; landing 20261012T151906-L-2287474 (interface); batch 20261012T151904; modules 2; new nodes 2)
+- 15:19 L: merged deliver/F2/Sheaf.AlgebraicGeometry.CechResolution (stage 3; reviewer PASS; first push; landing 20261012T151906-L-2287721 (interface); batch 20261012T151904; modules 3; new nodes 2)
