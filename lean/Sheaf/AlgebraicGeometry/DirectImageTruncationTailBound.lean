@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-! # Shifting a uniform direct-image bound to the truncation tail
 
@@ -48,6 +51,33 @@ theorem directImage_truncation_tail_bound
     (E : schemeDerivedQCohCategory X) (n j : ℤ) (hj : N ≤ j + n + 1) :
     IsZero ((schemeHigherDirectImage f j).obj
       ((DerivedCategory.TStructure.t.truncLT (-n)).obj E.obj)) := by
-  sorry
+  let T := (DerivedCategory.TStructure.t.truncLT (-n)).obj E.obj
+  let R := moduleRings X.toRingedSpace
+  let P := SheafOfModules.isQuasicoherent R
+  have hzero : IsZero (SheafOfModules.free (R := R) PEmpty.{u + 1}) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (SheafOfModules.freeHomEquiv _).injective
+    funext i
+    exact PEmpty.elim i
+  have : P.ContainsZero :=
+    ⟨⟨_, hzero, SheafOfModules.isQuasicoherent_free (R := R) PEmpty.{u + 1}⟩⟩
+  have hT : DerivedCategory.homologyProperty P T := by
+    have hle := DerivedCategory.homologyProperty_truncLE E.property (-n - 1)
+    exact (DerivedCategory.homologyProperty P).prop_of_iso
+      ((DerivedCategory.TStructure.t.truncLEIsoTruncLT (-n - 1) (-n) (by omega)).app E.obj)
+      hle
+  have hshift : schemeDerivedQCohProperty X (T⟦-n - 1⟧) :=
+    (DerivedCategory.homologyProperty P).le_shift (-n - 1) T hT
+  have : (T⟦-n - 1⟧).IsLE 0 :=
+    DerivedCategory.TStructure.t.isLE_shift T (-n - 1) (-n - 1) 0 (by omega)
+  have hz := hN ⟨T⟦-n - 1⟧, hshift⟩
+    (fun m hm ↦ DerivedCategory.isZero_of_isLE _ 0 m hm) (j + n + 1) hj
+  let e := (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (j + n + 1)).mapIso
+      (((schemeDerivedDirectImage f).commShiftIso (-n - 1)).app T) ≪≫
+    ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).shiftIso
+      (-n - 1) (j + n + 1) j (by omega)).app ((schemeDerivedDirectImage f).obj T)
+  exact hz.of_iso e.symm
 
 end AlgebraicGeometry
