@@ -13,13 +13,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
-import Sheaf.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
-import WeilConjectures.SixFunctors.Finite.GlobalSections
-import WeilConjectures.SixFunctors.Finite.Exact
+import Sheaf.AlgebraicGeometry.Curve.GenericFiniteCoarseTraceFiltrationData
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimeCoarseFiltrationRefinement
 
 /-! Generic finite trace and filtration data. -/
 
@@ -86,6 +81,25 @@ theorem exists_generic_finite_trace_filtration_data
           ∀ i, Sheaf.H
             ((Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField).obj
               (F i (n i))) 2,
-          Function.Injective j := by sorry
+          Function.Injective j := by
+  classical
+  obtain ⟨r, D, g, hconn, hsmooth, haffine, hInt, n, F, hzero, hstep, j, hj⟩ :=
+    exists_generic_finite_coarse_trace_filtration_data f hmodel M hM hfinite
+  let : ∀ i, IsIntegral (D i) := hInt
+  have hflag (i : Fin r) :=
+    exists_prime_filtration_of_coarse (Spec (D i).functionField) (n i) (F i)
+      (hzero i) (hstep i)
+  choose m G hz hs he using hflag
+  let e (i : Fin r) := Classical.choice (he i)
+  refine ⟨r, D, g, hconn, hsmooth, haffine, hInt, m, G, hz, hs, ?_⟩
+  let T (i : Fin r) := Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField
+  refine ⟨fun x i ↦ Sheaf.H.map ((T i).map (e i).hom) 2 (j x i), ?_⟩
+  intro x y hxy
+  apply hj
+  funext i
+  have hi := congrFun hxy i
+  have hi' := congrArg (Sheaf.H.map ((T i).map (e i).inv) 2) hi
+  simpa only [← Sheaf.H.map_comp_apply, ← (T i).map_comp, (e i).hom_inv_id,
+    (T i).map_id, Sheaf.H.map_id_apply] using hi'
 
 end AlgebraicGeometry.IsConnectedCurve

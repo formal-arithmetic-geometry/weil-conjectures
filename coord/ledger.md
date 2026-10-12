@@ -7049,3 +7049,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/S3/Sheaf.Topology.FilteredInjectiveCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T085338-L-39116 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/T1/Sheaf.Algebra.Homology.TruncationTelescope (stage 3; reviewer PASS; first push; landing 20261012T085339-L-39258 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/T1/Sheaf.AlgebraicGeometry.Curve.ConstantLowDegreeBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085339-L-39455 (interface); batch 20261012T085205; modules 4; new nodes 3)
+- 08:53 L: merged deliver/T1/Sheaf.AlgebraicGeometry.Curve.GenericFiniteTraceFiltrationData (stage 3; reviewer PASS; first push; landing 20261012T085339-L-39603 (interface); batch 20261012T085205; modules 3; new nodes 2)

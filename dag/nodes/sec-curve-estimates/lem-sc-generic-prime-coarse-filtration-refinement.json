@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-generic-prime-coarse-filtration-refinement",
+ "kind": "statement",
+ "title": "Refining constant vector-space quotients into rank-one prime quotients",
+ "statement": "Let X be a scheme and F(0),...,F(n) abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], with F(0) zero. Suppose each consecutive pair is identified with the first and second terms of a short exact complex whose third term is isomorphic to a finite iterated binary direct sum of a constant Z/ell sheaf [def-sc-constant-sheaves], for some prime ell depending on the step. Then there are m and sheaves G(a) for natural a, with G(0) zero, successive short exact complexes for a<m with rank-one prime constant third terms, and an isomorphism F(n) to G(m). Length-zero chains and zero-dimensional vector quotients are allowed.",
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-constant-sheaves"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2"
+ },
+ "proof": [
+  {
+   "text": "Let P be the isomorphism-closed property of being prime constant. Induct on d to put the d-fold binary sum of a prime constant in P.filtrationClosure: use the zero constructor and prop_biprod with le_filtrationClosure.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the coarse chain, transporting through its isomorphisms and using closure of P.filtrationClosure under extensions. Its endpoint belongs to P.filtrationClosure. The proved instance in WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions supplies IsClosedUnderExtensions; prop_X₂_of_shortExact is applied with the two endpoint isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved source-library filtrationClosure_iff to obtain a finite chain of monomorphisms with prime constant cokernels. Form canonical short exact complexes. Extend the chain constantly beyond the endpoint by min(a,m) and transport the endpoint isomorphism. Here filtrationClosure_iff is the proved upstream declaration in WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions, not an additional open claim.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite filtration in an abelian category with constant prime quotients",
+   "date": "2026-10-12",
+   "results": "Unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "refine a finite filtration whose quotients are finite products of a simple object into a composition series",
+   "date": "2026-10-12",
+   "results": "CompositionSeries and module finite-length results, no sheaf formulation.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtration|Filtration in source CategoryTheory/ObjectProperty and Mathlib CategoryTheory/Abelian",
+   "date": "2026-10-12",
+   "results": "Found proved source ObjectProperty.Extensions: filtrationClosure_iff and closure under extensions. Used these and Mathlib prop_biprod for refinement. No geometric trace construction.",
+   "verdict": "tools used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.GenericFiniteTraceFiltrationData",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-generic-finite-trace-filtration-data",
+   "place": "proof paragraphs 1--2",
+   "via": [
+    "lem-sc-affine-generic-finite-second-retraction",
+    "lem-sc-affine-generic-finite-second",
+    "lem-sc-generic-finite-trace-filtration-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2; formal decomposition by T1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.GenericPrimeCoarseFiltrationRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/GenericPrimeCoarseFiltrationRefinement.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.exists_prime_filtration_of_coarse",
+  "statement": "theorem exists_prime_filtration_of_coarse (X : Scheme.{u}) (n : ℕ) (F : ℕ → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hzero : IsZero (F 0)) (hstep : ∀ a : ℕ, a < n → ∃ (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (ℓ d : ℕ), ℓ.Prime ∧ S.ShortExact ∧ Nonempty (S.X₁ ≅ F a) ∧ Nonempty (S.X₂ ≅ F (a + 1)) ∧ Nonempty (S.X₃ ≅ Nat.rec (0 : _) (fun _ A ↦ A ⊞ X.constantZMod ℓ) d)) : ∃ (m : ℕ) (G : ℕ → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), IsZero (G 0) ∧ (∀ a : ℕ, a < m → ∃ (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (ℓ : ℕ), ℓ.Prime ∧ S.ShortExact ∧ Nonempty (S.X₁ ≅ G a) ∧ Nonempty (S.X₂ ≅ G (a + 1)) ∧ Nonempty (S.X₃ ≅ X.constantZMod ℓ)) ∧ Nonempty (F n ≅ G m)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085339-L-39603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085339-L-39603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
