@@ -25,57 +25,71 @@
  ],
  "proof": [
   {
-   "text": "For each index a let $\\mathcal F_a=\\mathcal O_{U_a}$, viewed as the trivial rank-one $\\mathcal O_{U_a}$-module. On $U_{ab}$ define an $\\mathcal O_{U_{ab}}$-linear map $\\varphi_{ab}:\\mathcal F_a|_{U_{ab}}\\to\\mathcal F_b|_{U_{ab}}$ by multiplication by the unit $g_{ab}$; its inverse is multiplication by $g_{ba}=g_{ab}^{-1}$, so it is an isomorphism.",
+   "text": "Take the local modules F_a = O_X.over U_a. Define multiplication by a section on the over-site using unitHomEquiv and the section obtained by restricting that section. Multiplication by g_ab and by its inverse compose to the identity, giving transitionIso g_ab. This is the local rank-one gluing datum.",
    "uses": [
     "def-sc-invertible-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00AM (lemma-glue-sheaves-structures), setup of the local modules and transition isomorphisms"
+    "place": "Sheaves Lemma 00AM (sheaves-lemma-glue-sheaves-structures), applied to the rank-one free O_X-modules on the U_a glued along multiplication by g_ab"
    }
   },
   {
-   "text": "The identities $g_{aa}=1$ and $g_{ba}=g_{ab}^{-1}$ give $\\varphi_{aa}=\\mathrm{id}$ and inverse transition maps. On every triple overlap $U_{abc}$, multiplication satisfies $\\varphi_{bc}\\circ\\varphi_{ab}=\\varphi_{ac}$ because $g_{ac}=g_{ab}g_{bc}$; hence the transition maps satisfy the required cocycle condition.",
+   "text": "At every W contained in U_a, U_b and U_c, apply Units.val to hcoc and use associativity of multiplication to prove the componentwise cocycle required by glue_sheaves_of_modules. That theorem requires no separate identity or inverse hypotheses; hid and hinv are redundant for unit-valued cocycles.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00AM, cocycle condition for the transition maps"
+    "place": "Sheaves Lemma 00AM (sheaves-lemma-glue-sheaves-structures), applied to the rank-one free O_X-modules on the U_a glued along multiplication by g_ab"
    }
   },
   {
-   "text": "Apply the gluing theorem for sheaves of modules to the open cover $(U_a)$, the modules $\\mathcal F_a$, and the isomorphisms $\\varphi_{ab}$. It produces an $\\mathcal O_X$-module $\\mathcal L$ and isomorphisms $\\psi_a:\\mathcal L|_{U_a}\\xrightarrow{\\sim}\\mathcal F_a$ satisfying $\\varphi_{ab}\\circ\\psi_a=\\psi_b$ on $U_{ab}$.",
+   "text": "Apply the object-gluing clause of glue_sheaves_of_modules to F_a and transitionIso g_ab, obtaining L and psi_a : L.over U_a isomorphic to O_X.over U_a. Define e_a as the inverse component of psi_a at U_a applied to 1. Naturality identifies e_a restricted to W with psi_a.inv_W(1); componentwise bijectivity and linearity show these are free generators. Apply the overlap compatibility to e_a and cancel psi_b to obtain e_a = g_ab e_b on U_a intersect U_b.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-sc-local-free-generator"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00AM (lemma-glue-sheaves-structures), existence part"
+    "place": "Sheaves Lemma 00AM (sheaves-lemma-glue-sheaves-structures), applied to the rank-one free O_X-modules on the U_a glued along multiplication by g_ab"
    }
   },
   {
-   "text": "Each $\\mathcal F_a$ is free of rank one, so the displayed isomorphisms make $\\mathcal L$ locally free of rank one; thus $\\mathcal L$ is an invertible $\\mathcal O_X$-module. If $(\\mathcal L',\\psi'_a)$ is another such glued module with the same transition functions, the local maps $\\psi_a^{-1}\\circ\\psi'_a:\\mathcal L'|_{U_a}\\to\\mathcal L|_{U_a}$ agree on overlaps by the compatibility equations, so the uniqueness clause of the gluing theorem gives a unique global isomorphism compatible with all chosen trivializations.",
+   "text": "Every point belongs to a cover member. Its free generator gives overIso, which is transported via overFunctorEquiv, overEquiv and restrictFunctorIsoPullback to the pullback trivialization required by IsInvertible. Thus L is invertible.",
    "uses": [
     "def-sc-invertible-module",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Lemma 00AM (sheaves-lemma-glue-sheaves-structures), applied to the rank-one free O_X-modules on the U_a glued along multiplication by g_ab"
+   }
+  },
+  {
+   "text": "For another framed module L prime, restrict both transition equations to W. Injectivity of multiplication by the free generator e_b prime shows that any relation r e_a prime = t e_b prime forces r times the restriction of g_ab = t; the same relation then holds for e_a and e_b. Repeat with the roles reversed. The source library glueHom constructs maps in both directions; isGlueValue_glueHom_app shows that they preserve each frame. Maps equal on free frames have equal components on every smaller open by linearity and surjectivity; the locality clause of glue_sheaves_of_modules makes them globally equal. Apply this criterion to the two composites and to any other frame-preserving isomorphism, proving the inverse identities and unique isomorphism assertion.",
+   "uses": [
+    "def-sc-local-free-generator",
     "lem-weil-pbc-glue-sheaves-of-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00AM, conclusion and uniqueness from Lemma 04TN"
+    "place": "Sheaves Lemma 00AM (sheaves-lemma-glue-sheaves-structures), applied to the rank-one free O_X-modules on the U_a glued along multiplication by g_ab"
    }
   }
  ],
  "proof_deps": [
   "def-sc-invertible-module",
+  "def-sc-local-free-generator",
   "lem-weil-pbc-glue-sheaves-of-modules"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves Lemma 00AM (lemma-glue-sheaves-structures), applied to rank-one free modules with multiplication transition maps"
+  "place": "Stacks Sheaves Lemmas 00AM and 04TN; implemented using glue_sheaves_of_modules for object descent and morphism locality, and the proved source FreeGenerator.lean glueHom construction for frame-preserving maps. Sources read at https://stacks.math.columbia.edu/tag/00AM and https://stacks.math.columbia.edu/tag/04TN."
  },
  "mathlib_searches": [
   {
@@ -163,5 +177,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T173835-L-3298166",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
