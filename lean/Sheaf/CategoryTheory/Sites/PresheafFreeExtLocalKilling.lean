@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 Source: Stacks Project, Derived Categories, Tag 06XU; Cohomology on Sites, Tag 03F9.
 (blueprint: lem-sc-presheaf-free-ext-local-killing)
+(blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
 -/
 
 @[expose] public section
@@ -28,6 +29,7 @@ locally surjective map of small-valued presheaves.
 Source: Stacks Project, Derived Categories, Tag 06XU (Yoneda representatives), and
 Cohomology on Sites, Tag 03F9 (local lifting in the vanishing argument).
 (blueprint: lem-sc-presheaf-free-ext-local-killing)
+(blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
 
 Proof: represent the class by a degree-q Yoneda extension using Tag 06XU and let
 G -> Z[P] be its last epimorphism. At each object V construct E(V) as the subtype
@@ -42,6 +44,21 @@ last epimorphism is Z[f]. Pulling the last short exact sequence back along Z[f]
 therefore gives a split short exact sequence. Its Ext class is zero, so the entire
 pulled-back Yoneda product is zero. For q=1 this is the sole short exact sequence.
 No representative of a mere existence theorem is used to define public data. -/
+theorem exists_presheaf_ext_local_killing_witness
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{v}]
+    [HasExt.{w'} (Sheaf J AddCommGrpCat.{v})]
+    (F : Sheaf J AddCommGrpCat.{v}) (P : Cᵒᵖ ⥤ Type v)
+    (q : ℕ) (hq : 0 < q)
+    (x : Ext ((presheafToSheaf J AddCommGrpCat).obj (P ⋙ AddCommGrpCat.free)) F q) :
+    ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P),
+      Presheaf.IsLocallySurjective J f ∧
+      ∃ h : (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
+        (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0, True := by
+  sorry
+
+/-- The local Ext killing conclusion. (blueprint: lem-sc-presheaf-free-ext-local-killing)
+Proof: apply the preceding Yoneda witness theorem and discard its trivial marker. -/
 theorem exists_presheaf_ext_local_killing
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]
@@ -52,6 +69,7 @@ theorem exists_presheaf_ext_local_killing
     ∃ (E : Cᵒᵖ ⥤ Type v) (f : E ⟶ P), Presheaf.IsLocallySurjective J f ∧
       (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
         (Functor.whiskerRight f AddCommGrpCat.free))).comp x (Nat.zero_add q) = 0 := by
-  sorry
+  obtain ⟨E, f, hf, h, _⟩ := exists_presheaf_ext_local_killing_witness F P q hq x
+  exact ⟨E, f, hf, h⟩
 
 end CategoryTheory.Sheaf

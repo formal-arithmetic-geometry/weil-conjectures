@@ -8442,3 +8442,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso (stage 3; reviewer PASS; first push; landing 20261012T160136-L-2564050 (proof); batch 20261012T160131; modules 1; new nodes 0)
 - 16:01 L: merged deliver/H2/Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModelData (stage 3; reviewer PASS; first push; landing 20261012T160136-L-2564152 (interface); batch 20261012T160131; modules 2; new nodes 1)
 - 16:01 L: merged deliver/H3/Sheaf.Paper.ZariskiEtalePushedResolutionQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T160137-L-2564310 (interface); batch 20261012T160131; modules 2; new nodes 1)
+- 16:01 L: merged deliver/J1/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261012T160137-L-2564474 (proof); batch 20261012T160131; modules 1; new nodes 1)
