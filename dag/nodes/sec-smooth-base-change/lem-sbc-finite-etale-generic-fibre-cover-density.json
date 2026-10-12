@@ -14,18 +14,27 @@
  ],
  "proof": [
   {
-   "text": "The composite X → C → S is smooth, hence flat with geometrically reduced\nfibres. On affine charts its ring maps are smooth over reduced rings, so the\nsource rings are reduced by 033B; localizing gives reduced stalks and hence X.\nFor density take any nonempty open subset of X. The smooth composite maps it\nto a nonempty open of S by 01UA, which contains the generic point since S is\nintegral. A point over that generic point lifts to the generic fibre: the\nspectrum of S's generic stalk is the one-point spectrum of its function field,\nand the cartesian pullback has a point over every compatible pair of points.\nPasting the two given squares identifies this fibre with Xη. Hence every\nnonempty open of X meets the image of ψX. This proves dominance, including\nwhen X is empty, where the empty image is dense.",
-   "uses": [],
+   "text": "The composite πX ≫ c is smooth. On affine neighborhoods U of the base and V in its inverse image, Γ(S,U) is a domain because U is nonempty and S is integral. A smooth A-algebra B is flat, so Algebra.TensorProduct.includeRight_injective embeds B in Frac(A) ⊗[A] B. This base change is smooth over the fraction field and hence reduced by [lem-sc-smooth-algebra-reduced-field]. Therefore B is reduced. Transport reducedness to V and its stalks through the affine isomorphism and the open immersion, and apply the stalkwise reducedness criterion.",
+   "uses": [
+    "lem-sc-smooth-algebra-reduced-field"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The range of S.fromSpecStalk at its generic point contains that point, by fromSpecStalk_closedPoint, and is dense because the generic singleton is dense. The composite πX ≫ c is open: smoothness gives flatness and local finite presentation, and Mathlib UniversallyOpen.of_flat (Tag 01UA) applies. The preimage of the dense range is dense by Dense.preimage. Scheme.Pullback.range_fst identifies it with the image of the first projection of the canonical pullback. Paste hX with hCη.flip to identify Xη with this pullback; transport dominance along hp.isoPullback. Every step is valid for an empty X.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-smooth-algebra-reduced-field"
+ ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "M2",
+  "by": "Y2",
   "document": "Stacks Project",
-  "place": "Tags 033B and 01UA",
-  "note": "Expanded the source argument; mathematical input not yet formalized."
+  "place": "Tags 033B and 01UA; Tag 056T for the smooth algebra over a field input",
+  "note": "Formal proof replaces the general reduced-base argument by injection into smooth fraction-field base change; density uses openness, Dense.preimage, and Mathlib pullback range."
  },
  "mathlib_searches": [
   {
@@ -96,10 +105,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T095914-L-320964",
-  "kind": "interface",
+  "landing": "20261012T112855-L-773615",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
