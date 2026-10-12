@@ -6592,3 +6592,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/E1/Sheaf.RingTheory.IntegerPrimeLocalizations (stage 3; reviewer PASS; first push; landing 20261012T070533-L-3469147 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/E1/Sheaf.RingTheory.LocalizationRegular (stage 3; reviewer PASS; first push; landing 20261012T070533-L-3469334 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/E2/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed (stage 3; reviewer PASS; first push; landing 20261012T070533-L-3469488 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/E2/Sheaf.AlgebraicGeometry.FiniteEtaleAlgebraStage (stage 3; reviewer PASS; first push; landing 20261012T070534-L-3469604 (proof); batch 20261012T070523; modules 1; new nodes 0)
