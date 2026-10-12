@@ -1,0 +1,127 @@
+{
+ "id": "lem-sp-finite-page-image-lift",
+ "kind": "statement",
+ "title": "Canonical incoming-alpha image lift to a finite derived-D term",
+ "statement": "Let $X$ be a type-zero bigraded exact couple in an abelian category [def-sp-exact-couple]. Fix integers $a,p,q$ with $p\\geq0$. Put $R=\\max(p+3,q-a+2)$, $r=R-2$, $u=p-r$, $v=q+r$. Let $\\iota_n:D_n^{i,j}\\to D^{i,j}$ be the recursively composed canonical derived-D inclusions, with $\\iota_0=1$. Let $F$ be a decreasing filtration of $D^{0,p+q}$ [def-sp-filtration] whose steps at every $i\\geq0$ are the images of the incoming $i$-fold alpha iterate [def-sp-convergence]. Suppose the specified map $\\lambda:D^{0,p+q}\\to D^{u,v}$ equals the canonically transported outgoing $(-u)$-fold alpha iterate and is invertible. Then there is an invertible map $\\ell:F^p\\to D_r^{u,v}$ with $\\iota_r\\circ\\ell=\\lambda\\circ(F^p\\hookrightarrow D^{0,p+q})$. No support or vanishing assumption is required.\n\nExact Lean interface:\n```lean\ntheorem finitePage_image_lift\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    (X : BigradedExactCouple B 0) (a : ℤ)\n    (inc : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q)\n    (hinc0 : ∀ p q : ℤ, inc 0 p q = 𝟙 _)\n    (hinc : ∀ (r : ℕ) (p q : ℤ), inc (r + 1) p q =\n      (X.pageCouple r).derivedDInclusion p q ≫ inc r p q)\n    (p q : ℤ) (hp : 0 ≤ p)\n    (F : DecreasingFiltration (X.D 0 (p + q)))\n    (hF : ∀ i : ℤ, 0 ≤ i → F.step i =\n      imageSubobject (X.incomingAlphaIter i.toNat 0 (p + q)))\n    (lambda : X.D 0 (p + q) ⟶\n      X.D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2))\n    (hlambda : lambda = X.alphaIter\n      (-(p - max (p + 3) (q - a + 2) + 2)).toNat 0 (p + q) ≫\n        eqToHom (by congr 1 <;> omega))\n    [IsIso lambda] :\n    ∃ (lift : (F.step p : B) ⟶\n        (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).D\n          (p - max (p + 3) (q - a + 2) + 2)\n          (q + max (p + 3) (q - a + 2) - 2)),\n      IsIso lift ∧\n      lift ≫ inc ((max (p + 3) (q - a + 2)).toNat - 2)\n          (p - max (p + 3) (q - a + 2) + 2)\n          (q + max (p + 3) (q - a + 2) - 2) = (F.step p).arrow ≫ lambda\n```",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--6; canonical incoming-alpha image and quotient comparisons (Stacks Tags 011S, 011R and 0AMJ)"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Use pageCouple_image from [lem-sp-derived-couple-exact]. Its A and I families are uniquely specified by their initial values and recurrences. Expand incomingAlphaIter using alphaIter and compare the endpoint transports to prove its successor recurrence. Natural-number induction identifies A with incomingAlphaIter and I with inc. Therefore inc is monomorphic and its image is the incoming iterate image.",
+   "uses": [
+    "lem-sp-derived-couple-exact",
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the first length to prove alphaIter(m+n) is the composite of the m-fold iterate and the n-fold iterate at its endpoint, as a heterogeneous equality. The successor step uses associativity and removal of the canonical equality transports. Since r>=p, split the r-fold incoming iterate after p steps at first index zero, identifying the remaining iterate with lambda.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precomposition by the source equality isomorphism does not change the incoming image. Factor the incoming p-fold iterate through its image, and use the epimorphic image projection to compute its image after lambda. The filtration formula identifies this image with that of F.step(p).arrow followed by lambda. Both this composite and inc are mono; Subobject.isoOfMkEqMk gives lift, and its defining commutative square gives the required equation.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "lem-sp-derived-couple-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-13",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--6; canonical incoming-alpha image and quotient comparisons (Stacks Tags 011S, 011R and 0AMJ)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Spectral sequence stable page is graded quotient of incoming images of exact couple alpha maps",
+   "results": "8 hits: HomologicalComplex.IsSupportedOutside.exactAt, CochainComplex.exactAt_of_isLE, HomologicalComplex.IsSupported.exactAt, HomologicalComplex.exactAt_of_isSupported, CochainComplex.isLE_iff, CochainComplex.exactAt_of_isGE, CochainComplex.isGE_iff, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact incoming-alpha finite-page comparison interface"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSubobjectCompIso|epi.*kernelSubobject|isColimit.*[Cc]okernel",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact incoming-alpha finite-page comparison interface"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exact couple D images identify with incoming alpha images and g induces the graded quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AbutmentFinitePageComparison",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, step 5: Canonical incoming-alpha image lift to a finite derived-D term",
+   "via": [
+    "lem-sp-truncation-canonical-abutment",
+    "lem-sp-abutment-finite-page-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FinitePageImageLift",
+  "file": "lean/Sheaf/CategoryTheory/FinitePageImageLift.lean",
+  "declaration": "CategoryTheory.finitePage_image_lift",
+  "statement": "theorem finitePage_image_lift\n    {B : Type u₂} [Category.{v₂} B] [Abelian B]\n    (X : BigradedExactCouple B 0) (a : ℤ)\n    (inc : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q)\n    (hinc0 : ∀ p q : ℤ, inc 0 p q = 𝟙 _)\n    (hinc : ∀ (r : ℕ) (p q : ℤ), inc (r + 1) p q =\n      (X.pageCouple r).derivedDInclusion p q ≫ inc r p q)\n    (p q : ℤ) (hp : 0 ≤ p)\n    (F : DecreasingFiltration (X.D 0 (p + q)))\n    (hF : ∀ i : ℤ, 0 ≤ i → F.step i =\n      imageSubobject (X.incomingAlphaIter i.toNat 0 (p + q)))\n    (lambda : X.D 0 (p + q) ⟶\n      X.D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2))\n    (hlambda : lambda = X.alphaIter\n      (-(p - max (p + 3) (q - a + 2) + 2)).toNat 0 (p + q) ≫\n        eqToHom (by congr 1 <;> omega))\n    [IsIso lambda] :\n    ∃ (lift : (F.step p : B) ⟶\n        (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).D\n          (p - max (p + 3) (q - a + 2) + 2)\n          (q + max (p + 3) (q - a + 2) - 2)),\n      IsIso lift ∧\n      lift ≫ inc ((max (p + 3) (q - a + 2)).toNat - 2)\n          (p - max (p + 3) (q - a + 2) + 2)\n          (q + max (p + 3) (q - a + 2) - 2) = (F.step p).arrow ≫ lambda",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T184248-L-3999316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T184248-L-3999316",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
