@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-generic-flatness",
+ "kind": "statement",
+ "title": "Generic flatness for a finite type morphism to an integral scheme",
+ "statement": "Let $f : X \\to S$ be a morphism of schemes, with $S$ integral (nonempty, reduced and irreducible), and $f$ locally of finite type and quasi-compact. There is a nonempty open subset $U \\subseteq S$ such that the induced morphism $f^{-1}(U) \\to U$ is flat.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 052A, Proposition generic flatness, applied to the structure sheaf; Tag 051T, finite type algebra generic freeness"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Replace the integral base by a nonempty affine open Spec(A), where A is a domain. Quasi-compactness gives a finite affine cover Spec(B_i) of its inverse image. The coordinate A-algebras B_i are finite type. It suffices to invert one nonzero element of A making each B_i flat over A, since flatness is local on the source.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-flat-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each B_i choose a surjection from a finite-variable polynomial A-algebra P. Let K be the fraction field of A. The ideal of relations after tensoring with K is finitely generated since K[t_1,...,t_n] is Noetherian. Lift finitely many generators to the relation ideal over A, and form the finitely presented quotient B_i_prime by these lifted relations. It surjects onto B_i and becomes isomorphic to it over K. Spread this finitely presented algebra to the subring A_0 of A generated over the integers by its finitely many coefficients. A_0 is a Noetherian domain. Apply Noetherian generic freeness to its finite type polynomial presentation, then base change to A: after inverting a nonzero a_i, B_i_prime is free as an A_{a_i}-module. The kernel of its surjection onto (B_i)_{a_i} becomes zero over K. A free module over a domain injects into its fraction-field extension, so this kernel is zero. Thus (B_i)_{a_i} is free and hence flat over A_{a_i}. This is the finite type algebra case of Tag 051T, including the finite-presentation descent argument of Tag 051S.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Invert the product a of the finitely many a_i. It is nonzero, so D(a) is a nonempty open in Spec(A), and hence an open in S. Localization preserves flatness, so all finitely many affine source charts over D(a) are flat. Flatness is local on the source, giving the desired restricted morphism. For an empty source cover the product is 1 and the assertion is vacuous.",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 052A, affine finite-cover argument, and Tag 051T, generic freeness proof",
+  "note": "Only flatness of the structure morphism is asserted, not the additional finite-presentation or coherent-module clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism over an integral scheme becomes flat over a nonempty open subset of the base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|exists.*flat.*localized",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over an integral scheme becomes flat over a nonempty open subset of the base",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instOfIsOpenImmersion",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Relative connected component of the section: the generic-fibre closed-cover spreading step, via Tag 054Y and its generic-flatness argument.",
+   "via": [
+    "lem-sbc-generic-fibre-closed-cover-spread",
+    "lem-sbc-generic-fibre-component-spread",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFlatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFlatness.lean",
+  "declaration": "AlgebraicGeometry.exists_nonempty_open_flat_restrict",
+  "statement": "theorem exists_nonempty_open_flat_restrict {X S : Scheme.{u}} [IsIntegral S]\n    (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :\n    ∃ U : S.Opens, (U : Set S).Nonempty ∧ Flat (f ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T232905-L-2043814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T232905-L-2043814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
