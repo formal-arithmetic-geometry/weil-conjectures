@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-syntomic-principal-localization-hypotheses",
+ "kind": "statement",
+ "title": "Complete-intersection fibre neighbourhood after principal localization",
+ "statement": "Let $R$ and $S$ be commutative rings with an $R$-algebra structure, $q\\in\\operatorname{Spec}S$ a prime, and $g\\in S\\setminus q$ [def-weil-ring-localization-away]. Put $p=q\\cap R$ and $Q=\\ker(\\kappa(p)\\otimes_R S\\to\\kappa(q))$ [def-weil-pbc-localization-at-prime]. Assume some $h\\in(\\kappa(p)\\otimes_R S)\\setminus Q$ has $(\\kappa(p)\\otimes_R S)_h$ a global complete intersection over $\\kappa(p)$ [def-weil-pbc-complete-intersection-over-field]. Then there is a prime $q_1$ of $S_g$ contracting to $q$ such that, for $p_1=q_1\\cap R$ and $Q_1=\\ker(\\kappa(p_1)\\otimes_R S_g\\to\\kappa(q_1))$, some $h_1\\notin Q_1$ has $(\\kappa(p_1)\\otimes_R S_g)_{h_1}$ a global complete intersection over $\\kappa(p_1)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00SY (3) => (2), first sentence, and 00SA for the fibre condition"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof": [
+  {
+   "text": "Extend $q$ to $q_1=qS_g$, which contracts to $q$ since $g\\notin q$. The prime-local rings and residue fields are canonically isomorphic [lem-weil-pbc-localization-prime-residue-field-iso]; the base prime is unchanged. Tensoring with its residue field identifies the new fibre with the localization of the old fibre $F$ at $\\bar g=1\\otimes g$ [lem-weil-pbc-localization-tensor-over-base]. The canonical prime contracts to $Q$ by compatibility of the maps to the residue fields. Thus the image of $h$ stays outside the prime. The localization at this image is $(F_{\\bar g})_{h/1}\\cong(F_h)_{\\bar g/1}$ [lem-weil-pbc-localization-of-localization]. The latter is a global complete intersection by [lem-weil-pbc-global-complete-intersection-principal-localization]. Transport the presentation and dimension along the canonical residue-field and fibre algebra isomorphisms to conclude.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-global-complete-intersection-principal-localization",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SY (lemma-syntomic), proof of (3) => (2), lines 36903-36945 ('After replacing S by S_g ... we may assume S is finitely presented over R'); Lemma Tag 00SA (lemma-localize-lci) for the fibre"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-global-complete-intersection-principal-localization",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00SY (3) => (2), first sentence, and 00SA for the fibre condition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization preserves flatness of local ring maps and local complete intersection fibre at a prime",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented flat local algebra with complete intersection fibre is locally isomorphic to a quotient with codimension many equations",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth, Algebra.smooth_iff, Algebra.Smooth.finitePresentation; none asserts the complete-intersection comparison.",
+   "date": "2026-10-13",
+   "verdict": "no matching syntomic or complete-intersection theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, AlgEquiv",
+   "results": "IsLocalization.atUnit, atOne, Away.tensorEquiv, Away.tensorProductEquivTMulRight, Away.mvPolynomialQuotientEquiv; none transports the complete-intersection fibre hypothesis or constructs the comparison quotient.",
+   "date": "2026-10-13",
+   "verdict": "localization tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg complete intersection|CompleteIntersection|syntomic Mathlib/RingTheory/Smooth Mathlib/RingTheory/Extension/Presentation; rg syntomic.*hypotheses|equationCount_comparison|comparison_of_syntomic|syntomic_hypotheses_away lean/Sheaf lean/WeilConjectures; blueprint_refs.py search syntomic comparison and syntomic localization",
+   "results": "Only a docstring on Algebra.Presentation.dimension mentions complete intersection. No existing library declaration or blueprint node states either new assertion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); 00SY (3) => (2), first sentence, and 00SA for the fibre condition",
+   "via": [
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SyntomicPrincipalLocalizationHypotheses",
+  "file": "lean/Sheaf/RingTheory/SyntomicPrincipalLocalizationHypotheses.lean",
+  "declaration": "Algebra.exists_completeIntersection_fibre_away",
+  "statement": "theorem exists_completeIntersection_fibre_away\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (q : PrimeSpectrum S)\n    (g : S) (hg : g ∉ q.asIdeal)\n    (hci : ∃ h : (q.asIdeal.comap (algebraMap R S)).Fiber S,\n      h ∉ (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S))\n        ⟨q, rfl⟩).asIdeal ∧\n      IsGlobalCompleteIntersection (q.asIdeal.comap (algebraMap R S)).ResidueField\n        (Localization.Away h)) :\n    ∃ q₁ : PrimeSpectrum (Localization.Away g),\n      q₁.comap (algebraMap S (Localization.Away g)) = q ∧\n      ∃ h : (q₁.asIdeal.comap (algebraMap R (Localization.Away g))).Fiber\n          (Localization.Away g),\n        h ∉ (PrimeSpectrum.preimageEquivFiber R (Localization.Away g)\n          (q₁.comap (algebraMap R (Localization.Away g))) ⟨q₁, rfl⟩).asIdeal ∧\n        IsGlobalCompleteIntersection\n          (q₁.asIdeal.comap (algebraMap R (Localization.Away g))).ResidueField\n          (Localization.Away h)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T210408-L-969449",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T210408-L-969449",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
