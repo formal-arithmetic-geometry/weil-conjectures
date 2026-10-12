@@ -65,7 +65,7 @@ lemma exchange_id {upperF : 𝒴 ⥤ 𝒳} {lowerF : 𝒳 ⥤ 𝒴} (adj : upper
   change (mateEquiv adj adj (TwoSquare.mk (𝟭 𝒴) upperF upperF (𝟭 𝒳)
     ((Functor.leftUnitor upperF).hom ≫ (Functor.rightUnitor upperF).inv))).natTrans.app K = _
   rw [mateEquiv_unitors]
-  simp
+  simp <;> rfl
 
 variable {𝒳'' : Type u₅} {𝒴'' : Type u₆} [Category.{v₅} 𝒳''] [Category.{v₆} 𝒴'']
 
@@ -226,8 +226,8 @@ lemma completedExchange_app_of_id {upperF : 𝒰 ⥤ 𝒯} {lowerF : 𝒯 ⥤ �
     (𝔠 : CompletionDatum 𝔇 (BaseChangeSquare.id adj)) (K : 𝒳) :
     𝔠.completedExchange.app K = 𝔠.limY'.rlim.map (𝔠.ρ.arrowH.app K) ≫
       𝔠.lowerLim.inv.app ((BaseChangeSquare.id adj).upperG'.obj (𝔠.ρ.redX.obj K)) := by
-  rw [completedExchange_app, Reduction.arrowV'_app, exchange_id, Functor.map_id,
-    Category.id_comp]
+  rw [completedExchange_app, Reduction.arrowV'_app, exchange_id]
+  erw [Functor.map_id, Category.id_comp]
 
 variable {𝒯'' : Type*} {𝒰'' : Type*} [Category 𝒯''] [Category 𝒰'']
 

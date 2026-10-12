@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 
@@ -52,6 +55,8 @@ open CategoryTheory Limits MonoidalCategory Functor.OplaxMonoidal
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
+
+attribute [local instance] Sheaf.monoidalCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {U V : Scheme.{u}} (f : U ⟶ V)
 

@@ -161,6 +161,7 @@ lemma reductionξ_eq (n : ℕ) [IsIso (𝔠.reductionδ 𝔯 K n)] :
     Category.comp_id]
 
 /-- The edge `σ_n` commutes with the quotient maps `n + 1 ⟶ n`. -/
+omit [IsIso (𝔠.ρ.arrowH'.app K)] in
 @[reassoc]
 lemma reductionσ_comm (n : ℕ) :
     (𝔯.q n).app _ ≫ 𝔠.reductionσ 𝔯 K n =
@@ -173,9 +174,9 @@ lemma reductionτ_comm (n : ℕ) :
     (𝔯.q n).app _ ≫ 𝔠.reductionτ 𝔯 K n =
       𝔠.reductionτ 𝔯 K (n + 1) ≫ (𝔠.limY'.transition n).app (𝔠.ρ.cornerC.obj K) := by
   rw [reductionτ, reductionτ, ← (𝔯.q n).naturality_assoc, Category.assoc, 𝔯.recon_comm]
-  rfl
 
 /-- The edge `ξ̄_n` commutes with the quotient maps `n + 1 ⟶ n`. -/
+omit [IsIso (𝔠.ρ.arrowH'.app K)] in
 @[reassoc]
 lemma reductionξ_comm (n : ℕ) :
     (𝔯.q n).app _ ≫ 𝔠.reductionξ 𝔯 K n = 𝔠.reductionξ 𝔯 K (n + 1) ≫ (𝔯.q n).app _ :=
@@ -191,13 +192,14 @@ lemma reductionα_δ_comm (n : ℕ) :
   constructor
   · simp only [reductionα, Category.assoc]
     rw [← 𝔠.limY'.map_tower_comm]
-    exact reassoc_of% (𝔠.reductionσ_comm 𝔯 K n)
+    exact 𝔠.reductionσ_comm_assoc 𝔯 K n _
   · simp only [reductionδ, Category.assoc]
     rw [← 𝔠.limY'.map_tower_comm]
-    exact reassoc_of% (𝔠.reductionτ_comm 𝔯 K n)
+    exact 𝔠.reductionτ_comm_assoc 𝔯 K n _
 
 /-- The completed reduction square is natural in `K`: for `φ : K ⟶ K'` (e.g. a tower
 compatible endomorphism), the edges `α_n`, `δ_n`, `ξ̄_n` intertwine the induced maps. -/
+omit [IsIso (𝔠.ρ.arrowH'.app K)] in
 lemma reduction_naturality {K' : 𝒳} [IsIso (𝔠.ρ.arrowH'.app K')] (φ : K ⟶ K') (n : ℕ) :
     𝔠.reductionα 𝔯 K n ≫ (𝔠.limY'.ev n).map (𝔠.ρ.cornerB.map φ) =
         (𝔯.red n).map ((𝔇.lowerF ⋙ 𝔠.completedPullback).map φ) ≫ 𝔠.reductionα 𝔯 K' n ∧

@@ -54,7 +54,7 @@ noncomputable def self (L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
 
 /-- Transport of an étale-origin witness along an isomorphism `K ≅ K'`. -/
 @[simps]
-def ofIso {K K' : DerivedCategory.Plus (Sheaf (ProEt.topology T) A)}
+noncomputable def ofIso {K K' : DerivedCategory.Plus (Sheaf (ProEt.topology T) A)}
     (w : EtaleOriginWitness K) (e : K ≅ K') : EtaleOriginWitness K' where
   L := w.L
   α := w.α ≪≫ e

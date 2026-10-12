@@ -170,8 +170,8 @@ lemma contractible_mem_distTriangles (X : PairCategory F) :
   refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
     ((isZero_zero _).iso (isZero_of_isZero (X := (incl F X.idx).obj 0) (isZero_zero _)))
     ?_ ?_ ?_
-  · simp only [contractibleTriangle_obj₁, contractibleTriangle_mor₁, Iso.refl_hom,
-      Functor.mapTriangle_obj, Triangle.mk_mor₁, Functor.map_id]
+  · change 𝟙 X ≫ 𝟙 X = 𝟙 X ≫ (incl F X.idx).map (𝟙 X.obj)
+    rw [Functor.map_id]
     rfl
   · exact (isZero_of_isZero (X := (incl F X.idx).obj 0) (isZero_zero _)).eq_of_tgt _ _
   · exact (isZero_zero _).eq_of_src _ _
@@ -210,15 +210,14 @@ lemma complete_morphism_of_iso {T₁ T₂ T₁' T₂' : Triangle (PairCategory F
     (H : ∀ (a : T₁'.obj₁ ⟶ T₂'.obj₁) (b : T₁'.obj₂ ⟶ T₂'.obj₂),
       T₁'.mor₁ ≫ b = a ≫ T₂'.mor₁ → ∃ c, T₁'.mor₂ ≫ c = b ≫ T₂'.mor₂ ∧
         T₁'.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂'.mor₃)
-    (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂) (comm : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :
+    (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂) (hcomm : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :
     ∃ c, T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧ T₁.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂.mor₃ := by
   obtain ⟨c, hc₂, hc₃⟩ := H (e₁.inv.hom₁ ≫ a ≫ e₂.hom.hom₁) (e₁.inv.hom₂ ≫ b ≫ e₂.hom.hom₂) (by
-    rw [reassoc_of% e₁.inv.comm₁, reassoc_of% comm, e₂.hom.comm₁]
-    simp only [assoc])
+    simp only [assoc]
+    rw [reassoc_of% e₁.inv.comm₁, reassoc_of% hcomm, e₂.hom.comm₁])
   refine ⟨e₁.hom.hom₃ ≫ c ≫ e₂.inv.hom₃, ?_, ?_⟩
   · rw [reassoc_of% e₁.hom.comm₂, reassoc_of% hc₂]
-    simp only [assoc]
-    rw [e₂.inv.comm₂, Iso.hom_inv_id_triangle_hom₂_assoc, Iso.hom_inv_id_triangle_hom₂_assoc]
+    simp only [assoc, e₂.inv.comm₂, Iso.hom_inv_id_triangle_hom₂_assoc]
   · simp only [assoc]
     rw [← e₂.inv.comm₃, ← reassoc_of% hc₃, ← reassoc_of% e₁.hom.comm₃, ← Functor.map_comp,
       ← Functor.map_comp]
@@ -230,7 +229,7 @@ lemma complete_morphism_incl_of_stage {k m : ι} (h : k ≤ m) {S₁ S₂ : Tria
     (hS₁ : S₁ ∈ distTriang _) (hS₂ : S₂ ∈ distTriang _)
     (a : (F.transition h).obj S₁.obj₁ ⟶ (F.transition h).obj S₂.obj₁)
     (b : (F.transition h).obj S₁.obj₂ ⟶ (F.transition h).obj S₂.obj₂)
-    (comm : (F.transition h).map S₁.mor₁ ≫ b = a ≫ (F.transition h).map S₂.mor₁) :
+    (hcomm : (F.transition h).map S₁.mor₁ ≫ b = a ≫ (F.transition h).map S₂.mor₁) :
     ∃ c, ((incl F k).mapTriangle.obj S₁).mor₂ ≫ c =
         homMk (X := (incl F k).obj S₁.obj₂) (Y := (incl F k).obj S₂.obj₂) h h b ≫
           ((incl F k).mapTriangle.obj S₂).mor₂ ∧
@@ -239,9 +238,9 @@ lemma complete_morphism_incl_of_stage {k m : ι} (h : k ≤ m) {S₁ S₂ : Tria
         c ≫ ((incl F k).mapTriangle.obj S₂).mor₃ := by
   obtain ⟨c, hc₂, hc₃⟩ := complete_distinguished_triangle_morphism _ _
     ((F.transition h).map_distinguished _ hS₁) ((F.transition h).map_distinguished _ hS₂) a b
-    comm
+    hcomm
   let ψ : (F.transition h).mapTriangle.obj S₁ ⟶ (F.transition h).mapTriangle.obj S₂ :=
-    { hom₁ := a, hom₂ := b, hom₃ := c, comm₁ := comm, comm₂ := hc₂, comm₃ := hc₃ }
+    { hom₁ := a, hom₂ := b, hom₃ := c, comm₁ := hcomm, comm₂ := hc₂, comm₃ := hc₃ }
   let Φ := (inclMapTriangleTransIso F h).hom.app S₁ ≫ (incl F m).mapTriangle.map ψ ≫
     (inclMapTriangleTransIso F h).inv.app S₂
   have e₁ : Φ.hom₁ = homMk (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁) h h a := by
@@ -259,18 +258,18 @@ lemma complete_morphism_incl {k : ι} {S₁ S₂ : Triangle (F.obj ⟨k⟩)}
     (hS₁ : S₁ ∈ distTriang _) (hS₂ : S₂ ∈ distTriang _)
     (a : ((incl F k).mapTriangle.obj S₁).obj₁ ⟶ ((incl F k).mapTriangle.obj S₂).obj₁)
     (b : ((incl F k).mapTriangle.obj S₁).obj₂ ⟶ ((incl F k).mapTriangle.obj S₂).obj₂)
-    (comm : ((incl F k).mapTriangle.obj S₁).mor₁ ≫ b = a ≫ ((incl F k).mapTriangle.obj S₂).mor₁) :
+    (hcomm : ((incl F k).mapTriangle.obj S₁).mor₁ ≫ b = a ≫ ((incl F k).mapTriangle.obj S₂).mor₁) :
     ∃ c, ((incl F k).mapTriangle.obj S₁).mor₂ ≫ c = b ≫ ((incl F k).mapTriangle.obj S₂).mor₂ ∧
       ((incl F k).mapTriangle.obj S₁).mor₃ ≫ a⟦(1 : ℤ)⟧' =
         c ≫ ((incl F k).mapTriangle.obj S₂).mor₃ := by
   obtain ⟨m₁, -, h₁, -, a₁, rfl⟩ := exists_homMk_ge a k
   obtain ⟨m, hm, h₂, -, b₁, rfl⟩ := exists_homMk_ge b m₁
-  rw [← homMk_trHom hm h₁ h₁ h₂ h₂ a₁] at comm ⊢
+  rw [← homMk_trHom hm h₁ h₁ h₂ h₂ a₁] at hcomm ⊢
   set a₂ := trHom (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁) hm h₁ h₁ h₂ h₂ a₁
-  change (incl F k).map S₁.mor₁ ≫ _ = _ ≫ (incl F k).map S₂.mor₁ at comm
+  change (incl F k).map S₁.mor₁ ≫ _ = _ ≫ (incl F k).map S₂.mor₁ at hcomm
   rw [incl_map_eq_homMk h₂, incl_map_eq_homMk h₂, homMk_comp_homMk, homMk_comp_homMk,
-    homMk_eq_homMk_iff] at comm
-  obtain ⟨m', hm', e⟩ := comm
+    homMk_eq_homMk_iff] at hcomm
+  obtain ⟨m', hm', e⟩ := hcomm
   rw [trHom_comp, trHom_comp, trHom_transition_map, trHom_transition_map] at e
   rw [← homMk_trHom hm' h₂ h₂ (h₂.trans hm') (h₂.trans hm') a₂,
     ← homMk_trHom hm' h₂ h₂ (h₂.trans hm') (h₂.trans hm') b₁]
@@ -278,12 +277,12 @@ lemma complete_morphism_incl {k : ι} {S₁ S₂ : Triangle (F.obj ⟨k⟩)}
 
 lemma complete_morphism_of_mem_distTriangles {T₁ T₂ : Triangle (PairCategory F)}
     (hT₁ : T₁ ∈ distTriangles F) (hT₂ : T₂ ∈ distTriangles F)
-    (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂) (comm : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :
+    (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂) (hcomm : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :
     ∃ c, T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧ T₁.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂.mor₃ := by
   obtain ⟨k₁, S₁, hS₁, ⟨e₁⟩⟩ := hT₁
   obtain ⟨k, hk, S₂, hS₂, ⟨e₂⟩⟩ := exists_iso_of_mem_distTriangles hT₂ k₁
   exact complete_morphism_of_iso (e₁ ≪≫ (inclMapTriangleTransIso F hk).app S₁) e₂
-    (complete_morphism_incl ((F.transition hk).map_distinguished _ hS₁) hS₂) a b comm
+    (complete_morphism_incl ((F.transition hk).map_distinguished _ hS₁) hS₂) a b hcomm
 
 
 /-- Blueprint `def-weil-pbc-common-stage-cones`: the pair category of a directed system of
@@ -297,8 +296,8 @@ noncomputable instance pretriangulated : Pretriangulated (PairCategory F) where
   rotate_distinguished_triangle T :=
     ⟨rotate_mem_distTriangles, fun h ↦ mem_distTriangles_of_iso
       ((rotCompInvRot (C := PairCategory F)).app T) (invRotate_mem_distTriangles h)⟩
-  complete_distinguished_triangle_morphism _ _ hT₁ hT₂ a b comm :=
-    complete_morphism_of_mem_distTriangles hT₁ hT₂ a b comm
+  complete_distinguished_triangle_morphism _ _ hT₁ hT₂ a b hcomm :=
+    complete_morphism_of_mem_distTriangles hT₁ hT₂ a b hcomm
 
 lemma mem_distTriang_iff (T : Triangle (PairCategory F)) :
     T ∈ distTriang (PairCategory F) ↔ ∃ (k : ι) (S : Triangle (F.obj ⟨k⟩))
@@ -324,10 +323,17 @@ lemma cone_triangle_distinguished {X Y : PairCategory F} {k : ι} (hX : X.idx �
       distTriang (PairCategory F) := by
   refine ⟨k, _, hT, ⟨Triangle.isoMk _ _ (isoToStage X hX) (isoToStage Y hY) (Iso.refl _)
     ?_ ?_ ?_⟩⟩
-  · simp [homMk_eq]
-  · simp [isoToStage, incl, homMk_comp_homMk]
-  · dsimp
-    simp only [isoToStage, incl, homMk_comp_homMk, comp_id, id_comp, shiftFunctor_map_homMk]
+  · change _ = _ ≫ (incl F k).map u
+    simp [homMk_eq]
+  · change _ ≫ 𝟙 _ = (isoToStage Y hY).hom ≫ (incl F k).map i
+    simp only [comp_id, isoToStage, incl, homMk_comp_homMk]
+    congr 1
+    simp
+  · change homMk (X := ⟨k, C⟩) (Y := ⟨X.idx, (shiftFunctor _ (1 : ℤ)).obj X.obj⟩) le_rfl hX _ ≫
+        (shiftFunctor (PairCategory F) (1 : ℤ)).map (isoToStage X hX).hom =
+      𝟙 _ ≫ ((incl F k).map p ≫ 𝟙 _)
+    rw [id_comp, comp_id, isoToStage, shiftFunctor_map_homMk, homMk_comp_homMk]
+    change _ = homMk _ _ _
     congr 1
     simp only [assoc, Iso.inv_hom_id_app_assoc, transitionId_inv_shift]
 
@@ -354,9 +360,9 @@ open Triangulated in
 /-- The pair category of a directed system of triangulated categories is triangulated. -/
 instance isTriangulated : IsTriangulated (PairCategory F) := by
   apply IsTriangulated.mk
-  intro X₁ X₂ X₃ Z₁₂ Z₂₃ Z₁₃ u₁₂ u₂₃ u₁₃ comm v₁₂ w₁₂ h₁₂ v₂₃ w₂₃ h₂₃ v₁₃ w₁₃ h₁₃
+  intro X₁ X₂ X₃ Z₁₂ Z₂₃ Z₁₃ u₁₂ u₂₃ u₁₃ hcomm v₁₂ w₁₂ h₁₂ v₂₃ w₂₃ h₂₃ v₁₃ w₁₃ h₁₃
   obtain ⟨k, h₁, h₂, h₃, f, g, rfl, rfl⟩ := exists_homMk_comp u₁₂ u₂₃
-  subst comm
+  subst hcomm
   obtain ⟨_, _, _, h₁₂'⟩ := distinguished_cocone_triangle f
   obtain ⟨_, _, _, h₂₃'⟩ := distinguished_cocone_triangle g
   obtain ⟨_, _, _, h₁₃'⟩ := distinguished_cocone_triangle (f ≫ g)

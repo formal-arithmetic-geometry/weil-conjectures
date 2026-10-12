@@ -136,8 +136,9 @@ lemma map_homologyπ_mapExactE'Iso_hom (p q : ℤ) :
   have h' : Φ.map (X.dSc p q).homologyπ = ((X.dSc p q).mapCyclesIso Φ).inv ≫
       (((X.dSc p q).map Φ).homologyπ ≫ ((X.dSc p q).mapHomologyIso Φ).hom) :=
     ((Iso.inv_comp_eq _).2 h).symm
-  rw [h']
-  simp [mapExactE'Iso, mapExactCycles, ShortComplex.homologyπ_naturality]
+  rw [mapExactE'Iso, mapExactCycles, Iso.trans_hom, Iso.symm_hom,
+    ShortComplex.homologyMapIso_hom, h', assoc, assoc, Iso.hom_inv_id_assoc, assoc,
+    ShortComplex.homologyπ_naturality]
 
 @[reassoc]
 lemma kernelComparison_ι' (p q : ℤ) :

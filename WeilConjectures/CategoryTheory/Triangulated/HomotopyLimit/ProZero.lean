@@ -54,24 +54,31 @@ variable {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLi
 noncomputable def proZeroTerm (n k : ℕ) : P.pt ⟶ F.obj (op n) :=
   P.proj (n + k) ≫ F.map (homOfLE (Nat.le_add_right n k)).op
 
-lemma proZeroTerm_zero (n : ℕ) : proZeroTerm (P := P) n 0 = P.proj n := by
-  simp [proZeroTerm, ← F.map_id]
-  rfl
+omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
+lemma proj_comp_map_eq_of_eq {a b n : ℕ} (hab : a = b) (f : op a ⟶ op n) (g : op b ⟶ op n) :
+    P.proj a ≫ F.map f = P.proj b ≫ F.map g := by
+  subst hab
+  rw [Subsingleton.elim f g]
 
+omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
+lemma proZeroTerm_zero (n : ℕ) : proZeroTerm (P := P) n 0 = P.proj n := by
+  have : F.map (homOfLE (Nat.le_add_right n 0)).op = 𝟙 _ := F.map_id _
+  rw [proZeroTerm, this, comp_id]
+
+omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
 lemma proZeroTerm_succ_left (n k : ℕ) :
     proZeroTerm (P := P) (n + 1) k ≫ F.map (homOfLE n.le_succ).op =
       proZeroTerm (P := P) n (k + 1) := by
   simp only [proZeroTerm, assoc, ← F.map_comp]
-  rw [show n + 1 + k = n + (k + 1) by omega]
-  rfl
+  exact proj_comp_map_eq_of_eq (by omega) _ _
 
 include hP in
 lemma sub_towerShift_comp_proZeroTerm (n k : ℕ) :
     (𝟙 _ - towerShift hP) ≫ proZeroTerm (P := P) n k =
       proZeroTerm (P := P) n k - proZeroTerm (P := P) n (k + 1) := by
   simp only [proZeroTerm, Preadditive.sub_comp, id_comp, towerShift_proj_assoc, ← F.map_comp]
-  rw [show n + k + 1 = n + (k + 1) by omega]
-  rfl
+  congr 1
+  exact proj_comp_map_eq_of_eq (by omega) _ _
 
 lemma proZeroTerm_eq_zero {n m : ℕ} (h : n ≤ m) (hm : F.map (homOfLE h).op = 0) (k : ℕ)
     (hk : m ≤ n + k) : proZeroTerm (P := P) n k = 0 := by

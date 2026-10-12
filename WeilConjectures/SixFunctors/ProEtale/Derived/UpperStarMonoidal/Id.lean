@@ -76,7 +76,8 @@ lemma leftDerivedUpperStarId_hom_app_Qh_obj
       (Sheaf (Scheme.ProEt.topology X) A))) K
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Category.comp_id] at h₃
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at h₃
+  erw [Category.comp_id, Category.comp_id] at h₃
   rw [Functor.map_comp, ← reassoc_of% h₁, ← h₂, Category.assoc, ← h₃]
   rfl
 

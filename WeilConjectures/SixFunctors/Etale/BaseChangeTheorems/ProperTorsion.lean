@@ -68,7 +68,8 @@ variable {X Y X' Y' : Scheme.{u}}
 and a sheaf `F` of `Λ`-modules on `X_ét` killed by `r`, i.e. a sheaf of `𝐅_r`-modules, the
 exchange map `g⁻¹ Rᵠf_* F ⟶ Rᵠf'_* g'⁻¹ F` is an isomorphism in every degree `q`. The sheaf
 `F` is torsion, so this is the degreewise form of the proper base change theorem
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` for `F` placed in degree `0`.
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology` for `F` placed in
+degree `0`.
 This is blueprint `lemma-weil-pbc-prime-proper-base-change`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_prime [IsProper f]
     (sq : IsPullback g' f' f g) {r : ℕ} (hr : r.Prime)
@@ -76,7 +77,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_prime [IsProper f]
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   have : IsTorsionModuleSheaf F := .of_nsmul_id_eq_zero Λ hr.pos hF
   exact (Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_obj_iff Λ sq F).1
-    (Etale.isIso_baseChange_of_isProper Λ sq _
+    (Etale.isIso_baseChange_of_isProper_of_torsionHomology Λ sq _
       (Etale.DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj Λ X F)) q
 
 /-- **Torsion coefficient assembly**: for a proper morphism `f : X ⟶ Y`, a cartesian square as
