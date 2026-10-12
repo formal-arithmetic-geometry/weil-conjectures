@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Put $P=k[x_1,\\dots,x_m]$, $J=(f_1,\\dots,f_t)$ and let $\\pi:P\\to T=P/J$ be the quotient map. Since $T\\neq0$, the zero ideal of $T$ is proper, so [lem-weil-pbc-proper-ideal-contained-in-maximal] gives a maximal ideal $\\mathfrak n\\subset T$. Its inverse image $\\mathfrak M=\\pi^{-1}(\\mathfrak n)$ is a maximal ideal of $P$: indeed $P/\\mathfrak M\\cong T/\\mathfrak n$ is a field. Moreover $J\\subseteq\\mathfrak M$, and the correspondence of ideals for the quotient identifies $\\mathfrak n$ with $\\mathfrak M/J$.",
+   "text": "Put P = k[x_1,...,x_m], J = span(range f), and T = P/J. Choose a maximal ideal n of the nonzero quotient with Ideal.exists_maximal (the zero-ideal case of lem-weil-pbc-proper-ideal-contained-in-maximal). Its comap M along the surjective quotient map is maximal by Ideal.comap_isMaximal_of_surjective. Each generator maps to zero, hence belongs to M; Ideal.map_comap_of_surjective identifies M/J with n.",
    "uses": [
     "lem-weil-pbc-proper-ideal-contained-in-maximal"
    ],
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-polynomial-ring-maximal-localization-dimension], $\\dim(P_{\\mathfrak M})=m$. By [lem-weil-pbc-localization-dimension-chains-below-prime], this is $\\operatorname{ht}(\\mathfrak M)$, while $\\dim(T_{\\mathfrak n})=\\operatorname{ht}(\\mathfrak n)$. The Noetherian ring $P$ is the finite type algebra $k[x_1,\\dots,x_m]$ over the Noetherian field $k$, hence is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Applying [lem-weil-pbc-noetherian-height-quotient-bound] to $J=(f_1,\\dots,f_t)\\subseteq\\mathfrak M$ gives $m=\\operatorname{ht}(\\mathfrak M)\\leq\\operatorname{ht}(\\mathfrak M/J)+t=\\dim(T_{\\mathfrak n})+t$. Therefore $\\dim(T_{\\mathfrak n})\\geq m-t$. This is exactly the source's iteration of Tag 00KW at the maximal ideal $\\mathfrak M$.",
+   "text": "Apply MvPolynomial.ringKrullDim_localizationAtMaximal to M and IsLocalization.AtPrime.ringKrullDim_eq_height to get height(M) = m. The polynomial ring and its quotient are Noetherian by the canonical Mathlib instances, specializing lem-weil-pbc-finite-type-algebra-noetherian. Ideal.height_le_height_add_encard_of_subset applied to range f gives m <= height(n) + encard(range f). Set.encard_image_le bounds that cardinality by t, even if equations repeat. The maximal ideal n has finite height by Noetherianity; write height(n) = d, convert to natural numbers, and deduce m - t <= d.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
     "lem-weil-pbc-localization-dimension-chains-below-prime",
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "The ring $T$ is a finitely generated $k$-algebra, being the quotient of $P$ by $J$. Hence [lem-weil-pbc-closed-point-dimension-local-ring], applied to the maximal ideal $\\mathfrak n$, identifies the dimension at $\\mathfrak n$ of $\\operatorname{Spec}T$ with $\\dim(T_{\\mathfrak n})$. By [lem-weil-pbc-dimension-supremum-local-dimensions], the Krull dimension of $\\operatorname{Spec}T$ is the supremum of its dimensions at points, so it is at least its dimension at $\\mathfrak n$. Step 2 therefore gives $\\dim(\\operatorname{Spec}T)\\geq\\dim(T_{\\mathfrak n})\\geq m-t$, as required.",
+   "text": "The surjective k-algebra map Ideal.Quotient.mkₐ gives the finite polynomial presentation of T. Apply topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal at n and IsLocalization.AtPrime.ringKrullDim_eq_height to identify its local topological dimension with height(n) = d. Finally topologicalKrullDim_eq_iSup_topologicalKrullDimAt and le_iSup give the desired global bound.",
    "uses": [
     "lem-weil-pbc-closed-point-dimension-local-ring",
     "lem-weil-pbc-dimension-supremum-local-dimensions"
@@ -78,9 +78,9 @@
   "lem-weil-pbc-dimension-supremum-local-dimensions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, paragraph following Definition Tag 00S9 (definition-lci-field), lines 35834-35849: choose a maximal ideal over the equations, use Tag 00OP and iterate Tag 00KW; passage from the local bound to the dimension of Spec is made explicit using Algebra Tag 00OU and Topology Tag 0B7I"
+  "place": "Paragraph following Definition 00S9: maximal ideal, polynomial localization dimension (00OP), equation-count height bound (00KW); closed-point comparison (00OU), then Topology 0B7I. Lean implementation uses the existing Sheaf declarations and Mathlib KrullsHeightTheorem."
  },
  "mathlib_searches": [
   {
@@ -157,5 +157,15 @@
   "group": "F1",
   "result": "pass",
   "note": "k field (Type u, Field); m,t : ℕ with htm : t ≤ m (genuine); f : Fin t → MvPolynomial (Fin m) k; T = quotient by Ideal.span (Set.range f) written literally; T nonzero as Nontrivial (needed: empty Spec has dim ⊥); conclusion ((m - t : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim (Spec (CommRingCat.of T)), same Spec/topologicalKrullDim form as landed sibling DimensionQuasiFiniteOverPolynomialAlgebra; edge cases t=0, m=t, m=t=0; no let, no existentials, no new nodes, only the item's lean record changed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194112-L-455499",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
