@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.AlgebraicGeometry.RationalPointTopologicalLocalDimensionBaseChange
+import Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension
 
 /-!
 # Local dimension of rational points under field extension
@@ -56,6 +56,18 @@ theorem ringKrullDim_rationalPoint_field_baseChange
     ringKrullDim (X.presheaf.stalk (p (IsLocalRing.closedPoint k))) =
       ringKrullDim ((pullback f
         (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk
-          (q (IsLocalRing.closedPoint K))) := by sorry
+          (q (IsLocalRing.closedPoint K))) := by
+  have hleft := ringKrullDim_stalk_rationalPoint_eq_topologicalKrullDimAt f p hp
+  calc
+    ringKrullDim (X.presheaf.stalk (p (IsLocalRing.closedPoint k))) =
+        topologicalKrullDimAt (p (IsLocalRing.closedPoint k)) :=
+      hleft
+    _ = topologicalKrullDimAt (q (IsLocalRing.closedPoint K)) :=
+      topologicalKrullDimAt_rationalPoint_field_baseChange f p hp K q hq hqp
+    _ = ringKrullDim ((pullback f
+        (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk
+          (q (IsLocalRing.closedPoint K))) :=
+      (ringKrullDim_stalk_rationalPoint_eq_topologicalKrullDimAt
+        (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) q hq).symm
 
 end AlgebraicGeometry
