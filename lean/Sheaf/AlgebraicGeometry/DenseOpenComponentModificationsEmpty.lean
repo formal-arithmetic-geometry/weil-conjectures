@@ -24,6 +24,16 @@ theorem exists_dense_open_isIso_component_modifications_of_zero
     (hν : ∀ i, ∃ U : (C i).Opens, Dense (U : Set (C i)) ∧ IsIso (ν i ∣_ U)) :
     ∃ U : X.Opens, Dense (U : Set X) ∧
       IsIso (CategoryTheory.Limits.Sigma.desc (fun i => ν i ≫ ι i) ∣_ U) := by
-  sorry
+  have _hC := hC
+  have _hinj := hinj
+  have _hν := hν
+  have : IsEmpty X := ⟨fun x ↦ by
+    obtain ⟨i, _⟩ := hcover (irreducibleComponent x)
+      (irreducibleComponent_mem_irreducibleComponents x)
+    exact Fin.elim0 i⟩
+  refine ⟨⊥, ?_, ?_⟩
+  · intro x
+    exact isEmptyElim x
+  · infer_instance
 
 end AlgebraicGeometry
