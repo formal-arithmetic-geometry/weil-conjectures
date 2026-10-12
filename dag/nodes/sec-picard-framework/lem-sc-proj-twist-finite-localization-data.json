@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-proj-twist-finite-localization-data",
+ "kind": "statement",
+ "title": "Finite principal-localization data of a locally homogeneous twist section",
+ "statement": "Let A be an N-graded commutative ring with grading 𝒜, k an integer, f homogeneous of positive degree b, and s a section of twist 𝒜 k [def-weil-pbc-proj-twisting-sheaf] on D₊(f). Set B=A_(f) and M=A_f, viewed as a B-module by the canonical homogeneous-localization inclusion. There exist a finite family g_i in B spanning the unit ideal and elements t_i in M localized at g_i, compatible on every overlap under the canonical module localization maps [lem-weil-pbc-cover-module-exact]. At each homogeneous prime p in D₊(f), there is an index i and an additive evaluation map from M localized at g_i to A_p sending every z/1 to the canonical image of z in A_p and sending t_i to the value s(p). This is only compatible local data; the statement does not assert a global element of M.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4 and its preceding construction, specialized to the shift A(k); this split separates ordinary gluing from degree detection"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof": [
+  {
+   "text": "at each point use the local homogeneous-fraction witness of s. Choose a\nhomogeneous basic neighborhood inside its witness neighborhood and D₊(f). Multiply the\nwitness denominator by this neighborhood's defining element and by f, and multiply the\nnumerator by the same factors. The resulting homogeneous denominator h has positive\ndegree c and D₊(h) lies in the witness neighborhood. For u = h^b/f^c in A_(f), the affine\nchart identifies D₊(h) inside D₊(f) with D(u). Quasi-compactness gives finitely many such\nneighborhoods. Their chart elements u_i generate the unit ideal. In A_f localized at u_i,\nh_i is invertible since h_i^b = u_i*f^c_i and f is invertible, so the witness fraction\ndefines t_i. On an overlap use the homogeneous element f*h_i*h_j of A. Both fractions\nhave the same evaluations s(p) at every point of its basic open, so homogeneous-prime\nequality detection makes them equal in A localized at f*h_i*h_j. The universal properties\nidentify this ring localization with the iterated module localization at u_i*u_j, giving\nthe displayed compatibility. At a point of D(u_i), u_i maps to a unit in A_p; the ordinary\nevaluation A_f → A_p therefore extends to the further localization. Its underlying\nadditive map sends z/1 to the ordinary evaluation of z and t_i to s(p). Every point lies\nin some neighborhood. If the open is empty, f is nilpotent and both A_f and A_(f) are\nzero; the empty cover has span top in this zero ring and evaluation is vacuous.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-sc-proj-basic-open-localization-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-proj-basic-open-localization-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Finite basic-open refinement and local fractions from the construction preceding Definition 27.8.3; overlap equality via homogeneous-prime localization detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally homogeneous fraction section of a Proj twist gives compatible ordinary module fractions on a finite principal cover of the homogeneous basic open",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisting sheaf locally homogeneous fractions finite principal open cover compatible module localization sections",
+   "results": "Found ModuleCat.Tilde.exists_const and StructureSheaf.normalize_finite_fraction_representation, both over affine Spec with different section and stalk types; no Proj twist finite chart-data statement.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite|compact|isLocallyFraction|coverModuleExact in Mathlib ProjectiveSpectrum/Basic, the source twist sheaf module, and Sheaf/RingTheory/CoverModuleExact; finite principal twist and localization data in the entire DAG",
+   "results": "Local homogeneous-fraction predicate and the existing finite module gluing theorem. No statement extracting the finite compatible data from these twist sections.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistFractionDescent",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause: associated sheaf of a shift has homogeneous fraction charts",
+   "via": [
+    "lem-sc-proj-twist-fraction-descent",
+    "lem-sc-proj-single-twist-basic-open-fractions",
+    "lem-sc-proj-finite-twist-coproduct-fractions",
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistFiniteLocalizationData.lean",
+  "declaration": "AlgebraicGeometry.Proj.twist_finiteLocalization_data",
+  "statement": "theorem twist_finiteLocalization_data {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ) (hb : 0 < b) (hf : f ∈ 𝒜 b) (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))) : let B := HomogeneousLocalization.Away 𝒜 f let M := LocalizedModule.Away f A letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f)) ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤), let ρ := fun (a h : B) (ha : a ∣ h) ↦ IsLocalizedModule.lift (Submonoid.powers a) (LocalizedModule.mkLinearMap (Submonoid.powers a) M) (LocalizedModule.mkLinearMap (Submonoid.powers h) M) (RingTheory.localizationAway_map_units_of_dvd (M := M) a h ha) ∃ t : ∀ i : Fin n, LocalizedModule.Away (g i) M, (∀ i j : Fin n, ρ (g i) (g i * g j) (dvd_mul_right (g i) (g j)) (t i) = ρ (g j) (g i * g j) (dvd_mul_left (g j) (g i)) (t j)) ∧ ∀ p : basicOpen 𝒜 f, ∃ (i : Fin n) (e : LocalizedModule.Away (g i) M →+ Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal), (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers (g i)) M z) = IsLocalization.map (M := Submonoid.powers f) (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl) (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A) (Submonoid.powers_le.mpr p.2) z) ∧ e (t i) = (s.1 p).1",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T135259-L-1682214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T135259-L-1682214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import Sheaf.Algebra.Module.DegreeZeroFractions
+import Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalizationData
+import Sheaf.RingTheory.CoverModuleExact
+import Sheaf.AlgebraicGeometry.ProjTwistDegreeDetection
 
 /-!
 # Descent of locally homogeneous fractions on a Proj basic open
@@ -46,6 +49,22 @@ theorem twist_fraction_descent
         IsLocalization.map (M := Submonoid.powers f)
           (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)
           (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)
-          (Submonoid.powers_le.mpr p.2) z = (s.1 p).1 := by sorry
+          (Submonoid.powers_le.mpr p.2) z = (s.1 p).1 := by
+  let B := HomogeneousLocalization.Away 𝒜 f
+  let M := LocalizedModule.Away f A
+  let : Module B M := Module.compHom M (algebraMap B (Localization.Away f))
+  obtain ⟨n, g, hspan, t, ht, heval⟩ := twist_finiteLocalization_data 𝒜 k f b hb hf s
+  obtain ⟨z, hz, _⟩ := (RingTheory.coverModuleExact (M := M) n g hspan).2 t ht
+  have hvalue (p : basicOpen 𝒜 f) :
+      IsLocalization.map (M := Submonoid.powers f)
+        (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)
+        (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)
+        (Submonoid.powers_le.mpr p.2) z = (s.1 p).1 := by
+    obtain ⟨i, e, he, hs⟩ := heval p
+    exact (he z).symm.trans ((congrArg e (hz i)).trans hs)
+  refine ⟨z, twist_degree_detection 𝒜 k f b hb hf z ?_, hvalue⟩
+  intro p
+  rw [hvalue p]
+  exact (s.1 p).2
 
 end AlgebraicGeometry.Proj
