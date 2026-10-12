@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "On each D₊(xᵢ), take the section xᵢ^d of O_P(d). For d ≥ 0 this is the fraction xᵢ^d/1 and for d < 0 it is 1/xᵢ^(-d). The degree-d locally homogeneous fractions are multiplied by xᵢ^(-d) to degree-zero fractions, with inverse multiplication by xᵢ^d. These maps commute with all restrictions. Thus xᵢ^d is a free generator on every subopen. In Lean the existing proved declarations Proj.twistPowSection and Proj.isFreeGenerator_twistPowSection supply this step directly, including negative d.",
+   "text": "The proved source declarations Proj.twistPowSection and Proj.isFreeGenerator_twistPowSection construct x_i^d and establish that it freely generates the twist on every subopen of D_+(x_i), for every integer d. They are imported from WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf"
    ],
@@ -26,25 +26,47 @@
    }
   },
   {
-   "text": "C.chart_eq identifies the chart D₊(xᵢ) with Uᵢ and its ratio coordinates with those of the glued line. In particular (C.iso.inv)⁻¹(D₊(xᵢ))=Uᵢ. Pull back xᵢ^d along C.iso.inv, using the unit of the ordinary Scheme.Modules pullback adjunction, to obtain gᵢ. The proved source lemma Scheme.Modules.IsFreeGenerator.pullback_unit_app says these sections are free generators on the preimage opens, hence on Uᵢ. Its bijectivity conclusion on every subopen is exactly bijective_smul_g₀ or bijective_smul_g₁. Ordinary pullback is the source library left adjoint to module pushforward; it agrees with the tensor-formula pullback by uniqueness of left adjoints, as explicitly proved in the parent module.",
+   "text": "The private helper chart_preimage first proves that the polynomial coordinate basic opens cover Proj using iSup_basicOpen_eq_top' and MvPolynomial.adjoin_range_X_eq_top. The equations C.chart_eq then identify C.iso.hom with Proj.linearProjection by linearCover.hom_ext. Proj.linearProjection_preimage_standardOpen and the inverse-isomorphism identities imply that the inverse image under C.iso.inv of D_+(x_i) equals the standard open U_i.",
    "uses": [
-    "def-sc-p1-proj-chart-isomorphism",
-    "def-pc-module-pullback"
+    "def-sc-p1-proj-chart-isomorphism"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "https://stacks.math.columbia.edu/tag/01M7",
     "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
    }
   },
   {
-   "text": "On D₊(x₀)∩D₊(x₁), x₀ and x₁ are units. The identity x₀^d=(x₀/x₁)^d x₁^d follows from multiplication and inversion of units, for every integer d. The chart equations send x₀/x₁ to t⁻¹, so the induced ring map sends its d-th power to transitionUnit(d,0,1). The pullback unit commutes with restriction and scalar multiplication. Applying it to the identity therefore gives map_g₀ for g₀,g₁. Assemble the two sections, the two free-generator conclusions and this equation into TwistData. For d=0 this is 1=1; for d=-1 it is x₀⁻¹=(x₀/x₁)⁻¹x₁⁻¹. No arbitrary module or global comparison is constructed in this step.",
+   "text": "The helper chart_coordinate identifies the section x_j/x_i after inverse pullback with ProjectiveSpace.coordRatio i j. Apply homOfSections_appLE_coordRatio to the linear chart, and use awayToSection_awayι_appLE and injectivity of the chart section-ring isomorphism. The equality C.chart_eq and C.iso.inv_hom_id transport this chart calculation to C.iso.inv.",
    "uses": [
-    "def-sc-p1-standard",
     "def-sc-p1-proj-chart-isomorphism",
-    "def-pc-module-pullback"
+    "def-sc-p1-standard"
    ],
-   "elementary": false,
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
+   }
+  },
+  {
+   "text": "The helper polynomial_transition constructs the overlap unit c explicitly: its value is the restriction of x_i/x_j and its inverse is the restriction of x_j/x_i. Pointwise evaluation using awayToSection_apply and HomogeneousLocalization.Away.val_mk proves their product is one. Evaluation of twistPowSection reduces x_i^d = c^d x_j^d to equality of localization fractions. Split the integer degree into ofNat and negSucc; multiply denominators and prove the resulting polynomial identity. This treats degree zero and negative degrees without extra hypotheses.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
+   }
+  },
+  {
+   "text": "Define g_i as the restriction of Scheme.Modules.pullbackSection C.iso.inv (twistPowSection d X_i) to U_i using chart_preimage. The existing proved source lemma Scheme.Modules.IsFreeGenerator.pullback_unit_app, followed by IsFreeGenerator.map, supplies both bijective_smul fields on every subopen. The helper transported_map_g₀ applies pullbackSection to polynomial_transition, then uses pullbackSection_map and pullbackSection_smul and restricts to the overlap. The chart_coordinate calculation identifies the image of c with ProjectiveSpace.ratio 0 1; Units.ext and map_zpow identify the image of c^d with transitionUnit d 0 1. This proves map_g₀. Assemble these sections and the three proofs into TwistData. The statement uses the ordinary Scheme.Modules.pullback, so no tensor-pullback comparison theorem is needed in this proof.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-p1-proj-chart-isomorphism",
+    "def-sc-p1-standard"
+   ],
+   "elementary": true,
    "source": {
     "document": "https://stacks.math.columbia.edu/tag/01M7",
     "place": "Lemma 01M7 (2),(3), applied to the shifted ring; blueprint lem-sc-p1-graded-resolution final clause, local generators and transition equation"
@@ -52,7 +74,6 @@
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
   "def-sc-p1-proj-chart-isomorphism",
   "def-sc-p1-standard",
   "def-weil-pbc-proj-twisting-sheaf"
@@ -60,7 +81,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01M7",
-  "place": "Explicit chart and unit-power argument from 01M7 (2),(3) and the parent blueprint final clause"
+  "place": "R2: complete Lean proof of the chart, localization unit-power, and ordinary-pullback argument from Stacks 01M7 (2),(3); completes the existing sandbox attempt without new holes"
  },
  "mathlib_searches": [
   {
@@ -137,11 +158,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-5246f",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T085250-L-19238",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T121231-L-998146",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, DAG metadata, report, target axioms, and direct importer compiled and matched the stated proof/interface requirements."
  }
 }
