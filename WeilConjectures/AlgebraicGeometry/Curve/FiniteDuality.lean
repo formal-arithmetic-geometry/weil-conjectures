@@ -113,9 +113,12 @@ theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine 
       ∃ a, x ∈ O a ∧ O a ≤ W := by
     obtain ⟨_, ⟨a, rfl⟩, hxa, haW⟩ := (Opens.isBasis_iff_nbhd.1 hO) hx
     exact ⟨a, hxa, haW⟩
-  have hA (a : Σ _ : ULift.{u} (Fin 2), {g : k[X] // g ≠ 0}) : IsAffineOpen (O a) := isAffineOpen_chartBasicOpen k a.1 a.2.1
-  have hA' (a : Σ _ : ULift.{u} (Fin 2), {g : k[X] // g ≠ 0}) : IsAffineOpen (f ⁻¹ᵁ O a) := (hA a).preimage f
-  have hff (a : Σ _ : ULift.{u} (Fin 2), {g : k[X] // g ≠ 0}) := Hom.free_finite_chartBasicOpen (f := f) a.1 (g := a.2.1)
+  have hA (a : Σ _ : ULift.{u} (Fin 2), {g : k[X] // g ≠ 0}) : IsAffineOpen (O a) :=
+    isAffineOpen_chartBasicOpen k a.1 a.2.1
+  have hA' (a : Σ _ : ULift.{u} (Fin 2), {g : k[X] // g ≠ 0}) : IsAffineOpen (f ⁻¹ᵁ O a) :=
+    (hA a).preimage f
+  have hff (a : Σ _ : ULift.{u} (Fin 2), {g : k[X] // g ≠ 0}) :=
+    Hom.free_finite_chartBasicOpen (f := f) a.1 (g := a.2.1)
   let φ (a) : Γ((Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials, O a) →+
       Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials, O a) :=
     f.traceSections (O a) (hA' a) (hff a).1 (hff a).2
