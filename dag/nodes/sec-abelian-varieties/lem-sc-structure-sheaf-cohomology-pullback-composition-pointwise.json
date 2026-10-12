@@ -1,0 +1,101 @@
+{
+ "id": "lem-sc-structure-sheaf-cohomology-pullback-composition-pointwise",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-structure-sheaf-cohomology-pullback-composition",
+   "place": "pointwise calculation used to prove additive-homomorphism equality"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointwise composition law for structure-sheaf cohomology pullback",
+ "statement": "For composable scheme morphisms f : X ⟶ Y and g : Y ⟶ Z, every n and every x : Sheaf.H (structureSheafAb Z) n, structureSheafCohomologyPullback (f ≫ g) n x = structureSheafCohomologyPullback f n (structureSheafCohomologyPullback g n x).",
+ "stmt_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 equation-functorial"
+ },
+ "proof": [
+  {
+   "text": "Unfold the Ext-defined pullback. The comparison isomorphisms for inverse images and constant sheaves are compatible with composition; naturality of Ext maps and associativity of Yoneda products identify the composite pullback with the pullback along f ≫ g, evaluated at x.",
+   "uses": [
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 equation-functorial"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structureSheafCohomologyPullback_comp_apply",
+   "results": "no existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pointwise composition of Ext maps induced by exact functors",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext map composition Yoneda product",
+   "results": "Service unavailable: no direct result.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackComposition",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackCompositionPointwise",
+  "file": "lean/Sheaf/AlgebraicGeometry/StructureSheafCohomologyPullbackCompositionPointwise.lean",
+  "declaration": "AlgebraicGeometry.Scheme.structureSheafCohomologyPullback_comp_apply",
+  "statement": "theorem structureSheafCohomologyPullback_comp_apply {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) (x : Sheaf.H (structureSheafAb Z) n) : structureSheafCohomologyPullback (f ≫ g) n x = structureSheafCohomologyPullback f n (structureSheafCohomologyPullback g n x)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643324",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

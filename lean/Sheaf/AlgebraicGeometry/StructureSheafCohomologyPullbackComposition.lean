@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
+import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackCompositionPointwise
 
 /-! Composition law for pullback on structure-sheaf cohomology.
 (blueprint: lem-sc-structure-sheaf-cohomology-pullback-composition)
@@ -45,6 +46,7 @@ theorem structureSheafCohomologyPullback_comp {X Y Z : Scheme.{u}}
     structureSheafCohomologyPullback (f ≫ g) n =
       (structureSheafCohomologyPullback f n).comp
         (structureSheafCohomologyPullback g n) := by
-  sorry
+  ext x
+  exact structureSheafCohomologyPullback_comp_apply f g n x
 
 end AlgebraicGeometry.Scheme
