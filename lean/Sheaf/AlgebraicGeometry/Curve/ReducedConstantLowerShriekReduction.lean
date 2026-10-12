@@ -8,11 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
+import Sheaf.AlgebraicGeometry.ReducedCurveNormalization
+import Sheaf.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions
 import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
-import Sheaf.AlgebraicGeometry.ReducedCurveNormalization
 import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
@@ -103,7 +104,55 @@ theorem exists_reducedConstantLowerShriekReductionData
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X] (j : U ⟶ X)
     [IsOpenImmersion j] (r : ℕ) [Fact r.Prime] :
     ReducedConstantLowerShriekReductionData f j r := by
-  sorry
+  let : X.Over (Spec (.of k)) := ⟨f⟩
+  have : IsSeparated (X ↘ Spec (.of k)) := by
+    change IsSeparated f
+    infer_instance
+  have : LocallyOfFiniteType (X ↘ Spec (.of k)) := by
+    change LocallyOfFiniteType f
+    infer_instance
+  have : QuasiCompact (X ↘ Spec (.of k)) := by
+    change QuasiCompact f
+    infer_instance
+  obtain ⟨Y, ν, hsep, hft, hqc, hdim, hsmooth, hfinite, V, hV, hiso⟩ :=
+    exists_finite_smooth_modification_of_reduced_curve (k := k) X
+      (IsCurve.krullDim_le_one (f := f))
+  change IsSeparated (ν ≫ f) at hsep
+  change LocallyOfFiniteType (ν ≫ f) at hft
+  change QuasiCompact (ν ≫ f) at hqc
+  change Smooth (ν ≫ f) at hsmooth
+  let := hsep
+  let := hft
+  let := hqc
+  let := hsmooth
+  let := hfinite
+  let := hiso
+  let : IsCurve (ν ≫ f) := { krullDim_le_one := hdim }
+  have hrange : (V : Set X) ⊆ Set.range ν := by
+    intro x hx
+    obtain ⟨y, hy⟩ := (ν ∣_ V).surjective ⟨x, hx⟩
+    refine ⟨y.1, ?_⟩
+    exact (morphismRestrict_base_coe ν V y).symm.trans (congrArg Subtype.val hy)
+  have hsurj : Surjective ν := by
+    constructor
+    rw [← Set.range_eq_univ, ← ν.isClosedMap.isClosed_range.closure_eq]
+    exact (hV.mono hrange).closure_eq
+  let U' := pullback ν j
+  let j' : U' ⟶ Y := pullback.fst ν j
+  let ν' : U' ⟶ U := pullback.snd ν j
+  have Hconstant : ∀ {C : Scheme.{u}} (g : C ⟶ Spec (.of k))
+      [IsCurve g] [Smooth g],
+      IsCurve.Assertions (ULift.{u + 1} (ZMod r)) g
+        (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) C r) := by
+    intro C g _ _
+    by_cases hr : (r : k) = 0
+    · let : CharP k r := (CharP.charP_iff_prime_eq_zero (Fact.out : r.Prime)).mpr hr
+      exact assertions_constantModSheaf_of_charP (ULift.{u + 1} (ZMod r)) g r
+    · exact assertions_constantModSheaf_of_ne_zero (ULift.{u + 1} (ZMod r)) g r hr
+  refine ⟨Y, ν, V, U', j', ν', hfinite, hsurj, hsmooth, hV, hiso,
+    inferInstance, IsPullback.of_hasPullback ν j, ?_⟩
+  exact smoothConstantLowerShriekAssertions_of_constant r Hconstant (ν ≫ f) j'
+
 
 /-- Prime coefficient sheaves are canonically isomorphic.
 Source: `Etale.constantModSheaf` in `SmoothBaseChange.Defs`,

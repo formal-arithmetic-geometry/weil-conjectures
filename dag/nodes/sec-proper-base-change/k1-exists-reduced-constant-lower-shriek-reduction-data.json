@@ -23,47 +23,40 @@
  },
  "proof": [
   {
-   "text": "Choose the finite surjective smooth modification and dense isomorphism locus from reduced-curve normalization (Stacks 0A3Q, normalization paragraph), including the empty and zero-dimensional cases. Pull j back to this modification; base change preserves open immersions.",
+   "text": "Install the structure morphism f as X.Over Spec k and apply exists_finite_smooth_modification_of_reduced_curve. Install the separated, locally finite type, quasi-compact and smooth witnesses, and combine the dimension witness with them to obtain IsCurve (ν ≫ f).",
    "uses": [
     "lem-weil-pbc-reduced-curve-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "Split a smooth curve into finitely many open-and-closed irreducible components: smooth local rings are normal domains; Noetherianity makes the complement of a component closed. Apply the smooth constant Kummer or Artin--Schreier assertions, including the zero-dimensional cases. For each component the intersection with U is empty or dense, so dense-open localization yields its lower-shriek assertions. Finite pushforward and short-exact devissage assemble the finite direct sum. The smooth assertion packages use the smooth constant curve computations [thm-sc-main], preserving the unit's curve-calculation step.",
+   "text": "The restriction ν over the dense open V is an isomorphism, hence its underlying map is surjective. Therefore V is contained in the range of ν, by morphismRestrict_base_coe. Since ν is finite its range is closed. A closed set containing a dense set is the whole space, so ν is surjective. This is the Lean proof hsurj, using ν.isClosedMap.isClosed_range and Dense.mono. Form the standard pullback U′ = Y ×_X U; its first projection is an open immersion by base change, and IsPullback.of_hasPullback gives the cartesian square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For every smooth curve g over k, split on whether r casts to zero in k. If it does, CharP.charP_iff_prime_eq_zero installs CharP k r and assertions_constantModSheaf_of_charP gives the constant-coefficient assertions. Otherwise use assertions_constantModSheaf_of_ne_zero. The coefficient quotient is finite because ULift (ZMod r) is finite. Both existing assertion declarations reside in SmoothCalculations, retaining the thm-sc-main curve-calculation route and including disconnected, empty and zero-dimensional smooth sources.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-sc-smooth-normal",
     "lemma-weil-pbc-smooth-curve-kummer-localization",
-    "lemma-weil-pbc-smooth-curve-artin-schreier",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-field-extension",
-    "lem-weil-pbc-curve-assertions-dense-open",
-    "lem-weil-pbc-curve-assertions-finite-pushforward",
-    "lemma-weil-pbc-eight-curve-devissage",
-    "thm-sc-main",
-    "def-sc-constant-sheaves"
+    "lemma-weil-pbc-smooth-curve-artin-schreier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply smoothConstantLowerShriekAssertions_of_constant to this family of constant-coefficient assertions, the smooth curve ν ≫ f, and the pullback immersion j′. Package the geometric witnesses, their properties, the cartesian square and the resulting assertions into ReducedConstantLowerShriekReductionData.",
+   "uses": [
+    "lem-pbc-u2-smooth-constant-lower-shriek-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-reduced-curve-normalization",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sc-smooth-normal",
   "lemma-weil-pbc-smooth-curve-kummer-localization",
   "lemma-weil-pbc-smooth-curve-artin-schreier",
-  "lem-weil-pbc-zero-dimensional-cohomology",
-  "lem-weil-pbc-zero-dimensional-field-extension",
-  "lem-weil-pbc-curve-assertions-dense-open",
-  "lem-weil-pbc-curve-assertions-finite-pushforward",
-  "lemma-weil-pbc-eight-curve-devissage",
-  "thm-sc-main",
-  "def-sc-constant-sheaves"
+  "lem-pbc-u2-smooth-constant-lower-shriek-localization"
  ],
- "proof_origin": "Stacks 0A3Q, normalization paragraph, followed by Stacks 03SG, smooth lower-shriek proof: finite component decomposition, empty and zero-dimensional cases, characteristic-specific thm-sc-main calculations, dense-open localization, finite pushforward and devissage.",
+ "proof_origin": "Stacks 0A3Q normalization paragraph; surjectivity follows from closed range and dense isomorphism locus. Existing Kummer and Artin--Schreier assertions on all smooth curves followed by the localization assembly of Stacks 03SG. Lean reduction written by U2.",
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -138,10 +131,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T030604-L-1299228",
+  "landing": "20261012T042423-L-1822566",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
