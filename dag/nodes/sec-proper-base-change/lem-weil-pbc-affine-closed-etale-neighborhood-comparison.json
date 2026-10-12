@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-affine-closed-etale-neighborhood-comparison",
+ "kind": "statement",
+ "title": "Closed affine cohomology as an etale-neighborhood colimit",
+ "statement": "Let $X$ be an affine scheme and $i:Z\\to X$ a closed immersion [def-weil-pbc-scheme-conventions]. Let $\\Lambda$ be a commutative ring and $J$ a sheaf of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves], with torsion underlying abelian sheaf [def-weil-pbc-torsion-etale-sheaf]. For every integer $q\\geq0$ there is a small filtered category $I$, schemes $Y_a$ and etale morphisms $v_a:Y_a\\to X$, a diagram $H:I\\to\\mathrm{Ab}$, and a colimit cocone $c$ of $H$. Its point is isomorphic to $H^q(Z,i^{-1}J_{ab})$ and its value at $a$ is isomorphic to $H^q(Y_a,v_a^{-1}J_{ab})$ [def-weil-pbc-etale-cohomology, def-weil-pbc-inverse-image]. No injectivity or positive-degree assumption is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Proof, affine case, first two displayed equalities; continuity Tag 09YQ and Gabber Tag 09ZI"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Present X and Z as Spec B and Spec B/K. The pair henselization is a filtered colimit of etale neighborhoods with the same closed fibre. Choose a small cofinal directed system of those neighborhoods.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomology continuity to the compatible pullbacks of the underlying abelian sheaf. This gives a colimit cocone of neighborhood cohomology with point the henselization cohomology.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-weil-pbc-etale-pullback-forget-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image preserves torsion. Gabber comparison gives the closed-fibre cohomology in every degree. Composition of inverse images and forgetting module coefficients identify it with the restriction along i. Transport the colimit cocone along that isomorphism; do not assert that its point is zero.",
+   "uses": [
+    "prop-weil-pbc-gabber-pair-comparison",
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-weil-pbc-etale-pullback-forget-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lem-weil-pbc-inverse-image-torsion",
+  "lem-weil-pbc-pair-henselization",
+  "prop-weil-pbc-gabber-pair-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Proof, affine case, first two displayed equalities; continuity Tag 09YQ and Gabber Tag 09ZI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology on a closed subscheme of an affine scheme is the filtered colimit of cohomology on etale neighborhoods for any torsion sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology on a closed subscheme of an affine scheme is the filtered colimit of cohomology on etale neighborhoods for any torsion sheaf",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.AffineZariskiSite.cocone, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; no matching module-sheaf theorem or neighborhood comparison.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "12 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.functorH_obj_coe, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat, CategoryTheory.Sheaf.H.map, CategoryTheory.Sheaf.H.equiv₀, CategoryTheory.Sheaf.functorH_map, CategoryTheory.Sheaf.H.map_id_apply; no matching module-sheaf theorem or neighborhood comparison.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H.*injective|neighborhood.*cohomology|cohomology.*neighborhood",
+   "results": "0 hits: ; no matching module-sheaf theorem or neighborhood comparison.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-closed-injective-acyclic",
+   "place": "Affine proof, comparison and acyclicity steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedEtaleNeighborhoodComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.affine_closed_etale_neighborhood_comparison",
+  "statement": "theorem Etale.affine_closed_etale_neighborhood_comparison\n    (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    [IsTorsionSheaf J] (q : ℕ) :\n    ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I)\n      (Y : I → Scheme.{u}) (v : ∀ a, Y a ⟶ X),\n      (∀ a, Etale (v a)) ∧\n      ∃ (H : I ⥤ AddCommGrpCat.{u + 1}) (c : Cocone H),\n        Nonempty (IsColimit c) ∧\n        Nonempty (AddCommGrpCat.of (Sheaf.H\n          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n            ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) ≅ c.pt) ∧\n        ∀ a, Nonempty (H.obj a ≅ AddCommGrpCat.of (Sheaf.H\n          ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n            ((v a)^*[ModuleCat.{u + 1} Λ].obj J)) q))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T030019-L-1269397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T030019-L-1269397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

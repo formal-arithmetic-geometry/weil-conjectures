@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+ "kind": "statement",
+ "title": "ModuleCat sheaves and sheaves of modules over the constant ring sheaf",
+ "statement": "Let Λ : Type (u+1) be a commutative ring and X : Scheme.{u} [def-weil-pbc-scheme-conventions]. Let R be the underlying ring sheaf of the sheafification of the constant CommRingCat-valued presheaf with value Λ [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification]. There exists an equivalence from Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves] to SheafOfModules.{u+1} R [def-weil-sheaf-of-modules-category], together with a natural isomorphism from its composite with SheafOfModules.toSheaf R to sheafCompose of the ModuleCat-to-AddCommGrpCat forgetful functor [def-weil-pbc-abelian-etale-sheaves]. Thus the same additive sheaf is retained; no injectivity or torsion assumption is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/093I",
+  "place": "Modules on Sites, Section 18.42, opening paragraph; underlying-abelian convention in Cohomology on Sites, Lemma 21.12.4 (03FD). Encoding construction written by the worker from these definitions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ring sheaf as the sheafification of the constant CommRingCat-valued presheaf. For a ModuleCat-valued sheaf, a ring-sheaf scalar is locally represented by constants. Act on the restricted section with these constants and glue. Local equality of representatives and separatedness give independence; module identities and restriction compatibility follow locally and hence globally. Lambda-linear morphisms respect the glued action.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the other direction restrict the ring-sheaf action along the constant-presheaf sheafification unit at every object. The underlying additive sheaf and restriction maps are retained, so this gives a ModuleCat-valued sheaf. Ring-linear morphisms become Lambda-linear natural transformations. Restriction after gluing gives the original Lambda-action. Gluing after restriction gives the original ring-sheaf action, since scalars are locally constant representatives and the additive sheaf is separated. These identities give the equivalence unit and counit with triangle identities. Identity additive components form the natural isomorphism of forgetful functors. All carriers are in Type (u+1) and the site belongs to X : Scheme.{u}.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/093I",
+  "place": "Modules on Sites, Section 18.42, opening paragraph; underlying-abelian convention in Cohomology on Sites, Lemma 21.12.4 (03FD). Encoding construction written by the worker from these definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equivalence of ModuleCat valued sheaves with sheaves of modules over a constant ring sheaf",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence between ModuleCat-valued sheaves and modules over the constant ring sheaf",
+   "results": "8 hits including SheafOfModules.forgetToSheafModuleCat and toSheafCompSheafToPresheafIso. The former restricts to R(X)-modules and is not the required constant-ring equivalence; no matching result.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf",
+   "results": "12 hits describe the additive forgetful functor, faithfulness and limit preservation, but no encoding equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ee]quiv|[Ee]quiv.*constant",
+   "results": "25 hits, none an equivalence of these module-sheaf encodings. Direct rg of the project and Mathlib ModuleCat/Sheaf sources also found no matching bridge.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-closed-injective-acyclic",
+   "place": "Affine proof, module-sheaf encoding step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSheafConstantRingEquivalence.lean",
+  "declaration": "AlgebraicGeometry.moduleSheaf_constantRing_equivalence",
+  "statement": "theorem moduleSheaf_constantRing_equivalence\n    (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})\n    : let R : Sheaf X.smallEtaleTopology RingCat.{u + 1} := (sheafCompose X.smallEtaleTopology\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of Λ))\n    ∃ (e : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌\n      SheafOfModules.{u + 1} R),\n      Nonempty (e.functor ⋙ SheafOfModules.toSheaf R ≅\n        sheafCompose X.smallEtaleTopology\n          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T030019-L-1269397",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T030019-L-1269397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

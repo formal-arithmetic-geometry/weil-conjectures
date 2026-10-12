@@ -5878,3 +5878,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:56 L: merged deliver/Q1/Sheaf.Topology.IrreducibleIntegerExtensionVanishing (stage 3; reviewer PASS; after a return; landing 20261012T025541-L-1250432 (interface); modules 3; new nodes 2)
 - 02:57 L: returned deliver/N1/Sheaf.Topology.ConstantSubsheafFiniteFiltration (reviewer RETURN: (reviewer X-cdc3e, head cdc3e3c05) H9 (brief point 5): unused import. In lean/Sheaf/Topology/ConstantSubsheafFiniteFiltr)
 - 02:59 L: merged deliver/Q1/WeilConjectures.AlgebraicGeometry.Curve.Reductions (stage 3; reviewer PASS; first push; landing 20261012T025731-L-1257477 (interface); modules 5; new nodes 4)
+- 03:01 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T030019-L-1269397 (interface); modules 4; new nodes 3)

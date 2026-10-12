@@ -19,44 +19,35 @@
  ],
  "proof": [
   {
-   "text": "Write X = Spec B and Z = Spec B/K. Form the pair henselization B^h, a filtered colimit of etale B-algebras C with unchanged quotient B/K. Its closed fibre is Z.",
+   "text": "Use the etale-neighborhood comparison for the torsion module sheaf J in degree q. Obtain a filtered diagram H, a colimit cocone c, an isomorphism from the required cohomology to c.pt, and object isomorphisms to cohomology of the etale pullbacks of J. No zero-group comparison is assumed.",
    "uses": [
-    "lem-weil-pbc-pair-henselization"
+    "lem-weil-pbc-affine-closed-etale-neighborhood-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Gabber comparison to the torsion pullback of the underlying abelian sheaf on Spec B^h. It identifies the desired cohomology with that on Spec B^h. Inverse-image composition and forgetting coefficients identify the two restrictions.",
+   "text": "For every index a, the map v_a is etale. Its inverse image preserves injective module sheaves. Apply the underlying abelian Sheaf.H acyclicity theorem to this injective on Y_a at positive degree q. Transport its zero-group property along the object isomorphism, showing that H is objectwise zero.",
    "uses": [
-    "prop-weil-pbc-gabber-pair-comparison",
-    "lem-weil-pbc-inverse-image-torsion",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Cohomology on Spec B^h is the filtered colimit of cohomology on Spec C. Etale restriction preserves injective module sheaves, whose underlying abelian sheaves are acyclic, so each positive-degree group is zero. Hence the filtered colimit is zero. The module-sheaf comparison of 03FD uses Cech acyclicity, not injectivity after forgetting coefficients.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
     "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-injective-module-abelian-acyclic"
+    "lem-weil-pbc-injective-module-sheaf-H-acyclic"
    ],
    "elementary": false
+  },
+  {
+   "text": "Mathlib Functor.isZero_iff makes H a zero functor. IsColimit.isZero_pt proves that c.pt is zero. Transport across the comparison isomorphism and apply AddCommGrpCat.subsingleton_of_isZero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-pair-henselization",
-  "prop-weil-pbc-gabber-pair-comparison",
-  "lem-weil-pbc-inverse-image-torsion",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-affine-closed-etale-neighborhood-comparison",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-injective-module-abelian-acyclic"
+  "lem-weil-pbc-injective-module-sheaf-H-acyclic"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tag 0A51",
-  "place": "Proof, affine case n = 0 (steps 3--5 of the parent node); specialized to constant coefficients and the library Sheaf.H encoding"
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Affine case, factored into all-degree neighborhood comparison and positive-degree injective acyclicity; formal colimit combination written by S1 during repair"
  },
  "mathlib_searches": [
   {
@@ -130,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a3709",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T003530-L-597800",
+  "landing": "20261012T030019-L-1269397",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
