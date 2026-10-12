@@ -32,7 +32,7 @@ blueprint's `lem-pc-cech-resolution`).
 - `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion`
   (`cor-pc-projective-noetherian-rf-perfect-base-change`): the derived pullback of `Rf_* ℱ` along
   any `T = Spec B ⟶ S` is perfect and is `Rf_{T*} ℱ_T`.
-- `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isProper`
+- `AlgebraicGeometry.Scheme.Modules.perfect_and_baseChange_cechModuleComplex_of_isProper`
   (`lem-pc-rf-perfect-base-change`): the same for `f` proper of finite presentation and `ℱ` of
   finite presentation and flat over `S`.
 -/

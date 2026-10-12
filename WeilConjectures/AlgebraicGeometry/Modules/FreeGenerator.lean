@@ -107,6 +107,11 @@ lemma presheaf_map_map_apply {U V W : X.Opens} (f : V ⟶ U) (g : W ⟶ V) (e : 
   rw [op_comp, Functor.map_comp]
   rfl
 
+/-- Morphisms of `𝒪_X`-modules commute with restriction of sections. -/
+lemma Hom.app_presheaf_map_apply (φ : M ⟶ N) {V W : X.Opens} (i : W ⟶ V) (s : Γ(M, V)) :
+    φ.app W (M.presheaf.map i.op s) = N.presheaf.map i.op (φ.app V s) :=
+  ConcreteCategory.congr_hom (φ.mapPresheaf.naturality i.op) s
+
 /-- Restricting a section of `M` along an endomorphism of an open does nothing. -/
 lemma presheaf_map_id_apply {U : X.Opens} (f : U ⟶ U) (e : Γ(M, U)) :
     M.presheaf.map f.op e = e := by

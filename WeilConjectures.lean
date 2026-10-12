@@ -33,6 +33,8 @@ public import WeilConjectures.Algebra.Homology.ExactCouple.TruncationCouple
 public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
 public import WeilConjectures.Algebra.Homology.FlatComplex
 public import WeilConjectures.Algebra.Homology.FlatComplexBaseChange
+public import WeilConjectures.Algebra.Homology.HomologyBaseChange
+public import WeilConjectures.Algebra.Homology.HomologyBaseChangeReduced
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
@@ -97,6 +99,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
@@ -139,6 +142,10 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Cohomology.SerreCriterion
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.AdelicDifferentials
+public import WeilConjectures.AlgebraicGeometry.Curve.AdelicH1
+public import WeilConjectures.AlgebraicGeometry.Curve.AdelicLocal
+public import WeilConjectures.AlgebraicGeometry.Curve.AdelicStructureSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineCount
@@ -166,8 +173,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+public import WeilConjectures.AlgebraicGeometry.Curve.ResidueSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
