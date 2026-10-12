@@ -9314,3 +9314,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/X3/Sheaf.AlgebraicGeometry.IdealPowersReesGradedData (stage 3; reviewer PASS; first push; landing 20261012T194156-L-470313 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PicardEvaluationOpenLocus (stage 3; reviewer PASS; first push; landing 20261012T194156-L-470458 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PicardKunnethQcoh (stage 3; reviewer PASS; first push; landing 20261012T194157-L-470577 (interface); batch 20261012T194054; modules 3; new nodes 2)
+- 19:41 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit (stage 3; reviewer PASS; first push; landing 20261012T194157-L-470696 (proof); batch 20261012T194054; modules 1; new nodes 0)

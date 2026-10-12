@@ -38,172 +38,78 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (cohomology of a quasi-compact open as derived functors; restriction to it).** Fix an open $U\\subseteq X$. The open subscheme $U$ is a scheme [def-pc-scheme], and $H^n(U,-)=R^nv_U$ ($n\\ge0$) are the right derived functors of the global sections functor $v_U=\\Gamma(U,-):\\Mod(\\mathcal O_U)\\to\\textit{Ab}$, $\\mathcal A\\mapsto\\mathcal A(U)$ [pqf-def-cohomology], computed by injective resolutions [def-sp-left-exact-additive]; $v_U$ is additive and left exact because kernels in $\\Mod(\\mathcal O_U)$ are computed sectionwise [def-weil-sheaf-of-modules-category], and $\\Mod(\\mathcal O_U)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives] (applied to the scheme $U$). By [lem-weil-pbc-right-derived-universal-delta-functor] the $R^nv_U$ form a $\\delta$-functor: every short exact sequence $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ of $\\mathcal O_U$-modules has a long exact sequence $\\cdots\\to R^nv_U(\\mathcal B)\\to R^nv_U(\\mathcal C)\\xrightarrow{\\delta^n}R^{n+1}v_U(\\mathcal A)\\to R^{n+1}v_U(\\mathcal B)\\to\\cdots$ whose connecting maps commute with the maps induced by a morphism of short exact sequences; and $R^0v_U\\cong v_U$ naturally. By [lem-weil-pbc-module-open-restriction-injectives] (1), (2) the restriction functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$, $\\mathcal G\\mapsto\\mathcal G|_U$, is additive and exact and carries injective $\\mathcal O_X$-modules to injective $\\mathcal O_U$-modules, and by [lem-weil-pbc-module-restriction-open-immersion-colimits] (1) it carries a colimit cocone in $\\Mod(\\mathcal O_X)$ to a colimit cocone in $\\Mod(\\mathcal O_U)$. Consequently, writing $H^n(U,\\mathcal G)=H^n(U,\\mathcal G|_U)$ and $H^n(U,h)$ as in the statement: (i) every short exact sequence $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ in $\\Mod(\\mathcal O_X)$ has a long exact sequence $\\cdots\\to H^n(U,\\mathcal B)\\to H^n(U,\\mathcal C)\\xrightarrow{\\delta^n}H^{n+1}(U,\\mathcal A)\\to H^{n+1}(U,\\mathcal B)\\to\\cdots$, and for a morphism $(a,b,c)$ of short exact sequences in $\\Mod(\\mathcal O_X)$ one has $H^{n+1}(U,a)\\circ\\delta^n=\\delta'^n\\circ H^n(U,c)$ (apply the above to the restricted sequences and the restricted morphism); (ii) if $\\mathcal I$ is an injective $\\mathcal O_X$-module then $H^n(U,\\mathcal I)=0$ for $n>0$ [lem-weil-pbc-derived-functor-injective-vanishing], since $\\mathcal I|_U$ is injective; (iii) $H^0(U,\\mathcal G)\\cong(\\mathcal G|_U)(U)=\\mathcal G(U)$, by isomorphisms $\\theta_{\\mathcal G}$ natural in $\\mathcal G\\in\\Mod(\\mathcal O_X)$, so that $\\theta_{\\mathcal G'}\\circ H^0(U,h)=h_U\\circ\\theta_{\\mathcal G}$ for $h:\\mathcal G\\to\\mathcal G'$. For $q\\ge0$ let $P(q)$ be the assertion: for every quasi-compact open $U\\subseteq X$ and every directed system of $\\mathcal O_X$-modules with a colimit in $\\Mod(\\mathcal O_X)$, clauses (a) and (b) of the statement hold in degree $q$. As the source stresses, the induction is on $P(q)$, i.e. for all quasi-compact opens and all systems at once.",
+   "text": "Convert hBasis by IsTopologicalBasis.exists_subset_of_mem_open and obtain compact binary intersections by IsCompact.inter_of_isOpen. Apply abelianSections_preservesDirectedColimits to the abelian evaluation functor E. The exact, colimit-preserving module forgetful functor T has T composed with E definitionally equal to openModuleSections, so sections of modules preserve I-colimits as well. The preservation instances for T are the proved upstream sheaf-module instances.",
    "uses": [
-    "def-pc-scheme",
-    "pqf-def-cohomology",
-    "def-sp-left-exact-additive",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-module-open-restriction-injectives",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-derived-functor-injective-vanishing"
+    "lem-sc-topological-abelian-sections-filtered-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Section 01EO (cohomology of O_X-modules as derived functors) and Lemma 01E1 (lemma-cohomology-of-open, line 495), as used in the proof of Lemma 01FF (lines 3211-3310)"
+    "place": "Tag 01FF, lemma-quasi-separated-cohomology-colimit; stage-3 route through existing abelian-sheaf and derived-composite tools"
    }
   },
   {
-   "text": "**Step 2 (finite coverings of quasi-compact opens: Topology, Lemma 0069 (3), whose proof the source omits).** (i) A finite nonempty intersection $W_1\\cap\\cdots\\cap W_r$ of quasi-compact opens of $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]: by induction on $r$, using hypothesis (2) for $(W_1\\cap\\cdots\\cap W_{r-1})\\cap W_r$. (ii) Let $U\\subseteq X$ be a quasi-compact open and $U=\\bigcup_aV_a$ an open covering. For $x\\in U$ choose $a$ with $x\\in V_a$; since the quasi-compact opens form a basis (hypothesis (1)), there is a quasi-compact open $W_x$ with $x\\in W_x\\subseteq V_a$. The $W_x$ ($x\\in U$) cover $U$, so finitely many $W_{x_1},\\ldots,W_{x_m}$ do, since $U$ is quasi-compact. Thus $U=\\bigcup_{j=1}^mU_j$, $U_j=W_{x_j}$, is a finite covering of $U$ by quasi-compact opens refining $(V_a)$, and by (i) every $U_{j_0\\ldots j_p}=U_{j_0}\\cap\\cdots\\cap U_{j_p}$ is quasi-compact, in particular every $U_j\\cap U_{j'}$. So $U$ has a cofinal system of open coverings $U=\\bigcup_{j\\in J}U_j$ with $J$ finite and all $U_j$, $U_j\\cap U_{j'}$ (indeed all $U_{j_0\\ldots j_p}$) quasi-compact. (If $U=\\emptyset$ the empty covering, $m=0$, does it.)",
+   "text": "Induct on n to prove that the right derived functor of openModuleSections in degree n preserves all I-colimits. At zero transport section preservation along rightDerivedZeroIsoSelf. At the successor apply preservesColimitsOfShape_rightDerived_succ in the Grothendieck module-sheaf category. Its proof supplies the functorial injective diagram, exact colimit short sequence and connecting-map ladder. It remains only to verify that colimits of injective module diagrams are acyclic for open sections.",
    "uses": [
-    "def-weil-pbc-quasi-compact-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma 0069 (lemma-topology-quasi-separated-scheme, line 5471), part (3); proof 'Omitted' there, written out here; cited in the proof of 01FF, line 3215"
-   }
-  },
-  {
-   "text": "**Step 3 (degree $0$: $P(0)$, and sections over quasi-compact opens).** Let $(\\mathcal G_i,\\gamma_{i'i})$ be a directed system of $\\mathcal O_X$-modules over $I$ with colimit $(\\mathcal G,(g_i)_i)$ in $\\Mod(\\mathcal O_X)$. By [lem-weil-pbc-module-directed-colimit-underlying-sets] the underlying sheaf of sets of $\\mathcal G$, with the maps underlying the $g_i$, is a colimit of the underlying sheaves of sets of the $\\mathcal G_i$. Let $V\\subseteq X$ be a quasi-compact open. By Step 2, $V$ has a cofinal system of finite open coverings with quasi-compact pairwise intersections, so [lem-weil-pbc-sheaves-directed-colimit-sections] (1) and (2) apply to $V$: $(\\ast)$ every $t\\in\\mathcal G(V)$ is $g_{i,V}(s)$ for some $i$ and $s\\in\\mathcal G_i(V)$; and if $s\\in\\mathcal G_i(V)$ has $g_{i,V}(s)=0=g_{i,V}(0)$ then (clause (1) with $s'=0$, $i'=i$) $\\gamma_{i''i,V}(s)=\\gamma_{i''i,V}(0)=0$ for some $i''\\ge i$. Transporting along the natural isomorphisms $\\theta$ of Step 1 (iii) ($\\theta\\circ H^0(V,g_i)=g_{i,V}\\circ\\theta$, $\\theta\\circ H^0(V,\\gamma_{i''i})=\\gamma_{i''i,V}\\circ\\theta$, $\\theta$ bijective and additive) gives (a) and (b) for $H^0(V,-)$. Hence $P(0)$. Statement $(\\ast)$ and its injectivity companion, for sections over arbitrary quasi-compact opens $V$, are used again in Step 7.",
-   "uses": [
-    "lem-weil-pbc-module-directed-colimit-underlying-sets",
-    "lem-weil-pbc-sheaves-directed-colimit-sections"
+    "lem-weil-pbc-right-derived-filtered-colimit-successor",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3214-3217: 'The result is true for q = 0 ... by Sheaves, Lemma 009F (combined with Topology, Lemma 0069)'"
+    "place": "Tag 01FF, lemma-quasi-separated-cohomology-colimit; stage-3 route through existing abelian-sheaf and derived-composite tools"
    }
   },
   {
-   "text": "**Step 4 (a system of injectives).** Let $(\\mathcal F_i,\\varphi_{i'i})$ and $(\\mathcal F,(c_i))$ be as in the statement. By [lem-weil-pbc-scheme-modules-functorial-injective-embeddings] there are a functor $J$ and a natural transformation $j:\\mathrm{id}\\to J$ on $\\Mod(\\mathcal O_X)$ with every $j_{\\mathcal A}$ a monomorphism into an injective object [def-sp-injective-resolutions]. Put $\\mathcal I_i=J(\\mathcal F_i)$, $\\psi_{i'i}=J(\\varphi_{i'i})$ and $\\alpha_i=j_{\\mathcal F_i}:\\mathcal F_i\\to\\mathcal I_i$; then $(\\mathcal I_i,\\psi_{i'i})$ is a system over $I$ of injective $\\mathcal O_X$-modules and $\\psi_{i'i}\\alpha_i=\\alpha_{i'}\\varphi_{i'i}$. In the abelian category $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] let $\\pi_i:\\mathcal I_i\\to\\mathcal Q_i$ be a cokernel of $\\alpha_i$. For $i\\le i'$, $\\pi_{i'}\\psi_{i'i}\\alpha_i=\\pi_{i'}\\alpha_{i'}\\varphi_{i'i}=0$, so there is a unique $\\chi_{i'i}:\\mathcal Q_i\\to\\mathcal Q_{i'}$ with $\\chi_{i'i}\\pi_i=\\pi_{i'}\\psi_{i'i}$; uniqueness (as $\\pi_i$ is an epimorphism) gives $\\chi_{ii}=\\mathrm{id}$ and $\\chi_{i''i'}\\chi_{i'i}=\\chi_{i''i}$, so $(\\mathcal Q_i,\\chi_{i'i})$ is a system over $I$. Each $0\\to\\mathcal F_i\\xrightarrow{\\alpha_i}\\mathcal I_i\\xrightarrow{\\pi_i}\\mathcal Q_i\\to0$ is short exact [def-weil-pbc-exact-sequence] ($\\alpha_i$ a monomorphism, hence a kernel of its cokernel in an abelian category), and for $i\\le i'$ the triple $(\\varphi_{i'i},\\psi_{i'i},\\chi_{i'i})$ is a morphism of short exact sequences.",
+   "text": "For a diagram J of injective modules, apply topological_filtered_cohomology to J composed with T in degree n+1. It gives preservation of the canonical colimit by the abelian object-cohomology functor C. Since T preserves the module colimit, C(T(colimit J)) is the colimit of C(T(J_i)). Each latter object is zero by injective_module_abelian_acyclic; IsColimit.isZero_pt therefore proves that C(T(colimit J)) is zero.",
    "uses": [
-    "lem-weil-pbc-scheme-modules-functorial-injective-embeddings",
-    "def-sp-injective-resolutions",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-exact-sequence"
+    "lem-sc-topological-filtered-cohomology",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3222-3240 (Injectives, Lemma 01DI; the short exact sequences 0 -> F_i -> I_i -> Q_i -> 0)"
+    "place": "Tag 01FF, lemma-quasi-separated-cohomology-colimit; stage-3 route through existing abelian-sheaf and derived-composite tools"
    }
   },
   {
-   "text": "**Step 5 (the colimit sequence).** By [lem-weil-pbc-scheme-modules-coproduct-finite-subsums] (1) the systems $(\\mathcal I_i,\\psi_{i'i})$ and $(\\mathcal Q_i,\\chi_{i'i})$ have colimits $(\\mathcal I,(c^{\\mathcal I}_i))$ and $(\\mathcal Q,(c^{\\mathcal Q}_i))$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-category-colimit]. Since $(c^{\\mathcal I}_i\\alpha_i)_i$ is a cocone on $(\\mathcal F_i)$ ($c^{\\mathcal I}_{i'}\\alpha_{i'}\\varphi_{i'i}=c^{\\mathcal I}_{i'}\\psi_{i'i}\\alpha_i=c^{\\mathcal I}_i\\alpha_i$) and $(c^{\\mathcal Q}_i\\pi_i)_i$ one on $(\\mathcal I_i)$, there are unique $\\alpha:\\mathcal F\\to\\mathcal I$ and $\\pi:\\mathcal I\\to\\mathcal Q$ with $\\alpha c_i=c^{\\mathcal I}_i\\alpha_i$ and $\\pi c^{\\mathcal I}_i=c^{\\mathcal Q}_i\\pi_i$; then $\\pi\\alpha c_i=c^{\\mathcal Q}_i\\pi_i\\alpha_i=0$ for all $i$, so $\\pi\\alpha=0$ by uniqueness. Thus for every $i$ the triple $(c_i,c^{\\mathcal I}_i,c^{\\mathcal Q}_i)$ is a morphism from $0\\to\\mathcal F_i\\to\\mathcal I_i\\to\\mathcal Q_i\\to0$ to the complex $0\\to\\mathcal F\\xrightarrow{\\alpha}\\mathcal I\\xrightarrow{\\pi}\\mathcal Q\\to0$.",
+   "text": "Use nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived to transport this zero object to derived abelian sections of T(colimit J). The same comparison and injective_module_abelian_acyclic show that T sends every injective module to an E-acyclic abelian sheaf. Apply exists_rightDerived_exact_comp_iso to exact T and left exact E. Its object comparison identifies module-derived open sections with derived abelian sections after T. Transport zero along it, completing the successor premise and the induction.",
    "uses": [
-    "lem-weil-pbc-scheme-modules-coproduct-finite-subsums",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3241-3246"
-   }
-  },
-  {
-   "text": "**Step 6 ($0\\to\\mathcal F\\to\\mathcal I\\to\\mathcal Q\\to0$ is exact; checked on stalks).** Let $x\\in X$, with stalks and stalk maps as in [def-weil-pbc-module-stalk]. By [lem-weil-pbc-module-stalk-filtered-colimit] (the directed set $I$ viewed as a filtered category), $(\\mathcal F_x,((c_i)_x)_i)$ is a colimit of $(\\mathcal F_{i,x})$ in $\\mathcal O_{X,x}$-modules, and likewise for $\\mathcal I_x$, $\\mathcal Q_x$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] (with $R=\\mathcal O_{X,x}$) these cocones satisfy hypotheses (1) and (2) of [lem-weil-pbc-filtered-colimit-modules-criterion], which (with $R=\\mathbf Z$) shows that they are also colimits of the underlying diagrams of abelian groups. By [lem-weil-pbc-module-stalk-exact] (5), each $0\\to\\mathcal F_{i,x}\\to\\mathcal I_{i,x}\\to\\mathcal Q_{i,x}\\to0$ is exact (exactness at each of its three inner places is exactness of $0\\to\\mathcal F_i\\to\\mathcal I_i$, $\\mathcal F_i\\to\\mathcal I_i\\to\\mathcal Q_i$, $\\mathcal I_i\\to\\mathcal Q_i\\to0$, true by Step 4), the transition maps $(\\varphi_{i'i})_x,(\\psi_{i'i})_x,(\\chi_{i'i})_x$ make these a diagram over $I$ of exact sequences of abelian groups (taking stalks is compatible with composition), and by Step 5 the maps of the colimit sequence are $\\alpha_x,\\pi_x$ ($\\alpha_x(c_i)_x=(c^{\\mathcal I}_i)_x(\\alpha_i)_x$, $\\pi_x(c^{\\mathcal I}_i)_x=(c^{\\mathcal Q}_i)_x(\\pi_i)_x$; the colimit of the constant diagram $0$ is $0$). By [lem-weil-pbc-filtered-colimit-abelian-groups-exact] (Stacks 00DB), $0\\to\\mathcal F_x\\xrightarrow{\\alpha_x}\\mathcal I_x\\xrightarrow{\\pi_x}\\mathcal Q_x\\to0$ is exact. As this holds for every $x$, [lem-weil-pbc-module-stalk-exact] (5) shows that $0\\to\\mathcal F\\xrightarrow{\\alpha}\\mathcal I\\xrightarrow{\\pi}\\mathcal Q\\to0$ is a short exact sequence of $\\mathcal O_X$-modules.",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-module-stalk-filtered-colimit",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-ext-derived-composite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3247-3255: 'We may check this on stalks. By Sheaves, Sections 009D and 009E taking stalks commutes with colimits. Since a directed colimit of short exact sequences of abelian groups is short exact (Algebra, Lemma 00DB) we deduce the result.'"
+    "place": "Tag 01FF, lemma-quasi-separated-cohomology-colimit; stage-3 route through existing abelian-sheaf and derived-composite tools"
    }
   },
   {
-   "text": "**Step 7 (the claim: $H^q(V,\\mathcal I)=0$ for every quasi-compact open $V$ and $q\\ge1$).** Apply [lem-weil-pbc-module-cech-vanishing-basis] to the $\\mathcal O_X$-module $\\mathcal I=\\varinjlim\\mathcal I_i$, with $\\mathcal B$ the set of quasi-compact opens of $X$ (a basis by hypothesis (1)) and $\\mathrm{Cov}$ the set of coverings $\\mathcal U:U=\\bigcup_{j\\in J}U_j$ of the Zariski site [def-sc-zariski-site] with $J$ finite and $U$ and all $U_j$ quasi-compact opens. Hypothesis (1) of that node holds by Step 2 (i), hypothesis (2) by Step 2 (ii). For (3), let $\\mathcal U\\in\\mathrm{Cov}$ and $p\\ge0$. The Cech term [def-weil-pbc-site-cech-complex] $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal G)=\\prod_{t\\in J^{p+1}}\\mathcal G(U_t)$ is a finite product, every $U_t$ being quasi-compact (Step 2 (i)). The maps $\\check{\\mathcal C}^p(\\mathcal U,c^{\\mathcal I}_i)$ (componentwise $c^{\\mathcal I}_{i,U_t}$) form a cocone on the diagram $i\\mapsto\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_i)$ of abelian groups and commute with the Cech differentials, morphisms of sheaves commuting with restrictions. This cocone satisfies the hypotheses of [lem-weil-pbc-filtered-colimit-modules-criterion] (with $R=\\mathbf Z$): (1) given $z=(z_t)_t\\in\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)$, Step 3 $(\\ast)$ applied to the system $(\\mathcal I_i)$ and the quasi-compact opens $U_t$ gives $i_t$ and $y_t\\in\\mathcal I_{i_t}(U_t)$ with $z_t=c^{\\mathcal I}_{i_t}(y_t)$; as $J^{p+1}$ is finite and $I$ directed (and nonempty), pick $i\\ge$ all $i_t$, and then $z$ is the image of $(\\psi_{ii_t}(y_t))_t$; (2) if $y\\in\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_i)$ maps to $0$, each $c^{\\mathcal I}_i(y_t)=0$, so by Step 3 some $i_t\\ge i$ has $\\psi_{i_ti}(y_t)=0$, and for $i'\\ge$ all $i_t$ the image of $y$ in $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_{i'})$ is $0$. Hence $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)$ is the colimit of the $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_i)$ in abelian groups, compatibly with the differentials. Each $\\mathcal I_i$ is an injective $\\mathcal O_X$-module, so by [lem-weil-pbc-module-injective-open-cover-cech-acyclic] (Stacks 01EP) $\\check H^p(\\mathcal U,\\mathcal I_i)=0$ for $p>0$, i.e. $\\check{\\mathcal C}^{p-1}(\\mathcal U,\\mathcal I_i)\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_i)\\to\\check{\\mathcal C}^{p+1}(\\mathcal U,\\mathcal I_i)$ is exact for $p\\ge1$; these sequences form a diagram over $I$ (the $\\psi_{i'i}$ induce maps of Cech complexes), and by [lem-weil-pbc-filtered-colimit-abelian-groups-exact] (Stacks 00DB) the colimit sequence $\\check{\\mathcal C}^{p-1}(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^{p+1}(\\mathcal U,\\mathcal I)$ is exact, i.e. $\\check H^p(\\mathcal U,\\mathcal I)=0$ for $p\\ge1$. So [lem-weil-pbc-module-cech-vanishing-basis] gives $H^q(V,\\mathcal I|_V)=0$ for every quasi-compact open $V$ and every $q\\ge1$.",
-   "uses": [
-    "lem-weil-pbc-module-cech-vanishing-basis",
-    "def-sc-zariski-site",
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3255-3257 (the claim) and 3279-3303 (its proof by Lemmas 01EW, 01EP and Algebra 00DB)"
-   }
-  },
-  {
-   "text": "**Step 8 (the comparison diagram).** Fix a quasi-compact open $U$ and $n\\ge0$, and write $H^m(h)$ for $H^m(U,h)$. By Step 1 (i) applied to the short exact sequences of Steps 4 and 6, the rows $H^n(U,\\mathcal I_i)\\xrightarrow{H^n(\\pi_i)}H^n(U,\\mathcal Q_i)\\xrightarrow{\\delta_i}H^{n+1}(U,\\mathcal F_i)\\to H^{n+1}(U,\\mathcal I_i)$ and $H^n(U,\\mathcal I)\\xrightarrow{H^n(\\pi)}H^n(U,\\mathcal Q)\\xrightarrow{\\delta}H^{n+1}(U,\\mathcal F)\\to H^{n+1}(U,\\mathcal I)$ are exact; $H^{n+1}(U,\\mathcal I_i)=0$ by Step 1 (ii) ($\\mathcal I_i$ injective) and $H^{n+1}(U,\\mathcal I)=0$ by Step 7, so $\\delta_i$ and $\\delta$ are surjective and $\\ker\\delta=\\operatorname{im}H^n(\\pi)$, $\\ker\\delta_i=\\operatorname{im}H^n(\\pi_i)$. By the naturality in Step 1 (i), applied to the morphisms of short exact sequences $(c_i,c^{\\mathcal I}_i,c^{\\mathcal Q}_i)$ (Step 5) and $(\\varphi_{i'i},\\psi_{i'i},\\chi_{i'i})$ (Step 4): $H^{n+1}(c_i)\\circ\\delta_i=\\delta\\circ H^n(c^{\\mathcal Q}_i)$ and $H^{n+1}(\\varphi_{i'i})\\circ\\delta_i=\\delta_{i'}\\circ H^n(\\chi_{i'i})$; functoriality of $H^n(U,-)$ gives $H^n(\\pi)H^n(c^{\\mathcal I}_i)=H^n(c^{\\mathcal Q}_i)H^n(\\pi_i)$ and $H^n(\\chi_{i'i})H^n(\\pi_i)=H^n(\\pi_{i'})H^n(\\psi_{i'i})$. (This is the diagram of the source, with its two zeros in the right column.)",
-   "uses": [
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-derived-functor-injective-vanishing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3257-3274 (the diagram, the zero at the upper right from injectivity of the I_i, the zero at the lower right from the claim)"
-   }
-  },
-  {
-   "text": "**Step 9 ($P(n)\\Rightarrow P(n+1)$: the snake-lemma chase written out).** Assume $P(n)$; it applies to the systems $(\\mathcal I_i,\\psi_{i'i})$ and $(\\mathcal Q_i,\\chi_{i'i})$ with colimits $\\mathcal I$, $\\mathcal Q$, on the same $U$. Notation of Step 8. (a) Let $x\\in H^{n+1}(U,\\mathcal F)$. As $\\delta$ is surjective, $x=\\delta(y)$ with $y\\in H^n(U,\\mathcal Q)$; by $P(n)$(a) for $(\\mathcal Q_i)$, $y=H^n(c^{\\mathcal Q}_i)(y_i)$ for some $i$, $y_i\\in H^n(U,\\mathcal Q_i)$; then $x=\\delta H^n(c^{\\mathcal Q}_i)(y_i)=H^{n+1}(c_i)(\\delta_i(y_i))$. (b) Let $y\\in H^{n+1}(U,\\mathcal F_i)$ with $H^{n+1}(c_i)(y)=0$. As $\\delta_i$ is surjective, $y=\\delta_i(z)$ with $z\\in H^n(U,\\mathcal Q_i)$. Then $\\delta(H^n(c^{\\mathcal Q}_i)(z))=H^{n+1}(c_i)(y)=0$, so $H^n(c^{\\mathcal Q}_i)(z)=H^n(\\pi)(w)$ for some $w\\in H^n(U,\\mathcal I)$. By $P(n)$(a) for $(\\mathcal I_i)$, $w=H^n(c^{\\mathcal I}_k)(w_k)$ for some $k$ and $w_k\\in H^n(U,\\mathcal I_k)$; choose $l\\ge i,k$ and put $w_l=H^n(\\psi_{lk})(w_k)$, so that $w=H^n(c^{\\mathcal I}_l)(w_l)$, and $z_l=H^n(\\chi_{li})(z)$. Then $u=z_l-H^n(\\pi_l)(w_l)\\in H^n(U,\\mathcal Q_l)$ satisfies $H^n(c^{\\mathcal Q}_l)(u)=H^n(c^{\\mathcal Q}_i)(z)-H^n(\\pi)H^n(c^{\\mathcal I}_l)(w_l)=H^n(\\pi)(w)-H^n(\\pi)(w)=0$. By $P(n)$(b) for $(\\mathcal Q_i)$ there is $m\\ge l$ with $H^n(\\chi_{ml})(u)=0$, i.e. $H^n(\\chi_{mi})(z)=H^n(\\pi_m)\\big(H^n(\\psi_{ml})(w_l)\\big)$. Hence $H^{n+1}(\\varphi_{mi})(y)=H^{n+1}(\\varphi_{mi})\\delta_i(z)=\\delta_mH^n(\\chi_{mi})(z)=\\delta_mH^n(\\pi_m)(\\ldots)=0$, as $\\delta_m\\circ H^n(\\pi_m)=0$ by exactness. So (a) and (b) hold in degree $n+1$ for every quasi-compact $U$ and every system: $P(n+1)$.",
+   "text": "Apply IsColimitOfPreserves to the given cocone c in degree q. Concrete.isColimit_exists_rep gives the first assertion. For a stage element y mapping to zero, compare its image with that of zero at the same stage and use Concrete.isColimit_rep_eq_iff_exists; the resulting two transition arrows have target j, and additivity sends the second zero to zero. In a preorder the first arrow is equal by subsingleton elimination to homOfLE of its underlying inequality, giving the second assertion exactly. These are the concrete filtered-colimit APIs for abelian groups; no antisymmetry or positive-degree restriction is used.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 01FF, lines 3273-3277: 'The top row is exact by an application of Algebra, Lemma 00DB. Hence by the snake lemma we deduce the result for q = q_0 + 1.' (the chase replaces the colimit of the top rows and the snake lemma, with the same content)"
-   }
-  },
-  {
-   "text": "**Step 10 (conclusion).** By Step 3, $P(0)$ holds, and by Step 9, $P(n)$ implies $P(n+1)$; by induction $P(q)$ holds for all $q\\ge0$, which is (a) and (b) for every quasi-compact open $U$. By the elementwise description of the directed colimit of abelian groups [def-weil-directed-colimit-abelian-groups] (every element is represented at some stage; an element represented at stage $i$ is $0$ if and only if it becomes $0$ at some later stage), (a) says that the canonical map $\\varinjlim_iH^q(U,\\mathcal F_i)\\to H^q(U,\\mathcal F)$ is surjective and (b) that it is injective, so it is bijective.",
-   "uses": [
-    "def-weil-directed-colimit-abelian-groups"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01FF, statement (lines 3194-3209) and the induction in its proof (lines 3214-3219)"
+    "place": "Tag 01FF, lemma-quasi-separated-cohomology-colimit; stage-3 route through existing abelian-sheaf and derived-composite tools"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "pqf-def-cohomology",
-  "def-sp-left-exact-additive",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-module-open-restriction-injectives",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-derived-functor-injective-vanishing",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-module-directed-colimit-underlying-sets",
-  "lem-weil-pbc-sheaves-directed-colimit-sections",
-  "lem-weil-pbc-scheme-modules-functorial-injective-embeddings",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-scheme-modules-coproduct-finite-subsums",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-module-stalk-filtered-colimit",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-criterion",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-module-cech-vanishing-basis",
-  "def-sc-zariski-site",
-  "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "def-weil-directed-colimit-abelian-groups"
+  "lem-sc-topological-abelian-sections-filtered-colimit",
+  "lem-weil-pbc-right-derived-filtered-colimit-successor",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-topological-filtered-cohomology",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sc-ext-derived-composite"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 01FF (label lemma-quasi-separated-cohomology-colimit, line 3194) and its proof (lines 3211-3310), with Topology 0069 (3) (proof omitted there, written out in step 2), Sheaves 009F, Injectives 01DI, Algebra 00DB, Cohomology 01EP and 01EW"
+  "place": "Tag 01FF (lemma-quasi-separated-cohomology-colimit), degree-zero and successor ladder; acyclicity deduced from the existing abelian-sheaf theorem and the module/abelian acyclic comparison (03FD and 015M). Source read online at https://stacks.math.columbia.edu/tag/01FF because the literature files are not materialized in this checkout."
  },
  "mathlib_searches": [
   {
@@ -283,5 +189,15 @@
   "group": "U1",
   "result": "fix",
   "note": "X Scheme; (1) hBasis IsTopologicalBasis of compact opens; (2) hInter replaced by Mathlib [QuasiSeparatedSpace X] (same predicate); directed I Preorder/Nonempty/IsDirected; D functor to SheafOfModules (moduleRings X); c Cocone + IsColimit; U compact open; q : N; H^q(U,-) = landed RingedSpace.openModuleCohomology (stmt_dep added, landed, reviewed); (a) surjectivity elementwise tied to c.ι.app i; (b) kernel vanishing tied to D.map (homOfLE hij); proof unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T194157-L-470696",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

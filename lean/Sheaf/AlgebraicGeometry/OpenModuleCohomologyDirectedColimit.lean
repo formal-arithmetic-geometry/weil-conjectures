@@ -10,19 +10,15 @@ public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Topology.Bases
 public import Mathlib.Topology.QuasiSeparated
 public import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
-import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings
-import Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.Paper.PQFCohomology
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import Sheaf.Topology.SheavesDirectedColimitSections
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
+import Sheaf.Topology.AbelianSectionsFilteredColimit
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+import Sheaf.Topology.TopologicalFilteredCohomology
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
+import Sheaf.CategoryTheory.RightDerivedExactComposite
 
 /-! # Directed colimits and module cohomology on quasi-compact opens
 
@@ -46,40 +42,24 @@ map from the directed colimit of cohomology groups is bijective.
 Source: Stacks Project, Cohomology, Lemma 20.19.1, Tag 01FF
 (blueprint: lem-weil-pbc-qs-scheme-cohomology-directed-colimit).
 
-Proof (the node's ten steps):
-1. Use pqf-def-cohomology and the right-derived universal delta-functor lemma for the
-long exact sequence. Module open restriction is exact, preserves injectives and colimits
-(lem-weil-pbc-module-open-restriction-injectives and
-lem-weil-pbc-module-restriction-open-immersion-colimits). Thus degree zero is sections,
-and injective modules have no positive cohomology on opens.
-2. Binary compact intersections give all finite nonempty compact intersections. The basis
-and quasi-compactness give finite compact refinements of open covers, including the empty
-cover for the empty open (Stacks 0069).
-3. Apply lem-weil-pbc-module-directed-colimit-underlying-sets and
-lem-weil-pbc-sheaves-directed-colimit-sections to obtain both elementwise assertions for
-sections, hence in degree zero by the natural degree-zero identification.
-4. Use lem-weil-pbc-scheme-modules-functorial-injective-embeddings to embed the system
-functorially into injectives. Cokernels give a system of short exact sequences.
-5. Take colimits of the injective and cokernel systems using
-lem-weil-pbc-scheme-modules-coproduct-finite-subsums. Universal properties produce the
-maps from the original colimit and between these two colimits, with composite zero.
-6. Check exactness of this sequence on stalks using lem-weil-pbc-module-stalk-exact,
-lem-weil-pbc-module-stalk-filtered-colimit, the filtered-colimit elementwise criterion,
-and lem-weil-pbc-filtered-colimit-abelian-groups-exact.
-7. The colimit of the injective system is acyclic on every quasi-compact open: finite
-Cech terms commute with the colimit by step 3 and directedness; injective Cech complexes
-are acyclic by lem-weil-pbc-module-injective-open-cover-cech-acyclic. Exactness of filtered
-colimits preserves this acyclicity, and lem-weil-pbc-module-cech-vanishing-basis applies.
-8. Compare the long exact sequences of the stage and colimit short exact sequences.
-Naturality gives the comparison squares and step 7 gives the terminal zeros.
-9. Assuming both assertions in degree n, lift a degree n+1 class through the surjective
-connecting map and then from a cokernel stage, proving surjectivity. For a stage class
-with zero image, lift through its connecting map; its colimit lift comes from the
-injective colimit. Represent that element at a common stage, subtract its cokernel image,
-and kill the resulting zero-image degree n class at a later stage by the induction
-hypothesis. Exactness then kills the original degree n+1 class at that stage.
-10. Induct from step 3 using step 9. The elementwise description of directed colimits of
-abelian groups identifies these assertions with bijectivity of the canonical map. -/
+Proof:
+1. Translate the compact-open basis and quasi-separatedness into the hypotheses of
+   abelianSections_preservesDirectedColimits. The forgetful functor from module
+   sheaves to abelian sheaves preserves colimits, so open module sections do too.
+2. Induct on the right-derived degree. At zero use rightDerivedZeroIsoSelf. The
+   existing preservesColimitsOfShape_rightDerived_succ packages the injective
+   embedding, exact colimit sequence, and natural connecting-map ladder.
+3. For its acyclicity premise, apply topological_filtered_cohomology to the underlying
+   abelian sheaves of an injective module diagram. Each stage has zero positive
+   object cohomology by injective_module_abelian_acyclic, so its cohomology colimit is
+   zero. The forgetful functor preserves the original module colimit cocone.
+4. Identify object cohomology with derived abelian sections. The exact-composite
+   comparison exists_rightDerived_exact_comp_iso identifies these with module-derived
+   sections: the same injective-module vanishing verifies its acyclicity premise.
+5. Preservation now makes the image of the given cocone a colimit in abelian groups.
+   The concrete filtered-colimit API gives stage representatives and eventual equality
+   with zero. A transition arrow in the preorder is homOfLE of its underlying inequality.
+The empty open, degree zero, and non-antisymmetric directed preorders are included. -/
 theorem openModuleCohomology_directedColimit (X : Scheme.{u})
     (hBasis : IsTopologicalBasis {V : Set X | IsOpen V ∧ IsCompact V})
     [QuasiSeparatedSpace X]
@@ -95,6 +75,85 @@ theorem openModuleCohomology_directedColimit (X : Scheme.{u})
       ∃ (j : I) (hij : i ≤ j),
         ((RingedSpace.openModuleCohomology X.toRingedSpace q U).map
           (D.map (homOfLE hij))).hom y = 0) := by
-  sorry
+  have hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V,
+      ∃ W : Set X, IsOpen W ∧ IsCompact W ∧ x ∈ W ∧ W ⊆ V := by
+    intro V hV x hx
+    obtain ⟨W, hW, hxW, hWV⟩ := hBasis.exists_subset_of_mem_open hx hV
+    exact ⟨W, hW.1, hW.2, hxW, hWV⟩
+  have hint : ∀ (V W : Set X), IsOpen V → IsOpen W → IsCompact V →
+      IsCompact W → IsCompact (V ∩ W) := by
+    intro V W hV hW hVc hWc
+    exact hVc.inter_of_isOpen hWc hV hW
+  let Γ := RingedSpace.openModuleSections X.toRingedSpace U
+  let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
+  let E := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+    (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (Opposite.op U)
+  have : PreservesColimitsOfShape I E :=
+    TopCat.abelianSections_preservesDirectedColimits X hbas hint I U hU
+  have : PreservesColimitsOfShape I Γ :=
+    inferInstanceAs (PreservesColimitsOfShape I (T ⋙ E))
+  have : PreservesFiniteLimits Γ :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.forget (moduleRings X.toRingedSpace) ⋙
+        PresheafOfModules.toPresheaf (moduleRings X.toRingedSpace).obj ⋙
+          (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (Opposite.op U)))
+  have : IsGrothendieckAbelian.{u}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.isGrothendieckAbelian _
+  have hderived (n : ℕ) : PreservesColimitsOfShape I (Γ.rightDerived n) := by
+    induction n with
+    | zero =>
+        exact preservesColimitsOfShape_of_natIso Γ.rightDerivedZeroIsoSelf.symm
+    | succ n hn =>
+        have := hn
+        apply Γ.preservesColimitsOfShape_rightDerived_succ I n
+        intro J hJ
+        let C := Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) (n + 1) ⋙
+          (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (Opposite.op U)
+        have : IsIso (colimit.post (J ⋙ T) C) :=
+          TopCat.topological_filtered_cohomology X hbas hint I (J ⋙ T) (n + 1) U hU
+        have : PreservesColimit (J ⋙ T) C := preservesColimit_of_isIso_post C (J ⋙ T)
+        have hz : IsZero (C.obj (T.obj (colimit J))) := by
+          apply (isColimitOfPreserves C
+            (isColimitOfPreserves T (colimit.isColimit J))).isZero_pt
+          apply Functor.isZero
+          intro i
+          have : Injective (J.obj i) := hJ i
+          have : Subsingleton (Sheaf.H'.{u} (T.obj (J.obj i)) (n + 1) U) :=
+            injective_module_abelian_acyclic U (J.obj i) (n + 1) (Nat.succ_pos n)
+          change IsZero (Sheaf.H'.{u} (T.obj (J.obj i)) (n + 1) U)
+          exact AddCommGrpCat.isZero_of_subsingleton _
+        obtain ⟨e⟩ := Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived
+          (Opens.grothendieckTopology X) U (n + 1)
+        have hac : ∀ M, Injective M → E.rightAcyclic (T.obj M) := by
+          intro M hM k
+          have : Injective M := hM
+          have : Subsingleton (Sheaf.H'.{u} (T.obj M) (k + 1) U) :=
+            injective_module_abelian_acyclic U M (k + 1) (Nat.succ_pos k)
+          obtain ⟨d⟩ := Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived
+            (Opens.grothendieckTopology X) U (k + 1)
+          have hzM : IsZero (Sheaf.H'.{u} (T.obj M) (k + 1) U) :=
+            AddCommGrpCat.isZero_of_subsingleton _
+          exact hzM.of_iso (d.app (T.obj M)).symm
+        have : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+          (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+        obtain ⟨d, _⟩ := Functor.exists_rightDerived_exact_comp_iso T E hac (colimit J) (n + 1)
+        exact (hz.of_iso (e.app (T.obj (colimit J))).symm).of_iso d
+  have : PreservesColimitsOfShape I
+      (RingedSpace.openModuleCohomology X.toRingedSpace q U) := hderived q
+  let H := RingedSpace.openModuleCohomology X.toRingedSpace q U
+  have hH := isColimitOfPreserves H hc
+  constructor
+  · intro x
+    exact Concrete.isColimit_exists_rep (D ⋙ H) hH x
+  · intro i y hy
+    have he : H.map (c.ι.app i) y = H.map (c.ι.app i) 0 := by
+      simpa only [map_zero] using hy
+    obtain ⟨j, f, g, hj⟩ :=
+      (Concrete.isColimit_rep_eq_iff_exists (D ⋙ H) hH y 0).mp he
+    refine ⟨j, f.le, ?_⟩
+    change (H.map (D.map f)).hom y = (H.map (D.map g)).hom 0 at hj
+    have hf : f = homOfLE f.le := Subsingleton.elim _ _
+    simpa only [Functor.comp_map, map_zero, hf] using hj
 
 end AlgebraicGeometry
