@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep
 
 /-! # Descent of higher direct image cohomology-presheaf classes
 
@@ -114,6 +113,60 @@ theorem exists_higherDirectImage_limit_presheaf_class_cover {S : Scheme.{v}}
             ∃ (i : I) (y : (K.obj i).obj.obj (op V)),
               (η.app i).hom.app (op V) y =
                 T.obj.map f.op
-                  ((toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op U) z) := by sorry
+                  ((toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op U) z) := by
+  classical
+  have _hK := @hK
+  let T := (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
+    (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))
+  let P := (uliftYoneda.{v + 1} ⋙
+    (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
+    presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1} ⋙
+    upperStar AddCommGrpCat.{v + 1} c.pt.hom ⋙
+    DerivedCategory.Plus.singleFunctor _ 0).op ⋙
+      preadditiveYoneda.obj
+        (((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H))⟦(p : ℤ)⟧)
+  obtain ⟨e, haffine⟩ := exists_higherDirectImage_limit_affine_class_rep
+    D c hc F φ hφid hφcomp H eH hH p
+  refine ⟨e, ?_⟩
+  intro U z
+  let 𝒰 := U.left.affineCover
+  let V (j : 𝒰.I₀) : S.Etale :=
+    Scheme.Etale.mk (𝒰.f j ≫ U.hom)
+  let f (j : 𝒰.I₀) : V j ⟶ U :=
+    MorphismProperty.Over.homMk (𝒰.f j)
+  refine ⟨Sieve.ofArrows V f, ?_, ?_⟩
+  · rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+    exact 𝒰.iUnion_range
+  · intro W g hg
+    obtain ⟨j, a, rfl⟩ := (Sieve.mem_ofArrows_iff V f g).mp hg
+    have : IsAffine (V j).left := by
+      change IsAffine (Spec _)
+      infer_instance
+    obtain ⟨i, y, hy⟩ := haffine (V j) (P.map (f j).op z)
+    let y' := (eK i).inv.hom.app (op (V j)) y
+    have hstage : (η.app i).hom.app (op (V j)) y' =
+        (toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op (V j))
+          (P.map (f j).op z) := by
+      rw [hη]
+      dsimp only [y']
+      have he := congrArg (fun t ↦ t.hom.app (op (V j))) (eK i).inv_hom_id
+      have hey := ConcreteCategory.congr_hom he y
+      change (eK i).hom.hom.app (op (V j))
+        ((eK i).inv.hom.app (op (V j)) y) = y at hey
+      change (abelianHigherDirectImageMap (c.π.app (op i)).left
+        (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i)
+        (colimit H) ((eH i).inv ≫ colimit.ι H i)).hom.app (op (V j))
+          ((eK i).hom.hom.app (op (V j)) ((eK i).inv.hom.app (op (V j)) y)) = _
+      rw [hey]
+      exact hy
+    refine ⟨i, (K.obj i).obj.map a.op y', ?_⟩
+    have hnat := (η.app i).hom.naturality_apply a.op y'
+    rw [hnat, hstage]
+    have hτ := (toSheafify S.smallEtaleTopology P ≫ e.hom.hom).naturality_apply
+      (f j).op z
+    rw [hτ]
+    simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+    rfl
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-higher-direct-image-limit-affine-class-rep",
+ "kind": "statement",
+ "title": "Affine stage representatives of raw higher-direct-image classes",
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions], $I$ a nonempty directed preorder, and $D:I^{\\mathrm{op}}\\to\\mathrm{Over}(S)$ an inverse system with affine transitions and quasi-compact quasi-separated structure maps. Let $c$ be a cone whose underlying scheme cone is limiting and whose structure map $g:X\\to S$ is qcqs. Write $g_i:X_i\\to S$ and $f_i:X\\to X_i$ for the stage structure maps and projections. Let $F_i$ be abelian etale sheaves [def-weil-pbc-etale-sheaves] with inverse-image transition maps [def-weil-pbc-inverse-image] satisfying the unital and composition equations in the Lean signature. Let $H$ present the pullbacks $f_i^{-1}F_i$ with the indicated canonical transition maps and set $F=\\operatorname{colim} H$. Fix $p\\in\\mathbb N$. Put $T=R^p g_*F$ [def-weil-pbc-direct-image] and $P(U)=\\operatorname{Hom}(g^{-1}\\mathbb Z[U][0],F[0][p])$ in the bounded-below derived category [def-weil-pbc-derived-categories], where $\\mathbb Z[U]$ is the sheafified free abelian representable [def-weil-pbc-sheafification]. There exists an isomorphism $e:P^\\#\\simeq T$ such that for every etale object $U\\to S$ with affine underlying scheme and every $z\\in P(U)$, there are $i\\in I$ and $y\\in(R^p g_{i,*}F_i)(U)$ for which the canonical map [def-sbc-abelian-higher-direct-image-map] associated to $f_i$ and the coefficient map $f_i^{-1}F_i\\to F$ sends $y$ to $(e\\circ\\mathrm{toSheafify})(z)$. The coefficient map is exactly $(eH_i)^{-1}$ followed by the colimit injection. There is no stage higher-direct-image presentation $K$, cocone $\\eta$, or covering sieve in this assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Lemma Tag 09Z1 proof: cohomology continuity on affine etale objects; Tag 03Q8: natural sheafification comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-sbc-abelian-higher-direct-image-map",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Choose the natural comparison P^# ≅ T from derived adjunction and the generator evaluation in the higher-direct-image presheaf theorem. Its presheaf presentation is restricted cohomology on U times_S X. Keep this natural comparison throughout; do not choose an unrelated abstract isomorphism.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine U, base change the inverse system along U to a limiting system of qcqs schemes with affine transitions. Pull back the compatible sheaves and their transition maps. Inverse image preserves colimits, so their limit-site coefficient sheaf is the pullback of colimit H. Place the sheaves in degree-zero complexes; the common lower bound is zero. Apply complex cohomology continuity. The representative property of filtered abelian-group colimits produces a class at one stage representing z.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Send the stage class into the actual stage higher direct image using the natural presheaf comparison, obtaining y. Naturality of derived adjunction identifies its image with the natural comparison image of z: the unit, pullback composition comparison, counit and coefficient map are precisely the factors defining abelianHigherDirectImageMap before homology. Apply degree-p homology and evaluate at U to obtain the displayed equality.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "def-sbc-abelian-higher-direct-image-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "def-sbc-abelian-higher-direct-image-map"
+ ],
+ "proof_origin": {
+  "by": "worker A2",
+  "document": "https://stacks.math.columbia.edu/tag/09Z1",
+  "place": "Affine cohomology-continuity part of the proof, separated from passage to a covering sieve; natural derived-Hom presentation from Tag 03Q8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology classes on affine objects descend to a stage of an inverse limit with affine transition maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived cohomology class on an affine etale object over an inverse limit locally descends to a finite stage",
+   "results": "Eight hits: etale ring facts, Etale.of_comp, and affine-transition structure-sheaf descent; none compares abelian etale cohomology with canonical higher-direct-image maps.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smallEtaleTopology\"",
+   "results": "Found Scheme.ofArrows_mem_smallEtaleTopology_iff and affine-etale cover-density APIs; no affine cohomology stage-representative theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*limit|limit.*cohomology; rg on both Lean roots for higherDirectImage.*(class|cover)",
+   "results": "Mathlib search returned local-cohomology and group-cohomology facts. The source root has module-coefficient direct-image restriction facts; the Sheaf root has the general complex continuity theorem and the target cover lemma, but no affine representative assertion with the canonical abelianHigherDirectImageMap.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Affine representative construction in proof steps 1-3 of lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+   "via": [
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageLimitAffineClassRep.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_higherDirectImage_limit_affine_class_rep",
+  "statement": "theorem exists_higherDirectImage_limit_affine_class_rep {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ) :\n    let T := (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj\n      (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))\n    let P := (uliftYoneda.{v + 1} ⋙\n      (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙\n      presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1} ⋙\n      upperStar AddCommGrpCat.{v + 1} c.pt.hom ⋙\n      DerivedCategory.Plus.singleFunctor _ 0).op ⋙\n        preadditiveYoneda.obj\n          (((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H))⟦(p : ℤ)⟧)\n    ∃ (e : (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj P ≅ T),\n      ∀ (U : S.Etale) [IsAffine U.left] (z : P.obj (op U)),\n        ∃ (i : I)\n          (y : ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj\n            (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj\n              ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i)))).obj.obj (op U)),\n          (abelianHigherDirectImageMap (c.π.app (op i)).left\n            (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i)\n            (colimit H) ((eH i).inv ≫ colimit.ι H i)).hom.app (op U) y =\n              ((toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op U) z)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085209-L-1107",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085209-L-1107",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
