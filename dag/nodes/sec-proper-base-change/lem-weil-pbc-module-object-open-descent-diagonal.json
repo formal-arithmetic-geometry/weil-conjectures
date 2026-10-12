@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-module-object-open-descent-diagonal",
+ "kind": "statement",
+ "title": "Diagonal transition map identity from cocycle",
+ "statement": "Given a ringed space X, opens U indexed by I, local sheaves Fi, overlap isomorphisms φij, and a cocycle identity on all triple overlaps, each diagonal component (φii).hom at every W ≤ U i equals the identity morphism.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [
+  {
+   "text": "Set i=j=k in the cocycle, then left-compose by the inverse component of φii and simplify using the inverse-hom identity to obtain φii = id.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "gluing sheaves of modules from isomorphisms on overlaps satisfying a cocycle",
+   "results": "Service unavailable (Internal Server Error); no verdict from this attempt. Parent node records earlier LeanSearch results: sections and schemes only.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue morphisms of sheaves of modules from compatible restrictions on an open cover",
+   "results": "TopCat.Sheaf.existsUnique_gluing and existsUnique_gluing'; Scheme.GlueData.sheafValGluedMk; PresheafedSpace.GlueData formulas. No sheaf-of-modules object descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"glue\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*[Mm]odule|[Mm]odule.*glue; rg descentGlue, gluing and glue_sheaves_of_modules in Mathlib and both project roots; blueprint_refs.py search 00AL and 00AM",
+   "results": "Mathlib only module colimits and unrelated geometry. Source Scheme.Modules.descentGlue constructs a scheme descent object, limited to schemes and universe u. SheafOfModulesFromBasis assumes finite refinements and one universe, not arbitrary ringed-space covers. No imported blueprint node matches 00AL or 00AM; existing parent bundles this object clause with morphism gluing.",
+   "date": "2026-10-12",
+   "verdict": "no applicable existing theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ModuleObjectOpenDescent",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Object gluing part of lem-weil-pbc-glue-sheaves-of-modules, steps 4-7, used in finite-etale lifting essential surjectivity",
+   "via": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ModuleObjectOpenDescent",
+  "file": "lean/Sheaf/Topology/ModuleObjectOpenDescent.lean",
+  "declaration": "AlgebraicGeometry.diagonal_transition_identity",
+  "statement": "theorem diagonal_transition_identity\n    (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)\n    (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))\n    (φij : ∀ i j : I, (SheafOfModules.overMap (moduleRings X)\n      (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅\n      (SheafOfModules.overMap (moduleRings X)\n      (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j))\n    (hcoc : ∀ (i j k : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j)\n      (hk : W ≤ U k), (φij i k).hom.val.app (op (Over.mk\n      (homOfLE (le_inf hi hk)))) = (φij i j).hom.val.app (op (Over.mk\n      (homOfLE (le_inf hi hj)))) ≫ (φij j k).hom.val.app (op (Over.mk\n      (homOfLE (le_inf hj hk))))) :\n    ∀ (i : I) (W : Opens X) (hi : W ≤ U i),\n      (φij i i).hom.val.app (op (Over.mk (homOfLE (le_inf hi hi)))) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

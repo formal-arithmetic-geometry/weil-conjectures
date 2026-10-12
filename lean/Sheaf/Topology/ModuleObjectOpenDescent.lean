@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Topology.ModuleObjectOpenDescentAux
 
 /-! # Effectivity of open-cover descent for sheaves of modules
 
@@ -54,6 +55,32 @@ They are linear and commute with restriction, by uniqueness of gluing; hence the
 form an isomorphism H.over (U i) to Fi i. Finally, the cocycle identifies the two
 routes from a component to Fi j on W contained in U i and U j. Separation on the
 small covering of W gives the required compatibility of these isomorphisms. -/
+theorem diagonal_transition_identity
+    (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
+    (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))
+    (φij : ∀ i j : I, (SheafOfModules.overMap (moduleRings X)
+      (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅
+      (SheafOfModules.overMap (moduleRings X)
+      (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j))
+    (hcoc : ∀ (i j k : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j)
+      (hk : W ≤ U k), (φij i k).hom.val.app (op (Over.mk
+      (homOfLE (le_inf hi hk)))) = (φij i j).hom.val.app (op (Over.mk
+      (homOfLE (le_inf hi hj)))) ≫ (φij j k).hom.val.app (op (Over.mk
+      (homOfLE (le_inf hj hk))))) :
+    ∀ (i : I) (W : Opens X) (hi : W ≤ U i),
+      (φij i i).hom.val.app (op (Over.mk (homOfLE (le_inf hi hi)))) = 𝟙 _ := by
+  intro i W hi
+  let f := (φij i i).hom.val.app (op (Over.mk (homOfLE (le_inf hi hi))))
+  let g := (φij i i).inv.val.app (op (Over.mk (homOfLE (le_inf hi hi))))
+  have hgf : g ≫ f = 𝟙 _ := by
+    have hh := congrArg (fun q => q.val.app (op (Over.mk (homOfLE (le_inf hi hi)))))
+      (φij i i).inv_hom_id
+    exact hh
+  have hff : f = f ≫ f := hcoc i i i W hi hi hi
+  have h := congrArg (fun q => g ≫ q) hff
+  rw [← Category.assoc, hgf, Category.id_comp] at h
+  exact h.symm
+
 theorem module_object_open_descent
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (hcover : ⨆ i, U i = ⊤) :
@@ -73,6 +100,9 @@ theorem module_object_open_descent
         ∀ (i j : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j),
           (φi i).hom.val.app (op (Over.mk (homOfLE hi))) ≫
             (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) =
-              (φi j).hom.val.app (op (Over.mk (homOfLE hj))) := by sorry
+              (φi j).hom.val.app (op (Over.mk (homOfLE hj))) := by
+  intro Fi φij hcoc
+  apply module_object_open_descent_aux X I U hcover Fi φij
+    (diagonal_transition_identity X I U Fi φij hcoc) hcoc
 
 end AlgebraicGeometry
