@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.FiniteCoefficientTensorKernelClosedFiber
+import Mathlib.RingTheory.Smooth.Quotient
 
 /-!
 # Vanishing of the tensor-map kernel modulo the target maximal ideal
@@ -50,7 +52,32 @@ theorem finite_coefficient_tensor_kernel_reduction_quotient
     Submodule.mkQ (((IsLocalRing.maximalIdeal A).map
         (Algebra.TensorProduct.includeRight (R := A₀) (A := C)).toRingHom) •
         (RingHom.ker F : Submodule (TensorProduct A₀ C A) (TensorProduct A₀ C A))) x = 0 := by
-  sorry
+  have _hcompat := hψγ
+  let : Algebra A (TensorProduct A₀ C A) := Algebra.TensorProduct.rightAlgebra
+  let : Algebra A B := φ.toAlgebra
+  have : Module.Flat A B := hflat
+  let f : TensorProduct A₀ C A →ₗ[A] B :=
+    { F.toAddMonoidHom with
+      map_smul' := fun a x ↦ by
+        change F ((1 ⊗ₜ[A₀] a) * x) = φ a * F x
+        rw [map_mul, hF, map_one, one_mul] }
+  have hclosed := finite_coefficient_tensor_kernel_closed_fiber α hα hres.2 γ hγ φ ψ
+    F hF hker
+  intro x hx
+  apply (Submodule.Quotient.mk_eq_zero _).2
+  have hxI : x ∈ (IsLocalRing.maximalIdeal A) •
+      (⊤ : Submodule A (TensorProduct A₀ C A)) := by
+    rw [Ideal.smul_top_eq_map]
+    exact hclosed hx
+  have hxK : x ∈ f.ker := hx
+  have hxIK : x ∈ (IsLocalRing.maximalIdeal A) • f.ker := by
+    rw [← LinearMap.ker_inf_smul_top_eq_smul_of_flat _ f hsurj]
+    exact ⟨hxK, hxI⟩
+  change x ∈ (((IsLocalRing.maximalIdeal A).map
+    (algebraMap A (TensorProduct A₀ C A))) •
+      (RingHom.ker F : Submodule (TensorProduct A₀ C A) (TensorProduct A₀ C A))).restrictScalars A
+  rw [Ideal.smul_restrictScalars]
+  exact hxIK
 
 /-- Flatness and the correct closed-fibre kernel make K/m_A K vanish.
 Source: Stacks Project, Remark 07NS (part (4)); Proposition 07NQ, tensor exactness argument.

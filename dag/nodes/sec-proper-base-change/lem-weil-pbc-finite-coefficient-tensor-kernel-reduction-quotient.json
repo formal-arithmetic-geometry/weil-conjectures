@@ -12,20 +12,25 @@
  },
  "proof": [
   {
-   "text": "Use flat tensor exactness to inject the kernel modulo m_A into the tensor product modulo m_A. Residue-field surjectivity reduces every tensor class to c tensor 1; the kernel equality puts a vanishing image in m₀C, and balancing puts c tensor 1 in m_A times the original kernel.",
+   "text": "Use the proved closed-fibre calculation to obtain ker F⊆m_A D.",
    "uses": [
-    "lem-weil-pbc-flat-quotient-tensor-injective"
+    "lem-weil-pbc-finite-coefficient-tensor-kernel-closed-fiber"
    ],
    "elementary": false
+  },
+  {
+   "text": "Equip D with its right A-algebra structure and B with φ.toAlgebra. The tensor formula makes F A-linear. Use the proved Mathlib theorem LinearMap.ker_inf_smul_top_eq_smul_of_flat (Mathlib.RingTheory.Smooth.Quotient), with hsurj and hflat, to get ker F∩m_A D=m_A ker F. Since every kernel element lies in m_A D, it lies in m_A ker F. Ideal.smul_top_eq_map and Ideal.smul_restrictScalars identify these A-submodules with the D-ideal notation. Submodule.Quotient.mk_eq_zero finishes. This uses Mathlib directly instead of the planned flat-quotient-tensor-injective node.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-quotient-tensor-injective"
+  "lem-weil-pbc-finite-coefficient-tensor-kernel-closed-fiber"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Remark 07NS part (4), the closed-fibre calculation"
+  "place": "Remark 07NS (4), closed-fibre isomorphism; Proposition 07NQ, kernel-tensor paragraph. Read at https://stacks.math.columbia.edu/tag/07NS and https://stacks.math.columbia.edu/tag/07NQ."
  },
  "mathlib_searches": [
   {
@@ -93,10 +98,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T215153-L-1303644",
-  "kind": "proof",
+  "landing": "20261012T230801-L-1910264",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
