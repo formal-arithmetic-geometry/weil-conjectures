@@ -15,16 +15,24 @@
  ],
  "proof": [
   {
-   "text": "Use filteredness of the pair-etale category and its essential smallness. Transport the under-category colimit along commAlgCatEquivUnder and reindex along equivSmallModel in the universe of A. Apply the finite-separable-fibres theorem to the resulting small diagram, and transport its canonical decomposition to B=c.pt.right. This yields the finite product of all residue fields over p and separable algebraicity of each extension.",
+   "text": "Use pair_henselization_filtered and pair_henselization_essentiallySmall to reindex the full pair-etale category along equivSmallModel. Apply the inverse of commAlgCatEquivUnder to the given colimit cocone; isColimitOfPreserves and coconePointUniqueUpToIso give an A-algebra equivalence from B=c.pt.right to the chosen small algebra colimit. Apply filteredEtale_fiber_structure, and transport reducedness and Krull dimension at most zero along its tensor equivalence. The fibre is Noetherian by isNoetherianRing_fiber, hence Artinian by Mathlib IsNoetherianRing.isArtinianRing_of_krullDimLE_zero.",
    "uses": [
     "lem-weil-pbc-pair-henselization-filtered",
     "lem-weil-pbc-pair-henselization-essentially-small",
-    "lem-weil-pbc-henselization-finite-separable-fibres"
+    "lem-weil-pbc-filtered-etale-fiber-structure",
+    "lem-weil-pbc-fibre-ring-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical decomposition respects the B-algebra structures: on each component, x tensor b maps to rho(x) times the residue image of b, so 1 tensor b maps to the structure-map image of b. Tensor this B-algebra equivalence over B with C. Tensor cancellation identifies the source with kappa(p) tensor_A C, while distribution over the finite product identifies the target with the product of kappa(q_i) tensor_B C. The component at q sends x tensor y to rho(x) tensor y. The hypothesis on phi identifies phi with this projection because pure tensors additively generate the source.",
+   "text": "Apply fibre_primes_residue_fields to identify the prime spectrum of the fibre with the primes F of B over p, including the equality of the canonical residue-field composite with the tensor evaluation map psi. The fibre is reduced Artinian, so Mathlib IsArtinianRing.equivPi decomposes it as the product of quotients at maximal ideals. Reindex by primeSpectrumEquivMaximalSpectrum and the given spectrum equivalence. For each maximal ideal the quotient-to-residue-field map is bijective by Ideal.bijective_algebraMap_quotient_residueField. Compose it with the residue-field equivalence from fibre_primes_residue_fields. Equality with RingHom.pi psi follows pointwise from its canonical composite equality. Thus F is finite and RingHom.pi psi is bijective. The residue-field equivalences chosen here are uniquely determined by their composites with the surjective residue maps, not arbitrary witnesses of mere existence.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the canonical ring equivalence with tensor symmetry to obtain B tensor_A kappa(p) to the residue product. Its B-algebra compatibility follows on algebraMap(b)=b tensor 1 because each residue component sends 1 to 1. Tensor this equivalence with C over B, use cancelBaseChange and the finite-product form Algebra.TensorProduct.piRight from Mathlib/RingTheory/TensorProduct/Pi.lean (the finite iteration of the binary-product calculation), and tensor symmetry. On a pure tensor x tensor y, the q coordinate is y tensor rho(x), directly by the pure-tensor formulas; symmetry gives rho(x) tensor y, equal to phi(x tensor y) by hypothesis. TensorProduct.induction_on extends this equality to every element.",
    "uses": [
     "lem-weil-pbc-tensor-cancel-base-change",
     "lem-weil-pbc-algebra-tensor-product-distributes-product"
@@ -32,7 +40,7 @@
    "elementary": false
   },
   {
-   "text": "In the product of fibres choose e equal to 1 at q and 0 elsewhere and pull it back to p.Fiber C. Componentwise multiplication gives idempotence and phi(e)=1. Extension by zero gives surjectivity of phi. For x in its kernel the q coordinate is zero, while all other coordinates of e are zero, so e*x=0. This also applies to zero components.",
+   "text": "Let q0 be q as an element of F. Pull back Pi.single q0 1 through the product ring equivalence T. Injectivity of T and pointwise multiplication prove idempotence. The coordinate identity with phi proves phi(e)=1. For any z in q.Fiber C, Pi.single q0 (Q.symm z), where Q is tensor symmetry, pulls back to a preimage of z, proving surjectivity. If phi(x)=0, Q.injective implies the q0 coordinate of T(x) vanishes. At q0 the product T(e)*T(x) is therefore zero; elsewhere T(e) is zero. Injectivity of T proves e*x=0. Pi.single and tensor symmetry allow zero factors, so no nontriviality of C or of any factor is used.",
    "uses": [],
    "elementary": true
   }
@@ -40,15 +48,17 @@
  "proof_deps": [
   "lem-weil-pbc-pair-henselization-filtered",
   "lem-weil-pbc-pair-henselization-essentially-small",
-  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-filtered-etale-fiber-structure",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
   "lem-weil-pbc-tensor-cancel-base-change",
   "lem-weil-pbc-algebra-tensor-product-distributes-product"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "K3",
+  "group": "Q1",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0AH1, lemma-filtered-colimit-etale-noetherian-fibres; Tag 0AH3, lemma-henselization-pair-G-ring, displayed product-of-fibres calculation with the completion replaced by an arbitrary B-algebra C."
+  "place": "Tag 0AH1, lemma-filtered-colimit-etale-noetherian-fibres, reduced zero-dimensional fibre argument; Tag 0AH3, lemma-henselization-pair-G-ring, product-of-fibres calculation; formal glue by Q1 using Mathlib reduced Artinian product decomposition and finite-product tensor equivalence."
  },
  "mathlib_searches": [
   {
@@ -158,10 +168,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T184315-L-4008896",
-  "kind": "interface",
+  "landing": "20261012T213852-L-1209419",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
