@@ -15,30 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Apply geometry to conclude that every c is closed and its residue-field map is an isomorphism. Identify its residue field with k by residueFieldIsoBase.",
+   "text": "Apply zeroDimensional_baseChange_geometry and retain its pointwise residue-field isomorphism conclusion. No second use of Nullstellensatz or explicit identification with k is needed.",
    "uses": [
-    "new-zdbp-geometry",
-    "lem-weil-pbc-closed-point-residue-field-base"
+    "new-zdbp-geometry"
    ],
    "elementary": false
   },
   {
-   "text": "Use Scheme.Pullback.carrierEquiv and its projection identities. Spec k and Spec k-prime each have one point, so triplets over a fixed c have only that choice of second point. The residue-field pushout is isomorphic to k-prime because the first map is an isomorphism; its spectrum has exactly one point. Transport existence and uniqueness back across carrierEquiv.",
+   "text": "For each pullback triplet T, the left map in its residue-field pushout is an isomorphism, since it is a residue-field congruence followed by the structure residue-field map. Its Spec map is an isomorphism. The pullback square isPullback_SpecMap_tensor therefore makes Spec.map T.tensorInr an isomorphism (IsPullback.isIso_snd_of_isIso). Its underlying homeomorphism injects Spec T.tensor into the singleton spectrum of the field at T.y, giving Subsingleton (Spec T.tensor).",
    "uses": [
     "lem-weil-pbc-fibre-product-points"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For any c, exists_preimage_pullback with the unique point of Spec k-prime gives a point above c, since Spec k is a singleton. If two points lie above c, their ofPoint triplets agree by Triplet.ext: their first coordinates agree by hypothesis and their second coordinates agree because Spec k-prime is a singleton. carrierEquiv_eq_iff and the singleton tensor spectrum identify their carrierEquiv images; injectivity of carrierEquiv identifies the points.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "new-zdbp-geometry",
-  "lem-weil-pbc-closed-point-residue-field-base",
   "lem-weil-pbc-fibre-product-points"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00KH, 00FV, 00P4; schemes.tex Tag 01JT; concrete repaired proof, N1"
+  "place": "Tags 00FV and schemes.tex 01JT; existing geometry theorem and Mathlib PullbackCarrier correspondence, implemented in Lean by J1"
  },
  "mathlib_searches": [
   {
@@ -121,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c443d",
-  "group": "N1",
+  "reviewer": "X-c682d",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T013028-L-824126",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivered modules, DAG nodes, report, unchanged target statement, and clean lcompile.py --all result against the stage-3 review brief."
+  "landing": "20261012T015829-L-941838",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature, pullback proof, dependency statements, node proof metadata, unit route, and report; compilation is clean and axioms are only propext, Classical.choice, and Quot.sound."
  }
 }

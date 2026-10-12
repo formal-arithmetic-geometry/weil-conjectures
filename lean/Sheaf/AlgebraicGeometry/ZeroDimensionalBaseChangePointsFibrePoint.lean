@@ -4,6 +4,8 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
 
 /-! Intermediate fibre facts for zero-dimensional base change.
 Source: Stacks Project, schemes.tex Lemma 01JT and algebra.tex Lemma 00P4.
@@ -32,6 +34,35 @@ theorem zeroDimensional_baseChange_fibre_points
     ∀ c : C, ∃! z : (pullback (C ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{v}),
       (pullback.fst (C ↘ Spec (.of k))
-        (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base z = c := by sorry
+        (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base z = c := by
+  classical
+  let f : C ⟶ Spec (.of k) := C ↘ Spec (.of k)
+  let g : Spec (.of k') ⟶ Spec (.of k) :=
+    Spec.map (CommRingCat.ofHom (algebraMap k k'))
+  have hres := (zeroDimensional_baseChange_geometry k C hC).2.2
+  have hsub (T : Scheme.Pullback.Triplet f g) : Subsingleton (Spec T.tensor) := by
+    let : IsIso (f.residueFieldMap T.x) := (hres T.x).2
+    have : IsIso (Spec.map
+        (((Spec (.of k)).residueFieldCongr T.hx).inv ≫
+          f.residueFieldMap T.x)) := by
+      rw [Spec.map_comp]
+      infer_instance
+    let : IsIso (Spec.map T.tensorInr) :=
+      T.isPullback_SpecMap_tensor.isIso_snd_of_isIso
+    exact (Spec.map T.tensorInr).homeomorph.injective.subsingleton
+  intro c
+  obtain ⟨z, hz, _⟩ := Scheme.Pullback.exists_preimage_pullback
+    (f := f) (g := g) c (⊥ : PrimeSpectrum k') (Subsingleton.elim _ _)
+  refine ⟨z, hz, ?_⟩
+  intro w hw
+  apply (Scheme.Pullback.carrierEquiv (f := f) (g := g)).injective
+  apply Scheme.Pullback.carrierEquiv_eq_iff.mpr
+  have hT : Scheme.Pullback.Triplet.ofPoint w = Scheme.Pullback.Triplet.ofPoint z := by
+    apply Scheme.Pullback.Triplet.ext
+    · exact hw.trans hz.symm
+    · exact Subsingleton.elim _ _
+  refine ⟨hT, ?_⟩
+  let := hsub (Scheme.Pullback.Triplet.ofPoint z)
+  exact Subsingleton.elim _ _
 
 end AlgebraicGeometry
