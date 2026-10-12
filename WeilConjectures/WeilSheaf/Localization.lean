@@ -28,9 +28,11 @@ coefficient stage `Λ = ℚ̄_ℓ`: on Weil complexes (`AlgebraicGeometry.WeilCo
    triangle of `K` to the closed-support triangle of the underlying complex on the geometric
    fiber `X̄` (`AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedSupportTriangle`), by an
    isomorphism of triangles which is the identity on `K`
-   (`AlgebraicGeometry.WeilComplex.exists_iso_mapTriangle_closedSupportTriangle`), and the
-   underlying complex of `Ri^! K` is `Rī^!` of that of `K`
-   (`AlgebraicGeometry.WeilComplex.nonempty_forget_closedUpperShriek_obj_iso`).
+   (`AlgebraicGeometry.WeilComplex.exists_iso_mapTriangle_closedSupportTriangle`), and
+   forgetting the Weil structures commutes with `Ri^!`, compatibly with the counits of
+   `i_* ⊣ Ri^!` and `ī_* ⊣ Rī^!`
+   (`AlgebraicGeometry.WeilComplex.exists_closedUpperShriek_comp_forget_iso`,
+   `AlgebraicGeometry.WeilComplex.nonempty_forget_closedUpperShriek_obj_iso`).
 
 The Weil structures of `i^*`, `j^*`, `i_*` and `Rj_*` are those of the transported functors on
 pro-étale Weil sheaves, and the adjunctions `φ^* ⊣ φ_*` lift those on the geometric fibers
@@ -89,6 +91,8 @@ noncomputable def WeilComplex.forgetBoundedConstructibleAdic :
   (WeilComplex.objectProperty k₀ l X).liftFullSubcategory _
     (IsoAlgebra.forget _).mapDerivedCategory fun K hK ↦ (WeilComplex.objectProperty_iff K).1 hK
 
+/-- `AlgebraicGeometry.WeilComplex.forgetBoundedConstructibleAdic` followed by the inclusion of
+`Dᵇc(X̄, ℚ̄_ℓ)` is the forgetful functor `AlgebraicGeometry.WeilComplex.forget`. -/
 lemma WeilComplex.forgetBoundedConstructibleAdic_comp_ι :
     WeilComplex.forgetBoundedConstructibleAdic k₀ l X ⋙ ObjectProperty.ι _ = WeilComplex.forget :=
   rfl
@@ -308,10 +312,10 @@ variable [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
 /-- Blueprint `prop-sf-localization-all-stages` (Weil clause), equivariance of the closed-support
 triangle: forgetting the Weil structures carries the closed-support triangle
 `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` of a Weil complex `K` to the closed-support triangle
-`ī_* Rī^! K̄ ⟶ K̄ ⟶ Rj̄_* j̄^* K̄ ⟶` in `Dᵇc(X̄, ℚ̄_ℓ)` of its underlying complex `K̄`, along the base
-changes `ī`, `j̄` of `i`, `j` to the geometric fibers, by an isomorphism of triangles which is
-the identity on `K̄`. So the counit `i_* Ri^! K ⟶ K`, the unit `K ⟶ Rj_* j^* K` and the third
-arrow are the Weil-equivariant lifts of those on the geometric fiber. The forgetful functor is
+`ī_* Rī^! K̄ ⟶ K̄ ⟶ Rj̄_* j̄^* K̄ ⟶` in `Dᵇc(X̄, ℚ̄_ℓ)` of its underlying complex `K̄`, along
+the base changes `ī`, `j̄` of `i`, `j` to the geometric fibers, by an isomorphism of triangles
+which is the identity on `K̄`. So the counit `i_* Ri^! K ⟶ K`, the unit `K ⟶ Rj_* j^* K` and the
+third arrow are the Weil-equivariant lifts of those on the geometric fiber. The forgetful functor is
 triangulated and commutes with `i_*` and `Rj_*`
 (`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_forget_iso`), so the image of
 the triangle is distinguished with outer vertices in the essential images of `ī_*` and `Rj̄_*`,
@@ -389,6 +393,78 @@ theorem WeilComplex.nonempty_forget_closedUpperShriek_obj_iso (K : WeilComplex k
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ringChar_algebraicClosure_ne
     (Scheme.Hom.geometricFiberMap i (comp_over i _))).preimageIso
     (α ≪≫ Triangle.π₁.mapIso e)⟩
+
+/-- Blueprint `prop-sf-localization-all-stages` (Weil clause), the Weil structure of `Ri^!` and
+the equivariance of `i_* ⊣ Ri^!`: forgetting the Weil structures commutes with `Ri^!`, and the
+counit of `i_* ⊣ Ri^!` is carried to the counit of `ī_* ⊣ Rī^!` on `Dᵇc(X̄, ℚ̄_ℓ)`, along the base
+change `ī` of `i` to the geometric fibers. Here `eI` identifies the underlying complex of
+`i_* Q` with `ī_*` of that of `Q`
+(`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_forget_iso`), and `e` is its mate
+under the two adjunctions `i_* ⊣ Ri^!` and `ī_* ⊣ Rī^!`; that the mate is an isomorphism comes
+from the isomorphism of closed-support triangles
+(`AlgebraicGeometry.WeilComplex.exists_iso_mapTriangle_closedSupportTriangle`), `ī_*` being
+fully faithful (`CategoryTheory.Adjunction.isIso_mateEquiv_app`). -/
+theorem WeilComplex.exists_closedUpperShriek_comp_forget_iso :
+    ∃ (eI : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i ⋙
+          WeilComplex.forgetBoundedConstructibleAdic k₀ l X ≅
+        WeilComplex.forgetBoundedConstructibleAdic k₀ l Z ⋙
+          ProEtale.boundedConstructibleAdicRightDerivedLowerStar
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+            ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _)))
+      (e : WeilComplex.closedUpperShriek (k₀ := k₀) (l := l) i j hij ⋙
+          WeilComplex.forgetBoundedConstructibleAdic k₀ l Z ≅
+        WeilComplex.forgetBoundedConstructibleAdic k₀ l X ⋙
+          ProEtale.boundedConstructibleAdicClosedUpperShriek
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+            ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))
+            (Scheme.Hom.geometricFiberMap j (comp_over j _))
+            (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)),
+      ∀ K, (ProEtale.boundedConstructibleAdicRightDerivedLowerStar
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+            ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))).map
+          (e.hom.app K) ≫
+        (ProEtale.boundedConstructibleAdicClosedUpperShriekAdjunction
+            (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+            ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))
+            (Scheme.Hom.geometricFiberMap j (comp_over j _))
+            (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)).counit.app
+          ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K) =
+        eI.inv.app _ ≫ (WeilComplex.forgetBoundedConstructibleAdic k₀ l X).map
+          ((WeilComplex.closedUpperShriekAdjunction i j hij).counit.app K) := by
+  obtain ⟨eI₀⟩ := WeilComplex.nonempty_derivedLowerStar_comp_forget_iso (k₀ := k₀) (l := l) i
+  let eI : WeilComplex.derivedLowerStar i ⋙ WeilComplex.forgetBoundedConstructibleAdic k₀ l X ≅
+      WeilComplex.forgetBoundedConstructibleAdic k₀ l Z ⋙
+        ProEtale.boundedConstructibleAdicRightDerivedLowerStar
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+          ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _)) :=
+    NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _ (eI₀.app M))
+      (fun f ↦ ObjectProperty.hom_ext _ (eI₀.hom.naturality f))
+  let β := mateEquiv (WeilComplex.closedUpperShriekAdjunction i j hij)
+    (ProEtale.boundedConstructibleAdicClosedUpperShriekAdjunction
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+      ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))
+      (Scheme.Hom.geometricFiberMap j (comp_over j _))
+      (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)) eI.inv
+  have (K : WeilComplex k₀ l X) : IsIso (β.natTrans.app K) := by
+    obtain ⟨w, hw, -⟩ := WeilComplex.existsUnique_distTriang_closedSupportTriangle i j hij K
+    obtain ⟨w', hw', -⟩ :=
+      ProEtale.existsUnique_distTriang_boundedConstructibleAdicClosedSupportTriangle
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+        ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))
+        (Scheme.Hom.geometricFiberMap j (comp_over j _))
+        (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)
+        ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K)
+    obtain ⟨e, he⟩ := WeilComplex.exists_iso_mapTriangle_closedSupportTriangle i j hij K hw hw'
+    exact Adjunction.isIso_mateEquiv_app _ _
+      (ProEtale.fullyFaithfulBoundedConstructibleAdicRightDerivedLowerStar
+        (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+        ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _)))
+      eI.inv K (Triangle.π₁.mapIso e) (by
+        have h := e.hom.comm₁
+        simp only [he, Category.comp_id] at h
+        exact h.symm)
+  have : IsIso β.natTrans := NatIso.isIso_of_isIso_app _
+  exact ⟨eI, asIso β.natTrans, fun K ↦ mateEquiv_counit _ _ eI.inv K⟩
 
 end Equivariance
 

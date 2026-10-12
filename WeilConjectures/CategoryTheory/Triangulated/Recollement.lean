@@ -38,6 +38,14 @@ under `j^*`, `Rj_*` and the fibres of the open unit, without an ambient exceptio
 - `CategoryTheory.Pretriangulated.Recollement.isLeftAdjoint`: `i` is a left adjoint.
 - `CategoryTheory.Pretriangulated.Recollement.existsUnique_distTriang_counit_unit`: the supported
   localization triangle, with its unique third map.
+- `CategoryTheory.Pretriangulated.Recollement.exists_iso_triangle`: any distinguished triangle
+  `A ⟶ K ⟶ B ⟶` with `A` in the essential image of `i` and `B` in that of `j_*` is isomorphic to
+  the supported localization triangle of `K`, by an isomorphism which is the identity on `K`.
+  This is how the supported localization triangle is compared along functors, e.g. for the
+  equivariance of the triangle of Weil complexes (blueprint `prop-sf-localization-all-stages`).
+- `CategoryTheory.Adjunction.isIso_mateEquiv_app`: a criterion for the mate of an isomorphism
+  `ΦZ ⋙ i' ≅ i ⋙ Φ` along adjunctions `i ⊣ G`, `i' ⊣ G'` to be invertible, used to compare the
+  right adjoints `i^!` along such functors.
 -/
 
 @[expose] public section

@@ -47,7 +47,7 @@ variable {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
 include adj in
 /-- The unit form of the mate condition `mateEquiv adj adj eL⁻¹ = eR`. -/
 @[reassoc]
-lemma map_unit_app_comp_hom_app (h : mateEquiv adj adj eL.inv = eR.hom) (X : C) :
+lemma map_unit_app_comp_of_mateEquiv_eq (h : mateEquiv adj adj eL.inv = eR.hom) (X : C) :
     F.map (adj.unit.app X) ≫ eR.hom.app (L.obj X) ≫ R.map (eL.hom.app X) =
       adj.unit.app (F.obj X) := by
   have := unit_mateEquiv adj adj eL.inv X
@@ -57,7 +57,7 @@ lemma map_unit_app_comp_hom_app (h : mateEquiv adj adj eL.inv = eR.hom) (X : C) 
 include adj in
 /-- The counit form of the mate condition `mateEquiv adj adj eL⁻¹ = eR`. -/
 @[reassoc]
-lemma hom_app_comp_map_counit_app (h : mateEquiv adj adj eL.inv = eR.hom) (Y : D) :
+lemma comp_map_counit_app_of_mateEquiv_eq (h : mateEquiv adj adj eL.inv = eR.hom) (Y : D) :
     eL.hom.app (R.obj Y) ≫ L.map (eR.hom.app Y) ≫ adj.counit.app (G.obj Y) =
       G.map (adj.counit.app Y) := by
   have := mateEquiv_counit adj adj eL.inv Y
@@ -76,7 +76,7 @@ noncomputable def adjunctionUnit (h : mateEquiv adj adj eL.inv = eR.hom) :
         change F.map (adj.unit.app K.carrier) ≫ eR.hom.app (L.obj K.carrier) ≫
           R.map (eL.hom.app K.carrier ≫ L.map K.str.hom) = K.str.hom ≫ adj.unit.app K.carrier
         rw [R.map_comp]
-        erw [map_unit_app_comp_hom_app_assoc adj h]
+        erw [map_unit_app_comp_of_mateEquiv_eq_assoc adj h]
         exact (adj.unit.naturality K.str.hom).symm }
   naturality _ _ φ := ObjectProperty.hom_ext _ (Algebra.Hom.ext (adj.unit.naturality φ.hom.f))
 
@@ -90,7 +90,7 @@ noncomputable def adjunctionCounit (h : mateEquiv adj adj eL.inv = eR.hom) :
         change G.map (adj.counit.app K.carrier) ≫ K.str.hom =
           (eL.hom.app (R.obj K.carrier) ≫ L.map (eR.hom.app K.carrier ≫ R.map K.str.hom)) ≫
             adj.counit.app K.carrier
-        rw [← hom_app_comp_map_counit_app adj h, L.map_comp]
+        rw [← comp_map_counit_app_of_mateEquiv_eq adj h, L.map_comp]
         simp only [Category.assoc]
         erw [adj.counit_naturality] }
   naturality _ _ φ := ObjectProperty.hom_ext _ (Algebra.Hom.ext (adj.counit.naturality φ.hom.f))
@@ -98,7 +98,8 @@ noncomputable def adjunctionCounit (h : mateEquiv adj adj eL.inv = eR.hom) :
 /-- **Lifting an adjunction to algebras.** If `eR` is the mate of `eL⁻¹`, the adjunction
 `L ⊣ R` lifts to an adjunction `mapOfNatIso eL ⊣ mapOfNatIso eR` between the categories of
 algebras with invertible structure morphism, whose unit and counit have the unit and counit of
-`L ⊣ R` as underlying morphisms. -/
+`L ⊣ R` as underlying morphisms. This gives the Frobenius-equivariant adjunctions `φ^* ⊣ φ_*` of
+Weil sheaves (blueprint `prop-sf-localization-all-stages`, Weil clause). -/
 noncomputable def adjunction (h : mateEquiv adj adj eL.inv = eR.hom) :
     mapOfNatIso eL ⊣ mapOfNatIso eR where
   unit := adjunctionUnit h

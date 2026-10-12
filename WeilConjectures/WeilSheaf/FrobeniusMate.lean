@@ -47,6 +47,8 @@ section Exchange
 
 variable (A : Type u') [Category.{u + 1} A]
 
+/-- The components of the inverse of `g_* ≅ g'_*` for `g = g'` are the restriction maps along the
+canonical isomorphisms `V ×_{Y,g} Z ≅ V ×_{Y,g'} Z`. -/
 lemma lowerStarCongr_inv_app_hom_app {Z W : Scheme.{u}} {g g' : Z ⟶ W} (h : g = g')
     (G : Sheaf (ProEt.topology Z) A) (V : W.ProEtᵒᵖ) :
     ((lowerStarCongr A h).inv.app G).hom.app V =
@@ -64,6 +66,10 @@ variable {X Y : Scheme.{u}} (p : X ⟶ Y)
 
 set_option maxHeartbeats 1000000 in
 -- The kernel needs more time to check the identification of the pullbacks.
+/-- The unit of the equivalence `(ai)_* ⊣ (ah)_*` (for `ai ≫ ah = 𝟙`) transported along `p_*`
+and the exchange isomorphism `ah_* ⋙ p_* ≅ p_* ⋙ bh_*` compose to the unit of `(bi)_* ⊣ (bh)_*`
+followed by `bh_*` of the exchange isomorphism `p_* ⋙ bi_* ≅ ai_* ⋙ p_*`: the unit form of the
+mate relation between the two exchange isomorphisms, checked on sections. -/
 lemma lowerStar_map_lowerStarComp_trans_inv_app_comp (M : Sheaf (ProEt.topology X) A) :
     (p)_*[A].map ((lowerStarComp A ai ah ≪≫ lowerStarCongr A hA ≪≫ lowerStarId A X).inv.app M) ≫
         (lowerStarComp A ah p).hom.app ((ai)_*[A].obj M) ≫
@@ -92,7 +98,9 @@ section Adic
 
 variable {l : ℕ} [Fact l.Prime]
 
-lemma adicLowerStarComp_trans_inv_app_hom' {X Y : Scheme.{u}} (a : Y ⟶ X) (b : X ⟶ Y)
+/-- The inverse of the unit `(a)_* ⋙ (b)_* ≅ 𝟭` (for `a ≫ b = 𝟙`) of `ℓ`-adic sheaves is that of
+the underlying sheaves. -/
+private lemma adicLowerStarComp_trans_inv_app_hom' {X Y : Scheme.{u}} (a : Y ⟶ X) (b : X ⟶ Y)
     (h : a ≫ b = 𝟙 Y) (M : AdicSheaf l Y) :
     ((adicLowerStarComp l a b ≪≫ adicLowerStarCongr l h ≪≫ adicLowerStarId l Y).inv.app M).hom =
       (lowerStarComp _ a b ≪≫ lowerStarCongr _ h ≪≫ lowerStarId _ Y).inv.app M.X := by
@@ -105,6 +113,8 @@ variable {X Y : Scheme.{u}} (p : X ⟶ Y)
 
 set_option maxHeartbeats 1000000 in
 -- The `Mod`-level composites unfold to the underlying sheaf-level ones.
+/-- `AlgebraicGeometry.ProEtale.lowerStar_map_lowerStarComp_trans_inv_app_comp` for sheaves of
+`ℚ̄_ℓ,X`-modules. -/
 lemma adicLowerStar_map_adicLowerStarComp_trans_inv_app_comp {ah ai : X ⟶ X} {bh bi : Y ⟶ Y}
     (hA : ai ≫ ah = 𝟙 X) (hB : bi ≫ bh = 𝟙 Y) (c : ah ≫ p = p ≫ bh) (c' : p ≫ bi = ai ≫ p)
     (M : AdicSheaf l X) :
@@ -226,7 +236,8 @@ variable {l : ℕ} [Fact l.Prime] {k : Type u} [Field k] [Finite k] {X₀ Y₀ :
 
 /-- The Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*` are mates under `φ̄^* ⊣ φ̄_*`: the
 mate of the inverse of `ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso` is
-`ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`. -/
+`ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`. So `φ̄^* ⊣ φ̄_*` lifts to pro-étale Weil
+sheaves (blueprint `prop-sf-localization-all-stages`, Weil clause). -/
 lemma ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     mateEquiv (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
         (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
