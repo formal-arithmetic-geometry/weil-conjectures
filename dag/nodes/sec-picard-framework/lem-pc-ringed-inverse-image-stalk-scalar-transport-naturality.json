@@ -14,24 +14,53 @@
  ],
  "proof": [
   {
-   "text": "identify the chosen sheaf pullback with presheaf pullback followed by\nsheafification using uniqueness of left adjoints. Apply the ring and abelian\nstalk comparisons of Tag 008H, transporting them through this identification.\nThe ring map is stalkPullbackHom followed by stalk of toSheafify; both are\nisomorphisms. The analogous abelian map defines c. To verify\nsemilinearity, represent the scalar and vector on neighborhoods of f(x), restrict\nboth to their intersection, and apply the germ formulas for the two comparisons.\nThe semilinearity clause of exists_inverseImageModuleInstances identifies the\nunit of r times m with the product of the two units. The stalk germ scalar law\nthen gives the asserted equation. For naturality, represent m by a germ, use\nnaturality of the abelian inverse-image unit, and use stalkFunctor_map_germ_apply.\nThe map on the right is exactly stalkAddMap of inverseImageModuleMap by definition.\nThe construction applies to zero modules and zero rings; with empty X there is\nno x. No flatness or nonvanishing hypothesis is used.",
+   "text": "Use the explicit inverse-image construction, whose underlying presheaf is presheaf pullback followed by sheafification. Define the comparison map as stalkPullbackHom followed by stalkFunctor.map toSheafify, for both the ring and each abelian sheaf. Mathlib stalkPullbackIso and stalkFunctor_map_unit_toSheafify_isIso make the abelian comparison invertible; convert asIso to an additive equivalence. No abstract chosen left adjoint or uniqueness-of-adjoints comparison is needed.",
    "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "def-pc-topological-inverse-image-module",
-    "def-weil-pbc-module-stalk"
+    "lem-weil-pbc-presheaf-inverse-image-stalk",
+    "lem-weil-pbc-stalk-sheafification-space",
+    "def-pc-topological-inverse-image-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove the germ formula for the explicit map using germ_stalkPullbackHom and stalkFunctor_map_germ. Unfold sheafAdjunctionContinuous and use map_restrictFullyFaithful_unit_app and comp_unit_app to identify the section map with the explicit sheaf adjunction unit. These are categorical adjunction identities applied to the construction, with no additional geometric theorem.",
+   "uses": [
+    "lem-weil-pbc-presheaf-inverse-image-stalk",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Represent the scalar and vector by germs, then restrict their representatives to the intersection of the two neighborhoods. Use germ_smul in the source. The chosen-spec semilinearity clause of exists_inverseImageModuleInstances transports the product under the explicit sheaf unit. Use germ_smul in the inverse-image module and the ring and abelian comparison germ formulas to identify this with k(r) times c(m).",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent a source module stalk element by a germ. Unfold moduleStalkFunctor.map and stalkAddMap, then apply stalkFunctor_map_germ_apply on both sides. The abelian comparison germ formula reduces the desired equation to sectionwise unit_naturality of the explicit sheaf pullback adjunction. inverseImageModuleMap has precisely that underlying abelian pullback map, by definition.",
+   "uses": [
+    "def-pc-module-stalk-functor",
+    "def-weil-pbc-module-stalk",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-presheaf-inverse-image-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
   "def-pc-topological-inverse-image-module",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tag 0098, balanced tensor construction and the inverse-image stalk comparison"
+  "place": "Tags 008H and 0098, using the explicit inverse-image construction; Mathlib categorical unit identities for the germ formula"
  },
  "mathlib_searches": [
   {
@@ -113,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T135248-L-1675330",
-  "kind": "interface",
+  "landing": "20261012T152348-L-2313576",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

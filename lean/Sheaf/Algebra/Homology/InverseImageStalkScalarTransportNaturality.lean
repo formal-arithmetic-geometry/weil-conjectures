@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Topology.PresheafModuleStalkFunctor
 public import Sheaf.Topology.InverseImageModule
-import Sheaf.Topology.InverseImageStalk
+import Mathlib.Topology.Sheaves.Sheafify
 
 /-!
 # Natural semilinear inverse-image stalk comparison
@@ -29,12 +29,51 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+private def explicitStalkMap
+    (C : Type (u + 1)) [Category.{u} C] [Limits.HasColimits.{u} C]
+    {T Z : TopCat.{u}} (f : T ⟶ Z) (x : T)
+    [HasWeakSheafify (Opens.grothendieckTopology T) C] (G : Z.Sheaf C) :
+    TopCat.Presheaf.stalk G.obj (f x) ⟶
+      TopCat.Presheaf.stalk ((TopCat.Sheaf.inverseImageConstruction f C).obj G).obj x :=
+  TopCat.Presheaf.stalkPullbackHom C f G.obj x ≫
+    (TopCat.Presheaf.stalkFunctor C x).map
+      (toSheafify (Opens.grothendieckTopology T)
+        ((TopCat.Presheaf.pullback C f).obj G.obj))
+
+private theorem explicitStalkMap_germ
+    (C : Type (u + 1)) [Category.{u} C] [Limits.HasColimits.{u} C]
+    {T Z : TopCat.{u}} (f : T ⟶ Z) (x : T)
+    [HasWeakSheafify (Opens.grothendieckTopology T) C] (G : Z.Sheaf C)
+    (V : Opens Z) (hx : f x ∈ V) :
+    TopCat.Presheaf.germ G.obj V (f x) hx ≫ explicitStalkMap C f x G =
+      ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f) C (Opens.grothendieckTopology Z)
+          (Opens.grothendieckTopology T)).unit.app G).hom.app (Opposite.op V) ≫
+        TopCat.Presheaf.germ
+          ((TopCat.Sheaf.inverseImageConstruction f C).obj G).obj
+          ((Opens.map f).obj V) x hx := by
+  dsimp only [explicitStalkMap]
+  rw [TopCat.Presheaf.germ_stalkPullbackHom_assoc,
+    TopCat.Presheaf.stalkFunctor_map_germ, ← Category.assoc]
+  congr 1
+  change _ = ((sheafToPresheaf (Opens.grothendieckTopology Z) C).map
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f) C (Opens.grothendieckTopology Z)
+        (Opens.grothendieckTopology T)).unit.app G)).app (Opposite.op V)
+  dsimp only [Functor.sheafPullbackConstruction.sheafAdjunctionContinuous]
+  rw [Adjunction.map_restrictFullyFaithful_unit_app]
+  simp [Adjunction.comp_unit_app, TopCat.Presheaf.pullbackPushforwardAdjunction,
+    TopCat.Presheaf.pullback]
+
+set_option backward.defeqAttrib.useBackward true in
+set_option maxHeartbeats 800000 in
+-- Comparing stalk module actions unfolds both the ringed-space and sheaf interfaces.
 /-- Natural semilinear comparison for the explicitly constructed inverse image.
 Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
 
-Proof: identify the chosen sheaf pullback with presheaf pullback followed by
-sheafification using uniqueness of left adjoints. Apply the ring and abelian
-stalk comparisons of Tag 008H, transporting them through this identification.
+Proof: use the explicit sheaf pullback construction, namely presheaf pullback
+followed by sheafification. Apply the ring and abelian stalk comparisons of Tag
+008H directly to this construction.
 The ring map is stalkPullbackHom followed by stalk of toSheafify; both are
 isomorphisms. The analogous abelian map defines c. To verify
 semilinearity, represent the scalar and vector on neighborhoods of f(x), restrict
@@ -67,6 +106,72 @@ theorem exists_inverseImage_stalk_comparison_natural
       (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),
       c N ((RingedSpace.moduleStalkFunctor Y (f x)).map a m) =
       PresheafOfModules.stalkAddMap
-          (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m) := by sorry
+          (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m) := by
+  classical
+  dsimp only
+  let kA (M : RingedSpace.Modules Y) :=
+    explicitStalkMap Ab f x ((SheafOfModules.toSheaf _).obj M)
+  have hkA (M : RingedSpace.Modules Y) : IsIso (kA M) := by
+    have : IsIso (TopCat.Presheaf.stalkPullbackHom Ab f M.val.presheaf x) :=
+      (TopCat.Presheaf.stalkPullbackIso Ab f M.val.presheaf x).isIso_hom
+    have := TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso x Ab
+      ((TopCat.Presheaf.pullback Ab f).obj M.val.presheaf)
+    change IsIso (TopCat.Presheaf.stalkPullbackHom Ab f M.val.presheaf x ≫
+      (TopCat.Presheaf.stalkFunctor Ab x).map
+        (toSheafify (Opens.grothendieckTopology X)
+          ((TopCat.Presheaf.pullback Ab f).obj M.val.presheaf)))
+    infer_instance
+  let c (M : RingedSpace.Modules Y) := (asIso (kA M)).addCommGroupIsoToAddEquiv
+  have hc (M : RingedSpace.Modules Y) (V : Opens Y) (hx : f x ∈ V)
+      (m : M.val.obj (Opposite.op V)) :
+      c M (TopCat.Presheaf.germ M.val.presheaf V (f x) hx m) =
+        TopCat.Presheaf.germ (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val.presheaf
+          ((Opens.map f).obj V) x hx
+          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+            (Opens.map f) Ab (Opens.grothendieckTopology Y)
+              (Opens.grothendieckTopology X)).unit.app
+                ((SheafOfModules.toSheaf _).obj M)).hom.app (Opposite.op V) m) := by
+    exact ConcreteCategory.congr_hom
+      (explicitStalkMap_germ Ab f x ((SheafOfModules.toSheaf _).obj M) V hx) m
+  refine ⟨c, ?_, ?_⟩
+  · intro M r m
+    obtain ⟨U, hxU, r, rfl⟩ := Y.presheaf.exists_germ_eq r
+    obtain ⟨V, hxV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf m
+    have hx : f x ∈ U ⊓ V := ⟨hxU, hxV⟩
+    rw [← Y.presheaf.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) (f x) hx r,
+      ← TopCat.Presheaf.germ_res_apply M.val.presheaf
+        (homOfLE inf_le_right : U ⊓ V ⟶ V) (f x) hx m,
+      ← PresheafOfModules.germ_smul (R := Y.presheaf) M.val]
+    erw [hc]
+    have hu := (Classical.choose_spec
+      (TopCat.Sheaf.exists_inverseImageModuleInstances f Y.sheaf M)).2
+    have hs := hu (Opposite.op (U ⊓ V))
+      (Y.presheaf.map (homOfLE inf_le_left).op r)
+      (M.val.map (homOfLE inf_le_right).op m)
+    erw [hs]
+    erw [PresheafOfModules.germ_smul
+      (R := (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj)
+      (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val]
+    erw [hc]
+    have hr := ConcreteCategory.congr_hom
+      (explicitStalkMap_germ CommRingCat f x Y.sheaf (U ⊓ V) hx)
+      (Y.presheaf.map (homOfLE inf_le_left).op r)
+    exact congrArg (fun r ↦ r • _) hr.symm
+  · intro M N a m
+    obtain ⟨V, hx, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf m
+    change c N ((TopCat.Presheaf.stalkFunctor Ab (f x)).map
+      ((PresheafOfModules.toPresheaf _).map a.val)
+        (TopCat.Presheaf.germ M.val.presheaf V (f x) hx m)) = _
+    erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+    erw [hc, hc]
+    dsimp only [PresheafOfModules.stalkAddMap]
+    erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+    have hn := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f) Ab (Opens.grothendieckTopology Y)
+        (Opens.grothendieckTopology X)).unit_naturality
+          ((SheafOfModules.toSheaf _).map a)
+    exact congrArg (fun q ↦ TopCat.Presheaf.germ
+      (TopCat.Sheaf.inverseImageModule f Y.sheaf N).val.presheaf
+        ((Opens.map f).obj V) x hx (q.hom.app (Opposite.op V) m)) hn.symm
 
 end
