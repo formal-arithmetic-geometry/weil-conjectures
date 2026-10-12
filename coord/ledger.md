@@ -9431,3 +9431,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: returned deliver/P3/Sheaf.CategoryTheory.Sites.OverPullbackAdjunctionMono (reviewer RETURN: (reviewer X-8cb5c, head 8cb5c43e5) F: coord/changes/OverPullbackAdjunctionMono-import.md omits the direct downstream use)
 - 20:39 L: returned deliver/J1/Sheaf.AlgebraicGeometry.StrictLocalSectionPullback (reviewer RETURN: (the landing tools, head 63834a1f2) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 20:39 L: returned deliver/P3/Sheaf.AlgebraicGeometry.FinitePresentationSupportReductionFiltration (reviewer RETURN: (the landing tools, head 31e5e278b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 20:39 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact (stage 3; reviewer PASS; first push; landing 20261012T203937-L-828386 (proof); batch 20261012T203936; modules 1; new nodes 0)

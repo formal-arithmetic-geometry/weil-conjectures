@@ -6,7 +6,9 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.CategoryTheory.Sites.Abelian
+import Sheaf.CategoryTheory.SiteExtensionByZeroExact
 
 /-!
 # Exactness of extension by zero on the small Zariski site
@@ -43,7 +45,12 @@ preadditive categories preserves finite biproducts, hence is additive. -/
 theorem zariski_extensionByZero_additive (X : Scheme.{u}) (U : X.Opens) :
     (Functor.sheafPullbackConstruction.sheafPullback (Over.forget U) AddCommGrpCat.{u}
         ((Opens.grothendieckTopology X).over U) (Opens.grothendieckTopology X)).Additive := by
-  sorry
+  have : ((Over.forget U).sheafPushforwardContinuous AddCommGrpCat.{u}
+      ((Opens.grothendieckTopology X).over U) (Opens.grothendieckTopology X)).Additive :=
+    ⟨by intro A B f g; ext V; rfl⟩
+  exact (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (Over.forget U) AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U)
+    (Opens.grothendieckTopology X)).left_adjoint_additive
 
 /-- Extension by zero `j_! : Ab(U_Zar) ⥤ Ab(X_Zar)` (additive by
 `zariski_extensionByZero_additive`) carries every short exact sequence to a short exact
@@ -68,6 +75,21 @@ theorem zariski_extensionByZero_exact (X : Scheme.{u}) (U : X.Opens) :
         Mono ((Functor.sheafPullbackConstruction.sheafPullback (Over.forget U)
           AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U)
           (Opens.grothendieckTopology X)).map f)) := by
-  sorry
+  have htop : (Opens.grothendieckTopology X).toPrecoverage.toGrothendieck =
+      Opens.grothendieckTopology X := by
+    apply le_antisymm (GrothendieckTopology.toGrothendieck_toPrecoverage_le _)
+    intro V S hS
+    simpa only [Sieve.generate_sieve] using
+      (Precoverage.generate_mem_toGrothendieck
+        ((Opens.grothendieckTopology X).arrows_mem_toPrecoverage_iff S |>.mpr hS))
+  have hshort := site_extensionByZero_exact
+    (Opens.grothendieckTopology X).toPrecoverage U
+  rw [htop] at hshort
+  obtain ⟨hzero, hshort⟩ := hshort
+  refine ⟨hshort, ?_⟩
+  intro A B f hf
+  have : Mono (ShortComplex.cokernelSequence f).f := hf
+  exact (hshort (ShortComplex.cokernelSequence f)
+    ⟨ShortComplex.cokernelSequence_exact f⟩).mono_f
 
 end AlgebraicGeometry
