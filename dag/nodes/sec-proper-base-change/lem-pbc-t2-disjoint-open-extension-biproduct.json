@@ -1,0 +1,144 @@
+{
+ "id": "lem-pbc-t2-disjoint-open-extension-biproduct",
+ "kind": "statement",
+ "title": "Extension by zero from finite disjoint opens is a biproduct",
+ "statement": "Let Λ be any commutative ring, X any scheme, F a sheaf of Λ-modules on its small etale site, n a natural number, and U_a (a in Fin n) pairwise disjoint open subsets. Put W = union_a U_a and let j_W and j_a be the open inclusions. There exists an isomorphism j_W! j_W* F ≅ ⨁_a j_a! j_a* F. No curve, finiteness, torsion or constructibility assumption is needed, and n = 0 is allowed. Extension by zero is [def-weil-pbc-extension-by-zero] and the biproduct is [def-weil-additive-category].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. Primary text checked at https://stacks.math.columbia.edu/tag/03SC and https://stacks.math.columbia.edu/tag/0A5C."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-additive-category"
+ ],
+ "proof": [
+  {
+   "text": "Inside W form φ: ⨁_a i_a! i_a* (F|W) → F|W by taking the biproduct desc of the adjunction counits. The inclusions i_a:U_a→W are jointly surjective by the definition of W.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-additive-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a fixed a, restriction P=i_a* kills every summand indexed by b≠a, since the images of i_a and i_b are disjoint. P of the a-th inclusion is invertible, with inverse P of the a-th projection: one identity is inclusion-projection, the other follows from the total biproduct identity, whose other terms vanish.",
+   "uses": [
+    "lemma-openclosed-vanishing-lowershriek",
+    "def-weil-additive-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite of P of the a-th inclusion with Pφ is P of the a-th counit. This is invertible by the right triangle identity and the invertible unit of i_a! ⊣ i_a*. Thus Pφ is invertible. The jointly-surjective restriction criterion, proved from conservative geometric stalks, makes φ invertible. This also applies to the empty cover of the empty W.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the additive functor j_W! to φ and use Functor.mapBiproduct. Identify j_W! i_a! with j_a! by uniqueness of left adjoints to the composite inverse image, and identify i_a* j_W* with j_a* by upperStarComp. The component isomorphisms induce a biproduct isomorphism, giving the stated result.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-additive-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-additive-category",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-openclosed-vanishing-lowershriek",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. Primary text checked at https://stacks.math.columbia.edu/tag/03SC and https://stacks.math.columbia.edu/tag/0A5C. Finite-biproduct details and generalization written by T2 following these source arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero finite disjoint open cover sheaf biproduct",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "Unavailable; LeanFinder, Loogle, and local source searches used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero from finitely many pairwise disjoint open subsets is a finite biproduct of the extensions by zero from each open",
+   "results": "TopCat.Sheaf.isProductOfDisjoint, Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections; topological presheaf cover equivalences and condensed locally constant functions. No etale extension-by-zero biproduct theorem.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biproduct\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg biproduct|biprod|sum WeilConjectures/SixFunctors/OpenClosed and SixFunctors/Etale/LowerShriek/OpenImmersion; Mathlib/CategoryTheory/Preadditive/Biproducts; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts",
+   "results": "Located biproduct total, inclusion/projection identities and Functor.mapBiproduct. Located existing extension-by-zero composition, disjoint-range vanishing and jointly-surjective restriction criterion; these give the complete geometric proof.",
+   "date": "2026-10-12",
+   "verdict": "No one-line match; proved from the located categorical and geometric lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-curve-dense-open-localization",
+   "place": "proof, direct-sum decomposition of extension by zero and componentwise comparison of the eight assertions; this node isolates the sheaf decomposition",
+   "via": [
+    "lem-pbc-q1-disjoint-open-prime-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DisjointOpenExtensionBiproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DisjointOpenExtensionBiproduct.lean",
+  "declaration": "AlgebraicGeometry.Etale.disjointOpenExtension_biproduct_iso",
+  "statement": "theorem disjointOpenExtension_biproduct_iso (Λ : Type (u + 1)) [CommRing Λ]\n    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (n : ℕ) (U : Fin n → X.Opens)\n    (hU : Pairwise (fun a b ↦ Disjoint (U a : Set X) (U b))) :\n    Nonempty\n      ((((⨆ a, U a).ι)_!open[ModuleCat.{u + 1} Λ].obj\n          (((⨆ a, U a).ι)^*[ModuleCat.{u + 1} Λ].obj F)) ≅\n        ⨁ (fun a ↦ (((U a).ι)_!open[ModuleCat.{u + 1} Λ].obj\n          (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F))))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

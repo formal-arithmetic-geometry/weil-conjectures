@@ -15,38 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Let W be the union of the given finitely many pairwise disjoint opens. The extension-by-zero counits give a morphism from the finite direct sum of the j_a! restrictions to j_! of the restriction to W. At a geometric point inside W, the unique nonzero summand maps identically to F at that point; outside W both sides are zero. Conservative geometric stalks make this an isomorphism. Each summand is constructible on the open-closed stratification and killed by r.",
+   "text": "Define G_a=j_a! j_a* F. The curve X is Noetherian, so each open immersion j_a is quasi-compact. Constructibility of inverse image and of open extension by zero with the scheme-theoretic closed complement give constructibility of G_a. The composite additive functor j_a* followed by j_a! sends r times the identity of F to r times the identity of G_a, so each G_a is killed by r.",
    "uses": [
-    "def-weil-pbc-extension-by-zero",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-geometric-stalks"
+    "prop-constructible-pullback",
+    "prop-constructible-open-closed",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved disjoint-open biproduct decomposition to obtain e:j_W! j_W* F ≅ ⨁_a G_a.",
+   "uses": [
+    "lem-pbc-t2-disjoint-open-extension-biproduct"
    ],
    "elementary": false
   },
   {
-   "text": "Cohomology and inverse image are additive and comparison maps are natural in the sheaf. Thus each cohomology group and each field-extension or open-restriction map for the finite sum is the finite direct sum of those for the summands. A finite sum is zero or finite exactly when every summand is, and a finite sum of maps is bijective or surjective exactly when each summand map is. Apply these facts to C1-C8. The affine and proper conditions are shared by all the summands. For the conditional coefficient requirements use that r-primary coefficients are either all invertible away from r, all primary at r, or zero when an exceptional condition applies. When n = 0 the sheaf is zero and the universal statement on Fin 0 is vacuous.",
+   "text": "Apply the general common-prime biproduct assertion equivalence to f, r, the constructible r-killed family G, and e. Its two sides are definitionally the desired assertions.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-primary-torsion"
+    "lem-pbc-t2-prime-biproduct-assertions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-eight-curve-assertions",
-  "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-pbc-t2-disjoint-open-extension-biproduct",
+  "lem-pbc-t2-prime-biproduct-assertions",
+  "prop-constructible-open-closed",
+  "prop-constructible-pullback"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "03SC, 0GJA; elementary details and ModuleCat coefficient transport written out by Q1"
+  "place": "03SC proof, fourth paragraph, and 0A5C; geometric biproduct decomposition proved in Lean by T2, analytic finite-sum comparison isolated in lem-pbc-t2-prime-biproduct-assertions."
  },
  "mathlib_searches": [
   {
@@ -120,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T025731-L-1257477",
+  "landing": "20261012T042421-L-1821844",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

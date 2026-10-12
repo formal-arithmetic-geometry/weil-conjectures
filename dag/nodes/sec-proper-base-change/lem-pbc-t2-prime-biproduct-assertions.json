@@ -1,0 +1,148 @@
+{
+ "id": "lem-pbc-t2-prime-biproduct-assertions",
+ "kind": "statement",
+ "title": "Eight assertions for a finite biproduct with one prime annihilator",
+ "statement": "Let Λ be a commutative ring, k a field, X a scheme, and f:X→Spec k. Let r be prime, I a finite set, and G_a a family of constructible Λ-module sheaves on X_et, each killed by r (r times its identity morphism is zero). Let H be another such module sheaf with an isomorphism H ≅ ⨁_a G_a. Then the eight conditional predicates [def-weil-pbc-eight-curve-assertions] satisfy Assertions Λ f H if and only if Assertions Λ f (G_a) for every a. The predicates are used as formally defined, without a curve or algebraic closedness hypothesis. The common-prime hypothesis concerns [def-weil-pbc-primary-torsion]; constructibility is [def-weil-pbc-etale-constructible-sheaf]. The empty family is allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. Primary text checked at https://stacks.math.columbia.edu/tag/03SC and https://stacks.math.columbia.edu/tag/0A5C."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-additive-category"
+ ],
+ "proof": [
+  {
+   "text": "Forgetting to abelian sheaves, inverse image, and cohomology are additive and preserve finite biproducts and coefficient isomorphisms. Naturality identifies each field-extension or open-restriction cohomology comparison with the finite sum of the component comparisons.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-additive-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite direct sum is zero or finite exactly when all components are zero or finite, and a finite sum of maps is bijective or surjective exactly when every component is. This gives C1,C2,C5,C7,C8, since affine and proper conditions are shared. Constructibility holds for the finite sum and is invariant under the given isomorphism.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-additive-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For C3, in positive characteristic p=r every r-killed sheaf has primary stalks. If p differs from r, a primary stalk killed by r is zero: an element killed by p^m and r is zero by Bezout. Therefore a summand satisfying the exceptional primary hypothesis is zero, and if the whole sum satisfies it the whole sum is zero. C3 then holds automatically in the exceptional cases.",
+   "uses": [
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For C4 and C6, if r is invertible in k every r-killed sheaf has invertible-order torsion; use the componentwise comparisons of the first two steps. If char k=r, such a sheaf satisfying invertible-order torsion is zero, since each stalk element is killed both by r and by an integer coprime to r. This handles exceptional conditions both for individual summands and for the whole sum. Transport all hypotheses and comparison maps along H ≅ ⨁ G. For the empty family H is zero and all assertions are automatic.",
+   "uses": [
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-eight-curve-assertions",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-additive-category",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-primary-torsion",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. Primary text checked at https://stacks.math.columbia.edu/tag/03SC and https://stacks.math.columbia.edu/tag/0A5C. Finite-biproduct details and generalization written by T2 following these source arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology vanishing finiteness base change finite direct sum prime torsion sheaves",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "Unavailable; LeanFinder, Loogle, and local source searches used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing finiteness bijectivity and surjectivity of etale cohomology comparison maps are preserved and reflected by finite direct sums of sheaves killed by a common prime",
+   "results": "Eight hits concerning formally etale products, locally surjective sheaf morphisms and the etale locus; no bundled cohomological assertion equivalence.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biproduct\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg biproduct|direct.sum Mathlib/CategoryTheory/Sites/SheafCohomology; rg assertions.*(iso|biproduct)|biproduct.*assertions lean/Sheaf lean/WeilConjectures",
+   "results": "No finite-sum assertion theorem. RetractAssertions only handles coefficient-converted CurveCoefficientPair objects and is not this ModuleCat interface; of_shortExact is in Reductions, which imports the current item and would make a cycle.",
+   "date": "2026-10-12",
+   "verdict": "No direct match; new finite-sum comparison obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-curve-dense-open-localization",
+   "place": "proof, direct-sum decomposition of extension by zero and componentwise comparison of the eight assertions; this node isolates the cohomological finite-sum comparison",
+   "via": [
+    "lem-pbc-q1-disjoint-open-prime-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimeBiproductAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimeBiproductAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_iff_of_prime_biproduct_iso",
+  "statement": "theorem assertions_iff_of_prime_biproduct_iso (Λ : Type (u + 1)) [CommRing Λ]\n    {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    (r : ℕ) [Fact r.Prime] {ι : Type} [Finite ι]\n    (G : ι → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hGc : ∀ a, Scheme.IsConstructibleSheaf (G a)) (hGr : ∀ a, r • 𝟙 (G a) = 0)\n    {H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : H ≅ ⨁ G) :\n    Assertions Λ f H ↔ ∀ a, Assertions Λ f (G a)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821844",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
