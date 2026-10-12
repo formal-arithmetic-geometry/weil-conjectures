@@ -11,16 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
-import Sheaf.Paper.SchemeTheoreticSupport
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.CoherentIdealPatchingExactSequence
 
 /-!
 # The integral-support induction step for coherent devissage
@@ -108,7 +101,50 @@ theorem coherent_property_integral_ideals_of_small_support
               G'.arrow = h ≫ idealModuleProductι ι G) ∧
             Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map
               G'.arrow).hom ∧ P (G' : X.Modules)) :
-    ∀ I : Z.IdealSheafData, P ((pushforward i).obj I.toModules) := by
-  sorry
+    ∀ I : Z.IdealSheafData, P ((pushforward i).obj I.toModules)  := by
+  have ft_iso_small_support : ∀ {F G : X.Modules} (e : F ≅ G), F.IsFiniteType → G.IsFiniteType := by
+    intro F G e hF
+    obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
+    let q' : G.LocalGeneratorsData :=
+      { I := q.I
+        X := q.X
+        coversTop := q.coversTop
+        generators j := (q.generators j).ofEpi
+          ((SheafOfModules.overFunctor X.ringCatSheaf (q.X j)).map e.hom) }
+    refine { exists_localGeneratorsData := ⟨q', ?_⟩ }
+    constructor
+    intro j
+    have := hq.isFiniteType j
+    exact inferInstanceAs ((q.generators j).ofEpi
+      ((SheafOfModules.overFunctor X.ringCatSheaf (q.X j)).map e.hom)).IsFiniteType
+  have coh_iso_small_support : ∀ {F G : X.Modules} (e : F ≅ G),
+      RingedSpace.IsCoherent X.toRingedSpace F →
+      RingedSpace.IsCoherent X.toRingedSpace G := by
+    intro F G e hF
+    obtain ⟨hq, ht⟩ := (isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF
+    exact (isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mpr
+      ⟨(SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e hq,
+        ft_iso_small_support e ht⟩
+  have coh_zero_small_support : ∀ {F : X.Modules},
+      RingedSpace.IsCoherent X.toRingedSpace F →
+      RingedSpace.IsCoherent X.toRingedSpace (0 : X.Modules) := by
+    intro F hF
+    have hk := ((isCoherent_kernel_cokernel_biprod_and_submodule X).1 F F hF hF).1 (𝟙 F)
+    exact coh_iso_small_support (isZero_kernel_of_mono (𝟙 F)).isoZero hk.1
+  have p_iso_small_support : ∀ {F G : X.Modules} (e : F ≅ G),
+      RingedSpace.IsCoherent X.toRingedSpace F → P G → P F := by
+    intro F G e hF hG
+    let S : ShortComplex X.Modules := ShortComplex.mk (0 : 0 ⟶ F) e.hom (by simp)
+    have hs : S.ShortExact :=
+      { exact := (S.exact_iff_mono rfl).mpr inferInstance }
+    exact hP_ext S hs (coh_zero_small_support hF) hF
+      (coh_iso_small_support e hF) hP_zero hG
+  intro I
+  obtain ⟨r, hr, S, hmid, hs, hF, h₁, h₂, h₃, G', hG', ⟨e⟩, hp, hsupport, hzero⟩ :=
+    coherent_ideal_patching_exact_sequence X P hP_zero Z i ξ hclosure hG I
+  apply hP_sum ((pushforward i).obj I.toModules) r hF hr
+  rw [← hmid]
+  exact hP_ext S hs h₁ h₂ h₃ (p_iso_small_support e h₁ hp)
+    (hsmall S.X₃ h₃ hsupport hzero)
 
 end AlgebraicGeometry.Scheme.Modules
