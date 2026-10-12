@@ -49,6 +49,7 @@ import stage3_delivery as s3  # noqa: E402
 import review_class as rc  # noqa: E402
 import sorry_ledger as sl  # noqa: E402
 import batch_recovery as recovery
+import import_cycles as cycles
 from pipeline_guard import alert, clear_alert
 import math
 
@@ -304,6 +305,8 @@ def check(c: dict, classify: bool = True) -> dict:
         ch = li.interface_changes(m0["old"] or "", m0["text"] or "") if m0["old"] else ["(new module)"]
         if len(D["modules"]) > 1 or (ch and not set(ch) <= {"(imports removed)"}):
             raise Refuse("the landing would be of kind interface, not proof: the delivery is CODEX")
+    cycle = cycles.closing_cycle(cycles.graph(li.LEAN), {m["module"]: m["text"] for m in D["modules"]})
+    if cycle: raise Refuse("import cycle: " + " -> ".join(cycle))
     bad = prune_check(D)
     if bad:
         raise Refuse(bad)
@@ -381,6 +384,8 @@ def land_one(plan: dict, batch_id: str) -> dict:
     for nid, x in D["nodes"].items():
         if x["role"] == "new" and (ROOT / x["path"]).exists():
             raise Refuse(f"the new node {nid} exists on {md.MAIN} now (another delivery created it)")
+    if plan.get("cycle_tip") and md.git("rev-parse", "HEAD") != plan["cycle_tip"]:
+        raise Wait("the library moved after the import-cycle check; retry on the new tip")
     mods = D["modules"]
     rels = [f[len("lean/"):] for f in plan["write"]]
     is_set = len(mods) > 1
@@ -487,6 +492,7 @@ def land_batch(cache: dict, log) -> dict | None:
     pre = cache.setdefault("_pre", Pre())
     res = pre.results(cands)
     plans, taken = [], {}
+    import_graph = cycles.graph(li.LEAN)
     for c, (st, x) in zip(cands, res):
         g, item, head = c["group"], c["item"], c["head"]
         if st == "ok":
@@ -495,6 +501,13 @@ def land_batch(cache: dict, log) -> dict | None:
             if clash:
                 log("waits for the next batch", g, item, head[:9], "|", f"{clash[0]} is written by {taken[clash[0]]} in this batch")
                 continue
+            texts = {m["module"]: m["text"] for m in x["D"]["modules"]}
+            cycle = cycles.closing_cycle(import_graph, texts)
+            if cycle:
+                log("waits for the next batch", g, item, head[:9], "| import cycle:", " -> ".join(cycle))
+                pre.done.pop(head, None)
+                continue
+            import_graph = cycles.overlay(import_graph, texts)
             for p in x["paths"]:
                 taken[p] = key(c)
             plans.append(x)
@@ -532,6 +545,10 @@ def land_batch(cache: dict, log) -> dict | None:
         ids = [n for n in by_module.get(item, []) if n not in plan["D"]["nodes"]]
         plan["item_nodes"] = [p for p in (md.node_path(n) for n in ids) if p]
         try:
+            # Source scan outside locks; validate the exact tip under the lock.
+            plan["cycle_tip"] = md.git("rev-parse", "HEAD")
+            cycle = cycles.closing_cycle(cycles.graph(li.LEAN), {m["module"]: m["text"] for m in plan["D"]["modules"]})
+            if cycle: raise Wait("import cycle: " + " -> ".join(cycle))
             lock_started = time.time()
             with md.merge_lock():
                 e = land_one(plan, batch_id)
@@ -576,6 +593,15 @@ def give_back(g, item, head, why, log):
 # ---------------------------------------------------------------- taking a landed delivery out
 
 def undo_entries(entries, message, *, returned=False):
+    """Retry a stale preparation immediately, without another build or triage round."""
+    for attempt in range(20):
+        try:
+            return _undo_entries(entries, message, returned=returned)
+        except recovery.TipMoved:
+            if attempt == 19: raise
+
+
+def _undo_entries(entries, message, *, returned=False):
     """Prepare outside locks; restore delivery records and sources in a single commit.
 
     See batch_recovery's docstring for the records derived from land_one and
@@ -826,6 +852,19 @@ def triage(b: dict, last: dict) -> dict:
     text = (ld.LOCAL / "build.log").read_text(errors="ignore") if (ld.LOCAL / "build.log").exists() else ""
     blocks, imports, memo = log_blocks(text), library_imports(), {}
     T = {"decisions": [], "open": [], "unattributed": []}
+    if 'build cycle detected' in text:
+        def source(e, m):
+            p = s3.path_of_module(m)
+            a, z = recovery.blob(ROOT, e['commit'] + '^', p), recovery.blob(ROOT, e['commit'], p)
+            return (a or b'').decode(), (z or b'').decode()
+        breakers = cycles.cycle_breakers(text, imports, entries, source)
+        for route, e in breakers:
+            msg = 'import cycle: ' + ' -> '.join(route)
+            T['decisions'].append({'failure': route[0], 'case': 'import-cycle',
+                'return': [key(e)], 'reason': msg, 'message': msg, 'by': 'tools'})
+        if not breakers: T['unattributed'].append('build cycle detected; closing writer unavailable')
+        # Never send cycle diagnostics to the agent, including malformed logs.
+        return T
     seen = set()
     for c in last.get("batch_checks") or []:
         e = by_mod.get(c["module"])
@@ -941,6 +980,7 @@ def verdict_decisions(T: dict, v) -> list[dict]:
 
 
 SENTENCE = {
+    "import-cycle": "Your delivery adds an import that closes a cycle in {F}. Remove the closing import.",
     "own-fault": "Your delivered module {F} does not compile in the library.",
     "breaker": "Your delivery breaks {F}, which it does not adapt: deliver the change together with every module adapted to it, as one delivery, or keep what {F} uses.",
     "dependent-adapts": "Your module {F} no longer compiles: another delivery of the same batch changed what it uses, and that change stays. Adapt {F} to the library as it is now and deliver again.",

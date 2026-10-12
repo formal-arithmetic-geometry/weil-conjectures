@@ -204,3 +204,16 @@ class Logic(unittest.TestCase):
 
 
 if __name__ == '__main__': unittest.main()
+
+class ImportCycleTests(unittest.TestCase):
+    def test_cycle_guard_names_path(self):
+        import import_cycles as ic
+        root = pathlib.Path(tempfile.mkdtemp())
+        (root/'Sheaf').mkdir(); (root/'Sheaf/A.lean').write_text('module\nimport Sheaf.B\n')
+        (root/'Sheaf/B.lean').write_text('module\n')
+        with self.assertRaisesRegex(RuntimeError, 'Sheaf.B -> Sheaf.A'):
+            ic.refuse(root, {'Sheaf.B': 'module\nimport Sheaf.A\n'})
+    def test_lake_cycle_log(self):
+        import import_cycles as ic
+        x='error: build cycle detected:\n  error: Sheaf/B.lean: bad import \'Sheaf.A\'\n'
+        self.assertEqual(ic.log_cycles(x), [['Sheaf.B','Sheaf.A']])

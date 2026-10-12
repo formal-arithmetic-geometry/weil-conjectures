@@ -16,6 +16,14 @@ H = pathlib.Path.home(); ROOT = pathlib.Path(os.environ.get("AUTOLAND_ROOT") or 
 LOG = pathlib.Path(os.environ.get("AUTOLAND_LOG") or H / "cc1" / "autoland.log")
 PID = pathlib.Path(os.environ.get("AUTOLAND_PID") or H / "cc1" / "autoland.pid")
 os.environ["SHEAF_LEAD"] = "L-only"; os.environ["PATH"] = str(H / ".elan" / "bin") + ":" + os.environ.get("PATH", "")
+# Load server settings on every launch; retain explicitly supplied overrides.
+import shlex
+for line in (ROOT / 'coord/sheaf.env').read_text().splitlines():
+    fields = shlex.split(line, comments=True)
+    if fields and '=' in fields[0]:
+        name, value = fields[0].split('=', 1)
+        os.environ.setdefault(name, value)
+os.environ.setdefault('SHEAF_BATCH_POOL', '20')
 sys.path.insert(0, str(ROOT / "tools")); import review_class as rc, batch_land as bl
 ENV = dict(os.environ)
 NOTE2 = "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"

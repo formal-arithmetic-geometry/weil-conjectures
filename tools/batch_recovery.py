@@ -22,6 +22,11 @@ class Conflict(RuntimeError):
     pass
 
 
+class TipMoved(Conflict):
+    """Preparation must be retried immediately on the current tree."""
+    pass
+
+
 def git(root, *args):
     p = subprocess.run(['git', '-C', str(root), *args], capture_output=True)
     if p.returncode:
@@ -164,7 +169,11 @@ def inverse(root, commits, *, imports_only=False):
 def commit_inverse(root, prepared, expected, message):
     """Caller holds merge and tree locks only for this write/commit."""
     if git(root, 'rev-parse', 'HEAD').decode().strip() != expected:
-        raise Conflict('tip moved: prepare and retry')
+        # Unrelated worker commits must not starve a long preparation. Only
+        # advancing commits that touch this inverse require a fresh preparation.
+        changed = set(git(root, 'diff', '--name-only', expected, 'HEAD').decode().splitlines())
+        if changed & set(prepared):
+            raise TipMoved('tip moved on recovery paths: prepare and retry')
     previous = {}
     try:
         for path, data in prepared.items():
