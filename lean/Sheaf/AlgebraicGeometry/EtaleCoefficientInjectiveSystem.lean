@@ -6,10 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystemEmbedding
 
 /-! # Injective embeddings of coefficient systems
 
@@ -23,6 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 /-- A compatible coefficient system admits a compatible stagewise injective embedding.
 Source: Stacks Project, Tag 0EXZ, product of direct images over all outgoing arrows.
 (blueprint: lem-weil-pbc-etale-coefficient-injective-system).
@@ -70,6 +68,10 @@ theorem etale_coefficient_injective_system
       (∀ i : I, Injective (FI i)) ∧ (∀ i : I, Mono (ai i)) ∧
       (∀ (i j : I) (f : i ⟶ j),
         φ f ≫ ai j = (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).map (ai i) ≫ ψ f)
-    := by sorry
+    := by
+  obtain ⟨ψ, hidentityI, hcompositionI, ai, hmono, hacompat⟩ :=
+    etale_coefficient_injective_system_embedding D F φ hidentity hcomposition
+  exact ⟨etaleCoefficientInjectiveTarget D F, ψ, hidentityI, hcompositionI, ai,
+    etale_coefficient_injective_system_data D F, hmono, hacompat⟩
 
 end AlgebraicGeometry.Etale
