@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Write $F=R^n$ with coordinate projections. By the definition of localization of a module [def-weil-pbc-module-localization] and coordinatewise scalar multiplication, a vector belongs to $\\mathfrak pF_{\\mathfrak p}$ exactly when each coordinate belongs to $\\mathfrak pR_{\\mathfrak p}$; the canonical map sends the $i$-th coordinate $s_i$ to $s_i/1$. For a coordinate $a$, membership $a/1\\in\\mathfrak pR_{\\mathfrak p}$ means that some denominator $u\\notin\\mathfrak p$ satisfies $ua\\in\\mathfrak p$; primality of $\\mathfrak p$ then gives $a\\in\\mathfrak p$, and the converse is immediate by taking $u=1$. Thus $s/1\\in\\mathfrak pF_{\\mathfrak p}$ if and only if every $s_i\\in\\mathfrak p$, which is equivalent to $s\\in\\mathfrak pF$ by the coordinate description of the submodule $\\mathfrak pR^n$.",
+   "text": "Membership in p times R^n is coordinatewise membership in p: induct on ideal scalar products for necessity, and write the vector as the finite sum of its coordinate multiples of standard coordinate vectors for sufficiency. Mathlib Submodule.localized'_smul, Ideal.localized'_eq_map and Submodule.localized'_top identify pF_p with the localization of pF [def-weil-pbc-module-localization, def-weil-pbc-localization-at-prime]. A fraction v/t with v in pF equal to s/1 supplies another denominator a with (at) • s = a • v. Thus each (at)s_i lies in p; because at is outside p, primality implies s_i in p. Conversely take v=s and t=1. For the scalar clause, IsLocalization.algebraMap_mem_map_algebraMap_iff supplies u outside p with us_i in p; primality gives s_i in p, and the converse uses u=1.",
    "uses": [
     "def-weil-pbc-module-localization",
     "def-weil-pbc-localization-at-prime"
@@ -159,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T225310-L-1805391",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

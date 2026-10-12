@@ -9899,3 +9899,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/G1/Sheaf.AlgebraicGeometry.CechH1MapNatural (stage 3; reviewer PASS; first push; landing 20261012T225309-L-1804805 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ProductResidueH1Injective (stage 3; reviewer PASS; after a return; landing 20261012T225309-L-1804922 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/G1/Sheaf.CategoryTheory.FilteredCohomologyImagePresentation (stage 3; reviewer PASS; first push; landing 20261012T225310-L-1805182 (interface); batch 20261012T225253; modules 2; new nodes 1)
+- 22:53 L: merged deliver/G2/Sheaf.RingTheory.FreePrimeMembership (stage 3; reviewer PASS; first push; landing 20261012T225310-L-1805391 (proof); batch 20261012T225253; modules 1; new nodes 0)
