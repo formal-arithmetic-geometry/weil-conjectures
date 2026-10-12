@@ -25,54 +25,48 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-supported-perfect-generator] to X=Y and T=Y\\setminus V. It gives a perfect complex E whose cohomology is supported on T and which generates the full subcategory of D_QCoh(Y) consisting of complexes supported on T.",
+   "text": "Apply [lem-pc-supported-perfect-generator] to the closed complement $T=Y\\setminus V$. Openness of $V$ proves closedness of $T$, and the given compactness of $V$ proves compactness of $T^c=V$. Obtain the triangulated-closure proof, a perfect supported $E$, and the shifted-Hom detection equivalence.",
    "uses": [
     "lem-pc-supported-perfect-generator"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G, proof of Lemma 48.4.3(3), invocation of Derived Categories of Schemes Lemma 36.15.4"
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
    }
   },
   {
-   "text": "The supported subcategory is a full triangulated subcategory of D_QCoh(Y): it is closed under shifts, and under cones because in the long exact cohomology sequence of a distinguished triangle a sheaf between two sheaves supported on T is supported on T. It has set-indexed direct sums computed in D_QCoh(Y) [lem-pc-derived-qcoh-direct-sums], and these are the ambient direct sums of D(\\mathcal O_Y), whose cohomology sheaves are the direct sums of the cohomology sheaves [lem-pc-derived-ambient-direct-sums]; so support on T is preserved. The complex E is compact in D_QCoh(Y) by [lem-pc-perfect-object-compact], hence compact in the supported full subcategory because its coproducts are the same ambient coproducts. Since E generates that subcategory in the sense of [def-pc-generators], the singleton family consisting of E is a set of compact objects whose coproduct is a generator there.",
+   "text": "By [lem-pc-perfect-object-compact], this given perfect $E$ is compact in $D_{\\mathrm{QCoh}}(Y)$ with its canonical coproduct structure.",
    "uses": [
-    "lem-pc-perfect-object-compact",
-    "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-derived-ambient-direct-sums",
-    "def-pc-generators"
+    "lem-pc-perfect-object-compact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G, proof of Lemma 48.4.3(3), closure of the supported subcategory under direct sums"
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
    }
   },
   {
-   "text": "Apply [lem-pc-compact-generators-build-objects] to the supported subcategory and the singleton compact generating family {E}. For each supported Q it gives a sequence X_1\\to X_2\\to\\cdots whose telescope, formed with coproducts of the supported subcategory and hence also in D_QCoh(Y), is Q, with X_1 a coproduct of shifts of E and each transition cone a coproduct of shifts of E. Set Q_0=0 and Q_{n+1}=X_{n+1}; the cone of Q_0\\to Q_1 is X_1, so the same property holds for every transition. The telescope is unchanged by adjoining the initial zero object, yielding the required sequence 0=Q_0\\to Q_1\\to Q_2\\to\\cdots.",
+   "text": "For each supported $Q$, apply [lem-sc-supported-derived-generated-perfect-core] to the triangulated-closure proof, the compactness proof, the support of $E$, the detection equivalence, and the support of $Q$. The elementary equivalence $y\\notin (Y\\setminus V)\\leftrightarrow y\\in V$ matches the support conventions. This gives precisely the required transition and telescope triangles.",
    "uses": [
-    "lem-pc-compact-generators-build-objects"
+    "lem-sc-supported-derived-generated-perfect-core"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G, proof of Lemma 48.4.3(3), application of Derived Categories Lemma 13.37.3"
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-supported-perfect-generator",
   "lem-pc-perfect-object-compact",
-  "lem-pc-derived-qcoh-direct-sums",
-  "lem-pc-derived-ambient-direct-sums",
-  "def-pc-generators",
-  "lem-pc-compact-generators-build-objects"
+  "lem-sc-supported-derived-generated-perfect-core"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E4G (Lemma 48.4.3), proof of (3), using Tags 0A9A and 09SN"
+  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
  },
  "mathlib_searches": [
   {
@@ -158,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T112850-L-772004",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

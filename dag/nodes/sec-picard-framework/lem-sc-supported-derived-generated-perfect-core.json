@@ -1,0 +1,190 @@
+{
+ "id": "lem-sc-supported-derived-generated-perfect-core",
+ "kind": "statement",
+ "title": "Telescope construction from a given supported compact detector",
+ "statement": "Let $Y$ be a scheme [def-weil-pbc-scheme-conventions], $V\\subseteq Y$ an open subset, and $T=Y\\setminus V$. Write $\\mathcal D$ for the full subcategory of $D_{\\mathrm{QCoh}}(Y)$ [def-pc-derived-category] on complexes whose cohomology stalks vanish on $V$. Assume the corresponding ambient object property is triangulated [def-weil-triangulated-category]. Let $E,Q\\in D_{\\mathrm{QCoh}}(Y)$ have cohomology stalks zero on $V$. Assume $E$ is compact [def-pc-compact-object] in $D_{\\mathrm{QCoh}}(Y)$, using its coproducts [lem-pc-derived-qcoh-direct-sums], and that for every $K\\in\\mathcal D$, $K$ is zero if and only if $\\operatorname{Hom}(E[n],K)=0$ for all $n\\in\\mathbb Z$ [def-pc-generators]. Then there are objects $X_n\\in D_{\\mathrm{QCoh}}(Y)$ and morphisms $t_n:X_n\\to X_{n+1}$, with $X_0$ zero, such that each $t_n$ fits into an ambient distinguished triangle $X_n\\to X_{n+1}\\to\\bigoplus_{i\\in I_n}E[m_{n,i}]\\to X_n[1]$. There is an ambient coproduct cofan $S=\\bigoplus_{n\\in\\mathbb N}X_n$ and morphisms $s:S\\to S$, $q:S\\to Q$, $r:Q\\to S[1]$, with $\\iota_n s=t_n\\iota_{n+1}$ and $S\\xrightarrow{1-s}S\\xrightarrow{q}Q\\xrightarrow{r}S[1]$ distinguished. The sets $I_n$ lie in the same universe as the scheme and its module sheaves; the chosen localization morphism universe is arbitrary.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "lem-pc-derived-qcoh-direct-sums",
+  "def-pc-generators"
+ ],
+ "proof": [
+  {
+   "text": "Let $P$ be the property of quasi-coherent complexes whose cohomology stalks vanish on $V$. The supplied triangulated-closure hypothesis gives its full subcategory $\\mathcal D$ the inherited triangulated structure, and the supplied support hypotheses put $E$ and $Q$ in $\\mathcal D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "By [lem-pc-derived-ambient-direct-sums], cohomology of an ambient coproduct is the coproduct of cohomology sheaves. By [lem-pc-stalk-direct-sums], its stalk at a point of $V$ is a direct sum of zero stalks, hence zero. By [lem-pc-derived-qcoh-direct-sums], quasi-coherence is preserved. Thus $\\mathcal D$ has coproducts computed in the ambient derived category and in $D_{\\mathrm{QCoh}}(Y)$.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-pc-stalk-direct-sums",
+    "lem-pc-derived-qcoh-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "The small-site K-injective resolutions of [prop-pur-kinjective-resolutions-exist] apply to the ringed site of opens of $Y$. Represent the source by a complex and resolve the target by a K-injective complex. The localization map from chain maps to derived morphisms is surjective, since morphisms into a K-injective are homotopy classes of chain maps (Mathlib, CochainComplex.IsKInjective.Qh_map_bijective). Chain maps between sheaves of $u$-small modules form a $u$-small set, so each derived Hom is $u$-small as a quotient. Transfer the supported triangulated category to its equivalent model with $u$-small Hom sets before applying the compact-generator theorem in the next step. Its coproducts and resulting indexing sets then have universe $u$, independently of the chosen localization universe.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Theorem 079P (theorem-K-injective-embedding-grothendieck), and derived.tex, K-injective morphisms"
+   }
+  },
+  {
+   "text": "The Hom groups in a full subcategory are the ambient Hom groups, and the coproducts agree. Thus the assumed compactness of $E$ in $D_{\\mathrm{QCoh}}(Y)$ gives compactness in $\\mathcal D$, and the supplied shifted-Hom detection equivalence makes $\\{E\\}$ a generating family [def-pc-generators]. Apply [lem-pc-compact-generators-build-objects] to this singleton family and $Q$. It gives $A_0\\to A_1\\to\\cdots$ with $A_0$ a sum of shifts and triangles $Z_n\\to A_n\\to A_{n+1}\\to Z_n[1]$, with $Z_n$ a sum of shifts, and the telescope triangle ending in $Q$.",
+   "uses": [
+    "def-pc-generators",
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Rotate each transition triangle once to obtain $A_n\\to A_{n+1}\\to Z_n[1]\\to A_n[1]$. The shift equivalence preserves coproducts, so its third object is a sum of $E[m+1]$. Apply the inherited exact inclusion to obtain ambient distinguished triangles and ambient colimiting cofans.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Set $X_0=0$ and $X_{n+1}=A_n$. For the first transition use $0\\to A_0\\xrightarrow{1}A_0\\to0[1]$. The coproduct of $(X_n)$ is canonically isomorphic to that of $(A_n)$ by deleting the zero summand and relabelling $n+1$ as $n$. Checking on coprojections shows that this isomorphism intertwines the two transition endomorphisms. Transport the telescope triangle along it, and reindex the ULift coproduct by $\\mathbb N$. This gives the stated cofan $S$, the map $s$ satisfying $\\iota_n s=t_n\\iota_{n+1}$, and the triangle with $1-s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-stalk-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-generators",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy.?colimit|compact.*generat|generat.*compact",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a compact weak generator builds every object as a sequential homotopy colimit of sums of its shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "triangulated subcategory supported perfect compact generator telescope coproducts",
+   "results": "DerivedCategory.TStructure.t; CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; CategoryTheory.Triangulated.TStructure.IsLE; DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.Triangulated.TStructure.ge_of_isGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the direct-sum extension from bounded-below support to all supported complexes; the telescope step after constructing the supported perfect generator",
+   "via": [
+    "lem-sc-supported-derived-generated-perfect",
+    "lem-sc-right-adjoint-open-support-criterion",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedDerivedGeneratedPerfectCore.lean",
+  "declaration": "AlgebraicGeometry.supported_derived_generated_perfect_core",
+  "statement": "theorem supported_derived_generated_perfect_core (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (V : Y.Opens) (E Q : schemeDerivedQCohCategory Y)\n    (htri : ObjectProperty.IsTriangulated (fun K : schemeDerivedCategory Y ↦\n      schemeDerivedQCohProperty Y K ∧\n        ∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ →\n          Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj K).val.presheaf y))))\n    (hcompact :\n      letI : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y\n      IsCompactObject E)\n    (hsupport : ∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj E.obj).val.presheaf y)))\n    (hgen : ∀ K : schemeDerivedQCohCategory Y,\n      (∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj K.obj).val.presheaf y))) →\n      (IsZero K.obj ↔ ∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj))) :\n    (∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj).val.presheaf y))) →\n      ∃ (X : ℕ → schemeDerivedQCohCategory Y)\n        (t : ∀ n : ℕ, (X n).obj ⟶ (X (n + 1)).obj),\n        IsZero (X 0).obj ∧\n        (∀ n : ℕ, ∃ (I : Type u) (m : I → ℤ)\n          (C : Cofan (fun i : I ↦ E.obj⟦m i⟧)), Nonempty (IsColimit C) ∧\n          ∃ (a : (X (n + 1)).obj ⟶ C.pt)\n            (b : C.pt ⟶ (X n).obj⟦(1 : ℤ)⟧),\n            Triangle.mk (t n) a b ∈ distTriang (schemeDerivedCategory Y)) ∧\n        ∃ (S : Cofan (fun n : ℕ ↦ (X n).obj)), Nonempty (IsColimit S) ∧\n          ∃ (s : S.pt ⟶ S.pt) (q : S.pt ⟶ Q.obj)\n            (r : Q.obj ⟶ S.pt⟦(1 : ℤ)⟧),\n            (∀ n : ℕ, S.inj n ≫ s = t n ≫ S.inj (n + 1)) ∧\n            Triangle.mk (𝟙 S.pt - s) q r ∈ distTriang (schemeDerivedCategory Y)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T112850-L-772004",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T112850-L-772004",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

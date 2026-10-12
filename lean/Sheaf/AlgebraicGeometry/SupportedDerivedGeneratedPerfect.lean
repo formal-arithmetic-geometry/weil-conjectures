@@ -8,12 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 
 /-! # Building supported derived objects from a perfect complex
 
@@ -81,6 +78,19 @@ theorem supported_derived_generated_perfect (Y : Scheme.{u})
               (r : Q.obj ⟶ S.pt⟦(1 : ℤ)⟧),
               (∀ n : ℕ, S.inj n ≫ s = t n ≫ S.inj (n + 1)) ∧
               Triangle.mk (𝟙 S.pt - s) q r ∈ distTriang (schemeDerivedCategory Y) := by
-  sorry
+  obtain ⟨htri, ⟨E, hEperf, hEsupp, hdet⟩⟩ :=
+    supported_perfect_generator Y (V : Set Y)ᶜ (by
+      simpa using V.isOpen.isClosed_compl) (by simpa using hV)
+  refine ⟨E, hEperf, ?_, ?_⟩
+  · intro k y hy
+    exact hEsupp k y (by simpa using hy)
+  · intro Q hQ
+    apply supported_derived_generated_perfect_core Y V E Q htri
+      (perfectObjectCompact Y E hEperf) hEsupp
+    · intro K hK
+      exact hdet K (fun k y hy ↦ hK k y (by
+        simpa only [Set.mem_compl_iff, not_not, SetLike.mem_coe] using hy))
+    · intro k y hy
+      exact hQ k y (by simpa only [Set.mem_compl_iff, not_not, SetLike.mem_coe] using hy)
 
 end AlgebraicGeometry

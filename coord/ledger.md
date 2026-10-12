@@ -7543,3 +7543,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/T1/Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLocus (stage 3; reviewer PASS; first push; landing 20261012T112850-L-771580 (interface); batch 20261012T112824; modules 2; new nodes 1)
 - 11:28 L: merged deliver/T1/WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech (stage 3; reviewer PASS; first push; landing 20261012T112850-L-771714 (interface); batch 20261012T112824; modules 2; new nodes 1)
 - 11:28 L: merged deliver/T3/Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference (stage 3; reviewer PASS; first push; landing 20261012T112850-L-771901 (proof); batch 20261012T112824; modules 1; new nodes 0)
+- 11:28 L: merged deliver/U1/Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect (stage 3; reviewer PASS; first push; landing 20261012T112850-L-772004 (interface); batch 20261012T112824; modules 2; new nodes 1)
