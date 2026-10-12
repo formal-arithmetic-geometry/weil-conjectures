@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-etale-module-sheaf-nonzero-section-universe",
+ "kind": "statement",
+ "title": "A nonzero etale module-sheaf section bounds the scheme universe",
+ "statement": "Let $u,v,w$ be universes, $X$ a scheme in universe $u$ [def-weil-pbc-scheme-conventions], and $\\Lambda$ a commutative ring in universe $v$. Let $F$ be a sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves], with section modules in universe $\\max(v,w)$. If an etale object $U$ has a section $s\\in F(U)$ with $s\\ne0$, then every type $A$ in universe $u$ is equivalent to a type in universe $\\max(v,w)$ (Lean: $\\mathrm{UnivLE}^{u,\\max(v,w)}$). No quasi-compactness, filtered diagram, or colimit is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/schemes.tex",
+  "place": "Sites Definition Tag 00VR (definition-sheaf), applied to the disjoint union cover; Schemes Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes). The size consequence is written by S1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For any type A in the scheme universe, form the disjoint union V of copies of U indexed by A. Its structure map to X is etale by locality at the source. Its summand inclusions form a covering family, with pairwise disjoint images.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put E=F(U). For each a in A prescribe maps E to F(U) equal to the identity on summand a and zero on other summands. These maps are compatible: on the same summand use monicity of its inclusion; a common source of distinct summands is empty, whose section module is terminal by the empty covering. Apply the module-valued sheaf condition to obtain t(a): E to F(V).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If t(a)=t(b) with a different from b, restrict to summand a to obtain id_E=0. Evaluation at s contradicts s nonzero. Thus t embeds A in the type of maps E to F(V), a type in the coefficient universe. Mathlib small_of_injective gives Small A. Since A was arbitrary this is UnivLE. Empty A causes no problem; empty U or the zero ring cannot have a nonzero section.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S1",
+  "date": "2026-10-12",
+  "note": "Formal size consequence of the sheaf condition, proved in Lean without sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "UnivLE|amalgamateOfArrows|isEmpty_of_commSq_sigmaι_of_ne",
+   "results": "Returned 25 hits: Mathlib/Logic/Small/Defs.lean, Mathlib/Logic/UnivLE.lean, Mathlib/Logic/UnivLE.lean, Mathlib/Logic/UnivLE.lean, Mathlib/Logic/UnivLE.lean, Mathlib/Logic/UnivLE.lean, Mathlib/SetTheory/ZFC/Rank.lean, Mathlib/SetTheory/Cardinal/UnivLE.lean. No theorem states the nonzero-section universe bound.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a nonzero section of a module sheaf on the etale site forces the universe of schemes to be small in the universe of its sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a nonzero section of an etale module sheaf implies UnivLE using arbitrary disjoint unions and the sheaf condition",
+   "results": "Returned 8 hits: Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.etaleLocus_eq_compl_support, Algebra.exists_etale_of_isEtaleAt, ModuleCat.Tilde.exists_const, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff, SheafOfModules.LocalGeneratorsData.X. No theorem states the nonzero-section universe bound.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSectionColimitLocalZero",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleSheafSectionUniverse",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleSheafSectionUniverse.lean",
+  "declaration": "AlgebraicGeometry.etale_module_sheaf_section_univLE",
+  "statement": "theorem etale_module_sheaf_section_univLE (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{max v w} Λ))\n    (U : X.Etale) (s : F.obj.obj (op U)) (hs : s ≠ 0) : UnivLE.{u, max v w}",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-finitely-presented",
+   "place": "Step 3, evaluation on an affine representable module sheaf; Sites Tag 0738(2), local equality before finite selection. Universe justification for local equality in independent universes.",
+   "via": [
+    "lem-weil-pbc-etale-section-colimit-local-zero-sieve",
+    "lem-weil-pbc-etale-section-colimit-finite-zero-cover",
+    "lem-weil-pbc-etale-section-colimit-eventual-zero",
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085333-L-37102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085333-L-37102",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
