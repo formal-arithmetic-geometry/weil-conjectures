@@ -32,12 +32,13 @@ import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.SixFunctors.Etale.Gabber
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import Sheaf.AlgebraicGeometry.Curve.NormalizationMonoProperties
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import WeilConjectures.SixFunctors.Finite.Exact
 
 /-!
 # Reduction steps for the eight curve-cohomology assertions
@@ -703,7 +704,42 @@ theorem exists_mono_lowerShriek_constantModSheaf_lowerStar {k : Type u} [Field k
           ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)),
       Mono α ∧ Scheme.IsConstructibleSheaf (cokernel α) ∧
         IsZero ((V.ι)^*[ModuleCat.{u + 1} Λ].obj (cokernel α)) :=
-  sorry
+  by
+    have : Surjective ν' := MorphismProperty.of_isPullback hj inferInstance
+    let M : ModuleCat.{u + 1} Λ := ModuleCat.of Λ (Λ ⧸ Ideal.span {(ℓ : Λ)})
+    let e := (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) ν').app M
+    let η := (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν').unit.app
+      (Etale.constantModSheaf Λ U ℓ)
+    have : Mono η := Etale.mono_unit_app_of_surjective Λ ν' ν'.surjective _
+    let β : (j)_!open[ModuleCat.{u + 1} Λ].obj
+        ((ν')_*[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)) ⟶
+        (ν)_*[ModuleCat.{u + 1} Λ].obj
+          ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)) :=
+      (Etale.finiteOpenComparison (ModuleCat.{u + 1} Λ) hj).app
+        (Etale.constantModSheaf Λ U' ℓ)
+    let α : (j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ) ⟶
+        (ν)_*[ModuleCat.{u + 1} Λ].obj
+          ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)) :=
+      (j)_!open[ModuleCat.{u + 1} Λ].map
+        (η ≫ (ν')_*[ModuleCat.{u + 1} Λ].map e.hom) ≫ β
+    have : IsIso β := Etale.isIso_finiteOpenComparison_app (ModuleCat.{u + 1} Λ) hj _
+    have : PreservesFiniteLimits (j)_!open[ModuleCat.{u + 1} Λ] := inferInstance
+    have : IsIso ((ν')_*[ModuleCat.{u + 1} Λ].map e.hom) := inferInstance
+    have : IsIso ((j)_!open[ModuleCat.{u + 1} Λ].map
+        ((ν')_*[ModuleCat.{u + 1} Λ].map e.hom)) := inferInstance
+    have hm₁ : Mono ((j)_!open[ModuleCat.{u + 1} Λ].map η) := Functor.map_mono _ η
+    have hm₂ : Mono ((j)_!open[ModuleCat.{u + 1} Λ].map
+        ((ν')_*[ModuleCat.{u + 1} Λ].map e.hom)) := inferInstance
+    have hm₃ : Mono β := by
+      constructor
+      intro Z a b h
+      have h' := congrArg (fun m ↦ m ≫ inv β) h
+      simpa only [Category.assoc, IsIso.hom_inv_id, Category.comp_id] using h'
+    have hα : Mono α := by
+      dsimp only [α]
+      rw [Functor.map_comp]
+      exact mono_comp' (mono_comp' hm₁ hm₂) hm₃
+    exact ⟨α, hα, normalization_mono_properties (Λ := Λ) f ν V hV j hj ℓ α hα⟩
 
 /-- **Normalisation and the smooth constant case.** Let `X` be a reduced curve over an
 algebraically closed field `k`, `ν : X' ⟶ X` a finite surjective morphism from a smooth

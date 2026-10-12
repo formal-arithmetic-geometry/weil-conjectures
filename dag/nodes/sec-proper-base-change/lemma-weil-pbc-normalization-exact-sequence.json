@@ -18,29 +18,36 @@
  ],
  "proof": [
   {
-   "text": "The normalization $\\nu:\\widetilde C\\to C$ is a finite morphism, hence has\nexact direct image by [lemma-weil-pbc-finite-direct-image-exact], and $\\nu$ is\nan isomorphism over the normal locus so that $\\widetilde C\\to C$ is an\nisomorphism over the open part of the extension by zero\n[def-weil-pbc-extension-by-zero] outside the finite nonnormal locus. The map\n$j_!\\mathbf F_r\\to\\nu_*\\widetilde j_!\\mathbf F_r$ is the diagonal finite-fibre\nmap: at a geometric point $\\bar c\\in U$ the target stalk is the product of\n$\\mathbf F_r$ over the finite geometric fibre of the normalization, computed\nwith the finite stalk formula, and the map is the adjoint of the unit; it is\ninjective with cokernel $Q$ supported on the finite nonnormal locus, and\nexactness of the sequence follows from exactness of the two direct images and\nthe stalkwise computation. The cokernel $Q$ is constructible: it is the finite\npushforward of a constructible sheaf on the normal locus of the finite set of\nnonnormal points. Naturality of the sequence in the algebraically closed\nextension: the compatibilities of\n[lemma-weil-pbc-finite-pushforward-extension-zero] (with the datum of\n[def-weil-pbc-finite-open-comparison]) and of the finite direct\nimage under pullback along $C_{k'}\\to C$ transport the construction, and the\nconstant-sheaf invariance supplied by\n[thm-sc-main] makes the boundary maps and the\nrestrictions to opens compatible with *field extension*.",
+   "text": "Base change preserves surjectivity, so ν′ is surjective. The adjunction unit R_U → ν′_*ν′^*R_U is mono by [lem-weil-pbc-finite-surjective-unit-mono]. Identify ν′^*R_U with R_U′ using [lemma-constructible-pullback-constant], then apply exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and compose with the finite/open comparison isomorphism [lemma-weil-pbc-finite-pushforward-extension-zero], constructed in [def-weil-pbc-finite-open-comparison]. This gives the concrete monomorphism α=j_!(η followed by ν′_*e) followed by β. The Lean proof proves monicity by preservation of monos, then cancellation of the comparison isomorphisms.",
    "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-finite-surjective-unit-mono",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-extension-by-zero-exact",
     "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "def-weil-pbc-finite-open-comparison",
-    "thm-sc-main"
+    "def-weil-pbc-finite-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normalization-mono-cokernel] to the constructed α and its proof of monicity. It supplies precisely constructibility of cokernel α and zero inverse image on V. Package α, Mono α, and these two properties as the existential conclusion. This proves the existing Lean signature; the additional boundary-map compatibility of the prose blueprint is not part of that signature and is not newly asserted here.",
+   "uses": [
+    "lem-weil-pbc-normalization-mono-cokernel"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-finite-surjective-unit-mono",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-extension-by-zero-exact",
   "lemma-weil-pbc-finite-pushforward-extension-zero",
   "def-weil-pbc-finite-open-comparison",
-  "thm-sc-main",
-  "lemma-weil-pbc-eight-curve-devissage"
+  "lem-weil-pbc-normalization-mono-cokernel"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "## Proof"
+  "place": "Adjunction-unit and finite/open comparison construction; cokernel part split into lem-weil-pbc-normalization-mono-cokernel"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -107,31 +114,22 @@
  "lean": {
   "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
   "declaration": "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar",
-  "branch": "slopmaster2",
-  "line": 236,
+  "branch": "sheaf-dag",
+  "line": 696,
   "declarations": [
    "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
   ],
-  "sorry_free": false,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  "sorry_free": true,
+  "note": "T2 second reading: the existential theorem has no local sorry; its proof constructs the mono and invokes lem-weil-pbc-normalization-mono-cokernel for the remaining cokernel properties. Transitive sorryAx remains; this is not an axiom-free completion."
  },
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T042417-L-1819931",
+  "landing": "20261012T060756-L-2916510",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-   "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced",
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
