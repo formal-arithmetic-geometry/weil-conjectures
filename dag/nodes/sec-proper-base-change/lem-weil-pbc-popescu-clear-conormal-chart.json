@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-popescu-clear-conormal-chart",
+ "kind": "statement",
+ "title": "Clear the polynomial relations on one prescribed conormal chart",
+ "statement": "Let R be a commutative ring, pi in R, n,m natural numbers, f:Fin(m)->P=R[x_1,...,x_n], a0 in P, and E a subset of Fin(m). Put Rbar=R/(pi^2), red:P->Rbar[x], I=(red(f_j)) and val(a)=red(a) modulo I. Assume the localization (Rbar[x]/I)_val(a0) is smooth over Rbar [def-weil-pbc-smooth-ring-map], that the classes of red(f_j), j in E, are a prescribed basis of the localized conormal module [def-weil-pbc-module-localization-away], and that its Kahler differentials over Rbar have a basis indexed by Fin(n-|E|). There exist a in P, coefficient polynomials h_lj and g_l in P, and a positive integer s, with val(a)=val(a0)^s, such that the localization at val(a) is smooth, the same selected conormal generators are a basis, the differentials still have a basis indexed by Fin(n-|E|), and a*f_l=sum_{j in E}h_lj*f_j+C(pi^2)*g_l for every l. No Noetherian hypothesis is necessary: the ideal of the finite family f is finitely generated.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CP (https://stacks.math.columbia.edu/tag/07CP), proof between preparation (2) and equation (4); Tag 00DV for Nakayama"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "In Pbar=(R/pi^2)[x], write I=(red(f_j)) and I_E=(red(f_j), j in E). The given localized conormal basis spans (I/I^2)_a0, so I_a0=(I_E)_a0+(I^2)_a0. The finitely generated module M=(I/I_E)_a0 therefore satisfies M=I_a0 M. Apply Nakayama to obtain e with e-1 in I_a0 annihilating M.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write e=1+b/a0^N with b in I. Lift b to a linear combination of the original f_j and let a1=a0*(a0^N+b). Its image in Pbar/I is val(a0)^(N+1). After localizing at red(a1), the annihilator becomes invertible and I and I_E agree.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each f_l express its reduction using the selected generators in the localization at a1. Clear all coefficient denominators and kill the residual localization kernel. Choose a common positive exponent t over the finite family and put a=a1^t. Lift the resulting coefficient polynomials to R[x]. The residual maps to zero modulo pi^2, hence is C(pi^2)*g_l; this yields the displayed identities. Empty families use t=1.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set s=(N+1)*t, a positive integer. The equality val(a)=val(a0)^s identifies the quotient localizations canonically. Transport smoothness, the conormal basis and its prescribed generator equalities, and the differential basis through these algebra and module localization equivalences. No prime, covering, or finite-presentation assertion is made by this lemma.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CP, preparation (3)--(4); same denominator correction as the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A subset of ideal generators that is a basis of the localized conormal module generates the localized ideal after shrinking the principal open using Nakayama",
+   "date": "2026-10-13",
+   "results": "Internal Server Error; service unavailable",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a subset of ideal generators is a localized conormal basis, shrink a principal chart without changing its quotient basic open so the subset generates the localized ideal",
+   "date": "2026-10-13",
+   "results": "Module.FinitePresentation.exists_basis_localizedModule_powers; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Module.Basis.ofIsLocalizedModule. Loogle found Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul.",
+   "verdict": "Ingredients only; no matching chart refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul|algebraMap_mem_map_algebraMap_iff; conormal|Nakayama in lean/Sheaf/RingTheory and lean/WeilConjectures; blueprint_refs.py search 07CP and conormal",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/Finiteness/Nakayama.lean and Mathlib/RingTheory/Localization/Ideal.lean. Existing SmoothAtPrimeFreeConormalBasis gives initial charts only. LocalizedConormalBasisJacobian gives membership modulo I^2, with a different tensor/presentation interface, not exact equations. No matching imported blueprint node.",
+   "verdict": "No duplicate or exact library result found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftPresentation",
+  "group": "N3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07CP in the finite-etale lifting approximation: clearing equations (3)--(4) on one initial conormal chart",
+   "via": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuClearConormalChart",
+  "file": "lean/Sheaf/RingTheory/PopescuClearConormalChart.lean",
+  "declaration": "Algebra.exists_popescu_cleared_conormal_chart",
+  "statement": "theorem exists_popescu_cleared_conormal_chart\n    {R : Type u} [CommRing R] (π : R) (n m : ℕ)\n    (f : Fin m → MvPolynomial (Fin n) R)\n    (a0 : MvPolynomial (Fin n) R) (E : Finset (Fin m)) :\n    let red := MvPolynomial.map (Ideal.Quotient.mk (Ideal.span ({π ^ 2} : Set R)))\n    let I := Ideal.span (Set.range (fun j ↦ red (f j)))\n    let val := fun a ↦ Ideal.Quotient.mk I (red a)\n    Smooth (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a0)) →\n    (∃ b : Module.Basis E (Localization.Away (val a0))\n        (LocalizedModule.Away (val a0) I.Cotangent),\n      ∀ j : E, b j = LocalizedModule.mkLinearMap (Submonoid.powers (val a0))\n        I.Cotangent (I.toCotangent ⟨red (f j), Ideal.subset_span ⟨j, rfl⟩⟩)) →\n    Nonempty (Module.Basis (Fin (n - E.card)) (Localization.Away (val a0))\n      (KaehlerDifferential (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a0)))) →\n    ∃ (a : MvPolynomial (Fin n) R)\n      (h : Fin m → Fin m → MvPolynomial (Fin n) R)\n      (g : Fin m → MvPolynomial (Fin n) R) (s : ℕ),\n      0 < s ∧ val a = val a0 ^ s ∧\n      Smooth (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a)) ∧\n      (∃ b : Module.Basis E (Localization.Away (val a))\n        (LocalizedModule.Away (val a) I.Cotangent),\n      ∀ j : E, b j = LocalizedModule.mkLinearMap (Submonoid.powers (val a))\n        I.Cotangent (I.toCotangent ⟨red (f j), Ideal.subset_span ⟨j, rfl⟩⟩)) ∧\n      Nonempty (Module.Basis (Fin (n - E.card)) (Localization.Away (val a))\n      (KaehlerDifferential (R ⧸ Ideal.span ({π ^ 2} : Set R)) (Localization.Away (val a)))) ∧\n      ∀ l : Fin m,\n        a * f l = ∑ j ∈ E, h l j * f j + MvPolynomial.C (π ^ 2) * g l",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

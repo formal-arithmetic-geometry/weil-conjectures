@@ -9585,3 +9585,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:27 L: merged deliver/F3/Sheaf.RingTheory.TorKernelBoundaryNaturalityOf (stage 3; reviewer PASS; after a return; landing 20261012T212721-L-1130977 (interface); batch 20261012T212719; modules 4; new nodes 2; change records: coord/changes/tor-kernel-boundary-canonical.md)
 - 21:27 L: merged deliver/M1/Sheaf.RingTheory.SplitInjectionAfterCompletion (stage 3; reviewer PASS; first push; landing 20261012T212722-L-1131144 (interface); batch 20261012T212719; modules 3; new nodes 2)
 - 21:27 L: merged deliver/N2/Sheaf.Topology.ConstantSubsheafUnboundedNormalization (stage 3; reviewer PASS; first push; landing 20261012T212722-L-1131255 (interface); batch 20261012T212719; modules 3; new nodes 2)
+- 21:27 L: merged deliver/N3/Sheaf.RingTheory.PopescuLiftPresentation (stage 3; reviewer PASS; first push; landing 20261012T212722-L-1131362 (interface); batch 20261012T212719; modules 2; new nodes 1)
