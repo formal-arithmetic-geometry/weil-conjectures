@@ -64,6 +64,9 @@ def inventory(upstream):
     relocation = {m: mapped(m) for m in modules if m.startswith('Sheaf.')}
     for m, text in modules.items():
         if not m.startswith('WeilConjectures.') or not (upstream/path(m)).is_file(): continue
+        if text == (upstream/path(m)).read_text():
+            effective[m] = False
+            continue
         try:
             merged, _, accepted = merge_file(upstream, m, text, set(modules), relocation)
             effective[m] = merged != (upstream/path(m)).read_text()
@@ -182,7 +185,7 @@ def merge_file(upstream, module, ours, selected, mapping):
     added=[m for m in IMPORT.findall(ours) if m in selected|set(mapping) and m not in IMPORT.findall(theirs)]
     if added and accepted:
         last=list(IMPORT.finditer(theirs))[-1].end()
-        theirs=theirs[:last]+''.join('\nimport '+mapping[m] for m in sorted(added))+theirs[last:]
+        theirs=theirs[:last]+''.join('\nimport '+mapping.get(m, m) for m in sorted(added))+theirs[last:]
     return rewrite(theirs,mapping), kept, accepted
 
 
