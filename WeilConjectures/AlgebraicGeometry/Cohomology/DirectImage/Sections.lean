@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Restrict
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
@@ -494,17 +493,48 @@ T' --g---> T
 ```
 Then `R^q f'_* (g'^* ℱ) ≅ (R^q f_* ℱ)|_{T'}` for every `q`.
 
-This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: restriction
-to an open subscheme sends injective `𝒪_X`-modules to flasque, hence pushforward-acyclic, ones and
-commutes with the pushforward
-(`AlgebraicGeometry.Scheme.Modules.higherDirectImagePullbackIsoRestrict`). -/
+This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: for an
+injective resolution `ℱ → I^•`, the restriction `I^•|_{X'}` is a resolution of `ℱ|_{X'}` by
+flasque, hence `f'_*`-acyclic, modules (restriction is exact), and
+`f'_* (I^•|_{X'}) ≅ (f_* I^•)|_{T'}` (`AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`). -/
 theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
-      ((higherDirectImage f q).obj ℱ).restrict g) :=
-  have := isOpenImmersion_of_isPullback sq
-  ⟨higherDirectImagePullbackIsoRestrict sq ℱ q⟩
+      ((higherDirectImage f q).obj ℱ).restrict g) := by
+  have : IsOpenImmersion g' :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback (P := @IsOpenImmersion) sq.flip ‹_›
+  have : PreservesColimitsOfSize.{u, u} (restrictFunctor g') :=
+    (restrictAdjunction g').leftAdjoint_preservesColimits
+  have : PreservesColimitsOfSize.{u, u} (restrictFunctor g) :=
+    (restrictAdjunction g).leftAdjoint_preservesColimits
+  have : (restrictFunctor g').PreservesHomology := {}
+  have : (restrictFunctor g).PreservesHomology := {}
+  let J := injectiveResolution ℱ
+  let R := restrictFunctor g'
+  -- `J|_{X'}` is a resolution of `ℱ|_{X'}` by flasque, hence `f'_*`-acyclic, modules
+  let K := (R.mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex
+  let ι : (CochainComplex.single₀ X'.Modules).obj (R.obj ℱ) ⟶ K :=
+    (HomologicalComplex.singleMapHomologicalComplex R (ComplexShape.up ℕ) 0).inv.app ℱ ≫
+      (R.mapHomologicalComplex _).map J.ι
+  have : QuasiIso ι := inferInstance
+  have hI (n : ℕ) : (pushforward f').rightAcyclic (K.X n) :=
+    rightAcyclic_pushforward_of_isFlasque f' _
+      (isFlasque_restrict g' _ (isFlasque_of_injective (J.cocomplex.X n)))
+  -- `f'_* (J|_{X'}) ≅ (f_* J)|_{T'}`
+  let L := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex
+  let e : ((pushforward f').mapHomologicalComplex _).obj K ≅
+      ((restrictFunctor g).mapHomologicalComplex _).obj L :=
+    ((NatIso.mapHomologicalComplex (pushforwardRestrictIso sq) (ComplexShape.up ℕ)).app
+      J.cocomplex).symm
+  -- restriction to `T'` is exact, hence commutes with cohomology
+  let e' : (((restrictFunctor g).mapHomologicalComplex _).obj L).homology q ≅
+      (restrictFunctor g).obj (L.homology q) :=
+    (L.sc q).mapHomologyIso (restrictFunctor g)
+  exact ⟨(higherDirectImage f' q).mapIso ((restrictFunctorIsoPullback g').app ℱ).symm ≪≫
+    (pushforward f').rightDerivedObjIsoOfResolution ι hI q ≪≫
+    HomologicalComplex.homologyMapIso e q ≪≫ e' ≪≫
+    (restrictFunctor g).mapIso (J.isoRightDerivedObj (pushforward f) q).symm⟩
 
 open MonoidalCategory in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`

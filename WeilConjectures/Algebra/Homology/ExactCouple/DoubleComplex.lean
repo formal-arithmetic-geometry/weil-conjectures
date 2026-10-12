@@ -287,7 +287,7 @@ noncomputable def firstSpectralSequencePageTwoIso (p q : ℕ) :
 /-- The first spectral sequence of a first quadrant double complex `K` abuts to the cohomology
 of the total complex of `K`, with the filtration induced by the column filtration.
 
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+(blueprint: `thm-sp-double-complex-spectral-sequences`, `sk-def-groth-ss`) -/
 lemma firstSpectralSequence_abutsTo :
     K.firstSpectralSequence.AbutsTo fun n ↦ (K.total (up ℕ)).homology n :=
   (K.extendNat.columnFiltration.exactCouple.firstQuadrantSpectralSequence_abutsTo
