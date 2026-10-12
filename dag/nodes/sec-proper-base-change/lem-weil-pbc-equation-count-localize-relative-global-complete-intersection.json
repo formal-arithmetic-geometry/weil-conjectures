@@ -35,133 +35,22 @@
  ],
  "proof": [
   {
-   "text": "(Setting; an open neighbourhood of $\\mathfrak q$ with fibre dimension $\\le n-c$.) Write $P=R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring], $\\pi:P\\to S$ the quotient map and $I=(f_1,\\dots,f_c)$. Since $\\pi$ is a surjective $R$-algebra homomorphism from a polynomial ring in finitely many variables, $R\\to S$ is of finite type [def-weil-pbc-finite-type-algebra]. For a prime $\\mathfrak q'$ of $S$ write $\\dim_{\\mathfrak q'}(S/R)$ for the dimension at the point $\\mathfrak Q'$ of the spectrum of the fibre ring as in [lem-weil-pbc-fibre-dimension-bounded-open-upstairs]; the hypothesis says $\\dim_{\\mathfrak q}(S/R)=n-c$ (in particular $n-c\\ge0$, as the dimension of a space at a point is $\\ge0$). By [lem-weil-pbc-fibre-dimension-bounded-open-upstairs] with $d=n-c$ there is an open $V\\subseteq\\operatorname{Spec}S$ with $\\mathfrak q\\in V$ and $\\dim_{\\mathfrak q'}(S/R)\\le n-c$ for all $\\mathfrak q'\\in V$. (Source: 'By Lemma 00QH there exists a $g\\in S$, $g\\notin\\mathfrak q$ such that all nonempty fibres of $R\\to S_g$ have dimension $\\le n-c$'.)",
+   "text": "Choose h with the expected fibre dimensions by the dimension-localization lemma. Apply the generic polynomial presentation lemma to this same h, and assemble the RGCI, specified fibre condition, and equivalence with its two generator identities.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+    "new-equation-count-localize-presentation",
+    "new-equation-count-localize-rgci"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ST (lemma-localize-relative-complete-intersection, line 36671), proof of (3), lines 36715-36720"
-   }
-  },
-  {
-   "text": "(Choice of $g$ and $h$.) By [lem-weil-pbc-spec-localization-away-basic-open] (i) there is $g\\in S$ with $\\mathfrak q\\in D(g)\\subseteq V$, i.e. $g\\notin\\mathfrak q$ and every prime $\\mathfrak q'$ of $S$ with $g\\notin\\mathfrak q'$ lies in $V$. As $\\pi$ is surjective choose $h\\in P$ with $\\pi(h)=g$ (source: 'Let $h\\in R[x_1,\\dots,x_n]$ be any element that maps to $g$').",
-   "uses": [
-    "lem-weil-pbc-spec-localization-away-basic-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ST (lemma-localize-relative-complete-intersection, line 36671), proof of (3), lines 36715-36720"
-   }
-  },
-  {
-   "text": "(The presentation: $T\\cong S_g$.) Let $P'=R[x_1,\\dots,x_{n+1}]=P[x_{n+1}]$ [def-weil-pbc-mv-polynomial-ring]. By [lem-weil-pbc-polynomial-scalar-extension] (with $A=P$, the ring $S$, one variable $x_{n+1}$) $S\\otimes_PP'\\cong S[x_{n+1}]$, and by [lem-weil-pbc-tensor-quotient-base-change] (with $A=P$, $B=P'$, the ideal $I$) $P'/IP'\\cong P'\\otimes_P(P/I)=P'\\otimes_PS$; composing, the $R$-algebra map $\\sigma:P'\\to S[x_{n+1}]$ with $x_i\\mapsto\\pi(x_i)$ ($i\\le n$), $x_{n+1}\\mapsto x_{n+1}$ is surjective with kernel $IP'=(f_1,\\dots,f_c)P'$. By [lem-weil-pbc-localization-away-polynomial-quotient] (ring $S$, $r=g$) the $S$-algebra map $\\lambda:S[x_{n+1}]\\to S_g$ [def-weil-ring-localization-away], $x_{n+1}\\mapsto1/g$, is surjective with kernel $(gx_{n+1}-1)$. Hence $\\lambda\\sigma:P'\\to S_g$ is a surjective $R$-algebra map with $x_i\\mapsto(x_i\\bmod(f))/1$, $x_{n+1}\\mapsto1/g$, and since $\\sigma(hx_{n+1}-1)=gx_{n+1}-1$ and $\\sigma$ is surjective with kernel $IP'$, its kernel is $\\sigma^{-1}\\big((gx_{n+1}-1)S[x_{n+1}]\\big)=(hx_{n+1}-1)P'+IP'=(f_1,\\dots,f_c,hx_{n+1}-1)$. So $\\lambda\\sigma$ induces the $R$-algebra isomorphism $T=R[x_1,\\dots,x_{n+1}]/(f_1,\\dots,f_c,hx_{n+1}-1)\\xrightarrow{\\sim}S_g$ of the statement (source: '$S_g=R[x_1,\\dots,x_n,x_{n+1}]/(f_1,\\dots,f_c,hx_{n+1}-1)$'; the proof of 00SS (2): '$S_g\\cong S[x_{n+1}]/(gx_{n+1}-1)$').",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ST (line 36671), the displayed presentation of S_g; Lemma Tag 00SS (lemma-base-change-relative-global-complete-intersection, line 36640), proof of (2), line 36665"
-   }
-  },
-  {
-   "text": "(Every point of every fibre of $S$ has local dimension $\\ge n-c$.) Let $\\mathfrak p'\\subset R$ be a prime, $k=\\kappa(\\mathfrak p')$ and $F'=S\\otimes_Rk$ [def-weil-pbc-localization-at-prime]. By [lem-weil-pbc-polynomial-scalar-extension] $P\\otimes_Rk\\cong k[x_1,\\dots,x_n]$, and by associativity of $\\otimes$ and [lem-weil-pbc-tensor-quotient-base-change] (with $A=P$, $B=k[x_1,\\dots,x_n]$) $F'=(P/I)\\otimes_Rk\\cong\\bar F':=k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$, $\\bar f_j$ the image of $f_j$ under the coefficient map $R\\to k$. The ring $k[x_1,\\dots,x_n]$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (a field is Noetherian [def-weil-pbc-noetherian-ring]: its only ideals are $0$ and $k$). Let $\\bar{\\mathfrak Q}$ be a prime of $\\bar F'$ and $\\tilde{\\mathfrak Q}\\supseteq(\\bar f_1,\\dots,\\bar f_c)$ its inverse image in $k[x_1,\\dots,x_n]$. By [lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference] the heights $\\operatorname{ht}\\bar{\\mathfrak Q}\\le\\operatorname{ht}\\tilde{\\mathfrak Q}\\le n$ are integers and $\\dim_{\\bar{\\mathfrak Q}}\\operatorname{Spec}\\bar F'=n-\\operatorname{ht}\\tilde{\\mathfrak Q}+\\operatorname{ht}\\bar{\\mathfrak Q}$; by [lem-weil-pbc-noetherian-height-quotient-bound] (with $t=c$, $J=(\\bar f_1,\\dots,\\bar f_c)$) $\\operatorname{ht}\\tilde{\\mathfrak Q}\\le\\operatorname{ht}\\bar{\\mathfrak Q}+c$. Hence $\\dim_{\\bar{\\mathfrak Q}}\\operatorname{Spec}\\bar F'\\ge n-c$. Isomorphic rings have homeomorphic spectra and a homeomorphism preserves the dimension at a point [def-kun-topological-dimension-at-point], so $\\dim_{\\mathfrak Q}\\operatorname{Spec}F'\\ge n-c$ for every prime $\\mathfrak Q$ of $F'$. (The source leaves this lower bound implicit; it is the count 'dim $\\ge n-c$ by Lemma 00KW applied $c$ times' of the paragraph after Definition 00S9, line 35841.)",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
-    "lem-weil-pbc-noetherian-height-quotient-bound",
-    "def-kun-topological-dimension-at-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, the paragraph after Definition Tag 00S9 (definition-lci-field, lines 35834-35849: dim >= n - c by Lemma 00KW), with Lemma Tag 00P2 (lemma-codimension) as packaged in the cited height-difference node; used implicitly in the proof of Lemma Tag 00ST (3), lines 36715-36720"
-   }
-  },
-  {
-   "text": "(The fibres of $T$ are localizations of the fibres of $S$.) Keep $\\mathfrak p'$, $k$, $F'$ and let $\\bar g=g\\otimes1\\in F'$. The $R$-algebra isomorphism $T\\cong S_g$ of step 3 gives $T\\otimes_Rk\\cong S_g\\otimes_Rk$. Since $S_g\\otimes_Rk\\cong S_g\\otimes_S(S\\otimes_Rk)=S_g\\otimes_SF'$ (associativity of $\\otimes$) and, by [lem-weil-pbc-localization-away-tensor-iso] (with $A=S$, $M=F'$, $f=g$), $F'\\otimes_SS_g\\cong F'_g$, $m\\otimes(s/g^e)\\mapsto sm/g^e$, where the localization of the $S$-module $F'$ at $g$ [def-weil-pbc-module-localization-away] is the ring $F'_{\\bar g}$ [def-weil-ring-localization-away] since $g$ acts on $F'$ as multiplication by $\\bar g$, and this map is multiplicative, we get a ring isomorphism $T\\otimes_Rk\\cong F'_{\\bar g}$.",
-   "uses": [
-    "lem-weil-pbc-localization-away-tensor-iso",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ST (3), proof line 36717 ('all nonempty fibres of $R\\to S_g$'): the fibre of $R\\to S_g$ over a prime is the localization of the fibre of $R\\to S$"
-   }
-  },
-  {
-   "text": "(Every point of every fibre of $T$ has local dimension exactly $n-c$.) Let $X=\\operatorname{Spec}(T\\otimes_Rk)$ and $Y=\\operatorname{Spec}F'$ [def-weil-affine-spectrum]. By step 5 $X$ is homeomorphic to $\\operatorname{Spec}F'_{\\bar g}$, which by [lem-weil-pbc-spec-localization-away-basic-open] (ii) maps homeomorphically onto the open subset $D(\\bar g)\\subseteq Y$ by $\\mathfrak P\\mapsto$ its inverse image in $F'$. Let $x\\in X$ and $y=\\mathfrak Q''\\in D(\\bar g)$ its image. Then $\\dim_xX=\\dim_y D(\\bar g)$ (a homeomorphism preserves the dimension at a point [def-kun-topological-dimension-at-point]) $=\\dim_yY$ by [lem-weil-pbc-dimension-at-point-open-subspace]. By [lem-weil-pbc-fibre-ring-primes-bijection] (with $A=R$, $B=S$, $C=F'$, $j:S\\to F'$) $\\mathfrak q''=j^{-1}(\\mathfrak Q'')$ is a prime of $S$ lying over $\\mathfrak p'$ and $\\mathfrak Q''=\\ker\\psi_{\\mathfrak q''}$ is the kernel of $F'\\to\\kappa(\\mathfrak q'')$, so $\\dim_yY=\\dim_{\\mathfrak q''}(S/R)$ in the notation of step 1; and $g\\notin\\mathfrak q''$ since $j(g)=\\bar g\\notin\\mathfrak Q''$. By step 2 $\\mathfrak q''\\in V$, so $\\dim_yY\\le n-c$ by step 1, and $\\dim_yY\\ge n-c$ by step 4. Hence $\\dim_xX=n-c$ for every $x\\in X$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-dimension-at-point-open-subspace",
-    "lem-weil-pbc-fibre-ring-primes-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ST (lemma-localize-relative-complete-intersection, line 36671), proof of (3), lines 36715-36720"
-   }
-  },
-  {
-   "text": "(Conclusion.) Let $\\mathfrak p'\\subset R$ be a prime with $T\\otimes_R\\kappa(\\mathfrak p')\\neq0$. By [lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero] there is a prime of $T$ over $\\mathfrak p'$, hence by [lem-weil-pbc-fibre-ring-primes-bijection] a prime of $T\\otimes_R\\kappa(\\mathfrak p')$, so $X\\neq\\emptyset$. By [lem-weil-pbc-dimension-supremum-local-dimensions] and step 6, $\\dim X=\\sup_{x\\in X}\\dim_xX=n-c=(n+1)-(c+1)$. So every nonempty fibre of $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ has dimension $(n+1)-(c+1)$, i.e. $T=R[x_1,\\dots,x_{n+1}]/(f_1,\\dots,f_c,hx_{n+1}-1)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. With step 2 ($g=\\pi(h)\\notin\\mathfrak q$) and step 3 ($T\\cong S_g$ by the stated map) this is the statement.",
-   "uses": [
-    "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "lem-weil-pbc-dimension-supremum-local-dimensions",
-    "def-weil-pbc-relative-global-complete-intersection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00ST (3), proof lines 36715-36720, with Definition Tag 00SP (definition-relative-global-complete-intersection, line 36506) and Topology, Lemma Tag 0B7I (lemma-dimension-supremum-local-dimensions)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
-  "def-weil-ring-localization-away",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
-  "lem-weil-pbc-noetherian-height-quotient-bound",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-localization-away-tensor-iso",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
-  "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
-  "lem-weil-pbc-dimension-supremum-local-dimensions",
-  "def-weil-pbc-relative-global-complete-intersection"
+  "new-equation-count-localize-presentation",
+  "new-equation-count-localize-rgci"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00ST (lemma-localize-relative-complete-intersection, line 36671), proof of (3), lines 36715-36720, via Lemma Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs, line 31308) and Lemma Tag 00SS (2) (line 36640); the lower bound n - c on fibre dimensions, implicit in the source, follows the paragraph after Definition Tag 00S9 (lines 35834-35849)"
+  "by": "worker",
+  "document": "Stacks Project, Algebra, Lemma Tag 00ST",
+  "place": "proof decomposition"
  },
  "mathlib_searches": [
   {
@@ -254,5 +143,15 @@
   "group": "K1",
   "result": "fix",
   "note": "R comm ring, n c : Nat, f : Fin c -> R[x], S quotient, q prime, p comap, Q = preimageEquivFiber (kernel of kappa(p) (x) S -> kappa(q), read), dim_Q = n-c with c<=n untruncated; h, g=mk h not in q, T with Option indices (n+1 vars, c+1 eqs incl rename h * X none - 1), RGCI of THIS presentation restored as explicit fibre clause beside the recorded ring-map predicate, e : T ≃ₐ[R] Localization.Away g on generators"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,162 @@
+{
+ "id": "new-equation-count-localize-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-equation-count-localize-relative-global-complete-intersection",
+   "via": [],
+   "place": "Step 3"
+  }
+ },
+ "same_as": null,
+ "kind": "statement",
+ "title": "Polynomial presentation of an arbitrary principal localization",
+ "statement": "theorem exists_localization_presentation\n    (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)\n    (h : MvPolynomial (Fin n) R) :\n      let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)\n      let g : S := Ideal.Quotient.mk _ h\n      let relations : Option (Fin c) → MvPolynomial (Option (Fin n)) R :=\n        Option.elim' (MvPolynomial.rename some h * MvPolynomial.X none - 1)\n          (fun i ↦ MvPolynomial.rename some (f i))\n      let T := MvPolynomial (Option (Fin n)) R ⧸ Ideal.span (Set.range relations)\n      ∃ e : T ≃ₐ[R] Localization.Away g,\n        (∀ i : Fin n,\n          e (Ideal.Quotient.mk _ (MvPolynomial.X (some i))) =\n            algebraMap S (Localization.Away g) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧\n        e (Ideal.Quotient.mk _ (MvPolynomial.X none)) = IsLocalization.Away.invSelf g",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ST (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the old variables in S_g and the new variable at invSelf g. The renamed equations vanish by quotient membership, and h*X_none-1 vanishes by mul_invSelf. Ideal.Quotient.liftₐ gives forward : T →ₐ[R] S_g.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rename the old variables into T. The old equations lie in the defining ideal, so Ideal.Quotient.liftₐ descends this map to base : S →ₐ[R] T. The added equation gives base(g)*[X_none]=1; thus base(g) is a unit. IsLocalization.Away.liftAlgHom extends base to backward : S_g →ₐ[R] T.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The extended map sends invSelf(g) to [X_none], by unit cancellation applied to the two inverse identities. The composite backward ∘ forward fixes each polynomial generator, hence is the identity by polynomial extensionality and quotient surjectivity. The composite forward ∘ backward fixes S, hence is the identity by localization extensionality. AlgEquiv.ofAlgHom combines the maps; evaluation of X_some and X_none gives the required formulas. No nontriviality or nonvanishing assumption is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ST (3), the inverse-variable presentation; implemented directly by the polynomial, quotient and localization universal properties (00CP)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a polynomial ring localized at an element has a presentation by adjoining an inverse variable",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv and Algebra.Presentation.localizationAway; neither matches the Option presentation over the original base ring.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools for the remaining presentation step."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.mvPolynomialQuotientEquiv",
+   "results": "The equivalence for one variable over S, not the Option quotient over R.",
+   "date": "2026-10-13",
+   "verdict": "Useful tool, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mvPolynomialQuotientEquiv|localization.*CompleteIntersection|exists_localization_relativeGlobal",
+   "results": "Mathlib MvPolynomial.Localization has the one-variable quotient equivalence; no proved version of the item in WeilConjectures or Sheaf.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "polynomial quotient presentation of localization by adjoining inverse variable",
+   "results": "UNAVAILABLE: Internal Server Error; msearch recorded the service failure. Used LeanFinder, Loogle and local source grep instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "principal localization quotient polynomial algebra adjoin inverse generator universal property",
+   "results": "IsLocalization.adjoin_inv, IsLocalization.Away.mvPolynomialQuotientEquiv, Algebra.Generators.localizationAway, Localization.awayEquivAdjoin, IsLocalization.Away.mvPolynomialQuotientEquiv_apply, Algebra.Generators.compLocalizationAwayAlgHom_X_inl, Algebra.Presentation.localizationAway, Algebra.PreSubmersivePresentation.localizationAway",
+   "date": "2026-10-13",
+   "verdict": "Second reading: useful universal-property/dimension tools, no exact duplicate of this Option-indexed theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.aeval, MvPolynomial.rename",
+   "results": "MvPolynomial.rename_eq, MvPolynomial.rename_eq_aeval, MvPolynomial.aeval_comp_rename, MvPolynomial.aeval_rename, MvPolynomial.aeval_id_rename, witt_structure_prop",
+   "date": "2026-10-13",
+   "verdict": "Second reading: useful universal-property/dimension tools, no exact duplicate of this Option-indexed theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "mvPolynomialQuotientEquiv|localized_presentation_is_relativeGlobalCompleteIntersection",
+   "results": "Mathlib/RingTheory/Extension/Presentation/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean, Mathlib/RingTheory/Extension/Presentation/Basic.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean",
+   "date": "2026-10-13",
+   "verdict": "Second reading: useful universal-property/dimension tools, no exact duplicate of this Option-indexed theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EquationCountLocalizePresentation",
+  "declaration": "Algebra.exists_localization_presentation",
+  "file": "lean/Sheaf/RingTheory/EquationCountLocalizePresentation.lean",
+  "statement": "theorem exists_localization_presentation\n    (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)\n    (h : MvPolynomial (Fin n) R) :\n      let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)\n      let g : S := Ideal.Quotient.mk _ h\n      let relations : Option (Fin c) → MvPolynomial (Option (Fin n)) R :=\n        Option.elim' (MvPolynomial.rename some h * MvPolynomial.X none - 1)\n          (fun i ↦ MvPolynomial.rename some (f i))\n      let T := MvPolynomial (Option (Fin n)) R ⧸ Ideal.span (Set.range relations)\n      ∃ e : T ≃ₐ[R] Localization.Away g,\n        (∀ i : Fin n,\n          e (Ideal.Quotient.mk _ (MvPolynomial.X (some i))) =\n            algebraMap S (Localization.Away g) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧\n        e (Ideal.Quotient.mk _ (MvPolynomial.X none)) = IsLocalization.Away.invSelf g",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T212721-L-1130843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

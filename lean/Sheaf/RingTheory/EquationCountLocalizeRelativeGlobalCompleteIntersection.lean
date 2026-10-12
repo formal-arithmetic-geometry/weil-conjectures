@@ -9,10 +9,8 @@ public import Sheaf.Paper.RelativeGlobalCompleteIntersection
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import Sheaf.RingTheory.EquationCountLocalizePresentation
+import Sheaf.RingTheory.EquationCountLocalizeRGCI
 
 /-!
 # Localizing an equation-count presentation
@@ -81,6 +79,9 @@ theorem exists_localization_relativeGlobalCompleteIntersection
               algebraMap S (Localization.Away g) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧
           e (Ideal.Quotient.mk _ (MvPolynomial.X none)) =
             IsLocalization.Away.invSelf g := by
-  sorry
+  obtain ⟨h, hh⟩ := localized_presentation_is_relativeGlobalCompleteIntersection R n c f q hdim
+  obtain ⟨e, hevars, henew⟩ := exists_localization_presentation R n c f h
+  refine ⟨h, ?_⟩
+  exact ⟨hh.1, hh.2.1, hh.2.2, ⟨e, hevars, henew⟩⟩
 
 end Algebra
