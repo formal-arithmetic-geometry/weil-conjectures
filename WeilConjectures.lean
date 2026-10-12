@@ -101,6 +101,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.GaCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericKummer
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard

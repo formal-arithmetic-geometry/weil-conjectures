@@ -5,6 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
+public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
@@ -314,3 +318,120 @@ theorem exists_isColimit_pointConstantIntToZMod {x : X} (hx : IsClosed {x}) (n :
 end Point
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.IsCurve
+
+open Scheme
+
+variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
+  [SmoothOfRelativeDimension 1 f]
+
+include f
+
+omit [IsCurve f] in
+/-- A closed point of a smooth curve has coheight one. -/
+lemma coheight_eq_one_of_isClosed {x : C} (hx : IsClosed {x}) : Order.coheight x = 1 := by
+  have h := ringKrullDim_stalk_eq_one_of_smoothOfRelativeDimension_one f hx
+  rw [ringKrullDim_stalk_eq_coheight] at h
+  exact_mod_cast h
+
+/-- A point of coheight one of a smooth curve is closed: otherwise it specializes to a closed
+point, which would have coheight at least two. -/
+lemma isClosed_of_coheight_eq_one {x : C} (hx : Order.coheight x = 1) : IsClosed {x} := by
+  have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
+  by_contra hnc
+  obtain ⟨y, hy, hyc⟩ :=
+    isClosed_closure.exists_closed_singleton (S := closure {x}) ⟨x, subset_closure rfl⟩
+  have hne : y ≠ x := fun h ↦ hnc (h ▸ hyc)
+  have h := Order.coheight_add_one_le
+    (lt_of_specializes_of_ne C (specializes_iff_mem_closure.2 hy) hne)
+  rw [hx, coheight_eq_one_of_isClosed f hyc] at h
+  exact absurd h (by decide)
+
+variable [IsIntegral C]
+
+/-- **The generic Kummer residue sheaf, with its valuation description.** Let `C` be a smooth
+integral curve over a field `k`, let `n` be invertible in `k` and let `η : Spec k(C) ⟶ C` be the
+generic point. Given colimit cofans `c₀` of the sheaves `i_{x*} ℤ` over the points of coheight
+one and `c` of the sheaves `i_{x*} ℤ/n` over the closed points of `C` (these are the same
+points), there are
+
+* a cokernel `δ : η_* 𝔾ₘ ⟶ R¹η_* μₙ` of `n` on `η_* 𝔾ₘ` (the Kummer connecting morphism),
+* the reduction `r : ⨁_x i_{x*} ℤ ⟶ ⨁_x i_{x*} ℤ/n`, and
+* an isomorphism `e : R¹η_* μₙ ≅ ⨁_x i_{x*} ℤ/n`
+
+such that `δ ≫ e = div ≫ r`: the isomorphism is induced by the valuations at the closed points,
+via the divisor map `div` (`AlgebraicGeometry.Scheme.divisorSequenceMap`). -/
+theorem exists_iso_rightDerived_one_rootsOfUnitySheaf [IsLocallyNoetherian C] [IsRegular C]
+    (n : ℕ) (hn : (n : k) ≠ 0)
+    (c₀ : Cofan fun x : {x : C // Order.coheight x = 1} ↦ C.pointConstantInt x.1)
+    (hc₀ : IsColimit c₀) (c : Cofan fun x : {x : C // IsClosed {x}} ↦ C.pointConstantZMod x.1 n)
+    (hc : IsColimit c) :
+    ∃ (δ : C.genericGm ⟶ (C.genericLowerStar.rightDerived 1).obj
+        ((Spec C.functionField).rootsOfUnitySheaf n)) (w : (n • 𝟙 C.genericGm) ≫ δ = 0)
+      (r : c₀.pt ⟶ c.pt) (e : (C.genericLowerStar.rightDerived 1).obj
+        ((Spec C.functionField).rootsOfUnitySheaf n) ≅ c.pt),
+      Nonempty (IsColimit (CokernelCofork.ofπ δ w)) ∧
+      (∀ (x : C) (h₁ : Order.coheight x = 1) (h₂ : IsClosed {x}),
+        c₀.inj ⟨x, h₁⟩ ≫ r = C.pointConstantIntToZMod x n ≫ c.inj ⟨x, h₂⟩) ∧
+      δ ≫ e.hom = C.divisorSequenceMap c₀ hc₀ ≫ r := by
+  have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
+  have : IsNoetherian C := ⟨⟩
+  have hnC : IsUnit (n : Γ(C, ⊤)) := by
+    simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
+  obtain ⟨x₀⟩ := (inferInstance : Nonempty C)
+  have : Nonempty (⊤ : C.Opens) := ⟨⟨x₀, trivial⟩⟩
+  have hnK : IsUnit (n : C.functionField) := by
+    simpa using hnC.map (C.germToFunctionField ⊤).hom
+  have hn₀ : n ≠ 0 := by
+    rintro rfl
+    exact hn Nat.cast_zero
+  obtain ⟨δ, w, ⟨hδ⟩⟩ := C.exists_isColimit_rightDerived_one_rootsOfUnitySheaf n hnK
+  let c' : Cofan fun x : {x : C // Order.coheight x = 1} ↦ C.pointConstantZMod x.1 n :=
+    Cofan.mk c.pt fun x ↦ c.inj ⟨x.1, isClosed_of_coheight_eq_one f x.2⟩
+  have hc' : IsColimit c' := Cofan.IsColimit.mk c'
+    (fun t ↦ Cofan.IsColimit.desc hc fun x ↦ t.inj ⟨x.1, coheight_eq_one_of_isClosed f x.2⟩)
+    (fun t x ↦ Cofan.IsColimit.fac hc _ _)
+    (fun t m hm ↦ Cofan.IsColimit.hom_ext hc _ _ fun x ↦ by
+      rw [Cofan.IsColimit.fac]
+      exact hm ⟨x.1, coheight_eq_one_of_isClosed f x.2⟩)
+  have hq (x : {x : C // Order.coheight x = 1}) :=
+    C.exists_isColimit_pointConstantIntToZMod (isClosed_of_coheight_eq_one f x.2) n hn₀
+  choose wq hq using hq
+  have hred := CokernelCofork.isColimitOfπNsmulOfCofan (C := Sheaf C.smallEtaleTopology
+    AddCommGrpCat.{u + 1}) (P := fun x : {x : C // Order.coheight x = 1} ↦ C.pointConstantInt x.1)
+    (P' := fun x : {x : C // Order.coheight x = 1} ↦ C.pointConstantZMod x.1 n) n
+    (fun x ↦ C.pointConstantIntToZMod x.1 n) wq (fun x ↦ (hq x).some) hc₀ hc'
+  have hdiv := C.isColimitOfπDivisorSequenceMapComp c₀ hc₀ n hnC _ hred
+  refine ⟨δ, w, Cofan.IsColimit.desc hc₀ fun i ↦ C.pointConstantIntToZMod i.1 n ≫ c'.inj i,
+    hδ.coconePointUniqueUpToIso hdiv, ⟨hδ⟩, fun x h₁ h₂ ↦ ?_, ?_⟩
+  · exact Cofan.IsColimit.fac hc₀ _ _
+  · exact hδ.comp_coconePointUniqueUpToIso_hom hdiv WalkingParallelPair.one
+
+/-- **The generic Kummer residue sheaf.** Let `C` be a smooth integral curve over a field `k`
+(in the blueprint `k` is algebraically closed), let `n` be invertible in `k`, let `μₙ` be the
+sheaf of `n`-th roots of unity on `Spec k(C)` and `η : Spec k(C) ⟶ C` the generic point. Then
+
+`R¹η_* μₙ ≅ ⨁_{x ∈ C closed} i_{x*} ℤ/n`,
+
+where `R¹η_*` is the first right derived functor of `η_*` and the direct sum is the vertex of any
+colimit cofan. The isomorphism is induced by the valuations at the closed points, see
+`AlgebraicGeometry.IsCurve.exists_iso_rightDerived_one_rootsOfUnitySheaf`.
+(blueprint: `lem-sc-generic-kummer-residues`) -/
+theorem nonempty_rightDerived_one_rootsOfUnitySheaf_iso (n : ℕ) (hn : (n : k) ≠ 0)
+    (c : Cofan fun x : {x : C // IsClosed {x}} ↦ C.pointConstantZMod x.1 n) (hc : IsColimit c) :
+    Nonempty ((C.genericLowerStar.rightDerived 1).obj
+      ((Spec C.functionField).rootsOfUnitySheaf n) ≅ c.pt) := by
+  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    IsGrothendieckAbelian.hasColimits _
+  have : HasColimitsOfSize.{u, u} (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsRegular C := IsRegular.of_smooth f
+  let P := fun x : {x : C // Order.coheight x = 1} ↦ C.pointConstantInt x.1
+  obtain ⟨-, -, -, e, -⟩ := exists_iso_rightDerived_one_rootsOfUnitySheaf f n hn
+    (colimit.cocone (Discrete.functor P)) (colimit.isColimit _) c hc
+  exact ⟨e⟩
+
+end AlgebraicGeometry.IsCurve
