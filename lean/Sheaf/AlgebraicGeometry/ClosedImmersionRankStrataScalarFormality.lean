@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift
+import Mathlib.Algebra.Homology.SingleHomology
 import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
 import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
@@ -29,6 +28,122 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject
 
 namespace AlgebraicGeometry
+
+private theorem coprojection_isIso_of_other_zero
+    {C : Type*} [Category* C] [HasZeroMorphisms C]
+    {I : Type*} (A : I → C) [HasCoproduct A]
+    (n : I) (h : ∀ m, m ≠ n → IsZero (A m)) : IsIso (Sigma.ι A n) := by
+  classical
+  let p : ∐ A ⟶ A n := Sigma.desc (fun m ↦ if e : m = n then eqToHom (congrArg A e)
+    else 0)
+  refine ⟨⟨p, ?_, ?_⟩⟩
+  · simp [p]
+  · apply Sigma.hom_ext
+    intro m
+    by_cases e : m = n
+    · subst m
+      simp [p]
+    · exact (h m e).eq_of_src _ _
+
+private theorem inclusion_homology_isIso
+    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory.{w} C]
+    (P : CochainComplex C ℤ) (hd : ∀ a b, P.d a b = 0) (n : ℤ) :
+    IsIso ((DerivedCategory.homologyFunctor C n).map
+      (DerivedCategory.Q.map (HomologicalComplex.mkHomFromSingle (𝟙 (P.X n))
+        (fun b _ ↦ by rw [hd, comp_zero])))) := by
+  let j := HomologicalComplex.mkHomFromSingle (𝟙 (P.X n))
+    (fun b _ ↦ by rw [hd, comp_zero])
+  have hj : IsIso (j.f n) := by
+    dsimp [j]
+    rw [HomologicalComplex.mkHomFromSingle_f, Category.comp_id]
+    infer_instance
+  let φ := (HomologicalComplex.shortComplexFunctor C (ComplexShape.up ℤ) n).map j
+  let γ := ShortComplex.LeftHomologyMapData.ofZeros φ
+    (by simp [HomologicalComplex.single]) (by simp [HomologicalComplex.single])
+    (hd _ _) (hd _ _)
+  have : ShortComplex.QuasiIso φ := γ.quasiIso_iff.mpr (by
+    change IsIso (j.f n)
+    exact hj)
+  have : IsIso (HomologicalComplex.homologyMap j n) := by
+    change IsIso (ShortComplex.homologyMap φ)
+    infer_instance
+  exact (NatIso.isIso_map_iff (DerivedCategory.homologyFunctorFactors C n) j).mpr this
+
+private theorem zeroDifferentialAssembly (Y : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (hd : ∀ a b, P.d a b = 0)
+    (K : schemeDerivedCategory Y)
+    (hlift : ∀ n, ∃ f : (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj (P.X n) ⟶ K,
+      IsIso ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).map f)) :
+    Nonempty (DerivedCategory.Q.obj P ≅ K) := by
+  classical
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let L (n : ULift.{u} ℤ) : CochainComplex C ℤ :=
+    (HomologicalComplex.single C (ComplexShape.up ℤ) n.down).obj (P.X n.down)
+  let j (n : ULift.{u} ℤ) : L n ⟶ P := HomologicalComplex.mkHomFromSingle (𝟙 (P.X n.down))
+    (fun b _ ↦ by rw [hd, comp_zero])
+  let f (n : ULift.{u} ℤ) : DerivedCategory.Q.obj (L n) ⟶ K := (hlift n.down).choose
+  have hf (n : ℤ) : IsIso ((DerivedCategory.homologyFunctor C n).map (f ⟨n⟩)) :=
+    (hlift n).choose_spec
+  let D := DerivedCategory.Q.obj (∐ L)
+  obtain ⟨hc⟩ := derivedAmbientDirectSumsCofan Y (ULift.{u} ℤ)
+    (fun n ↦ DerivedCategory.Q.obj (L n)) L (fun _ ↦ Iso.refl _)
+  let g : D ⟶ K := hc.desc (Cofan.mk K f)
+  let a : D ⟶ DerivedCategory.Q.obj P := DerivedCategory.Q.map (Sigma.desc j)
+  have hi (n : ℤ) : IsIso ((DerivedCategory.homologyFunctor C n).map
+      (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩))) := by
+    let H := DerivedCategory.homologyFunctor C n
+    have hzero (m : ULift.{u} ℤ) (hm : m ≠ ⟨n⟩) : IsZero (H.obj (DerivedCategory.Q.obj (L m))) :=
+      (HomologicalComplex.isZero_single_obj_homology
+        (ComplexShape.up ℤ) m.down (P.X m.down) n (by
+          intro e
+          apply hm
+          exact ULift.ext _ _ e.symm)).of_iso
+          ((DerivedCategory.homologyFunctorFactors C n).app (L m))
+    have := coprojection_isIso_of_other_zero
+      (fun m ↦ H.obj (DerivedCategory.Q.obj (L m))) ⟨n⟩ hzero
+    have hsum : IsIso (Sigma.desc
+        (fun m ↦ H.map (DerivedCategory.Q.map (Sigma.ι L m)))) := by
+      simpa only [Iso.refl_inv, Category.id_comp] using
+        derivedAmbientDirectSumsHomology Y (ULift.{u} ℤ)
+          (fun m ↦ DerivedCategory.Q.obj (L m)) L (fun _ ↦ Iso.refl _) n
+    have he : H.map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) =
+        Sigma.ι (fun m ↦ H.obj (DerivedCategory.Q.obj (L m))) ⟨n⟩ ≫
+          Sigma.desc (fun m ↦ H.map (DerivedCategory.Q.map (Sigma.ι L m))) := by simp
+    rw [he]
+    infer_instance
+  have ha : IsIso a := (DerivedCategory.isIso_iff C a).mpr (by
+    intro n
+    have he : DerivedCategory.Q.map (Sigma.ι L ⟨n⟩) ≫ a = DerivedCategory.Q.map (j ⟨n⟩) := by
+      simp [a, ← Functor.map_comp]
+    have := hi n
+    have := inclusion_homology_isIso P hd n
+    have hiso : IsIso ((DerivedCategory.homologyFunctor C n).map
+        (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) ≫
+          (DerivedCategory.homologyFunctor C n).map a) := by
+      rw [← Functor.map_comp, he]
+      assumption
+    exact IsIso.of_isIso_comp_left
+      ((DerivedCategory.homologyFunctor C n).map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)))
+      ((DerivedCategory.homologyFunctor C n).map a))
+  have hg : IsIso g := (DerivedCategory.isIso_iff C g).mpr (by
+    intro n
+    have he : DerivedCategory.Q.map (Sigma.ι L ⟨n⟩) ≫ g = f ⟨n⟩ := by
+      simpa [g] using hc.fac (Cofan.mk K f) ⟨⟨n⟩⟩
+    have := hi n
+    have := hf n
+    have hiso : IsIso ((DerivedCategory.homologyFunctor C n).map
+        (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)) ≫
+          (DerivedCategory.homologyFunctor C n).map g) := by
+      rw [← Functor.map_comp, he]
+      assumption
+    exact IsIso.of_isIso_comp_left
+      ((DerivedCategory.homologyFunctor C n).map (DerivedCategory.Q.map (Sigma.ι L ⟨n⟩)))
+      ((DerivedCategory.homologyFunctor C n).map g))
+  exact ⟨(asIso a).symm ≪≫ asIso g⟩
 
 /-- A family of arbitrary module sheaves on disjoint rank strata is formal after
 scalar direct image along a closed immersion. The family need not be finite.
@@ -75,6 +190,28 @@ theorem closedImmersion_rankStrata_scalar_formality
         (Scheme.Modules.pushforward i).obj (T n))) :
     Nonempty (K ≅ DerivedCategory.Q.obj
       (((Scheme.Modules.pushforward i).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-        (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp)))) := by sorry
+        (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp)))) := by
+  classical
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let F := Scheme.Modules.pushforward i
+  let P := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+    (CochainComplex.of T (fun _ ↦ 0) (fun _ ↦ zero_comp))
+  obtain ⟨e⟩ := zeroDifferentialAssembly Y P
+    (fun a b ↦ by
+      simp only [P, Functor.mapHomologicalComplex_obj_d, CochainComplex.of.d,
+        zero_comp, dite_eq_ite, ite_self]
+      exact Functor.map_zero F _ _) K (fun n ↦ by
+      obtain ⟨f, hf⟩ := closedImmersion_rankStrata_scalar_homology_lift
+        i r E T hT K n (fun m _ ↦ hK m) (hK n).some.inv
+      refine ⟨f, ?_⟩
+      have hiso : IsIso
+          ((DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app (F.obj (T n)) ≫
+            (DerivedCategory.homologyFunctor C n).map f) := by
+        rw [hf]
+        infer_instance
+      exact IsIso.of_isIso_comp_left
+        ((DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app (F.obj (T n)))
+        ((DerivedCategory.homologyFunctor C n).map f))
+  exact ⟨e.symm⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-closed-immersion-rank-strata-scalar-homology-lift",
+ "kind": "statement",
+ "title": "Lift a scalar homology map from one closed rank support",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme], [def-weil-closed-immersion], and let $D(\\mathcal O_Y)$ be a derived category [def-pc-derived-category]. Let $r:Z\\to\\mathbb N$ be locally constant, let $j_q:Z_q=\\{r=q\\}\\to Z$ be its rank strata [def-sc-locally-ranked-exterior-complex], and choose any module sheaf $E_q$ on each $Z_q$. Set $T^m=j_{m,*}E_m$ for $m\\geq0$ and $T^m=0$ otherwise. Fix $K\\in D(\\mathcal O_Y)$ and $n\\in\\mathbb Z$. Assume $H^m(K)\\cong i_*T^m$ only for $m\\neq n$. For every scalar module-sheaf map $a:i_*T^n\\to H^n(K)$ there exists a derived morphism $f:(i_*T^n)[-n]\\to K$ such that $H^n(f)$, composed with the canonical identification $i_*T^n\\cong H^n((i_*T^n)[-n])$, equals $a$. No hypothesis is imposed on $H^n(K)$ and $a$ need not be invertible; r need not have finite image.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, single-degree truncation in rank-support reconstruction step 2; exact extension by zero and adjunction from Cohomology Tags 08BS and 08BT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-derived-category",
+  "def-sc-locally-ranked-exterior-complex"
+ ],
+ "proof": [
+  {
+   "text": "If n is negative, T^n=0 and the zero map lifts a. Otherwise let V_n be Y minus the closed image of Z minus the rank-n fiber. The rank fibers are clopen, and the images are closed since i is a closed immersion. The other cohomology sheaves vanish on V_n, since their rank supports are disjoint. The source i_*T^n is supported on the closed subset i(Z_n) contained in V_n.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction identifies H^m(K restricted to V_n) with the restriction of H^m(K). Canonical truncation above and below n identifies K restricted to V_n with its degree-n homology placed in degree n, compatibly with the canonical single-complex homology isomorphism. Restrict a and use the inverse of this identification to obtain the local derived map.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact extension by zero and the derived adjunction to send the local map to K. The source sheaf, being supported on a closed subset contained in V_n, is isomorphic by the counit to extension by zero of its restriction: on V_n the counit is the identity and off V_n both stalks vanish. Compose with its inverse. On V_n the induced homology map is a by counit naturality and the truncation comparison; off V_n the source stalk is zero. Stalkwise equality detects equality of sheaf morphisms. This proves the stated lifting equation, also for empty strata.",
+   "uses": [
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-locally-ranked-exterior-complex",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "N4",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, single-degree truncation in rank-support reconstruction step 2; exact extension by zero and adjunction from Cohomology Tags 08BS and 08BT"
+  },
+  "note": "One-stratum part of the parent reconstruction, using the open complement of the other closed rank supports; does not assert global formality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map from a sheaf on a closed rank stratum into homology lifts to a morphism in the derived category using exact extension by zero",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complex of sheaves with cohomology supported on disjoint closed locally finite subsets is formal",
+   "results": "Generic single-degree support and K-injective declarations, no scalar rank-support lifting theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"singleFunctor\"",
+   "results": "singleFunctor, singleFunctorIsoCompQ, and compatibility isomorphisms; not the support-sensitive lifting assertion.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "zeroDifferential|homology_lift|mkHomFromSingle",
+   "results": "mkHomFromSingle in Mathlib; local rg found ClopenRankStrataHomologyLift, whose source and target use the direct-image algebra rather than scalar modules. No duplicate scalar lift found. blueprint_refs searches for rank stratum and single degree found no matching blueprint statement.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormality",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BQZ, single-degree truncation in rank-support reconstruction step 2; exact extension by zero and adjunction from Cohomology Tags 08BS and 08BT",
+   "via": [
+    "lem-sc-closed-immersion-rank-strata-scalar-formality",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarHomologyLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionRankStrataScalarHomologyLift.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_rankStrata_scalar_homology_lift",
+  "statement": "theorem closedImmersion_rankStrata_scalar_homology_lift\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings Y.toRingedSpace))]\n    (r : LocallyConstant Z ℕ)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))\n    (n : ℤ)\n    (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) m).obj K ≅\n        (Scheme.Modules.pushforward i).obj (T m)))\n    (a : (Scheme.Modules.pushforward i).obj (T n) ⟶\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj K) :\n    ∃ f : (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj\n          ((Scheme.Modules.pushforward i).obj (T n)) ⟶ K,\n      (DerivedCategory.singleFunctorCompHomologyFunctorIso\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).inv.app\n          ((Scheme.Modules.pushforward i).obj (T n)) ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).map f = a",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261012T231638-L-1963001",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261012T231638-L-1963001",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

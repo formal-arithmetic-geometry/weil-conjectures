@@ -15,62 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Each rank fiber Z_n and its complement are closed in Z. Since i is closed, V_n=Y minus i(Z minus Z_n) is open, and V_out=Y minus i(Z) is open. They cover Y, and V_m intersect V_n is contained in V_out for m≠n. Each i*T^q is supported on the closed image of its own stratum, so restriction to V_n leaves only degree n and restriction to V_out is zero. The rank supports are locally finite, even if r has infinite image.",
+   "text": "For each integer n, invert the given degree-n homology isomorphism and apply the one-stratum scalar homology lift. Its lifting equation identifies the homology of the resulting single-degree map with an isomorphism, so that homology map is invertible.",
    "uses": [
-    "def-weil-closed-immersion",
-    "def-sc-locally-ranked-exterior-complex"
+    "lem-sc-closed-immersion-rank-strata-scalar-homology-lift"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
+   "elementary": true
   },
   {
-   "text": "Exact restriction commutes with cohomology. On V_n the object K has cohomology only in degree n, isomorphic to the restriction of i*T^n. The canonical upper and lower truncation maps identify it in the derived category with that cohomology sheaf placed in degree n. The zero-differential comparison complex restricted to V_n has the same cohomology and the same single-degree reconstruction. These operations can be carried out in standard derived categories on the opens, then transported through their representative localizations.",
+   "text": "Put P=i_*C and L_n=P^n[-n]. Each differential of P vanishes by additivity of pushforward. Construct the chain inclusions L_n to P by the identity on their degree-n term. The homology of this inclusion in degree n is invertible by the zero-differential short-complex calculation. Index the family by ULift of the integers to match the universe of module-sheaf coproducts. The termwise coproduct gives a derived coproduct, so the lifted maps assemble to a morphism g:Q(coproduct L_n) to K. The inclusions assemble to a chain morphism whose localization is a:Q(coproduct L_n) to Q(P).",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "def-sbc-standard-tstructure-derived-category"
+    "lem-pc-derived-ambient-direct-sums-cofan"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply exact extension by zero from V_n and use the derived shriek/restriction adjunction to obtain counit maps from these extended restrictions to K. Form their derived coproduct using termwise representatives. Homology commutes with this coproduct. In each degree and at each point of i(Z), exactly one relevant rank support contributes, and the counit is the identity under the open restriction comparison. Outside i(Z) every cohomology stalk is zero, including every summand. Hence the coproduct counit is an isomorphism on all cohomology stalks and is a derived isomorphism. Apply the same argument to Q(i*C). Compose the coproduct of the extended single-degree isomorphisms with the two counit isomorphisms. Empty Z gives zero objects and rank zero gives the degree-zero case; no finite sum of idempotents and no gluing of arbitrary derived maps is used.",
+   "text": "Homology of the termwise coproduct is the coproduct of the homologies. In degree n all single-complex summands except n are zero; the n-th coprojection is invertible, with inverse obtained by the coproduct universal property. Thus the homology of the derived n-th coprojection is invertible. Its composite with H^n(a) is the single-term inclusion map, and its composite with H^n(g) is the chosen lift. Both are invertible, so H^n(a) and H^n(g) are invertible for every integer n. Homology detects derived isomorphisms. Compose the inverse of a with g and reverse the isomorphism to obtain K isomorphic to Q(P). All assembly and homology-detection glue is proved in the item module.",
    "uses": [
-    "lem-sc-derived-open-shriek-derived-adjunction",
-    "lem-pc-derived-ambient-direct-sums-cofan",
-    "lem-pc-derived-ambient-direct-sums-homology",
-    "lem-weil-pbc-module-stalk-exact"
+    "lem-pc-derived-ambient-direct-sums-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext (Koszul-complex computation of the derived sheaf Hom)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
-  "def-sc-locally-ranked-exterior-complex",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-sc-closed-immersion-rank-strata-scalar-homology-lift",
   "lem-pc-derived-ambient-direct-sums-cofan",
-  "lem-pc-derived-ambient-direct-sums-homology",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-pc-derived-ambient-direct-sums-homology"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "T2",
+  "agent": "N4",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
    "place": "Tag 0BQZ, single-degree truncation in the parent step 3, made explicit by closed rank supports, exact extension by zero (Tags 08BS, 08BT), and derived coproducts (Tag 07D9)"
   },
-  "note": "Strict part of the parent calculation; the detailed rank-support assembly is written by the worker."
+  "note": "One-stratum scalar homology lifts followed by a proved countable zero-differential coproduct assembly. No finite-rank hypothesis and no algebra action; one strictly smaller geometric lifting statement remains."
  },
  "mathlib_searches": [
   {
@@ -160,9 +138,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261012T194142-L-465385",
+  "landing": "20261012T231638-L-1963001",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
