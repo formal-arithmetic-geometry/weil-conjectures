@@ -7,7 +7,6 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompletionDimension
 import Sheaf.RingTheory.CompletionRegularLocal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
@@ -53,6 +52,10 @@ theorem isDiscreteValuationRing
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] :
     ∃ _ : IsDomain (AdicCompletion (IsLocalRing.maximalIdeal A) A),
       IsDiscreteValuationRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) := by
-  sorry
+  have : IsRegularLocalRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) :=
+    (isRegularLocalRing_iff A).mp inferInstance
+  refine ⟨inferInstance, IsRegularLocalRing.isDiscreteValuationRing _ ?_⟩
+  exact (RingTheory.completion_dimension A).1.trans
+    (IsDiscreteValuationRing.ringKrullDim_eq_one A)
 
 end AdicCompletion
