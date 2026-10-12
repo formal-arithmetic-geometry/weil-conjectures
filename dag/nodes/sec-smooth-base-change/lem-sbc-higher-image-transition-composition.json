@@ -1,0 +1,151 @@
+{
+ "id": "lem-sbc-higher-image-transition-composition",
+ "kind": "statement",
+ "title": "Higher-image transition composition",
+ "statement": "Let $\\Lambda$ be a commutative ring, $a:Y\\prime\\to Y$, $b:Y\\prime\\prime\\to Y\\prime$, $h:Y\\to S$, $h\\prime:Y\\prime\\to S$ and $h\\prime\\prime:Y\\prime\\prime\\to S$ be scheme morphisms [def-weil-pbc-scheme-conventions] satisfying $a h=h\\prime$ and $b h\\prime=h\\prime\\prime$. Let $F$ be a sheaf of $\\Lambda$-modules on $Y_{et}$ [def-weil-pbc-etale-sheaves] and $q\\in\\mathbf Z$. Write $t(a,F)$ for the canonical transition [def-sbc-module-higher-image-transitions], $P_{h\\prime\\prime}(E)=H^q(Rh\\prime\\prime_*E[0])$, and $c:(ba)^*\\simeq b^*a^*$ for the pullback composition comparison [lem-weil-pbc-inverse-image-composition]. Then $t(ba,F)=t(a,F)\\,t(b,a^*F)\\,P_{h\\prime\\prime}(c^{-1}_F)$. More generally, for sheaves $F\\prime$ on $Y\\prime$ and $F\\prime\\prime$ on $Y\\prime\\prime$, maps $f:a^*F\\to F\\prime$ and $g:b^*F\\prime\\to F\\prime\\prime$, transition along the composite followed by the coefficient map $c_F\\,b^*(f)\\,g$ equals transition along $a$ followed by $f$, then transition along $b$ followed by $g$.",
+ "source": {
+  "document": "Stacks Project and source library",
+  "place": "Tags 09Z1 and 03Q8, canonical comparisons; formal adjunction calculation for these comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sbc-lower-star-plus-transition-comp] for the derived transition composition at F[0]. Then Before homology, expand both transitions as the adjoints of the pulled-back counits. Express the unit for the composite pullback adjunction as the successive units, transported through the inverse-image composition comparison. Naturality moves the middle unit past the first counit; the triangle identity cancels this pair. Associativity of the pullback comparisons identifies the remaining expression with the transition for `b ≫ a`. For a sheaf placed in degree zero, the exact-functor comparison with singleFunctor commutes with composition: compute on the degree-zero complex using the factorization through the homotopy category. This identifies the remaining derived pullback comparison with singleFunctor applied to the ordinary pullback comparison. Apply homology, preserving compositions. The equalities of the three structure morphisms occur only as proof-irrelevant transports. Apply coefficient naturality to move f across the second transition; the maps g and the comparison compose by functoriality. The generic source-library derived pullback identity and associativity comparisons apply to ModuleCat coefficients; the abelian-group-only derivedInverseImageComposition theorem is not used. Its present module imports the source Transition module, which reaches the parent coherence module, so a direct import here would be cyclic; the future proof must relocate that existing lemma rather than restate it.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sbc-lower-star-plus-transition-comp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sbc-lower-star-plus-transition-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and source library",
+  "place": "Canonical comparison of Tag 09Z1; explicit formal assembly from derived adjunction and pullback coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical transition maps higher direct image functoriality identity composition",
+   "results": "CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, CategoryTheory.GrothendieckTopology.toPlus_comp_plusCompIso_inv, localCohomology.diagramComp",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarPlusTransition|higherDirectImageOverMap",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image comparison morphism identity composition naturality",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.naturality|homEquiv_naturality|right_triangle_components",
+   "results": "Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transition R h star F to R h prime star a star F for commutative triangles preserves identity and composition and is natural in F",
+   "results": "CategoryTheory.Comma.map, CategoryTheory.CostructuredArrow.map₂, CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory.Z_map_app, CategoryTheory.StructuredArrow.map₂, CategoryTheory.Comma.natTrans, CategoryTheory.Grothendieck.ιNatTrans, CategoryTheory.MorphismProperty.FunctorialFactorizationData.functorCategory.Z_obj_map, CategoryTheory.CostructuredArrow.map₂_obj_hom",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Adjunction.comp",
+   "results": "Adjunction.comp_unit_app, Adjunction.comp_counit_app, conjugateEquiv_leftUnitor_hom and conjugateEquiv_rightUnitor_hom are generic infrastructure; no exact higher-image law.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mates of natural transformations preserve identity and vertical composition of adjoint functors",
+   "results": "mateEquiv, mateEquiv_apply and iterated/conjugate mate composition laws; generic infrastructure only.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusSingleFunctor|mateEquiv_vcomp|conjugateEquiv_leftUnitor_hom; repository transition.*(comp|id)",
+   "results": "Mathlib mateEquiv_vcomp; source ExactFunctor provides single-functor comparison but no composition compatibility law. Sheaf lowerStarPlusTransition_comp is the existing derived part of the composition argument, not the higher-image coefficient law; importing it here currently creates a cycle.",
+   "date": "2026-10-12",
+   "verdict": "second reading: use existing derived part in the plan; no duplicate higher-image statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Canonical transition maps in the higher-direct-image limit argument; composition of the comparison",
+   "via": [
+    "sbc-lem-higher-image-over-transition-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageTransitionComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.higher_direct_image_transition_composition",
+  "statement": "theorem higher_direct_image_transition_composition\n    (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' Y'' : Scheme.{u}}\n    (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)\n    (wa : a ≫ h = h') (wb : b ≫ h' = h'') (q : ℤ)\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (F' : Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (F'' : Sheaf Y''.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (f : ((a)^*[ModuleCat.{u + 1} Λ]).obj F ⟶ F')\n    (g : ((b)^*[ModuleCat.{u + 1} Λ]).obj F' ⟶ F'') :\n    higherDirectImageTransition Λ (b ≫ a) h h''\n        (by rw [Category.assoc, wa, wb]) q F ≫\n      (DerivedCategory.Plus.homologyFunctor _ q).map\n        (R+((h'')_*[ModuleCat.{u + 1} Λ]).map\n          ((DerivedCategory.Plus.singleFunctor _ 0).map\n          ((upperStarComp (ModuleCat.{u + 1} Λ) b a).hom.app F ≫\n            ((b)^*[ModuleCat.{u + 1} Λ]).map f ≫ g))) =\n      (higherDirectImageTransition Λ a h h' wa q F ≫\n        (DerivedCategory.Plus.homologyFunctor _ q).map\n          (R+((h')_*[ModuleCat.{u + 1} Λ]).map\n            ((DerivedCategory.Plus.singleFunctor _ 0).map f))) ≫\n      (higherDirectImageTransition Λ b h' h'' wb q F' ≫\n        (DerivedCategory.Plus.homologyFunctor _ q).map\n          (R+((h'')_*[ModuleCat.{u + 1} Λ]).map\n            ((DerivedCategory.Plus.singleFunctor _ 0).map g)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T095855-L-313547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T095855-L-313547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

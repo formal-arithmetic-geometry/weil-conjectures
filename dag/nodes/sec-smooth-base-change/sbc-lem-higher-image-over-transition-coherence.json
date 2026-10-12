@@ -17,38 +17,31 @@
  ],
  "proof": [
   {
-   "text": "Expand the derived transition as the adjoint of a^* of the counit, transported along the inverse-image composition isomorphism. For an identity morphism the composition comparison is the identity comparison; the adjunction triangle identity reduces the transition to the identity.",
+   "text": "For an identity over W, the inverse of upperStarComp(id,U.hom) is the component of upperStarId at the pulled-back sheaf. Apply the general identity-triangle law.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-derived-inverse-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For two composable arrows expand the unit for their composite using the composite adjunction. By naturality move the intervening unit past the counit. Cancel that unit-counit pair by the triangle identity. Associativity of the inverse-image composition comparisons makes the factors left exactly the adjoint of the counit for the composite. The equalities of structure maps in Over W only contribute proof-irrelevant equality transports.",
-   "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-derived-inverse-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply degree-q homology. Its map preserves identities and composition. Naturality of the inverse-image comparison with singleFunctor moves the degree-zero identification through the composite. The ordinary inverse-image associativity comparison identifies φ^*ψ^*Z^*G with U^*G in the same way as the one-step arrow, giving the stated coherence.",
-   "uses": [
+    "lem-sbc-higher-image-transition-identity",
     "lem-weil-pbc-inverse-image-composition"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the coefficient-compatible composition law to the underlying triangles, with the inverse pullback comparisons as coefficient maps. Evaluate the inverse of upperStarComp_assoc in an abstract coefficient category, cancel its first isomorphism, and specialize to modules. This identifies the composite coefficient map with the one-step comparison. Apply congrArg to the higher-image functor and compose this equality with the triangle law.",
+   "uses": [
+    "lem-sbc-higher-image-transition-composition",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-sbc-higher-image-transition-composition",
+  "lem-sbc-higher-image-transition-identity",
   "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 09Z1, canonical transitions; derived inverse-image adjunction composition and its triangle identities; formal assembly by G1"
+  "document": "Stacks Project, Tags 09Z1 and 03Q8; source-library pullback coherence",
+  "place": "Assembly in Lean from general triangle laws and coefficient naturality, by C3"
  },
  "mathlib_searches": [
   {
@@ -122,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-1b606",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T053932-L-2635421",
+  "landing": "20261012T095855-L-313547",
   "kind": "interface",
-  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
