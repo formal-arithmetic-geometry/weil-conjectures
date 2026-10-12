@@ -1,0 +1,111 @@
+{
+ "id": "new-node-nested-slice-extension-stalk-iso",
+ "kind": "statement",
+ "title": "Canonical nested slice map induces stalk isomorphisms",
+ "statement": "For a sheaf F on X and opens V ⊆ U, the canonical direct-sum presheaf map P_V → P_U obtained by composing indices with V → U induces an isomorphism on the stalk at every point of V.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Lemma 0A38 final paragraph; Lemma 00A5(3), (4)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Use the cofinal system of neighborhoods contained in V. On each such neighborhood both indexing types are subsingletons, so the canonical component is an isomorphism. The germ presentation of stalks transfers these local isomorphisms to the stalk map, proving both surjectivity and injectivity.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+  "place": "Lemma 0A38 final paragraph; Lemma 00A5(3), (4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalkFunctor map isIso on cofinal neighborhoods",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf stalk map isomorphism from local component isomorphisms",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*isIso.*cofinal|isIso.*stalkFunctor",
+   "results": "no exact match in Mathlib or local library",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.NestedSliceExtensionStalks",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sc-nested-slice-extension-stalks",
+   "place": "stalk-isomorphism part of the nested slice extension proof",
+   "via": [
+    "new-lem-sc-nested-slice-extension-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.NestedSliceExtensionStalkIso",
+  "file": "lean/Sheaf/Topology/NestedSliceExtensionStalkIso.lean",
+  "declaration": "TopCat.Sheaf.nestedSliceExtensionMap_stalk_isIso",
+  "statement": "theorem nestedSliceExtensionMap_stalk_isIso {X : TopCat.{u}} (F : TopCat.Sheaf AddCommGrpCat.{u} X) (U V : Opens X) (hVU : V ≤ U) : ∀ x : X, x ∈ V → IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (nestedSliceExtensionMap F U V hVU))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12",
+  "declarations": [
+   "TopCat.Sheaf.nestedSliceExtensionMap",
+   "TopCat.Sheaf.nestedSliceExtensionMap_stalk_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T120552-L-962712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T120552-L-962712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
