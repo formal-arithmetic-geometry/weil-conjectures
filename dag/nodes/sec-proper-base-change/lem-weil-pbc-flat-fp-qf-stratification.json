@@ -33,179 +33,39 @@
  ],
  "proof": [
   {
-   "text": "*Restriction to an affine open.* Let $W\\subseteq S$ be an affine open, $X_W:=f^{-1}(W)$ and $f_W:=f|_{X_W}:X_W\\to W$; by [lem-weil-pbc-open-preimage-fibre-product] $f_W$ is the base change of $f$ along the inclusion $W\\to S$, and for every $s\\in W$ its fibre $X_W\\times_W\\operatorname{Spec}\\kappa(s)$ is $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ (pasting of the two cartesian squares, [def-pc-fibre-product]). As a base change, $f_W$ is flat [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation [lem-weil-pbc-qcqs-morphism-permanence] (3). Since $f$ is quasi-finite, it is of finite type and every point of $X$ is isolated in its fibre [pqf-def-quasifinite]; $f$ is also separated, so the base change $f_W$ is separated and of finite type [lem-pod-separated-finite-type-base-change], and every point of $X_W$ is isolated in its fibre [lem-weil-pbc-isolated-fibre-point-base-change] (applied to $f$, which is locally of finite type, and $g:W\\to S$). Hence $f_W$ is quasi-finite [pqf-def-quasifinite], in particular locally quasi-finite [pqf-lem-qf-locqf-qc]. Finally $X_W=f^{-1}(W)$ is quasi-compact, because $f$ is quasi-compact (finite type, [def-weil-finite-type-morphism]) and $W$ is an affine open. By [lem-weil-pbc-lqf-qc-source-bounded-fibres] applied to $f_W$ there is an integer $n_W\\ge0$ bounding the degrees of all fibres $X_s$, $s\\in W$: each is a finite $\\kappa(s)$-scheme of degree $\\le n_W$.",
+   "text": "Obtain local quasi-finiteness and a universal fibre-degree bound from quasi-finiteness and quasi-compactness, then use the bounded affine stratification theorem pointwise to define the global filtration by degree sublevel sets.",
    "uses": [
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "pqf-def-quasifinite",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-isolated-fibre-point-base-change",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
     "pqf-lem-qf-locqf-qc",
-    "def-weil-finite-type-morphism",
     "lem-weil-pbc-lqf-qc-source-bounded-fibres"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, first paragraph ('The question is local on S, hence we may assume that S is affine. By Morphisms, Lemma 03JA the fibres of f are universally bounded in this case. Hence the existence of the stratification follows from Lemma 07RY'), the locality written out"
-   }
+   "elementary": false
   },
   {
-   "text": "*The stratification over an affine open.* For each affine open $W\\subseteq S$, step 1 shows that $f_W:X_W\\to W$ satisfies the hypotheses of [lem-weil-pbc-flat-fp-lqf-bounded-stratification] with bound $n_W$. It gives closed subsets $\\emptyset=Z^W_{-1}\\subseteq Z^W_0\\subseteq\\cdots\\subseteq Z^W_{n_W}=W$ of $W$; put $Z^W_r:=W$ for $r>n_W$, $S^W_r:=Z^W_r\\setminus Z^W_{r-1}$ for $r\\ge0$ (so $S^W_r=\\emptyset$ for $r>n_W$). The $S^W_r$ are pairwise disjoint with union $W$, $Z^W_r=S^W_0\\cup\\cdots\\cup S^W_r$ for every $r\\ge-1$ (induction on $r$ from $Z^W_{-1}=\\emptyset$), and for every morphism $h:T\\to W$ and $r\\ge0$: $X_W\\times_WT\\to T$ is finite locally free of degree $r$ [def-pc-finite-locally-free] iff $h(T)\\subseteq S^W_r$.",
+   "text": "The bounded theorem gives closed sublevel loci, disjoint degree strata, their cover, and the universal finite-locally-free criterion.",
    "uses": [
-    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, first paragraph ('The question is local on S, hence we may assume that S is affine. By Morphisms, Lemma 03JA the fibres of f are universally bounded in this case. Hence the existence of the stratification follows from Lemma 07RY'), the locality written out"
-   }
-  },
-  {
-   "text": "*The strata are determined pointwise.* For $r\\ge0$ define $S_r\\subseteq S$ as the set of $s\\in S$ such that the fibre $X_s\\to\\operatorname{Spec}\\kappa(s)$ [def-weil-residue-field] is finite locally free of degree $r$ [def-pc-finite-locally-free]. Claim: $S_r\\cap W=S^W_r$ for every affine open $W$. Let $s\\in W$; the canonical morphism $\\operatorname{Spec}\\kappa(s)\\to S$ has image $\\{s\\}\\subseteq W$, so it factors through $W$ as $h_s:\\operatorname{Spec}\\kappa(s)\\to W$ [lem-weil-pbc-morphism-factors-through-open-subscheme], and $X_W\\times_W\\operatorname{Spec}\\kappa(s)=X_s$ over $\\operatorname{Spec}\\kappa(s)$ (step 1). By the universal property of step 2 applied to $h_s$, $X_s\\to\\operatorname{Spec}\\kappa(s)$ is finite locally free of degree $r$ iff $\\{s\\}\\subseteq S^W_r$, i.e. $s\\in S_r$ iff $s\\in S^W_r$.",
-   "uses": [
-    "def-weil-residue-field",
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
     "lem-weil-pbc-flat-fp-lqf-bounded-stratification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, first paragraph ('The question is local on S, hence we may assume that S is affine. By Morphisms, Lemma 03JA the fibres of f are universally bounded in this case. Hence the existence of the stratification follows from Lemma 07RY'), the locality written out"
-   }
+   "elementary": false
   },
   {
-   "text": "*The closed subsets $Z_r$.* Put $Z_{-1}:=\\emptyset$ and $Z_r:=S_0\\cup\\cdots\\cup S_r$ for $r\\ge0$; then $Z_{-1}\\subseteq Z_0\\subseteq Z_1\\subseteq\\cdots$. The affine opens $W$ cover $S$ [def-pc-scheme]. By steps 2 and 3, for each affine open $W$ the sets $S_r\\cap W=S^W_r$ are pairwise disjoint with union $W$; since every point of $S$ lies in some $W$, the $S_r$ ($r\\ge0$) are pairwise disjoint with union $S$, and hence $S_r=Z_r\\setminus Z_{r-1}$. Moreover $Z_r\\cap W=S^W_0\\cup\\cdots\\cup S^W_r=Z^W_r$ is closed in $W$ (step 2). A subset whose intersection with every member of an open cover is closed in that member is closed (its complement is the union of the open sets $W\\setminus(Z_r\\cap W)$), so every $Z_r$ is closed in $S$.",
+   "text": "Induct on the lower degree to show upper degree loci meet quasi-compact opens compactly; the affine successor step is isolated as the separately stated descent theorem. Intersect the compact upper locus with the closed sublevel locus to obtain compactness of each degree stratum.",
    "uses": [
-    "def-pc-scheme"
+    "lem-weil-pbc-qf-degree-successor-affine-compact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, first paragraph ('The question is local on S, hence we may assume that S is affine. By Morphisms, Lemma 03JA the fibres of f are universally bounded in this case. Hence the existence of the stratification follows from Lemma 07RY'), the locality written out"
-   }
-  },
-  {
-   "text": "*Finite local freeness of degree $r$ is local on the target.* Let $h:Y\\to T$ be a morphism of schemes, $r\\ge0$, and $T=\\bigcup_jT_j$ an open covering; write $h_j:Y_j:=h^{-1}(T_j)\\to T_j$, which is the base change of $h$ along $T_j\\to T$ [lem-weil-pbc-open-preimage-fibre-product]. Then $h$ is finite locally free of degree $r$ [def-pc-finite-locally-free] iff every $h_j$ is. Indeed: (finite) $h$ is finite iff all $h_j$ are [lem-weil-pbc-finite-local-on-target] ((1)$\\Leftrightarrow$(3) and the last sentence). (flat) The local rings $\\mathcal O_{Y,y}$, $\\mathcal O_{T,h(y)}$ and the map between them are the same for $h_j$ and $h$ when $y\\in Y_j$, and every $y$ lies in some $Y_j$, so flatness of $h$ is flatness of all $h_j$ [def-weil-flat-morphism]. (locally of finite presentation) If $h$ is, so is each base change $h_j$ [lem-weil-pbc-qcqs-morphism-permanence] (3); conversely if all $h_j$ are, then for $y\\in Y_j$ the affine opens $U\\subseteq Y_j$, $V\\subseteq T_j$ with $h(U)\\subseteq V$ and $\\mathcal O(V)\\to\\mathcal O(U)$ of finite presentation given by [def-sbc-locally-finite-presentation] for $h_j$ are affine opens of $Y$, $T$, so $h$ is of finite presentation at $y$. (degree) For $t\\in T_j$ (residue field $\\kappa(t)$ the same in $T_j$ and $T$, [def-weil-residue-field]), the fibre $Y_j\\times_{T_j}\\operatorname{Spec}\\kappa(t)$ is $Y\\times_T\\operatorname{Spec}\\kappa(t)$ by pasting the cartesian square of [lem-weil-pbc-open-preimage-fibre-product] with the fibre square [def-pc-fibre-product]; so $\\dim_{\\kappa(t)}\\Gamma$ of the fibre is the same for $h$ and $h_j$, and every $t$ lies in some $T_j$.",
-   "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-finite-local-on-target",
-    "def-weil-flat-morphism",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-sbc-locally-finite-presentation",
-    "def-weil-residue-field",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, first paragraph ('The question is local on S, hence we may assume that S is affine. By Morphisms, Lemma 03JA the fibres of f are universally bounded in this case. Hence the existence of the stratification follows from Lemma 07RY'), the locality written out"
-   }
-  },
-  {
-   "text": "*The universal property.* Let $g:T\\to S$ be a morphism and $r\\ge0$. For each affine open $W\\subseteq S$ let $T_W:=g^{-1}(W)$ and $g_W:T_W\\to W$ the restriction [lem-weil-pbc-morphism-factors-through-open-subscheme]; the $T_W$ form an open covering of $T$. The preimage of $T_W$ in $X\\times_ST$ is $(X\\times_ST)\\times_TT_W=X\\times_ST_W=X_W\\times_WT_W$ over $T_W$, by [lem-weil-pbc-open-preimage-fibre-product] (twice) and pasting of cartesian squares [def-pc-fibre-product]. By step 5, $X\\times_ST\\to T$ is finite locally free of degree $r$ iff for every affine open $W$ the projection $X_W\\times_WT_W\\to T_W$ is; by the universal property of step 2 (for $f_W$ and $g_W$) this holds iff $g(T_W)\\subseteq S^W_r=S_r\\cap W$ (step 3) for every $W$; since $T=\\bigcup_WT_W$ and $g(T_W)\\subseteq W$, this is equivalent to $g(T)\\subseteq S_r$.",
-   "uses": [
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, first paragraph ('The question is local on S, hence we may assume that S is affine. By Morphisms, Lemma 03JA the fibres of f are universally bounded in this case. Hence the existence of the stratification follows from Lemma 07RY'), the locality written out"
-   }
-  },
-  {
-   "text": "*Quasi-compactness, set-up.* For $r\\ge-1$ put $U_r:=S\\setminus Z_r$, open by step 4, with $U_{-1}=S\\supseteq U_0\\supseteq U_1\\supseteq\\cdots$ and $Z_r\\cap U_{r-1}=Z_r\\setminus Z_{r-1}=S_r$ for $r\\ge0$. Fix $r\\ge0$ and an affine open $W'=\\operatorname{Spec}A\\subseteq U_{r-1}$ [def-weil-affine-spectrum]. Then $Z_r\\cap W'=S_r\\cap W'$ is closed in $W'$, hence of the form $V(I)$ for an ideal $I\\subseteq A$ (definition of the Zariski topology). The morphism $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ induced by the surjection $A\\to A/I$ is a closed immersion [lem-weil-pbc-closed-immersion-affine-cover-criterion] (2) [def-weil-closed-immersion] whose image is $V(I)$ (the primes of $A/I$ are the $\\mathfrak p/I$ with $\\mathfrak p\\supseteq I$). Composing with the inclusion $W'\\to S$ gives $g:\\operatorname{Spec}(A/I)\\to S$ with $g(\\operatorname{Spec}(A/I))=V(I)\\subseteq S_r$, so by step 6 the projection $X\\times_S\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}(A/I)$ is finite locally free of degree $r$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, second paragraph (quasi-compactness of U_r = S minus Z_r)"
-   }
-  },
-  {
-   "text": "*Descending to a finitely generated ideal.* Let $\\Lambda$ be the set of finitely generated ideals $I_\\lambda\\subseteq I$, directed by inclusion; $I=\\bigcup_\\lambda I_\\lambda$, so $A/I=\\varinjlim_\\lambda A/I_\\lambda$ and $\\operatorname{Spec}(A/I)=\\varprojlim_\\lambda\\operatorname{Spec}(A/I_\\lambda)$ with affine transition morphisms [lem-weil-pbc-spec-colimit-limit]. Apply [lem-weil-pbc-descend-finite-locally-free] with $S_0=Y_0=W'$, $S_\\lambda=\\operatorname{Spec}(A/I_\\lambda)$ (index $0$ the ideal $(0)$) and $f_0=f_{W'}:X_{W'}\\to W'$: here $W'$ is affine, hence quasi-compact and quasi-separated; $X_{W'}$ is quasi-compact (step 1) and quasi-separated since $f_{W'}$ is separated over the affine $W'$ [lem-weil-pbc-qcqs-over-affine]; $f_{W'}$ is locally of finite presentation (step 1). Its base change to $\\operatorname{Spec}(A/I)$ is $X_{W'}\\times_{W'}\\operatorname{Spec}(A/I)=X\\times_S\\operatorname{Spec}(A/I)$ (pasting with [lem-weil-pbc-open-preimage-fibre-product], [def-pc-fibre-product]), finite locally free of degree $r$ by step 7. Hence there is $\\lambda$ with $X\\times_S\\operatorname{Spec}(A/I_\\lambda)\\to\\operatorname{Spec}(A/I_\\lambda)$ finite locally free of degree $r$, and by step 6 the image $V(I_\\lambda)$ of $\\operatorname{Spec}(A/I_\\lambda)\\to S$ (step 7 for $I_\\lambda$) lies in $S_r\\cap W'=V(I)$. As $I_\\lambda\\subseteq I$, also $V(I)\\subseteq V(I_\\lambda)$; so $Z_r\\cap W'=V(I_\\lambda)=V(a_1,\\ldots,a_m)$ for generators $a_1,\\ldots,a_m$ of $I_\\lambda$, and $U_r\\cap W'=W'\\setminus V(I_\\lambda)=D(a_1)\\cup\\cdots\\cup D(a_m)$. Each $D(a_k)\\cong\\operatorname{Spec}A_{a_k}$ is quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii), so $U_r\\cap W'$ is quasi-compact.",
-   "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-descend-finite-locally-free",
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, second paragraph (quasi-compactness of U_r = S minus Z_r)"
-   }
-  },
-  {
-   "text": "*$U_r\\to S$ is quasi-compact.* Claim: for every affine open $W\\subseteq S$ and every $r\\ge-1$, $U_r\\cap W$ is quasi-compact. Induction on $r$: $U_{-1}\\cap W=W$ is quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (iii). For $r\\ge0$, the open $U_{r-1}\\cap W$ is quasi-compact by induction, so it is covered by finitely many affine opens $W'_1,\\ldots,W'_m\\subseteq U_{r-1}\\cap W$ (affine opens form a basis [def-pc-scheme]); since $U_r\\subseteq U_{r-1}$, $U_r\\cap W=\\bigcup_k(U_r\\cap W'_k)$, a finite union of quasi-compact sets by step 8, hence quasi-compact. (This is Stacks' 'composition of the quasi-compact maps $U_r\\to U_{r-1}$'.)",
-   "uses": [
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, second paragraph (quasi-compactness of U_r = S minus Z_r)"
-   }
-  },
-  {
-   "text": "*$S_r\\to S$ is quasi-compact.* Let $W\\subseteq S$ be a quasi-compact open and $r\\ge0$; $W$ is a finite union of affine opens $W_1,\\ldots,W_m$ [def-pc-scheme]. For each $k$, $S_r\\cap W_k=Z_r\\cap(U_{r-1}\\cap W_k)$ (step 7) is a closed subset of $U_{r-1}\\cap W_k$, which is quasi-compact by step 9; a closed subset of a quasi-compact space is quasi-compact. Hence $S_r\\cap W=\\bigcup_k(S_r\\cap W_k)$ is quasi-compact. Together with steps 4 and 6 this proves the statement.",
-   "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), proof, second paragraph (quasi-compactness of U_r = S minus Z_r)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "pqf-def-quasifinite",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-isolated-fibre-point-base-change",
-  "pqf-lem-qf-locqf-qc",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
   "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
-  "def-pc-finite-locally-free",
-  "def-weil-residue-field",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "def-pc-scheme",
-  "lem-weil-pbc-finite-local-on-target",
-  "def-weil-flat-morphism",
-  "def-sbc-locally-finite-presentation",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-weil-pbc-descend-finite-locally-free",
-  "lem-weil-pbc-qcqs-over-affine",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+  "pqf-lem-qf-locqf-qc",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-qf-degree-successor-affine-compact"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma Tag 07RZ (lemma-stratify-flat-fp-qf), line 12845, with its proof; the locality on S ('The question is local on S') written out by the worker"
+  "by": "worker",
+  "document": "lean proof and Stacks Tag 07RZ",
+  "place": "affine bounded stratification plus induction on upper degree loci"
  },
  "mathlib_searches": [
   {
@@ -286,5 +146,15 @@
   "group": "J1",
   "result": "fix",
   "note": "X S : Scheme.{u}, f; Flat/LocallyOfFinitePresentation/IsSeparated instances; hf : landed Scheme.Hom.IsQuasiFinite (LOFT+QC+isolated fibre points, c85d109b5); Z : N -> Set S with Z 0 = Z_{-1} = empty, closed, monotone; strata Z(r+1)\\Z r disjoint, cover; all T : Scheme.{u}, g, r: pullback.snd f g IsFiniteLocallyFreeOfDegree r iff range g in stratum; IsCompact W -> IsCompact (stratum cap W); fix: let strata inlined (J1 c634916b4 let rule); #print resolves all names"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T135255-L-1678370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

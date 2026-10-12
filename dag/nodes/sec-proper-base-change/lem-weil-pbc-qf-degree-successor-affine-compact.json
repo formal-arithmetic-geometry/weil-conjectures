@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-qf-degree-successor-affine-compact",
+ "kind": "statement",
+ "title": "Successor upper fibre-degree locus is quasi-compact on affine opens",
+ "statement": "Let f : X ⟶ S be flat, locally of finite presentation, separated and quasi-finite. If the degree-≤r locus is closed, the universal degree-r criterion holds, and an affine open W lies in the degree-≥r locus, then the degree-≥r+1 locus intersected with W is compact.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 07RZ, proof, second paragraph"
+ },
+ "proof": [
+  {
+   "text": "Write the closed degree-≤r locus in affine W as V(I), form the inverse limit of quotient spectra by finitely generated subideals, and descend finite local freeness of the degree-r base change to a finite stage. The universal criterion identifies the resulting vanishing locus with V(I), so its complement is a finite union of compact basic opens.",
+   "uses": [
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project More on Morphisms",
+  "place": "Tag 07RZ, second paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compactness of successor upper fibre degree locus on affine open",
+   "results": "no existing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsCompact set of scheme points fibre degree",
+   "results": "no existing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg upper fibre degree compact affine",
+   "results": "no existing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-fp-qf-stratification",
+   "place": "step 8 of its proof",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteDegreeUpperLocusCompact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isCompact_successor_degree_locus_inter_affine",
+  "statement": "theorem isCompact_successor_degree_locus_inter_affine {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite) (r : ℕ) (W : S.Opens) (hW : IsAffineOpen W) (hclosed : IsClosed {s : S | (f.fiberToSpecResidueField s).finrankΓ ≤ r}) (hdegree : ∀ (T : Scheme.{u}) (g : T ⟶ S), (pullback.snd f g).IsFiniteLocallyFreeOfDegree r ↔ Set.range g ⊆ {s : S | (f.fiberToSpecResidueField s).finrankΓ = r}) (hWge : ∀ s : S, s ∈ W → r ≤ (f.fiberToSpecResidueField s).finrankΓ) : IsCompact ({s : S | r + 1 ≤ (f.fiberToSpecResidueField s).finrankΓ} ∩ (W : Set S))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "pqf-def-quasifinite"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T135255-L-1678370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T135255-L-1678370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
