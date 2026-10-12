@@ -104,7 +104,24 @@ theorem spec_field_point_residue_field_map
       l.hom.comp (algebraMap R q.asIdeal.ResidueField) = ψ ∧
       ∀ (l' : q.asIdeal.ResidueField →+* K),
         l'.comp (algebraMap R q.asIdeal.ResidueField) = ψ → l' = l.hom := by
-  sorry
+  let q := Spec.map (CommRingCat.ofHom ψ) (IsLocalRing.closedPoint K)
+  let l := (Scheme.Spec.residueFieldIso (.of R) q).inv ≫
+    (Spec (.of R)).descResidueField
+      (Scheme.stalkClosedPointTo (Spec.map (CommRingCat.ofHom ψ)))
+  have hl : l.hom.comp (algebraMap R q.asIdeal.ResidueField) = ψ := by
+    have h := Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField
+      K (Spec (.of R)) (Spec.map (CommRingCat.ofHom ψ))
+    rw [← Scheme.Spec.map_residueFieldIso_inv_eq_fromSpecResidueField] at h
+    rw [← Spec.map_comp_assoc, ← Spec.map_comp] at h
+    exact congrArg CommRingCat.Hom.hom (Spec.map_injective h)
+  refine ⟨q, rfl, l, ?_, ?_, hl, ?_⟩
+  · change Ideal.comap ψ (IsLocalRing.maximalIdeal K) = RingHom.ker ψ
+    rw [IsLocalRing.maximalIdeal_eq_bot]
+    rfl
+  · simp only [Scheme.residueFieldCongr_refl, Iso.refl_inv]
+    exact (Category.id_comp _).symm
+  · intro l' hl'
+    exact Ideal.ResidueField.ringHom_ext (hl'.trans hl.symm)
 
 /-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9
 (blueprint: lem-weil-pbc-spec-field-point-residue-field), final part of clause (3).
@@ -123,6 +140,25 @@ theorem spec_field_point_residue_field_generic
       (Spec.map (CommRingCat.ofHom (algebraMap R K)) (IsLocalRing.closedPoint K)) Set.univ ∧
     IsIso ((Spec (.of R)).descResidueField
       (Scheme.stalkClosedPointTo (Spec.map (CommRingCat.ofHom (algebraMap R K))))) := by
-  sorry
+  obtain ⟨q, hq, l, hker, hl, hcomp, -⟩ :=
+    spec_field_point_residue_field_map R K (algebraMap R K)
+  have hqbot : q.asIdeal = ⊥ := by
+    rw [hker, ← RingHom.injective_iff_ker_eq_bot]
+    exact IsFractionRing.injective R K
+  refine ⟨by rw [hq]; exact hqbot, ?_, ?_⟩
+  · change closure {_} = Set.univ
+    rw [hq, PrimeSpectrum.closure_singleton, hqbot, PrimeSpectrum.zeroLocus_bot]
+  · have hsurj : Function.Surjective l.hom := by
+      intro z
+      obtain ⟨a, b, -, rfl⟩ := IsFractionRing.div_surjective R z
+      refine ⟨algebraMap R q.asIdeal.ResidueField a /
+        algebraMap R q.asIdeal.ResidueField b, ?_⟩
+      rw [map_div₀]
+      exact congrArg₂ (· / ·) (RingHom.congr_fun hcomp a) (RingHom.congr_fun hcomp b)
+    have : IsIso l := (ConcreteCategory.isIso_iff_bijective l).mpr
+      ⟨RingHom.injective l.hom, hsurj⟩
+    rw [hl] at this
+    rw [isIso_comp_left_iff, isIso_comp_left_iff] at this
+    simpa [← hq] using this
 
 end AlgebraicGeometry
