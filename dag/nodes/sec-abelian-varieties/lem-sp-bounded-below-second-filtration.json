@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-bounded-below-second-filtration",
+ "kind": "statement",
+ "title": "Second filtration by subcomplexes for a half-plane-supported bicomplex",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $J$ an integer-indexed cochain bicomplex with a total complex [def-sp-double-complex-total], and $b\\in\\mathbf Z$. Assume $J^{i,j}=0$ whenever $i<0$ or $j<b$. There is a decreasing filtration $L$ of $\\operatorname{Tot}(J)$ by subcomplexes [def-sp-filtration] such that its degree-$n$ step $p$ [def-sp-filtered-complex-subquotients] is the second-filtration image sum over $j\\in[p,n]$. Its step at $b$ is the whole object in every degree, and its step at $n+1$ is zero in degree $n$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012Z and 0132; thm-sp-if-e1 proof paragraph 1, filtration construction"
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For total degree n the nonzero summands have first index i nonnegative and second index j at least b, with i+j=n. Thus b ≤ j ≤ n. For each p take the sum of the images of the diagonal inclusions with j in [p,n]. On a diagonal summand the horizontal differential preserves j and the vertical differential raises j by one. Both therefore factor through the next degree's step. Their signed sum does too. Choose these factorizations through the monomorphisms representing the steps. The equations for the squares of the differentials and the inclusion morphism follow by cancellation of those monomorphisms. This gives a subcomplex for each p. The inclusions of the image sums for p ≤ q give compatible inclusions of the subcomplexes, hence an antitone family of subobjects of the total complex. Evaluation of its inclusions has exactly the stated images. At p=b every nonzero diagonal summand occurs, so the coproduct universal property makes the image sum top. At p=n+1 the indexing interval is empty, so it is bottom. If n<b the total itself is zero, and these same equalities still hold.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012Z and 0132; thm-sp-if-e1 proof paragraph 1, filtration construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence of a degreewise bounded filtered complex converges to the image filtration on cohomology",
+   "results": "DerivedCategory.isZero_of_isLE; CochainComplex.cm5b; DerivedCategory.isZero_of_isGE; CochainComplex.isLE_iff; CochainComplex.exactAt_of_isLE; CochainComplex.isGE_iff; CochainComplex.isZero_of_isGE; CochainComplex.exactAt_of_isGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CohomologicalSpectralSequence",
+   "results": "loogle: unknown identifier 'CohomologicalSpectralSequence'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration|complexCycles|complexBoundaries",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence second filtration row cohomology signed differential degreewise bounded convergence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondFiltration",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Tags 012Z and 0132; thm-sp-if-e1 proof paragraph 1, filtration construction",
+   "via": [
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BoundedBelowSecondFiltration",
+  "file": "lean/Sheaf/CategoryTheory/BoundedBelowSecondFiltration.lean",
+  "declaration": "HomologicalComplex₂.boundedBelow_secondFiltration",
+  "statement": "theorem boundedBelow_secondFiltration\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (J : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    [J.HasTotal (ComplexShape.up ℤ)]\n    (b : ℤ)\n    (hzero : ∀ i j : ℤ, i < 0 ∨ j < b → IsZero ((J.X i).X j)) :\n    ∃ L : DecreasingFiltration (J.total (ComplexShape.up ℤ)),\n      (∀ p n : ℤ, L.complexStep p n = (J.secondFiltration n).step p) ∧\n      (∀ n : ℤ, L.complexStep b n = ⊤) ∧\n      (∀ n : ℤ, L.complexStep (n + 1) n = ⊥)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

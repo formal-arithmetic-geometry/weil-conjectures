@@ -10,9 +10,9 @@ public import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.BoundedBelowSecondFiltration
+import Sheaf.CategoryTheory.CartanEilenbergRowPages
+import Sheaf.CategoryTheory.DegreewiseFilteredStableQuotient
 
 /-! # The second-filtration spectral sequence and its total abutment
 
@@ -96,6 +96,50 @@ theorem cartanEilenberg_second_filtration
               (imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n))) ∧
           (∀ p n : ℤ, ∃ (t : ℤ) (ht : 1 ≤ t), ∀ (r : ℤ) (hr : t ≤ r),
             Nonempty ((E.page r (le_trans (by decide : (0 : ℤ) ≤ 1)
-              (le_trans ht hr))).X (p, n - p) ≅ (H n).gradedPiece p))) := by sorry
+              (le_trans ht hr))).X (p, n - p) ≅ (H n).gradedPiece p))) := by
+  classical
+  obtain ⟨b, hb⟩ := hbelow
+  let J := ((CartanEilenbergPresentation.mappedFunctor F).obj I).flip
+  have hzero : ∀ i j : ℤ, i < 0 ∨ j < b → IsZero ((J.X i).X j) := by
+    intro i j hij
+    rcases hij with hi | hj
+    · change IsZero
+        (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X j)).extend
+          ComplexShape.embeddingUpNat |>.X i)
+      exact HomologicalComplex.isZero_extend_X _ _ i (by
+        intro r
+        change (r : ℤ) ≠ i
+        omega)
+    · change IsZero
+        (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X j)).extend
+          ComplexShape.embeddingUpNat |>.X i)
+      exact (HomologicalComplex.eval B (ComplexShape.up ℤ) i).map_isZero
+        ((ComplexShape.embeddingUpNat.extendFunctor B).map_isZero
+          ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map_isZero (hb j hj)))
+  obtain ⟨L, hL, htop, hbot⟩ := J.boundedBelow_secondFiltration b hzero
+  obtain ⟨E, e₀, e₁, hd₀, hpages, hd₁, hneg⟩ :=
+    cartanEilenberg_row_pages F K I a ⟨b, hb⟩ hterms hrows L hL
+  refine ⟨L, E, e₀, e₁, hL, hd₀, hpages, hd₁, hneg, ?_⟩
+  intro Y c
+  have hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,
+      L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥ :=
+    fun n ↦ ⟨b, n + 1, htop n, hbot n⟩
+  obtain ⟨H, hfin, hstep, hstable⟩ :=
+    degreewiseFiltered_stable_quotient (J.total (ComplexShape.up ℤ)) L hfinite Y c
+  refine ⟨H, hfin, hstep, ?_⟩
+  intro p n
+  obtain ⟨t, ht, htail⟩ := hstable p n
+  refine ⟨t, ht, ?_⟩
+  intro r hr
+  have hpage : ∃ hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r,
+      Nonempty
+        ((E.page r (le_trans (by decide : (0 : ℤ) ≤ 1) (le_trans ht hr))).X (p, n - p) ≅
+          cokernel (Subobject.ofLE _ _ hBZ)) := by
+    have h := hpages p (n - p) r (le_trans ht hr)
+    rw [show p + (n - p) = n by omega] at h
+    exact h
+  obtain ⟨hBZ, he⟩ := hpage
+  obtain ⟨hBZ', hf⟩ := htail r hr
+  exact ⟨he.some ≪≫ hf.some⟩
 
 end CategoryTheory.Functor

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-second-filtration-row-cohomology",
+ "kind": "statement",
+ "title": "Second-filtration row cohomology with its totalization sign",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be additive and left exact between Grothendieck abelian categories [def-sp-left-exact-additive, def-sp-grothendieck-abelian]. Let $I$ be a bicomplex with complex index $s\\in\\mathbf Z$ and resolution index $r\\in\\mathbf N$, zero for $s<b$ for some integer $b$. Let $J$ be its $F$-mapped, extended and flipped bicomplex [def-sp-cartan-eilenberg-presentation]. Given a decreasing subcomplex filtration $L$ of its total [def-sp-filtration] with degreewise steps equal to the second-filtration sums [def-sp-double-complex-total], there exist a page-zero cohomological spectral sequence $E$ [def-sp-spectral-sequence], page-zero isomorphisms $E_0^{p,q}\\cong(\\operatorname{gr}^pL)^{p+q}$, and row isomorphisms $e_{r,s}:E_1^{s,r}\\cong H^r(F(I^{s,\\bullet}))$. The page-zero differential is the graded differential. For every $t\\ge1$, $E_t^{p,q}$ is isomorphic to the cokernel of $B_t\\subseteq Z_t$ [def-sp-filtered-complex-subquotients]. The row isomorphisms satisfy $d_1 e_{r,s+1}=(-1)^r e_{r,s}H^r(F(d_I^{s,s+1}))$, and $E_1^{p,q}=0$ for $q<0$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130; thm-sp-if-e1 proof paragraph 1, row computation before sign correction"
+ },
+ "stmt_deps": [
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-abelian",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Build the spectral sequence of the filtration by the differential-object self-map construction, retaining the page-zero and cycle/boundary identifications. The graded complex at s is the row F(I.X s), extended by zero and placed in degrees s+r: the component raising s disappears on taking the quotient. Thus page one is its cohomology. To compute d₁, lift a row cocycle to L^s/L^(s+2). Its total differential has only the component raising complex degree, with coefficient (-1)^r. The connecting map is consequently (-1)^r times the map of row cohomology induced by I.d s (s+1). The extended row is zero in negative resolution degrees, so its cohomology there vanishes. This proves the negative-degree page-one clause.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130; thm-sp-if-e1 proof paragraph 1, row computation before sign correction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence of a degreewise bounded filtered complex converges to the image filtration on cohomology",
+   "results": "DerivedCategory.isZero_of_isLE; CochainComplex.cm5b; DerivedCategory.isZero_of_isGE; CochainComplex.isLE_iff; CochainComplex.exactAt_of_isLE; CochainComplex.isGE_iff; CochainComplex.isZero_of_isGE; CochainComplex.exactAt_of_isGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CohomologicalSpectralSequence",
+   "results": "loogle: unknown identifier 'CohomologicalSpectralSequence'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration|complexCycles|complexBoundaries",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence second filtration row cohomology signed differential degreewise bounded convergence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondFiltration",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Tag 0130; thm-sp-if-e1 proof paragraph 1, row computation before sign correction",
+   "via": [
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SecondFiltrationRowCohomology",
+  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationRowCohomology.lean",
+  "declaration": "CategoryTheory.Functor.secondFiltration_row_cohomology",
+  "statement": "theorem secondFiltration_row_cohomology\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p) :\n    ∃ (E : CohomologicalSpectralSequence B 0)\n      (e₀ : ∀ p q : ℤ, (E.page 0).X (p, q) ≅ (L.gradedPiece p).X (p + q))\n      (e₁ : ∀ (r : ℕ) (s : ℤ), (E.page 1).X (s, (r : ℤ)) ≅\n        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)).homology r),\n      (∀ p q : ℤ, (E.page 0).d (p, q) (p, q + 1) ≫ (e₀ p (q + 1)).hom =\n        (e₀ p q).hom ≫ (L.gradedPiece p).d (p + q) (p + (q + 1))) ∧\n      (∀ (p q t : ℤ) (ht : 1 ≤ t),\n        ∃ hBZ : L.complexBoundaries p (p + q) t ≤ L.complexCycles p (p + q) t,\n          Nonempty ((E.page t (le_trans (by decide : (0 : ℤ) ≤ 1) ht)).X (p, q) ≅\n            cokernel (Subobject.ofLE _ _ hBZ))) ∧\n      (∀ (r : ℕ) (s : ℤ),\n        (E.page 1).d (s, (r : ℤ)) (s + 1, (r : ℤ)) ≫ (e₁ r (s + 1)).hom =\n          (r : ℤ).negOnePow • ((e₁ r s).hom ≫ HomologicalComplex.homologyMap\n            ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map (I.d s (s + 1))) r)) ∧\n      (∀ p q : ℤ, q < 0 → IsZero ((E.page 1).X (p, q)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

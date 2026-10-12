@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-cartan-eilenberg-row-pages",
+ "kind": "statement",
+ "title": "Injective-resolution comparisons and sign correction for row pages",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be additive and left exact between Grothendieck abelian categories [def-sp-left-exact-additive, def-sp-grothendieck-abelian]. Let $K$ be bounded below and $a:K\\to I$ a bicomplex augmentation into termwise injective rows, each a quasi-isomorphic resolution of $K^s$ [def-sp-injective-resolutions]; assume $I^{s,\\bullet}=0$ for $s<b$ for some $b$. For a subcomplex filtration $L$ of the flipped mapped total [def-sp-cartan-eilenberg-presentation] with steps the second-filtration sums [def-sp-double-complex-total], there exist $E,e_0,e_1$ with the page-zero and cycle/boundary quotient clauses of [lem-sp-second-filtration-row-cohomology], but with $e_1:E_1^{s,r}\\cong R^rF(K^s)$ and unsigned differential $d_1e_{1,r,s+1}=e_{1,r,s}R^rF(d_K^{s,s+1})$. The negative complementary degrees of page one vanish. No convergence assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130; Mathlib InjectiveResolution.isoRightDerivedObj_inv_naturality; thm-sp-if-e1 proof paragraph 1"
+ },
+ "stmt_deps": [
+  "lem-sp-second-filtration-row-cohomology",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Bundle each given augmented row as an InjectiveResolution with cocomplex I.X s, injectivity hterms s, augmentation a.f s and quasi-isomorphism hrows s. Apply lem-sp-second-filtration-row-cohomology to obtain the spectral sequence, row cohomology comparisons, signed d1 equation and negative-degree vanishing. Multiply the comparison at (s,r) by (-1)^(r*s). The Lean calculation using Int.negOnePow_add and Int.units_mul_self cancels the consecutive (-1)^r factor. Compose these corrected comparisons with InjectiveResolution.isoRightDerivedObj F r inverses. The degree-zero augmentation equation follows by evaluating a.comm s (s+1) at zero, and Mathlib InjectiveResolution.isoRightDerivedObj_inv_naturality supplies the required right-derived naturality equation. No resolution is chosen from an existence theorem.",
+   "uses": [
+    "lem-sp-second-filtration-row-cohomology",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-second-filtration-row-cohomology",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130; Mathlib InjectiveResolution.isoRightDerivedObj_inv_naturality; thm-sp-if-e1 proof paragraph 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence of a degreewise bounded filtered complex converges to the image filtration on cohomology",
+   "results": "DerivedCategory.isZero_of_isLE; CochainComplex.cm5b; DerivedCategory.isZero_of_isGE; CochainComplex.isLE_iff; CochainComplex.exactAt_of_isLE; CochainComplex.isGE_iff; CochainComplex.isZero_of_isGE; CochainComplex.exactAt_of_isGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CohomologicalSpectralSequence",
+   "results": "loogle: unknown identifier 'CohomologicalSpectralSequence'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration|complexCycles|complexBoundaries",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence second filtration row cohomology signed differential degreewise bounded convergence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondFiltration",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Tag 0130; Mathlib InjectiveResolution.isoRightDerivedObj_inv_naturality; thm-sp-if-e1 proof paragraph 1",
+   "via": [
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergRowPages",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergRowPages.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_row_pages",
+  "statement": "theorem cartanEilenberg_row_pages\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (K : CochainComplex.Plus A)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      K.obj ⟶ I)\n    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))\n    (hterms : ∀ (s : ℤ) (r : ℕ), Injective ((I.X s).X r))\n    (hrows : ∀ s : ℤ, QuasiIso (a.f s))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p) :\n    ∃ (E : CohomologicalSpectralSequence B 0)\n      (e₀ : ∀ p q : ℤ, (E.page 0).X (p, q) ≅ (L.gradedPiece p).X (p + q))\n      (e₁ : ∀ (r : ℕ) (s : ℤ), (E.page 1).X (s, (r : ℤ)) ≅\n        (F.rightDerived r).obj (K.obj.X s)),\n      (∀ p q : ℤ, (E.page 0).d (p, q) (p, q + 1) ≫ (e₀ p (q + 1)).hom =\n        (e₀ p q).hom ≫ (L.gradedPiece p).d (p + q) (p + (q + 1))) ∧\n      (∀ (p q t : ℤ) (ht : 1 ≤ t),\n        ∃ hBZ : L.complexBoundaries p (p + q) t ≤ L.complexCycles p (p + q) t,\n          Nonempty ((E.page t (le_trans (by decide : (0 : ℤ) ≤ 1) ht)).X (p, q) ≅\n            cokernel (Subobject.ofLE _ _ hBZ))) ∧\n      (∀ (r : ℕ) (s : ℤ),\n        (E.page 1).d (s, (r : ℤ)) (s + 1, (r : ℤ)) ≫ (e₁ r (s + 1)).hom =\n          (e₁ r s).hom ≫ (F.rightDerived r).map (K.obj.d s (s + 1))) ∧\n      (∀ p q : ℤ, q < 0 → IsZero ((E.page 1).X (p, q)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

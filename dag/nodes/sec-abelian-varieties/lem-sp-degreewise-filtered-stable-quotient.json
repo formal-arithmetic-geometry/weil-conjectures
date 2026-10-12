@@ -1,0 +1,115 @@
+{
+ "id": "lem-sp-degreewise-filtered-stable-quotient",
+ "kind": "statement",
+ "title": "Stable filtered cycle quotients and transported cohomology image filtration",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K$ an integer-indexed cochain complex, and $L$ a decreasing filtration by subcomplexes [def-sp-filtration]. Assume that for every degree $n$ there are integers $\\ell_n,h_n$ such that $L^{\\ell_n}K^n=K^n$ and $L^{h_n}K^n=0$, using the image steps [def-sp-filtered-complex-subquotients]. Given objects $Y^n$ and isomorphisms $c_n:H^n(K)\\cong Y^n$, there is a finite decreasing filtration $H$ on every $Y^n$ with $H^pY^n=(c_n)_*\\operatorname{im}(H^n(L^pK)\\to H^n(K))$. For every $p,n$ there exists $t\\ge1$ such that for every $r\\ge t$ the inclusion $B_r^{p,n}\\subseteq Z_r^{p,n}$ holds and its cokernel is isomorphic to $\\operatorname{gr}^pH(Y^n)$. Here $Z_r,B_r$ are the filtered cycle/boundary subobjects of [def-sp-filtered-complex-subquotients].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012Q, 012W and 0132; thm-sp-if-e1 proof paragraph 1, stationary quotients and transport"
+ },
+ "stmt_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For each n define the p-th step on H^n(K) to be the image of H^n(L^pK) → H^n(K). The factorization through L^pK of the inclusion of L^qK for p ≤ q gives antitonicity. Pick bounds for degrees n-1,n,n+1. For p below all their lower bounds the subcomplex inclusion is an isomorphism in these three degrees, so its homology image is top. Above the upper bound in degree n its homology image is zero. Thus the image filtration is finite. Fix p,n. Choose t ≥ 1 so that L^(p+t)K^(n+1)=0 and L^(p-t+1)K^(n-1)=K^(n-1). Antitonicity keeps these equalities true for every r ≥ t. In the formulas for Z_r and B_r the outer steps can therefore be replaced by zero and the whole object. The cycles are the images in gr^pK^n of actual cycles in L^pK^n, while the boundaries are the images of actual boundaries of K intersected with L^pK^n. The abelian subquotient isomorphism identifies Z_r/B_r with the quotient of the image of H^n(L^pK) by the image of H^n(L^(p+1)K). This is the graded piece of the image filtration. For a family c_n:H^n(K) ≅ Y^n, take direct images of these steps along c_n.hom. Their antitonicity is preserved by the direct-image functor. Since each c_n is an isomorphism, direct image preserves top and bottom and identifies the successive inclusion arrows up to isomorphism. Applying the cokernel functor to these squares gives the graded-piece comparisons. This yields the exact step formula, finiteness and stationary-quotient isomorphisms below.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012Q, 012W and 0132; thm-sp-if-e1 proof paragraph 1, stationary quotients and transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence of a degreewise bounded filtered complex converges to the image filtration on cohomology",
+   "results": "DerivedCategory.isZero_of_isLE; CochainComplex.cm5b; DerivedCategory.isZero_of_isGE; CochainComplex.isLE_iff; CochainComplex.exactAt_of_isLE; CochainComplex.isGE_iff; CochainComplex.isZero_of_isGE; CochainComplex.exactAt_of_isGE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CohomologicalSpectralSequence",
+   "results": "loogle: unknown identifier 'CohomologicalSpectralSequence'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration|complexCycles|complexBoundaries",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral sequence second filtration row cohomology signed differential degreewise bounded convergence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergSecondFiltration",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Tags 012Q, 012W and 0132; thm-sp-if-e1 proof paragraph 1, stationary quotients and transport",
+   "via": [
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DegreewiseFilteredStableQuotient",
+  "file": "lean/Sheaf/CategoryTheory/DegreewiseFilteredStableQuotient.lean",
+  "declaration": "CategoryTheory.degreewiseFiltered_stable_quotient",
+  "statement": "theorem degreewiseFiltered_stable_quotient\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (L : DecreasingFiltration K)\n    (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,\n      L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥)\n    (Y : ℤ → C) (c : ∀ n : ℤ, K.homology n ≅ Y n) :\n    ∃ H : ∀ n : ℤ, DecreasingFiltration (Y n),\n      (∀ n : ℤ, (H n).IsFinite) ∧\n      (∀ p n : ℤ, (H n).step p =\n        (Subobject.«exists» (c n).hom).obj\n          (imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n))) ∧\n      (∀ p n : ℤ, ∃ (t : ℤ) (ht : 1 ≤ t), ∀ (r : ℤ) (hr : t ≤ r),\n        ∃ hBZ : L.complexBoundaries p n r ≤ L.complexCycles p n r,\n          Nonempty (cokernel (Subobject.ofLE _ _ hBZ) ≅ (H n).gradedPiece p))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T095930-L-327103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
