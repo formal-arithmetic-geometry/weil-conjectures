@@ -234,4 +234,95 @@ theorem exists_isRoot_and_eval_eq (P : (colim R p K)[X]) (hP : P.Monic) (a₀ : 
   · rw [eval_ι, toAlgHom_ofAlgHom]
     exact SP.lift_X a₀ hmap
 
+instance : IsLocalHom (eval R p K).toRingHom :=
+  ⟨fun x hx ↦ (isUnit_iff_eval_ne_zero x).mpr hx.ne_zero⟩
+
+/-- The image of `κ(p)` in `K` lies in the image of `ψ : C → K`. -/
+lemma algebraMap_mem_range_eval (x : p.ResidueField) :
+    algebraMap p.ResidueField K x ∈ Set.range (eval R p K) := by
+  obtain ⟨⟨a, b, hb⟩, rfl⟩ := IsLocalization.mk'_surjective (nonZeroDivisors (R ⧸ p)) x
+  obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective a
+  obtain ⟨s, rfl⟩ := Ideal.Quotient.mk_surjective b
+  have hs : algebraMap R K s ≠ 0 := by
+    intro h
+    rw [← RingHom.mem_ker, ker_algebraMap R p K] at h
+    exact nonZeroDivisors.ne_zero hb (Ideal.Quotient.eq_zero_iff_mem.mpr h)
+  have hu : IsUnit (algebraMap R (colim R p K) s) :=
+    (isUnit_iff_eval_ne_zero _).mpr (by rwa [AlgHom.commutes])
+  refine ⟨algebraMap R _ r * ↑hu.unit⁻¹, ?_⟩
+  dsimp only
+  have hR (r : R) : algebraMap p.ResidueField K
+      (algebraMap (R ⧸ p) p.ResidueField (Ideal.Quotient.mk p r)) = algebraMap R K r := by
+    rw [← Ideal.Quotient.algebraMap_eq, ← IsScalarTower.algebraMap_apply R (R ⧸ p),
+      ← IsScalarTower.algebraMap_apply R p.ResidueField K]
+  rw [map_mul, AlgHom.commutes, IsFractionRing.mk'_eq_div, map_div₀, hR, hR, div_eq_mul_inv]
+  congr 1
+  refine eq_inv_of_mul_eq_one_left ?_
+  rw [← AlgHom.commutes (eval R p K), ← map_mul, IsUnit.val_inv_mul, map_one]
+
+variable [Algebra.IsSeparable p.ResidueField K]
+
+/-- **The map `ψ : C → K` is surjective** when `K` is separable algebraic over `κ(p)`: every
+element of `K` is a simple root of its minimal polynomial over `κ(p)`, which lifts to a monic
+polynomial over `C`.
+
+(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+theorem eval_surjective : Function.Surjective (eval R p K) := by
+  intro α
+  have hsep : IsSeparable p.ResidueField α := Algebra.IsSeparable.isSeparable _ α
+  have hg : (minpoly p.ResidueField α).map (algebraMap p.ResidueField K) ∈
+      Polynomial.lifts (eval R p K).toRingHom := by
+    rw [lifts_iff_coeff_lifts]
+    intro n
+    rw [coeff_map]
+    exact algebraMap_mem_range_eval _
+  obtain ⟨P, hP, -, hPm⟩ := lifts_and_natDegree_eq_and_monic hg
+    ((minpoly.monic hsep.isIntegral).map _)
+  obtain ⟨a, -, ha⟩ := exists_isRoot_and_eval_eq P hPm α
+    (by rw [eval₂_eq_eval_map, hP, eval_map, ← aeval_def, minpoly.aeval])
+    (by
+      rw [eval₂_eq_eval_map, ← derivative_map, hP, derivative_map, eval_map, ← aeval_def]
+      exact hsep.aeval_derivative_ne_zero (minpoly.aeval _ _))
+  exact ⟨a, ha⟩
+
+/-- The residue field of `C` is `K`: the isomorphism induced by `ψ : C → K`.
+
+(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+noncomputable def residueFieldEquiv : ResidueField (colim R p K) ≃+* K :=
+  RingEquiv.ofBijective (ResidueField.lift (eval R p K).toRingHom)
+    ⟨(ResidueField.lift _).injective, fun α ↦ by
+      obtain ⟨a, rfl⟩ := eval_surjective (R := R) (p := p) α
+      exact ⟨residue _ a, rfl⟩⟩
+
+@[simp]
+lemma residueFieldEquiv_residue (x : colim R p K) :
+    residueFieldEquiv (residue _ x) = eval R p K x :=
+  rfl
+
+/-- **The colimit over étale triples is henselian**: a simple root in the residue field `K` of a
+monic polynomial over `C` lifts (`EtaleTriple.exists_isRoot_and_eval_eq`).
+
+(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+instance henselianLocalRing_colim : HenselianLocalRing (colim R p K) := by
+  refine ((HenselianLocalRing.TFAE _).out 1 0).mp fun f hf a₀ h₁ h₂ ↦ ?_
+  let e : ResidueField (colim R p K) ≃+* K := residueFieldEquiv
+  have he : (e : ResidueField (colim R p K) →+* K).comp (residue _) = (eval R p K).toRingHom :=
+    RingHom.ext fun _ ↦ rfl
+  have key (g : (colim R p K)[X]) :
+      g.eval₂ (eval R p K).toRingHom (e a₀) = e (aeval a₀ g) := by
+    change _ = (e : ResidueField (colim R p K) →+* K) (eval₂ (algebraMap _ _) a₀ g)
+    rw [hom_eval₂, ResidueField.algebraMap_eq, he]
+    rfl
+  obtain ⟨a, ha, hae⟩ := exists_isRoot_and_eval_eq f hf (e a₀)
+    (by rw [key, h₁, map_zero]) (by rw [key]; exact (map_ne_zero e).mpr h₂)
+  exact ⟨a, ha, e.injective ((residueFieldEquiv_residue a).trans hae)⟩
+
+/-- **The colimit over étale triples is strictly henselian** when `K` is a separable closure of
+`κ(p)`: it is henselian with residue field `K`.
+
+(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+instance isStrictlyHenselianLocalRing_colim [IsSepClosed K] :
+    IsStrictlyHenselianLocalRing (colim R p K) where
+  isSepClosed_residueField := IsSepClosed.of_ringEquiv (residueFieldEquiv).symm
+
 end EtaleTriple
