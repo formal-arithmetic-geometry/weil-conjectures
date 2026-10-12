@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-ce-total-sections-comparison",
+ "kind": "statement",
+ "title": "Global sections of CE totals commute with the fixed resolution comparison",
+ "statement": "For a scheme $X$ [def-weil-pbc-scheme-conventions], a bounded-below complex $K$ of abelian étale sheaves [def-weil-pbc-etale-sheaves] and a termwise hypercohomology presentation $D$ [def-weil-pbc-termwise-hypercohomology-presentation], write $A=\\operatorname{Tot}(I)$ and $B=\\operatorname{Tot}(\\Gamma(X,I))$ after extension and index flip [def-sp-cartan-eilenberg-presentation, def-sp-double-complex-total]. The finite-diagonal isomorphism $e_D:B\\cong\\Gamma(X,A)$, uniquely specified on each diagonal inclusion by the extension comparisons, satisfies $e_D\\circ\\Gamma(X,D.\\mathrm{comparison})=D.w$. For a morphism $f:Y\\to X$ [def-weil-pbc-inverse-image] and a chain map $g:f^{-1}A\\to A\\prime$, the degreewise sections unit followed by $\\Gamma(Y,g)$ is a chain map, and its postcomposition with $\\Gamma(Y,h)$ equals the sections lift of $g\\circ h$. These are constructions, not arbitrary existence choices.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J (lemma-two-ss-complex-functor), Tag 015K (remark-functorial-ss); Homology Tag 012K"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the comparison isomorphism and its summand formula from the proved finite-diagonal comparison. The formula uniquely determines its morphism in every degree, so this choice introduces no undetermined data.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-mapped-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each nonnegative resolution summand, compose the summand equation with global sections of D.comparison, use functoriality, and rewrite using D.w_formula. In negative resolution degree, extension by zero makes the summand zero. Apply total coproduct extensionality in each degree, then chain-map extensionality.",
+   "uses": [
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct ceSectionsUnit by composing the global-sections/terminal-sections comparison, the inverse-image adjunction unit whiskered by terminal sections, the pushforward/terminal-sections comparison whiskered by upperStar, and the inverse global-sections comparison whiskered by upperStar. Its components are definitionally the prescribed globalSectionsUpperStarMap. Apply its naturality field to each differential and use the chain-map equation of g to construct ceSectionsLift with explicit degree components. Postcomposition follows degreewise from Functor.map_comp and associativity.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J (lemma-two-ss-complex-functor), Tag 015K (remark-functorial-ss); Homology Tag 012K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Eilenberg total complex filtered spectral sequence natural pullback",
+   "date": "2026-10-12",
+   "results": "8 hits; HomologicalComplex.HasGoodTrifunctor₂₃Obj, HomologicalComplex.mapBifunctor₂₃.mapBifunctor₂₃Desc, HomologicalComplex.HasGoodTrifunctor₁₂Obj, HomologicalComplex.mapBifunctor₁₂.mapBifunctor₁₂Desc, HomologicalComplex.mapBifunctorDesc, CochainComplex.ιMapBifunctor, HomologicalComplex.mapBifunctor₁₂.ι, HomologicalComplex.mapBifunctor₂₃.ι.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap_comp",
+   "date": "2026-10-12",
+   "results": "1 hits; HomologicalComplex.homologyMap_comp.",
+   "verdict": "used homologyMap_comp for abutment transport"
+  },
+  {
+   "tool": "grep",
+   "query": "cartanEilenberg|hypercohomology.*filtered|filtered.*hypercohomology",
+   "date": "2026-10-12",
+   "results": "0 hits; no matches.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg filtered total spectral sequence pullback naturality",
+   "date": "2026-10-12",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercohomologyCETotalMaps",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "CE-total-maps step 3: finite-diagonal comparison; step 5: identification of the CE-total abutment map with the target K-injective comparison",
+   "via": [
+    "lem-weil-pbc-ce-total-filtered-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCETotalSections",
+  "file": "lean/Sheaf/Paper/EtaleCETotalSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.totalSectionsIso_comparison",
+  "statement": "theorem totalSectionsIso_comparison {X : Scheme.{uNatural}}\n    {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}\n    (D : EtaleTermwiseHypercohomology X K) :\n    D.totalSectionsIso.hom ≫\n      ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex\n        (ComplexShape.up ℤ)).map D.comparison = D.w",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleTermwiseHypercohomology.totalSectionsIso_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T213851-L-1208924",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T213851-L-1208924",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,16 +8,7 @@ module
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import Sheaf.CategoryTheory.CartanEilenbergFunctorial
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import Sheaf.Paper.EtaleCEFilteredTotalConstruction
 
 /-! # Coherent filtered Cartan--Eilenberg total maps
 
@@ -33,6 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the simultaneous presentation, total-map and stabilization witnesses.
 /-- Choose the filtered CE spectral sequences and their maps on CE totals. The abutment
@@ -41,43 +33,21 @@ Source: Stacks Project, derived.tex, Tag 015J (lemma-two-ss-complex-functor) and
 Tag 015K (remark-functorial-ss).
 (blueprint: lem-weil-pbc-ce-total-filtered-maps).
 
-Proof: Shift each bounded-below complex to start in degree zero, choose its CE resolution
-by exists_cartanEilenberg_resolution, and shift back. Construct the second filtration
-of the extended, flipped CE total. Its steps are the entire object below a fixed lower
-complex-degree bound b and are zero in cochain degree i above filtration index i.
-To use the uniformly finite filtered-complex construction, crop the filtration above
-an integer c: retain its steps through c and replace all later steps by zero. This is
-a finite filtration of the whole complex. For a fixed total degree n choose c > n+1;
-the cropped and original filtrations then agree in degrees n-1,n,n+1 for every index.
-The canonical cycle and boundary formulas therefore agree in bidegrees (q,n-q) on
-every page. Increasing c gives identity filtered maps between cropped filtrations;
-the representative comparisons identify these maps with identities on the unchanged
-cycle/boundary quotients. Thus the page objects and homology structure maps glue.
-For a page differential use a common c for its source and target total degrees.
-For a filtered map use common lower and upper crop bounds in source and target;
-canonical representative naturality then glues its page maps as well. This constructs
-the canonical spectral sequence for the degreewise finite filtration, without claiming
-that the original filtration is uniformly finite. Use the signed row identifications
-and the natural
-Ext/global-sections comparison to obtain the presentations D. For each (f,v), apply
-cartanEilenberg_lift to exact inverse image and the augmented CE resolutions. Totalize
-this bicomplex map, and compose with the target presentation's comparison to its chosen
-K-injective resolution to obtain g. The augmentation square is the stated homotopy.
-Apply the global-sections unit to g to obtain s. Additivity commutes with the finite
-diagonal sums: cartanEilenberg_mapped_total_iso supplies e. Its summand formula and the
-presentation's w_formula later identify w with e.hom followed by Γ(comparison).
-The total map preserves the complex-degree filtration, hence induces M. On each row
-resolve the inverse-image row into the target injective row; naturality of the fixed
-constant-integer/global-sections comparison computes H(v) after cohomologyMap. The sign
-correction is the same in source and target, giving the first-page equation.
-Restrict the total map to the images of cohomology of filtration steps and transport
-along c_X and the target resolution isomorphism. This gives t and ht. Choose for each
-presentation and bidegree a bound beyond the finite filtration tails in degrees n-1,
-n and n+1. Cycles and boundaries are then stationary; their canonical quotient-to-image
-comparisons give eInf. These representative comparisons commute with the filtered
-map, so the map on stationary pages is the induced map on the two successive image
-quotients, namely cokernel.map. Its compatibility proof is immaterial by proof
-irrelevance. The bound depends only on a presentation and a bidegree, not on (f,v).
+Proof: Use exists_etaleHypercohomology_ce_filtered_totals to construct the coherent
+filtered spectral data and a map u between the CE sheaf totals, with its strict
+augmentation square and stationary-page equation on the cohomology of CE totals.
+Compose u with the target presentation's comparison to obtain g. Its augmentation
+square, followed by the target's over_K homotopy, gives the required homotopy.
+Define s degreewise from the global-sections unit and g; naturality of the unit
+makes s a chain map. The proved finite-diagonal comparison totalSectionsIso supplies
+e and its summand formula. On every nonnegative diagonal summand, this formula and
+w_formula show that the target comparison followed by global sections is w; negative
+resolution summands are zero. Hence the map of global-sections CE totals followed
+by w_Y equals e.hom followed by s. Applying homologyMap_comp and c_formula identifies
+the CE abutment map with the required resolutionEtaleCohomologyIso composite.
+Keep the filtration-step maps supplied by the filtered-total construction, rewrite
+ht by this equality, and retain its stationary-page equation. The latter does not
+depend on the proof of ht.
 Zero complexes, empty schemes and empty diagonal sums are included in these constructions.
 No choice of an arbitrary resolution lift is used in this statement. -/
 theorem exists_etaleHypercohomology_ce_total_maps :
@@ -171,6 +141,38 @@ theorem exists_etaleHypercohomology_ce_total_maps :
                   (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q)
                     (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q))))
                   (t (q + 1)) (t q) (hc q)) := by
-  sorry
+  obtain ⟨D, M, R, eInf, hE, hT⟩ := exists_etaleHypercohomology_ce_filtered_totals
+  refine ⟨D, M, R, eInf, hE, ?_⟩
+  intro X Y f K L v
+  obtain ⟨u, hu, hstable⟩ := hT f K L v
+  let g := u ≫ (D Y L).comparison
+  let s := ceSectionsLift f g
+  let e := (D X K).totalSectionsIso
+  refine ⟨g, s, e, ?_, ?_, (D X K).totalSectionsIso_formula, ?_⟩
+  · obtain ⟨h⟩ := (D Y L).over_K
+    exact ⟨by simpa only [g, ← Category.assoc, hu] using h.compLeft v⟩
+  · intro i
+    rfl
+  · intro n
+    obtain ⟨t, ht, hpage⟩ := hstable n
+    have htotal :
+        ((D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫
+          (D Y L).totalSectionsIso.inv) ≫ (D Y L).w = e.hom ≫ s := by
+      rw [← (D Y L).totalSectionsIso_comparison]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc]
+      rw [← ceSectionsLift_comp]
+    have habut :
+        HomologicalComplex.homologyMap
+          ((D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫
+            (D Y L).totalSectionsIso.inv) n ≫ ((D Y L).c n).hom =
+        HomologicalComplex.homologyMap (e.hom ≫ s) n ≫
+          (@resolutionEtaleCohomologyIso.{uNatural} Y L.obj (D Y L).ρ.complex
+            (D Y L).ρ.map (D Y L).ρ.quasiIso (D Y L).ρ.isKInjective n).hom := by
+      rw [(D Y L).c_formula]
+      rw [← Category.assoc, ← HomologicalComplex.homologyMap_comp, htotal]
+    refine ⟨t, ?_, hpage⟩
+    intro q
+    rw [ht q, ← Category.assoc, habut]
+    simp only [Category.assoc]
 
 end AlgebraicGeometry.Etale

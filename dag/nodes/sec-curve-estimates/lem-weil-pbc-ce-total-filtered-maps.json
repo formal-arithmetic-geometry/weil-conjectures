@@ -22,58 +22,35 @@
  ],
  "proof": [
   {
-   "text": "Shift a bounded-below complex so its terms below zero vanish. Apply the CE existence theorem and shift back. Use the first hypercohomology spectral-sequence theorem, with its signed row identifications and canonical resolution comparison, to build each presentation. Use the natural sheaf-H/derived-global-sections comparison on all rows, rather than separately chosen row isomorphisms.",
+   "text": "Use the coherent filtered CE-total construction to obtain D,M,R,eInf, the first-page equation, the CE-total lift u, its strict augmentation square and t,ht with the stationary-page equation.",
    "uses": [
-    "lem-sp-cartan-eilenberg-exists",
-    "thm-sp-if-e1",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "lem-weil-pbc-ce-filtered-total-construction"
    ],
    "elementary": false
   },
   {
-   "text": "The complex-degree filtration is top below a uniform lower bound b, but only degreewise zero at high indices. Crop it above an index c by replacing steps above c by zero; the result is a uniformly finite filtration of the whole complex. Apply the bounded filtered-complex spectral-sequence construction to these crops. For fixed total degree n choose c>n+1. The crop and original filtration agree in degrees n-1,n,n+1 at every index, so their cycle and boundary formulas agree on every page in bidegree (q,n-q). Increasing c gives identity filtered maps of the crops; canonical representative comparisons identify the maps with identities on the unchanged cycle/boundary quotients. Glue the page objects and structure maps through these identifications; choose one common c for the degrees involved in a differential or page-homology comparison. For a filtered map choose common lower and upper crop bounds in source and target, use naturality of the canonical representative comparisons, and glue the page maps. The page-zero graded complexes are those of the original filtration. This supplies simultaneous canonical choices, rather than unrelated choices of an objectwise spectral sequence.",
+   "text": "Set g=u followed by the target presentation comparison. Compose its strict augmentation square with the target over_K homotopy to get the required homotopy. Define s=ceSectionsLift(f,g). Its degreewise formula is definitional. Take e=totalSectionsIso of the source, with its proved summand formula.",
    "uses": [
-    "thm-sp-spectral-object-yields",
-    "lem-sp-filtered-complex-ZB-description",
-    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact inverse image and the augmented CE comparison theorem give a bicomplex lift of every v. Totalize and follow by the target comparison to its chosen K-injective resolution to obtain g; the augmentation square gives its homotopy. Apply the global-sections unit degreewise to construct s. The finite-diagonal comparison supplies e with its specified summand equation.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-cartesian-eilenberg-functorial",
-    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-weil-pbc-ce-total-sections-comparison",
     "def-weil-pbc-termwise-hypercohomology-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The CE bicomplex map and global-sections unit preserve complex-degree filtration. Apply the canonical filtered spectral-sequence functor to obtain M for all chosen presentations. On each row the natural injective-resolution comparison computes cohomologyMap followed by H(v); the signed identifications use unchanged indices. This proves the first-page equation.",
+   "text": "The target finite-diagonal comparison followed by sections of its comparison equals w_Y. Cancel its inverse in the CE-total map, and use ceSectionsLift_comp to identify b followed by w_Y with e.hom followed by s. Apply homologyMap_comp and c_formula. This rewrites the transported CE-total abutment map as the exact resolutionEtaleCohomologyIso composite in the statement. Keep t and the stationary-page equation and rewrite ht by this equality.",
    "uses": [
-    "thm-sp-spectral-object-yields",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-cohomology-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The image-filtration step maps are restrictions of the cohomology of this filtered total map. Transport their source along c_X and their target along the canonical resolution isomorphism to obtain t and ht. Finite tails in degrees n-1,n,n+1 make cycles and boundaries stationary. Choose a bound for each presentation and bidegree, and use the canonical quotient-to-image comparison at each later page for eInf. Naturality of the representative comparisons identifies the stable page map with the induced map on successive quotients, which is cokernel.map. The proof of the successive-inclusion square is irrelevant.",
-   "uses": [
-    "thm-sp-spectral-object-yields",
-    "thm-sp-if-e1",
+    "lem-weil-pbc-ce-total-sections-comparison",
     "def-weil-pbc-termwise-hypercohomology-presentation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K2",
-  "date": "2026-10-12",
+  "group": "M3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 015J (lemma-two-ss-complex-functor), Tag 015K (remark-functorial-ss); finite filtered-complex convergence in Homology Tag 012K"
+  "place": "Tag 015J (lemma-two-ss-complex-functor), Tag 015K (remark-functorial-ss); Homology Tag 012K"
  },
  "mathlib_searches": [
   {
@@ -128,25 +105,16 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "proof_deps": [
-  "lem-sp-cartan-eilenberg-exists",
-  "thm-sp-if-e1",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "thm-sp-spectral-object-yields",
-  "lem-sp-filtered-complex-ZB-description",
-  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-cartesian-eilenberg-functorial",
-  "lem-sp-cartan-eilenberg-mapped-total",
-  "def-weil-pbc-termwise-hypercohomology-presentation",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "def-weil-pbc-cohomology-pullback"
+  "lem-weil-pbc-ce-filtered-total-construction",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
  ],
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.EtaleHypercohomologyCETotalMaps",
   "file": "lean/Sheaf/Paper/EtaleHypercohomologyCETotalMaps.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_etaleHypercohomology_ce_total_maps",
-  "statement": "theorem exists_etaleHypercohomology_ce_total_maps : ∃ (D : ∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})), EtaleTermwiseHypercohomology X K) (M : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj), (D X K).sequence ⟶ (D Y L).sequence) (R : ∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (q n : ℤ), ℤ) (eInf : ∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (q n r : ℤ) (hr : 1 ≤ r) (hR : R X K q n ≤ r), ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q), (∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (p : ℕ) (q : ℤ), ((M f K L v).hom 1).f (q, (p : ℤ)) ≫ ((D Y L).firstPageIso p q).hom = ((D X K).firstPageIso p q).hom ≫ AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp (cohomologyMap f (K.obj.X q) p))) ∧ (∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj), let A := (((CartanEilenbergPresentation.mappedFunctor (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj (D X K).I).flip).total (ComplexShape.up ℤ) let B := (((CartanEilenbergPresentation.mappedFunctor (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).obj (D X K).I).flip).total (ComplexShape.up ℤ) ∃ (g : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj A ⟶ (D Y L).ρ.complex) (s : ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj A ⟶ ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj (D Y L).ρ.complex) (e : B ≅ ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) |>.mapHomologicalComplex (ComplexShape.up ℤ)).obj A), Nonempty (Homotopy (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).map (D X K).aug ≫ g) (v ≫ (D Y L).ρ.map)) ∧ (∀ i : ℤ, s.f i = globalSectionsUpperStarMap AddCommGrpCat.{uNatural + 1} f (A.X i) ≫ (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).map (g.f i)) ∧ (∀ (m : ℕ) (k n : ℤ) (h : (m : ℤ) + k = n), (((CartanEilenbergPresentation.mappedFunctor (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).obj (D X K).I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) k n h ≫ e.hom.f n = (HomologicalComplex.extendXIso (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) |>.mapHomologicalComplex (ComplexShape.up ℕ)).obj ((D X K).I.X k)) ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).hom ≫ (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).map ((HomologicalComplex.extendXIso (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) |>.mapHomologicalComplex (ComplexShape.up ℕ)).obj ((D X K).I.X k)) ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj (D X K).I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) k n h)) ∧ ∀ n : ℤ, ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{uNatural + 1}) ⟶ (((D Y L).H n).step q : AddCommGrpCat.{uNatural + 1})) (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow = (((D X K).H n).step q).arrow ≫ (((D X K).c n).inv ≫ HomologicalComplex.homologyMap (e.hom ≫ s) n ≫ (@resolutionEtaleCohomologyIso.{uNatural} Y L.obj (D Y L).ρ.complex (D Y L).ρ.map (D Y L).ρ.quasiIso (D Y L).ρ.isKInjective n).hom)), ∀ (hc : ∀ q : ℤ, Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q) (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))) ≫ t q = t (q + 1) ≫ Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q) (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))), ∀ (q r : ℤ) (hr : 1 ≤ r) (hX : R X K q n ≤ r) (hY : R Y L q n ≤ r), ((M f K L v).hom r hr).f (q, n - q) ≫ (eInf Y L q n r hr hY).hom = (eInf X K q n r hr hX).hom ≫ cokernel.map (Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q) (((D X K).H n).antitone_step (Int.le_add_one (le_refl q)))) (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q) (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))) (t (q + 1)) (t q) (hc q))",
+  "statement": "theorem exists_etaleHypercohomology_ce_total_maps :\n    ∃ (D : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        EtaleTermwiseHypercohomology X K)\n      (M : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),\n        (D X K).sequence ⟶ (D Y L).sequence)\n      (R : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (q n : ℤ), ℤ)\n      (eInf : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (q n r : ℤ) (hr : 1 ≤ r) (hR : R X K q n ≤ r),\n        ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),\n      (∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (p : ℕ) (q : ℤ),\n        ((M f K L v).hom 1).f (q, (p : ℤ)) ≫ ((D Y L).firstPageIso p q).hom =\n          ((D X K).firstPageIso p q).hom ≫\n            AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp\n              (cohomologyMap f (K.obj.X q) p))) ∧\n      (∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),\n        let A",
   "branch": "sheaf-dag",
   "by": "K2",
   "date": "2026-10-12"
@@ -165,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T152347-L-2313291",
+  "landing": "20261012T213851-L-1208924",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
