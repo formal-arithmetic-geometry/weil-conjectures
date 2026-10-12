@@ -1,0 +1,117 @@
+{
+ "id": "new-finite-values",
+ "kind": "statement",
+ "title": "Finite representatives realize section values",
+ "statement": "Let A be an N-graded commutative ring, f homogeneous of positive degree b, k an integer, and s a section of twist k on D₊(f). Write B=A_(f) and M=A_f. There are n, g:Fin n→B spanning the unit ideal, and t_i in M localized at g_i, such that for every p in D₊(f) and every additive e:M_(g_i)→A_p extending the canonical map M→A_p and compatible with the B-action through A_p, e(t_i)=s(p).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4 and its preceding construction, specialized to the shift A(k); this split separates ordinary gluing from degree detection"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The locally homogeneous-fraction predicate for the twist gives a/d on a neighborhood. Refine by D₊(u), then replace by N/h=(a*u*f)/(d*u*f) so h has positive degree c. The chart sends this to D(h^b/f^c); quasi-compactness extracts a finite cover and the chart elements span one. Construct t=(h^(b-1)*N/f^c)/(h^b/f^c). For any e with the two identities, applying e to g*(1/g)=1 forces F(g) to be a unit and hence p to lie in D₊(h). Applying e to g*t=z gives the asserted value after cancellation. On the empty chart take the empty family in the zero ring.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Section 27.8; Lemma 27.8.1 and preceding construction; G3 second reading supplies the explicit localization argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact homogeneous basic open twisting sheaf section finite local fraction representatives",
+   "results": "LocalizedModule.lift and lift_comp give the canonical evaluation; no finite Proj twist statement was found. Direct reading also checked the upstream isLocallyFraction predicate and library import cycles.",
+   "date": "2026-10-13",
+   "verdict": "Use Mathlib lift for the proved canonical lemma; finite chart construction remains open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isLocallyFraction\"",
+   "results": "Found affine and Proj structure-sheaf predicates and comap lemmas, not finite chart representatives for a shifted twist. The upstream twist predicate was read directly.",
+   "date": "2026-10-13",
+   "verdict": "No exact finite-cover twist statement."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*fraction|fraction.*finite|canonical.*eval",
+   "results": "LocalizedModule.lift and lift_comp give the canonical evaluation; no finite Proj twist statement was found. Direct reading also checked the upstream isLocallyFraction predicate and library import cycles.",
+   "date": "2026-10-13",
+   "verdict": "Use Mathlib lift for the proved canonical lemma; finite chart construction remains open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of a projective spectrum twisting sheaf admits representatives on finitely many principal open charts spanning the unit ideal",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict. Used Loogle/LeanFinder and direct source searches instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-proj-twist-finite-localization-data",
+   "place": "Finite principal representatives of a twist section",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistFiniteValues",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistFiniteValues.lean",
+  "declaration": "AlgebraicGeometry.Proj.twist_finiteLocal_values",
+  "statement": "theorem twist_finiteLocal_values\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)\n    (hb : 0 < b) (hf : f ∈ 𝒜 b)\n    (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))) :\n    let B := HomogeneousLocalization.Away 𝒜 f\n    let M := LocalizedModule.Away f A\n    letI : Module B M := Module.compHom M (algebraMap B (Localization.Away f))\n    ∃ (n : ℕ) (g : Fin n → B) (hspan : Ideal.span (Set.range g) = ⊤)\n      (t : ∀ i : Fin n, LocalizedModule.Away (g i) M),\n      ∀ (i : Fin n) (p : basicOpen 𝒜 f)\n        (e : LocalizedModule.Away (g i) M →+\n          Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal),\n        (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers (g i)) M z) =\n          IsLocalization.map (M := Submonoid.powers f)\n            (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n            (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n            (Submonoid.powers_le.mpr p.2) z) →\n        (∀ (a : B) (x : LocalizedModule.Away (g i) M),\n          e (a • x) =\n            IsLocalization.map (M := Submonoid.powers f)\n              (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n              (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n              (Submonoid.powers_le.mpr p.2)\n              (algebraMap B (Localization.Away f) a) * e x) →\n        e (t i) = (s.1 p).1",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0f47c",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T194113-L-455918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0f47c",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T194113-L-455918",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and node statements; all modules and direct importer compile, with only permitted axioms and documented sorryAx."
+ }
+}

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
+import Sheaf.AlgebraicGeometry.ProjTwistFiniteCanonicalEval
+import Sheaf.AlgebraicGeometry.ProjTwistFiniteValues
 
 /-!
 # Finite localization data of twist sections
@@ -15,6 +17,7 @@ Source: Stacks Project, Tags 01MN and 01M7.
 -/
 
 @[expose] public section
+set_option linter.unusedVariables false
 
 universe v
 open CategoryTheory Opposite LocalizedModule
@@ -56,6 +59,13 @@ theorem twist_finiteLocal_representatives
         (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers (g i)) M z) = F z) ∧
         (∀ (a : B) (x : LocalizedModule.Away (g i) M),
           e (a • x) = F (algebraMap B (Localization.Away f) a) * e x) ∧
-        e (t i) = (s.1 p).1) := by sorry
+        e (t i) = (s.1 p).1) := by
+  dsimp
+  obtain ⟨n, g, hspan, t, hv⟩ := twist_finiteLocal_values 𝒜 k f b hb hf s
+  refine ⟨n, g, hspan, t, ?_⟩
+  intro i p hi
+  obtain ⟨e, he, hlin⟩ := twist_finiteLocal_canonical_eval 𝒜 f (g i) p hi
+  refine ⟨e, he, hlin, ?_⟩
+  exact hv i p e he hlin
 
 end AlgebraicGeometry.Proj

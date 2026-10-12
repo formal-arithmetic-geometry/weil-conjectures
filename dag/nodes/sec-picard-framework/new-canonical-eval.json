@@ -1,0 +1,111 @@
+{
+ "id": "new-canonical-eval",
+ "kind": "statement",
+ "title": "Canonical evaluation on a localized module",
+ "statement": "Let A be an N-graded commutative ring, f in A, g in B=A_(f), and p a point of D₊(f). Let F:A_f→A_p be the canonical localization map. If F(g) is a unit, then there is an additive map e:(A_f)_g→A_p extending F and satisfying e(a*x)=F(a)*e(x) for a in B.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4 and its preceding construction, specialized to the shift A(k); this split separates ordinary gluing from degree detection"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Give A_p its B-action via B→A_f→A_p. The canonical F is B-linear. Each power of g acts invertibly because F(g) is a unit. Mathlib LocalizedModule.lift constructs the map; lift_comp and map_smul give the two identities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Section 27.8; Lemma 27.8.1 and preceding construction; G3 second reading supplies the explicit localization argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule.lift",
+   "results": "LocalizedModule.lift and lift_comp give the canonical evaluation; no finite Proj twist statement was found. Direct reading also checked the upstream isLocallyFraction predicate and library import cycles.",
+   "date": "2026-10-13",
+   "verdict": "Use Mathlib lift for the proved canonical lemma; finite chart construction remains open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend a linear map to a localization when the image of the localized scalar is invertible",
+   "results": "LocalizedModule.lift and lift_comp give the canonical evaluation; no finite Proj twist statement was found. Direct reading also checked the upstream isLocallyFraction predicate and library import cycles.",
+   "date": "2026-10-13",
+   "verdict": "Use Mathlib lift for the proved canonical lemma; finite chart construction remains open."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*fraction|fraction.*finite|canonical.*eval",
+   "results": "LocalizedModule.lift and lift_comp give the canonical evaluation; no finite Proj twist statement was found. Direct reading also checked the upstream isLocallyFraction predicate and library import cycles.",
+   "date": "2026-10-13",
+   "verdict": "Use Mathlib lift for the proved canonical lemma; finite chart construction remains open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a linear map from a module to its localization when powers of the chosen element act invertibly on the target",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict. Used Loogle/LeanFinder and direct source searches instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-proj-twist-finite-localization-data",
+   "place": "Finite principal representatives of a twist section",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistFiniteCanonicalEval",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistFiniteCanonicalEval.lean",
+  "declaration": "AlgebraicGeometry.Proj.twist_finiteLocal_canonical_eval",
+  "statement": "theorem twist_finiteLocal_canonical_eval\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (f : A) (g : HomogeneousLocalization.Away 𝒜 f)\n    (p : basicOpen 𝒜 f)\n    (hunit : IsUnit ((IsLocalization.map (M := Submonoid.powers f)\n      (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n      (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n      (Submonoid.powers_le.mpr p.2))\n      (algebraMap (HomogeneousLocalization.Away 𝒜 f) (Localization.Away f) g))) :\n    let M := LocalizedModule.Away f A\n    letI : Module (HomogeneousLocalization.Away 𝒜 f) M :=\n      Module.compHom M (algebraMap _ (Localization.Away f))\n    ∃ e : LocalizedModule.Away g M →+\n        Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal,\n      (∀ z : M, e (LocalizedModule.mkLinearMap (Submonoid.powers g) M z) =\n        IsLocalization.map (M := Submonoid.powers f)\n          (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n          (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n          (Submonoid.powers_le.mpr p.2) z) ∧\n      (∀ (a : HomogeneousLocalization.Away 𝒜 f)\n        (x : LocalizedModule.Away g M),\n        e (a • x) =\n          (IsLocalization.map (M := Submonoid.powers f)\n            (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n            (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n            (Submonoid.powers_le.mpr p.2)\n            (algebraMap (HomogeneousLocalization.Away 𝒜 f)\n              (Localization.Away f) a)) * e x)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0f47c",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T194113-L-455918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0f47c",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T194113-L-455918",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and node statements; all modules and direct importer compile, with only permitted axioms and documented sorryAx."
+ }
+}
