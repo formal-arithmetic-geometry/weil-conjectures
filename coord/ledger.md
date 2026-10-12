@@ -5790,3 +5790,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:18 L: merged deliver/Q1/Sheaf.Paper.ZeroDimensionalCohomology (stage 3; reviewer PASS; after a return; landing 20261012T011727-L-769650 (interface); modules 2; new nodes 2)
 - 01:18 L: merged deliver/S1/Sheaf.AlgebraicGeometry.TensorPullback (stage 3; reviewer PASS; after a return; landing 20261012T011848-L-774058 (proof); modules 1; new nodes 0)
 - 01:22 L: merged deliver/C1/Sheaf.AlgebraicGeometry.TorsionFilteredUnion (stage 3; reviewer PASS; after a return; landing 20261012T012208-L-789729 (proof); modules 1; new nodes 0)
+- 01:22 L: returned deliver/G1/Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore (reviewer RETURN: (reviewer X-e6b91, head e6b919787) C4: In dag/nodes/sec-proper-base-change/lem-weil-pbc-restricted-cohomology-colimit.js)
