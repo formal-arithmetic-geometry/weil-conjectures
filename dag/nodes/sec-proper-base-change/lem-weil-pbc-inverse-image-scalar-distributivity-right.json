@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-inverse-image-scalar-distributivity-right",
+ "kind": "statement",
+ "title": "Distributivity transported action (right)",
+ "statement": "Let U and V be schemes [def-pc-scheme], f : U → V, and O a commutative ring sheaf on the small etale site of V [def-weil-pbc-etale-site]. Let L be the set inverse image, assumed to preserve finite limits, La the fixed abelian inverse image, and Lr any left adjoint to the sectionwise ring direct image. Write FrU, FrV and FaU, FaV for the respective underlying-set functors. Assume natural isomorphisms er : Lr ⋙ FrU ≅ FrV ⋙ L and ea : La ⋙ FaU ≅ FaV ⋙ L, and assume that both ring and abelian adjunction hom equivalences commute with the set adjunction through er and ea, as in [lem-weil-pbc-etale-inverse-image-algebraic-structures]. For any O-module sheaf G [def-weil-sheaf-of-modules-category], write FV(G) for its abelian sheaf, A = La(FV(G)), and OR for the ring sheaf underlying Lr(O). Let muV : FrV(O) × FaV(FV(G)) → FaV(FV(G)) be any sheaf morphism whose section values are the scalar action of G applied to its two product projections. Define mu by prod.map(er.hom(O),ea.hom(FV(G))), then the inverse product comparison for L, then L(muV), then ea.inv(FV(G)). Let e be the canonical isomorphism from the categorical product FrU(Lr(O)) × FaU(A) to the chosen sectionwise product of these sheaves, determined by the product projections. Set act_W(r,x) = (e.inv ≫ mu)_W(r,x). For every object W of the small etale site of U, r,s in OR(W), and x in A(W), act_W(r+s,x) = act_W(r,x)+act_W(s,x). No module-additivity, multiplicative, or unit law is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, proof; distributivity of transported scalar multiplication"
+ },
+ "proof": [
+  {
+   "text": "Identify addition on the supplied ring and abelian left adjoints with transported source addition. Obtain canonical lifts from lem-weil-pbc-etale-inverse-image-algebraic-structures and use the assumed hom equivalence equations and uniqueness of left adjoints to identify their comparisons with er and ea.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express source distributivity in the scalar variable on (O times O) times G. The resulting diagram holds sectionwise by the formula for muV and the module distributivity axiom of G.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply L to this equality. Use naturality of its invertible product comparison with respect to the projections, diagonals, and addition, substitute the addition transport equations, and cancel er and ea. Evaluate at ((r,s),x) using e to compare categorical and sectionwise products. This is precisely the displayed scalar-additivity equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, proof of lemma-pullback-module; diagram calculations expanded by Y3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a sheaf of modules scalar multiplication satisfies module axioms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.map_smul, PresheafOfModules.Sheafify.SMulCandidate, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.smulCandidate, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.SMulCandidate.h, AlgebraicGeometry.Scheme.Modules.Hom.app_smul, PresheafOfModules.Sheafify.mul_smul",
+   "date": "2026-10-12",
+   "verdict": "No exact scalar-action transport theorem among the returned results"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.ofMinimalAxioms",
+   "results": "1 hits: Module.ofMinimalAxioms",
+   "date": "2026-10-12",
+   "verdict": "constructor for assembling laws, not a transport result"
+  },
+  {
+   "tool": "grep",
+   "query": "prodComparison.*smul|smul.*prodComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact scalar-action transport theorem among the returned results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite product preserving inverse image functor transports both distributivity laws of a module scalar action",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving functor transports associativity and unit of a scalar multiplication action",
+   "results": "8 hits: Action.instHasFiniteProducts, CategoryTheory.PreGaloisCategory.IsNaturalSMul, CategoryTheory.Functor.mapAction_obj_ρ_apply, CategoryTheory.PreGaloisCategory.IsNaturalSMul.naturality, CategoryTheory.Functor.mapAction, CategoryTheory.Limits.SingleObj.instMulActionObjSingleObjStar, Action.instMulAction, CategoryTheory.Functor.mapAction_obj_V",
+   "date": "2026-10-12",
+   "verdict": "No exact scalar-action transport theorem among the returned results"
+  },
+  {
+   "tool": "grep",
+   "query": "prodComparison|one_smul|mul_smul",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Tannaka.lean, Mathlib/Algebra/Category/ModuleCat/Tannaka.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Semi.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact scalar-action transport theorem among the returned results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivity",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Distributivity of transported scalar multiplication in scalar action transport, Tag 03D2",
+   "via": [
+    "lem-weil-pbc-inverse-image-module-action-laws",
+    "lem-weil-pbc-inverse-image-module-object",
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivityRight",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageScalarDistributivityRight.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageScalarDistributivity_right",
+  "statement": "theorem etaleInverseImageScalarDistributivity_right (U V : Scheme.{u}) (f : U ⟶ V)\n    (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})\n    [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :\n    let L := Scheme.etaleSetPullback f\n    let La := Etale.upperStar AddCommGrpCat.{u + 1} f\n    let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f\n    let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology\n    let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology\n    let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology\n    let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let aS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1}\n      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)\n    ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤\n        Sheaf U.smallEtaleTopology CommRingCat.{u + 1})\n      (ar : Lr ⊣ Rr) (er : Lr ⋙ FrU ≅ FrV ⋙ L),\n    let OR := (sheafCompose U.smallEtaleTopology\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O)\n    let OV := (sheafCompose V.smallEtaleTopology\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O\n    let FV := SheafOfModules.toSheaf.{u + 1} OV\n    ∀ (ea : La ⋙ FaU ≅ FaV ⋙ L),\n      (∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})\n          (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F),\n        FrV.map (ar.homEquiv G F h) =\n          aS.homEquiv (FrV.obj G) (FrU.obj F) (er.inv.app G ≫ FrU.map h)) ∧\n      (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})\n          (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : La.obj G ⟶ F),\n        FaV.map (a.homEquiv G F h) =\n          aS.homEquiv (FaV.obj G) (FaU.obj F) (ea.inv.app G ≫ FaU.map h)) →\n    ∀ G : SheafOfModules.{u + 1} OV,\n    ∀ muV : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ (FaV.obj (FV.obj G)),\n      (∀ (W : V.Etaleᵒᵖ) (x : ((FrV.obj O) ⨯ (FaV.obj (FV.obj G))).obj.obj W),\n        muV.hom.app W x =\n          @SMul.smul (O.obj.obj W) (G.val.obj W) (G.val.obj W).isModule.toSMul\n            ((prod.fst : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶\n              FrV.obj O).hom.app W x : O.obj.obj W)\n            ((prod.snd : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶\n              FaV.obj (FV.obj G)).hom.app W x : G.val.obj W)) →\n    let A := La.obj (FV.obj G)\n    let mu := prod.map (er.hom.app O) (ea.hom.app (FV.obj G)) ≫\n      inv (prodComparison L (FrV.obj O) (FaV.obj (FV.obj G))) ≫\n      L.map muV ≫ ea.inv.app (FV.obj G)\n    let e : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ≅\n        (FrU.obj (Lr.obj O)) ⊗ (FaU.obj A) :=\n      (limit.isLimit _).conePointUniqueUpToIso\n        (CartesianMonoidalCategory.tensorProductIsBinaryProduct _ _)\n    let act : ∀ W : U.Etaleᵒᵖ, OR.obj.obj W → A.obj.obj W → A.obj.obj W :=\n      fun W r x ↦ (e.inv ≫ mu).hom.app W (r, x)\n    ∀ W : U.Etaleᵒᵖ,\n      (∀ (r s : OR.obj.obj W) (x : A.obj.obj W),\n        act W (r + s) x = act W r x + act W s x)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112831-L-764740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112831-L-764740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

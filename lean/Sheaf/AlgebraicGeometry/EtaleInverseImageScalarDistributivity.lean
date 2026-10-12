@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivityLeft
+import Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivityRight
 
 /-! # Distributivity of the transported scalar action
 
@@ -108,6 +110,10 @@ theorem etaleInverseImageScalarDistributivity (U V : Scheme.{u}) (f : U ⟶ V)
         act W r (x + y) = act W r x + act W r y) ∧
       (∀ (r s : OR.obj.obj W) (x : A.obj.obj W),
         act W (r + s) x = act W r x + act W s x)
-    := by sorry
+    := by
+  dsimp only
+  intro Lr ar er ea hcompat G muV hmu W
+  exact ⟨etaleInverseImageScalarDistributivity_left U V f O Lr ar er ea hcompat G muV hmu W,
+    etaleInverseImageScalarDistributivity_right U V f O Lr ar er ea hcompat G muV hmu W⟩
 
 end AlgebraicGeometry
