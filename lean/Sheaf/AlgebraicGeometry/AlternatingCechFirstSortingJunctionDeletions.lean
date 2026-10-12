@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators
-import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingPrefixContribution
+import Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailContribution
 
 /-!
 # Junction deletions in the first sorting homotopy
@@ -71,6 +72,58 @@ theorem cechFirstSortingJunctionDeletions (X : Scheme.{u}) {I : Type v} [LinearO
       ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),
         if (cechStableSort t σ ∧ cechPartialSort σ τ a) ∧
             cechJunction σ τ a r = σ a then E σ a τ r else 0) =
-      ∑ a : Fin (p + 2), (B a.val t - B (a.val + 1) t) := by sorry
+      ∑ a : Fin (p + 2), (B a.val t - B (a.val + 1) t) := by
+  classical
+  let E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))
+      (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦
+    ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •
+      F.map (S.indexMap t (cechJunction σ τ a)).op
+        ((-1 : ℤ) ^ r.val •
+          F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op
+            (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))
+  let P := ∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),
+    ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),
+      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧
+          cechJunction σ τ a r = σ a) ∧ r.val ≤ a.val then E σ a τ r else 0
+  let T := ∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),
+    ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),
+      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧
+          cechJunction σ τ a r = σ a) ∧ a.val < r.val then E σ a τ r else 0
+  let B : ℕ → S.cochains F (p + 1) := fun a t ↦
+    ∑ σ : Equiv.Perm (Fin (p + 2)), ∑ τ : Equiv.Perm (Fin (p + 2)),
+      if cechStableSort t σ ∧
+          (∀ k, k.val < a → τ k = σ k) ∧
+          (∀ i j, a ≤ i.val → i < j → τ i < τ j) then
+        (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0
+  dsimp only
+  have hP := cechFirstSortingJunctionPrefixContribution X U F S p s t
+  have hT := cechFirstSortingJunctionTailContribution X U F S p s t
+  change P = ∑ a : Fin (p + 2), B a.val t at hP
+  change T = - ∑ a : Fin (p + 2), B (a.val + 1) t at hT
+  have hsplit : (∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),
+      ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),
+        if (cechStableSort t σ ∧ cechPartialSort σ τ a) ∧
+            cechJunction σ τ a r = σ a then E σ a τ r else 0) = P + T := by
+    dsimp [P, T]
+    simp only [← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl
+    intro σ hσ
+    apply Finset.sum_congr rfl
+    intro a ha
+    apply Finset.sum_congr rfl
+    intro τ hτ
+    apply Finset.sum_congr rfl
+    intro r hr
+    by_cases h : cechJunction σ τ a r = σ a
+    · by_cases ha' : r.val ≤ a.val
+      · simp [h, ha']
+      · have hr' : a.val < r.val := by omega
+        simp [h, ha', hr']
+    · simp [h]
+  rw [hsplit]
+  change P + T = ∑ a : Fin (p + 2), (B a.val t - B (a.val + 1) t)
+  rw [hP, hT]
+  rw [Finset.sum_sub_distrib]
+  simp only [sub_eq_add_neg]
 
 end AlgebraicGeometry.Scheme

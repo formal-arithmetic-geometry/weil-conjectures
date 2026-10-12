@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.1"
+ },
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "proof_origin": {
+  "by": "agent",
+  "agent": "M1 (Codex)",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.1; labelled-deletion verification omitted in source, written out by the agent"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-alternating-cech-first-sorting-junction-deletions"
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingJunctionDeletions",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "id": "lem-pc-alternating-cech-first-sorting-junction-tail-contribution",
+ "title": "Tail-labelled junction deletion contribution",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I -> X.Opens, F an abelian-group-valued presheaf, S a SiteCechComplex for the maps U_i -> X [def-weil-pbc-site-cech-complex], p a natural number, s a degree-(p+1) cochain, and t : Fin (p+2) -> I. Use the stable sorting filter, partial sorting filter, and junction map [def-pc-alternating-cech-sorting-operators]. Define E and B by the following displayed formulas. The sum of junction-labelled deletions with a < r equals minus the sum of advanced partial sorting contributions B_(a+1).\n\nlet E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let T := ∑ σ, ∑ a, ∑ τ, ∑ r,\n      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n          cechJunction σ τ a r = σ a) ∧ a.val < r.val then E σ a τ r else 0\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ, ∑ τ, if cechStableSort t σ ∧\n          (∀ k, k.val < a → τ k = σ k) ∧\n          (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n        (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    T = - ∑ a : Fin (p + 2), B (a.val + 1) t",
+ "proof": [
+  {
+   "text": "Proof: For each fixed sigma and a, the permutation satisfying the partial\nsorting filter is unique: its prefix is sigma below a and its tail is the\nincreasing enumeration of the unused labels. The same construction defines\nthe unique partial permutation rho at stage a+1 (including stage p+2).\nLet tau be the stage-a permutation and b = tau.symm (sigma a). Then b >= a,\nsince a label in the fixed prefix cannot equal sigma a by injectivity.\nThe tail junction label sigma a occurs exactly at r = b+1. Removing that\nposition leaves rho, obtained from tau by moving the entry at b to a and\nshifting entries a through b-1 one place right. This fixes sigma through a\nand leaves the remaining tail increasing. This move has sign (-1)^(b-a),\nincluding b=a when it is the identity. Thus sign(rho) = (-1)^(b-a) sign(tau).\nThe deletion coefficient (-1)^a (-1)^(b+1) sign(tau) equals -sign(rho),\nbecause a+b+1 and b-a+1 differ by 2a. Comparing all projections with\nindexMap_pr and the fibre product universal property identifies the two\nindex-map composite with the map for rho. Functoriality and additivity of F\ntherefore turn the unique tail term into the negative stage-a+1 term.\nApply this for each sigma, retaining its stable sorting filter on both sides,\nand sum over a and sigma. At the last a, tau=rho=sigma and b=a, so the same\nargument still applies. Labels, rather than their values in I, are compared,\nso repetitions in t cause no extra terms; an empty I admits no such t.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech junction deletion contribution",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset sum permutation deletion sign",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechJunction deletion",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sign of permutation obtained by moving one entry to an earlier position cycle range",
+   "results": "Fin.sign_cycleIcc_of_le, Fin.sign_cycleRange and permutation sign ingredients; no filtered Cech contribution theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fin.sign_cycleIcc_of_le",
+   "results": "Fin.sign_cycleIcc_of_le supplies the sign of moving a label; not the contribution identity.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "partial.*sort|indexMap.*(comp|trans)|sign_cycle",
+   "results": "Mathlib sign_cycleIcc lemmas; local index-map composition arguments in SiteCechComplex, AlternatingCechRepeatCentralFaces and AlternatingCechSortingBoundaryTransport. No existing contribution identity; no cechJunction declaration in the upstream root.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingTailContribution",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingTailContribution.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingJunctionTailContribution",
+  "statement": "theorem cechFirstSortingJunctionTailContribution (X : Scheme.{u}) {I : Type v}\n    [LinearOrder I] (U : I → X.Opens)\n    (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})\n    (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))\n    (p : ℕ) (s : S.cochains F (p + 1)) (t : Fin (p + 2) → I) :\n    let E := fun (σ : Equiv.Perm (Fin (p + 2))) (a : Fin (p + 2))\n        (τ : Equiv.Perm (Fin (p + 2))) (r : Fin (p + 3)) ↦\n      ((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) •\n        F.map (S.indexMap t (cechJunction σ τ a)).op\n          ((-1 : ℤ) ^ r.val •\n            F.map (S.indexMap (t ∘ cechJunction σ τ a) r.succAbove).op\n              (s ((t ∘ cechJunction σ τ a) ∘ r.succAbove)))\n    let T := ∑ σ, ∑ a, ∑ τ, ∑ r,\n      if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n          cechJunction σ τ a r = σ a) ∧ a.val < r.val then E σ a τ r else 0\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ, ∑ τ, if cechStableSort t σ ∧\n          (∀ k, k.val < a → τ k = σ k) ∧\n          (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n        (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    T = - ∑ a : Fin (p + 2), B (a.val + 1) t",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T232141-L-1992950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T232141-L-1992950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
