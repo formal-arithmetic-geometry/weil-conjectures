@@ -131,7 +131,8 @@ lemma of_isPullback_of_mem_fpqcTopology {T Z : Scheme.{u}} {S : Sieve T}
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Descent of properties of morphisms along fpqc coverings**, for a covering family
 `{g i : T' i ⟶ T}`: if `P` is moreover stable under base change and the base changes `b i` of
-`f` along the `g i` have `P`, then `f` has `P`. -/
+`f` along the `g i` have `P`, then `f` has `P`.
+(blueprint: `lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent`) -/
 lemma of_isPullback_of_ofArrows_mem_fpqcTopology [P.IsStableUnderBaseChange] {T Z : Scheme.{u}}
     {ι : Type*} {T' : ι → Scheme.{u}} {g : ∀ i, T' i ⟶ T}
     (hg : Sieve.ofArrows T' g ∈ fpqcTopology T) (f : Z ⟶ T) {Z' : ι → Scheme.{u}}

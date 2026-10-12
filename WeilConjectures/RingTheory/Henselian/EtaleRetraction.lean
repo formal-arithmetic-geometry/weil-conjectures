@@ -74,7 +74,8 @@ theorem map_maximalIdeal_le_jacobson_of_finite {B : Type v} [CommRing B] [Algebr
 
 /-- **Uniqueness of retractions of unramified algebras over a local ring.** Two `R`-algebra
 maps from a formally unramified, essentially of finite type `R`-algebra `S` to the local ring
-`R` with the same preimage of the maximal ideal are equal. -/
+`R` with the same preimage of the maximal ideal are equal.
+(blueprint: `lem-weil-pbc-henselian-etale-retraction-uniqueness`) -/
 theorem algHom_ext_of_comap_maximalIdeal_eq {S : Type v} [CommRing S] [Algebra R S]
     [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] {σ₁ σ₂ : S →ₐ[R] R}
     (h : (maximalIdeal R).comap σ₁ = (maximalIdeal R).comap σ₂) : σ₁ = σ₂ := by
@@ -538,6 +539,17 @@ theorem existsUnique_algHom_comap_maximalIdeal_eq [HenselianLocalRing R]
     ∃! σ : S →ₐ[R] R, (maximalIdeal R).comap σ = q :=
   IsLocalRing.existsUnique_algHom_comap_maximalIdeal_eq_of_forall_exists_isRoot
     (((HenselianLocalRing.TFAE R).out 0 1).mp ‹HenselianLocalRing R›) q hq hκ
+
+/-- **Existence of étale retractions over a henselian local ring**: the existence half of
+`HenselianLocalRing.existsUnique_algHom_comap_maximalIdeal_eq`.
+(blueprint: `lem-weil-pbc-henselian-etale-retraction-existence`) -/
+theorem exists_algHom_comap_maximalIdeal_eq [HenselianLocalRing R]
+    {S : Type v} [CommRing S] [Algebra R S] [Algebra.Etale R S] (q : Ideal S) [q.IsPrime]
+    (hq : q.comap (algebraMap R S) = maximalIdeal R)
+    (hκ : Function.Bijective (Ideal.ResidueField.mapₐ (maximalIdeal R) q (Algebra.ofId R S)
+      hq.symm)) :
+    ∃ σ : S →ₐ[R] R, (maximalIdeal R).comap σ = q :=
+  (existsUnique_algHom_comap_maximalIdeal_eq q hq hκ).exists
 
 /-- **Henselian local rings lift idempotents.** A local ring `(R, 𝔪)` is henselian (in Mathlib's
 sense of lifting simple roots) if and only if for every finite `R`-algebra `B` every idempotent

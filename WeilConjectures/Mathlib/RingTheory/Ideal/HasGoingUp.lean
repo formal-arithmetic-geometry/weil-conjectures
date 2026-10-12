@@ -32,7 +32,8 @@ theorem ringKrullDim_le_of_isIntegral (R S : Type*) [CommRing R] [CommRing S] [A
 
 /-- An injective integral extension `R → S` preserves the Krull dimension:
 `dim S = dim R` (Stacks `00OK`). Incomparability bounds `dim S ≤ dim R`, and lying over together
-with going up lifts every chain of primes of `R` to `S`. -/
+with going up lifts every chain of primes of `R` to `S`.
+(blueprint: `lem-weil-pbc-integral-injective-dimension-equal`) -/
 theorem ringKrullDim_eq_of_isIntegral (R S : Type*) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.IsIntegral R S] [FaithfulSMul R S] :
     ringKrullDim S = ringKrullDim R := by

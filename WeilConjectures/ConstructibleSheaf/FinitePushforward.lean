@@ -304,7 +304,8 @@ theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Schem
 of pushforwards of constant sheaves along finite, finitely presented morphisms, then so does
 its pullback along any `ν : U ⟶ U'`: pullback is exact, commutes with finite sums, and with
 pushforward along finite morphisms (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`),
-and it preserves constant sheaves. -/
+and it preserves constant sheaves.
+(blueprint: `lem-weil-pbc-finite-pushforward-embedding-pullback`) -/
 theorem Etale.exists_mono_biproduct_lowerStar_upperStar {U U' : Scheme.{u}} (ν : U ⟶ U')
     (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {r : ℕ} (V : Fin r → Scheme.{u})
     (h : ∀ i, V i ⟶ U') [∀ i, IsFinite (h i)] [∀ i, LocallyOfFinitePresentation (h i)]

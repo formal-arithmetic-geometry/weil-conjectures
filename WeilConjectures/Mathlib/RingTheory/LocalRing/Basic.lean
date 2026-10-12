@@ -21,7 +21,7 @@ namespace IsLocalRing
 variable {R : Type*} [CommRing R] [IsLocalRing R]
 
 /-- The only idempotents of a local ring are `0` and `1`: one of `e` and `1 - e` is a unit, and
-an idempotent unit is `1`. -/
+an idempotent unit is `1`. (blueprint: `lem-weil-pbc-local-ring-idempotent-zero-one`) -/
 theorem eq_zero_or_eq_one_of_isIdempotentElem {e : R} (he : IsIdempotentElem e) :
     e = 0 ∨ e = 1 := by
   rcases isUnit_or_isUnit_one_sub_self e with h | h

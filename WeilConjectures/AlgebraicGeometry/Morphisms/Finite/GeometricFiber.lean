@@ -202,7 +202,8 @@ instance GeometricFiber.finite : Finite (GeometricFiber f y) := by
   exact Finite.of_equiv _ (geometricFiberEquivPointsOver f y hY₀ hy).symm
 
 /-- **Every point of the fibre of a finite morphism over a geometric point `y` with values in
-an algebraically closed field is the image of a geometric point over `y`.** -/
+an algebraically closed field is the image of a geometric point over `y`.**
+(blueprint: `lem-weil-pbc-finite-geometric-point-lift`) -/
 lemma GeometricFiber.exists_apply_default_eq [IsAlgClosed Ω] (x : X) (hx : f x = y default) :
     ∃ t : GeometricFiber f y, t.1 default = x := by
   obtain ⟨Y₀, hY₀, hy, -⟩ :=
