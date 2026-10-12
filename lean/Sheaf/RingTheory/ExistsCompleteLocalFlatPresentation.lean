@@ -9,15 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.CohenRing
-import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
-import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
-import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.CompleteLocalMapRegularPresentation
 
 /-!
 # Flat presentations of maps of complete Noetherian local rings
@@ -81,6 +73,15 @@ theorem exists_completeLocal_flat_presentation
           IsLocalHom g ∧ IsLocalHom q ∧ IsLocalHom b ∧
           Function.Surjective q ∧ Function.Surjective b ∧
           g.Flat ∧ b.comp g = f.comp q := by
-  sorry
+  obtain ⟨R, S, rR, rS, hR, hS, hcR, hcS, q, b, g,
+    hq, hlq, hb, hlb, hlg, hcomm, _, _, hflat, _⟩ :=
+    exists_complete_local_map_regular_presentation f
+  let := rR
+  let := rS
+  let := hR
+  let := hS
+  exact ⟨R, S, rR, rS, inferInstance, inferInstance,
+    inferInstance, inferInstance, hcR, hcS, g, q, b,
+    hlg, hlq, hlb, hq, hb, hflat, hcomm⟩
 
 end RingHom

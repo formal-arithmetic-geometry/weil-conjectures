@@ -33,104 +33,22 @@
  ],
  "proof": [
   {
-   "text": "Write $f=\\varphi:A\\to B$, $\\kappa_A=A/\\mathfrak m_A$, $\\kappa_B=B/\\mathfrak m_B$. Since $f$ is local it induces a field homomorphism $\\kappa_A\\to\\kappa_B$, so both residue fields have the same characteristic $p\\ge0$. Apply [lem-weil-pbc-cohen-structure-power-series-surjection] to $B$ and to $A$ (Noetherian, so their maximal ideals are finitely generated, and complete): there are $m,n\\ge0$, rings $\\Lambda_B,\\Lambda_A$, each a field of characteristic $0$ if $p=0$ and a Cohen ring with residue characteristic $p$ [def-weil-pbc-cohen-ring] if $p>0$, and surjective ring homomorphisms $v:S_0=\\Lambda_B[[z_1,\\ldots,z_m]]\\to B$ and $q:R=\\Lambda_A[[x_1,\\ldots,x_n]]\\to A$ [def-weil-pbc-multivariate-power-series]. By [lem-weil-pbc-power-series-field-cohen-regular-complete] (1), (3), (4): $R$ and $S_0$ are Noetherian local rings, complete for their maximal ideals, regular; $\\mathfrak m_R=(x_1,\\ldots,x_n)$ and $\\dim R=n$ if $p=0$, $\\mathfrak m_R=(p,x_1,\\ldots,x_n)$ and $\\dim R=n+1$ if $p>0$; likewise $\\mathfrak m_{S_0}=(z_1,\\ldots,z_m)$, resp. $(p,z_1,\\ldots,z_m)$. A surjective ring homomorphism $h:(C,\\mathfrak m_C)\\to(D,\\mathfrak m_D)$ of local rings is local and satisfies $h(\\mathfrak m_C)=\\mathfrak m_D$: $C/h^{-1}(\\mathfrak m_D)\\cong D/\\mathfrak m_D$ is a field, so $h^{-1}(\\mathfrak m_D)$ is a maximal ideal, hence equals $\\mathfrak m_C$; and an element of $\\mathfrak m_D$ has only non-unit preimages, which lie in $\\mathfrak m_C$. So $q$ and $v$ are local with $q(\\mathfrak m_R)=\\mathfrak m_A$ and $v(\\mathfrak m_{S_0})=\\mathfrak m_B$.",
+   "text": "Apply [lem-weil-pbc-complete-local-map-regular-presentation] to the given local map f. Obtain complete regular local rings R and S, surjective local maps q and b, and a local flat map g with b composed with g equal to f composed with q. Regular local rings are Noetherian local rings by definition [def-weil-regular-scheme]. Forget the residue-field isomorphism, parameter-system extension, and regular closed-fibre assertions, and assemble the remaining witnesses and conjunctions in the order of the statement. All universes and the original map f are unchanged.",
    "uses": [
-    "lem-weil-pbc-cohen-structure-power-series-surjection",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "def-weil-pbc-cohen-ring",
-    "def-weil-pbc-multivariate-power-series",
-    "def-weil-pbc-noetherian-ring"
+    "lem-weil-pbc-complete-local-map-regular-presentation",
+    "def-weil-regular-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769), first two sentences: choice of S -> B and R = Lambda[[x_1..x_n]] -> A by the Cohen structure theorem (Algebra, Theorem 032A)"
-   }
-  },
-  {
-   "text": "We lift $f\\circ q:R\\to B$ to a ring homomorphism $\\phi:R\\to S_0$ with $v\\circ\\phi=f\\circ q$ and $\\phi(\\mathfrak m_R)\\subseteq\\mathfrak m_{S_0}$. Let $J=\\ker v$ and $\\bar v:S_0/J\\xrightarrow{\\sim}B$ the induced isomorphism. $J\\neq S_0$ since $B\\neq0$, so $J\\subseteq\\mathfrak m_{S_0}$ ($t=1$ below). $J$ is closed for the $\\mathfrak m_{S_0}$-adic topology: by Step 1, $v(\\mathfrak m_{S_0}^k)=\\mathfrak m_B^k$, so $v^{-1}(\\mathfrak m_B^k)=J+\\mathfrak m_{S_0}^k$ (if $v(s)=v(y)$ with $y\\in\\mathfrak m_{S_0}^k$ then $s-y\\in J$), and $\\bigcap_k(J+\\mathfrak m_{S_0}^k)=v^{-1}(\\bigcap_k\\mathfrak m_B^k)=v^{-1}(0)=J$ because the complete ring $B$ has $\\bigcap_k\\mathfrak m_B^k=0$ [def-weil-pbc-adically-complete-ring]. Let $R_0=\\mathbf Q$ if $p=0$ and $R_0=\\mathbf Z$ if $p>0$. If $p=0$, every nonzero integer has nonzero image in $\\kappa_B$, hence is a unit of the local ring $S_0$ (and of $A$, $B$, $R$), so these rings are $\\mathbf Q$-algebras in a unique way and every ring homomorphism between them is $\\mathbf Q$-linear; if $p>0$ every ring is a $\\mathbf Z$-algebra and every ring homomorphism is $\\mathbf Z$-linear. By [lem-weil-pbc-power-series-cohen-formally-smooth-adic], $R$ is formally smooth over $R_0$ for the $\\mathfrak m_R$-adic topology. Let $g=\\bar v^{-1}\\circ f\\circ q:R\\to S_0/J$, an $R_0$-algebra homomorphism with $g(\\mathfrak m_R)\\subseteq\\bar v^{-1}(\\mathfrak m_B)=(\\mathfrak m_{S_0}+J)/J$, since $f(q(\\mathfrak m_R))\\subseteq\\mathfrak m_B$ ($q$, $f$ local) and $v(\\mathfrak m_{S_0})=\\mathfrak m_B$. Apply [lem-weil-pbc-fs-adic-lift-into-complete] with $S=R$, $\\mathfrak n=\\mathfrak m_R$, target $S_0$ (complete for $I=\\mathfrak m_{S_0}$ by Step 1), closed ideal $J$, $t=1$, $r=1$: it gives an $R_0$-algebra homomorphism $\\phi:R\\to S_0$ with $(S_0\\to S_0/J)\\circ\\phi=g$, i.e. $v\\circ\\phi=f\\circ q$, and $\\phi(\\mathfrak m_R)\\subseteq\\mathfrak m_{S_0}$.",
-   "uses": [
-    "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
-    "lem-weil-pbc-fs-adic-lift-into-complete",
-    "def-weil-pbc-adically-complete-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769): 'We lift the composition Lambda[[x_1..x_n]] -> A -> B to a map phi : R -> S ... formally smooth over Z in the m-adic topology (Lemma 07NL) by an application of Lemma 07NJ'"
-   }
-  },
-  {
-   "text": "Let $S=\\Lambda_B[[y_1,\\ldots,y_n,z_1,\\ldots,z_m]]$ [def-weil-pbc-multivariate-power-series] and regard $S_0$ as the subring of series involving only $z_1,\\ldots,z_m$. By [lem-weil-pbc-power-series-quotient-variables] (with $i=n$) the map $\\pi:S\\to S_0$ that discards every term containing some $y_j$ is a surjective ring homomorphism which is the identity on $S_0$ and has kernel $(y_1,\\ldots,y_n)$; put $v'=v\\circ\\pi:S\\to B$, a surjective ring homomorphism with $v'(y_j)=0$ and $v'|_{S_0}=v$. By [lem-weil-pbc-power-series-field-cohen-regular-complete] (1), (3), (4), $S$ is a Noetherian regular local ring, complete for $\\mathfrak m_S$, with $\\mathfrak m_S=(y_1,\\ldots,y_n,z_1,\\ldots,z_m)$ and $\\dim S=n+m$ if $p=0$, $\\mathfrak m_S=(p,y_1,\\ldots,y_n,z_1,\\ldots,z_m)$ and $\\dim S=n+m+1$ if $p>0$; in particular $\\mathfrak m_{S_0}S\\subseteq\\mathfrak m_S$, as the generators of $\\mathfrak m_{S_0}$ lie in $\\mathfrak m_S$. Put $t_i=\\phi(x_i)+y_i\\in\\mathfrak m_S$ (as $\\phi(x_i)\\in\\mathfrak m_{S_0}$ by Step 2). Apply [lem-weil-pbc-power-series-universal-property-complete] to $\\Lambda=\\Lambda_A$, $T=S$, $\\mathfrak a=\\mathfrak m_S$, $\\alpha=\\phi|_{\\Lambda_A}:\\Lambda_A\\to S_0\\subseteq S$ and $t_1,\\ldots,t_n$: there is a ring homomorphism $\\phi':R\\to S$ with $\\phi'(\\lambda)=\\phi(\\lambda)$ for $\\lambda\\in\\Lambda_A$ and $\\phi'(x_i)=\\phi(x_i)+y_i$. It is local: $\\mathfrak m_R$ is generated by $x_1,\\ldots,x_n$ (and $p$ if $p>0$), and $\\phi'(x_i)=t_i\\in\\mathfrak m_S$, $\\phi'(p)=p\\in\\mathfrak m_S$.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "lem-weil-pbc-power-series-quotient-variables",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-power-series-universal-property-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769): 'we replace phi by the map phi' : R = Lambda[[x_1..x_n]] -> S' = S[[y_1..y_n]] with phi'|_Lambda = phi|_Lambda and phi'(x_i) = phi(x_i) + y_i. We also replace S -> B by the map S' -> B which maps y_i to zero'"
-   }
-  },
-  {
-   "text": "The square commutes: $v'\\circ\\phi'=f\\circ q$. Both are ring homomorphisms $R=\\Lambda_A[[x_1,\\ldots,x_n]]\\to B$. On $\\lambda\\in\\Lambda_A$: $v'(\\phi'(\\lambda))=v(\\pi(\\phi(\\lambda)))=v(\\phi(\\lambda))=f(q(\\lambda))$ by Step 2, since $\\phi(\\lambda)\\in S_0$ and $\\pi$ is the identity on $S_0$. On $x_i$: $v'(\\phi(x_i)+y_i)=v(\\phi(x_i))+v(\\pi(y_i))=f(q(x_i))+0$. Moreover $f(q(x_i))\\in\\mathfrak m_B$ since $q$ and $f$ are local, and $B$ is $\\mathfrak m_B$-adically complete. By the uniqueness clause of [lem-weil-pbc-power-series-universal-property-complete] (with $T=B$, $\\mathfrak a=\\mathfrak m_B$, $\\alpha=(f\\circ q)|_{\\Lambda_A}$, $t_i=f(q(x_i))$) the two homomorphisms are equal.",
-   "uses": [
-    "lem-weil-pbc-power-series-universal-property-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769): commutativity of the replaced square (S' -> B maps y_i to zero), not written out in the source"
-   }
-  },
-  {
-   "text": "$\\phi':R\\to S$ is flat. Suppose $p>0$ (for $p=0$ delete $p$ from every list below). The ideal $(p,t_1,\\ldots,t_n,z_1,\\ldots,z_m)$ of $S$ equals $\\mathfrak m_S$: it is contained in $\\mathfrak m_S$ by Step 3, and it contains $p$, the $z_j$, and $y_i=t_i-\\phi(x_i)$, because $\\phi(x_i)\\in\\mathfrak m_{S_0}=(p,z_1,\\ldots,z_m)S_0\\subseteq(p,z_1,\\ldots,z_m)S$; so it contains the generators of $\\mathfrak m_S$ of Step 3. These are $1+n+m=\\dim S$ elements generating $\\mathfrak m_S$ of the regular local ring $S$, so by [lem-weil-pbc-regular-local-generators-regular-sequence] the sequence $p,t_1,\\ldots,t_n,z_1,\\ldots,z_m$ is a regular sequence in $S$ [def-weil-pbc-regular-sequence]. Hence its initial segment $p,t_1,\\ldots,t_n$ is a regular sequence: the nonzerodivisor conditions for its terms are those of the longer sequence, and $S/(p,t_1,\\ldots,t_n)S\\neq0$ since $(p,t_1,\\ldots,t_n)\\subseteq\\mathfrak m_S$. Now $R$ is a regular local ring of dimension $n+1$ whose maximal ideal is generated by $p,x_1,\\ldots,x_n$ (Step 1), $\\phi'$ is a local homomorphism of Noetherian local rings (Step 3), and $\\phi'(p),\\phi'(x_1),\\ldots,\\phi'(x_n)=p,t_1,\\ldots,t_n$ is a regular sequence in $S$. By [lem-weil-pbc-flat-over-regular], $\\phi'$ is flat [def-weil-pbc-flat-ring-map].",
-   "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-flat-over-regular",
-    "def-weil-regular-scheme",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07NN, proof ('a regular system of parameters of R maps to part of a regular sequence in S'') and statement ('In particular R -> S is flat (see Algebra, Lemma 07DY lemma-flat-over-regular)'), with Algebra, Lemma 00NQ (lemma-regular-ring-CM) for the regular sequence"
-   }
-  },
-  {
-   "text": "Conclusion: $R$ and $S$ are Noetherian local rings, complete for their maximal ideals (Steps 1 and 3); $q:R\\to A$ and $v':S\\to B$ are surjective local homomorphisms (Steps 1 and 3, and the remark of Step 1 on surjections of local rings), $\\phi':R\\to S$ is a flat (Step 5) local (Step 3) homomorphism, $f$ is local by hypothesis, and $v'\\circ\\phi'=f\\circ q$ (Step 4). This is the assertion, with $S$ in the role of the statement's $S$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769), conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohen-structure-power-series-surjection",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "def-weil-pbc-cohen-ring",
-  "def-weil-pbc-multivariate-power-series",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
-  "lem-weil-pbc-fs-adic-lift-into-complete",
-  "def-weil-pbc-adically-complete-ring",
-  "lem-weil-pbc-power-series-quotient-variables",
-  "lem-weil-pbc-power-series-universal-property-complete",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-flat-over-regular",
-  "def-weil-regular-scheme",
-  "def-weil-pbc-flat-ring-map"
+  "lem-weil-pbc-complete-local-map-regular-presentation",
+  "def-weil-regular-scheme"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings, line 9769) and its proof; flatness from its 'In particular' clause via Algebra, Lemma Tag 07DY (lemma-flat-over-regular) and Lemma Tag 00NQ (lemma-regular-ring-CM). Only the clauses of the node (surjective vertical maps, R -> S flat, R, S Noetherian complete local) are proved; the source's further conclusions (R, S power series rings over fields or Cohen rings, regular parameters to part of a regular system of parameters, regular closed fibre) are not part of the statement, though the proof constructs R and S as such power series rings. The universal-property node and the commutativity check of Step 4 are agent-written details the source leaves implicit."
+  "place": "Stage-3 F2: projection of the existing compatible regular-presentation statement for Stacks Tag 07NN; its Noetherian and local clauses follow from Mathlib IsRegularLocalRing parent classes."
  },
  "mathlib_searches": [
   {
@@ -230,5 +148,15 @@
   "group": "H1",
   "result": "pass",
   "note": "A,B CommRing+IsNoetherianRing+IsLocalRing+IsAdicComplete(maximalIdeal) ; f local; ∃ R S : Type (max u v) CommRing/IsLocalRing/Noetherian/IsAdicComplete(maximalIdeal); g q b all IsLocalHom; q,b surjective; g.Flat = RingHom.Flat (#check); b.comp g = f.comp q; sorry-only axioms"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T203941-L-829887",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
