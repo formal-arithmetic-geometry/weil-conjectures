@@ -8958,3 +8958,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/H2/Sheaf.AlgebraicGeometry.StalkTensorMultiplicationRange (stage 3; reviewer PASS; first push; landing 20261012T184305-L-4005195 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/H3/Sheaf.Algebra.ProjectiveDimensionWellDefined (stage 3; reviewer PASS; first push; landing 20261012T184305-L-4005292 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingBoundary (stage 3; reviewer PASS; first push; landing 20261012T184306-L-4005448 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.FormalCompletionMapSurjectiveProper (stage 3; reviewer PASS; first push; landing 20261012T184306-L-4005594 (proof); batch 20261012T184234; modules 1; new nodes 0)

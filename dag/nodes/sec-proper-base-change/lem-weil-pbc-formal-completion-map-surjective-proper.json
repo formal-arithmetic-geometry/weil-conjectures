@@ -31,7 +31,20 @@
  ],
  "proof": [
   {
-   "text": "Let H be the internal Hom sheaf. The formal-functions comparison identifies Gamma(X,H) with lim_n Gamma(X,H/I^n H), and the completion-internal-Hom comparison identifies that inverse limit with morphisms between the completed modules. Both comparisons are bijections, and their composite is exactly u |-> u^ by compatibility with reduction modulo I^n. Therefore this composite is surjective.",
+   "text": "Set J = I O_X and give X its Noetherian instance from properness over the Noetherian affine base. Form the coherent object H = Hom(G,F), using coherence of internal Hom. Its sections identify with morphisms G -> F.",
+   "uses": [
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful); its proof uses Lemma 0882 (lemma-completion-internal-hom) and the theorem on formal functions in the form of Lemma 087U (lemma-spell-out-theorem-formal-functions; Theorem 02OC theorem-formal-functions, Section 02O7 section-theorem-formal-functions)"
+   }
+  },
+  {
+   "text": "For a given morphism v of completions, surjectivity of the canonical completion/internal-Hom comparison gives a compatible family s of sections of H/J^(n+1)H whose image is v. Evaluate these sections at the top open. Their compatibility gives an element of the categorical inverse limit, using preservation of limits by the forgetful functor from A-modules to types. Invert the degree-zero formal-functions isomorphism to get a top section x of H; restrict x to all opens to obtain the section z. The specified projection equalities of formal functions show that the image of z in every quotient is s_n. Equality at the top open determines a section family, since every component is a restriction from the top.",
    "uses": [
     "lem-weil-pbc-completion-internal-hom",
     "lem-weil-pbc-formal-functions-complete-base",
@@ -41,20 +54,34 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0883 (lemma-fully-faithful), line 6760"
+    "place": "Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful); its proof uses Lemma 0882 (lemma-completion-internal-hom) and the theorem on formal functions in the form of Lemma 087U (lemma-spell-out-theorem-formal-functions; Theorem 02OC theorem-formal-functions, Section 02O7 section-theorem-formal-functions)"
+   }
+  },
+  {
+   "text": "Let u be the morphism represented by z under homObjSectionsEquiv. To show its completion is v, use extensionality of the full-subcategory morphisms and natural transformations. At level n, precompose both maps by the quotient projection G -> G/J^(n+1)G, which is an epimorphism because it is a cokernel projection. Apply sections to the specified factorization identity for e_n, substitute the quotient image of z = s_n, and use naturality of homObjSectionsEquiv in both variables. The factorization identity for the canonical quotient-map reduction is cokernel.pi_desc. Thus the components agree after an epimorphism, and hence agree. This gives the required preimage u.",
+   "uses": [
+    "lem-weil-pbc-completion-internal-hom",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful); its proof uses Lemma 0882 (lemma-completion-internal-hom) and the theorem on formal functions in the form of Lemma 087U (lemma-spell-out-theorem-formal-functions; Theorem 02OC theorem-formal-functions, Section 02O7 section-theorem-formal-functions)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-completion-internal-hom",
-  "lem-weil-pbc-formal-functions-complete-base",
   "def-pur-sheaf-hom",
-  "def-weil-pbc-coherent-formal-module"
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-completion-internal-hom",
+  "lem-weil-pbc-formal-functions-complete-base"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful) and its proof"
+  "place": "Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful), proof; H3 made the inverse-limit and componentwise compatibility glue explicit in Lean."
  },
  "mathlib_searches": [
   {
@@ -132,9 +159,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T173810-L-3291142",
-  "kind": "interface"
+  "landing": "20261012T184306-L-4005594",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
