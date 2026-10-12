@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FiniteAfterCompletion
+import Sheaf.RingTheory.CompletionFiniteExtensionDecomposition
+import Sheaf.RingTheory.CompletionFiniteExtensionTensor
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
@@ -82,6 +84,9 @@ theorem completion_finite_extension
                 (Ideal.LiesOver.over (P := q.1) (p := p)) r)) ∧
         (∀ (a : C) (q : Q), e (a ⊗ₜ[R] (1 : S)) q = g q a) ∧
         Nonempty ((C ⊗[R] S) ≃ₐ[S] AdicCompletion J B) := by
-  sorry
+  have hd := completion_finite_extension_decomposition R S p
+  have ht := completion_finite_extension_tensor R S p
+  rcases hd with ⟨hfin, ⟨e, g, hlevel, hcompat⟩⟩
+  exact ⟨hfin, ⟨e, g, hlevel, hcompat, ht⟩⟩
 
 end AdicCompletion

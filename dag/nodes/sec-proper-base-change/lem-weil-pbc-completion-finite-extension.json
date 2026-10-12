@@ -31,95 +31,28 @@
  ],
  "proof": [
   {
-   "text": "(Reduction to the local case.) Put $A=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pA$ and $B=S\\otimes_RR_{\\mathfrak p}=S_{\\mathfrak p}$. By [lem-weil-pbc-localization-base-change] (with $M=R\\setminus\\mathfrak p$, $D=S$) the map $\\lambda:S\\to B$, $s\\mapsto s\\otimes1$, is a localization of $S$ at $W=\\varphi(R\\setminus\\mathfrak p)$. $A$ is a Noetherian [lem-weil-pbc-localization-noetherian] local ring with maximal ideal $\\mathfrak m$ [def-weil-pbc-localization-at-prime], and $B$ is a finitely generated $A$-module (the $s_j\\otimes1$ generate it if the $s_j$ generate $S$ over $R$). Since $S$ is a finite, hence finite type, $R$-algebra, $S$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. By [lem-weil-pbc-localization-prime-residue-field-iso] (1) for $\\lambda$, $\\mathfrak Q'\\mapsto\\lambda^{-1}(\\mathfrak Q')$ is a bijection from the primes of $B$ onto the primes $\\mathfrak Q$ of $S$ with $\\varphi^{-1}(\\mathfrak Q)\\cap(R\\setminus\\mathfrak p)=\\emptyset$, inverse $\\mathfrak Q\\mapsto\\mathfrak QB$; and (same lemma for $R\\to A$) a prime of $A$ equals $\\mathfrak m$ iff its preimage in $R$ is $\\mathfrak p$. The preimage in $R$ of $\\mathfrak Q'$ (via $R\\to A\\to B$, which equals $R\\to S\\to B$) is $\\varphi^{-1}(\\lambda^{-1}(\\mathfrak Q'))$; hence the primes of $B$ lying over $\\mathfrak m$ are exactly the $\\mathfrak n_i=\\mathfrak q_iB$, $i=1,\\dots,m$, pairwise distinct. By part (2) of the same lemma the map $S_{\\mathfrak q_i}\\to B_{\\mathfrak n_i}$, $s/t\\mapsto\\lambda(s)/\\lambda(t)$, is an isomorphism of $S$-algebras; it is compatible with the maps from $A$ (on $A$ both are $a/u\\mapsto\\varphi(a)/\\varphi(u)$) and so carries $\\mathfrak m^nS_{\\mathfrak q_i}=\\mathfrak p^nS_{\\mathfrak q_i}$ onto $\\mathfrak m^nB_{\\mathfrak n_i}$. Finally $S_{\\mathfrak q_i}$ is Noetherian [lem-weil-pbc-localization-noetherian]. (Stacks: 'we may replace $R$ by $R_{\\mathfrak p}$ and $S$ by $S_{\\mathfrak p}$'.)",
+   "text": "Apply the finite-prime decomposition theorem and destruct its finite set, isomorphism, levelwise maps, and compatibility.",
    "uses": [
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
+    "lem-weil-pbc-completion-finite-extension-decomposition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135), first two sentences; Lemma Tag 00DK (lemma-tensor-localization, line 2088); Lemma Tag 00E3 (lemma-spec-localization)"
-   }
+   "elementary": false
   },
   {
-   "text": "(The rings $B/\\mathfrak m^nB$.) Fix $n\\ge1$ and put $B_n=B/\\mathfrak m^nB$, a finite algebra over $A/\\mathfrak m^n$. The local ring $A/\\mathfrak m^n$ has $\\mathfrak m/\\mathfrak m^n$ as its only prime (a prime containing $\\mathfrak m^n$ contains $\\mathfrak m$, which is maximal). By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum], $B_n$ has finitely many primes, each maximal, and their intersection consists of nilpotent elements. The primes of $B_n$ are the $\\mathfrak P/\\mathfrak m^nB$ with $\\mathfrak P\\supseteq\\mathfrak m^nB$ a prime of $B$; the preimage of such $\\mathfrak P$ in $A$ is a proper ideal containing $\\mathfrak m^n$, hence equal to $\\mathfrak m$, so $\\mathfrak P$ is one of the $\\mathfrak n_i$ of step 1; conversely $\\mathfrak n_i\\supseteq\\mathfrak mB\\supseteq\\mathfrak m^nB$. Hence the primes of $B_n$ are exactly the $m$ distinct maximal ideals $\\bar{\\mathfrak n}_i=\\mathfrak n_i/\\mathfrak m^nB$ (for $n=1$ this shows that there are finitely many $\\mathfrak q_i$, as the statement asserts), and every element of their intersection, the Jacobson radical of $B_n$, is nilpotent. By [lem-weil-pbc-product-of-localizations-at-maximal] the canonical map $B_n\\to\\prod_{i=1}^m(B_n)_{\\bar{\\mathfrak n}_i}$ is an isomorphism of $B$-algebras (for $m=0$: $B_n=0$). (Stacks: 'prime ideals of $S/\\mathfrak m^nS$ are in 1-to-1 correspondence with $\\mathfrak q_1,\\dots,\\mathfrak q_m$ ... hence $S/\\mathfrak m^nS=\\prod S_{\\mathfrak q_i}/\\mathfrak m^nS_{\\mathfrak q_i}$ by 00JB'; the Artinian property used there is replaced by the hypotheses of 00JA checked directly.)",
+   "text": "Apply the completed tensor equivalence theorem and package it with the preceding data.",
    "uses": [
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-product-of-localizations-at-maximal"
+    "lem-weil-pbc-completion-finite-extension-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135), sentences 4-5; Lemma Tag 00JA (lemma-product-local, line 12758), Lemma Tag 06RS proof"
-   }
-  },
-  {
-   "text": "(Identifying the factors and passing to the limit.) By [lem-weil-pbc-localization-at-prime-of-quotient] (ring $B$, ideal $\\mathfrak m^nB$, prime $\\bar{\\mathfrak n}_i$) there is a ring isomorphism $(B_n)_{\\bar{\\mathfrak n}_i}\\cong B_{\\mathfrak n_i}/\\mathfrak m^nB_{\\mathfrak n_i}$, $\\overline{b}/\\overline{t}\\leftrightarrow\\overline{b/t}$, and by step 1 $B_{\\mathfrak n_i}/\\mathfrak m^nB_{\\mathfrak n_i}\\cong S_{\\mathfrak q_i}/\\mathfrak p^nS_{\\mathfrak q_i}$; with step 2 we get isomorphisms of $B$-algebras $\\beta_n:B/\\mathfrak m^nB\\xrightarrow{\\sim}\\prod_{i=1}^mS_{\\mathfrak q_i}/\\mathfrak p^nS_{\\mathfrak q_i}$ whose $i$-th component is induced by the canonical map $B\\to B_{\\mathfrak n_i}\\cong S_{\\mathfrak q_i}$. Since all maps are induced by maps of $B$, the $\\beta_n$ commute with the reductions $(\\,)/\\mathfrak m^{n+1}\\to(\\,)/\\mathfrak m^n$. An inverse limit of a finite product of inverse systems is the product of the inverse limits (compatible sequences are taken componentwise), so the $\\beta_n$ give a ring isomorphism of $B$-algebras $\\beta:B^\\wedge=\\varprojlim_nB/\\mathfrak m^nB\\xrightarrow{\\sim}\\prod_{i=1}^m\\varprojlim_nS_{\\mathfrak q_i}/\\mathfrak p^nS_{\\mathfrak q_i}$, $(x_n)_n\\mapsto(\\beta_n(x_n))_n$, where $B^\\wedge$ is the $\\mathfrak pS_{\\mathfrak p}$-adic ($=\\mathfrak mB$-adic) completion of $S_{\\mathfrak p}$ [def-weil-pbc-adic-completion]. It is also $A^\\wedge$-linear for the componentwise actions $(a_n)_n\\cdot(x_n)_n=(a_nx_n)_n$, $A^\\wedge=\\varprojlim A/\\mathfrak m^n=(R_{\\mathfrak p})^\\wedge$. (Stacks: 'Hence the $\\mathfrak m$-adic completion $S^\\wedge$ of $S$ is equal to $\\prod S^\\wedge_{\\mathfrak q_i}$'.)",
-   "uses": [
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "def-weil-pbc-adic-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135), sentence 6; Proposition Tag 00CT (proposition-localize-quotient, line 1380)"
-   }
-  },
-  {
-   "text": "(The $\\mathfrak p$-adic and $\\mathfrak q_i$-adic completions of $S_{\\mathfrak q_i}$ agree.) Fix $i$. The map $A\\to S_{\\mathfrak q_i}$, $a/u\\mapsto\\varphi(a)/\\varphi(u)$, is a local homomorphism (as $\\varphi^{-1}(\\mathfrak q_i)=\\mathfrak p$); $\\mathfrak m$ and $\\mathfrak q_iS_{\\mathfrak q_i}$ are finitely generated since $A$ and $S_{\\mathfrak q_i}$ are Noetherian (step 1). By step 3 with $n=1$, $S_{\\mathfrak q_i}/\\mathfrak mS_{\\mathfrak q_i}$ is isomorphic, compatibly with the maps from $B$, to the $i$-th factor of $B/\\mathfrak mB$, hence is a quotient of the $\\kappa=A/\\mathfrak m$-vector space $B/\\mathfrak mB$, which is finite-dimensional because $B$ is a finite $A$-module; so $\\dim_\\kappa S_{\\mathfrak q_i}/\\mathfrak mS_{\\mathfrak q_i}<\\infty$. By [lem-weil-pbc-finite-after-completion] (1) the map $\\gamma_i:\\varprojlim_nS_{\\mathfrak q_i}/\\mathfrak m^nS_{\\mathfrak q_i}\\to(S_{\\mathfrak q_i})^\\wedge=\\varprojlim_nS_{\\mathfrak q_i}/\\mathfrak q_i^nS_{\\mathfrak q_i}$ induced by the quotient maps is a ring isomorphism; it is a map of $S_{\\mathfrak q_i}$-algebras, and of $A^\\wedge$-algebras when $A^\\wedge$ acts on the target through the map $\\varphi^\\wedge$ of that lemma (which is the map induced by $A\\to S_{\\mathfrak q_i}$), since both are defined componentwise. Hence $\\gamma\\circ\\beta:B^\\wedge\\xrightarrow{\\sim}\\prod_{i=1}^m(S_{\\mathfrak q_i})^\\wedge$, $\\gamma=\\prod_i\\gamma_i$, is an isomorphism of $S$-algebras and of $A^\\wedge$-algebras. (Stacks: 'The $\\mathfrak q_iS_{\\mathfrak q_i}$-adic completion $S^\\wedge_{\\mathfrak q_i}$ is equal to the $\\mathfrak m$-adic completion by Lemma 0394'.)",
-   "uses": [
-    "lem-weil-pbc-finite-after-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135), sentence 3; Lemma Tag 0394 (lemma-finite-after-completion, line 23100)"
-   }
-  },
-  {
-   "text": "(Tensor product description.) $B$ is a finitely generated module over the Noetherian ring $A$ (step 1), so by [lem-weil-pbc-completion-finite-module-tensor] (2) (with $I=\\mathfrak m$, $P=B$; note $\\mathfrak m^nB$ is the submodule $I^nP$) the $A^\\wedge$-linear map $c_B:A^\\wedge\\otimes_AB\\to B^\\wedge$, $a\\otimes b\\mapsto a\\cdot\\iota_B(b)$, is bijective. It is multiplicative on pure tensors, $c_B((a\\otimes b)(a'\\otimes b'))=aa'\\iota_B(bb')=c_B(a\\otimes b)c_B(a'\\otimes b')$, because $\\iota_B$ is a ring map and $A^\\wedge$ acts componentwise; so $c_B$ is an isomorphism of $A^\\wedge$-algebras and of $B$-algebras (hence $S$-algebras). By [lem-weil-pbc-tensor-cancel-base-change] (with $R\\to R_{\\mathfrak p}$, the $R$-algebra $S$ and the $R_{\\mathfrak p}$-algebra $A^\\wedge$) $A^\\wedge\\otimes_{R_{\\mathfrak p}}(R_{\\mathfrak p}\\otimes_RS)\\cong A^\\wedge\\otimes_RS$, $a\\otimes(r\\otimes s)\\mapsto ra\\otimes s$, an isomorphism of $A^\\wedge$-algebras which is visibly $S$-linear; with $R_{\\mathfrak p}\\otimes_RS\\cong S\\otimes_RR_{\\mathfrak p}=B$ (swap of factors) this gives $(R_{\\mathfrak p})^\\wedge\\otimes_RS\\cong A^\\wedge\\otimes_AB\\xrightarrow{c_B}B^\\wedge$, isomorphisms of $S$-algebras and $(R_{\\mathfrak p})^\\wedge$-algebras. (Stacks: 'Finally, we have $R^\\wedge\\otimes_RS=S^\\wedge$ by Lemma 00MA'.)",
-   "uses": [
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-tensor-cancel-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135), last sentence; Lemma Tag 00MA (lemma-completion-tensor, line 22901) part (3)"
-   }
-  },
-  {
-   "text": "(Conclusion.) Composing step 5 with step 4 gives the isomorphism of $S$-algebras $(R_{\\mathfrak p})^\\wedge\\otimes_RS\\xrightarrow{\\sim}B^\\wedge\\xrightarrow{\\sim}\\prod_{i=1}^m(S_{\\mathfrak q_i})^\\wedge$, compatible with the $(R_{\\mathfrak p})^\\wedge$-algebra structures, the $i$-th component of $(R_{\\mathfrak p})^\\wedge\\to\\prod_i(S_{\\mathfrak q_i})^\\wedge$ being the map induced by $R_{\\mathfrak p}\\to S_{\\mathfrak q_i}$ (step 4); both rings are isomorphic to the $\\mathfrak pS_{\\mathfrak p}$-adic completion $B^\\wedge$ of $S_{\\mathfrak p}$. If $m=0$, $B^\\wedge=0$ by step 3 and the product is the zero ring.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-finite-after-completion",
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-tensor-cancel-base-change"
+  "lem-weil-pbc-completion-finite-extension-decomposition",
+  "lem-weil-pbc-completion-finite-extension-tensor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135) and its proof (lines 23152-23174)"
+  "place": "Algebra, Lemma Tag 07N9, steps 1--6, reduced to the two named intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -216,5 +149,15 @@
   "group": "F1",
   "result": "pass",
   "note": "R Noetherian/S finite via Algebra+Module.Finite, p prime, Q=p.primesOver S (all primes contracting to p, Finite Q a conclusion), C=(R_p)^ and D q=(S_q)^ maximal-ideal AdicCompletion, e S-alg iso C⊗S≃Π D q (empty product=0), g pinned level-by-level by localRingHom, e(a⊗1)q=g q a, Nonempty S-alg iso to pS_p-adic completion of A⊗S; S/R algebraMaps into completions checked rfl through localizations"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T144131-L-2102845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

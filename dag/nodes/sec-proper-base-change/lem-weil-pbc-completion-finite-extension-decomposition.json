@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-completion-finite-extension-decomposition",
+ "kind": "statement",
+ "title": "Finite-prime decomposition data for completion",
+ "statement": "theorem completion_finite_extension_decomposition\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let C := AdicCompletion m A\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)\n    Finite Q ∧\n      ∃ (e : (C ⊗[R] S) ≃ₐ[S] (∀ q : Q, D q))\n        (g : ∀ q : Q, C →+* D q),\n        (∀ (q : Q) (n : ℕ) (a : C) (r : A),\n          AdicCompletion.evalₐ m n a = Ideal.Quotient.mk (m ^ n) r →\n          AdicCompletion.evalₐ\n              (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g q a) =\n            Ideal.Quotient.mk\n              ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n)\n              (Localization.localRingHom p q.1 (algebraMap R S)\n                (Ideal.LiesOver.over (P := q.1) (p := p)) r)) ∧\n        (∀ (a : C) (q : Q), e (a ⊗ₜ[R] (1 : S)) q = g q a)",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07N9, steps 1--4"
+ },
+ "proof": [
+  {
+   "text": "This intermediate theorem packages the cited part of the Stacks proof for use by the target theorem.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07N9, steps 1--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion finite algebra tensor product decomposition",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completion finite module tensor equivalence",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n AdicCompletion.*TensorProduct Mathlib/RingTheory",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionFiniteExtension",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completion-finite-extension",
+   "place": "Algebra, Lemma Tag 07N9, steps 1--4"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionFiniteExtensionDecomposition",
+  "file": "lean/Sheaf/RingTheory/CompletionFiniteExtensionDecomposition.lean",
+  "declaration": "AdicCompletion.completion_finite_extension_decomposition",
+  "statement": "theorem completion_finite_extension_decomposition\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let C := AdicCompletion m A\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)\n    Finite Q ∧\n      ∃ (e : (C ⊗[R] S) ≃ₐ[S] (∀ q : Q, D q))\n        (g : ∀ q : Q, C →+* D q),\n        (∀ (q : Q) (n : ℕ) (a : C) (r : A),\n          AdicCompletion.evalₐ m n a = Ideal.Quotient.mk (m ^ n) r →\n          AdicCompletion.evalₐ\n              (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g q a) =\n            Ideal.Quotient.mk\n              ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n)\n              (Localization.localRingHom p q.1 (algebraMap R S)\n                (Ideal.LiesOver.over (P := q.1) (p := p)) r)) ∧\n        (∀ (a : C) (q : Q), e (a ⊗ₜ[R] (1 : S)) q = g q a)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T144131-L-2102845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T144131-L-2102845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
