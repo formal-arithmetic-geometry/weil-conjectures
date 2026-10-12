@@ -12,6 +12,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -58,9 +59,9 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
   (`AlgebraicGeometry.Etale.kummerBoundary`) is this isomorphism is the orientation
   `AlgebraicGeometry.Etale.affineLineOrientation` of
   `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`.
-* Of `sk-prop-a1-inv` (ii) only the uniqueness half is stated; the gluing half — that
-  normalized local comparisons over an étale cover of `Y` glue — needs a formalisation of
-  étale-local data on `Y` that this file does not set up.
+* The gluing half of `sk-prop-a1-inv` (ii) — that normalized local comparisons over an étale
+  cover of `Y` glue (`prop-pur-a1-invariance`) — is stated for a single surjective étale
+  `v : Y' ⟶ Y`, the disjoint union of the members of a covering family.
 
 ## Main statements
 
@@ -72,6 +73,7 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
 - `AlgebraicGeometry.Etale.injective_upperStar_map_of_isFiniteLocallyConstantSheaf`,
   `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
+- `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`
 -/
 
 @[expose] public section
@@ -288,6 +290,58 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
   exact Iso.ext (by rw [← Category.comp_id α.hom, ← β.inv_hom_id, ← Category.assoc, this,
     Category.id_comp])
 
+
+include aY in
+/-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
+
+*Gluing.* Let `F ∈ D(𝔸¹_Y)`, `C ∈ D(Y)` and `θ : Li₁^* F ≅ C`. Let `v : Y' ⟶ Y` be surjective
+and étale with `Y'` separated of finite type over `k`, for instance the disjoint union of an
+étale covering family `{Y_α ⟶ Y}`, and write `v₁ : 𝔸¹_{Y'} ⟶ 𝔸¹_Y` for the base change of `v`
+and `a' : 𝔸¹_{Y'} ⟶ Y'` for the projection. Suppose
+
+* (local shape) `Lv₁^* F ≅ L(m)[n]` for a finite locally constant sheaf `L` on `𝔸¹_{Y'}`, free
+  of rank one at every geometric point;
+* (normalized local comparison) `κ' : Lv₁^* F ≅ La'^* Lv^* C` restricts along the unit section
+  `i₁'` of `𝔸¹_{Y'}` to `Lv^* θ`, under `Li₁'^* La'^* ≅ 𝟭` and `Li₁'^* Lv₁^* ≅ Lv^* Li₁^*`.
+
+Then there is a unique isomorphism `κ : F ≅ La^* C` whose restriction to `𝔸¹_{Y'}` is `κ'`,
+under `Lv₁^* La^* ≅ La'^* Lv^*`.
+
+The blueprint also asks `F` and `C` to lie in `D^b_{ctf}`; this is not imposed here, the local
+shape making `F`, and through `κ'` and `θ` also `C`, étale-locally a shift and twist of a lisse
+sheaf. -/
+theorem existsUnique_iso_leftDerivedUpperStar_of_etale
+    (F : _root_.DerivedCategory
+      (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).obj F ≅ C)
+    {Y' : Scheme.{u}} (v : Y' ⟶ Y) [Etale v] [Surjective v] [IsSeparated (v ≫ aY)]
+    (hF : ∃ L : Sheaf 𝔸(ULift.{u} (Fin 1); Y').smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsFiniteLocallyConstantSheaf L ∧
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ 𝔸(ULift.{u} (Fin 1); Y')),
+        Nonempty ((pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+      ∃ m n : ℤ, Nonempty
+        ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+          ((tateTwist Λ _ m).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))⟦n⟧))
+    (κ' : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+      (L((𝔸(ULift.{u} (Fin 1); Y') ↘ Y')^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj C))
+    (hκ' : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')^*[ModuleCat.{u + 1} Λ])).map
+          κ'.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+            (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')).hom.app _ =
+        ((leftDerivedUpperStarComp _ (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')
+            (AffineSpace.map (ULift.{u} (Fin 1)) v)).inv.app F ≫
+          (leftDerivedUpperStarComp _ v (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+            (AffineSpace.oneSection_comp_map v)).hom.app F) ≫
+        (L((v)^*[ModuleCat.{u + 1} Λ])).map θ.hom) :
+    ∃! κ : F ≅ (L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C,
+      (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫
+          (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+            (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).inv.app C ≫
+          (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+            (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).hom.app C =
+        κ'.hom :=
+  sorry
 end
 
 end Etale
