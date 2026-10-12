@@ -9428,3 +9428,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:23 L: merged deliver/Y3/Sheaf.RingTheory.IsN1OfFiniteDomainExtension (stage 3; reviewer PASS; first push; landing 20261012T202301-L-711440 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:23 L: merged deliver/Y3/Sheaf.RingTheory.PolynomialPurelyInseparableIntegralClosureFinite (stage 3; reviewer PASS; first push; landing 20261012T202301-L-711549 (interface); batch 20261012T202227; modules 2; new nodes 1)
 - 20:36 L: returned deliver/R2/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension (reviewer RETURN: (reviewer X-1ea4a, head 1ea4aca18) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Co)
+- 20:39 L: returned deliver/P3/Sheaf.CategoryTheory.Sites.OverPullbackAdjunctionMono (reviewer RETURN: (reviewer X-8cb5c, head 8cb5c43e5) F: coord/changes/OverPullbackAdjunctionMono-import.md omits the direct downstream use)
