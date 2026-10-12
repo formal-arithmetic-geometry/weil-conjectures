@@ -95,6 +95,8 @@ factorisations `ĀS^* e_ψ = split ∘ average` and `ĀS^* e_ψ = ĀS^*(ℒ_ψ �
 ℒ_ψ)`. -/
 noncomputable def affineLine.artinSchreierTrivialization (ψ : AddChar k₀ (PadicAlgCl l)) :
     ProEtale.AdicSheaf.unit l Ā ≅ (ĀS)^*ᵃ[l].obj (affineLine.artinSchreierImage l ψ) :=
+  haveI := strongEpi_of_epi ((ĀS)^*ᵃ[l].map
+    (factorThruImage (affineLine.artinSchreierIdempotentHom l ψ)))
   image.isoStrongEpiMono _ _ (affineLine.artinSchreierAverageModHom_comp_splitModHom ψ) ≪≫
     (image.isoStrongEpiMono ((ĀS)^*ᵃ[l].map
         (factorThruImage (affineLine.artinSchreierIdempotentHom l ψ)))
@@ -119,6 +121,31 @@ theorem affineLine.germ_artinSchreierTrivialization (ψ : AddChar k₀ (PadicAlg
         (ProEtale.globalSectionOfModHom (affineLine.artinSchreierTrivialization l ψ).hom) =
       ULift.up (ψ (-c)) •
         ProEtale.globalSectionOfModHom (affineLine.artinSchreierTrivialization l ψ).hom := by
-  sorry
+  have hsplit := affineLine.artinSchreierTrivialization_hom_comp (l := l) ψ
+  set θ := affineLine.artinSchreierTrivialization l ψ
+  set ι := image.ι (affineLine.artinSchreierIdempotentHom l ψ)
+  -- `ĀS^*(ℒ_ψ ⊆ ĀS_* ℚ̄_ℓ)` has the retraction `average ≫ θ`
+  have hret : (ĀS)^*ᵃ[l].map ι ≫ affineLine.artinSchreierAverageModHom l ψ ≫ θ.hom = 𝟙 _ := by
+    rw [← cancel_epi θ.hom, reassoc_of% hsplit,
+      affineLine.artinSchreierSplitModHom_averageModHom_assoc, Category.comp_id]
+  have hinj : Function.Injective
+      ((Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).map
+        ((ĀS)^*ᵃ[l].map ι).hom).hom := by
+    refine Function.LeftInverse.injective (g := ((Sheaf.Γ _ _).map
+      (affineLine.artinSchreierAverageModHom l ψ ≫ θ.hom).hom).hom) fun x ↦ ?_
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← Mod.comp_hom', hret, Mod.id_hom',
+      CategoryTheory.Functor.map_id]
+    rfl
+  have hθs : ((Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).map
+      ((ĀS)^*ᵃ[l].map ι).hom).hom (ProEtale.globalSectionOfModHom θ.hom) =
+      affineLine.artinSchreierSplitSection l ψ := by
+    rw [affineLine.artinSchreierSplitSection, ← hsplit, ProEtale.globalSectionOfModHom_eq,
+      ProEtale.globalSectionOfModHom_eq, Mod.comp_hom', Functor.map_comp,
+      ConcreteCategory.comp_apply]
+  apply hinj
+  rw [map_smul, hθs, ← affineLine.germ_artinSchreierSplitSection, ← hθs]
+  exact (congrArg (fun φ ↦ φ.hom (ProEtale.globalSectionOfModHom θ.hom))
+    (ProEtale.germ_naturality (WeilCoefficients.{u} l)
+      (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c) ι.hom)).symm
 
 end AlgebraicGeometry
