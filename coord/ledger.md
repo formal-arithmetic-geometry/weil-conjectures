@@ -6318,3 +6318,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:50 L: returned deliver/C1/Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance (reviewer RETURN: (reviewer X-29324, head 29324e78b) E3/H8: EtaleSetPullbackSheafEquivalence.lean lines 22–24 incorrectly infer equality o)
 - 05:50 L: returned deliver/T1/Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification (reviewer RETURN: (reviewer X-783bd, head 783bd57d6) H8 — Both new theorem docstrings omit complete natural-language proofs. In lean/Sheaf)
 - 05:50 L: returned deliver/S1/Sheaf.AlgebraicGeometry.DescendAffine (reviewer RETURN: (reviewer X-Conne, head Connectio) the reviewer passed it, but the landing failed: [--drop-files DROP_FILES] [--revert-s)
+- 05:50 L: returned deliver/G1/Sheaf.AlgebraicGeometry.AffineEtaleDescentData (reviewer RETURN: (reviewer X-e0335, head e0335d21b) D1 (brief §4): The two new nodes merely restate the item's conjuncts, leaving all mat)
