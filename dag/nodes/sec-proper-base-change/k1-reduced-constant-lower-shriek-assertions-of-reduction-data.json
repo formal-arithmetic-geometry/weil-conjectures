@@ -1,0 +1,115 @@
+{
+ "id": "k1-reduced-constant-lower-shriek-assertions-of-reduction-data",
+ "kind": "statement",
+ "title": "reducedConstantLowerShriekAssertions_of_reduction_data",
+ "statement": "Let k be an algebraically closed field [def-weil-algebraic-closure], f:X → Spec k a separated finite-type curve of dimension at most one [def-weil-pbc-curve-setting], X reduced [def-pc-reduced-scheme], j:U → X an open immersion [def-weil-open-immersion], and r a prime. Put R=ULift(Z/rZ) and let R_U/(r) denote the constant R-module sheaf with value R/(r) [def-weil-pbc-constant-sheaf]. Assume ReducedConstantLowerShriekReductionData(f,j,r) [k1-reduced-constant-lower-shriek-reduction-data]: a finite surjective smooth modification is isomorphic over a dense open, and its pulled-back lower-shriek coefficient sheaf satisfies the eight assertions. Then j_! R_U/(r) satisfies the eight assertions for f.",
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-curve-setting",
+  "def-weil-open-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-constant-sheaf",
+  "k1-reduced-constant-lower-shriek-reduction-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SG and 0A3Q"
+ },
+ "proof": [
+  {
+   "text": "Unpack the finite, surjective, smooth, dense-open-isomorphism and pullback hypotheses from the reduction data, then apply AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite.",
+   "uses": [
+    "lemma-weil-pbc-curve-normalization-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-curve-normalization-constant"
+ ],
+ "proof_origin": "Application of the existing finite transfer theorem recorded by lemma-weil-pbc-curve-normalization-constant (Stacks 0A3Q).",
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "date": "2026-10-12",
+   "results": "Actual repair search: 12 hits; CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.instAdditiveSheafConstantSheaf, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "verdict": "No complete matching assertion-bearing reduction data package or prime-coefficient sheaf isomorphism; use the existing source-library transfer theorem and the quotient equivalence machinery."
+  },
+  {
+   "tool": "grep",
+   "query": "constantModSheaf|H.map_comp_apply",
+   "date": "2026-10-12",
+   "results": "Actual repair search: 2 hits; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "verdict": "No complete matching assertion-bearing reduction data package or prime-coefficient sheaf isomorphism; use the existing source-library transfer theorem and the quotient equivalence machinery."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology constant sheaf extension by zero on a smooth curve finite normalization",
+   "date": "2026-10-12",
+   "results": "Actual repair search: 8 hits; AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation",
+   "verdict": "No complete matching assertion-bearing reduction data package or prime-coefficient sheaf isomorphism; use the existing source-library transfer theorem and the quotient equivalence machinery."
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf quotient by zero module equivalence and curve lower shriek assertions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "proof step 1: prime-coefficient hypothesis supplied by algebraicallyClosedCohomologyInvariant; via e1-prime-coefficient-curve-assertions proof step 2, constant lower-shriek assertions; finite normalization transfer to the original open immersion",
+   "via": [
+    "k1-reduced-constant-lower-shriek-assertions",
+    "e1-prime-coefficient-curve-assertions"
+   ]
+  },
+  "same_as": [
+   "lemma-weil-pbc-curve-normalization-constant"
+  ]
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReducedConstantLowerShriekReduction.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.reducedConstantLowerShriekAssertions_of_reduction_data",
+  "statement": "theorem reducedConstantLowerShriekAssertions_of_reduction_data\n    {k : Type u} [Field k] [IsAlgClosed k] {X U : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X] (j : U ⟶ X)\n    [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]\n    (h : ReducedConstantLowerShriekReductionData f j r) :\n    IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f\n      ((Etale.openImmersionLowerShriek\n        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj\n        (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) U r))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T030604-L-1299228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T030604-L-1299228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
