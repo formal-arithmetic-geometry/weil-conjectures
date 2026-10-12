@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "*Notation; (1) functoriality.* Write $\\eta_\\lambda:A_\\lambda\\to A^h_\\lambda$ for the structure map of the henselization; by [lem-weil-pbc-pair-henselization] (2) each $(A^h_\\lambda,I^h_\\lambda)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Let $\\mu\\le\\lambda$. The ring map $\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}:A_\\mu\\to A^h_\\lambda$ maps $I_\\mu$ into $\\eta_\\lambda(I_\\lambda)\\subseteq I_\\lambda A^h_\\lambda=I^h_\\lambda$, and $(A^h_\\lambda,I^h_\\lambda)$ is henselian, so by [lem-weil-pbc-henselization-universal-property] (applied to $(B,J)=(A_\\mu,I_\\mu)$, $(A',I')=(A^h_\\lambda,I^h_\\lambda)$) there is exactly one ring map $\\varphi^h_{\\mu\\lambda}:A^h_\\mu\\to A^h_\\lambda$ with $\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}$, and $\\varphi^h_{\\mu\\lambda}(I^h_\\mu)\\subseteq I^h_\\lambda$. Directed system: $\\varphi^h_{\\lambda\\lambda}$ and $\\mathrm{id}$ both satisfy $(-)\\circ\\eta_\\lambda=\\eta_\\lambda$; for $\\mu\\le\\lambda\\le\\nu$, $\\varphi^h_{\\lambda\\nu}\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\varphi^h_{\\lambda\\nu}\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\eta_\\nu\\circ\\varphi_{\\lambda\\nu}\\circ\\varphi_{\\mu\\lambda}=\\eta_\\nu\\circ\\varphi_{\\mu\\nu}=\\varphi^h_{\\mu\\nu}\\circ\\eta_\\mu$. By the uniqueness clause of [lem-weil-pbc-henselization-universal-property], $\\varphi^h_{\\lambda\\lambda}=\\mathrm{id}$ and $\\varphi^h_{\\lambda\\nu}\\circ\\varphi^h_{\\mu\\lambda}=\\varphi^h_{\\mu\\nu}$. So $(A^h_\\lambda,I^h_\\lambda)$ is a directed system of pairs: clause (1).",
+   "text": "Functoriality: obtain a henselian colimit from pair_henselization. For any colimit representative in the hypotheses, the unique colimit isomorphism in Under carries the structural map and hence the extended ideal to the chosen representative. Transport HenselianRing by mapping the Jacobson radical and pulling back each monic polynomial and simple root along the ring equivalence, then mapping its lifted root forward. For each transition F.map f followed by the target structure map, henselization_universal_property gives a unique lift. Ideal.map_map and hJ give ideal preservation. Choose these lifts; uniqueness applied to the identity and composite proves the two functor laws.",
    "uses": [
     "lem-weil-pbc-pair-henselization",
     "def-weil-pbc-henselian-terminology",
@@ -39,11 +39,12 @@
    }
   },
   {
-   "text": "*The colimit pair $(A^h_\\infty,I^h_\\infty)$ is henselian.* The colimit $A^h_\\infty=\\varinjlim_\\lambda A^h_\\lambda$ of the directed system of step 1 exists in commutative rings (a directed set is a filtered category; the filtered colimit is the disjoint union of the $A^h_\\lambda$ modulo the evident relation, with operations computed at a common later index) [def-weil-pbc-category-colimit], [lem-weil-pbc-filtered-colimit-algebras-elementwise]; let $\\iota_\\lambda:A^h_\\lambda\\to A^h_\\infty$ be the coprojections, and $I^h_\\infty=\\bigcup_\\lambda\\iota_\\lambda(I^h_\\lambda)$. By [lem-weil-pbc-filtered-colimit-henselian-pair], applied to the directed system of henselian pairs $(A^h_\\lambda,I^h_\\lambda)$ of step 1, $I^h_\\infty$ is an ideal of $A^h_\\infty$ and $(A^h_\\infty,I^h_\\infty)$ is a henselian pair. The family $\\iota_\\lambda\\circ\\eta_\\lambda:A_\\lambda\\to A^h_\\infty$ is a cocone on $(A_\\lambda)$: for $\\mu\\le\\lambda$, $\\iota_\\lambda\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\iota_\\lambda\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\iota_\\mu\\circ\\eta_\\mu$. So there is exactly one ring map $\\eta_\\infty:A\\to A^h_\\infty$ with $\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ\\eta_\\lambda$ [def-weil-pbc-category-colimit]. It maps $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$ into $I^h_\\infty$: $\\eta_\\infty(\\alpha_\\lambda(x))=\\iota_\\lambda(\\eta_\\lambda(x))$ with $\\eta_\\lambda(x)\\in I_\\lambda A^h_\\lambda=I^h_\\lambda$ for $x\\in I_\\lambda$. (Stacks: 'Since the colimit is filtered we obtain $\\colim(A_i^h,I_i^h)=(\\colim A_i^h,\\colim I_i^h)$ in the category of pairs; details omitted. Again using the colimit is filtered, this is a henselian pair'.)",
+   "text": "Colimit pair: set Jh i = (J i).map (eta.app i).hom. Naturality and Ideal.map_map prove transition maps preserve Jh. The preceding colimit-isomorphism argument makes each stage henselian. filteredColimit_henselianPair supplies the ideal K of colimit G, its union-of-images membership description, and henselianness. Transport K and henselianness to the arbitrary colimit cocone d via the unique colimit isomorphism. This gives Ih and its required membership description. Descend the cocone eta followed by d.iota to obtain etaInf. The descriptions hI and hIh show I.map etaInf is contained in Ih. Conversely, each stage ideal Jh maps into I.map etaInf, since J i maps into I at c.iota i and the etaInf square commutes. Taking stage representatives proves Ih = I.map etaInf.",
    "uses": [
     "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-filtered-colimit-henselian-pair"
+    "lem-weil-pbc-filtered-colimit-henselian-pair",
+    "lem-weil-pbc-pair-henselization",
+    "def-weil-pbc-henselian-terminology"
    ],
    "elementary": false,
    "source": {
@@ -52,7 +53,7 @@
    }
   },
   {
-   "text": "*(2) The comparison maps $u$ and $v$.* Let $\\eta:A\\to A^h$ be the henselization of $(A,I)$; $(A^h,IA^h)$ is henselian [lem-weil-pbc-pair-henselization] (2). For each $\\lambda$, $\\eta\\circ\\alpha_\\lambda:A_\\lambda\\to A^h$ maps $I_\\lambda$ into $\\eta(I)\\subseteq IA^h$, so [lem-weil-pbc-henselization-universal-property] gives exactly one $u_\\lambda:A^h_\\lambda\\to A^h$ with $u_\\lambda\\circ\\eta_\\lambda=\\eta\\circ\\alpha_\\lambda$, and $u_\\lambda(I^h_\\lambda)\\subseteq IA^h$. They form a cocone: for $\\mu\\le\\lambda$, $u_\\lambda\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=u_\\lambda\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\eta\\circ\\alpha_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\eta\\circ\\alpha_\\mu=u_\\mu\\circ\\eta_\\mu$, so $u_\\lambda\\circ\\varphi^h_{\\mu\\lambda}=u_\\mu$ by the uniqueness clause. Let $u:A^h_\\infty\\to A^h$ be the induced map, $u\\circ\\iota_\\lambda=u_\\lambda$ [def-weil-pbc-category-colimit]. Then $u\\circ\\eta_\\infty=\\eta$, since both agree after every $\\alpha_\\lambda$ ($u\\circ\\eta_\\infty\\circ\\alpha_\\lambda=u_\\lambda\\circ\\eta_\\lambda=\\eta\\circ\\alpha_\\lambda$) and $A$ is the colimit; and $u$ is the only ring map with $u\\circ\\eta_\\infty=\\eta$: for any such $u'$, $u'\\circ\\iota_\\lambda\\circ\\eta_\\lambda=u'\\circ\\eta_\\infty\\circ\\alpha_\\lambda=\\eta\\circ\\alpha_\\lambda$, so $u'\\circ\\iota_\\lambda=u_\\lambda$ by uniqueness of $u_\\lambda$, and $u'=u$ by the colimit property. Conversely, $(A^h_\\infty,I^h_\\infty)$ is henselian and $\\eta_\\infty(I)\\subseteq I^h_\\infty$ (step 2), so [lem-weil-pbc-henselization-universal-property] (for $(B,J)=(A,I)$) gives exactly one $v:A^h\\to A^h_\\infty$ with $v\\circ\\eta=\\eta_\\infty$, and $v(IA^h)\\subseteq I^h_\\infty$.",
+   "text": "Universal property of the colimit henselization: for any henselian pair (A,L) and phi from c.pt with I.map phi contained in L, lift c.iota i followed by phi through each stage henselization using henselization_universal_property. Uniqueness, naturality of eta and the cocone equations give compatibility. Descend these lifted maps by hd to obtain b : d.pt -> A. Applying hc.hom_ext gives etaInf followed by b = phi. Any other such b agrees at each d.iota by uniqueness of the stage lift, and hd.hom_ext then gives global uniqueness. Specialize to a henselization zeta : c.pt -> A, whose extended ideal is henselian by pair_henselization and transport, to obtain the comparison map u and its required unique factorization.",
    "uses": [
     "lem-weil-pbc-pair-henselization",
     "lem-weil-pbc-henselization-universal-property",
@@ -65,7 +66,7 @@
    }
   },
   {
-   "text": "*(2) $u$ and $v$ are inverse; the ideals.* $u\\circ v\\circ\\eta=u\\circ\\eta_\\infty=\\eta=\\mathrm{id}\\circ\\eta$, and $(A^h,IA^h)$ is henselian with $\\eta(I)\\subseteq IA^h$, so $u\\circ v=\\mathrm{id}_{A^h}$ by the uniqueness clause of [lem-weil-pbc-henselization-universal-property] (for $(B,J)=(A,I)$, $(A',I')=(A^h,IA^h)$). For each $\\lambda$: $v\\circ u\\circ\\iota_\\lambda\\circ\\eta_\\lambda=v\\circ\\eta\\circ\\alpha_\\lambda=\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ\\eta_\\lambda$; since $(A^h_\\infty,I^h_\\infty)$ is henselian and $\\iota_\\lambda\\circ\\eta_\\lambda$ maps $I_\\lambda$ into $I^h_\\infty$, the uniqueness clause (for $(B,J)=(A_\\lambda,I_\\lambda)$) gives $v\\circ u\\circ\\iota_\\lambda=\\iota_\\lambda$; hence $v\\circ u=\\mathrm{id}$ by the uniqueness in the colimit property [def-weil-pbc-category-colimit]. So $u$ is an isomorphism with inverse $v$. Ideals: $u(I^h_\\infty)=\\bigcup_\\lambda u_\\lambda(I^h_\\lambda)\\subseteq IA^h$ (step 3) and $v(IA^h)\\subseteq I^h_\\infty$, i.e. $IA^h\\subseteq u(I^h_\\infty)$; so $u(I^h_\\infty)=IA^h$. This proves clause (2). (Stacks: 'Hence by the Yoneda lemma we find $(A^h,I^h)=(\\colim A_i^h,\\colim I_i^h)$'.)",
+   "text": "Inverse and ideals: since (d.pt,Ih) is henselian and etaInf carries I into Ih, henselization_universal_property for zeta gives v : A -> d.pt with zeta followed by v = etaInf. For every comparison u satisfying etaInf followed by u = zeta, uniqueness of the colimit universal property just constructed makes u followed by v the identity of d.pt; uniqueness of the henselization universal property makes v followed by u the identity of A. These identities directly prove injectivity and surjectivity of u.hom. Finally Ih = I.map etaInf and Ideal.map_map give Ih.map u = I.map zeta.",
    "uses": [
     "lem-weil-pbc-henselization-universal-property",
     "def-weil-pbc-category-colimit"
@@ -77,7 +78,7 @@
    }
   },
   {
-   "text": "*The case $(A,I)$ henselian.* Assume $(A,I)$ henselian [def-weil-pbc-henselian-terminology]. For each $\\lambda$, $\\alpha_\\lambda$ maps $I_\\lambda$ into $I$, so [lem-weil-pbc-henselization-universal-property] (for $(B,J)=(A_\\lambda,I_\\lambda)$, $(A',I')=(A,I)$) gives exactly one ring map $\\beta_\\lambda:A^h_\\lambda\\to A$ with $\\beta_\\lambda\\circ\\eta_\\lambda=\\alpha_\\lambda$, and $\\beta_\\lambda(I^h_\\lambda)\\subseteq I$. Compatibility: for $\\mu\\le\\lambda$, $\\beta_\\lambda\\circ\\varphi^h_{\\mu\\lambda}\\circ\\eta_\\mu=\\beta_\\lambda\\circ\\eta_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\alpha_\\lambda\\circ\\varphi_{\\mu\\lambda}=\\alpha_\\mu$, so $\\beta_\\lambda\\circ\\varphi^h_{\\mu\\lambda}=\\beta_\\mu$ by uniqueness. Let $\\beta:A^h_\\infty\\to A$ be the induced map, $\\beta\\circ\\iota_\\lambda=\\beta_\\lambda$ [def-weil-pbc-category-colimit]. Then $\\beta\\circ\\eta_\\infty\\circ\\alpha_\\lambda=\\beta_\\lambda\\circ\\eta_\\lambda=\\alpha_\\lambda$ for all $\\lambda$, so $\\beta\\circ\\eta_\\infty=\\mathrm{id}_A$. And $\\eta_\\infty\\circ\\beta\\circ\\iota_\\lambda\\circ\\eta_\\lambda=\\eta_\\infty\\circ\\alpha_\\lambda=\\iota_\\lambda\\circ\\eta_\\lambda$, where both $\\eta_\\infty\\circ\\beta\\circ\\iota_\\lambda$ and $\\iota_\\lambda$ are ring maps $A^h_\\lambda\\to A^h_\\infty$ and $(A^h_\\infty,I^h_\\infty)$ is henselian with $\\iota_\\lambda\\eta_\\lambda(I_\\lambda)\\subseteq I^h_\\infty$ (step 2); by the uniqueness clause of [lem-weil-pbc-henselization-universal-property], $\\eta_\\infty\\circ\\beta\\circ\\iota_\\lambda=\\iota_\\lambda$ for all $\\lambda$, hence $\\eta_\\infty\\circ\\beta=\\mathrm{id}$. So $\\beta$ is an isomorphism $\\varinjlim A^h_\\lambda\\cong A$ with inverse $\\eta_\\infty$. Ideals: $\\beta(I^h_\\infty)=\\bigcup_\\lambda\\beta_\\lambda(I^h_\\lambda)\\subseteq I$, and $\\eta_\\infty(I)\\subseteq I^h_\\infty$ (step 2), i.e. $I\\subseteq\\beta(I^h_\\infty)$; so $\\beta(I^h_\\infty)=I$. (This argument does not use $A^h$; equivalently it is clause (2) together with $A^h\\cong A$ for a henselian $(A,I)$.)",
+   "text": "Henselian specialization: when (c.pt,I) is henselian, specialize the universal property of step 3 to its identity map. This supplies the stage maps beta_i, their uniqueness and ideal inclusions, their compatibility, and their descended map b with etaInf followed by b the identity. Apply the same universal property to etaInf into the henselian colimit pair to see b followed by etaInf is the identity. Thus b is bijective. Mapping Ih = I.map etaInf along b yields Ih.map b = I.",
    "uses": [
     "def-weil-pbc-henselian-terminology",
     "lem-weil-pbc-henselization-universal-property",
@@ -95,13 +96,12 @@
   "def-weil-pbc-henselian-terminology",
   "lem-weil-pbc-henselization-universal-property",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
   "lem-weil-pbc-filtered-colimit-henselian-pair"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0A04 (lemma-henselization-colimit) and its proof; the Yoneda argument and the omitted details (the colimit of pairs, the ideal $I^h_\\infty$) are written out by the agent as explicit maps through the universal property of Lemma Tag 0A02 (lemma-henselization)"
+  "place": "Lemma Tag 0A04 and its proof, with the universal property from the last paragraph of Tag 0A02 and filtered-colimit henselianness from Tag 0FWT. F2 formalized the explicit inverse-map argument, transport to arbitrary colimit representatives, and the equality Ih = I.map etaInf; the direct elementwise-colimit dependency is unnecessary because filteredColimit_henselianPair already provides the ideal membership description."
  },
  "mathlib_searches": [
   {
@@ -203,5 +203,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053930-L-2634713",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
