@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-dominant-finite-refinement-limit",
+ "kind": "statement",
+ "title": "Dominant finite integral refinements preserve an approximation limit",
+ "statement": "Let S be a scheme and N a Noetherian approximation of S [def-weil-pbc-scheme-conventions, def-nagata-noetherian-inverse-system]. Let X be a diagram on N.I with integral stages, alpha a cone from S to X with dominant components [def-sbc-normal-dominant-galois], and p:X -> N.D a natural transformation with finite components. If alpha followed by p equals N.pi, then the cone alpha is limiting. No normality or compactness assumption on S and no affine-transition hypothesis on X is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal replacement diagram limit claim; Tag 01ZM for finite-presentation morphism descent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-nagata-noetherian-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "A finite p_i is locally of finite presentation because its target N.D(i) is Noetherian. Apply exists_map_at_refinement_of_affine_limit to N.D, N.pi, N.isLimit, p_i and alpha_i with the equation alpha_i;p_i=N.pi_i. This gives j, f:j -> i and a:N.D(j) -> X_i, with N.pi_j;a=alpha_i and a;p_i=N.D(f).",
+   "uses": [
+    "lem-sbc-pointed-section-stage-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The maps p_j;a and X(f) agree after p_i by the naturality of p, and agree after alpha_j by the cone identity and the descended-map identity. The target morphism p_i is separated because it is finite, X_j is reduced because it is integral, and alpha_j is dominant. Mathlib ext_of_isDominant_of_isSeparated gives p_j;a=X(f).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary cone c:T -> X define its lift to S by the supplied N.isLimit applied to c followed by p. The descended map gives lift;alpha_i=lift;N.pi_j;a=c_j;p_j;a=c_j;X(f)=c_i. Thus it is a cone lift over X. Any other lift over X is also a lift over N after composition with p. N.isLimit.hom_ext proves its uniqueness. These are the three fields of the IsLimit structure.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-pointed-section-stage-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal replacement diagram limit claim; Tag 01ZM for finite-presentation morphism descent",
+  "note": "D3 proves the source limit claim by finite-presentation descent and dominant-map extensionality instead of the omitted affine-chart calculation. This is a change below the unit level, preserving the same finite normal replacement limit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine dominant integral refinement of a cofiltered inverse system of schemes has the same limit",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite refinement with integral stages and dominant projections preserves the limit of a Noetherian approximation",
+   "results": "Affine transition limit descent lemmas and Noetherianity lemmas; no exact refinement-limit theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*[Aa]pprox|[Aa]pprox.*normal|dominant.*refinement|refinement.*dominant",
+   "results": "No hits in Mathlib. Read normalization and affine transition limit APIs; searched both library roots, DAG, and blueprint refs. No duplicate statement.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalNoetherianRefinement",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal replacement diagram limit claim; Tag 01ZM for finite-presentation morphism descent",
+   "via": [
+    "lem-sbc-normal-noetherian-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DominantFiniteRefinementLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DominantFiniteRefinementLimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isLimit_of_dominant_finite_refinement",
+  "statement": "theorem isLimit_of_dominant_finite_refinement {S : Scheme.{u}}\n    (N : S.NoetherianApproximation)\n    (X : N.I ⥤ Scheme.{u}) (α : (Functor.const N.I).obj S ⟶ X) (p : X ⟶ N.D)\n    (hfac : α ≫ p = N.π)\n    (hp : ∀ i, IsFinite (p.app i))\n    (hX : ∀ i, IsIntegral (X.obj i))\n    (hα : ∀ i, IsDominant (α.app i)) :\n    Nonempty (IsLimit (Cone.mk S α))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T173816-L-3292628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T173816-L-3292628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

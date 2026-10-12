@@ -14,31 +14,34 @@
  ],
  "proof": [
   {
-   "text": "For each stage of the supplied approximation N, form the integral scheme-theoretic image of S and normalize it in its own function field. Its affine chart rings are finite type integer domains. Their integral closures are finite by [lem-weil-pbc-finite-type-z-domain-normalization-finite], so the normalizations are Noetherian integral schemes with integrally closed stalks. Normality of S supplies dominant factorization maps to these stages.",
+   "text": "Apply exists_normal_finite_stage_diagram to obtain X, alpha and finite p on the original index category, with alpha followed by p equal to N.pi, integral normal stages, and dominant projections. No limit assertion is used in this step.",
    "uses": [
-    "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+    "lem-sbc-normal-finite-stage-diagram"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The universal property of normalization gives unique transition maps compatible with N and the projections from S, hence their functor and cone identities. A transition followed by the finite normalization map is affine; the finite map is separated, and affineness of the composite implies affineness of the transition. The stages are Noetherian and therefore quasi-separated.",
-   "uses": [],
    "elementary": true
   },
   {
-   "text": "On the inverse images of affine charts at an original stage, the image rings and their normalizations embed in the corresponding normal ring of S. The new rings contain the original image rings whose filtered colimit is that ring of S; thus they have the same colimit. The affine spectrum limit calculation identifies the limit on these charts with S. The identifications agree on overlaps, so they glue to the asserted limit cone.",
+   "text": "For f:i -> j, naturality of p identifies X(f) followed by p_j with p_i followed by N.D(f). The latter is affine by composition of affine morphisms. Since p_j is finite and hence separated, IsAffineHom.of_comp proves X(f) affine. Apply isLimit_of_dominant_finite_refinement to this diagram to obtain its limiting cone.",
+   "uses": [
+    "lem-sbc-dominant-finite-refinement-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each finite p_i is quasi-compact and locally of finite type. QuasiCompact.compactSpace_of_compactSpace and LocallyOfFiniteType.isLocallyNoetherian, applied to the Noetherian N.D(i), make X_i Noetherian. IsLocallyNoetherian.quasiSeparatedSpace makes it quasi-separated. Package the same small cofiltered category N.I and all the proved properties in the original existential statement.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+  "lem-sbc-normal-finite-stage-diagram",
+  "lem-sbc-dominant-finite-refinement-limit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
   "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal approximation paragraphs, using Tag 01ZA and finiteness of normalization over the integers",
-  "note": "Source argument transcribed by S1; omitted chart and gluing details expanded in the docstring."
+  "note": "D3 made the planned geometric construction a separate named obligation. The remaining limit claim is proved by finite-presentation descent and dominant-map extensionality in DominantFiniteRefinementLimit. Affineness of transitions, Noetherianity and quasi-separatedness are proved with Mathlib; the normal-replacement unit route is retained."
  },
  "mathlib_searches": [
   {
@@ -118,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T154246-L-2435413",
+  "landing": "20261012T173816-L-3292628",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
