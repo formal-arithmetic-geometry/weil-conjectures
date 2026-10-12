@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-dvr-idempotent-extension",
+ "kind": "statement",
+ "title": "Idempotents extend across a flat uniformizer localization",
+ "statement": "Let $R$ be a commutative domain, $\\pi\\in R$ an irreducible element, and $B$ a commutative $R$-algebra which is flat as an $R$-module [def-weil-flat-ring-map]. Assume $B/\\pi B$ is reduced. For every idempotent $e\\in B[1/\\pi]$, there exists $b\\in B$ whose image under the localization map is $e$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055J, proof, affine fibre and denominator calculation"
+ },
+ "stmt_deps": [
+  "def-weil-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Flatness over the domain makes multiplication by pi, and hence every power of pi, injective. Therefore B maps injectively into B[1/pi]. Write e=b/pi^n and induct on n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "When n=0 the numerator is the desired lift. For n+1, idempotence and injectivity imply b squared equals pi^(n+1) times b. Modulo pi this numerator has square zero, hence vanishes by reducedness. Write b=pi c, cancel the unit pi after localization, and apply the induction hypothesis to c.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 055J",
+  "note": "R3 spells out the affine ring identifications or the denominator argument of the source proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Idempotents of a uniformizer localization of a flat algebra with reduced uniformizer quotient extend",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Idempotents of a uniformizer localization of a flat algebra with reduced uniformizer quotient extend",
+   "results": "LeanFinder returns IsLocalization.Away.quotient_of_isIdempotentElem and nilpotent-kernel lifting, which are different statements. Read the exact already proved source declaration and its denominator induction.",
+   "date": "2026-10-13",
+   "verdict": "no exact Mathlib statement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_eq_algebraMap_of_isIdempotentElem|generic.*connected|isLocalization.*fiber|fiber.*Away",
+   "results": "Read Mathlib Fiber.lean, Pullbacks.lean, Localization/BaseChange.lean and TensorProduct/Quotient.lean. They give the general affine pullback, localization base change and quotient base change tools. The algebraic idempotent extension itself is already proved in WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic. No exact affine fibre comparison with the displayed restriction equation was found.",
+   "date": "2026-10-13",
+   "verdict": "general Mathlib tools; exact ring extension in source library"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConnectedGenericFibreTrait",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055J in the trait argument for the generalization of the relative connected component of a smooth section",
+   "via": [
+    "lem-sbc-connected-generic-fibre-trait",
+    "lem-sbc-smooth-section-component-noetherian-generalization-core",
+    "lem-sbc-smooth-section-component-noetherian-generalization",
+    "lem-sbc-smooth-section-component-generalization",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic",
+  "declaration": "IsDiscreteValuationRing.exists_eq_algebraMap_of_isIdempotentElem",
+  "statement": "theorem exists_eq_algebraMap_of_isIdempotentElem {B : Type*} [CommRing B] [Algebra R B]\n    [Module.Flat R B] {ϖ : R} (hϖ : Irreducible ϖ)\n    (hred : IsReduced (B ⧸ Ideal.span {algebraMap R B ϖ}))\n    {e : Localization.Away (algebraMap R B ϖ)} (he : IsIdempotentElem e) :\n    ∃ b : B, algebraMap B _ b = e",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T173901-L-3305316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T173901-L-3305316",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
