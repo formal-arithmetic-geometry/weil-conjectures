@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-finite-free-constant-local-lift",
+ "kind": "statement",
+ "title": "Local lifting of maps from finite free constant sheaves",
+ "statement": "Let $X$ be a scheme with its small etale site [def-weil-pbc-etale-site], $\\Lambda$ a ring, and $F,G$ sheaves of left $\\Lambda$-modules on that site. Let $f:F\\to G$ be an epimorphism (right cancellable), $n\\in\\mathbb N$, $P=\\Lambda^n$, and $a:\\underline P_X\\to G$, where the underline denotes the constant sheaf [def-weil-pbc-constant-sheaf]. There is a jointly surjective etale cover $(u_i:U_i\\to X)_i$, with its index type in the universe of $X$, and maps $r_i:\\underline P_{U_i}\\to u_i^*F$ satisfying $u_i^*(f)\\circ r_i=u_i^*(a)\\circ c_{i,P}^{-1}$, where $c_{i,P}:u_i^*\\underline P_X\\simeq\\underline P_{U_i}$ is the natural constant-sheaf pullback comparison. Neither finiteness of the coefficient ring nor constancy of $G$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant, extension paragraph: simultaneous local lifting of the finitely many free generators; read at https://stacks.math.columbia.edu/tag/093U"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the constant-sheaf/global-sections adjunction CategoryTheory.constantSheafAdj on the terminal object of the etale site. The map a gives a linear map P -> G(X). Its values on the standard basis are n sections. The adjunction holds for ModuleCat over any Ring; only linearity of these maps is used.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib Sheaf.isLocallySurjective_iff_epi' in Mathlib.CategoryTheory.Sites.EpiMono applies to ModuleCat with its forgetful functor, and makes each Presheaf.imageSieve f.hom of a basis-image section covering. Intersect the n image sieves, using GrothendieckTopology.iInf_mem from WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections. Every arrow in the intersection has a lift for every basis section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The characterization Scheme.mem_smallEtaleTopology_iff says that over every point x of X there is an arrow in this covering sieve whose image contains x. Choose one such arrow for each x, and use Cover.mkOfCovers to obtain an etale cover indexed by X, hence in the required small universe. The construction gives the empty cover on an empty scheme.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On each chosen cover member, choose lifts of the basis images and extend linearly using Pi.basisFun and Basis.constr. By the constant-sheaf adjunction this linear map of sections determines a morphism from the constant free sheaf. For an etale map, Etale.upperStarIsoLocalizationRestriction identifies pullback with restriction of sections. Naturality of this comparison and of the constant-sheaf adjunction shows that after composition with the restricted f the adjunct is the restriction of a. Equality of linear maps is checked on the standard basis, and injectivity of the adjunction homEquiv gives the claimed sheaf equality with upperStarConstantSheafIso. For rank zero the unique linear map and the identity cover suffice. No map is required to split on all sections.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, lemma-kernel-finite-locally-constant, extension paragraph: simultaneous local lifting of the finitely many free generators; read at https://stacks.math.columbia.edu/tag/093U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "maps from a finite free constant sheaf locally lift along sheaf epimorphisms",
+   "results": "Service unavailable: Internal Server Error; no results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a map from a constant finite free module sheaf locally lifts along an epimorphism of etale module sheaves",
+   "results": "Eight hits, including SheafOfModules.GeneratingSections.epi, GeneratingSections.ofEpi, generatorsOfIsCokernelFree, and Presentation.mapGenerators. These use ring-sheaf modules, not fixed-coefficient Sheaf J (ModuleCat Lambda).",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.exists_free_surjective",
+   "results": "One hit, Mathlib.RingTheory.Finiteness.ModuleFinitePresentation, for algebras over a commutative ring; does not lift maps of fixed-coefficient sheaves.",
+   "date": "2026-10-12",
+   "verdict": "different statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(presentation|lift)|exists.*[Pp]resentation|finite.*free.*surj; finiteFree.*local.*lift; exists.*lift in Sites/LocallySurjective and ModuleCat/Sheaf",
+   "results": "No exact local lifting theorem. EtaleShortExactLocalLift has different coefficients. ConstructibleSheaf.FreeLifting.exists_lift_freeYoneda assumes CommRing and a quasi-compact object. KernelCokernel contains related stalk and cover constructions but reaches the current item and cannot be imported without a cycle. Mathlib has the local-surjectivity and free-module APIs needed by the plan.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantExtensionPresentationLift",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-constructible-flc-serre",
+   "place": "extension paragraph: simultaneous local lifts of the free generators",
+   "via": [
+    "lem-pc-constant-extension-presentation-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeConstantLocalLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeConstantLocalLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteFreeConstant_local_lift",
+  "statement": "theorem exists_finiteFreeConstant_local_lift {X : Scheme.{u}}\n    {Λ : Type (u + 1)} [Ring Λ]\n    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}\n    (f : F ⟶ G) [Epi f] (n : ℕ)\n    (a : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n      (ModuleCat.of Λ (Fin n → Λ)) ⟶ G) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i,\n      ∃ r : (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n          (ModuleCat.of Λ (Fin n → Λ)) ⟶\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj F,\n        r ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).map f =\n          ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) (𝒰.f i)).app\n            (ModuleCat.of Λ (Fin n → Λ))).inv ≫\n            (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).map a",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T160137-L-2564742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T160137-L-2564742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
