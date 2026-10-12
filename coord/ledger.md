@@ -8320,3 +8320,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/P3/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeSourceStalkIso (stage 3; reviewer PASS; first push; landing 20261012T151911-L-2289768 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient (stage 3; reviewer PASS; first push; landing 20261012T151912-L-2289877 (interface); batch 20261012T151904; modules 2; new nodes 1)
 - 15:19 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems (stage 3; reviewer PASS; first push; landing 20261012T151912-L-2290053 (interface); batch 20261012T151904; modules 2; new nodes 1)
+- 15:19 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.EtaleRingDirectImageOperations (stage 3; reviewer PASS; first push; landing 20261012T151912-L-2290176 (proof); batch 20261012T151904; modules 1; new nodes 0)
