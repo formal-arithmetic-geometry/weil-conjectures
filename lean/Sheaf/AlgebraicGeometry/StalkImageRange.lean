@@ -1,9 +1,9 @@
 module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-public import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Mathlib.CategoryTheory.Abelian.Images
+import Mathlib.CategoryTheory.Abelian.Images
 
 @[expose] public section
 
@@ -23,7 +23,19 @@ theorem stalk_image_inclusion_range {X : Scheme.{u}}
     {M N : X.Modules} (f : M ⟶ N) (x : X) :
     let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
     LinearMap.range (S.map (image.ι f)).hom = LinearMap.range (S.map f).hom := by
-  sorry
+  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  have hr := ((RingedSpace.module_stalk_exact X.toRingedSpace f).2.2.2.1 x).2.2
+  have he : S.map (Abelian.imageIsoImage f).hom ≫ S.map (image.ι f) =
+      S.map (Abelian.image.ι f) := by
+    rw [← S.map_comp, Abelian.imageIsoImage_hom_comp_image_ι]
+  have hs : Function.Surjective (S.map (Abelian.imageIsoImage f).hom).hom :=
+    (ModuleCat.epi_iff_surjective _).mp inferInstance
+  calc
+    LinearMap.range (S.map (image.ι f)).hom =
+        LinearMap.range (S.map (Abelian.image.ι f)).hom := by
+      rw [← he, ModuleCat.hom_comp,
+        LinearMap.range_comp_of_range_eq_top _ (LinearMap.range_eq_top.mpr hs)]
+    _ = LinearMap.range (S.map f).hom := hr
 
 end
 end AlgebraicGeometry.Scheme

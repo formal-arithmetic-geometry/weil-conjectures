@@ -51,11 +51,21 @@
  ],
  "proof": [
   {
-   "text": "Use exactness of stalks to identify the stalk of the abelian image inclusion with the range of the stalk map.",
+   "text": "Apply the image clause of module_stalk_exact to f at x. It gives equality of the linear range of the stalk of Abelian.image.ι f and the range of the stalk of f.",
    "uses": [
     "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Mathlib Abelian.imageIsoImage identifies the abelian image with the categorical image. Map its hom through the stalk functor. Functoriality and imageIsoImage_hom_comp_image_ι identify its composite with the mapped categorical image inclusion as the mapped abelian image inclusion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The mapped isomorphism hom is an epimorphism in ModuleCat, hence its linear map is surjective. LinearMap.range_comp_of_range_eq_top shows that precomposition with this map leaves the range unchanged. Substitute this into the equality from step 1.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -102,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-289aa",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T161500-L-2647518",
+  "landing": "20261012T184352-L-4022838",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched against packet, base repository, Lean compilation, axiom probe, and the sole direct importer; all checks passed."
  }
 }
