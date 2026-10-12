@@ -10,17 +10,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Tensor associativity and localization base change identify B tensor_R C' as the localization of B tensor_R C at the scalar x.",
+   "text": "Put A = B tensor_R C and T = C' tensor_C A, using the right C-algebra structure on A. Tensor congruence with commRight, cancelBaseChange, and commRight identify T with B tensor_R C' as C'-algebras. Ideal.map_radical_of_surjective transports the nilradical across this algebra equivalence; quotientEquivAlg induces the equivalence of reductions.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "The nilradical of a localization is the extension of the nilradical (IsLocalization.map_radical applied to zero). Alternatively, a nilpotent fraction has a numerator whose power is killed by a denominator power; multiplying numerator and denominator by that power gives a nilpotent numerator. Hence localization commutes with reduction.",
+   "text": "Give T its right A-algebra structure. IsLocalization.tensorRight from Localization.BaseChange makes T the localization of A at the image of the powers of x. IsLocalization.map_radical applied to the zero ideal shows nilradical T is the extension of nilradical A. quotientEquivAlgOfEq and tensorQuotientEquiv therefore identify the reduction of T with C' tensor_C (A modulo nilradical A), as C'-algebras.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "Localize the specified reduced product equivalence. Localization of a finite product is the product of the factor localizations, using a common denominator power for its finitely many entries (Mathlib Localization/Pi). Each factor localization is C' tensor_C D_j. Compose the canonical isomorphisms, all commuting with C' scalars. Empty products give the zero ring on both sides.",
+   "text": "Tensor the supplied C-algebra splitting equivalence with the identity on C', using Algebra.TensorProduct.congr. Compose with Algebra.TensorProduct.piRight C C' C' D. This finite-product equivalence applies to every Fin r, including Fin 0, without an extra positivity assumption. Compose these four equivalences to obtain the claimed Nonempty C'-algebra equivalence.",
    "uses": [],
    "elementary": false
   }
@@ -30,7 +30,7 @@
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
   "place": "taking a common principal localization for the finitely many purely inseparable factors",
-  "note": "Second reader A3: explicit localization proof; Mathlib infrastructure identified in the searches."
+  "note": "Second reader C3: fully formalized the original localization, nilradical, and finite-product route using Mathlib; no case-split nodes or remaining sorry."
  },
  "mathlib_searches": [
   {
@@ -109,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "X-e8627",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T160824-L-2609665",
+  "landing": "20261012T173814-L-3292215",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and completed proof to the node; delivery and sole direct importer RefineFiniteDomainSplitting compile without warnings; axioms are only propext, Classical.choice, and Quot.sound."
  }
 }

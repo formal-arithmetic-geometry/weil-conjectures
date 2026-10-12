@@ -5,10 +5,14 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.RingTheory.Localization.Ideal
+import Mathlib.RingTheory.TensorProduct.Quotient
+import Mathlib.RingTheory.TensorProduct.Pi
 
 /-!
 # Localization of a reduced tensor-product decomposition
@@ -53,4 +57,34 @@ theorem reduced_product_localization
     letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := B) (B := C')
     Nonempty (((B ⊗[R] C') ⧸ nilradical (B ⊗[R] C')) ≃ₐ[C']
       (∀ j, C' ⊗[C] D j)) := by
-  sorry
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := B) (B := C)
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := B) (B := C')
+  obtain ⟨e⟩ := hsplit
+  let A := B ⊗[R] C
+  let T := C' ⊗[C] A
+  let ebase : T ≃ₐ[C'] B ⊗[R] C' :=
+    (Algebra.TensorProduct.congr (AlgEquiv.refl : C' ≃ₐ[C'] C')
+      (Algebra.TensorProduct.commRight R C B).symm).trans
+      ((Algebra.TensorProduct.cancelBaseChange R C C' C' B).trans
+        (Algebra.TensorProduct.commRight R C' B))
+  have hnilBase : nilradical (B ⊗[R] C') =
+      (nilradical T).map ebase.toRingEquiv.toRingHom := by
+    simpa only [nilradical, Ideal.zero_eq_bot, Ideal.map_bot] using
+      (Ideal.map_radical_of_surjective ebase.surjective
+        (by simp)
+        (I := (⊥ : Ideal T))).symm
+  let ered := Ideal.quotientEquivAlg (nilradical T)
+    (nilradical (B ⊗[R] C')) ebase hnilBase
+  let := Algebra.TensorProduct.rightAlgebra (R := C) (A := C') (B := A)
+  have hnil : nilradical T = (nilradical A).map
+      (Algebra.TensorProduct.includeRight (R := C) (A := C')).toRingHom := by
+    change nilradical T = (nilradical A).map (algebraMap A T)
+    simpa only [nilradical, Ideal.zero_eq_bot, Ideal.map_bot] using
+      (IsLocalization.map_radical
+        (Algebra.algebraMapSubmonoid A (Submonoid.powers x)) T (⊥ : Ideal A)).symm
+  let equot : (T ⧸ nilradical T) ≃ₐ[C'] C' ⊗[C] (A ⧸ nilradical A) :=
+    (Ideal.quotientEquivAlgOfEq C' hnil).trans
+      (Algebra.TensorProduct.tensorQuotientEquiv C' A C' (nilradical A)).symm
+  exact ⟨ered.symm.trans (equot.trans
+    ((Algebra.TensorProduct.congr (AlgEquiv.refl : C' ≃ₐ[C'] C') e).trans
+      (Algebra.TensorProduct.piRight C C' C' D)))⟩
