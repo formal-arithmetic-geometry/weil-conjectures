@@ -23,101 +23,30 @@
  ],
  "proof": [
   {
-   "text": "Step 1 ($\\{g\\}$ is an fpqc covering). Since $g$ is etale, $(Y',g)$ is an object of the small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site]; since $g$ is surjective [def-weil-surjective-morphism], the one-member family $\\{g:Y'\\to Y\\}$ is jointly surjective, hence a covering family of $Y$ in $Y_{\\Et}$. By [lem-weil-pbc-fpqc-finer-than-etale] it is an fpqc covering of $Y$ [def-weil-pbc-fpqc-covering].",
+   "text": "Construct F and q with their pullback, transport and morphism equations by finiteEtaleDescent_data.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-surjective-morphism",
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "def-weil-pbc-fpqc-covering"
+    "lem-galois-descent-data-existence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Lemma Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc, line 3044): an etale covering is an fpqc covering"
-   }
+   "elementary": true
   },
   {
-   "text": "Step 2 (the functor). For $P\\in\\mathsf{FEt}(Y)$, $P'=P\\times_YY'$ is a finite etale $Y'$-scheme and $\\alpha\\mapsto\\alpha\\times_YY'$ is the base change functor $g^*:\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y')$ [def-weil-pbc-finite-etale-category]. By the universal property of fibre products [def-pc-fibre-product], $p_k^*P'=(P\\times_YY')\\times_{Y',p_k}Y''$ is canonically isomorphic to $P\\times_YY''$ over $Y''$ for $k=1,2$, because $g\\circ p_1=g\\circ p_2$; so $\\mathrm{can}_P$ is an isomorphism over $Y''$. Pulled back along $p_{12},p_{13},p_{23}$, each of the three isomorphisms becomes the composite of the canonical identifications with $P\\times_YY'''$, so $p_{13}^*\\mathrm{can}_P=p_{23}^*\\mathrm{can}_P\\circ p_{12}^*\\mathrm{can}_P$: $(P',\\mathrm{can}_P)$ is a descent datum [def-pd-descent-datum]. For a $Y$-morphism $\\alpha:P\\to Q$, both $\\mathrm{can}_Q\\circ p_1^*(\\alpha\\times_YY')$ and $p_2^*(\\alpha\\times_YY')\\circ\\mathrm{can}_P$ correspond under these identifications to $\\alpha\\times_YY''$, so $\\alpha\\times_YY'$ is a morphism of $\\mathsf{DD}$; functoriality is that of $g^*$.",
+   "text": "Use finiteEtaleDescent_fullyFaithful to obtain Full and Faithful, and finiteEtaleDescent_essSurj to obtain EssSurj. These give the IsEquivalence structure. Return this F and q with the original equations.",
    "uses": [
-    "def-weil-pbc-finite-etale-category",
-    "def-pc-fibre-product",
-    "def-pd-descent-datum"
+    "lem-galois-descent-fully-faithful",
+    "lem-galois-descent-essentially-surjective"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Definition Tag 023V (definition-descent-datum, line 8101) and Remark 'remark-easier' (pr_0^*V -> pr_1^*V, cocycle pr_02^* = pr_12^* o pr_01^*); the canonical datum on a base change"
-   }
-  },
-  {
-   "text": "Step 3 (fully faithful). Morphisms in $\\mathsf{FEt}(Y)$ are all $Y$-morphisms, and morphisms in $\\mathsf{DD}$ are all $Y'$-morphisms compatible with the data. Apply [lem-galois-fpqc-morphisms-descend] to the fpqc covering $\\{g:Y'\\to Y\\}$ of Step 1 (with $S=Y$, $X=Y'$, $X_2=Y''$, $\\mathrm{pr}_0=p_1$, $\\mathrm{pr}_1=p_2$) and to $U=P$, $W=Q$ for $P,Q\\in\\mathsf{FEt}(Y)$: the map $\\alpha\\mapsto\\alpha\\times_YY'$ is a bijection from $\\operatorname{Hom}_Y(P,Q)$ onto the $Y'$-morphisms $\\beta:P\\times_YY'\\to Q\\times_YY'$ with $\\mathrm{can}_Q\\circ p_1^*\\beta=p_2^*\\beta\\circ\\mathrm{can}_P$, which is $\\operatorname{Hom}_{\\mathsf{DD}}((P\\times_YY',\\mathrm{can}_P),(Q\\times_YY',\\mathrm{can}_Q))$. So the functor of Step 2 is fully faithful.",
-   "uses": [
-    "lem-galois-fpqc-morphisms-descend"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02W0 (lemma-refine-coverings-fully-faithful, line 8858), last sentence"
-   }
-  },
-  {
-   "text": "Step 4 (effectivity). Let $(P',\\varphi)\\in\\mathsf{DD}$. The morphism $P'\\to Y'$ is finite, hence affine [pqf-def-affine-morphism], since a finite morphism is by definition affine with finite ring maps over affine opens [def-weil-finite-integral-morphism]. By [lem-galois-fpqc-affine-descent-effective], applied to the fpqc covering $\\{g:Y'\\to Y\\}$ of Step 1 and to $V=P'$ with the descent datum $\\varphi$, there are a scheme $P$ with a morphism $P\\to Y$ and an isomorphism $\\psi:P\\times_YY'\\to P'$ of $Y'$-schemes with $\\varphi\\circ p_1^*\\psi=p_2^*\\psi\\circ\\mathrm{can}_P$.",
-   "uses": [
-    "pqf-def-affine-morphism",
-    "def-weil-finite-integral-morphism",
-    "lem-galois-fpqc-affine-descent-effective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 0245 (lemma-affine, line 9148)"
-   }
-  },
-  {
-   "text": "Step 5 ($P$ is finite etale over $Y$). The base change $P\\times_YY'\\to Y'$ of $P\\to Y$ along $g$ is the composite of the isomorphism $\\psi$ with the finite etale $P'\\to Y'$. It is finite: the preimage of an affine open $W\\subseteq Y'$ is $\\psi^{-1}$ of its (affine) preimage in $P'$, with the same ring map up to the isomorphism $\\psi^\\sharp$ [def-weil-finite-integral-morphism]; and it is etale, since flatness, unramifiedness and local finite presentation are read on local rings and affine charts, which $\\psi$ identifies [def-weil-etale-morphism]. By [lem-weil-pbc-fpqc-descend-finite] for the fpqc covering $\\{g\\}$ (one index), $P\\to Y$ is finite; by [lem-galois-fpqc-descend-etale] for the same covering, $P\\to Y$ is etale. So $P\\in\\mathsf{FEt}(Y)$ [def-weil-pbc-finite-etale-category], and by Step 4 $\\psi$ is an isomorphism $(P\\times_YY',\\mathrm{can}_P)\\cong(P',\\varphi)$ in $\\mathsf{DD}$ (its inverse is compatible because $\\psi$ is). Hence the functor of Step 2 is essentially surjective.",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-fpqc-descend-finite",
-    "lem-galois-fpqc-descend-etale",
-    "def-weil-pbc-finite-etale-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02LA (lemma-descending-property-finite, line 6102) and Lemma Tag 02VN (lemma-descending-property-etale, line 6209), direction '<=' of Definition Tag 02KO (line 5310)"
-   }
-  },
-  {
-   "text": "Step 6 (equivalence). A functor that is fully faithful (Step 3) and essentially surjective (Step 5) is an equivalence of categories: choosing for each object $(P',\\varphi)$ of $\\mathsf{DD}$ a $P$ and an isomorphism $\\psi$ as in Steps 4-5 defines on objects a quasi-inverse, which full faithfulness makes a functor with the $\\psi$ as natural isomorphisms.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
-    "place": "## Proof, Step 4 ('the construction is inverse to base change by Steps 1-3')"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "def-weil-surjective-morphism",
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "def-weil-pbc-fpqc-covering",
-  "def-weil-pbc-finite-etale-category",
-  "def-pc-fibre-product",
-  "def-pd-descent-datum",
-  "lem-galois-fpqc-morphisms-descend",
-  "pqf-def-affine-morphism",
-  "def-weil-finite-integral-morphism",
-  "lem-galois-fpqc-affine-descent-effective",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-fpqc-descend-finite",
-  "lem-galois-fpqc-descend-etale"
+  "lem-galois-descent-data-existence",
+  "lem-galois-descent-fully-faithful",
+  "lem-galois-descent-essentially-surjective"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Descent: Lemma Tag 02W0 (line 8858, full faithfulness), Lemma Tag 0245 (line 9148, effectivity for affine morphisms), Lemmas Tag 02LA (line 6102) and 02VN (line 6209, finite and etale descend), with Topologies Lemma Tag 022C (topologies.tex line 3044, etale coverings are fpqc coverings); the route named in the lead_note of 2026-10-10"
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Steps 2--6 assembled in Lean; full faithfulness via effective epimorphisms, effectivity via Stacks 0245, finite and etale via 02LA and 02VN"
  },
  "mathlib_searches": [
   {
@@ -204,5 +133,15 @@
   "group": "F1",
   "result": "pass",
   "note": "g surjective etale (Surjective, Etale; no qc needed: singleton is fppf hence fpqc), FEt(Y)=source Y.FiniteEtale, DD = finite-etale full subcategory of Over.DescentDataCategory g (transport form of recorded Over.DescentDatum, Hom.commutes = 023V(3)), q+IsPullback gives P x_Y Y', transport equation pins can_P, map equation pins alpha x_Y Y', Nonempty IsEquivalence; universes v shared; new node fields per rule; no Mathlib/source equivalent"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

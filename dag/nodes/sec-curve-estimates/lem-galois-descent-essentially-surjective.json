@@ -1,0 +1,139 @@
+{
+ "id": "lem-galois-descent-essentially-surjective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Steps 4 and 5 (effective affine descent and descent of finite etale properties)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Essential surjectivity of canonical finite etale descent",
+ "statement": "Let g:Y' -> Y be a surjective [def-weil-surjective-morphism] etale [def-weil-etale-morphism] map of schemes. Let F and q satisfy [lem-galois-descent-data-existence]. Then every finite etale descent datum A [def-galois-finite-etale-descent-data] is isomorphic to F(P) for some finite etale Y-scheme P [def-weil-pbc-finite-etale-category].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Proof; corrected Stacks route recorded in node lem-galois-descent"
+ },
+ "stmt_deps": [
+  "lem-galois-descent-data-existence",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-galois-finite-etale-descent-data",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib singleton_mem_fppfPrecoverage and fppfPrecoverage_le_fpqcPrecoverage make g an fpqc covering. A finite morphism is affine. Apply effective affine descent to A.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-surjective-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-finite-integral-morphism",
+    "lem-galois-fpqc-affine-descent-effective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard pullback of the descended object is isomorphic to A, hence finite etale. Apply isFinite_of_fpqc_cover and etale_of_fpqc_cover to the PUnit singleton family.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The descended finite etale scheme P and the projection equations yield two pullback squares. Their unique comparison isomorphism and its inverse preserve transport: compare both projections and use invariance and pullback uniqueness. Lift this isomorphism to the finite etale descent-data full subcategory.",
+   "uses": [
+    "lem-galois-descent-data-existence",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product",
+    "def-galois-finite-etale-descent-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-finite-integral-morphism",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-galois-fpqc-descend-etale",
+  "lem-galois-descent-data-existence",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "def-galois-finite-etale-descent-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Steps 4 and 5 (effective affine descent and descent of finite etale properties); explicit Lean proof using Mathlib pullback/effective-epimorphism APIs and the recorded Stacks lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale schemes effective descent essential surjectivity etale surjection",
+   "results": "UNAVAILABLE: HTTP Internal Server Error, recorded by launcher msearch.py",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale scheme descent essential surjectivity affine fpqc effective descent",
+   "results": "Property descent instances and etale composition lemmas, but no effectivity theorem for the concrete descent-data category.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg canonical.*descent|fully.*faithful.*descent|effective.*epimorph in Mathlib/AlgebraicGeometry and CategoryTheory/Sites/Descent; rg finiteEtaleDescent|DescentDatum in library; search DAG for canonical datum, full faithfulness and essential surjectivity",
+   "results": "No equivalent finite-etale transport-form declaration. Mathlib.AlgebraicGeometry.Sites.Fpqc contains effective-epimorphism instances; source DescentDatum provides transport definitions. General fpqc singleton pullback full faithfulness is a different functor and requires restriction/comparison glue.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleDescent",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleDescentEssentiallySurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleDescentEssentiallySurjective.lean",
+  "declaration": "AlgebraicGeometry.finiteEtaleDescent_essSurj",
+  "statement": "theorem finiteEtaleDescent_essSurj {Y Y' : Scheme.{v}} (g : Y' ⟶ Y) [Surjective g] [Etale g] (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g) (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left) (h : finiteEtaleDescentCompatible F q) : F.EssSurj",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

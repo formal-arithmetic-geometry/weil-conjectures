@@ -1,0 +1,130 @@
+{
+ "id": "lem-galois-descent-data-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Step 2 (canonical functor and its projection equations)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical finite etale base-change functor",
+ "statement": "For any morphism g:Y' -> Y of schemes [def-pc-scheme], there exist a functor F from finite etale Y-schemes [def-weil-pbc-finite-etale-category] to finite etale descent data relative to g [def-galois-finite-etale-descent-data], and first projections q_P, such that each image is the pullback of P along g [def-pc-fibre-product], transport [def-pd-descent-datum] preserves q_P, and F maps morphisms to their base changes. No covering hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Proof; corrected Stacks route recorded in node lem-galois-descent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-galois-finite-etale-descent-data",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "For each finite etale P, take its pullback and second projection, finite etale by stability under base change.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define transport by keeping the first projection and replacing the second by the new point of the base. Pullback uniqueness proves naturality, identity, and cocycle.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull back morphisms; pullback uniqueness proves compatibility and the functor laws. First projections give all the equations.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-galois-finite-etale-descent-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-galois-finite-etale-descent-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Step 2 (canonical functor and its projection equations); explicit Lean proof using Mathlib pullback/effective-epimorphism APIs and the recorded Stacks lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical descent datum on a pullback scheme transport naturality cocycle",
+   "results": "UNAVAILABLE: HTTP Internal Server Error, recorded by launcher msearch.py",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical descent datum transport on pullback with cocycle for finite etale schemes",
+   "results": "Abstract Pseudofunctor.DescentData.pullFunctor declarations; none state this transport-form finite etale construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg canonical.*descent|fully.*faithful.*descent|effective.*epimorph in Mathlib/AlgebraicGeometry and CategoryTheory/Sites/Descent; rg finiteEtaleDescent|DescentDatum in library; search DAG for canonical datum, full faithfulness and essential surjectivity",
+   "results": "No equivalent finite-etale transport-form declaration. Mathlib.AlgebraicGeometry.Sites.Fpqc contains effective-epimorphism instances; source DescentDatum provides transport definitions. General fpqc singleton pullback full faithfulness is a different functor and requires restriction/comparison glue.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleDescent",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleDescentDataExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleDescentDataExistence.lean",
+  "declaration": "AlgebraicGeometry.finiteEtaleDescent_data",
+  "statement": "theorem finiteEtaleDescent_data {Y Y' : Scheme.{v}} (g : Y' ⟶ Y) : ∃ (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g) (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left), finiteEtaleDescentCompatible F q",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.finiteEtaleDescentCompatible"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

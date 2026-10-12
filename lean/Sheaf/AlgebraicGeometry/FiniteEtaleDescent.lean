@@ -6,12 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentData
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-import Sheaf.AlgebraicGeometry.AffineFpqcDescent
-import Sheaf.AlgebraicGeometry.FpqcDescentEtale
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
-import Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover
-import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.FiniteEtaleDescentFullyFaithful
+import Sheaf.AlgebraicGeometry.FiniteEtaleDescentEssentiallySurjective
 
 /-!
 # Effective etale descent for finite etale schemes
@@ -28,6 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- For a surjective etale map `g : Y' ⟶ Y`, the base-change functor from
 finite etale schemes over `Y` to finite etale schemes over `Y'` with descent
 data is an equivalence (blueprint: lem-galois-descent).
@@ -74,6 +71,11 @@ theorem finiteEtaleDescent {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
               z.left ≫ q P) ∧
       ∀ P Q : Y.FiniteEtale, ∀ f : P ⟶ Q,
         (F.map f).hom.hom.left ≫ q Q = q P ≫ f.hom.left := by
-  sorry
+  obtain ⟨F, q, h⟩ := finiteEtaleDescent_data g
+  obtain ⟨hff⟩ := finiteEtaleDescent_fullyFaithful g F q h
+  have : F.Faithful := hff.faithful
+  have : F.Full := hff.full
+  have : F.EssSurj := finiteEtaleDescent_essSurj g F q h
+  exact ⟨F, q, ⟨{}⟩, h⟩
 
 end AlgebraicGeometry

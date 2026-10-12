@@ -1,0 +1,130 @@
+{
+ "id": "lem-galois-descent-fully-faithful",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Step 3 (full faithfulness), specialized to an etale surjection via effective epimorphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Full faithfulness of canonical finite etale descent",
+ "statement": "Let g:Y' -> Y be a surjective [def-weil-surjective-morphism] etale [def-weil-etale-morphism] map of schemes. Let F and q satisfy the pullback, transport-invariance and morphism equations of [lem-galois-descent-data-existence]. Then F is fully faithful: for every finite etale P,Q the map Hom(P,Q) -> Hom(F(P),F(Q)) is bijective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Proof; corrected Stacks route recorded in node lem-galois-descent"
+ },
+ "stmt_deps": [
+  "lem-galois-descent-data-existence",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-galois-finite-etale-descent-data",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "For each P the first projection q_P is a base change of g, hence surjective, flat and locally of finite presentation. Mathlib.AlgebraicGeometry.Sites.Fpqc supplies EffectiveEpi q_P.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-surjective-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any compatible morphism beta, transport and pullback uniqueness show beta followed by q_Q has equal values on points with the same q_P image. EffectiveEpi.desc gives a unique descended scheme map. Epimorphism cancellation proves it is over Y.",
+   "uses": [
+    "lem-galois-descent-data-existence",
+    "def-galois-finite-etale-descent-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the morphism of finite etale schemes from that map. Pullback uniqueness identifies its image with beta (fullness). Cancel q_P in the morphism equation to prove faithfulness.",
+   "uses": [
+    "lem-galois-descent-data-existence",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "lem-galois-descent-data-existence",
+  "def-galois-finite-etale-descent-data",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+  "place": "Step 3 (full faithfulness), specialized to an etale surjection via effective epimorphisms; explicit Lean proof using Mathlib pullback/effective-epimorphism APIs and the recorded Stacks lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible morphisms descend uniquely along surjective etale morphisms",
+   "results": "UNAVAILABLE: HTTP Internal Server Error, recorded by launcher msearch.py",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale base change functor is fully faithful and essentially surjective descent datum",
+   "results": "Abstract Pseudofunctor fully-faithful descent functors require a prestack instance; Scheme.Etale.forgetFullyFaithful is a forgetful functor, not descent.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg canonical.*descent|fully.*faithful.*descent|effective.*epimorph in Mathlib/AlgebraicGeometry and CategoryTheory/Sites/Descent; rg finiteEtaleDescent|DescentDatum in library; search DAG for canonical datum, full faithfulness and essential surjectivity",
+   "results": "No equivalent finite-etale transport-form declaration. Mathlib.AlgebraicGeometry.Sites.Fpqc contains effective-epimorphism instances; source DescentDatum provides transport definitions. General fpqc singleton pullback full faithfulness is a different functor and requires restriction/comparison glue.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleDescent",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleDescentFullyFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleDescentFullyFaithful.lean",
+  "declaration": "AlgebraicGeometry.finiteEtaleDescent_fullyFaithful",
+  "statement": "theorem finiteEtaleDescent_fullyFaithful {Y Y' : Scheme.{v}} (g : Y' ⟶ Y) [Surjective g] [Etale g] (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g) (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left) (h : finiteEtaleDescentCompatible F q) : Nonempty F.FullyFaithful",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
