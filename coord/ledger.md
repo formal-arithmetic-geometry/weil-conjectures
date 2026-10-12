@@ -8480,3 +8480,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/D2/Sheaf.Topology.PointwiseTruncationLimitExists (stage 3; reviewer PASS; first push; landing 20261012T160825-L-2610069 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:08 L: merged deliver/E1/Sheaf.AlgebraicGeometry.DerivedGlobalGermUnitFac (stage 3; reviewer PASS; first push; landing 20261012T160825-L-2610193 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:08 L: merged deliver/E2/Sheaf.Algebra.Homology.TotalFreeFiltrationTerms (stage 3; reviewer PASS; first push; landing 20261012T160825-L-2610327 (proof); batch 20261012T160822; modules 1; new nodes 0)
+- 16:08 L: merged deliver/F2/Sheaf.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficients (stage 3; reviewer PASS; after a return; landing 20261012T160826-L-2610460 (proof); batch 20261012T160822; modules 1; new nodes 0)
