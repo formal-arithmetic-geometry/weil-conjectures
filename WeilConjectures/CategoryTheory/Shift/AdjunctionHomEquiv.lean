@@ -46,7 +46,7 @@ lemma shiftedHomEquiv_apply (a : A) (X : C) (Y : D) (x : X ⟶ (G.obj Y)⟦a⟧)
   have h := CommShift.compatibilityCounit_of_compatibilityUnit adj _ _
     (RightAdjointCommShift.compatibilityUnit_iso adj a) Y
   change (adj.homEquiv _ _).symm (x ≫ (RightAdjointCommShift.iso adj a).inv.app Y) = _
-  rw [homEquiv_counit, F.map_comp, assoc, h, ← F.map_comp_assoc, Iso.inv_hom_id_app, F.map_id,
-    id_comp]
+  rw [homEquiv_counit, h, ← F.map_comp_assoc, assoc, Iso.inv_hom_id_app]
+  exact congrArg (· ≫ _) (congrArg F.map (comp_id x))
 
 end CategoryTheory.Adjunction
