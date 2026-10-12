@@ -8,8 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.Dual.Defs
-import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
-import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+import Sheaf.AlgebraicGeometry.RationalPointTangentDerivationIdentification
+import Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
+import Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
 
 /-!
 # The Lie algebra and the cotangent dual at the identity
@@ -21,12 +22,56 @@ Source: blueprint `sk-i-cartier`, third paragraph, and the dimension paragraph o
 
 @[expose] public section
 
+noncomputable section
+
 universe u
 
 open CategoryTheory
 open scoped MonObj
 
 namespace AlgebraicGeometry.GrpObj
+
+private noncomputable def cotangentDualScalarEquiv
+    {k K : Type u} [Field k] [Field K] (r : k ≃+* K)
+    (M : Type u) [AddCommGroup M] [Module K M] :
+    letI : RingHomInvPair r.toRingHom r.symm.toRingHom :=
+      RingHomInvPair.of_ringEquiv r
+    letI : RingHomInvPair r.symm.toRingHom r.toRingHom :=
+      RingHomInvPair.of_ringEquiv r.symm
+    letI : Module k M := Module.compHom M r.toRingHom
+    (M →ₗ[k] k) ≃ₛₗ[r.toRingHom] (M →ₗ[K] K) := by
+  letI : RingHomInvPair r.toRingHom r.symm.toRingHom :=
+    RingHomInvPair.of_ringEquiv r
+  letI : RingHomInvPair r.symm.toRingHom r.toRingHom :=
+    RingHomInvPair.of_ringEquiv r.symm
+  letI : Module k M := Module.compHom M r.toRingHom
+  let f : (M →ₗ[k] k) →ₛₗ[r.toRingHom] (M →ₗ[K] K) :=
+    { toFun := fun φ ↦
+        { toFun := fun m ↦ r (φ m)
+          map_add' := by intros; simp
+          map_smul' := by
+            intro c m
+            have h := φ.map_smul (r.symm c) m
+            change φ (r (r.symm c) • m) = r.symm c * φ m at h
+            rw [r.apply_symm_apply] at h
+            rw [h, map_mul, r.apply_symm_apply]
+            rfl }
+      map_add' := by intros; ext; simp
+      map_smul' := by intros; ext; simp }
+  apply LinearEquiv.ofBijective f
+  constructor
+  · intro φ ψ h
+    ext m
+    exact r.injective (congrArg (fun L : M →ₗ[K] K ↦ L m) h)
+  · intro ψ
+    let φ : M →ₗ[k] k :=
+      { toFun := fun m ↦ r.symm (ψ m)
+        map_add' := by intros; simp
+        map_smul' := by
+          intro c m
+          change r.symm (ψ (r c • m)) = c * r.symm (ψ m)
+          rw [ψ.map_smul, smul_eq_mul, map_mul, r.symm_apply_apply] }
+    exact ⟨φ, by ext m; exact r.apply_symm_apply (ψ m)⟩
 
 /-- The Lie algebra is the dual of the cotangent space at the rational identity, with
 scalars transported by the residue-field identification. No smoothness is required.
@@ -71,6 +116,27 @@ theorem exists_lie_identity_cotangent_dual_equiv
       letI : RingHomInvPair r.symm.toRingHom r.toRingHom :=
         RingHomInvPair.of_ringEquiv r.symm
       Nonempty (Lie G ≃ₛₗ[r.toRingHom]
-        Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)) := by sorry
+        Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)) := by
+  let x := unitSection G (IsLocalRing.closedPoint k)
+  let R := G.left.presheaf.stalk x
+  let K := G.left.residueField x
+  let ρ : k →+* K :=
+    (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom
+  have hρ : Function.Bijective ρ := (identity_residue_rational G).1
+  let r : k ≃+* K := RingEquiv.ofBijective ρ hρ
+  let : RingHomInvPair r.toRingHom r.symm.toRingHom :=
+    RingHomInvPair.of_ringEquiv r
+  let : RingHomInvPair r.symm.toRingHom r.toRingHom :=
+    RingHomInvPair.of_ringEquiv r.symm
+  let : Module k (schemeTangentSpace k G.left G.hom x) :=
+    Module.compHom (schemeTangentSpace k G.left G.hom x) ρ
+  let : Module K (IsLocalRing.CotangentSpace R) :=
+    inferInstanceAs (Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))
+  let : Module k (IsLocalRing.CotangentSpace R) :=
+    Module.compHom (IsLocalRing.CotangentSpace R) ρ
+  obtain ⟨E⟩ := exists_lie_identity_tangent_linearEquiv G
+  obtain ⟨F, _⟩ := exists_rationalPoint_tangent_cotangent_linearEquiv
+    k G.left G.hom x hρ
+  exact ⟨r, ⟨(E.trans F).trans (cotangentDualScalarEquiv r _)⟩⟩
 
 end AlgebraicGeometry.GrpObj
