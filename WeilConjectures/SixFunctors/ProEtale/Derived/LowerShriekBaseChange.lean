@@ -192,15 +192,27 @@ pullbacks of the exact pullbacks being computed degreewise
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
-  Functor.whiskerLeft D((c.i)_!open[A])
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft D((c.i)_!open[A])
       (ProEtale.derivedBaseChangeMap A (c.isPullback_g_ofIsPullback sq).flip.toCommSq) ≫
-    (rightDerivedLowerShriekOfCompactificationBaseChangeIso A sq c).hom
+    (Functor.associator _ _ _).inv ≫ (rightDerivedLowerShriekOfCompactificationBaseChangeIso A sq c).hom
 
 end Exchange
 
 section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+omit [Finite Λ] in
+lemma isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification [Finite Λ]
+    (sq : IsPullback g' f' f g) (c : Compactification f)
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :
+    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (c.isPullback_g_ofIsPullback sq).flip.toCommSq).app
+        (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj K)) :=
+  isIso_derivedBaseChangeMap_app_of_isProper Λ (c.isPullback_g_ofIsPullback sq).flip _
+    (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek c.i hK)
 
 /-- Blueprint `thm-cbc-finite-level-proetale`: Finite-level pro-etale compact-support base
 change.
@@ -232,7 +244,10 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :
     IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
       c).app K) := by
-  sorry
+  have := isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification Λ sq c K hK
+  simp only [rightDerivedLowerShriekOfCompactificationBaseChangeMap, NatTrans.comp_app,
+    Functor.whiskerLeft_app]
+  infer_instance
 
 end Finite
 

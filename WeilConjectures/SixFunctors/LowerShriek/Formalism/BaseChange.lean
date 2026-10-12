@@ -113,7 +113,12 @@ lemma sqIso_id_horiz_inv {X Y : Scheme.{u}} (j : X ⟶ Y) (w : 𝟙 X ≫ j = j 
   apply Iso.inv_ext
   rw [sqIso_id_horiz_hom]
   ext M
-  simp [← Functor.map_comp]
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
+    Functor.rightUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+    Category.id_comp, Category.assoc, NatTrans.id_app, Functor.comp_obj, Functor.id_obj]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
 
 /-- The base change map of the pushforwards of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up
 to `(𝟙)^* ≅ 𝟭`. -/
@@ -123,6 +128,106 @@ lemma pfBaseChange_id_horiz {X Y : Scheme.{u}} (j : X ⟶ Y) (w : 𝟙 X ≫ j =
         ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
           (F.pbId Y).hom).whiskerLeft (F.pbId X).inv := by
   rw [pfBaseChange, sqIso_id_horiz_inv, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_unitors]
+
+/-- **Horizontal pasting of the inverses of square isomorphisms.**
+```
+U'' --t₁--> U' --t₂--> U
+|l          |m          |r
+Z'' --b₁--> Z' --b₂--> Z
+```
+-/
+lemma sqIso_inv_paste_horiz {U'' U' U Z'' Z' Z : Scheme.{u}} (t₁ : U'' ⟶ U')
+    (t₂ : U' ⟶ U) (l : U'' ⟶ Z'') (m : U' ⟶ Z') (r : U ⟶ Z) (b₁ : Z'' ⟶ Z') (b₂ : Z' ⟶ Z)
+    (t : U'' ⟶ U) (b : Z'' ⟶ Z) (w₁ : t₁ ≫ m = l ≫ b₁) (w₂ : t₂ ≫ r = m ≫ b₂)
+    (ht : t₁ ≫ t₂ = t) (hb : b₁ ≫ b₂ = b) (w : t ≫ r = l ≫ b) :
+    (F.sqIso t l r b w).inv =
+      ((TwoSquare.mk _ _ _ _ (F.sqIso t₂ m r b₂ w₂).inv ≫ₕ
+        TwoSquare.mk _ _ _ _ (F.sqIso t₁ l m b₁ w₁).inv).whiskerTop
+          (F.pbComp' b₁ b₂ b hb).hom).whiskerBottom (F.pbComp' t₁ t₂ t ht).inv := by
+  apply Iso.inv_ext
+  ext M
+  rw [NatTrans.comp_app, F.sqIso_hom_app_paste_horiz t₁ t₂ l m r b₁ b₂ t b w₁ w₂ ht hb w M]
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.assoc,
+    NatTrans.id_app, Functor.comp_obj]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [Iso.hom_inv_id_app]
+
+/-- **Horizontal pasting of base change maps of the pushforwards.**
+```
+U'' --t₁--> U' --t₂--> U
+|l          |m          |r
+Z'' --b₁--> Z' --b₂--> Z
+```
+-/
+lemma pfBaseChange_paste_horiz {U'' U' U Z'' Z' Z : Scheme.{u}} (t₁ : U'' ⟶ U')
+    (t₂ : U' ⟶ U) (l : U'' ⟶ Z'') (m : U' ⟶ Z') (r : U ⟶ Z) (b₁ : Z'' ⟶ Z') (b₂ : Z' ⟶ Z)
+    (t : U'' ⟶ U) (b : Z'' ⟶ Z) (w₁ : t₁ ≫ m = l ≫ b₁) (w₂ : t₂ ≫ r = m ≫ b₂)
+    (ht : t₁ ≫ t₂ = t) (hb : b₁ ≫ b₂ = b) (w : t ≫ r = l ≫ b) :
+    F.pfBaseChange t l r b w =
+      ((F.pfBaseChange t₂ m r b₂ w₂ ≫ᵥ F.pfBaseChange t₁ l m b₁ w₁).whiskerRight
+        (F.pbComp' b₁ b₂ b hb).hom).whiskerLeft (F.pbComp' t₁ t₂ t ht).inv := by
+  rw [pfBaseChange, F.sqIso_inv_paste_horiz t₁ t₂ l m r b₁ b₂ t b w₁ w₂ ht hb w,
+    mateEquiv_whiskerTop_whiskerBottom, mateEquiv_vcomp _ (F.adj m)]
+  rfl
+
+/-- **Vertical pasting of the inverses of square isomorphisms.**
+```
+U' --t--> U
+|l₁       |r₁
+W' --h--> W
+|l₂       |r₂
+Z' --b--> Z
+```
+-/
+lemma sqIso_inv_paste_vert {U' U W' W Z' Z : Scheme.{u}} (t : U' ⟶ U) (h : W' ⟶ W)
+    (b : Z' ⟶ Z) (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z) (l : U' ⟶ Z')
+    (r : U ⟶ Z) (w₁ : t ≫ r₁ = l₁ ≫ h) (w₂ : h ≫ r₂ = l₂ ≫ b) (hl : l₁ ≫ l₂ = l)
+    (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b) :
+    (F.sqIso t l r b w).inv =
+      ((TwoSquare.mk _ _ _ _ (F.sqIso h l₂ r₂ b w₂).inv ≫ᵥ
+        TwoSquare.mk _ _ _ _ (F.sqIso t l₁ r₁ h w₁).inv).whiskerLeft
+          (F.pbComp' r₁ r₂ r hr).inv).whiskerRight (F.pbComp' l₁ l₂ l hl).hom := by
+  apply Iso.inv_ext
+  ext M
+  rw [NatTrans.comp_app, F.sqIso_hom_app_paste_vert t h b l₁ r₁ l₂ r₂ l r w₁ w₂ hl hr w M]
+  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.assoc, NatTrans.id_app,
+    Functor.comp_obj]
+  rw [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id]
+
+/-- **Vertical pasting of base change maps of the pushforwards.**
+```
+U' --t--> U
+|l₁       |r₁
+W' --h--> W
+|l₂       |r₂
+Z' --b--> Z
+```
+-/
+lemma pfBaseChange_paste_vert {U' U W' W Z' Z : Scheme.{u}} (t : U' ⟶ U) (h : W' ⟶ W)
+    (b : Z' ⟶ Z) (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z) (l : U' ⟶ Z')
+    (r : U ⟶ Z) (w₁ : t ≫ r₁ = l₁ ≫ h) (w₂ : h ≫ r₂ = l₂ ≫ b) (hl : l₁ ≫ l₂ = l)
+    (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b) :
+    F.pfBaseChange t l r b w =
+      ((F.pfBaseChange t l₁ r₁ h w₁ ≫ₕ F.pfBaseChange h l₂ r₂ b w₂).whiskerTop
+        (F.pfComp' r₁ r₂ r hr).hom).whiskerBottom (F.pfComp' l₁ l₂ l hl).inv := by
+  have hP : conjugateEquiv (F.adj r) ((F.adj r₂).comp (F.adj r₁)) (F.pbComp' r₁ r₂ r hr).inv =
+      (F.pfComp' r₁ r₂ r hr).hom := rfl
+  have hP' : conjugateEquiv ((F.adj l₂).comp (F.adj l₁)) (F.adj l) (F.pbComp' l₁ l₂ l hl).hom =
+      (F.pfComp' l₁ l₂ l hl).inv := rfl
+  rw [pfBaseChange, F.sqIso_inv_paste_vert t h b l₁ r₁ l₂ r₂ l r w₁ w₂ hl hr w,
+    mateEquiv_conjugateEquiv_vcomp _ ((F.adj l₂).comp (F.adj l₁)),
+    conjugateEquiv_mateEquiv_vcomp _ ((F.adj r₂).comp (F.adj r₁)), mateEquiv_hcomp, hP, hP']
+  rfl
 
 /-- **Proper base change**: the base change map `b^* r_* ⟶ l_* t^*` of a cartesian square with
 `r` proper is an isomorphism. -/
@@ -182,7 +287,7 @@ lemma shriekBaseChange_id (c : Compactification f) (hi : IsPullback (𝟙 X) c.i
     (F.shriekBaseChange c c (𝟙 c.Z) hi hp).natTrans =
       Functor.whiskerLeft (F.shriek c) (F.pbId Y).hom ≫ (Functor.rightUnitor _).hom ≫
         (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pbId X).inv (F.shriek c) := by
-  haveI := HasBaseChange.isIso_baseChange (F := F) hi
+  have := HasBaseChange.isIso_baseChange (F := F) hi
   have key : inv (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hi.w).natTrans =
       ((TwoSquare.mk (F.sh c.i) (𝟭 _) (𝟭 _) (F.sh c.i)
         ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
@@ -214,7 +319,51 @@ lemma shriekBaseChange_paste_horiz {X'' Y'' : Scheme.{u}} {f'' : X'' ⟶ Y''} {a
     F.shriekBaseChange c c'' (h₁ ≫ h₂) hi hp =
       ((F.shriekBaseChange c c' h₂ hi₂ hp₂ ≫ᵥ F.shriekBaseChange c' c'' h₁ hi₁ hp₁).whiskerLeft
         (F.pbComp' a' b' (a' ≫ b') rfl).inv).whiskerRight (F.pbComp' a b (a ≫ b) rfl).hom := by
-  sorry
+  have := HasBaseChange.isIso_baseChange (F := F) hi
+  have := HasBaseChange.isIso_baseChange (F := F) hi₁
+  have := HasBaseChange.isIso_baseChange (F := F) hi₂
+  have hA : inv (F.baseChange (a' ≫ b') c''.i c.i (h₁ ≫ h₂) hi.w).natTrans =
+      ((TwoSquare.vComp (TwoSquare.mk _ _ _ _ (inv (F.baseChange b' c'.i c.i h₂ hi₂.w).natTrans))
+        (TwoSquare.mk _ _ _ _ (inv (F.baseChange a' c''.i c'.i h₁ hi₁.w).natTrans))).whiskerLeft
+          (F.pbComp' a' b' (a' ≫ b') rfl).inv).whiskerRight
+            (F.pbComp' h₁ h₂ (h₁ ≫ h₂) rfl).hom := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [F.baseChange_paste_horiz a' b' c''.i c'.i c.i h₁ h₂ (a' ≫ b') (h₁ ≫ h₂) hi₁.w hi₂.w rfl
+      rfl hi.w]
+    ext M
+    simp
+  have hP := F.pfBaseChange_paste_horiz h₁ h₂ c''.g c'.g c.g a b (h₁ ≫ h₂) (a ≫ b) hp₁.w hp₂.w
+    rfl rfl hp.w
+  ext K
+  simp only [shriekBaseChange, hA, hP, TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
+    TwoSquare.hComp, TwoSquare.vComp, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.assoc, shriek]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  have hn := (F.pfBaseChange h₁ c''.g c'.g a hp₁.w).natTrans.naturality
+    ((inv (F.baseChange b' c'.i c.i h₂ hi₂.w).natTrans).app K)
+  simp only [Functor.comp_map, Functor.comp_obj] at hn
+  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  rw [← reassoc_of% hn]
+
+/-- The comparison along a refinement `r`, in terms of the unit of `r^* ⊣ r_*` and the inverse
+of the base change map of the extension by zero of the square of `r`. -/
+lemma refinementComparison_app_eq {c d : Compactification f} (r : c.Refinement d)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (K : F.obj X) :
+    haveI := HasBaseChange.isIso_baseChange (F := F) hr.flip
+    (F.refinementComparison r hr).app K =
+      (F.pf d.g).map ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫
+        (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+          (F.sh c.i).map ((F.pbId X).hom.app K))) ≫
+        (F.pfComp' r.hom d.g c.g r.hom_g).inv.app ((F.sh c.i).obj K) := by
+  have := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  rw [F.refinementComparison_eq_of_baseChange r hr ((Functor.leftUnitor _).symm ≪≫
+    Functor.isoWhiskerRight (F.pbId X).symm (F.sh c.i) ≪≫
+    asIso (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans)
+    (by ext K; simp [← Functor.map_comp_assoc])]
+  simp
 
 /-- **Compatibility with refinements**: the compact-support exchange maps attached to two
 compactifications `c`, `d` of `f` (and `c'`, `d'` of `f'`) are intertwined by the comparisons
@@ -231,6 +380,56 @@ lemma shriekBaseChange_refinementComparison {c d : Compactification f}
         (F.shriekBaseChange c c' hc hci hcp).natTrans =
       (F.shriekBaseChange d d' hd hdi hdp).natTrans ≫
         Functor.whiskerLeft (F.pb g') (F.refinementComparison r' hr') := by
+  have := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  have := HasBaseChange.isIso_baseChange (F := F) hr'.flip
+  have := HasBaseChange.isIso_baseChange (F := F) hci
+  have := HasBaseChange.isIso_baseChange (F := F) hdi
+  have hw : g' ≫ d.i = c'.i ≫ (hc ≫ r.hom) := by rw [← r.i_hom, reassoc_of% hci.w]
+  -- the two decompositions of the base change map of the square `g' ≫ d.i = c'.i ≫ (hc ≫ r)`
+  have hcube : ∀ K : F.obj X,
+      (F.baseChange g' c'.i c.i hc hci.w).natTrans.app K ≫
+        (F.pb hc).map ((F.sh c.i).map ((F.pbId X).inv.app K) ≫
+          (F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+        (F.sqIso hc r'.hom r.hom hd hcomm).hom.app ((F.sh d.i).obj K) =
+      (F.sh c'.i).map ((F.pbId X').inv.app ((F.pb g').obj K)) ≫
+        (F.baseChange (𝟙 X') c'.i d'.i r'.hom hr'.flip.w).natTrans.app ((F.pb g').obj K) ≫
+        (F.pb r'.hom).map ((F.baseChange g' d'.i d.i hd hdi.w).natTrans.app K) := by
+    intro K
+    have h₁ := congr_app (F.baseChange_paste_horiz g' (𝟙 X) c'.i c.i d.i hc r.hom g'
+      (hc ≫ r.hom) hci.w hr.flip.w (Category.comp_id g') rfl hw) K
+    have h₂ := congr_app (F.baseChange_paste_horiz (𝟙 X') g' c'.i d'.i d.i r'.hom hd g'
+      (hc ≫ r.hom) hr'.flip.w hdi.w (Category.id_comp g') hcomm.symm hw) K
+    simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
+      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+      Category.comp_id, Functor.comp_obj] at h₁ h₂
+    rw [F.pbComp'_id_right_hom_app] at h₁
+    rw [F.pbComp'_id_left_hom_app] at h₂
+    have hn := (F.baseChange g' c'.i c.i hc hci.w).natTrans.naturality ((F.pbId X).inv.app K)
+    simp only [Functor.comp_map, Functor.comp_obj] at hn
+    rw [F.sqIso_eq hc r'.hom r.hom hd hcomm (hc ≫ r.hom) rfl hcomm.symm]
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+    rw [← reassoc_of% hn, ← reassoc_of% h₁, h₂]
+    simp
+  -- the same identity for the inverses, transposed along `r'^* ⊣ r'_*`
+  have hcore : ∀ K : F.obj X,
+      (F.pb hd).map ((F.adj r.hom).unit.app ((F.sh d.i).obj K) ≫
+        (F.pf r.hom).map (inv ((F.baseChange (𝟙 X) c.i d.i r.hom hr.flip.w).natTrans.app K) ≫
+          (F.sh c.i).map ((F.pbId X).hom.app K))) ≫
+        (F.pfBaseChange hc r'.hom r.hom hd hcomm).natTrans.app ((F.sh c.i).obj K) ≫
+        (F.pf r'.hom).map (inv ((F.baseChange g' c'.i c.i hc hci.w).natTrans.app K)) =
+      inv ((F.baseChange g' d'.i d.i hd hdi.w).natTrans.app K) ≫
+        (F.adj r'.hom).unit.app ((F.sh d'.i).obj ((F.pb g').obj K)) ≫
+        (F.pf r'.hom).map (inv ((F.baseChange (𝟙 X') c'.i d'.i r'.hom hr'.flip.w).natTrans.app
+          ((F.pb g').obj K)) ≫ (F.sh c'.i).map ((F.pbId X').hom.app ((F.pb g').obj K))) := by
+    intro K
+    have hinv := congrArg inv (hcube K)
+    simp only [IsIso.inv_comp, Functor.map_inv, Category.assoc, NatIso.isIso_inv_app,
+      IsIso.Iso.inv_inv, IsIso.Iso.inv_hom, Functor.map_comp, Iso.app_inv] at hinv
+    apply ((F.adj r'.hom).homEquiv _ _).symm.injective
+    simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
+      Adjunction.counit_naturality, Adjunction.left_triangle_components_assoc]
+    sorry
   sorry
 
 end ShriekBaseChange
