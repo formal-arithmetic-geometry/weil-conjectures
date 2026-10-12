@@ -46,6 +46,19 @@ theorem isKFlat_of_boundedAbove_flat_ringedSpace
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)
     (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i))
     (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) : K.IsKFlat := by
-  sorry
+  apply (AlgebraicGeometry.RingedSpace.isKFlat_iff_stalk_isKFlat X K).2
+  intro x F hF
+  let S := (AlgebraicGeometry.RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  have hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((S.obj K).X i) := by
+    obtain ⟨b, hb⟩ := hbounded
+    refine ⟨b, fun i hi ↦ ?_⟩
+    exact (AlgebraicGeometry.RingedSpace.moduleStalkFunctor X x).map_isZero (hb i hi)
+  have hf : ∀ i : ℤ, Module.Flat (X.presheaf.stalk x) ((S.obj K).X i) := by
+    intro i
+    change Module.Flat (X.presheaf.stalk x)
+      ((AlgebraicGeometry.RingedSpace.moduleStalkFunctor X x).obj (K.X i))
+    exact AlgebraicGeometry.RingedSpace.flat_stalk_of_isFlat X (K.X i) (hflat i) x
+  exact CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat (S.obj K) hb hf F hF
 
 end CochainComplex
