@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-roos-functorial-acyclic-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step, cohomology of the derived inverse limit",
+   "via": [
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "title": "Functorial acyclic finite-prefix resolution of an abelian tower",
+ "statement": "Let T be the abelian category of inverse systems of abelian groups indexed by natural numbers [def-weil-inverse-system, lem-pc-tower-abelian], with enough injectives [def-sp-enough-injectives], and let L=lim be additive with right derived functors [def-sp-left-exact-additive]. Let P:T -> Ab send A to product_n A_n with componentwise maps, and let t:P -> P be 1 minus shift [def-weil-tower-transition-endomorphism]. There exist functors U,V:T -> T, natural maps i:Id -> U and p:U -> V with pi=0 and 0 -> A -> U(A) -> V(A) -> 0 short exact for every A, natural isomorphisms e_U:L U -> P and e_V:L V -> P with L(p_A) e_V(A)=e_U(A)t_A, and R^q L(U(A))=R^q L(V(A))=0 for every A and q>=1.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system",
+  "lem-pc-tower-abelian",
+  "def-sp-enough-injectives",
+  "def-sp-left-exact-additive",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof": [
+  {
+   "text": "For a tower A indexed by n >= 0, define U(A)_n as the finite product of A_i with i <= n and V(A)_n as the finite product with i < n. Both transitions forget the last coordinate. Define i_A at n by all composites of transitions from A_n to A_i. Define p_A at n by x_i - f_i(x_(i+1)) for i < n. Coordinatewise maps induced by a morphism of towers commute with i_A,p_A and transitions, yielding functors U,V and natural transformations i,p with i_A p_A=0.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+   }
+  },
+  {
+   "text": "At level n, i_A is injective because its coordinate n is the identity. The kernel of p_A consists precisely of successive-transition tuples and is the image of i_A. Given y_i for i<n, start with x_n=0 and solve x_i=y_i+f_i(x_(i+1)) downwards, so p_A is surjective. These levelwise short exact sequences are short exact in the functor category, since its kernels and cokernels are computed levelwise by their universal properties. The empty prefix V(A)_0 is the zero group.",
+   "uses": [
+    "lem-pc-tower-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+   }
+  },
+  {
+   "text": "A compatible family of finite prefixes is determined uniquely by one entry in each A_i; conversely a full tuple restricts to such a family. This gives natural isomorphisms lim U(A) and lim V(A) with product_i A_i. Computing every coordinate identifies lim p_A with 1 minus the shift, namely x_i-f_i(x_(i+1)). Thus the isomorphisms intertwine lim p with the natural transition endomorphism of the product functor.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+   }
+  },
+  {
+   "text": "Both U(A) and V(A) have surjective projection transitions (extend a prefix by zero). Apply the acyclicity theorem for surjective towers to each: all positive right derived limits of U(A) and V(A) vanish.",
+   "uses": [
+    "lem-pc-tower-surjective-lim-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "def-weil-tower-transition-endomorphism",
+  "lem-pc-tower-abelian",
+  "lem-pc-tower-surjective-lim-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite prefix towers give a natural short exact resolution of an inverse system by inverse limit acyclic towers with limits equal to products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial short exact resolution of a countable inverse system by finite prefix towers with surjective transition maps, limits equal to the product and inverse limit acyclic terms",
+   "results": "Profinite.NobelingProof.succ_exact; CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ; projective resolution exactness; HomologicalComplex.shortExact_of_degreewise_shortExact. None supplies this tower resolution.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Roos|roos|prefix.*tower|tower.*prefix in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "No matches. Library search finds only the parent node proof plan, not a separate finite-prefix acyclic resolution theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RoosAcyclicResolution",
+  "file": "lean/Sheaf/CategoryTheory/RoosAcyclicResolution.lean",
+  "declaration": "CategoryTheory.exists_roos_acyclic_resolution",
+  "declarations": [
+   "CategoryTheory.roosProductFunctor",
+   "CategoryTheory.roosProductDifferential",
+   "CategoryTheory.exists_roos_acyclic_resolution"
+  ],
+  "statement": "theorem exists_roos_acyclic_resolution [EnoughInjectives (ℕᵒᵖ ⥤ AddCommGrpCat.{u})] [(lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).Additive] : ∃ (U V : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ (ℕᵒᵖ ⥤ AddCommGrpCat.{u})) (i : 𝟭 (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⟶ U) (p : U ⟶ V) (w : ∀ A, i.app A ≫ p.app A = 0), (∀ A, (ShortComplex.mk (i.app A) (p.app A) (w A)).ShortExact) ∧ ∃ (eU : U ⋙ lim ≅ roosProductFunctor) (eV : V ⋙ lim ≅ roosProductFunctor), (∀ A, lim.map (p.app A) ≫ eV.hom.app A = eU.hom.app A ≫ roosProductDifferential.app A) ∧ ∀ (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (q : ℕ), 1 ≤ q → IsZero ((lim.rightDerived q).obj (U.obj A)) ∧ IsZero ((lim.rightDerived q).obj (V.obj A))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-abfc5",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135221-L-1657192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-abfc5",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135221-L-1657192",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged Roos statement and delivered proof with its node; matched the new acyclic-resolution statement with its node and Stacks 07KW; compiled both modules and all eight direct importers."
+ }
+}
