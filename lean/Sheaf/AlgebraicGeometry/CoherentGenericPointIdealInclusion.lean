@@ -10,23 +10,12 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.CoherentGenericPointClosedDescent
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMap
 import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentHomsOverOpen
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
-import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # A coherent ideal inclusion near a generic point
 
@@ -43,6 +32,37 @@ namespace AlgebraicGeometry
 namespace Scheme
 namespace Modules
 noncomputable section
+
+/-- Closed pushforward preserves invertibility of a stalk map at a source point. -/
+private theorem pushforward_stalk_isIso {X Z : Scheme.{w}} (i : Z ⟶ X)
+    [IsClosedImmersion i] {A B : Z.Modules} (χ : A ⟶ B) (z : Z)
+    [IsIso ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).map χ)] :
+    IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base z)).map
+      ((pushforward i).map χ)) := by
+  have hA := closedImmersion_pushforward_stalks i i.isClosedEmbedding A
+  have hB := closedImmersion_pushforward_stalks i i.isClosedEmbedding B
+  let cA := ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base A.presheaf z)
+  let cB := ConcreteCategory.hom (TopCat.Presheaf.stalkPushforward Ab i.base B.presheaf z)
+  let f := (RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base z)).map
+    ((pushforward i).map χ)
+  let g := (RingedSpace.moduleStalkFunctor Z.toRingedSpace z).map χ
+  have hca : Function.Bijective cA := (hA.2.1 z).1
+  have hcb : Function.Bijective cB := (hB.2.1 z).1
+  have hg : Function.Bijective g := ConcreteCategory.bijective_of_isIso g
+  have comm (a) : cB (f a) = g (cA a) := by
+    exact congr($(hA.2.2 B χ z) a)
+  have hf : Function.Bijective f := by
+    constructor
+    · intro a b hab
+      apply hca.1
+      apply hg.1
+      rw [← comm, ← comm, hab]
+    · intro b
+      obtain ⟨a, ha⟩ := hg.2 (cB b)
+      obtain ⟨a', ha'⟩ := hca.2 a
+      refine ⟨a', hcb.1 ?_⟩
+      rw [comm, ha', ha]
+  exact (ConcreteCategory.isIso_iff_bijective f).mpr hf
 
 /-- A coherent module whose generic stalk is killed by the ambient maximal ideal contains
 an injective pushforward of a finite direct sum of a coherent ideal on the integral closed
@@ -103,7 +123,29 @@ theorem coherent_generic_point_ideal_inclusion {X Z : Scheme.{w}} [IsNoetherian 
         ∃ (W : X.Opens), i.base (genericPoint Z) ∈ W ∧
           IsIso ((SheafOfModules.overFunctor X.ringCatSheaf W).map α)
     := by
-  sorry
+  have : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType i
+  obtain ⟨G, hG, β, hβ, hβstalk⟩ := coherent_generic_point_closed_descent i F hF hkill
+  obtain ⟨r, I, hI, hsum, χ, hχ, hχstalk⟩ := coherent_integral_generic_ideal_map Z G hG
+  have : Mono β := hβ
+  have : Mono χ := hχ
+  have : IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+    (i.base (genericPoint Z))).map β) := hβstalk
+  have : IsIso ((RingedSpace.moduleStalkFunctor Z.toRingedSpace
+    (genericPoint Z)).map χ) := hχstalk
+  let α := (pushforward i).map χ ≫ β
+  have : Mono α := inferInstance
+  have : IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+      (i.base (genericPoint Z))).map ((pushforward i).map χ)) :=
+    pushforward_stalk_isIso i χ (genericPoint Z)
+  have hαstalk : Function.Bijective ((RingedSpace.moduleStalkFunctor X.toRingedSpace
+      (i.base (genericPoint Z))).map α) := by
+    dsimp only [α]
+    rw [Functor.map_comp]
+    exact ConcreteCategory.bijective_of_isIso _
+  have hsource := (isCoherent_pushforward_of_isFinite i _ hsum).1
+  obtain ⟨W, hW, hαW⟩ :=
+    (coherent_local_isomorphism X F _ hF hsource α (i.base (genericPoint Z))).2.2.2 hαstalk
+  exact ⟨r, I, hI, α, inferInstance, W, hW, hαW⟩
 
 end
 end Modules
