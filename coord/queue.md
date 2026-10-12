@@ -1,6 +1,6 @@
 # Work queue
 
-59 items; claim with `tools/claim.py next <group> [--stage N]`.
+58 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (49)
+## Stage 3: modules to prove (48)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -46,7 +46,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks` | 3 | 1 | proof |
