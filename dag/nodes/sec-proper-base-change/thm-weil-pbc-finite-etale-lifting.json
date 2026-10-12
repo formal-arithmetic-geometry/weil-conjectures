@@ -1,260 +1,181 @@
 {
-  "id": "thm-weil-pbc-finite-etale-lifting",
-  "blueprint": {
-    "is": "thm-weil-pbc-finite-etale-lifting",
-    "from": null,
-    "same_as": null
+ "id": "thm-weil-pbc-finite-etale-lifting",
+ "blueprint": {
+  "is": "thm-weil-pbc-finite-etale-lifting",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite-etale lifting over a proper henselian pair",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $S=\\operatorname{Spec}A$, $S_0=\\operatorname{Spec}(A/I)$, let $f:Y\\to S$ be proper [def-weil-pbc-scheme-conventions], and let $Y_0=Y\\times_SS_0$ with its closed immersion $i:Y_0\\to Y$. Let $\\mathsf{FEt}(Y)$, $\\mathsf{FEt}(Y_0)$ be the categories of finite etale schemes over $Y$, $Y_0$ with $Y$-, resp. $Y_0$-morphisms, and $i^*:\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y_0)$, $U\\mapsto U_0=U\\times_YY_0$, $\\varphi\\mapsto\\varphi_0=\\varphi\\times_YY_0$, the base change functor [def-weil-pbc-finite-etale-category]. Then:\n\n(a) $i^*$ is fully faithful: for $U,V\\in\\mathsf{FEt}(Y)$ the map $\\operatorname{Hom}_Y(U,V)\\to\\operatorname{Hom}_{Y_0}(U_0,V_0)$, $\\varphi\\mapsto\\varphi_0$, is bijective (every $Y_0$-morphism $U_0\\to V_0$ lifts to a unique $Y$-morphism $U\\to V$);\n\n(b) $i^*$ is essentially surjective: every finite etale $Y_0$-scheme is $Y_0$-isomorphic to $U_0$ for some $U\\in\\mathsf{FEt}(Y)$;\n\n(c) hence $i^*$ is an equivalence of categories;\n\n(d) (finite group actions lift uniquely) for a group $G$ (in the application a finite group) and $Z\\in\\mathsf{FEt}(Y)$, every action of $G$ on $Z_0$ by $Y_0$-automorphisms is $g\\mapsto(\\rho(g))_0$ for a unique action $\\rho$ of $G$ on $Z$ by $Y$-automorphisms; and for every $Z'\\in\\mathsf{FEt}(Y_0)$ with an action of $G$ by $Y_0$-automorphisms there are $Z\\in\\mathsf{FEt}(Y)$ with a $G$-action by $Y$-automorphisms and a $G$-equivariant $Y_0$-isomorphism $Z_0\\cong Z'$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
+  "place": "node thm-weil-pbc-finite-etale-lifting, order 1138",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0GS2 (Fundamental Groups, Lemma lemma-finite-etale-on-proper-over-henselian-pair, pione.tex line 1749): the statement for a henselian pair"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A48 (Fundamental Groups, Lemma lemma-finite-etale-on-proper-over-henselian, pione.tex line 1622): the henselian local case, the tag of the Lean declaration"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A0B (Etale Cohomology, lemma-zariski-h0-proper-over-henselian-pair), behind the idempotent lifting used for (a); Tags 0A0C and 0A3S (lemma-h0-proper-over-henselian-pair / -local) are the H^0 comparisons for etale sheaves, cited by the import, and are not used"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-etale-restriction-fully-faithful] to obtain full faithfulness for the given fibre i:Y₀ → Y.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-restriction-fully-faithful"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Finite-etale lifting over a proper henselian pair",
-  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $S=\\operatorname{Spec}A$, $S_0=\\operatorname{Spec}(A/I)$, let $f:Y\\to S$ be proper [def-weil-pbc-scheme-conventions], and let $Y_0=Y\\times_SS_0$ with its closed immersion $i:Y_0\\to Y$. Let $\\mathsf{FEt}(Y)$, $\\mathsf{FEt}(Y_0)$ be the categories of finite etale schemes over $Y$, $Y_0$ with $Y$-, resp. $Y_0$-morphisms, and $i^*:\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y_0)$, $U\\mapsto U_0=U\\times_YY_0$, $\\varphi\\mapsto\\varphi_0=\\varphi\\times_YY_0$, the base change functor [def-weil-pbc-finite-etale-category]. Then:\n\n(a) $i^*$ is fully faithful: for $U,V\\in\\mathsf{FEt}(Y)$ the map $\\operatorname{Hom}_Y(U,V)\\to\\operatorname{Hom}_{Y_0}(U_0,V_0)$, $\\varphi\\mapsto\\varphi_0$, is bijective (every $Y_0$-morphism $U_0\\to V_0$ lifts to a unique $Y$-morphism $U\\to V$);\n\n(b) $i^*$ is essentially surjective: every finite etale $Y_0$-scheme is $Y_0$-isomorphic to $U_0$ for some $U\\in\\mathsf{FEt}(Y)$;\n\n(c) hence $i^*$ is an equivalence of categories;\n\n(d) (finite group actions lift uniquely) for a group $G$ (in the application a finite group) and $Z\\in\\mathsf{FEt}(Y)$, every action of $G$ on $Z_0$ by $Y_0$-automorphisms is $g\\mapsto(\\rho(g))_0$ for a unique action $\\rho$ of $G$ on $Z$ by $Y$-automorphisms; and for every $Z'\\in\\mathsf{FEt}(Y_0)$ with an action of $G$ by $Y_0$-automorphisms there are $Z\\in\\mathsf{FEt}(Y)$ with a $G$-action by $Y$-automorphisms and a $G$-equivariant $Y_0$-isomorphism $Z_0\\cong Z'$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "node thm-weil-pbc-finite-etale-lifting, order 1138",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0GS2 (Fundamental Groups, Lemma lemma-finite-etale-on-proper-over-henselian-pair, pione.tex line 1749): the statement for a henselian pair"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A48 (Fundamental Groups, Lemma lemma-finite-etale-on-proper-over-henselian, pione.tex line 1622): the henselian local case, the tag of the Lean declaration"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A0B (Etale Cohomology, lemma-zariski-h0-proper-over-henselian-pair), behind the idempotent lifting used for (a); Tags 0A0C and 0A3S (lemma-h0-proper-over-henselian-pair / -local) are the H^0 comparisons for etale sheaves, cited by the import, and are not used"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-finite-etale-category"
-  ],
-  "proof": [
-    {
-      "text": "*Setup.* For $U\\in\\mathsf{FEt}(Y)$ with structure map $p:U\\to Y$, the base change $U_0=U\\times_YY_0$ is finite etale over $Y_0$ [def-weil-pbc-finite-etale-category], and by pasting the cartesian squares $U_0\\to Y_0\\to S_0$ over $U\\to Y\\to S$ [lem-weil-pbc-cartesian-square-pasting] $U_0=U\\times_SS_0$ is also the closed fibre of $U$ over $S$. Since $p$ is finite and $f$ is proper, $f\\circ p:U\\to S$ is proper [lem-weil-pbc-finite-morphism-permanence](c). So every $U\\in\\mathsf{FEt}(Y)$, and every scheme finite over such a $U$, is a proper $S$-scheme whose closed fibre is its base change to $Y_0$.",
-      "uses": [
-        "def-weil-pbc-finite-etale-category",
-        "lem-weil-pbc-cartesian-square-pasting",
-        "lem-weil-pbc-finite-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-        "place": "## Proof, first sentences (properness of Z over S)"
-      }
-    },
-    {
-      "text": "*Morphisms are sections.* Let $U,V\\in\\mathsf{FEt}(Y)$ and $P=V\\times_YU$ with second projection $\\pi:P\\to U$, which is finite etale (base change of $V\\to Y$, [def-weil-pbc-finite-etale-category]). By the universal property of the fibre product, $\\varphi\\mapsto s_\\varphi=(\\varphi,\\mathrm{id}_U)$ is a bijection from $\\operatorname{Hom}_Y(U,V)$ to the set of sections of $\\pi$ (inverse: $s\\mapsto\\mathrm{pr}_1\\circ s$). Base change to $Y_0$ gives $P_0=P\\times_YY_0=V_0\\times_{Y_0}U_0$ with $\\pi_0:P_0\\to U_0$, and $(s_\\varphi)_0=s_{\\varphi_0}$, so this bijection commutes with $\\varphi\\mapsto\\varphi_0$ and $s\\mapsto s_0$.",
-      "uses": [
-        "def-weil-pbc-finite-etale-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-        "place": "## Proof: Hom_Y(X,W) = (W x_Y X)(X)"
-      }
-    },
-    {
-      "text": "*Sections are clopen pieces of degree one.* $\\pi$ is finite, hence separated, and etale. By [lem-weil-pbc-etale-section-clopen-immersion] a section $s$ of $\\pi$ is an open and closed immersion, $W_s=s(U)$ is an open and closed subscheme of $P$, and $\\pi|_{W_s}:W_s\\to U$ is an isomorphism with inverse $s$. Conversely, if $W\\subseteq P$ is open and closed and $\\pi|_W:W\\to U$ is an isomorphism, $s=\\iota_W\\circ(\\pi|_W)^{-1}$ is a section with $W_s=W$, and a section $s$ is recovered from $W_s$ as $\\iota_{W_s}\\circ(\\pi|_{W_s})^{-1}$. So $s\\mapsto W_s$ is a bijection from the sections of $\\pi$ to the set of open and closed $W\\subseteq P$ with $\\pi|_W$ an isomorphism; the same holds for $\\pi_0$, and $(W_s)\\times_YY_0=W_{s_0}$. For every open and closed $W\\subseteq P$, $\\pi|_W=\\pi\\circ\\iota_W$ is finite etale: $\\iota_W$ is an open immersion, hence etale, and a closed immersion, hence finite, and compositions of finite, resp. etale, morphisms are finite, resp. etale.",
-      "uses": [
-        "lem-weil-pbc-etale-section-clopen-immersion",
-        "lem-weil-pbc-etale-composition-cancellation",
-        "lem-weil-pbc-closed-immersion-finite",
-        "lem-weil-pbc-finite-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/pione.tex",
-        "place": "Etale Morphisms, Proposition 024T and Schemes, Lemma 01KT (sections); the dictionary of the blueprint proof between Y-morphisms and clopen pieces of rank one"
-      }
-    },
-    {
-      "text": "*Clopen subsets correspond.* $P$ is finite over $U$, so $P\\to S$ is proper (Step 1), with closed fibre $P_0$. Open and closed subsets of a scheme correspond to the idempotents of its ring of global sections. By [thm-weil-pbc-henselian-idempotent-lifting] applied to $P\\to S$, $W\\mapsto W_0=W\\times_SS_0=W\\cap P_0$ is a bijection from the open and closed subsets of $P$ to those of $P_0$. Applied to $U\\to S$ (proper by Step 1), the injectivity says: an open and closed subset $T\\subseteq U$ with $T\\cap U_0=\\emptyset$ is empty (it and $\\emptyset$ have the same closed fibre).",
-      "uses": [
-        "thm-weil-pbc-henselian-idempotent-lifting",
-        "lem-weil-pbc-finite-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-        "place": "## Proof: the idempotent-lifting interface applied to the proper Z -> S"
-      }
-    },
-    {
-      "text": "*The degree-one condition descends.* Let $W\\subseteq P$ be open and closed. If $\\pi|_W$ is an isomorphism so is its base change $W_0\\to U_0$. Conversely suppose $W_0\\to U_0$ is an isomorphism. $\\pi|_W$ is finite etale (Step 3), hence finite, flat and locally of finite presentation; let $r:U\\to\\mathbf Z_{\\ge0}$ be its rank [lem-weil-pbc-finite-flat-rank-iso]. By (1) of that node $U_1=r^{-1}(1)$ is open and closed in $U$. By (2), for $u\\in U_0$, $r(u)$ is the rank of the base change $W_0\\to U_0$ at $u$, which is $1$ by (3) since $W_0\\to U_0$ is an isomorphism; so $U_0\\subseteq U_1$. Then $U\\setminus U_1$ is open and closed and disjoint from $U_0$, hence empty by Step 4; so $r\\equiv1$ and $\\pi|_W$ is an isomorphism by (3). (The imported proof argued that the rank is determined on the image of $Y_0$ because $Y_0\\to Y$ is surjective; $Y_0\\to Y$ is a closed immersion and not surjective in general, and the step needs the fact of Step 4 that every nonempty clopen of $U$ meets $U_0$.)",
-      "uses": [
-        "lem-weil-pbc-finite-flat-rank-iso",
-        "thm-weil-pbc-henselian-idempotent-lifting"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-        "place": "## Proof: rank of Z_e over Y is determined on the closed fibre"
-      }
-    },
-    {
-      "text": "*(a) Full faithfulness.* Composing Steps 2-5: $\\operatorname{Hom}_Y(U,V)\\cong\\{$sections of $\\pi\\}\\cong\\{W\\subseteq P$ clopen, $\\pi|_W$ iso$\\}\\cong\\{W_0\\subseteq P_0$ clopen, $\\pi_0|_{W_0}$ iso$\\}\\cong\\{$sections of $\\pi_0\\}\\cong\\operatorname{Hom}_{Y_0}(U_0,V_0)$, the middle bijection being $W\\mapsto W_0$ (Step 4, restricted by Step 5). Since $(s_\\varphi)_0=s_{\\varphi_0}$ and $(W_s)_0=W_{s_0}$, the composite is $\\varphi\\mapsto\\varphi_0$. Hence $i^*$ is bijective on every Hom set: full and faithful, i.e. morphisms lift uniquely.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-        "place": "## Proof: Hom_Y(X,W) -> Hom_{Y_0}(X_0,W_0) bijective"
-      }
-    },
-    {
-      "text": "*(b) Essential surjectivity.* Every finite etale $Y_0$-scheme is isomorphic over $Y_0$ to $U_0$ for some $U\\in\\mathsf{FEt}(Y)$: this is [lem-weil-pbc-finite-etale-lifting-essential-surjectivity] (Stacks 0GS2, by algebraization in the Noetherian complete case, approximation in the G-ring case and a limit argument). It does not follow from idempotent lifting or from the degree-zero comparisons 0A0C/0A3S cited by the imported proof, which only give (a).",
-      "uses": [
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/pione.tex",
-        "place": "Lemma 0GS2, proof: the essential-surjectivity paragraphs"
-      }
-    },
-    {
-      "text": "*(c) Equivalence.* A functor that is full, faithful and essentially surjective is an equivalence of categories (in Mathlib, `CategoryTheory.Functor.IsEquivalence` is the conjunction of `Faithful`, `Full` and `EssSurj`); apply this to $i^*$ with (a) and (b).",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/pione.tex",
-        "place": "Lemma 0GS2, statement"
-      }
-    },
-    {
-      "text": "*(d) Group actions (formal consequence of (a) and (b)).* By (a), $i^*$ induces a bijection $\\operatorname{End}_Y(Z)\\to\\operatorname{End}_{Y_0}(Z_0)$ compatible with composition and identities, hence a group isomorphism $\\operatorname{Aut}_Y(Z)\\to\\operatorname{Aut}_{Y_0}(Z_0)$ ($\\varphi$ is invertible iff $\\varphi_0$ is, the inverse of $\\varphi_0$ lifting to an inverse of $\\varphi$ by faithfulness). An action of $G$ on $Z_0$ is a homomorphism $\\rho_0:G\\to\\operatorname{Aut}_{Y_0}(Z_0)$; composing with the inverse group isomorphism gives the unique $\\rho:G\\to\\operatorname{Aut}_Y(Z)$ with $\\rho(g)_0=\\rho_0(g)$. For $Z'\\in\\mathsf{FEt}(Y_0)$ with an action $\\rho':G\\to\\operatorname{Aut}(Z')$, choose by (b) $Z$ and a $Y_0$-isomorphism $\\alpha:Z_0\\to Z'$, transport the action to $Z_0$ by $g\\mapsto\\alpha^{-1}\\rho'(g)\\alpha$ and lift it as before; $\\alpha$ is then $G$-equivariant. Finiteness of $G$ is not needed.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-        "place": "## Proof: a finite group action lifts by lifting automorphisms and using uniqueness"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-finite-etale-category",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-composition",
-    "thm-weil-pbc-henselian-idempotent-lifting",
-    "lem-weil-pbc-finite-flat-rank-iso",
+  {
+   "text": "Identify Y₀ with the chosen pullback Y ×_A Spec(A/I) using the given cartesian square. Compose each finite etale Y₀-cover with this isomorphism. Apply [lem-weil-pbc-finite-etale-lifting-essential-surjectivity] to choose a lift U and its fibre isomorphism. Pullback.map for the fibre isomorphism is itself an isomorphism and transports the chosen fibre of U back to its base change along i. The projection equations, and cancellation of the fibre isomorphism, give the isomorphism over Y₀. Thus pullback along i is essentially surjective.",
+   "uses": [
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "## Proof (full faithfulness by idempotent lifting, corrected); essential surjectivity follows literature/stacks-project/pione.tex Lemma 0GS2 through its node"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "finite etale schemes over proper scheme over henselian pair equivalent to finite etale schemes over closed fibre",
-      "results": "Scheme.Etale, IsProper.instOfIsFinite, isProper_eq, IsFinite.toIsAffineHom, Scheme.Etale.forgetFullyFaithful (Mathlib.AlgebraicGeometry.Morphisms.{Etale,Proper,Finite}): nothing on henselian pairs",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a henselian pair (A, I) and a proper scheme over A, pullback to the closed fibre is an equivalence of categories of finite etale schemes",
-      "results": "Scheme.instHasPullbacksEtale, Scheme.Pullback.carrierEquiv, Triplet.Spec_map_tensor_isPullback, IsFinite.instSndScheme: unrelated",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "HenselianRing, CategoryTheory.Functor.IsEquivalence",
-      "results": "no results",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'Henselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-      "results": "only Mathlib/RingTheory/Henselian.lean (HenselianRing R I, HenselianLocalRing: ring-level, simple-root lifting); no schemes over henselian pairs",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1138,
-  "blueprint_uses": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions",
-    "thm-weil-pbc-henselian-idempotent-lifting"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** The former proof invoked the torsion degree-zero comparison for\nthe map $H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ on structure\nsheaves; that citation applies in neither reading, since the structure sheaf\nis not torsion and the two sheaves are different objects. The needed statement\nis the idempotent lifting interface\n[thm-weil-pbc-henselian-idempotent-lifting], which the proof now cites. The\nrest of the proof — properness of $Z$ over $S$, the dictionary between\n$Y$-morphisms $Y\\to Z$ and rank-one idempotents, the Hom-computation, and\nuniqueness of the lifted group action — is proved here and depends on no\nfurther input.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing",
-          "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-          "lines": [
-            132,
-            143
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
-    "declaration": "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing",
-    "branch": "slopmaster2",
-    "line": 132,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "thm-weil-pbc-finite-etale-lifting",
-    "worker": "stage1",
-    "summary": "Statement made precise (functor = base change U -> U x_Y Y_0 on FEt with Y-morphisms; (a) fully faithful, (b) essentially surjective, (c) equivalence, (d) unique lifting of group actions, a formal consequence of (a)+(b)); new stmt_dep def-weil-pbc-finite-etale-category (Mathlib leaf, MorphismProperty.Over / Over.pullback). The Stacks statement for a henselian pair is Tag 0GS2 (pione.tex), 0A48 being the henselian local case; Stacks proves full faithfulness by a graph argument from essential surjectivity. Full faithfulness is written along the imported proof's route (idempotent lifting thm-weil-pbc-henselian-idempotent-lifting, Stacks 0A0B), which needs no essential surjectivity: Hom = sections of V x_Y U -> U = clopen pieces mapping isomorphically to U (new Mathlib leaf lem-weil-pbc-etale-section-clopen-immersion), clopens correspond, and the degree-one condition descends (new Mathlib leaf lem-weil-pbc-finite-flat-rank-iso plus the fact that a clopen of U missing U_0 is empty). Corrected: the imported proof's claim that Y_0 -> Y is surjective (false; a closed immersion). Gap filled: the imported proof derived essential surjectivity from 0A0C/0A3S, which are H^0 comparisons and do not give it; it is now the new unsplit node lem-weil-pbc-finite-etale-lifting-essential-surjectivity (Stacks 0GS2 algebraization/approximation/limit route). Not in Mathlib (three searches): no henselian pairs for schemes."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "Nine steps: full faithfulness by the corrected idempotent route (morphisms = sections = clopen pieces of rank one of V x_Y U; clopens correspond by thm-weil-pbc-henselian-idempotent-lifting; rank one descends from the closed fibre since a clopen of U missing U_0 is empty), essential surjectivity as a new unsplit node (Stacks 0GS2, the henselian-pair form; 0A48 is the local case), equivalence and group actions formal. Three Mathlib leaves verified against the pinned source: def-weil-pbc-finite-etale-category (MorphismProperty.Over Comma.lean:615, Over.pullback OverAdjunction.lean:101), lem-weil-pbc-etale-section-clopen-immersion (Etale.of_comp Etale.lean:130, IsOpenImmersion.of_flat_of_mono FlatMono.lean:38, IsClosedImmersion.of_comp Separated.lean:242; the lead restated the open-immersion clause as two clauses so that each clause is one lemma), lem-weil-pbc-finite-flat-rank-iso (FlatRank.lean: isLocallyConstant_finrank, finrank_of_isPullback, isIso_iff_finrank_eq). Statement made precise ((a)-(d)); 0A0C/0A3S dropped (H^0 comparisons, unused). The imported proof's 'Y_0 -> Y surjective' was false (closed immersion). Lean attached earlier kept (own sorry; tagged 0A48 but states the pair form)."
+  {
+   "text": "The full and faithful instances of the fully faithful functor, together with the established essential surjectivity, give Functor.IsEquivalence. Group-action lifting is the unchanged formal consequence by full faithfulness.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-restriction-fully-faithful",
+  "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2, combining full faithfulness and essential surjectivity; cartesian-square transport formalized by N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale schemes over proper scheme over henselian pair equivalent to finite etale schemes over closed fibre",
+   "results": "Scheme.Etale, IsProper.instOfIsFinite, isProper_eq, IsFinite.toIsAffineHom, Scheme.Etale.forgetFullyFaithful (Mathlib.AlgebraicGeometry.Morphisms.{Etale,Proper,Finite}): nothing on henselian pairs",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a henselian pair (A, I) and a proper scheme over A, pullback to the closed fibre is an equivalence of categories of finite etale schemes",
+   "results": "Scheme.instHasPullbacksEtale, Scheme.Pullback.carrierEquiv, Triplet.Spec_map_tensor_isPullback, IsFinite.instSndScheme: unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, CategoryTheory.Functor.IsEquivalence",
+   "results": "no results",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Henselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only Mathlib/RingTheory/Henselian.lean (HenselianRing R I, HenselianLocalRing: ring-level, simple-root lifting); no schemes over henselian pairs",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1138,
+ "blueprint_uses": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "thm-weil-pbc-henselian-idempotent-lifting"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** The former proof invoked the torsion degree-zero comparison for\nthe map $H^0(Z,\\mathcal O_Z)\\to H^0(Z_0,\\mathcal O_{Z_0})$ on structure\nsheaves; that citation applies in neither reading, since the structure sheaf\nis not torsion and the two sheaves are different objects. The needed statement\nis the idempotent lifting interface\n[thm-weil-pbc-henselian-idempotent-lifting], which the proof now cites. The\nrest of the proof — properness of $Z$ over $S$, the dictionary between\n$Y$-morphisms $Y\\to Z$ and rank-one idempotents, the Hom-computation, and\nuniqueness of the lifted group action — is proved here and depends on no\nfurther input.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+     "lines": [
+      132,
+      143
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+  "declaration": "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing",
+  "branch": "slopmaster2",
+  "line": 132,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-pbc-finite-etale-lifting",
+  "worker": "stage1",
+  "summary": "Statement made precise (functor = base change U -> U x_Y Y_0 on FEt with Y-morphisms; (a) fully faithful, (b) essentially surjective, (c) equivalence, (d) unique lifting of group actions, a formal consequence of (a)+(b)); new stmt_dep def-weil-pbc-finite-etale-category (Mathlib leaf, MorphismProperty.Over / Over.pullback). The Stacks statement for a henselian pair is Tag 0GS2 (pione.tex), 0A48 being the henselian local case; Stacks proves full faithfulness by a graph argument from essential surjectivity. Full faithfulness is written along the imported proof's route (idempotent lifting thm-weil-pbc-henselian-idempotent-lifting, Stacks 0A0B), which needs no essential surjectivity: Hom = sections of V x_Y U -> U = clopen pieces mapping isomorphically to U (new Mathlib leaf lem-weil-pbc-etale-section-clopen-immersion), clopens correspond, and the degree-one condition descends (new Mathlib leaf lem-weil-pbc-finite-flat-rank-iso plus the fact that a clopen of U missing U_0 is empty). Corrected: the imported proof's claim that Y_0 -> Y is surjective (false; a closed immersion). Gap filled: the imported proof derived essential surjectivity from 0A0C/0A3S, which are H^0 comparisons and do not give it; it is now the new unsplit node lem-weil-pbc-finite-etale-lifting-essential-surjectivity (Stacks 0GS2 algebraization/approximation/limit route). Not in Mathlib (three searches): no henselian pairs for schemes."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Nine steps: full faithfulness by the corrected idempotent route (morphisms = sections = clopen pieces of rank one of V x_Y U; clopens correspond by thm-weil-pbc-henselian-idempotent-lifting; rank one descends from the closed fibre since a clopen of U missing U_0 is empty), essential surjectivity as a new unsplit node (Stacks 0GS2, the henselian-pair form; 0A48 is the local case), equivalence and group actions formal. Three Mathlib leaves verified against the pinned source: def-weil-pbc-finite-etale-category (MorphismProperty.Over Comma.lean:615, Over.pullback OverAdjunction.lean:101), lem-weil-pbc-etale-section-clopen-immersion (Etale.of_comp Etale.lean:130, IsOpenImmersion.of_flat_of_mono FlatMono.lean:38, IsClosedImmersion.of_comp Separated.lean:242; the lead restated the open-immersion clause as two clauses so that each clause is one lemma), lem-weil-pbc-finite-flat-rank-iso (FlatRank.lean: isLocallyConstant_finrank, finrank_of_isPullback, isIso_iff_finrank_eq). Statement made precise ((a)-(d)); 0A0C/0A3S dropped (H^0 comparisons, unused). The imported proof's 'Y_0 -> Y surjective' was false (closed immersion). Lean attached earlier kept (own sorry; tagged 0A48 but states the pair form)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T034034-L-1502684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

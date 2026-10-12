@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.HenselianClopenRestriction
+import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
+import Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
+import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair
@@ -127,7 +131,25 @@ theorem Scheme.bijective_appTop_idempotent_of_henselianRing
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
     Function.Bijective (fun e : {e : Γ(Y, ⊤) // IsIdempotentElem e} ↦
       (⟨i.appTop.hom e.1, e.2.map i.appTop.hom⟩ : {e : Γ(Y₀, ⊤) // IsIdempotentElem e})) :=
-  sorry
+  by
+    obtain ⟨hinj, hsurj⟩ := Scheme.henselian_clopen_restriction I f i f₀ h
+    have hY := scheme_clopen_idempotent Y
+    have hY₀ := scheme_clopen_idempotent Y₀
+    constructor
+    · intro e e' he
+      apply hY.2.1.1
+      apply hinj _ _
+      · exact ⟨(hY.1 e.1 e.2).2.1, (hY.1 e.1 e.2).2.2.1⟩
+      · exact ⟨(hY.1 e'.1 e'.2).2.1, (hY.1 e'.1 e'.2).2.2.1⟩
+      · rw [← (hY.2.2.2 i e.1 e.2).2, ← (hY.2.2.2 i e'.1 e'.2).2]
+        exact congrArg (fun x ↦ idempotentOpen x.1) he
+    · intro e₀
+      obtain ⟨U, hU, hres⟩ := hsurj (idempotentOpen e₀.1)
+        ⟨(hY₀.1 e₀.1 e₀.2).2.1, (hY₀.1 e₀.1 e₀.2).2.2.1⟩
+      obtain ⟨e, he, hloc⟩ := hY.2.1.2 U hU
+      refine ⟨⟨e, he⟩, hY₀.2.1.1 ?_⟩
+      change idempotentOpen (i.appTop e) = idempotentOpen e₀.1
+      rw [(hY.2.2.2 i e he).2, hloc, hres]
 
 /-- **Finite étale lifting over a proper scheme over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
@@ -140,7 +162,33 @@ uniquely.
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
     (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence :=
-  sorry
+  by
+    obtain ⟨hff⟩ := Scheme.fullyFaithful_pullback_finiteEtale_of_henselianRing
+      inferInstance I f i f₀ h
+    have := hff.full
+    have := hff.faithful
+    let j := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+    let k := pullback.fst f j
+    let e := h.isoPullback
+    have hess : (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).EssSurj := by
+      constructor
+      intro V
+      have : IsFinite V.hom := V.prop.1
+      have : Etale V.hom := V.prop.2
+      let V' : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤
+          (pullback f j) := MorphismProperty.Over.mk ⊤ (V.hom ≫ e.hom)
+            ⟨inferInstance, inferInstance⟩
+      obtain ⟨U, ⟨a⟩⟩ := Scheme.essSurj_pullback_finiteEtale_of_henselianRing I f V'
+      let q := asIso (pullback.map U.hom i U.hom k
+        (𝟙 _) e.hom (𝟙 _) (by simp) (by simp [k, j, e]))
+      refine ⟨U, ⟨MorphismProperty.Over.isoMk (q ≪≫ (CategoryTheory.Over.forget _).mapIso a) ?_⟩⟩
+      change q.hom ≫ a.hom.left ≫ V.hom = pullback.snd U.hom i
+      apply (cancel_mono e.hom).1
+      have ha : a.hom.left ≫ V.hom ≫ e.hom = pullback.snd U.hom k := a.hom.w
+      simp only [Category.assoc, ha]
+      dsimp [q]
+      simp
+    exact ⟨inferInstance, inferInstance, hess⟩
 
 end Henselian
 
@@ -157,7 +205,7 @@ theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
     (f₀ : Y₀ ⟶ Spec (.of (IsLocalRing.ResidueField A)))
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))) :
     (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence :=
-  Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing (IsLocalRing.maximalIdeal A) f i
+  Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing (I := IsLocalRing.maximalIdeal A) f i
     f₀ h
 
 /-- **The `H¹` comparison for a finite constant sheaf over a henselian pair.** Let `(A, I)` be
