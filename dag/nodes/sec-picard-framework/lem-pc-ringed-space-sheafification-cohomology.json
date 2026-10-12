@@ -31,55 +31,74 @@
  ],
  "proof": [
   {
-   "text": "Put $I^\\bullet=I(K)$, with its K-injective resolution $K\\to I^\\bullet$ as chosen in [def-pc-ringed-spaces-derived-direct-image]. By the definition in the statement, $H^q(U,K)$ is the degree-$q$ cohomology of the complex of sections $\\Gamma(U,I^\\bullet)$, with restriction maps induced by those of $I^\\bullet$; and since $K\\to I^\\bullet$ is a quasi-isomorphism, the cohomology sheaf $H^q(K)$ is identified with the cohomology object $\\ker(d^q)/\\operatorname{im}(d^{q-1})$ of $I^\\bullet$ [def-weil-abstract-derived-category]. No restriction of K-injectives to $U$ is needed, since sections over $U$ are taken of the resolution on $X$.",
+   "text": "Naturality of the quasi-isomorphism K to I(K), and two-out-of-three, show that I sends quasi-isomorphisms to quasi-isomorphisms. A quasi-isomorphism between K-injectives is a homotopy equivalence. The additive underlying-presheaf functor preserves homotopies; homology factors through the homotopy category, so the resolved presheaf cohomology functor R inverts quasi-isomorphisms. Localization.lift constructs P with Localization.fac giving Q followed by P isomorphic to R.",
    "uses": [
     "def-pc-ringed-spaces-derived-direct-image",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0BKJ, proof, reduction to a complex of injectives"
+    "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
    }
   },
   {
-   "text": "For the complex of presheaves of modules $U\\mapsto\\Gamma(U,I^\\bullet)$, kernels, images, and quotients are computed sectionwise. Applying module sheafification to the cycle and boundary presheaves therefore gives the cycle and boundary sheaves of $I^\\bullet$: sheafification is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact]. Since sheafification also commutes with the displayed quotient, the sheafification of $U\\mapsto H^q(\\Gamma(U,I^\\bullet))$ is canonically $\\ker(d^q)/\\operatorname{im}(d^{q-1})=H^q(K)$. The identification is natural in morphisms of complexes $I^\\bullet\\to J^\\bullet$, which induce compatible maps on the cycle, boundary and cohomology presheaves and sheaves, sheafification being a functor. Applied to $I(f)$ for morphisms of complexes $f$, and since both $K\\mapsto(U\\mapsto H^q(U,K))^\\#$ and $K\\mapsto H^q(K)$ are functors on $D(\\mathcal O_X)$ factoring through the localization, whose morphisms are composites of images of morphisms of complexes and inverses of images of quasi-isomorphisms [def-weil-abstract-derived-category], the isomorphism is natural in $K\\in D(\\mathcal O_X)$.",
+   "text": "Use abelian, rather than module, sheafification. It is exact. The underlying-abelian-sheaf functor T is exact by Mathlib finite-limit preservation and the proved source-library instance SheafOfModules.preservesFiniteColimits_toSheaf. For U the sheaf inclusion and S abelian sheafification, the invertible counit gives (T followed by U) followed by S isomorphic to T. Apply the natural homology comparison for exact functors first to S and then T, and apply the counit termwise. This gives the private complexSheafificationHomologyIso for every complex, naturally in chain maps.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0BKJ, proof, sheafification of cycles and boundaries"
+    "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
    }
   },
   {
-   "text": "Let $\\theta:\\mathcal P\\to\\mathcal P^\\#\\cong H^q(K)$ be the sheafification map of $\\mathcal P=(U\\mapsto H^q(U,K))$ composed with the isomorphism of Step 2. By [lem-weil-pbc-stalk-sheafification-space] $\\theta_x$ is an isomorphism, and by [def-weil-pbc-module-stalk] $\\mathcal P_x$ is the filtered colimit of the groups $H^q(U,K)$ over open neighborhoods $U$ of $x$. Thus every stalk element is a germ of a section on some neighborhood, and a section whose germ is zero restricts to zero on a smaller neighborhood. For $f:K\\to L$, naturality of $\\theta$ (Step 2) and the definition of the induced map on stalks give $(H^q(U,f)(s))_x=H^q(f)_x(s_x)$. These are the asserted consequences.",
+   "text": "The natural resolution map induces an isomorphism on homology. Compose its inverse with the preceding complex-level comparison and DerivedCategory.homologyFunctorFactors to identify R followed by sheafification with Q followed by derived homology followed by T. Localization.liftNatIso descends this natural isomorphism to e on the derived category. Define theta to be the sheafification unit followed by the underlying-presheaf map of e.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-stalk-sheafification-space"
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0BKJ, conclusion from the sheafification description"
+    "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
+   }
+  },
+  {
+   "text": "The stalk map of theta is a composite of isomorphisms: the sheafification-unit stalk map and the stalk map of e. Its surjectivity and TopCat.Presheaf.exists_germ_eq give a local representative for every target stalk element. Its injectivity reduces a zero image germ to a zero source germ; TopCat.Presheaf.germ_eq compares the section with zero and produces the smaller neighborhood. These are the underlying abelian-group clauses of the stalk description, with no bundled module-stalk functor required. Finally, apply TopCat.Presheaf.stalkFunctor_map_germ_apply and the open-component of theta.naturality to obtain the morphism compatibility.",
+   "uses": [
+    "lem-weil-pbc-stalk-sheafification-space",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
    }
   }
  ],
  "proof_deps": [
   "def-pc-ringed-spaces-derived-direct-image",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-stalk-sheafification-space"
+  "lem-weil-pbc-stalk-sheafification-space",
+  "def-weil-pbc-module-stalk"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
+  "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology",
+  "note": "Tag 0BKJ argument realized by the existing exact-functor comparisons, localization, and Mathlib stalk lemmas; no new holes. Source text read at https://stacks.math.columbia.edu/tag/0BKJ because the local TeX is not present."
  },
  "mathlib_searches": [
   {
@@ -172,5 +191,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T194105-L-452994",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
