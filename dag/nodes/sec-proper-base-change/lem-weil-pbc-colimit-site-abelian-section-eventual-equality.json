@@ -16,60 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Form presentations of a limit object Y by stages reached from i, including arrows from i and stage objects with image Y. Joint surjectivity of the object and arrow colimit legs supplies representatives. Filteredness moves any finite set of representatives to a common stage. Eventual equality in these same two supplied colimit cocones gives equality of endpoints and composites after further refinement, and equalizes parallel refinements. Thus the presentation category is filtered. The category above a fixed presentation is final by the common-refinement and equalizer criterion.",
+   "text": "For any compositional triangle of continuous functors, construct the unit-compatible left-adjoint isomorphism from the composite adjunction to the direct adjunction. The stage unit equation characterizes the supplied comparison map as the second unit followed by restriction of that isomorphism. Componentwise cancellation proves equality under the comparison iff equality under the second unit. Apply this to alpha at t and infer that the V(t.right) unit on the stage inverse image H kills x-y.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false
   },
   {
-   "text": "Take the filtered colimit of the inverse-image sections on presentations. Lift a restriction arrow to a common stage; eventual equality and naturality of the uniquely unit-characterized transition maps prove independence of the lift and the identity and composition restriction laws. These are a presheaf of abelian groups. Every Q cover lifts by hQ to a finite stage cover, and hVpullback preserves its covering pullbacks. Its sheaf equalizer is the filtered colimit of the finite stage equalizers. Filtered abelian group colimits commute with finite products and equalizers, so the presheaf is a sheaf; the empty-cover condition gives the zero group.",
+   "text": "Apply the source-unit zero-detection criterion to the sheaf H = F(t.hom) inverse image of G, the object W = F(t.hom)(U), and the source section x-y. This yields d : t.right to k whose unit on H kills x-y.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-finite-precoverage",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "lem-weil-pbc-colimit-site-finite-unit-zero-detection"
    ],
    "elementary": false
   },
   {
-   "text": "A map from this constructed sheaf to a sheaf H is a compatible family of stage sheaf maps. Apply each stage adjunction to identify this family with one map from G to restriction of H along V_i. The identity presentation and the unit define the reverse assignment. Adjunct uniqueness and the colimit universal property show the assignments are mutually inverse and natural in H. Uniqueness of the left adjoint therefore identifies the constructed sheaf with the canonical sheafPullback, compatibly with units.",
+   "text": "Set t-prime to the composite t.hom followed by d, and b to the Under morphism with right component d. F.map_comp and Under.w give the compositional triangle. Apply the proved kernel-comparison lemma to theta b using htheta. Additivity and sub_eq_zero turn vanishing under the d-unit into equality under theta b.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
     "lem-weil-pbc-conjugate-iso-unit-equation",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
-  },
-  {
-   "text": "At Y = V i U the presentations carrying U forward are final, by common refinement and eventual object and arrow equality. Adjunct uniqueness identifies their coprojections with alpha and refinement maps with theta. Equality of alpha-t(x) and alpha-t(y) is equality of the two same-stage representatives in this filtered colimit of underlying sets. The same-stage equality criterion yields b : t to t-prime equating their theta images. Both images are evaluated at F(b.right)(W-t), so endpoint transport is unnecessary in this last equation.",
-   "uses": [
-    "lem-weil-pbc-initial-functor-cofiltered-criterion",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-colimit-site-finite-unit-zero-detection",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), presentation and adjunction paragraphs; abelian extension via sites-modules.tex Tag 03CO (lemma-limits-colimits-abelian-sheaves); elementwise extraction of the same-stage equality clause"
+  "place": "Tag 0A35, source-unit zero detection combined with Mathlib Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom_app and comp_unit_app; argument written and compiled by M1."
  },
  "mathlib_searches": [
   {
@@ -141,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T173843-L-3300402",
+  "landing": "20261012T184317-L-4009345",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
