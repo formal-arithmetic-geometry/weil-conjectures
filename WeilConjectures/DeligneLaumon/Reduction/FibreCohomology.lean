@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
+public import WeilConjectures.DeligneLaumon.Reduction.Weights
 
 /-!
 # Higher direct images over a base quasi-finite over `k₀`

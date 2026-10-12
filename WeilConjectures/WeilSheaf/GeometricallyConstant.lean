@@ -81,12 +81,6 @@ open ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
-/-- The pullback of `ℓ`-adic sheaves along an isomorphism of schemes is an equivalence, being
-left adjoint to the pushforward, which is an equivalence. -/
-instance isEquivalence_adicUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsIso g] :
-    (g)^*ᵃ[l].IsEquivalence :=
-  (adicUpperStarLowerStarAdjunction l g).isEquivalence_left_of_isEquivalence_right
-
 /-- If the geometric fiber `Ū` is connected, the underlying sheaf of a geometrically constant
 Weil sheaf is isomorphic to `ℚ̄_ℓⁿ` on all of `Ū`. -/
 theorem IsGeometricallyConstant.exists_iso_biproduct_unit

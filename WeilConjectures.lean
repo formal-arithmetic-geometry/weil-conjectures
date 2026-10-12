@@ -829,6 +829,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
@@ -2058,7 +2059,6 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.DualIrreducible
-public import WeilConjectures.WeilSheaf.FiniteDirectImage
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
 public import WeilConjectures.WeilSheaf.Finiteness
@@ -2142,7 +2142,6 @@ public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Induced
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Real
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow

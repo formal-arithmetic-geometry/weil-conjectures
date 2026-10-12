@@ -80,6 +80,16 @@ namespace WeilSheaf
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
+/-- The trace energy of a Weil sheaf placed in degree `0` is that of the sheaf. -/
+theorem traceEnergy_toComplex (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :
+    (toComplex.obj F).traceEnergy ι n = F.traceEnergy ι n := by
+  simp only [WeilComplex.traceEnergy, traceEnergy, WeilComplex.traceFunction_toComplex]
+
+/-- The `L²`-weight of a Weil sheaf placed in degree `0` is that of the sheaf. -/
+theorem l2Weight_toComplex (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
+    (toComplex.obj F).l2Weight ι = F.l2Weight ι := by
+  simp only [WeilComplex.l2Weight, l2Weight, traceEnergy_toComplex]
+
 /-- The trace energy of a Weil sheaf placed in degree `0` and shifted by one is that of the
 sheaf: the shift only changes the sign of the trace function. -/
 theorem traceEnergy_shift_toComplex (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) :

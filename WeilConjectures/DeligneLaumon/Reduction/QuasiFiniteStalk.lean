@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
@@ -197,7 +197,7 @@ noncomputable def WeilComplex.derivedLowerShriekCongr {X Y : Scheme.{u}}
   exact Iso.refl _
 
 variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
   [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
   {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyQuasiFinite f]
   [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
@@ -244,6 +244,9 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLo
     (e₅.app _).symm ≪≫ (WeilComplex.derivedLowerShriekCongr (comp_over f' _)).app _
   exact ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf 0).mapIso E')⟩
 
+omit [IsSeparated (X' ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X' ↘ Spec (CommRingCat.of k₀))] in
 /-- **Base change for the degree-zero direct image with compact support of a quasi-finite
 morphism.** For a cartesian square `X' = X ×_Y Y'` of `k₀`-schemes with `f : X ⟶ Y` separated and
 quasi-finite, `h^*(f₀!F) ≅ f'₀!(g^*F)`: `Rf₀!F = f₀!F` is concentrated in degree zero and
@@ -285,8 +288,7 @@ theorem Scheme.Hom.degreeOver_dvd_of_isOver {x : X} (hx : x ∈ X.finitePoints) 
   have := Scheme.Hom.degreeOver_dvd_degreeOver_comp f (Y ↘ Spec (CommRingCat.of k₀)) hx
   rwa [comp_over] at this
 
-variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
+variable [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]

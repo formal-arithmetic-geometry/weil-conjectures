@@ -11,13 +11,14 @@ public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
-# Finite direct images of real Weil sheaves
+# Finite direct images of real and of pure Weil sheaves
 
 For a proper morphism `π` of `k₀`-schemes, the direct image `π₀*F` of a Weil sheaf is the
 cohomology sheaf `R⁰π₀!F` of the direct image with compact support
 (`AlgebraicGeometry.WeilSheaf.lowerStarIsoHigherLowerShriekZero`). For `π` finite, `π₀!` is a
 quasi-finite direct image, so `π₀*` preserves `ι`-reality
-(`AlgebraicGeometry.WeilSheaf.IsReal.lowerStar_of_isFinite`).
+(`AlgebraicGeometry.WeilSheaf.IsReal.lowerStar_of_isFinite`) and punctual purity
+(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.lowerStar_of_isFinite`).
 -/
 
 @[expose] public section
@@ -74,5 +75,23 @@ theorem IsReal.lowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ} {X Y : Scheme
     {F : WeilSheaf k₀ l X} (h : F.IsReal ι) : ((lowerStar π).obj F).IsReal ι :=
   (h.higherLowerShriek_zero_of_quasiFinite π).of_iso
     (lowerStarIsoHigherLowerShriekZero π F).symm
+
+/-- **Purity under a finite direct image.** If `π : X ⟶ Y` is a finite morphism of `k₀`-schemes
+and `F` is punctually `ι`-pure of weight `w`, then so is `π₀*F`: it is the quasi-finite direct
+image `R⁰π₀!F`, at a closed point `y` every eigenvalue `β` of `F_y` has a power `β ^ e`, with
+`e = [κ(x) : κ(y)]`, which is an eigenvalue of `F_x` for a closed point `x` above `y`, and
+`q_x = q_y ^ e`
+(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite`).
+The blueprint states this for `π` finite étale; étaleness is not needed
+(blueprint: `lem-a1-finite-map-purity`). -/
+theorem IsPunctuallyPureOfWeight.lowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
+    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    (π : X ⟶ Y) [π.IsOver (Spec (CommRingCat.of k₀))] [IsFinite π]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    {F : WeilSheaf k₀ l X} (h : F.IsPunctuallyPureOfWeight ι w) :
+    ((lowerStar π).obj F).IsPunctuallyPureOfWeight ι w :=
+  (h.higherLowerShriek_zero_of_quasiFinite π).of_mono
+    (lowerStarIsoHigherLowerShriekZero π F).hom
 
 end AlgebraicGeometry.WeilSheaf
