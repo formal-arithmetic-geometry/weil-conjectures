@@ -1,6 +1,6 @@
 # Work queue
 
-54 items; claim with `tools/claim.py next <group> [--stage N]`.
+55 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (44)
+## Stage 3: modules to prove (45)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -59,10 +59,11 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.ModuleAcyclicUnderlyingSections` | 6 | 1 | proof |
 | `Sheaf.Topology.FiniteClosedCoverCohomologyVanishing` | 6 | 1 | proof |
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
 | `Sheaf.Topology.NoetherianExtensionByZeroReduction` | 6 | 1 | proof |
