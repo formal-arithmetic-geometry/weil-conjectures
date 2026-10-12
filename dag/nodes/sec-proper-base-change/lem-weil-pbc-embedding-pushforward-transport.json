@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-embedding-pushforward-transport",
+ "kind": "statement",
+ "title": "Equivalences of sheaf categories identifying the embedded-image direct images",
+ "statement": "Let X,Z be topological spaces in universe u, i:Z→X a continuous embedding, Y a topological space in universe u+1, and e:Y≃ₜX a homeomorphism. Let D=e⁻¹(range i), and let j:D→Y be the inclusion. There exist equivalences T:Sh(X,Type(u+1))≌Sh(Y,Type(u+1)) and S:Sh(Z,Type(u+1))≌Sh(D,Type(u+1)), a natural isomorphism Γ(X,−)≅T⋙Γ(Y,−), and a natural isomorphism i_*⋙T≅S⋙j_*. These are direct-image statements, with no inverse-image or adjunction unit assumed.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZG, application to the closed-image transport of the assigned node; Mathlib Topology.Sets.Opens Homeomorph.opensCongr, CategoryTheory.Sites.Equivalence Equivalence.sheafCongr"
+ },
+ "proof": [
+  {
+   "text": "For any homeomorphism between arbitrary universes, its equivalence on opens is a dense subsite. Prove preservation and reflection of covering sieves pointwise: forward, factor an arrow of the image sieve and pull membership back by the inverse homeomorphism; reverse, send a covering arrow to its image. Equivalence supplies cover density and local full faithfulness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set h:D≃ₜZ to e restricted to D, followed by the inverse of the embedding's homeomorphism to its range. Use sheafCongr on the equivalences of opens from e.symm and h.symm, with the dense-subsite proof, to obtain T and S.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At the top open the inverse open-set functor preserves top, giving the global-sections isomorphism by mapIso of eqToIso. Its naturality is the underlying sheaf morphism's naturality. The two direct-image composites are definitionally equal: h.symm(z) has underlying point e.symm(i(z)). Use Iso.refl under ObjectProperty.isoMk and NatIso.ofComponents.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-12",
+  "note": "Fully proved in Lean from Mathlib, with no sorry; part of the assigned node's homeomorphism/adjunction transport proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf categories and inverse image adjunction units transported along a homeomorphism of topological spaces",
+   "results": "sheafCongr supplies transport across different universes once the open-set equivalence is shown dense; presheafEquivOfIso only treats bundled same-universe topological isomorphisms.",
+   "date": "2026-10-12",
+   "verdict": "components; no exact standalone match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.sheafCongr",
+   "results": "sheafCongr supplies transport across different universes once the open-set equivalence is shown dense; presheafEquivOfIso only treats bundled same-universe topological isomorphisms.",
+   "date": "2026-10-12",
+   "verdict": "components; no exact standalone match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateIsoEquiv|sheafCongr",
+   "results": "sheafCongr supplies transport across different universes once the open-set equivalence is shown dense; presheafEquivOfIso only treats bundled same-universe topological isomorphisms.",
+   "date": "2026-10-12",
+   "verdict": "components; no exact standalone match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homeomorphism between topological spaces induces an equivalence of categories of sheaves compatible with pushforward and global sections",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ClosedEmbeddingRestrictionTransport",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-closed-embedding-restriction-transport-square",
+   "place": "Equivalences of sheaf categories identifying the embedded-image direct images",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.EmbeddingPushforwardTransport",
+  "file": "lean/Sheaf/Topology/EmbeddingPushforwardTransport.lean",
+  "declaration": "TopCat.embedding_pushforward_transport",
+  "statement": "theorem embedding_pushforward_transport\n    {X Z : TopCat.{u}} (i : Z ⟶ X) (hi : Topology.IsEmbedding i)\n    (Y : TopCat.{u + 1}) (e : Y ≃ₜ X) :\n    let D : Set Y := e ⁻¹' Set.range i\n    let j : TopCat.of D ⟶ Y := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩\n    ∃ (T : X.Sheaf (Type (u + 1)) ≌ Y.Sheaf (Type (u + 1)))\n      (S : Z.Sheaf (Type (u + 1)) ≌ (TopCat.of D).Sheaf (Type (u + 1))),\n      Nonempty\n        (sheafToPresheaf (Opens.grothendieckTopology X) (Type (u + 1)) ⋙\n            (evaluation (Opens X)ᵒᵖ (Type (u + 1))).obj (op ⊤) ≅\n          T.functor ⋙ sheafToPresheaf (Opens.grothendieckTopology Y) (Type (u + 1)) ⋙\n            (evaluation (Opens Y)ᵒᵖ (Type (u + 1))).obj (op ⊤)) ∧\n      Nonempty\n        ((Opens.map i).sheafPushforwardContinuous (Type (u + 1))\n            (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z) ⋙ T.functor ≅\n          S.functor ⋙ Sheaf.pushforward (Type (u + 1)) j)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T070538-L-3471650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T070538-L-3471650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
