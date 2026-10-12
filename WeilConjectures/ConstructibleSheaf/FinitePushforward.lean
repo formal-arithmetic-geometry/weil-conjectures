@@ -8,7 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.FinitelyPresentable
+public import WeilConjectures.ConstructibleSheaf.NoetherianDescent
+public import WeilConjectures.ConstructibleSheaf.NormalGenericPoint
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
@@ -64,39 +66,6 @@ noncomputable instance Etale.hasFiniteBiproducts_sheaf_moduleCat (X : Scheme.{u}
     HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
-/-- **Constant sheaves on a normal scheme.** Let `Y` be an integral scheme all of whose local
-rings are integrally closed, `g : Spec K ⟶ Y` the inclusion of its generic point and `M` a
-`Λ`-module. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism; the same
-holds for the inclusion of a nonempty open subscheme.
-
-The blueprint states this for a finite abelian group `E`; the proof (the strict henselisation
-of a normal local ring is a normal domain, so the generic fibre of `Spec 𝒪ˢʰ_{Y,ȳ}` is
-irreducible) applies to an arbitrary value `M`.
-(blueprint: `lem-weil-pbc-normal-constant-generic`) -/
-@[stacks 09Z5]
-theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [IsIntegral Y]
-    (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) :
-    IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-        (Y.fromSpecStalk (genericPoint Y))).unit.app
-          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ∧
-      ∀ {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U],
-        IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
-          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-  sorry
-
-/-- **Constructible sheaves are finitely presentable.** On a quasi-compact quasi-separated
-scheme `X`, with `Λ` Noetherian, a constructible sheaf of `Λ`-modules `F` is a finitely
-presentable object of the category of sheaves: `Hom(F, -)` commutes with filtered colimits
-(indexed by small categories), i.e. every morphism from `F` to a filtered colimit factors
-through a stage, and two such factorisations agree at a later stage.
-(blueprint: `lem-weil-pbc-constructible-finitely-presented`) -/
-@[stacks 09Z4]
-theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ]
-    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    IsFinitelyPresentable.{u} F :=
-  sorry
-
 /-- **The finite-pushforward embedding over a Noetherian base.** A constructible sheaf of
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
 `C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
@@ -115,21 +84,6 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
 section Auxiliary
 
 /-! ### Auxiliary lemmas -/
-
-/-- **Descent of a constructible sheaf to a Noetherian scheme.** A constructible sheaf of
-`Λ`-modules on a quasi-compact quasi-separated scheme `U`, for `Λ` noetherian, is the pullback
-of a constructible sheaf on a Noetherian scheme `U'` along some morphism `U ⟶ U'`: its strata
-are constructible and its finitely generated stalks finitely presented, so write `U` as a
-cofiltered limit of schemes of finite type over `ℤ` with affine transition maps [Stacks 01ZA] and
-descend the finitely many étale objects, sections and relations presenting `C` to one stage.
-This is Step 2 of `lem-weil-pbc-constructible-finite-pushforward-approximation`. -/
-theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Scheme.{u}}
-    [CompactSpace U]
-    [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsConstructibleSheaf C] :
-    ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
-  sorry
 
 /-- **Pulling back a finite-pushforward embedding.** If `C'` on `U'` embeds into a finite sum
 of pushforwards of constant sheaves along finite, finitely presented morphisms, then so does
