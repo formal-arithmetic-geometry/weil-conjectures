@@ -16,30 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Expand the comparisons before homology. Apply the inverse hom-set equivalence for the h″ derived adjunction to the composite comparison. Its naturality moves the first comparison inside b^*. The h′ counit followed by the adjunct defining that first comparison cancels its unit by the triangle identity.",
+   "text": "Prove the single-complex coherence locally for arbitrary exact additive functors G and H. At the complex level, check the supported degree and all zero degrees for composition and for a natural isomorphism. Expand mapDerivedCategorySingleFunctor into the factorization comparison followed by Q of the complex comparison. Use mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac with naturality to transport the two degreewise equalities through localization. Reflect equality along the fully faithful inclusion of the bounded-below category. Specialize to a* and b* and upperStarComp to obtain cD.hom at F[0], followed by b* of the a-single comparison and the b-single comparison, equal to the (ba)-single comparison followed by singleFunctor of c.hom.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction"
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Associativity of the derived inverse-image composition comparisons identifies the remaining adjunct with the comparison for b followed by a. On F concentrated in degree zero, the two single-complex comparisons compose to singleFunctor applied to the underived comparison c_{b,a,F}: this follows by checking degree zero and all zero degrees on the single complex and transporting by the exact-functor localization comparisons. Apply the h″ direct image and degree-p homology, both preserving composition. All witnesses of the structure-map equalities agree by proof irrelevance. Identity morphisms, p = 0 and zero F are included.",
+   "text": "Construct the derived transition as the h-prime adjunction unit followed by direct image of the transported pullback comparison and pullback of the h counit. Prove naturality by transposing with homEquiv.symm, moving the pullback comparison by naturality, and using counit naturality. For composition, substitute the two structure-map equalities, transpose with the final adjunction, and move the first transition through the second comparison. The first transition is an adjunct, so the middle counit cancels its unit by homEquiv.symm_apply_apply. Apply upperStarCompDerivedPlus_assoc and naturality of the inverse (b,a) comparison; cancel its hom and inv. This gives t_a followed by t_b followed by direct image of cD.inv equal to t_ba.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-derived-inverse-image"
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-inverse-image-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand abelianHigherDirectImageMap as homology of the derived transition followed by direct image of the single comparison and coefficient map. The expansion is just associativity and map_comp; first substitute the structure map equality to avoid expanding equality transports. Pull the composite of homology maps inside homology. Replace t_ba by the derived composition formula, and replace the composite coefficient comparison by the single-complex coherence formula. Combine consecutive direct-image maps and cancel cD.inv followed by cD.hom. Finally naturality of the b transition moves the a-single comparison through it. Associativity gives exactly the two canonical comparison maps in the statement. All helpers are proved locally; there are no remaining intermediate holes. Identity scheme arrows, zero sheaves and p=0 require no separate assumptions.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-derived-inverse-image",
   "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-derived-inverse-image"
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-inverse-image-composition"
  ],
  "proof_origin": {
-  "by": "worker K3",
-  "document": "Stacks Project, Etale Cohomology",
-  "place": "Tag 09Z1 canonical comparison maps; adjunction and single-complex coherence elaboration by K3"
+  "by": "worker U3",
+  "document": "Stacks Project, Etale Cohomology, Tag 09Z1; lean/Sheaf/AlgebraicGeometry/EtalePullbackSingleComp.lean; lean/Sheaf/AlgebraicGeometry/LowerStarPlusTransitionComp.lean; WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc",
+  "place": "Canonical comparison maps of Tag 09Z1. U3 reuses the proved private generic single-complex calculations, specializes the proved module-valued derived transition calculation to AddCommGrpCat, and supplies naturality, expansion and homology assembly locally. The target statement and the unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -135,10 +146,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T165519-L-2935372",
-  "kind": "interface",
+  "landing": "20261012T184350-L-4022146",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
