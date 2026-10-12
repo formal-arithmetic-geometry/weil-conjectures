@@ -29,71 +29,26 @@
  ],
  "proof": [
   {
-   "text": "(Clause (1).) Write $\\varphi:R\\to C$ for the structure map and $\\bar z$ for the class of $z$ in $C$. The polynomial $z^p-f\\in R[z]$ [def-weil-polynomial-ring] is monic of degree $p$, so by [lem-weil-pbc-monic-quotient-free] the ring $C=R[z]/(z^p-f)$ is a free $R$-module with basis $1,\\bar z,\\ldots,\\bar z^{p-1}$; in particular it is a finitely generated $R$-module. The map $\\varphi$ is $r\\mapsto r\\cdot1$, and $1$ is a member of this basis, so $r\\cdot 1=0$ forces $r=0$: $\\varphi$ is injective. Since $C$ is a finitely generated $R$-module, $C$ is integral over $R$ [def-weil-pbc-integral-closure] by [lem-weil-pbc-finite-algebra-is-integral].",
-   "uses": [
-    "def-weil-polynomial-ring",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "def-weil-pbc-integral-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof: 'Set C = B[z]/(z^p - f) and note that B subset C is finite'"
-   }
-  },
-  {
-   "text": "(The Frobenius is additive in $C$.) Since $p=0$ in $R$, also $p\\cdot1=\\varphi(p\\cdot 1)=0$ in $C$. Let $x,y\\in C$. By the binomial formula in the commutative ring $C$, $(x+y)^p=\\sum_{k=0}^{p}\\binom pk x^ky^{p-k}$. For $0<k<p$ the prime $p$ divides $\\binom pk$: from $\\binom pk\\,k!\\,(p-k)!=p!$, $p$ divides the right side, and $p$ divides neither $k!$ nor $(p-k)!$ (products of integers between $1$ and $p-1$), so, $p$ being prime, $p\\mid\\binom pk$. These terms are therefore $0$ in $C$, and $(x+y)^p=x^p+y^p$. By induction on the number of summands, $(x_0+\\cdots+x_m)^p=x_0^p+\\cdots+x_m^p$ for all $x_0,\\ldots,x_m\\in C$; and $(xy)^p=x^py^p$ by commutativity.",
+   "text": "Set g = X^p - C f. It is monic by Polynomial.monic_X_pow_sub_C and has nonzero degree by Polynomial.degree_X_pow_sub_C since p is prime. AdjoinRoot.of.injective_of_degree_ne_zero gives injectivity. Polynomial.Monic.finite_adjoinRoot supplies a finite R-module, and Algebra.IsIntegral.of_finite proves every quotient element integral over R.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof: 'Set C = B[z]/(z^p - f) and note that B subset C is finite' (the power property of C over B, which the source derives from the pure inseparability of L/M; written here directly)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Clause (2).) Let $c\\in C$. As $C$ is a quotient of the polynomial ring $R[z]$ [def-weil-polynomial-ring], $c$ is the class of a polynomial, $c=\\sum_{i=0}^m\\varphi(b_i)\\bar z^i$ with $b_i\\in R$. By Step 2, $c^p=\\sum_{i=0}^m\\varphi(b_i)^p(\\bar z^p)^i$, and $\\bar z^p=\\varphi(f)$ in $C$ because $z^p-f$ lies in the ideal divided out. Hence $c^p=\\varphi\\big(\\sum_{i=0}^m b_i^pf^i\\big)$ lies in the image of $R$.",
-   "uses": [
-    "def-weil-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof: 'Set C = B[z]/(z^p - f) and note that B subset C is finite' ('for every element of B or C some power of it lies in A')"
-   }
-  },
-  {
-   "text": "(Clause (3), at most one prime.) Let $\\mathfrak p\\subset R$ be a prime ideal and let $\\mathfrak q,\\mathfrak q'\\subset C$ be prime ideals with $\\varphi^{-1}(\\mathfrak q)=\\varphi^{-1}(\\mathfrak q')=\\mathfrak p$. Let $c\\in\\mathfrak q$. By Step 3 there is $r\\in R$ with $c^p=\\varphi(r)$. Then $\\varphi(r)=c^p\\in\\mathfrak q$, so $r\\in\\varphi^{-1}(\\mathfrak q)=\\mathfrak p=\\varphi^{-1}(\\mathfrak q')$, so $c^p=\\varphi(r)\\in\\mathfrak q'$; since $\\mathfrak q'$ is prime, $c\\in\\mathfrak q'$ (if $c\\notin\\mathfrak q'$, then $c^n\\notin\\mathfrak q'$ for all $n\\ge1$ by induction on $n$). Hence $\\mathfrak q\\subseteq\\mathfrak q'$, and by symmetry $\\mathfrak q'\\subseteq\\mathfrak q$, so $\\mathfrak q=\\mathfrak q'$.",
+   "text": "Install characteristic-p instances using CharP.charP_iff_prime_eq_zero in R and AdjoinRoot g. Represent each quotient element by a polynomial (AdjoinRoot.induction_on), and use Polynomial.induction_on' to reduce to sums and monomials. Sums are handled by add_pow_char. For a*z^n, the witness in R is a^p*f^n: AdjoinRoot.eval₂_root gives z^p = of g f and commutativity of natural-number multiplication rewrites (z^n)^p = (z^p)^n. This proves the p-th-power image assertion.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BR8 (lemma-powers), proof, first paragraph (injectivity on spectra, then surjectivity by Lemma Tag 00GQ)"
-   }
+   "elementary": true
   },
   {
-   "text": "(Clause (3), existence.) By Step 1 the map $\\varphi:R\\to C$ is injective and $C$ is integral over $R$. By lying over [lem-weil-pbc-integral-injective-lying-over], every prime ideal $\\mathfrak p\\subset R$ is the contraction $\\varphi^{-1}(\\mathfrak q)$ of some prime ideal $\\mathfrak q\\subset C$. With Step 4, for every prime $\\mathfrak p$ of $R$ there is exactly one prime $\\mathfrak q$ of $C$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$.",
-   "uses": [
-    "lem-weil-pbc-integral-injective-lying-over"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0BR8 (lemma-powers), proof, first paragraph (injectivity on spectra, then surjectivity by Lemma Tag 00GQ); lying over is Algebra, Lemma Tag 00GQ (lemma-integral-overring-surjective)"
-   }
+   "text": "Apply PrimeSpectrum.isHomeomorph_comap (Stacks 0BR8) with exponent p for every element. Positivity follows from hp.pos, and the kernel is zero by RingHom.injective_iff_ker_eq_bot and the injectivity already proved, hence contained in the nilradical. Surjectivity gives a prime above each P; injectivity gives uniqueness, converting between spectrum points and ideals by PrimeSpectrum.ext and congrArg asIdeal.",
+   "uses": [],
+   "elementary": false
   }
  ],
- "proof_deps": [
-  "def-weil-polynomial-ring",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "def-weil-pbc-integral-closure",
-  "lem-weil-pbc-integral-injective-lying-over"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Clause (3) (Steps 4-5) follows the proof of Algebra, Lemma Tag 0BR8 (lemma-powers) with Lemma Tag 00GQ; clauses (1)-(2) (Steps 1-3) are written by the agent: the source, More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, more-algebra.tex), only says 'B subset C is finite' and derives the power property from the pure inseparability of the fraction fields, not from the Frobenius identity used here"
+  "place": "Stage-3 Mathlib reduction, independently read by R1: monic finite AdjoinRoot API and explicit Frobenius polynomial induction for clauses (1)-(2); PrimeSpectrum.isHomeomorph_comap (Stacks 0BR8) for clause (3), implementing the original power and lying-over argument."
  },
  "mathlib_searches": [
   {
@@ -218,5 +173,15 @@
   "group": "H1",
   "result": "pass",
   "note": "p prime (hp), R CommRing+IsDomain, p=0 in R (hchar, literal; = CharP for a domain, landed precedent ArtinSchreierKernel), f : R, C = AdjoinRoot (X^p - C f) (rfl = R[X]/span{X^p-C f}), C domain instance; (1) of injective + IsIntegral R c via algebraMap = of (rfl); (2) c^p in of.range; (3) every prime P has ∃! prime Q with comap = P; #check: X/C resolve to Polynomial.X/C, of to AdjoinRoot.of; no let/show, universe u only; node record-only diff"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T194135-L-463045",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
