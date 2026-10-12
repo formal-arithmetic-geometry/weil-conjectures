@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution $M\\to I^\\bullet$ in $\\mathcal A$ [def-sp-injective-resolutions]. Since $T$ is exact, applying it to the augmented exact sequence gives an exact sequence $0\\to T(M)\\to T(I^0)\\to T(I^1)\\to\\cdots$. Thus $T(I^\\bullet)$ is a resolution of $T(M)$, bounded below and with the same degrees as $I^\\bullet$; its terms need not be injective in $\\mathcal B$.",
+   "text": "Choose the Mathlib injective resolutions I₀ of M and J₀ of T(M) [def-sp-injective-resolutions]. For any injective resolution I of M, construct its mapped augmentation single₀(T(M)) → T(I) using singleMapHomologicalComplex and T.mapHomologicalComplex.map I.ι. Exactness of T preserves homology, so this augmentation is a quasi-isomorphism. Construct φ₀ : T(I₀) → J₀ by InjectiveResolution.descOfQuasiIso over the identity; it is a quasi-isomorphism.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "By the hypothesis on $T$, every term $T(I^m)$ of the resolution in Step 1 is $U$-acyclic in the sense of [def-sp-acyclic]. Apply item 2 of [lemma-weil-pbc-leray-acyclicity] with $v=U$, $F=T(M)$ and the resolution $T(M)\\to T(I^\\bullet)$. Its natural comparison gives $R^iU(T(M))\\cong\\mathcal H^i(U(T(I^\\bullet)))$ for every $i\\geq0$; it does not require $T(I^m)$ to be injective.",
+   "text": "The hypothesis hTU makes every term of T(I₀) U-acyclic [def-sp-acyclic], and the terms of J₀ are U-acyclic because they are injective. Apply Functor.quasiIso_map_of_rightAcyclic_nat from [lemma-weil-pbc-leray-acyclicity] to φ₀. Thus U(φ₀) is a quasi-isomorphism and its degree-i homology map is an isomorphism.",
    "uses": [
     "def-sp-acyclic",
     "lemma-weil-pbc-leray-acyclicity"
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "The composite $U\\circ T$ is left exact: $T$ preserves kernels and finite biproducts because it is exact, and $U$ preserves them by left exactness [def-sp-left-exact-additive]. Computing its right derived functor with the chosen injective resolution gives $R^i(U\\circ T)(M)=\\mathcal H^i(U(T(I^\\bullet)))$. The comparison of Step 2 therefore gives the claimed isomorphism. The isomorphism is the natural map of item 2 of [lemma-weil-pbc-leray-acyclicity], induced by any morphism of complexes $T(I^\\bullet)\\to J^\\bullet$ over $\\mathrm{id}_{T(M)}$ into an injective resolution $T(M)\\to J^\\bullet$ [def-sp-injective-resolutions]; it is in this sense canonical, the derived functors on both sides being those of the convention of [def-sp-left-exact-additive].",
+   "text": "Use InjectiveResolution.isoRightDerivedObj [def-sp-left-exact-additive] for I₀ and J₀, the complex-composition isomorphism, and the homology isomorphism of Step 2 to construct e. For arbitrary I, J and a lift φ, use injective-resolution desc maps α : I₀ → I and β : J₀ → J [def-sp-injective-resolutions]. The maps φ₀ ≫ β and T(α) ≫ φ agree on the mapped augmentation. The proved private helper homotopy_of_resolution constructs a homotopy between them by coinduction, using exactness of the source and injectivity of the target terms, as in Mathlib InjectiveResolution.descHomotopyZero. Apply U to the homotopy and take homology. Combine the resulting equality with the naturality of isoRightDerivedObj at α and β and the naturality of mapHomologicalComplexCompIso at α. Reassociating these compositions yields exactly the required formula for e.hom for every I, J and φ.",
    "uses": [
     "def-sp-left-exact-additive",
     "lemma-weil-pbc-leray-acyclicity",
@@ -69,7 +69,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 015M (derived-lemma-compose-derived-functors), using Lemma 015E (derived-lemma-leray-acyclicity)"
+  "place": "Tag 015M (lemma-compose-derived-functors), using Tag 015E (lemma-leray-acyclicity); canonical comparison implemented with Mathlib resolution naturality and the coinductive argument of InjectiveResolution.descHomotopyZero. Tags read at https://stacks.math.columbia.edu/tag/015M and https://stacks.math.columbia.edu/tag/015E."
  },
  "mathlib_searches": [
   {
@@ -159,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T225323-L-1810847",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
