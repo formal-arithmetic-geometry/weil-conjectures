@@ -17,26 +17,15 @@
  ],
  "proof": [
   {
-   "text": "The dense-open complement is zero-dimensional, finite and discrete, with residue fields equal to k. Closed direct image is exact and Leray computes its cohomology on the complement. Thus the closed term has no positive cohomology over either field, and its degree-zero comparison is bijective by the canonical global-sections pullback and stalk comparison.",
+   "text": "Apply dense_open_closed_term to obtain a short exact sequence with the actual counit as first arrow, a bijective closed-term degree-zero comparison, and vanishing degree-one cohomology on both rows.",
    "uses": [
-    "def-weil-pbc-curve-setting",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-    "lemma-weil-pbc-finite-direct-image-exact"
+    "lem-pbc-k2-dense-open-closed-term"
    ],
    "elementary": false
   },
   {
-   "text": "The open-closed short exact sequence and its inverse image give the five-term commuting ladder 0 -> H^0(G) -> H^0(F) -> H^0(B) -> H^1(G) -> H^1(F) -> 0. The known closed-term bijection and the five lemma in the appropriate windows transfer the simultaneous first and last pairs of vertical bijections in both directions.",
+   "text": "Apply the proved pullbackCohomology_longExact_ladder. Degree-one closed-term vanishing makes both counit H¹ maps surjective. Use Mathlib.Algebra.FiveLemma additive left/right exact and four-lemma variants to prove both directions: F comparisons imply G⁰ bijective by the left-exact lemma and G¹ injective/surjective by the two four lemmas; G comparisons imply F⁰ injective/surjective by the two four lemmas and F¹ bijective by the right-exact lemma. Finally split q≤1 into q=0 and q=1.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
     "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
     "lem-weil-pbc-five-lemma"
    ],
@@ -44,24 +33,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-curve-setting",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pbc-k2-dense-open-closed-term",
   "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-zero-dimensional-cohomology",
-  "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-  "lemma-weil-pbc-finite-direct-image-exact"
+  "lem-weil-pbc-five-lemma"
  ],
  "proof_origin": {
-  "by": "X2",
+  "by": "K2 stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the five-term exact sequence and remark (c)"
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the five-term exact sequence and remark (c)",
+  "note": "The geometric first step is a separate item; the simultaneous four-lemma transfer is fully written in Lean using Mathlib.Algebra.FiveLemma."
  },
  "mathlib_searches": [
   {
@@ -139,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T054002-L-2649579",
+  "landing": "20261012T063514-L-3156950",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

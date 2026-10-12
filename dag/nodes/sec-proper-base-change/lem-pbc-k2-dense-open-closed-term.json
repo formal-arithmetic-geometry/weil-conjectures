@@ -1,0 +1,159 @@
+{
+ "id": "lem-pbc-k2-dense-open-closed-term",
+ "kind": "statement",
+ "title": "Acyclic closed term for the dense-open counit",
+ "statement": "Let k,k' be algebraically closed fields and f:X→Spec k a separated finite-type curve of dimension at most one [def-weil-pbc-curve-setting]. Let X'→X be the pullback along Spec k'→Spec k [def-weil-pbc-extension-pullback]. For any commutative ring Λ, module sheaf F [def-weil-pbc-etale-sheaves], and dense open U, let A be its underlying abelian sheaf, and ε the underlying counit j_!j^*F→F [def-weil-pbc-extension-by-zero], [lem-weil-pbc-extension-by-zero-adjunction]. There exist an abelian sheaf B and b:A→B with εb=0 such that 0→G→A→B→0 is short exact, the canonical degree-zero cohomologyMap for B [def-weil-pbc-etale-cohomology] is bijective, and H¹(X,B) and H¹(X',ι'^*B) are subsingletons. No torsion, reducedness, or constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the five-term exact sequence and remark (c)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-extension-pullback",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Form the reduced closed complement i:Z→X and the module open-closed short exact sequence. Forget to abelian sheaves, an exact functor. Its first arrow is exactly ε; choose the last object B and last arrow b from this sequence.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Density excludes the generic points of the Noetherian curve. The closed complement is therefore finite and zero-dimensional, with residue fields k. Finite exact direct image and Leray identify cohomology of B with that on Z, which vanishes in positive degrees. After the field extension, finite-exchange base change for the closed immersion identifies the pulled-back B with the corresponding closed term on the finite union of k'-points. Its degree-one cohomology vanishes as well. The degree-zero canonical map is the product of stalk comparisons, and hence bijective. This works for arbitrary module stalks; finiteness of those stalks is not needed. Empty complements give the zero sheaf.",
+   "uses": [
+    "def-weil-pbc-curve-setting",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-curve-setting",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-exchange"
+ ],
+ "proof_origin": {
+  "by": "K2 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the five-term exact sequence and remark (c)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dense open curve closed complement cohomology comparison",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "five lemma exact sequence comparison bijective",
+   "results": "Mathlib.Algebra.FiveLemma has the additive four/five lemmas, but not the geometric closed-term construction.",
+   "date": "2026-10-12",
+   "verdict": "Use four lemmas in the parent theorem; no geometric match."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*closed.*term|dense.*low.*base",
+   "results": "No msearch hits. Direct library rg finds DenseOpenHighCohomologyHigh and DenseOpenPulledCounitHigh, which concern degrees above one only.",
+   "date": "2026-10-12",
+   "verdict": "No existing statement of the required closed-term properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open closed exact sequence etale sheaf closed immersion cokernel",
+   "results": "Eight hits, including MayerVietorisSquare.shortComplex_shortExact; none identifies the dense-open closed term or its field-extension cohomology. Direct rg finds the existing upstream shortExact_openClosedShortComplex, which supplies only the exact-sequence part.",
+   "date": "2026-10-12",
+   "verdict": "No whole-statement match; keep the existing open-closed result as a dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.ShortExact",
+   "results": "Initial search returned unknown identifier. Follow-up query \"shortExact\" returned twelve standard ShortComplex exactness definitions and lemmas, none asserting the geometric closed-term properties.",
+   "date": "2026-10-12",
+   "verdict": "No geometric match in these results."
+  },
+  {
+   "tool": "grep",
+   "query": "closedComplement|openClosed|open_closed",
+   "results": "msearch hits concern unrelated Mathlib closed complements. Direct rg on lean/ finds shortExact_openClosedShortComplex and Finite/BaseChange; the existing curve comparison statements impose constructibility/torsion or concern higher degrees.",
+   "date": "2026-10-12",
+   "verdict": "Use existing exactness and finite exchange inputs; no duplicate of the split lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenLowBaseChange",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-x2-dense-open-low-base-change",
+   "place": "Proof step 1: acyclic closed term and degree-zero comparison",
+   "via": [
+    "lem-pbc-s2-dense-open-base-change",
+    "lem-pbc-q1-dense-open-prime-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenClosedTerm",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenClosedTerm.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.dense_open_closed_term",
+  "statement": "theorem dense_open_closed_term (Λ : Type (u + 1)) [CommRing Λ]\n    {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']\n    {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]\n    {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : X' ⟶ Spec (.of k')}\n    {ι' : X' ⟶ X} (h : IsPullback ι' f' f ι)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (U : X.Opens) (hU : Dense (U : Set X)) :\n    let A := (sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F\n    let ε := (sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map\n        ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).counit.app F)\n    ∃ (B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (b : A ⟶ B)\n      (w : ε ≫ b = 0),\n      (ShortComplex.mk ε b w).ShortExact ∧\n      Function.Bijective (cohomologyMap ι' B 0) ∧\n      Subsingleton (Sheaf.H B 1) ∧\n      Subsingleton (Sheaf.H (((ι')^*[AddCommGrpCat.{u + 1}]).obj B) 1)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T063514-L-3156950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T063514-L-3156950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

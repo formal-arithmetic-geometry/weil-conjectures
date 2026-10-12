@@ -7,14 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenClosedTerm
 import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.OpenClosed.Exact
+import Mathlib.Algebra.FiveLemma
 
 /-! # Dense-open field-extension comparison ingredients -/
 
@@ -55,6 +50,84 @@ theorem dense_open_low_base_change (Λ : Type (u + 1)) [CommRing Λ]
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)) ↔
     (∀ q : ℕ, q ≤ 1 → Function.Bijective (cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) q)) := by
-  sorry
+  dsimp
+  obtain ⟨B, b, w, hS, hB, hBX, hBY⟩ := dense_open_closed_term Λ f h F U hU
+  let S := ShortComplex.mk _ b w
+  obtain ⟨hY, δX, δY, _, _, hiX, hiY, exX, exY, c₁, c₂, c₃⟩ :=
+    pullbackCohomology_longExact_ladder ι' S hS
+  let := hBX
+  let := hBY
+  have surX : Function.Surjective (Sheaf.H.map S.f 1) := by
+    intro x
+    exact (exX 1).1 x |>.mp (Subsingleton.elim _ _)
+  have surY : Function.Surjective (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map S.f) 1) := by
+    intro x
+    exact (exY 1).1 x |>.mp (Subsingleton.elim _ _)
+  have hc₁ (q : ℕ) :
+      (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map S.f) q).comp
+        (cohomologyMap ι' S.X₁ q) =
+      (cohomologyMap ι' S.X₂ q).comp (Sheaf.H.map S.f q) := AddMonoidHom.ext (fun x ↦ (c₁ q x).symm)
+  have hc₂ (q : ℕ) :
+      (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map S.g) q).comp
+        (cohomologyMap ι' S.X₂ q) =
+      (cohomologyMap ι' S.X₃ q).comp (Sheaf.H.map S.g q) := AddMonoidHom.ext (fun x ↦ (c₂ q x).symm)
+  have hc₃ (q : ℕ) :
+      (δY q).comp (cohomologyMap ι' S.X₃ q) =
+      (cohomologyMap ι' S.X₁ (q + 1)).comp (δX q) := AddMonoidHom.ext (fun x ↦ (c₃ q x).symm)
+  constructor
+  · intro hF
+    have hG₀ := AddMonoidHom.bijective_of_bijective_of_injective_of_left_exact
+      _ _ _ _ _ _ _ (hc₁ 0) (hc₂ 0) (exX 0).1 (exY 0).1
+      (hF 0 (by omega)) hB.1 hiX hiY
+    have hG₁i := AddMonoidHom.injective_of_surjective_of_injective_of_injective
+      _ _ _ _ _ _ _ _ _ _ (hc₂ 0) (hc₃ 0) (hc₁ 1)
+      (exX 0).2.1 (exX 0).2.2 (exY 0).2.1
+      (hF 0 (by omega)).2 hB.1 (hF 1 (by omega)).1
+    have hG₁s := AddMonoidHom.surjective_of_surjective_of_surjective_of_injective
+      (δX 0) (Sheaf.H.map S.f 1) (0 : Sheaf.H S.X₂ 1 →+ Unit)
+      (δY 0) (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map S.f) 1)
+      (0 : Sheaf.H (((ι')^*[AddCommGrpCat.{u + 1}]).obj S.X₂) 1 →+ Unit)
+      _ _ _ (0 : Unit →+ Unit) (hc₃ 0) (hc₁ 1) (by ext)
+      (fun x ↦ by simpa using surX x) (exY 0).2.2
+      (fun x ↦ by simpa using surY x) hB.2 (hF 1 (by omega)).2
+      (fun _ _ _ ↦ Subsingleton.elim _ _)
+    intro q hq
+    interval_cases q
+    · exact hG₀
+    · exact ⟨hG₁i, hG₁s⟩
+  · intro hG
+    have hF₀i := AddMonoidHom.injective_of_surjective_of_injective_of_injective
+      (0 : Unit →+ Sheaf.H S.X₁ 0) (Sheaf.H.map S.f 0) (Sheaf.H.map S.g 0)
+      (0 : Unit →+ Sheaf.H (((ι')^*[AddCommGrpCat.{u + 1}]).obj S.X₁) 0)
+      (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map S.f) 0)
+      (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map S.g) 0)
+      (0 : Unit →+ Unit) _ _ _ (by ext; simp) (hc₁ 0) (hc₂ 0)
+      (fun x ↦ by
+        constructor
+        · intro hx
+          have hz := hiX (hx.trans (map_zero _).symm)
+          exact ⟨0, hz.symm⟩
+        · rintro ⟨y, rfl⟩
+          exact map_zero _)
+      (exX 0).1
+      (fun x ↦ by
+        constructor
+        · intro hx
+          have hz := hiY (hx.trans (map_zero _).symm)
+          exact ⟨0, hz.symm⟩
+        · rintro ⟨y, rfl⟩
+          exact map_zero _)
+      (fun _ ↦ ⟨0, rfl⟩) (hG 0 (by omega)).1 hB.1
+    have hF₀s := AddMonoidHom.surjective_of_surjective_of_surjective_of_injective
+      _ _ _ _ _ _ _ _ _ _ (hc₁ 0) (hc₂ 0) (hc₃ 0)
+      (exX 0).2.1 (exY 0).1 (exY 0).2.1
+      (hG 0 (by omega)).2 hB.2 (hG 1 (by omega)).1
+    have hF₁ := AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact
+      _ _ _ _ _ _ _ (hc₃ 0) (hc₁ 1) (exX 0).2.2 (exY 0).2.2
+      hB.2 (hG 1 (by omega)) surX surY
+    intro q hq
+    interval_cases q
+    · exact ⟨hF₀i, hF₀s⟩
+    · exact hF₁
 
 end AlgebraicGeometry.IsCurve
