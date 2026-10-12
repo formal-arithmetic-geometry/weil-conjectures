@@ -11,7 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import WeilConjectures.Compactification.FiniteTypeDirected
-import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.FiniteTypeIdealDiagram
+import Sheaf.Topology.ModuleCohomologyTopComparison
+import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Finite-type representatives for first cohomology of ideal sheaves
 
@@ -69,6 +71,33 @@ theorem ideal_h1_finiteType_representative (X : Scheme.{u})
         (y : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj K.toModules),
         f ≫ I.toModulesι = K.toModulesι ∧
           ((RingedSpace.moduleCohomology X.toRingedSpace 1).map f).hom y = x := by
-  sorry
+  let A := {K : X.IdealSheafData // K ≤ I ∧ K.ofFiniteType}
+  have : Nonempty A := ⟨⟨⊥, bot_le, IdealSheafData.ofFiniteType_bot⟩⟩
+  have : IsDirected A (· ≤ ·) := ⟨fun a b ↦ by
+    obtain ⟨K, hK, haK, hbK⟩ := I.directedOn_ofFiniteType_le a.val a.property b.val b.property
+    exact ⟨⟨K, hK⟩, haK, hbK⟩⟩
+  obtain ⟨D, τ, hc, hstage⟩ := exists_finiteType_ideal_module_diagram X I _hI
+  obtain ⟨e⟩ := RingedSpace.nonempty_moduleCohomology_top_iso X.toRingedSpace 1
+  let H := RingedSpace.moduleCohomology X.toRingedSpace 1
+  obtain ⟨a, z, hz⟩ := (openModuleCohomology_directedColimit X
+    PrespectralSpace.isTopologicalBasis D (Cocone.mk I.toModules τ) hc ⊤
+    (by simpa using (isCompact_univ : IsCompact (Set.univ : Set X))) 1).1
+      ((e.hom.app I.toModules).hom x)
+  obtain ⟨hfinite, b, hb⟩ := hstage a
+  let w : H.obj (D.obj a) := (e.inv.app (D.obj a)).hom z
+  have hw : (H.map (τ.app a)).hom w = x := by
+    have hn := congrArg (fun f ↦ f.hom z) (e.inv.naturality (τ.app a))
+    change (e.inv.app I.toModules).hom
+      (((RingedSpace.openModuleCohomology X.toRingedSpace 1 ⊤).map (τ.app a)).hom z) =
+        (H.map (τ.app a)).hom w at hn
+    rw [hz] at hn
+    rw [← hn]
+    exact ConcreteCategory.congr_hom (e.hom_inv_id_app I.toModules) x
+  refine ⟨a.val, a.property.1, hfinite, b.inv ≫ τ.app a, (H.map b.hom).hom w, ?_, ?_⟩
+  · exact hb
+  · change (H.map (b.inv ≫ τ.app a)).hom ((H.map b.hom).hom w) = x
+    rw [← LinearMap.comp_apply, ← ModuleCat.hom_comp, ← H.map_comp,
+      ← Category.assoc, b.hom_inv_id, Category.id_comp]
+    exact hw
 
 end AlgebraicGeometry.Scheme

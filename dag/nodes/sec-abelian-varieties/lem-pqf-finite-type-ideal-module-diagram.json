@@ -1,0 +1,129 @@
+{
+ "id": "lem-pqf-finite-type-ideal-module-diagram",
+ "kind": "statement",
+ "title": "Finite-type subideal module diagram and its colimit",
+ "statement": "Let X be a qcqs scheme [def-pc-scheme] and I a quasi-coherent ideal sheaf [def-nagata-extended-ideal, pqf-def-coherent]. Index by A = {K | K ≤ I and K.ofFiniteType}, ordered by inclusion. There exist a diagram D : A → Mod(O_X), a cocone τ with point I.toModules, and a proof that this cocone is a colimit [def-weil-pbc-category-colimit]. For every a in A, a.val.toModules is of finite type and there is an isomorphism e : D(a) → a.val.toModules whose inverse followed by τ(a) and I.toModulesι is a.val.toModulesι. The stage identifications and monomorphic structure-sheaf inclusions specify the diagram and cocone up to the canonical isomorphism used downstream. No cohomology assertion is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
+  "url": "https://stacks.math.columbia.edu/tag/01PG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Take the subtype of finite-type subideals of I, ordered by inclusion. At K use K.toModules and use the inclusions of ideals as transition maps. On an affine open the range of K.toModulesι is K.ideal; these section maps glue on the affine basis. The monomorphic structure-sheaf inclusions force identity and composition, and give the compatible cocone into I.toModules. The stage isomorphisms are identities. Finite affine generators and their localizations are local generators of K.toModules, proving its finite type.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
+    "url": "https://stacks.math.columbia.edu/tag/01PG"
+   }
+  },
+  {
+   "text": "The directed-union theorem supplies an ideal stage containing any given affine section. A compatible cocone on the stages defines an additive, linear map on these sections, independent of the chosen stage because a common upper stage compares any two choices. The maps commute with restrictions and glue uniquely on the affine basis. Every local section is locally in a stage, so this glued map is unique. This proves the colimit universal property. Zero belongs to the index family, including on the empty scheme.",
+   "uses": [
+    "lemma-nagata-ideal-directed-union-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
+    "url": "https://stacks.math.columbia.edu/tag/01PG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-ideal-directed-union-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
+  "url": "https://stacks.math.columbia.edu/tag/01PG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent ideal sheaf is the directed colimit of its finite type ideal submodules as module sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology commutes with filtered colimits of quasi coherent ideal subsheaves",
+   "results": "SheafOfModules.Presentation.isColimit, generic existence of module-sheaf colimits, localCohomology.ofDiagram and free-sheaf colimits; none constructs the directed finite-type subideal module diagram.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.IsColimit",
+   "results": "12 hits for free-sheaf colimits and quasi-coherent presentations, not the finite-type subideal inclusion diagram.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(diagram|[Cc]olimit)|([Cc]olimit|diagram).*ideal; toModules.*IsFiniteType; ofFiniteType.*IsFiniteType",
+   "results": "Mathlib LocalCohomology concerns ring-ideal supported cohomology. The library has the ideal-lattice directed union in FiniteTypeDirected, and a cofiltered closed-subscheme diagram in AffineTransitionLimit, but no colimit cocone of their ideal module sheaves or finite-type module conversion. Sheaf has the original representative target, not this algebraic construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeIdealH1Representatives",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pqf-finite-type-ideal-h1-representatives",
+   "place": "Algebraic diagram construction, step 1 of the existing plan",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeIdealDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeIdealDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteType_ideal_module_diagram",
+  "statement": "theorem exists_finiteType_ideal_module_diagram (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (I : X.IdealSheafData) (_hI : I.toModules.IsQuasicoherent) :\n    ∃ (D : {K : X.IdealSheafData // K ≤ I ∧ K.ofFiniteType} ⥤ X.Modules)\n      (τ : D ⟶ (Functor.const _).obj I.toModules)\n      (_ : IsColimit (Cocone.mk I.toModules τ)),\n      ∀ a, a.val.toModules.IsFiniteType ∧\n        ∃ e : D.obj a ≅ a.val.toModules,\n          e.inv ≫ τ.app a ≫ I.toModulesι = a.val.toModulesι",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-65a9e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-3999967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-65a9e",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-3999967",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with both nodes, cited dependencies, source argument, report, clean compilation, and axiom checks."
+ }
+}

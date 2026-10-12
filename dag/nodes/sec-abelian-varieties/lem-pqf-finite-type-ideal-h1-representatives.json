@@ -15,44 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Index the finite-type quasi-coherent subideals K of I by inclusion. The zero ideal belongs to the family and sums give upper bounds. Use directedOn_ofFiniteType_le and sSup_ofFiniteType_le_eq. Construct their inclusions as module-sheaf maps, compatible with the inclusions into the structure sheaf. Over affine opens range_toModulesι_app identifies their images with K.ideal. Their union is I.ideal, so compatible maps glue uniquely on local sections to a map from I.toModules. This proves that I.toModules is the colimit of the diagram. Finite local generators of K.ideal give K.toModules.IsFiniteType.",
+   "text": "The zero ideal makes the explicit subtype of finite-type subideals nonempty. Apply directedOn_ofFiniteType_le to make it a directed preorder. Obtain its ideal-module diagram, colimit cocone, and finite-type stage identifications from the algebraic diagram lemma.",
    "uses": [
-    "lemma-nagata-ideal-directed-union-finite-type"
+    "lemma-nagata-ideal-directed-union-finite-type",
+    "lem-pqf-finite-type-ideal-module-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 01PG, statement and proof"
-   }
+   "elementary": false
   },
   {
-   "text": "The compact opens of a scheme form a basis (affine opens form a compact basis). Quasi-separatedness supplies compact intersections, and X is compact. Apply openModuleCohomology_directedColimit to the preceding colimit at the top open in degree 1. Its surjectivity clause gives a stage class whose image is the prescribed class.",
+   "text": "Use the natural scalar-forgetting comparison at the top open in degree 1 to transport x to open-module cohomology. The compact opens are a basis by PrespectralSpace.isTopologicalBasis and the top open is compact. Apply the surjectivity clause of openModuleCohomology_directedColimit to select a stage a and class z. Naturality of the comparison inverse and its inverse identity transport z to a class w with the required image in module-valued cohomology.",
    "uses": [
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "lem-weil-pbc-module-cohomology-top-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 01FF, applied in Tag 01XG"
-   }
+   "elementary": false
   },
   {
-   "text": "Compare module-valued global cohomology with group-valued cohomology at the top open. Both use the same injective module resolution. The exact forgetful functor from global modules to abelian groups preserves homology, so it identifies the groups naturally in the module sheaf. Transport the class and the equality from the previous step across this natural identification. The stage K and its cocone map f satisfy K ≤ I, finite type, and f followed by the inclusion of I is the inclusion of K. When I is zero or X is empty the zero stage and zero class still work.",
-   "uses": [
-    "pqf-def-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
-    "url": "https://stacks.math.columbia.edu/tag/01XG"
-   }
+   "text": "Let K be a.val and let b identify D(a) with K.toModules. Use f = b.inv followed by the cocone leg, and y = H1(b.hom)(w). The stage compatibility proves the inclusion identity. Functoriality and b.hom followed by b.inv being the identity prove H1(f)(y) = x.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lemma-nagata-ideal-directed-union-finite-type",
+  "lem-pqf-finite-type-ideal-module-diagram",
   "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-  "pqf-def-cohomology"
+  "lem-weil-pbc-module-cohomology-top-comparison"
  ],
  "proof_origin": {
   "by": "document",
@@ -125,11 +113,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-65a9e",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T144119-L-2098725",
+  "landing": "20261012T184250-L-3999967",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with both nodes, cited dependencies, source argument, report, clean compilation, and axiom checks."
  }
 }
