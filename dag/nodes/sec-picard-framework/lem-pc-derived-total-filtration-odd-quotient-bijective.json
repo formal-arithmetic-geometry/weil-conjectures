@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, dga.tex, lemma-resolve, proof: alternating two-step filtration and its successive quotients"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, dga.tex, lemma-resolve, proof: alternating two-step filtration and its successive quotients",
+  "note": "Complete Lean proof, with no remaining sorry."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOddAux",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from the third endpoint of a short exact sequence to an odd column filtration quotient is degreewise bijective",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of a direct sum by earlier summands and a submodule in one column is the quotient of that column",
+   "results": "Eight hits, including Submodule.quotientPi and Submodule.quotientEquivDirectSum. These require finite products or principal ideal ring assumptions and do not identify this categorical filtration quotient.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "Twelve hits including ShortExact.map_of_exact and epi_g; generic tools but no odd quotient theorem.",
+   "verdict": "tools only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "oddQuotient|oddFullQuotient|columnProjection",
+   "results": "No Mathlib hits. Local rg finds no prior oddQuotientMap or oddFullQuotient declaration.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "id": "lem-pc-derived-total-filtration-odd-quotient-bijective",
+ "title": "Degreewise bijectivity of the canonical odd quotient map",
+ "statement": "Let $A$, $K$, $S_a$, $e_a$, the zero positive column hypothesis, and the explicit filtration be as in [lem-pc-derived-total-filtration-stable]. Suppose every $S_a$ is short exact. Let $q_j:(S_j).X_3[j]\\to\\operatorname{coker}(s_{2j+1})$ be the canonical descent of the full-column cochain map of [lem-pc-derived-total-filtration-odd-quotient-map]. For every $j\\in\\mathbf N$ and $k\\in\\mathbf Z$, its degree component $q_j^k$ is a bijection of the underlying $A$-modules. No degreewise splitting, free endpoint, or vanishing endpoint differential is required.",
+ "stmt_deps": [
+  "lem-pc-derived-total-filtration-stable",
+  "lem-pc-derived-total-filtration-odd-quotient-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the total coproduct universal property to project onto column -j, then compose with e_j inverse and (S_j).g. This projection kills every earlier full column and every lower-column generator, using (S_j).f composed with (S_j).g equal to zero for column j. The supremum definition of the stage implies that the projection vanishes on stage 2j+1.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the projection to stage 2j+2 and descend through the evaluated categorical cokernel. Evaluation preserves cokernels. Its composite with the full-column quotient map is (S_j).g in degree k+j. The defining factorization of q_j and degreewise epimorphy of (S_j).g imply that the projection is a left inverse of q_j^k. Thus q_j^k is injective.",
+   "uses": [
+    "lem-pc-derived-total-filtration-odd-quotient-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Show from the supremum that stage 2j+2 is contained in stage 2j+1 plus the range of full column j. Lift a quotient vector through the degreewise surjective cokernel projection, split that lift into the two summands, and kill the first. Transport the remaining column vector by e_j inverse. It maps to the original quotient vector under the full-column quotient map. The factorization through (S_j).g gives a preimage under q_j^k, proving surjectivity. All steps are proved in Lean.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable",
+    "lem-pc-derived-total-filtration-odd-quotient-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-total-filtration-stable",
+  "lem-pc-derived-total-filtration-odd-quotient-map"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): alternating lower piece and full next column in the total resolution; odd successive quotient calculation",
+   "via": [
+    "lem-pc-derived-total-free-filtration",
+    "lem-pc-derived-total-filtration-quotients",
+    "lem-pc-derived-total-filtration-cokernel-odd",
+    "lem-pc-derived-total-filtration-cokernel-odd-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TotalFreeFiltrationOddQuotientBijective",
+  "file": "lean/Sheaf/Algebra/Homology/TotalFreeFiltrationOddQuotientBijective.lean",
+  "declaration": "CochainComplex.TotalFreeFiltration.oddQuotientMap_bijective",
+  "statement": "theorem oddQuotientMap_bijective\n    (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :\n    Function.Bijective ((oddQuotientMap K S e h_positive h_exact j).f k)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184238-L-3994263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184238-L-3994263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
