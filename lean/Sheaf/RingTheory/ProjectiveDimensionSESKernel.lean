@@ -2,6 +2,7 @@ module
 
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
 
 @[expose] public section
@@ -39,6 +40,20 @@ theorem projectiveDimensionLE_of_shortExact
     (h₂ : ModuleCat.HasProjectiveResolutionLE S.X₂ m)
     (h₃ : ModuleCat.HasProjectiveResolutionLE S.X₃ (m + 1)) :
     ModuleCat.HasProjectiveResolutionLE S.X₁ m := by
-  sorry
+  have := HasExt.standard (ModuleCat.{max u v} R)
+  have h₂van := (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing S.X₂ m).2.1 h₂
+  have h₃van := (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing S.X₃ (m + 1)).2.1 h₃
+  have h₂pd : HasProjectiveDimensionLT S.X₂ (m + 1) :=
+    HasProjectiveDimensionLT.mk (fun i hi Y e ↦
+      (h₂van Y i hi).elim e 0)
+  have h₃pd : HasProjectiveDimensionLT S.X₃ (m + 2) :=
+    HasProjectiveDimensionLT.mk (fun i hi Y e ↦
+      (h₃van Y i hi).elim e 0)
+  have h₁pd : HasProjectiveDimensionLT S.X₁ (m + 1) :=
+    hS.hasProjectiveDimensionLT_X₁ (m + 1) (by infer_instance) (by infer_instance)
+  exact (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing S.X₁ m).1.2
+    (by
+      intro Y
+      exact HasProjectiveDimensionLT.subsingleton S.X₁ (m + 1) (m + 1) (by rfl) Y)
 
 end Ring

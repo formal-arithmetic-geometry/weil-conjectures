@@ -32,49 +32,24 @@
  ],
  "proof": [
   {
-   "text": "Fix an arbitrary $R$-module $N$ and set $i=m+1$. By [lem-weil-pbc-projective-dimension-ext-characterization] (Stacks 065R), the assumed resolution of $M$ of length $\\le m$ makes $\\operatorname{Ext}^{i}_R(M,N)=0$. Applying the same characterization with $n=m+1$ to the assumed resolution of $M''$ gives $\\operatorname{Ext}^{i+1}_R(M'',N)=0$. Here $i\\ge1$, including when $m=0$.",
+   "text": "Use the bounded-resolution/Ext-vanishing characterization for `S.X₂` at `m` and `S.X₃` at `m+1` to construct Mathlib projective-dimension instances in degrees `m+1` and `m+2`. Mathlib’s contravariant short-exact dimension lemma gives projective dimension at most `m` for `S.X₁`; the characterization converts this Ext vanishing back to a bounded projective resolution.",
    "uses": [
     "lem-weil-pbc-projective-dimension-ext-characterization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), proof invoking Lemma Tag 065R (lemma-projective-dimension-ext)"
-   }
-  },
-  {
-   "text": "For the given short exact sequence [def-weil-pbc-exact-sequence], [lem-weil-pbc-ext-long-exact-first-variable] (Stacks 065P) gives an exact segment $\\operatorname{Ext}^{i}_R(M,N)\\xrightarrow{u^*}\\operatorname{Ext}^{i}_R(M',N)\\xrightarrow{\\delta^i}\\operatorname{Ext}^{i+1}_R(M'',N)$. Both outer groups vanish by Step 1. Thus $\\ker(\\delta^i)=\\operatorname{Ext}^{i}_R(M',N)=\\operatorname{im}(u^*)=0$; hence $\\operatorname{Ext}^{m+1}_R(M',N)=0$.",
-   "uses": [
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-ext-long-exact-first-variable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), proof invoking Lemma Tag 065P (lemma-reverse-long-exact-seq-ext)"
-   }
-  },
-  {
-   "text": "Because $N$ was arbitrary, [lem-weil-pbc-projective-dimension-ext-characterization] (Stacks 065R), now in its Ext-vanishing-to-resolution direction with $X=M'$ and $n=m$, supplies a projective resolution of $M'$ of length $\\le m$, as claimed.",
-   "uses": [
-    "lem-weil-pbc-projective-dimension-ext-characterization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), proof invoking Lemma Tag 065R (lemma-projective-dimension-ext)"
+    "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), part (1), via Tags 065R and Mathlib CategoryTheory.Abelian.Projective.Dimension"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-projective-dimension-ext-characterization",
-  "lem-weil-pbc-ext-long-exact-first-variable"
+  "lem-weil-pbc-projective-dimension-ext-characterization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), part (1), proof via Tags 065R and 065P"
+  "place": "Algebra, Lemma Tag 065S (lemma-exact-sequence-projective-dimension), part (1), shortened using Mathlib contravariant projective-dimension lemma"
  },
  "mathlib_searches": [
   {
@@ -166,5 +141,15 @@
   "group": "G1",
   "result": "fix",
   "note": "R comm ring, m : ℕ, ShortComplex+ShortExact = 0→M'→M→M''→0 (mono/epi/Im=Ker), h₂ pd(M)≤m, h₃ pd(M'')≤m+1, concl pd(M')≤m via landed HasProjectiveResolutionLE; universe ModuleCat.{v} → ModuleCat.{max u v} to match landed 065R (E1 afb3fd39a) used by the proof; docstring now carries the node proof"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T225321-L-1809975",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
