@@ -92,6 +92,9 @@ theorem module_cohomology_isZero_of_cech_vanishing (X : Scheme.{u}) (F : X.Modul
       (U : X.Opens) : Function.Surjective (S.g.val.app (Opposite.op U)) := by
     apply Scheme.module_sections_surjective_of_cech_h1_vanishing X S hS U
       (fun I V _ ↦ (⨆ i : I, V i) = U)
+    · intro I V hV hcover x hx
+      rw [← hcover] at hx
+      exact TopologicalSpace.Opens.mem_iSup.mp hx
     · intro I V hV hcover
       refine ⟨I, V, hV, ?_, fun i ↦ ⟨i, le_rfl⟩⟩
       apply le_antisymm (iSup_le hV)

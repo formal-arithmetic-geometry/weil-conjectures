@@ -111,12 +111,13 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-site-cech-complex",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-sheaf-cokernel-local-image"
+  "lem-weil-pbc-sheaf-cokernel-local-image",
+  "lem-weil-pbc-site-ses-cech-h1-surjective"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01EU, label lemma-ses-cech-h1, proof; implicit cocycle identity and correction/gluing checks written out"
+  "place": "Tag 01EU, with the site-level Cech lifting argument instantiated for scheme opens"
  },
  "mathlib_searches": [
   {
@@ -210,7 +211,7 @@
   "module": "Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1",
   "declaration": "AlgebraicGeometry.Scheme.module_sections_surjective_of_cech_h1_vanishing",
   "file": "lean/Sheaf/AlgebraicGeometry/ModuleSectionsSurjectiveOfCechH1.lean",
-  "statement": "theorem module_sections_surjective_of_cech_h1_vanishing (X : Scheme.{u}) (S : ShortComplex X.Modules) (hS : S.ShortExact) (U : Opens X) (Cov : ∀ (I : Type v) (V : I → Opens X), (∀ i, V i ≤ U) → Prop) (hcofinal : ∀ (I : Type v) (V : I → Opens X) (hV : ∀ i, V i ≤ U), (∀ x, x ∈ U → ∃ i, x ∈ V i) → ∃ (K : Type v) (W : K → Opens X) (hW : ∀ k, W k ≤ U), Cov K W hW ∧ ∀ k, ∃ (i : I), W k ≤ V i) (hcech : ∀ (I : Type v) (V : I → Opens X) (hV : ∀ i, V i ≤ U), (hCov : Cov I V hV) → ∀ (f : ∀ i, V i ⟶ U), ∀ (Scech : SiteCechComplex V f), IsZero ((Scech.cohomologyFunctor 1).obj ((S.X₁.val.presheaf)))) : Function.Surjective (S.g.val.app (op U))",
+  "statement": "theorem module_sections_surjective_of_cech_h1_vanishing (X : Scheme.{u}) (S : ShortComplex X.Modules) (hS : S.ShortExact) (U : Opens X) (Cov : ∀ (I : Type (max u v)) (V : I → Opens X), (∀ i, V i ≤ U) → Prop) (hcover : ∀ (I : Type (max u v)) (V : I → Opens X) (hV : ∀ i, V i ≤ U), Cov I V hV → ∀ x, x ∈ U → ∃ i, x ∈ V i) (hcofinal : ∀ (I : Type (max u v)) (V : I → Opens X) (_hV : ∀ i, V i ≤ U), (∀ x, x ∈ U → ∃ i, x ∈ V i) → ∃ (K : Type (max u v)) (W : K → Opens X) (hW : ∀ k, W k ≤ U), Cov K W hW ∧ ∀ k, ∃ (i : I), W k ≤ V i) (hcech : ∀ (I : Type (max u v)) (V : I → Opens X) (hV : ∀ i, V i ≤ U), (hCov : Cov I V hV) → ∀ (f : ∀ i, V i ⟶ U), ∀ (Scech : SiteCechComplex V f), IsZero ((Scech.cohomologyFunctor 1).obj ((S.X₁.val.presheaf)))) : Function.Surjective (S.g.val.app (op U))",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-12",
@@ -227,17 +228,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-1fd9c",
-  "group": "M3",
+  "reviewer": "X-5a124",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T112845-L-769737",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module and report match the unchanged DAG/Lean theorem, compile cleanly, and correctly document the false uncovered-family statement.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.module_sections_surjective_of_cech_h1_vanishing"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.module_sections_surjective_of_cech_h1_vanishing"
-  ]
+  "landing": "20261012T160145-L-2567368",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statement and proof with the DAG node, Stacks 01EU, change record, minimal forced adaptation, report, compilation and axiom checks."
  }
 }
