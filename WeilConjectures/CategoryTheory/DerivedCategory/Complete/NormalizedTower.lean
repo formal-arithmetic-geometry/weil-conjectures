@@ -528,6 +528,35 @@ lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
   rw [heq]
   infer_instance
 
+include hφ hψ₀ hexact hsurj hker ht in
+/-- The strict model of a normalized tower is a normalized adic tower of complexes. -/
+theorem isNormalizedAdicTower_towerFunctor :
+    CochainComplex.IsNormalizedAdicTower ϖ (towerFunctor φ ψ hψ L t) where
+  smul_eq_zero := smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t
+  exact_smul := exact_smul_towerFunctor_obj φ ψ hψ hψ₀ hexact L t
+  quasiIso_cokernelDesc {n m} h := by
+    rcases Nat.eq_or_lt_of_le h with rfl | hlt
+    · exact quasiIso_cokernelDesc_towerFunctor_self φ ψ hψ hψ₀ L t n
+    · obtain ⟨k, rfl⟩ : ∃ k, m = n + k + 1 := ⟨m - n - 1, by omega⟩
+      exact quasiIso_cokernelDesc_towerFunctor φ ψ hψ hφ hψ₀ hsurj hker L t ht n k
+
+include hφ hψ₀ hexact hsurj hker ht in
+/-- **Strictification of normalized towers.** A normalized tower `L_n ∈ D(J, A_n)`, whose
+transition maps `t_n : L_{n+1} ⟶ Res L_n` exhibit `L_n` as a derived base change of
+`L_{n+1}`, is represented by a normalized adic tower `T` of complexes of sheaves of
+`R`-modules: there are isomorphisms `Q T_n ≅ Res L_n` under which the transition maps of `T`
+become the restrictions of scalars of the `t_n`. -/
+theorem exists_isNormalizedAdicTower :
+    ∃ (T : ℕᵒᵖ ⥤ CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ)
+      (e : ∀ n : ℕ, Q.obj (T.obj (op n)) ≅ (Sheaf.derivedRestrictScalars J (ψ n)).obj (L n)),
+      CochainComplex.IsNormalizedAdicTower ϖ T ∧ ∀ n : ℕ,
+        Q.map (T.map (homOfLE n.le_succ).op) ≫ (e n).hom =
+          (e (n + 1)).hom ≫ (Sheaf.derivedRestrictScalars J (ψ (n + 1))).map (t n) ≫
+            (Sheaf.derivedRestrictScalarsCompIso J (hψ n.le_succ).symm).hom.app (L n) :=
+  ⟨towerFunctor φ ψ hψ L t, towerFunctorIso φ ψ hψ L t,
+    isNormalizedAdicTower_towerFunctor φ ψ hψ hφ hψ₀ hexact hsurj hker L t ht,
+    Q_map_towerFunctor_map_comp_towerFunctorIso_hom φ ψ hψ L t⟩
+
 end Normalized
 
 end DerivedCategory
