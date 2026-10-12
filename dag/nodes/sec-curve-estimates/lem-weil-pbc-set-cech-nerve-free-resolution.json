@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "Surjectivity of $f$ lets us choose one $\\sigma(b)\\in f^{-1}(b)$ for every $b\\in B$; thus $f\\sigma=\\operatorname{id}_B$. Define $R$-linear maps on the free-module bases [def-weil-pbc-free-module] by $h_{-1}[b]=[\\sigma(b)]$ and, for $n\\geq0$, $h_n[(a_0,\\ldots,a_n)]=[(\\sigma f(a_0),a_0,\\ldots,a_n)]$. All coordinates of the latter tuple have the same $f$-image, so $h_n$ lands in $R[A_{n+1}]$. The empty-set case is included: a surjection $A\\to\\varnothing$ forces $A=\\varnothing$, and the zero maps give the same formulas.",
+   "text": "Surjectivity of $f$ lets us choose one $\\sigma(b)\\in f^{-1}(b)$ for every $b\\in B$; thus $f\\sigma=\\operatorname{id}_B$. Define $R$-linear maps on the free-module bases [def-weil-pbc-free-module] by $h_{-1}[b]=[\\sigma(b)]$ and, for $n\\geq0$, $h_n[(a_0,\\ldots,a_n)]=[(\\sigma f(a_0),a_0,\\ldots,a_n)]$. All coordinates of the latter tuple have the same $f$-image, so $h_n$ lands in $R[A_{n+1}]$. The empty-set case is included: a surjection $A\\to\\varnothing$ forces $A=\\varnothing$, and the zero maps give the same formulas. Lean implementation: prepend and homotopy construct these maps explicitly; vertex and sectionMap construct the augmentation section. The right inverse is obtained from the proved theorem Function.Surjective.hasRightInverse.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "For $i<j$, deleting coordinate $j$ and then $i$ gives the same tuple as deleting $i$ and then $j-1$. In $\\partial^2$, these two terms have coefficients $(-1)^{i+j}$ and $(-1)^{i+j-1}$ and cancel; hence $\\partial^2=0$. In degree one, $\\varepsilon\\partial[(a_0,a_1)]=[f(a_1)]-[f(a_0)]=0$, since $(a_0,a_1)\\in A_1$; this is $\\varepsilon\\partial=0$.",
+   "text": "For $i<j$, deleting coordinate $j$ and then $i$ gives the same tuple as deleting $i$ and then $j-1$. In $\\partial^2$, these two terms have coefficients $(-1)^{i+j}$ and $(-1)^{i+j-1}$ and cancel; hence $\\partial^2=0$. In degree one, $\\varepsilon\\partial[(a_0,a_1)]=[f(a_1)]-[f(a_0)]=0$, since $(a_0,a_1)\\in A_1$; this is $\\varepsilon\\partial=0$. Lean implementation: face_face proves the deletion identity coordinatewise. differential_squared partitions the double sum into j ≤ i and its complement and pairs (i,j) with (j,i+1), following the finite-sum argument of Mathlib AlternatingFaceMapComplex.d_squared. augmentation_differential proves the degree-one identity on basis vectors.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "On a basis tuple $x=(a_0,\\ldots,a_n)$ with $n\\geq1$, the zeroth face of $h_n(x)$ is $x$. For $1\\leq j\\leq n+1$, its $j$th face is the prefixed tuple obtained by deleting $a_{j-1}$ from $x$; when $j=1$, its prefix is still $\\sigma f(a_0)$ because all entries of $x$ have the same image in $B$. Thus the remaining terms of $\\partial h_n(x)$ cancel term by term against $h_{n-1}\\partial(x)$, giving $\\partial h_n+h_{n-1}\\partial=\\operatorname{id}_{R[A_n]}$. For $n=0$, the two faces of $h_0[a]$ give $\\partial h_0[a]=[a]-[\\sigma f(a)]$, while $h_{-1}\\varepsilon[a]=[\\sigma f(a)]$. Finally $\\varepsilon h_{-1}[b]=[f\\sigma(b)]=[b]$. Linearity extends all three identities from basis elements to modules.",
+   "text": "On a basis tuple $x=(a_0,\\ldots,a_n)$ with $n\\geq1$, the zeroth face of $h_n(x)$ is $x$. For $1\\leq j\\leq n+1$, its $j$th face is the prefixed tuple obtained by deleting $a_{j-1}$ from $x$; when $j=1$, its prefix is still $\\sigma f(a_0)$ because all entries of $x$ have the same image in $B$. Thus the remaining terms of $\\partial h_n(x)$ cancel term by term against $h_{n-1}\\partial(x)$, giving $\\partial h_n+h_{n-1}\\partial=\\operatorname{id}_{R[A_n]}$. For $n=0$, the two faces of $h_0[a]$ give $\\partial h_0[a]=[a]-[\\sigma f(a)]$, while $h_{-1}\\varepsilon[a]=[\\sigma f(a)]$. Finally $\\varepsilon h_{-1}[b]=[f\\sigma(b)]=[b]$. Linearity extends all three identities from basis elements to modules. Lean implementation: face_prepend_zero and face_prepend_succ identify the faces; homotopy_identity, homotopy_identity_zero, and augmentation_section prove the three linear-map identities by free-module extensionality.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "For $n>0$ and $z\\in\\ker\\partial\\subseteq R[A_n]$, step 3 gives $z=\\partial h_n(z)$, so $H_n=0$. In degree zero, a $z$ with $\\varepsilon(z)=0$ satisfies $z=\\partial h_0(z)$, and step 2 gives the reverse inclusion $\\operatorname{im}\\partial\\subseteq\\ker\\varepsilon$. Since $\\varepsilon h_{-1}=\\operatorname{id}$, the augmentation is onto; consequently $R[A_0]/\\operatorname{im}\\partial\\cong R[B]$, with the stated map on $H_0$. Together with step 2 these equalities prove exactness at every term, including $R[B]$.",
+   "text": "For $n>0$ and $z\\in\\ker\\partial\\subseteq R[A_n]$, step 3 gives $z=\\partial h_n(z)$, so $H_n=0$. In degree zero, a $z$ with $\\varepsilon(z)=0$ satisfies $z=\\partial h_0(z)$, and step 2 gives the reverse inclusion $\\operatorname{im}\\partial\\subseteq\\ker\\varepsilon$. Since $\\varepsilon h_{-1}=\\operatorname{id}$, the augmentation is onto; consequently $R[A_0]/\\operatorname{im}\\partial\\cong R[B]$, with the stated map on $H_0$. Together with step 2 these equalities prove exactness at every term, including $R[B]$. Lean implementation: range_eq_ker_of_contraction proves both inclusions, sending a cycle z to its explicit preimage h(z). The final theorem applies this in degree zero and in every positive degree, and uses augmentation_section to prove surjectivity.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
@@ -159,5 +159,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T144107-L-2093722",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
