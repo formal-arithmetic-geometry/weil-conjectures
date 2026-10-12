@@ -8,8 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
+public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
+public import WeilConjectures.AlgebraicGeometry.IdempotentBasicOpen
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentableLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.Topology.SpectralSpace.ClopenExtension
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair
@@ -131,6 +134,29 @@ variable {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
   {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)
   (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
 
+omit [HenselianRing A I] [IsProper f] in
+include I in
+/-- The closed fibre of a scheme over `Spec A` over `Spec A/I` is a closed immersion. -/
+lemma Scheme.isClosedImmersion_of_isPullback_quotient
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    IsClosedImmersion i :=
+  MorphismProperty.of_isPullback (P := @IsClosedImmersion) h.flip
+    (IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective)
+
+omit [HenselianRing A I] [IsProper f] in
+/-- The closed fibre of a scheme `Y` over `Spec A` over `Spec A/I` has image `f⁻¹ V(I)`. -/
+lemma Scheme.range_of_isPullback_quotient
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    Set.range i = f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+  have hq : Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) =
+      PrimeSpectrum.zeroLocus (I : Set A) := by
+    have := range_comap_of_surjective (A ⧸ I) (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+    rw [Ideal.mk_ker] at this
+    exact this
+  rw [← hq, ← Scheme.Pullback.range_fst, ← h.isoPullback_hom_fst, Scheme.Hom.comp_base,
+    TopCat.coe_comp, Set.range_comp, Set.range_eq_univ.2 h.isoPullback.hom.surjective,
+    Set.image_univ]
+
 /-- **Idempotent lifting for the structure sheaf over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
@@ -141,8 +167,49 @@ fibres of those of `Y`. The restriction map itself need not be bijective.
 theorem Scheme.bijective_appTop_idempotent_of_henselianRing
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
     Function.Bijective (fun e : {e : Γ(Y, ⊤) // IsIdempotentElem e} ↦
-      (⟨i.appTop.hom e.1, e.2.map i.appTop.hom⟩ : {e : Γ(Y₀, ⊤) // IsIdempotentElem e})) :=
-  sorry
+      (⟨i.appTop.hom e.1, e.2.map i.appTop.hom⟩ : {e : Γ(Y₀, ⊤) // IsIdempotentElem e})) := by
+  have hi := Scheme.isClosedImmersion_of_isPullback_quotient I f i f₀ h
+  have hrange := Scheme.range_of_isPullback_quotient I f i f₀ h
+  obtain ⟨_, -, hC⟩ := f.spectralSpace_and_isClosed_and_isConnected_inter I
+  set T₀ := f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)
+  have hinj : Function.Injective i := i.isClosedEmbedding.injective
+  have hpre (e : Γ(Y, ⊤)) : i ⁻¹' (Y.basicOpen e : Set Y) = Y₀.basicOpen (i.appTop e) := by
+    rw [← Scheme.preimage_basicOpen_top]
+    rfl
+  refine ⟨fun ⟨e, he⟩ ⟨e', he'⟩ hee ↦ ?_, fun ⟨e₀, he₀⟩ ↦ ?_⟩
+  · have hee' : i.appTop e = i.appTop e' := congrArg Subtype.val hee
+    have hsub {a b : Γ(Y, ⊤)} (ha : IsIdempotentElem a) (hb : IsIdempotentElem b)
+        (hab : i.appTop a = i.appTop b) : (Y.basicOpen a : Set Y) ⊆ Y.basicOpen b := by
+      rw [← Set.sdiff_eq_empty]
+      by_contra hne
+      have hS := (Scheme.isClopen_basicOpen_of_isIdempotentElem ha).diff
+        (Scheme.isClopen_basicOpen_of_isIdempotentElem hb)
+      obtain ⟨y, ⟨hya, hyb⟩, hyT⟩ := f.nonempty_inter_preimage_zeroLocus I HenselianRing.jac
+        hS.isClosed (Set.nonempty_iff_ne_empty.2 hne)
+      obtain ⟨z, rfl⟩ : y ∈ Set.range i := hrange ▸ hyT
+      have h₁ : z ∈ i ⁻¹' (Y.basicOpen a : Set Y) := hya
+      rw [hpre, hab, ← hpre] at h₁
+      exact hyb h₁
+    refine Subtype.ext (Scheme.eq_of_basicOpen_eq_of_isIdempotentElem he he' ?_)
+    exact SetLike.coe_injective ((hsub he he' hee').antisymm (hsub he' he hee'.symm))
+  · let U₀ : Set Y₀ := Y₀.basicOpen e₀
+    have hU₀ : IsClopen U₀ := Scheme.isClopen_basicOpen_of_isIdempotentElem he₀
+    have hAT : i '' U₀ ⊆ T₀ := hrange ▸ Set.image_subset_range _ _
+    have hB : T₀ \ i '' U₀ = i '' U₀ᶜ := by
+      rw [Set.image_compl_eq_range_sdiff_image hinj, hrange]
+    obtain ⟨U, hU, hUA⟩ := exists_isClopen_inter_eq_of_isConnected_inter hC hAT
+      (i.isClosedEmbedding.isClosedMap _ hU₀.isClosed)
+      (hB ▸ i.isClosedEmbedding.isClosedMap _ hU₀.isOpen.isClosed_compl)
+    obtain ⟨e, he, hDe⟩ := Scheme.exists_isIdempotentElem_basicOpen_eq hU
+    refine ⟨⟨e, he⟩, Subtype.ext (Scheme.eq_of_basicOpen_eq_of_isIdempotentElem
+      (he.map i.appTop.hom) he₀ (SetLike.coe_injective ?_))⟩
+    change (Y₀.basicOpen (i.appTop e) : Set Y₀) = U₀
+    rw [← hpre, hDe]
+    ext z
+    have hz : i z ∈ T₀ := hrange ▸ Set.mem_range_self z
+    change i z ∈ U ↔ z ∈ U₀
+    rw [← hinj.mem_set_image, ← hUA]
+    exact ⟨fun h ↦ ⟨h, hz⟩, fun h ↦ h.1⟩
 
 /-- **Finite étale lifting over a proper scheme over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
