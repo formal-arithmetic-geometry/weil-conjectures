@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
 import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
+import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight
+import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesMinimal
 
 /-!
 # Associated primes of a fractional principal quotient of a normal domain
@@ -51,6 +53,8 @@ theorem associatedPrimes_fractionalPrincipalQuotient
         (A ⧸ (Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K)),
       p ∈ Ideal.minimalPrimes ((Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K)) ∧
         p.height = 1 := by
-  sorry
+  intro p hp
+  exact ⟨associatedPrimes_fractionalPrincipalQuotient_minimal A K y hy p hp,
+    associatedPrimes_fractionalPrincipalQuotient_height A K y hy p hp⟩
 
 end Ideal

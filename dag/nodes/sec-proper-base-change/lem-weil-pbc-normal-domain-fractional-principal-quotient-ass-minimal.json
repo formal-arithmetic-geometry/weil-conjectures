@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass-minimal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "via": [
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Minimal-prime part: every associated prime of the fractional principal quotient is minimal over the comap ideal.",
+ "statement": "theorem associatedPrimes_fractionalPrincipalQuotient_minimal (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (y : K) (hy : y ≠ 0) : ∀ p ∈ associatedPrimes A (A ⧸ (Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K)), p ∈ Ideal.minimalPrimes ((Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K))",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 031T (lemma-normal-domain-intersection-localizations-height-1), lines 44061-44128, clause (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Strictly smaller component of the parent argument via numerator reduction.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, clause (3)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031T, clause (3), decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normal Noetherian domain quotient R/(R intersect xR) has no embedded primes and associated primes height one",
+   "results": "Ideal.map_height_le_one_of_mem_minimalPrimes; no fractional-principal intersection quotient result",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal Noetherian domain intersection principal fractional ideal quotient has no embedded associated primes",
+   "results": "Ideal.IsMaximal.mem_associatedPrimes_of_isFractionRing and Ideal.isLasker; no match",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'embedded|associatedPrimes|IsAssociatedPrime' Mathlib/RingTheory/Ideal/AssociatedPrime Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+   "results": "associated primes and principal height theorems occur; no theorem about A/(A intersect yA) in current-head sparse Mathlib source",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass",
+  "worker": "stage1",
+  "summary": "Read Stacks 031T and replaced its height-one-localization/symbolic-power proof of clause (3) below the node level by an explicit injection into the nonzero principal quotient A/aA. The only new fact is clause (1), strictly smaller than the fractional statement. Annihilator equality and minimality are written out, including the zero quotient edge case.",
+  "blueprint": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Step 4: normality of the strict henselization, through the normal-etale colimit and normal-Nagata monogenic argument. The fractional principal quotient bound is the auxiliary 031T(3) used in that argument; steps 1-4 prove that auxiliary fact using 031T(1).",
+   "searches": [
+    "tools/blueprint_refs.py search principal associated: def-sc-divisor and pqf-lem-associated-sections-localize are not this statement",
+    "tools/blueprint_refs.py search fractional quotient: no matches",
+    "tools/blueprint_refs.py search 031T: no matches"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T203951-L-833142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesMinimal",
+  "declaration": "Ideal.associatedPrimes_fractionalPrincipalQuotient_minimal",
+  "file": "lean/Sheaf/RingTheory/FractionalPrincipalQuotientAssociatedPrimesMinimal.lean",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13",
+  "existing": false,
+  "statement": "theorem associatedPrimes_fractionalPrincipalQuotient_minimal (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (y : K) (hy : y ≠ 0) : ∀ p ∈ associatedPrimes A (A ⧸ (Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K)), p ∈ Ideal.minimalPrimes ((Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K))"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nfq1156",
+  "group": "F1",
+  "result": "fix",
+  "note": "A: CommRing+IsNoetherianRing+IsDomain+IsIntegrallyClosed (NORMAL RING domain form); K: Field+Algebra+IsFractionRing; y≠0; J=A∩yA as comap (Algebra.linearMap A K) (A∙y) (membership ↔ ∃b, a=y·b checked by simp); associated primes = associatedPrimes (isAssociatedPrime_iff under Noetherian); no embedded = p ∈ Ideal.minimalPrimes J; height = p.height = 1 as in landed sibling; FIX: let J inlined (J1 c634916b4 rule)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T203951-L-833142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
