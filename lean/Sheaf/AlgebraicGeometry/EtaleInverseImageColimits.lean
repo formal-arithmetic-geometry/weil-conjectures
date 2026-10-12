@@ -39,6 +39,6 @@ inverse: the composites agree with the identities on every coprojection and henc
 are identities by uniqueness. Thus the canonical map is an isomorphism. -/
 theorem inverseImage_preservesColimits {U V : Scheme.{u}} (f : U ⟶ V) :
     PreservesColimitsOfSize.{w, w} (upperStar AddCommGrpCat.{u + 1} f) := by
-  sorry
+  exact (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).leftAdjoint_preservesColimits
 
 end AlgebraicGeometry.Etale
