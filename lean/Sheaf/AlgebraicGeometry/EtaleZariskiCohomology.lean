@@ -11,7 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
 
 /-!
 # Étale and Zariski cohomology of quasi-coherent modules on curves
@@ -49,7 +50,14 @@ theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     (F : C.Modules) [F.IsQuasicoherent] (q : ℕ) :
     Nonempty (Sheaf.H (Scheme.Modules.etaleTensorSectionsSheaf F) q ≃+
       ((RingedSpace.moduleCohomology C.toRingedSpace q).obj F)) := by
-  sorry
+  obtain ⟨_, _, c, _, _⟩ := Scheme.Modules.etale_zariski_qcoh_comparison C
+  -- Identify the small and large Ext models through one common derived category.
+  let : HasDerivedCategory (Sheaf C.smallEtaleTopology AddCommGrpCat.{u}) :=
+    HasDerivedCategory.standard _
+  let : HasExt.{u + 1} (Sheaf C.smallEtaleTopology AddCommGrpCat.{u}) :=
+    HasExt.standard _
+  exact ⟨(Abelian.Ext.homAddEquiv.{u + 1, u}.trans
+    Abelian.Ext.homAddEquiv.{u + 1, u + 1}.symm).trans (c F q).symm⟩
 
 /-- The comparison specialized to `Gₐ = (𝒪_C)_et`.
 Source: Stacks Project, Descent, Proposition 03DW (2), specialized to the structure
@@ -64,7 +72,9 @@ theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     Nonempty (Sheaf.H (@Scheme.Modules.etaleTensorSectionsSheaf C (Scheme.Modules.unit C)
         (SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf))) q ≃+
       ((RingedSpace.moduleCohomology C.toRingedSpace q).obj (Scheme.Modules.unit C))) := by
-  sorry
+  have : (Scheme.Modules.unit C).IsQuasicoherent :=
+    SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  exact etale_zariski_cohomology_agree f (Scheme.Modules.unit C) q
 
 /-- Both cohomology groups of `Gₐ` and `𝒪_C` vanish in degree at least two on a smooth
 connected curve. Source: Stacks Project, Descent, Proposition 03DW (2), and Cohomology,
@@ -89,6 +99,21 @@ theorem subsingleton_etale_ga_and_structure_cohomology {k : Type u} [Field k] [I
         (SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf))) q) ∧
     Subsingleton ((RingedSpace.moduleCohomology C.toRingedSpace q).obj
       (Scheme.Modules.unit C)) := by
-  sorry
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  let F := Scheme.Modules.unit C
+  -- Compare module-derived cohomology directly with H' of the underlying abelian sheaf.
+  obtain ⟨e⟩ := module_cohomology_iso_underlying_abelian C F q
+  have hz := isZero_zariskiCohomology_of_dimension_bound C 1
+    (IsCurve.krullDim_le_one (f := f))
+    ((SheafOfModules.toSheaf (moduleRings C.toRingedSpace)).obj F) q
+    (lt_of_lt_of_le (by decide : 1 < 2) hq)
+  have : Subsingleton (Sheaf.H'
+      ((SheafOfModules.toSheaf (moduleRings C.toRingedSpace)).obj F) q ⊤) :=
+    AddCommGrpCat.subsingleton_of_isZero hz
+  have hzar : Subsingleton ((RingedSpace.moduleCohomology C.toRingedSpace q).obj F) :=
+    e.addCommGroupIsoToAddEquiv.injective.subsingleton
+  obtain ⟨c⟩ := etale_ga_cohomology_agree f q
+  exact ⟨c.injective.subsingleton, hzar⟩
 
 end AlgebraicGeometry
