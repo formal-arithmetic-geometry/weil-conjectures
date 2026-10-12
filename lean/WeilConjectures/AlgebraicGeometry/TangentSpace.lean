@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import Sheaf.AlgebraicGeometry.SmoothRelativeDifferentialsFiniteLocallyFree
+import Sheaf.AlgebraicGeometry.PullbackDualFiniteLocallyFree
 
 /-!
 # Cotangent and tangent sheaves of a morphism of schemes
@@ -202,11 +204,24 @@ noncomputable def tangentSheafAlong (e : S ⟶ X) : S.Modules :=
 /-- For a smooth morphism `f` the cotangent sheaf is locally free, so the tangent sheaf along a
 section `e` is the pullback `e^*T_{X/S}` of the tangent sheaf.
 
-Proof sketch (not formalised): for a locally free `Ω` of finite rank, `e^*ℋom(Ω, 𝒪_X) ≅
-ℋom(e^*Ω, 𝒪_S)`, since both sides commute with finite direct sums and agree for `Ω = 𝒪_X`. -/
+Source: Stacks Project, Tags 02G1 and 0FNV. The cotangent sheaf is definitionally the
+library's relative differential sheaf, which is finite locally free for a smooth morphism.
+The dual pairing of a finite locally free module is preserved by the monoidal pullback
+functor; uniqueness of left duals gives the claimed isomorphism.
+
+(blueprint: lem-ag-tangent-along-section-pullback) -/
 theorem tangentSheafAlong_iso_pullback_tangentSheaf [Smooth f] (e : S ⟶ X) (he : e ≫ f = 𝟙 S) :
     Nonempty (f.tangentSheafAlong e ≅ (Modules.pullback e).obj f.tangentSheaf) := by
-  sorry
+  have _ := he
+  have h : f.cotangentSheaf = f.relativeDifferentials := by rfl
+  change Nonempty (Modules.dual ((Modules.pullback e).obj f.cotangentSheaf) ≅
+    (Modules.pullback e).obj (Modules.dual f.cotangentSheaf))
+  rw [h]
+  have : f.relativeDifferentials.IsFiniteLocallyFree :=
+    f.isFiniteLocallyFree_relativeDifferentials
+  obtain ⟨d⟩ := Modules.nonempty_pullback_dual_iso_of_isFiniteLocallyFree
+    e f.relativeDifferentials
+  exact ⟨d.symm⟩
 
 end Hom
 

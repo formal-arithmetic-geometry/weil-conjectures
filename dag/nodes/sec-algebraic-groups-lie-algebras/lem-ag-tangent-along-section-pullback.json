@@ -1,0 +1,112 @@
+{
+ "id": "lem-ag-tangent-along-section-pullback",
+ "kind": "statement",
+ "title": "Tangent sheaf along a smooth section is the pullback tangent sheaf",
+ "statement": "Let f:X\\to S be a smooth morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms] and e:S\\to X a section, so f\\circ e=id_S. Let Omega be the cotangent sheaf, the sheafification of the relative Kahler differential presheaf [def-sc-relative-differential-sheaf]. Define T=\\mathcal Hom(Omega,O_X) and T_e=\\mathcal Hom(e^*Omega,O_S). Then T_e\\cong e^*T.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0FNV",
+  "place": "TangentSpace original proof sketch, completed using Tags 02G1 and 0FNV."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The cotangentSheaf definition and the library relativeDifferentials definition are definitionally equal: both sheafify relativeDifferentials of the adjoint structure-ring map. Use this equality and finite local freeness of smooth relative differentials.",
+   "uses": [
+    "lem-ag-smooth-relative-differentials-finite-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply pullback compatibility of duals to relativeDifferentials and e, and invert the resulting isomorphism. Unfold tangentSheafAlong and tangentSheaf to identify its endpoints. The section equation is unnecessary for this stronger compatibility, but its binder is retained unchanged.",
+   "uses": [
+    "lem-ag-pullback-dual-finite-locally-free"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-pullback-dual-finite-locally-free",
+  "lem-ag-smooth-relative-differentials-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0FNV",
+  "place": "TangentSpace original proof sketch, completed using Tags 02G1 and 0FNV.",
+  "note": "Combining and translating the cited source with the library APIs; not a change to any unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free sheaf has a left dual; smooth relative differential sheaf finite locally free; pullback dual finite locally free sheaf tangent section",
+   "results": "HTTP Internal Server Error for all three queries.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf dual evaluation coevaluation exact pairing; smooth relative differential sheaf finite locally free; pullback dual finite locally free sheaf",
+   "results": "FGModuleCat.exactPairing is only over a field; smooth search returns ring-level standard smooth freeness and finite presentation; pullback search returns pullbackObjFreeIso, not the needed sheaf duality. Loogle ExactPairing and SheafOfModules.homObj are unknown identifiers in its index.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg ExactPairing|dualizable|HasLeftDual Mathlib/Algebra/Category/ModuleCat/Sheaf; rg cotangentSheaf|relativeDifferentials|tangentSheaf Mathlib/AlgebraicGeometry; rg pullback.*dual|dual.*pullback Mathlib",
+   "results": "No sheaf-level exact pairing or tangent theorem. Generic rigid dual uniqueness exists. Library search finds relativeDifferentials (same definition by rfl), its constant-rank theorem, and ExactPairing.map, but no finite-locally-free exact pairing. Blueprint searches finite locally free dual, tangent sheaf, smooth relative differentials yield zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.TangentSpace",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-d-tangent",
+   "place": "TangentSpace module, theorem tangentSheafAlong_iso_pullback_tangentSheaf and its original proof sketch"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.TangentSpace",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TangentSpace.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.tangentSheafAlong_iso_pullback_tangentSheaf",
+  "statement": "theorem tangentSheafAlong_iso_pullback_tangentSheaf [Smooth f] (e : S ⟶ X) (he : e ≫ f = 𝟙 S) : Nonempty (f.tangentSheafAlong e ≅ (Modules.pullback e).obj f.tangentSheaf)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
