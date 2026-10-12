@@ -7736,3 +7736,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: returned deliver/V3/Sheaf.Topology.ConstantSubsheafQuotientStalkIso (reviewer RETURN: (the landing tools, head 49fbe3bae) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
 - 13:52 L: returned deliver/W2/Sheaf.CategoryTheory.IdentityDerivedHomologyComparison (reviewer RETURN: (the landing tools, head 970cf9bf4) the delivery did not land: lean/Sheaf/CategoryTheory/IdentityDerivedHomologyComparis)
 - 13:52 L: returned deliver/X3/Sheaf.AlgebraicGeometry.DisjointUniversalHomeomorphismsLisseImage (reviewer RETURN: (the landing tools, head 01f61a74a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 13:52 L: returned deliver/X3/Sheaf.CategoryTheory.SiteInjectiveCechAcyclic (reviewer RETURN: (the landing tools, head 1707f242f) the delivery did not land: (d) user Sheaf.Topology.DirectedInjectiveDerivedSectionsA)
