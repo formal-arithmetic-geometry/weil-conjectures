@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "*Step 4 (it is a colimit).* Let $(M,(\\mu_{(i,j)}))$ be a cocone on $D$ in commutative $R$-algebras [def-weil-pbc-category-colimit]. Let $e_1,e_2\\in M$ be the images of $(1,0),(0,1)\\in R$: $e_1+e_2=1$, $e_1e_2=0$, $e_k^2=e_k$. Then $M_k=e_kM$ is a commutative ring with unit $e_k$, an $R_1$- (resp. $R_2$-) algebra via $r_1\\mapsto$ image of $(r_1,0)$ (resp. $r_2\\mapsto$ image of $(0,r_2)$), and every $m\\in M$ is uniquely $m=e_1m+e_2m$. For $(x,y)\\in A_i\\times B_j$, $(x,0)=(1,0)\\cdot(x,y)$, so $\\mu_{(i,j)}(x,0)=e_1\\mu_{(i,j)}(x,y)\\in M_1$; hence $\\mu^1_{(i,j)}:A_i\\to M_1$, $x\\mapsto\\mu_{(i,j)}(x,0)$, is an $R_1$-algebra homomorphism ($1\\mapsto\\mu_{(i,j)}(1,0)=e_1$), similarly $\\mu^2_{(i,j)}:B_j\\to M_2$, $y\\mapsto\\mu_{(i,j)}(0,y)$, and $\\mu_{(i,j)}(x,y)=\\mu^1_{(i,j)}(x)+\\mu^2_{(i,j)}(y)$. (a) $\\mu^1_{(i,j)}$ does not depend on $j$: for $b:j\\to j''$, compatibility along $(\\mathrm{id}_i,b)$ gives $\\mu_{(i,j'')}(x,B_b(0))=\\mu_{(i,j)}(x,0)$, i.e. $\\mu^1_{(i,j'')}=\\mu^1_{(i,j)}$; any $j,j'$ map to a common $j''$ ($J$ filtered). Write $\\mu^1_i$; likewise $\\mu^2_j$ ($I$ filtered). (b) Compatibility along $(a,\\mathrm{id}_j)$ gives $\\mu^1_{i'}\\circ A_a=\\mu^1_i$ for $a:i\\to i'$ (evaluate at $(x,0)$), so $(M_1,(\\mu^1_i))$ is a cocone on $i\\mapsto A_i$ in $R_1$-algebras ($J\\ne\\emptyset$ supplies some $j$), and there is a unique $R_1$-algebra map $u_1:\\Lambda_1\\to M_1$ with $u_1\\iota_i=\\mu^1_i$; likewise a unique $u_2:\\Lambda_2\\to M_2$ with $u_2\\kappa_j=\\mu^2_j$. (c) Existence: $u(\\lambda_1,\\lambda_2)=u_1(\\lambda_1)+u_2(\\lambda_2)$ is additive, sends $1$ to $e_1+e_2=1$, is multiplicative since $M_1M_2=e_1e_2M=0$, and is $R$-linear; $u\\theta_{(i,j)}(x,y)=\\mu^1_i(x)+\\mu^2_j(y)=\\mu_{(i,j)}(x,y)$. (d) Uniqueness: if $u':\\Lambda_1\\times\\Lambda_2\\to M$ is an $R$-algebra map with $u'\\theta_{(i,j)}=\\mu_{(i,j)}$ for all $(i,j)$, then $\\lambda_1\\mapsto u'(\\lambda_1,0)$ takes values in $M_1$ (as $(\\lambda_1,0)=(1,0)(\\lambda_1,0)$), is an $R_1$-algebra map $\\Lambda_1\\to M_1$ and satisfies $u'(\\iota_i(x),0)=u'\\theta_{(i,j)}(x,0)=\\mu^1_i(x)$, so it equals $u_1$; likewise $u'(0,\\lambda_2)=u_2(\\lambda_2)$, and $u'(\\lambda_1,\\lambda_2)=u'(\\lambda_1,0)+u'(0,\\lambda_2)=u(\\lambda_1,\\lambda_2)$. So $(\\Lambda_1\\times\\Lambda_2,(\\theta_{(i,j)}))$ is a colimit of $D$ in commutative $R$-algebras.",
+   "text": "*Step 4 (the colimit, checked on underlying types).* Forgetting a filtered colimit of commutative R-algebras to commutative rings preserves its universal property, even when the base has a smaller universe: for any ring cocone choose an index i, give its apex the algebra map obtained by composing the structure map at i with the cocone leg, and use common upper objects to show every other leg commutes with that map. Lift the ring cocone to an algebra cocone and apply the original colimit universal property. Forgetting filtered ring colimits to types preserves them (Mathlib's Ring.FilteredColimits). Thus each coordinate colimit is jointly surjective, and equality of two elements represented at the same stage holds at a later stage (Types.jointly_surjective_of_isColimit and Types.FilteredColimit.isColimit_eq_iff'). For the product cocone, represent the first and second coordinates at i and j; their pair represents the element at (i,j). If two pairs at (i,j) have equal images, find f:i→k and g:j→l witnessing the respective coordinate equalities; the arrow (f,g) witnesses equality in the product diagram. The recognition lemma Types.FilteredColimit.isColimitOf' proves this underlying type cocone colimiting. To recover the algebra colimit [def-weil-pbc-category-colimit], first reflect through the ring forgetful functor (which preserves these colimits and reflects isomorphisms); then lift the resulting universal ring map to an algebra map by checking its structure-map compatibility on the leg at any index. Existence, factorization and uniqueness follow from the ring universal property. This uses no idempotent decomposition of the destination.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -94,7 +94,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma Tag 07F3 (lemma-product, line 1926): Stacks omits the proof and gives only the hint 'A product of filtered colimits is a filtered colimit'; the steps write out that hint"
+  "place": "Lemma Tag 07F3 (lemma-product), hint 'A product of filtered colimits is a filtered colimit'; J2 implements the hint by the product diagram and the elementwise recognition criterion in Mathlib.CategoryTheory.Limits.Types.Filtered. Universe-independent forgetting-to-rings argument adapted from the proved private ringColimit helper in Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule."
  },
  "mathlib_searches": [
   {
@@ -171,5 +171,15 @@
   "group": "K1",
   "result": "fix",
   "note": "R1,R2,Λ1,Λ2 CommRing + two Algebra = the two ring maps; h1/h2 ObjectProperty.ind Smooth = def-weil-pbc-filtered-colimit-smooth-algebras; conclusion product algebra via RingHom.prodMap (inlined letI); FIX: single universe u -> sibling Popescu form R:Type u, Λ:Type (max u v), ind.{max u v}"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144121-L-2099416",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
