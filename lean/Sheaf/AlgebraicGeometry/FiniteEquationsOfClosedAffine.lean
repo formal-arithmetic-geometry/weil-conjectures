@@ -2,7 +2,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! Finite principal equations for a degree sublevel locus on an affine open. -/
 
@@ -51,6 +50,10 @@ theorem exists_finite_equations_of_finitely_generated_zeroLocus
     {S : Scheme.{u}} {W : S.Opens} {I : Ideal Γ(S, W)} (hI : I.FG) :
     ∃ t : Finset Γ(S, W), ∀ s : S, s ∈ W →
       (s ∈ S.zeroLocus (U := W) I ↔ ∀ a ∈ t, s ∉ S.basicOpen a) := by
-  sorry
+  obtain ⟨t, ht⟩ := hI
+  refine ⟨t, ?_⟩
+  intro s hs
+  rw [← ht, Scheme.zeroLocus_span]
+  simp only [Scheme.mem_zeroLocus_iff, Finset.mem_coe]
 
 end AlgebraicGeometry.Scheme.Hom
