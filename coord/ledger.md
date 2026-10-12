@@ -9066,3 +9066,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/S2/Sheaf.AlgebraicGeometry.CoherentSupportUnionExactSequence (stage 3; reviewer PASS; first push; landing 20261012T184342-L-4019500 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ProperFlatCohomologyData (stage 3; reviewer PASS; first push; landing 20261012T184342-L-4019598 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/S2/Sheaf.CategoryTheory.SmallInjectivePresheafCechExact (stage 3; reviewer PASS; first push; landing 20261012T184343-L-4019714 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/S2/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (stage 3; reviewer PASS; first push; landing 20261012T184343-L-4019871 (interface); batch 20261012T184234; modules 5; new nodes 4)

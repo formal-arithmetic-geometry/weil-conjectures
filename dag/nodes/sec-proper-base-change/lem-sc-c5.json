@@ -1,172 +1,167 @@
 {
-  "id": "lem-sc-c5",
-  "blueprint": {
-    "is": "lem-sc-c5",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "C5: finiteness on proper curves",
-  "statement": "Let $k$ be algebraically closed, let $C$ be a\nsmooth proper connected curve over $k$, let\n$r$ be a prime (arbitrary, possibly\n$r=\\operatorname{char}k$), and let\n$\\mathbf F_r$ be the constant sheaf, viewed as constructible. Then\n$\\mathbf F_r$ satisfies $\\mathcal C_5(C,\\mathbf F_r)$ of\n[def-weil-pbc-eight-curve-assertions]: $H^q(C_{\\Et},\\mathbf F_r)$\nis finite for every $q\\geq0$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c5.md",
-    "place": "node lem-sc-c5, order 1116"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-eight-curve-assertions",
-    "def-sc-curves"
-  ],
-  "proof": [
-    {
-      "text": "If $r\\neq\\operatorname{char}k$, the finiteness is the explicit\ncomputation of [thm-sc-proper-cohomology] and the vanishing for\n$q>2$, which is [lem-sc-cohomological-dimension]. If\n$r=\\operatorname{char}k=p>0$, then $H^q(C,\\mathbf F_p)=0$ for\n$q>1$ by the Artin–Schreier bound\n([lem-sc-artin-schreier-dimension]),\n$H^0(C,\\mathbf F_p)=\\mathbf Z/p\\mathbf Z$, and\n$H^1(C,\\mathbf F_p)=\\ker(\\wp:H^1(C,\\mathcal O_C)\\to H^1(C,\\mathcal O_C))$ by the Artin–Schreier sequence\n([lem-sc-as-sequence]), an $\\mathbf F_p$-vector space of\ndimension at most $g$ by [lem-sc-fixed-points-finite],\nhence finite.",
-      "uses": [
-        "thm-sc-proper-cohomology",
-        "lem-sc-cohomological-dimension",
-        "lem-sc-artin-schreier-dimension",
-        "lem-sc-as-sequence",
-        "lem-sc-fixed-points-finite"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-c5",
+ "blueprint": {
+  "is": "lem-sc-c5",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "C5: finiteness on proper curves",
+ "statement": "Let $k$ be algebraically closed, let $C$ be a\nsmooth proper connected curve over $k$, let\n$r$ be a prime (arbitrary, possibly\n$r=\\operatorname{char}k$), and let\n$\\mathbf F_r$ be the constant sheaf, viewed as constructible. Then\n$\\mathbf F_r$ satisfies $\\mathcal C_5(C,\\mathbf F_r)$ of\n[def-weil-pbc-eight-curve-assertions]: $H^q(C_{\\Et},\\mathbf F_r)$\nis finite for every $q\\geq0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c5.md",
+  "place": "node lem-sc-c5, order 1116"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-sc-curves"
+ ],
+ "proof": [
+  {
+   "text": "If $r\\neq\\operatorname{char}k$, the finiteness is the explicit\ncomputation of [thm-sc-proper-cohomology] and the vanishing for\n$q>2$, which is [lem-sc-cohomological-dimension]. If\n$r=\\operatorname{char}k=p>0$, then $H^q(C,\\mathbf F_p)=0$ for\n$q>1$ by the Artin–Schreier bound\n([lem-sc-artin-schreier-dimension]),\n$H^0(C,\\mathbf F_p)=\\mathbf Z/p\\mathbf Z$, and\n$H^1(C,\\mathbf F_p)=\\ker(\\wp:H^1(C,\\mathcal O_C)\\to H^1(C,\\mathcal O_C))$ by the Artin–Schreier sequence\n([lem-sc-as-sequence]), an $\\mathbf F_p$-vector space of\ndimension at most $g$ by [lem-sc-fixed-points-finite],\nhence finite.",
+   "uses": [
     "thm-sc-proper-cohomology",
     "lem-sc-cohomological-dimension",
     "lem-sc-artin-schreier-dimension",
     "lem-sc-as-sequence",
     "lem-sc-fixed-points-finite"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c5.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "For a smooth proper connected curve over an algebraically closed field and constant sheaf F_r, etale cohomology H^q is finite for every q, including characteristic r",
-      "results": "AlgebraicGeometry.IsEtale.instIsSmooth (Mathlib.AlgebraicGeometry.Morphisms.Etale); Algebra.Etale.finitePresentation (Mathlib.RingTheory.Etale.Basic); AlgebraicGeometry.finite_appTop_of_universallyClosed (Mathlib.AlgebraicGeometry.Morphisms.Proper); no etale-cohomology finiteness theorem",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite etale cohomology groups of a proper smooth curve with constant finite coefficients",
-      "results": "Mostly unrelated algebraic finiteness results, including Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential and FunctionField...ClassGroup; no etale-cohomology theorem",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "finite H^q etale cohomology proper curve",
-      "results": "Query rejected: unknown identifier finite; no declarations returned",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n -i Artin.?Schreier|cohomological dimension|proper.*curve|etale cohomology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "Only an Artin-Schreier theory mention in FieldTheory/KummerExtension.lean; no proper-curve etale cohomology finiteness declarations",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1116,
-  "blueprint_uses": [
-    "def-sc-curves",
-    "def-weil-pbc-eight-curve-assertions",
-    "lem-sc-artin-schreier-dimension",
-    "lem-sc-as-sequence",
-    "lem-sc-cohomological-dimension",
-    "lem-sc-fixed-points-finite",
-    "thm-sc-proper-cohomology"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-          "lines": [
-            145,
-            157
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lem-sc-c5",
-    "worker": "stage1",
-    "summary": "Checked the C5 statement and its two characteristic branches against the server blueprint. The proof uses the prime-to-characteristic proper-curve computation and cohomological dimension, or in characteristic p the Artin-Schreier sequence, dimension bound, and finite fixed-point result. No Lean declaration or hidden split was present; no new DAG nodes were required. Mathlib searches were recorded for the item, with no matching etale-cohomology finiteness theorem found."
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "group": "C",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
-    "declaration": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-    "branch": "slopmaster2",
-    "line": 145,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-57c3b",
-    "group": "C1",
-    "result": "pass",
-    "landing": "20261012T085218-L-5119",
-    "kind": "interface",
-    "note": "independent Codex review: Matched the C₈ proof with lem-sc-c8 and its dependencies; signatures and targets are unchanged, node edits are permitted, all 100 downstream users are recorded, compilation is clean, and axioms match unfinished upstream dependencies.",
-    "sorry_before": [
-      "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
-      "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-      "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-      "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
-      "AlgebraicGeometry.IsCurve.surjective_cohomologyMap_constantModSheaf_two"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
-      "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-      "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-      "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero"
-    ]
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "thm-sc-proper-cohomology",
+  "lem-sc-cohomological-dimension",
+  "lem-sc-artin-schreier-dimension",
+  "lem-sc-as-sequence",
+  "lem-sc-fixed-points-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c5.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth proper connected curve over an algebraically closed field and constant sheaf F_r, etale cohomology H^q is finite for every q, including characteristic r",
+   "results": "AlgebraicGeometry.IsEtale.instIsSmooth (Mathlib.AlgebraicGeometry.Morphisms.Etale); Algebra.Etale.finitePresentation (Mathlib.RingTheory.Etale.Basic); AlgebraicGeometry.finite_appTop_of_universallyClosed (Mathlib.AlgebraicGeometry.Morphisms.Proper); no etale-cohomology finiteness theorem",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale cohomology groups of a proper smooth curve with constant finite coefficients",
+   "results": "Mostly unrelated algebraic finiteness results, including Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential and FunctionField...ClassGroup; no etale-cohomology theorem",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "finite H^q etale cohomology proper curve",
+   "results": "Query rejected: unknown identifier finite; no declarations returned",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i Artin.?Schreier|cohomological dimension|proper.*curve|etale cohomology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Only an Artin-Schreier theory mention in FieldTheory/KummerExtension.lean; no proper-curve etale cohomology finiteness declarations",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1116,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-weil-pbc-eight-curve-assertions",
+  "lem-sc-artin-schreier-dimension",
+  "lem-sc-as-sequence",
+  "lem-sc-cohomological-dimension",
+  "lem-sc-fixed-points-finite",
+  "thm-sc-proper-cohomology"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      145,
+      157
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sc-c5",
+  "worker": "stage1",
+  "summary": "Checked the C5 statement and its two characteristic branches against the server blueprint. The proof uses the prime-to-characteristic proper-curve computation and cohomological dimension, or in characteristic p the Artin-Schreier sequence, dimension bound, and finite fixed-point result. No Lean declaration or hidden split was present; no new DAG nodes were required. Mathlib searches were recorded for the item, with no matching etale-cohomology finiteness theorem found."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+  "declaration": "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
+  "branch": "slopmaster2",
+  "line": 145,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
+   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
+   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
+   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
+   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
+   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
+   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero"
+  ]
+ }
 }
