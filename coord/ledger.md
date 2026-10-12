@@ -6285,3 +6285,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/T1/Sheaf.RingTheory.AdicCompletionNoetherian (stage 3; reviewer PASS; first push; landing 20261012T053955-L-2646623 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/T2/Sheaf.AlgebraicGeometry.FpqcDescentEtale (stage 3; reviewer PASS; first push; landing 20261012T053955-L-2646747 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/T2/Sheaf.Topology.SetsExtensionByEmpty (stage 3; reviewer PASS; first push; landing 20261012T053956-L-2646846 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/T2/WeilConjectures.AlgebraicGeometry.Curve.Estimate (stage 3; reviewer PASS; first push; landing 20261012T053956-L-2646979 (proof); batch 20261012T053916; modules 1; new nodes 0)

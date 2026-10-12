@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
 
 /-!
 # The curve estimate
@@ -76,15 +79,38 @@ The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the bluepr
 (blueprint: `sk-thm-curveestimate`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
-    Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) :=
-  -- Proof sketch: after choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and
-  -- `H¹(C, μₙ) ≅ Pic(C)[n]` by
-  -- `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one`, since
-  -- `Γ(C, 𝒪)ˣ = kˣ` is `n`-divisible. The degree map gives `Pic(C)[n] = Pic⁰(C)[n]`, and
-  -- `Pic⁰(C) ≃* J(k)` for the Jacobian `J`, an abelian variety of dimension `g`
-  -- (`AlgebraicGeometry.exists_jacobian`, a group isomorphism), so `Pic⁰(C)[n] ≅ J(k)[n]`,
-  -- which is `(ℤ/n)^{2g}` (`AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`).
-  sorry
+    Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) := by
+  have : NeZero (n : k) := ⟨hn⟩
+  have : NeZero n := .of_neZero_natCast k
+  obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k n
+  let eμ := ((Sheaf.functorH _ 1).mapIso
+    (C.constantZModIsoRootsOfUnitySheaf n f hζ)).addCommGroupIsoToAddEquiv
+  obtain ⟨eH⟩ := nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper f n hn
+  obtain ⟨⟨eT⟩, -, -⟩ := f.pic_proper_ntorsion n hn
+  let ePic := (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).symm
+  let eKer : AddSubgroup.torsionBy C.CohomologicalPicardGroup n ≃+
+      Additive (powMonoidHom n : C.Pic →* C.Pic).ker :=
+    { toFun := fun x ↦ Additive.ofMul ⟨(ePic x).toMul, by
+        have hx := congrArg ePic (AddSubgroup.torsionBy.nsmul_iff.mp x.property)
+        change (ePic x).toMul ^ n = 1
+        simpa only [map_nsmul, map_zero, toMul_nsmul, toMul_zero] using
+          congrArg Additive.toMul hx⟩
+      invFun := fun x ↦ ⟨ePic.symm (Additive.ofMul x.toMul.val), by
+        apply AddSubgroup.torsionBy.nsmul_iff.mpr
+        apply ePic.injective
+        have hx : x.toMul.val ^ n = 1 := x.toMul.property
+        simpa only [map_nsmul, AddEquiv.apply_symm_apply, map_zero, ofMul_pow, ofMul_one] using
+          congrArg Additive.ofMul hx⟩
+      left_inv := fun x ↦ Subtype.ext (ePic.symm_apply_apply x)
+      right_inv := fun x ↦ by
+        apply Additive.toMul.injective
+        apply Subtype.ext
+        exact congrArg Additive.toMul (ePic.apply_symm_apply _)
+      map_add' := fun x y ↦ by
+        apply Additive.toMul.injective
+        apply Subtype.ext
+        exact congrArg Additive.toMul (ePic.map_add x y) }
+  exact ⟨eμ.trans (eH.trans (eKer.trans eT.toAdditive))⟩
 
 /-- **The curve estimate in degree two.** Let `C` be a smooth proper connected curve over an
 algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
@@ -97,12 +123,29 @@ dimension exactly one (`AlgebraicGeometry.IsConnectedCurve.krullDim_eq_one`); wi
 (blueprint: `sk-thm-curveestimate`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
-    Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) :=
-  -- Proof sketch: after choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and
-  -- `H²(C, μₙ) ≅ Pic(C)/n` by
-  -- `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two`.
-  -- The degree `Pic(C) → ℤ` is surjective with `n`-divisible kernel `Pic⁰(C)`, so
-  -- `Pic(C)/n ≅ ℤ/n`.
-  sorry
+    Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) := by
+  have : NeZero (n : k) := ⟨hn⟩
+  have : NeZero n := .of_neZero_natCast k
+  obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k n
+  let eμ := ((Sheaf.functorH _ 2).mapIso
+    (C.constantZModIsoRootsOfUnitySheaf n f hζ)).addCommGroupIsoToAddEquiv
+  obtain ⟨eH⟩ := IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two f n hn
+  obtain ⟨-, ⟨eQ⟩, -⟩ := f.pic_proper_ntorsion n hn
+  let ePic := (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).symm
+  have : (zsmulAddGroupHom (α := C.CohomologicalPicardGroup) (n : ℤ)).range.Normal :=
+    ⟨fun x hx y ↦ by
+      simpa only [add_comm y x, add_assoc, add_neg_cancel, add_zero] using hx⟩
+  let eQuot := QuotientAddGroup.congr
+    (zsmulAddGroupHom (α := C.CohomologicalPicardGroup) (n : ℤ)).range
+    (powMonoidHom n : C.Pic →* C.Pic).range.toAddSubgroup ePic (by
+      ext x
+      constructor
+      · rintro ⟨y, ⟨z, rfl⟩, rfl⟩
+        exact ⟨(ePic z).toMul, by simp⟩
+      · rintro ⟨y, hy⟩
+        refine ⟨n • ePic.symm (Additive.ofMul y), ⟨ePic.symm (Additive.ofMul y), ?_⟩, ?_⟩
+        · simp
+        · simpa using congrArg Additive.ofMul hy)
+  exact ⟨eμ.trans (eH.trans (eQuot.trans eQ.toAdditive))⟩
 
 end AlgebraicGeometry
