@@ -25,9 +25,9 @@
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-nagata-final-descended-model` | 3 | state | 1 |
+| `lemma-nagata-final-descended-model` | 3 | state | 0 |
 
-Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement dependency.
+Not open yet: 47 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (1816)
 
@@ -118,7 +118,6 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.TensorPullbackTilde` | 4 | 1 | proof |
 | `Sheaf.CategoryTheory.ExistsDirectedReindexing` | 4 | 1 | proof |
 | `Sheaf.CategoryTheory.InjectiveSheafCechAcyclic` | 4 | 1 | proof |
-| `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
 | `Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime` | 4 | 1 | proof |
 | `Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings` | 4 | 1 | proof |
 | `Sheaf.Paper.FiniteEtaleEtaleLocalSplit` | 4 | 1 | proof |
@@ -155,7 +154,7 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescent` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceDegree` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal` | 5 | 1 | proof |
@@ -242,7 +241,6 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange` | 6 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk` | 6 | 1 | proof |
@@ -375,6 +373,7 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardCoherent` | 7 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteUnramifiedOnePointClosed` | 7 | 1 | proof |
@@ -560,6 +559,7 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.FiniteClopenOpenCoverSection` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom` | 8 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree` | 8 | 1 | proof |
