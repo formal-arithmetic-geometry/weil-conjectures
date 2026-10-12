@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-stalk-tensor-complex-degrees",
+ "kind": "statement",
+ "title": "Degreewise stalk tensor comparison",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $x\\in X$, and $T$ its module stalk functor [def-pc-module-stalk-functor]. Suppose a family of module isomorphisms $\\varphi_{A,B}:T(A\\otimes B)\\cong T(A)\\otimes T(B)$ is given for all sheaves of modules. For all cochain complexes $F,K$ [def-pc-cochain-complex-modules] and integers $n$, there are isomorphisms $e_{F,K,n}:T(\\operatorname{Tot}(F\\otimes K)^n)\\cong\\operatorname{Tot}(TF\\otimes TK)^n$ [def-pc-tensor-complex-sheaves] such that for every $p+q=n$, $T(\\iota_{p,q})e_{F,K,n}=\\varphi_{F^p,K^q}\\iota_{p,q}$, where $\\iota$ denotes the relevant total-degree coproduct injection.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-stalk-direct-sums] to the diagonal coproduct of tensor sheaves. Its germ formula implies the corresponding categorical injection formula: represent an arbitrary germ and apply the formula. If the diagonal index has smaller universe, first lift it to the sheaf universe and reindex the coproduct using the lift equivalence. The scalar ring in the direct-sum statement is the RingCat stalk; canonically identify it with the CommRingCat stalk used by [def-pc-module-stalk-functor]. Both scalar actions on germs are given by the germ of the sectionwise scalar product, so representing the scalar on a neighborhood verifies compatibility and transports the linear equivalence.",
+   "uses": [
+    "lem-pc-stalk-direct-sums",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the direct sum of stalks with the categorical module coproduct, using ModuleCat.coprodIsoDirectSum (Mathlib/Algebra/Category/ModuleCat/Products.lean, lines 99-109). Compose with the coproduct of the given component isomorphisms. The coproduct injection formula gives the asserted equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-pc-stalk-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "Y3",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification; componentwise formalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the stalk of a coproduct of sheaves of modules is the coproduct of their stalks",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving coproducts commutes with total tensor complexes via a natural tensor comparison",
+   "results": "HomologicalComplex.HasTensor, ιTensorObj, and Functor.map₂HomologicalComplex_map_app; no ready stalk comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*(stalk|Functor)|stalk.*Additive",
+   "results": "General graded and homological bifunctor APIs; no stalk total tensor comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.StalkTensorComplex",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the derived pullback composition proof needs pullback to preserve K-flat resolutions: tensoring with an acyclic complex can be checked after taking stalks; Degreewise stalk tensor comparison",
+   "via": [
+    "lem-pc-stalk-tensor-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.StalkTensorComplexDegrees",
+  "file": "lean/Sheaf/Algebra/Homology/StalkTensorComplexDegrees.lean",
+  "declaration": "CochainComplex.exists_stalk_tensor_degree_iso",
+  "statement": "theorem exists_stalk_tensor_degree_iso (φ : ∀ A B : SheafOfModules.{u₁} O, (RingedSpace.moduleStalkFunctor X x).obj (A ⊗ B) ≅ (RingedSpace.moduleStalkFunctor X x).obj A ⊗ (RingedSpace.moduleStalkFunctor X x).obj B) : ∃ e : ∀ (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ) (n : ℤ), ((S).obj (mapBifunctor F K (curriedTensor _))).X n ≅ (mapBifunctor ((S).obj F) ((S).obj K) (curriedTensor _)).X n, ∀ (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ) (p q n : ℤ) (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n), (RingedSpace.moduleStalkFunctor X x).map (HomologicalComplex.ιMapBifunctor F K (curriedTensor _) (.up ℤ) p q n h) ≫ (e F K n).hom = (φ (F.X p) (K.X q)).hom ≫ HomologicalComplex.ιMapBifunctor ((S).obj F) ((S).obj K) (curriedTensor _) (.up ℤ) p q n h",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cf219",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cf219",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702543",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match all three nodes; existing interfaces are preserved; delivered modules and direct importer Sheaf.Algebra.Homology.KFlatStalkCriterion compile cleanly; axioms match the documented remaining dependencies."
+ }
+}

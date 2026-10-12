@@ -26,51 +26,37 @@
  ],
  "proof": [
   {
-   "text": "For each integer $n$, the degree-$n$ term of the total tensor complex is $\\bigoplus_{p+q=n}\\mathcal F^p\\otimes_{\\mathcal O_X}\\mathcal K^q$ by [def-pc-tensor-complex-sheaves]. Applying [lem-pc-stalk-direct-sums] to this coproduct gives a canonical identification of its stalk with $\\bigoplus_{p+q=n}(\\mathcal F^p\\otimes_{\\mathcal O_X}\\mathcal K^q)_x$.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-stalk-direct-sums"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification"
-   }
-  },
-  {
-   "text": "For every pair $(p,q)$, the canonical module-stalk comparison [lem-pc-ringed-space-module-stalk-tensor] gives $(\\mathcal F^p\\otimes_{\\mathcal O_X}\\mathcal K^q)_x\\cong\\mathcal F_x^p\\otimes_{\\mathcal O_{X,x}}\\mathcal K_x^q$, naturally in both module sheaves. Taking the direct sum of these component isomorphisms identifies the degree-$n$ term with $\\bigoplus_{p+q=n}\\mathcal F_x^p\\otimes_{\\mathcal O_{X,x}}\\mathcal K_x^q$.",
+   "text": "Choose the natural module tensor comparisons from [lem-pc-ringed-space-module-stalk-tensor]. Apply [lem-pc-stalk-tensor-complex-degrees] to obtain the diagonal degree isomorphisms and their injection formulas.",
    "uses": [
     "lem-pc-ringed-space-module-stalk-tensor",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-stalk-tensor-complex-degrees"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification; Modules, Lemma Tag 01CB"
-   }
+   "elementary": false
   },
   {
-   "text": "The comparisons in the preceding steps carry each summand's tensor differential to the corresponding stalk tensor differential, because the module comparison [lem-pc-ringed-space-module-stalk-tensor] is natural and the stalk map sends a germ of a section to the germ of its image. They therefore commute with the total differential $d_{\\mathcal F}\\otimes1+(-1)^p1\\otimes d_{\\mathcal K}$, with the same sign on both sides by [def-pc-tensor-complex-sheaves]. Thus the degreewise maps assemble to the asserted natural isomorphism of complexes.",
+   "text": "Prove stalk additivity using the additive abelian-group stalk functor, then use [lem-pc-stalk-tensor-complex-differential] and HomologicalComplex.Hom.isoOfComponents to assemble the complex isomorphisms.",
    "uses": [
-    "lem-pc-ringed-space-module-stalk-tensor",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-stalk-tensor-complex-differential"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Prove naturality by checking after each stalked summand injection. Transport hom-ext through the degree isomorphism and the component tensor isomorphisms. The injection formula for mapBifunctorMap and naturality of the module tensor comparison identify both composites.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-stalk-direct-sums",
-  "lem-pc-ringed-space-module-stalk-tensor"
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pc-stalk-tensor-complex-degrees",
+  "lem-pc-stalk-tensor-complex-differential"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "Y3",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification; source text unavailable in this checkout"
+  "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), tensor-stalk identification; degreewise construction, proved differential and naturality"
  },
  "mathlib_searches": [
   {
@@ -161,5 +147,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cf219",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702543",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match all three nodes; existing interfaces are preserved; delivered modules and direct importer Sheaf.Algebra.Homology.KFlatStalkCriterion compile cleanly; axioms match the documented remaining dependencies."
  }
 }
