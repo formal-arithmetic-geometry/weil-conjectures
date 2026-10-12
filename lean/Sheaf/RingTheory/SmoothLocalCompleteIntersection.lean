@@ -7,11 +7,13 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.CompleteIntersectionOverField
+import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
-import Sheaf.RingTheory.LocalCompleteIntersectionFieldChange
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.SmoothLocalizationConormalSplit
+import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import Sheaf.RingTheory.SmoothOverFieldRegularLocal
+import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Smooth algebras over fields are local complete intersections
@@ -26,45 +28,124 @@ universe u v
 
 namespace Algebra
 
+private theorem globalCI_equiv {k A B : Type*} [Field k] [CommRing A] [CommRing B]
+    [Algebra k A] [Algebra k B] (e : A ≃ₐ[k] B)
+    (h : IsGlobalCompleteIntersection k A) : IsGlobalCompleteIntersection k B := by
+  rcases h with h | ⟨n, c, f, hcn, ⟨ef⟩, hdim⟩
+  · exact Or.inl (e.toEquiv.subsingleton_congr.mp h)
+  · refine Or.inr ⟨n, c, f, hcn, ⟨ef.trans e⟩, ?_⟩
+    rw [← (PrimeSpectrum.homeomorphOfRingEquiv e.toRingEquiv).isHomeomorph.topologicalKrullDim_eq]
+    exact hdim
+
+private theorem localCI_of_maximal {k A : Type*} [Field k] [CommRing A]
+    [Algebra k A] [FiniteType k A]
+    (h : ∀ q : Ideal A, q.IsMaximal →
+      ∃ g : A, g ∉ q ∧ IsGlobalCompleteIntersection k (Localization.Away g)) :
+    IsLocalCompleteIntersection k A := by
+  let s : Set A := {g | IsGlobalCompleteIntersection k (Localization.Away g)}
+  refine ⟨s, ?_, fun _ hg ↦ hg⟩
+  apply top_unique
+  intro p _
+  obtain ⟨q, hq, hpq⟩ := p.asIdeal.exists_le_maximal p.isPrime.ne_top
+  obtain ⟨g, hg, hci⟩ := h q hq
+  simp only [TopologicalSpace.Opens.mem_iSup]
+  exact ⟨g, hci, fun hgp ↦ hg (hpq hgp)⟩
+
+private theorem localCI_equiv {k A B : Type*} [Field k] [CommRing A] [CommRing B]
+    [Algebra k A] [Algebra k B] [FiniteType k A] [FiniteType k B] (e : A ≃ₐ[k] B)
+    (h : IsLocalCompleteIntersection k A) : IsLocalCompleteIntersection k B := by
+  obtain ⟨s, hs, hci⟩ := h
+  refine ⟨e '' s, ?_, ?_⟩
+  · apply top_unique
+    intro p _
+    have hp : PrimeSpectrum.comap e.toRingHom p ∈ (⨆ g ∈ s, PrimeSpectrum.basicOpen g) := by
+      rw [hs]
+      trivial
+    simp only [TopologicalSpace.Opens.mem_iSup] at hp ⊢
+    obtain ⟨g, hg, hpg⟩ := hp
+    exact ⟨e g, ⟨g, hg, rfl⟩, hpg⟩
+  · rintro _ ⟨g, hg, rfl⟩
+    exact globalCI_equiv
+      (IsLocalization.algEquivOfAlgEquiv (M := .powers g) (T := .powers (e g))
+        (Localization.Away g) (Localization.Away (e g)) e (Submonoid.map_powers e g))
+      (hci g hg)
+
 /-- (blueprint: lem-weil-pbc-smooth-over-field-local-complete-intersection)
 Stacks Project, Algebra, Lemma 10.137.4 (Tag 00T5): a smooth algebra over a field is a local
 complete intersection, hence admits a principal-open cover with global complete intersection
 localizations.
 
-Proof following the ten steps of the DAG node:
-1. Smoothness implies finite presentation and finite type. Pass to an algebraic closure using
-   `lem-weil-pbc-smooth-ring-map-base-change-composition`; descend the local complete
-   intersection conclusion by `lem-weil-pbc-lci-field-change`. Thus assume the field is
-   algebraically closed.
-2. Choose a polynomial presentation with finitely generated kernel `I`. Apply
-   `lem-weil-pbc-smooth-localization-conormal-split` with localization element `1` to obtain
-   a split injection from `I/I²` into the free module on the polynomial differentials.
-3. For a maximal ideal of the algebra, its inverse image in the polynomial ring is generated
-   by `xᵢ - aᵢ`: use `lem-weil-pbc-zariski-lemma` and
-   `lem-weil-pbc-alg-closed-finite-extension-trivial` to identify the residue field with `k`.
-4. Translate the coordinates and use `lem-weil-pbc-polynomial-ring-origin-regular-local`.
-   The polynomial local ring is regular of dimension `n`. By
-   `lem-weil-pbc-regular-local-cotangent-dimension`, the classes of `xᵢ - aᵢ` give a basis of
-   its maximal ideal modulo its square.
-5. First order Taylor expansion modulo the square of that maximal ideal identifies the
-   differential of a kernel element with its class in the cotangent space. Check constants
-   and variables, then sums and products by the Leibniz rule.
-6. Tensor the split injection with the residue field. Its source identifies with `I/m'I`
-   since `I²` is contained in `m'I`; the resulting map is injective.
-7. Choose kernel elements representing a basis of `I/m'I`. By
-   `lem-weil-pbc-nakayama-local-generators`, their images generate the localized kernel.
-8. Their cotangent classes are independent. Extend them to a cotangent basis; Nakayama gives
-   generators of the maximal ideal. By
-   `lem-weil-pbc-regular-local-generators-regular-sequence`, these form a regular sequence.
-   The initial segment generating the localized kernel is therefore regular as well.
-9. Apply `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` to find an element
-   outside the chosen maximal ideal whose localization is a global complete intersection.
-10. Choose such an element for every maximal ideal. Every prime lies in a maximal ideal,
-    so these principal opens cover the spectrum. For the zero ring the spectrum and the
-    family of maximal ideals are empty. Together with finite type, this is precisely
-    `IsLocalCompleteIntersection`. -/
+Proof using regular local rings, over the original field:
+1. Finite presentation gives an algebra equivalence from a finite polynomial quotient to S.
+2. At a maximal ideal q of the quotient, let p be its inverse image in the polynomial ring,
+   L the localization at p, and J the extended presentation ideal. The polynomial local
+   ring L is regular of dimension n. Localization commutes with quotient, so L/J is the
+   local ring at q of the smooth algebra and is regular by Stacks Lemma 00TT.
+3. By Stacks Lemma 00NR, J is generated by an initial segment of a regular system of
+   parameters of L. Lemma 00NQ makes that parameter system a regular sequence. Its initial
+   segment is weakly regular and lies in the maximal ideal, hence is regular as well.
+4. Apply Lemma 00SC to obtain a principal neighborhood of q which is a global complete
+   intersection. Every prime lies in a maximal ideal, so these neighborhoods cover.
+5. Transport this cover across the presentation equivalence. Algebra equivalences preserve
+   global complete intersections, their dimensions, and the corresponding localizations.
+The zero ring is covered vacuously because it has no prime ideals. -/
 theorem isLocalCompleteIntersection_of_smooth (k : Type u) (S : Type v) [Field k]
     [CommRing S] [Algebra k S] [Smooth k S] : IsLocalCompleteIntersection k S := by
-  sorry
+  obtain ⟨n, I, e, _⟩ := (FinitePresentation.iff (R := k) (A := S)).mp inferInstance
+  have : Smooth k (MvPolynomial (Fin n) k ⧸ I) := Smooth.of_equiv e.symm
+  apply localCI_equiv e
+  apply localCI_of_maximal
+  intro q hq
+  let := hq
+  classical
+  let P := MvPolynomial (Fin n) k
+  let A := P ⧸ I
+  let p := q.comap (Ideal.Quotient.mk I)
+  let L := Localization.AtPrime p
+  let J : Ideal L := I.map (algebraMap P L)
+  have : p.IsMaximal := Ideal.comap_isMaximal_of_surjective
+    (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  have : IsRegularLocalRing L := inferInstance
+  have hdim : ringKrullDim L = (n : WithBot ℕ∞) := by
+    rw [IsLocalization.AtPrime.ringKrullDim_eq_height p,
+      MvPolynomial.height_eq_of_isMaximal n p]
+    rfl
+  have hIp : I ≤ p := by
+    intro x hx
+    change Ideal.Quotient.mk I x ∈ q
+    rw [Ideal.Quotient.eq_zero_iff_mem.mpr hx]
+    exact q.zero_mem
+  have hJ : J ≤ IsLocalRing.maximalIdeal L := by
+    rw [← Localization.AtPrime.map_eq_maximalIdeal]
+    exact Ideal.map_mono hIp
+  have hJne : J ≠ ⊤ :=
+    ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal L).ne_top hJ
+  have hM : Algebra.algebraMapSubmonoid A p.primeCompl = q.primeCompl :=
+    Ideal.map_primeCompl_comap_of_surjective (Ideal.Quotient.mk I)
+      Ideal.Quotient.mk_surjective q
+  have : IsLocalization q.primeCompl (L ⧸ J) := by
+    rw [← hM]
+    exact inferInstance
+  have : IsRegularLocalRing (Localization.AtPrime q) := smooth_over_field_regular_local k A q
+  have : IsRegularLocalRing (L ⧸ J) := .of_ringEquiv
+    (IsLocalization.algEquiv q.primeCompl (L ⧸ J) (Localization.AtPrime q)).symm.toRingEquiv
+  obtain ⟨xs, c, hc, hxs, hgen⟩ :=
+    RingTheory.exists_parameters_regularLocalQuotient L n hdim J hJne
+  have hreg := (IsRegularLocalRing.isRegular_and_quotients_of_generators
+    L n hdim xs hxs).1
+  have htreg : RingTheory.Sequence.IsRegular L (xs.take c) := by
+    apply (IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal
+      (M := L) (fun x hx ↦ hxs.1 ▸ Ideal.subset_span (List.mem_of_mem_take hx))).mpr
+    have hw := hreg.toIsWeaklyRegular
+    rw [← List.take_append_drop c xs] at hw
+    exact ((RingTheory.Sequence.isWeaklyRegular_append_iff L _ _).mp hw).1
+  apply exists_globalCompleteIntersection_of_regularSequence
+    k n I q hq.isPrime (xs.take c).length (xs.take c).get
+  · simpa only [List.ofFn_get] using htreg
+  · change J = Ideal.span (Set.range (xs.take c).get)
+    rw [hgen]
+    apply congrArg Ideal.span
+    ext x
+    simp
 
 end Algebra
