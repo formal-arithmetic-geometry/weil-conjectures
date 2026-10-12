@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.RingTheory.FiniteModuleComplete
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Quotients of complete Noetherian local rings
@@ -18,6 +19,7 @@ first sentence and proof (blueprint: lem-weil-pbc-complete-local-quotient).
 -/
 
 @[expose] public section
+
 
 universe u
 
@@ -54,4 +56,25 @@ theorem quotient_complete_local
       IsLocalRing.maximalIdeal (R ⧸ I) =
         (IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk I) ∧
       IsAdicComplete (IsLocalRing.maximalIdeal (R ⧸ I)) (R ⧸ I) := by
-  sorry
+  set_option linter.style.haveILetI false in
+    letI : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hI
+  set_option linter.style.haveILetI false in
+    letI : IsLocalRing (R ⧸ I) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  have hnoeth : IsNoetherianRing (R ⧸ I) :=
+    isNoetherianRing_of_surjective R (R ⧸ I) (Ideal.Quotient.mk I)
+      Ideal.Quotient.mk_surjective
+  have hmax : IsLocalRing.maximalIdeal (R ⧸ I) =
+      (IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk I) := by
+    symm
+    exact IsLocalRing.map_maximalIdeal_of_surjective (Ideal.Quotient.mk I)
+      Ideal.Quotient.mk_surjective
+  have hcomp : IsAdicComplete
+      ((IsLocalRing.maximalIdeal R).map (algebraMap R (R ⧸ I))) (R ⧸ I) := by
+    rw [IsAdicComplete.map_algebraMap_iff]
+    exact finite_module_complete_over_complete_noetherian R
+      (IsLocalRing.maximalIdeal R) (R ⧸ I)
+  refine ⟨hnoeth, inferInstance, hmax, ?_⟩
+  rw [hmax]
+  convert hcomp using 1
+  all_goals rfl
