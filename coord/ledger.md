@@ -10124,3 +10124,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: returned deliver/S1/Sheaf.AlgebraicGeometry.Modules.LocalBlockResidueRank (reviewer RETURN: (the landing tools, head dcedd9010) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 23:42 L: merged deliver/A3/Sheaf.CategoryTheory.ColimitSiteAbelianStageMatchingLift (stage 3; reviewer PASS; first push; landing 20261012T234216-L-2124111 (interface); batch 20261012T234214; modules 3; new nodes 2)
 - 23:42 L: merged deliver/A4/Sheaf.RingTheory.LciConormalFreeRankCodimension (stage 3; reviewer PASS; after a return; landing 20261012T234216-L-2124258 (interface); batch 20261012T234214; modules 2; new nodes 1)
+- 23:42 L: merged deliver/C4/Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbedding (stage 3; reviewer PASS; first push; landing 20261012T234216-L-2124403 (interface); batch 20261012T234214; modules 3; new nodes 2)

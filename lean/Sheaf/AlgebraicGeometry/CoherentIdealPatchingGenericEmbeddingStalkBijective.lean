@@ -1,0 +1,37 @@
+module
+
+public import Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore
+
+@[expose] public section
+universe u
+open CategoryTheory CategoryTheory.Limits ZeroObject AlgebraicGeometry
+namespace AlgebraicGeometry.Scheme.Modules
+
+/-- The factorization supplied by the core construction is bijective at the generic
+stalk once its stalk map is known to be surjective. Source: Stacks Project, Tag 01YL,
+final paragraph.
+(blueprint: lem-weil-pbc-coherent-ideal-patching-generic-embedding-stalk-bijective)
+Proof: combine the supplied surjectivity with monomorphy of the factorization; the
+remaining geometric verification that the stalk map is surjective is isolated in the
+core construction. -/
+theorem coherent_ideal_patching_generic_embedding_stalk_bijective
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
+    (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]
+    (ξ : X) (hclosure : closure ({ξ} : Set X) = Set.range i.base)
+    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)
+    (hsupport : {x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base)
+    (hkill : ∀ g : X.presheaf.stalk ξ,
+      ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G,
+        g ∈ IsLocalRing.maximalIdeal _ → g • m = 0)
+    (I : Z.IdealSheafData) (r : ℕ)
+    (M : X.Modules) (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf)
+    (τ : idealModuleProduct ι G ⟶ M) (hτ : Mono τ)
+    (hτsurj : Function.Surjective
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom)
+    (hι : Function.Surjective
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom) :
+    Function.Bijective
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom := by sorry
+
+
+end AlgebraicGeometry.Scheme.Modules

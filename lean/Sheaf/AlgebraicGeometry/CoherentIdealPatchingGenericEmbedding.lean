@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingCore
+import Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbeddingStalkBijective
 
 /-!
 # A generic embedding of an ideal multiple into an ideal sum
@@ -77,6 +79,18 @@ theorem coherent_ideal_patching_generic_embedding
             ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom ∧
           ∃ (τ : idealModuleProduct ι G ⟶ M), Mono τ ∧
             Function.Bijective
-              ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom) := by sorry
+              ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom) := by
+  obtain ⟨r, hr, h⟩ :=
+    coherent_ideal_patching_generic_embedding_core X Z i ξ hclosure G hG hsupport hkill I
+  refine ⟨r, hr, ?_⟩
+  let M := @biproduct (Fin r) X.Modules _ _
+    (fun _ : Fin r ↦ (pushforward i).obj I.toModules)
+    (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ (pushforward i).obj I.toModules))
+  change IsZero M ∨ _
+  rcases h with hzero | ⟨J, ι, hιmono, hJqc, hιsurj, τ, hτmono, hτsurj⟩
+  · exact Or.inl hzero
+  · have hbij := coherent_ideal_patching_generic_embedding_stalk_bijective
+      X Z i ξ hclosure G hG hsupport hkill I r M J ι τ hτmono hτsurj hιsurj
+    exact Or.inr ⟨J, ι, hιmono, hJqc, hιsurj, τ, hτmono, hbij⟩
 
 end AlgebraicGeometry.Scheme.Modules
