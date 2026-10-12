@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.IrreducibleStratificationRefinement
+import Sheaf.AlgebraicGeometry.RefinementPreservesFiniteLisse
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-! Refinement of a finite lisse stratification by irreducible strata. -/
@@ -38,6 +40,9 @@ theorem exists_irreducible_refinement
       IrreducibleSpace (T.domain i) ∧
         IsFiniteLocallyConstantEtaleSheafOfSets
           ((etaleSetPullback (T.immersion i)).obj F) := by
-  sorry
+  obtain ⟨T, hTS, hI⟩ := exists_irreducible_refinement_topological X S
+  refine ⟨T, ?_⟩
+  intro i
+  exact ⟨hI i, refinement_preserves_finite_lisse X F T S hTS hS i⟩
 
 end AlgebraicGeometry.Scheme
