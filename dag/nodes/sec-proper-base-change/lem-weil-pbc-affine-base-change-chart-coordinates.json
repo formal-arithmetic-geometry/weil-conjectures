@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-affine-base-change-chart-coordinates",
+ "kind": "statement",
+ "title": "Affine chart coordinates for the base change map",
+ "statement": "Let f : X → S be an affine morphism, let f' : X' → S', g : S' → S and g' : X' → X form a cartesian square, and let F be a quasi-coherent O_X-module. For affine opens U of S and W of S' with W ⊆ g⁻¹(U), put R = Γ(S,U), B = Γ(X,f⁻¹(U)), R' = Γ(S',W) and M = Γ(F,f⁻¹(U)), with the algebra and module structures induced by f and g. There exist R'-linear equivalences a : Γ(g* f_*F,W) ≃ R' ⊗_R M and b : Γ(f'_* g'*F,W) ≃ (R' ⊗_R B) ⊗_B M such that b(beta_W(a⁻¹(r ⊗ m))) = (r ⊗ 1) ⊗ m for every r in R' and m in M, where beta is the canonical module base-change map.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02KG proof, reduction to spectra"
+ },
+ "proof": [
+  {
+   "text": "Restrict to compatible affine opens and identify them with spectra of their section rings. The cartesian square identifies the pulled-back affine with the tensor product ring, and quasi-coherence identifies the module with the associated module of sections.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_affineBaseChange_tensorComparisons after the affine and tilde identifications. The open-restriction comparison transports beta to this square. The adjunction identity homEquiv(homEquiv.symm(k)) = k identifies beta after the g-unit with the pushforward of the g'-unit; the sectionwise pushforward composition identifications are identities. The two unit-normalized tensor comparisons give the formula at 1 tensor m, and R'-linearity gives it at r tensor m. This proves only the coordinate formula, without using bijectivity of beta.",
+   "uses": [
+    "lem-weil-pbc-affine-base-change-tensor-comparisons",
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-base-change-tensor-comparisons",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02KG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine base change chart coordinates tensor product canonical map on sections",
+   "results": "service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine base change chart coordinates tensor product canonical map",
+   "results": "see searches.jsonl; hits were generic tensor base-change declarations",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.*assoc|baseChange.*tensor",
+   "results": "see searches.jsonl; generic associator and base-change declarations only",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIsoOnAffine",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-pushforward-base-change-app-bijective",
+   "place": "proof: identify affine charts and compute canonical tensor-product map"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeChartCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeChartCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineBaseChange_chart_coordinates",
+  "statement": "theorem exists_affineBaseChange_chart_coordinates {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffineHom f]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : S.Opens) (hU : IsAffineOpen U)\n    (W : S'.Opens) (hW : IsAffineOpen W) (hWU : W ≤ g ⁻¹ᵁ U) :\n    let R := Γ(S, U)\n    let B := Γ(X, f ⁻¹ᵁ U)\n    let R' := Γ(S', W)\n    let M := Γ(F, f ⁻¹ᵁ U)\n    letI : Algebra R B := (f.app U).hom.toAlgebra\n    letI : Algebra R R' := (g.appLE U W hWU).hom.toAlgebra\n    letI : Module R M := Module.compHom M (f.app U).hom\n    letI : Algebra B (R' ⊗[R] B) := Algebra.TensorProduct.rightAlgebra\n    ∃ (a : Γ((tensorPullback g).obj ((pushforward f).obj F), W) ≃ₗ[R'] R' ⊗[R] M)\n      (b : Γ((pushforward f').obj ((tensorPullback g').obj F), W) ≃ₗ[R']\n        (R' ⊗[R] B) ⊗[B] M),\n      ∀ (r : R') (m : M),\n        b ((moduleBaseChangeMap f f' g g' sq.w F).app W (a.symm (r ⊗ₜ[R] m))) =\n          (r ⊗ₜ[R] (1 : B)) ⊗ₜ[B] m",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T165528-L-2938405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T165528-L-2938405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
