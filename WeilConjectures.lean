@@ -1699,6 +1699,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ExchangeCube
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FibreSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
