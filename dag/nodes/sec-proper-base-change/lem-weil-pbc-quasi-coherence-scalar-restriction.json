@@ -31,95 +31,43 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (forgetting from $\\mathcal A$-modules to $\\mathcal O$-modules).* Let $W\\subseteq S$ be open, $\\mathcal O_W=\\mathcal O_S|_W$, $\\mathcal A_W=\\mathcal A|_W$ with structure map $\\sigma:\\mathcal O_W\\to\\mathcal A_W$. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful] to the site of opens of $W$ (every presheaf of abelian groups on a topological space has a sheafification) and to each of the sheaves of rings $\\mathcal O_W$ and $\\mathcal A_W$. (a) *Direct sums.* For a family $(\\mathcal G_i)_{i\\in I}$ of $\\mathcal A_W$-modules a direct sum $(\\Sigma,(\\iota_i))$ in $\\Mod(\\mathcal A_W)$ exists (clause (2)); its underlying $\\mathcal O_W$-module, with the $\\iota_i$ (which are $\\mathcal A_W$-linear, hence $\\mathcal O_W$-linear), is a direct sum of the underlying $\\mathcal O_W$-modules in $\\Mod(\\mathcal O_W)$. Indeed let $(\\Sigma',(\\iota'_i))$ be a direct sum in $\\Mod(\\mathcal O_W)$ (clause (2)) and $c:\\Sigma'\\to\\Sigma$ the $\\mathcal O_W$-linear map with $c\\iota'_i=\\iota_i$. By clause (3) for $\\mathcal O_W$ and for $\\mathcal A_W$, the underlying abelian sheaves of $(\\Sigma',(\\iota'_i))$ and of $(\\Sigma,(\\iota_i))$ are both coproducts in $\\Ab(W)$ of the underlying abelian sheaves of the $\\mathcal G_i$, and $c$ commutes with the coprojections, so $c$ is an isomorphism of abelian sheaves: every $c_V$ is bijective, its inverse is $\\mathcal O_W(V)$-linear, and $c$ is an isomorphism in $\\Mod(\\mathcal O_W)$ [def-weil-sheaf-of-modules-category]. (b) *Exactness.* For $\\mathcal A_W$-linear maps $\\mathcal P\\xrightarrow{u}\\mathcal Q\\xrightarrow{v}\\mathcal G$, the sequence $\\mathcal P\\to\\mathcal Q\\to\\mathcal G\\to0$ is exact in $\\Mod(\\mathcal A_W)$ if and only if the underlying sequence of $\\mathcal O_W$-modules is exact in $\\Mod(\\mathcal O_W)$: exactness means $vu=0$, $\\operatorname{Coker}v=0$ and $\\ker v=\\operatorname{Im}u$ ($\\operatorname{Im}u=\\ker(\\mathcal Q\\to\\operatorname{Coker}u)$); by clause (1) the forgetful functors of both categories to $\\Ab(W)$ preserve kernels and cokernels, hence images, and are faithful, so both conditions are equivalent to the exactness of the underlying sequence of abelian sheaves.",
+   "text": "Restriction of scalars preserves small colimits: both forgetful functors to abelian sheaves preserve colimits by moduleSheaves_colimits_forgetful, the composite with scalar restriction is the other forgetful functor, and the target forgetful functor reflects colimits because it reflects isomorphisms.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DA (sites-modules-lemma-abelian) and Lemma 03DB (sites-modules-lemma-limits-colimits); used tacitly in Morphisms, Lemma 0H88, proof, first paragraph: 'Then this is also an exact sequence of O_U-modules' (written out by the agent)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (direct sums of copies of $\\mathcal A$ on affines).* Let $W\\subseteq S$ be open, $I$ a set and $(\\Sigma,(\\iota_i)_{i\\in I})$ a direct sum of copies of $\\mathcal A_W$ in $\\Mod(\\mathcal A_W)$; put $e_i=\\iota_{i,W'}(1)$ on any open $W'\\subseteq W$, so that $\\iota_{i,W'}(a)=a\\,e_i$ by $\\mathcal A_W$-linearity. Let $U\\subseteq W$ be an affine open, identified with $\\operatorname{Spec}R$, $R=\\mathcal O_S(U)$ [def-pc-scheme], and let $A=\\mathcal A(U)$, an $R$-module through $\\sigma_U:R\\to A$; let $c_i:A\\to\\bigoplus_IA$ be the summand inclusions and $\\tau:N\\to\\Gamma(U,\\widetilde N)$ the maps of [lem-weil-pbc-affine-tilde-gamma-adjunction]. *Claim:* there is an isomorphism of $\\mathcal O_U$-modules $\\theta:(\\bigoplus_IA)^\\sim\\to\\Sigma|_U$ with $\\theta_U(\\tau((a_i)_i))=\\sum_ia_ie_i$ (finite sum) for $(a_i)\\in\\bigoplus_IA$; consequently the underlying $\\mathcal O_W$-module of $\\Sigma$ is quasi-coherent [pqf-def-coherent]. Proof: $\\mathcal A|_U$ is a quasi-coherent $\\mathcal O_U$-module by [lem-weil-pbc-module-restriction-open-immersion-colimits](2) (open immersion $\\operatorname{Spec}R\\cong U\\subseteq S$), so by [lem-weil-pbc-affine-tilde-gamma-adjunction](3) the counit $\\varepsilon:\\widetilde A\\to\\mathcal A|_U$ is an isomorphism of $\\mathcal O_U$-modules, and $\\varepsilon_U\\circ\\tau=\\mathrm{id}_A$ because $\\varepsilon$ corresponds to $\\mathrm{id}_A$ under the bijection $\\alpha\\mapsto\\alpha_U\\circ\\tau$ of clause (1). By Step 1(a), $(\\Sigma,(\\iota_i))$ is a direct sum of copies of $\\mathcal A_W$ in $\\Mod(\\mathcal O_W)$, so by [lem-weil-pbc-module-restriction-open-immersion-colimits](1) (open immersion $U\\subseteq W$) $(\\Sigma|_U,(\\iota_i|_U))$ is a direct sum of copies of $\\mathcal A|_U$ in $\\Mod(\\mathcal O_U)$; by [lem-weil-pbc-affine-tilde-gamma-adjunction](4), $((\\bigoplus_IA)^\\sim,(\\widetilde{c_i}))$ is a direct sum of copies of $\\widetilde A$. Hence there is a unique $\\mathcal O_U$-linear $\\theta$ with $\\theta\\circ\\widetilde{c_i}=\\iota_i|_U\\circ\\varepsilon$ for all $i$, and it is an isomorphism (a family of isomorphisms between the summands induces an isomorphism of direct sums). On sections over $U$, using $\\widetilde{c_i}_U\\circ\\tau=\\tau\\circ c_i$ (clause (1)): $\\theta_U(\\tau(c_i(a)))=\\iota_{i,U}(\\varepsilon_U(\\tau(a)))=\\iota_{i,U}(a)=a\\,e_i$, and $\\tau((a_i))=\\sum_i\\tau(c_i(a_i))$ gives the formula by additivity. Quasi-coherence: every point of $W$ lies in an affine open $U\\subseteq W$ (the affine opens of the scheme $S$ form a basis of its topology [def-pc-scheme]), and $\\Sigma|_U\\cong(\\bigoplus_IA)^\\sim$; this is the definition of quasi-coherence [pqf-def-coherent].",
+   "text": "For a colimit-preserving additive functor into scheme modules, a global presentation has quasi-coherent image if the image of the ring module is quasi-coherent. Use PreservesCoproduct.iso and isQuasicoherent_sigma for the free terms, Presentation.isColimit and PreservesCokernel.iso to identify the image with their cokernel, and isQuasicoherent_cokernel for closure. These are the existing source-library coproduct and cokernel closure theorems; the stronger cokernel-image theorem is unnecessary.",
    "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "pqf-def-coherent"
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01ID (schemes-lemma-colimit-quasi-coherent: direct sums of tilde modules are tilde of the direct sum) and Lemma 01I7 (schemes-lemma-compare-constructions); used in Morphisms, Lemma 0H88, proof ('cokernel of a morphism of quasi-coherent O_U-modules') and in the second paragraph ('Since the functor tilde is exact'); written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (quasi-coherent as an $\\mathcal A$-module $\\Rightarrow$ quasi-coherent as an $\\mathcal O_S$-module).* Let $\\mathcal G$ be quasi-coherent as an $\\mathcal A$-module and $x\\in S$. There are an open $W\\ni x$, sets $I,J$ and an exact sequence $\\Sigma_J\\xrightarrow{u}\\Sigma_I\\xrightarrow{v}\\mathcal G|_W\\to0$ in $\\Mod(\\mathcal A_W)$, $\\Sigma_I,\\Sigma_J$ direct sums of copies of $\\mathcal A_W$ there. By Step 1(b) it is exact in $\\Mod(\\mathcal O_W)$, i.e. $v$ is a cokernel of the $\\mathcal O_W$-linear map $u$ in the abelian category $\\Mod(\\mathcal O_W)$ [def-weil-sheaf-of-modules-category], so $\\mathcal G|_W\\cong\\operatorname{Coker}u$ as $\\mathcal O_W$-modules. By Step 2 the underlying $\\mathcal O_W$-modules of $\\Sigma_I$ and $\\Sigma_J$ are quasi-coherent, so $\\operatorname{Coker}u$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-image](2) applied on the scheme $W$ (an open subscheme of $S$ [def-pc-scheme]); quasi-coherence is invariant under isomorphism (an isomorphism $\\mathcal F|_U\\cong\\widetilde M$ composes with one $\\mathcal G|_U\\cong\\mathcal F|_U$), so $\\mathcal G|_W$ is quasi-coherent [pqf-def-coherent]. In particular $x$ has an affine open neighbourhood $U\\subseteq W$ with $\\mathcal G|_U=(\\mathcal G|_W)|_U\\cong\\widetilde M$ for a module $M$ over $\\mathcal O_S(U)$. As $x$ was arbitrary, the underlying $\\mathcal O_S$-module of $\\mathcal G$ is quasi-coherent [pqf-def-coherent].",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "def-pc-scheme",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0H88 (morphisms-lemma-quasi-coherence-scalar-restriction), proof, first paragraph (line 1855 ff.)"
-   }
+   "text": "For the forward implication choose a quasi-coherent presentation cover of G. On each member U, scalar restriction followed by overEquiv U preserves colimits and sends the algebra unit to A.toModule restricted to U, which is quasi-coherent. Apply the preceding presentation argument, transport back along overEquiv U using isQuasicoherent_pushforward_of_isLeftAdjoint and its unit isomorphism, then glue with SheafOfModules.IsQuasicoherent.of_coversTop. No affine refinement or tilde comparison is needed for this implication.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Step 4 (converse: the module over an affine and its presentation).* Let $\\mathcal G$ be an $\\mathcal A$-module whose underlying $\\mathcal O_S$-module is quasi-coherent, $x\\in S$, and $U\\ni x$ an affine open, identified with $\\operatorname{Spec}R$, $R=\\mathcal O_S(U)$ [def-pc-scheme]. Put $A=\\mathcal A(U)$, a commutative $R$-algebra through $\\sigma_U$, and $M=\\mathcal G(U)$, an $A$-module through the action of $\\mathcal A(U)$ on $\\mathcal G(U)$; its $R$-module structure as a section module of the $\\mathcal O_S$-module $\\mathcal G$ is $r\\cdot m=\\sigma_U(r)m$, i.e. the restriction of scalars along $\\sigma_U$ (this is the 'translation of the $\\mathcal A$-module structure into an $A$-module structure on $M$' that the source omits). $\\mathcal G|_U$ is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits](2), so by [lem-weil-pbc-affine-tilde-gamma-adjunction](3) the counit $\\varepsilon_{\\mathcal G}:\\widetilde M\\to\\mathcal G|_U$ is an isomorphism of $\\mathcal O_U$-modules, with $(\\varepsilon_{\\mathcal G})_U\\circ\\tau=\\mathrm{id}_M$ (clause (1), as in Step 2). Presentation of $M$: let $I=M$ as a set, $\\alpha:\\bigoplus_{m\\in I}A\\to M$, $(a_m)\\mapsto\\sum_ma_mm$, which is $A$-linear and surjective; let $J=K=\\ker\\alpha$ as a set and $\\beta:\\bigoplus_{k\\in J}A\\to\\bigoplus_IA$, $(a_k)\\mapsto\\sum_ka_kk$, whose image is $K$. So $\\bigoplus_JA\\xrightarrow{\\beta}\\bigoplus_IA\\xrightarrow{\\alpha}M\\to0$ is an exact sequence of $A$-modules, hence of $R$-modules; that is, $\\alpha$ is a cokernel of $\\beta$ in $R$-modules. For $k\\in K$ write $k_m\\in A$ for its component at $m\\in I$.",
+   "text": "For the converse, the affine opens of S cover the top by S.isBasis_affineOpens. On each affine U, underlying quasi-coherence restricts to U by SheafOfModules.isQuasicoherent_over. Apply nonempty_algebraModule_presentation_over, then Presentation.isQuasicoherent. Glue these local assertions with IsQuasicoherent.of_coversTop. The split theorem contains only the affine presentation portion of the converse, not the forward implication or the global gluing.",
    "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-affine-algebra-module-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0H88, proof, second paragraph ('We have isomorphisms of O_U-modules A|_U = A~ and F|_U = M~ ... (details omitted). Choose an exact sequence ... of A-modules'); details written by the agent"
-   }
-  },
-  {
-   "text": "*Step 5 (the $\\mathcal A|_U$-linear maps).* Let $(\\Sigma_I,(\\iota_m))$ and $(\\Sigma_J,(\\iota'_k))$ be direct sums of copies of $\\mathcal A|_U$ in $\\Mod(\\mathcal A|_U)$ (Step 1(a)), with $e_m=\\iota_{m}(1)$, $e'_k=\\iota'_k(1)$ as in Step 2. For a section $g\\in\\mathcal G(U)$ the maps $\\mathcal A(V)\\to\\mathcal G(V)$, $a\\mapsto a\\cdot g|_V$ ($V\\subseteq U$ open) form an $\\mathcal A|_U$-linear map $\\mathcal A|_U\\to\\mathcal G|_U$, since restriction is compatible with the actions [def-weil-sheaf-of-modules-category]; likewise for a section of $\\Sigma_I$ over $U$. By the universal property of direct sums let $v:\\Sigma_I\\to\\mathcal G|_U$ be the $\\mathcal A|_U$-linear map with $v\\iota_m=(a\\mapsto a\\,m|_V)$ for $m\\in I=M$, and $u:\\Sigma_J\\to\\Sigma_I$ the one with $u\\iota'_k=(a\\mapsto a\\,s_k|_V)$, where $s_k=\\sum_mk_me_m\\in\\Sigma_I(U)$ (finite sum). On sections over $U$, by $\\mathcal A(U)$-linearity, $v_U(\\sum_ma_me_m)=\\sum_ma_mm=\\alpha((a_m))$ and $u_U(\\sum_ka_ke'_k)=\\sum_ka_ks_k=\\sum_m\\bigl(\\sum_ka_kk_m\\bigr)e_m$, and $\\sum_ka_kk_m$ is the $m$-th component of $\\beta((a_k))$.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0H88, proof, second paragraph ('this produces an exact sequence ... of A~-modules'); written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 6 (exactness, and conclusion).* Let $\\theta_I:(\\bigoplus_IA)^\\sim\\to\\Sigma_I$ and $\\theta_J:(\\bigoplus_JA)^\\sim\\to\\Sigma_J$ be the isomorphisms of Step 2 (with $W=U$), and $\\widetilde\\alpha,\\widetilde\\beta$ the images of the $R$-linear maps $\\alpha,\\beta$ under the functor $N\\mapsto\\widetilde N$ of [lem-weil-pbc-affine-tilde-gamma-adjunction](1), so $\\widetilde\\alpha_U\\circ\\tau=\\tau\\circ\\alpha$, $\\widetilde\\beta_U\\circ\\tau=\\tau\\circ\\beta$. Then $v\\circ\\theta_I=\\varepsilon_{\\mathcal G}\\circ\\widetilde\\alpha$ and $u\\circ\\theta_J=\\theta_I\\circ\\widetilde\\beta$ as $\\mathcal O_U$-linear maps: by the bijection $\\gamma\\mapsto\\gamma_U\\circ\\tau$ of clause (1) it suffices to compare them after $\\tau$ on global sections, and by Steps 2, 4, 5: $v_U(\\theta_{I,U}(\\tau(a)))=v_U(\\sum_ma_me_m)=\\alpha(a)=(\\varepsilon_{\\mathcal G})_U(\\tau(\\alpha(a)))=(\\varepsilon_{\\mathcal G})_U(\\widetilde\\alpha_U(\\tau(a)))$ for $a\\in\\bigoplus_IA$, and $u_U(\\theta_{J,U}(\\tau(b)))=u_U(\\sum_kb_ke'_k)=\\theta_{I,U}(\\tau(\\beta(b)))=\\theta_{I,U}(\\widetilde\\beta_U(\\tau(b)))$ for $b\\in\\bigoplus_JA$. So the sequence of underlying $\\mathcal O_U$-modules $\\Sigma_J\\xrightarrow{u}\\Sigma_I\\xrightarrow{v}\\mathcal G|_U\\to0$ is isomorphic, through $\\theta_J,\\theta_I,\\varepsilon_{\\mathcal G}$, to $(\\bigoplus_JA)^\\sim\\xrightarrow{\\widetilde\\beta}(\\bigoplus_IA)^\\sim\\xrightarrow{\\widetilde\\alpha}\\widetilde M\\to0$. The latter is exact in $\\Mod(\\mathcal O_U)$: $\\alpha$ is a cokernel of $\\beta$ (Step 4) and $N\\mapsto\\widetilde N$ preserves colimits [lem-weil-pbc-affine-tilde-gamma-adjunction](4), so $\\widetilde\\alpha$ is a cokernel of $\\widetilde\\beta$, which in the abelian category $\\Mod(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category] is exactness of the sequence. Hence the sequence $\\Sigma_J\\to\\Sigma_I\\to\\mathcal G|_U\\to0$ is exact in $\\Mod(\\mathcal O_U)$, and by Step 1(b) (with $W=U$) it is exact in $\\Mod(\\mathcal A|_U)$. Since $x\\in U$ was arbitrary, $\\mathcal G$ is quasi-coherent as an $\\mathcal A$-module. With Step 3 this proves the equivalence.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0H88, proof, second paragraph ('Since the functor tilde is exact, this produces an exact sequence ... of A~-modules. This means that F is quasi-coherent as an A-module'); details written by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-scheme",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "pqf-def-coherent",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-affine-algebra-module-presentation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 0H88 (morphisms-lemma-quasi-coherence-scalar-restriction) and its proof (EGA I, Proposition 9.6.1 as the source's reference); the omitted details (the A-module structure on M, the A~-linearity of the tilde presentation, compatibility of direct sums and exactness with forgetting A to O_S) are written by the agent in Steps 1, 2, 4-6"
+  "place": "Morphisms, Lemma 0H88: forward implication via presentations, coproducts and cokernels without affine refinement; affine converse isolated as lem-weil-pbc-affine-algebra-module-presentation, followed by affine-cover gluing. Lean route checked by H3 second reader."
  },
  "mathlib_searches": [
   {
@@ -222,5 +170,15 @@
   "group": "G1",
   "result": "fix",
   "note": "S scheme; A : S.CommAlgebraSheaf + hA : A.toModule.IsQuasicoherent (not inferInstance); G SheafOfModules over A.right; iff of G.IsQuasicoherent with restrictScalars A.hom, as K1 c42e1122f; differs from K1 162f49708 clause (1) (special case A=u_*O_U)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-57db0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135242-L-1668797",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and affine split with their DAG nodes and Stacks 0H88; verified unchanged interfaces, axiom dependencies, report repairs, and compilation of both modules and all four direct importers."
  }
 }

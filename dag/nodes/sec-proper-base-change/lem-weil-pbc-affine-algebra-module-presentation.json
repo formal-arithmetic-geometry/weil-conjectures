@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-affine-algebra-module-presentation",
+ "kind": "statement",
+ "title": "Affine algebra-module presentation from underlying quasi-coherence",
+ "statement": "Let S be a scheme, A a quasi-coherent commutative O_S-algebra, and G an A-module. For every affine open U of S, if the underlying O_S-module of G restricted to U is quasi-coherent, then G restricted to the slice over U admits a presentation by coproducts of copies of A restricted to U.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0H88, proof, second paragraph; EGA I, Proposition 9.6.1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "On an affine U identify the section module M of G with an R-module and use the A(U)-action to make M a module over A(U). Present M by the free A(U)-module on all elements and relations given by the kernel. The sheafified presentation is exact because tilde preserves colimits, and compatibility of the action with restrictions makes its maps A-linear. Transport the presentation across the canonical equivalence between modules on the open subscheme and the slice site over U.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0H88, proof, second paragraph; details made explicit in the worker docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global free presentation of a module over a quasi-coherent algebra on an affine scheme",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Presentation",
+   "results": "Mathlib provides Presentation and Presentation.isQuasicoherent, but no affine algebra-module presentation theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "presentation.*[Aa]lgebra|[Aa]lgebra.*presentation",
+   "results": "No existing scalar-restriction affine presentation theorem; only general module presentation APIs",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-quasi-coherence-scalar-restriction",
+   "place": "proof, Step 4: the module over an affine and its presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraModulePresentation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_algebraModule_presentation_over",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraModulePresentation.lean",
+  "statement": "theorem nonempty_algebraModule_presentation_over (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) (G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).obj A.right)) (U : S.Opens) (hU : IsAffineOpen U) (hG : (((SheafOfModules.restrictScalars ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).map A.hom)).obj G).over U).IsQuasicoherent) : Nonempty (G.over U).Presentation",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-57db0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135242-L-1668797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-57db0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135242-L-1668797",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and affine split with their DAG nodes and Stacks 0H88; verified unchanged interfaces, axiom dependencies, report repairs, and compilation of both modules and all four direct importers."
+ }
+}
