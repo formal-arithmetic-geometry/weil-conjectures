@@ -33,106 +33,35 @@
  ],
  "proof": [
   {
-   "text": "*Finite type.* Since $f$ is locally of finite type [def-weil-finite-type-morphism] and $U\\subseteq X$, $V\\subseteq S$ are affine opens with $f(U)\\subseteq V$, the implication (1)$\\Rightarrow$(2) of [lem-weil-pbc-lft-affine-pairs] (Stacks 01T2) gives that the ring map $\\varphi:R=\\mathcal O_S(V)\\to A=\\mathcal O_X(U)$ induced by $f$ is of finite type.",
+   "text": "Use Scheme.Hom.finiteType_appLE on the two affine opens to provide the Algebra.FiniteType instance for the induced section-ring algebra. This is the affine-pair characterization [lem-weil-pbc-lft-affine-pairs].",
    "uses": [
-    "def-weil-finite-type-morphism",
     "lem-weil-pbc-lft-affine-pairs"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof, third paragraph, line 3707 ('By Lemma lemma-locally-finite-type-characterize the ring map R -> A is of finite type'); Lemma Tag 01T2 (lemma-locally-finite-type-characterize), line 2673"
-   }
+   "elementary": false
   },
   {
-   "text": "*Affine charts and the prime of $s$.* By [lem-weil-pbc-affine-open-spec-points] there are canonical open immersions $\\iota_U:\\operatorname{Spec}A\\to X$ and $\\iota_V:\\operatorname{Spec}R\\to S$ [def-weil-affine-spectrum] with images $U$ and $V$; they are $\\iota_U=\\mathrm{in}_U\\circ a$, $\\iota_V=\\mathrm{in}_V\\circ b$ with $a:\\operatorname{Spec}A\\xrightarrow{\\sim}U$, $b:\\operatorname{Spec}R\\xrightarrow{\\sim}V$ isomorphisms of schemes onto the open subschemes and $\\mathrm{in}_U,\\mathrm{in}_V$ the inclusions, and the prime $\\mathfrak q$ of $x$ satisfies $\\iota_U(\\mathfrak q)=x$. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $\\iota_V\\circ\\operatorname{Spec}\\varphi=f\\circ\\iota_U$. Let $f_U:U\\to V$ be the restriction of $f$, so $\\mathrm{in}_V\\circ f_U=f\\circ\\mathrm{in}_U$. Then $\\mathrm{in}_V\\circ f_U\\circ a=f\\circ\\iota_U=\\iota_V\\circ\\operatorname{Spec}\\varphi=\\mathrm{in}_V\\circ b\\circ\\operatorname{Spec}\\varphi$, and since a morphism into the open subscheme $V$ is determined by its composite with $\\mathrm{in}_V$ (on points $\\mathrm{in}_V$ is injective, and on structure sheaves $\\mathrm{in}_V^{-1}\\mathcal O_S\\to\\mathcal O_V$ is the identity of $\\mathcal O_S|_V$ [def-weil-open-immersion]), $f_U\\circ a=b\\circ\\operatorname{Spec}\\varphi$. On points, $\\operatorname{Spec}\\varphi(\\mathfrak q)=\\varphi^{-1}(\\mathfrak q)=:\\mathfrak p$ and $\\iota_V(\\mathfrak p)=f(\\iota_U(\\mathfrak q))=f(x)=s$, so $\\mathfrak p$ is the prime of $R$ corresponding to $s$ and $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$. Put $F=A\\otimes_R\\kappa(\\mathfrak p)$, $j:A\\to F$, $a'\\mapsto a'\\otimes1$, and let $\\overline{\\mathfrak q}$ be the prime of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$, which exists and is unique by [lem-weil-pbc-fibre-ring-primes-bijection].",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-fibre-ring-primes-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof, third paragraph, lines 3702-3710 (the pair of affine opens, the primes q and p, the fibre ring A tensor kappa(p) and the prime q-bar)"
-   }
+   "text": "Apply Mathlib Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber backwards to the given isolated fibre point. Apply Scheme.Hom.QuasiFiniteAt.quasiFiniteAt to the affine pair and its point to obtain Algebra.QuasiFiniteAt for the induced ring map at the corresponding prime. Apply Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber forwards to obtain openness of that prime singleton in the topological fibre of the map of spectra. All three are proved Mathlib declarations in Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite and Mathlib.RingTheory.ZariskisMainTheorem.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*The open piece $p^{-1}(U)$ of $X_s$ is the fibre of $f_U$.* Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ with projections $p:X_s\\to X$, $\\varpi:X_s\\to\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre], and $c:\\operatorname{Spec}\\kappa(s)\\to S$ the canonical morphism. By [lem-weil-pbc-residue-field-point-naturality] applied to the open immersion $\\mathrm{in}_V$ and the point $s\\in V$, the map $r:\\kappa_S(s)\\to\\kappa_V(s)$ on residue fields is an isomorphism and $\\mathrm{in}_V\\circ j^V_s=c\\circ\\operatorname{Spec}(r)$, where $j^V_s:\\operatorname{Spec}\\kappa_V(s)\\to V$ is the canonical morphism of $V$; so $c_V:=j^V_s\\circ\\operatorname{Spec}(r)^{-1}:\\operatorname{Spec}\\kappa(s)\\to V$ satisfies $\\mathrm{in}_V\\circ c_V=c$, i.e. $c_V$ is the restriction of $c$ to $V\\supseteq c(\\operatorname{Spec}\\kappa(s))=\\{s\\}$. Apply [lem-weil-pbc-open-fibre-product] to $f$, $c$ and the opens $U\\subseteq X$, $V\\subseteq S$, $W=\\operatorname{Spec}\\kappa(s)$: the canonical morphism $U\\times_V\\operatorname{Spec}\\kappa(s)\\to X_s$, the fibre product taken over $f_U$ and $c_V$, is an open immersion [def-weil-open-immersion] with image $p^{-1}(U)\\cap\\varpi^{-1}(W)=p^{-1}(U)$, and it carries the first projection to $U$ (followed by $\\mathrm{in}_U$) to $p$ restricted to $p^{-1}(U)$. In particular $p^{-1}(U)$ is open in $X_s$.",
+   "text": "The homeomorphism PrimeSpectrum.preimageHomeomorphFiber [lem-weil-pbc-fibre-spec-homeomorphism] carries the singleton in the topological fibre to the canonical fibre-ring prime singleton. Rewrite the image of a singleton and use Homeomorph.isOpen_image. By [def-weil-pbc-ring-map-quasi-finite-at-prime], this is exactly the required predicate. Pair it with the finite-type witness from step 1.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof, line 3711 ('Since Spec(A-bar) is an open subscheme of the fibre X_s') and last paragraph, lines 3723-3726 ('U_s ... for any open U')"
-   }
-  },
-  {
-   "text": "*The fibre of $f_U$ is $\\operatorname{Spec}F$.* Let $\\pi:R\\to\\kappa(\\mathfrak p)$ be the canonical map. By [lem-weil-pbc-spec-residue-field-identification] for $\\operatorname{Spec}R$ and $\\mathfrak p$ there is an isomorphism $e:\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\xrightarrow{\\sim}\\kappa(\\mathfrak p)$ with $j^{\\operatorname{Spec}R}_{\\mathfrak p}=\\operatorname{Spec}(\\pi)\\circ\\operatorname{Spec}(e^{-1})$; by [lem-weil-pbc-residue-field-point-naturality] applied to the isomorphism (in particular open immersion) $b$ and $\\mathfrak p\\mapsto s$, $b\\circ j^{\\operatorname{Spec}R}_{\\mathfrak p}=j^V_s\\circ\\operatorname{Spec}(r_b)$ with $r_b:\\kappa_V(s)\\to\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)$ an isomorphism. Hence $b^{-1}\\circ c_V=b^{-1}\\circ j^V_s\\circ\\operatorname{Spec}(r)^{-1}=\\operatorname{Spec}(\\pi)\\circ\\theta$ with $\\theta=\\operatorname{Spec}(e^{-1})\\circ\\operatorname{Spec}(r_b)^{-1}\\circ\\operatorname{Spec}(r)^{-1}:\\operatorname{Spec}\\kappa(s)\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$ an isomorphism of schemes. Since $f_U\\circ a=b\\circ\\operatorname{Spec}\\varphi$ (step 2) with $a,b$ isomorphisms, the universal property [def-pc-fibre-product] shows that $U\\times_V\\operatorname{Spec}\\kappa(s)$ (over $f_U$, $c_V$), with first projection composed with $a^{-1}$ and second projection composed with $\\theta$, is a fibre product of $\\operatorname{Spec}\\varphi$ and $\\operatorname{Spec}\\pi$: a pair $(t_1:T\\to\\operatorname{Spec}A,\\ t_2:T\\to\\operatorname{Spec}\\kappa(\\mathfrak p))$ with $\\operatorname{Spec}\\varphi\\circ t_1=\\operatorname{Spec}\\pi\\circ t_2$ corresponds bijectively to the pair $(a\\circ t_1,\\theta^{-1}\\circ t_2)$ with $f_U\\circ a\\circ t_1=c_V\\circ\\theta^{-1}\\circ t_2$. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}\\kappa(\\mathfrak p)\\cong\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))=\\operatorname{Spec}F$ with first projection $\\operatorname{Spec}(j)$. By uniqueness of fibre products up to unique isomorphism compatible with the projections [def-pc-fibre-product] and step 3, there is a homeomorphism $h:\\operatorname{Spec}F\\to p^{-1}(U)$ onto the open subset $p^{-1}(U)$ of $X_s$ with $p\\circ h=\\iota_U\\circ\\operatorname{Spec}(j)$.",
-   "uses": [
-    "lem-weil-pbc-spec-residue-field-identification",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof, third paragraph, lines 3708-3711 (the fibre ring A-bar = A tensor_R kappa(p), 'Spec(A-bar) is an open subscheme of the fibre X_s')"
-   }
-  },
-  {
-   "text": "*$\\xi$ is $h(\\overline{\\mathfrak q})$, and it is isolated in $\\operatorname{Spec}F$.* By [def-pc-scheme-fibre], $p$ is a homeomorphism of $X_s$ onto the subspace $f^{-1}(s)$ of $X$, and $\\xi$ is the point with $p(\\xi)=x$. Since $x\\in U$, $\\xi\\in p^{-1}(U)$, so $\\xi=h(\\mathfrak Q)$ for a prime $\\mathfrak Q$ of $F$ (step 4), and $\\iota_U(j^{-1}(\\mathfrak Q))=\\iota_U(\\operatorname{Spec}(j)(\\mathfrak Q))=p(h(\\mathfrak Q))=x=\\iota_U(\\mathfrak q)$. As $\\iota_U$ is an open immersion, it is injective on points [def-weil-open-immersion], so $j^{-1}(\\mathfrak Q)=\\mathfrak q$, and by the injectivity of $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ in [lem-weil-pbc-fibre-ring-primes-bijection], $\\mathfrak Q=\\overline{\\mathfrak q}$. By hypothesis $\\{\\xi\\}$ is open in $X_s$; it is contained in $p^{-1}(U)$, hence open in the subspace $p^{-1}(U)$, and as $h$ is a homeomorphism $\\operatorname{Spec}F\\to p^{-1}(U)$, $\\{\\overline{\\mathfrak q}\\}=h^{-1}(\\{\\xi\\})$ is open in $\\operatorname{Spec}F$. (This is the source's remark that a point isolated in $X_s$ is isolated in the open $U_s=p^{-1}(U)$.)",
-   "uses": [
-    "def-pc-scheme-fibre",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-fibre-ring-primes-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof, last paragraph, lines 3723-3726 ('if x is an isolated point of X_s then it is also an isolated point of U_s for any open U which contains it')"
-   }
-  },
-  {
-   "text": "*Conclusion.* By step 1, $\\varphi$ is of finite type; by step 2, $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ and $\\overline{\\mathfrak q}$ is the prime of $F=A\\otimes_R\\kappa(\\mathfrak p)$ corresponding to $\\mathfrak q$; by step 5, $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}F$. This is the definition of $R\\to A$ being quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime].",
-   "uses": [
+    "lem-weil-pbc-fibre-spec-homeomorphism",
     "def-weil-pbc-ring-map-quasi-finite-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof, last paragraph, lines 3723-3726"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
   "lem-weil-pbc-lft-affine-pairs",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-residue-field-point-naturality",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-spec-residue-field-identification",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-spec-homeomorphism",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, proof: (2) implies (4), last paragraph lines 3723-3726, with the identification of Spec(A tensor_R kappa(p)) as the open U_s of X_s from the third paragraph, lines 3702-3711; Lemma Tag 01T2 for finite type"
+  "by": "worker",
+  "document": "Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite; Mathlib.RingTheory.ZariskisMainTheorem; Mathlib.RingTheory.LocalRing.ResidueField.Fiber",
+  "place": "QuasiFinite.lean:343,395; ZariskisMainTheorem.lean:754; ResidueField/Fiber.lean:212. Complete proof through the Mathlib candidate previously recorded on this node, with the project predicate translated by the fibre homeomorphism."
  },
  "mathlib_searches": [
   {
@@ -244,5 +173,15 @@
   "group": "H1",
   "result": "pass",
   "note": "f:X⟶S [LocallyOfFiniteType f]; xi=f.asFiber x in f.fiber (f x), isolated as IsOpen {f.asFiber x} (landed spelling, EtaleLocalFiniteAtPoint/FiniteDimensionalResidueField); U,V IsAffineOpen, hx, hUV : U ≤ f⁻¹ᵁ V; φ=(f.appLE V U hUV).hom.toAlgebra; q=hU.primeIdealOf ⟨x,hx⟩ : PrimeSpectrum Γ(X,U); conclusion ∃ FiniteType witness ∧ recorded Algebra.IsQuasiFiniteAtPrime (p.Fiber S form); #check confirmed names; one universe u forced by Hom"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085231-L-11426",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

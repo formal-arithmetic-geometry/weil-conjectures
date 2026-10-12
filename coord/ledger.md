@@ -6808,3 +6808,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/E2/Sheaf.RingTheory.GRingEquiv (stage 3; reviewer PASS; first push; landing 20261012T085231-L-11010 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/E2/Sheaf.Topology.TopologicalFilteredCohomology (stage 3; reviewer PASS; first push; landing 20261012T085231-L-11116 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/E2/WeilConjectures.Mathlib.Algebra.Homology.TotalComplex (stage 3; reviewer PASS; first push; landing 20261012T085231-L-11267 (interface); batch 20261012T085205; modules 4; new nodes 4)
+- 08:52 L: merged deliver/E3/Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs (stage 3; reviewer PASS; first push; landing 20261012T085231-L-11426 (proof); batch 20261012T085205; modules 1; new nodes 0)

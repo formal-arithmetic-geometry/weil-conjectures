@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-!
 # Isolated fibre points and quasi-finiteness on affine pairs
@@ -59,6 +60,18 @@ theorem Scheme.Hom.isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber
     ∃ hft : Algebra.FiniteType Γ(S, V) Γ(X, U),
       letI := hft
       Algebra.IsQuasiFiniteAtPrime Γ(S, V) Γ(X, U) (hU.primeIdealOf ⟨x, hx⟩) := by
-  sorry
+  let := (f.appLE V U hUV).hom.toAlgebra
+  let : Algebra.FiniteType Γ(S, V) Γ(X, U) := f.finiteType_appLE hV hU hUV
+  refine ⟨inferInstance, ?_⟩
+  have hq := (Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr hisolated).quasiFiniteAt
+    hU hV hUV hx
+  have hopen := (Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber
+    (R := Γ(S, V)) (hU.primeIdealOf ⟨x, hx⟩)).mp hq
+  let q := hU.primeIdealOf ⟨x, hx⟩
+  let e := PrimeSpectrum.preimageHomeomorphFiber Γ(S, V) Γ(X, U)
+    (q.comap (algebraMap Γ(S, V) Γ(X, U)))
+  change IsOpen {e ⟨q, rfl⟩}
+  rw [← Set.image_singleton, e.isOpen_image]
+  exact hopen
 
 end AlgebraicGeometry
