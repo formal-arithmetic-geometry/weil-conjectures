@@ -9,9 +9,9 @@
  },
  "proof_origin": {
   "by": "worker",
-  "group": "T2",
+  "group": "E2",
   "date": "2026-10-13",
-  "text": "Decomposition of the two conjuncts of the parent theorem; each component is the corresponding independent part of the Stacks argument."
+  "text": "Lean proof of the Chow paragraph of Stacks Tag 02O5, using the existing affine-base projective ample-invertible theorem, explicit projective-space base change, pullback composition, and ampleness invariance. Verified against https://stacks.math.columbia.edu/tag/02O5 and https://stacks.math.columbia.edu/tag/01PU. No parent theorem is used."
  },
  "mathlib_match": null,
  "blueprint": {
@@ -25,15 +25,70 @@
  },
  "stmt_deps": [],
  "proof_deps": [
-  "lem-pc-chow-relative-ample-twist"
+  "def-nagata-projective-space-base-change",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-ample-iso",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated"
  ],
  "proof": [
   {
-   "text": "This component is a strict conjunct of the parent conclusion and follows by the tensor-pullback functoriality argument in Stacks Tag 02O5.",
+   "text": "The integral polynomial Proj twist O(1) is invertible by the proved source instance Proj.isInvertible_twist_homogeneousSubmodule. For any morphism, uniqueness of left adjoints identifies tensorPullback with Mathlib Scheme.Modules.pullback; IsInvertible.pullback and IsInvertible.of_iso then preserve invertibility. Apply this twice to the integral-model projection and j to obtain the global witness hL.",
    "uses": [
-    "lem-pc-chow-relative-ample-twist"
+    "def-pc-projective-space-twist",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Properness composes, so hj makes j followed by the projective-space structure morphism proper. Projective space is separated over its base. IsProper.of_comp therefore makes j proper; the closed-image criterion applied to j.isClosedMap.isClosed_range makes j a closed immersion. ProjectiveSpace.isClosedImmersion_liftBaseChange makes the induced morphism k=(j,pi) into projective space over Z a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any closed immersion i:X->P^m_B with affine B, compose i with ProjectiveSpace.map B.toSpecGamma. This projective-space map is a closed immersion because it is the base change of the affine isomorphism B.toSpecGamma. Apply projective_closedImmersion_ample_invertible over the ring Gamma(B,top). ProjectiveSpace.map_toProjInt and nonempty_tensorPullbackComp identify its twice-pulled integral twist with the twice-pulled twist for i. Transport invertibility and ampleness using IsInvertible.of_iso and isAmple_iff_of_iso. This is the proved private helper projective_ample_affine.",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-nagata-projective-space-base-change",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-ample-iso",
+    "def-sc-invertible-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "For an affine open V of the base, use morphismRestrict f V and its cartesian square. ProjectiveSpace.isPullback_liftBaseChange identifies the induced immersion into P^m_V as a base change of i; Mathlib MorphismProperty.of_isPullback preserves its closed-immersion property. Apply the previous affine-base helper. ProjectiveSpace.liftBaseChange_toProjInt and successive nonempty_tensorPullbackComp isomorphisms identify that module with the restriction of i*O(1). Transport ampleness across this explicit isomorphism. Apply this proved private helper projective_ample_affine_open to j over S and to k over Z.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-nagata-projective-space-base-change",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-ample-iso",
+    "lem-weil-pbc-projective-ample-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "ProjectiveSpace.liftBaseChange_toProjInt identifies the composites of j and k to the integral projective model. Compose the two nonempty_tensorPullbackComp isomorphisms with eqToIso of that equality to obtain L isomorphic to k*O(1), without using the holed Chow twist-isomorphism component. Pull this isomorphism back along the inclusion of pi^{-1}(W); invertibility of L restricts by the first step. isAmple_iff_of_iso transfers the affine-open ampleness conclusion for k to the original displayed restriction of L. Pair the S and Z clauses with hL.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": true
   }
  ],
  "created": {
@@ -99,10 +154,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T225330-L-1813231",
-  "kind": "interface",
+  "landing": "20261012T235553-L-2200999",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
