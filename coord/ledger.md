@@ -9703,3 +9703,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:51 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus (stage 3; reviewer PASS; first push; landing 20261012T215158-L-1305559 (interface); batch 20261012T215151; modules 4; new nodes 3)
 
 - 05:57 L: batch 20261012T215151 dependency take-out
+- 22:05 L: returned deliver/G1/Sheaf.AlgebraicGeometry.ProductResidueH1Injective (reviewer RETURN: (the landing tools, head 773993a6e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
