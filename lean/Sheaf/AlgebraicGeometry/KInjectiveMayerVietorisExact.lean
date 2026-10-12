@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisDegreewise
 
 /-! # Exactness of the concrete direct-image Mayer--Vietoris complex
 
@@ -59,6 +58,9 @@ theorem schemeMayerVietorisComplex_shortExact
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hI : ∀ n : ℤ, Injective (I.X n)) :
-    (schemeMayerVietorisComplex X U V I).ShortExact := by sorry
+    (schemeMayerVietorisComplex X U V I).ShortExact := by
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  exact schemeMayerVietorisComplex_degreewise_shortExact X U V hcover I n (hI n)
 
 end AlgebraicGeometry
