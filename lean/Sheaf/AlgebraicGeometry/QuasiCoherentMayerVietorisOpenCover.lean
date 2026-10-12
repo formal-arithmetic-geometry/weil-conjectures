@@ -86,6 +86,15 @@ theorem quasiCoherent_mayerVietoris_openCover (X : Scheme.{u}) (W : X.Opens) :
           (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE (inf_le_inf
           inf_le_left inf_le_left))).app F ≫
             δ F (U ⊓ T) (V ⊓ T) p) := by
-  sorry
+  obtain ⟨δ, hinj, hexact, hrestrict⟩ := module_mayerVietoris W.toScheme.toRingedSpace
+  refine ⟨fun F _ U V p ↦ (δ U V p).app F, ?_, ?_, ?_, ?_⟩
+  · intro F _ U V
+    exact hinj U V F
+  · intro F _ U V p
+    exact hexact U V F p
+  · intro F _ G _ f U V p
+    exact ((δ U V p).naturality f).symm
+  · intro F _ U V T p
+    exact congrArg (fun η ↦ η.app F) (hrestrict U V T p)
 
 end AlgebraicGeometry.Scheme
