@@ -16,27 +16,34 @@
  ],
  "proof": [
   {
-   "text": "The degree -q term is the sheaf associated to the q-th exterior power of the finite free module on Fin r. It is finite free, vanishes for q > r, and restriction to each principal affine neighbourhood identifies it with a finite free module over the restricted ring. Take these local restrictions as the strictly perfect representatives, with degree bounds -r and 0. Their images under localization identify with restrictions of Q by exactness. This proves perfection, including r=0.",
+   "text": "Use the exterior-power basis of the free module on Fin r, reindexed by ULift (Fin m). The associated-sheaf functor sends this basis isomorphism to the finite free sheaf by tildeFinsupp, and open restriction preserves finite coproducts and the unit sheaf. For q > r the exterior basis index is empty, so the term is zero. The cochain extension has zero positive terms and identifies its term in degree -q with the q-th Koszul term. Thus every open restriction is strictly perfect with bounds -r and 0. At each point choose the top open; mapDerivedCategoryFactors identifies derived restriction with the localization of this explicit restricted complex.",
    "uses": [
     "def-pc-perfect-complex",
-    "def-weil-pbc-koszul-complex"
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-spec-tilde-free-module"
    ],
    "elementary": false
   },
   {
-   "text": "If f_i is not in the prime x, it is a unit in the stalk ring. Exterior multiplication by the i-th basis vector gives a homotopy of multiplication by f_i to zero (Tag 0663). Localizing this identity and dividing the homotopy by f_i contracts the stalk complex. Exactness of stalks identifies its homology with the homology stalks of Q, so they vanish in every degree. For an empty tuple the premise cannot hold; for the zero ring there are no points.",
+   "text": "Let U be the union of D(f_i). Apply isZero_restrict_shift_koszul at shift zero and remove the zero shift by shiftFunctorZero. Exact restriction commutes with homology: compose mapDerivedCategoryFactors, homologyFunctorFactors, and mapHomologicalComplexHomologyIso to identify restricted derived homology with restriction of the homology sheaf. It is therefore zero. If f_i is not in x, then x lies in U. Represent each stalk element by a section on V and restrict to V intersect U. The identity of the zero restricted sheaf is zero, so this restricted section is zero, and the original germ is zero. This proves that the homology stalk is subsingleton in every degree, without any new contraction lemma.",
    "uses": [
-    "def-weil-pbc-koszul-complex"
+    "lem-pc-koszul-restriction-zero",
+    "def-pc-derived-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "def-weil-pbc-koszul-complex"
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-pc-koszul-restriction-zero",
+  "def-pc-derived-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
   "place": "Tag 0A9A, affine paragraph (Koszul perfection and support); Tag 0663 (null homotopy)"
  },
@@ -109,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T144159-L-2112257",
-  "kind": "interface",
+  "landing": "20261012T163613-L-2784732",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
