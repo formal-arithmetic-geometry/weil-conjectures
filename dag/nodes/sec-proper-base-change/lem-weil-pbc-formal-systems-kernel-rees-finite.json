@@ -32,74 +32,35 @@
  ],
  "proof": [
   {
-   "text": "*Construct the action.* Repeatedly applying the reduction condition of [def-weil-pbc-coherent-formal-module] gives $\\mathcal F_l/\\mathcal I^r\\mathcal F_l\\cong\\mathcal F_r$ for $l\\ge r\\ge1$: induction on $l-r$, using $\\mathcal I^{l-1}\\mathcal F_l\\subseteq\\mathcal I^r\\mathcal F_l$ and the third isomorphism theorem for quotients. All transition maps are surjective as maps of sheaves. For $x\\in\\mathcal K_n$ and $a\\in\\mathcal I^m$, lift $x$ locally to $\\widetilde x\\in\\mathcal F_{n+m+1}$. If $n\\ge1$, its image in $\\mathcal F_n$ is zero, so $\\widetilde x\\in\\mathcal I^n\\mathcal F_{n+m+1}$; for $n=0$ the same inclusion holds with $\\mathcal I^0=\\mathcal O_X$. Thus $a\\widetilde x$ lies in $\\mathcal I^{n+m}\\mathcal F_{n+m+1}=\\mathcal K_{n+m}$. A different lift differs by $\\mathcal I^{n+1}\\mathcal F_{n+m+1}$, and multiplication by $a$ kills this difference since $\\mathcal I^{n+m+1}\\mathcal F_{n+m+1}=0$. Replacing $a$ by a section differing by $\\mathcal I^{m+1}$ likewise changes the product by zero. These local choices agree on overlaps, so glue to bilinear action maps. Additivity, the unit law and associativity are verified with lifts to a single common level $\\mathcal F_{n+m+l+1}$: for degrees $m,l$ both parenthesizations send the representative to $(ab)\\widetilde x=a(b\\widetilde x)$. The same multiplication calculation defines the associative unital algebra $\\mathcal B$. Extending over the sheaf direct sums yields the claimed graded action.",
+   "text": "Each F_(n+1) is coherent by the formal-system property, hence quasi-coherent on the locally Noetherian scheme. K_0 is F_1; every successor kernel is quasi-coherent by isQuasicoherent_kernel. Apply isQuasicoherent_sigma to the ULift-indexed family and transport along Sigma.reindex to the original natural-number coproduct.",
    "uses": [
     "def-weil-pbc-coherent-formal-module",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), statement and affine action implicit in proof; Section 0EHN (section-coherent-formal) reduction condition. The lift-independence and action laws are expanded here."
-   }
-  },
-  {
-   "text": "*Affine identification.* Work on an affine open $U=\\operatorname{Spec}A$ with $I=\\mathcal I(U)$. The restriction is an object of $\\mathit{Coh}(U,\\widetilde I)$, since coherence and the reduction conditions are local. By [lem-weil-pbc-coherent-formal-modules-affine] (1), $M=\\varprojlim_r\\mathcal F_r(U)$ is finite over $\\widehat A$ and the projections identify $\\mathcal F_r(U)=M/I^rM$, compatibly with transitions. The kernel in degree $n$ is consequently $I^nM/I^{n+1}M$, also for $n=0$ because $\\mathcal F_0=0$. Each $\\mathcal K_n$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth] and [lem-weil-pbc-quasi-coherent-module-kernel]. Affine sections of ideal products and quotients [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] identify the degree-$n$ part of $\\mathcal B|_U$ with the associated sheaf of $I^n/I^{n+1}$. The counit and preservation of all colimits in [lem-weil-pbc-affine-tilde-gamma-adjunction] (3),(4) identify both sheaf direct sums with the associated sheaves of $B=\\bigoplus I^n/I^{n+1}$ and $G=\\bigoplus I^nM/I^{n+1}M$ respectively. In these identifications the action of step 1 is $(a,\\bar x)\\mapsto\\overline{ax}$: a representative in $M$ supplies every lift used there. Thus the identifications respect multiplication and grading. In particular $\\mathcal G|_U$ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections].",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-coherent-formal-modules-affine",
     "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630, via Lemma 087W (lemma-inverse-systems-affine); Schemes 01IC (lemma-kernel-cokernel-quasi-coherent), 01ID (lemma-colimit-quasi-coherent), 01I8 (lemma-widetilde-constructions)."
-   }
+   "elementary": false
   },
   {
-   "text": "*Finite generation on the affine open.* Apply [lem-weil-pbc-completed-module-associated-graded-generators] to $A,I,M$. Choose a finite generating family of $M/IM$. The lemma says that it generates $G$ in degree zero over $B$, so gives a surjective $B$-linear graded map $B^{\\oplus t}\\to G$. It is also $A$-linear. By [lem-weil-pbc-affine-tilde-gamma-adjunction] (4), associated sheaves preserve its cokernel and hence its surjectivity. Step 2 identifies the resulting morphism with a surjection $(\\mathcal B|_U)^{\\oplus t}\\to\\mathcal G|_U$ respecting the graded action. This proves finite type over $\\mathcal B|_U$, without asserting finite type over $\\mathcal O_U$.",
+   "text": "Apply the strictly smaller graded-construction theorem to obtain the remaining existential conjunct. This is a decomposition: the graded construction is still open, while coproduct quasi-coherence has a complete proof from existing declarations.",
    "uses": [
-    "lem-weil-pbc-completed-module-associated-graded-generators",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-formal-systems-kernel-rees-finite-existence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), final sentence: the assertion that the affine associated graded module is finite is isolated in the new smaller algebraic node."
-   }
-  },
-  {
-   "text": "*Local conclusion.* Every point lies in an affine open $U$, where steps 2 and 3 establish quasi-coherence and provide finitely many degree-zero generators. Quasi-coherence and the stated finite-type condition are local, so these affine verifications give the conclusion on $X$. No global generating family or separation hypothesis on $X$ is required.",
-   "uses": [
-    "pqf-def-coherent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 087Z (lemma-finite-over-rees-algebra), first sentence of proof: the question is local on X."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-coherent-formal-modules-affine",
   "pqf-lem-coherent-ft-locnoeth",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-completed-module-associated-graded-generators",
-  "pqf-def-coherent"
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-formal-systems-kernel-rees-finite-existence"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087Z (lemma-finite-over-rees-algebra), proof lines 6621-6630, via 087W; the action, n=0 convention, and the omitted affine finite-generation argument are made explicit."
+  "by": "agent",
+  "group": "Q4",
+  "date": "2026-10-13",
+  "place": "Second reading: direct proof of coproduct quasi-coherence via coherent levels, kernels and reindexed coproducts; the remaining graded construction is split off from Stacks 087Z."
  },
  "mathlib_searches": [
   {
@@ -183,5 +144,15 @@
   "group": "T1",
   "result": "pass",
   "note": "Noetherian X via IsNoetherian; I as IdealSheafData; F : CoherentFormalModule X I (landed family, op n = F_(n+1)); K_0=F_1, K_(n+1)=kernel of actual transition; B_n = formalModuleQuotient I 1 of landed idealSheafPower n (I^0=O_X); A.unit = pi_0 (1 mod I); multiplication tied to section products via c in I^(m+n); action tied to local lifts a*t through kernel inclusions (mono) so A, M are determined; quasi-coherence of the coproduct via SheafOfModules.IsQuasicoherent; finite type with degree-zero generators by local generation predicate; no sorry in data, combined compile clean in 4 s"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043486",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

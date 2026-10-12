@@ -7,13 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 public import Sheaf.AlgebraicGeometry.GradedSheafStructures
-import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.RingTheory.CompletedModuleAssociatedGradedGenerators
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.FormalSystemsKernelReesFiniteExistence
 
 /-! # Finite graded kernel module of a coherent formal system
 
@@ -81,6 +77,18 @@ theorem formalSystems_kernel_rees_finite {X : Scheme.{ut}} [IsNoetherian X]
           (formalKernelι F (m + n)).val.app (op U)
             (M.act m n U ((formalAssociatedGradedπ I m).val.app (op U) a) x) =
               (@id Γ(X, U) ((Scheme.idealSheafPower I.toModulesι m).2.val.app (op U) a)) • t := by
-  sorry
+  refine ⟨?_, formalSystems_kernel_rees_finite_exists I F⟩
+  have hF (n : ℕ) : (F.obj.obj (op n)).IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mp
+      (F.property.1 n)).1
+  let (n : ℕ) : (F.obj.obj (op n)).IsQuasicoherent := hF n
+  let (n : ℕ) : (formalKernelPiece F n).IsQuasicoherent := by
+    cases n with
+    | zero => exact hF 0
+    | succ n => exact Scheme.Modules.isQuasicoherent_kernel _
+  have hsum := Scheme.Modules.isQuasicoherent_sigma
+    (fun n : ULift.{ut} ℕ ↦ formalKernelPiece F n.down)
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+    (Sigma.reindex (Equiv.ulift : ULift.{ut} ℕ ≃ ℕ) (formalKernelPiece F)) hsum
 
 end AlgebraicGeometry
