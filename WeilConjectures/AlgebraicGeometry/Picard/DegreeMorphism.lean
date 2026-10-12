@@ -189,6 +189,10 @@ section DegreePart
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 
+instance (d : ℤ) : Mono (picardFunctorDegreeι f d).hom :=
+  (NatTrans.mono_iff_mono_app _).2 fun T ↦
+    (mono_iff_injective _).2 (injective_picardFunctorDegreeι_app f d T.unop)
+
 variable [IsProper f] [LocallyOfFinitePresentation f]
 
 /-- **`Pic^d_{X/k}` is the subfunctor of classes of degree `d`**: the image of the monomorphism
