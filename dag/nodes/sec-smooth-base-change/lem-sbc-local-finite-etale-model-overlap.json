@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), local claim and its spreading"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.EnlargeOpenFiniteEtaleModel",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "lem-sbc-local-finite-etale-model-overlap",
+ "title": "Local finite etale extension with overlap comparison",
+ "statement": "Let S be an integral normal Noetherian quasi-separated scheme (normality means its local rings are integrally closed), c:C → S a qcqs smooth morphism with geometrically connected fibres, σ:S → C a section, K the function field, and q:Cη → Spec K, j:Cη → C the cartesian generic fibre [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms, def-pc-fibre-product]. Let sη:Spec K → Cη be the induced section, G a finite group with invertible order on S, and Z a finite étale G-torsor over Cη with a K-rational point over sη. Let U ⊊ S be an open containing the generic point. Suppose jU:Cη → c⁻¹(U) factors j and π:P → c⁻¹(U) is finite étale with ψ:Z.P → P giving its cartesian generic restriction. Write PA for this finite etale scheme over c inverse U. There exist an open W of S, a point s outside U lying in W, and a finite etale scheme Q over c inverse W such that the restrictions of PA and Q to (c inverse U) intersect (c inverse W), via the canonical open inclusions, are isomorphic as finite etale schemes over that intersection. W need not contain U, and no model over U union W is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a generic point s of an irreducible component of the nonempty closed complement of U. The inverse image of U in Spec O(S,s) is the punctured spectrum. Extend the generic group action uniquely to the existing finite etale cover over that punctured family using full faithfulness on the normal smooth integral family. The action laws and the torsor identity follow from generic faithfulness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct the finite etale extension over Spec O(S,s) by the local claim of 0EYJ. In dimension one the normal local domain is a DVR: ramification indices divide the invertible group order, the tame normalization (0EYG, 0EYH) and split-section trait test (0EYI) give etaleness near the section, and purity across the regular special divisor (0EYE) gives etaleness everywhere. In dimension at least two, normality and flatness give depth two on the total space. The depth-two finite algebra extension (0EY6) is compatible with flat base change. Complete a smooth affine neighbourhood of the section: the completion is a power series ring over the local base. The rational section point and group action split the generic section fibre, hence split the finite etale cover over the normal punctured section by generic faithfulness. Power-series full faithfulness (0EY9) splits the cover over the punctured completion. Depth-two uniqueness splits its extension; flat descent and the fibre criterion (0EYB) give etaleness over the missing fibre. Disconnected covers are treated componentwise with their stabilizers, whose orders divide the group order, then induced and reunited.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-presentation neighbourhood spreading of 0BQ5 and the finite-etale property spreading of 0EY3 to the local extension and its agreement with PA over the punctured local base. Shrink the neighbourhood W of s until Q is finite etale and the comparison over c inverse (U intersect W) is an isomorphism. Its two projections are exactly the canonical inclusions of (c inverse U) intersect (c inverse W), so it yields the displayed iso between the two FiniteEtale.pullback objects. W contains s outside U; it is not required to contain U. This step does not form U union W or glue the schemes.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, local claim; Tags 0BQ5 and 0EY3, spreading with comparison",
+  "note": "Strict local part of the original argument, before open-cover gluing."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "the classical spreading input, local claim and neighbourhood spreading in the Noetherian proof of 0EYJ",
+   "via": [
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover over an open of a normal noetherian smooth family extends near a missing point when the generic torsor is split over a section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale torsor on the generic fibre of a smooth normal noetherian family split over a section extends near a missing point with a comparison on the overlap",
+   "results": "service unavailable: ",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GaloisCover\"",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*finiteEtale|finiteEtale.*overlap|exists_pullback_iso_of_isPullback",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.LocalFiniteEtaleModelOverlap",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/LocalFiniteEtaleModelOverlap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_local_finiteEtale_model_overlap",
+  "statement": "theorem GaloisCover.exists_local_finiteEtale_model_overlap {S C : Scheme.{u}} [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U) (hU : U ≠ ⊤)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU) :\n    ∃ (W : S.Opens) (s : S), s ∉ U ∧ s ∈ W ∧\n      ∃ Q : (c ⁻¹ᵁ W).toScheme.FiniteEtale,\n        Nonempty ((FiniteEtale.pullback\n          (C.homOfLE (inf_le_left : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ U))).obj PA ≅\n          (FiniteEtale.pullback\n          (C.homOfLE (inf_le_right : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ W))).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135220-L-1656944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135220-L-1656944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

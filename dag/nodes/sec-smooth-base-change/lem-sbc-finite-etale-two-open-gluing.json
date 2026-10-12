@@ -1,0 +1,105 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "WeilConjectures source library",
+  "place": "AlgebraicGeometry/FundamentalGroup/Gluing.lean, exists_pullback_iso_of_isPullback, lines 249-259"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.EnlargeOpenFiniteEtaleModel",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "lem-sbc-finite-etale-two-open-gluing",
+ "title": "Finite etale gluing across two open subschemes",
+ "statement": "Let D,A,B,X be schemes [def-weil-pbc-scheme-conventions]. Let dA:D -> A, dB:D -> B, iA:A -> X, iB:B -> X be open immersions giving a cartesian square [def-pc-fibre-product], and assume that the images of iA and iB cover X. For finite etale schemes PA over A and PB over B and an isomorphism between their restrictions to D, there is a finite etale scheme P over X whose restriction to A is isomorphic to PA. Here a finite etale scheme over a base is a scheme with a finite etale structure morphism, and restriction is pullback.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The existing library theorem identifies X with the pushout of the two open immersions, glues the finite etale schemes over the pushout, and pulls the result back along that identification. Its proof constructs the glued scheme and checks finiteness and etaleness locally on the target. Use this already proved declaration directly.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C1",
+  "document": "WeilConjectures source library",
+  "place": "AlgebraicGeometry/FundamentalGroup/Gluing.lean, exists_pullback_iso_of_isPullback",
+  "note": "Existing proved tool; no new Lean module or sorry."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "classical spreading input, gluing the neighbourhood extension to the original model",
+   "via": [
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite etale schemes glue over two open subschemes from an isomorphism on the intersection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale schemes over two open subschemes with isomorphic restrictions to their intersection glue to a finite etale scheme",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.GlueData.f_open",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_opens_inf_le|exists_pullback_iso_of_isPullback|exists_pullback_inl_iso",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FundamentalGroup.Gluing",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.exists_pullback_iso_of_isPullback",
+  "statement": "theorem exists_pullback_iso_of_isPullback {D A B X : Scheme.{u}}\n    (dA : D ⟶ A) (dB : D ⟶ B) [IsOpenImmersion dA] [IsOpenImmersion dB]\n    (iA : A ⟶ X) (iB : B ⟶ X) [IsOpenImmersion iA] [IsOpenImmersion iB]\n    (H : IsPullback dA dB iA iB)\n    (hcov : ∀ x, x ∈ Set.range iA ∨ x ∈ Set.range iB)\n    (PA : A.FiniteEtale) (PB : B.FiniteEtale)\n    (e : (pullback dA).obj PA ≅ (pullback dB).obj PB) :\n    ∃ P : X.FiniteEtale, Nonempty ((pullback iA).obj P ≅ PA)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135220-L-1656944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135220-L-1656944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

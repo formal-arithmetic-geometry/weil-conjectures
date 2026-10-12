@@ -15,18 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Let s be a generic point of an irreducible component of S minus U. The inverse image\nof U in Spec O(S,s) is the punctured spectrum. Normality of the smooth total space\nimplies full faithfulness of restriction of finite étale covers to the generic fibre,\nso the action on Z extends uniquely to the given model over c⁻¹(U). The torsor identities\nand surjectivity follow from generic comparison on this normal integral family.\nIf the local base has dimension one it is a trait. Tameness follows because the\nramification index divides the invertible group order. The tame normalization and\ntrait test, using the split section fibre, give étaleness near the section. The special\nfibre is irreducible, so purity extends the cover across it (0EYG, 0EYH, 0EYI, 0EYE).\nIn higher dimension normality gives depth two on the local base, and flatness transfers\nit to the total space. Extend the finite algebra by 0EY6; this extension is unique among\ndepth-two extensions and commutes with flat base change. Complete a smooth affine\nneighbourhood of the section: it is a power series ring over the local base. The\nrestriction to the punctured section is split, since it is finite étale over a normal\nintegral base and split generically. By 0EY9 the cover on the punctured completion is\nsplit, so its depth-two extension is split. Flat descent and 0EYB imply étaleness on the\nmissing fibre. Spread this local extension and glue it to the original one by 0BQ5\nand 0EY3. The resulting open V contains U and s, hence U < V, and still contains the\ngeneric point. For a disconnected torsor apply the connected argument to each component\nand its stabilizer. Stabilizer orders divide the invertible group order; the split\nsection fibre meets every component. Induce and take the finite disjoint union to\nrecover Z, and retain only the underlying finite étale cover and comparison.",
-   "uses": [],
+   "text": "Apply the local overlap extension to PA obtained by bundling the given finite etale morphism pi. Obtain W, s outside U in W, Q, and an overlap isomorphism.",
+   "uses": [
+    "lem-sbc-local-finite-etale-model-overlap"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Set V=U union W. Then U is contained in V and the witness s shows the reverse inclusion fails, so U<V. The generic point stays in V. The canonical inclusions of c inverse U and c inverse W into c inverse V cover that scheme. Their intersection square is cartesian by Mathlib isPullback_opens_inf_le. Apply finite etale two-open gluing with the supplied overlap isomorphism to obtain PV and an isomorphism of its restriction to c inverse U with PA.",
+   "uses": [
+    "lem-sbc-finite-etale-two-open-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underlying inverse of the restriction isomorphism, followed by the pullback first projection, gives f:P -> PV whose square over the open inclusion is cartesian. Define jV as jU followed by that inclusion, and psiV as psi followed by f. Canonical inclusion composition proves jV factors j. Paste the given generic restriction square with the square for f to prove that psiV gives the required generic restriction. Finiteness and etaleness are the bundled properties of PV.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-local-finite-etale-model-overlap",
+  "lem-sbc-finite-etale-two-open-gluing"
+ ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "M2",
+  "kind": "written-by-agent",
+  "by": "C1",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ, proof of Lemma 58.31.8: local claim and spreading to a larger open",
-  "note": "Strict subargument of the Noetherian extension proof; the parent supplies Noetherian induction."
+  "place": "Tag 0EYJ, local extension, neighbourhood spreading, and gluing",
+  "note": "Compiled Lean gluing and strict-enlargement assembly. One local overlap theorem remains sorry; finite etale gluing is supplied by the proved source library."
  },
  "mathlib_searches": [
   {
@@ -170,9 +187,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T110311-L-618930",
+  "landing": "20261012T135220-L-1656944",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
