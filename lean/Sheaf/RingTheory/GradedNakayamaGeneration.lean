@@ -10,7 +10,8 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.RingTheory.FiniteHomogeneousGenerators
+import Sheaf.RingTheory.FiniteGradedModuleLowerBound
+import Sheaf.RingTheory.GradedQuotientSpanDescent
 
 /-!
 # Graded Nakayama generation over the projective-line polynomial ring
@@ -49,7 +50,30 @@ theorem graded_nakayama_generation {k : Type u} [Field k]
       (Ideal.span (Set.range (X : Fin 2 → MvPolynomial (Fin 2) k)) •
         (⊤ : Submodule (MvPolynomial (Fin 2) k) N)).mkQ (n i))) = ⊤) :
     Submodule.span (MvPolynomial (Fin 2) k) (Set.range n) = ⊤ := by
-  sorry
+  classical
+  let : DirectSum.Decomposition ℳ := hℳ.chooseDecomposition
+  let Q := Submodule.span (MvPolynomial (Fin 2) k) (Set.range n)
+  obtain ⟨B, hB⟩ := exists_graded_module_lower_bound ℳ hℳ hsmul
+  have hdegrees (a : ℕ) : ∀ (j : ℤ) (x : N), j < B + a → x ∈ ℳ j → x ∈ Q := by
+    induction a with
+    | zero =>
+      intro j x hj hx
+      have hzero := hB j x (by simpa using hj) hx
+      rw [hzero]
+      exact Q.zero_mem
+    | succ a ih =>
+      intro j x hj hx
+      obtain ⟨q, hq, y, hy, z, hz, hxyz⟩ :=
+        homogeneous_decomposition_of_quotient_span ℳ hℳ hsmul r n hn hgen j x hx
+      rw [hxyz]
+      exact Q.add_mem (Q.add_mem hq (Q.smul_mem _ (ih (j - 1) y (by omega) hy)))
+        (Q.smul_mem _ (ih (j - 1) z (by omega) hz))
+  apply top_unique
+  intro x _
+  apply DirectSum.Decomposition.inductionOn (ℳ := ℳ)
+    (motive := fun x ↦ x ∈ Q) Q.zero_mem ?_ (fun _ _ ↦ Q.add_mem) x
+  intro j y
+  exact hdegrees ((j - B).toNat + 1) j y (by omega) y.property
 
 /-- A finite graded module with zero quotient modulo `(x₀,x₁)` is zero.
 Source: blueprint `lem-sc-p1-graded-resolution`, graded-resolution proof, graded Nakayama.
@@ -68,6 +92,28 @@ theorem subsingleton_of_graded_quotient_subsingleton {k : Type u} [Field k]
     (hzero : Subsingleton (N ⧸
       (Ideal.span (Set.range (X : Fin 2 → MvPolynomial (Fin 2) k)) •
         (⊤ : Submodule (MvPolynomial (Fin 2) k) N)))) : Subsingleton N := by
-  sorry
+  let : Module k N := Module.compHom N (algebraMap k (MvPolynomial (Fin 2) k))
+  let : IsScalarTower k (MvPolynomial (Fin 2) k) N :=
+    IsScalarTower.of_compHom k (MvPolynomial (Fin 2) k) N
+  have : Subsingleton (N ⧸
+      (Ideal.span (Set.range (X : Fin 2 → MvPolynomial (Fin 2) k)) •
+        (⊤ : Submodule (MvPolynomial (Fin 2) k) N))) := hzero
+  have hspan := graded_nakayama_generation ℳ hℳ hsmul 0
+    (fun i : Fin 0 ↦ Fin.elim0 i) (fun i ↦ Fin.elim0 i) (by
+      apply Subsingleton.elim)
+  have hbot : (⊥ : Submodule (MvPolynomial (Fin 2) k) N) = ⊤ := by
+    simpa using hspan
+  refine ⟨fun x y ↦ ?_⟩
+  have hx : x = 0 := by
+    have : x ∈ (⊥ : Submodule (MvPolynomial (Fin 2) k) N) := by
+      rw [hbot]
+      trivial
+    simpa using this
+  have hy : y = 0 := by
+    have : y ∈ (⊥ : Submodule (MvPolynomial (Fin 2) k) N) := by
+      rw [hbot]
+      trivial
+    simpa using this
+  exact hx.trans hy.symm
 
 end MvPolynomial
