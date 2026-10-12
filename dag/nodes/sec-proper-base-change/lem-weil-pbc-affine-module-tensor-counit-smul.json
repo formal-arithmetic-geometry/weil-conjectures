@@ -16,29 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Let q be the O_U-linear composite of kappa with the canonical pullback counit. The canonical pullback unit formula and hP identify its value on theta_t(1 tensor eta(g)) with g viewed as a section of F over f inverse V. This is the adjunction triangle.",
+   "text": "Write ηA for the ring inverse-image unit. Applying the ring Hom equivalence to the definition of e gives ηA followed by f_*(e) equal to the identity. Since t followed by ε equals e, the identity on the sections of RF is an A-linear morphism g from RF to the direct image of F with IA-action through t followed by ε.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse-image module Hom equivalence to obtain v:I(RF) → Res_t Res_ε F as the inverse adjunct of g. Use the change-of-rings Hom equivalence to obtain a B-linear map d:B tensor_IA I(RF) → Res_ε F. The two equivalences have explicit section formulas. Applying their inverse identities shows d(theta_t(1 tensor η_ab(m)))=m for every section m of RF over V.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-change-of-rings-adjunction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport d along pobj to a B-linear map dP:P(RF) → Res_ε F. Its underlying additive map is O_U-linear after restriction along b because ε(b(r))=r, by hb. Call that O_U-linear map dU.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose κ inverse with dU to get a:tensorPullback f (S(RF)) → F. Compute its adjunct using homEquiv_unit. The hP unit formula replaces eqToHom(pobj) applied to κ inverse of the tensor-pullback unit by theta_t(1 tensor η_ab(m)); the evaluation formula of the preceding step sends this to m. Thus the adjunct of a is the identity. Injectivity of the canonical tensor-pullback Hom equivalence, and homEquiv_symm_id, give a=counit_F.",
    "uses": [
     "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse-image module adjunction gives the inverse-image counit I(RF) to F, linear over IA for the action through e. Evaluate c tensor s as epsilon(c) times that counit of s. The equality t epsilon=e makes the map balanced, and the formula is B-linear. It commutes with restrictions and sheafifies to delta.",
-   "uses": [
-    "lem-pc-module-inverse-image-adjunction",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pc-module-change-of-rings-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The evaluation delta and q agree on the unit images from the first step. The pushout identifies Res_b P(RF) with O_U tensor over f inverse O_X of I(RF). Inverse-image unit sections locally generate I(RF), and their O_U multiples locally generate this tensor sheaf. Both delta and q are O_U-linear, the former by b epsilon=1. Thus equality on those unit sections extends to all local sections and hence to all sections. The section formula determines delta uniquely, including empty opens and zero rings. Therefore B-linearity of the evaluation gives q_W(c p)=epsilon_W(c) q_W(p).",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false
+   "text": "Evaluate that equality on κ(p) and cancel κ inverse composed with κ to obtain dP(p)=counit_F(κ(p)) on every open. Apply B-linearity of dP, whose target B-action is through ε, to obtain the stated scalar identity. This works without using the pushout hypothesis or any local generation assertion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -50,9 +59,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "F3 second reader",
+  "agent": "V1 stage-3 worker",
   "date": "2026-10-13",
-  "note": "Scalar-compatibility part of Stacks 01SB construction; explicit expansion of its sheaf tensor evaluation and local generation argument. Replaces the rejected full-conclusion core restatement."
+  "note": "Explicit evaluation by the two canonical Hom equivalences (Stacks 008A and 008Y), followed by uniqueness under the canonical tensor-pullback adjunction (0096). Replaces the local-generation/pushout comparison in the former plan. Stacks 01SB supplies the construction being compared; the formal adjunction uniqueness argument is written by this worker."
  },
  "mathlib_searches": [
   {
@@ -136,10 +145,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T184257-L-4002311",
-  "kind": "interface",
+  "landing": "20261012T232907-L-2044148",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
