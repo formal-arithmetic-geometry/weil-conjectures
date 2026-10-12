@@ -197,4 +197,25 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
   isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux z z' q h n
 
+/-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
+field extension and let `Z` be a scheme over `k` whose base change `Z_K` is smooth (in particular
+locally of finite type) and proper over `K`, and connected. Then `Z` is of finite type, smooth and
+proper over `k`, and connected.
+
+This is the statement of the blueprint, where `K / k` is finite; finiteness is not needed.
+Smoothness, being locally of finite type and properness descend along the faithfully flat
+quasi-compact morphism `Spec K ⟶ Spec k` (Stacks 02KL, 05B5, 02YJ), and `Z` is connected as the
+image of `Z_K` under the surjection `Z_K ⟶ Z`.
+
+(blueprint: `thm-pd-fpqc-local-properties`) -/
+theorem locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback
+    {k K : Type u} [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
+    (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
+    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) [Smooth z']
+    [IsProper z'] [ConnectedSpace Z'] :
+    LocallyOfFiniteType z ∧ QuasiCompact z ∧ Smooth z ∧ IsProper z ∧ ConnectedSpace Z := by
+  have : IsProper z := of_isPullback_Spec_map_algebraMap @IsProper h ‹_›
+  exact ⟨inferInstance, inferInstance, of_isPullback_Spec_map_algebraMap @Smooth h ‹_›, this,
+    connectedSpace_of_isPullback_Spec_map_algebraMap h⟩
+
 end AlgebraicGeometry
