@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-integral-fibre-section-local-lift",
+ "kind": "statement",
+ "title": "Every fibre section lifts over a pointed neighbourhood",
+ "statement": "Let Lambda be a commutative ring and F a sheaf of Lambda-modules on the small etale site of a scheme X [def-weil-pbc-etale-sheaves]. Let f:X -> Y be integral [def-weil-finite-integral-morphism], let s:Spec Omega -> Y be a geometric point with Omega algebraically closed [def-weil-geometric-point], and let (g':X' -> X,f':X' -> Spec Omega,f,s) be Cartesian [def-weil-pbc-cartesian-square]. For a pointed etale neighbourhood (V,v), define R_(V,v):F(V times_Y X) -> Gamma(X',g'^*F) as the inverse-image unit for g' restricted along the iterated pullback lift with first projection (f' followed by v,g') and second projection the identity of X'. Every t in Gamma(X',g'^*F) has the form R_(V,v)(z) for some V,v,z.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYP, via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to an affine neighbourhood of s and form the strict henselization Spec A. Integrality makes its pullback Spec B affine and B integral over A. Use the canonical underlying-set inverse-image comparison, including the unit equation, to apply the set-valued stalk formula to the module sheaf F. The local-structure theorem makes the chosen ring-colimit A strictly henselian, so its residue field is separably closed.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "lem-sc-etale-module-set-pullback-comparison",
+    "lem-weil-pbc-strict-henselization-local-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let m be the maximal ideal of A. The integral henselian-pair theorem makes (B,mB) henselian. Apply henselian degree-zero comparison to the proper identity of Spec B. Further restriction from the separably closed residue field of A to Omega is bijective on sections. Composition of units and the two pullback projections identify the resulting restriction with R_(V,v).",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lemma-weil-pbc-etale-degree-zero",
+    "lem-weil-pbc-sections-base-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift t successively through field-extension invariance and henselian restriction to a section on Spec B. The surjectivity and representative formula of the strict-henselization stalk comparison gives V,v,z inducing this section. The unit equations identify R_(V,v)(z) with t. The empty fibre gives its zero section, represented by zero over the identity neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-strict-henselization-local-structure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q9, 09XK, 09ZH and 0A3I; local lifting or equality consequence of the section comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an integral morphism every section of an etale sheaf on a geometric fibre lifts over a pointed etale neighbourhood",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical conclusion from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every fibre section lifts over a pointed neighbourhood for an etale sheaf and an integral morphism",
+   "results": "Eight results, on etale loci, structure-sheaf spreading, and standard etale algebras; no etale-sheaf section comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*section|section.*integral|fibre.*vanish|vanish.*fibre",
+   "results": "Mathlib hits concern integral ring maps or unrelated integration sections. Source Integral.Exact proves lifting across sheaf epimorphisms, not lifting from a geometric fibre. DAG and blueprint search found no matching local lift/zero statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralGeometricFibreSections",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-integral-base",
+   "place": "Integral base change geometric-point calculation: every fibre section lifts over a pointed neighbourhood",
+   "via": [
+    "lem-sbc-integral-geometric-fibre-sections",
+    "lem-sbc-integral-underived-exchange",
+    "lem-sbc-integral-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralFibreSectionLocalLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.integralFibreSection_localLift",
+  "statement": "theorem integralFibreSection_localLift\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (t : ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj\n      (op (Scheme.Etale.mk (𝟙 X')))) :\n    ∃ (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V)\n      (z : F.obj.obj (op (f.Etale.obj V))),\n      (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z = t",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-74455",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T144143-L-2106572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-74455",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T144143-L-2106572",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and dependencies with all three nodes and cited sources; all delivered modules and direct importer Sheaf.AlgebraicGeometry.IntegralGeometricPointExchange compile cleanly; axiom checks show only permitted axioms and the two declared sorry dependencies."
+ }
+}
