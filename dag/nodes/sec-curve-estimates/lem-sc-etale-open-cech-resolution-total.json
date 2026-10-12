@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-etale-open-cech-resolution-total",
+ "kind": "statement",
+ "title": "Total open Čech resolution comparison with derived evaluation",
+ "statement": "Let X be any scheme, i:X.Opens → X.Etale a cover-preserving finite-limit-preserving functor, with i(top) terminal. Let U be a finite u-small open family with supremum top. Let G be any étale abelian sheaf in universe u+1, assume its sheaf category has injective resolutions, and let I be any injective resolution of G. For each n≥0 the degree-n homology of the total of the actual double complex D=C^p(U,i^*I^q) [def-sc-etale-open-cech-resolution-double-complex] is isomorphic to (R^n ev_i(top))(G). Neither separatedness, affine opens, nor acyclicity of G is assumed; the assertion involves the total resolution and not the sections Čech complex.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Original proof step 2: the injective Čech augmentation and total-complex abutment comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex",
+  "def-sc-etale-open-cech-resolution-double-complex",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "The open cover generates a covering sieve on top. Push it forward using cover preservation to obtain a cover of i(top). Finite-limit preservation identifies products over i(top) with i applied to intersections; universal uniqueness makes these identifications commute with every projection and hence every Čech face. If needed to apply the existing large-index interface, lift the cover index by ULift and transport products along its canonical equivalence.",
+   "uses": [
+    "def-sc-etale-open-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Augment the horizontal row C^bullet(U,i^*I^q) by I^q(i(top)) via restrictions. The sheaf condition computes H^0 and injective Čech acyclicity computes the positive groups as zero. The product comparisons from the preceding step identify these rows with the image-cover Čech complexes. Thus each row augmentation is a quasi-isomorphism, including empty covers.",
+   "uses": [
+    "lem-weil-pbc-injective-sheaf-cech-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of restriction makes the row augmentations a morphism from the evaluated resolution to D.X 0 and then to Tot D by inclusion of the (0,q) summand. Its horizontal differential is zero and its vertical sign is +1. Apply the first-quadrant column-augmentation theorem to conclude that the total augmentation is a quasi-isomorphism. This theorem uses the finite diagonal filtration, so it does not assume a bound on the length of I.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the homology isomorphism of that augmentation and compose with the inverse of I.isoRightDerivedObj for the sheaf-evaluation functor in degree n. This identifies total homology with the displayed derived evaluation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-open-cech-resolution-double-complex",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Original proof step 2: the injective Čech augmentation and total-complex abutment comparison; direct derived-resolution formulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Cech double complex of an injective resolution has total cohomology equal to derived global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Totalization of Cech resolution computes derived evaluation by injective Cech acyclicity",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-12",
+   "digest": "6ac94776d05c8de2",
+   "verdict": "No exact match. Related definitions and resolution computations were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|Cech.*Resolution|SpectralSequence.*AbutsTo",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-12",
+   "digest": "7f32ed786627d148",
+   "verdict": "No exact match. Related definitions and resolution computations were inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sc-etale-affine-open-cech-derived-evaluation-succ: Original proof step 2: the injective Čech augmentation and total-complex abutment comparison",
+   "via": [
+    "lem-sc-etale-affine-open-cech-derived-evaluation-succ",
+    "lem-sc-etale-affine-open-cech-derived-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenCechResolutionTotal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_etale_openCech_resolution_total_iso",
+  "statement": "theorem nonempty_etale_openCech_resolution_total_iso (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) (hc : CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i) [PreservesFiniteLimits i] (ht : IsTerminal (i.obj ⊤)) {ι : Type u} [Finite ι] (U : ι → X.Opens) (hcover : iSup U = ⊤) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [HasInjectiveResolutions (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] (I : InjectiveResolution G) (n : ℕ) : Nonempty (((etaleOpenCechResolutionDoubleComplex X i U I).total (.up ℕ)).homology n ≅ (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op (i.obj ⊤))).rightDerived n).obj G))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

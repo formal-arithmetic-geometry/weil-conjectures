@@ -8445,3 +8445,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/J1/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261012T160137-L-2564474 (proof); batch 20261012T160131; modules 1; new nodes 1)
 - 16:01 L: merged deliver/J2/Sheaf.AlgebraicGeometry.TwistedSectionsFiniteDimensional (stage 3; reviewer PASS; first push; landing 20261012T160137-L-2564589 (proof); batch 20261012T160131; modules 1; new nodes 1)
 - 16:01 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ConstantExtensionPresentationLift (stage 3; reviewer PASS; first push; landing 20261012T160137-L-2564742 (interface); batch 20261012T160131; modules 2; new nodes 1)
+- 16:01 L: merged deliver/K2/Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc (stage 3; reviewer PASS; first push; landing 20261012T160138-L-2564845 (interface); batch 20261012T160131; modules 5; new nodes 4)

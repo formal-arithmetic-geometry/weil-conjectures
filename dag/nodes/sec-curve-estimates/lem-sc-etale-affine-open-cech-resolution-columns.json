@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-etale-affine-open-cech-resolution-columns",
+ "kind": "statement",
+ "title": "Affine-intersection vertical homology of the open Čech resolution",
+ "statement": "Let X be separated, let i:X.Opens → X.Etale satisfy i followed by forgetting to schemes over X equals the restriction functor, and let U be any u-small family of affine opens (no covering or finiteness condition on the family). Let G be an étale abelian sheaf with values in universe u+1, assume injective resolutions exist, and assume positive derived evaluation of G vanishes on every affine étale X-scheme. For every injective resolution I of G and its actual double complex D defined in [def-sc-etale-open-cech-resolution-double-complex], the vertical-homology complex H^0_II(D) is isomorphic to C^bullet(U,i^*G). For each q>0 and each p, the object (H^q_II(D))^p is zero. No assertion about total homology or convergence is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Original proof steps 1 and 2: affine intersections and vertical homology, including row zero"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex",
+  "def-sc-etale-open-cech-resolution-double-complex"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of the Čech functor in degree p is restriction to the discrete tuple family followed by its product. Restriction preserves finite limits and colimits. Shrink Mathlib AB4StarOfSize for AddCommGrpCat from u+1 to u, so that this product is exact. The product-to-limit natural isomorphism therefore shows that this evaluation preserves homology. Map the short complex K.sc q through these functors and use NatTrans.app_homology for the Čech differentials. This constructs a complex isomorphism H^q_II(D) ≅ C^bullet(U,H^q(K)), where K is the resolution restricted to opens. All these steps are proved in Lean.",
+   "uses": [
+    "def-sc-etale-open-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheaf-to-presheaf and restriction along i.op form a left exact additive functor A. Compose the inverse of I.isoRightDerivedObj A 0 with A.rightDerivedZeroIsoSelf to identify H^0(K) with A(G). Apply the Čech functor and compose the preceding complex isomorphism. This proves the bottom row.",
+   "uses": [
+    "def-sc-etale-open-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen product of a nonempty finite family of opens equals their infimum: the projections give one inequality and Pi.lift gives the other. Mathlib IsAffineOpen.iInf proves affineness of this intersection on a separated scheme. The functor equality identifies (i(V)).left with V as a scheme. The formula I.isoRightDerivedObj for evaluation transports hvan to homology of the evaluated resolution; evaluation preserves homology, so each value of H^q(K) at these products is zero. Product projection extensionality gives zero identity on each Čech term. The column isomorphism transports this vanishing. This includes empty tuple indexing and empty intersections; the proof is entirely Lean.",
+   "uses": [
+    "def-sc-etale-open-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-open-cech-resolution-double-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Original proof steps 1 and 2: affine intersections and vertical homology, including row zero; direct derived-resolution formulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Column cohomology of the Cech double complex commutes with products and vanishes for an acyclic affine cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": "CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-12",
+   "digest": "4596b05316f088d8",
+   "verdict": "No exact match. Related definitions and resolution computations were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|Cech.*Resolution|SpectralSequence.*AbutsTo",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-12",
+   "digest": "7f32ed786627d148",
+   "verdict": "No exact match. Related definitions and resolution computations were inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sc-etale-affine-open-cech-derived-evaluation-succ: Original proof steps 1 and 2: affine intersections and vertical homology, including row zero",
+   "via": [
+    "lem-sc-etale-affine-open-cech-derived-evaluation-succ",
+    "lem-sc-etale-affine-open-cech-derived-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineOpenCechResolutionColumns.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_affineOpenCech_resolution_columns",
+  "statement": "theorem etale_affineOpenCech_resolution_columns (X : Scheme.{u}) [X.IsSeparated] (i : X.Opens ⥤ X.Etale) (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) {ι : Type u} (U : ι → X.Opens) (hU : ∀ j, IsAffineOpen (U j)) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [HasInjectiveResolutions (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] (hvan : ∀ (W : X.Etale), IsAffine W.left → ∀ (q : ℕ), 0 < q → IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op W)).rightDerived q).obj G)) (I : InjectiveResolution G) : Nonempty (((HomologicalComplex.homologyFunctor _ (.up ℕ) 0).mapHomologicalComplex (.up ℕ)).obj (etaleOpenCechResolutionDoubleComplex X i U I) ≅ (cechComplexFunctor U).obj (i.op ⋙ G.obj)) ∧ (∀ (q : ℕ), 0 < q → ∀ (p : ℕ), IsZero ((((HomologicalComplex.homologyFunctor _ (.up ℕ) q).mapHomologicalComplex (.up ℕ)).obj (etaleOpenCechResolutionDoubleComplex X i U I)).X p))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,8 +10,9 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import Sheaf.CategoryTheory.SpectralSequenceNatRowZero
+import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
+import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal
 
 /-! # The positive-degree affine-open Čech edge comparison for étale sheaves
 
@@ -69,6 +70,22 @@ theorem nonempty_rightDerived_etale_affineOpenCech_succ
       (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
         (op (i.obj ⊤))).rightDerived (n + 1)).obj G)
         ≅ ((cechComplexFunctor U).obj (i.op ⋙ G.obj)).homology (n + 1)) := by
-  sorry
+  let I := injectiveResolution G
+  let D := etaleOpenCechResolutionDoubleComplex X i U I
+  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
+  obtain ⟨hzero, hpositive⟩ := etale_affineOpenCech_resolution_columns
+    X i hi U hU G hvan I
+  have hrow (p q : ℕ) (hq : 0 < q) : IsZero ((E.page 2).X (p, q)) := by
+    obtain ⟨e⟩ := hE₂ p q
+    exact e.isZero_iff.mpr
+      (((((HomologicalComplex.homologyFunctor _ (.up ℕ) q).mapHomologicalComplex
+        (.up ℕ)).obj D).sc p).isZero_homology_of_isZero_X₂ (hpositive q hq p))
+  obtain ⟨eA⟩ := E.nonempty_abutment_iso_row_zero _ hE hrow (n + 1)
+  obtain ⟨eB⟩ := hE₂ (n + 1) 0
+  obtain ⟨eC⟩ := hzero
+  obtain ⟨eD⟩ := nonempty_etale_openCech_resolution_total_iso
+    X i hc ht U hcover G I (n + 1)
+  exact ⟨eD.symm ≪≫ eA ≪≫ eB ≪≫
+    (HomologicalComplex.homologyFunctor _ _ (n + 1)).mapIso eC⟩
 
 end AlgebraicGeometry.Scheme

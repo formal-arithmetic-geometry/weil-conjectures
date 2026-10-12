@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-spectral-sequence-nat-row-zero",
+ "kind": "statement",
+ "title": "Bottom-row collapse for the natural-index spectral-sequence abutment",
+ "statement": "Let C be an abelian category and E a first-quadrant cohomological spectral sequence indexed by natural bidegrees, starting at page two. Let H:N→C and assume E.AbutsTo H in the project convention: each H(n) has a decreasing subobject filtration with F^0=H(n), F^(n+1)=0, and quotient F^p/F^(p+1) isomorphic to E.pageInfinity(p,q) for p+q=n; this stable page is p+q+2. Assume every page-two term with q>0 is zero. Then H(n) is isomorphic to (E.page 2)^(n,0) for every n, including zero.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0132",
+  "place": "Original proof step 3: stationarity and collapse of the finite abutment filtration"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the page number minus two. The homology of a short complex with zero middle object is zero, and the successor-page isomorphism transports this vanishing. Hence every positive row vanishes on every page.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "In bidegree (n,0) the differential of bidegree (r,1-r) has no outgoing target for r≥2. If an incoming arrow exists its source has positive second coordinate and is zero. Cycle inclusion and homology projection are therefore isomorphisms. Compose these with the successor-page comparison, inductively identifying page two with the stable page n+2.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For p<n, convergence and positive-row vanishing make the cokernel of the inclusion F^(p+1)→F^p zero. The inclusion is thus epic and monic, hence an isomorphism and the two subobjects equal. Induct from F^0=top to obtain F^n=top. Since F^(n+1)=bottom, the last quotient projection is an isomorphism. Compose the inverse top inclusion, this quotient projection, the graded-piece comparison and the inverse stationary-page comparison. This constructs the claimed isomorphism and is completely proved in Lean.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0132",
+  "place": "Original proof step 3: stationarity and collapse of the finite abutment filtration; direct derived-resolution formulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A first quadrant spectral sequence supported in row zero computes its filtered abutment",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant spectral sequence whose positive rows vanish has abutment isomorphic to the zero row",
+   "results": "HomologicalComplex.isZero_single_obj_homology; CochainComplex.isZero_of_isLE; CochainComplex.isZero_of_isGE; HomologicalComplex.fromOpcycles_eq_zero; DerivedCategory.isZero_of_isLE; HomologicalComplex.isZero_single_comp_eval; HomologicalComplex.ιMapBifunctorOrZero_eq_zero; HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq_zero",
+   "date": "2026-10-12",
+   "digest": "592a3ae46dae3671",
+   "verdict": "No exact match. Related definitions and resolution computations were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "AbutsTo|collapse",
+   "results": "Mathlib/Tactic/Attr/Register.lean; Mathlib/Combinatorics/SetFamily/FourFunctions.lean; Mathlib/Combinatorics/SetFamily/FourFunctions.lean; Mathlib/Combinatorics/SetFamily/FourFunctions.lean; Mathlib/Combinatorics/SetFamily/FourFunctions.lean; Mathlib/Combinatorics/SetFamily/FourFunctions.lean; Mathlib/SetTheory/Ordinal/Basic.lean; Mathlib/SetTheory/Ordinal/Basic.lean",
+   "date": "2026-10-12",
+   "digest": "9ad51c75bac64395",
+   "verdict": "No exact match. Related definitions and resolution computations were inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sc-etale-affine-open-cech-derived-evaluation-succ: Original proof step 3: stationarity and collapse of the finite abutment filtration",
+   "via": [
+    "lem-sc-etale-affine-open-cech-derived-evaluation-succ",
+    "lem-sc-etale-affine-open-cech-derived-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralSequenceNatRowZero",
+  "file": "lean/Sheaf/CategoryTheory/SpectralSequenceNatRowZero.lean",
+  "declaration": "CategoryTheory.SpectralSequence.nonempty_abutment_iso_row_zero",
+  "statement": "theorem SpectralSequence.nonempty_abutment_iso_row_zero {C : Type u} [Category.{v} C] [Abelian C] (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C) (hH : E.AbutsTo H) (hrow : ∀ p q : ℕ, 0 < q → IsZero ((E.page 2).X (p, q))) (n : ℕ) : Nonempty (H n ≅ (E.page 2).X (n, 0))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
