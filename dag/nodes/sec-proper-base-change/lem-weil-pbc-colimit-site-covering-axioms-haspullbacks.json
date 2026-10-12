@@ -23,20 +23,38 @@
  ],
  "proof": [
   {
-   "text": "Fix a Q-cover R, a member f of R, and an arbitrary arrow g into its target. Represent R by a stage covering S using hQ and f by a member of S using the definition of Presieve.map. Represent g in the arrow colimit, move its representative and S to a common stage, and enforce their common target using eventual equality in the object colimit. The image of S remains covering by hcover, and the representative of f is a member of that image. Thus stage HasPullbacks supplies a pullback of the represented f and g. Every subsequent transition preserves it by hpullback. Its image in the cocone category is a pullback: represent a test cone's vertex and legs at a common later stage and make its endpoint and cone equations hold there by eventual equality in the object and arrow colimits. Preservation of the stage pullback gives a mediating arrow whose cocone image factors the cone. For uniqueness represent any two mediating arrows and make their factorization equations hold at a common later stage; the preserved pullback there equates them. Their cocone images therefore agree. This establishes a pullback of f and g after the endpoint transports. Applying this argument to every R, g, and member f gives Q.HasPullbacks. There is nothing to construct for an empty covering.",
+   "text": "Unpack a Q-cover using hQ and eliminate its target transport. Eliminate membership in Presieve.map to write its chosen member as the image of an actual member f of a stage cover S. Empty covers require no chosen member and are handled vacuously.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent the other arrow g by an arrow b at some stage i using Types.jointly_surjective for the arrow cocone. Its target has the same colimit image as the target X of S. Apply Types.FilteredColimit.isColimit_eq_iff to this equality in the object cocone, obtaining k, a:j to k, c:i to k, and an equality F(a)(X)=F(c)(target b). Define g at k by F(c)(b) followed by eqToHom of the reversed equality. Functoriality of eqToHom, Arrow.arrow_mk_comp_eqToHom, and cocone naturality show that its image has exactly the same Arrow object as g. Cocone naturality similarly identifies the image of F(a)(f) with the original covering member.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
+  },
+  {
+   "text": "The image T of S under F(a) is covering by hcover and contains F(a)(f) by Presieve.map_map. The stage HasPullbacks axiom gives a pullback of F(a)(f) and the lifted g. Every transition out of k preserves it by hpullback applied to T. Apply filteredColimit_preservesPullback to get preservation by V_k, then Mathlib hasPullback_of_preservesPullback to get a pullback of the image cospan.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-preserves-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer this HasPullback along the two Arrow equalities. Arrow.mk_eq_mk_iff identifies sources, the common target, and the arrows up to eqToHom. Substitute the object equalities, simplify the identity transports, and substitute the arrow equalities. This yields the required HasPullback of the original cospan. Assemble the two HasPullbacks structures for all covers and all members.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimit-preserves-pullback"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "worker Q2",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 09YL, finite diagram, covering pullback and composition paragraphs; expanded by K1 second reader to include endpoint transports and empty indices."
+  "place": "Tag 09YL, covering pullback paragraph; endpoint lifting proved with Mathlib set-colimit lemmas, and the existing filteredColimit_preservesPullback supplies preservation."
  },
  "mathlib_searches": [
   {
@@ -95,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T184313-L-4008001",
-  "kind": "interface",
+  "landing": "20261012T194132-L-462186",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
