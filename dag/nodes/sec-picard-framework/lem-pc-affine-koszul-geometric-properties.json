@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-affine-koszul-geometric-properties",
+ "kind": "statement",
+ "title": "Perfection and stalk support of the explicit affine Koszul object",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let A be a commutative ring and f:Fin(r)\\to A a finite tuple. Choose derived categories for module sheaves on Spec(A) and on each localized open site [def-pc-derived-category]. Form Q by placing the actual Koszul chain complex [def-weil-pbc-koszul-complex] in cochain degrees -q, applying the associated-sheaf functor termwise, and localizing. Then Q is perfect [def-pc-perfect-complex]. For every integer n and every prime x for which some f_i is not in x, the stalk at x of H^n(Q) is zero. No detection or open-unit assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A9A, affine paragraph (Koszul perfection and support); Tag 0663 (null homotopy)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-weil-pbc-koszul-complex",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "The degree -q term is the sheaf associated to the q-th exterior power of the finite free module on Fin r. It is finite free, vanishes for q > r, and restriction to each principal affine neighbourhood identifies it with a finite free module over the restricted ring. Take these local restrictions as the strictly perfect representatives, with degree bounds -r and 0. Their images under localization identify with restrictions of Q by exactness. This proves perfection, including r=0.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If f_i is not in the prime x, it is a unit in the stalk ring. Exterior multiplication by the i-th basis vector gives a homotopy of multiplication by f_i to zero (Tag 0663). Localizing this identity and dividing the homotopy by f_i contracts the stalk complex. Exactness of stalks identifies its homology with the homology stalks of Q, so they vanish in every degree. For an empty tuple the premise cannot hold; for the zero ring there are no points.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A9A, affine paragraph (Koszul perfection and support); Tag 0663 (null homotopy)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafified Koszul complex on spectrum is perfect quasi coherent with homology supported on zero locus",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified Koszul complex is perfect with quasi coherent cohomology and zero stalks off zero locus",
+   "results": "8 hits: CochainComplex.isKInjective_of_injective, Algebra.smoothLocus_eq_compl_support_inter, SheafOfModules.isQuasicoherent, SheafOfModules.generatorsOfIsCokernelFree_I, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, SheafOfModules.IsQuasicoherent, SheafOfModules.IsFinitePresentation, SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*perfect|koszul.*quasicoherent|koszul.*stalk|mapDerivedCategory.*equivalence|derived.*open.*adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0A9A, affine paragraph (Koszul perfection and support); Tag 0663 (null homotopy)",
+   "via": [
+    "lem-pc-supported-perfect-detector-affine-construction",
+    "lem-pc-supported-perfect-detector-affine",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKoszulGeometricProperties.lean",
+  "declaration": "AlgebraicGeometry.affine_koszul_geometric_properties",
+  "statement": "theorem affine_koszul_geometric_properties\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] :\n    let Q := DerivedCategory.Q.obj\n      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n        _ _ _ _ (tilde.functor (.of A))\n        ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n        ((ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat))\n    Scheme.IsPerfect (Spec (.of A)) Q ∧\n      ∀ (n : ℤ) (x : PrimeSpectrum A), (∃ i, f i ∉ x.asIdeal) →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).obj\n            Q).val.presheaf x))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T144159-L-2112257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T144159-L-2112257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
