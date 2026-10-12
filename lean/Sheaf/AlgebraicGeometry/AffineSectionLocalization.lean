@@ -50,6 +50,6 @@ theorem affine_section_localization
           tmulSection (e (sectionFraction L F s n t))
               (tensorPowSectionOne (homOfGlobalSection L s) n U) =
             (F ⊗ L.tensorPow n).presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op t) := by
-  sorry
+  exact exists_sectionFraction_nonvanishing_equiv Y L s F
 
 end AlgebraicGeometry.Scheme.Modules
