@@ -10,6 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 public import Mathlib.Algebra.Homology.Homotopy
 
+import Sheaf.AlgebraicGeometry.FieldFibreHomology
+import Sheaf.AlgebraicGeometry.FieldComplexHomotopyNormalForm
+
 /-! # Homotopy normal form of a field fibre of single locally free cohomology
 
 Source: blueprint lem-pc-perfect-locus, proof step 4.
@@ -51,6 +54,7 @@ theorem nonempty_homotopyEquiv_single_field_fibre
     Nonempty (HomotopyEquiv (((Modules.pullback f).mapHomologicalComplex _).obj P)
       ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj
         (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r))))) := by
-  sorry
+  have h := single_field_fibre_homology P d hge hle hfree i r hzero hrank hR f
+  exact homotopyEquiv_of_single_field_homology hR _ i r h.1 h.2
 
 end AlgebraicGeometry.Scheme.Modules
