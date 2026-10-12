@@ -13,14 +13,21 @@
  ],
  "proof": [
   {
-   "text": "On each standard open and its subopens, the structure-map image of c is the fraction C(c)/1. By the definition of twistMul, multiplication by C(c) on a degree-n fraction a/b equals multiplication by this restricted global function. The cover therefore identifies twistMul, after transport n+0=n, with multiplication by rho(c) as a morphism of sheaves.",
+   "text": "Compute the value of rho(c) at every point directly. Unfold Proj.toSpecZero and basicOpenToSpec; GammaSpecIso inverse naturality cancels the affine global-sections isomorphisms. The top-open isomorphism and the isomorphism D+(1)=top induce restriction maps. The remaining map is awayToSection applied to fromZeroRingHom, whose value is C(c)/1. This is the fully proved private constant_value helper.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor the preceding equality with the identity of G. On pure tensors x tensor y, the balanced tensor-product relation gives x tensor (rho(c)y)=rho(c)(x tensor y). Additivity proves the equality on the presheaf tensor product, and sheafification preserves the equality of these morphisms. Evaluate at the top open to obtain the asserted section formula. The equality proofs p and ha are irrelevant, so no choice of those proofs matters. This argument needs neither coherence nor nonnegative n; it includes the zero sheaf, c=0 and c=1.",
+   "text": "Transport twistMul n ha from n+0 to n. Extensionality on opens, sections, and points reduces its equality with Scheme.Modules.smulHom rho(c) to commutativity of multiplication in the point localization, using constant_value. The fully proved private twist_cast_val helper removes the degree transport. This works for every integer n and every scalar, without coherence or positivity.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private tensor_hom_ext helper composes with tensorObjIsoSheafification.inv and applies injectivity of the sheafification adjunction homEquiv. Presheaf extensionality and TensorProduct.induction_on reduce the result to pure tensors. The existing whiskerLeft_app_tmulSection and tmulSection_smul formulas then prove the private tensor_smul helper: G tensor multiplication by a global function is multiplication by that function on G tensor the module. Whisker the preceding twistMul equality, identify the arbitrary equality transport p by whiskerLeft_eqToHom and proof irrelevance, and evaluate at the top open. Restriction at top is the identity, and Module.compHom identifies multiplication by rho(c) with the stated k-action.",
    "uses": [],
    "elementary": true
   }
@@ -31,7 +38,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+  "place": "Stacks Project, Lemma 01YS proof of (5) and Tag 01M6; direct Lean implementation by J2 using GammaSpecIso naturality, pointwise twist multiplication, and the tensor-sheafification adjunction."
  },
  "mathlib_searches": [
   {
@@ -105,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T135328-L-1697674",
-  "kind": "interface",
+  "landing": "20261012T163615-L-2785643",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
