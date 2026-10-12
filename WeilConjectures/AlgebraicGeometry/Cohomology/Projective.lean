@@ -87,8 +87,8 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
     have (i j : X.affineOpens) : ∃ t : Finset X.affineOpens,
         i ∈ s → j ∈ s → t.sup (fun V ↦ (V : X.Opens)) = (i : X.Opens) ⊓ j := by
       by_cases h : i ∈ s ∧ j ∈ s
-      · obtain ⟨t, -, ht⟩ := exists_finset_affineOpens_sup_eq (hqs _ _ (hsA i h.1) i.1.isOpen
-          i.2.isCompact (hsA j h.2) j.1.isOpen j.2.isCompact)
+      · obtain ⟨t, -, ht⟩ := exists_finset_affineOpens_sup_eq (W := (i : X.Opens) ⊓ j)
+          (hqs _ _ (hsA i h.1) i.1.isOpen i.2.isCompact (hsA j h.2) j.1.isOpen j.2.isCompact)
         exact ⟨t, fun _ _ ↦ ht⟩
       · exact ⟨∅, fun hi hj ↦ (h ⟨hi, hj⟩).elim⟩
     choose t ht using this
@@ -127,7 +127,7 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
     exact hB.higherDirectImage.2 p hp
   choose n hn using key
   obtain ⟨sT, -, hsT⟩ := exists_finset_isAffineOpen_sup_eq_top (X := T)
-  refine ⟨sT.sup n, fun g g' f' _ sq ℱ' _ p hp ↦
+  refine ⟨sT.sup n, fun {T'} {X'} g g' f' _ sq ℱ' _ p hp ↦
     isZero_of_forall_exists_isZero_restrict _ fun t' ↦ ?_⟩
   obtain ⟨A, hA, hgA⟩ : ∃ A ∈ sT, g t' ∈ (A : T.Opens) := by
     have : g t' ∈ sT.sup (fun U ↦ (U : T.Opens)) := hsT ▸ trivial
@@ -227,12 +227,12 @@ theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n
     have : IsAffineHom ((ProjectiveSpace.standardOpen n S j).ι ≫ ℙ(n; S) ↘ S) := by
       rw [← ProjectiveSpace.standardOpenIso_hom_over]
       infer_instance
-    have h := ((hS'.preimage ((ProjectiveSpace.standardOpen n S j).ι ≫ ℙ(n; S) ↘ S)).image_of_isOpenImmersion
-      (ProjectiveSpace.standardOpen n S j).ι).preimage i
+    have h := ((hS'.preimage ((ProjectiveSpace.standardOpen n S j).ι ≫ ℙ(n; S) ↘ S)
+      ).image_of_isOpenImmersion (ProjectiveSpace.standardOpen n S j).ι).preimage i
     rwa [image_preimage_ι_comp, Scheme.Hom.preimage_inf, inf_comm, ← Scheme.Hom.comp_preimage]
       at h
-  have hsep (V₁ V₂ : (Limits.pullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')).Opens) (h₁ : IsAffineOpen V₁)
-      (h₂ : IsAffineOpen V₂) : IsAffineOpen (V₁ ⊓ V₂) :=
+  have hsep (V₁ V₂ : (Limits.pullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')).Opens)
+      (h₁ : IsAffineOpen V₁) (h₂ : IsAffineOpen V₂) : IsAffineOpen (V₁ ⊓ V₂) :=
     (isAffineHom_diagonal_iff (f := f')).mp inferInstance ⊤ (isAffineOpen_top _) V₁ (by simp) V₂
       (by simp) h₁ h₂
   have hcov : (Finset.univ : Finset n).sup U = ⊤ := by
