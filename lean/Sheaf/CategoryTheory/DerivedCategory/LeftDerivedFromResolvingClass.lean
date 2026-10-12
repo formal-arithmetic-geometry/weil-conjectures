@@ -9,7 +9,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
-import Sheaf.CategoryTheory.LeftDerivedExactWhenDefined
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
+import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 
 /-!
 # Left derived functors computed by a resolving class
@@ -64,6 +65,48 @@ theorem leftDerived_from_resolvingClass
         LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ∧
           (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
             ∀ X : HomotopyCategory A (ComplexShape.up ℤ), X ∈ P → IsIso (ε.app X) := by
-  sorry
+  classical
+  let W := HomotopyCategory.quasiIso A (ComplexShape.up ℤ)
+  let Q := DerivedCategory.Qh (C := A)
+  obtain ⟨hleft, hright, htri, hsat, htwo, _, _, _, _⟩ :=
+    HomotopyCategory.quasiIso_saturated_triangulated A
+  let : W.HasRightCalculusOfFractions := hright
+  let : W.HasTwoOutOfThreeProperty := htwo
+  have hS : W.IsSaturatedTriangulatedMultiplicativeSystem :=
+    ⟨⟨⟨hleft, hright⟩, fun _ _ _ _ h g f ↦ hsat _ _ _ _ g h f⟩, htri⟩
+  have hwitness := resolvingClass_essentialConstancy W F P hres hinv
+  have hpw : F.HasPointwiseLeftDerivedFunctor W := by
+    intro X
+    obtain ⟨Y, u, hc, hr, _⟩ := hwitness X
+    have hb := leftDerived_defined_pointwiseKan_bridge W Q F X Y hc u hr
+    exact (F.hasPointwiseLeftDerivedFunctorAt_iff Q W X).2 hb.1
+  let : F.HasPointwiseLeftDerivedFunctor W := hpw
+  let LF := F.totalLeftDerived Q W
+  let ε := F.totalLeftDerivedCounit Q W
+  have hLF : LF.IsLeftDerivedFunctor ε W := inferInstance
+  have hdefined : ∀ X, F.IsTriangulatedLeftDerivedDefinedAt W hS X := by
+    intro X
+    obtain ⟨Y, _, hc, _, _⟩ := hwitness X
+    exact ⟨Y, hc⟩
+  refine ⟨hpw, LF, ε, hLF, ?_, ?_⟩
+  · exact leftDerived_exact_of_localization A D' F hS LF ε hLF hdefined
+  · intro X hX
+    obtain ⟨Y, u, hc, hr, hu⟩ := hwitness X
+    obtain ⟨_, π, ⟨hπ⟩, _, hidentity⟩ :=
+      leftDerived_defined_pointwiseKan_bridge W Q F X Y hc u hr
+    let hcanonical :=
+      isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor LF ε W (Q.obj X)
+    let e := hcanonical.conePointUniqueUpToIso hπ
+    have hid : W (𝟙 X) := W.id_mem X
+    have : IsIso (u.app (⟨Over.mk (𝟙 X), hid⟩ : W.Over ⊤ X)) := hu hid hX
+    have : IsIso (π.app (StructuredArrow.mk (𝟙 (Q.obj X)))) := by
+      rw [hidentity hid]
+      infer_instance
+    have he := hcanonical.conePointUniqueUpToIso_hom_comp hπ
+      (StructuredArrow.mk (𝟙 (Q.obj X)))
+    have he' : e.hom ≫ π.app (StructuredArrow.mk (𝟙 (Q.obj X))) = ε.app X := by
+      simpa [RightExtension.coneAt] using he
+    rw [← he']
+    infer_instance
 
 end CategoryTheory.Functor

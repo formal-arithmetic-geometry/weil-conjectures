@@ -25,60 +25,49 @@
  ],
  "proof": [
   {
-   "text": "For each complex $X$, consider the category of quasi-isomorphisms into $X$. By (1), the full subcategory of arrows $X'\\to X$ with $X'\\in\\mathcal P$ is cofinal; by (2), $F$ is constant up to canonical isomorphism on this subcategory. Hence the pro-object used in the resolving-class criterion (Tag 05S9) is essentially constant with value $F(X')$ (and for $X\\in\\mathcal P$ the identity resolution may be used). Thus a pointwise left derived functor exists at every $X$, and every $X\\in\\mathcal P$ computes it.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 06XN proof, dual resolving-class argument"
-   }
-  },
-  {
-   "text": "By the Stacks-to-Kan bridge, the essentially constant pro-object in Definition 05S9 obtained in Step 1 is exactly a pointwise right Kan extension at $QX$, with the same value and comparison map.",
-   "uses": [
-    "lem-pur-left-derived-defined-pointwise-kan-bridge"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition Tag 05S9 and Lemma Tag 05SA, pointwise reformulation in Situation Tag 05S8"
-   }
-  },
-  {
-   "text": "Apply the pointwise-to-global derived-functor construction: the pointwise existence from Step 2 and the localization $Q$ give a left derived functor $LF:D(\\mathcal A)\\to\\mathcal D'$ with a natural transformation $LF\\circ Q\\to F$ exhibiting the right Kan extension and universal property.",
-   "uses": [
-    "lem-pur-total-left-derived-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
-    "place": "hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor, line 86; isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor, line 98"
-   }
-  },
-  {
-   "text": "The quasi-isomorphisms in $K(\\mathcal A)$ satisfy the saturated multiplicative-system and triangulation-compatibility hypotheses of Situation 05S8. Together with the bridge, the pointwise Kan-extension functor just constructed is the Stacks left derived functor defined everywhere, so Proposition Tag 05SE (LF part), as stated in the exactness node, makes $LF$ exact. For $X\\in\\mathcal P$, the component of the canonical transformation is an isomorphism by the identity resolution in Step 1 and the comparison clause of the bridge; therefore $LF(QX)\\cong F(X)$.",
+   "text": "Use quasiIso_saturated_triangulated to obtain right calculus, two-out-of-three and the saturated triangulated system. The resolving-class essential-constancy theorem supplies a witnessing denominator cone at every X, including an invertible identity leg when X is in P.",
    "uses": [
     "lem-pur-quasi-isos-saturated-triangulated",
-    "lem-pur-left-derived-defined-pointwise-kan-bridge",
-    "lem-pur-left-derived-exact-when-defined"
+    "lem-pur-resolving-class-essential-constancy"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT; Proposition Tag 05SE, LF part; Lemma Tag 06XN computation clause"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing Stacks-to-Kan bridge to each witness, obtaining pointwise left derived functors. Mathlib assembles these into LF=F.totalLeftDerived Qh W with its canonical counit and universal property.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pur-total-left-derived-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The witnesses supply IsTriangulatedLeftDerivedDefinedAt at every X. Apply exactness on the chosen localization, which transports the strict-localization exactness theorem to the chosen derived category.",
+   "uses": [
+    "lem-pur-left-derived-exact-chosen-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At X in P, the bridge identifies the identity projection of its limit cone with the invertible identity leg of the denominator cone. Mathlib makes the canonical derived pair pointwise; uniqueness of limit cones gives an isomorphism e from LF(QX) to the witness value. The counit component equals e.hom composed with the invertible identity projection, hence is invertible.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pur-total-left-derived-localization",
+    "lem-pur-resolving-class-essential-constancy"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
   "lem-pur-left-derived-defined-pointwise-kan-bridge",
   "lem-pur-total-left-derived-localization",
-  "lem-pur-quasi-isos-saturated-triangulated",
-  "lem-pur-left-derived-exact-when-defined"
+  "lem-pur-left-derived-exact-chosen-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 06XN and 05SE in Situation 05S8"
+  "place": "Tags 06XN and 05SE; Mathlib pointwise-to-global assembly and limit-cone uniqueness"
  },
  "mathlib_searches": [
   {
@@ -164,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

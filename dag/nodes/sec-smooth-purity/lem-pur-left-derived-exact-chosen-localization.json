@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-left-derived-exact-chosen-localization",
+ "kind": "statement",
+ "title": "Exactness of an everywhere-defined left derived functor on a chosen derived category",
+ "statement": "Let A be abelian [def-sp-abelian], with a chosen derived category D(A) and localization Qh:K(A)→D(A) [def-weil-abstract-derived-category]. Let D' be triangulated [def-weil-triangulated-category] and F:K(A)→D' exact. Let S be the quasi-isomorphisms, and assume S is a saturated triangulated multiplicative system [def-pur-saturated-triangulated-localization]. If the denominator pro-diagram of F is essentially constant at every X (the predicate IsTriangulatedLeftDerivedDefinedAt), then any LF:D(A)→D' with ε:Qh⋙LF→F exhibiting the right Kan extension is exact: there is a compatible integer-shift structure on LF making it triangulated.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05SE, left derived part; localization equivalence and uniqueness of right Kan extensions"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [
+  {
+   "text": "Set E to the equivalence from the strict constructed localization W.Localization to the chosen derived category, with e:W.Q⋙E≅Qh. Mathlib commShiftOfLocalization lifts Qh integer shifts to E, compatibly with e. Since W.Q is exact and its mapArrow is essentially surjective, isTriangulated_of_precomp_iso makes E exact. The constructed localization satisfies the strict universal property and whiskering by W.Q is bijective on natural transformations.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the supplied right Kan extension LF,ε with the equivalence E, using Mathlib isRightKanExtension_iff_postcomp₁. Apply leftDerived_exact_when_defined on the strict constructed localization to obtain a shift structure and exactness on E⋙LF.",
+   "uses": [
+    "lem-pur-left-derived-exact-when-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard the equivalence E as localization at all isomorphisms. Mathlib commShiftOfLocalization descends the supplied shift structure on E⋙LF to LF; its comparison is shift-compatible. Apply isTriangulated_of_precomp_iso again to descend exactness to LF.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-left-derived-exact-when-defined",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05SE, left derived part; localization equivalence and uniqueness of right Kan extensions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact triangulated left derived functor right Kan extension localization",
+   "results": "totalLeftDerived and hasLeftDerivedFunctor_iff give the universal pair but not exactness.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsTriangulated",
+   "results": "Unknown identifier in search service; no hits.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_of_iso|StrictUniversalPropertyFixedTarget|IsPointwiseRightKanExtension",
+   "results": "StrictUniversalPropertyFixedTarget requires literal equality; chosen Qh only has IsLocalization. isTriangulated_of_iso supplies transport once shift structure exists.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left derived functor of exact triangulated functor is triangulated",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-left-derived-from-kflat-class",
+   "place": "Step 4 exactness on the chosen localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/LeftDerivedExactOfLocalization.lean",
+  "declaration": "CategoryTheory.Functor.leftDerived_exact_of_localization",
+  "statement": "theorem leftDerived_exact_of_localization\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    (D' : Type u') [Category.{v'} D'] [Preadditive D'] [HasZeroObject D']\n    [HasShift D' ℤ] [∀ n : ℤ, (shiftFunctor D' n).Additive]\n    [Pretriangulated D'] [CategoryTheory.IsTriangulated D']\n    (F : HomotopyCategory A (ComplexShape.up ℤ) ⥤ D')\n    [F.CommShift ℤ] [F.IsTriangulated]\n    (hS : MorphismProperty.IsSaturatedTriangulatedMultiplicativeSystem\n      (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)))\n    (LF : DerivedCategory A ⥤ D') (ε : DerivedCategory.Qh ⋙ LF ⟶ F)\n    (hLF : LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)))\n    (hdefined : ∀ X : HomotopyCategory A (ComplexShape.up ℤ),\n      F.IsTriangulatedLeftDerivedDefinedAt\n        (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) hS X) :\n    ∃ (_ : LF.CommShift ℤ), LF.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-resolving-class-essential-constancy",
+ "kind": "statement",
+ "title": "Resolving classes make denominator pro-diagrams essentially constant",
+ "statement": "Let C and H be categories, W a morphism property on C with right calculus of fractions and two-out-of-three [def-pur-saturated-triangulated-localization], F:C→H a functor, and P a class of objects. Suppose every X admits s:X'→X in W with X' in P, and F inverts every W-arrow between objects of P. Then for each X the denominator diagram G:W/X→H is essentially constant [def-pc-essentially-constant-pro-diagram]. More precisely, there exist Y and a cone u:Y→G with a stage j₀ and retraction r:G(j₀)→Y satisfying u(j₀)r=id and the common-stage factorization criterion of essential constancy. If X is in P, the leg u(id_X) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, dual proof; Categories Tag 05PU(2)"
+ },
+ "stmt_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Use the right Ore square from LeftFraction.exists_rightFraction to construct common predecessors in W/X. Use HasRightCalculusOfFractions.ext to construct equalizers. The identity denominator gives nonemptiness; hence W/X is cofiltered.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let R be the full subcategory of denominators whose source lies in P. Resolve the source of any denominator to obtain an arrow from R. Mathlib initial_of_exists_of_isCofiltered_of_fullyFaithful proves its inclusion initial; of_exists_of_isCofiltered_of_fullyFaithful also proves R cofiltered. Two-out-of-three and hinv make every map in the restricted F-diagram invertible. Mathlib EventuallyConstant supplies its limit cone, normalized to have identity leg at a chosen r₀. Extend this cone along the initial inclusion; the extended leg at r₀ remains the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any denominator j choose a common predecessor of r₀ and j, then resolve its source again. The transition a to r₀ lies between resolving objects and is inverted by F. Cone naturality and the identity leg imply u(k)F(a)=id; invertibility gives u(k)=F(a)⁻¹. Naturality at b then gives F(b)=F(a)u(j), the required factorization with retraction r=id. This explicitly verifies IsEssentiallyConstantProDiagram.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If X lies in P, its identity denominator is an object of R. Because every restricted transition is invertible, EventuallyConstant.isIso_π_of_isLimit makes the corresponding restricted cone leg invertible. extendCone_obj_π_app at the identity morphism identifies the extended leg with that restricted leg.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, dual proof; Categories Tag 05PU(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "resolving class essential constancy of denominator cofiltered diagram",
+   "results": "EventuallyConstant gives cones when all incoming transition maps are invertible; does not supply resolving-subcategory restriction and descent.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCofiltered, Functor",
+   "results": "Unknown identifier in search service; no hits.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEssentiallyConstantProDiagram|leftDerived_exact|IsTriangulatedLeftDerivedDefinedAt",
+   "results": "No Mathlib resolving-class essential-constancy theorem; project definition and bridge only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "resolving class essentially constant denominator diagram",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-left-derived-from-kflat-class",
+   "place": "Step 1 resolving-class argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ResolvingClassEssentialConstancy.lean",
+  "declaration": "CategoryTheory.Functor.resolvingClass_essentialConstancy",
+  "statement": "theorem resolvingClass_essentialConstancy\n    {C : Type u} [Category.{v} C] {H : Type uH} [Category.{vH} H]\n    (W : MorphismProperty C) [W.HasRightCalculusOfFractions]\n    [W.HasTwoOutOfThreeProperty] (F : C ⥤ H) (P : Set C)\n    (hres : ∀ X : C, ∃ (X' : C) (s : X' ⟶ X), X' ∈ P ∧ W s)\n    (hinv : ∀ (X X' : C) (s : X ⟶ X'),\n      X ∈ P → X' ∈ P → W s → IsIso (F.map s)) (X : C) :\n    let G := MorphismProperty.Over.forget W ⊤ X ⋙ Over.forget X ⋙ F\n    ∃ (Y : H) (u : (Functor.const (W.Over ⊤ X)).obj Y ⟶ G),\n      IsEssentiallyConstantProDiagram G Y ∧\n        (∃ (j₀ : W.Over ⊤ X) (r : G.obj j₀ ⟶ Y),\n          u.app j₀ ≫ r = 𝟙 Y ∧\n            ∀ j : W.Over ⊤ X, ∃ (k : W.Over ⊤ X) (a : k ⟶ j₀) (b : k ⟶ j),\n              G.map b = G.map a ≫ r ≫ u.app j) ∧\n        ∀ h : W (𝟙 X), X ∈ P →\n          IsIso (u.app (⟨Over.mk (𝟙 X), h⟩ : W.Over ⊤ X))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
