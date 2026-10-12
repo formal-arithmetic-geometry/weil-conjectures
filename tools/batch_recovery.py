@@ -205,7 +205,7 @@ def interface_delta(old, new):
                   ({'(public imports changed)'} if a['#imports'] != b['#imports'] else set()))
 
 
-def select(entries, failures, imports, changes, messages=None):
+def select(entries, failures, imports, changes, messages=None, *, checkpoint=lambda: None):
     """Pure decision shared by live triage and read-only replay. No build or writes.
 
     changes(entry, module) returns importer-visible declaration names. Exact
@@ -213,14 +213,19 @@ def select(entries, failures, imports, changes, messages=None):
     modules as causes of an older importer failure.
     """
     import leanindex as li
-    messages = messages or {}; memo = {}; out = []
+    messages = messages or {}; memo = {}; out = []; deltas = {}
+    def delta(e, m):
+        k = (id(e), m)
+        if k not in deltas: deltas[k] = changes(e, m)
+        return deltas[k]
     for module in failures:
+        checkpoint()
         closure = li.closure(module, imports, memo) | {module}
         writers = [e for e in entries if module in e['modules']]
         suspects, changed = list(writers), {}
         if not writers:
             for e in entries:
-                names = {m: changes(e, m) for m in set(e['modules']) & closure}
+                names = {m: delta(e, m) for m in set(e['modules']) & closure}
                 names = {m: ns for m, ns in names.items() if ns}
                 if names:
                     suspects.append(e); changed[id(e)] = names

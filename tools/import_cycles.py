@@ -1,7 +1,7 @@
 """Source-only import-cycle checks shared by the batch lander and delivery launcher."""
 from __future__ import annotations
 import pathlib, re
-IMPORT = re.compile(r"^\s*(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([\w.']+)", re.M)
+IMPORT = re.compile(r"^\s*(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([^\n]+)", re.M)
 
 
 def imports(text):
@@ -20,14 +20,19 @@ def imports(text):
                 elif text[i] == '"': i += 1; break
                 else: out.append('\n' if text[i] == '\n' else ' '); i += 1
         else: out.append(text[i]); i += 1
-    return set(IMPORT.findall(''.join(out)))
+    return {m for line in IMPORT.findall(''.join(out)) for m in line.split()
+            if re.fullmatch(r"[\w.']+", m)}
 
 
 def graph(root):
     root = pathlib.Path(root)
+    files = list(root.glob('*.lean'))
+    for directory in root.iterdir():
+        if directory.is_dir() and not directory.name.startswith('.'):
+            files.extend(directory.rglob('*.lean'))
     return {'.'.join(p.relative_to(root).with_suffix('').parts): imports(p.read_text(errors='replace'))
-            for family in ('Sheaf', 'WeilConjectures', 'TargetsCheck', 'SheafChallenge')
-            for p in ([root / (family + '.lean')] if (root / (family + '.lean')).is_file() else []) + list((root / family).rglob('*.lean'))}
+            for p in files}
+
 
 
 def path(g, start, end):
@@ -107,3 +112,49 @@ def cycle_breakers(text, g, entries, read):
             winner = next(e for e in reversed(entries) if e in candidates)
             out.append((mods, winner))
     return out
+
+
+def source_roots(lean):
+    """Package/toolchain sources only; never accept an orphaned .olean."""
+    import tomllib
+    lean = pathlib.Path(lean)
+    roots = []
+    for package in (lean / '.lake/packages').glob('*'):
+        roots.append(package)
+        config = package / 'lakefile.toml'
+        if config.is_file():
+            data = tomllib.loads(config.read_text())
+            roots.extend(package / lib.get('srcDir', data.get('srcDir', '.'))
+                         for lib in data.get('lean_lib', []))
+        # Lean lakefiles in this installation use these source directories.
+        config = package / 'lakefile.lean'
+        if config.is_file():
+            roots.extend(package / d for d in re.findall(r'srcDir\s*:=\s*"([^"\n]+)"', config.read_text()))
+    toolchain = lean / 'lean-toolchain'
+    if toolchain.is_file():
+        name = toolchain.read_text().strip().replace('/', '--').replace(':', '---')
+        roots.append(pathlib.Path.home() / '.elan/toolchains' / name / 'src/lean')
+    return roots
+
+
+def refuse_missing(texts, library, roots):
+    """Validate every delivered import against source modules of the pinned base,
+    installed packages/toolchain, or this delivery (never another delivery).
+    """
+    available = set(library) | {m for m, t in texts.items() if t is not None}
+    missing = []
+    for module, text in sorted(texts.items()):
+        if text is None: continue
+        for dep in sorted(imports(text)):
+            rel = pathlib.Path(*dep.split('.')).with_suffix('.lean')
+            if dep not in available and not any((r / rel).is_file() for r in roots):
+                missing.append(f'{module}: {dep}')
+    if missing: raise RuntimeError('missing import source modules: ' + '; '.join(missing))
+
+
+def source_modules(repo, ref='HEAD'):
+    """Tracked source inventory of an exact library base; excludes untracked files."""
+    import subprocess
+    paths = subprocess.run(['git', '-C', str(repo), 'ls-tree', '-r', '--name-only', ref, '--', 'lean/'],
+                           check=True, capture_output=True, text=True).stdout.splitlines()
+    return {p[5:-5].replace('/', '.') for p in paths if p.endswith('.lean')}

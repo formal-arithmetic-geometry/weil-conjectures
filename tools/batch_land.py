@@ -57,6 +57,13 @@ ROOT = md.ROOT
 BD = ROOT / "local" / "batch"
 PASSED, OPEN, CLOSED, TRIAGE = BD / "passed", BD / "open.json", BD / "closed", BD / "triage"
 CLONE = ld.LOCAL / "buildtree"
+STOP_REQUESTED = lambda: False
+
+
+def stop_checkpoint():
+    if STOP_REQUESTED(): raise Wait("stop requested between operations")
+
+
 ROUNDS = 4
 POOL = int(os.environ.get("SHEAF_BATCH_POOL", "4"))
 TRIAGE_WAIT = float(os.environ.get("SHEAF_TRIAGE_WAIT", "1500"))     # seconds for the Codex agent's verdict
@@ -311,7 +318,12 @@ def check(c: dict, classify: bool = True) -> dict:
             import_graph = pickle.load(f)
     else:
         import_graph = cycles.graph(li.LEAN)
-    cycle = cycles.closing_cycle(import_graph, {m["module"]: m["text"] for m in D["modules"]})
+    texts = {m["module"]: m["text"] for m in D["modules"]}
+    try:
+        cycles.refuse_missing(texts, cycles.source_modules(ROOT, pathlib.Path(graph_file).name.split("-imports")[0] if graph_file else "HEAD"), cycles.source_roots(li.LEAN))
+    except RuntimeError as exc:
+        raise Refuse(str(exc)) from exc
+    cycle = cycles.closing_cycle(import_graph, texts)
     if cycle: raise Refuse("import cycle: " + " -> ".join(cycle))
     bad = prune_check(D)
     if bad:
@@ -391,6 +403,7 @@ class Pre:
 
     def results(self, cands: list[dict]) -> list[tuple]:
         while True:
+            stop_checkpoint()
             self.pump(cands)
             if all(c["head"] in self.done for c in cands):
                 return [self.done[c["head"]] for c in cands]
@@ -526,6 +539,9 @@ def land_batch(cache: dict, log) -> dict | None:
     import_graph = pre.snapshot()
     for c in cands: c['_import_graph_file'] = str(pre.graph_file)
     res = pre.results(cands)
+    pre.snapshot()
+    base_modules = cycles.source_modules(ROOT, pre.graph_tip)
+    package_roots = cycles.source_roots(li.LEAN)
     plans, taken = [], {}
     for c, (st, x) in zip(cands, res):
         g, item, head = c["group"], c["item"], c["head"]
@@ -536,6 +552,12 @@ def land_batch(cache: dict, log) -> dict | None:
                 log("waits for the next batch", g, item, head[:9], "|", f"{clash[0]} is written by {taken[clash[0]]} in this batch")
                 continue
             texts = {m["module"]: m["text"] for m in x["D"]["modules"]}
+            try:
+                cycles.refuse_missing(texts, base_modules, package_roots)
+            except RuntimeError as exc:
+                pre.done.pop(head, None)
+                give_back(g, item, head, str(exc), log)
+                continue
             cycle = cycles.closing_cycle(import_graph, texts)
             if cycle:
                 log("waits for the next batch", g, item, head[:9], "| import cycle:", " -> ".join(cycle))
@@ -575,6 +597,7 @@ def land_batch(cache: dict, log) -> dict | None:
             by_module.setdefault(l["module"], []).append(nid)
     import_graph = pre.snapshot()
     expected_tip = pre.graph_tip
+    base_modules = cycles.source_modules(ROOT, expected_tip)
     for plan in plans:
         g, item, head = plan["group"], plan["item"], plan["head"]
         pre.done.pop(head, None)     # landed, or checked again
@@ -589,6 +612,10 @@ def land_batch(cache: dict, log) -> dict | None:
                 # External source edits are overlaid outside the write lock.
                 pre.import_graph, pre.graph_tip = import_graph, expected_tip
                 import_graph = pre.snapshot(); expected_tip = pre.graph_tip
+            try:
+                cycles.refuse_missing({m["module"]: m["text"] for m in plan["D"]["modules"]}, base_modules, package_roots)
+            except RuntimeError as exc:
+                raise Refuse(str(exc)) from exc
             plan["cycle_tip"] = expected_tip
             cycle = cycles.closing_cycle(import_graph, {m["module"]: m["text"] for m in plan["D"]["modules"]})
             if cycle: raise Wait("import cycle: " + " -> ".join(cycle))
@@ -802,13 +829,18 @@ def triage(b: dict, last: dict, imports=None) -> dict:
                                   [c['module'] for c in last.get('batch_checks') or []]))
     messages = {m: blocks.get(m) or '\n'.join(last.get('errors') or []) for m in failures}
     messages.update({c['module']: c['message'] for c in last.get('batch_checks') or []})
+    deltas = {}
     def changes(e, m):
+        stop_checkpoint()
+        k = (e["commit"], m)
+        if k in deltas: return deltas[k]
         path = s3.path_of_module(m)
         a, z = recovery.blob(ROOT, e['commit'] + '^', path), recovery.blob(ROOT, e['commit'], path)
-        return recovery.interface_delta(a.decode() if a is not None else None,
-                                        z.decode() if z is not None else None)
+        deltas[k] = recovery.interface_delta(a.decode() if a is not None else None,
+                                               z.decode() if z is not None else None)
+        return deltas[k]
     T = {'decisions': [], 'open': [], 'unattributed': [] if failures else ['?']}
-    for o in recovery.select(entries, failures, imports, changes, messages):
+    for o in recovery.select(entries, failures, imports, changes, messages, checkpoint=stop_checkpoint):
         suspects = [key(e) for e in o['suspects']]
         if not suspects:
             T['unattributed'].append(o['failure'])
@@ -971,8 +1003,6 @@ def step(cache: dict, log) -> str:
     b = read_json(OPEN)
     if not b:
         return "landed" if land_batch(cache, log) else "idle"
-    if "_pre" in cache:
-        cache["_pre"].pump(candidates(cache))
     for e in b["entries"]:
         if e["state"] != "landed":
             continue
@@ -1001,6 +1031,8 @@ def step(cache: dict, log) -> str:
         clear_alert()
         return "verified"
     write_json(OPEN, b)
+    if "_pre" in cache:
+        cache["_pre"].pump(candidates(cache))
     if b.get("triage"):
         t = b["triage"]
         v = read_json(pathlib.Path(t["dir"]) / "verdict.json")
@@ -1026,6 +1058,10 @@ def step(cache: dict, log) -> str:
     pre = cache.get('_pre')
     imports = pre.snapshot() if hasattr(pre, 'snapshot') else library_imports()
     T = triage(b, last, imports)
+    # Source attribution can outlive a build or a manual take-out. Discard its
+    # decision before writing records/ALERT or taking anything out.
+    if read_json(OPEN) != b or ld.read_json(ld.B / "last.json") != last:
+        return "waiting"
     log(f"batch {b['id']}: RED build (round {b['round'] + 1}); failing {' '.join((last.get('failing') or [])[:8])}")
     b["handled"].append(last.get("time"))
     if T['unattributed'] or b['round'] >= 4:

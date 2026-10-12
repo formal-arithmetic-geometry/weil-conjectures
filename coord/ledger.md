@@ -9326,3 +9326,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:57 L: returned deliver/N3/Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated (reviewer RETURN: (reviewer X-b7943, head b7943592d) F: The change record says `The four direct importers are checked unchanged against th)
 - 20:00 L: returned deliver/J2/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf (reviewer RETURN: (reviewer X-ca6e2, head ca6e23e6c) H10: The interface refactor in CohomologyPresheaf.lean fails downstream compilation. )
 - 20:01 L: returned deliver/B3/Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink (reviewer RETURN: (reviewer X-087a5, head 087a51f1e) A (report completeness; review points 5 and 7): In coord/reports/B3/Sheaf.AlgebraicGe)
+
+- L: refuse missing source imports before batch landing; cache red attribution and discard stale results; honor SIGTERM at read-only checkpoints. Python tests and incident replay passed.
