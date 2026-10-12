@@ -8694,3 +8694,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:21 L: returned deliver/F2/Sheaf.Algebra.Homology.UpperTruncationStepSES (reviewer RETURN: (reviewer X-35d56, head 35d56e1ba) H8: The item module docstrings cite nonexistent blueprint `lem-weil-pbc-truncation-st)
 - 17:25 L: returned deliver/N2/WeilConjectures.SixFunctors.Etale.Gabber (reviewer RETURN: (reviewer X-68ba5, head 68ba54d94) H10 (brief compilation requirement; stages/3-proving-and-pruning.md §4): lean/WeilCon)
 - 17:30 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.AffineChartTotalTensor (reviewer RETURN: (reviewer X-86ff5, head 86ff50977) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Af)
+- 17:30 L: returned deliver/U2/Sheaf.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison (reviewer RETURN: (reviewer X-0766d, head 0766d3f79) H9 (stage-3 point 5): remove `import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebra)
