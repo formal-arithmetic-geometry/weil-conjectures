@@ -29,35 +29,35 @@
  ],
  "proof": [
   {
-   "text": "All maps below are morphisms of $D(O_X)$ and all equalities are equalities of global morphisms; the associativity and unit isomorphisms of $\\otimes^L$ (Tag 0FPB, symmetric monoidal structure on $D(O_X)$) are suppressed, as in the statement. Naturality of the bijection of [lem-sc-derived-internal-hom-adjunction] in its first variable says: for $f:A\\to B$ and $g:B\\otimes^L K\\to M$ with adjunct $g^\\flat:B\\to R\\mathcal Hom(K,M)$, the adjunct of $g\\circ(f\\otimes 1_K)$ is $g^\\flat\\circ f$. Take $A=O_X$, $B=K\\otimes^L D$, $f=\\eta$ (which exists and is unique because $\\varphi_K$ is an isomorphism, the hypothesis for $M=K$) and $g=1_K\\otimes e$, whose adjunct is $\\varphi_K$ by definition. Then the adjunct of $(1_K\\otimes e)\\circ(\\eta\\otimes 1_K)$ is $\\varphi_K\\circ\\eta$, which by the definition of $\\eta$ is the adjunct of $\\mathrm{id}_K$. Since the adjunction is a bijection, $(1_K\\otimes e)\\circ(\\eta\\otimes 1_K)=\\mathrm{id}_K$.",
-   "uses": [
-    "lem-sc-derived-internal-hom-adjunction"
-   ],
+   "text": "Apply the supplied naturality equation hadj to eta and phi_K. Apply adj to h_eta and substitute h_phi_def(K). The resulting equality identifies lambda_K.hom with the evaluation composite. Cancel lambda_K.hom to prove the K-triangle.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0FPC, construction of the coevaluation and first zig-zag identity; Tag 0FPB for the monoidal constraints"
+    "place": "Tag 0FPC, formal tensor-Hom duality criterion; Tag 0FPB, monoidal constraints"
    }
   },
   {
-   "text": "Put $g:=(e\\otimes 1_D)\\circ(1_D\\otimes\\eta):D\\to D$. For $M=O_X$ the map $\\varphi_{O_X}:D=O_X\\otimes^L D\\to R\\mathcal Hom(K,O_X)$ is the adjunct of $e$, and it is an isomorphism by hypothesis. By the naturality of Step 1 (with $A=B=D$, $f=g$, resp. $f=\\mathrm{id}_D$), $\\varphi_{O_X}\\circ g$ is the adjunct of $e\\circ(g\\otimes 1_K)$ and $\\varphi_{O_X}$ is the adjunct of $e$. Compute $e\\circ(g\\otimes1_K)=e\\circ(e\\otimes 1_{D\\otimes K})\\circ(1_D\\otimes\\eta\\otimes 1_K)$. By bifunctoriality of $\\otimes^L$ both $e\\circ(e\\otimes 1_{D\\otimes K})$ and $e\\circ(1_{D\\otimes K}\\otimes e)$ equal $e\\otimes e:(D\\otimes^L K)\\otimes^L(D\\otimes^L K)\\to O_X\\otimes^L O_X=O_X$, so $e\\circ(g\\otimes 1_K)=e\\circ(1_D\\otimes 1_K\\otimes e)\\circ(1_D\\otimes\\eta\\otimes1_K)=e\\circ\\bigl(1_D\\otimes[(1_K\\otimes e)\\circ(\\eta\\otimes 1_K)]\\bigr)=e$ by Step 1. Hence $\\varphi_{O_X}\\circ g$ and $\\varphi_{O_X}$ have the same adjunct, so $\\varphi_{O_X}\\circ g=\\varphi_{O_X}$ by bijectivity of the adjunction, and $g=\\mathrm{id}_D$ because $\\varphi_{O_X}$ is an isomorphism. Only $\\varphi_K$ and $\\varphi_{O_X}$ are used.",
+   "text": "Apply the already proved dualizable_evaluation_second_triangle with the same data and hypotheses, and combine the two triangle equalities by conjunction introduction.",
    "uses": [
-    "lem-sc-derived-internal-hom-adjunction"
+    "lem-pc-dualizable-evaluation-second-triangle"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0FPC, second zig-zag identity; Tag 0FPB for the monoidal constraints"
+    "place": "Tag 0FPC, formal tensor-Hom duality criterion; Tag 0FPB, monoidal constraints"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-internal-hom-adjunction"
+  "lem-pc-dualizable-evaluation-second-triangle"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "S3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0FPC, cohomology-example-dual-derived"
+  "place": "Tag 0FPC, formal tensor-Hom duality criterion; Tag 0FPB, monoidal constraints"
  },
  "mathlib_searches": [
   {
@@ -153,17 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-a2279",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T173832-L-3297337",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.dualizable_evaluation_criterion"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.dualizable_evaluation_second_triangle"
-  ]
+  "landing": "20261012T194140-L-464780",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proofs match both node statements and proof records; existing signatures are unchanged, public import closure is preserved, and the delivered module plus sole direct importer PerfectRHomTensorComparison compile cleanly against the delivery. Axiom checks confirm only standard axioms and existing upstream sorryAx dependencies."
  }
 }

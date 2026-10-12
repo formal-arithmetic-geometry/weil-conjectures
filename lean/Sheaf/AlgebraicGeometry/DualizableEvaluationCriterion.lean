@@ -1,6 +1,5 @@
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Closed symmetric monoidal dualizability criterion
@@ -16,6 +15,20 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
+
+private theorem evaluation_slide {C : Type*} [Category C] [MonoidalCategory C]
+    (K D : C) (e : D ⊗ K ⟶ 𝟙_ C) (η : 𝟙_ C ⟶ K ⊗ D) :
+    ((ρ_ D).inv ≫ (𝟙 D ⊗ₘ η) ≫ (α_ D K D).inv ≫
+      (e ⊗ₘ 𝟙 D) ≫ (λ_ D).hom) ▷ K ≫ e =
+    D ◁ ((λ_ K).inv ≫ (η ⊗ₘ 𝟙 K) ≫ (α_ K D K).hom ≫
+      (𝟙 K ⊗ₘ e) ≫ (ρ_ K).hom) ≫ e := by
+  calc
+    _ = 𝟙 (D ⊗ K) ⊗≫ (D ◁ η) ▷ K ⊗≫
+        (e ▷ (D ⊗ K) ≫ (𝟙_ C) ◁ e) ≫ (λ_ (𝟙_ C)).hom := by monoidal
+    _ = 𝟙 (D ⊗ K) ⊗≫ (D ◁ η) ▷ K ⊗≫
+        ((D ⊗ K) ◁ e ≫ e ▷ (𝟙_ C)) ≫ (λ_ (𝟙_ C)).hom := by
+      rw [whisker_exchange]
+    _ = _ := by monoidal
 
 /- The evaluation isomorphism criterion for a dualizable object in `D(O_X)`.
 The bijection `adj` is a tensor--internal-Hom bijection of
@@ -66,7 +79,71 @@ theorem dualizable_evaluation_second_triangle (X : Scheme.{u})
       (adj (𝟙_ (schemeDerivedCategory X)) K K).symm ((λ_ K).hom)) :
  𝟙 D = (ρ_ D).inv ≫ (𝟙 D ⊗ₘ η) ≫ (α_ D K D).inv ≫
         (e ⊗ₘ 𝟙 D) ≫ (λ_ D).hom := by
-  sorry
+  have hnat := hadj (K ⊗ D) (𝟙_ _) K K K K η (𝟙 K) (𝟙 K) (φ K)
+  have hphi := hφ_def K
+  have hfirst : (λ_ K).hom =
+      (η ⊗ₘ 𝟙 K) ≫ (α_ K D K).hom ≫ (𝟙 K ⊗ₘ e) ≫ (ρ_ K).hom := by
+    have hh := congrArg (adj (𝟙_ _) K K) hη
+    simp only [Equiv.apply_symm_apply] at hh
+    have hmap := CategoryTheory.Functor.map_id
+      (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+        X.toRingedSpace.sheaf) (op K, K)
+    have hnat' :
+        (adj (𝟙_ _) K K) (η ≫ φ K) =
+          (η ⊗ₘ 𝟙 K) ≫ (adj (K ⊗ D) K K) (φ K) := by
+      change (adj (𝟙_ _) K K)
+        (η ≫ φ K ≫
+          (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+            X.toRingedSpace.sheaf).map (𝟙 (op K, K))) = _ at hnat
+      rw [hmap] at hnat
+      simpa only [Category.comp_id] using hnat
+    rw [hnat'] at hh
+    rw [hphi] at hh
+    simpa using hh.symm
+  have hK : (λ_ K).inv ≫ (η ⊗ₘ 𝟙 K) ≫ (α_ K D K).hom ≫
+      (𝟙 K ⊗ₘ e) ≫ (ρ_ K).hom = 𝟙 K := by
+    rw [← hfirst, Iso.inv_hom_id]
+  let I := 𝟙_ (schemeDerivedCategory X)
+  let g := (ρ_ D).inv ≫ (𝟙 D ⊗ₘ η) ≫ (α_ D K D).inv ≫
+    (e ⊗ₘ 𝟙 D) ≫ (λ_ D).hom
+  have hg : (g ⊗ₘ 𝟙 K) ≫ e = e := by
+    rw [tensorHom_id]
+    dsimp only [g]
+    rw [evaluation_slide, hK]
+    simp
+  have hnatural (A A' : schemeDerivedCategory X) (a : A' ⟶ A)
+      (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+        X.toRingedSpace.sheaf).obj (op K, I)) :
+      adj A' K I (a ≫ f) = (a ⊗ₘ 𝟙 K) ≫ adj A K I f := by
+    have hn := hadj A A' K K I I a (𝟙 K) (𝟙 I) f
+    have hmap := CategoryTheory.Functor.map_id
+      (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+        X.toRingedSpace.sheaf) (op K, I)
+    change adj A' K I (a ≫ f ≫
+      (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+        X.toRingedSpace.sheaf).map (𝟙 (op K, I))) = _ at hn
+    rw [hmap] at hn
+    simpa only [Category.comp_id] using hn
+  let t := (λ_ D).inv ≫ φ I
+  have ht : adj D K I t = e := by
+    dsimp only [t]
+    rw [hnatural, hφ_def, Equiv.apply_symm_apply]
+    monoidal
+  have hgt : g ≫ t = t := by
+    apply (adj D K I).injective
+    calc
+      adj D K I (g ≫ t) = (g ⊗ₘ 𝟙 K) ≫ adj D K I t := hnatural D D g t
+      _ = (g ⊗ₘ 𝟙 K) ≫ e := congrArg (fun f ↦ (g ⊗ₘ 𝟙 K) ≫ f) ht
+      _ = e := hg
+      _ = adj D K I t := ht.symm
+  let : IsIso (φ I) := hφ I
+  let : IsIso t := by
+    dsimp only [t]
+    infer_instance
+  have hgid : g = 𝟙 D := by
+    apply (cancel_mono t).1
+    simpa only [Category.id_comp] using hgt
+  exact hgid.symm
 
 theorem dualizable_evaluation_criterion (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
