@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Noetherian
 public import WeilConjectures.SixFunctors.Finite.BaseChange
-public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.SixFunctors.Finite.Counit
 
 /-!
 # Finite direct images of constructible sheaves on Noetherian schemes

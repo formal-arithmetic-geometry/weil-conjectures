@@ -54,8 +54,15 @@ theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : S
     (f : X ⟶ S) [IsFinite f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (hq : q ≠ 0) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
+  let e : (R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj ((f)_*[ModuleCat.{u + 1} Λ].obj F) :=
+    (Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory _ f).app _ ≪≫
+      (((f)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app F
+  refine IsZero.of_iso ?_ ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e)
+  obtain hq | hq := hq.lt_or_gt
+  · exact (_root_.DerivedCategory.isGE_iff _ 0).1 inferInstance q hq
+  · exact (_root_.DerivedCategory.isLE_iff _ 0).1 inferInstance q hq
 
 variable [Finite Λ]
 
@@ -71,8 +78,12 @@ theorem isConstructibleSheaf_lowerStar_of_isFinite {k : Type u} [Field k] {X S :
     IsConstructibleSheaf ((f)_*[ModuleCat.{u + 1} Λ].obj F) ∧
       ∀ q : ℤ, 0 < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
         ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) :=
-  sorry
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian S := {}
+  exact ⟨Scheme.IsConstructibleSheaf.lowerStar_of_isFinite f F, fun q hq ↦
+    isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite f F q hq.ne'⟩
 
 /-- Blueprint `lem-fin-closed-immersion`: Closed immersions preserve constructibility.
 
@@ -86,8 +97,10 @@ theorem isConstructibleSheaf_lowerStar_of_isClosedImmersion {Z X : Scheme.{u}} (
     IsConstructibleSheaf ((i)_*[ModuleCat.{u + 1} Λ].obj G) ∧
       ∀ q : ℤ, 0 < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
         ((R((i)_*[ModuleCat.{u + 1} Λ])).obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
-  sorry
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) := by
+  have : IsFinite i := ((IsClosedImmersion.iff_isFinite_and_mono i).1 inferInstance).1
+  exact ⟨Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact i G,
+    fun q hq ↦ isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite i G q hq.ne'⟩
 
 /-- Blueprint `lem-fin-finite-reflects-derived`: Finite direct image reflects bounded
 constructibility.
@@ -99,8 +112,27 @@ theorem DerivedCategory.boundedConstructible_of_rightDerivedLowerStar {Z S : Sch
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
       ((R((p)_*[ModuleCat.{u + 1} Λ])).obj K)) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z K :=
-  sorry
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z K := by
+  let e (q : ℤ) : (_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((p)_*[ModuleCat.{u + 1} Λ])).obj K) ≅
+        (p)_*[ModuleCat.{u + 1} Λ].obj ((_root_.DerivedCategory.homologyFunctor _ q).obj K) :=
+    (_root_.DerivedCategory.homologyFunctor _ q).mapIso
+        ((Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory _ p).app K) ≪≫
+      (((p)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso q).symm.app K
+  have hz (q : ℤ) (h : IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((p)_*[ModuleCat.{u + 1} Λ])).obj K))) :
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj K) :=
+    Etale.isZero_of_isZero_lowerStar_of_isFinite _ p (h.of_iso (e q).symm)
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hK
+  refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun q ↦ ?_⟩
+  · exact (_root_.DerivedCategory.isGE_iff _ a).2
+      fun q hq ↦ hz q ((_root_.DerivedCategory.isGE_iff _ a).1 ha q hq)
+  · exact (_root_.DerivedCategory.isLE_iff _ b).2
+      fun q hq ↦ hz q ((_root_.DerivedCategory.isLE_iff _ b).1 hb q hq)
+  · have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj
+        ((R((p)_*[ModuleCat.{u + 1} Λ])).obj K)) := hc q
+    exact Scheme.IsConstructibleSheaf.of_lowerStar_of_isFinite p _
+      (IsConstructibleSheaf.of_iso (e q))
 
 end Etale
 
