@@ -1,163 +1,330 @@
 #!/usr/bin/env python3
-"""Turn the sheaf DAG into text-only blueprint changes."""
+"""Text-only DAG comparison and blueprint refinement; Python 3.11+, no Lean."""
 from __future__ import annotations
-import argparse, collections, json, pathlib, re, shutil, sys
-try:
- import tomllib
-except ImportError: tomllib=None
-ROOT=pathlib.Path(__file__).resolve().parents[1]
-DAG=ROOT/'dag'/'nodes'
-FORBIDDEN=re.compile(r'(?i)(delivery|landing|stage\s*[0-9]|sheaf-dag|blueprint_pr|upstream-bp|43\.131\.49\.250|weil_formal|noreply@|token|secret)')
+import argparse
+import collections
+import contextlib
+import hashlib
+import json
+import pathlib
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import tomllib
 
-def nodes():
- out={}
- for f in DAG.rglob('*.json'):
-  try:
-   d=json.loads(f.read_text()); out[d['id']]=d
-  except Exception: continue
- return out
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+FORBIDDEN = re.compile(r'(?i)\b(?:delivery|landing|stage\s*[123]|blueprint_pr|upstream-bp|[A-Z][123]\s+(?:group|worker))\b|(?:\d{1,3}\.){3}\d{1,3}|-----BEGIN .*PRIVATE KEY|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:gh[pousr]_|sk-proj-)[A-Za-z0-9]+')
 
-def treepath(tree):
- t=pathlib.Path(tree)
- if (t/'.git').exists(): return t
- # accept bare repositories
- if (t/'HEAD').exists() and not (t/'blueprint').exists():
-  import subprocess
-  x=pathlib.Path('/tmp/bp-tree-'+str(__import__('os').getpid())); x.mkdir(exist_ok=True)
-  subprocess.run(['git','--git-dir',str(t),'archive','blueprint-main'],stdout=open(x/'a.tar','wb'),check=True)
-  shutil.unpack_archive(str(x/'a.tar'),str(x)); return x
- return t
 
-def bpindex(tree):
- r={}; base=tree/'blueprint'
- for f in base.rglob('*'):
-  if f.suffix not in ('.md',): continue
-  if f.name.endswith('.proof.md'): continue
-  m=re.search(r'(?m)^id\s*=\s*"([^"]+)"', f.read_text(errors='ignore'))
-  if m:r[m.group(1)]=f
- return r
+def load_nodes():
+    result = {}
+    for path in sorted((ROOT / 'dag/nodes').glob('*/*.json')):
+        node = json.loads(path.read_text())
+        ident = node['id']
+        if ident in result:
+            raise ValueError(f'duplicate DAG id: {ident}')
+        result[ident] = node
+    return result
 
-def sketch_of(d): return d.get('unit') or ''
-def layer2(path):
- try:
-  rel=path.relative_to(path.parents[2])
- except Exception:return False
- parts=path.parts
- return path.name=='_section.md' or any(p.startswith('sk-') for p in parts[-2:]) and path.name=='_section.md'
+
+@contextlib.contextmanager
+def blueprint_tree(value):
+    path = pathlib.Path(value).resolve()
+    if (path / 'blueprint').is_dir():
+        yield path
+        return
+    with tempfile.TemporaryDirectory(prefix='blueprint-text-') as name:
+        out = pathlib.Path(name)
+        refs = subprocess.check_output(['git', '--git-dir', str(path), 'for-each-ref', '--format=%(refname)'], text=True).splitlines()
+        ref = next((r for r in ('refs/heads/up-slop-now', 'refs/heads/blueprint-main', 'refs/heads/main') if r in refs), None)
+        if ref is None:
+            raise ValueError('blueprint bare repository has no upstream main reference')
+        archive = subprocess.check_output(['git', '--git-dir', str(path), 'archive', ref])
+        subprocess.run(['tar', '-xf', '-', '-C', name], input=archive, check=True)
+        yield out
+
+
+def parse(path):
+    text = path.read_text()
+    parts = text.split('+++', 2)
+    if len(parts) != 3 or parts[0].strip():
+        raise ValueError(f'{path}: missing TOML front matter')
+    return tomllib.loads(parts[1]), parts[2].strip()
+
+
+def scan(tree):
+    result = {}
+    for path in sorted((tree / 'blueprint').rglob('*.md')):
+        front, body = parse(path)
+        ident = front.get('id')
+        if not ident:
+            if front.get('kind') != 'proof' or not front.get('of'):
+                raise ValueError(f'{path}: no id or proof of')
+            ident = front['of'] + '.proof'
+        if ident in result:
+            raise ValueError(f'duplicate blueprint id {ident}')
+        result[ident] = (path.relative_to(tree), front, body)
+    return result
+
+
+def high(path):
+    # blueprint/sec/_section.md and blueprint/sec/sk/_section.md.
+    return path.name == '_section.md' and len(path.parts) <= 4
+
+
+def fields(data):
+    return '+++\n' + '\n'.join(f'{k} = {json.dumps(v, ensure_ascii=False)}' for k, v in data.items()) + '\n+++\n'
+
+
+def proof_body(node):
+    paras = []
+    for step in node.get('proof') or []:
+        if isinstance(step, str):
+            paras.append(step)
+            continue
+        text = step.get('text', '')
+        missing = [i for i in step.get('uses', []) if '[' + i + ']' not in text]
+        if missing:
+            text += ' (' + ', '.join('[' + i + ']' for i in missing) + ').'
+        paras.append(text)
+    return '\n\n'.join(paras)
+
+
+def correction(node):
+    value = node.get('statement_change')
+    if not value and isinstance(node.get('split_report'), dict):
+        value = node['split_report'].get('statement_change')
+    return value
+
+
+def classify(ns, bp):
+    rows = []
+    for ident, node in sorted(ns.items()):
+        imported = bool((node.get('blueprint') or {}).get('is'))
+        present = bp.get(ident)
+        state = None
+        if node.get('status') == 'merged':
+            state = 'merged-omitted'
+        elif not imported and not present:
+            state = 'mathlib-omitted' if node.get('status') == 'mathlib' else 'new'
+        elif imported and not present:
+            state = 'upstream-absent'
+        elif present:
+            if correction(node) and node.get('statement', '').strip() != present[2]:
+                state = 'ask-statement' if high(present[0]) else 'statement'
+            if not state and node.get('proof'):
+                proof = bp.get(ident + '.proof')
+                if proof_body(node).strip() != (proof[2] if proof else ''):
+                    state = 'ask-proof' if high(present[0]) else 'proof'
+        if state:
+            rows.append({'chapter': node.get('chapter', ''), 'sketch': node.get('unit', ''), 'id': ident, 'kind': node.get('kind', ''), 'change': state})
+    for ident, entry in sorted(bp.items()):
+        if not ident.endswith('.proof') and ident not in ns:
+            rows.append({'chapter': entry[0].parts[1], 'sketch': entry[0].parts[2] if len(entry[0].parts) > 3 else '', 'id': ident, 'kind': entry[1].get('kind'), 'change': 'blueprint-only'})
+    return rows
+
 
 def diff(args):
- ns=nodes(); bp=bpindex(treepath(args.blueprint)); counts=collections.Counter(); rows=[]
- for i,d in sorted(ns.items()):
-  ch=d.get('chapter','unknown'); p=bp.get(i)
-  if d.get('blueprint',{}).get('is') is None: counts[(ch,'new:'+d.get('kind','?'))]+=1; rows.append((ch,sketch_of(d),'new',i,d.get('kind','')))
-  elif d.get('statement_change'):
-   if p and layer2(p): counts[(ch,'statement-correction-ASK')]+=1; rows.append((ch,sketch_of(d),'ask-statement',i,d.get('kind','')))
-   else: counts[(ch,'statement-correction')]+=1; rows.append((ch,sketch_of(d),'statement',i,d.get('kind','')))
-  elif d.get('proof') and p: counts[(ch,'changed-proof')]+=1; rows.append((ch,sketch_of(d),'proof',i,d.get('kind','')))
- print('COUNTS')
- for (ch,k),n in sorted(counts.items()): print(f'{ch}\t{k}\t{n}')
- print('TOTAL\t',sum(counts.values()))
- for r in rows: print('\t'.join(r))
+    with blueprint_tree(args.blueprint) as tree:
+        rows = classify(load_nodes(), scan(tree))
+    counts = collections.Counter(r['change'] for r in rows)
+    if args.json:
+        print(json.dumps({'counts': dict(sorted(counts.items())), 'rows': rows}, indent=2))
+        return
+    print('Counts: ' + ', '.join(f'{k}={v}' for k, v in sorted(counts.items())))
+    grouped = collections.defaultdict(collections.Counter)
+    for row in rows:
+        grouped[(row['chapter'], row['sketch'])][row['change'] + (':' + row['kind'] if row['change'] == 'new' else '')] += 1
+    for (chapter, sketch), count in sorted(grouped.items()):
+        print(chapter, sketch, ' '.join(f'{k}={v}' for k, v in sorted(count.items())), sep='\t')
 
-def fm(fields):
- lines=['+++']
- for k,v in fields:
-  if isinstance(v,list): lines.append(f'{k} = ['+', '.join(json.dumps(x) for x in v)+']')
-  else: lines.append(f'{k} = {json.dumps(v,ensure_ascii=False)}')
- lines += ['+++','']; return '\n'.join(lines)
 
-def link(i): return f'[{i}]({i})'
-def render_node(d, proof=False):
- fields=[('id',d['id']),('kind','proof' if proof else ('theorem' if d.get('kind') in ('statement','lemma') else d.get('kind','definition')))]
- if proof: fields=[('kind','proof'),('of',d['id'])]
- else:
-  if d.get('title'): fields.append(('title',d['title']))
-  if d.get('lean',{}).get('declaration'): fields.append(('lean',[d['lean']['declaration']]))
-  uses=d.get('stmt_deps') or []
-  if uses: fields.append(('uses',uses))
- s=fm(fields)
- if proof:
-  for st in d.get('proof',[]):
-   text=st.get('text','')
-   for u in st.get('uses',[]): text += f' ({link(u)})'
-   s+=text+'\n\n'
- else:
-  s+=d.get('statement','').strip()+'\n'
-  if d.get('source'):
-   src=d['source']; s+='\nSource: '+str(src.get('document',''))+' ('+str(src.get('place',''))+').\n'
-  if d.get('proof'): s+='\n'
- return s
+def write(path, text):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists() or path.read_text() != text:
+        path.write_text(text)
+
+
+def node_text(node, ns):
+    meta = {'id': node['id'], 'kind': 'definition' if node['kind'] == 'definition' else 'lemma'}
+    if node.get('title'):
+        meta['title'] = node['title']
+    deps = []
+    for ident in node.get('stmt_deps') or []:
+        if ident in ns and ns[ident].get('status') == 'mathlib' and not (ns[ident].get('blueprint') or {}).get('is'):
+            continue
+        deps.append(ident)
+    if deps:
+        meta['uses'] = sorted(set(deps))
+    lean = node.get('lean') or {}
+    if lean.get('declaration'):
+        meta['lean'] = [lean['declaration']]
+    source = node.get('source') or {}
+    if source:
+        meta['source'] = (str(source.get('document', '')) + ', ' + str(source.get('place', ''))).strip(', ')
+    return fields(meta) + node.get('statement', '').strip() + '\n'
+
 
 def cut(args):
- ns=nodes(); tree=treepath(args.blueprint); bp=bpindex(tree); out=pathlib.Path(args.out); out.mkdir(parents=True,exist_ok=True)
- chapters={args.chapter}; selected=[]
- for i,d in ns.items():
-  if d.get('chapter')!=args.chapter: continue
-  if args.sketch and sketch_of(d)!=args.sketch: continue
-  selected.append((i,d))
- # copy blueprint chapter into output so check sees complete tree
- src=tree/'blueprint'
- if src.exists(): shutil.copytree(src,out/'blueprint',dirs_exist_ok=True)
- ask=[]
- for i,d in sorted(selected):
-  b=d.get('blueprint',{}); p=bp.get(i)
-  if b.get('is') and d.get('statement_change'):
-   if p and layer2(p): ask.append(f'{i}: statement correction requested — {d.get("statement_change")}'); continue
-   if p:
-    rel=p.relative_to(tree/'blueprint'); dest=out/'blueprint'/rel.parent/i/'_section.md'; dest.parent.mkdir(parents=True,exist_ok=True)
-    text=render_node(d); 
-    if dest.exists() and dest.read_text()==text: continue
-    dest.write_text(text)
-  elif b.get('is') and d.get('proof') and p and not layer2(p):
-   pr=p.with_name(p.stem+'.proof.md')
-   if pr.exists():
-    rel=pr.relative_to(tree/'blueprint'); dest=out/'blueprint'/rel; dest.parent.mkdir(parents=True,exist_ok=True); text=render_node(d,True)
-    if not dest.exists() or dest.read_text()!=text: dest.write_text(text)
-  elif b.get('is') is None:
-   anc=b.get('from',{}).get('node'); ap=bp.get(anc) if anc else None
-   if ap:
-    rel=ap.relative_to(tree/'blueprint'); parent=rel.parent/(anc if d.get('blueprint',{}).get('from',{}).get('via') else '')
-    if parent.name=='': parent=rel.parent
-   else: parent=pathlib.Path(args.chapter)/(sketch_of(d) or 'unplaced')
-   dest=out/'blueprint'/parent/f'{i}.md'; dest.parent.mkdir(parents=True,exist_ok=True); text=render_node(d)
-   if not dest.exists() or dest.read_text()!=text: dest.write_text(text)
-   if d.get('proof'):
-    pr=dest.with_name(i+'.proof.md'); pt=render_node(d,True)
-    if not pr.exists() or pr.read_text()!=pt: pr.write_text(pt)
- if ask:
-  (out/'ASK.md').write_text('\n'.join(ask)+'\n')
- print('WROTE',len(selected),'DAG NODES to',out)
+    ns = load_nodes()
+    out = pathlib.Path(args.out).resolve()
+    with blueprint_tree(args.blueprint) as tree:
+        bp = scan(tree)
+        baseline = {str(p.relative_to(tree)): p.read_text() for p in (tree / 'blueprint').rglob('*.md')}
+        # Seed absent files only: rerunning a cut preserves existing changes.
+        for rel, text in baseline.items():
+            path = out / rel
+            if not path.exists():
+                write(path, text)
+        selected = [r for r in classify(ns, bp) if r['chapter'] == args.chapter and (not args.sketch or r['sketch'] == args.sketch)]
+        ask = []
+        for row in selected:
+            ident, mode = row['id'], row['change']
+            if mode.startswith('ask-'):
+                ask.append({'id': ident, 'proposal': mode, 'reason': correction(ns[ident]), 'statement': ns[ident]['statement']})
+                continue
+            if mode not in ('new', 'statement', 'proof'):
+                continue
+            node = ns[ident]
+            if mode == 'new':
+                ancestor = (node.get('blueprint') or {}).get('from') or {}
+                target = ancestor.get('node')
+                if target not in bp:
+                    ask.append({'id': ident, 'proposal': 'placement', 'reason': 'No existing blueprint ancestor', 'statement': node['statement']})
+                    continue
+                path, front, body = bp[target]
+                if high(path):
+                    parent = path.parent
+                elif path.name == '_section.md':
+                    parent = path.parent
+                else:
+                    # Keep the statement file intact; its refinements use a deeper folder.
+                    parent = path.parent / target
+                dest = parent / (ident + '.md')
+                write(out / dest, node_text(node, ns))
+                if node.get('proof'):
+                    write(out / dest.with_name(ident + '.proof.md'), fields({'kind': 'proof', 'of': ident}) + proof_body(node) + '\n')
+            else:
+                path, front, body = bp[ident]
+                if mode == 'statement':
+                    write(out / path, fields(front) + node['statement'].strip() + '\n')
+                if node.get('proof'):
+                    proof_path = bp.get(ident + '.proof', (path.with_name(ident + '.proof.md'),))[0]
+                    write(out / proof_path, fields({'kind': 'proof', 'of': ident}) + proof_body(node) + '\n')
+        manifest = {'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
+        write(out / '.blueprint-cut.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
+    changed = [str(p.relative_to(out)) for p in (out / 'blueprint').rglob('*.md') if baseline.get(str(p.relative_to(out))) != p.read_text()]
+    print(json.dumps({'changed_files': len(changed), 'proposals': len(ask), 'files': sorted(changed)}, indent=2))
+
+
+def graph(bp):
+    result = {}
+    for ident, (_, front, _) in bp.items():
+        result[ident] = set(front.get('uses', []))
+        if front.get('of'):
+            result[ident].add(front['of'])
+    return result
+
+
+def cycles(edges):
+    done, active, found = set(), [], set()
+    def visit(ident):
+        if ident in active:
+            found.add(tuple(sorted(active[active.index(ident):])))
+            return
+        if ident in done:
+            return
+        active.append(ident)
+        for target in sorted(edges.get(ident, set())):
+            visit(target)
+        active.pop(); done.add(ident)
+    for ident in sorted(edges):
+        visit(ident)
+    return found
+
+
+def tex_errors(text):
+    clean = re.sub(r'```.*?```|`[^`]*`', '', text, flags=re.S)
+    clean = re.sub(r'\\\$', '', clean)
+    errors = []
+    if len(re.findall(r'\$\$', clean)) % 2:
+        errors.append('display dollars unbalanced')
+    if clean.replace('$$', '').count('$') % 2:
+        errors.append('inline dollars unbalanced')
+    for start, end in (('\\(', '\\)'), ('\\[', '\\]')):
+        if clean.count(start) != clean.count(end):
+            errors.append('TeX delimiters unbalanced')
+    return errors
+
 
 def check(args):
- root=pathlib.Path(args.dir); base=root/'blueprint'; ids={}; errs=[]
- files=[]
- for f in base.rglob('*.md'):
-  if f.name.endswith('.proof.md'): continue
-  txt=f.read_text(errors='replace'); m=re.search(r'(?m)^id\s*=\s*"([^"]+)"',txt)
-  if not m: continue
-  i=m.group(1); files.append((f,txt,i))
-  if i in ids: errs.append(f'duplicate id {i}')
-  ids[i]=f
- for f,txt,i in files:
-  if FORBIDDEN.search(txt): errs.append(f'forbidden text in {f}')
-  if txt.count('$$')%2 or txt.count('$')%2: errs.append(f'unbalanced TeX in {f}')
-  for key in ('uses','of'):
-   mm=re.search(rf'(?m)^{key}\s*=\s*(\[[^\n]*\]|"[^"]+")',txt)
-   if mm:
-    vals=re.findall(r'"([^"]+)"',mm.group(1))
-    for v in vals:
-     if v not in ids: errs.append(f'{f}: missing {key} target {v}')
- # all paths confined by construction
- if errs:
-  for e in errs: print('ERROR',e)
-  return 1
- print(f'OK {len(ids)} ids; no duplicate, missing dependency, forbidden text, or TeX errors')
- return 0
+    root = pathlib.Path(args.dir).resolve()
+    manifest = json.loads((root / '.blueprint-cut.json').read_text()) if (root / '.blueprint-cut.json').exists() else None
+    if not manifest:
+        raise ValueError('check needs .blueprint-cut.json baseline from cut to enforce protected layers')
+    baseline = manifest['baseline']
+    errors = []
+    try:
+        bp = scan(root)
+    except (ValueError, tomllib.TOMLDecodeError) as ex:
+        print('FAIL:', ex); return 1
+    edges = graph(bp)
+    changed = []
+    for ident, (path, front, body) in bp.items():
+        actual = (root / path).read_text()
+        if baseline.get(str(path)) == actual:
+            continue
+        changed.append(path)
+        expected = path.parent.name if path.name == '_section.md' else path.name.removesuffix('.md')
+        if expected != ident and front.get('kind') != 'proof':
+            errors.append(f'{path}: id {ident} != filename {expected}')
+        if high(path):
+            errors.append(f'protected layer changed: {path}')
+        if FORBIDDEN.search(actual):
+            errors.append(f'forbidden text: {path}: {FORBIDDEN.search(actual).group()}')
+        for error in tex_errors(body):
+            errors.append(f'{path}: {error}')
+        for target in edges[ident]:
+            if target not in bp:
+                errors.append(f'{path}: missing dependency {target}')
+        for target in re.findall(r'\[((?:def|lem|prop|thm|cor|sk|sec|d-|p-|l-|aux)[A-Za-z0-9_.-]*)\](?!\()', body):
+            if target not in bp:
+                errors.append(f'{path}: unresolved citation {target}')
+    for rel in baseline:
+        if not (root / rel).exists():
+            errors.append('blueprint file removed: ' + rel)
+    # Compare cycles to the original graph, without materializing a second tree.
+    base_graph = {}
+    for text in baseline.values():
+        parts = text.split('+++', 2); front = tomllib.loads(parts[1])
+        ident = front.get('id') or (front.get('of', '') + '.proof')
+        base_graph[ident] = set(front.get('uses', [])) | ({front['of']} if front.get('of') else set())
+    for cycle in cycles(edges) - cycles(base_graph):
+        errors.append('new cycle: ' + ', '.join(cycle))
+    if (root / '.git').exists():
+        paths = subprocess.check_output(['git', '-C', str(root), 'diff', '--name-only', 'HEAD'], text=True).splitlines()
+        for path in paths:
+            if not path.startswith('blueprint/'):
+                errors.append('changed outside blueprint/: ' + path)
+    for error in sorted(set(errors)):
+        print('ERROR ' + error)
+    print(f'{"FAIL" if errors else "PASS"}: {len(bp)} objects, {len(changed)} changed files, {len(set(errors))} errors')
+    return int(bool(errors))
+
 
 def main():
- ap=argparse.ArgumentParser(); sub=ap.add_subparsers(dest='cmd',required=True)
- p=sub.add_parser('diff'); p.add_argument('--blueprint',required=True); p.set_defaults(fn=diff)
- p=sub.add_parser('cut'); p.add_argument('chapter'); p.add_argument('--sketch'); p.add_argument('--blueprint',required=True); p.add_argument('--out',required=True); p.set_defaults(fn=cut)
- p=sub.add_parser('check'); p.add_argument('dir'); p.set_defaults(fn=check)
- a=ap.parse_args(); return a.fn(a)
-if __name__=='__main__':sys.exit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest='command', required=True)
+    cmd = commands.add_parser('diff'); cmd.add_argument('--blueprint', required=True); cmd.add_argument('--json', action='store_true'); cmd.set_defaults(fn=diff)
+    cmd = commands.add_parser('cut'); cmd.add_argument('chapter'); cmd.add_argument('--sketch'); cmd.add_argument('--blueprint', required=True); cmd.add_argument('--out', required=True); cmd.set_defaults(fn=cut)
+    cmd = commands.add_parser('check'); cmd.add_argument('dir'); cmd.set_defaults(fn=check)
+    args = parser.parse_args()
+    try:
+        return args.fn(args)
+    except (ValueError, OSError, subprocess.CalledProcessError) as ex:
+        print(str(ex), file=sys.stderr); return 1
+
+if __name__ == '__main__':
+    sys.exit(main())
