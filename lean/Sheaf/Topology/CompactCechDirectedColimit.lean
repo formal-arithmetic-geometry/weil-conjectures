@@ -6,6 +6,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Spaces
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.Topology.AbelianSectionsFilteredColimit
 
 /-!
 # Directed colimits and finite compact Čech complexes

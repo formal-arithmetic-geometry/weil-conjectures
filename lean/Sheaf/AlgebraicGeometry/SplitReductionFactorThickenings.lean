@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.AlgebraicGeometry.Spec
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Factor thickenings for a split reduction

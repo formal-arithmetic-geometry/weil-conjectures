@@ -6,6 +6,7 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry

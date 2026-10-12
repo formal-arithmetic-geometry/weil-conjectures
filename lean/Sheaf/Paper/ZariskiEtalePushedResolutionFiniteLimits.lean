@@ -3,6 +3,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.CategoryTheory.SiteExtensionByZeroExact
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry

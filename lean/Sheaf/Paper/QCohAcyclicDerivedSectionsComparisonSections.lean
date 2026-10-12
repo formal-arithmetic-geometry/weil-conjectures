@@ -15,6 +15,8 @@ import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.Topology.RestrictInjectiveResolution
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 @[expose] public section
 

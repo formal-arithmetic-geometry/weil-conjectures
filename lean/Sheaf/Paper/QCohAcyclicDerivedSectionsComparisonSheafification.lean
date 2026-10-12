@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.DerivedSectionPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 @[expose] public section
 

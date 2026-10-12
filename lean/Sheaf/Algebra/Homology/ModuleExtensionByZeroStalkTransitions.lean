@@ -4,6 +4,7 @@ public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkInside
+import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
