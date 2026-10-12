@@ -7820,3 +7820,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/H2/Sheaf.Algebra.Homology.HomComplexSectionsQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T135238-L-1667422 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence (stage 3; reviewer PASS; first push; landing 20261012T135239-L-1667531 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (stage 3; reviewer PASS; after a return; landing 20261012T135239-L-1667651 (interface); batch 20261012T135212; modules 4; new nodes 3)
+- 13:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkAux (stage 3; reviewer PASS; first push; landing 20261012T135239-L-1667782 (proof); batch 20261012T135212; modules 1; new nodes 3)

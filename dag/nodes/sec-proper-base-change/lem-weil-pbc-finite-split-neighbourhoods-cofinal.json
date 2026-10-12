@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-finite-split-neighbourhoods-cofinal",
+ "kind": "statement",
+ "title": "Cofiltered split neighbourhoods compute the base stalk",
+ "statement": "Let $f:X\\to Y$ be finite [def-weil-finite-integral-morphism], and let $y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point]. A split neighbourhood consists of a pointed etale neighbourhood $(U,u)$ of $y$ [def-weil-pbc-geometric-stalks] and pairwise disjoint clopen pieces of $U\\times_Y X$, indexed by the geometric fibre, covering the base change, with the marked point $(u,t)$ in the $t$-th piece. Its morphisms are pointed neighbourhood morphisms mapping each piece into the corresponding piece. This category is cofiltered, and its forgetful functor to pointed etale neighbourhoods of $y$ is initial.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/Finite/SplitExists.lean",
+  "place": "AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_forget; the existing fully proved split-neighbourhood argument underlying Stacks Tag 03QP (1)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "The existing theorem exists_hom constructs a split refinement of every pointed neighbourhood, using an affine chart and the finite-algebra splitting.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Pull back decompositions along common pointed refinements to construct cones for pairs of split neighbourhoods. Equalize parallel maps by a pointed refinement. This proves cofilteredness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each pointed neighbourhood, a split refinement exists; any two such choices admit a common split refinement, and parallel comparison maps can be equalized. Therefore the corresponding costructured-arrow category is connected, proving initial_forget.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/Finite/SplitExists.lean",
+  "place": "Existing sorry-free proof, recorded as a reusable tool without adding a declaration"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cofinal split etale neighbourhoods and their pieces for a finite morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial",
+   "results": "CategoryTheory.Functor.Initial, CategoryTheory.Functor.initial_fromPUnit_of_isInitial, CategoryTheory.Functor.Initial.lift, CategoryTheory.Functor.initial_of_isLeftAdjoint, CategoryTheory.IsCofiltered.of_initial, CategoryTheory.IsCofilteredOrEmpty.of_initial, CategoryTheory.Functor.Initial.instNonemptyCostructuredArrow, CategoryTheory.Functor.initial_of_adjunction",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "splitNbhd|pieceFunctor|sectionsIsoPi",
+   "results": "No Mathlib hits; the exact result is in the existing WeilConjectures library.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkAux",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-finite-pushforward-stalk-map-bijective",
+   "place": "Shorter split-neighbourhood proof: Cofiltered split neighbourhoods compute the base stalk"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_forget",
+  "statement": "instance initial_forget : (forget f y).Initial",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_forget",
+   "AlgebraicGeometry.Scheme.Hom.SplitNbhd.isCofiltered"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135239-L-1667782",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135239-L-1667782",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

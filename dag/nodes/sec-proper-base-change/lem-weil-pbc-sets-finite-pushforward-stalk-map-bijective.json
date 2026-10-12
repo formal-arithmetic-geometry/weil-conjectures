@@ -18,24 +18,49 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is the corresponding geometric fibre or restriction-map stage of the ten-step proof in the parent node; the remaining geometric argument is intentionally isolated here for a later worker.",
+   "text": "Compute the pushforward stalk on the opposite of the cofiltered split-neighbourhood category: the forgetful functor is initial, so its opposite is final. Functor.Final.colimitIso gives e₀.",
    "uses": [
-    "lem-weil-pbc-sets-finite-pushforward-set-stalk"
+    "lem-weil-pbc-finite-split-neighbourhoods-cofinal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proposition 03QP (1)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Compute each fibre stalk using the initial t-th-piece functor, obtaining e₁ t by Functor.Final.colimitIso.",
+   "uses": [
+    "lem-weil-pbc-finite-split-pieces-cofinal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section functor on split neighbourhoods is naturally the product of its piece-section functors, through restrictions to each piece.",
+   "uses": [
+    "lem-weil-pbc-finite-split-sections-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use hfin to choose a Fintype for the geometric fibre. Filtered colimits of Type-valued functors preserve finite limits, hence this product; apply PreservesProduct.iso to the piece-section functors. This holds also for an empty fibre.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the composite on each colimit coprojection and each product projection. The piece inclusion is a morphism of pointed neighbourhoods, so colimit.w identifies the restricted piece germ with the base-change neighbourhood germ. Thus e₀.hom followed by Pi.lift r equals the composite of the section-product, colimit-product, and piece-stalk isomorphisms. Pi.lift r is therefore an isomorphism. Compose with Types.productIso; its projections show its underlying function is precisely the map in the statement, and hence bijective.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sets-finite-pushforward-set-stalk"
+  "lem-weil-pbc-finite-split-neighbourhoods-cofinal",
+  "lem-weil-pbc-finite-split-pieces-cofinal",
+  "lem-weil-pbc-finite-split-sections-product",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "stage-3 decomposition",
-  "place": "finite pushforward stalk proof"
+  "document": "lean/WeilConjectures/SixFunctors/Finite/Stalk.lean",
+  "place": "H2 adapts the split-neighbourhood proof of stalkIsoColimitSections_hom_comp_piLift_stalkRestrict to Type coefficients using Mathlib filtered_colim_preservesFiniteLimits_of_types"
  },
  "mathlib_searches": [
   {
@@ -95,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T053928-L-2633622",
-  "kind": "interface",
+  "landing": "20261012T135239-L-1667782",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

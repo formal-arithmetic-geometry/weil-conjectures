@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-finite-split-sections-product",
+ "kind": "statement",
+ "title": "Sections on split neighbourhoods are products of piece sections",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism], let $y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point with $\\Omega$ separably closed [def-weil-geometric-point], and let $H$ be a sheaf of sets on the small etale site of $X$ [def-weil-pbc-etale-sheaf-of-sets]. On the category of split neighbourhoods defined in [lem-weil-pbc-finite-split-neighbourhoods-cofinal], the functor $s\\mapsto H(U_s\\times_Y X)$ is naturally isomorphic to the product, indexed by geometric fibre points $t$, of the functors $s\\mapsto H(\\operatorname{piece}_t(s))$. Its $t$-th component is restriction along the piece inclusion. More generally this holds for any coefficient category having this indexed product.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/Finite/PieceSections.lean",
+  "place": "AlgebraicGeometry.Scheme.Hom.SplitNbhd.sectionsIsoPi; the existing fully proved split-neighbourhood argument underlying Stacks Tag 03QP (1)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-finite-split-neighbourhoods-cofinal",
+  "def-weil-finite-integral-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof": [
+  {
+   "text": "The piece inclusions are monomorphisms forming a jointly surjective etale cover; distinct pieces have disjoint underlying ranges.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf condition for this disjoint cover says that the categorical product of restrictions is an isomorphism. This also handles an empty cover, where the sheaf value on the empty scheme is terminal.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Piece inclusions commute with split-neighbourhood maps. Hence restriction defines a natural transformation to the product of the piece-section functors. It is an isomorphism objectwise by the preceding step, giving sectionsIsoPi.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/Finite/PieceSections.lean",
+  "place": "Existing sorry-free proof, recorded as a reusable tool without adding a declaration"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of a sheaf on a disjoint cover are the product of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.lift",
+   "results": "CategoryTheory.Limits.Pi.lift, CategoryTheory.Limits.instIsIsoLiftπ, CategoryTheory.Limits.Pi.lift_π, CategoryTheory.Limits.Pi.lift_comp_π, CategoryTheory.Limits.instMonoLiftπ, CategoryTheory.Limits.Fan.isLimitOfIsIsoPiLift, CategoryTheory.Limits.Fan.nonempty_isLimit_iff_isIso_piLift, CategoryTheory.Limits.Pi.lift_comp_π_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_piLift_of_disjoint|sectionsIsoPi",
+   "results": "No Mathlib hits; the exact result is in the existing WeilConjectures library.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkAux",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-finite-pushforward-stalk-map-bijective",
+   "place": "Shorter split-neighbourhood proof: Sections on split neighbourhoods are products of piece sections"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.SplitNbhd.sectionsIsoPi",
+  "statement": "def sectionsIsoPi : sectionsFunctor f y G ≅ ∏ᶜ pieceSectionsFunctor f y G",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135239-L-1667782",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135239-L-1667782",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
