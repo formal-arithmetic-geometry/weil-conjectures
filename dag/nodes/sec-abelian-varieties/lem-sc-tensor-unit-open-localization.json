@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-tensor-unit-open-localization",
+ "kind": "statement",
+ "title": "Open localization of the tensor-pullback unit",
+ "statement": "Let $p:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $U\\subseteq Y$ be an open subset. Write $R_U$ for restriction of module sheaves to the open slice site over $U$, $P_p$ for tensor pullback [def-pc-module-pullback], $T_p=p_*P_p$, and $\\eta:\\mathrm{id}\\to T_p$ for the canonical unit [lem-pc-module-pullback-adjunction]. There exist an additive endofunctor $H$ on the category of sheaves of modules over $\\mathcal O_Y|_U$, a natural transformation $\\alpha:\\mathrm{id}\\to H$, and a natural isomorphism $\\theta:R_U H\\cong T_p R_U$ (functors composed in the order written), such that for every $\\mathcal O_Y$-module $M$, $R_U(\\eta_M)=\\alpha_{R_U M}\\,;\\,\\theta_M$. No local-freeness or invertibility assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E8",
+  "place": "Tag 01E8, last paragraph of the proof, localization on Y; Tag 0096, canonical tensor-pullback adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Set V=p^{-1}U and restrict the morphism of ringed spaces to V→U. On the open slice sites let H be tensor pullback along this restricted morphism followed by direct image, and let α be its canonical unit. The tensor/inverse-image Hom bijections of [lem-pc-module-pullback-adjunction] apply with the restricted ring maps. Tensor pullback is a left adjoint between additive categories and is additive (Mathlib Adjunction.left_adjoint_additive); direct image is sectionwise restriction of scalars and is additive. Their composite is additive.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of direct image is direct image from V: on every W⊆U both assign the sections on p^{-1}W with the identical ring action. Tensor pullback [def-pc-module-pullback] commutes with restriction. To verify the inverse-image part, intersect every neighbourhood of the image of an open subset of V with U; these intersections form a cofinal neighbourhood system. Extension of scalars uses the same restricted structural ring maps. Sheafification commutes with restriction because both have the universal property of the sheaf associated to the restricted tensor presheaf; equivalently the open-cover matching families agree. These natural identifications compose to θ:R_U H≅T_p R_U.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every M the unit formula in [lem-pc-module-pullback-adjunction] sends a section m to the sheafification of 1 tensor its inverse-image unit. Restricting this formula to opens contained in U gives exactly the same formula for α and θ, so R_U(η_M)=α_{R_U M};θ_M. All comparisons commute with module morphisms. If U is empty the same constructions apply on its open slice; nothing requires a nonempty open or a nonzero module.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01E8",
+  "place": "Tag 01E8, last paragraph of the proof, localization on Y; Tag 0096, canonical tensor-pullback adjunction",
+  "note": "Details of the open restriction step implicit in the local proof, written out by M2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pullback pushforward composite on module sheaves localizes to each open slice as an additive functor, compatibly with its adjunction unit",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of pullback and pushforward of sheaf modules restricts to an additive endofunctor on each open slice and its adjunction unit restricts naturally",
+   "results": "Found SheafOfModules.pullbackPushforwardAdjunction, its unit formulas for the structure module, and pushforwardPushforwardAdj_unit_app_val_app. No open-localization comparison for tensorPullback.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*over|over.*pullback|unit.*over",
+   "results": "The logged broad Mathlib grep returned no matching unit localization theorem. Targeted reads of ModuleCat/Sheaf/PushforwardContinuous.lean give overFunctor and slice adjunctions. The source library has a private tensorPullbackOverComparison in RingedSpaceTensorPullbackPresentation, but it is an object comparison without the required unit compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 01E8, last paragraph of the proof, localization on Y; Tag 0096, canonical tensor-pullback adjunction",
+   "via": [
+    "lem-sc-finite-locally-free-tensor-unit",
+    "lem-sc-picard-pullback-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorUnitOpenLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorUnitOpenLocalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.tensorPullback_unit_open_localization",
+  "statement": "theorem tensorPullback_unit_open_localization {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (U : Opens Y) :\n    ∃ (H : SheafOfModules.{u} (Y.ringCatSheaf.over U) ⥤\n        SheafOfModules.{u} (Y.ringCatSheaf.over U))\n      (α : 𝟭 _ ⟶ H)\n      (θ : SheafOfModules.overFunctor Y.ringCatSheaf U ⋙ H ≅\n        Modules.tensorPullback p ⋙ Modules.pushforward p ⋙\n          SheafOfModules.overFunctor Y.ringCatSheaf U),\n      H.Additive ∧ ∀ M : Y.Modules,\n        ((Classical.choose (Modules.exists_tensorPullbackAdjunction p)).unit.app M).over U =\n          α.app (M.over U) ≫ θ.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T225320-L-1809744",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T225320-L-1809744",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

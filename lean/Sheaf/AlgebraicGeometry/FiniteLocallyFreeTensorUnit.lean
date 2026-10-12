@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
+import Sheaf.AlgebraicGeometry.TensorUnitOpenLocalization
+import Mathlib.CategoryTheory.Sites.LocalProperties
+
 /-! # Units on finite locally free modules
 
 Source: Stacks Project, Tags 0BDP and 01E8.
@@ -22,6 +25,22 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem isIso_app_coproduct {C : Type*} [Category C] {I : Type*}
+    [HasCoproductsOfShape I C] (H : C ⥤ C)
+    [PreservesColimitsOfShape (Discrete I) H] (α : 𝟭 C ⟶ H)
+    (O : C) [IsIso (α.app O)] : IsIso (α.app (∐ fun _ : I ↦ O)) := by
+  have h : α.app (∐ fun _ : I ↦ O) =
+      CategoryTheory.Limits.Sigma.map (fun _ : I ↦ α.app O) ≫
+        (PreservesCoproduct.iso H (fun _ : I ↦ O)).inv := by
+    apply Sigma.hom_ext
+    intro i
+    simp only [Sigma.ι_map_assoc, PreservesCoproduct.inv_hom, ι_comp_sigmaComparison]
+    exact α.naturality (Sigma.ι (fun _ : I ↦ O) i)
+  rw [h]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The tensor-pullback adjunction unit is invertible on finite locally free modules
 when it is invertible on the structure module.
 Source: Stacks Project, Tag 01E8, degree-zero projection formula and its local proof;
@@ -41,6 +60,45 @@ theorem isIso_tensorPullback_unit_of_finiteLocallyFree {X Y : Scheme.{u}}
     (hO : IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction p)).unit.app
       (SheafOfModules.unit Y.ringCatSheaf)))
     (N : Y.Modules) [N.IsFiniteLocallyFree] :
-    IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction p)).unit.app N) := by sorry
+    IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction p)).unit.app N) := by
+  classical
+  obtain ⟨q, hfree, hfinite⟩ :=
+    SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := N)
+  let := hfree
+  let := hfinite
+  let η := (Classical.choose (Modules.exists_tensorPullbackAdjunction p)).unit
+  let := hO
+  have hlocal (i : q.I) : IsIso ((η.app N).over (q.X i)) := by
+    have := hfinite.isFiniteType i
+    let := Fintype.ofFinite (q.generators i).I
+    let e := asIso (q.generators i).π
+    obtain ⟨H, α, θ, hH, hθ⟩ := tensorPullback_unit_open_localization p (q.X i)
+    let := hH
+    let O := SheafOfModules.unit Y.ringCatSheaf
+    have hunit : IsIso ((η.app O).over (q.X i)) :=
+      (SheafOfModules.overFunctor Y.ringCatSheaf (q.X i)).map_isIso _
+    have hαunit : IsIso (α.app (O.over (q.X i))) := by
+      have : IsIso (α.app (O.over (q.X i)) ≫ θ.hom.app O) :=
+        hθ O ▸ hunit
+      exact IsIso.of_isIso_comp_right _ (θ.hom.app O)
+    have hαfree : IsIso (α.app (SheafOfModules.free
+        (R := Y.ringCatSheaf.over (q.X i)) (q.generators i).I)) :=
+      isIso_app_coproduct H α (O.over (q.X i))
+    have : IsIso (α.app (N.over (q.X i))) :=
+      (NatTrans.isIso_app_iff_of_iso α e).mp hαfree
+    exact (hθ N).symm ▸ inferInstance
+  have : IsIso ((SheafOfModules.toSheaf Y.ringCatSheaf).map (η.app N)) := by
+    apply Sheaf.isIso_of_coversTop q.coversTop
+    intro i
+    have := hlocal i
+    change IsIso ((SheafOfModules.toSheaf (Y.ringCatSheaf.over (q.X i))).map
+      ((η.app N).over (q.X i)))
+    infer_instance
+  have : (SheafOfModules.toSheaf Y.ringCatSheaf ⋙
+      sheafToPresheaf _ _).ReflectsIsomorphisms :=
+    inferInstanceAs (Modules.toPresheaf Y).ReflectsIsomorphisms
+  have : (SheafOfModules.toSheaf Y.ringCatSheaf).ReflectsIsomorphisms :=
+    reflectsIsomorphisms_of_comp _ (sheafToPresheaf _ _)
+  exact isIso_of_reflects_iso (η.app N) (SheafOfModules.toSheaf Y.ringCatSheaf)
 
 end AlgebraicGeometry.Scheme
