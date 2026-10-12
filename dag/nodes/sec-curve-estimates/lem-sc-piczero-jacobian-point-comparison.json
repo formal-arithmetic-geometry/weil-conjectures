@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-piczero-jacobian-point-comparison",
+ "kind": "statement",
+ "title": "Multiplicative Jacobian point comparison for Picard base change",
+ "statement": "Let $k\\subseteq k'$ be algebraically closed fields [def-sc-field-extension], and let $f:X\\to\\operatorname{Spec}k$ be a proper smooth connected curve [def-sc-curves]. Write $X'=X\\times_k k'$ and $f':X'\\to\\operatorname{Spec}k'$ [def-pc-base-change]. Let $G\\subseteq\\operatorname{Pic}(X)$ and $G'\\subseteq\\operatorname{Pic}(X')$ be subgroups whose underlying sets are the degree-zero Picard classes [def-sc-pic0]. Let $j:G\\to G'$ be a homomorphism whose underlying Picard classes are the canonical pullbacks. There exist an abelian variety J over k equipped with a commutative group structure and multiplicative equivalences e:G ≃ J(k) and e':G' ≃ J(k'), such that e'(j(x)) is the extension of e(x) for every x in G. Here J(k') denotes morphisms Spec k' to J over k.",
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "def-pc-base-change",
+  "def-sc-pic0"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Proper degree-one comparison and Jacobian base-change compatibility square"
+ },
+ "proof": [
+  {
+   "text": "Smoothness and connectedness over the algebraically closed field give geometric integrality. Geometric integrality, separatedness and finite type make X a variety of dimension one. The curve relative-dimension-one lemma, applied to the identity base change, gives smooth relative dimension one. Jacobian representability gives a commutative abelian variety representing the degree-zero Picard functor, with its tensor-compatible group law.",
+   "uses": [
+    "thm-sc-jacobian-representability",
+    "lem-sc-smooth-regular",
+    "lem-weil-separably-closed-geometrically-connected",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-curve-base-change-relative-dimension-one"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change preserves connected curve structure, smoothness and properness. Apply degree-zero Picard representability on the extended curve. The Jacobian compatibility square and the pullback adjunction identify its rational points with morphisms Spec kprime to J over k. The compatibility square for the sheafification units identifies pullback of a class with extension of its representing point; multiplication compatibility makes both equivalences multiplicative. Transport across the given equalities of subgroup underlying sets.",
+   "uses": [
+    "lem-sc-base-change-curve",
+    "lem-sc-jacobian-base-change-compatible",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-jacobian-representability",
+  "lem-sc-smooth-regular",
+  "lem-weil-separably-closed-geometrically-connected",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-base-change-curve",
+  "lem-sc-jacobian-base-change-compatible",
+  "lem-sc-curve-base-change-relative-dimension-one"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Proper degree-one Jacobian comparison and base-change square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback on degree zero Picard groups of smooth proper curves is injective and bijective on prime to characteristic torsion under algebraically closed field extension",
+   "results": "Eight elliptic-curve and pullback hits; no general Picard comparison.",
+   "date": "2026-10-12",
+   "verdict": "No matching general Picard comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective, CategoryTheory.Over",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "picZero.*base|jacobian.*compat|exists_mulEquiv_of_isPicardZeroMul",
+   "results": "msearch Mathlib grep: 0 hits. Repository rg finds jacobian_compatibility and exists_mulEquiv_of_isPicardZeroMul; neither packages the required point square.",
+   "date": "2026-10-12",
+   "verdict": "Use existing comparisons as dependencies; no duplicate bridge"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural multiplicative equivalence between degree zero Picard groups and rational points of the Jacobian compatible with field extension",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-piczero-torsion-base-change",
+   "place": "Jacobian comparison square",
+   "via": [
+    "thm-sc-jacobian-representability",
+    "lem-sc-jacobian-base-change-compatible"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicZeroJacobianPointComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicZeroJacobianPointComparison.lean",
+  "declaration": "AlgebraicGeometry.pic_zero_jacobian_point_comparison",
+  "statement": "theorem pic_zero_jacobian_point_comparison\n    {k k' : Type u} [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    [IsConnectedCurve f] [Smooth f] [IsProper f]\n    (G : Subgroup X.Pic) (hG : (G : Set X.Pic) = f.picZero)\n    (G' : Subgroup (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Pic)\n    (hG' : (G' : Set (pullback f\n      (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Pic) =\n      (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).picZero)\n    (j : G →* G')\n    (hj : ∀ L : G, (j L).val = Scheme.Pic.mapHom\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) L.val)\n    : ∃ (J : Over (Spec (.of k))) (hJ : CommGrpObj J),\n      letI := hJ\n      ∃ (_ : IsAbelianVariety J) (e : G ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J))\n        (e' : G' ≃* (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k'))) ⟶ J)),\n      ∀ x : G, e' (j x) =\n        toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k')))) ≫ e x",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T095856-L-313905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T095856-L-313905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
