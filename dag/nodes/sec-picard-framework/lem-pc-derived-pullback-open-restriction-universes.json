@@ -14,21 +14,21 @@
  ],
  "proof": [
   {
-   "text": "Choose standard localizations of all four complex categories. Apply derivedPullback_openRestriction_iso in the affine calculation node to obtain its natural comparison with a common standard localization universe.",
+   "text": "Apply derivedPullback_openRestriction_iso with HasDerivedCategory.standard for the four module-sheaf categories, obtaining the standard same-universe natural comparison.",
    "uses": [
     "lem-pc-affine-derived-pullback-tensor-tilde"
    ],
    "elementary": false
   },
   {
-   "text": "Uniqueness of localization gives canonical equivalences from each chosen localization to each standard one, commuting naturally with Q. Exact restriction is induced by its termwise complex functor, so its derived functors commute with these equivalences. The left-derived universal property from exists_derivedPullback likewise identifies the transported derived pullback with the chosen derived pullback: transport its counit and use uniqueness of left-derived functors.",
+   "text": "For each chosen localization of the homotopy category, form Localization.uniq to its standard localization. Exact restriction commutes with these equivalences: compose mapDerivedCategoryFactorsh with compUniqFunctor and lift the resulting isomorphism by the fully faithful precomposition with Qh. Derived pullback commutes with the equivalences as well: extract its left-derived counit from exists_derivedPullback, identify the two underlying tensor pullback functors using their recorded object and map equalities, and transport the right Kan extension across both equivalences. Postcomposition acts by an equivalence on right extensions; precomposition uses isRightKanExtension_iff_postcomp₁. Apply rightKanExtensionUniqueOfIso.",
    "uses": [
     "def-pc-derived-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Whisker the standard comparison by the canonical equivalences and cancel their units and counits. The resulting natural isomorphism is the claimed comparison on the ambient and open-subscheme localization choices. In particular it does not assert that w=wO.",
+   "text": "Compose the two restriction transport isomorphisms, the two pullback transport isomorphisms, and the standard comparison using isoWhiskerLeft and isoWhiskerRight. This identifies the claimed composites after postcomposition with the open-source localization equivalence. Cancel it using preimageIso for the fully faithful right-whiskering functor.",
    "uses": [],
    "elementary": true
   }
@@ -38,9 +38,9 @@
   "lem-pc-affine-derived-pullback-tensor-tilde"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent W3",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
+  "place": "Tag 08DW supplies open-restriction compatibility through the existing same-universe theorem; W3 proves independent-universe transport using Mathlib localization equivalences and right Kan extension uniqueness."
  },
  "mathlib_searches": [
   {
@@ -111,10 +111,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T085326-L-34617",
-  "kind": "interface",
+  "landing": "20261012T095930-L-327007",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
