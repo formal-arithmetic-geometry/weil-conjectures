@@ -1,207 +1,212 @@
 {
-  "id": "prop-weil-pbc-gabber-pair-comparison",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-injective-restriction-acyclicity",
-      "place": "step 4 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09ZI we see that H^q(Z, I|_Z) = H^q(X^h, I|_{X^h})')",
-      "via": []
-    },
-    "same_as": null
+ "id": "prop-weil-pbc-gabber-pair-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 4 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09ZI we see that H^q(Z, I|_Z) = H^q(X^h, I|_{X^h})')",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Gabber's affine comparison for a henselian pair",
-  "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $X=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}(A/I)$ and $z:Z\\to X$ the closed immersion. For every torsion abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf] the pullback map [def-weil-pbc-cohomology-pullback]\n$$\nz^*:H^q(X_{\\Et},F)\\longrightarrow H^q(Z_{\\Et},z^{-1}F)\n$$\nis an isomorphism for every $q\\ge0$ ($H^q$ etale cohomology [def-weil-pbc-etale-cohomology], $z^{-1}$ the inverse image [def-weil-pbc-inverse-image]). Only the pair form is asserted: for an affine scheme of finite type over $\\operatorname{Spec}A$ in place of $\\operatorname{Spec}A$ the comparison with the closed fibre is false (see the report of lemma-weil-pbc-injective-restriction-acyclicity and the Lean docstring of AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing).",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 09ZI (theorem-gabber), Section 59.91 (section-gabber-affine-proper)",
-    "lean": "slopmaster2: AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing, WeilConjectures/SixFunctors/Etale/Gabber.lean:227 (stated for torsion sheaves of Λ-modules; reaches sorry in bijective_cohomologyMap_zero_of_henselianRing and exists_mono_map_eq_zero_of_henselianRing)"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-inverse-image"
-  ],
-  "proof": [
-    {
-      "text": "For degree zero identify the range of Spec(A/I)→Spec A with V(I). Every finite cover p:X′→Spec A is proper; Stein connectedness gives the required nonempty connected intersections of irreducible closed subsets with p⁻¹(V(I)). Apply the abelian finite-cover connectedness criterion to obtain an isomorphism on global sections. The proved formula cohomologyMap_zero_eq_globalSectionsUpperStarMap and the canonical H.equiv₀/global-sections bijections conjugate it to the degree-zero cohomology bijection.",
-      "uses": [
-        "lemma-weil-pbc-stein-connectedness",
-        "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
-        "lem-weil-pbc-cohomology-pullback-degree-zero"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Fix $q>0$ and assume the comparison is bijective in every smaller degree, for every torsion sheaf. Choose a monomorphism $\\iota:F\\hookrightarrow F'$ of torsion sheaves and write $Q=\\operatorname{coker}(\\iota)$. The resulting short exact sequence $0\\to F\\to F'\\to Q\\to0$ and its inverse image along $z$ give a commutative diagram of long exact cohomology sequences on $X$ and $Z$ [lem-weil-pbc-ext-long-exact-second-variable], together with the already proved local cohomologyMap_comp_extClass and cohomologyMap_comp_mk₀ naturality identities; the restriction map for $F'$ and $Q$ in degree $q-1$ is an isomorphism by the induction hypothesis.",
-      "uses": [
-        "lem-weil-pbc-ext-long-exact-second-variable",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-torsion-etale-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem Tag 09ZI (59.82.7), proof: short exact sequence and comparison diagram"
-      }
-    },
-    {
-      "text": "For injectivity, let $\\xi\\in H^q(X_{\\Et},F)$ with $z^*\\xi=0$. The pair $(A,0)$ is henselian ($B/0B=B$ for every finite $A$-algebra $B$), so affine Gabber effacement [lemma-weil-pbc-gabber-effacement] applied to $(A,0)$ and the class $\\xi$ gives a monomorphism of torsion sheaves $F\\hookrightarrow F'$ whose image kills $\\xi$ in $H^q(X_{\\Et},F')$; let $Q$ be its cokernel. By exactness of the upper long exact sequence of the ladder [lem-weil-pbc-ext-long-exact-second-variable], together with the already proved local cohomologyMap_comp_extClass and cohomologyMap_comp_mk₀ naturality identities, $\\xi=\\delta(\\eta)$ for some $\\eta\\in H^{q-1}(X_{\\Et},Q)$. In the lower sequence, $\\delta(z^*\\eta)=z^*\\xi=0$ (commutativity of the ladder), so $z^*\\eta$ is the image of some $\\alpha\\in H^{q-1}(Z_{\\Et},z^{-1}F')$; by the induction hypothesis (surjectivity in degree $q-1$ for the torsion sheaf $F'$) $\\alpha=z^*\\beta$ with $\\beta\\in H^{q-1}(X_{\\Et},F')$, and then $z^*(\\eta-\\bar\\beta)=0$ where $\\bar\\beta$ is the image of $\\beta$ in $H^{q-1}(X_{\\Et},Q)$ (commutativity again); by the induction hypothesis (injectivity in degree $q-1$ for $Q$) $\\eta=\\bar\\beta$, hence $\\xi=\\delta(\\eta)=\\delta(\\bar\\beta)=0$ by exactness of the upper sequence. (Rewritten by the lead at the spot check, 2026-10-10: the delivered text ended with a garbled sentence; the argument is Stacks' proof of 09ZI.)",
-      "uses": [
-        "lemma-weil-pbc-gabber-effacement",
-        "lem-weil-pbc-ext-long-exact-second-variable"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem Tag 09ZI, proof: Injectivity for $\\mathcal F$ (59.82.7)"
-      }
-    },
-    {
-      "text": "For surjectivity, let $\\eta\\in H^q(Z_{\\Et},z^{-1}F)$. Apply the same effacement lemma to the class on $Z$ to obtain a monomorphism $F\\hookrightarrow F'$ whose image of $\\eta$ is zero, with cokernel $Q$. Exactness of the lower long exact sequence writes $\\eta$ as the image of a class in $H^{q-1}(Z_{\\Et},z^{-1}Q)$. By the induction isomorphism for $Q$, lift this class to $H^{q-1}(X_{\\Et},Q)$; exactness of the upper sequence then produces a class in $H^q(X_{\\Et},F)$ mapping to $\\eta$. This proves surjectivity, and induction over all $q$ proves the comparison.",
-      "uses": [
-        "lemma-weil-pbc-gabber-effacement",
-        "lem-weil-pbc-ext-long-exact-second-variable"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
-        "place": "Theorem Tag 09ZI, proof: Surjectivity for $\\mathcal F$ (59.82.7)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Gabber's affine comparison for a henselian pair",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], $X=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}(A/I)$ and $z:Z\\to X$ the closed immersion. For every torsion abelian sheaf $F$ on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf] the pullback map [def-weil-pbc-cohomology-pullback]\n$$\nz^*:H^q(X_{\\Et},F)\\longrightarrow H^q(Z_{\\Et},z^{-1}F)\n$$\nis an isomorphism for every $q\\ge0$ ($H^q$ etale cohomology [def-weil-pbc-etale-cohomology], $z^{-1}$ the inverse image [def-weil-pbc-inverse-image]). Only the pair form is asserted: for an affine scheme of finite type over $\\operatorname{Spec}A$ in place of $\\operatorname{Spec}A$ the comparison with the closed fibre is false (see the report of lemma-weil-pbc-injective-restriction-acyclicity and the Lean docstring of AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09ZI (theorem-gabber), Section 59.91 (section-gabber-affine-proper)",
+  "lean": "slopmaster2: AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing, WeilConjectures/SixFunctors/Etale/Gabber.lean:227 (stated for torsion sheaves of Λ-modules; reaches sorry in bijective_cohomologyMap_zero_of_henselianRing and exists_mono_map_eq_zero_of_henselianRing)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For degree zero identify the range of Spec(A/I)→Spec A with V(I). Every finite cover p:X′→Spec A is proper; Stein connectedness gives the required nonempty connected intersections of irreducible closed subsets with p⁻¹(V(I)). Apply the abelian finite-cover connectedness criterion to obtain an isomorphism on global sections. The proved formula cohomologyMap_zero_eq_globalSectionsUpperStarMap and the canonical H.equiv₀/global-sections bijections conjugate it to the degree-zero cohomology bijection.",
+   "uses": [
     "lemma-weil-pbc-stein-connectedness",
     "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix $q>0$ and assume the comparison is bijective in every smaller degree, for every torsion sheaf. Choose a monomorphism $\\iota:F\\hookrightarrow F'$ of torsion sheaves and write $Q=\\operatorname{coker}(\\iota)$. The resulting short exact sequence $0\\to F\\to F'\\to Q\\to0$ and its inverse image along $z$ give a commutative diagram of long exact cohomology sequences on $X$ and $Z$ [lem-weil-pbc-ext-long-exact-second-variable], together with the already proved local cohomologyMap_comp_extClass and cohomologyMap_comp_mk₀ naturality identities; the restriction map for $F'$ and $Q$ in degree $q-1$ is an isomorphism by the induction hypothesis.",
+   "uses": [
     "lem-weil-pbc-ext-long-exact-second-variable",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "lemma-weil-pbc-gabber-effacement"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "document": "Stacks Project",
-    "place": "09ZI induction; M2 affine degree-zero proof using 09ZG/09ZF and Stein connectedness, with Mathlib Ext exactness for the existing induction"
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI (59.82.7), proof: short exact sequence and comparison diagram"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Gabber affine analogue of proper base change: étale cohomology of henselian pair equals cohomology of closed subscheme",
-      "results": "isAffineHom_isStableUnderBaseChange, IsEtale.instIsStableUnderBaseChangeScheme, HasAffineProperty.iff_of_openCover, ... (none about cohomology)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Gabber: for a henselian pair (A,I) and a torsion étale sheaf, cohomology of Spec A equals cohomology of Spec A/I",
-      "results": "Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.subsingleton_h1Cotangent, StandardEtalePair.* (ring theory only)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn -i 'gabber\\|HenselianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ (and grep -rln HenselianRing)",
-      "results": "Gabber only in BBD citations of CategoryTheory/Triangulated/TStructure; HenselianRing only in RingTheory/Henselian.lean (definitions, IsAdicComplete.henselianRing); no etale cohomology of henselian pairs",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lemma-weil-pbc-injective-restriction-acyclicity",
-    "date": "2026-10-09"
+  {
+   "text": "For injectivity, let $\\xi\\in H^q(X_{\\Et},F)$ with $z^*\\xi=0$. The pair $(A,0)$ is henselian ($B/0B=B$ for every finite $A$-algebra $B$), so affine Gabber effacement [lemma-weil-pbc-gabber-effacement] applied to $(A,0)$ and the class $\\xi$ gives a monomorphism of torsion sheaves $F\\hookrightarrow F'$ whose image kills $\\xi$ in $H^q(X_{\\Et},F')$; let $Q$ be its cokernel. By exactness of the upper long exact sequence of the ladder [lem-weil-pbc-ext-long-exact-second-variable], together with the already proved local cohomologyMap_comp_extClass and cohomologyMap_comp_mk₀ naturality identities, $\\xi=\\delta(\\eta)$ for some $\\eta\\in H^{q-1}(X_{\\Et},Q)$. In the lower sequence, $\\delta(z^*\\eta)=z^*\\xi=0$ (commutativity of the ladder), so $z^*\\eta$ is the image of some $\\alpha\\in H^{q-1}(Z_{\\Et},z^{-1}F')$; by the induction hypothesis (surjectivity in degree $q-1$ for the torsion sheaf $F'$) $\\alpha=z^*\\beta$ with $\\beta\\in H^{q-1}(X_{\\Et},F')$, and then $z^*(\\eta-\\bar\\beta)=0$ where $\\bar\\beta$ is the image of $\\beta$ in $H^{q-1}(X_{\\Et},Q)$ (commutativity again); by the induction hypothesis (injectivity in degree $q-1$ for $Q$) $\\eta=\\bar\\beta$, hence $\\xi=\\delta(\\eta)=\\delta(\\bar\\beta)=0$ by exactness of the upper sequence. (Rewritten by the lead at the spot check, 2026-10-10: the delivered text ended with a garbled sentence; the argument is Stacks' proof of 09ZI.)",
+   "uses": [
+    "lemma-weil-pbc-gabber-effacement",
+    "lem-weil-pbc-ext-long-exact-second-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI, proof: Injectivity for $\\mathcal F$ (59.82.7)"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing",
-          "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-          "lines": [
-            233,
-            292
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing",
-          "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-          "lines": [
-            131,
-            139
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing",
-          "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-          "lines": [
-            216,
-            231
-          ],
-          "kind": "theorem",
-          "nodes": [
-            "lemma-weil-pbc-gabber-effacement"
-          ],
-          "below": true
-        }
-      ]
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-    "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing",
-    "branch": "slopmaster2",
-    "line": 243,
-    "declarations": [
-      "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
-  },
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "prop-weil-pbc-gabber-pair-comparison",
-    "worker": "stage1",
-    "summary": "Split the pair-form Gabber comparison by the proof of Stacks Tag 09ZI: degree zero via the existing affine degree-zero comparison, then induction on q using a torsion monomorphism with cokernel, the existing long-exact pullback ladder, and the existing affine effacement lemma for injectivity and surjectivity. The superseded relative finite-type statement remains excluded as documented in the statement."
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "group": "C",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the four steps against Stacks 09ZI (degree 0 via lemma-weil-pbc-etale-degree-zero; induction on q via effacement 09ZH = lemma-weil-pbc-gabber-effacement and the long-exact ladder): the diagram chases are Stacks' (injectivity: efface xi on X with the pair (A, 0), xi = delta(eta), z^* eta in the image of H^{q-1}(Z, F'), lift by surjectivity in degree q-1, conclude by injectivity in degree q-1 for Q; surjectivity: efface eta on Z, eta = delta(theta), lift theta by the induction); step 3's last sentence was garbled ('the restriction of xi is nonzero whenever the chosen class is nonzero') and is rewritten by L in the next commit; the C review names what it checked (statement, 09ZI proof, dependencies) and is accepted as the last of the old group's reviews"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "M2",
-    "result": "pass",
-    "landing": "20261012T033636-L-1481564",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "For surjectivity, let $\\eta\\in H^q(Z_{\\Et},z^{-1}F)$. Apply the same effacement lemma to the class on $Z$ to obtain a monomorphism $F\\hookrightarrow F'$ whose image of $\\eta$ is zero, with cokernel $Q$. Exactness of the lower long exact sequence writes $\\eta$ as the image of a class in $H^{q-1}(Z_{\\Et},z^{-1}Q)$. By the induction isomorphism for $Q$, lift this class to $H^{q-1}(X_{\\Et},Q)$; exactness of the upper sequence then produces a class in $H^q(X_{\\Et},F)$ mapping to $\\eta$. This proves surjectivity, and induction over all $q$ proves the comparison.",
+   "uses": [
+    "lemma-weil-pbc-gabber-effacement",
+    "lem-weil-pbc-ext-long-exact-second-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WANTED: literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 09ZI, proof: Surjectivity for $\\mathcal F$ (59.82.7)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-stein-connectedness",
+  "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-ext-long-exact-second-variable",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lemma-weil-pbc-gabber-effacement"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "09ZI induction; M2 affine degree-zero proof using 09ZG/09ZF and Stein connectedness, with Mathlib Ext exactness for the existing induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Gabber affine analogue of proper base change: étale cohomology of henselian pair equals cohomology of closed subscheme",
+   "results": "isAffineHom_isStableUnderBaseChange, IsEtale.instIsStableUnderBaseChangeScheme, HasAffineProperty.iff_of_openCover, ... (none about cohomology)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber: for a henselian pair (A,I) and a torsion étale sheaf, cohomology of Spec A equals cohomology of Spec A/I",
+   "results": "Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.subsingleton_h1Cotangent, StandardEtalePair.* (ring theory only)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'gabber\\|HenselianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ (and grep -rln HenselianRing)",
+   "results": "Gabber only in BBD citations of CategoryTheory/Triangulated/TStructure; HenselianRing only in RingTheory/Henselian.lean (definitions, IsAdicComplete.henselianRing); no etale cohomology of henselian pairs",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-injective-restriction-acyclicity",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      233,
+      292
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      131,
+      139
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      216,
+      231
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lemma-weil-pbc-gabber-effacement"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+  "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing",
+  "branch": "slopmaster2",
+  "line": 243,
+  "declarations": [
+   "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "prop-weil-pbc-gabber-pair-comparison",
+  "worker": "stage1",
+  "summary": "Split the pair-form Gabber comparison by the proof of Stacks Tag 09ZI: degree zero via the existing affine degree-zero comparison, then induction on q using a torsion monomorphism with cokernel, the existing long-exact pullback ladder, and the existing affine effacement lemma for injectivity and surjectivity. The superseded relative finite-type statement remains excluded as documented in the statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the four steps against Stacks 09ZI (degree 0 via lemma-weil-pbc-etale-degree-zero; induction on q via effacement 09ZH = lemma-weil-pbc-gabber-effacement and the long-exact ladder): the diagram chases are Stacks' (injectivity: efface xi on X with the pair (A, 0), xi = delta(eta), z^* eta in the image of H^{q-1}(Z, F'), lift by surjectivity in degree q-1, conclude by injectivity in degree q-1 for Q; surjectivity: efface eta on Z, eta = delta(theta), lift theta by the induction); step 3's last sentence was garbled ('the restriction of xi is nonzero whenever the chosen class is nonzero') and is rewritten by L in the next commit; the C review names what it checked (statement, 09ZI proof, dependencies) and is accepted as the last of the old group's reviews"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass.",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.exists_isFinite_cohomologyMap_eq_zero_of_henselianRing",
+   "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing"
+  ],
+  "sorry_after": []
+ }
 }

@@ -1,131 +1,136 @@
 {
-  "id": "lemma-weil-pbc-finite-stage-killing",
-  "blueprint": {
-    "is": "lemma-weil-pbc-finite-stage-killing",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Finite-stage killing of a class",
-  "statement": "Let $(T,T_0)$ be an affine henselian pair, let $F$ be torsion, and let $c\\in\nH^q(T_0,F|_{T_0})$ with $q>0$. Suppose $c$ vanishes after pullback to an\nintegral strictly local cover that is the inverse limit of finite, finitely\npresented covers $T_\\lambda\\to T$. Then $c$ already vanishes after pullback to\none $T_{\\lambda_0}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-finite-stage-killing.md",
-    "place": "node lemma-weil-pbc-finite-stage-killing, order 1125",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09ZD"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Obtain the full cohomology colimit cocone, its stage and limit isomorphisms, and compatible restriction maps r_j from exists_cofiltered_etale_cohomology_cocone.",
-      "uses": [
-        "lem-weil-pbc-cofiltered-etale-cohomology-cocone"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The vanishing hypothesis and injectivity of the limit comparison imply B_j₀(r_j₀(x))=B_j₀(0). Forgetting abelian groups preserves the small filtered colimit. Mathlib IsColimit.eq_iff′ therefore gives an arrow j₀→j in J opposite along which r_j₀(x) becomes zero. Compatibility of r gives r_j(x)=0; applying the stage isomorphism e_j proves π_j^*(x)=0.",
-      "uses": [
-        "def-weil-directed-colimit-abelian-groups"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-cofiltered-etale-cohomology-cocone",
-    "def-weil-directed-colimit-abelian-groups"
-  ],
-  "proof_origin": {
-    "by": "worker",
+ "id": "lemma-weil-pbc-finite-stage-killing",
+ "blueprint": {
+  "is": "lemma-weil-pbc-finite-stage-killing",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite-stage killing of a class",
+ "statement": "Let $(T,T_0)$ be an affine henselian pair, let $F$ be torsion, and let $c\\in\nH^q(T_0,F|_{T_0})$ with $q>0$. Suppose $c$ vanishes after pullback to an\nintegral strictly local cover that is the inverse limit of finite, finitely\npresented covers $T_\\lambda\\to T$. Then $c$ already vanishes after pullback to\none $T_{\\lambda_0}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-finite-stage-killing.md",
+  "place": "node lemma-weil-pbc-finite-stage-killing, order 1125",
+  "external": [
+   {
     "document": "Stacks Project",
-    "place": "09YQ followed by Mathlib CategoryTheory.Limits.IsColimit.eq_iff′; M2 stage-3 Lean proof"
+    "place": "Tag 09ZD"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the full cohomology colimit cocone, its stage and limit isomorphisms, and compatible restriction maps r_j from exists_cofiltered_etale_cohomology_cocone.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-etale-cohomology-cocone"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1125,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-etale-cohomology-continuity"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-etale-cohomology-continuity"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "In an affine henselian pair, if a positive-degree class $c$ dies on an\nintegral strictly-local cover $T_\\infty\\to T_0$ represented by a filtered\nsystem $\\{T_\\lambda\\}$ of finite finitely presented covers, then there exists\n$\\lambda_0$ such that the pullback of $c$ to $H^q(T_{\\lambda_0},F|)$ is zero.",
-      "proof": "Represent the chosen cochain and its null-homotopy on the limit by finitely\nmany sections. Each section and each equality occurs at some index because\nthe system is filtered and the etale site is quasi-compact and quasi-separated.\nChoose one index dominating those finitely many indices. The descended\ncochain and the descended null-homotopy satisfy the coboundary equation at a\nfurther finite index; replacing by that index gives $\\lambda_0$. This exposes the indexing and\nvanishing witness requested by Tag `09ZD`.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit",
-          "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-          "lines": [
-            143,
-            160
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-    "declaration": "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit",
-    "branch": "slopmaster2",
-    "line": 153,
-    "declarations": [
-      "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "M2",
-    "result": "pass",
-    "landing": "20261012T033636-L-1481564",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "The vanishing hypothesis and injectivity of the limit comparison imply B_j₀(r_j₀(x))=B_j₀(0). Forgetting abelian groups preserves the small filtered colimit. Mathlib IsColimit.eq_iff′ therefore gives an arrow j₀→j in J opposite along which r_j₀(x) becomes zero. Compatibility of r gives r_j(x)=0; applying the stage isomorphism e_j proves π_j^*(x)=0.",
+   "uses": [
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cofiltered-etale-cohomology-cocone",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "09YQ followed by Mathlib CategoryTheory.Limits.IsColimit.eq_iff′; M2 stage-3 Lean proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1125,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-etale-cohomology-continuity"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-etale-cohomology-continuity"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "In an affine henselian pair, if a positive-degree class $c$ dies on an\nintegral strictly-local cover $T_\\infty\\to T_0$ represented by a filtered\nsystem $\\{T_\\lambda\\}$ of finite finitely presented covers, then there exists\n$\\lambda_0$ such that the pullback of $c$ to $H^q(T_{\\lambda_0},F|)$ is zero.",
+   "proof": "Represent the chosen cochain and its null-homotopy on the limit by finitely\nmany sections. Each section and each equality occurs at some index because\nthe system is filtered and the etale site is quasi-compact and quasi-separated.\nChoose one index dominating those finitely many indices. The descended\ncochain and the descended null-homotopy satisfy the coboundary equation at a\nfurther finite index; replacing by that index gives $\\lambda_0$. This exposes the indexing and\nvanishing witness requested by Tag `09ZD`.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      143,
+      160
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+  "declaration": "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit",
+  "branch": "slopmaster2",
+  "line": 153,
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass.",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.exists_isFinite_cohomologyMap_eq_zero_of_henselianRing",
+   "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing"
+  ],
+  "sorry_after": []
+ }
 }

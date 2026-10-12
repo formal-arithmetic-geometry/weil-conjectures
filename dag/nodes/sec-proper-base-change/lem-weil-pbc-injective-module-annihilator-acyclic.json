@@ -1,0 +1,206 @@
+{
+ "id": "lem-weil-pbc-injective-module-annihilator-acyclic",
+ "kind": "statement",
+ "title": "Acyclicity of the annihilator of an integer in an injective module sheaf",
+ "statement": "Let $X$ be any scheme [def-weil-pbc-scheme-conventions] and $\\Lambda$ any commutative ring. Let $J$ be an injective object in the category of sheaves of $\\Lambda$-modules on $X_{\\acute et}$ [def-weil-pbc-etale-sheaves]. For $n>0$ put $E=\\ker(n\\operatorname{id}_J)$, a genuine kernel in this abelian category. The underlying abelian sheaf [def-weil-pbc-abelian-etale-sheaves] satisfies $H^q(X,E)=0$ for every $q>0$ [def-weil-pbc-etale-cohomology]. This is on X itself and asserts no restriction acyclicity.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03FD, proof, and Tag 03FC; quotient-ring restriction/coextension adjunction",
+  "url": "https://stacks.math.columbia.edu/tag/03FD"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Put r=(n : Λ), R=Λ/(r), and K=coextendScalars(Λ→R)(I). Use the existing Sheaf.restrictCoextendScalarsAdj: restriction of scalars preserves monomorphisms and hence its right adjoint sends the injective I to an injective R-module sheaf K. No regularity of r is needed.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the short complex with first object Res(K), counit f, and second map r id_I, using the zero-composite proof of the existing ModuleCat.coextendQuotientShortComplex sectionwise. ModuleCat.exact_coextendQuotientShortComplex and mono_coextendQuotientShortComplex_f apply sectionwise without any nonzerodivisor hypothesis. Evaluation detects presheaf homology, so the presheaf sequence is exact and f is monic. Exact sheafification transports exactness back to sheaves. ShortComplex.Exact.fIsKernel then identifies Res(K) with kernel(r id_I) by uniqueness of kernels.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved subsingleton_H_underlying_of_injective_module to the injective R-module sheaf K. Its underlying abelian sheaf is definitionally the one underlying Res(K). Transport the resulting subsingleton through the kernel isomorphism, the coefficient-forgetful functor, and functorH. Finally Nat.cast_smul_eq_nsmul identifies r id_I with n • id_I. This works also for n=0, though the unchanged public statement requires n>0; n=1, zero rings and empty schemes are included.",
+   "uses": [
+    "lem-weil-pbc-injective-module-sheaf-H-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-injective-module-sheaf-H-acyclic",
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 03FD, proof, and Tag 03FC; quotient-ring restriction/coextension adjunction; N2 second reading closes the theorem using the existing sheaf coextension adjunction, quotient counit exactness, kernel uniqueness and injective module acyclicity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion|pushout",
+   "results": [
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+    "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+    "Mathlib/CategoryTheory/Abelian/CommSq.lean"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.mono_pushout_of_mono_f",
+   "results": [
+    "CategoryTheory.Abelian.mono_pushout_of_mono_f"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsion etale sheaf cohomology class on an affine closed subscheme can be killed by a monomorphism into another torsion sheaf",
+   "results": [
+    "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+    "Algebra.etaleLocus_eq_compl_support",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+    "TopCat.Presheaf.instMonoCommRingCatToTotalQuotientPresheafPresheaf",
+    "AlgebraicGeometry.exists_lift_of_germInjective",
+    "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+    "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The annihilator of a positive integer in an injective module sheaf has zero positive cohomology",
+   "results": [
+    "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+    "CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex",
+    "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero",
+    "CochainComplex.cm5b.instInjectiveXIntI",
+    "CochainComplex.isKInjective_of_injective",
+    "CochainComplex.isKInjective_of_injective_aux",
+    "groupCohomology.instMonoModuleCatFShortComplexH0",
+    "Rep.isZero_Tor_succ_of_projective"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective",
+   "results": [
+    "CategoryTheory.Injective",
+    "CategoryTheory.Injective.instOfNonempty",
+    "CategoryTheory.Limits.IsZero.injective",
+    "CategoryTheory.Injective.injective_under",
+    "CategoryTheory.InjectivePresentation.injective",
+    "CategoryTheory.Injective.instOppositeOpOfProjective",
+    "CategoryTheory.Injective.instProjectiveOppositeOp",
+    "CategoryTheory.Injective.injective_iff_projective_op"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*nsmul|Henselian.*cohomology|cohomology.*henselian",
+   "results": [],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of an injective sheaf of modules vanishes in positive degree",
+   "results": [],
+   "date": "2026-10-12",
+   "available": false,
+   "note": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian pair restriction on cohomology of torsion abelian sheaves",
+   "results": [],
+   "date": "2026-10-12",
+   "available": false,
+   "note": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Gabber",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "via": [
+    "lemma-weil-pbc-gabber-effacement"
+   ],
+   "place": "Acyclicity of E=ker(n id_J) in the replacement effacement route"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveModuleAnnihilatorAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveModuleAnnihilatorAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Etale.subsingleton_H_kernel_nsmul_injective_module",
+  "statement": "theorem subsingleton_H_kernel_nsmul_injective_module (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] (n : ℕ) (_hn : 0 < n) (q : ℕ) (hq : 0 < q) : Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (kernel (n • 𝟙 I))) q)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass."
+ }
+}

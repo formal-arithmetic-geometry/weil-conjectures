@@ -1,238 +1,233 @@
 {
-  "id": "lemma-weil-pbc-constructible-approximation",
-  "blueprint": {
-    "is": "lemma-weil-pbc-constructible-approximation",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "A cohomology class of a torsion sheaf comes from a constructible sheaf",
-  "statement": "Let $X$ be a quasi-compact and quasi-separated scheme and $i:Z\\to X$ a morphism of schemes with $Z$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], [def-pc-scheme] (the cases used are $Z=X$, $i=\\mathrm{id}_X$, and $i$ a closed immersion). Write $i^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Z_{\\Et})$ for the inverse image of abelian sheaves on the small etale sites [def-weil-pbc-inverse-image], [def-weil-pbc-abelian-etale-sheaves], $H^q(Z_{\\Et},-)$ for etale cohomology [def-weil-pbc-etale-cohomology] and, for a morphism $\\varphi$ of abelian sheaves on $Z_{\\Et}$, $H^q(\\varphi)$ for the induced map of [lem-weil-pbc-cohomology-pullback-functorial]; for a sheaf of modules, $i^{-1}$ and $H^q$ are taken of its underlying abelian sheaf. Let $q\\ge0$.\n(1) (Torsion abelian sheaves.) Let $F$ be a torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf] and $\\xi\\in H^q(Z_{\\Et},i^{-1}F)$. Then there are an integer $n\\ge1$, a sheaf $G$ of $(\\mathbf Z/n)_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category] which is constructible [def-weil-pbc-etale-constructible-sheaf] (with $\\Lambda=\\mathbf Z/n$; so $G$ is a torsion constructible abelian sheaf: finite stalks, killed by $n$), a morphism $u:G\\to F$ of abelian sheaves, and a class $\\zeta\\in H^q(Z_{\\Et},i^{-1}G)$ with $H^q(i^{-1}u)(\\zeta)=\\xi$.\n(2) (Sheaves of modules over a finite ring.) Let $\\Lambda$ be a finite commutative ring, $F$ a sheaf of $\\Lambda_X$-modules on $X_{\\Et}$ and $\\xi\\in H^q(Z_{\\Et},i^{-1}F)$. Then there are a constructible sheaf $G$ of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], a morphism $u:G\\to F$ of sheaves of $\\Lambda_X$-modules and a class $\\zeta\\in H^q(Z_{\\Et},i^{-1}G)$ with $H^q(i^{-1}u)(\\zeta)=\\xi$.\n(For $Z=X$, $i=\\mathrm{id}_X$, identified with the identity functor, this says that $\\xi\\in H^q(X_{\\Et},F)$ lies in the image of $H^q(X_{\\Et},G)\\to H^q(X_{\\Et},F)$. The map $u$ cannot in general be taken to be a monomorphism, i.e. $G$ cannot be taken to be a constructible subsheaf of $F$, when $X$ is not Noetherian: see the split report.)",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), line 14901, proof, first sentence: 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map G -> F with G a constructible abelian sheaf and xi coming from an element zeta of H^q(Z, G|_Z)'; replaces the imported blueprint statement (blueprint file sk-thm-p1/lemma-weil-pbc-constructible-approximation.md, order 1126)"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-scheme",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-etale-constructible-sheaf"
-  ],
-  "proof": [
-    {
-      "text": "For part (2), use the natural comparison of module inverse image and abelian inverse image. Apply its cohomology natural isomorphism to send ξ to a class in the underlying abelian sheaf of i⁻¹_Mod F. The constructible restriction class theorem supplies G, its constructibility witness, a:G→F and a stage class z with H^q(U(i⁻¹_Mod a))(z) equal to that transported class.",
-      "uses": [
-        "lem-weil-pbc-etale-module-pullback-forget-naturality",
-        "lem-weil-pbc-constructible-restriction-class"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The constructible restriction theorem records a finite locally closed stratification and finite-value trivializations on its strata. Use the same strata as Scheme.Stratification and apply finite_locally_constant_module_values_iff on each stratum. This proves the source-library IsConstructibleSheaf predicate used by Gabber, without changing the meaning of constructibility.",
-      "uses": [
-        "def-weil-pbc-etale-constructible-sheaf",
-        "lem-weil-pbc-finite-locally-constant-module-values"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Whisker the inverse-image natural isomorphism with Sheaf.functorH in degree q. Naturality at a gives H^q(i⁻¹_Ab U(a))(e_G(z)) = e_F(H^q(U(i⁻¹_Mod a))(z)). Substitute the equality for z and cancel e_F with its inverse. Thus the class e_G(z) maps to ξ. This proves part (2) and is the complete proof of exists_isConstructibleSheaf_hom_of_henselianRing in Gabber. Parts (1) below remain the natural-language torsion-abelian argument; the existing Lean declaration represents only part (2).",
-      "uses": [
-        "lem-weil-pbc-etale-module-pullback-forget-naturality"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "*Part (1): $F$ is the filtered union of the $F[n]$, and $\\xi$ comes from some $F[n]$.* $F$ is torsion, so by definition [def-weil-pbc-torsion-etale-sheaf] the subsheaves $F[n]=\\ker(n:F\\to F)$, indexed by the positive integers ordered by divisibility (a directed set), with the inclusions $j_n:F[n]\\hookrightarrow F$, form a colimit cocone $(F,(j_n))$ in $\\Ab(X_{\\Et})$ ($c_F$ is an isomorphism). As in step 2, $i^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $(i^{-1}F,(i^{-1}j_n))$ is a colimit cocone of the directed system $i^{-1}F[n]$, and [lem-weil-pbc-cohomology-filtered-colimit] on the quasi-compact and quasi-separated $Z$ makes $\\varinjlim_nH^q(Z_{\\Et},i^{-1}F[n])\\to H^q(Z_{\\Et},i^{-1}F)$, induced by the $H^q(i^{-1}j_n)$, bijective. Every element of a directed colimit of abelian groups has a representative at some stage [def-weil-directed-colimit-abelian-groups]; so there are $n\\ge1$ and $\\xi_n\\in H^q(Z_{\\Et},i^{-1}F[n])$ with $H^q(i^{-1}j_n)(\\xi_n)=\\xi$.",
-      "uses": [
-        "def-weil-pbc-torsion-etale-sheaf",
-        "lem-weil-pbc-inverse-image-preserves-colimits",
-        "lem-weil-pbc-cohomology-filtered-colimit",
-        "def-weil-directed-colimit-abelian-groups",
-        "lem-weil-pbc-cohomology-pullback-functorial"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03SA (lemma-torsion-colimit-constructible), line 12216, part (3) and the proof of part (2): 'First write F = union F[n] ... view F[n] as a sheaf of Z/nZ-modules and apply (3)'"
-      }
-    },
-    {
-      "text": "*Part (1): apply part (2) with $\\Lambda=\\mathbf Z/n$.* The abelian sheaf $F[n]$ is killed by $n$, so it carries a (unique) structure of sheaf of $(\\mathbf Z/n)_X$-modules extending its abelian structure [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] (2), and its underlying abelian sheaf is $F[n]$. Part (2) (steps 1-3), applied to $X$, $i$, the finite ring $\\mathbf Z/n$, this module sheaf and $\\xi_n$, gives a constructible sheaf $G$ of $(\\mathbf Z/n)_X$-modules, a $(\\mathbf Z/n)_X$-linear map $u':G\\to F[n]$ and $\\zeta\\in H^q(Z_{\\Et},i^{-1}G)$ with $H^q(i^{-1}u')(\\zeta)=\\xi_n$. Put $u=j_n\\circ u':G\\to F$, a morphism of abelian sheaves. Then $H^q(i^{-1}u)(\\zeta)=H^q(i^{-1}j_n)(H^q(i^{-1}u')(\\zeta))=H^q(i^{-1}j_n)(\\xi_n)=\\xi$: $i^{-1}$ is a functor [def-weil-pbc-inverse-image], and $H^q$ is functorial in the sheaf, since if $\\tilde\\varphi,\\tilde\\psi$ are lifts of $\\varphi,\\psi$ to K-injective resolutions then $\\tilde\\psi\\circ\\tilde\\varphi$ lifts $\\psi\\circ\\varphi$, and $H^q(-)$ does not depend on the lift [lem-weil-pbc-cohomology-pullback-functorial]. This proves (1). (Stacks applies 03SA(2), whose proof is exactly the passage $F=\\bigcup_nF[n]$ followed by 03SA(3); taking the two colimits one after the other avoids assembling one index category, as in [lem-weil-pbc-curve-constructible-reduction] step 5.)",
-      "uses": [
-        "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
-        "def-weil-pbc-inverse-image",
-        "lem-weil-pbc-cohomology-pullback-functorial",
-        "def-weil-pbc-etale-constructible-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 03SA (lemma-torsion-colimit-constructible), line 12216, part (3) and the proof of part (2): 'First write F = union F[n] ... view F[n] as a sheaf of Z/nZ-modules and apply (3)'"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lemma-weil-pbc-constructible-approximation",
+ "blueprint": {
+  "is": "lemma-weil-pbc-constructible-approximation",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "A cohomology class of a torsion sheaf comes from a constructible sheaf",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme and $i:Z\\to X$ a morphism of schemes with $Z$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], [def-pc-scheme] (the cases used are $Z=X$, $i=\\mathrm{id}_X$, and $i$ a closed immersion). Write $i^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Z_{\\Et})$ for the inverse image of abelian sheaves on the small etale sites [def-weil-pbc-inverse-image], [def-weil-pbc-abelian-etale-sheaves], $H^q(Z_{\\Et},-)$ for etale cohomology [def-weil-pbc-etale-cohomology] and, for a morphism $\\varphi$ of abelian sheaves on $Z_{\\Et}$, $H^q(\\varphi)$ for the induced map of [lem-weil-pbc-cohomology-pullback-functorial]; for a sheaf of modules, $i^{-1}$ and $H^q$ are taken of its underlying abelian sheaf. Let $q\\ge0$.\n(1) (Torsion abelian sheaves.) Let $F$ be a torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf] and $\\xi\\in H^q(Z_{\\Et},i^{-1}F)$. Then there are an integer $n\\ge1$, a sheaf $G$ of $(\\mathbf Z/n)_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category] which is constructible [def-weil-pbc-etale-constructible-sheaf] (with $\\Lambda=\\mathbf Z/n$; so $G$ is a torsion constructible abelian sheaf: finite stalks, killed by $n$), a morphism $u:G\\to F$ of abelian sheaves, and a class $\\zeta\\in H^q(Z_{\\Et},i^{-1}G)$ with $H^q(i^{-1}u)(\\zeta)=\\xi$.\n(2) (Sheaves of modules over a finite ring.) Let $\\Lambda$ be a finite commutative ring, $F$ a sheaf of $\\Lambda_X$-modules on $X_{\\Et}$ and $\\xi\\in H^q(Z_{\\Et},i^{-1}F)$. Then there are a constructible sheaf $G$ of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-etale-constructible-sheaf], a morphism $u:G\\to F$ of sheaves of $\\Lambda_X$-modules and a class $\\zeta\\in H^q(Z_{\\Et},i^{-1}G)$ with $H^q(i^{-1}u)(\\zeta)=\\xi$.\n(For $Z=X$, $i=\\mathrm{id}_X$, identified with the identity functor, this says that $\\xi\\in H^q(X_{\\Et},F)$ lies in the image of $H^q(X_{\\Et},G)\\to H^q(X_{\\Et},F)$. The map $u$ cannot in general be taken to be a monomorphism, i.e. $G$ cannot be taken to be a constructible subsheaf of $F$, when $X$ is not Noetherian: see the split report.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), line 14901, proof, first sentence: 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map G -> F with G a constructible abelian sheaf and xi coming from an element zeta of H^q(Z, G|_Z)'; replaces the imported blueprint statement (blueprint file sk-thm-p1/lemma-weil-pbc-constructible-approximation.md, order 1126)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For part (2), use the natural comparison of module inverse image and abelian inverse image. Apply its cohomology natural isomorphism to send ξ to a class in the underlying abelian sheaf of i⁻¹_Mod F. The constructible restriction class theorem supplies G, its constructibility witness, a:G→F and a stage class z with H^q(U(i⁻¹_Mod a))(z) equal to that transported class.",
+   "uses": [
     "lem-weil-pbc-etale-module-pullback-forget-naturality",
-    "lem-weil-pbc-constructible-restriction-class",
+    "lem-weil-pbc-constructible-restriction-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructible restriction theorem records a finite locally closed stratification and finite-value trivializations on its strata. Use the same strata as Scheme.Stratification and apply finite_locally_constant_module_values_iff on each stratum. This proves the source-library IsConstructibleSheaf predicate used by Gabber, without changing the meaning of constructibility.",
+   "uses": [
     "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the inverse-image natural isomorphism with Sheaf.functorH in degree q. Naturality at a gives H^q(i⁻¹_Ab U(a))(e_G(z)) = e_F(H^q(U(i⁻¹_Mod a))(z)). Substitute the equality for z and cancel e_F with its inverse. Thus the class e_G(z) maps to ξ. This proves part (2) and is the complete proof of exists_isConstructibleSheaf_hom_of_henselianRing in Gabber. Parts (1) below remain the natural-language torsion-abelian argument; the existing Lean declaration represents only part (2).",
+   "uses": [
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "*Part (1): $F$ is the filtered union of the $F[n]$, and $\\xi$ comes from some $F[n]$.* $F$ is torsion, so by definition [def-weil-pbc-torsion-etale-sheaf] the subsheaves $F[n]=\\ker(n:F\\to F)$, indexed by the positive integers ordered by divisibility (a directed set), with the inclusions $j_n:F[n]\\hookrightarrow F$, form a colimit cocone $(F,(j_n))$ in $\\Ab(X_{\\Et})$ ($c_F$ is an isomorphism). As in step 2, $i^{-1}$ preserves colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $(i^{-1}F,(i^{-1}j_n))$ is a colimit cocone of the directed system $i^{-1}F[n]$, and [lem-weil-pbc-cohomology-filtered-colimit] on the quasi-compact and quasi-separated $Z$ makes $\\varinjlim_nH^q(Z_{\\Et},i^{-1}F[n])\\to H^q(Z_{\\Et},i^{-1}F)$, induced by the $H^q(i^{-1}j_n)$, bijective. Every element of a directed colimit of abelian groups has a representative at some stage [def-weil-directed-colimit-abelian-groups]; so there are $n\\ge1$ and $\\xi_n\\in H^q(Z_{\\Et},i^{-1}F[n])$ with $H^q(i^{-1}j_n)(\\xi_n)=\\xi$.",
+   "uses": [
     "def-weil-pbc-torsion-etale-sheaf",
     "lem-weil-pbc-inverse-image-preserves-colimits",
     "lem-weil-pbc-cohomology-filtered-colimit",
     "def-weil-directed-colimit-abelian-groups",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
-    "def-weil-pbc-inverse-image"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "09ZE first sentence, with 03SA(3), 03Q5: finite-ring class approximation via the existing constructible-restriction theorem, natural coefficient comparison and finite-value constructibility criterion. Original torsion-abelian part (1) retained."
+    "place": "Lemma 03SA (lemma-torsion-colimit-constructible), line 12216, part (3) and the proof of part (2): 'First write F = union F[n] ... view F[n] as a sheaf of Z/nZ-modules and apply (3)'"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "torsion etale sheaf on quasi-compact quasi-separated scheme is filtered colimit of constructible sheaves; cohomology class comes from a constructible sheaf",
-      "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), AlgebraicGeometry.Scheme.Modules.instHasColimits (Mathlib.AlgebraicGeometry.Modules.Sheaf), CategoryTheory.Sheaf.isColimitSheafifyCocone, Sheaf.instHasColimitsOfShape (Mathlib.CategoryTheory.Sites.Limits), SheafOfModules.Presentation.isColimit: existence of colimits of sheaves only; nothing on constructible etale sheaves or on cohomology and filtered colimits",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "every cohomology class of a torsion etale sheaf on a quasi-compact quasi-separated scheme comes from a constructible sheaf mapping to it",
-      "results": "CategoryTheory.Sheaf.H, Sheaf.cohomologyPresheaf, Sheaf.cohomologyPresheafFunctor, Sheaf.instAddCommGroupH (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): sheaf cohomology as Ext only; AlgebraicGeometry.exists_of_res_eq_of_qcqs(_of_top) (Morphisms.QuasiSeparated): Zariski sections; Algebra.etaleLocus_eq_compl_support: unrelated",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Topology.IsConstructible; and CategoryTheory.Sheaf.H, CategoryTheory.IsFiltered",
-      "results": "Topology.IsConstructible and its API (Mathlib.Topology.Constructible): constructible subsets of a space only; the second query: no results (no statement relating sheaf cohomology and filtered diagrams)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rlni constructible Mathlib/; grep -n 'def\\|lemma\\|theorem' Mathlib/AlgebraicGeometry/Sites/{Etale,ConstantSheaf,ElladicCohomology,SheafQuasiCompact}.lean; grep -rni 'constructible\\|torsion' Mathlib/AlgebraicGeometry/Sites; grep -rn colimit Mathlib/CategoryTheory/Sites/SheafCohomology/",
-      "results": "constructible only for subsets (Topology/Constructible.lean, Topology/Spectral/ConstructibleTopology.lean, RingTheory/Spectrum/Prime/{ConstructibleSet,Chevalley,ChevalleyComplexity,Topology}.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean); AlgebraicGeometry/Sites/Etale.lean has the etale (pre)topology, smallEtaleTopology and geometric fibre points, nothing on constructible or torsion sheaves; SheafCohomology/{Basic,Cech,MayerVietoris}.lean have no colimit statement. Mathlib has no constructible etale sheaves.",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1126,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "lemma-weil-pbc-finite-stage-killing"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-constructible-complexes"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "For a torsion sheaf $F$ on an affine henselian pair and a fixed class\n$c\\in H^q(T_0,F_0)$, there is a quasi-compact etale neighbourhood $U\\to T$\nand a constructible sheaf $C$ on $U$ with a monomorphism $C\\hookrightarrow F|_U$\nthrough which a cocycle representing $c$ factors.",
-      "proof": "Choose a split etale hypercover $U_\\bullet\\to T_0$ whose $(q+1)$-skeleton is\nfinite and quasi-compact and a cocycle $c\\in\\Gamma(U_q,F_0)$. Write its\nfinite components as $U_{r,a}$ for $0\\leq r\\leq q+1$ and denote all face and\ndegeneracy maps by $\\partial^i_{r,a}$ and $s^i_{r,a}$. Choose quasi-compact\netale lifts $\\widetilde U_{r,a}\\to U\\to T$ and sections of $F$ representing\nthe finitely many sections in $c$ and in the equations $dc=0$.\n\nEnlarge the finite list by applying every $\\partial^i_{r,a}$ and\n$s^i_{r,a}$ to every chosen section. The simplicial identities are now a\nfinite list of equalities on finite fibre products. Shrink the lifts once so\nthat all equalities hold on the closed fibre and all maps factor through one\nquasi-compact etale neighbourhood $U\\to T$. On each lifted component let\n$C_{r,a}$ be the subsheaf of $F|_U$ generated by this finite list. The\nequalizer loci of pairs of generators give a finite stratification on which\n$C_{r,a}$ is locally constant with finite fibres, hence constructible.\n\nClosure under all displayed face and degeneracy maps gives a simplicial\nconstructible subsheaf $C_\\bullet\\subseteq F|_{U_\\bullet}$. The cocycle lies\nin $\\Gamma(U_q,C_q)$ and the equation $dc=0$ remains true in $C_\\bullet$.\nTake the image of the augmentation $C_0\\to F|_U$ and its finite iterated\nextensions through degree $q+1$, then sheafify; this gives a constructible\nsubsheaf $C\\hookrightarrow F|_U$ through which $c$ factors. Monicity is\nchecked at a geometric stalk: a finite combination of the generators maps to\nzero in $F$ precisely when it is already zero in the generated subsheaf.\nThus every face map, cocycle, and equality used by the selected class is\ncontained in $C$.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing",
-          "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-          "lines": [
-            162,
-            194
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lemma-weil-pbc-constructible-approximation",
-    "worker": "stage1",
-    "summary": "Statement rewritten from the vague imported one ('a cocycle factors, after a quasi-compact etale neighbourhood, through a monomorphism C -> F with C constructible torsion') to the form Stacks uses in the proof of 09ZE (efface-cohomology-on-closed-by-finite-cover, the lemma behind Gabber's theorem 09ZH-area): for qcqs X, a morphism i:Z->X with Z qcqs (Z=X or a closed subscheme), a torsion abelian F and xi in H^q(Z,i^{-1}F), there are n, a constructible Z/n-module sheaf G, a map u:G->F and zeta with H^q(i^{-1}u)(zeta)=xi; part (2) the same for sheaves of modules over a finite ring Lambda (the form the h1 user proves inline in its steps 2-3). The morphism i is included because 09ZE needs the class on the closed subscheme Z. The monomorphism of the imported statement (and of the brief's 'constructible subsheaf C of F') was dropped: it is false for non-Noetherian X. Counterexample: X=Spec(prod_N F_2) (a Stone space; every point closed; constructible subsets are clopen), x a non-principal ultrafilter point (closed, not open), F=x_* Z/2 (pushforward along the closed immersion of x), q=0, Z=X, xi=1 in H^0(X,F)=Z/2. H^0 of a subsheaf C -> F is injective, so xi in the image forces the section 1 into C(X); the stalks of F are Z/2 at x and 0 elsewhere, all generated by 1, so C=F. But F is not constructible: the stratum T containing x would be clopen, F|_T finite locally constant, so its support {x} would be open in T, hence in X. Stacks 09ZE itself only takes a map G -> F (the pushout F' = G' + _G F is mono since G -> G' is), so nothing downstream needs the mono; on Noetherian X images of constructible sheaves are constructible and the mono form holds. The imported proof (cocycle on a split hypercover, generated subsheaf) was replaced by the Stacks route: 03SA(3) (lem-weil-pbc-module-sheaf-colimit-constructible), forgetful and i^{-1} commute with colimits, 03Q5 (lem-weil-pbc-cohomology-filtered-colimit) on qcqs Z, an element of a filtered colimit comes from a stage (elementary), and for (1) F = colim F[n] by the definition of torsion, then (2) with Lambda=Z/n. No new nodes. stmt_deps: removed lemma-weil-pbc-finite-stage-killing (not a statement dependency; the old statement only pointed at its hypotheses) and def-weil-pbc-constructible-complexes (replaced by def-weil-pbc-etale-constructible-sheaf). Lean: AlgebraicGeometry.Etale.exists_isConstructibleSheaf_mono_of_henselianRing (WeilConjectures/SixFunctors/Etale/Gabber.lean:169, own sorry; docstring names this node) states the mono form for Spec A, (A,I) henselian, Z=Spec A/I; with the correct (constructible-strata) definition it is false by the counterexample above (I=0); with the defective IsConstructibleSheaf of coord/HUMAN.md it may hold, which is the defect again. Mathlib searched three ways: no constructible etale sheaves, no cohomology/filtered-colimit statement."
-  },
-  "tool_uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-  ],
-  "lean_candidates": [
-    {
-      "name": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_mono_of_henselianRing",
-      "file": "WeilConjectures/SixFunctors/Etale/Gabber.lean:169",
-      "status": "own sorry",
-      "note": "states the monomorphism form (constructible SUBsheaf), which is false for non-Noetherian A: A = ∏_N F_2, I = 0, F = x_* Z/2 at a non-principal ultrafilter point, q = 0, ξ = 1 (the support of a constructible sheaf is constructible, {x} is not). Not attached; see coord/HUMAN.md."
-    }
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "result": "accepted",
-    "note": "Statement rewritten (the imported sketch and the brief asked for a constructible SUBsheaf; false on non-Noetherian X: X = Spec ∏_N F_2, x a non-principal ultrafilter point, F = x_* Z/2, ξ = 1 ∈ H^0; L checked: the support of a constructible sheaf is constructible and {x} is not). Now: a morphism u: G → F from a constructible sheaf of Z/n- (resp. Λ-) modules with ξ in the image, on a qcqs Z → X; this is what Stacks 09ZE uses (pushout along a mono stays injective). Five steps: 03SA(3) via the merged module node, forgetful and i^{-1} preserve colimits (tool uses), cohomology commutes with filtered colimits on qcqs (03Q5, tool use), element at a stage (elementary, written out), F = ∪ F[n], and Z/n-structure. Checked. Users: lemma-weil-pbc-gabber-effacement (being split) and lemma-weil-pbc-constructible-finite-pushforward; the h1 node cites it only in blueprint_uses. Lean candidate recorded as false, not attached."
-  },
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.Gabber",
-    "declaration": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing",
-    "branch": "slopmaster2",
-    "line": 183,
-    "declarations": [
-      "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): exists_isConstructibleSheaf_mono_of_henselianRing (line 158, false as stated, coord/HUMAN.md) is gone upstream; its replacement exists_isConstructibleSheaf_hom_of_henselianRing (tagged for this node, sorry) asks only a morphism ι : C ⟶ F with C constructible and a class c' mapping to c (no monomorphism; its docstring gives the counterexample); citers that used a mono must be rechecked"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "M2",
-    "result": "pass",
-    "landing": "20261012T033636-L-1481564",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing",
-      "AlgebraicGeometry.Etale.exists_cohomologyMap_eq_zero_of_isLimit",
-      "AlgebraicGeometry.Etale.exists_isFinite_cohomologyMap_eq_zero_of_henselianRing",
-      "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.Etale.exists_isFinite_cohomologyMap_eq_zero_of_henselianRing",
-      "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing"
-    ]
+  {
+   "text": "*Part (1): apply part (2) with $\\Lambda=\\mathbf Z/n$.* The abelian sheaf $F[n]$ is killed by $n$, so it carries a (unique) structure of sheaf of $(\\mathbf Z/n)_X$-modules extending its abelian structure [lem-weil-pbc-sheaves-killed-by-n-zmod-modules] (2), and its underlying abelian sheaf is $F[n]$. Part (2) (steps 1-3), applied to $X$, $i$, the finite ring $\\mathbf Z/n$, this module sheaf and $\\xi_n$, gives a constructible sheaf $G$ of $(\\mathbf Z/n)_X$-modules, a $(\\mathbf Z/n)_X$-linear map $u':G\\to F[n]$ and $\\zeta\\in H^q(Z_{\\Et},i^{-1}G)$ with $H^q(i^{-1}u')(\\zeta)=\\xi_n$. Put $u=j_n\\circ u':G\\to F$, a morphism of abelian sheaves. Then $H^q(i^{-1}u)(\\zeta)=H^q(i^{-1}j_n)(H^q(i^{-1}u')(\\zeta))=H^q(i^{-1}j_n)(\\xi_n)=\\xi$: $i^{-1}$ is a functor [def-weil-pbc-inverse-image], and $H^q$ is functorial in the sheaf, since if $\\tilde\\varphi,\\tilde\\psi$ are lifts of $\\varphi,\\psi$ to K-injective resolutions then $\\tilde\\psi\\circ\\tilde\\varphi$ lifts $\\psi\\circ\\varphi$, and $H^q(-)$ does not depend on the lift [lem-weil-pbc-cohomology-pullback-functorial]. This proves (1). (Stacks applies 03SA(2), whose proof is exactly the passage $F=\\bigcup_nF[n]$ followed by 03SA(3); taking the two colimits one after the other avoids assembling one index category, as in [lem-weil-pbc-curve-constructible-reduction] step 5.)",
+   "uses": [
+    "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA (lemma-torsion-colimit-constructible), line 12216, part (3) and the proof of part (2): 'First write F = union F[n] ... view F[n] as a sheaf of Z/nZ-modules and apply (3)'"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-constructible-restriction-class",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "09ZE first sentence, with 03SA(3), 03Q5: finite-ring class approximation via the existing constructible-restriction theorem, natural coefficient comparison and finite-value constructibility criterion. Original torsion-abelian part (1) retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "torsion etale sheaf on quasi-compact quasi-separated scheme is filtered colimit of constructible sheaves; cohomology class comes from a constructible sheaf",
+   "results": "CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize (Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf), AlgebraicGeometry.Scheme.Modules.instHasColimits (Mathlib.AlgebraicGeometry.Modules.Sheaf), CategoryTheory.Sheaf.isColimitSheafifyCocone, Sheaf.instHasColimitsOfShape (Mathlib.CategoryTheory.Sites.Limits), SheafOfModules.Presentation.isColimit: existence of colimits of sheaves only; nothing on constructible etale sheaves or on cohomology and filtered colimits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every cohomology class of a torsion etale sheaf on a quasi-compact quasi-separated scheme comes from a constructible sheaf mapping to it",
+   "results": "CategoryTheory.Sheaf.H, Sheaf.cohomologyPresheaf, Sheaf.cohomologyPresheafFunctor, Sheaf.instAddCommGroupH (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): sheaf cohomology as Ext only; AlgebraicGeometry.exists_of_res_eq_of_qcqs(_of_top) (Morphisms.QuasiSeparated): Zariski sections; Algebra.etaleLocus_eq_compl_support: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible; and CategoryTheory.Sheaf.H, CategoryTheory.IsFiltered",
+   "results": "Topology.IsConstructible and its API (Mathlib.Topology.Constructible): constructible subsets of a space only; the second query: no results (no statement relating sheaf cohomology and filtered diagrams)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni constructible Mathlib/; grep -n 'def\\|lemma\\|theorem' Mathlib/AlgebraicGeometry/Sites/{Etale,ConstantSheaf,ElladicCohomology,SheafQuasiCompact}.lean; grep -rni 'constructible\\|torsion' Mathlib/AlgebraicGeometry/Sites; grep -rn colimit Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "constructible only for subsets (Topology/Constructible.lean, Topology/Spectral/ConstructibleTopology.lean, RingTheory/Spectrum/Prime/{ConstructibleSet,Chevalley,ChevalleyComplexity,Topology}.lean, AlgebraicGeometry/Morphisms/FinitePresentation.lean); AlgebraicGeometry/Sites/Etale.lean has the etale (pre)topology, smallEtaleTopology and geometric fibre points, nothing on constructible or torsion sheaves; SheafCohomology/{Basic,Cech,MayerVietoris}.lean have no colimit statement. Mathlib has no constructible etale sheaves.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1126,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "lemma-weil-pbc-finite-stage-killing"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For a torsion sheaf $F$ on an affine henselian pair and a fixed class\n$c\\in H^q(T_0,F_0)$, there is a quasi-compact etale neighbourhood $U\\to T$\nand a constructible sheaf $C$ on $U$ with a monomorphism $C\\hookrightarrow F|_U$\nthrough which a cocycle representing $c$ factors.",
+   "proof": "Choose a split etale hypercover $U_\\bullet\\to T_0$ whose $(q+1)$-skeleton is\nfinite and quasi-compact and a cocycle $c\\in\\Gamma(U_q,F_0)$. Write its\nfinite components as $U_{r,a}$ for $0\\leq r\\leq q+1$ and denote all face and\ndegeneracy maps by $\\partial^i_{r,a}$ and $s^i_{r,a}$. Choose quasi-compact\netale lifts $\\widetilde U_{r,a}\\to U\\to T$ and sections of $F$ representing\nthe finitely many sections in $c$ and in the equations $dc=0$.\n\nEnlarge the finite list by applying every $\\partial^i_{r,a}$ and\n$s^i_{r,a}$ to every chosen section. The simplicial identities are now a\nfinite list of equalities on finite fibre products. Shrink the lifts once so\nthat all equalities hold on the closed fibre and all maps factor through one\nquasi-compact etale neighbourhood $U\\to T$. On each lifted component let\n$C_{r,a}$ be the subsheaf of $F|_U$ generated by this finite list. The\nequalizer loci of pairs of generators give a finite stratification on which\n$C_{r,a}$ is locally constant with finite fibres, hence constructible.\n\nClosure under all displayed face and degeneracy maps gives a simplicial\nconstructible subsheaf $C_\\bullet\\subseteq F|_{U_\\bullet}$. The cocycle lies\nin $\\Gamma(U_q,C_q)$ and the equation $dc=0$ remains true in $C_\\bullet$.\nTake the image of the augmentation $C_0\\to F|_U$ and its finite iterated\nextensions through degree $q+1$, then sheafify; this gives a constructible\nsubsheaf $C\\hookrightarrow F|_U$ through which $c$ factors. Monicity is\nchecked at a geometric stalk: a finite combination of the generators maps to\nzero in $F$ precisely when it is already zero in the generated subsheaf.\nThus every face map, cocycle, and equality used by the selected class is\ncontained in $C$.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing",
+     "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+     "lines": [
+      162,
+      194
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-constructible-approximation",
+  "worker": "stage1",
+  "summary": "Statement rewritten from the vague imported one ('a cocycle factors, after a quasi-compact etale neighbourhood, through a monomorphism C -> F with C constructible torsion') to the form Stacks uses in the proof of 09ZE (efface-cohomology-on-closed-by-finite-cover, the lemma behind Gabber's theorem 09ZH-area): for qcqs X, a morphism i:Z->X with Z qcqs (Z=X or a closed subscheme), a torsion abelian F and xi in H^q(Z,i^{-1}F), there are n, a constructible Z/n-module sheaf G, a map u:G->F and zeta with H^q(i^{-1}u)(zeta)=xi; part (2) the same for sheaves of modules over a finite ring Lambda (the form the h1 user proves inline in its steps 2-3). The morphism i is included because 09ZE needs the class on the closed subscheme Z. The monomorphism of the imported statement (and of the brief's 'constructible subsheaf C of F') was dropped: it is false for non-Noetherian X. Counterexample: X=Spec(prod_N F_2) (a Stone space; every point closed; constructible subsets are clopen), x a non-principal ultrafilter point (closed, not open), F=x_* Z/2 (pushforward along the closed immersion of x), q=0, Z=X, xi=1 in H^0(X,F)=Z/2. H^0 of a subsheaf C -> F is injective, so xi in the image forces the section 1 into C(X); the stalks of F are Z/2 at x and 0 elsewhere, all generated by 1, so C=F. But F is not constructible: the stratum T containing x would be clopen, F|_T finite locally constant, so its support {x} would be open in T, hence in X. Stacks 09ZE itself only takes a map G -> F (the pushout F' = G' + _G F is mono since G -> G' is), so nothing downstream needs the mono; on Noetherian X images of constructible sheaves are constructible and the mono form holds. The imported proof (cocycle on a split hypercover, generated subsheaf) was replaced by the Stacks route: 03SA(3) (lem-weil-pbc-module-sheaf-colimit-constructible), forgetful and i^{-1} commute with colimits, 03Q5 (lem-weil-pbc-cohomology-filtered-colimit) on qcqs Z, an element of a filtered colimit comes from a stage (elementary), and for (1) F = colim F[n] by the definition of torsion, then (2) with Lambda=Z/n. No new nodes. stmt_deps: removed lemma-weil-pbc-finite-stage-killing (not a statement dependency; the old statement only pointed at its hypotheses) and def-weil-pbc-constructible-complexes (replaced by def-weil-pbc-etale-constructible-sheaf). Lean: AlgebraicGeometry.Etale.exists_isConstructibleSheaf_mono_of_henselianRing (WeilConjectures/SixFunctors/Etale/Gabber.lean:169, own sorry; docstring names this node) states the mono form for Spec A, (A,I) henselian, Z=Spec A/I; with the correct (constructible-strata) definition it is false by the counterexample above (I=0); with the defective IsConstructibleSheaf of coord/HUMAN.md it may hold, which is the defect again. Mathlib searched three ways: no constructible etale sheaves, no cohomology/filtered-colimit statement."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_mono_of_henselianRing",
+   "file": "WeilConjectures/SixFunctors/Etale/Gabber.lean:169",
+   "status": "own sorry",
+   "note": "states the monomorphism form (constructible SUBsheaf), which is false for non-Noetherian A: A = ∏_N F_2, I = 0, F = x_* Z/2 at a non-principal ultrafilter point, q = 0, ξ = 1 (the support of a constructible sheaf is constructible, {x} is not). Not attached; see coord/HUMAN.md."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Statement rewritten (the imported sketch and the brief asked for a constructible SUBsheaf; false on non-Noetherian X: X = Spec ∏_N F_2, x a non-principal ultrafilter point, F = x_* Z/2, ξ = 1 ∈ H^0; L checked: the support of a constructible sheaf is constructible and {x} is not). Now: a morphism u: G → F from a constructible sheaf of Z/n- (resp. Λ-) modules with ξ in the image, on a qcqs Z → X; this is what Stacks 09ZE uses (pushout along a mono stays injective). Five steps: 03SA(3) via the merged module node, forgetful and i^{-1} preserve colimits (tool uses), cohomology commutes with filtered colimits on qcqs (03Q5, tool use), element at a stage (elementary, written out), F = ∪ F[n], and Z/n-structure. Checked. Users: lemma-weil-pbc-gabber-effacement (being split) and lemma-weil-pbc-constructible-finite-pushforward; the h1 node cites it only in blueprint_uses. Lean candidate recorded as false, not attached."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Gabber",
+  "declaration": "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing",
+  "branch": "slopmaster2",
+  "line": 183,
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): exists_isConstructibleSheaf_mono_of_henselianRing (line 158, false as stated, coord/HUMAN.md) is gone upstream; its replacement exists_isConstructibleSheaf_hom_of_henselianRing (tagged for this node, sorry) asks only a morphism ι : C ⟶ F with C constructible and a class c' mapping to c (no monomorphism; its docstring gives the counterexample); citers that used a mono must be rechecked"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass.",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.exists_isFinite_cohomologyMap_eq_zero_of_henselianRing",
+   "AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing"
+  ],
+  "sorry_after": []
+ }
 }

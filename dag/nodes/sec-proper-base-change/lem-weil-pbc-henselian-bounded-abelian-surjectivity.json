@@ -1,0 +1,240 @@
+{
+ "id": "lem-weil-pbc-henselian-bounded-abelian-surjectivity",
+ "kind": "statement",
+ "title": "Surjectivity of henselian restriction for bounded abelian coefficients",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], with $X=\\operatorname{Spec} A$, $Z=\\operatorname{Spec}(A/I)$ [def-weil-affine-spectrum] and quotient-induced map $i:Z\\to X$. Let $G$ be an abelian sheaf on $X_{\\acute et}$ [def-weil-pbc-abelian-etale-sheaves], killed by multiplication by an integer $n>0$. For every $q\\geq0$ the canonical restriction $H^q(X,G)\\to H^q(Z,i^{-1}G)$ [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback] is surjective. The statement has no arbitrary coefficient-ring module structure and asserts only surjectivity.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09ZE, 09ZH and 09ZI, proofs; finite Z/n coefficient case",
+  "url": "https://stacks.math.columbia.edu/tag/09ZI"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Give G its uniquely determined Z/n-module structure, lifting the finite ring to the coefficient universe. Represent each closed-fibre class by a constructible Z/n-module sheaf C mapping to G. Use constructible filtered colimits, exact inverse image, preservation of colimits by the coefficient forgetful functor, and cohomology continuity. This construction needs no comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-constructible-restriction-class",
+    "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Embed C into a finite sum of finite pushforwards of finite constant Z/n-modules (09Z7). Finite exchange and finite-pushforward cohomology identify each closed-fibre component class with a finite constant class on the finite cover. Kill each by 09ZD. Push forward the monic unit of the finite surjective killing cover; the edge/unit compatibility shows that the component class dies. Taking the finite sum and composing with the embedding gives a monomorphism C to C-prime killing the represented class.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology",
+    "lem-weil-pbc-finite-surjective-unit-mono",
+    "lem-weil-pbc-finite-pushforward-unit-edge-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Push out C to C-prime along C to G. Pushouts of monomorphisms are monic in the abelian category of Z/n-module sheaves. The pushout identity and functoriality of inverse image and H show that the original class dies. All coefficients remain Z/n-modules, including the cokernel. The same construction for I=0 effaces source classes.",
+   "uses": [
+    "lem-weil-pbc-abelian-pushout-mono",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct simultaneously on q for all Z/n-module sheaves, proving bijectivity as an auxiliary claim. Degree zero follows from the finite-connected-intersection criterion and henselian connectedness, transported through the degree-zero pullback comparison. In the successor degree, source effacement and the long exact sequence prove injectivity using bijectivity in the previous degree. Closed-fibre effacement and the same sequence lift a fibre class from the cokernel in the previous degree, proving surjectivity. Naturality of the boundary maps identifies the lift. Retain only surjectivity and forget the module structure. Neither effacement nor comparison from Gabber.lean is used. For n=1 the coefficient sheaf is zero; q=0 and empty spectra are included.",
+   "uses": [
+    "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lemma-weil-pbc-stein-connectedness"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-constructible-restriction-class",
+  "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-integral-cover-kills-constant-cohomology",
+  "lem-weil-pbc-finite-surjective-unit-mono",
+  "lem-weil-pbc-finite-pushforward-unit-edge-compatibility",
+  "lem-weil-pbc-abelian-pushout-mono",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lemma-weil-pbc-stein-connectedness"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 09ZE, 09ZH and 09ZI, proofs; finite Z/n coefficient case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion|pushout",
+   "results": [
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+    "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+    "Mathlib/CategoryTheory/Abelian/CommSq.lean"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.mono_pushout_of_mono_f",
+   "results": [
+    "CategoryTheory.Abelian.mono_pushout_of_mono_f"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsion etale sheaf cohomology class on an affine closed subscheme can be killed by a monomorphism into another torsion sheaf",
+   "results": [
+    "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+    "Algebra.etaleLocus_eq_compl_support",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+    "TopCat.Presheaf.instMonoCommRingCatToTotalQuotientPresheafPresheaf",
+    "AlgebraicGeometry.exists_lift_of_germInjective",
+    "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+    "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+    "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The annihilator of a positive integer in an injective module sheaf has zero positive cohomology",
+   "results": [
+    "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+    "CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex",
+    "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero",
+    "CochainComplex.cm5b.instInjectiveXIntI",
+    "CochainComplex.isKInjective_of_injective",
+    "CochainComplex.isKInjective_of_injective_aux",
+    "groupCohomology.instMonoModuleCatFShortComplexH0",
+    "Rep.isZero_Tor_succ_of_projective"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective",
+   "results": [
+    "CategoryTheory.Injective",
+    "CategoryTheory.Injective.instOfNonempty",
+    "CategoryTheory.Limits.IsZero.injective",
+    "CategoryTheory.Injective.injective_under",
+    "CategoryTheory.InjectivePresentation.injective",
+    "CategoryTheory.Injective.instOppositeOpOfProjective",
+    "CategoryTheory.Injective.instProjectiveOppositeOp",
+    "CategoryTheory.Injective.injective_iff_projective_op"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*nsmul|Henselian.*cohomology|cohomology.*henselian",
+   "results": [],
+   "date": "2026-10-12",
+   "available": true,
+   "note": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of an injective sheaf of modules vanishes in positive degree",
+   "results": [],
+   "date": "2026-10-12",
+   "available": false,
+   "note": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian pair restriction on cohomology of torsion abelian sheaves",
+   "results": [],
+   "date": "2026-10-12",
+   "available": false,
+   "note": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Gabber",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "via": [
+    "lemma-weil-pbc-gabber-effacement"
+   ],
+   "place": "Bounded-class lifting step of the replacement henselian module effacement route"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianBoundedAbelianSurjectivity.lean",
+  "declaration": "AlgebraicGeometry.Etale.surjective_cohomologyMap_of_henselianRing_of_nsmul_eq_zero",
+  "statement": "theorem surjective_cohomologyMap_of_henselianRing_of_nsmul_eq_zero {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (G : Sheaf (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (hn : 0 < n) (hG : n • 𝟙 G = 0) (q : ℕ) : Function.Surjective (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) G q)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0ade0",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460521",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass."
+ }
+}
