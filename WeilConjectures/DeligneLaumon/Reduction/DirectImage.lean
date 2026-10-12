@@ -73,6 +73,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
 set_option maxHeartbeats 400000 in
+-- The Noether normalisation step elaborates slowly.
 /-- Let `g₀ : T ⟶ Y₀` be a morphism of finite type from an integral affine scheme to an affine
 scheme, followed by an immersion `a : Y₀ ⟶ Y`. Then the direct-image weight assertion holds for
 `g₀ ≫ a` restricted to some nonempty affine open `V` of `T` (blueprint: `cor-zl-rfshriek-sheaf`,

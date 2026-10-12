@@ -52,6 +52,7 @@ noncomputable def ProEtaleWeilSheaf.upperStarLowerStarAdjunction (φ : X ⟶ Y)
     (ProEtale.adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ (comp_over φ _)))
     _ _ (ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv l φ _)
 
+omit [Fact (ringChar k₀ ≠ l)] in
 @[simp]
 lemma ProEtaleWeilSheaf.upperStarLowerStarAdjunction_unit_app_hom_f (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] (F : ProEtaleWeilSheaf k₀ l Y) :
@@ -60,6 +61,7 @@ lemma ProEtaleWeilSheaf.upperStarLowerStarAdjunction_unit_app_hom_f (φ : X ⟶ 
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).unit.app F.carrier :=
   rfl
 
+omit [Fact (ringChar k₀ ≠ l)] in
 @[simp]
 lemma ProEtaleWeilSheaf.upperStarLowerStarAdjunction_counit_app_hom_f (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] (F : ProEtaleWeilSheaf k₀ l X) :

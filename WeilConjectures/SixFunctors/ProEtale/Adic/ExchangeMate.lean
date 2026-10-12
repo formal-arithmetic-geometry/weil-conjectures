@@ -49,6 +49,7 @@ section Sections
 
 variable (A : Type u') [Category.{u + 1} A]
 
+set_option linter.flexible false in
 set_option maxHeartbeats 1000000 in
 -- The section-wise comparison of the iterated base changes is a long `simp` computation.
 /-- The unit of the Frobenius equivalences, pushed forward along `J`, followed by the
@@ -82,14 +83,9 @@ lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a 
   · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullbackId]
-  · simp only [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-      MorphismProperty.Over.pullbackId, Functor.comp_obj, Functor.id_obj, Functor.const_obj_obj,
-      Functor.map_comp, Category.assoc, MorphismProperty.Comma.comp_hom, Comma.comp_left,
-      MorphismProperty.Over.pullback_map_left, MorphismProperty.Over.pullbackComp_inv_app_left,
-      pullback.map_id, Category.comp_id, MorphismProperty.Over.pullbackComp_hom_app_left,
-      Category.id_comp, MorphismProperty.Over.pullbackId_hom_app_left, limit.lift_π,
-      PullbackCone.mk_π_app]
+      MorphismProperty.Over.pullbackId]
     rw [pullback.condition_assoc]
     simp
 

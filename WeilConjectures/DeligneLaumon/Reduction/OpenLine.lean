@@ -73,7 +73,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
   rcases lt_or_ge r 0 with hr | hr
   · -- `H_c^r` vanishes in negative degrees
     intro β hβ
-    have : Subsingleton (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier :=
+    have :
+        Subsingleton (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier :=
       WeilSheaf.subsingleton_globalSections_of_isZero
         (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg
           (f := C ↘ Spec (CommRingCat.of k₀)) _ hr)
@@ -85,7 +86,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
   obtain ⟨e⟩ := WeilSheaf.nonempty_upperStar_directImage_iso j F
   have hjK := hw.of_mono e.hom
   -- a nonempty affine open `V ⊆ U` of `C`; its complement is finite
-  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian (C ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian C :=
+    LocallyOfFiniteType.isLocallyNoetherian (C ↘ Spec (CommRingCat.of k₀))
   have : IsRegular C := IsRegular.of_smooth (C ↘ Spec (CommRingCat.of k₀))
   have : ConnectedSpace C :=
     GeometricallyConnected.connectedSpace_of_subsingleton (f := C ↘ Spec (CommRingCat.of k₀))
@@ -128,8 +130,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
     let v : V.toScheme ⟶ U := IsOpenImmersion.lift j V.ι hr
     have hv : v ≫ j = V.ι := IsOpenImmersion.lift_fac _ _ _
     have : v.IsOver (Spec (CommRingCat.of k₀)) := IsOpenImmersion.isOver_lift _ _ hr
-    have hVK : ((WeilSheaf.upperStar V.ι).obj ((WeilSheaf.directImage j).obj F)).IsPunctuallyPureOfWeight
-        ι w :=
+    have hVK : ((WeilSheaf.upperStar V.ι).obj
+        ((WeilSheaf.directImage j).obj F)).IsPunctuallyPureOfWeight ι w :=
       WeilSheaf.IsPunctuallyPureOfWeight.upperStar_of_comp_eq v j V.ι hv hjK
     have hVe := hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine ι
       (ringKrullDim_le_of_smoothOfRelativeDimension (V.toScheme ↘ Spec (CommRingCat.of k₀)) 1) _
@@ -151,7 +153,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
   obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
     (C ↘ Spec (CommRingCat.of k₀)) ((WeilSheaf.directImage j).obj F) n
   exact FrobeniusModule.HasWeightsAtMost.of_equiv E.symm
-    (((WeilSheaf.HasWeightsAtMost.of_exact hS h₁ h₃).of_epi e₂.hom).compactlySupportedCohomology_zero)
+    ((WeilSheaf.HasWeightsAtMost.of_exact hS h₁ h₃).of_epi
+      e₂.hom).compactlySupportedCohomology_zero
 
 /-- **Compact-support upper bound on a curve.** Let `C` be a smooth geometrically connected curve
 over `k₀` and let `F` be a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then every

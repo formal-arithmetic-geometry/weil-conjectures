@@ -276,7 +276,8 @@ theorem IsFourierPartner.isPunctuallyPureOfWeight (h' : D.IsFourierPartner ψ D'
     exact ⟨y, hx''⟩
   have := D'.isDominant_opens_ι O hO
   have key : ∀ y : D'.U.finitePoints, D'.j.base y.1 ∈ Set.range D''.j.base →
-      (D'.sheaf.stalk y).IsPureOfWeight ι ((D'.U ↘ Spec (CommRingCat.of k₀)).residueCard y.1) v := by
+      (D'.sheaf.stalk y).IsPureOfWeight ι
+        ((D'.U ↘ Spec (CommRingCat.of k₀)).residueCard y.1) v := by
     intro y hy
     obtain ⟨E⟩ := nonempty_equiv_stalk_of_iso e'.symm y
     let x : (affineLine k₀).finitePoints :=

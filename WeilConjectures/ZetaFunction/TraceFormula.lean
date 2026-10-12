@@ -91,7 +91,7 @@ theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e
       (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
     LinearMap.trace (PadicAlgCl l) _ (G.stalkAt s m hs).frobeniusEnd =
       LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd := by
-  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso e s m hs
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso s m hs e
   simpa only [pow_one] using E.trace_frobeniusEnd_pow 1
 
 /-- Isomorphic Weil sheaves have the same trace function. -/

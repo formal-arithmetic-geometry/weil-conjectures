@@ -26,7 +26,8 @@ sheaf on `C₀`, punctually `ι`-pure of weight `w`. Then `H_c^i(C, 𝓕)` has w
 (blueprint: `thm-a1-affine-curve-upper`).
 
 The degree-one bound is reduced to the Deligne–Laumon estimate on the affine line for a sheaf
-unramified at infinity (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one`):
+unramified at infinity
+(`LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one`):
 
 * the boundary sequence of `j : U₀ ↪ 𝔸¹` passes from `H_c^1(𝔸¹, j_*𝓔)` to `H_c^1(U, 𝓔)`, the
   boundary contributing weights at most `w`;
@@ -37,7 +38,7 @@ unramified at infinity (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeights
 
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_zero_of_isFinite`:
   blueprint `lem-a1-finite-boundary-weights`.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one_sheaf`:
+- `WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one_sheaf`:
   the degree-one bound on `U₀` for a sheaf unramified at infinity.
 -/
 
@@ -63,7 +64,8 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_zero_of_isFinite
   obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
     (Z ↘ Spec (CommRingCat.of k₀)) G 0
   exact FrobeniusModule.HasWeightsAtMost.of_equiv E.symm
-    (WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite _ hG).compactlySupportedCohomology_zero
+    (WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite _
+      hG).compactlySupportedCohomology_zero
 
 end WeilSheaf
 
@@ -224,8 +226,9 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiv
 finite type, `𝓕` a Weil sheaf on `U`, punctually `ι`-pure of weight `w`, `H : U ⟶ ℙ¹` a separated
 quasi-finite morphism and `W ⊆ ℙ¹` an open containing `∞`, with finite complement, on which
 `H₀!𝓕` is lisse. Then `H_c^1(U, 𝓕)` has weights at most `w + 1`:
-`H_c^1(U, 𝓕) = H_c^1(ℙ¹, H₀!𝓕)` is a quotient of `H_c^1(W, (H₀!𝓕)|_W)`, the finite complement of `W`
-having no `H_c^1`, and `hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine`
+`H_c^1(U, 𝓕) = H_c^1(ℙ¹, H₀!𝓕)` is a quotient of `H_c^1(W, (H₀!𝓕)|_W)`, the finite complement of
+`W` having no `H_c^1`, and
+`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine`
 applies on `W`. This replaces the constant field extension and the homography of the blueprint
 (`lem-a1-unramified-at-infinity`). -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
@@ -255,7 +258,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
     infer_instance
   have hW := hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine W
     hWtop hG (hKw.upperStar W.ι)
-  have hK := WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar_of_isOpenImmersion
+  have hK := hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar_of_isOpenImmersion
     W.ι (by rwa [Scheme.Opens.range_ι]) _ Nat.one_pos hW
   exact FrobeniusModule.HasWeightsAtMost.of_equiv E hK
 
@@ -360,12 +363,13 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology (D : LisseOnDenseOpen 
   · have := subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine D.lisse
       (Or.inl (by omega : r ≤ 0))
     exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-  · exact_mod_cast D.hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isPunctuallyPureOfWeight
-      hw
+  · exact_mod_cast
+      D.hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isPunctuallyPureOfWeight hw
   · rcases (by omega : 2 < r ∨ r = 2) with hr | rfl
     · have := subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine D.lisse (Or.inr hr)
       exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-    · exact_mod_cast (hw.isPureOfWeightOver_compactlySupportedCohomology_two D.lisse).hasWeightsAtMostOver
+    · exact_mod_cast
+        (hw.isPureOfWeightOver_compactlySupportedCohomology_two D.lisse).hasWeightsAtMostOver
 
 end LisseOnDenseOpen
 

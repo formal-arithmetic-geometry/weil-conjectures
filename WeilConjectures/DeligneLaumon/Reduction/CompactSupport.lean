@@ -165,8 +165,10 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_
   exact ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf r).mapIso E)⟩
 
 end CompactSupport
+
 section FiniteComplement
 
+omit [Finite k₀] in
 /-- **The closed complement of an open with finite complement.** If `U` is an open subscheme of a
 `k₀`-scheme `X` locally of finite type whose complement is finite, the reduced closed subscheme
 `Z` on the complement is finite over `k₀`. -/
@@ -233,7 +235,8 @@ theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_of_upperStar
   obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
     (X ↘ Spec (CommRingCat.of k₀)) F r
   exact FrobeniusModule.HasWeightsAtMost.of_equiv E.symm
-    (((WeilSheaf.HasWeightsAtMost.of_exact hS h₁ h₃).of_epi e₂.hom).compactlySupportedCohomology_zero)
+    ((WeilSheaf.HasWeightsAtMost.of_exact hS h₁ h₃).of_epi
+      e₂.hom).compactlySupportedCohomology_zero
 
 end FiniteComplement
 
