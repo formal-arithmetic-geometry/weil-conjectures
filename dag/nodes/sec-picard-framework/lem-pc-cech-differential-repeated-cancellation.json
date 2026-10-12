@@ -12,11 +12,21 @@
  ],
  "proof": [
   {
-   "text": "Construct the permutation exchanging the two equal entries, apply the alternating cochain law, compare the two restriction composites using the universal property of the chosen fibre products, and use the opposite face signs to cancel.",
+   "text": "Expand the subtype sum over the distinct pair with Finset.sum_subtype and Finset.sum_pair; order the two positions, interchanging them if necessary. For a < b, rotate the remaining indices in the interval [a,b-1] using Fin.cycleIcc. Its value formula shows that the face deleting b, followed by this rotation, is the face deleting a: outside the interval indices coincide; at its endpoint use t a = t b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the alternating cochain hypothesis to this cycle. Functoriality combines the two restriction maps. Morphisms between opens form subsingletons, so after transporting along the tuple equality the composite is the other restriction map. The SiteCechComplex supplies the chosen products and index maps.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use Fin.sign_cycleIcc_of_le to compute the sign as (-1)^(b-a-1). The exponent equation a+(b-a-1)+1=b and the square of a power of -1 show that the two weighted terms are negatives. Their sum is zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,7 +36,7 @@
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Section 20.23, Tag 01FG: verification omitted immediately before Definition 01FH; signed extension preceding Lemma 01FJ",
-  "note": "Stage-3 reduction interface for the repeated-tuple cancellation proof."
+  "note": "B2 second reading: direct Lean proof using Mathlib interval-cycle values and sign, functoriality, and the thin category of opens; no split-off theorem and no remaining sorry."
  },
  "mathlib_searches": [
   {
@@ -103,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T184347-L-4021364",
-  "kind": "interface",
+  "landing": "20261012T225256-L-1800279",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
