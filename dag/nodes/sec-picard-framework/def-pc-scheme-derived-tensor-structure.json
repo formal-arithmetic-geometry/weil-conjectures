@@ -14,9 +14,27 @@
   "def-pc-kflat-complex",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the recorded tensor closed and Grothendieck abelian structures. The sheafified free Yoneda modules form a separating family by SheafOfModules.isSeparating_sheafification_freeYoneda. Identify each with the explicit extension-by-zero unit by lem-pc-scheme-module-free-yoneda-iso. Apply lem-pc-sites-modules-j-shriek-flat and transport right-tensor exactness to left-tensor left exactness by symmetry. ObjectProperty.flat_coproduct gives a flat coproduct separator. Apply Abelian.hasFunctorialFlatResolution_of_flat_separator and the existing K-flat derived monoidal construction.",
+   "uses": [
+    "lem-pc-scheme-module-free-yoneda-iso",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-module-free-yoneda-iso",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06Y7; free representable generators, using upstream flat separator construction"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -108,5 +126,15 @@
   "group": "M1",
   "result": "fix",
   "note": "Matched: X scheme; K in D_QCoh with Scheme.IsPerfect; exists Kdual in D_QCoh with ExactPairing both orders (ev/coev + zig-zags; tensorLeftHomEquiv gives Hom(K(x)A,B)=Hom(A,Kv(x)B) and Hom(A,K(x)B)=Hom(Kv(x)A,B)); closure of K(x)A, Kv(x)A in D_QCoh; any g:T->X, Lg*K perfect, Lg*K/Lg*Kv qcoh with exact pairings and adjunctions on T. FIX: item's file-local derivedTensor instance removed; schemeDerivedTensorMonoidal made a global instance and its five file-local helper instances (symmetry, preadditive, closed, Grothendieck, countable colimits, flat resolution) moved into the def body as letI/haveI; only the module-tensor local instance (as landed C1 089e8d1b6/K1 60a01cfa3) stays. New def node kept: upstream K-flat DerivedMonoidal construction, only Prop inputs sorried (HasFunctorialFlatResolution is a Prop), exact pairings not expressible on mapBifunctor representatives."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T063522-L-3160510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-scheme-module-free-yoneda-iso",
+ "kind": "statement",
+ "title": "Free Yoneda sheaves agree with extension by zero of the localized unit",
+ "statement": "Let X be a scheme [def-pc-scheme] and U an open. The module sheafification [def-weil-presheaf-modules-sheafification] of the free O_X-presheaf on the representable of U is isomorphic to the module sheafification of the extension-by-zero presheaf [def-weil-extension-by-zero-presheaf] of the unit module over the localized ring sheaf on X/U.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, explicit direct-sum construction of extension by zero of the localized unit"
+ },
+ "proof": [
+  {
+   "text": "At each V both presheaves are the free O_X(V)-module on maps V to U. Identify each basis vector with the unit in the corresponding summand of the explicit direct sum. These linear maps have inverse given by finite linear combination and commute with restrictions, which compose the indices and restrict coefficients in both constructions. Apply module sheafification to the resulting presheaf isomorphism. The empty index case is the zero module.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, explicit direct-sum construction of extension by zero of the localized unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "free sheaves of modules on opens are flat",
+   "results": "Found freeFunctor and Module.Flat.of_free; no sheaf flatness theorem for the free Yoneda encoding",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.flat",
+   "results": "Unknown identifier in search service",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*flat|flat.*sheafification",
+   "results": "No upstream match; project ExtensionByZeroFlat uses a separately constructed direct-sum presheaf requiring a nontrivial identification with free Yoneda",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafification of the free presheaf of modules on a representable open is flat",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free module on representable presheaf is extension by zero of ring unit",
+   "results": "8 hits: freeYoneda, freeObj_obj, free_obj, freeObj, Elements.freeYoneda, freeYonedaEquiv, freeAdjunctionUnit_app, free. None identifies the explicit project extension-by-zero presheaf.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; second reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.linearEquivFunOnFinite",
+   "results": "Found finite-index equivalence and related lemmas; not a presheaf isomorphism. Local grep also found finsuppLequivDFinsupp, the sectionwise equivalence needed for a future proof.",
+   "date": "2026-10-12",
+   "verdict": "sectionwise tools only; second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|extensionByZero|finsuppLequivDFinsupp",
+   "results": "Generic free Yoneda sheaves and the Finsupp/DFinsupp linear equivalence, but no existing natural isomorphism for the project direct-sum construction. Repository search confirms only extension-by-zero stalk maps and the existing flatness theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedTensorStructure",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-scheme-derived-tensor-structure",
+   "place": "identify the free representable generators with the existing flat extension-by-zero modules",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeModuleFreeYonedaIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeModuleFreeYonedaIso.lean",
+  "declaration": "AlgebraicGeometry.schemeModule_freeYoneda_iso",
+  "statement": "theorem schemeModule_freeYoneda_iso (U : X.Opens) : Nonempty (((PresheafOfModules.sheafification (𝟙 (moduleRings X.toRingedSpace).obj)).obj ((PresheafOfModules.free (moduleRings X.toRingedSpace).obj).obj (yoneda.obj U))) ≅ ((PresheafOfModules.sheafification (𝟙 (moduleRings X.toRingedSpace).obj)).obj ((SheafOfModules.extensionByZeroPresheaf (moduleRings X.toRingedSpace) U).obj (SheafOfModules.unit ((moduleRings X.toRingedSpace).over U)))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T063522-L-3160510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T063522-L-3160510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

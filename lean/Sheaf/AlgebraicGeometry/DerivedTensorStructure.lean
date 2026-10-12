@@ -6,6 +6,9 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.SchemeModuleFreeYonedaIso
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
@@ -44,7 +47,29 @@ so this resolution is functorial. -/
 theorem schemeModule_hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := by
-  sorry
+  let _ := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : IsGrothendieckAbelian.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  apply Abelian.hasFunctorialFlatResolution_of_flat_separator _
+    (SheafOfModules.isSeparating_sheafification_freeYoneda
+      (moduleRings X.toRingedSpace)).isSeparator_coproduct
+  apply ObjectProperty.flat_coproduct
+  intro U
+  obtain ⟨e⟩ := schemeModule_freeYoneda_iso X U
+  apply ObjectProperty.prop_of_iso ObjectProperty.flat e.symm
+  have h := SheafOfModules.isFlat_extensionByZero_unit X.sheaf U
+  change CategoryTheory.exactFunctor _ _ (MonoidalCategory.tensorRight _) at h
+  have : PreservesFiniteLimits (MonoidalCategory.tensorRight
+      ((PresheafOfModules.sheafification (𝟙 (moduleRings X.toRingedSpace).obj)).obj
+      ((SheafOfModules.extensionByZeroPresheaf (moduleRings X.toRingedSpace) U).obj
+        (SheafOfModules.unit ((moduleRings X.toRingedSpace).over U))))) := h.1
+  apply (ObjectProperty.flat_iff_preservesFiniteLimits _).2
+  exact preservesFiniteLimits_of_natIso
+    (BraidedCategory.tensorLeftIsoTensorRight _).symm
 
 /-- The K-flat derived tensor monoidal structure on D(O_X): the upstream derived monoidal
 structure of the localization `Qh` of the homotopy category, for the recorded sheaf tensor
