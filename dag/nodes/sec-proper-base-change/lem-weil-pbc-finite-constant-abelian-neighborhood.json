@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-finite-constant-abelian-neighborhood",
+ "kind": "statement",
+ "title": "Additive constant-presheaf charts near each point of a finite set chart",
+ "statement": "Let $Y$ be a scheme [def-weil-pbc-scheme-conventions], $G$ an abelian sheaf [def-weil-pbc-abelian-etale-sheaves], $U$ an object of its small etale site [def-weil-pbc-etale-sheaves], $S$ a finite set in the next universe, and $e$ an isomorphism from the restriction to $U$ of the underlying set sheaf of $G$ to the constant sheaf with value $S$ [def-weil-pbc-constant-sheaf]. For each underlying point $x$ of $U$, there exist an etale $V\\to U$, a point $v$ of $V$ above $x$, a finite abelian group $M$, a set-sheaf isomorphism $e\\prime:\\underline{|M|}\\to |G|_V$ on the localized small etale site at $V\\to Y$, and a natural transformation of abelian presheaves $\\alpha:\\operatorname{const}(M)\\to G_V$. After forgetting abelian structure, $\\alpha$ equals the constant set presheaf sheafification unit [def-weil-pbc-sheafification] followed by the underlying presheaf map of $e\\prime$. No nonemptiness or connectedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RU (definition-finite-locally-constant), abelian clauses; agent-formulated finite-operation refinement, steps 1--3 of lem-weil-pbc-finite-constant-abelian-refinement. Tag 03RU supplies definitions, not this refinement theorem; the argument is the recorded agent-formulated proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Fix an underlying point x of U.left and choose a geometric point above it. Identify the localized small etale site at U with the small etale site of its domain. For each geometric point of that domain, the stalk of the given constant set sheaf is S: sheafification preserves stalks, and the cofiltered pointed-neighborhood category has connected opposite, whose constant-diagram colimit is S. The set chart therefore transports the abelian stalk operations to S.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-sets-sheafification-geometric-stalk",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart supplies constant sections indexed by S. For every pair of labels compare their sum in G with the section labeled by their sum in the transported stalk group. Compare zero and all negatives likewise. The germs agree. Equality of germs is equality on some pointed neighborhood by Mathlib Point.toPresheafFiber_eq_iff′. There are finitely many comparisons because S and S times S are finite. Cofilteredness gives a single pointed refinement on which all comparisons hold.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the label sections to the common pointed neighborhood V. Their zero and addition identities define additive maps M to the sections of G on every object of the localized site at V; restriction compatibility defines a natural transformation α from the constant abelian presheaf. Transport the restricted original set chart along the bijection between the finite abelian group M and S to obtain e′. On underlying presheaves, α is precisely the constant set sheafification unit followed by e′. The geometric lift supplies v in V.left with V.hom(v)=x. This stops before sheafifying α or assembling a covering.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-sets-sheafification-geometric-stalk"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RU (definition-finite-locally-constant), abelian clauses; agent-formulated finite-operation refinement, steps 1--3 of lem-weil-pbc-finite-constant-abelian-refinement. Tag 03RU supplies definitions, not this refinement theorem; the argument is the recorded agent-formulated proof.",
+  "by": "G2 stage-3 worker; agent-formulated argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite constant set sheaf carrying abelian operations has a locally bijective constant abelian presheaf chart near each point",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf whose underlying set sheaf is finite constant is locally constant as an abelian sheaf",
+   "date": "2026-10-12",
+   "results": "8 hits, including Sheaf.isConstant_iff_forget. This requires full and faithful constant sheaf functors and does not construct a local additive chart.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "W_of_isLocallyBijective|W_iff|mkOfCovers",
+   "date": "2026-10-12",
+   "results": "25 unrelated hits in remote grep. Local rg and source reads find W_of_isLocallyBijective and W_iff in Mathlib.CategoryTheory.Sites.LocallyBijective and Localization, and Cover.mkOfCovers. These handle the later sheafification and cover steps, not the finite-operation chart.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantAbelianRefinement",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-constructible-complexes",
+   "place": "Finite local abelian comparison: finite-operation refinement of a finite constant set chart, before sheafification and covering assembly.",
+   "via": [
+    "lem-weil-pbc-finite-constant-abelian-refinement",
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lem-weil-pbc-constructible-torsion-modules-agree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantAbelianNeighborhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_constant_abelian_neighborhood",
+  "statement": "theorem finite_constant_abelian_neighborhood {Y : Scheme.{u}} (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : Y.Etale) (S : Type (u + 1)) [Finite S] (e : ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G).over U ≅ (constantSheaf (Y.smallEtaleTopology.over U) (Type (u + 1))).obj S) (x : U.left) : ∃ (V : U.left.Etale) (v : V.left), V.hom v = x ∧ ∃ (M : AddCommGrpCat.{u + 1}), Finite M ∧ ∃ e' : (constantSheaf (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)) (Type (u + 1))).obj (M : Type (u + 1)) ≅ (sheafCompose (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj (G.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)), ∃ α : (Functor.const (Over ((MorphismProperty.Over.map ⊤ U.prop).obj V))ᵒᵖ).obj M ⟶ (G.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)).obj, Functor.whiskerRight α (CategoryTheory.forget AddCommGrpCat.{u + 1}) = toSheafify (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)) ((Functor.const (Over ((MorphismProperty.Over.map ⊤ U.prop).obj V))ᵒᵖ).obj (M : Type (u + 1))) ≫ e'.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095903-L-316800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095903-L-316800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

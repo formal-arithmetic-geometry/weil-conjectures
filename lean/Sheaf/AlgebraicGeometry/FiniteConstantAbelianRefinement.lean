@@ -6,6 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood
 
 /-!
 # Refining a finite set trivialization to an abelian trivialization
@@ -55,6 +56,36 @@ theorem finite_constant_abelian_refinement {Y : Scheme.{u}}
       (G.over ((MorphismProperty.Over.map ⊤ U.prop).obj
         (𝒱.etalePrecoverageToEtale j))).IsConstant
           (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj
-            (𝒱.etalePrecoverageToEtale j))) := by sorry
+            (𝒱.etalePrecoverageToEtale j))) := by
+  classical
+  choose V v hv M hM e' α hα using
+    finite_constant_abelian_neighborhood G U S e
+  let 𝒱 : Cover.{u} etalePrecoverage U.left :=
+    Cover.mkOfCovers U.left (fun x ↦ (V x).left) (fun x ↦ (V x).hom)
+      (fun x ↦ ⟨x, v x, hv x⟩) (fun x ↦ (V x).prop)
+  refine ⟨𝒱, fun x ↦ ?_⟩
+  let W : Y.Etale := (MorphismProperty.Over.map ⊤ U.prop).obj (V x)
+  let J := Y.smallEtaleTopology.over W
+  let F := G.over W
+  have : IsIso (e' x).hom.hom :=
+    inferInstanceAs (IsIso ((sheafToPresheaf J (Type (u + 1))).map (e' x).hom))
+  have hi : Presheaf.IsLocallyInjective J (α x) := by
+    rw [← Presheaf.isLocallyInjective_forget_iff, hα x]
+    have ht : Presheaf.IsLocallyInjective J (toSheafify J
+        ((Functor.const (Over W)ᵒᵖ).obj (M x : Type (u + 1)))) := inferInstance
+    exact Presheaf.isLocallyInjective_comp J _ _
+  have hs : Presheaf.IsLocallySurjective J (α x) := by
+    rw [Presheaf.isLocallySurjective_iff_whisker_forget, hα x]
+    have ht : Presheaf.IsLocallySurjective J (toSheafify J
+        ((Functor.const (Over W)ᵒᵖ).obj (M x : Type (u + 1)))) := inferInstance
+    exact Presheaf.isLocallySurjective_comp (J := J)
+      (toSheafify J ((Functor.const (Over W)ᵒᵖ).obj (M x : Type (u + 1))))
+      (e' x).hom.hom
+  have hw : J.W (α x) := J.W_of_isLocallyBijective (α x)
+  have : IsIso ((presheafToSheaf J AddCommGrpCat.{u + 1}).map (α x)) :=
+    (J.W_iff (α x)).mp hw
+  exact Sheaf.isConstant_of_iso J
+    ((asIso ((presheafToSheaf J AddCommGrpCat.{u + 1}).map (α x))) ≪≫
+      asIso ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).counit.app F)).symm
 
 end AlgebraicGeometry.Scheme
