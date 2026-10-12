@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-ringed-space-tensor-pullback-underived",
+ "kind": "statement",
+ "title": "Concrete tensor pullback is an additive left adjoint",
+ "statement": "For a morphism $g:X\\to Y$ of ringed spaces [def-weil-locally-ringed-space-morphism], there is an additive functor $P:\\operatorname{Mod}(O_Y)\\to\\operatorname{Mod}(O_X)$ [def-weil-sheaf-of-modules-category] with objects $O_X\\otimes_{g^{-1}O_Y}g^{-1}M$ and morphisms $1\\otimes g^{-1}a$ [def-weil-pbc-topological-inverse-image], left adjoint to $g_*$ [def-pc-ringed-spaces-derived-direct-image].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008A, 008Y and 0096"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Compose the tensor/restriction Hom equivalence with the inverse-image/direct-image Hom equivalence. The ring adjunction triangle identifies the composite scalar map with g-sharp. The sectionwise unit formula proves naturality for the prescribed tensor maps. Construct the functor and adjunction from these equivalences. As a left adjoint between abelian categories it preserves zero and binary coproducts, hence is additive.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-change-of-rings-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008A, 008Y and 0096"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-pc-module-change-of-rings-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008A, 008Y and 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left derived tensor pullback ringed space adjoint derived direct image",
+   "results": "Mathlib SheafOfModules.pullbackPushforwardAdjunction supplies abstract underived pullback, not the concrete tensor formula with absolute derived comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.derived",
+   "results": "Loogle returned zero hits: unknown identifier Adjunction.derived. Read the declaration directly in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; its hypotheses include both postcomposition comparisons.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; local source inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback|nonempty_tensorPullbackAdjunction|leftDerived_from_resolvingClass",
+   "results": "Sheaf.AlgebraicGeometry.TensorPullback proves the scheme-level underived argument; adapt its proof to ringed spaces. LeftDerivedFromResolvingClass states the generic derived existence; no concrete absolute ringed-space comparison was found.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "absolute derived tensor pullback for modules on a ringed space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ringed-spaces-derived-adjoint-general",
+   "place": "proof step 1 concrete tensor pullback underived adjunction",
+   "via": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-finite-affine-derived-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackUnderived.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_tensorModulePullback",
+  "statement": "theorem exists_tensorModulePullback\n    {X Y : RingedSpace.{u}} (g : X ⟶ Y) :\n    ∃ (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))\n      (h : ∀ M : SheafOfModules.{u} (moduleRings Y),\n        P.obj M = SheafOfModules.changeOfRings.{u, u, u}\n          (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n          (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M))\n      (_ : ∀ {M N : SheafOfModules.{u} (moduleRings Y)} (a : M ⟶ N),\n        P.map a = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom.{u, u, u}\n          (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n          (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)\n          (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) ≫\n          eqToHom (h N).symm)\n      (_ : P.Additive),\n      Nonempty (P ⊣ moduleDirectImage g)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085313-L-29356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085313-L-29356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,11 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlatPullback
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute
+import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-!
 # Derived pullback/direct-image adjunction for ringed spaces
@@ -88,6 +88,27 @@ theorem derivedModulePullback_adjunction
           K.IsKFlat → IsIso
             (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧
         Nonempty (L ⊣ derivedModuleDirectImage g) := by
-  sorry
+  obtain ⟨P, h, hm, hP, ⟨adj⟩⟩ := exists_tensorModulePullback g
+  let := hP
+  obtain ⟨L, ε, hL, hK, hcomp⟩ :=
+    exists_absolute_leftDerived_tensorModulePullback g P h hm
+  let := hL
+  let := hcomp (derivedModuleDirectImage g)
+  let β := (moduleDirectImage g).rightDerivedFunctorUnit
+  let : (derivedModuleDirectImage g ⋙ L).IsRightDerivedFunctor
+      (Functor.whiskerRight β L ≫ (Functor.associator _ _ _).hom)
+      (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings X))
+        (ComplexShape.up ℤ)) :=
+    (HomotopyCategory.KInjectives.localizerMorphism
+      (SheafOfModules.{u} (moduleRings X)))
+      |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure
+        _ (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives
+          _).isIso_of_isRightDerivedFunctor _ I) _
+  exact ⟨P, h, hm, hP, L, ε, hL, hK,
+    ⟨(adj.mapHomotopyCategory (ComplexShape.up ℤ)).derived
+      (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y))
+        (ComplexShape.up ℤ))
+      (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings X))
+        (ComplexShape.up ℤ)) ε β⟩⟩
 
 end AlgebraicGeometry.RingedSpace

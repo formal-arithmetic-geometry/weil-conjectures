@@ -28,68 +28,32 @@
  ],
  "proof": [
   {
-   "text": "Write $\\rho:g^{-1}\\mathcal B\\to\\mathcal O_X$ for the ring morphism induced by the structure map in [def-weil-locally-ringed-space-morphism]. The underived pullback of a sheaf of $\\mathcal B$-modules is $\\mathcal O_X\\otimes_{g^{-1}\\mathcal B}g^{-1}(-)$. Apply the inverse-image/direct-image module adjunction [lem-pc-module-inverse-image-adjunction] to $g^{-1}\\mathcal B$-modules, followed by the change-of-rings adjunction [lem-pc-module-change-of-rings-adjunction] along $\\rho$. Their composite gives natural bijections $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal O_X\\otimes_{g^{-1}\\mathcal B}g^{-1}E,F)\\cong\\operatorname{Hom}_{\\mathcal B}(E,g_*F)$, so the displayed underived pullback is left adjoint to $g_*$. Here $g_*F$ has the $\\mathcal B$-module structure through $g^\\sharp$ and sections $V\\mapsto F(g^{-1}V)$, as stated in [def-pc-ringed-spaces-derived-direct-image]; the inverse-image module structure and the sheaf-module categories are supplied by [def-weil-pbc-topological-inverse-image] and [def-weil-sheaf-of-modules-category].",
+   "text": "Use [lem-pc-ringed-space-tensor-pullback-underived] to construct P with its prescribed objects, maps, additivity and underived adjunction.",
    "uses": [
-    "lem-pc-module-inverse-image-adjunction",
-    "lem-pc-module-change-of-rings-adjunction",
-    "def-weil-locally-ringed-space-morphism",
-    "def-pc-ringed-spaces-derived-direct-image",
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pc-ringed-space-tensor-pullback-underived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 008A and 008Y, tensor/change-of-rings and inverse-image/direct-image adjunctions for sheaves of modules"
-   }
+   "elementary": false
   },
   {
-   "text": "The functor in the first step has the total left derived functor $Lg^*=\\mathcal O_X\\otimes^{\\mathbf L}_{g^{-1}\\mathcal B}g^{-1}(-)$, computed on K-flat resolutions. Every complex $E$ of $\\mathcal B$-modules has a K-flat resolution $P\\to E$ [lem-pc-kflat-resolution]. Since $g^{-1}$ is exact, $g^{-1}P\\to g^{-1}E$ is a quasi-isomorphism, and $g^{-1}P$ is K-flat over $g^{-1}\\mathcal B$ by [lem-pc-kflat-pullback-preservation] applied to the morphism of ringed spaces $(g,\\mathrm{id}):(X,g^{-1}\\mathcal B)\\to(Y,\\mathcal B)$, whose termwise pullback is $g^{-1}P\\otimes_{g^{-1}\\mathcal B}g^{-1}\\mathcal B=g^{-1}P$. Hence, by [lem-pur-derived-change-of-rings] along $\\rho$, $Lg^*E\\cong\\mathcal O_X\\otimes_{g^{-1}\\mathcal B}g^{-1}P$, and a quasi-isomorphism of K-flat complexes is sent to a quasi-isomorphism; this gives the required left-derived comparison maps. The direct image has the total right derived functor $Rg_*$ computed on K-injective resolutions [def-pc-ringed-spaces-derived-direct-image]; the existence and resolution comparison data are supplied by [def-pur-kinjective-complex] and [prop-pur-kinjective-resolutions-exist]. Therefore the generic derived-adjunction theorem [lem-sc-derived-adjunction-from-underived] applies to the underived adjunction of step 1. It yields an adjunction $Lg^*\\dashv Rg_*$ and its derived counit induced by the underived counit.",
+   "text": "Use [lem-pc-ringed-space-tensor-pullback-absolute] for L and its K-flat comparison, including the left-derived postcomposition with derived direct image. The existing K-injective right derivability structure for [def-pc-ringed-spaces-derived-direct-image] proves the right-derived postcomposition with L. Lift the underived adjunction to homotopy categories and apply Mathlib's CategoryTheory.Adjunction.derived. Its homEquiv supplies the natural Hom bijections.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pur-derived-change-of-rings",
+    "lem-pc-ringed-space-tensor-pullback-absolute",
     "def-pc-ringed-spaces-derived-direct-image",
-    "def-pur-kinjective-complex",
-    "prop-pur-kinjective-resolutions-exist",
     "lem-sc-derived-adjunction-from-underived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W, cohomology-lemma-adjoint, with the K-flat/K-injective constructions of the derived pullback and direct image"
-   }
-  },
-  {
-   "text": "By the conclusion of [lem-sc-derived-adjunction-from-underived], the adjunction is represented by natural bifunctorial Hom bijections. Substituting the definitions of the two derived functors from the statement gives $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lg^*E,F)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(E,Rg_*F)$, natural in both $E$ and $F$.",
-   "uses": [
-    "lem-sc-derived-adjunction-from-underived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W, cohomology-lemma-adjoint, adjunction conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-module-inverse-image-adjunction",
-  "lem-pc-module-change-of-rings-adjunction",
-  "def-weil-pbc-topological-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-locally-ringed-space-morphism",
+  "lem-pc-ringed-space-tensor-pullback-underived",
+  "lem-pc-ringed-space-tensor-pullback-absolute",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-pur-derived-change-of-rings",
-  "def-pur-kinjective-complex",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sc-derived-adjunction-from-underived",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation"
+  "lem-sc-derived-adjunction-from-underived"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079W, cohomology-lemma-adjoint, using Tags 008A/008Y and the derived-functor constructions"
+  "place": "Tag 079W: concrete underived adjunction, absolute K-flat left derivation and K-injective right derivation; assembled with Mathlib Adjunction.derived"
  },
  "mathlib_searches": [
   {
@@ -196,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085313-L-29356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
