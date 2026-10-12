@@ -15,29 +15,37 @@
  ],
  "proof": [
   {
-   "text": "On affine etale objects over affine X-opens, the additive kernel before restriction is I_B. The relative kernel of B/J_B → B/I_B is I_B/J_B, and every class in it has a representative in I_B. Thus the additive image and relative kernel coincide on this affine basis, compatibly with all restrictions.",
+   "text": "Prove additive restriction along a closed immersion is an epimorphism. For an etale test scheme V use its affine open cover. Each base-changed closed immersion into an affine member has a surjective global-functions map by Mathlib IsClosedImmersion.isAffine_surjective_of_isAffine. Lift the restricted section and apply Scheme.ofArrows_mem_smallEtaleTopology_iff and Sheaf.epi_of_isLocallySurjective. This is the affine representative step, without explicitly computing either ideal kernel.",
    "uses": [
     "def-sbc-ideal-sheaf-powers",
     "def-sc-etale-additive-structure-restriction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Direct image preserves kernels. Use the base-change composition isomorphism and j followed by i_J equals i_I to view its kernel inclusion as a monomorphism into the target of the displayed composite. The affine representative argument gives a locally surjective factorization through this subobject.",
+   "text": "Check composition compatibility of additive restriction with Etale.lowerStarComp, componentwise. After applying the coefficient functor, Scheme.Hom.comp_appTop and MorphismProperty.Over.pullbackComp_left_fst_fst identify the composite pullback projections. Apply IdealSheafData.inclusion_subschemeι to the nested ideals.",
    "uses": [
-    "lem-weil-pbc-direct-image-left-exact",
-    "def-weil-pbc-direct-image",
-    "def-sc-etale-additive-structure-restriction"
+    "def-sbc-ideal-sheaf-powers",
+    "def-sc-etale-additive-structure-restriction",
+    "def-weil-pbc-direct-image"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Sheafifying the sectionwise image gives the categorical image in abelian sheaves. Hence the preceding factorization is an image factorization. Uniqueness gives the isomorphism, with the same coefficient universe lift as in the additive sheaf.",
+   "text": "Let f be restriction to J, g the pushforward of the relative restriction, k restriction to I, and c the composition isomorphism, so f followed by g followed by c equals k. Lift kernel.ι k followed by f to kernel g. The universal property of kernel k proves that this lift and kernel.ι k form a pullback square over f and kernel.ι g. Abelian.epi_snd_of_isLimit makes the lift epi, and strongEpi_of_epi and image.isoStrongEpiMono identify the displayed image with kernel g.",
    "uses": [
     "def-sc-etale-additive-structure-restriction",
     "def-weil-pbc-direct-image"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Compose the image isomorphism with the inverse of PreservesKernel.iso for the pushforward along J.subschemeι. Direct image preserves kernels, so its target is exactly the pushforward of the relative additive kernel in the theorem.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -49,7 +57,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as IdealAdditiveImageRelativeKernel"
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; extracted from the image comparison proof as IdealAdditiveImageRelativeKernel; P4 formal proof uses local affine surjectivity, composition compatibility, and pullback stability of epis in place of explicit sheafification of the image"
  },
  "mathlib_searches": [
   {
@@ -137,10 +145,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261012T220519-L-1392973",
-  "kind": "interface",
+  "landing": "20261012T232903-L-2042992",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
