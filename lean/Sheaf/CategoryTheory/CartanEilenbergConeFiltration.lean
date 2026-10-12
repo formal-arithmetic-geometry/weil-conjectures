@@ -6,11 +6,10 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
+import Sheaf.CategoryTheory.CartanEilenbergConeFiltrationData
+import Sheaf.CategoryTheory.CartanEilenbergConeFiltrationProperties
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-public import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.Filtration
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # The complex-degree filtration on an augmentation cone
 
@@ -96,6 +95,10 @@ theorem cartanEilenberg_cone_filtration
       ∀ p n : ℤ, Nonempty ((F.gradedPiece p).homology n ≅
         (CochainComplex.mappingCone
           (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).homology
-            (n - p)) := by sorry
+            (n - p)) := by
+  obtain ⟨F, hF⟩ := cartanEilenberg_cone_filtration_data K I a b hIbelow hKbelow aug haug
+  obtain ⟨hbounds, hgraded⟩ := cartanEilenberg_cone_filtration_properties
+    K I a b hIbelow hKbelow aug haug F hF
+  exact ⟨F, hF, hbounds, hgraded⟩
 
 end CategoryTheory.Functor
