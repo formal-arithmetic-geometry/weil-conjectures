@@ -27,60 +27,33 @@
  ],
  "proof": [
   {
-   "text": "Reduction to fibre rings. Let $\\mathfrak p'\\subset R'$ be a prime ideal and $\\mathfrak p\\subset R$ its inverse image under $R\\to R'$, a prime ideal of $R$. Put $F=S\\otimes_R\\kappa(\\mathfrak p)$ and $T=(R'\\otimes_RS)\\otimes_{R'}\\kappa(\\mathfrak p')$, the fibre rings of $R\\to S$ at $\\mathfrak p$ and of $R'\\to R'\\otimes_RS$ at $\\mathfrak p'$ [def-weil-pbc-localization-at-prime]. Since $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is surjective, $\\mathfrak p$ is in its image, so $F\\neq0$ by [lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero] (direction 'only if') applied to $R\\to S$ and $\\mathfrak p$. By the same lemma (direction 'if') applied to $R'\\to R'\\otimes_RS$ and $\\mathfrak p'$, it suffices to show $T\\neq0$ (Steps 2-4).",
+   "text": "Apply surjectivity stable under scheme base change [lem-weil-pbc-surjective-base-change] to Spec S → Spec R and Spec R' → Spec R. This makes the first projection from Spec R' ×_{Spec R} Spec S to Spec R' surjective.",
    "uses": [
-    "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-surjective-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof, and Lemma Tag 00E7 (lemma-in-image, line 3500)"
-   }
+   "elementary": false
   },
   {
-   "text": "The map of residue fields. The ring map $R\\to R'$ sends $R\\setminus\\mathfrak p$ into $R'\\setminus\\mathfrak p'$ (as $\\mathfrak p$ is the inverse image of $\\mathfrak p'$), so it induces a local homomorphism $R_{\\mathfrak p}\\to R'_{\\mathfrak p'}$, $r/s\\mapsto r/s$, which maps $\\mathfrak pR_{\\mathfrak p}$ into $\\mathfrak p'R'_{\\mathfrak p'}$ and hence a homomorphism of fields $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ [def-weil-pbc-localization-at-prime]. Both composites $R\\to\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ and $R\\to R'\\to\\kappa(\\mathfrak p')$ send $r$ to the class of $r/1$, so they agree: the $R$-algebra structure of $\\kappa(\\mathfrak p')$ through $R'$ is the one through $\\kappa(\\mathfrak p)$. Thus $\\kappa(\\mathfrak p')$ is a field extension of $\\kappa(\\mathfrak p)$.",
+   "text": "The affine fibre-product isomorphism [lem-weil-pbc-fibre-product-affine-spectra], instantiated as pullbackSpecIso R R' S, identifies Spec(R' ⊗_R S) with that pullback. Its inverse followed by the first projection equals Spec.map of r' ↦ r' ⊗ 1, by pullbackSpecIso_inv_fst.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-fibre-product-affine-spectra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof: '$\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is an extension of fields'"
-   }
+   "elementary": false
   },
   {
-   "text": "Identification of the fibre ring. Using the symmetry $M\\otimes N\\cong N\\otimes M$ of tensor products of algebras, $T\\cong\\kappa(\\mathfrak p')\\otimes_{R'}(R'\\otimes_RS)$, and by [lem-weil-pbc-tensor-cancel-base-change] (with its $R\\to S$, $B$, $A$ taken to be $R\\to R'$, $S$, $\\kappa(\\mathfrak p')$) this is isomorphic as a ring to $\\kappa(\\mathfrak p')\\otimes_RS$. By Step 2 the $R$-algebra $\\kappa(\\mathfrak p')$ is also an algebra over $\\kappa(\\mathfrak p)$ through $R\\to\\kappa(\\mathfrak p)$, so [lem-weil-pbc-tensor-cancel-base-change] again (with its $R\\to S$, $B$, $A$ taken to be $R\\to\\kappa(\\mathfrak p)$, $S$, $\\kappa(\\mathfrak p')$) gives a ring isomorphism $\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}(\\kappa(\\mathfrak p)\\otimes_RS)\\cong\\kappa(\\mathfrak p')\\otimes_RS$. With $\\kappa(\\mathfrak p)\\otimes_RS\\cong F$ (symmetry) we get a ring isomorphism $T\\cong\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}F$.",
-   "uses": [
-    "lem-weil-pbc-tensor-cancel-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof: $(R'\\otimes_RS)\\otimes_{R'}\\kappa(\\mathfrak p')=S\\otimes_R\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak p')$"
-   }
-  },
-  {
-   "text": "Nonvanishing. $F$ is a nonzero $\\kappa(\\mathfrak p)$-algebra (Step 1) and $\\kappa(\\mathfrak p)\\subseteq\\kappa(\\mathfrak p')$ a field extension (Step 2). Extend $\\{1\\}$ to a $\\kappa(\\mathfrak p)$-basis of $\\kappa(\\mathfrak p')$ and let $\\lambda:\\kappa(\\mathfrak p')\\to\\kappa(\\mathfrak p)$ be the $\\kappa(\\mathfrak p)$-linear map with $\\lambda(1)=1$ vanishing on the other basis vectors. Then $\\lambda\\otimes\\mathrm{id}_F:\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}F\\to\\kappa(\\mathfrak p)\\otimes_{\\kappa(\\mathfrak p)}F\\cong F$ sends $1\\otimes1$ to $1\\neq0$, so $1\\otimes1\\neq0$ and $\\kappa(\\mathfrak p')\\otimes_{\\kappa(\\mathfrak p)}F\\neq0$. By Step 3, $T\\neq0$, and by Step 1 $\\mathfrak p'$ is in the image of $\\operatorname{Spec}(R'\\otimes_RS)\\to\\operatorname{Spec}R'$. As $\\mathfrak p'$ was arbitrary, this map is surjective.",
+   "text": "The inverse of an isomorphism is surjective. Its composite with the surjective projection is surjective; rewrite by the projection identity to obtain exactly the required tensor-product spectrum map.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof: 'which is not zero as $S\\otimes_R\\kappa(\\mathfrak p)$ is not zero by assumption and $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is an extension of fields'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-tensor-cancel-base-change"
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 00FI (lemma-surjective-spec-radical-ideal, line 5822), second paragraph of the proof, with Lemma Tag 00E7 (lemma-in-image, line 3500); the nonvanishing of the tensor product over a field extension (Step 4) and the compatibility of R-structures (Step 2), which the source leaves implicit, written out by the worker"
+  "by": "worker",
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+  "place": "Alternative route using Tag 01S1 (base-change-surjective) and Tags 01I4/01JQ (fibre-product-affine-schemes/fibre-product-affines), realized by Mathlib PullbackCarrier and pullbackSpecIso_inv_fst."
  },
  "mathlib_searches": [
   {
@@ -178,5 +151,15 @@
   "group": "F1",
   "result": "fix",
   "note": "statement matched clause by clause; surjectivity restated as Mathlib AlgebraicGeometry.Surjective on Spec.map (convention; was Function.Surjective of .base); no Mathlib lemma for ring-level Spec-surjective base change (only the scheme IsStableUnderBaseChange instance, needs pullbackSpecIso)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085314-L-29760",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

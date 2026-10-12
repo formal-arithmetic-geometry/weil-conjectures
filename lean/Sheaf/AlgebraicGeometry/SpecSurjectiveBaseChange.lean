@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.RingTheory.TensorProduct.Basic
 
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+
 /-!
 # Surjectivity of spectra after base change
 
@@ -28,24 +30,24 @@ Source: Stacks Project, Algebra, Tag 00FI, final assertion
 (blueprint: lem-weil-pbc-spec-surjective-base-change).
 
 Proof:
-1. For a prime `p'` of `R'`, let `p` be its inverse image in `R`. Surjectivity makes
-   `S ⊗[R] κ(p)` nonzero, by lem-weil-pbc-prime-in-image-iff-fibre-ring-nonzero.
-   The same lemma reduces the conclusion to nonvanishing of the fibre at `p'`.
-2. Localizing and quotienting gives the field inclusion `κ(p) → κ(p')`
-   (def-weil-pbc-localization-at-prime). Its composite from `R` agrees with the map
-   through `R'`, since both send an element to its residue class.
-3. Tensor symmetry and two applications of lem-weil-pbc-tensor-cancel-base-change
-   identify that fibre with `κ(p') ⊗[κ(p)] (S ⊗[R] κ(p))`.
-4. A basis containing `1` gives a linear retraction `κ(p') → κ(p)` preserving `1`.
-   Tensoring the retraction with the identity sends `1 ⊗ 1` to the nonzero unit
-   of the original fibre. Thus the new fibre is nonzero and `p'` is in the image.
-   As `p'` was arbitrary, the base-changed spectrum map is surjective. -/
+1. Regard the given surjectivity as an instance. Surjectivity is stable under
+   scheme base change (Stacks Tag 01S1), so the first projection from
+   `Spec R' ×[Spec R] Spec S` to `Spec R'` is surjective.
+2. The affine pullback isomorphism `pullbackSpecIso R R' S` identifies this
+   pullback with `Spec (R' ⊗[R] S)` (Stacks Tags 01I4 and 01JQ).
+   Its inverse followed by the first projection is the required spectrum map,
+   by `pullbackSpecIso_inv_fst R R' S`.
+3. An isomorphism and a composite of surjective scheme morphisms are surjective.
+   Rewrite by the projection identity and infer these instances. -/
 theorem Spec.map_surjective_baseChange
     {R S R' : Type u} [CommRing R] [CommRing S] [CommRing R']
     [Algebra R S] [Algebra R R']
     (h : Surjective (Spec.map (CommRingCat.ofHom (algebraMap R S)))) :
     Surjective (Spec.map (CommRingCat.ofHom
       (Algebra.TensorProduct.includeLeftRingHom : R' →+* R' ⊗[R] S))) := by
-  sorry
+  -- Identify the affine base change with the scheme pullback.
+  let := h
+  rw [← pullbackSpecIso_inv_fst R R' S]
+  infer_instance
 
 end AlgebraicGeometry
