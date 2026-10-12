@@ -201,4 +201,56 @@ theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single {k₀ : Type*} [Fiel
     minpoly.eq_of_irreducible_of_monic hfirr (by simp [f, hx]) hfmon
   exact (Normal.minpoly_eq_iff_mem_orbit L).1 ((hmin _ hroot).symm.trans (hmin _ hu))
 
+/-- The Galois group of `k((t))` acts on the roots of `X^q - X - b t⁻¹`, `q = #k₀`, `b ≠ 0`, by
+all translations by `k₀`; this is
+`LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single` for `b ∈ kˣ` arbitrary. -/
+theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single_of_ne_zero {k₀ : Type*} [Field k₀]
+    [Finite k₀] [Algebra k₀ k] {b : k} (hb : b ≠ 0) (L : Type*) [Field L]
+    [Algebra (LaurentSeries k) L] [IsAlgClosure (LaurentSeries k) L] {u : L}
+    (hu : u ^ Nat.card k₀ - u = algebraMap (LaurentSeries k) L (HahnSeries.single (-1) b))
+    (c : k₀) :
+    ∃ σ : L ≃ₐ[LaurentSeries k] L,
+      σ u = u + algebraMap (LaurentSeries k) L (HahnSeries.C (algebraMap k₀ k c)) := by
+  set K := LaurentSeries k
+  have := Fintype.ofFinite k₀
+  set ι : k₀ →+* L := (algebraMap K L).comp (HahnSeries.C.comp (algebraMap k₀ k))
+  set q := Nat.card k₀
+  have hq : 2 ≤ q := Finite.one_lt_card
+  set s : K := HahnSeries.single (-1 : ℤ) b
+  set f : K[X] := X ^ q - X - C s
+  have hfirr : Irreducible f := irreducible_X_pow_sub_X_sub_C_single hq hb
+  have hfmon : f.Monic := by
+    unfold f
+    rw [sub_sub]
+    exact monic_X_pow_sub (by compute_degree; exact_mod_cast (by omega : 1 < q))
+  obtain ⟨p, hp⟩ := CharP.exists k₀
+  have : Fact p.Prime := ⟨CharP.char_is_prime k₀ p⟩
+  have : CharP L p := charP_of_injective_ringHom ι.injective p
+  obtain ⟨m, -, hm⟩ := FiniteField.card k₀ p
+  have hqc : q = Fintype.card k₀ := Nat.card_eq_fintype_card
+  have hroot : (u + ι c) ^ q - (u + ι c) = algebraMap K L s := by
+    rw [hqc, hm, add_pow_char_pow, ← hm, ← map_pow, FiniteField.pow_card, ← hqc, ← hu]
+    ring
+  have hmin : ∀ x : L, x ^ q - x = algebraMap K L s → f = minpoly K x := fun x hx ↦
+    minpoly.eq_of_irreducible_of_monic hfirr (by simp [f, hx]) hfmon
+  exact (Normal.minpoly_eq_iff_mem_orbit L).1 ((hmin _ hroot).symm.trans (hmin _ hu))
+
+/-- The uniformizer `t` of `k((t))` is transcendental over `k`. -/
+theorem transcendental_single_one : Transcendental k (HahnSeries.single (1 : ℤ) (1 : k)) := by
+  rintro ⟨p, hp, h⟩
+  refine hp (Polynomial.coe_injective (R := k) (HahnSeries.ofPowerSeries_injective (Γ := ℤ) (R := k) ?_))
+  have hC : (HahnSeries.ofPowerSeries ℤ k).comp PowerSeries.C = algebraMap k (LaurentSeries k) :=
+    RingHom.ext fun x ↦ by simp [RingHom.algebraMap_toAlgebra]
+  rw [← Polynomial.eval₂_C_X_eq_coe, Polynomial.hom_eval₂, hC, HahnSeries.ofPowerSeries_X,
+    ← Polynomial.aeval_def, h, Polynomial.coe_zero, map_zero]
+
+/-- The coordinate `1 / t` of `k((t))` is transcendental over `k`. -/
+theorem transcendental_single_neg_one :
+    Transcendental k (HahnSeries.single (-1 : ℤ) (1 : k)) := by
+  have h : HahnSeries.single (-1 : ℤ) (1 : k) = (HahnSeries.single (1 : ℤ) (1 : k))⁻¹ :=
+    eq_inv_of_mul_eq_one_left (by
+      rw [HahnSeries.single_mul_single, neg_add_cancel, mul_one, HahnSeries.single_zero_one])
+  rw [h, Transcendental, IsAlgebraic.inv_iff]
+  exact transcendental_single_one
+
 end LaurentSeries

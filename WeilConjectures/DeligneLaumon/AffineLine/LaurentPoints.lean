@@ -53,8 +53,9 @@ lemma affineLine.homOfVector_comp_over_eq (v : A) :
         (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) =
       Spec.map (CommRingCat.ofHom (algebraMap (AlgebraicClosure k₀) A)) ≫
         (Scheme.specAlgebraicClosure k₀).hom := by
-  rw [AffineSpace.homOfVector_over, Scheme.specAlgebraicClosure, Over.mk_hom, ← Spec.map_comp,
-    ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
+  rw [AffineSpace.homOfVector_over]
+  simp only [Scheme.specAlgebraicClosure, Over.mk_hom]
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
 
 /-- The point `x = v` of the geometric affine line `𝔸¹_{k̄}` with values in a `k̄`-algebra `A`. -/
 noncomputable def affineLine.geometricPoint (v : A) : Spec (.of A) ⟶ Ā :=
@@ -98,7 +99,7 @@ lemma affineLine.specMap_comp_geometricPoint {B : Type u} [CommRing B] [Algebra 
       congr 2
       exact RingHom.ext hφ₀
     · rw [AffineSpace.comp_homOfVector_appTop_coord, AffineSpace.homOfVector_appTop_coord,
-        AffineSpace.homOfVector_appTop_coord, Scheme.specMap_appTop_ΓSpecIso_inv]
+        Scheme.specMap_appTop_ΓSpecIso_inv]
       rfl
   · rw [Category.assoc, affineLine.geometricPoint_geometricFiberToAlgebraicClosure,
       affineLine.geometricPoint_geometricFiberToAlgebraicClosure, ← Spec.map_comp,
@@ -138,14 +139,6 @@ lemma affineLine.homOfVector_appTop_appTop (v : A) (c : k₀) :
   rfl
 
 end GeometricPoint
-
-instance LaurentSeries.isScalarTower_algebraicClosure :
-    IsScalarTower k₀ (AlgebraicClosure k₀) (LaurentSeries (AlgebraicClosure k₀)) :=
-  .of_algebraMap_eq fun x ↦ by simp [HahnSeries.algebraMap_apply]
-
-instance PowerSeries.isScalarTower_algebraicClosure :
-    IsScalarTower k₀ (AlgebraicClosure k₀) (PowerSeries (AlgebraicClosure k₀)) :=
-  .of_algebraMap_eq fun x ↦ by simp [PowerSeries.algebraMap_apply]
 
 /-- The point `x = b / t` of the geometric affine line `𝔸¹_{k̄}` with values in the Laurent series
 field `k̄((t))`. -/
