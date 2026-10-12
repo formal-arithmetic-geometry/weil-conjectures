@@ -6011,3 +6011,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/T2/Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic (stage 3; reviewer PASS; first push; landing 20261012T042421-L-1822044 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/T2/Sheaf.Paper.IntegralCoverTrivialCohomology (stage 3; reviewer PASS; first push; landing 20261012T042422-L-1822155 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets (stage 3; reviewer PASS; first push; landing 20261012T042422-L-1822250 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/U1/WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality (stage 3; reviewer PASS; first push; landing 20261012T042422-L-1822346 (interface); batch 20261012T042402; modules 3; new nodes 2)

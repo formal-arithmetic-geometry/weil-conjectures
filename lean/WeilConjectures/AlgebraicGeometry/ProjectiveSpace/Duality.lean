@@ -16,10 +16,15 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+
 import Sheaf.AlgebraicGeometry.CoherentProjRepresentation
-import Sheaf.AlgebraicGeometry.ProjSheafificationExact
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.SheafifyGradedChain
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists
 import Sheaf.RingTheory.GradedSyzygy
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Sheaf.AlgebraicGeometry.ProjSheafificationExact
 
 /-!
 # Serre duality on the projective line
@@ -177,8 +182,44 @@ theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules
       (f₂ : ∐ (fun j ↦ 𝒪 (d₂ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₁ j)))
       (f₁ : ∐ (fun j ↦ 𝒪 (d₁ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₀ j)))
       (f₀ : ∐ (fun j ↦ 𝒪 (d₀ j)) ⟶ 𝒢),
-      Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact :=
-  sorry
+      Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact := by
+  let := MvPolynomial.gradedAlgebra (σ := Fin 2) (R := k)
+  obtain ⟨C, -, -⟩ := Proj.proj_shifted_free_is_twist k 0
+  have : IsLocallyNoetherian (ProjectiveLine (Spec (.of k))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
+  have : IsLocallyNoetherian (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)) :=
+    LocallyOfFiniteType.isLocallyNoetherian C.iso.hom
+  have hG := (isCoherent_iff_isQuasicoherent_and_isFiniteType _
+    ((Scheme.Modules.pullback C.iso.hom).obj 𝒢)).2 ⟨inferInstance, inferInstance⟩
+  obtain ⟨M, hM, ℳ, hℳ, hsmul, F, ⟨eF⟩, alpha, halpha, hscalar, hres⟩ :=
+    Proj.coherent_exists_graded_representation k _ hG
+  let := hM
+  obtain ⟨A, 𝒜, r, d, b, a₂, a₁, a₀, h𝒜, hA, hb, ha₂, ha₁, ha₀, hinj, hex₁,
+      hex₀, hsurj⟩ := MvPolynomial.exists_graded_free_resolution_two ℳ hℳ hsmul
+  obtain ⟨E, g₂, g₁, g₀, hE, hg₂, hg₀, hex⟩ :=
+    Proj.sheafify_graded_chain k C M ℳ hℳ hsmul F alpha halpha hscalar
+      hres A 𝒜 a₂ a₁ a₀ h𝒜 hA ha₂ ha₁ ha₀ hinj hex₁ hex₀ hsurj
+  have eTw (i : Fin 3) :
+      Nonempty ((Scheme.Modules.pullback C.iso.inv).obj (E i) ≅
+        ∐ (fun j ↦ ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (d i j))) := by
+    obtain ⟨alphaE, hαE, hsE, hrE⟩ := hE i
+    exact Proj.homogeneous_basis_sheaf_twists k C (A i) (𝒜 i) (h𝒜 i) (hA i)
+      (E i) alphaE hαE hsE hrE (r i) (d i) (b i) (hb i)
+  obtain ⟨e₂⟩ := eTw 2
+  obtain ⟨e₁⟩ := eTw 1
+  obtain ⟨e₀⟩ := eTw 0
+  let e : (Scheme.Modules.pullback C.iso.inv).obj F ≅ 𝒢 :=
+    (Scheme.Modules.pullback C.iso.inv).mapIso eF ≪≫ (pullbackComp C.iso.inv C.iso.hom).app 𝒢 ≪≫
+      (pullbackCongr C.iso.inv_hom_id).app 𝒢 ≪≫ (pullbackId _).app 𝒢
+  let := hg₂
+  let := hg₀
+  refine ⟨r 0, r 1, r 2, d 0, d 1, d 2, e₂.inv ≫ g₂ ≫ e₁.hom,
+    e₁.inv ≫ g₁ ≫ e₀.hom, e₀.inv ≫ g₀ ≫ e.hom, inferInstance, inferInstance, ?_⟩
+  apply ComposableArrows.exact_of_iso _ hex
+  exact ComposableArrows.isoMk₃ e₂ e₁ e₀ e
+    (by change g₂ ≫ e₁.hom = e₂.hom ≫ (e₂.inv ≫ g₂ ≫ e₁.hom); simp)
+    (by change g₁ ≫ e₀.hom = e₁.hom ≫ (e₁.inv ≫ g₁ ≫ e₀.hom); simp)
+    (by change g₀ ≫ e.hom = e₀.hom ≫ (e₀.inv ≫ g₀ ≫ e.hom); simp)
 
 /-- `Hom(𝒪(a), Ω¹_{ℙ¹_k/k}) ≅ 𝒪(-a - 2)`, since `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` is invertible and
 `𝒪(a)ᵛ ≅ 𝒪(-a)`. -/

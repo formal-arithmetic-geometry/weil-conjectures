@@ -28,26 +28,53 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-p1-coherent-proj-representation] to obtain a finitely generated graded $S=k[x_0,x_1]$-module $M$ and an isomorphism $\\widetilde M\\cong\\mathcal G$. Apply [lem-sc-p1-graded-syzygy] to get an exact graded resolution $0\\to F_2\\to F_1\\to F_0\\to M\\to0$ with each $F_i$ a finite direct sum of shifts $S(d)$. By [lem-sc-p1-proj-sheafification-exact], associated sheafification preserves this exact sequence. Finally [lem-sc-p1-proj-shifted-free-twist] identifies each $\\widetilde{F_i}$ with a finite direct sum of the twists $\\mathcal O(d)$, and the isomorphism $\\widetilde M\\cong\\mathcal G$ identifies the final term, yielding the required exact sequence.",
+   "text": "Choose a chart-compatible comparison C from proj_shifted_free_is_twist at degree zero. Both projective-line models are locally Noetherian: the glued line is of finite type over Spec k, and an isomorphism is locally of finite type. Pullback preserves quasi-coherence and finite presentation; finite presentation implies finite type. Apply the locally-Noetherian coherent criterion to the pullback of G, then obtain its finite graded representation M, associated sheaf F, chart data, and isomorphism F ≅ C^*G.",
    "uses": [
-    "lem-sc-p1-coherent-proj-representation",
-    "lem-sc-p1-graded-syzygy",
-    "lem-sc-p1-proj-sheafification-exact",
-    "lem-sc-p1-proj-shifted-free-twist"
+    "lem-sc-p1-proj-shifted-free-twist",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sc-p1-coherent-proj-representation"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply graded syzygy to M and its internal scalar-compatible grading. Retain the three free modules, ranks, integer shifts, homogeneous bases, degree-preserving maps, injectivity, the two range/kernel identities, and surjectivity.",
+   "uses": [
+    "lem-sc-p1-graded-syzygy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact graded-chain sheafification theorem to this chain and the supplied chart data for F. It gives three associated sheaves E_i, their chart data, and an exact chain of inverse pullbacks ending at inverse pullback of F, with monic and epic endpoints.",
+   "uses": [
+    "lem-sc-p1-sheafify-graded-chain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each i, apply the homogeneous-basis sheaf identification using the basis of the ith free module and the chart data just obtained. This gives inverse pullback E_i ≅ the finite sum of twists with the syzygy rank and shifts.",
+   "uses": [
+    "lem-sc-p1-homogeneous-basis-sheaf-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the isomorphism F ≅ C^*G along C^(-1). Compose with Scheme.Modules.pullbackComp, pullbackCongr of C.inv_hom_id, and pullbackId to identify the last term with G. Conjugate the three arrows through all four isomorphisms. Monicity and epicity are preserved by composition with isomorphisms. ComposableArrows.isoMk₃ checks the three commuting squares using hom_inv_id, and ComposableArrows.exact_of_iso transports exactness. Supply the ranks, shifts and these arrows as existential witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-p1-coherent-proj-representation",
   "lem-sc-p1-graded-syzygy",
-  "lem-sc-p1-proj-sheafification-exact",
-  "lem-sc-p1-proj-shifted-free-twist"
+  "lem-sc-p1-homogeneous-basis-sheaf-twists",
+  "lem-sc-p1-proj-shifted-free-twist",
+  "lem-sc-p1-sheafify-graded-chain",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "## Proof"
+  "place": "Stage-3 realization of graded representation, syzygy, exact sheafification and shifted-free identification; U1, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -136,5 +163,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T042422-L-1822346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
