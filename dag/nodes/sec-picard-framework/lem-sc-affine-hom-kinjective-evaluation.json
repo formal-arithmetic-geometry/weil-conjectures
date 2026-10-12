@@ -17,40 +17,33 @@
  },
  "proof": [
   {
-   "text": "Internal sheaf Hom from the unit is naturally the identity by evaluation at one. Degreewise evaluation gives an isomorphism from the Hom complex out of the unit in degree zero to its second complex: all other product factors are zero, and the differential is that of the second complex. Apply the derived internal Hom localization comparison and invert the resolution map to descend this natural isomorphism to j on D(Y).",
+   "text": "Apply affine_hom_complex_evaluation to obtain the natural unit Hom-complex isomorphism e and the chain isomorphism d, with its chain-level counit equation.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
+    "lem-sc-affine-hom-complex-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "The restriction of the algebra unit has the same sections and restrictions as f_*O_X, with identity sectionwise identification. Apply iH degreewise to a K-injective I. Hom from a complex concentrated in degree zero has the degreewise Hom sheaves and differential of I. The K-injective computation of derived internal Hom therefore gives c: Q(T(H(I))) is isomorphic to RHom(A[0],QI).",
+   "text": "Apply derived_single_hom_evaluation to e, obtaining j and c for B=f_*O_X and the canonical unit map k:O_Y to B, on each K-injective I.",
    "uses": [
-    "def-sc-direct-image-algebra-derived-category",
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
+    "lem-sc-derived-single-hom-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "By h_eval, on every open and section the underived counit equals precomposition by O_Y to A followed by evaluation at one. Sheaf-morphism extensionality gives equality in every degree, hence of chain maps. Apply Q and the comparisons from the preceding steps to obtain c followed by RHom(O_Y to A,QI) followed by j_QI equal to Q of the termwise counit.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false
+   "text": "Compose Q.mapIso d with c. By associativity and the equation for c, the evaluation composite is Q(d.hom) followed by Q of chain precomposition and e. Functor.map_comp combines the two localized chain maps; the equation for d identifies their composite with the termwise counit.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-sc-direct-image-algebra-derived-category"
+  "lem-sc-affine-hom-complex-evaluation",
+  "lem-sc-derived-single-hom-evaluation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/duality.tex",
-  "place": "termwise comparison and evaluation in section-duality-finite; explicit argument extracted from steps 2 and 3 of lem-sc-affine-derived-hom-localized-evaluation"
+  "place": "termwise comparison and evaluation in section-duality-finite; decomposed into underived chain evaluation and derived K-injective comparison"
  },
  "mathlib_searches": [
   {
@@ -126,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-6f534",
-  "group": "B2",
+  "reviewer": "X-1f6eb",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T112829-L-764098",
+  "landing": "20261012T135257-L-1679849",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet/node statements, compiled cleanly, preserved the existing theorem signature, and the required importer compiled against them."
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node statements and dependencies; verified compilation, direct importer compatibility, and axioms."
  }
 }

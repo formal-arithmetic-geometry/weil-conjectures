@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-affine-hom-complex-evaluation",
+ "kind": "statement",
+ "title": "Underived affine Hom evaluation on complexes",
+ "statement": "Let f:X to Y be an affine morphism of schemes [def-pc-scheme], A=f_*O_X its direct-image algebra and T restriction of scalars [def-sc-direct-image-algebra-derived-category]. Let H:Mod(O_Y) to Mod(A) be additive, iH:T composed with H naturally isomorphic to internal Hom(T(A),-) [def-pur-sheaf-hom], and T adjoint to H with counit epsilon. Assume epsilon(phi)=iH(phi)(1) on every open and section. There exists a natural isomorphism e:Hom-complex(O_Y[0],-) to the identity [def-pur-hom-complex] such that for every unbounded cochain complex I there exists a chain isomorphism d:T(H(I)) to Hom-complex(A[0],I). Its composite with precomposition by the canonical k:O_Y to f_*O_X, then e_I, equals the termwise counit. No derived category or K-injectivity is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "termwise affine Hom evaluation, extracted from Stacks Tags 0BUZ, 0BV0, 0AX3"
+ },
+ "proof": [
+  {
+   "text": "In the product defining Hom from a degree-zero sheaf, all factors except the zero source degree vanish. Projection to the zero factor is an isomorphism; its inverse inserts the given map in that factor and zero in all others. The differential formula reduces to postcomposition by the target differential.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the unit source, compose that projection with evaluation at one. Its inverse sends x to the linear map r -> r*x. These are inverse sheaf maps and commute with differentials and all chain maps. They give the natural isomorphism e.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction of the direct-image algebra unit is f_*O_X: both have on an open U the module O_X(f^{-1}U), with the scalar action through f.c. Use this sectionwise identity, apply iH in every degree, and then invert the projection in step 1 for the source f_*O_X[0]. This constructs the chain isomorphism d.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under these projections, precomposition by O_Y -> f_*O_X sends a local linear map phi to the map r -> phi(f.c(r)). Evaluation at one is phi(1), since f.c preserves one. The hypothesis h_eval identifies this with the counit in each degree. Extensionality on opens and sections, followed by chain-map extensionality, proves the equality. Zero rings, empty schemes, zero complexes, and unbounded complexes are included: no exactness of products is used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "termwise affine Hom evaluation, extracted from Stacks Tags 0BUZ, 0BV0, 0AX3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom of complexes from a sheaf concentrated in degree zero and evaluation at the unit",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homObjUnitIso\"",
+   "date": "2026-10-12",
+   "results": "0 hits",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*single|homObjUnitIso",
+   "date": "2026-10-12",
+   "results": "Mathlib has no sheaf-valued Hom-complex unit theorem; repository has homComplexSingle and homObjUnitIso",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison derived internal Hom with K-injective target compatible with morphisms in the first argument",
+   "date": "2026-10-12",
+   "results": "8 hits, all ordinary injective-resolution Ext/right-derived APIs; none gives sheaf-valued Hom-complex evaluation.",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"hom\"",
+   "date": "2026-10-12",
+   "results": "12 hits on SingleFunctors.Hom; none is a sheaf Hom-complex comparison.",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "HomologicalComplex.*single|fullyFaithfulWhiskeringLeft|homComplex_single_iso",
+   "date": "2026-10-12",
+   "results": "Mathlib localization precomposition API found. Local rg on lean also found homComplex_single_iso (objectwise only), homComplex_unit_iso (no specified evaluation compatibility), derivedInternalHom_unit_iso (no comparison compatibility), and derivedInternalHom_single_comparison (needs a supplied derived functor; no counit equality). None states this lemma.",
+   "verdict": "no exact match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineHomKInjectiveEvaluation",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, finite duality comparison and counit evaluation: AffineHomComplexEvaluation",
+   "via": [
+    "lem-sc-affine-hom-kinjective-evaluation",
+    "lem-sc-affine-derived-hom-localized-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineHomComplexEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineHomComplexEvaluation.lean",
+  "declaration": "AlgebraicGeometry.affine_hom_complex_evaluation",
+  "statement": "theorem affine_hom_complex_evaluation\n    {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]\n    (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n        SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))\n      [H.Additive]\n      (iH : H ⋙ SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ≅\n        (SheafOfModules.homFunctor Y.sheaf).obj\n          (op ((SheafOfModules.restrictScalars\n            (R := moduleRings Y.toRingedSpace)\n            (R' := moduleRings (directImageAlgebraSpace f))\n            ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj\n              (SheafOfModules.unit (moduleRings (directImageAlgebraSpace f))))))\n      (adj₀ : SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ⊣ H)\n    (h_eval : ∀ (F : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (U : Y.Opens)\n          (φ : (H.obj F).val.obj (op U)),\n        ((adj₀.counit.app F).val.app (op U)).hom φ =\n          ((((iH.hom.app F).val.app (op U)).hom φ).app (op (Over.mk (𝟙 U)))).hom\n            (1 : (moduleRings (directImageAlgebraSpace f)).obj.obj (op U))) :\n    ∃ e : (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj\n        (op ((CochainComplex.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n            (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _,\n      ∀ I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,\n      ∃ d : (((SheafOfModules.restrictScalars\n          (R := moduleRings Y.toRingedSpace)\n          (R' := moduleRings (directImageAlgebraSpace f))\n          ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).mapHomologicalComplex\n            (.up ℤ)).obj ((H.mapHomologicalComplex (.up ℤ)).obj I)) ≅\n          homComplex (R := Y.toRingedSpace.sheaf)\n            ((CochainComplex.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n                ((Scheme.Modules.pushforward f).obj\n                  (SheafOfModules.unit X.ringCatSheaf))) I,\n        d.hom ≫ ((homComplexFunctor (R := Y.toRingedSpace.sheaf)).map\n          (((CochainComplex.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map\n              (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)).app I ≫\n            e.hom.app I =\n              ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1f6eb",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1f6eb",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679849",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node statements and dependencies; verified compilation, direct importer compatibility, and axioms."
+ }
+}

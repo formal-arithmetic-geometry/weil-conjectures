@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-derived-single-hom-evaluation",
+ "kind": "statement",
+ "title": "Derived single-source Hom evaluation",
+ "statement": "Let Y be a scheme [def-pc-scheme] for which the derived category D(O_Y) exists [def-pc-derived-category]. Let Q be localization of cochain complexes of sheaves of O_Y-modules. Suppose a natural isomorphism e:Hom-complex(O_Y[0],-) to the identity [def-pur-hom-complex] is given. There exists a natural isomorphism j:RHom(O_Y[0],-) to the identity [def-pur-derived-internal-hom] such that for every O_Y-module sheaf B [def-pur-sheaf-hom], every k:O_Y to B and every K-injective complex I [def-pur-kinjective-complex], there is c:Q Hom-complex(B[0],I) isomorphic to RHom(B[0],QI). The composite c.hom, RHom(k[0],QI), j_QI equals Q of Hom-complex(k[0],I) followed by e_I. No affine morphism, algebra-valued functor or adjunction is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-hom",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 08J7 and Lemma 0A95; localization comparison and naturality"
+ },
+ "proof": [
+  {
+   "text": "Write I0 for the functorial K-injective replacement and eta for its augmentation. Use derivedInternalHom_comparison for this replacement. Fixing its first variable at O_Y[0], compose it with e on I0 and the inverse of Q(eta). This gives a natural isomorphism after precomposition by Q. Fully faithful precomposition by Q descends it to j on the derived category.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-injective complex I, eta_I is a quasi-isomorphism between K-injectives. Hence Hom(B[0], eta_I) is a quasi-isomorphism by quasiIso_homComplex_map. Compose Q of this map with the inverse of the comparison at (B[0], I) to obtain c from the unresolved Hom complex to derived internal Hom.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the comparison in the first variable moves precomposition by k[0] across it. The comparison at O_Y[0] cancels against its inverse in j. Naturality of the Hom-complex bifunctor moves eta across precomposition by k. Finally naturality of e moves eta across evaluation, and Q(eta) cancels with its inverse. The resulting composite is Q of precomposition by k[0] followed by e_I, as asserted. No finiteness or boundedness hypothesis is used; the zero map k, zero B, zero ring and empty scheme obey the same identities.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 08J7 and Lemma 0A95; localization comparison and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom of complexes from a sheaf concentrated in degree zero and evaluation at the unit",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homObjUnitIso\"",
+   "date": "2026-10-12",
+   "results": "0 hits",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*single|homObjUnitIso",
+   "date": "2026-10-12",
+   "results": "Mathlib has no sheaf-valued Hom-complex unit theorem; repository has homComplexSingle and homObjUnitIso",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison derived internal Hom with K-injective target compatible with morphisms in the first argument",
+   "date": "2026-10-12",
+   "results": "8 hits, all ordinary injective-resolution Ext/right-derived APIs; none gives sheaf-valued Hom-complex evaluation.",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"hom\"",
+   "date": "2026-10-12",
+   "results": "12 hits on SingleFunctors.Hom; none is a sheaf Hom-complex comparison.",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "HomologicalComplex.*single|fullyFaithfulWhiskeringLeft|homComplex_single_iso",
+   "date": "2026-10-12",
+   "results": "Mathlib localization precomposition API found. Local rg on lean also found homComplex_single_iso (objectwise only), homComplex_unit_iso (no specified evaluation compatibility), derivedInternalHom_unit_iso (no comparison compatibility), and derivedInternalHom_single_comparison (needs a supplied derived functor; no counit equality). None states this lemma.",
+   "verdict": "no exact match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineHomKInjectiveEvaluation",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, finite duality comparison and counit evaluation: DerivedSingleHomEvaluation",
+   "via": [
+    "lem-sc-affine-hom-kinjective-evaluation",
+    "lem-sc-affine-derived-hom-localized-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedSingleHomEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSingleHomEvaluation.lean",
+  "declaration": "AlgebraicGeometry.derived_single_hom_evaluation",
+  "statement": "theorem derived_single_hom_evaluation (Y : Scheme.{u})\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (e : (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj\n        (op ((CochainComplex.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n            (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _) :\n    ∃ j : (Functor.curry.obj\n        (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj\n          (op ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n              (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _,\n      ∀ (B : SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n        (k : SheafOfModules.unit Y.ringCatSheaf ⟶ B)\n        (I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n        (_ : I.IsKInjective),\n      ∃ c : DerivedCategory.Q.obj\n          (homComplex (R := Y.toRingedSpace.sheaf)\n            ((CochainComplex.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj B) I) ≅\n          (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj\n            (op ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj B),\n              DerivedCategory.Q.obj I),\n        c.hom ≫ (derivedInternalHom (Opens.grothendieckTopology Y)\n            Y.toRingedSpace.sheaf).map\n          (((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op,\n            𝟙 (DerivedCategory.Q.obj I)) ≫\n          j.hom.app (DerivedCategory.Q.obj I) =\n            DerivedCategory.Q.map\n              (((homComplexFunctor (R := Y.toRingedSpace.sheaf)).map\n                (((CochainComplex.singleFunctor\n                  (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op)).app I ≫\n                    e.hom.app I)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1f6eb",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1f6eb",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679849",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with node statements and dependencies; verified compilation, direct importer compatibility, and axioms."
+ }
+}
