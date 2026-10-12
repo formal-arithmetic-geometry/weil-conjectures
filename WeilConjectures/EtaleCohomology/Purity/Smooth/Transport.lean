@@ -23,18 +23,16 @@ of `𝒪_E`-modules, and the `E` stage is its rationalization
 
 ## Implementation notes
 
-The one statement here is the genuinely new content of `sk-thm-purity-transport`: that `Rf^!`
-preserves derived completeness, which is what makes the `𝒪_E` stage a stage at all.
-
-Everything else in that subsection is either formal or unavailable. The purity isomorphism on
-derived-complete objects is `sk-thm-smooth-purity` read at `Λ = 𝒪_E`, since derived
-completeness is a property of objects of the ambient derived category and the purity
-isomorphism is an isomorphism there. The `E` statement is its image under the localization
-functor `DerivedCategoryDerivedCompleteRational.fromIntegral`, and the `ℚ̄_ℓ` statement its
-colimit over finite `E/ℚ_ℓ` — a colimit category the repository does not yet have. What is
-*not* formal, and is not stated because the finite reductions `𝒪_E → A_{E,n}` are not
-available as functors here, is that `γ_{f,K}` extends the finite-coefficient isomorphism
-compatibly with those reductions.
+The statement here is that `Rf^!` preserves derived completeness, which is what makes the
+`𝒪_E` stage a stage at all. The transport of the purity isomorphism itself is in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction` (compatibility with the finite
+reductions) and `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit` (the
+realization at the `𝒪_E` stage of a levelwise isomorphism of normalized systems); the smooth
+traces are in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.Trace`. The purity isomorphism cannot be read
+off `sk-thm-smooth-purity` at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a derived complete
+`K` need not be derived complete (the constant sheaf `𝒪_E` on `𝔾_m` over an algebraically
+closed field is not), whereas `Rf^! K` is.
 
 ## Main statements
 
@@ -86,9 +84,9 @@ carries derived-complete objects of `D(Y_ét, 𝒪_E)` to derived-complete objec
 right adjoint of `Rf_!`, whose existence is assumed here: the instance
 `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` only covers finite coefficients.
 
-Given this, the purity isomorphism `γ_{f,K} : (Lf^* K)(d)[2d] ≅ Rf^! K` at the adic stage is
-`sk-thm-smooth-purity` read at `Λ = 𝒪_E`, and applying
-`AlgebraicGeometry.DerivedCategoryDerivedCompleteRational.fromIntegral` gives it over `E`. -/
+The purity isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` at the adic stage, realized from the
+finite-level purity isomorphisms, is their realization
+(`AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit`). -/
 theorem derivedCompleteIntegral_rightDerivedUpperShriek
     [(R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).IsLeftAdjoint]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology
