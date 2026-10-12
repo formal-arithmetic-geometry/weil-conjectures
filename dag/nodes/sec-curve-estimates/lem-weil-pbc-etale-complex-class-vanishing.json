@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-etale-complex-class-vanishing",
+ "kind": "statement",
+ "title": "Etale complex class vanishing",
+ "statement": "Let $I$ be a small cofiltered category, $D:I\\to\\mathrm{Sch}$ a diagram of quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions] with affine transitions, and $X=\\varprojlim D$ with projections $f_i$. Let $\\mathcal F_i^\\bullet$ be complexes of abelian etale sheaves [def-weil-pbc-etale-sheaves] with unital compatible transitions $f_{ji}^{-1}\\mathcal F_i^\\bullet\\to\\mathcal F_j^\\bullet$ [def-weil-pbc-inverse-image], using the canonical composition isomorphisms [lem-weil-pbc-inverse-image-composition]. Suppose one integer $a$ satisfies $\\mathcal F_i^n=0$ for all $i$ and $n<a$. Set $\\mathcal F^\\bullet=\\varinjlim_i f_i^{-1}\\mathcal F_i^\\bullet$ termwise, and fix $p\\in\\mathbf Z$. Cohomology and its canonical maps are defined by derived global sections [def-weil-pbc-etale-cohomology]. For every stage $i$ and $x\\in H^p(X_i,\\mathcal F_i^\\bullet)$ whose canonical image in $H^p(X,\\mathcal F^\\bullet)$ is zero, there is a stage $j$ and arrow $j\\to i$ such that the transition image of $x$ in $H^p(X_j,\\mathcal F_j^\\bullet)$ is zero.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), lines 7783-7828"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the filtered opposite category by a nonempty directed cofinal system. Restrict the scheme limit cone and complex colimit cocone to that system; their universal properties are preserved. A representative in the restricted system gives an original-stage representative. For eventual vanishing of a class at an arbitrary original stage, finality first supplies an arrow to a reindexed stage in the filtered opposite category; transfer the class along it, obtain a later zero witness, and compose the arrows.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $\\mathcal F^\\bullet=\\varinjlim_i f_i^{-1}\\mathcal F_i^\\bullet$ termwise. For every pair of integers $(p,n)$, apply the sheaf continuity theorem [lem-weil-pbc-etale-cohomology-limit-of-schemes] to the system of sheaves $\\mathcal F_i^n$ and its compatible transition maps. Its hypotheses are exactly the quasi-compact quasi-separated stages, affine transitions, and the colimit sheaf $\\mathcal F^n$, so it gives a canonical isomorphism $\\varinjlim_i H^p((X_i)_{\\Et},\\mathcal F_i^n)\\cong H^p(X_{\\Et},\\mathcal F^n)$.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof lines 7794-7802, invoking Theorem Tag 09YQ"
+   }
+  },
+  {
+   "text": "Use [thm-sp-if-e1] with the global-sections functor, as identified for etale sheaves by [def-sp-etale-dictionary] and for complexes by [def-sp-kinjective-bridge]. Its indexing is $E_{1,i}^{p,q}=H^p((X_i)_{\\Et},\\mathcal F_i^q)$ and $E_1^{p,q}=H^p(X_{\\Et},\\mathcal F^q)$: $p$ is the cohomological degree and $q$ is the filtration degree. The comparison [lem-weil-pbc-complex-spectral-sequence-comparison] has four hypotheses. (i) Step 2 gives $\\varinjlim_i E_{1,i}^{p,q}\\cong E_1^{p,q}$ for every $p,q$, and [lem-weil-pbc-hypercohomology-e1-pullback-functorial] identifies this with the map of $E_1$ pages. (ii) Each row resolution starts in cohomological degree $p=0$, while $\\mathcal F_i^q=\\mathcal F^q=0$ for $q<a$, so all $E_1$ terms vanish for $p<0$ or $q<a$. (iii) In total degree $n$, only $a\\leq q\\leq n$ and $p=n-q\\geq0$ occur, uniformly in $i$; these bounds force stabilization of each page entry. (iv) The filtration by the second degree in [thm-sp-if-e1] and its finite-filtration convergence [thm-sp-spectral-object-yields] give $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, zero for $q>n$, and $E_\\infty^{p,q}=\\operatorname{gr}^q A^{p+q}$ (similarly at each stage). The functoriality node supplies the compatible spectral-sequence maps, filtered abutment maps, and graded compatibility. Thus the comparison node gives $\\varinjlim_i A_i^n\\cong A^n$.",
+   "uses": [
+    "thm-sp-if-e1",
+    "def-sp-etale-dictionary",
+    "def-sp-kinjective-bridge",
+    "thm-sp-spectral-object-yields",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-complex-spectral-sequence-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof lines 7803-7823; Derived Categories Lemma Tag 015J"
+   }
+  },
+  {
+   "text": "A class vanishing in the limit has leading graded component vanishing on the stable page. The stable-page comparison is injective on filtered colimits, so this component vanishes at a later stage. The class then lies one filtration step deeper. Repeat through the finite range from a to p; eventually the class is in the zero step. Compose the finite chain of transition arrows.",
+   "uses": [
+    "lem-weil-pbc-complex-spectral-sequence-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [def-sp-kinjective-bridge] and [def-weil-pbc-etale-cohomology], the abutments $A_i^n$ and $A^n$ of Step 3 are $H^n((X_i)_{\\Et},\\mathcal F_i^\\bullet)$ and $H^n(X_{\\Et},\\mathcal F^\\bullet)$ defined by derived global sections. For a transition $f_{i'i}$ use the pair $(f_{i'i},\\varphi_{i'i})$ in [lem-weil-pbc-hypercohomology-e1-pullback-functorial]; for the map to $X$ use $(f_i,\\iota_i)$, where $\\iota_i:f_i^{-1}\\mathcal F_i^\\bullet\\to\\mathcal F^\\bullet$ is the colimit coprojection. The identity and composition clauses of that node, together with the cocycle condition in the statement, show that these give the compatible transition and target maps required in Step 3. Its abutment clause identifies each $b_i^n$ with the canonical derived pullback map, so the isomorphism from Step 3 is exactly the displayed one.",
+   "uses": [
+    "def-sp-kinjective-bridge",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof lines 7823-7828"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-etale-dictionary",
+  "def-sp-kinjective-bridge",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-complex-spectral-sequence-comparison",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "thm-sp-if-e1",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "worker R1",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZM, finite-term comparison; vanishing half (details expanded by R1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale hypercohomology bounded below complex continuity classes descend and vanish at later stages",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale hypercohomology bounded below complex class descends to stage inverse limit",
+   "results": "CochainComplex.cm5b, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.isKInjective_of_injective_aux, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, CochainComplex.IsKProjective, CochainComplex.IsKInjective",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|etale.*cohomology.*limit",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "second Proof, sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; the required complex-continuity input to that sentence; vanishing half of the finite abutment comparison",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": "none",
+  "slopmaster2": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexClassVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexClassVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_complex_class_eq_zero",
+  "statement": "theorem exists_etale_complex_class_eq_zero {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)] [∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f)] (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (φ : ∀ {i j : I} (f : j ⟶ i), ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (F i) ⟶ F j) (hidentity : ∀ i : I, φ (𝟙 i) = (NatIso.mapHomologicalComplex (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i))) (ComplexShape.up ℤ)).hom.app (F i) ≫ (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i)) (ComplexShape.up ℤ)).hom.app (F i)) (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j), φ (g ≫ f) = (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f) (D.map (g ≫ f)) (D.map_comp g f)) (ComplexShape.up ℤ)).hom.app (F i) ≫ ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex (ComplexShape.up ℤ)).map (φ f) ≫ φ g) (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n)) (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (eG : ∀ i : I, G.obj (op i) ≅ ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (F i)) (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op = (eG i).hom ≫ (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f) (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫ ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv) (p : ℤ) (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), (cohomology AddCommGrpCat.{u + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶ (cohomology AddCommGrpCat.{u + 1} X p).obj (DerivedCategory.Q.obj (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app (DerivedCategory.Q.obj K)) ≫ (Functor.rightDerivedFunctorCompIso' (lowerStar AddCommGrpCat.{u + 1} f) (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f) (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal) ≪≫ lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫ (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).symm)).hom.app ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫ (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K))) (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ i : I, H.obj (op i) ≅ (cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i))) (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op = (eH i).hom ≫ P (D.map f) (F i) ≫ (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map (DerivedCategory.Q.map (φ f)) ≫ (eH j).inv) (L : Cocone G) (hL : IsColimit L) (B : Cocone H) (eB : B.pt ≅ (cohomology AddCommGrpCat.{u + 1} c.pt p).obj (DerivedCategory.Q.obj L.pt)) (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom = (eH i).hom ≫ P (c.π.app i) (F i) ≫ (cohomology AddCommGrpCat.{u + 1} c.pt p).map (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) : ∀ (i : I) (x : H.obj (op i)), B.ι.app (op i) x = 0 → ∃ (j : I) (f : j ⟶ i), H.map f.op x = 0",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

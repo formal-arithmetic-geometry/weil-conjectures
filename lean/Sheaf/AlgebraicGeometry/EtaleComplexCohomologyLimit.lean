@@ -9,12 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Sheaf.CategoryTheory.SpectralSequenceComparison
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleComplexClassDescent
+import Sheaf.AlgebraicGeometry.EtaleComplexClassVanishing
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Continuity of etale cohomology for systems of complexes
 
@@ -135,6 +132,26 @@ theorem nonempty_isColimit_etale_complex_cohomology
         (cohomology AddCommGrpCat.{u + 1} c.pt p).map
           (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :
     Nonempty (IsColimit B) := by
-  sorry
+  classical
+  have hsurj := exists_etale_complex_class_rep D c hc F φ hidentity hcomposition
+    a hbelow G eG hG p P hP H eH hH L hL B eB hB
+  have hzero := exists_etale_complex_class_eq_zero D c hc F φ hidentity hcomposition
+    a hbelow G eG hG p P hP H eH hH L hL B eB hB
+  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+    (forget AddCommGrpCat.{u + 1})
+  have := reflectsColimit_of_reflectsIsomorphisms H (forget AddCommGrpCat)
+  refine ⟨isColimitOfReflects (forget AddCommGrpCat) ?_⟩
+  apply Types.FilteredColimit.isColimitOf'
+  · intro x
+    obtain ⟨i, y, hy⟩ := hsurj x
+    exact ⟨op i, y, hy.symm⟩
+  · intro i x y hxy
+    change B.ι.app i x = B.ι.app i y at hxy
+    have hz : B.ι.app i (x - y) = 0 := by
+      rw [map_sub, hxy, sub_self]
+    obtain ⟨j, f, hf⟩ := hzero i.unop (x - y) hz
+    refine ⟨op j, f.op, ?_⟩
+    change H.map f.op x = H.map f.op y
+    exact sub_eq_zero.mp (by simpa only [map_sub] using hf)
 
 end AlgebraicGeometry.Etale
