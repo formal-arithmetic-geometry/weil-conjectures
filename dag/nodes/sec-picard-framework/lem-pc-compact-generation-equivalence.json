@@ -1,0 +1,106 @@
+{
+ "id": "lem-pc-compact-generation-equivalence",
+ "kind": "statement",
+ "title": "Compact generation is preserved by equivalence",
+ "statement": "For an additive shift-compatible equivalence e : C ≌ D between triangulated categories with w-indexed coproducts, IsCompactlyGeneratedTriangulated.{w} C implies IsCompactlyGeneratedTriangulated.{w} D.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 13.37.1 (09SM), Definition 13.36.3 (09SJ), Definition 13.37.5 (09SQ)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compactly-generated"
+ ],
+ "proof": [
+  {
+   "text": "Map a compact generating family along e. Additive Hom equivalences and the coproduct comparison identify each canonical direct-sum map with the corresponding map in C, preserving compactness. The coproduct image is a generator because e reflects zero objects and nonzero morphisms and commutes with shifts.",
+   "uses": [
+    "def-pc-compactly-generated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compactly-generated",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H1",
+  "date": "2026-10-12",
+  "description": "Complete Lean proof using Mathlib equivalence and coproduct tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivalence compact triangulated transfer",
+   "results": "No direct declaration; searched Mathlib CategoryTheory triangulated and limits files.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact generation is preserved by equivalence",
+   "results": "Generic triangulated equivalence declarations; no theorem about the project compact-generation predicate.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact generation is preserved by equivalence",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-brown-hom-representability-locally-small",
+   "place": "proof, first step: transport compact generation across ShrinkHoms equivalence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactGenerationEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/CompactGenerationEquivalence.lean",
+  "declaration": "CategoryTheory.compactGenerationEquivalence",
+  "statement": "theorem compactGenerationEquivalence\n    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]\n    [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]\n    [Preadditive C] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]\n    [Pretriangulated C] [Pretriangulated D] [IsTriangulated C] [IsTriangulated D]\n    [HasCoproducts.{w} C] [HasCoproducts.{w} D]\n    (e : C ≌ D) [e.functor.Additive] [e.inverse.Additive] [e.functor.CommShift ℤ]\n    (hC : IsCompactlyGeneratedTriangulated.{w} C) :\n    IsCompactlyGeneratedTriangulated.{w} D",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-615836",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-615836",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

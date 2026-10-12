@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
+import Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer
+import Sheaf.CategoryTheory.CompactGenerationEquivalence
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Objectwise Brown representability with small Hom sets
@@ -59,6 +62,47 @@ theorem brownHomRepresentabilityLocallySmall
     (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
     (hC : IsCompactlyGeneratedTriangulated.{w} C)
     (hF : ∀ I : Type w, PreservesColimitsOfShape (Discrete I) F) (Y : D) :
-    (F.op ⋙ yoneda.obj Y).IsRepresentable := by sorry
+    (F.op ⋙ yoneda.obj Y).IsRepresentable := by
+  let eC := ShrinkHoms.equivalence.{w} C
+  let eD := ShrinkHoms.equivalence.{w} D
+  obtain ⟨zC, sC, pC, aC, tC, iC, cC, hTC⟩ := triangulatedEquivalenceTransfer eC
+  obtain ⟨zD, sD, pD, aD, tD, iD, cD, hTD⟩ := triangulatedEquivalenceTransfer eD
+  let := zC
+  let := sC
+  let := pC
+  let := aC
+  let := tC
+  let := iC
+  let := cC
+  let := zD
+  let := sD
+  let := pD
+  let := aD
+  let := tD
+  let := iD
+  let := cD
+  let := eC.commShiftInverse ℤ
+  let := eD.commShiftInverse ℤ
+  let := hTC.1
+  let := hTC.2
+  let := hTD.1
+  let := hTD.2
+  let : HasCoproducts.{w} (ShrinkHoms C) :=
+    fun _ ↦ Adjunction.hasColimitsOfShape_of_equivalence eC.inverse
+  let : HasCoproducts.{w} (ShrinkHoms D) :=
+    fun _ ↦ Adjunction.hasColimitsOfShape_of_equivalence eD.inverse
+  have hCs := compactGenerationEquivalence eC hC
+  let Fs := eC.inverse ⋙ F ⋙ eD.functor
+  have hFs : ∀ I : Type w, PreservesColimitsOfShape (Discrete I) Fs := by
+    intro I
+    let := hF I
+    dsimp [Fs]
+    infer_instance
+  have hAdj : Fs.IsLeftAdjoint := brownRepresentabilityRightAdjoint Fs hCs hFs
+  have hAdj' : (F ⋙ eD.functor).IsLeftAdjoint :=
+    (Functor.isLeftAdjoint_comp_iff_right eC.inverse (F ⋙ eD.functor)).mp hAdj
+  let : F.IsLeftAdjoint :=
+    (Functor.isLeftAdjoint_comp_iff_left F eD.functor).mp hAdj'
+  exact ((Adjunction.ofIsLeftAdjoint F).representableBy Y).isRepresentable
 
 end CategoryTheory

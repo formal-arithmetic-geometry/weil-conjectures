@@ -1,0 +1,99 @@
+{
+ "id": "lem-pc-triangulated-equivalence-transfer",
+ "kind": "statement",
+ "title": "Triangulated structure transfer across an equivalence",
+ "statement": "Let C be a triangulated category [def-weil-triangulated-category], and let D be a category equivalent to C via e : C ≌ D, with arbitrary object and Hom universes. There exist a zero object, a preadditive structure, an additive integer shift, a pretriangulated structure and a triangulated structure on D, and a shift comparison for e.functor, such that e.functor is triangulated and e.inverse is triangulated for the inverse shift comparison induced by the equivalence adjunction.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05QK and 05QL: triangulated category and exact functor axioms; transport by an equivalence"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the shifted, additive, triangulated structure on the equivalent category using localization at isomorphisms and the induced shift; verify the triangulated functor and its inverse by the equivalence unit and counit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H1",
+  "date": "2026-10-12",
+  "description": "Complete Lean proof using Mathlib equivalence and coproduct tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "equivalence compact triangulated transfer",
+   "results": "No direct declaration; searched Mathlib CategoryTheory triangulated and limits files.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangulated structure transfer across an equivalence",
+   "results": "Equivalence.IsTriangulated and its mk constructors in Mathlib.CategoryTheory.Triangulated.Adjunction; no structure transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Triangulated structure transfer across an equivalence",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-brown-hom-representability-locally-small",
+   "place": "proof, first step: transport additive, zero, shift and triangulated structures",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer",
+  "file": "lean/Sheaf/CategoryTheory/TriangulatedEquivalenceTransfer.lean",
+  "declaration": "CategoryTheory.triangulatedEquivalenceTransfer",
+  "statement": "theorem triangulatedEquivalenceTransfer\n    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]\n    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]\n    (e : C ≌ D) :\n    ∃ (_ : HasZeroObject D) (_ : HasShift D ℤ) (_ : Preadditive D)\n      (_ : ∀ n : ℤ, (shiftFunctor D n).Additive) (_ : Pretriangulated D)\n      (_ : IsTriangulated D) (_ : e.functor.CommShift ℤ),\n      let := e.commShiftInverse ℤ\n      e.functor.IsTriangulated ∧ e.inverse.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-615836",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-615836",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
