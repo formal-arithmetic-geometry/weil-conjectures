@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-smooth-proper-qcoh-data",
+ "kind": "statement",
+ "title": "Quasi-coherent projection data",
+ "statement": "For a proper noetherian morphism, the direct image, unit, and derived pullback tensor objects have quasi-coherent cohomology.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D5, 08DW, 08DX and 09M1"
+ },
+ "proof": [
+  {
+   "text": "Properness implies quasi-compactness and quasi-separatedness. Apply schemeDerivedDirectImage_preserves_QCoh to each quasi-coherent object to obtain hRf.",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain a quasi-coherent object U isomorphic to the tensor unit from exists_compact_derivedTensorUnit. Apply each homology functor to this isomorphism and transport quasi-coherence by prop_of_iso to obtain hO.",
+   "uses": [
+    "lem-pc-derived-tensor-unit-compact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the pullback clause of derivedPullback_tensor_preserve_QCoh to K, then canonical_derivedTensor_preserve_QCoh to its pullback and E. This yields hTensor; assemble hRf, hO and the two occurrences of hTensor.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-canonical-derived-tensor-qcoh"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-tensor-unit-compact",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-canonical-derived-tensor-qcoh"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D5, 08DW, 08DX and 09M1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "schemeDerivedQCohProperty derivedPullback tensor proper",
+   "results": "no independent declaration found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "schemeDerivedQCohProperty derivedPullback",
+   "results": "no scheme-level match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothProper qcoherent data projection formula",
+   "results": "no match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseData",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-sc-smooth-proper-tensor-perfect-case-data"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperQCohData",
+  "declaration": "AlgebraicGeometry.smoothProper_qcoh_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperQCohData.lean",
+  "statement": "theorem smoothProper_qcoh_data {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] : ∃ (hRf : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj)) (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y))) (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X), schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)), ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X), schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T202237-L-703603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T202237-L-703603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

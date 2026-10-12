@@ -9,13 +9,15 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.SmoothProperQCohData
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+set_option linter.unusedVariables false in
 /-- Intermediate existence of the quasi-coherent and monoidal data used by the
 projection comparison. Source: Stacks Project, Tag 0A9T.
 (blueprint: lem-sc-smooth-proper-tensor-perfect-case-data). -/
@@ -37,5 +39,8 @@ theorem smoothProper_tensor_perfect_case_data
         schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)),
       Nonempty (Functor.Monoidal (derivedPullback f)) ∧
       Nonempty (derivedPullback f ⊣ schemeDerivedDirectImage f) := by
-  sorry
+  obtain ⟨hRf, hO, hTensor, _⟩ := smoothProper_qcoh_data f
+  obtain ⟨m, _⟩ := exists_derivedPullbackMonoidalModel f
+  obtain ⟨ha⟩ := nonempty_derivedPullbackAdjunction f
+  exact ⟨hRf, hO, hTensor, ⟨m.toMonoidal⟩, ⟨ha⟩⟩
 end AlgebraicGeometry
