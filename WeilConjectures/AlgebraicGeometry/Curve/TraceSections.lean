@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineChartBasis
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.RingTheory.Kaehler.TraceMap
 
 /-!
@@ -255,6 +256,88 @@ lemma free_finite_chartBasicOpen :
     (S := Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g))
   exact f.free_app (isAffineOpen_chartBasicOpen k i g)
 
+attribute [local instance] Algebra.precompModule Algebra.precompModule_isScalarTower
+
+include hf hg in
+/-- **Duality over a basic open of a chart.** For `V = Dᵢ(g)`, `ω ↦ (b ↦ Tr(b ω))` is a bijection
+from `Γ(Ω¹_{X/k}, f⁻¹V)` onto the `Γ(V)`-linear maps `Γ(X, f⁻¹V) → Γ(Ω¹_{ℙ¹/k}, V)`. -/
+lemma traceSections_smul_duality :
+    (∀ ω : Γ((X ↘ Spec (.of k)).relativeDifferentials, f ⁻¹ᵁ chartBasicOpen k i g),
+      (∀ b : Γ(X, f ⁻¹ᵁ chartBasicOpen k i g),
+        f.traceSections _ ((isAffineOpen_chartBasicOpen k i g).preimage f)
+          (free_finite_chartBasicOpen i).1 (free_finite_chartBasicOpen i).2 (b • ω) = 0) →
+      ω = 0) ∧
+    ∀ (φ : Γ(X, f ⁻¹ᵁ chartBasicOpen k i g) →+
+      Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+        chartBasicOpen k i g)),
+      (∀ (r : Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g))
+        (b : Γ(X, f ⁻¹ᵁ chartBasicOpen k i g)), φ (f.app _ r * b) = r • φ b) →
+      ∃ ω : Γ((X ↘ Spec (.of k)).relativeDifferentials, f ⁻¹ᵁ chartBasicOpen k i g),
+        ∀ b, f.traceSections _ ((isAffineOpen_chartBasicOpen k i g).preimage f)
+          (free_finite_chartBasicOpen i).1 (free_finite_chartBasicOpen i).2 (b • ω) = φ b := by
+  have hV := isAffineOpen_chartBasicOpen k i g
+  have hV' := hV.preimage f
+  have := SmoothOfRelativeDimension.smooth (n := 1) (f := X ↘ Spec (.of k))
+  have := isReduced_of_smooth (X ↘ Spec (.of k))
+  obtain ⟨hfree, hfin⟩ := free_finite_chartBasicOpen (f := f) i (g := g)
+  let := (f.app (chartBasicOpen k i g)).hom.toAlgebra
+  let : Algebra k Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g) :=
+    ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).specStructureMap _).hom.toAlgebra
+  let : Algebra k Γ(X, f ⁻¹ᵁ chartBasicOpen k i g) :=
+    ((X ↘ Spec (.of k)).specStructureMap (f ⁻¹ᵁ chartBasicOpen k i g)).hom.toAlgebra
+  have : IsScalarTower k Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g)
+      Γ(X, f ⁻¹ᵁ chartBasicOpen k i g) := .of_algebraMap_eq' <|
+    (congrArg CommRingCat.Hom.hom (specStructureMap_comp_app f (chartBasicOpen k i g))).symm
+  let : Module k Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+      chartBasicOpen k i g) :=
+    Module.compHom _ (algebraMap k Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g))
+  have : IsScalarTower k Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g)
+      Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+        chartBasicOpen k i g) :=
+    ⟨fun c r m ↦ mul_smul (algebraMap k Γ(ProjectiveLine (Spec (.of k)), _) c) r m⟩
+  let : Algebra k[X] Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g) :=
+    (polyToChartBasicOpen k i g).toAlgebra
+  have : IsScalarTower k k[X] Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g) :=
+    .of_algebraMap_eq fun c ↦ (polyToChartBasicOpen_C k i g c).symm
+  have := isLocalization_chartBasicOpen k i g
+  have : Algebra.Smooth k Γ(X, f ⁻¹ᵁ chartBasicOpen k i g) := smooth_sections hV' rfl
+  have hbij :=
+    KaehlerDifferential.bijective_liftKaehlerDifferential_traceDerivation_of_isFreeGenerator
+      g hg _ (isFreeGenerator_sectionsD_polyToChartBasicOpen_X k i g).bijective
+      ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).sectionsDerivation _ rfl)
+      (sectionsDerivation_apply _ _ rfl _)
+      (fun q hq ↦
+        have := hq.isPrime
+        exists_kaehlerDifferential_generator hV' rfl q)
+      (fun p _ hp ↦ f.formallyUnramified_localization_of_mem_minimalPrimes hf hV hV' p hp)
+  have h (ω : Γ((X ↘ Spec (.of k)).relativeDifferentials, f ⁻¹ᵁ chartBasicOpen k i g))
+      (b : Γ(X, f ⁻¹ᵁ chartBasicOpen k i g)) :
+      f.traceSections _ hV' hfree hfin (b • ω) =
+        (Algebra.traceDerivation (B := Γ(X, f ⁻¹ᵁ chartBasicOpen k i g))
+          ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).sectionsDerivation _ rfl)
+          ).liftKaehlerDifferential
+          (((X ↘ Spec (.of k)).kaehlerSectionsEquiv _ rfl hV').symm ω) b := by
+    rw [← KaehlerDifferential.traceLin_apply, ← LinearEquiv.map_smul]
+    rfl
+  refine ⟨fun ω hω ↦ ?_, fun φ hφ ↦ ?_⟩
+  · apply ((X ↘ Spec (.of k)).kaehlerSectionsEquiv _ rfl hV').symm.injective
+    rw [map_zero]
+    refine hbij.1 ?_
+    rw [map_zero]
+    refine LinearMap.ext fun b ↦ ?_
+    rw [← h, hω, LinearMap.zero_apply]
+  · let ψ : Γ(X, f ⁻¹ᵁ chartBasicOpen k i g) →ₗ[Γ(ProjectiveLine (Spec (.of k)),
+        chartBasicOpen k i g)]
+        Γ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
+          chartBasicOpen k i g) :=
+      { toFun := φ
+        map_add' := φ.map_add
+        map_smul' := hφ }
+    obtain ⟨η, hη⟩ := hbij.2 ψ
+    refine ⟨(X ↘ Spec (.of k)).kaehlerSectionsEquiv _ rfl hV' η, fun b ↦ ?_⟩
+    rw [h, LinearEquiv.symm_apply_apply, hη]
+    rfl
+
 include hf hg in
 /-- **Duality over a basic open of a chart, injectivity.** If `Tr(b ω) = 0` for all
 `b ∈ Γ(X, f⁻¹V)`, then `ω = 0`. -/
@@ -264,7 +347,7 @@ lemma traceSections_smul_eq_zero
       f.traceSections _ ((isAffineOpen_chartBasicOpen k i g).preimage f)
         (free_finite_chartBasicOpen i).1 (free_finite_chartBasicOpen i).2 (b • ω) = 0) :
     ω = 0 :=
-  sorry
+  (traceSections_smul_duality hf i hg).1 ω hω
 
 include hf hg in
 /-- **Duality over a basic open of a chart, surjectivity.** Every `Γ(V)`-linear map
@@ -278,6 +361,6 @@ lemma exists_traceSections_smul_eq
     ∃ ω : Γ((X ↘ Spec (.of k)).relativeDifferentials, f ⁻¹ᵁ chartBasicOpen k i g),
       ∀ b, f.traceSections _ ((isAffineOpen_chartBasicOpen k i g).preimage f)
         (free_finite_chartBasicOpen i).1 (free_finite_chartBasicOpen i).2 (b • ω) = φ b :=
-  sorry
+  (traceSections_smul_duality hf i hg).2 φ hφ
 
 end AlgebraicGeometry.Scheme.Hom
