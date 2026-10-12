@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.Topology.Irreducible
+import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 
 /-! # Flat finite-presentation maps with dense irreducible fibres
 
@@ -42,4 +43,34 @@ theorem flat_finitePresentation_dense_irreducible_fibres
     (hdense : ∃ U : Set (PrimeSpectrum R), Dense U ∧
       ∀ p ∈ U, IsIrreducible (Set.univ : Set (PrimeSpectrum (p.asIdeal.Fiber T)))) :
     IsIrreducible (Set.univ : Set (PrimeSpectrum T)) := by
-  sorry
+  let f := PrimeSpectrum.comap (algebraMap R T)
+  have : Module.Flat R T := RingHom.flat_algebraMap_iff.mp hflat
+  have : Algebra.FinitePresentation R T := RingHom.finitePresentation_algebraMap.mp hfp
+  have hopen : IsOpenMap f :=
+    PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation
+  obtain ⟨U, hU_dense, hU⟩ := hdense
+  have hfibre (p : PrimeSpectrum R) (hp : p ∈ U) : IsIrreducible (f ⁻¹' {p}) := by
+    let e := PrimeSpectrum.preimageHomeomorphFiber R T p
+    have h := (hU p hp).image (fun q ↦ (e.symm q).val)
+      (continuous_subtype_val.comp e.symm.continuous).continuousOn
+    have heq : (fun q ↦ (e.symm q).val) '' Set.univ = f ⁻¹' {p} := by
+      ext q
+      constructor
+      · rintro ⟨z, _, rfl⟩
+        exact (e.symm z).property
+      · intro hq
+        exact ⟨e ⟨q, hq⟩, Set.mem_univ _, by simp⟩
+    rwa [heq] at h
+  have hpre : (Set.univ : Set (PrimeSpectrum R)) ⊆
+      closure ((Set.univ : Set (PrimeSpectrum R)) ∩
+        {p | IsPreirreducible (f ⁻¹' {p})}) := by
+    have hsub : U ⊆ Set.univ ∩ {p | IsPreirreducible (f ⁻¹' {p})} := by
+      intro p hp
+      exact ⟨Set.mem_univ _, (hfibre p hp).isPreirreducible⟩
+    intro p _
+    exact closure_mono hsub (hU_dense p)
+  have hpre' := hR.isPreirreducible.preimage_of_dense_isPreirreducible_fiber f hopen hpre
+  have : Nonempty (PrimeSpectrum R) := hR.nonempty.to_subtype.map Subtype.val
+  obtain ⟨p, hp⟩ := hU_dense.nonempty
+  obtain ⟨q, _⟩ := (hfibre p hp).nonempty
+  exact ⟨⟨q, Set.mem_univ _⟩, by simpa using hpre'⟩

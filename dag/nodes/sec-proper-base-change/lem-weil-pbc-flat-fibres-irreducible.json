@@ -29,38 +29,27 @@
  ],
  "proof": [
   {
-   "text": "By flatness and finite presentation, the induced map $\\operatorname{Spec}(T)\\to\\operatorname{Spec}(R)$ is open, by [lem-weil-pbc-flat-finite-presentation-open].",
-   "uses": [
-    "lem-weil-pbc-flat-finite-presentation-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Proposition 00I1 (proposition-fppf-open), as invoked in the proof of Lemma 00I6"
-   }
+   "text": "Convert ring-hom flatness and finite presentation to the corresponding algebra instances. Mathlib provides openness of the induced map by PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, with flatness supplying going down.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-irreducible-on-top] to this open map $f:\\operatorname{Spec}(T)\\to\\operatorname{Spec}(R)$: the target $\\operatorname{Spec}(R)$ is irreducible by hypothesis, and for each prime $\\mathfrak p$ of $R$ the fibre $f^{-1}(\\mathfrak p)$, with the subspace topology, is homeomorphic to $\\operatorname{Spec}(T\\otimes_R\\kappa(\\mathfrak p))$ by [lem-weil-pbc-fibre-spec-homeomorphism]; irreducibility is preserved by homeomorphisms, so $f^{-1}(\\mathfrak p)$ is irreducible for every $\\mathfrak p$ in the given dense set of primes. The conclusion is that $\\operatorname{Spec}(T)$ is irreducible.",
-   "uses": [
-    "lem-weil-pbc-irreducible-on-top",
-    "lem-weil-pbc-fibre-spec-homeomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00I6 (algebra-lemma-flat-fibres-irreducible), invoking Topology Lemma 004Z"
-   }
+   "text": "For each p in the dense subset, use PrimeSpectrum.preimageHomeomorphFiber R T p. The image of the irreducible fibre-ring spectrum under the inverse homeomorphism followed by subtype inclusion is exactly the set-theoretic fibre, so IsIrreducible.image transfers irreducibility.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The dense subset is contained in the locus of preirreducible fibres. Apply Mathlib IsPreirreducible.preimage_of_dense_isPreirreducible_fiber to the whole irreducible base. Nonemptiness follows by choosing a point in the dense set and then a point in its nonempty irreducible fibre.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-flat-finite-presentation-open",
-  "lem-weil-pbc-irreducible-on-top",
-  "lem-weil-pbc-fibre-spec-homeomorphism"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)"
+  "by": "worker",
+  "group": "H1",
+  "document": "Stacks Project, Algebra and Topology",
+  "place": "Tags 00I6, 00I1, 00E6 and 004Z, realized directly with Mathlib declarations"
  },
  "mathlib_searches": [
   {
@@ -136,5 +125,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T135238-L-1667283",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
