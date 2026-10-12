@@ -86,10 +86,10 @@
    }
   },
   {
-   "text": "$R''=A_M$ as subrings of $M$ (the special case of Algebra, Lemma 0308 needed here). If $y\\in R''$, then $y$ is integral over $R'$, and $R'$ is integral over $R$ by definition; by [lem-weil-pbc-integral-transitive] applied to $R\\to R'\\to R'[y]$ (the subring $R'[y]\\subseteq M$ is integral over $R'$, since the integral closure of $R'$ in $M$ is a subring [def-weil-pbc-integral-closure] containing $R'$ and $y$), $y$ is integral over $R$, so $y\\in A_M$. Conversely, if $y\\in M$ satisfies $y^n+r_{n-1}y^{n-1}+\\dots+r_0=0$ with $r_i\\in R$, then since the map $R\\to M$ factors through $R\\to R'\\subseteq M$ the same equation has coefficients in $R'$, so $y$ is integral over $R'$ and $y\\in R''$. The $R$-module structures agree, both coming from $R\\to M$. Hence $A_M=R''$ is a finitely generated $R$-module by step 4.",
+   "text": "Let C be the integral closure of R' in M. An element integral over R is integral over R' by mapping its monic equation along R to R' (Mathlib IsIntegral.tower_top). Thus the identity on M restricts to an injective R-linear map from the integral closure of R in M to C. By step 4 C is finite over R, and R is Noetherian, so Module.Finite.of_injective (lem-weil-pbc-noetherian-submodule-finite) gives finiteness of the integral closure of R in M. The reverse inclusion and transitivity of integrality are unnecessary.",
    "uses": [
-    "lem-weil-pbc-integral-transitive",
-    "def-weil-pbc-integral-closure"
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-noetherian-submodule-finite"
    ],
    "elementary": false,
    "source": {
@@ -122,13 +122,13 @@
   "def-weil-pbc-separable-algebraic-extension",
   "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
   "lem-weil-pbc-finite-module-over-finite-algebra",
-  "lem-weil-pbc-integral-transitive",
   "def-weil-pbc-japanese-domain"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 032N (lemma-domain-char-p-N-1-2, line 45382), proof ('Assume the integral closure ... we win')"
+  "place": "Algebra, Lemma Tag 032N (lemma-domain-char-p-N-1-2, line 45382), proof ('Assume the integral closure ... we win')",
+  "note": "A3 stage-3 proof follows Tag 032N, with step 5 shortened to an injection into the second integral closure; Noetherianity replaces the equality of closures. All other steps use the existing node declarations or recorded Mathlib matches."
  },
  "mathlib_searches": [
   {
@@ -216,5 +216,15 @@
   "group": "E1",
   "result": "fix",
   "note": "Noetherian domain R/IsNoetherianRing, K=Frac via IsFractionRing, char p>0 -> [Fact p.Prime][CharP K p] (fixed from hp:0<p), h = IsN2 quantifier (Type v, scalar tower, FiniteDimensional) + IsPurelyInseparable K L giving Module.Finite R (integralClosure R L), conclusion IsN2 R K"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T194058-L-451043",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
