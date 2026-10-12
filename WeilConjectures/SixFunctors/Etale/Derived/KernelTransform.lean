@@ -105,7 +105,7 @@ commutes with shifts as a bifunctor.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor` moves the shift into the kernel
 before applying the projection formula, so that it never has to commute a shift with
-`- ⊗ᴸ π'^* N` naturally in `N` (which the instances above do not provide). It uses some braiding
+`- ⊗ᴸ π'^* N` naturally in `N`. It uses some braiding
 of `D((V ×_S V')_ét)` (`DerivedCategory.nonempty_braidedCategory`); since only the existence of
 an isomorphism is asserted, the choice does not matter.
 
