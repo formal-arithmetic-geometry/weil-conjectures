@@ -25,6 +25,7 @@ public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.FiniteType
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
@@ -474,19 +475,6 @@ theorem Ideal.height_le_card_of_le_span_sup_sq {R : Type*} [CommRing R] [IsNoeth
     (hle : p ≤ Ideal.span s ⊔ p ^ 2) : p.height ≤ s.card :=
   Ideal.height_le_card_of_mem_minimalPrimes_span_finset
     (Ideal.mem_minimalPrimes_of_le_sup_sq (IsNoetherian.noetherian p) (Ideal.span_le.2 hs) hle)
-
-/-- A nontrivial finitely generated algebra over a field has finite Krull dimension. -/
-theorem exists_ringKrullDim_eq_natCast_of_finiteType (k R : Type*) [Field k] [CommRing R]
-    [Nontrivial R] [Algebra k R] [Algebra.FiniteType k R] : ∃ n : ℕ, ringKrullDim R = n := by
-  have h1 := ringKrullDim_ne_top_of_finiteType k R
-  have h2 : ringKrullDim R ≠ ⊥ :=
-    ne_bot_of_le_ne_bot WithBot.coe_ne_bot ringKrullDim_nonneg_of_nontrivial
-  induction h : ringKrullDim R using WithBot.recBotCoe with
-  | bot => exact absurd h h2
-  | coe m =>
-    induction m using ENat.recTopCoe with
-    | top => exact absurd h h1
-    | coe m => exact ⟨m, rfl⟩
 
 /-! ### Dimension of the cotangent space at a rational point -/
 

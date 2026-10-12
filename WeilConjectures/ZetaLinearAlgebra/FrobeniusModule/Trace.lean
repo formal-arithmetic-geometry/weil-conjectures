@@ -44,17 +44,6 @@ theorem Equiv.symm_map_frobenius {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N
   rw [e.map_frobenius]
   simp
 
-/-- Isomorphic Frobenius modules have the same traces of the powers of the Frobenius. -/
-theorem Equiv.trace_frobeniusEnd_pow {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) (k : ℕ) :
-    LinearMap.trace K _ (N.frobeniusEnd ^ k) = LinearMap.trace K _ (M.frobeniusEnd ^ k) := by
-  have hp : ∀ j : ℕ, e.toLinearEquiv.conj M.frobeniusEnd ^ j =
-      e.toLinearEquiv.conj (M.frobeniusEnd ^ j) := fun j ↦ by
-    induction j with
-    | zero => ext x; simp [LinearEquiv.conj_apply]
-    | succ j ih => rw [pow_succ, ih, pow_succ, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
-        LinearEquiv.conj_comp]
-  rw [e.frobeniusEnd_eq_conj, hp, LinearMap.trace_conj']
-
 /-- The Frobenius of `M.rescale c`, for `c ≠ 0`, is `c • F`. -/
 theorem frobeniusEnd_rescale {M : FrobeniusModule.{u, v} K} {c : K} (hc : c ≠ 0) :
     (M.rescale c).frobeniusEnd = c • M.frobeniusEnd :=
