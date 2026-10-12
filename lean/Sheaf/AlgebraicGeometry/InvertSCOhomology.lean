@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
-import Sheaf.AlgebraicGeometry.AffineCohomologyLocalization
+import Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalization
+import Sheaf.Paper.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluing
 import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
 
@@ -58,6 +59,40 @@ theorem invertS_cohomology
               (e (cohomologyFraction L F s p ⊤ n ξ)) =
             (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p
               (homOfLE (le_top : U ≤ ⊤))).app (F ⊗ L.tensorPow n : X.Modules) ξ := by
-  sorry
+  obtain ⟨S, hS, _, _⟩ := nonvanishing_section_trivializes X L s
+  let P : X.Opens → Prop := fun U ↦
+    ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p U ≃+
+        (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).obj F,
+      ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj
+          (F ⊗ L.tensorPow n : X.Modules)),
+        (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).map
+            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :
+              F ⟶ (F ⊗ L.tensorPow n : X.Modules))
+            (e (cohomologyFraction L F s p U n ξ)) =
+          (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p
+            (homOfLE (inf_le_left : U ⊓ S ≤ U))).app (F ⊗ L.tensorPow n : X.Modules) ξ
+  have hAffine : ∀ U : X.Opens, IsAffineOpen U → P U := by
+    intro U hU
+    exact affineOpen_cohomology_localization X L s F S hS U hU
+  have hUnion : ∀ (U V : X.Opens), IsCompact (U : Set X) → IsAffineOpen V →
+      P U → P V → P (U ⊓ V) → P (U ⊔ V) := by
+    intro U V hU hV hPU hPV hPUV
+    exact cohomologyFractionPresentation_gluing X L s F S hS U V hU hV hPU hPV hPUV
+  have hTop : P ⊤ := quasiCompactOpen_induction X P hAffine hUnion ⊤ isCompact_univ
+  let Q : X.Opens → Prop := fun T ↦
+    ∃ e : CohomologyFractionPresentation L F s p ⊤ ≃+
+        (RingedSpace.openModuleCohomology X.toRingedSpace p T).obj F,
+        ∀ (n : ℕ) (ξ :
+          (RingedSpace.openModuleCohomology X.toRingedSpace p ⊤).obj
+            (F ⊗ L.tensorPow n : X.Modules)),
+          (RingedSpace.openModuleCohomology X.toRingedSpace p T).map
+              (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :
+                F ⟶ (F ⊗ L.tensorPow n : X.Modules))
+              (e (cohomologyFraction L F s p ⊤ n ξ)) =
+            (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p
+              (homOfLE (le_top : T ≤ ⊤))).app (F ⊗ L.tensorPow n : X.Modules) ξ
+  have h : Q (⊤ ⊓ S) := hTop p
+  have h' : Q S := (congrArg Q (top_inf_eq S)) ▸ h
+  exact ⟨S, hS, h'⟩
 
 end AlgebraicGeometry.Scheme.Modules

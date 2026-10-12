@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-invert-s-cohomology-affine-open",
+ "kind": "statement",
+ "title": "Localization on an ambient affine open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $L$ an invertible module [def-sc-invertible-module], $s\\in\\Gamma(X,L)$ and $F$ a quasi-coherent module [pqf-def-coherent]. Let $S\\subseteq X$ be an open with underlying set the nonvanishing locus $X_s$ [def-weil-pbc-ample-invertible-module], and let $U\\subseteq X$ be affine open. For $p\\geq0$, write $A_p(W)=H^p(W,F)$ for open module cohomology [def-sc-open-module-cohomology] and $Q_p(U)$ for the additive fraction presentation [def-sc-cohomology-fraction-presentation], whose generator $[n,\\xi]$ has $\\xi\\in H^p(U,F\\otimes L^{\\otimes n})$ and whose relations are $[n,\\xi]=[n+b,s^b\\xi]$. For every $p\\geq0$, There is an additive isomorphism $e_p:Q_p(U)\\longrightarrow A_p(U\\cap S)$ such that, for every $n\\geq0$ and every numerator $\\xi$, multiplication of $e_p([n,\\xi])$ by $s^n$ is the restriction of $\\xi$ from $U$ to $U\\cap S$. Multiplication here is induced on cohomology by the module morphism $F\\cong F\\otimes\\mathcal O_X\\xrightarrow{1\\otimes s^n}F\\otimes L^{\\otimes n}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
+  "place": "Tags 09MR (degree-zero and affine-open paragraphs), 01PW, and 01E1 (2); consulted at https://stacks.math.columbia.edu/tag/09MR, /01PW and /01E1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-cohomology-fraction-presentation",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For p=0 apply affineOpen_cohomology_localization_zero.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-affine-open-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p>0, affine_cap_section_open identifies U cap S with an affine open V, by extensionality and the equality defining S.",
+   "uses": [
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each F tensor L.tensorPow n is quasi-coherent by the already proved WeilConjectures declaration isQuasicoherent_tensorObj F (L.tensorPow n). Apply affine-open vanishing to every numerator on U, to F on U cap S, and to each twist on U cap S.",
+   "uses": [
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A direct sum of subsingleton groups is subsingleton. Quotient induction then makes its fraction quotient subsingleton. Define the additive equivalence between the zero source and target groups by the constant zero maps in both directions. Its inverse identities, additivity and the numerator formula follow from subsingleton elimination in the relevant groups.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-invert-s-cohomology-affine-open-zero",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
+  "place": "09MR affine-open step, with explicit Lean presentation/restriction glue for 01PW and 01E1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of modules on an affine open and cohomology of the restricted module on the open subscheme",
+   "results": "HTTP Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology on an affine open is cohomology of the restricted sheaf on the open subscheme naturally in the sheaf",
+   "results": "Eight hits, including IsAffineOpen.fromSpec_app_of_le and affineOpensRestrict; no cohomology fraction comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "Twelve hits; rightDerivedZeroIsoSelf supplies the degree-zero natural isomorphism, but no open restriction or fraction quotient transport.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleCohomology.*restrict|affineOpen_cohomology_localization",
+   "results": "msearch Mathlib grep returned zero hits. Local source search found OpenModuleCohomologyComparison, which gives existence of additive equivalences but not their naturality or quotient/fraction formulas.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvertSCOhomology",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Cohomology of Schemes, Lemma 01XR proof: invoke Lemma 09MR to identify the localization of graded cohomology with cohomology on the principal affine open; 09MR affine-open base case: degree-zero comparison and vanishing",
+   "via": [
+    "lem-sc-invert-s-cohomology",
+    "lem-sc-section-affine-open-kills-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineOpen_cohomology_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenCohomologyLocalization.lean",
+  "statement": "theorem affineOpen_cohomology_localization (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (F : X.Modules) [F.IsQuasicoherent] (S : X.Opens) (hS : (S : Set X) = nonvanishingLocus L s) (U : X.Opens) (hU : IsAffineOpen U) : ∀ p : ℕ, ∃ e : CohomologyFractionPresentation L F s p U ≃+ (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).obj F, ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj (F ⊗ L.tensorPow n : X.Modules)), (RingedSpace.openModuleCohomology X.toRingedSpace p (U ⊓ S)).map (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) : F ⟶ (F ⊗ L.tensorPow n : X.Modules)) (e (cohomologyFraction L F s p U n ξ)) = (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p (homOfLE (inf_le_left : U ⊓ S ≤ U))).app (F ⊗ L.tensorPow n : X.Modules) ξ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T184316-L-4009102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T184316-L-4009102",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
