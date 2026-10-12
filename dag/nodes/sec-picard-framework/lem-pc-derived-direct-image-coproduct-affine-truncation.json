@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-derived-direct-image-coproduct-affine-truncation",
+ "kind": "statement",
+ "title": "Affine uniform truncation maps for a derived coproduct",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme]. Let $I$ be a set and $E_i$ a family in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. Let $S\\in D(\\mathcal O_X)$ with maps $\\iota_i:E_i\\to S$ which exhibit an ambient coproduct. Write $F_q=H^q\\circ Rf_*$ [def-pc-derived-direct-image]. For every integer $q$ and affine open $U\\subseteq Y$, there is an integer $a$ such that both maps $\\Gamma(U,\\bigoplus_i F_q(E_i))\\to\\Gamma(U,\\bigoplus_i F_q(\\tau_{\\ge a}E_i))$ and $\\Gamma(U,F_q(S))\\to\\Gamma(U,F_q(\\tau_{\\ge a}S))$ induced by the canonical projections $\\pi_a:T\\to\\tau_{\\ge a}T$ are isomorphisms of $\\mathcal O_Y(U)$-modules. The first map is sections of the coproduct of the maps $F_q(\\pi_a(E_i))$, rather than a claimed coproduct formula for sections.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ, local uniform truncation argument, using Tag 08D5(2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-derived-ambient-direct-sums] to identify the cohomology of the given ambient coproduct with the direct sum of the quasi-coherent cohomology sheaves of its summands. Express this sum as the directed colimit of finite sums: [lem-weil-pbc-quasi-coherent-module-direct-sum] and [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] give quasi-coherence, including the empty sum.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict f to U; its target is affine and quasi-compact and it remains qcqs. Exact restriction preserves sums, quasi-coherent cohomology and canonical truncations. Restricted K-injective representatives compute the restricted derived direct image, naturally in all objects and in the truncation projections.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the uniform upper-bound clause of 08D5(2) to the restricted morphism. Choose a single sufficiently negative a (for instance a <= q-N, with N its upper bound) so that the direct images of tau_<a E_i and tau_<a S vanish in both degrees q and q+1. Shift compatibility and the uniform bound make this choice independent of i. The long exact sequence of the truncation triangle therefore makes every q-th truncation projection an isomorphism after restriction. The separate objectwise existence clause is insufficient for this familywise choice.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves coproducts, so the coproduct of these restricted isomorphisms is invertible, also for an empty family. Apply evaluation at the top open of U to this isomorphism and to the isomorphism for S. Under the natural restriction comparisons these are exactly the two module maps in the statement; no assertion that sections commute with coproducts is made.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-derived-direct-image-uniform-truncation-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ, local uniform truncation argument, using Tag 08D5(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward commutes with direct sums after a common lower truncation",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform lower truncation gives isomorphisms on derived direct image cohomology over affine opens for a family of quasi coherent complexes",
+   "results": "Found CochainComplex.quasiIso_truncGEMap_iff and ordinary truncation quasi-isomorphism criteria; none asserts derived direct-image commutation or a uniform family bound.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*coproduct|coproduct.*truncGE",
+   "results": "msearch grep returned no hits. Local searches found existing ambient direct sums, objectwise affine truncation comparison and uniform upper bound, but neither of the two new assertions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImageCohomologyCoproduct",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ, local uniform truncation argument, using Tag 08D5(2) in the fixed-degree cohomology argument for ambient direct sums",
+   "via": [
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageCoproductAffineTruncation",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageCoproductAffineTruncation.lean",
+  "declaration": "AlgebraicGeometry.exists_derivedDirectImage_coproduct_affine_truncation",
+  "statement": "theorem exists_derivedDirectImage_coproduct_affine_truncation {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))] (I : Type u₁) (E : I → schemeDerivedQCohCategory X) (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S) (hc : IsColimit (Cofan.mk S ι)) (q : ℤ) (U : Y.Opens) (hU : IsAffineOpen U) : ∃ a : ℤ, IsIso ((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).map (Limits.Sigma.map (fun i ↦ (schemeHigherDirectImage f q).map ((DerivedCategory.TStructure.t.truncGEπ a).app (E i).obj)))) ∧ IsIso ((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).map ((schemeHigherDirectImage f q).map ((DerivedCategory.TStructure.t.truncGEπ a).app S)))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070528-L-3466410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070528-L-3466410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-pc-derived-direct-image-truncated-coproduct",
+ "kind": "statement",
+ "title": "Common lower-truncation coproduct comparison for derived direct image",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme]. Let $I$ be a set and $E_i$ a family in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. Let $S\\in D(\\mathcal O_X)$ with maps $\\iota_i:E_i\\to S$ which exhibit an ambient coproduct. Write $F_q=H^q\\circ Rf_*$ [def-pc-derived-direct-image]. For every pair of integers $a,q$, the canonical map $\\bigoplus_i F_q(\\tau_{\\ge a}E_i)\\to F_q(\\tau_{\\ge a}S)$ whose restriction to the $i$th summand is $F_q(\\tau_{\\ge a}\\iota_i)$ is an isomorphism. Here $\\tau_{\\ge a}$ is canonical lower truncation for the standard cohomological t-structure.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-derived-ambient-direct-sums] to identify the cohomology of the given ambient coproduct with the direct sum of the quasi-coherent cohomology sheaves of its summands. Express this sum as the directed colimit of finite sums: [lem-weil-pbc-quasi-coherent-module-direct-sum] and [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] give quasi-coherence, including the empty sum.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact sums commute with canonical lower truncation, by the cycle/kernel and cokernel formulas for the standard truncation of representatives; therefore the truncated cofan is a coproduct, and all its objects have common cohomological lower bound a. Apply the truncation hypercohomology spectral sequence to bounded-below representatives.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the E2 page, the higher-direct-image presheaf theorem identifies the comparison locally with cohomology on the inverse images of affine opens. These inverse images are qcqs. Cohomology commutes with direct sums there, and module sheafification preserves colimits. Thus R^p f_* commutes with the sums of the quasi-coherent H^r of the truncated summands.",
+   "uses": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact sums commute with the kernels and images of the differentials, giving isomorphisms on every page. In total degree q only 0 <= p <= q-a can occur. Convergence gives finite filtrations; induction on their short exact sequences gives an abutment isomorphism. Naturality identifies it with the displayed coproduct comparison. If q<a both abutments vanish; the empty family is covered by the zero coproduct.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward commutes with direct sums after a common lower truncation",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform lower truncation gives isomorphisms on derived direct image cohomology over affine opens for a family of quasi coherent complexes",
+   "results": "Found CochainComplex.quasiIso_truncGEMap_iff and ordinary truncation quasi-isomorphism criteria; none asserts derived direct-image commutation or a uniform family bound.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE.*coproduct|coproduct.*truncGE",
+   "results": "msearch grep returned no hits. Local searches found existing ambient direct sums, objectwise affine truncation comparison and uniform upper bound, but neither of the two new assertions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImageCohomologyCoproduct",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J in the fixed-degree cohomology argument for ambient direct sums",
+   "via": [
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageTruncatedCoproduct.lean",
+  "declaration": "AlgebraicGeometry.derivedDirectImage_truncated_cohomology_coproduct",
+  "statement": "theorem derivedDirectImage_truncated_cohomology_coproduct {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))] (I : Type u₁) (E : I → schemeDerivedQCohCategory X) (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S) (hc : IsColimit (Cofan.mk S ι)) (a q : ℤ) : IsIso (Sigma.desc (fun i ↦ (schemeHigherDirectImage f q).map ((DerivedCategory.TStructure.t.truncGE a).map (ι i))))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070528-L-3466410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070528-L-3466410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
