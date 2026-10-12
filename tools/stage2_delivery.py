@@ -1225,10 +1225,21 @@ def compile_modules(D: dict, group: str, root: pathlib.Path | None = None, timeo
 
 # ---------------------------------------------------------------- declaration -> node
 
+_NODE_CACHE = {}
+
+
 def nodes_at(git: Git, ref: str) -> dict[str, dict]:
     """Every node of dag/nodes on `ref`, read with one `git cat-file --batch`."""
-    paths = [p for p in git.run("ls-tree", "-r", "--name-only", ref, "--", "dag/nodes").splitlines() if p.endswith(".json")]
-    inp = "".join(f"{ref}:{p}\n" for p in paths)
+    # Immutable subtree ids also share the reading across ledger-only commits.
+    tree = git.run("rev-parse", f"{ref}:dag/nodes").strip()
+    key = (str(git.root.resolve()), tree)
+    if key in _NODE_CACHE:
+        return _NODE_CACHE[key]
+    entries = [line.split("\t", 1) for line in git.run("ls-tree", "-r", ref, "--", "dag/nodes").splitlines()]
+    entries = [(head.split()[2], path) for head, path in entries if path.endswith(".json")]
+    paths = [path for _, path in entries]
+    # Blob ids avoid thousands of repeated commit:path tree walks in cat-file.
+    inp = "".join(f"{sha}\n" for sha, _ in entries)
     r = subprocess.run(["git", "cat-file", "--batch"], cwd=git.root, input=inp.encode(), capture_output=True)
     data, out, i = r.stdout, {}, 0
     for p in paths:
@@ -1243,6 +1254,9 @@ def nodes_at(git: Git, ref: str) -> dict[str, dict]:
             out[pathlib.PurePosixPath(p).stem] = json.loads(body)
         except ValueError:
             pass
+    if len(_NODE_CACHE) >= 4:
+        _NODE_CACHE.pop(next(iter(_NODE_CACHE)))
+    _NODE_CACHE[key] = out
     return out
 
 
