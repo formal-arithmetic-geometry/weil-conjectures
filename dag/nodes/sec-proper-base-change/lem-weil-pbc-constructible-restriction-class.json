@@ -16,34 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Express F as a small filtered colimit of constructible module sheaves Gₐ by\n03SA(3), with cocone maps aₐ : Gₐ → F. Forgetting modules preserves colimits; inverse\nimage also preserves colimits, and naturally commutes with forgetting modules.\nThus the underlying abelian restriction of F is the filtered colimit of the underlying\nabelian restrictions of Gₐ. On the quasi-compact quasi-separated scheme X₀, 03Q5\nidentifies the cohomology of this colimit with the filtered colimit of their cohomology\ngroups. Every element of a filtered colimit of abelian groups comes from one stage.\nChoose that stage Gₐ and its class z, and take a = aₐ. The canonical cohomology map\nfrom that stage is precisely H^q of the underlying restricted a, giving the equality.\nThis includes q = 0, zero classes, empty schemes, and the zero coefficient ring.",
+   "text": "Apply AlgebraicGeometry.Scheme.exists_filtered_colimit_constructible to F and obtain the small filtered category A, diagram D, constructibility witnesses hD, cocone ι and its colimit witness hι.",
    "uses": [
-    "lem-weil-pbc-module-sheaf-colimit-constructible",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "def-weil-directed-colimit-abelian-groups"
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof Steps 2-3; Stacks 03SA(3) and 03Q5"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_restriction_class_of_filtered_presentation to ι, hι, q and c. Obtain a stage a, class z and the exact equality for the restricted underlying abelian cohomology map.",
+   "uses": [
+    "lem-weil-pbc-constructible-restriction-class-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take G = D.obj a and the map ι.app a. The stored witness hD a proves constructibility; the equality from the preceding step proves the cohomology clause.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-module-sheaf-colimit-constructible",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "def-weil-directed-colimit-abelian-groups"
+  "lem-weil-pbc-constructible-restriction-class-core"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof Steps 2-3; Stacks 03SA(3) and 03Q5; regrouping of the existing DAG argument by R1"
+  "place": "Tags 03SA(3) and 03Q5: filtered constructible presentation followed by extraction at a stage; second reading by F1"
  },
  "mathlib_searches": [
   {
@@ -118,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-7aadf",
-  "group": "R1",
+  "reviewer": "X-22eb2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T000248-L-482311",
+  "landing": "20261012T003231-L-586136",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes and cited Stacks arguments; existing signatures unchanged, all three modules compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded open dependencies."
+  "note": "independent Codex review: Delivered Lean files compile cleanly; target and existing signatures are unchanged; the named remaining sorry, nodes, imports, pruning record, axioms, and report satisfy the stage-3 brief."
  }
 }

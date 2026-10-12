@@ -5752,3 +5752,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:30 L: returned deliver/N1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints (reviewer RETURN: (reviewer X-a061a, head a061ac195) 1. D1 (relabelling; review points 4–5): ZeroDimensionalBaseChangePoints.lean:62–66 me)
 - 00:30 L: returned deliver/P1/Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections (reviewer RETURN: (reviewer X-ee6db, head ee6dbcefe) D1/B2: In dag/nodes/sec-proper-base-change/lem-weil-pbc-zero-dimensional-global-secti)
 - 00:30 L: merged deliver/T1/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct (stage 3; reviewer PASS; first push; landing 20261012T003034-L-577946 (proof); modules 1; new nodes 0)
+- 00:33 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass (stage 3; reviewer PASS; after a return; landing 20261012T003231-L-586136 (interface); modules 2; new nodes 2)

@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-constructible-restriction-class-core",
+ "kind": "statement",
+ "title": "Representatives of restricted cohomology classes from a supplied filtered colimit",
+ "statement": "Let X and X₀ be quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions], i:X₀→X a morphism [def-weil-pbc-inverse-image], Λ a finite commutative ring, and A a small filtered category (nonempty, with common successors for two objects and eventual equalizers for parallel arrows). Let D:A→Mod(X_et,Λ) be a diagram of module sheaves [def-weil-pbc-etale-sheaves], F a module sheaf, and ι:D→const(F) a cocone which is a colimit [def-weil-pbc-category-colimit]. For every q≥0 and every c∈H^q(X₀,i⁻¹F) [def-weil-pbc-etale-cohomology], there exist a∈A and z∈H^q(X₀,i⁻¹D(a)) such that H^q(i⁻¹ι_a)(z)=c. Cohomology and its maps are taken on underlying abelian sheaves. There is no constructibility hypothesis on D.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q5 (lemma-colimit-cohomology); used after Tag 03SA(3) (lemma-filtered-colimit-constructible)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Forget modules in the supplied colimit cocone; the forgetful functor preserves colimits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply abelian inverse image, which preserves colimits. The natural compatibility with module inverse image identifies the resulting cocone, including each leg, with the underlying abelian restrictions of ι_a.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the qcqs scheme X₀ the canonical filtered-colimit cohomology comparison makes H^q of that cocone a colimit cocone of abelian groups. Its legs are exactly H^q of the restricted ι_a. This is a mathematical application of Tag 03Q5; the current Lean declaration needs a u+1-sized indexing version and the natural comparison to Sheaf.H.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every element of a filtered colimit of abelian groups has a representative at one stage. Concretely, forgetting to sets preserves this filtered colimit, and CategoryTheory.Limits.Concrete.isColimit_exists_rep (Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean:130) gives a and z. The leg identified in the previous step gives the required equality.",
+   "uses": [
+    "lem-category-theory-concrete-iscolimit-exists-rep"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-category-theory-concrete-iscolimit-exists-rep"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q5 (lemma-colimit-cohomology), after the supplied presentation in the argument using Tag 03SA(3); second reading by F1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit etale sheaf cohomology classes represented at one stage",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit abelian sheaves cohomology every element comes from some stage",
+   "results": "Eight hits: Sheaf.H, Sheaf.cohomologyPresheaf, Grothendieck abelian instances and existence of filtered colimits, but no theorem for restricted cohomology classes from a supplied colimit.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Concrete.isColimit_exists_rep",
+   "results": "Search responded with unknown identifier Concrete.isColimit_exists_rep; no usable match. The fully qualified lemma was located by grep.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_exists_rep|exists_constructible_restriction_class|exists_restriction_class_of_filtered_presentation",
+   "results": "Seven hits, including the generic Concrete.isColimit_exists_rep at Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean:130. It requires a colimit cocone and preservation by the forgetful functor, so it does not prove the sheaf-cohomology comparison. Independent rg of lean/ and upstream found no identical theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass",
+  "group": "F1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "original proof Steps 2-3: the cohomology class is represented at a stage after choosing the filtered constructible presentation",
+   "via": [
+    "lem-weil-pbc-constructible-restriction-class"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleRestrictionClassCore.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_restriction_class_of_filtered_presentation",
+  "statement": "theorem exists_restriction_class_of_filtered_presentation\n    {X X₀ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace X₀] [QuasiSeparatedSpace X₀] (i : X₀ ⟶ X)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]\n    {D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}\n    {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}\n    (ι : D ⟶ (Functor.const A).obj F)\n    (hc : Nonempty (IsColimit (Cocone.mk F ι)))\n    (q : ℕ)\n    (c : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)\n      AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj F)) q) :\n    ∃ (a : A) (z : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)\n      AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj (D.obj a))) q),\n      Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)\n        AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1} Λ].map (ι.app a))) q z = c",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-22eb2",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T003231-L-586136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-22eb2",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T003231-L-586136",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files compile cleanly; target and existing signatures are unchanged; the named remaining sorry, nodes, imports, pruning record, axioms, and report satisfy the stage-3 brief."
+ }
+}

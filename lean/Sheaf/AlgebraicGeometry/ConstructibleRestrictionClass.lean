@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
+import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore
 
 /-!
 # Constructible representatives of restricted cohomology classes
@@ -52,6 +54,11 @@ theorem exists_constructible_restriction_class
           AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj G)) q),
         Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
           AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1} Λ].map a)) q z = c := by
-  sorry
+  classical
+  obtain ⟨A, _, hA, D, hD, ι, hι⟩ :=
+    Scheme.exists_filtered_colimit_constructible F
+  obtain ⟨a, z, hz⟩ := exists_restriction_class_of_filtered_presentation
+    (i := i) (Λ := Λ) ι hι q c
+  exact ⟨D.obj a, hD a, ι.app a, z, hz⟩
 
 end AlgebraicGeometry.Etale
