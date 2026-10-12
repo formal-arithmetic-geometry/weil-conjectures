@@ -13,49 +13,73 @@
  },
  "proof": [
   {
-   "text": "*Step 1 (the closed fibre as a closed subset).* $S_0\\to S$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], hence so is its base change $i:Z_0=Z\\times_SS_0\\to Z$ [lem-weil-pbc-closed-immersion-base-change]. By definition of a closed immersion [def-weil-closed-immersion], $i$ is a homeomorphism of $Z_0$ onto the closed subset $T=i(Z_0)\\subseteq Z$. For an open $W\\subseteq Z$, the scheme $W\\times_SS_0=W\\times_ZZ_0$ is the open subscheme $i^{-1}(W)$ of $Z_0$. Since $i:Z_0\\to T$ is a homeomorphism, $W'\\mapsto i(W')$ is a bijection from the open and closed subsets of $Z_0$ to the open and closed subsets of $T$ (relative topology), and it sends $i^{-1}(W)$ to $W\\cap T$.",
+   "text": "The quotient spectrum map is a closed immersion, and base change in the given IsPullback square makes i a closed immersion. The isomorphism with the chosen pullback and Mathlib Scheme.Pullback.range_fst identify range(i) with f^{-1}(V(I)); the quotient spectrum range is V(I) by range_comap_of_surjective and Ideal.mk_ker.",
    "uses": [
     "lem-weil-pbc-spec-quotient-closed-immersion",
     "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-closed-immersion"
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-points"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.91.1 (Tag 0A0B), statement: $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ as a closed subset; written out by the agent"
+    "place": "Tag 0A0B, closed fibre; Mathlib AlgebraicGeometry/PullbackCarrier.lean range_fst, and RingTheory/Spectrum/Prime/RingHom.lean range_comap_of_surjective"
    }
   },
   {
-   "text": "*Step 2 (Tag 0A0B applied to the sheaf of $\\{0,1\\}$-valued locally constant functions).* Let $\\mathcal C$ be the sheaf on the topological space $Z$ with $\\mathcal C(U)$ the set of continuous maps $U\\to\\{0,1\\}$ ($\\{0,1\\}$ discrete); $\\chi\\mapsto\\chi^{-1}(1)$ identifies $\\mathcal C(U)$ with the set of open and closed subsets of $U$, compatibly with restriction ($U'\\subseteq U$: $\\chi^{-1}(1)\\cap U'$). Its inverse image $\\mathcal C|_T$ along $T\\subseteq Z$ has $\\Gamma(T,\\mathcal C|_T)$ = continuous maps $T\\to\\{0,1\\}$, the restriction map $\\Gamma(Z,\\mathcal C)\\to\\Gamma(T,\\mathcal C|_T)$ being $\\chi\\mapsto\\chi|_T$: a section of the inverse image is, near each point $t\\in T$, the restriction to $T$ of a section $\\chi$ of $\\mathcal C$ over an open $V\\ni t$ of $Z$, hence locally constant on $T$, and germs at $t$ are determined by their values near $t$; conversely a continuous $\\chi:T\\to\\{0,1\\}$ is locally constant, so near each $t\\in T$ it is the restriction of the constant function $\\chi(t)$ on an open of $Z$, and these local sections of the presheaf inverse image agree on overlaps and glue in the sheafification. The lemma [lem-weil-pbc-zariski-h0-proper-henselian-pair] for the henselian pair $(A,I)$, the proper $Z\\to S$ and the sheaf $\\mathcal C$ says that $\\chi\\mapsto\\chi|_T$ is bijective; that is, $W\\mapsto W\\cap T$ is a bijection from the open and closed subsets of $Z$ to those of $T$.",
+   "text": "Apply Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter: Y is spectral, and every irreducible closed subset meets the closed fibre in a nonempty connected set. In particular this holds for the closure of each singleton.",
    "uses": [
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+    "lemma-weil-pbc-stein-connectedness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent"
+    "place": "Tag 0A0B, proof: spectrality and connectedness of each irreducible closed subset intersected with the closed fibre"
    }
   },
   {
-   "text": "*Step 3 (statement (a)).* By Steps 1 and 2, $W\\mapsto i^{-1}(W)=W\\times_SS_0$ is the composite of the bijection $W\\mapsto W\\cap T$ (Step 2) and the inverse of the bijection $W'\\mapsto i(W')$ (Step 1), hence a bijection from the open and closed subsets of $Z$ to those of $Z_0$. If $W$ is open and closed with $W\\times_SS_0=\\emptyset$, then $W$ and $\\emptyset$ have the same image, so $W=\\emptyset$ by injectivity.",
+   "text": "Every nonempty closed subset C of Y meets range(i): choose x in C, use connectedness (hence nonemptiness) of closure({x}) intersected with the fibre, and use closure({x}) contained in C. If clopens U and V have equal inverse images, a point in U minus V would give a nonempty closed difference meeting range(i), contradicting equality of inverse images. Apply the same argument to V minus U and conclude by subset antisymmetry.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.91.1 (Tag 0A0B); written out by the agent"
+    "place": "Elementary consequence of the preceding connectedness assertion, written by M1"
+   }
+  },
+  {
+   "text": "Use the closed embedding homeomorphism e:Y₀ ≃ range(i) to transport a clopen V to V₁=e(V), whose complement is also closed. Apply TopCat.spectral_closed_clopen_decomposition_lift with Z=range(i) and the connectedness of Z intersected with each point closure. Obtain closed disjoint U,W covering Y and the equality Subtype.val(V₁)=Z intersect U.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spectral-closed-clopen-decomposition-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0CAM, lemma-connected-topological, applied to the closed image of the fibre"
+   }
+  },
+  {
+   "text": "The disjoint cover gives U=W complement, so U is open as well as closed. For x in Y₀, the intersection identity says i(x) belongs to U precisely when it belongs to Subtype.val(V₁). The latter is equivalent to x belonging to V by e(x)=i(x) and injectivity of i. This proves the required inverse-image equality. The argument includes empty schemes and empty clopens without extra hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Elementary set and homeomorphism calculations, written by M1"
    }
   }
  ],
  "proof_deps": [
   "def-weil-closed-immersion",
   "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fibre-product-points",
   "lem-weil-pbc-spec-quotient-closed-immersion",
-  "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+  "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
+  "lemma-weil-pbc-stein-connectedness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A0B; characteristic-function identification as in Steps 1–3 of thm-weil-pbc-henselian-idempotent-lifting"
+  "place": "Tags 0A0B and 0CAM; M1 translates existing Stein connectedness and closed clopen decomposition lifting, with elementary uniqueness and homeomorphism transport"
  },
  "mathlib_searches": [
   {
@@ -128,10 +152,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T034034-L-1502684",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042412-L-1817423",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -5971,3 +5971,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/K1/WeilConjectures.AlgebraicGeometry.Curve.Compactification (stage 3; reviewer PASS; first push; landing 20261012T042411-L-1816945 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/K2/Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood (stage 3; reviewer PASS; first push; landing 20261012T042411-L-1817147 (interface); batch 20261012T042402; modules 3; new nodes 2)
 - 04:24 L: merged deliver/K2/Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (stage 3; reviewer PASS; first push; landing 20261012T042412-L-1817318 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/M1/Sheaf.AlgebraicGeometry.HenselianClopenRestriction (stage 3; reviewer PASS; first push; landing 20261012T042412-L-1817423 (proof); batch 20261012T042402; modules 1; new nodes 0)
