@@ -10,11 +10,9 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.PairHenselizationFiltered
-import Sheaf.RingTheory.PairHenselizationEssentiallySmall
-import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.TensorProduct.Pi
+import Sheaf.RingTheory.PairHenselizationFiberSeparable
+import Sheaf.RingTheory.PairHenselizationFiberProjection
+import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Localization description of a fibre of a pair henselization
@@ -30,6 +28,24 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
+
+private theorem localization_of_idempotent_projection
+    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
+    (e : R) (he : IsIdempotentElem e) (hef : f e = 1)
+    (hsurj : Function.Surjective f) (hker : ∀ x, f x = 0 → e * x = 0) :
+    let _ := f.toAlgebra
+    IsLocalization (Submonoid.powers e) S := by
+  let _ := f.toAlgebra
+  apply IsLocalization.away_of_isIdempotentElem_of_mul he ?_ hsurj
+  intro x y
+  change f x = f y ↔ e * x = e * y
+  constructor
+  · intro hxy
+    have h := hker (x - y) (by simp only [map_sub, hxy, sub_self])
+    exact sub_eq_zero.mp (by simpa only [mul_sub] using h)
+  · intro hxy
+    have h := congrArg f hxy
+    simpa only [map_mul, hef, one_mul] using h
 
 /-- The residue extension at a prime of a Noetherian pair henselization is separable,
 and its fibre after any map to C is a localization of the contracted-prime fibre.
@@ -77,6 +93,20 @@ theorem pair_henselization_fiber_localization
     letI := ρ.toRingHom.toAlgebra
     letI := φ.toAlgebra
     Algebra.IsSeparable p.ResidueField q.ResidueField ∧
-      ∃ M : Submonoid (p.Fiber C), IsLocalization M (q.Fiber C) := by sorry
+      ∃ M : Submonoid (p.Fiber C), IsLocalization M (q.Fiber C) := by
+  dsimp
+  let _ := c.pt.hom.hom.toAlgebra
+  let _ := g.toAlgebra
+  let _ := (g.comp c.pt.hom.hom).toAlgebra
+  let _ : IsScalarTower A c.pt.right C :=
+    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  intro ρ hρ φ hφ
+  let _ := ρ.toRingHom.toAlgebra
+  let _ := φ.toAlgebra
+  refine ⟨pair_henselization_fiber_separable A I c hc q ρ hρ, ?_⟩
+  obtain ⟨e, he, heφ, hsurj, hker⟩ :=
+    pair_henselization_fiber_projection A I c hc C g q ρ hρ φ hφ
+  exact ⟨Submonoid.powers e,
+    localization_of_idempotent_projection φ e he heφ hsurj hker⟩
 
 end RingTheory

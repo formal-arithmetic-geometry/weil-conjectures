@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-pair-henselization-fiber-projection",
+ "kind": "statement",
+ "title": "Idempotent projection for a pair henselization fibre",
+ "statement": "Let A be a commutative ring, I an ideal and c a colimit cocone of the full category of etale maps A to D inducing bijections A/I to D/ID. Write B=c.pt.right, f:A to B, and suppose B is Noetherian. Let C be a commutative ring, g:B to C, q a prime of B, p its contraction, and rho:kappa(p) to kappa(q) the canonical A-algebra residue map. Give C the B-algebra structure from g and A-algebra structure from g composed with f. If phi:p.Fiber C to q.Fiber C is a ring homomorphism satisfying phi(x tensor y)=rho(x) tensor y on every pure tensor, then there is e in p.Fiber C such that e is idempotent, phi(e)=1, phi is surjective, and every x in ker(phi) satisfies e*x=0.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AH1, lemma-filtered-colimit-etale-noetherian-fibres; Tag 0AH3, lemma-henselization-pair-G-ring, displayed product-of-fibres calculation with the completion replaced by an arbitrary B-algebra C."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use filteredness of the pair-etale category and its essential smallness. Transport the under-category colimit along commAlgCatEquivUnder and reindex along equivSmallModel in the universe of A. Apply the finite-separable-fibres theorem to the resulting small diagram, and transport its canonical decomposition to B=c.pt.right. This yields the finite product of all residue fields over p and separable algebraicity of each extension.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization-filtered",
+    "lem-weil-pbc-pair-henselization-essentially-small",
+    "lem-weil-pbc-henselization-finite-separable-fibres"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical decomposition respects the B-algebra structures: on each component, x tensor b maps to rho(x) times the residue image of b, so 1 tensor b maps to the structure-map image of b. Tensor this B-algebra equivalence over B with C. Tensor cancellation identifies the source with kappa(p) tensor_A C, while distribution over the finite product identifies the target with the product of kappa(q_i) tensor_B C. The component at q sends x tensor y to rho(x) tensor y. The hypothesis on phi identifies phi with this projection because pure tensors additively generate the source.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the product of fibres choose e equal to 1 at q and 0 elsewhere and pull it back to p.Fiber C. Componentwise multiplication gives idempotence and phi(e)=1. Extension by zero gives surjectivity of phi. For x in its kernel the q coordinate is zero, while all other coordinates of e are zero, so e*x=0. This also applies to zero components.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization-filtered",
+  "lem-weil-pbc-pair-henselization-essentially-small",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-algebra-tensor-product-distributes-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K3",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AH1, lemma-filtered-colimit-etale-noetherian-fibres; Tag 0AH3, lemma-henselization-pair-G-ring, displayed product-of-fibres calculation with the completion replaced by an arbitrary B-algebra C."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsIdempotentElem",
+   "date": "2026-10-12",
+   "results": "No hits",
+   "verdict": "Partial match: Mathlib supplies the final localization step, but not the pair-henselization fibre structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian filtered colimit of etale algebras has separable residue fields and its fibre projections are localizations",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "away_of_isIdempotentElem|hensel.*fiber",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/LocalIso.lean, Mathlib/RingTheory/Localization/Away/Lemmas.lean, Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "verdict": "Partial match: Mathlib supplies the final localization step, but not the pair-henselization fibre structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection from a finite product of commutative rings is localization at an idempotent",
+   "date": "2026-10-12",
+   "results": "IsLocalization.Away.quotient_of_isIdempotentElem, IsLocalization.away_of_isIdempotentElem, IsLocalization.away_of_isIdempotentElem_of_mul, RingHom.pi_bijective_of_isIdempotentElem, RingHom.prod_bijective_of_isIdempotentElem, AlgEquiv.prodQuotientOfIsIdempotentElem_apply_fst, AlgEquiv.prodQuotientOfIsIdempotentElem_apply, AlgEquiv.prodQuotientOfIsIdempotentElem_apply_snd",
+   "verdict": "Partial match: Mathlib supplies the final localization step, but not the pair-henselization fibre structure."
+  },
+  {
+   "tool": "grep",
+   "query": "away_of_isIdempotentElem|hensel.*fiber",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean; Mathlib/RingTheory/LocalIso.lean; Mathlib/RingTheory/Localization/Away/Lemmas.lean; Mathlib/RingTheory/Localization/Away/Basic.lean; Mathlib/RingTheory/Localization/Away/Basic.lean; Mathlib/RingTheory/Localization/Away/Basic.lean; Mathlib/RingTheory/Localization/Away/Basic.lean; Mathlib/RingTheory/Localization/Away/Basic.lean",
+   "verdict": "Second reader: generic projection/localization tools and finite-type fibre surjectivity are partial matches; none supplies the canonical pair-henselization fibre projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor map kappa(p) tensor C to kappa(q) tensor C is surjective and its kernel is annihilated by an idempotent for a noetherian ind etale ring extension",
+   "date": "2026-10-13",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.Etale.exists_subalgebra_fg; Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective; Algebra.FormallyEtale.iff_of_surjective; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange; RingHom.SurjectiveOnStalks.exists_mul_eq_tmul; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.Extension.tensorCotangentSpace",
+   "verdict": "Second reader: generic projection/localization tools and finite-type fibre surjectivity are partial matches; none supplies the canonical pair-henselization fibre projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom, IsIdempotentElem, Function.Surjective",
+   "date": "2026-10-13",
+   "results": "IsLocalization.Away.algebraMap_surjective_of_isIdempotentElem; IsLocalization.away_of_isIdempotentElem_of_mul; IsLocalization.away_of_isIdempotentElem; Algebra.FormallySmooth.iff_of_surjective; Algebra.FormallyEtale.iff_of_surjective; AlgebraicGeometry.isOpenImmersion_SpecMap_iff_of_surjective; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux₂",
+   "verdict": "Second reader: generic projection/localization tools and finite-type fibre surjectivity are partial matches; none supplies the canonical pair-henselization fibre projection."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(surject|idempotent)|((surject|idempotent).*fiber)",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/QuasiFinite/Basic.lean; Mathlib/RingTheory/QuasiFinite/Basic.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean; Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean; Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean; Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean; Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean",
+   "verdict": "Second reader: generic projection/localization tools and finite-type fibre surjectivity are partial matches; none supplies the canonical pair-henselization fibre projection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselizationFiberLocalization",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pair-henselization-fiber-localization",
+   "place": "Original proof steps 1 to 3: canonical product decomposition, compatible base change, and idempotent projection witnesses.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PairHenselizationFiberProjection",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationFiberProjection.lean",
+  "declaration": "RingTheory.pair_henselization_fiber_projection",
+  "statement": "theorem pair_henselization_fiber_projection\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (c : Cocone (ObjectProperty.ι\n      (fun D : Under (CommRingCat.of A) ↦\n        AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map D.hom) ∧\n          Function.Bijective (Ideal.quotientMap (I.map D.hom.hom) D.hom.hom\n            (Ideal.le_comap_map)))))\n    (hc : IsColimit c) [IsNoetherianRing c.pt.right]\n    (C : Type u) [CommRing C] (g : c.pt.right →+* C)\n    (q : Ideal c.pt.right) [q.IsPrime] :\n    letI := c.pt.hom.hom.toAlgebra\n    letI := g.toAlgebra\n    letI := (g.comp c.pt.hom.hom).toAlgebra\n    letI : IsScalarTower A c.pt.right C :=\n      IsScalarTower.of_algebraMap_eq fun _ ↦ rfl\n    let p := q.comap c.pt.hom.hom\n    ∀ (ρ : p.ResidueField →ₐ[A] q.ResidueField),\n      ρ = Ideal.ResidueField.mapₐ p q (Algebra.ofId A c.pt.right) rfl →\n    ∀ (φ : p.Fiber C →+* q.Fiber C),\n      (∀ (x : p.ResidueField) (y : C),\n        φ (TensorProduct.tmul A x y) = TensorProduct.tmul c.pt.right (ρ x) y) →\n      ∃ e : p.Fiber C, IsIdempotentElem e ∧ φ e = 1 ∧\n        Function.Surjective φ ∧ ∀ x, φ x = 0 → e * x = 0",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
