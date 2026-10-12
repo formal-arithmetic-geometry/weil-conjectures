@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineComputationVanishing
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Local eventual vanishing for higher direct image sections
 
@@ -100,6 +100,42 @@ theorem exists_higherDirectImage_local_section_eq_zero {S : Scheme.{v}}
       ∃ R : Sieve V, R ∈ S.smallEtaleTopology V ∧
         ∀ (W : S.Etale) (q : W ⟶ V), R q →
           ∃ (j : I) (f : i ⟶ j),
-            (K.map f).hom.app (op W) ((K.obj i).obj.map q.op z) = 0 := by sorry
+            (K.map f).hom.app (op W) ((K.obj i).obj.map q.op z) = 0 := by
+  classical
+  intro i z hz
+  let 𝒰 := V.left.affineCover
+  let W (a : 𝒰.I₀) : S.Etale := Scheme.Etale.mk (𝒰.f a ≫ V.hom)
+  let q (a : 𝒰.I₀) : W a ⟶ V := MorphismProperty.Over.homMk (𝒰.f a)
+  refine ⟨Sieve.ofArrows W q, ?_, ?_⟩
+  · rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+    exact 𝒰.iUnion_range
+  · intro T t ht
+    obtain ⟨a, b, rfl⟩ := (Sieve.mem_ofArrows_iff W q t).mp ht
+    have : IsAffine (W a).left := by
+      change IsAffine (Spec _)
+      infer_instance
+    have hzero : (η.app i).hom.app (op (W a)) ((K.obj i).obj.map (q a).op z) = 0 := by
+      rw [NatTrans.naturality_apply, hz, map_zero]
+    let y := (eK i).hom.hom.app (op (W a)) ((K.obj i).obj.map (q a).op z)
+    have hy : (abelianHigherDirectImageMap (c.π.app (op i)).left
+        (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p
+        (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i)).hom.app (op (W a)) y = 0 := by
+      rw [hη] at hzero
+      exact hzero
+    obtain ⟨j, f, hf⟩ := exists_higherDirectImage_affine_computation_eq_zero
+      D c hc F φ hφid hφcomp H eH hH p (W a) i y hy
+    have hstage : (K.map f).hom.app (op (W a))
+        ((K.obj i).obj.map (q a).op z) = 0 := by
+      rw [hK]
+      change (eK j).inv.hom.app (op (W a))
+        ((abelianHigherDirectImageMap (D.map f.op).left (D.obj (op i)).hom
+          (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f)).hom.app
+            (op (W a)) y) = 0
+      rw [hf, map_zero]
+    refine ⟨j, f, ?_⟩
+    rw [op_comp, (K.obj i).obj.map_comp]
+    change (K.map f).hom.app (op T)
+      ((K.obj i).obj.map b.op ((K.obj i).obj.map (q a).op z)) = 0
+    rw [NatTrans.naturality_apply, hstage, map_zero]
 
 end AlgebraicGeometry.Etale
