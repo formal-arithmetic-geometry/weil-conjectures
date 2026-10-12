@@ -15,72 +15,50 @@
  ],
  "proof": [
   {
-   "text": "(The thickenings $Y_m\\subseteq Y_n$.) For $0\\le m\\le n$ the closed immersion $S_m\\to S_n$ is defined by the ideal $I^{m+1}/I^{n+1}$ of $A/I^{n+1}$, whose $(n+1)$-st power is $0$; every prime of $A/I^{n+1}$ contains this nilpotent ideal, so $S_m\\to S_n$ is surjective. By transitivity of fibre products $Y_m=Y\\times_SS_m\\cong Y_n\\times_{S_n}S_m$, so $j_{m,n}:Y_m\\to Y_n$ is the base change of $S_m\\to S_n$ along $Y_n\\to S_n$; hence it is a closed immersion [lem-weil-pbc-closed-immersion-base-change] and surjective [lem-weil-pbc-surjective-base-change]. Its ideal sheaf is $I^{m+1}\\mathcal O_{Y_n}$, whose $(n+1)$-st power is $I^{(m+1)(n+1)}\\mathcal O_{Y_n}=0$ as $I^{n+1}\\mathcal O_{Y_n}=0$; so $Y_m\\subseteq Y_n$ is a finite order thickening [def-sbc-first-order-thickening]. By [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] each $j_{m,n}$, in particular $j_{n,n+1}:Y_n\\to Y_{n+1}$ and $j_{0,n}:Y_0\\to Y_n$, is a universal homeomorphism.",
+   "text": "For each n, the canonical transition j_n is a finite order thickening and universal homeomorphism.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-surjective-base-change",
-    "def-sbc-first-order-thickening",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+    "lem-weil-pbc-infinitesimal-transition-thickening"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'Let X_n = X x_{Spec A} Spec(A/I^{n+1}) ... the inclusions X_0 -> X_1 -> X_2 -> ...'"
+    "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
    }
   },
   {
-   "text": "(Lifting $V$ to a compatible system of etale $Y_n$-schemes.) Put $V_0=V$. Given an etale $Y_n$-scheme $V_n$, apply [lemma-weil-pbc-universal-homeomorphism-site-equivalence] to the universal homeomorphism $j_{n,n+1}:Y_n\\to Y_{n+1}$ (the preceding thickening construction): base change along $j_{n,n+1}$ is an equivalence from etale $Y_{n+1}$-schemes to etale $Y_n$-schemes, so there are an etale $Y_{n+1}$-scheme $V_{n+1}$ and an isomorphism of $Y_n$-schemes $V_{n+1}\\times_{Y_{n+1}}Y_n\\cong V_n$. Composing it with the projection gives $V_n\\to V_{n+1}$ over $j_{n,n+1}$, and the square formed by $V_n\\to V_{n+1}$, $V_n\\to Y_n$, $V_{n+1}\\to Y_{n+1}$, $j_{n,n+1}$ is cartesian by construction. By induction and transitivity of fibre products [def-pc-fibre-product], $V_n\\times_{Y_n}Y_0\\cong V$ as $Y_0$-schemes for every $n$. (Stacks cites Etale Morphisms, Theorem 039R, for thickenings with the same underlying space, which is the case here; the DAG node is its generalization to universal homeomorphisms, Stacks 04DZ, whose Lean `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale` is sorry-free on slopmaster2.)",
+   "text": "Transport the given finite etale cover V to level zero along I^1=I. Given the cover W_n at level n, apply the one-step finite etale lifting theorem to j_n and W_n.",
    "uses": [
-    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-    "def-pc-fibre-product",
-    "def-weil-etale-morphism"
+    "lem-weil-pbc-finite-etale-thickening-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'By Etale Morphisms, Theorem 039R the inclusions ... induce equivalence of categories between the category of schemes etale over X_0 and the category of schemes etale over X_n'"
+    "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
    }
   },
   {
-   "text": "(Each $V_n\\to Y_n$ is finite.) By the preceding thickening construction, $Y_0\\subseteq Y_n$ is a finite order thickening, and by the preceding inductive construction, $V\\cong Y_0\\times_{Y_n}V_n$ as $Y_0$-schemes, i.e. $V\\to Y_0$ is the base change of $V_n\\to Y_n$. Since $V\\to Y_0$ is finite, [lem-weil-pbc-thickening-finite-cartesian] shows that $V_n\\to Y_n$ is finite. So $(V_n\\to Y_n)_n$ is a system of finite morphisms with cartesian transition squares.",
-   "uses": [
-    "lem-weil-pbc-thickening-finite-cartesian",
-    "def-weil-finite-integral-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2 (label lemma-finite-etale-on-proper-over-henselian-pair), proof, paragraph 'Essential surjectivity when A is Noetherian and I-adically complete' (same as the complete local case of Lemma 0A48); 'if U_n -> X_n corresponds to a finite etale morphism U_0 -> X_0, then U_n -> X_n is finite too, for example by More on Morphisms, Lemma 09ZW'"
-   }
-  },
-  {
-   "text": "Choose these lifts recursively on n. The initial cover is transported from V along I^1=I, retaining its isomorphism over the closed fibre. Return the schemes V_n, their finite etale structure maps, and the cartesian transitions. The construction requires neither completeness nor properness.",
+   "text": "Use Nat.rec and classical choice to choose W_(n+1) from the existential lift of W_n. The choose_spec proof supplies a comparison g_n and its cartesian square. Each chosen object carries finiteness and etaleness. At zero the underlying scheme is V itself, with structure morphism composed with the inverse equality isomorphism of the two bases; after transporting back these isomorphisms cancel, yielding the initial over-category isomorphism.",
    "uses": [
     "def-weil-pbc-finite-etale-category",
     "def-pc-fibre-product"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
+   }
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-surjective-base-change",
-  "def-sbc-first-order-thickening",
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-thickening-finite-cartesian",
-  "def-weil-finite-integral-morphism",
-  "def-weil-pbc-finite-etale-category"
+  "lem-weil-pbc-infinitesimal-transition-thickening",
+  "lem-weil-pbc-finite-etale-thickening-lift",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Fundamental Groups, Lemma 0GS2, essential-surjectivity proof, complete Noetherian case; the construction of compatible finite etale covers on X_n, before applying algebraization"
+  "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, complete Noetherian essential-surjectivity paragraph, before algebraization"
  },
  "mathlib_searches": [
   {
@@ -151,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T044739-L-2032950",
+  "landing": "20261012T063512-L-3156081",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
