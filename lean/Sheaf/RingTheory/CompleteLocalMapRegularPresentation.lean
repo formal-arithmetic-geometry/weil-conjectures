@@ -9,15 +9,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
-import Sheaf.RingTheory.CohenPowerSeriesPresentation
-import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
-import Sheaf.RingTheory.PowerSeriesAdicEvaluation
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesQuotientVariables
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.CompleteLocalMapCohenPresentation
 
 /-!
 # Compatible regular presentations of a map of complete local rings
@@ -88,6 +80,33 @@ theorem exists_complete_local_map_regular_presentation
           IsLocalRing.IsRegularSystemOfParameters t ∧
           IsLocalRing.IsRegularSystemOfParameters (t.map u ++ z)) ∧
         u.Flat ∧ IsRegularLocalRing (S ⧸ (IsLocalRing.maximalIdeal R).map u) := by
-  sorry
+  obtain ⟨ΛA, ΛB, cA, cB, n, m, hR, hS, hcR, hcS, hchar, hcohen,
+    hdata⟩ := exists_complete_local_map_cohen_presentation f
+  obtain ⟨q, v, u, hq, hq_local, hv, hv_local, hu_local, hcomm,
+    hflat, hfiber, hparams⟩ := hdata
+  obtain ⟨t, z, ht, hz, hp⟩ := hparams
+  let R := MvPowerSeries (Fin n) ΛA
+  let S := MvPowerSeries (Fin m) ΛB
+  let : CommRing ΛA := cA
+  let : CommRing ΛB := cB
+  let : CommRing R := inferInstance
+  let : CommRing S := inferInstance
+  let : IsRegularLocalRing R := hR
+  let : IsRegularLocalRing S := hS
+  let : IsLocalHom q := hq_local
+  let qres := IsLocalRing.ResidueField.map q
+  have hsurj : Function.Surjective qres := by
+    intro a
+    obtain ⟨a, rfl⟩ := IsLocalRing.residue_surjective a
+    obtain ⟨r, rfl⟩ := hq a
+    exact ⟨IsLocalRing.residue R r, rfl⟩
+  have hres : ∃ e : (R ⧸ IsLocalRing.maximalIdeal R) ≃+*
+      (A ⧸ IsLocalRing.maximalIdeal A),
+      ∀ r : R, e (Ideal.Quotient.mk (IsLocalRing.maximalIdeal R) r) =
+        Ideal.Quotient.mk (IsLocalRing.maximalIdeal A) (q r) := by
+    exact ⟨RingEquiv.ofBijective qres ⟨qres.injective, hsurj⟩, fun _ ↦ rfl⟩
+  exact ⟨R, S, inferInstance, inferInstance, hR, hS, hcR, hcS,
+    q, v, u, hq, hq_local, hv, hv_local, hu_local, hcomm, hres,
+    ⟨t, z, ht, hz⟩, hflat, hfiber⟩
 
 end RingHom
