@@ -1,0 +1,163 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution), part (1), dual of Tag 05T7 (lemma-subcategory-left-resolution), part (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def mkHom|def mkAux|abbrev of|isIso_cokernel_map_of_isPushout",
+   "results": "Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/HomologicalComplex.lean; Mathlib/Algebra/Homology/Single.lean; Mathlib/Algebra/Homology/Single.lean; Mathlib/Algebra/Homology/Double.lean",
+   "date": "2026-10-12",
+   "verdict": "constructors and local tools, no exact assembly theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Assemble cochain complex from a recursive sequence of objects with cokernel projections and commuting augmentation components",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.ofHom",
+   "results": "CochainComplex.ofHom",
+   "date": "2026-10-12",
+   "verdict": "constructors and local tools, no exact assembly theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an integer indexed cochain complex from a sequence indexed by natural numbers with consecutive differentials composing to zero, extended by zero below a bound",
+   "results": "CochainComplex.of, CochainComplex.mk, CochainComplex.mk' and ConnectData.cochainComplex provide constructors, not the supplied cokernel-pushout assembly conclusion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; reusable constructors only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, CategoryTheory.Limits.IsColimit",
+   "results": "opcyclesIsCokernel and extend.rightHomologyData.isColimitCokernelCofork supply local cokernel universal properties; no theorem constructs the supplied augmentation and transports all pushout squares.",
+   "date": "2026-10-12",
+   "verdict": "local tools, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "opcycles.*extend|extend.*opcycles|def extend|def embedding (Algebra/Homology)",
+   "results": "HomologicalComplex.extend, extendMap, extendOpcyclesIso and ComplexShape.embeddingUpIntGE are useful for a future assembly proof. None states the full system or assembly conclusion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; possible shorter implementation of remaining assembly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SubcategoryRightResolution",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-subcategory-right-resolution-assembly",
+ "title": "Assembly of an ascending cokernel-pushout system",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], $\\mathcal I\\subset\\mathrm{Ob}(\\mathcal A)$ contain the chosen zero object, $a\\in\\mathbf Z$, and $K$ a cochain complex [def-weil-abstract-derived-category] with $K^n$ zero for $n<a$. Suppose that for $m\\in\\mathbf N$ we are given objects $X_m\\in\\mathcal I$, $Q_m$, epimorphisms $p_m:X_m\\to Q_m$, monomorphisms $\\alpha_m:K^{a+m}\\to X_m$ and $\\beta_m:C_K^{a+m}\\to Q_m$, where $C_K^n=\\operatorname{Coker}(d_K^{n-1})$, satisfying $\\pi_K^{a+m}\\beta_m=\\alpha_m p_m$. Assume $p_0$ is an isomorphism. Suppose given $d_m:X_m\\to X_{m+1}$ such that $d_mp_{m+1}=0$ and $p_{m+1}$ is a cokernel of $d_m$. For every $m$ suppose there are $P_m$, $u_m:K^{a+m+1}\\to P_m$, $v_m:Q_m\\to P_m$, and a monomorphism $j_m:P_m\\to X_{m+1}$ such that the square with top $\\bar d_K^{a+m}$, left $\\beta_m$, right $u_m$ and bottom $v_m$ is a pushout [def-weil-pbc-category-colimit], and $u_mj_m=\\alpha_{m+1}$, $p_mv_mj_m=d_m$. Then there are a cochain complex $I$ and a morphism $\\iota:K\\to I$ whose components are monomorphisms, with $I^n\\in\\mathcal I$ and $I^n$ zero for $n<a$, such that every induced map $C_K^n\\to C_I^n$ is mono and for every $n$ there are $P$, $u:K^{n+1}\\to P$, $v:C_I^n\\to P$, and a mono $j:P\\to I^{n+1}$ with $\\operatorname{IsPushout}(\\bar d_K^n,\\bar\\iota^n,u,v)$, $uj=\\iota^{n+1}$, and $vj=\\bar d_I^n$. Composition is written in diagrammatic order.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Define the terms in degree a+m to be X_m and all smaller terms to be the chosen zero object. Define the differentials to be d_m in these degrees and zero at the boundary. Each d_m factors through p_m by the supplied local square, so hzero_d makes consecutive differentials compose to zero. Assemble with CochainComplex.of.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the augmentation using the supplied alpha_m and zero in lower degrees. Commutation follows by composing hcomm with v_m and j_m and then applying the supplied pushout identity. At the boundary its source is zero. Assemble with CochainComplex.ofHom.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The initial p_0, an isomorphism, is a cokernel of the zero incoming differential. Subsequently hcoker identifies Q_m with the opcycles of I. By cancellation of the epimorphism K.pOpcycles, the induced map on opcycles identifies with beta_m and is mono. Transport the supplied pushout squares along these canonical isomorphisms. Cancellation of p_m identifies v_m j_m with the map out of opcycles.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree a-1 both opcycles objects are zero. Take P=K.X a, maps identity and zero, and j=alpha_0. In smaller degrees use zero pushouts. Mono of augmentation components below a follows from the source being zero. Membership and the lower bound follow from the chosen terms.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution), part (1), dual of Tag 05T7 (lemma-subcategory-left-resolution), part (1)"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-subcategory-right-resolution-05T6",
+   "place": "Steps 1-3, 5-6: construction and ascending recursion, separated from the cohomology calculation",
+   "via": []
+  },
+  "same_as": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SubcategoryRightResolutionAssembly",
+  "file": "lean/Sheaf/Algebra/Homology/SubcategoryRightResolutionAssembly.lean",
+  "declaration": "CochainComplex.exists_complex_of_cokernel_pushout_system",
+  "statement": "theorem exists_complex_of_cokernel_pushout_system (C : Type u) [Category.{v} C] [Abelian C] (𝓘 : Set C) (hzero : (0 : C) ∈ 𝓘) (a : ℤ) (K : CochainComplex C ℤ) (hK : ∀ n : ℤ, n < a → IsZero (K.X n)) (X Q : ℕ → C) (p : ∀ m : ℕ, X m ⟶ Q m) (α : ∀ m : ℕ, K.X (a + m) ⟶ X m) (β : ∀ m : ℕ, K.opcycles (a + m) ⟶ Q m) (hmem : ∀ m : ℕ, X m ∈ 𝓘) (hepi : ∀ m : ℕ, Epi (p m)) (hmono : ∀ m : ℕ, Mono (α m)) (hβ : ∀ m : ℕ, Mono (β m)) (hcomm : ∀ m : ℕ, K.pOpcycles (a + m) ≫ β m = α m ≫ p m) (hinit : IsIso (p 0)) (d : ∀ m : ℕ, X m ⟶ X (m + 1)) (hzero_d : ∀ m : ℕ, d m ≫ p (m + 1) = 0) (hcoker : ∀ m : ℕ, IsColimit (CokernelCofork.ofπ (p (m + 1)) (hzero_d m))) (hsq : ∀ m : ℕ, ∃ (P : C) (u : K.X (a + (m + 1 : ℕ)) ⟶ P) (v : Q m ⟶ P) (j : P ⟶ X (m + 1)), Mono j ∧ IsPushout (K.fromOpcycles (a + m) (a + (m + 1 : ℕ))) (β m) u v ∧ u ≫ j = α (m + 1) ∧ p m ≫ v ≫ j = d m) : ∃ (I : CochainComplex C ℤ) (ι : K ⟶ I), (∀ n : ℤ, Mono (ι.f n)) ∧ (∀ n : ℤ, I.X n ∈ 𝓘) ∧ (∀ n : ℤ, n < a → IsZero (I.X n)) ∧ (∀ n : ℤ, Mono (opcyclesMap ι n)) ∧ (∀ n : ℤ, ∃ (P : C) (u : K.X (n + 1) ⟶ P) (v : I.opcycles n ⟶ P) (j : P ⟶ I.X (n + 1)), Mono j ∧ IsPushout (K.fromOpcycles n (n + 1)) (opcyclesMap ι n) u v ∧ u ≫ j = ι.f (n + 1) ∧ v ≫ j = I.fromOpcycles n (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T095913-L-320641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T095913-L-320641",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

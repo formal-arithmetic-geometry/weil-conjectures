@@ -8,6 +8,9 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
+import Mathlib.CategoryTheory.Abelian.CommSq
+import Sheaf.Algebra.Homology.SubcategoryRightResolutionSystem
+
 /-!
 # Right resolutions with terms in a prescribed subset
 
@@ -23,6 +26,58 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject
 
 namespace CochainComplex
+
+private theorem quasiIsoAt_of_pushout_factorization
+    {C : Type u} [Category.{v} C] [Abelian C]
+    {K I : CochainComplex C ℤ} (α : K ⟶ I) (n : ℤ)
+    [Mono (HomologicalComplex.opcyclesMap α n)]
+    {P : C} (u : K.X (n + 1) ⟶ P) (v : I.opcycles n ⟶ P)
+    (j : P ⟶ I.X (n + 1)) [Mono j]
+    (sq : IsPushout (K.fromOpcycles n (n + 1)) (HomologicalComplex.opcyclesMap α n) u v)
+    (hv : v ≫ j = I.fromOpcycles n (n + 1)) : QuasiIsoAt α n := by
+  let f := K.fromOpcycles n (n + 1)
+  let g := HomologicalComplex.opcyclesMap α n
+  let k := kernel.map f v g u sq.w
+  have : Epi k := Abelian.epi_kernel_map_of_isPushout sq
+  have : Mono k := mono_of_mono_fac (show k ≫ kernel.ι v = kernel.ι f ≫ g by
+    simp [k])
+  have : IsIso k := isIso_of_mono_of_epi k
+  let t : K.homology n ⟶ kernel f :=
+    kernel.lift f (K.homologyι n) (K.homologyι_comp_fromOpcycles n (n + 1))
+  let t' : kernel f ⟶ K.homology n :=
+    (K.homologyIsKernel n (n + 1) (by simp)).lift (KernelFork.ofι (kernel.ι f)
+      (kernel.condition f))
+  have htι : t' ≫ K.homologyι n = kernel.ι f :=
+    (K.homologyIsKernel n (n + 1) (by simp)).fac _ WalkingParallelPair.zero
+  have ht : t ≫ t' = 𝟙 _ := by
+    apply (cancel_mono (K.homologyι n)).1
+    simp [t, htι, Category.assoc]
+  have ht' : t' ≫ t = 𝟙 _ := by
+    apply (cancel_mono (kernel.ι f)).1
+    simp [t, htι, Category.assoc]
+  have : IsIso t := ⟨t', ht, ht'⟩
+  let l : kernel v ⟶ I.homology n :=
+    (I.homologyIsKernel n (n + 1) (by simp)).lift (KernelFork.ofι (kernel.ι v) (by
+      rw [← hv, ← Category.assoc, kernel.condition, zero_comp]))
+  let l' : I.homology n ⟶ kernel v :=
+    kernel.lift v (I.homologyι n) (by
+      apply (cancel_mono j).1
+      simp [Category.assoc, hv])
+  have hlι : l ≫ I.homologyι n = kernel.ι v :=
+    (I.homologyIsKernel n (n + 1) (by simp)).fac _ WalkingParallelPair.zero
+  have hl : l ≫ l' = 𝟙 _ := by
+    apply (cancel_mono (kernel.ι v)).1
+    simp [l', hlι, Category.assoc]
+  have hl' : l' ≫ l = 𝟙 _ := by
+    apply (cancel_mono (I.homologyι n)).1
+    simp [l', hlι, Category.assoc]
+  have : IsIso l := ⟨l', hl, hl'⟩
+  rw [quasiIsoAt_iff_isIso_homologyMap]
+  have eq : HomologicalComplex.homologyMap α n = t ≫ k ≫ l := by
+    apply (cancel_mono (I.homologyι n)).1
+    simp [t, k, g, hlι, Category.assoc]
+  rw [eq]
+  infer_instance
 
 /-- A bounded-below complex admits a degreewise monomorphic quasi-isomorphism to a complex
 with the same lower bound and terms in any subset containing zero into which every object
@@ -65,6 +120,14 @@ theorem exists_mono_quasiIso_in_subcategory
     ∃ (I : CochainComplex C ℤ) (α : K ⟶ I),
       QuasiIso α ∧ (∀ n : ℤ, Mono (α.f n)) ∧
       (∀ n : ℤ, I.X n ∈ 𝓘) ∧ (∀ n : ℤ, n < a → IsZero (I.X n)) := by
-  sorry
+  obtain ⟨I, α, hmono, hmem, hbound, hop, hsq⟩ :=
+    exists_subcategory_right_resolution_system C 𝓘 hzero hembed a K hK
+  refine ⟨I, α, ?_, hmono, hmem, hbound⟩
+  rw [quasiIso_iff]
+  intro n
+  have : Mono (HomologicalComplex.opcyclesMap α n) := hop n
+  obtain ⟨P, u, v, j, hj, sq, _, hv⟩ := hsq n
+  have : Mono j := hj
+  exact quasiIsoAt_of_pushout_factorization α n u v j sq hv
 
 end CochainComplex

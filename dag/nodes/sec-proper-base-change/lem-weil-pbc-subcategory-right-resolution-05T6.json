@@ -28,86 +28,39 @@
  ],
  "proof": [
   {
-   "text": "Notation: for a cochain complex $X^\\bullet$ and $n\\in\\mathbf Z$ let $\\pi_X^n:X^n\\to C_X^n:=\\operatorname{Coker}(d_X^{n-1})$ be the cokernel and $\\bar d_X^n:C_X^n\\to X^{n+1}$ the morphism with $\\bar d_X^n\\pi_X^n=d_X^n$. **Step 1 (induction hypothesis; dual of $IH_n$ in 05T7).** For an integer $n\\ge a-1$ let $IH_n$ be the statement: there are objects $I^j\\in\\mathcal I$ for $j\\le n$ with $I^j=0$ for $j<a$, morphisms $d^j:I^j\\to I^{j+1}$ for $j\\le n-1$, and monomorphisms $\\alpha^j:K^j\\to I^j$ for $j\\le n$, such that (i) $d^j\\alpha^j=\\alpha^{j+1}d_K^j$ for $j\\le n-1$; (ii) $d^{j+1}d^j=0$ for $j\\le n-2$; (iii) for $j\\le n-1$ the morphism $\\operatorname{Ker}(d_K^j)/\\operatorname{Im}(d_K^{j-1})\\to\\operatorname{Ker}(d^j)/\\operatorname{Im}(d^{j-1})$ induced by $\\alpha^j$ is an isomorphism; (iv) the morphism $\\bar\\alpha^n:C_K^n=\\operatorname{Coker}(d_K^{n-1})\\to C_I^n=\\operatorname{Coker}(d^{n-1})$ induced by $\\alpha^n$ (it exists by (i) for $j=n-1$) is a monomorphism. $IH_{a-1}$ holds: take $I^j=0$ for $j\\le a-1$ (allowed since $0\\in\\mathcal I$), all $d^j$ and $\\alpha^j$ zero; each $\\alpha^j:K^j=0\\to0$ is a monomorphism, (i)-(iii) hold since all objects in degrees $\\le a-1$ are $0$, and (iv) holds since $C_K^{a-1}$ is a quotient of $K^{a-1}=0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), part (1); its proof is \"dual to Lemma Tag 05T7\" (lemma-subcategory-left-resolution, line 5302), whose proof of part (1): the induction hypothesis $IH_n$ and the remark that $IH_{a+1}$ holds with $P^j=0$, dualized"
-   }
-  },
-  {
-   "text": "**Step 2 (construction in degree $n+1$).** Assume $IH_n$. Since $d_K^nd_K^{n-1}=0$ there is $\\bar d_K^n:C_K^n\\to K^{n+1}$ with $\\bar d_K^n\\pi_K^n=d_K^n$, and $\\bar\\alpha^n:C_K^n\\to C_I^n$ is a monomorphism by (iv). Let $(P,u,v)$ be a pushout of $\\bar d_K^n$ and $\\bar\\alpha^n$, i.e. $P=K^{n+1}\\amalg_{C_K^n}C_I^n$ with $u:K^{n+1}\\to P$, $v:C_I^n\\to P$, $u\\bar d_K^n=v\\bar\\alpha^n$ (pushouts exist in $\\mathcal A$ by [lem-weil-pbc-abelian-exact-epi-cokernel](d); this is the dual of the fibre product $K^{n-1}\\times_{K^n}\\operatorname{Ker}(d^n)$ of 05T7). By hypothesis on $\\mathcal I$ choose a monomorphism $i:P\\to I^{n+1}$ with $I^{n+1}\\in\\mathcal I$ (note $n+1\\ge a$, so no vanishing is required). Put $\\alpha^{n+1}=i\\circ u:K^{n+1}\\to I^{n+1}$ and $d^n=i\\circ v\\circ\\pi_I^n:I^n\\to I^{n+1}$. Since $\\bar\\alpha^n$ is a monomorphism, $u$ is a monomorphism by [lem-weil-pbc-abelian-pushout-mono] (with $a=\\bar\\alpha^n$, $b=\\bar d_K^n$, $a'=u$), so $\\alpha^{n+1}$ is a monomorphism as a composite of monomorphisms.",
+   "text": "Construct the ascending pushout system, with degreewise mono augmentation and mono opcycles maps; all terms lie in the subset and vanish below a.",
    "uses": [
-    "lem-weil-pbc-abelian-exact-epi-cokernel",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-abelian-pushout-mono"
+    "lem-weil-pbc-subcategory-right-resolution-system"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), part (1); its proof is \"dual to Lemma Tag 05T7\" (lemma-subcategory-left-resolution, line 5302), whose proof of part (1): the choice of a surjection $P^{n-1}\\to K^{n-1}\\times_{K^n}\\Ker(d^n)$, dualized to an injection of the pushout $K^{n+1}\\amalg_{C_K^n}C_I^n$ into an element of $\\mathcal I$"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 3 (conditions (i) and (ii) in degree $n$).** $d^n\\alpha^n=iv\\pi_I^n\\alpha^n=iv\\bar\\alpha^n\\pi_K^n=iu\\bar d_K^n\\pi_K^n=iu\\,d_K^n=\\alpha^{n+1}d_K^n$, using $\\bar\\alpha^n\\pi_K^n=\\pi_I^n\\alpha^n$ (definition of $\\bar\\alpha^n$) and the pushout square. And $d^nd^{n-1}=iv\\,\\pi_I^nd^{n-1}=0$ since $\\pi_I^n$ is a cokernel of $d^{n-1}$. With $IH_n$ this gives (i) for $j\\le n$ and (ii) for $j\\le n-1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), part (1); its proof is \"dual to Lemma Tag 05T7\" (lemma-subcategory-left-resolution, line 5302), whose proof of part (1): \"the reader easily checks that $IH_{n-1}$ holds\", dualized; this step and Steps 4-5 write that check out"
-   }
-  },
-  {
-   "text": "**Step 4 (condition (iii) in degree $n$).** Since $\\pi_I^n$ is an epimorphism and $d^n=(iv)\\pi_I^n$, the morphism $\\bar d_I^n:C_I^n\\to I^{n+1}$ is $iv$, and $\\operatorname{Ker}(iv)=\\operatorname{Ker}(v)$ as subobjects of $C_I^n$ because $i$ is a monomorphism. By [lem-weil-pbc-cohomology-kernel-on-cokernel], $H^n(K)\\cong\\operatorname{Ker}(\\bar d_K^n)$ and $H^n(I)\\cong\\operatorname{Ker}(\\bar d_I^n)=\\operatorname{Ker}(v)$ (here $H^n(I)$ only involves $d^{n-1},d^n$, already defined), and the map $H^n(K)\\to H^n(I)$ induced by $\\alpha^n$ is an isomorphism if and only if the morphism $\\operatorname{Ker}(\\bar d_K^n)\\to\\operatorname{Ker}(v)$ induced by $\\bar\\alpha^n$ is. Apply [lem-weil-pbc-pushout-kernel-iso] to the pushout square with $w=C_K^n$, $f=\\bar d_K^n$, $g=\\bar\\alpha^n$ (a monomorphism), $h=u$, $k=v$: the morphism $\\operatorname{Ker}(\\bar d_K^n)\\to\\operatorname{Ker}(v)$ induced by $\\bar\\alpha^n$ is an isomorphism. Hence (iii) holds for $j=n$, and with $IH_n$ for all $j\\le n$.",
+   "text": "For every degree n, the local pushout square induces an epi kernel map by Abelian.epi_kernel_map_of_isPushout. It is also mono because its composite with the target kernel inclusion equals the source kernel inclusion followed by the mono opcycles map; balancedness makes it an isomorphism. The mono embedding j preserves the kernel of the bottom pushout map. Identify both homology objects with these kernels using homologyIsKernel; homologyι_naturality identifies the homology map with the composite of these three isomorphisms. Hence QuasiIsoAt holds in every degree.",
    "uses": [
-    "lem-weil-pbc-cohomology-kernel-on-cokernel",
-    "lem-weil-pbc-pushout-kernel-iso"
+    "lem-weil-pbc-pushout-kernel-iso",
+    "lem-weil-pbc-cohomology-kernel-on-cokernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), part (1); its proof is \"dual to Lemma Tag 05T7\" (lemma-subcategory-left-resolution, line 5302), whose proof of part (1): the isomorphisms $\\Ker(d^j)/\\Im(d^{j-1})\\to H^j(K^\\bullet)$ in $IH_{n-1}$, dualized"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 5 (condition (iv) in degree $n+1$).** As $\\pi_K^n$ and $\\pi_I^n$ are epimorphisms, a morphism kills $d_K^n=\\bar d_K^n\\pi_K^n$ iff it kills $\\bar d_K^n$, and kills $d^n=(iv)\\pi_I^n$ iff it kills $iv$; so $C_K^{n+1}=\\operatorname{Coker}(\\bar d_K^n)$ and $C_I^{n+1}=\\operatorname{Coker}(iv)$, and $\\bar\\alpha^{n+1}$ is the morphism $\\operatorname{Coker}(\\bar d_K^n)\\to\\operatorname{Coker}(iv)$ induced by $\\alpha^{n+1}=iu$. It factors as $\\operatorname{Coker}(\\bar d_K^n)\\xrightarrow{\\theta}\\operatorname{Coker}(v)\\xrightarrow{\\bar\\imath}\\operatorname{Coker}(iv)$, with $\\theta$ induced by $u$ and $\\bar\\imath$ induced by $i$ (both composites agree after precomposing with the epimorphism $K^{n+1}\\to\\operatorname{Coker}(\\bar d_K^n)$). $\\theta$ is an isomorphism by [lem-weil-pbc-pushout-cokernel-iso] applied to the same pushout square ($f=\\bar d_K^n$, $g=\\bar\\alpha^n$, $h=u$, $k=v$), and $\\bar\\imath$ is a monomorphism by [lem-weil-pbc-cokernel-map-mono-of-mono] ($i$ is a monomorphism). Hence $\\bar\\alpha^{n+1}$ is a monomorphism. Together with Steps 2-4, $IH_{n+1}$ holds, the data of $IH_n$ being kept unchanged.",
-   "uses": [
-    "lem-weil-pbc-pushout-cokernel-iso",
-    "lem-weil-pbc-cokernel-map-mono-of-mono"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), part (1); its proof is \"dual to Lemma Tag 05T7\" (lemma-subcategory-left-resolution, line 5302), whose proof of part (1): the condition that $\\alpha:\\Ker(d^n)\\to\\Ker(d_K^n)$ is surjective in $IH_{n-1}$, dualized"
-   }
-  },
-  {
-   "text": "**Step 6 (conclusion).** Starting from $IH_{a-1}$ (Step 1) and applying Steps 2-5 recursively (choosing at each stage $n$ the pushout and the monomorphism $i$), each $IH_{n+1}$ extends the data of $IH_n$ without changing it, so we obtain objects $I^n\\in\\mathcal I$ for all $n$ with $I^n=0$ for $n<a$, morphisms $d^n:I^n\\to I^{n+1}$ and monomorphisms $\\alpha^n:K^n\\to I^n$ for all $n$. By (ii) of every $IH_m$, $d^{n+1}d^n=0$ for all $n$, so $I^\\bullet$ is a cochain complex; by (i), $\\alpha=(\\alpha^n)$ is a morphism of complexes $K^\\bullet\\to I^\\bullet$ [def-weil-abstract-derived-category]; and by (iii) of $IH_{n+1}$, $H^n(\\alpha):H^n(K^\\bullet)\\to H^n(I^\\bullet)$ is an isomorphism for every $n$ (for $n<a$ both sides are $0$). Thus $\\alpha$ is a quasi-isomorphism with every $\\alpha^n$ injective, $I^n\\in\\mathcal I$ for all $n$, and $I^n=0$ for $n<a$.",
+   "text": "Apply quasiIso_iff and assemble the witnesses with the termwise mono, membership and lower-bound properties of the construction.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), part (1); its proof is \"dual to Lemma Tag 05T7\" (lemma-subcategory-left-resolution, line 5302), whose proof of part (1): \"proceeding by descending induction we produce a complex $P^\\bullet$ ... and a termwise surjective quasi-isomorphism\", dualized to ascending induction"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-abelian-exact-epi-cokernel",
-  "lem-weil-pbc-abelian-pushout-mono",
   "lem-weil-pbc-cohomology-kernel-on-cokernel",
-  "lem-weil-pbc-cokernel-map-mono-of-mono",
-  "lem-weil-pbc-pushout-cokernel-iso",
-  "lem-weil-pbc-pushout-kernel-iso"
+  "lem-weil-pbc-pushout-kernel-iso",
+  "lem-weil-pbc-subcategory-right-resolution-system"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 05T6 (line 5387), part (1), proved there as the dual of Lemma Tag 05T7 (line 5302), part (1); the dualization and the check the source leaves to the reader are written out"
+  "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution), part (1), dual of Tag 05T7 (lemma-subcategory-left-resolution), part (1)",
+  "note": "M1 Lean proof separates the explicit recursive construction from the kernel/homology comparison; only the sequence assembly remains unproved."
  },
  "mathlib_searches": [
   {
@@ -197,5 +150,15 @@
   "group": "S1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T095913-L-320641",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

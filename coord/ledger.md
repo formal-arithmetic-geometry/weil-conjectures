@@ -7238,3 +7238,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SerreSectionModuleChartScalar (stage 3; reviewer PASS; first push; landing 20261012T095912-L-320296 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/K3/Sheaf.RingTheory.GradedNakayamaGeneration (stage 3; reviewer PASS; first push; landing 20261012T095912-L-320400 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/K3/Sheaf.RingTheory.GradedSubmoduleFinite (stage 3; reviewer PASS; first push; landing 20261012T095913-L-320545 (proof); batch 20261012T095846; modules 1; new nodes 0)
+- 09:59 L: merged deliver/M1/Sheaf.Algebra.Homology.SubcategoryRightResolution (stage 3; reviewer PASS; first push; landing 20261012T095913-L-320641 (interface); batch 20261012T095846; modules 3; new nodes 2)
