@@ -1,13 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Mathlib.RingTheory.Filtration
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedBound
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedSystem
 
 @[expose] public section
 universe u
@@ -36,6 +31,8 @@ theorem coherentFormalModule_kernel_stabilized_aux {X : Scheme.{u}} [IsNoetheria
               F.obj.map (homOfLE (Nat.le_add_right m c)).op),
           e.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫
             F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) := by
-  sorry
+  obtain ⟨c, hc⟩ := coherentFormalModule_kernel_stabilized_bound I F H α
+  obtain ⟨S, j, hS⟩ := coherentFormalModule_kernel_stabilized_system I F H α c hc
+  exact ⟨c, hc, S, j, hS⟩
 
 end AlgebraicGeometry
