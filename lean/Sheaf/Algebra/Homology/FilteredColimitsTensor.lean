@@ -9,9 +9,9 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.Algebra.Homology.FilteredColimitsTensorTotal
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
@@ -59,6 +59,9 @@ theorem filteredColimitsTensorComplex
             (ComplexShape.up ℤ) (ComplexShape.up ℤ)).flip.obj P) ⋙
             HomologicalComplex₂.totalFunctor (Mod R) (ComplexShape.up ℤ)
               (ComplexShape.up ℤ) (ComplexShape.up ℤ)) := by
-  sorry
+  let := (grothendieckAbelian_and_functorial_kInjective_resolutions J R).1
+  constructor
+  · exact AB5OfSize.ofShape I
+  · exact preservesFilteredColimitsTensorTotal C J R I
 
 end SheafOfModules

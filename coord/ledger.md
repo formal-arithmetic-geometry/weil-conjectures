@@ -7822,3 +7822,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (stage 3; reviewer PASS; after a return; landing 20261012T135239-L-1667651 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkAux (stage 3; reviewer PASS; first push; landing 20261012T135239-L-1667782 (proof); batch 20261012T135212; modules 1; new nodes 3)
 - 13:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.GluedComponentAffineSection (stage 3; reviewer PASS; after a return; landing 20261012T135240-L-1667920 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:52 L: merged deliver/H3/Sheaf.Algebra.Homology.FilteredColimitsTensor (stage 3; reviewer PASS; first push; landing 20261012T135240-L-1668024 (interface); batch 20261012T135212; modules 2; new nodes 1)
