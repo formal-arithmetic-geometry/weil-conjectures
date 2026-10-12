@@ -26,59 +26,63 @@
  ],
  "proof": [
   {
-   "text": "For the ringed site $(X_{\\mathrm{Zar}},\\mathcal O_X)$, the forgetful functor from sheaves of $\\mathcal O_X$-modules to abelian sheaves is exact, preserving kernels and cokernels, by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Thus an exact sequence of module sheaves remains exact after forgetting the module structure.",
+   "text": "Set T = SheafOfModules.toSheaf (moduleRings X.toRingedSpace), Gamma = abelian evaluation at the top open, G = module global sections and V = module-to-abelian-group forgetful. T preserves finite limits by Mathlib and finite colimits by the proved source instance SheafOfModules.preservesFiniteColimits_toSheaf. Thus T preserves homology and quasi-isomorphisms. This realizes the exactness assertion of lem-weil-pbc-module-sheaves-colimits-forgetful without importing its larger packaging theorem.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma Tag 03DA (lemma-abelian: Mod(O) abelian and the forgetful functor exact)"
-   }
+   "elementary": false
   },
   {
-   "text": "The sheaves of $\\mathcal O_X$-modules on $X_{\\mathrm{Zar}}$ are the $\\mathcal O_X$-modules on the underlying space of $X$, the objects of $X_{\\mathrm{Zar}}$ being the open subsets and its coverings the open coverings [def-sc-zariski-site]; this category has enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives]. Choose an injective resolution $\\mathcal F\\to I^\\bullet$ in the category of $\\mathcal O_X$-module sheaves. Exactness of the forgetful functor from step 1 makes the underlying complex $\\mathcal F_{\\mathrm{ab}}\\to I^\\bullet_{\\mathrm{ab}}$ an exact resolution in abelian sheaves.",
+   "text": "Prove the private topCohomologyEquiv: the representable presheaf of the top open has a unique element in every degree. FreeAbelianGroup.uniqueEquiv followed by the inverse lift equivalence identifies its free abelian presheaf with constant lifted integers. FreeAbelianGroup.lift_ext proves naturality on generators. Apply presheafToSheaf.mapIso and Ext.precompAddEquiv to identify Sheaf.H' F q top with Sheaf.H F q. Prove topCohomologyIsoDerived by composing this with H.equiv₀ and rightDerivedZeroIsoSelf in degree zero, and cohomology_nonempty_addEquiv_rightDerived_evaluation_succ in positive degrees. These are fully proved private glue declarations, not new unresolved statements.",
    "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "def-sc-zariski-site",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-sc-zariski-cohomology",
+    "new-sheaf-cohomology-derived-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma Tag 03DA and Injectives, Theorem Tag 079H, applied to the ringed Zariski site"
-   }
+   "elementary": false
   },
   {
-   "text": "Each term $I^m$ is an injective $\\mathcal O_X$-module on the ringed site $(X_{\\mathrm{Zar}},\\mathcal O_X)$, so $H^q(U,I^m_{\\mathrm{ab}})=0$ for $q>0$ and every open $U$, in particular $U=X$, by [lem-sc-injective-module-abelian-acyclic-zariski]; that is, $I^m_{\\mathrm{ab}}$ is acyclic for $v=\\Gamma(X,-):\\textit{Ab}(X_{\\mathrm{Zar}})\\to\\textit{Ab}$. The category $\\textit{Ab}(X_{\\mathrm{Zar}})$ is abelian with enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives], so the acyclic-resolution criterion [lemma-weil-pbc-leray-acyclicity] (2) applies to $v$ and identifies the cohomology of the complex of global sections $\\Gamma(X,I^\\bullet_{\\mathrm{ab}})$ with the derived global sections $R^q\\Gamma(X,\\mathcal F_{\\mathrm{ab}})$ [def-sc-zariski-cohomology]. The same global-sections complex $\\Gamma(X,I^\\bullet)$ computes the module cohomology $R^q\\Gamma(X,\\mathcal F)$ [pqf-def-cohomology], since $I^\\bullet$ is an injective resolution in $\\mathcal O_X$-modules. The resulting isomorphisms are canonical and natural in $\\mathcal F$, since maps of sheaves lift to maps of injective resolutions and the comparison map of [lemma-weil-pbc-leray-acyclicity] (2) is induced by any morphism of complexes over the identity.",
+   "text": "Install enough injectives for module sheaves from the proved moduleSheaves_abelian_enoughInjectives theorem for X.toRingedSpace; abelian-sheaf enough injectives is the unchanged explicit assumption hE. For every injective module I and n : Nat, injective_module_abelian_acyclic at the top open gives Subsingleton (Sheaf.H' (T.obj I) (n+1) top). The preceding Ext/derived-evaluation isomorphism and AddCommGrpCat.isZero_of_subsingleton give Gamma.rightAcyclic (T.obj I).",
    "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
     "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "new-sheaf-cohomology-derived-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose I = injectiveResolution F. Compose the inverse component of HomologicalComplex.singleMapHomologicalComplex T with T.mapHomologicalComplex.map I.iota to obtain a resolution iota of T.obj F by T(I). Exactness from step 1 makes the mapped augmentation a quasi-isomorphism; composing with the single-complex isomorphism preserves this. Its terms are Gamma-acyclic by step 3. The proved source Gamma.rightDerivedObjIsoOfResolution iota gives R^q Gamma(TF) isomorphic to the homology of Gamma(T(I)).",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "I.isoRightDerivedObj G q computes moduleCohomology as the homology of G(I). The exact functor V commutes with this homology by ShortComplex.mapHomologyIso. The section functors G composed with V and T composed with Gamma are definitionally equal; mapHomologicalComplexCompIso packages their identical section complexes and the association with Gamma(T(I)). Compose these complex homology isomorphisms with the inverse acyclic-resolution isomorphism from step 4 and the inverse Ext/derived-evaluation isomorphism of step 2. This is the unchanged Nonempty isomorphism in every natural degree q.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
     "lemma-weil-pbc-leray-acyclicity",
-    "pqf-def-cohomology",
+    "new-sheaf-cohomology-derived-evaluation",
     "def-sc-zariski-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof, second paragraph; Lemma Tag 03F9 acyclic Cech criterion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "def-sc-zariski-site",
+  "def-sc-zariski-cohomology",
+  "new-sheaf-cohomology-derived-evaluation",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
   "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
   "lemma-weil-pbc-leray-acyclicity",
-  "pqf-def-cohomology",
-  "def-sc-zariski-cohomology"
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "F3 stage 3 worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof"
+  "place": "Lemma Tag 03FD, injective-module acyclic-resolution argument; implemented using the proved source Leray acyclic-resolution comparison and the existing Ext/derived-evaluation bridge."
  },
  "mathlib_searches": [
   {
@@ -184,5 +188,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085237-L-13889",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
