@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-affine-etale-descent-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof of restriction acyclicity: passage to cohomology of the limit via 09YQ; affine objects and finite covering descent",
+   "via": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "AffineEtaleDescentData",
+ "statement": "Let I be a nonempty directed preorder, D : I^op → Scheme an inverse system of schemes in universe u with affine transitions and qcqs stages, and c a limiting cone with point X. Write C_i for the full affine étale site of D_i and C for that of X, with their finite standard étale precoverages [def-weil-pbc-full-affine-etale-site]. Suppose functors U_ij and v_i, natural first projections p_ij and q_i and comparison isomorphisms delta_ij are given. Suppose each p-square over D_ji and each q-square over c_i is a pullback, delta_ij.hom followed by q_i equals q_j followed by p_ij, and U_ij and v_i preserve covering presieves. Then (1) every object A of C is isomorphic to v_i(A_i) for some stage i and A_i in C_i; (2) for every finite family f_a : B_a → A in C, indexed by Fin n, its presieve covers iff there are a common stage i, objects A_i and B_ai, maps f_ai, and isomorphisms t : v_i(A_i) ≅ A and s_a : v_i(B_ai) ≅ B_a such that the stage family covers and v_i(f_ai) followed by t.hom equals s_a.hom followed by f_a. Empty families n = 0 are included. The data do not assert map descent or eventual equality.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, proof of the qcqs case; steps 5--7 of the parent node"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "1. Every affine étale object is of finite presentation over the quasi-separated base.\n   The limit is qcqs because its projections are affine. Apply 01ZM to descend an object\n   to a finite-presentation model. Its base-change tail has the given object as limit\n   (01YZ). Apply 01Z6 to make the model affine, then 07RP to make it étale at a later\n   stage. Further base changes preserve affineness. The q-pullback squares identify the\n   resulting isomorphism with the stated v-presentation.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-limit-affine-stage",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 5--7 of the parent node"
+   }
+  },
+  {
+   "text": "2. For a map between two v-images, use the q-pullback identifications and 01ZM(2) to\n   descend the map. The p-pullback identifications give a map between the U-images.\n   The delta first-projection equation and pullback uniqueness identify its image with\n   the original map. This supplies the arrow descent needed to descend a finite cover.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 5--7 of the parent node"
+   }
+  },
+  {
+   "text": "3. Descend the finitely many objects and arrows of a covering by the first two steps,\n   taking common upper bounds. The finite disjoint union of its source objects is affine,\n   hence qcqs. Its map to the target is étale, hence locally finitely presented. Its\n   base change to the limit is surjective. Apply 07RR to make it surjective at a stage;\n   this means that the descended family covers. Delta gives the stated comparisons.",
+   "uses": [
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 5--7 of the parent node"
+   }
+  },
+  {
+   "text": "4. Conversely, preservation of coverings by v and invariance under the displayed\n   source and target isomorphisms show that any such descended covering covers.\n   This includes n = 0: the coproduct is empty and 07RR applies to its map.",
+   "uses": [
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 5--7 of the parent node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-full-affine-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Adaptation of the cited proof steps to chosen pullback squares and the original universe levels; source read online at https://stacks.math.columbia.edu/tag/0EYL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "descent affine etale objects morphisms covering families along inverse limits of schemes",
+   "results": "Service unavailable: Internal Server Error (msearch.py recorded the failed attempt).",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "descent of affine etale objects and finite covering families over inverse limits",
+   "results": "Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType and affine-open descent; no affine etale object and cover descent",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg FullAffineEtale|affineEtale|strictification|0EYL|09YL in Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean and Mathlib/CategoryTheory; rg in lean/WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search affine etale",
+   "results": "Mathlib defines the spectrum affine site but has no coherent system, descent of its covers, or strict colimit identification. Existing affineEtaleSiteBaseChange uses Type (u+1), exists_site_system_strictification uses Cat.{u,u}; EtaleFiniteDataDescent does not retain affine domains. No imported blueprint node states any helper exactly.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing nodes are proof dependencies where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleDescentData",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleDescentData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_descent_data",
+  "statement": "theorem affineEtale_descent_data\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)]\n    [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c)\n    (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤\n          (D.obj (op j)).FullAffineEtale)\n      (v : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ c.pt.FullAffineEtale)\n      (p : ∀ (i j : I) (h : i ≤ j),\n        U i j h ⋙ fullAffineEtaleInclusion (D.obj (op j)) ⋙\n          Etale.forget (D.obj (op j)) ⋙ Over.forget (D.obj (op j)) ⟶\n        fullAffineEtaleInclusion (D.obj (op i)) ⋙\n          Etale.forget (D.obj (op i)) ⋙ Over.forget (D.obj (op i)))\n      (q : ∀ i : I,\n        v i ⋙ fullAffineEtaleInclusion c.pt ⋙ Etale.forget c.pt ⋙ Over.forget c.pt ⟶\n        fullAffineEtaleInclusion (D.obj (op i)) ⋙\n          Etale.forget (D.obj (op i)) ⋙ Over.forget (D.obj (op i)))\n      (gamma : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k),\n        U i j h ⋙ U j k h' ≅ U i k (h.trans h'))\n      (delta : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ v j ≅ v i)\n    (h1 : (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale),\n        IsPullback ((p i j h).app A) ((U i j h).obj A).obj.hom\n          A.obj.hom (D.map (homOfLE h).op)))\n    (h2 : (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale),\n        IsPullback ((q i).app A) ((v i).obj A).obj.hom A.obj.hom (c.π.app (op i))))\n    (h7 : (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale),\n        ((delta i j h).hom.app A).hom.left ≫ (q i).app A =\n          (q j).app ((U i j h).obj A) ≫ (p i j h).app A))\n    (h10 : (∀ (i j : I) (h : i ≤ j) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A),\n        R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A →\n          R.map (U i j h) ∈ fullAffineEtalePrecoverage (D.obj (op j)) ((U i j h).obj A)))\n    (h12 : (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale) (R : Presieve A),\n        R ∈ fullAffineEtalePrecoverage (D.obj (op i)) A →\n          R.map (v i) ∈ fullAffineEtalePrecoverage c.pt ((v i).obj A)))\n    :\n      (∀ A : c.pt.FullAffineEtale,\n        ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale), Nonempty ((v i).obj Ai ≅ A))\n      ∧ (∀ (n : ℕ) (A : c.pt.FullAffineEtale) (B : Fin n → c.pt.FullAffineEtale)\n        (f : ∀ a : Fin n, B a ⟶ A),\n        Presieve.ofArrows B f ∈ fullAffineEtalePrecoverage c.pt A ↔\n          ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale)\n            (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (fi : ∀ a : Fin n, Bi a ⟶ Ai)\n            (t : (v i).obj Ai ≅ A) (s : ∀ a : Fin n, (v i).obj (Bi a) ≅ B a),\n            Presieve.ofArrows Bi fi ∈ fullAffineEtalePrecoverage (D.obj (op i)) Ai ∧\n              ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033435",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

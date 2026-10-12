@@ -31,145 +31,48 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the schemes involved; the functors are well defined).* Each $f_i$ is affine [lem-weil-pbc-limit-affine-transition], hence quasi-compact and separated [lem-weil-pbc-affine-morphism-permanence](3); as $X_i$ is quasi-compact and quasi-separated, so is $X$ [lem-weil-pbc-qcqs-morphism-permanence](2). Let $T$ be one of the quasi-separated schemes $X$, $X_i$ and $U\\to T$ an object of $T_{affine,\\Et}$: it is etale, hence locally of finite presentation [def-weil-etale-morphism], and $U$ is affine, so $U\\to T$ is of finite presentation [lem-weil-pbc-qcqs-morphism-permanence](1) (\"any object of $X_{affine,\\Et}$, resp. $(X_i)_{affine,\\Et}$, is of finite presentation over $X$, resp. $X_i$\"). Let $h:T'\\to T$ be one of the affine morphisms $f_{i'i}$ ($T=X_i$, $T'=X_{i'}$) or $f_i$ ($T=X_i$, $T'=X$) and $V$ an object of $T_{affine,\\Et}$. The projection $V\\times_TT'\\to V$ is a base change of $h$, hence affine, so $V\\times_TT'$ is affine since $V$ is [lem-weil-pbc-affine-morphism-permanence](1),(2); and $V\\times_TT'\\to T'$ is etale [lem-weil-pbc-etale-base-change-finite-limits](1). So the base change functor $b_h:T_{\\Et}\\to T'_{\\Et}$ of [lem-weil-pbc-etale-base-change-finite-limits](1) maps the full subcategory $T_{affine,\\Et}$ into $T'_{affine,\\Et}$ [lem-weil-pbc-affine-etale-site-topos]; its restriction is the functor $u=u_{i'i}$, resp. $u_i$.",
+   "text": "Choose U, v, p, q, gamma and delta from the coherent base-change-system theorem. This supplies exactly the first fifteen conjuncts, including continuity and adjoints on Type u sheaves.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-affine-etale-site-topos"
+    "lem-weil-pbc-affine-etale-base-change-system"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336), proof, first paragraph (qcqs case)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (continuity).* Keep $h:T'\\to T$ and $u$ as in step 1. (a) Let $\\{g_j:U_j\\to U\\}_{j=1,\\dots,m}$ be a covering of $T_{affine,\\Et}$, a standard etale covering: finitely many affine $U_j$ etale over $U$ with $U=\\bigcup_jg_j(U_j)$ [lem-weil-pbc-affine-etale-site-topos]. It is a covering of $T_{\\Et}$ (jointly surjective etale family), so $\\{u(U_j)\\to u(U)\\}$ is a covering of $T'_{\\Et}$ by [lem-weil-pbc-etale-base-change-continuous](1): the morphisms are etale and jointly surjective. The family is finite and its members and target are affine (step 1), so it is a standard etale covering, i.e. a covering of $T'_{affine,\\Et}$. (b) For morphisms $U_j\\to U\\leftarrow W$ of $T_{affine,\\Et}$ the scheme-theoretic fibre product $U_j\\times_UW$ is affine [lem-weil-pbc-fibre-product-affine-spectra] and etale over $T$, and it is the fibre product in $T_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits](2), hence in the full subcategory $T_{affine,\\Et}$; the same holds over $T'$. By [lem-weil-pbc-etale-base-change-continuous](2) the canonical morphism $u(U_j\\times_UW)\\to u(U_j)\\times_{u(U)}u(W)$ is an isomorphism. (a) and (b) are the two conditions of continuity [def-weil-pbc-sites-and-cohomology](3) (Sites, Definition 00WV).",
+   "text": "Apply affineEtale_descent_data to the chosen pullback squares, delta projection equation and preservation of covers. It supplies object descent and the Fin n covering equivalence.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-affine-etale-descent-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336), proof, first paragraph (qcqs case); continuity of the base change functors is asserted, not proved, there and in Etale Cohomology Section 03PZ (equation-functorial, line 4430: base change preserves fibre products and coverings, 'easy to check (omitted)')"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (morphisms of sites).* Keep $h$, $u$. By [def-weil-pbc-sites-and-cohomology](3) we must show that $u_s$, the left adjoint of $u^s:\\mathcal G\\mapsto\\mathcal G\\circ u$ on sheaves of sets, commutes with finite limits. Let $\\rho_T:\\mathcal H\\mapsto\\mathcal H|_{T_{affine,\\Et}}$ be the restriction, an equivalence from sheaves of sets on $T_{\\Et}$ to sheaves of sets on $T_{affine,\\Et}$ [lem-weil-pbc-affine-etale-site-topos], and likewise $\\rho_{T'}$. For a sheaf of sets $\\mathcal F$ on $T'_{\\Et}$ the direct image is $h_*\\mathcal F=\\mathcal F\\circ b_h$ [lem-weil-pbc-etale-base-change-continuous](3), so for $V$ in $T_{affine,\\Et}$, $(\\rho_Th_*\\mathcal F)(V)=\\mathcal F(V\\times_TT')=\\mathcal F(u(V))=(u^s\\rho_{T'}\\mathcal F)(V)$, compatibly with restriction maps and naturally in $\\mathcal F$: $\\rho_T\\circ h_*=u^s\\circ\\rho_{T'}$. The inverse image $h^{-1}$ is left adjoint to $h_*$ and commutes with finite limits [lem-weil-pbc-etale-inverse-image-algebraic-structures](1). Choosing a quasi-inverse $\\rho_T^{-1}$, the functor $\\rho_{T'}\\circ h^{-1}\\circ\\rho_T^{-1}$ is left adjoint to $\\rho_T\\circ h_*\\circ\\rho_{T'}^{-1}\\cong u^s$ (an equivalence transports adjunctions), so by uniqueness of left adjoints $u_s\\cong\\rho_{T'}\\circ h^{-1}\\circ\\rho_T^{-1}$, which commutes with finite limits as a composite of such functors. Hence $u$ defines a morphism of sites.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Lemma Tag 021I (lemma-morphism-big-small-etale (2), topologies.tex line 1175: base change $S_\\Et\\to T_\\Et$ induces the morphism of sites $f_{small}$) and Lemma Tag 04HR (lemma-alternative (topologies.tex line 1005: $S_{affine,\\Et}$ and $S_\\Et$ have equivalent topoi)); the transfer to the affine sites is not written in the source (Etale Cohomology 0EYL uses it tacitly) and is written here by an agent"
-   }
-  },
-  {
-   "text": "*Step 4 (composition; the strict system).* For $i\\le i'\\le i''$ and $V$ in $(X_i)_{affine,\\Et}$, the squares $u_{i'i}(V)\\to V$ over $f_{i'i}$ and $u_{i''i'}(u_{i'i}V)\\to u_{i'i}V$ over $f_{i''i'}$ are cartesian, so by [lem-weil-pbc-cartesian-square-pasting] $(V\\times_{X_i}X_{i'})\\times_{X_{i'}}X_{i''}$ with its two projections is a fibre product of $V\\to X_i$ and $f_{i'i}f_{i''i'}=f_{i''i}$; hence there is a unique isomorphism $\\gamma_{i''i'i}(V):u_{i''i'}u_{i'i}(V)\\to u_{i''i}(V)$ over $X_{i''}$ compatible with the projections to $V$; in the same way $\\delta_{i'i}(V):u_{i'}u_{i'i}(V)\\to u_i(V)$ (using $f_i=f_{i'i}f_{i'}$). These are natural in $V$ and are identities when two indices agree (with $u_{ii}=\\mathrm{id}$), and the cocycle identities of [lem-weil-pbc-site-system-strictification] hold because both sides are isomorphisms over the last stage compatible with the projections to $V$, and such an isomorphism is unique by the universal property of the fibre product [def-pc-fibre-product]. With steps 2 and 3, all hypotheses of [lem-weil-pbc-site-system-strictification] hold for the sites $(X_i)_{affine,\\Et}$ (coverings finite), the functors $u_{i'i}$ and the cone $v_i=u_i$ to $\\mathcal D=X_{affine,\\Et}$; it gives the sites $\\mathcal C_i$, the equivalences $e_i$ and the strict functors $u'_{i'i}$, $u'_i$ of clause (1), and $(\\mathcal C_i,u'_{i'i})$ is a system as in [lem-weil-pbc-colimit-of-sites]. This proves clause (1).",
-   "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-site-system-strictification",
-    "lem-weil-pbc-colimit-of-sites"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Situation Tag 0A34 (situation-inverse-limit-sites, line 3770) and the proof of Lemma Tag 09YL ('our definition of composition of morphisms of sites implies $u_b\\circ u_a=u_c$'); the base change functors satisfy this only up to the canonical isomorphisms, which the source passes over; this step is written by an agent"
-   }
-  },
-  {
-   "text": "*Step 5 (descent of objects, clause (2)).* Let $U\\to X$ be an object of $X_{affine,\\Et}$; it is of finite presentation (step 1). By [thm-pd-spreading-out](1) (Limits 01ZM) there are $i\\in I$ and a morphism of finite presentation $V_i\\to X_i$ with $U\\cong V_i\\times_{X_i}X$ over $X$. For $i'\\ge i$ put $V_{i'}=V_i\\times_{X_i}X_{i'}$; by [lem-weil-pbc-scheme-over-limit] $(V_{i'})_{i'\\ge i}$ is an inverse system with affine transition morphisms and limit $V_i\\times_{X_i}X\\cong U$. Each $V_{i'}\\to X_{i'}$ is of finite presentation (base change [lem-weil-pbc-qcqs-morphism-permanence](3)), in particular quasi-compact and quasi-separated, and $X_{i'}$ is qcqs, so $V_{i'}$ is qcqs [lem-weil-pbc-qcqs-morphism-permanence](2). As $U$ is affine, [lem-weil-pbc-limit-affine-stage] (Limits 01Z6) gives $i_1\\ge i$ with $V_{i_1}$ affine. Now apply [lem-weil-pbc-descend-etale] (Limits 07RP) to the system $(X_{i'})_{i'\\ge i_1}$ and $f_0:V_{i_1}\\to X_{i_1}$ over $S_0=Y_0=X_{i_1}$ (all qcqs): its base change to $X$ is $U\\to X$ (up to the isomorphism above, by [lem-weil-pbc-cartesian-square-pasting]: $V_{i_1}\\times_{X_{i_1}}X\\cong V_i\\times_{X_i}X$), which is etale, and $f_0$ is locally of finite presentation; so for some $i_2\\ge i_1$ the base change $U_{i_2}:=V_{i_1}\\times_{X_{i_1}}X_{i_2}\\to X_{i_2}$ is etale. $U_{i_2}$ is affine, being affine over the affine $V_{i_1}$ [lem-weil-pbc-affine-morphism-permanence](1),(2). So $U_{i_2}$ is an object of $(X_{i_2})_{affine,\\Et}$ and $u_{i_2}(U_{i_2})=U_{i_2}\\times_{X_{i_2}}X\\cong V_{i_1}\\times_{X_{i_1}}X\\cong U$ over $X$ ([lem-weil-pbc-cartesian-square-pasting]).",
+   "text": "Prove map descent directly from exists_pullback_hom_of_isLimit: convert the map by the q-pullback isomorphism, descend its composite with q_B, lift it to the U_B pullback, then use naturality of q, the delta projection equation and pullback uniqueness to obtain the delta conjugation formula. Prove eventual equality directly from exists_pullback_fst_comp_eq_of_isLimit: naturality of q converts equality under v into equality after the limit first projection; descend that equality and use naturality of p and pullback extensionality at the resulting stage. Affine domains over quasi-separated bases are of finite presentation by the recorded qcqs permanence instances.",
    "uses": [
     "thm-pd-spreading-out",
-    "lem-weil-pbc-scheme-over-limit",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-limit-affine-stage",
-    "lem-weil-pbc-descend-etale",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-affine-morphism-permanence"
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336), proof, first paragraph (qcqs case): 'the category of schemes of finite presentation over $X$ is the colimit ... (Limits 01ZM). The same holds for the subcategories of affine objects etale over $X$ by Limits, Lemmas 01Z6 and 07RP'; the system $V_{i'}$ is that of the second paragraph ($U=\\lim_{i'\\ge i}U_{i'}$, Limits 01YZ)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 6 (descent of morphisms and of their equality, clause (3)).* Let $U_i$, $V_i$ be objects of $(X_i)_{affine,\\Et}$; they are of finite presentation over $X_i$ (step 1). A morphism $\\varphi:u_i(U_i)=U_i\\times_{X_i}X\\to V_i\\times_{X_i}X=u_i(V_i)$ over $X$ is, by [thm-pd-spreading-out](2), the base change of a morphism $\\varphi_{i'}:U_i\\times_{X_i}X_{i'}\\to V_i\\times_{X_i}X_{i'}$ over $X_{i'}$ for some $i'\\ge i$; $\\varphi_{i'}$ is a morphism of $(X_{i'})_{affine,\\Et}$ (a full subcategory of the schemes over $X_{i'}$) from $u_{i'i}(U_i)$ to $u_{i'i}(V_i)$, and its base change to $X$ is $u_{i'}(\\varphi_{i'})$ composed with the isomorphisms $\\delta_{i'i}$ of step 4. If $\\varphi,\\psi:U_i\\to V_i$ are morphisms over $X_i$ with $u_i(\\varphi)=u_i(\\psi)$, then [thm-pd-spreading-out](3) gives $i'\\ge i$ with $u_{i'i}(\\varphi)=u_{i'i}(\\psi)$. Objects or morphisms given at two indices are first moved to a common larger index ($I$ directed) by the $u_{i'i}$ and the isomorphisms $\\gamma$ of step 4.",
+   "text": "Apply exists_affineEtale_colimit_presentation to the chosen coherence, site properties, object descent, the two directly proved morphism-descent clauses, and covering descent. Reassemble the witnesses and all twenty conjuncts without changing the statement.",
    "uses": [
-    "thm-pd-spreading-out"
+    "lem-weil-pbc-affine-etale-colimit-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336), proof, first paragraph (qcqs case) ('the category of schemes of finite presentation over $X$ is the colimit of the categories of schemes of finite presentation over $X_i$, see Limits 01ZM'), and second paragraph ('Fully faithfulness follows directly from ... Limits 0EY1')"
-   }
-  },
-  {
-   "text": "*Step 7 (coverings, clause (4)).* Images of coverings are coverings: $u_i$ is continuous (step 2). Conversely let $\\{g^j:U^j\\to U\\}_{j=1,\\dots,m}$ be a covering of $X_{affine,\\Et}$. By steps 5 and 6 applied to the finitely many objects and morphisms, and $I$ being directed, there are $i$, objects $U_i$, $U_i^j$ of $(X_i)_{affine,\\Et}$, morphisms $g_i^j:U_i^j\\to U_i$ over $X_i$ and isomorphisms $u_i(U_i)\\cong U$, $u_i(U_i^j)\\cong U^j$ over $X$ under which $u_i(g_i^j)$ corresponds to $g^j$. Put $W_i=\\coprod_jU_i^j$, affine [lem-weil-pbc-affine-morphism-permanence](4), and $G_i=(g_i^j)_j:W_i\\to U_i$, a morphism over $X_i$ which is etale on each open and closed piece $U_i^j$ ([lem-weil-pbc-etale-composition-cancellation](3)), hence locally of finite presentation. For $i'\\ge i$ (resp. at the limit) the base change of $G_i$ is the morphism $\\coprod_ju_{i'i}(U_i^j)\\to u_{i'i}(U_i)$ (resp. $\\coprod_ju_i(U_i^j)\\to u_i(U_i)$) induced by the $u_{i'i}(g_i^j)$ (resp. $u_i(g^j_i)$), since the base change of the open covering $\\{U_i^j\\}$ of $W_i$ is an open covering of the base change by pieces $U^j_i\\times_{X_i}X_{i'}$; so its image is the union of the images of the $u_{i'i}(g_i^j)$. At the limit this union is $U$, the $g^j$ being jointly surjective; so the base change of $G_i$ to $X$ is surjective. $X_i$, $W_i$, $U_i$ are qcqs (affine), so [lem-weil-pbc-descend-surjective] (Limits 07RR), applied with $S_0=X_i$, $X_0=W_i$, $Y_0=U_i$, gives $i'\\ge i$ with the base change of $G_i$ to $X_{i'}$ surjective, i.e. $\\{u_{i'i}(g_i^j)\\}_j$ jointly surjective: a standard etale covering of $(X_{i'})_{affine,\\Et}$ (step 1 for affineness and etaleness), whose image under $u_{i'}$ is isomorphic, via the isomorphisms $\\delta_{i'i}$ of step 4 and those chosen above, to $\\{g^j:U^j\\to U\\}$.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-descend-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336), proof, first paragraph (qcqs case): 'if $\\{U^j\\to U\\}$ is a covering of $X_{affine,\\Et}$ and if $U_i^j\\to U_i$ is morphism of affine schemes etale over $X_i$ whose base change to $X$ is $U^j\\to U$, then we see that the base change of $\\{U_i^j\\to U_i\\}$ to some $X_{i'}$ is a covering for $i'$ large enough, see Limits, Lemma 07RR'; the passage to the disjoint union, needed to apply 07RR to a family, is written out here"
-   }
-  },
-  {
-   "text": "*Step 8 (assembling, clause (5)).* Let $\\mathcal C=\\varinjlim_i\\mathcal C_i$ be the colimit site of [lem-weil-pbc-colimit-of-sites] for the strict system of step 4, with canonical functors $c_i:\\mathcal C_i\\to\\mathcal C$, and $\\Phi:\\mathcal C\\to X_{affine,\\Et}$ the functor induced by the $u'_i$ ($u'_{i'}u'_{i'i}=u'_i$, so they form a cocone on the objects and on the arrows, filtered colimits of sets [def-weil-pbc-category-colimit]). Every object of $\\mathcal C$ is $c_i(A)$ with $A\\cong e_i(A_0)$, and $\\Phi c_i(A)\\cong u_i(A_0)$. $\\Phi$ is essentially surjective by step 5. For objects $c_i(A),c_i(B)$ (two objects of $\\mathcal C$ come from a common $i$) the arrows between them in $\\mathcal C$ are $\\varinjlim_{i'\\ge i}\\operatorname{Hom}_{\\mathcal C_{i'}}(u'_{i'i}A,u'_{i'i}B)\\cong\\varinjlim_{i'\\ge i}\\operatorname{Hom}(u_{i'i}A_0,u_{i'i}B_0)$ (the $e_{i'}$ are fully faithful and $u'_{i'i}e_i\\cong e_{i'}u_{i'i}$), and $\\Phi$ maps this to $\\operatorname{Hom}_X(u_iA_0,u_iB_0)$ by the base change maps; this is surjective and injective by step 6, so $\\Phi$ is fully faithful, hence an equivalence. A family in $\\mathcal C$ is a covering iff it is $c_i$ of a covering of some $\\mathcal C_i$, iff (via $e_i$, which preserves and reflects coverings up to isomorphism) it is isomorphic to the image of a standard etale covering of some $(X_i)_{affine,\\Et}$; by step 7 (and since a family isomorphic to a standard etale covering is one) this holds iff its image under $\\Phi$ is a covering of $X_{affine,\\Et}$. So $\\Phi$ identifies the colimit site with $X_{affine,\\Et}$, which is clause (5).",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336), proof, first paragraph (qcqs case) ('In this way we see that the functor $\\colim(X_i)_{affine,\\Et}\\to X_{affine,\\Et}$ is essentially surjective. Fully faithfulness follows ...'), with Sites Lemma Tag 09YL for the colimit site"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-site-system-strictification",
-  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-affine-etale-base-change-system",
+  "lem-weil-pbc-affine-etale-descent-data",
   "thm-pd-spreading-out",
-  "lem-weil-pbc-scheme-over-limit",
-  "lem-weil-pbc-limit-affine-stage",
-  "lem-weil-pbc-descend-etale",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-descend-surjective",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-etale-colimit-presentation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 0EYL (lemma-colimit-affine-sites, line 7336) and its proof (first paragraph, qcqs case); steps 3 and 4 (morphisms of sites, strictification) are not in the source and were written by an agent"
+  "place": "0EYL qcqs case, retaining the original eight-step route: steps 1--4, 5 and 7, and 4/8 are isolated as three strict sub-results; step 6 is implemented directly from the closed 01ZM declarations."
  },
  "mathlib_searches": [
   {
@@ -263,5 +166,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033435",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

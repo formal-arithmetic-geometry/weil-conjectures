@@ -8,12 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.CategoryTheory.SiteSystemStrictification
-import Sheaf.AlgebraicGeometry.DescendSurjective
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.CategoryTheory.ColimitSites
+import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem
+import Sheaf.AlgebraicGeometry.AffineEtaleDescentData
+import Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentation
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # The affine étale site of an inverse limit
@@ -30,6 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, Étale Cohomology, Lemma 0EYL, first paragraph (qcqs case);
 Sites, Situation 0A34 and Lemma 09YL.
 (blueprint: lem-weil-pbc-affine-etale-site-colimit).
@@ -213,6 +212,152 @@ theorem exists_affineEtaleSite_colimit
             (∃ (_ : P.HasIsos) (_ : P.IsStableUnderComposition)
               (_ : P.IsStableUnderBaseChange) (_ : P.HasPullbacks),
               W.IsEquivalence ∧ ∀ (A : K.pt) (R : Presieve A),
-                R ∈ P A ↔ R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A))) := by sorry
+                R ∈ P A ↔ R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A))) := by
+  obtain ⟨U, v, p, q, gamma, delta,
+    h0, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12, h13, h14⟩ :=
+    exists_affineEtale_baseChange_system D c hc
+  obtain ⟨h15, h18⟩ := affineEtale_descent_data D c hc U v p q gamma delta
+    h1 h2 h7 h10 h12
+  have h16 : (∀ (i : I) (A B : (D.obj (op i)).FullAffineEtale)
+        (f : (v i).obj A ⟶ (v i).obj B),
+        ∃ (j : I) (h : i ≤ j) (g : (U i j h).obj A ⟶ (U i j h).obj B),
+          f = (delta i j h).inv.app A ≫ (v j).map g ≫ (delta i j h).hom.app B) := by
+    intro i A B f
+    have : IsAffine A.obj.left := A.property
+    have : IsAffine B.obj.left := B.property
+    have : QuasiCompact A.obj.hom :=
+      quasiCompact_of_compactSpace (X := A.obj.left) (Y := D.obj (op i)) A.obj.hom
+    have : QuasiCompact B.obj.hom :=
+      quasiCompact_of_compactSpace (X := B.obj.left) (Y := D.obj (op i)) B.obj.hom
+    have : QuasiSeparated A.obj.hom :=
+      QuasiSeparated.of_quasiSeparatedSpace (X := A.obj.left) A.obj.hom
+    have : QuasiSeparated B.obj.hom :=
+      QuasiSeparated.of_quasiSeparatedSpace (X := B.obj.left) B.obj.hom
+    let eA := (h2 i A).isoPullback
+    let ψ := eA.inv ≫ f.hom.left ≫ (q i).app B
+    have hψ : ψ ≫ B.obj.hom =
+        pullback.fst A.obj.hom (c.π.app (op i)) ≫ A.obj.hom := by
+      dsimp [ψ]
+      rw [Category.assoc, Category.assoc, (h2 i B).w]
+      have fw : f.hom.left ≫ ((v i).obj B).obj.hom = ((v i).obj A).obj.hom := by
+        exact MorphismProperty.Over.w f.hom
+      rw [← Category.assoc f.hom.left, fw]
+      rw [← (h2 i A).isoPullback_hom_snd]
+      dsimp [eA]
+      simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+      exact pullback.condition.symm
+    obtain ⟨j, a, ψj, hψj, hdesc⟩ := exists_pullback_hom_of_isLimit hc
+      A.obj.hom B.obj.hom ψ hψ
+    let h : i ≤ j.unop := leOfHom a.unop
+    have ha : a = (homOfLE h).op := Subsingleton.elim _ _
+    let eAj := (h1 i j.unop h A).isoPullback
+    let gleft := (h1 i j.unop h B).lift (eAj.hom ≫ ψj)
+      ((U i j.unop h).obj A).obj.hom (by
+        rw [Category.assoc, hψj, ha, ← Category.assoc]
+        dsimp [eAj]
+        rw [IsPullback.isoPullback_hom_fst, (h1 i j.unop h A).w])
+    let g : (U i j.unop h).obj A ⟶ (U i j.unop h).obj B :=
+      ObjectProperty.homMk (MorphismProperty.Over.homMk gleft
+        (by dsimp [gleft]; exact (h1 i j.unop h B).lift_snd _ _ _) (by trivial))
+    refine ⟨j.unop, h, g, ?_⟩
+    apply (cancel_epi ((delta i j.unop h).hom.app A)).mp
+    simp only [Iso.hom_inv_id_app_assoc]
+    apply ObjectProperty.hom_ext
+    apply MorphismProperty.Over.Hom.ext
+    apply (h2 i B).hom_ext
+    · change ((delta i j.unop h).hom.app A).hom.left ≫ f.hom.left ≫ (q i).app B =
+        ((v j.unop).map g).hom.left ≫
+          ((delta i j.unop h).hom.app B).hom.left ≫ (q i).app B
+      rw [h7 i j.unop h B]
+      have hqg := (q j.unop).naturality g
+      change ((v j.unop).map g).hom.left ≫ (q j.unop).app ((U i j.unop h).obj B) =
+        (q j.unop).app ((U i j.unop h).obj A) ≫ g.hom.left at hqg
+      rw [reassoc_of% hqg]
+      have gp : g.hom.left ≫ (p i j.unop h).app B = eAj.hom ≫ ψj := by
+        dsimp [g, gleft]
+        exact (h1 i j.unop h B).lift_fst _ _ _
+      rw [gp]
+      have hm : (q j.unop).app ((U i j.unop h).obj A) ≫ eAj.hom =
+          ((delta i j.unop h).hom.app A).hom.left ≫ eA.hom ≫
+            pullback.map A.obj.hom (c.π.app (op i)) A.obj.hom (D.map a)
+              (𝟙 _) (c.π.app j) (𝟙 _) (by simp) (by simp) := by
+        apply pullback.hom_ext
+        · rw [ha]
+          change (q j.unop).app ((U i j.unop h).obj A) ≫ eAj.hom ≫
+              pullback.fst _ _ =
+            ((delta i j.unop h).hom.app A).hom.left ≫ eA.hom ≫
+              (pullback.map _ _ _ _ _ _ _ _ _ ≫ pullback.fst _ _)
+          rw [show pullback.map A.obj.hom (c.π.app (op i)) A.obj.hom
+              (D.map (homOfLE h).op) (𝟙 _) (c.π.app j) (𝟙 _)
+              (by simp) (by simp) ≫ pullback.fst _ _ =
+              pullback.fst A.obj.hom (c.π.app (op i)) by simp]
+          dsimp only [eA, eAj]
+          rw [IsPullback.isoPullback_hom_fst, IsPullback.isoPullback_hom_fst]
+          exact (h7 i j.unop h A).symm
+        · rw [ha]
+          simp only [Category.assoc, pullback.map, pullback.lift_snd,
+            Category.comp_id]
+          dsimp only [eA, eAj]
+          rw [IsPullback.isoPullback_hom_snd_assoc, IsPullback.isoPullback_hom_snd]
+          rw [reassoc_of% (MorphismProperty.Over.w ((delta i j.unop h).hom.app A).hom)]
+          exact (h2 j.unop ((U i j.unop h).obj A)).w
+      rw [reassoc_of% hm]
+      have hd := congrArg
+        (fun z ↦ ((delta i j.unop h).hom.app A).hom.left ≫ eA.hom ≫ z) hdesc
+      simpa only [Category.assoc, ψ, Iso.hom_inv_id_assoc, Functor.id_obj,
+        Functor.fromPUnit, Functor.comp_obj, fullAffineEtaleInclusion,
+        ObjectProperty.ι_obj] using hd.symm
+    · simp only [MorphismProperty.Over.w]
+  have h17 : (∀ (i : I) (A B : (D.obj (op i)).FullAffineEtale) (f g : A ⟶ B),
+        (v i).map f = (v i).map g →
+          ∃ (j : I) (h : i ≤ j), (U i j h).map f = (U i j h).map g) := by
+    intro i A B f g hfg
+    have : IsAffine A.obj.left := A.property
+    have : IsAffine B.obj.left := B.property
+    have : QuasiCompact A.obj.hom :=
+      quasiCompact_of_compactSpace (X := A.obj.left) (Y := D.obj (op i)) A.obj.hom
+    have : QuasiCompact B.obj.hom :=
+      quasiCompact_of_compactSpace (X := B.obj.left) (Y := D.obj (op i)) B.obj.hom
+    have : QuasiSeparated A.obj.hom :=
+      QuasiSeparated.of_quasiSeparatedSpace (X := A.obj.left) A.obj.hom
+    have : QuasiSeparated B.obj.hom :=
+      QuasiSeparated.of_quasiSeparatedSpace (X := B.obj.left) B.obj.hom
+    have hqf := (q i).naturality f
+    have hqg := (q i).naturality g
+    change ((v i).map f).hom.left ≫ (q i).app B =
+      (q i).app A ≫ f.hom.left at hqf
+    change ((v i).map g).hom.left ≫ (q i).app B =
+      (q i).app A ≫ g.hom.left at hqg
+    have hqeq : (q i).app A ≫ f.hom.left = (q i).app A ≫ g.hom.left := by
+      rw [← hqf, ← hqg, hfg]
+    have hlim : pullback.fst A.obj.hom (c.π.app (op i)) ≫ f.hom.left =
+        pullback.fst A.obj.hom (c.π.app (op i)) ≫ g.hom.left := by
+      apply (cancel_epi (h2 i A).isoPullback.hom).mp
+      simpa only [← Category.assoc, IsPullback.isoPullback_hom_fst] using hqeq
+    obtain ⟨j, a, heq⟩ := exists_pullback_fst_comp_eq_of_isLimit hc
+      A.obj.hom B.obj.hom f.hom.left g.hom.left f.hom.w g.hom.w hlim
+    let h : i ≤ j.unop := leOfHom a.unop
+    have ha : a = (homOfLE h).op := Subsingleton.elim _ _
+    rw [ha] at heq
+    refine ⟨j.unop, h, ?_⟩
+    apply ObjectProperty.hom_ext
+    apply MorphismProperty.Over.Hom.ext
+    apply (h1 i j.unop h B).hom_ext
+    · have hpf := (p i j.unop h).naturality f
+      have hpg := (p i j.unop h).naturality g
+      change ((U i j.unop h).map f).hom.left ≫ (p i j.unop h).app B =
+        (p i j.unop h).app A ≫ f.hom.left at hpf
+      change ((U i j.unop h).map g).hom.left ≫ (p i j.unop h).app B =
+        (p i j.unop h).app A ≫ g.hom.left at hpg
+      rw [hpf, hpg]
+      rw [← (h1 i j.unop h A).isoPullback_hom_fst]
+      simpa only [Category.assoc] using
+        congrArg (fun z ↦ (h1 i j.unop h A).isoPullback.hom ≫ z) heq
+    · simp only [MorphismProperty.Over.w]
+  obtain h19 := exists_affineEtale_colimit_presentation D c hc U v p q gamma delta
+    h0 h3 h4 h5 h8 h9 h10 h11 h12 h13 h14 h15 h16 h17 h18
+  exact ⟨U, v, p, q, gamma, delta, h0, h1, h2, h3, h4, h5, h6, h7, h8, h9,
+    h10, h11, h12, h13, h14, h15, h16, h17, h18, h19⟩
+
 
 end AlgebraicGeometry.Scheme
