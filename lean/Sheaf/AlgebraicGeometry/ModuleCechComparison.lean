@@ -53,7 +53,14 @@ theorem cechComplexFunctor_presheafModuleCat_additive (X : Scheme.{u}) {ι : Typ
     (SheafOfModules.forget X.ringCatSheaf ⋙
       PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙
         CategoryTheory.cechComplexFunctor U).Additive := by
-  sorry
+  constructor
+  intro F G f g
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply Pi.hom_ext
+  intro y
+  simp [CategoryTheory.cechComplexFunctor, ← Preadditive.comp_add]
+  rfl
 
 attribute [instance] cechComplexFunctor_presheafModuleCat_additive
 
@@ -74,7 +81,12 @@ functoriality of the structure sheaf sends it to the identity ring morphism. -/
 theorem moduleCech_top_restriction (X : Scheme.{u}) :
     (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op ⊤))).hom =
       RingHom.id Γ(X, ⊤) := by
-  sorry
+  have h : isTerminalTop.op.to (op ⊤) = 𝟙 (op (⊤ : X.Opens)) := Subsingleton.elim _ _
+  rw [h]
+  change (X.ringCatSheaf.obj.map (𝟙 _)).hom = _
+  rw [X.ringCatSheaf.obj.map_id]
+  rfl
+
 
 /-- Restrictions of a global section, as a zero cochain.
 Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
@@ -138,7 +150,32 @@ theorem moduleCechBeta_comm {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
         ((moduleCechDouble U I).total (ComplexShape.up ℕ)).d n m =
       ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).d n m ≫
         moduleCechBetaComponent U I m := by
-  sorry
+  by_cases h : n + 1 = m
+  · subst m
+    dsimp [moduleCechBetaComponent]
+    rw [HomologicalComplex₂.total_d, Category.assoc, Preadditive.comp_add,
+      HomologicalComplex₂.ι_D₁, HomologicalComplex₂.ι_D₂]
+    rw [HomologicalComplex₂.d₁_eq' _ _ (by simp : (ComplexShape.up ℕ).Rel 0 1),
+      HomologicalComplex₂.d₂_eq _ _ 0 (by simp : (ComplexShape.up ℕ).Rel n (n + 1))
+        (n + 1) (by simp)]
+    simp only [PresheafOfModules.forgetToPresheafModuleCat_map, ComplexShape.ε₁_def,
+      one_smul, ComplexShape.ε₂_def, ComplexShape.ε_zero, Preadditive.comp_add]
+    let T := SheafOfModules.forget X.ringCatSheaf ⋙
+      PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙
+        CategoryTheory.cechComplexFunctor U
+    have hz : I.ι.f 0 ≫ I.cocomplex.d 0 1 = 0 := by
+      simp
+    have hz' : (T.map (I.ι.f 0)).f n ≫ (T.map (I.cocomplex.d 0 1)).f n = 0 := by
+      rw [← HomologicalComplex.comp_f, ← T.map_comp, hz, T.map_zero]
+      rfl
+    have hc := (T.map (I.ι.f 0)).comm n (n + 1)
+    change (T.map (I.ι.f 0)).f n ≫ (T.map (I.cocomplex.d 0 1)).f n ≫ _ +
+      (T.map (I.ι.f 0)).f n ≫ (T.obj (I.cocomplex.X 0)).d n (n + 1) ≫ _ = _
+    rw [← Category.assoc, hz', zero_comp, zero_add, ← Category.assoc, hc,
+      Category.assoc]
+    rfl
+  · rw [HomologicalComplex.shape _ _ _ h, HomologicalComplex.shape _ _ _ h]
+    simp
 
 /-- The map beta of Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
 noncomputable def moduleCechBeta {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
