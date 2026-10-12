@@ -5984,3 +5984,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.EtaleInverseImageExact (stage 3; reviewer PASS; first push; landing 20261012T042414-L-1818884 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/P2/Sheaf.CategoryTheory.ExistsDirectedReindexing (stage 3; reviewer PASS; first push; landing 20261012T042415-L-1818990 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/P2/WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup (stage 3; reviewer PASS; first push; landing 20261012T042415-L-1819088 (interface); batch 20261012T042402; modules 4; new nodes 4)
+- 04:24 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding (stage 3; reviewer PASS; first push; landing 20261012T042415-L-1819209 (interface); batch 20261012T042402; modules 2; new nodes 1)

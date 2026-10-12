@@ -20,87 +20,41 @@
  ],
  "proof": [
   {
-   "text": "*Setup at a point; the generic trivialization.* Fix a point $x\\in X$ and let $\\varepsilon_x:\\operatorname{Spec}\\kappa(x)\\to X$ be the canonical morphism. The inverse image $\\varepsilon_x^{-1}F$ is a constructible sheaf of $\\Lambda$-modules on $\\operatorname{Spec}\\kappa(x)$ by [prop-constructible-pullback] (on the one-point space $\\operatorname{Spec}\\kappa(x)$ every stratum is trivially a constructible subset, so condition (a) of [def-weil-pbc-etale-constructible-sheaf] holds). By [lem-weil-pbc-constructible-field-finite-separable-constant] there are a finite separable extension $K/\\kappa(x)$, a finite $\\Lambda$-module $M$ and an isomorphism $\\pi^{-1}\\varepsilon_x^{-1}F\\cong\\underline M_{\\operatorname{Spec}K}$, $\\pi:\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(x)$. Put $h=\\varepsilon_x\\circ\\pi:\\operatorname{Spec}K\\to X$; composing with the canonical isomorphism $h^{-1}\\cong\\pi^{-1}\\varepsilon_x^{-1}$ of [lem-weil-pbc-inverse-image-composition] gives an isomorphism of sheaves of $\\Lambda$-modules $\\alpha:h^{-1}F\\xrightarrow{\\sim}\\underline M_{\\operatorname{Spec}K}$. (Stacks: 'Since $\\mathcal F$ is constructible, there is a finite separable extension $K/\\kappa(x)$ such that $\\mathcal F|_{\\Spec(K)}$ is the constant sheaf with value $E$'.) For the corrected module predicate, first compare the finite-value trivializations with the source-library finite locally constant predicate using the finite-value equivalence; after pullback convert the stratum data back to finite-value trivializations. Constructible strata are retained.",
+   "text": "Obtain Y, nu, K, g, finite M, invertible generic unit u, generic isomorphism alpha and geometric-point lifts from normalized generic data. Write A=nu^*F and B=M_Y. Define psi:A -> B as the g-adjoint of alpha followed by u inverse. Functoriality, the left triangle identity, and the inverse hom-equivalence identity give g^*psi=alpha. Define phi:F -> nu_*B as the nu-adjoint of psi; its inverse hom-equivalence identity gives nu^*phi followed by the counit equal to psi.",
    "uses": [
-    "prop-constructible-pullback",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-constructible-field-finite-separable-constant",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-finite-locally-constant-module-values"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (1), lines 12959-12971"
-   }
-  },
-  {
-   "text": "*The normal model.* $X$ is Noetherian, hence quasi-separated. By [lem-weil-pbc-normalization-in-residue-field-extension] applied to $x$ and $K/\\kappa(x)$ there are a normal integral scheme $Y$, an integral morphism $\\nu:Y\\to X$ and the inclusion $g:\\operatorname{Spec}K\\to Y$ of the generic point of $Y$ (with $K$ as function field) such that $h=\\nu\\circ g$. (Stacks takes the normalization of the reduced closure $Z=\\overline{\\{x\\}}$ in $\\operatorname{Spec}K$ and composes with $Z\\to X$; that is the same $X$-scheme, by the last clause of Stacks 035I, recorded in the new node; working over $X$ directly removes the closed immersion from the argument.)",
-   "uses": [
-    "lem-weil-pbc-normalization-in-residue-field-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (1), lines 12967-12978"
-   }
-  },
-  {
-   "text": "*The map $\\varphi:F\\to\\nu_*\\underline M$.* By [lem-weil-pbc-normal-constant-generic] applied to the normal integral $Y$ and $g$, the unit $u:\\underline M_Y\\to g_*g^{-1}\\underline M_Y$ is an isomorphism; the node is stated for a finite abelian group $E$, and $M$ is one; $u$ is the unit of the adjunction $g^{-1}\\dashv g_*$, which is $\\Lambda$-linear by [lem-weil-pbc-inverse-image-module-adjunction], so $u$ is an isomorphism of sheaves of $\\Lambda$-modules (the constant sheaf of $\\Lambda$-modules has the constant abelian sheaf as underlying sheaf, both being sheafifications of the same presheaf, [def-weil-pbc-constant-sheaf]); and $g^{-1}\\underline M_Y\\cong\\underline M_{\\operatorname{Spec}K}$ by [lemma-constructible-pullback-constant]. Let $\\alpha':g^{-1}\\nu^{-1}F\\cong h^{-1}F\\xrightarrow{\\alpha}\\underline M_{\\operatorname{Spec}K}=g^{-1}\\underline M_Y$ (the first isomorphism from [lem-weil-pbc-inverse-image-composition]). Define $\\psi=u^{-1}\\circ g_*(\\alpha')\\circ\\eta_g:\\nu^{-1}F\\to g_*g^{-1}\\nu^{-1}F\\to g_*g^{-1}\\underline M_Y\\to\\underline M_Y$, the map adjoint to $\\alpha'$ followed by $u^{-1}$, and let $\\varphi:F\\to\\nu_*\\underline M_Y$ be the map adjoint to $\\psi$ under $\\nu^{-1}\\dashv\\nu_*$, i.e. $\\varphi=\\nu_*(\\psi)\\circ\\eta_\\nu$ and $\\psi=\\varepsilon_\\nu\\circ\\nu^{-1}(\\varphi)$. All maps are $\\Lambda$-linear by [lem-weil-pbc-inverse-image-module-adjunction]. (Stacks: 'The map $\\mathcal F|_{\\Spec(K)}\\to\\underline E$ is adjoint to a map $\\mathcal F|_Y\\to g_*\\underline E=\\underline E$ ... This in turn is adjoint to a map $\\varphi:\\mathcal F\\to f_*\\underline E$'.)",
-   "uses": [
-    "lem-weil-pbc-normal-constant-generic",
-    "lem-weil-pbc-inverse-image-module-adjunction",
-    "def-weil-pbc-constant-sheaf",
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (1), lines 12979-12984, using Lemma 09Z5 (lemma-push-constant-sheaf-from-open) (1)"
-   }
-  },
-  {
-   "text": "*$\\varphi$ is injective at every geometric point over $x$.* Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point lying over $x$ [def-weil-geometric-point], i.e. a field map $\\kappa(x)\\to\\Omega$ with $\\Omega$ algebraically closed. As $K/\\kappa(x)$ is algebraic it extends to $K\\to\\Omega$, giving a geometric point $\\bar\\omega$ of $\\operatorname{Spec}K$ with $h\\circ\\bar\\omega=\\bar x$; put $\\bar y=g\\circ\\bar\\omega$, so $\\nu\\circ\\bar y=\\bar x$. (i) $g^{-1}(\\psi)$ equals $\\alpha'$ up to the identification $g^{-1}\\underline M_Y=\\underline M_{\\operatorname{Spec}K}$: indeed $\\varepsilon_g\\circ g^{-1}(u)=\\mathrm{id}$ (triangle identity, $u$ being the unit at $\\underline M_Y$) and $g^{-1}(u)$ is an isomorphism, so $g^{-1}(u)^{-1}=\\varepsilon_g$, whence $g^{-1}\\psi=\\varepsilon_g\\circ g^{-1}g_*(\\alpha')\\circ g^{-1}(\\eta_g)=\\alpha'\\circ\\varepsilon_g\\circ g^{-1}(\\eta_g)=\\alpha'$ by naturality of $\\varepsilon_g$ and the other triangle identity. By the natural isomorphism $c_{g,\\bar\\omega}:(g^{-1}H)_{\\bar\\omega}\\cong H_{\\bar y}$ of [lem-weil-pbc-inverse-image-stalk-germ] (natural in $H$), $\\psi_{\\bar y}$ corresponds to $(g^{-1}\\psi)_{\\bar\\omega}=\\alpha'_{\\bar\\omega}$, an isomorphism. (ii) Let $r:(\\nu_*\\underline M_Y)_{\\bar x}\\to(\\underline M_Y)_{\\bar y}$ be the restriction map of [lem-weil-pbc-counit-stalk-germ-restriction] and $c=c_{\\nu,\\bar y,F}:(\\nu^{-1}F)_{\\bar y}\\cong F_{\\bar x}$. Since $\\psi=\\varepsilon_\\nu\\circ\\nu^{-1}(\\varphi)$, $(\\varepsilon_\\nu)_{\\bar y}=r\\circ c$ ([lem-weil-pbc-counit-stalk-germ-restriction]) and $c\\circ(\\nu^{-1}\\varphi)_{\\bar y}=\\varphi_{\\bar x}\\circ c$ (naturality of $c$), we get $\\psi_{\\bar y}=r\\circ\\varphi_{\\bar x}\\circ c$. By (i) the left side is bijective, so $\\varphi_{\\bar x}$ is injective. This is Stacks' commutative square $\\mathcal F_{\\bar x}=(\\mathcal F|_Y)_{\\bar y}\\to\\underline E_{\\bar y}$ through $(f_*\\underline E)_{\\bar x}$, written out.",
-   "uses": [
-    "def-weil-geometric-point",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-counit-stalk-germ-restriction",
+    "lem-weil-pbc-constructible-module-normalized-generic-data",
     "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (1), lines 12984-12994 (the commutative diagram)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For any geometric s above x choose w with w followed by g and nu equal to s. Naturality of upperStarCompSheafFiberIso for g conjugates the stalk of psi at w followed by g to the stalk of g^*psi=alpha. Hence the stalk of psi is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-normalized-generic-data",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of upperStarCompSheafFiberIso for nu, applied to phi, and the counit identity above factor an isomorphism (the inverse comparison followed by the stalk of psi) through the stalk of phi. By mono_of_mono_fac the stalk of phi is monic. ModuleCat.mono_iff_injective gives the required injectivity for every s. This uses only naturality of the stalk comparison, not a germ description of the counit.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-constructible-pullback",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-constructible-field-finite-separable-constant",
-  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-constructible-module-normalized-generic-data",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-finite-locally-constant-module-values",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
-  "lem-weil-pbc-normal-constant-generic",
-  "lem-weil-pbc-inverse-image-module-adjunction",
-  "def-weil-pbc-constant-sheaf",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-direct-image",
-  "def-weil-geometric-point",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-counit-stalk-germ-restriction"
+  "lemma-openclosed-stalk-upperstar",
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09Z6 proof of (1), generic trivialization, normalization and stalk square, transferred to (3)"
+  "place": "Tag 09Z6 (lemma-constructible-maps-into-constant), proof of (1), the two adjunctions and stalk square, transferred to (3). Lean reduction and naturality argument completed by Q1, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -174,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f722",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T022144-L-1050150",
+  "landing": "20261012T042415-L-1819209",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean declarations with their nodes and the Stacks 09Z6/09Z1 route; existing signature unchanged, node changes confined to proof fields, compilation clean, axioms limited to the standard three plus sorryAx from recorded open obligations."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

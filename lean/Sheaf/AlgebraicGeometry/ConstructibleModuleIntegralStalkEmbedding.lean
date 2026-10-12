@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ConstructibleModuleNormalizedGenericData
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
@@ -70,6 +72,66 @@ theorem exists_integral_lowerStar_stalk_injective
             ((Scheme.SpecToEquivOfField Ω X) s).1 = x →
               Function.Injective
                 (((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map φ) := by
-  sorry
+  classical
+  obtain ⟨Y, ν, hν, K, hK, g, M, hM, hu, e, hlift⟩ :=
+    exists_constructible_module_normalized_generic_data Λ F hF x
+  let : Field K := hK
+  let : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app
+    ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := hu
+  let A := (upperStar (ModuleCat.{u + 1} Λ) ν).obj F
+  let B := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  let adj := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g
+  -- Adjunction along g and the invertible unit extend the generic isomorphism.
+  let ψ : A ⟶ B := adj.homEquiv A _ e.some.hom ≫ inv (adj.unit.app B)
+  have hψ : (upperStar (ModuleCat.{u + 1} Λ) g).map ψ = e.some.hom := by
+    dsimp only [ψ]
+    rw [Functor.map_comp, Functor.map_inv]
+    rw [IsIso.inv_eq_of_hom_inv_id (adj.left_triangle_components B)]
+    exact (adj.homEquiv A _).symm_apply_apply e.some.hom
+  let adjν := upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν
+  let φ : F ⟶ (lowerStar (ModuleCat.{u + 1} Λ) ν).obj B := adjν.homEquiv F B ψ
+  have hφ : (upperStar (ModuleCat.{u + 1} Λ) ν).map φ ≫ adjν.counit.app B = ψ :=
+    (adjν.homEquiv F B).symm_apply_apply ψ
+  refine ⟨Y, ν, hν, M, hM, φ, ?_⟩
+  intro Ω _ _ s hs
+  obtain ⟨w, hw⟩ := hlift Ω s hs
+  rw [← Category.assoc] at hw
+  subst s
+  let c := upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) g w
+  -- Naturality transports the generic isomorphism to the stalk on Y.
+  have hψstalk : IsIso
+      (((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map ψ) := by
+    have he : IsIso ((upperStar (ModuleCat.{u + 1} Λ) g).map ψ) := by
+      rw [hψ]
+      infer_instance
+    have he' : IsIso
+        (((Scheme.pointSmallEtale w).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+          ((upperStar (ModuleCat.{u + 1} Λ) g).map ψ)) := inferInstance
+    have hn := c.hom.naturality ψ
+    have eq : ((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map ψ =
+        c.inv.app A ≫
+          ((Scheme.pointSmallEtale w).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
+            ((upperStar (ModuleCat.{u + 1} Λ) g).map ψ) ≫ c.hom.app B := by
+      rw [← cancel_epi (c.hom.app A)]
+      simpa only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.comp_map] using hn.symm
+    rw [eq]
+    infer_instance
+  let d := upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) ν (w ≫ g)
+  -- The stalk of φ has an invertible composite, so it is a monomorphism.
+  have hfac :
+      ((Scheme.pointSmallEtale ((w ≫ g) ≫ ν)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map φ ≫
+          (d.inv.app ((lowerStar (ModuleCat.{u + 1} Λ) ν).obj B) ≫
+            ((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+              (A := ModuleCat.{u + 1} Λ)).map (adjν.counit.app B)) =
+      d.inv.app F ≫ ((Scheme.pointSmallEtale (w ≫ g)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map ψ := by
+    rw [← Category.assoc, d.inv.naturality]
+    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp, hφ]
+  have : Mono (((Scheme.pointSmallEtale ((w ≫ g) ≫ ν)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map φ) := mono_of_mono_fac hfac
+  exact (ModuleCat.mono_iff_injective _).mp this
 
 end AlgebraicGeometry.Etale
