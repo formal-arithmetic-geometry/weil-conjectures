@@ -369,10 +369,17 @@ lemma cohomologyClass_extClass {S : ShortComplex (Sheaf J (ModuleCat.{max u v} R
 /-- In degree `0` the classes of cocycles exhaust `Ext⁰(R, F)`, each exactly once. -/
 lemma bijective_cohomologyClass_zero (F : Sheaf J (ModuleCat.{max u v} R)) :
     Function.Bijective (fun z : {z : F.obj.obj (op (U.obj 0)) // U.IsCocycle F 0 z} ↦
-      hU.cohomologyClass F 0 z.1 z.2) :=
-  (hU.isResolution.bijective_cocycleClass_zero F).comp
-    (Equiv.subtypeEquiv (freeSheafHomEquiv J R (U.obj 0) F).symm
-      isCocycle_iff_d_comp_eq_zero).bijective
+      hU.cohomologyClass F 0 z.1 z.2) := by
+  let e : {z : F.obj.obj (op (U.obj 0)) // U.IsCocycle F 0 z} ≃
+      {φ : (U.freeComplex J R).X 0 ⟶ F // (U.freeComplex J R).d 1 0 ≫ φ = 0} :=
+    Equiv.subtypeEquiv (freeSheafHomEquiv J R (U.obj 0) F).symm
+      (fun z ↦ isCocycle_iff_d_comp_eq_zero (q := 0) z)
+  have key (z : {z : F.obj.obj (op (U.obj 0)) // U.IsCocycle F 0 z}) :
+      hU.cohomologyClass F 0 z.1 z.2 = hU.isResolution.cocycleClass 0 (e z).1 (e z).2 := by
+    rfl
+  have h := (hU.isResolution.bijective_cocycleClass_zero F).comp e.bijective
+  convert h using 1
+  exact funext key
 
 omit [HasExt.{w} (Sheaf J (ModuleCat.{max u v} R))] in
 /-- The cochain complex of an injective sheaf on a hypercover is exact in positive degrees,
