@@ -33,98 +33,37 @@
  ],
  "proof": [
   {
-   "text": "*The pieces of $W\\times_XY$.* Fix an object $w:W\\to X$ of $X_{\\Et}$ and write $W_Y=W\\times_XY$ with projections $p:W_Y\\to W$, $q:W_Y\\to Y$ [def-pc-fibre-product]; $(W_Y,q)$ is the object of $Y_{\\Et}$ at which $f_*H$ is evaluated [def-weil-pbc-direct-image]. Put $O_j=q^{-1}(V_j)$. Since the $V_j$ are pairwise disjoint, open and closed and cover $Y$, the $O_j$ ($j\\in J$) are pairwise disjoint, open and closed and cover $W_Y$; if $J=\\varnothing$ then $Y=\\varnothing$ and $W_Y=\\varnothing$. By [lem-weil-pbc-open-fibre-product] (with base $X$, the open $W\\subseteq W$, the open $V_j\\subseteq Y$, $U=X$) the canonical morphism $W\\times_XV_j\\to W_Y$ is an open immersion with image $p^{-1}(W)\\cap q^{-1}(V_j)=O_j$, compatibly with the projections; the projection $W\\times_XV_j\\to W$ is the base change along $w$ of the isomorphism $f|_{V_j}:V_j\\to X$, hence an isomorphism (its inverse is $(\\mathrm{id}_W,(f|_{V_j})^{-1}\\circ w)$, by the universal property [def-pc-fibre-product]). So $p|_{O_j}:O_j\\to W$ is an isomorphism of schemes from the open subscheme $O_j$. Now $\\sigma_{j,W}=(\\mathrm{id}_W,s_j\\circ w)$ satisfies $p\\circ\\sigma_{j,W}=\\mathrm{id}_W$ and $q\\circ\\sigma_{j,W}=s_j\\circ w$, which lands in $V_j$; so $\\sigma_{j,W}$ maps $W$ into the open $O_j$, hence factors through the open subscheme $O_j$ [def-weil-open-immersion], and the factored morphism is a right inverse of the isomorphism $p|_{O_j}$, hence equal to its inverse. Thus $\\sigma_{j,W}$ is an open immersion with image $O_j$ (an isomorphism $W\\xrightarrow{\\sim}O_j$ followed by the inclusion). The morphism $s_j\\circ w:W\\to Y$ is etale ($s_j$ is an open immersion, hence etale, and $w$ is etale [lem-weil-pbc-etale-composition-cancellation] (1), (2)), so $W_j:=(W,s_j\\circ w)$ is an object of $Y_{\\Et}$, $\\sigma_{j,W}:W_j\\to(W_Y,q)$ is a morphism of $Y_{\\Et}$ (as $q\\circ\\sigma_{j,W}=s_j\\circ w$) and is etale (open immersion), and the family $\\{\\sigma_{j,W}:W_j\\to W_Y\\}_{j\\in J}$ is jointly surjective (the $O_j$ cover $W_Y$), so it is a covering of $W_Y$ in $Y_{\\Et}$ [def-weil-pbc-etale-site] (the empty family when $J=\\varnothing$, which covers $W_Y=\\varnothing$).",
+   "text": "For a fixed W in X.Etale, splitCoverSectionsLimit supplies the limiting fan in ModuleCat whose vertex is H(W times_X Y) and whose legs are the displayed restrictions H(sigma_j,W). This is precisely the geometric decomposition and gluing in the original steps 1 and 2; it makes no naturality or sheaf-product assertion.",
+   "uses": [
+    "lem-weil-pbc-split-cover-sections-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct each sheaf morphism q_j: f_*H -> H|s_j with component H(sigma_j,W). To prove naturality, rewrite the two composites by functoriality of H, remove opposites, and use extensionality of morphisms over Y and the two pullback projections. The resulting equations follow from the pullback lift and map formulas. Linearity is built into these maps in ModuleCat. Restriction is already a sheaf by the definition localizationRestriction.",
    "uses": [
     "def-pc-fibre-product",
     "def-weil-pbc-direct-image",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'A finite etale morphism is locally isomorphic to a disjoint union of isomorphisms ... Thus the lemma says that if F_i ... then prod F_i is too. This is clear.' (the identification of the direct image with the product is left implicit there; written out by an agent)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Sections over $W_Y$ are the product of the sections over the pieces.* Fibre products in $Y_{\\Et}$ are scheme fibre products [def-weil-pbc-etale-site]. Transport along the isomorphisms $W\\cong O_i$ of step 1: by [lem-weil-pbc-open-fibre-product] (applied to $\\mathrm{id}_{W_Y}$ twice and the opens $O_i,O_k$ of $W_Y$) $O_i\\times_{W_Y}O_k$ is the open subscheme $O_i\\cap O_k$ with both projections the inclusions. Hence $W_i\\times_{W_Y}W_k=\\varnothing$ for $i\\neq k$, and $W_i\\times_{\\sigma_{i,W},W_Y,\\sigma_{i,W}}W_i$ is $W$ with both projections equal to $\\mathrm{id}_W$ (up to the unique isomorphism of fibre products [def-pc-fibre-product], which does not affect the equalizer condition). The underlying presheaf of abelian groups of $H$ is an abelian sheaf on $Y_{\\Et}$ [def-weil-sheaf-of-modules-category, def-weil-pbc-abelian-etale-sheaves]. The sheaf condition for the empty covering of the empty scheme $\\varnothing$ (an object of $Y_{\\Et}$, covered by the empty family) says that $H(\\varnothing)$ is the equalizer of two maps into the empty product, i.e. $H(\\varnothing)=0$. The sheaf condition for the covering $\\{\\sigma_{j,W}\\}_{j\\in J}$ of step 1 says that $H(W_Y)\\to\\prod_{j}H(W_j)$, $t\\mapsto(H(\\sigma_{j,W})(t))_j$, is injective with image the families $(t_j)_j$ whose two restrictions to $W_i\\times_{W_Y}W_k$ agree for all $i,k$. For $i\\neq k$ both restrictions lie in $H(\\varnothing)=0$, so they agree; for $i=k$ the two projections are equal, so the two restrictions of $t_i$ agree. Every family is compatible, so\n$$\\Phi_W:(f_*H)(W)=H(W_Y)\\longrightarrow\\prod_{j\\in J}H(W_j)=\\prod_{j\\in J}(H|_{s_j})(W),\\qquad t\\mapsto(H(\\sigma_{j,W})(t))_j,$$\nis bijective, and additive since the restriction maps of $H$ are. For $J=\\varnothing$ this says $H(W_Y)=H(\\varnothing)=0$, the empty product. (This is the sheaf property for a disjoint union, 'This is clear' in Stacks 095B.)",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-open-fibre-product",
-    "def-pc-fibre-product",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00VM (sites-definition-sheaf-sets: the sheaf condition as an equalizer), applied to the covering of W x_X Y by its open and closed pieces; the empty covering of the empty object gives F(empty) = a point"
-   }
-  },
-  {
-   "text": "*The restrictions $H|_{s_j}$, their product, and naturality of $\\Phi$.* Since $s_j$ is etale (statement, (1)), $H|_{s_j}$ (underlying abelian presheaf $V\\mapsto H(V\\to X\\xrightarrow{s_j}Y)$) is an abelian sheaf on $X_{\\Et}$ by [lem-weil-pbc-etale-inverse-image-restriction] (1) (the restriction $G|_Y$ there, for $j=s_j$, $G$ the underlying abelian sheaf of $H$). Let $P$ be the presheaf $W\\mapsto\\prod_j(H|_{s_j})(W)$ with componentwise restriction maps. $X_{\\Et}$ is a site in the sense of Stacks 00VH [def-weil-pbc-etale-site, def-weil-pbc-sites-and-cohomology] (1), so by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] (1) for the discrete diagram $J$, $P$ with its projections is a sheaf of sets and a product of the $H|_{s_j}$ in sheaves of sets (for $J=\\varnothing$ the one-point sheaf). Naturality: let $h:W'\\to W$ be a morphism of $X_{\\Et}$, $w'=w\\circ h$, and $h_Y=h\\times_X\\mathrm{id}_Y:W'_Y\\to W_Y$, so that $(f_*H)(h)=H(h_Y)$ [def-weil-pbc-direct-image] ($h_Y$ is a morphism over $Y$). Then $h_Y\\circ\\sigma_{j,W'}=\\sigma_{j,W}\\circ h$: both have first component $h$ ($p\\circ h_Y\\circ\\sigma_{j,W'}=h\\circ p'\\circ\\sigma_{j,W'}=h$) and second component $s_j\\circ w'=s_j\\circ w\\circ h$, so they are equal by the uniqueness in [def-pc-fibre-product]. Moreover $h$ is a morphism $(W',s_j\\circ w')\\to(W,s_j\\circ w)$ of $Y_{\\Et}$, and $(H|_{s_j})(h)=H(h)$. Applying the contravariant functor $H$: $H(\\sigma_{j,W'})\\circ H(h_Y)=H(h)\\circ H(\\sigma_{j,W})=(H|_{s_j})(h)\\circ H(\\sigma_{j,W})$ for every $j$, i.e. $P(h)\\circ\\Phi_W=\\Phi_{W'}\\circ(f_*H)(h)$. So $\\Phi=(\\Phi_W)_W:f_*H\\to P$ is a morphism of abelian presheaves, componentwise bijective by step 2. Taking $H$ to be the underlying abelian sheaf of $\\Lambda_Y$ itself, the same argument shows that $r_j:f_*\\Lambda_Y\\to\\Lambda_Y|_{s_j}$, $r_{j,W}=\\Lambda_Y(\\sigma_{j,W})$, is a morphism of presheaves, and a ring map in each component (restriction maps of a sheaf of rings are ring maps).",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "def-weil-pbc-direct-image",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'A finite etale morphism is locally isomorphic to a disjoint union of isomorphisms ... Thus the lemma says that if F_i ... then prod F_i is too. This is clear.' (the identification of the direct image with the product is left implicit there; written out by an agent)"
-   }
-  },
-  {
-   "text": "*Module structures and linearity of $\\Phi$.* The module structures are the canonical ones, as in Stacks 03D6 and 03DH. For an etale $e:T\\to Y$, $\\Lambda_Y|_e$ is a sheaf of rings on $T_{\\Et}$ (step 3, with sectionwise ring structure), and $\\kappa_e:\\Lambda_T\\to\\Lambda_Y|_e$ is the unique morphism of sheaves of rings whose composite with the canonical map from the constant presheaf $\\Lambda$ to its sheafification $\\Lambda_T$ [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification] sends $\\lambda\\in\\Lambda$ over $V\\to T$ to the section $\\iota_V(\\lambda)$ of $\\Lambda_Y$ over $V\\to T\\to Y$ induced by $\\lambda$ (this assignment is a morphism of presheaves of rings, since restriction maps of $\\Lambda_Y$ send $\\iota(\\lambda)$ to $\\iota(\\lambda)$, so it extends uniquely along the sheafification by its universal property); $H|_e$ is a sheaf of $\\Lambda_T$-modules through $\\kappa_e$ (restriction maps of $H|_e$ are restriction maps of $H$, semilinear over those of $\\Lambda_Y$, hence over those of $\\Lambda_T$ via $\\kappa_e$) [def-weil-sheaf-of-modules-category]. Likewise $f^\\sharp:\\Lambda_X\\to f_*\\Lambda_Y$ is the unique morphism of sheaves of rings sending the constant $\\lambda$ over $W$ to $\\iota_{W_Y}(\\lambda)$, and $f_*H$ is a sheaf of $\\Lambda_X$-modules by $a\\cdot t=f^\\sharp_W(a)\\,t$ for $a\\in\\Lambda_X(W)$, $t\\in H(W_Y)$ [def-weil-pbc-direct-image] (whose 'the same functors act on module sheaves' is made precise this way); $P$ is a sheaf of $\\Lambda_X$-modules componentwise, $\\Lambda_X(W)$ acting on the $j$-th factor through $\\kappa_{s_j,W}$. Claim: $r_{j,W}\\circ f^\\sharp_W=\\kappa_{s_j,W}$ for all $W$. Both sides are components of morphisms of sheaves of rings $\\Lambda_X\\to\\Lambda_Y|_{s_j}$ (the left one the composite of $f^\\sharp$ with the presheaf morphism $r_j$ of step 3), and both send the constant $\\lambda$ over $W$ to $\\iota(\\lambda)$ (restriction of $\\iota_{W_Y}(\\lambda)$ along $\\sigma_{j,W}$ is $\\iota_{W_j}(\\lambda)$); by the uniqueness in the universal property of sheafification [def-weil-pbc-sheafification] they are equal. Hence, by semilinearity of the restriction map $H(\\sigma_{j,W})$ over $\\Lambda_Y(\\sigma_{j,W})=r_{j,W}$ [def-weil-sheaf-of-modules-category], for $a\\in\\Lambda_X(W)$ and $t\\in H(W_Y)$: $H(\\sigma_{j,W})(a\\cdot t)=H(\\sigma_{j,W})(f^\\sharp_W(a)\\,t)=r_{j,W}(f^\\sharp_W(a))\\,H(\\sigma_{j,W})(t)=\\kappa_{s_j,W}(a)\\,H(\\sigma_{j,W})(t)=a\\cdot H(\\sigma_{j,W})(t)$. So each $\\Phi_W$ is $\\Lambda_X(W)$-linear.",
-   "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Definition 03D6 (sites-modules-definition-pushforward: module structure on f_*F via f^sharp: O_D -> f_*O_C), Section 03DH (sites-modules-section-localize: O_U(V/U)=O(V), j_U^sharp the identity), Definition 03CW (sheaves of modules); universal property of sheafification, Sites Proposition 00WH"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 2-4, $\\Phi:f_*H\\to P$ is a morphism of sheaves of $\\Lambda_X$-modules whose components are bijective and linear; the inverse maps $\\Phi_W^{-1}$ are linear and commute with the restriction maps (because the $\\Phi_W$ do), so they form an inverse morphism and $\\Phi$ is an isomorphism of sheaves of $\\Lambda_X$-modules [def-weil-sheaf-of-modules-category]. $P$ with its projections is the product of the $H|_{s_j}$ in the category of sheaves of $\\Lambda_X$-modules: it is a sheaf (step 3, [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]), its restriction maps are componentwise semilinear, the projections are linear, and for morphisms of sheaves of $\\Lambda_X$-modules $g_j:G\\to H|_{s_j}$ the unique map of sheaves of sets $G\\to P$ with components $g_j$ is $(g_{j,W})_j$ on sections, which is linear because each $g_{j,W}$ is. For $J=\\varnothing$, $P$ is the zero sheaf, the final object. This is the isomorphism $f_*H\\xrightarrow{\\sim}\\prod_{j\\in J}H|_{s_j}$ of the statement.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'A finite etale morphism is locally isomorphic to a disjoint union of isomorphisms ... Thus the lemma says that if F_i ... then prod F_i is too. This is clear.' (the identification of the direct image with the product is left implicit there; written out by an agent)"
-   }
+   "text": "Form c = Fan.mk (f_*H) q. The forgetful functor sheafToPresheaf reflects limits. Apply evaluationJointlyReflectsLimits, and identify each evaluated fan with the limiting fan of the first step using Fan.isLimitMapConeEquiv twice. Thus c is a limiting fan of sheaves. Fan.nonempty_isLimit_iff_isIso_piLift makes Pi.lift q invertible. Use asIso of this morphism; Pi.lift_pi proves the prescribed component formula. This includes the empty family. These are the generic Mathlib reflection and fan declarations themselves, for ModuleCat-valued sheaves; the Type-valued statement of lem-weil-pbc-site-sheaf-sets-limits-sectionwise is not invoked.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-split-cover-sections-limit",
   "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-site",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-etale-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991, which calls the step 'clear'; the sheaf-condition argument follows sites.tex Definition 00VM and the module structures sites-modules.tex Definition 03D6 and Section 03DH; written out by an agent"
+  "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'Thus the lemma says that if F_i ... then prod F_i is too'; formal reduction of steps 1-2 to a sectionwise limiting fan, with naturality and sheaf-product assembly proved using Mathlib limit reflection"
  },
  "mathlib_searches": [
   {
@@ -235,5 +174,15 @@
   "group": "E1",
   "result": "pass",
   "note": "f:Y->X; finite possibly empty J (Type w, Finite); V_j clopen covering disjoint = IsColimit Cofan + IsOpenImmersion + IsClosedImmersion; f|V_j iso with inverse t j (hinv1/hinv2), s_j = t j ≫ i j; Λ comm ring, H ModuleCat-valued sheaf on Y_et; f_* = Etale.lowerStar; H|_{s_j} = Etale.localizationRestriction (literal precomposition with Over.map, no sheafification); σ_{j,W} = pullback.lift (𝟙 W) (w ≫ s_j) as Over.homMk; ∃ iso to ∏ᶜ with every component = H(σ_{j,W}); no statement change"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T063524-L-3161876",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
