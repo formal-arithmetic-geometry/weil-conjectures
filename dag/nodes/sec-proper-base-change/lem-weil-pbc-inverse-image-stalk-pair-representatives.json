@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-inverse-image-stalk-pair-representatives",
+ "kind": "statement",
+ "title": "Two inverse-image stalk elements have unit representatives on one open",
+ "statement": "Let $f:Z\\to X$ be a continuous map of topological spaces, and let $A$ be a sheaf of sets on $X$ [def-weil-pbc-topological-inverse-image]. The sets may lie in any universe at least as large as the space universe. Write $L=f^{-1}A$ for the constructed sheaf inverse image and $\\eta:A\\to f_*L$ for its adjunction unit. For any $z\\in Z$ and any $s,t\\in L_z$, where $L_z$ is the colimit of sections over open neighbourhoods of $z$ [lem-weil-pbc-sets-inverse-image-stalk], there exist an open $W\\ni f(z)$ and $a,b\\in A(W)$ with $(\\eta_W(a))_z=s$ and $(\\eta_W(b))_z=t$.",
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008H, 008G and 007Z"
+ },
+ "proof": [
+  {
+   "text": "Represent each element by a section on a neighbourhood N, using joint surjectivity of the neighbourhood-colimit coprojections.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the presheaf left Kan extension P, let theta be its sheafification unit and let R be the locally generated image of theta. R is a subsheaf of the sheafification. The sheafification universal property extends the map from P to R to a map l from its sheafification to R. The composite of l and the inclusion of R is the identity: both agree on theta, and sheafification hom-ext cancels theta. Hence every section is locally in the image of theta. For the section on N, choose a smaller neighbourhood V of z and a preimage in P(V).",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK, local surjectivity of the sheafification unit; the subsheaf-image argument follows the universal property"
+   }
+  },
+  {
+   "text": "The pointwise left Kan extension is a colimit over open W with V contained in f^{-1}W. Joint surjectivity of its coprojections gives a section on some W. W contains f(z), since V contains z. The constructed unit is the Kan-extension unit followed by theta. Naturality of theta and the stalk-colimit relations identify its unit germ with the original element.",
+   "uses": [
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Perform this for s and t. Restrict the two sections to W1 intersect W2. Naturality of the unit and the colimit relations preserve both germs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008G and 008H, common representative argument; direct proof by local surjectivity (Sites 00WK) and pointwise Kan-extension colimit, avoiding equal-universe stalk APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every germ of a topological sheaf inverse image is represented by the adjunction unit applied to a section near the image point",
+   "results": "germ_stalkPullbackHom; presheaf-unit germ formulas. No pair representation for constructed sheaf pullback with independent space/value universes.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkPullbackIso",
+   "results": "stalkPullbackIso: presheaf stalks; still requires passage to constructed sheaf pullback, unit compatibility and common representatives with larger values.",
+   "date": "2026-10-12",
+   "verdict": "ingredient, not statement match"
+  },
+  {
+   "tool": "grep",
+   "query": "germ_stalkPullbackHom|stalkFunctor_map_unit_toSheafify_isIso|gabber.*local|inverse_image_stalk_pair",
+   "results": "Stalks.lean:242 germ_stalkPullbackHom; Sheafify.lean:137 stalkFunctor_map_unit_toSheafify_isIso. Repository search found no local-agreement or pair-representative declaration.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf inverse image stalk element represented by adjunction unit of a section on a neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberZariskiEtaleComparisonStalkInjective",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-zariski-etale-comparison-stalk-injective",
+   "place": "stage-3 proof, common representative step",
+   "via": [
+    "lem-weil-pbc-gabber-zariski-etale-comparison-stalk-injective"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InverseImageStalkPairRepresentatives",
+  "file": "lean/Sheaf/Paper/InverseImageStalkPairRepresentatives.lean",
+  "declaration": "TopCat.inverse_image_stalk_pair_representatives",
+  "statement": "theorem inverse_image_stalk_pair_representatives\n    {X Z : TopCat.{u}} (f : Z ⟶ X) (A : X.Sheaf (Type (max u w))) (z : Z)\n    (s t : colimit ((OpenNhds.inclusion z).op ⋙\n      ((Functor.sheafPullbackConstruction.sheafPullback\n        (Opens.map f) (Type (max u w))\n        (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj A).obj)) :\n    ∃ (W : Opens X) (hzW : f z ∈ W) (a b : A.obj.obj (op W)),\n      colimit.ι ((OpenNhds.inclusion z).op ⋙\n        ((Functor.sheafPullbackConstruction.sheafPullback\n          (Opens.map f) (Type (max u w))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj A).obj)\n        (op ⟨(Opens.map f).obj W, hzW⟩)\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Opens.map f) (Type (max u w))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app A).hom.app\n            (op W) a) = s ∧\n      colimit.ι ((OpenNhds.inclusion z).op ⋙\n        ((Functor.sheafPullbackConstruction.sheafPullback\n          (Opens.map f) (Type (max u w))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj A).obj)\n        (op ⟨(Opens.map f).obj W, hzW⟩)\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Opens.map f) (Type (max u w))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app A).hom.app\n            (op W) b) = t",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T063521-L-3160038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T063521-L-3160038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

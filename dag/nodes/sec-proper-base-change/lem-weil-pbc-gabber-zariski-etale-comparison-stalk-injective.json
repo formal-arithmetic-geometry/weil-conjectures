@@ -31,69 +31,57 @@
  ],
  "proof": [
   {
-   "text": "*The unit as a class in the presheaf inverse image.* Write $i^{-1}F=(i_pF)^\\#$ with sheafification map $\\theta:i_pF\\to i^{-1}F$, $i_pF(V)=\\varinjlim_{(U,\\varphi)\\in\\mathcal I_V^{op}}F(U)$ over the pairs of an object $U$ of $X_{\\Et}$ and a $Z$-morphism $\\varphi:V\\to U\\times_XZ$, coprojections $\\iota_{(U,\\varphi)}$, and restriction along $g:V'\\to V$ sending $\\iota_{(U,\\varphi)}(s)$ to $\\iota_{(U,\\varphi\\circ g)}(s)$ [lem-weil-pbc-presheaf-pullback-sets-left-exact] (1), [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (2). The adjunction $u_s\\dashv u^s$ is the composite of $u_p\\dashv u^p$, whose unit at $U$ is $\\iota_{(U,\\mathrm{id})}$ [lem-weil-pbc-presheaf-pullback-sets-left-exact] (1), and of sheafification $\\dashv$ inclusion, whose unit is $\\theta$; so the composite unit is $i^*s=\\theta_{U\\times_XZ}(\\iota_{(U,\\mathrm{id})}(s))$. Consequently, for $W\\subseteq X$ open, $V\\subseteq i^{-1}W$ open in $Z$ with inclusion $\\varphi_V:V\\to W\\times_XZ$ (the given open/base-change identifications), and a $Z$-morphism $g:V'\\to V$ of $Z_{\\Et}$, the restriction of $i^*s$ along $\\varphi_V\\circ g$ is $\\theta_{V'}(\\iota_{(W,\\varphi_V\\circ g)}(s))$, since $\\theta$ is a morphism of presheaves. Moreover each $\\mathcal I_{V'}^{op}$ is filtered, because $X_{\\Et}$ has finite limits and $U\\mapsto U\\times_XZ$ commutes with them [lem-weil-pbc-etale-base-change-finite-limits] (2), (3), [lem-weil-pbc-presheaf-pullback-sets-left-exact] (2).",
+   "text": "Fix z and two elements of the inverse-image stalk. Represent both as unit germs of sections a and b on one open W containing i(z).",
    "uses": [
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-etale-base-change-finite-limits"
+    "lem-weil-pbc-inverse-image-stalk-pair-representatives"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09ZF (lemma-gabber-h0), proof, first paragraph (the description of the stalk on the right hand side as a colimit over etale neighbourhoods $(U,u)\\to(X,z)$ with a section of $U\\times_XZ\\to Z$ near $z$); the unit as in Sites, Lemma Tag 00WX and the paragraph 'we denote $i^{-1}s$' of the same proof"
+    "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
    }
   },
   {
-   "text": "*Key step: agreement on $Z$ near $z$ gives agreement on $X$ near $i(z)$* (source: 'As \\'etale morphisms are open, the image of $U\\to X$ is an open neighbourhood $U_0$ of $z$ in $X$. The map $\\mathcal F(U_0)\\to\\mathcal F(U)$ is injective by the sheaf condition for $\\mathcal F$ with respect to the \\'etale covering $U\\to U_0$'). Let $z\\in Z$, $x=i(z)$, $W\\subseteq X$ an open neighbourhood of $x$, $a,b\\in F(W)$, and suppose $(i^*a)|_V=(i^*b)|_V$ in $(i^{-1}F)(V)$ for some open $V\\subseteq i^{-1}W$ containing $z$. We show $a|_{W_0}=b|_{W_0}$ for an open $W_0\\subseteq W$ containing $x$. By the preceding unit description, $(i^*a)|_V=\\theta_V(p)$ and $(i^*b)|_V=\\theta_V(q)$ with $p=\\iota_{(W,\\varphi_V)}(a)$, $q=\\iota_{(W,\\varphi_V)}(b)$ in $i_pF(V)$. As $\\theta_V(p)=\\theta_V(q)$, there is a covering $\\{g_k:V_k\\to V\\}$ of $Z_{\\Et}$ with $p|_{V_k}=q|_{V_k}$ for all $k$ [lem-weil-pbc-site-sheafification-sections-local]. The covering is jointly surjective [def-weil-pbc-etale-sheaf-of-sets]: pick $k$ and $v\\in V_k$ with $g_k(v)=z$. By the preceding unit description, $p|_{V_k}=\\iota_{(W,\\varphi_k)}(a)$ and $q|_{V_k}=\\iota_{(W,\\varphi_k)}(b)$, $\\varphi_k=\\varphi_V\\circ g_k$. Since $\\mathcal I_{V_k}^{op}$ is filtered (by the preceding step), [lem-weil-pbc-filtered-colimit-sets-elementwise] (3) gives a morphism $(U,\\psi)\\to(W,\\varphi_k)$ of $\\mathcal I_{V_k}$, i.e. an $X$-morphism $g:U\\to W$ from an etale $U\\to X$ with $(g\\times_XZ)\\circ\\psi=\\varphi_k$, such that $a|_U=b|_U$ (restriction along $g$). Let $u'\\in U$ be the image of $\\psi(v)\\in U\\times_XZ$; as $\\psi$ is a $Z$-morphism, $\\psi(v)$ lies over $z$, so $u'$ lies over $x=i(z)$. The image $W_0$ of $U\\to X$ is open [lem-weil-pbc-etale-morphism-open-map], contains $x$, and lies in $W$ because $U\\to X$ factors through $g$. So $U\\to X$ factors as $U\\xrightarrow{u_0}W_0\\hookrightarrow X$ [lem-weil-pbc-morphism-factors-through-open-subscheme]; $u_0$ is surjective by the choice of $W_0$ and etale, being a morphism between schemes etale over $X$ [lem-weil-pbc-open-immersion-etale], [lem-weil-pbc-etale-composition-cancellation] (3). Hence $\\{u_0:U\\to W_0\\}$ is a covering of $X_{\\Et}$ [def-weil-pbc-etale-site]. The two morphisms $g$ and $(W_0\\hookrightarrow W)\\circ u_0$ from $U$ to $W$ become equal after composing with the open immersion $W\\hookrightarrow X$, so they are equal [lem-weil-pbc-open-immersion-monomorphism]; therefore $(a|_{W_0})|_U=a|_U=b|_U=(b|_{W_0})|_U$ along $u_0$. The sheaf condition of $F$ for the one-member covering $\\{u_0\\}$ [def-weil-pbc-etale-sheaf-of-sets] (the first map of the equalizer diagram is injective) gives $a|_{W_0}=b|_{W_0}$.",
+   "text": "Apply colimit.ι_map to the assumed equality of beta images. The filtered-colimit equality criterion produces an open V around z on which the two image sections agree. Rewrite them by the given unit equation hbeta.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-etale-morphism-open-map",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
-    "lem-weil-pbc-open-immersion-etale",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-open-immersion-monomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09ZF (lemma-gabber-h0), proof, first paragraph (from 'As \\'etale morphisms are open' to 'Taking the colimit over all $U$ and $U_0$')"
-   }
-  },
-  {
-   "text": "*$\\beta_z$ is injective for every $z\\in Z$* (source: 'We will show this map is injective by looking at stalks. The stalk on the left hand side at $z\\in Z$ is the stalk of $\\mathcal F|_{X_{Zar}}$ at $z$'; '...we obtain injectivity on stalks'). Let $x=i(z)$ and $c:(F_{\\rm Zar})_x\\to(i^{-1}_{\\rm Zar}F_{\\rm Zar})_z$ the bijection of [lem-weil-pbc-sets-inverse-image-stalk], $c(s_x)=(\\eta^{\\rm Zar}_W(s))_z$. Let $\\sigma,\\tau$ be elements of $(i^{-1}_{\\rm Zar}F_{\\rm Zar})_z$. By surjectivity of $c$ and since a germ at $x$ is represented on any smaller neighbourhood (restriction to $W=W_1\\cap W_2$), $\\sigma=(\\eta^{\\rm Zar}_W(a))_z$ and $\\tau=(\\eta^{\\rm Zar}_W(b))_z$ for one open $W\\ni x$ and $a,b\\in F(W)$. By the assumed unit equation, $\\beta_z(\\sigma)=(i^*a)_z$ and $\\beta_z(\\tau)=(i^*b)_z$, germs in $((i^{-1}F)_{\\rm Zar})_z$. Suppose they are equal. The stalk is a colimit over the directed set of open neighbourhoods of $z$, a filtered category, so by [lem-weil-pbc-filtered-colimit-sets-elementwise] (3) there is an open $V\\subseteq i^{-1}W$ containing $z$ with $(i^*a)|_V=(i^*b)|_V$. By the preceding local agreement step there is an open $W_0\\subseteq W$ containing $x$ with $a|_{W_0}=b|_{W_0}$, so $a_x=b_x$ in $(F_{\\rm Zar})_x$, and $\\sigma=c(a_x)=c(b_x)=\\tau$. In Lean the stalk map is written directly as colim.map of the transformation whiskered with the opposite inclusion of open neighbourhoods; this allows sets in a larger universe than the space.",
-   "uses": [
-    "lem-weil-pbc-sets-inverse-image-stalk",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09ZF (lemma-gabber-h0), proof, first paragraph (second and last sentences)"
+    "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
+   }
+  },
+  {
+   "text": "Apply local agreement to get W0 contained in W around i(z), on which a and b restrict equally.",
+   "uses": [
+    "lem-weil-pbc-gabber-zariski-etale-local-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
+   }
+  },
+  {
+   "text": "Naturality of the topological unit gives equality of the unit sections after restriction to i^{-1}W0. The neighbourhood-colimit relations identify their germs with the original two elements, which are therefore equal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-inverse-image-stalk-pair-representatives",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-open-immersion-monomorphism",
-  "lem-weil-pbc-sets-inverse-image-stalk"
+  "lem-weil-pbc-gabber-zariski-etale-local-agreement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph, details expanded from the original node"
+  "place": "Tag 09ZF, first paragraph; stage-3 second reading writes the stalk assembly, splitting common representatives and geometric local agreement"
  },
  "mathlib_searches": [
   {
@@ -160,9 +148,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T044739-L-2032811",
+  "landing": "20261012T063521-L-3160038",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
