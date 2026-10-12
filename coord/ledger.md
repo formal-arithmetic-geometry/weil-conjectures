@@ -6446,3 +6446,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:08 L: merged deliver/Y2/Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions (stage 3; reviewer PASS; first push; landing 20261012T060801-L-2919222 (interface); batch 20261012T060728; modules 2; new nodes 1)
 - 06:17 L: returned deliver/D2/Sheaf.RingTheory.EtaleResidueTriplesLocalization (reviewer RETURN: (reviewer X-d5cce, head d5cce6905) C1/C2: In dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-triple-unit-refinement.)
 - 06:17 L: returned deliver/V2/Sheaf.AlgebraicGeometry.FullAffineEtaleTopos (reviewer RETURN: (reviewer X-0eea1, head 0eea1587a) E2 (brief point 4): fullAffineEtale_cohomology_comparison_point is false and remains )
+- 06:17 L: returned deliver/Z2/Sheaf.CategoryTheory.FiniteFiltrationInduction (reviewer RETURN: (reviewer X-c4980, head c49806826) H10 (review points 2 and 8): Include adapted lean/Sheaf/CategoryTheory/FiniteFiltered)
