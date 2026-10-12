@@ -8326,3 +8326,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/R3/Sheaf.AlgebraicGeometry.QuotientFibreLimitTransfer (stage 3; reviewer PASS; first push; landing 20261012T151913-L-2290637 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/T2/Sheaf.LinearAlgebra.IdempotentCharpolyLocalCharpoly (stage 3; reviewer PASS; after a return; landing 20261012T151914-L-2290758 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/W3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleDiagonalEvaluation (stage 3; reviewer PASS; first push; landing 20261012T151914-L-2290910 (proof); batch 20261012T151904; modules 1; new nodes 0)
+- 15:23 L: returned deliver/E2/Sheaf.AlgebraicGeometry.RationalPointTopologicalLocalDimensionBaseChange (reviewer RETURN: (the landing tools, head 5415381e4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
