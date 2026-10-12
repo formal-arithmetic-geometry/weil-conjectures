@@ -15,95 +15,28 @@
  ],
  "proof": [
   {
-   "text": "*The systems and the map.* Write $\\mathcal I/i$ for the category of arrows $a:j\\to i$ of $\\mathcal I$ (a morphism $(a\\circ b:k\\to i)\\to(a:j\\to i)$ being $b:k\\to j$); it is cofiltered because $\\mathcal I$ is, so colimits over $(\\mathcal I/i)^{\\mathrm{op}}$ are filtered. For $a:j\\to i$ and $b:k\\to j$ put $\\theta_b=H^p(\\varphi_b)\\circ f_b^*:H^p(u_a(X_i),\\mathcal F_j)\\to H^p(u_b u_a(X_i),f_b^{-1}\\mathcal F_j)=H^p(u_{a\\circ b}(X_i),f_b^{-1}\\mathcal F_j)\\to H^p(u_{a\\circ b}(X_i),\\mathcal F_k)$, with $f_b^*$ the pullback of [lem-weil-pbc-site-cohomology-pullback] (here $u_b\\circ u_a=u_{a\\circ b}$, [lem-weil-pbc-colimit-of-sites]). For $c:l\\to k$, $\\theta_c\\circ\\theta_b=H^p(\\varphi_c)f_c^*H^p(\\varphi_b)f_b^*=H^p(\\varphi_c\\circ f_c^{-1}\\varphi_b)f_c^*f_b^*=H^p(\\varphi_c\\circ f_c^{-1}\\varphi_b\\circ c_{b,c}^{-1})(f_b\\circ f_c)^*=H^p(\\varphi_{b\\circ c})f_{b\\circ c}^*=\\theta_{b\\circ c}$ by naturality (2) and composition (4) of [lem-weil-pbc-site-cohomology-pullback] and the cocycle condition (read through the canonical isomorphism $c_{b,c}:f_c^{-1}f_b^{-1}\\cong f_{b\\circ c}^{-1}$), so $(H^p(u_a(X_i),\\mathcal F_j))_{a}$ is a functor on $(\\mathcal I/i)^{\\mathrm{op}}$. On $\\mathcal C$ the transition maps of $(f_j^{-1}\\mathcal F_j)$ are $\\tau_b=f_k^{-1}\\varphi_b\\circ c:f_j^{-1}\\mathcal F_j\\cong f_k^{-1}f_b^{-1}\\mathcal F_j\\to f_k^{-1}\\mathcal F_k$ ($f_b\\circ f_k=f_j$ since $u_k\\circ u_b=u_j$), with coprojections $\\iota_j$ into $\\mathcal F$ [def-weil-pbc-category-colimit]. Put $\\kappa_a=H^p(\\iota_j)\\circ f_j^*:H^p(u_a(X_i),\\mathcal F_j)\\to H^p(u_ju_a(X_i),f_j^{-1}\\mathcal F_j)=H^p(u_i(X_i),f_j^{-1}\\mathcal F_j)\\to H^p(u_i(X_i),\\mathcal F)$. Then $\\kappa_{a\\circ b}\\circ\\theta_b=H^p(\\iota_k)f_k^*H^p(\\varphi_b)f_b^*=H^p(\\iota_k\\circ f_k^{-1}\\varphi_b\\circ c)f_j^*=H^p(\\iota_k\\circ\\tau_b)f_j^*=\\kappa_a$, again by (2) and (4). Hence the $\\kappa_a$ induce the canonical map $\\kappa:\\varinjlim_{a:j\\to i}H^p(u_a(X_i),\\mathcal F_j)\\to H^p(u_i(X_i),\\mathcal F)$ of the statement. By (2) and (3) of [lem-weil-pbc-site-cohomology-pullback] and the $\\delta$-functor property of $H^\\bullet(U,-)$ [def-weil-pbc-sites-and-cohomology], $\\theta$ and $\\kappa$ are natural in maps of systems $(\\mathcal F_i,\\varphi_a)\\to(\\mathcal F'_i,\\varphi'_a)$ and commute with the connecting maps of a short exact sequence of systems (one that is exact on every $\\mathcal C_i$) and of the induced sequence of colimit sheaves on $\\mathcal C$ when the latter is exact.",
+   "text": "Induct on the degree, generalizing the compatible coefficient system, its inverse-image diagram, its colimit cocone, and the stage cohomology diagram and comparison cocone. In degree zero apply cohomology_colimit_sites_degree_zero_descent.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-site-cohomology-pullback"
+    "lem-weil-pbc-colimit-sites-degree-zero-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 09YP (lemma-colimit), statement (the canonical map is left implicit there); the map as in Section Tag 0EXI (sites.tex, situation-inverse-limit-sites)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The case $p=0$.* $H^0(U,-)$ is $\\Gamma(U,-)$ [def-weil-pbc-sites-and-cohomology], and in degree $0$ the pullback $f_b^*$, resp. $f_j^*$, is the unit of $f_b^{-1}\\dashv f_{b*}$, resp. $f_j^{-1}\\dashv f_{j*}$, evaluated at the object ([lem-weil-pbc-site-cohomology-pullback] (1)). So the system $(H^0(u_a(X_i),\\mathcal F_j),\\theta_b)$ and the map $\\kappa$ in degree $0$ are exactly the system $(\\mathcal F_j(u_a(X_i)))$ and the map of [lem-weil-pbc-colimit-of-sites-sections] (abelian version), which is an isomorphism. In degree zero, finite-stage representatives and finite-stage equality in filtered colimits give both class existence and eventual vanishing. This uses the inner-colimit formula 0A35 as well as the finite-covering section comparison: the current ColimitSiteSections declaration alone only handles a fixed sheaf diagram on the colimit site.",
+   "text": "In degree n+1 obtain the degree-n cokernel system and connecting ladder from cohomology_colimit_sites_connecting_ladder. Lift the desired class y through its surjective target map δ to z. Apply the induction hypothesis to the returned system and cocone to represent z by x at a stage t. Use δstage(t)(x) as representative for y; evaluating the commuting square at x, then rewriting the representation equality and δ(z)=y, proves the claim.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-weil-pbc-colimit-of-sites-sections"
+    "lem-weil-pbc-colimit-sites-connecting-ladder"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Proof of Lemma Tag 09YP, first paragraph: 'The case p = 0 is Sites, Lemma 09YN'"
-   }
-  },
-  {
-   "text": "*An injective system and a short exact sequence of systems.* By [lem-weil-pbc-colimit-of-sites-injective-system] choose a system $(\\mathcal G_i,\\psi_a)$ of injective abelian sheaves with an injective map of systems $\\gamma:(\\mathcal F_i,\\varphi_a)\\to(\\mathcal G_i,\\psi_a)$. Let $\\mathcal Q_i=\\operatorname{Coker}(\\gamma_i)$ in $\\textit{Ab}(\\mathcal C_i)$. Since $f_a^{-1}$ is exact [def-weil-pbc-sites-and-cohomology], $f_a^{-1}\\mathcal Q_i=\\operatorname{Coker}(f_a^{-1}\\gamma_i)$, and since $\\psi_a\\circ f_a^{-1}\\gamma_i=\\gamma_j\\circ\\varphi_a$, the map $\\psi_a$ induces $\\chi_a:f_a^{-1}\\mathcal Q_i\\to\\mathcal Q_j$; the cocycle condition $\\chi_{a\\circ b}=\\chi_b\\circ f_b^{-1}\\chi_a$ holds because it holds for $\\psi$ and $f_{a\\circ b}^{-1}\\mathcal G_i\\to f_{a\\circ b}^{-1}\\mathcal Q_i$ is an epimorphism. Thus $0\\to(\\mathcal F_i,\\varphi_a)\\to(\\mathcal G_i,\\psi_a)\\to(\\mathcal Q_i,\\chi_a)\\to0$ is a sequence of systems, exact on every $\\mathcal C_i$, and the maps $\\varphi_b$, $\\psi_b$, $\\chi_b$ form a map of short exact sequences $f_b^{-1}(0\\to\\mathcal F_j\\to\\mathcal G_j\\to\\mathcal Q_j\\to0)\\to(0\\to\\mathcal F_k\\to\\mathcal G_k\\to\\mathcal Q_k\\to0)$. Applying the exact functors $f_i^{-1}$ gives a filtered system (over $\\mathcal I^{\\mathrm{op}}$) of short exact sequences $0\\to f_i^{-1}\\mathcal F_i\\to f_i^{-1}\\mathcal G_i\\to f_i^{-1}\\mathcal Q_i\\to0$ in $\\textit{Ab}(\\mathcal C)$, and since filtered colimits in $\\textit{Ab}(\\mathcal C)$ are exact [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal Q\\to0$ is exact, where $\\mathcal G=\\varinjlim f_i^{-1}\\mathcal G_i$, $\\mathcal Q=\\varinjlim f_i^{-1}\\mathcal Q_i$ [def-weil-pbc-category-colimit].",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Proof of Lemma Tag 09YP, second paragraph ('Choose (F_i, phi_a) -> (G_i, psi_a) as in Lemma 0EXZ'), with the short exact sequences of the proof of Lemma Tag 0739 (lemma-colim-works-over-collection: 'Since colimits of sheaves are the sheafification of colimits on the level of presheaves, since sheafification is exact, and since filtered colimits of abelian groups are exact')"
-   }
-  },
-  {
-   "text": "*Vanishing for colimits of injective systems.* Let $(\\mathcal G_i,\\psi_a)$ be any system as in the statement with every $\\mathcal G_i$ an injective abelian sheaf, and $\\mathcal G=\\varinjlim f_i^{-1}\\mathcal G_i$. We show $H^q(U,\\mathcal G)=0$ for all $U\\in\\operatorname{Ob}(\\mathcal C)$ and $q>0$. Let $\\mathcal U$ be any covering of $\\mathcal C$. By the definition of $\\operatorname{Cov}(\\mathcal C)$ [lem-weil-pbc-colimit-of-sites] there are $i$ and a (finite) covering $\\mathcal U_i$ of $\\mathcal C_i$ with $\\mathcal U=u_i(\\mathcal U_i)$. By [lem-weil-pbc-colimit-of-sites-cech-complex], $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\cong\\varinjlim_{a:j\\to i}\\check{\\mathcal C}^\\bullet(u_a(\\mathcal U_i),\\mathcal G_j)$, a filtered colimit of complexes, where $u_a(\\mathcal U_i)$ is a covering of $\\mathcal C_j$. Each $\\check{\\mathcal C}^\\bullet(u_a(\\mathcal U_i),\\mathcal G_j)$ is exact in degrees $q>0$ since $\\mathcal G_j$ is injective [lem-weil-pbc-site-injective-cech-acyclic]. Applying [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to the sequences $\\check{\\mathcal C}^{q-1}\\to\\check{\\mathcal C}^q\\to\\check{\\mathcal C}^{q+1}$ ($q\\ge1$), the colimit complex is exact in degrees $q>0$, i.e. $\\check H^q(\\mathcal U,\\mathcal G)=0$ for $q>0$ [def-weil-pbc-site-cech-complex]. Now apply [lem-weil-pbc-site-cech-vanishing-criterion] to $\\mathcal G$ with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$ and $\\mathrm{Cov}=\\operatorname{Cov}(\\mathcal C)$: hypothesis (1) holds trivially (all fibre products of members of a covering exist, being objects of $\\mathcal C$), (2) holds since every covering is in $\\mathrm{Cov}$, (3) was just shown. Hence $H^q(U,\\mathcal G)=0$ for all $q>0$ and all $U$.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-colimit-of-sites-cech-complex",
-    "lem-weil-pbc-site-injective-cech-acyclic",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-site-cech-vanishing-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Proof of Lemma Tag 09YP, third paragraph (Lemma Tag 03F9 lemma-cech-vanish-collection, 'by the case p = 0', Lemma Tag 03AW lemma-injective-trivial-cech, Algebra Lemma Tag 00DB)"
-   }
-  },
-  {
-   "text": "Induct simultaneously over all systems in the degree, establishing the two finite-stage assertions in smaller degrees by steps 1–4. In degree n+1, take a class y on the colimit site. The long exact sequence and positive acyclicity of the colimit of G lift it to z in H^n of the colimit of the cokernel system R. By degree-n stage existence, z comes from z_t at a stage. Its stage connecting image maps to y by compatibility with connecting maps. Transport by hDobj and hclegs to obtain x in D(t) with c_t(x)=y. No uniqueness or detection assertion in degree n+1 is used.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 09YP (lemma-colimit), with the right-exact diagram in Tag 0739; online copies at https://stacks.math.columbia.edu/tag/09YP and https://stacks.math.columbia.edu/tag/0739"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-colimit-of-sites-cech-complex",
-  "lem-weil-pbc-site-injective-cech-acyclic",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "lem-weil-pbc-derived-functor-injective-vanishing"
+  "lem-weil-pbc-colimit-sites-degree-zero-descent",
+  "lem-weil-pbc-colimit-sites-connecting-ladder"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP (lemma-colimit), with the right-exact diagram in Tag 0739; online copies at https://stacks.math.columbia.edu/tag/09YP and https://stacks.math.columbia.edu/tag/0739"
+  "document": "https://stacks.math.columbia.edu/tag/09YP",
+  "place": "Tag 09YP and the right-exact comparison diagram of Tag 0739; Lean induction and commuting-square representative calculation by E2."
  },
  "mathlib_searches": [
   {
@@ -182,9 +115,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T044745-L-2035824",
+  "landing": "20261012T063508-L-3154331",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

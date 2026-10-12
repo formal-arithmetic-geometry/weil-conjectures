@@ -7,12 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.ColimitSiteCechComplex
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.Paper.ColimitSitesInjectiveSystem
-import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.CohomologyColimitSitesDegreeZeroDescent
+import Sheaf.CategoryTheory.CohomologyColimitSitesConnectingLadder
 
 /-! # Every cohomology class on the colimit site is the image of a stage class.
 
@@ -33,7 +29,13 @@ Source: Stacks Project, Cohomology on Sites, proof of Tag 09YP and the diagram
 argument in Tag 0739; Sites, Tag 09YN (https://stacks.math.columbia.edu/tag/09YP).
 (blueprint: lem-weil-pbc-colimit-sites-class-descent).
 
-Proof (Stacks 09YP, using the dimension-shifting argument of 0739):
+The Lean proof below inducts over the degree, generalizing the coefficient system,
+its colimit diagram and the comparison cocone. The zero case is the degree-zero
+section comparison. The successor case uses the connecting ladder of the cokernel
+system, applies the induction hypothesis to that system, and checks the representative
+using its commuting square. The two intermediate statements retain the following plan.
+
+Proof plan (Stacks 09YP, using the dimension-shifting argument of 0739):
 Induct simultaneously for all systems on the degree. In degree zero, identify Ext^0
 with sections by evaluation on the generator of the free representable. The degree-zero
 clauses of hpullbackMap and hcanonicalMap identify transitions and comparison legs
@@ -242,6 +244,30 @@ theorem cohomology_colimit_sites_class_descent
         ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck p).map
           (eqToHom (hSobj t.right).symm ≫ K.ι.app t.right)).app
             (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) :
-    ∀ y : c.pt, ∃ (t : Under i) (x : D.obj t), (c.ι.app t).hom x = y := by sorry
+    ∀ y : c.pt, ∃ (t : Under i) (x : D.obj t), (c.ι.app t).hom x = y := by
+  induction p generalizing Fs φ S K D c with
+  | zero =>
+    exact cohomology_colimit_sites_degree_zero_descent
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+      pullbackMap hpullbackMap canonicalMap hcanonicalMap e he eV heV
+      Fs φ hφ S hSobj hSmap K hK i X_i D hDobj hDmap c hcpt hclegs
+  | succ n ih =>
+    obtain ⟨FsR, φR, hφR, SR, hSobjR, hSmapR, KR, hKR,
+        DR, hDobjR, hDmapR, cR, hcptR, hclegsR, δ, δstage, hδ, hcomm⟩ :=
+      cohomology_colimit_sites_connecting_ladder
+        J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+        pullbackMap hpullbackMap canonicalMap hcanonicalMap e he eV heV
+        Fs φ hφ S hSobj hSmap K hK i X_i n D hDobj hDmap c hcpt hclegs
+    intro y
+    obtain ⟨z, hz⟩ := hδ y
+    obtain ⟨t, x, hx⟩ := ih FsR φR hφR SR hSobjR hSmapR KR hKR
+      DR hDobjR hDmapR cR hcptR hclegsR z
+    refine ⟨t, (δstage t).hom x, ?_⟩
+    calc
+      (c.ι.app t).hom ((δstage t).hom x) =
+          δ.hom ((cR.ι.app t).hom x) :=
+        ConcreteCategory.congr_hom (hcomm t) x
+      _ = y := by rw [hx, hz]
+
 
 end CategoryTheory
