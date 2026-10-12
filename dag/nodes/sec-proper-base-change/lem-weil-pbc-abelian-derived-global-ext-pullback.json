@@ -20,46 +20,30 @@
  ],
  "proof": [
   {
-   "text": "Choose injective resolutions I of G and J of its inverse image. Exactness of inverse image makes g prime inverse image of I a resolution; comparison into J is unique up to homotopy.",
+   "text": "Obtain the compatible Ext/classical pair r and r prime. Use the canonical single-complex/classical-derived isomorphism and r inverse to construct b1. Compose the exact inverse-image/single-complex isomorphism with the analogous comparison and r prime inverse to construct b2.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-sheafH-right-derived-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the constant integer sheaf adjunction termwise to identify Hom(Z,I) with global sections of I, and similarly for J. Compute Ext by these resolutions and the homology of derived global sections by the same complexes. These give b1 and b2, including degree zero.",
+   "text": "Apply the derived-unit/classical-pullback identity and the Ext/classical-pullback identity. Compose with the inverse Ext comparison and cancel both pairs of inverse isomorphisms. Evaluation of the resulting equality of group morphisms gives the required equality for every x.",
    "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "lem-weil-pbc-derived-unit-classical-pullback",
+    "lem-weil-pbc-sheafH-right-derived-pullback"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The mapExactFunctor formula in cohomologyMap applies exact inverse image to a cocycle and precomposes the constant-sheaf comparison. Under evaluation at 1 this is the unit section map followed by the comparison to J. The derived-unit and Leray formula identifies that complex map with p. Homology therefore gives the required compatibility. This verifies compatibility of the two particular resolution comparisons, not of arbitrary additive isomorphisms.",
-   "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "lem-weil-pbc-ext-via-injective-resolution"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-ext-via-injective-resolution",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "prop-weil-pbc-inverse-image-exact",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "lem-weil-pbc-derived-unit-classical-pullback",
+  "lem-weil-pbc-sheafH-right-derived-pullback"
  ],
  "proof_origin": {
-  "by": "T2 stage 3 worker",
-  "document": "https://stacks.math.columbia.edu/tag/01FT",
-  "place": "Definition of cohomology by derived global sections; https://stacks.math.columbia.edu/tag/08J6 (Leray); https://stacks.math.columbia.edu/tag/01F8 and equations 01F9, 01FA (unit construction of pullback), specialized to abelian etale sheaves and Ext from the constant integers.",
-  "note": "Expansion of the stated steps of lem-weil-pbc-strict-local-abelian-total-exchange; no unit step is bypassed."
+  "by": "M1 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "Equations 01F9 and 01FA, factored through classical right-derived base change.",
+  "note": "Two strictly partial map comparisons are combined by explicit canonical isomorphisms; no unit route bypassed."
  },
  "mathlib_searches": [
   {
@@ -136,9 +120,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T063521-L-3160240",
+  "landing": "20261012T085303-L-24797",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

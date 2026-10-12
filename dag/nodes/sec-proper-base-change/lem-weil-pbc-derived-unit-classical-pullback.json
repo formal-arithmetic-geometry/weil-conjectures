@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-derived-unit-classical-pullback",
+ "kind": "statement",
+ "title": "Derived-unit homology map agrees with classical derived pullback",
+ "statement": "Let $X,X^{\\prime}$ be schemes [def-pc-scheme], $g:X^{\\prime}\\to X$ a morphism, $G$ an abelian sheaf on $X_{\\mathrm{et}}$ [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$. Set $K=G[0]$ [def-weil-pbc-derived-categories], $L=g^{-1}$ [def-weil-pbc-derived-inverse-image], $\\Gamma=\\Gamma(X,-)$, $\\Gamma^{\\prime}=\\Gamma(X^{\\prime},-)$ [def-weil-pbc-etale-cohomology], $P=R^+\\Gamma$ and $P^{\\prime}=R^+\\Gamma^{\\prime}$. Let $p=H^q(P(\\eta_K);\\lambda_{LK})$ be the derived-unit and Leray pullback [lem-weil-pbc-cohomology-pullback-derived-unit]. Let $a:H^q(P^{\\prime}(LK))\\xrightarrow{\\sim}H^q(P^{\\prime}((LG)[0]))$ be induced by the canonical exact-functor/single-complex isomorphism. Let $c_G:H^q(P(G[0]))\\xrightarrow{\\sim}R^q\\Gamma(G)$ and $c^{\\prime}_{LG}$ be the canonical classical single-complex comparisons. Let $e:\\Gamma\\to L\\Gamma^{\\prime}$ be the underived section map from the unit and the direct-image/global-sections isomorphism. Then $p;a;c^{\\prime}_{LG}=c_G;\\operatorname{rightDerivedBaseChange}(e,q)_G$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "Cohomology, Lemma 01F8 (lemma-functoriality), equations 01F9 (equation-functorial-derived) and 01FA (equation-functorial), Remark 01FB (remark-explain-arrow); sites-cohomology.tex Remark 08J6 for the site version."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the derived-unit and Leray formula to identify the pullback with the right-derived descendant of the underived section map. The identity-exact-functor base-change construction has the same unit compatibility; the right-derived universal property identifies the two.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply homology and transport through the exact inverse-image single-complex isomorphism and the classical single-complex comparisons. By the definition of rightDerivedBaseChange this is its component at G; the identity-functor comparisons cancel.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-derived-unit"
+ ],
+ "proof_origin": {
+  "by": "M1 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "Unit construction of cohomology pullback, equations 01F9 and 01FA.",
+  "note": "Specific interface comparison; not compatibility of arbitrary additive equivalences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext sheaf cohomology comparison with classical right derived base change and derived adjunction unit",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*(Cohomology|[Cc]ohomology)|rightDerivedBaseChange",
+   "date": "2026-10-12",
+   "results": "0 hits in Mathlib",
+   "verdict": "No exact comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "classical right derived base change agrees with homology of derived adjunction unit and Leray isomorphism",
+   "date": "2026-10-12",
+   "results": "8 hits, including Adjunction.derived, Functor.rightDerived and InjectiveResolution.isoRightDerivedObj; none states the comparison.",
+   "verdict": "No exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianDerivedGlobalExtPullback",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
+   "via": [
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedUnitClassicalPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedUnitClassicalPullback.lean",
+  "declaration": "AlgebraicGeometry.derivedUnit_classicalPullback",
+  "statement": "theorem derivedUnit_classicalPullback {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let P := (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus\n    let P' := (Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus\n    let p := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      (P.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').derivedPlus.unit.app K) ≫\n        (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _\n          (lowerStar AddCommGrpCat.{u + 1} g')\n          (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) _ _ _ _\n          (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\n            (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g'))\n          (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g')).hom.app\n            (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K))\n    let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}\n    let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}\n    let L := upperStar AddCommGrpCat.{u + 1} g'\n    let e : Γ ⋙ 𝟭 _ ⟶ L ⋙ Γ' :=\n      (Functor.rightUnitor Γ).hom ≫ (Functor.leftUnitor Γ).inv ≫\n        Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫\n        (Functor.associator _ _ _).hom ≫\n        Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom\n    p ≫ (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n        (P'.map ((L.mapDerivedCategoryPlusSingleFunctor 0).hom.app G)) ≫\n        (Γ'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app\n          (L.obj G) =\n      (Γ.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app G ≫\n        (Functor.rightDerivedBaseChange e q).app G",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-24797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-24797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
