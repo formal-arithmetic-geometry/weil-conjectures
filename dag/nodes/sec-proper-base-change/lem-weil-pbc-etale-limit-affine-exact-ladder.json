@@ -18,44 +18,34 @@
  ],
  "proof": [
   {
-   "text": "Present the affine etale sites using the affine limit and affine site-colimit theorems, and transport sheaves and inverse images through the affine sheaf equivalences. Construct an embedding of F into a compatible system E of injective sheaves by the products of direct images in Stacks 0EXZ, and take stage cokernels R. Exact inverse image gives their coefficient cocycles. Pull these systems to the limit and use exact filtered colimits to obtain 0 → L → LE → K → 0. This construction is part of the named open ladder theorem.",
+   "text": "Obtain the compatible stage and limit short exact systems from etale_limit_compatible_exact_systems, including all three components of their short-complex comparison morphisms. Build the middle degree-n cohomology diagram and cocone with etale_limit_canonical_cohomology_diagram, and apply the same theorem to the quotient system for transition invariance of its comparison legs.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+    "lem-weil-pbc-etale-limit-compatible-exact-systems",
+    "lem-weil-pbc-etale-limit-canonical-cohomology-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the canonical cohomology diagram HE and cocone BE. Long exact sequences give delta, alpha and beta. Stage injectivity gives surjectivity of delta; stage and limit exactness give delta alpha=0 and ker beta=im alpha_0. Naturality gives all comparison squares, and pullback composition and cocone naturality give transition invariance of the R legs. Apply the supplied continuation to these data. No eventual-zero assertion is used.",
+   "text": "Define delta_i and beta to be the canonical Sheaf.H.δSucc boundaries of the stage and limit sequences. Define alpha_i by H^n(bi_i) after eHE_i and alpha_0 by H^n(b) after eBE. Injective-stage cohomology vanishing gives delta_i surjective. Exactness gives delta_i alpha_i=0 and ker beta=image alpha_0. Pullback boundary naturality followed by short-complex morphism boundary naturality gives the two boundary squares. Coefficient naturality and the middle short-complex square give the alpha square. Transport the preimage of limit exactness along eBE.inv. Assemble the seven claims and apply the continuation.",
    "uses": [
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "lem-weil-pbc-ext-injective-positive-vanishing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-derived-functor-injective-vanishing",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial"
+  "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
+  "lem-weil-pbc-etale-limit-compatible-exact-systems",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "lem-weil-pbc-ext-injective-positive-vanishing",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/09YP",
-  "place": "Injective-system construction 0EXZ and stage/limit long exact sequences from 0739; named open geometric ladder theorem."
+  "place": "E2: direct compatible sheaf-system construction and canonical Ext boundaries; explicit Lean assembly of all seven ladder clauses."
  },
  "mathlib_searches": [
   {
@@ -120,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-6e169",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T135239-L-1667651",
+  "landing": "20261012T184251-L-4000461",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures with their nodes, the unchanged item signature with the clone, and proof dependencies with the induction; all delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineComparison compile cleanly; axioms are standard plus expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

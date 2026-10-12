@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-etale-limit-compatible-exact-systems",
+ "kind": "statement",
+ "title": "EtaleLimitCompatibleExactSystems",
+ "statement": "Let I be a nonempty directed preorder, D an inverse diagram of schemes [def-pc-scheme], c a cone, and F_i abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves] with coherent inverse-image transitions phi [def-weil-pbc-inverse-image]. Let G be their pullback diagram on c.pt, with coherent object identifications eG, and L a colimit cocone [def-weil-pbc-category-colimit]. There exist coherent systems FI_i of injective sheaves [def-sp-injective-resolutions] and FR_i of quotient sheaves, their pullback diagrams GI and GR, and colimit cocones LI and LR; stage short exact sequences [def-sp-abelian] F_i -> FI_i -> FR_i and a limit short exact sequence L.pt -> LI.pt -> LR.pt; morphisms r along every stage transition whose three components are phi, psi, and phiR; and morphisms t from each pulled-back stage short complex to the limit short complex whose three components are eG_i.inv followed by L.iota_i, eGI_i.inv followed by LI.iota_i, and eGR_i.inv followed by LR.iota_i. All FI_i are injective. No cohomology maps or exact cohomology rows are asserted. The existence is expressed in continuation form: every proposition implied by such data holds.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Product-of-direct-images construction; cokernels and exact filtered colimits in the dimension-shifting argument of 09YP"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Construct FI_i as the product, over arrows i to k, of direct images of Injective.under(F_k). Adjunction transposes phi followed by the canonical embeddings into the product factors. The identity factor is monic. Exact inverse image makes direct images preserve injectives; products of injectives are injective. Reindexing defines psi and proves its unit and composition laws and compatibility with the embeddings. The scheme pullbacks already have canonical coherent composition and identity comparisons; no affine-site colimit is needed.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-injective-system",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the actual stage cokernels FR_i. Exact inverse image preserves these cokernels. The universal property supplies phiR; cancelling the quotient epis proves the unit and composition equations. Compatibility of embeddings and quotients gives the morphisms r with the stated components. Pull the short exact systems to c.pt and take filtered colimits. Their exactness gives the limit short exact sequence, transported to the supplied colimit L for the first system. Coprojections define t and all three of its components; objectwise naturality proves the two commutative squares.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-of-sites-injective-system",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Product-of-direct-images construction; cokernels and exact filtered colimits in the dimension-shifting argument of 09YP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial pullback on sheaf cohomology compatible coefficient diagrams cocones",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible injective systems of sheaves short exact sequences cohomology connecting homomorphism naturality",
+   "date": "2026-10-13",
+   "results": "HomologicalComplex.HomologySequence.δ_naturality and generic homology results; no coefficient-system construction or cohomology cocone theorem",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap.*comp|etale_limit_replacement_exact_systems|map_δSucc",
+   "date": "2026-10-13",
+   "results": "Existing replacement exact systems lack stage transition morphisms and specified middle limit component. Mathlib Sheaf.functorH and generic exact sequences do not assemble the varying-site system.",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitAffineExactLadder",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-limit-affine-exact-ladder",
+   "place": "Exact ladder construction: Product-of-direct-images construction; cokernels and exact filtered colimits in the dimension-shifting argument of 09YP",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitCompatibleExactSystems",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitCompatibleExactSystems.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_compatible_exact_systems",
+  "statement": "theorem etale_limit_compatible_exact_systems {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j) (hidentity : ∀ i : I, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eG : ∀ i : I, G.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)) (hG : ∀ (i j : I) (f : i ⟶ j), G.map f = (eG i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (result : Prop) (continuation : ∀ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φR : ∀ {i j : I} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j) (hidentityR : ∀ i : I, φR (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i)) (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), φR (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φR f) ≫ φR g) (GR : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eGR : ∀ i : I, GR.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FR i)) (hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f = (eGR i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (FR i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φR f) ≫ (eGR j).inv) (LR : Cocone GR) (hLR : IsColimit LR) (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (ψ : ∀ {i j : I} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j) (hidentityI : ∀ i : I, ψ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i)) (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), ψ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ψ f) ≫ ψ g) (GI : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eGI : ∀ i : I, GI.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FI i)) (hGI : ∀ (i j : I) (f : i ⟶ j), GI.map f = (eGI i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (FI i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ψ f) ≫ (eGI j).inv) (LI : Cocone GI) (hLI : IsColimit LI) (a : L.pt ⟶ LI.pt) (b : LI.pt ⟶ LR.pt) (w : a ≫ b = 0) (hE : (ShortComplex.mk a b w).ShortExact) (ai : ∀ i : I, F i ⟶ FI i) (bi : ∀ i : I, FI i ⟶ FR i) (wi : ∀ i : I, ai i ≫ bi i = 0) (hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact) (t : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).map (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))) ⟶ ShortComplex.mk a b w) (r : ∀ (i j : I) (f : i ⟶ j), (ShortComplex.mk (ai i) (bi i) (wi i)).map (upperStar AddCommGrpCat.{u + 1} (D.map f.op)) ⟶ ShortComplex.mk (ai j) (bi j) (wi j)), (∀ (i j : I) (f : i ⟶ j), (r i j f).τ₁ = φ f) ∧ (∀ (i j : I) (f : i ⟶ j), (r i j f).τ₂ = ψ f) ∧ (∀ (i j : I) (f : i ⟶ j), (r i j f).τ₃ = φR f) ∧ (∀ i : I, (t i).τ₂ = (eGI i).inv ≫ LI.ι.app i) ∧ (∀ i : I, Injective (FI i)) ∧ (∀ i : I, (t i).τ₁ = (eG i).inv ≫ L.ι.app i) ∧ (∀ i : I, (t i).τ₃ = (eGR i).inv ≫ LR.ι.app i) → result) : result",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T184251-L-4000461",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T184251-L-4000461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

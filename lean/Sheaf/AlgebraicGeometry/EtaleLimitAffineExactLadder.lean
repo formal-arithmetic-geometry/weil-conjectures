@@ -6,14 +6,8 @@ Authors: SHEAF group H2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Sheaf.AlgebraicGeometry.EtaleLimitCompatibleExactSystems
+import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
 
 /-! # Exact connecting ladders for affine-stage cohomology
 
@@ -29,6 +23,50 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+private theorem cohomologyMap_boundary {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (hS : S.ShortExact) (n : ℕ) (z : Sheaf.H S.X₃ n) :
+    cohomologyMap f S.X₁ (n + 1) (Sheaf.H.δSucc hS n z) =
+      Sheaf.H.δSucc (hS.map_of_exact (upperStar AddCommGrpCat.{u + 1} f)) n
+        (cohomologyMap f S.X₃ n z) := by
+  change cohomologyMap f S.X₁ (n + 1) (z.comp hS.extClass rfl) =
+    (cohomologyMap f S.X₃ n z).comp
+      (hS.map_of_exact (upperStar AddCommGrpCat.{u + 1} f)).extClass rfl
+  rw [cohomologyMap_apply, cohomologyMap_apply,
+    Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_extClass]
+  exact (Abelian.Ext.comp_assoc _ _ _ (zero_add n) rfl (by omega)).symm
+
+private theorem cohomology_boundary_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (hS : S.ShortExact)
+    (S' : ShortComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (hS' : S'.ShortExact)
+    (t : S.map (upperStar AddCommGrpCat.{u + 1} f) ⟶ S')
+    (n : ℕ) (z : Sheaf.H S.X₃ n) :
+    Sheaf.H.map t.τ₁ (n + 1)
+        (cohomologyMap f S.X₁ (n + 1) (Sheaf.H.δSucc hS n z)) =
+      Sheaf.H.δSucc hS' n
+        (Sheaf.H.map t.τ₃ n (cohomologyMap f S.X₃ n z)) := by
+  exact (congrArg (Sheaf.H.map t.τ₁ (n + 1))
+    (cohomologyMap_boundary f S hS n z)).trans
+      (Sheaf.H.map_δSucc
+        (hS.map_of_exact (upperStar AddCommGrpCat.{u + 1} f)) hS' t n _)
+
+private theorem cohomology_middle_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (S' : ShortComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (t : S.map (upperStar AddCommGrpCat.{u + 1} f) ⟶ S')
+    (n : ℕ) (z : Sheaf.H S.X₂ n) :
+    Sheaf.H.map t.τ₃ n (cohomologyMap f S.X₃ n (Sheaf.H.map S.g n z)) =
+      Sheaf.H.map S'.g n (Sheaf.H.map t.τ₂ n (cohomologyMap f S.X₂ n z)) := by
+  rw [cohomologyMap_map f n S.g z]
+  exact (Sheaf.H.map_comp_apply
+    ((upperStar AddCommGrpCat.{u + 1} f).map S.g) t.τ₃ _).symm.trans
+      ((congrArg (fun h ↦ Sheaf.H.map h n (cohomologyMap f S.X₂ n z))
+        t.comm₂₃.symm).trans (Sheaf.H.map_comp_apply t.τ₂ S'.g _))
+
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 /-- Exact connecting rows and their comparison squares for an affine-stage system.
 
 Source: Stacks Project, Tag 09YP, using 0EXZ and the right-exact rows of 0739;
@@ -58,9 +96,11 @@ limit coprojections gives the β-δ and α₀-α squares. Exactness of the limit
 sequence at H^n(K) gives ker β = im α₀, without needing any acyclicity of LE.
 The R comparison legs commute with transitions by pullback composition,
 coefficient naturality, the cocycle for T, and the cocone law for K. All
-comparisons are unit compatible under affine restriction and strictification:
-the right adjoints evaluate on the same cartesian base changes, so uniqueness
-of their left adjoints gives the comparisons and their coherence.
+comparison diagrams are supplied by the existing canonical cohomology diagram
+theorem. For the quotient system, postcompose cocone naturality with the vertex
+isomorphism, insert the displayed arrow and leg formulas, cancel the source
+object isomorphism, and evaluate on a class. This gives the last comparison
+identity directly, without an affine-site presentation or strictification.
 
 No cohomological continuity in any degree is claimed by this ladder. In
 particular class descent and eventual detection of zero are separate steps.
@@ -167,6 +207,71 @@ theorem etale_limit_affine_exact_ladder
           (cohomologyMap (c.π.app (op k)) (R k) n
             (Sheaf.H.map (ρ g) n (cohomologyMap (D.map g.op) (R j) n z))) =
         Sheaf.H.map ((eT j).inv ≫ K.ι.app j) n
-          (cohomologyMap (c.π.app (op j)) (R j) n z)) → result) : result := by sorry
+          (cohomologyMap (c.π.app (op j)) (R j) n z)) → result) : result := by
+  classical
+  apply etale_limit_compatible_exact_systems
+    D c F φ hidentity hcomposition G eG hG L hL result
+  intro R ρ hidentityR hcompositionR T eT hT K hK
+    E ψ hidE hcompE GE eGE hGE LE hLE a b w hS ai bi wi hi t r hcompat
+  obtain ⟨hr₁, hr₂, hr₃, ht₂, hinj, ht₁, ht₃⟩ := hcompat
+  obtain ⟨HE, eHE, hHE, BE, eBE, hBE⟩ :=
+    etale_limit_canonical_cohomology_diagram D c E ψ hidE hcompE GE eGE hGE LE n
+  obtain ⟨HR, eHR, hHR, BR, eBR, hBR⟩ :=
+    etale_limit_canonical_cohomology_diagram
+      D c R ρ hidentityR hcompositionR T eT hT K n
+  have hlegs (j k : I) (g : j ⟶ k) (z : Sheaf.H (R j) n) :
+      Sheaf.H.map ((eT k).inv ≫ K.ι.app k) n
+          (cohomologyMap (c.π.app (op k)) (R k) n
+            (Sheaf.H.map (ρ g) n (cohomologyMap (D.map g.op) (R j) n z))) =
+        Sheaf.H.map ((eT j).inv ≫ K.ι.app j) n
+          (cohomologyMap (c.π.app (op j)) (R j) n z) := by
+    have hcat : HR.map g ≫ BR.ι.app k ≫ eBR.hom = BR.ι.app j ≫ eBR.hom := by
+      rw [← Category.assoc, BR.w g]
+    rw [hBR k, hBR j, hHR j k g] at hcat
+    simp only [Category.assoc, Iso.inv_hom_id_assoc] at hcat
+    have hh := (cancel_epi (eHR j).hom).1 hcat
+    exact congrArg (fun f ↦ f.hom z) hh
+  let δ (i : I) : Sheaf.H (R i) n →+ Sheaf.H (F i) (n + 1) :=
+    Sheaf.H.δSucc (hi i) n
+  let α (i : I) := (Sheaf.H.map (bi i) n).comp (eHE i).hom.hom
+  let α₀ := (Sheaf.H.map b n).comp eBE.hom.hom
+  let β : Sheaf.H K.pt n →+ Sheaf.H L.pt (n + 1) := Sheaf.H.δSucc hS n
+  refine continuation E ψ hidE hcompE GE eGE hGE LE hLE HE eHE hHE BE eBE hBE
+    R ρ hidentityR hcompositionR T eT hT K hK δ α α₀ β ?_
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, hlegs⟩
+  · intro i
+    have : Injective (E i) := hinj i
+    exact Sheaf.H.δSucc_surjective (hi i) n
+  · intro i v
+    exact (Sheaf.H.exact_map_δSucc (hi i) n _).2 ⟨(eHE i).hom.hom v, rfl⟩
+  · intro j k g z
+    have h := cohomology_boundary_naturality (D.map g.op)
+      (ShortComplex.mk (ai j) (bi j) (wi j)) (hi j)
+      (ShortComplex.mk (ai k) (bi k) (wi k)) (hi k) (r j k g) n z
+    rw [hr₁ j k g, hr₃ j k g] at h
+    exact h.symm
+  · intro k z
+    have h := cohomology_boundary_naturality (c.π.app (op k))
+      (ShortComplex.mk (ai k) (bi k) (wi k)) (hi k)
+      (ShortComplex.mk a b w) hS (t k) n z
+    rw [ht₁ k, ht₃ k] at h
+    exact h.symm
+  · intro k v
+    change Sheaf.H.map ((eT k).inv ≫ K.ι.app k) n
+        (cohomologyMap (c.π.app (op k)) (R k) n
+          (Sheaf.H.map (bi k) n ((eHE k).hom.hom v))) =
+      Sheaf.H.map b n (eBE.hom.hom ((BE.ι.app k).hom v))
+    have hm := cohomology_middle_naturality (c.π.app (op k))
+      (ShortComplex.mk (ai k) (bi k) (wi k)) (ShortComplex.mk a b w)
+      (t k) n ((eHE k).hom.hom v)
+    rw [ht₃ k, ht₂ k] at hm
+    have hb := congrArg (fun f ↦ f.hom v) (hBE k)
+    exact hm.trans (congrArg (Sheaf.H.map b n) hb.symm)
+  · intro y hy
+    obtain ⟨v, hv⟩ := (Sheaf.H.exact_map_δSucc hS n y).1 hy
+    refine ⟨eBE.inv.hom v, ?_⟩
+    change Sheaf.H.map b n (eBE.hom.hom (eBE.inv.hom v)) = y
+    simpa using hv
+
 
 end AlgebraicGeometry.Etale
