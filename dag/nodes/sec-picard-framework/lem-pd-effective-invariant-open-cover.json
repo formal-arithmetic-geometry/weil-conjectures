@@ -14,34 +14,31 @@
  ],
  "proof": [
   {
-   "text": "If needed, select one covering open for each point of V to obtain a small index type. Choose an effective model W_i over Y and a transport-invariant cartesian projection q_i:U_i -> W_i for each E_i. Transport compatibility of the inclusions identifies each E_i with the restriction of D. Inverse transport supplies reverse invariance. Thus each intersection U_i intersect U_j is invariant under the restricted data.",
+   "text": "Select one covering open for every point of V. This yields a point-indexed subcover in the scheme universe, including the empty scheme case. For this subcover select explicit effective witnesses W_i,q_i, their cartesian squares and transport-invariance proofs from the hypotheses.",
    "uses": [
     "def-pd-descent-datum"
    ],
    "elementary": true
   },
   {
-   "text": "The projection q_i is a base change of the fpqc cover p. Identify its double pullback with the two transports on U_i, using the effective pullback square. The invariance of U_i intersect U_j says its preimages under the two projections agree. Apply open-subscheme fpqc descent to obtain a unique open W_ij of W_i whose inverse image is U_i intersect U_j.",
+   "text": "Apply the geometric chart-construction lemma to these explicit witnesses, obtaining W_0 over Y, q_0, and a jointly covering family of open chart embeddings j_i with cartesian chart squares.",
    "uses": [
-    "lem-weil-pbc-open-subscheme-fpqc-descent",
-    "def-pd-descent-datum"
+    "lem-pd-glued-effective-model-charts"
    ],
    "elementary": false
   },
   {
-   "text": "The identity of U_i intersect U_j intertwines the two restricted data. Under the effective pullback identifications it is a compatible base-change morphism between W_ij and W_ji. Fpqc descent of morphisms supplies a unique transition isomorphism; descend the inverse likewise. Injectivity gives the inverse, identity and triple cocycle laws. The descended preimages of the triple intersections agree by uniqueness of descended opens.",
+   "text": "Form the open cover of W_0 given by j_i. Each chart square identifies U_i with the pullback of q_0 along j_i. Transport the original cartesian square of q_i along that identification. Mathlib Scheme.isPullback_of_openCover then gives IsPullback q_0 V.hom W_0.hom p.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "lem-weil-pbc-open-subscheme-fpqc-descent"
+    "def-pd-descent-datum"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use Scheme.GlueData to glue the W_i along W_ij and the transition isomorphisms to a scheme W. Their structure morphisms to Y agree on overlaps by fpqc faithfulness, so glue to W -> Y. The projections U_i -> W_i -> W agree on overlaps and glue to q:V -> W. Their cartesian squares identify the open cover U_i of V with the base changes of the covering W_i of W. The local identifications and their inverses glue to an isomorphism V = W times_Y X, so the resulting square is cartesian. For any test-scheme point a of V, restrict its source to the inverse images of the U_i. On each such open transport compatibility and invariance of q_i give invariance of q; morphism extensionality on an open cover gives it globally. Thus W and q witness D.IsEffective. If V is empty, use the empty Y-scheme, whose pullback is empty; transport invariance is unique.",
+   "text": "For any test-scheme point a over f_1, choose around each source point the inverse image A of one U_i containing its image. The restriction b:A to U_i is morphismRestrict. Naturality of D identifies its restricted transport with the transport of b followed by inclusion, using the given compatibility. The chart-square equation changes inclusion followed by q_0 to q_i followed by j_i. Transport invariance of q_i proves the desired equality on A. Scheme.hom_ext_of_forall proves the global equality. Package this equality and the global cartesian square as D.IsEffective.",
    "uses": [
-    "lem-weil-pbc-glue-schemes",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "def-pd-descent-datum"
+    "def-pd-descent-datum",
+    "lem-weil-pbc-scheme-morphism-gluing"
    ],
    "elementary": false
   }
@@ -49,7 +46,7 @@
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Descent, Tag 0AP4, proof; the omitted cocycle and local transport checks are written out in transport form"
+  "place": "Descent, Tag 0AP4; geometric charts split into lem-pd-glued-effective-model-charts, with global cartesianness and transport invariance proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -121,9 +118,7 @@
  },
  "proof_deps": [
   "def-pd-descent-datum",
-  "lem-weil-pbc-open-subscheme-fpqc-descent",
-  "lem-galois-fpqc-morphisms-descend",
-  "lem-weil-pbc-glue-schemes",
+  "lem-pd-glued-effective-model-charts",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "reviewed": {
@@ -140,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T085225-L-8472",
+  "landing": "20261012T095912-L-320104",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

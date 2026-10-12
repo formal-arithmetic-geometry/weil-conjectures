@@ -7233,3 +7233,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineBasePieceTensorPresentation (stage 3; reviewer PASS; first push; landing 20261012T095911-L-319802 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/K1/Sheaf.RingTheory.MinimalPresentationTor (stage 3; reviewer PASS; first push; landing 20261012T095911-L-319899 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/K2/Sheaf.AlgebraicGeometry.HigherDirectImageLocalSectionVanishing (stage 3; reviewer PASS; first push; landing 20261012T095911-L-320000 (interface); batch 20261012T095846; modules 2; new nodes 1)
+- 09:59 L: merged deliver/K2/Sheaf.AlgebraicGeometry.InvariantOpenEffectiveDescent (stage 3; reviewer PASS; first push; landing 20261012T095912-L-320104 (interface); batch 20261012T095846; modules 2; new nodes 1)

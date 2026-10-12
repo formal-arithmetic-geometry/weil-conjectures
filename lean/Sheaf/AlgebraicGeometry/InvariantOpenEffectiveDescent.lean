@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
-import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import Sheaf.AlgebraicGeometry.GluedEffectiveModelCharts
+import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Gluing
 
 /-!
@@ -58,6 +58,71 @@ theorem isEffective_of_effective_open_cover
       ((E i).transport f₁ f₂ h a).left ≫ (U i).ι =
         (D.transport f₁ f₂ h (Over.homMk (a.left ≫ (U i).ι)
           (by simpa only [Over.mk_hom, Category.assoc] using Over.w a))).left)
-    (heffective : ∀ i, (E i).IsEffective) : D.IsEffective := by sorry
+    (heffective : ∀ i, (E i).IsEffective) : D.IsEffective := by
+  classical
+  -- Point-indexed subcovers keep the geometric gluing in the universe of schemes.
+  choose idx hidx using hcover
+  let U' : V.left → V.left.Opens := fun x ↦ U (idx x)
+  let E' := fun x : V.left ↦ E (idx x)
+  have hc : ∀ x : V.left, ∃ y, x ∈ U' y := fun x ↦ ⟨x, hidx x⟩
+  choose W q hcart hinv using fun x : V.left ↦ heffective (idx x)
+  obtain ⟨W₀, q₀, j, hj, hjcover, hjY, hchart⟩ :=
+    exists_glued_effective_model_charts hp D U' hc E'
+      (fun x ↦ hcompat (idx x)) W q hcart hinv
+  let 𝒲 : W₀.left.OpenCover := {
+    I₀ := V.left
+    X := fun x ↦ (W x).left
+    f := j
+    mem₀ := by
+      rw [Scheme.presieve₀_mem_precoverage_iff]
+      exact ⟨fun w ↦ by
+        obtain ⟨i, z, hz⟩ := hjcover w
+        exact ⟨i, ⟨z, hz⟩⟩, hj⟩ }
+  refine ⟨W₀, q₀, ?_, ?_⟩
+  · apply Scheme.isPullback_of_openCover q₀ V.hom W₀.hom p 𝒲
+    intro i
+    apply (hcart i).of_iso (hchart i).flip.isoPullback
+      (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    · simp [𝒲, Scheme.Cover.pullbackHom]
+    · change (U' i).ι ≫ V.hom =
+        (hchart i).flip.isoPullback.hom ≫ Limits.pullback.fst q₀ (j i) ≫ V.hom
+      simp
+    · simpa [𝒲] using (hjY i).symm
+    · simp
+  · intro T f₁ f₂ h a
+    apply Scheme.hom_ext_of_forall
+    intro x
+    obtain ⟨i, hi⟩ := hc (a.left x)
+    let A : T.Opens := a.left ⁻¹ᵁ U' i
+    let g : A.toScheme ⟶ T := A.ι
+    let b : Over.mk (g ≫ f₁) ⟶ Over.mk ((U' i).ι ≫ V.hom) :=
+      Over.homMk (a.left ∣_ U' i) (by
+        change (a.left ∣_ U' i) ≫ (U' i).ι ≫ V.hom = g ≫ f₁
+        rw [← Category.assoc, morphismRestrict_ι, Category.assoc, Over.w a]
+        rfl)
+    have hb : b.left ≫ (U' i).ι = g ≫ a.left := morphismRestrict_ι a.left (U' i)
+    have heq : (Over.homMk g : Over.mk (g ≫ f₁) ⟶ Over.mk f₁) ≫ a =
+        Over.homMk (b.left ≫ (U' i).ι)
+          (by simpa only [Over.mk_hom, Category.assoc] using Over.w b) := by
+      ext
+      exact hb.symm
+    have ht := D.transport_homMk_comp g f₁ f₂ h a
+    rw [heq] at ht
+    have ht' := congrArg (fun c ↦ c.left) ht
+    simp only [Over.comp_left, Over.homMk_left] at ht'
+    have hk := hcompat (idx i) (g ≫ f₁) (g ≫ f₂)
+      (by simpa only [Category.assoc] using congrArg (fun k ↦ g ≫ k) h) b
+    have hq := (hchart i).w
+    refine ⟨A, hi, ?_⟩
+    change g ≫ (D.transport f₁ f₂ h a).left ≫ q₀ = g ≫ a.left ≫ q₀
+    rw [← Category.assoc, ← ht', ← hk]
+    simp only [Category.assoc]
+    calc
+      ((E' i).transport (g ≫ f₁) (g ≫ f₂) _ b).left ≫ (U' i).ι ≫ q₀ =
+          ((E' i).transport (g ≫ f₁) (g ≫ f₂) _ b).left ≫ q i ≫ j i := by rw [← hq]
+      _ = b.left ≫ q i ≫ j i := by
+        simpa only [Category.assoc] using
+          congrArg (fun k ↦ k ≫ j i) (hinv i (g ≫ f₁) (g ≫ f₂) _ b)
+      _ = g ≫ a.left ≫ q₀ := by rw [hq, ← Category.assoc, hb, Category.assoc]
 
 end CategoryTheory.Over.DescentDatum
