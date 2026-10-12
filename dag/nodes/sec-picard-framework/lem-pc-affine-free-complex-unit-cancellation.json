@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-affine-free-complex-unit-cancellation",
+ "kind": "statement",
+ "title": "Affine free cochain complex cancellation from a supplied unit coefficient",
+ "statement": "Let $R$ be a commutative ring, $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and $P$ a cochain complex [def-pc-derived-category] of $\\mathcal O_S$-modules [def-weil-sheaf-of-modules-category]. Let $n:\\mathbf Z\\to\\mathbf N$ and choose free-sheaf identifications $e_j:P^j\\cong\\mathcal O_S^{n(j)}$ [def-weil-pbc-free-module]. Fix $i\\in\\mathbf Z$, a basis index $p$ in degree $i$, and a basis index $q$ in degree $i+1$. Suppose the $(q,p)$ coefficient of $e_{i+1}d^ie_i^{-1}$ is a unit of $\\Gamma(S,\\mathcal O_S)$. There exists a cochain complex $P\\prime$ homotopy equivalent to $P$ whose terms are free of sizes $n(j)-1$ when $j=i$ or $j=i+1$, and of sizes $n(j)$ otherwise. Moreover $P\\prime{}^j\\cong P^j$ for every $j\\ne i,i+1$. No support bounds, local-ring assumption, residue map or nonzero residue differential is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT (lemma-add-trivial-complex), splitting and its contracting identity summand; read at https://stacks.math.columbia.edu/tag/00MT"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-spec-tilde-free-module] to identify each term with the associated sheaf of its finite free module. The fully faithful additive tilde functor lifts the conjugated differentials and their complex equations. Its global-sections isomorphism identifies the given unit coefficient with the corresponding module coefficient. Reindex the lifted complex by j ↦ -j and its ULift bases by Fin.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-free-complex-unit-entry-splits] at degree -i to the supplied unit entry. It produces a complementary chain complex with ranks n(i)-1 and n(i+1)-1 at the two affected degrees and ranks n(j) elsewhere, together with a split identity complex and termwise differential-compatible direct-sum isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-free-complex-unit-entry-splits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Contract the identity summand: the homotopy is the inverse of its sole nonzero differential in the opposite direction and zero elsewhere. The homotopy equation is the identity in each of the two nonzero degrees; outside them every summand map is zero. Projection to the complement and inclusion back compose to the identity on the complement and to a map homotopic to the identity on the original complex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the additive tilde functor to the complement, projection, inclusion and homotopy, and reverse the grading. The functor preserves compositions, sums and zero, so the homotopy equations hold after applying it. The complementary bases give the displayed free-sheaf isomorphisms by [lem-weil-pbc-spec-tilde-free-module]. At every other degree the identity summand is zero, so the original direct-sum isomorphism identifies the complementary term with the original term.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-free-complex-unit-entry-splits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT (lemma-add-trivial-complex), splitting and its contracting identity summand; read at https://stacks.math.columbia.edu/tag/00MT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A unit coefficient in a differential of a finite free complex splits off a contractible summand and gives a homotopy equivalent complex",
+   "results": "ChainComplex.alternatingConstHomotopyEquiv; HomologicalComplex.homotopyCofiber.XIso; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv; instQFactorsThroughHomotopyDown; AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId; AlgebraicTopology.DoldKan.Γ₀NondegComplexIso; HomotopyEquiv.instInhabited; CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv; no unit-cancellation theorem found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*(cancel|splitt)|contractible.*summand|tildeFinsupp",
+   "results": "Mathlib/NumberTheory/LucasLehmer.lean; Mathlib/GroupTheory/OreLocalization/Basic.lean; Mathlib/GroupTheory/OreLocalization/Basic.lean; Mathlib/GroupTheory/HNNExtension.lean; Mathlib/GroupTheory/HNNExtension.lean; Mathlib/GroupTheory/HNNExtension.lean; Mathlib/GroupTheory/HNNExtension.lean; Mathlib/GroupTheory/HNNExtension.lean; no unit-cancellation theorem found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv, ChainComplex",
+   "results": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv; ChainComplex.alternatingConstHomotopyEquiv; AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv; no unit-cancellation theorem found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit coefficient of a differential in a finite free cochain complex gives a homotopy equivalent complement with the two ranks decreased by one",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkUnitCancellationAt",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof step 4: unit-entry cancellation and contraction of the split identity complex",
+   "via": [
+    "lem-pc-finite-free-stalk-unit-cancellation-at",
+    "lem-pc-finite-free-stalk-unit-cancellation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeComplexUnitCancellation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeComplexUnitCancellation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_free_complex_unit_cancellation",
+  "statement": "theorem exists_affine_free_complex_unit_cancellation (R : CommRingCat.{u})\n    (P : CochainComplex (Spec R).Modules ℤ) (n : ℤ → ℕ)\n    (e : ∀ j : ℤ, P.X j ≅ SheafOfModules.free\n      (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin (n j))))\n    (i : ℤ) (p : ULift.{u} (Fin (n i))) (q : ULift.{u} (Fin (n (i + 1))))\n    (hunit : IsUnit (freeMatrix ((e i).inv ≫ P.d i (i + 1) ≫ (e (i + 1)).hom) q p)) :\n    ∃ P' : CochainComplex (Spec R).Modules ℤ,\n      Nonempty (HomotopyEquiv P P') ∧\n      (∀ j : ℤ, Nonempty (P'.X j ≅ SheafOfModules.free\n        (R := (Spec R).ringCatSheaf)\n        (ULift.{u} (Fin (if j = i ∨ j = i + 1 then n j - 1 else n j))))) ∧\n      (∀ j : ℤ, j ≠ i → j ≠ i + 1 → Nonempty (P'.X j ≅ P.X j))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T184328-L-4013690",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T184328-L-4013690",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

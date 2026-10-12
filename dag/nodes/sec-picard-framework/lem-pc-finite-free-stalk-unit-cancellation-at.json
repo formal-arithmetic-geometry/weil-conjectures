@@ -15,41 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-pbc-spec-tilde-free-module] (Mathlib tildeFinsupp and isoTop) to identify each chosen free sheaf with the sheaf associated to the finite free module on ULift(Fin(n(j))). Morphisms between these free sheaves are determined by their generator images (SheafOfModules.freeHomEquiv). Reading these images in global sections gives their matrices over the stalk. The pullbackFreeIso identifications send each generator to the corresponding generator; naturality of the pullback unit says the coefficient r becomes its residue image. Thus a nonzero pulled-back differential has a coefficient whose residue is nonzero.",
-   "uses": [
-    "lem-weil-pbc-spec-tilde-free-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The specified nonzero residue differential has a nonzero coefficient. Its lift is outside the maximal ideal of the local stalk, hence is a unit. Both supplied degrees i and i+1 lie in [0,d] by i<d.",
+   "text": "Choose the supplied free identifications and conjugate the indicated differential to a map φ of finite free sheaves. Its pulled-back conjugate δ is nonzero by cancellation of the pulled-back isomorphisms. A map of finite free sheaves with zero matrix is zero: write the identity as the finite sum of coordinate projection followed by inclusion, and use naturality to determine each unit-sheaf endomorphism by its value at 1 on the terminal open. Therefore freeMatrix δ has a nonzero coefficient.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Reverse the grading, replace ULift(Fin(n(j))) by Fin(n(j)) using its canonical equivalence, and apply [lem-weil-pbc-free-complex-unit-entry-splits] to the unit coefficient. Its complement has rank one less at the two affected degrees and unchanged ranks elsewhere. The split identity complex is contractible: its homotopy has the inverse of its differential in the reverse direction and zero in every other position. The homotopy identity is the identity map in the two affected degrees and the unique zero map outside them. The direct-sum decomposition therefore gives projection and inclusion inverse up to this homotopy.",
+   "text": "The proved upstream freeMatrix_pullback formula identifies this coefficient with g.appTop applied to the same coefficient a of φ. Naturality of ΓSpecIso identifies that image with the residue of ΓSpecIso(a). The residue-ne-zero criterion for the local stalk proves ΓSpecIso(a) is a unit; the inverse global-sections ring isomorphism proves a is a unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pc-affine-free-complex-unit-cancellation] with the supplied pivot indices and this unit coefficient. It gives a homotopy equivalent complementary complex, explicit sizes decreased by one at the two specified degrees, and termwise isomorphisms with the original complex elsewhere.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
+    "lem-pc-affine-free-complex-unit-cancellation"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the additive associated-sheaf functor to the complement, the projection, inclusion and contracting homotopy, and reverse grading back. Functorial preservation of composition, addition, identities and zero carries the homotopy equations to the sheaf complex. Its basis identifications give its free terms by [lem-weil-pbc-spec-tilde-free-module]. Both cancelled degrees lie inside [0,d]; outside that interval the complement agrees up to isomorphism with the original zero term. Thus the support bounds persist. Record the two exact rank equalities and equality in every other degree. No iteration or minimality conclusion is used.",
-   "uses": [
-    "lem-weil-pbc-spec-tilde-free-module"
-   ],
-   "elementary": false
+   "text": "Set n\\prime(j) to n(j)-1 at i and i+1 and to n(j) elsewhere. Below 0 and above d neither cancelled degree occurs, since 0≤i<i+1≤d; transfer the original zero terms along the supplied unchanged-term isomorphisms. This proves both strict support bounds. The two Fin pivot indices prove n(i)>0 and n(i+1)>0, so natural subtraction yields n\\prime(i)+1=n(i) and n\\prime(i+1)+1=n(i+1). The remaining rank equations are the other branch of the definition of n\\prime.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-tilde-free-module",
-  "lem-weil-pbc-free-complex-unit-entry-splits"
+  "lem-pc-affine-free-complex-unit-cancellation"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C2",
+  "group": "P2",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00MT, https://stacks.math.columbia.edu/tag/00MT, read in second review; fixed-degree matrix cancellation and sheafification, with degree selection removed"
+  "place": "Tag 00MT (lemma-add-trivial-complex), splitting and its contracting identity summand; read at https://stacks.math.columbia.edu/tag/00MT; residue detection, support preservation and rank arithmetic proved in Lean; affine splitting/contraction isolated"
  },
  "mathlib_searches": [
   {
@@ -124,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T173812-L-3291614",
+  "landing": "20261012T184328-L-4013690",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
