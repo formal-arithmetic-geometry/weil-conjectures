@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-generating-sections-stalk-span",
+ "kind": "statement",
+ "title": "Finite generating sections are detected by their stalk spans",
+ "statement": "Let $Y$ be a scheme and $M$ an $\\mathcal O_Y$-module. Let $I$ be a finite set and $s_i$ a family of global sections. Using the stalk modules and germs of [def-weil-pbc-module-stalk], the sections generate $M$ in the sense of [def-weil-pbc-generating-sections] if and only if, for every $y\\in Y$, the $\\mathcal O_{Y,y}$-span of the germs $s_{i,y}$ is all of $M_y$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Definition 01AM; Sheaves Lemma 0H7H(2); the finite direct-sum stalk calculation is step 2 of lem-weil-pbc-invertible-generating-sections-fibre."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-generating-sections"
+ ],
+ "proof": [
+  {
+   "text": "Form the free sheaf morphism f associated to the sections. On every open U its i-th component sends a to a times s_i restricted to U. This follows from unitHomEquiv and freeHomEquiv.",
+   "uses": [
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map on stalks is linear over the ring stalk. The identity on the finite free sheaf is the sum of the inclusions composed with coordinate projections (sum_freeπ_ιFree). Represent a stalk element by a section; applying this identity, f, and the germ map writes its image as a sum of coefficient germs times s_{i,y}. Conversely each s_{i,y} is the image of the germ of the i-th basis section. Thus the linear stalk map has range equal to the span of the germs.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The forgetful functor to abelian sheaves preserves colimits and hence epimorphisms. The abelian-sheaf stalk functor is a left adjoint and hence preserves epimorphisms. Epimorphisms of abelian groups are surjective, proving the forward direction. Conversely, range equal to top makes each stalk map surjective; epi_of_surjective_stalk, using the local-surjectivity criterion, gives the reverse direction.",
+   "uses": [
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-locally-surjective-iff-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Definition 01AM; Sheaves Lemma 0H7H(2); the finite direct-sum stalk calculation is step 2 of lem-weil-pbc-invertible-generating-sections-fibre."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections generate a sheaf of modules if and only if they span each stalk",
+   "results": "Service unavailable: Internal Server Error (msearch.py). No verdict from this service.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a sheaf of modules generate iff their germs span every stalk",
+   "results": "GeneratingSections and LocalGeneratorsData, but no stalk-span equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv|stalk.*Surjective|span.*germ in Mathlib and both library roots; blueprint_refs search generating stalk",
+   "results": "epi_of_surjective_stalk, sum_freeπ_ιFree and Hom.stalkLinearMap are proved tools in WeilConjectures. No existing span criterion; blueprint search returned zero.",
+   "date": "2026-10-12",
+   "verdict": "assembled from existing proved tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reduction-projective-space",
+   "place": "step 5 of its split (source: Lemma 0A4F (label lemma-reduce-to-P1), proof, last paragraph (\"For every $n \\geq 1$ there is a finite surjective morphism ... Applying Lemmas 0A4C, 0A4E, 0A4D one more time\"))",
+   "via": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-symmetric-product-over-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeneratingSectionsStalkSpan",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeneratingSectionsStalkSpan.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.generating_sections_iff_stalk_span",
+  "statement": "theorem generating_sections_iff_stalk_span (Y : Scheme.{u}) (M : Y.Modules) {I : Type u} [Finite I] (s : I → M.sections) : Epi (M.freeHomEquiv.symm s) ↔ ∀ y : Y, Submodule.span (Y.presheaf.stalk y) (Set.range fun i ↦ (TopCat.Presheaf.germ M.val.presheaf ⊤ y trivial) ((s i).val (Opposite.op ⊤))) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T153010-L-2350483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T153010-L-2350483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

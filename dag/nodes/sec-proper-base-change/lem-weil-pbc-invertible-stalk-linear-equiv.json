@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-invertible-stalk-linear-equiv",
+ "kind": "statement",
+ "title": "Each stalk of an invertible module is a rank-one module",
+ "statement": "Let $Y$ be a scheme, $L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module], and $y\\in Y$. With the stalk module structure of [def-weil-pbc-module-stalk], there exists an $\\mathcal O_{Y,y}$-linear equivalence $L_y\\cong\\mathcal O_{Y,y}$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Lemma 01CY, proof: the stalk of an invertible module is free of rank one; expanded local trivialization argument (step 3 of lem-weil-pbc-invertible-generating-sections-fibre)."
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Choose an open neighbourhood U of y and an isomorphism of the pullback of L with the unit by IsInvertible.exists_isoUnit. Compose with restrictFunctorIsoPullback, transport the unit free generator across the inverse trivialization, and use isFreeGenerator_restrict_iff to obtain a free generator t of L on U.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The linear map a ↦ a • germ(t) from O_{Y,y} to L_y is bijective. For surjectivity represent a module germ on a neighbourhood V contained in U and write its representing section uniquely as a multiple of t restricted to V. For injectivity represent two scalar germs on neighbourhoods inside U, turn equality of their multiples into section equality on a common smaller neighbourhood using germ_eq, and cancel the restricted free generator. Taking scalar germs then gives equality of the original scalars. LinearMap.toSpanSingleton is this linear map; LinearEquiv.ofBijective and its inverse yield the asserted equivalence. Use the existing stalk_generator_bijective theorem from Sheaf.Paper.NonvanishingSectionTrivializes (accessible via import all); no copy of that theorem is declared here.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Lemma 01CY, proof: the stalk of an invertible module is free of rank one; expanded local trivialization argument (step 3 of lem-weil-pbc-invertible-generating-sections-fibre). H2 second reader proves the germ argument using existing restriction/free-generator tools; no new unproved premise. Returned-delivery repair: import all Sheaf.Paper.NonvanishingSectionTrivializes and reuse its existing private stalk_generator_bijective theorem instead of duplicating it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of invertible sheaf is free of rank one",
+   "results": "Service unavailable: Internal Server Error (msearch.py). No verdict from this service.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections generate an invertible sheaf iff at every point some germ is outside the maximal ideal times the stalk",
+   "results": "mem_basicOpen and isUnit_of_isUnit_germ for the structure sheaf only; no arbitrary invertible-module stalk trivialization.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*Linear|stalk.*basis|IsInvertible.*stalk across Mathlib, WeilConjectures, Sheaf; blueprint_refs search invertible stalk",
+   "results": "restrictStalkNatIso, restrictFunctorIsoPullback, Hom.stalkLinearMap. InvertibleModuleGenericStalk requires IsIntegral and does not apply to arbitrary schemes; no exact rank-one equivalence. Blueprint search returned zero.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reduction-projective-space",
+   "place": "step 5 of its split (source: Lemma 0A4F (label lemma-reduce-to-P1), proof, last paragraph (\"For every $n \\geq 1$ there is a finite surjective morphism ... Applying Lemmas 0A4C, 0A4E, 0A4D one more time\"))",
+   "via": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-symmetric-product-over-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InvertibleStalkLinearEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleStalkLinearEquiv.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invertible_stalk_linearEquiv",
+  "statement": "theorem invertible_stalk_linearEquiv (Y : Scheme.{u}) (L : Y.Modules) [L.IsInvertible] (y : Y) : Nonempty (↑(TopCat.Presheaf.stalk L.val.presheaf y) ≃ₗ[Y.presheaf.stalk y] ↑(Y.presheaf.stalk y))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T153010-L-2350483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T153010-L-2350483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
