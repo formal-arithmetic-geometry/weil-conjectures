@@ -1,6 +1,7 @@
 module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.GeometricRegularityFieldIso
 @[expose] public section
 universe u
 /-- Geometric regularity over a domain is preserved after changing the chosen
@@ -18,4 +19,10 @@ theorem fractionField_geometricallyRegular_tensorProduct_transport
     (h : Algebra.IsGeometricallyRegular (⊥ : Ideal A).ResidueField
       ((⊥ : Ideal A).Fiber C)) :
     Algebra.IsGeometricallyRegular K (TensorProduct A K C) := by
-  sorry
+  let e : (⊥ : Ideal A).ResidueField ≃ₐ[A] K :=
+    IsLocalization.algEquiv (nonZeroDivisors A) _ _
+  let E := Algebra.TensorProduct.congr e (AlgEquiv.refl : C ≃ₐ[A] C)
+  apply Algebra.isGeometricallyRegular_of_fieldIso e.toRingEquiv E.toRingEquiv ?_ h
+  intro x y
+  simp only [Algebra.smul_def, map_mul]
+  congr 1
