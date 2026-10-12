@@ -245,4 +245,63 @@ theorem DerivedCategory.supportCondition_shift_rightDerivedLowerShriek {X Y : Sc
   rw [hδ]
   exact_mod_cast (by lia : δ ≤ i.toNat)
 
+open _root_.DerivedCategory in
+/-- The support estimate for the ordinary direct image `Rf_*` along a morphism of finite type
+between schemes of finite type over a field, reduced by dévissage to its pointwise form for a
+constructible sheaf `G` (Stacks `0F0X`): if every geometric point `s` over `y ∈ Y` with
+`s^* Rᵠf_* G ≠ 0` has `q ≤ N` and `dim {y}⁻ ≤ N - q` whenever `dim supp G ≤ N`, then for a
+bounded constructible `K` with `K[n]` satisfying the support condition, `(Rf_* K)[n + d]`
+satisfies it, for every `d ≥ 0`. (blueprint: `lem-per-artin-gabber-affine-curve`, Step 3) -/
+theorem DerivedCategory.supportCondition_shift_rightDerivedLowerStar_of_stalk {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f]
+    (hP : ∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf G]
+      {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) (q : ℤ),
+      ¬ IsZero (((s)^*[ModuleCat.{u + 1} Λ]).obj
+        ((homologyFunctor _ q).obj ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+          ((singleFunctor _ 0).obj G)))) →
+      (sheafSupport G).Nonempty ∧ ∀ N : ℕ, topologicalKrullDim (sheafSupport G) ≤ (N : ℕ∞) →
+        q ≤ N ∧ topologicalKrullDim (closure {s.base (IsLocalRing.closedPoint Ω)} : Set Y) ≤
+          ((N - q).toNat : ℕ∞))
+    (d : ℕ) {n : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.SupportCondition (K⟦n⟧))
+    (hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.SupportCondition (((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)⟦n + d⟧) := by
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
+  have hN := boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f
+    (f ≫ aY) aY rfl K hK'
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hKc⟩ := hK'
+  intro i hi
+  rw [DerivedCategory.sheafSupport_homology_shift] at hi ⊢
+  have : IsConstructibleSheaf ((homologyFunctor _ (n + d + -i)).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)) := hN.2 _
+  -- the dimension of the closure of a point with nonzero stalk
+  have key (y : Y) (hy : y ∉ stalkZeroLocus ((homologyFunctor _ (n + d + -i)).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K))) :
+      0 ≤ i ∧ topologicalKrullDim (closure {y} : Set Y) ≤ (i.toNat : ℕ∞) := by
+    obtain ⟨Ω, _, _, s, rfl, hs⟩ := exists_not_isZero_upperStar_of_notMem_stalkZeroLocus _ hy
+    let Φ := R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((s)^*[ModuleCat.{u + 1} Λ])
+    have hΦ : ¬ IsZero ((homologyFunctor _ (n + d + -i)).obj (Φ.obj K)) := fun h ↦
+      hs (h.of_iso ((leftDerivedUpperStarHomologyFunctorIso _ s _).app _))
+    have : K.IsLE (a + ((b - a + 1).toNat : ℕ) - 1) :=
+      TStructure.t.isLE_of_le K b _ (by lia)
+    obtain ⟨c, hc⟩ :=
+      _root_.DerivedCategory.exists_not_isZero_homology_obj_singleFunctor Φ _ a K ha this _ hΦ
+    have : IsConstructibleSheaf ((homologyFunctor _ c).obj K) := hKc c
+    obtain ⟨hne, hdim⟩ := hP ((homologyFunctor _ c).obj K) s _ fun h ↦
+      hc (h.of_iso ((leftDerivedUpperStarHomologyFunctorIso _ s _).app _).symm)
+    -- the support condition for `Hᶜ K`
+    have hG := hK (n - c)
+    have hnc : n + -(n - c) = c := by ring
+    rw [DerivedCategory.sheafSupport_homology_shift, hnc] at hG
+    obtain ⟨h₀, h₁⟩ := hG hne
+    obtain ⟨hq, hδ⟩ := hdim (n - c).toNat h₁
+    refine ⟨by lia, hδ.trans ?_⟩
+    exact_mod_cast (by lia : ((((n - c).toNat : ℕ) : ℤ) - (n + d + -i - c)).toNat ≤ i.toNat)
+  obtain ⟨y, hy⟩ := (sheafSupport_nonempty_iff _).1 hi
+  exact ⟨(key y hy).1, topologicalKrullDim_sheafSupport_le _ _ fun y hy ↦ (key y hy).2⟩
+
 end AlgebraicGeometry.Etale
