@@ -15,48 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Pull the two finite clopen coproducts back to Z. Pasting identifies the two ambient schemes with Z times_X Y, and the commuting square identifies their maps to W times_X Y. The pulled-back pieces remain a coproduct and their projections are isomorphisms to Z.",
+   "text": "Pull D1,D2 back along g1,g2 with the explicit splitting pullback theorem. Obtain E1,E2 over Z and bijections e1,e2 with section compatibility.",
    "uses": [
-    "def-weil-pbc-finite-etale-trace-splitting-data",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-closed-immersion"
+    "lem-weil-pbc-finite-etale-trace-splitting-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Intersect every pair of sheets. Projection through either sheet isomorphism gives the same clopen subset of Z. At a point, the two clopen coproduct partitions give exactly one matching second sheet for each first sheet and conversely, hence a bijection. Intersect finitely many clopen matching loci to obtain a neighbourhood where this bijection is constant.",
+   "text": "The inverse projection identities convert the cocone of each E into a coproduct cocone of copies of Z: define descent by first projecting each old piece to Z; the inverse identities prove its factorization and uniqueness. Apply the finite-section-coproduct local permutation theorem to obtain a neighbourhood U_z and a matching bijection for every point z of Z.",
    "uses": [
     "def-weil-pbc-finite-etale-trace-splitting-data",
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion"
+    "lem-weil-pbc-finite-section-coproduct-local-permutation"
    ],
    "elementary": false
   },
   {
-   "text": "The neighbourhoods cover Z. On each, matching sections factor through the same intersection piece and invert its projection, so coincide; compose to the common ambient pullback over W using the commuting square. Their inclusion arrows give R. If the index sets cannot be bijected, the pointwise construction forces Z empty and the empty presieve covers vacuously.",
+   "text": "Regard U_z as an etale X-scheme and its inclusion k_z as a site arrow. Let R be their ofArrows presieve. Each point z is in the range of k_z, so the small etale jointly-surjective criterion proves it covers; an empty Z gives an empty point-indexed covering. On k_z use e1, the local matching bijection and inverse e2 as the final bijection. Rewrite sections by the transport equations. Functoriality and g1 followed by h1 equals g2 followed by h2 identify the induced maps to B_f(W). Compose the local equality to give the desired equality.",
    "uses": [
-    "def-pc-fibre-product",
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-finite-etale-trace-splitting-data"
+    "lem-weil-pbc-finite-etale-trace-splitting-pullback",
+    "lem-weil-pbc-finite-section-coproduct-local-permutation"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-finite-etale-trace-splitting-data",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-open-fibre-product"
+  "lem-weil-pbc-finite-etale-trace-splitting-pullback",
+  "lem-weil-pbc-finite-section-coproduct-local-permutation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1.; explicit elaboration in Lean using Mathlib coproducts and open immersion lifts"
  },
  "mathlib_searches": [
   {
@@ -139,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-cbf30",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T110259-L-613771",
+  "landing": "20261012T135240-L-1668128",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean statements and proofs with their nodes; existing signature unchanged, delivered modules and direct importer FiniteEtaleTraceSplitSumCompatibility compile cleanly, and all proved declarations use only permitted axioms."
  }
 }

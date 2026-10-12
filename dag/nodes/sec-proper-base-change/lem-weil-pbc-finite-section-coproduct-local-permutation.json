@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-finite-section-coproduct-local-permutation",
+ "kind": "statement",
+ "title": "Local permutation between finite coproducts of sections",
+ "statement": "Let $S,P$ be schemes [def-pc-scheme], $p:P\\to S$ a morphism, and $J_1,J_2$ finite sets. Let $s_{r,j}:S\\to P$ ($r=1,2$) satisfy $p\\circ s_{r,j}=\\mathrm{id}_S$, and suppose $(P,(s_{r,j})_{j\\in J_r})$ is a coproduct cocone of copies of $S$ [lem-weil-pbc-scheme-coproduct-family]. For every point $z\\in S$ there exist an open subscheme $U\\subseteq S$ containing $z$, with inclusion $\\iota_U$ [def-weil-open-immersion], and a bijection $e:J_1\\simeq J_2$ such that $s_{1,j}\\circ\\iota_U=s_{2,e(j)}\\circ\\iota_U$ for all $j$. Empty index sets and schemes are allowed. No etaleness or separatedness assumption on $p$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Identify each cocone with the standard coproduct by its universal property. The coproduct underlying space is the disjoint union of the copies of S, and its inclusions are open immersions. Let a_r be the resulting homeomorphisms, with a_r(j,x)=s_r(j)(x). In Lean these are sigmaMk followed by the homeomorphism of the unique colimit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define r_1(j) to be the first coordinate of a_2 inverse applied to s_1(j)(z), and define r_2 symmetrically. Applying p shows the second coordinate is z. Hence s_2(r_1(j))(z)=s_1(j)(z) and the symmetric equality holds. Injectivity of a_1,a_2 implies injectivity of j mapped to s_r(j)(z). The displayed equalities make r_1 and r_2 mutual inverses, defining e.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Intersect, over the finite index set J_1, the inverse images under s_1(j) of the open images of s_2(e(j)). This open U contains z. The composite of its inclusion and s_1(j) has image in the open immersion s_2(e(j)), so it factors through it. Postcomposing this factorization with p shows the factor equals the inclusion of U, because each s_r(j) is a section. This is the asserted equality of scheme morphisms. Empty schemes have no point z; if z exists an empty coproduct is impossible, as its disjoint-union space is empty.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1.; explicit elaboration in Lean using Mathlib coproducts and open immersion lifts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coproducts of sections of a scheme morphism locally agree up to a bijection of the indices",
+   "results": "LeanSearch returned Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite clopen decompositions of a scheme into sections of a morphism differ locally by a permutation",
+   "results": "LeanFinder found scheme gluing and open-cover declarations, but no local permutation statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaMk|sigmaOpenCover|disjoint_opensRange_sigmaι",
+   "results": "Limits.lean:202,241,247,252 supplies coproduct disjointness and the homeomorphism of its carrier, not local reindexing.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplitReindexing",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Unique section obtained by descent of locally split sums; Local reindexing of sheets in a commuting square; Local permutation between finite coproducts of sections",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-split-reindexing",
+    "lem-weil-pbc-finite-etale-trace-section-descent",
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSectionCoproductLocalPermutation",
+  "declaration": "AlgebraicGeometry.finiteSectionCoproduct_local_permutation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSectionCoproductLocalPermutation.lean",
+  "statement": "theorem finiteSectionCoproduct_local_permutation (S P : Scheme.{u}) (p : P ⟶ S)\n    (J₁ J₂ : Type u) [Finite J₁] [Finite J₂]\n    (s₁ : J₁ → (S ⟶ P)) (s₂ : J₂ → (S ⟶ P))\n    (hc₁ : IsColimit (Cofan.mk P s₁)) (hc₂ : IsColimit (Cofan.mk P s₂))\n    (h₁ : ∀ j, s₁ j ≫ p = 𝟙 S) (h₂ : ∀ j, s₂ j ≫ p = 𝟙 S) (z : S) :\n    ∃ (U : S.Opens), z ∈ U ∧ ∃ e : J₁ ≃ J₂,\n      ∀ j, U.ι ≫ s₁ j = U.ι ≫ s₂ (e j)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cbf30",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135240-L-1668128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cbf30",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135240-L-1668128",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean statements and proofs with their nodes; existing signature unchanged, delivered modules and direct importer FiniteEtaleTraceSplitSumCompatibility compile cleanly, and all proved declarations use only permitted axioms."
+ }
+}

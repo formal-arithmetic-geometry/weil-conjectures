@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-finite-etale-trace-splitting-pullback",
+ "kind": "statement",
+ "title": "Pullback of explicit finite splitting data with section compatibility",
+ "statement": "Let $f:Y\\to X$ be etale [def-weil-pbc-scheme-conventions], $T,Z$ objects of $X_{\\mathrm{Et}}$ [def-weil-pbc-etale-site], and $g:Z\\to T$. Write $B_fT=T\\times_XY$ and $B_fg$ for the induced map [def-pc-fibre-product]. Given explicit finite clopen splitting data $D$ of $B_fT$ [def-weil-pbc-finite-etale-trace-splitting-data], there exist splitting data $E$ of $B_fZ$ and a bijection $e:D.J\\simeq E.J$ with $\\sigma_{D,j}\\circ g=B_fg\\circ\\sigma_{E,e(j)}$ for every $j$. Empty index sets are allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-etale-trace-splitting-data"
+ ],
+ "proof": [
+  {
+   "text": "Pull each sheet inclusion i_j back along b=B_f(g). The inclusions are open and closed immersions by base change. The finite coproduct is universal, so the pulled-back inclusions give a colimit cocone with apex B_f(Z).",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-etale-trace-splitting-data",
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each j construct a_j:Z to B_f(Z) by the pair (identity, g followed by t_j,i_j and the projection to Y). Its projection to Z is the identity, and a_j followed by b equals g followed by t_j,i_j, by the pullback universal property. Thus (a_j,g followed by t_j) lifts to a map t_new from Z to the new piece. The first inverse identity follows on projections. For the second, write q for the projection of the new piece to the old one. The pullback square gives i_new followed by projection_Z,g equals q followed by i_j,projection_T; postcompose with t_j and use the old inverse identity to obtain q. This proves equality on the second projection of the new piece. On its first projection into B_f(Z), check further on its two projections; the same equation, the old inverse identities, and the pullback square give equality. The index type is unchanged, and the constructed piece, inclusion and inverse, colimit and immersion proofs form E. The equality a_j followed by b equals g followed by t_j,i_j is precisely the section compatibility in the small etale category.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-etale-trace-splitting-data",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-etale-trace-splitting-data",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1.; explicit elaboration in Lean using Mathlib coproducts and open immersion lifts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves finite clopen coproduct splittings of an etale scheme morphism and their inverse sheet sections",
+   "results": "LeanSearch returned Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a finite coproduct of open and closed sections preserves the decomposition and the sections commute with the pullback map",
+   "results": "LeanFinder found scheme coproduct structure sheaf isomorphisms and disjointness lemmas, not an explicit splitting transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isUniversal_finiteCoproducts|nonempty_isColimit_of_pullbackCone_left",
+   "results": "Extensive.lean:451 and VanKampen.lean:760 supply the universal-coproduct step, but not the inverse projections and section compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplitReindexing",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Unique section obtained by descent of locally split sums; Local reindexing of sheets in a commuting square; Pullback of explicit finite splitting data with section compatibility",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-split-reindexing",
+    "lem-weil-pbc-finite-etale-trace-section-descent",
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplittingPullback",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleTrace_splitting_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceSplittingPullback.lean",
+  "statement": "theorem finiteEtaleTrace_splitting_pullback {X Y : Scheme.{u}} (f : Y ⟶ X)\n    (hf : Etale f) (T Z : X.Etale) (g : Z ⟶ T)\n    (D : FiniteEtaleTraceSplitting f T) :\n    let B := MorphismProperty.Over.pullback @Etale ⊤ f ⋙ MorphismProperty.Over.map ⊤ hf\n    ∃ (E : FiniteEtaleTraceSplitting f Z) (e : D.J ≃ E.J),\n      ∀ j, g ≫ D.sectionMap hf j = E.sectionMap hf (e j) ≫ B.map g",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cbf30",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135240-L-1668128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cbf30",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135240-L-1668128",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean statements and proofs with their nodes; existing signature unchanged, delivered modules and direct importer FiniteEtaleTraceSplitSumCompatibility compile cleanly, and all proved declarations use only permitted axioms."
+ }
+}
