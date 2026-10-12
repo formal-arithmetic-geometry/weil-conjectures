@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-section-component-generic-dichotomy",
+ "kind": "statement",
+ "title": "Generic dichotomy for a section component",
+ "statement": "For schemes P and T with noetherian structures, a locally finitely presented, quasi-compact, quasi-separated morphism g : P ⟶ T and section σ with σ ≫ g = 𝟙 T, and every irreducible closed set Z ⊆ P, there is an open U meeting Z such that U ∩ Z is contained in the section component locus or in its complement. Locally finite presentation is used as in [def-sbc-locally-finite-presentation].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Stacks Project, Tag 055P, final paragraph using 055N and 055M"
+ },
+ "stmt_deps": [
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "let x be the generic point of Z and y = g(x). Give the closure of y its reduced\nclosed subscheme structure and base change g and its section to it. Tag 055M identifies\nits section component with the inverse image of the original component. Over this\nintegral base the generic fibre is noetherian, and its section component is clopen and\ngeometrically connected because it has a rational section point. Take the closures of\nthis component and its complement in the total space. After shrinking the base about\ny, these closures cover the total space and are disjoint (055N, using 054Y and 054W).\nAfter a further shrinking, geometric connectedness of the first closure's fibres\npersists (055G). Shrink also so that the section lands in the first closure. Thus the\nsection component is clopen over a nonempty open V of the closure of y. The trace\nW = Z intersect g inverse image V is a nonempty open of Z, containing x; it is\nirreducible. The component's trace on W is clopen, hence empty or all of W. Express W\nas Z intersect an ambient open U, giving the asserted alternatives. No constructibility\ncriterion is used in this step.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Stacks Project, Tag 055P, final paragraph using 055N and 055M",
+  "note": "The full argument is transcribed in the declaration docstring; remaining geometric step is a standalone item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic dichotomy for a section component",
+   "results": "Unrelated cases tactics; no scheme-level generic dichotomy.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "connectedComponentIn",
+   "results": "connectedComponentIn membership and connectedness lemmas, none gives the scheme result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "section.*component|component.*section",
+   "results": "No existing declaration with this scheme-level statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic dichotomy for a section component",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionComponentLocallyConstructible",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Relative section component local constructibility, Tag 055P: Generic dichotomy for a section component",
+   "via": [
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionComponentGenericDichotomy",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionComponentGenericDichotomy.lean",
+  "declaration": "AlgebraicGeometry.exists_open_section_component_dichotomy",
+  "statement": "theorem exists_open_section_component_dichotomy {P T : Scheme.{u}}\n    [IsNoetherian P] [IsNoetherian T] (g : P ⟶ T)\n    [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g]\n    (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (Z : Set P)\n    (hZ : IsClosed Z) (hZi : IsIrreducible Z) :\n    ∃ U : Set P, IsOpen U ∧ (U ∩ Z).Nonempty ∧\n      (U ∩ Z ⊆ {q : P | q ∈ connectedComponentIn (g ⁻¹' {g q}) (σ (g q))} ∨\n       U ∩ Z ⊆ {q : P | q ∈ connectedComponentIn (g ⁻¹' {g q}) (σ (g q))}ᶜ)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T110301-L-614433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T110301-L-614433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
