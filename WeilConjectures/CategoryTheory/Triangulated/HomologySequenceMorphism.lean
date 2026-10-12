@@ -36,26 +36,18 @@ set_option backward.isDefEq.respectTransparency.types false in
 noncomputable def homologySequenceComposableArrows₅Map :
     F.homologySequenceComposableArrows₅ T n₀ n₁ h ⟶
       F.homologySequenceComposableArrows₅ T' n₀ n₁ h :=
+  have w (n : ℤ) : (F.shift n).map T.mor₁ ≫ (F.shift n).map φ.hom₂ =
+      (F.shift n).map φ.hom₁ ≫ (F.shift n).map T'.mor₁ := by
+    rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁]
+  have w' (n : ℤ) : (F.shift n).map T.mor₂ ≫ (F.shift n).map φ.hom₃ =
+      (F.shift n).map φ.hom₂ ≫ (F.shift n).map T'.mor₂ := by
+    rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂]
   homMk₅ ((F.shift n₀).map φ.hom₁) ((F.shift n₀).map φ.hom₂) ((F.shift n₀).map φ.hom₃)
     ((F.shift n₁).map φ.hom₁) ((F.shift n₁).map φ.hom₂) ((F.shift n₁).map φ.hom₃)
-    (by
-      dsimp
-      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁])
-    (by
-      dsimp
-      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂])
-    (by
-      dsimp
-      rw [F.homologySequenceδ_naturality T T' φ n₀ n₁ h])
-    (by
-      dsimp
-      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁])
-    (by
-      dsimp
-      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂])
+    (w n₀) (w' n₀) (F.homologySequenceδ_naturality T T' φ n₀ n₁ h).symm (w n₁) (w' n₁)
 
 variable {F φ n₀ n₁ h} (hT : T ∈ distTriang C) (hT' : T' ∈ distTriang C)
-include hT hT'
+include h hT hT'
 
 /-- **Four lemma for homology sequences.** For a morphism `φ : T ⟶ T'` of distinguished
 triangles, `F^{n₀}(φ.hom₃)` is an epimorphism as soon as `F^{n₀}(φ.hom₂)` and `F^{n₁}(φ.hom₁)`

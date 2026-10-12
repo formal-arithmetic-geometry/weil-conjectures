@@ -51,7 +51,7 @@ namespace Etale
 
 open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-! ### The direct image along the open complement -/
 
@@ -93,6 +93,7 @@ lemma boundedConstructible_rightDerivedLowerStar_of_openComplementBound_aux
           ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) ∧
         TStructure.t.IsGE ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) a ∧
         TStructure.t.IsLE ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) (a + m - 1 + e) := by
+  have : IsNoetherianRing Λ := inferInstance
   induction m with
   | zero =>
     intro a K _ _ _
@@ -156,10 +157,12 @@ lemma boundedConstructible_rightDerivedLowerStar_of_openComplementBound_aux
     obtain ⟨h₃bc, h₃₁, h₃₂⟩ := h₃
     have hRT := (R((j)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hT
     refine ⟨(Etale.DerivedCategory.boundedConstructible _ T).ext_of_isTriangulatedClosed₂ _ hRT
-      h₁bc h₃bc, TStructure.t.isGE₂ _ hRT a h₁₁ (TStructure.t.isGE_of_ge _ a b (by lia)), ?_⟩
+      h₁bc h₃bc, TStructure.t.isGE₂ _ hRT a h₁₁
+        (TStructure.t.isGE_of_ge ((R((j)_*[ModuleCat.{u + 1} Λ])).obj T'.obj₃) a b (by lia)), ?_⟩
     have : TStructure.t.IsLE ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) (b + e) :=
-      TStructure.t.isLE₂ _ hRT (b + e) (TStructure.t.isLE_of_le _ (a + m - 1 + e) _ (by lia))
-        h₃₂
+      TStructure.t.isLE₂ _ hRT (b + e)
+        (TStructure.t.isLE_of_le ((R((j)_*[ModuleCat.{u + 1} Λ])).obj T'.obj₁) (a + m - 1 + e) _
+          (by lia)) h₃₂
     exact TStructure.t.isLE_of_le _ (b + e) _ (by lia)
 
 /-- Under the open-complement condition with constant `e` for `j : V ⟶ T`, the direct image
@@ -193,8 +196,6 @@ end DirectImage
 /-! ### Closed immersions under the open-complement condition -/
 
 section ClosedImmersion
-
-variable [Finite Λ]
 
 /-- Let `i : Z ⟶ T` be a closed immersion whose open complement `j : U ⟶ T` satisfies the
 open-complement condition with constant `e`. Then `Ri^!` sends `D_c^[a, b](T)` into
@@ -260,7 +261,7 @@ end ClosedImmersion
 
 section Charts
 
-variable [Finite Λ] {k : Type u} [Field k]
+variable {k : Type u} [Field k]
 
 /-- Equal morphisms have isomorphic exceptional inverse images. -/
 lemma nonempty_iso_rightDerivedUpperShriek_of_eq {X Y : Scheme.{u}} {g₁ g₂ : X ⟶ Y}
@@ -408,19 +409,16 @@ theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     refine ⟨boundedConstructible_of_openCover Λ Uc hUc _ fun k ↦ ?_,
       homologyConcentratedIn_of_openCover _ Uc hUc _ fun k ↦ ?_⟩
     · exact (boundedConstructible _ _).prop_of_iso ((hres (σ.symm k)).some.app L).symm (h k).1
-    · obtain ⟨g, l⟩ := homologyConcentratedIn_of_iso _ ((hres (σ.symm k)).some.app L).symm
-        (h k).2
-      have := hD (σ.symm k)
+    · have := hD (σ.symm k)
       have := hC (σ.symm k)
-      exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_ge _ _ _ (by lia),
-        _root_.DerivedCategory.TStructure.t.isLE_of_le _ _ _ (by lia)⟩
+      exact (homologyConcentratedIn_of_iso _ ((hres (σ.symm k)).some.app L).symm
+        (h k).2).mono (by lia) (by lia)
   · refine constructibleTorAmplitudeIn_of_openCover Λ Uc hUc _ fun k ↦ ?_
-    obtain ⟨⟨hbc, g, l⟩, hta⟩ := constructibleTorAmplitudeIn_of_iso _
+    obtain ⟨⟨hbc, hconc⟩, hta⟩ := constructibleTorAmplitudeIn_of_iso _
       ((hres (σ.symm k)).some.app K).symm ((hchart (σ.symm k)).2 (hjt (σ.symm k)) a b K hK)
     have := hD (σ.symm k)
     have := hC (σ.symm k)
-    exact ⟨⟨hbc, _root_.DerivedCategory.TStructure.t.isGE_of_ge _ _ _ (by lia),
-      _root_.DerivedCategory.TStructure.t.isLE_of_le _ _ _ (by lia)⟩, hta.mono (by lia) (by lia)⟩
+    exact ⟨⟨hbc, hconc.mono (by lia) (by lia)⟩, hta.mono (by lia) (by lia)⟩
 
 end Charts
 

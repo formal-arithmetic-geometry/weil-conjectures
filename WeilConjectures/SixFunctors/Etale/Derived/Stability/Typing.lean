@@ -96,8 +96,10 @@ noncomputable def DerivedCategoryFiniteTor.tensorHomAdjunction
       (DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K) :=
   (derivedTensorHomAdjunction _ K.obj).restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm
-    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _
+      fun _ hM ↦ constructibleFiniteTor_tensor Λ X K.property hM).symm
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _
+      fun _ hM ↦ constructibleFiniteTor_derivedHom Λ aX K.property hM).symm
 
 end Bifunctors
 
@@ -187,8 +189,11 @@ theorem typingRule (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
       DerivedCategoryFiniteTor.ι _ X ⋙ (RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.obj)) :=
   ⟨⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨ObjectProperty.liftCompιIso _ _ _⟩,
     ⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨ObjectProperty.liftCompιIso _ _ _⟩,
-    ⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _⟩,
-    ⟨ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _⟩⟩
+    ⟨ObjectProperty.liftCompιIso _ _ _⟩,
+    ⟨ObjectProperty.liftFullSubcategoryCompιIso _ _ _
+      fun _ hM ↦ constructibleFiniteTor_tensor Λ X K.property hM⟩,
+    ⟨ObjectProperty.liftFullSubcategoryCompιIso _ _ _
+      fun _ hM ↦ constructibleFiniteTor_derivedHom Λ aX K.property hM⟩⟩
 
 end Etale
 

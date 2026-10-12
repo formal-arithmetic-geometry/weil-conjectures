@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 
 /-!
 # The absolute Frobenius acts trivially on the small pro-étale site
@@ -83,6 +84,23 @@ lemma overPullbackIterateFrobeniusIso_inv_app_left (V : X.ProEt) :
       relativeIterateFrobenius hp n hX V.hom :=
   rfl
 
+
+/-- The relative Frobenius maps are compatible with the iterates: `r^{(m + n)}_V` is the
+composite of `r^{(m)}_V` and the base change of `r^{(n)}_V` along `F_X^{(m)}`, read through
+`V ×_{X, F^{(m + n)}} X ≅ (V ×_{X, F^{(n)}} X) ×_{X, F^{(m)}} X`. -/
+lemma relativeIterateFrobeniusIso_add (m : ℕ) (V : X.ProEt) :
+    (overPullbackIterateFrobeniusIso hp hX m).inv.app V ≫
+        (Over.pullback @WeaklyEtale ⊤ (X.iterateFrobenius hp hX m)).map
+          ((overPullbackIterateFrobeniusIso hp hX n).inv.app V) ≫
+        (MorphismProperty.Over.pullbackComp (X.iterateFrobenius hp hX m)
+          (X.iterateFrobenius hp hX n)).inv.app V ≫
+        (MorphismProperty.Over.pullbackCongr (iterateFrobenius_add hp n X hX m)).inv.app V =
+      (overPullbackIterateFrobeniusIso hp hX (m + n)).inv.app V := by
+  ext : 1
+  apply pullback.hom_ext
+  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
+      iterateFrobenius_add]
+  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
 end Scheme.ProEt
 
 namespace ProEtale
@@ -104,6 +122,58 @@ lemma conjugateIsoEquiv_upperStarIterateFrobeniusIso :
     conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A _)
         (upperStarIterateFrobeniusIso A hp hX n) = (lowerStarIterateFrobeniusIso A hp hX n).symm :=
   Equiv.apply_symm_apply _ _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The components of the trivialization `F_{X*} ≅ 𝟭` are the restriction maps along the relative
+Frobenius maps `r_V : V ⟶ V ×_{X, F_X} X`. -/
+lemma lowerStarIterateFrobeniusIso_hom_app_hom_app (G : Sheaf (ProEt.topology X) A)
+    (V : X.ProEtᵒᵖ) :
+    ((lowerStarIterateFrobeniusIso A hp hX n).hom.app G).hom.app V =
+      G.obj.map ((ProEt.overPullbackIterateFrobeniusIso hp hX n).inv.app V.unop).op := by
+  simp [lowerStarIterateFrobeniusIso]
+
+/-- The trivializations `F_{X*} ≅ 𝟭` are compatible with the iterates
+`F_X^{(m + n)} = F_X^{(m)} ≫ F_X^{(n)}`. -/
+lemma lowerStarIterateFrobeniusIso_add (m : ℕ) :
+    lowerStarCongr A (iterateFrobenius_add hp n X hX m) ≪≫
+        (lowerStarComp A (X.iterateFrobenius hp hX m) (X.iterateFrobenius hp hX n)).symm ≪≫
+        Functor.isoWhiskerLeft _ (lowerStarIterateFrobeniusIso A hp hX n) ≪≫
+        Functor.rightUnitor _ ≪≫ lowerStarIterateFrobeniusIso A hp hX m =
+      lowerStarIterateFrobeniusIso A hp hX (m + n) := by
+  ext G V
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, ObjectProperty.FullSubcategory.comp_hom,
+    NatTrans.comp_app, lowerStarCongr_hom_app_hom_app, lowerStarComp_inv_app_hom_app,
+    lowerStarIterateFrobeniusIso_hom_app_hom_app, lowerStar_obj_obj_map',
+    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
+  simp only [← Functor.map_comp, ← op_comp]
+  congr 2
+  exact ProEt.relativeIterateFrobeniusIso_add hp hX n m V.unop
+
+/-- The trivializations `F_X^* ≅ 𝟭` are compatible with the iterates
+`F_X^{(m + n)} = F_X^{(m)} ≫ F_X^{(n)}`: this is conjugate to
+`AlgebraicGeometry.ProEtale.lowerStarIterateFrobeniusIso_add`. -/
+lemma upperStarIterateFrobeniusIso_add (m : ℕ) :
+    upperStarCongr A (iterateFrobenius_add hp n X hX m) ≪≫
+        upperStarComp A (X.iterateFrobenius hp hX m) (X.iterateFrobenius hp hX n) ≪≫
+        Functor.isoWhiskerRight (upperStarIterateFrobeniusIso A hp hX n) _ ≪≫
+        Functor.leftUnitor _ ≪≫ upperStarIterateFrobeniusIso A hp hX m =
+      upperStarIterateFrobeniusIso A hp hX (m + n) := by
+  apply (conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A _)).injective
+  rw [conjugateIsoEquiv_trans Adjunction.id
+      (upperStarLowerStarAdjunction A (X.iterateFrobenius hp hX m ≫ X.iterateFrobenius hp hX n)),
+    conjugateIsoEquiv_trans Adjunction.id ((upperStarLowerStarAdjunction A _).comp
+      (upperStarLowerStarAdjunction A (X.iterateFrobenius hp hX m))),
+    conjugateIsoEquiv_trans Adjunction.id
+      (Adjunction.id.comp (upperStarLowerStarAdjunction A (X.iterateFrobenius hp hX m))),
+    conjugateIsoEquiv_trans Adjunction.id
+      (upperStarLowerStarAdjunction A (X.iterateFrobenius hp hX m)),
+    conjugateIsoEquiv_upperStarIterateFrobeniusIso, conjugateIsoEquiv_leftUnitor,
+    conjugateIsoEquiv_isoWhiskerRight, conjugateIsoEquiv_upperStarIterateFrobeniusIso,
+    conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_upperStarCongr,
+    conjugateIsoEquiv_upperStarIterateFrobeniusIso, ← lowerStarIterateFrobeniusIso_add A hp hX n m]
+  ext : 1
+  simp
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]

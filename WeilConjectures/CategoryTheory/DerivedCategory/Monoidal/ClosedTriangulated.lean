@@ -8,13 +8,11 @@ module
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import Mathlib.CategoryTheory.Adjunction.Unique
-public import Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 
 /-!
-# The derived internal hom is triangulated in each variable
+# The derived internal hom is triangulated in its first variable
 
 Let `C` be a monoidal closed Grothendieck abelian category as in
 `WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed`, so that `D(C)` is monoidal
@@ -368,24 +366,5 @@ theorem exists_distinguished_ihom_pre (T : Triangle (DerivedCategory C))
   obtain ⟨I, _, rfl⟩ := X.mk_surjective
   exact exists_distinguished_ihom_pre_of_iso (e ≪≫ Qh.mapTriangle.mapIso e') eM.symm
     (exists_distinguished_ihom_pre_of_degreewiseSplit S σ I)
-
-
-/-- Blueprint `lem-sf-hom-triangulated`: Exactness of the internal Hom in each variable, second
-variable.
-
-For a distinguished triangle `M' ⟶ M ⟶ M'' ⟶ M'[1]` of `D(C)` and any `K`, the maps
-`RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` induced by the first two maps extend to a
-distinguished triangle `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'') ⟶ RHom(K, M')[1]`: the functor
-`RHom(K, -)` is triangulated, being right adjoint to the triangulated functor `K ⊗ᴸ -`, with the
-shift structure induced by the adjunction. The first variable is
-`DerivedCategory.exists_distinguished_ihom_pre`. -/
-theorem exists_distinguished_ihom_map (K : DerivedCategory C) (T : Triangle (DerivedCategory C))
-    (hT : T ∈ distTriang _) :
-    ∃ h, Triangle.mk ((ihom K).map T.mor₁) ((ihom K).map T.mor₂) h ∈ distTriang _ := by
-  let adj : (curriedTensor (DerivedCategory C)).obj K ⊣ ihom K := ihom.adjunction K
-  let _ := adj.rightAdjointCommShift ℤ
-  have := adj.commShift_of_leftAdjoint ℤ
-  have := adj.isTriangulated_rightAdjoint
-  exact ⟨_, (ihom K).map_distinguished T hT⟩
 
 end DerivedCategory

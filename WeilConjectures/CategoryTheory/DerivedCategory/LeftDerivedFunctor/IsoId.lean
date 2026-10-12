@@ -140,8 +140,8 @@ lemma leftDerivedFunctorNatIso_trans (e : F ≅ G) (e' : G ≅ H) :
   rw [← cancel_mono (H.leftDerivedFunctorCounit.app P)]
   simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [leftDerivedFunctorNatIso_hom_app_comp_counit, leftDerivedFunctorNatIso_hom_app_comp_counit,
-    leftDerivedFunctorNatIso_hom_app_comp_counit_assoc, Category.assoc, ← Functor.map_comp,
-    ← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp]
+    leftDerivedFunctorNatIso_hom_app_comp_counit_assoc, ← Functor.map_comp, ← NatTrans.comp_app,
+    ← NatTrans.mapHomotopyCategory_comp, Iso.trans_hom]
 
 /-- The isomorphism of left derived functors induced by the identity is the identity. -/
 @[simp]

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 
@@ -264,6 +265,18 @@ end Components
 
 section Kunneth
 
+/-- Naturality of a composite of four isomorphisms, from the naturality of each factor. -/
+lemma _root_.CategoryTheory.Iso.hom_naturality_trans₄ {C : Type*} [Category C]
+    {A₁ A₂ A₃ A₄ A₅ B₁ B₂ B₃ B₄ B₅ : C}
+    {e₁ : A₁ ≅ A₂} {e₂ : A₂ ≅ A₃} {e₃ : A₃ ≅ A₄} {e₄ : A₄ ≅ A₅}
+    {e₁' : B₁ ≅ B₂} {e₂' : B₂ ≅ B₃} {e₃' : B₃ ≅ B₄} {e₄' : B₄ ≅ B₅}
+    {φ₁ : A₁ ⟶ B₁} {φ₂ : A₂ ⟶ B₂} {φ₃ : A₃ ⟶ B₃} {φ₄ : A₄ ⟶ B₄} {φ₅ : A₅ ⟶ B₅}
+    (h₁ : φ₁ ≫ e₁'.hom = e₁.hom ≫ φ₂) (h₂ : φ₂ ≫ e₂'.hom = e₂.hom ≫ φ₃)
+    (h₃ : φ₃ ≫ e₃'.hom = e₃.hom ≫ φ₄) (h₄ : φ₄ ≫ e₄'.hom = e₄.hom ≫ φ₅) :
+    φ₁ ≫ (e₁' ≪≫ e₂' ≪≫ e₃' ≪≫ e₄').hom = (e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄).hom ≫ φ₅ := by
+  simp only [Iso.trans_hom, Category.assoc]
+  rw [reassoc_of% h₁, reassoc_of% h₂, reassoc_of% h₃, h₄]
+
 variable {B X Y P : Scheme.{u}}
 
 section Inner
@@ -370,6 +383,21 @@ variable {p : P ⟶ X} {q : P ⟶ Y} {f : X ⟶ B} {g : Y ⟶ B} (sq : IsPullbac
   (w : q ≫ g = h) [HasCompactification f] [HasCompactification g] [HasCompactification q]
   [HasCompactification h] [QuasiCompact q] [QuasiCompact h]
 
+@[reassoc]
+lemma rightDerivedLowerShriek_map_relativeKunnethInnerIso_hom_naturality_left
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (φ : K ⟶ K')
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(g)_![ModuleCat.{u + 1} Λ]).map ((R(q)_![ModuleCat.{u + 1} Λ]).map
+        (((-⊗ᴸ-(P)[ModuleCat.{u + 1} Λ]).map ((L((p)^*[ModuleCat.{u + 1} Λ])).map φ)).app
+          ((L((q)^*[ModuleCat.{u + 1} Λ])).obj L))) ≫
+      ((R(g)_![ModuleCat.{u + 1} Λ]).mapIso (relativeKunnethInnerIso Λ sq K' L)).hom =
+    ((R(g)_![ModuleCat.{u + 1} Λ]).mapIso (relativeKunnethInnerIso Λ sq K L)).hom ≫
+      (R(g)_![ModuleCat.{u + 1} Λ]).map (((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj L).map
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ))) := by
+  rw [Functor.mapIso_hom, Functor.mapIso_hom, ← Functor.map_comp, ← Functor.map_comp,
+    relativeKunnethInnerIso_hom_naturality_left]
+
 /-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism is natural in the
 first variable. -/
 @[reassoc]
@@ -383,11 +411,10 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_left
     (relativeKunnethIsoOfIsPullback Λ sq h w K L).hom ≫
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ)).app
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj L) := by
-  simp only [relativeKunnethIsoOfIsPullback, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Category.assoc]
-  rw [rightDerivedLowerShriekCompIsoApp_hom_naturality_assoc, ← Functor.map_comp_assoc,
-    relativeKunnethInnerIso_hom_naturality_left, Functor.map_comp_assoc,
-    projectionIso_inv_naturality_right_assoc, derivedTensorBraidingIso_hom_naturality_right]
+  exact Iso.hom_naturality_trans₄ (rightDerivedLowerShriekCompIsoApp_hom_naturality Λ q g h w _)
+    (rightDerivedLowerShriek_map_relativeKunnethInnerIso_hom_naturality_left Λ sq φ L)
+    (projectionIso_inv_naturality_right Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).map φ))
+    (derivedTensorBraidingIso_hom_naturality_right _ _)
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism is natural in the
 second variable. -/
@@ -402,11 +429,11 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_right
     (relativeKunnethIsoOfIsPullback Λ sq h w K L).hom ≫
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).map
         ((R(g)_![ModuleCat.{u + 1} Λ]).map ψ) := by
-  simp only [relativeKunnethIsoOfIsPullback, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Category.assoc]
-  rw [rightDerivedLowerShriekCompIsoApp_hom_naturality_assoc, ← Functor.map_comp_assoc,
-    relativeKunnethInnerIso_hom_naturality_right, Functor.map_comp_assoc,
-    projectionIso_inv_naturality_left_assoc, derivedTensorBraidingIso_hom_naturality_left]
+  exact Iso.hom_naturality_trans₄ (rightDerivedLowerShriekCompIsoApp_hom_naturality Λ q g h w _)
+    (by rw [Functor.mapIso_hom, Functor.mapIso_hom, ← Functor.map_comp, ← Functor.map_comp,
+      relativeKunnethInnerIso_hom_naturality_right])
+    (projectionIso_inv_naturality_left Λ g ψ _)
+    (derivedTensorBraidingIso_hom_naturality_left _ _)
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism
 `Rh_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rf_! K ⊗ᴸ Rg_! L` as a natural isomorphism of bifunctors

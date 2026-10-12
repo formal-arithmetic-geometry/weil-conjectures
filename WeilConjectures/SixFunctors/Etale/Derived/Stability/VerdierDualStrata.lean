@@ -292,11 +292,34 @@ theorem exists_opens_smooth_isFiniteLocallyConstantSheaf {k : Type u} [Field k] 
   have hOW : O ≤ W := fun x hx ↦ hx.2.1
   have hOS : O ≤ S := fun x hx ↦ hx.2.2
   have : Nonempty O := ⟨⟨z, hzo, hzWS⟩⟩
-  have : IrreducibleSpace O := by
-    refine Subtype.irreducibleSpace ?_
-    exact (isIrreducible_irreducibleComponent.open_subset ho hoC).isIrreducible.mono
-      ⟨z, hzo⟩ |> fun h ↦ (isIrreducible_irreducibleComponent.subset_irreducible ?_ ?_)
-  sorry
+  have : IrreducibleSpace O := Subtype.irreducibleSpace ⟨⟨z, hzo, hzWS⟩,
+    isIrreducible_irreducibleComponent.2.open_subset O.isOpen fun x hx ↦ hoC hx.1⟩
+  have : TopologicalSpace.NoetherianSpace O := O.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact O.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  -- `O` is smooth of some relative dimension
+  have : Smooth (O.ι ≫ aZ) := by
+    rw [← Scheme.Hom.smoothLocus_eq_top_iff, ← Scheme.Hom.preimage_smoothLocus_eq, eq_top_iff]
+    rintro x -
+    exact hOS x.2
+  obtain ⟨n, hn⟩ := exists_topologicalKrullDim_eq (O.ι ≫ aZ)
+  have hsm := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq (O.ι ≫ aZ) n).2 hn
+  -- the restricted model
+  let P' := (((O.ι)^*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
+  refine ⟨O, inferInstance, inferInstance, n, hsm, P',
+    ⟨fun q hq ↦ Functor.map_isZero _ (hP.1 q hq), fun q ↦
+      Functor.PreservesFlat.flat_obj (F := (O.ι)^*[ModuleCat.{u + 1} Λ]) (hP.2 q)⟩,
+    fun q ↦ ?_, ⟨(L((O.ι)^*[ModuleCat.{u + 1} Λ])).mapIso eP ≪≫
+      (leftDerivedUpperStarIsoMapDerivedCategory _ O.ι).app _ ≪≫
+      ((O.ι)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app P⟩⟩
+  by_cases hq : a ≤ q ∧ q ≤ b
+  · have hi : a + ((⟨(q - a).toNat, by omega⟩ : Fin m) : ℕ) = q := by
+      simp only
+      omega
+    have hWq := hW ⟨(q - a).toNat, by omega⟩
+    rw [hi] at hWq
+    exact IsFiniteLocallyConstantSheaf.upperStar_of_range_subset O.ι W.ι
+      (by simpa using hOW) _
+  · exact IsFiniteLocallyConstantSheaf.of_isZero (Functor.map_isZero _ (hP.1 q (by omega)))
 
 end Etale
 
