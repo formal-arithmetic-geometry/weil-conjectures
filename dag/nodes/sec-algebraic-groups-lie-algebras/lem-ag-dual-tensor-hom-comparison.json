@@ -12,12 +12,12 @@
  ],
  "proof": [
   {
-   "text": "Transpose both maps under the tensor-Hom adjunction. For ihomUnitTensorToIhom, uncurry_curry makes the transpose the associator followed by internal evaluation and left unitor. For dualTensorHom, use the definition of SheafOfModules.tensorHomEquiv: this adjunction is built from the sheafification adjunction and PresheafOfModules.homObjEquiv.",
+   "text": "Compute uncurry of an arbitrary sheafified presheaf map using SheafOfModules.uncurry_eq_tensorHomEquiv_symm, the sheafification hom equivalence, the adjunction triangle identity, and naturality of the sheafification tensorator. This is the private proved helper dualTensorHom_transport.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "Both underlying maps on pure tensors m tensor (phi tensor n) are phi(m)n. Tensor induction gives equality. Naturality of the tensor and unit isomorphisms for sheafification transports that equality to the sheaf maps. Injectivity of transposition gives equality of the comparisons.",
+   "text": "Unfold PresheafOfModules.dualTensorHom and cancel homObjEquiv with its inverse. Expand the sheaf evaluation using ihom_ev_app and Adjunction.homEquiv_counit. The private proved helper dualTensorHom_pairing transports associativity, evaluation, and the left unitor along the strong monoidal sheafification functor, using its associativity and left-unit coherence laws. Apply uncurry_injective and specialize the resulting site-level comparison to X.sheaf.",
    "uses": [],
    "elementary": false
   }
@@ -27,7 +27,7 @@
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0FNV",
   "place": "Canonical tensor-Hom morphism, generalized to target N; the bridge compares its two library constructions.",
-  "note": "The source names the canonical map; the equality between the library implementations is expanded by transposition and the construction of the sheafification adjunction."
+  "note": "The proof expands the existing presheaf comparison and sheaf tensor-Hom adjunction, then uses strong monoidal coherence. Every helper is proved privately; no auxiliary sorry or additional DAG dependency remains."
  },
  "mathlib_searches": [
   {
@@ -93,11 +93,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "X-e375b",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T042418-L-1820507",
+  "landing": "20261012T202242-L-705482",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean module and node match the original public statement; delivered module and direct importer compile cleanly with allowed axioms only."
  }
 }
