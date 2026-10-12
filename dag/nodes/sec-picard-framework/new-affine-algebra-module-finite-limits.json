@@ -16,20 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Identify the canonical left adjoint with tensor pullback using the tensor Hom adjunction. On an affine open Spec B with inverse image Spec A, the stalk map at p over q is the localization A localized away from q to A_p, hence flat. Tensor pullback preserves kernels by the exact, jointly conservative stalk functors. It preserves finite products because tensor preserves finite direct sums. Kernels and finite products imply preservation of finite limits in an abelian category. Transport along the unique isomorphism of left adjoints. Empty schemes and zero modules cause no exceptions.",
+   "text": "Obtain the concrete tensor pullback P, its object and morphism formulas, and an adjunction P ⊣ g_* from RingedSpace.exists_tensorModulePullback. The formulas determine the functor; no arbitrary object is chosen from mere existence.",
+   "uses": [
+    "lem-pc-ringed-space-tensor-pullback-underived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_algebra_tensorModulePullback_exact to f, P, and its prescribed object and morphism formulas. Its first conclusion gives PreservesFiniteLimits P. This includes all module sheaves and empty schemes.",
+   "uses": [
+    "lem-sc-affine-algebra-tensor-pullback-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib Adjunction.leftAdjointUniq on P ⊣ g_* and Adjunction.ofIsRightAdjoint g_* to obtain P ≅ g_*.leftAdjoint. Transport finite-limit preservation using CategoryTheory.Limits.preservesFiniteLimits_of_natIso.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-ringed-space-tensor-pullback-underived",
+  "lem-sc-affine-algebra-tensor-pullback-exact"
+ ],
  "proof_origin": {
-  "by": "R2 stage 3",
+  "by": "K2 stage 3",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof; Tag 01SB (read online)"
+  "place": "Tag 0AVW proof, using the existing concrete tensor adjunction and affine tensor exactness; Mathlib Adjunction.leftAdjointUniq for transport"
  },
  "mathlib_searches": [
   {
@@ -116,9 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T131310-L-1354875",
-  "kind": "interface"
+  "landing": "20261012T151909-L-2288660",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import Sheaf.AlgebraicGeometry.AffineAlgebraTensorPullbackExact
 /-! # Canonical affine algebra module adjunction component
 
 Source: Stacks Project, Tags 0AVW and 01SB. -/
@@ -34,5 +36,12 @@ theorem affine_algebra_module_adjunction_preserves_finite_limits
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :
     Limits.PreservesFiniteLimits
-      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).leftAdjoint := by sorry
+      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).leftAdjoint := by
+  obtain ⟨P, h, hm, _, ⟨adj⟩⟩ :=
+    RingedSpace.exists_tensorModulePullback (toDirectImageAlgebraSpace f)
+  have : Limits.PreservesFiniteLimits P :=
+    (affine_algebra_tensorModulePullback_exact f P h hm).1
+  exact Limits.preservesFiniteLimits_of_natIso
+    (adj.leftAdjointUniq (Adjunction.ofIsRightAdjoint
+      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))))
 end AlgebraicGeometry

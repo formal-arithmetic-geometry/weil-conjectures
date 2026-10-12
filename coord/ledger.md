@@ -8309,3 +8309,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffineEtaleNormalizedCartesianComparisons (stage 3; reviewer PASS; first push; landing 20261012T151908-L-2288246 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/G3/Sheaf.Algebra.Homology.StalkTensorComplexDegrees (stage 3; reviewer PASS; first push; landing 20261012T151908-L-2288385 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/K1/Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization (stage 3; reviewer PASS; first push; landing 20261012T151908-L-2288509 (proof); batch 20261012T151904; modules 1; new nodes 0)
+- 15:19 L: merged deliver/K2/Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionFiniteLimits (stage 3; reviewer PASS; first push; landing 20261012T151909-L-2288660 (proof); batch 20261012T151904; modules 1; new nodes 0)
