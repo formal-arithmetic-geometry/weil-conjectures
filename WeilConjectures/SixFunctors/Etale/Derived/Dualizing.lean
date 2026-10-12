@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-!
 
@@ -90,6 +92,20 @@ noncomputable def verdierDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (RHom(X)[A]).flip.obj (dualizingComplex A a)
+
+/-- **Verdier biduality for dualizable complexes when `ω_X` is invertible.** If the dualizing
+complex `ω_X` is invertible — for instance for `X` smooth over a field, where an orientation
+gives `ω_X ≅ Λ_X(d)[2d]` — then the double Verdier dual of a dualizable `K` is `K`:
+`𝔻_X 𝔻_X K ≅ K`. This is the duality `[[K, ω], ω] ≅ K` of
+`CategoryTheory.nonempty_iso_ihom_obj_ihom_obj_of_isInvertible`, the derived category of étale
+sheaves being braided. -/
+theorem nonempty_iso_verdierDual_verdierDual_of_isInvertible
+    (hω : IsInvertible (dualizingComplex A a))
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
+    Nonempty (K ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op K)))) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  obtain ⟨e⟩ := nonempty_iso_ihom_obj_ihom_obj_of_isInvertible hK hω
+  exact ⟨e.symm⟩
 
 section Field
 
