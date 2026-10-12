@@ -9,6 +9,7 @@ public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.Data.Finset.Sort
 public import Mathlib.Data.Fintype.Powerset
 public import Mathlib.RingTheory.Ideal.Span
+import Mathlib.LinearAlgebra.Matrix.Adjugate
 import Sheaf.LinearAlgebra.Matrix.CauchyBinet
 
 /-!
@@ -57,6 +58,37 @@ theorem scalar_left_inverse_maximal_minors {R : Type u} [CommRing R]
           f ^ m = ∑ I : {I : Finset (Fin n) // I.card = m},
             (B.submatrix id (I.val.orderEmbOfFin I.property)).det *
               (A.submatrix (I.val.orderEmbOfFin I.property) id).det) := by
-  sorry
+  classical
+  dsimp only
+  constructor
+  · intro f hf
+    refine Submodule.span_induction ?_ ?_ ?_ ?_ hf
+    · rintro x ⟨I, rfl⟩
+      let e : Fin m → Fin n := I.val.orderEmbOfFin I.property
+      refine ⟨(A.submatrix e id).adjugate * (1 : Matrix (Fin n) (Fin n) R).submatrix
+        e id, ?_⟩
+      have hproj : (1 : Matrix (Fin n) (Fin n) R).submatrix e id * A =
+          A.submatrix e id := by
+        simpa using one_submatrix_mul e (Equiv.refl (Fin n)) A
+      rw [Matrix.mul_assoc, hproj, adjugate_mul]
+    · exact ⟨0, by simp⟩
+    · intro x y _ _ hx hy
+      obtain ⟨B, hB⟩ := hx
+      obtain ⟨C, hC⟩ := hy
+      exact ⟨B + C, by rw [Matrix.add_mul, hB, hC, add_smul]⟩
+    · intro r x _ hx
+      obtain ⟨B, hB⟩ := hx
+      exact ⟨r • B, by simp only [smul_mul, hB, smul_smul, smul_eq_mul]⟩
+  · intro f B hB
+    have hdet : (B * A).det = f ^ m := by
+      rw [hB, det_smul, det_one, Fintype.card_fin, mul_one]
+    have hsum := (cauchy_binet m n B A).1
+    rw [hdet] at hsum
+    refine ⟨?_, hsum⟩
+    rw [hsum]
+    apply Submodule.sum_mem
+    intro I _
+    apply Ideal.mul_mem_left
+    exact Ideal.subset_span ⟨I, rfl⟩
 
 end Matrix
