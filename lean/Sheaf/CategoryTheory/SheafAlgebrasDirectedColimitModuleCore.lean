@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group P1
+-/
 module
 
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
@@ -7,11 +12,76 @@ public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+
+/-! # Underlying modules of directed colimits of algebra sheaves
+
+Source: Stacks Project, Modules, Lemma 01AH; Sheaves, Sections 009D and 009E
+(blueprint: stage3-sheaf-algebras-directed-colimit-module-core).
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace CategoryTheory
+
+/-- Forgetting sheaf modules preserves colimits, by the sheafification counit. -/
+private theorem module_toSheaf_preservesColimit
+    {X : Type u} [TopologicalSpace X]
+    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    {I : Type u} [Category I] (F : I ⥤ SheafOfModules.{u} R) :
+    PreservesColimit F (SheafOfModules.toSheaf R) := by
+  let L := PresheafOfModules.sheafification (𝟙 R.obj)
+  let G := SheafOfModules.toSheaf R
+  let H := F ⋙
+    (SheafOfModules.forget R ⋙ PresheafOfModules.restrictScalars (𝟙 R.obj))
+  have : PreservesColimit H (L ⋙ G) := by
+    change PreservesColimit H
+      (PresheafOfModules.toPresheaf R.obj ⋙
+        presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat)
+    infer_instance
+  have : PreservesColimit (H ⋙ L) G :=
+    preservesColimit_of_preserves_colimit_cocone
+      (isColimitOfPreserves L (colimit.isColimit H))
+      (isColimitOfPreserves (L ⋙ G) (colimit.isColimit H))
+  exact preservesColimit_of_iso_diagram G
+    (Functor.associator F
+      (SheafOfModules.forget R ⋙ PresheafOfModules.restrictScalars (𝟙 R.obj)) L ≪≫
+      Functor.isoWhiskerLeft F
+        (asIso (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).counit))
+
+/-- Forgetting ring sheaves preserves directed colimits, by compatible sheafification. -/
+private theorem ring_toAb_preservesColimit
+    {X : Type u} [TopologicalSpace X]
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
+    (F : I ⥤ Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) :
+    PreservesColimit F (sheafCompose (Opens.grothendieckTopology X)
+      (forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat)) := by
+  let J := Opens.grothendieckTopology X
+  let U := forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat.{u}
+  have : PreservesLimits U := inferInstance
+  have : PreservesFilteredColimits U :=
+    comp_preservesFilteredColimits (forget₂ CommRingCat RingCat)
+      (forget₂ RingCat AddCommGrpCat)
+  have : ∀ V, PreservesColimitsOfShape (J.Cover V)ᵒᵖ U := fun _ ↦ inferInstance
+  have : J.PreservesSheafification U :=
+    GrothendieckTopology.instPreservesSheafification J U
+  let L := presheafToSheaf J CommRingCat.{u}
+  let G := sheafCompose J U
+  let H := F ⋙ sheafToPresheaf J CommRingCat
+  have : PreservesColimit H (L ⋙ G) :=
+    preservesColimit_of_natIso H
+      (sheafComposeNatIso J U (sheafificationAdjunction J CommRingCat)
+        (sheafificationAdjunction J AddCommGrpCat))
+  have : PreservesColimit (H ⋙ L) G :=
+    preservesColimit_of_preserves_colimit_cocone
+      (isColimitOfPreserves L (colimit.isColimit H))
+      (isColimitOfPreserves (L ⋙ G) (colimit.isColimit H))
+  exact preservesColimit_of_iso_diagram G
+    (Functor.associator F (sheafToPresheaf J CommRingCat) L ≪≫
+      Functor.isoWhiskerLeft F (asIso (sheafificationAdjunction J CommRingCat).counit))
 
 /-- The underlying module cocone of the sheafified algebra colimit is a colimit.
 Proof: choose i₀ in the nonempty directed index. The composites of the stage structure
@@ -46,6 +116,33 @@ theorem sheafAlgebras_directed_colimit_module_core
       toSheafify (Opens.grothendieckTopology X) p.pt) :
     Nonempty (IsColimit
       ((commAlgebraSheafModuleFunctor O).mapCocone (Cocone.mk (Under.mk σ) ι))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  classical
+  let J := Opens.grothendieckTopology X
+  let R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj O
+  let U := forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat.{u}
+  let c := Cocone.mk (Under.mk σ) ι
+  let d := (Under.forget O).mapCocone c
+  have he : IsColimit (Sheaf.sheafifyCocone (F := F ⋙ Under.forget O) p) :=
+    Sheaf.isColimitSheafifyCocone (F := F ⋙ Under.forget O) p
+      (evaluationJointlyReflectsColimits p (fun V ↦ (hp V.unop).some))
+  have hd : IsColimit d := IsColimit.ofIsoColimit he
+    (Cocone.ext (Iso.refl _) (by
+      intro i
+      apply Sheaf.hom_ext
+      change ((Sheaf.sheafifyCocone (F := F ⋙ Under.forget O) p).ι.app i).hom =
+        (ι.app i).right.hom
+      rw [Sheaf.sheafifyCocone_ι_app_val (F := F ⋙ Under.forget O), hι]))
+  have : PreservesColimit (F ⋙ Under.forget O) (sheafCompose J U) :=
+    ring_toAb_preservesColimit (F ⋙ Under.forget O)
+  have ha : IsColimit ((sheafCompose J U).mapCocone d) :=
+    isColimitOfPreserves (sheafCompose J U) hd
+  have : PreservesColimit (F ⋙ commAlgebraSheafModuleFunctor O)
+      (SheafOfModules.toSheaf R) :=
+    module_toSheaf_preservesColimit R (F ⋙ commAlgebraSheafModuleFunctor O)
+  have : ReflectsColimit (F ⋙ commAlgebraSheafModuleFunctor O)
+      (SheafOfModules.toSheaf R) :=
+    reflectsColimit_of_reflectsIsomorphisms _ _
+  exact ⟨isColimitOfReflects (SheafOfModules.toSheaf R) ha⟩
 
 end CategoryTheory

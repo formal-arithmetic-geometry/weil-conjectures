@@ -7,26 +7,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Directedness makes all structure-map composites into p equal. Use their common value to give p its presheaf O-module structure; the Under identities and hι identify its sheafified structure map with σ.",
+   "text": "Use Mathlib evaluationJointlyReflectsColimits with hp to prove that p is a presheaf ring colimit. Sheaf.isColimitSheafifyCocone gives a ring-sheaf colimit; hι and Sheaf.sheafifyCocone_ι_app_val identify it by Cocone.ext with the underlying ring-sheaf cocone of the supplied algebra cocone.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The sectionwise ring colimit hypothesis hp gives stage representatives and eventual equality. Descend a compatible family of O-linear maps on representatives; a common upper bound proves additivity and linearity. Uniqueness proves compatibility with restriction, giving the presheaf module colimit.",
+   "text": "Prove locally that forgetting ring sheaves to abelian sheaves preserves the directed colimit. The composite forgetful functor on commutative rings preserves limits and filtered colimits. Mathlib GrothendieckTopology.instPreservesSheafification and sheafComposeNatIso identify sheafification followed by forgetting with forgetting followed by sheafification. Apply preservation to a presheaf colimit cocone and transfer along the invertible sheafification counit using preservesColimit_of_iso_diagram. This gives the underlying abelian sheaf colimit.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Module sheafification preserves that colimit. Compare ring and module sheafifications through their underlying abelian sheafification; local representatives prove O-linearity and hι identifies the legs. Transport the colimit along the resulting cocone isomorphism.",
+   "text": "Prove locally that SheafOfModules.toSheaf preserves colimits: PresheafOfModules.toPresheaf preserves them, module sheafification is left adjoint, and sheafificationCompToSheaf is definitionally the abelian sheafification composite. Apply preservesColimit_of_preserves_colimit_cocone and transfer along the invertible module-sheafification counit. Since toSheaf reflects isomorphisms and the module diagram has a colimit, reflectsColimit_of_reflectsIsomorphisms gives reflection of the colimit. The abelian cocone obtained from commAlgebraSheafModuleFunctor is definitionally the one obtained from the underlying ring sheaves, so isColimitOfReflects closes the theorem.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sections 009D and 009E; Modules 01AH"
+  "place": "Sections 009D and 009E; Modules 01AH. P1 formal proof uses Mathlib compatible sheafification, invertible adjunction counits, and reflection of colimits, replacing the representative argument."
  },
  "mathlib_searches": [
   {
@@ -97,12 +97,12 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-119d0",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T135330-L-1698480",
-  "kind": "interface",
-  "note": "independent Codex review: Lean signature matches the corrected node and prior E7 return; delivery and sole direct importer compile cleanly; original caller fails as reported, confirming the minimal forced adaptation; axioms and change record agree."
+  "landing": "20261012T150955-L-2231541",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-12",
