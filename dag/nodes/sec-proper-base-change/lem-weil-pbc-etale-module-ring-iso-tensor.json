@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-etale-module-ring-iso-tensor",
+ "kind": "statement",
+ "title": "Tensor comparison for an invertible change of ring sheaf",
+ "statement": "Let $U,V$ be schemes, $f:U\\to V$, $R_V,R_U$ commutative ring sheaves on their small etale sites [def-weil-pbc-etale-site], $L_r$ any ring-sheaf functor from $V$ to $U$, and $c:L_r(R_V)\\cong R_U$. Let $L_0$ and $L_M$ be functors from $R_V$-module sheaves to $L_r(R_V)$-module sheaves and $R_U$-module sheaves respectively [def-weil-sheaf-of-modules-category]. Suppose $t:L_M\\operatorname{res}_c\\cong L_0$, where $\\operatorname{res}_c$ is pushforward along the identity site functor with ring map $c$ [def-weil-pbc-direct-image]. Then there are isomorphisms $d_G:R_U\\otimes_{L_r(R_V)}L_0G\\cong L_MG$, with tensor change of rings defined by sheafifying the sectionwise tensor product [def-pur-sheaf-tensor-product]. For every $h:G\\to H$, $\\operatorname{changeOfRings}(L_0h)d_H=d_GL_Mh$. For every site object $W$, $a\\in R_U(W)$, $m\\in (L_0G)(W)$, $d_G(\\eta_W(a\\otimes m))=t_G^{-1}(c_W^{-1}(a)m)$, where $\\eta$ is the sheafification unit.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definition 03D6 and Lemmas 03CZ, 03D7; parent proof step 3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Define a section map a tensor m to t.inv(G)(c.inv(a) times m). Linearity of t.inv and the inverse-ring identities make it balanced and RU(W)-linear, hence the tensor universal property extends it. Its inverse n maps to 1 tensor t.hom(G)(n). The inverse-comparison identity proves one composite is identity; balancing and c.hom(c.inv(a))=a prove the other on pure tensors, hence everywhere.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of c and t shows these inverse linear maps commute with restrictions, so they identify the tensor presheaf with the underlying presheaf of LM(G). Sheafification and its unit on a sheaf give d(G); the defining factorization gives the pure-tensor equation.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For G to H, naturality of t and linearity of L0.map show the two composites agree on pure tensors. The tensor and sheafification universal properties give the displayed naturality equation.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definition 03D6 and Lemmas 03CZ, 03D7; parent proof step 3",
+  "note": "Explicit specialization and compatibility argument written by F1 from the cited Stacks construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars along ring isomorphism tensor product identifies with restriction scalars",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor extension of scalars along an isomorphism of ring sheaves comparison inverse restriction scalars",
+   "results": "Found PresheafOfModules.restrictScalarsCompToPresheaf and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply and toRestrictScalars_hom_apply. These are sectionwise ingredients; no sheafified tensor isomorphism for the supplied comparison t.",
+   "verdict": "partial ingredients; no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Ii]so|restrictScalars.*[Aa]dj|pushforwardPushforwardEquivalence",
+   "results": "Found the module scalar adjunction and pushforward equivalence, but no changeOfRings sheaf comparison of the required kind. The project ChangeOfRingsAdjunction.lean is for TopCat sites and cannot specialize to the small etale site.",
+   "verdict": "no complete match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleModuleInverseImageTransport",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "proof via inverse image of constant-ring modules; transport lemma, Definition 03D6 and Lemmas 03CZ, 03D7; parent proof step 3",
+   "via": [
+    "lem-weil-pbc-etale-module-inverse-image-transport",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleRingIsoTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleRingIsoTensor.lean",
+  "declaration": "AlgebraicGeometry.etaleModuleRingIsoTensor",
+  "statement": "theorem etaleModuleRingIsoTensor (U V : Scheme.{u}) (f : U ⟶ V) (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (c : Lr.obj RV ≅ RU) (L0 : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⥤ SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))) (LM : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⥤ SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)) (t : LM ⋙ SheafOfModules.pushforward (F := 𝟭 U.Etale) ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c).hom ≅ L0) : (∃ (d : ∀ G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV), SheafOfModules.changeOfRings.{u, u + 1, u + 1} (J := U.smallEtaleTopology) c.hom (L0.obj G) ≅ LM.obj G), (∀ (G H : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)) (h : G ⟶ H), SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} (J := U.smallEtaleTopology) c.hom (L0.obj G) (L0.map h) ≫ (d H).hom = (d G).hom ≫ LM.map h) ∧ (∀ (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)) (W : U.Etaleᵒᵖ) (a : RU.obj.obj W) (m : (L0.obj G).val.obj W), (d G).hom.val.app W ((toSheafify U.smallEtaleTopology (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} (J := U.smallEtaleTopology) c.hom (L0.obj G)).presheaf).app W (a ⊗ₜ[(Lr.obj RV).obj.obj W, (c.hom.hom.app W).hom] m)) = (t.inv.app G).val.app W ((c.inv.hom.app W a) • m)))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12629",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

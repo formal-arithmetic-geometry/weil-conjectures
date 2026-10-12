@@ -8,8 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleConstruction
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion
+import Sheaf.AlgebraicGeometry.EtaleModuleRingIsoAdjunction
+import Sheaf.AlgebraicGeometry.EtaleModuleRingIsoTensor
 
 /-!
 # Transport of the etale module inverse image
@@ -28,6 +30,32 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry
 
+private theorem adjunctionForgetUnitCounit
+    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
+    (L : C ⥤ D) (R : D ⥤ C) (La : A ⥤ B) (Ra : B ⥤ A)
+    (P : C ⥤ A) (Q : D ⥤ B) (am : L ⊣ R) (a : La ⊣ Ra)
+    (e : L ⋙ Q ≅ P ⋙ La) (d : R ⋙ P ≅ Q ⋙ Ra)
+    (hm : ∀ (G : C) (F : D) (h : L.obj G ⟶ F),
+      P.map (am.homEquiv G F h) ≫ d.hom.app F =
+        a.homEquiv (P.obj G) (Q.obj F) (e.inv.app G ≫ Q.map h)) :
+    (∀ G : C, P.map (am.unit.app G) ≫ d.hom.app (L.obj G) =
+      a.unit.app (P.obj G) ≫ Ra.map (e.inv.app G)) ∧
+    (∀ F : D, Q.map (am.counit.app F) =
+      e.hom.app (R.obj F) ≫ La.map (d.hom.app F) ≫ a.counit.app (Q.obj F)) := by
+  constructor
+  · intro G
+    simpa [Adjunction.homEquiv_id, Adjunction.homEquiv_unit] using hm G (L.obj G) (𝟙 _)
+  · intro F
+    have h := hm (R.obj F) F (am.counit.app F)
+    have hc : am.homEquiv (R.obj F) F (am.counit.app F) = 𝟙 _ := by
+      rw [← am.homEquiv_symm_id F, Equiv.apply_symm_apply]
+    rw [hc, P.map_id, Category.id_comp] at h
+    have h' := congrArg (fun t ↦ (a.homEquiv (P.obj (R.obj F)) (Q.obj F)).symm t) h
+    simp only [Equiv.symm_apply_apply, Adjunction.homEquiv_counit] at h'
+    simpa using congrArg (fun t ↦ e.hom.app (R.obj F) ≫ t) h'.symm
+
+set_option maxHeartbeats 600000 in
+-- Specializing the abstract adjunction identities to this dependent package exceeds the default.
 /-- Transport the module inverse image and its adjunction along a ring comparison.
 Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6.
 (blueprint: lem-weil-pbc-etale-module-inverse-image-transport).
@@ -243,6 +271,54 @@ theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
           gamma)).obj F) ≫
           (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app
             ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
-            1} RingCat.{u + 1})).obj RU)).obj F)) := by sorry
+            1} RingCat.{u + 1})).obj RU)).obj F)) := by
+  have _ := hconst
+  obtain ⟨L0, e0, hact⟩ := etaleInverseImageModuleConstruction U V f RV
+    Lr ar er ea ⟨hr, ha⟩
+  have hlin := etaleInverseImageModuleLinearCriterion U V f RV
+    Lr ar er ea L0 e0 ⟨hr, ha, hact⟩
+  obtain ⟨LM, e, t, am, ht, hm⟩ := etaleModuleRingIsoAdjunction U V f
+    RV RU Lr ar gamma c hc L0 e0 hlin
+  let FV := SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
+  let FU := SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
+  let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
+  let RM := SheafOfModules.pushforward.{u + 1}
+    (S := (sheafCompose V.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
+    (R := (sheafCompose U.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
+    (J := V.smallGrothendieckTopology @Etale) (K := U.smallGrothendieckTopology @Etale)
+    (F := MorphismProperty.Over.pullback @Etale ⊤ f)
+    ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      gamma)
+  let d : RM ⋙ FV ≅ FU ⋙ Etale.lowerStar AddCommGrpCat.{u + 1} f := Iso.refl _
+  obtain ⟨hu, hcu⟩ := adjunctionForgetUnitCounit LM RM
+    (Etale.upperStar AddCommGrpCat.{u + 1} f)
+    (Etale.lowerStar AddCommGrpCat.{u + 1} f) FV FU am a e d
+    (fun G F h ↦ (Category.comp_id _).symm.trans (hm G F h))
+  have hd := etaleModuleRingIsoTensor U V f RV RU Lr c L0 LM t
+  refine ⟨L0, LM, e0, e, t, am, ht, ?_, hd, hm, ?_, ?_⟩
+  · intro G
+    obtain ⟨muV, muU, hv, hu, hmu⟩ := hact G
+    refine ⟨muV, ?_, muU, ⟨?_, hmu⟩, ?_⟩
+    · intro W x
+      exact heq_of_eq (hv W x)
+    · intro W x
+      exact heq_of_eq (hu W x)
+    · intro nu hnu
+      ext W x
+      exact (eq_of_heq (hnu.1 W x)).trans (hu W x).symm
+  · intro G
+    exact (Category.comp_id _).symm.trans (hu G)
+  · intro F
+    have he : e.hom.app (RM.obj F) ≫
+        (Etale.upperStar AddCommGrpCat.{u + 1} f).map (d.hom.app F) ≫
+          a.counit.app (FU.obj F) = e.hom.app (RM.obj F) ≫ a.counit.app (FU.obj F) :=
+      (congrArg (fun k ↦ e.hom.app (RM.obj F) ≫ k ≫ a.counit.app (FU.obj F))
+        ((Etale.upperStar AddCommGrpCat.{u + 1} f).map_id _)).trans
+          (congrArg (fun k ↦ e.hom.app (RM.obj F) ≫ k) (Category.id_comp _))
+    exact (hcu F).trans he
 
 end AlgebraicGeometry

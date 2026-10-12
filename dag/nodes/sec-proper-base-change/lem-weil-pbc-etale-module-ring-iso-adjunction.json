@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-etale-module-ring-iso-adjunction",
+ "kind": "statement",
+ "title": "Transport a linearity criterion across a ring-sheaf isomorphism",
+ "statement": "Let $U,V$ be schemes and $f:U\\to V$ a morphism on their small etale sites [def-weil-pbc-etale-site]. Let $R_V,R_U$ be commutative ring sheaves, $L_r$ a left adjoint to the ring direct image with adjunction $a_r$, $c:L_r(R_V)\\cong R_U$, and $\\gamma:R_V\\to f_*R_U$ the adjunct of $c$. Write $F_V,F_0,F_U$ for forgetting modules over $R_V,L_r(R_V),R_U$ to abelian sheaves [def-weil-sheaf-of-modules-category], and $a:L_a\\dashv R_a$ for the etale abelian adjunction. Suppose $L_0:\\operatorname{Mod}(R_V)\\to\\operatorname{Mod}(L_r(R_V))$ and $e_0:L_0F_0\\cong F_VL_a$ are given. Assume that for every $G,F$ and abelian map $\\alpha:L_aF_VG\\to F_0F$, a linear lift $h:L_0G\\to F$ with $F_0h=e_0(G)\\alpha$ exists iff the abelian adjunct of $\\alpha$ lifts to an $R_V$-linear map $G\\to R_0F$, where $R_0$ is direct image along $a_r$'s ring unit [def-weil-pbc-direct-image]. Then there exist $L_M:\\operatorname{Mod}(R_V)\\to\\operatorname{Mod}(R_U)$, $e:L_MF_U\\cong F_VL_a$, $t:L_M\\operatorname{res}_c\\cong L_0$, and $a_M:L_M\\dashv f_{*,\\gamma}$. For every $G$, $F_0(t_G)e_{0,G}=e_G$. For every linear $h:L_MG\\to F$, $F_V(a_M(h))=a(e_G^{-1}F_Uh)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7, invertible ring-map specialization; parent proof step 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct LM as L0 followed by restriction along c.inv. Restriction along c.hom and c.inv are inverse functors up to natural identity-on-section comparisons: their composite scalar actions agree with the original action by the inverse-ring identities. They induce t and e.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the assumed linearity criterion to the same underlying map with the target restricted along c.hom. The adjunct identity gives gamma = ar.unit.app RV followed by direct image of c.hom. Thus restricting direct image along the ring unit is direct image along gamma. Linear maps and their underlying hom equivalence agree under these identifications.",
+   "uses": [
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The faithful forgetful functors make the linear lifts unique. Restrict the abelian hom equivalence to the two sets of linear maps. Its naturality gives am; its formula is the required hom comparison. The identity-on-sections comparison gives the equation relating t, e0, and e.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7, invertible ring-map specialization; parent proof step 2",
+  "note": "Explicit specialization and compatibility argument written by F1 from the cited Stacks construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport an adjunction of sheaves of modules by a ring isomorphism restriction scalars",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars along an isomorphism of sheaves of rings is an equivalence and agrees with extension of scalars",
+   "results": "Found SheafOfModules.restrictScalars, restrictScalars_obj_val, pushforwardCongr, and underlying-presheaf comparisons. These do not package transport of the given linearity criterion and its hom comparison.",
+   "verdict": "partial ingredients; no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Ii]so|pushforwardPushforwardEquivalence|etaleInverseImageModuleConstruction",
+   "results": "Mathlib Sheaf/PushforwardContinuous.lean defines pushforwardPushforwardEquivalence at line 388, and its section formulas at lines 403 and 409. This supplies the scalar equivalence, not the full adjunction transport/hom-equivalence compatibility.",
+   "verdict": "partial ingredient",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleModuleInverseImageTransport",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "proof via inverse image of constant-ring modules; transport lemma, Tags 03D3 and 03D7, invertible ring-map specialization; parent proof step 2",
+   "via": [
+    "lem-weil-pbc-etale-module-inverse-image-transport",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleRingIsoAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleRingIsoAdjunction.lean",
+  "declaration": "AlgebraicGeometry.etaleModuleRingIsoAdjunction",
+  "statement": "theorem etaleModuleRingIsoAdjunction (U V : Scheme.{u}) (f : U ⟶ V) (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (ar : Lr ⊣ (MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)) (gamma : RV ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)).obj RU) (c : Lr.obj RV ≅ RU) (hc : ar.homEquiv RV RU c.hom = gamma) (L0 : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⥤ SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))) (e0 : L0 ⋙ SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV)) ≅ SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⋙ Etale.upperStar AddCommGrpCat.{u + 1} f) (hlin : ∀ (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)) (F : SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))) (alpha : (Etale.upperStar AddCommGrpCat.{u + 1} f).obj ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).obj G) ⟶ (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))).obj F), (∃ h : L0.obj G ⟶ F, (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))).map h = e0.hom.app G ≫ alpha) ↔ ∃ k : G ⟶ (SheafOfModules.pushforward (J := V.smallGrothendieckTopology @Etale) (K := U.smallGrothendieckTopology @Etale) (F := MorphismProperty.Over.pullback @Etale ⊤ f) ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (ar.unit.app RV))).obj F, (SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).map k = (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).obj G) ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))).obj F) alpha) : ∃ (LM : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⥤ SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)) (e : LM ⋙ SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU) ≅ SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⋙ Etale.upperStar AddCommGrpCat.{u + 1} f) (t : LM ⋙ SheafOfModules.pushforward (F := 𝟭 U.Etale) ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c).hom ≅ L0) (am : LM ⊣ SheafOfModules.pushforward (J := V.smallGrothendieckTopology @Etale) (K := U.smallGrothendieckTopology @Etale) (F := MorphismProperty.Over.pullback @Etale ⊤ f) ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map gamma)), (∀ G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV), (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV))).map (t.hom.app G) ≫ e0.hom.app G = e.hom.app G) ∧ (∀ (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)) (F : SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)) (h : LM.obj G ⟶ F), (SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).map (am.homEquiv G F h) = (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).obj G) ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)).obj F) (e.inv.app G ≫ (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)).map h))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12629",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
