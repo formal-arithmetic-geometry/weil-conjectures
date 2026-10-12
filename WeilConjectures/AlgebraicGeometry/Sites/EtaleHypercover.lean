@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Refinement
+public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Map
 
 /-!
 # Étale hypercovers of quasi-compact quasi-separated schemes
@@ -257,13 +258,24 @@ noncomputable abbrev _root_.CategoryTheory.SemiSimplicialObject.baseChange
 lemma _root_.CategoryTheory.SemiSimplicialObject.IsHypercover.baseChange
     {U : SemiSimplicialObject X.Etale} (hU : U.IsHypercover X.smallEtaleTopology) :
     (U.baseChange g).IsHypercover Y.smallEtaleTopology :=
-  sorry
+  hU.map (Scheme.Hom.coverPreserving_etale g)
 
 /-- Base change of qcqs hypercovers along a quasi-compact quasi-separated morphism. -/
 lemma IsQcqsHypercover.baseChange [QuasiCompact g] [QuasiSeparated g]
     {U : SemiSimplicialObject X.Etale} (hU : IsQcqsHypercover U) :
-    IsQcqsHypercover (U.baseChange g) :=
-  sorry
+    IsQcqsHypercover (U.baseChange g) := by
+  have h (n : ℕ) : CompactSpace ((U.baseChange g).obj n).left ∧
+      QuasiSeparatedSpace ((U.baseChange g).obj n).left := by
+    rw [show ((U.baseChange g).obj n).left = Limits.pullback (U.obj n).hom g from rfl]
+    have := hU.compactSpace n
+    have := hU.quasiSeparatedSpace n
+    have : CompactSpace ((𝟭 Scheme).obj (U.obj n).left) :=
+      inferInstanceAs (CompactSpace (U.obj n).left)
+    have : QuasiSeparatedSpace ((𝟭 Scheme).obj (U.obj n).left) :=
+      inferInstanceAs (QuasiSeparatedSpace (U.obj n).left)
+    exact ⟨QuasiCompact.compactSpace_of_compactSpace (Limits.pullback.fst (U.obj n).hom g),
+      quasiSeparatedSpace_of_quasiSeparated (Limits.pullback.fst (U.obj n).hom g)⟩
+  exact ⟨hU.isHypercover.baseChange g, fun n ↦ (h n).1, fun n ↦ (h n).2⟩
 
 /-- The pullback of a section of `F` over an étale `X`-scheme `V` to a section of `g^* F` over
 `V ×_X Y`: the unit `F ⟶ g_* g^* F` evaluated at `V`. -/
