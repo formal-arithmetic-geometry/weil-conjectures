@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-strict-local-mate-continuity-presentation",
+ "kind": "statement",
+ "title": "Neighbourhood presentation of the strict-local derived mate",
+ "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $g:S_{(s)}\\to S$ its strict-henselization map [def-weil-pbc-strict-henselization-limit], $X'=X\\times_S S_{(s)}$, $p:X'\\to X$, and $f':X'\\to S_{(s)}$. For every $K\\in D^+(\\operatorname{Ab}(X_{et}))$ and $n\\in\\mathbf Z$, the map $m=\\Gamma(S_{(s)},H^n(\\mathrm{mate}_K))$ has a global cohomology continuity presentation with base $T=X$, object $K$, and degree $n$ [def-weil-pbc-global-cohomology-continuity-presentation]. The source cocone is colimiting and the composite of each source leg with $m$ is the canonical projection pullback. No target colimit or invertibility assertion is made.",
+ "source": {
+  "document": "Stacks Project, etale-cohomology.tex",
+  "place": "Tags 03Q9 (theorem-higher-direct-images), 03Q8 and 0GIT; presentation of neighbourhood restriction maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-global-cohomology-continuity-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Choose the small affine pointed-neighbourhood representative category from strictHenselization_properties. Its inclusion is initial and the representative diagram has the strict henselization as limit. Apply the fibre-product limit construction along f and identify its structural map using the prescribed affine legs. The stages are qcqs because f is qcqs and the neighbourhood bases are affine. Every transition is affine since it is the base change of a map between affine schemes. This gives I, D, c, t, p and their geometric properties.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lemma-weil-pbc-fibre-product-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take F to be the neighbourhood hypercohomology diagram. Choose a bounded-below injective representative J of K. Restriction to an etale neighbourhood preserves injectives, so sections of its restriction compute hypercohomology. Functorial restriction of sections, under derived adjunction and Leray, yields the stated transition formula and its functor laws. Sheafification of this cohomology presheaf computes homology of Rf_*K. Stalk invariance under sheafification and initiality of affine representatives give a colimiting cocone with vertex the geometric stalk. The germ restriction is invertible and exact inverse image commutes with homology; transport this cocone to the source group of the displayed mate. This gives sourceLegs and sourceIsColimit, without using derived continuity.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "lem-weil-pbc-strict-local-germ-restriction-iso",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact strict-local global sections and the derived Leray comparison to identify the target with hypercohomology of the pullback limit. On J the adjunction mate restricts sections along the pullback square: a section over a neighbourhood is sent to its inverse-image section along the limit projection. Taking homology and expressing inverse-image composition by its canonical coherence isomorphism proves the restriction equation, for every source leg. These equations supply the presentation and do not assert that its target cocone is colimiting.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lem-weil-pbc-strict-local-germ-restriction-iso",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lemma-weil-pbc-fibre-product-limit",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent J1 following document",
+  "document": "Stacks Project, etale-cohomology.tex",
+  "place": "Tag 03Q9, neighbourhood construction and final injective-complex paragraph; presentation and coherence expanded by J1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Present the strict henselization base change mate on global cohomology as the projection pullback cocone on affine etale neighbourhood hypercohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsColimit\", \"Cocone\", \"IsIso\"",
+   "results": "Matches: CategoryTheory.Limits.PushoutCocone.isIso_inl_of_epi_of_isColimit, CategoryTheory.Limits.PushoutCocone.isIso_inr_of_epi_of_isColimit, CategoryTheory.Limits.Cocone.isColimitOfIsIsoColimMapι, CategoryTheory.Limits.Cocone.isColimit_iff_isIso_colimMap_ι",
+   "date": "2026-10-12",
+   "verdict": "no exact match for this presentation"
+  },
+  {
+   "tool": "grep",
+   "query": "GlobalCohomologyContinuityPresentation|strictLocalBaseChange_continuityPresentation",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match for this presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "neighbourhood colimit and restriction maps in the strict-local argument",
+   "via": [
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_strictLocalBaseChange_continuityPresentation",
+  "statement": "theorem nonempty_strictLocalBaseChange_continuityPresentation {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : Nonempty (GlobalCohomologyContinuityPresentation X K n ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060741-L-2909237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060741-L-2909237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
