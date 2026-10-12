@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-total-fraction-fiber-decomposition",
+ "kind": "statement",
+ "title": "Total-fraction localization decomposes into minimal-prime fibres",
+ "statement": "Let R be a reduced Noetherian commutative ring in universe u [def-weil-pbc-noetherian-ring], A a commutative R-algebra in universe max(u,v), and S the nonzerodivisors of R. There exist n, an enumeration q: Fin n ≃ {p ∈ Spec R | p is minimal}, a ring isomorphism e: S⁻¹R ≃ ∏_i κ(q_i), and a ring isomorphism f: S⁻¹A ≃ ∏_i (κ(q_i) ⊗_R A), such that f(algebraMap(r))_i = algebraMap(e(r)_i) for every r in S⁻¹R and i in Fin n. Residue fields and fibres are those of [def-weil-pbc-localization-at-prime], and localizations are those of [def-weil-pbc-module-localization]. No Noetherianity, reducedness, nontriviality or regularity is assumed for A.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Algebra, Lemma Tag 02LX; Smoothing Ring Maps, Lemma Tag 07F5 (lemma-reduce-to-field), third paragraph of the proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply reduced_noetherian_total_ring_fractions to obtain n and q, bijective canonical maps from each prime localization to its residue field, and unique compatible maps φ_i from the total fraction ring to the prime localizations. Choose these uniquely determined φ_i within the theorem proof. RingHom.pi φ is bijective by the decomposition theorem, and its componentwise restriction identity makes it an R-algebra homomorphism. AlgEquiv.ofBijective, followed by AlgEquiv.piCongrRight of the bijective residue-field maps, gives an R-algebra isomorphism e from the total fraction ring to the product of residue fields.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Localization.tensorRightAlgEquiv identifies S⁻¹A with (S⁻¹R) ⊗_R A. Apply tensor symmetry, tensor congruence with e, Algebra.TensorProduct.piRight for the finite product, then tensor symmetry in each factor. Their composite is the required ring isomorphism f to the product of fibres. This is the base-change property of localization followed by Mathlib finite-product tensor distribution.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse localization equivalence sends the scalar r to r ⊗ 1. The next maps send it successively to 1 ⊗ r, 1 ⊗ e(r), the tuple of 1 ⊗ e(r)_i, and finally e(r)_i ⊗ 1. This is exactly the scalar map into each fibre. Tensor-product simp lemmas prove the compatibility. The same construction allows n=0, so the zero ring causes no exception.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Algebra, Lemma Tag 02LX; Smoothing Ring Maps, Lemma Tag 07F5 (lemma-reduce-to-field), third paragraph of the proof",
+  "note": "The source argument is expanded into the explicit Lean construction; no new unproved statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of smooth algebras is preserved under isomorphism of the base ring and under finite products",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total quotient ring localization of an algebra over a reduced Noetherian ring is the product of its fibres at the minimal primes, compatibly with the product of residue fields of the base",
+   "results": "PrimeSpectrum.piLocalizationToMaximalEquiv, PrimeSpectrum.piLocalizationToMaximal_bijective, MaximalSpectrum.toPiLocalizationEquiv, Localization.AtPrime.mapPiEvalRingHom_bijective, and related spectrum localization definitions. No exact match for the compatible two-ring decomposition.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind_smooth|IsRegular.*[Ll]ocaliz|[Gg]eometrically[Rr]egular.*[Rr]egular; tensor product piRight; CommAlgCat restrictScalars",
+   "results": "Mathlib.CategoryTheory.ObjectProperty.Ind provides transport of colimit presentations and closure under isomorphisms. Mathlib.RingTheory.TensorProduct.Pi provides Algebra.TensorProduct.piRight. Mathlib has AlgCat.restrictScalarsEquivalenceOfRingEquiv, but no corresponding CommAlgCat equivalence in Basic. The project has the proved binary Algebra.ind_smooth_prod; no combined finite-product/base-transport statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLocalizedIndSmooth",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Tag 07F5, third paragraph: total fraction decomposition, finite products, and transport of the resulting smooth colimit presentation.",
+   "via": [
+    "lem-weil-pbc-popescu-standard-nonzerodivisor-aux-localized-ind",
+    "lem-weil-pbc-popescu-standard-nonzerodivisor-aux",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TotalFractionFiberDecomposition",
+  "file": "lean/Sheaf/RingTheory/TotalFractionFiberDecomposition.lean",
+  "declaration": "total_fraction_fiber_decomposition",
+  "statement": "theorem total_fraction_fiber_decomposition\n    (R : Type u) (A : Type (max u v)) [CommRing R] [CommRing A] [Algebra R A]\n    [IsNoetherianRing R] [IsReduced R] :\n    ∃ (n : ℕ) (q : Fin n ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R})\n      (e : Localization R⁰ ≃+* ∀ i, (q i).val.asIdeal.ResidueField)\n      (f : Localization (Algebra.algebraMapSubmonoid A R⁰) ≃+*\n        ∀ i, (q i).val.asIdeal.Fiber A),\n      ∀ r i, f (algebraMap (Localization R⁰)\n          (Localization (Algebra.algebraMapSubmonoid A R⁰)) r) i =\n        algebraMap ((q i).val.asIdeal.ResidueField) ((q i).val.asIdeal.Fiber A) (e r i)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T194145-L-466383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T194145-L-466383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

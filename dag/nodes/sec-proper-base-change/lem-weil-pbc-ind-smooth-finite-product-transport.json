@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-ind-smooth-finite-product-transport",
+ "kind": "statement",
+ "title": "Ind-smoothness under compatible finite product decompositions",
+ "statement": "Let R be a commutative ring in universe u and A an R-algebra in universe max(u,v). Let n be a natural number, K_i commutative rings in universe u and B_i commutative K_i-algebras in universe max(u,v), indexed by Fin n. Suppose e: R ≃ ∏_i K_i and f: A ≃ ∏_i B_i are ring isomorphisms satisfying f(algebraMap(r))_i = algebraMap(e(r)_i). If every B_i is a filtered colimit of smooth K_i-algebras with diagram and terms in universe max(u,v) [def-weil-pbc-filtered-colimit-smooth-algebras, def-weil-pbc-smooth-ring-map], then A is a filtered colimit of smooth R-algebras in the same universe. The empty product is allowed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07F5 (lemma-reduce-to-field), third paragraph of the proof; Lemma Tag 07F3 (lemma-product)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Define restriction of scalars CommAlgCat S → CommAlgCat R along a ring map. Along e: R ≃ S its inverse is restriction along e inverse; the unit and counit are identity ring isomorphisms, with algebra compatibility following from the inverse identities. Map a colimit presentation along this equivalence. Each smooth S-algebra becomes smooth over R because the isomorphism R → S is smooth and smooth ring maps compose (Mathlib.RingTheory.RingHom.Smooth). Transport the apex along the compatible target ring isomorphism. This constructs ind_smooth_transport without new axioms.",
+   "uses": [
+    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n for the componentwise algebra ∏ K_i → ∏ B_i. For n=0 both rings are subsingleton, so their structure map is bijective and hence smooth; ObjectProperty.le_ind gives a one-object presentation. For n+1, split the dependent tuple into its zero coordinate and its tail using Fin.consEquiv, upgraded to a ring isomorphism by pointwise addition and multiplication. Apply the induction hypothesis to the tail, then Algebra.ind_smooth_prod to the zero coordinate and tail. The compatible splitting isomorphisms transport this presentation to the original dependent products.",
+   "uses": [
+    "lem-weil-pbc-popescu-product",
+    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the transport construction of the first step to the product presentation of the second step and the given e,f. The scalar compatibility is precisely the pointwise hypothesis, by function extensionality. The equivalence changes neither the index category nor the term universe.",
+   "uses": [
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-popescu-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07F5 (lemma-reduce-to-field), third paragraph of the proof; Lemma Tag 07F3 (lemma-product)",
+  "note": "The source argument is expanded into the explicit Lean construction; no new unproved statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of smooth algebras is preserved under isomorphism of the base ring and under finite products",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular algebra over a reduced Noetherian ring becomes a filtered colimit of smooth algebras after localization at the nonzerodivisors",
+   "results": "Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.of_isLocalization_Away, Algebra.Smooth.exists_finiteType, and related standard smooth localization results. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ind_smooth|IsRegular.*[Ll]ocaliz|[Gg]eometrically[Rr]egular.*[Rr]egular; tensor product piRight; CommAlgCat restrictScalars",
+   "results": "Mathlib.CategoryTheory.ObjectProperty.Ind provides transport of colimit presentations and closure under isomorphisms. Mathlib.RingTheory.TensorProduct.Pi provides Algebra.TensorProduct.piRight. Mathlib has AlgCat.restrictScalarsEquivalenceOfRingEquiv, but no corresponding CommAlgCat equivalence in Basic. The project has the proved binary Algebra.ind_smooth_prod; no combined finite-product/base-transport statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLocalizedIndSmooth",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Tag 07F5, third paragraph: total fraction decomposition, finite products, and transport of the resulting smooth colimit presentation.",
+   "via": [
+    "lem-weil-pbc-popescu-standard-nonzerodivisor-aux-localized-ind",
+    "lem-weil-pbc-popescu-standard-nonzerodivisor-aux",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IndSmoothFiniteProductTransport",
+  "file": "lean/Sheaf/RingTheory/IndSmoothFiniteProductTransport.lean",
+  "declaration": "Algebra.ind_smooth_of_finite_product",
+  "statement": "theorem Algebra.ind_smooth_of_finite_product\n    (R : Type u) (A : Type (max u v)) [CommRing R] [CommRing A] [Algebra R A]\n    (n : ℕ) (K : Fin n → Type u) (B : Fin n → Type (max u v))\n    [∀ i, CommRing (K i)] [∀ i, CommRing (B i)] [∀ i, Algebra (K i) (B i)]\n    (e : R ≃+* ∀ i, K i) (f : A ≃+* ∀ i, B i)\n    (hcompat : ∀ r i, f (algebraMap R A r) i = algebraMap (K i) (B i) (e r i))\n    (hB : ∀ i, ObjectProperty.ind.{max u v}\n      (fun C : CommAlgCat.{max u v} (K i) ↦ Algebra.Smooth (K i) C)\n      (CommAlgCat.of (K i) (B i))) :\n    ObjectProperty.ind.{max u v}\n      (fun C : CommAlgCat.{max u v} R ↦ Algebra.Smooth R C) (CommAlgCat.of R A)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T194145-L-466383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T194145-L-466383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

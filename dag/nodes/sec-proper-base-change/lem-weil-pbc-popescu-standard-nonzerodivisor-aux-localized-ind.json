@@ -16,38 +16,45 @@
  },
  "proof": [
   {
-   "text": "PT over the total ring of fractions. Let $S\\subset R$ be the set of nonzerodivisors and $Q=S^{-1}R$. $R$ is reduced, Noetherian and nonzero, so it has finitely many minimal primes $\\mathfrak q_1,\\dots,\\mathfrak q_t$ [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $t\\ge1$ (a nonzero ring has a prime, and every prime contains a minimal prime), and by [lem-weil-pbc-reduced-noetherian-total-ring-fractions] each $K_i=R_{\\mathfrak q_i}=\\kappa(\\mathfrak q_i)$ is a field and $Q\\to K_1\\times\\cdots\\times K_t$ is an isomorphism. Tensoring with $\\Lambda$ over $R$: $S^{-1}\\Lambda\\cong\\Lambda\\otimes_RQ\\cong\\prod_i\\Lambda\\otimes_RK_i=:\\prod_i\\Lambda_i$ (localization is base change to $S^{-1}R$, and $\\otimes$ commutes with finite products), compatibly with $Q\\cong\\prod_iK_i$. Each $\\Lambda_i=\\Lambda\\otimes_R\\kappa(\\mathfrak q_i)$ [def-weil-pbc-localization-at-prime] is the fibre ring of $R\\to\\Lambda$ at $\\mathfrak q_i$, so it is Noetherian and geometrically regular over $\\kappa(\\mathfrak q_i)=K_i$ by regularity [def-weil-pbc-g-ring]. Hence $K_i\\to\\Lambda_i$ is a regular ring map of Noetherian rings: it is flat, every module over a field being free [def-weil-pbc-flat-ring-map], and its only fibre ring, over the prime $(0)$ of $K_i$ with $\\kappa((0))=K_i$, is $\\Lambda_i\\otimes_{K_i}K_i\\cong\\Lambda_i$. By the field-case hypothesis PT holds for each $K_i\\to\\Lambda_i$, so by [lem-weil-pbc-popescu-product], applied $t-1$ times ($(K_1\\times\\cdots\\times K_{s})\\times K_{s+1}$ for $s=1,\\dots,t-1$), PT holds for $\\prod_iK_i\\to\\prod_i\\Lambda_i$, hence, transporting along the isomorphisms $Q\\cong\\prod_iK_i$, $S^{-1}\\Lambda\\cong\\prod_i\\Lambda_i$, for $Q\\to S^{-1}\\Lambda$ [def-weil-pbc-filtered-colimit-smooth-algebras].",
+   "text": "Apply total_fraction_fiber_decomposition to R and Λ, obtaining a finite enumeration q of the minimal primes and compatible isomorphisms from the localized base to ∏ κ(q_i) and the localized target to ∏ q_i.Fiber Λ. This construction does not use the field-case hypothesis or regularity.",
    "uses": [
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-total-fraction-fiber-decomposition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each q_i, unfold RingHom.IsRegular and toAlgebra_algebraMap to extract geometric regularity of its fibre. Its Noetherianity is the first clause. A geometrically regular k-algebra A over a field gives a regular map k → A: flatness is automatic, and for a prime p of k use p.algEquivResidueFieldOfField to identify its fibre with A. For every finite purely inseparable extension L of the residue field, restrict scalars to k; the canonical field isomorphism is finite and purely inseparable, so these properties compose. Apply geometric regularity over k and cancel the intermediate base change with Algebra.TensorProduct.cancelBaseChange. This proves geometric regularity of the only fibre, hence regularity of k → A. Apply the assumed field case to each residue-field fibre.",
+   "uses": [
     "def-weil-pbc-g-ring",
     "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-popescu-product",
-    "def-weil-pbc-filtered-colimit-smooth-algebras",
+    "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-noetherian-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F5 (lemma-reduce-to-field, lines 2011-2064), third paragraph ('Q = K_1 x ... x K_n is a product of fields, see Algebra, Lemmas 02LX and 00FR. By Lemma 07F3 and our assumption PT holds for S^{-1}R -> S^{-1}Lambda'; the regularity of K_i -> Lambda_i, which Stacks leaves implicit, is written out here)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply Algebra.ind_smooth_of_finite_product to the compatible decomposition and the component presentations from the preceding step. This yields the required presentation over Localization R⁰ in universe max(u,v).",
+   "uses": [
+    "lem-weil-pbc-ind-smooth-finite-product-transport",
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-total-fraction-fiber-decomposition",
   "def-weil-pbc-g-ring",
   "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-popescu-product",
-  "def-weil-pbc-filtered-colimit-smooth-algebras",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-ind-smooth-finite-product-transport",
+  "def-weil-pbc-filtered-colimit-smooth-algebras"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma Tag 07F5 (lemma-reduce-to-field), proof"
+  "place": "Lemma Tag 07F5 (lemma-reduce-to-field), third paragraph of the proof; Lemma Tag 07F3 (lemma-product)",
+  "note": "U1: explicit fibre regularity, finite-product induction and compatible tensor-product decomposition; all new lemmas proved."
  },
  "mathlib_searches": [
   {
@@ -129,9 +136,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T173902-L-3305548",
+  "landing": "20261012T194145-L-466383",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
