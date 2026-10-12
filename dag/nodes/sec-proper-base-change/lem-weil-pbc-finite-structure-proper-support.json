@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-finite-structure-proper-support",
+ "kind": "statement",
+ "title": "Proper support of a finite structure direct image",
+ "statement": "Let $p:Y\\to X$ be finite [def-weil-finite-integral-morphism], let $X$ be locally Noetherian, and let $f:X\\to S$ be separated and locally of finite type [def-weil-finite-type-morphism]. Suppose $f\\circ p:Y\\to S$ is proper [def-weil-proper-morphism]. Then the module $p_*\\mathcal O_Y$ has support proper over $S$ [def-weil-pbc-closed-subset-proper-over-base].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), support condition of 088F"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Finite direct image of the structure module is coherent; the coherence criterion supplies quasi-coherence and finite type.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Closedness of the support is the first clause of module_support_proper_over_base. The full source is proper over the base, hence its closed image is proper by the image clause of closed_subset_proper_over_base_properties.",
+   "uses": [
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Outside the closed image, restrict any germ representative to the intersection with the complementary open. Its inverse image is empty, so its section ring is subsingleton and its germ is zero. Thus the support is contained in the image. Apply the closed-subset clause of closed_subset_proper_over_base_properties.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "09ZT, proof; expanded by G3 along the parent node steps",
+  "note": "Support proof written in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite pushforward of the structure sheaf has proper support if the composite scheme morphism is proper",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image of the structure sheaf under a finite morphism has support contained in its closed image",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter, AlgebraicGeometry.Scheme.image_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.mk, Function.Surjective",
+   "results": "Ideal.Quotient.mk_surjective, RingHom.quotientKerEquivOfSurjective_symm_comp, Ideal.quotientKerAlgEquivOfSurjective_mk, RingHom.quotientKerEquivOfSurjective_apply_mk, Ideal.quotientKerAlgEquivOfSurjective_symm_apply, RingHom.quotientKerEquivOfSurjective_symm_apply, OrthogonalIdempotents.surjective_pi, IsDedekindDomain.idealFactorsFunOfQuotHom_coe_coe; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*pushforward|pushforward.*support|ker.*Quotient.mk",
+   "results": "Mathlib/Topology/LocallyFinsupp/Pushforward.lean, Mathlib/Topology/LocallyFinsupp/Pushforward.lean, Mathlib/Topology/LocallyFinsupp/Pushforward.lean, Mathlib/Topology/LocallyFinsupp/Pushforward.lean, Mathlib/Data/Setoid/Basic.lean, Mathlib/Data/Setoid/Basic.lean, Mathlib/Data/Setoid/Basic.lean, Mathlib/LinearAlgebra/Isomorphisms.lean; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AlgebraizeFiniteStructureAlgebra",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "09ZT algebraization subargument: parent lem-weil-pbc-algebraize-finite-structure-algebra, step 4",
+   "via": [
+    "lem-weil-pbc-algebraize-finite-structure-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStructureProperSupport",
+  "file": "lean/Sheaf/Paper/FiniteStructureProperSupport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_structure_proper_support",
+  "statement": "theorem finite_structure_proper_support {Y X S : Scheme.{u}}\n    (p : Y ⟶ X) (f : X ⟶ S) [IsFinite p] [IsLocallyNoetherian X]\n    [IsSeparated f] [LocallyOfFiniteType f] [IsProper (p ≫ f)] :\n    HasSupportProperOver f\n      ((pushforward p).obj (SheafOfModules.unit Y.ringCatSheaf))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T112841-L-768142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T112841-L-768142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
