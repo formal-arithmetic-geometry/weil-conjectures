@@ -39,6 +39,29 @@ theorem exists_annihilator_of_subsingleton_localizedModule
     (M : Type v) [AddCommGroup M] [Module A M] [Module.Finite A M]
     (hzero : Subsingleton (LocalizedModule S M)) :
     ∃ s ∈ S, ∀ m : M, s • m = 0 := by
-  sorry
+  classical
+  have hkill := (LocalizedModule.subsingleton_iff (S := S) (M := M)).mp hzero
+  obtain ⟨g, hg⟩ := Module.Finite.fg_top (R := A) (M := M)
+  have hfinite : ∀ t : Finset M, ∃ s ∈ S, ∀ m ∈ t, s • m = 0 := by
+    intro t
+    induction t using Finset.induction_on with
+    | empty => exact ⟨1, S.one_mem, by simp⟩
+    | @insert m t hmt ih =>
+      obtain ⟨s, hs, hst⟩ := ih
+      obtain ⟨r, hr, hrm⟩ := hkill m
+      refine ⟨s * r, S.mul_mem hs hr, ?_⟩
+      intro x hx
+      rcases Finset.mem_insert.mp hx with rfl | hx
+      · rw [mul_smul, hrm, smul_zero]
+      · rw [mul_comm, mul_smul, hst x hx, smul_zero]
+  obtain ⟨s, hs, hsg⟩ := hfinite g
+  refine ⟨s, hs, ?_⟩
+  intro m
+  have hm : m ∈ Submodule.span A (g : Set M) := by rw [hg]; trivial
+  induction hm using Submodule.span_induction with
+  | mem x hx => exact hsg x hx
+  | zero => exact smul_zero s
+  | add x y hx hy ihx ihy => rw [smul_add, ihx, ihy, add_zero]
+  | smul a x hx ih => rw [smul_comm s a x, ih, smul_zero]
 
 end Module
