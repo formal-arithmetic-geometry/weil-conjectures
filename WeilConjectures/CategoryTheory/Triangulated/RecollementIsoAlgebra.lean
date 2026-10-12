@@ -29,7 +29,8 @@ We show the formal part of the Weil clause of blueprint `prop-sf-localization-al
 2. the mate `FC ⋙ j^* ⟶ j^* ⋙ FU` of `αjLow` is an isomorphism
    (`CategoryTheory.Pretriangulated.Recollement.leftAdjointIso`), so that `j^* ⊣ j_*` lifts to
    objects with Frobenius structure as well
-   (`Recollement.mateEquiv_leftAdjointIso_inv`, `CategoryTheory.Endofunctor.IsoAlgebra.adjunction`);
+   (`Recollement.mateEquiv_leftAdjointIso_inv`,
+   `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`);
 3. if `αjLow` is the mate of `αj⁻¹`, then for `(K, θ : FC K ≅ K)` all three arrows of the
    supported localization triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶ (i i^! K)⟦1⟧` commute with the
    Frobenius structures (`Recollement.mapTriangleIso`): for the third arrow this follows from the
@@ -90,7 +91,8 @@ equivariant. -/
 noncomputable def isoAlgebraAdjunction :
     IsoAlgebra.mapOfNatIso αi ⊣
       IsoAlgebra.mapOfNatIso (rightAdjointIso adj adj' αi αjLow hi h₀ hess) :=
-  IsoAlgebra.adjunction (mateEquiv_inv_eq_rightAdjointIso_hom adj adj' αi αjLow hi h₀ hess)
+  IsoAlgebra.mapOfNatIsoAdjunction adj' _ _
+    (mateEquiv_inv_eq_rightAdjointIso_hom adj adj' αi αjLow hi h₀ hess)
 
 include αi h₀ hess in
 /-- In a recollement, the mate `FC ⋙ j^* ⟶ j^* ⋙ FU` of `αjLow : j_* ⋙ FC ≅ FU ⋙ j_*` along
@@ -122,7 +124,7 @@ noncomputable def leftAdjointIso : jUp ⋙ FU ≅ FC ⋙ jUp :=
 
 /-- `αjLow` is the mate of the inverse of
 `CategoryTheory.Pretriangulated.Recollement.leftAdjointIso`, so that `j^* ⊣ j_*` lifts to objects
-with Frobenius structure (`CategoryTheory.Endofunctor.IsoAlgebra.adjunction`). -/
+with Frobenius structure (`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction`). -/
 lemma mateEquiv_leftAdjointIso_inv :
     mateEquiv adj adj (leftAdjointIso adj αi αjLow h₀ hess).inv = αjLow.hom :=
   (mateEquiv adj adj).apply_symm_apply _
@@ -160,7 +162,7 @@ include hj in
 lemma map_unit_comp_str (K : IsoAlgebra FC) :
     FC.map (adj.unit.app K.carrier) ≫ (strOpen αj αjLow K).hom =
       K.str.hom ≫ adj.unit.app K.carrier :=
-  ((IsoAlgebra.adjunction hj).unit.app K).hom.h
+  ((IsoAlgebra.mapOfNatIsoAdjunction adj _ _ hj).unit.app K).hom.h
 
 include hj in
 /-- Blueprint `prop-sf-localization-all-stages` (Weil clause): the third arrow

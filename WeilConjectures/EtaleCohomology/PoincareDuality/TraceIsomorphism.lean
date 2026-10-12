@@ -151,7 +151,7 @@ end TateOrientation
 end DualityAtZero
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
-  [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} {d : ℕ}
+  [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} [HasInvertibleExponent Λ X] {d : ℕ}
   (a : X ⟶ Spec (.of k)) [IsProper a] [SmoothOfRelativeDimension d a] [GeometricallyConnected a]
 
 namespace TateOrientation

@@ -137,7 +137,8 @@ noncomputable def boundedConstructibleRationalUpperStarIsoAlgebraAdjunction :
         (boundedConstructibleRationalUpperStarCommIso M I aX τX i j hij aZ aU τZ τU hi hj) ⊣
       IsoAlgebra.mapOfNatIso
         (boundedConstructibleRationalRightDerivedLowerStarCommIso M I aX aU j τX τU hj) :=
-  IsoAlgebra.adjunction
+  IsoAlgebra.mapOfNatIsoAdjunction (boundedConstructibleRationalUpperStarLowerStarAdjunction M aX j)
+    _ _
     (mateEquiv_boundedConstructibleRationalUpperStarCommIso_inv M I aX τX i j hij aZ aU τZ τU hi hj)
 
 /-- Blueprint `prop-sf-localization-all-stages` (Weil clause, stage `E`): the Frobenius

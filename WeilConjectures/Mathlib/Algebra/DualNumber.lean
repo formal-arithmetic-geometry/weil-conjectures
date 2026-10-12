@@ -27,6 +27,20 @@ namespace DualNumber
 
 variable {R : Type*} [CommSemiring R]
 
+section LiftElem
+
+variable {A : Type*} [CommSemiring A] [Algebra R A]
+
+/-- The `R`-algebra homomorphism `R[ε] → A`, `ε ↦ m`, for an element `m` of square zero. -/
+def liftElem (m : A) (hm : m * m = 0) : R[ε] →ₐ[R] A :=
+  lift ⟨(Algebra.ofId R A, m), hm, fun _ ↦ Commute.all _ _⟩
+
+theorem liftElem_apply (m : A) (hm : m * m = 0) (x : R[ε]) :
+    liftElem m hm x = algebraMap R A x.fst + algebraMap R A x.snd * m :=
+  rfl
+
+end LiftElem
+
 /-- The `R`-algebra endomorphism `ε ↦ cε` of the dual numbers. -/
 def scale (c : R) : R[ε] →ₐ[R] R[ε] :=
   TrivSqZeroExt.map (c • LinearMap.id)
