@@ -44,6 +44,87 @@ universe u
 
 open CategoryTheory Limits
 
+namespace CategoryTheory.Limits.CokernelCofork
+
+section Preadditive
+
+variable {C : Type*} [Category* C] [Preadditive C]
+
+/-- A cokernel of an endomorphism `f'` of `Y` gives one of an endomorphism `f` of `X` which is
+conjugate to `f'` by an isomorphism `e : X ≅ Y`. -/
+noncomputable def isColimitOfπOfIso {X Y Z : C} {f : X ⟶ X} {f' : Y ⟶ Y} (e : X ≅ Y)
+    (he : f ≫ e.hom = e.hom ≫ f') {π : Y ⟶ Z} (w : f' ≫ π = 0)
+    (h : IsColimit (CokernelCofork.ofπ π w)) :
+    IsColimit (CokernelCofork.ofπ (f := f) (e.hom ≫ π)
+      (by rw [← Category.assoc, he, Category.assoc, w, comp_zero])) :=
+  have : Epi π := epi_of_isColimit_cofork h
+  IsColimit.ofπ' _ _ fun {A} k hk ↦ by
+    have hk2 : f' ≫ e.inv ≫ k = 0 := by
+      rw [← Category.assoc, show f' ≫ e.inv = e.inv ≫ f by
+        rw [Iso.comp_inv_eq, Category.assoc, he, Iso.inv_hom_id_assoc], Category.assoc, hk,
+        comp_zero]
+    have hd : π ≫ h.desc (CokernelCofork.ofπ (e.inv ≫ k) hk2) = e.inv ≫ k :=
+      Cofork.IsColimit.π_desc h
+    exact ⟨h.desc (CokernelCofork.ofπ (e.inv ≫ k) hk2), by
+      rw [Category.assoc, hd]
+      exact Iso.hom_inv_id_assoc _ _⟩
+
+/-- **Cokernels of `n` commute with coproducts.** If `q i : P i ⟶ P' i` is a cokernel of
+multiplication by `n` on `P i` for every `i`, then the induced map `∐ P ⟶ ∐ P'` is a cokernel of
+multiplication by `n` on `∐ P`, for any colimit cofans. -/
+noncomputable def isColimitOfπNsmulOfCofan {ι : Type*} {P P' : ι → C} (n : ℕ)
+    (q : ∀ i, P i ⟶ P' i) (w : ∀ i, (n • 𝟙 (P i)) ≫ q i = 0)
+    (hq : ∀ i, IsColimit (CokernelCofork.ofπ (q i) (w i))) {c : Cofan P} (hc : IsColimit c)
+    {c' : Cofan P'} (hc' : IsColimit c') :
+    IsColimit (CokernelCofork.ofπ (f := n • 𝟙 c.pt)
+      (Cofan.IsColimit.desc hc fun i ↦ q i ≫ c'.inj i) (Cofan.IsColimit.hom_ext hc _ _ fun i ↦ by
+        simp only [Preadditive.nsmul_comp, Category.id_comp, Preadditive.comp_nsmul,
+          Cofan.IsColimit.fac, comp_zero]
+        rw [← Preadditive.nsmul_comp, show n • q i = 0 by simpa using w i, zero_comp])) :=
+  have hk (i : ι) {A : C} (k : c.pt ⟶ A) (hk : (n • 𝟙 c.pt) ≫ k = 0) :
+      (n • 𝟙 (P i)) ≫ c.inj i ≫ k = 0 := by
+    simp only [Preadditive.nsmul_comp, Category.id_comp] at hk ⊢
+    rw [← Preadditive.comp_nsmul, hk, comp_zero]
+  IsColimit.ofπ _ _
+    (fun {A} k hk' ↦ Cofan.IsColimit.desc hc' fun i ↦
+      (hq i).desc (CokernelCofork.ofπ (c.inj i ≫ k) (hk i k hk')))
+    (fun {A} k hk' ↦ Cofan.IsColimit.hom_ext hc _ _ fun i ↦ by
+      rw [← Category.assoc, Cofan.IsColimit.fac, Category.assoc, Cofan.IsColimit.fac]
+      exact Cofork.IsColimit.π_desc (hq i))
+    (fun {A} k hk' m hm ↦ Cofan.IsColimit.hom_ext hc' _ _ fun i ↦ by
+      have : Epi (q i) := epi_of_isColimit_cofork (hq i)
+      rw [← cancel_epi (q i), Cofan.IsColimit.fac]
+      have hd : q i ≫ (hq i).desc (CokernelCofork.ofπ (c.inj i ≫ k) (hk i k hk')) =
+          c.inj i ≫ k := Cofork.IsColimit.π_desc (hq i)
+      rw [hd, ← hm, ← Category.assoc, ← Category.assoc, Cofan.IsColimit.fac])
+
+end Preadditive
+
+variable {C : Type*} [Category* C]
+
+/-- **Cokernels of compatible endomorphisms of a short exact sequence.** Let `a`, `b`, `c` be
+endomorphisms of the terms of a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0`, compatible with its
+maps, with `a` an epimorphism. Then a cokernel `π` of `c` gives the cokernel `g ≫ π` of `b`. -/
+noncomputable def isColimitOfπOfShortExact [Abelian C] {S : ShortComplex C} (hS : S.ShortExact)
+    {a : S.X₁ ⟶ S.X₁} {b : S.X₂ ⟶ S.X₂} {c : S.X₃ ⟶ S.X₃} (hab : a ≫ S.f = S.f ≫ b)
+    (hbc : b ≫ S.g = S.g ≫ c) [Epi a] {Z : C} {π : S.X₃ ⟶ Z} (w : c ≫ π = 0)
+    (h : IsColimit (CokernelCofork.ofπ π w)) :
+    IsColimit (CokernelCofork.ofπ (f := b) (S.g ≫ π)
+      (by rw [← Category.assoc, hbc, Category.assoc, w, comp_zero])) :=
+  have : Epi π := epi_of_isColimit_cofork h
+  have : Epi S.g := hS.epi_g
+  IsColimit.ofπ' _ _ fun {A} k hk ↦ by
+    have hfk : S.f ≫ k = 0 := (cancel_epi a).1 (by
+      rw [← Category.assoc, hab, Category.assoc, hk, comp_zero, comp_zero])
+    let k' := hS.exact.gIsCokernel.desc (CokernelCofork.ofπ k hfk)
+    have hk' : S.g ≫ k' = k := Cofork.IsColimit.π_desc hS.exact.gIsCokernel
+    have hck : c ≫ k' = 0 := (cancel_epi S.g).1 (by
+      rw [← Category.assoc, ← hbc, Category.assoc, hk', hk, comp_zero])
+    have hd : π ≫ h.desc (CokernelCofork.ofπ k' hck) = k' := Cofork.IsColimit.π_desc h
+    exact ⟨h.desc (CokernelCofork.ofπ k' hck), by rw [Category.assoc, hd, hk']⟩
+
+end CategoryTheory.Limits.CokernelCofork
+
 namespace AlgebraicGeometry.Scheme
 
 section Generic
