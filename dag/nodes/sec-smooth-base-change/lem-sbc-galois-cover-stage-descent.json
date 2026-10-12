@@ -14,14 +14,14 @@
  ],
  "proof": [
   {
-   "text": "Reindex by a coinitial directed poset using [lem-weil-pbc-cofiltered-limit-directed-reindex]. The cone remains limiting and qcqs and affine-transition hypotheses persist. A stage of this restriction is an object of I, so a descended cartesian model gives the required model in I.",
+   "text": "Reindex I by the opposite of a nonempty directed partial order A using IsFiltered.exists_directed on Iᵒᵖ and F.leftOp.Initial. Functor.Initial.isLimitWhiskerEquiv transfers the given limiting cone. The inherited qcqs and affine-transition assumptions are local instances. A stage of the restriction is an object of I.",
    "uses": [
     "lem-weil-pbc-cofiltered-limit-directed-reindex"
    ],
    "elementary": false
   },
   {
-   "text": "The finite étale map Z.π is of finite presentation. Descend it by the object clause of [thm-pd-spreading-out], retaining a cartesian comparison. Its stage source is qcqs because it is finitely presented over a qcqs scheme. Apply [lem-weil-pbc-descend-finite], [lem-weil-pbc-descend-etale], and [lem-weil-pbc-descend-surjective] at a common later stage. Their hypotheses hold: finite presentation gives local finite presentation and local finite type; both stage source and target are qcqs; the limit map has each required property. The result is finite, étale, and surjective.",
+   "text": "The private helper exists_finiteEtaleSurjective_limit_stage applies Scheme.exists_isPullback_of_finitePresentation to Z.π. The model is qcqs by quasi-compact and quasi-separated permanence. Its pullback is finite, étale, and surjective by the cartesian model isomorphism. Apply exists_isFinite_baseChange_stage, Etale.exists_stage_of_inverseLimit, and exists_surjective_of_isLimit separately. Choose a common upper bound and use base-change stability to retain all three properties. Pullback pasting gives a finite étale surjective model with its cartesian comparison.",
    "uses": [
     "thm-pd-spreading-out",
     "lem-weil-pbc-descend-finite",
@@ -31,18 +31,31 @@
    "elementary": false
   },
   {
-   "text": "Enumerate the finite group by a finite type. By the morphism clause of [thm-pd-spreading-out], descend all the action endomorphisms as maps over the base to a common stage. Its equality clause makes the finitely many unit and multiplication equations hold at a later common stage. The comparison map from the finite coproduct of the model to its fibre square is then defined from these action maps.",
+   "text": "The private helper exists_action_maps_stage conjugates each Z.smul g through the cartesian model isomorphism and descends it by Scheme.exists_pullback_hom_of_isLimit (01ZM(2)). Finiteness of G gives a common upper bound of the factorization stages. Pullback lifts construct actual endomorphisms on that common model; checking their two projections proves base compatibility and equivariance with Z.",
    "uses": [
     "thm-pd-spreading-out"
    ],
    "elementary": false
   },
   {
-   "text": "Finite coproducts and fibre products of finitely presented objects are finitely presented and commute with base change; for coproducts use Mathlib FinitaryPreExtensive.isUniversal_finiteCoproducts in Scheme, and for fibre products use pullback pasting. Consequently the stage comparison pulls back to Z.isIso_sigmaDesc. Descend its inverse and both inverse equations by [thm-pd-spreading-out]. The resulting action and invertible comparison, together with the finite étale surjective map, assemble the required GaloisCover. Pasting the model comparisons gives χ and its cartesian square.",
+   "text": "The private helper exists_action_laws_stage uses equivariance to show that the unit equation and all multiplication equations hold after base change to the limit. Apply Scheme.exists_pullback_fst_comp_eq_of_isLimit (01ZM(3)) to each equation. Finiteness of G × G gives a common stage. Pullback hom_ext and transport of the projected equalities prove the action laws for the canonically base-changed endomorphisms.",
    "uses": [
     "thm-pd-spreading-out"
    ],
    "elementary": false
+  },
+  {
+   "text": "Descend invertibility of the torsor comparison. The comparison_pullback_data and comparison_isIso_iff helpers prove universality of its finite coproduct and fibre-square base changes: finite coproduct universality is Mathlib FinitaryPreExtensive.isUniversal_finiteCoproducts, the fibre-square square is proved by the pullback universal property, and equivariance proves the comparison square on coproduct components and both projections. The finite coproduct is qcqs by finite_coproduct_lfp_qcqs; the fibre square is qcqs by finite morphism permanence. The comparison is étale by postcomposition cancellation and hence locally finitely presented. The exists_iso_snd and exists_iso_overPullback helpers compare an isomorphism model with the identity model using exists_iso_of_isPullback (01ZM(2),(3)), as in the proved private helpers of DescendMonomorphism. This gives a later stage at which the base-changed comparison is invertible. The base-change comparison equivalence identifies it with the required canonical comparison.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base-change the genuine action once more to the stage where its comparison is invertible. Check the unit, multiplication, and base-compatibility laws on the two pullback projections. Assemble the GaloisCover using the finite, étale, and surjective base-change instances and the comparison isomorphism. isPullback_isPullbackLift gives the final cartesian square; the restricted diagram stage is sent back by F.leftOp to an object of I.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -50,14 +63,15 @@
   "lem-weil-pbc-descend-etale",
   "lem-weil-pbc-descend-finite",
   "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
   "thm-pd-spreading-out"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "M1",
+  "by": "W3",
   "document": "Stacks Project",
-  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)",
-  "note": "The limit-reduction route is unchanged; finite torsor descent is separated from proved section descent and proved base change."
+  "place": "Tags 01ZM, 01ZO, 07RP, 07RR, 0BTV; Tag 0EZJ, final paragraph",
+  "note": "Plan implemented in Lean, including finite action maps, action equations, comparison base change, and isomorphism descent. Local proof bookkeeping reuses the proved private arguments of GenericOpenFiniteEtaleModel, GaloisCoverBaseChange, and DescendMonomorphism. No new postponed theorem."
  },
  "mathlib_searches": [
   {
@@ -129,10 +143,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T135251-L-1676677",
-  "kind": "interface",
+  "landing": "20261012T184356-L-4024347",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
