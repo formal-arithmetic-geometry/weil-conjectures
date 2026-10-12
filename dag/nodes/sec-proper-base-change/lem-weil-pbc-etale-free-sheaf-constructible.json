@@ -30,76 +30,22 @@
  ],
  "proof": [
   {
-   "text": "By Tag 03S9, choose a finite partition $X=\\coprod_iX_i$ by constructible locally closed subschemes such that $\\pi_i:U_i=U\\times_XX_i\\to X_i$ is finite etale. The fibre product and each inclusion $X_i\\to X$ are as in [def-pc-fibre-product] and [def-weil-constructible-subset].",
+   "text": "Apply isConstructibleEtaleModuleSheaf_iff to convert the finite-value constructibility predicate to IsConstructibleSheaf, then apply isConstructibleSheaf_etaleLowerShriek_constant_core. The core implements the original stratification, base-change, finite-etale comparison and pushforward argument.",
    "uses": [
-    "lem-weil-pbc-etale-stratified-finite"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-etale-free-sheaf-constructible-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S8 proof, line 12199, invoking Lemma 03S9 (Tag 03S9)"
-   }
-  },
-  {
-   "text": "Pull back the module sheaf $j_!\\underline M_U$ along the immersion $i_i:X_i\\to X$. The module-form extension-by-zero base-change node identifies $i_i^{-1}(j_!\\underline M_U)$ with $(\\pi_i)_!\\underline M_{U_i}$; this is Stacks Lemma 03S6 (Tag 03S6) applied to the fibre-product square.",
-   "uses": [
-    "lem-weil-pbc-etale-shriek-base-change-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S8 proof, lines 12203-12210, using Lemma 03S6 (Tag 03S6)"
-   }
-  },
-  {
-   "text": "Since $\\pi_i$ is finite etale, its extension by zero agrees with its direct image on module sheaves by the module-form comparison node, which is Stacks Lemma 03S7 (Tag 03S7). Hence $i_i^{-1}(j_!\\underline M_U)\\cong(\\pi_i)_*\\underline M_{U_i}$.",
-   "uses": [
-    "lem-weil-pbc-etale-shriek-star-finite-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S8 proof, lines 12205-12210, using Lemma 03S7 (Tag 03S7)"
-   }
-  },
-  {
-   "text": "The finite-etale pushforward lemma gives that $(\\pi_i)_*\\underline M_{U_i}$ is finite locally constant as a sheaf of $\\Lambda_{X_i}$-modules: this is the module clause of Lemma 095B (Tag 095B; 03RU is the definition), isolated in [lem-weil-pbc-etale-finite-pushforward-locally-constant].",
-   "uses": [
-    "lem-weil-pbc-etale-finite-pushforward-locally-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S8 proof, lines 12211-12212, invoking Lemma 03RU (Tag 03RU)"
-   }
-  },
-  {
-   "text": "The strata $X_i$ are constructible locally closed and the pullback to each $X_i$ is finite locally constant. By the definition of a constructible sheaf of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-constructible-sheaf], $j_!\\underline M_U$ is constructible.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-pbc-etale-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RW and Lemma 03S8 conclusion (Tag 03S8)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-stratified-finite",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-etale-shriek-star-finite-modules",
-  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-pbc-etale-sheaves"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-etale-free-sheaf-constructible-core"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03S8 (Tag 03S8), part (3), proof at lines 12198-12212"
+  "place": "Lemma 03S8(3), proof; implemented through the existing constructibility comparison and the now proved core theorem."
  },
  "mathlib_searches": [
   {
@@ -189,16 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T044754-L-2040429",
+  "landing": "20261012T053957-L-2647447",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.isConstructibleSheaf_etaleLowerShriek_constant_core"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

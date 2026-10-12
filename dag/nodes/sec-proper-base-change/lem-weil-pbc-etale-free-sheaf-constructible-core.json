@@ -18,26 +18,54 @@
  },
  "proof": [
   {
-   "text": "Choose the finite constructible stratification on which j becomes finite etale, identify lower shriek after pullback with lower shriek on the base change, replace finite-etale lower shriek by lower star, and use finite local constancy of finite-etale pushforward; these witnesses give the stalk-based constructibility predicate.",
+   "text": "Apply exists_etale_stratified_finite (Stacks Tag 03S0). Copy the topological stratification, domains, immersions, immersion proofs and range equalities into Scheme.Stratification. The constructibility field is already in the shared topological record.",
    "uses": [
-    "lem-weil-pbc-etale-stratified-finite",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-etale-stratified-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant module sheaf with value M is locally constant, trivialized by the identity cover. Its geometric stalk is M by the source-library sheafFiberConstantSheafIso; since M is finite as a set, Module.Finite.of_finite and ModuleCat.isFinitelyGenerated_iff make every stalk finitely generated. Thus it is finite locally constant. This elementary coefficient argument is proved in the private helper finiteLocallyConstant_constant_module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each immersion g, switch from pullback j g to pullback g j using pullbackSymmetry_hom_comp_snd. The latter projection to the stratum is finite because it is the composite of an isomorphism and the finite projection supplied by the stratification. Pull back the finite locally constant constant sheaf along pullback.snd g j using IsFiniteLocallyConstantSheaf.upperStar.",
+   "uses": [
+    "prop-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteLocallyConstant_lowerStar_of_finite_etale to that pulled-back sheaf and the finite etale projection pullback.fst g j. Transport along the inverse of the canonical finite-etale lower-shriek-to-lower-star comparison to obtain finite local constancy of its extension by zero.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-pushforward-locally-constant",
     "lem-weil-pbc-etale-shriek-star-finite-modules",
-    "lem-weil-pbc-etale-finite-pushforward-locally-constant"
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isIso_etaleLowerShriekBaseChangeMap at g and j. Transport finite local constancy along its component at the constant sheaf, identifying extension on the base change with the stratum pullback of the original extension. Package these witnesses for the copied Scheme.Stratification in IsConstructibleSheaf.exists_stratification.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lemma-constructible-iso-invariance"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-stratified-finite",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
   "lem-weil-pbc-etale-shriek-star-finite-modules",
-  "lem-weil-pbc-etale-finite-pushforward-locally-constant"
+  "lemma-constructible-iso-invariance",
+  "lem-weil-pbc-etale-shriek-base-change-modules"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03S8(3)"
+  "place": "Lemma 03S8(3), proof; implemented by U1 using the existing stalk predicates, pullback stability and isomorphism invariance."
  },
  "mathlib_searches": [
   {
@@ -103,9 +131,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T044754-L-2040429",
+  "landing": "20261012T053957-L-2647447",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

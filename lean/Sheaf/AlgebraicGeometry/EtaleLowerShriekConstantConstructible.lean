@@ -9,10 +9,11 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
-import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Constructibility of extension by zero of a finite constant module sheaf
@@ -29,6 +30,23 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem finiteLocallyConstant_constant_module
+    (T : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ]
+    (M : ModuleCat.{u + 1} Λ) [Finite M] :
+    IsFiniteLocallyConstantSheaf
+      ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
+  have hc : ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M).IsConstant
+      T.smallEtaleTopology := Sheaf.isConstant_of_iso _ (Iso.refl _)
+  have hl := hc.isLocallyConstantSheaf
+  refine { toIsLocallyConstantSheaf := hl, isFinitelyGenerated_sheafFiber := ?_ }
+  intro Ω _ _ t
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have hM : ConcreteCategory.IsFinitelyGenerated M :=
+    (ModuleCat.isFinitelyGenerated_iff M).2 Module.Finite.of_finite
+  exact hM.of_iso ((pointSmallEtale t).sheafFiberConstantSheafIso M).symm
+
 /-- Extension by zero of a finite constant module sheaf along an etale morphism between
 quasi-compact quasi-separated schemes is constructible. Sheaves valued in `ModuleCat Λ`
 encode module sheaves over the constant ring sheaf `Λ_X`. The functor `etaleLowerShriek`
@@ -42,7 +60,7 @@ Source: Stacks Project, Tag 03S8, Lemma 59.73.1(3)
 
 Proof:
 1. Choose a finite partition of `X` into constructible locally closed subschemes such
-   that the base change of `j` to each stratum is finite etale, by Tag 03S9
+   that the base change of `j` to each stratum is finite etale, by Tag 03S0
    (`lem-weil-pbc-etale-stratified-finite`).
 2. Pull back the extension to each stratum. Tag 03S6 identifies this pullback with the
    extension of the constant module sheaf on the base-changed source
@@ -72,7 +90,35 @@ theorem isConstructibleSheaf_etaleLowerShriek_constant_core
       (CA := fun A : ModuleCat.{u + 1} Λ => A)
       ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) j inferInstance).obj
         ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
-  sorry
+  obtain ⟨S, _, hf⟩ := exists_etale_stratified_finite j
+  let T : Stratification X :=
+    { toStratification := S.toStratification
+      domain := S.domain
+      immersion := S.immersion
+      isImmersion := S.isImmersion
+      range_immersion := S.range_immersion }
+  refine ⟨T, fun i ↦ ?_⟩
+  have := (hf i).1
+  have := (hf i).2
+  let g := S.immersion i
+  have : IsFinite (Limits.pullback.fst g j) := by
+    rw [← Limits.pullbackSymmetry_hom_comp_snd g j]
+    infer_instance
+  let N := (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  have hconstant := finiteLocallyConstant_constant_module U M
+  have hpull := IsFiniteLocallyConstantSheaf.upperStar (Limits.pullback.snd g j) N
+  have hpush := finiteLocallyConstant_lowerStar_of_finite_etale
+    (Limits.pullback.fst g j) ((Etale.upperStar _ (Limits.pullback.snd g j)).obj N)
+  have hshriek := IsFiniteLocallyConstantSheaf.of_iso
+    (asIso (Etale.etaleLowerShriekToLowerStar (ModuleCat.{u + 1} Λ)
+      (Limits.pullback.fst g j) ((Etale.upperStar _ (Limits.pullback.snd g j)).obj N))).symm
+  have hbase := Etale.isIso_etaleLowerShriekBaseChangeMap Λ g j
+  let e := asIso ((Etale.etaleLowerShriekBaseChangeMap Λ g j).app N)
+  have : IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (Limits.pullback.snd g j) ⋙
+      Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (Limits.pullback.fst g j)
+        inferInstance).obj N) := hshriek
+  exact IsFiniteLocallyConstantSheaf.of_iso e
 
 theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
