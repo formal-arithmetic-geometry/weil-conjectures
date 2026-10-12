@@ -9,11 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.Span.Basic
-<<<<<<< HEAD
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-=======
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ZModuleEquivalence
->>>>>>> origin/slopmaster2
 
 /-!
 # Extension of scalars along an algebra map as a tensor product
@@ -152,7 +149,6 @@ end ModuleCat
 
 namespace ModuleCat
 
-<<<<<<< HEAD
 open MonoidalCategory
 
 variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
@@ -206,7 +202,11 @@ instance : Limits.PreservesLimitsOfSize.{u, u + 1}
 universe of the rings. -/
 instance : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
   (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isRightAdjoint
-=======
+
+end ModuleCat
+
+namespace ModuleCat
+
 variable (R : Type u) [Ring R]
 
 /-- Coinduction from abelian groups to `R`-modules: an abelian group `A` is sent to
@@ -246,6 +246,5 @@ lemma coinduceObjAddEquiv_map_apply {A B : AddCommGrpCat.{u}} (g : A ⟶ B)
     (f : (coinduce R).obj A) (x : R) :
     coinduceObjAddEquiv R B ((coinduce R).map g f) x = g (coinduceObjAddEquiv R A f x) := by
   with_unfolding_all rfl
->>>>>>> origin/slopmaster2
 
 end ModuleCat
