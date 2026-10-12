@@ -89,7 +89,6 @@ theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : 
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
   obtain ⟨ι, _, _, U, hU, hU'⟩ := exists_finite_nonempty_affine_cover Y
   have := Fintype.ofFinite ι
-  have := isGrothendieckAbelian Y
   -- the truncated Čech complex is perfect
   obtain ⟨e₀⟩ := nonempty_Q_cechModuleComplexTrunc_iso p 𝒢 U hU hU'
   have hKP : (DerivedCategory.Q.obj (cechModuleComplexTrunc p 𝒢 U)).IsPerfect :=
@@ -109,7 +108,9 @@ theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : 
   have : Nontrivial R := by
     have := IsLocalization.isPrime_of_isPrime_disjoint (Submonoid.powers s) R x.asIdeal
       x.isPrime ((Ideal.disjoint_powers_iff_notMem_of_isPrime s).2 hs)
-    exact ⟨⟨0, 1, fun h ↦ this.ne_top ((Ideal.eq_top_iff_one _).2 (h ▸ Ideal.zero_mem _))⟩⟩
+    refine nontrivial_of_ne (0 : R) 1 fun h ↦ this.ne_top ((Ideal.eq_top_iff_one _).2 ?_)
+    rw [← h]
+    exact Ideal.zero_mem _
   have := fun n ↦ (hP n).1
   have := fun n ↦ (hP n).2
   set r : ℤ → ℕ := fun n ↦ Module.finrank R (P.X n)

@@ -339,10 +339,89 @@ lemma IsOpenResolution.comp_toPushforwardResolution (hA : IsOpenResolution Ω ι
   dsimp only [Functor.id_map, Functor.comp_map] at h₁
   simp only [HomologicalComplex.comp_f, toPushforwardResolution, pushforwardResolutionι,
     CochainComplex.single₀_map_f_zero]
-  rw [reassoc_of% h₁]
-  simp [restrictAugmentation] at h
-  sorry
+  rw [reassoc_of% h₁, ← Functor.map_comp]
+  simp only [restrictAugmentation, HomologicalComplex.comp_f,
+    HomologicalComplex.singleMapHomologicalComplex_inv_app_self] at h
+  simp only [HomologicalComplex.singleMapHomologicalComplex_inv_app_self]
+  done
 
 end Pushforward
+
+section Comparison
+
+variable {Ω : X.Opens}
+
+/-- A cochain map between `Ω`-resolutions over a morphism which is an isomorphism on `Ω` induces
+isomorphisms on the cohomology of the sections over `Ω`. -/
+lemma IsOpenResolution.isIso_homologyMap {ℱ 𝒢 : X.Modules} {A B : CochainComplex X.Modules ℕ}
+    {ι : (CochainComplex.single₀ X.Modules).obj ℱ ⟶ A}
+    {ι' : (CochainComplex.single₀ X.Modules).obj 𝒢 ⟶ B}
+    (hA : IsOpenResolution Ω ι) (hB : IsOpenResolution Ω ι') (φ : ℱ ⟶ 𝒢)
+    [IsIso ((restrictFunctor Ω.ι).map φ)] (c : A ⟶ B)
+    (comm : ι ≫ c = (CochainComplex.single₀ X.Modules).map φ ≫ ι') (q : ℕ) :
+    IsIso (HomologicalComplex.homologyMap
+      (((sectionsOver Ω).mapHomologicalComplex _).map c) q) := by
+  have h := hA.iso_hom_naturality hB φ c comm q
+  have : IsIso (((globalSectionsFunctor Ω).rightDerived q).map ((restrictFunctor Ω.ι).map φ) ≫
+      (hB.iso q).hom) := inferInstance
+  rw [h] at this
+  exact IsIso.of_isIso_comp_left (hA.iso q).hom _
+
+/-- The restriction to `Ω₂ ≤ Ω₁` of the unit `ℱ ⟶ j_* (ℱ|_{Ω₁})` is an isomorphism. -/
+instance isIso_restrict_map_unit {Ω₁ Ω₂ : X.Opens} [Fact (Ω₂ ≤ Ω₁)] (ℱ : X.Modules) :
+    IsIso ((restrictFunctor Ω₂.ι).map ((restrictAdjunction Ω₁.ι).unit.app ℱ)) := by
+  have h₁ : IsIso ((restrictFunctor Ω₁.ι).map ((restrictAdjunction Ω₁.ι).unit.app ℱ)) := by
+    have := (restrictAdjunction Ω₁.ι).left_triangle_components ℱ
+    have : IsIso ((restrictFunctor Ω₁.ι).map ((restrictAdjunction Ω₁.ι).unit.app ℱ) ≫
+        (restrictAdjunction Ω₁.ι).counit.app ((restrictFunctor Ω₁.ι).obj ℱ)) := by
+      rw [this]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ ((restrictAdjunction Ω₁.ι).counit.app _)
+  exact (NatIso.isIso_map_iff (restrictFunctorIsoOfLE (Fact.out : Ω₂ ≤ Ω₁)) _).2
+    (inferInstanceAs (IsIso ((restrictFunctor (X.homOfLE _)).map
+      ((restrictFunctor Ω₁.ι).map ((restrictAdjunction Ω₁.ι).unit.app ℱ)))))
+
+/-- **Naturality of `openComparison` for the restriction to a smaller open.** -/
+lemma openComparison_naturality {Ω₁ Ω₂ : X.Opens} (h : Ω₂ ≤ Ω₁) {ℱ : X.Modules}
+    {A B : CochainComplex X.Modules ℕ}
+    {ι : (CochainComplex.single₀ X.Modules).obj ℱ ⟶ A}
+    {ι' : (CochainComplex.single₀ X.Modules).obj ℱ ⟶ B}
+    (hA₁ : IsOpenResolution Ω₁ ι) (hB₁ : IsOpenResolution Ω₁ ι')
+    (hA₂ : IsOpenResolution Ω₂ ι) (hB₂ : IsOpenResolution Ω₂ ι') (q : ℕ) :
+    (openComparison hA₁ hB₁ q).hom ≫ HomologicalComplex.homologyMap
+        ((NatTrans.mapHomologicalComplex (sectionsOverRestrict h) _).app B) q =
+      HomologicalComplex.homologyMap
+        ((NatTrans.mapHomologicalComplex (sectionsOverRestrict h) _).app A) q ≫
+        (openComparison hA₂ hB₂ q).hom := by
+  have : Fact (Ω₂ ≤ Ω₁) := ⟨h⟩
+  have hP₁ := isOpenResolution_pushforwardResolution Ω₁ ℱ
+  have hP₂ := isOpenResolution_pushforwardResolution_of_le Ω₁ ℱ h
+  have ha := hA₁.comp_toPushforwardResolution
+  have hb := hB₁.comp_toPushforwardResolution
+  have e₁ := openComparison_hom_comp_eq hA₁ hB₁ hP₁ _ _ _ ha hb q
+  have e₂ := openComparison_hom_comp_eq hA₂ hB₂ hP₂ _ _ _ ha hb q
+  have := hB₂.isIso_homologyMap hP₂ _ _ hb q
+  have nat (C D : CochainComplex X.Modules ℕ) (c : C ⟶ D) :
+      HomologicalComplex.homologyMap (((sectionsOver Ω₁).mapHomologicalComplex _).map c) q ≫
+        HomologicalComplex.homologyMap
+          ((NatTrans.mapHomologicalComplex (sectionsOverRestrict h) _).app D) q =
+      HomologicalComplex.homologyMap
+          ((NatTrans.mapHomologicalComplex (sectionsOverRestrict h) _).app C) q ≫
+        HomologicalComplex.homologyMap (((sectionsOver Ω₂).mapHomologicalComplex _).map c) q := by
+    rw [← HomologicalComplex.homologyMap_comp, ← HomologicalComplex.homologyMap_comp,
+      (NatTrans.mapHomologicalComplex (sectionsOverRestrict h) _).naturality]
+  rw [← cancel_mono (HomologicalComplex.homologyMap
+    (((sectionsOver Ω₂).mapHomologicalComplex _).map hB₁.toPushforwardResolution) q),
+    Category.assoc, ← nat, reassoc_of% e₁, nat, Category.assoc, e₂]
+
+/-- An injective resolution of `ℱ` on `X` is an `Ω`-resolution for every open `Ω`. -/
+lemma isOpenResolution_injectiveResolution {ℱ : X.Modules} (I : InjectiveResolution ℱ)
+    (Ω : X.Opens) : IsOpenResolution Ω I.ι := by
+  refine ⟨?_, fun n ↦ rightAcyclic_globalSections_of_isFlasque _
+    (isFlasque_restrict _ _ (isFlasque_of_injective _))⟩
+  dsimp only [restrictAugmentation]
+  infer_instance
+
+end Comparison
 
 end AlgebraicGeometry.Scheme.Modules

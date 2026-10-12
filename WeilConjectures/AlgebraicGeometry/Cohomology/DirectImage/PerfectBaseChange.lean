@@ -98,7 +98,7 @@ theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFini
           (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) := by
   -- an affine open neighbourhood `V` of `t`
   obtain ⟨V, hV, htV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens)
-    (Set.mem_univ t : t ∈ (⊤ : T.Opens))
+    (show t ∈ (⊤ : T.Opens) from trivial)
   have : IsAffine V.toScheme := hV
   -- the restriction of `(f, ℱ)` over `V`
   set fV := f ∣_ V
@@ -116,20 +116,17 @@ theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFini
   obtain ⟨S, Y, _, _, π, p, _, _, 𝒢, _, h, h𝒢, hsq, ⟨e⟩⟩ :=
     exists_isNoetherianRing_model fV ℱV hℱV
   obtain ⟨a, P₀, d, hs₀, hP₀, hbc₀⟩ :=
-    exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing p 𝒢 h𝒢 (π.base ⟨t, htV⟩)
+    exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing p 𝒢 h𝒢 (π ⟨t, htV⟩)
   -- the open `U = π⁻¹ D(a)` of `T`
   set U : T.Opens := V.ι ''ᵁ (π ⁻¹ᵁ S.basicOpen a)
   have hUV : U ≤ V := by
     rintro _ ⟨y, -, rfl⟩
     exact y.2
-  have hrange : Set.range (T.homOfLE hUV ≫ π).base ⊆ Set.range (S.basicOpen a).ι.base := by
+  have hrange : Set.range (T.homOfLE hUV ≫ π) ⊆ Set.range (S.basicOpen a).ι := by
     rintro _ ⟨y, rfl⟩
     rw [Scheme.Opens.range_ι]
     obtain ⟨z, hz, hzy⟩ := y.2
-    have : T.homOfLE hUV y = z := by
-      apply V.ι.isOpenEmbedding.injective
-      rw [← Scheme.Hom.comp_apply, Scheme.homOfLE_ι]
-      exact hzy.symm
+    have : T.homOfLE hUV y = z := Subtype.ext (by rw [Scheme.homOfLE_apply, ← hzy]; rfl)
     rw [Scheme.Hom.comp_apply, this]
     exact hz
   let j : U.toScheme ⟶ (S.basicOpen a).toScheme :=
@@ -139,12 +136,12 @@ theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFini
     ⟨⟨t, htV⟩, hs₀, rfl⟩, hP₀.pullback j, ?_⟩
   intro T' X' g g' f' _ sq q
   -- the square over `V`
-  have hg'V : Set.range g'.base ⊆ Set.range (f ⁻¹ᵁ V).ι.base := by
+  have hg'V : Set.range g' ⊆ Set.range (f ⁻¹ᵁ V).ι := by
     rintro _ ⟨x, rfl⟩
     rw [Scheme.Opens.range_ι]
-    change f.base (g'.base x) ∈ V
+    change f (g' x) ∈ V
     rw [← Scheme.Hom.comp_apply, sq.w, Scheme.Hom.comp_apply]
-    exact hUV (g.base (f'.base x)).2
+    exact hUV (g (f' x)).2
   let g'V : X' ⟶ (f ⁻¹ᵁ V).toScheme := IsOpenImmersion.lift (f ⁻¹ᵁ V).ι g' hg'V
   have hg'Vfac : g'V ≫ (f ⁻¹ᵁ V).ι = g' := IsOpenImmersion.lift_fac _ _ _
   have sq₁ : IsPullback g'V f' fV (g ≫ T.homOfLE hUV) := by
