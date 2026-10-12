@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-colimit-site-stage-section-diagram",
+ "kind": "statement",
+ "title": "Functorial inverse-image section diagram over an under category",
+ "statement": "Let $J$ be a small category and $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit]. For each $j$ let $P_j$ be a precoverage and write $T_j$ for its generated Grothendieck topology [def-weil-pbc-sites-and-cohomology]. Assume every transition functor $F(a)$ is continuous for these topologies. Fix $i\\in J$ and $U\\in F(i)$. There exist a functor $L:\\mathrm{Sh}(T_i,\\mathrm{Set})\\to(\\mathrm{Under}(i)\\to\\mathrm{Set})$, natural isomorphisms $E_t:L(-)(t)\\cong(F(t.hom)_s(-))(F(t.hom)U)$, and natural transformations $\\theta_b:F(t.hom)_s\\to F(b.right)^s\\circ F(t\\prime.hom)_s$ (in diagrammatic Lean notation: the latter inverse image followed by restriction), for every $b:t\\to t\\prime$. For every sheaf $G$ and $X\\in F(i)$, the unit at $t$ followed by $\\theta_b(G)$ evaluated at $F(t.hom)X$ equals the unit at $t\\prime$ as an equality of arrow objects. Moreover, $E_t(G)$ followed by $\\theta_b(G)$ evaluated at $F(t.hom)U$ equals $L(G)(b)$ followed by $E_{t\\prime}(G)$, again as an equality of arrow objects. Here inverse image and restriction are the adjoint sheaf functors of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. No filteredness, cocone, cover-preservation, finite-limit, or colimit hypothesis or conclusion is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), equation sites-equation-compute-pullback-to-limit and the unit-transposed transition maps in its adjunction paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For t in Under(i), set S_t(G) to sections of the inverse image along F(t.hom) evaluated at F(t.hom)(U). For a refinement b:t→t′, transpose the unit at t′ through the adjunction at t. The equation t.hom ≫ b.right = t′.hom identifies the iterated restriction functor, yielding the natural transformation theta_b and its unit equation. Naturality of the adjunction hom equivalence makes theta_b natural in G.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an identity refinement the identity transformation and theta have the same adjunct, so injectivity gives equality. For composable refinements, compose their transposes after restriction; its adjunct is the unit at the final stage, also the adjunct of the transpose for the composite. Thus these maps agree. Evaluate at the transported U and transport along F.map_id and F.map_comp to obtain identity and composition of section maps. These maps, natural in G, define L. The natural isomorphisms E identify its evaluations with S_t; the section-map equation is this construction written in Arrow to retain endpoint transports.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), equation sites-equation-compute-pullback-to-limit and the unit-transposed transition maps in its adjunction paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial diagram of sections of inverse image sheaves on stages indexed by an under category with transition maps transposed from adjunction units",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous functor inverse image sheaf adjunction units transition maps naturality composition under category section diagram",
+   "results": "8 hits: CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.Sheaf.ΓRes_map_assoc, CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm, CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓNatIsoLim, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, TopCat.Sheaf.interUnionPullbackConeLift_left",
+   "date": "2026-10-12",
+   "verdict": "supporting adjunction declarations only; no functorial stage section diagram theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback|sheafAdjunctionContinuous",
+   "results": "11 hits: Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-12",
+   "verdict": "supporting adjunction declarations only; no functorial stage section diagram theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteSetEvaluationPresentation",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-of-sites-reduced",
+   "place": "Tag 0A35 (lemma-compute-pullback-to-limit), equation sites-equation-compute-pullback-to-limit and the unit-transposed transition maps in its adjunction paragraph",
+   "via": [
+    "lem-weil-pbc-colimit-site-set-evaluation-presentation",
+    "lem-weil-pbc-colimit-site-set-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteStageSectionDiagram",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteStageSectionDiagram.lean",
+  "declaration": "CategoryTheory.colimit_site_stage_section_diagram",
+  "statement": "theorem colimit_site_stage_section_diagram\n    (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (i : J) (U : F.obj i) :\n    ∃ (L : Sheaf (P i).toGrothendieck (Type u) ⥤ (Under i ⥤ Type u))\n      (E : ∀ t : Under i, L ⋙ (evaluation (Under i) (Type u)).obj t ≅\n        sheafPullback (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck ⋙\n          sheafToPresheaf (P t.right).toGrothendieck (Type u) ⋙\n          (evaluation (F.obj t.right)ᵒᵖ (Type u)).obj\n            (op ((F.map t.hom).toFunctor.obj U)))\n      (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n        sheafPullback (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck ⟶\n        sheafPullback (F.map t'.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t'.right).toGrothendieck ⋙\n          (F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n            (P t.right).toGrothendieck (P t'.right).toGrothendieck),\n      (∀ (G : Sheaf (P i).toGrothendieck (Type u))\n        (t t' : Under i) (b : t ⟶ t') (X : F.obj i),\n        Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app\n            (op X) ≫ ((θ t t' b).app G).hom.app\n              (op ((F.map t.hom).toFunctor.obj X))) =\n        Arrow.mk (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app G).hom.app\n            (op X))) ∧\n      ∀ (G : Sheaf (P i).toGrothendieck (Type u))\n        (t t' : Under i) (b : t ⟶ t'),\n        Arrow.mk ((E t).hom.app G ≫ ((θ t t' b).app G).hom.app\n          (op ((F.map t.hom).toFunctor.obj U))) =\n        Arrow.mk ((L.obj G).map b ≫ (E t').hom.app G)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T173804-L-3289375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T173804-L-3289375",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
