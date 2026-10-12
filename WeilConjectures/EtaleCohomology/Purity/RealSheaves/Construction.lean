@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusConjug
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 
 /-!
@@ -420,6 +421,28 @@ theorem isConj_frobenius_of_isFrobeniusElement (x : C.finitePoints) {f : W.funda
     exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
 
 end Standard
+
+section OpenSubcurve
+
+variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
+  {U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j]
+
+omit [Finite K] in
+/-- An affine open of a curve is a curve. -/
+lemma isCurve_comp_of_isAffine [IsAffine U] : IsCurve (j ≫ p) where
+  krullDim_le_one :=
+    j.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans (IsCurve.krullDim_le_one (f := p))
+
+omit [Finite K] [IsCurve p] in
+/-- A nonempty open of a smooth geometrically connected scheme over a field is geometrically
+connected: it is geometrically irreducible. -/
+lemma geometricallyConnected_comp [Nonempty U] [Smooth p] [GeometricallyConnected p] :
+    GeometricallyConnected (j ≫ p) := by
+  have : GeometricallyIrreducible p := .of_smooth_of_geometricallyConnected p
+  have : Surjective (j ≫ p) := ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
+  infer_instance
+
+end OpenSubcurve
 
 end WeilGroup
 

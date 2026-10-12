@@ -232,3 +232,39 @@ theorem isIrreducible_iff {ρ : Representation k G V} :
       (fun e ↦ Subrepresentation.toSubmodule_injective e)⟩
 
 end Representation
+
+namespace Representation
+
+variable {k G H V W : Type*} [Field k] [Group G] [Group H] [AddCommGroup V] [Module k V]
+  [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W}
+
+/-- An irreducible representation equivalent to a subquotient `M ⧸ N` of `ρ` is a constituent
+of `ρ`. -/
+theorem isConstituent_of_equiv_subquotient (hσ : σ.IsIrreducible) {N M : Subrepresentation ρ}
+    (h : N ≤ M) (e : σ.Equiv (M.subquotient N)) : σ.IsConstituent ρ :=
+  ⟨hσ, N, M, h, ⟨e.asModuleLinearEquiv.trans (M.subquotientAsModuleLinearEquiv N)⟩⟩
+
+/-- Restricting an irreducible representation along a surjective homomorphism keeps it
+irreducible: both have the same invariant subspaces. -/
+theorem IsIrreducible.comp (hσ : σ.IsIrreducible) {f : H →* G} (hf : Function.Surjective f) :
+    Representation.IsIrreducible (σ.comp f) := by
+  rw [isIrreducible_iff] at hσ ⊢
+  refine ⟨hσ.1, fun U hU ↦ hσ.2 U fun g v hv ↦ ?_⟩
+  obtain ⟨h, rfl⟩ := hf g
+  exact hU h v hv
+
+/-- A constituent of `ρ` restricted along a surjective homomorphism `f` is a constituent of the
+restriction of `ρ`: subrepresentations of `ρ` are subrepresentations of `ρ ∘ f`, with the same
+subquotients. -/
+theorem IsConstituent.comp (hσ : σ.IsConstituent ρ) {f : H →* G} (hf : Function.Surjective f) :
+    Representation.IsConstituent (σ.comp f) (ρ.comp f) := by
+  obtain ⟨N, M, hNM, ⟨e⟩⟩ := hσ.exists_covBy
+  let N' : Subrepresentation (ρ.comp f) := ⟨N.toSubmodule, fun h _ hv ↦ N.apply_mem_toSubmodule
+    (f h) hv⟩
+  let M' : Subrepresentation (ρ.comp f) := ⟨M.toSubmodule, fun h _ hv ↦ M.apply_mem_toSubmodule
+    (f h) hv⟩
+  refine isConstituent_of_equiv_subquotient (hσ.1.comp hf) (N := N') (M := M') hNM.le
+    (Equiv.mk e.toLinearEquiv fun h ↦ ?_)
+  exact e.isIntertwining' (f h)
+
+end Representation

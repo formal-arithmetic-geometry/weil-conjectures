@@ -872,6 +872,155 @@ theorem isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine [IsAffine C]
       (Subrepresentation.toSubmodule_injective (Subsingleton.elim _ _))
   exact ((hρ.subquotient _ _).hasDetWeight ι).eq ι (hγ.of_equiv ι e) x
 
+section Transfer
+
+/-! ### Transfer along a restriction of Weil groups
+
+Let `j : U₀ ⟶ C₀` be an open immersion of curves and `r : W(U₀) →* W(C₀)` a homomorphism of
+Weil groups carrying the local Frobenius at each closed point `x` of `U₀` into the Frobenius
+conjugacy class at `j x`. Then the local invariants of a representation `ρ` of `W(C₀)` at `j x`
+are those of `ρ ∘ r` at `x`. -/
+
+variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] {j : U ⟶ C} [IsOpenImmersion j]
+  {WU : WeilGroup pU} {WC : WeilGroup p} {r : WU.carrier →* WC.carrier}
+  (hr : ∀ (x : U.finitePoints) (y : C.finitePoints), j.base x.1 = y.1 →
+    IsConj (WC.frobenius y) (r (WU.frobenius x)))
+  {l : ℕ} [Fact l.Prime] {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
+  [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) WC.carrier V)
+
+/-- The image of a closed point of `U₀` under the open immersion `j` is a closed point of
+`C₀`. -/
+def finitePointsMap (j : U ⟶ C) [IsOpenImmersion j] (x : U.finitePoints) : C.finitePoints :=
+  ⟨j.base x.1, (Scheme.Hom.mem_finitePoints_iff_of_isIso j x.1).2 x.2⟩
+
+omit [IsOpenImmersion j] in
+include hr in
+/-- The local Frobenius eigenvalues of `ρ ∘ r` at `x` are those of `ρ` at `j x`. -/
+theorem localEigenvalues_comp_of_isConj (x : U.finitePoints) (y : C.finitePoints)
+    (hxy : j.base x.1 = y.1) :
+    WU.localEigenvalues l (ρ.comp r) x = WC.localEigenvalues l ρ y := by
+  obtain ⟨c, hc⟩ := isConj_iff.1 (hr x y hxy)
+  let e : V ≃ₗ[PadicAlgCl l] V := LinearEquiv.ofLinearMap (ρ c) (ρ c⁻¹)
+    (by rw [← Module.End.mul_eq_comp, ← map_mul, mul_inv_cancel, map_one]; rfl)
+    (by rw [← Module.End.mul_eq_comp, ← map_mul, inv_mul_cancel, map_one]; rfl)
+  have he : ρ (r (WU.frobenius x)) = e.conj (ρ (WC.frobenius y)) := by
+    rw [← hc]
+    ext v
+    simp [e, LinearEquiv.conj_apply, map_mul]
+  simp only [localEigenvalues, MonoidHom.comp_apply]
+  rw [he, LinearEquiv.charpoly_conj]
+
+variable {ρ}
+
+include hr in
+/-- The restriction of an `ι`-real representation is `ι`-real. -/
+theorem IsReal.comp_of_isConj {ι : PadicAlgCl l →+* ℂ} (hρ : WC.IsReal l ρ ι) :
+    WU.IsReal l (ρ.comp r) ι := by
+  intro x n
+  have h : WU.localPolynomial l (ρ.comp r) x = WC.localPolynomial l ρ (finitePointsMap j x) :=
+    (localPolynomial_eq_charpolyRev_of_isConj (ρ := ρ) (hr x _ rfl)).symm
+  rw [h]
+  exact hρ _ n
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+include hr in
+/-- The restriction of a representation of determinant weight `γ` has determinant weight `γ`:
+the norms of `x` and `j x` agree. -/
+theorem HasDetWeight.comp_of_isConj {ι : PadicAlgCl l →+* ℂ} {γ : ℝ}
+    (hρ : WC.HasDetWeight l ρ ι γ) : WU.HasDetWeight l (ρ.comp r) ι γ := by
+  intro x
+  have h := isConj_iff_eq.1 (MonoidHom.map_isConj
+    (LinearMap.det : Module.End (PadicAlgCl l) V →* PadicAlgCl l)
+    (ρ.map_isConj (hr x (finitePointsMap j x) rfl)))
+  rw [MonoidHom.comp_apply, ← h, ← Scheme.Hom.pointNorm_of_isIso j x.1]
+  exact hρ (finitePointsMap j x)
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- The restriction of a lisse representation along a continuous homomorphism of Weil groups
+preserving degrees is lisse. -/
+theorem IsLisse.comp_of_continuous (hρ : WC.IsLisse l ρ) (hcont : Continuous r)
+    (hdeg : WC.deg.comp r = WU.deg) : WU.IsLisse l (ρ.comp r) := by
+  refine ⟨fun b i i' ↦ ?_⟩
+  have hgeo (g : WU.geometric) : r g ∈ WC.geometric := by
+    rw [MonoidHom.mem_ker, ← MonoidHom.comp_apply, hdeg]
+    exact g.2
+  let r' : WU.geometric → WC.geometric := fun g ↦ ⟨r g, hgeo g⟩
+  have : Continuous r' := (hcont.comp continuous_subtype_val).subtype_mk _
+  exact (hρ.continuous_toMatrix b i i').comp this
+
+include hr in
+/-- If the restriction `ρ ∘ r` is punctually `ι`-pure of weight `w`, then `ρ` is so at the
+closed points of `C₀` in the image of `j`. -/
+theorem frobeniusWeight_eq_of_isPunctuallyPure_comp {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
+    (hpure : WU.IsPunctuallyPure l (ρ.comp r) ι w) (x : U.finitePoints) (y : C.finitePoints)
+    (hxy : j.base x.1 = y.1) {α : PadicAlgCl l} (hα : α ∈ WC.localEigenvalues l ρ y) :
+    frobeniusWeight ι (C.pointNorm y.1) α = w := by
+  rw [← localEigenvalues_comp_of_isConj hr ρ x y hxy] at hα
+  rw [← hxy, Scheme.Hom.pointNorm_of_isIso j x.1]
+  exact hpure x α hα
+
+end Transfer
+
+/-- **Local eigenvalues are compatible with restriction to an open.** For a restriction
+`W(U₀) → W(C₀)` of Weil groups along `j : U₀ ⟶ C₀`, the local Frobenius eigenvalues of
+`ρ ∘ restrict` at a closed point `x` of `U₀` are those of `ρ` at `j x`: the restriction carries
+the local Frobenius at `x` into the Frobenius conjugacy class at `j x`. This is the first step of
+reducing purity on `C₀` to purity on an affine open subcurve. -/
+theorem localEigenvalues_comp_restrict {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)}
+    [IsCurve pU] {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU}
+    {WC : WeilGroup p} (R : Restriction j WU WC) {l : ℕ} [Fact l.Prime] {V : Type u}
+    [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
+    (ρ : Representation (PadicAlgCl l) WC.carrier V) (x : U.finitePoints) (y : C.finitePoints)
+    (hxy : j.base x.1 = y.1) :
+    WU.localEigenvalues l (ρ.comp R.restrict) x = WC.localEigenvalues l ρ y :=
+  localEigenvalues_comp_of_isConj R.restrict_frobenius ρ x y hxy
+
+/-- **Restriction of a Weil group to an affine open.** Every closed point `y` of a smooth
+geometrically connected curve `C₀` lies in a nonempty affine open `j : U₀ ⟶ C₀`, itself a smooth
+geometrically connected curve, with a Weil group `W(U₀)` and a continuous, surjective,
+degree-preserving homomorphism `r : W(U₀) →* W(C₀)` carrying local Frobenius elements into the
+Frobenius conjugacy classes. It is the restriction `W(U₀) → W(C₀, s)` to the standard Weil group
+(`AlgebraicGeometry.WeilGroup.restrictionOfPath`), followed by the inverse of
+`AlgebraicGeometry.WeilGroup.toStandard`. -/
+theorem exists_restriction_isAffine [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
+    (W : WeilGroup p) (y : C) :
+    ∃ (U : C.Opens) (_ : IsAffine U) (_ : IsCurve (U.ι ≫ p))
+      (_ : SmoothOfRelativeDimension 1 (U.ι ≫ p)) (_ : GeometricallyConnected (U.ι ≫ p))
+      (WU : WeilGroup (U.ι ≫ p)) (r : WU.carrier →* W.carrier), y ∈ U ∧ Continuous r ∧
+      Function.Surjective r ∧ W.deg.comp r = WU.deg ∧
+      ∀ (x : U.toScheme.finitePoints) (y : C.finitePoints), U.ι.base x.1 = y.1 →
+        IsConj (W.frobenius y) (r (WU.frobenius x)) := by
+  have := SmoothOfRelativeDimension.smooth 1 p
+  have := W.connectedSpace
+  obtain ⟨V, hV, hyV, -⟩ := exists_isAffineOpen_mem_and_subset (show y ∈ (⊤ : C.Opens) from trivial)
+  have : IsAffine V := hV
+  have : Nonempty V := ⟨⟨y, hyV⟩⟩
+  have : IsCurve (V.ι ≫ p) := isCurve_comp_of_isAffine V.ι
+  have : SmoothOfRelativeDimension 1 (V.ι ≫ p) := by
+    simpa using smoothOfRelativeDimension_comp (n := 0) (m := 1) V.ι p
+  have : GeometricallyConnected (V.ι ≫ p) := geometricallyConnected_comp V.ι
+  have : ConnectedSpace V := GeometricallyConnected.connectedSpace_of_subsingleton (V.ι ≫ p)
+  obtain ⟨sV⟩ := (V.ι ≫ p).nonempty_algebraicClosure_point
+  obtain ⟨GV, _, _⟩ := Scheme.FiniteEtale.exists_isFundamentalGroup sV
+  obtain ⟨τ⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor
+    (Scheme.FiniteEtale.fiber (sV ≫ V.ι)) (Scheme.FiniteEtale.fiber W.basePoint)
+  let R := restrictionOfPath (p := p) (pU := V.ι ≫ p) V.ι rfl τ GV W.fundamentalGroup
+  let e := W.toStandard.symm
+  refine ⟨V, hV, inferInstance, inferInstance, inferInstance, _,
+    e.toMulEquiv.toMonoidHom.comp R.restrict, hyV,
+    e.continuous.comp R.continuous_restrict, e.surjective.comp R.surjective_restrict, ?_,
+    fun x y' hxy ↦ ?_⟩
+  · rw [← R.deg_restrict, ← MonoidHom.comp_assoc]
+    refine congrArg (MonoidHom.comp · R.restrict) (MonoidHom.ext fun g ↦ ?_)
+    rw [MonoidHom.comp_apply, W.deg_eq]
+    exact congrArg (Scheme.FiniteEtale.weilGroupDeg p W.basePoint W.fundamentalGroup)
+      (W.toStandard.apply_symm_apply g)
+  · have h := (W.isConj_toStandard_frobenius y').trans (R.restrict_frobenius x y' hxy)
+    have h' := e.toMulEquiv.toMonoidHom.map_isConj h
+    convert h' using 1
+    · exact (W.toStandard.symm_apply_apply _).symm
+    · rfl
+
 /-- Blueprint `sk-p-real-purity`: Purity of real lisse sheaves on curves.
 
 The main theorem of the block. Let `C₀ / 𝔽_q` be a smooth geometrically connected curve,
@@ -896,25 +1045,14 @@ theorem isPunctuallyPure_of_isConstituent_of_isReal [SmoothOfRelativeDimension 1
     (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : σ.IsConstituent ρ)
     {γ : ℝ} (hγ : W.HasDetWeight l σ ι γ) :
     W.IsPunctuallyPure l σ ι γ := by
-  intro x α hα
-  have := SmoothOfRelativeDimension.smooth 1 p
-  obtain ⟨U, hU, hxU, -⟩ := exists_isAffineOpen_mem_and_subset (x := x.1) (U := ⊤) trivial
-  have : IsAffine U := hU
-  have : Nonempty U := ⟨⟨x.1, hxU⟩⟩
-  have : IsCurve (U.ι ≫ p) := isCurve_comp_of_isAffine U.ι
-  have : SmoothOfRelativeDimension 1 (U.ι ≫ p) := by
-    simpa using smoothOfRelativeDimension_comp (n := 0) (m := 1) U.ι p
-  have : GeometricallyConnected (U.ι ≫ p) := geometricallyConnected_comp U.ι
-  have : ConnectedSpace U := GeometricallyConnected.connectedSpace_of_subsingleton (U.ι ≫ p)
-  obtain ⟨WU, ⟨R⟩⟩ := Restriction.exists_weilGroup W U.ι rfl
-  have hpure := isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine WU l (ρ.comp R.restrict) ι
-    (R.isLisse_comp l hρ) (R.isReal_comp l ρ ι hreal) (σ.comp R.restrict)
-    (R.isConstituent_comp l ρ hσ) (R.hasDetWeight_comp l σ ι hγ)
-  have hy : (⟨x.1, hxU⟩ : U) ∈ U.toScheme.finitePoints :=
-    (Scheme.Hom.mem_finitePoints_iff_of_isIso U.ι _).1 x.2
-  have hxy : U.ι.mapFinitePoints ⟨_, hy⟩ = x := Subtype.ext rfl
-  rw [← hxy] at hα ⊢
-  exact R.frobeniusWeight_eq_of_isPunctuallyPure_comp l σ ι hpure _ α hα
+  intro y α hα
+  obtain ⟨U, _, _, _, _, WU, r, hyU, hcont, hsurj, hdeg, hr⟩ := exists_restriction_isAffine W y.1
+  have hpure := isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine WU l (ρ.comp r) ι
+    (hρ.comp_of_continuous hcont hdeg) (hreal.comp_of_isConj hr) (σ.comp r) (hσ.comp hsurj)
+    (hγ.comp_of_isConj hr)
+  let x : U.toScheme.finitePoints :=
+    ⟨⟨y.1, hyU⟩, (Scheme.Hom.mem_finitePoints_iff_of_isIso U.ι _).1 y.2⟩
+  exact frobeniusWeight_eq_of_isPunctuallyPure_comp hr hpure x y rfl hα
 
 end WeilGroup
 
