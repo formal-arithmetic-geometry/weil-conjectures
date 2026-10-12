@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMap
 import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapInjective
+import Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapSurjective
 
 @[expose] public section
 
@@ -25,6 +27,7 @@ theorem relativeDifferentials_affine_sections_map_bijective (f : X ⟶ S)
     (he : ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =
       f.relativeDifferentialsDerivation.d (X := op U.1) a) :
     Function.Bijective e := by
-  sorry
+  exact ⟨relativeDifferentials_affine_sections_map_injective f U V hUV e he,
+    relativeDifferentials_affine_sections_map_surjective f U V hUV e he⟩
 
 end AlgebraicGeometry

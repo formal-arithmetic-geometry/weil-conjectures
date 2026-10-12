@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-relative-differentials-affine-sections-map-surjective",
+ "kind": "statement",
+ "title": "Affine differential sections map is surjective",
+ "statement": "Under the hypotheses of the affine differential sections map, any compatible linear map is surjective.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine comparison calculation for relative differentials to represent every section by a Kähler differential.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine relative differentials injective surjective",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine relative differentials sections",
+   "results": "no exact scheme-level match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials.*affine.*sections",
+   "results": "no matching declaration",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapBijective",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-relative-differentials-affine-sections-map-bijective",
+   "place": "surjectivity part",
+   "via": [
+    "lem-sc-relative-differentials-affine-sections-map-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialsAffineSectionsMapSurjective.lean",
+  "declaration": "AlgebraicGeometry.relativeDifferentials_affine_sections_map_surjective",
+  "statement": "theorem relativeDifferentials_affine_sections_map_surjective (f : X ⟶ S) (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) (e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) →ₗ[Γ(X, U.1)] Γ(f.relativeDifferentials, U.1)) (he : ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) = f.relativeDifferentialsDerivation.d (X := op U.1) a) : Function.Surjective e",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261012T230803-L-1911109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261012T230803-L-1911109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
