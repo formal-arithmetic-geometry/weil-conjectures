@@ -30,82 +30,23 @@
  ],
  "proof": [
   {
-   "text": "(A $p$-basis of $K$ and the basis of $\\Omega_{K/\\mathbf F_p}$.) The map $F:K\\to K$, $b\\mapsto b^p$, is a ring homomorphism ($(b+c)^p=b^p+c^p$ since $p$ divides $\\binom pj$ for $0<j<p$), injective as $K$ is a field, so $K^p=F(K)$ is a subfield of $K$ ($(b^p)^{-1}=(b^{-1})^p$); likewise $L^p$ is a subfield of $L$ for every field $L\\supseteq K$. The prime field $\\mathbf F_p\\subseteq K$ satisfies $c=c^p$ for $c\\in\\mathbf F_p$, so $\\mathbf F_p\\subseteq K^p$ and $\\mathbf F_pK^p=K^p$. By [lem-weil-pbc-p-basis-exists] applied to $K$ there is a family $(x_i)_{i\\in I}$ in $K$ whose monomials $x^E=\\prod_ix_i^{e_i}$ ($E=(e_i)_{i\\in I}$, $0\\le e_i<p$, almost all $e_i=0$) form a basis of $K$ over $K^p=\\mathbf F_pK^p$. By [lem-weil-pbc-p-basis-differentials-basis] for the extension $K/\\mathbf F_p$, $(\\mathrm dx_i)_{i\\in I}$ is a basis of the $K$-vector space $\\Omega_{K/\\mathbf F_p}$ [def-weil-pbc-kahler-differentials].",
+   "text": "Combine the differential-kernel clause and the finite-extension p-power clause by conjunction introduction.",
    "uses": [
-    "lem-weil-pbc-p-basis-exists",
-    "lem-weil-pbc-p-basis-differentials-basis",
-    "def-weil-pbc-kahler-differentials"
+    "lem-weil-pbc-intersection-subfields-differentials-kernel",
+    "lem-weil-pbc-intersection-subfields-differentials-powers"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields, line 11458), proof of (1), first sentence ('Choose a p-basis {x_i} for K over F_p'), with Lemma Tag 07P2 (lemma-p-basis), (a) implies (b)"
-   }
-  },
-  {
-   "text": "(Proof of (1).) Let $\\omega\\in\\Omega_{K/\\mathbf F_p}$ map to zero in $\\Omega_{K/K_\\alpha}$ for every $\\alpha$, and suppose $\\omega\\ne0$. By Step 1 write $\\omega=\\sum_{i\\in I'}y_i\\,\\mathrm dx_i$ with $I'\\subseteq I$ finite and nonempty and all $y_i\\ne0$. Let $\\mathcal E$ be the finite set of families $E=(e_i)_{i\\in I'}$ with $0\\le e_i<p$, $N=|\\mathcal E|$; extending $E$ by zero outside $I'$, the $x^E$, $E\\in\\mathcal E$, are pairwise distinct members of the basis of Step 1, hence linearly independent over $K^p$. In particular, for $i_0\\in I'$, $1=x^0$ and $x_{i_0}$ are $K^p$-independent, so $x_{i_0}\\notin K^p$ and $K^p\\ne K$; by (ii) (an empty intersection of subfields of $K$ being $K$) $\\mathcal A$ is nonempty. Fix $\\alpha$. The image of $\\omega$ in $\\Omega_{K/K_\\alpha}$ is $\\sum_{i\\in I'}y_i\\,\\mathrm dx_i$ (the map is $K$-linear with $\\mathrm da\\mapsto\\mathrm da$) and is zero, with $y_i\\ne0$; so $(\\mathrm dx_i)_{i\\in I'}$ is linearly dependent in $\\Omega_{K/K_\\alpha}$. $K/K_\\alpha$ is an extension of fields of characteristic $p$ and $K_\\alpha K^p=K_\\alpha$ by (i); by [lem-weil-pbc-p-independent-differentials-independent] for $K/K_\\alpha$ and the family $(x_i)_{i\\in I'}$, this family is not $p$-independent over $K_\\alpha$: there are $a_E\\in K_\\alpha$ ($E\\in\\mathcal E$), not all zero, with $\\sum_Ea_Ex^E=0$. Let $V\\subseteq K^{\\oplus\\mathcal E}\\cong K^{\\oplus N}$ be the $K$-linear subspace of all $(a_E)_E$ with $\\sum_Ea_Ex^E=0$ (the kernel of a $K$-linear map). We have shown $V\\cap K_\\alpha^{\\oplus N}\\ne0$ for every $\\alpha\\in\\mathcal A$. The extension $K/K^p$, the nonempty family $(K_\\alpha)$ and $k=K^p$ satisfy (1)-(3) of [lem-weil-pbc-intersection-subfields-subspace] (these are (i)-(iii)), so $V\\cap(K^p)^{\\oplus N}\\ne0$: a nontrivial $K^p$-linear relation $\\sum_Ea_Ex^E=0$, contradicting the $K^p$-independence of the $x^E$, $E\\in\\mathcal E$. Hence $\\omega=0$.",
-   "uses": [
-    "lem-weil-pbc-p-independent-differentials-independent",
-    "lem-weil-pbc-intersection-subfields-subspace",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields, line 11458), proof of (1) ('By Lemma 07P2 this means that for every alpha there exists a relation ... This is a contradiction by Lemma 07P3'); the use of 07P2 (1) implies (2) for K/K_alpha, the subspace V and the nonemptiness of the index set are written out"
-   }
-  },
-  {
-   "text": "(Proof of (2): the induction and the reduction to extensions without intermediate fields.) For every finite extension $L/K$ and every $\\alpha$, $L^p\\subseteq L^pK_\\alpha$, so $L^p\\subseteq\\bigcap_\\alpha L^pK_\\alpha$ (intersection taken in $L$, the empty intersection being $L$); we prove the reverse inclusion by induction on $d=[L:K]$, for all fields $K$ of characteristic $p$, all families $(K_\\alpha)$ satisfying (i)-(iii) and all $L/K$ with $[L:K]=d$ simultaneously. If $d=1$, $L=K$ and $K^pK_\\alpha=K_\\alpha$ by (i), so $\\bigcap_\\alpha K^pK_\\alpha=K^p$ by (ii). Let $d>1$. Suppose first that there is an intermediate field $K\\subsetneq M\\subsetneq L$. By [lem-weil-pbc-field-degree-multiplicativity] $[L:K]=[L:M][M:K]$ with both factors $>1$, so $[M:K]<d$ and $[L:M]<d$. Put $M_\\alpha=M^pK_\\alpha\\subseteq M$. By induction for $M/K$, $M^p=\\bigcap_\\alpha M_\\alpha$. The family $(M_\\alpha)$ of subfields of the field $M$ (of characteristic $p$) satisfies (i)-(iii): $M^p\\subseteq M_\\alpha$; $M^p=\\bigcap_\\alpha M_\\alpha$; and if $K_{\\alpha''}\\subseteq K_\\alpha\\cap K_{\\alpha'}$ then $M_{\\alpha''}\\subseteq M_\\alpha\\cap M_{\\alpha'}$. By induction for $L/M$ and $(M_\\alpha)$, $L^p=\\bigcap_\\alpha L^pM_\\alpha$, and $L^pM_\\alpha=L^pK_\\alpha$ since $M^p\\subseteq L^p$. Suppose now that $K$ and $L$ are the only intermediate fields. Choose $\\theta\\in L\\setminus K$; then $K(\\theta)$ (the smallest subfield of $L$ containing $K$ and $\\theta$) is an intermediate field $\\ne K$, so $L=K(\\theta)$; every element of $L$ is algebraic over $K$ [def-weil-algebraic-element] (the $d+1$ elements $1,\\theta,\\ldots,\\theta^d$ of the $d$-dimensional $K$-space $L$ are linearly dependent). Either $\\theta^p\\notin K$ (Step 4) or $\\theta^p\\in K$ (Step 5); in both cases $\\bigcap_\\alpha L^pK_\\alpha\\subseteq L^p$, which completes the induction.",
-   "uses": [
-    "lem-weil-pbc-field-degree-multiplicativity",
-    "def-pc-field-extension",
-    "def-weil-algebraic-element"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields), proof of (2), first paragraph ('Suppose that we have a tower L/M/K ... Hence it suffices to prove (2) for primitive field extensions having no nontrivial subfields'); the induction on [L:K] is set up explicitly"
-   }
-  },
-  {
-   "text": "(Case $\\theta^p\\notin K$.) Put $\\varphi=\\theta^p\\in L^p$. $K(\\varphi)$ is an intermediate field containing $\\varphi\\notin K$, so $K(\\varphi)=L$. By [lem-weil-pbc-simple-algebraic-extension-power-basis] for $\\theta$ and for $\\varphi$, both $1,\\theta,\\ldots,\\theta^{d-1}$ and $1,\\varphi,\\ldots,\\varphi^{d-1}$ are $K$-bases of $L$, $d=[L:K]$. The Frobenius $F:L\\to L^p$, $b\\mapsto b^p$, is a ring isomorphism mapping $K$ onto $K^p$ and $F(\\sum_jc_j\\theta^j)=\\sum_jc_j^p\\varphi^j$, so $L^p=\\{\\sum_{j<d}a_j\\varphi^j:a_j\\in K^p\\}$. Fix $\\alpha$ and put $W_\\alpha=\\{\\sum_{j<d}a_j\\varphi^j:a_j\\in K_\\alpha\\}$. It is a $K_\\alpha$-subspace of $L$ containing $K_\\alpha$ and, by (i), $L^p$; it is closed under multiplication by $\\varphi$ because $\\varphi\\cdot\\varphi^{d-1}=\\varphi^d\\in L^p\\subseteq W_\\alpha$, hence it is a subring. It is a field: for $0\\ne x\\in W_\\alpha$, $y\\mapsto xy$ is an injective $K_\\alpha$-linear endomorphism of the finite-dimensional $K_\\alpha$-space $W_\\alpha$ ($L$ is a field), hence surjective, so $x^{-1}\\in W_\\alpha$. Every subfield of $L$ containing $L^p$ and $K_\\alpha$ contains $W_\\alpha$; so $L^pK_\\alpha=W_\\alpha$. Let $x\\in\\bigcap_\\alpha L^pK_\\alpha$ and write $x=\\sum_{j<d}c_j\\varphi^j$ with $c_j\\in K$, uniquely. For each $\\alpha$, $x\\in W_\\alpha$ gives $x=\\sum_jc'_j\\varphi^j$ with $c'_j\\in K_\\alpha\\subseteq K$, and uniqueness gives $c_j=c'_j\\in K_\\alpha$. So $c_j\\in\\bigcap_\\alpha K_\\alpha=K^p$ by (ii), and $x\\in L^p$.",
-   "uses": [
-    "lem-weil-pbc-simple-algebraic-extension-power-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields), proof of (2), the case 'L = K(theta) separable over K. Then L is generated by theta^p over K ... L^p = K^p + K^p theta + ... and L^pK_alpha = K_alpha + K_alpha theta + ...'; the case split is by whether theta^p lies in K, which avoids separability, and the identification of L^pK_alpha and the intersection are written out"
-   }
-  },
-  {
-   "text": "(Case $\\theta^p\\in K$.) Put $t=\\theta^p\\in K$. Then $t\\notin K^p$: if $t=s^p$ with $s\\in K$ then $(\\theta-s)^p=\\theta^p-s^p=0$, so $\\theta=s\\in K$. By [lem-weil-pbc-simple-algebraic-extension-power-basis] every element of $L=K(\\theta)$ is $\\sum_{j<d}c_j\\theta^j$ with $c_j\\in K$, so $L^p=F(L)=\\{\\sum_{j<d}c_j^pt^j\\}$ is contained in the subring $K^p[t]$ of $K$ generated by $K^p$ and $t$; conversely $K^p\\subseteq L^p$ and $t=\\theta^p\\in L^p$. As $t^p\\in K^p$, $L^p=K^p[t]=\\{\\sum_{j<p}a_jt^j:a_j\\in K^p\\}$. For each $\\alpha$ let $U_\\alpha=\\{\\sum_{j<p}a_jt^j:a_j\\in K_\\alpha\\}\\subseteq K$; it contains $K_\\alpha$ and (by (i)) $L^p$, is closed under multiplication by $t$ since $t^p\\in K^p\\subseteq K_\\alpha$, hence is a subring, finite-dimensional over $K_\\alpha$, hence a subfield (as in Step 4), contained in every subfield containing $K_\\alpha$ and $L^p$: $L^pK_\\alpha=U_\\alpha$. (The source writes $U_\\alpha$ as a direct sum $\\bigoplus_{j<p}K_\\alpha t^j$; this fails when $t\\in K_\\alpha$, and the directedness (iii) is used instead.) By (ii) there is $\\alpha_0$ with $t\\notin K_{\\alpha_0}$. Claim: $1,t,\\ldots,t^{p-1}$ are linearly independent over $K_{\\alpha_0}$. Indeed $t$ is a root of $X^p-t^p\\in K_{\\alpha_0}[X]$; let $e=[K_{\\alpha_0}(t):K_{\\alpha_0}]$; by [lem-weil-pbc-simple-algebraic-extension-power-basis] $1,t,\\ldots,t^{e-1}$ is a $K_{\\alpha_0}$-basis of $K_{\\alpha_0}(t)$, so expressing $t^e$ in it gives a monic $m\\in K_{\\alpha_0}[X]$ of degree $e\\ge1$ with $m(t)=0$, and every $g\\in K_{\\alpha_0}[X]$ with $g(t)=0$ is divisible by $m$ (write $g=qm+r$ with $\\deg r<e$; $r(t)=0$ forces $r=0$). So $m$ divides $X^p-t^p=(X-t)^p$ in $K[X]$; since $K[X]$ is a unique factorization domain and $m$ is monic, $m=(X-t)^e$, whose coefficient of $X^{e-1}$ is $-e\\,t\\in K_{\\alpha_0}$. If $e<p$, $e$ is invertible in $\\mathbf F_p\\subseteq K_{\\alpha_0}$ and $t\\in K_{\\alpha_0}$, a contradiction; so $e=p$, proving the claim. Now let $x\\in\\bigcap_\\alpha U_\\alpha$ and write $x=\\sum_{j<p}c_jt^j$ with $c_j\\in K_{\\alpha_0}$ ($x\\in U_{\\alpha_0}$), uniquely by the claim. Given $\\alpha'$, choose by (iii) $\\alpha''$ with $K_{\\alpha''}\\subseteq K_{\\alpha'}\\cap K_{\\alpha_0}$; $x\\in U_{\\alpha''}$ gives $x=\\sum_jc''_jt^j$ with $c''_j\\in K_{\\alpha''}\\subseteq K_{\\alpha_0}$, so $c_j=c''_j\\in K_{\\alpha'}$. Hence $c_j\\in\\bigcap_{\\alpha'}K_{\\alpha'}=K^p$ by (ii), and $x\\in K^p[t]=L^p$.",
-   "uses": [
-    "lem-weil-pbc-simple-algebraic-extension-power-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields), proof of (2), the case 'L = K(theta) with theta^p = t in K, t not in K^p ... Again the result is clear'; the decomposition L^pK_alpha = sum K_alpha t^j is not direct when t is in K_alpha, and the argument via (iii) is written out"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-p-basis-exists",
-  "lem-weil-pbc-p-basis-differentials-basis",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-p-independent-differentials-independent",
-  "lem-weil-pbc-intersection-subfields-subspace",
-  "lem-weil-pbc-field-degree-multiplicativity",
-  "def-pc-field-extension",
-  "def-weil-algebraic-element",
-  "lem-weil-pbc-simple-algebraic-extension-power-basis"
+  "lem-weil-pbc-intersection-subfields-differentials-kernel",
+  "lem-weil-pbc-intersection-subfields-differentials-powers"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07P4 (lemma-intersection-subfields, line 11458) and its proof, via Lemmas Tag 07P2 (lemma-p-basis) and Tag 07P3 (lemma-intersection-subfields-subspace); the steps the source leaves implicit (the subspace of relations and 07P2 (1) implies (2) for K/K_alpha in (1), the induction on [L:K], the identification of L^pK_alpha and of the intersection in both cases of (2)) are written out, the case split of (2) is by whether theta^p lies in K, and the non-direct sum of the case theta^p in K is replaced by an argument using (iii)"
+  "by": "worker",
+  "group": "J1",
+  "date": "2026-10-13",
+  "note": "Two-clause decomposition of the original five-step argument; each clause retains its source proof steps."
  },
  "mathlib_searches": [
   {
@@ -191,5 +132,15 @@
   "group": "C1",
   "result": "fix",
   "note": "p prime, CharP K p; Kα family of subfields (IntermediateField over ZMod p); (i) K^p ⊆ Kα, (ii) K^p = ⨅ Kα, (iii) directed; (1) kernel of all KaehlerDifferential.map is 0; (2) L^p = ⋂ closure(L^p ∪ Kα) for finite L/K; no Nonempty, empty ι checked"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T213040-L-1151387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
