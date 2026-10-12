@@ -1434,6 +1434,7 @@ public import WeilConjectures.RingTheory.GenericConnectedness
 public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
+public import WeilConjectures.RingTheory.Henselian.EtaleRetraction
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.Etale
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
