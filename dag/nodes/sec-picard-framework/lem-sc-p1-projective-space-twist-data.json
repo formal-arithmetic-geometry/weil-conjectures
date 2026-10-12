@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-p1-projective-space-twist-data",
+ "kind": "statement",
+ "title": "Standard generators for the integral-model projective-line twist",
+ "statement": "Let $k$ be a field and $d\\in\\mathbf Z$. On $\\mathbf P^1_k$ with the standard opens of [def-sc-p1-standard], the integral-model twisting module $\\operatorname{ProjectiveSpace.twist}(d)$ [def-pc-projective-space-twist] admits $\\operatorname{TwistData}$ [def-sc-p1-standard]: generators $g_0,g_1$ trivializing it on every subopen of $D_+(x_0),D_+(x_1)$ and satisfying $g_0=(x_0/x_1)^d g_1$ on the intersection.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Tags 01MN, 01M7 (2),(3); Section 01MM, homogeneous fraction charts; parent proof step 2, integral-model trivializations",
+  "url": "https://stacks.math.columbia.edu/tag/01M7"
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-p1-standard"
+ ],
+ "proof": [
+  {
+   "text": "On the integral polynomial Proj, restrict the fraction section X_i/X_j to the intersection of the variable charts. Evaluate its value at each point using awayToSection_apply and Away.val_mk; the value is Localization.mk X_i X_j. The opposite ratio has value Localization.mk X_j X_i. Their product is one by Localization.mk_mul and the localization equality criterion (witness 1), giving a unit c.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At each point the degree-d chart generator twistPowSection is X_i^(d.toNat)/X_i^((-d).toNat). Split d into ofNat m and negSucc m. In the first case c^d has numerator X_i^m and denominator X_j^m; in the second its value uses the opposite ratio to the power m+1. In both cases the transition equality reduces under Localization.mk_mul to a polynomial multiplication identity. The localization relation uses witness 1; this includes d=0 and also i=j.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull back both generators along toProjInt. The existing isFreeGenerator_twistPowSection and pullback_unit_app lemmas supply the two bijective scalar maps on every subopen. Apply pullbackSection to the integral transition equation and use pullbackSection_map and pullbackSection_smul. Naturality of the structure-sheaf map identifies the image of c with ratioUnit. Units.map preserves integer powers, so its image c^d is transitionUnit. Assemble the generators, bijectivity proofs and overlap equality into TwistData.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-sc-p1-standard"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Tags 01MN and 01M7, Section 01MM; fully checked K3 fraction calculation and pullback of generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The integral model twisting sheaf on projective line has free generators on the two coordinate charts with transition ratio to any integer power",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisting sheaf on projective line has two standard free generators whose transition is the integer power of the coordinate ratio",
+   "results": "Eight Proj structure sheaf and localization results, including Proj.awayToSection and ProjectiveSpectrum.Proj.awayToSection_apply; no theorem constructing TwistData.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TwistData|twistPowSection|transitionUnit",
+   "results": "No Mathlib hits. Local rg found upstream twistPowSection and its free-generator theorem; neither asserts the TwistData construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjTwistInverseTransport",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Proof, final clause: each sheafified finite graded free module is a finite sum of twists; integral-model twist chart trivializations",
+   "via": [
+    "lem-sc-p1-proj-twist-inverse-transport",
+    "lem-sc-p1-homogeneous-basis-sheaf-twists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjectiveLineTwistData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/ProjectiveLineTwistData.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.nonempty_twistData_projectiveSpace",
+  "statement": "theorem nonempty_twistData_projectiveSpace (k : Type u) [Field k] (d : ℤ) :\n    Nonempty (TwistData (Spec (.of k)) d\n      (ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T085301-L-24046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T085301-L-24046",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,9 +7,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjectiveLineTwistData
+import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Transport of a polynomial Proj twist to the projective line
@@ -52,6 +52,34 @@ theorem proj_twist_inverse_transport (k : Type u) [Field k]
     Nonempty ((Scheme.Modules.pullback C.iso.inv).obj
       (twist (homogeneousSubmodule (Fin 2) k) d) ≅
         ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d) := by
-  sorry
+  classical
+  let L := ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d
+  obtain ⟨T⟩ := ProjectiveLine.nonempty_twistData_projectiveSpace k d
+  obtain ⟨C', ⟨L', ⟨T'⟩, ⟨e'⟩⟩, _⟩ := proj_shifted_free_is_twist k d
+  have hcov : (⨆ i : ULift.{u} (Fin 2),
+      basicOpen (homogeneousSubmodule (Fin 2) k) (X i.down)) = ⊤ := by
+    have h := iSup_basicOpen_eq_top' (homogeneousSubmodule (Fin 2) k)
+      X (fun i ↦ ⟨1, isHomogeneous_X k i⟩) (adjoin_range_X_eq_top (Fin 2) k)
+    refine top_le_iff.mp fun x hx ↦ ?_
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (h.ge hx)
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i⟩, hi⟩
+  have hC : C'.iso.hom = C.iso.hom := by
+    apply (linearCover (homogeneousSubmodule (Fin 2) k)
+      (fun j : ULift.{u} (Fin 2) ↦ X j.down)
+      (fun j ↦ X_mem_homogeneousSubmodule_one k j.down) hcov).hom_ext
+    intro i
+    exact (C'.chart_eq i).trans (C.chart_eq i).symm
+  obtain ⟨L₀, T₀, _, huniq⟩ := ProjectiveLine.exists_twistData_unique_iso k d
+  obtain ⟨e₀, _, _⟩ := huniq L' T'
+  obtain ⟨e₁, _, _⟩ := huniq L T
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction C'.iso.hom
+  let a := adj.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction C'.iso.hom)
+  let e := e' ≪≫ a.app L' ≪≫
+    (Scheme.Modules.pullback C'.iso.hom).mapIso (e₀.symm ≪≫ e₁) ≪≫
+    (Scheme.Modules.pullbackCongr hC).app L
+  exact ⟨(Scheme.Modules.pullback C.iso.inv).mapIso e ≪≫
+    (Scheme.Modules.pullbackComp C.iso.inv C.iso.hom).app L ≪≫
+    (Scheme.Modules.pullbackCongr C.iso.inv_hom_id).app L ≪≫
+    (Scheme.Modules.pullbackId _).app L⟩
 
 end AlgebraicGeometry.Proj
