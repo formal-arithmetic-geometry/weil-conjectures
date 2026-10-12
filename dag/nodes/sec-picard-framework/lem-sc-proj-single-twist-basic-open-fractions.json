@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-proj-single-twist-basic-open-fractions",
+ "kind": "statement",
+ "title": "Homogeneous fraction charts for an individual Proj twist",
+ "statement": "Let A be a commutative N-graded ring with grading 𝒜. For every integer k, the locally-fraction sheaf twist 𝒜 k [def-weil-pbc-proj-twisting-sheaf] admits compatible additive charts beta on every D₊(f), f homogeneous of positive degree. The chart is injective into LocalizedModule.Away f A, with range degreeZeroFractions [def-sc-degree-zero-module-fractions] for the shifted grading: y has degree n when y lies in 𝒜_(k+n) if k+n is nonnegative, and is zero otherwise. It intertwines awayToSection scalars with the homogeneous-localization algebra map. If D₊(g) is contained in D₊(f) and g^e=h*f with e>0 and h homogeneous, restriction carries y/f^m to h^m*y/g^(e*m). No nonnilpotence or restriction on k is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Definition 27.10.1 (1), Tag 01MN; Lemma 27.8.4 (2),(3), Tag 01M7, applied to A(k)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the degree-k fraction construction pointwise at homogeneous primes. Fractions with a denominator f^m define locally-fraction sections on D₊(f). Their equivalence relation is preserved under localization at every point. Conversely cover a locally-fraction section by basic opens on which it has a homogeneous fraction representative. D₊(f) is affine for homogeneous f of positive degree, hence a finite subcover suffices. Clearing the finitely many denominators and overlap equality witnesses yields a homogeneous representative y/f^m of degree k. The same finite-cover argument applied to a zero section proves injectivity of the map from these fractions into sections. Invert that bijection to obtain beta. Its range in the ordinary localized module is precisely the equal-degree fractions of the shift A(k), by the definition of degreeZeroFractions. Negative graded components of A are zero. When f is nilpotent, both the sections on the empty open and the localization are zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pointwise multiplication of fractions gives scalar compatibility. For g^e=h*f, the element h/g^e in A_g is an inverse of f. The localization homomorphism therefore carries y/f^m to h^m*y/g^(e*m). Evaluating both expressions at every homogeneous prime of D₊(g) proves that this agrees with restriction of the locally-fraction sections.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-degree-zero-module-fractions",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Definition 27.10.1 (1), Tag 01MN; Lemma 27.8.4 (2),(3), Tag 01M7, applied to A(k); adaptation to the locally-fraction twist and finite coordinate interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of the Serre twisting sheaf on a homogeneous basic open are homogeneous fractions with scalar and restriction compatibility",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a twisting sheaf on a homogeneous basic open are equal degree fractions in a localized graded module",
+   "results": "Proj.awayToSection, StructureSheaf.IsFraction, sectionInBasicOpen; structure sheaf only",
+   "date": "2026-10-12",
+   "verdict": "No single-twist chart match"
+  },
+  {
+   "tool": "grep",
+   "query": "basicOpen|Away|away|equiv|Equiv|fraction in WeilConjectures/AlgebraicGeometry/ProjectiveSpectrum/Twist and Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "results": "Locally-fraction twist definition and multiplication trivializations only; attached definition node explicitly notes the chart identification is a stage-3 lemma",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem; the original module is the finite-coproduct version, not the single-twist lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause: associated sheaf of the finite direct sum of shifts is the finite direct sum of the corresponding twists; single twist charts",
+   "via": [
+    "lem-sc-proj-finite-twist-coproduct-fractions",
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistBasicOpenFractions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistBasicOpenFractions.lean",
+  "declaration": "AlgebraicGeometry.Proj.single_twist_basicOpen_fractions",
+  "statement": "theorem single_twist_basicOpen_fractions\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] :\n    ∃ beta : ∀ (k : ℤ) (f : A) (b : ℕ), 0 < b → f ∈ 𝒜 b →\n      (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f)) →+ LocalizedModule.Away f A,\n    (∀ (k : ℤ) (f : A) (b : ℕ) (hb : 0 < b) (hf : f ∈ 𝒜 b),\n      Function.Injective (beta k f b hb hf) ∧\n      Set.range (beta k f b hb hf) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set A))\n        (fun n : ℕ ↦ {y : A | if 0 ≤ k + n then y ∈ 𝒜 (k + n).toNat else y = 0})\n        (Submonoid.powers f)) ∧\n    (∀ (k : ℤ) (f : A) (b : ℕ) (hb : 0 < b) (hf : f ∈ 𝒜 b)\n      (q : HomogeneousLocalization.Away 𝒜 f)\n      (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))),\n      beta k f b hb hf (awayToSection 𝒜 f q • s) =\n        algebraMap (HomogeneousLocalization.Away 𝒜 f) (Localization.Away f) q •\n          beta k f b hb hf s) ∧\n    (∀ (k : ℤ) (f g : A) (b c : ℕ) (hb : 0 < b) (hc : 0 < c)\n      (hf : f ∈ 𝒜 b) (hg : g ∈ 𝒜 c) (inc : basicOpen 𝒜 g ≤ basicOpen 𝒜 f)\n      (e t : ℕ) (h : A), 0 < e → h ∈ 𝒜 t → g ^ e = h * f →\n      ∀ (m : ℕ) (y : A) (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f))),\n        beta k f b hb hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n        beta k g c hc hg ((twist 𝒜 k).val.map (homOfLE inc).op s) =\n          mk (h ^ m • y)\n            (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

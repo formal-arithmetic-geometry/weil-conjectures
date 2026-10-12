@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-finite-pi-away-fractions",
+ "kind": "statement",
+ "title": "Finite localization coordinates preserve shifted equal-degree fractions",
+ "statement": "Let A be a commutative N-graded ring with grading 𝒜, r a natural number, a:Fin r→Z, and f any element of A. The additive A-linear map awayPi from Away f (Fin r→A) to Fin r→Away f A sends y/s to its coordinate fractions y_i/s. This map is bijective. A vector fraction belongs to degreeZeroFractions [def-sc-degree-zero-module-fractions] for the grading in which y has degree n precisely when every y_i lies in 𝒜_(a_i+n) (or is zero if a_i+n<0) if and only if each coordinate fraction belongs to the corresponding individual shifted degreeZeroFractions. This includes the empty product and zero denominators.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Finite direct sum consequence of Tag 01M7 (2); equal-degree localization of Algebra Section 00JM; finite products via Mathlib IsLocalizedModule.pi"
+ },
+ "stmt_deps": [
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Define awayPi using IsLocalizedModule.map on the coordinate projections. Its value on y/s is y_i/s by map_LocalizedModules. Localization.pi identifies the product of localized modules as a localization of the product. Its universal equivalence agrees with awayPi on y/1; linearMap_ext gives equality and hence bijectivity. Induction on a vector fraction and on a ring fraction proves compatibility with localized scalars by mk_smul_mk.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "A homogeneous vector representative projects to an equal-degree coordinate representative. Conversely choose (d_i,y_i,s_i) representing every coordinate, with s_i homogeneous of degree d_i. Let t=product s_i and D=sum d_i. Multiply y_i by the product u_i of all s_j with j unequal to i. The multiplier is homogeneous of degree D-d_i, so z_i=u_i*y_i has shifted degree D whenever a_i+d_i is nonnegative. Otherwise y_i and z_i are zero and meet the shifted degree condition regardless of the sign of a_i+D. The denominator t has degree D. The common-factor cancellation lemma gives z_i/t=y_i/s_i. Injectivity of awayPi identifies z/t with the original fraction. This proof uses no nonzero denominator assumption. Empty products and sums produce t=1 and D=0.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Finite direct sum consequence of Tag 01M7 (2); equal-degree localization of Algebra Section 00JM; finite products via Mathlib IsLocalizedModule.pi; adaptation to the locally-fraction twist and finite coordinate interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The degree zero localization of a finite direct sum of shifted graded modules is the product of the degree zero localizations",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a finite product of modules commutes with finite products with equal degree homogeneous fractions",
+   "results": "IsLocalizedModule.pi in Mathlib.RingTheory.TensorProduct.IsBaseChangePi; homogeneous localization multiplication lemmas",
+   "date": "2026-10-12",
+   "verdict": "IsLocalizedModule.pi proves bijectivity; no shifted homogeneous-range theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "pi|Pi|prod|Prod in Mathlib/Algebra/Module/LocalizedModule and prod_mem_graded in Mathlib/Algebra/GradedMonoid",
+   "results": "IsLocalizedModule.map_LocalizedModules, mk_cancel_common_left, SetLike.prod_mem_graded",
+   "date": "2026-10-12",
+   "verdict": "Used for the complete Lean proof; no exact equal-degree finite-coordinate theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause: associated sheaf of the finite direct sum of shifts is the finite direct sum of the corresponding twists; finite homogeneous common denominators",
+   "via": [
+    "lem-sc-proj-finite-twist-coproduct-fractions",
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Module.FinitePiAwayFractions",
+  "file": "lean/Sheaf/Algebra/Module/FinitePiAwayFractions.lean",
+  "declaration": "LocalizedModule.awayPi_bijective_degreeZero",
+  "statement": "theorem awayPi_bijective_degreeZero\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (r : ℕ) (a : Fin r → ℤ)\n    (f : A) :\n    Function.Bijective (awayPi r f) ∧\n    ∀ x : LocalizedModule.Away f (Fin r → A),\n      x ∈ degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set A))\n        (fun n : ℕ ↦ {y : Fin r → A | ∀ i,\n          if 0 ≤ a i + n then y i ∈ 𝒜 (a i + n).toNat else y i = 0})\n        (Submonoid.powers f) ↔\n      ∀ i, awayPi r f x i ∈ degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set A))\n        (fun n : ℕ ↦ {y : A |\n          if 0 ≤ a i + n then y ∈ 𝒜 (a i + n).toNat else y = 0})\n        (Submonoid.powers f)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12",
+  "declarations": [
+   "LocalizedModule.awayPi",
+   "LocalizedModule.awayPi_mk",
+   "LocalizedModule.awayPi_smul",
+   "LocalizedModule.awayPi_bijective",
+   "LocalizedModule.awayPi_bijective_degreeZero"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

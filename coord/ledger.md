@@ -6851,3 +6851,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension (stage 3; reviewer PASS; first push; landing 20261012T085243-L-16570 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.Morphisms.UnderlyingFiniteEtaleExtension (stage 3; reviewer PASS; first push; landing 20261012T085244-L-16680 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.PicardLift (stage 3; reviewer PASS; first push; landing 20261012T085244-L-16790 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:52 L: merged deliver/G3/Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions (stage 3; reviewer PASS; first push; landing 20261012T085244-L-16937 (interface); batch 20261012T085205; modules 3; new nodes 2)
