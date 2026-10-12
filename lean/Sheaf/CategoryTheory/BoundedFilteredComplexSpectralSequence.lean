@@ -10,10 +10,7 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.SpectralSequencePageInduction
+import Sheaf.CategoryTheory.BoundedFilteredComplexPages
 
 /-!
 # Spectral sequences of bounded filtered complexes
@@ -218,6 +215,33 @@ theorem boundedFilteredComplex_spectralSequence
             ((S.obj U).page r hr).d (p - r, q + r - 1) (p, q) = 0 ∧
             Nonempty (((S.obj U).page r hr).X (p, q) ≅
               ((S.obj U).page t (by omega)).X (p, q))) := by
-  sorry
+  classical
+  have maps : ∀ (U : ObjectProperty.FullSubcategory
+      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))
+      (p r : ℤ) (hr : 1 ≤ r),
+      ∃ f : U.obj.filtration.complexQuotient p (p + r) (by omega) ⟶
+          U.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega),
+        U.obj.filtration.complexQuotientπ p (p + r) (by omega) ≫ f =
+          Subobject.ofLE (U.obj.filtration.step p)
+            (U.obj.filtration.step (p - r + 1))
+            (U.obj.filtration.antitone_step (by omega)) ≫
+              U.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega) := by
+    intro U p r hr
+    let F := U.obj.filtration
+    refine ⟨cokernel.desc
+      (Subobject.ofLE (F.step (p + r)) (F.step p) (F.antitone_step (by omega)))
+      (Subobject.ofLE (F.step p) (F.step (p - r + 1))
+        (F.antitone_step (by omega)) ≫
+          F.complexQuotientπ (p - r + 1) (p + 1) (by omega)) ?_, ?_⟩
+    · dsimp only [DecreasingFiltration.complexQuotientπ]
+      rw [← Category.assoc, Subobject.ofLE_comp_ofLE]
+      rw [← Subobject.ofLE_comp_ofLE (F.step (p + r)) (F.step (p + 1))
+        (F.step (p - r + 1)) (F.antitone_step (by omega))
+        (F.antitone_step (by omega))]
+      simp only [Category.assoc, cokernel.condition, comp_zero]
+    · exact cokernel.π_desc _ _ _
+  choose φ hφ using maps
+  obtain ⟨S, e₁, eI, h⟩ := boundedFilteredComplex_canonicalPages C φ hφ
+  exact ⟨S, e₁, φ, eI, hφ, h⟩
 
 end CategoryTheory

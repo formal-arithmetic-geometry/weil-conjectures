@@ -21,63 +21,28 @@
  ],
  "proof": [
   {
-   "text": "The short exact sequences $0\\to F^{p+1}K\\to F^pK\\to\\operatorname{gr}^pK\\to0$ give the displayed long exact cohomology sequences by [lem-sp-long-exact-of-triangle].",
+   "text": "For each finite filtered complex and r ≥ 1, construct the quotient transition F^p/F^(p+r) → F^(p-r+1)/F^(p+1) using cokernel.desc. The composite from F^(p+r) vanishes since p+1 ≤ p+r, by Subobject.ofLE_comp_ofLE and cokernel.condition. cokernel.π_desc gives the required equation; choose these maps simultaneously.",
    "uses": [
-    "lem-sp-long-exact-of-triangle"
+    "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "These sequences form an E1-indexed couple with $\\alpha$ of bidegree $(-1,+1)$, $g$ of $(0,0)$, and connecting $f$ of $(+1,0)$. Reindexing by $(P,Q)=(2p+q,-p)$ changes these to the standard exact-couple bidegrees $(-1,+1),(+2,-1),(0,0)$ of [def-sp-exact-couple]. The standard couple therefore starts at its $E_2=E_1^{filtered}$; the filtered $E_1$ is the initial graded page.",
+   "text": "Apply the canonical-pages construction to these quotient transitions and their proved projection equation. Package its spectral-sequence functor, first-page and image comparisons and remaining properties together with the constructed transitions.",
    "uses": [
-    "def-sp-exact-couple"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "After this reindexing, the derived couples give [def-sp-spectral-sequence] with standard differential bidegree $(+R,1-R)$ on standard page $R$; standard page $R$ corresponds to filtered page $r=R-1$ (so standard $E_2$ is filtered $E_1$), and this translates back to filtered bidegree $(+r,1-r)$ in $(p,q)$; page homology is identified by [lem-sp-page-induction]. The first differential is the connecting map from Step 1, not a derived-couple definition of E1.",
-   "uses": [
-    "def-sp-exact-couple",
-    "def-sp-spectral-sequence",
-    "lem-sp-page-induction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The filtered-complex cycle and boundary calculation [lem-sp-filtered-complex-ZB-description] gives exactly the displayed $Z_r,B_r$ subobjects and $E_r=Z_r/B_r$. Its well-typed quotient-complex clause identifies this object with the image of $H^{p+q}(X^{[p,p+r]})$ in $H^{p+q}(X^{[p-r+1,p+1]})$; at $r=1$, $Z_1$ and $B_1$ are respectively the cycles and boundaries of $\\operatorname{gr}^pK$, so $E_1=H(\\operatorname{gr}^pK)$, and boundedness gives stabilization for large r.",
-   "uses": [
-    "lem-sp-filtered-complex-ZB-description"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The bounded image filtration on cohomology is finite and separated. In the convergence convention [def-sp-convergence], its filtration index $P=p+n$ is the shifted version of the filtered index $p$ in total degree $n$. The stabilization and associated-graded identification from Step 4 give convergence in that sense.",
-   "uses": [
-    "def-sp-convergence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Filtered maps induce maps of the couples and hence compatible page maps by [lem-sp-couple-morphism]. The first-quadrant vanishing and stabilization follow directly from the translated differential bidegree and the stated support bounds.",
-   "uses": [
-    "lem-sp-couple-morphism"
+    "thm-sp-spectral-object-yields-canonical-pages"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sp-long-exact-of-triangle",
-  "def-sp-exact-couple",
-  "def-sp-spectral-sequence",
-  "lem-sp-page-induction",
-  "lem-sp-filtered-complex-ZB-description",
-  "def-sp-convergence",
-  "lem-sp-couple-morphism"
+  "def-sp-filtered-complex-subquotients",
+  "thm-sp-spectral-object-yields-canonical-pages"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "E2 stage 3, second reading",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-spectral-object-yields.md",
-  "place": "## Proof"
+  "place": "Canonical quotient transitions proved by the cokernel universal property; remaining construction in thm-sp-spectral-object-yields-canonical-pages."
  },
  "mathlib_searches": [
   {
@@ -180,5 +145,15 @@
   "group": "N1",
   "result": "fix",
   "note": "node diff: only stmt_deps +def-sp-filtered-complex-subquotients (complexCycles/Boundaries/Quotient used) +def-sp-exact-couple (BigradedExactCouple used), statement unchanged; matched abelian C, bounded filtration = FullSubcategory FilteredObject IsFinite, X^[a,b]=complexQuotient, E1/e1, d1=hS.delta of gr^{p+1}->X^[p,p+2]->gr^p with i,j pinned, Z_r/B_r = complexCycles/Boundaries with eZ pinned through z (epi) and eI, image of H(X^[p,p+r] -> X^[p-r+1,p+1]) with phi pinned, functoriality with s,a,b,g pinned, exact couple (P,Q)=(2p+q,-p) with D, alpha, g, page differentials, colimit legs tied, ConvergesTo, first-quadrant and r>max(p,q)+1 stabilization; FIX: dropped conjunct (G n).IsExhaustive (not in the node, implied by IsFinite)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T053927-L-2633324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
