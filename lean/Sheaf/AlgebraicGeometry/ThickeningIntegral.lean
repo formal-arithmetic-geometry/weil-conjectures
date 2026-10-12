@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.AlgebraicGeometry.ThickeningAffineScheme
+import Sheaf.AlgebraicGeometry.ThickeningAffineHom
 
 /-!
 # Integrality is insensitive to thickenings
@@ -54,6 +54,25 @@ theorem isIntegralHom_iff_of_thickenings {S S' X X' : Scheme.{u}}
     (i_S : S ⟶ S') (i_X : X ⟶ X') (f' : X' ⟶ S') (f : X ⟶ S)
     (hS : IsThickening i_S) (hX : IsThickening i_X)
     (hcomm : i_X ≫ f' = f ≫ i_S) : IsIntegralHom f ↔ IsIntegralHom f' := by
-  sorry
+  let : IsClosedImmersion i_S := hS.1
+  let : IsClosedImmersion i_X := hX.1
+  let : Surjective i_S := hS.2
+  let : Surjective i_X := hX.2
+  constructor
+  · intro hf
+    let : IsIntegralHom f := hf
+    have : IsAffineHom f := inferInstance
+    have : IsAffineHom f' :=
+      isAffineHom_of_thickenings i_S i_X f' f hS hX hcomm
+    have : UniversallyClosed (f ≫ i_S) := inferInstance
+    have : UniversallyClosed (i_X ≫ f') := hcomm ▸ inferInstance
+    have : UniversallyClosed f' := UniversallyClosed.of_comp_surjective i_X f'
+    exact IsIntegralHom.iff_universallyClosed_and_isAffineHom.mpr
+      ⟨inferInstance, inferInstance⟩
+  · intro hf'
+    let : IsIntegralHom f' := hf'
+    have : IsIntegralHom (i_X ≫ f') := inferInstance
+    have : IsIntegralHom (f ≫ i_S) := hcomm ▸ inferInstance
+    exact IsIntegralHom.of_comp f i_S
 
 end AlgebraicGeometry
