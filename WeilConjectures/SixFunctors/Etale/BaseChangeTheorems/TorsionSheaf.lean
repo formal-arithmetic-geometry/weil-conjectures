@@ -83,7 +83,10 @@ section TorsionSheaf
 of `F` at every geometric point of `X` is a torsion abelian group, i.e. every element of
 every geometric stalk is killed by a positive integer. Torsion refers to the underlying
 abelian group of the stalk, not to its `Λ`-module structure; for `Λ = ℤ` this is the
-classical notion of a torsion abelian sheaf [Stacks 03SA]. -/
+classical notion of a torsion abelian sheaf [Stacks 03SA].
+
+This is the notion of torsion sheaf of blueprint `def-weil-pbc-etale-sheaves`, phrased with
+geometric stalks, which the blueprint notes is equivalent to local killing of sections. -/
 class Scheme.IsTorsionSheaf {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
