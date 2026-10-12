@@ -8107,3 +8107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/G3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsAux (stage 3; reviewer PASS; first push; landing 20261012T144115-L-2096892 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/G3/Sheaf.CategoryTheory.FilteredColimitCategoryFiniteLift (stage 3; reviewer PASS; first push; landing 20261012T144115-L-2097028 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/G3/Sheaf.RingTheory.FormallySmoothCompleteLocalRegular (stage 3; reviewer PASS; first push; landing 20261012T144115-L-2097177 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/G3/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv (stage 3; reviewer PASS; first push; landing 20261012T144116-L-2097346 (interface); batch 20261012T144049; modules 3; new nodes 3)

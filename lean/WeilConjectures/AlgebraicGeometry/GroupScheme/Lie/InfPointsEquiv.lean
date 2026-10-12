@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
+import Sheaf.AlgebraicGeometry.GroupScheme.DiagonalTangentAddition
 
 /-!
 # The infinitesimal points of a group scheme are its Lie algebra
@@ -93,9 +94,46 @@ theorem toLie_bijective : Function.Bijective (toLie G) := by
 noncomputable def lieEquiv : infPoints G ≃ Lie G :=
   Equiv.ofBijective _ (toLie_bijective G)
 
+private theorem transportedOmegaHom_congr
+    {v w : Scheme.dualNumbersOver S ⟶ G} (e : v = w)
+    (hv : S.dualNumbersι ≫ v.left = unitSection G)
+    (hw : S.dualNumbersι ≫ w.left = unitSection G) :
+    (Scheme.Modules.pullbackCongr hv).inv.app G.hom.cotangentSheaf ≫ omegaHom G v =
+      (Scheme.Modules.pullbackCongr hw).inv.app G.hom.cotangentSheaf ≫ omegaHom G w := by
+  subst w
+  rfl
+
 /-- The bridge turns the group law of the infinitesimal points into the addition of `Lie(G)`. -/
 theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + lieEquiv G w := by
-  sorry
+  open MonoidalCategory CartesianMonoidalCategory in
+  let f := lift (fst _ _ ≫ v.1) (snd _ _ ≫ w.1) ≫ μ[G]
+  open MonoidalCategory CartesianMonoidalCategory in
+  have hd : lift (𝟙 (Scheme.dualNumbersOver S)) (𝟙 (Scheme.dualNumbersOver S)) ≫ f =
+      (v * w).1 := by
+    simp only [f, ← Category.assoc, comp_lift, lift_fst, lift_snd, Category.id_comp]
+    rfl
+  open MonoidalCategory CartesianMonoidalCategory in
+  have h₁ : lift (𝟙 (Scheme.dualNumbersOver S))
+      (toUnit (Scheme.dualNumbersOver S) ≫ Scheme.dualNumbersιOver S) ≫ f = v.1 := by
+    simp only [f, ← Category.assoc, comp_lift, lift_fst, lift_snd]
+    simp only [Category.assoc, (mem_infPoints G).mp w.2]
+    simp [← Hom.mul_def, MonObj.comp_one]
+  open MonoidalCategory CartesianMonoidalCategory in
+  have h₂ : lift (toUnit (Scheme.dualNumbersOver S) ≫ Scheme.dualNumbersιOver S)
+      (𝟙 (Scheme.dualNumbersOver S)) ≫ f = w.1 := by
+    simp only [f, ← Category.assoc, comp_lift, lift_fst, lift_snd]
+    simp only [Category.assoc, (mem_infPoints G).mp v.2]
+    simp [← Hom.mul_def, MonObj.comp_one]
+  have h := omegaHom_diagonal_add G f (unitSection G)
+    (by rw [hd]; exact ι_comp_left_eq G (v * w).2)
+    (by rw [h₁]; exact ι_comp_left_eq G v.2)
+    (by rw [h₂]; exact ι_comp_left_eq G w.2)
+  change toLie G (v * w) = toLie G v + toLie G w
+  calc
+    _ = _ := (transportedOmegaHom_congr G hd _ _).symm
+    _ = _ := h
+    _ = _ := congrArg₂ (· + ·) (transportedOmegaHom_congr G h₁ _ _)
+      (transportedOmegaHom_congr G h₂ _ _)
 
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
   have h := lieEquiv_mul G (1 : infPoints G) 1

@@ -1,0 +1,116 @@
+{
+ "id": "lem-ag-dual-numbers-diagonal-coefficients",
+ "kind": "statement",
+ "title": "Derivation coefficient addition on the dual-number diagonal",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], $D=S[\\varepsilon]$ its dual-number thickening [def-sc-dual-numbers], and $X\\to S$ any scheme over $S$. Let $f:D\\times_S D\\to X$ be an $S$-morphism and $g:S\\to X$ a morphism. Write $z:D\\to D$ for projection to $S$ followed by the zero section. Suppose the reductions of $f\\circ(\\mathrm{id},\\mathrm{id})$, $f\\circ(\\mathrm{id},z)$ and $f\\circ(z,\\mathrm{id})$ all equal $g$. The relative derivations given by their epsilon coefficients, transported to $g_*\\mathcal O_S$, satisfy $d_{f\\circ(\\mathrm{id},\\mathrm{id})}(a)=d_{f\\circ(\\mathrm{id},z)}(a)+d_{f\\circ(z,\\mathrm{id})}(a)$ on every open and every section $a$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0B2B",
+  "place": "Lemma 33.16.2 proof, square-zero pushout addition; sectionwise arbitrary-base form and group unit-law application"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Compare the iterated thickening S[epsilon][delta] to D times_S D by its two projections. Product extensionality identifies its two axes with the categorical axes and its single-to-double diagonal with the categorical diagonal. The diagonal is constructed sectionwise by x mapping to x.fst + inr x.snd.fst; locality follows because units are detected by the constant coefficient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The diagonal section map is identity on both dual-number inclusions. For a ring map q with those properties, q(inr(inl r))=inr r. Also inr(inr r)=inl(inr r)*inr(inl 1), so its image is zero. Expand x into its four coefficients and apply additivity: (q x).snd=x.fst.snd+x.snd.fst. The first summand is the first-axis coefficient and the second is the second-axis coefficient. Apply this to the comorphism of f on each open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The equations of the three reductions identify their underlying maps with g, hence identify the inverse-image opens and the pushforward module structures. The definitions of infDerivation and equality transport turn the preceding coefficient equation into the asserted equation of relative derivation components. This includes the zero-ring and empty-base cases.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0B2B",
+  "place": "Square-zero addition calculation, applied sectionwise over arbitrary base schemes; group-unit-law and universal-differential glue written by G3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a scheme morphism from the product of two dual number thickenings, the derivation on the diagonal equals the sum of the derivations on the two axes.",
+   "results": "Service returned Internal Server Error; no results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tangent map of multiplication of a group scheme at the identity is addition on its Lie algebra",
+   "results": "Eight results about differentiable manifolds; no scheme-theoretic tangent diagonal or group-scheme multiplication result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, HAdd.hAdd",
+   "results": "Adjunction.homAddEquiv_add and homAddEquiv_symm_add provide the additive adjunction glue, but not the scheme coefficient identity. Used homAddEquiv_symm_add.",
+   "date": "2026-10-12",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "grep",
+   "query": "omegaHom_diagonal|diagonal.*Derivation|Derivation.*diagonal; lieEquiv_mul|toLie_mul|infDerivation_mul in the library; blueprint_refs search dual numbers diagonal",
+   "results": "No Mathlib match; no duplicate blueprint node. DualNumbersDiagonal proves equality on the diagonal from equality on the axes, not the needed coefficient sum. GroupScheme.LieIdentityTangentEquiv depends on the item and cannot be imported.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Lie algebra paragraph: the identification with dual-number tangent points and the additive first-order group law",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DiagonalDerivationCoefficients.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.infDerivation_diagonal_coefficients",
+  "statement": "theorem infDerivation_diagonal_coefficients {S : Scheme.{u}} (X : Over S) (f : Scheme.dualNumbersOver S ⊗ Scheme.dualNumbersOver S ⟶ X) (g : S ⟶ X.left) (hd : S.dualNumbersι ≫ (lift (𝟙 (Scheme.dualNumbersOver S)) (𝟙 (Scheme.dualNumbersOver S)) ≫ f).left = g) (h₁ : S.dualNumbersι ≫ (lift (𝟙 (Scheme.dualNumbersOver S)) (toUnit (Scheme.dualNumbersOver S) ≫ Scheme.dualNumbersιOver S) ≫ f).left = g) (h₂ : S.dualNumbersι ≫ (lift (toUnit (Scheme.dualNumbersOver S) ≫ Scheme.dualNumbersιOver S) (𝟙 (Scheme.dualNumbersOver S)) ≫ f).left = g) : let D₀ : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation' X.hom.pullbackPresheafHom := hd ▸ infDerivation X (lift (𝟙 _) (𝟙 _) ≫ f) let D₁ : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation' X.hom.pullbackPresheafHom := h₁ ▸ infDerivation X (lift (𝟙 _) (toUnit _ ≫ Scheme.dualNumbersιOver S) ≫ f) let D₂ : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation' X.hom.pullbackPresheafHom := h₂ ▸ infDerivation X (lift (toUnit _ ≫ Scheme.dualNumbersιOver S) (𝟙 _) ≫ f) ∀ {V : (TopologicalSpace.Opens X.left)ᵒᵖ} (a : Γ(X.left, V.unop)), D₀.d a = D₁.d a + D₂.d a",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T144116-L-2097346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T144116-L-2097346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
