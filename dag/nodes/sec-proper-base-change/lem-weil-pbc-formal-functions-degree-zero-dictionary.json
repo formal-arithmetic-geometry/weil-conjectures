@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-formal-functions-degree-zero-dictionary",
+ "kind": "statement",
+ "title": "Degree-zero dictionary for formal fibre cohomology and canonical germs",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, $y\\in Y$, and $A=\\mathcal O_{Y,y}$ with maximal ideal $\\mathfrak m$. Let $M_0=(f_*\\mathcal O_X)_y$ and $M=(R^0f_*\\mathcal O_X)_y$ [def-weil-pbc-module-stalk], with direct image and cohomology [pqf-def-cohomology]. For $n\\ge0$ put $X_n=\\operatorname{Spec}(A/\\mathfrak m^{n+1})\\times_Y X$, with projection $i_n$, and let $C_n=H^0(X_n,i_n^*\\mathcal O_X)$ and $S_n=\\Gamma(X_n,\\mathcal O_{X_n})$ with their $\\widehat A$-actions and transition maps [def-weil-pbc-formal-fibre-cohomology]; pullback is [def-pc-module-pullback] and cohomology h-maps are [def-weil-pbc-module-cohomology-fmap]. There exist an $A$-linear equivalence $a:M_0\\to M$ and an isomorphism of inverse systems $b:C\\to S$ over $\\widehat A$ such that, for each $n$, every $A$-linear canonical stalk map $\\theta_n:M\\to C_n$ satisfying IsFormalFunctionsTheta [def-weil-pbc-formal-fibre-cohomology], every open $V\\ni y$ whose inverse image under $f i_n$ contains all of $X_n$, and every $t\\in\\Gamma(f^{-1}V,\\mathcal O_X)$, one has $b_n(\\theta_n(a([t]_V)))=i_n^*(t)$. No properness, Noetherian or completion-comparison assertion is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma Tag 02OD (lemma-formal-functions-stalk), degree-zero specialization; Cohomology Tag 01E4 (lemma-cohomology-sheaf) and Tag 01FB (remark-explain-arrow). The degree-zero identification and its augmentation compatibility are written out here from these constructions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Direct image is left exact. The augmentation from direct image to its zeroth right derived functor is a natural isomorphism. Apply the module stalk functor at y to the augmentation to obtain a from the ordinary pushforward stalk to the derived stalk (equivalently, take the inverse of rightDerivedZeroIsoSelf, whose hom goes from the derived functor to direct image). This uses the degree-zero injective-resolution comparison; on a section t the augmentation represents t as its degree-zero cycle.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n, use the already proved tensorPullbackObjUnitToUnit_isIso and its unit equation to identify tensor pullback of the unit module to X_n with the unit module: the tensor formula sends r tensor s to r times the pullback of s, with inverse r to r tensor 1, and these maps commute with restriction and sheafification. Identify zeroth module cohomology with global sections by its resolution augmentation. Restriction of scalars gives an isomorphism over the completed local ring at each n. Naturality of the degree-zero cohomology h-map and the adjunction units identifies its transition with section pullback along j_n, giving the natural isomorphism b.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix n, a canonical theta, an open V containing y, and t in O_X(f^{-1}V). Choose injective resolutions and their restriction comparisons. The augmentation of t is a degree-zero cycle, and its resolutionSectionClass is the section corresponding to t under a. Apply IsFormalFunctionsTheta to that cycle. The containment of the whole fibre in the inverse image of f^{-1}V makes the restriction on the left an isomorphism. Under the H^0 and tensor-unit identifications of the previous step, both h-maps are maps on sections by the degree-zero formula; the unit sends t to its pullback. Cancelling restriction proves b_n(theta(a(germ(t)))) = i_n.appLE(t).",
+   "uses": [
+    "def-weil-pbc-formal-fibre-cohomology",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma Tag 02OD (lemma-formal-functions-stalk), degree-zero specialization; Cohomology Tag 01E4 (lemma-cohomology-sheaf) and Tag 01FB (remark-explain-arrow). The degree-zero identification and its augmentation compatibility are written out here from these constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero higher direct image stalk and cohomology of structure sheaf identify with direct image stalk and global sections",
+   "results": "AlgebraicGeometry.StructureSheaf.toPushforwardStalk, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.Scheme.fromSpecStalk_app, ModuleCat.Tilde.toOpen_germ, AlgebraicGeometry.StructureSheaf.toOpen_germ, ModuleCat.Tilde.stalkIso_hom",
+   "verdict": "No exact match for the scheme-module inverse-system identifications with the canonical germ formula.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "formal_functions|formalFunctions|IsCoherent.*unit",
+   "results": "No hits.",
+   "verdict": "No exact match for the scheme-module inverse-system identifications with the canonical germ formula.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero right derived direct image of modules and degree zero cohomology are naturally isomorphic to direct image and global sections",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedZeroIsoSelf|tensorPullback.*unit|pullback.*unit",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean",
+   "verdict": "No exact match for the scheme-module inverse-system identifications with the canonical germ formula.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism zeroth derived global sections tensor inverse image structure sheaf compatible with germs",
+   "results": "Scheme.restrictFunctorΓ; Scheme.Modules.germ_restrictStalkNatIso_inv_app; Scheme.Modules.germ_restrictStalkNatIso_hom_app and generic structure-sheaf identities.",
+   "verdict": "No exact dictionary. Local search found the proved tensorPullbackObjUnitToUnit_isIso, now explicitly used in the proof plan.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedZeroIsoSelf",
+   "results": "unknown identifier (no hits)",
+   "verdict": "Service cannot resolve this short name; the fully qualified declaration was checked in the existing Mathlib leaf node.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsStalk",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "The degree-zero O_X specialization of the formal-functions step in the proof of henselian idempotent lifting; the final paragraph of lem-weil-pbc-formal-functions-stalk's proof, identifying cohomology with sections and theta with section pullback.",
+   "via": [
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroDictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsDegreeZeroDictionary.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_degreeZero_dictionary",
+  "statement": "theorem formalFunctions_degreeZero_dictionary {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) : ∃ a : ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))) ≃ₗ[ Y.presheaf.stalk y] formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0, ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅ formalFibreSectionsSystem f y, ∀ (n : ℕ) (θ : formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0 →ₗ[ Y.presheaf.stalk y] formalFibreCohomologyLocal f y (SheafOfModules.unit X.ringCatSheaf) 0 n), IsFormalFunctionsTheta f y (SheafOfModules.unit X.ringCatSheaf) 0 n θ → ∀ (V : Y.Opens) (hy : y ∈ V) (hV : (⊤ : (formalFibre f y n).Opens) ≤ (formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) (t : Γ(X, f ⁻¹ᵁ V)), (b.hom.app (op n)) (θ (a (TopCat.Presheaf.germ ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val.presheaf V y hy t))) = (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144051-L-2088386",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144051-L-2088386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

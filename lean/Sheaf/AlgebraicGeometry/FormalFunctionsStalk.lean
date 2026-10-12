@@ -9,23 +9,11 @@ public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Mathlib.RingTheory.AdicCompletion.Functoriality
+import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroDictionary
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The theorem on formal functions at a point of the base
 
@@ -132,6 +120,38 @@ theorem formal_functions_stalk_structureSheaf {X Y : Scheme.{uS}} (f : X ⟶ Y)
             (TopCat.Presheaf.germ
               ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val.presheaf
               V y hy t))) = (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t := by
-  sorry
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have hF : RingedSpace.IsCoherent X.toRingedSpace
+      (SheafOfModules.unit X.ringCatSheaf) := by
+    have : (SheafOfModules.unit X.ringCatSheaf).IsFinitePresentation :=
+      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{uS, uS, uS} _
+    exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr
+      ⟨SheafOfModules.isQuasicoherent_unit.{uS, uS, uS}, inferInstance⟩
+  obtain ⟨θ, hθ, _, _, e, _, he⟩ :=
+    formal_functions_stalk f (SheafOfModules.unit X.ringCatSheaf) hF y 0
+  obtain ⟨a, b, hab⟩ := formalFunctions_degreeZero_dictionary f y
+  let c := (AdicCompletion.congr (maximalIdeal (Y.presheaf.stalk y)) a).toModuleIso
+  let d := HasLimit.isoOfNatIso b
+  refine ⟨c ≪≫ e ≪≫ d, ?_⟩
+  intro n V hy hV t
+  let z := TopCat.Presheaf.germ
+    ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val.presheaf
+    V y hy t
+  change (limit.π (formalFibreSectionsSystem f y) (op n))
+    (d.hom (e.hom (c.hom (AdicCompletion.of (maximalIdeal (Y.presheaf.stalk y)) _
+      z)))) = _
+  have hc : c.hom (AdicCompletion.of (maximalIdeal (Y.presheaf.stalk y)) _
+      z) =
+      AdicCompletion.of (maximalIdeal (Y.presheaf.stalk y)) _
+        (a z) := by
+    exact AdicCompletion.map_of _ _ _
+  rw [hc]
+  have hd := congrArg (fun k ↦ k (e.hom (AdicCompletion.of
+    (maximalIdeal (Y.presheaf.stalk y)) _ (a z))))
+    (HasLimit.isoOfNatIso_hom_π b (op n))
+  change (limit.π (formalFibreSectionsSystem f y) (op n)) (d.hom _) = _ at hd
+  simp only [ConcreteCategory.comp_apply] at hd
+  rw [hd, he]
+  exact hab n (θ n) (hθ n) V hy hV t
 
 end AlgebraicGeometry

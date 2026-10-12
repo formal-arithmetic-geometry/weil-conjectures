@@ -165,6 +165,16 @@
     "document": "literature/stacks-project/coherent.tex",
     "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800)"
    }
+  },
+  {
+   "text": "Degree-zero specialization (implemented in Lean; steps 1--9 remain the plan for the still-open general theorem). Properness makes X locally Noetherian, so the unit module is coherent by the coherence criterion and its finite locally free presentation. Apply the general formal_functions_stalk at p=0 to O_X. The degree-zero dictionary gives a on stalks and b on systems, with the germ formula. Complete a using AdicCompletion.congr, and apply HasLimit.isoOfNatIso to b. Compose these two isomorphisms with the general formal-functions isomorphism. AdicCompletion.map_of commutes the first factor with the canonical map to completion. HasLimit.isoOfNatIso_hom_π commutes the last factor with every projection. The general component formula followed by the dictionary germ formula is the desired section pullback.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-degree-zero-dictionary",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -180,6 +190,7 @@
   "lem-weil-pbc-affine-morphism-cohomology-edge",
   "lem-weil-pbc-closed-immersion-unit-quotient",
   "lem-weil-pbc-flat-base-change-map-sections",
+  "lem-weil-pbc-formal-functions-degree-zero-dictionary",
   "lem-weil-pbc-higher-direct-image-presheaf",
   "lem-weil-pbc-localization-noetherian",
   "lem-weil-pbc-module-cohomology-fmap-basic-properties",
@@ -198,7 +209,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 02OD (lemma-formal-functions-stalk) and its proof, lines 5721-5800; the omitted verifications (identification of the infinitesimal neighbourhoods, compatibility of the identifications with the maps theta_n and with the transition maps) written out by the agent"
+  "place": "Cohomology of Schemes, Lemma 02OD (lemma-formal-functions-stalk) and its proof, lines 5721-5800; the omitted verifications (identification of the infinitesimal neighbourhoods, compatibility of the identifications with the maps theta_n and with the transition maps) written out by the agent; B2 stage 3: the degree-zero assertion is reduced to the preceding general theorem and the degree-zero dictionary, using completion functoriality and the limit natural-isomorphism projection identity. The nine-step general proof remains open."
  },
  "mathlib_searches": [
   {
@@ -292,5 +303,15 @@
   "group": "R1",
   "result": "fix",
   "note": "f proper, Y loc. Noetherian, F coherent, y, p; X_n = Spec(A/m^(n+1)) x_Y X with j_n = pullback.map; transition = fmap of the adjoint h-map; theta_n tied by IsFormalFunctionsTheta (canonical 01E4 class via landed FlatBaseChangeOpenChoices + pullback along X_n -> f^-1 V); compatibility, m^(n+1)M kill, completed-ring iso with projections; degree-zero section clause; reverted the delivery's change of existing node(s) lem-weil-pbc-higher-direct-image-presheaf (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144051-L-2088386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
