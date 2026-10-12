@@ -15,26 +15,17 @@
  ],
  "proof": [
   {
-   "text": "Around each point choose a neighbourhood admitting the image retraction, shrink to an affine open, and trivialize the finite locally free kernel and image. The identity g∘f=0 factors the image inclusion through ker g. Restrict the given retraction M₂→im f to ker g: its composite with im f→ker g is the identity. Thus im f is a direct summand of ker g.",
-   "uses": [
-    "def-amb-finite-locally-free-module"
-   ],
+   "text": "Identify homology with the cokernel of the canonical abelian image-to-kernel map using left homology data and cokernel universal properties.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "On affine sections the quotient H=ker g/im f is the complementary direct summand of the finite free kernel. It is finitely generated, as a quotient of a finitely generated module, and projective by the direct-summand theorem [lem-weil-pbc-projective-direct-summand]. Apply the finite-projective standard-free-cover theorem [lem-weil-pbc-finite-projective-standard-free-cover] to refine to principal opens where H is finite free. At any residue field the split exact sequence 0→im f→ker g→H→0 stays split exact after tensoring. Dimension additivity gives b≤k and dimension H=k-b, hence each free piece has rank k-b.",
+   "text": "On each splitting neighbourhood restrict the retraction to the kernel. The resulting image-to-kernel map is split mono. Its cokernel is quasi-coherent. On affine opens the split cokernel sequence gives a product decomposition; its sections are finite projective retracts, hence finitely presented and flat. Additivity of stalk rank gives k-b. Apply the affine finite-local-free criterion, commute restriction with cokernel, and glue over the neighbourhood cover. This uses finitePresentation_projective_sections for affine finite projectivity, Module.Projective.of_split for the retract, and isQuasicoherent_cokernel for quasi-coherence. The already proved LocallyFreeRank declarations isFiniteLocallyFreeOfRank_of_isAffineOpen and rankAtStalk_sections_eq, together with Module.rankAtStalk_prod, supply the rank criterion and calculation; isFiniteLocallyFreeOfRank_of_iSup_eq_top supplies gluing.",
    "uses": [
+    "def-amb-finite-locally-free-module",
     "lem-weil-pbc-projective-direct-summand",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The affine quasi-coherent equivalence identifies the split quotient H with the sheaf cokernel of im f→ker g [lem-weil-pbc-affine-tilde-gamma-adjunction, lem-weil-pbc-quasi-coherent-module-cokernel-image]. The universal properties identify this cokernel with short-complex homology. Restriction to an open subscheme is exact, as can be checked on stalks, and preserves homology; hence these local free quotient sheaves are the restrictions of S.homology. The resulting neighbourhoods cover Z, so finite local freeness of rank k-b follows [def-amb-finite-locally-free-module]. For empty Z the condition is vacuous.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "def-amb-finite-locally-free-module"
+    "lem-pc-finite-flat-affine-sections-projective",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
    ],
    "elementary": false
   }
@@ -42,14 +33,13 @@
  "proof_deps": [
   "def-amb-finite-locally-free-module",
   "lem-weil-pbc-projective-direct-summand",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
-  "place": "kernel/image splitting argument"
+  "place": "kernel/image splitting argument, formalized using source-library affine projectivity and stalk-rank criteria; S2"
  },
  "mathlib_searches": [
   {
@@ -127,10 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T085322-L-33000",
-  "kind": "interface",
+  "landing": "20261012T110317-L-621312",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
