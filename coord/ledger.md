@@ -9841,3 +9841,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace (stage 3; reviewer PASS; first push; landing 20261012T223426-L-1644010 (interface); batch 20261012T223357; modules 3; new nodes 2)
 - 22:34 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertions (stage 3; reviewer PASS; first push; landing 20261012T223426-L-1644168 (interface); batch 20261012T223357; modules 3; new nodes 2)
 - 22:38 L: returned deliver/X2/Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart (reviewer RETURN: (reviewer X-0df4e, head 0df4e5774) I5: Remove the unused line `import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh`)
+- 22:47 L: returned deliver/J3/Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompatibility (reviewer RETURN: (reviewer X-4e568, head 4e5681743) E2 / review point 4: `leftDerived_value_triangle_extension_compat` retains a false `s)
