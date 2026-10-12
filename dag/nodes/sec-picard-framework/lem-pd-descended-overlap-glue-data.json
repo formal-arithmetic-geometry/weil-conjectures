@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "For each i,k take the open inverse image of U_k in U_i. Compatibility with D and inverse transport show this open is invariant under E_i. The pullback square identifies E_i with the canonical datum because transport preserves q_i. Base change of the singleton p makes q_i fpqc. Descent of opens gives a unique open O_ik in W_i whose pullback is the intersection. Put Z(i,k)=O_ik and f i k its open inclusion. Uniqueness for the diagonal gives O_ii=W_i, so f i i is an isomorphism. The descended-open pullback square gives r i k and its cartesian square.",
+   "text": "Compatibility with the ambient transport preserves factorization of a test point through any U_k: lift it through the open immersion U_k -> V and compare the transported inclusions using hcompat. For maps a,b into U_i with the same q_i composite, restrict the test scheme to the preimage of U_k under a. The cartesian square and hinv identify transport of a with b. Thus a and b have equal inverse-image opens, by applying containment in both directions. In particular the intersection open satisfies the required equality on U_i times_{W_i} U_i. Base change of p gives an fpqc singleton q_i. Apply unique descent of opens to obtain O_ik. Set Z_ik to its open subscheme and f_ik to the inclusion. Diagonal uniqueness gives O_ii=top and f_ii is an isomorphism. Construct r_ik by the open-immersion lift of the first projection followed by q_i; the equality of inverse-image opens and the pullback projection open range give its cartesian square.",
    "uses": [
     "lem-galois-fpqc-covering-base-change",
     "lem-weil-pbc-open-subscheme-fpqc-descent"
@@ -24,30 +24,31 @@
    "elementary": false
   },
   {
-   "text": "The identity on the common intersection identifies the pullbacks of Z(i,k) and Z(k,i), compatibly with the canonical data. Apply the morphism descent bijection to descend this identity to t i k and its inverse to t k i. Injectivity proves the inverse equations and t i i=identity. By construction r i k followed by t i k and f k i equals the second projection followed by q k.",
+   "text": "Fpqc representable descent gives EffectiveEpi for every fpqc singleton, using Mathlib fpqcTopology.Subcanonical and the singleton sheaf criterion. Base change of q_i along f_ik makes r_ik such a singleton. Given two test maps into U_i times_V U_k agreeing after r_ik, their U_i projections have equal q_i composites. Cartesian uniqueness identifies transport of the first U_i projection with the second. Compatibility with D and monicity of U_k -> V identify their U_k transports as well. Invariance of q_k then gives equality after the swapped lift r_ki. Define t_ik by EffectiveEpi.desc of the swap followed by r_ki. Its factorization is r_ik followed by t_ik = swap followed by r_ki. Monicity of U_i -> V makes the diagonal swap the identity, so cancelling r_ii gives t_ii=identity. Composing the factorization with f_ki gives the stated second-projection equation.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend"
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Uniqueness of descended opens identifies the triple-overlap domains after restricting the transitions. Their cartesian universal properties define the maps t prime with the required second-projection equation. After fpqc base change their cyclic composite is the identity on the triple intersection; injectivity of morphism descent gives the cyclic cocycle. Empty index sets and empty opens give empty families and empty descended opens, respectively. This constructs local overlap data only, without taking a colimit or constructing its map to the base.",
+   "text": "For P_ikl=Z_ik times_{W_i} Z_il pull back q_i along the common map P_ikl -> W_i to get an fpqc effective epi c:B_ikl -> P_ikl. The two cartesian intersection squares give maps a:B_ikl -> U_i times_V U_k and b:B_ikl -> U_i times_V U_l sharing their U_i projection. Their other projections define d:B_ikl -> U_k times_V U_l. The maps (d followed by r_kl, a followed by swap and r_ki) and (b followed by swap and r_li, d followed by swap and r_lk) define cyclic reordered lifts e and e-prime into P_kli and P_lik. The second projection of e factors through c as the first projection followed by t_ik. Since the second projection of P_kli is monic, e is compatible on every equal-c pair, and EffectiveEpi.desc defines t-prime_ikl with the required projection equation. Monicity of second projections and the pairwise transition factorization show c followed by t-prime_ikl=e, e followed by t-prime_kli=e-prime, and e-prime followed by t-prime_lik=c. Cancel c for the cyclic identity. This proof does not assume that the U_i cover V and works with empty index sets and empty opens.",
    "uses": [
-    "lem-weil-pbc-open-subscheme-fpqc-descent",
-    "lem-galois-fpqc-morphisms-descend"
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-galois-fpqc-covering-base-change",
-  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-fpqc-representable-descent",
   "lem-weil-pbc-open-subscheme-fpqc-descent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project",
-  "place": "Tag 0AP4, overlap construction and omitted coherence verification, expanded using Tags 03N0 and 02W0"
+  "by": "agent",
+  "document": "Stacks Project, Descent",
+  "place": "Tag 0AP4 overlap construction and omitted gluing verification, with Tags 03N0 and 023Q; Lean proof and explicit transport/effective-epi argument by H1, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -124,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T173900-L-3304840",
-  "kind": "interface",
+  "landing": "20261012T203942-L-830381",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
