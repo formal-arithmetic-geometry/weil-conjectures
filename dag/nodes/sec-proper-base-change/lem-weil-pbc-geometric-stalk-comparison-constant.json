@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-geometric-stalk-comparison-constant",
+ "kind": "statement",
+ "title": "Comparison of geometric module stalks normalized on constant sheaves",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] and $\\Lambda$ a commutative ring. Let $s:\\operatorname{Spec}\\Omega\\to X$ and $t:\\operatorname{Spec}\\Omega\\prime\\to X$ have the same image point, where $\\Omega,\\Omega\\prime$ are separably closed fields. On the category of $\\Lambda$-module sheaves on the small etale site [def-weil-pbc-etale-site], there exists a natural isomorphism $\\beta:(-)_{s}\\simeq(-)_{t}$ between the stalk functors [def-weil-pbc-geometric-stalks]. For every $\\Lambda$-module $M$, the component $\\beta_{M_X}$ is identity on $M$ under the canonical identifications of the stalks of the constant sheaf $M_X$ [def-constructible-constant] with $M$. No monomorphism, subsheaf, genericity or finiteness is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 04FN (stalk functors and pointed neighbourhoods), combined with Tag 09BH (3), generic submodule paragraph; agent-written separably closed module-valued formulation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "def-constructible-constant"
+ ],
+ "proof": [
+  {
+   "text": "Let x be the common image. Using the field-spectrum/residue-field description of the geometric points, embed a separable closure K of kappa(x) into both separably closed fields (Mathlib IsSepClosed.lift). Both geometric points factor through Spec K over X.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-pd-separable-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition along either factor induces a bijection on pointed etale lifts. A lift into an etale neighbourhood is a residue-field embedding of a finite separable extension of kappa(x). Its image lies in the embedded separable closure K, and thus it factors uniquely through K. These bijections commute with maps of etale neighbourhoods, giving natural isomorphisms of the point fibre functors. This is the separably closed version of the pointed-neighbourhood argument of Stacks Tag 04FN.",
+   "uses": [
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the colimit description of geometric stalks to these fibre-functor isomorphisms and compose one comparison with the inverse of the other. Naturality in module sheaves follows from naturality of the colimit coprojections. Each comparison preserves germs of constant sections. The stalk of the constant presheaf is its value, and sheafification does not change stalks. Consequently the composite is identity on the value of every constant module sheaf under the canonical constant-stalk isomorphisms.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-constructible-constant",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-pd-separable-closure",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-sheafification-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 04FN and Tag 09BH (3); extending the indicated pointed-neighbourhood comparison to separably closed fields and module coefficients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fiber functors of two geometric points of an etale site over the same scheme point are naturally isomorphic and identify constant sheaf germs",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.arrowStalkMapIsoOfEq",
+    "AlgebraicGeometry.Scheme.arrowStalkMapIsoOfEq",
+    "AlgebraicGeometry.Scheme.stalkMap_congr_point",
+    "AlgebraicGeometry.Scheme.Hom.stalkMap_congr_point",
+    "TopCat.Presheaf.stalkCongr",
+    "AlgebraicGeometry.Scheme.stalkMap_congr_point_assoc",
+    "TopCat.Presheaf.stalkCongr_hom",
+    "AlgebraicGeometry.Scheme.Hom.stalkMap_congr_point_assoc"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No match: pointSmallEtale constructs the point and has a surjection to the topological fibre; other hits concern scheme structure-sheaf stalks or abstract site-point comparisons, not a normalized comparison of geometric module stalks over a common image."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.pointSmallEtale",
+   "results": [
+    "AlgebraicGeometry.Scheme.pointSmallEtale",
+    "AlgebraicGeometry.Scheme.pointSmallEtale_fiber",
+    "AlgebraicGeometry.Scheme.isConservative_pointSmallEtale",
+    "AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_pointSmallEtale'",
+    "AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage",
+    "AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_surjective",
+    "AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_coe"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No match: pointSmallEtale constructs the point and has a surjection to the topological fibre; other hits concern scheme structure-sheaf stalks or abstract site-point comparisons, not a normalized comparison of geometric module stalks over a common image."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberIso|pointSmallEtale.*(Iso|iso)|same.*(point|image)",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No match: pointSmallEtale constructs the point and has a surjection to the topological fibre; other hits concern scheme structure-sheaf stalks or abstract site-point comparisons, not a normalized comparison of geometric module stalks over a common image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two geometric points over the same point give naturally isomorphic etale module sheaf stalk functors compatible with constant sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantSubsheafGenericStalkModel",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Proof step 2(b), constructibility of module subsheaves: identifying the generic image submodule in a constant sheaf, comparison at different geometric generic points",
+   "via": [
+    "lem-weil-pbc-constant-subsheaf-generic-stalk-model",
+    "lem-weil-pbc-noetherian-constant-subsheaf-generic",
+    "lem-weil-pbc-module-generic-generators",
+    "lem-weil-pbc-module-subobject-generic-neighbourhood",
+    "lem-weil-pbc-module-subobject-generic-constancy",
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricStalkComparisonConstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStalkComparisonConstant.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_geometricStalkComparison_constant",
+  "statement": "theorem exists_geometricStalkComparison_constant\n    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]\n    [Limits.PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ))]\n    {Ω Ω' : Type u} [Field Ω] [IsSepClosed Ω] [Field Ω'] [IsSepClosed Ω']\n    (s : Spec (.of Ω) ⟶ X) (t : Spec (.of Ω') ⟶ X)\n    (h : s (IsLocalRing.closedPoint Ω) = t (IsLocalRing.closedPoint Ω')) :\n    ∃ β : (pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ) ≅\n        (pointSmallEtale t).sheafFiber,\n      ∀ M : ModuleCat.{u + 1} Λ,\n        β.hom.app ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) ≫\n          ((pointSmallEtale t).sheafFiberConstantSheafIso M).hom =\n          ((pointSmallEtale s).sheafFiberConstantSheafIso M).hom",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
