@@ -1,0 +1,131 @@
+{
+ "id": "new-zdbp-fibres-point",
+ "kind": "statement",
+ "title": "Unique points of base-change fibres",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $k\\to k\\prime$ be a field extension, and let $f:C\\to\\operatorname{Spec}k$ be a separated, locally finite type, quasi-compact morphism of schemes [def-weil-pbc-scheme-conventions], with $\\dim |C|\\le0$ [def-kun-topological-krull-dimension]. Put $C_{k\\prime}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\prime$ and let $\\pi:C_{k\\prime}\\to C$ be the projection [def-pc-base-change]. For every $c\\in|C|$, there exists exactly one $z\\in|C_{k\\prime}|$ with $\\pi(z)=c$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "schemes.tex Tag 01JT, algebra.tex Tag 00FV"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Apply geometry to conclude that every c is closed and its residue-field map is an isomorphism. Identify its residue field with k by residueFieldIsoBase.",
+   "uses": [
+    "new-zdbp-geometry",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Scheme.Pullback.carrierEquiv and its projection identities. Spec k and Spec k-prime each have one point, so triplets over a fixed c have only that choice of second point. The residue-field pushout is isomorphic to k-prime because the first map is an isomorphism; its spectrum has exactly one point. Transport existence and uniqueness back across carrierEquiv.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-zdbp-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-fibre-product-points"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH, 00FV, 00P4; schemes.tex Tag 01JT; concrete repaired proof, N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zero dimensional scheme residue field or base change fibre",
+   "results": "No direct match; prerequisite ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field map isomorphism closed point algebraically closed base",
+   "results": "No direct match; prerequisite ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mathlib algebraic geometry residue field base change fibre topology",
+   "results": "No single theorem matches this intermediate statement.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint",
+  "declaration": "AlgebraicGeometry.zeroDimensional_baseChange_fibre_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalBaseChangePointsFibrePoint.lean",
+  "statement": "theorem zeroDimensional_baseChange_fibre_points (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k'] (C : Scheme.{v}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hC : topologicalKrullDim C ≤ 0) : ∀ c : C, ∃! z : (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{v}), (pullback.fst (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base z = c",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-base-change-points",
+   "place": "strictly smaller intermediate step",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-base-change-points"
+   ]
+  },
+  "same_as": null
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered modules, DAG nodes, report, unchanged target statement, and clean lcompile.py --all result against the stage-3 review brief."
+ }
+}

@@ -10,6 +10,10 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Instances.Discrete
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry
+import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint
+import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreTopology
+import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreHomeomorphism
 
 /-!
 # Points of a zero-dimensional scheme after field extension
@@ -57,6 +61,11 @@ theorem zeroDimensional_baseChange_points
       IsHomeomorph
         (pullback.fst (C ↘ Spec (.of k))
           (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base := by
-  sorry
+  obtain ⟨hfinite, hdiscrete, hclosed⟩ :=
+    zeroDimensional_baseChange_geometry k C hC
+  exact ⟨hfinite, hdiscrete, hclosed,
+    zeroDimensional_baseChange_fibre_points k k' C hC,
+    zeroDimensional_baseChange_fibre_topology k k' C hC,
+    zeroDimensional_baseChange_fibre_homeomorphism k k' C hC⟩
 
 end AlgebraicGeometry

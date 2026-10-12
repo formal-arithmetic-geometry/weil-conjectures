@@ -1,0 +1,138 @@
+{
+ "id": "new-zdbp-geometry",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-base-change-points",
+   "place": "intermediate conclusion in its proof",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-base-change-points"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite discrete geometry of a zero-dimensional scheme",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $f:C\\to\\operatorname{Spec}k$ be a separated, locally finite type, quasi-compact morphism [def-weil-pbc-scheme-conventions], where $\\dim |C|\\le0$ [def-kun-topological-krull-dimension]. Then $|C|$ is finite and discrete. Every $c\\in|C|$ is closed [def-weil-closed-points], and the induced residue-field map $\\kappa(f(c))\\to\\kappa(c)$ [def-weil-residue-field] is an isomorphism. Here $\\operatorname{Spec}k$ denotes the affine spectrum [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00KH (Noetherian of dimension 0 = Artinian, finitely many maximal primes), Lemma Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension: dimension at a point is preserved by ground field extension); residue fields by the Nullstellensatz (Tag 00FV); fibres of a base change: literature/stacks-project/schemes.tex Lemma Tag 01JT (points of a fibre product)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Use LocallyOfFiniteType.isLocallyNoetherian, IsLocallyArtinian.of_topologicalKrullDim_le_zero, and QuasiCompact.compactSpace_of_compactSpace to make C Artinian. Its point set is finite and discrete by the Artinian instances.",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every singleton is closed in the discrete space. SpecMap_residueFieldIsoBase_inv identifies C.fromSpecResidueField(c) composed with f as Spec of an isomorphism. Apply the same identity to the identity of Spec k to make its fromSpecResidueField an isomorphism. The residue-field naturality identity and isIso_comp_right_iff then make Spec.map(f.residueFieldMap c) an isomorphism; reflection by Scheme.Spec and passage from the opposite category give the required IsIso.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH, 00FV, 00P4; schemes.tex Tag 01JT; concrete repaired proof, N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a zero-dimensional scheme of finite type over a field has dimension zero",
+   "results": "IsFinite.instIsStableUnderBaseChangeScheme, locallyOfFiniteType_isStableUnderBaseChange, isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero (Mathlib.AlgebraicGeometry.Artinian), IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-09",
+   "verdict": "no match: stability of finite type/finite under base change and 'dim <= 0 => locally Artinian' exist; dimension of a base change and the bijection on points do not"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely generated algebra over a field that is Artinian is finite dimensional",
+   "results": "Module.finite_of_isArtinianRing, Module.finite_iff_isArtinianRing (Mathlib.RingTheory.Jacobson.Artinian), Algebra.QuasiFinite.iff_of_isArtinianRing, Module.Finite.of_quasiFinite",
+   "date": "2026-10-09",
+   "verdict": "ingredient only (affine pieces of C are finite k-algebras)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a scheme of finite type over an algebraically closed field with finitely many points to a larger field is bijective on points",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed, isField_of_universallyClosed, IsFinite.instIsStableUnderBaseChangeScheme, RingHom.Bijective.isStableUnderBaseChange, instFiniteCarrierCarrierCommRingCatFiberOfIsFinite (finite morphisms have finite fibres), locallyOfFiniteType_isStableUnderBaseChange",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsArtinianRing.*TensorProduct\\|TensorProduct.*IsArtinianRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'isArtinianRing_iff_krullDimLE_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n 'theorem\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Artinian.lean",
+   "results": "no Artinian-tensor lemma; isArtinianRing_iff_krullDimLE_zero (RingTheory/HopkinsLevitzki.lean:180); Artinian.lean: IsLocallyArtinian.of_topologicalKrullDim_le_zero, discreteTopology, IsArtinianScheme.finite",
+   "date": "2026-10-09",
+   "verdict": "no match: clause 1 is assembled from Mathlib pieces (of_topologicalKrullDim_le_zero, discreteTopology, quasi-compactness), clause 2 absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsGeometry",
+  "declaration": "AlgebraicGeometry.zeroDimensional_baseChange_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalBaseChangePointsGeometry.lean",
+  "statement": "theorem zeroDimensional_baseChange_geometry (k : Type v) [Field k] [IsAlgClosed k] (C : Scheme.{v}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hC : topologicalKrullDim C ≤ 0) : Finite C ∧ DiscreteTopology C ∧ (∀ c : C, c ∈ closedPoints C ∧ IsIso ((C ↘ Spec (.of k)).residueFieldMap c))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered modules, DAG nodes, report, unchanged target statement, and clean lcompile.py --all result against the stage-3 review brief."
+ }
+}

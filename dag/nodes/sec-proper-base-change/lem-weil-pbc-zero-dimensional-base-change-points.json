@@ -27,75 +27,32 @@
  ],
  "proof": [
   {
-   "text": "*Clause (1): $|C|$ is finite and discrete.* By the conventions [def-weil-pbc-scheme-conventions], $C\\to\\operatorname{Spec}k$ is separated and of finite type (locally of finite type and quasi-compact), and $\\dim C\\le0$ by hypothesis. By [lem-weil-pbc-finite-type-dim-zero-artinian] (finite type over a field gives Noetherian affine pieces; a Noetherian ring of dimension $0$ is Artinian, Stacks 00KH), $C$ is locally Artinian, its underlying space $|C|$ is discrete and finite, and every point $c\\in|C|$ is closed [def-weil-closed-points] (in a discrete space every singleton is closed). If $C=\\emptyset$ all assertions below are vacuous.",
+   "text": "Apply the proved geometry theorem to obtain finiteness, discreteness, closed points and residue-field isomorphisms.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-finite-type-dim-zero-artinian",
-    "def-weil-closed-points"
+    "new-zdbp-geometry"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00KH (lemma-Noetherian-dimension-0) and its proof (the spectrum of a Noetherian ring of dimension 0 is a finite discrete space)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Clause (1): $\\kappa(c)=k$.* Let $c\\in|C|$. By step 1, $c$ is a closed point of $C$, and $C$ is locally of finite type over the algebraically closed field $k$ [def-weil-algebraic-closure]. By [lem-weil-pbc-closed-point-residue-field-base] (Nullstellensatz, Stacks 00FV: $\\kappa(c)$ is a finite extension of $k$, hence equal to $k$ as $k$ is algebraically closed), the map $k\\to\\kappa(c)$ induced by the structure morphism on residue fields [def-weil-residue-field] is an isomorphism.",
+   "text": "Apply the separate point, dimension, and homeomorphism ingredients and assemble all six conclusions directly as a conjunction.",
    "uses": [
-    "def-weil-algebraic-closure",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "def-weil-residue-field"
+    "new-zdbp-fibres-point",
+    "new-zdbp-fibres-topology",
+    "new-zdbp-fibres-homeomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Theorem Tag 00FV (theorem-nullstellensatz), applied to an affine open $\\operatorname{Spec}A\\ni c$ with $A$ a finitely generated $k$-algebra and the maximal ideal of $c$"
-   }
-  },
-  {
-   "text": "*Clause (2): the fibres of $\\pi$.* Write $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ with projections $\\pi:C_{k'}\\to C$ and $\\mathrm{pr}:C_{k'}\\to\\operatorname{Spec}k'$ [def-pc-base-change]. The spectrum of a field has exactly one point (its zero ideal) [def-weil-affine-spectrum]: let $s$ be the point of $\\operatorname{Spec}k$ and $\\eta$ that of $\\operatorname{Spec}k'$, with $\\kappa(s)=k$ and $\\kappa(\\eta)=k'$ [def-weil-residue-field]. By [lem-weil-pbc-fibre-product-points] (Stacks 01JT), the points of $C_{k'}$ correspond bijectively to quadruples $(c,y,t,\\mathfrak p)$ with $c\\in C$, $y\\in\\operatorname{Spec}k'$, $t\\in\\operatorname{Spec}k$ having the same image, and $\\mathfrak p$ a prime of $\\kappa(c)\\otimes_{\\kappa(t)}\\kappa(y)$, the point lying over $c$ under $\\pi$. Necessarily $y=\\eta$ and $t=s$, so $\\pi^{-1}(c)$ is in bijection with $\\operatorname{Spec}(\\kappa(c)\\otimes_kk')$. By step 2 the structure map $k\\to\\kappa(c)$ is an isomorphism of $k$-algebras, so $\\kappa(c)\\otimes_kk'\\cong k\\otimes_kk'\\cong k'$ (the map $a\\otimes b\\mapsto ab$), a field; its spectrum has exactly one point. Hence $\\pi^{-1}(c)$ is a single point for every $c\\in|C|$, i.e. $\\pi:|C_{k'}|\\to|C|$ is a bijection; in particular $|C_{k'}|$ is finite (step 1).",
-   "uses": [
-    "def-pc-base-change",
-    "def-weil-affine-spectrum",
-    "def-weil-residue-field",
-    "lem-weil-pbc-fibre-product-points"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Lemma Tag 01JT (lemma-points-fibre-product), with $X=C$, $Y=\\operatorname{Spec}k'$, $S=\\operatorname{Spec}k$"
-   }
-  },
-  {
-   "text": "*Clause (2): $\\dim C_{k'}\\le0$ and $\\pi$ is a homeomorphism.* By step 1, $C$ is (locally) of finite type over $k$ with discrete underlying space. By [lem-weil-pbc-discrete-field-base-change-artinian] (Stacks 00P4 in dimension $0$), $C_{k'}$ is locally Artinian, its underlying space is discrete and $\\dim C_{k'}\\le0$ [def-kun-topological-krull-dimension]. So $\\pi:|C_{k'}|\\to|C|$ is a continuous bijection (step 3) between finite discrete spaces; its inverse is continuous because every map out of a discrete space is, so $\\pi$ is a homeomorphism of finite discrete spaces.",
-   "uses": [
-    "lem-weil-pbc-discrete-field-base-change-artinian",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension): $\\dim_xX=\\dim_{x_K}X_K$, here $0$ at every point"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-finite-type-dim-zero-artinian",
-  "def-weil-closed-points",
-  "def-weil-algebraic-closure",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "def-weil-residue-field",
-  "def-pc-base-change",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-fibre-product-points",
-  "lem-weil-pbc-discrete-field-base-change-artinian",
-  "def-kun-topological-krull-dimension"
+  "new-zdbp-geometry",
+  "new-zdbp-fibres-point",
+  "new-zdbp-fibres-topology",
+  "new-zdbp-fibres-homeomorphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "assembled by the agent from Stacks Algebra Lemma Tag 00KH, Theorem Tag 00FV, Lemma Tag 00P4 and Schemes (literature/stacks-project/schemes.tex) Lemma Tag 01JT; no single document proves the statement"
+  "place": "direct conjunction of geometry and the three genuine fibre ingredients; no wrapper"
  },
  "mathlib_searches": [
   {
@@ -179,5 +136,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "reverted the delivery's change of existing node(s) def-pc-base-change (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered modules, DAG nodes, report, unchanged target statement, and clean lcompile.py --all result against the stage-3 review brief."
  }
 }

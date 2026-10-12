@@ -1,0 +1,138 @@
+{
+ "id": "new-zdbp-fibres-homeomorphism",
+ "kind": "statement",
+ "title": "Homeomorphism after base change",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $k\\to k\\prime$ be a field extension, and let $f:C\\to\\operatorname{Spec}k$ be a separated, locally finite type, quasi-compact morphism of schemes [def-weil-pbc-scheme-conventions], with $\\dim |C|\\le0$ [def-kun-topological-krull-dimension]. Put $C_{k\\prime}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\prime$ and let $\\pi:C_{k\\prime}\\to C$ be the projection [def-pc-base-change]. The continuous map $|\\pi|:|C_{k\\prime}|\\to|C|$ is a homeomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH and 00P4 for discrete spaces; schemes.tex Tag 01JT for bijectivity; elementary discrete-space topology"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use geometry for DiscreteTopology C. The base change is locally Noetherian by LocallyOfFiniteType.isLocallyNoetherian; use the topology ingredient and IsLocallyArtinian.of_topologicalKrullDim_le_zero for discrete topology of the source.",
+   "uses": [
+    "new-zdbp-geometry",
+    "new-zdbp-fibres-topology",
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The point ingredient gives surjectivity by existence and injectivity by uniqueness in each fibre. The scheme projection is continuous. In a discrete target every image of an open set is open, so this bijection is an IsHomeomorph.",
+   "uses": [
+    "new-zdbp-fibres-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble continuity, the open-map proof using isOpen_discrete, injectivity, and surjectivity into IsHomeomorph.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-zdbp-geometry",
+  "new-zdbp-fibres-topology",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "new-zdbp-fibres-point"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH, 00FV, 00P4; schemes.tex Tag 01JT; concrete repaired proof, N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zero dimensional scheme residue field or base change fibre",
+   "results": "No direct match; prerequisite ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field map isomorphism closed point algebraically closed base",
+   "results": "No direct match; prerequisite ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mathlib algebraic geometry residue field base change fibre topology",
+   "results": "No single theorem matches this intermediate statement.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreHomeomorphism",
+  "declaration": "AlgebraicGeometry.zeroDimensional_baseChange_fibre_homeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalBaseChangePointsFibreHomeomorphism.lean",
+  "statement": "theorem zeroDimensional_baseChange_fibre_homeomorphism (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k'] (C : Scheme.{v}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hC : topologicalKrullDim C ≤ 0) : IsHomeomorph (pullback.fst (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k')) )).base",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-base-change-points",
+   "place": "strictly smaller intermediate step",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-base-change-points"
+   ]
+  },
+  "same_as": null
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered modules, DAG nodes, report, unchanged target statement, and clean lcompile.py --all result against the stage-3 review brief."
+ }
+}

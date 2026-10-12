@@ -1,0 +1,129 @@
+{
+ "id": "new-zdbp-fibres-topology",
+ "kind": "statement",
+ "title": "Dimension of base-change",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], let $k\\to k\\prime$ be a field extension, and let $f:C\\to\\operatorname{Spec}k$ be a separated, locally finite type, quasi-compact morphism of schemes [def-weil-pbc-scheme-conventions], with $\\dim |C|\\le0$ [def-kun-topological-krull-dimension]. Put $C_{k\\prime}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k\\prime$ and let $\\pi:C_{k\\prime}\\to C$ be the projection [def-pc-base-change]. Then $\\dim |C_{k\\prime}|\\le0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00P4, via locally quasi-finite base change and Artinian criterion"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Obtain DiscreteTopology C from geometry.",
+   "uses": [
+    "new-zdbp-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every subset of C is discrete (IsDiscrete.univ.mono). The criterion locallyQuasiFinite_iff_isDiscrete_preimage_singleton makes f locally quasi-finite. Base change makes pullback.snd locally quasi-finite over Spec k-prime, hence its source locally Artinian by IsLocallyArtinian.of_locallyQuasiFinite. Apply its discrete topology instance and topologicalKrullDim_zero_of_discreteTopology.",
+   "uses": [
+    "lem-weil-pbc-discrete-field-base-change-artinian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-zdbp-geometry",
+  "lem-weil-pbc-discrete-field-base-change-artinian"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH, 00FV, 00P4; schemes.tex Tag 01JT; concrete repaired proof, N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zero dimensional scheme residue field or base change fibre",
+   "results": "No direct match; prerequisite ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "residue field map isomorphism closed point algebraically closed base",
+   "results": "No direct match; prerequisite ingredients only.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mathlib algebraic geometry residue field base change fibre topology",
+   "results": "No single theorem matches this intermediate statement.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreTopology",
+  "declaration": "AlgebraicGeometry.zeroDimensional_baseChange_fibre_topology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalBaseChangePointsFibreTopology.lean",
+  "statement": "theorem zeroDimensional_baseChange_fibre_topology (k k' : Type v) [Field k] [Field k'] [IsAlgClosed k] [Algebra k k'] (C : Scheme.{v}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hC : topologicalKrullDim C ≤ 0) : topologicalKrullDim (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{v}) ≤ 0",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-base-change-points",
+   "place": "strictly smaller intermediate step",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-base-change-points"
+   ]
+  },
+  "same_as": null
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c443d",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T013028-L-824126",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered modules, DAG nodes, report, unchanged target statement, and clean lcompile.py --all result against the stage-3 review brief."
+ }
+}
