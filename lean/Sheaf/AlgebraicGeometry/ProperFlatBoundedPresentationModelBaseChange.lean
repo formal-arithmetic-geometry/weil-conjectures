@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Mathlib.Algebra.Homology.SingleHomology
 
 @[expose] public section
 set_option autoImplicit false
@@ -10,6 +11,24 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
+/-- A nonzero module placed in degree -1 violates negative homology vanishing,
+even after pullback along the identity. This diagnostic uses no project sorries. -/
+private theorem single_negative_homology_obstruction (S : Scheme.{u}) (M : S.Modules)
+    (hM : ¬ IsZero M) :
+    ¬ IsZero ((((Modules.pullback (𝟙 S)).mapHomologicalComplex _).obj
+      ((HomologicalComplex.single S.Modules (ComplexShape.up ℤ) (-1)).obj M)).homology
+        (-1)) := by
+  intro h
+  let C := (HomologicalComplex.single S.Modules (ComplexShape.up ℤ) (-1)).obj M
+  let e := (NatIso.mapHomologicalComplex (Modules.pullbackId S) (ComplexShape.up ℤ)).app C
+    ≪≫ (Functor.mapHomologicalComplexIdIso S.Modules (ComplexShape.up ℤ)).app C
+  let eH := (HomologicalComplex.homologyFunctor S.Modules (ComplexShape.up ℤ) (-1)).mapIso e
+    ≪≫ HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℤ) (-1) M
+  exact hM (h.of_iso eH.symm)
+
+-- STATEMENT-DISPUTED: C is arbitrary: no hypothesis identifies it with Rf_* F.
+-- A nonzero finite free module in degree -1 meets the displayed boundedness,
+-- flatness and finiteness hypotheses but contradicts the negative-homology clause.
 /-- Base-change and negative-homology bridge for the bounded model of the
 proper flat direct image.
 Source: Stacks Project, Tags 0B91(2), 0A1H and 08EB.
