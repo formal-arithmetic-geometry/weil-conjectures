@@ -7,12 +7,10 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.ColimitSiteCechComplex
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.Paper.ColimitSitesInjectiveSystem
-import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.CohomologyColimitSitesZeroComparison
+import Sheaf.CategoryTheory.CohomologyColimitSitesCorrectedLift
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # A stage cohomology class vanishing on the colimit site vanishes after a transition.
 
@@ -246,6 +244,39 @@ theorem cohomology_colimit_sites_eventual_vanishing
           (eqToHom (hSobj t.right).symm ≫ K.ι.app t.right)).app
             (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) :
     ∀ (t : Under i) (x : D.obj t), (c.ι.app t).hom x = 0 →
-      ∃ (t' : Under i) (b : t ⟶ t'), (D.map b).hom x = 0 := by sorry
+      ∃ (t' : Under i) (b : t ⟶ t'), (D.map b).hom x = 0 := by
+  induction p generalizing Fs φ S K D c with
+  | zero =>
+      intro t x hx
+      have hinj := cohomology_colimit_sites_zero_comparison_injective
+        J F P hfinite hcover hpullback V hobjects
+        harrows Q hQ hVcover hVpullback pullbackMap hpullbackMap canonicalMap
+        hcanonicalMap e he eV heV Fs φ hφ
+        S hSobj hSmap K hK i X_i D
+        hDobj hDmap c hcpt hclegs
+      have hzero : (colimit.ι D t).hom x = 0 := by
+        apply hinj
+        rw [map_zero]
+        change ((colimit.ι D t ≫ colimit.desc D c).hom x) = 0
+        simpa using hx
+      obtain ⟨t', b, _, hb⟩ := Concrete.colimit_exists_of_rep_eq D x (0 : D.obj t)
+        (by simpa only [map_zero] using hzero)
+      exact ⟨t', b, by simpa only [map_zero] using hb⟩
+  | succ n ih =>
+      obtain ⟨Rs, ρ, hρ, T, hTobj, hTmap, L, hL, E, hEobj, hEmap,
+        d, hdpt, hdlegs, δ, hlift⟩ := cohomology_colimit_sites_corrected_lift n
+          J F P hfinite hcover hpullback V hobjects
+          harrows Q hQ hVcover hVpullback pullbackMap hpullbackMap canonicalMap
+          hcanonicalMap e he eV heV Fs φ hφ
+          S hSobj hSmap K hK i X_i D
+          hDobj hDmap c hcpt hclegs
+      intro t x hx
+      obtain ⟨t', b, z, hz, hδ⟩ := hlift t x hx
+      obtain ⟨t'', b', hz'⟩ := ih Rs ρ hρ T hTobj hTmap L hL E hEobj hEmap
+        d hdpt hdlegs t' z hz
+      refine ⟨t'', b ≫ b', ?_⟩
+      have hnat := ConcreteCategory.congr_hom (δ.naturality b') z
+      simpa only [Functor.map_comp, AddCommGrpCat.comp_apply, hz', map_zero, hδ]
+        using hnat.symm
 
 end CategoryTheory
