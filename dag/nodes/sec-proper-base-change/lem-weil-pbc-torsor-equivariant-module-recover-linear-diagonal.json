@@ -80,20 +80,28 @@
  "statement": "theorem equivariantModulePresheaf_recoverLinear_diagonal\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) [ConnectedSpace c.P]\n    (N N' : Rep.{u + 1} (ZMod ℓ) P)\n    (η : c.equivariantModulePresheaf ℓ N ⟶ c.equivariantModulePresheaf ℓ N') :\n    letI := c.etale\n    ∃! f : N.V →ₗ[ZMod ℓ] N'.V,\n      ∀ (s : c.equivariantSections ℓ N (Etale.mk c.π)) (x : c.P),\n        (η.app (op (Etale.mk c.π)) s).val\n            ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x) =\n          f (s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))",
  "proof": [
   {
-   "text": "Proof: The torsor isomorphism, with its factors interchanged, identifies\nc.P times_V c.P with copies of c.P indexed by g in P. On the g-th copy a section\nhas the value rho(g) applied to its value on the diagonal. Thus restriction to\nthe diagonal determines an equivariant section. Conversely any locally constant\nfunction t on c.P extends on the g-th copy with value rho(g)t. This extension\nis locally constant because the copies are open, and equivariance follows from\nrho(hg)=rho(h)rho(g). The restriction and extension operations are linear and\ninverse. Every locally constant function on the connected nonempty space c.P\nis constant, so diagonal evaluation gives a linear isomorphism from these sections\nto N, and likewise to N'. Conjugate the linear component eta at Etale.mk c.pi\nby these two isomorphisms to obtain f. At each point x the diagonal evaluations\nare the same constants, so the asserted formula holds for every s and x.\nFor uniqueness fix one x, which exists by connectedness. For every n, extend\nthe constant diagonal function with value n; evaluating the formulas for two\ncandidate maps on this section at x shows equality at n. Linear extensionality\nthen gives equality of the maps. The zero module and trivial group work with\nthe same construction; ell need not be prime or positive.",
+   "text": "Diagonal restriction of each locally constant section is constant by connectedness. The swapped torsor coproduct isomorphism covers every point by a group translate of a diagonal point; equivariance therefore makes evaluation at one point injective.",
    "uses": [
     "def-weil-pbc-torsor-associated-module"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use surjectivity of diagonal evaluation to obtain a linear equivalence from sections to N. Compose its inverse, the component of eta at the torsor object, and evaluation in N' to construct f. Constancy proves the formula at all points. Surjectivity and linear extensionality prove uniqueness.",
+   "uses": [
+    "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-torsor-associated-module"
+  "def-weil-pbc-torsor-associated-module",
+  "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DV5 (3), 0DV6 (context); elementary diagonal trivialization and naturality argument"
+  "place": "Tags 0DV5 (3), 0DV6 (context); explicit torsor trivialization, Mathlib locally constant constancy, and existing diagonal evaluation surjectivity"
  },
  "lean": {
   "existing": false,
@@ -122,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T150951-L-2230130",
-  "kind": "interface",
+  "landing": "20261012T160142-L-2566330",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
