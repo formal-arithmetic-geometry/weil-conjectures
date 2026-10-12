@@ -64,8 +64,6 @@ Frobenius has finitely many fixed points `J₀(𝔽_q)`
 
 - `AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_mapIso`: the monodromy of a transported
   torsor.
-- `AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_eq_one_of_section`: a torsor with a section
-  has trivial monodromy.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso`: Frobenius-fixed
   compatible systems of `ℤ / ℓⁿ`-torsors on a curve over `𝔽̄_q` are trivial.
 - `AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_isIsomorphic_mapIso_of_isProper`: the
@@ -208,23 +206,6 @@ lemma monodromy_mapIso (e : Y ≅ Y) (τ : FiniteEtale.mapIso e ⋙ fiber s ≅ 
   rw [t.fiber_map_vaddHom_monodromy s G (σ g)]
   exact (hσ P g x).symm
 
-/-- A torsor with a section has trivial monodromy: the point of the geometric fibre through the
-section is the image of the unique point of the geometric fibre of `Y` itself, which is fixed by
-`G`. -/
-lemma monodromy_eq_one_of_section (t : EtaleTorsor M Y) {σ : Y ⟶ t.P} (hσ : σ ≫ t.π = 𝟙 Y) :
-    t.monodromy s G = 1 := by
-  let T : Y.FiniteEtale := ⟨MorphismProperty.Over.mk ⊤ (𝟙 Y) inferInstance,
-    inferInstanceAs (IsFinite (𝟙 Y))⟩
-  let S : T ⟶ t.toFiniteEtale := ObjectProperty.homMk (MorphismProperty.Over.homMk σ hσ)
-  let x₀ : (fiber s).obj T := Over.homMk s (Category.comp_id s)
-  have hx₀ (g : G) : g • x₀ = x₀ := fiber_ext s <| by
-    rw [← Category.comp_id (g • x₀).left, ← Category.comp_id x₀.left]
-    exact (fiber_left_comp s (g • x₀)).trans (fiber_left_comp s x₀).symm
-  ext g
-  let x := (fiber s).map S x₀
-  refine congrArg Multiplicative.toAdd ((t.monodromy_eq_iff s G g x 0).mpr ?_)
-  rw [t.fiber_map_vaddHom_zero s, ← IsNaturalSMul.naturality g S x₀, hx₀]
-
 end Monodromy
 
 section Curve
@@ -250,7 +231,8 @@ module, at finite level (the isomorphisms (4.3) with `J[ℓⁿ](K̄) = Pic(C)[�
 Let `C₀` be a proper smooth geometrically connected curve over a finite field `K`, `C` its
 geometric fibre and `ℓ ≠ char K`. The cup product followed by the trace
 `H¹(C, ℤ / ℓⁿ) × H¹(C, μ_{ℓⁿ}) ⟶ H²(C, μ_{ℓⁿ}) = ℤ / ℓⁿ` is perfect (blueprint
-`lem-wf-curve-finite-level-pd`), and Kummer theory identifies `H¹(C, μ_{ℓⁿ})` with the
+`lem-wf-curve-finite-level-pd`, `AlgebraicGeometry.Scheme.EtaleTorsor.bijective_curvePairing`),
+and Kummer theory identifies `H¹(C, μ_{ℓⁿ})` with the
 `ℓⁿ`-torsion of `Pic(C)` (blueprint `lem-wf-curve-kummer-jacobian-tate-module`). In the torsor
 model of `H¹(C, ℤ / ℓⁿ)` this gives maps `Ψ n` from `ℤ / ℓⁿ`-torsors to characters of
 `Pic(C)[ℓⁿ]` such that

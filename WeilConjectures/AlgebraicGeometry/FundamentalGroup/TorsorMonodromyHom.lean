@@ -27,7 +27,8 @@ For torsors this gives:
 * the total space of a torsor with surjective monodromy is connected
   (`AlgebraicGeometry.Scheme.EtaleTorsor.connectedSpace_of_surjective_monodromy`);
 * a torsor with trivial monodromy has a section
-  (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_monodromy_eq_one`).
+  (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_section_of_monodromy_eq_one`), and conversely
+  (`AlgebraicGeometry.Scheme.EtaleTorsor.monodromy_eq_one_of_section`).
 
 Finally, if `G` has exactly `l ^ (r k)` continuous characters with values in `ℤ / lᵏ` for
 `k ≤ n`, every nontrivial character `χ : G → ℤ / lⁿ` is of the form `lᵃ χ'` with `a < n` and `χ'`
@@ -433,6 +434,23 @@ theorem exists_section_of_monodromy_eq_one (t : EtaleTorsor M Y) (h : t.monodrom
       toAdd_one, fiber_map_vaddHom_zero]
   obtain ⟨F, -⟩ := exists_hom_fiber_map_eq s G (X := T) (fun _ ↦ p) fun g _ ↦ (hp g).symm
   exact ⟨F.hom.left, hom_left_comp F⟩
+
+/-- A torsor with a section has trivial monodromy: the point of the geometric fibre through the
+section is the image of the unique point of the geometric fibre of `Y` itself, which is fixed by
+`G`. -/
+lemma monodromy_eq_one_of_section (t : EtaleTorsor M Y) {σ : Y ⟶ t.P} (hσ : σ ≫ t.π = 𝟙 Y) :
+    t.monodromy s G = 1 := by
+  let T : Y.FiniteEtale := ⟨MorphismProperty.Over.mk ⊤ (𝟙 Y) inferInstance,
+    inferInstanceAs (IsFinite (𝟙 Y))⟩
+  let S : T ⟶ t.toFiniteEtale := ObjectProperty.homMk (MorphismProperty.Over.homMk σ hσ)
+  let x₀ : (fiber s).obj T := Over.homMk s (Category.comp_id s)
+  have hx₀ (g : G) : g • x₀ = x₀ := fiber_ext s <| by
+    rw [← Category.comp_id (g • x₀).left, ← Category.comp_id x₀.left]
+    exact (fiber_left_comp s (g • x₀)).trans (fiber_left_comp s x₀).symm
+  ext g
+  let x := (fiber s).map S x₀
+  refine congrArg Multiplicative.toAdd ((t.monodromy_eq_iff s G g x 0).mpr ?_)
+  rw [t.fiber_map_vaddHom_zero s, ← IsNaturalSMul.naturality g S x₀, hx₀]
 
 /-- **Lifting of torsors.** Let `l` be a prime and suppose that `π₁(Y, s)` has exactly
 `l ^ (r k)` continuous characters with values in `ℤ / lᵏ` for `k ≤ n`. A `ℤ / lⁿ`-torsor `P`
