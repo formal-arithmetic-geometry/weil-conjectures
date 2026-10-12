@@ -80,16 +80,6 @@ theorem det_frobeniusEnd_eq_of_linearEquiv (M : FrobeniusModule K) {V : Type*}
         LinearEquiv.coe_toLinearMap, frobeniusEnd_apply, hf, LinearEquiv.apply_symm_apply]
   rw [← hT, LinearMap.det_conj]
 
-/-- The eigenvalues of the Frobenius of a Frobenius module are nonzero (a local copy of
-`FrobeniusModule.ne_zero_of_hasEigenvalue`, which lives in a module not imported here). -/
-private theorem ne_zero_of_hasEigenvalue' (M : FrobeniusModule K) {α : K}
-    (hα : M.frobeniusEnd.HasEigenvalue α) : α ≠ 0 := by
-  rintro rfl
-  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
-  apply hv.2
-  apply M.frobenius.injective
-  rw [← frobeniusEnd_apply, hv.apply_eq_smul, zero_smul, map_zero]
-
 end FrobeniusModule
 
 namespace AlgebraicGeometry.WeilGroup
@@ -351,7 +341,7 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight
     have hq : 1 < C.pointNorm x.1 := Finite.one_lt_card
     rw [hqx]
     exact (WeilGroup.isOfWeight_iff_frobeniusWeight_eq hq
-      (FrobeniusModule.ne_zero_of_hasEigenvalue' _ hα)).2 (hpure x α hα')
+      (FrobeniusModule.ne_zero_of_hasEigenvalue hα)).2 (hpure x α hα')
   · obtain ⟨f, hf⟩ := hst Q x
     rw [show (cokernel i).stalk x = Q.obj.stalk x from rfl,
       FrobeniusModule.det_frobeniusEnd_eq_of_linearEquiv _ f hf, f.finrank_eq, hqx, hγ x]
