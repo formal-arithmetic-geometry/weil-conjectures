@@ -22,35 +22,41 @@
  ],
  "proof": [
   {
-   "text": "Extend each local partition by the closed complement of its affine chart. Affine charts are quasi-compact and hence retrocompact; local constructible subsets are constructible in X. Realize the complement as a closed subscheme and compose local immersions with the chart inclusion.",
+   "text": "Order the affine charts by their Fin n indices. For each a put V_a equal to the union of W_b for b < a. Each affine open is compact, so quasi-separatedness makes it retrocompact and constructible; finite unions show V_a is open and constructible. The image of each local stratum under W_a -> X is constructible by Topology.IsConstructible.image_of_isOpenEmbedding (Tag 09YD), because W_a is retrocompact.",
    "uses": [
     "def-constructible-stratification",
-    "def-weil-closed-immersion",
     "def-weil-open-immersion",
-    "def-weil-spectral-space",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-weil-pbc-constructible-in-retrocompact-open",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact"
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "lem-weil-pbc-constructible-image-retrocompact-open"
    ],
    "elementary": false
   },
   {
-   "text": "Take the finite common refinement of these extended partitions using intersections, represented by fibre products. Discard empty parts. For each nonempty part choose a point and a chart containing it; refinement puts the entire part into one local stratum of that chart. The empty base admits the zero-stratum partition.",
-   "uses": [
-    "lemma-constructible-common-refinement"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Replace each chosen refined scheme by its fibre product with the local representative. The composite immersion has the same image, so the finite partition and constructibility persist. The second projection gives the actual factorization through the local representative.",
+   "text": "Realize the closed complement X \\ V_a by the vanishing-ideal closed subscheme C_a. For a local stratum immersion g_ab : T_ab -> X, use T_ab x_X C_a as the domain and the first projection followed by g_ab as its immersion into X. Closed immersion base change and composition with g_ab make this an immersion. The scheme pullback image formula identifies its range with range(g_ab) intersect (X \\ V_a), a constructible locally closed subset. The first projection is the requested actual factorization through T_ab.",
    "uses": [
     "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
     "lem-weil-pbc-base-change-image",
     "lem-weil-pbc-immersion-base-change-lft",
     "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false
+  },
+  {
+   "text": "The finite dependent sum of local indices (a,b) indexes these pieces. For disjointness, pieces in the same chart are disjoint by the local partition and injectivity of the chart inclusion. If a < a′, the piece of chart a lies in W_a whereas the piece of chart a′ avoids W_a by construction; the other order is symmetric. For coverage, choose the least chart index containing a given point, and then its local stratum. That point avoids every earlier chart and hence belongs to the resulting piece. Empty pieces may be retained: the stratification definition imposes no nonemptiness requirement. When n = 0 the covering hypothesis makes X empty and the dependent sum is empty.",
+   "uses": [
+    "def-constructible-stratification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reindex the finite dependent sum by Fin of its cardinality using Fintype.equivFin. Assemble the schemes and immersions into LocallyClosedStratification using the proved image, constructibility, local closedness, coverage and pairwise disjointness properties. Each stratum factors through its original local representative by its pullback first projection, with the composition equality holding definitionally.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -58,20 +64,19 @@
   "def-pc-fibre-product",
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
-  "def-weil-spectral-space",
   "lem-weil-pbc-base-change-image",
   "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-weil-pbc-constructible-in-retrocompact-open",
+  "lem-weil-pbc-constructible-image-retrocompact-open",
   "lem-weil-pbc-immersion-base-change-lft",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-  "lemma-constructible-common-refinement"
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03S0 locality reduction; finite intersection refinement and scheme pullback representatives as in the parent node steps 1-3"
+  "place": "Tag 03S0 locality reduction; ordered disjointification supplies a direct proof of the affine-local gluing step, using Tag 09YD and closed-subscheme pullback representatives. Fully formalized by F1."
  },
  "mathlib_searches": [
   {
@@ -137,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T060742-L-2909666",
-  "kind": "interface",
+  "landing": "20261012T070535-L-3470253",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
