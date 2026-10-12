@@ -1,6 +1,6 @@
 # Work queue
 
-58 items; claim with `tools/claim.py next <group> [--stage N]`.
+59 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (48)
+## Stage 3: modules to prove (49)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -55,7 +55,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.InverseImageStalkGerm` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange` | 5 | 2 | proof |
@@ -65,6 +64,8 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale` | 5 | 4 | proof |
+| `Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
