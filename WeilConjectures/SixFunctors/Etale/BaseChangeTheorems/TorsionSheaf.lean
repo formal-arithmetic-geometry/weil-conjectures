@@ -153,7 +153,7 @@ lemma Scheme.IsTorsionModuleSheaf.of_epi {Λ : Type (u + 1)} [CommRing Λ] {X : 
 open Etale in
 /-- The pullback of a torsion sheaf of `Λ`-modules is torsion: the stalk of `f^* F` at a
 geometric point `s` is the stalk of `F` at `s ≫ f`. -/
-instance isTorsionSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
+instance isTorsionModuleSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf F] :
     IsTorsionModuleSheaf ((f)^*[ModuleCat.{u + 1} Λ].obj F) where
   isTorsion_sheafFiber Ω _ _ s :=
