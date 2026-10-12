@@ -7523,3 +7523,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FibreProductPointResidueField (stage 3; reviewer PASS; first push; landing 20261012T112844-L-769362 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T112844-L-769483 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/M1/Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise (stage 3; reviewer PASS; first push; landing 20261012T112844-L-769607 (proof); batch 20261012T112824; modules 1; new nodes 0)
+- 11:28 L: merged deliver/M3/Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1 (stage 3; reviewer PASS; first push; landing 20261012T112845-L-769737 (proof); batch 20261012T112824; modules 1; new nodes 0)

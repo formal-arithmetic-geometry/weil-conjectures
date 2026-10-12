@@ -4,6 +4,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Sheaf.CategoryTheory.SiteCechComplex
 import Sheaf.Topology.SheafCokernelLocalImage
+import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Surjectivity of module sections from vanishing Čech H¹
@@ -19,6 +20,29 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
+-- These checked witnesses exhibit the missing covering condition in the statement.
+private theorem empty_family_cofinal (X : Scheme.{u}) (U : Opens X) :
+    ∀ (I : Type v) (V : I → Opens X) (_hV : ∀ i, V i ≤ U),
+      (∀ x, x ∈ U → ∃ i, x ∈ V i) →
+      ∃ (K : Type v) (W : K → Opens X) (_hW : ∀ k, W k ≤ U),
+        IsEmpty K ∧ ∀ k, ∃ (i : I), W k ≤ V i := by
+  intro I V hV hcover
+  exact ⟨PEmpty, PEmpty.elim, fun k ↦ k.elim, inferInstance, fun k ↦ k.elim⟩
+
+private theorem empty_family_cech_isZero (X : Scheme.{u}) (F : X.Modules)
+    (U : Opens X) (I : Type v) [IsEmpty I] (V : I → Opens X)
+    (f : ∀ i, V i ⟶ U) (C : SiteCechComplex V f) :
+    IsZero ((C.cohomologyFunctor 1).obj F.val.presheaf) := by
+  change IsZero ((C.complex F.val.presheaf).homology 1)
+  apply HomologicalComplex.ExactAt.isZero_homology
+  apply HomologicalComplex.ExactAt.of_isZero
+  change IsZero (C.cochains F.val.presheaf 1)
+  let : Subsingleton (C.cochains F.val.presheaf 1) :=
+    ⟨fun a b ↦ funext fun t ↦ isEmptyElim (t 0)⟩
+  exact AddCommGrpCat.isZero_of_subsingleton _
+
+-- STATEMENT-DISPUTED: Cov members need not cover U. Taking Cov := IsEmpty I makes
+-- cofinality and Cech vanishing automatic; sectionwise surjectivity is then false.
 /-- Vanishing Čech H¹ on a cofinal system of open coverings makes sections of a
 short exact sequence of `O_X`-modules surjective.
 Source: Stacks Project, Cohomology, Tag 01EU.
