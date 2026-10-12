@@ -9121,3 +9121,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:44 L: merged deliver/Y2/Sheaf.RingTheory.SmoothStandardSmoothRetract (stage 3; reviewer PASS; first push; landing 20261012T184401-L-4026121 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:44 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct (stage 3; reviewer PASS; first push; landing 20261012T184402-L-4026227 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:44 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality (stage 3; reviewer PASS; first push; landing 20261012T184402-L-4026371 (proof); batch 20261012T184234; modules 1; new nodes 1)
+- 18:44 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.GenericProductKernelBound (stage 3; reviewer PASS; first push; landing 20261012T184402-L-4026480 (interface); batch 20261012T184234; modules 3; new nodes 2)

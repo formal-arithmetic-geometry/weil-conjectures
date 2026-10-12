@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-generic-tensor-nilpotence-descent",
+ "kind": "statement",
+ "title": "An inverted annihilator descends generic nilpotence",
+ "statement": "Let A, B, R0 be commutative rings with A-algebra structures on B and R0. Let F be a field with compatible A- and R0-algebra structures. Suppose t in R0 has the property that every x in B tensor_A R0 whose image in B tensor_A F is nilpotent satisfies that (1 tensor t)x is nilpotent. Let s in R0 be divisible by t, and let R=R0[1/s] have compatible A-, R0-, and F-algebra maps, with F a fraction field of R. For every x in B tensor_A R, nilpotence of its image in B tensor_A F implies nilpotence of x.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Write l:B tensor_A R0 to B tensor_A R for the tensor map, m for the tensor map to B tensor_A F, and d=1 tensor image(s). Prove by tensor induction that every x in B tensor_A R satisfies x*d^n=l(y) for some n and y. For a pure tensor b tensor c use IsLocalization.Away.surj to clear the denominator of c. For a sum with denominators d^n and d^k, use denominator d^(n+k) and numerator y*(1 tensor s)^k+v*(1 tensor s)^n. The zero tensor has denominator exponent zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The tensor maps satisfy m(l(y))=m0(y), proved by tensor induction and IsScalarTower.algebraMap_apply. If m(x) is nilpotent, then m0(y)=m(x)*m(d)^n is nilpotent. Apply the hypothesis on t to y and map this nilpotence along l. This gives nilpotence of (1 tensor image(t))*(x*d^n).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "IsLocalization.Away.isUnit_of_dvd makes image(t) a unit, because t divides s. IsLocalization.Away.algebraMap_isUnit makes image(s) a unit. Map these units into the tensor algebra with includeRight. Remove the unit factors 1 tensor image(t) and d^n using IsUnit.isNilpotent_unit_mul_of_commute_iff and IsUnit.isNilpotent_mul_unit_of_commute_iff. The remaining element x is nilpotent. This also covers the zero tensor algebra; incompatible zero localizations have no asserted field-algebra instances.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If a scalar makes every generically nilpotent element nilpotent, localization inverting that scalar descends nilpotence from the generic fiber",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsNilpotent",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent results used in the complete Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpoten.*(localiz|unit)|localiz.*nilpoten",
+   "results": "25 hits: Mathlib/RingTheory/Polynomial/Nilpotent.lean, Mathlib/RingTheory/Polynomial/Nilpotent.lean, Mathlib/RingTheory/Polynomial/Nilpotent.lean, Mathlib/RingTheory/Polynomial/Nilpotent.lean, Mathlib/RingTheory/Polynomial/Nilpotent.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent results used in the complete Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericProductKernelBound",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "proof steps 4--9: An inverted annihilator descends generic nilpotence",
+   "via": [
+    "lem-weil-pbc-generic-product-kernel-bound",
+    "lem-weil-pbc-spread-generic-product-embedding",
+    "lem-weil-pbc-generic-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericTensorNilpotenceDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericTensorNilpotenceDescent.lean",
+  "declaration": "generic_tensor_nilpotence_of_annihilator",
+  "statement": "theorem generic_tensor_nilpotence_of_annihilator\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B]\n    (R0 : Type w) [CommRing R0] [Algebra A R0]\n    (F : Type z) [Field F] [Algebra A F] [Algebra R0 F]\n    [IsScalarTower A R0 F]\n    (t : R0)\n    (ht : ∀ x : B ⊗[A] R0,\n      IsNilpotent (Algebra.TensorProduct.map (AlgHom.id A B)\n        (IsScalarTower.toAlgHom A R0 F) x) →\n      IsNilpotent ((1 : B) ⊗ₜ[A] t * x))\n    (s : R0) (hts : t ∣ s)\n    (R : Type u) [CommRing R] [Algebra R0 R] [IsLocalization.Away s R]\n    [Algebra A R] [IsScalarTower A R0 R] [Algebra R F]\n    [IsScalarTower R0 R F] [IsScalarTower A R F] [IsFractionRing R F]\n    (x : B ⊗[A] R) :\n    IsNilpotent (Algebra.TensorProduct.map (AlgHom.id A B)\n      (IsScalarTower.toAlgHom A R F) x) → IsNilpotent x",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

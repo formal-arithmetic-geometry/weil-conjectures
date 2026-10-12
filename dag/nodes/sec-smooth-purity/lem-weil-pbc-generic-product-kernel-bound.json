@@ -12,14 +12,31 @@
  ],
  "proof": [
   {
-   "text": "Put C = (B tensor_A R0)_red. It is a finite R0-module. Tensor associativity identifies its generic localization with the source of e: reduction commutes with localization, since a fraction is nilpotent if and only if a denominator multiple of its numerator is nilpotent. The kernel of the map from C to its generic localization is torsion and finitely generated, since R0 is Noetherian. Choose a nonzero annihilator for each generator and take their product t (1 for no generators). Localizing at any s divisible by t kills the kernel. Localization is exact, so the induced map from the localized C to the generic product is injective. Reduction commutes with this principal localization and identifies its source with (B tensor_A R)_red. The pure-tensor compatibility determines the map f uniquely: R-linearity determines all pure tensors and additivity determines their sums; the quotient map is surjective. Thus f is the injective induced map. When the generic product is zero, the kernel is all of C and the same torsion argument kills C.",
+   "text": "Apply the generic tensor nilpotence annihilator theorem to A, B, R0, and K' to obtain one nonzero t making every generically nilpotent tensor over R0 nilpotent after multiplication by 1 tensor t.",
+   "uses": [
+    "lem-weil-pbc-generic-tensor-nilpotence-annihilator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each s divisible by t and each R=R0[1/s], use tensor commutativity, cancelBaseChange.symm, and tensor commutativity again to construct the ring equivalence psi:B tensor_A K' to (K tensor_A B) tensor_K K'. It sends b tensor c to (1 tensor b) tensor c. Let m be the tensor map from B tensor_A R to B tensor_A K'. Tensor induction proves f(q(x))=e(q(psi(m(x)))). For a pure tensor, factor b tensor c as (b tensor 1)(1 tensor c), apply the assumed compatibility to the first factor, and apply f.commutes and e.commutes plus the R to K' scalar tower to the second factor.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "To prove injectivity, it suffices to test elements mapping to zero. Lift such an element to a tensor y by quotient surjectivity. The compatibility identity and injectivity of e imply q(psi(m(y)))=0. The quotient criterion says psi(m(y)) is nilpotent, and the injective ring equivalence psi reflects nilpotence, so m(y) is nilpotent. Apply generic tensor nilpotence descent to t, s, R, and y. Thus y is nilpotent, and its quotient class is zero. The argument uses neither a nonempty field product nor nontriviality of B.",
+   "uses": [
+    "lem-weil-pbc-generic-tensor-nilpotence-descent"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-generic-tensor-nilpotence-annihilator",
+  "lem-weil-pbc-generic-tensor-nilpotence-descent"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
   "place": "proof steps 4--9"
  },
@@ -99,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T173806-L-3289958",
+  "landing": "20261012T184402-L-4026480",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

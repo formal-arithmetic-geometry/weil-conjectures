@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-generic-tensor-nilpotence-annihilator",
+ "kind": "statement",
+ "title": "One nonzero scalar makes all generically nilpotent tensor elements nilpotent",
+ "statement": "Let A, B, and R0 be commutative rings, with B a finite A-module [pqf-lem-finite-integral-lft], R0 a Noetherian domain, and A-algebra structures on B and R0. Let F be a field that is a fraction field of R0, with compatible A- and R0-algebra structures. Write m0 for the tensor map B tensor_A R0 to B tensor_A F induced by R0 to F. There exists t in R0, t nonzero, such that for every x in B tensor_A R0, if m0(x) is nilpotent, then (1 tensor t)x is nilpotent.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "stmt_deps": [
+  "pqf-lem-finite-integral-lft"
+ ],
+ "proof": [
+  {
+   "text": "Equip C=B tensor_A R0 with its right R0-algebra structure, and D=B tensor_A F with its C-algebra structure induced by the canonical tensor map m. Mathlib IsLocalization.tensorProduct_tensorProduct_right identifies D as localization of C at images of nonzero elements of R0. If m(x) is nilpotent, choose n with m(x)^n=0. IsLocalization.map_eq_zero_iff gives a nonzero a in R0 with (1 tensor a)x^n=0. For n>0, multiply by (1 tensor a)^(n-1) to show ((1 tensor a)x)^n=0. For n=0 the relation says 1 tensor a=0, so (1 tensor a)x=0.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Let Q=C/nilradical(C), J=m^(-1)(nilradical(D)), and N=J.map(q), where q:C to Q is the quotient map. Tensor commRight and Module.Finite.base_change show that C is finite over R0. Therefore Q and N are finite over the Noetherian ring R0. Every z in N is q(x) for an x in J by Ideal.mem_map_iff_of_surjective. The preceding calculation gives a nonzero a killing z. Thus N is a torsion R0-module.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Submodule.annihilator_top_inter_nonZeroDivisors to the finite torsion module N. It yields t in the annihilator of N and in the nonzero divisors of R0, hence t is nonzero. For any generically nilpotent x, q(x) lies in N, so q((1 tensor t)x)=t smul q(x)=0. Quotient.eq_zero_iff_mem and mem_nilradical give the conclusion. The zero algebra and the zero kernel are included in this argument.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a finite algebra over a noetherian domain a nonzero scalar annihilates the kernel of the map from its reduction to the reduced generic fiber",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite algebra over a noetherian domain a nonzero scalar annihilates the kernel of the map from its reduction to the reduced generic fiber",
+   "results": "8 hits: Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt, Module.finite_of_surjective_of_ker_le_nilradical, exists_integral_inj_algHom_of_quotient, isNilpotent_tensor_residueField_iff, PrimeSpectrum.exists_image_comap_of_finite_of_free, finite_of_algHom_finiteType_of_isJacobsonRing, Module.exists_ker_toSpanSingleton_eq_annihilator, Module.AEval.isTorsion_of_finiteDimensional",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent results used in the complete Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*annihilat|annihilat.*[Ff]inite|[Ff]inite.*annihilat",
+   "results": "12 hits: Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/Nakayama.lean, Mathlib/RingTheory/KrullDimension/Module.lean, Mathlib/RingTheory/Support.lean, Mathlib/RingTheory/Support.lean, Mathlib/RingTheory/Support.lean, Mathlib/RingTheory/Support.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent results used in the complete Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericProductKernelBound",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "proof steps 4--9: One nonzero scalar makes all generically nilpotent tensor elements nilpotent",
+   "via": [
+    "lem-weil-pbc-generic-product-kernel-bound",
+    "lem-weil-pbc-spread-generic-product-embedding",
+    "lem-weil-pbc-generic-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericTensorNilpotenceAnnihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericTensorNilpotenceAnnihilator.lean",
+  "declaration": "exists_generic_tensor_nilpotence_annihilator",
+  "statement": "theorem exists_generic_tensor_nilpotence_annihilator\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (R0 : Type w) [CommRing R0] [IsNoetherianRing R0] [IsDomain R0]\n    [Algebra A R0]\n    (F : Type z) [Field F] [Algebra A F] [Algebra R0 F]\n    [IsScalarTower A R0 F] [IsFractionRing R0 F] :\n    ∃ t : R0, t ≠ 0 ∧ ∀ x : B ⊗[A] R0,\n      IsNilpotent (Algebra.TensorProduct.map (AlgHom.id A B)\n        (IsScalarTower.toAlgHom A R0 F) x) →\n      IsNilpotent ((1 : B) ⊗ₜ[A] t * x)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
