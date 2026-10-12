@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import Sheaf.AlgebraicGeometry.SectionRingSingleQuotientChart
+import Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlap
 
 /-! # Compatible local quotient morphisms for the section ring
 
@@ -64,6 +66,14 @@ theorem exists_sectionRing_compatible_quotient_charts
               ⊤)).op ((t.val ^ n) (n • e)) =
         (L.tensorPow (n • e)).presheaf.map (homOfLE
           (le_top : (U i).ι ''ᵁ (g i ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤
-            ⊤)).op (ξ.val (n • e)) := by sorry
+            ⊤)).op (ξ.val (n • e)) := by
+  classical
+  have hchart (i : I) :=
+    exists_sectionRing_single_quotient_chart X L (d i) (s i) (hd i) (U i) (hU i)
+  choose g hg using hchart
+  refine ⟨g, ?_, hg⟩
+  intro i j
+  exact sectionRing_quotient_charts_overlap X L (d i) (d j) (s i) (s j)
+    (hd i) (hd j) (U i) (U j) (hU i) (hU j) (g i) (g j) (hg i) (hg j)
 
 end AlgebraicGeometry.Scheme.Modules

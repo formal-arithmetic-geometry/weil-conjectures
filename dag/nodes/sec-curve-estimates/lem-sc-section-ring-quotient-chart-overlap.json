@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-section-ring-quotient-chart-overlap",
+ "kind": "statement",
+ "title": "Comparison of quotient chart morphisms on an intersection",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $L$ an invertible $X$-module [def-sc-invertible-module], and $S$ its graded section ring [def-sc-invertible-section-ring]. Let $d,e>0$, $s\\in S_d$, $t\\in S_e$, and opens $U,V\\subseteq X$ with underlying sets respectively the nonvanishing loci of $s,t$ [def-weil-pbc-ample-invertible-module]. Suppose given morphisms $g:U\\to\\operatorname{Proj}(S)$ and $h:V\\to\\operatorname{Proj}(S)$ [def-pc-proj]. For each of these morphisms $k$, assume that for every positive-degree homogeneous $a\\in S_r$, every $n\\geq0$, and every $\\xi\\in S_{nr}$, on the ambient image $W$ of $k^{-1}(D_+(a))$ its scalar pullback satisfies $k^\\sharp(\\xi/a^n)\\cdot(a^n)|_W=\\xi|_W$. Then $g|_{U\\cap V}=h|_{U\\cap V}$ as morphisms to $\\operatorname{Proj}(S)$. This comparison asserts no existence of morphisms.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "At a point where s is nonvanishing, choose a positive-degree a-chart through its image. Apply the fraction equation with numerator s^r and denominator a^d. In the residue field both the coefficient and a^d must be nonzero since s^r is nonzero. Localness of the stalk map reflects the unit of s^r/a^d, proving that the image belongs to D_+(s). The same argument works for every section nonvanishing at the point. Thus both given maps send U intersect V into D_+(st). This residue calculation does not require X to be reduced.",
+   "uses": [
+    "def-pc-proj",
+    "def-sc-invertible-section-ring",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+   }
+  },
+  {
+   "text": "Factor both restricted maps through the affine chart D_+(st). On U intersect V the section st and each tensor power are generators. Restrict both assumed fraction equations for denominator st; cancellation of the same free generator shows equality of pullbacks of each xi/(st)^n. Such fractions exhaust S_(st), so the ring maps agree. The affine morphism correspondence proves equality of the factored maps and hence of their composites with the chart inclusion. The tensor unit covers n=0; the empty overlap has unique sections and maps.",
+   "uses": [
+    "def-pc-proj",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms from nonvanishing opens to Proj of an invertible section ring satisfying homogeneous fraction equations agree on their intersection",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.ext_iff, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+   "verdict": "No exact match: Mathlib handles scalar ring maps and Proj charts, not these invertible-module fraction equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local maps into Proj of section ring of invertible sheaf agree on overlaps by homogeneous fraction identities",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfLE_toBasicOpenOfGlobalSections|awayMap_awayToSection|ext_to_Spec",
+   "date": "2026-10-12",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "verdict": "No exact match: Mathlib handles scalar ring maps and Proj charts, not these invertible-module fraction equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleProjCompatibleCharts",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: choose powers and sections on each component with affine nonvanishing locus containing T; the canonical-map chart construction and its pointwise verification",
+   "via": [
+    "lem-sc-ample-proj-compatible-quotient-charts",
+    "lem-sc-ample-proj-canonical-map-chart-formula",
+    "lem-sc-ample-proj-canonical-map",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingQuotientChartOverlap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRing_quotient_charts_overlap",
+  "statement": "theorem sectionRing_quotient_charts_overlap (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible] (d e : ℕ) (s : sectionRingGrade L d) (t : sectionRingGrade L e) (hd : 0 < d) (he : 0 < e) (U V : X.Opens) (hU : (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d)) (hV : (V : Set X) = nonvanishingLocus (L.tensorPow e) (t.val e)) (g : U.toScheme ⟶ Proj (sectionRingGrade L)) (h : V.toScheme ⟶ Proj (sectionRingGrade L)) (hg : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e) (n : ℕ) (ξ : sectionRingGrade L (n • e)), (show Γ(X, U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val)) from g.app (Proj.basicOpen (sectionRingGrade L) t.val) (Proj.awayToSection (sectionRingGrade L) t.val (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n ξ.val ξ.property))) • (L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤ ⊤)).op ((t.val ^ n) (n • e)) = (L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤ ⊤)).op (ξ.val (n • e))) (hh : ∀ (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e) (n : ℕ) (ξ : sectionRingGrade L (n • e)), (show Γ(X, V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val)) from h.app (Proj.basicOpen (sectionRingGrade L) t.val) (Proj.awayToSection (sectionRingGrade L) t.val (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n ξ.val ξ.property))) • (L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤ ⊤)).op ((t.val ^ n) (n • e)) = (L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : V.ι ''ᵁ (h ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤ ⊤)).op (ξ.val (n • e))) : X.homOfLE (inf_le_left : U ⊓ V ≤ U) ≫ g = X.homOfLE (inf_le_right : U ⊓ V ≤ V) ≫ h",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T184308-L-4006137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T184308-L-4006137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
