@@ -6,7 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
-import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Open pieces of universal first order thickenings
@@ -23,6 +22,29 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+private theorem firstOrder_surjective {T T' : Scheme.{u}} (i : T ⟶ T')
+    (hi : IsFirstOrderThickening i) : Function.Surjective i := by
+  have : IsClosedImmersion i := hi.1
+  have hs : i.ker.support = ⊤ := by
+    rw [← Scheme.IdealSheafData.support_pow_succ i.ker 1, hi.2]
+    exact Scheme.IdealSheafData.support_bot
+  apply Set.range_eq_univ.mp
+  rw [← i.isClosedEmbedding.isClosed_range.closure_eq, ← i.support_ker, hs]
+  rfl
+
+private theorem firstOrder_restrict {T T' : Scheme.{u}} (i : T ⟶ T')
+    (hi : IsFirstOrderThickening i) (W' : T'.Opens) :
+    IsFirstOrderThickening (i ∣_ W') := by
+  have : IsClosedImmersion i := hi.1
+  refine ⟨inferInstance, Scheme.IdealSheafData.ext ?_⟩
+  funext Q
+  rw [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply,
+    Scheme.ker_morphismRestrict_ideal]
+  have hQ := congrArg (fun I => I.ideal
+    ⟨W'.ι ''ᵁ Q, Q.2.image_of_isOpenImmersion W'.ι⟩) hi.2
+  simpa only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply,
+    Scheme.IdealSheafData.ideal_bot, Pi.bot_apply] using hQ
 
 /-- Restriction of a first order thickening, restriction of a universal thickening to
 opens of source and base, and enlargement of an open base containing the image.
@@ -82,6 +104,99 @@ theorem universalFirstOrderThickening_open_pieces {Z X : Scheme.{u}} (h : Z ⟶ 
       ∀ {Z' : Scheme.{u}} (i : Z ⟶ Z') (hU' : Z' ⟶ U.toScheme),
         IsUniversalFirstOrderThickening hU i hU' →
           IsUniversalFirstOrderThickening h i (hU' ≫ U.ι)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro T T' iT b hiT
+    have : IsClosedImmersion iT := hiT.1
+    refine ⟨?_, ?_⟩
+    · intro W'
+      exact ⟨firstOrder_restrict iT hiT W', Scheme.ker_morphismRestrict_ideal iT W'⟩
+    · intro W
+      let e := (isHomeomorph_iff_isEmbedding_surjective.mpr
+        ⟨iT.isClosedEmbedding.isEmbedding, firstOrder_surjective iT hiT⟩).homeomorph
+      refine ⟨e.opensCongr W, ?_, ?_⟩
+      · exact e.opensCongr.symm_apply_apply W
+      · intro W' hW'
+        exact e.opensCongr.symm.injective (hW'.trans (e.opensCongr.symm_apply_apply W).symm)
+  · intro Z' i h' H V U hVU
+    have : IsClosedImmersion i := H.1.1
+    let e := (isHomeomorph_iff_isEmbedding_surjective.mpr
+      ⟨i.isClosedEmbedding.isEmbedding, firstOrder_surjective i H.1⟩).homeomorph
+    obtain ⟨V', hV'⟩ : ∃ V' : Z'.Opens, i ⁻¹ᵁ V' = V :=
+      ⟨e.opensCongr V, e.opensCongr.symm_apply_apply V⟩
+    subst V
+    have hV'U : V' ≤ h' ⁻¹ᵁ U := by
+      intro z' hz'
+      obtain ⟨z, rfl⟩ := firstOrder_surjective i H.1 z'
+      have hz := hVU hz'
+      change h' (i z) ∈ U
+      rw [← Scheme.Hom.comp_apply, H.2.1]
+      exact hz
+    let iV := i ∣_ V'
+    let hV := h.resLE U (i ⁻¹ᵁ V') hVU
+    let hV' := h'.resLE U V' hV'U
+    have hiVι : iV ≫ V'.ι = (i ⁻¹ᵁ V').ι ≫ i :=
+      morphismRestrict_ι i V'
+    have hhV : hV ≫ U.ι = (i ⁻¹ᵁ V').ι ≫ h := h.resLE_comp_ι hVU
+    have hhV' : hV' ≫ U.ι = V'.ι ≫ h' := h'.resLE_comp_ι hV'U
+    refine ⟨V', rfl, hV'U, iV, hV, hV', hiVι, hhV, hhV',
+      firstOrder_restrict i H.1 V', ?_, ?_⟩
+    · apply (cancel_mono U.ι).mp
+      rw [Category.assoc, hhV', ← Category.assoc, hiVι,
+        Category.assoc, H.2.1, hhV]
+    · intro T T' j b a hj hab
+      have habX : j ≫ (b ≫ U.ι) = (a ≫ (i ⁻¹ᵁ V').ι) ≫ h := by
+        rw [← Category.assoc, hab, Category.assoc, hhV, ← Category.assoc]
+      obtain ⟨a'', ha'', huniq⟩ := H.2.2 j (b ≫ U.ι) (a ≫ (i ⁻¹ᵁ V').ι) hj habX
+      have haV' : Set.range a'' ⊆ Set.range V'.ι := by
+        rw [Scheme.Opens.range_ι]
+        rintro _ ⟨t', rfl⟩
+        obtain ⟨t, rfl⟩ := firstOrder_surjective j hj t'
+        have ht := congrArg (fun f : T ⟶ Z' => f t) ha''.2
+        simp only [Scheme.Hom.comp_apply] at ht
+        rw [ht]
+        exact (a t).2
+      let a' := IsOpenImmersion.lift V'.ι a'' haV'
+      have ha'ι : a' ≫ V'.ι = a'' := IsOpenImmersion.lift_fac V'.ι a'' haV'
+      have ha' : a' ≫ hV' = b ∧ j ≫ a' = a ≫ iV := by
+        constructor
+        · apply (cancel_mono U.ι).mp
+          rw [Category.assoc, hhV', ← Category.assoc, ha'ι, ha''.1]
+        · apply (cancel_mono V'.ι).mp
+          rw [Category.assoc, ha'ι, ha''.2]
+          simp only [Category.assoc, hiVι]
+      refine ⟨a', ha', ?_⟩
+      intro a₁ ha₁
+      apply (cancel_mono V'.ι).mp
+      have ha₁X : (a₁ ≫ V'.ι) ≫ h' = b ≫ U.ι ∧
+          j ≫ (a₁ ≫ V'.ι) = (a ≫ (i ⁻¹ᵁ V').ι) ≫ i := by
+        constructor
+        · rw [Category.assoc, ← hhV', ← Category.assoc, ha₁.1]
+        · rw [← Category.assoc, ha₁.2, Category.assoc, hiVι, ← Category.assoc]
+      exact (huniq _ ha₁X).trans ha'ι.symm
+  · intro U hU hhU Z' i hU' H
+    refine ⟨H.1, ?_, ?_⟩
+    · rw [← Category.assoc, H.2.1, hhU]
+    · intro T T' j b a hj hab
+      have hb : Set.range b ⊆ Set.range U.ι := by
+        rw [Scheme.Opens.range_ι]
+        rintro _ ⟨t', rfl⟩
+        obtain ⟨t, rfl⟩ := firstOrder_surjective j hj t'
+        have ht := congrArg (fun f : T ⟶ X => f t) hab
+        rw [Scheme.Hom.comp_apply, Scheme.Hom.comp_apply] at ht
+        rw [ht, ← hhU, Scheme.Hom.comp_apply]
+        exact (hU (a t)).2
+      let bU := IsOpenImmersion.lift U.ι b hb
+      have hbU : bU ≫ U.ι = b := IsOpenImmersion.lift_fac U.ι b hb
+      have habU : j ≫ bU = a ≫ hU := by
+        apply (cancel_mono U.ι).mp
+        rw [Category.assoc, hbU, Category.assoc, hhU, hab]
+      obtain ⟨a', ha', huniq⟩ := H.2.2 j bU a hj habU
+      refine ⟨a', ⟨?_, ha'.2⟩, ?_⟩
+      · rw [← Category.assoc, ha'.1, hbU]
+      · intro a'' ha''
+        apply huniq a''
+        refine ⟨?_, ha''.2⟩
+        apply (cancel_mono U.ι).mp
+        rw [Category.assoc, ha''.1, hbU]
 
 end AlgebraicGeometry
