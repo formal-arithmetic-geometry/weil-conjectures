@@ -6,10 +6,11 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.RingTheory.RegularLocalRing.Polynomial
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.Algebra.Polynomial.Basic
+import Mathlib.RingTheory.Derivation.MapCoeffs
 import Sheaf.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Regularity of a degree-p polynomial extension
@@ -54,6 +55,27 @@ theorem isRegularRing_quotient_X_pow_sub_of_isUnit_derivation
     (n : ℕ) (hn : 1 ≤ n) :
     IsRegularRing
       (Polynomial R ⧸ Ideal.span ({Polynomial.X ^ n - Polynomial.C f} : Set (Polynomial R))) := by
-  sorry
+  have hn0 : n ≠ 0 := Nat.ne_of_gt hn
+  clear hn0
+  let Dp : Derivation ℤ (Polynomial R) (Polynomial R) :=
+    PolynomialModule.equivPolynomialSelf.compDer D.mapCoeffs
+  have hDpX : Dp Polynomial.X = 0 := by
+    dsimp [Dp]
+    simp
+  have hDpC (x : R) : Dp (Polynomial.C x) = Polynomial.C (D x) := by
+    dsimp [Dp]
+    simp
+  have hDp : Dp (Polynomial.X ^ n - Polynomial.C f) = -Polynomial.C (D f) := by
+    rw [map_sub, Dp.leibniz_pow, hDpX, smul_zero, hDpC]
+    simp
+  let I : Ideal (Polynomial R) := Ideal.span
+    ({Polynomial.X ^ n - Polynomial.C f} : Set (Polynomial R))
+  apply IsRegularRing.quotient_span_singleton_of_isUnit_derivation
+      (Polynomial R) (Polynomial.X ^ n - Polynomial.C f) Dp
+  rw [hDp]
+  apply IsUnit.map (Ideal.Quotient.mk I)
+  simpa only [map_neg] using
+    IsUnit.map (Polynomial.C : R →+* Polynomial R) hDf.neg
+
 
 end Algebra
