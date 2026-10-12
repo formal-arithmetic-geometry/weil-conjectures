@@ -5817,3 +5817,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:58 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint (stage 3; reviewer PASS; first push; landing 20261012T015829-L-941838 (proof); modules 1; new nodes 0)
 - 02:00 L: merged deliver/K1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial (stage 3; reviewer PASS; after a return; landing 20261012T015900-L-944365 (interface); modules 5; new nodes 4)
 - 02:01 L: returned deliver/P1/Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest (reviewer RETURN: (reviewer X-8478c, head 8478cc598) C4/C1: dag/nodes/sec-curve-estimates/zero-dimensional-global-sections-exact.json, pro)
+- 02:02 L: merged deliver/R1/Sheaf.Topology.NoetherianExtensionByZeroReduction (stage 3; reviewer PASS; first push; landing 20261012T020117-L-955673 (interface); modules 2; new nodes 1)
