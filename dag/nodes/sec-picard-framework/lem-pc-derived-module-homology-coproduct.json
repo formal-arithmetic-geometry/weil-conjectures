@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-derived-module-homology-coproduct",
+ "kind": "statement",
+ "title": "Homology preserves coproducts in the derived module category",
+ "statement": "Let $R$ be a ring and $D(R)$ the derived category of $R$-modules [def-weil-abstract-derived-category]. For $q\\in\\mathbb Z$, any set-indexed family $(E_i)_{i\\in I}$ in $D(R)$, and any colimiting cofan $(S,\\iota_i)$, the cofan $(H^q(S),H^q(\\iota_i))$ is colimiting in the category of $R$-modules. The statement includes arbitrary unbounded complexes and the empty family.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-derived-products (Tag 07D9), clauses (1)-(2); cohomology of exact termwise sums as used in perfect.tex, Tag 09M1"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Import all Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology and reuse its already proved private generic shortComplexHomologyColimit theorem. Apply it to ModuleCat R and Discrete I; ModuleCat AB4 supplies exact coproducts. No copy or reproving of the existing generic homology comparison is needed.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums-homology",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse complexHomologyColimit from the same imported module to pass from short-complex homology preservation to cochain-complex homology in degree q. Both reused helpers quantify over an arbitrary abelian category, so no scheme or sheaf assumption enters. Mathlib homologyFunctorFactors identifies Q followed by derived homology with complex homology; transport preservation along this natural isomorphism.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums-homology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose complex representatives K_i of E_i and their localization isomorphisms. Use [lem-pc-derived-module-direct-sums] to obtain the colimit of Q(K_i) with apex Q(∐K_i). Precompose the specified cofan by the representative isomorphisms, and use uniqueness of colimits to identify its apex with Q(∐K_i). Apply homology to this isomorphism and to the termwise-complex coproduct colimit.",
+   "uses": [
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the resulting homology colimit along the natural isomorphism whose i-th component is homology of the representative isomorphism. Functoriality gives H(e_i followed by ι_i)=H(e_i) followed by H(ι_i), so the transported cofan has exactly the legs H(ι_i). Package this IsColimit in Nonempty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums-homology",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-module-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H1",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-derived-products (Tag 07D9), clauses (1)-(2); cohomology of exact termwise sums as used in perfect.tex, Tag 09M1",
+  "note": "Repair of returned delivery: remove both duplicate private helpers and reuse the generic proved helpers from DerivedAmbientDirectSumsHomology with a private import all. Remaining module-homology transport proof and signatures unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of coproduct in derived module category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "12 hits: DerivedCategory.homologyFunctor, DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt, DerivedCategory.instIsHomologicalHomologyFunctor, DerivedCategory.shift_homologyFunctor, DerivedCategory.HomologySequence.δ, DerivedCategory.isIso_iff, DerivedCategory.homologyFunctorFactors, DerivedCategory.HomologySequence.exact₁. No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimit.*homology|homology.*PreservesColimit|toAddMonoid.*bijective",
+   "results": "0 hits: . No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.homologyFunctor",
+   "results": "Second reading: 12 hits, providing homology functor and natural comparisons, but no colimit-preservation theorem. The unqualified query failed identifier resolution and is not evidence of absence. Direct rg found DerivedAmbientDirectSumsHomology for module sheaves, whose generic helpers are private; its public statement does not apply to ModuleCat.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: compactness of the structure sheaf in the perfect-object argument; coproduct comparison for zeroth derived global sections",
+   "via": [
+    "lem-pc-derived-tensor-unit-compact",
+    "lem-pc-perfect-object-compact",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-pc-derived-global-sections-cohomology-coproduct"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedModuleHomologyCoproduct",
+  "file": "lean/Sheaf/CategoryTheory/DerivedModuleHomologyCoproduct.lean",
+  "declaration": "AlgebraicGeometry.derivedModuleHomology_coproduct",
+  "statement": "theorem derivedModuleHomology_coproduct (R : Type u) [Ring R]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R)] (q : ℤ)\n    (I : Type u) (E : I → DerivedCategory (ModuleCat.{u} R))\n    (S : DerivedCategory (ModuleCat.{u} R)) (ι : ∀ i, E i ⟶ S)\n    (hι : IsColimit (Cofan.mk S ι)) :\n    Nonempty (IsColimit (Cofan.mk\n      ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).obj S)\n      (fun i ↦ (DerivedCategory.homologyFunctor (ModuleCat.{u} R) q).map (ι i))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T144116-L-2097585",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T144116-L-2097585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
