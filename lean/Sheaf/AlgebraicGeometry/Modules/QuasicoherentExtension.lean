@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.Modules.AffineExtensionSectionSurjectivity
+import Mathlib.CategoryTheory.Preadditive.LeftExact
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Extensions of quasi-coherent modules
 
@@ -21,6 +24,43 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem tilde_preservesKernel (R : CommRingCat.{u})
+    {M N : ModuleCat.{u} R} (f : M ⟶ N) :
+    Limits.PreservesLimit (Limits.parallelPair f 0) (tilde.functor R) := by
+  let T := tilde.functor R
+  let ff : T.FullyFaithful := tilde.fullyFaithfulFunctor (R := R)
+  let : T.Full := ff.full
+  let : T.Faithful := ff.faithful
+  let : T.IsLeftAdjoint := (tilde.adjunction (R := R)).isLeftAdjoint
+  let := Limits.preservesBinaryBiproducts_of_preservesBinaryCoproducts T
+  let : T.Additive := Functor.additive_of_preservesBinaryBiproducts T
+  have : (T.obj M).IsQuasicoherent := by
+    change (tilde.{u} (R := R) M).IsQuasicoherent
+    infer_instance
+  have : (T.obj N).IsQuasicoherent := by
+    change (tilde.{u} (R := R) N).IsQuasicoherent
+    infer_instance
+  let k := Limits.kernel (T.map f)
+  have hk : k.IsQuasicoherent := Scheme.Modules.isQuasicoherent_kernel (T.map f)
+  have : IsIso (Scheme.Modules.fromTildeΓ (R := R) k) :=
+    Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := R) k
+  let e : T.obj ((moduleSpecΓFunctor (R := R)).obj k) ≅ k :=
+    asIso (Scheme.Modules.fromTildeΓ (R := R) k)
+  let t := T.preimage (e.hom ≫ Limits.kernel.ι (T.map f))
+  have ht : t ≫ f = 0 := by
+    apply T.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage, Functor.map_zero,
+      Category.assoc, Limits.kernel.condition, Limits.comp_zero, t]
+  let c := Limits.KernelFork.ofι t ht
+  have hc : Limits.IsLimit (c.map T) := by
+    apply Limits.IsLimit.ofIsoLimit (Limits.kernelIsKernel (T.map f))
+    exact Limits.Fork.ext e.symm (by simp [c, t, Limits.KernelFork.map])
+  have hc' : Limits.IsLimit c :=
+    Limits.isLimitOfReflects T ((c.isLimitMapConeEquiv T).symm hc)
+  exact Limits.preservesLimit_of_preserves_limit_cone hc'
+    ((c.isLimitMapConeEquiv T).symm hc)
+
 
 /-- In a short exact sequence of modules on a scheme, quasi-coherence of both end terms
 implies quasi-coherence of the middle term.
@@ -47,6 +87,44 @@ Proof:
 theorem isQuasicoherent_of_shortExact {X : Scheme.{u}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) [S.X₁.IsQuasicoherent] [S.X₃.IsQuasicoherent] :
     S.X₂.IsQuasicoherent := by
-  sorry
+  refine isQuasicoherent_of_iSup_opensRange_eq_top S.X₂
+    (fun U : {U : X.Opens // IsAffineOpen U} ↦ U.2.fromSpec)
+    iSup_opensRange_fromSpec_eq_top (fun U ↦ ?_)
+  let T := S.map (restrictFunctor U.2.fromSpec)
+  have hT : T.ShortExact := hS.map_of_exact (restrictFunctor U.2.fromSpec)
+  letI : (T.X₁).IsQuasicoherent := by
+    exact isQuasicoherent_restrictFunctor _ _
+  letI : (T.X₃).IsQuasicoherent := by
+    exact isQuasicoherent_restrictFunctor _ _
+  let R : CommRingCat.{u} := Γ(X, U.1)
+  let G := moduleSpecΓFunctor (R := R)
+  let L := tilde.functor R
+  letI : G.IsRightAdjoint := (tilde.adjunction (R := R)).isRightAdjoint
+  letI := CategoryTheory.Limits.preservesBinaryBiproducts_of_preservesBinaryProducts G
+  letI : G.Additive := Functor.additive_of_preservesBinaryBiproducts G
+  letI : Epi (G.map T.g) := epi_globalSections_of_shortExact T hT
+  letI : Mono T.f := hT.mono_f
+  have hG : (T.map G).ShortExact :=
+    { exact := hT.exact.map_of_mono_of_preservesKernel G inferInstance inferInstance
+      mono_f := (inferInstance : Mono (G.map T.f))
+      epi_g := (inferInstance : Epi (G.map T.g)) }
+  letI : ∀ {M N : ModuleCat.{u} R} (f : M ⟶ N),
+      CategoryTheory.Limits.PreservesLimit (CategoryTheory.Limits.parallelPair f 0) L :=
+    fun {_ _} f ↦ tilde_preservesKernel R f
+  letI : CategoryTheory.Limits.PreservesFiniteLimits L :=
+    Functor.preservesFiniteLimits_of_preservesKernels L
+  have hL : ((T.map G).map L).ShortExact := hG.map_of_exact L
+  let φ : ((T.map G).map L) ⟶ T :=
+    { τ₁ := T.X₁.fromTildeΓ
+      τ₂ := T.X₂.fromTildeΓ
+      τ₃ := T.X₃.fromTildeΓ
+      comm₁₂ := (fromTildeΓNatTrans.naturality T.f).symm
+      comm₂₃ := (fromTildeΓNatTrans.naturality T.g).symm }
+  have hφ : IsIso φ.τ₂ :=
+    ShortComplex.isIso₂_of_shortExact_of_isIso₁₃ φ hL hT
+  have h₂ : T.X₂.IsQuasicoherent :=
+    (isQuasicoherent_iff_isIso_fromTildeΓ T.X₂).mpr hφ
+  letI : ((restrictFunctor U.2.fromSpec).obj S.X₂).IsQuasicoherent := h₂
+  exact presentationOfIsIsoFromTildeΓ _
 
 end AlgebraicGeometry.Scheme.Modules
