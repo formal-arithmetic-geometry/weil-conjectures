@@ -6,11 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
 import WeilConjectures.SixFunctors.BaseChange.Etale
-import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # Etale extension by zero commutes with base change for module sheaves
@@ -51,6 +47,9 @@ so the base-change transformation is an isomorphism. Its inverse is natural in t
 theorem isIso_etaleLowerShriekBaseChangeMap (Λ : Type (u + 1)) [CommRing Λ]
     {Y V X : Scheme.{u}} (f : Y ⟶ X) (j : V ⟶ X) [Etale j] :
     IsIso (etaleLowerShriekBaseChangeMap Λ f j) := by
-  sorry
+  unfold etaleLowerShriekBaseChangeMap
+  have := Etale.isIso_baseChangeMap_flip_of_isPullback (ModuleCat.{u + 1} Λ)
+    (IsPullback.of_hasPullback f j).flip
+  infer_instance
 
 end AlgebraicGeometry.Etale

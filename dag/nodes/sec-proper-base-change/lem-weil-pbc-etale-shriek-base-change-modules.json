@@ -33,75 +33,28 @@
  ],
  "proof": [
   {
-   "text": "*The two adjunctions and $\\beta$.* $j'$ is etale, as a base change of the etale $j$ [lem-weil-pbc-etale-base-change-finite-limits]. On sheaves of $\\Lambda$-modules we have $j_!\\dashv j^{-1}$ and $j'_!\\dashv j'^{-1}$ [lem-weil-pbc-etale-restriction-injectives] and $f^{-1}\\dashv f_*$, $f'^{-1}\\dashv f'_*$ [prop-weil-pbc-inverse-image-modules-exact](3). Composing [def-weil-pbc-composite-adjunction], $L_1=f^{-1}j_!$ is left adjoint to $R_1=j^{-1}f_*$ and $L_2=j'_!f'^{-1}$ is left adjoint to $R_2=f'_*j'^{-1}$, as functors between $\\Mod(V_{\\Et},\\Lambda)$ and $\\Mod(Y_{\\Et},\\Lambda)$ (Stacks: \"$j'_!f'^{-1}$ is left adjoint to $f'_*(j')^{-1}$ and $f^{-1}j_!$ is left adjoint to $j^{-1}f_*$\"). By [def-weil-pbc-etale-shriek-base-change-map], $\\beta:L_2\\to L_1$ is the natural transformation whose conjugate with respect to these two adjunctions is the underived exchange transformation $\\Ex^0_\\square:R_1\\to R_2$ of the cartesian square $\\square=(f,f',j,j',\\mathrm{id})$, top $j'$, bottom $j$.",
+   "text": "Unfold `etaleLowerShriekBaseChangeMap`. The exchange transformation is an isomorphism by the existing étale base-change theorem `Etale.isIso_baseChangeMap_flip_of_isPullback` applied to the pullback square `IsPullback.of_hasPullback f j` (flipped). The typeclass instance `conjugateEquiv_symm_iso` then makes its conjugate defining the lower-shriek base-change map an isomorphism. The existing exchange theorem combines the restriction identification and its isomorphism recorded by [lem-weil-pbc-etale-underived-exchange-restriction], with coefficients in ModuleCat Λ; [def-weil-pbc-adjunction-conjugate] supplies preservation of isomorphisms under inverse conjugation.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-etale-shriek-base-change-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493, proof lines 11506-11514, first sentence"
-   }
-  },
-  {
-   "text": "*The right adjoints agree on abelian sheaves.* Apply [lem-weil-pbc-etale-underived-exchange-restriction](2) with the following dictionary. Its $f:X\\to Y$ is our $f:Y\\to X$, and its etale $j:V\\to Y$ is our $j:V\\to X$. Its $X_V=X\\times_YV$ is our $V'=Y\\times_XV$ with $j_X=j'$ and $f_V=f'$, and its square $\\square_j$, with the identity as identification, is our $\\square$ [def-weil-pbc-cartesian-square]. It gives the following. For every abelian sheaf $F$ on $Y_{\\Et}$, the underived exchange morphism $\\Ex^0_{\\square,F}:j^{-1}f_*F\\to f'_*j'^{-1}F$ [def-weil-pbc-underived-exchange] is an isomorphism of abelian sheaves on $V_{\\Et}$. On sections it is the identification $F(W\\times_XY)=F(W\\times_VV')$, for $W\\to V$ etale. This is Stacks' \"$f'_*(j')^{-1}=j^{-1}f_*$ because $f_*$ commutes with etale localization (by construction)\".",
-   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
     "lem-weil-pbc-etale-underived-exchange-restriction",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-underived-exchange"
+    "def-weil-pbc-adjunction-conjugate"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493, proof lines 11506-11514, second sentence"
-   }
-  },
-  {
-   "text": "*The right adjoints agree on sheaves of modules.* Let $G\\in\\Mod(Y_{\\Et},\\Lambda)$. By [lem-weil-pbc-underived-exchange-module-linear], $\\Ex^0_{\\square,G}$ (formed on the underlying abelian sheaf of $G$) is a morphism of sheaves of $\\Lambda_V$-modules $R_1G\\to R_2G$. By step 2 it is an isomorphism of abelian sheaves, so each component $\\Ex^0_{\\square,G}(W)$ is a bijective $\\Lambda_V(W)$-linear map. Its inverse is then $\\Lambda_V(W)$-linear, and these inverses commute with the restriction maps because the $\\Ex^0_{\\square,G}(W)$ do. So the inverse is a morphism of sheaves of $\\Lambda_V$-modules [def-weil-sheaf-of-modules-category], and $\\Ex^0_{\\square,G}$ is an isomorphism in $\\Mod(V_{\\Et},\\Lambda)$. Hence $\\Ex^0_\\square:R_1\\to R_2$ is a natural isomorphism of functors $\\Mod(Y_{\\Et},\\Lambda)\\to\\Mod(V_{\\Et},\\Lambda)$; it is natural by [lem-weil-pbc-underived-exchange-module-linear].",
-   "uses": [
-    "lem-weil-pbc-underived-exchange-module-linear",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493, proof lines 11506-11514, \"on abelian sheaves and on sheaves of modules\" (statement); the module form is written out here"
-   }
-  },
-  {
-   "text": "*Conclusion.* By [def-weil-pbc-adjunction-conjugate], a natural transformation $\\tau:L_2\\to L_1$ is an isomorphism if and only if its conjugate $\\tau^c:R_1\\to R_2$ is. By step 1, $\\beta^c=\\Ex^0_\\square$ [def-weil-pbc-etale-shriek-base-change-map], and by step 3 this is a natural isomorphism. Hence $\\beta:j'_!f'^{-1}\\to f^{-1}j_!$ is a natural isomorphism. So for every $M\\in\\Mod(V_{\\Et},\\Lambda)$, $\\beta_M:j'_!((f')^{-1}M)\\to f^{-1}(j_!M)$ is an isomorphism of sheaves of $\\Lambda_Y$-modules, and the inverses $\\beta_M^{-1}$ are natural in $M$. This is Stacks' conclusion \"$j'_!f'^{-1}=f^{-1}j_!$\": two functors whose right adjoints are isomorphic are themselves isomorphic.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "def-weil-pbc-etale-shriek-base-change-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493, proof lines 11506-11514"
+    "document": "lean/WeilConjectures/SixFunctors/BaseChange/Etale.lean",
+    "place": "Etale.isIso_baseChangeMap_flip_of_isPullback"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-etale-shriek-base-change-map",
   "lem-weil-pbc-etale-underived-exchange-restriction",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-underived-exchange-module-linear",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-adjunction-conjugate"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03S6 (lemma-shriek-base-change), line 11493, proof lines 11506-11514"
+  "by": "library",
+  "document": "lean/WeilConjectures/SixFunctors/BaseChange/Etale.lean",
+  "place": "Etale.isIso_baseChangeMap_flip_of_isPullback"
  },
  "mathlib_searches": [
   {
@@ -181,5 +134,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T044750-L-2038261",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
