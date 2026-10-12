@@ -5,11 +5,12 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
 # Proper direct images and a finite boundary
@@ -23,6 +24,8 @@ the two boundary steps of Deligne's generic constructibility theorem
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj_of_isFinite`: the direct image along a
+  finite morphism detects the zero sheaf.
 - `AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map`:
   a morphism which is an isomorphism over `G` and after `Rb_*` is an isomorphism
   (`lem-fin-finite-boundary-comparison`).
@@ -35,7 +38,7 @@ the two boundary steps of Deligne's generic constructibility theorem
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits ZeroObject
 
 open scoped CategoryTheory.Functor
 
@@ -47,22 +50,93 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
+/-- **The direct image along a finite morphism detects the zero sheaf**: by the stalk formula,
+the stalk of `f_* G` at a geometric point `y` is the product of the stalks of `G` at the
+geometric points over `y`, and every geometric point `t` of `X` lies over `t ≫ f`. -/
+theorem isZero_of_isZero_lowerStar_obj_of_isFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
+    {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
+  have : LocallySmall.{u + 1} Y.Etale := locallySmall_max.{u + 1, u}
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
+  have : IsIso (0 : G ⟶ 0) := Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ by
+    let t := X.algClosurePoint x
+    let y := t ≫ f
+    have : (((pointSmallEtale y).ulift.{u + 1}).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).IsLeftAdjoint := inferInstance
+    have : ((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).IsLeftAdjoint :=
+      inferInstance
+    have h₁ : IsZero ((pointSmallEtale y).sheafFiber.obj ((f)_*[ModuleCat.{u + 1} Λ].obj G)) :=
+      ((((pointSmallEtale y).ulift.{u + 1}).sheafFiber (A := ModuleCat.{u + 1} Λ)).map_isZero
+        hG).of_iso (((pointSmallEtale y).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} Λ)).app
+          _).symm
+    have h₂ := h₁.of_iso (Etale.stalkIsoPi (ModuleCat.{u + 1} Λ) f y G).symm
+    classical
+    have : HasLimitsOfShape (Discrete (f.GeometricFiber y)) (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfShape_discrete _ _
+    have : HasLimit (Discrete.functor fun s : f.GeometricFiber y ↦
+        (pointSmallEtale s.1).sheafFiber.obj G) := HasLimitsOfShape.has_limit _
+    have h₃ : IsZero ((pointSmallEtale t).sheafFiber.obj G) :=
+      h₂.of_epi (Pi.π _ (⟨t, rfl⟩ : f.GeometricFiber y))
+    have h₄ : IsZero ((X.uliftPointSmallEtale x).sheafFiber.obj G) :=
+      h₃.of_iso (((pointSmallEtale t).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} Λ)).app G)
+    exact isIso_of_source_target_iso_zero _ h₄.isoZero
+      (((X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)).map_isZero
+        (isZero_zero _)).isoZero
+  exact IsZero.of_iso (isZero_zero _) (asIso (0 : G ⟶ 0))
+
+/-- An object of the derived category all of whose homology sheaves vanish is zero. -/
+lemma isZero_of_forall_isZero_homology {X : Scheme.{u}}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (h : ∀ n, IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj K)) : IsZero K := by
+  have : K.IsLE (-1) := (_root_.DerivedCategory.isLE_iff K (-1)).2 fun i _ ↦ h i
+  have : K.IsGE 0 := (_root_.DerivedCategory.isGE_iff K 0).2 fun i _ ↦ h i
+  exact _root_.DerivedCategory.TStructure.t.isZero K (-1) 0 (by lia)
+
+open Pretriangulated in
 /-- Blueprint `lem-fin-finite-boundary-comparison`: A proper direct image detects a comparison
 off a finite boundary.
 
-Let `b : Y ⟶ S` be proper, let `a : G ⟶ Y` be an open immersion with closed complement
-`i : Z ⟶ Y`, and suppose that `i ≫ b` is finite. Let `c : K ⟶ L` be a morphism of bounded below
-complexes of étale sheaves of `Λ`-modules on `Y`. If the restriction `a^* c` and the direct
-image `Rb_* c` are isomorphisms, then so is `c`. -/
+Let `b : Y ⟶ S` be a morphism (proper, in the blueprint), let `a : G ⟶ Y` be an open immersion
+with closed complement `i : Z ⟶ Y`, and suppose that `i ≫ b` is finite. Let `c : K ⟶ L` be a
+morphism of complexes of étale sheaves of `Λ`-modules on `Y` (bounded below, in the blueprint;
+neither hypothesis is needed). If the restriction `a^* c` and the direct image `Rb_* c` are
+isomorphisms, then so is `c`.
+
+The cone `M` of `c` vanishes on `G`, so the open–closed triangle identifies it with
+`Ri_* i^* M`, and `0 = Rb_* M = R(bi)_* i^* M = (bi)_* i^* M`; the finite direct image `(bi)_*`
+is exact and detects the zero sheaf, so `i^* M = 0` and `M = 0`. -/
 theorem isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map {S Y G Z : Scheme.{u}}
-    (b : Y ⟶ S) [IsProper b] (a : G ⟶ Y) [IsOpenImmersion a] (i : Z ⟶ Y) [IsClosedImmersion i]
+    (b : Y ⟶ S) (a : G ⟶ Y) [IsOpenImmersion a] (i : Z ⟶ Y) [IsClosedImmersion i]
     (hai : Set.range i = (Set.range a)ᶜ) [IsFinite (i ≫ b)]
     {K L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (c : K ⟶ L) (hK : ∃ n : ℤ, K.IsGE n) (hL : ∃ n : ℤ, L.IsGE n)
+    (c : K ⟶ L)
     (ha : IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategory.map c))
     (hb : IsIso ((R((b)_*[ModuleCat.{u + 1} Λ])).map c)) :
-    IsIso c :=
-  sorry
+    IsIso c := by
+  obtain ⟨M, g, h, hT⟩ := distinguished_cocone_triangle c
+  refine (Triangle.isZero₃_iff_isIso₁ _ hT).1 ?_
+  have hMa : IsZero ((Etale.upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategory.obj M) :=
+    (Triangle.isZero₃_iff_isIso₁ _ (Functor.map_distinguished _ _ hT)).2 ha
+  have hMb : IsZero ((R((b)_*[ModuleCat.{u + 1} Λ])).obj M) :=
+    (Triangle.isZero₃_iff_isIso₁ _ (Functor.map_distinguished _ _ hT)).2 hb
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) a i hai M
+  have hu : IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app M) :=
+    (Triangle.isZero₁_iff_isIso₂ _ hw).1 (Functor.map_isZero _ hMa)
+  let N := (Etale.upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategory.obj M
+  have hN : IsZero ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (i ≫ b)).mapDerivedCategory.obj N) :=
+    (hMb.of_iso ((R((b)_*[ModuleCat.{u + 1} Λ])).mapIso
+      (asIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app
+        M)).symm)).of_iso
+      ((rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) i b).app N ≪≫
+        (rightDerivedFunctorLowerStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ)
+          (i ≫ b)).app N).symm
+  have hN' : IsZero N := isZero_of_forall_isZero_homology Λ fun n ↦
+    isZero_of_isZero_lowerStar_obj_of_isFinite Λ (i ≫ b)
+      ((_root_.DerivedCategory.homologyFunctor _ n).map_isZero hN |>.of_iso
+        (((Etale.lowerStar (ModuleCat.{u + 1} Λ) (i ≫ b)).mapDerivedCategoryHomologyFunctorIso
+          n).app N))
+  exact (Functor.map_isZero _ hN').of_iso (asIso
+    ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app M))
 
 /-- Blueprint `lem-fin-finite-boundary-reconstruction`: Recovering constructibility at a finite
 boundary.
