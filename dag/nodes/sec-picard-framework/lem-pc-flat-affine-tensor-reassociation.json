@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-flat-affine-tensor-reassociation",
+ "kind": "statement",
+ "title": "Scalar reassociation on a cartesian affine open",
+ "statement": "Let $R,S$ be commutative rings with an $R$-algebra structure on $S$, $f:X\\to\\operatorname{Spec}R$ a scheme morphism, $W\\subseteq X$ affine, and $M$ an $\\mathcal O_X$-module [def-pc-scheme]. Use the cartesian base change $X_S$, projections $g,f_S$ of [def-pc-flat-cohomology-comparison]. Let $W\\prime=g^{-1}W$ and $h:W\\prime\\leq g^{-1}W$. Set $A=\\Gamma(W,\\mathcal O_X)$, $B=\\Gamma(W\\prime,\\mathcal O_{X_S})$, with $A\\to B$ induced by $g$. Let $\\beta:S\\to B$ be restriction of the structure map of $f_S$. Restrict the action on $\\Gamma(W,M)$ from $A$ to $R$ along $f$. There exists an $S$-linear equivalence $e:S\\otimes_R\\Gamma(W,M)\\simeq B\\otimes_A\\Gamma(W,M)$ such that $e(b\\otimes s)=\\beta(b)\\otimes s$ for all $b,s$, with the $S$-action on the right restricted along $\\beta$. No quasi-coherence, flatness, or nonemptiness is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KG",
+  "place": "Proof of Lemma 30.5.1, affine calculation (02KG)."
+ },
+ "proof": [
+  {
+   "text": "The cartesian affine ring formula identifies B with S tensor_R A, compatibly with A and S. Tensor associativity and the tensor-unit equivalence identify (S tensor_R A) tensor_A Γ(W,M) with S tensor_R Γ(W,M). The composite is S-linear and sends b tensor s to β(b) tensor s.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/02KG",
+  "place": "Affine calculation in the proof of Lemma 30.5.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine base change ring of sections tensor product scalar reassociation",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"baseChange\"",
+   "date": "2026-10-12",
+   "results": "12 hits, including TensorProduct.AlgebraTensorModule.cancelBaseChange and its pure-tensor formulas; no cartesian affine section-ring identification",
+   "verdict": "generic tensor operations only"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*section|pullback.*affine.*section",
+   "date": "2026-10-12",
+   "results": "0 hits in Mathlib; local rg finds existing affine tensor pullback theorem, used separately",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of the structure sheaf of a fibre product of affine schemes and reassociation of extension of scalars",
+   "date": "2026-10-12",
+   "results": "8 hits: pullbackSpecIso projection formulas and PullbackCarrier point-tensor formulas; no theorem combining affine-open restriction with section-module scalar reassociation.",
+   "verdict": "Second reading: affine ring formula exists; the required open-chart transport and module reassociation still need proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "date": "2026-10-12",
+   "results": "11 hits: cancelBaseChange and pure-tensor formulas in TensorProduct.Tower; generic algebraic equivalences only.",
+   "verdict": "Second reading: no exact scheme-section theorem; existing tensor associativity can supply the algebraic part."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyAffineSections",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Separated-case affine computation, realized by step 3 of lem-pc-flat-affine-base-change-sections.",
+   "via": [
+    "lem-pc-flat-affine-base-change-sections",
+    "lem-pc-flat-cech-base-change-terms",
+    "lem-pc-flat-cech-base-change",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatAffineTensorReassociation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatAffineTensorReassociation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_baseChange_affine_tensor_reassociation",
+  "statement": "theorem exists_baseChange_affine_tensor_reassociation (f : X ⟶ Spec (.of R)) (W : X.Opens) (hW : IsAffineOpen W) (M : X.Modules) (W' : (baseChangedScheme (S := S) f).Opens) (hW' : W' = baseChangeFst (S := S) f ⁻¹ᵁ W) (h : W' ≤ baseChangeFst (S := S) f ⁻¹ᵁ W) : let P := M.presheafModuleCat ⋙ ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom) let β := (((baseChangedScheme (S := S) f).presheaf.map (homOfLE (le_top : W' ≤ ⊤)).op).hom).comp (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom) letI : Algebra Γ(X, W) Γ(baseChangedScheme (S := S) f, W') := (baseChangeFst (S := S) f |>.appLE W W' h).hom.toAlgebra letI : Module S (TensorProduct Γ(X, W) Γ(baseChangedScheme (S := S) f, W') Γ(M, W)) := Module.compHom _ β ∃ e : TensorProduct R S (P.obj (op W)) ≃ₗ[S] TensorProduct Γ(X, W) Γ(baseChangedScheme (S := S) f, W') Γ(M, W), ∀ (b : S) (s : P.obj (op W)), e (b ⊗ₜ[R] s) = β b ⊗ₜ[Γ(X, W)] (show Γ(M, W) from s)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T095852-L-312553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T095852-L-312553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

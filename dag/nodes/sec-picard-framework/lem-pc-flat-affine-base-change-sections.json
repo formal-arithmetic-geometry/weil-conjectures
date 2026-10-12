@@ -14,15 +14,15 @@
  },
  "proof": [
   {
-   "text": "The inverse image of the affine open W is the cartesian base change of W by Spec S over Spec R. The affine spectra fibre-product formula identifies it with Spec(S tensor_R Gamma(X,W)); in particular it is affine. This identification respects the maps from S and Gamma(X,W).",
+   "text": "Use the scalar reassociation theorem to identify S tensor_R Gamma(W,M) with the tensor over Gamma(W,O_X) used by the affine pullback comparison.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-flat-affine-tensor-reassociation",
     "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the affine module pullback sections comparison to g, W and g inverse W. Compare tensorPullback with the library pullback by uniqueness of left adjoints to the common pushforward functor. The conjugate-isomorphism unit equation ensures that the comparison sends a pure tensor to the coefficient times the library adjunction unit.",
+   "text": "Apply the affine module pullback sections theorem and transport its unit formula through the canonical left-adjoint comparison between tensor pullback and pullback.",
    "uses": [
     "lem-weil-pbc-module-pullback-affine-sections",
     "lem-weil-pbc-conjugate-iso-unit-equation"
@@ -30,21 +30,21 @@
    "elementary": false
   },
   {
-   "text": "Using the cartesian ring formula, rewrite the coefficient ring as S tensor_R Gamma(X,W). Swap tensor factors and apply tensor associativity and the tensor-unit equivalence; this identifies the source with S tensor_R Gamma(M,W), S-linearly. On b tensor s the composite is b restricted to g inverse W times the restriction of the unit at W. Transport across the given equality W prime equals g inverse W. Restriction along the inclusion h is the same transport because Opens is a thin category. Empty W has zero sections, so the same tensor and unit equivalences apply without any nonemptiness assumption.",
+   "text": "Swap tensor factors, use the coefficient-linearity of the affine comparison, and take its bijective linear equivalence. Naturality and the unit equation prove the required pure-tensor formula. Affinity of W prime follows because the affine morphism Spec S to Spec R remains affine after base change.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-flat-cohomology-comparison",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-flat-affine-tensor-reassociation",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/02KG",
-  "place": "Canonical affine section comparison with unit formula, as used in Tag 02KH."
+  "place": "Affine base-change computation and tensor reassociation."
  },
  "mathlib_searches": [
   {
@@ -123,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T085227-L-9332",
+  "landing": "20261012T095852-L-312553",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
