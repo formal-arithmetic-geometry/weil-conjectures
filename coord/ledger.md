@@ -6640,3 +6640,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.DenseOpenVanishingComparison (stage 3; reviewer PASS; first push; landing 20261012T070546-L-3475430 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.PrimeBiproductInvertible (stage 3; reviewer PASS; first push; landing 20261012T070547-L-3475586 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.PrimeBiproductPrimary (stage 3; reviewer PASS; first push; landing 20261012T070547-L-3475690 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/P2/Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant (stage 3; reviewer PASS; first push; landing 20261012T070547-L-3475785 (proof); batch 20261012T070523; modules 1; new nodes 0)

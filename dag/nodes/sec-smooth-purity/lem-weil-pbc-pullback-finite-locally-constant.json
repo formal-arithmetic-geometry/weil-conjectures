@@ -22,58 +22,94 @@
  ],
  "proof": [
   {
-   "text": "The base-change functors for the morphisms $f$ and $g$ define morphisms of the corresponding small etale sites. Applying the composition theorem for morphisms of sites gives the canonical natural isomorphism $(f\\circ g)^{-1}F\\cong g^{-1}(f^{-1}F)$ on abelian sheaves.",
+   "text": "Take the component at F of Etale.upperStarComp AddCommGrpCat g f. This gives the composite-to-iterated inverse-image isomorphism c.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB and the sentence after Definition Tag 03CC"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 095A (lemma-pullback-locally-constant, line 9960), with Lemma 03Q1 (lemma-stalk-pullback) (3) for the geometric stalks and Sites Lemma 03CB (lemma-composition-morphisms-sites) for $(f\\circ g)^{-1}\\cong g^{-1}f^{-1}$"
    }
   },
   {
-   "text": "Write $G=f^{-1}F$ and choose an etale covering $\\{j_i:U_i\\to Y\\}$ such that each restriction $G|_{U_i}=G\\circ\\iota_{j_i}$ is isomorphic, as a sheaf of sets, to a constant sheaf of sets $\\underline{E_i}_{U_i}$ [def-weil-pbc-etale-sheaves]. Put $U_i'=U_i\\times_YY'$ with projections $k_i:U_i'\\to Y'$ and $g_i:U_i'\\to U_i$, so $g\\circ k_i=j_i\\circ g_i$; the $k_i$ are etale and jointly surjective [lem-weil-pbc-etale-covering-base-change], i.e. an etale covering of $Y'$. For each $i$ there are isomorphisms of abelian sheaves on $(U_i')_{\\Et}$\n$$(g^{-1}G)|_{U_i'}\\cong k_i^{-1}g^{-1}G\\cong(g\\circ k_i)^{-1}G=(j_i\\circ g_i)^{-1}G\\cong g_i^{-1}j_i^{-1}G\\cong g_i^{-1}(G|_{U_i}),$$\nby [lem-weil-pbc-etale-inverse-image-restriction] (1) for the etale morphisms $k_i$ and $j_i$ (the latter transported by the functor $g_i^{-1}$) and [lem-weil-pbc-inverse-image-composition] (2) twice. Passing to underlying sheaves of sets, the underlying sheaf of sets of $g_i^{-1}(G|_{U_i})$ is the set-theoretic inverse image of the underlying sheaf of sets of $G|_{U_i}$ [lem-weil-pbc-etale-inverse-image-algebraic-structures] (3), hence (by functoriality of the set-theoretic inverse image) isomorphic to $g_i^{-1}\\underline{E_i}_{U_i}$, which is isomorphic to the constant sheaf $\\underline{E_i}_{U_i'}$ [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf]. Thus $g^{-1}G$ is locally constant. For a geometric point $\\bar y'$ of $Y'$ with image $\\bar y=g\\circ\\bar y'$, [lem-weil-pbc-inverse-image-stalk-germ] gives $(g^{-1}G)_{\\bar y'}\\cong G_{\\bar y}$, which is finite since $G$ is finite locally constant; hence $g^{-1}G$ is finite locally constant [def-weil-pbc-etale-sheaves].",
+   "text": "For an etale X-scheme U, transport G.over U along Etale.overSheafEquiv U and use overSheafEquivFunctorObjOverIso on abelian sheaves. Forgetting groups commutes definitionally with these restrictions and site-equivalence functors. Sheaf.isConstant_sheafCongr_functor_iff and the forgotten isomorphism identify constancy of the localized underlying set sheaf with constancy of the underlying set sheaf of U.hom inverse image. This is the private helper underlying_isConstant_over_iff; it does not assert that a constant underlying set sheaf is a constant abelian sheaf.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-etale-covering-base-change",
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lemma-constructible-pullback-locally-constant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095A (lemma-pullback-locally-constant) via Modules on Sites Lemma 093R, with Lemma 03Q1 (3); restriction to an etale U is j^{-1} (Section 03S2, after Definition 03S3)"
+    "place": "Etale Cohomology, Lemma 095A (lemma-pullback-locally-constant, line 9960), with Lemma 03Q1 (lemma-stalk-pullback) (3) for the geometric stalks and Sites Lemma 03CB (lemma-composition-morphisms-sites) for $(f\\circ g)^{-1}\\cong g^{-1}f^{-1}$"
    }
   },
   {
-   "text": "Combining the canonical isomorphism of Step 1 with the local constancy and finite-stalk conclusion of Step 2 proves $(f\\circ g)^{-1}F\\cong g^{-1}(f^{-1}F)$ and that this sheaf is finite locally constant on $Y'_{\\Et}$.",
+   "text": "Set pullback is left exact: unfold its sheafification-after-Kan-extension construction and apply the existing flat-functor and sheafification instances, with the universe-shrunk AB5 instance for sets. etaleInverseImageAbelianLift then supplies the isomorphism between forgetting abelian inverse image and set inverse image. For a constant set sheaf, Sheaf.isConstant_sheafPullback applies to base change because it preserves terminal objects; the constructed/abstract pullback comparison transfers this constancy to etaleSetPullback. Transport across the abelian forgetful comparison. This proves underlying_isConstant_upperStar for any constant value in Type (u+1), with no need for sections or uniqueness of the constant-sheaf comparison.",
    "uses": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 095A (lemma-pullback-locally-constant, line 9960), with Lemma 03Q1 (lemma-stalk-pullback) (3) for the geometric stalks and Sites Lemma 03CB (lemma-composition-morphisms-sites) for $(f\\circ g)^{-1}\\cong g^{-1}f^{-1}$"
+   }
+  },
+  {
+   "text": "Unpack a trivializing etale cover of the underlying set sheaf of G=f inverse image F, and pull it back using Cover.pullback2 (Lean pullback₂). Each original restriction is constant by step 2, and pulling it along the first projection stays constant by step 3. The inverse of upperStarComp for the first projection, the pullback-square equality, and upperStarComp for the second projection give an isomorphism with restriction of g inverse image G. Forget it and use Sheaf.isConstant_congr; step 2 identifies this with the required localized restriction. This proves underlying_locallyConstant_upperStar.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 095A (lemma-pullback-locally-constant, line 9960), with Lemma 03Q1 (lemma-stalk-pullback) (3) for the geometric stalks and Sites Lemma 03CB (lemma-composition-morphisms-sites) for $(f\\circ g)^{-1}\\cong g^{-1}f^{-1}$"
+   }
+  },
+  {
+   "text": "For every algebraically closed geometric point s of Y-prime, compose Point.sheafFiberCompIso for forgetting groups, the forgotten component of Etale.upperStarCompSheafFiberIso g s, and the inverse forget/stalk comparison at s followed by g. The result identifies the set-valued stalk of the iterated inverse image with the finite set-valued stalk of G at s followed by g. Shrink the forgetful filtered-colimit preservation instance from u+1 to u, and apply Finite.of_equiv to this isomorphism.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Lemma 095A (lemma-pullback-locally-constant, line 9960), with Lemma 03Q1 (lemma-stalk-pullback) (3) for the geometric stalks and Sites Lemma 03CB (lemma-composition-morphisms-sites) for $(f\\circ g)^{-1}\\cong g^{-1}f^{-1}$"
+   }
+  },
+  {
+   "text": "Finite local constancy is invariant under set-sheaf isomorphisms: map the isomorphism through each localized restriction and use Sheaf.isConstant_congr on the same cover; map it through each geometric fiber functor and use Finite.of_equiv. Apply this proved private helper to the forgotten inverse of c from step 1, with local constancy from step 4 and finite stalks from step 5. Pair the result with Nonempty.intro c.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095A (lemma-pullback-locally-constant), conclusion"
+    "place": "Etale Cohomology, Lemma 095A (lemma-pullback-locally-constant, line 9960), with Lemma 03Q1 (lemma-stalk-pullback) (3) for the geometric stalks and Sites Lemma 03CB (lemma-composition-morphisms-sites) for $(f\\circ g)^{-1}\\cong g^{-1}f^{-1}$"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lemma-constructible-pullback-locally-constant",
+  "lem-weil-pbc-etale-inverse-image-abelian-lift",
+  "lem-weil-pbc-etale-base-change-finite-limits",
   "def-weil-pbc-etale-sheaves",
   "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 095A, with Lemma 03Q1 (3) and Sites Lemma 03CB"
+  "place": "P2 Lean implementation of Tags 095A, 03Q1 (3), and 03CB; generic constant-sheaf pullback and localized-site equivalence replace the section/uniqueness route"
  },
  "mathlib_searches": [
   {
@@ -184,5 +220,15 @@
   "group": "G1",
   "result": "pass",
   "note": "T,Y,Y' schemes, g,f arbitrary morphisms; F : Sheaf T_et AddCommGrpCat; h^-1 = recorded AlgebraicGeometry.Etale.upperStar (rfl to sheafPullback along Over.pullback @Etale, the node's sheafified base-change pullback); hF = recorded IsFiniteLocallyConstantEtaleSheafOfSets on sheafCompose forget of f^-1F; conclusion Nonempty ((g≫f)^-1F ≅ g^-1 f^-1 F) in Ab sheaves ∧ FLC of underlying set sheaf of (g≫f)^-1F; no let/hollow hyps, universes shared, names #check-verified"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475785",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
