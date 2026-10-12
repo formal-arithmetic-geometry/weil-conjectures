@@ -30,127 +30,63 @@
  ],
  "proof": [
   {
-   "text": "Conventions and four preliminary facts. We write the proof for a scheme $X$; it is the same on any ringed space. For an open $U\\subseteq X$, $\\mathcal M|_U$ is the restriction [lem-weil-pbc-module-restriction-open-immersion-colimits] ($(\\mathcal M|_U)(W)=\\mathcal M(W)$ for $W\\subseteq U$), and a morphism $\\mathcal O_U^{\\oplus n}\\to\\mathcal M|_U$ is the same as the $n$-tuple of sections $s_i\\in\\mathcal M(U)$, the images of the basis sections $e_i$ (the 'associated map' of [pqf-def-coherent]). Kernels in $\\mathit{Mod}(\\mathcal O_X)$ are sectionwise [def-weil-sheaf-of-modules-category]. (a) If $\\alpha:\\mathcal F\\to\\mathcal F'$ is an isomorphism of $\\mathcal O_X$-modules and $\\mathcal F$ is of finite type (resp. coherent), so is $\\mathcal F'$: composing a local epimorphism $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ with $\\alpha|_U$ gives an epimorphism onto $\\mathcal F'|_U$; and for $\\psi':\\mathcal O_U^{\\oplus n}\\to\\mathcal F'|_U$ the map $\\psi=\\alpha^{-1}|_U\\circ\\psi'$ has $\\operatorname{Ker}\\psi=\\operatorname{Ker}\\psi'$, since $\\alpha^{-1}_W$ is injective on every $W$. (b) The zero module is coherent: $\\mathcal O_X^{\\oplus0}\\to0$ is an epimorphism, and the kernel of $\\mathcal O_U^{\\oplus n}\\to0$ is $\\mathcal O_U^{\\oplus n}$, of finite type. (c) Finite type is local: if $U=\\bigcup_jV_j$ is an open covering and $\\mathcal K|_{V_j}$ is of finite type for every $j$, then $\\mathcal K|_U$ is of finite type, the condition of [pqf-def-coherent] being one on open neighbourhoods of points; moreover $(\\operatorname{Ker}\\psi)|_V=\\operatorname{Ker}(\\psi|_V)$ for $V\\subseteq U$ open, kernels being sectionwise. (d) Restriction to an open $U$ preserves epimorphisms and exactness of complexes of $\\mathcal O_X$-modules: by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1) and (2) both are local lifting conditions over all opens $W\\subseteq X$ and coverings of them, and for $\\mathcal M|_U$ these are the same conditions restricted to the opens $W\\subseteq U$.",
+   "text": "Finite type transports along isomorphisms by transporting local generating sections through the restricted isomorphism. The kernel condition transports via kernelCompMono. The zero sheaf has the empty global generating tuple; relations into its restriction are kernels of zero maps and thus finite free sheaves, whose basis is a finite global generating tuple. These steps are implemented as proved private helpers.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "pqf-def-coherent",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Definition 01BV (definition-coherent, line 1578) and Definition 01B5 (definition-finite-type, line 810); Section 01AF (section-kernels) and Lemma 01AG (lemma-abelian); facts (a)-(d) are used without statement in the proof of Lemma 01BY (agent-written)"
-   }
-  },
-  {
-   "text": "Part (1), kernel. Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of coherent $\\mathcal O_X$-modules. $\\mathcal F$ is of finite type (condition (1) of coherence, [pqf-def-coherent]) and $\\mathcal G$ is coherent, so $\\operatorname{Ker}\\varphi$ is of finite type by [lem-weil-pbc-coherent-finite-type-sub-kernel] (2). It is a sub-$\\mathcal O_X$-module of the coherent module $\\mathcal F$ (kernels are sectionwise, [def-weil-sheaf-of-modules-category]), so it is coherent by [lem-weil-pbc-coherent-finite-type-sub-kernel] (1).",
-   "uses": [
-    "lem-weil-pbc-coherent-finite-type-sub-kernel",
-    "pqf-def-coherent",
+    "lem-weil-pbc-module-finite-type-image-extension",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BY (lemma-coherent-abelian, line 1641), proof of part (3), first sentence: by (2) the kernel is of finite type and hence by (1) coherent"
-   }
+   "elementary": true
   },
   {
-   "text": "Part (1), the cokernel is of finite type, and the image. Let $\\pi:\\mathcal G\\to\\operatorname{Coker}\\varphi$ be the cokernel of $\\varphi$ in the abelian category $\\mathit{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category], [def-sp-abelian]; a cokernel morphism is an epimorphism, and $\\mathcal G$ is of finite type, so $\\operatorname{Coker}\\varphi$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (1). Let $\\mathcal I=\\operatorname{Im}\\varphi=\\operatorname{Ker}\\pi\\subseteq\\mathcal G$ (the sub-$\\mathcal O_X$-module $W\\mapsto\\ker\\pi_W$), with inclusion $i:\\mathcal I\\to\\mathcal G$. Since $\\pi\\varphi=0$, $\\varphi=i\\circ\\varphi'$ for a unique $\\varphi':\\mathcal F\\to\\mathcal I$. The complex $\\mathcal F\\xrightarrow{\\varphi}\\mathcal G\\xrightarrow{\\pi}\\operatorname{Coker}\\varphi$ is exact at $\\mathcal G$, the image of $\\varphi$ being by definition the kernel of $\\mathcal G\\to\\operatorname{Coker}\\varphi$ [def-weil-pbc-exact-sequence]; hence $\\varphi'$ is an epimorphism by [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift], and $\\mathcal I$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (1), $\\mathcal F$ being of finite type. Finally $0\\to\\mathcal I\\xrightarrow{i}\\mathcal G\\xrightarrow{\\pi}\\operatorname{Coker}\\varphi\\to0$ is a short exact sequence: $i$ is a monomorphism (a kernel), $\\pi$ an epimorphism, and $\\operatorname{Im}(i)=\\mathcal I=\\operatorname{Ker}\\pi$ [def-weil-pbc-exact-sequence].",
+   "text": "For f:F to G between coherent modules, its kernel is finite type by the finite type kernel lemma, and then coherent as a finite type submodule of F.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-abelian",
-    "lem-weil-pbc-module-finite-type-image-extension",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BY (lemma-coherent-abelian, line 1641), proof of part (3), second paragraph: since G is of finite type so is Coker(phi); Im(phi) is used with generators t_j (finite type as an image, Lemma 01B7)"
-   }
-  },
-  {
-   "text": "Part (1), the cokernel is coherent. Let $U\\subseteq X$ be open and $\\overline\\Psi:\\mathcal O_U^{\\oplus n}\\to(\\operatorname{Coker}\\varphi)|_U$ the map of sections $\\bar s_1,\\dots,\\bar s_n\\in(\\operatorname{Coker}\\varphi)(U)$; we show $\\operatorname{Ker}\\overline\\Psi$ is of finite type. By step 1 (c) it suffices that every $x\\in U$ has an open neighbourhood $V\\subseteq U$ with $\\operatorname{Ker}(\\overline\\Psi|_V)$ of finite type. Since $\\pi$ is an epimorphism, by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1) each $\\bar s_i$ lifts near $x$; since $\\mathcal I$ is of finite type (step 3) it is generated near $x$ by finitely many sections [pqf-def-coherent]. So there is an open $x\\in V\\subseteq U$ with $s_i\\in\\mathcal G(V)$, $\\pi(s_i)=\\bar s_i|_V$ ($1\\le i\\le n$), and $t_1,\\dots,t_m\\in\\mathcal I(V)$ such that $\\Phi:\\mathcal O_V^{\\oplus m}\\to\\mathcal I|_V$, $e_j\\mapsto t_j$, is an epimorphism. Let $\\Psi:\\mathcal O_V^{\\oplus m}\\oplus\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V$ send $e_j\\mapsto i(t_j)$ and $e'_i\\mapsto s_i$. In the abelian category $\\mathit{Mod}(\\mathcal O_V)$ [def-weil-sheaf-of-modules-category] consider the diagram with top row $0\\to\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus m}\\oplus\\mathcal O_V^{\\oplus n}\\to\\mathcal O_V^{\\oplus n}\\to0$ (inclusion and projection, a split short exact sequence), bottom row $0\\to\\mathcal I|_V\\to\\mathcal G|_V\\to(\\operatorname{Coker}\\varphi)|_V\\to0$ (exact by step 3 and step 1 (d)) and vertical maps $\\Phi,\\Psi,\\overline\\Psi|_V$. It commutes, as one checks on basis sections: $\\Psi(e_j)=i(t_j)=i(\\Phi(e_j))$; $\\pi(\\Psi(e_j))=\\pi(i(t_j))=0=\\overline\\Psi(0)$; $\\pi(\\Psi(e'_i))=\\bar s_i|_V=\\overline\\Psi(e'_i)$. The snake lemma [lem-weil-pbc-snake-lemma-abelian] gives an exact sequence $\\operatorname{Ker}\\Psi\\to\\operatorname{Ker}(\\overline\\Psi|_V)\\to\\operatorname{Coker}\\Phi$, and $\\operatorname{Coker}\\Phi=0$ since $\\Phi$ is an epimorphism; so $\\operatorname{Ker}\\Psi\\to\\operatorname{Ker}(\\overline\\Psi|_V)$ is an epimorphism by [lem-weil-pbc-abelian-exact-epi-cokernel] (b). Since $\\mathcal G$ is coherent, $\\operatorname{Ker}\\Psi$ is of finite type (condition (3) of [pqf-def-coherent] for the open $V$ and the map $\\Psi$ from a finite free module), hence $\\operatorname{Ker}(\\overline\\Psi|_V)$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (1). With step 3, $\\operatorname{Coker}\\varphi$ is coherent.",
-   "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "pqf-def-coherent",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-snake-lemma-abelian",
-    "lem-weil-pbc-abelian-exact-epi-cokernel",
-    "lem-weil-pbc-module-finite-type-image-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BY (lemma-coherent-abelian, line 1641), proof of part (3), second paragraph (local lifts s_i, generators t_j of Im(phi), the diagram with Phi, Psi, Psi-bar, and the snake lemma giving Ker(Psi) -> Ker(Psi-bar) -> 0)"
-   }
-  },
-  {
-   "text": "Part (2), the two cases in which $\\mathcal F_2$ is coherent. Let $0\\to\\mathcal F_1\\xrightarrow{f}\\mathcal F_2\\xrightarrow{g}\\mathcal F_3\\to0$ be short exact [def-weil-pbc-exact-sequence]. If $\\mathcal F_2,\\mathcal F_3$ are coherent: $f$ is a kernel of $g$ by [lem-weil-pbc-abelian-short-exact-kernel], so $\\mathcal F_1\\cong\\operatorname{Ker}g$, which is coherent by step 2; hence $\\mathcal F_1$ is coherent by step 1 (a). If $\\mathcal F_1,\\mathcal F_2$ are coherent: $g$ is an epimorphism and the complex is exact at $\\mathcal F_2$, so $g$ is a cokernel of $f$ by [lem-weil-pbc-abelian-exact-epi-cokernel] (a); hence $\\mathcal F_3\\cong\\operatorname{Coker}f$, coherent by steps 3 and 4, and $\\mathcal F_3$ is coherent by step 1 (a).",
-   "uses": [
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-short-exact-kernel",
-    "lem-weil-pbc-abelian-exact-epi-cokernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BY (lemma-coherent-abelian, line 1641), proof of part (4), first sentence: by part (3) it suffices to prove that if F_1 and F_3 are coherent so is F_2"
-   }
-  },
-  {
-   "text": "Part (2), $\\mathcal F_1,\\mathcal F_3$ coherent implies $\\mathcal F_2$ coherent. $\\mathcal F_2$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (2). Let $U\\subseteq X$ be open and $\\psi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F_2|_U$ the map of sections $s_1,\\dots,s_n\\in\\mathcal F_2(U)$, and $\\psi_3=g|_U\\circ\\psi$, the map of the sections $g(s_i)$ of $\\mathcal F_3$. In $\\mathit{Mod}(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category] the diagram with top row $0\\to0\\to\\mathcal O_U^{\\oplus n}\\xrightarrow{\\mathrm{id}}\\mathcal O_U^{\\oplus n}\\to0$, bottom row $0\\to\\mathcal F_1|_U\\to\\mathcal F_2|_U\\to\\mathcal F_3|_U\\to0$ (short exact by step 1 (d)) and vertical maps $0,\\psi,\\psi_3$ commutes, and its rows satisfy the hypotheses of [lem-weil-pbc-snake-lemma-abelian], the top map $0\\to\\mathcal O_U^{\\oplus n}$ being a monomorphism. Since $\\operatorname{Ker}(0\\to\\mathcal F_1|_U)=0$ and $\\operatorname{Coker}(0\\to\\mathcal F_1|_U)=\\mathcal F_1|_U$, the snake lemma gives an exact sequence $0\\to\\operatorname{Ker}\\psi\\xrightarrow{u}\\operatorname{Ker}\\psi_3\\xrightarrow{\\partial}\\mathcal F_1|_U$ with $u$ a monomorphism. Let $\\kappa:\\operatorname{Ker}\\partial\\to\\operatorname{Ker}\\psi_3$ be a kernel and $u':\\operatorname{Ker}\\psi\\to\\operatorname{Ker}\\partial$ the factorization of $u$; by exactness $u'$ is an epimorphism [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift], and it is a monomorphism since $\\kappa u'=u$ is, so $u'$ is an isomorphism (in an abelian category a monomorphism that is an epimorphism is an isomorphism: it is the kernel of its cokernel $0$, [def-sp-abelian]). Now $\\operatorname{Ker}\\psi_3$ is of finite type since $\\mathcal F_3$ is coherent [pqf-def-coherent], and $\\mathcal F_1|_U$ is a coherent $\\mathcal O_U$-module by [lem-weil-pbc-coherent-module-local-on-open-cover] (1); so $\\operatorname{Ker}\\partial$ is of finite type by [lem-weil-pbc-coherent-finite-type-sub-kernel] (2) on the scheme $U$, and so is $\\operatorname{Ker}\\psi\\cong\\operatorname{Ker}\\partial$ by step 1 (a). Hence $\\mathcal F_2$ is coherent.",
-   "uses": [
-    "lem-weil-pbc-module-finite-type-image-extension",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-snake-lemma-abelian",
-    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
-    "def-sp-abelian",
-    "pqf-def-coherent",
-    "lem-weil-pbc-coherent-module-local-on-open-cover",
     "lem-weil-pbc-coherent-finite-type-sub-kernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BY (lemma-coherent-abelian, line 1641), proof of part (4): Lemma 01B7 gives finite type; the diagram with rows 0 -> 0 -> O_U^n -> O_U^n -> 0 and 0 -> F_1 -> F_2 -> F_3 -> 0; the snake lemma gives 0 -> K -> K_3 -> F_1; K is the kernel of a map from a finite type module to a coherent module, of finite type by (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Part (3). For $r=0$ the zero module is coherent (step 1 (b)); for $r=1$ there is nothing to prove. For $r\\ge2$ put $\\mathcal F'=\\mathcal F_1\\oplus\\dots\\oplus\\mathcal F_{r-1}$, coherent by induction. In the additive category $\\mathit{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category], [def-sp-abelian] the biproduct $\\mathcal F'\\oplus\\mathcal F_r$ (sectionwise $\\mathcal F'(W)\\oplus\\mathcal F_r(W)$) has inclusions $\\iota_1,\\iota_2$ and projections $p_1,p_2$ with $p_1\\iota_1=\\mathrm{id}$, $p_2\\iota_2=\\mathrm{id}$, $p_2\\iota_1=0$, $\\iota_1p_1+\\iota_2p_2=\\mathrm{id}$. Hence $0\\to\\mathcal F'\\xrightarrow{\\iota_1}\\mathcal F'\\oplus\\mathcal F_r\\xrightarrow{p_2}\\mathcal F_r\\to0$ is short exact [def-weil-pbc-exact-sequence]: $\\iota_1$ is a monomorphism and $p_2$ an epimorphism (they have a left, resp. right, inverse), and $\\iota_1$ is a kernel of $p_2$ since every $t$ with $p_2t=0$ is $t=\\iota_1(p_1t)$, so $\\operatorname{Im}\\iota_1=\\operatorname{Ker}p_2$. By part (2) (step 6) $\\mathcal F'\\oplus\\mathcal F_r=\\mathcal F_1\\oplus\\dots\\oplus\\mathcal F_r$ is coherent. A module isomorphic to a coherent one is coherent by step 1 (a).",
+   "text": "The cokernel is finite type as an epimorphic image of G. Its relation kernels are finite type by lem-weil-pbc-coherent-cokernel-relations. These are exactly the two fields of IsCoherent.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-abelian",
+    "lem-weil-pbc-module-finite-type-image-extension",
+    "lem-weil-pbc-coherent-cokernel-relations",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In a short exact sequence with coherent end terms, the middle term is finite type by finiteType_image_extension and its relation kernels are finite type by lem-weil-pbc-coherent-extension-relations. If the first and middle terms are coherent, identify the last with the cokernel of the first map; if the middle and last are coherent, identify the first with the kernel of the last map. Transport coherence along the universal-property isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-image-extension",
+    "lem-weil-pbc-coherent-extension-relations",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-abelian-short-exact-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on r. The empty biproduct is zero by the biproduct universal property. For Fin (r+1), the inclusions from the tail biproduct and the projection onto index zero form a split short exact sequence. Construct its retraction and section using the biproduct universal properties and check the splitting identity on each projection using Fin.cases. Apply the extension conclusion to the coherent tail and the coherent first summand. Isomorphism invariance and zero coherence were established directly in the first step.",
+   "uses": [
     "def-weil-pbc-exact-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BY (lemma-coherent-abelian), part (4) applied to 0 -> F_1 -> F_1 (+) F_2 -> F_2 -> 0 and induction on r (the direct sum statement is not stated in Stacks; written out by the agent from part (4))"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-  "lem-weil-pbc-coherent-finite-type-sub-kernel",
-  "def-sp-abelian",
   "lem-weil-pbc-module-finite-type-image-extension",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
-  "lem-weil-pbc-snake-lemma-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-coherent-finite-type-sub-kernel",
+  "lem-weil-pbc-coherent-cokernel-relations",
+  "lem-weil-pbc-coherent-extension-relations",
   "lem-weil-pbc-abelian-exact-epi-cokernel",
   "lem-weil-pbc-abelian-short-exact-kernel",
-  "lem-weil-pbc-coherent-module-local-on-open-cover"
+  "def-weil-pbc-exact-sequence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BY (label lemma-coherent-abelian, line 1641), parts (2)-(4) with proof; part (3) of this node (direct sums) and the preliminary facts of step 1 written out by the agent"
+  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), proof of (3) and (4); T1 implements kernel, universal-property transport, zero and finite sums, and separates the two relation-kernel arguments into named nodes."
  },
  "mathlib_searches": [
   {
@@ -233,5 +169,15 @@
   "group": "E1",
   "result": "pass",
   "note": "X : RingedSpace.{u} (node allows any ringed space; scheme case via X.toRingedSpace, X.Modules defeq carrier); IsCoherent = recorded C1 predicate; (1) kernel f/cokernel f from SheafOfModules.instAbelian; (2) S.ShortExact with all three two-of-three implications; (3) Fin r family, ⨁ F via local HasFiniteBiproducts.of_hasFiniteProducts (needed: Abelian.hasFiniteBiproducts is not an instance; biproduct is Prop-chosen so canonical), r=0 zero clause, iso clause; no hollow hypotheses, no let, node fields other than lean unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-eb846",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T211618-L-1058419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, dependency records, Stacks 01BY, repository diffs, clean compilation and axiom probes."
  }
 }
