@@ -71,7 +71,7 @@ def scan(tree):
 
 def high(path):
     # blueprint/sec/_section.md and blueprint/sec/sk/_section.md.
-    return path.name == '_section.md' and len(path.parts) <= 4
+    return len(path.parts) <= 3 or (path.name == '_section.md' and len(path.parts) <= 4) or (len(path.parts) == 4 and path.name == path.parent.name + '.proof.md')
 
 
 def fields(data):
@@ -201,7 +201,7 @@ def cut(args):
                     parent = path.parent
                 else:
                     # Keep the statement file intact; its refinements use a deeper folder.
-                    parent = path.parent / target
+                    parent = path.parent
                 dest = parent / (ident + '.md')
                 write(out / dest, node_text(node, ns))
                 if node.get('proof'):
@@ -298,6 +298,22 @@ def check(args):
         for target in re.findall(r'\[((?:def|lem|prop|thm|cor|sk|sec|d-|p-|l-|aux)[A-Za-z0-9_.-]*)\](?!\()', body):
             if target not in bp:
                 errors.append(f'{path}: unresolved citation {target}')
+    # A directory newly introduced by this cut is a section in the renderer.
+    # Its index must state the section, rather than merely label a container.
+    base_dirs = {pathlib.Path(rel).parent for rel in baseline}
+    for folder in sorted((root / 'blueprint').rglob('*')):
+        if not folder.is_dir() or folder.relative_to(root) in base_dirs:
+            continue
+        section = folder / '_section.md'
+        if not section.is_file():
+            errors.append(f'{folder.relative_to(root)}: new section missing _section.md')
+            continue
+        try:
+            front, body = parse(section)
+            if front.get('id') != folder.name or not body or front.get('kind') == 'proof':
+                errors.append(f'{section.relative_to(root)}: section must hold its statement')
+        except (ValueError, tomllib.TOMLDecodeError) as ex:
+            errors.append(str(ex))
     for rel in baseline:
         if not (root / rel).exists():
             errors.append('blueprint file removed: ' + rel)
@@ -311,8 +327,9 @@ def check(args):
         errors.append('new cycle: ' + ', '.join(cycle))
     if (root / '.git').exists():
         paths = subprocess.check_output(['git', '-C', str(root), 'diff', '--name-only', 'HEAD'], text=True).splitlines()
+        paths += subprocess.check_output(['git', '-C', str(root), 'ls-files', '--others', '--exclude-standard'], text=True).splitlines()
         for path in paths:
-            if not path.startswith('blueprint/'):
+            if not path.startswith('blueprint/') and path != '.blueprint-cut.json':
                 errors.append('changed outside blueprint/: ' + path)
     for error in sorted(set(errors)):
         print('ERROR ' + error)
