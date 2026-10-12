@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.RingTheory.PrescribedResidueBasisSpreads
-import Sheaf.RingTheory.SmoothLocalizationConormalSplit
+import Sheaf.RingTheory.SmoothAtPrimeConormalData
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialData
 
 /-!
 # Free conormal basis near a smooth prime
@@ -85,6 +85,9 @@ theorem exists_smoothAtPrime_free_conormal_basis
           (KaehlerDifferential R
             (Localization.Away
               (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)))) := by
-  sorry
+  rcases exists_smoothAtPrime_conormal_data R n m f q hs with
+    ⟨a, ha, V, c, hcard, hbound, hsm, hb⟩
+  refine ⟨a, ha, V, c, hcard, hbound, hsm, hb, ?_⟩
+  exact exists_smoothAtPrime_differential_data R n m f a V c q ha hcard hbound hsm hb
 
 end Algebra

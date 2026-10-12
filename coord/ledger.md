@@ -9084,3 +9084,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/U1/Sheaf.AlgebraicGeometry.EtaleSectionsTriangleNaturality (stage 3; reviewer PASS; first push; landing 20261012T184348-L-4021707 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationBijective (stage 3; reviewer PASS; first push; landing 20261012T184349-L-4021810 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/U2/Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing (stage 3; reviewer PASS; first push; landing 20261012T184349-L-4021911 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/U2/Sheaf.RingTheory.SmoothAtPrimeFreeConormalBasis (stage 3; reviewer PASS; first push; landing 20261012T184349-L-4022043 (interface); batch 20261012T184234; modules 3; new nodes 2)

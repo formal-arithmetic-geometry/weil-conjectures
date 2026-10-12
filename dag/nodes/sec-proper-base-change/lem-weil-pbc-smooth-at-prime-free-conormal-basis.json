@@ -31,69 +31,22 @@
  ],
  "proof": [
   {
-   "text": "(A smooth principal neighbourhood and its conormal sequence.) By smoothness at $\\mathfrak q$ [def-weil-pbc-singular-ideal], choose $b\\in A\\setminus\\mathfrak q$ such that $A_b$ is a smooth $R$-algebra, and choose $h\\in P$ mapping to $b$. Apply [lem-weil-pbc-smooth-localization-conormal-split] to $b$: with $M=(I/I^2)_b$ and $F=\\bigoplus_{i=1}^nA_b\\,\\mathrm dx_i$, the localized conormal map gives a split exact sequence $0\\to M\\to F\\to\\Omega_{A_b/R}\\to0$. Hence $M$ and $\\Omega_{A_b/R}$ are finite projective $A_b$-modules: each is a direct summand of the finite free module $F$.",
+   "text": "Apply the conormal data component to obtain the localization, selected subset, and conormal basis, then apply the differential data component to the resulting data and assemble the conjunction.",
    "uses": [
-    "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-smooth-localization-conormal-split"
+    "lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data",
+    "lem-weil-pbc-smooth-at-prime-free-conormal-basis-differential-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07C6 (lemma-find-strictly-standard): Algebra Tags 00S1, 00S7 and Definitions 00T2, 00TB give the split injection after a localization outside q"
-   }
-  },
-  {
-   "text": "(Select some of the given relations at the prime.) Let $\\mathfrak q_b\\subset A_b$ be the prime induced by $\\mathfrak q$ and $\\kappa=\\kappa(\\mathfrak q)$. The classes of $f_1,\\dots,f_m$ generate $I/I^2$, hence their images span $M\\otimes_{A_b}\\kappa$. Choose a subset $V\\subseteq\\{1,\\dots,m\\}$ whose images are a basis, and put $c=|V|$, so $c\\le m$. Tensoring the split exact sequence of step 1 with $\\kappa$ remains split exact. Its middle term has dimension $n$, and its first term has dimension $c$; therefore $c\\le n$ and $\\Omega_{A_b/R}\\otimes_{A_b}\\kappa$ has dimension $n-c$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07C6 (lemma-find-strictly-standard): choose f_1,...,f_c forming a basis of I/I^2 tensor kappa(q)"
-   }
-  },
-  {
-   "text": "(Spread the prescribed conormal basis.) A finite projective module is finitely presented [lem-weil-pbc-finite-projective-finitely-presented], and its localization at a prime is finite free [lem-weil-pbc-finite-projective-rank-locally-constant]. Its rank at $\\mathfrak q_b$ is $c$: if $M_{\\mathfrak q_b}\\cong A_{b,\\mathfrak q_b}^{\\oplus n}$, then tensoring with $\\kappa$ gives $M\\otimes_{A_b}\\kappa\\cong\\kappa^{\\oplus n}$ (localization at $\\mathfrak q_b$ does not change the tensor product with $\\kappa$, on which $A_b\\setminus\\mathfrak q_b$ already acts invertibly), so $n=\\dim_\\kappa M\\otimes_{A_b}\\kappa=c$ by step 2. Thus [lem-weil-pbc-prescribed-residue-basis-spreads], applied over $A_b$ to $M$ and the selected classes of the $f_j$, gives $s/1\\in A_b\\setminus\\mathfrak q_b$ such that those same classes form a basis of $M_{s/1}$. Write $s/1=u/b^e$ with $u\\in A$; since $s/1\\notin\\mathfrak q_b$, $u\\notin\\mathfrak q$, and localizing at $u$ gives the same result after possibly also inverting $b$. Put $a=hu\\in P$. Its image $\\bar a=bu$ is outside $\\mathfrak q$, $(I/I^2)_{\\bar a}$ is free on the classes of $f_j$, $j\\in V$, and $A_{\\bar a}=(A_b)_{u/1}$ is smooth over $R$ by [lem-weil-pbc-smooth-ring-map-principal-localization].",
-   "uses": [
-    "lem-weil-pbc-finite-projective-finitely-presented",
-    "lem-weil-pbc-finite-projective-rank-locally-constant",
-    "lem-weil-pbc-prescribed-residue-basis-spreads",
-    "lem-weil-pbc-smooth-ring-map-principal-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07C6 (lemma-find-strictly-standard): after replacing a by aa' outside q, the selected f_j form a basis of (I/I^2)_a"
-   }
-  },
-  {
-   "text": "(Spread the basis of differentials and take a common shrink.) The finite projective $A_b$-module $N=\\Omega_{A_b/R}$ is finitely presented [lem-weil-pbc-finite-projective-finitely-presented], and by step 2 its localization at $\\mathfrak q_b$ is free of rank $n-c$. Apply [lem-weil-pbc-finitely-presented-free-at-prime-spreads] to obtain $t/1\\in A_b\\setminus\\mathfrak q_b$ such that $N_{t/1}$ is free of rank $n-c$. Choose a numerator $v\\in A\\setminus\\mathfrak q$ for $t/1$ and replace the element $a=hu$ of step 3 by $huv$. Further localization preserves the basis of $(I/I^2)_{bu}$ and smoothness, while $N_{uv}=(\\Omega_{A_b/R})_{uv}$ is canonically $\\Omega_{A_{buv}/R}$ by [lem-weil-pbc-kahler-differentials-localization]. Thus this $a$ and $V$ satisfy (i)--(iii).",
-   "uses": [
-    "lem-weil-pbc-finite-projective-finitely-presented",
-    "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-kahler-differentials-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07C6 (lemma-find-strictly-standard): after a further shrink, dx_{c+1},...,dx_n map to a basis of (Omega_{A/R})_a; the statement needs only freeness of rank n-c"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-smooth-localization-conormal-split",
-  "lem-weil-pbc-finite-projective-finitely-presented",
-  "lem-weil-pbc-finite-projective-rank-locally-constant",
-  "lem-weil-pbc-prescribed-residue-basis-spreads",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
-  "lem-weil-pbc-kahler-differentials-localization"
+  "lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data",
+  "lem-weil-pbc-smooth-at-prime-free-conormal-basis-differential-data"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07C6 (lemma-find-strictly-standard), with Algebra Lemmas 00S1, 00S7, 0GWM and 00NX used to spell out the two shrinking arguments"
+  "place": "Lemma Tag 07C6, decomposed into conormal and differential localization components"
  },
  "mathlib_searches": [
   {
@@ -171,5 +124,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T184349-L-4022043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
