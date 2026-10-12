@@ -6,8 +6,9 @@ Authors: SHEAF group Q2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeFieldFiltration
+import Sheaf.AlgebraicGeometry.Curve.UnderlyingAbelianAssertions
+import Sheaf.AlgebraicGeometry.Curve.ConstructibleShortExactAssertions
 
 /-! # Prime devissage for constructible module sheaves
 
@@ -47,6 +48,11 @@ theorem IsCurve.assertions_of_constructible_prime_devissage
       [Scheme.IsConstructibleSheaf G], IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f G)
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsConstructibleSheaf F] : IsCurve.Assertions Λ f F := by
-  sorry
+  have hfil := Scheme.constructible_hasPrimeFieldFiltration Λ C F
+  induction hfil with
+  | prime r F G e =>
+    exact IsCurve.assertions_of_underlying_abelian_iso f e (H r G)
+  | extension S hS h₁ h₃ ih₁ ih₃ =>
+    exact IsCurve.Assertions.of_constructible_shortExact Λ f hS ih₁ ih₃
 
 end AlgebraicGeometry

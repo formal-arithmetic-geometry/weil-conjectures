@@ -1,0 +1,135 @@
+{
+ "id": "lem-v2-underlying-abelian-assertions",
+ "kind": "statement",
+ "title": "Curve assertions are invariant under forgetting coefficient scalars",
+ "statement": "Let $k$ be a field, $f:X\\to\\operatorname{Spec}k$ a scheme morphism, and $\\Lambda,R$ commutative rings. Let $F$ and $G$ be constructible sheaves of $\\Lambda$-modules and $R$-modules respectively on $X_{\\mathrm{\\acute et}}$ [def-weil-pbc-etale-sheaves], [def-constructible-constructible]. Suppose their underlying abelian sheaves are isomorphic. If the eight conditional assertions $\\mathcal C(X,G)$ [def-weil-pbc-eight-curve-assertions] hold, then $\\mathcal C(X,F)$ holds. No curve, reducedness, finiteness of the coefficient rings, or algebraic closedness assumption is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Theorem 03SC, second proof paragraph (prime-field scalars on the same abelian sheaf)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-constructible",
+  "def-weil-pbc-eight-curve-assertions"
+ ],
+ "proof": [
+  {
+   "text": "Commutation of the stalk functor with forgetting modules follows from preservation of filtered colimits (Mathlib Point.sheafFiberCompIso). Compose the two commutation isomorphisms and the given abelian isomorphism to obtain a stalk additive equivalence. It preserves nsmul, hence primary and invertible-order torsion.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the functor Sheaf.H to the isomorphism, obtaining inverse equivalences in every degree. Transfer subsingleton and finite groups for C1-C5. Constructibility of both sheaves is assumed.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of Etale.cohomologyMap with coefficient morphisms conjugates each comparison by the equivalences on the source and pullback. Prove injectivity and surjectivity by composing those equivalences, giving C6-C8.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-primary-torsion",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Theorem 03SC, second proof paragraph (prime-field scalars on the same abelian sheaf); module-coefficient formalization by V2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules over a finite ring has a finite filtration whose factors are sheaves of vector spaces over prime fields",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves over finite rings reduce to prime field sheaves by primary decomposition and exact sequence devissage",
+   "results": "Eight hits (including CondensedMod.ofSheafStonean and SheafOfModules.IsFiniteType); no prime-field filtration or curve assertions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "prime.*devissage|devissage.*prime",
+   "results": "No Mathlib match; the source library provides Assertions.of_shortExact, but Curve.Reductions imports the item and cannot be imported here. Local rg also checked HasPrimeFieldFiltration, of_constructible_shortExact, assertions_of_underlying_abelian_iso and finite.*filtration in both library roots and Mathlib/CategoryTheory/Sites.",
+   "date": "2026-10-12",
+   "verdict": "no exact usable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Short-exact extension step, used in Theorem 03SC second paragraph to reduce finite coefficients to prime fields",
+   "via": [
+    "lem-weil-pbc-constructible-prime-module-devissage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.UnderlyingAbelianAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/UnderlyingAbelianAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_of_underlying_abelian_iso",
+  "statement": "theorem assertions_of_underlying_abelian_iso {Λ R : Type (u + 1)} [CommRing Λ] [CommRing R] {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)} [Scheme.IsConstructibleSheaf F] [Scheme.IsConstructibleSheaf G] (e : (sheafCompose _ (forget₂ (ModuleCat.{u + 1} R) AddCommGrpCat.{u + 1})).obj G ≅ (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) (h : Assertions R f G) : Assertions Λ f F",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T054000-L-2648778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T054000-L-2648778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
