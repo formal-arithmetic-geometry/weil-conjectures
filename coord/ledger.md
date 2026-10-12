@@ -8391,3 +8391,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/S1/Sheaf.AlgebraicGeometry.Morphisms.NormalPointedFamilyApproximation (stage 3; reviewer PASS; first push; landing 20261012T154246-L-2435413 (interface); batch 20261012T154240; modules 3; new nodes 2)
 - 15:42 L: merged deliver/X2/Sheaf.ConstructibleSheaf.TorsorDiagonalEvaluation (stage 3; reviewer PASS; first push; landing 20261012T154246-L-2435526 (interface); batch 20261012T154240; modules 3; new nodes 2)
 - 15:48 L: returned deliver/T2/Sheaf.AlgebraicGeometry.ProjLineSerreVanishing (reviewer RETURN: (the landing tools, head cfee29ebd) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 15:48 L: merged deliver/A2/Sheaf.RingTheory.MinimalGradedPresentationExists (stage 3; reviewer PASS; after a return; landing 20261012T154825-L-2471517 (proof); batch 20261012T154824; modules 1; new nodes 0)

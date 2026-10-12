@@ -13,17 +13,17 @@
  ],
  "proof": [
   {
-   "text": "Restrict scalars from S=k[x_0,x_1] to k via constant polynomials. In Q=N/IN, every polynomial acts by its constant coefficient. Thus the finite homogeneous generating set gives a finite k-spanning set of Q. Extract a k-basis from these images and retain the homogeneous lifts n_i with their integer degrees d_i. This uses finite-dimensional linear algebra, and also covers the empty basis when Q=0.",
+   "text": "Restrict scalars from S=k[x_0,x_1] to k via the constant-polynomial embedding. Prove that f-C(constantCoeff f) lies in I using Mathlib MvPolynomial.mem_pow_idealOfVars_iff' at power 1. Thus every polynomial acts on N/IN by its constant coefficient. A span induction shows the images of the finite homogeneous generating set span the quotient over k. Apply Mathlib exists_linearIndependent to those images, whose finite basis index set is reindexed by Fin r. Choose lifts from the original homogeneous generating set and choose their degrees. This handles the empty quotient basis without a separate case.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Take F=Fin r → S. Its degree-j subgroup consists of tuples whose ith coefficient is homogeneous of degree j-d_i, or zero when j-d_i<0. Coordinatewise homogeneous polynomial decomposition, with degrees translated by d_i, gives an internal direct sum: all translated supports have finite union, and uniqueness follows coordinatewise. Homogeneous multiplication adds degrees. The standard basis e_i lies in degree d_i. Define q(a)=sum_i a_i n_i; the given scalar compatibility proves that q preserves degrees.",
+   "text": "Construct F=Fin r →₀ S explicitly, with its standard basis Finsupp.basisSingleOne. Flatten its polynomial coordinates into finitely supported k-coefficients indexed by Fin r × (Fin 2 →₀ ℕ). Define the degree-j subgroup by restricting support to monomials t in coordinate i satisfying degree(t)+d_i=j. These support subsets partition the coefficient index set; disjointness of supported submodules and their supremum being top prove internality, transported through the flattening linear equivalence. The homogeneous product degree formula proves scalar compatibility, and a standard basis vector has degree d_i. Define q by Finsupp.linearCombination S n. For each coefficient of a homogeneous vector, either the coefficient is zero or it is homogeneous of a degree m with m+d_i=j. The given hsmul and the finite sum formula prove q preserves degrees. The local shifted-grading facts follow the already proved construction in Sheaf.RingTheory.GradedFreeCover; that module and its generation theorem are not needed as proof dependencies.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply [lem-sc-p1-graded-nakayama-generation] to the lifted homogeneous basis to see that q is surjective. If q(a) is in IN, independence of the basis modulo I forces every constant coefficient of a_i to be zero. The kernel of constant coefficient is the ideal I=(x_0,x_1), so every a_i lies in I. Expanding a in the finite standard basis gives a in IF, which is minimality. The empty-basis case gives N=0 by the same graded Nakayama theorem.",
+   "text": "Derive Module.Finite S N from the original finite spanning set. Apply [lem-sc-p1-graded-nakayama-generation] to the lifted quotient basis, obtaining span S (range n)=top. Mathlib span_range_eq_top_iff_surjective_finsuppLinearCombination gives surjectivity of q. If q(a) belongs to IN, its quotient class is zero. Expand a in the standard basis and replace each polynomial action on the quotient by its constant coefficient. Mathlib Fintype.linearIndependent_iff, applied to the chosen quotient basis, forces all constant coefficients to vanish. The power-1 ideal-of-variables criterion puts each polynomial coefficient in I. The finite standard-basis expansion and Submodule.smul_mem_smul show a belongs to IF. All formulas also hold for Fin 0.",
    "uses": [
     "lem-sc-p1-graded-nakayama-generation"
    ],
@@ -36,7 +36,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "Graded Hilbert syzygy argument, expanded by the standard minimal-presentation construction in step 1 of DAG node lem-sc-p1-graded-nakayama-free; not a quoted blueprint proof."
+  "place": "Lean formalization by group A2 of the existing three-step minimal-presentation construction; shifted-support implementation follows the proved private helpers of Sheaf.RingTheory.GradedFreeCover (group A3). Source: graded Hilbert syzygy expansion of step 1 of lem-sc-p1-graded-nakayama-free."
  },
  "mathlib_searches": [
   {
@@ -105,10 +105,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-92dcd",
-  "group": "P2",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T130620-L-1309762",
-  "kind": "interface"
+  "landing": "20261012T154825-L-2471517",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
