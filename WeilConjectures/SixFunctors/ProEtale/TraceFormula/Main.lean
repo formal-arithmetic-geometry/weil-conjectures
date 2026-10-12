@@ -99,6 +99,30 @@ theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
             (G.ctf_upperStar i (.mk hi) hW)) :=
   sorry
 
+/-- Blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace formula for an arbitrary
+Frobenius coefficient morphism `φ : LΦ₁^* K ⟶ K`, with no invertibility assumed. For a Weil
+complex on the geometric base change `X = X₀ ×_{𝐅_q} Ω` of a separated finite type `X₀/𝐅_q`,
+`Ω` algebraically closed, whose Frobenius is the base change of the `q`-power Frobenius of `X₀`,
+and every `m ≥ 1`,
+
+`tr_A(F_{c,m}(φ) ∣ RΓ_c(X, K)) = ∑_{x ∈ X₀(𝐅_{q^m})} tr_A(φ_{m, x̄} ∣ K_x̄)`. -/
+theorem trace_globalOperator_eq_sum_trace_stalkFrobenius_of_coeff {Ω : Type u} [Field Ω]
+    [IsAlgClosed Ω]
+    (G : GeometricOperations A (Spec (.of Ω))) {aX : X ⟶ Spec (.of Ω)} [HasCompactification aX]
+    (W : WeilComplex (A := A) aX) {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k)) [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀]
+    (σ : Spec (.of Ω) ⟶ Spec (.of k)) (p : X ⟶ X₀) (hΦ : W.IsModelFrobenius f₀ σ p)
+    (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m)
+    [IsProper (haveI := hΦ.isGeometric; W.graph G hctf m).snd]
+    [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
+    [Fintype {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x}]
+    [∀ x : Spec (.of Ω) ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)] :
+    haveI := hΦ.isGeometric
+    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hctf m) hctf) =
+      ∑ x : {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
+        MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2.2) :=
+  sorry
+
 /-- **The finite-coefficient Lefschetz trace formula.** For every Weil datum on the
 geometric base change `X = X₀ ×_{𝐅_q} Ω` of a separated finite type `X₀/𝐅_q`, `Ω`
 algebraically closed, whose Frobenius is the base change of the `q`-power Frobenius of `X₀`,
@@ -123,6 +147,6 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius {Ω : Type u} [Field Ω
     MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hctf m) hctf) =
       ∑ x : {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
         MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2.2) :=
-  sorry
+  trace_globalOperator_eq_sum_trace_stalkFrobenius_of_coeff G W f₀ σ p hΦ hctf m hm
 
 end AlgebraicGeometry.ProEtale
