@@ -9,7 +9,8 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
+import Sheaf.CategoryTheory.CechResolutionColumns
+import Sheaf.CategoryTheory.CechResolutionTotal
 
 /-!
 # The Čech-to-derived spectral sequence
@@ -107,8 +108,11 @@ theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
           (ComplexShape.up ℕ)).obj D ≅
         (cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧
-      ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) :=
-  sorry
+      ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) := by
+  let I := injectiveResolution F
+  refine ⟨Sheaf.cechResolutionDoubleComplex I X π, ?_, ?_⟩
+  · exact fun q ↦ Sheaf.cechResolutionDoubleComplex_columns I X π q
+  · exact fun n ↦ Sheaf.cechResolutionDoubleComplex_total I X π hπ n
 
 /-- **The Čech-to-derived spectral sequence, with enough injectives.** The special case of
 `Sheaf.exists_cechToDerivedSpectralSequence` where abelian sheaves on `C` have enough injectives,
