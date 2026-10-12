@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-tensor-restrict-extend-module-natural",
+ "kind": "statement",
+ "title": "Naturality of the module tensor restriction-extension comparison",
+ "statement": "Let A and B be commutative rings in one universe and let $\\rho:A\\to B$ be a unital ring homomorphism. For every B-module M and A-module N there are A-linear isomorphisms $e_{M,N}:\\operatorname{Res}_\\rho(M\\otimes_B\\operatorname{Ext}_\\rho N)\\cong\\operatorname{Res}_\\rho(M)\\otimes_A N$, with extension of scalars [def-weil-module-base-change] and ordinary module tensor products [def-weil-pbc-module-tensor-product]. They can be chosen natural simultaneously in both modules: for all B-linear $f:M\\to M\\prime$ and A-linear $g:N\\to N\\prime$, $e_{M\\prime,N\\prime}\\circ\\operatorname{Res}_\\rho(f\\otimes_B\\operatorname{Ext}_\\rho g)=(\\operatorname{Res}_\\rho f\\otimes_A g)\\circ e_{M,N}$. There are no flatness or nonzero hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y1, proof: tensor base-change identity; https://stacks.math.columbia.edu/tag/06Y1"
+ },
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Give B its A-algebra structure induced by ρ and M its restricted A-action. The scalar tower identity is (ρ(a)b)m = ρ(a)(bm). Mathlib TensorProduct.AlgebraTensorModule.cancelBaseChange A B B M N gives a B-linear equivalence M tensor_B (B tensor_A N) to M tensor_A N. Restrict that equivalence to A and bundle it as a module isomorphism. Its formula is m tensor (b tensor n) maps to (b m) tensor n; its inverse sends m tensor n to m tensor (1 tensor n). The balanced relations and inverse identities are exactly those of cancelBaseChange.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For B-linear f:M→M′ and A-linear g:N→N′, prove the naturality equality by two tensor inductions, first on the outer B-tensor and then on the inner A-tensor. Zero and addition cases follow from additivity and tensor distributivity. On m tensor (b tensor n) the two sides are (b f(m)) tensor g(n) and f(b m) tensor g(n), equal by B-linearity of f. No flatness, nonzero-ring or finiteness hypothesis is used.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Expanded the module-level identity implicit in the proof of Stacks Tag 06Y1; Lean proof uses Mathlib cancelBaseChange and tensor induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product restriction of scalars commutes with extension of scalars naturally in both modules",
+   "results": "Service returned Internal Server Error; search unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cancelBaseChange\"",
+   "results": "Found TensorProduct.AlgebraTensorModule.cancelBaseChange and its pure tensor formulas, also lTensor_comp_cancelBaseChange. The equivalence needs bundling in ModuleCat and naturality in both arguments.",
+   "date": "2026-10-12",
+   "verdict": "ingredients for a complete proof"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|preservesColimit_restrictScalars|mapTotal|totalComparison",
+   "results": "Found tensor equivalence in TensorProduct/Tower.lean and restriction colimit preservation in ModuleCat/ChangeOfRings.lean. Source-library search also found the already proved HomologicalComplex₂.mapTotalIso.",
+   "date": "2026-10-12",
+   "verdict": "module-level ingredients and existing totalization comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TensorRestrictExtendScalars",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "module-level tensor identity in the ring-level base-change argument of derived pullback composition",
+   "via": [
+    "lem-pc-tensor-restrict-extend-scalars",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-kflat-extension-of-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule",
+  "file": "lean/Sheaf/Algebra/Homology/TensorRestrictExtendScalarsModule.lean",
+  "declaration": "ModuleCat.exists_tensorRestrictExtend_module_natural",
+  "statement": "theorem exists_tensorRestrictExtend_module_natural\n    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B) :\n    ∃ e : ∀ (M : ModuleCat.{u} B) (N : ModuleCat.{u} A),\n      (restrictScalars ρ).obj (M ⊗ (extendScalars ρ).obj N) ≅\n        (restrictScalars ρ).obj M ⊗ N,\n      ∀ (M M' : ModuleCat.{u} B) (N N' : ModuleCat.{u} A)\n        (f : M ⟶ M') (g : N ⟶ N'),\n        (restrictScalars ρ).map (f ⊗ₘ (extendScalars ρ).map g) ≫ (e M' N').hom =\n          (e M N).hom ≫ ((restrictScalars ρ).map f ⊗ₘ g)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135252-L-1677076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135252-L-1677076",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

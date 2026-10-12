@@ -14,15 +14,14 @@
  ],
  "proof": [
   {
-   "text": "In every bidegree (p,q), the balanced A-linear maps l tensor (b tensor k) -> (b l) tensor k and l tensor k -> l tensor (1 tensor k) are inverse. The A-balancing follows from the action through the ring map, and the B-balancing from associativity of the B-action. Tensor induction verifies both composites. This is the underlying module comparison of TensorProduct.AlgebraTensorModule.cancelBaseChange, with scalar actions induced by the given ring map.",
+   "text": "Use the natural module isomorphisms of [lem-pc-tensor-restrict-extend-module-natural]. For the tensor bicomplex T of L and Ext(K), assemble them in the second complex degree with HomologicalComplex.Hom.isoOfComponents. Its differential compatibility is the naturality equality with f the identity and g the differential of K. Assemble in the first degree with isoOfComponents again. Apply HomologicalComplex.Hom.ext to reduce compatibility to each second-degree component; naturality with f the differential of L and g the identity proves it. This constructs a bicomplex isomorphism f between Res(T) and the tensor bicomplex of Res(L) and K.",
    "uses": [
-    "def-weil-module-base-change",
-    "def-weil-pbc-module-tensor-product"
+    "lem-pc-tensor-restrict-extend-module-natural"
    ],
    "elementary": true
   },
   {
-   "text": "Naturality commutes with both differentials: the first identity follows from B-linearity of the differential of L; the second follows from A-linearity of the differential of K. Apply the maps to every coproduct summand with p+q=n. Restriction of scalars preserves coproducts (ModuleCat.preservesColimit_restrictScalars), so these give inverse A-linear maps on the total degree terms. Coproduct extensionality and the two differential identities show they commute with the signed total differential. They form inverse cochain maps. No boundedness or flatness assumption is used.",
+   "text": "Restriction of scalars preserves all coproducts of module objects, by Mathlib ModuleCat.preservesColimit_restrictScalars. The source-library HomologicalComplex₂.mapTotalIso, in WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap, therefore identifies Tot(Res(T)) with Res(Tot(T)). Compose its inverse with HomologicalComplex₂.total.mapIso f. By the definition of mapBifunctor [def-pc-tensor-complex-sheaves], this is precisely the required cochain-complex isomorphism. All coproducts exist even for unbounded integer-indexed complexes.",
    "uses": [
     "def-pc-tensor-complex-sheaves"
    ],
@@ -30,14 +29,12 @@
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-module-base-change",
-  "def-weil-pbc-module-tensor-product"
+  "lem-pc-tensor-restrict-extend-module-natural",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06Y1, lemma-base-change-K-flat, proof; read at https://stacks.math.columbia.edu/tag/06Y1"
+  "by": "agent",
+  "reason": "Lean assembly of the tensor identity of Stacks Tag 06Y1 from the proved module comparison and source-library mapTotalIso."
  },
  "mathlib_searches": [
   {
@@ -109,9 +106,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T110320-L-622160",
+  "landing": "20261012T135252-L-1677076",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

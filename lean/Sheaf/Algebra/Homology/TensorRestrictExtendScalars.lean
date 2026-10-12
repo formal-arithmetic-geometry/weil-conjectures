@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule
+import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-!
 # Tensor total complexes and restriction of scalars
@@ -53,6 +55,38 @@ theorem nonempty_tensorRestrictExtendScalarsIso
             (curriedTensor _))) ≅
         mapBifunctor
           (((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj L)
-          K (curriedTensor _)) := by sorry
+          K (curriedTensor _)) := by
+  classical
+  obtain ⟨e, he⟩ := ModuleCat.exists_tensorRestrictExtend_module_natural ρ
+  let T := (((curriedTensor (ModuleCat B)).mapBifunctorHomologicalComplex
+    (.up ℤ) (.up ℤ)).obj L).obj
+      (((ModuleCat.extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj K)
+  let : (ModuleCat.restrictScalars ρ).PreservesTotalComplex T (.up ℤ) :=
+    fun n ↦ inferInstance
+  let t := (HomologicalComplex₂.mapTotalIso (ModuleCat.restrictScalars ρ) T (.up ℤ)).symm
+  let f :
+      ((((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).mapHomologicalComplex
+        (.up ℤ)).obj T) ≅
+      (((curriedTensor (ModuleCat A)).mapBifunctorHomologicalComplex
+        (.up ℤ) (.up ℤ)).obj
+          (((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj L)).obj K :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun i ↦ HomologicalComplex.Hom.isoOfComponents (fun j ↦ e (L.X i) (K.X j))
+        (by
+          intro j j' hj
+          change (e (L.X i) (K.X j)).hom ≫ (ModuleCat.restrictScalars ρ).obj (L.X i) ◁ K.d j j' =
+            (ModuleCat.restrictScalars ρ).map (L.X i ◁ (ModuleCat.extendScalars ρ).map (K.d j j')) ≫
+              (e (L.X i) (K.X j')).hom
+          exact (he (L.X i) (L.X i) (K.X j) (K.X j') (𝟙 _) (K.d j j')).symm))
+      (by
+        intro i i' hi
+        apply HomologicalComplex.Hom.ext
+        funext j
+        change (e (L.X i) (K.X j)).hom ≫ (ModuleCat.restrictScalars ρ).map (L.d i i') ▷ K.X j =
+          (ModuleCat.restrictScalars ρ).map (L.d i i' ▷ (ModuleCat.extendScalars ρ).obj (K.X j)) ≫
+            (e (L.X i') (K.X j)).hom
+        simpa [MonoidalCategory.whiskerLeft, MonoidalCategory.whiskerRight] using
+          (he (L.X i) (L.X i') (K.X j) (K.X j) (L.d i i') (𝟙 _)).symm)
+  exact ⟨t ≪≫ HomologicalComplex₂.total.mapIso f (.up ℤ)⟩
 
 end CochainComplex

@@ -7861,3 +7861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent (stage 3; reviewer PASS; first push; landing 20261012T135251-L-1676677 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/M1/Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete (stage 3; reviewer PASS; first push; landing 20261012T135252-L-1676830 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/M1/WeilConjectures.SixFunctors.Etale.Gabber (stage 3; reviewer PASS; first push; landing 20261012T135252-L-1676928 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/M2/Sheaf.Algebra.Homology.TensorRestrictExtendScalars (stage 3; reviewer PASS; first push; landing 20261012T135252-L-1677076 (interface); batch 20261012T135212; modules 2; new nodes 1)
