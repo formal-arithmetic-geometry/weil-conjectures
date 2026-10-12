@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-brown-stage-sequence",
+ "kind": "statement",
+ "title": "Brown initial and kernel-killing stages",
+ "statement": "Let C be a pretriangulated category [def-weil-triangulated-category] with morphism universe v and coproducts indexed by Type v. Let I : Type v, E : I → C, and H : C opposite → AddCommGrpCat v be homological [def-sp-homological-functor] and preserve products indexed by Type v. There are a functor X : ℕ → C and natural transformations β_j : Hom_C(-,X_j) → H. Writing t_j : X_j → X_(j+1) for the successor transition, Hom(-,t_j) followed by β_(j+1) is β_j. For every i and integer n, β_0 on E_i[n] is surjective. For every j,i,n and f : E_i[n] → X_j, if β_j(f)=0 then f followed by t_j is zero. Neither compactness nor generation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-sp-homological-functor",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For an additive H and an element x in H(Z), define the transformation explicitly by sending f : K → Z to H(f)(x). Additivity proves its components are group homomorphisms and functoriality proves naturality. Conversely, naturality evaluated at the identity recovers every component of a given transformation from its value at the identity.",
+   "uses": [
+    "def-sp-homological-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  },
+  {
+   "text": "A coproduct cofan becomes a limiting fan on passage to the opposite category. H and the forgetful functor to types preserve this limit. The universal property therefore gives a unique element with any prescribed family of summand values, and shows an element is zero whenever every summand restriction is zero. Index a coproduct by (j,a), a in H(A_j). Its prescribed element gives a Yoneda transformation surjective on each A_j, witnessed by the summand inclusion.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-homological-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  },
+  {
+   "text": "Given a stage Z and β, index a coproduct by pairs (j,f) with β_j(f)=0 and let k be its coproduct-desc map to Z. Naturality and the coproduct zero criterion show H(k) annihilates the stage element. Complete k to a distinguished triangle, and use homological exactness to lift the element to the third vertex. Its explicit element transformation is compatible with β. The vanishing of two consecutive triangle morphisms kills each kernel map.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-homological-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  },
+  {
+   "text": "Use the family A_(i,n)=E_i[n], indexed by I × ULift ℤ. Apply the initial stage and choose the fully proved successor construction. Nat.rec on pairs (Z,β) gives the stages; Functor.ofSequence packages the transitions. Its successor-map equation identifies the compatibility and kernel-killing conclusions with those already proved for each successor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-homological-functor",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct a sequence for Brown representability with initial surjectivity and transitions killing kernels of Yoneda transformations",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No result or no-match verdict is asserted. LeanFinder, Loogle and local source searches were also performed.",
+   "date": "2026-10-12",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive cohomological functor taking coproducts to products admits a sequence of Yoneda transformations initially surjective on chosen objects and with transitions killing kernels",
+   "results": "Found complex factorization and abelian Yoneda surjectivity results; no Brown stage construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofSequence",
+   "results": "Found Functor.ofSequence and its successor-map equation, used for recursion packaging. No stage-existence result.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "brownStageSequence|kernel.*kill|kill.*kernel",
+   "results": "msearch found no matches. Local rg of Sheaf/CategoryTheory found only the BrownConstruction docstring describing this missing step.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownRepresentabilityConstruction",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-brown-generator-construction",
+   "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BrownStageSequence",
+  "file": "lean/Sheaf/CategoryTheory/BrownStageSequence.lean",
+  "declaration": "CategoryTheory.brownStageSequence",
+  "statement": "theorem brownStageSequence {I : Type v} (E : I → C)\n    (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological]\n    (hH : ∀ (J : Type v), PreservesLimitsOfShape (Discrete J) H) :\n    ∃ (X : ℕ ⥤ C) (β : ∀ j : ℕ, preadditiveYoneda.obj (X.obj j) ⟶ H),\n      (∀ j : ℕ,\n        preadditiveYoneda.map (X.map (homOfLE (Nat.le_succ j))) ≫ β (j + 1) = β j) ∧\n      (∀ (i : I) (n : ℤ), Function.Surjective (β 0 |>.app (Opposite.op ((E i)⟦n⟧)))) ∧\n      (∀ (j : ℕ) (i : I) (n : ℤ) (f : (E i)⟦n⟧ ⟶ X.obj j),\n        (β j).app (Opposite.op ((E i)⟦n⟧)) f = 0 →\n          f ≫ X.map (homOfLE (Nat.le_succ j)) = 0)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T151911-L-2289617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T151911-L-2289617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

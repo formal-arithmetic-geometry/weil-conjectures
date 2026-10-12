@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-brown-telescope-assembly",
+ "kind": "statement",
+ "title": "Compatible Brown transformations on a telescope",
+ "statement": "Let C be triangulated [def-weil-triangulated-category] with morphism universe v and Type v indexed coproducts. Let X : ℕ → C, let H : C opposite → AddCommGrpCat v be homological [def-sp-homological-functor] and preserve Type v indexed products, and let β_j : Hom_C(-,X_j) → H be natural transformations compatible with every successor transition. There exist G, maps ι_j : X_j → G, and α : Hom_C(-,G) → H. Successor transition followed by ι_(j+1) is ι_j; Hom(-,ι_j) followed by α is β_j. For every compact K [def-pc-compact-object], integer n and f : K[n] → G, there are j and g : K[n] → X_j with g followed by ι_j equal to f. No surjectivity or kernel-killing assumption on β is made, and no bijectivity of α is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-sp-homological-functor",
+  "def-sp-abelian",
+  "def-pc-compact-object"
+ ],
+ "proof": [
+  {
+   "text": "Compactness is preserved by integer shifts. Take the additive adjunction between shift by n and by -n. Its homAddEquiv identifies the summand Hom groups. The inverse shift preserves coproducts, so its sigmaComparison is invertible. Postcomposition with its inverse identifies the total Hom groups. DirectSum.congrAddEquiv gives the sum comparison; equality on each summand follows from adjunction naturality and map_ι_comp_inv_sigmaComparison. Thus the new compactness comparison is conjugate by additive equivalences to the old bijective comparison.",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  },
+  {
+   "text": "Form A as the coproduct of X_j indexed by ULift ℕ and let d be the coproduct-desc transition shift. Complete 1-d to a distinguished triangle A → A → G → A[1]. Put ι_j equal to the inclusion followed by its second arrow. Restrict the zero composite (1-d) followed by that arrow to each summand and expand the difference to obtain successor compatibility.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  },
+  {
+   "text": "Reuse BrownStageSequence's private elementTransformation, stage_elementTransformation_value, stage_coproduct_element and stage_coproduct_element_zero through proof-only import all; brownStageSequence itself is not applied. The recovery formula follows from naturality evaluated at the identity. The coproduct element and zero criterion follow from the limiting fan universal property after applying H and the forgetful functor to types. Evaluate β_j at the identity to obtain a_j. Their successor compatibility follows by naturality and the given equality of transformations. Product preservation assembles a_j into x in H(A). The value H(1-d)(x) has zero restriction to each summand by compatibility, hence is zero by the limiting fan universal property. Homological exactness lifts x to y in H(G). The explicitly constructed transformation f ↦ H(f)(y) is α; functoriality, the summand values of x and naturality recover β_j on restriction along ι_j.",
+   "uses": [
+    "def-sp-homological-functor",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  },
+  {
+   "text": "Apply compact_hom_hocolim to K[n], compact by the first step, and the constructed telescope triangle. Its comparison is surjective. Every element of a colimit of types is represented at some stage (Types.jointly_surjective'). Its specified value under the comparison gives exactly the required factorization through ι_j.",
+   "uses": [
+    "lem-pc-compact-hom-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "def-weil-triangulated-category",
+  "def-sp-homological-functor",
+  "lem-pc-compact-hom-hocolim"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend compatible transformations from representable functors to a cohomological functor along a sequential homotopy colimit in a triangulated category",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No result or no-match verdict is asserted. LeanFinder, Loogle and local source searches were also performed.",
+   "date": "2026-10-12",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible Yoneda transformations on a sequence extend to its homotopy colimit and maps from shifted compact objects factor through a stage",
+   "results": "Found ordinary presheaf colimit and Ind-category Yoneda comparisons; none construct the triangulated telescope map.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homAddEquiv",
+   "results": "Found the additive Hom equivalence for adjunctions and its application equations; used to prove compactness under shifts.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact_hom_hocolim|homAddEquiv|isLimitEquivSections",
+   "results": "Mathlib supplies homAddEquiv and isLimitEquivSections. Local rg found the existing project compact_hom_hocolim comparison; used without restating it.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownRepresentabilityConstruction",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-brown-generator-construction",
+   "place": "Tag 0A8F, proof of Lemma lemma-brown (https://stacks.math.columbia.edu/tag/0A8F)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BrownTelescopeAssembly",
+  "file": "lean/Sheaf/CategoryTheory/BrownTelescopeAssembly.lean",
+  "declaration": "CategoryTheory.brownTelescopeAssembly",
+  "statement": "theorem brownTelescopeAssembly (X : ℕ ⥤ C)\n    (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological]\n    (hH : ∀ (J : Type v), PreservesLimitsOfShape (Discrete J) H)\n    (β : ∀ j : ℕ, preadditiveYoneda.obj (X.obj j) ⟶ H)\n    (hβ : ∀ j : ℕ,\n      preadditiveYoneda.map (X.map (homOfLE (Nat.le_succ j))) ≫ β (j + 1) = β j) :\n    ∃ (G : C) (ι : ∀ j : ℕ, X.obj j ⟶ G) (α : preadditiveYoneda.obj G ⟶ H),\n      (∀ j : ℕ, X.map (homOfLE (Nat.le_succ j)) ≫ ι (j + 1) = ι j) ∧\n      (∀ j : ℕ, preadditiveYoneda.map (ι j) ≫ α = β j) ∧\n      (∀ (K : C), IsCompactObject K → ∀ (n : ℤ) (f : K⟦n⟧ ⟶ G),\n        ∃ (j : ℕ) (g : K⟦n⟧ ⟶ X.obj j), g ≫ ι j = f)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T151911-L-2289617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T151911-L-2289617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
