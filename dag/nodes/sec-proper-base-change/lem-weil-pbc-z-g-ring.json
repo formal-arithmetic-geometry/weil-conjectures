@@ -25,65 +25,48 @@
  ],
  "proof": [
   {
-   "text": "The ring $\\mathbf Z$ is Noetherian, and its prime localizations are the field $\\mathbf Q$ at $(0)$ and discrete valuation rings at the nonzero primes, by [lem-weil-pbc-z-localizations-dvr]. Thus the definition of a G-ring reduces the claim to checking regularity of the completion map at the field localization and at each DVR localization.",
+   "text": "The integers are Noetherian by the standard Mathlib instance. Unfold [def-weil-pbc-g-ring] and fix a prime ideal p. Split into p = 0 and p ≠ 0.",
    "uses": [
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-z-localizations-dvr"
+    "def-weil-pbc-g-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3), first sentence: fields, Z and characteristic-zero Dedekind domains are handled from the definition; the localization description is the Dedekind criterion in Algebra Lemma 034X (tag 034X)."
-   }
+   "elementary": true
   },
   {
-   "text": "At the zero prime, $\\mathbf Z_{(0)}=\\mathbf Q$ is a field, its maximal ideal is zero, and its completion is itself. The identity map of a field is flat and has the field as its only fibre; the fibre is a regular ring by [lem-weil-pbc-field-regular-ring], so the identity map is regular by [def-weil-pbc-g-ring].",
+   "text": "At p = 0, obtain the integer-algebra equivalence of the localization with the rationals from [lem-weil-pbc-z-localizations-dvr]. Transfer the field property along this equivalence while retaining the existing ring operations. The maximal ideal is zero, so the ring is complete for that ideal. Mathlib AdicCompletion.ofAlgEquiv identifies its canonical completion map with an algebra isomorphism. A bijective algebra map is a localization at the trivial submonoid {1}; apply [lem-weil-pbc-localization-regular] to obtain its regularity.",
    "uses": [
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-field-regular-ring"
+    "lem-weil-pbc-z-localizations-dvr",
+    "lem-weil-pbc-localization-regular"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3), the field case in the sentence preceding the itemized conclusion."
-   }
+   "elementary": false
   },
   {
-   "text": "For every nonzero prime ideal $(p)$, the localization $\\mathbf Z_{(p)}$ is a Noetherian local discrete valuation ring whose fraction field is $\\mathbf Q$, hence has characteristic zero. Therefore the hypothesis of [lem-weil-pbc-dvr-completion-regular] applies, and its completion map is regular. More explicitly, the completion is a discrete valuation ring by More on Algebra Lemma Tag 0AP1, completion is flat by Algebra Lemma Tag 00MB, its generic fibre $\\operatorname{Frac}(\\mathbf Z_{(p)}^\\wedge)=\\mathbf Q_p$ is geometrically regular over $\\mathbf Q$ by characteristic zero, and its closed fibre is the field $\\mathbf F_p$.",
+   "text": "At p ≠ 0, [lem-weil-pbc-z-localizations-dvr] supplies the DVR instance. The integer algebra map to the prime localization is injective by its FaithfulSMul instance, so this localization has characteristic zero. Its fraction field has characteristic zero by Mathlib IsFractionRing.charZero_of_isFractionRing. Apply [lem-weil-pbc-dvr-completion-regular] with that fraction field.",
    "uses": [
     "lem-weil-pbc-z-localizations-dvr",
     "lem-weil-pbc-dvr-completion-regular"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3), together with Lemma Tag 0AP1 (completion-dvr), Algebra Lemma Tag 00MB (completion-flat), and Definition Tag 07BZ (regular ring map)."
-   }
+   "elementary": false
   },
   {
-   "text": "The zero-prime and nonzero-prime cases cover every prime of $\\mathbf Z$, so all localization-to-completion maps required by [def-weil-pbc-g-ring] are regular. Therefore $\\mathbf Z$ is a G-ring.",
+   "text": "The two cases prove regularity at every prime; combine this with Noetherianity to conclude IsGRing ℤ.",
    "uses": [
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-z-localizations-dvr",
-    "lem-weil-pbc-dvr-completion-regular"
+    "def-weil-pbc-g-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Proposition 07PX (tag 07PX), proof of item (3)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-g-ring",
   "lem-weil-pbc-dvr-completion-regular",
-  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-localization-regular",
   "lem-weil-pbc-z-localizations-dvr"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Proposition Tag 07PX (proposition-ubiquity-G-ring), item (3) and its proof"
+  "place": "Proposition 07PX (3), following the field/DVR cases; field completion regularity via the existing localization-regular theorem",
+  "group": "M2",
+  "date": "2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -159,5 +142,15 @@
   "reviewer": "R-zgr",
   "group": "J1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T060745-L-2911397",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

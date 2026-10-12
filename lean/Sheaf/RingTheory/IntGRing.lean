@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.DVRCompletionRegular
 import Sheaf.RingTheory.IntegerPrimeLocalizations
+import Sheaf.RingTheory.LocalizationRegular
+import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # The integers are a G-ring
@@ -40,6 +42,32 @@ Proof:
 4. These cases cover every prime of the integers. Hence all completion maps in the
    definition of `IsGRing` are regular, giving the claim. -/
 theorem isGRing : IsGRing ℤ := by
-  sorry
+  refine ⟨inferInstance, ?_⟩
+  intro p hp
+  by_cases h : p = ⊥
+  · subst p
+    obtain ⟨e⟩ := prime_localizations_dvr.2.2.2.2.1
+    let A := Localization.AtPrime (⊥ : Ideal ℤ)
+    let : Field A := (e.toRingEquiv.toMulEquiv.isField (Field.toIsField ℚ)).toField
+    have hm : IsLocalRing.maximalIdeal A = ⊥ := IsLocalRing.maximalIdeal_eq_bot
+    have : IsAdicComplete (IsLocalRing.maximalIdeal A) A := by
+      rw [hm]
+      infer_instance
+    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A
+    have hb : Function.Bijective (algebraMap A C) := by
+      exact (AdicCompletion.ofAlgEquiv (IsLocalRing.maximalIdeal A)).bijective
+    have : IsLocalization (⊥ : Submonoid A) C :=
+      IsLocalization.of_le_isUnit_of_bijective (by
+        rintro x ⟨y, hy, rfl⟩
+        have : y = 1 := hy
+        simp [this]) hb
+    exact (IsLocalization.isRegular_and_fiber (⊥ : Submonoid A)).1
+  · let A := Localization.AtPrime p
+    have : IsDiscreteValuationRing A := (prime_localizations_dvr.2.2.2.2.2 p h).2.2.1
+    have : CharZero A := charZero_of_injective_algebraMap
+      (FaithfulSMul.algebraMap_injective ℤ A)
+    have : CharZero (FractionRing A) := IsFractionRing.charZero_of_isFractionRing A
+    exact AdicCompletion.isRegular_algebraMap_of_isDiscreteValuationRing_of_charZero
+      A (FractionRing A)
 
 end Int
