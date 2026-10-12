@@ -27,39 +27,41 @@
  ],
  "proof": [
   {
-   "text": "*Matching the objects with clause (v) of [lem-weil-pbc-projective-space-twisting-sheaf-charts].* Since $n$ is finite and nonempty, choose a bijection $n\\cong\\{0,\\dots,N\\}$ ($N=|n|-1\\ge0$) and relabel the variables; nothing below depends on the labels. Then $S=\\mathbf Z[T_0,\\dots,T_N]$, $P=\\operatorname{Proj}(S)$ and $\\widetilde{S(1)}$ with its global sections $T_k$ ($T_k/1\\in(S_f)_1$ on every $D_+(f)$) are exactly the objects $\\mathbf P^N_{\\mathbf Z}$, $\\mathcal O(1)=\\widetilde{S(1)}$ [def-weil-pbc-proj-twisting-sheaf] and $T_0,\\dots,T_N$ of [lem-weil-pbc-projective-space-twisting-sheaf-charts]. The glued $\\mathcal O_P(1)$ of the present statement is the module of [def-pc-projective-space-twist] with $A=\\mathbf Z$, $x_k=T_k$, $d=1$, $e_i=e_i^{(1)}$, transition rule $e_i=(T_i/T_j)e_j$: this is the module $\\mathcal L$ of clause (v) with its bases $e_j$. The global section $T^{\\mathrm{gl}}_k$ satisfies $T^{\\mathrm{gl}}_k|_{U_j}=(T_k/T_j)e_j$ for every $j$, which is the defining property of the section $x_k$ of clause (v); as the $U_j$ cover $P$ (clause (i) of [lem-weil-pbc-projective-space-twisting-sheaf-charts]) a section of the sheaf $\\mathcal L$ is determined by its restrictions to the $U_j$, so $T^{\\mathrm{gl}}_k=x_k$. Finally the section $T_j|_{D_+(T_j)}$ of clause (v) is the element $T_j/1\\in(S_{T_j})_1=\\widetilde{S(1)}(U_j)$, by the description of the global sections $T_k$ (restriction to every $D_+(f)$ is $T_k/1$; [def-weil-pbc-proj-twisting-sheaf]).",
+   "text": "By the existing definition ProjectiveSpace.twist is the pullback of Proj.twist along f = toProjInt. Spec (ULift Z) is terminal, hence terminal.from it and the pullback projection f are isomorphisms. Scheme.Modules.pullbackIsoPushforwardInv, pushforwardComp, pushforwardCongr and pushforwardId identify pullback f followed by pushforward f with the identity. Mathlib Adjunction.isIso_unit_of_iso makes the adjunction unit eta an isomorphism; take theta to be its inverse. This constructs the comparison without choosing any witness from an unproved existence statement.",
    "uses": [
     "def-pc-projective-space-twist",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+    "def-weil-pbc-proj-twisting-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MS (label lemma-when-invertible, d = 1) and the glueing of morphisms of sheaves (Sheaves, Lemma 00AL), as carried out in step 7 (clause (v)) of lem-weil-pbc-projective-space-twisting-sheaf-charts"
-   }
+   "elementary": true
   },
   {
-   "text": "*Conclusion.* By clause (v) of [lem-weil-pbc-projective-space-twisting-sheaf-charts] there is a unique isomorphism of $\\mathcal O_P$-modules $\\Phi:\\mathcal L\\to\\widetilde{S(1)}$ with $\\Phi(e_j)=T_j|_{U_j}$ for all $j$, and $\\Phi(x_k)=T_k$ for all $k$. Translating by step 1 ($\\mathcal L=\\mathcal O_P(1)$, $T_j|_{U_j}=T_j/1$, $x_k=T^{\\mathrm{gl}}_k$), $\\theta:=\\Phi$ is an isomorphism $\\mathcal O_P(1)\\to\\widetilde{S(1)}$ with $\\theta(e_i)=T_i/1$ for every $i$ and $\\theta(T^{\\mathrm{gl}}_k)=T_k$ for every $k$. Uniqueness: any isomorphism $\\theta'$ with $\\theta'(e_i)=T_i/1$ for all $i$ is a $\\Phi'$ with $\\Phi'(e_j)=T_j|_{U_j}$ for all $j$, hence $\\theta'=\\Phi=\\theta$ by the uniqueness in clause (v). (Clause (v) is proved in step 7 of [lem-weil-pbc-projective-space-twisting-sheaf-charts] exactly along Stacks 01MS and the glueing of morphisms: local isomorphisms $a\\,e_j\\mapsto a\\,T_j|$, compatible on $U_i\\cap U_j$ by $T_i|=(T_i/T_j)T_j|$, glued in the sheaf $\\mathcal Hom$ [lem-pur-sheaf-hom-is-sheaf].)",
+   "text": "twistOneSection is defined by applying eta to the polynomial global coordinate section. The hom-inverse identity gives theta(Tgl_k) = T_k. Naturality gives the chart restriction. On every point of D_+(T_i), val_unitToTwist_app_top and val_twistPowSection_apply identify both sides with the fraction T_i/1, proving theta(e_i) = twistPowSection 1.",
    "uses": [
-    "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-proj-twisting-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MS (label lemma-when-invertible, d = 1) and the glueing of morphisms of sheaves (Sheaves, Lemma 00AL), as carried out in step 7 (clause (v)) of lem-weil-pbc-projective-space-twisting-sheaf-charts"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness precompose the two candidate morphisms with the isomorphism eta. They agree on each global polynomial coordinate section by their prescribed global images. The standard opens cover Proj by iSup_basicOpen_eq_top' and adjoin_range_X_eq_top. On D_+(T_i) the restriction of T_i equals twistPowSection 1 by the same pointwise fraction calculation; isFreeGenerator_twistPowSection proves this is a free generator, also on smaller opens. Thus on V intersect D_+(T_i) any section is a scalar multiple of this generator; linearity and naturality imply the maps agree. The sheaf condition eq_of_locally_eq' gives equality on V for every V. Cancel eta and apply Iso.ext. The proved private helper hom_ext_of_global_frames carries the linearity, restriction and sheaf-separation argument.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-projective-space-twist",
   "def-weil-pbc-proj-twisting-sheaf",
-  "lem-weil-pbc-projective-space-twisting-sheaf-charts"
+  "prop-nagata-proj-standard-open"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "specialization of clause (v) of lem-weil-pbc-projective-space-twisting-sheaf-charts (whose step 7 is agent-written along Constructions Lemma 01MS and Sheaves Lemma 00AL)"
+  "document": "literature/stacks-project/constructions.tex; literature/stacks-project/sheaves.tex",
+  "place": "Constructions Lemma 01MS (lemma-when-invertible), Sheaves Lemma 00AL (lemma-glue-maps); shorter implementation using the recorded pullback definition and existing source-library/Mathlib adjunction and free-generator lemmas",
+  "group": "R3",
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -158,5 +160,15 @@
   "group": "K1",
   "result": "fix",
   "note": "def-pc-projective-space-twist re-record (PolynomialTwistData) reverted to landed ProjectiveSpace.twist; item restated: n finite nonempty, O_P(1) = pushforward along toProjInt of ProjectiveSpace.twist n (Spec Z) 1, e_i = twistOneSection i restricted to D+(T_i), T^gl_k = twistOneSection k, target Proj.twist _ 1, theta(e_i) = twistPowSection 1, theta(T^gl_k) = unitToTwist(1), ExistsUnique; reverted the delivery's change of existing node(s) def-pc-projective-space-twist (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/ProjPolynomialTwistData.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T223415-L-1640382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
