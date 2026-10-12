@@ -70,7 +70,7 @@ variable [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]
 
 /-- (Implementation) A base change of a quasi-compact quasi-separated étale scheme over a stage
 along an affine morphism is quasi-compact and quasi-separated. -/
-lemma compactSpace_and_quasiSeparatedSpace_pullback {Y Z T : Scheme.{u}} (p : Y ⟶ T)
+lemma compactSpace_and_quasiSeparatedSpace_pullback_of_isAffineHom {Y Z T : Scheme.{u}} (p : Y ⟶ T)
     (g : Z ⟶ T) [IsAffineHom g] [CompactSpace Y] [QuasiSeparatedSpace Y] :
     CompactSpace ↥(pullback p g) ∧ QuasiSeparatedSpace ↥(pullback p g) :=
   ⟨inferInstance, quasiSeparatedSpace_of_quasiSeparated (pullback.fst p g)⟩
@@ -100,7 +100,7 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
         (by rw [Category.assoc, he, reassoc_of% hπ.w, c.w f]) ∧
       x ∈ Set.range (γ ≫ g.left) := by
     obtain ⟨Z, g, hg, z, hz⟩ := (Scheme.mem_smallEtaleTopology_iff R).1 hR x
-    obtain ⟨k', f, E, hE, q, hq, eE, he, E', π₁, π₂, hπ, γ, hγ, ε, hε⟩ :=
+    obtain ⟨k', f, E, hE, q, hq, eE, he, E', π₁, π₂, hπ, γ, -, hγ, ε, hε⟩ :=
       exists_etale_refinement_of_isLimit D c hc V'.hom (g ≫ e.hom).left z
     refine ⟨Z, g, hg, k', f, E, hE, q, hq, eE, he, E', π₁, π₂, hπ, γ, hγ, ε, ?_⟩
     rw [Scheme.Hom.comp_apply, hε, hz]
@@ -121,7 +121,7 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
   have hWc : CompactSpace W.left := by
     have : CompactSpace ((𝟭 Scheme).obj V'.left) := ‹CompactSpace V'.left›
     have : QuasiSeparatedSpace ((𝟭 Scheme).obj V'.left) := ‹QuasiSeparatedSpace V'.left›
-    have := compactSpace_and_quasiSeparatedSpace_pullback V'.hom (c.π.app m)
+    have := compactSpace_and_quasiSeparatedSpace_pullback_of_isAffineHom V'.hom (c.π.app m)
     exact (Scheme.compactSpace_and_quasiSeparatedSpace_of_iso e.symm this).1
   obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
     (fun x ↦ Set.range (γ x ≫ (g x).left)) hopen
@@ -134,7 +134,7 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
   let V'' : (D.obj K).Etale := (D.map h).Etale.obj V'
   have : CompactSpace ((𝟭 Scheme).obj V'.left) := ‹CompactSpace V'.left›
   have : QuasiSeparatedSpace ((𝟭 Scheme).obj V'.left) := ‹QuasiSeparatedSpace V'.left›
-  have hV'' := compactSpace_and_quasiSeparatedSpace_pullback V'.hom (D.map h)
+  have hV'' := compactSpace_and_quasiSeparatedSpace_pullback_of_isAffineHom V'.hom (D.map h)
   have : CompactSpace V''.left := hV''.1
   have : QuasiSeparatedSpace V''.left := hV''.2
   let e' : W ≅ (c.π.app K).Etale.obj V'' :=

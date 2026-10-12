@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
+public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 
 /-!
