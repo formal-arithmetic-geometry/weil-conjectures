@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.BaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
@@ -166,11 +167,9 @@ object of `D(A)`.
 The Čech complex is quasi-isomorphic to a bounded complex of flat `A`-modules
 (`AlgebraicGeometry.Scheme.Modules.nonempty_Q_cechModuleComplexTrunc_iso`) whose cohomology
 modules `Γ(S, R^q f_* ℱ)` are finitely generated, hence is perfect
-(`DerivedCategory.isPerfect_of_flat_of_finite_homology`). The finiteness of the cohomology is the
-blueprint's `lem-pc-coherent-hi`
-(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`),
-which covers all proper morphisms; the blueprint quotes `lem-pc-projective-coherent-finiteness`,
-its projective case.
+(`AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex`). The finiteness of the
+cohomology is the blueprint's `lem-pc-projective-coherent-finiteness`
+(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage_of_isClosedImmersion`).
 
 (blueprint: `lem-pc-projective-noetherian-rf-perfect`) -/
 theorem isPerfect_Q_cechModuleComplex_of_isClosedImmersion [IsLocallyNoetherian S]
@@ -180,7 +179,12 @@ theorem isPerfect_Q_cechModuleComplex_of_isClosedImmersion [IsLocallyNoetherian 
   have : IsProper f := hi ▸ inferInstance
   have : IsNoetherianRing Γ(S, ⊤) :=
     IsLocallyNoetherian.component_noetherian ⟨⊤, isAffineOpen_top S⟩
-  exact isPerfect_Q_cechModuleComplex_of_isNoetherianRing f ℱ U hU hU' hℱ
+  have := isGrothendieckAbelian X
+  have := Fintype.ofFinite ι
+  refine isPerfect_Q_cechModuleComplex f ℱ U hU hU' hℱ fun q ↦ ?_
+  obtain ⟨e⟩ := nonempty_homology_cechModuleComplex_linearEquiv f ℱ U hU hU' q
+  have := finite_sections_higherDirectImage_of_isClosedImmersion f i hi ℱ q
+  exact Module.Finite.equiv e.symm
 
 omit [Finite ι] in
 include hU hU' in
