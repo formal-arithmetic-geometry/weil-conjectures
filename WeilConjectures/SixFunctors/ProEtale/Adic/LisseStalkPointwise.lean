@@ -11,7 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 # Sections of lisse sheaves are detected by geometric points with varying fields
 
 A variant of
-`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_globalSectionsToUpperStar_eq_zero` in which the algebraically closed field of the geometric point may depend on the point of the
+`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_globalSectionsToUpperStar_eq_zero`
+in which the algebraically closed field of the geometric point may depend on the point of the
 scheme: a morphism `ℚ̄_ℓ ⟶ H` into a lisse sheaf vanishes as soon as its global section vanishes
 at a geometric point over every point. This applies to schemes which are not of finite type over
 a field, such as weakly étale schemes over a curve, whose residue fields do not embed into a single

@@ -135,6 +135,8 @@ noncomputable def curryTensorLeft (hq : IsLinearRight q) :
   colimit.desc _ ((Cocone.precompose (diagramIsoParallelPair _).hom).obj
     (Cofork.ofπ (curryAux q) (curryAux_condition q hq)))
 
+omit [MonoidalPreadditive C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)] in
 /-- The morphism `(A ⊗ X) ⊗_A D ⟶ N` induced by `q` on the quotient map. -/
 lemma tensorπ_curryTensorLeft (hq : IsLinearRight q) :
     tensorπ ((free A).obj X) D ≫ (curryTensorLeft q hq).hom =

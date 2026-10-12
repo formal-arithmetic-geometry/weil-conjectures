@@ -41,26 +41,23 @@ namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- **Powers of boundary eigenvalues.** Let `j : U₀ ⟶ C₀` be a dense quasi-compact open
-immersion into a smooth curve over `k₀`, `F` a lisse Weil sheaf on `U₀` and `x` a closed point
-of `C₀`. If `α` is an eigenvalue of the local Frobenius on the stalk `(j_* F)_x̄`, then `α ^ k`
-is an eigenvalue of the local Frobenius on `(j_* (F^{⊗ k}))_x̄` for every `k ≥ 1`.
+/-- **Powers of boundary eigenvalues.** Let `j : U₀ ⟶ C₀` be a quasi-compact open immersion of
+`k₀`-schemes, `F` a lisse Weil sheaf on `U₀` and `x` a closed point of `C₀`. If `α` is an
+eigenvalue of the local Frobenius on the stalk `(j_* F)_x̄`, then `α ^ k` is an eigenvalue of the
+local Frobenius on `(j_* (F^{⊗ k}))_x̄` for every `k`.
 
 The eigenvector `v ^ {⊗ k}` is built from the pairings `j_* F ⊗ j_* F^{⊗ k} ⟶ j_* F^{⊗ (k + 1)}`
 and is nonzero since `v` is the germ of a section `σ` of the lisse sheaf `F` over a pro-étale
 neighbourhood, whose tensor powers do not vanish
-(`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`). The density of `j`,
-the smoothness of `C₀` and `k ≠ 0` are not needed. (blueprint: `lem-wf-boundary-semicontinuity`,
+(`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`). (blueprint: `lem-wf-boundary-semicontinuity`,
 Step 4) -/
 theorem hasEigenvalue_stalk_directImage_tensorPow {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
     (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
-    (hj : Dense (Set.range j.base)) {F : WeilSheaf k₀ l U} (hF : F.IsLisse)
+    {F : WeilSheaf k₀ l U} (hF : F.IsLisse)
     (x : C.finitePoints) {α : PadicAlgCl l}
-    (hα : (((directImage j).obj F).stalk x).frobeniusEnd.HasEigenvalue α) {k : ℕ}
-    (hk : k ≠ 0) :
+    (hα : (((directImage j).obj F).stalk x).frobeniusEnd.HasEigenvalue α) (k : ℕ) :
     (((directImage j).obj (F.tensorPow hF k)).stalk x).frobeniusEnd.HasEigenvalue (α ^ k) :=
   hasEigenvalue_stalkAt_lowerStar_tensorPow j _ hF _ _ hα k
 
