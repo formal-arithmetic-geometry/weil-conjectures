@@ -197,6 +197,7 @@ noncomputable def rightDerivedLowerStarCompIsoOfComp (p : W ⟶ X) (f : X ⟶ S)
       (derivedUpperStarLowerStarAdjunction A p)) (derivedUpperStarLowerStarAdjunction A c)
     (leftDerivedUpperStarComp A p f c hp.symm)
 
+omit [Etale.UpperStarPreservesFlat A] in
 /-- The counit of `Lc^* ⊣ Rc_*` composed with `Lc^*` of the composition isomorphism
 `Rf_* Rp_* ≅ Rc_*` is the counit of the composite adjunction `Lf^* ⋙ Lp^* ⊣ Rp_* ⋙ Rf_*`. -/
 @[reassoc]

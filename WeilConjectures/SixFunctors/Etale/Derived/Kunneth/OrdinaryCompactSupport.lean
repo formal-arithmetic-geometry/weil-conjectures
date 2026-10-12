@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -48,22 +49,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Extensions by zero along equal open immersions are isomorphic. -/
-noncomputable def openImmersionLowerShriekCongr {U X : Scheme.{u}} {j₁ j₂ : U ⟶ X}
-    [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ = j₂) :
-    (j₁)_!open[ModuleCat.{u + 1} Λ] ≅ (j₂)_!open[ModuleCat.{u + 1} Λ] := by
-  subst h
-  exact Iso.refl _
-
-/-- The composition isomorphism `D((j' ≫ j)_!) ≅ D(j'_!) ⋙ D(j_!)` of derived extensions by zero
-along open immersions. -/
-noncomputable def mapDerivedCategoryOpenImmersionLowerShriekComp {V U X : Scheme.{u}}
-    (j' : V ⟶ U) (j : U ⟶ X) [IsOpenImmersion j'] [IsOpenImmersion j] :
-    D((j' ≫ j)_!open[ModuleCat.{u + 1} Λ]) ≅
-      D((j')_!open[ModuleCat.{u + 1} Λ]) ⋙ D((j)_!open[ModuleCat.{u + 1} Λ]) :=
-  Functor.mapDerivedCategoryNatIso (Etale.openImmersionLowerShriekComp _ j' j) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
-
 /-- The projection formula `j_!(K ⊗ᴸ Lj^* M) ≅ j_! K ⊗ᴸ M` for an open immersion `j`, at
 objects `K` and `M` (`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`). -/
 noncomputable def openImmersionLowerShriekTensorIso {U X : Scheme.{u}} (j : U ⟶ X)
@@ -100,8 +85,8 @@ noncomputable def mapDerivedCategoryOpenImmersionLowerShriekCompObjIso {V U X : 
     (Z : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     D((j)_!open[ModuleCat.{u + 1} Λ]).obj (D((j')_!open[ModuleCat.{u + 1} Λ]).obj Z) ≅
       D((J)_!open[ModuleCat.{u + 1} Λ]).obj Z :=
-  ((mapDerivedCategoryOpenImmersionLowerShriekComp Λ j' j).app Z).symm ≪≫
-    (Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekCongr Λ h)).app Z
+  ((mapDerivedCategoryOpenImmersionLowerShriekComp _ j' j).app Z).symm ≪≫
+    (mapDerivedCategoryOpenImmersionLowerShriekCongr _ h).app Z
 
 /-- Base change for the extension by zero, objectwise: `j'_!(Lg'^* K) ≅ Lg''^*(j_! K)` for a
 cartesian square `g' ≫ j = j' ≫ g''` with `j` an open immersion. -/
