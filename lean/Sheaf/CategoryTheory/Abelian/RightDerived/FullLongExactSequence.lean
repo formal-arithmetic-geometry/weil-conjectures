@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
+import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-!
 # The full long exact sequence of right derived functors
@@ -57,6 +57,28 @@ theorem exists_rightDerived_full_long_exact
         ∃ (w₁ : (F.rightDerived n).map S.g ≫ δ n = 0)
           (w₂ : δ n ≫ (F.rightDerived (n + 1)).map S.f = 0),
           (ShortComplex.mk _ _ w₁).Exact ∧ (ShortComplex.mk _ _ w₂).Exact := by
-  sorry
+  obtain ⟨G, hG, _⟩ := exists_horseshoe_rightDerived_deltaFunctor F
+  let P : (ℕ → A ⥤ B) → Prop := fun K ↦
+    ∃ δ : ∀ n : ℕ, (K n).obj S.X₃ ⟶ (K (n + 1)).obj S.X₁,
+      Mono ((K 0).map S.f) ∧
+      ∀ n : ℕ, (∃ h : (K n).map S.f ≫ (K n).map S.g = 0,
+          (ShortComplex.mk _ _ h).Exact) ∧
+        ∃ (w₁ : (K n).map S.g ≫ δ n = 0)
+          (w₂ : δ n ≫ (K (n + 1)).map S.f = 0),
+          (ShortComplex.mk _ _ w₁).Exact ∧ (ShortComplex.mk _ _ w₂).Exact
+  have hP : P G.F := by
+    refine ⟨G.delta S hS, G.mono_zero S hS, ?_⟩
+    intro n
+    refine ⟨⟨(G.exact_middle S hS n).choose, (G.exact_middle S hS n).choose_spec⟩, ?_⟩
+    exact ⟨(G.exact_right S hS n).choose, (G.exact_left S hS n).choose,
+      (G.exact_right S hS n).choose_spec, (G.exact_left S hS n).choose_spec⟩
+  have hP' : P (fun n : ℕ ↦ F.rightDerived n) := hG ▸ hP
+  rcases hP' with ⟨δ, hm, hall⟩
+  refine ⟨δ, hm, ?_⟩
+  intro n
+  rcases hall n with ⟨hmn, hrest⟩
+  rcases hrest with ⟨w1, w2, hr, hl⟩
+  refine ⟨?_, w1, w2, hr, hl⟩
+  simpa only [ShortComplex.map] using hmn.choose_spec
 
 end CategoryTheory.ShortComplex.ShortExact
