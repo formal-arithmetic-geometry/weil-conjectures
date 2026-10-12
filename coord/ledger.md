@@ -7958,3 +7958,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition (stage 3; reviewer PASS; first push; landing 20261012T135323-L-1695655 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit (stage 3; reviewer PASS; first push; landing 20261012T135324-L-1695777 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EtaleComplexFirstPageAbutment (stage 3; reviewer PASS; first push; landing 20261012T135324-L-1695902 (interface); batch 20261012T135212; modules 2; new nodes 2)
+- 13:53 L: merged deliver/U3/Sheaf.Algebra.Homology.TelescopeColimit (stage 3; reviewer PASS; first push; landing 20261012T135324-L-1696045 (interface); batch 20261012T135212; modules 2; new nodes 2)

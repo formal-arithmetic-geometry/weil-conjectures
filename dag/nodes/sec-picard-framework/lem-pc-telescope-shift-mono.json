@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-telescope-shift-mono",
+ "kind": "statement",
+ "title": "One minus shift is monic on the sequential coproduct",
+ "statement": "Let $\\mathcal C$ be a small site, $\\mathcal O$ a sheaf of commutative rings, and $E:\\mathbf N\\to\\operatorname{Comp}(\\operatorname{Mod}(\\mathcal O))$ a sequential system of cochain complexes [def-pc-cochain-complex-modules]. Put $A=\\bigoplus_{n\\geq0}E_n$ and let $\\iota_n:E_n\\to A$ be the coproduct injections. The morphism $u:A\\to A$ determined by $u\\iota_n=\\iota_n-\\iota_{n+1}E(n\\leq n+1)$ is a monomorphism. No injectivity of the transition morphisms is assumed.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 093W (lemma-colim-sequence), proof by finite initial-sum short exact sequences; used in Tag 0949 (lemma-colim-hocolim)"
+ },
+ "proof": [
+  {
+   "text": "In every degree form A_n = the sum of E_j for j < n and B_n = the sum of E_j for j ≤ n. Define u_n by ι_j minus the transition to summand j+1. Project onto the first n summands. The composite is 1 minus a nilpotent lower triangular shift, with inverse the finite geometric sum. Thus u_n is split monic, including n=0. The u_n commute with inclusions of initial sums.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sheaves of modules form a Grothendieck abelian category, so the sequential colimit of these monomorphisms is monic. The two colimits of finite initial sums are the coproduct of all terms: maps out of either colimit are exactly compatible maps out of finite sums, hence families of maps out of all summands. Checking each coproduct injection identifies the colimit map with 1-shift. Evaluation computes coproducts degreewise, so the map is monic in each cochain degree and hence in the category of complexes.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 093W proof, with the finite split monomorphism verified by a finite geometric sum"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "One minus shift is injective on the direct sum of a sequence of complexes",
+   "results": "HTTP Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One minus shift is a monomorphism on the countable coproduct of a sequence in an abelian category",
+   "results": "Unrelated mono instances and HomologicalComplex.instMonoFOfHasFiniteLimits; no telescope monomorphism theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_descShortComplex|mono.*shift|shift.*mono",
+   "results": "quasiIso_descShortComplex at Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137; shift occurrences elsewhere do not give monicity of one minus shift.",
+   "date": "2026-10-12",
+   "verdict": "no match for telescope monicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TelescopeColimit",
+  "group": "U3",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the homotopy-colimit construction used before the final comparison: identify the cone of 1-shift with the termwise filtered colimit; injectivity part of step 1 of lem-pc-complex-hocolim-colimit",
+   "via": [
+    "lem-pc-complex-hocolim-colimit",
+    "lem-pc-kflat-hocolim-truncations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TelescopeShiftMono",
+  "file": "lean/Sheaf/Algebra/Homology/TelescopeShiftMono.lean",
+  "declaration": "CochainComplex.telescopeShift_mono",
+  "statement": "theorem telescopeShift_mono\n    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{u})\n    (E : ℕ ⥤ CochainComplex (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) :\n    Mono (Sigma.desc (fun n : ℕ ↦\n      Sigma.ι (fun n : ℕ ↦ E.obj n) n -\n        E.map (homOfLE (Nat.le_succ n)) ≫\n          Sigma.ι (fun n : ℕ ↦ E.obj n) (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1976a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135324-L-1696045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1976a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135324-L-1696045",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly, target signatures and node statements match, and the required direct importer compiles against the delivery."
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-cone-short-exact-quasi-iso",
+ "kind": "statement",
+ "title": "The canonical cone projection of a short exact sequence is a quasi-isomorphism",
+ "statement": "Let $\\mathcal A$ be an abelian category, and let $0\\to X\\xrightarrow{f}Y\\xrightarrow{g}Z\\to0$ be a short exact sequence of cochain complexes. The canonical morphism $p:\\operatorname{Cone}(f)\\to Z$, equal to $g$ on the unshifted $Y$ summand and zero on the shifted $X$ summand, is a quasi-isomorphism.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-quasi-iso-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0152, canonical delta functor for a short exact sequence of complexes; cone comparison used in Tag 0949"
+ },
+ "proof": [
+  {
+   "text": "Apply the already proved Mathlib theorem CochainComplex.mappingCone.quasiIso_descShortComplex to the short exact short complex S. Its morphism descShortComplex S is defined as mappingCone.desc S.f 0 S.g. Mathlib inr_descShortComplex and inl_desc give its two stated summand restrictions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+  "place": "descShortComplex at line 53, inr_descShortComplex at line 56, quasiIso_descShortComplex at line 137"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The map from the mapping cone of the first arrow of a short exact sequence of complexes to its third complex is a quasi-isomorphism",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map from the mapping cone of the first arrow of a short exact sequence of complexes to its third complex is a quasi-isomorphism",
+   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex: S.ShortExact → QuasiIso (mappingCone.descShortComplex S).",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.quasiIso_descShortComplex",
+   "results": "One exact match in Mathlib.Algebra.Homology.HomotopyCategory.ShortExact",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_descShortComplex|mono.*shift|shift.*mono",
+   "results": "quasiIso_descShortComplex at Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137; shift occurrences elsewhere do not give monicity of one minus shift.",
+   "date": "2026-10-12",
+   "verdict": "no match for telescope monicity"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.mappingCone.quasiIso_descShortComplex",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+  "how": "At line 137 quasiIso_descShortComplex hS proves QuasiIso (descShortComplex S) for any S.ShortExact. descShortComplex (line 53) is desc S.f 0 S.g. inr_descShortComplex (line 56) and inl_desc (MappingCone) identify the two summand restrictions."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TelescopeColimit",
+  "group": "U3",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the homotopy-colimit construction used before the final comparison; step 2 of lem-pc-complex-hocolim-colimit: the canonical cone-to-colimit map is a quasi-isomorphism",
+   "via": [
+    "lem-pc-complex-hocolim-colimit",
+    "lem-pc-kflat-hocolim-truncations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Homology.HomotopyCategory.ShortExact",
+  "declaration": "CochainComplex.mappingCone.quasiIso_descShortComplex",
+  "statement": "lemma quasiIso_descShortComplex : QuasiIso (descShortComplex S)",
+  "branch": "mathlib",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1976a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135324-L-1696045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1976a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135324-L-1696045",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly, target signatures and node statements match, and the required direct importer compiles against the delivery."
+ }
+}

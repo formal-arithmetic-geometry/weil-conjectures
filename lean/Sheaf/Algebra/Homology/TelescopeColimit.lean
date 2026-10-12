@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
+import Sheaf.Algebra.Homology.TelescopeShiftMono
 
 /-!
 # Telescope comparison for complexes of sheaves of modules
@@ -52,6 +53,50 @@ noncomputable def telescopeToColimit :
     (∐ (fun n : ℕ => E.obj n)) ⟶ colimit E :=
   Sigma.desc (fun n : ℕ => colimit.ι E n)
 
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def telescope_cokernel
+    (h : telescopeShift R E ≫ telescopeToColimit R E = 0) :
+    IsColimit (CokernelCofork.ofπ (telescopeToColimit R E) h) := by
+  let cocone (s : CokernelCofork (telescopeShift R E)) : Cocone E :=
+    { pt := s.pt
+      ι :=
+        { app := fun n ↦ Sigma.ι (fun n : ℕ ↦ E.obj n) n ≫ s.π
+          naturality := by
+            intro n m f
+            have hs (k : ℕ) :
+                E.map (homOfLE (Nat.le_succ k)) ≫
+                    Sigma.ι (fun n : ℕ ↦ E.obj n) (k + 1) ≫ s.π =
+                  Sigma.ι (fun n : ℕ ↦ E.obj n) k ≫ s.π := by
+              have hz := congrArg
+                (fun z ↦ Sigma.ι (fun n : ℕ ↦ E.obj n) k ≫ z) s.condition
+              simp only [telescopeShift, Sigma.ι_desc_assoc, Preadditive.sub_comp,
+                Category.assoc, comp_zero] at hz
+              exact (sub_eq_zero.mp hz).symm
+            have hall (m : ℕ) (hnm : n ≤ m) :
+                E.map (homOfLE hnm) ≫
+                    Sigma.ι (fun n : ℕ ↦ E.obj n) m ≫ s.π =
+                  Sigma.ι (fun n : ℕ ↦ E.obj n) n ≫ s.π := by
+              induction m, hnm using Nat.le_induction with
+              | base => simp
+              | succ k hnk ih =>
+                rw [show homOfLE (Nat.le_trans hnk (Nat.le_succ k)) =
+                  homOfLE hnk ≫ homOfLE (Nat.le_succ k) from Subsingleton.elim _ _]
+                rw [E.map_comp, Category.assoc, hs k]
+                exact ih
+            have hf : f = homOfLE (leOfHom f) := Subsingleton.elim _ _
+            rw [hf]
+            exact hall m (leOfHom f) } }
+  refine Cofork.IsColimit.mk _ (fun s ↦ colimit.desc E (cocone s)) ?_ ?_
+  · intro s
+    apply Sigma.hom_ext
+    intro n
+    simp [telescopeToColimit, cocone]
+  · intro s m hm
+    apply colimit.hom_ext (F := E)
+    intro n
+    have hn := congrArg (fun z ↦ Sigma.ι (fun n : ℕ ↦ E.obj n) n ≫ z) hm
+    simpa [telescopeToColimit, cocone, Category.assoc] using hn
+
 /-- (blueprint: lem-pc-complex-hocolim-colimit) For a sequential system of cochain
 complexes of sheaves of modules on a ringed site, the canonical map from the cone
 of `1 - shift` on its direct sum to its termwise filtered colimit is a
@@ -70,6 +115,20 @@ theorem quasiIso_telescopeColimit
       (mappingCone.inl (telescopeShift R E)).comp
         (Cochain.ofHom f) (add_zero _) = 0 ∧
       QuasiIso f := by
-  sorry
+  have h : telescopeShift R E ≫ telescopeToColimit R E = 0 := by
+    apply Sigma.hom_ext
+    intro n
+    simp [telescopeShift, telescopeToColimit, Preadditive.sub_comp,
+      Category.assoc, colimit.w]
+  let S := ShortComplex.mk (telescopeShift R E) (telescopeToColimit R E) h
+  have hc := telescope_cokernel R E h
+  have hmono : Mono (telescopeShift R E) := telescopeShift_mono R E
+  have hS : S.ShortExact :=
+    { exact := S.exact_of_g_is_cokernel hc
+      mono_f := hmono
+      epi_g := epi_of_isColimit_cofork hc }
+  refine ⟨mappingCone.descShortComplex S, mappingCone.inr_descShortComplex S, ?_,
+    mappingCone.quasiIso_descShortComplex hS⟩
+  exact mappingCone.inl_desc S.f 0 S.g (by simp)
 
 end CochainComplex

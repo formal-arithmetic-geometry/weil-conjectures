@@ -26,40 +26,45 @@
  ],
  "proof": [
   {
-   "text": "Put $A^\\bullet=\\bigoplus_n E_n^\\bullet$ and let $u=1-\\operatorname{shift}:A^\\bullet\\to A^\\bullet$. In each degree, an element of the direct sum has finite support; if $u(x)=0$, its first nonzero component cannot cancel with an earlier component, so the least component is zero, and induction gives $x=0$. Thus $u$ is termwise injective. The cokernel in degree $i$ is the quotient of $\\bigoplus_n E_n^i$ by the relations identifying each element with its image in the next summand, which is exactly the filtered colimit $\\varinjlim_n E_n^i$. These identifications commute with the differentials, so $\\operatorname{coker}(u)$ is the termwise filtered-colimit complex.",
+   "text": "Let u = telescopeShift and q = telescopeToColimit. On summand n the composite u q is colimit.ι_n minus E(n≤n+1) followed by colimit.ι_(n+1), hence zero by the colimit cocone identity.",
    "uses": [
     "def-pc-cochain-complex-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0949 (derived-lemma-colim-hocolim), proof"
-   }
+   "elementary": true
   },
   {
-   "text": "With the cone convention of [def-weil-abstract-derived-category], the cone of $u$ is $C(u)^r=A^r\\oplus A^{r+1}$ with differential $(l,k)\\mapsto(d(l)+u(k),-d(k))$. The map $\\pi:C(u)\\to\\operatorname{coker}(u)$, $(l,k)\\mapsto[l]$, is a termwise surjective chain map, since $[d(l)+u(k)]=[d(l)]$; this is the canonical map from $\\operatorname{hocolim}_n E_n^\\bullet=C(u)$ to $\\varinjlim_n E_n^\\bullet$ (Step 1). Its kernel $K^\\bullet$ consists of the pairs $(u(c),k)$, with $c$ unique because $u$ is termwise injective (Step 1). $K^\\bullet$ is contractible: $h(u(c),k)=(0,c)$, of degree $-1$, satisfies $dh+hd=1$, because $d(0,c)=(u(c),-d(c))$ and $h(d(u(c),k))=h(u(d(c)+k),-d(k))=(0,d(c)+k)$. Hence $H^i(K^\\bullet)=0$ for all $i$. The degreewise short exact sequence $0\\to K^\\bullet\\to C(u)\\xrightarrow{\\pi}\\operatorname{coker}(u)\\to0$ of complexes of $\\mathcal O$-modules has the long exact cohomology sequence $\\cdots\\to H^i(K^\\bullet)\\to H^i(C(u))\\xrightarrow{H^i(\\pi)}H^i(\\operatorname{coker}(u))\\to H^{i+1}(K^\\bullet)\\to\\cdots$ (snake lemma in the abelian category $\\Mod(\\mathcal O)$, Stacks Lemma 0117), so every $H^i(\\pi)$ is an isomorphism. Thus $\\pi$ is a quasi-isomorphism in the sense of [def-pc-quasi-iso-modules]. (Equivalently, [lem-weil-pbc-complex-ses-triangle] applied to $0\\to A^\\bullet\\xrightarrow{u}A^\\bullet\\to\\operatorname{coker}(u)\\to0$ exhibits $\\varinjlim_n E_n^\\bullet$ as a cone of $Q(u)$ in $D(\\Mod(\\mathcal O))$; the explicit $\\pi$ above is what makes the comparison map canonical.)",
+   "text": "Construct the cokernel cofork of u with projection q. A cofork p annihilating u gives maps a_n = ι_n p satisfying a_n = E(n≤n+1)a_(n+1). Induction extends this relation to every n≤m, so the a_n form a cocone. The colimit universal property supplies the unique factorization through q, verified on coproduct injections. The Lean helper telescope_cokernel carries this explicit construction.",
    "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-weil-abstract-derived-category",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use lem-pc-telescope-shift-mono for monicity of u. The cokernel cofork from step 2 makes q epic and the short complex (u,q) exact, so the resulting sequence is short exact.",
+   "uses": [
+    "lem-pc-telescope-shift-mono"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-cone-short-exact-quasi-iso to the resulting short exact sequence. Its actual morphism is mappingCone.descShortComplex, whose unshifted restriction is q and whose shifted cochain restriction is zero. Mathlib inr_descShortComplex and inl_desc give the two required identities. This proves the original existential with its canonicality clauses unchanged.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
     "def-pc-quasi-iso-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0949 (derived-lemma-colim-hocolim), proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-cochain-complex-modules",
-  "lem-weil-pbc-complex-ses-triangle",
-  "def-weil-abstract-derived-category",
+  "lem-pc-telescope-shift-mono",
+  "lem-pc-cone-short-exact-quasi-iso",
   "def-pc-quasi-iso-modules"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 0949 (derived-lemma-colim-hocolim), proof"
+  "place": "Tag 0949 using Tag 093W; canonical cone comparison implemented by Mathlib mappingCone.quasiIso_descShortComplex"
  },
  "mathlib_searches": [
   {
@@ -150,5 +155,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1976a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135324-L-1696045",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly, target signatures and node statements match, and the required direct importer compiles against the delivery."
  }
 }
