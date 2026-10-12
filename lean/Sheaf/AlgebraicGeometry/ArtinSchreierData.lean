@@ -4,12 +4,9 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
-import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
-import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+
+import Sheaf.AlgebraicGeometry.ArtinSchreierDataConstruction
+import Sheaf.AlgebraicGeometry.ArtinSchreierDataFormulas
 
 @[expose] public section
 universe u
@@ -18,6 +15,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 set_option autoImplicit false
 
+set_option linter.unusedVariables false in
 /-- The sectionwise data for the Artin--Schreier sequence.
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md,
 node `lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
@@ -50,6 +48,8 @@ theorem artinSchreier_data
             ((Functor.const C.Etaleᵒᵖ).obj
               (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =
           (c.val : Γ(U.unop.left, ⊤))) := by
-  sorry
+  obtain ⟨G, hG, a, hrestr⟩ := artinSchreier_construction C
+  obtain ⟨wp, iota, hzero, hwp, hiota⟩ := artinSchreier_formulas f p hp G a hrestr
+  exact ⟨G, hG, a, wp, iota, hzero, hrestr, hwp, hiota⟩
 
 end AlgebraicGeometry

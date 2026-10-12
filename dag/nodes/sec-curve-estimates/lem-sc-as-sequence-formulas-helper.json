@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Proof, the maps paragraph (no exactness or stalk argument)"
+ },
+ "proof_origin": {
+  "by": "K1 second reader",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Proof, maps paragraph; restriction identification also uses Stacks Tags 0096, 01CA, 03DR, 03DU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafifyLift|sheafify.*homEquiv|frobenius.*map_add",
+   "date": "2026-10-12",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/FieldTheory/PerfectClosure.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "digest": "9f1b34362f1e06a6",
+   "verdict": "No complete match; individual Frobenius and sheafification lemmas support the maps construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of the structure sheaf is canonically the structure sheaf, naturally in the morphism; global sections are naturally isomorphic",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.StructureSheaf.comap_id_eq_map, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.StructureSheaf.comap_id', AlgebraicGeometry.StructureSheaf.comap_id, AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app, AlgebraicGeometry.Spec.map_appLE, AlgebraicGeometry.Spec.map_app, AlgebraicGeometry.Scheme.IdealSheafData.comap_id",
+   "digest": "bc1fdd750e40c3b2",
+   "verdict": "No complete match; individual Frobenius and sheafification lemmas support the maps construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "frobenius, RingHom",
+   "date": "2026-10-12",
+   "results": "frobenius, iterateFrobenius_one, frobenius_def, iterate_frobenius, coe_iterateFrobenius, RingHom.frobenius_comm, iterateFrobenius_eq_pow, RingHom.iterate_map_frobenius",
+   "digest": "3c99f19f84047788",
+   "verdict": "No complete match; individual Frobenius and sheafification lemmas support the maps construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct Frobenius minus identity and the constant ZMod p map to a sheaf of abelian groups identified naturally with regular functions on the small etale site in characteristic p",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArtinSchreierData",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-sc-as-sequence-formulas-helper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-as-sequence",
+   "place": "maps paragraph",
+   "via": [
+    "lem-sc-as-sequence-data"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Artin–Schreier formulas helper",
+ "statement": "Let f : C → Spec k be a curve [def-sc-curves] over an algebraically closed field k of positive characteristic p. Let G be an abelian sheaf on the small etale site [def-weil-pbc-etale-site] and suppose additive equivalences a_U : G(U) ≃ Gamma(U,O_U) commute with restrictions. There exist wp : G → G and iota : C.constantZMod p → G [def-sc-constant-sheaves] with iota ≫ wp = 0, a_U(wp_U(x)) = a_U(x)^p - a_U(x), and a_U(iota_U(eta_U(c))) = (c.val : Gamma(U,O_U)) for each c in ZMod p; eta is the constant-presheaf sheafification unit [def-weil-pbc-sheafification].",
+ "proof": [
+  {
+   "text": "Positive field characteristic is prime. Pulling functions back along U → C → Spec k gives p = 0 in Gamma(U,O_U), even on the empty U. Binomial expansion proves additivity of x^p - x. Conjugation by the natural a_U defines wp; ring-homomorphic restrictions preserve powers and subtraction, so its components are natural.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The canonical ring map ZMod p → Gamma(U,O_U), c ↦ c.val, composed with ULift.down and a_U inverse, gives a natural additive constant-presheaf map. Extend it uniquely through sheafification to iota. The extension equation and the definition of wp give the two section formulas.",
+   "uses": [
+    "def-sc-constant-sheaves",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fermat gives c^p = c in ZMod p, so the composite with wp is zero before sheafification. Uniqueness of the extension then implies iota ≫ wp = 0.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-sheafification"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreierDataFormulas",
+  "declaration": "AlgebraicGeometry.artinSchreier_formulas",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSchreierDataFormulas.lean",
+  "statement": "theorem artinSchreier_formulas\n    {k : Type u} [Field k] [IsAlgClosed k]\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]\n    (p : ℕ) [CharP k p] (hp : 0 < p)\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (hrestr : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x)) :\n    ∃ (wp : G ⟶ G) (iota : C.constantZMod p ⟶ G) (_hzero : iota ≫ wp = 0),\n      (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n        a U (wp.hom.app U x) = (a U x) ^ p - a U x) ∧\n      (∀ (U : C.Etaleᵒᵖ) (c : ZMod p),\n        a U (iota.hom.app U\n          ((toSheafify C.smallEtaleTopology\n            ((Functor.const C.Etaleᵒᵖ).obj\n              (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =\n          (c.val : Γ(U.unop.left, ⊤)))",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-site",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7d5f8",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T060743-L-2910060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7d5f8",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T060743-L-2910060",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged artinSchreier_data signature, its two-helper proof, helper statements and docstrings, DAG records, import change record, and report; all three modules compile cleanly and axiom checks show only permitted axioms plus sorryAx from the open helpers."
+ },
+ "mathlib_match": null
+}

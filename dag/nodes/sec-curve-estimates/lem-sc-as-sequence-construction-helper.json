@@ -1,0 +1,135 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Proof, the maps paragraph (no exactness or stalk argument)"
+ },
+ "proof_origin": {
+  "by": "K1 second reader",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Proof, maps paragraph; restriction identification also uses Stacks Tags 0096, 01CA, 03DR, 03DU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafifyLift|sheafify.*homEquiv|frobenius.*map_add",
+   "date": "2026-10-12",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/FieldTheory/PerfectClosure.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "digest": "9f1b34362f1e06a6",
+   "verdict": "No complete match; individual Frobenius and sheafification lemmas support the maps construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of the structure sheaf is canonically the structure sheaf, naturally in the morphism; global sections are naturally isomorphic",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.StructureSheaf.comap_id_eq_map, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.StructureSheaf.comap_id', AlgebraicGeometry.StructureSheaf.comap_id, AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app, AlgebraicGeometry.Spec.map_appLE, AlgebraicGeometry.Spec.map_app, AlgebraicGeometry.Scheme.IdealSheafData.comap_id",
+   "digest": "bc1fdd750e40c3b2",
+   "verdict": "No complete match; individual Frobenius and sheafification lemmas support the maps construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "frobenius, RingHom",
+   "date": "2026-10-12",
+   "results": "frobenius, iterateFrobenius_one, frobenius_def, iterate_frobenius, coe_iterateFrobenius, RingHom.frobenius_comm, iterateFrobenius_eq_pow, RingHom.iterate_map_frobenius",
+   "digest": "3c99f19f84047788",
+   "verdict": "No complete match; individual Frobenius and sheafification lemmas support the maps construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct Frobenius minus identity and the constant ZMod p map to a sheaf of abelian groups identified naturally with regular functions on the small etale site in characteristic p",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArtinSchreierData",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-sc-as-sequence-construction-helper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-as-sequence",
+   "place": "maps paragraph",
+   "via": [
+    "lem-sc-as-sequence-data"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Artin–Schreier construction helper",
+ "statement": "For any scheme C [def-pc-scheme], there exist an abelian sheaf G on its small etale site [def-weil-pbc-etale-site], an isomorphism from G to the ULift of the etale tensor-sections sheaf of the structure module [def-sc-etale-qcoherent-module], and additive equivalences a_U : G(U) ≃ Gamma(U,O_U) for every etale U over C, such that a_V(G(g)(x)) = g-sharp(a_U(x)) for every g : V → U over C and x in G(U).",
+ "proof": [
+  {
+   "text": "Choose the lifted etale tensor-sections sheaf G and its identity isomorphism. Quasi-coherent descent gives its sheaf condition.",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "lem-sc-etale-qcoherent-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each u : U → C, evaluate the adjoint structure-module isomorphism epsilon_u on the top open and compose with ULift.down to define the additive equivalence a_U.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restriction in the tensor-sections presheaf is the canonical adjunction unit followed by normalized composition and transport. By the unit characterizations of epsilon_u and epsilon_v, epsilon_v after this restriction and g-sharp after epsilon_u have the same adjoint. Uniqueness proves equality; evaluation gives the naturality equation.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreierDataConstruction",
+  "declaration": "AlgebraicGeometry.artinSchreier_construction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSchreierDataConstruction.lean",
+  "statement": "theorem artinSchreier_construction (C : Scheme.{u}) :\n    ∃ (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n      (_ : G ≅ (sheafCompose C.smallEtaleTopology\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n          (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unitObj C)))\n      (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤)),\n      ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n        a V (G.obj.map g x) = g.unop.left.appTop (a U x)",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7d5f8",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T060743-L-2910060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7d5f8",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T060743-L-2910060",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged artinSchreier_data signature, its two-helper proof, helper statements and docstrings, DAG records, import change record, and report; all three modules compile cleanly and axiom checks show only permitted axioms plus sorryAx from the open helpers."
+ },
+ "mathlib_match": null
+}

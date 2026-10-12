@@ -5,9 +5,9 @@
   "place": "Construction and exactness parts of the Artin–Schreier sequence"
  },
  "proof_origin": {
-  "by": "worker",
+  "by": "K1 second reader",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
-  "place": "Proof split for stage 3"
+  "place": "Proof, maps paragraph; separates natural section identification from existence of maps."
  },
  "mathlib_searches": [
   {
@@ -62,15 +62,17 @@
  "statement": "The construction of the Artin–Schreier sheaf, its section equivalences, maps, zero composite, and section formulas for a curve over an algebraically closed field of characteristic p>0.",
  "proof": [
   {
-   "text": "The theorem is the corresponding construction/exactness portion of the Artin–Schreier proof, with the remaining portion supplied as a hypothesis or companion theorem.",
+   "text": "Choose the sheaf, its recorded isomorphism and natural additive section equivalences from artinSchreier_construction. Apply artinSchreier_formulas to these very equivalences and their naturality proof, obtaining wp, iota, their zero composite and both map formulas. Combine the witnesses and three equations.",
    "uses": [
-    "lem-sc-as-sequence"
+    "lem-sc-as-sequence-construction-helper",
+    "lem-sc-as-sequence-formulas-helper"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-as-sequence"
+  "lem-sc-as-sequence-construction-helper",
+  "lem-sc-as-sequence-formulas-helper"
  ],
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ArtinSchreierData",
@@ -96,11 +98,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "X-7d5f8",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T044737-L-2031778",
+  "landing": "20261012T060743-L-2910060",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged artinSchreier_data signature, its two-helper proof, helper statements and docstrings, DAG records, import change record, and report; all three modules compile cleanly and axiom checks show only permitted axioms plus sorryAx from the open helpers."
  }
 }
