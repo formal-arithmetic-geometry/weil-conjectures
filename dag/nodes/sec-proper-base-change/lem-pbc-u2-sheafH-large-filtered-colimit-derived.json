@@ -24,20 +24,33 @@
  ],
  "proof": [
   {
-   "text": "Repeat the qcqs finite-cover and injective-resolution proof of filtered-colimit continuity, with all objects and morphisms of the filtered index category in Type(u+1). Filtered colimits remain exact and the finite Cech complexes commute with them; induction through the long exact sequences gives continuity in every degree.",
+   "text": "Apply Mathlib CategoryTheory.IsFiltered.exists_directed to A. It supplies a nonempty directed partial order B in the same universe Type(u+1), and a final functor F : B → A. Install these supplied instances. No universe shrinking, torsion assumption or restriction of diagrams is needed.",
    "uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit"
+    "lem-weil-pbc-filtered-category-exists-directed-final"
    ],
    "elementary": false
+  },
+  {
+   "text": "The inverse of Functor.Final.isColimitWhiskerEquiv F c makes c.whisker F a colimit cocone for F composed with D, with the original vertex and restricted legs. Apply the existing coefficient-size etaleCohomology_isColimit_of_isDirected X to this cocone in degree q.",
+   "uses": [
+    "lem-weil-pbc-etale-directed-cohomology-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functor.mapCocone commutes definitionally with cocone whiskering in this situation, so the result of step 2 is a colimit witness for the whiskering by F of the displayed image cocone. The forward direction of Functor.Final.isColimitWhiskerEquiv F applied to this image cocone gives precisely the desired witness. This elementary universal-property transport keeps both the vertex and all original mapped cocone legs.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-filtered-colimit"
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-etale-directed-cohomology-colimit"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03Q5 and 0739"
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0032, directed final reindexing, combined with the existing coefficient-size directed cohomology theorem (Tag 03Q5 and sites-cohomology.tex Tag 0739). D2 repair uses Mathlib exists_directed and Final.isColimitWhiskerEquiv to restrict and recover the supplied cocone."
  },
  "mathlib_searches": [
   {
@@ -95,9 +108,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T053920-L-2630140",
+  "landing": "20261012T085223-L-7673",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

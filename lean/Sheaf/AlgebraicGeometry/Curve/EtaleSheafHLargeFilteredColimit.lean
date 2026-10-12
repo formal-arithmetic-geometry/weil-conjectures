@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group U2
+Authors: SHEAF groups U2, J1, R2 and D2
 -/
 module
 
@@ -10,7 +10,8 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Mathlib.CategoryTheory.Presentable.Directed
+import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Continuity of Ext cohomology for large filtered diagrams -/
@@ -39,7 +40,14 @@ theorem etaleCohomology_isColimit_large_filtered
     Nonempty (IsColimit
       ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
         Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).mapCocone c)) := by
-  sorry
+  obtain ⟨B, horder, hdirected, hnonempty, F, hfinal⟩ := IsFiltered.exists_directed A
+  let := horder
+  let := hdirected
+  let := hnonempty
+  let := hfinal
+  have hF : IsColimit (c.whisker F) := (Functor.Final.isColimitWhiskerEquiv F c).symm hc
+  obtain ⟨hH⟩ := etaleCohomology_isColimit_of_isDirected X hF q
+  exact ⟨Functor.Final.isColimitWhiskerEquiv F _ hH⟩
 
 theorem sheafH_isColimit_large_filtered
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
