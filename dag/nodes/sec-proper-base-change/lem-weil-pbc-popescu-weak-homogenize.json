@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-popescu-weak-homogenize",
+ "kind": "statement",
+ "title": "Partial homogenization and target denominator clearing",
+ "statement": "Let $R$ and $\\Lambda$ be commutative rings with an $R$-algebra structure on $\\Lambda$, and let $\\mathfrak q\\subset\\Lambda$ be a prime ideal with localization $\\Lambda_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. Let $n,m,c\\ge0$, $f_j\\in R[x_1,\\ldots,x_{n+m}]$, $a_i\\in\\Lambda$ for $1\\le i\\le n$, and $y_i\\in\\Lambda_{\\mathfrak q}$ for $1\\le i\\le n+m$ [def-weil-pbc-mv-polynomial-ring]. Assume $y_i=a_i/1$ for $i\\le n$ and $f_j(y)=0$ for all $j$. There are $d_j\\ge0$, polynomials $F_j\\in R[x_0,x_1,\\ldots,x_{n+m},w]$, and values $l_0,l_1,\\ldots,l_{n+m},l_w\\in\\Lambda$ such that: every support monomial $x^e$ of $f_j$ has extra degree $E(e)=\\sum_{i>n}e_i\\le d_j$; $F_j=\\sum_e (f_j)_e\\prod_{i=1}^{n+m}x_i^{e_i} w^{d_j-E(e)}$; $l_i=a_i$ for $i\\le n$; $l_0,l_w\\notin\\mathfrak q$; and $l_0F_j(l_1,\\ldots,l_{n+m},l_w)=0$ in $\\Lambda$ for every $j$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak), lines 2189–2211, homogenization and the common target annihilator"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write the last $m$ values as fractions in $\\Lambda_{\\mathfrak q}$. Choose $w$ to be the product of their denominators and multiply each numerator by the other denominators. Thus all these values have denominator $w\\notin\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
+   }
+  },
+  {
+   "text": "For each $j$, choose $d_j$ as the maximum extra-variable degree of the finite support, zero if the support is empty. Define $F_j$ by the indicated finite monomial sum, with original indices shifted by one to leave room for $x_0$. Assign the first $n$ values to $a_i$, the extra values to the adjusted numerators, and the last to $w$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
+   }
+  },
+  {
+   "text": "In the localization, every monomial of $F_j$ evaluates to $w^{d_j}$ times the corresponding monomial of $f_j(y)$: the extra denominators cancel against $w^{E(e)}$, with $E(e)\\le d_j$. Summing gives zero by the hypothesis on $f_j$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
+   }
+  },
+  {
+   "text": "The localization zero criterion supplies one annihilator outside $\\mathfrak q$ for each unlocalized evaluated $F_j$. Let $l_0$ be their product, or $1$ for an empty family. Primality keeps it outside $\\mathfrak q$, and it annihilates every evaluated $F_j$. The displayed equations follow. Empty extra-variable families likewise use denominator $1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak), lines 2189–2211, homogenization and the common target annihilator"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homogenize the last variables of multivariate polynomial equations evaluated to zero in a prime localization, and clear denominators with one common annihilator",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogenize the last variables of multivariate polynomial equations evaluated to zero in a prime localization, and clear denominators with one common annihilator",
+   "results": "Polynomial.eval_homogenize handles a univariate polynomial over a semifield; IsLocalization.coeffIntegerNormalization handles univariate coefficient denominators. HomogeneousLocalization and Generators.localizationAway_σ do not give this partial multivariate homogenization statement.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeniz.*localiz|localiz.*homogeniz|homogeniz.*eval",
+   "results": "5 hits in Algebra/Polynomial/Homogenize.lean, only univariate homogenization and evaluation formulas.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuDelocalizeWeak",
+  "group": "Q3",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); lines 2189–2211, homogenization and the common target annihilator",
+   "via": [
+    "lem-weil-pbc-popescu-delocalize-weak",
+    "lem-weil-pbc-popescu-delocalize-height-zero",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuWeakHomogenize",
+  "file": "lean/Sheaf/RingTheory/PopescuWeakHomogenize.lean",
+  "declaration": "Algebra.exists_homogenized_local_equations",
+  "statement": "theorem exists_homogenized_local_equations {R : Type u} {Λ : Type v} [CommRing R] [CommRing Λ] [Algebra R Λ] (q : PrimeSpectrum Λ) (n m c : ℕ) (f : Fin c → MvPolynomial (Fin (n + m)) R) (a : Fin n → Λ) (y : Fin (n + m) → Localization.AtPrime q.asIdeal) (hy : ∀ i : Fin n, y (Fin.castAdd m i) = algebraMap Λ (Localization.AtPrime q.asIdeal) (a i)) (hf : ∀ j, aeval y (f j) = 0) : ∃ (d : Fin c → ℕ) (F : Fin c → MvPolynomial (Fin (n + m + 2)) R) (l : Fin (n + m + 2) → Λ), (∀ j : Fin c, ∀ e ∈ (f j).support, (∑ i : Fin (n + m), if n ≤ i.val then e i else 0) ≤ d j) ∧ (∀ j : Fin c, F j = ∑ e ∈ (f j).support, MvPolynomial.C ((f j).coeff e) * (∏ i : Fin (n + m), X i.castSucc.succ ^ e i) * X (Fin.last (n + m + 1)) ^ (d j - ∑ i : Fin (n + m), if n ≤ i.val then e i else 0)) ∧ (∀ i : Fin n, l (Fin.castLE (Nat.le_add_right n m) i).castSucc.succ = a i) ∧ l 0 ∉ q.asIdeal ∧ l (Fin.last (n + m + 1)) ∉ q.asIdeal ∧ (∀ j : Fin c, aeval l (X (0 : Fin (n + m + 2)) * F j) = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

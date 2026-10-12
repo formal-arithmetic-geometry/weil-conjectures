@@ -111,7 +111,7 @@
    }
   },
   {
-   "text": "(A standard smooth presentation of $D$ containing the generators of $A$.) By [lem-weil-pbc-standard-smooth-include-generators] (Stacks 07EY) applied to the standard smooth $R_{\\mathfrak p}$-algebra $D$ and $a_1,\\dots,a_n$ there are $m\\ge0$, $n\\le c\\le n+m$, $f_1,\\dots,f_c\\in P':=R_{\\mathfrak p}[x_1,\\dots,x_{n+m}]$ and an isomorphism of $R_{\\mathfrak p}$-algebras $P'/(f_1,\\dots,f_c)\\cong D$ sending the class of $x_i$ to $a_i$ ($i\\le n$), such that $\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ [def-weil-pbc-polynomial-partial-derivative] is invertible in $D$ [def-weil-pbc-standard-smooth-algebra]. We identify $D=P'/(f_1,\\dots,f_c)$; then $\\beta_D$ sends $\\bar x_i\\otimes1$ to the class of $x_i$.",
+   "text": "(A standard smooth presentation of $D$ containing the generators of $A$.) By [lem-weil-pbc-standard-smooth-include-generators] (Stacks 07EY) applied to the standard smooth $R_{\\mathfrak p}$-algebra $D$ and $a_1,\\dots,a_n$ there are $m\\ge0$, $c\\le n+m$, $f_1,\\dots,f_c\\in P':=R_{\\mathfrak p}[x_1,\\dots,x_{n+m}]$ and an isomorphism of $R_{\\mathfrak p}$-algebras $P'/(f_1,\\dots,f_c)\\cong D$ sending the class of $x_i$ to $a_i$ ($i\\le n$), such that $\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ [def-weil-pbc-polynomial-partial-derivative] is invertible in $D$ [def-weil-pbc-standard-smooth-algebra]. We identify $D=P'/(f_1,\\dots,f_c)$; then $\\beta_D$ sends $\\bar x_i\\otimes1$ to the class of $x_i$.",
    "uses": [
     "lem-weil-pbc-standard-smooth-include-generators",
     "def-weil-pbc-standard-smooth-algebra",
@@ -124,79 +124,30 @@
    }
   },
   {
-   "text": "($P'$ is the localization of $P=R[x_1,\\dots,x_{n+m}]$ at $S=R\\setminus\\mathfrak p$.) $R_{\\mathfrak p}=S^{-1}R$ [def-weil-pbc-localization-at-prime]. Let $\\varphi:P\\to P'$ apply $R\\to R_{\\mathfrak p}$ to the coefficients. By [lem-weil-pbc-polynomial-scalar-extension] $P'\\cong R_{\\mathfrak p}\\otimes_RP$ compatibly with $\\varphi$ ($p\\mapsto1\\otimes p$), and by [lem-weil-pbc-localization-base-change] (with $D=P$ and $R\\to R_{\\mathfrak p}$ the localization at $S$) $P\\to P\\otimes_RR_{\\mathfrak p}$ is a localization of $P$ at the image of $S$ [def-weil-pbc-module-localization]. Hence: (a) every element of $P'$ is $u^{-1}\\varphi(p)$ with $p\\in P$, $u\\in S$, and finitely many elements have a common denominator (the product of the denominators); (b) $\\varphi(p)=\\varphi(q)$ implies $vp=vq$ for some $v\\in S$; (c) every $u\\in S$ is a unit in $P'$. Moreover (d) $\\varphi$ commutes with each $\\partial/\\partial x_i$ (both are computed coefficientwise by the monomial formula [def-weil-pbc-polynomial-partial-derivative]) and hence with Jacobian determinants.",
+   "text": "Apply [lem-weil-pbc-popescu-weak-clear-presentation] to the submersive presentation in step 5 and the relations $g_j$ of $A$, which vanish at its first $n$ generators through $A_{\\mathfrak p}\\to D$. Obtain equations $f_j$ over $R$, certificates $s_0-h\\Delta\\in(f)$ and $s_jg_j\\in(f)$, with all $s_j\\notin\\mathfrak p$, and vanishing of every $f_j$ in $D$. This groups the original denominator-clearing steps 6–9.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-polynomial-partial-derivative"
+    "lem-weil-pbc-popescu-weak-clear-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2179-2181 ('after clearing denominators')"
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
    }
   },
   {
-   "text": "(Clearing the denominators of the $f_j$.) By Step 6(a) write $f_j=u_j^{-1}\\varphi(p_j)$ with $p_j\\in P$, $u_j\\in S$. Since $u_j$ is a unit of $P'$ (Step 6(c)), replacing $f_j$ by $u_jf_j=\\varphi(p_j)$ changes neither the ideal $(f_1,\\dots,f_c)$ nor the classes of the $x_i$, hence neither $D$ nor $\\beta_D,\\gamma_D$, and it multiplies $\\det(\\partial f_j/\\partial x_i)_{i,j\\le c}$ by the unit $u_1\\cdots u_c$ ($\\partial/\\partial x_i$ is $R_{\\mathfrak p}$-linear and the determinant is linear in each row [def-weil-pbc-polynomial-partial-derivative]), so it stays invertible in $D$. Hence we may assume $f_j=\\varphi(f_j^0)$ with $f_j^0\\in P$; we write $f_j$ for $f_j^0\\in P$ from now on, and $\\Delta=\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}\\in P$, so that $\\varphi(\\Delta)$ is the Jacobian determinant of the $\\varphi(f_j)$ (Step 6(d)) and is invertible in $D=P'/(\\varphi(f_1),\\dots,\\varphi(f_c))$.",
+   "text": "Compose the generators of $D$ with its map to $\\Lambda_{\\mathfrak q}$. Their first $n$ values are $\\alpha(\\bar x_i)/1$, since the composite of the local factorization is the specified tensor-product lift. Apply [lem-weil-pbc-popescu-weak-homogenize] to obtain degrees $d_j$, explicitly homogenized equations $F_j$, and values $l$ agreeing with $\\alpha(\\bar x_i)$ on the first $n$ generators, with $l_0,l_w\\notin\\mathfrak q$ and evaluation killing $x_0F_j$. This groups original steps 10–11.",
    "uses": [
-    "def-weil-pbc-polynomial-partial-derivative"
+    "lem-weil-pbc-popescu-weak-homogenize",
+    "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2179-2181"
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
    }
   },
   {
-   "text": "(The element $s_0$.) Since $\\varphi(\\Delta)$ is invertible in $D$ there are $a'_0,\\dots,a'_c\\in P'$ with $1=a'_0\\varphi(\\Delta)+\\sum_{j=1}^ca'_j\\varphi(f_j)$. By Step 6(a) write $a'_j=u^{-1}\\varphi(a''_j)$ ($j=0,\\dots,c$) with $a''_j\\in P$ and one $u\\in S$; multiplying by $u$ gives $\\varphi(u)=\\varphi(a''_0\\Delta+\\sum_ja''_jf_j)$, so by Step 6(b) [def-weil-pbc-module-localization] $v(u-a''_0\\Delta-\\sum_ja''_jf_j)=0$ in $P$ for some $v\\in S$. With $s_0=vu\\in S$ and $h=va''_0\\in P$: $s_0-h\\Delta=\\sum_jva''_jf_j\\in(f_1,\\dots,f_c)P$. (This is what Stacks means by 'it becomes invertible after inverting some $s_0\\in R$, $s_0\\notin\\mathfrak p$'.)",
-   "uses": [
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2182-2185"
-   }
-  },
-  {
-   "text": "(The elements $s_1,\\dots,s_t$.) The image of $\\varphi(g_j)$ ($g_j\\in R[x_1,\\dots,x_n]\\subset P$) in $D$ is $g_j$ evaluated at the classes of $x_1,\\dots,x_n$, which is $\\beta_D(g_j(\\bar x_1,\\dots,\\bar x_n)\\otimes1)=\\beta_D(0)=0$ by Steps 4 and 5 ($\\beta_D$ is an $R_{\\mathfrak p}$-algebra map sending $\\bar x_i\\otimes1$ to the class of $x_i$) [def-weil-pbc-mv-polynomial-ring]. So $\\varphi(g_j)=\\sum_kh_k\\varphi(f_k)$ with $h_k\\in P'$; writing $h_k=u^{-1}\\varphi(h'_k)$ (Step 6(a)) gives $\\varphi(ug_j)=\\varphi(\\sum_kh'_kf_k)$, so $v(ug_j-\\sum_kh'_kf_k)=0$ for some $v\\in S$ (Step 6(b) [def-weil-pbc-module-localization]). With $s_j=vu\\in S$: $s_jg_j\\in(f_1,\\dots,f_c)P$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2186-2188"
-   }
-  },
-  {
-   "text": "(The elements $\\lambda_{n+1},\\dots,\\lambda_{n+m+1}$.) For $i=1,\\dots,m$ write $\\gamma_D(\\text{class of }x_{n+i})=\\mu_i/u_i$ with $\\mu_i\\in\\Lambda$, $u_i\\in\\Lambda\\setminus\\mathfrak q$ [def-weil-pbc-localization-at-prime]. Put $\\lambda_{n+m+1}=u_1\\cdots u_m$ ($=1$ if $m=0$), which is not in $\\mathfrak q$ as $\\mathfrak q$ is prime, and $\\lambda_{n+i}=\\mu_i\\prod_{k\\ne i}u_k$; then $\\gamma_D(\\text{class of }x_{n+i})=\\lambda_{n+i}/\\lambda_{n+m+1}$ in $\\Lambda_{\\mathfrak q}$ for $i=1,\\dots,m$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2193-2195"
-   }
-  },
-  {
-   "text": "(Homogenization and the element $\\lambda_0$.) For $j=1,\\dots,c$ write $f_j=\\sum_{e\\in\\mathbf N^m}a_{j,e}x_{n+1}^{e_1}\\cdots x_{n+m}^{e_m}$ with $a_{j,e}\\in R[x_1,\\dots,x_n]$, let $d_j$ be the total degree of $f_j$ in $x_{n+1},\\dots,x_{n+m}$ (the maximum of $|e|=e_1+\\dots+e_m$ over $a_{j,e}\\ne0$; $0$ if $f_j=0$) and $F_j=\\sum_ea_{j,e}X_{n+1}^{e_1}\\cdots X_{n+m}^{e_m}X_{n+m+1}^{d_j-|e|}\\in R[x_1,\\dots,x_n,X_{n+1},\\dots,X_{n+m+1}]$ [def-weil-pbc-mv-polynomial-ring], so $f_j=F_j(x_1,\\dots,x_{n+m},1)$. The $R$-algebra maps $P\\xrightarrow{\\varphi}P'\\to D\\xrightarrow{\\gamma_D}\\Lambda_{\\mathfrak q}$ and the evaluation $P\\to\\Lambda_{\\mathfrak q}$ at $(\\lambda_1/1,\\dots,\\lambda_n/1,\\lambda_{n+1}/\\lambda_{n+m+1},\\dots,\\lambda_{n+m}/\\lambda_{n+m+1})$ agree on every $x_i$ (Steps 4, 5, 10), hence are equal; since $\\varphi(f_j)$ maps to $0$ in $D$, $f_j(\\lambda_1/1,\\dots,\\lambda_{n+m}/\\lambda_{n+m+1})=0$ in $\\Lambda_{\\mathfrak q}$. Multiplying by $(\\lambda_{n+m+1}/1)^{d_j}$ term by term, $a_{j,e}(\\lambda)\\prod_k(\\lambda_{n+k}/\\lambda_{n+m+1})^{e_k}\\cdot\\lambda_{n+m+1}^{d_j}=a_{j,e}(\\lambda)\\prod_k\\lambda_{n+k}^{e_k}\\lambda_{n+m+1}^{d_j-|e|}$, gives $F_j(\\lambda_1,\\dots,\\lambda_{n+m+1})/1=0$ in $\\Lambda_{\\mathfrak q}$. So there is $v_j\\in\\Lambda\\setminus\\mathfrak q$ with $v_jF_j(\\lambda_1,\\dots,\\lambda_{n+m+1})=0$ in $\\Lambda$ [def-weil-pbc-localization-at-prime]; put $\\lambda_0=v_1\\cdots v_c\\notin\\mathfrak q$ ($\\mathfrak q$ prime), so $\\lambda_0F_j(\\lambda_1,\\dots,\\lambda_{n+m+1})=0$ for all $j$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2189-2211"
-   }
-  },
-  {
-   "text": "(The factorization.) Let $B=R[x_0,x_1,\\dots,x_n,X_{n+1},\\dots,X_{n+m+1}]/(g_1,\\dots,g_t,x_0F_1,\\dots,x_0F_c)$, an $R$-algebra of finite presentation ($n+m+2$ variables, $t+c$ relations) [def-weil-pbc-finitely-presented-algebra]. The $R$-algebra map $R[x_1,\\dots,x_n]\\to B$, $x_i\\mapsto$ class of $x_i$, kills each $g_j$, so it induces $\\beta:A\\to B$, $\\bar x_i\\mapsto$ class of $x_i$. The evaluation $R[x_0,\\dots,X_{n+m+1}]\\to\\Lambda$, $x_0\\mapsto\\lambda_0$, $x_i\\mapsto\\lambda_i$, $X_{n+k}\\mapsto\\lambda_{n+k}$, kills $g_j$ (Step 4) and $x_0F_j$ (Step 11) [def-weil-pbc-mv-polynomial-ring], so it induces $\\gamma:B\\to\\Lambda$. Then $\\gamma\\beta(\\bar x_i)=\\lambda_i=\\alpha(\\bar x_i)$ for all $i$, and since the $\\bar x_i$ generate $A$ as an $R$-algebra, $\\gamma\\beta=\\alpha$.",
+   "text": "(The factorization.) Let $B=R[x_0,x_1,\\dots,x_n,X_{n+1},\\dots,X_{n+m+1}]/(g_1,\\dots,g_t,x_0F_1,\\dots,x_0F_c)$, an $R$-algebra of finite presentation ($n+m+2$ variables, $t+c$ relations) [def-weil-pbc-finitely-presented-algebra]. The $R$-algebra map $R[x_1,\\dots,x_n]\\to B$, $x_i\\mapsto$ class of $x_i$, kills each $g_j$, so it induces $\\beta:A\\to B$, $\\bar x_i\\mapsto$ class of $x_i$. The evaluation $R[x_0,\\dots,X_{n+m+1}]\\to\\Lambda$, $x_0\\mapsto\\lambda_0$, $x_i\\mapsto\\lambda_i$, $X_{n+k}\\mapsto\\lambda_{n+k}$, kills $g_j$ (Step 4) and $x_0F_j$ (Step 7) [def-weil-pbc-mv-polynomial-ring], so it induces $\\gamma:B\\to\\Lambda$. Then $\\gamma\\beta(\\bar x_i)=\\lambda_i=\\alpha(\\bar x_i)$ for all $i$, and since the $\\bar x_i$ generate $A$ as an $R$-algebra, $\\gamma\\beta=\\alpha$.",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
     "def-weil-pbc-mv-polynomial-ring"
@@ -208,7 +159,7 @@
    }
   },
   {
-   "text": "($B_b$ is smooth.) Let $b\\in B$ be the class of $x_0X_{n+m+1}s_0s_1\\cdots s_t$. The data $R$, $n,m,c,t$ ($c\\le n+m$ by Step 5), $f_1,\\dots,f_c\\in P$ (Step 7), $g_1,\\dots,g_t$, $s_0,\\dots,s_t$ satisfy hypothesis (i) of [lem-weil-pbc-popescu-delocalize-weak-localization-smooth] with $h$ from Step 8 and hypothesis (ii) by Step 9; the $F_j$ of Step 11 are the polynomials of that node with $d_j$ the total degree, and $B$, $b$ are the algebra and the element there. Hence $B_b$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
+   "text": "($B_b$ is smooth.) Let $b\\in B$ be the class of $x_0X_{n+m+1}s_0s_1\\cdots s_t$. The equations $f_j$ and certificates $s_0-h\\Delta\\in(f)$ and $s_jg_j\\in(f)$ come from Step 6. The degrees $d_j$ bound the extra-variable degrees of all support monomials, and the $F_j$ have the explicit partial homogenization formula, by Step 7. These are exactly the inputs of [lem-weil-pbc-popescu-delocalize-weak-localization-smooth], with $c\\le n+m$ from Step 5 and $B$ from Step 8. Hence $B_b$ is smooth over $R$ [def-weil-pbc-smooth-ring-map].",
    "uses": [
     "lem-weil-pbc-popescu-delocalize-weak-localization-smooth",
     "def-weil-pbc-smooth-ring-map"
@@ -220,14 +171,16 @@
    }
   },
   {
-   "text": "(Conclusion.) By Step 13 and the definition of the singular ideal [def-weil-pbc-singular-ideal], $b$ lies in the set $G$ of elements $g\\in B$ with $B_g$ smooth over $R$, hence $b\\in H_{B/R}=\\sqrt{(G)}$. Its image $\\gamma(b)=\\lambda_0\\lambda_{n+m+1}\\sigma(s_0)\\sigma(s_1)\\cdots\\sigma(s_t)$ ($\\sigma:R\\to\\Lambda$ the structure map) is not in $\\mathfrak q$: $\\lambda_0\\notin\\mathfrak q$ (Step 11), $\\lambda_{n+m+1}\\notin\\mathfrak q$ (Step 10), and $s_j\\in S=R\\setminus\\mathfrak p$ with $\\mathfrak p=\\sigma^{-1}(\\mathfrak q)$ gives $\\sigma(s_j)\\notin\\mathfrak q$; as $\\mathfrak q$ is prime the product is not in $\\mathfrak q$. Thus $H_{B/R}\\Lambda\\not\\subset\\mathfrak q$, and $C=B$ with $\\beta,\\gamma$ of Step 12 is the required factorization.",
+   "text": "The element $b$ is a smooth-localization generator and hence belongs to the radical of their span, namely $H_{B/R}$. Its image is $l_0l_w\\prod_j\\alpha_R(s_j)$, outside $\\mathfrak q$ by primality and the clearing certificates. Thus the ideal generated by the image of $H_{B/R}$ is not contained in $\\mathfrak q$. Transport $B$ to its universe lift $C=\\operatorname{ULift}B$ using the algebra equivalence: finite presentation and the factorization transport, and [lem-weil-pbc-singular-ideal-map-equiv] transports this singular-ideal witness. The minimality hypothesis stays in the signature but is unnecessary for the local unit-ideal argument.",
    "uses": [
-    "def-weil-pbc-singular-ideal"
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-singular-ideal-map-equiv",
+    "def-weil-pbc-finitely-presented-algebra"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), line 2226"
+    "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak)"
    }
   }
  ],
@@ -243,15 +196,15 @@
   "def-weil-pbc-mv-polynomial-ring",
   "lem-weil-pbc-standard-smooth-include-generators",
   "def-weil-pbc-polynomial-partial-derivative",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-popescu-delocalize-weak-localization-smooth"
+  "lem-weil-pbc-popescu-weak-clear-presentation",
+  "lem-weil-pbc-popescu-weak-homogenize",
+  "lem-weil-pbc-popescu-delocalize-weak-localization-smooth",
+  "lem-weil-pbc-singular-ideal-map-equiv"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma Tag 07F9 (lemma-delocalize-weak, line 2148) and its proof, lines 2162-2227"
+  "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak), lines 2162–2227; steps 6–9 and 10–11 isolated as two polynomial lemmas; quotient maps and universe transport implemented in Lean",
+  "by": "document"
  },
  "mathlib_match": null,
  "status": "split",
@@ -305,5 +258,15 @@
   "group": "G1",
   "result": "fix",
   "note": "R Noetherian, A f.p., alpha, q prime; q minimal over popescuIdeal alpha; localized R_p -> R_p⊗A -> Lambda_q at its maximal ideal resolvable (CanBePopescuResolved); concl. exists C:Type(max u v) f.p., beta,gamma, gamma∘beta=alpha, H_{C/R}Lambda ⊄ q; premise restated in E1 height-zero sibling form; L 2026-10-11 12:45: realigned by X-1350 to the E1 9a2392fc7 localized-hypothesis form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
