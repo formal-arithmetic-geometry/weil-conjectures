@@ -5825,3 +5825,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:04 L: merged deliver/U1/Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf (stage 3; reviewer PASS; first push; landing 20261012T020410-L-970280 (proof); modules 1; new nodes 0)
 - 02:04 L: merged deliver/V1/Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent (stage 3; reviewer PASS; first push; landing 20261012T020425-L-971522 (proof); modules 1; new nodes 0)
 - 02:04 L: returned deliver/V1/WeilConjectures.ConstructibleSheaf.LocallyConstantReduction (reviewer RETURN: (reviewer X-01328, head 01328d91d) B2/B3/B5: both new node statements are not self-contained (`F_ℓ` is undefined and no )
+- 02:08 L: merged deliver/K1/Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison (stage 3; reviewer PASS; first push; landing 20261012T020819-L-987360 (proof); modules 1; new nodes 0)
