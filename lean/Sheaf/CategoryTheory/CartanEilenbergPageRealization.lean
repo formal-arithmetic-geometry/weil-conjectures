@@ -8,12 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.CartanEilenbergFunctorial
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.Paper.CartanEilenbergLeftExactCohomology
+import Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor
+import Sheaf.CategoryTheory.CartanEilenbergFilteredTruncationComparison
 
 /-! # CartanEilenbergPageRealization
 
@@ -113,6 +109,33 @@ theorem exists_cartanEilenberg_page_realization
         (e X p q).hom = (k X p q).hom ≫
           (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1)
             (by push_cast; rfl) rfl rfl).hom.app X) := by
-  sorry
+  classical
+  obtain ⟨E, c, hc⟩ := Abelian.SpectralObject.exists_pageTwo_functor
+    (F.grothendieckSpectralObjectFunctor G)
+  obtain ⟨M, L, s, hL, hs⟩ :=
+    exists_cartanEilenberg_filtered_truncation_comparison F G E c hc
+  let k := fun (X : A) (p q : ℕ) ↦ Abelian.SpectralObject.pageTwoComparison
+    (F.grothendieckSpectralObject G X) (c X) p q (p + q : ℕ) (by push_cast; rfl)
+  let e := fun (X : A) (p q : ℕ) ↦ k X p q ≪≫
+    (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1)
+      (by push_cast; rfl) rfl rfl).app X
+  refine ⟨M, E, L, s, e, c, k, hL, ?_, hs, ?_⟩
+  · intro X Y f p q
+    have hk : ((E.map f).hom 2).f ((p : ℤ), (q : ℤ)) ≫ (k Y p q).hom =
+        (k X p q).hom ≫
+          (((F.grothendieckSpectralObjectFunctor G).map f).hom (p + q : ℕ)).app
+            (ComposableArrows.mk₁ (homOfLE
+              (by simp : ((q : ℤ) : EInt) ≤ ((q + 1 : ℤ) : EInt)))) := by
+      dsimp only [k]
+      exact hc X Y f (p : ℤ) (q : ℤ)
+    dsimp only [e, Iso.trans_hom]
+    rw [← Category.assoc, hk, Category.assoc]
+    have h := (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1)
+      (by push_cast; rfl) rfl rfl).hom.naturality f
+    simpa only [Functor.comp_map, Abelian.SpectralObject.hFunctor_map,
+      Category.assoc, Iso.app_hom] using
+      congrArg (fun t ↦ (k X p q).hom ≫ t) h
+  · intro X p q
+    exact ⟨rfl, rfl⟩
 
 end CategoryTheory

@@ -1,0 +1,176 @@
+{
+ "id": "lem-sp-spectral-object-page-two-functor",
+ "kind": "statement",
+ "title": "Functorial page-two realization of spectral objects",
+ "statement": "Let A be a category and C an abelian category [def-sp-abelian]. For every functor S from A to EInt-indexed abelian spectral objects, there is a functor E from A to E₂ cohomological spectral sequences [def-sp-spectral-sequence] and isomorphisms c_X : E(X) ≅ S(X).E₂SpectralSequence. Define k_X(p,q) by evaluating c_X on page two at (p,q), followed by the canonical first-page computation to H^{p+q}(S(X))(q,q+1). For every morphism f : X to Y and integer p,q, E(f)_2(p,q) composed with k_Y(p,q) equals k_X(p,q) composed with the component of S(f) on H^{p+q}(q,q+1).",
+ "source": {
+  "document": "Mathlib spectral-object page construction and Stacks Tag 015K",
+  "place": "Mathlib Algebra/Homology/SpectralObject/SpectralSequence.lean: pageX, pageD, spectralSequenceHomologyData, spectralSequence; FirstPage.lean: spectralSequenceFirstPageXIso; Stacks Tags 012K (morphisms) and 015K (functoriality)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Use the cohomology components of a spectral-object morphism and its compatibility with connecting maps to define a morphism of the three-term short complexes used in Mathlib SpectralObject.SpectralSequence.pageX. Restrict to the kernels and descend through the cokernels defining their homology, obtaining maps of each page object. Naturality of the connecting maps implies commutation with the differentials.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same kernel and cokernel universal-property equations show commutation with Mathlib spectralSequenceHomologyData and hence with its successor-page isomorphisms. Uniqueness proves identity and composition. These page maps give the required functor E, with the existing spectral sequences as objects and c equal to the identity.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At page two the repeated outer indices identify the page with single-interval cohomology through spectralSequenceFirstPageXIso. Its kernel inclusion and cokernel projection commute with the original cohomology components. This gives the asserted naturality square for k.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib spectral-object page construction and Stacks Tag 015K",
+  "place": "finite kernel/image construction and filtered comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial spectral sequence of a filtered complex and comparison to canonical truncation spectral object",
+   "results": "8 hits: ComplexShape.Embedding.πTruncGENatTrans, ComplexShape.Embedding.πTruncGENatTrans_app, ComplexShape.Embedding.ιTruncLENatTrans, ComplexShape.Embedding.ιTruncLENatTrans_app, HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc, CategoryTheory.Triangulated.TStructure.truncGEδLT, ComplexShape.Embedding.truncLE'ToRestrictionNatTrans_app, CategoryTheory.Triangulated.TStructure.truncLTι",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.SpectralObject.spectralSequence",
+   "results": "12 hits: CategoryTheory.Abelian.SpectralObject.spectralSequence, CategoryTheory.Abelian.SpectralObject.isZero_spectralSequence_page_X_of_isZero_H', CategoryTheory.Abelian.SpectralObject.isZero_spectralSequence_page_X_of_isZero_H, CategoryTheory.Abelian.SpectralObject.spectralSequencePageXIso, CategoryTheory.Abelian.SpectralObject.isZero_spectralSequence_page_X_iff, CategoryTheory.Abelian.SpectralObject.spectralSequenceHomologyData, CategoryTheory.Abelian.SpectralObject.spectralSequenceHomologyData_left_H, CategoryTheory.Abelian.SpectralObject.spectralSequenceHomologyData_right_H",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequenceFunctor|spectralSequenceMap",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg filtered injective resolution decallage comparison canonical truncation spectral sequence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spectral objects functorially give spectral sequences with natural first page comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectral objects functorially give spectral sequences with natural first page comparison",
+   "results": "8 hits: CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_ω₁, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ, CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ', CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor, CategoryTheory.Triangulated.SpectralObject.ω₂_map_hom₁, CategoryTheory.Triangulated.SpectralObject.ω₂_obj_mor₁, CategoryTheory.Functor.mapTriangulatedSpectralObject, CategoryTheory.Triangulated.SpectralObject.precomp",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.SpectralObject.spectralSequence",
+   "results": "12 hits: CategoryTheory.Abelian.SpectralObject.spectralSequence, CategoryTheory.Abelian.SpectralObject.isZero_spectralSequence_page_X_of_isZero_H', CategoryTheory.Abelian.SpectralObject.isZero_spectralSequence_page_X_of_isZero_H, CategoryTheory.Abelian.SpectralObject.spectralSequencePageXIso, CategoryTheory.Abelian.SpectralObject.isZero_spectralSequence_page_X_iff, CategoryTheory.Abelian.SpectralObject.spectralSequenceHomologyData, CategoryTheory.Abelian.SpectralObject.spectralSequenceHomologyData_left_H, CategoryTheory.Abelian.SpectralObject.spectralSequenceHomologyData_right_H",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequenceFunctor|spectralSequenceMap",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Eilenberg filtered injective resolution decallage comparison canonical truncation spectral sequence",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.descFSucc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution",
+   "results": "12 hits: CategoryTheory.InjectiveResolution, CategoryTheory.InjectiveResolution.self, CategoryTheory.HasInjectiveResolution.mk, CategoryTheory.HasInjectiveResolution.out, CategoryTheory.InjectiveResolution.cocomplex, CategoryTheory.InjectiveResolution.Hom, CategoryTheory.InjectiveResolution.hasHomology, CategoryTheory.InjectiveResolution.injective",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartanEilenberg|decalage|DecFiltration",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "related API only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergPageRealization",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "second spectral sequence, functoriality, and filtered comparison with truncation",
+   "via": [
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectPageTwoFunctor",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectPageTwoFunctor.lean",
+  "declaration": "CategoryTheory.Abelian.SpectralObject.exists_pageTwo_functor",
+  "statement": "theorem exists_pageTwo_functor {A : Type uA} [Category.{vA} A] {C : Type uC} [Category.{vC} C] [Abelian C] (S : A ⥤ SpectralObject C EInt) : ∃ (E : A ⥤ E₂CohomologicalSpectralSequence C) (c : ∀ X : A, E.obj X ≅ (S.obj X).E₂SpectralSequence), ∀ (X Y : A) (f : X ⟶ Y) (p q : ℤ), ((E.map f).hom 2).f (p, q) ≫ (pageTwoComparison (S.obj Y) (c Y) p q (p + q) rfl).hom = (pageTwoComparison (S.obj X) (c X) p q (p + q) rfl).hom ≫ ((S.map f).hom (p + q)).app (ComposableArrows.mk₁ (homOfLE (by simp : (q : EInt) ≤ ((q + 1 : ℤ) : EInt))))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085355-L-45989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085355-L-45989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

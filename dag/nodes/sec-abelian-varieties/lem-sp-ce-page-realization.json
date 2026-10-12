@@ -15,57 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Construct the resolution-degree subcomplex filtration, and construct its quotient-image spectral sequence functor on filtered complexes. This construction is local in the three adjacent degrees needed for each homology object, so it works without a uniform filtration bound on the entire complex.",
+   "text": "Apply the functorial page-two construction to the spectral-object functor X ↦ GrothendieckSpectralObject(F,G,X), obtaining E, c and the natural page-two comparison k.",
    "uses": [
-    "def-sp-filtered-page-two-model",
-    "def-sp-double-complex-total",
-    "lem-sp-filtered-complex-ZB-description"
+    "lem-sp-spectral-object-page-two-functor"
    ],
    "elementary": false
   },
   {
-   "text": "Choose an injective and CE presentation of each object. Lift maps through the injective resolutions and the CE resolutions, and use independence of comparison maps to enforce identity, composition, and comparison with every presentation, defining E and s.",
+   "text": "Use the filtered Cartan–Eilenberg/truncation comparison for E and c. It supplies the common filtered page model, the second filtrations L, the comparisons s, the filtration equation, and compatibility with every presentation comparison.",
    "uses": [
-    "lem-sp-cartan-eilenberg-exists",
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-weil-pbc-cartesian-eilenberg-functorial",
-    "lem-sp-cartan-eilenberg-comparison-independence"
+    "lem-sp-ce-filtered-truncation-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The horizontal cycles and boundaries are injective, so their short exact sequences split. G preserves the splittings and identifies horizontal cohomology with G of that cohomology. These cohomology complexes resolve R^qF(X). Normalize the resolution differential sign by multiplying the term of degree j by (-1)^(qj), then compute R^pG and its naturality.",
-   "uses": [
-    "lem-sp-cart-eilenberg-left-exact-cohomology",
-    "lem-sp-derived-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use Dec(V)^a Tot(I)^n = {x in V^(a+n) : dx in V^(a+n+1)}. The augmentation of tau_{<=q} F(J) lies in Dec(V)^(-q). The CE resolutions of cycles, boundaries and homology make the graded comparison a quasi-isomorphism. The degreewise Dec filtration has injective graded terms and split steps, by the injectivity of the horizontal cycles and boundaries, so it is a filtered injective resolution of the canonical truncation filtration. Compare filtered injective computations before applying G; G preserves comparison homotopies by additivity. Tag 015X identifies the result with the truncation construction. The Dec cycle/boundary equations identify its first page with the original second page; connecting maps use the same differential. Define k using this comparison and e using the derived single-degree truncation natural isomorphism, obtaining both displayed equations and naturality.",
-   "uses": [
-    "def-sp-cartan-eilenberg-presentation",
-    "lem-sp-derived-well-defined"
-   ],
-   "elementary": false
+   "text": "Compose k with the existing upstream natural isomorphism CategoryTheory.Functor.grothendieckSpectralObjectHIso (WeilConjectures/CategoryTheory/SpectralSequence/Grothendieck.lean) to define e. Compose its naturality equation with hc, reassociating composition, to prove naturality of e. The two displayed equations are definitional. This step does not apply the DAG lemma on well-definedness of derived functors.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-filtered-page-two-model",
-  "def-sp-double-complex-total",
-  "lem-sp-filtered-complex-ZB-description",
-  "lem-sp-cartan-eilenberg-exists",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-weil-pbc-cartesian-eilenberg-functorial",
-  "lem-sp-cartan-eilenberg-comparison-independence",
-  "lem-sp-cart-eilenberg-left-exact-cohomology",
-  "lem-sp-derived-well-defined",
-  "def-sp-cartan-eilenberg-presentation"
+  "lem-sp-spectral-object-page-two-functor",
+  "lem-sp-ce-filtered-truncation-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Derived Categories",
-  "place": "Tags 015J, 015K, 015N and 015X; expanded comparison and sign details by S2"
+  "place": "Lean reduction through the functorial page-two and filtered CE/truncation comparison nodes."
  },
  "mathlib_searches": [
   {
@@ -133,9 +109,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T063520-L-3159660",
+  "landing": "20261012T085355-L-45989",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
