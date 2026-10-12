@@ -243,7 +243,12 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_base
     (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₂ _) hM₂)
   obtain ⟨e₁⟩ := hbc₁
   obtain ⟨e₂⟩ := hbc₂
-  exact ⟨t ≪≫ (R(_)_![ModuleCat.{u + 1} Λ]).mapIso p ≪≫ ku ≪≫ (e₁.symm ⊗ᵢ e₂.symm)⟩
+  exact ⟨t ≪≫ (R(_)_![ModuleCat.{u + 1} Λ]).mapIso p ≪≫ ku ≪≫
+    ((-⊗ᴸ-(pullback b₁ b₂)[ModuleCat.{u + 1} Λ]).mapIso e₁.symm).app _ ≪≫
+    ((-⊗ᴸ-(pullback b₁ b₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂.symm⟩
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
+/-- Blueprint `sk-def-sf-kv-maps` (i), `def-sf-kv-maps` (i): the `!`-Künneth isomorphism.
 
 Let `fᵢ : Xᵢ ⟶ Yᵢ` be separated of finite type between schemes over `S`, let `Λ` be a finite
 coefficient ring and `Mᵢ` in `Dctf(Xᵢ, Λ)`. Writing `f = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`,

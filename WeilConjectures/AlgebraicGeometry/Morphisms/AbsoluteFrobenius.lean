@@ -103,14 +103,6 @@ homeomorphism. -/
 instance isUniversalHomeomorphism_iterateFrobenius :
     IsUniversalHomeomorphism (X.iterateFrobenius hp hX n) where
 
-/-- The `p ^ 0`-power absolute Frobenius is the identity. -/
-lemma iterateFrobenius_zero : X.iterateFrobenius hp hX 0 = 𝟙 X := by
-  refine Scheme.Hom.ext rfl fun U ↦ ?_
-  ext s
-  simp only [eqToHom_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id,
-    Scheme.Hom.id_app, CommRingCat.hom_id, RingHom.id_apply]
-  exact pow_one s
-
 /-- The `p ^ (m + n)`-power absolute Frobenius is the composite of the `p ^ m`-power and the
 `p ^ n`-power absolute Frobenius. -/
 lemma iterateFrobenius_add (m : ℕ) :
@@ -120,7 +112,7 @@ lemma iterateFrobenius_add (m : ℕ) :
   simp only [Hom.comp_base, TopologicalSpace.Opens.map_comp_obj, preimage_iterateFrobenius,
     Hom.comp_app, eqToHom_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id,
     CommRingCat.hom_comp, RingHom.coe_comp, Function.comp_apply]
-  exact (pow_mul_comm s (p ^ n) (p ^ m) ▸ (pow_add p m n ▸ (pow_mul s (p ^ m) (p ^ n)).symm))
+  exact (congrArg (s ^ ·) (by rw [pow_add, mul_comm])).trans (pow_mul s _ _)
 
 section RelativeFrobenius
 
@@ -175,7 +167,7 @@ lemma relativeIterateFrobenius_naturality {W : Scheme.{u}} (w : W ⟶ X) (g : V 
         Limits.pullback.map _ _ _ _ g (𝟙 X) (𝟙 X) (by simp [h]) (by simp) =
       g ≫ relativeIterateFrobenius hp n hX w := by
   apply Limits.pullback.hom_ext
-  · simp [iterateFrobenius_naturality hp n g]
+  · simpa using (iterateFrobenius_naturality hp n g _ _).symm
   · simp [h]
 
 end RelativeFrobenius

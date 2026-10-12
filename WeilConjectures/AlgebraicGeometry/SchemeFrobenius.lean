@@ -36,7 +36,8 @@ The absolute `q ^ m`-power Frobenius of `X` factors as `Fr^{(q^m)}_X = g_σ^m Φ
 
 - `AlgebraicGeometry.Scheme.Hom.absoluteFrobenius`: the absolute `q ^ m`-power Frobenius.
 - `AlgebraicGeometry.Scheme.Hom.schemeFrobenius`: the scheme Frobenius `Φ^m`.
-- `AlgebraicGeometry.specArithmeticFrobenius`, `AlgebraicGeometry.Scheme.Hom.arithmeticGaloisFrobenius`:
+- `AlgebraicGeometry.specArithmeticFrobenius`,
+  `AlgebraicGeometry.Scheme.Hom.arithmeticGaloisFrobenius`:
   the arithmetic Frobenius `Spec σ` of `Spec k̄` and `g_σ = 𝟙 × Spec σ`.
 
 ## Main statements
@@ -68,10 +69,11 @@ lemma iterateFrobenius_naturality {X Y : Scheme.{u}} (g : X ⟶ Y) (hX : (p : Γ
     (hY : (p : Γ(Y, ⊤)) = 0) (n : ℕ) :
     X.iterateFrobenius hp hX n ≫ g = g ≫ Y.iterateFrobenius hp hY n := by
   refine Scheme.Hom.ext (by simp [Scheme.Hom.comp_base]; rfl) fun U ↦ ?_
+  rw [Scheme.Hom.comp_app, Scheme.Hom.comp_app]
   ext s
-  simp only [Scheme.Hom.comp_app, CommRingCat.comp_apply]
-  rw [iterateFrobenius_app_apply, iterateFrobenius_app_apply, map_pow]
-  simp
+  simp only [eqToHom_refl, op_id, CommRingCat.comp_apply]
+  erw [X.presheaf.map_id, CommRingCat.id_apply]
+  exact (map_pow (g.app U).hom s _).symm
 
 /-- The `p ^ 0`-power Frobenius is the identity. -/
 @[simp]
@@ -79,17 +81,20 @@ lemma iterateFrobenius_zero (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) :
     X.iterateFrobenius hp hX 0 = 𝟙 X := by
   refine Scheme.Hom.ext rfl fun U ↦ ?_
   ext s
-  simp [iterateFrobenius_app_apply]
+  simp only [eqToHom_refl, op_id, CommRingCat.comp_apply, Scheme.Hom.id_app]
+  erw [X.presheaf.map_id, CommRingCat.id_apply, CommRingCat.id_apply]
+  exact pow_one s
 
 /-- The Frobenius powers compose: `F^{p^m} ≫ F^{p^n} = F^{p^(m+n)}`. -/
 lemma iterateFrobenius_add (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (m n : ℕ) :
-    X.iterateFrobenius hp hX (m + n) = X.iterateFrobenius hp hX m ≫ X.iterateFrobenius hp hX n := by
+    X.iterateFrobenius hp hX (m + n) =
+      X.iterateFrobenius hp hX m ≫ X.iterateFrobenius hp hX n := by
   refine Scheme.Hom.ext rfl fun U ↦ ?_
+  rw [Scheme.Hom.comp_app]
   ext s
-  simp only [Scheme.Hom.comp_app, CommRingCat.comp_apply]
-  rw [iterateFrobenius_app_apply, iterateFrobenius_app_apply, iterateFrobenius_app_apply,
-    ← pow_mul, ← pow_add, mul_comm]
-  simp
+  simp only [eqToHom_refl, op_id, CommRingCat.comp_apply]
+  erw [X.presheaf.map_id, CommRingCat.id_apply]
+  exact (by rw [← pow_mul, ← pow_add, add_comm] : s ^ p ^ (m + n) = (s ^ p ^ n) ^ p ^ m)
 
 /-- The absolute Frobenius of an affine scheme `Spec R` is `Spec` of the Frobenius of `R`. -/
 lemma iterateFrobenius_Spec (R : CommRingCat.{u}) (hR : (p : R) = 0)
@@ -99,7 +104,7 @@ lemma iterateFrobenius_Spec (R : CommRingCat.{u}) (hR : (p : R) = 0)
   refine ext_of_isAffine ?_
   rw [← cancel_mono (ΓSpecIso R).hom, ΓSpecIso_naturality]
   ext s
-  simp [iterateFrobenius_app_apply, map_pow]
+  exact map_pow (ΓSpecIso R).hom.hom s _
 
 /-- The residue field maps of the absolute Frobenius are the Frobenius of the residue
 fields. -/
@@ -300,7 +305,8 @@ the algebraic closure of the finite field `k` with `q` elements. -/
 def specArithmeticFrobenius : Aut (Spec (.of (AlgebraicClosure k))) :=
   letI := Fintype.ofFinite k
   Scheme.Spec.mapIso
-    (FiniteField.frobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k)).toRingEquiv.toCommRingCatIso.op
+    (FiniteField.frobeniusAlgEquivOfAlgebraic k
+      (AlgebraicClosure k)).toRingEquiv.toCommRingCatIso.op
 
 lemma specArithmeticFrobenius_pow_hom [Fintype k] (m : ℕ) :
     (specArithmeticFrobenius k ^ m).hom =
@@ -314,7 +320,8 @@ lemma specArithmeticFrobenius_pow_hom [Fintype k] (m : ℕ) :
     rfl
 
 /-- The arithmetic Frobenius of `Spec k̄` is the inverse of the geometric Frobenius. -/
-lemma specArithmeticFrobenius_eq_inv : specArithmeticFrobenius k = (specGeometricFrobenius k)⁻¹ := by
+lemma specArithmeticFrobenius_eq_inv :
+    specArithmeticFrobenius k = (specGeometricFrobenius k)⁻¹ := by
   let := Fintype.ofFinite k
   rw [eq_inv_iff_mul_eq_one]
   ext1

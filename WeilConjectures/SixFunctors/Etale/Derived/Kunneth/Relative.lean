@@ -258,7 +258,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (Λ : Type (u + 1))
     (_hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y M) :
     Nonempty ((R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) f g K M) ≅
-      (R(f)_![ModuleCat.{u + 1} Λ]).obj K ⊗ (R(g)_![ModuleCat.{u + 1} Λ]).obj M) :=
+      ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
+        ((R(g)_![ModuleCat.{u + 1} Λ]).obj M)) :=
   nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite Λ f g K M
 
 omit [HasSmallSiteSheafify A] in
@@ -343,10 +344,10 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
       ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)))
     (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L))) :
-    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).obj
-          ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) ⊗
-        (R(g)_![ModuleCat.{u + 1} Λ]).obj
-          ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
+    Nonempty (((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj
+          ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)))).obj
+        ((R(g)_![ModuleCat.{u + 1} Λ]).obj
+          ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L))) ≅
       (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
         ((R((pullback.mapOverBase i j f g)_*[ModuleCat.{u + 1} Λ])).obj
           ((L((pullback.mapOverBase i j f g)^*[ModuleCat.{u + 1} Λ])).obj
@@ -383,8 +384,9 @@ theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
     {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
     (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
-    Nonempty ((R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K) ⊗
-        (R(j ≫ g)_![ModuleCat.{u + 1} Λ]).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L) ≅
+    Nonempty (((-⊗ᴸ-(Spec (.of k))[ModuleCat.{u + 1} Λ]).obj
+          ((R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))).obj
+        ((R(j ≫ g)_![ModuleCat.{u + 1} Λ]).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
       (R(pullback.toBase (i ≫ f) (j ≫ g))_![ModuleCat.{u + 1} Λ]).obj
         ((L((pullback.mapOverBase i j f g)^*[ModuleCat.{u + 1} Λ])).obj
           (externalProduct (ModuleCat.{u + 1} Λ) f g K L))) := by
