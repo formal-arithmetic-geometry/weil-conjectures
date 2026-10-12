@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-constructible-module-finite-zero-cokernel",
+ "kind": "statement",
+ "title": "Finite affine free cover with zero cokernel",
+ "statement": "Let X be a quasi-compact and quasi-separated scheme, Λ a finite commutative ring, and F a constructible module sheaf on X_et. With P_W the sheafification of the free Λ-module presheaf represented by W, there exist finitely many affine etale objects U_i and a morphism g : ⨿_i P_{U_i} ⟶ F whose cokernel is a zero object.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095N, proof of the finite surjection through the constructible-topology argument."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Represent finitely many generators of each finite geometric stalk on affine pointed etale neighbourhoods, form the corresponding finite free map, and use constructibility of cokernel supports plus compactness of the constructible topology to concatenate finitely many families until every geometric stalk of the cokernel vanishes. Geometric stalk conservativity then makes the cokernel zero.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095N"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095N"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite affine free cover of constructible etale module sheaf with zero cokernel",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (IsZero (cokernel _))",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"exists_affine_free_etale_zero_cokernel\" Mathlib WeilConjectures",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteEpimorphism",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-module-finite-epimorphism",
+   "place": "zero-cokernel intermediate theorem",
+   "via": [
+    "lem-weil-pbc-constructible-module-finite-epimorphism"
+   ]
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleFiniteZeroCokernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etale_zero_cokernel",
+  "statement": "theorem exists_affine_free_etale_zero_cokernel (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleEtaleModuleSheaf F) : let P : X.Etale → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) := fun W => (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ) ∃ (n : ℕ) (U : Fin n → X.Etale), (∀ i, IsAffine (U i).left) ∧ ∃ g : (∐ fun i : Fin n => P (U i)) ⟶ F, Nonempty (IsZero (cokernel g))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T053956-L-2647093",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T053956-L-2647093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
