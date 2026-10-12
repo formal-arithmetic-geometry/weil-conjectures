@@ -16,18 +16,25 @@
  ],
  "proof": [
   {
-   "text": "Take C_k to be the finitely supported functions on the ULift basis in degree -k, with m(k)=n(-k). Use tildeFinsupp and e_{-k}^{-1} to identify its associated sheaf with P^{-k}. Fullness lifts each conjugated differential, and faithfulness transfers the shape and square-zero identities. These give a chain complex; double negation gives m(-j)=n(j).",
+   "text": "Take C_k = Γ(Spec R, P^(-k)), with R-action through (ΓSpecIso R).inv, and d_C(k,l) the global-sections map of d_P(-k,-l). Global sections sends zero morphisms to zero by evaluation, and functoriality sends d_P composed with d_P to zero. If l+1 is not k then -k+1 is not -l, so the cochain shape equation gives the chain shape equation. Set m(k)=n(-k). Compose the section isomorphism induced by e_(-k), freeSectionsEquiv, and coordinatewise (ΓSpecIso R).hom to obtain an R-linear equivalence C_k ≃ R^(ULift Fin m(k)). Basis.ofEquivFun and reindexing along Equiv.ulift give the required Fin bases. Double negation gives m(-j)=n(j).",
    "uses": [
     "lem-weil-pbc-spec-tilde-free-module"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Reindex the standard ULift bases by Fin. The coproduct comparison defining tildeFinsupp preserves the standard injections and coordinate projections. The global-sections isomorphism ΓSpecIso then identifies the displayed freeMatrix coefficient with the module coefficient. A ring isomorphism preserves units, so the supplied pivot indices give the unit entry of C. The sheaf identifications intertwine the differentials by the defining preimage equation. This comparison works without a nontriviality hypothesis.",
+   "text": "For any f:M→N and supplied finite free identifications eM and eN, evaluate LinearMap.toMatrix in the bases obtained from the preceding section coordinates. Basis.ofEquivFun identifies a basis vector with the inverse image of Pi.single p 1. Since (ΓSpecIso R).inv preserves zero and one, its coordinatewise action fixes this standard vector. The proved freeSectionsEquiv_app formula says the conjugated map eM.inv ≫ f ≫ eN.hom acts by freeMatrix; multiplication by Pi.single p 1 selects column p. Thus the module coefficient at (q,p) equals (ΓSpecIso R).hom applied to that sheaf coefficient. Apply this calculation to d_P at the two negated degrees, cast the pivot indices along -(-i)=i and -(-i-1)=i+1, and use IsUnit.map. Reindexing the bases converts the same coefficient to the Fin-indexed matrix in the conclusion. All calculations hold over the zero ring and with empty finite index sets; the supplied pivots exclude an empty index set in either chosen degree.",
    "uses": [
     "lem-weil-pbc-spec-tilde-free-module"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Each P^j is in the essential image of tilde by tildeFinsupp composed with e_j.symm. Mathlib isIso_fromTildeΓ_iff therefore makes the canonical counit tilde(Γ(P^j))→P^j an isomorphism. Define φ_j by applying the global-sections and tilde functors to P.XIsoOfEq(-(-j)=j) and then composing with this counit isomorphism. Naturality of fromTildeΓNatTrans intertwines every differential. Functoriality and the XIsoOfEq_hom_comp_d and d_comp_XIsoOfEq_hom identities remove the two index transports, giving exactly the required differential equation.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -35,9 +42,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S2",
+  "group": "K2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Tags 01HV(1)-(2), 01I7: affine associated-sheaf comparison and its global-sections mapping property; read https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/01I7; step 1 of lem-pc-affine-free-complex-unit-cancellation"
+  "place": "Tags 01HV(1)-(2), 01I7; direct global-sections construction and counit naturality, using the proved freeSectionsEquiv_app formula in WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf"
  },
  "mathlib_searches": [
   {
@@ -117,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T211618-L-1058319",
-  "kind": "interface",
+  "landing": "20261012T223407-L-1637452",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
