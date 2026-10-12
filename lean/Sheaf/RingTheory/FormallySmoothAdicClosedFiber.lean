@@ -61,6 +61,57 @@ theorem flat_and_isGeometricallyRegular_closedFiber_of_formallySmoothAdic
         maximalIdeal A ≤ I.comap (algebraMap A B))
     Algebra.FormallySmoothAdic A B (maximalIdeal B) →
       φ.Flat ∧ Algebra.IsGeometricallyRegular (A ⧸ maximalIdeal A) (B ⧸ I) := by
-  sorry
+  let : Algebra A B := φ.toAlgebra
+  let : Field (A ⧸ maximalIdeal A) := Ideal.Quotient.field (maximalIdeal A)
+  let I : Ideal B := Ideal.map φ (maximalIdeal A)
+  let : Algebra (A ⧸ maximalIdeal A) (B ⧸ I) :=
+    Ideal.Quotient.algebraQuotientOfLEComap Ideal.le_comap_map
+  change Algebra.FormallySmoothAdic A B (maximalIdeal B) →
+    φ.Flat ∧ Algebra.IsGeometricallyRegular (A ⧸ maximalIdeal A) (B ⧸ I)
+  intro hfs
+  have : I ≠ ⊤ := (map_maximalIdeal_lt_top φ).ne
+  have : Nontrivial (B ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr this
+  have : IsLocalRing (B ⧸ I) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  let : Algebra (A ⧸ maximalIdeal A) (TensorProduct A B (A ⧸ maximalIdeal A)) :=
+    Algebra.TensorProduct.rightAlgebra
+  have : IsScalarTower A (A ⧸ maximalIdeal A) (B ⧸ I) :=
+    IsScalarTower.of_algebraMap_eq' (by ext a; rfl)
+  let e : (B ⧸ I) ≃ₐ[A ⧸ maximalIdeal A] (TensorProduct A B (A ⧸ maximalIdeal A)) :=
+    AlgEquiv.extendScalarsOfSurjective Ideal.Quotient.mk_surjective
+      ((Algebra.TensorProduct.quotIdealMapEquivTensorQuot B
+        (maximalIdeal A)).restrictScalars A)
+  have htfs := Algebra.formallySmoothAdic_tensorProduct A B
+    (A ⧸ maximalIdeal A) (maximalIdeal B) hfs
+  have hqfs : Algebra.FormallySmoothAdic (A ⧸ maximalIdeal A) (B ⧸ I)
+      ((maximalIdeal B).map (Ideal.Quotient.mk I)) := by
+    intro D _ _ J hJ g hg
+    let g' := g.comp e.symm.toAlgHom
+    have hg' : ∃ k : ℕ, 1 ≤ k ∧
+        ∀ x ∈ ((maximalIdeal B).map
+          (algebraMap B (TensorProduct A B (A ⧸ maximalIdeal A)))) ^ k, g' x = 0 := by
+      obtain ⟨k, hk, hgk⟩ := hg
+      refine ⟨k, hk, ?_⟩
+      intro x hx
+      apply hgk
+      have he : e.symm.toRingHom.comp
+          (algebraMap B (TensorProduct A B (A ⧸ maximalIdeal A))) = Ideal.Quotient.mk I := by
+        ext b
+        change e.symm (TensorProduct.tmul A b (1 : A ⧸ maximalIdeal A)) =
+          Ideal.Quotient.mk I b
+        exact e.symm_apply_apply (Ideal.Quotient.mk I b)
+      rw [← Ideal.map_pow] at hx ⊢
+      have hmem := Ideal.mem_map_of_mem e.symm.toRingHom hx
+      rwa [Ideal.map_map, he] at hmem
+    obtain ⟨f, hf⟩ := htfs J hJ g' hg'
+    refine ⟨f.comp e.toAlgHom, ?_⟩
+    ext x
+    have hx := DFunLike.congr_fun hf (e x)
+    simpa [g'] using hx
+  rw [map_maximalIdeal_of_surjective (Ideal.Quotient.mk I)
+    Ideal.Quotient.mk_surjective] at hqfs
+  exact ⟨flat_of_formallySmoothAdic φ hfs,
+    Algebra.isGeometricallyRegular_of_formallySmoothAdic
+      (A ⧸ maximalIdeal A) (B ⧸ I) hqfs⟩
 
 end RingHom
