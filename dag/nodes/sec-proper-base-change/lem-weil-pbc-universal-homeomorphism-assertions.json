@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-universal-homeomorphism-assertions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-reduction-module-assertions",
+   "place": "generalization of the transfer step",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Transfer of curve assertions across a universal homeomorphism",
+ "statement": "Let k be an algebraically closed field, Λ a commutative ring, f : C → Spec k a curve [def-weil-pbc-curve-setting], i : D → C a closed universal homeomorphism such that i ≫ f is a curve, and F a Λ-module etale sheaf on C. The eight assertions [def-weil-pbc-eight-curve-assertions] for (D, i⁻¹F) imply those for (C,F), where i⁻¹ denotes inverse image [def-weil-pbc-inverse-image]. Universal homeomorphism already implies surjectivity.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC proof, first two paragraphs; Proposition 03SI for reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Identify module and abelian pullback using the forgetful comparison. Universal homeomorphism gives cohomology equivalences. Pullback preserves constructibility; geometric stalk linear equivalences preserve primary torsion and invertible torsion order. Closed immersion preserves affineness and properness under composition. Transport vanishing and finiteness through the equivalences to prove C1-C5.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a field extension, pull back i along the extension projection and paste the resulting cartesian square with the field square. Universal homeomorphism is stable under this base change. The restriction square transport theorem identifies the original cohomology map with the reduced one through additive equivalences. Transport injectivity and surjectivity to prove C6-C7. For an open immersion use the same construction; its pullback is open. Transport the surjective degree-two restriction to prove C8.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-weil-pbc-cohomology-restriction-square-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-cohomology-restriction-square-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC reduction argument and Proposition 03SI; componentwise Lean proof using geometric stalks and commuting cohomology squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal homeomorphism identifies etale cohomology and the cohomology assertions on curves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal homeomorphism induces equivalence on etale sheaves and cohomology",
+   "results": "8 hits; no exact statement of this step",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*homeomorphism|IsUniversalHomeomorphism",
+   "results": "0 hits; no exact statement of this step",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReductionModuleAssertions",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.UniversalHomeomorphismAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/UniversalHomeomorphismAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_of_universalHomeomorphism",
+  "statement": "theorem IsCurve.assertions_of_universalHomeomorphism\n    (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]\n    {C D : Scheme.{u}} (f : C ⟶ Spec (.of k)) (i : D ⟶ C)\n    [IsCurve f] [IsCurve (i ≫ f)] [IsClosedImmersion i]\n    [IsUniversalHomeomorphism i]\n    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (H : IsCurve.Assertions Λ (i ≫ f)\n      ((i)^*[ModuleCat.{u + 1} Λ].obj F)) :\n    IsCurve.Assertions Λ f F",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T054000-L-2648982",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T054000-L-2648982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

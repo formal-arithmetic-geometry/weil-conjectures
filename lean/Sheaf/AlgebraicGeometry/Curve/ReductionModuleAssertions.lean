@@ -6,10 +6,8 @@ Authors: SHEAF group Q2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.Curve.UniversalHomeomorphismAssertions
 import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # The eight assertions descend from the reduction
 
@@ -50,6 +48,21 @@ theorem IsCurve.assertions_of_reduction
     (H : IsCurve.Assertions Λ (C.nilradical.subschemeι ≫ f)
       ((C.nilradical.subschemeι)^*[ModuleCat.{u + 1} Λ].obj F)) :
     IsCurve.Assertions Λ f F := by
-  sorry
+  obtain ⟨hred, hclosed, hsurj, huniv⟩ :=
+    reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism C
+  let D := C.nilradical.subscheme
+  let i : D ⟶ C := C.nilradical.subschemeι
+  have : IsClosedImmersion i := hclosed
+  have : Surjective i := hsurj
+  have : IsUniversalHomeomorphism i := inferInstance
+  have : IsReduced D := hred
+  let : IsCurve (i ≫ f) :=
+    { toIsSeparated := inferInstance
+      toLocallyOfFiniteType := inferInstance
+      toQuasiCompact := inferInstance
+      krullDim_le_one := by
+        rw [IsHomeomorph.topologicalKrullDim_eq i i.isHomeomorph]
+        exact IsCurve.krullDim_le_one (f := f) }
+  exact IsCurve.assertions_of_universalHomeomorphism Λ f i F H
 
 end AlgebraicGeometry
