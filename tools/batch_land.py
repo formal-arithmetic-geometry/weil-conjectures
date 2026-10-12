@@ -320,7 +320,7 @@ def check(c: dict, classify: bool = True) -> dict:
         import_graph = cycles.graph(li.LEAN)
     texts = {m["module"]: m["text"] for m in D["modules"]}
     try:
-        cycles.refuse_missing(texts, cycles.source_modules(ROOT, pathlib.Path(graph_file).name.split("-imports")[0] if graph_file else "HEAD"), cycles.source_roots(li.LEAN))
+        cycles.refuse_missing(texts, cycles.source_modules(ROOT, pathlib.Path(graph_file).name.split("-imports")[0] if graph_file else "HEAD"), cycles.source_roots(ROOT))
     except RuntimeError as exc:
         raise Refuse(str(exc)) from exc
     cycle = cycles.closing_cycle(import_graph, texts)

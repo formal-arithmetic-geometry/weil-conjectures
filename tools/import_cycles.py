@@ -118,6 +118,7 @@ def source_roots(lean):
     """Package/toolchain sources only; never accept an orphaned .olean."""
     import tomllib
     lean = pathlib.Path(lean)
+    if (lean / "lean").is_dir(): lean = lean / "lean"
     roots = []
     for package in (lean / '.lake/packages').glob('*'):
         roots.append(package)
