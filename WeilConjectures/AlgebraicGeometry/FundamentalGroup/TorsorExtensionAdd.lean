@@ -519,4 +519,64 @@ lemma pairK₂_ι (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd 
     pairK₂ t h hπ c₁ c₂ hv₁ hv₂ ≫ kernel.ι _ = kernel.ι _ ≫ pairV' t h hπ :=
   kernel.lift_ι _ _ _
 
+variable (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+  (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1))
+
+lemma pairK₁_pairI : pairK₁ t h hπ c₁ c₂ hv₁ hv₂ ≫ T.pairI =
+    kernelToKernelComp t.muDiff ≫ pairK₂ t h hπ c₁ c₂ hv₁ hv₂ := by
+  rw [← cancel_mono (kernel.ι (T.pairPhi ≫ biprod.map T.pairPhi T.pairPhi)), Category.assoc,
+    pairI_ι, pairK₁_ι, Category.assoc, pairK₂_ι, kernelToKernelComp_ι_assoc]
+
+lemma pairK₂_pairQ (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m))
+    (hb : b = (1, 0) ∨ b = (0, 1)) (c : ℕ) (hv : T.vadd b ≫ h = h ≫ t.vadd (c • 1)) :
+    pairK₂ t h hπ c₁ c₂ hv₁ hv₂ ≫ T.pairQ b hb =
+      kernelCompToKernel t.muDiff ≫ (c • pairK₁ t h hπ c₁ c₂ hv₁ hv₂) := by
+  rw [← cancel_mono (kernel.ι T.pairPhi), Category.assoc, pairQ_ι, pairK₂_ι_assoc,
+    comp_pairV'_pairMuDiff t h hπ _ (kernel.condition _) b c hv]
+  simp only [Category.assoc, Preadditive.comp_nsmul, Preadditive.nsmul_comp, pairK₁_ι,
+    kernelCompToKernel_ι_assoc]
+
+/-- Pulling back along `h` is a morphism from the extension of `t` to the pair sequence, by
+`(c₁, c₂)` on the quotient. -/
+noncomputable def pairExtSeqMap : t.extSeq ⟶ T.pairSeq where
+  τ₁ := pairK₁ t h hπ c₁ c₂ hv₁ hv₂
+  τ₂ := pairK₂ t h hπ c₁ c₂ hv₁ hv₂
+  τ₃ := biprod.lift (c₁ • pairK₁ t h hπ c₁ c₂ hv₁ hv₂) (c₂ • pairK₁ t h hπ c₁ c₂ hv₁ hv₂)
+  comm₁₂ := pairK₁_pairI t h hπ c₁ c₂ hv₁ hv₂
+  comm₂₃ := by
+    apply biprod.hom_ext
+    · change (pairK₂ t h hπ c₁ c₂ hv₁ hv₂ ≫ biprod.lift _ _) ≫ biprod.fst =
+        (kernelCompToKernel t.muDiff ≫ biprod.lift _ _) ≫ biprod.fst
+      rw [Category.assoc, biprod.lift_fst, Category.assoc, biprod.lift_fst,
+        pairK₂_pairQ t h hπ c₁ c₂ hv₁ hv₂ _ _ c₁ hv₁]
+    · change (pairK₂ t h hπ c₁ c₂ hv₁ hv₂ ≫ biprod.lift _ _) ≫ biprod.snd =
+        (kernelCompToKernel t.muDiff ≫ biprod.lift _ _) ≫ biprod.snd
+      rw [Category.assoc, biprod.lift_snd, Category.assoc, biprod.lift_snd,
+        pairK₂_pairQ t h hπ c₁ c₂ hv₁ hv₂ _ _ c₂ hv₂]
+
+lemma muUnit_pairK₁ : t.muUnit ≫ pairK₁ t h hπ c₁ c₂ hv₁ hv₂ = T.pairUnit := by
+  rw [← cancel_mono (kernel.ι T.pairPhi), ← cancel_mono (kernel.ι (m • 𝟙 T.pushforwardGm))]
+  simp [muUnit, muUnitV, pairW, pushforwardGmUnit]
+
+include h hπ hv₁ hv₂ in
+/-- The cup product with the class of `t`, read in the pair sequence. -/
+lemma map_pairUnit_cupMu (x : Sheaf.H (Y.rootsOfUnitySheaf m) 1) :
+    Sheaf.H.map T.pairUnit 2 (t.cupMu x) = Sheaf.H.δSucc T.pairSeq_shortExact 1
+      (Sheaf.H.map (biprod.lift (c₁ • T.pairUnit) (c₂ • T.pairUnit)) 1 x) := by
+  have := t.isIso_muUnit
+  have e₁ : inv t.muUnit ≫ T.pairUnit = pairK₁ t h hπ c₁ c₂ hv₁ hv₂ := by
+    rw [IsIso.inv_comp_eq, muUnit_pairK₁]
+  have e₂ : t.muUnit ≫ biprod.lift (c₁ • pairK₁ t h hπ c₁ c₂ hv₁ hv₂)
+      (c₂ • pairK₁ t h hπ c₁ c₂ hv₁ hv₂) = biprod.lift (c₁ • T.pairUnit) (c₂ • T.pairUnit) := by
+    apply biprod.hom_ext <;>
+      simp [muUnit_pairK₁ t h hπ c₁ c₂ hv₁ hv₂]
+  simp only [cupMu, AddMonoidHom.comp_apply]
+  rw [← Sheaf.H.map_comp_apply, e₁]
+  refine (Sheaf.H.map_δSucc _ T.pairSeq_shortExact (pairExtSeqMap t h hπ c₁ c₂ hv₁ hv₂) 1
+    _).trans ?_
+  congr 1
+  change Sheaf.H.map (biprod.lift (c₁ • pairK₁ t h hπ c₁ c₂ hv₁ hv₂)
+    (c₂ • pairK₁ t h hπ c₁ c₂ hv₁ hv₂)) 1 _ = _
+  exact (Sheaf.H.map_comp_apply _ _ _).symm.trans (congrArg (fun φ ↦ Sheaf.H.map φ 1 x) e₂)
+
 end AlgebraicGeometry.Scheme.EtaleTorsor
