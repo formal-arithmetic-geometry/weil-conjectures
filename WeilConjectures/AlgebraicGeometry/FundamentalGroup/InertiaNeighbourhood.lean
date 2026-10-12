@@ -91,6 +91,27 @@ lemma pointOfAlgebra_comp_eq_specAtPrime :
     (Localization.AtPrime Q), Ideal.atPrimeToField_algebraMap]
   exact (IsScalarTower.algebraMap_apply Γ(C, W) C.functionField Ω r).symm
 
+
+omit [QuasiCompact j] [IsDedekindDomain Γ(C, W)] [IsSepClosed Ω] [Q.IsMaximal]
+  [IsGalois C.functionField Ω] in
+include hW in
+lemma injective_algebraMap_of_isAffineOpen : Function.Injective (algebraMap Γ(C, W) Ω) := by
+  have : IsFractionRing Γ(C, W) C.functionField :=
+    functionField_isFractionRing_of_isAffineOpen C W hW
+  rw [IsScalarTower.algebraMap_eq Γ(C, W) C.functionField Ω]
+  exact (algebraMap C.functionField Ω).injective.comp (IsFractionRing.injective _ _)
+
+omit [QuasiCompact j] [IsDedekindDomain Γ(C, W)] in
+include hW in
+/-- The local ring `B_Q` is strictly henselian. -/
+lemma isStrictlyHenselianLocalRing_atPrime_of_isAffineOpen :
+    IsStrictlyHenselianLocalRing (Localization.AtPrime Q) := by
+  have : IsFractionRing Γ(C, W) C.functionField :=
+    functionField_isFractionRing_of_isAffineOpen C W hW
+  have : Algebra.IsAlgebraic Γ(C, W) C.functionField :=
+    IsLocalization.isAlgebraic _ (nonZeroDivisors Γ(C, W))
+  have : Algebra.IsAlgebraic Γ(C, W) Ω := Algebra.IsAlgebraic.trans Γ(C, W) C.functionField Ω
+  exact Ideal.isStrictlyHenselianLocalRing_atPrime Q (injective_algebraMap_of_isAffineOpen hW)
 set_option maxHeartbeats 1000000 in
 -- the elaboration of the integral closure and localization instances is slow
 include hϖ hWU m in
