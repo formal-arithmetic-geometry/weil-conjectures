@@ -16,7 +16,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
-  "place": "Proof, paragraph 4"
+  "place": "Proof, paragraph 4, cohomology passage; N1 realizes generic direct-image continuity on the affine etale basis via the existing qcqs sections theorem (Stacks 0738/03Q4), then applies existing coefficient-sized Ext cohomology continuity (Stacks 03Q5/0739)."
  },
  "mathlib_searches": [
   {
@@ -67,12 +67,37 @@
  "statement": "cohomology colimit preservation",
  "proof": [
   {
-   "text": "The assertion is the corresponding finite-stalk construction/cohomology comparison described in the parent node.",
+   "text": "The spectrum of the function field is affine, hence qcqs. Mathlib quasiCompact_of_compactSpace and QuasiSeparated.of_quasiSeparatedSpace make the generic-point morphism quasi-compact and quasi-separated. For an affine etale object W over X, its base change along this morphism is qcqs by stability under base change and the source-space permanence lemmas.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply etale_sections_filtered_colimit to the original cocone after changing abelian groups to integer modules through the coefficient equivalence. The induced sheaf functor is isomorphic to composeAndSheafify, hence left adjoint and colimit preserving. The canonical module comparison is bijective and thus an isomorphism; nonempty_isColimit_iff_isIso_desc gives its image colimit. Reflect this colimit through the coefficient equivalence. This supplies continuity of abelian sections on each qcqs base-changed affine etale object.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Direct image is precomposition with etale base change, so its sections on W are exactly the sections used in the preceding step. Restriction to the affine etale basis is an equivalence by Mathlib Functor.isEquivalence_of_isOneHypercoverDense. Apply evaluationJointlyReflectsColimits to get the restricted presheaf colimit, reflect through sheafToPresheaf, and then through the basis equivalence. This proves that the direct-image cocone is colimit.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply sheafH_isColimit_large_filtered on X to this direct-image cocone for each natural degree q. Functor.mapCocone for a composite is definitionally the iterated image cocone, so the resulting proof has exactly the required conclusion.",
+   "uses": [
+    "lem-pbc-u2-sheafH-large-filtered-colimit"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "lem-pbc-u2-sheafH-large-filtered-colimit"
+ ],
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.Curve.GenericTorsionColimit",
@@ -102,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-448dd",
   "group": "N1",
   "result": "pass",
-  "landing": "20261012T053943-L-2640180",
+  "landing": "20261012T085309-L-27482",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature with its node, the proof with its recorded dependencies, and the import removal with the retained public path; compilation and axiom probes passed."
  }
 }
