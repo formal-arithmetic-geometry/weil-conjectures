@@ -72,6 +72,21 @@ theorem sum_map_pow_localEigenvalues_tensorPower (x : C.finitePoints) (n : ℕ) 
       localEigenvalues_tprod, Multiset.map_map_product_mul,
       Multiset.sum_map_pow_map_product_mul, ih, pow_succ]
 
+/-- Blueprint `lem-rp-even-tensor-positivity`, part (i): every tensor power `ℱ^{⊗ k}`, `k ≥ 1`, of
+an `ι`-real sheaf is `ι`-real, its local eigenvalues being the `k`-fold products of the
+conjugation-stable local eigenvalues of `ℱ`. -/
+theorem IsReal.tensorPower (hρ : W.IsReal l ρ ι) {k : ℕ} (hk : 1 ≤ k) :
+    W.IsReal l (ρ.tensorPower k) ι := by
+  refine isReal_of_map_conj_localEigenvalues ι fun x ↦ ?_
+  induction k, hk using Nat.le_induction with
+  | base =>
+    rw [localEigenvalues, ← ρ.tensorPowerOneEquiv.charpoly_apply, ← localEigenvalues]
+    exact hρ.map_conj_localEigenvalues ..
+  | succ k hk ih =>
+    rw [localEigenvalues, ← (ρ.tensorPowerSuccEquiv k).charpoly_apply, ← localEigenvalues,
+      localEigenvalues_tprod, Multiset.map_map_product_mul, Multiset.map_map_product_mul, ih,
+      hρ.map_conj_localEigenvalues]
+
 /-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive.
 
 If `ℱ` is `ι`-real and `k ≥ 1` is even, then every inverse local factor
