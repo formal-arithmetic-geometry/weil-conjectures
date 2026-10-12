@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-constant-pullback-unit-continuous-map",
+ "kind": "statement",
+ "title": "Constant pullback unit on continuous maps",
+ "statement": "Let $i:Y_0\\to Y$ be a morphism of schemes [def-weil-pbc-scheme-conventions], and let $M$ be an abelian group with the discrete topology. For $W\\in Y_{\\acute et}$ and $g\\in\\underline M_Y(W)$ [def-weil-pbc-constant-sheaf], let $\\lambda_Y(g):|W|\\to M$ be the continuous-map representative of $g$, let $\\eta(g)\\in (i_*i^*\\underline M_Y)(W)$ be the inverse-image adjunction unit [def-weil-pbc-inverse-image], and let $c:i^*\\underline M_Y\\cong\\underline M_{Y_0}$ be the constant-sheaf comparison [lemma-constructible-pullback-constant]. Then $\\lambda_{Y_0}(c(\\eta(g)))=\\lambda_Y(g)\\circ|\\operatorname{pr}_1|$ as continuous maps $|W\\times_Y Y_0|\\to M$. There is no finiteness hypothesis on $M$.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "lemma-constructible-pullback-constant"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q1 (2), (4), and Tag 0A5G"
+ },
+ "proof": [
+  {
+   "text": "Use the already proved continuous-map model of the constant abelian sheaf in WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf (constantSheafIsoContinuousMapSheaf and toSheafify_constantSheafToContinuousMapSheaf). Define κ on g by precomposing its continuous-map representative with pr1. It is additive by pointwise addition. Naturality follows from the base-change square, Hom.etale_map_left_comp_fst.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the constant-sheaf adjunction on Y with i^* ⊣ i_* and the terminal-object comparison for pushforward. The constant-sheaf comparison is the uniqueness isomorphism between this adjunction and the constant-sheaf adjunction on Y₀. Mathlib Adjunction.homEquiv_leftAdjointUniq_hom_app and homEquiv_naturality_right identify the adjunct of c followed by the continuous-map comparison with the adjunct of the continuous-map comparison on Y₀.",
+   "uses": [
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunct of κ, followed by the terminal-object comparison, sends m to the constant function m, because toSheafify_constantSheafToContinuousMapSheaf sends the presheaf unit to the constant function. The same holds on Y₀, and restrictions preserve constant functions, including on empty objects. Equality follows by evaluation at m and at a point of the terminal scheme. Cancel the terminal comparison isomorphism and use injectivity of the constant-sheaf adjunction Hom equivalence to identify κ with the adjunct of c followed by the continuous-map comparison. Evaluate this identity at W and g and expand homEquiv_unit to obtain the formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (2), (4) and 0A5G; calculation from the existing Lean adjunction and continuous-map comparison definitions by C2, 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image constant sheaf unit agrees with pullback of locally constant functions",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of the inverse image adjunction on a constant sheaf corresponds to precomposition of locally constant functions with the first fibre product projection",
+   "results": "LightCondSet.topCatAdjunctionUnit and CompHausLike.LocallyConstant adjunction lemmas concern different sites; no exact etale result.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom_app and related generic uniqueness lemmas. Direct source reading also found homEquiv_leftAdjointUniq_hom_app.",
+   "verdict": "generic tools used, no exact coefficient formula",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "constant_pullback_unit|unit_leftAdjointUniq|toSheafify_constantSheafToContinuousMapSheaf",
+   "results": "msearch found generic unit_leftAdjointUniq lemmas. Direct rg found the constant continuous-map comparison and its presheaf-unit formula in WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf, plus lowerStarCompSheafSectionsTerminalIso in WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs.",
+   "verdict": "used these existing tools; no existing exact formula",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHom",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-scheme-torsor-pullback-equivariant-hom",
+   "place": "proof step 2, coefficient comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleConstantSheafPullbackUnitContinuousMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleConstantSheafPullbackUnitContinuousMap.lean",
+  "declaration": "AlgebraicGeometry.Etale.constant_pullback_unit_continuousMap",
+  "statement": "theorem constant_pullback_unit_continuousMap {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y) (M : Type (u + 1)) [AddCommGroup M] [TopologicalSpace M] [DiscreteTopology M] (W : Y.Etale) (g : ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)).obj.obj (op W)) : (Scheme.Etale.constantSheafIsoContinuousMapSheaf Y₀ M).hom.hom.app (op (i.Etale.obj W)) (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} i).app (AddCommGrpCat.of M)).hom.hom.app (op (i.Etale.obj W)) (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))).hom.app (op W) g)) = ((Scheme.Etale.constantSheafIsoContinuousMapSheaf Y M).hom.hom.app (op W) g).comp (pullback.fst W.hom i).base.hom",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T112832-L-765167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T112832-L-765167",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

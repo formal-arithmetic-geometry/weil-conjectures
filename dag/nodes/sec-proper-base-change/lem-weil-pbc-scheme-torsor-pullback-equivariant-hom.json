@@ -17,41 +17,39 @@
  },
  "proof": [
   {
-   "text": "The adjunction, Yoneda and representable inverse-image comparison give the canonical sheaf morphism to the base-changed representing scheme. Compose with Yoneda of e and the sheaf isomorphism supplied by hrepr.",
+   "text": "Define the natural transformation b on sections by x ↦ baseChange(x) ≫ e.hom. Functoriality of base change proves naturality. Take its adjunct f0 under the sheaf pullback/pushforward adjunction and compose with the torsor isomorphism supplied by hrepr. The adjunction unit formula says that f0 sends the unit of x to b(x). This construction does not choose an inverse-image representable comparison.",
    "uses": [
-    "lem-galois-inverse-image-representable",
     "lem-galois-etale-torsor-sheaf-torsor"
    ],
    "elementary": false
   },
   {
-   "text": "On constant coefficient sections, Yoneda evaluation carries the unit to base change; coefficient comparison carries the unit of m to m. The equation is therefore hact after evaluation and coefficient transport.",
+   "text": "Use constant_pullback_unit_continuousMap to express the coefficient comparison applied to the coefficient unit as precomposition of the corresponding continuous function with the first pullback projection. On every open fibre of that function, check both pullback projections to show b(g acting on x) = c(unit(g)) acting on b(x); the first projection uses compatibility of gluing with precomposition and the second is fixed, and hact identifies the resulting constant actions.",
    "uses": [
-    "lem-galois-inverse-image-representable",
-    "lemma-constructible-pullback-constant"
+    "lem-weil-pbc-constant-pullback-unit-continuous-map",
+    "lem-galois-etale-torsor-sheaf-torsor"
    ],
    "elementary": false
   },
   {
-   "text": "Coefficient sections locally come from constants by local representability of sheafification. Pull the covering back, restrict the equation by naturality, and use separatedness of R.sheaf to glue the constant-section equations. Only the local-representability clause is needed, not the disputed local-injectivity clause.",
+   "text": "Apply the action compatibility of the torsor isomorphism supplied by hrepr. By the definition of coefficient transport ofIso, the forward coefficient comparison is followed by its inverse, which cancels. Substitute the unit evaluation formula for f0 to obtain exactly the asserted equation for f0 composed with this torsor isomorphism.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-sc-gm-torsor"
+    "def-sc-gm-torsor",
+    "lemma-constructible-pullback-constant"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-gm-torsor",
   "lem-galois-etale-torsor-sheaf-torsor",
-  "lem-galois-inverse-image-representable",
-  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-constant-pullback-unit-continuous-map",
+  "def-sc-gm-torsor",
   "lemma-constructible-pullback-constant"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q1 and Tag 0A5G; Section 03AG"
+  "place": "Tag 03Q1 (2), (4), Tag 0A5G and Section 03AG; C2 direct adjunction construction and continuous-map calculation, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -129,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T095931-L-327532",
+  "landing": "20261012T112832-L-765167",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
