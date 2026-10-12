@@ -48,8 +48,9 @@ variable {k : Type u} [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Ov
 
 lemma specStructureMap_comp_app (V : Y.Opens) :
     (Y ↘ Spec (.of k)).specStructureMap V ≫ f.app V =
-      (X ↘ Spec (.of k)).specStructureMap (f ⁻¹ᵁ V) :=
-  sorry
+      (X ↘ Spec (.of k)).specStructureMap (f ⁻¹ᵁ V) := by
+  rw [specStructureMap, specStructureMap, Category.assoc, app_eq_appLE, appLE_comp_appLE]
+  simp only [comp_over]
 
 /-- The **trace of differentials on sections**: for `f⁻¹V` affine and `Γ(X, f⁻¹V)` finite free
 over `Γ(Y, V)`, the map `Γ(Ω¹_{X/k}, f⁻¹V) → Γ(Ω¹_{Y/k}, V)`, `c da ↦ Tr(C · dA)`, where `A` and
@@ -80,8 +81,23 @@ variable {f}
 /-- The trace of differentials on sections is `Γ(Y, V)`-linear. -/
 lemma traceSections_smul (V : Y.Opens) (hV : IsAffineOpen (f ⁻¹ᵁ V)) (hfree) (hfin)
     (r : Γ(Y, V)) (ω : Γ((X ↘ Spec (.of k)).relativeDifferentials, f ⁻¹ᵁ V)) :
-    f.traceSections V hV hfree hfin (f.app V r • ω) = r • f.traceSections V hV hfree hfin ω :=
-  sorry
+    f.traceSections V hV hfree hfin (f.app V r • ω) = r • f.traceSections V hV hfree hfin ω := by
+  letI := (f.app V).hom.toAlgebra
+  letI : Algebra k Γ(Y, V) := ((Y ↘ Spec (.of k)).specStructureMap V).hom.toAlgebra
+  letI : Algebra k Γ(X, f ⁻¹ᵁ V) :=
+    ((X ↘ Spec (.of k)).specStructureMap (f ⁻¹ᵁ V)).hom.toAlgebra
+  haveI : IsScalarTower k Γ(Y, V) Γ(X, f ⁻¹ᵁ V) := .of_algebraMap_eq' <|
+    (congrArg CommRingCat.Hom.hom (specStructureMap_comp_app f V)).symm
+  letI : Module k Γ((Y ↘ Spec (.of k)).relativeDifferentials, V) :=
+    Module.compHom _ (algebraMap k Γ(Y, V))
+  haveI : IsScalarTower k Γ(Y, V) Γ((Y ↘ Spec (.of k)).relativeDifferentials, V) :=
+    ⟨fun c r m ↦ mul_smul (algebraMap k Γ(Y, V) c) r m⟩
+  have h (ω') : f.traceSections V hV hfree hfin ω' =
+      KaehlerDifferential.traceLin ((Y ↘ Spec (.of k)).sectionsDerivation V rfl)
+        (((X ↘ Spec (.of k)).kaehlerSectionsEquiv (f ⁻¹ᵁ V) rfl hV).symm ω') := rfl
+  rw [h, h, LinearEquiv.map_smul]
+  exact (congrArg _ (algebraMap_smul (M := Ω[Γ(X, f ⁻¹ᵁ V)⁄k]) Γ(X, f ⁻¹ᵁ V) r _)).trans
+    (map_smul _ r _)
 
 /-- Finiteness and freeness of `Γ(X, f⁻¹V)` over `Γ(Y, V)` pass to basic opens of `V`. -/
 lemma free_finite_basicOpen {V : Y.Opens} (hV : IsAffineOpen V) (hV' : IsAffineOpen (f ⁻¹ᵁ V))
