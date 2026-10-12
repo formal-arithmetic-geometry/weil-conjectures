@@ -19,23 +19,48 @@
  ],
  "proof": [
   {
-   "text": "Apply j_! to the unit and its specified retraction. For nonzero r-torsion sheaves the primary characteristic condition forces p=r; invertible-order torsion forces r invertible in k, otherwise G is zero and its pullback and pushforward are zero. Constructibility is preserved by finite locally constant pullback, finite pushforward and extension by zero. Thus the larger sheaf has the required conditional hypotheses. Cohomology retractions preserve vanishing and finiteness, and the natural comparison maps are retracts preserving bijectivity and surjectivity. Descend all assertions to j_!G.",
+   "text": "Apply extension by zero and then the forgetful sheaf functor to the supplied unit and retraction. Functor.map_comp and Functor.map_id give a composite equal to the identity. This is the retraction of underlying abelian sheaves used below.",
    "uses": [
-    "def-weil-pbc-primary-torsion",
-    "def-weil-pbc-constructible-torsion",
-    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-    "lem-weil-pbc-curve-assertions-retract"
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use v1-finite-cover-lower-shriek-coefficient-compatibility to obtain constructibility of the larger sheaf and transfer of invertible-order and primary torsion hypotheses. This step contains no cohomology descent.",
+   "uses": [
+    "v1-finite-cover-lower-shriek-coefficient-compatibility"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each q, Sheaf.H.map_comp_apply and Sheaf.H.map_id_apply give a left inverse to the cohomology map of the section. Thus it is injective. C1, C2, C3 descend via Function.Injective.subsingleton; C4 and C5 descend via Finite.of_injective. For C3 and C4 use precisely the transferred coefficient hypotheses of the preceding step.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every scheme morphism t, cohomologyMap_map gives the naturality square for both retraction maps. Applying upperStar preserves their composite identity. To lift y along the smaller comparison map, lift the image of y under the pulled-back section along the larger comparison map, and apply the original cohomology retraction. Naturality and the pulled-back identity prove this is a lift. For injectivity, apply the pulled-back section to equality of smaller comparison images, use naturality and injectivity of the larger comparison map, then injectivity of the original section. These explicit private helper proofs descend C6, C7, and C8; combine the eight fields into Assertions.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-primary-torsion",
-  "def-weil-pbc-constructible-torsion",
-  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-  "lem-weil-pbc-curve-assertions-retract"
+  "def-weil-pbc-extension-by-zero",
+  "v1-finite-cover-lower-shriek-coefficient-compatibility",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-cohomology-pullback"
  ],
- "proof_origin": "Stacks 03SD: descend the eight assertions from j_!(v_*v^*G) to j_!G using the supplied unit retraction and verification of the conditional coefficient hypotheses.",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SD, lemma-vanishing-easier, first paragraph; explicit cohomology retraction and naturality calculations written in Lean by V1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -110,10 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T030255-L-1281385",
+  "landing": "20261012T042423-L-1822760",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

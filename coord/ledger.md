@@ -6015,3 +6015,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback (stage 3; reviewer PASS; first push; landing 20261012T042422-L-1822451 (interface); batch 20261012T042402; modules 3; new nodes 2)
 - 04:24 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction (stage 3; reviewer PASS; first push; landing 20261012T042423-L-1822566 (interface); batch 20261012T042402; modules 2; new nodes 1)
 - 04:24 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful (stage 3; reviewer PASS; first push; landing 20261012T042423-L-1822665 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/V1/Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract (stage 3; reviewer PASS; first push; landing 20261012T042423-L-1822760 (interface); batch 20261012T042402; modules 2; new nodes 1)
