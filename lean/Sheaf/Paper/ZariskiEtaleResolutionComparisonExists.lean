@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.Paper.ZariskiEtaleResolutionChainMapExists
+import Sheaf.Paper.ZariskiEtaleResolutionHomologyDataExists
 
 /-! # Resolution comparison bridge -/
 
@@ -135,4 +135,8 @@ theorem zariski_etale_resolution_comparison_exists
         (HomologicalComplex.homologyMap
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).map b) q).hom (e₁ x) := by sorry
+               (ComplexShape.up ℕ)).map b) q).hom (e₁ x) := by
+  obtain ⟨b, hb⟩ := zariski_etale_resolution_comparison_chain_map_exists i hi F I R
+  obtain ⟨e₁, e₂, h⟩ :=
+    zariski_etale_resolution_homology_data_exists i hi fstar hfstar F I R b hb q V
+  exact ⟨b, hb, e₁, e₂, h⟩

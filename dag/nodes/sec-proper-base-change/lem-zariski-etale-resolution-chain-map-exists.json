@@ -1,0 +1,143 @@
+{
+ "id": "lem-zariski-etale-resolution-chain-map-exists",
+ "kind": "statement",
+ "title": "Augmented comparison into a pushed injective complex",
+ "statement": "Let X be a scheme [def-pc-scheme], let J be its Zariski topology [def-sc-zariski-site], and let K be its small étale topology [def-weil-pbc-etale-site]. Let i:X.Opens→X.Etale be continuous, with sheafification for abelian groups on both sites. Write L=i⁻¹ and G=i_* for the adjoint abelian sheaf functors [def-weil-pbc-sites-and-cohomology], and assume L additive and preserving finite limits. For an abelian étale sheaf F [def-weil-pbc-abelian-etale-sheaves], an injective resolution I of F and an injective resolution R of GF [def-sp-injective-resolutions], there exists a cochain map b:R→GI such that ι_R⁰ b⁰=G(ι_I⁰). No quasi-isomorphism condition on the pushed complex GI is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 01FB, 013P and 015B (4); sites-cohomology.tex Tags 0730 and 0733(1)"
+ },
+ "proof": [
+  {
+   "text": "The exact inverse image L preserves monomorphisms. The adjunction L ⊣ G therefore makes G preserve injective objects (Mathlib Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms). Each (GI)^n is injective.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend G(ι_I⁰) along the monic ι_R⁰ using Injective.factorThru. The composite with d_GI⁰ vanishes on ι_R⁰. R.exact₀.descToInjective extends it to b¹. At each subsequent degree, the preceding chain-map square and d²=0 make bⁿ⁺¹ d_GIⁿ⁺¹ vanish on d_Rⁿ. R.exact_succ.descToInjective supplies the next component. CochainComplex.mkHom assembles the squares; its zero component has the required augmentation.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 01FB, 013P and 015B (4); sites-cohomology.tex Tags 0730 and 0733(1)",
+  "note": "Separate chain construction from identification with the canonical cohomology map; chain construction implemented in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology pullback counit is the homology map of an augmented comparison of injective resolutions",
+   "results": "Service returned Internal Server Error; unavailable, no absence verdict.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a morphism from an object into a complex of injectives to a chain map from an injective resolution",
+   "results": "Mathlib InjectiveResolution.desc uses two resolutions; factorThru, exact₀, exact_succ and CochainComplex.mkHom give the required construction without exactness of the target.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "extAddEquivCohomologyClass; extPullback_resolution_sections; objectCohomologyPresheaf_resolution; siteCohomology_pullback_unique",
+   "results": "Mathlib computes Ext by resolution cocycles. Existing section comparisons use global étale cohomology or only give a presheaf isomorphism; none gives this objectwise Zariski-to-étale formula for characterized fstar and arbitrary resolutions.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiEtaleResolutionComparisonExists",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-etale-resolution-map",
+   "place": "augmentation comparison construction",
+   "via": [
+    "lem-weil-pbc-zariski-etale-resolution-comparison-exists",
+    "lem-weil-pbc-zariski-etale-resolution-map",
+    "lem-weil-pbc-zariski-etale-canonical-leray",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZariskiEtaleResolutionChainMapExists",
+  "file": "lean/Sheaf/Paper/ZariskiEtaleResolutionChainMapExists.lean",
+  "declaration": "zariski_etale_resolution_comparison_chain_map_exists",
+  "statement": "theorem zariski_etale_resolution_comparison_chain_map_exists\n    {X : Scheme.{u + 1}}\n    (i : X.Opens ⥤ X.Etale)\n    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)\n      X.smallEtaleTopology)\n    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [(sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    [PreservesFiniteLimits (sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology)]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution F)\n    (R : InjectiveResolution ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F))\n    :\n    ∃ b : R.cocomplex ⟶\n      ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n        (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex,\n      R.ι.f 0 ≫ b.f 0 = (i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).map (I.ι.f 0)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T154826-L-2471640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T154826-L-2471640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

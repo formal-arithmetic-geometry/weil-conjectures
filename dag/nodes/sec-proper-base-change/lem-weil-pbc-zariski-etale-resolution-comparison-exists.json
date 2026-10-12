@@ -20,33 +20,29 @@
  ],
  "proof": [
   {
-   "text": "sheafification, the free-abelian adjunction and additive Yoneda identify\nHom from the free abelian sheaf on V with evaluation at V. Apply this naturally to\nall terms of R, and similarly to I at i(V). Ext computed from injective resolutions\nthen supplies e₁ and e₂, including when the chosen Ext universe differs from the\ncoefficient universe. Evaluation of the pushed complex at V is evaluation of I at i(V).\nThe inverse image is exact, so its right adjoint preserves injectives. Extend the\npushed augmentation F → I to a map b from R using injectivity and exactness of R:\nfirst extend in degree zero, then factor each next differential through the image\nof the previous differential and extend into the next injective term.\n",
+   "text": "Construct b and its augmentation by lem-zariski-etale-resolution-chain-map-exists, using the fully proved degreewise extension through injective objects.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-zariski-etale-resolution-chain-map-exists"
    ],
    "elementary": false
   },
   {
-   "text": "To identify its map on cohomology, lift the adjunction unit from an injective\nresolution of an arbitrary coefficient sheaf A to the pushed resolution of its\ninverse image. Comparison maps are natural up to homotopy; the horseshoe construction\nshows that they respect connecting maps. In degree zero they evaluate to the unit.\nExt in the first variable is effaceable in positive degree in the coefficient\nvariable, so dimension shifting uniquely identifies this family with the given\nfstar satisfying hfstar. Postcomposing with the cohomology map of the counit yields\nthe comparison lifting the identity of the direct image, by the adjunction triangle\nidentity. Choose b as that composite comparison. It has the augmentation asserted\nhere, and the termwise evaluation identifications give the displayed formula.\nNo arbitrary equivalences are asserted to satisfy this formula: e₁ and e₂ are the\nones constructed from evaluation and Ext. Only existence of one comparison is used.",
+   "text": "Apply lem-zariski-etale-resolution-homology-data-exists to this b and its augmentation; obtain e₁, e₂ and the comparison identity. Assemble the chain map, augmentation, equivalences and identity as the existential witness.",
    "uses": [
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
+    "lem-zariski-etale-resolution-homology-data-exists"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-site-cohomology-pullback"
+  "lem-zariski-etale-resolution-chain-map-exists",
+  "lem-zariski-etale-resolution-homology-data-exists"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01FB; derived.tex Tags 013P and 015B",
-  "note": "Resolution formula split into existence and independence; independence formalized by null-homotopy induction."
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 01FB, 013P and 015B (4); sites-cohomology.tex Tags 0730 and 0733(1)",
+  "note": "A3: chain-map construction proved by injective extension; canonical section-homology identification is the remaining strictly smaller obligation. Original signature unchanged."
  },
  "mathlib_searches": [
   {
@@ -120,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T135322-L-1695187",
+  "landing": "20261012T154826-L-2471640",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
