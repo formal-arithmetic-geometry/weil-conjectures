@@ -9,12 +9,9 @@ public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
+import Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
+import Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardLifting
 import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Pushforward of coherent thickening systems is an equivalence with adic systems.
@@ -129,7 +126,34 @@ theorem thickeningSystems_pushforward_equivalence {A : Type v} [CommRing A] [IsN
             (Scheme.Modules.pushforwardComp (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom
                 (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))).hom.app
               (M.term n) ≫
-            (Scheme.Modules.pushforwardCongr (hi n)).hom.app (M.term n)) := by sorry
+            (Scheme.Modules.pushforwardCongr (hi n)).hom.app (M.term n)) := by
+  have _hsecondProjection := hi₂
+  have _hpushforwardAdjunction := aj
+  let T : ℕ → Scheme.{v} := fun n ↦ pullback f (Spec.map (CommRingCat.ofHom
+    (Ideal.Quotient.mk (I ^ (n + 1)))))
+  let j : ∀ n, T n ⟶ X := fun n ↦ pullback.fst f (Spec.map (CommRingCat.ofHom
+    (Ideal.Quotient.mk (I ^ (n + 1)))))
+  let J := (Scheme.IdealSheafData.ofIdealTop (I.map
+    (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f
+  have : ∀ n, IsClosedImmersion (j n) := fun n ↦ (hgeom n).1
+  let P := thickeningSystemPushforward j hi ai
+  have hP := thickeningSystemPushforward_fullyFaithful j hi ai
+  have : P.Full := hP.1
+  have : P.Faithful := hP.2
+  let Φ : CoherentThickeningSystem T i ⥤ CoherentFormalModule X J :=
+    ObjectProperty.lift (IsCoherentFormalModule J) P
+      (thickeningSystemPushforward_isAdic j hi ai J hgeom)
+  have : Φ.EssSurj := ⟨fun H ↦ by
+    obtain ⟨M, ⟨e⟩⟩ := thickeningSystemPushforward_lifting j hi ai J hgeom H
+    exact ⟨M, ⟨ObjectProperty.isoMk _ e⟩⟩⟩
+  have : Φ.IsEquivalence := {}
+  let β := fun n ↦ thickeningSystemPushforwardEvaluation j hi ai n
+  refine ⟨Φ, β, inferInstance, ?_⟩
+  intro M n
+  change ((thickeningSystemPushforward j hi ai).obj M).map
+    (homOfLE (Nat.le_succ n)).op ≫ 𝟙 _ = 𝟙 _ ≫ _
+  rw [Category.comp_id, Category.id_comp]
+  exact thickeningSystemPushforward_transition j hi ai M n
 
 end
 end AlgebraicGeometry

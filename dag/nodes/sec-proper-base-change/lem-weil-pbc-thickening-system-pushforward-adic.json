@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-thickening-system-pushforward-adic",
+ "kind": "statement",
+ "title": "Adic object conditions for the explicit pushed tower",
+ "statement": "Let X be Noetherian [def-weil-pbc-coherent-formal-module], let T_n, i_n, j_n, hi_n and ai_n be as in [lem-weil-pbc-thickening-system-pushforward-functor], and let J be an ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]. Assume j_n is closed with kernel J^(n+1). For every coherent thickening system M [def-weil-pbc-coherent-thickening-system], the explicitly constructed inverse system P(M) satisfies IsCoherentFormalModule J [def-weil-pbc-coherent-formal-module]: its terms are coherent, J^(n+1) kills term n, and its adjacent map is the canonical quotient by J^(n+1) followed by an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-coherent-thickening-system",
+  "lem-weil-pbc-thickening-system-pushforward-functor"
+ ],
+ "proof": [
+  {
+   "text": "The source of each closed j_n is Noetherian. Closed-immersion coherent equivalence implies coherence of its pushed term and annihilation by j_n.ker=J^(n+1). On affine opens the range of the multiplication-image power is J(U)^(n+1), so the ideal-sheaf power and the image power give the same annihilation condition.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since i_n≫j_(n+1)=j_n and both j maps are closed, i_n is closed. The formula for the kernel of a composite and the closed-immersion comap/map identity imply i_n.ker=(J^(n+1)).comap j_(n+1). Compute its affine sections to identify its multiplication image with the (n+1)st power of J.comap j_(n+1).",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the closed-immersion unit-quotient identity to the specified ai_n by uniqueness of adjunctions with the same right adjoint. Follow the unit quotient by i_(n,*) of the comparison isomorphism, obtaining the adjoint transition. Push this identity by j_(n+1),*. The ideal-power quotient comparison gives an isomorphism from formalModuleQuotient J (n+1) of the pushed term to pushed M_n. Its composite with the quotient projection is the explicit adjacent transition. The sequence successor lemma identifies this with P(M).map of the adjacent arrow.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+    "lem-weil-pbc-thickening-system-pushforward-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-thickening-system-pushforward-functor",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880; detailed termwise dictionary from parent proof steps 1--2 and 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "coherent sheaves on closed thickenings inverse system adic quotient transition",
+   "results": "msearch.py returned Internal Server Error (unavailable).",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "equivalence coherent systems on infinitesimal thickenings and adic inverse systems of coherent sheaves",
+   "results": "localCohomology and equivalences of sheaf sites, not this tower construction.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem among the returned results."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Functor, ℕ",
+   "results": "General categorical declarations; direct source search located Functor.ofOpSequence and NatTrans.ofOpSequence.",
+   "date": "2026-10-13",
+   "verdict": "Sequence constructors suffice for functoriality; they do not assert the geometric adic or lifting conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "thickeningSystems|CoherentThickeningSystem|IsCoherentFormalModule; Functor/OfSequence",
+   "results": "No earlier termwise tower functor, adic verification or object lifting theorem. Mathlib Functor/OfSequence has ofOpSequence and NatTrans.ofOpSequence. Blueprint searches for thickening, adic and inverse system found no same statement.",
+   "date": "2026-10-13",
+   "verdict": "The functor can be constructed from the sequence API; the two geometric substatements need new nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ThickeningSystemsEquivalence",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880; parent lem-weil-pbc-thickening-systems-pushforward-equivalence steps 1--2 and 5",
+   "via": [
+    "lem-weil-pbc-thickening-systems-pushforward-equivalence",
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningSystemPushforwardAdic.lean",
+  "declaration": "AlgebraicGeometry.thickeningSystemPushforward_isAdic",
+  "declarations": [
+   "AlgebraicGeometry.thickeningSystemPushforward_isAdic"
+  ],
+  "statement": "theorem thickeningSystemPushforward_isAdic {X : Scheme.{v}} [IsNoetherian X] {T : ℕ → Scheme.{v}} {i : ∀ n, T n ⟶ T (n + 1)} (j : ∀ n, T n ⟶ X) (hi : ∀ n, i n ≫ j (n + 1) = j n) (ai : ∀ n, Scheme.Modules.tensorPullback (i n) ⊣ Scheme.Modules.pushforward (i n)) (J : X.IdealSheafData) (hgeom : ∀ n, IsClosedImmersion (j n) ∧ (j n).ker = J ^ (n + 1)) (M : CoherentThickeningSystem T i) : IsCoherentFormalModule J ((thickeningSystemPushforward j hi ai).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T194157-L-470857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T194157-L-470857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

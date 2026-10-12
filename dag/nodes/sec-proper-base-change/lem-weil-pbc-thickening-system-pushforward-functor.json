@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-thickening-system-pushforward-functor",
+ "kind": "statement",
+ "title": "Explicit termwise pushforward functor is fully faithful",
+ "statement": "Let X be a scheme [def-pc-scheme], T_n a tower of schemes with i_n:T_n→T_(n+1), j_n:T_n→X, hi_n:i_n≫j_(n+1)=j_n, and specified tensor pullback adjunctions ai_n [def-pc-module-pullback]. For coherent thickening systems [def-weil-pbc-coherent-thickening-system], construct P(M)_n=j_(n,*)M_n and the adjacent map as j_(n+1,*) of the ai_n-adjoint of M.comparison n followed by pushforward composition and hi_n. This defines a functor to inverse systems, with evaluation naturally equal to termwise pushforward. If every j_n is a closed immersion [def-weil-closed-immersion], this explicit functor is full and faithful.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-coherent-thickening-system"
+ ],
+ "proof": [
+  {
+   "text": "Define the adjacent morphism by applying ai_n.homEquiv to the comparison and then pushforward and the canonical composition/congruence isomorphisms. Use Functor.ofOpSequence to define all longer transitions by composition. Data are explicit.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the adjunction hom equivalence to a compatible family equation. Naturality of homEquiv and of the pushforward comparison makes the pushed components commute with adjacent transitions. NatTrans.ofOpSequence extends to all transitions. Identities and composition hold componentwise by the pushforward functor laws. Evaluation has the identity natural isomorphism and the adjacent-map formula is ofOpSequence_map_homOfLE_succ.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For closed j_n, each pushed component map has a unique preimage by closedImmersion_pushforward_fullyFaithful. Cancel the pushforward comparison, apply faithfulness of j_(n+1),* and injectivity of ai_n.homEquiv to show the preimages satisfy pullback comparison compatibility. Thus they form an arrow of thickening systems mapping to the given natural transformation. Equality of pushed arrows implies equality of all components, hence equality of compatible families. This proves Full and Faithful.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880; detailed termwise dictionary from parent proof steps 2--3 and 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "coherent sheaves on closed thickenings inverse system adic quotient transition",
+   "results": "msearch.py returned Internal Server Error (unavailable).",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "equivalence coherent systems on infinitesimal thickenings and adic inverse systems of coherent sheaves",
+   "results": "localCohomology and equivalences of sheaf sites, not this tower construction.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem among the returned results."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Functor, ℕ",
+   "results": "General categorical declarations; direct source search located Functor.ofOpSequence and NatTrans.ofOpSequence.",
+   "date": "2026-10-13",
+   "verdict": "Sequence constructors suffice for functoriality; they do not assert the geometric adic or lifting conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "thickeningSystems|CoherentThickeningSystem|IsCoherentFormalModule; Functor/OfSequence",
+   "results": "No earlier termwise tower functor, adic verification or object lifting theorem. Mathlib Functor/OfSequence has ofOpSequence and NatTrans.ofOpSequence. Blueprint searches for thickening, adic and inverse system found no same statement.",
+   "date": "2026-10-13",
+   "verdict": "The functor can be constructed from the sequence API; the two geometric substatements need new nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ThickeningSystemsEquivalence",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880; parent lem-weil-pbc-thickening-systems-pushforward-equivalence steps 2--3 and 5",
+   "via": [
+    "lem-weil-pbc-thickening-systems-pushforward-equivalence",
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ThickeningSystemPushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningSystemPushforward.lean",
+  "declaration": "AlgebraicGeometry.thickeningSystemPushforward_fullyFaithful",
+  "declarations": [
+   "AlgebraicGeometry.thickeningPushforwardComparison",
+   "AlgebraicGeometry.thickeningPushforwardTransition",
+   "AlgebraicGeometry.thickeningPushforwardTransition_naturality",
+   "AlgebraicGeometry.thickeningSystemPushforwardMap",
+   "AlgebraicGeometry.thickeningSystemPushforward",
+   "AlgebraicGeometry.thickeningSystemPushforwardEvaluation",
+   "AlgebraicGeometry.thickeningSystemPushforward_transition",
+   "AlgebraicGeometry.thickeningPushforward_compatibility",
+   "AlgebraicGeometry.thickeningSystemPushforward_fullyFaithful"
+  ],
+  "statement": "theorem thickeningSystemPushforward_fullyFaithful [∀ n, IsClosedImmersion (j n)] : (thickeningSystemPushforward j hi ai).Full ∧ (thickeningSystemPushforward j hi ai).Faithful",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T194157-L-470857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T194157-L-470857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
