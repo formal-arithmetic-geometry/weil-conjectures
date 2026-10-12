@@ -22,10 +22,11 @@
    "elementary": false
   },
   {
-   "text": "Set J to the precoverage of the small etale topology. Prove J.toGrothendieck equals the original topology, using toGrothendieck_toPrecoverage_le and generate_mem_toGrothendieck on each covering sieve. For every covering family choose a SiteCechComplex S. Apply injective_module_cech_cohomology_isZero to I, rewriting the topology with this equality. Use nonempty_etale_siteCech_complex_iso and map its inverse through the homology functor to transport zero positive cohomology to the categorical cechComplexFunctor.",
+   "text": "Transfer injectivity of the sheaf of modules to its underlying module presheaf using injective_module_sheaf_injective_presheaf. At p=q+1 apply injective_presheaf_module_cech_cocycle_lift_max with hom universe u and coefficient/index universe u+1. CochainComplex.of_d identifies the differentials with differentialValue; ShortComplex.ab_exact_iff and ExactAt.isZero_homology give zero SiteCechComplex cohomology. The original etale comparison and remaining conclusion then follow unchanged. This replaces the invalid common-universe ringed-site acyclicity invocation.",
    "uses": [
-    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
-    "lem-weil-pbc-etale-site-cech-complex-comparison"
+    "lem-weil-pbc-etale-site-cech-complex-comparison",
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max"
    ],
    "elementary": false
   },
@@ -44,15 +45,16 @@
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
-  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-weil-pbc-cech-vanishing-criterion",
   "lem-weil-pbc-etale-site-cech-complex-comparison",
-  "lem-weil-pbc-cech-vanishing-criterion"
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03FD, proof second paragraph, via Tags 03FC and 03F9; Lean implementation by T2 uses the existing constant-ring equivalence and chosen-product/categorical Cech comparison."
+  "place": "Existing source argument, with V2 forced replacement of ringed-site acyclicity by presheaf cocycle lifting in universe u+1; no signature changes."
  },
  "mathlib_searches": [
   {
@@ -120,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "X-b3519",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T042421-L-1822044",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T202256-L-710012",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, Lean files, forced adaptations, DAG metadata, and report matched and compiled successfully."
  }
 }

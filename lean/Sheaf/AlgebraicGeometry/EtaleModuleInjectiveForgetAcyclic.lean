@@ -8,7 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
-import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
+import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
+import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
 import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
 
@@ -80,10 +82,24 @@ theorem isZero_rightDerived_globalSections_forget_of_injective
     have hcover : Presieve.ofArrows V f ∈ J U := hf
     obtain ⟨S⟩ := SiteCechComplex.exists_of_covering J hcover
     have hzero : IsZero ((S.cohomologyFunctor p).obj I.val.presheaf) := by
-      have h := @CategoryTheory.injective_module_cech_cohomology_isZero
-        Y.Etale _ J _ _ _ _
-      rw [show J.toGrothendieck = Y.smallEtaleTopology from htop] at h
-      exact @h O inferInstance inferInstance I inferInstance T U V f hcover S p hp
+      have : Injective I.val := injective_module_sheaf_injective_presheaf O I
+      obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hp)
+      change IsZero ((S.complex I.val.presheaf).homology (q + 1))
+      apply HomologicalComplex.ExactAt.isZero_homology
+      apply (HomologicalComplex.exactAt_iff' (S.complex I.val.presheaf)
+        q (q + 1) (q + 2) (by simp) (by simp)).2
+      rw [ShortComplex.ab_exact_iff]
+      intro c hc
+      change (CochainComplex.of.d (S.cochains I.val.presheaf)
+        (S.differential I.val.presheaf) (q + 1) ((q + 1) + 1)) c = 0 at hc
+      rw [CochainComplex.of_d] at hc
+      obtain ⟨b, hb⟩ := injective_presheaf_module_cech_cocycle_lift_max.{u + 1, u, u + 1}
+        O.obj I.val V f S q c hc
+      refine ⟨b, ?_⟩
+      change (CochainComplex.of.d (S.cochains I.val.presheaf)
+        (S.differential I.val.presheaf) q (q + 1)) b = c
+      rw [CochainComplex.of_d]
+      exact hb
     obtain ⟨c⟩ := nonempty_etale_siteCech_complex_iso Y U V f S I.val.presheaf
     exact hzero.of_iso ((HomologicalComplex.homologyFunctor _ _ p).mapIso c.symm)
   have hvan := isZero_rightDerived_etale_of_cech_vanishing Y Set.univ

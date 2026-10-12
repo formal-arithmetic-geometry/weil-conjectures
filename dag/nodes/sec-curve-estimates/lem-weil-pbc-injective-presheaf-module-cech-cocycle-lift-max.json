@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max",
+ "kind": "statement",
+ "title": "Injective module presheaf cocycle lifting with larger coefficient universe",
+ "statement": "Let C have objects in Type u and homs in Type v. Let R be a presheaf of rings in Type (max v w), and let M be an injective object [def-sp-injective-resolutions] in PresheafOfModules.{max v w} R [def-weil-presheaf-modules-sheafification]. Let T : Type (max v w), f : T -> C, hom_t : f(t) -> U, and let S be chosen iterated fibre products and index maps [def-weil-pbc-site-cech-complex]. For q >= 0, every c in Cech cochains of M.presheaf in degree q+1 with differential zero has a primitive b in degree q with differential b=c. No topology, sheafification, sheaf condition or covering condition is assumed. Coefficients and indices are large enough for all hom sets.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), via Lemmas 03FB and 03AT, and the underlying-abelian identification in Lemma 03FD"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put a=max v w. Build the free R-module complex on the disjoint union of ULift-to-a hom sets into each chosen product. The tuple sets and hom sets are a-small, so its values belong to the module-presheaf category in which M is injective. Deletion maps give the alternating boundary.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At an object partition the basis by its composite to U. Each summand is the free tuple complex on the set of lifts to the family. An empty lift set gives zero; for a nonempty set prepend one chosen lift, whose alternating boundary gives a contraction in positive degrees. Exactness of direct sums and objectwise exactness of module presheaves imply exactness at q+1 (Stacks 03F5 and 03AT).",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Free Yoneda identifies Hom(K_n,M) with cochains, respecting differential. A cocycle factors through the image of K_(q+1)->K_q. Injectivity extends the resulting image-to-M map to K_q. Yoneda gives its primitive, including q=0.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "V2 max-universe form of the presheaf step of Tag 03FC, using 03AS, 03F5 and 03AT; argument stated in words, formal proof remains sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective presheaf of modules has every positive Cech cocycle a coboundary when hom sets are in a smaller universe than module values",
+   "results": "Eight generic injectivity and locally-injective results, no module cocycle lifting result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules, CategoryTheory.Injective",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*cech|cech.*cocycle",
+   "results": "Only Stone-Cech hits in Mathlib. Local library has the common-universe cocycle lemma, which does not apply to the five etale callers without transport.",
+   "date": "2026-10-13",
+   "verdict": "no matching max-universe theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every positive Cech cocycle of an injective presheaf of modules is a boundary when coefficients are large enough for the hom sets",
+   "results": "Service unavailable: Internal Server Error (launcher recorded UNAVAILABLE, zero hits).",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: the acyclicity argument for an injective module sheaf; presheaf cocycle lifting with coefficients large enough for homs and cover indices",
+   "via": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax",
+  "file": "lean/Sheaf/CategoryTheory/Sites/InjectivePresheafModuleCechCocycleLiftMax.lean",
+  "declaration": "CategoryTheory.injective_presheaf_module_cech_cocycle_lift_max",
+  "statement": "theorem injective_presheaf_module_cech_cocycle_lift_max\n    {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{max v w})\n    (M : PresheafOfModules.{max v w} R) [Injective M]\n    {T : Type (max v w)} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U)\n    (S : SiteCechComplex f hom) (q : ℕ)\n    (c : S.cochains M.presheaf (q + 1))\n    (hc : S.differentialValue M.presheaf (q + 1) c = 0) :\n    ∃ b : S.cochains M.presheaf q, S.differentialValue M.presheaf q b = c",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3519",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T202256-L-710012",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3519",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T202256-L-710012",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, Lean files, forced adaptations, DAG metadata, and report matched and compiled successfully."
+ }
+}

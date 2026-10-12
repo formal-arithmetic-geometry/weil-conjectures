@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Injective module sheaves have vanishing Cech cohomology on a ringed site",
- "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site [def-weil-pbc-sites-and-cohomology], let $I$ be an injective object [def-sp-injective-resolutions] of the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], and let $\\mathcal U=\\{U_i\\to U\\}_{i\\in J}$ be any covering in $\\mathcal C$. For the underlying abelian sheaf $I_{\\mathrm{ab}}$, the Cech complex [def-weil-pbc-site-cech-complex] $\\check{\\mathcal C}^p(\\mathcal U,I_{\\mathrm{ab}})=\\prod_{(i_0,\\ldots,i_p)\\in J^{p+1}} I(U_{i_0}\\times_U\\cdots\\times_U U_{i_p})$ with its alternating restriction differential has $\\check H^p(\\mathcal U,I_{\\mathrm{ab}})=0$ for every $p>0$.",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site [def-weil-pbc-sites-and-cohomology], let $I$ be an injective object [def-sp-injective-resolutions] of the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], and let $\\mathcal U=\\{U_i\\to U\\}_{i\\in J}$ be any covering in $\\mathcal C$. For the underlying abelian sheaf $I_{\\mathrm{ab}}$, the Cech complex [def-weil-pbc-site-cech-complex] $\\check{\\mathcal C}^p(\\mathcal U,I_{\\mathrm{ab}})=\\prod_{(i_0,\\ldots,i_p)\\in J^{p+1}} I(U_{i_0}\\times_U\\cdots\\times_U U_{i_p})$ with its alternating restriction differential has $\\check H^p(\\mathcal U,I_{\\mathrm{ab}})=0$ for every $p>0$. Universe restrictions: the category has objects in Type u and homs in Type v; ring values, module values, and the covering index type all lie in Type v (RingCat.{v}, SheafOfModules.{v}, T : Type v). Assume abelian sheafification HasSheafify and WEqualsLocallyBijective in AddCommGrpCat.{v}, and that the precoverage has isomorphisms, is stable under composition and base change, and has pullbacks. Independent smaller coefficient universes are excluded.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), via Lemmas 03FB and 03AT, and the underlying-abelian identification in Lemma 03FD"
@@ -26,22 +26,21 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-pbc-ringed-site-injective-module-injective-presheaf] to install injectivity of the underlying module presheaf I.val. This is the exact-sheafification adjunction step, unchanged from the source.",
+   "text": "Apply injective_module_sheaf_injective_presheaf to the exact-sheafification adjunction to obtain injectivity of I.val.",
    "uses": [
     "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
    ],
    "elementary": false
   },
   {
-   "text": "UNRESOLVED SIZE STEP (B2 universe repair): the old application of [lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift] is invalid with the independent universes of this theorem. That lemma now requires homs, rings, values and family indices in one universe. The original proof is reopened as one named theorem; a new universe-valid argument is needed before its remaining exactness reduction can be applied. The chosen complex is still [def-weil-pbc-site-cech-complex]. No proof of the unrestricted statement is claimed.",
+   "text": "Write p=q+1. The corrected common-universe cocycle-lifting declaration now applies to R.obj, I.val, f, hom and S; every positive cocycle has a primitive.",
    "uses": [
-    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
-    "def-weil-pbc-site-cech-complex"
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Mathlib HomologicalComplex.exactAt_iff' and ShortComplex.ab_exact_iff turn this elementwise lifting into exactness at q+1. Unfolding SiteCechComplex.complex and using CochainComplex.of_d identifies its two differentials with differentialValue. ExactAt.isZero_homology gives the requested zero object, since cohomologyFunctor is the complex functor composed with homologyFunctor. The covering proof is not required after the presheaf injectivity transfer.",
+   "text": "Unfold cohomologyFunctor to homology of S.complex. Use HomologicalComplex.exactAt_iff', ShortComplex.ab_exact_iff, and CochainComplex.of_d to turn cocycle lifting into ExactAt (q+1). ExactAt.isZero_homology gives the conclusion. The covering hypothesis is unnecessary after the injectivity transfer.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
@@ -54,9 +53,9 @@
   "def-weil-pbc-site-cech-complex"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT; B2 second reading: prior implementation reopened, independent-universe application invalid"
+  "place": "V2 repaired Lean proof of Tag 03FC using 03FB and the corrected common-universe cocycle-lifting lemma; full proof body compiles, with inherited dependencies only."
  },
  "mathlib_searches": [
   {
@@ -131,10 +130,10 @@
   "module": "Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic",
   "declaration": "CategoryTheory.injective_module_cech_cohomology_isZero",
   "file": "lean/Sheaf/CategoryTheory/Sites/InjectiveModuleCechAcyclic.lean",
-  "statement": "theorem injective_module_cech_cohomology_isZero {C : Type u} [Category.{v} C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (R : Sheaf J.toGrothendieck RingCat.{r}) [HasSheafify J.toGrothendieck AddCommGrpCat.{s}] [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{s}] (I : SheafOfModules.{s} R) [Injective I] {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom) (p : ℕ) (hp : 0 < p) : IsZero ((S.cohomologyFunctor p).obj I.val.presheaf)",
+  "statement": "theorem injective_module_cech_cohomology_isZero\n    {C : Type u} [Category.{v} C] (J : Precoverage C)\n    [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (R : Sheaf J.toGrothendieck RingCat.{v})\n    [HasSheafify J.toGrothendieck AddCommGrpCat.{v}]\n    [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{v}]\n    (I : SheafOfModules.{v} R) [Injective I]\n    {T : Type v} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U)\n    (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom)\n    (p : ℕ) (hp : 0 < p) :\n    IsZero ((S.cohomologyFunctor p).obj I.val.presheaf)",
   "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-11",
+  "by": "V2",
+  "date": "2026-10-13",
   "existing": false
  },
  "reviewed_lean": {
@@ -147,11 +146,72 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9630a",
-  "group": "B2",
+  "reviewer": "X-b3519",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T153008-L-2349915",
+  "landing": "20261012T202256-L-710012",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean matched the corrected node statements, recorded universe change, Stacks contraction argument, permitted node edits, forced adaptation errors, clean compilation and documented axioms."
+  "note": "independent Codex review: Delivered packet, Lean files, forced adaptations, DAG metadata, and report matched and compiled successfully."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "V2 stage 2",
+  "old_statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site [def-weil-pbc-sites-and-cohomology], let $I$ be an injective object [def-sp-injective-resolutions] of the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], and let $\\mathcal U=\\{U_i\\to U\\}_{i\\in J}$ be any covering in $\\mathcal C$. For the underlying abelian sheaf $I_{\\mathrm{ab}}$, the Cech complex [def-weil-pbc-site-cech-complex] $\\check{\\mathcal C}^p(\\mathcal U,I_{\\mathrm{ab}})=\\prod_{(i_0,\\ldots,i_p)\\in J^{p+1}} I(U_{i_0}\\times_U\\cdots\\times_U U_{i_p})$ with its alternating restriction differential has $\\check H^p(\\mathcal U,I_{\\mathrm{ab}})=0$ for every $p>0$.",
+  "what": "Reviewer X-38a84 requested the common-universe repair: the old independent-universe signature is kernel-refuted by the Type 1 triangle example in the V2 report. Align RingCat, AddCommGrpCat, SheafOfModules and T at the hom universe v. Preserve all Challenge signatures. Five etale callers have hom universe u and coefficient/index universe u+1, so adapt their proofs using the strictly presheaf cocycle-lifting step in max universes, not the repaired ringed-site theorem.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), via Lemmas 03FB and 03AT, and the underlying-abelian identification in Lemma 03FD"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-injective-module-sheaf-H-acyclic",
+    "holds": true,
+    "note": "Existing signature unchanged; forced proof adaptation uses module-presheaf injectivity and the max-universe cocycle-lifting step at hom universe u and coefficient/index universe u+1."
+   },
+   {
+    "id": "lem-weil-pbc-injective-module-abelian-acyclic",
+    "holds": true,
+    "note": "Existing signature unchanged; forced proof adaptation uses module-presheaf injectivity and the max-universe cocycle-lifting step at hom universe u and coefficient/index universe u+1."
+   },
+   {
+    "id": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "holds": true,
+    "note": "Existing signature unchanged; forced proof adaptation uses module-presheaf injectivity and the max-universe cocycle-lifting step at hom universe u and coefficient/index universe u+1."
+   },
+   {
+    "id": "lem-weil-pbc-injective-etale-module-cech-h1",
+    "holds": true,
+    "note": "Existing signature unchanged; forced proof adaptation uses module-presheaf injectivity and the max-universe cocycle-lifting step at hom universe u and coefficient/index universe u+1."
+   },
+   {
+    "id": "lem-weil-pbc-etale-module-injective-forget-acyclic",
+    "holds": true,
+    "note": "Existing signature unchanged; forced proof adaptation uses module-presheaf injectivity and the max-universe cocycle-lifting step at hom universe u and coefficient/index universe u+1."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Use [lem-weil-pbc-ringed-site-injective-module-injective-presheaf] to install injectivity of the underlying module presheaf I.val. This is the exact-sheafification adjunction step, unchanged from the source.",
+    "uses": [
+     "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "UNRESOLVED SIZE STEP (B2 universe repair): the old application of [lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift] is invalid with the independent universes of this theorem. That lemma now requires homs, rings, values and family indices in one universe. The original proof is reopened as one named theorem; a new universe-valid argument is needed before its remaining exactness reduction can be applied. The chosen complex is still [def-weil-pbc-site-cech-complex]. No proof of the unrestricted statement is claimed.",
+    "uses": [
+     "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+     "def-weil-pbc-site-cech-complex"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Mathlib HomologicalComplex.exactAt_iff' and ShortComplex.ab_exact_iff turn this elementwise lifting into exactness at q+1. Unfolding SiteCechComplex.complex and using CochainComplex.of_d identifies its two differentials with differentialValue. ExactAt.isZero_homology gives the requested zero object, since cohomologyFunctor is the complex functor composed with homologyFunctor. The covering proof is not required after the presheaf injectivity transfer.",
+    "uses": [
+     "def-weil-pbc-site-cech-complex"
+    ],
+    "elementary": true
+   }
+  ]
  }
 }

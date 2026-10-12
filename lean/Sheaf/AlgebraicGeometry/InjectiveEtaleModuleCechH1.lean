@@ -16,7 +16,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule
 import Sheaf.CategoryTheory.SiteCechMathlibComparison
-import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
+import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
+import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-!
 # Degree-one Čech acyclicity of injective étale module sheaves
@@ -91,7 +93,24 @@ theorem isZero_cech_H_one_of_injective_module_sheaf
     rw [← htop]
     intro R M hM
     have : Injective M := hM
-    exact injective_module_cech_cohomology_isZero K R M V f hc S 1 (by decide)
+    have : Injective M.val := injective_module_sheaf_injective_presheaf R M
+    let q : ℕ := 0
+    change IsZero ((S.complex M.val.presheaf).homology (q + 1))
+    apply HomologicalComplex.ExactAt.isZero_homology
+    apply (HomologicalComplex.exactAt_iff' (S.complex M.val.presheaf)
+      q (q + 1) (q + 2) (by simp) (by simp)).2
+    rw [ShortComplex.ab_exact_iff]
+    intro c hc
+    change (CochainComplex.of.d (S.cochains M.val.presheaf)
+      (S.differential M.val.presheaf) (q + 1) ((q + 1) + 1)) c = 0 at hc
+    rw [CochainComplex.of_d] at hc
+    obtain ⟨b, hb⟩ := injective_presheaf_module_cech_cocycle_lift_max.{u + 1, u, u + 1}
+      R.obj M.val V f S q c hc
+    refine ⟨b, ?_⟩
+    change (CochainComplex.of.d (S.cochains M.val.presheaf)
+      (S.differential M.val.presheaf) q (q + 1)) b = c
+    rw [CochainComplex.of_d]
+    exact hb
   have hz := vanish R M hM
   have hz' : IsZero ((S.cohomologyFunctor 1).obj
       (J.obj ⋙ forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})) :=
