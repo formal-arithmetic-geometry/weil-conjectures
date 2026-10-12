@@ -7,14 +7,13 @@ module
 
 public import Sheaf.RingTheory.NagataRing
 import Sheaf.RingTheory.FiniteOverNagata
-import Sheaf.RingTheory.IsN1AdjoinSingleton
-import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.RingTheory.PolynomialRingN2
+import Sheaf.RingTheory.PolynomialNagata
+import Sheaf.RingTheory.NagataDomainN2
 
 /-!
 # Nagata rings are universally Japanese
 
-Source: Stacks Project, Algebra, Proposition 10.162.4 (Tag 0334), implication
+Source: Stacks Project, Algebra, Proposition 10.162.15 (Tag 0334), implication
 (1) ⇒ (3) (blueprint: lem-weil-pbc-nagata-universally-japanese).
 -/
 
@@ -22,39 +21,47 @@ Source: Stacks Project, Algebra, Proposition 10.162.4 (Tag 0334), implication
 
 universe u
 
+private theorem isNagataRing_of_surjective (A B : Type u) [CommRing A] [CommRing B]
+    (f : A →+* B) (hf : Function.Surjective f) (hA : IsNagataRing A) :
+    IsNagataRing B := by
+  let : Algebra A B := f.toAlgebra
+  let : Module.Finite A B := Module.Finite.of_surjective (Algebra.linearMap A B) hf
+  exact (finite_over_nagata_is_nagata A B hA).1
+
+private theorem isNagataRing_mvPolynomial (R : Type u) [CommRing R]
+    (hR : IsNagataRing R) (n : ℕ) : IsNagataRing (MvPolynomial (Fin n) R) := by
+  induction n with
+  | zero =>
+      exact isNagataRing_of_surjective R _
+        (MvPolynomial.isEmptyRingEquiv R (Fin 0)).symm.toRingHom
+        (MvPolynomial.isEmptyRingEquiv R (Fin 0)).symm.surjective hR
+  | succ n ih =>
+      exact isNagataRing_of_surjective (Polynomial (MvPolynomial (Fin n) R)) _
+        (MvPolynomial.finSuccEquiv R n).symm.toRingHom
+        (MvPolynomial.finSuccEquiv R n).symm.surjective
+        (isNagataRing_polynomial _ ih)
+
 /-- A Nagata ring is universally Japanese: every finite type domain algebra is N-2.
 
-Source: Stacks Project, Algebra, Proposition 10.162.4 (Tag 0334), implication
+Source: Stacks Project, Algebra, Proposition 10.162.15 (Tag 0334), implication
 (1) ⇒ (3) (blueprint: lem-weil-pbc-nagata-universally-japanese).
 
-Proof, following the six steps of the node:
-1. For a monogenic extension of domains `A ⊆ B = A[x]` with `A` Nagata, write
-   `K = Frac(A)` and `L = Frac(B)`. If `x` is transcendental over `K`, evaluation
-   identifies `B` with `A[X]`. The zero prime shows `A` is N-2, and
-   `lem-weil-pbc-polynomial-ring-n2` (Tag 032O) shows `B` is N-2.
-2. If `x` is algebraic, `L = K(x)` is finite over `K` by
-   `lem-weil-pbc-algebraic-generators-finite-extension`. For any finite `M/L`,
-   `lem-weil-pbc-finite-module-over-finite-algebra` makes `M/K` finite. The integral
-   closure `A'` of `A` in `M` is finite over `A` by N-2. It is normal with fraction
-   field `M` by `lem-weil-pbc-integral-closure-finite-extension-normal`, and Nagata
-   by `lem-weil-pbc-finite-over-nagata-nagata` (Tag 032T).
-3. Put `T = A'[x]` inside `M`. Finite `A`-module generators of `A'` generate `T`
-   over `B`, and `Frac(T) = M`. Since `T` is integral over `B`, the integral closure
-   `B'` of `B` in `M` equals that of `T`: one inclusion uses the same monic
-   equations, the other `lem-weil-pbc-integral-transitive`.
-4. By `lem-weil-pbc-normal-nagata-monogenic-n1`, `T` is N-1, so `B'` is finite
-   over `T`, and hence over `B` by `lem-weil-pbc-finite-module-over-finite-algebra`.
-   This proves N-2 for every monogenic extension of Nagata domains.
-5. For any monogenic algebra `A → B` over a Nagata ring, `B` is Noetherian by
-   `lem-weil-pbc-finite-type-algebra-noetherian`. For a prime `q` of `B`, let `p`
-   be its inverse image. The domain `A/p` is Nagata by
-   `lem-weil-pbc-finite-over-nagata-nagata`. The induced monogenic domain extension
-   `A/p ⊆ B/q` is N-2 by steps 1-4, proving that `B` is Nagata.
-6. Factor a finite type map into finitely many monogenic maps and apply step 5
-   inductively. Thus every finite type `R`-algebra `S` is Nagata. If `S` is a
-   domain, its zero prime quotient is `S` itself, so it is N-2. This is precisely
-   `IsUniversallyJapanese R`, as defined in Tag 032R.
+Proof: Present a finite type algebra `S` as a quotient of `MvPolynomial (Fin n) R`.
+Induct on `n` to show that this polynomial ring is Nagata: the zero-variable ring
+is isomorphic to `R`, and the successor ring is isomorphic to a one-variable
+polynomial ring over the preceding ring. The one-variable assertion reduces
+prime quotients to injective monogenic extensions of Nagata domains, whose
+transcendental and algebraic cases are treated separately. Transporting Nagata
+along the polynomial isomorphisms and the surjective presentation uses
+`finite_over_nagata_is_nagata`, since a surjective ring map is finite. Thus `S`
+is Nagata; when `S` is a domain, its zero prime quotient makes it N-2 by
+`isN2_of_isNagataRing_domain`. This gives `IsUniversallyJapanese R`.
 -/
 theorem isUniversallyJapanese_of_isNagataRing (R : Type u) [CommRing R]
     (hR : IsNagataRing R) : IsUniversallyJapanese R := by
-  sorry
+  intro S _ _ _ _
+  obtain ⟨n, f, hf⟩ := Algebra.FiniteType.iff_quotient_mvPolynomial''.mp
+    (inferInstance : Algebra.FiniteType R S)
+  have hS := isNagataRing_of_surjective (MvPolynomial (Fin n) R) S f.toRingHom hf
+    (isNagataRing_mvPolynomial R hR n)
+  exact isN2_of_isNagataRing_domain S hS
