@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.ColimitSiteAbelianStageMatchingLift
 
 /-! # Stage-image descent on a filtered colimit of sites
 
@@ -93,6 +94,69 @@ theorem colimit_site_abelian_stage_image_isSheaf
         i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X)))
  :
     Presheaf.IsSheaf Q.toGrothendieck
-      (ColimitSiteStageImage.presheaf F P V Q i G α) := by sorry
+      (ColimitSiteStageImage.presheaf F P V Q i G α)  := by
+  classical
+  let H := ColimitSiteStageImage.target F P V Q i G
+  let m := Functor.whiskerRight (ColimitSiteStageImage.inclusion F P V Q i G α)
+    (forget AddCommGrpCat.{u})
+  have hH : Presieve.IsSheaf Q.toGrothendieck (H.obj ⋙ forget AddCommGrpCat.{u}) := by
+    rw [← isSheaf_iff_isSheaf_of_type, ← Presheaf.isSheaf_iff_isSheaf_forget]
+    exact H.property
+  rw [Presheaf.isSheaf_iff_isSheaf_forget (s := forget AddCommGrpCat.{u}),
+    isSheaf_iff_isSheaf_of_type]
+  intro Y S hS x hx
+  obtain ⟨s, hs, huniq⟩ := hH S hS (x.map m) (hx.map m)
+  obtain ⟨t, W, T, hT, hY, hTS, y, hy, hxy⟩ :=
+    colimit_site_abelian_stage_matching_lift J F P hfinite hcover hpullback
+      V hobjects harrows Q hQ hVpullback i G α hα Y S hS x hx
+  let A := (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}
+    (P i).toGrothendieck (P t.right).toGrothendieck).obj G
+  have hA : Presieve.IsSheaf (P t.right).toGrothendieck
+      (A.obj ⋙ forget AddCommGrpCat.{u}) := by
+    rw [← isSheaf_iff_isSheaf_of_type, ← Presheaf.isSheaf_iff_isSheaf_forget]
+    exact A.property
+  obtain ⟨z, hz, _⟩ := hA.isSheafFor_of_mem_precoverage hT y hy
+  let Ht := ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous
+    AddCommGrpCat.{u} (P t.right).toGrothendieck Q.toGrothendieck).obj H
+  have hHt : Presieve.IsSheaf (P t.right).toGrothendieck
+      (Ht.obj ⋙ forget AddCommGrpCat.{u}) := by
+    rw [← isSheaf_iff_isSheaf_of_type, ← Presheaf.isSheaf_iff_isSheaf_forget]
+    exact Ht.property
+  have he : (α t).hom.app (op W) z = H.obj.map (eqToHom hY).op s := by
+    apply (hHt.isSheafFor_of_mem_precoverage hT).isSeparatedFor.ext
+    intro Z g hg
+    change H.obj.map ((V.ι.app t.right).toFunctor.map g).op
+      ((α t).hom.app (op W) z) =
+        H.obj.map ((V.ι.app t.right).toFunctor.map g).op
+          (H.obj.map (eqToHom hY).op s)
+    have hn := NatTrans.naturality_apply (α t).hom g.op z
+    change (α t).hom.app (op Z) (A.obj.map g.op z) =
+      H.obj.map ((V.ι.app t.right).toFunctor.map g).op
+        ((α t).hom.app (op W) z) at hn
+    calc
+      _ = (α t).hom.app (op Z) (A.obj.map g.op z) := hn.symm
+      _ = (α t).hom.app (op Z) (y g hg) := congrArg _ (hz g hg)
+      _ = (x ((V.ι.app t.right).toFunctor.map g ≫ eqToHom hY) (hTS g hg)).val :=
+        hxy g hg
+      _ = _ := by
+        have hh := hs ((V.ι.app t.right).toFunctor.map g ≫ eqToHom hY) (hTS g hg)
+        change H.obj.map ((V.ι.app t.right).toFunctor.map g ≫ eqToHom hY).op s =
+          (x ((V.ι.app t.right).toFunctor.map g ≫ eqToHom hY) (hTS g hg)).val at hh
+        simpa only [op_comp, Functor.map_comp, AddCommGrpCat.comp_apply] using hh.symm
+  have hmem : s ∈ ColimitSiteStageImage.subgroup F P V Q i G α (op Y) := by
+    apply AddSubgroup.subset_closure
+    refine ⟨t, W, eqToHom hY.symm, z, ?_⟩
+    change H.obj.map (eqToHom hY.symm).op ((α t).hom.app (op W) z) = s
+    rw [he, ← AddCommGrpCat.comp_apply, ← Functor.map_comp]
+    simp
+  refine ⟨⟨s, hmem⟩, ?_, ?_⟩
+  · intro Z f hf
+    apply Subtype.ext
+    exact hs f hf
+  · intro b hb
+    apply Subtype.ext
+    apply huniq b.val
+    intro Z f hf
+    exact congrArg Subtype.val (hb f hf)
 
 end CategoryTheory
