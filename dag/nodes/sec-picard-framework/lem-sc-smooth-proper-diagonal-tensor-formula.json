@@ -32,75 +32,49 @@
  ],
  "proof": [
   {
-   "text": "The closed immersion i is proper and of finite type between Noetherian schemes, and it is perfect in the sense of lem-sc-smooth-proper-tensor-direct-sums: for z\\in Z over y\\in Y, \\mathcal O_{Z,z}=(i_*\\mathcal O_Z)_y is, as an \\mathcal O_{Y,y}-module, quasi-isomorphic to a bounded complex of finite free modules because i_*\\mathcal O_Z is locally perfect, so it has finite Tor dimension. Hence by lem-sc-smooth-proper-tensor-direct-sums (Tag 0A9R) applied to f=i, c commutes with all set-indexed direct sums.",
+   "text": "Use perfectImmersion_stalkwiseTorBounds to obtain the finite Tor bounds in both conventions; apply smoothProper_tensor_perfect_case with the Tor-prime bound. Its existential witnesses supply hRf, hO, hTensor, the monoidal structure, the pullback adjunction, and invertibility of the counit-pinned comparison on all perfect K.",
    "uses": [
-    "lem-sc-smooth-proper-tensor-direct-sums"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9R"
-   }
-  },
-  {
-   "text": "Direct sums exist in D_QCoh(O_Y) and D_QCoh(O_Z) by lem-pc-derived-qcoh-direct-sums. The full subcategory E of D_QCoh(O_Y) on which the comparison is an isomorphism is strictly full, saturated and triangulated: the comparison is a natural transformation between exact functors (Li^* and -\\otimes^L c(O_Y) are exact, and c is exact as right adjoint of the exact functor Ri_*), so its isomorphism locus is closed under shifts, cones and retracts. It is closed under direct sums because both functors commute with direct sums: K\\mapsto Li^*K\\otimes^L c(O_Y) does since Li^* is a left adjoint and \\otimes^L commutes with sums, and c does by step 1.",
-   "uses": [
-    "lem-sc-smooth-proper-tensor-direct-sums",
-    "lem-pc-derived-qcoh-direct-sums"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9U proof"
-   }
-  },
-  {
-   "text": "Applying lem-pc-derived-qcoh-perfect-generation with X=Y, the smallest strictly full subcategory containing all perfect complexes and closed under shifts, cones, retracts, and arbitrary sums is D_QCoh(O_Y). The right adjoint c for i exists by lem-pc-noetherian-derived-direct-image-right-adjoint.",
-   "uses": [
-    "lem-pc-derived-qcoh-perfect-generation",
-    "lem-pc-noetherian-derived-direct-image-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9U proof"
-   }
-  },
-  {
-   "text": "By lem-sc-smooth-proper-tensor-perfect-case (Tag 0A9T) applied to f=i (perfect by step 1), the comparison is an isomorphism for every perfect K; its comparison morphism is the mate under Ri_*\\dashv c of the projection-formula morphism, the same as in the statement.",
-   "uses": [
+    "lem-sc-perfect-immersion-stalkwise-tor-bounds",
     "lem-sc-smooth-proper-tensor-perfect-case"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9T"
-   }
+   "elementary": false
   },
   {
-   "text": "The localizing-subcategory argument in Tag 0A9U (the More on Algebra P-resolution remark) now applies: E contains every perfect complex by step 4 and is closed under shifts, cones, retracts and arbitrary sums by steps 1 and 2. Step 3 says these perfect complexes generate D_QCoh(O_Y), hence E=D_QCoh(O_Y). Thus the comparison is an isomorphism for K, and its inverse has the displayed orientation.",
+   "text": "For each specified monoidal structure, pullback adjunction, and right adjoint c, install coproducts on both quasi-coherent derived categories. Apply properPerfect_rightAdjoint_preservesCoproducts with the Tor bound and the canonical liftCompιIso of the quasi-coherent pushforward lift to obtain coproduct preservation of c.",
    "uses": [
-    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-pc-derived-qcoh-direct-sums",
     "lem-sc-smooth-proper-tensor-direct-sums"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9U proof; More on Algebra P-resolution remark"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Let P(K) be exactly the existential pf and IsIso predicate in the theorem conclusion. Apply rightAdjointTensorLocus_localizing to obtain its five closure conditions. Combine them with the perfect-case witness to show P is one of the properties in the defining infimum of perfectLocalizingClosure Y. Therefore sInf_le gives perfectLocalizingClosure Y ≤ P.",
+   "uses": [
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-tensor-perfect-case"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the left hand side using derivedQCohPerfectGeneration Y. The resulting inequality top ≤ P applied to K proves the required existential with exactly the given witnesses and the same counit-pinned comparison.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-smooth-proper-tensor-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
   "lem-pc-derived-qcoh-perfect-generation",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint",
-  "lem-sc-smooth-proper-tensor-perfect-case",
-  "lem-pc-derived-qcoh-direct-sums"
+  "lem-sc-perfect-immersion-stalkwise-tor-bounds",
+  "lem-sc-right-adjoint-tensor-locus-localizing",
+  "lem-sc-smooth-proper-tensor-direct-sums",
+  "lem-sc-smooth-proper-tensor-perfect-case"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9U proof"
+  "place": "Tag 0A9U, lemma-compare-with-pullback-flat-proper-noetherian; implemented by N3 with two missing glue statements split off"
  },
  "mathlib_searches": [
   {
@@ -179,5 +153,15 @@
   "group": "S1",
   "result": "pass",
   "note": "Noetherian Z,Y; closed immersion+proper i; i_*O_Z perfect as Y.IsPerfect (Ri_* 𝟙_); arbitrary right adjoint c of the D_QCoh lift of Ri_*; arbitrary K in D_QCoh(Y); projection map pinned via Li^*-|Ri_* homEquiv, μIso, counit; conclusion IsIso of the mate of pf ≫ K◁counit ≫ ρ_, same encoding as landed SmoothProperTensorPerfectCase; added stmt_deps def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure justified (both used); check_dag unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085314-L-29615",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

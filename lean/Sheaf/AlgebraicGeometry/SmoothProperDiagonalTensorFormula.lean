@@ -14,9 +14,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 import Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts
 import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase
+import Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds
+import Sheaf.AlgebraicGeometry.RightAdjointTensorLocusLocalizing
 
 /-!
 # Tensor formula for the right adjoint of a perfect proper immersion
@@ -92,6 +93,36 @@ theorem smooth_proper_diagonal_tensor_formula
               hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
             (ObjectProperty.homMk (pf.hom ≫
               K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by
-  sorry
+  obtain ⟨hTor', hTor⟩ := perfectImmersion_stalkwiseTorBounds i hperfect
+  obtain ⟨hRf, hO, hTensor, hmon, hadj, hcase⟩ :=
+    smoothProper_tensor_perfect_case i hTor'
+  refine ⟨hRf, hO, hTensor, hmon, hadj, ?_⟩
+  intro mon a c adj K
+  let : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y
+  let : HasCoproducts.{u} (schemeDerivedQCohCategory Z) := derivedQCohDirectSums Z
+  have hsums := properPerfect_rightAdjoint_preservesCoproducts i hTor
+    ((schemeDerivedQCohProperty Y).lift
+      ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i) hRf)
+    ((schemeDerivedQCohProperty Y).liftCompιIso
+      ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i) hRf) c adj
+  let P : ObjectProperty (schemeDerivedQCohCategory Y) := fun K ↦
+    ∃ pf : (schemeDerivedDirectImage i).obj
+            (((derivedPullback i).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅
+          K.obj ⊗ (schemeDerivedDirectImage i).obj (c.obj ⟨𝟙_ _, hO⟩).obj,
+          pf.inv = (a.homEquiv _ _)
+            ((Functor.Monoidal.μIso (derivedPullback i) K.obj
+              ((schemeDerivedDirectImage i).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫
+              (derivedPullback i).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧
+          IsIso ((adj.homEquiv
+            ⟨((derivedPullback i).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
+              hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
+            (ObjectProperty.homMk (pf.hom ≫
+              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))
+  have hclosed := rightAdjointTensorLocus_localizing i hRf hO hTensor a c adj hsums
+  have hle : perfectLocalizingClosure Y ≤ P := by
+    apply sInf_le
+    exact ⟨fun E hE ↦ hcase mon a c adj E hE, hclosed⟩
+  rw [derivedQCohPerfectGeneration Y] at hle
+  exact hle K trivial
 
 end AlgebraicGeometry

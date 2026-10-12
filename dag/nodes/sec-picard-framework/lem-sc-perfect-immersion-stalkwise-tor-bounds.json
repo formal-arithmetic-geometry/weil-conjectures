@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-perfect-immersion-stalkwise-tor-bounds",
+ "kind": "statement",
+ "title": "Stalkwise Tor bounds from perfection of a closed immersion pushforward",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-sbc-closed-immersion-ideal-sheaf]. Use the derived direct image [def-pc-derived-direct-image] and its structure-sheaf unit [def-pc-scheme-derived-tensor-structure]. Suppose $Ri_*\\mathcal O_Z$ is perfect on $Y$ [def-pc-perfect-complex]. For each $z\\in Z$, the module $\\mathcal O_{Z,z}$ restricted along $i^\\sharp_z:\\mathcal O_{Y,i(z)}\\to\\mathcal O_{Z,z}$ has finite Tor dimension: there is $n\\in\\mathbb N$ such that for every $\\mathcal O_{Y,i(z)}$-module $M$ and $j>n$, both $\\operatorname{Tor}_j(\\mathcal O_{Z,z},M)$ and $\\operatorname{Tor}^{\\prime}_j(\\mathcal O_{Z,z},M)$ vanish. Here Tor is derived in the second tensor factor and Tor-prime in the first, exactly Mathlib CategoryTheory.Tor and CategoryTheory.Tor-prime; the two asserted bounds may be chosen independently.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U; hypothesis translation in step 1 of lem-sc-smooth-proper-diagonal-tensor-formula"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Fix z, y=i(z). Closed-pushforward stalks identify the pushforward stalk with the restriction of the source stalk, naturally and linearly. Outside the image the stalk is zero. Exactness of stalks therefore proves exactness of closed pushforward and identifies the stalk of Ri_*O_Z with O_{Z,z} in degree zero.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A strictly perfect model on a neighbourhood of y supplied by perfection remains bounded finite projective after taking its stalk. It represents the restricted module in degree zero. Split off the acyclic positive-degree projective tail starting at its bounded endpoint; the remainder is a finite projective resolution. Choose a natural-number bound beyond its length. Computing Tor-prime with this resolution gives the first vanishing assertion for every test module.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve the test module and form the tensor double complex with the preceding finite projective resolution. Augmenting in either direction is a quasi-isomorphism, since projective modules are flat. The two homology computations identify Tor derived in the second factor with Tor-prime derived in the first. Thus the same bound proves the second assertion; no uniform bound over Z is needed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U; hypothesis translation in step 1 of lem-sc-smooth-proper-diagonal-tensor-formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex concentrated in degree zero has finite projective dimension and vanishing higher Tor",
+   "results": "8 hits: CategoryTheory.HasProjectiveDimensionLT.mk', CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.hasProjectiveDimensionLT_iff, CategoryTheory.instHasProjectiveDimensionLTOfNatNatOfProjective, CategoryTheory.isZero_of_hasProjectiveDimensionLT_zero, CategoryTheory.HasProjectiveDimensionLT.subsingleton, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.HasProjectiveDimensionLT.subsingleton'",
+   "date": "2026-10-12",
+   "verdict": "component results only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor'",
+   "results": "5 hits: CategoryTheory.Tor', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-12",
+   "verdict": "component results only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_Tor|Tor C n ≅ Tor'",
+   "results": "3 hits: 21, 56, 61",
+   "date": "2026-10-12",
+   "verdict": "component results only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfection of the derived pushforward of a structure sheaf along a closed immersion implies finite Tor dimension on source stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Stalkwise Tor bounds from perfection of a closed immersion pushforward",
+   "via": [
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectImmersionStalkwiseTorBounds.lean",
+  "declaration": "AlgebraicGeometry.perfectImmersion_stalkwiseTorBounds",
+  "statement": "theorem perfectImmersion_stalkwiseTorBounds\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (hperfect : Y.IsPerfect ((schemeDerivedDirectImage i).obj\n      (𝟙_ (schemeDerivedCategory Z)))) :\n    (∀ x : Z, ∃ n : ℕ,\n      ∀ (M : ModuleCat.{u} (Y.presheaf.stalk (i x))) (j : ℕ), n < j →\n        IsZero (((Tor' (ModuleCat.{u} (Y.presheaf.stalk (i x))) j).obj\n          ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj\n            (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))).obj M)) ∧\n    (∀ x : Z, ∃ n : ℕ,\n      ∀ (M : ModuleCat.{u} (Y.presheaf.stalk (i x))) (j : ℕ), n < j →\n        IsZero (((Tor (ModuleCat.{u} (Y.presheaf.stalk (i x))) j).obj\n          ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj\n            (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))).obj M))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085314-L-29615",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085314-L-29615",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
