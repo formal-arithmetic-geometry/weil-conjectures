@@ -45,6 +45,39 @@ theorem FormalFiberDegreePQuotient
       Ideal.span ({Polynomial.X ^ p - Polynomial.C
         (Algebra.TensorProduct.includeLeftRingHom a)} :
           Set (Polynomial (TensorProduct K M F)))) ≃+* TensorProduct K L F) := by
-  sorry
+  classical
+  have hp : p ≠ 0 := (Fact.out : p.Prime).ne_zero
+  have hm : (Polynomial.X ^ p - Polynomial.C a).Monic :=
+    Polynomial.monic_X_pow_sub_C a hp
+  have hv : Polynomial.aeval z (Polynomial.X ^ p - Polynomial.C a) = 0 := by
+    simp [ha]
+  have hi : IsIntegral M z := ⟨_, hm, hv⟩
+  have hd : (minpoly M z).natDegree = p := by
+    have h := IntermediateField.adjoin.finrank hi
+    rw [hz, IntermediateField.finrank_top'] at h
+    exact h.symm.trans hdeg
+  have he : minpoly M z = Polynomial.X ^ p - Polynomial.C a := by
+    symm
+    apply Polynomial.eq_of_monic_of_dvd_of_natDegree_le (minpoly.monic hi) hm
+    · exact minpoly.dvd M z hv
+    · rw [Polynomial.natDegree_X_pow_sub_C, hd]
+  let e : AdjoinRoot (Polynomial.X ^ p - Polynomial.C a) ≃ₐ[M] L :=
+    (AdjoinRoot.algEquivOfEq M _ _ he.symm).trans
+      ((IntermediateField.adjoinRootEquivAdjoin M hi).trans
+        ((IntermediateField.equivOfEq hz).trans IntermediateField.topEquiv))
+  let q : Polynomial (TensorProduct K F M) :=
+    Polynomial.X ^ p - Polynomial.C (Algebra.TensorProduct.includeRight a)
+  let eb := AdjoinRoot.tensorAlgEquiv (R := K) (T := F)
+    (Polynomial.X ^ p - Polynomial.C a) q (by simp [q])
+  let ec := Algebra.TensorProduct.comm K F M
+  let eq := AdjoinRoot.mapRingEquiv ec.toRingEquiv q
+    (Polynomial.X ^ p - Polynomial.C
+      (Algebra.TensorProduct.includeLeftRingHom a))
+    (by
+      apply Associated.of_eq
+      simp [q, ec])
+  let et := Algebra.TensorProduct.congr (AlgEquiv.refl : F ≃ₐ[F] F) (e.restrictScalars K)
+  exact ⟨eq.symm.trans (eb.symm.toRingEquiv.trans
+    (et.toRingEquiv.trans (Algebra.TensorProduct.comm K F L).toRingEquiv))⟩
 
 end MvPowerSeries
