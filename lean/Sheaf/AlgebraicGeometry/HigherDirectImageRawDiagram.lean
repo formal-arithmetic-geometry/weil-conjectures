@@ -6,7 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
 
 /-! # The raw cohomology diagram
 
@@ -21,6 +22,24 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+private theorem five_factor_add
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F : C ⥤ D) [F.Additive] {X Y : C} {P Q R T : D}
+    (a : P ⟶ Q) (b : Q ⟶ F.obj X) (c : F.obj Y ⟶ R) (d : R ⟶ T)
+    (x y : X ⟶ Y) :
+    a ≫ b ≫ F.map (x + y) ≫ c ≫ d =
+      (a ≫ b ≫ F.map x ≫ c ≫ d) + (a ≫ b ≫ F.map y ≫ c ≫ d) := by
+  simp only [Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+
+private theorem five_factor_zero
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F : C ⥤ D) [F.Additive] {X Y : C} {P Q R T : D}
+    (a : P ⟶ Q) (b : Q ⟶ F.obj X) (c : F.obj Y ⟶ R) (d : R ⟶ T) :
+    a ≫ b ≫ F.map (0 : X ⟶ Y) ≫ c ≫ d = 0 := by
+  simp only [Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- The explicit raw pullbacks satisfy identity and composition, independently of any
 limit, affineness, or quasi-compactness assumption.
 Source: Stacks Project, Tag 09Z1, canonical comparison maps in lemma-relative-colimit.
@@ -57,7 +76,15 @@ theorem higherDirectImageRawOverPullback_functorial
       higherDirectImageRawOverPullback Λ k G q (f ≫ g) U z =
         higherDirectImageRawOverPullback Λ k G q f U
           (higherDirectImageRawOverPullback Λ k G q g U z)) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro A B f
+    exact five_factor_zero D+((f.left)^*[ModuleCat.{u + 1} Λ]) _ _ _ _
+  · intro A B f x y
+    exact five_factor_add D+((f.left)^*[ModuleCat.{u + 1} Λ]) _ _ _ _ x y
+  · intro A z
+    exact higherDirectImageRawOverPullback_id Λ k G q A U z
+  · intro A B C f g z
+    exact higherDirectImageRawOverPullback_comp Λ k G q f g U z
 
 /-- The additive map on raw cohomology; its data are the explicit five-factor formula. -/
 noncomputable def higherDirectImageRawOverPullbackHom

@@ -1,0 +1,124 @@
+{
+ "id": "lem-sbc-higher-image-raw-pullback-composition",
+ "kind": "statement",
+ "title": "Composition of explicit raw cohomology pullbacks",
+ "statement": "Let $\\Lambda$ be a commutative ring, $k:W\\to S$ a morphism of schemes [def-weil-pbc-scheme-conventions], $G$ an etale $\\Lambda$-module sheaf on $W$ [def-weil-pbc-etale-sheaves], $q\\in\\mathbf Z$, and $U\\to S$ etale. Use the raw groups $P_A(U)$ and their explicit five-factor maps $r_f$ of [sbc-lem-higher-image-raw-over-naturality]. For every $f:A\\to B$ and $g:B\\to C$ in the category of schemes over $W$, and every $z\\in P_C(U)$, one has $r_{f\\gg g}(z)=r_f(r_g(z))$. This statement only asserts composition; it assumes no functoriality of the raw groups and imposes no limit or quasi-compactness conditions.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), Tag 09Z1 (lemma-relative-colimit), and canonical comparison maps; source of the corresponding step of lem-sbc-higher-image-raw-pullback-functorial"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-over-naturality",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Expand the two five-factor formulas of [sbc-lem-higher-image-raw-over-naturality]. Preservation of composition moves the inner factors through the outer exact derived inverse image. Naturality moves the source comparisons past the single-functor comparisons; adjacent direct and inverse single comparisons cancel.",
+   "uses": [
+    "sbc-lem-higher-image-raw-over-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the associativity coherence of the canonical inverse-image composition comparisons [lem-weil-pbc-inverse-image-composition], first to f.left, g.left, C.hom followed by k for the source, and then to f.left, g.left, C.hom for coefficients. The equations Over.w identify the diagonals. Compatibility of the single-functor comparison with composition [lem-sbc-pullback-single-comp] combines the coefficient factors. The shift-compatible exact-derived-functor factorization [lem-weil-pbc-exact-functor-derived-factorization] identifies the two shift factors with the one for the composite. Thus the remaining five factors are precisely its formula.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-sbc-pullback-single-comp",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-image-raw-over-naturality",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-sbc-pullback-single-comp",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and the exact-functor factorization interface",
+  "place": "The corresponding step of lem-sbc-higher-image-raw-pullback-functorial, expanded by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity and composition for cohomology pullback on derived Hom between single complexes",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor isomorphic to identity acts on integer shifted morphisms between single complexes",
+   "date": "2026-10-13",
+   "results": "Termwise shift comparisons and singleMapHomologicalComplex found; no full transport identity. Existing ExtExactFunctorIdentityComparison is for natural-number Ext, not all integer morphisms in a supplied D-plus.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryPlusSingleFunctor\"",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageRawOverPullback_comp|exactFunctorSingleIdentityTransport",
+   "date": "2026-10-13",
+   "results": "No Mathlib hits. Local searches found EtalePullbackSingleComp, HigherDirectImageTransitionIdentity, and ExtExactFunctorIdentityComparison. Their comparison lemmas do not state this whole integer-degree transport identity.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-higher-image-raw-pullback-functorial",
+   "place": "identity and composition coherence step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_comp",
+  "statement": "theorem higherDirectImageRawOverPullback_comp\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {A B C : Over W} (f : A ⟶ B) (g : B ⟶ C) (U : S.Etale)\n    (z : (higherDirectImageRawOverPresheaf Λ k G q C).obj (op U)) :\n    higherDirectImageRawOverPullback Λ k G q (f ≫ g) U z =\n      higherDirectImageRawOverPullback Λ k G q f U\n        (higherDirectImageRawOverPullback Λ k G q g U z)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T203940-L-829517",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T203940-L-829517",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

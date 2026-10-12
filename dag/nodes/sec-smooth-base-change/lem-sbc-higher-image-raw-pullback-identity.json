@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-higher-image-raw-pullback-identity",
+ "kind": "statement",
+ "title": "Identity of explicit raw cohomology pullback",
+ "statement": "Let $\\Lambda$ be a commutative ring, $k:W\\to S$ a scheme morphism [def-weil-pbc-scheme-conventions], $G$ an etale $\\Lambda$-module sheaf on $W$ [def-weil-pbc-etale-sheaves], $q\\in\\mathbf Z$ and $U\\to S$ etale. Use the raw groups and explicit pullbacks of [sbc-lem-higher-image-raw-over-naturality]. For each scheme $A$ over $W$ and each $z\\in P_A(U)$, the raw pullback of the identity of $A$ sends $z$ to itself. No additivity or composition assertion is part of this statement, and no limit or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 015F (lemma-right-derived-exact-functor), Tag 09Z1 (lemma-relative-colimit), and canonical comparison maps; source of the corresponding step of lem-sbc-higher-image-raw-pullback-functorial"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-over-naturality",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the unit coherence of [lem-weil-pbc-inverse-image-composition] on the source A.hom followed by k and on the coefficient morphism A.hom. By upperStarComp_id_left the five-factor formula becomes the single of e.inv, inverse single comparison, derived identity pullback of z, shift comparison, and shifted single comparison followed by the single of e.hom.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "sbc-lem-higher-image-raw-over-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply e termwise to complexes and then the termwise identity comparison. Compose after localization with the exact-derived-functor factorization of [lem-weil-pbc-exact-functor-derived-factorization]. The localization universal property [def-weil-abstract-derived-category] gives the natural transformation from D(F) to the identity. Its compatibility with each integer shift follows from the termwise identity and the shift-compatible factorization. Faithfulness of precomposition with localization reflects this compatibility. Concretely use Localization.full_whiskeringLeft, Localization.natTrans_ext, and cancellation of the localization shift isomorphism.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the complex concentrated in degree zero, compute the transformation as the single-functor comparison followed by the image of e. Degree zero is e; in all other degrees the maps to the zero object agree. Apply localization and its factorization comparison. Naturality for z and shift compatibility identify the last four factors with s(e_X) followed by z. Cancel the initial s(e_X inverse). The fully faithful inclusion D-plus into D reflects equality, transporting both sides by its shift comparison. This argument includes negative degrees and zero objects.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "sbc-lem-higher-image-raw-over-naturality",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and the exact-functor factorization interface",
+  "place": "The corresponding step of lem-sbc-higher-image-raw-pullback-functorial, expanded by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity and composition for cohomology pullback on derived Hom between single complexes",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor isomorphic to identity acts on integer shifted morphisms between single complexes",
+   "date": "2026-10-13",
+   "results": "Termwise shift comparisons and singleMapHomologicalComplex found; no full transport identity. Existing ExtExactFunctorIdentityComparison is for natural-number Ext, not all integer morphisms in a supplied D-plus.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryPlusSingleFunctor\"",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageRawOverPullback_comp|exactFunctorSingleIdentityTransport",
+   "date": "2026-10-13",
+   "results": "No Mathlib hits. Local searches found EtalePullbackSingleComp, HigherDirectImageTransitionIdentity, and ExtExactFunctorIdentityComparison. Their comparison lemmas do not state this whole integer-degree transport identity.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-higher-image-raw-pullback-functorial",
+   "place": "identity and composition coherence step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawPullbackIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawPullbackIdentity.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_id",
+  "statement": "theorem higherDirectImageRawOverPullback_id\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    (A : Over W) (U : S.Etale)\n    (z : (higherDirectImageRawOverPresheaf Λ k G q A).obj (op U)) :\n    higherDirectImageRawOverPullback Λ k G q (𝟙 A) U z = z",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T203940-L-829517",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T203940-L-829517",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
