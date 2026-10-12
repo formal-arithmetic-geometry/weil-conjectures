@@ -1,0 +1,108 @@
+{
+ "id": "lem-pc-stalk-from-spec-subopen",
+ "kind": "statement",
+ "title": "Canonical stalk maps commute with nested open inclusions",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $y\\in Y$, and let $U\\subseteq V\\subseteq Y$ be opens containing $y$. The canonical maps from $\\operatorname{Spec}\\mathcal O_{Y,y}$ to these opens satisfy $U.\\mathrm{fromSpecStalkOfMem}(y);(U\\hookrightarrow V)=V.\\mathrm{fromSpecStalkOfMem}(y)$.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Stalk.lean",
+  "place": "Opens.fromSpecStalkOfMem_ι, line 176; applied to U and V and cancelled along V.ι"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Compose with the open immersion V.ι. Associativity and Scheme.homOfLE_ι identify the left composite with U.fromSpecStalkOfMem followed by U.ι. Mathlib Opens.fromSpecStalkOfMem_ι identifies both composites with Y.fromSpecStalk y. Cancel the monomorphism V.ι.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/AlgebraicGeometry/Stalk.lean",
+  "place": "Three-line specialization of Opens.fromSpecStalkOfMem_ι; extracted from the comparison definition in the second reading."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical maps from the spectrum of a scheme stalk commute with inclusions of nested open neighborhoods",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from the spectrum of a stalk to a smaller open composed with inclusion into a larger open equals the canonical stalk map to the larger open",
+   "results": "8 hits, including Opens.fromSpecStalkOfMem_ι and its reassociated version; these give the equality after composition with V.ι.",
+   "date": "2026-10-13",
+   "verdict": "ingredients, specialized by cancellation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecStalkOfMem\", \"homOfLE\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalkOfMem.*homOfLE|homOfLE.*fromSpecStalkOfMem",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Extension of the finite calculation near a point: compatibility of canonical stalk maps under the nested-open restriction comparison.",
+   "via": [
+    "lem-pc-finite-free-reverse-components-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkFromSpecSubopen",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkFromSpecSubopen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_homOfLE",
+  "statement": "theorem fromSpecStalkOfMem_homOfLE {Y : Scheme.{u}}\n    (y : Y) (V : Y.Opens) (hyV : y ∈ V) (U : Y.Opens) (hUV : U ≤ V) (hyU : y ∈ U) :\n    U.fromSpecStalkOfMem y hyU ≫ Y.homOfLE hUV = V.fromSpecStalkOfMem y hyV",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230805-L-1911780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230805-L-1911780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

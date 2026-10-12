@@ -15,49 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Restriction followed by stalk pullback has a natural isomorphism e to the original stalk pullback: replace restriction along Y.homOfLE(U<=V) by pullback using restrictFunctorIsoPullback, compose using Mathlib pullbackComp, and use U.fromSpecStalkOfMem(y) ; Y.homOfLE(U<=V) = V.fromSpecStalkOfMem(y). Prove this last identity by composing with V.ι and cancelling that open immersion. Apply the natural isomorphism termwise to complexes.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-    "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix homotopy identities after shrinking"
-   }
-  },
-  {
-   "text": "Choose finite bases for P. Restriction and pullback preserve free sheaves and bases, by restrictFunctorIsoPullback and the source-library pullbackFreeIso. Only pairs (i,j) with i=j+1 and both indices in [0,d] contribute; all other maps are zero by the hypothesis on h or because a source or target is a zero object. Thus there are finitely many scalar coefficients, all in O_{Y,y}, the ring of global sections of Spec O_{Y,y}.",
+   "text": "Restrict each chosen finite free presentation of P.X n to V using restrictFreeIso. Index the relevant ordered pairs by the product of the finite integer interval [0,d] with itself. Conjugate the prescribed component h(i,j) by the pullbacks of the chosen bases to obtain a finite family of maps between standard free sheaves. Apply the finite-matrix lifting theorem to obtain U inside V, the prescribed natural module comparison e0, and the lifted standard-free maps.",
    "uses": [
     "def-weil-pbc-free-module",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+    "lem-pc-finite-free-stalk-finite-matrix-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-    "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix homotopy identities after shrinking"
-   }
+   "elementary": false
   },
   {
-   "text": "Represent each scalar coefficient by a structure-sheaf section on a neighbourhood of y contained in V, using the description of stalk elements as germs. Intersect the finitely many neighbourhoods to get U. Define k by the matrices in the restricted bases and by zero outside the relevant pairs. Its reverse-degree zero condition holds by construction, and its pulled-back entries are the prescribed entries of h. The natural comparison e from the first step identifies their bases, giving the component conjugacy equations. When d=0 or a rank is zero the corresponding coefficient list is empty; use zero maps and take an empty intersection to be V.",
+   "text": "Transport each lifted standard-free map back through the restricted bases. Naturality of e0.hom and e0.inv, followed by cancellation of the mapped basis isomorphisms, proves its stalk image equals e0(PV.X i).hom composed with h(i,j) composed with e0(PV.X j).inv. This is the fully proved private transport_lift helper. Apply Functor.mapHomologicalComplexCompIso to e0, obtaining the natural isomorphism e on every complex on V.",
    "uses": [
-    "def-weil-pbc-module-stalk"
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-    "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix homotopy identities after shrinking"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Define k(i,j) by these lifted maps when i and j lie in [0,d] and the reverse-degree relation holds; define it as zero otherwise. This gives its required support directly. For a pair in the finite range with reverse-degree relation, use the transported component equation. If the relation fails, use hzero. If either degree is outside [0,d], strict boundedness makes the original term a zero object; restriction and pullback preserve zero objects, so h(i,j)=0. Map preservation of zero and zero-composition identities finish these cases. The termwise components of the natural complex comparison are the components of e0, so all equations have the required type.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-free-module",
-  "def-weil-pbc-module-stalk",
+  "lem-pc-finite-free-stalk-finite-matrix-lift",
   "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Expansion of lem-pc-finite-free-stalk-homotopy-p-only, steps 1--2; finite matrix argument, with equations separated from lifting."
+  "place": "Finite matrix argument split into standard-free matrix lifting and a complete Lean proof of basis transport, bounded support, and reverse-degree assembly; W2, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -143,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T210029-L-953536",
+  "landing": "20261012T230805-L-1911780",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

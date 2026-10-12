@@ -1,0 +1,91 @@
+{
+ "id": "def-pc-stalk-restriction-within-iso",
+ "kind": "definition",
+ "title": "Stalk pullback comparison after nested open restriction",
+ "statement": "Let $Y$ be a scheme, $y\\in Y$, and $U\\subseteq V\\subseteq Y$ opens containing $y$. Restriction from $V$ to $U$ followed by pullback along the map from $\\operatorname{Spec}\\mathcal O_{Y,y}$ to $U$ is naturally isomorphic to pullback along the map to $V$. The equality of the underlying maps is [lem-pc-stalk-from-spec-subopen].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first paragraph: replace restriction by pullback and compose pullbacks"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-stalk-from-spec-subopen"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural isomorphism from restriction inside an open followed by pullback from the ambient scheme stalk to pullback to that stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecStalkOfMem\", \"restrictFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalkOfMem.*restrict|restrict.*fromSpecStalkOfMem",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Birational/RationalMap.lean; no nested-open module comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, first paragraph: restriction followed by stalk pullback comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkRestrictionWithinIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkRestrictionWithinIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.stalkRestrictionWithinIso",
+  "statement": "def stalkRestrictionWithinIso {Y : Scheme.{u}} (y : Y) (V : Y.Opens) (hyV : y ∈ V) (U : Y.Opens) (hUV : U ≤ V) (hyU : y ∈ U) : restrictFunctor (Y.homOfLE hUV) ⋙ pullback (U.fromSpecStalkOfMem y hyU) ≅ pullback (V.fromSpecStalkOfMem y hyV)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230805-L-1911780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230805-L-1911780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

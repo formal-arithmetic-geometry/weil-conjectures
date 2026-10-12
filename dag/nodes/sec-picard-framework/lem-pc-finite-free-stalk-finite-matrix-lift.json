@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-finite-free-stalk-finite-matrix-lift",
+ "kind": "statement",
+ "title": "Simultaneous stalk lifting of a finite family of standard free-sheaf matrices",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $y\\in Y$ and let $V\\subseteq Y$ be an open containing $y$. Let $I$ be a finite index type, and let $r,s:I\\to\\mathbf N$. For $q\\in I$, write $F_q=\\mathcal O_V^{\\oplus r(q)}$ and $G_q=\\mathcal O_V^{\\oplus s(q)}$ for the standard free sheaves of modules (finite coproducts of the structure sheaf) [def-weil-sheaf-of-modules-category], [def-weil-pbc-free-module]. Let $T$ be pullback of modules [def-pc-module-pullback] along $V.\\mathrm{fromSpecStalkOfMem}(y)$ from $\\operatorname{Spec}\\mathcal O_{Y,y}$ [def-weil-pbc-module-stalk] to $V$. For every family $f_q:T(F_q)\\to T(G_q)$, there exist an open $U\\subseteq V$ containing $y$ and maps $g_q:R(F_q)\\to R(G_q)$, where $R$ is restriction along $U\\hookrightarrow V$ and $S$ is pullback along $U.\\mathrm{fromSpecStalkOfMem}(y)$, with $S(g_q)=e(F_q).\\mathrm{hom}\\circ f_q\\circ e(G_q).\\mathrm{inv}$ in diagrammatic order. Here $e:R\\circ S\\simeq T$ is the specified natural comparison: restriction-as-pullback [lem-weil-pbc-open-immersion-module-pullback-restriction], followed by pullback composition and the equality of the two composite maps from the stalk scheme into $V$. The comparison is the construction [def-pc-stalk-restriction-within-iso].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: extension of the finite calculation near a point; lem-pc-finite-free-reverse-components-lift, steps 2--3, finite matrix coefficients before change of bases and reverse-degree assembly"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-pc-stalk-restriction-within-iso"
+ ],
+ "proof": [
+  {
+   "text": "Identify the pullbacks of the standard free sheaves with standard free sheaves on the stalk spectrum using pullbackFreeIso. Express each f_q as a finite matrix by freeMatrix, and identify its coefficient ring with the stalk ring via GammaSpecIso. The index type and each rank are finite, so the disjoint union of all coefficient positions is finite.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each coefficient use its germ representative on an open containing y and contained in V, and intersect these finitely many opens. Restrict all representatives to the intersection U. Use freeHomEquiv, or finite sums of the free inclusions and coordinate projections with multiplication by the represented functions, to construct the corresponding morphisms of standard free sheaves on U. Conjugate by restrictFreeIso to obtain g_q between the restricted sheaves in the statement. For empty coefficient lists take U=V.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct e by whiskering restrictFunctorIsoPullback with S, applying pullbackComp, and applying pullbackCongr to the equality U.fromSpecStalkOfMem composed with Y.homOfLE equals V.fromSpecStalkOfMem. Prove this equality by cancellation of the open immersion V.ι and fromSpecStalkOfMem_ι. The free inclusions and coordinate projections commute with pullbackFreeIso by pullback_map_ιFree_pullbackFreeIso_hom and pullbackFreeIso_hom_freeπ; pullback composition gives compatibility of their unit factors with e. Then freeMatrix_pullback and the chosen germ equalities give the component matrices of S(g_q)=e(F_q).hom composed with f_q composed with e(G_q).inv. Morphisms of finite free sheaves are determined by their matrix entries, proving the equation.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: extension of the finite calculation near a point; lem-pc-finite-free-reverse-components-lift, steps 2--3, finite matrix coefficients before change of bases and reverse-degree assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite family of morphisms between finite free sheaves over a stalk extends to a common open neighborhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of morphisms between finite free sheaves over a stalk extends to a common open neighborhood",
+   "results": "8 hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_lift_of_germInjective_aux, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.IsFiniteType",
+   "date": "2026-10-13",
+   "verdict": "No direct finite-matrix lifting theorem; the hits supply free sheaves, generators, or the restriction-pullback comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-13",
+   "verdict": "No direct finite-matrix lifting theorem; the hits supply free sheaves, generators, or the restriction-pullback comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*finite.*stalk|finite.*family.*lift",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No direct finite-matrix lifting theorem; the hits supply free sheaves, generators, or the restriction-pullback comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, first two paragraphs: extension of the finite matrix calculation to a neighbourhood; scalar coefficient lifting before reverse-degree assembly",
+   "via": [
+    "lem-pc-finite-free-reverse-components-lift",
+    "lem-pc-finite-free-stalk-homotopy-p-only",
+    "lem-pc-finite-free-stalk-homotopy-pair-shrink",
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteMatrixLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkFiniteMatrixLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_free_matrices_of_stalk_local",
+  "statement": "theorem exists_finite_free_matrices_of_stalk_local\n    {Y : Scheme.{u}} {ι : Type v} [Finite ι]\n    (y : Y) (V : Y.Opens) (hyV : y ∈ V)\n    (r s : ι → ℕ)\n    (f : ∀ q,\n      (pullback (V.fromSpecStalkOfMem y hyV)).obj\n          (SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin (r q)))) ⟶\n      (pullback (V.fromSpecStalkOfMem y hyV)).obj\n          (SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin (s q))))) :\n    ∃ (U : Y.Opens) (hUV : U ≤ V) (hyU : y ∈ U),\n      let R := restrictFunctor (Y.homOfLE hUV)\n      let S := pullback (U.fromSpecStalkOfMem y hyU)\n      let e := stalkRestrictionWithinIso y V hyV U hUV hyU\n      ∃ (g : ∀ q,\n        R.obj (SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin (r q)))) ⟶\n        R.obj (SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin (s q))))),\n        ∀ q, S.map (g q) =\n          (e.app (SheafOfModules.free (R := V.toScheme.ringCatSheaf)\n            (ULift.{u} (Fin (r q))))).hom ≫ f q ≫\n          (e.app (SheafOfModules.free (R := V.toScheme.ringCatSheaf)\n            (ULift.{u} (Fin (s q))))).inv",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230805-L-1911780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230805-L-1911780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
