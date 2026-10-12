@@ -11,6 +11,7 @@ public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.InvertSCOhomology
+import Sheaf.AlgebraicGeometry.FractionZeroTensorPower
 
 /-!
 # A power of a section kills a positive cohomology class
@@ -51,6 +52,13 @@ theorem exists_tensorPowSection_cohomology_eq_zero
     (xi : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :
     ∃ e : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace p).map
       ((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) e) xi = 0 := by
-  sorry
+  obtain ⟨V, hV, e, _⟩ := invertS_cohomology X L F s p
+  have hVU : V = U := SetLike.coe_injective (hV.trans hU.symm)
+  subst V
+  let : Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F) :=
+    subsingleton_openModuleCohomology_of_isAffineOpen X F U hAffine p hp
+  have hsub : Subsingleton (CohomologyFractionPresentation L F s p ⊤) :=
+    ⟨fun x y ↦ e.injective (Subsingleton.elim (e x) (e y))⟩
+  exact exists_tensorPowSection_cohomology_eq_zero_of_subsingleton_fractions X L F s p hsub xi
 
 end AlgebraicGeometry.Scheme.Modules

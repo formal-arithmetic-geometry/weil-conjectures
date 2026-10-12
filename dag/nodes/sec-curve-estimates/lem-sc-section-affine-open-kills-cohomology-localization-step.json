@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-section-affine-open-kills-cohomology-localization-step",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-section-affine-open-kills-cohomology",
+   "place": "Lemma 01XR proof, localization and affine vanishing step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Zero cohomology fractions imply tensor-power annihilation",
+ "statement": "Let X be a scheme [def-pc-scheme], L and F be O_X-modules, s a global section of L, and p a nonnegative integer. Use tensor powers and section multiplication from [def-sc-cohomology-fraction-presentation] and module cohomology from [def-sc-ringed-space-module-cohomology]. If the additive degree-zero fraction presentation CohomologyFractionPresentation L F s p top is a subsingleton, then for every xi in H^p(X,F) there exists e >= 0 such that the cohomology map induced by F -> F tensor L^{tensor e}, f -> f tensor s^e, sends xi to zero. No affine open, compactness, quasi-separatedness, invertibility, quasi-coherence, or positive-degree hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01XR, denominator-clearing consequence of the fraction presentation in Lemma 09MR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-cohomology-fraction-presentation",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Forget scalars on global module cohomology and identify it naturally with open module cohomology at the top open, using exactness of scalar forgetting on the complex of sections of an injective module resolution [def-sc-ringed-space-module-cohomology]. Apply the inverse right unitor to regard xi as a degree-zero numerator eta.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The presentation of [def-sc-cohomology-fraction-presentation] is the additive direct limit of the twisted cohomology groups with transition maps mulTensorPowSection. Section-power multiplication and tensor coherence give the directed-system identities. Since the presentation is a subsingleton, the class [0,eta] is zero. Express its relation as a finite sum of defining relations and push it to a common degree e: all relation terms cancel, so the transition sends eta to zero. This is the zero criterion for an additive direct limit (Mathlib AddCommGroup.DirectLimit.of.zero_exact).",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor coherence identifies the transition from degree zero composed with the inverse right unitor with the morphism f -> f tensor s^e. Naturality of the comparison in step 1 transfers the vanishing to global module cohomology.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-cohomology-fraction-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01XR, denominator-clearing consequence of the fraction presentation in Lemma 09MR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An element of an additive directed colimit is zero if it becomes zero at a later stage",
+   "results": "Service unavailable: this kind of search is not available now; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zero class in direct limit of additive groups eventually maps to zero",
+   "results": "AddCommGroup.DirectLimit.of.zero_exact, Mathlib.Algebra.Colimit.Module; relevant algebraic zero criterion, but identification of the explicit cohomology quotient with that direct limit and the natural comparison with global module cohomology still needed.",
+   "date": "2026-10-13",
+   "verdict": "related algebra, not the same statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.DirectLimit.of.zero_exact",
+   "results": "Confirmed generic additive direct-limit zero criterion.",
+   "date": "2026-10-13",
+   "verdict": "related algebra, not the same statement"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyFraction|mulTensorPowSection",
+   "results": "msearch: 0 Mathlib hits; rg on lean/ and /home/ubuntu/weil-lean found the fraction definitions and existing localization comparisons, no denominator-clearing cohomology theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FractionZeroTensorPower",
+  "file": "lean/Sheaf/AlgebraicGeometry/FractionZeroTensorPower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_cohomology_eq_zero_of_subsingleton_fractions",
+  "statement": "theorem exists_tensorPowSection_cohomology_eq_zero_of_subsingleton_fractions\n    (X : Scheme.{u}) (L F : X.Modules) (s : Γ(L, ⊤)) (p : ℕ)\n    (hsub : Subsingleton (CohomologyFractionPresentation L F s p ⊤))\n    (xi : (RingedSpace.moduleCohomology X.toRingedSpace p).obj F) :\n    ∃ e : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace p).map\n      ((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) e) xi = 0",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184403-L-4026619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184403-L-4026619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,37 +29,30 @@
  ],
  "proof": [
   {
-   "text": "Apply the localization isomorphism of [lem-sc-invert-s-cohomology] to p, F, L, and s. Since X_s is affine and the restriction of a quasi-coherent module to an open subscheme is quasi-coherent, [pqf-lem-affine-vanishing] gives H^p(X_s,F restricted to X_s)=0 for p>0. Therefore the image of xi in the localized graded cohomology module is zero.",
+   "text": "Apply invertS_cohomology [lem-sc-invert-s-cohomology] to obtain an additive equivalence from the fraction presentation to open cohomology on V with V = X_s. Identify V with the given U by equality of their underlying sets. Apply subsingleton_openModuleCohomology_of_isAffineOpen [pqf-lem-affine-vanishing] and pull the subsingleton structure back along the injective equivalence.",
    "uses": [
     "lem-sc-invert-s-cohomology",
     "pqf-lem-affine-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01XR proof, first paragraph, using Lemmas 09MR and 01XB"
-   }
+   "elementary": false
   },
   {
-   "text": "By the definition of localization of a module, the vanishing of the image of the homogeneous class xi/1 means that some power s^e annihilates xi. In degree e this says exactly that the map H^p(X,F) to H^p(X,F tensor L^{tensor e}) induced by f maps f to f tensor s^e and sends xi to zero.",
+   "text": "Apply exists_tensorPowSection_cohomology_eq_zero_of_subsingleton_fractions [lem-sc-section-affine-open-kills-cohomology-localization-step] to the resulting zero fraction presentation and xi. This isolates only the denominator-clearing and global/open-cohomology comparison step.",
    "uses": [
-    "lem-sc-invert-s-cohomology"
+    "lem-sc-section-affine-open-kills-cohomology-localization-step"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01XR statement and proof, conclusion from localization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-invert-s-cohomology",
-  "pqf-lem-affine-vanishing"
+  "pqf-lem-affine-vanishing",
+  "lem-sc-section-affine-open-kills-cohomology-localization-step"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01XR (coherent-lemma-section-affine-open-kills-classes), using Lemma 09MR"
+  "place": "Lemma 01XR: localization comparison, affine vanishing, and clearing the zero fraction; second reading Y3 separates only the final algebraic step"
  },
  "mathlib_searches": [
   {
@@ -138,5 +131,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184403-L-4026619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
