@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
+import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic
@@ -358,8 +360,35 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
             (IsLocalRing.ResidueField.map φ))))
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
             ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
-              ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
-  sorry
+              ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by
+  let g := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom φ))
+  let i := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  let j := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))
+  let k := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))
+  have h : j ≫ g = k ≫ i := by
+    dsimp [j, g, k, i]
+    rw [← ProjectiveSpace.map_comp, ← ProjectiveSpace.map_comp]
+    congr 1
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+  obtain ⟨a₁, a₂, ha⟩ := Etale.exists_addEquiv_strictLocal_totalCohomology_exchange
+    Λ φ (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+    (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B)) g
+    (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) F q
+  obtain ⟨b₁, b₂, hb⟩ := Etale.exists_addEquiv_cohomology_restrictionSquare
+    Λ g i j k h F q
+    (Etale.bijective_cohomologyMap_projectiveLine_residueField A Λ F q)
+    (Etale.bijective_cohomologyMap_projectiveLine_residueField B Λ
+      ((g)^*[ModuleCat.{u + 1} Λ].obj F) q)
+  refine ⟨a₁.trans b₁, a₂.trans b₂, ?_⟩
+  intro x
+  change b₂ (a₂ _) = Etale.cohomologyMap k _ q (b₁ (a₁ x))
+  rw [ha, hb]
+
 
 /-- If the residue field map `κ_A ⟶ κ_B` of a local morphism of strictly henselian local
 rings is an isomorphism, the stalk at the closed geometric point of `Spec B` of the

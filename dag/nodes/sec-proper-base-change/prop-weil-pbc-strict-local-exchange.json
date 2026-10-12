@@ -18,22 +18,40 @@
  ],
  "proof": [
   {
-   "text": "On a termwise injective representative of the exchange morphism of\n[def-weil-pbc-derived-exchange], the stalk at the closed geometric point is\ncomputed by applying the comparison of\n[prop-weil-pbc-p1-strict-henselian-comparison] to the two closed fibres; expanding\nthe unit--$\\theta_\\square$--counit composite shows that this is the\nrestriction map between the cohomologies of the two closed projective lines,\nwhich is an isomorphism when the residue-field map is an isomorphism.",
+   "text": "For the projective-line square obtain a1,a2 identifying stalk exchange with cohomology pullback on the two total projective lines, with no closed-fibre comparison used yet.",
    "uses": [
-    "def-weil-pbc-derived-exchange",
-    "prop-weil-pbc-p1-strict-henselian-comparison"
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "The residue-field identity Res(phi) after res(A) = res(B) after phi gives a commuting square of projective lines by contravariance of Spec.map and ProjectiveSpace.map_comp. Stalks of inverse images equal the original stalks, so torsion is preserved (the existing instance isTorsionSheaf_upperStar). Apply the strictly henselian projective-line comparison over A to F and over B to g prime inverse image of F. These are the two bijective restriction hypotheses of the restriction-square transport theorem. Obtain b1,b2 and its commuting equation.",
+   "uses": [
+    "prop-weil-pbc-p1-strict-henselian-comparison",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-cohomology-restriction-square-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define e1=a1 followed by b1 and e2=a2 followed by b2. Rewrite first with the total-space exchange equation, then with the restriction-square equation. This proves the unchanged existential statement. The existing second assertion then follows from bijectivity of pullback along an isomorphism of residue fields.",
+   "uses": [
+    "lem-weil-pbc-strict-local-total-cohomology-exchange",
+    "lem-weil-pbc-cohomology-restriction-square-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-cohomology-restriction-square-transport",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-strict-local-total-cohomology-exchange",
   "prop-weil-pbc-p1-strict-henselian-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-strict-local-exchange.md",
-  "place": "## Proof"
+  "by": "worker T1",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 095T, closed-fibre comparison and final map-on-stalks paragraphs; expanded into two generic comparison interfaces"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -98,19 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a3709",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T003530-L-597800",
+  "landing": "20261012T042421-L-1821727",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies.",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
-   "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal",
-   "AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

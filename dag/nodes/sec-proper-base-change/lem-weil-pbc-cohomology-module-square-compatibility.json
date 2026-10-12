@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-cohomology-module-square-compatibility",
+ "kind": "statement",
+ "title": "Underlying abelian cohomology respects a module inverse-image square",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $g:X'\\to X$, $i:X_0\\to X$, $j:X'_0\\to X'$, $k:X'_0\\to X_0$ be scheme morphisms [def-pc-scheme] with $g\\circ j=i\\circ k$. For a sheaf $F$ of $\\Lambda$-modules on the small etale site of $X$ [prop-weil-pbc-inverse-image-modules-exact] and $q\\geq0$, write $F_{ab}$ for its underlying abelian sheaf [def-weil-pbc-abelian-etale-sheaves] and $H^q$ for etale cohomology, with pullback maps as in [def-weil-pbc-cohomology-pullback]. There exist additive equivalences $c_1:H^q(X_0,i^{-1}F_{ab})\\simeq H^q(X_0,(i^{-1}F)_{ab})$, $c_2:H^q(X',g^{-1}F_{ab})\\simeq H^q(X',(g^{-1}F)_{ab})$, and $c_3:H^q(X'_0,j^{-1}(g^{-1}F)_{ab})\\simeq H^q(X'_0,k^{-1}(i^{-1}F)_{ab})$ such that for every $x\\in H^q(X,F_{ab})$ one has $c_3(j^*(c_2(g^*x)))=k^*(c_1(i^*x))$. No cohomological bijectivity or geometric condition beyond commutativity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03FD and 095T, coefficient convention and final map-on-stalks paragraph; inverse-image coefficient compatibility is Modules on Sites, Tags 03D2 and 04JC"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the existing coefficient-forgetting isomorphisms alpha for i and beta for g from lemma-weil-pbc-etale-pullback-forget-modules. No choice of coherence for these isomorphisms is needed for this existential assertion.",
+   "uses": [
+    "lemma-weil-pbc-etale-pullback-forget-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let e1 be the inverse-image composition isomorphism for j,g and e2 that for k,i with common composite j after g. Define gamma as j inverse image of beta, then e1 inverse, then e2, then k inverse image of alpha inverse. Cohomology of alpha inverse, beta inverse, and gamma gives c1,c2,c3. Each is bijective because the cohomology functor sends isomorphisms to isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of cohomologyMap moves beta inverse and alpha inverse past the respective pullbacks. Apply the composition part of lem-weil-pbc-cohomology-pullback-functorial to j,g and k,i, using the supplied equality of composites. Compose cohomology maps and cancel j inverse image of beta inverse with j inverse image of beta, and e1 with e1 inverse. Both sides become cohomology of e2 followed by k inverse image of alpha inverse applied to pullback along the common composite. This is the required equation.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules"
+ ],
+ "proof_origin": {
+  "by": "worker T1",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03FD and 095T; the coefficient and inverse-image composition calculation implemented from the existing forgetting and functoriality declarations by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology pullback naturality for a commuting square inverse image of module sheaves forgetting coefficients",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of module sheaves commutes with forgetting coefficients and cohomology pullback composition",
+   "date": "2026-10-12",
+   "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso",
+   "verdict": "no exact match; declarations inspected",
+   "digest": "74721dde1b4736e8"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStar.*forget|forget.*upperStar|cohomologyMap.*comp",
+   "date": "2026-10-12",
+   "results": "0 hits; ",
+   "verdict": "no exact match; declarations inspected",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "its proof, computing exchange termwise and applying the two closed-fibre comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CohomologyModuleSquareCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyModuleSquareCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_addEquiv_cohomology_moduleSquare",
+  "statement": "theorem Etale.exists_addEquiv_cohomology_moduleSquare (Λ : Type (u + 1)) [CommRing Λ] {X X' X₀ X₀' : Scheme.{u}} (g : X' ⟶ X) (i : X₀ ⟶ X) (j : X₀' ⟶ X') (k : X₀' ⟶ X₀) (h : j ≫ g = k ≫ i) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) : ∃ (c₁ : Sheaf.H ((i)^*[AddCommGrpCat.{u + 1}].obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) q ≃+ Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj F)) q) (c₂ : Sheaf.H ((g)^*[AddCommGrpCat.{u + 1}].obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)) q ≃+ Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((g)^*[ModuleCat.{u + 1} Λ].obj F)) q) (c₃ : Sheaf.H ((j)^*[AddCommGrpCat.{u + 1}].obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((g)^*[ModuleCat.{u + 1} Λ].obj F))) q ≃+ Sheaf.H ((k)^*[AddCommGrpCat.{u + 1}].obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj F))) q), ∀ x, c₃ (Etale.cohomologyMap j ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((g)^*[ModuleCat.{u + 1} Λ].obj F)) q (c₂ (Etale.cohomologyMap g ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q x))) = Etale.cohomologyMap k ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj F)) q (c₁ (Etale.cohomologyMap i ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q x))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
