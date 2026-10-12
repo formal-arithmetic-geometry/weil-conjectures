@@ -29,61 +29,23 @@
  ],
  "proof": [
   {
-   "text": "Let K=F(I). Extend K by zero to integer degrees and choose a Cartan--Eilenberg resolution with its shared augmentation by [lem-sp-cartan-eilenberg-exists]. Package it in a CartanEilenbergPresentation with the given X and I. Apply [lem-pc-grothendieck-ss-double-complex-model] to obtain the total augmentation a, its cohomology comparison h and the quotient/inclusion description of the abstract left edge. The equation for homologyMap a identifies h with the inverse of I.isoRightDerivedObj (F composed with G).",
+   "text": "Apply the general complex hypercohomology cocycle equation to K=F(I) and the supplied c. Identify the complex hypercohomology edge with the Grothendieck edge through the canonical resolution comparisons. Rewrite that identity in the cocycle equation.",
    "uses": [
-    "lem-sp-cartan-eilenberg-exists",
-    "lem-pc-grothendieck-ss-double-complex-model",
-    "lem-sp-derived-well-defined"
+    "lem-pc-hypercohomology-edge-cocycle",
+    "lem-pc-grothendieck-hypercohomology-edge"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
-   }
-  },
-  {
-   "text": "Every F(I^q) is G-acyclic by [def-sp-composite-acyclicity] and the injectivity in [def-sp-injective-resolutions]. Applying G to the CE augmentation in each resolved column is a quasi-isomorphism. The injective horizontal cycles, boundaries and cohomology of [lem-sp-cartan-eilenberg-exists] give split short exact sequences, so G commutes with horizontal cohomology. The second filtration has E2^{0,n}=G(H^n(K)) through rightDerivedZeroIsoSelf, and the model fixes its canonical identification with G(R^nF(X)).",
-   "uses": [
-    "def-sp-composite-acyclicity",
-    "def-sp-injective-resolutions",
-    "lem-sp-cartan-eilenberg-exists",
-    "lem-pc-grothendieck-ss-double-complex-model",
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
-   }
-  },
-  {
-   "text": "Precompose homologyMap a with c followed by the homology quotient of GF(I). The condition c composed with iCycles = G(iCycles) fixes its representative in the resolution-degree-zero total summand. The quotient by filtration step 1 discards positive resolution degrees. Under the split horizontal-cohomology computation, the degree-zero component is G applied to the quotient Z^n(K) -> H^n(K). The stable-page cycle inclusion into E2 preserves this component. Substitute the explicit augmentation and left-edge equations of [lem-pc-grothendieck-ss-double-complex-model], and compose the target with G of I.isoRightDerivedObj F n. This gives exactly the stated equation. The calculation applies to every c with the stated inclusion equation since iCycles is monic. More explicitly, if U is the horizontal row in resolution degree zero, a_Z: Z^n(K) -> Z^n(U) and b: H^n(K) -> H^n(U) are induced by the CE augmentation, then a_Z followed by the quotient of U equals the quotient of K followed by b, by homology-map naturality. Applying G and the split-horizontal-homology identification gives exactly the degree-zero representative of G(quotient_K) followed by G(b). The augmentation b lands in the kernel of the next resolution differential. The degree-zero comparison identifies this kernel with G(H^n(K)), and there is no incoming boundary from a negative resolution degree. The transpose sign is (-1)^(n*0)=1 on this representative.",
-   "uses": [
-    "lem-pc-grothendieck-ss-double-complex-model",
-    "lem-sp-derived-well-defined",
-    "lem-sp-grothendieck-edge-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-cartan-eilenberg-exists",
-  "lem-pc-grothendieck-ss-double-complex-model",
-  "lem-sp-derived-well-defined",
-  "def-sp-composite-acyclicity",
-  "def-sp-injective-resolutions",
-  "def-sp-left-exact-additive",
-  "lem-sp-grothendieck-edge-maps"
+  "lem-pc-hypercohomology-edge-cocycle",
+  "lem-pc-grothendieck-hypercohomology-edge"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle",
-  "note": "Expanded from the supplied step-2 argument, using the construction in Tags 015N and 015J; those tags do not themselves state the cocycle equation."
+  "place": "Tags 015J (lemma-two-ss-complex-functor) and 015N (lemma-grothendieck-spectral-sequence); representative calculation expanded from lem-pc-grothendieck-cocycle-comparison",
+  "note": "G1 stage 3: separate the general complex cocycle calculation from the resolution-identification calculation; combine by rewriting, with no changed signature."
  },
  "mathlib_searches": [
   {
@@ -154,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-b3b0d",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T070544-L-3474530",
+  "landing": "20261012T095903-L-316603",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and new comparison with their nodes, checked the proof, pruning, import users and report; both modules compile, and axiom probes show only standard axioms plus sorryAx for the named comparison."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

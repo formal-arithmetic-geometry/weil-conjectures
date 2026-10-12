@@ -6,9 +6,8 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel
-import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import Sheaf.CategoryTheory.HypercohomologyEdgeCocycle
+import Sheaf.CategoryTheory.GrothendieckHypercohomologyEdge
 
 /-! # Comparing the Grothendieck edge with the cocycle quotient
 
@@ -87,6 +86,10 @@ theorem grothendieck_cocycle_comparison
         (F.grothendieckLeftEdgeMap G hFG n).app X ≫
         G.map (I.isoRightDerivedObj F n).hom =
       G.map (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ n) := by
-  sorry
+  let K := (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+  have h := G.cochainHypercohomologyLeftEdge_cocycle K n c hc
+  have e := grothendieckLeftEdgeMap_eq_hypercohomology F G hFG X I n
+  rw [← e] at h
+  exact h
 
 end CategoryTheory
