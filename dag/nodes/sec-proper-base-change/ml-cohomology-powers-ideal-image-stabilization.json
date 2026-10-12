@@ -17,62 +17,61 @@
  ],
  "proof": [
   {
-   "text": "(Setup: the short exact sequences and the ladder of long exact sequences.) Put $\\mathcal I^0\\mathcal F=\\mathcal F$. For $k\\ge n\\ge0$ one has $\\mathcal I^k\\mathcal F\\subseteq\\mathcal I^n\\mathcal F$: $\\mathcal I^k=\\mathcal I^{k-n}\\mathcal I^n\\subseteq\\mathcal I^n$, so each generating local section $as$ ($a$ in $\\mathcal I^k$) of $\\mathcal I^k\\mathcal F$ lies in $\\mathcal I^n\\mathcal F$ ([def-weil-pbc-coherent-formal-module] (0)). For $n\\ge1$ let $S_n$ be the short exact sequence $0\\to\\mathcal I^n\\mathcal F\\to\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F\\to0$ of $\\mathcal O_X$-modules; for $k\\ge n\\ge1$ the inclusion $\\mathcal I^k\\mathcal F\\subseteq\\mathcal I^n\\mathcal F$, the identity of $\\mathcal F$ and the quotient map $\\mathcal F/\\mathcal I^k\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$ form a morphism of short exact sequences $S_k\\to S_n$. The category $\\Mod(\\mathcal O_X)$ is abelian with enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], $\\Gamma(X,-)$ is left exact and additive, and $H^q(X,-)$ are its right derived functors [pqf-def-cohomology]. By [lem-weil-pbc-horseshoe-delta-functor] (2) each $S_n$ gives an exact sequence $H^p(X,\\mathcal I^n\\mathcal F)\\xrightarrow{\\iota_n}H\\xrightarrow{\\rho_n}M_n\\xrightarrow{\\delta_n}H^{p+1}(X,\\mathcal I^n\\mathcal F)\\xrightarrow{\\beta_n}H^{p+1}(X,\\mathcal F)$, with $\\iota_n,\\beta_n$ induced by the inclusion $\\mathcal I^n\\mathcal F\\subseteq\\mathcal F$ and $\\rho_n$ by the quotient map. Write $\\alpha_{k,n}:H^{p+1}(X,\\mathcal I^k\\mathcal F)\\to H^{p+1}(X,\\mathcal I^n\\mathcal F)$ ($k\\ge n\\ge0$) for the map induced by the inclusion. By [lem-weil-pbc-horseshoe-delta-functor] (1) applied to the morphism $S_k\\to S_n$, $\\delta_n\\circ\\tau_{k,n}=\\alpha_{k,n}\\circ\\delta_k$; by functoriality of $H^{p+1}(X,-)$, $\\beta_k=\\beta_n\\circ\\alpha_{k,n}$ and $\\alpha_{k,n}=\\alpha_{j,n}\\circ\\alpha_{k,j}$ for $k\\ge j\\ge n$, and $\\beta_n=\\alpha_{n,0}$.",
+   "text": "Put J = I O_X and P_n = J^n F, with monic image inclusions j_n : P_n -> F. The cokernel sequences S_n = (P_n -> F -> F/P_n) are short exact by Mathlib ShortComplex.exact_cokernel. Obtain the cohomological delta-functor with degree functors moduleCohomology from pqf-def-cohomology. Its exact_right, exact_left and naturality fields give the needed exact rows and natural connecting maps. The quotient transitions commute with projections by cokernel.π_desc.",
    "uses": [
     "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "pqf-def-cohomology",
-    "lem-weil-pbc-horseshoe-delta-functor"
+    "pqf-def-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OB (lemma-ML-cohomology-powers-ideal, line 5553), lines 5604-5607 and 5619-5640: the short exact sequences 0 -> I^nF -> F -> F/I^nF -> 0, the morphism between those for n+m and n, and the induced commutative diagram with exact rows"
+    "place": "Cohomology of Schemes, Lemma 02OB, part (3)"
    }
   },
   {
-   "text": "(The constant $c$.) Apply [lem-weil-pbc-cohomology-powers-ideal-application] to $A,I,f,\\mathcal F$ (the same hypotheses and the same $\\mathcal I^n\\mathcal F$) with $q=p$, obtaining $c_p\\ge0$, and with $q=p+1$, obtaining $c_{p+1}\\ge0$; there $M_n$ is $H^q(X,\\mathcal I^n\\mathcal F)$ and $\\mu_{k,n}$ the map induced by the inclusion, so for $q=p$ one has $\\mu_{n,0}=\\iota_n$ and for $q=p+1$ one has $\\mu_{k,n}=\\alpha_{k,n}$, $\\mu_{k,0}=\\beta_k$. Put $c=\\max(c_p,c_{p+1})$.",
+   "text": "Apply lem-weil-pbc-cohomology-powers-ideal-application only in degree p+1 and retain its transition maps i, compatibility i_(k,n) j_n = j_k, and kernel threshold c. Cancellation of the monic j_n proves composition of i. The degree-zero product inclusion j_0 is an isomorphism: J^0 is O_X, its multiplication on F is the left unitor, and the image inclusion of this epimorphism is epi and mono. Thus the kernel of H^(p+1)(i_(k,0)) is the kernel of H^(p+1)(j_k).",
    "uses": [
-    "lem-weil-pbc-cohomology-powers-ideal-application"
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OB, line 5587: 'Let c = max{c_p, c_{p+1}}, where c_p, c_{p+1} are the integers found in Lemma 02OA for H^p and H^{p+1}'"
+    "place": "Cohomology of Schemes, Lemma 02OB, part (3)"
    }
   },
   {
-   "text": "(Part (2), the inclusion $\\supseteq$.) For $k\\ge n\\ge1$, $\\operatorname{Im}(\\rho_n)=\\rho_n(H)=\\tau_{k,n}(\\rho_k(H))\\subseteq\\operatorname{Im}(\\tau_{k,n})$, using $\\tau_{k,n}\\circ\\rho_k=\\rho_n$ (statement).",
+   "text": "For k >= n+c and x in H^p(F/P_k), let y = delta_k(x). Exact_left gives H^(p+1)(j_k)(y)=0. The degree-zero comparison gives H^(p+1)(i_(k,0))(y)=0. Since c <= k, the kernel equality gives H^(p+1)(i_(k,k-c))(y)=0; restricting scalars in that equality changes neither the underlying maps nor their zero conditions. Since n <= k-c, composition gives H^(p+1)(i_(k,n))(y)=0. The short-complex morphism (i_(k,n), identity F, quotient transition) and delta naturality imply delta_n(tau_(k,n)(x))=0. Exact_right, via ShortComplex.Exact.moduleCat_range_eq_ker, places tau_(k,n)(x) in the image of rho_n.",
+   "uses": [
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "pqf-def-cohomology",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 02OB, part (3)"
+   }
+  },
+  {
+   "text": "Conversely, the identity rho_k followed by tau_(k,n) equals rho_n follows from cokernel.π_desc and functoriality. Every rho_n(x) is therefore tau_(k,n)(rho_k(x)), giving the reverse range inclusion. Set.Subset.antisymm proves the equality for all positive n and k >= n+c.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OB, lines 5642-5644 (implicit: the image of H^p(F) is contained in that of H^p(F/I^{n+m}F) because the left vertical map of the diagram is the identity)"
-   }
-  },
-  {
-   "text": "(Part (2), the inclusion $\\subseteq$: the diagram chase.) Let $n\\ge1$, $k\\ge n+c$ and $x\\in M_k$. By exactness of the sequence of step 1 for $S_k$ at $H^{p+1}(X,\\mathcal I^k\\mathcal F)$, $\\beta_k(\\delta_k(x))=0$, i.e. $\\delta_k(x)\\in\\operatorname{Ker}(\\mu_{k,0})$ in degree $q=p+1$. Since $k\\ge c\\ge c_{p+1}$, part (b) of [lem-weil-pbc-cohomology-powers-ideal-application] for $q=p+1$ gives $\\operatorname{Ker}(\\beta_k)=\\operatorname{Ker}(\\alpha_{k,k-c_{p+1}})$, so $\\alpha_{k,k-c_{p+1}}(\\delta_k(x))=0$. As $k-c_{p+1}\\ge k-c\\ge n$, $\\alpha_{k,n}=\\alpha_{k-c_{p+1},n}\\circ\\alpha_{k,k-c_{p+1}}$ (step 1), hence $\\alpha_{k,n}(\\delta_k(x))=0$. By step 1, $\\delta_n(\\tau_{k,n}(x))=\\alpha_{k,n}(\\delta_k(x))=0$, so by exactness of the sequence for $S_n$ at $M_n$, $\\tau_{k,n}(x)\\in\\operatorname{Ker}(\\delta_n)=\\operatorname{Im}(\\rho_n)$. Thus $\\operatorname{Im}(\\tau_{k,n})\\subseteq\\operatorname{Im}(\\rho_n)$, and with step 4, $\\operatorname{Im}(\\tau_{k,n})=\\operatorname{Im}(\\rho_n)$ for all $n\\ge1$, $k\\ge n+c$. (Stacks cites Lemma 02OA part (4) for 'Ker(beta) = Ker(alpha)'; the fact used is part (3), here (b), as written.)",
-   "uses": [
-    "lem-weil-pbc-cohomology-powers-ideal-application"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OB, lines 5615-5645 (part (3): Ker(beta) = Ker(alpha) for m >= c, then the diagram chase; set k = n + m)"
+    "place": "Cohomology of Schemes, Lemma 02OB, part (3)"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
   "lem-weil-pbc-cohomology-powers-ideal-application",
-  "lem-weil-pbc-horseshoe-delta-functor",
-  "lem-weil-pbc-scheme-modules-enough-injectives",
   "pqf-def-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 02OB (lemma-ML-cohomology-powers-ideal, line 5553), proof lines 5586-5645"
+  "place": "Lemma 02OB, part (3), proof lines 5615-5645; formalized by T1 using the existing cohomological delta-functor and only the degree p+1 threshold of 02OA."
  },
  "mathlib_searches": [
   {
@@ -148,8 +147,8 @@
   "reviewer": "COMPILER",
   "group": "T1",
   "result": "pass",
-  "landing": "20261012T144147-L-2107926",
-  "kind": "interface",
+  "landing": "20261012T163620-L-2787551",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
