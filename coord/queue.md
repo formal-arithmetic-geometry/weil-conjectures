@@ -1,6 +1,6 @@
 # Work queue
 
-22 items; claim with `tools/claim.py next <group> [--stage N]`.
+25 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (3)
 
@@ -22,7 +22,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (14)
+## Stage 3: modules to prove (17)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -34,9 +34,18 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 9 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 5 | proof |
+| `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `Sheaf.Topology.NoetherianTopologicalCohomologyVanishing` | 4 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
+
+Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
+
+| module | distance to a target | sorry |
+|---|---|---|
+| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 4 | 4 |
