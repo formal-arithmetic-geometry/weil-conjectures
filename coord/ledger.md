@@ -8419,3 +8419,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:48 L: merged deliver/Y2/Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux (stage 3; reviewer PASS; first push; landing 20261012T154837-L-2474939 (interface); batch 20261012T154824; modules 2; new nodes 1)
 - 15:48 L: merged deliver/Y2/Sheaf.RingTheory.SingularIdealsOfAnnihilatorBound (stage 3; reviewer PASS; first push; landing 20261012T154837-L-2475057 (interface); batch 20261012T154824; modules 3; new nodes 2)
 - 15:48 L: merged deliver/Y3/Sheaf.RingTheory.FiniteGabberUpstairsRelation (stage 3; reviewer PASS; first push; landing 20261012T154838-L-2475177 (interface); batch 20261012T154824; modules 2; new nodes 1)
+- 15:50 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCoproductEmbeddingPoints (reviewer RETURN: (reviewer X-c188e, head c188e79a7) F (review completeness), brief point 2: coord/changes/EtaleCoproductEmbeddingPoints-i)
