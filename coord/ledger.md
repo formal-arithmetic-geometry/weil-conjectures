@@ -6033,3 +6033,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:34 L: returned deliver/Q2/WeilConjectures.SixFunctors.Etale.Gabber (reviewer RETURN: (reviewer X-dceda, head dceda9773) C7 / brief point 5: Gabber.lean removes both modules realizing sk-def-pbc's statement)
 - 04:43 L: returned deliver/G1/Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects (reviewer RETURN: (reviewer X-9028d, head 9028d2342) D1/B1: `liftedCommGrpBranch` and `liftedCommRingBranch` are restatements of the paren)
 - 04:43 L: returned deliver/H2/Sheaf.AlgebraicGeometry.StrictHenselization (reviewer RETURN: (reviewer X-1d894, head 1d894026e) F: Brief point 2 requires every downstream user in the change record. Five are missin)
+- 04:47 L: merged deliver/A3/Sheaf.AlgebraicGeometry.ArtinSchreier (stage 3; reviewer PASS; first push; landing 20261012T044736-L-2030878 (proof); batch 20261012T044734; modules 1; new nodes 0)
