@@ -6186,3 +6186,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/F1/Sheaf.Paper.GabberCriterion (stage 3; reviewer PASS; first push; landing 20261012T053928-L-2633918 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/F1/Sheaf.RingTheory.HenselianOfEtaleSectionLifting (stage 3; reviewer PASS; first push; landing 20261012T053929-L-2634024 (proof); batch 20261012T053916; modules 1; new nodes 2)
 - 05:39 L: merged deliver/F1/Sheaf.Topology.SheavesDirectedColimitSections (stage 3; reviewer PASS; first push; landing 20261012T053929-L-2634141 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/F1/Sheaf.Topology.SpectralGeneralizations (stage 3; reviewer PASS; first push; landing 20261012T053929-L-2634292 (proof); batch 20261012T053916; modules 1; new nodes 0)
