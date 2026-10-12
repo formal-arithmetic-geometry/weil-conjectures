@@ -62,32 +62,45 @@
  ],
  "proof": [
   {
-   "text": "Use K-injective localization into f_*J to represent derived sections by Hom-complex classes. Evaluate the free generator and apply the stage derived-sections unit. The canonical cohomology germ then represents the same class under the unique strict-local stalk restriction. Q.first identifies its base cone leg. Expand the derived mate, use naturality and the adjunction triangle identities, and use Q.over to identify the inverse-image composition. Exact inverse image commutes with homology and strict-local exact sections followed by Leray give T. Naturality transports by q. This proves the derived restriction identity without replacing derived restriction by termwise restriction at the limit.",
+   "text": "The termwise direct image of the given bounded-below complex of injectives is bounded below and K-injective: the inverse-image left adjoint is exact, so direct image preserves injectives. Use sourceInjectiveDirectImageIso to obtain its specified representative r of Rf_*K.",
    "uses": [
-    "def-weil-pbc-strict-local-injective-source-comparison",
-    "def-weil-pbc-canonical-derived-cohomology-germs",
-    "def-weil-pbc-strict-local-neighbourhood-geometry",
-    "def-weil-pbc-strict-henselization-restriction",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-strict-local-mate-projection-data",
-    "lem-weil-pbc-injective-sections-pullback-comparison"
+    "def-weil-pbc-strict-local-injective-source-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply sourceLocalizedSectionsIso_germ to this representative on S. It factors the canonical source germ leg through cohomology of the actual complex of sections on the neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-strict-local-localized-hom-germ"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply strictLocalComplexSectionRestriction_mate to identify that base complex restriction followed by the derived mate and target isomorphism with stage sections identification, termwise fibre restriction, and the limit representative sections comparison.",
+   "uses": [
+    "lem-weil-pbc-strict-local-complex-sections-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone-leg clause of injectiveSections_strictLocal_comparison replaces termwise restriction followed by the limit comparison by the stage comparison followed by derived cohomology restriction. Unfold sourceLocalizedSectionsIso and strictLocalInjectiveSourceIso and reassociate: the localized Hom factors followed by the stage section factors are definitionally the original source isomorphism.",
+   "uses": [
+    "lem-weil-pbc-injective-sections-pullback-comparison",
+    "def-weil-pbc-strict-local-injective-source-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-canonical-derived-cohomology-germs",
-  "def-weil-pbc-strict-henselization-restriction",
   "def-weil-pbc-strict-local-injective-source-comparison",
-  "def-weil-pbc-strict-local-mate-projection-data",
-  "def-weil-pbc-strict-local-neighbourhood-geometry",
   "lem-weil-pbc-injective-sections-pullback-comparison",
-  "prop-weil-pbc-derived-inverse-image-adjunction"
+  "lem-weil-pbc-strict-local-complex-sections-mate",
+  "lem-weil-pbc-strict-local-localized-hom-germ"
  ],
  "proof_origin": {
-  "by": "S3 second reading: germ and derived mate part of original plan",
+  "by": "agent J3, Lean reduction with two separate compatibility statements",
   "document": "Stacks Project",
-  "place": "Tags 03Q8 and 03Q9"
+  "place": "Tags 03Q8 and 03Q9, localized Hom germ computation separated from the complex-sections mate computation"
  },
  "lean": {
   "existing": false,
@@ -113,9 +126,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T184344-L-4020224",
+  "landing": "20261012T225316-L-1808247",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

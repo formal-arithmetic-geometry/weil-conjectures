@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-strict-local-localized-hom-germ",
+ "kind": "statement",
+ "title": "Localized Hom germ comparison for a complex on the base",
+ "statement": "Let $S$ be a scheme, $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point, $K\\in D^+(\\operatorname{Ab}(S_{et}))$, $L$ a K-injective cochain complex of abelian etale sheaves on $S$, $r:K\\cong QL$, $n\\in\\mathbf Z$, and $i$ a representative affine pointed neighbourhood. Use the free sheaf and canonical source germ leg of [def-weil-pbc-canonical-derived-cohomology-germs]. Define $E_i$ from $\\operatorname{Hom}(\\mathbf Z[V_i][0],K[n])$ to $H^n(L(V_i))$ by the bounded-below inclusion, transport by $r$, the K-injective localization bijection, Hom-complex homology, and degreewise free-generator evaluation, exactly as in [def-weil-pbc-strict-local-injective-source-comparison], stopping before any stage pullback. Define $b_i:H^n(L(V_i))\\to\\Gamma(S_{(s)},H^n(g^{-1}K))$ by applying the neighbourhood section restriction of [def-weil-pbc-strict-henselization-restriction] degreewise to $L$, taking homology, using the exact-inverse-image localization comparison, transporting by $g^{-1}r^{-1}$, and commuting exact strict-local sections with homology. These constructions do not choose a representative of a class. Then the canonical source germ leg equals $E_i b_i$. No morphism $f$, base-change mate or fibre cohomology is involved.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9; cohomology of a K-injective complex and the canonical neighbourhood restriction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-kinjective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "K-injective localization represents every derived Hom class by a cocycle modulo homotopy. The bounded-below single and shift comparisons and free-generator evaluation identify this quotient with cohomology of L(V_i).",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical derived Hom to homology map sends this cocycle to its homology section. Naturality of the presheaf fibre moves that map across the neighbourhood germ. Apply the characterizing equation of the unique strict-henselization stalk restriction to replace that germ by restriction of the same section.",
+   "uses": [
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image and exact strict-local sections commute with homology. Their localization factorizations therefore identify the restricted section with the class of the degreewise restricted cocycle. Boundaries remain boundaries, so the identity descends to cohomology. Naturality of the quotient, shift and homology comparisons transports it along r, giving E_i b_i in every integer degree.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-strict-local-injective-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent J3, explicit compatibility argument from the cited constructions",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9; cohomology of a K-injective complex and the canonical neighbourhood restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived base change mate on an injective complex compatible with termwise restriction of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localized Hom into a K-injective sheaf complex evaluation as sections cohomology commutes with cohomology germ restriction",
+   "results": "CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, Sheaf.cohomologyPresheaf and topological presheaf germ lemmas. No comparison with this etale strict-local restriction.",
+   "date": "2026-10-13",
+   "verdict": "Generic localization and sheaf-cohomology infrastructure; no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective (Mathlib.Algebra.Homology.DerivedCategory.KInjective).",
+   "date": "2026-10-13",
+   "verdict": "Supplies the localization bijection, not its compatibility with the germ map."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceLocalizedSectionsIso|strictLocalComplexSectionRestriction|derivedPlus_mateEquiv_app_fac",
+   "results": "msearch returned zero hits. Direct reading of the source library found Adjunction.derivedPlus_mateEquiv_app_fac in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction. No etale sections or germ comparison.",
+   "date": "2026-10-13",
+   "verdict": "No existing declaration of either new compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceDerivedRestriction",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 final injective-complex paragraph: Localized Hom germ comparison for a complex on the base",
+   "via": [
+    "lem-weil-pbc-strict-local-injective-source-restriction",
+    "lem-weil-pbc-strict-local-injective-source-derived-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalLocalizedHomGerm",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalLocalizedHomGerm.lean",
+  "declaration": "AlgebraicGeometry.Etale.sourceLocalizedSectionsIso_germ",
+  "statement": "theorem sourceLocalizedSectionsIso_germ {S : Scheme.{v}}\n    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ)\n    (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :\n    (strictLocalCohomologySourceLegs s K n).app (op i) =\n      (sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫\n        strictLocalComplexSectionRestriction s K L r n i",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sourceLocalizedSectionsIso",
+   "AlgebraicGeometry.Etale.strictHenselizationSectionRestriction_naturality",
+   "AlgebraicGeometry.Etale.strictLocalSectionRestrictionNat",
+   "AlgebraicGeometry.Etale.strictLocalComplexSectionRestriction",
+   "AlgebraicGeometry.Etale.sourceLocalizedSectionsIso_germ"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T225316-L-1808247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T225316-L-1808247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
