@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-coefficient-root-extension",
+ "kind": "statement",
+ "title": "Finite coefficient-root extension with an algebraically independent rooted tuple",
+ "statement": "Let k→K be a field extension [def-pc-field-extension] in one universe, let s be a finite algebraically independent subset over k [def-weil-pbc-transcendence-basis], let p be prime with char(k)=p, and let P be any polynomial over E=k(s). There are fields l,L in that universe and commuting scalar towers k→l→L and k→K→L, with l/k and L/K finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension], and a finite algebraically independent subset t of L over l, such that E embeds in E₁=l(t), the embeddings E→K→L and E→E₁→L agree, every coefficient of P mapped to E₁ is a p-th power in E₁, and K together with E₁ generates L. No finiteness of K/E, finite generation of K/k, separability hypothesis, or degree inequality is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 04KM, coefficient-root construction in the induction step"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put E=k(s). The set of quotients f(s)/g(s), for multivariate polynomials f,g over k with g(s) nonzero, is a subfield of K containing k and s. Conversely every such quotient lies in E. Hence every coefficient c of P has such an expression. For each of the finitely many nonzero coefficients choose one expression and put h=f g^(p-1), so c=h(s)/g(s)^p. Let C be the finite union of the coefficient sets of these h.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix an algebraic closure Ω of K. Every element of Ω has a unique p-th root: existence follows from algebraic closedness, uniqueness from injective Frobenius. Let l be the subfield generated over k by the roots of C, let t be the roots of s, and let L be the compositum of K and l(t) in Ω. All are actual subfields and belong to the same universe as K.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius",
+    "def-pc-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a subfield F of Ω the elements z with z^p in F form a subfield, because Frobenius preserves sums, products and inverses. Applying this to F=k shows l^p is contained in k, and applying it to F=K shows L^p is contained in K. Thus l/k and L/K are purely inseparable. The constant roots and variable roots are algebraic, as roots of X^p-c. Their finite sets generate l/k and L/K, respectively, so the algebraic-generators lemma gives finiteness.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-algebraic-element",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put E₁=l(t) in L. Since each s_i=t_i^p, the original E embeds in E₁. These inclusions commute in L, giving the algebra structure E→E₁ and the scalar tower. For h=Σ c_I X^I, the element h̃=Σ c_I^(1/p) t^I belongs to E₁ and satisfies h̃^p=h(s). Consequently c=(h̃/g(s))^p in E₁. A zero coefficient is the p-th power of zero. This proves the coefficient condition for every index.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-pc-field-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The root function gives a bijection between the finite sets s and t. If a nonzero polynomial G over l vanished on t, coefficientwise p-th powers would lie in k and would give a nonzero polynomial G^(p) over k on the same variables. It is nonzero by injectivity of Frobenius on l. Its evaluation on s equals G(t)^p=0, contradicting algebraic independence of s. Thus t is algebraically independent over l. Finally K and E₁ generate L by its compositum construction; equivalently adjoining the range of K→L over E₁ is top.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-transcendence-basis",
+    "def-pc-field-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "M2 stage-3 worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 04KM, coefficient-root construction in the induction step; details written out from the source and checked against the Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Polynomial over rational function field coefficients become pth powers after finite purely inseparable extension of constants and pth roots of variables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial over k(s) acquires pth power coefficients in a finite purely inseparable constant extension l with rooted transcendence basis s^(1/p)",
+   "results": "IsPurelyInseparable.elemReduct, minpoly_eq, minpoly_eq_X_sub_C_pow, pow_mem, algebraMap_elemReduct_eq; these concern existing purely inseparable extensions and do not construct the constants or rooted tuple.",
+   "date": "2026-10-13",
+   "verdict": "No matching coefficient-root construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.coeff, _ ^ _",
+   "results": "coeff_X_pow, coeff_C_mul_X_pow, coeff_pow_mul_natDegree and coefficient identities.",
+   "date": "2026-10-13",
+   "verdict": "No extension construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*root|coeff.*pth|root.*coefficient in lean/Sheaf, lean/WeilConjectures; coeff.*pow in Mathlib",
+   "results": "Source MvPolynomial.exists_mapExpand_eq_pow and Field.exists_finiteDimensional_pow_eq in WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure. The first assumes roots of coefficients in an already given extension. The second gives a finite extension with roots but does not assert purely inseparable or construct a compatible rooted tuple in the compositum. No existing declaration packages this construction.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; neither source lemma supplies the required construction by specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.InseparableDegreeDrop",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-make-separably-generated",
+   "place": "steps 5–7: adjoining roots of coefficients and variables; the construction before any degree comparison",
+   "via": [
+    "lem-weil-pbc-inseparable-degree-drop"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.CoefficientRootExtension",
+  "file": "lean/Sheaf/FieldTheory/CoefficientRootExtension.lean",
+  "declaration": "FieldExtension.exists_coefficientRoot_extension",
+  "statement": "theorem exists_coefficientRoot_extension\n    (k K : Type w) [Field k] [Field K] [Algebra k K]\n    (s : Finset K)\n    (hs : AlgebraicIndependent k ((↑) : s → K))\n    (p : ℕ) [Fact p.Prime] [CharP k p]\n    (P : (IntermediateField.adjoin k (s : Set K))[X]) :\n    ∃ (l : Type w) (hl : Field l) (akl : Algebra k l)\n      (L : Type w) (hL : Field L) (aKL : Algebra K L) (alL : Algebra l L)\n      (akL : Algebra k L) (htl : IsScalarTower k l L) (htK : IsScalarTower k K L),\n      Module.Finite k l ∧ IsPurelyInseparable k l ∧\n      Module.Finite K L ∧ IsPurelyInseparable K L ∧\n      ∃ t : Finset L, AlgebraicIndependent l ((↑) : t → L) ∧\n        ∃ (a : Algebra (IntermediateField.adjoin k (s : Set K))\n            (IntermediateField.adjoin l (t : Set L))),\n          IsScalarTower (IntermediateField.adjoin k (s : Set K))\n            (IntermediateField.adjoin l (t : Set L)) L ∧\n          (∀ n : ℕ, ∃ b : IntermediateField.adjoin l (t : Set L),\n            algebraMap (IntermediateField.adjoin k (s : Set K))\n              (IntermediateField.adjoin l (t : Set L)) (P.coeff n) = b ^ p) ∧\n          IntermediateField.adjoin (IntermediateField.adjoin l (t : Set L))\n            (Set.range (algebraMap K L)) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165522-L-2936343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165522-L-2936343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

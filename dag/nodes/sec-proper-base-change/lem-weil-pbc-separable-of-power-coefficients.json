@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-separable-of-power-coefficients",
+ "kind": "statement",
+ "title": "Separability after adjoining roots of the coefficients of a minimal polynomial",
+ "statement": "Let K→K'→Ω and K→Ω be a commuting tower of fields [def-pc-field-extension]. Let p be an exponential characteristic of K', let e be a natural number, and let x∈Ω. Suppose x^(p^e) is separable over K [def-weil-pbc-separable-algebraic-extension], and each nonzero coefficient c of its minimal polynomial over K has a p^e-th root in K'. Then x is separable over K'.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Tag 031V, coefficientwise Frobenius argument; the direct minimal-polynomial variant proved as IsSeparable.of_pow_of_coeffs in the source library"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-element",
+  "def-weil-ring-frobenius"
+ ],
+ "proof": [
+  {
+   "text": "Let q=p^e and let g be the minimal polynomial over K of x^q, mapped to K'. Lift its finitely many nonzero coefficients through the q-th-power map, and lift zero by zero, obtaining h in K'[T] with coefficientwise iterated Frobenius equal to g.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-pc-field-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The polynomial g is separable because the minimal polynomial of x^q is separable and coprimality with its derivative is preserved by coefficient extension. Injectivity of iterated Frobenius on K' and the separable-map equivalence show h is separable.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluating coefficientwise Frobenius and substituting T^q gives h(x)^q=g(x^q)=0. Exponential characteristic is positive, so q>0 and the field Ω has no nonzero nilpotents; hence h(x)=0. The minimal polynomial of x over K' divides h, and a divisor of a separable polynomial is separable. This is exactly the proved source declaration IsSeparable.of_pow_of_coeffs.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-pc-separable-polynomial",
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-pc-separable-polynomial",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-ring-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "M2 stage-3 worker",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Tag 031V, coefficientwise Frobenius argument; the direct minimal-polynomial variant proved as IsSeparable.of_pow_of_coeffs in the source library; details written out from the source and checked against the Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separable power and coefficients of minimal polynomial pth powers imply separable element after base extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If x^(p^e) is separable and the coefficients of its minimal polynomial are p^e powers over a larger base then x is separable over that base",
+   "results": "minpoly.natSepDegree_eq_one_iff_pow_mem, minpoly.map_eq_of_isSeparable_of_isPurelyInseparable, IsSeparable.of_algebra_isSeparable_of_isSeparable.",
+   "date": "2026-10-13",
+   "verdict": "No direct Mathlib match; source library has the exact proved declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "of_pow_of_coeffs|Separable.*coeff|coeff.*Separable in Mathlib/FieldTheory and lean/WeilConjectures/Mathlib",
+   "results": "Exact existing theorem IsSeparable.of_pow_of_coeffs in WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure, lines 115–138; proof has no sorry and imports only Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "Exact match in the adopted source library; reuse it without a new Lean declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.InseparableDegreeDrop",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-make-separably-generated",
+   "place": "step 8: beta becomes separable after the coefficients of the minimal polynomial of beta^p acquire roots",
+   "via": [
+    "lem-weil-pbc-inseparable-degree-drop"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure",
+  "declaration": "IsSeparable.of_pow_of_coeffs",
+  "statement": "theorem IsSeparable.of_pow_of_coeffs {K K' Ω : Type*} [Field K] [Field K'] [Field Ω]\n    [Algebra K K'] [Algebra K Ω] [Algebra K' Ω] [IsScalarTower K K' Ω] (p : ℕ) [ExpChar K' p]\n    (e : ℕ) {x : Ω} (hsep : IsSeparable K (x ^ p ^ e))\n    (hcoeff : ∀ c ∈ (minpoly K (x ^ p ^ e)).coeffs, ∃ d : K', d ^ p ^ e = algebraMap K K' c) :\n    IsSeparable K' x",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165522-L-2936343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165522-L-2936343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

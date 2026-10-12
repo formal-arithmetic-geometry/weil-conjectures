@@ -15,115 +15,76 @@
  ],
  "proof": [
   {
-   "text": "The finite extension K/k(s) has positive inseparable degree; degree different from one means it is not separable. Characteristic zero fields are perfect and algebraic extensions over them are separable, so only positive prime characteristic remains. Take its relative separable closure K_s and beta outside K_s with beta^p in K_s by the shortest Frobenius chain. Put alpha = beta^p. Its minimal polynomial P over E is separable, since alpha lies in K_s, and hence has distinct roots in an algebraic closure.",
+   "text": "Write E=k(s). Use separableClosure.eq_top_iff and isSeparable_iff_finInsepDegree_eq_one to find x outside K_s=separableClosure E K. The extension K/K_s is purely inseparable. Choose an exponential characteristic p of k and hence of E and K_s. Among exponents n with x^(p^n) in K_s choose the least. It is positive; its penultimate power beta is outside K_s and beta^p is inside K_s. If p=1 these two conclusions contradict one another; therefore p is prime and k has characteristic p. This entire shortest-chain argument is proved in the private helper beta_exists.",
    "uses": [
     "def-weil-pbc-relative-separable-closure",
     "lem-weil-pbc-separable-first-purely-inseparable",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-pc-separable-polynomial"
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-ring-frobenius"
    ],
    "elementary": false
   },
   {
-   "text": "(The step marked 'details omitted': $k'$ and $E'$.) Fix an algebraic closure $\\Omega$ of $K$ [def-weil-algebraic-closure] and view $K\\subseteq\\Omega$. For $c\\in\\Omega$ the polynomial $T^p-c$ has a root in $\\Omega$, unique because the Frobenius $u\\mapsto u^p$ of $\\Omega$ is an injective ring homomorphism [def-weil-ring-frobenius]; write it $c^{1/p}$. Since $x_1,\\dots,x_r$ are algebraically independent over $k$ [def-weil-pbc-transcendence-basis], every element of $E_x$ is $f(x)/g(x)$ with $f,g\\in k[X_1,\\dots,X_r]$, $g(x)\\ne0$ (these quotients form a subfield of $K$ containing $k$ and the $x_i$, and lie in every such subfield). Write $c_j=f_j(x)/g_j(x)$ ($j=1,\\dots,m$) and $h_j=f_jg_j^{p-1}$, so $c_j=h_j(x)/g_j(x)^p$. Let $S\\subseteq k$ be the finite set of coefficients of $h_1,\\dots,h_m$, and put $k'=k(s^{1/p};s\\in S)\\subseteq\\Omega$ and $E'=k'(x_1^{1/p},\\dots,x_r^{1/p})\\subseteq\\Omega$. Then $E_x\\subseteq E'$ (as $k\\subseteq k'$ and $x_i=(x_i^{1/p})^p$). For $h_j=\\sum_I s_IX^I$ let $\\tilde h_j=\\sum_I s_I^{1/p}\\prod_i(x_i^{1/p})^{I_i}\\in E'$; since the Frobenius of $\\Omega$ is a ring homomorphism, $\\tilde h_j^p=\\sum_I s_Ix^I=h_j(x)$. Hence $c_j=(\\tilde h_j/g_j(x))^p$: every coefficient of $P$ is a $p$-th power in $E'$.",
+   "text": "Apply the coefficient-root extension theorem to the arbitrary polynomial P=minpoly E (beta^p) and the algebraic independence supplied by the given transcendence basis. Obtain finite purely inseparable l/k and L/K, an algebraically independent finite tuple t over l, a commuting E→E₁=l(t)→L tower, p-th-power coefficients in E₁, and the equality saying that K and E₁ generate L. This construction asserts no degree comparison.",
    "uses": [
-    "def-weil-algebraic-closure",
-    "def-weil-ring-frobenius",
-    "def-weil-pbc-transcendence-basis"
+    "lem-weil-pbc-coefficient-root-extension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'Let k'/k be a finite purely inseparable extension obtained by adjoining pth roots such that each a_i is a pth power in k'(x_1^{1/p}, ..., x_r^{1/p}). Such an extension exists; details omitted.'"
-   }
+   "elementary": false
   },
   {
-   "text": "(Adjoining $p$-th roots is finite purely inseparable.) Let $F\\subseteq\\Omega$ be a subfield and $\\beta_1,\\dots,\\beta_t\\in\\Omega$ with $\\beta_i^p\\in F$. The set $\\{\\gamma\\in\\Omega:\\gamma^p\\in F\\}$ is a subfield of $\\Omega$ (the Frobenius is a ring homomorphism [def-weil-ring-frobenius], and $(\\gamma^{-1})^p=(\\gamma^p)^{-1}$) containing $F$ and all $\\beta_i$, so every $\\gamma\\in F(\\beta_1,\\dots,\\beta_t)$ has $\\gamma^p\\in F$; each $\\beta_i$ is algebraic over $F$ [def-weil-algebraic-element] (a root of $T^p-\\beta_i^p$), so $F(\\beta_1,\\dots,\\beta_t)/F$ is finite by [lem-weil-pbc-algebraic-generators-finite-extension], hence finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. With $F=k$ and the $s^{1/p}$: $k'/k$ is finite purely inseparable and $k'^p\\subseteq k$. Let $L\\subseteq\\Omega$ be the compositum of $K$ and $E'$ (the smallest subfield containing both); as $k\\subseteq K$, $L=K(s^{1/p},x_1^{1/p},\\dots,x_r^{1/p};s\\in S)$ with $s,x_i\\in K$, so with $F=K$: $L/K$ is finite purely inseparable. This is the diagram of the source with $L$ the compositum.",
-   "uses": [
-    "def-weil-ring-frobenius",
-    "def-weil-algebraic-element",
-    "lem-weil-pbc-algebraic-generators-finite-extension",
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'k'/k be a finite purely inseparable extension obtained by adjoining pth roots ... Let L be a field fitting into the diagram ... We may and do assume L is the compositum of K and k'(x_1^{1/p}, ..., x_r^{1/p})'"
-   }
-  },
-  {
-   "text": "($x^{1/p}$ is a transcendence basis of $L/k'$.) (a) $K=k(a_1,\\dots,a_n)$ and $k\\subseteq k'$ give $L=k'(x_1^{1/p},\\dots,x_r^{1/p},a_1,\\dots,a_n)$: $L/k'$ is finitely generated. (b) By [lem-weil-pbc-compositum-degree-bound] with $F=E_x\\subseteq K$, $E_x\\subseteq M=E'$ (step 2) and $KE'=L$: $L/E'$ is finite with $[L:E']\\le[K:E_x]$; hence $L$ is algebraic over $E'$ [def-weil-algebraic-element] (for $\\lambda\\in L$ the powers $1,\\lambda,\\lambda^2,\\dots$ are linearly dependent over $E'$). (c) The $x_i^{1/p}$ are algebraically independent over $k'$ [def-kun-transcendence-degree]: if $G\\in k'[X_1,\\dots,X_r]$ is nonzero with $G(x^{1/p})=0$, let $G^{(p)}$ be $G$ with every coefficient raised to the $p$-th power; its coefficients lie in $k$ (step 3: $k'^p\\subseteq k$), it is nonzero (the Frobenius of $k'$ is injective), and $G^{(p)}(x)=G(x^{1/p})^p=0$ because the Frobenius of $\\Omega$ is a ring homomorphism [def-weil-ring-frobenius], contradicting the algebraic independence of $x$ over $k$. By (b) and (c), $x^{1/p}=(x_1^{1/p},\\dots,x_r^{1/p})$ is a finite transcendence basis of $L/k'$ [def-weil-pbc-transcendence-basis] with $k'(x^{1/p})=E'$, and $k'$ has characteristic $p$.",
+   "text": "Apply the compositum rank bound to the field range of K→L over E. Transport its rank through AlgHom.equivFieldRange and use adjoin E₁ range(K→L)=top. This gives rank E₁ L≤rank E K. The latter rank is finite, so L/E₁ is finite. Algebraicity over the intermediate field E₁ is equivalent to algebraicity over the subalgebra generated by t; together with algebraic independence this proves that t is a transcendence basis. Finally K/k finitely generated and L/K finite imply L/k essentially of finite type; enlarging the base to l gives L/l essentially of finite type, equivalently finitely generated as a field. These deductions are proved in Lean; no new holes are left.",
    "uses": [
     "lem-weil-pbc-compositum-degree-bound",
+    "def-weil-pbc-transcendence-basis",
     "def-weil-algebraic-element",
-    "def-kun-transcendence-degree",
-    "def-weil-ring-frobenius",
-    "def-weil-pbc-transcendence-basis"
+    "def-pc-field-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: implicit in 'By induction we can find k' ⊂ k'' and L ⊂ L' as in the lemma for the extension L/k'' (the induction is applied to L/k' with the transcendence basis x_1^{1/p}, ..., x_r^{1/p})"
-   }
+   "elementary": false
   },
   {
-   "text": "($\\beta$ becomes separable.) Let $L_s\\subseteq L$ be the separable algebraic closure of $E'$ in $L$ [def-weil-pbc-relative-separable-closure]; by [lem-weil-pbc-separable-first-purely-inseparable] (step 4: $L/E'$ is algebraic) $L_s$ is a subfield containing $E'$ and $L_s/E'$ is separable algebraic. Every $\\kappa\\in K_s$ lies in $L_s$: its minimal polynomial $Q$ over $E_x$ is separable, the minimal polynomial $Q_1$ of $\\kappa$ over $E'\\supseteq E_x$ divides $Q$, and a divisor of a separable polynomial is separable [def-pc-separable-polynomial] (if $Q=Q_1R$ then $Q'=Q_1'R+Q_1R'$, so a common factor of $Q_1,Q_1'$ divides $Q$ and $Q'$). In particular $\\alpha\\in L_s$ and $K_s\\subseteq L_s$. Now $P\\in E_x[T]\\subseteq E'[T]$ has $P(\\alpha)=0$, pairwise distinct roots in an algebraic closure (step 1) and all coefficients $p$-th powers in $E'$ (step 2), so [lem-weil-pbc-separable-root-pth-power] applied to the separable algebraic extension $L_s/E'$ [def-weil-pbc-separable-algebraic-extension] gives $\\alpha'\\in L_s$ with $\\alpha'^p=\\alpha$. Then $(\\beta-\\alpha')^p=\\beta^p-\\alpha'^p=0$ in the field $L$ [def-weil-ring-frobenius], so $\\beta=\\alpha'\\in L_s$.",
+   "text": "The element beta^p is separable over E because it belongs to K_s. Map it into L; minimal polynomials are unchanged under the injective E-algebra homomorphism K→L. Apply the existing source theorem IsSeparable.of_pow_of_coeffs with exponent e=1 and the coefficient-root condition. Thus the image of beta is separable over E₁. This replaces the longer route through a p-th root in the relative separable closure.",
+   "uses": [
+    "lem-weil-pbc-separable-of-power-coefficients",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put S=separableClosure E₁ L and A=K_s joined with E(beta), as an intermediate field of K/E. Every element of K_s maps into S by separability under embedding and enlargement of the base. The preceding step puts beta in S as well, so A maps into S. Since beta is outside K_s, K_s<A. The original compositum equality implies that K and S generate L, because E₁⊆S. Apply the field-range compositum bound with F=A to get [L:S]≤[K:A]. Mathlib IntermediateField.finrank_lt_of_gt gives [K:A]<[K:K_s]. Composing the two inequalities proves the required strict inseparable-degree decrease. The field maps into S, scalar tower, compositum equality and inequalities are all written and proved in the private helpers compositum_finrank_le and insep_lt_of_new_separable_element.",
    "uses": [
     "def-weil-pbc-relative-separable-closure",
-    "lem-weil-pbc-separable-first-purely-inseparable",
-    "def-pc-separable-polynomial",
-    "lem-weil-pbc-separable-root-pth-power",
     "def-weil-pbc-separable-algebraic-extension",
-    "def-weil-ring-frobenius"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'Let L/L_sep/k'(x_1^{1/p}, ..., x_r^{1/p}) be the subextension found in Fields, Lemma 030K. Then L_sep is the compositum of K_sep and k'(x_1^{1/p}, ..., x_r^{1/p}). The element α ∈ L_sep is a zero of the polynomial P ... By Fields, Lemma 031V we see that α = (α')^p for some α' ∈ L_sep. Clearly, this means that β maps to α' ∈ L_sep.'"
-   }
-  },
-  {
-   "text": "(The degree drops.) Put $K_1=K_s(\\beta)\\subseteq K$. By step 5, $K_1\\subseteq L_s$, and $E'\\subseteq L_s$. Apply [lem-weil-pbc-compositum-degree-bound] in $\\Omega$ with $F=K_1\\subseteq K$ ($K/K_1$ is finite, as $K/E_x$ is finite and $E_x\\subseteq K_1$) and $K_1\\subseteq M=L_s$: the compositum $KL_s$ is contained in $L$ and contains $K$ and $E'$, hence equals $L$, and $[L:L_s]\\le[K:K_1]$. By [lem-weil-pbc-field-degree-multiplicativity], $e=[K:K_s]=[K:K_1]\\,[K_1:K_s]$ with $[K_1:K_s]\\ge2$ because $\\beta\\notin K_s$. Hence $d(L,k',x^{1/p})=[L:L_s]\\le e/2<e$.",
-   "uses": [
     "lem-weil-pbc-compositum-degree-bound",
     "lem-weil-pbc-field-degree-multiplicativity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'In other words, we get the tower of fields ... Thus this construction leads to a new situation with [L : L_sep] < [K : K_sep].'"
-   }
+   "elementary": false
   },
   {
-   "text": "The construction uses actual subfields of an algebraic closure of K, so both fields have the same universe as K. Their inclusion maps induce the required algebra structures and scalar towers. The rooted finite transcendence basis and finite L/k_1(t) established above give exactly the output of the one-step theorem; no induction or final separating basis is asserted.",
-   "uses": [
-    "def-pc-field-extension",
-    "def-weil-algebraic-closure"
-   ],
+   "text": "Package the constructed fields and commuting scalar towers with the finite generation, transcendence-basis, finiteness and strict degree inequality proved above. The types and every binder of the original theorem are unchanged.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-transcendence-degree",
   "def-pc-field-extension",
-  "def-pc-separable-polynomial",
-  "def-weil-algebraic-closure",
   "def-weil-algebraic-element",
   "def-weil-pbc-finite-purely-inseparable-extension",
   "def-weil-pbc-relative-separable-closure",
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-transcendence-basis",
   "def-weil-ring-frobenius",
-  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-coefficient-root-extension",
   "lem-weil-pbc-compositum-degree-bound",
   "lem-weil-pbc-field-degree-multiplicativity",
   "lem-weil-pbc-separable-first-purely-inseparable",
-  "lem-weil-pbc-separable-root-pth-power"
+  "lem-weil-pbc-separable-of-power-coefficients"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "name": "M2 stage-3 worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 04KM, coefficient-root construction and degree-drop paragraphs"
+  "place": "Tag 04KM induction step, with the coefficient-root construction isolated and all shortest-chain, basis, finite-generation, source-lemma specialization and strict compositum-degree glue proved in Lean; source Tags 04KM and 031V read online"
  },
  "mathlib_searches": [
   {
@@ -197,9 +158,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T135244-L-1671750",
+  "landing": "20261012T165522-L-2936343",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
