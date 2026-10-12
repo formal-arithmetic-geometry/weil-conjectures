@@ -333,6 +333,63 @@ theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Fini
     exact henselianLift_eq _ _ _ _ _ hℓ rfl
   · rw [specializationFiber_left_snd, pullback.lift_snd]
 
+
+section Invariants
+
+variable {Λ : Type (u + 1)} [CommRing Λ] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+
+omit [IsSepClosed Ω] [Nonempty W] [Fact (IsAffineOpen W)] [IsOpenImmersion j] in
+/-- The inertia invariants `F_η^I` of the geometric generic stalk. -/
+def inertiaInvariants :
+    Submodule Λ ((pointSmallEtale (genericGeometricPoint (Ω := Ω) j)).sheafFiber.obj F :
+      ModuleCat.{u + 1} Λ) where
+  carrier := {x | ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω), galoisStalkMap F σ x = x}
+  add_mem' {a b} ha hb σ hσ := by rw [map_add, ha σ hσ, hb σ hσ]
+  zero_mem' σ _ := map_zero _
+  smul_mem' c x hx σ hσ := by rw [map_smul, hx σ hσ]
+
+include hϖ hWU m in
+/-- Blueprint `lem-wf-boundary-stalk-invariants`: the image of the specialization map is the
+module of inertia invariants of the geometric generic stalk. -/
+theorem range_boundarySpecialization [Finite Λ] [ConnectedSpace U]
+    (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
+    [IsFiniteLocallyConstantSheaf F] :
+    Set.range (boundarySpecialization j Q F) = inertiaInvariants j Q F := by
+  ext x
+  refine ⟨?_, fun hx ↦ exists_boundarySpecialization_eq j Q ϖ hϖ hWU m hint F x hx⟩
+  rintro ⟨y, rfl⟩ σ hσ
+  exact galoisStalkMap_boundarySpecialization j Q hσ F y
+
+include hϖ hWU m in
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level): for a finite locally
+constant sheaf `F` of modules over a finite ring, the boundary stalk `(j_* F)_x̄` is isomorphic,
+through the specialization map, to the inertia invariants `F_η^I` of the geometric generic
+stalk. -/
+noncomputable def boundaryStalkLinearEquiv [Finite Λ] [ConnectedSpace U]
+    (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
+    (hC : ∀ (V : C.Etale) (v : V.left), IsDomain (V.left.presheaf.stalk v))
+    [IsLocallyNoetherian C] [IsFiniteLocallyConstantSheaf F] :
+    ((pointSmallEtale (boundaryGeometricPoint Q)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ) ≃ₗ[Λ] inertiaInvariants j Q F :=
+  LinearEquiv.ofBijective ((boundarySpecialization j Q F).hom.codRestrict (inertiaInvariants j Q F)
+      fun y σ hσ ↦ galoisStalkMap_boundarySpecialization j Q hσ F y)
+    ⟨fun y₁ y₂ h ↦ injective_boundarySpecialization j Q hC F (congrArg Subtype.val h),
+      fun x ↦ by
+        obtain ⟨y, hy⟩ := exists_boundarySpecialization_eq j Q ϖ hϖ hWU m hint F x.1 x.2
+        exact ⟨y, Subtype.ext hy⟩⟩
+
+lemma coe_boundaryStalkLinearEquiv_apply [Finite Λ] [ConnectedSpace U]
+    (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
+    (hC : ∀ (V : C.Etale) (v : V.left), IsDomain (V.left.presheaf.stalk v))
+    [IsLocallyNoetherian C] [IsFiniteLocallyConstantSheaf F]
+    (y : ((pointSmallEtale (boundaryGeometricPoint Q)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ)) :
+    (boundaryStalkLinearEquiv j Q ϖ hϖ hWU m F hint hC y : _) =
+      boundarySpecialization j Q F y :=
+  rfl
+
+end Invariants
+
 end Surjective
 
 end Etale
