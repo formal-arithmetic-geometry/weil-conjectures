@@ -29,6 +29,63 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry
 
+/-- A map into a homology object lifts whenever the derived object is presented by
+the corresponding single complex.  The extra equation records that this presentation
+has the canonical homology map; it is exactly the categorical part of the argument.
+(blueprint: lem-sc-clopen-rank-strata-homology-lift-core) -/
+private theorem single_lift_of_homology_presentation
+    {C : Type u} [Category C] [Abelian C] [HasDerivedCategory.{wA} C] (n : ℤ)
+    (X : C) (K : DerivedCategory C)
+    (e : (DerivedCategory.singleFunctor C n).obj
+      ((DerivedCategory.homologyFunctor C n).obj K) ≅ K)
+    (he : (DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app
+      ((DerivedCategory.homologyFunctor C n).obj K) ≫
+      (DerivedCategory.homologyFunctor C n).map e.hom = 𝟙 _) (a : X ⟶
+      (DerivedCategory.homologyFunctor C n).obj K) :
+    ∃ f : (DerivedCategory.singleFunctor C n).obj X ⟶ K,
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app X ≫
+        (DerivedCategory.homologyFunctor C n).map f = a := by
+  let f := (DerivedCategory.singleFunctor C n).map a ≫ e.hom
+  refine ⟨f, ?_⟩
+  dsimp [f]
+  rw [Functor.map_comp]
+  rw [← Category.assoc]
+  have hn := (DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.naturality a
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  rw [← hn]
+  rw [Category.assoc, he]
+  simp
+
+/-- The rank-stratum idempotent splitting and the two canonical truncations give
+the indicated presentation, with its canonical map on degree-`n` homology.
+(blueprint: lem-sc-clopen-rank-strata-homology-presentation) -/
+theorem clopenRankStrata_homology_presentation
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
+    [HasDerivedCategory.{wA} (SheafOfModules.{u}
+      (moduleRings (directImageAlgebraSpace i)))]
+    (r : LocallyConstant Z ℕ)
+    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)
+    (T : ℤ → Z.Modules)
+    (hT : ∀ n : ℤ, T n = if 0 ≤ n then
+      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj
+        (E n.toNat) else 0)
+    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))
+    (n : ℤ)
+    (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅
+        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m))) :
+    ∃ e : (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj
+        ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) ≅ K,
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso
+        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).inv.app
+          ((DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) ≫
+        (DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map e.hom = 𝟙 _ := by
+  sorry
+
 /-- A module in degree n supported on its clopen rank stratum maps into a
 complex through its degree-n homology, provided all other homology degrees
 are supported on their respective different rank strata. The degree-n
@@ -88,6 +145,8 @@ theorem clopenRankStrata_homology_lift
         (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).inv.app
           ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n)) ≫
         (DerivedCategory.homologyFunctor
-          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map f = a := by sorry
+          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map f = a := by
+  obtain ⟨e, he⟩ := clopenRankStrata_homology_presentation i r E T hT K n hother
+  exact single_lift_of_homology_presentation n _ K e he a
 
 end AlgebraicGeometry

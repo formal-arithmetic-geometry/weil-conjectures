@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-clopen-rank-strata-homology-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-clopen-rank-strata-homology-lift",
+   "place": "proof, final truncation step",
+   "via": [
+    "lem-sc-clopen-rank-strata-homology-lift"
+   ]
+  }
+ },
+ "kind": "statement",
+ "title": "Clopen rank stratum homology presentation",
+ "statement": "In the clopen rank-stratum situation of lem-sc-clopen-rank-strata-homology-lift, for K and n there exists an isomorphism e from the n-th homology of K placed in degree n to K whose induced map under the canonical single-complex homology identification is the identity.",
+ "source": {
+  "document": "literature/blueprint/slopmaster2/",
+  "place": "expanded proof of lem-sc-clopen-rank-strata-homology-lift, idempotent splitting and truncation"
+ },
+ "stmt_deps": [
+  "def-sc-locally-ranked-exterior-complex",
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sf-derived-concentrated-single",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Split K by the characteristic idempotent of the rank-n clopen stratum. The complementary summand has zero homology in every degree by the hypotheses on the other strata, while the image summand has only its n-th homology. Canonical truncation identifies this summand with the n-th homology placed in degree n; composing with the inclusion gives e, and naturality gives the identity equation.",
+   "uses": [
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "lem-sf-derived-concentrated-single"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "note": "Stage-3 decomposition of the geometric idempotent/truncation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch (natural language)",
+   "query": "derived category object with homology vanishing outside one degree is isomorphic to its single complex",
+   "results": "No exact match returned.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "Loogle",
+   "query": "singleFunctor C n (homologyFunctor C n K) ≅ K",
+   "results": "No exact match returned.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep of Mathlib source",
+   "query": "homologyFunctor singleFunctor canonical truncation concentrated",
+   "results": "No theorem combining clopen idempotent splitting with derived single-degree presentation found.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "date": "2026-10-13",
+  "group": "N4"
+ },
+ "lean_audit": "none",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_candidates": [],
+ "split_report": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261012T234222-L-2126079",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
+  "declaration": "AlgebraicGeometry.clopenRankStrata_homology_presentation",
+  "statement": "theorem clopenRankStrata_homology_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i)))] (r : LocallyConstant Z ℕ) (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules) (T : ℤ → Z.Modules) (hT : ∀ n : ℤ, T n = if 0 ≤ n then (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj (E n.toNat) else 0) (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i)))) (n : ℤ) (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅ (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m))) : ∃ e : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) ≅ K, (DerivedCategory.singleFunctorCompHomologyFunctorIso (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).inv.app ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) ≫ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map e.hom = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": null,
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261012T234222-L-2126079",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
