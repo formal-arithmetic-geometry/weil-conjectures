@@ -2,7 +2,9 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.CategoryTheory.ColimitSiteCechCoconeConstruction
+import Sheaf.CategoryTheory.ColimitSiteFiniteProductSections
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 @[expose] public section
 
@@ -126,6 +128,19 @@ theorem colimitSite_cech_complex_colimit
               (op ((V.ι.app a.right).toFunctor.obj
                 ((F.map a.hom).toFunctor.obj (S.W p t)))))) ∧
         Nonempty (IsColimit K) := by
-  sorry
+  intro β hβ c hc i T _ U f hom _ S
+  obtain ⟨D, eD, K, eK, hD, hK⟩ :=
+    colimitSite_cech_cocone_exists F P V Q G θ hθid hθcomp H E hβ c i f hom S
+  refine ⟨D, eD, K, eK, hD, hK, ?_⟩
+  have hp (p : ℕ) :
+      Nonempty (IsColimit ((HomologicalComplex.eval _ (ComplexShape.up ℕ) p).mapCocone K)) := by
+    exact colimitSite_finiteProduct_sections_isColimit F P hfinite hcover hpullback V
+      hobjects harrows Q hQ G θ H E hβ c hc i (S.W p)
+      (D ⋙ HomologicalComplex.eval _ (ComplexShape.up ℕ) p)
+      (fun a ↦ (HomologicalComplex.eval _ (ComplexShape.up ℕ) p).mapIso (eD a))
+      ((HomologicalComplex.eval _ (ComplexShape.up ℕ) p).mapCocone K)
+      ((HomologicalComplex.eval _ (ComplexShape.up ℕ) p).mapIso eK)
+      (fun a a' b t ↦ hD a a' b p t) (fun a t ↦ hK a p t)
+  exact ⟨HomologicalComplex.isColimitOfEval D K (fun p ↦ Classical.choice (hp p))⟩
 
 end CategoryTheory
