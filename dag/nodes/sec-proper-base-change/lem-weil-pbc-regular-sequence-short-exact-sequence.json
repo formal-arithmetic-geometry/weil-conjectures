@@ -28,43 +28,45 @@
  ],
  "proof": [
   {
-   "text": "Induced maps and cokernels of multiplication. For an ideal $I\\subset R$ one has $\\alpha(IM_1)\\subseteq IM_2$ and $\\beta(IM_2)\\subseteq IM_3$ (as $\\alpha(xm)=x\\alpha(m)$), so $\\alpha,\\beta$ induce $R$-linear maps $\\alpha_I:M_1/IM_1\\to M_2/IM_2$, $\\beta_I:M_2/IM_2\\to M_3/IM_3$ with $\\beta_I\\alpha_I=0$; for $I=I_0=0$ these are $\\alpha,\\beta$. Let $N$ be an $R$-module and $1\\le i\\le r$. Since $I_i=I_{i-1}+Rf_i$, we have $I_iN=I_{i-1}N+f_iN$, whose image in $N/I_{i-1}N$ is $f_i\\cdot(N/I_{i-1}N)$; hence the cokernel of multiplication by $f_i$ on $N/I_{i-1}N$ is $(N/I_{i-1}N)/f_i(N/I_{i-1}N)=N/I_iN$, the quotient map being the projection $N/I_{i-1}N\\to N/I_iN$. Under these identifications for $N=M_1,M_2,M_3$, the maps of cokernels induced by $\\alpha_{I_{i-1}}$ and $\\beta_{I_{i-1}}$ are $\\alpha_{I_i}$ and $\\beta_{I_i}$ (both send the class of $m$ to the class of $\\alpha(m)$, resp. $\\beta(m)$).",
+   "text": "For a list rs weakly regular on M3, construct the induced maps a and b with Submodule.mapQ and Submodule.smul_top_le_comap_smul_top. Their values on representatives are definitionally the classes of alpha(x) and beta(x), so the required compatibility equalities are reflexivity.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof (the identification of M/f_1M with the cokernel of f_1 on M, implicit in the displayed sequence 0 -> M_1/f_1M_1 -> M_2/f_1M_2 -> M_3/f_1M_3 -> 0 and in 'induction on r')"
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), with its proof (snake lemma, Tag 07JW, and induction on r); part (a) is what that proof establishes, part (b) is the statement of the tag. Tag verified in stacks-project/tags/tags: 0F1T,algebra-lemma-regular-sequence-short-exact-sequence"
    }
   },
   {
-   "text": "The inductive claim. For $0\\le i\\le r$ let $(P_i)$ be: the sequence $0\\to M_1/I_iM_1\\xrightarrow{\\alpha_{I_i}}M_2/I_iM_2\\xrightarrow{\\beta_{I_i}}M_3/I_iM_3\\to0$ is exact, and $f_j$ is a nonzerodivisor on $M_2/I_{j-1}M_2$ for every $1\\le j\\le i$. $(P_0)$ holds: $I_0=0$, so the sequence is the given short exact sequence (Step 1), and the second condition is empty. We show $(P_{i-1})\\Rightarrow(P_i)$ for $1\\le i\\le r$ in Step 3; then $(P_r)$ is part (a).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof ('The lemma follows from this and induction on r. Some details omitted.'; the induction is set up here)"
-   }
-  },
-  {
-   "text": "The inductive step, by the snake lemma. Assume $(P_{i-1})$, $1\\le i\\le r$, and write $\\bar M_j=M_j/I_{i-1}M_j$. Consider the commutative diagram whose two rows are both the exact sequence $0\\to\\bar M_1\\xrightarrow{\\alpha_{I_{i-1}}}\\bar M_2\\xrightarrow{\\beta_{I_{i-1}}}\\bar M_3\\to0$ of $(P_{i-1})$ and whose three vertical maps are multiplication by $f_i$; it commutes because $\\alpha_{I_{i-1}},\\beta_{I_{i-1}}$ are $R$-linear. The top row has $\\beta_{I_{i-1}}$ surjective and exactness at $\\bar M_2$, the bottom row has $\\alpha_{I_{i-1}}$ injective and exactness at $\\bar M_2$, and moreover the top first map is injective and the bottom last map surjective. By the snake lemma [lem-weil-pbc-snake-lemma-modules] the sequence $\\ker(f_i|\\bar M_1)\\to\\ker(f_i|\\bar M_2)\\to\\ker(f_i|\\bar M_3)\\xrightarrow{\\partial}\\operatorname{coker}(f_i|\\bar M_1)\\to\\operatorname{coker}(f_i|\\bar M_2)\\to\\operatorname{coker}(f_i|\\bar M_3)$ is exact, its first map is injective and its last map surjective. By hypothesis $f_i$ is a nonzerodivisor on $\\bar M_1$ and on $\\bar M_3$, so $\\ker(f_i|\\bar M_1)=0=\\ker(f_i|\\bar M_3)$. Exactness at $\\ker(f_i|\\bar M_2)$ between two zero modules gives $\\ker(f_i|\\bar M_2)=0$: $f_i$ is a nonzerodivisor on $M_2/I_{i-1}M_2$. Exactness at $\\operatorname{coker}(f_i|\\bar M_1)$ with $\\partial$ defined on $0$ gives that $\\operatorname{coker}(f_i|\\bar M_1)\\to\\operatorname{coker}(f_i|\\bar M_2)$ is injective; with exactness at $\\operatorname{coker}(f_i|\\bar M_2)$ and surjectivity of the last map the three cokernels form a short exact sequence. By Step 1 the cokernels are $M_j/I_iM_j$ and the maps are $\\alpha_{I_i},\\beta_{I_i}$, so $0\\to M_1/I_iM_1\\to M_2/I_iM_2\\to M_3/I_iM_3\\to0$ is exact. With $(P_{i-1})$ for $j<i$ this is $(P_i)$.",
+   "text": "Obtain all quotient short exact rows by the snake-lemma consequence [lem-weil-pbc-snake-lemma-modules] already proved in Mathlib as RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last. Apply it to the four maps 0 -> M1 -> M2 -> M3, with rs weakly regular on M3: exactness of zero followed by a is injectivity of a (Submodule.mapQ_zero and LinearMap.exact_zero_iff_injective). Apply it again to M1 -> M2 -> M3 -> PUnit, where the last map is zero, surjective, and every list is weakly regular on PUnit: this gives exactness of a followed by b. Surjectivity of b follows by lifting a quotient representative first to M3 and then along beta. These applications reuse the quotient induction in Mathlib instead of explicitly constructing a SnakeInput.",
    "uses": [
     "lem-weil-pbc-snake-lemma-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof ('By Lemma 07JW [lemma-snake], if f_1 : M_1 -> M_1 and f_1 : M_3 -> M_3 are injective, then so is f_1 : M_2 -> M_2 and we obtain a short exact sequence 0 -> M_1/f_1M_1 -> M_2/f_1M_2 -> M_3/f_1M_3 -> 0', applied to the modules M_j/I_{i-1}M_j)"
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), with its proof (snake lemma, Tag 07JW, and induction on r); part (a) is what that proof establishes, part (b) is the statement of the tag. Tag verified in stacks-project/tags/tags: 0F1T,algebra-lemma-regular-sequence-short-exact-sequence"
    }
   },
   {
-   "text": "Part (b). Suppose $f_1,\\dots,f_r$ is $M_1$-regular and $M_3$-regular [def-weil-pbc-regular-sequence]. Condition (1) of the definition for $M_1$ and $M_3$ is the hypothesis of (a), so by (a) (Steps 2 and 3) $f_i$ is a nonzerodivisor on $M_2/I_{i-1}M_2$ for $i=1,\\dots,r$: condition (1) for $M_2$. By (a) $\\beta_{I_r}:M_2/I_rM_2\\to M_3/I_rM_3$ is surjective, and $M_3/I_rM_3\\neq0$ by condition (2) for $M_3$; hence $M_2/I_rM_2\\neq0$, condition (2) for $M_2$. So $f_1,\\dots,f_r$ is $M_2$-regular.",
+   "text": "Translate the hypotheses into IsWeaklyRegular on M1 and M3 [def-weil-pbc-regular-sequence] using isWeaklyRegular_iff_Fin and isSMulRegular_iff_right_eq_zero_of_smul. Weak regularity of f on M3 restricts to every prefix f.take n by isWeaklyRegular_append_iff and List.take_append_drop. Step 2 therefore gives all the requested prefix rows, including the empty and full prefixes. For i < length f apply Mathlib isSMulRegular_of_range_eq_ker to the row modulo the preceding prefix, using injectivity of a, exactness (range a = ker b), and the given scalar regularity on both outer quotient modules. This gives the middle nonzerodivisor assertion and completes part (a).",
    "uses": [
     "def-weil-pbc-regular-sequence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), statement and proof ('Some details omitted': the nonvanishing condition is written out here)"
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), with its proof (snake lemma, Tag 07JW, and induction on r); part (a) is what that proof establishes, part (b) is the statement of the tag. Tag verified in stacks-project/tags/tags: 0F1T,algebra-lemma-regular-sequence-short-exact-sequence"
+   }
+  },
+  {
+   "text": "For part (b), IsRegular on the outer terms [def-weil-pbc-regular-sequence] supplies the hypotheses of part (a), giving IsWeaklyRegular on M2. To prove the nonvanishing condition, suppose top = Ideal.ofList f smul top on M2. Apply Submodule.map beta to this equality, rewrite Submodule.map_smul'' and Submodule.map_top, and use surjectivity of beta (range beta = top). The resulting equality top = Ideal.ofList f smul top on M3 contradicts its IsRegular.top_ne_smul. Hence f is regular on M2.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), with its proof (snake lemma, Tag 07JW, and induction on r); part (a) is what that proof establishes, part (b) is the statement of the tag. Tag verified in stacks-project/tags/tags: 0F1T,algebra-lemma-regular-sequence-short-exact-sequence"
    }
   }
  ],
@@ -75,7 +77,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof; snake lemma Tag 07JW (lemma-snake)"
+  "place": "Algebra, Lemma Tag 0F1T (lemma-regular-sequence-short-exact-sequence), proof; N3 reuses the proved Mathlib four-term quotient exactness induction for the snake-lemma step (Tag 07JW), obtains all prefix rows at once, and proves nonvanishing by mapping the ideal multiple along beta."
  },
  "mathlib_searches": [
   {
@@ -187,5 +189,15 @@
   "group": "K1",
   "result": "fix",
   "note": "R CommRing; M1 M2 M3 R-modules (independent universes after fix); SES via Injective alpha, Surjective beta, Function.Exact; I_i = Ideal.ofList (take i); (a) hyp nonzerodivisor on M1,M3 quotients for i<r, concl on M2 and for all i<=r induced quotient maps tied to alpha/beta via mkQ, exact+inj+surj; (b) IsRegular M1, M3 -> IsRegular M2; parse structure verified by #check"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T194128-L-460929",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
