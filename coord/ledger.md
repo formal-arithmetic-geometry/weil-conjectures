@@ -9140,3 +9140,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:28 L: returned deliver/J3/Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasIsos (reviewer RETURN: (reviewer X-f9714, head f9714e100) H2: In dag/nodes/sec-proper-base-change/lem-weil-pbc-colimit-site-covering-axioms-has)
 - 19:36 L: returned deliver/S3/Sheaf.AlgebraicGeometry.ProperFlatCohomologyDataBaseChange (reviewer RETURN: (reviewer X-87b4c, head 87b4cd474) E2 (brief point 4): proper_flat_cohomology_model_data_base_change remains false. Coun)
 - 19:37 L: returned deliver/H2/Sheaf.RingTheory.PopescuStandardReductionFactor (reviewer RETURN: (reviewer X-e357b, head e357b7877) D2 (also D1): PopescuStandardReductionFactorAux.lean:26–40 moves the entire factoriza)
+- 19:40 L: returned deliver/C3/Sheaf.AlgebraicGeometry.KoszulDualConormalRankStratum (reviewer RETURN: (the landing tools, head 06c5915ec) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
