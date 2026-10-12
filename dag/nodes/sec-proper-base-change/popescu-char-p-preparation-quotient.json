@@ -19,74 +19,52 @@
  ],
  "proof": [
   {
-   "text": "Let R=k[X_1,…,X_m], J=(π_i^8), J_C=JC and J_Λ=JΛ. Membership of the parameter images in q gives J_Λ⊆q. The quotient universal property gives γ₀:C/JC→Λ/JΛ; the quotient prime correspondence gives q₀=q/JΛ. Both satisfy the displayed commutative squares. C/JC is finitely presented over R/J by base change. Put Q=R_(q∩R), L=Λ_q. Localization of a quotient identifies P=(R/J)_(q₀∩(R/J)) with Q/JQ and L₀=(Λ/JΛ)_q₀ with L/JL. These identifications preserve the structure maps.",
+   "text": "Construct the quotient algebra map using Ideal.quotientMapₐ and quotient surjectivity. Since each parameter maps into q, JT is contained in q; map q along the quotient to obtain q₀, and contract it back with Ideal.comap_map_mk. J has finitely many generators; Ideal.FG.map and Algebra.FinitePresentation.quotient give finite presentation of C/JC over R, then Algebra.FinitePresentation.of_restrict_scalars_finitePresentation gives it over R/J.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "lem-weil-pbc-finite-presentation-base-change-composition"
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-localization-at-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+    "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
    }
   },
   {
-   "text": "The supplied positive n and containment m_L^n⊆JL imply that the maximal ideal of L/JL is nilpotent. L is Noetherian since Λ is Noetherian. Thus the nonzero quotient L/JL is Artinian local by the power bound, and has Krull dimension zero. If popescuIdeal γ₀ is not contained in q₀ choose the first alternative. Otherwise any prime containing popescuIdeal γ₀ and contained in q₀ localizes to a prime of L₀, hence its unique prime. The prime correspondence for localization then makes it equal to q₀. This proves minimality. Neither dimension nor minimality is inferred from the annihilator equalities.",
+   "text": "Extract n and the maximal-ideal power bound. For a prime p₀ below q₀, contract to p below q containing JT. Ideal.isPrime_map_of_isLocalizationAtPrime makes its extension pL prime; the power bound and Ideal.IsPrime.le_of_pow_le force maximalIdeal L ≤ pL. Contract using Ideal.under_map_of_isLocalizationAtPrime and IsLocalization.AtPrime.under_maximalIdeal, giving q ≤ p. Map back to the quotient to get q₀ ≤ p₀. This proves q₀ minimal over zero, hence minimal over popescuIdeal γ₀ whenever that ideal is contained in q₀. Ring.KrullDimLE.of_isLocalization and ringKrullDimZero_iff_ringKrullDim_eq_zero give dimension zero.",
    "uses": [
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-popescu-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+    "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
    }
   },
   {
-   "text": "Use the supplied I⊆JQ, K⊆JL, IL⊆K, f:Q⊗_R C→D and g:D→L/K, with D essentially smooth over Q/I. The first containment defines Q/I→P; the second defines L/K→L₀. Set E=P⊗_(Q/I)D. Tensor universality gives E→L₀ from the compatible maps. The map Q⊗_R C→D→E kills JC since J is zero in P, hence descends to P⊗_(R/J)(C/JC)→E. On pure tensors the composite is the required tensor lift, by the supplied equation gf composed with L/K→L₀. Pure tensors generate, so this is the required algebra-homomorphism equality.",
+   "text": "Split on whether popescuIdeal γ₀ is contained in q₀. In the contained case combine minimality and dimension with essentiallySmooth_localized_quotient_factorization, using the remaining auxiliary data. Otherwise choose the first disjunct.",
    "uses": [
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "lem-weil-pbc-localization-base-change"
+    "lem-weil-pbc-essentially-smooth-localized-quotient-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
-   }
-  },
-  {
-   "text": "Present D as a localization of a smooth Q/I-algebra S. Base change S to P; it is smooth over P. Localization base change identifies E with its localization at the image of the multiplicative subset. Thus E is essentially smooth over P. The carriers Q,P,D live in Type(max u v) or smaller, so their tensor product E has a representative there; transport structures and maps along this representative. Combine this factorization with the dimension and minimality from step 2 to obtain the second alternative.",
-   "uses": [
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-localization-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+    "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
   "def-weil-pbc-popescu-resolution",
-  "def-weil-pbc-essentially-smooth-ring-map",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition"
+  "lem-weil-pbc-essentially-smooth-localized-quotient-factorization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+  "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)",
+  "note": "G2 constructive Lean proof; minimal-prime argument replaces the Noetherian-Artinian route below the unit level."
  },
  "mathlib_searches": [
   {
@@ -214,11 +192,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-bd8f8",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T150958-L-2232705",
+  "landing": "20261012T165513-L-2933438",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged main signature, both new Lean statements and proof plans with their DAG records and Stacks 07FJ; verified compilation, axioms, import visibility and the earlier repairs."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

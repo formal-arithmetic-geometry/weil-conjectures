@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-essentially-smooth-localized-quotient-factorization",
+ "kind": "statement",
+ "title": "Essentially smooth local factorization descends through larger quotients",
+ "statement": "Let R, C, T be commutative rings with C and T R-algebras, γ:C→T an R-algebra map, q a prime of T and J an ideal of R. Put R₀=R/J, C₀=C/JC, T₀=T/JT. Suppose γ₀:C₀→T₀ is an R₀-algebra map commuting with the quotient maps and q₀ is a prime of T₀ whose inverse image is q. Put Q=R_(q∩R), L=T_q with their induced algebra map. Suppose I⊆JQ and K⊆JL are ideals with IL⊆K, D is a compatible Q- and Q/I-algebra essentially smooth over Q/I, and f:Q⊗_R C→D and g:D→L/K are Q-algebra maps whose composite is the canonical tensor map. Put P=(R₀)_(q₀∩R₀) and L₀=(T₀)_q₀. Then there exists a P-algebra E essentially smooth over P and P-algebra maps F:P⊗_(R₀)C₀→E and G:E→L₀ whose composite is the canonical tensor map induced by γ₀. With R:Type u and C:Type v, D and E have carriers in Type(max u v), independently of the universe of T.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the equality lifting q₀ to construct ρ:Q→P and τ:L→L₀ with Localization.localRingHom. Check formulas on images of R and T using localRingHom_to_map. I⊆JQ and K⊆JL show I⊆ker ρ and K⊆ker τ. Localization ring-homomorphism extensionality proves compatibility with Q→L and P→L₀. Quotient.lift constructs Q/I→P and L/K→L₀, making D→L₀ a Q/I-algebra homomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
+   }
+  },
+  {
+   "text": "Set E=P⊗_(Q/I)D. TensorProduct.lift constructs G:E→L₀. The composite C→Q⊗_R C→D→E sends a base element x to its image under R→R/J→P→E, hence kills JC. Quotient.lift descends it to C/JC, and TensorProduct.lift constructs F:P⊗_(R/J)(C/JC)→E. Tensor induction reduces the composite equation to pure tensors; quotient surjectivity then reduces to c∈C, where it follows from gf and the quotient compatibility equation for γ₀.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
+   }
+  },
+  {
+   "text": "The private, proved essentiallySmooth_baseChange lemma presents D as the localization of a smooth Q/I-algebra S. Transport the S-algebra structure to D using the inverse presentation equivalence, and transport the localization instance by IsLocalization.isLocalization_iff_of_ringEquiv. Algebra.Smooth.baseChange makes P⊗_(Q/I)S smooth. IsLocalization.tensorProductEquivOfMapIncludeRight exhibits E as its localization at the image of the multiplicative subset. All carriers lie in Type(max u v), so this is the required EssentiallySmooth presentation without a universe change.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, quotient steps (items item-sixth-resolve and item-eighth-resolve)",
+  "note": "Explicit universal-property proof of the quotient/base-change step of 07FJ; complete Lean proof by G2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A factorization through an essentially smooth local algebra descends to larger quotient ideals by tensor base change",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No search verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially smooth algebra factorization descends through quotients and localization",
+   "results": "Algebra.FormallySmooth.localization_map, Algebra.Smooth.exists_finiteType, Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.localization_base, Algebra.Smooth.exists_subalgebra_fg; none states the combined factorization descent.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProductEquivOfMapIncludeRight",
+   "results": "IsLocalization.tensorProductEquivOfMapIncludeRight and its tmul computation lemma. Used to prove essential smoothness of the constructed tensor algebra; does not construct the descended factorization maps.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmooth_localized_quotient|EssentiallySmooth.*baseChange|essentiallySmooth.*baseChange in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint search essentially smooth quotient",
+   "results": "No existing combined declaration or matching blueprint node. Localization/BaseChange.lean supplies tensorProductEquivOfMapIncludeRight; Smooth/Basic.lean supplies Smooth.baseChange.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCharPPreparationQuotient",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential-surjectivity approximation: auxiliary construction in the positive-characteristic Popescu resolution; quotient factorization descent in steps 3–4 of popescu-char-p-preparation-quotient",
+   "via": [
+    "popescu-char-p-preparation-quotient",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EssentiallySmoothLocalizedQuotientFactorization",
+  "file": "lean/Sheaf/RingTheory/EssentiallySmoothLocalizedQuotientFactorization.lean",
+  "declaration": "Algebra.essentiallySmooth_localized_quotient_factorization",
+  "statement": "theorem essentiallySmooth_localized_quotient_factorization\n    {R : Type u} {C : Type v} {T : Type w}\n    [CommRing R] [CommRing C] [CommRing T] [Algebra R C] [Algebra R T]\n    (γ : C →ₐ[R] T) (q : PrimeSpectrum T) (J : Ideal R)\n    (γ₀ : (C ⧸ J.map (algebraMap R C)) →ₐ[R ⧸ J]\n      (T ⧸ J.map (algebraMap R T)))\n    (q₀ : PrimeSpectrum (T ⧸ J.map (algebraMap R T)))\n    (hγ : γ₀.toRingHom.comp (Ideal.Quotient.mk (J.map (algebraMap R C))) =\n      (Ideal.Quotient.mk (J.map (algebraMap R T))).comp γ.toRingHom)\n    (hq : PrimeSpectrum.comap (Ideal.Quotient.mk (J.map (algebraMap R T))) q₀ = q)\n    (hfactor :\n      let Q := Localization.AtPrime (q.asIdeal.under R)\n      let L := Localization.AtPrime q.asIdeal\n      letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal\n      let JQ := J.map (algebraMap R Q)\n      let JL := (J.map (algebraMap R T)).map (algebraMap T L)\n      ∃ (I : Ideal Q) (K : Ideal L),\n        I ≤ JQ ∧ K ≤ JL ∧ I.map (algebraMap Q L) ≤ K ∧\n        ∃ (D : Type (max u v)) (_ : CommRing D) (_ : Algebra Q D)\n          (_ : Algebra (Q ⧸ I) D) (_ : IsScalarTower Q (Q ⧸ I) D),\n          EssentiallySmooth (Q ⧸ I) D ∧\n          ∃ (f : Q ⊗[R] C →ₐ[Q] D) (g : D →ₐ[Q] L ⧸ K),\n            g.comp f = Algebra.TensorProduct.lift (Algebra.ofId Q (L ⧸ K))\n              ((Ideal.Quotient.mkₐ R K).comp\n                ((IsScalarTower.toAlgHom R T L).comp γ))\n              (fun _ _ ↦ Commute.all _ _)) :\n    let R₀ := R ⧸ J\n    let C₀ := C ⧸ J.map (algebraMap R C)\n    let T₀ := T ⧸ J.map (algebraMap R T)\n    let P := Localization.AtPrime (q₀.asIdeal.under R₀)\n    let L₀ := Localization.AtPrime q₀.asIdeal\n    letI := Localization.AtPrime.algebraOfLiesOver (q₀.asIdeal.under R₀) q₀.asIdeal\n    ∃ (E : Type (max u v)) (_ : CommRing E) (_ : Algebra P E),\n      EssentiallySmooth P E ∧\n      ∃ (f : P ⊗[R₀] C₀ →ₐ[P] E) (g : E →ₐ[P] L₀),\n        g.comp f = Algebra.TensorProduct.lift (Algebra.ofId P L₀)\n          ((IsScalarTower.toAlgHom R₀ T₀ L₀).comp γ₀)\n          (fun _ _ ↦ Commute.all _ _)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T165513-L-2933438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T165513-L-2933438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
