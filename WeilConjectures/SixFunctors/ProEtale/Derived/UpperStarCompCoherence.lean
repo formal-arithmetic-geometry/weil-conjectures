@@ -413,6 +413,131 @@ lemma leftDerivedUpperStarComp_assoc_app (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ 
   simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc] using NatTrans.congr_app this K
 
+/-- Transport of the derived pullback along `f = g` and then along `g = h` is transport along
+`f = h`. -/
+@[reassoc (attr := simp)]
+lemma leftDerivedUpperStarCongr_hom_app_trans {f g h : X ⟶ Y} (e₁ : f = g) (e₂ : g = h)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) A)) :
+    (leftDerivedUpperStarCongr A e₁).hom.app K ≫ (leftDerivedUpperStarCongr A e₂).hom.app K =
+      (leftDerivedUpperStarCongr A (e₁.trans e₂)).hom.app K := by
+  subst e₁ e₂
+  simp
+
+/-- The transport of the derived pullback does not depend on the proof of `f = g`. -/
+lemma leftDerivedUpperStarCongr_hom_app_proof {f g : X ⟶ Y} (e e' : f = g)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) A)) :
+    (leftDerivedUpperStarCongr A e).hom.app K = (leftDerivedUpperStarCongr A e').hom.app K :=
+  -- `rfl` is correct but makes the kernel unfold the derived functors
+  congrArg (fun e => (leftDerivedUpperStarCongr A e).hom.app K) (Subsingleton.elim e e')
+
+/-- The naturality of the composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, with the composite
+functor unfolded. -/
+@[reassoc]
+lemma leftDerivedUpperStarComp_hom_naturality (f : X ⟶ Y) (g : Y ⟶ Z)
+    {K K' : DerivedCategory (Sheaf (ProEt.topology Z) A)} (φ : K ⟶ K') :
+    L((f ≫ g)^*[A]).map φ ≫ (leftDerivedUpperStarComp A f g).hom.app K' =
+      (leftDerivedUpperStarComp A f g).hom.app K ≫ L((f)^*[A]).map (L((g)^*[A]).map φ) :=
+  (leftDerivedUpperStarComp A f g).hom.naturality φ
+
+/-- The transport of the derived pullback along an equation `f = f` is the identity. -/
+@[simp]
+lemma leftDerivedUpperStarCongr_hom_app_self {f : X ⟶ Y} (e : f = f)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) A)) :
+    (leftDerivedUpperStarCongr A e).hom.app K = 𝟙 _ := by
+  rw [leftDerivedUpperStarCongr_hom_app_proof e rfl]
+  simp
+
+/-- The inverse of the transport along `f = g` is the transport along `g = f`. -/
+lemma leftDerivedUpperStarCongr_inv_app {f g : X ⟶ Y} (e : f = g)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) A)) :
+    (leftDerivedUpperStarCongr A e).inv.app K =
+      (leftDerivedUpperStarCongr A e.symm).hom.app K := by
+  subst e
+  simp
+
+/-- The transport of the derived pullback is natural. -/
+@[reassoc]
+lemma leftDerivedUpperStarCongr_hom_naturality {f g : X ⟶ Y} (e : f = g)
+    {K K' : DerivedCategory (Sheaf (ProEt.topology Y) A)} (φ : K ⟶ K') :
+    L((f)^*[A]).map φ ≫ (leftDerivedUpperStarCongr A e).hom.app K' =
+      (leftDerivedUpperStarCongr A e).hom.app K ≫ L((g)^*[A]).map φ := by
+  subst e
+  simp
+
+/-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` is compatible with transport along an
+equality `g = g'` of the second morphism. -/
+@[reassoc]
+lemma leftDerivedUpperStarComp_hom_app_congr_right (f : X ⟶ Y) {g g' : Y ⟶ Z} (e : g = g')
+    (K : DerivedCategory (Sheaf (ProEt.topology Z) A)) :
+    (leftDerivedUpperStarComp A f g).hom.app K ≫
+        L((f)^*[A]).map ((leftDerivedUpperStarCongr A e).hom.app K) =
+      (leftDerivedUpperStarCongr A (congrArg (f ≫ ·) e)).hom.app K ≫
+        (leftDerivedUpperStarComp A f g').hom.app K := by
+  subst e
+  simp
+
+/-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` is compatible with transport along an
+equality `f = f'` of the first morphism. -/
+@[reassoc]
+lemma leftDerivedUpperStarComp_hom_app_congr_left {f f' : X ⟶ Y} (e : f = f') (g : Y ⟶ Z)
+    (K : DerivedCategory (Sheaf (ProEt.topology Z) A)) :
+    (leftDerivedUpperStarComp A f g).hom.app K ≫
+        (leftDerivedUpperStarCongr A e).hom.app (L((g)^*[A]).obj K) =
+      (leftDerivedUpperStarCongr A (congrArg (· ≫ g) e)).hom.app K ≫
+        (leftDerivedUpperStarComp A f' g).hom.app K := by
+  subst e
+  simp
+
+/-- The cocycle step for iterated coefficient maps along endomorphisms: for endomorphisms
+`Φ, P, Q, R, S, T` of `X` with `S = Φ ≫ T`, `T = Q ≫ R`, `S = P ≫ R` and `P = Φ ≫ Q`, and maps
+`ψ_R : LR^* K ⟶ K`, `ψ_Q : LQ^* K ⟶ K`, `ψ : LΦ^* K ⟶ K`, the two composites
+`LS^* K ⟶ K` obtained by grouping `ψ ∘ LΦ^* ψ_Q ∘ LΦ^* LQ^* ψ_R` in the two possible ways
+agree. -/
+lemma leftDerivedUpperStarComp_cocycle_aux {Φ P Q R S T : X ⟶ X} (e₁ : S = Φ ≫ T)
+    (e₂ : T = Q ≫ R) (e₃ : S = P ≫ R) (e₄ : P = Φ ≫ Q)
+    {K : DerivedCategory (Sheaf (ProEt.topology X) A)} (ψR : L((R)^*[A]).obj K ⟶ K)
+    (ψQ : L((Q)^*[A]).obj K ⟶ K) (ψ : L((Φ)^*[A]).obj K ⟶ K) :
+    (leftDerivedUpperStarCongr A e₁).hom.app K ≫ (leftDerivedUpperStarComp A Φ T).hom.app K ≫
+        L((Φ)^*[A]).map ((leftDerivedUpperStarCongr A e₂).hom.app K ≫
+          (leftDerivedUpperStarComp A Q R).hom.app K ≫ L((Q)^*[A]).map ψR ≫ ψQ) ≫ ψ =
+      (leftDerivedUpperStarCongr A e₃).hom.app K ≫ (leftDerivedUpperStarComp A P R).hom.app K ≫
+        L((P)^*[A]).map ψR ≫ (leftDerivedUpperStarCongr A e₄).hom.app K ≫
+        (leftDerivedUpperStarComp A Φ Q).hom.app K ≫ L((Φ)^*[A]).map ψQ ≫ ψ := by
+  subst e₂
+  simp only [leftDerivedUpperStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp,
+    Functor.map_comp, Category.assoc]
+  rw [leftDerivedUpperStarCongr_hom_naturality_assoc,
+    leftDerivedUpperStarComp_hom_app_congr_left_assoc, leftDerivedUpperStarCongr_hom_app_trans_assoc,
+    leftDerivedUpperStarComp_hom_naturality_assoc, leftDerivedUpperStarComp_assoc_app_assoc,
+    leftDerivedUpperStarCongr_hom_app_trans_assoc,
+    leftDerivedUpperStarCongr_hom_app_proof e₁
+      ((e₃.trans (congrArg (· ≫ R) e₄)).trans (Category.assoc Φ Q R))]
+
+/-- The stalk step for iterated coefficient maps: for a morphism `x : W ⟶ X` fixed by
+endomorphisms `P = Φ`, `M` and `N = Φ ≫ M` of `X`, and maps `ψ_M : LM^* K ⟶ K`,
+`ψ : LΦ^* K ⟶ K`, the endomorphism of `Lx^* K` induced by `ψ ∘ LΦ^* ψ_M` along `x ≫ N = x` is
+the composite of the endomorphisms induced by `ψ_M` and by `ψ`. -/
+lemma leftDerivedUpperStarComp_stalk_aux {x : W ⟶ X} {Φ M N P : X ⟶ X} (eN : N = Φ ≫ M)
+    (eP : P = Φ) (hN : x ≫ N = x) (hM : x ≫ M = x) (h₁ : x ≫ P = x)
+    {K : DerivedCategory (Sheaf (ProEt.topology X) A)} (ψM : L((M)^*[A]).obj K ⟶ K)
+    (ψ : L((Φ)^*[A]).obj K ⟶ K) :
+    (leftDerivedUpperStarCongr A hN).inv.app K ≫ (leftDerivedUpperStarComp A x N).hom.app K ≫
+        L((x)^*[A]).map ((leftDerivedUpperStarCongr A eN).hom.app K ≫
+          (leftDerivedUpperStarComp A Φ M).hom.app K ≫ L((Φ)^*[A]).map ψM ≫ ψ) =
+      ((leftDerivedUpperStarCongr A hM).inv.app K ≫ (leftDerivedUpperStarComp A x M).hom.app K ≫
+        L((x)^*[A]).map ψM) ≫
+      ((leftDerivedUpperStarCongr A h₁).inv.app K ≫ (leftDerivedUpperStarComp A x P).hom.app K ≫
+        L((x)^*[A]).map ((leftDerivedUpperStarCongr A eP).hom.app K ≫ ψ)) := by
+  subst eN eP
+  simp only [leftDerivedUpperStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp,
+    Functor.map_comp, Category.assoc, leftDerivedUpperStarCongr_inv_app]
+  rw [leftDerivedUpperStarCongr_hom_naturality_assoc, leftDerivedUpperStarComp_hom_naturality_assoc,
+    leftDerivedUpperStarComp_hom_app_congr_left_assoc, leftDerivedUpperStarComp_assoc_app_assoc,
+    leftDerivedUpperStarCongr_hom_app_trans_assoc, leftDerivedUpperStarCongr_hom_app_trans_assoc,
+    leftDerivedUpperStarCongr_hom_app_proof hN.symm
+      ((hM.symm.trans (congrArg (· ≫ M) h₁.symm)).trans (Category.assoc x P M))]
+
+
 end Laws
 
 end AlgebraicGeometry.ProEtale

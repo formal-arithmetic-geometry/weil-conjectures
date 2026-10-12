@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
 
@@ -257,8 +258,56 @@ lemma coeffIterate_succ (m : ℕ) :
 `leftDerivedUpperStarComp` with `leftDerivedUpperStarId`. -/
 lemma coeffIterate_one :
     W.coeffIterate 1 =
-      (leftDerivedUpperStarCongr A W.frobeniusIterate_one).hom.app W.obj ≫ W.coeff :=
-  sorry
+      (leftDerivedUpperStarCongr A W.frobeniusIterate_one).hom.app W.obj ≫ W.coeff := by
+  have h := leftDerivedUpperStarComp_id_right_app (A := A) W.frobenius W.obj
+  rw [coeffIterate_succ, coeffIterate_zero]
+  erw [reassoc_of% h]
+  rw [leftDerivedUpperStarCongr_hom_app_trans_assoc]
+
+/-- `Φ_{m + n} = Φ_n ≫ Φ_m`. -/
+lemma frobeniusIterate_add (m n : ℕ) :
+    W.frobeniusIterate (m + n) = W.frobeniusIterate n ≫ W.frobeniusIterate m := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [← Nat.add_assoc, frobeniusIterate_succ, ih, frobeniusIterate_succ,
+      Category.assoc]
+
+/-- The recursion of `coeffIterate` at `m + (n + 1)`, with the transport along
+`Φ_{m + (n + 1)} = Φ₁ ≫ Φ_{m + n}`. -/
+lemma coeffIterate_add_succ (m n : ℕ)
+    (e : W.frobeniusIterate (m + (n + 1)) = W.frobenius ≫ W.frobeniusIterate (m + n)) :
+    W.coeffIterate (m + (n + 1)) =
+      (leftDerivedUpperStarCongr A e).hom.app W.obj ≫
+        (leftDerivedUpperStarComp A W.frobenius (W.frobeniusIterate (m + n))).hom.app W.obj ≫
+        ((upperStar A W.frobenius).leftDerivedFunctor).map (W.coeffIterate (m + n)) ≫
+        W.coeff :=
+  W.coeffIterate_succ (m + n)
+
+/-- Blueprint `lem-trf-iterated-weil-cocycle`: the cocycle identity
+`φ_{m + n} = φ_n ∘ LΦ_n^* φ_m` for the iterates of the Frobenius coefficient morphism, read
+through the composition isomorphism `LΦ_{m + n}^* ≃ LΦ_n^* LΦ_m^*` of `Φ_{m + n} = Φ_n ≫ Φ_m`. -/
+lemma coeffIterate_add (m n : ℕ) :
+    W.coeffIterate (m + n) =
+      (leftDerivedUpperStarCongr A (W.frobeniusIterate_add m n)).hom.app W.obj ≫
+        (leftDerivedUpperStarComp A (W.frobeniusIterate n) (W.frobeniusIterate m)).hom.app
+          W.obj ≫
+        ((upperStar A (W.frobeniusIterate n)).leftDerivedFunctor).map (W.coeffIterate m) ≫
+        W.coeffIterate n := by
+  induction n with
+  | zero =>
+    have h := leftDerivedUpperStarComp_id_left_app (A := A) (W.frobeniusIterate m) W.obj
+    have nat := (leftDerivedUpperStarId A X).hom.naturality (W.coeffIterate m)
+    change W.coeffIterate m = (leftDerivedUpperStarCongr A _).hom.app W.obj ≫
+      (leftDerivedUpperStarComp A (𝟙 X) (W.frobeniusIterate m)).hom.app W.obj ≫
+      ((upperStar A (𝟙 X)).leftDerivedFunctor).map (W.coeffIterate m) ≫
+      (leftDerivedUpperStarId A X).hom.app W.obj
+    dsimp only [Functor.id_obj, Functor.id_map] at nat
+    rw [nat, reassoc_of% h, leftDerivedUpperStarCongr_hom_app_trans_assoc]
+    exact (Category.id_comp _).symm
+  | succ n ih =>
+    rw [coeffIterate_add_succ W m n (W.frobeniusIterate_succ (m + n)), ih,
+      coeffIterate_succ W n]
+    exact leftDerivedUpperStarComp_cocycle_aux _ _ _ _ _ _ _
 
 /-- The iterates of an invertible Frobenius coefficient morphism are invertible. -/
 instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m) := by
@@ -306,8 +355,22 @@ lemma stalkFrobenius_eq_pow {x : s ⟶ X} (hx : x ≫ W.frobenius = x) (m : ℕ)
     W.stalkFrobenius m x (W.comp_frobeniusIterate_of_comp_frobenius hx m) =
       let F : End (((upperStar A x).leftDerivedFunctor).obj W.obj) :=
         W.stalkFrobenius 1 x (W.comp_frobeniusIterate_of_comp_frobenius hx 1)
-      F ^ m :=
-  sorry
+      F ^ m := by
+  induction m with
+  | zero =>
+    have h := leftDerivedUpperStarComp_id_right_app (A := A) x W.obj
+    change (leftDerivedUpperStarCongr A (Category.comp_id x)).inv.app W.obj ≫ (leftDerivedUpperStarComp A x (𝟙 X)).hom.app W.obj ≫
+        ((upperStar A x).leftDerivedFunctor).map ((leftDerivedUpperStarId A X).hom.app W.obj) =
+      𝟙 _
+    rw [h, leftDerivedUpperStarCongr_inv_app, leftDerivedUpperStarCongr_hom_app_trans,
+      leftDerivedUpperStarCongr_hom_app_self]
+  | succ m ih =>
+    simp only at ih ⊢
+    rw [pow_succ', End.mul_def, ← ih]
+    simp only [stalkFrobenius]
+    rw [coeffIterate_succ W m, coeffIterate_one]
+    exact leftDerivedUpperStarComp_stalk_aux (W.frobeniusIterate_succ m) W.frobeniusIterate_one
+      _ _ _ _ _
 
 /-- The Frobenius coefficient morphism of the pullback `Lf^* K` along a morphism
 `f : Y ⟶ X` that intertwines an endomorphism `g : Y ⟶ Y` with `Φ_m`,
