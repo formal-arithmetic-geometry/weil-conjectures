@@ -17,31 +17,37 @@
  ],
  "proof": [
   {
-   "text": "On the bounded below injective complex I, the defining compatibility of rightDerivedFunctorPlusBaseChange with the right-derived functor units identifies its component with the unit section map η(I) followed by the Γ′ derived unit on LI. Naturality of that unit along φ, whose augmentation homotopy represents the identity of LG after localization, replaces LI by the injective resolution J. The unit is invertible on J, so the resulting representative is Γ′(φ) after η(I).",
+   "text": "Evaluate rightDerivedFunctorPlusBaseChange_fac at the bounded below source resolution. Naturality of mapDerivedCategoryPlusIdIso cancels the identity-functor factorization, giving the levelwise section transformation followed by the target derived unit. This is the private proved helper resolution_baseChange_unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply resolution_pullback_augmentation to the supplied lift and homotopy. Naturality of base change along the source augmentation and naturality of the target derived unit along the lift identify the derived base-change map, conjugated by the chosen resolution isomorphisms, with Q of the section map. Cancel the source and target units on injective complexes. This is the proved representative calculation inside resolution_baseChange_sections.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "prop-weil-pbc-inverse-image-exact"
+    "lem-weil-pbc-resolution-pullback-augmentation"
    ],
    "elementary": false
   },
   {
-   "text": "Apply degree-q homology and transport through the single-complex right-derived comparisons. Expand their definition using the chosen resolutions I and J. The identifications on their resolution homology are exactly isoRightDerivedObjCochainComplex, and cancellation of the invertible units gives the stated formula. An additive functor preserves homotopies, so the supplied homotopy yields equality on homology.",
+   "text": "Expand rightDerivedBaseChange_app and the canonical single-functor homology comparisons. Use identityDerivedHomologyComparison to identify the identity exact-functor comparison. Apply homology to the representative equation, cancel the resolution isomorphisms, and use homologyFunctorObjQIso_hom_naturality. The surviving comparison is exactly isoRightDerivedObjCochainComplex. Specialize to the etale section functors and exact upperStar.",
    "uses": [
-    "lem-sp-derived-functor-single-identification"
+    "lem-weil-pbc-identity-derived-homology-comparison",
+    "lem-sp-derived-functor-single-identification",
+    "prop-weil-pbc-inverse-image-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-resolution-pullback-augmentation",
+  "lem-weil-pbc-identity-derived-homology-comparison",
   "lem-sp-derived-functor-single-identification",
-  "lem-weil-pbc-kinjective-hom-derived",
   "prop-weil-pbc-inverse-image-exact"
  ],
  "proof_origin": {
-  "by": "X2 stage-3 worker",
+  "by": "E3 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/01F8",
-  "place": "equations 01F9 and 01FA",
-  "note": "strictly smaller resolution-level interface"
+  "place": "Resolution representative through unit compatibility; equation 01F9; implemented using PlusBaseChange_fac and PlusSingle comparisons. Only augmentation coherence remains; identity comparison uses the existing proved module."
  },
  "mathlib_searches": [
   {
@@ -142,9 +148,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T144159-L-2112121",
+  "landing": "20261012T173818-L-3293332",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
