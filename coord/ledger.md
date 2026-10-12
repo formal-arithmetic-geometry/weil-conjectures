@@ -7688,3 +7688,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:08 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SplitReductionSpectrumComponents (stage 3; reviewer PASS; first push; landing 20261012T130809-L-1320319 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 13:09 L: returned deliver/C3/Sheaf.FieldTheory.SeparableTensorPurelyInseparable (reviewer RETURN: (reviewer X-43a01, head 43a01c2d4) A (delivery shape; stage-3 brief §6 change record): In coord/changes/separableTensor_)
 - 13:09 L: merged deliver/R1/Sheaf.CategoryTheory.SheafAbelianObjectsBijective (stage 3; reviewer PASS; first push; landing 20261012T130938-L-1329085 (interface); batch 20261012T120425; modules 3; new nodes 2)
+- 13:11 L: merged deliver/R1/Sheaf.ConstructibleSheaf.TorsorAssociatedModuleComparisons (stage 3; reviewer PASS; first push; landing 20261012T131109-L-1340790 (interface); batch 20261012T120425; modules 3; new nodes 2)

@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-torsor-diagonal-evaluation",
+ "kind": "statement",
+ "title": "Diagonal evaluation",
+ "statement": "Let $V$ be a scheme [def-weil-pbc-scheme-conventions], $\\ell\\in\\mathbb N$, $P$ a finite group and $c:Y\\to V$ a finite etale $\\operatorname{ULift}(P)$-torsor [def-sbc-normal-dominant-galois]. Write $E_c$ for its equivariant locally constant section presheaf functor [def-weil-pbc-torsor-associated-module], and $S$ for restriction of scalars along $\\operatorname{ULift}(\\mathbb Z/\\ell)\\to\\mathbb Z/\\ell$. The precomposition of $S E_c$ with the etale localization $Y_{et}\\to V_{et}$ is naturally isomorphic to the underlying presheaf functor of the constant module sheaf functor on $Y$ [def-weil-pbc-constant-sheaf] applied to scalar-restricted underlying representations. The maps are evaluation on the diagonal and equivariant extension.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-torsor-associated-module",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For W etale over c.P, evaluate an equivariant function on the graph of\nW.hom in W times_V c.P. The torsor isomorphism identifies this latter scheme\nwith the disjoint union of copies of W indexed by P. The inverse extends a\nlocally constant function t on W by the formula rho(g)(t(w)) on the translate\nof the graph by g. These copies are open, so the extension is locally constant;\nthe action law proves equivariance. Evaluation and extension are inverse and\nlinear, including after scalar restriction. Composition of W with an etale\nmap and postcomposition with an intertwiner commute with both formulas.\nLocally constant functions on W are the sections of the constant module sheaf:\nthe map from the constant presheaf sends a coefficient to its constant function,\nis locally surjective on its open fibers, and is locally injective (on an empty\nobject use the empty covering). Sheafification gives this identification.\nThis establishes the stated natural presheaf isomorphism, without sheafifying\nthe equivariant presheaf or invoking inverse image. -/",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
+  "note": "Concrete local torsor trivialization argument; the source finite-type comparison is implemented here at the presheaf level for arbitrary modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Invariant locally constant sections on a finite etale torsor descend to the constant sheaf; evaluation at the diagonal trivializes equivariant sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant locally constant functions on a finite etale torsor descend to locally constant functions on its base",
+   "results": "8 hits: Profinite.exists_locallyConstant_finite_aux, Profinite.exists_locallyConstant_finite_nonempty, Profinite.exists_locallyConstant_fin_two, Profinite.exists_locallyConstant, CompHausLike.LocallyConstant.counitAppAppImage, CompHausLike.LocallyConstant.componentHom, CompHausLike.LocallyConstant.fiber, CompHausLike.LocallyConstant.incl_comap",
+   "date": "2026-10-12",
+   "verdict": "No exact scheme-torsor presheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*sheaf|sheaf.*equivariant",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact scheme-torsor presheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorAssociatedModuleComparisons",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "split-locally-constant-cover-filtration",
+   "place": "proof: Passing from H-modules to locally constant sheaves, and identifying constant rank-one quotients",
+   "via": [
+    "lem-weil-pbc-torsor-associated-module-comparisons",
+    "lem-weil-pbc-torsor-module-descent-equivalence",
+    "lem-weil-pbc-connected-torsor-module-descent",
+    "lem-weil-pbc-sylow-cover-stalk-data",
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorDiagonalEvaluation",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorDiagonalEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_diagonal",
+  "statement": "theorem equivariantModulePresheaf_diagonal {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P] (c : Scheme.GaloisCover (ULift.{u + 1} P) V) : Nonempty ( c.equivariantModulePresheafFunctor ℓ ⋙ (Functor.whiskeringRight V.Etaleᵒᵖ _ _).obj (ModuleCat.restrictScalars.{u + 1} (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)) ⋙ (Functor.whiskeringLeft c.P.Etaleᵒᵖ V.Etaleᵒᵖ _).obj (MorphismProperty.Over.map ⊤ c.etale).op ≅ forget₂ (Rep.{u + 1} (ZMod ℓ) P) (ModuleCat.{u + 1} (ZMod ℓ)) ⋙ ModuleCat.restrictScalars.{u + 1} (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ) ⋙ constantSheaf c.P.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) ⋙ sheafToPresheaf c.P.smallEtaleTopology _)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a2263",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T131109-L-1340790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a2263",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T131109-L-1340790",
+  "kind": "interface"
+ }
+}

@@ -6,6 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
+import Sheaf.ConstructibleSheaf.TorsorDiagonalEvaluation
+import Sheaf.ConstructibleSheaf.TorsorInvariantSections
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Pullback and coefficient comparisons for associated module sheaves
@@ -22,6 +25,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Etale
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation along a local torsor section trivializes the associated module sheaf
 upstairs. The trivial coefficient representation descends to the coefficient sheaf.
 Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
@@ -58,6 +62,32 @@ theorem Scheme.GaloisCover.associatedModuleFunctor_comparisons
         constantSheaf c.P.smallEtaleTopology C) ∧
     Nonempty (T.obj (Rep.trivial (ZMod ℓ) P (ULift.{u + 1} (ZMod ℓ))) ≅
       (constantSheaf V.smallEtaleTopology C).obj
-        (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by sorry
+        (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by
+  dsimp only
+  let C := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))
+  let S := ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)
+  let F := c.equivariantModulePresheafFunctor ℓ ⋙
+    (Functor.whiskeringRight V.Etaleᵒᵖ _ _).obj S
+  let T := c.associatedModuleFunctor ℓ
+  obtain ⟨d⟩ := c.equivariantModulePresheaf_diagonal ℓ
+  obtain ⟨t⟩ := c.equivariantModulePresheaf_trivial ℓ
+  constructor
+  · let R := Etale.localizationRestriction C c.π c.etale
+    let K := forget₂ (Rep.{u + 1} (ZMod ℓ) P) (ModuleCat.{u + 1} (ZMod ℓ)) ⋙
+      S ⋙ constantSheaf c.P.smallEtaleTopology C
+    have h : T ⋙ R ≅ K :=
+      (Functor.isoWhiskerLeft F
+        ((MorphismProperty.Over.map ⊤ c.etale).pushforwardContinuousSheafificationCompatibility
+          C (c.P.smallGrothendieckTopology @Etale)
+            (V.smallGrothendieckTopology @Etale)).symm) ≪≫
+      Functor.isoWhiskerRight d (presheafToSheaf c.P.smallEtaleTopology C) ≪≫
+      Functor.isoWhiskerLeft K (sheafificationNatIso c.P.smallEtaleTopology C).symm
+    exact ⟨Functor.isoWhiskerLeft T
+      (Etale.upperStarIsoLocalizationRestriction C c.π c.etale) ≪≫
+      h⟩
+  · exact ⟨(presheafToSheaf V.smallEtaleTopology C).mapIso t ≪≫
+      (sheafificationIso ((constantSheaf V.smallEtaleTopology C).obj
+        (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))).symm⟩
 
 end AlgebraicGeometry
