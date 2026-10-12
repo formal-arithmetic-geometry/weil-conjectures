@@ -1,6 +1,6 @@
 # Work queue
 
-105 items; claim with `tools/claim.py next <group> [--stage N]`.
+107 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -23,7 +23,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (96)
+## Stage 3: modules to prove (98)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -40,8 +40,10 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations` | 2 | 2 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 4 | proof |
+| `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstantExtensionCover` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit` | 3 | 1 | proof |
