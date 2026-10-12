@@ -23,44 +23,36 @@
  ],
  "proof": [
   {
-   "text": "For a tuple $(i_0,\\ldots,i_p)$, permuting the indices only permutes the factors in the intersection, and the corresponding restriction maps agree because the Zariski site is a poset of open subschemes. Thus restriction to strictly increasing tuples commutes with the alternating sum of face restrictions, so it is a cochain map (Stacks Tag 01FK).",
+   "text": "Define increasing-tuple cochains as the product of sections on increasing tuples, and define its differential by the signed face sum. Define degree restriction by evaluation at the underlying increasing tuple; it commutes with the full differential by the formula. Restriction is degreewise surjective by extension by zero to other tuples, so it is an epimorphism of abelian groups. Precomposing the square of the increasing-tuple differential with this epimorphism gives the full differential squared followed by restriction, hence zero. Cancel the epimorphism to obtain d squared = 0, and construct the cochain complex A with CochainComplex.of. The degree identifications e are identities, and CochainComplex.ofHom constructs r. The two displayed coordinate formulas are definitional.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-sc-zariski-site"
+    "def-weil-pbc-site-cech-complex"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 20.23, Lemma 20.23.5 (Tag 01FK)"
+    "document": "Stacks Project, Cohomology of Sheaves",
+    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
    }
   },
   {
-   "text": "Let $D^\\bullet$ be the full ordered complex and let $A^\\bullet$ be the strictly increasing (alternating) subcomplex. Every ordered tuple has a unique permutation of a strictly increasing tuple together with a pattern of repeated indices. Extend a cochain on $A^p$ to tuples with distinct indices by the sign of this permutation, and put it equal to zero on tuples with repetitions. This gives a cochain map $A^\\bullet\\to D^\\bullet$ whose composite with restriction is the identity on $A^\\bullet$; the sign rule is compatible with every face map because deleting one entry changes the permutation sign by the corresponding face sign (Stacks Tags 01FJ, 01FK).",
-   "uses": [],
+   "text": "Apply the homotopy inverse lemma to this explicitly constructed A, e and r, using the proved restriction formula. Form HomotopyEquiv with the supplied inverse and both homotopies. Mathlib HomotopyEquiv.toHomologyIso gives in each degree an isomorphism whose hom is homologyMap r. Therefore IsIso (homologyMap r p) holds for every p. The cover hypothesis is preserved in the signature but this comparison itself works for any family of opens.",
+   "uses": [
+    "lem-pc-alternating-cech-restriction-homotopy"
+   ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 20.23, Lemmas 20.23.3 and 20.23.5 (Tags 01FJ, 01FK)"
-   }
-  },
-  {
-   "text": "For completeness, use the explicit homotopies of Stacks Tag 01FM (Lemma 20.23.6). For a tuple $(i_0,\\ldots,i_p)$, let $\\sigma^{i_0\\ldots i_p}$ be the unique permutation that puts the entries in nondecreasing order, preserving the original order inside equal blocks, and let $\\sigma_a$ sort the tail beginning at position $a$. Define $h:D^{p+1}\\to D^p$ by $h(s)_{i_0\\ldots i_p}=\\sum_{a=0}^p(-1)^a\\operatorname{sgn}(\\sigma_a)s_{i_{\\sigma(0)}\\ldots i_{\\sigma(a)}i_{\\sigma_a(a)}\\ldots i_{\\sigma_a(p)}}$. Direct cancellation of adjacent terms gives $(dh+hd)(s)_{i_0\\ldots i_p}=s_{i_0\\ldots i_p}-\\operatorname{sgn}(\\sigma)s_{i_{\\sigma(0)}\\ldots i_{\\sigma(p)}}$, so $D^\\bullet$ retracts up to homotopy onto the semialternating subcomplex. On that subcomplex, the projection to nondecreasing tuples has inverse given by the sign rule; the inclusion of strictly increasing tuples into nondecreasing tuples has the homotopy that is zero on strictly increasing tuples and, when $i_a=i_{a+1}$ is the first equality, inserts the repeated entry with coefficient $(-1)^a$. The same adjacent-term cancellation gives, on the semi-ordered complex, $(dh+hd)(s)_{i_0\\ldots i_p}=0$ if $i_0<\\dots<i_p$ and $=s_{i_0\\ldots i_p}$ otherwise, so the projection to strictly increasing tuples followed by extension by zero is homotopic to the identity. Thus restriction $D^\\bullet\\to A^\\bullet$ is a homotopy equivalence and induces the asserted cohomology isomorphisms.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 20.23, Lemma 20.23.6 (Tag 01FM), first and second homotopies"
+    "document": "Stacks Project, Cohomology of Sheaves",
+    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-site-cech-complex",
-  "def-sc-zariski-site"
+  "lem-pc-alternating-cech-restriction-homotopy"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Section 20.23 (Cech cohomology: the alternating and ordered Cech complexes)"
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
  },
  "mathlib_searches": [
   {
@@ -148,5 +140,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085229-L-10128",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
