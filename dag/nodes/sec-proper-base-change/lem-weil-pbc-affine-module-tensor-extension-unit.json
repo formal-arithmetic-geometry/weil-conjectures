@@ -20,7 +20,14 @@
  "statement": "Let $f:U\\to X$ be a scheme morphism, $A=f_*O_U$, and $S$ scalar restriction along $O_X\\to A$. Given a ring sheaf $B$, maps $b:O_U\\to B$, $t:f^{-1}A\\to B$, $\\epsilon:B\\to O_U$ with $b\\epsilon=1$, a functor $P$ with specified objects $B\\otimes_{f^{-1}A}f^{-1}G$, and $\\kappa:P\\operatorname{Res}_b\\simeq Sf^*$, there is $H(G)=O_U\\otimes_{B,\\epsilon}P(G)$ with its scalar-extension map formula and natural $\\gamma:Sf^*\\to H$. For every local section $p$ of $P(G)$, $\\gamma_G\\kappa_G(p)$ equals the sheafification of $1\\otimes p$. Conventions: [def-pc-scheme], [pqf-def-affine-morphism], [def-weil-sheaf-of-modules-category], [pqf-def-coherent], [def-pc-module-pullback], [def-pur-sheaf-tensor-product], [lem-pc-module-pullback-adjunction].",
  "proof": [
   {
-   "text": "Use change of rings along ε on P objects and sheafify id tensor P(a) on morphisms.\nThe maps preserve identities and composition because tensor extension and sheafification\ndo. The scalar-extension adjunction unit sends p to the sheafification of 1 tensor p.\nCompose this unit, after P, with κ inverse to define γ. Its naturality follows from\nnaturality of the unit and κ. Composing with κ cancels κ inverse, giving the section\nformula. The equation bε=1 makes the unit O_U-linear; no affineness or\nquasi-coherence is needed; the zero ring\nand zero module satisfy the same construction.",
+   "text": "Construct the sectionwise extension functor T using changeOfRingsPresheaf and the maps id tensor a; extension of scalars preserves identities and composition. Compose P, T and module sheafification to construct H with the required object and morphism formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct q on sections by p maps to 1 tensor p. The retraction b followed by epsilon is identity, so q is O_U-linear. The pure-tensor characterization of changeOfRingsMap proves restriction compatibility. Tensor functoriality proves naturality in P. Compose q with the sheafification adjunction unit to obtain delta, then set gamma = kappa inverse followed by delta. Cancel kappa followed by its inverse to obtain the section formula.",
    "uses": [
     "def-pur-sheaf-tensor-product"
    ],
@@ -129,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-cf5bf",
-  "group": "D3",
+  "reviewer": "X-db30a",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T112833-L-765501",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet and node statements; all four modules and direct importer AffineModuleCorrespondence compile successfully, with only permitted named sorry declarations remaining."
+  "landing": "20261012T135243-L-1669448",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature to the node, explicit tensor-unit proof to the recorded proof steps, and report to delivered changes; delivered module and direct importer AffineModuleTensorConstruction compile cleanly, and the axiom audit shows only propext, Classical.choice, Quot.sound."
  }
 }

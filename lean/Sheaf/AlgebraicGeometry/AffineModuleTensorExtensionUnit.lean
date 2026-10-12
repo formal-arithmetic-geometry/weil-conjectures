@@ -60,6 +60,8 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
+set_option maxHeartbeats 800000 in
+-- Tensor instance reduction in the explicit unit construction needs additional heartbeats.
 /-- Extension along ε supplies a functor and its canonical tensor unit after κ.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h.
 Proof: Use change of rings along ε on P objects and sheafify id tensor P(a) on morphisms.
@@ -90,6 +92,106 @@ theorem affine_module_tensor_extensionUnit
               ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
                 (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W
                   ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] p)) := by
-  sorry
+  have := pobj
+  let T : SheafOfModules.{u} (𝓡 B) ⥤ _root_.PresheafOfModules.{u} U.ringCatSheaf.obj :=
+    { obj := fun M ↦ SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε M
+      map := fun {M N} a ↦
+        show SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε M ⟶
+          SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε N from
+        { app := fun W ↦ (ModuleCat.extendScalars (ε.hom.app W).hom).map (a.val.app W)
+          naturality := SheafOfModules.changeOfRingsHom_naturality.{u, u, u} ε _ a }
+      map_id := by
+        intro M
+        apply PresheafOfModules.hom_ext
+        intro W
+        exact (ModuleCat.extendScalars (ε.hom.app W).hom).map_id _
+      map_comp := by
+        intro M N L a c
+        apply PresheafOfModules.hom_ext
+        intro W
+        exact (ModuleCat.extendScalars (ε.hom.app W).hom).map_comp _ _ }
+  let F := PresheafOfModules.sheafification (𝟙 U.ringCatSheaf.obj)
+  let H := P ⋙ T ⋙ F
+  let q (M : SheafOfModules.{u} (𝓡 B)) :
+      ((SheafOfModules.restrictScalars (𝓻 b)).obj M).val ⟶ T.obj M := by
+    refine { app := ?_, naturality := ?_ }
+    · intro W
+      refine ModuleCat.ofHom
+        (X := ((SheafOfModules.restrictScalars (𝓻 b)).obj M).val.obj W)
+        (Y := (T.obj M).obj W)
+        { toFun := fun m ↦ (1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] m
+          map_add' := by intros; exact TensorProduct.tmul_add _ _ _
+          map_smul' := ?_ }
+      intro r m
+      let : Module (B.obj.obj W) (U.sheaf.obj.obj W) :=
+        Module.compHom (U.sheaf.obj.obj W) (ε.hom.app W).hom
+      change (1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom]
+        (b.hom.app W r • (show M.val.obj W from m)) = (show U.sheaf.obj.obj W from r) •
+          ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] (show M.val.obj W from m))
+      have hr : ε.hom.app W (b.hom.app W r) = r :=
+        ConcreteCategory.congr_hom (congrArg (fun a ↦ a.hom.app W) hb)
+          (show U.sheaf.obj.obj W from r)
+      change (1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W] (b.hom.app W r • (show M.val.obj W from m)) = _
+      rw [TensorProduct.tmul_smul]
+      change (ε.hom.app W (b.hom.app W r) * 1) ⊗ₜ[B.obj.obj W] (show M.val.obj W from m) = _
+      rw [hr, mul_one]
+      simpa only [mul_one] using
+        (ModuleCat.ExtendScalars.smul_tmul (ε.hom.app W).hom
+          (show U.sheaf.obj.obj W from r) 1 (show M.val.obj W from m)).symm
+    · intro V W i
+      ext m
+      symm
+      change SheafOfModules.changeOfRingsMap ε M i
+        ((1 : U.sheaf.obj.obj V) ⊗ₜ[B.obj.obj V, (ε.hom.app V).hom] m) = _
+      rw [show SheafOfModules.changeOfRingsMap ε M i _ = _ from
+        Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap ε M i) 1 m]
+      simp only [map_one]
+      rfl
+  let δ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ⟶ H :=
+    { app := fun G ↦ ⟨q (P.obj G) ≫
+        (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
+          (T.obj (P.obj G))⟩
+      naturality := by
+        intro G G' a
+        apply SheafOfModules.hom_ext
+        change ((SheafOfModules.restrictScalars (𝓻 b)).map (P.map a)).val ≫
+          (q (P.obj G') ≫
+            (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
+              (T.obj (P.obj G'))) =
+          (q (P.obj G) ≫
+            (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
+              (T.obj (P.obj G))) ≫ (F.map (T.map (P.map a))).val
+        have hq : ((SheafOfModules.restrictScalars (𝓻 b)).map (P.map a)).val ≫
+            q (P.obj G') = q (P.obj G) ≫ T.map (P.map a) := by
+          ext W m
+          change (1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom]
+            ((P.map a).val.app W m) =
+            (ModuleCat.extendScalars (ε.hom.app W).hom).map ((P.map a).val.app W)
+              ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] m)
+          erw [ModuleCat.ExtendScalars.map_tmul]
+          rfl
+        rw [← Category.assoc, hq, Category.assoc]
+        have hn := (PresheafOfModules.sheafificationAdjunction
+          (𝟙 U.ringCatSheaf.obj)).unit.naturality (T.map (P.map a))
+        change T.map (P.map a) ≫
+          (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
+            (T.obj (P.obj G')) =
+          (PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
+            (T.obj (P.obj G)) ≫ (F.map (T.map (P.map a))).val at hn
+        rw [hn, Category.assoc] }
+  refine ⟨H, fun _ ↦ rfl, κ.inv ≫ δ, ?_, ?_⟩
+  · intro G G' a
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  · intro G W p
+    change (δ.app G).val.app W ((κ.inv.app G).val.app W
+      ((κ.hom.app G).val.app W p)) = _
+    have hk : (κ.inv.app G).val.app W ((κ.hom.app G).val.app W p) = p :=
+      congrArg (fun a ↦ a.val.app W p) (κ.hom_inv_id_app G)
+    rw [hk]
+    change ((PresheafOfModules.sheafificationAdjunction
+      (𝟙 U.ringCatSheaf.obj)).unit.app (T.obj (P.obj G))).app W
+        ((q (P.obj G)).app W p) = _
+    rfl
 end
 end AlgebraicGeometry.Scheme.Modules
