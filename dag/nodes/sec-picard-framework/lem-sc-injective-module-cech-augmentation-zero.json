@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-injective-module-cech-augmentation-zero",
+ "kind": "statement",
+ "title": "Degree-zero part of injective Cech augmentation",
+ "statement": "Let X be a scheme [def-pc-scheme], U_i an arbitrary open cover of X, and J an injective sheaf of O_X-modules [def-weil-sheaf-of-modules-category, def-sp-injective-resolutions]. Let C(U,J) be the Cech cochain complex of the presheaf of global-section-ring modules [def-weil-pbc-site-cech-complex]. Global sections are the evaluation functor of [def-sc-ringed-space-module-cohomology]. Let b be a cochain map from the single-term complex J(X)[0] to C(U,J), whose degree-zero component is the canonical restriction map into the product over Fin 1-tuples, preceded by the identity restriction-of-scalars identification at X. The structure-sheaf map from X to itself is identified with the identity ring homomorphism, by a supplied proof ht of that equality. Then the homology map of b in degree zero is an isomorphism. This concerns one injective module, with no injective resolution or total complex.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EP (lemma-injective-trivial-cech), degree-zero and positive-degree clauses, as used in the augmented-row argument of Tag 01EQ (lemma-cech-cohomology)."
+ },
+ "proof": [
+  {
+   "text": "Identify categorical products of opens with finite intersections and products of modules with families of sections. The first Cech differential is the difference of the two restrictions on every pairwise overlap. Its kernel therefore consists of compatible families; the sheaf gluing axiom gives a unique section on their union. By hU the union is X. Restriction from J(X) to this kernel is therefore a linear bijection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both complexes have zero incoming boundaries in degree zero. The source zero homology is its only term and the target zero homology is the kernel just identified. ht gives the identity scalar identification and hb identifies the induced map with restriction. Thus the map is an isomorphism. For an empty cover hU forces X empty and the empty-cover sheaf axiom identifies J(X) with zero, as is the empty product in the target. Injectivity is unnecessary in this degree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EP; the source-library flasque route for positive degree, and sheaf gluing in degree zero. T2 second reading, 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The augmented Cech complex of an injective sheaf of modules on an open cover is exact",
+   "results": "Eight hits: MayerVietorisSquare.shortComplex_exact and shortComplex_shortExact; InjectiveResolution.ofCocomplex_exactAt_succ, cocomplex_exactAt_succ, exact_zero/exact_succ; no general injective module Cech augmentation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented Cech complex of an injective sheaf of modules on an open cover is exact",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*quasiIso|quasiIso.*cech|augmented.*[Cc]ech",
+   "results": "Nineteen hits about augmented Cech nerves and extra degeneracies; no theorem giving this augmentation quasi-isomorphism. Project searches found positive-degree vanishing and the explicit-complex comparison, but no degree-zero canonical augmentation quasi-isomorphism with this interface.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIsoAt",
+   "results": "12 hits: quasiIso_iff, quasiIsoAt_iff_exactAt and homology-map characterizations; no Cech augmentation theorem.",
+   "date": "2026-10-12",
+   "verdict": "generic assembly tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero cohomology of a sheaf Cech complex is its global sections",
+   "results": "8 hits on sheaf global sections and nonabelian cohomology; no degree-zero linear Cech augmentation quasi-isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on lean/: cechComplexFunctorHomologyIso, exactAt_cechComplex_of_isFlasque, kernel, quasiIsoAt",
+   "results": "Found the fully proved upstream flasque acyclicity and explicit-complex homology comparison, used to close the positive theorem. ModuleCechResolutionColumnZero concerns resolution columns rather than the Cech row and cannot supply the zero-degree theorem. No duplicate of either component found.",
+   "date": "2026-10-12",
+   "verdict": "positive component proved from existing tools; zero component remains open"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentation",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-injective-module-cech-augmentation",
+   "place": "Strict degree part of the augmented Cech quasi-isomorphism"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveModuleCechAugmentationZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.injectiveModuleCechAugmentation_quasiIsoAt_zero",
+  "statement": "theorem injectiveModuleCechAugmentation_quasiIsoAt_zero {X : Scheme.{u}} {ι : Type u}\n    (U : ι → X.Opens) (hU : iSup U = ⊤) (J : X.Modules) [Injective J]\n    (ht : (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op ⊤))).hom =\n      RingHom.id Γ(X, ⊤))\n    (b : (CochainComplex.single₀ (ModuleCat.{u} Γ(X, ⊤))).obj\n        ((RingedSpace.globalSectionsFunctor X.toRingedSpace).obj J) ⟶\n      (CategoryTheory.cechComplexFunctor U).obj J.presheafModuleCat)\n    (hb : b.f 0 =\n      (ModuleCat.restrictScalarsId'App\n        (X.ringCatSheaf.obj.map (isTerminalTop.op.to (op ⊤))).hom ht\n        (J.val.obj (op ⊤))).inv ≫\n      Pi.lift fun y : Fin 1 → ι =>\n        J.presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op) :\n    QuasiIsoAt b 0",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T160143-L-2566656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T160143-L-2566656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,6 +9,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationPositive
+import Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationZero
 
 /-! # The augmented Čech complex of an injective module
 
@@ -61,6 +63,13 @@ theorem injectiveModuleCechAugmentation_quasiIso {X : Scheme.{u}} {ι : Type u}
         (J.val.obj (op ⊤))).inv ≫
       Pi.lift fun y : Fin 1 → ι =>
         J.presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op) :
-    QuasiIso b := by sorry
+    QuasiIso b := by
+  rw [quasiIso_iff]
+  intro n
+  by_cases hn : n = 0
+  · subst n
+    exact injectiveModuleCechAugmentation_quasiIsoAt_zero U hU J ht b hb
+  · apply injectiveModuleCechAugmentation_quasiIsoAt_positive U hU J ht b hb n
+    omega
 
 end AlgebraicGeometry.Scheme.Modules
