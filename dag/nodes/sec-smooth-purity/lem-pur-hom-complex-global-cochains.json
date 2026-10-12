@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-hom-complex-global-cochains",
+ "kind": "statement",
+ "title": "Global sections of the sheaf Hom complex identify ordinary cochains",
+ "statement": "Let C be a site with topology J and R a sheaf of commutative rings. For arbitrary integer-indexed cochain complexes A,B of R-modules [def-pc-cochain-complex-modules] [def-weil-sheaf-of-modules-category], put H = Hom^bullet(A,B) [def-pur-hom-complex], using the internal Hom sheaves [def-pur-sheaf-hom], and let O be the rank-one free R-module sheaf. There exist additive equivalences e_n : Hom_R(O,H^n) ≃ Cochain^n(A,B) for every integer n, where Cochain^n consists of all families of module-sheaf maps A^p → B^(p+n). For i+1=j and every s : O → H^i, e_j(s followed by d_H) equals the usual external Hom differential δ(e_i(s)). No boundedness, acyclicity or injectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 21.34 (Tag 0A8X), product construction and signed differential; global version Equation 21.34.0.2 (Tag 0A8Z). Read on https://stacks.math.columbia.edu/tag/0A8X."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use SheafOfModules.unitHomEquiv and SheafOfModules.homObjSectionsEquiv to identify morphisms from the rank-one free module sheaf into homObj(M,N) with morphisms M → N. Their composite preserves addition and sends postcomposition with homObjMap(f,g) to precomposition by f and postcomposition by g; both assertions are definitional equalities in the existing constructions.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the actual Hom-complex product projections and differential formulas from homComplex_projections_exists. In degree n send s to the cochain with component e_{p,q}(s followed by π_{n,p,q}). Construct the inverse by the product-limit lift of the inverse component maps. The product projection identities and additive equivalence inverse identities prove both inverse laws. Additivity follows from add_comp and additivity of the factor equivalences.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the differential on an arbitrary component p,q with p+j=q. Use the specified differential projection formula with q prime = p+i and p prime = p+1. Composition distributes over subtraction and integer-unit scaling; the factor equivalence preserves those operations and turns homObjMap into ordinary pre/postcomposition. Thus the component equals the postcomposition term minus i.negOnePow times the precomposition term. Mathlib δ_v uses j.negOnePow for the second term, and j=i+1 gives j.negOnePow=-i.negOnePow. Cochain extensionality proves equality.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-sc-hom-complex-projections",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X and global Equation 0A8Z",
+  "description": "X2: explicit Lean construction from the existing internal-Hom equivalences, product universal property and signed differential formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of the sheaf Hom complex are ordinary cochains, compatibly with differentials",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of the sheaf Hom complex are ordinary cochains, compatibly with differentials",
+   "results": "CochainComplex.HomComplex, HomComplex_X, Cochain.ofHom and Cocycle.homOf are external constructions; none identifies the sheaf Hom-complex global sections.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "homObjSectionsEquiv|homComplex_global_cochains|unitHomEquiv in Mathlib, WeilConjectures and Sheaf",
+   "results": "Mathlib.Algebra.Category.ModuleCat.Sheaf.unitHomEquiv and source Sheaf.InternalHom.homObjSectionsEquiv give individual factors. Existing HomComplexSectionsCochains statements concern localized sections, and import RhomIntoKInjectiveLocal, which reaches the current item. No global cochain comparison found.",
+   "verdict": "no exact match; use the existing factor equivalences",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KInjectiveHomComplex",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "the proof paragraph asserting K-injectivity of Hom from a K-flat complex into a K-injective complex: its global-sections/cochains comparison",
+   "via": [
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-global-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexGlobalCochains",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexGlobalCochains.lean",
+  "declaration": "CategoryTheory.homComplex_global_cochains",
+  "statement": "theorem homComplex_global_cochains\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{max u v})\n    (A B : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) A B\n    ∃ e : ∀ n : ℤ, (SheafOfModules.unit R₀ ⟶ H.X n) ≃+\n        CochainComplex.HomComplex.Cochain A B n,\n      ∀ (i j : ℤ), i + 1 = j → ∀ s : SheafOfModules.unit R₀ ⟶ H.X i,\n        e j (s ≫ H.d i j) = CochainComplex.HomComplex.δ i j (e i s)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T225338-L-1815922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T225338-L-1815922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

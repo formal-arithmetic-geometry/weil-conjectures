@@ -26,50 +26,42 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal K^\\bullet$ be any acyclic complex of $\\mathcal O$-modules. By the definition of K-flatness, the total tensor complex $\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O}\\mathcal L^\\bullet)$ is acyclic.",
+   "text": "For an arbitrary acyclic test complex K and chain map f : K → Hom(L,I), let T = Tot(K ⊗ L). Apply the recorded definition of K-flatness to obtain T.Acyclic.",
    "uses": [
     "def-pc-kflat-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective), proof: first sentence"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-sc-derived-hom-tensor-total] (applied with $\\mathcal M^\\bullet=\\mathcal I^\\bullet$) there is an isomorphism of complexes of $\\mathcal O$-modules $\\mathcal Hom^\\bullet(\\mathcal K^\\bullet,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet))\\cong\\mathcal Hom^\\bullet(\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O}\\mathcal L^\\bullet),\\mathcal I^\\bullet)$.",
+   "text": "Obtain the isomorphism t : Hom(K,Hom(L,I)) ≅ Hom(T,I) from homComplex_tensorTotal_iso. Apply the global-cochain comparison to both sides. Represent the degree-zero cochain of f by a morphism z from the rank-one module sheaf to the degree-zero term of Hom(K,Hom(L,I)). Differential compatibility and δ(ofHom f)=0 imply z d = 0. The chain-map equation for t shows that b_0(z t_0) is an external cocycle from T to I.",
    "uses": [
-    "lem-sc-derived-hom-tensor-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A96 (lemma-compose), tensor-Hom calculation in the proof"
-   }
-  },
-  {
-   "text": "For the acyclic total tensor complex from Step 1, K-injectivity of $\\mathcal I^\\bullet$ gives $\\operatorname{Hom}_{K(\\mathcal O)}(\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O}\\mathcal L^\\bullet),\\mathcal I^\\bullet)=0$. For complexes $\\mathcal A^\\bullet,\\mathcal B^\\bullet$ of $\\mathcal O$-modules, the global sections $\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal B^\\bullet))$ form the complex whose degree-$n$ terms are families of $\\mathcal O$-linear maps $\\mathcal A^p\\to\\mathcal B^{p+n}$ with the differential of [def-pur-hom-complex]; its degree-zero cocycles are the morphisms of complexes and its degree-zero coboundaries are exactly the null-homotopic ones, so $H^0(\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(\\mathcal A^\\bullet,\\mathcal B^\\bullet)))=\\operatorname{Hom}_{K(\\mathcal O)}(\\mathcal A^\\bullet,\\mathcal B^\\bullet)$. Taking global sections and $H^0$ of the isomorphism of Step 2 therefore gives $\\operatorname{Hom}_{K(\\mathcal O)}(\\mathcal K^\\bullet,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet))=0$ for every acyclic $\\mathcal K^\\bullet$. By the definition of K-injectivity, $\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)$ is K-injective.",
-   "uses": [
-    "def-pur-kinjective-complex",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pur-hom-complex-global-cochains",
     "def-pur-hom-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective), proof: conclusion"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib CochainComplex.IsKInjective.eq_δ_of_cocycle with the acyclic T to express this cocycle as δα for a degree-minus-one cochain α. Represent α by b_{-1}^{-1}(α), then postcompose with t^{-1}_{-1}. The inverse-isomorphism and chain-map identities show that its differential is z. Differential compatibility of a gives δ(a_{-1}(s)) = ofHom f. Mathlib Cochain.equivHomotopy converts this equality into Homotopy f 0. Supply these homotopies to the IsKInjective constructor.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-kflat-complex",
-  "def-pur-kinjective-complex",
   "def-pur-hom-complex",
+  "def-pur-kinjective-complex",
+  "lem-pur-hom-complex-global-cochains",
   "lem-sc-derived-hom-tensor-total"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 0A96 (lemma-RHom-from-K-flat-into-K-injective), proof"
+  "place": "Lemma 21.34.8 (Tag 0A96), implemented directly on cocycles and boundaries via the proved global-cochain comparison",
+  "description": "X2: kernel-checked combination of the existing tensor-Hom theorem and Mathlib K-injectivity, without passing through homology quotients."
  },
  "mathlib_searches": [
   {
@@ -156,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T225338-L-1815922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
