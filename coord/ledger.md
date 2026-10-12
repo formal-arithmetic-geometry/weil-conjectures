@@ -7897,3 +7897,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.PicardLocusClosed (stage 3; reviewer PASS; first push; landing 20261012T135303-L-1686121 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:53 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.RingedSpacePastedPullbackAdjunction (stage 3; reviewer PASS; first push; landing 20261012T135303-L-1686313 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.SectionComponentGenericDichotomy (stage 3; reviewer PASS; first push; landing 20261012T135304-L-1686480 (interface); batch 20261012T135212; modules 2; new nodes 1)
+- 13:53 L: merged deliver/Q1/Sheaf.CategoryTheory.SheafRingObjectsSurjective (stage 3; reviewer PASS; first push; landing 20261012T135304-L-1686618 (interface); batch 20261012T135212; modules 2; new nodes 1)
