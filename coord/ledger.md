@@ -5850,3 +5850,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:31 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian (stage 3; reviewer PASS; first push; landing 20261012T023042-L-1092605 (interface); modules 3; new nodes 2)
 - 02:32 L: returned deliver/E1/Sheaf.AlgebraicGeometry.ModuleAcyclicUnderlyingSections (reviewer RETURN: (reviewer X-b4937, head b4937e93d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
 - 02:32 L: returned deliver/M1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints (reviewer RETURN: (reviewer X-9d0ed, head 9d0ed174b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ze)
+- 02:32 L: returned deliver/T1/WeilConjectures.ConstructibleSheaf.KernelCokernel (reviewer RETURN: (reviewer X-be294, head be29498f0) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.Constructi)
