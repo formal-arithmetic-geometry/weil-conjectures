@@ -232,7 +232,7 @@ lemma injective_atPrimeToField : Function.Injective (atPrimeToField Q) := by
   rw [IsLocalization.mk'_eq_zero_iff]
   exact ⟨1, by rw [OneMemClass.coe_one, one_mul]; exact Subtype.ext hx⟩
 
-variable [IsDomain R] [IsSepClosed Ω] [Algebra.IsAlgebraic R Ω]
+variable [IsSepClosed Ω] [Algebra.IsAlgebraic R Ω]
 
 /-- The localization at a prime of the integral closure of a domain `R` in a separably closed
 field `Ω` algebraic over `R` is strictly henselian. -/
