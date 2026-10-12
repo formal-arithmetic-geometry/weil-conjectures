@@ -30,20 +30,46 @@
  ],
  "proof": [
   {
-   "text": "This is the corresponding relative/absolute component of the flat-prime support and smooth-composition argument in Tag 07CT.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Stacks Tag 07CT, proof: Flat-prime support argument and smooth composition"
-   }
+   "text": "Apply Algebra.singularIdeal_map_le_relative_of_annihilator_bound with the given dB, hfp, pi, hR and hbound to obtain map(dB, H(D/R)) <= H(B/D). Equip B with the D-algebra structure induced by dB; its scalar tower over R follows from dB.comp_algebraMap.",
+   "uses": [
+    "lem-weil-pbc-singular-ideals-relative-bound"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reduce the desired inclusion using Ideal.map_radical_le, Ideal.radical_mono, Ideal.map_le_iff_le_comap and Ideal.span_le to proving that dB(f) is a smooth localization element whenever D_f is smooth over R. Such f belongs to H(D/R) by Ideal.subset_span and Ideal.le_radical. The relative bound places dB(f) in H(B/D), so Algebra.smooth_localization_of_mem_singularIdeal makes B_{dB(f)} smooth over D.",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-singular-ideal-localization-smooth"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the D_f-algebra structure on B_{dB(f)} by Localization.awayMap. IsLocalization.map_eq verifies its scalar tower over D, and IsScalarTower.to₁₃₄ gives the scalar tower over R. Algebra.FormallySmooth.localization_base (Submonoid.powers f) changes the base of its formal smoothness from D to D_f. Algebra.FinitePresentation.of_restrict_scalars_finitePresentation gives finite presentation over D_f, since D_f is finite type over D and B_{dB(f)} is finitely presented over D by smoothness. Together these give Smooth D_f B_{dB(f)}.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose Smooth R D_f with Smooth D_f B_{dB(f)} using Algebra.Smooth.comp. This places every mapped generator in smoothElements R B; the span and radical reductions finish the absolute inclusion. The argument also permits zero localizations, zero rings, and nilpotent generators, and introduces no nontriviality assumption.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-singular-ideals-relative-bound",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07CT (lemma-desingularize-strictly-standard, lines 1831-1860), applying Lemma Tag 07CR (lemma-desingularize, line 1665)"
+  "place": "Stacks Tag 07CT, smooth-composition paragraph; Q2 Lean proof via relative containment and principal localizations, with Mathlib FormallySmooth.localization_base and Smooth.comp"
  },
  "mathlib_searches": [
   {
@@ -111,10 +137,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T154837-L-2475057",
-  "kind": "interface",
+  "landing": "20261012T184334-L-4016359",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
