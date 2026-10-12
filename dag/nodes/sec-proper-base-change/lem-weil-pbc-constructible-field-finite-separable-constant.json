@@ -29,118 +29,26 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the stratification of a one-point space).* By [def-weil-pbc-etale-constructible-sheaf] there is a stratification $(\\iota_m:Z_m\\to\\operatorname{Spec}k)_{m<n}$ [def-constructible-stratification]: pairwise disjoint locally closed subsets $T_m$ covering $\\operatorname{Spec}k$ and immersions $\\iota_m$ with set-theoretic image $T_m$, such that every $\\iota_m^{-1}G$ is finite locally constant in the sense of Stacks 03RU as spelled out in (b) of that definition. By [def-weil-affine-spectrum] $\\operatorname{Spec}k$ has exactly one point (the zero ideal is the only prime of a field). As the $T_m$ cover this point and are pairwise disjoint, exactly one stratum, say $T_{m_0}$, is nonempty, and $T_{m_0}=\\operatorname{Spec}k$. Put $Z=Z_{m_0}$, $\\iota=\\iota_{m_0}:Z\\to\\operatorname{Spec}k$; then $Z\\neq\\emptyset$ (its image is $T_{m_0}\\neq\\emptyset$), $\\iota$ is an immersion with image all of $\\operatorname{Spec}k$, and by (b) there are an etale covering $\\{u_i:U_i\\to Z\\}_{i\\in I}$ (a jointly surjective family of etale morphisms) and finite $\\Lambda$-modules $M_i$ with isomorphisms of sheaves of $\\Lambda_{U_i}$-modules $\\alpha_i:(\\iota^{-1}G)|_{U_i}\\xrightarrow{\\sim}\\underline{M_i}$. (Condition (a), constructibility of the strata, is not needed.)",
+   "text": "Apply the extracted finite trivializing datum theorem to hG, then apply the finite-separable extension theorem to that datum and its finite constant values.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-constructible-stratification",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RU (definition-finite-locally-constant), line 9917; the definition of constructible sheaves of Lambda-modules (Section 09Y5ff.) as recorded in def-weil-pbc-etale-constructible-sheaf"
-   }
-  },
-  {
-   "text": "*Step 2 ($\\iota$ is an isomorphism).* The image of the immersion $\\iota$ is all of $\\operatorname{Spec}k$, a closed subset, so $\\iota$ is a closed immersion by [lem-weil-pbc-immersion-closed-image-closed-immersion]. By the affine description of closed immersions in [def-weil-closed-immersion] (Stacks 01QO), applied to the affine open $\\operatorname{Spec}k$ itself, there is an ideal $I\\subseteq k$ with $\\iota$ isomorphic over $\\operatorname{Spec}k$ to $\\operatorname{Spec}(k/I)\\to\\operatorname{Spec}k$. As $k$ is a field, $I=0$ or $I=k$; $I=k$ would give $Z\\cong\\operatorname{Spec}(0)=\\emptyset$, contradicting $Z\\neq\\emptyset$ (step 1). So $I=0$ and $\\iota$ is isomorphic over $\\operatorname{Spec}k$ to $\\operatorname{Spec}(\\mathrm{id}_k)=\\mathrm{id}$, i.e. $\\iota$ is an isomorphism of schemes [def-weil-affine-spectrum].",
-   "uses": [
-    "lem-weil-pbc-immersion-closed-image-closed-immersion",
-    "def-weil-closed-immersion",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-constructible-field-finite-separable-constant-step1",
+    "lem-weil-pbc-constructible-field-finite-separable-constant-step3-7"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 01QO (lemma-closed-immersion): closed immersions into an affine scheme Spec(R) are Spec(R/I); agent-written argument, Stacks 09Z6 gives none"
-   }
-  },
-  {
-   "text": "*Step 3 (a point of some $U_i$ and its residue field; Stacks 02GL(2)).* Since $Z\\neq\\emptyset$ and the family $\\{u_i\\}$ is jointly surjective, there are $i\\in I$ and a point $x\\in U_i$. By [lem-weil-pbc-affine-open-spec-points] there are an affine open $V\\subseteq U_i$ containing $x$, a ring $B$ with $V\\cong\\operatorname{Spec}B$ (via the open immersion $v:\\operatorname{Spec}B\\to U_i$ with image $V$), and a prime $\\mathfrak q\\subset B$ corresponding to $x$. The composite $e=\\iota\\circ u_i\\circ v:\\operatorname{Spec}B\\to\\operatorname{Spec}k$ is etale by [lem-weil-pbc-etale-composition-cancellation]: $v$ is an open immersion, hence etale (1); $\\iota$ is an isomorphism (step 2), in particular an open immersion, hence etale (1); $u_i$ is etale; and composites of etale morphisms are etale (2). By [def-weil-affine-spectrum] $e=\\operatorname{Spec}\\varphi$ for a unique ring map $\\varphi:k\\to B$. The preimage $\\varphi^{-1}(\\mathfrak q)$ is a prime of $k$, hence $0$. By [lem-weil-pbc-etale-algebra-residue-field-separable] (with $A=k$, $\\mathfrak p=0$) the residue field $K:=\\kappa(\\mathfrak q)$ is a finite separable extension of $\\kappa(0)$ via the induced map. By [lem-weil-pbc-spec-field-point-residue-field] (1), $\\kappa(0)$ is a fraction field of $k/0=k$ and $k\\to\\kappa(0)$ is injective with kernel $0$; since $k$ is a field, $k\\to\\kappa(0)$ is an isomorphism. Hence, with $\\psi:k\\xrightarrow{\\varphi}B\\to\\kappa(\\mathfrak q)=K$ (the composite equals $k\\to\\kappa(0)\\to\\kappa(\\mathfrak q)$, the residue field maps being induced by $\\varphi$ on localizations), $K$ is a finite separable field extension of $k$ via $\\psi$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-etale-algebra-residue-field-separable",
-    "lem-weil-pbc-spec-field-point-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 02GL (lemma-etale-over-field) (2), line 8175: fibres of etale morphisms are disjoint unions of spectra of finite separable extensions; here only the residue field of one point is used"
-   }
-  },
-  {
-   "text": "*Step 4 (the morphism $\\pi$ factors through $U_i$).* Let $s:\\operatorname{Spec}K\\to\\operatorname{Spec}B$ be $\\operatorname{Spec}$ of the canonical map $B\\to\\kappa(\\mathfrak q)=K$, and $j=v\\circ s:\\operatorname{Spec}K\\to U_i$. By functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum], $\\iota\\circ u_i\\circ j=e\\circ s=\\operatorname{Spec}(\\varphi)\\circ\\operatorname{Spec}(B\\to K)=\\operatorname{Spec}(\\psi)=\\pi$, the morphism induced by the extension $K/k$ of step 3.",
-   "uses": [
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (lemma-constructible-maps-into-constant), line 12969-12971 ('F|_Spec(K)'): agent-written factorization"
-   }
-  },
-  {
-   "text": "*Step 5 (restriction to $U_i$ is the inverse image along $u_i$, $\\Lambda$-linearly).* Put $H=\\iota^{-1}G$, a sheaf of $\\Lambda_Z$-modules [prop-weil-pbc-inverse-image-modules-exact] (2). By [lem-weil-pbc-etale-inverse-image-restriction] (1) ($u_i$ is etale) there is an isomorphism of abelian sheaves $\\rho_H:u_i^{-1}H\\xrightarrow{\\sim}H|_{U_i}$, and by its clause (2) its adjoint under $u_i^{-1}\\dashv u_{i,*}$ is the map $H\\to u_{i,*}(H|_{U_i})$ given at $W\\in Z_{\\Et}$ by the restriction map $H(W)\\to H(W\\times_ZU_i)$ of $H$ along the projection. Restriction maps of a sheaf of $\\Lambda_Z$-modules are linear over the restriction maps of $\\Lambda_Z$, which (through the identification $u_i^{-1}\\Lambda_Z\\cong\\Lambda_{U_i}$ of [prop-weil-pbc-inverse-image-modules-exact] (1) and the unit $\\Lambda_Z\\to u_{i,*}u_i^{-1}\\Lambda_Z$) is how $\\Lambda_Z$ acts on $u_{i,*}(H|_{U_i})$; so this adjoint is $\\Lambda_Z$-linear, and by [lem-weil-pbc-inverse-image-module-adjunction] $\\rho_H$ is $\\Lambda_{U_i}$-linear: an isomorphism of sheaves of $\\Lambda$-modules. Composing with $\\alpha_i$ of step 1 gives $\\beta_i=\\alpha_i\\circ\\rho_H:u_i^{-1}\\iota^{-1}G\\xrightarrow{\\sim}\\underline{M_i}$ on $(U_i)_{\\Et}$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-module-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RU (restriction F|_{U_i}); agent-written identification with the inverse image"
-   }
-  },
-  {
-   "text": "*Step 6 (inverse images along the composite).* By [lem-weil-pbc-inverse-image-composition] (2), applied to $(u,v)=(\\iota,u_i)$ and then to $(u,v)=(\\iota\\circ u_i,j)$, there are isomorphisms $c:j^{-1}u_i^{-1}\\iota^{-1}G\\xrightarrow{\\sim}j^{-1}(\\iota\\circ u_i)^{-1}G\\xrightarrow{\\sim}(\\iota\\circ u_i\\circ j)^{-1}G=\\pi^{-1}G$ (step 4), the first being $j^{-1}$ of $c_{\\iota,u_i,G}$. Each $c_{u,v,G}$ is characterized in clause (2) as the map whose adjoint under the composite adjunction $v^{-1}u^{-1}\\dashv u_*v_*$ is $d_{u,v}\\circ\\eta_{u\\circ v,G}$; the unit $\\eta_{u\\circ v,G}$ is $\\Lambda$-linear and $d_{u,v}$ is given on sections by the maps of the sheaf $(u\\circ v)^{-1}G$ along isomorphisms of objects, hence $\\Lambda$-linear, so by [lem-weil-pbc-inverse-image-module-adjunction] (applied to $u$ and then to $v$) $c_{u,v,G}$ is $\\Lambda$-linear; and $j^{-1}$ of a linear map is linear [prop-weil-pbc-inverse-image-modules-exact] (2). So $c$ is an isomorphism of sheaves of $\\Lambda$-modules on $(\\operatorname{Spec}K)_{\\Et}$.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-inverse-image-module-adjunction",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6, line 12969-12971; agent-written"
-   }
-  },
-  {
-   "text": "*Step 7 (the inverse image of a constant sheaf is constant; conclusion).* By [lemma-constructible-pullback-constant] with values in $\\Lambda$-modules there is an isomorphism $j^*\\underline{M_i}_{U_i}\\cong\\underline{M_i}_{\\operatorname{Spec}K}$, where $j^*$ is the left adjoint of the direct image on sheaves of $\\Lambda$-modules; $j^{-1}$ on sheaves of $\\Lambda$-modules is also left adjoint to that direct image [prop-weil-pbc-inverse-image-modules-exact] (3), so $j^{-1}\\cong j^*$ by uniqueness of adjoints and $\\gamma:j^{-1}\\underline{M_i}\\xrightarrow{\\sim}\\underline{M_i}$, the constant sheaf of $\\Lambda$-modules with value $M_i$ on $(\\operatorname{Spec}K)_{\\Et}$ [def-weil-pbc-constant-sheaf]. With $M=M_i$, a finite $\\Lambda$-module (step 1), the composite $\\pi^{-1}G\\xrightarrow{c^{-1}}j^{-1}u_i^{-1}\\iota^{-1}G\\xrightarrow{j^{-1}(\\beta_i)}j^{-1}\\underline{M_i}\\xrightarrow{\\gamma}\\underline M$ (steps 5, 6) is an isomorphism of sheaves of $\\Lambda$-modules, and $K/k$ is finite separable (step 3). This is the statement.",
-   "uses": [
-    "lemma-constructible-pullback-constant",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6, line 12969-12971 ('F|_Spec(K) is the constant sheaf with value E')"
+    "document": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstant.lean",
+    "place": "theorem proof body"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-constructible-stratification",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-immersion-closed-image-closed-immersion",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "lem-weil-pbc-spec-field-point-residue-field",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-inverse-image-module-adjunction",
-  "lem-weil-pbc-inverse-image-composition",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-constant-sheaf"
+  "lem-weil-pbc-constructible-field-finite-separable-constant-step1",
+  "lem-weil-pbc-constructible-field-finite-separable-constant-step3-7"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 09Z6 (lemma-constructible-maps-into-constant), line 12969-12971, where the claim is stated without proof; steps follow Definition 03RU and Morphisms Lemma 02GL(2) (literature/stacks-project/morphisms.tex, line 8175)"
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstant.lean",
+  "place": "composition of the two intermediate theorems"
  },
  "mathlib_searches": [
   {
@@ -251,5 +159,15 @@
   "group": "K1",
   "result": "pass",
   "note": "k Field Type u; Λ CommRing+Finite (u+1); G Sheaf smallEtale (ModuleCat Λ); hG = recorded Scheme.IsConstructibleEtaleModuleSheaf; ∃K Field+Algebra k K, FiniteDimensional ∧ Algebra.IsSeparable; ∃M ModuleCat Λ, Finite carrier; Etale.upperStar along Spec.map (algebraMap k K) ≅ constantSheaf.obj M; #check'd upperStar/constantSheaf/IsConstructibleEtaleModuleSheaf; compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2628925",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

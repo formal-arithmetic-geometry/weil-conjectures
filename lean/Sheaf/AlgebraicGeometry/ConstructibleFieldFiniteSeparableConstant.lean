@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import Sheaf.AlgebraicGeometry.SpecFieldPointResidueField
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantDatum
+import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantCore
 
 /-!
 # Constructible sheaves over a field become constant after finite separable extension
@@ -83,6 +85,7 @@ theorem constructible_field_finite_separable_constant
             (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj G ≅
             (constantSheaf (Spec (CommRingCat.of K)).smallEtaleTopology
               (ModuleCat.{u + 1} Λ)).obj M) := by
-  sorry
+  obtain ⟨d, hd⟩ := constructible_field_finite_separable_constant_datum k Λ G hG
+  exact constructible_field_finite_separable_constant_of_datum k Λ G d hd
 
 end AlgebraicGeometry

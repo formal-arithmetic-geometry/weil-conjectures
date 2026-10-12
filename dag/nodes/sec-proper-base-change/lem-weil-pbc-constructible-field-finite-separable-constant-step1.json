@@ -1,0 +1,101 @@
+{
+ "id": "lem-weil-pbc-constructible-field-finite-separable-constant-step1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-field-finite-separable-constant",
+   "place": "step decomposition",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Extraction of a finite trivializing datum",
+ "statement": "For a field $k$, finite commutative ring $\\\\Lambda$ and constructible sheaf $G$ as in [def-weil-pbc-etale-constructible-sheaf], there exists a $LocallyConstantDatum\\\\ d$ for $G$ such that every member of its finite etale cover restricts $G$ to a constant sheaf with a finite $\\\\Lambda$-module value.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 09Z6"
+ },
+ "proof": [
+  {
+   "text": "Unpack the constructibility witness: on the one-point spectrum of a field, retain the nonempty stratum and its locally constant datum, whose cover members carry finite constant values.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstantDatum.lean",
+    "place": "the theorem proof obligation"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 09Z6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite trivializing datum constructible sheaf field",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstantDatum",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible_field_finite_separable_constant",
+   "results": "only this declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstantDatum.lean",
+  "declaration": "AlgebraicGeometry.constructible_field_finite_separable_constant_datum",
+  "statement": "theorem constructible_field_finite_separable_constant_datum\n    (k : Type u) [Field k]\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (G : Sheaf (Spec (CommRingCat.of k)).smallEtaleTopology\n      (ModuleCat.{u + 1} Λ))\n    (hG : Scheme.IsConstructibleEtaleModuleSheaf G) :\n    ∃ d : LocallyConstantDatum G, ∀ i : d.cover.I₀,\n      ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧\n        Nonempty ((G.over (d.cover.etalePrecoverageToEtale i)) ≅\n          (constantSheaf\n            ((Spec (CommRingCat.of k)).smallEtaleTopology.over\n              (d.cover.etalePrecoverageToEtale i))\n            (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2628925",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2628925",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
