@@ -49,7 +49,17 @@ theorem cohomology_of_iso_invertible_single_zero (X : Scheme.{u})
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj M)) ∧
     Nonempty ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M ≅ N) := by
-  sorry
+  rcases hM with ⟨e⟩
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  constructor
+  · intro i hi
+    exact IsZero.of_iso
+      (HomologicalComplex.isZero_single_obj_homology (ComplexShape.up ℤ) 0 N i hi)
+      ((DerivedCategory.homologyFunctor C i).mapIso e ≪≫
+        (DerivedCategory.homologyFunctorFactors C i).app
+          ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj N))
+  · exact ⟨(DerivedCategory.homologyFunctor C 0).mapIso e ≪≫
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso C 0).app N⟩
 
 /-- An object isomorphic to a locally free sheaf of rank `r` shifted by `-i` has that sheaf
 as its degree-`i` cohomology and vanishing cohomology in every other degree.
@@ -71,6 +81,18 @@ theorem cohomology_of_iso_locallyFree_shift (X : Scheme.{u})
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj M)) ∧
     Nonempty ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj M ≅ E) := by
-  sorry
+  rcases hM with ⟨e⟩
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let e' : M ≅ (DerivedCategory.singleFunctor C i).obj E :=
+    e ≪≫ ((DerivedCategory.singleFunctors C).shiftIso (-i) i 0 (by simp)).app E
+  constructor
+  · intro j hj
+    exact IsZero.of_iso
+      (HomologicalComplex.isZero_single_obj_homology (ComplexShape.up ℤ) i E j hj)
+      ((DerivedCategory.homologyFunctor C j).mapIso e' ≪≫
+        (DerivedCategory.homologyFunctorFactors C j).app
+          ((HomologicalComplex.single C (ComplexShape.up ℤ) i).obj E))
+  · exact ⟨(DerivedCategory.homologyFunctor C i).mapIso e' ≪≫
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso C i).app E⟩
 
 end AlgebraicGeometry
