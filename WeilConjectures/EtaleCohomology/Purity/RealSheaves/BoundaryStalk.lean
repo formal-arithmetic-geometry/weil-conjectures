@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.InertiaNeighbourhood
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.StalkTransport
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 public import WeilConjectures.ConstructibleSheaf.LowerStarSpecialization
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
@@ -394,6 +394,59 @@ end Invariants
 
 end Surjective
 
+section Transport
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [ConnectedSpace U]
+  {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] {s : Spec (.of Ω') ⟶ U}
+  (τ : FiniteEtale.fiber (genericGeometricPoint (Ω := Ω) j) ≅ FiniteEtale.fiber s)
+  (G : Type u) [Group G] [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)] [TopologicalSpace G]
+  [IsTopologicalGroup G] [CompactSpace G]
+  [PreGaloisCategory.IsFundamentalGroup (FiniteEtale.fiber s) G]
+
+omit [IsGalois C.functionField Ω] in
+/-- Transported along a path `τ` from the generic geometric point `η` to a base point `s`, the
+action of `σ ∈ Gal(Ω / k(C))` on the stalk `F_η` becomes the action of its image in `π₁(U, s)`
+on the stalk `F_s` (`AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.smul`). -/
+theorem transport_galoisStalkMap (F : U.FiniteLocallyConstantModule Λ)
+    (σ : Ω ≃ₐ[C.functionField] Ω)
+    (x : FiniteLocallyConstantModule.stalk (genericGeometricPoint (Ω := Ω) j) F) :
+    FiniteLocallyConstantModule.transport _ s τ F (galoisStalkMap F.obj σ x) =
+      FiniteLocallyConstantModule.smul s G (galoisToFundamentalGroup (genericPointLift j) τ G σ)
+        (FiniteLocallyConstantModule.transport _ s τ F x) := by
+  let η := genericGeometricPoint (Ω := Ω) j
+  let F' := (FiniteLocallyConstantModule.forget U Λ).obj F
+  let i := FiniteLocallyConstant.repIso F'
+  obtain ⟨V, v, z, hz⟩ := (pointSmallEtale η).toPresheafFiber_jointly_surjective
+    (P := F'.obj.obj) ((FiniteLocallyConstantModule.forgetStalkEquiv η F).symm x)
+  have hx : (pointSmallEtale η).toPresheafFiber V v F.obj.obj z = x := by
+    rw [← FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber η F]
+    exact (congrArg (FiniteLocallyConstantModule.forgetStalkEquiv η F) hz).trans
+      (Equiv.apply_symm_apply _ x)
+  have hgerm (w : (pointSmallEtale η).fiber.obj V) :
+      FiniteLocallyConstant.isoStalkEquiv η i
+        ((FiniteLocallyConstantModule.forgetStalkEquiv η F).symm
+          ((pointSmallEtale η).toPresheafFiber V w F.obj.obj z)) =
+        ULift.up ((pointSmallEtale η).fiber.map (i.hom.hom.hom.app (op V) z).down w) := by
+    rw [← FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber η F,
+      Equiv.symm_apply_apply, FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber]
+  have hσ : galoisStalkMap F.obj σ x = (pointSmallEtale η).toPresheafFiber V
+      ((pointSmallEtaleHom η (σ : Ω →+* Ω) (specMap_comp_genericGeometricPoint j σ)).hom.app V v)
+        F.obj.obj z := by
+    rw [← hx]
+    exact ConcreteCategory.congr_hom (toPresheafFiber_pointSmallEtaleHom_sheafFiber_app η
+      (σ : Ω →+* Ω) (specMap_comp_genericGeometricPoint j σ) F.obj V v) z
+  apply (FiniteLocallyConstantModule.forgetStalkEquiv s F).symm.injective
+  apply (FiniteLocallyConstant.stalkEquiv s F').injective
+  simp only [FiniteLocallyConstantModule.transport, FiniteLocallyConstantModule.smul,
+    Equiv.symm_apply_apply]
+  rw [FiniteLocallyConstant.isoStalkEquiv_smul, FiniteLocallyConstant.isoStalkEquiv_transport,
+    FiniteLocallyConstant.isoStalkEquiv_transport, hσ, hgerm, ← hx, hgerm]
+  refine congrArg ULift.up ((congrArg (τ.hom.app _) ?_).trans
+    (galoisToFundamentalGroup_smul (genericPointLift j) τ G σ _ _).symm)
+  exact fiber_ext _ (Category.assoc _ _ _)
+
+end Transport
+
 end Etale
 
 namespace WeilGroup.BoundaryChart
@@ -462,6 +515,73 @@ theorem boundaryStalkEquiv_boundaryStalkMap (hz : z ∉ Set.range j.base) {σ : 
     (c.boundaryStalkEquiv F hz (boundaryStalkMap c.point hσ F y)).1 =
       galoisStalkMap F σ (c.boundaryStalkEquiv F hz y).1 :=
   ConcreteCategory.congr_hom (boundaryStalkMap_comp_boundarySpecialization j c.point hσ F) y
+
+section Representation
+
+variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
+  (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
+  [∀ P, MulAction GU ((FiniteEtale.fiber sU).obj P)]
+  [PreGaloisCategory.IsFundamentalGroup (FiniteEtale.fiber sU) GU]
+
+/-- The finite locally constant sheaf `F` as an object of the category of finite locally
+constant sheaves of `Λ`-modules. -/
+abbrev flc : U.FiniteLocallyConstantModule Λ := ⟨F, inferInstance⟩
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
+omit [Finite K] in
+lemma map_inertiaInvariants_transport :
+    (inertiaInvariants j c.point F).map (FiniteLocallyConstantModule.transportLinearEquiv
+      _ sU (genericPath j sU) (flc F)).toLinearMap =
+      FiniteLocallyConstantModule.invariants sU GU (flc F) (inertiaGroup sU GU c c.point) := by
+  let T := FiniteLocallyConstantModule.transportLinearEquiv
+    _ sU (genericPath j sU) (flc F)
+  have hT (σ : Gal(Ω/C.functionField)) (x) : T (galoisStalkMap F σ x) =
+      FiniteLocallyConstantModule.smul sU GU (genericGaloisMap j sU GU σ) (T x) :=
+    transport_galoisStalkMap j (genericPath j sU) GU (flc F) σ x
+  ext y
+  simp only [Submodule.mem_map, LinearEquiv.coe_coe]
+  constructor
+  · rintro ⟨x, hx, rfl⟩ _ ⟨σ, hσ, rfl⟩
+    rw [← hT, hx σ hσ]
+  · intro hy
+    refine ⟨T.symm y, fun σ hσ ↦ T.injective ?_, T.apply_symm_apply y⟩
+    rw [hT, T.apply_symm_apply]
+    exact hy _ ⟨σ, hσ, rfl⟩
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level, representation form):
+the boundary stalk `(j_* F)_x̄` is isomorphic to the invariants, in the stalk `F_{s_U}` with its
+action of `π₁(U₀, s_U)` (the Galois correspondence), of the image of the inertia group at the
+point `Q` of the chart. -/
+noncomputable def boundaryStalkEquivInvariants (hz : z ∉ Set.range j.base) :
+    ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ) ≃ₗ[Λ]
+      FiniteLocallyConstantModule.invariants sU GU (flc F) (inertiaGroup sU GU c c.point) :=
+  (c.boundaryStalkEquiv F hz).trans (LinearEquiv.ofSubmodules _ _ _
+    (c.map_inertiaInvariants_transport F sU GU))
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (Frobenius equivariance, representation form):
+for `σ` in the decomposition group of `Q`, the identification of the boundary stalk with the
+inertia invariants in `F_{s_U}` intertwines the action of the residue automorphism of `σ` on
+`(j_* F)_x̄` with the action of the image of `σ` in `π₁(U₀, s_U)`. -/
+theorem boundaryStalkEquivInvariants_boundaryStalkMap (hz : z ∉ Set.range j.base)
+    {σ : Gal(Ω/C.functionField)}
+    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) c.point)
+    (y : ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ)) :
+    (c.boundaryStalkEquivInvariants F sU GU hz (boundaryStalkMap c.point hσ F y)).1 =
+      FiniteLocallyConstantModule.smul sU GU (genericGaloisMap j sU GU σ)
+        (c.boundaryStalkEquivInvariants F sU GU hz y).1 := by
+  change FiniteLocallyConstantModule.transport _ sU (genericPath j sU) (flc F)
+      (c.boundaryStalkEquiv F hz (boundaryStalkMap c.point hσ F y)).1 = _
+  rw [c.boundaryStalkEquiv_boundaryStalkMap F hz hσ y]
+  exact transport_galoisStalkMap j (genericPath j sU) GU (flc F) σ _
+
+end Representation
 
 end WeilGroup.BoundaryChart
 

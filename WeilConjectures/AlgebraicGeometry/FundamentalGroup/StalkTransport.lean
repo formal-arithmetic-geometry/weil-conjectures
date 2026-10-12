@@ -191,6 +191,28 @@ lemma transportLinearEquiv_apply (F : Y.FiniteLocallyConstantModule Λ) (x : sta
     transportLinearEquiv s s' τ F x = transport s s' τ F x :=
   rfl
 
+section Invariants
+
+variable [ConnectedSpace Y] (G : Type u) [Group G]
+  [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
+  [PreGaloisCategory.IsNaturalSMul (FiniteEtale.fiber s) G]
+
+lemma smul_stalk_zero (F : Y.FiniteLocallyConstantModule Λ) (g : G) :
+    smul s G g (0 : stalk s F) = 0 := by
+  have := smul_smul s G g (0 : Λ) (0 : stalk s F)
+  rwa [zero_smul, zero_smul] at this
+
+/-- The invariants of a subgroup `H` of the fundamental group `G = π₁(Y, s)` in the stalk `F_s`
+of a finite locally constant sheaf of `Λ`-modules. -/
+def invariants (F : Y.FiniteLocallyConstantModule Λ) (H : Subgroup G) :
+    Submodule Λ (stalk s F) where
+  carrier := {x | ∀ g ∈ H, smul s G g x = x}
+  add_mem' {a b} ha hb g hg := by rw [smul_add, ha g hg, hb g hg]
+  zero_mem' g _ := smul_stalk_zero s G F g
+  smul_mem' c x hx g hg := by rw [smul_smul, hx g hg]
+
+end Invariants
+
 end FiniteLocallyConstantModule
 
 end AlgebraicGeometry.Scheme
