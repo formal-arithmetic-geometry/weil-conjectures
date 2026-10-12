@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+import Sheaf.AlgebraicGeometry.LocalPullbackAdjointStalkIso
+import Sheaf.AlgebraicGeometry.LocalDirectImageStalkCohomology
 
 /-! # Transport of an arbitrary sheaf comparison to local total cohomology
 
@@ -25,6 +27,8 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
+set_option maxHeartbeats 750000 in
+-- Elaborating the nested right-derived scalar transports needs additional heartbeats.
 /-- An arbitrary isomorphism beta from the local pullback of G to the local higher
  direct image transports the stalk of G to total cohomology. If its adjoint sends
  a section s to the canonical class of xi, the transported germ restricts to xi.
@@ -86,6 +90,40 @@ theorem localDerived_stalk_transport {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)
           ((Scheme.Modules.restrictAdjunction
             ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app
               ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p
-          (e.toLinearMap (TopCat.Presheaf.germ G.presheaf V y hy s)) = xi := by sorry
+          (e.toLinearMap (TopCat.Presheaf.germ G.presheaf V y hy s)) = xi := by
+  let H := ((Scheme.Modules.pushforward
+    (pullback.fst (Y.fromSpecStalk y) f)).rightDerived p).obj
+      ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)
+  let N := (Scheme.Modules.pushforward (Y.fromSpecStalk y)).obj H
+  let a : G ⟶ N := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
+    (Y.fromSpecStalk y))).homEquiv _ _ beta
+  have ha : IsIso ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map a) :=
+    localPullback_adjoint_stalk_isIso Y y G _ beta
+  obtain ⟨e, he⟩ := localDirectImage_stalk_cohomology f y F p
+  refine ⟨(asIso ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map a)).toLinearEquiv.trans
+    e, ?_⟩
+  intro I K V hy D xi s hs
+  have hg : ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map a)
+      (TopCat.Presheaf.germ G.presheaf V y hy s) =
+        TopCat.Presheaf.germ N.presheaf V y hy (Scheme.Modules.Hom.app a V s) := by
+    change (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).map
+      ((PresheafOfModules.toPresheaf _).map a.val)
+        (TopCat.Presheaf.germ G.presheaf V y hy s) = _
+    exact TopCat.Presheaf.stalkFunctor_map_germ_apply V y hy
+      ((PresheafOfModules.toPresheaf _).map a.val) s
+  have hgs : ((asIso ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map a)).toLinearEquiv
+      |>.trans e).toLinearMap (TopCat.Presheaf.germ G.presheaf V y hy s) =
+        e (TopCat.Presheaf.germ N.presheaf V y hy (D.targetClass p xi)) := by
+    change e (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map a)
+      (TopCat.Presheaf.germ G.presheaf V y hy s)) = _
+    exact (congrArg e hg).trans
+      (congrArg (fun t => e (TopCat.Presheaf.germ N.presheaf V y hy t)) hs)
+  exact (congrArg
+    (Scheme.Modules.moduleCohomologyFMap
+      ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι
+      ((Scheme.Modules.restrictAdjunction
+        ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app
+          ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p)
+    hgs).trans (he I K V hy D xi)
 
 end AlgebraicGeometry
