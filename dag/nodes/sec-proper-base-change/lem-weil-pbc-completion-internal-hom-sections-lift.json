@@ -30,81 +30,37 @@
  ],
  "proof": [
   {
-   "text": "For any family e satisfying the factorization equation, its restriction on affine sections is the canonical quotient evaluation map: the affine quotient projection is surjective and precomposition with the source quotient is injective by finite-level factorization. (Affine opens: the modules.) Let $U\\subseteq X$ be an affine open and $A=\\mathcal O_X(U)$, so $(U,\\mathcal O_X|_U)\\cong\\operatorname{Spec}A$ [def-weil-affine-spectrum]. As $X$ is locally Noetherian, $A$ is Noetherian [pqf-lem-affine-open-locnoeth]; so $U$ is a Noetherian scheme. Put $I=\\mathcal I(U)$; as $\\mathcal I|_U$ is quasi-coherent, the counit $\\widetilde I\\to\\mathcal I|_U$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction] (3), so $(U,\\mathcal I|_U)$ is the situation of [lem-weil-pbc-coherent-formal-modules-affine] for $(A,I)$. The sheaves $\\mathcal F,\\mathcal G,\\mathcal H$ are coherent ([lem-weil-pbc-coherent-sheaf-hom-coherent] for $\\mathcal H$), hence quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth], so $M=\\mathcal F(U)$, $N=\\mathcal G(U)$ and $\\mathcal H(U)$ are finitely generated $A$-modules [lem-weil-pbc-quasi-coherent-finite-type-affine] (a), and $\\mathcal F_n(U)=M/I^nM$, $\\mathcal G_n(U)=N/I^nN$, $\\mathcal H_n(U)=\\mathcal H(U)/I^n\\mathcal H(U)$ with $q_n(U)$ the quotient maps [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2). By full faithfulness of $\\Gamma(U,-)$ on quasi-coherent modules over the affine $U$ ([lem-weil-pbc-affine-tilde-gamma-adjunction] (1),(3): $\\alpha\\mapsto\\Gamma(U,\\alpha)$ is the adjunction bijection composed with the counit isomorphism), $\\mathcal H(U)=\\operatorname{Hom}_{\\mathcal O_U}(\\mathcal G|_U,\\mathcal F|_U)\\to H:=\\operatorname{Hom}_A(N,M)$, $\\varphi\\mapsto\\varphi_U$, is an $A$-linear bijection (so $H$ is a finitely generated $A$-module), and likewise $\\mathcal Hom(\\mathcal G_n,\\mathcal F_n)(U)\\cong\\operatorname{Hom}_A(N/I^nN,M/I^nM)$. Under these identifications $\\mathcal H_n(U)=H/I^nH$ and $e_n(U)$ of step 1 is $h\\bmod I^nH\\mapsto\\bar h_n$, where $\\bar h_n(x\\bmod I^nN)=h(x)\\bmod I^nM$ (evaluate on sections over $U$, where $q^{\\mathcal H}_n(U)$ is surjective). Hence $\\varprojlim_n\\Gamma(U,\\mathcal H_n)=\\varprojlim_nH/I^nH=H^\\wedge$.",
+   "text": "Apply [lem-weil-pbc-completion-internal-hom-affine-sections-lift] to t on every affine open U, obtaining a unique compatible family l_U of sections of the completed Hom quotients on U.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "pqf-lem-affine-open-locnoeth",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-coherent-sheaf-hom-coherent",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-completion-internal-hom-quotient"
+    "lem-weil-pbc-completion-internal-hom-affine-sections-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0882 (lemma-completion-internal-hom, line 6438), proof, first sentences: 'we may assume X = Spec(A) and F, G given by finite A-modules ... H corresponds to the finite A-module H = Hom_A(M, N)'"
-   }
+   "elementary": false
   },
   {
-   "text": "(Affine opens: reduction to modules over $A^\\wedge$.) Keep the notation of step 2 and let $E:\\mathit{Coh}(U,\\mathcal I|_U)\\to\\mathrm{Mod}^{fg}(A^\\wedge)$, $(\\mathcal P_n)\\mapsto\\varprojlim_n\\Gamma(U,\\mathcal P_n)$, $(\\alpha_n)\\mapsto\\varprojlim_n\\Gamma(U,\\alpha_n)$, be the equivalence of [lem-weil-pbc-coherent-formal-modules-affine] (2); in particular $E$ is bijective on Hom sets. By step 2, $E(\\mathcal G^\\wedge|_U)=\\varprojlim N/I^nN=N^\\wedge$ and $E(\\mathcal F^\\wedge|_U)=M^\\wedge$ (with $A^\\wedge$ acting componentwise), and $E\\circ\\Phi_U:H^\\wedge\\to\\operatorname{Hom}_{A^\\wedge}(N^\\wedge,M^\\wedge)$ is $$\\beta:(h_n\\bmod I^nH)_n\\longmapsto\\big((x_n\\bmod I^nN)_n\\mapsto(h_n(x_n)\\bmod I^nM)_n\\big).$$ Hence $\\Phi_U$ is bijective if and only if $\\beta$ is. Note that $\\beta$ is $A^\\wedge$-linear: $\\beta((a_n)_n(h_n)_n)$ and $(a_n)_n\\beta((h_n)_n)$ both send $(x_n)$ to $(a_nh_n(x_n))_n$; and for $h\\in H$, $\\beta(\\iota_H(h))=h^\\wedge:(x_n)_n\\mapsto(h(x_n))_n$.",
+   "text": "Restrict l_U to an affine V contained in U. Naturality of e_n and of the sections corresponding to t_n shows that the restricted family solves the same local lifting equations on V; naturality of transition maps preserves its compatibility. Local uniqueness identifies it with l_V. For an arbitrary common subopen of two affine opens, refine by affine opens and use sheaf separatedness to show their sections agree.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0882 (lemma-completion-internal-hom, line 6438), proof: 'The statement of the lemma becomes the statement H^ = Hom_{A^}(M^, N^) via the equivalence of Lemma 087W'"
-   }
+   "elementary": false
   },
   {
-   "text": "(Affine opens: $\\beta$ is bijective.) $A$ is Noetherian and $N$, $M$, $H$ are finitely generated $A$-modules (step 2). By [lem-weil-pbc-completion-finite-module-tensor] (2) the $A^\\wedge$-linear maps $c_P:A^\\wedge\\otimes_AP\\to P^\\wedge$, $a\\otimes x\\mapsto a\\,\\iota_P(x)$, are bijective for $P=N,M,H$. The ring map $A\\to A^\\wedge$ is flat [lem-weil-pbc-noetherian-completion-flat], and $N$ is finitely generated over the Noetherian $A$, so by [lem-weil-pbc-flat-base-change-hom-finitely-presented] the map $\\theta:A^\\wedge\\otimes_AH\\to\\operatorname{Hom}_{A^\\wedge}(A^\\wedge\\otimes_AN,A^\\wedge\\otimes_AM)$, $a\\otimes h\\mapsto a(\\mathrm{id}\\otimes h)$, is bijective. Let $\\gamma:\\operatorname{Hom}_{A^\\wedge}(A^\\wedge\\otimes_AN,A^\\wedge\\otimes_AM)\\to\\operatorname{Hom}_{A^\\wedge}(N^\\wedge,M^\\wedge)$, $f\\mapsto c_M\\circ f\\circ c_N^{-1}$, a bijection. Both $\\beta\\circ c_H$ and $\\gamma\\circ\\theta$ are $A^\\wedge$-linear (step 3), and $A^\\wedge\\otimes_AH$ is generated as an $A^\\wedge$-module by the $1\\otimes h$; on these, $\\beta(c_H(1\\otimes h))=\\beta(\\iota_H(h))=h^\\wedge$ (step 3) and $\\gamma(\\theta(1\\otimes h))=c_M\\circ(\\mathrm{id}\\otimes h)\\circ c_N^{-1}=h^\\wedge$ by the naturality $h^\\wedge\\circ c_N=c_M\\circ(\\mathrm{id}\\otimes h)$ [lem-weil-pbc-completion-finite-module-tensor] (1). Hence $\\beta=\\gamma\\circ\\theta\\circ c_H^{-1}$ is bijective, and by step 3 so is $\\Phi_U$, for every affine open $U\\subseteq X$. (This is Stacks' chain $H^\\wedge=H\\otimes_AA^\\wedge=\\operatorname{Hom}_{A^\\wedge}(N\\otimes_AA^\\wedge,M\\otimes_AA^\\wedge)=\\operatorname{Hom}_{A^\\wedge}(N^\\wedge,M^\\wedge)$, with the check that it is the map $\\beta$.)",
-   "uses": [
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-noetherian-completion-flat",
-    "lem-weil-pbc-flat-base-change-hom-finitely-presented"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0882 (lemma-completion-internal-hom, line 6438), proof: 'By Algebra, Lemma 00MA (used 3 times) we have H^ = Hom_A(M, N) (x)_A A^ = Hom_{A^}(M (x)_A A^, N (x)_A A^) = Hom_{A^}(M^, N^) where the second equality uses that A^ is flat over A (More on Algebra, Lemma 087R)'; flatness of A -> A^ is Algebra, Lemma 00MB"
-   }
-  },
-  {
-   "text": "Apply local bijectivity to the given compatible family t, glue the unique local inverse section families as in the parent step 5, and use local injectivity to prove global uniqueness. (From affine opens to $X$.) The affine opens of $X$ form a basis of its topology, and $\\mathcal H_n$ and $\\mathcal Hom(\\mathcal G_n,\\mathcal F_n)$ are sheaves [def-weil-sheaf-of-modules-category], [def-pur-sheaf-hom]. Injectivity of $\\Phi$: if $\\Phi(s)=\\Phi(s')$ then for every affine open $U$, $\\Phi_U(s|_U)=\\Phi(s)|_U=\\Phi(s')|_U=\\Phi_U(s'|_U)$ (step 1 (e)), so $s_n|_U=s'_n|_U$ for all $n$ (step 4), and $s_n=s'_n$ as the affine opens cover $X$. Surjectivity: let $\\alpha=(\\alpha_n)$ be a morphism $\\mathcal G^\\wedge\\to\\mathcal F^\\wedge$. For each affine open $U$ choose (step 4) $t^U\\in\\varprojlim_n\\Gamma(U,\\mathcal H_n)$ with $\\Phi_U(t^U)=\\alpha|_U$. For affine opens $U,V$ and an affine open $W\\subseteq U\\cap V$, $\\Phi_W(t^U|_W)=\\alpha|_W=\\Phi_W(t^V|_W)$ (step 1 (e), applied on $U$ and on $V$), so $t^U_n|_W=t^V_n|_W$ (step 4); such $W$ cover $U\\cap V$, so $t^U_n$ and $t^V_n$ agree on $U\\cap V$ and glue to $s_n\\in\\Gamma(X,\\mathcal H_n)$. The relation $t_n(s_{n+1})=s_n$ holds on every affine $U$, hence on $X$; so $s=(s_n)\\in\\varprojlim_n\\Gamma(X,\\mathcal H_n)$, and $\\Phi(s)_n$ and $\\alpha_n$ are sections of $\\mathcal Hom(\\mathcal G_n,\\mathcal F_n)$ with the same restriction $\\Phi_U(t^U)_n=\\alpha_n|_U$ to every affine $U$, hence equal. So $\\Phi$ is bijective.",
+   "text": "The affine opens cover X. At every level glue the compatible local family using Mathlib Presheaf.FamilyOfElementsOnObjects.IsCompatible.existsUnique_section on the underlying type-valued sheaf. The transition equations and the evaluation equations hold after restriction to each affine open, hence globally by CoversTop.sections_ext. Any competing compatible global lift restricts to l_U by local uniqueness; the same sheaf extensionality gives equality at every level. Transport the evaluation equality back through homObjSectionsEquiv.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0882 (lemma-completion-internal-hom, line 6438), proof: 'To prove this we may work affine locally on X'; the gluing is written out by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "pqf-lem-affine-open-locnoeth",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-sheaf-hom-coherent",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-completion-internal-hom-quotient",
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-noetherian-completion-flat",
-  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "lem-weil-pbc-completion-internal-hom-affine-sections-lift",
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Detailed construction and affine comparison and gluing following Tag 0882 and the parent proof; the local checkout omits the literature file; the published Tag 0882 was read online."
+  "place": "Tag 0882, affine-local reduction. Global descent is formalized with naturality, affine refinement, CoversTop.existsUnique_section and CoversTop.sections_ext; affine algebra is isolated in the new local-comparison node."
  },
  "mathlib_searches": [
   {
@@ -162,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T194152-L-468849",
+  "landing": "20261012T213040-L-1151513",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
