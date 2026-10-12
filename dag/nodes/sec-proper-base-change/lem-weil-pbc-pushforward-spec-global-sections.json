@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-pushforward-spec-global-sections",
+ "kind": "statement",
+ "title": "Global sections of affine pushforward are restriction of scalars",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, and let $\\psi=\\operatorname{Spec}\\varphi$ [def-weil-affine-spectrum]. In the categories of module sheaves [def-weil-sheaf-of-modules-category], there is a natural isomorphism from $F\\mapsto\\Gamma_R(\\psi_*F)$ to $\\Gamma_S$ followed by restriction of scalars along $\\varphi$. On underlying elements of global sections this isomorphism and its inverse are the identity; the $R$-action on $\\Gamma_R(\\psi_* F)$ agrees with restriction of the $S$-action on $\\Gamma_S(F)$.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackTilde.lean",
+  "place": "pushforwardSpecMapCompΓIso, lines 36–50; global sections and the structure map of Spec, as in Stacks Schemes 01I7 and 01I9"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "On global sections both underlying abelian groups are Γ(Spec S,F), since the preimage of the whole space is the whole space. For r in R, the action in the pushforward is multiplication by (Spec.map φ).appTop ((ΓSpecIso R).inv r). Naturality ΓSpecIso_inv_naturality identifies this element with (ΓSpecIso S).inv (φ r), exactly the restricted action. Thus identity on elements gives a linear equivalence. All sheaf morphisms have the same underlying maps on global sections, so these equivalences are natural. This is the complete already compiled construction of pushforwardSpecMapCompΓIso.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackTilde.lean",
+  "place": "pushforwardSpecMapCompΓIso"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of pushforward along spectrum map are restriction of scalars",
+   "results": "Service unavailable: Internal Server Error (msearch.py); no verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "tilde.adjunction found in Mathlib.AlgebraicGeometry.Modules.Tilde; the required comparison found by source grep below.",
+   "date": "2026-10-12",
+   "verdict": "related adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "rg pushforwardSpecMapCompΓIso lean/WeilConjectures lean/Sheaf dag/nodes; rg ΓSpecIso_inv_naturality Mathlib/AlgebraicGeometry",
+   "results": "Existing proved pushforwardSpecMapCompΓIso in WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde; no DAG node records it. Its identity linear equivalence and naturality were read in full.",
+   "date": "2026-10-12",
+   "verdict": "existing source declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorPullbackTilde",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-tilde-pullback-base-change",
+   "place": "adjunction route, identification of the common right adjoint",
+   "via": [
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pushforwardSpecMapCompΓIso",
+  "statement": "def pushforwardSpecMapCompΓIso : pushforward (Spec.map φ) ⋙ moduleSpecΓFunctor (R := R) ≅ moduleSpecΓFunctor (R := S) ⋙ ModuleCat.restrictScalars φ.hom",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T042414-L-1818464",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T042414-L-1818464",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

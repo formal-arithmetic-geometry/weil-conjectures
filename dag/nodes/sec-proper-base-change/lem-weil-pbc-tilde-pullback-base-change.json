@@ -31,53 +31,48 @@
  ],
  "proof": [
   {
-   "text": "Identify $R=\\Gamma(\\operatorname{Spec}R,\\mathcal O)$ and $S=\\Gamma(\\operatorname{Spec}S,\\mathcal O)$, with the homomorphism on sections induced by $\\psi$ equal to $\\varphi$ [def-weil-affine-spectrum]. By [lem-weil-pbc-affine-tilde-gamma-adjunction](1) (Schemes 01I7), the $R$-module $M$ determines the associated module sheaf $\\mathcal F_M$, canonically and naturally isomorphic to $\\widetilde M$; this isomorphism carries the canonical section of $m$ to $\\tau(m)$.",
+   "text": "By [lem-weil-pbc-affine-tilde-gamma-adjunction], tilde over R is left adjoint to global sections. Compose with the chosen adjunction of [lem-pc-module-pullback-adjunction]. The natural isomorphism [lem-weil-pbc-pushforward-spec-global-sections] identifies the resulting right adjoint with global sections over Spec S followed by restriction of scalars along φ. Transport the composite adjunction through that isomorphism.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I7 (lemma-compare-constructions), statement and proof; Lemma 01I9 (lemma-widetilde-pullback), first sentence of proof"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-associated-module-pullback] (Modules 01BJ) to the ringed-space morphism $\\psi$, the $R$-module $M$, and the isomorphism of Step 1. It gives a canonical isomorphism $\\psi^*\\widetilde M\\cong\\mathcal F_{S\\otimes_R M}$, functorial in $M$. Applying [lem-weil-pbc-affine-tilde-gamma-adjunction](1) over $S$ identifies $\\mathcal F_{S\\otimes_R M}$ with $\\widetilde{S\\otimes_R M}$; compose these two isomorphisms to define $\\theta_M$. Both component isomorphisms are natural, so $\\theta_M$ is natural.",
-   "uses": [
-    "lem-weil-pbc-associated-module-pullback",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback), proof of (1), citing Schemes 01I7 and Modules 01BJ"
-   }
-  },
-  {
-   "text": "The isomorphism from Modules 01BJ is the canonical pullback comparison: its construction presents the associated sheaf $\\mathcal F_M$ as the pullback of $M$ from the one-point ringed space $(\\{*\\},R)$, and uses the composition isomorphism of pullbacks. Hence the image of the pullback-unit section $\\eta_{\\widetilde M}(\\tau(m))$ in the associated sheaf for $S\\otimes_R M$ is the canonical section belonging to $1\\otimes m$: the ring map $R\\to S$ sends the scalar $1$ to $1$ and extension of scalars sends $m$ to $1\\otimes m$. Under the comparison of Step 2 with $\\widetilde{S\\otimes_R M}$, this canonical section is $\\tau(1\\otimes m)$, establishing the required equality. This is the unit compatibility implicit in the canonical construction of Modules 01BJ; it is stated here because the cited Stacks proof only states the isomorphism.",
-   "uses": [
-    "lem-weil-pbc-associated-module-pullback",
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pc-module-pullback"
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-pushforward-spec-global-sections"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), proof using the first construction as a pullback from a one-point ringed space and the pullback-composition isomorphism; Schemes Lemma 01I7 identifies canonical sections with the tilde sections"
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I7 mapping property and Lemma 01I9 (1); alternative adjunction proof, written by N2, using the already proved source-library comparison pushforwardSpecMapCompΓIso"
+   }
+  },
+  {
+   "text": "The extension/restriction-of-scalars adjunction (ModuleCat.extendRestrictScalarsAdj) composed with the tilde adjunction over S has the same right adjoint. Mathlib Adjunction.leftAdjointUniq therefore gives the required natural isomorphism. This is a formal application of uniqueness of representing objects to the two Hom bijections, without the associated-module-pullback lemma.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I7 mapping property and Lemma 01I9 (1); alternative adjunction proof, written by N2, using the already proved source-library comparison pushforwardSpecMapCompΓIso"
+   }
+  },
+  {
+   "text": "Apply Adjunction.unit_leftAdjointUniq_hom_app to M and evaluate the equality of R-linear maps at m. The first composite unit is the tensor-pullback unit applied to tilde.toOpen M ⊤ m; the pushforward/global-sections comparison is identity on elements. The second composite unit is tilde.toOpen of the scalar-extension unit at m. These identifications are definitional, yielding the required equation in Lean by congr and exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I7 mapping property and Lemma 01I9 (1); alternative adjunction proof, written by N2, using the already proved source-library comparison pushforwardSpecMapCompΓIso"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-associated-module-pullback",
-  "def-pc-module-pullback"
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-pushforward-spec-global-sections"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback), proof of (1), via Lemma 01I7 and Modules, Lemma 01BJ (literature/stacks-project/modules.tex); the canonical-section unit calculation is made explicit from the construction in 01BJ"
+  "place": "Schemes, Lemma 01I7 mapping property and Lemma 01I9 (1); alternative adjunction proof, written by N2, using the already proved source-library comparison pushforwardSpecMapCompΓIso"
  },
  "mathlib_searches": [
   {
@@ -189,5 +184,15 @@
   "group": "H1",
   "result": "pass",
   "note": "R,S CommRingCat.{u}, φ, Spec.map φ, tilde.functor R/S, tensorPullback with exists_tensorPullbackAdjunction unit, natural iso θ (naturality in M), global-section clause θ(η(τ m)) = τ(1⊗m) via extendRestrictScalarsAdj unit; stmt_dep lem-pc-module-pullback-adjunction justified by the unit"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T042414-L-1818464",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,8 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.AssociatedModulePullback
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 /-!
 # Pullback of associated modules on affine schemes
@@ -35,17 +34,13 @@ The comparison takes the pullback-unit image of the canonical section of `m` to
 that of `1 ⊗ m`. The unit is the canonical tensor-formula adjunction unit.
 Source: Stacks Project, Schemes, Tag 01I9 (1), Tags 01I7 and 01BJ
 (blueprint: lem-weil-pbc-tilde-pullback-base-change).
-Proof, following the node's three steps:
-1. Identify the section rings of the spectra with R and S, and their induced map with φ
-   (def-weil-affine-spectrum). Tag 01I7 identifies tilde M naturally with the associated
-   module sheaf, carrying its canonical sections to tilde.toOpen
-   (lem-weil-pbc-affine-tilde-gamma-adjunction).
-2. Tag 01BJ identifies the tensor pullback of this associated sheaf with the associated
-   sheaf of S tensor_R M (lem-weil-pbc-associated-module-pullback). Apply Tag 01I7 over S
-   and compose. Both comparisons are natural in M, so their composite is a natural iso.
-3. In the one-point-ringed-space construction of Tag 01BJ, pullback composition takes the
-   unit image of m to 1 tensor m. The comparisons of Tag 01I7 take canonical sections to
-   tilde.toOpen, giving the displayed equality (def-pc-module-pullback). -/
+Proof: compose the tilde-global-sections adjunction with the chosen tensor-pullback
+adjunction. Global sections of pushforward along `Spec φ` are restriction of scalars
+along `φ`, via `pushforwardSpecMapCompΓIso`. Thus this composite and extension of
+scalars followed by tilde are left adjoints to the same functor. Uniqueness of left
+adjoints gives the natural isomorphism. Its unit compatibility, evaluated at `m`, is
+exactly the displayed equality, since the tilde unit is `tilde.toOpen` at the whole
+space and the scalar-extension unit sends `m` to `1 ⊗ m`. -/
 theorem exists_tensorPullback_tilde_iso {R S : CommRingCat.{u}} (φ : R ⟶ S) :
     ∃ θ : tilde.functor R ⋙ tensorPullback (Spec.map φ) ≅
         ModuleCat.extendScalars φ.hom ⋙ tilde.functor S,
@@ -55,6 +50,12 @@ theorem exists_tensorPullback_tilde_iso {R S : CommRingCat.{u}} (φ : R ⟶ S) :
             (tilde M)).app ⊤ (tilde.toOpen M ⊤ m)) =
           tilde.toOpen ((ModuleCat.extendScalars φ.hom).obj M) ⊤
             ((ModuleCat.extendRestrictScalarsAdj φ.hom).unit.app M m) := by
-  sorry
+  let adj := Classical.choose (exists_tensorPullbackAdjunction (Spec.map φ))
+  let adj₁ := (tilde.adjunction.comp adj).ofNatIsoRight (pushforwardSpecMapCompΓIso φ)
+  let adj₂ := (ModuleCat.extendRestrictScalarsAdj φ.hom).comp tilde.adjunction
+  refine ⟨adj₁.leftAdjointUniq adj₂, ?_⟩
+  intro M m
+  have h := congr($((adj₁.unit_leftAdjointUniq_hom_app adj₂ M)) m)
+  exact h
 
 end AlgebraicGeometry.Scheme.Modules
