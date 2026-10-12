@@ -79,17 +79,20 @@ private lemma unit_app_comp_app_of_mateEquiv_eq {C D E F : Type*} [Category* C] 
     G.map (adj₁.unit.app c) ≫ γ.app (L₁.obj c) = adj₂.unit.app (G.obj c) ≫ R₂.map (α.app c) :=
   h ▸ unit_mateEquiv adj₁ adj₂ α c
 
+/-- The unit of the `ℓ`-adic adjunction `φ^* ⊣ φ_*` is that of the underlying sheaves. -/
 private lemma adicUnit_app_hom (M : AdicSheaf l Y) :
     ((adicUpperStarLowerStarAdjunction l φ).unit.app M).hom =
       (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ).unit.app M.X := by
   rw [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
 
+/-- The pushforward of the `ℓ`-adic unit is that of the underlying unit. -/
 private lemma lowerStar_map_adicUnit_app_hom (M : AdicSheaf l Y) :
     ((b.inv)_*ᵃ[l].map ((adicUpperStarLowerStarAdjunction l φ).unit.app M)).hom =
       (b.inv)_*[_].map ((upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ).unit.app
         M.X) := by
   rw [adicLowerStar_map_hom, adicUnit_app_hom]
 
+/-- The `ℓ`-adic unit at `(b⁻¹)_* M` is the underlying unit at `(b⁻¹)_* M.X`. -/
 private lemma adicUnit_app_lowerStar_obj_hom (M : AdicSheaf l Y) :
     ((adicUpperStarLowerStarAdjunction l φ).unit.app ((b.inv)_*ᵃ[l].obj M)).hom =
       (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) φ).unit.app
@@ -125,6 +128,7 @@ section GeometricFrobenius
 variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
   {g : Y₀ ⟶ Spec (.of k)} (ψ : X₀ ⟶ Y₀) (hψ : ψ ≫ g = f)
 
+/-- Unfolding the `ℓ`-adic pullback exchange isomorphism of the geometric Frobenius. -/
 private lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq' :
     adicUpperStarGeometricFiberMapCompFrobeniusIso l ψ hψ =
       Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius).symm ≪≫
@@ -134,6 +138,7 @@ private lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq' :
       Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius) _ :=
   rfl
 
+/-- Unfolding the `ℓ`-adic pushforward exchange isomorphism of the geometric Frobenius. -/
 private lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_eq :
     adicLowerStarGeometricFiberMapCompFrobeniusIso l ψ hψ =
       adicLowerStarComp l _ _ ≪≫

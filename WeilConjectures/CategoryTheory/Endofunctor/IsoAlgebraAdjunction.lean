@@ -111,11 +111,13 @@ noncomputable def mapOfNatIsoAdjunction
 
 variable (h : mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv) = TwoSquare.mk _ _ _ _ eR.hom)
 
+/-- The unit of `mapOfNatIsoAdjunction` is the unit of `L ⊣ R`. -/
 @[simp]
 lemma mapOfNatIsoAdjunction_unit_app_hom_f (K : IsoAlgebra F) :
     ((mapOfNatIsoAdjunction adj h).unit.app K).hom.f = adj.unit.app K.carrier :=
   rfl
 
+/-- The counit of `mapOfNatIsoAdjunction` is the counit of `L ⊣ R`. -/
 @[simp]
 lemma mapOfNatIsoAdjunction_counit_app_hom_f (K : IsoAlgebra G) :
     ((mapOfNatIsoAdjunction adj h).counit.app K).hom.f = adj.counit.app K.carrier :=
@@ -151,11 +153,13 @@ def liftFullSubcategoryAdjunction :
           liftFullSubcategory_map, homMk_hom, Category.id_comp]
         exact adj.right_triangle_components Y.obj)) }
 
+/-- The unit of `liftFullSubcategoryAdjunction` is the unit of `L ⊣ R`. -/
 @[simp]
 lemma liftFullSubcategoryAdjunction_unit_app_hom (X : P.FullSubcategory) :
     ((liftFullSubcategoryAdjunction adj hL hR).unit.app X).hom = adj.unit.app X.obj :=
   rfl
 
+/-- The counit of `liftFullSubcategoryAdjunction` is the counit of `L ⊣ R`. -/
 @[simp]
 lemma liftFullSubcategoryAdjunction_counit_app_hom (Y : Q.FullSubcategory) :
     ((liftFullSubcategoryAdjunction adj hL hR).counit.app Y).hom = adj.counit.app Y.obj :=

@@ -120,7 +120,10 @@ theorem toIhomDual_str (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) :
       μ Fr F.obj.carrier.X G.obj.carrier.X ▷ Fr.obj (F.dual hF).obj.carrier.X ≫
         μ Fr (F.obj.carrier.X ⊗ G.obj.carrier.X) (F.dual hF).obj.carrier.X ≫
         Fr.map (Mod.toIhomDualAux F.obj.carrier G.obj.carrier) ≫ G.obj.str.hom.hom := by
-    rw [reassoc_of% hμ, ← Fr.map_comp_assoc, Mod.toIhomDual_evaluation]
+    rw [reassoc_of% hμ, ← Fr.map_comp_assoc]
+    exact congrArg (fun f ↦ μ Fr F.obj.carrier.X G.obj.carrier.X ▷ Fr.obj (F.dual hF).obj.carrier.X ≫
+      μ Fr (F.obj.carrier.X ⊗ G.obj.carrier.X) (F.dual hF).obj.carrier.X ≫ Fr.map f ≫
+        G.obj.str.hom.hom) (Mod.toIhomDual_evaluation F.obj.carrier G.obj.carrier)
   exact key.symm
 
 end AlgebraicGeometry.WeilSheaf

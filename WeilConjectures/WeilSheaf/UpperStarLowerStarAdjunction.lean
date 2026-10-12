@@ -65,6 +65,7 @@ noncomputable def ProEtaleWeilSheaf.upperStarLowerStarAdjunction :
     (ProEtale.adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ (comp_over φ _)))
     (ProEtale.mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv φ (comp_over φ _))
 
+/-- The unit `F ⟶ φ_* φ^* F` of pro-étale Weil sheaves is the unit of `φ̄^* ⊣ φ̄_*`. -/
 @[simp]
 lemma ProEtaleWeilSheaf.upperStarLowerStarAdjunction_unit_app_hom_f
     (F : ProEtaleWeilSheaf k₀ l Y) :
@@ -73,6 +74,7 @@ lemma ProEtaleWeilSheaf.upperStarLowerStarAdjunction_unit_app_hom_f
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))).unit.app F.carrier :=
   rfl
 
+/-- The counit `φ^* φ_* F ⟶ F` of pro-étale Weil sheaves is the counit of `φ̄^* ⊣ φ̄_*`. -/
 @[simp]
 lemma ProEtaleWeilSheaf.upperStarLowerStarAdjunction_counit_app_hom_f
     (F : ProEtaleWeilSheaf k₀ l X) :

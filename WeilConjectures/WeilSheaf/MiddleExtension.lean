@@ -64,12 +64,13 @@ theorem Scheme.genericPoints_subset_of_isOpen_of_dense {X : Scheme.{u}} [IsLocal
   obtain ⟨_, ⟨V, hV, rfl⟩, hcV, -⟩ :=
     X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ c) isOpen_univ
   have : IsNoetherianRing Γ(X, V) := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
-  have := noetherianSpace_of_isAffineOpen V hV
-  have : QuasiSober V := V.isOpen.isOpenEmbedding_subtypeVal.quasiSober
-  have hc' : (⟨c, hcV⟩ : V) ∈ genericPoints V := by
+  have : NoetherianSpace (V : Set X) := noetherianSpace_of_isAffineOpen V hV
+  have : QuasiSober (V : Set X) := V.isOpen.isOpenEmbedding_subtypeVal.quasiSober
+  have hc' : (⟨c, hcV⟩ : (V : Set X)) ∈ genericPoints (V : Set X) := by
     rw [mem_genericPoints_iff_forall_specializes] at hc ⊢
     exact fun y hy ↦ Subtype.ext (hc _ (hy.map continuous_subtype_val))
-  exact genericPoints_subset_of_isOpen_of_dense (hU.preimage continuous_subtype_val)
+  exact _root_.genericPoints_subset_of_isOpen_of_dense (α := (V : Set X))
+    (hU.preimage continuous_subtype_val)
     (hd.preimage_val V.isOpen) hc'
 
 variable {k₀ : Type u} [Field k₀]
@@ -82,13 +83,16 @@ theorem Scheme.Hom.dense_range_geometricFiberMap {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] (hj : Dense (Set.range j.base)) :
-    Dense (Set.range (Scheme.Hom.geometricFiberMap j (comp_over j _)).base) := by
-  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian (C ↘ _)
+    Dense (Set.range
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))).base) := by
+  have : IsLocallyNoetherian C :=
+    LocallyOfFiniteType.isLocallyNoetherian (C ↘ Spec (CommRingCat.of k₀))
   have : Flat (C ↘ Spec (CommRingCat.of k₀)).geometricFiberProj :=
     MorphismProperty.pullback_fst _ _
       (Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance) :
         Flat (Spec.map (CommRingCat.ofHom (algebraMap k₀ (AlgebraicClosure k₀)))))
-  have hrange : Set.range (Scheme.Hom.geometricFiberMap j (comp_over j _)).base =
+  have hrange : Set.range
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))).base =
       (C ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.base ⁻¹' Set.range j.base :=
     Scheme.range_snd_of_isPullback (Scheme.Hom.isPullback_geometricFiberMap j _).flip
   rw [hrange]
@@ -96,7 +100,8 @@ theorem Scheme.Hom.dense_range_geometricFiberMap {U C : Scheme.{u}}
   refine Scheme.genericPoints_subset_of_isOpen_of_dense j.isOpenEmbedding.isOpen_range hj ?_
   rw [mem_genericPoints_iff_forall_specializes] at hη ⊢
   intro c hc
-  obtain ⟨η', hη'η, rfl⟩ := Flat.generalizingMap (C ↘ Spec (CommRingCat.of k₀)).geometricFiberProj hc
+  obtain ⟨η', hη'η, rfl⟩ :=
+    Flat.generalizingMap (C ↘ Spec (CommRingCat.of k₀)).geometricFiberProj hc
   rw [hη _ hη'η]
 
 /-- The geometric fibre of a smooth `k₀`-scheme has regular local rings. -/
