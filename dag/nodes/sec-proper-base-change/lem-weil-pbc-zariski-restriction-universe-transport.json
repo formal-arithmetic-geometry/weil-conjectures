@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-zariski-restriction-universe-transport",
+ "kind": "statement",
+ "title": "Universe transport for Zariski restriction",
+ "statement": "For every sheaf G of Type (u+1) on X, the ULift/order-isomorphism transport identifies the spectral closed restriction bijection with the Zariski inverse-image unit at the top open, yielding a bijection.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZG, universe transport step"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-h0-spectral-closed-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Transport the spectral restriction bijection across the ULift homeomorphism and induced order isomorphisms of opens, preserving the sheaf adjunction unit at the top open.",
+   "uses": [
+    "lem-weil-pbc-h0-spectral-closed-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-h0-spectral-closed-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport sheaf restriction bijection along homeomorphism",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf adjunction unit homeomorphism transport",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ULift sheaf restriction bijective",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiClosedImmersionConnectedRestriction.lean",
+  "declaration": "AlgebraicGeometry.zariski_restriction_universe_transport",
+  "statement": "theorem zariski_restriction_universe_transport\n    {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (hconn : ∀ x : X, IsConnected (closure ({x} : Set X) ∩ Set.range i)) :\n      letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1),\n          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P :=\n            fun P U ↦\n              @Types.hasColimit.{u, u + 1, u}\n                (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U)\n                inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P)\n      ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat,\n      Function.Bijective\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))\n          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app\n            (op (⊤ : X.Opens)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
+   "place": "Transport the spectral restriction bijection along ULift and open-set order isomorphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T053953-L-2645347",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T053953-L-2645347",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

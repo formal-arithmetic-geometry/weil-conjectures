@@ -6,6 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
@@ -24,6 +25,32 @@ universe u
 open CategoryTheory Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
+
+/-- Universe transport of the spectral restriction bijection to the Zariski inverse-image unit.
+The proof follows the ULift/order-isomorphism transport in the blueprint.
+
+Proof: transport the spectral restriction map along the ULift homeomorphism and the induced
+order isomorphisms on opens; these preserve covers, sheaf sections, and the adjunction unit
+at the top open, so bijectivity is preserved.
+(blueprint: lem-weil-pbc-zariski-restriction-universe-transport) -/
+theorem zariski_restriction_universe_transport
+    {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (hconn : ∀ x : X, IsConnected (closure ({x} : Set X) ∩ Set.range i)) :
+      letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1),
+          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P :=
+            fun P U ↦
+              @Types.hasColimit.{u, u + 1, u}
+                (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U)
+                inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P)
+      ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat,
+      Function.Bijective
+        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+          (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))
+          (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app
+            (op (⊤ : X.Opens))) := by
+  sorry
+
 
 /-- Zariski sections restrict bijectively if every point closure meets the closed
 subscheme in a nonempty connected subset.
@@ -65,6 +92,27 @@ theorem zariski_closed_immersion_connected_restriction
         (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
           (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))
           (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app
-            (op (⊤ : X.Opens))) := by sorry
+            (op (⊤ : X.Opens))) := by
+  classical
+  let : T0Space X.toTopCat := by
+    constructor
+    intro x y h
+    exact (inferInstance : T0Space X).t0 h
+  let : CompactSpace X.toTopCat := by
+    constructor
+    change IsCompact (Set.univ : Set X)
+    exact isCompact_univ
+  let : QuasiSober X.toTopCat := (inferInstance : QuasiSober X)
+  let : QuasiSeparatedSpace X.toTopCat := (inferInstance : QuasiSeparatedSpace X)
+  let : PrespectralSpace X.toTopCat := (inferInstance : PrespectralSpace X)
+  let : SpectralSpace X.toTopCat := {}
+  let D : Set X := Set.range i.base
+  have hD : IsClosed D := by
+    exact (Scheme.Hom.isClosedEmbedding i).isClosed_range
+  have hc (x : X) : ConnectedSpace (↥(D ∩ closure ({x} : Set X))) := by
+    apply isConnected_iff_connectedSpace.mp
+    simpa [D, Set.inter_comm] using hconn x
+  intro G
+  exact zariski_restriction_universe_transport i hconn G
 
 end AlgebraicGeometry
