@@ -31,6 +31,43 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
+/-- Core geometric part of the product Picard openness argument.  The proof is the
+construction of the multiple Picard locus from the Kunneth injectivity input and
+the universal structure-sheaf pushforward hypotheses, followed by the proper
+closed-image argument.  The final trivialization of the resulting line bundle
+on the open is handled separately below.  Source: Stacks Project, Tag 0BF3
+(blueprint: lem-sc-picard-product-open-core). -/
+theorem picard_product_open_core
+    {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
+    [Flat g] [IsProper g] [LocallyOfFinitePresentation g]
+    (σ : S ⟶ X) (τ : S ⟶ Y)
+    (hσ : σ ≫ f = 𝟙 S) (hτ : τ ≫ g = 𝟙 S)
+    (s : S) (L : (pullback f g).Modules) [L.IsInvertible]
+    (hO : ∀ {T : Scheme.{u}} (t : T ⟶ S),
+      IsIso ((Classical.choose
+        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f t))).unit.app
+          (SheafOfModules.unit T.ringCatSheaf)))
+    (hO' : ∀ {T : Scheme.{u}} (t : T ⟶ S),
+      IsIso ((Classical.choose
+        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd g t))).unit.app
+          (SheafOfModules.unit T.ringCatSheaf)))
+    (h₁ : Nonempty ((Scheme.Modules.tensorPullback
+      (pullback.lift (𝟙 X) (f ≫ τ) (by simp [hτ]))).obj L ≅
+        SheafOfModules.unit X.ringCatSheaf))
+    (h₂ : Nonempty ((Scheme.Modules.tensorPullback
+      (pullback.lift (g ≫ σ) (𝟙 Y) (by simp [hσ]))).obj L ≅
+        SheafOfModules.unit Y.ringCatSheaf))
+    (hs : Nonempty ((Scheme.Modules.tensorPullback
+      ((pullback.fst f g ≫ f).fiberι s)).obj L ≅ SheafOfModules.unit _)) :
+    ∃ U : S.Opens, s ∈ U ∧ ∃ N : (pullback (pullback.fst f g ≫ f) U.ι).Modules,
+      Nonempty ((Scheme.Modules.tensorPullback
+        (pullback.fst (pullback.fst f g ≫ f) U.ι)).obj L ≅
+          N) ∧
+      Nonempty (N ≅ SheafOfModules.unit
+        (pullback (pullback.fst f g ≫ f) U.ι).ringCatSheaf) := by
+  sorry
+
 /-- Triviality on the two section slices and the fibre at `s` extends to an open
 neighbourhood of `s`. Source: Stacks Project, More on Morphisms, Lemma pic-of-product,
 Tag 0BF3 (blueprint: lem-sc-picard-product-open).
@@ -82,6 +119,7 @@ theorem picard_product_open
       Nonempty ((Scheme.Modules.tensorPullback
         (pullback.fst (pullback.fst f g ≫ f) U.ι)).obj L ≅
           SheafOfModules.unit (pullback (pullback.fst f g ≫ f) U.ι).ringCatSheaf) := by
-  sorry
+  obtain ⟨U, hsU, N, eL, eN⟩ := picard_product_open_core f g σ τ hσ hτ s L hO hO' h₁ h₂ hs
+  refine ⟨U, hsU, ⟨eL.some ≪≫ eN.some⟩⟩
 
 end AlgebraicGeometry.Scheme

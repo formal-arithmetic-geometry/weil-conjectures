@@ -32,38 +32,20 @@
  ],
  "proof": [
   {
-   "text": "For the special fibre over s, apply the Kunneth lemma in degree one to X_s and Y_s. The universal pushforward hypotheses give H^0(X_s,O)=κ(s)=H^0(Y_s,O), while the sections σ(s) and τ(s) are κ(s)-rational points. Thus the injective map supplied by lem-sc-picard-h1-product-injective is the map induced by pullback along the slices (1,τ(s)):X_s→X_s×_{κ(s)}Y_s and (σ(s),1):Y_s→X_s×_{κ(s)}Y_s, which are the fibres at s of 1×τ and σ×1.",
+   "text": "Apply the core geometric product Picard openness statement and compose its trivialization with the isomorphism of the auxiliary invertible module to the unit module on the open.",
    "uses": [
-    "lem-sc-picard-h1-product-injective"
+    "lem-sc-picard-product-open-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 33.1 (varieties-lemma-kunneth), degree 1"
-   }
-  },
-  {
-   "text": "Apply the H1 multiple Picard flat-proper lemma with the product family h:X×_S Y→S as f, the two families X→S and Y→S as the X_i, and the morphisms u_1=1×τ:X→X×_S Y and u_2=σ×1:Y→X×_S Y (morphisms over S). The product h is flat, proper and of finite presentation (stable under base change and composition). Universal pushforward for h: for T→S, the base change pr_1:X_T×_T Y_T→X_T of g_T along the flat morphism f_T gives, by flat base change in degree 0 (lem-pc-flat-base-change-cohom, g_T being quasi-compact and quasi-separated), (pr_1)_*O=f_T^*(g_T)_*O_{Y_T}=f_T^*O_T=O_{X_T}, hence (h_T)_*O=(f_T)_*O_{X_T}=O_T; for X→S and Y→S it is the hypothesis. Since (1×τ)^*L and (σ×1)^*L are trivial, the loci Z_1,Z_2 are all of S, so the containment Z⊂Z_1∩Z_2 holds trivially. The fibre triviality of L at s puts s in Z, and by Step 1 the map H^1((X×_S Y)_s,O)→H^1(X_s,O)⊕H^1(Y_s,O) induced by u_1,u_2 (whose fibres at s are the slices) is injective. Hence there is an open U∋s with Z∩U=U, i.e. L restricted to (X×_S Y)_U is h_U^*N for an invertible N on U; shrinking U so that N is trivial, L is trivial on (X×_S Y)_U.",
-   "uses": [
-    "lem-sc-picard-h1-multiple-locus",
-    "lem-pc-flat-base-change-cohom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma lemma-pic-of-product, proof, using lemma-H1-O-multiple-picard-flat-proper"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-picard-h1-product-injective",
-  "lem-sc-picard-h1-multiple-locus",
-  "lem-pc-flat-base-change-cohom"
+  "lem-sc-picard-product-open-core"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma pic-of-product, Tag 0BF3"
+  "by": "worker",
+  "document": "Stacks Project, More on Morphisms, Lemma pic-of-product, Tag 0BF3",
+  "place": "final composition from the core Picard-locus argument"
  },
  "mathlib_searches": [
   {
@@ -153,5 +135,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135216-L-1655144",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

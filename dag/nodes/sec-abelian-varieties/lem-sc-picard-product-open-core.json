@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-picard-product-open-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-product-open",
+   "place": "geometric Picard-locus argument"
+  }
+ },
+ "kind": "statement",
+ "title": "Core geometric product Picard openness with an auxiliary trivial module",
+ "statement": "Under the hypotheses of lem-sc-picard-product-open, there exist an open neighbourhood U of s and an auxiliary module N on the base change of X times_S Y to U such that L restricted to that open is isomorphic to N and N is isomorphic to the unit module.",
+ "stmt_deps": [
+  "lem-sc-picard-product-open"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma pic-of-product, Tag 0BF3, Picard-locus construction"
+ },
+ "proof": [
+  {
+   "text": "Construct the multiple Picard triviality locus using the degree-one Kunneth injectivity lemma, universal structure-sheaf pushforward, flat base change in degree zero, and the proper closed-image argument; the resulting local Picard representative is then identified with the unit module after shrinking.",
+   "uses": [
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-h1-product-injective",
+  "lem-sc-picard-h1-multiple-locus",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma pic-of-product, Tag 0BF3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard product openness with an auxiliary invertible module on an open base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard product openness auxiliary module",
+   "results": "no matching theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (_ ≅ _) product Picard",
+   "results": "no matching theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard_product_open_core",
+   "results": "new worker theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardProductOpen",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardProductOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardProductOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_product_open_core",
+  "statement": "theorem picard_product_open_core\n    {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [Flat g] [IsProper g] [LocallyOfFinitePresentation g]\n    (σ : S ⟶ X) (τ : S ⟶ Y)\n    (hσ : σ ≫ f = 𝟙 S) (hτ : τ ≫ g = 𝟙 S)\n    (s : S) (L : (pullback f g).Modules) [L.IsInvertible]\n    (hO : ∀ {T : Scheme.{u}} (t : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f t))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (hO' : ∀ {T : Scheme.{u}} (t : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd g t))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (h₁ : Nonempty ((Scheme.Modules.tensorPullback\n      (pullback.lift (𝟙 X) (f ≫ τ) (by simp [hτ]))).obj L ≅\n        SheafOfModules.unit X.ringCatSheaf))\n    (h₂ : Nonempty ((Scheme.Modules.tensorPullback\n      (pullback.lift (g ≫ σ) (𝟙 Y) (by simp [hσ]))).obj L ≅\n        SheafOfModules.unit Y.ringCatSheaf))\n    (hs : Nonempty ((Scheme.Modules.tensorPullback\n      ((pullback.fst f g ≫ f).fiberι s)).obj L ≅ SheafOfModules.unit _)) :\n    ∃ U : S.Opens, s ∈ U ∧ ∃ N : (pullback (pullback.fst f g ≫ f) U.ι).Modules,\n      Nonempty ((Scheme.Modules.tensorPullback\n        (pullback.fst (pullback.fst f g ≫ f) U.ι)).obj L ≅\n          N) ∧\n      Nonempty (N ≅ SheafOfModules.unit\n        (pullback (pullback.fst f g ≫ f) U.ι).ringCatSheaf)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135216-L-1655144",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135216-L-1655144",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
