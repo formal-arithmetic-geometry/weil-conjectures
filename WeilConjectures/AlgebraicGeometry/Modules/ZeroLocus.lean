@@ -569,7 +569,9 @@ theorem Hom.zeroLocus_eq_bot_iff (φ : M ⟶ N) : φ.zeroLocus = ⊥ ↔ φ = 0 
     rw [Hom.ideal_zeroLocus (0 : M ⟶ N) (U x) hM hN (b := 0) (by simp)]
     simp
 
-/-- The zero scheme of a morphism of invertible modules is locally principal. -/
+/-- The zero scheme of a morphism of invertible modules is locally principal.
+
+(blueprint: `lem-pc-zero-scheme-properties`) -/
 theorem Hom.isLocallyPrincipal_zeroLocus (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal := by
   intro x
   obtain ⟨U, hxU, -, ⟨eM, hM⟩, eN, hN⟩ :=
