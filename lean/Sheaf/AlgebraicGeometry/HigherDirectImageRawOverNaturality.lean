@@ -6,9 +6,10 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawTransitionToHom
 
 /-! # Raw cohomology pullback and the higher-image comparison
 
@@ -67,6 +68,68 @@ noncomputable def higherDirectImageRawOverPullback
           ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
             (Over.w f).symm).inv.app G))
 
+private lemma raw_presheaf_map_apply
+    (Λ : Type (u + 1)) [CommRing Λ] {Y S : Scheme.{u}} (h : Y ⟶ S) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    {T U : S.Etale} (a : T ⟶ U) (z : (higherDirectImagePresheaf Λ h q K).obj (op U)) :
+    (higherDirectImagePresheaf Λ h q K).map a.op z =
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        (((h)^*[ModuleCat.{u + 1} Λ]).map ((freeSheaf Λ S).map a)) ≫ z := rfl
+
+private lemma pullback_class_naturality
+    {C D E D' E' : Type*} [Category* C] [Category* D] [Category* E]
+    [Category* D'] [Category* E']
+    (F : C ⥤ D) (G : C ⥤ E) (L : D ⥤ E)
+    (SD : D ⥤ D') (SE : E ⥤ E') (LD : D' ⥤ E')
+    (c : G ⟶ F ⋙ L) (t : SD ⋙ LD ≅ L ⋙ SE)
+    {X Y : C} (a : X ⟶ Y) {Z : D'} {Z' : E'}
+    (z : SD.obj (F.obj Y) ⟶ Z) (e : LD.obj Z ⟶ Z') :
+    SE.map (c.app X) ≫ t.inv.app (F.obj X) ≫
+        LD.map (SD.map (F.map a) ≫ z) ≫ e =
+      SE.map (G.map a) ≫ SE.map (c.app Y) ≫ t.inv.app (F.obj Y) ≫ LD.map z ≫ e := by
+  have hc := c.naturality a
+  have ht := t.inv.naturality (F.map a)
+  change G.map a ≫ c.app Y = c.app X ≫ L.map (F.map a) at hc
+  change SE.map (L.map (F.map a)) ≫ t.inv.app (F.obj Y) =
+    t.inv.app (F.obj X) ≫ LD.map (SD.map (F.map a)) at ht
+  rw [LD.map_comp, Category.assoc, ← reassoc_of% ht,
+    ← SE.map_comp_assoc, ← hc, SE.map_comp, Category.assoc]
+
+/-- The comparison component of raw pullback with the higher direct image map.
+Source: Stacks Project, Tags 03Q8 and 09Z1; canonical derived-Hom comparison.
+(blueprint: sbc-lem-higher-image-raw-over-comparison).
+The proof expands the adjunction comparison, applies the triangle identity,
+and identifies the resulting shifted homology map with the canonical transition.
+-/
+theorem higherDirectImageRawOverPullback_comparison
+    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    {A B : Over W} (f : A ⟶ B) (U : S.Etale)
+    (z : (higherDirectImageRawOverPresheaf Λ k G q B).obj (op U)) :
+    (higherDirectImageRawOverComparison Λ k G q A).app (op U)
+        (higherDirectImageRawOverPullback Λ k G q f U z) =
+    ((higherDirectImageOverMap Λ k G q f).hom.app (op U))
+      ((higherDirectImageRawOverComparison Λ k G q B).app (op U) z) := by
+  sorry
+
+/-- Restriction component of raw pullback naturality.
+Source: Stacks Project, Tags 03Q8 and 09Z1.
+(blueprint: sbc-lem-higher-image-raw-over-restriction).
+The proof is the naturality of the pullback composition and single-complex
+comparison maps under restriction of the étale test object.
+-/
+theorem higherDirectImageRawOverPullback_restriction
+    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    {A B : Over W} (f : A ⟶ B) (U : S.Etale)
+    (z : (higherDirectImageRawOverPresheaf Λ k G q B).obj (op U))
+    (T : S.Etale) (a : T ⟶ U) :
+      higherDirectImageRawOverPullback Λ k G q f T
+        ((higherDirectImageRawOverPresheaf Λ k G q B).map a.op z) =
+      (higherDirectImageRawOverPresheaf Λ k G q A).map a.op
+            (higherDirectImageRawOverPullback Λ k G q f U z) := by
+  sorry
+
 /-- Raw pullback intertwines the fixed cohomology-presheaf comparison with the
 canonical higher-image transition. This requires no limit or qcqs assumptions.
 Source: Stacks Project, Tags 03Q8 and 09Z1.
@@ -97,7 +160,8 @@ theorem higherDirectImageRawOverPullback_toSheaf
       higherDirectImageRawOverPullback Λ k G q f T
         ((higherDirectImageRawOverPresheaf Λ k G q B).map a.op z) =
       (higherDirectImageRawOverPresheaf Λ k G q A).map a.op
-            (higherDirectImageRawOverPullback Λ k G q f U z) := by
-  sorry
+            (higherDirectImageRawOverPullback Λ k G q f U z)  := by
+  exact ⟨higherDirectImageRawOverPullback_comparison Λ k G q f U z,
+    fun T a => higherDirectImageRawOverPullback_restriction Λ k G q f U z T a⟩
 
 end AlgebraicGeometry.Etale

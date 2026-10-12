@@ -1,0 +1,120 @@
+{
+ "id": "sbc-lem-higher-image-raw-over-comparison",
+ "kind": "statement",
+ "title": "Raw over comparison component",
+ "statement": "For a commutative ring Λ, schemes W and S, k:W→S, a sheaf G on W_et,  an integer q, an arrow f:A→B of objects over W, an etale S-object U, and a raw class z on B, the explicitly constructed raw pullback r_f(z) satisfies e_A(r_f(z)) = t_f(e_B(z)), where e_A and e_B are the fixed raw comparison maps to the associated higher direct image sections and t_f is the canonical higher-image transition. This is the evaluated section equality used by the naturality theorem.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1, canonical comparison maps; explicit derived-Hom formulation"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "def-sbc-module-higher-image-transitions",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Expand ToHom as derived adjunction, zero-degree homology, and homology shift comparison. Expand the transition as unit, pullback composition and counit. Naturality of the unit and the triangle identity identify its adjunct with pullback of the class. The single-complex composition comparison gives the first two raw factors. Compatibility with shifts of these canonical derived adjunctions and composition maps gives the shift factor and identifies zero-degree shifted homology with degree-q homology. Naturality in the specified coefficient morphism v gives the final factor and H^q(Rh′_*v).",
+   "uses": [
+    "sbc-lem-higher-image-raw-triangle-restriction",
+    "def-sbc-module-higher-image-transitions",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-image-raw-triangle-restriction",
+  "def-sbc-module-higher-image-transitions",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1; canonical derived-Hom comparison, argument written by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a derived adjunction Hom equivalence under pullback composition and higher direct image transition",
+   "results": "Eight hits about exponentiable morphisms and module-sheaf pullbacks, none about this fixed higher-image comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\"",
+   "results": "Twelve hits about characters and actions, none about derived higher-image comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImagePresheafToSheaf|homEquiv.*naturality",
+   "results": "Generic homEquiv naturality declarations; no theorem about changing the scheme morphism in the fixed comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison from raw derived Hom cohomology to higher direct images commutes with pullback along a triangle of scheme morphisms",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-over-naturality",
+   "place": "Intermediate component of the proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawOverNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_comparison",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13",
+  "statement": "theorem higherDirectImageRawOverPullback_comparison\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {A B : Over W} (f : A ⟶ B) (U : S.Etale)\n    (z : (higherDirectImageRawOverPresheaf Λ k G q B).obj (op U)) :\n    (higherDirectImageRawOverComparison Λ k G q A).app (op U)\n        (higherDirectImageRawOverPullback Λ k G q f U z) =\n    ((higherDirectImageOverMap Λ k G q f).hom.app (op U))\n      ((higherDirectImageRawOverComparison Λ k G q B).app (op U) z)"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T194108-L-453988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T194108-L-453988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

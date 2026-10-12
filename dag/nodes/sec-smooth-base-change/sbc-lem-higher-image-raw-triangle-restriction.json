@@ -1,0 +1,114 @@
+{
+ "id": "sbc-lem-higher-image-raw-triangle-restriction",
+ "kind": "statement",
+ "title": "Raw triangle pullback commutes with etale restriction",
+ "statement": "For a commutative ring Λ, schemes Y, Y′, S, morphisms a:Y′→Y, h:Y→S, h′:Y′→S with a≫h=h′, bounded-below derived module sheaves K on Y and K′ on Y′, integer q, and a specified derived coefficient morphism v:a* K→K′ [def-weil-pbc-derived-categories], [def-weil-pbc-etale-sheaves], define r_U(z) by the single-complex map of the pullback composition isomorphism, the inverse single-complex comparison, derived pullback of z, the shift comparison, and v[q] [lem-weil-pbc-inverse-image-composition]. For etale S-objects T,U, b:T→U and a raw class z∈Hom(h*Λ[U][0],K[q]), one has r_T(z|_T)=r_U(z)|_T.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1, canonical comparison maps; explicit derived-Hom formulation"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Restriction is precomposition with the single-complex free-sheaf map. Apply naturality of inverse-image composition and of the inverse single-complex comparison to this map, then functoriality of derived pullback. Postcompose by the fixed shift comparison and v[q]; associativity gives the claimed equality.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1; canonical derived-Hom comparison, argument written by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a derived adjunction Hom equivalence under pullback composition and higher direct image transition",
+   "results": "Eight hits about exponentiable morphisms and module-sheaf pullbacks, none about this fixed higher-image comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\"",
+   "results": "Twelve hits about characters and actions, none about derived higher-image comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImagePresheafToSheaf|homEquiv.*naturality",
+   "results": "Generic homEquiv naturality declarations; no theorem about changing the scheme morphism in the fixed comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison from raw derived Hom cohomology to higher direct images commutes with pullback along a triangle of scheme morphisms",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Proof: the cohomology colimit on qcqs etale objects and its natural sheafification comparison",
+   "via": [
+    "sbc-lem-higher-image-raw-over-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawTrianglePullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawTrianglePullback_restriction",
+  "statement": "theorem higherDirectImageRawTrianglePullback_restriction (Λ : Type (u + 1)) [CommRing Λ] {Y Y' S : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (K' : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (v : D+((a)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K') (U : S.Etale) (z : (higherDirectImagePresheaf Λ h q K).obj (op U)) (T : S.Etale) (b : T ⟶ U) : higherDirectImageRawTrianglePullback Λ a h h' w q K K' v T ((higherDirectImagePresheaf Λ h q K).map b.op z) = (higherDirectImagePresheaf Λ h' q K').map b.op (higherDirectImageRawTrianglePullback Λ a h h' w q K K' v U z)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T194108-L-453988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T194108-L-453988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
