@@ -68,6 +68,8 @@ by `hf`, and the new fibre is finite of that same degree. This gives both clause
 `BoundsFiberDegrees` at every `t` (`def-weil-pbc-fibre-degree-bound`). -/
 lemma boundsFiberDegrees_pullback_snd {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
     (n : ℕ) (hf : BoundsFiberDegrees f n) : BoundsFiberDegrees (pullback.snd f g) n := by
-  sorry
+  intro t
+  obtain ⟨hfin, hdeg⟩ := finite_fiber_degree_pullback f g t (hf (g t)).1
+  exact ⟨hfin, hdeg.le.trans (hf (g t)).2⟩
 
 end AlgebraicGeometry.Scheme.Hom
