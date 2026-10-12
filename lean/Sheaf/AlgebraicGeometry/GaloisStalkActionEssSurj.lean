@@ -7,9 +7,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.FieldTheory.Galois.Profinite
+import Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization
+import Sheaf.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
 
 /-!
 # Essential surjectivity of the canonical Galois stalk functor
@@ -25,6 +27,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 03QT, theorem-equivalence-sheaves-point, proof;
 Tag 03QR, the etale-scheme/Galois-set equivalence used there.
 (blueprint: lem-exc-galois-stalk-action-essentially-surjective).
@@ -74,6 +78,52 @@ theorem galoisStalkActionFunctor_essSurj
         (j.hom.app F) ((T.obj F).obj.obj.ρ g
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) →
-      T.EssSurj := by sorry
+      T.EssSurj := by
+  classical
+  dsimp only
+  intro T j hj
+  let U := ObjectProperty.ι
+      (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := Gal(Ks/K)))
+    ⋙ ObjectProperty.ι
+      (Action.IsContinuous (V := Type (max (u + 1) v)) (G := Gal(Ks/K)))
+    ⋙ Action.forget (Type (max (u + 1) v)) (Gal(Ks/K))
+  refine ⟨fun M ↦ ?_⟩
+  obtain ⟨I, A, f, hfinite, ⟨hc⟩, ⟨hu⟩⟩ :=
+    discreteContAction_finite_orbit_coproduct (Gal(Ks/K)) M
+  have hreal (i : I) :=
+    galoisStalkActionFunctor_finite_mem_essImage K Ks Ω T j hj (A i) (hfinite i)
+  choose F he using hreal
+  let e (i : I) : T.obj (F i) ≅ A i := (he i).some
+  have : HasSheafify (Spec (.of K)).smallEtaleTopology
+      (Type (max (u + 1) v)) := inferInstance
+  have : Limits.HasColimitsOfShape (Discrete I) (Type (max (u + 1) v)) := inferInstance
+  have : Limits.HasColimitsOfShape (Discrete I)
+      (Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :=
+    Sheaf.instHasColimitsOfShape
+  let D := Discrete.functor F
+  let c := Limits.colimit.cocone D
+  let a : Discrete.functor A ≅ D ⋙ T :=
+    Discrete.natIso (fun i ↦ (e i.as).symm)
+  let d := (Limits.Cocone.precompose a.hom).obj (T.mapCocone c)
+  let k : M ⟶ T.obj c.pt := hc.desc d
+  have hp : Limits.PreservesColimit D (T ⋙ U) :=
+    Limits.preservesColimit_of_natIso D j.symm
+  let q := Limits.isColimitOfPreserves (T ⋙ U) (Limits.colimit.isColimit D)
+  let b := Functor.isoWhiskerRight a U
+  let z := hu.coconePointsIsoOfNatIso q b
+  have hk : U.map k = z.hom := by
+    apply hu.hom_ext
+    intro i
+    change U.map ((Limits.Cofan.mk M f).ι.app i) ≫ U.map k = _
+    rw [← U.map_comp, hc.fac]
+    dsimp [z, Limits.IsColimit.coconePointsIsoOfNatIso, Limits.IsColimit.map]
+    exact (hu.fac ((Limits.Cocone.precompose b.hom).obj
+      ((T ⋙ U).mapCocone (Limits.colimit.cocone D))) i).symm
+  have : IsIso (U.map k) := hk ▸ z.isIso_hom
+  have : IsIso k.hom.hom.hom := ‹IsIso (U.map k)›
+  have : IsIso k.hom.hom := inferInstance
+  have : IsIso k.hom := ObjectProperty.isIso_hom_iff _ |>.mp inferInstance
+  have : IsIso k := ObjectProperty.isIso_hom_iff _ |>.mp inferInstance
+  exact ⟨c.pt, ⟨(asIso k).symm⟩⟩
 
 end AlgebraicGeometry.Scheme

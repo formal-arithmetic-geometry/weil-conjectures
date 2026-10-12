@@ -1,0 +1,137 @@
+{
+ "id": "lem-exc-discrete-continuous-action-finite-orbit-coproduct",
+ "kind": "statement",
+ "title": "Finite orbit coproduct decomposition",
+ "statement": "Let G : Type u be a compact topological group and M a discrete continuous G-action on a set in Type w. Write U for the forgetful functor to Type w. There exist I : Type w, a family A : I → DiscreteContAction (Type w) G, and equivariant inclusions f_i : A_i → M such that every underlying set A_i is finite, Cofan.mk M f is a colimit cocone, and U.mapCocone (Cofan.mk M f) is a colimit cocone in Type w. Both colimit assertions are expressed as Nonempty IsColimit and include the empty-action case.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT, proof of theorem-equivalence-sheaves-point"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the quotient of the underlying action by the orbit equivalence relation as I, and the orbit subtypes as A_i. Equip them with the restricted action and discrete topology. Continuity follows from subtype continuity and equality of the subtype topology with the discrete topology. The inclusions are equivariant.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stabilizer of an orbit representative is open by stabilizer_isOpen. The quotient is finite by quotient_finite_of_isOpen and the orbit-stabilizer equivalence makes the orbit finite.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-quotient-finite-discrete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use selfEquivSigmaOrbits' to define the unique map out of the cocone, evaluating the chosen orbit map on each element. Its equivariance follows from equivariance of the component maps, and the same decomposition proves the factorization and uniqueness laws. The inverse sigma-orbit equivalence is bijective, so Cofan.nonempty_isColimit_iff_bijective_fromSigma proves the underlying set colimit. Transport it through isColimitMapCoconeEquiv. No element or representative is chosen for an empty orbit family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-open-subgroup-quotient-finite-discrete"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT; universe adaptation and Lean glue by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor realizing finite discrete continuous Galois sets and preserving coproducts is essentially surjective",
+   "results": "GaloisCategory.functorToContAction essential-surjectivity results only; no theorem for the geometric stalk.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.coconePointsIsoOfNatIso",
+   "results": "Found the colimit comparison API used in the combining proof.",
+   "date": "2026-10-12",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteContAction.*[Cc]oproduct|orbit.*[Ff]inite",
+   "results": "No categorical orbit decomposition found. Direct source search found selfEquivSigmaOrbits', orbitEquivQuotientStabilizer, stabilizer_isOpen, and quotient_finite_of_isOpen, used in the orbit proof.",
+   "date": "2026-10-12",
+   "verdict": "tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A discrete continuous action of a compact topological group decomposes as a coproduct of finite orbits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite continuous Galois action represented by stalk of representable etale sheaf",
+   "results": "PreGaloisCategory.exists_lift_of_continuous and fiberIsoQuotientStabilizer require a Galois category and its fiber functor; no geometric stalk realization or comparison with the given germ formula. Second reader found no applicable replacement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MulAction.selfEquivSigmaOrbits'",
+   "results": "Exact set orbit decomposition equivalence already used; does not supply continuous categorical coproduct or finite geometric realization.",
+   "date": "2026-10-12",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*essImage|essImage.*finite|orbit.*[Cc]ofan",
+   "results": "No finite geometric realization or orbit categorical coproduct in Mathlib hits. Separate rg searches in lean/Sheaf and upstream algebraic geometry found no replacement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-galois-stalk-action-essentially-surjective",
+   "place": "proof, steps 1 and 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct",
+  "file": "lean/Sheaf/CategoryTheory/DiscreteContActionFiniteOrbitCoproduct.lean",
+  "declaration": "CategoryTheory.discreteContAction_finite_orbit_coproduct",
+  "statement": "theorem discreteContAction_finite_orbit_coproduct\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] (M : DiscreteContAction (Type w) G) :\n    let U := ObjectProperty.ι (ContAction.IsDiscrete (V := Type w) (G := G))\n      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type w) (G := G))\n      ⋙ Action.forget (Type w) G\n    ∃ (I : Type w) (A : I → DiscreteContAction (Type w) G) (f : ∀ i, A i ⟶ M),\n      (∀ i, Finite (A i).obj.obj.V) ∧\n      Nonempty (IsColimit (Cofan.mk M f)) ∧\n      Nonempty (IsColimit (U.mapCocone (Cofan.mk M f)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095853-L-312809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095853-L-312809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

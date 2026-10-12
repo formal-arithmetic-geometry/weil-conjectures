@@ -1,0 +1,153 @@
+{
+ "id": "lem-exc-galois-stalk-finite-action-realization",
+ "kind": "statement",
+ "title": "Finite discrete G-action realization",
+ "statement": "Let K, Ks, and Omega be fields in Type u, with compatible algebra structures K → Ks → Omega, Ks a separable closure of K, and Omega algebraically closed. Set S = Spec K, J = its small etale topology, p = the point Spec Omega → S, G = Gal(Ks/K), and w = max(u+1,v). Let T : Sheaf J (Type w) → DiscreteContAction (Type w) G be a functor and j : U ∘ T ≅ p.sheafFiber a natural isomorphism, where U forgets the action. Assume the canonical germ formula of lem-exc-galois-stalk-action-functor: for each g, each extending K-automorphism tau of Omega, x' = Spec(tau) ≫ x, and section z, j(g • j⁻¹(germ_x z)) = germ_x' z. Then every M whose underlying set is finite is in T.essImage, namely there exists a sheaf F and an equivariant isomorphism T(F) ≅ M. This includes the empty finite set and arbitrary finite sets in Type w.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT, proof of theorem-equivalence-sheaves-point"
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-galois-stalk-action-functor"
+ ],
+ "proof": [
+  {
+   "text": "Transport the finite action of M onto Fin n in Type u along a bijection; continuity is preserved. Apply etaleFieldGsets to obtain an etale K-scheme X with that small G-set of Ks-points.",
+   "uses": [
+    "lem-exc-etale-field-gsets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The representable h_X is a sheaf. Lift its values to Type w and use the representable-stalk isomorphism to identify its stalk with Omega-points of X. Each such point has finite separable residue field and therefore factors uniquely through Ks. This identifies the stalk with the original finite action as sets.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend each g to Omega and apply the assumed canonical germ formula to the identity germ of X. Together with the precomposition action formula in etaleFieldGsets it makes the bijection equivariant; its inverse is equivariant, giving T(h_X) ≅ M. The empty case uses the empty etale scheme.",
+   "uses": [
+    "lem-exc-etale-field-gsets",
+    "lem-exc-galois-stalk-action-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-gsets",
+  "lem-exc-galois-stalk-action-functor",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QT; universe adaptation and Lean glue by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor realizing finite discrete continuous Galois sets and preserving coproducts is essentially surjective",
+   "results": "GaloisCategory.functorToContAction essential-surjectivity results only; no theorem for the geometric stalk.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.coconePointsIsoOfNatIso",
+   "results": "Found the colimit comparison API used in the combining proof.",
+   "date": "2026-10-12",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteContAction.*[Cc]oproduct|orbit.*[Ff]inite",
+   "results": "No categorical orbit decomposition found. Direct source search found selfEquivSigmaOrbits', orbitEquivQuotientStabilizer, stabilizer_isOpen, and quotient_finite_of_isOpen, used in the orbit proof.",
+   "date": "2026-10-12",
+   "verdict": "tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A discrete continuous action of a compact topological group decomposes as a coproduct of finite orbits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite continuous Galois action represented by stalk of representable etale sheaf",
+   "results": "PreGaloisCategory.exists_lift_of_continuous and fiberIsoQuotientStabilizer require a Galois category and its fiber functor; no geometric stalk realization or comparison with the given germ formula. Second reader found no applicable replacement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MulAction.selfEquivSigmaOrbits'",
+   "results": "Exact set orbit decomposition equivalence already used; does not supply continuous categorical coproduct or finite geometric realization.",
+   "date": "2026-10-12",
+   "verdict": "tool match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*essImage|essImage.*finite|orbit.*[Cc]ofan",
+   "results": "No finite geometric realization or orbit categorical coproduct in Mathlib hits. Separate rg searches in lean/Sheaf and upstream algebraic geometry found no replacement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-galois-stalk-action-essentially-surjective",
+   "place": "proof, steps 1 and 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkFiniteActionRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galoisStalkActionFunctor_finite_mem_essImage",
+  "statement": "theorem galoisStalkActionFunctor_finite_mem_essImage\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] :\n    let S := Spec (.of K)\n    let J := S.smallEtaleTopology\n    let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))\n    let p := pointSmallEtale s\n    let G := Gal(Ks/K)\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))\n      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))\n    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤\n        DiscreteContAction (Type (max (u + 1) v)) G)\n      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),\n      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)\n          (τ : Ω ≃ₐ[K] Ω)\n          (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n            τ.toRingHom.comp (algebraMap Ks Ω))\n          (X : S.Etale) (x x' : p.fiber.obj X)\n          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n          (z : F.obj.obj (op X)),\n        (j.hom.app F) ((T.obj F).obj.obj.ρ g\n          ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =\n            p.toPresheafFiber X x' F.obj z) →\n      ∀ (M : DiscreteContAction (Type (max (u + 1) v)) G),\n        Finite M.obj.obj.V → T.essImage M",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095853-L-312809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095853-L-312809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
