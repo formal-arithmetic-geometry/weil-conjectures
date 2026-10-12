@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-minimal-prime-localization-radical",
+ "kind": "statement",
+ "title": "Radical of an ideal at a minimal prime",
+ "statement": "Let R be a commutative ring, I an ideal and q a prime minimal over I, meaning a minimal element among prime ideals containing I. Let R_q be its localization [def-weil-pbc-localization-at-prime]. Then the radical of IR_q equals qR_q. The radical consists of elements whose positive powers belong to the ideal. This applies without a Noetherian assumption.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, Ad(item-power); standard prime correspondence for localization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes with A=R_q. Its conclusion is exactly sqrt(IR_q)=qR_q, for the localization in the statement; no Noetherian assumption is needed.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, Ad(item-power); standard prime correspondence for localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The radical of an ideal in the localization at a minimal prime over it is the extension of that prime",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The radical of an ideal localized at a minimal prime over it is the localized maximal ideal",
+   "date": "2026-10-12",
+   "results": "Minimal-prime localization and radical lemmas, including Localization.AtPrime.map_eq_maximalIdeal.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes",
+   "date": "2026-10-12",
+   "results": "Exact declaration in Mathlib.RingTheory.Ideal.MinimalPrime.Localization.",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "radical_map_of_mem_minimalPrimes|minimalPrimes.*radical",
+   "date": "2026-10-12",
+   "results": "Localization.lean:211 exact theorem; Basic.lean:104 radical_minimalPrimes.",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes",
+  "file": "Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean",
+  "line": 211,
+  "how": "Exact after setting A=Localization.AtPrime q. Its conclusion is the radical of the extended ideal equals the extended prime. The maximal-ideal identification used by the parent is Localization.AtPrime.map_eq_maximalIdeal."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCharPPreparationCore",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential-surjectivity approximation: 07FJ characteristic-p preparation, Radical of an ideal at a minimal prime",
+   "via": [
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.RingTheory.Ideal.MinimalPrime.Localization",
+  "declaration": "IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes",
+  "branch": "mathlib",
+  "by": "P1",
+  "date": "2026-10-12",
+  "statement": "theorem IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes (q : Ideal R) [q.IsPrime] [IsLocalization.AtPrime A q] (I : Ideal R) (hIq : q ∈ I.minimalPrimes) : (I.map (algebraMap R A)).radical = q.map (algebraMap R A)"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T173847-L-3301416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T173847-L-3301416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,19 +11,10 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.ImprovePresentation
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
-import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
-import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
-import Sheaf.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.PopescuCharPPreparationGlobal
+import Sheaf.RingTheory.EssentiallySmoothBaseChange
+import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+import Mathlib.RingTheory.Finiteness.Ideal
 
 /-!
 # Popescu characteristic-p preparation: auxiliary construction
@@ -295,6 +286,93 @@ theorem exists_popescu_char_p_preparation_core
               ((Ideal.Quotient.mkₐ R K).comp
                 ((IsScalarTower.toAlgHom R Λ L).comp γ))
               (fun _ _ ↦ Commute.all _ _) := by
-  sorry
+  let H := Ideal.map α.toRingHom (singularIdeal k A)
+  let L₀ := Localization.AtPrime q.asIdeal
+  have hmin : q.asIdeal ∈ H.minimalPrimes := by
+    simpa only [popescuIdeal, Ideal.radical_minimalPrimes] using hminimal
+  have hrad : (H.map (algebraMap Λ L₀)).radical = IsLocalRing.maximalIdeal L₀ := by
+    rw [IsLocalization.AtPrime.radical_map_of_mem_minimalPrimes L₀ q.asIdeal H hmin,
+      Localization.AtPrime.map_eq_maximalIdeal]
+  obtain ⟨N₀, hN₀⟩ := Ideal.exists_pow_le_of_le_radical_of_fg
+    (le_of_eq hrad.symm) (IsNoetherian.noetherian _)
+  have hpower : IsLocalRing.maximalIdeal L₀ ^ (N₀ + 1) ≤ H.map (algebraMap Λ L₀) :=
+    (Ideal.pow_le_pow_right (Nat.le_succ N₀)).trans hN₀
+  obtain ⟨m, algΛ, towerΛ, C, ringC, algkC, algRC, towerC, fpC, β, γ,
+    hcomp, hsing, r, π, hr, hπq, hannR, hannΛ, hstrict, hglobal⟩ :=
+    exists_popescu_char_p_preparation_global p hp α q hreg (N₀ + 1) (by omega) hpower
+  let := algΛ
+  let := towerΛ
+  let := ringC
+  let := algkC
+  let := algRC
+  let := towerC
+  let := fpC
+  refine ⟨m, algΛ, towerΛ, C, ringC, algkC, algRC, towerC, fpC, β, γ,
+    hcomp, hsing, r, π, hr, hπq, hannR, hannΛ, hstrict, ?_⟩
+  let R := MvPolynomial (Fin m) k
+  let Q := Localization.AtPrime (q.asIdeal.under R)
+  let L := Localization.AtPrime q.asIdeal
+  let := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal
+  obtain ⟨n, hn, hpow, I₀, K, hI, hK, hIK, t, D', ringD', localD', artD',
+    algRE, algIE, towerE, hE, a, b, hab⟩ := hglobal
+  let := ringD'
+  let := localD'
+  let := artD'
+  let E := MvPolynomial (Fin t) D' 
+  let := algRE
+  let := algIE
+  let := towerE
+  let I := I₀.map (algebraMap R Q)
+  let : Algebra (R ⧸ I₀) (Q ⧸ I) :=
+    Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :
+      I₀ ≤ I.comap (algebraMap R Q))
+  have : IsScalarTower R (R ⧸ I₀) (Q ⧸ I) :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  let : Algebra (Q ⧸ I) (L ⧸ K) :=
+    Ideal.Quotient.algebraQuotientOfLEComap (Ideal.map_le_iff_le_comap.mp hIK)
+  have : IsScalarTower Q (Q ⧸ I) (L ⧸ K) :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  let : Algebra (R ⧸ I₀) (L ⧸ K) :=
+    ((algebraMap (Q ⧸ I) (L ⧸ K)).comp (algebraMap (R ⧸ I₀) (Q ⧸ I))).toAlgebra
+  have : IsScalarTower (R ⧸ I₀) (Q ⧸ I) (L ⧸ K) :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  have : IsScalarTower R (R ⧸ I₀) (L ⧸ K) :=
+    IsScalarTower.of_algebraMap_eq fun r ↦ by
+      change algebraMap R (L ⧸ K) r =
+        Ideal.Quotient.mk K (algebraMap Q L (algebraMap R Q r))
+      rw [← IsScalarTower.algebraMap_apply R Q L]
+      rfl
+  let D := (Q ⧸ I) ⊗[R ⧸ I₀] E
+  let : Algebra Q D := Algebra.TensorProduct.leftAlgebra
+    (R := R ⧸ I₀) (S := Q) (A := Q ⧸ I) (B := E)
+  let : Algebra R D := Algebra.TensorProduct.leftAlgebra
+    (R := R ⧸ I₀) (S := R) (A := Q ⧸ I) (B := E)
+  have : IsScalarTower Q (Q ⧸ I) D := inferInstance
+  have : IsScalarTower R Q D := inferInstance
+  have : IsScalarTower R (R ⧸ I₀) D := inferInstance
+  let j : E →ₐ[R] D :=
+    (Algebra.TensorProduct.includeRight (R := R ⧸ I₀) (A := Q ⧸ I)).restrictScalars R
+  let f : Q ⊗[R] C →ₐ[Q] D :=
+    Algebra.TensorProduct.lift (Algebra.ofId Q D) (j.comp a) (fun _ _ ↦ Commute.all _ _)
+  let b' : E →ₐ[R ⧸ I₀] L ⧸ K :=
+    b.extendScalarsOfSurjective Ideal.Quotient.mk_surjective
+  let g : D →ₐ[Q] L ⧸ K :=
+    (Algebra.TensorProduct.lift (Algebra.ofId (Q ⧸ I) (L ⧸ K)) b'
+      (fun _ _ ↦ Commute.all _ _)).restrictScalars Q
+  have hD : EssentiallySmooth (Q ⧸ I) D := essentiallySmooth_baseChange hE
+  refine ⟨n, hn, hpow, I, K, hI, hK, hIK, D, inferInstance, inferInstance,
+    inferInstance, inferInstance, hD, f, g, ?_⟩
+  ext y
+  change g (f (1 ⊗ₜ[R] y)) = _
+  have hf : f (1 ⊗ₜ[R] y) = (1 ⊗ₜ[R ⧸ I₀] a y) := by
+    change algebraMap Q D 1 * (1 ⊗ₜ[R ⧸ I₀] a y) = _
+    simp
+  rw [hf]
+  change algebraMap (Q ⧸ I) (L ⧸ K) 1 * b' (a y) = _
+  rw [map_one, one_mul]
+  change b (a y) = _
+  simpa only [AlgHom.comp_apply, AlgHom.restrictScalars_apply,
+    Algebra.TensorProduct.includeRight_apply, Algebra.TensorProduct.lift_tmul,
+    map_one, one_mul] using DFunLike.congr_fun hab y
 
 end Algebra

@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-essentially-smooth-base-change",
+ "kind": "statement",
+ "title": "Essential smoothness under base change",
+ "statement": "Let R,Q be commutative rings with carriers in Type u, and E a commutative R-algebra with carrier in Type v. Let R→Q be any algebra map. Suppose E is essentially smooth over R [def-weil-pbc-essentially-smooth-ring-map], meaning E is R-isomorphic to a localization of a smooth R-algebra. Then Q⊗_R E [def-weil-pbc-module-tensor-product], with its canonical left Q-algebra structure, is essentially smooth over Q. No flatness or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00DK (lemma-tensor-localization) and 00T4 (lemma-base-change-smooth), used in Smoothing Ring Maps, proof of Lemma 07FJ, item-eighth-resolve"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write E as S⁻¹P for a smooth R-algebra P, transporting the P-algebra structure and the localization property along the given R-algebra equivalence.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set P′=Q⊗_R P; smooth base change makes P′ smooth over Q.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Localization base change makes Q⊗_R E the localization of P′ at the image of S. The induced P′-algebra structure is the tensor of id_Q and P→E; its restriction to Q is the canonical one. Restrict the localization equivalence to Q to obtain an essentially smooth presentation. The constructed P′ lies in Type(max(u,v)), exactly the universe of the smooth model required for Q⊗_R E.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-essentially-smooth-ring-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00DK (lemma-tensor-localization) and 00T4 (lemma-base-change-smooth), used in Smoothing Ring Maps, proof of Lemma 07FJ, item-eighth-resolve"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An essentially smooth algebra stays essentially smooth after extension of scalars",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Essentially smooth algebra factorization after localization and quotient base change",
+   "date": "2026-10-12",
+   "results": "Smooth base-change and standard-smooth localization tools; no theorem for the project definition of EssentiallySmooth.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProduct_tensorProduct_right",
+   "date": "2026-10-12",
+   "results": "Exact localization base-change tool used in the proof.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_tensorProduct_right|Smooth.baseChange",
+   "date": "2026-10-12",
+   "results": "Localization/BaseChange.lean:371 and 405; no exact EssentiallySmooth theorem.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCharPPreparationCore",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential-surjectivity approximation: 07FJ characteristic-p preparation, Essential smoothness under base change",
+   "via": [
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EssentiallySmoothBaseChange",
+  "file": "lean/Sheaf/RingTheory/EssentiallySmoothBaseChange.lean",
+  "declaration": "Algebra.essentiallySmooth_baseChange",
+  "statement": "theorem essentiallySmooth_baseChange\n    {R Q : Type u} {E : Type v}\n    [CommRing R] [CommRing Q] [CommRing E] [Algebra R Q] [Algebra R E]\n    (hE : EssentiallySmooth R E) : EssentiallySmooth Q (Q ⊗[R] E)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T173847-L-3301416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T173847-L-3301416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
