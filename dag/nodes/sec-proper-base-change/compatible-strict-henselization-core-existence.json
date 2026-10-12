@@ -10,8 +10,28 @@
  ],
  "proof": [
   {
-   "text": "Proof: take A and B to be the actual coordinate-ring colimits strictHenselizationRing of the indicated geometric points, with eA and eB the identity spectrum isomorphisms. By affine neighbourhood cofinality and Tag 04HX, these colimits are the strict henselizations of the local rings at the images of σ and τ. Their residue fields are the separable algebraic closures of the respective point residue fields inside Ω; they are henselian local rings with separably closed residue fields. The integral factorizations hσ and hτ identify k and k' as algebraic extensions of those point residue fields. Since k and k' are separably closed, their embeddings into Ω contain these separable closures. The remaining extensions are algebraic purely inseparable: an algebraic extension of a separably closed field has no nontrivial separable part. Take ρA and ρB to be the spectra of these residue inclusions. Purely inseparable algebraic field extensions give integral, radicial, surjective spectrum maps, hence universal homeomorphisms. The inclusions extend the given point residue maps, so composition with the ring residue maps and the colimit structural maps gives σ and τ. No ring data are chosen from a mere unproved existence assertion. ",
+   "text": "For each point sigma, its assumed integral factorization equals the canonical residue embedding by the SpecToEquivOfField bijection, or equivalently cancellation of the mono fromSpecResidueField. For nu composed with sigma, the unique point of Spec Omega maps to the unique point of Spec k. Transport this residue embedding to the image of the composite and cancel fromSpecResidueField again to show its composite with Spec.preimage nu equals the geometric-point residue embedding.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply strictHenselizationResidue to s = nu composed with sigma, with the Omega algebra structure given by its canonical residue embedding. Obtain strict henselian local structure on the concrete strictHenselizationRing s, the unique residue equivalence delta with the relative separable closure E in Omega, and the geometric-point factorization.",
    "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved upstream RingHom.exists_comp_eq_of_isSepClosed (WeilConjectures.Mathlib.FieldTheory.IsSepClosed) to the separable extension E/F, the integral embedding b:F to k, and the embeddings k to Omega and E to Omega. This gives eta:E to k whose composite into Omega is the inclusion. Injectivity of k to Omega proves eta composed with F to E equals b. For every x in k, its integral polynomial over F is mapped to E, proving eta.IsIntegral by RingHom.IsIntegralElem.of_comp. Compose eta with delta to obtain gamma:ResidueField(strictHenselizationRing s) to k; it is integral since delta is an isomorphism. Since its source is separably closed, Mathlib infers IsPurelyInseparable, and Algebra.IsUniversalHomeomorphism.of_isPurelyInseparable makes rho = Spec.map gamma a universal homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equation beta composed with gamma = inclusion composed with delta identifies nu composed with rho with the canonical geometric residue map. The strictHenselizationResidue structural equation therefore gives the required factorization after precomposition by nu. A field spectrum map is flat and surjective, hence epi by Flat.epi_of_flat_of_surjective; cancel nu. Apply this single-point proof to sigma with nu composed with iota and to tau with nu. Use the concrete colimit rings as A and B and identity spectrum isomorphisms, normalizing associativity. The compatibility hypothesis h_iota is unnecessary for these independent existence clauses.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map"
    ],
@@ -19,13 +39,14 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04HX, 03PS and 04DY; second reader corrected decomposition"
+  "place": "Tags 04HX, 03PS and 04DY; J3 Lean implementation 2026-10-12 using existing strictHenselizationResidue and separable-field descent"
  },
  "mathlib_searches": [
   {
@@ -101,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T135236-L-1666580",
-  "kind": "interface",
+  "landing": "20261012T163616-L-2785849",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
