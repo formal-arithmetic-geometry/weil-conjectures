@@ -25,23 +25,23 @@
  ],
  "proof": [
   {
-   "text": "For each point of T, apply finite etale local splitting. The resulting pointed etale neighbourhoods are jointly surjective and form a cover, with a finite set of sheets on each member.",
+   "text": "Choose the pointed etale neighbourhood and finite coproduct splitting supplied by finite_etale_etale_local_split at each point of T. Cover.mkOfCovers forms the jointly surjective etale cover from these choices. Replace each summand by its given isomorphism with the base, using Sigma.mapIso and the cofan colimit, to obtain an isomorphism from the coproduct of copies to the pullback, compatible with its second projection.",
    "uses": [
     "lem-weil-pbc-finite-etale-etale-local-split"
    ],
    "elementary": false
   },
   {
-   "text": "The constant-sheaf coproduct comparison identifies the sections of each split cover with the constant sheaf of its finite set of sheets. Restriction to the localized small etale site respects this identification.",
+   "text": "For an etale neighbourhood U, construct a natural isomorphism between the restriction of h_P, transported to U.left.smallEtaleTopology by Etale.overSheafEquiv, and constantSetCoproductPresheaf U.left J. A section a over T is sent to pullback.lift a W.hom followed by the inverse coproduct splitting; the inverse composes with the splitting and pullback.fst. The pullback projection equations prove both inverse laws and naturality. Apply constantSheaf_sets_representable and constantSheafSheafCongrIso, then use full faithfulness of the site equivalence to obtain the local model on the localized site. Its value is ULift J, which is finite, including J empty.",
    "uses": [
     "lem-galois-constant-sheaf-sets-representable"
    ],
    "elementary": false
   },
   {
-   "text": "Lift a geometric point to a member of the cover. The local finite constant model makes its stalk finite, by the finite local-value stalk argument. The same argument works for separably closed points: finite etale fibres split over a separably closed field. Finiteness is precisely finite generation of a set. Empty sheets and the empty base are allowed.",
+   "text": "For a separably closed geometric point s, use Cover.exists_eq and exists_fac_of_etale_of_isSepClosed to choose a lift to a cover member U. For the site point Phi = pointSmallEtale s and its chosen element a at U, the category of elements of Phi.over a is equivalent to Over (Phi.fiber.elementsMk U a), by Mathlib fromOverFunctorElementsEquivalence. Over.initial_forget and Functor.Final.colimitIso identify the stalk of F.over U with the stalk of F. Lift the site point to the coefficient universe using uliftSheafFiberIso and apply the local sheaf isomorphism and sheafFiberConstantSheafIso. This identifies the original stalk with the finite local value. Convert finiteness to finite generation with ConcreteCategory.isFinitelyGenerated_iff_finite, obtaining IsFiniteSheaf. All glue is proved in private helpers, with no new sorry.",
    "uses": [
-    "lem-galois-flc-set-stalk-finite"
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
    ],
    "elementary": false
   }
@@ -49,12 +49,12 @@
  "proof_deps": [
   "lem-weil-pbc-finite-etale-etale-local-split",
   "lem-galois-constant-sheaf-sets-representable",
-  "lem-galois-flc-set-stalk-finite"
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03RV, read on the Stacks website; expanded local-model and descent argument"
+  "place": "Tags 03RV (2) to (1), 03Q1 (3), 03PR and 03P5; finite splitting from etale.tex Tag 04HN. Q1 wrote the localization and stalk glue in Lean, using the existing splitting and constant-sheaf comparison declarations. Source read on the Stacks website because the local TeX files are absent."
  },
  "mathlib_searches": [
   {
@@ -129,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T042407-L-1814906",
-  "kind": "interface",
+  "landing": "20261012T053948-L-2643074",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
