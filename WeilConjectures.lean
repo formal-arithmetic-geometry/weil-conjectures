@@ -435,6 +435,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.Sites.GmTorsorDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
+public import WeilConjectures.AlgebraicGeometry.Sites.HypercoverDescent
 public import WeilConjectures.AlgebraicGeometry.Sites.KInjectiveResolution
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
