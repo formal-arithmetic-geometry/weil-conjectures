@@ -1522,6 +1522,7 @@ public import WeilConjectures.RingTheory.Flat.ShortExact
 public import WeilConjectures.RingTheory.GenericConnectedness
 public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
+public import WeilConjectures.RingTheory.GradedAlgebra.PowersAlgebra
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.Etale
