@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyTriangleLaws
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import all Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Mathlib.CategoryTheory.Presentable.Directed
 
 /-! # Continuity for a supplied fixed-base cohomology cocone
 
@@ -79,6 +79,38 @@ theorem nonempty_isColimit_cofiltered_fixed_base_cohomology
     (hB : ∀ j : J, B.ι.app (op j) ≫ eB.hom =
       (eH j).hom ≫ AddCommGrpCat.ofHom
         (cohomologyTriangleMap (c.π.app j) (π.app j) t (ht j) G q)) :
-    Nonempty (IsColimit B) := by sorry
+    Nonempty (IsColimit B) := by
+  obtain ⟨I, hI, hdir, hne, R, hR⟩ := IsFiltered.exists_directed Jᵒᵖ
+  let D' := R.leftOp ⋙ D
+  let (i : Iᵒᵖ) : CompactSpace (D'.obj i) := inferInstanceAs
+    (CompactSpace (D.obj (R.obj i.unop).unop))
+  let (i : Iᵒᵖ) : QuasiSeparatedSpace (D'.obj i) := inferInstanceAs
+    (QuasiSeparatedSpace (D.obj (R.obj i.unop).unop))
+  let (i j : Iᵒᵖ) (f : i ⟶ j) : IsAffineHom (D'.map f) := inferInstanceAs
+    (IsAffineHom (D.map (R.map f.unop).unop))
+  let c' := c.whisker R.leftOp
+  have hc' : IsLimit c' := (Functor.Initial.isLimitWhiskerEquiv R.leftOp c).symm hc
+  let v := fun i : I ↦ π.app (R.obj i).unop
+  have wv : ∀ (i j : I) (f : i ⟶ j), v j = D'.map f.op ≫ v i := by
+    intro i j f
+    simp [v, D']
+  have wLimit : ∀ i : I, t = c'.π.app (op i) ≫ v i := fun i ↦ ht (R.obj i).unop
+  let H' := R ⋙ H
+  let B' := B.whisker R
+  suffices h : Nonempty (IsColimit B') from
+    h.map (Functor.Final.isColimitWhiskerEquiv R B)
+  set_option backward.isDefEq.respectTransparency true in
+    apply continuity_constant_pullback D' c' hc' S G v wv t wLimit q H'
+      (fun i ↦ eH (R.obj i).unop) ?_ B' eB ?_
+    · intro i j f
+      simpa only [H', D', v, cohomologyTriangleMap, AddCommGrpCat.ofHom_comp,
+        Category.assoc, Functor.comp_map, Functor.leftOp_map, Quiver.Hom.op_unop,
+        Functor.comp_obj, Opposite.op_unop]
+        using hH (R.obj j).unop (R.obj i).unop (R.map f).unop
+    · intro i
+      simpa only [B', c', v, cohomologyTriangleMap, AddCommGrpCat.ofHom_comp,
+        Category.assoc, Cocone.whisker_ι, Cone.whisker_π, Opposite.op_unop,
+        Functor.whiskerLeft_app, Functor.leftOp_obj]
+        using hB (R.obj i).unop
 
 end AlgebraicGeometry.Etale
