@@ -38,9 +38,14 @@ The Weil structures of `i^*`, `j^*`, `i_*` and `Rj_*` are those of the transport
 pro-étale Weil sheaves, and the adjunctions `φ^* ⊣ φ_*` lift those on the geometric fibers
 (`AlgebraicGeometry.ProEtaleWeilSheaf.upperStarLowerStarAdjunction`). The right adjoint `Ri^!` is
 then constructed by the recollement argument `CategoryTheory.Pretriangulated.Recollement`
-applied to Weil complexes, whose inputs are derived from the sheaf-level facts of
-`WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction` by the criterion of
-`WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport`. The equivariance follows from the
+applied to Weil complexes, whose inputs are derived by the criterion of
+`WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport` from sheaf-level facts transported
+from the geometric fibers: the counit `i^* i_* ⟶ 𝟭` is invertible, `j^* i_* = 0`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.isZero_upperStar_obj_lowerStar_obj`), `i^*` and `j^*`
+jointly detect zero objects
+(`AlgebraicGeometry.ProEtaleWeilSheaf.isZero_of_isZero_upperStar_of_isCompl`) and `i_*` is
+exact (`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl`).
+The equivariance follows from the
 uniqueness of the closed-support triangle with given vertices
 (`CategoryTheory.Pretriangulated.Recollement.exists_iso_triangle`): forgetting the Weil
 structures commutes with `i_*` and `Rj_*`
@@ -60,6 +65,59 @@ namespace AlgebraicGeometry
 open ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+/-- Along a closed immersion `i`, the counit `i^* i_* F ⟶ F` of pro-étale Weil sheaves is
+invertible, as is the counit of `ī^* ⊣ ī_*`. -/
+instance ProEtaleWeilSheaf.isIso_upperStarLowerStarAdjunction_counit_of_isClosedImmersion
+    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    (i : X ⟶ Y) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))] :
+    IsIso (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l i).counit :=
+  IsoAlgebra.isIso_mapOfNatIsoAdjunction_counit _ _ _ _
+
+section SheafLocalization
+
+variable {Z U X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+  [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
+  (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+  (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+
+omit [Fact (ringChar k₀ ≠ l)] [IsClosedImmersion i] [QuasiCompact j] in
+include j in
+/-- `j^* i_* = 0` on pro-étale Weil sheaves, for complementary `i` and `j`
+(`AlgebraicGeometry.ProEtale.isZero_adicUpperStar_obj_adicLowerStar_obj` on the underlying
+sheaves). -/
+lemma ProEtaleWeilSheaf.isZero_upperStar_obj_lowerStar_obj
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (M : ProEtaleWeilSheaf k₀ l Z) :
+    IsZero ((ProEtaleWeilSheaf.upperStar k₀ l j).obj
+      ((ProEtaleWeilSheaf.lowerStar k₀ l i).obj M)) :=
+  (ProEtaleWeilSheaf.isZero_iff _).2 (isZero_adicUpperStar_obj_adicLowerStar_obj _ _
+    (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij).disjoint M.carrier)
+
+omit [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j] in
+/-- Blueprint `lem-exc-open-closed-detection` for pro-étale Weil sheaves: for complementary `i`
+and `j`, a pro-étale Weil sheaf `F` with `i^* F = 0` and `j^* F = 0` is zero. -/
+lemma ProEtaleWeilSheaf.isZero_of_isZero_upperStar_of_isCompl
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : ProEtaleWeilSheaf k₀ l X)
+    (hi : IsZero ((ProEtaleWeilSheaf.upperStar k₀ l i).obj F))
+    (hj : IsZero ((ProEtaleWeilSheaf.upperStar k₀ l j).obj F)) : IsZero F :=
+  (ProEtaleWeilSheaf.isZero_iff _).2 (AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl _ _
+    (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij) F.carrier
+    ((ProEtaleWeilSheaf.isZero_iff _).1 hi) ((ProEtaleWeilSheaf.isZero_iff _).1 hj))
+
+omit [Fact (ringChar k₀ ≠ l)] in
+include j in
+/-- Blueprint `lem-exc-proetale-closed-exact` for pro-étale Weil sheaves: for complementary `i`
+and `j`, the pushforward `i_*` of pro-étale Weil sheaves is exact, as it is on the underlying
+sheaves (`AlgebraicGeometry.ProEtale.preservesFiniteColimits_adicLowerStar_of_isCompl`). -/
+lemma ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
+    PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l i) :=
+  have := preservesFiniteColimits_adicLowerStar_of_isCompl (l := l) _ _
+    (Scheme.Hom.isCompl_range_geometricFiberMap i j (comp_over i (Spec (CommRingCat.of k₀)))
+      (comp_over j (Spec (CommRingCat.of k₀))) hij)
+  IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
+
+end SheafLocalization
 
 section Forget
 
