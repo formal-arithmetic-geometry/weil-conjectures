@@ -7618,3 +7618,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:05 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ThickeningIntegral (stage 3; reviewer PASS; first push; landing 20261012T120536-L-961186 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:05 L: merged deliver/D2/Sheaf.Topology.NestedSliceExtensionStalks (stage 3; reviewer PASS; first push; landing 20261012T120552-L-962712 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:06 L: merged deliver/D3/Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat (stage 3; reviewer PASS; first push; landing 20261012T120608-L-963974 (proof); batch 20261012T120425; modules 1; new nodes 0)
+- 12:06 L: returned deliver/F1/Sheaf.RingTheory.PopescuSeparablePreparation (reviewer RETURN: (reviewer X-454eb, head 454eb017e) H3/brief point 1: in lean/Sheaf/RingTheory/PopescuSeparablePreparation.lean line 71 r)
