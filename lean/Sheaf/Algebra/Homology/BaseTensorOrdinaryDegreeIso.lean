@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Mathlib.RingTheory.IsTensorProduct
 
 /-!
 # Degreewise ordinary base tensor comparison
@@ -53,6 +54,55 @@ theorem exists_baseTensorOrdinaryDegreeIso
         ((extendScalars.{_, _, max uR uA uB v}
           (algebraMap A (A ⊗[R] B))).obj M),
       ∀ (b : B) (m : M), e.hom (b ⊗ₜ[R,algebraMap R B] m) =
-        Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)] m := by sorry
+        Algebra.TensorProduct.includeRight b ⊗ₜ[A,algebraMap A (A ⊗[R] B)] m := by
+  let : Module R M := Module.compHom M (algebraMap R A)
+  let : IsScalarTower R A M := IsScalarTower.of_compHom R A M
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := B)
+  let X := (extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).obj
+    ((restrictScalars.{max uR uA uB v} (algebraMap R A)).obj M)
+  let Y := (restrictScalars.{max uR uA uB v}
+    Algebra.TensorProduct.includeRight.toRingHom).obj
+    ((extendScalars.{_, _, max uR uA uB v} (algebraMap A (A ⊗[R] B))).obj M)
+  let f : (restrictScalars (algebraMap R B)).obj (of B B) ≃ₗ[R] B :=
+    { AddEquiv.refl B with
+      map_smul' := by
+        intro r b
+        change algebraMap R B r * (show B from b) = r • (show B from b)
+        exact (Algebra.smul_def r (show B from b)).symm }
+  let fT := TensorProduct.congr f (LinearEquiv.refl R M)
+  let fB : X ≃ₗ[B] (B ⊗[R] M) :=
+    { fT.toAddEquiv with
+      map_smul' := by
+        intro b x
+        change fT (b • x) = b • fT x
+        induction x using TensorProduct.induction_on with
+        | zero => simp
+        | add x y hx hy => simp only [smul_add, map_add, hx, hy]
+        | tmul b' m => rfl }
+  let g : (A ⊗[R] B) ≃ₗ[A]
+      (restrictScalars (algebraMap A (A ⊗[R] B))).obj (of (A ⊗[R] B) (A ⊗[R] B)) :=
+    { AddEquiv.refl (A ⊗[R] B) with
+      map_smul' := fun a x ↦ Algebra.smul_def a x }
+  let gT := TensorProduct.congr g (LinearEquiv.refl A M)
+  let gB : ((A ⊗[R] B) ⊗[A] M) ≃ₗ[B] Y :=
+    { gT.toAddEquiv with
+      map_smul' := by
+        intro b x
+        change gT (b • x) = b • (show Y from gT x)
+        induction x using TensorProduct.induction_on with
+        | zero => simp
+        | add x y hx hy => simp only [smul_add, map_add, hx, hy]
+        | tmul c m =>
+          change (b • c) ⊗ₜ[A,algebraMap A (A ⊗[R] B)] m =
+            (Algebra.TensorProduct.includeRight b * c) ⊗ₜ[A,algebraMap A (A ⊗[R] B)] m
+          rw [Algebra.smul_def]
+          rfl }
+  let e := (Algebra.IsPushout.cancelBaseChange R B A (A ⊗[R] B) M).symm
+  refine ⟨(fB.trans (e.trans gB)).toModuleIso, ?_⟩
+  intro b m
+  change gB (e (fB (b ⊗ₜ[R,algebraMap R B] m))) = _
+  change gB (e (b ⊗ₜ[R] m)) = _
+  rw [Algebra.IsPushout.cancelBaseChange_symm_tmul]
+  rfl
 
 end ModuleCat

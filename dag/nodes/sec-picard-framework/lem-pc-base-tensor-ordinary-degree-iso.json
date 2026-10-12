@@ -13,7 +13,7 @@
  },
  "proof": [
   {
-   "text": "Define the B-linear forward map b ⊗ m ↦ (1 ⊗ b) ⊗ m and inverse (a ⊗ b) ⊗ m ↦ b ⊗ am using the tensor universal property. R-balancing uses the algebra structures; A-balancing uses (aa₀)m = a(a₀m).",
+   "text": "Identify the ring-hom-based restriction of B with B as an R-module by the identity additive equivalence, using Algebra.smul_def. TensorProduct.congr with the identity of M gives fT; tensor induction (zero, sum, pure tensor) proves B-linearity, giving fB on the scalar extension of the restricted module. Similarly identify A tensor_R B with its restriction along algebraMap A (A tensor_R B), tensor with M, and check B-linearity by induction using Algebra.smul_def, giving gB into the stated restricted scalar extension.",
    "uses": [
     "def-weil-pbc-module-tensor-product",
     "def-weil-module-base-change"
@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "The composites fix pure tensors: one returns b ⊗ m, and the other returns (1 ⊗ b) ⊗ am = (a ⊗ b) ⊗ m by A-balancing. Tensor induction proves both identities, giving the isomorphism and generator formula. Mathlib IsPushout.cancelBaseChange and cancelBaseChange_symm_tmul implement this after transport of the scalar actions.",
+   "text": "Take the inverse of Mathlib Algebra.IsPushout.cancelBaseChange R B A (A tensor_R B) M, and compose fB, this equivalence, and gB. LinearEquiv.toModuleIso gives the required ModuleCat isomorphism. On b tensor m the two identity transports preserve pure tensors, and Algebra.IsPushout.cancelBaseChange_symm_tmul gives includeRight b tensor m. This is the degreewise universal-property tensor cancellation in the unit route; no flatness is used.",
    "uses": [
     "def-weil-pbc-module-tensor-product",
     "def-weil-module-base-change"
@@ -142,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T110319-L-621707",
-  "kind": "interface",
+  "landing": "20261012T135231-L-1663478",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
