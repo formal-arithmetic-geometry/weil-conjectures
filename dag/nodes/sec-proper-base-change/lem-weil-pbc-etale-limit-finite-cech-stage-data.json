@@ -20,37 +20,39 @@
  ],
  "proof": [
   {
-   "text": "Spread out the qcqs finite-presentation étale objects U and V_k and all covering arrows, descend étaleness, then descend surjectivity of their finite disjoint union to a common stage. This gives U₀,V₀,f₀,eU,eV with the covering-arrow descent equation.",
+   "text": "Use exists_etale_limit_finite_cover_descent to obtain the stage and the finite covering family, its qcqs properties, the object isomorphisms and arrow equation, and coverings at all later stages.",
    "uses": [
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-descend-etale",
-    "lem-weil-pbc-descend-surjective",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-weil-pbc-etale-limit-finite-cover-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Use actual base change for all later families. Coverings remain coverings. Preservation of finite limits gives the nerve isomorphisms eNj and eNlim with each projection equation. Cartesian-square pasting gives γ and δ; being over the new base, their first-projection equations determine their maps uniquely.",
+   "text": "For each degree and tuple apply finite-limit preservation to the slice functor Over.post B followed by Over.map eU.hom. Mathlib PreservesProduct.iso and Pi.mapIso produce the nerve comparison; applying Over.forget to piComparison_comp_π gives the projection equation. For later-stage comparisons use identity eU/eV. This is the proved private nerve_iso helper.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
     "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-category-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse of MorphismProperty.Over.pullbackComp at W_0 for gamma and delta. D.map_comp and subsingleton preorder arrows give the transition composite equality; c.w gives the cone equality. The proved private pasting_fst helper unfolds pullbackComp_inv_app_left and uses pullback pasting projection identities to prove both first-projection equations.",
+   "uses": [
     "lem-weil-pbc-cartesian-square-pasting"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate the coefficient adjunction units on the pulled-back nerve objects. Compose with φ and γ inverse for every transition, and with eG inverse, L.ι and δ inverse for the legs. Naturality commutes with each face, hence with the alternating differentials. The coefficient laws and hG give functor and cocone laws. Construct the complex maps directly by these pointwise formulas and product universal properties; no strictification or section-colimit theorem is used in this construction.",
+   "text": "Apply exists_etale_limit_finite_cech_coefficient_data to these fixed comparisons and their four projection equations. Assemble its diagram/cocone and two coefficient equations with the geometric data and equations into the original existential conclusion.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-cech-complex"
+    "lem-weil-pbc-etale-limit-finite-cech-coefficient-data"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 01ZM, 07RP, 07RR, 09YN, 09YP and 09YQ",
-  "place": "Canonical finite-cover descent and degreewise Čech comparison; expanded by V1 for the returned interface repair."
+  "document": "Stacks Project, Tags 01ZM, 07RP, 07RR, 09YP and 09YQ; Mathlib finite-product preservation and pullback composition",
+  "place": "C1 reduction: parent steps 1 and 3 separated; all of step 2 (nerve and pasting comparisons) proved directly, followed by existential assembly."
  },
  "mathlib_searches": [
   {
@@ -114,15 +116,11 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "thm-pd-spreading-out",
-  "lem-weil-pbc-descend-etale",
-  "lem-weil-pbc-descend-surjective",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-limit-finite-cover-descent",
   "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-category-fibre-product",
   "lem-weil-pbc-cartesian-square-pasting",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cech-complex"
+  "lem-weil-pbc-etale-limit-finite-cech-coefficient-data"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -137,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-37db9",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T194148-L-467380",
+  "landing": "20261012T215152-L-1303443",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules, signatures, nodes, report, and direct importer matched against the packet and base; all compiled successfully."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

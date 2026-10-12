@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-etale-limit-finite-cech-coefficient-data",
+ "kind": "statement",
+ "title": "Canonical coefficient maps on fixed descended Cech geometry",
+ "statement": "Let $I$ be a preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ any diagram, and $c$ any cone with point $X$ [def-pc-scheme, def-weil-pbc-category-colimit]. For a scheme map $q$ write $B_q$ for etale base change and $q^*$ for inverse image on abelian sheaves [def-weil-pbc-etale-site, def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves]. Let $F_i$ and $\\varphi_a:p_a^*F_i\\to F_j$ be a coefficient system with the canonical identity and composition laws. Let $G:I\\to\\mathrm{Ab}(X_{et})$ have isomorphisms $e_{G,i}:G_i\\simeq\\pi_i^*F_i$ and maps $G(a)=e_{G,i};\\chi;\\pi_j^*(\\varphi_a);e_{G,j}^{-1}$ for the canonical inverse-image comparison $\\chi$. Let $L$ be any cocone on $G$ and $H=L.pt$, with legs $\\lambda_i$. Fix $i_0$, a finite set $K$, etale objects $U_0,V_{0,k}$ over $D_{i_0}$ and $U,V_k$ over $X$, arrows $f_{0,k}$ and $f_k$ into their respective targets, and isomorphisms $e_U:B_{\\pi_{i_0}}U_0\\simeq U$, $e_{V,k}:B_{\\pi_{i_0}}V_{0,k}\\simeq V_k$ satisfying $B_{\\pi_{i_0}}f_{0,k};e_U=e_{V,k};f_k$. These are fixed input data, without any covering or qcqs assumption. For $J=\\{j\\mid i_0\\leq j\\}$ take the actual pullback families $U_j,V_{j,k},f_{j,k}$. For $n\\geq0$, $t:\\mathrm{Fin}(n+1)\\to K$, form $W_0(n,t)=\\prod_{a=0}^n V_{0,t(a)}$ over $U_0$ with projections $r_{0,a}$, its pullbacks $W_j,W_X$, and the products $N_j,N_X$ of the stage and limit families [def-weil-pbc-cech-complex, def-pc-fibre-product, def-weil-pbc-category-fibre-product]. Suppose given isomorphisms $z_j:W_j\\simeq N_j$, $z_X:W_X\\simeq N_X$ with projection identities $z_j;r_{j,a}=B_{p_{ji_0}}r_{0,a}$ and $z_X;r_{X,a}=B_{\\pi_{i_0}}r_{0,a};e_{V,t(a)}$. Suppose also given $\\gamma_a:B_{p_a}W_j\\simeq W_k$ and $\\delta_j:B_{\\pi_j}W_j\\simeq W_X$ whose first projections to $W_0$ equal the composites of the two pullback first projections. All these isomorphisms and identities are assumed for every degree and tuple. There exist a diagram $A:J\\to\\mathrm{CochainComplex}(\\mathrm{Ab},\\mathbb N)$, identifications $e_j:A_j\\simeq\\check C(f_j,F_j)$, a cocone $c_A$, and $e_X:c_A.pt\\simeq\\check C(f,H)$, such that, putting $T_{j,n,t}=e_j^n;\\mathrm{pr}_t;F_j(z_j)$ and $T_{X,n,t}=e_X^n;\\mathrm{pr}_t;H(z_X)$, one has $A(a)^n;T_{k,n,t}=T_{j,n,t};\\eta_{p_a,F_j}(W_j);\\varphi_a(B_{p_a}W_j);F_k(\\gamma_a^{-1})$ and $c_A.\\iota_j^n;T_{X,n,t}=T_{j,n,t};\\eta_{\\pi_j,F_j}(W_j);e_{G,j}^{-1}(B_{\\pi_j}W_j);\\lambda_j(B_{\\pi_j}W_j);H(\\delta_j^{-1})$. Evaluation is contravariant and $\\eta$ is the evaluated adjunction unit. Neither $c$ nor $L$ need be universal; no colimit assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP, lemma-colimit, proof: canonical Cech comparison maps; parent stage-data step 3. Etale realization in Tag 09YQ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-cech-complex",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Take each object A_j to be the actual Cech complex of f_j with coefficients F_j, and the cocone point to be the actual Cech complex of f with coefficients H. The complex identifications are identities. In each degree prescribe every tuple component by the stated unit/coefficient/pasting formulas, conjugating by z_j,z_k,z_X as appropriate. Product universality defines these homomorphisms.",
+   "uses": [
+    "def-weil-pbc-cech-complex",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Projection identities for z_j and z_X imply compatibility with every coordinate-deletion map in the nerves: both composites have the same retained coordinate projections. The first-projection equations for gamma and delta imply their identity, composition and mixed coherence laws by pullback uniqueness. Naturality of the units and the coefficient maps therefore commutes with each Cech face. Additivity gives commutation with the alternating differential, making each degreewise map a cochain map.",
+   "uses": [
+    "def-weil-pbc-cech-complex",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check each tuple component to prove A.map_id and A.map_comp, using the given identity/composition laws for phi, the inverse-image composition/unit laws, and the geometric coherence just established. Use the specified equation for G(a) and L.w to prove the cocone law in the same manner. Product extensionality proves equality of the complex morphisms. The definitions give the two required component identities. For empty K every tuple index set is empty, and the same product maps define zero complexes.",
+   "uses": [
+    "def-weil-pbc-cech-complex",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cech-complex",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP, lemma-colimit, proof: canonical Cech comparison maps; parent stage-data step 3. Etale realization in Tag 09YQ. Expanded as the corresponding part of the parent stage-data plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech complex functor canonical maps for a diagram of sheaves on varying sites",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error. No verdict from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations between Cech complexes from inverse image adjunction units coherent pullback composition",
+   "date": "2026-10-13",
+   "results": "Eight hits, including Cech nerve adjunction and Arrow.mapCechNerve_app; none supplies the prescribed coefficient transitions on varying etale categories.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|cosimplicialObjectFunctor",
+   "date": "2026-10-13",
+   "results": "The Cech functor is in Mathlib.CategoryTheory.Sites.SheafCohomology.Cech. Repository ColimitSiteCechComplex uses strict varying-site data and does not directly provide this non-strict scheme/pullback interface. Blueprint keyword search found no exact match.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechStageData",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The canonical Cech maps in step 3 of the injective-restriction acyclicity plan, parent stage-data step 3 with fixed nerve identifications supplied as inputs.",
+   "via": [
+    "lem-weil-pbc-etale-limit-finite-cech-stage-data",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientData",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitFiniteCechCoefficientData.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_limit_finite_cech_coefficient_data",
+  "statement": "theorem exists_etale_limit_finite_cech_coefficient_data\n    {I : Type u} [Preorder I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G)\n    (U : c.pt.Etale)\n    (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)\n    (i₀ : I) (U₀ : (D.obj (op i₀)).Etale)\n    (V₀ : K → (D.obj (op i₀)).Etale) (f₀ : ∀ k, V₀ k ⟶ U₀)\n    (eU : (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj U₀ ≅ U)\n    (eV : ∀ k,\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj (V₀ k) ≅ V k)\n    (he : ∀ k,\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).map (f₀ k) ≫\n        eU.hom = (eV k).hom ≫ f k) :\n    let J := {j : I // i₀ ≤ j}\n    let B := fun j : J ↦\n      MorphismProperty.Over.pullback @Etale ⊤ (D.map (homOfLE j.property).op)\n    let Blim := MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))\n    let Uj := fun j : J ↦ (B j).obj U₀\n    let Vj := fun (j : J) (k : K) ↦ (B j).obj (V₀ k)\n    let fj := fun (j : J) (k : K) ↦ (B j).map (f₀ k)\n    let W₀ := fun (n : ℕ) (t : Fin (n + 1) → K) ↦\n      (∏ᶜ fun a ↦ Over.mk (f₀ (t a))).left\n    let pr₀ := fun (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)) ↦\n      (Pi.π (fun a ↦ Over.mk (f₀ (t a))) a).left\n    let Wj := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦ (B j).obj (W₀ n t)\n    let Wlim := fun (n : ℕ) (t : Fin (n + 1) → K) ↦ Blim.obj (W₀ n t)\n    let Nj := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦\n      (∏ᶜ fun a ↦ Over.mk (fj j (t a))).left\n    let Nlim := fun (n : ℕ) (t : Fin (n + 1) → K) ↦\n      (∏ᶜ fun a ↦ Over.mk (f (t a))).left\n    let Pj := fun (j : J) (n : ℕ) ↦\n      fun t : Fin (n + 1) → K ↦ (F j.val).obj.obj (op (Nj j n t))\n    let Plim := fun (n : ℕ) ↦\n      fun t : Fin (n + 1) → K ↦ L.pt.obj.obj (op (Nlim n t))\n    ∀ (eNj : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),\n        Wj j n t ≅ Nj j n t)\n      (eNlim : ∀ (n : ℕ) (t : Fin (n + 1) → K), Wlim n t ≅ Nlim n t)\n      (γ : ∀ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K),\n        (MorphismProperty.Over.pullback @Etale ⊤\n          (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j n t) ≅ Wj k n t)\n      (δ : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),\n        (MorphismProperty.Over.pullback @Etale ⊤\n          (c.π.app (op j.val))).obj (Wj j n t) ≅ Wlim n t)\n      (hNj : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)),\n        (eNj j n t).hom ≫ (Pi.π (fun a ↦ Over.mk (fj j (t a))) a).left =\n          (B j).map (pr₀ n t a))\n      (hNlim : ∀ (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)),\n        (eNlim n t).hom ≫ (Pi.π (fun a ↦ Over.mk (f (t a))) a).left =\n          Blim.map (pr₀ n t a) ≫ (eV (t a)).hom)\n      (hγ : ∀ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K),\n        (γ j k a n t).hom.left ≫\n            pullback.fst (W₀ n t).hom (D.map (homOfLE k.property).op) =\n          pullback.fst (Wj j n t).hom (D.map (show j.val ⟶ k.val from a).op) ≫\n            pullback.fst (W₀ n t).hom (D.map (homOfLE j.property).op))\n      (hδ : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),\n        (δ j n t).hom.left ≫ pullback.fst (W₀ n t).hom (c.π.app (op i₀)) =\n          pullback.fst (Wj j n t).hom (c.π.app (op j.val)) ≫\n            pullback.fst (W₀ n t).hom (D.map (homOfLE j.property).op)),\n      ∃ (A : J ⥤ CochainComplex AddCommGrpCat.{u + 1} ℕ)\n      (eA : ∀ j : J, A.obj j ≅\n        (cechComplexFunctor (fun k : K ↦ Over.mk (fj j k))).obj\n          ((Over.forget (Uj j)).op ⋙ (F j.val).obj))\n      (cA : Cocone A)\n      (eK : cA.pt ≅ (cechComplexFunctor (fun k : K ↦ Over.mk (f k))).obj\n        ((Over.forget U).op ⋙ L.pt.obj)),\n      (∀ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K),\n        (eA j).inv.f n ≫ (A.map a).f n ≫ (eA k).hom.f n ≫\n            Pi.π (Pj k n) t ≫ (F k.val).obj.map (eNj k n t).hom.op =\n          Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫\n            ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n              (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app\n                (op (Wj j n t)) ≫\n            (φ (show j.val ⟶ k.val from a)).hom.app\n              (op ((MorphismProperty.Over.pullback @Etale ⊤\n                (D.map (show j.val ⟶ k.val from a).op)).obj (Wj j n t))) ≫\n            (F k.val).obj.map (γ j k a n t).inv.op) ∧\n      (∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),\n        (eA j).inv.f n ≫ (cA.ι.app j).f n ≫ eK.hom.f n ≫\n            Pi.π (Plim n) t ≫ L.pt.obj.map (eNlim n t).hom.op =\n          Pi.π (Pj j n) t ≫ (F j.val).obj.map (eNj j n t).hom.op ≫\n            ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n              (c.π.app (op j.val))).unit.app (F j.val)).hom.app (op (Wj j n t)) ≫\n            (eG j.val).inv.hom.app\n              (op ((MorphismProperty.Over.pullback @Etale ⊤\n                (c.π.app (op j.val))).obj (Wj j n t))) ≫\n            (L.ι.app j.val).hom.app\n              (op ((MorphismProperty.Over.pullback @Etale ⊤\n                (c.π.app (op j.val))).obj (Wj j n t))) ≫\n            L.pt.obj.map (δ j n t).inv.op)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T215152-L-1303443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T215152-L-1303443",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

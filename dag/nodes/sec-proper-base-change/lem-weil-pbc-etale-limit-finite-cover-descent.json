@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-etale-limit-finite-cover-descent",
+ "kind": "statement",
+ "title": "Descent of a finite qcqs etale covering",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a system of qcqs schemes with affine transition maps, and $c$ a limit cone with point $X$ [def-pc-scheme, def-weil-pbc-scheme-conventions, def-weil-pbc-category-colimit]. Write $B_q$ for actual base change on small etale categories [def-weil-pbc-etale-site, def-pc-fibre-product]. Let $U$ be a qcqs etale object over $X$, $K$ a finite set (possibly empty), $V_k$ qcqs etale objects, and $f_k:V_k\\to U$ a covering family. There exist $i_0\\in I$, qcqs etale objects $U_0,V_{0,k}$ over $D_{i_0}$, arrows $f_{0,k}:V_{0,k}\\to U_0$, and isomorphisms $e_U:B_{\\pi_{i_0}}U_0\\simeq U$ and $e_{V,k}:B_{\\pi_{i_0}}V_{0,k}\\simeq V_k$, such that $B_{\\pi_{i_0}}(f_{0,k});e_U=e_{V,k};f_k$. For every $j\\geq i_0$ put $U_j=B_{p_{ji_0}}U_0$, $V_{j,k}=B_{p_{ji_0}}V_{0,k}$, $f_{j,k}=B_{p_{ji_0}}f_{0,k}$. The family $(f_{j,k})$ covers $U_j$ for every such $j$. The conclusion contains no coefficient system or complex.",
+ "source": {
+  "document": "Stacks Project, Limits and Etale Cohomology",
+  "place": "Tags 01ZM(1),(2), 07RP, 07RR; the finite-cover descent used in 09YQ and the parent node step 1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The qcqs limit base and the qcqs etale sources imply finite presentation of the structure maps. Spread out U and the finite family V_k using 01ZM(1). Finite presentation over qcqs bases makes the models qcqs. Apply etaleness descent to each structure morphism and pass to a common upper bound, using pullback composition to retain the limit isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply morphism descent to the finitely many f_k with these fixed object identifications. Pass to a common upper bound, retaining the arrow equations and all qcqs properties.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite disjoint union of the covering sources is qcqs, and its arrow into U_0 is locally finitely presented. The covering assumption says its limit base change is surjective. Descend surjectivity to a later stage by 07RR. In the small etale topology this makes the descended family covering. In the empty-family case the source is empty and the same surjectivity theorem makes the target empty.",
+   "uses": [
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every later family is an actual pullback of this stage family; base change preserves coverings. The affine transitions preserve the qcqs properties of the models. This gives all claimed properties.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-descend-surjective",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-continuous"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Limits and Etale Cohomology",
+  "place": "Tags 01ZM(1),(2), 07RP, 07RR; the finite-cover descent used in 09YQ and the parent node step 1. Expanded as the corresponding part of the parent stage-data plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale covering family descends to a stage of an inverse limit of schemes",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error. No verdict from this service."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of quasi compact etale objects and covering arrows over an inverse limit of schemes descends to a common stage",
+   "date": "2026-10-13",
+   "results": "Eight hits in AffineTransitionLimit: descent of arrows/equalities and affine opens, no theorem for a finite covering family with fixed isomorphisms.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*etale.*stage|finite.*cover.*desc|cechComplexFunctor",
+   "date": "2026-10-13",
+   "results": "Mathlib arrow descent and Cech functor do not descend the finite family. Repository search found EtaleFiniteCoverFactorizationDescent, which requires a fixed affine target and affine sources, unlike this statement. Blueprint keyword search found no exact match.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechStageData",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The finite-cover descent in the 09YP Cech comparison used in step 3 of the injective-restriction acyclicity plan; parent stage-data step 1.",
+   "via": [
+    "lem-weil-pbc-etale-limit-finite-cech-stage-data",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCoverDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitFiniteCoverDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_limit_finite_cover_descent",
+  "statement": "theorem exists_etale_limit_finite_cover_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (U : c.pt.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]\n    (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)\n    (hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)\n    (hf : Sieve.ofArrows V f ∈ c.pt.smallEtaleTopology U) :\n    ∃ (i₀ : I) (U₀ : (D.obj (op i₀)).Etale)\n    (V₀ : K → (D.obj (op i₀)).Etale) (f₀ : ∀ k, V₀ k ⟶ U₀)\n    (eU : (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj U₀ ≅ U)\n    (eV : ∀ k,\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj (V₀ k) ≅ V k),\n    let J := {j : I // i₀ ≤ j}\n    let B := fun j : J ↦\n      MorphismProperty.Over.pullback @Etale ⊤ (D.map (homOfLE j.property).op)\n    let Blim := MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))\n    let Uj := fun j : J ↦ (B j).obj U₀\n    let Vj := fun (j : J) (k : K) ↦ (B j).obj (V₀ k)\n    let fj := fun (j : J) (k : K) ↦ (B j).map (f₀ k)\n    (CompactSpace U₀.left ∧ QuasiSeparatedSpace U₀.left) ∧\n    (∀ k, CompactSpace (V₀ k).left ∧ QuasiSeparatedSpace (V₀ k).left) ∧\n    (∀ k, Blim.map (f₀ k) ≫ eU.hom = (eV k).hom ≫ f k) ∧\n    (∀ j : J, Sieve.ofArrows (Vj j) (fj j) ∈\n        (D.obj (op j.val)).smallEtaleTopology (Uj j))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T215152-L-1303443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T215152-L-1303443",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

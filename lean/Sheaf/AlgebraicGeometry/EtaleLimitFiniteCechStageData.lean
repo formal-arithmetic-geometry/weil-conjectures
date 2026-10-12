@@ -8,9 +8,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.DescendSurjective
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCoverDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientData
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
+import Mathlib.CategoryTheory.Limits.MorphismProperty
 
 set_option linter.unusedVariables false
 
@@ -25,6 +26,47 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
+
+private theorem nerve_iso {X Y : Scheme.{u}} (q : X ⟶ Y)
+    (U₀ : Y.Etale) (U : X.Etale) {K : Type (u + 1)} [Finite K]
+    (V₀ : K → Y.Etale) (f₀ : ∀ k, V₀ k ⟶ U₀)
+    (V : K → X.Etale) (f : ∀ k, V k ⟶ U)
+    (eU : (MorphismProperty.Over.pullback @Etale ⊤ q).obj U₀ ≅ U)
+    (eV : ∀ k, (MorphismProperty.Over.pullback @Etale ⊤ q).obj (V₀ k) ≅ V k)
+    (he : ∀ k, (MorphismProperty.Over.pullback @Etale ⊤ q).map (f₀ k) ≫ eU.hom =
+      (eV k).hom ≫ f k) (n : ℕ) (t : Fin (n + 1) → K) :
+    ∃ e : (MorphismProperty.Over.pullback @Etale ⊤ q).obj
+      (∏ᶜ fun a ↦ Over.mk (f₀ (t a))).left ≅
+      (∏ᶜ fun a ↦ Over.mk (f (t a))).left,
+      ∀ a, e.hom ≫ (Pi.π (fun a ↦ Over.mk (f (t a))) a).left =
+        (MorphismProperty.Over.pullback @Etale ⊤ q).map
+          (Pi.π (fun a ↦ Over.mk (f₀ (t a))) a).left ≫ (eV (t a)).hom := by
+  let B := MorphismProperty.Over.pullback @Etale ⊤ q
+  let T := Over.post (X := U₀) B ⋙ Over.map eU.hom
+  have : PreservesFiniteLimits B := inferInstance
+  have : PreservesFiniteLimits (Over.post (X := U₀) B) := inferInstance
+  have : (Over.map eU.hom).IsEquivalence := inferInstance
+  have : PreservesFiniteLimits (Over.map eU.hom) := inferInstance
+  have : PreservesFiniteLimits T := inferInstance
+  let ev : ∀ a : Fin (n + 1), T.obj (Over.mk (f₀ (t a))) ≅ Over.mk (f (t a)) :=
+    fun a ↦ Over.isoMk (eV (t a)) (he (t a)).symm
+  let e := (Over.forget U).mapIso
+    (PreservesProduct.iso T (fun a ↦ Over.mk (f₀ (t a))) ≪≫ Pi.mapIso ev)
+  refine ⟨e, ?_⟩
+  intro a
+  have h : (PreservesProduct.iso T (fun a ↦ Over.mk (f₀ (t a))) ≪≫
+      Pi.mapIso ev).hom ≫ Pi.π (fun a ↦ Over.mk (f (t a))) a =
+      T.map (Pi.π (fun a ↦ Over.mk (f₀ (t a))) a) ≫ (ev a).hom := by
+    simp [PreservesProduct.iso_hom]
+  exact congrArg (fun g ↦ g.left) h
+
+private theorem pasting_fst {X Y Z : Scheme.{u}} (q : X ⟶ Y) (r : Y ⟶ Z)
+    (s : X ⟶ Z) (h : s = q ≫ r) (W : Z.Etale) :
+    ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) q r s h).inv.app W).left ≫
+      pullback.fst W.hom s =
+      pullback.fst (pullback.snd W.hom r) q ≫ pullback.fst W.hom r := by
+  subst s
+  simp [MorphismProperty.Over.pullbackComp_inv_app_left]
 
 /-- Descend a finite covering and construct its canonical complex diagram and cocone.
 Source: Stacks Project, Limits, Tags 01ZM (spreading out), 07RP (étaleness), 07RR
@@ -167,6 +209,73 @@ theorem exists_etale_limit_finite_cech_stage_data
             (L.ι.app j.val).hom.app
               (op ((MorphismProperty.Over.pullback @Etale ⊤
                 (c.π.app (op j.val))).obj (Wj j n t))) ≫
-            L.pt.obj.map (δ j n t).inv.op) := by sorry
+            L.pt.obj.map (δ j n t).inv.op) := by
+  classical
+  obtain ⟨i₀, U₀, V₀, f₀, eU, eV, hU₀, hV₀, he, hcover⟩ :=
+    exists_etale_limit_finite_cover_descent D c hc U K V f hV hf
+  refine ⟨i₀, U₀, V₀, f₀, eU, eV, ?_⟩
+  let J := {j : I // i₀ ≤ j}
+  let B := fun j : J ↦
+    MorphismProperty.Over.pullback @Etale ⊤ (D.map (homOfLE j.property).op)
+  let Blim := MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))
+  let Uj := fun j : J ↦ (B j).obj U₀
+  let Vj := fun (j : J) (k : K) ↦ (B j).obj (V₀ k)
+  let fj := fun (j : J) (k : K) ↦ (B j).map (f₀ k)
+  let W₀ := fun (n : ℕ) (t : Fin (n + 1) → K) ↦
+    (∏ᶜ fun a ↦ Over.mk (f₀ (t a))).left
+  let pr₀ := fun (n : ℕ) (t : Fin (n + 1) → K) (a : Fin (n + 1)) ↦
+    (Pi.π (fun a ↦ Over.mk (f₀ (t a))) a).left
+  let Wj := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦ (B j).obj (W₀ n t)
+  let Wlim := fun (n : ℕ) (t : Fin (n + 1) → K) ↦ Blim.obj (W₀ n t)
+  let Nj := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦
+    (∏ᶜ fun a ↦ Over.mk (fj j (t a))).left
+  let Nlim := fun (n : ℕ) (t : Fin (n + 1) → K) ↦
+    (∏ᶜ fun a ↦ Over.mk (f (t a))).left
+  have hstage : ∀ (j : J) (n : ℕ) (t : Fin (n + 1) → K),
+      ∃ e : Wj j n t ≅ Nj j n t,
+        ∀ a, e.hom ≫ (Pi.π (fun a ↦ Over.mk (fj j (t a))) a).left =
+          (B j).map (pr₀ n t a) := by
+    intro j n t
+    obtain ⟨e, he⟩ := nerve_iso (D.map (homOfLE j.property).op)
+      U₀ (Uj j) V₀ f₀ (Vj j) (fj j) (Iso.refl _) (fun _ ↦ Iso.refl _)
+      (by intro k; exact (Category.comp_id _).trans (Category.id_comp _).symm) n t
+    exact ⟨e, fun a ↦ by simpa using he a⟩
+  choose eNj hNj using hstage
+  have hlimit : ∀ (n : ℕ) (t : Fin (n + 1) → K),
+      ∃ e : Wlim n t ≅ Nlim n t,
+        ∀ a, e.hom ≫ (Pi.π (fun a ↦ Over.mk (f (t a))) a).left =
+          Blim.map (pr₀ n t a) ≫ (eV (t a)).hom := by
+    intro n t
+    exact nerve_iso (c.π.app (op i₀)) U₀ U V₀ f₀ V f eU eV he n t
+  choose eNlim hNlim using hlimit
+  have htrans (j k : J) (a : j ⟶ k) :
+      D.map (homOfLE k.property).op =
+        D.map (show j.val ⟶ k.val from a).op ≫ D.map (homOfLE j.property).op := by
+    rw [← D.map_comp]
+    congr 1
+  let γ := fun (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K) ↦
+    ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)
+      (D.map (show j.val ⟶ k.val from a).op) (D.map (homOfLE j.property).op)
+      (D.map (homOfLE k.property).op) (htrans j k a)).app (W₀ n t)).symm
+  let δ := fun (j : J) (n : ℕ) (t : Fin (n + 1) → K) ↦
+    ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)
+      (c.π.app (op j.val)) (D.map (homOfLE j.property).op) (c.π.app (op i₀))
+      (c.w (homOfLE j.property).op).symm).app (W₀ n t)).symm
+  have hγ (j k : J) (a : j ⟶ k) (n : ℕ) (t : Fin (n + 1) → K) :
+      (γ j k a n t).hom.left ≫
+          pullback.fst (W₀ n t).hom (D.map (homOfLE k.property).op) =
+        pullback.fst (Wj j n t).hom (D.map (show j.val ⟶ k.val from a).op) ≫
+          pullback.fst (W₀ n t).hom (D.map (homOfLE j.property).op) :=
+    pasting_fst _ _ _ (htrans j k a) (W₀ n t)
+  have hδ (j : J) (n : ℕ) (t : Fin (n + 1) → K) :
+      (δ j n t).hom.left ≫ pullback.fst (W₀ n t).hom (c.π.app (op i₀)) =
+        pullback.fst (Wj j n t).hom (c.π.app (op j.val)) ≫
+          pullback.fst (W₀ n t).hom (D.map (homOfLE j.property).op) :=
+    pasting_fst _ _ _ (c.w (homOfLE j.property).op).symm (W₀ n t)
+  obtain ⟨A, eA, cA, eK, hA, hK⟩ :=
+    exists_etale_limit_finite_cech_coefficient_data D c F φ hidentity hcomposition
+      G eG hG L U K V f i₀ U₀ V₀ f₀ eU eV he eNj eNlim γ δ hNj hNlim hγ hδ
+  exact ⟨A, eA, cA, eK, eNj, eNlim, γ, δ,
+    hU₀, hV₀, he, hcover, hNj, hNlim, hγ, hδ, hA, hK⟩
 
 end AlgebraicGeometry.Etale
