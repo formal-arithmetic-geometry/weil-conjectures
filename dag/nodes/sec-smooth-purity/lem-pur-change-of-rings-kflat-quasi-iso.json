@@ -27,70 +27,40 @@
  ],
  "proof": [
   {
-   "text": "Regard the new ring as a module over the original ring, concentrated in degree zero. Choose a K-flat resolution rho: R → O' by [lem-pc-kflat-resolution]. The cones of rho and of the given quasi-isomorphism alpha are acyclic by [lem-pur-quasi-iso-cone-acyclic].",
+   "text": "The cone of alpha is acyclic by the cone criterion [lem-pur-quasi-iso-cone-acyclic]. It is K-flat because cones of maps between K-flat complexes are K-flat [lem-pc-kflat-cone-direct-sum].",
    "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-kflat-cone-direct-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply extension-of-scalars acyclicity [lem-pur-change-of-rings-acyclic-kflat] to Cone(alpha). Its termwise E-image is acyclic.",
+   "uses": [
+    "lem-pur-change-of-rings-acyclic-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An additive functor commutes with mapping cones: Mathlib CochainComplex.mappingCone.mapHomologicalComplexIso alpha E identifies E(Cone(alpha)) with Cone(E(alpha)). Apply HomologicalComplex.homologyFunctor in every degree to this isomorphism. IsZero.of_iso transports vanishing of homology to the latter cone. The cone criterion [lem-pur-quasi-iso-cone-acyclic] gives the desired QuasiIso. This is the actual Lean composition and uses no tensor-cone comparison in the parent module.",
+   "uses": [
     "lem-pur-quasi-iso-cone-acyclic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
-   }
-  },
-  {
-   "text": "Form the natural commuting square with top row Tot(R ⊗ P) → Tot(R ⊗ Q), bottom row Tot(O' ⊗ P) → Tot(O' ⊗ Q), and vertical maps induced by rho [def-pc-tensor-complex-sheaves]. The cone of the top arrow is Tot(R ⊗ Cone(alpha)) by [lem-pc-tensor-mapping-cone-iso]. Signed symmetry of total tensors sends this complex to Tot(Cone(alpha) ⊗ R); it is acyclic by [def-pc-kflat-complex]. The vertical cones identify with Tot(Cone(rho) ⊗ P) and Tot(Cone(rho) ⊗ Q), acyclic by K-flatness of P and Q. Signed symmetry acts on degrees p,q by (-1)^(pq), commutes with the total differential, and is natural; applying it twice is the identity. The cone criterion therefore makes the top and vertical arrows quasi-isomorphisms.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-tensor-mapping-cone-iso",
-    "def-pc-kflat-complex",
-    "lem-pur-quasi-iso-cone-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
-   }
-  },
-  {
-   "text": "In every cohomological degree the square commutes and the top and vertical maps are isomorphisms. The bottom map equals right vertical composed with the top map and the inverse of left vertical; hence it is an isomorphism. Thus the bottom arrow is a quasi-isomorphism [def-pc-quasi-iso-modules].",
-   "uses": [
-    "def-pc-quasi-iso-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
-   }
-  },
-  {
-   "text": "Since O' is concentrated in degree zero, its total tensor with P is termwise extension of scalars [def-pur-sheaf-tensor-product], after restriction of the new scalar action. Restriction of scalars leaves the underlying sheaf of abelian groups unchanged, so kernels, images and cokernels, and therefore vanishing of cohomology, are detected on this same underlying sheaf. The quasi-isomorphism holds over O' as well. The given object equalities h and morphism equalities hm identify the termwise map of E with this extension-of-scalars map; the inserted eqToHom maps merely transport these identifications.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-quasi-iso-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-quasi-iso-modules",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-kflat-resolution",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-kflat-cone-direct-sum",
+  "lem-pur-change-of-rings-acyclic-kflat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+  "place": "Tags 06YT and 06YY; cone reformulation of quasi-isomorphism preservation",
+  "note": "Cone reformulation; Mathlib supplies the additive-functor cone comparison and homology transport."
  },
  "mathlib_searches": [
   {
@@ -165,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T085316-L-30639",
+  "landing": "20261012T110315-L-620178",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

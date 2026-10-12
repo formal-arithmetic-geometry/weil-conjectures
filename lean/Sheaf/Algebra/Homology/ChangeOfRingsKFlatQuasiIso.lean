@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import Sheaf.Algebra.Homology.ChangeOfRingsAcyclicKFlat
+import Sheaf.Algebra.Homology.KFlatClosure
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
@@ -58,6 +58,19 @@ theorem changeOfRings_kFlat_quasiIso
     [E.Additive] :
     ∀ {P Q : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ} (α : P ⟶ Q),
       P.IsKFlat → Q.IsKFlat → QuasiIso α →
-        QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α) := by sorry
+        QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α) := by
+  intro P Q α hP hQ hα
+  have hcone : (CochainComplex.mappingCone α).Acyclic :=
+    (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 hα
+  have hkcone : (CochainComplex.mappingCone α).IsKFlat :=
+    CochainComplex.isKFlat_mappingCone α hP hQ
+  have hEcone := changeOfRings_acyclic_of_isKFlat φ E h hm
+    (CochainComplex.mappingCone α) hkcone hcone
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
+  intro i
+  apply (HomologicalComplex.exactAt_iff_isZero_homology _ i).2
+  exact ((HomologicalComplex.exactAt_iff_isZero_homology _ i).1 (hEcone i)).of_iso
+    ((HomologicalComplex.homologyFunctor _ _ i).mapIso
+      (CochainComplex.mappingCone.mapHomologicalComplexIso α E)).symm
 
 end SheafOfModules

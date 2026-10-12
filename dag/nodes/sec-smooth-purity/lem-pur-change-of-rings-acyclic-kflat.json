@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-change-of-rings-acyclic-kflat",
+ "kind": "statement",
+ "title": "Extension of scalars of acyclic K-flat complexes",
+ "statement": "Let (C,J) be a site, O and O' sheaves of commutative rings and phi: O → O' a morphism. Let E be an additive functor on their sheaf-module categories [def-weil-sheaf-of-modules-category], with objects and maps (including equality transports) given by extension of scalars [def-pur-sheaf-tensor-product]. If K is an acyclic [def-pc-acyclic-complex-modules], K-flat [def-pc-kflat-complex] cochain complex of O-modules, then the termwise complex E(K) is acyclic as an O'-module complex. This is an object-level acyclicity assertion; no map between K-flat complexes is part of its statement.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT and 06YY; cone reformulation of quasi-isomorphism preservation"
+ },
+ "proof": [
+  {
+   "text": "Regard O' as an O-module S in degree zero by restriction of scalars [def-pc-sheaf-restrict-scalars]. Choose a K-flat resolution r: R → S [lem-pc-kflat-resolution]. Its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]. K-flatness of K [def-pc-kflat-complex] gives acyclicity of Tot(Cone(r) ⊗ K). The tensor-cone comparison [lem-pc-tensor-mapping-cone-iso] and the cone criterion make Tot(r ⊗ id_K) a quasi-isomorphism.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since R is K-flat and K is acyclic, Tot(K ⊗ R) is acyclic by [def-pc-kflat-complex]. The signed symmetry identifies it with Tot(R ⊗ K): in degrees p,q, multiply the module braiding [lem-pc-sheaf-modules-tensor-closed] by (-1)^(pq). For d_K the two exponents are (p+1)q and pq+q; for d_R they are p+p(q+1) and pq, equal modulo 2. Thus it commutes with the differential, and its reverse is its inverse. Hence the quasi-isomorphism in the first step gives acyclicity of Tot(S ⊗ K).",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Only the degree-zero term of S is nonzero. The total tensor is therefore the restriction of the termwise extension of scalars [def-pur-sheaf-tensor-product]. Restriction of scalars [def-pc-sheaf-restrict-scalars] has the same underlying sheaf of abelian groups, so computes the same kernels and cokernels; it is exact and faithful and reflects acyclicity. The prescribed h and hm identify E with extension of scalars by a natural isomorphism: its component is eqToHom(h M) and naturality is hm after cancellation. Mapping that isomorphism termwise transports acyclicity to E(K).",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YT and 06YY; cone reformulation of quasi-isomorphism preservation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars preserves acyclic K-flat complexes and quasi-isomorphisms",
+   "results": "No exact match; returned Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.Flat.iff_lTensor_exact', Module.FaithfullyFlat.iff_exact_iff_lTensor_exact",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Aa]cyclic|[Aa]cyclic.*changeOfRings|[Kk]Flat.*quasiIso",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars sends acyclic K-flat sheaf complexes to acyclic complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "Tensor-invariance clause: acyclicity of the extension of scalars of the cone; parent proof steps 1–2.",
+   "via": [
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-derived-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ChangeOfRingsAcyclicKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/ChangeOfRingsAcyclicKFlat.lean",
+  "declaration": "SheafOfModules.changeOfRings_acyclic_of_isKFlat",
+  "statement": "theorem changeOfRings_acyclic_of_isKFlat {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] {O O' : Sheaf J CommRingCat.{u}} (φ : O ⟶ O') (E : SheafOfModules.{u} (𝓡 O) ⥤ SheafOfModules.{u} (𝓡 O')) (h : ∀ M : SheafOfModules.{u} (𝓡 O), E.obj M = changeOfRings.{u, u, u} φ M) (hm : ∀ {M N : SheafOfModules.{u} (𝓡 O)} (a : M ⟶ N), E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm) [E.Additive] (K : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ) (hK : K.IsKFlat) (hA : K.Acyclic) : ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T110315-L-620178",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T110315-L-620178",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
