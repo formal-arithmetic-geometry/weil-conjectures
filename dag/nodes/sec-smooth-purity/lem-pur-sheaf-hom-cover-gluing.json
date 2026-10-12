@@ -25,37 +25,37 @@
  ],
  "proof": [
   {
-   "text": "Work in the localized site C/U. For each object V/U, the site base-change axiom makes {V×_U U_i→V} a covering. For x∈F(V), the local maps give sections φ_i(x|_{V×_U U_i}) of G on these members. On (V×_U U_i)×_V(V×_U U_j)=V×_U(U_i×_U U_j) the two sections agree because the restrictions of φ_i and φ_j agree on U_i×_U U_j. The sheaf equalizer axiom for the underlying sheaf of abelian groups G therefore gives a unique section φ_V(x)∈G(V) restricting to all these sections. Applying the same uniqueness to sums and to restrictions shows additivity and naturality, so the φ_V form a morphism of sheaves of abelian groups F|_U→G|_U.",
+   "text": "Forget the local module morphisms to additive natural transformations on C/U_i. For arbitrary arrows a:W→U_i and b:W→U_j with a f_i=b f_j, and an object T/W, use the pullback lift of T.hom a and T.hom b and the assumed overlap equality. This proves compatibility as elements of Mathlib presheafHom of the underlying additive presheaves. Mathlib Presheaf.IsSheaf.hom and Presieve.isSheafFor_arrows_iff give a unique additive natural transformation alpha on C/U restricting to these local transformations.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), via Sites Lemma 04TQ (sites-lemma-glue-maps)"
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), via Sites Lemma 04TQ"
    }
   },
   {
-   "text": "The glued morphism restricts to φ_i: on U_i the two maps have the same restrictions on the pulled-back covering family, so uniqueness in the sheaf axiom identifies them. If another morphism has the same restrictions, its value on every section x∈F(V) has the same restrictions on the covering V×_U U_i→V and hence equals φ_V(x); thus the glued morphism is unique.",
+   "text": "For T/U, scalar r and section x, compare alpha_T(r x) and r alpha_T(x) using separatedness of the underlying type sheaf of G on the pullback of the covering sieve along T.hom. Every arrow p:W→T in this sieve factors p T.hom=a f_i. Naturality identifies restricted alpha-values with alpha over a f_i; the gluing equation identifies that component with the given local linear map. Semilinearity of the restriction maps of F and G and linearity of the local map therefore give equality on each covering arrow. Sheaf separatedness proves equality globally. Equip the additive components of alpha with this scalar law to obtain the module morphism phi; its naturality is the additive naturality already proved.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), using Sites Lemma 04TQ"
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), via Sites Lemma 04TQ"
    }
   },
   {
-   "text": "The glued map is O|_U-linear. For a∈O(V) and x∈F(V), on every member V×_U U_i of the covering its value is φ_i(a x)=a|_{V×_U U_i} φ_i(x), since each φ_i is O|_{U_i}-linear and scalar multiplication restricts sectionwise. The sheaf uniqueness assertion then gives φ_V(a x)=a φ_V(x). Hence φ is a morphism of sheaves of O|_U-modules, as required.",
+   "text": "The additive gluing equations imply the desired local restriction equations for phi by pointwise extensionality of linear maps. For any other module morphism psi with those restrictions, forget psi to an element beta of presheafHom over U. Its local restrictions agree with the local additive maps componentwise, so uniqueness of the additive amalgamation gives beta=alpha. Componentwise and pointwise extensionality then give psi=phi.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), proof after reduction to Sites Lemma 04TQ"
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), via Sites Lemma 04TQ"
    }
   }
  ],
@@ -64,9 +64,9 @@
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 03EM, using Sites Lemma 04TQ"
+  "place": "Lemma 03EM via Sites Lemma 04TQ; formalized using Mathlib additive presheafHom gluing and local scalar-linearity by K3 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -152,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T210533-L-976089",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
