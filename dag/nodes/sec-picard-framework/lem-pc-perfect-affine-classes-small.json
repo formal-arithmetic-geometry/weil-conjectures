@@ -14,33 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Identify Y with Spec of its global section ring by the affine scheme isomorphism and transport derived module categories. Apply the affine bounded finite projective criterion to each perfect object.",
+   "text": "Use exists_affine_finite_module_presentation with the explicit affineModuleComplexFunctor: every perfect quasi-coherent object is isomorphic in the ambient derived category to the image of a complex with finite terms.",
    "uses": [
-    "lem-pc-perfect-affine-bounded-projective"
+    "lem-pc-perfect-affine-finite-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Encode the finite projective terms as images of finite free idempotent matrices (submodules of A^n), with integer degree bounds and linear differentials. These are u-small data. The complex identities, boundedness and termwise projectivity are predicates. Conjugate differentials along termwise module isomorphisms, obtaining an isomorphic complex of encoded modules. The map from the subtype of perfect quasi-coherent encoded derived objects to their skeleton is surjective. Apply Mathlib small_of_surjective. Zero modules and the zero ring are allowed. Mathlib.Algebra.Category.FGModuleCat.EssentiallySmall supplies an alternative existing small model for the finite terms; projectivity is a predicate on those terms.",
+   "text": "Define FiniteTermModel A by integer-indexed FGModuleRepr A terms, module-category differentials, and the shape and square-zero identities. This structure is in Type u. Given a finite-term complex P, Mathlib FGModuleRepr.ofFinite and ofFiniteEquiv give representatives X_n and isomorphisms e_n : X_n ≅ P_n. Define d_ij = e_i.hom ≫ P.d i j ≫ e_j.inv. Cancellation proves the shape and square-zero conditions and HomologicalComplex.Hom.isoOfComponents gives an isomorphism M.complex ≅ P. No boundedness or projectivity is needed for this larger small family.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let f send a finite-term model to the skeleton class of its associated derived sheaf. The range of f is u-small. The composite of the perfect and quasi-coherent full-subcategory inclusions is fully faithful, so its map on skeletons is injective. The presentation theorem and the preceding complex isomorphism put every perfect skeleton class in the range of f. Restrict this injective map to Set.range f and apply small_of_injective.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-derived-category"
+    "def-pc-derived-category",
+    "def-pc-perfect-complex"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-affine-bounded-projective",
+  "def-pc-derived-category",
   "def-pc-perfect-complex",
-  "def-pc-derived-category"
+  "lem-pc-perfect-affine-finite-presentation"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "X2",
+  "by": "agent",
+  "group": "Y2",
   "date": "2026-10-12",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Lemma perfect-lemma-perfect-affine, Tag 08EB; the finite-projective encoding in Step 1 of lem-pc-perfect-complexes-compact-set",
-  "note": "Argument written out by X2 from the existing item proof and the cited sources."
+  "note": "Finite-term encoding and skeleton injection proved in Lean by Y2; geometric transport is isolated as a strictly smaller presentation theorem."
  },
  "mathlib_searches": [
   {
@@ -110,9 +115,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T095931-L-327423",
+  "landing": "20261012T110326-L-625034",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

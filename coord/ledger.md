@@ -7435,3 +7435,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/W3/Sheaf.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage (stage 3; reviewer PASS; after a return; landing 20261012T110325-L-624658 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/W3/Sheaf.AlgebraicGeometry.SectionRestrictionSTorsion (stage 3; reviewer PASS; first push; landing 20261012T110326-L-624842 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/W3/Sheaf.AlgebraicGeometry.SmoothBaseChange.TorsionConstantPrimeDevissage (stage 3; reviewer PASS; first push; landing 20261012T110326-L-624937 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:03 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PerfectAffineClassesSmall (stage 3; reviewer PASS; first push; landing 20261012T110326-L-625034 (interface); batch 20261012T110249; modules 2; new nodes 2)

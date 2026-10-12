@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-perfect-affine-finite-presentation",
+ "kind": "statement",
+ "title": "Finite-term presentations of perfect objects on arbitrary affine schemes",
+ "statement": "Let $Y$ be an affine scheme in universe $u$ [def-pc-scheme], with derived categories for its module sheaves and those on each open site in morphism universe $w$ [def-pc-derived-category]. Put $A=\\Gamma(Y,\\mathcal O_Y)$, and let $F_Y$ be the explicit termwise associated-sheaf/pushforward functor [def-pc-affine-module-complex-functor]. For every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ that is perfect [def-pc-perfect-complex], there is a cochain complex $P$ of $A$-modules with each $P^n$ finitely generated and an isomorphism $E\\cong Q(F_Y(P))$ in $D(\\mathcal O_Y)$. No boundedness or projectivity of $P$ is asserted, and no relation between $u$ and $w$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma perfect-lemma-perfect-affine, Tag 08EB; the finite-projective encoding in Step 1 of lem-pc-perfect-complexes-compact-set"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-affine-module-complex-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put A = Γ(Y,O_Y). The canonical affine isomorphism e : Y ≅ Spec A gives inverse exact module-sheaf functors e_* and (e⁻¹)_*: the pseudofunctor composition and identity isomorphisms identify their composites with the identity. Their exactness follows from being equivalences of abelian categories. They send quasi-isomorphisms of complexes to quasi-isomorphisms and so induce inverse derived functors. Transport the given HasDerivedCategory choices, including the open-site choices, across these equivalences; no comparison of u and w is required.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each point of Spec A use its unique inverse point under e and transport an open neighbourhood in the definition of IsPerfect. The induced equivalence of the localized open sites commutes with restriction. The module-sheaf equivalence carries the structure ring module to the structure ring module and finite coproducts to finite coproducts, hence carries each free module on ULift (Fin m) to its corresponding free module. Apply it to the two retraction maps degreewise; functoriality preserves their composite identity. Exactness preserves the zero terms. This transports the strictly perfect local complexes and their derived isomorphisms, and proves that e_* E is perfect. Exactness commutes with homology and the ordinary isomorphism pull/push functors preserve quasi-coherence, so e_* E lies in D_QCoh(Spec A).",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the forward implication of perfect_iff_affine_bounded_projective to e_* E. It yields a bounded complex P of finite projective A-modules and an isomorphism e_* E ≅ Q(tilde(P)). Apply the inverse derived equivalence, compose its counit at E, and identify its value on Q(tilde(P)) with Q applied to termwise (e⁻¹)_* tilde(P), using the localization comparison. This is exactly Q((affineModuleComplexFunctor Y).obj P). Retain finiteness of every term and discard boundedness and projectivity. This proves the claimed existential without using any smallness assertion.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "def-pc-affine-module-complex-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-module-complex-functor",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-scheme",
+  "lem-pc-perfect-affine-bounded-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma perfect-lemma-perfect-affine, Tag 08EB; the finite-projective encoding in Step 1 of lem-pc-perfect-complexes-compact-set",
+  "group": "Y2",
+  "date": "2026-10-12",
+  "note": "Expanded affine isomorphism transport of Tag 08EB; source checked at https://stacks.math.columbia.edu/tag/08EB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every perfect complex on an affine scheme is isomorphic to the associated sheaf of a bounded complex of finite projective modules",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport perfect complex presentations across an isomorphism of affine schemes",
+   "date": "2026-10-12",
+   "results": "Eight morphism-property respectsIso hits; no result about derived module sheaves or perfect complex presentations.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*[Aa]ffine|[Aa]ffine.*perfect|IsPerfect|affineModuleComplexFunctor in Mathlib/AlgebraicGeometry and WeilConjectures/AlgebraicGeometry",
+   "date": "2026-10-12",
+   "results": "No hits in Mathlib or the source root. The existing Sheaf affine criterion is only on literal Spec A.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineClassesSmall",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives input, affine case: transfer the Spec A finite-projective presentation to an arbitrary affine scheme",
+   "via": [
+    "lem-pc-perfect-affine-classes-small",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectAffineFinitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineFinitePresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_finite_module_presentation",
+  "statement": "theorem exists_affine_finite_module_presentation (Y : Scheme.{u}) [IsAffine Y]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))]\n    (E : schemeDerivedQCohCategory Y) (hE : IsPerfect Y E.obj) :\n    ∃ P : CochainComplex (ModuleCat.{u} Γ(Y, ⊤)) ℤ,\n      (∀ n : ℤ, Module.Finite Γ(Y, ⊤) (P.X n)) ∧\n      Nonempty (E.obj ≅ DerivedCategory.Q.obj ((affineModuleComplexFunctor Y).obj P))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T110326-L-625034",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T110326-L-625034",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
