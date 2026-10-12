@@ -1517,6 +1517,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
