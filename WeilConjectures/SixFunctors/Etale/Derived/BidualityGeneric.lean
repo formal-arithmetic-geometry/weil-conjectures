@@ -94,11 +94,11 @@ theorem isIso_map_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_fini
       (ModuleCat.{u + 1} Λ) j aY (j ≫ aY) e'.hom ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj
         (op K))))
 
+omit [Finite Λ] in
 /-- A morphism `f` of complexes on `X` whose derived pullback along `h : Y ⟶ X` is an
 isomorphism induces isomorphisms on the stalks of the cohomology sheaves at every geometric
 point of `X` factoring through `h`: the stalk of `Hᵠ f` at `s ≫ h` is the stalk of
 `h^* Hᵠ f = Hᵠ(Lh^* f)` at `s`. -/
-omit [Finite Λ] in
 lemma isIso_sheafFiber_map_homologyFunctor_map_of_isIso_leftDerivedUpperStar_map
     {X Y : Scheme.{u}} (h : Y ⟶ X) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ Y)
@@ -180,13 +180,13 @@ theorem isIso_sheafFiber_map_verdierDualDoubleDual_app_of_not_isClosed (d : ℕ)
     have : IsSeparated (p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k)))) := by
       rw [hp]
       infer_instance
-    exact IsSeparated.of_comp p _
+    exact IsSeparated.of_comp p (Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))))
   have : LocallyOfFiniteType p := by
     have : LocallyOfFiniteType
         (p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k)))) := by
       rw [hp]
       infer_instance
-    exact LocallyOfFiniteType.of_comp p _
+    exact locallyOfFiniteType_of_comp p (Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))))
   -- the geometric generic fibre `g : U_η̄ ⟶ U` of `p`, with structure morphism `b`
   let g := pullback.fst p (affineLineGeometricGenericPoint k)
   let b := pullback.snd p (affineLineGeometricGenericPoint k)

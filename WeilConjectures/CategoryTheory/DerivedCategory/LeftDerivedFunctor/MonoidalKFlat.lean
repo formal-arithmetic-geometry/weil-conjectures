@@ -55,6 +55,28 @@ lemma kFlat_tensorObj {K L : HomotopyCategory C (.up ℤ)}
 
 end HomotopyCategory
 
+namespace CochainComplex
+
+variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [HasFunctorialFlatResolution C]
+
+/-- Tensoring with a fixed object preserves quasi-isomorphisms between K-flat complexes. -/
+lemma quasiIso_mapHomologicalComplex_tensorRight_map_of_kFlat (Y : C)
+    {K L : CochainComplex C ℤ} (hK : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat K)
+    (hL : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat L) (f : K ⟶ L) [QuasiIso f] :
+    QuasiIso (((tensorRight Y).mapHomologicalComplex (.up ℤ)).map f) := by
+  have h := (HomologicalComplex.quasiIso C (.up ℤ)).whiskerRight_of_kFlat f
+    ((HomologicalComplex.mem_quasiIso_iff f).2 inferInstance) hK hL
+    ((HomologicalComplex.single C (.up ℤ) 0).obj Y)
+  rw [HomologicalComplex.mem_quasiIso_iff] at h
+  let e := map₂HomologicalComplexFlipObjSingleIso (curriedTensor C) Y
+  exact (quasiIso_iff_of_arrow_mk_iso (f ▷ (HomologicalComplex.single C (.up ℤ) 0).obj Y)
+    (((tensorRight Y).mapHomologicalComplex (.up ℤ)).map f)
+    (Arrow.isoMk (e.app K) (e.app L) (e.hom.naturality f).symm)).1 h
+
+end CochainComplex
+
 namespace CategoryTheory.Functor
 
 variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
