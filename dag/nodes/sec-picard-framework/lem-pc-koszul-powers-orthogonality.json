@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-koszul-powers-orthogonality",
+ "kind": "statement",
+ "title": "Koszul orthogonality propagates to positive powers",
+ "statement": "Let A be a commutative ring, r≥0, f:Fin(r)→A and X=Spec(A) [def-pc-scheme], with a chosen derived category D(O_X) [def-pc-derived-category]. For a tuple g, let K(g) be the Koszul complex [def-weil-pbc-koszul-complex], extended to cochain degrees −q, sheafified termwise and localized. Let E be any object of D(O_X). If Hom(K(f)[n],E)=0 for all n∈ℤ, then for every e:Fin(r)→ℕ with e_i>0 and every n∈ℤ one has Hom(K((f_i^{e_i})_i)[n],E)=0. No quasi-coherence assumption on E is needed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, lemma-orthogonal-koszul-complex, Koszul multiplication triangles; More on Algebra, Tag 062C, lemma-koszul-mult"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "For any coordinate i and positive a,b, tensor the cone triangle for multiplication by f_i^a and f_i^b with the Koszul complexes on the other coordinates. Equivalently apply lemma-koszul-mult and permute the chosen coordinate to the last position. The complex with exponent a+b is an extension of the complexes with exponents a and b, up to shifts. Sheafification and localization preserve these triangles, since the other factors are bounded finite free complexes.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, Koszul multiplication triangles; More on Algebra, Tag 062C, lemma-koszul-mult"
+   }
+  },
+  {
+   "text": "Induct on ∑ᵢ(e_i−1). At zero all e_i=1. Otherwise choose i with e_i=m+1 and m>0. In the triangle just constructed put a=m and b=1 and keep the other exponents fixed. Both outer exponent tuples have strictly smaller sums. Their Hom groups into E vanish in all shifts by induction; exactness of Hom on the triangle makes the middle group vanish. For r=0 the base case is the only case.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, Koszul multiplication triangles; More on Algebra, Tag 062C, lemma-koszul-mult"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, lemma-orthogonal-koszul-complex, Koszul multiplication triangles; More on Algebra, Tag 062C, lemma-koszul-mult"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Orthogonality to shifts of Koszul complex implies orthogonality to positive powers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Orthogonality to shifts of Koszul complex implies orthogonality to positive powers",
+   "results": "Generic results only; no exact statement. Top results: CategoryTheory.ObjectProperty.instIsStableUnderShiftRightOrthogonal, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKInjective.rightOrthogonal, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.ObjectProperty.instIsStableUnderShiftLeftOrthogonal, CochainComplex.isLE_iff, CochainComplex.isGE_iff",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*pow|pow.*koszul",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction step: Koszul orthogonality forces the affine restriction to be the pushforward from the smaller open; Koszul orthogonality propagates to positive powers",
+   "via": [
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulPowersOrthogonality.lean",
+  "declaration": "AlgebraicGeometry.koszul_powers_orthogonal_of_orthogonal",
+  "statement": "theorem koszul_powers_orthogonal_of_orthogonal\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    (E : schemeDerivedCategory (Spec (.of A)))\n    (horth : ∀ n : ℤ, Subsingleton ((DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            _ _ _ _ (tilde.functor (.of A))\n            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n            ((ExteriorAlgebra.koszulComplex A r f).extend\n              ComplexShape.embeddingDownNat)))⟦n⟧ ⟶ E))\n    (e : Fin r → ℕ) (he : ∀ i, 0 < e i) (n : ℤ) :\n    Subsingleton ((DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            _ _ _ _ (tilde.functor (.of A))\n            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n            ((ExteriorAlgebra.koszulComplex A r (fun i ↦ f i ^ e i)).extend\n              ComplexShape.embeddingDownNat)))⟦n⟧ ⟶ E)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144153-L-2109824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144153-L-2109824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

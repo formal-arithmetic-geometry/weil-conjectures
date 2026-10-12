@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-derived-open-unit-cone",
+ "kind": "statement",
+ "title": "The derived open-unit cone is supported and quasi-coherent",
+ "statement": "Let A be a commutative ring, X=Spec(A) [def-pc-scheme], U⊆X a quasi-compact open, and choose derived categories D(O_X) and D of module sheaves on the over-site over U [def-pc-derived-category]. Let F:D(O_X)→D be exact derived open restriction, R any right adjoint of F with adjunction adj, and E an object with quasi-coherent cohomology. For any distinguished triangle E --adj.unit_E→ R(F(E)) --g→ C --h→ E[1], the cone C has quasi-coherent cohomology and F(C) is a zero object.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify the over-site module sheaves with modules on the open subscheme via Scheme.Modules.overEquiv. Exact restriction preserves quasi-coherent cohomology. The open inclusion is quasi-compact since U is compact in the affine X, and is separated. Its derived direct image preserves quasi-coherent cohomology; uniqueness of right adjoints identifies it with the supplied R after transporting across the over-site equivalence.",
+   "uses": [
+    "lem-pc-derived-open-restriction-qcoh-iff",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
+   }
+  },
+  {
+   "text": "Both E and R(F(E)) have quasi-coherent cohomology. In the long exact cohomology sequence, H^n(C) is an extension of the cokernel of H^n(E)→H^n(R(F(E))) by the kernel of the next cohomology map. Kernels, cokernels and extensions of quasi-coherent sheaves are quasi-coherent, so each H^n(C) is quasi-coherent.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
+   }
+  },
+  {
+   "text": "Restriction of derived direct image along the same open is the identity: use the open-restriction comparison and compute on a K-injective resolution; on each open W in U the section complex is unchanged. This identifies the derived counit with an isomorphism. The adjunction triangle identity then makes F(adj.unit_E) invertible. Applying exact F to the distinguished triangle gives F(C)=0 by the zero-cone criterion. These assertions are invariant under the canonical isomorphism between right adjoints.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-pc-derived-category",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cone of derived open restriction adjunction unit is quasi coherent and restricts to zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cone of derived open restriction adjunction unit is quasi coherent and restricts to zero",
+   "results": "Generic results only; no exact statement. Top results: CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_unitIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, CategoryTheory.Sheaf.coneΓ_π_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso, AlgebraicGeometry.opensCone_π_app",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*unit|unit.*overFunctor",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction step: Koszul orthogonality forces the affine restriction to be the pushforward from the smaller open; The derived open-unit cone is supported and quasi-coherent",
+   "via": [
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenUnitCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenUnitCone.lean",
+  "declaration": "AlgebraicGeometry.derived_open_unit_cone_properties",
+  "statement": "theorem derived_open_unit_cone_properties\n    (A : Type u) [CommRing A] (U : (Spec (.of A)).Opens)\n    (hqc : IsCompact (U : Set (Spec (.of A))))\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))]\n    (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) ⥤\n      schemeDerivedCategory (Spec (.of A)))\n    (adj : (SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory ⊣ R)\n    (E : schemeDerivedCategory (Spec (.of A)))\n    (hE : schemeDerivedQCohProperty (Spec (.of A)) E)\n    (C : schemeDerivedCategory (Spec (.of A)))\n    (g : R.obj ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj E) ⟶ C)\n    (h : C ⟶ E⟦(1 : ℤ)⟧)\n    (hT : Triangle.mk (adj.unit.app E) g h ∈ distTriang _) :\n    schemeDerivedQCohProperty (Spec (.of A)) C ∧\n      IsZero ((SheafOfModules.overFunctor.{u}\n        (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj C)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144153-L-2109824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144153-L-2109824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.KoszulAffineDetection
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.AlgebraicGeometry.DerivedOpenUnitCone
+import Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality
+import Sheaf.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Koszul orthogonality detects extension from an open
 
@@ -77,6 +79,55 @@ theorem koszul_open_orthogonality
             ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj
             ((ExteriorAlgebra.koszulComplex A r f).extend
               ComplexShape.embeddingDownNat)))⟦n⟧) ⟶ E) := by
-  sorry
+  classical
+  have _cover := hcover
+  let K : schemeDerivedCategory (Spec (.of A)) := DerivedCategory.Q.obj
+    ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u₁} A)
+      (SheafOfModules.{u₁} (moduleRings (Spec (.of A)).toRingedSpace))
+      _ _ _ _ (tilde.functor (.of A))
+      ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj
+      ((ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat))
+  let F := (SheafOfModules.overFunctor.{u₁}
+    (moduleRings (Spec (.of A)).toRingedSpace) (a ⁻¹ᵁ U)).mapDerivedCategory
+  change IsIso (adj.unit.app E) ↔ ∀ n : ℤ, Subsingleton (K⟦n⟧ ⟶ E)
+  have hU : a ⁻¹ᵁ U = ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) := by
+    ext x
+    change x ∈ a ⁻¹ᵁ U ↔ x ∈ ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)
+    rw [Opens.mem_iSup]
+    change x ∈ a ⁻¹ᵁ U ↔ ∃ i, f i ∉ x.asIdeal
+    simpa only [not_forall, not_not] using not_congr (hZ x)
+  have hFK (n : ℤ) : Limits.IsZero (F.obj (K⟦n⟧)) :=
+    isZero_restrict_shift_koszul A r f (a ⁻¹ᵁ U) hU n
+  have hB (n : ℤ) : Subsingleton (K⟦n⟧ ⟶ R.obj (F.obj E)) := by
+    have : Subsingleton (F.obj (K⟦n⟧) ⟶ F.obj E) := ⟨(hFK n).eq_of_src⟩
+    exact (adj.homEquiv (K⟦n⟧) (F.obj E)).symm.subsingleton
+  constructor
+  · intro hi n
+    let := hi
+    exact ⟨fun x y ↦ (cancel_mono (adj.unit.app E)).mp
+      (@Subsingleton.elim _ (hB n) _ _)⟩
+  · intro horth
+    obtain ⟨C, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle (adj.unit.app E)
+    let T := Pretriangulated.Triangle.mk (adj.unit.app E) g h
+    obtain ⟨hC, hres⟩ := derived_open_unit_cone_properties A (a ⁻¹ᵁ U) hqc R adj E hE
+      C g h hT
+    have hshift (n : ℤ) : Subsingleton (K⟦n⟧ ⟶ E⟦(1 : ℤ)⟧) := by
+      have hs := horth (n + -1)
+      have : Subsingleton (K⟦n⟧⟦(-1 : ℤ)⟧ ⟶ E) := by
+        refine ⟨fun x y ↦ ?_⟩
+        apply (cancel_epi ((shiftFunctorAdd _ n (-1)).hom.app K)).mp
+        exact Subsingleton.elim _ _
+      exact @Equiv.subsingleton _ _
+        ((shiftEquiv _ (1 : ℤ)).symm.toAdjunction.homEquiv (K⟦n⟧) E).symm this
+    have horthC (n : ℤ) : Subsingleton (K⟦n⟧ ⟶ C) := by
+      have hz (v : K⟦n⟧ ⟶ C) : v = 0 := by
+        obtain ⟨b, hb⟩ := T.coyoneda_exact₃ hT v
+          (@Subsingleton.elim _ (hshift n) _ 0)
+        have hb0 : b = 0 := @Subsingleton.elim _ (hB n) _ 0
+        simpa [hb0] using hb
+      exact ⟨fun v w ↦ (hz v).trans (hz w).symm⟩
+    have hzero : Limits.IsZero C := isZero_of_koszul_powers_orthogonal A r f (a ⁻¹ᵁ U) hU
+      ⟨C, hC⟩ hres (koszul_powers_orthogonal_of_orthogonal A r f C horthC)
+    exact (T.isZero₃_iff_isIso₁ hT).mp hzero
 
 end AlgebraicGeometry

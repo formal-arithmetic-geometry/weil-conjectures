@@ -26,50 +26,46 @@
  ],
  "proof": [
   {
-   "text": "Let C be the cone of the canonical map E \\to R(U intersection V \\to V)_*(E restricted to U intersection V). The restriction of K to U intersection V is zero (Elementary, Stacks Tag 0663: multiplication by each f_i is homotopic to zero on K, so on each D(f_i), where f_i is a unit, K is acyclic; the D(f_i) cover U intersection V=V minus V(f_1, ..., f_r).), so derived adjunction gives Hom(K[n], R(U intersection V \\to V)_*(E restricted to U intersection V))=0 for every n. Applying Hom(K[n],-) to the distinguished triangle E \\to R(U intersection V \\to V)_*(E restricted to U intersection V) \\to C \\to E[1] therefore shows that Hom(K[n],E)=0 for all n if and only if Hom(K[n],C)=0 for all n. The canonical map is an isomorphism exactly when C=0.",
+   "text": "Identify a⁻¹U with the union of the basic opens using the given zero-locus equivalence. For K the stated sheafified Koszul object, lem-pc-koszul-restriction-zero gives F(K[n])=0. The supplied adjunction homEquiv makes Hom(K[n],R(F(E))) a subsingleton for each n. If the unit is invertible, postcomposition is injective, hence Hom(K[n],E) is a subsingleton.",
    "uses": [
-    "def-pc-derived-category",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-pc-koszul-restriction-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR, proof: distinguished triangle and vanishing after restricting the Koszul complex to U"
-   }
+   "elementary": false
   },
   {
-   "text": "The cone C restricts to zero on U intersection V, since the canonical map restricts there to an isomorphism (elementary: restriction to an open is exact and the restriction of R(U intersection V \\to V)_* to U intersection V is computed on an injective resolution as the identity, Stacks Tag 08DF-type compatibility). On the affine V=Spec(A), the closed complement V minus U is V(f_1, ..., f_r). The Koszul multiplication triangles (elementary, Stacks Tag 062C: K(..., f g, ...) is homotopy equivalent to the cone of a map K(..., f, ...)[1] \\to K(..., g, ...), giving a distinguished triangle in D(O_V)) give, for each coordinate i and positive a,b, a distinguished triangle whose three terms are the Koszul complexes with exponents a, b, and a+b in that coordinate (and with the other exponents fixed). Applying Hom(-,C) yields a long exact sequence. Starting with the exponent tuple (1,...,1), induction on the sum of the exponents therefore shows that vanishing of Hom(K[n],C) for all n implies vanishing for every positive power tuple: to increase one exponent from m to m+1, use the triangle with a=m and b=1, whose other two Koszul terms have smaller sums. The auxiliary affine Koszul detection statement [lem-pc-koszul-affine-detection] now applies to C and gives C=0. Hence Hom(K[n],E)=0 for all n implies that the canonical map in (i) is an isomorphism.",
+   "text": "Choose a distinguished triangle E→R(F(E))→C→E[1] by Mathlib Pretriangulated.distinguished_cocone_triangle. The derived open-unit cone lemma supplies quasi-coherent cohomology of C and F(C)=0.",
+   "uses": [
+    "lem-pc-derived-open-unit-cone",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assume all Hom(K[n],E) vanish. The adjunction of shifts identifies Hom(K[n],E[1]) with Hom(K[n−1],E), hence it vanishes. For v:K[n]→C its composite to E[1] is zero, so Triangle.coyoneda_exact₃ factors it through R(F(E)). That Hom group vanishes by the first step, so v=0. Apply positive-power propagation to obtain vanishing against all Koszul powers.",
+   "uses": [
+    "lem-pc-koszul-powers-orthogonality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isZero_of_koszul_powers_orthogonal to the full-subcategory object ⟨C,hC⟩, with the open identified in step 1, zero restriction, and power orthogonality from step 3. This proves C is zero. Triangle.isZero₃_iff_isIso₁ then makes the original unit invertible.",
    "uses": [
     "lem-pc-koszul-affine-detection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR, proof using Lemma 36.9.6 and Lemma 36.3.5"
-   }
-  },
-  {
-   "text": "Conversely, if the canonical map E \\to R(U intersection V \\to V)_*(E restricted to U intersection V) is an isomorphism, then E is identified with that derived pushforward. Since K restricts to zero on U intersection V (Step 1, Stacks Tag 0663), derived adjunction gives Hom(K[n],E)=0 for every integer n.",
-   "uses": [
-    "def-pc-derived-category",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR, proof: the forward implication from E=Rj_*(E|_U)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-koszul-restriction-zero",
+  "lem-pc-derived-open-unit-cone",
   "def-pc-derived-category",
-  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-pc-koszul-powers-orthogonality",
   "lem-pc-koszul-affine-detection"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IR, Lemma orthogonal-koszul-complex, proof"
+  "place": "Tag 09IR, lemma-orthogonal-koszul-complex; Lean triangle exactness and adjunction glue by V1"
  },
  "mathlib_searches": [
   {
@@ -156,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144153-L-2109824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
