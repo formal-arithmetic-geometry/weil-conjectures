@@ -9397,3 +9397,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/Q3/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerProperty (stage 3; reviewer PASS; first push; landing 20261012T202249-L-707871 (interface); batch 20261012T202227; modules 2; new nodes 1)
 - 20:22 L: merged deliver/Q3/Sheaf.RingTheory.PopescuWeakClearCore (stage 3; reviewer PASS; first push; landing 20261012T202250-L-707975 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/R1/Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen (stage 3; reviewer PASS; first push; landing 20261012T202250-L-708078 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/R2/Sheaf.Paper.ArtinianIdealLengthOneFiltration (stage 3; reviewer PASS; first push; landing 20261012T202251-L-708179 (proof); batch 20261012T202227; modules 1; new nodes 0)
