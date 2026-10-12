@@ -1,6 +1,6 @@
 # Work queue
 
-843 items; claim with `tools/claim.py next <group> [--stage N]`.
+840 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (20)
 
@@ -32,7 +32,7 @@
 
 Not open yet: 41 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (823)
+## Stage 3: modules to prove (820)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -84,7 +84,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ComplexTermCohomologyColimit` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation` | 10 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPShrink` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GabberH0ZariskiTargetComparison` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties` | 10 | 1 | proof |
@@ -103,6 +102,8 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechColimit` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechStageData` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteFreeChainMapStalkEquality` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroAugmentationCompatibility` | 11 | 1 | proof |
@@ -187,7 +188,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.RingTheory.CompletionTensorLocalMapsSurjective` | 14 | 1 | proof |
 | `Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent` | 14 | 1 | proof |
 | `Sheaf.RingTheory.KoszulRegularSequenceDualComplex` | 14 | 3 | proof |
-| `Sheaf.RingTheory.MPseudoCoherentVanishingBase` | 14 | 1 | proof |
 | `Sheaf.RingTheory.PopescuDesingularizationQuotientData` | 14 | 1 | proof |
 | `Sheaf.RingTheory.PopescuLiftPresentation` | 14 | 1 | proof |
 | `Sheaf.RingTheory.PopescuLiftSmoothAway` | 14 | 1 | proof |
@@ -226,7 +226,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHom` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeInverse` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants` | 15 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FiniteTypeIdealDiagram` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatOpenDiagonalConormalZero` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalSystemsPushPullCore` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FractionZeroTensorPower` | 15 | 1 | proof |
@@ -265,10 +264,8 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.CategoryTheory.Sites.PresheafCechSheafResolution` | 15 | 1 | proof |
 | `Sheaf.FieldTheory.BrauerScalarDefectTensorLifts` | 15 | 1 | proof |
 | `Sheaf.FieldTheory.GaloisMatrixCocycleSplit` | 15 | 1 | proof |
-| `Sheaf.FieldTheory.NormalExtensionFixedField` | 15 | 1 | proof |
 | `Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact` | 15 | 1 | proof |
 | `Sheaf.Paper.EtaleHypercohomologyCETotalMaps` | 15 | 1 | proof |
-| `Sheaf.Paper.FlatLocalCriterionNonzerodivisor` | 15 | 1 | proof |
 | `Sheaf.Paper.GradedCohomologyModuleFinite` | 15 | 1 | proof |
 | `Sheaf.Paper.GradedCohomologyModuleStructure` | 15 | 1 | proof |
 | `Sheaf.Paper.H1ClosedPointAffineBasicOpen` | 15 | 1 | proof |
@@ -400,7 +397,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.CategoryTheory.FilteredQuotientComparisons` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredQuotientPageRealization` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.FinitePageGradedQuotient` | 16 | 1 | proof |
-| `Sheaf.CategoryTheory.HalfPlaneWeakConvergence` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.RightDerivedExactComposite` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.SecondFiltrationSignedFirstPage` | 16 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.OverPullbackAdjunctionMono` | 16 | 1 | proof |
@@ -551,6 +547,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.ValuationProperCoherentSections` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison` | 17 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedCoupleExact` | 17 | 1 | proof |
+| `Sheaf.CategoryTheory.FinitePageImageQuotient` | 17 | 1 | proof |
 | `Sheaf.FieldTheory.IntersectionSubfieldsSubspace` | 17 | 1 | proof |
 | `Sheaf.FieldTheory.PBasisDifferentialsBasis` | 17 | 1 | proof |
 | `Sheaf.FieldTheory.PBasisExtension` | 17 | 1 | proof |
