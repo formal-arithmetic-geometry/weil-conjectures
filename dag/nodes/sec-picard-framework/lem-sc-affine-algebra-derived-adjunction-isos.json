@@ -16,56 +16,36 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pc-ringed-spaces-derived-adjoint-general] for the tensor-derived adjunction. For $g$ the affine stalk map $A_q\\to A_p$ is a localization, so pullback is exact and $H^i(Lg^*M)=g^*H^i(M)$. This computation preserves quasi-coherence by [lem-sc-affine-algebra-derived-adjunction-qcoh]. Exact scalar restriction compares $Rg_*$ to $Rf_*$ using the same K-injective representative and the same underlying complex; [lem-sc-affine-derived-cohomology] computes $H^i(Rg_*K)$ as $g_*H^i(K)$.",
+   "text": "Construct the underived pullback adjunction using Mathlib SheafOfModules.PullbackConstruction.adjunction. Apply [lem-sc-affine-algebra-module-adjunction-isos] to obtain exactness and invertibility of its unit and counit on quasi-coherent modules.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-affine-algebra-derived-adjunction-qcoh",
-    "def-pc-ringed-spaces-derived-direct-image",
-    "lem-sc-affine-derived-cohomology"
+    "lem-sc-affine-algebra-module-adjunction-isos"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": true
   },
   {
-   "text": "The tensor-associativity identification with the two tensor operations of [lem-weil-pbc-affine-module-correspondence] carries the cohomology maps of the derived unit and counit to its $\\beta_{H^i(M)}$ and $\\alpha_{H^i(K)}$. This follows by applying the resolution comparison to the underived adjunction unit and counit, and using exactness to identify kernels and images. The correspondence asserts these maps are isomorphisms on quasi-coherent modules.",
+   "text": "For each integer n apply [lem-sc-affine-algebra-derived-unit-homology-factorization]. The underived unit on H^n(M) is invertible by the previous step. Its equality with H^n(adj.unit.app M) followed by e.hom and cancellation of the comparison isomorphism prove the cohomology map invertible. DerivedCategory.isIso_iff proves the derived unit invertible.",
    "uses": [
-    "lem-weil-pbc-affine-module-correspondence",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-sc-affine-algebra-derived-unit-homology-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": true
   },
   {
-   "text": "A derived morphism inducing an isomorphism in every cohomology degree is invertible: its cone is acyclic and hence zero in the localization. Thus both adjunction maps are invertible. Uniqueness of the left adjoint transports the maps through the adjunction-compatible natural isomorphism to the given $L,a$.",
+   "text": "For each integer n apply [lem-sc-affine-algebra-derived-counit-homology-factorization]. The underived counit on H^n(K) is invertible by the first step. Rewrite the derived cohomology map as e.hom followed by this counit, a composite of isomorphisms. DerivedCategory.isIso_iff proves the derived counit invertible. Pair the conclusions.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-sc-affine-algebra-derived-counit-homology-factorization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-affine-algebra-derived-adjunction-qcoh",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-sc-affine-derived-cohomology",
-  "lem-weil-pbc-affine-module-correspondence",
-  "def-weil-abstract-derived-category"
+  "lem-sc-affine-algebra-module-adjunction-isos",
+  "lem-sc-affine-algebra-derived-unit-homology-factorization",
+  "lem-sc-affine-algebra-derived-counit-homology-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof; step of the affine algebra adjunction argument isolated by U3"
+  "place": "Tag 0AVW proof, reduced to underived adjunction isomorphisms and the two explicit cohomology factorizations; assembly checked in Lean by A2"
  },
  "mathlib_searches": [
   {
@@ -155,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T085349-L-43586",
+  "landing": "20261012T110253-L-611484",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

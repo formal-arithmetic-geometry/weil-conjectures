@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos
+import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedUnitHomologyFactorization
+import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedCounitHomologyFactorization
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh
 import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
 import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
@@ -57,6 +60,49 @@ theorem affine_algebra_derived_adjunction_isos
     (∀ M : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))),
       directImageAlgebraDerivedQCohProperty f M → IsIso (adj.unit.app M)) ∧
     (∀ K : schemeDerivedCategory X, schemeDerivedQCohProperty X K →
-      IsIso (adj.counit.app K)) := by sorry
+      IsIso (adj.counit.app K)) := by
+  let g := toDirectImageAlgebraSpace f
+  let φ : moduleRings (directImageAlgebraSpace f) ⟶
+      ((TopologicalSpace.Opens.map g.hom.base).sheafPushforwardContinuous RingCat.{v}
+        (Opens.grothendieckTopology (directImageAlgebraSpace f))
+        (Opens.grothendieckTopology X.toRingedSpace)).obj
+        (moduleRings X.toRingedSpace) :=
+    ⟨Functor.whiskerRight g.hom.c (forget₂ CommRingCat RingCat)⟩
+  let adj₀ := SheafOfModules.PullbackConstruction.adjunction.{v} φ
+  have : Presheaf.IsLocallyInjective
+      (Opens.grothendieckTopology X.toRingedSpace)
+      (𝟙 (moduleRings X.toRingedSpace).obj) := by infer_instance
+  have : Presheaf.IsLocallySurjective
+      (Opens.grothendieckTopology X.toRingedSpace)
+      (𝟙 (moduleRings X.toRingedSpace).obj) := by infer_instance
+  let P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤
+      SheafOfModules.{v} (moduleRings X.toRingedSpace) :=
+    SheafOfModules.forget (moduleRings (directImageAlgebraSpace f)) ⋙
+    PresheafOfModules.pullback.{v} φ.hom ⋙
+    PresheafOfModules.sheafification (R := moduleRings X.toRingedSpace)
+      (𝟙 (moduleRings X.toRingedSpace).obj)
+  obtain ⟨hexact, hunit, hcounit⟩ := affine_algebra_module_adjunction_isos f P adj₀
+  let := hexact
+  constructor
+  · intro M hM
+    apply (DerivedCategory.isIso_iff _ _).2
+    intro n
+    obtain ⟨e, he⟩ :=
+      affine_algebra_derived_unit_homology_factorization f P adj₀ L adj M hM n
+    have := hunit _ (hM n)
+    have : IsIso ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) n).map
+        (adj.unit.app M) ≫ e.hom) := by
+      rw [he]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ e.hom
+  · intro K hK
+    apply (DerivedCategory.isIso_iff _ _).2
+    intro n
+    obtain ⟨e, he⟩ :=
+      affine_algebra_derived_counit_homology_factorization f P adj₀ L adj K hK n
+    have := hcounit _ (hK n)
+    rw [he]
+    infer_instance
 
 end AlgebraicGeometry

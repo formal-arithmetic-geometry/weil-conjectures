@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-affine-algebra-derived-counit-homology-factorization",
+ "kind": "statement",
+ "title": "Cohomology factorization of the affine algebra derived counit",
+ "statement": "Let $f:X\\to Y$ be an affine morphism [def-pc-scheme], and $g:(X,\\mathcal O_X)\\to(Y,f_*\\mathcal O_X)$ its canonical morphism [def-sc-direct-image-algebra-derived-category]. Let $P:\\operatorname{Mod}(f_*\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] preserve finite limits, with an adjunction $a:P\\dashv g_*$. Let $L:D(f_*\\mathcal O_X)\\to D(\\mathcal O_X)$ [def-weil-abstract-derived-category] have an adjunction $b:L\\dashv Rg_*$ to [def-pc-ringed-spaces-derived-direct-image]. For any $K$ with quasi-coherent cohomology [def-pc-derived-category] and integer $n$, there is an isomorphism $e:H^n(L Rg_*K)\\cong P g_*H^n(K)$ such that $H^n(b_K)=e\\,;\\,a_{H^n(K)}$, where $b_K$ and $a_{H^n(K)}$ denote the respective counit components.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For the tensor-derived adjunction, flatness of the stalk localizations of g\nmakes pullback exact, giving H^n(Lg-star E) = g^*H^n(E) naturally in E.\nFor K with quasi-coherent cohomology, compare Rg-star with Rf-star by exact scalar\nrestriction to O_Y using the same K-injective resolution. The affine unbounded\ncohomology calculation gives H^n(Rg-star K) = g_*H^n(K); the equality is algebra\nlinear, since the comparison uses the same pushed complex with its natural\nf_*O_X action. Applying exact pullback gives the displayed source comparison.\nOn the chosen resolutions the derived counit is induced by the ordinary\ncounit. The natural kernel and image comparisons used to compute cohomology\nidentify this map with the evaluation g^*g_*H^n(K) to H^n(K). On affine opens\nthis sends the pure tensor of a ring section and a module section to their\nproduct, so it is the ordinary tensor adjunction counit; naturality in open\nrestriction identifies the sheaf maps. Finally uniqueness of the underived\nand derived left adjoints supplies adjunction-compatible isomorphisms to P and L.\nAbsorb their cohomology components in the source isomorphism e; the target\nH^n(K) is unchanged, yielding precisely the equation for a and adj.\nThe unbounded cohomology formula is required: arbitrary direct image is not\nclaimed exact. Zero cohomology, empty schemes and the identity morphism satisfy\nthe same formula, with no extra hypotheses.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-affine-derived-cohomology",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-affine-derived-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-affine-module-correspondence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW proof; detailed cohomology comparison and adjunction-uniqueness argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the derived counit for an affine morphism to its direct image algebra agrees with the underived counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the derived counit for an affine morphism to its direct image algebra agrees with the underived counit",
+   "results": "AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine; AlgebraicGeometry.ΓSpec.adjunction_counit_app'; AlgebraicGeometry.ΓSpec.adjunction_counit_app; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop; AlgebraicGeometry.IsAffineOpen.fromSpec_app_self_apply",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "DerivedCategory.homologyFunctor; DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt; DerivedCategory.instIsHomologicalHomologyFunctor; DerivedCategory.shift_homologyFunctor; DerivedCategory.HomologySequence.δ; DerivedCategory.isIso_iff; DerivedCategory.homologyFunctorFactors; DerivedCategory.HomologySequence.exact₁",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*homology.*factorization|counit.*homology.*comparison",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionIsos",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence for the finite morphism: Cohomology factorization of the affine algebra derived counit",
+   "via": [
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedCounitHomologyFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraDerivedCounitHomologyFactorization.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_derived_counit_homology_factorization",
+  "statement": "theorem affine_algebra_derived_counit_homology_factorization\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))\n    [Limits.PreservesFiniteLimits P]\n    (L : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) ⥤\n      schemeDerivedCategory X)\n    (adj : L ⊣ RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f))\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (n : ℤ) :\n    ∃ e : (DerivedCategory.homologyFunctor\n          (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).obj\n          (L.obj ((RingedSpace.derivedModuleDirectImage\n            (toDirectImageAlgebraSpace f)).obj K)) ≅\n        P.obj ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).obj\n          ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).obj K)),\n      (DerivedCategory.homologyFunctor\n          (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).map\n          (adj.counit.app K) =\n        e.hom ≫ a.counit.app ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{v} (moduleRings X.toRingedSpace)) n).obj K)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T110253-L-611484",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T110253-L-611484",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
