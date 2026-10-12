@@ -7327,3 +7327,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:02 L: merged deliver/B3/Sheaf.AlgebraicGeometry.AffineBasePieceTensorBaseChange (stage 3; reviewer PASS; first push; landing 20261012T110254-L-611753 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:02 L: merged deliver/B3/Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField (stage 3; reviewer PASS; first push; landing 20261012T110254-L-611851 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:02 L: merged deliver/B3/Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility (stage 3; reviewer PASS; first push; landing 20261012T110254-L-611948 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:02 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Ogoma (stage 3; reviewer PASS; first push; landing 20261012T110254-L-612059 (proof); batch 20261012T110249; modules 1; new nodes 0)

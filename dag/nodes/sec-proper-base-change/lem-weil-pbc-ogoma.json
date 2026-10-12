@@ -29,29 +29,29 @@
  ],
  "proof": [
   {
-   "text": "Set $K=\\operatorname{Ker}(\\pi:M\\to M)$ and $K'=\\{m\\in M:\\ \\pi^2m/1=0\\text{ in }S^{-1}M\\}$, the preimage of $\\operatorname{Ker}(\\pi^2:S^{-1}M\\to S^{-1}M)$ under the $A$-linear localization map $M\\to S^{-1}M$ [def-weil-pbc-module-localization]; both are $A$-submodules of $M$, and $K\\subseteq K'$ since $\\pi m=0$ gives $\\pi^2m/1=0$. Let $Q=K'/K$.",
+   "text": "Let f : M → S⁻¹M be the localization map and g : M → M multiplication by π. Set K′ = ker(f ∘ g ∘ g) and N = g(K′), both submodules of M. The image N realizes the quotient K′/ker(g) in the original argument, without needing a quotient or an isomorphism in Lean.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+    "place": "Smoothing Ring Maps, Lemma Tag 07FC (lemma-ogoma, line 2287), Section 07FB"
    }
   },
   {
-   "text": "Every element of $Q$ is killed by an element of $S$, i.e. $S^{-1}Q=0$ ('by assumption' in Stacks): let $m\\in K'$. Multiplication by $\\pi$ on $S^{-1}M$ sends $x/t$ to $\\pi x/t$ [def-weil-pbc-module-localization], so $\\pi^2(m/1)=\\pi^2m/1=0$, i.e. $m/1\\in\\operatorname{Ker}(\\pi^2)=\\operatorname{Ker}(\\pi)$ on $S^{-1}M$ by hypothesis; hence $\\pi m/1=\\pi(m/1)=0$, so $t\\pi m=0$ for some $t\\in S$ (an element $x/1$ is $0$ iff $ux=0$ for some $u\\in S$). Thus $\\pi(tm)=0$, i.e. $tm\\in K$, and $t$ kills the class of $m$ in $Q$.",
+   "text": "For x ∈ N choose m ∈ K′ with g(m)=x. Then π² f(m)=0. The assumed equality of kernels gives π f(m)=0, hence f(x)=0. The localization kernel criterion gives t ∈ S with tx=0. Equality in the submodule follows by injectivity of its inclusion. Thus S⁻¹N=0 by LocalizedModule.subsingleton_iff.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+    "place": "Smoothing Ring Maps, Lemma Tag 07FC (lemma-ogoma, line 2287), Section 07FB"
    }
   },
   {
-   "text": "$Q$ is a finitely generated $A$-module: $K'$ is a submodule of the finitely generated module $M$ over the Noetherian ring $A$, hence finitely generated [lem-weil-pbc-noetherian-submodule-finite], and the images in $Q=K'/K$ of finitely many generators of $K'$ generate $Q$ [def-weil-finitely-generated-module].",
+   "text": "N is a submodule of the finite module M over the Noetherian ring A, so N is finite. Mathlib infers IsNoetherian A N and Module.Finite A N from the ambient instances.",
    "uses": [
     "lem-weil-pbc-noetherian-submodule-finite",
     "def-weil-finitely-generated-module",
@@ -60,29 +60,29 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+    "place": "Smoothing Ring Maps, Lemma Tag 07FC (lemma-ogoma, line 2287), Section 07FB"
    }
   },
   {
-   "text": "By Steps 2 and 3, $Q$ is a finitely generated $A$-module with $S^{-1}Q=0$, so there is $s\\in S$ with $sQ=0$ [lem-weil-pbc-finite-module-localization-zero-annihilator]; that is, $sm\\in K$, i.e. $\\pi sm=0$, for every $m\\in K'$.",
+   "text": "Apply Module.exists_annihilator_of_subsingleton_localizedModule to N to obtain s ∈ S annihilating N. Consequently sπm=0 for every m ∈ K′.",
    "uses": [
     "lem-weil-pbc-finite-module-localization-zero-annihilator"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+    "place": "Smoothing Ring Maps, Lemma Tag 07FC (lemma-ogoma, line 2287), Section 07FB"
    }
   },
   {
-   "text": "This $s$ works ('Then $s$ works' in Stacks; written out): let $n>0$. If $s^n\\pi m=0$ then $(s^n\\pi)^2m=s^n\\pi(s^n\\pi m)=0$, so $\\operatorname{Ker}(s^n\\pi)\\subseteq\\operatorname{Ker}((s^n\\pi)^2)$. Conversely let $(s^n\\pi)^2m=s^{2n}\\pi^2m=0$. Then in $S^{-1}M$, $\\pi^2m/1=s^{2n}\\pi^2m/s^{2n}=0$ [def-weil-pbc-module-localization], so $m\\in K'$, and by Step 4 $\\pi sm=0$; since $n\\ge1$, $s^n\\pi m=s^{n-1}(\\pi sm)=0$. Hence $\\operatorname{Ker}(s^n\\pi:M\\to M)=\\operatorname{Ker}((s^n\\pi)^2:M\\to M)$ for every $n>0$.",
+   "text": "Fix n>0. If sⁿπm=0, multiplying once more gives (sⁿπ)²m=0. Conversely, if (sⁿπ)²m=0, the identity (sⁿπ)²=s^(n+n)π² and linearity show s^(n+n) f(π²m)=0. Since s^(n+n) belongs to S, multiplication by it on the localization is injective, giving f(π²m)=0. Thus m ∈ K′ and sπm=0. Write n=k+1; then sⁿπm=s^k(sπm)=0. Extensionality gives the asserted set equality.",
    "uses": [
     "def-weil-pbc-module-localization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+    "place": "Smoothing Ring Maps, Lemma Tag 07FC (lemma-ogoma, line 2287), Section 07FB"
    }
   }
  ],
@@ -96,7 +96,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma, line 2287), Section 07FB (section-separable); proof lines 2296-2303. Tags verified in tags/tags: 07FB,smoothing-section-separable; 07FC,smoothing-lemma-ogoma"
+  "place": "Stacks Tag 07FC, proof; B3 realizes K′/ker(π) as the image π(K′), with the same uniform-annihilator argument and the final scalar calculation written explicitly."
  },
  "mathlib_searches": [
   {
@@ -172,5 +172,15 @@
   "group": "M1",
   "result": "pass",
   "note": "A CommRing+IsNoetherianRing, M Module.Finite, S Submonoid, pi:A; h = Ker(pi)=Ker(pi^2) on Mathlib LocalizedModule S M (A-action inferInstance); concl exists s:S, forall n>0, Ker(s^n pi)=Ker((s^n pi)^2) on M as sets; matches Stacks 07FC verbatim; no let, no extra universes/hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T110254-L-612059",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
