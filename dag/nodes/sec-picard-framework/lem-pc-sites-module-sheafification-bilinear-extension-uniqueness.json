@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+   "place": "decomposition of the existence and uniqueness argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uniqueness of bilinear sheafification extension",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "statement": "On a site (C,J), let O be a presheaf of commutative rings, R a sheaf of commutative rings, and α : O → R a locally bijective ring map. Let F,G be presheaves of O-modules, F#,G# their R-module sheafifications, and H a sheaf of R-modules, as in the cited statement dependencies. If two sectionwise R-bilinear families γ,δ : F# × G# → H are both compatible with all restriction maps and agree after precomposition with both module sheafification units, then γ = δ.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, sheafification step in the construction of tensor products"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The two module units have underlying abelian-group maps toSheafify, which are locally surjective by Mathlib. For any pair of sections x,y, intersect their image covering sieves (Presheaf.imageSieve_mem and GrothendieckTopology.intersection_covering). On every arrow in the intersection choose lifts a,b. Naturality of both families and their equality on unit images show equality of their restrictions. H.isSheaf.isSeparated gives equality of the original values; function and linear-map extensionality conclude.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, sheafification step in the construction of tensor products"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "imageSieve|W_toSheafify|isSeparated",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact bilinear extension theorem. Sheafification and local-surjectivity lemmas are used directly.",
+   "digest": "b4cca8c876b68653"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.imageSieve_mem",
+   "results": "1 hits: CategoryTheory.Presheaf.imageSieve_mem",
+   "date": "2026-10-12",
+   "verdict": "No exact bilinear extension theorem. Sheafification and local-surjectivity lemmas are used directly.",
+   "digest": "ed9231e9f0f8a237"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural bilinear transformations into a sheaf are equal if they agree locally on images of sheafification units",
+   "results": "8 hits: PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, CategoryTheory.GrothendieckTopology.sheafify_hom_ext, CategoryTheory.sheafify_hom_ext, CategoryTheory.GrothendieckTopology.plus_hom_ext, CategoryTheory.Presheaf.IsSheaf.hom_ext, CategoryTheory.GrothendieckTopology.sheafifyLift_unique, CategoryTheory.GrothendieckTopology.plusLift_unique, PresheafOfModules.sheafificationHomEquiv",
+   "date": "2026-10-12",
+   "verdict": "No exact bilinear extension theorem. Sheafification and local-surjectivity lemmas are used directly.",
+   "digest": "5462d20601bdfa39"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two natural bilinear maps from module sheafifications into a sheaf are equal when they agree on sheafification unit images",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "available": false
+  }
+ ],
+ "status": "split",
+ "created": {
+  "item": "Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness",
+  "declaration": "PresheafOfModules.unique_bilinear_sheafification_extension",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/SheafificationBilinearExtensionUniqueness.lean",
+  "statement": "theorem unique_bilinear_sheafification_extension\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasWeakSheafify J AddCommGrpCat.{max u v w}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    (O : Cᵒᵖ ⥤ CommRingCat.{max u v w}) (R : Sheaf J CommRingCat.{max u v w})\n    (α : (O ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w}) ⟶\n      ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R).obj)\n    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]\n    (F G : PresheafOfModules.{max u v w} (O ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w}))\n    (H : SheafOfModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R))\n    {γ δ : ∀ X : Cᵒᵖ,\n      ((sheafification α).obj F).val.obj X →ₗ[R.obj.obj X]\n        ((sheafification α).obj G).val.obj X →ₗ[R.obj.obj X] H.val.obj X}\n    (hγmap : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y)\n      (x : ((sheafification α).obj F).val.obj X)\n      (y : ((sheafification α).obj G).val.obj X),\n      γ Y (((sheafification α).obj F).val.map f x)\n        (((sheafification α).obj G).val.map f y) = H.val.map f (γ X x y))\n    (hδmap : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y)\n      (x : ((sheafification α).obj F).val.obj X)\n      (y : ((sheafification α).obj G).val.obj X),\n      δ Y (((sheafification α).obj F).val.map f x)\n        (((sheafification α).obj G).val.map f y) = H.val.map f (δ X x y))\n    (hγ : ∀ (X : Cᵒᵖ) (x : F.obj X) (y : G.obj X),\n      γ X (((sheafificationAdjunction α).unit.app F).app X x)\n        (((sheafificationAdjunction α).unit.app G).app X y) =\n        δ X (((sheafificationAdjunction α).unit.app F).app X x)\n          (((sheafificationAdjunction α).unit.app G).app X y)) : γ = δ",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T135219-L-1656536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T135219-L-1656536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

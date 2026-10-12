@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Ring.Limits
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionUniqueness
 
 /-!
 # Extension of bilinear maps through module sheafification
@@ -69,6 +71,12 @@ theorem existsUnique_bilinear_sheafification_extension
       (∀ (X : Cᵒᵖ) (x : F.obj X) (y : G.obj X),
         γ X (((sheafificationAdjunction α).unit.app F).app X x)
           (((sheafificationAdjunction α).unit.app G).app X y) = β X x y) := by
-  sorry
+  obtain ⟨γ, hγmap, hγunit⟩ :=
+    exists_bilinear_sheafification_extension O R α F G H β hβ
+  refine ⟨γ, ⟨hγmap, hγunit⟩, ?_⟩
+  intro δ hδ
+  apply unique_bilinear_sheafification_extension O R α F G H hδ.1 hγmap
+  intro X x y
+  rw [hγunit X x y, hδ.2 X x y]
 
 end PresheafOfModules

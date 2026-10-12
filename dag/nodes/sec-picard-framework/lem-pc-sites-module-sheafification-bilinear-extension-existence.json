@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+   "place": "decomposition of the existence and uniqueness argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of bilinear sheafification extension",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "statement": "Let $(\\mathcal C,J)$ be a site [def-weil-pbc-sites-and-cohomology], let $\\mathcal O$ be a presheaf of commutative rings with sheafification $\\mathcal O\\to\\mathcal O^\\#$ [def-weil-pbc-sheafification], let $\\mathcal F,\\mathcal G$ be presheaves of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification] with module sheafifications $\\mathcal F\\to\\mathcal F^\\#$, $\\mathcal G\\to\\mathcal G^\\#$, sheaves of $\\mathcal O^\\#$-modules [lem-pc-sites-module-sheafification-interface], and let $\\mathcal H$ be a sheaf of $\\mathcal O^\\#$-modules [def-weil-sheaf-of-modules-category], regarded as a presheaf of $\\mathcal O$-modules by restriction of scalars. Every morphism of presheaves of sets $\\beta:\\mathcal F\\times\\mathcal G\\to\\mathcal H$ that is $\\mathcal O$-bilinear on sections extends to a morphism of sheaves of sets $\\beta^\\#:\\mathcal F^\\#\\times\\mathcal G^\\#\\to\\mathcal H$ that is $\\mathcal O^\\#$-bilinear and satisfies $\\beta^\\#\\circ(\\mathcal F\\times\\mathcal G\\to\\mathcal F^\\#\\times\\mathcal G^\\#)=\\beta$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, sheafification step in the construction of tensor products"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The module units are locally bijective on underlying sets, by the underlying-sheafification comparison and module-sheafification interface. Given a pair of sections, intersect their covering image sieves and choose both lifts on each arrow.",
+   "uses": [
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply β to the lifts. Different lifts agree locally by local injectivity of the units, hence their β-values agree by separatedness of H. Naturality of β gives compatibility on overlaps. The sheaf property of H glues these local values into a unique value on the original pair. Uniqueness of gluing gives naturality and the unit equation. Equivalently this is factorization through the locally bijective product map into the sheaf H, via the sheafification universal property.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift x,x′,y on a common cover to verify first-variable additivity; lift x,y,y′ for the second variable. Naturality and the unit equation reduce both identities to additivity of β, and separatedness descends them. Lift a scalar along α as well to verify each scalar identity using the compatible module actions and O-linearity of β. Package these identities as curried R-linear maps.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, sheafification step in the construction of tensor products"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bilinear|sheafificationHomEquiv|homEquivOfIsLocallyBijective",
+   "results": "17 hits: Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact bilinear extension theorem. Existing results concern linear maps only.",
+   "digest": "2ff8b6375f558a52"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural bilinear map from two presheaves of modules to a sheaf extends along both module sheafification units",
+   "results": "8 hits: PresheafOfModules.toSheafify, PresheafOfModules.toSheafify_app_apply', PresheafOfModules.toSheafify_app_apply, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafification_map, PresheafOfModules.Sheafify.SMulCandidate.mk'",
+   "date": "2026-10-12",
+   "verdict": "No exact bilinear extension theorem. Existing results concern linear maps only.",
+   "digest": "05e979fa1550476e"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"bilinear\"",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact bilinear extension theorem. Existing results concern linear maps only.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A restriction compatible bilinear map from two presheaves of modules into a sheaf extends to the sheafifications",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "available": false
+  }
+ ],
+ "status": "split",
+ "created": {
+  "item": "Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtensionExistence",
+  "declaration": "PresheafOfModules.exists_bilinear_sheafification_extension",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/SheafificationBilinearExtensionExistence.lean",
+  "statement": "theorem exists_bilinear_sheafification_extension\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasWeakSheafify J AddCommGrpCat.{max u v w}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    (O : Cᵒᵖ ⥤ CommRingCat.{max u v w}) (R : Sheaf J CommRingCat.{max u v w})\n    (α : (O ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w}) ⟶\n      ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R).obj)\n    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]\n    (F G : PresheafOfModules.{max u v w} (O ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w}))\n    (H : SheafOfModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R))\n    (β : ∀ X : Cᵒᵖ, F.obj X →ₗ[O.obj X] G.obj X →ₗ[O.obj X]\n      ((restrictScalars α).obj H.val).obj X)\n    (hβ : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : F.obj X) (y : G.obj X),\n      β Y (F.map f x) (G.map f y) = H.val.map f (β X x y)) :\n    ∃ γ : ∀ X : Cᵒᵖ,\n      ((sheafification α).obj F).val.obj X →ₗ[R.obj.obj X]\n        ((sheafification α).obj G).val.obj X →ₗ[R.obj.obj X] H.val.obj X,\n      (∀ {X Y : Cᵒᵖ} (f : X ⟶ Y)\n        (x : ((sheafification α).obj F).val.obj X)\n        (y : ((sheafification α).obj G).val.obj X),\n        γ Y (((sheafification α).obj F).val.map f x)\n          (((sheafification α).obj G).val.map f y) = H.val.map f (γ X x y)) ∧\n      (∀ (X : Cᵒᵖ) (x : F.obj X) (y : G.obj X),\n        γ X (((sheafificationAdjunction α).unit.app F).app X x)\n          (((sheafificationAdjunction α).unit.app G).app X y) = β X x y)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T135219-L-1656536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T135219-L-1656536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,64 +29,22 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-sites-sheafification-underlying-sets], the underlying sheaves of sets of the abelian sheafifications $\\mathcal F^\\#$, $\\mathcal G^\\#$ (with the units) are the sheafifications of the underlying presheaves of sets of $\\mathcal F$, $\\mathcal G$, and likewise for $\\mathcal O\\to\\mathcal O^\\#$ as presheaf of rings; so all sheafifications below may be taken in sheaves of sets. The presheaf map $\\beta:\\mathcal F\\times\\mathcal G\\to\\mathcal H$ has sheaf target. By the universal property of sheafification [def-weil-pbc-sheafification], it factors uniquely through a morphism $\\widetilde\\beta:(\\mathcal F\\times\\mathcal G)^\\#\\to\\mathcal H$ whose composite with the sheafification unit is $\\beta$.",
+   "text": "Obtain a natural bilinear extension with the unit equation from the existence lemma. For any other extension, use both naturality hypotheses and the unit equations in the proved uniqueness lemma to identify the bilinear families. This assembles ExistsUnique without changing its statement.",
    "uses": [
-    "lem-pc-sites-sheafification-underlying-sets",
-    "def-weil-pbc-sheafification"
+    "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.1 (Tag 0GMW), hint using universal property of sheafification"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-sheafification-sets-exact], whose site-size hypothesis is part of [def-weil-pbc-sites-and-cohomology], the product of the two sheafifications is canonically isomorphic to $(\\mathcal F\\times\\mathcal G)^\\#$, compatibly with both units. Define $\\beta^\\#$ as $\\widetilde\\beta$ after this canonical isomorphism.",
-   "uses": [
-    "lem-weil-pbc-sheafification-sets-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.1 (Tag 0GMW), hint using the sheafification universal property"
-   }
-  },
-  {
-   "text": "To check $\\mathcal O^\\#$-bilinearity, compare the two sheaf maps expressing additivity and scalar compatibility after precomposition with the sheafification units. By the product comparison [lem-weil-pbc-sheafification-sets-exact], these precompositions (along the set-sheafification units of $\\mathcal O\\times\\mathcal F\\times\\mathcal G$ and $\\mathcal F\\times\\mathcal F\\times\\mathcal G$, which by [lem-pc-sites-sheafification-underlying-sets] are the products of the module and ring sheafification units) come from the corresponding maps on $\\mathcal O\\times\\mathcal F\\times\\mathcal G$ and $\\mathcal F\\times\\mathcal G$, where they agree because $\\beta$ is $\\mathcal O$-bilinear. The compatible $\\mathcal O^\\#$-actions are those of [lem-pc-sites-module-sheafification-interface], so the equalities descend uniquely through sheafification.",
-   "uses": [
-    "lem-weil-pbc-sheafification-sets-exact",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-pc-sites-module-sheafification-interface"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.1 (Tag 0GMW), hint using the sheafification universal property"
-   }
-  },
-  {
-   "text": "For uniqueness, any other extension composed with the product isomorphism of [lem-weil-pbc-sheafification-sets-exact] gives a map $(\\mathcal F\\times\\mathcal G)^\\#\\to\\mathcal H$ whose composite with the sheafification unit is $\\beta$. The uniqueness clause of [def-weil-pbc-sheafification] forces it to equal $\\widetilde\\beta$, hence forces the other extension to equal $\\beta^\\#$; the compatibility with the units gives the stated restriction identity.",
-   "uses": [
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.1 (Tag 0GMW), hint using the sheafification universal property"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheafification-underlying-sets"
+  "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 18.26.1 (Tag 0GMW), hint"
+  "place": "Tag 0GMW; existence and uniqueness assembled separately, uniqueness proved by local lifts and separatedness"
  },
  "mathlib_searches": [
   {
@@ -163,5 +121,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T135219-L-1656536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
