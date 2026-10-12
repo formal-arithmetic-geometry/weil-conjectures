@@ -8,11 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
-import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import WeilConjectures.SixFunctors.Finite.BaseChange
+import Sheaf.AlgebraicGeometry.GenericFiniteSchemeSplitting
+import Sheaf.AlgebraicGeometry.FiniteSplitCoverLisseImage
+import Sheaf.AlgebraicGeometry.LisseEtaleSurjectiveDescent
 
 /-!
 # A generic locus where a finite map preserves lissity
@@ -88,6 +86,14 @@ theorem exists_dense_open_finite_lisse_preservation
               ((sheafCompose S.smallEtaleTopology
                 (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
                   ((Etale.lowerStar AddCommGrpCat.{u + 1} g).obj E))) := by
-  sorry
+  obtain ⟨U, hUd, hU⟩ := exists_dense_open_finite_scheme_splitting S g
+  refine ⟨U, hUd, ?_⟩
+  intro V hVU E hE
+  obtain ⟨T, p, _, hpEtale, hpSurj, n, W, hcover, hdisjoint, hW⟩ := hU V hVU
+  let : Etale p := hpEtale
+  let : Surjective p := hpSurj
+  apply isLisseEtaleSheafOfSets_of_etale_surjective_pullback p
+  exact isLisse_pullback_finite_directImage_of_split_cover g V p n W
+    hcover hdisjoint hW E hE
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-generic-finite-scheme-splitting",
+ "kind": "statement",
+ "title": "Scheme-level generic splitting of a finite morphism",
+ "statement": "Let $S$ be an integral Noetherian affine scheme and $g:Z\\to S$ a finite morphism [def-weil-pbc-scheme-conventions]. There is a dense open $U$ of $S$ such that for every open $V\\subseteq U$ there is a finite etale surjective morphism $p:T\\to V$. On the fibre product $P=Z\\times_S T$ [def-pc-fibre-product], using $T\\to V\\to S$, there are finitely many opens $W_i$ ($i\\in\\operatorname{Fin}(n)$) with union $P$ and pairwise disjoint underlying opens. Each composite $W_i\\to P\\to T$ is a universal homeomorphism [def-weil-universal-homeomorphism]. No sheaf occurs in the choice of $U$. The number $n$ may be zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "## Proof, finite-algebra calculation and final paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Finite morphisms are affine. Write S=Spec A and Z=Spec B. A is a Noetherian domain and B is finite over A. The generic finite-algebra splitting gives a nonzero c, an etale surjective finite cover Spec A-prime of D(c), and a product decomposition of the reduction of B tensor A-prime into finite universal-homeomorphism factors.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-algebra-splitting",
+    "pqf-lem-finite-integral-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The factor spectra give a finite disjoint open-and-closed decomposition of the reduced source. The reduction is a homeomorphism on underlying spaces; lift the components to the unreduced source. Their maps to the cover are integral, surjective and universally injective since these properties are unchanged by a surjective closed reduction immersion. Hence they are universal homeomorphisms.",
+   "uses": [
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For V contained in D(c), base change the cover and the open components. Etaleness, finiteness and surjectivity persist; so do universal homeomorphisms. Opens, disjointness and the covering property persist under this restriction. If the source is empty, take n=0. D(c) is dense because c is nonzero in a domain.",
+   "uses": [
+    "lem-weil-pbc-universal-homeomorphism-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-generic-finite-algebra-splitting",
+  "pqf-lem-finite-integral-lft",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-universal-homeomorphism-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "## Proof, finite-algebra calculation and final paragraph; scheme and set-sheaf interfaces spelled out from the existing plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphism of schemes splits generically into finitely many universal homeomorphisms after etale base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism of schemes splits generically into finitely many universal homeomorphisms after etale base change",
+   "results": "LeanFinder returned finite fibers, finite affine ring maps, and IsEtale.of_comp, but no generic scheme splitting theorem. The existing project algebra splitting supplies the algebraic part.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; use the named project declarations and explicit categorical glue"
+  },
+  {
+   "tool": "grep",
+   "query": "rg universalHomeomorphism.*(lisse|locallyConstant)|locallyConstant.*(lowerStar|pushforward)|IsLisseEtaleSheafOfSets in Mathlib, WeilConjectures and Sheaf",
+   "results": "No exact result in Mathlib. Project EtaleSheaves defines the predicate; finite etale module pushforward uses a different abelian class, with no theorem identifying it with the set-valued hypothesis. EtaleSetInverseImageStalkGerm and EtaleOver supply comparison tools used in the proved descent step.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiniteLissePreservation",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-map-generic-lisse-preservation",
+   "place": "Proof, steps 1--5",
+   "via": [
+    "lem-weil-pbc-finite-map-generic-lisse-preservation",
+    "lem-weil-pbc-finite-pushforward-generic-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFiniteSchemeSplitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiniteSchemeSplitting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dense_open_finite_scheme_splitting",
+  "statement": "theorem exists_dense_open_finite_scheme_splitting (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S] {Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g] : ∃ U : S.Opens, Dense (U : Set S) ∧ ∀ (V : S.Opens), V ≤ U → ∃ (T : Scheme.{u}) (p : T ⟶ V.toScheme), IsFinite p ∧ Etale p ∧ Surjective p ∧ ∃ (n : ℕ) (W : Fin n → (pullback g (p ≫ V.ι)).Opens), (⨆ i, W i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (W i) (W j)) ∧ ∀ i, IsUniversalHomeomorphism ((W i).ι ≫ pullback.snd g (p ≫ V.ι))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085252-L-20173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085252-L-20173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
