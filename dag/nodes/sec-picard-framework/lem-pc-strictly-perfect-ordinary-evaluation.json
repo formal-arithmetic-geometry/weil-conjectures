@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-strictly-perfect-ordinary-evaluation",
+ "kind": "statement",
+ "title": "Ordinary strictly perfect evaluation is degreewise invertible",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open, and $P,F$ complexes of sheaves of $\\mathcal O_U$-modules, with $P$ strictly perfect [def-pc-perfect-complex]. Put $S=\\mathcal O_U[0]$ and $D=\\mathcal Hom^\\bullet(P,S)$ [def-pur-hom-complex]. Let $f:\\operatorname{Tot}(F\\otimes D)\\to\\mathcal Hom^\\bullet(P,F)$ be a chain map [def-pc-tensor-complex-sheaves]. Require that on the tensor summand $F^p\\otimes D^q$ in degree $n=p+q$, its projection to $\\mathcal Hom(P^r,F^{r+n})$ is zero if $r+q\\ne0$; if $r+q=0$, it is the currying of evaluation of $D^q$ on $P^r$, followed by the unit action on $F^p$ [lem-pc-sheaf-modules-tensor-closed]. Then every $f^n$ is an isomorphism. No boundedness is required of $F$ and $U$ need not be affine.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, final finite-free and retract calculation; Tag 08DM, lemma-Rhom-strictly-perfect"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "The product projections of Hom(P,S) identify its degree-q term with Hom(P^(-q),O). The other target terms of S are zero, so their Hom objects are zero.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bounded support of P gives finitely many potentially nonzero dual terms and Hom factors. Identify each total degree with the finite sum indexed by p+q=n; the component predicate makes f block diagonal with the ordinary module evaluation comparisons.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite free module E, identify Hom(E,B) and B tensor Hom(E,O) with finitely many copies of B. Evaluation on basis sections identifies the comparison with the identity. Naturality of the tensor-Hom bijection transports these identifications to any retract of E, and restricts the inverse to the retract.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite sum of these isomorphisms is invertible. The same formulas apply to empty U, zero P, and rank-zero modules.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-finite-free-internal-hom-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, final finite-free and retract calculation; Tag 08DM, lemma-Rhom-strictly-perfect"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ordinary tensor internal Hom evaluation for a bounded complex of finite projective sheaves is degreewise an isomorphism",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open of derived tensor Hom evaluation equals the localization of the ordinary evaluation chain map for strictly perfect complexes",
+   "results": "Eight hits: Tor and total tensor summand inclusions; no canonical evaluation or restriction comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex|ιMapBifunctor",
+   "results": "Mathlib HomComplex is a complex of abelian groups of morphisms, not the internal sheaf Hom complex. No ordinary sheaf evaluation comparison theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectRHomEvaluationLocal",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DQ, proof of lemma-dual-perfect-complex, final finite-free and retract calculation; Tag 08DM, lemma-Rhom-strictly-perfect; the strictly perfect local evaluation calculation in the tensor-Hom step of finite duality",
+   "via": [
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyPerfectOrdinaryEvaluation.lean",
+  "declaration": "AlgebraicGeometry.isIso_localOrdinaryEvaluation_degree",
+  "declarations": [
+   "AlgebraicGeometry.localEvaluationModules",
+   "AlgebraicGeometry.localEvaluationUnit",
+   "AlgebraicGeometry.localEvaluationDual",
+   "AlgebraicGeometry.localEvaluationTensor",
+   "AlgebraicGeometry.localEvaluationProjection",
+   "AlgebraicGeometry.localEvaluationComponent",
+   "AlgebraicGeometry.IsLocalOrdinaryEvaluation",
+   "AlgebraicGeometry.isIso_localOrdinaryEvaluation_degree"
+  ],
+  "statement": "theorem isIso_localOrdinaryEvaluation_degree (X : Scheme.{u}) (U : X.Opens) (P F : CochainComplex (localEvaluationModules X U) ℤ) (hstrict : Scheme.IsStrictlyPerfect X U P) (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F) (hf : IsLocalOrdinaryEvaluation X U P F f) (n : ℤ) : IsIso (f.f n)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T202238-L-704038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T202238-L-704038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
