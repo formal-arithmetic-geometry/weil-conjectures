@@ -1,0 +1,103 @@
+{
+ "id": "lem-pc-derived-total-resolution-homology-surjective",
+ "kind": "statement",
+ "title": "Surjective homology map of a total resolution",
+ "statement": "Let $R$ be a ring, $n$ an integer, $M^\\bullet$ a cochain complex of $R$-modules [def-pc-cochain-complex-modules], and $K^{p,q}$ an integer-indexed bicomplex of $R$-modules whose horizontal and vertical differentials increase their respective indices and commute. Assume that every column $K^{p,\\bullet}$ with $p>0$ is zero. Form the direct-sum total complex with $\\operatorname{Tot}^k=\\bigoplus_{p+q=k}K^{p,q}$ and differential $d_h+(-1)^p d_v$ on column $p$. Let $a:K^{0,\\bullet}\\to M^\\bullet$ and $\\varepsilon:\\operatorname{Tot}\\to M^\\bullet$ be maps of complexes. Assume that the restriction of $\\varepsilon$ to $K^{0,q}$ is $a^q$ for every integer $q$, and that $a$ induces a surjection $\\ker(d_v^{0,q})\\to\\ker(d_M^q)$ for every integer $q$. Then $H^n(\\varepsilon)$ is surjective, where cohomology means cycles modulo boundaries.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Tag 09IZ, proof"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Represent a degree n homology class of M by a cycle m. Surjectivity\nof the augmentation on cycles gives a cycle x in (K.X 0)^n mapping to m.\nInclude x into the column-zero summand of the total complex. Its vertical\ndifferential is zero since x is a cycle; its horizontal differential\nlands in the zero column K.X 1, and hence is also zero. Thus it is a total\ncycle. The augmentation identity on column zero says its image is m, so\nits homology class is a preimage of the given class. This argument works\nfor every integer n and requires neither boundedness nor the other exact rows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof, lifting augmented cycles"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "augmentation of direct sum total complex injective on cohomology exact rows cycles",
+   "results": "Eight hits, including K-injective and injective resolutions; none proves this claim.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap, Function.Surjective",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap.*(injective|surjective)|total.*homology",
+   "results": "Three unrelated hits. Upstream BicomplexColumns total results need boundedness not assumed here.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of a direct sum total complex with exact rows and exact cycle rows induces a bijective homology map.",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedTotalResolutionQuasiIso",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-resolution-quasi-iso",
+   "place": "surjective part of homology bijectivity"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedTotalResolutionHomologySurjective",
+  "file": "lean/Sheaf/Paper/DerivedTotalResolutionHomologySurjective.lean",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_homology_surjective",
+  "statement": "theorem total_resolution_homology_surjective\n    (M : CochainComplex (ModuleCat R) ℤ)\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (ε : K.total (ComplexShape.up ℤ) ⟶ M)\n    (a : K.X 0 ⟶ M)\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ i, M.HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))\n    (h_augmentation_zero : ∀ q : ℤ,\n      K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp) ≫ ε.f q = a.f q)\n    (h_cycles_surjective : ∀ q : ℤ, Function.Surjective\n      (HomologicalComplex.cyclesMap a q).hom) :\n    Function.Surjective (HomologicalComplex.homologyMap ε n).hom",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aba2f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135315-L-1691860",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aba2f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135315-L-1691860",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and dependencies with their DAG nodes, unchanged library interface, and Tag 09IZ; verified compilation and axioms, including the direct importer."
+ }
+}

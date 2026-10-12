@@ -7,6 +7,9 @@ public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Exact.Basic
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Paper.DerivedTotalResolutionHomologyInjective
+import Sheaf.Paper.DerivedTotalResolutionHomologySurjective
 
 /-!
 # Quasi-isomorphism from a good total resolution
@@ -28,6 +31,7 @@ namespace DerivedTotalResolution
 
 variable {R : Type u} [Ring R]
 
+set_option linter.unusedVariables false in
 /-- The total complex of an exact augmented resolution of cochain complexes is
 quasi-isomorphic to the resolved complex (Stacks, Tag 09IZ).
 
@@ -93,7 +97,14 @@ theorem total_resolution_quasiIso
     (h_cycles_surjective : ∀ q : ℤ, Function.Surjective
       (HomologicalComplex.cyclesMap a q).hom) :
     QuasiIso ε := by
-  sorry
+  rw [quasiIso_iff]
+  intro n
+  rw [quasiIsoAt_iff_isIso_homologyMap, ConcreteCategory.isIso_iff_bijective]
+  exact ⟨total_resolution_homology_injective M K ε a n h_positive h_augmentation_zero
+    h_augmentation h_exact h_exact_zero h_surjective h_cycles h_cycles_zero
+    h_cycles_surjective,
+    total_resolution_homology_surjective M K ε a n h_positive h_augmentation_zero
+      h_cycles_surjective⟩
 
 end DerivedTotalResolution
 

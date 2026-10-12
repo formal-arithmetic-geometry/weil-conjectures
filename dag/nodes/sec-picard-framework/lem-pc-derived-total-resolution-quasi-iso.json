@@ -24,38 +24,22 @@
  ],
  "proof": [
   {
-   "text": "For every cochain degree $q$, splice the short exact sequences $0 \\to \\Ker(d^q_{A_i}) \\to A_i^q \\to \\Im(d^q_{A_i}) \\to 0$ with the exact augmented rows and the exact rows of cycles. The resulting row $\\cdots \\to \\Im(d^q_{A_1}) \\to \\Im(d^q_{A_0}) \\to \\Im(d^q_M) \\to 0$ of images is exact. Splicing once more with $0 \\to \\Im(d^{q-1}_{A_i}) \\to \\Ker(d^q_{A_i}) \\to H^q(A_i^\\bullet) \\to 0$ gives exactness of the cohomology row $\\cdots \\to H^q(A_2^\\bullet) \\to H^q(A_1^\\bullet) \\to H^q(A_0^\\bullet) \\to H^q(M^\\bullet) \\to 0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, Lemma 12.19.4 (Tag 09IZ), proof, first paragraph"
-   }
-  },
-  {
-   "text": "On $A_{-p}^q$ the total differential is the horizontal map plus $(-1)^p$ times the cochain differential (the repository's sign $d_I+(-1)^p d_{II}$), so its square is zero by cancellation of the mixed terms. Write a total cocycle of degree $0$ as a finite sum $x = x_n + \\cdots + x_0$ with $x_i \\in A_i^i$, where $n$ is maximal. If $n>0$, the total cocycle equation makes $x_n$ a cycle and makes its image in $H^n(A_{n-1}^\\bullet)$ zero because that image is the boundary of $x_{n-1}$, up to sign. Exactness of the cohomology row of Step 1 lifts the class of $x_n$ from $H^n(A_{n+1}^\\bullet)$; subtracting the total boundary of a lifting cycle $y \\in \\Ker(d^n_{A_{n+1}})$ makes $x_n$ a boundary $d z$ with $z \\in A_n^{n-1}$, and subtracting $\\pm$ the total boundary of $z$ makes $x_n = 0$. Repeating decreases the maximal index and terminates by finite support (the total complex is a direct sum), so every class is represented by a cocycle $x = x_0$; the same argument works in every degree.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, Lemma 12.19.4 (Tag 09IZ), proof, second paragraph"
-   }
-  },
-  {
-   "text": "Let $x_0, x_0' \\in \\Ker(d^0_{A_0})$ be two such cocycles whose images in $M^0$ differ by $d_M(m)$. Lift $m$ to $a \\in A_0^{-1}$ by exactness of the augmented row; then $x_0 - x_0' - d_{A_0}(a)$ lies in $\\Ker(d^0_{A_0})$ and maps to $0$ in $\\Ker(d^0_M)$, so by exactness of the row of cycles it is the image of some $b \\in \\Ker(d^0_{A_1})$, whose total differential is that image. Hence $x_0 - x_0'$ is the total boundary of $b \\pm a$. Conversely cohomologous cocycles have the same image in $H^0(M^\\bullet)$, since the augmentation is a map of complexes. With Step 2 the augmentation induces a bijection on cohomology in every degree and is a quasi-isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, Lemma 12.19.4 (Tag 09IZ), proof, conclusion"
-   }
+   "text": "Use the injectivity and surjectivity statements degreewise. The ModuleCat forgetful functor reflects isomorphisms, so bijectivity makes every homology map an isomorphism. Apply quasiIsoAt_iff_isIso_homologyMap and quasiIso_iff.",
+   "uses": [
+    "lem-pc-derived-total-resolution-homology-injective",
+    "lem-pc-derived-total-resolution-homology-surjective"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-derived-total-resolution-homology-injective",
+  "lem-pc-derived-total-resolution-homology-surjective"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-f-representable/lem-pc-derived-total-resolution-quasi-iso.md",
-  "place": "proof"
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ; Lean reduction by homology-map bijectivity"
  },
  "mathlib_searches": [
   {
@@ -133,5 +117,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aba2f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135315-L-1691860",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and dependencies with their DAG nodes, unchanged library interface, and Tag 09IZ; verified compilation and axioms, including the direct importer."
  }
 }

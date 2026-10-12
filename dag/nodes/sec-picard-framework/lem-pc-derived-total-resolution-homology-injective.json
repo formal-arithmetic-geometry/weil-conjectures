@@ -1,0 +1,103 @@
+{
+ "id": "lem-pc-derived-total-resolution-homology-injective",
+ "kind": "statement",
+ "title": "Injective homology map of a total resolution",
+ "statement": "Let $R$ be a ring, $n$ an integer, and $M^\\bullet$ and $A_i^\\bullet$ ($i\\geq 0$) cochain complexes of $R$-modules [def-pc-cochain-complex-modules]. Let $\\cdots\\to A_2^\\bullet\\to A_1^\\bullet\\to A_0^\\bullet\\xrightarrow{a}M^\\bullet\\to0$ be an augmented chain of maps of complexes, exact in every cochain degree. Assume that for every integer $q$ the augmented row $\\cdots\\to\\ker(d_{A_2}^q)\\to\\ker(d_{A_1}^q)\\to\\ker(d_{A_0}^q)\\to\\ker(d_M^q)\\to0$ is exact. Form the direct-sum total complex with $\\operatorname{Tot}^k=\\bigoplus_{i\\geq0}A_i^{k+i}$ and differential equal to the horizontal differential plus $(-1)^i$ times the vertical differential on column $i$. Let $\\varepsilon:\\operatorname{Tot}\\to M^\\bullet$ be the augmentation, equal to $a$ on column zero and zero on the other columns. Then the induced map $H^n(\\varepsilon)$ is injective, where cohomology means cycles modulo boundaries.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Tag 09IZ, proof"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Write A_i = K.X (-i). The short exact sequences of cycles, terms and\nimages, together with exactness of the term and cycle rows, give exact image\nrows. Applying the same argument to boundaries, cycles and homology gives\nexact homology rows. Represent a class in the kernel by a total cocycle x,\nwhose components x_i in A_i^(n+i) have finite support. If its largest index\nr is positive, the cocycle equation says x_r is a vertical cycle and its\nhorizontal image is a vertical boundary. Exactness of the homology row\nlifts its class to a vertical cycle y in A_(r+1)^(n+r). Subtract the total\nboundary of y, which has degree n-1, to make x_r a vertical boundary.\nSubtract the appropriately signed total boundary of a primitive in\nA_r^(n+r-1). Its other component has index r-1, so this kills x_r without\ncreating any component at a larger index. Induction on the finite support\nreduces x to a cycle x_0 in A_0^n. Its augmentation is a boundary d_M m.\nLift m through the surjective term map A_0^(n-1) to M^(n-1), obtaining t.\nThen x_0-d t is a cycle with augmentation zero. Exactness of the augmented\ncycle row lifts it to a cycle b in A_1^n. The total boundary of b is its\nhorizontal image, and that of t is d t since the positive columns vanish.\nThus x is a total boundary. A linear map with zero kernel is injective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof, finite-support reduction and final kernel argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "augmentation of direct sum total complex injective on cohomology exact rows cycles",
+   "results": "Eight hits, including K-injective and injective resolutions; none proves this claim.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap, Function.Surjective",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap.*(injective|surjective)|total.*homology",
+   "results": "Three unrelated hits. Upstream BicomplexColumns total results need boundedness not assumed here.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of a direct sum total complex with exact rows and exact cycle rows induces a bijective homology map.",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedTotalResolutionQuasiIso",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-resolution-quasi-iso",
+   "place": "injective part of homology bijectivity"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedTotalResolutionHomologyInjective",
+  "file": "lean/Sheaf/Paper/DerivedTotalResolutionHomologyInjective.lean",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_homology_injective",
+  "statement": "theorem total_resolution_homology_injective\n    (M : CochainComplex (ModuleCat R) ℤ)\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (ε : K.total (ComplexShape.up ℤ) ⟶ M)\n    (a : K.X 0 ⟶ M)\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ i, M.HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))\n    (h_augmentation_zero : ∀ q : ℤ,\n      K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp) ≫ ε.f q = a.f q)\n    (h_augmentation : ∀ (p q n : ℤ) (hp : p < 0)\n      (h : ComplexShape.π (ComplexShape.up ℤ)\n        (ComplexShape.up ℤ) (ComplexShape.up ℤ) (p, q) = n),\n      K.ιTotal (ComplexShape.up ℤ) p q n h ≫ ε.f n = 0)\n    (h_exact : ∀ (p q : ℤ), p < -1 →\n      Function.Exact\n        ((K.d p (p + 1)).f q).hom\n        ((K.d (p + 1) (p + 2)).f q).hom)\n    (h_exact_zero : ∀ q : ℤ, Function.Exact\n      ((K.d (-1) 0).f q).hom (a.f q).hom)\n    (h_surjective : ∀ q : ℤ, Function.Surjective\n      (a.f q).hom)\n    (h_cycles : ∀ (p q : ℤ), p < -1 →\n      Function.Exact\n        (HomologicalComplex.cyclesMap (K.d p (p + 1)) q).hom\n        (HomologicalComplex.cyclesMap (K.d (p + 1) (p + 2)) q).hom)\n    (h_cycles_zero : ∀ q : ℤ, Function.Exact\n      (HomologicalComplex.cyclesMap (K.d (-1) 0) q).hom\n      (HomologicalComplex.cyclesMap a q).hom)\n    (h_cycles_surjective : ∀ q : ℤ, Function.Surjective\n      (HomologicalComplex.cyclesMap a q).hom) :\n    Function.Injective (HomologicalComplex.homologyMap ε n).hom",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aba2f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135315-L-1691860",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aba2f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135315-L-1691860",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs and dependencies with their DAG nodes, unchanged library interface, and Tag 09IZ; verified compilation and axioms, including the direct importer."
+ }
+}
