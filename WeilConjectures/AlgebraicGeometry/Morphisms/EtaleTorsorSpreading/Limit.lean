@@ -53,9 +53,17 @@ closed fibre, Zariski's main theorem (`Algebra.ZariskisMainProperty.of_finiteTyp
 Galois cover with its action and rational point, and `|G|⁻¹` descend to some `P`.
 The remaining obstacle is that the descended family must have geometrically connected fibres
 over *all* points of `Spec P`, while `Spec A ⟶ Spec P` is not surjective in general (e.g. a
-blow-up chart, or a valuation ring of rank `≥ 2`); this needs either [Stacks 055R] (openness of
-the union of the fibre components through the section) or the constructibility of the locus of
-geometrically irreducible fibres (EGA IV 9.7.7), neither of which is available.
+blow-up chart, or a valuation ring of rank `≥ 2`). Over `P` let `E ⊆ C_P` be the *good locus*
+of points lying on the irreducible component of their fibre through the section. It contains
+the closed fibre, and it is stable under generization: if `x ∈ E` lies over `t` and `y ⤳ x`
+lies over `t'`, pull back to the normalization `T'` of `T = cl(t')`; the local rings of the
+normal scheme `C_{T'}` are domains, so `y` and `σ` lie on the same irreducible component of
+`C_{T'}`, whose generic fibre is the component of `C_{t'}` through `σ(t')`. Purity at a point
+only involves its generizations, so the induction of [Stacks 0EYJ] runs on `E` — provided the
+trait, depth-two and purity steps are available in a form local at the point (hypotheses only
+on generizations of the point, no connectedness of the other fibres), or `E` is open
+([Stacks 055R]; by the above this reduces to the spreading of geometric irreducibility of the
+fibres from the generic point of a closed subset of `Spec P`, EGA IV 9.7.7).
 
 Status: this step is left open. The base cannot be taken Noetherian in the application: the
 vanishing theorem (`AlgebraicGeometry.Etale.exists_etaleTorsor_cohomologyMap_eq_zero`) applies it
