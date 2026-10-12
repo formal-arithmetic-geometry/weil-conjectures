@@ -5787,3 +5787,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:14 L: returned deliver/K1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial (reviewer RETURN: (reviewer X-a9a96, head a9a96f81c) D1: `cohomologyPullbackComposition` and `cohomologyPullbackIdentity` are exact restat)
 - 01:15 L: merged deliver/G1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image (stage 3; reviewer PASS; after a return; landing 20261012T011430-L-757597 (interface); modules 3; new nodes 2)
 - 01:17 L: merged deliver/J1/Sheaf.AlgebraicGeometry.Curve.SepClosedComparison (stage 3; reviewer PASS; after a return; landing 20261012T011600-L-764037 (interface); modules 3; new nodes 2)
+- 01:18 L: merged deliver/Q1/Sheaf.Paper.ZeroDimensionalCohomology (stage 3; reviewer PASS; after a return; landing 20261012T011727-L-769650 (interface); modules 2; new nodes 2)

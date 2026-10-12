@@ -1,0 +1,171 @@
+{
+ "id": "zero-dimensional-etale-finite",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-zero-dimensional-cohomology",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "zero-dimensional-etale-finite",
+ "statement": "For a separated, locally finite type, quasi-compact scheme C over an algebraically closed field k with topological Krull dimension at most zero, Finite C.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-zero-dimensional-cohomology.md",
+  "place": "node lem-weil-pbc-zero-dimensional-cohomology, order 1002"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "By LocallyOfFiniteType.isLocallyNoetherian f, C is locally Noetherian. By QuasiCompact.compactSpace_of_compactSpace f, C is compact. IsLocallyArtinian.of_topologicalKrullDim_le_zero hdim makes C locally Artinian and hence discrete. Therefore finite_of_compact_of_discrete proves Finite C (node lem-weil-pbc-finite-type-dim-zero-artinian).",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-dim-zero-artinian"
+ ],
+ "proof_origin": {
+  "by": "Q1",
+  "document": "lean/Sheaf/Paper/ZeroDimensionalCohomology.lean",
+  "place": "zero_dimensional_etale_finite; Mathlib Artinian and compact-discrete finiteness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of a separated finite type zero dimensional scheme over an algebraically closed field: degree zero is the finite product of geometric stalks and positive degrees vanish",
+   "results": "No theorem for this etale cohomology calculation; only unrelated curve field-extension and site declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- CategoryTheory.Sheaf.H _ _ = 0",
+   "results": "No matching declaration for etale cohomology vanishing or stalk product identification",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'zero.dimensional.*cohomology|cohomology.*geometric.stalk|finite.*coproduct.*cohomology' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No Mathlib declaration for the stated etale cohomology formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1002,
+ "blueprint_uses": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zero-dimensional-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Etale Cohomology: the first paragraph of Lemma 0A5B, Proposition 03SI (proposition-topological-invariance), Theorem 03QT (theorem-equivalence-sheaves-point), and Section 03QQ (section-cohomology-point). Step 1 uses the finite/discrete and residue-field leaves, reduction universal-homeomorphism, finite-discrete-affine, and the coproduct family to prove that the reduction is a finite coproduct of Spec k, including the residue-field and coproduct-isomorphism arguments. Step 2 applies the finite geometric-point coproduct statement, invokes universal-homeomorphism invariance, and uses the inverse-image stalk-germ lemma to identify each reduced stalk with F at the corresponding point. No exact sorry-free declaration exists in /home/ubuntu/weil-src-slopmaster2/WeilConjectures.",
+  "blueprint": {
+   "statement": "node lem-weil-pbc-zero-dimensional-cohomology, order 1002",
+   "steps": {
+    "1": "proof, first paragraph: reduction to a finite coproduct of spectra of k",
+    "2": "proof, second paragraph: exact global sections on each point and finite-product assembly"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "The reduction morphism's universal-homeomorphism invariance is a generic etale-site tool; the sk-prop-cd route has no unit-specific replacement for this standard reduction step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Step 2 uses the generic inverse-image stalk identification for the reduction morphism; the sk-prop-cd route has no unit-specific replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2089e",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T011727-L-769650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZeroDimensionalCohomology",
+  "file": "lean/Sheaf/Paper/ZeroDimensionalCohomology.lean",
+  "declaration": "AlgebraicGeometry.zero_dimensional_etale_finite",
+  "statement": "theorem zero_dimensional_etale_finite (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) : Finite C",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZeroDimensionalCohomology",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2089e",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T011727-L-769650",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations, node statements, proof metadata, report, and compiled files match the packet and stage-3 requirements."
+ }
+}

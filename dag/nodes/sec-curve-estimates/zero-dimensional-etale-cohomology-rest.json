@@ -1,0 +1,210 @@
+{
+ "id": "zero-dimensional-etale-cohomology-rest",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-zero-dimensional-cohomology",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "zero-dimensional-etale-cohomology-rest",
+ "statement": "Let u be a universe, k : Type u an algebraically closed field, C : Scheme.{u}, and f : C ⟶ Spec k a separated, locally finite-type, quasi-compact morphism. Assume topologicalKrullDim C ≤ 0. Let F be a sheaf of abelian groups in universe u+1 on the small étale site of C. For each underlying point x : C choose an algebraically closed field Ω(x) : Type u and a morphism s(x) : Spec Ω(x) ⟶ C whose unique source point maps to x. No algebraicity of Ω(x) over k or extra linearity condition on s(x) is assumed. Then (1) for every natural number q > 0 the abelian group H^q(C,F), computed by Etale.cohomology applied to F placed in degree zero by DerivedCategory.singleFunctor, is subsingleton; and (2) the canonical morphism from H^0(C,F) to the categorical product over x : C of the geometric stalks F_{s(x)} is an isomorphism. This morphism is precisely the composite of homologyRightDerivedFunctorObjSingleFunctorIso.hom, rightDerivedZeroIsoSelf.hom.app F, restriction F.ΓRes to the identity étale object C ⟶ C, and Pi.lift of the toPresheafFiber germs at s(x). The cohomology, site, abelian sheaves and geometric stalks are those of [def-weil-pbc-etale-cohomology], [def-weil-pbc-etale-site], [def-weil-pbc-abelian-etale-sheaves] and [def-weil-pbc-geometric-stalks]. Finiteness is not an added hypothesis or a conjunct of this statement.\n\nExact Lean signature:\ntheorem zero_dimensional_etale_cohomology_rest (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (Ω : C → Type u) [∀ x, Field (Ω x)] [∀ x, IsAlgClosed (Ω x)] (s : ∀ x : C, Spec (.of (Ω x)) ⟶ C) (hs : ∀ x : C, (s x).base.hom default = x) : (∀ q : ℕ, 0 < q → Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} C q).obj ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ∧ IsIso ((Functor.homologyRightDerivedFunctorObjSingleFunctorIso (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}) F 0).hom ≫ (Functor.rightDerivedZeroIsoSelf (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1})).hom.app F ≫ F.ΓRes (op (Scheme.Etale.mk (𝟙 C))) ≫ Pi.lift (fun x : C => (Scheme.pointSmallEtale (s x)).toPresheafFiber (Scheme.Etale.mk (𝟙 C)) (Over.homMk (s x) (Category.comp_id (s x))) F.obj))",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-zero-dimensional-cohomology.md",
+  "place": "node lem-weil-pbc-zero-dimensional-cohomology, order 1002"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-dim-zero-artinian], the finite-type\nzero-dimensional scheme $C$ has finite discrete underlying space and every\npoint is closed. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction. By\n[lem-weil-pbc-reduction-universal-homeomorphism], $C_{\\mathrm{red}}$ is reduced\nand $i$ is a universal homeomorphism. Since $C_{\\mathrm{red}}$ is a closed\nsubscheme of the finite-type $k$-scheme $C$, it is itself finite type over $k$.\nApplying [lem-weil-pbc-closed-point-residue-field-base] to $C_{\\mathrm{red}}$\nidentifies every residue field $\\kappa_{C_{\\mathrm{red}}}(c)$ with $k$ (equivalently,\n$\\mathcal O_{C_{\\mathrm{red}},c}=\\mathcal O_{C,c}/\\sqrt{0}$ has the same\nresidue field). The singleton pieces of the finite discrete space\n$C_{\\mathrm{red}}$ are open and closed. Each such piece is affine by\n[lem-weil-pbc-finite-discrete-scheme-affine]. Its coordinate ring is reduced\nand has only one prime, hence is a field; the residue-field identification\nmakes that field $k$. Therefore each piece is $\\operatorname{Spec}k$. By\n[lem-weil-pbc-scheme-coproduct-family], the morphism from the coproduct of\nthese pieces to $C_{\\mathrm{red}}$ induced by their inclusions is an\nisomorphism: its restriction to each summand is the corresponding open\nimmersion, and the summands are pairwise disjoint and cover $C_{\\mathrm{red}}$,\nso it is bijective and a local isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00KH (algebra-lemma-Noetherian-dimension-0) and Theorem 00FV (algebra-theorem-nullstellensatz), together with Morphisms Lemma 054M (morphisms-lemma-reduction-universal-homeomorphism) and the first paragraph of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-geometric-point-coproduct-cohomology] to the finite coproduct obtained in step 1 and the restriction of F. Positive cohomology is zero and the degree-zero canonical product-of-germs morphism is invertible. The chosen geometric points s(x) factor uniquely through the reduction, since Spec Ω(x) is reduced. On each Spec k summand, arbitrary algebraically closed geometric fields give the same exact stalk evaluation functor by Stacks Theorem 03QT and Lemma 03QU (the absolute Galois group of k is trivial); this extends the coproduct calculation stated for the canonical k-points to the specified s(x). No assumption that Ω(x) is algebraic over k is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-geometric-point-coproduct-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03QT, Lemma 03QU, Section 03QQ; Lemma 0A5B, first proof paragraph"
+   }
+  },
+  {
+   "text": "Use [thm-weil-pbc-universal-homeomorphism-invariance] for i : C_red → C from [lem-weil-pbc-reduction-universal-homeomorphism] to transport all cohomology groups of the inverse image of F to those of F. Apply [lem-weil-pbc-inverse-image-stalk-germ] to i and the lift of each specified s(x). Its germ formula identifies the product of pulled-back germs with the product of germs at s(x), after the unit comparison and the point bijection. Naturality of the degree-zero derived-to-underived comparison and restriction to the terminal étale object therefore identifies the transported isomorphism with exactly the displayed Lean composite. Positive-degree zero abelian groups have subsingleton underlying types. This proves the two conjuncts without assuming finiteness or reducedness of C.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition 03SI; Lemma 03Q1 (3) and its stalk pullback proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-zero-dimensional-cohomology.md",
+  "place": "Both proof paragraphs, specialized to the cohomological conjuncts; expanded finite reduction, arbitrary geometric stalk evaluation, and canonical germ compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of a separated finite type zero dimensional scheme over an algebraically closed field: degree zero is the finite product of geometric stalks and positive degrees vanish",
+   "results": "No theorem for this etale cohomology calculation; only unrelated curve field-extension and site declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- CategoryTheory.Sheaf.H _ _ = 0",
+   "results": "No matching declaration for etale cohomology vanishing or stalk product identification",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'zero.dimensional.*cohomology|cohomology.*geometric.stalk|finite.*coproduct.*cohomology' ~/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No Mathlib declaration for the stated etale cohomology formula",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1002,
+ "blueprint_uses": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zero-dimensional-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Etale Cohomology: the first paragraph of Lemma 0A5B, Proposition 03SI (proposition-topological-invariance), Theorem 03QT (theorem-equivalence-sheaves-point), and Section 03QQ (section-cohomology-point). Step 1 uses the finite/discrete and residue-field leaves, reduction universal-homeomorphism, finite-discrete-affine, and the coproduct family to prove that the reduction is a finite coproduct of Spec k, including the residue-field and coproduct-isomorphism arguments. Step 2 applies the finite geometric-point coproduct statement, invokes universal-homeomorphism invariance, and uses the inverse-image stalk-germ lemma to identify each reduced stalk with F at the corresponding point. No exact sorry-free declaration exists in /home/ubuntu/weil-src-slopmaster2/WeilConjectures.",
+  "blueprint": {
+   "statement": "node lem-weil-pbc-zero-dimensional-cohomology, order 1002",
+   "steps": {
+    "1": "proof, first paragraph: reduction to a finite coproduct of spectra of k",
+    "2": "proof, second paragraph: exact global sections on each point and finite-product assembly"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "The reduction morphism's universal-homeomorphism invariance is a generic etale-site tool; the sk-prop-cd route has no unit-specific replacement for this standard reduction step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Step 2 uses the generic inverse-image stalk identification for the reduction morphism; the sk-prop-cd route has no unit-specific replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2089e",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T011727-L-769650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest",
+  "file": "lean/Sheaf/Paper/ZeroDimensionalEtaleCohomologyRest.lean",
+  "declaration": "AlgebraicGeometry.zero_dimensional_etale_cohomology_rest",
+  "statement": "theorem zero_dimensional_etale_cohomology_rest (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (Ω : C → Type u) [∀ x, Field (Ω x)] [∀ x, IsAlgClosed (Ω x)] (s : ∀ x : C, Spec (.of (Ω x)) ⟶ C) (hs : ∀ x : C, (s x).base.hom default = x) : (∀ q : ℕ, 0 < q → Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} C q).obj ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ∧ IsIso ((Functor.homologyRightDerivedFunctorObjSingleFunctorIso (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}) F 0).hom ≫ (Functor.rightDerivedZeroIsoSelf (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1})).hom.app F ≫ F.ΓRes (op (Scheme.Etale.mk (𝟙 C))) ≫ Pi.lift (fun x : C => (Scheme.pointSmallEtale (s x)).toPresheafFiber (Scheme.Etale.mk (𝟙 C)) (Over.homMk (s x) (Category.comp_id (s x))) F.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZeroDimensionalCohomology",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2089e",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T011727-L-769650",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean declarations, node statements, proof metadata, report, and compiled files match the packet and stage-3 requirements."
+ }
+}
