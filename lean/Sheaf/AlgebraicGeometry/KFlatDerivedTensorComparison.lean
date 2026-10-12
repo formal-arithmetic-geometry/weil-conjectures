@@ -64,6 +64,52 @@ theorem kFlat_derivedTensor_comparison_natIso (X : Scheme.{u})
             (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)).obj G ⋙
           (Functor.whiskeringRight J
             (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-            (schemeDerivedCategory X)).obj DerivedCategory.Q) := by sorry
+            (schemeDerivedCategory X)).obj DerivedCategory.Q) := by
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive C :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed C :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : IsGrothendieckAbelian.{u} C :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have : Limits.HasColimitsOfSize.{0, 0} C :=
+    Limits.hasColimitsOfSizeShrink.{0, 0, u, u} C
+  have := schemeModule_hasFunctorialFlatResolution X
+  have := DerivedCategory.hasDerivedMonoidalCategory C
+  have hk (i : I) : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient C (.up ℤ)).obj (F.obj i)) := by
+    rw [HomotopyCategory.kFlat_iff_preserves_acyclic]
+    intro N hN
+    obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+    have h := hF i N hN
+    have hright : HomotopyCategory.subcategoryAcyclic C
+        ((HomotopyCategory.quotient C (.up ℤ)).obj N ⊗
+          (HomotopyCategory.quotient C (.up ℤ)).obj (F.obj i)) := by
+      exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 h
+    exact ⟨(HomotopyCategory.subcategoryAcyclic C).prop_of_iso
+      (β_ _ _) hright, hright⟩
+  have hμ (i : I) (j : J) :
+      IsIso (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := C)) (F.obj i) (G.obj j)) := by
+    have hq := DerivedMonoidal.isIso_counit_app_app_of_kFlat_left
+      (DerivedCategory.Qh (C := C)) (HomotopyCategory.quasiIso C (.up ℤ))
+      ((HomotopyCategory.quotient C (.up ℤ)).obj (F.obj i))
+      ((HomotopyCategory.quotient C (.up ℤ)).obj (G.obj j)) (hk i)
+    have : IsIso (Functor.LaxMonoidal.μ (DerivedCategory.Qh (C := C))
+        ((HomotopyCategory.quotient C (.up ℤ)).obj (F.obj i))
+        ((HomotopyCategory.quotient C (.up ℤ)).obj (G.obj j))) := hq
+    change IsIso (_ ≫ _ ≫ _)
+    change IsIso (_ ≫ (_ ≫ _) ≫ _)
+    infer_instance
+  have (i : I) (j : J) := hμ i j
+  refine ⟨NatIso.ofComponents (fun i ↦ NatIso.ofComponents
+    (fun j ↦ asIso (Functor.LaxMonoidal.μ DerivedCategory.Q
+      (F.obj i) (G.obj j))) ?_) ?_⟩
+  · intro j j' f
+    exact Functor.LaxMonoidal.μ_natural_right DerivedCategory.Q (F.obj _) (G.map f)
+  · intro i i' f
+    ext j
+    exact Functor.LaxMonoidal.μ_natural_left DerivedCategory.Q (F.map f) (G.obj j)
 
 end AlgebraicGeometry
