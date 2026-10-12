@@ -32,7 +32,7 @@ a total left derived functor `LE : D(X_ét, Λ) ⥤ D(X_ét, A)`, the derived ba
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -102,6 +102,52 @@ noncomputable def derivedExtendScalarsAdjunction :
   (ProEtale.etaleSheafExtendScalarsAdjunction _ X).derivedAdjunction.ofNatIsoRight
     (Functor.rightDerivedFunctorIsoMapDerivedCategory _)
 
+section
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {X}
+
+/-- For a K-flat complex `P` of étale sheaves, the derived tensor product `P ⊗ᴸ F[0]` is
+computed by the tensor product of complexes `P ⊗ F`. This is
+`DerivedCategory.QObjTensorSingleFunctorObjIso`, stated with
+`AlgebraicGeometry.Etale.derivedTensor` so that it specialises to `A = ModuleCat Λ` without
+comparing monoidal instances. -/
+noncomputable def derivedTensorQObjSingleFunctorObjIsoOfKFlat
+    (P : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ)
+    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) (F : Sheaf X.smallEtaleTopology A) :
+    ((derivedTensor A X).obj ((_root_.DerivedCategory.Q).obj P)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ≅
+      (_root_.DerivedCategory.Q).obj (((tensorRight F).mapHomologicalComplex _).obj P) :=
+  _root_.DerivedCategory.QObjTensorSingleFunctorObjIso P hP F
+
+end
+
+section
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+  {B : Type u'} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+  [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+  [Abelian.HasFunctorialFlatResolution B] {X}
+  {F : Sheaf X.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology B} [F.Additive]
+  [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
+  {R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B) ⥤
+    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+
+/-- For a monoidal functor `F` of étale sheaves with derived functor `LF` left adjoint to `R`,
+`R ⋙ RHom(K, -) ≅ RHom(LF K, -) ⋙ R`: both are right adjoint to
+`T ↦ LF(K ⊗ᴸ T) ≅ LF K ⊗ᴸ LF T`. -/
+noncomputable def derivedHomCompIsoOfAdjunction (adj : F.leftDerivedFunctor ⊣ R)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    R ⋙ (derivedHom A X).obj (op K) ≅ (derivedHom B X).obj (op (F.leftDerivedFunctor.obj K)) ⋙ R :=
+  (((derivedTensorHomAdjunction A K).comp adj).ofNatIsoLeft
+    (F.leftDerivedTensorIsoOfKFlat K)).rightAdjointUniq
+    (adj.comp (derivedTensorHomAdjunction B _))
+
+end
+
 set_option hygiene false in
 /-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
 local notation "𝐃(" X ", " Λ ")" =>
@@ -126,11 +172,25 @@ theorem nonempty_iso_restrictScalars_leftDerived_obj (K : 𝐃(X, Λ)) :
   exact ⟨R.mapDerivedCategory.mapIso (E.leftDerivedFunctor.mapIso e.symm ≪≫
       asIso (E.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P)) ≪≫
       _root_.DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app P) ≪≫
-      (_root_.DerivedCategory.quotientCompQhIso _).app _) ≪≫
+      (_root_.DerivedCategory.quotientCompQhIso _).app
+        ((E.mapHomologicalComplex (.up ℤ)).obj P)) ≪≫
     R.mapDerivedCategoryFactors.app _ ≪≫
     _root_.DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso
       (etaleSheafExtendScalarsCompRestrictScalarsIso J X) (.up ℤ)).app P) ≪≫
-    (_root_.DerivedCategory.QObjTensorSingleFunctorObjIso P hP c).symm ≪≫
-    whiskerRightIso e' _⟩
+    (derivedTensorQObjSingleFunctorObjIsoOfKFlat P hP c).symm ≪≫
+    ((derivedTensor _ X).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj c)).mapIso e'⟩
+
+/-- **Internal extension–restriction adjunction.** For `K ∈ D(X_ét, Λ)` and
+`N ∈ D(X_ét, Λ ⧸ J)`, `RHom_Λ(K, Res N) ≅ Res RHom_{Λ ⧸ J}(K ⊗ᴸ_Λ (Λ ⧸ J), N)`, naturally in `N`:
+both are right adjoint to `T ↦ (K ⊗ᴸ T) ⊗ᴸ_Λ (Λ ⧸ J) ≅ (K ⊗ᴸ_Λ (Λ ⧸ J)) ⊗ᴸ (T ⊗ᴸ_Λ (Λ ⧸ J))`,
+the derived extension of scalars being monoidal. -/
+noncomputable def derivedHomRestrictScalarsIso (K : 𝐃(X, Λ)) :
+    (Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapDerivedCategory ⋙
+        (derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K) ≅
+      (derivedHom (ModuleCat.{u + 1} (Λ ⧸ J)) X).obj
+          (op ((ProEtale.etaleSheafExtendScalars (Ideal.Quotient.mk J) X).leftDerivedFunctor.obj
+            K)) ⋙
+        (Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapDerivedCategory :=
+  derivedHomCompIsoOfAdjunction (derivedExtendScalarsAdjunction J X) K
 
 end AlgebraicGeometry.Etale

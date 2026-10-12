@@ -208,12 +208,19 @@ theorem isIso_sheafFiber_map_verdierDualDoubleDual_app_of_not_isClosed (d : ℕ)
   -- `dim U_η̄ < d`
   have hdim : topologicalKrullDim (pullback p (affineLineGeometricGenericPoint k) : Scheme) + 1 ≤
       d := by
-    refine (topologicalKrullDim_pullback_add_one_le p _ (y := genericPoint _)
-      ⟨IsLocalRing.closedPoint _, ?_⟩ ?_).trans ((topologicalKrullDim_subspace_le X U).trans hX)
-    · simp [affineLineGeometricGenericPoint, Scheme.geometricGenericPoint, Scheme.Hom.comp_apply,
-        Spec_closedPoint, Scheme.fromSpecStalk_closedPoint]
-    · rw [genericPoint_eq_bot_of_affine, PrimeSpectrum.isClosed_singleton_iff_isMaximal]
+    have hη : ¬ IsClosed ({genericPoint (Spec (.of (Polynomial k)))} : Set (Spec (.of _))) := by
+      rw [genericPoint_eq_bot_of_affine, PrimeSpectrum.isClosed_singleton_iff_isMaximal]
       exact fun h ↦ Polynomial.not_isField k (Ring.isField_iff_maximal_bot.2 h)
+    refine (topologicalKrullDim_pullback_add_one_le p _ ⟨IsLocalRing.closedPoint _, rfl⟩
+      fun hc ↦ hη ?_).trans ((topologicalKrullDim_subspace_le X U).trans hX)
+    have hmem : affineLineGeometricGenericPoint k (IsLocalRing.closedPoint _) ∈
+        Set.range (Scheme.fromSpecStalk _ (genericPoint (Spec (.of (Polynomial k))))) := by
+      rw [affineLineGeometricGenericPoint, Scheme.geometricGenericPoint, Scheme.Hom.comp_apply]
+      exact Set.mem_range_self _
+    rw [Scheme.range_fromSpecStalk, Set.mem_setOf_eq, specializes_iff_mem_closure,
+      hc.closure_eq, Set.mem_singleton_iff] at hmem
+    rw [hmem]
+    exact hc
   obtain ⟨d', hd', hdim'⟩ : ∃ d' < d,
       topologicalKrullDim (pullback p (affineLineGeometricGenericPoint k) : Scheme) ≤ d' := by
     have : Nonempty (TopologicalSpace.IrreducibleCloseds
@@ -229,7 +236,7 @@ theorem isIso_sheafFiber_map_verdierDualDoubleDual_app_of_not_isClosed (d : ℕ)
     | bot => exact absurd h0 (by simp)
     | coe m =>
       induction m using ENat.recTopCoe with
-      | top => exact absurd hdim (by simp)
+      | top => exact absurd hdim (by norm_cast; simp)
       | coe m =>
         norm_cast at hdim
         exact ⟨m, by omega, le_rfl⟩

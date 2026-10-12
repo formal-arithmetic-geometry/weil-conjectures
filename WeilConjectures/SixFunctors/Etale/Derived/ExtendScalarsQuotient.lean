@@ -100,14 +100,12 @@ instance isLeftAdjoint_etaleSheafExtendScalars :
 -- through enough points of the site is tried first and makes the search time out.
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
 
-attribute [local instance] Sheaf.monoidalCategory in
 /-- Extension of scalars of étale sheaves is oplax monoidal, being left adjoint to the lax
 monoidal restriction of scalars. -/
 noncomputable instance oplaxMonoidal_etaleSheafExtendScalars :
     (ProEtale.etaleSheafExtendScalars (Ideal.Quotient.mk J) X).OplaxMonoidal :=
   composeAndSheafifyOplaxMonoidal _ (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} _)
 
-attribute [local instance] Sheaf.monoidalCategory in
 instance isIso_δ_etaleSheafExtendScalars
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (Functor.OplaxMonoidal.δ
@@ -115,13 +113,11 @@ instance isIso_δ_etaleSheafExtendScalars
   isIso_δ_composeAndSheafify _
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (Ideal.Quotient.mk J)) F G
 
-attribute [local instance] Sheaf.monoidalCategory in
 instance isIso_η_etaleSheafExtendScalars :
     IsIso (Functor.OplaxMonoidal.η (ProEtale.etaleSheafExtendScalars (Ideal.Quotient.mk J) X)) :=
   isIso_η_composeAndSheafify _
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (Ideal.Quotient.mk J))
 
-attribute [local instance] Sheaf.monoidalCategory in
 /-- Extension of scalars of étale sheaves is strong monoidal. -/
 noncomputable instance monoidal_etaleSheafExtendScalars :
     (ProEtale.etaleSheafExtendScalars (Ideal.Quotient.mk J) X).Monoidal :=
