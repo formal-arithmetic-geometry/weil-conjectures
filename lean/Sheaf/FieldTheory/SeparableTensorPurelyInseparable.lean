@@ -1,8 +1,7 @@
 module
 
-public import Mathlib.FieldTheory.LinearDisjoint
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
-public import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.FieldTheory.PurelyInseparable.Tower
 
 /-!
 # Separable tensor purely inseparable field extensions
@@ -26,9 +25,9 @@ field, with the expected dimension.
 
 Source: literature/stacks-project/algebra.tex, Lemma Tag 07QH, proof first
 paragraph (blueprint: lem-weil-pbc-separable-tensor-purely-inseparable-field).
-The proof realizes the tensor product as the compositum using linear
- disjointness of separable and purely inseparable extensions, then uses a tensor
-basis for the dimension and a Frobenius-power argument for pure inseparability.
+The common-overfield criterion and linear disjointness of separable and purely
+inseparable images prove fieldness. A Frobenius-power argument proves pure
+inseparability, and base change preserves finiteness and dimension.
 -/
 theorem separableTensor_purelyInseparable_isField
     (k : Type u) (k' : Type v) (L : Type w) [Field k] [Field k'] [Field L]
@@ -38,4 +37,19 @@ theorem separableTensor_purelyInseparable_isField
       IsPurelyInseparable k' (k' ⊗[k] L) ∧
       Module.Finite k' (k' ⊗[k] L) ∧
       Module.finrank k' (k' ⊗[k] L) = Module.finrank k L := by
-  sorry
+  classical
+  have hfield : IsField (k' ⊗[k] L) := by
+    apply IntermediateField.LinearDisjoint.isField_of_forall k k' L
+    intro Ω _ _ f g
+    have : Algebra.IsSeparable k f.fieldRange :=
+      AlgEquiv.Algebra.isSeparable (AlgEquiv.ofInjective f f.injective)
+    have : IsPurelyInseparable k g.fieldRange :=
+      (AlgEquiv.ofInjective g g.injective).isPurelyInseparable
+    exact f.fieldRange.linearDisjoint_of_isPurelyInseparable_of_isSeparable g.fieldRange
+  let : Field (k' ⊗[k] L) := hfield.toField
+  have hpure : IsPurelyInseparable k' (k' ⊗[k] L) := by
+    obtain ⟨q, _⟩ := ExpChar.exists k
+    have : ExpChar k' q := expChar_of_injective_algebraMap (algebraMap k k').injective q
+    apply (isPurelyInseparable_iff_pow_mem k' q).2
+    exact IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar q
+  exact ⟨hfield, hpure, inferInstance, Module.finrank_baseChange⟩
