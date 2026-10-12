@@ -7,11 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.ClosedImmersionIdealPowerImage
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
+import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-!
 # Pushforward of ideal powers along a closed immersion
@@ -30,6 +29,28 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 noncomputable section
+
+private def cokernelIsoOfImageEq {C : Type*} [Category C] [Abelian C]
+    {A B D : C} (f : A ⟶ D) (g : B ⟶ D)
+    (h : Subobject.mk (image.ι f) = Subobject.mk (image.ι g)) :
+    cokernel f ≅ cokernel g :=
+  (cokernelImageι f).symm ≪≫
+    cokernel.mapIso (image.ι f) (image.ι g)
+      (Subobject.isoOfMkEqMk (image.ι f) (image.ι g) h) (Iso.refl D)
+      (by simp [Subobject.isoOfMkEqMk_hom, Subobject.ofMkLEMk_comp]) ≪≫
+    cokernelImageι g
+
+private theorem cokernelIsoOfImageEq_π {C : Type*} [Category C] [Abelian C]
+    {A B D : C} (f : A ⟶ D) (g : B ⟶ D)
+    (h : Subobject.mk (image.ι f) = Subobject.mk (image.ι g)) :
+    cokernel.π f ≫ (cokernelIsoOfImageEq f g h).hom = cokernel.π g := by
+  simp [cokernelIsoOfImageEq, cokernelImageι, cokernel.mapIso]
+
+private theorem quotientπ_map {X : Scheme.{u}} (I : X.IdealSheafData)
+    {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
+    formalModuleQuotientπ I m F ≫ formalModuleQuotientMap I f h =
+      f ≫ formalModuleQuotientπ I n G := by
+  simp [formalModuleQuotientπ, formalModuleQuotientMap]
 
 /-- Pushforward along a closed immersion identifies powers of an extended ideal with
 powers of the original ideal, and identifies the resulting quotient modules.
@@ -91,7 +112,57 @@ theorem closedImmersion_pushforward_idealPowers
             (ρ G n hn).hom =
           (ρ G m (le_trans hn h)).hom ≫ (Modules.pushforward i).map
             (formalModuleQuotientMap (I.comap i) (𝟙 G) h)) := by
-  sorry
+  classical
+  have hqc (J : Z.IdealSheafData) : J.toModules.IsQuasicoherent := by
+    have := SheafOfModules.isQuasicoherent_unit (R := Z.ringCatSheaf)
+    have := SheafOfModules.isQuasicoherent_unit (R := J.subscheme.ringCatSheaf)
+    have : SheafOfModules.IsQuasicoherent (R := Z.ringCatSheaf)
+        ((SheafOfModules.pushforward J.subschemeι.toRingCatSheafHom).obj
+          (SheafOfModules.unit J.subscheme.ringCatSheaf)) :=
+      Modules.isQuasicoherent_pushforward_of_isClosedImmersion J.subschemeι
+        (SheafOfModules.unit J.subscheme.ringCatSheaf)
+    exact Modules.isQuasicoherent_kernel J.toPushforwardSubscheme
+  refine ⟨hqc (I.comap i), ?_, closedImmersion_idealPower_image i I, ?_⟩
+  · intro U
+    let V : Z.affineOpens := ⟨i ⁻¹ᵁ U.1, U.2.preimage i⟩
+    exact ⟨V, rfl, (modulePullbackIdealQuotient i I).1 U V le_rfl⟩
+  · have hex (G : Z.Modules) [G.IsQuasicoherent] (n : ℕ) (hn : 1 ≤ n) :
+        ∃ e : formalModuleQuotient I n ((Modules.pushforward i).obj G) ≅
+            (Modules.pushforward i).obj (formalModuleQuotient (I.comap i) n G),
+          formalModuleQuotientπ I n ((Modules.pushforward i).obj G) ≫ e.hom =
+            (Modules.pushforward i).map (formalModuleQuotientπ (I.comap i) n G) := by
+      let a := idealModuleProductι (idealSheafPower (I.comap i).toModulesι n).2 G
+      let b := idealModuleProductι (idealSheafPower I.toModulesι n).2
+        ((Modules.pushforward i).obj G)
+      have := Modules.closedImmersion_pushforward_preservesCokernel i a
+      let e := cokernelIsoOfImageEq b ((Modules.pushforward i).map a)
+        (closedImmersion_idealPower_image i I G n hn).symm
+      refine ⟨e ≪≫ (PreservesCokernel.iso (Modules.pushforward i) a).symm, ?_⟩
+      change cokernel.π b ≫ e.hom ≫
+        (PreservesCokernel.iso (Modules.pushforward i) a).inv = _
+      rw [← Category.assoc, cokernelIsoOfImageEq_π]
+      simp [PreservesCokernel.iso_inv, cokernelComparison, formalModuleQuotientπ, a]
+    choose ρ hρ using hex
+    have hρ' (G : Z.Modules) [G.IsQuasicoherent] (n : ℕ) (hn : 1 ≤ n) := hρ G n hn
+    dsimp only [formalModuleQuotientπ] at hρ'
+    refine ⟨ρ, hρ, ?_, ?_⟩
+    · intro G H _ _ u n hn
+      apply (cancel_epi (cokernel.π (idealModuleProductι
+        (idealSheafPower I.toModulesι n).2 ((Modules.pushforward i).obj G)))).1
+      change formalModuleQuotientπ I n ((Modules.pushforward i).obj G) ≫ _ = _
+      rw [← Category.assoc, quotientπ_map, Category.assoc, hρ H n hn]
+      rw [← Functor.map_comp, ← Category.assoc, hρ' G n hn, ← Functor.map_comp]
+      exact congrArg (Modules.pushforward i).map
+        (quotientπ_map (I.comap i) u (Nat.le_refl n)).symm
+    · intro G _ m n h hn
+      apply (cancel_epi (cokernel.π (idealModuleProductι
+        (idealSheafPower I.toModulesι m).2 ((Modules.pushforward i).obj G)))).1
+      change formalModuleQuotientπ I m ((Modules.pushforward i).obj G) ≫ _ = _
+      rw [← Category.assoc, quotientπ_map, Category.id_comp, hρ G n hn]
+      rw [← Category.assoc, hρ' G m (le_trans hn h), ← Functor.map_comp]
+      have hz := quotientπ_map (I.comap i) (𝟙 G) h
+      rw [Category.id_comp] at hz
+      exact congrArg (Modules.pushforward i).map hz.symm
 
 end
 end AlgebraicGeometry.Scheme

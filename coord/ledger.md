@@ -7752,3 +7752,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/A3/Sheaf.RingTheory.SmoothAtGenericPointOverField (stage 3; reviewer PASS; first push; landing 20261012T135217-L-1655533 (proof); batch 20261012T135212; modules 1; new nodes 1)
 - 13:52 L: merged deliver/A3/Sheaf.Topology.TopologicalLerayBottomRealization (stage 3; reviewer PASS; first push; landing 20261012T135217-L-1655634 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/B2/Sheaf.Algebra.IndSmoothQuotientCompatibility (stage 3; reviewer PASS; first push; landing 20261012T135217-L-1655784 (interface); batch 20261012T135212; modules 2; new nodes 1)
+- 13:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers (stage 3; reviewer PASS; first push; landing 20261012T135217-L-1655948 (interface); batch 20261012T135212; modules 3; new nodes 2)

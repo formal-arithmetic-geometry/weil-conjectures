@@ -1,0 +1,164 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-ideal-power-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 (closed-immersion coherent equivalence) of thm-weil-pbc-finite-etale-lifting; Image subobjects of ideal powers under closed pushforward",
+   "via": [
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Image subobjects of ideal powers under closed pushforward",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], let $\\mathcal I$ be a quasi-coherent ideal of $\\mathcal O_X$, with extended ideal $\\mathcal I\\mathcal O_Z$ [def-nagata-extended-ideal], and let $\\mathcal G$ be a quasi-coherent $\\mathcal O_Z$-module [pqf-def-coherent]. Products and powers are those of [def-weil-pbc-coherent-formal-module]; pushforward is as in [def-pc-module-pullback]. For each integer $n\\geq1$, the image of $i_*((\\mathcal I\\mathcal O_Z)^n\\mathcal G)\\to i_*\\mathcal G$ equals the image of $\\mathcal I^n(i_*\\mathcal G)\\to i_*\\mathcal G$, as subobjects of $i_*\\mathcal G$. No quotient comparison or naturality is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968; details written out by the worker"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open U = Spec R of X, the inverse image is affine Spec S and R -> S is surjective. The pullback ideal has sections Ideal.map pi (I(U)).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-module-pullback-ideal-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968; details written out by the worker"
+   }
+  },
+  {
+   "text": "Positive ideal powers and their products with G are quasi-coherent and computed on affine sections. Closed pushforward preserves quasi-coherence by the existing source theorem isQuasicoherent_pushforward_of_isClosedImmersion, also recorded in the Lean declarations of lem-pc-closed-immersion-coherent-cohomology. Thus upstairs the range is (Ideal.map pi I(U))^n G(U′), and downstairs it is I(U)^n acting on the same group through pi.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968; details written out by the worker"
+   }
+  },
+  {
+   "text": "Ideal.map commutes with powers. Surjectivity of pi makes the mapped ideal the actual image. The generators pi(a) times s are precisely a times s under restriction of scalars. Hence the ranges agree over every affine open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968; details written out by the worker"
+   }
+  },
+  {
+   "text": "Affine opens form a basis. Restrict a section of either image subsheaf to an affine cover. Equality of the ranges provides local lifts in the other subsheaf. Monicity makes these lifts agree on overlaps; they glue by the sheaf condition. This gives both inclusions and equality of subobjects.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968; details written out by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 088A (lemma-existence-tricky), lines 6961-6968; details written out by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward along closed immersion of sheaves of modules preserves cokernels and ideal power products",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion pushforward modules preserves cokernels quotients ideal products",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, SheafOfModules.generatorsOfIsCokernelFree_π, AlgebraicGeometry.instIsClosedImmersionInclusion, localCohomology.ringModIdeals, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.Scheme.Hom.liftQuotient",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic cokernel and ideal-sheaf operations do not give the geometric comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Cc]okernel|cokernel.*[Ii]mage|isQuasicoherent_toModules",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Subobject.lean, Mathlib/Algebra/Category/ModuleCat/Subobject.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic cokernel and ideal-sheaf operations do not give the geometric comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionIdealPowerImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionIdealPowerImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.closedImmersion_idealPower_image",
+  "statement": "theorem closedImmersion_idealPower_image {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (I : X.IdealSheafData) (G : Z.Modules) [G.IsQuasicoherent] (n : ℕ) (hn : 1 ≤ n) : Subobject.mk (image.ι ((Modules.pushforward i).map (idealModuleProductι (idealSheafPower (I.comap i).toModulesι n).2 G))) = Subobject.mk (image.ι (idealModuleProductι (idealSheafPower I.toModulesι n).2 ((Modules.pushforward i).obj G)))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
