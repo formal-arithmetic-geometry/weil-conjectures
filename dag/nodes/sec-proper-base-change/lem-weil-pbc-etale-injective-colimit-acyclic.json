@@ -17,26 +17,25 @@
  ],
  "proof": [
   {
-   "text": "Let B be the qcqs objects U -> X of the small etale site of X. Let Cov consist of finite etale covers whose base and members belong to B. The terminal identity object belongs to B. Every finite fibre product of members of a Cov-cover belongs to B: a morphism between qcqs schemes is quasi-compact and quasi-separated, these properties are stable under base change, and composition with a qcqs base gives a qcqs source. Every cover of a B-object admits a finite affine etale refinement, which is a Cov-cover; affines are qcqs. Thus B and Cov satisfy the basis and refinement hypotheses of the Cech vanishing criterion.",
+   "text": "Let B be the qcqs objects of X.Etale and let Cov be the finite covering families with base and members in B. For iterated fibre products use the already-proved source-library Scheme.compactSpace_and_quasiSeparatedSpace_piObj: it implements qcqs morphism permanence, base change and finite products. For cofinality use the already-proved stronger Scheme.exists_finite_affine_of_mem_smallEtaleTopology on an arbitrary qcqs etale object U, applied to Sieve.ofArrows of the given covering. Lift its Fin m index to Type (u+1), take the affine members (hence qcqs), and extract the refinement arrows using Sieve.ofArrows.exists. Scheme.ofArrows_mem_smallEtaleTopology_iff verifies joint surjectivity of the lifted family. This replaces the separate cofinal-coverings import, whose statement is restricted to the identity object of the scheme under discussion.",
    "uses": [
     "def-weil-pbc-etale-site",
     "def-weil-pbc-scheme-conventions",
     "lem-weil-pbc-etale-composition-cancellation",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
     "lem-weil-pbc-affine-scheme-qcqs"
    ],
    "elementary": false
   },
   {
-   "text": "For every qcqs etale object U, evaluation on U commutes with filtered colimits at coefficient universe u+1. Apply the module sections theorem with coefficients Z, transporting abelian sheaves to Z-module sheaves along the coefficient equivalence. The induced compose-and-sheafify functor is left adjoint and is naturally isomorphic to sheafCompose, hence preserves colimits. Reflect the module-valued evaluation colimit through the coefficient equivalence. This argument works for arbitrary filtered categories at the coefficient size.",
+   "text": "Prove the private helper abelianSectionsColimit for I : Type (u+1). Take R = ULift.{u+1} Z and the coefficient equivalence U from ModuleCat R to AddCommGrpCat, given by restricting scalars along the inverse ULift ring equivalence and forgetting the Z-module structure. sheafCompose U is fully faithful and essentially surjective, hence an equivalence. Transport J and its supplied cocone along the inverse equivalence. Apply etale_sections_filtered_colimit on any qcqs object; bijectivity gives an isomorphism of the canonical comparison and hence a colimit evaluation cocone. Apply U and transport through the sheaf equivalence counit to obtain the original abelian evaluation cocone. Quantifying over all diagrams yields PreservesColimitsOfShape I for evaluation on each qcqs object.",
    "uses": [
     "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Let G be the supplied colimit of the injective diagram J. On every Cov-cover, each Cech term is a finite product of sections on finite covering fibre products. These products lie in B, so by the preceding sections comparison the Cech complex of G identifies with the colimit of the Cech complexes of J_i, including the differentials. Finite products of abelian groups are finite direct sums and commute with colimits. Each injective J_i has zero positive Cech cohomology. Exactness of filtered abelian-group colimits gives zero positive Cech cohomology for G. Apply the Cech vanishing criterion to obtain zero positive right derived evaluation on every B-object.",
+   "text": "Prove, rather than import or postpone, the coefficient-size finite Cech homology preservation calculation in four private helpers. First use exact filtered colimits in AddCommGrpCat.{u+1}, hence colim.PreservesHomology, and ShortComplex.functorEquivalence to prove that ShortComplex.homologyFunctor preserves I-colimits. Naturality of mapHomologyIso identifies the canonical image cocone. Pass to complexes by the three evaluations defining shortComplexFunctor. Each degree of the finite-cover Cech complex is a finite product of the evaluations at its covering fibre products. Functor-category evaluation detects colimits; the finite product functor preserves them because it is naturally isomorphic to the finite coproduct functor in abelian groups. Pi.isoLimit and its naturality identify this degreewise computation with the actual Cech functor, so HomologicalComplex.preservesColimitsOfShape_of_eval gives preservation for complexes. Compose with homology preservation. In the main theorem install the sections-preservation hypotheses from Step 2 and qcqs closure from Step 1. Each J_i has zero positive Cech homology by injective_sheaf_cech_acyclic. Thus J followed by Cech homology is a zero diagram; isColimitOfPreserves applied to the supplied hc has zero vertex. Apply isZero_rightDerived_etale_of_cech_vanishing to B, Cov and c.pt to conclude positive derived-evaluation vanishing.",
    "uses": [
     "lem-weil-pbc-cech-vanishing-criterion",
     "def-weil-pbc-cech-complex",
@@ -46,7 +45,7 @@
    "elementary": false
   },
   {
-   "text": "Take U to be the terminal etale object X, which is qcqs. Global sections are naturally isomorphic to evaluation there. Transport right derived functors along that natural isomorphism to obtain zero R^q Gamma of the supplied colimit for every positive q. The acyclicity statement depends only on the image of the original coprojections, so it holds for any colimit cocone of the injective diagram.",
+   "text": "Take T = Etale.mk (identity X), which belongs to B by the two hypotheses on X. MorphismProperty.Over.mkIdTerminal proves it terminal. Sheaf.GammaNatIsoSheafSections (Lean name Sheaf.ΓNatIsoSheafSections) identifies global sections with evaluation at T. Apply NatTrans.rightDerived to both directions of that isomorphism, using rightDerived_comp and rightDerived_id to verify the inverse laws. Transport the zero object given by the Cech criterion through the component of this derived isomorphism at c.pt. The supplied arbitrary colimit cocone is used throughout, so no identification with a chosen colimit or small-index restriction is necessary.",
    "uses": [
     "def-weil-pbc-global-sections-functor",
     "def-sp-left-exact-additive"
@@ -59,7 +58,6 @@
   "def-weil-pbc-scheme-conventions",
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
   "lem-weil-pbc-cech-vanishing-criterion",
@@ -70,9 +68,9 @@
   "def-sp-left-exact-additive"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0739 (lemma-colim-works-over-collection), proof, last paragraph: acyclicity of the colimit of injectives; qcqs etale basis of Tag 03Q5"
+  "place": "Tag 0739 (lemma-colim-works-over-collection), final paragraph; qcqs etale basis of Tag 03Q5. Lean proof by F2 adapts the complete smaller-index proofs in EtaleFilteredInjectiveAcyclic and FiniteEtaleCechFilteredColimit to coefficient-size indices, with all local helpers proved."
  },
  "mathlib_searches": [
   {
@@ -153,10 +151,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T035753-L-1605198",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T053930-L-2634507",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

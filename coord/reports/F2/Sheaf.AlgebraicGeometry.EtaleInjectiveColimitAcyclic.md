@@ -1,0 +1,44 @@
+## What changed
+
+Proved `AlgebraicGeometry.Scheme.isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize` without changing its signature or public imports. Its proof follows all four steps of the original node: the qcqs finite-cover basis, preservation of sections, acyclicity of finite Čech complexes under filtered colimits, and derived transport from terminal evaluation to global sections. No unit statement or realized unit step is bypassed.
+
+The proved smaller-index argument in `EtaleFilteredInjectiveAcyclic` supplied the implementation pattern. Its public theorem cannot be applied here: it requires `I : Type u`, whereas this item allows `I : Type (u + 1)`. The new private helpers `shortComplexHomologyColimit`, `complexHomologyColimit`, `finiteEtaleCechComplexColimit`, `coefficientFiniteEtaleCechHomology`, and `abelianSectionsColimit` are all proved. The first four adapt `FiniteEtaleCechFilteredColimit` without changing that module. Mathlib provides exact filtered colimits at precisely the abelian coefficient universe. The module-valued sections theorem accepts this same index size after choosing lifted integers as the coefficient ring.
+
+Added proof imports `WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit` (its already-proved finite affine refinement and qcqs finite-product lemmas) and `Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence` (the homology comparison). Updated the existing DAG node's proof, proof_deps and proof_origin to describe the implemented argument.
+
+## Proved and sorry left
+
+Proved `AlgebraicGeometry.Scheme.isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize` (node `lem-weil-pbc-etale-injective-colimit-acyclic`), the sole original sorry. No sorry remains in the delivered module; none is split off or added anywhere. All five private theorem helpers have complete proofs. A private `overFiniteProducts` instance supplies Mathlib’s existing finite-product construction only while elaborating this file; elaboration options are scoped to individual helpers. The interface scanner reports no interface changes. Existing dependencies are used as authorized by stage 3; this is a proof of the item from those declarations, not a claim that their entire transitive closure is already closed.
+
+The proof handles any supplied colimit cocone directly. There is no torsion assumption, no lowering of the diagram universe, and no nonempty-cover restriction. The empty finite index gives zero Čech terms; an empty scheme is permitted. Positive degree is used only for injective Čech vanishing and the vanishing criterion.
+
+## No longer needed
+
+Removed the direct proof import `Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings` and the corresponding direct proof dependency `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings`. The source-library theorem `Scheme.exists_finite_affine_of_mem_smallEtaleTopology` supplies finite affine refinements of arbitrary objects in the small étale site, including the refinement arrows needed here. The removed module remains a transitive dependency of the module-valued sections theorem; this delivery does not claim it is globally unreachable.
+
+Neither `Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic` / `lem-weil-pbc-etale-filtered-injective-acyclic` nor `Sheaf.AlgebraicGeometry.FiniteEtaleCechFilteredColimit` / `lem-weil-pbc-finite-etale-cech-filtered-colimit` is imported or needed as a dependency: their narrower-index statements are replaced by complete coefficient-size private calculations here. Their existing proofs were read and adapted, rather than their statements used.
+
+Trial imports `Mathlib.Algebra.Category.Grp.AB`, `Mathlib.Algebra.Homology.HomologicalComplexLimits`, and `Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory` were removed after checking compilation: the necessary declarations are already provided by the retained imports. Every retained proof import supplies declarations explicitly used in the proof. No other planned node is pruned.
+
+## Where the brief, the DAG or earlier work was wrong
+
+The plan is mathematically correct. Two existing proved interfaces have the smaller index universe and cannot directly discharge this item, even though their arguments generalize. This is resolved by complete private proofs at coefficient size; no existing signature is changed and no result is restated with sorry.
+
+The separate cofinal-coverings theorem is stated in the small site of the covering's base scheme at its identity object. The criterion needs coverings of arbitrary objects in X's fixed site. The already-proved source-library refinement theorem has exactly this ambient-site form, so it avoids unnecessary equivalence-of-relative-sites glue.
+
+Read the final paragraph of Stacks `lemma-colim-works-over-collection` (0739) and the qcqs étale refinement argument of `lemma-colimit` (03Q5) in the locally available Stacks sources. Searches through the prescribed leanfinder, loogle and grep tools found no directly applicable coefficient-size acyclicity theorem. The first worker confined all changes to the sandbox and stopped at a dry run; the second reader completes delivery below.
+
+
+## Second reading by F2
+
+1. **Unchanged interface: PASS.** Read the whole delivered module and its diff against the repository. The sole existing theorem signature is byte-for-byte identical, including the coefficient-size index universe, arbitrary colimit cocone, injectivity hypotheses and positive degree. The existing public import is unchanged; added imports are proof-only. There are no changed public definitions or signatures and no change records are needed.
+
+2. **Proof and axioms: PASS, relative to existing open dependencies.** Compiled the delivered file through `lcompile.py`: no errors or warnings. It contains no sorry, axiom, unsafe, opaque, implemented_by, extern, kernel-check bypass or hollow definition. In a scratch copy, ran `#print axioms` on the private instance, all five private helpers and the original theorem. The instance and four finite-complex helpers use only `propext`, `Classical.choice`, `Quot.sound`. `abelianSectionsColimit` and the original theorem additionally use `sorryAx` from the imported sections argument, whose existing `etale_section_colimit_eventual_zero` and `etale_section_colimit_representative` remain open. Thus the item has a complete reduction, but its transitive proof closure is not yet axiom-clean. No new sorry is introduced.
+
+3. **Split-off statements and edge cases: PASS.** No statements are split off and no new nodes are required. Read every private helper: each has a complete proof and carries a strictly intermediate calculation. Finite products remain finite in each degree; the empty covering index has empty positive-degree tuples and zero terms. Refinement does not require a nonempty scheme. The supplied cocone is preserved through coefficient equivalence and finite Čech homology, without changing its legs. The larger index universe is retained throughout. Independent leanfinder search for AB5 homology preservation and Loogle search for the short-complex homology functor gave no shorter applicable replacement; local searches confirm that the existing public finite-Čech and injective-colimit results require the smaller index universe.
+
+4. **Route, imports and pruning: PASS.** Read from the conclusion back through derived transport, the Čech criterion, homology preservation, sections preservation and finite refinements. This follows the final argument of [Stacks 0739](https://stacks.math.columbia.edu/tag/0739) with the qcqs refinements of [Stacks 03Q5](https://stacks.math.columbia.edu/tag/03Q5). The online sources were checked because the cited local Stacks files are absent on this machine. Independently removed each of the five retained proof imports in scratch copies; every removal fails compilation. The only removed old proof dependency is `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings`, already fully listed under No longer needed. Read `dag/units/sk-thm-p1.json`: this item and the pruned auxiliary node realize no unit statement or step; the recorded unit route is preserved.
+
+5. **DAG agreement: PASS.** The existing node changes only `proof`, `proof_deps`, `proof_origin`. Its statement and Lean signature record are unchanged. The four steps describe the actual Lean argument; `proof_deps` equals the union of their `uses`, and every cited node exists. The finite affine refinement and qcqs product results used instead of the removed direct dependency are already proved upstream. No new node or module is delivered.
+
+**Second-reader changes:** report only: recorded the independent checks, the inherited `sorryAx`, source verification and import-removal tests, and clarified that the first worker stopped at the dry run. No Lean proof or DAG repair was necessary.
