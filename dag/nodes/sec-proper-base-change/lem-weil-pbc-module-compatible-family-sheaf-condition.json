@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-module-compatible-family-sheaf-condition",
+ "kind": "statement",
+ "title": "Componentwise gluing for the coherent-family module presheaf",
+ "statement": "For a ringed space X, arbitrary opens U indexed by I, local module sheaves Fi, and arbitrary overlap isomorphisms φij, suppose the coherent-family submodules of def-weil-pbc-module-compatible-family-presheaf on all opens are small in max u v. Then the underlying abelian-group presheaf of smallCoherentOpenModulePresheaf is a sheaf for Opens.grothendieckTopology X. No cover, diagonal, or cocycle hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL (first proof) and 00AM; point-indexed universe argument of parent node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-compatible-family-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "For a covering sieve S on V and a matching family of coherent families, restrict S to any W contained in V and U i, then transfer that covering sieve to Over (U i). Its local sections are obtained by evaluating the matching family on its domains. Matching-family coherence and local restriction coherence prove compatibility. The sheaf axiom of Fi gives the unique amalgamation component on W.",
+   "uses": [
+    "def-weil-pbc-module-compatible-family-presheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Separation on each induced covering sieve shows these amalgamation components respect restriction, using presheaf map composition. Naturality of φij and the given families overlap equations show the amalgamation respects overlaps. Evaluation on a sieve member recovers its given family; separation componentwise proves uniqueness. Thus the large coherent-family Type presheaf is a sheaf.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Presieve.isSheaf_of_nat_equiv transports the Type sheaf condition through the sectionwise shrinking equivalences. smallCoherentOpenModulePresheaf_map_equiv supplies their naturality. Reflection of limits by the forgetful functor from abelian groups then proves the stated abelian-group sheaf condition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-compatible-family-presheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL and 00AM, implemented in Lean by G2 from the parent node construction; source read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf condition compatible families local sections equalizer modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct sheaf of modules compatible families of local sections on open cover",
+   "results": "SheafOfModules.LocalGeneratorsData and GeneratingSections; no exact construction theorem. Loogle PresheafOfModules, \"shrink\" found no match.",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; use explicit construction and generic sheaf and shrinking APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*famil|equivShrink|isSheafFor_of_nat_equiv|small_of_injective",
+   "results": "Mathlib Logic.Small.Basic small_of_injective, Algebra.Module.Shrink Shrink.linearEquiv, CategoryTheory.Sites.SheafOfTypes Presieve.isSheaf_of_nat_equiv, and Sites.Whiskering Presheaf.IsSheaf.isSeparated. All are used for their corresponding elementary steps.",
+   "date": "2026-10-13",
+   "verdict": "Generic APIs suffice to prove each step; no additional sorry dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ModuleCompatibleFamilySheaf",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-compatible-family-sheaf",
+   "place": "Componentwise gluing and separation (step 1)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ModuleCompatibleFamilySheafCondition",
+  "file": "lean/Sheaf/Topology/ModuleCompatibleFamilySheafCondition.lean",
+  "declaration": "AlgebraicGeometry.small_coherent_open_module_isSheaf",
+  "statement": "theorem small_coherent_open_module_isSheaf\n    (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)\n  (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))\n  (φij : ∀ i j : I,\n    (SheafOfModules.overMap (moduleRings X)\n      (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅\n    (SheafOfModules.overMap (moduleRings X)\n      (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j))\n    [∀ V : Opens X, Small.{max u v} (coherentOpenModuleSubmodule X I U Fi φij V)] :\n    Presheaf.IsSheaf (Opens.grothendieckTopology X)\n      (smallCoherentOpenModulePresheaf X I U Fi φij).presheaf",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3ce8a",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194113-L-455707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3ce8a",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194113-L-455707",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statements and proofs with the parent and three new nodes, original interfaces, recorded users, and cited construction; compilation and axiom checks passed."
+ }
+}

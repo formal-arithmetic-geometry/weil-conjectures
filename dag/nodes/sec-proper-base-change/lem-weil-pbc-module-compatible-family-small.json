@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-module-compatible-family-small",
+ "kind": "statement",
+ "title": "Coherent module families are small via a point-indexed subcover",
+ "statement": "For a ringed space X in universe u, a cover U indexed by any I in universe w, local module sheaves Fi with section universe max u v, and arbitrary overlap isomorphisms φij, the coherent-family submodule of def-weil-pbc-module-compatible-family-presheaf on every open V is small in universe max u v. No diagonal or cocycle identities are needed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL (first proof) and 00AM; point-indexed universe argument of parent node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-compatible-family-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose an index c(x) through each point using the open-cover hypothesis. Encode a coherent family by all its components on subopens of U c(x) contained in V. This is a product indexed by pairs of points and opens, hence in universe max u v.",
+   "uses": [
+    "def-weil-pbc-module-compatible-family-presheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For injectivity, fix an original component on W. The sieve of subopens contained in some chosen member covers W: through x in W use W intersect U c(x). On this sieve, overlap coherence identifies the original component with a chosen component, so two equally encoded families agree. Separation of Fi on the over-site gives equality on W. Function extensionality and small_of_injective finish, including the empty space.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-compatible-family-presheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL and 00AM, implemented in Lean by G2 from the parent node construction; source read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf condition compatible families local sections equalizer modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct sheaf of modules compatible families of local sections on open cover",
+   "results": "SheafOfModules.LocalGeneratorsData and GeneratingSections; no exact construction theorem. Loogle PresheafOfModules, \"shrink\" found no match.",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; use explicit construction and generic sheaf and shrinking APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*famil|equivShrink|isSheafFor_of_nat_equiv|small_of_injective",
+   "results": "Mathlib Logic.Small.Basic small_of_injective, Algebra.Module.Shrink Shrink.linearEquiv, CategoryTheory.Sites.SheafOfTypes Presieve.isSheaf_of_nat_equiv, and Sites.Whiskering Presheaf.IsSheaf.isSeparated. All are used for their corresponding elementary steps.",
+   "date": "2026-10-13",
+   "verdict": "Generic APIs suffice to prove each step; no additional sorry dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ModuleCompatibleFamilySheaf",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-compatible-family-sheaf",
+   "place": "Point-indexed subcover and section-universe bound (step 2)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ModuleCompatibleFamilySmall",
+  "file": "lean/Sheaf/Topology/ModuleCompatibleFamilySmall.lean",
+  "declaration": "AlgebraicGeometry.coherent_open_module_small",
+  "statement": "theorem coherent_open_module_small\n    (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)\n  (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i)))\n  (φij : ∀ i j : I,\n    (SheafOfModules.overMap (moduleRings X)\n      (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅\n    (SheafOfModules.overMap (moduleRings X)\n      (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j))\n    (hcover : ⨆ i, U i = ⊤) (V : Opens X) :\n    Small.{max u v} (coherentOpenModuleSubmodule X I U Fi φij V)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3ce8a",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194113-L-455707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3ce8a",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194113-L-455707",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statements and proofs with the parent and three new nodes, original interfaces, recorded users, and cited construction; compilation and axiom checks passed."
+ }
+}

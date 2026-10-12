@@ -1,0 +1,103 @@
+{
+ "id": "def-weil-pbc-module-compatible-family-presheaf",
+ "kind": "definition",
+ "title": "Explicit coherent-family module presheaf and its shrinking",
+ "statement": "Given a ringed space X, an arbitrary index type I, opens U i, module sheaves Fi i on Over (U i), and overlap isomorphisms φij, the explicit coherentOpenModulePresheaf has as its sections on V the submodule of OpenModuleFamily X I U Fi V cut out by OpenModuleFamilyCoherent. The scalar action restricts a ring section on V to each subopen W. Restrictions forget components outside a smaller open. This is a presheaf of modules in universe max u v w. When all these submodules are small in max u v, smallCoherentOpenModulePresheaf is its canonical sectionwise shrink, with restrictions transported by coherentOpenModuleShrinkEquiv. No cover, diagonal, or cocycle condition is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL (first proof) and 00AM; point-indexed universe argument of parent node"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the proof-bound components by the type of pairs (i,W) with W contained in U i and V. Transfer pointwise additive and module structures to the original family type. The restriction and overlap equations are closed under zero, addition, and scalar multiplication by semilinearity and linearity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For W contained in V, forget the components outside W. Restriction coherence and overlap coherence are inherited verbatim. The resulting semilinear maps satisfy identity and composition componentwise. When the sections are small, apply Shrink.linearEquiv objectwise and conjugate each restriction map; the inverse identities prove functoriality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00AL and 00AM, implemented in Lean by G2 from the parent node construction; source read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf condition compatible families local sections equalizer modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "construct sheaf of modules compatible families of local sections on open cover",
+   "results": "SheafOfModules.LocalGeneratorsData and GeneratingSections; no exact construction theorem. Loogle PresheafOfModules, \"shrink\" found no match.",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; use explicit construction and generic sheaf and shrinking APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*famil|equivShrink|isSheafFor_of_nat_equiv|small_of_injective",
+   "results": "Mathlib Logic.Small.Basic small_of_injective, Algebra.Module.Shrink Shrink.linearEquiv, CategoryTheory.Sites.SheafOfTypes Presieve.isSheaf_of_nat_equiv, and Sites.Whiskering Presheaf.IsSheaf.isSeparated. All are used for their corresponding elementary steps.",
+   "date": "2026-10-13",
+   "verdict": "Generic APIs suffice to prove each step; no additional sorry dependency."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ModuleCompatibleFamilySheaf",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-compatible-family-sheaf",
+   "place": "Explicit equalizer construction and shrinking (steps 1-2)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ModuleCompatibleFamilyPresheaf",
+  "file": "lean/Sheaf/Topology/ModuleCompatibleFamilyPresheaf.lean",
+  "declaration": "AlgebraicGeometry.coherentOpenModulePresheaf",
+  "statement": "def coherentOpenModulePresheaf :\n    PresheafOfModules.{max u v w} (moduleRings X).obj",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3ce8a",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194113-L-455707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3ce8a",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T194113-L-455707",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statements and proofs with the parent and three new nodes, original interfaces, recorded users, and cited construction; compilation and axiom checks passed."
+ }
+}
