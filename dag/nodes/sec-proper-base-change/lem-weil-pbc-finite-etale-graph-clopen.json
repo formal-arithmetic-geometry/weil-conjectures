@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-finite-etale-graph-clopen",
+ "kind": "statement",
+ "title": "Morphisms correspond to clopen graphs projecting isomorphically",
+ "statement": "Let $p:U\\to Y$ be a morphism of schemes [def-pc-scheme] and $q:V\\to Y$ a finite etale morphism [def-weil-pbc-finite-etale-category]. Put $P=V\\times_Y U$ [def-pc-fibre-product] with projection $r:P\\to U$. There exists a bijection from the set of morphisms $a:U\\to V$ satisfying $q\\circ a=p$ to the set of open subsets $W\\subseteq P$ [def-weil-open-immersion] that are also closed and for which $r|_W$ is an isomorphism. The underlying subset assigned to $a$ is the image of its graph $(a,\\mathrm{id}_U):U\\to P$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Restrict.lean",
+  "place": "isoOpensRange (423–435); OpenImmersion.lean, isoOfRangeEq (727–742); corrected blueprint finite-etale lifting steps 2–3"
+ },
+ "proof": [
+  {
+   "text": "The graph is a section of the finite etale projection. A section is an open and closed immersion by [lem-weil-pbc-etale-section-clopen-immersion]. Its inverse on its open image is the restricted projection, so it gives the stated clopen.",
+   "uses": [
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An open immersion is isomorphic to the open subscheme of its image (Scheme.Hom.isoOpensRange, Mathlib/AlgebraicGeometry/Restrict.lean:423). This identifies the inverse of that isomorphism with the restricted projection by composing with the graph and using its section identity. Conversely the inverse of r|_W followed by W inclusion is a section; compose it with the first product projection to obtain a over Y. The pullback identities verify the required triangle. This is the explicit inverse construction.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "To check uniqueness, equal graph images give an isomorphism between the two graph domains (IsOpenImmersion.isoOfRangeEq, OpenImmersion.lean:727). Composing its factorization equality with r identifies the isomorphism with the identity, so the two graphs and then their first projections coincide. To check surjectivity, the graph constructed from W is the inverse of its projection followed by W inclusion; its image is W because that inverse is surjective. These are the hinj and hsurj computations in the delivered proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/AlgebraicGeometry/Restrict.lean",
+  "place": "isoOpensRange (423–435); OpenImmersion.lean, isoOfRangeEq (727–742); corrected blueprint finite-etale lifting steps 2–3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale morphisms clopen graphs base change rank on open closed subschemes",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_morphismRestrict|finrank_of_isPullback|isoOpensRange|paste_twist_right",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Restrict.lean",
+   "verdict": "ingredients only; combined in the delivered Lean proof, no exact theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of finite etale morphisms correspond to open and closed subschemes projecting isomorphically",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale; Algebra.isOpen_etaleLocus; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "verdict": "ingredients only; combined in the delivered Lean proof, no exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq; AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac; AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_inv_fac; AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac_assoc; AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_inv_fac_assoc",
+   "verdict": "ingredients only; combined in the delivered Lean proof, no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "isoOpensRange (423–435); OpenImmersion.lean, isoOfRangeEq (727–742); corrected blueprint finite-etale lifting steps 2–3",
+   "via": [
+    "lem-weil-pbc-finite-etale-restriction-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleGraphClopen",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleGraphClopen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_graph_clopen",
+  "statement": "theorem Scheme.finiteEtale_graph_clopen {Y U V : Scheme.{u}} (p : U ⟶ Y) (q : V ⟶ Y) [IsFinite q] [Etale q] : ∃ e : {a : U ⟶ V // a ≫ q = p} ≃ {W : (pullback q p).Opens // IsClosed W.carrier ∧ IsIso (W.ι ≫ pullback.snd q p)}, ∀ a, (e a).1.carrier = Set.range (pullback.lift (f := q) (g := p) a.1 (𝟙 U) (by simpa using a.2)).base",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T042411-L-1816810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T042411-L-1816810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

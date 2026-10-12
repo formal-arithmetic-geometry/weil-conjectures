@@ -32,92 +32,54 @@
  },
  "proof": [
   {
-   "text": "*Setup.* For $U\\in\\mathsf{FEt}(Y)$ with structure map $p:U\\to Y$, the base change $U_0=U\\times_YY_0$ is finite etale over $Y_0$ [def-weil-pbc-finite-etale-category], and by pasting the cartesian squares $U_0\\to Y_0\\to S_0$ over $U\\to Y\\to S$ [lem-weil-pbc-cartesian-square-pasting] $U_0=U\\times_SS_0$ is also the closed fibre of $U$ over $S$. Since $p$ is finite and $f$ is proper, $f\\circ p:U\\to S$ is proper [lem-weil-pbc-finite-morphism-permanence](c). So every $U\\in\\mathsf{FEt}(Y)$, and every scheme finite over such a $U$, is a proper $S$-scheme whose closed fibre is its base change to $Y_0$.",
+   "text": "For finite etale U,V over Y, form P=V×Y U and its base change P0. The product projection square is cartesian by [lem-weil-pbc-finite-etale-graph-base-change]. Paste the U closed-fibre square and then the given Y square using [lem-weil-pbc-cartesian-square-pasting]. Since U and P are proper over A by [lem-weil-pbc-finite-morphism-permanence], apply [lem-weil-pbc-henselian-clopen-restriction] to U and P. This gives clopen injectivity on U and a clopen bijection on P.",
    "uses": [
-    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-finite-etale-graph-base-change",
     "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-finite-morphism-permanence"
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-henselian-clopen-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "## Proof, first sentences (properness of Z over S)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Morphisms are sections.* Let $U,V\\in\\mathsf{FEt}(Y)$ and $P=V\\times_YU$ with second projection $\\pi:P\\to U$, which is finite etale (base change of $V\\to Y$, [def-weil-pbc-finite-etale-category]). By the universal property of the fibre product, $\\varphi\\mapsto s_\\varphi=(\\varphi,\\mathrm{id}_U)$ is a bijection from $\\operatorname{Hom}_Y(U,V)$ to the set of sections of $\\pi$ (inverse: $s\\mapsto\\mathrm{pr}_1\\circ s$). Base change to $Y_0$ gives $P_0=P\\times_YY_0=V_0\\times_{Y_0}U_0$ with $\\pi_0:P_0\\to U_0$, and $(s_\\varphi)_0=s_{\\varphi_0}$, so this bijection commutes with $\\varphi\\mapsto\\varphi_0$ and $s\\mapsto s_0$.",
+   "text": "The equivalences of [lem-weil-pbc-finite-etale-graph-clopen] identify each Hom set with the clopen pieces of P or P0 whose projection is an isomorphism. Their images commute with base change by [lem-weil-pbc-finite-etale-graph-base-change]. For a clopen W of P, its restricted projection is finite etale and its rank commutes with the closed fibre by [lem-weil-pbc-finite-etale-clopen-restriction-rank].",
    "uses": [
-    "def-weil-pbc-finite-etale-category"
+    "lem-weil-pbc-finite-etale-graph-clopen",
+    "lem-weil-pbc-finite-etale-graph-base-change",
+    "lem-weil-pbc-finite-etale-clopen-restriction-rank"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "## Proof: Hom_Y(X,W) = (W x_Y X)(X)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Sections are clopen pieces of degree one.* $\\pi$ is finite, hence separated, and etale. By [lem-weil-pbc-etale-section-clopen-immersion] a section $s$ of $\\pi$ is an open and closed immersion, $W_s=s(U)$ is an open and closed subscheme of $P$, and $\\pi|_{W_s}:W_s\\to U$ is an isomorphism with inverse $s$. Conversely, if $W\\subseteq P$ is open and closed and $\\pi|_W:W\\to U$ is an isomorphism, $s=\\iota_W\\circ(\\pi|_W)^{-1}$ is a section with $W_s=W$, and a section $s$ is recovered from $W_s$ as $\\iota_{W_s}\\circ(\\pi|_{W_s})^{-1}$. So $s\\mapsto W_s$ is a bijection from the sections of $\\pi$ to the set of open and closed $W\\subseteq P$ with $\\pi|_W$ an isomorphism; the same holds for $\\pi_0$, and $(W_s)\\times_YY_0=W_{s_0}$. For every open and closed $W\\subseteq P$, $\\pi|_W=\\pi\\circ\\iota_W$ is finite etale: $\\iota_W$ is an open immersion, hence etale, and a closed immersion, hence finite, and compositions of finite, resp. etale, morphisms are finite, resp. etale.",
-   "uses": [
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Etale Morphisms, Proposition 024T and Schemes, Lemma 01KT (sections); the dictionary of the blueprint proof between Y-morphisms and clopen pieces of rank one"
-   }
-  },
-  {
-   "text": "The proper schemes P and U have their indicated closed fibres by Step 1. Apply [lem-weil-pbc-henselian-clopen-restriction] to each: clopen subsets of P and P₀ correspond by inverse image; a clopen subset of U missing U₀ is empty by injectivity, comparing it with the empty clopen.",
-   "uses": [
-    "lem-weil-pbc-henselian-clopen-restriction",
-    "lem-weil-pbc-finite-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "## Proof: the idempotent-lifting interface applied to the proper Z -> S"
-   }
-  },
-  {
-   "text": "*The degree-one condition descends.* Let $W\\subseteq P$ be open and closed. If $\\pi|_W$ is an isomorphism so is its base change $W_0\\to U_0$. Conversely suppose $W_0\\to U_0$ is an isomorphism. $\\pi|_W$ is finite etale (Step 3), hence finite, flat and locally of finite presentation; let $r:U\\to\\mathbf Z_{\\ge0}$ be its rank [lem-weil-pbc-finite-flat-rank-iso]. By (1) of that node $U_1=r^{-1}(1)$ is open and closed in $U$. By (2), for $u\\in U_0$, $r(u)$ is the rank of the base change $W_0\\to U_0$ at $u$, which is $1$ by (3) since $W_0\\to U_0$ is an isomorphism; so $U_0\\subseteq U_1$. Then $U\\setminus U_1$ is open and closed and disjoint from $U_0$, hence empty by Step 4; so $r\\equiv1$ and $\\pi|_W$ is an isomorphism by (3). (The imported proof argued that the rank is determined on the image of $Y_0$ because $Y_0\\to Y$ is surjective; $Y_0\\to Y$ is a closed immersion and not surjective in general, and the step needs the fact of Step 4 that every nonempty clopen of $U$ meets $U_0$.)",
+   "text": "Prove the restricted projection is an isomorphism iff its closed fibre is: ranks of an isomorphism are one and the rank-one locus is clopen by [lem-weil-pbc-finite-flat-rank-iso]. If the fibre has rank one, inverse images of this locus and all of U agree. Clopen injectivity on U forces the rank-one locus to equal U. The rank-one criterion then gives the isomorphism. This is the proved private rank_one_of_clopen_injective helper, with no assumption that the closed fibre is surjective.",
    "uses": [
     "lem-weil-pbc-finite-flat-rank-iso",
     "lem-weil-pbc-henselian-clopen-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "## Proof: rank of Z_e over Y is determined on the closed fibre"
-   }
+   "elementary": false
   },
   {
-   "text": "*(a) Full faithfulness.* Composing Steps 2-5: $\\operatorname{Hom}_Y(U,V)\\cong\\{$sections of $\\pi\\}\\cong\\{W\\subseteq P$ clopen, $\\pi|_W$ iso$\\}\\cong\\{W_0\\subseteq P_0$ clopen, $\\pi_0|_{W_0}$ iso$\\}\\cong\\{$sections of $\\pi_0\\}\\cong\\operatorname{Hom}_{Y_0}(U_0,V_0)$, the middle bijection being $W\\mapsto W_0$ (Step 4, restricted by Step 5). Since $(s_\\varphi)_0=s_{\\varphi_0}$ and $(W_s)_0=W_{s_0}$, the composite is $\\varphi\\mapsto\\varphi_0$. Hence $i^*$ is bijective on every Hom set: full and faithful, i.e. morphisms lift uniquely.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/thm-weil-pbc-finite-etale-lifting.md",
-    "place": "## Proof: Hom_Y(X,W) -> Hom_{Y_0}(X_0,W_0) bijective"
-   }
+   "text": "Injectivity of Hom restriction follows from clopen injectivity on P and injectivity of the graph equivalence. For surjectivity, lift the clopen graph of the given fibre morphism by clopen surjectivity on P; its projection is an isomorphism by the previous step. Use the inverse graph equivalence to recover a morphism, and image compatibility plus injectivity of the fibre graph equivalence verifies its restriction is the specified morphism. Finally identify these raw over-Y morphisms with MorphismProperty.Over morphisms and use Full and Faithful to construct FullyFaithful.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-etale-category",
+  "lem-weil-pbc-finite-etale-graph-base-change",
   "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-finite-composition",
   "lem-weil-pbc-henselian-clopen-restriction",
-  "lem-weil-pbc-finite-flat-rank-iso"
+  "lem-weil-pbc-finite-etale-graph-clopen",
+  "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "def-weil-pbc-finite-etale-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0GS2; corrected blueprint steps 1–6, using clopen restriction directly"
+  "place": "Tag 0GS2; corrected blueprint steps 1–6, formalized by K1 using clopen graphs and rank-one locus injectivity"
  },
  "mathlib_searches": [
   {
@@ -172,10 +134,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T034034-L-1502684",
+  "landing": "20261012T042411-L-1816810",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
