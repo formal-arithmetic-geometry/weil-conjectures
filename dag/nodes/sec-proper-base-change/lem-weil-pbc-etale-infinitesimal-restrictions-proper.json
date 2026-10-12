@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-etale-infinitesimal-restrictions-proper",
+ "kind": "statement",
+ "title": "Infinitesimal etaleness implies etaleness with proper source over a complete base",
+ "statement": "Let $A$ be a commutative ring complete for an ideal $I$ [def-weil-pbc-adically-complete-ring]. Let $f:Y\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum] be a scheme morphism with $Y$ locally Noetherian [pqf-def-locnoeth], and $g:X\\to Y$ of finite type [def-weil-finite-type-morphism], such that $g$ followed by $f$ is proper [def-weil-proper-morphism]. For each $n\\ge0$, put $Y_n=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I^{n+1})$ [def-pc-base-change, def-pc-fibre-product]. If the morphism $X\\times_Y Y_n\\to Y_n$ is etale [def-weil-etale-morphism] for every n, then g is etale. No properness of f or Noetherianity of A is required.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Lemma 0GS2, essential-surjectivity proof, complete Noetherian case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let j:Y_0\\to Y be the closed fibre immersion and J its kernel ideal sheaf. Over an affine Spec R in Y, the fibre is Spec(R/IR) and J is IR. Its (n+1)st power is I^(n+1)R. The corresponding subscheme is therefore Y_n, canonically and over Y; pulling back g identifies the restrictions in the hypothesis with the infinitesimal-neighbourhood restrictions. These affine identifications agree on overlaps because both are the quotient by the same quasi-coherent ideal.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the etale-infinitesimal-neighbourhood theorem to g, j and J. The target is locally Noetherian and g is finite type by hypothesis, so it gives an open W containing the inverse image of Y_0, on which g is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in X, properness of h=g followed by f makes h(closure({x})) a nonempty closed subset of Spec A. It contains a maximal ideal m, and completeness gives I contained in the Jacobson radical, hence in m. Choose t in closure({x}) mapping to m. The affine description of Y_0 shows that g(t) is in its image, so t belongs to W. Since W is open and t is a specialization of x, x belongs to W as well. Thus W=X and g is etale, including the vacuous case X empty.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "def-weil-affine-spectrum",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Lemma 0GS2, essential-surjectivity proof, complete Noetherian case; etaleness of the algebraized map from its infinitesimal restrictions and specialization into the closed fibre"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale morphism from infinitesimal restrictions with source proper over adically complete ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etaleness on all infinitesimal neighborhoods proper source complete base",
+   "results": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.etaleLocus_eq_univ_iff",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*infinitesimal|IsAdicComplete.*jacobson",
+   "results": "Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Complete Noetherian essential-surjectivity argument in step 7 of the ancestor split: etaleness of the algebraized map from its infinitesimal restrictions and specialization into the closed fibre",
+   "via": [
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOfInfinitesimalRestrictionsProper",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOfInfinitesimalRestrictionsProper.lean",
+  "declaration": "AlgebraicGeometry.etale_of_infinitesimal_restrictions_of_proper",
+  "statement": "theorem etale_of_infinitesimal_restrictions_of_proper\n    {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]\n    {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)\n    [IsLocallyNoetherian Y] [LocallyOfFiniteType g] [QuasiCompact g]\n    [IsProper (g ≫ f)]\n    (h_etale : ∀ n : ℕ, Etale (pullback.snd g (pullback.fst f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))))) :\n    Etale g",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
