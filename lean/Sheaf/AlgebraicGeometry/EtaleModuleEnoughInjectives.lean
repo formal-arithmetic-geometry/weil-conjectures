@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 
 /-!
@@ -24,6 +25,7 @@ Lemma 0A4C, first paragraph of the proof
 universe u
 
 open CategoryTheory
+
 
 namespace AlgebraicGeometry.Scheme
 
@@ -50,6 +52,16 @@ theorem etaleModule_enoughInjectives (T : Scheme.{u}) (R : Type u) [CommRing R] 
       ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj
         (RingCat.of (ULift.{u + 1, u} R)))) ∧
       EnoughInjectives (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) := by
-  sorry
+  have h := etaleModuleSheaves_grothendieckAbelian T R
+  constructor
+  · set_option linter.style.haveILetI false in
+      letI : IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1}
+        ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj
+          (RingCat.of (ULift.{u + 1, u} R)))) := h.1
+    infer_instance
+  · set_option linter.style.haveILetI false in
+      letI : IsGrothendieckAbelian.{u + 1}
+        (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) := h.2.2
+    infer_instance
 
 end AlgebraicGeometry.Scheme
