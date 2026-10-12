@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import Sheaf.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport
 
 /-! # Bijectivity of strict-local restriction maps
 Source: Stacks Project, Tag 03Q9.
@@ -77,7 +77,43 @@ theorem bijective_qcqsStrictLocalRestriction_of_formula
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤
           (pullback f (Scheme.strictHenselizationStructuralMap s)))
         (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) :
-    Function.Bijective (ConcreteCategory.hom a) := by sorry
-
+    Function.Bijective (ConcreteCategory.hom a) := by
+  classical
+  let U := forget (ModuleCat.{u + 1} Λ)
+  let H := (sheafCompose X.smallEtaleTopology U).obj F
+  let P := (lowerStar (ModuleCat.{u + 1} Λ) f).obj F
+  let : PreservesFilteredColimitsOfSize.{u, u} U :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} U
+  let γ := (Scheme.pointSmallEtale s).sheafFiberCompIso U
+  let e := strictLocalModuleSectionsSetEquiv Λ f s F
+  have he := strictLocalModuleSections_set_transport Λ f s F
+  obtain ⟨_, Θ, _, hbij, huniq⟩ := sets_pushforward_stalk_strictHenselization f H s
+  let b := fun t ↦ e (ConcreteCategory.hom a ((γ.hom.app P) t))
+  have hb : b = Θ := by
+    apply huniq
+    intro j z
+    dsimp only [b]
+    have hγ := ConcreteCategory.congr_hom
+      ((Scheme.pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app U
+        ((Scheme.AffineEtale.Spec Y).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2
+        P.obj) z
+    change (γ.hom.app P) _ = _ at hγ
+    erw [hγ]
+    have h := ConcreteCategory.congr_hom (ha j) z
+    change ConcreteCategory.hom a _ = _ at h
+    erw [h]
+    exact he j z
+  have hb' : Function.Bijective b := hb ▸ hbij
+  have hγbij := ConcreteCategory.bijective_of_isIso (γ.hom.app P)
+  constructor
+  · intro x y hxy
+    obtain ⟨x', rfl⟩ := hγbij.2 x
+    obtain ⟨y', rfl⟩ := hγbij.2 y
+    exact congrArg (fun t ↦ (γ.hom.app P) t) (hb'.1 (congrArg e hxy))
+  · intro y
+    obtain ⟨x, hx⟩ := hb'.2 (e y)
+    exact ⟨(γ.hom.app P) x, e.injective hx⟩
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,176 @@
+{
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse images of module sheaves commute with forgetting coefficients and with pullback symmetry on terminal sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting module sheaves commutes with stalk and inverse image strict henselization",
+   "results": "8 hits, concerning ModuleCat.Tilde stalk/fibre comparisons, none about etale inverse images and pullback symmetry. Loogle search for sheafFiberCompIso was also attempted.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use existing site comparison APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "strictLocal.*[Bb]ijective|sheafFiberCompIso|upperStar_forget_comparison; blueprint_refs search module sections forget",
+   "results": "Mathlib has sheafFiberCompIso and its germ formula; the project has isIso_upperStar_forget_comparison, etaleSetInverseImageCompositionUnits and etaleSetInverseImageRestriction. No existing terminal section equivalence with the required symmetry and formula. Blueprint search: 0 matches.",
+   "date": "2026-10-13",
+   "verdict": "New explicit equivalence and its restriction compatibility are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sheaf sections comparison with restriction along scheme isomorphism unit naturality",
+   "results": "Eight results about Zariski structure-sheaf restriction and open immersions; none supplies this etale coefficient/symmetry identity.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: no direct replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "Adjunction.homEquiv_unit found in Mathlib.CategoryTheory.Adjunction.Basic. It proves the coefficient-unit step, not the full symmetry calculation.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: use existing adjunction API for the remaining calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "localizationRestriction|unit_leftAdjointUniq_hom_app|pullbackComp; local sections comparison and forget unit searches",
+   "results": "Read etale restriction, composition-unit and coefficient-comparison modules. Their proved unit identities supply the steps; no existing theorem has the complete displayed transport identity.",
+   "date": "2026-10-13",
+   "verdict": "Second reading: existing comparisons are reused; the representative identity is strictly smaller than the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf inverse image comparison terminal evaluation pullback isomorphism forget modules unit",
+   "results": "8 hits about SheafOfModules pullback of free/unit objects and their adjunction; none gives constant-coefficient etale terminal-section symmetry transport.",
+   "date": "2026-10-13",
+   "verdict": "Current independent second reading: no direct replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "One hit in Mathlib.CategoryTheory.Adjunction.Unique; this is already the unit equation used in etaleSetInverseImageRestriction.",
+   "date": "2026-10-13",
+   "verdict": "Useful existing API, not the full representative transport."
+  },
+  {
+   "tool": "grep",
+   "query": "strictLocalModuleSections|ModulePullbackSectionComparison|pullbackSection.*unit|unit_leftAdjointUniq_hom_app; local rg for symmetry sections and forget unit",
+   "results": "Read the proved exists_modulePullbackSectionComparison and its private forgetPullIso_unit/forget_transition. It compares sections evaluated on base-changed site objects and composition transitions, but does not supply terminal restriction along pullback symmetry or an equality for this explicitly constructed equivalence. No exact existing identity found.",
+   "date": "2026-10-13",
+   "verdict": "Current second reading: original stalk reduction is short; keep the strictly smaller terminal naturality hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Underived exchange proof: canonical coefficient and pullback-symmetry transport in the strict-local degree-zero comparison",
+   "via": [
+    "lem-weil-pbc-strict-local-module-restriction-bijective",
+    "lem-weil-pbc-qcqs-strict-local-module-comparison",
+    "lem-weil-pbc-qcqs-geometric-exchange-factorization",
+    "lem-weil-pbc-proper-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient forgetting and inverse-image units"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree-zero comparison; Tags 03D3 and 03D7 for coefficient forgetting and inverse-image units"
+ },
+ "id": "lem-weil-pbc-strict-local-module-sections-set-transport",
+ "kind": "statement",
+ "title": "Representative compatibility of strict-local coefficient and symmetry transport",
+ "statement": "Let Λ, f:X→Y, s:Spec Ω→Y, F, ρ, A, B, g, h, σ be as in [def-weil-pbc-strict-local-module-sections-set-equiv]. For each affine pointed etale neighbourhood j of s [def-weil-pbc-strict-henselization-limit] and section z of F on X×_Y V_j, send z along the module inverse-image unit for g, restrict along the terminal-to-iterated-pullback map induced by σ followed by the strict-henselization base-change leg, and identify terminal sections with Γ(A,g*F). The explicit equivalence [def-weil-pbc-strict-local-module-sections-set-equiv] sends this section to the set inverse-image unit for h followed by restriction along strictHenselizationSectionMap f s j. This is an identity for any f, with no qcqs assumption, and does not assert bijectivity of a stalk map.",
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-module-sections-set-equiv",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof": [
+  {
+   "text": "Expand the explicit equivalence. The global-section/terminal-section isomorphism cancels the inverse terminal-section identification at the end of the module restriction map.",
+   "uses": [
+    "def-weil-pbc-strict-local-module-sections-set-equiv"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient comparison is the adjoint transpose of the forgotten module unit. Apply the homEquiv unit identity and the inverse comparison to identify the forgotten module unit with the set unit. Naturality of this inverse comparison moves it past restriction to the terminal object.",
+   "uses": [
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the unit equation of the inverse-image composition comparison for h and σ. Since σ≫h=g, inverse composition sends the g-unit to the iterated h-unit and σ-unit, with the canonical fibre-product pasting isomorphism. Naturality moves this identity past restriction.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image/restriction comparison for the etale isomorphism σ sends the σ-unit to restriction along the fibre-product projection. Compose with the inverse map at the terminal isomorphism over B. The resulting morphism to the iterated pullback is strictHenselizationSectionMap: compare both scheme projections using pullback.lift_fst, pullback.lift_snd, pullbackSymmetry_hom_comp_snd and the pullback pasting projections. Functoriality of restriction proves the displayed representative identity. No argument uses nonzero coefficients, nonempty X, or qcqs.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-module-sections-set-equiv",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "def-pc-fibre-product"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalModuleSectionsSetTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalModuleSections_set_transport",
+  "statement": "theorem strictLocalModuleSections_set_transport (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let H := (sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} Λ))).obj F ∀ (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) (z : F.obj.obj (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)))), strictLocalModuleSectionsSetEquiv Λ f s F (ConcreteCategory.hom ( ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).unit.app F).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.strictHenselizationBaseChangeMap f s j) (𝟙 _) (by change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _ simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd, pullbackSymmetry_hom_comp_snd, Category.id_comp])) (pullback.lift_snd _ _ _)).op ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (pullback f (Scheme.strictHenselizationStructuralMap s))) (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) z) = ((Scheme.etaleSetPullback (pullback.snd (Scheme.strictHenselizationStructuralMap s) f)).obj H).obj.map (Scheme.strictHenselizationSectionMap f s j).op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ (pullback.snd (Scheme.strictHenselizationStructuralMap s) f)) (Type (u + 1)) (X.smallGrothendieckTopology @AlgebraicGeometry.Etale) ((pullback (Scheme.strictHenselizationStructuralMap s) f).smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app H).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) z)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T203949-L-832369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T203949-L-832369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
