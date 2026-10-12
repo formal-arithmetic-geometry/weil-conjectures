@@ -25,38 +25,46 @@
  ],
  "proof": [
   {
-   "text": "Finite base change and henselian H1 comparison lift x to z. Naturality of cohomology identifies the restricted image of x with the restriction of H¹(ψ)(z), using the canonical comparison between module and underlying abelian inverse images.",
+   "text": "Form the pullback V₀ of the finite map h along the residue fibre i, and paste its cartesian square with the proper henselian residue-fibre square. The composite V→Spec A is proper by finite-morphism permanence. Apply the henselian constant-sheaf H1 comparison to V. Finite exchange and the bijective edge maps identify the H1 restriction for h_* of the constant abelian sheaf with this surjective constant-sheaf restriction, using cohomology_edgeMap_baseChange. This proves restriction_finite_constant.",
    "uses": [
     "lem-weil-pbc-finite-morphism-permanence",
     "lemma-weil-pbc-finite-exchange",
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-finite-pushforward-cohomology",
     "lem-weil-pbc-edge-map-base-change",
-    "thm-weil-pbc-finite-etale-lifting",
-    "lemma-weil-pbc-h1-torsor-comparison",
-    "lem-weil-pbc-constant-module-sheaf-underlying",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lemma-weil-pbc-h1-torsor-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Forget the finite constant module to its additive group. constantCommuteCompose identifies the underlying constant module sheaf with the corresponding constant abelian sheaf, and direct image commutes with this forgetting by the presheaf associator. Naturality of cohomology pullback transports the preceding surjectivity through this isomorphism. By the canonical module-to-abelian inverse-image comparison, its map on H1 is bijective. Lift the given x first through that comparison and then through the surjective restriction to obtain z.",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical comparison is natural in the module sheaf: apply left and right naturality of the abelian adjunction hom equivalence to the module unit naturality for ψ. CohomologyMap_map identifies the restriction of H1(ψ)(z) with the inverse-image map of the restriction of z. Substitute the two lifting equalities, apply Sheaf.H.map_comp_apply twice, and use this comparison naturality. The resulting equality is exactly the conclusion.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-morphism-permanence",
   "lemma-weil-pbc-finite-exchange",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-finite-pushforward-cohomology",
   "lem-weil-pbc-edge-map-base-change",
-  "thm-weil-pbc-finite-etale-lifting",
   "lemma-weil-pbc-h1-torsor-comparison",
   "lem-weil-pbc-constant-module-sheaf-underlying",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A5H"
+  "place": "Lemma 0A5H finite-pushforward lifting; finite exchange and H1 torsor comparison with canonical Kan-extension scalar-forgetting comparison"
  },
  "status": "split",
  "created": {
@@ -117,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0e535",
-  "group": "G1",
+  "reviewer": "X-79c09",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T011430-L-757597",
+  "landing": "20261012T021914-L-1037797",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures and the delivered proof with their DAG nodes, dependency statements, source arguments, report, and earlier return; existing interfaces and unit route are preserved."
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, dependency statements, sources, report and library diffs; both modules compile cleanly, axiom checks agree, and existing interfaces and the unit route are preserved."
  }
 }

@@ -5834,3 +5834,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:14 L: returned deliver/M1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints (reviewer RETURN: (reviewer X-cb2bf, head cb2bf3923) F (brief point 7): In coord/reports/M1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseCha)
 - 02:16 L: merged deliver/P1/Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit (stage 3; reviewer PASS; first push; landing 20261012T021534-L-1019339 (proof); modules 1; new nodes 0)
 - 02:18 L: merged deliver/P1/Sheaf.Topology.FiniteClosedCoverCohomologyVanishing (stage 3; reviewer PASS; first push; landing 20261012T021658-L-1026569 (interface); modules 4; new nodes 3)
+- 02:20 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift (stage 3; reviewer PASS; first push; landing 20261012T021914-L-1037797 (interface); modules 2; new nodes 1)

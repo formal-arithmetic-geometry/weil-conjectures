@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-module-abelian-inverse-image-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-acyclicity",
+   "place": "Proof, degree-one case (original Steps 3-7), finite-pushforward H1 lifting: identify the restriction of a module sheaf with the inverse image of its underlying abelian sheaf before applying the finite constant-sheaf comparison.",
+   "via": [
+    "lem-weil-pbc-henselian-finite-pushforward-h1-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical module-to-abelian inverse-image comparison is invertible",
+ "statement": "Let $i:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $\\Lambda$ a commutative ring. Let $J$ be a sheaf of $\\Lambda$-modules on the small etale site of $Y$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Write $U_X,U_Y$ for the functors forgetting to abelian sheaves. For the inverse-image and direct-image adjunctions [def-weil-pbc-inverse-image, def-weil-pbc-direct-image], the abelian adjoint of $U_Y(\\eta^{\\mathrm{Mod}}_J):U_YJ\\to i_*U_X(i^{-1}_{\\mathrm{Mod}}J)$ is an isomorphism $i^{-1}_{\\mathrm{Ab}}U_YJ\\xrightarrow{\\sim}U_X(i^{-1}_{\\mathrm{Mod}}J)$. This is the particular canonical comparison determined by the module adjunction unit, not merely existence of some isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03D2 and 03D3 (inverse image of modules and its adjunction); formal proof by Kan extension and sheafification comparisons"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Write the inverse image [def-weil-pbc-inverse-image] as left Kan extension followed by sheafification [def-weil-pbc-sheafification]. The functor forgetting a module to its additive group preserves colimits and limits. Mathlib Functor.leftKanExtensionCompIsoOfPreserves and sheafComposeNatIso therefore give an isomorphism e from the abelian inverse image of the underlying sheaf to the underlying module inverse image.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the sheafification unit and sheafComposeNatTrans_fac show that the composite of the abelian sheafification unit with e is the inverse Kan-extension comparison followed by the underlying module sheafification unit. The factorization leftKanExtensionCompIsoOfPreserves_inv_fac then shows that the abelian adjoint of e is the underlying module adjunction unit; direct image [def-weil-pbc-direct-image] commutes with forgetting because it is restriction of presheaves. Apply the injective adjunction hom equivalence: e is the displayed canonical map, so that map is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03D2 and 03D3 (inverse image of modules and its adjunction); formal proof by Kan extension and sheafification comparisons"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules commutes with forgetting to abelian sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves",
+   "results": "11 hits: CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac_app, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_hom_fac_app, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac_app_assoc, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_hom_fac_app_assoc, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_hom_fac, CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac_assoc",
+   "date": "2026-10-12",
+   "verdict": "candidate tools, composite comparison proved in Lean"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*sheafCompose|sheafCompose.*sheafPullback",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf pullback commutes with a functor preserving colimits and sheafification via the adjunction unit",
+   "results": "8 hits, including Functor.toSheafify_pullbackSheafificationCompatibility, Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, Functor.sheafPullbackConstruction.sheafPullbackIso and SheafOfModules.sheafificationCompPullback. None states the canonical coefficient-forgetting mate used here; the existing Kan-extension and sheafification isomorphisms are composed and identified by their unit factorizations.",
+   "date": "2026-10-12",
+   "verdict": "related tools, no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianInverseImageComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_moduleAbelianInverseImageComparison",
+  "statement": "theorem isIso_moduleAbelianInverseImageComparison {X Y : Scheme.{u}} (i : X ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsIso (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).homEquiv ((sheafCompose Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J) ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj J))).symm ((sheafCompose Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app J)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-79c09",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T021914-L-1037797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-79c09",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T021914-L-1037797",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, dependency statements, sources, report and library diffs; both modules compile cleanly, axiom checks agree, and existing interfaces and the unit route are preserved."
+ }
+}
