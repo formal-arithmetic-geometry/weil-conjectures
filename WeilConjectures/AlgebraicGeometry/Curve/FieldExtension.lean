@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.LocallyConstantAssertions
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
@@ -96,8 +97,18 @@ theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgC
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  refine bijective_cohomologyMap_of_forall_isReduced Λ
+    (fun {X _} g _ _ _ k' _ _ _ _ _ h' r _ G _ q ↦ ?_) f k' h F q
+  -- the eight assertions for a constructible `𝐅_r`-sheaf `G` on the reduced curve `X`
+  have hG : Assertions (ULift.{u + 1} (ZMod r)) g G := by
+    obtain ⟨n, U, -, -, hirr, -, hflc, hiff⟩ := exists_dense_assertions_iff_forall_lowerShriek
+      (ULift.{u + 1} (ZMod r)) g r G (Etale.nsmul_id_eq_zero_of_zmod r G)
+    refine hiff.2 fun a ↦ ?_
+    have := hflc a
+    exact Assertions.openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf g (U a) (hirr a) r
+      _
+  exact hG.bijective_cohomologyMap_of_isProper k' h' q
 
 open Etale Limits in
 /-- **Passage between separably closed fields.** Let `k ⊆ k'` be separably closed fields, `C`
