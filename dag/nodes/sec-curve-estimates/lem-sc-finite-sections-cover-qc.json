@@ -27,28 +27,36 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-global-generation-nonvanishing-cover], the nonvanishing loci $X_s$ of all global sections $s$ of $\\mathcal L$ cover $X$; each $X_s$ is open in $X$ [def-weil-pbc-ample-invertible-module] (the case $n=1$), so they form an open cover of $X$. Since $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], this open cover has a finite subcover $X_{t_1},\\ldots,X_{t_m}$. The corresponding global sections $t_1,\\ldots,t_m$ have $X=\\bigcup_{j=1}^mX_{t_j}$.",
+   "text": "Apply globalGeneration_nonvanishing_cover [lem-sc-global-generation-nonvanishing-cover] to obtain that all global sections have nonvanishing loci covering X.",
    "uses": [
-    "lem-sc-global-generation-nonvanishing-cover",
-    "def-weil-pbc-quasi-compact-scheme",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-sc-global-generation-nonvanishing-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NC proof, sentence beginning 'Again because X is quasi-compact'"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each section s, rewrite its nonvanishing locus using nonvanishingLocus_eq_compl_support_zeroLocus [lem-weil-pbc-section-nonvanishing-zero-locus]. The complement of the support of Hom.zeroLocus (homOfGlobalSection L s) is an open subset, so the rewritten set is open. This gives the openness needed by the compactness step without assuming ampleness.",
+   "uses": [
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib IsCompact.elim_finite_subcover to isCompact_univ, the nonvanishing loci, their openness, and the covering equality. Quasi-compactness [def-weil-pbc-quasi-compact-scheme] gives a Finset S of global sections covering X. Enumerate S using S.equivFin and define t(j) as the underlying section of the inverse image of j. For each point x, extract s in S whose locus contains x; its index under the equivalence supplies membership in the union of the loci of t. Hence this union equals Set.univ. The argument also works for the empty scheme and an empty finite subcover.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-global-generation-nonvanishing-cover",
-  "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-pbc-ample-invertible-module"
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NC (varieties-lemma-enough-globally-generated-ample), proof"
+  "place": "Varieties Lemma 09NC proof, second quasi-compactness step; Lean implementation by V1 using the existing nonvanishing/zero-locus dictionary and Mathlib finite subcovers."
  },
  "mathlib_searches": [
   {
@@ -128,5 +136,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T135326-L-1696812",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
