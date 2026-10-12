@@ -1,0 +1,123 @@
+{
+ "id": "new-etale-affine-singleton-tensor-degree-comparison-inverse",
+ "kind": "statement",
+ "title": "Two-sided inverse of a normalized affine degree comparison",
+ "statement": "For affine étale objects U and W of X, g : W → U, quasi-coherent F on X and degree n, every morphism from the lifted Amitsur degree term to the lifted singleton tensor-section Čech degree term satisfying the pure-tensor normalization admits a categorical inverse on both sides.",
+ "stmt_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-etale-qcoherent-module",
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, affine tensor-product calculation"
+ },
+ "proof": [
+  {
+   "text": "The affine pullback sections formula, affine product ring identification and normalized composition give a bijective comparison c. Its formula agrees with f on the pure-tensor generators. Evaluate the singleton product and use both tensor induction principles to show equality of additive maps. Take the inverse of the resulting bijective additive homomorphism; its elementwise inverse identities imply both categorical identities.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 03P2, affine-case identification, expanded using Tags 01I9 and 01IA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global sections of iterated affine fibre products tensor powers quasi coherent pullback",
+   "results": "Eight hits, including pullbackSpecIso; no complete section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no complete comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.ofBijective",
+   "results": "AddEquiv.ofBijective and its application lemmas.",
+   "date": "2026-10-13",
+   "verdict": "no complete comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor sections indexed product",
+   "results": "No match.",
+   "date": "2026-10-13",
+   "verdict": "no complete comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "additive comparison from tensor products to sections of an affine pullback is bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-etale-affine-singleton-tensor-degree-comparison",
+   "place": "fixed-degree affine tensor-section calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeInverse",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonTensorDegreeInverse.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_singletonTensorDegreeComparison_inverse",
+  "statement": "theorem exists_singletonTensorDegreeComparison_inverse\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)\n    (n : ℕ)\n    (f : (singletonTensorAmitsur X F U W g).X n ⟶\n      (singletonTensorCech X F U W g).X n)\n    (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f) :\n    ∃ inv : (singletonTensorCech X F U W g).X n ⟶\n      (singletonTensorAmitsur X F U W g).X n,\n      f ≫ inv = 𝟙 _ ∧ inv ≫ f = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-61f60",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T202229-L-700338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-61f60",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T202229-L-700338",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures and proofs with the delivered nodes, unchanged relocated definitions, change record, and affine source calculation; all four delivered modules and both direct importers compile cleanly, with only standard axioms and expected sorryAx from the two reported lower holes."
+ }
+}
