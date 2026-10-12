@@ -32,72 +32,42 @@
  ],
  "proof": [
   {
-   "text": "Local computation, for an arbitrary object M of D(O_X). By [def-pc-perfect-complex] there is an affine open cover X=\\bigcup U_i with K|_{U_i}\\cong\\mathcal E^\\bullet, a strictly perfect complex (bounded, each term a direct summand of a finite free O_{U_i}-module). Fix such U=U_i and represent M|_U by a complex \\mathcal F^\\bullet. By [lem-sc-derived-internal-hom-restrict-open], K^\\vee|_U\\cong R\\mathcal Hom_{O_U}(\\mathcal E^\\bullet,O_U) and R\\mathcal Hom_{O_X}(K,M)|_U\\cong R\\mathcal Hom_{O_U}(\\mathcal E^\\bullet,\\mathcal F^\\bullet), and by [lem-pc-rhom-strict-perfect-hom] these are the Hom complexes \\mathcal E^{\\vee\\bullet}=\\mathcal Hom^\\bullet(\\mathcal E^\\bullet,O_U), with terms \\mathcal Hom(\\mathcal E^{-n},O_U), and \\mathcal Hom^\\bullet(\\mathcal E^\\bullet,\\mathcal F^\\bullet). The terms of \\mathcal E^{\\vee\\bullet} are again direct summands of finite free modules, so \\mathcal E^{\\vee\\bullet} is strictly perfect (hence K^\\vee is perfect) and has quasi-coherent terms (hence quasi-coherent cohomology sheaves on U; quasi-coherence of cohomology is local, so K^\\vee\\in D_QCoh(O_X)). Being bounded with flat terms, \\mathcal E^{\\vee\\bullet} is K-flat by [lem-pc-bounded-above-flat-kflat], so with the symmetry of [lem-sc-derived-internal-hom-adjunction] M|_U\\otimes^L K^\\vee|_U is represented by \\operatorname{Tot}(\\mathcal F^\\bullet\\otimes\\mathcal E^{\\vee\\bullet}) [def-pc-tensor-complex-sheaves]. On these representatives the map of the statement (defined by the adjunction, whose formation commutes with restriction to U because restriction is termwise on tensor products and commutes with R\\mathcal Hom) is the termwise map \\mathcal F^p\\otimes\\mathcal Hom(\\mathcal E^{-q},O_U)\\to\\mathcal Hom(\\mathcal E^{-q},\\mathcal F^p), as in Tag 08DQ; this is an isomorphism of sheaves for \\mathcal E^{-q} finite free (both sides are (\\mathcal F^p)^{\\oplus r}) and hence for a direct summand of a finite free module. Likewise the bidual map on U is the termwise map \\mathcal E^n\\to\\mathcal Hom(\\mathcal Hom(\\mathcal E^n,O_U),O_U) (use [lem-pc-rhom-strict-perfect-hom] for the strictly perfect \\mathcal E^{\\vee\\bullet}), an isomorphism for the same reason.",
+   "text": "Obtain the perfect quasi-coherent internal dual D with its equality to RHom(K,O). Define evaluation by applying adj to this equality. For every ambient derived object define comparison by the inverse adjunction applied to the associator, evaluation and right unitor composite. The perfect evaluation isomorphism lemma proves these maps invertible. Restrict this family to quasi-coherent N for the statement.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-pc-rhom-strict-perfect-hom",
-    "lem-pc-bounded-above-flat-kflat",
-    "lem-sc-derived-internal-hom-adjunction",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-perfect-rhom-tensor-comparison-dual",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ (cohomology-lemma-dual-perfect-complex) and Tag 08DM"
-   }
+   "elementary": false
   },
   {
-   "text": "Globalization of the isomorphisms. The evaluation map M\\otimes^L K^\\vee\\to R\\mathcal Hom_{O_X}(K,M) and the bidual map are globally defined morphisms of D(O_X) (by the adjunction in the statement), and by Step 1 their restrictions to every U_i are isomorphisms. A morphism of D(O_X) is an isomorphism if and only if it induces isomorphisms on all cohomology sheaves, which can be checked on an open cover; hence both are isomorphisms. No morphism is glued here: only the property of being an isomorphism is checked locally. In particular the evaluation map is an isomorphism for every object M of D(O_X), not only for quasi-coherent M.",
+   "text": "Construct eta as the adjunct of the left unitor followed by the inverse comparison at K. Its defining equation follows from the inverse law, and uniqueness follows by injectivity of adj and cancellation of the comparison. Apply the dualizable evaluation criterion for every ambient derived object. Cancel the unitors in its identities to fill both ExactPairing fields, with evaluation ev and coevaluation eta.",
+   "uses": [
+    "lem-pc-dualizable-evaluation-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Biduality is purely categorical: for an exact pairing K,D, tensorLeftHomEquiv followed by the right unitor identifies Hom(A,K) with Hom(D tensor A,O). Composing with the inverse adjunction gives a bijection from Hom(A,K) to Hom(A,RHom(D,O)). Naturality says this bijection is postcomposition with the adjunct of evaluation. The proved private helper isIso_adjunct_left_evaluation applies isIso_of_yoneda_map_bijective, proving bidual invertible.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ (cohomology-lemma-dual-perfect-complex) and Tag 08DM"
-   }
+   "elementary": true
   },
   {
-   "text": "Zig-zag identities. Apply [lem-pc-dualizable-evaluation-criterion] with D=K^\\vee and e=\\epsilon: its hypothesis, that for every object M of D(O_X) the map M\\otimes^L K^\\vee\\to R\\mathcal Hom_{O_X}(K,M) corresponding under [lem-sc-derived-internal-hom-adjunction] to 1_M\\otimes\\epsilon is an isomorphism, is Step 2, and its coevaluation is the \\eta of the statement (the case M=K). It gives both triangle identities.",
-   "uses": [
-    "lem-pc-dualizable-evaluation-criterion",
-    "lem-sc-derived-internal-hom-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0FPC (cohomology-example-dual-derived)"
-   }
-  },
-  {
-   "text": "Base change. Let g:X'\\to X and U=U_i as in Step 1, and cover g^{-1}(U) by affine opens V. The complexes \\mathcal E^\\bullet and \\mathcal E^{\\vee\\bullet} are bounded with flat terms, so by [lem-pc-flat-complex-derived-pullback] (applied to g|_V:V\\to U) (Lg^*K)|_V and (Lg^*K^\\vee)|_V are represented by the termwise pullbacks g^*\\mathcal E^\\bullet and g^*\\mathcal E^{\\vee\\bullet}; the former is strictly perfect, so by [lem-sc-derived-internal-hom-restrict-open] and [lem-pc-rhom-strict-perfect-hom] R\\mathcal Hom_{O_{X'}}(Lg^*K,O_{X'})|_V is the Hom complex \\mathcal Hom^\\bullet(g^*\\mathcal E^\\bullet,O_V). Computing the isomorphism of [lem-pc-derived-pullback-tensor-product] on these flat representatives, the base-change map of the statement is on V the termwise map g^*\\mathcal Hom(\\mathcal E^{-n},O_U)\\to\\mathcal Hom(g^*\\mathcal E^{-n},O_V), which is an isomorphism for a finite free module and hence for a direct summand of one (Tag 0GM7, proof of (1)). Being an isomorphism is checked on cohomology sheaves, locally on X', as in Step 2.",
-   "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-pc-rhom-strict-perfect-hom",
-    "lem-pc-derived-pullback-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM7 (cohomology-lemma-pullback-internal-hom), case (1), and Tag 08DM"
-   }
+   "text": "For any CoreMonoidal model m of derived pullback, ExactPairing.map transports the exact pairing. Its evaluation is exactly m.mu followed by the pulled evaluation and m.epsilon inverse. Apply the proved private helper isIso_adjunct_evaluation: tensorRightHomEquiv and the left unitor give a bijection Hom(A,Lg*D) to Hom(A tensor Lg*K,O), and adjT inverse turns it into a bijection to Hom(A,RHom(Lg*K,O)). Naturality identifies it with postcomposition by bc, so isIso_of_yoneda_map_bijective proves bc invertible. The equivalence inverse law proves its required defining equation. The argument works for every monoidal model and does not need a termwise pullback calculation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-pc-rhom-strict-perfect-hom",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-sc-derived-internal-hom-adjunction",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-dualizable-evaluation-criterion",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-derived-pullback-tensor-product"
+  "lem-pc-perfect-rhom-tensor-comparison-dual",
+  "lem-pc-perfect-rhom-evaluation-isomorphisms",
+  "lem-pc-dualizable-evaluation-criterion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08DQ, 0FPC, 0GM7 and 09UA"
+  "place": "Tags 08DQ and 0FPC; two local-calculation statements combined with proved Yoneda helpers and ExactPairing.map for biduality and base change"
  },
  "mathlib_searches": [
   {
@@ -227,5 +197,15 @@
   "group": "C1",
   "result": "fix",
   "note": "H5 fix: derivedPullbackMonoidalModel (Classical.choose of sorried exists) removed, item quantifies over every m with IsDerivedPullbackMonoidalModel g m; Classical.choose of scheme_derivedInternalHom_adjunction replaced by bound adj/adj'/adjT tied by their naturality equations (0f5459d94 pattern; bidual via the symmetric form adj'); X, QCoh K M, IsPerfect K, Kdual=RHom(K,O) QCoh+perfect, ev, comparison for M and K, bidual, unique eta, ExactPairing with ev/eta, base change for every g matched"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144058-L-2090745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

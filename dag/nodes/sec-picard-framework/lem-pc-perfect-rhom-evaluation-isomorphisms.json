@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-perfect-rhom-evaluation-isomorphisms",
+ "kind": "statement",
+ "title": "Perfect evaluation isomorphisms",
+ "statement": "Let X be a scheme [def-pc-scheme], K a quasi-coherent perfect derived object [def-pc-derived-category, def-pc-perfect-complex], and D an object of D(O_X) equal to R\\mathcal Hom(K,O_X) [def-pur-derived-internal-hom]. Let adj be the natural bijections Hom(A,RHom(B,C)) = Hom(A tensor B,C), with their full three-variable naturality equations [lem-sc-derived-internal-hom-adjunction]. Define e as adj of the equality identification D to RHom(K,O_X). Then for every N in D(O_X), the adjunct under adj of the composite (N tensor D) tensor K to N tensor (D tensor K) to N tensor O_X to N is invertible. Tensor products, associators and unitors is those of the derived tensor [def-pc-scheme-derived-tensor-structure].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DQ and 08DM, lemma-dual-perfect-complex and lemma-hom-from-strictly-perfect"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pur-derived-internal-hom",
+  "lem-sc-derived-internal-hom-adjunction",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "refine the perfect neighbourhoods to affine opens and represent K by a\nbounded complex E of direct summands of finite free sheaves. Restriction of RHom\ncommutes with these opens, and the strictly-perfect Hom lemma computes RHom by\nordinary Hom complexes. The dual of E is again bounded and termwise finite projective,\nhence K-flat. For an arbitrary complex F, the evaluation comparison is the total\nof F^p tensor Hom(E^q,O) to Hom(E^q,F^p). It is an isomorphism for finite free\nE^q and for its direct summands. These identifications respect differentials and the canonical\nadjunction. For any natural adjunction bijection in the statement, Yoneda changes\nits adjuncts by invertible natural transformations, so invertibility is unchanged.\nFinally test the globally defined maps on cohomology sheaves on the open cover;\nno morphisms are glued. This works for unbounded F and does not assume F is quasi-coherent.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-rhom-strict-perfect-hom",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-sc-derived-internal-hom-adjunction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-rhom-strict-perfect-hom",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-sc-derived-internal-hom-adjunction",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DQ and 08DM, lemma-dual-perfect-complex and lemma-hom-from-strictly-perfect"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complex dual is perfect tensor Hom comparison and pullback of dual",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex internal dual tensor Hom comparison is an isomorphism",
+   "results": "8 generic HomologicalComplex and DerivedCategory isomorphisms; none supplies the scheme perfect-dual computation",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*RHom|RHom.*perfect",
+   "results": "0 Mathlib hits via msearch; repository search finds the assigned statement and its callers, no independent theorem of these parts",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "comparison isomorphism for perfect complexes: identify RHom(K,M) with M tensor^L RHom(K,O_X), and transport the dual through derived pullback; Perfect evaluation and bidual isomorphisms",
+   "via": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectRHomEvaluationIsomorphisms",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectRHomEvaluationIsomorphisms.lean",
+  "declaration": "AlgebraicGeometry.perfect_rhom_evaluation_isomorphisms",
+  "statement": "theorem perfect_rhom_evaluation_isomorphisms (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (K : schemeDerivedQCohCategory X) (hK : Scheme.IsPerfect X K.obj) (adj : ∀ A B C : schemeDerivedCategory X, (A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)) ≃ (A ⊗ B ⟶ C)) (hadj : ∀ (A A' B B' C C' : schemeDerivedCategory X) (a : A' ⟶ A) (b : B' ⟶ B) (c : C ⟶ C') (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)), adj A' B' C' (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).map (b.op, c)) = (a ⊗ₘ b) ≫ adj A B C f ≫ c) (D : schemeDerivedCategory X) (hD : D = (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op K.obj, 𝟙_ (schemeDerivedCategory X))) : (∀ N : schemeDerivedCategory X, IsIso ((adj (N ⊗ D) K.obj N).symm ((α_ N D K.obj).hom ≫ N ◁ (adj D K.obj (𝟙_ (schemeDerivedCategory X)) (eqToHom hD)) ≫ (ρ_ N).hom)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144058-L-2090745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144058-L-2090745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

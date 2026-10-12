@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-perfect-rhom-tensor-comparison-dual",
+ "kind": "statement",
+ "title": "Quasi-coherent perfect internal dual",
+ "statement": "Let X be a scheme [def-pc-scheme] and let K belong to D_QCoh(O_X) [def-pc-derived-category] with K perfect [def-pc-perfect-complex]. There is a quasi-coherent perfect object D whose underlying derived object equals R\\mathcal Hom(K,O_X) [def-pur-derived-internal-hom].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, lemma-dual-perfect-complex"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "around each point choose a strictly-perfect representative E for K and\nrefine to an affine neighbourhood. Internal Hom restriction and the strictly-perfect\nHom computation identify RHom(K,O) there with the ordinary dual complex Hom(E,O).\nDualizing a splitting of a finite free term gives a splitting of its dual, so this\ncomplex is strictly perfect and has quasi-coherent terms. Kernels and cokernels of\nmaps of quasi-coherent sheaves on a scheme are quasi-coherent, so its cohomology\nsheaves are quasi-coherent. Quasi-coherence is local on the scheme. Therefore the\nactual object RHom(K,O) has quasi-coherent cohomology and satisfies IsPerfect.\nEquip that object with its quasi-coherence proof to form D in the full subcategory;\nits underlying object is exactly RHom(K,O), rather than an arbitrary existence witness.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-rhom-strict-perfect-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-rhom-strict-perfect-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, lemma-dual-perfect-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complex dual is perfect tensor Hom comparison and pullback of dual",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex internal dual tensor Hom comparison is an isomorphism",
+   "results": "8 generic HomologicalComplex and DerivedCategory isomorphisms; none supplies the scheme perfect-dual computation",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*RHom|RHom.*perfect",
+   "results": "0 Mathlib hits via msearch; repository search finds the assigned statement and its callers, no independent theorem of these parts",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "comparison isomorphism for perfect complexes: identify RHom(K,M) with M tensor^L RHom(K,O_X), and transport the dual through derived pullback; Quasi-coherent perfect internal dual",
+   "via": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectRHomTensorComparisonDual",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectRHomTensorComparisonDual.lean",
+  "declaration": "AlgebraicGeometry.exists_perfect_rhom_dual",
+  "statement": "theorem exists_perfect_rhom_dual (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (K : schemeDerivedQCohCategory X) (hK : Scheme.IsPerfect X K.obj) : ∃ Kdual : schemeDerivedQCohCategory X, Kdual.obj = (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op K.obj, 𝟙_ (schemeDerivedCategory X)) ∧ Scheme.IsPerfect X Kdual.obj",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144058-L-2090745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144058-L-2090745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
