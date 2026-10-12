@@ -78,6 +78,13 @@ def isColimitOfArrowIso {X Y X' Y' Q : C} {f : X ⟶ Y} {f' : X' ⟶ Y'} (e₁ :
 
 end Limits.CokernelCofork
 
+/-- Being a colimit cofan is stable under reindexing along an equivalence of index types. This
+is `CategoryTheory.Limits.Cofan.isColimitEquivOfEquiv` without its (unused) assumptions that the
+coproducts exist. -/
+def Limits.Cofan.isColimitReindex {α β : Type*} {f : α → C} (ε : β ≃ α) {c : Cofan f}
+    (hc : IsColimit c) : IsColimit (Cofan.mk c.pt fun b ↦ c.inj (ε b) : Cofan (f ∘ ε)) :=
+  IsColimit.whiskerEquivalenceEquiv (Discrete.equivalence ε) hc
+
 section Preadditive
 
 variable [Preadditive C] (n : ℕ)
