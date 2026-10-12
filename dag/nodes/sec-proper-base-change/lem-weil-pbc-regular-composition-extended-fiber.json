@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-regular-composition-extended-fiber",
+ "kind": "statement",
+ "title": "Regular fibres of the map between extended fibres of a tower",
+ "statement": "Let A → B → C be a tower of commutative rings with compatible algebra structures, and assume B → C is regular [def-weil-pbc-g-ring]. For a prime p of A [def-weil-pbc-localization-at-prime] and a finite field extension K/κ(p), put D=K⊗[κ(p)](p.Fiber B) and E=K⊗[κ(p)](p.Fiber C). Give E its D-algebra structure by tensoring B → C with the two identity maps. Then for every prime q of D the fibre q.Fiber E is regular [def-weil-regular-scheme]. No regularity of A → B, no Noetherianity of p.Fiber C, and no purely inseparable hypothesis on K are assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Lemma 07QI (https://stacks.math.columbia.edu/tag/07QI), the base-change reduction; Algebra Lemma 0381 (https://stacks.math.columbia.edu/tag/0381)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "First prove the generic base-change fibre statement. If R → S is regular and R → R′ is essentially of finite type, then for q in Spec R′ put p=q∩R and install the canonical residue-field algebra via Localization.AtPrime.algebraOfLiesOver. The Mathlib generalization recorded by the residue-field finite-generation node gives Algebra.EssFiniteType κ(p) κ(q), hence the extension is finitely generated as a field. Geometric regularity of p.Fiber S and 0381 give regularity of κ(q)⊗[κ(p)](p.Fiber S). Two cancelBaseChange equivalences identify this with q.Fiber (R′⊗[R]S). Transport regularity through those ring equivalences.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the tower put X=κ(p)⊗[A]B, Y=κ(p)⊗[A]C, D=K⊗[κ(p)]X, E=K⊗[κ(p)]Y. The residue field is essentially finite type over A, so tensor symmetry and essential finite-type base change make B → X essentially finite type. Likewise K is module-finite over κ(p), so X → D is essentially finite type. Compose to get B → D essentially finite type.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the pushout cancelBaseChangeAlg equivalences Y ≅ X⊗[B]C and E ≅ D⊗[X]Y, extend the first over D, and cancel X to obtain a D-algebra equivalence E ≅ D⊗[B]C. The commutation with D is verified by cancelBaseChange_symm_comp_lTensor. Apply the generic fibre assertion from step 1 to B → C and B → D, then tensor the D-algebra equivalence with κ(q) to obtain regularity of q.Fiber E. This is a fully proved transport, with no extra hypotheses; the zero rings are covered by the same equivalences.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Lemma 07QI (https://stacks.math.columbia.edu/tag/07QI), the base-change reduction; Algebra Lemma 0381 (https://stacks.math.columbia.edu/tag/0381).",
+  "note": "D3 wrote out the omitted glue and verified the Lean proof from the existing named criteria."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Regular fibers of a regular ring homomorphism after essentially finite type base change",
+   "results": "UNAVAILABLE: HTTP Internal Server Error; no absence verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular fibers of a regular ring homomorphism after essentially finite type base change",
+   "results": "EssFiniteType/finite-type/quasi-finite base-change lemmas and smooth descent only; no regular-ring-map fibre theorem.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; used existing library statements and Mathlib tensor and residue-field tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing; Algebra.TensorProduct.cancelBaseChange",
+   "results": "IsRegularRing, isRegularRing_iff, IsRegularRing.of_ringEquiv, Algebra.TensorProduct.cancelBaseChange and its pure-tensor formulas.",
+   "date": "2026-10-12",
+   "verdict": "Constituent tools, no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*fiber|regular.*fibre|IsGeometricallyRegular|regular_fibre_baseChange|extendedFiber_regular",
+   "results": "No matching Mathlib declaration. Source and Sheaf searched too: RegularityRkGoesUp proves the bounded Serre criterion, not the all-primes statement.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularComposition",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity paragraph of 0GS2, via regular composition 07QI, step 2: regularity of the fibres of the intermediate extended-fibre map.",
+   "via": [
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RegularCompositionExtendedFiber",
+  "file": "lean/Sheaf/RingTheory/RegularCompositionExtendedFiber.lean",
+  "declaration": "RingHom.IsRegular.extendedFiber_regular",
+  "statement": "theorem IsRegular.extendedFiber_regular {A : Type u} {B : Type v} {C : Type w} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] (hg : (algebraMap B C).IsRegular) (p : Ideal A) [p.IsPrime] (K : Type t) [Field K] [Algebra p.ResidueField K] [Module.Finite p.ResidueField K] : letI := (Algebra.TensorProduct.map (AlgHom.id p.ResidueField K) (Algebra.TensorProduct.map (AlgHom.id p.ResidueField p.ResidueField) (IsScalarTower.toAlgHom A B C))).toRingHom.toAlgebra ∀ (q : Ideal (TensorProduct p.ResidueField K (p.Fiber B))) [q.IsPrime], IsRegularRing (q.Fiber (TensorProduct p.ResidueField K (p.Fiber C)))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095857-L-314450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095857-L-314450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

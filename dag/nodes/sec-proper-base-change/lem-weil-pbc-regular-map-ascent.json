@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-regular-map-ascent",
+ "kind": "statement",
+ "title": "Regularity ascends along flat maps with regular fibres",
+ "statement": "Let R and S be commutative rings, S an R-algebra. Suppose R is regular [def-weil-regular-scheme], S is Noetherian [def-weil-pbc-noetherian-ring], the map R → S is flat [def-weil-pbc-flat-ring-map], and for every prime p of R the fibre p.Fiber S [def-weil-pbc-localization-at-prime] is a regular ring. Then S is regular.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 031E (https://stacks.math.columbia.edu/tag/031E), at each target prime; the final ascent in the proof of More on Algebra, Lemma 07QI."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Fix q in Spec S and let p=q∩R. The local map R_p → S_q is flat and local. Its source is regular local and its target Noetherian.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the prime–fibre correspondence to obtain a prime Q in p.Fiber S contracting to q. The localization at Q is isomorphic to S_q/(pR_p)S_q; identify the extended maximal ideal by mapping p through the local homomorphism. The regularity hypothesis on p.Fiber S makes this closed fibre regular local. This is exactly Ideal.Fiber.algEquivAux₂, with transport of the equality of contracted primes.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-fibre-ring-local-ring-iso",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the flat local regularity criterion 031E. Every S_q is regular local, so isRegularRing_iff proves regularity of S. If S is zero there are no primes and this last condition is vacuous.",
+   "uses": [
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-fibre-ring-local-ring-iso",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 031E (https://stacks.math.columbia.edu/tag/031E), at each target prime; the final ascent in the proof of More on Algebra, Lemma 07QI.",
+  "note": "D3 wrote out the omitted glue and verified the Lean proof from the existing named criteria."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat ring map with regular source and regular fibers has regular Noetherian target",
+   "results": "UNAVAILABLE: HTTP Internal Server Error; no absence verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring map with regular source and regular fibers has regular Noetherian target",
+   "results": "Flatness of smooth maps and ascent of regular sequences only; no ring-regularity ascent theorem.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; used existing library statements and Mathlib tensor and residue-field tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing; Algebra.TensorProduct.cancelBaseChange",
+   "results": "IsRegularRing, isRegularRing_iff, IsRegularRing.of_ringEquiv, Algebra.TensorProduct.cancelBaseChange and its pure-tensor formulas.",
+   "date": "2026-10-12",
+   "verdict": "Constituent tools, no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*fiber|regular.*fibre|IsGeometricallyRegular|regular_fibre_baseChange|extendedFiber_regular",
+   "results": "No matching Mathlib declaration. Source and Sheaf searched too: RegularityRkGoesUp proves the bounded Serre criterion, not the all-primes statement.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularComposition",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity paragraph of 0GS2, via regular composition 07QI, step 3: apply 031E at every target prime.",
+   "via": [
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RegularMapAscent",
+  "file": "lean/Sheaf/RingTheory/RegularMapAscent.lean",
+  "declaration": "RingHom.isRegularRing_of_flat_of_regular_fibers",
+  "statement": "theorem isRegularRing_of_flat_of_regular_fibers {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [IsRegularRing R] [IsNoetherianRing S] (hflat : (algebraMap R S).Flat) (hfibres : ∀ (p : Ideal R) [p.IsPrime], IsRegularRing (p.Fiber S)) : IsRegularRing S",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095857-L-314450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095857-L-314450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

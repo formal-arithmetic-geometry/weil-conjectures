@@ -7,8 +7,10 @@ module
 
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
-import Sheaf.RingTheory.RegularBaseChange
-import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+import Sheaf.RingTheory.RegularCompositionExtendedFiber
+import Sheaf.RingTheory.RegularMapAscent
+import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Composition of regular ring maps
@@ -60,6 +62,32 @@ theorem IsRegular.comp_of_fiber_noetherian
     (hf : (algebraMap A B).IsRegular) (hg : (algebraMap B C).IsRegular)
     (h : ∀ (p : Ideal A) [p.IsPrime], IsNoetherianRing (p.Fiber C)) :
     (algebraMap A C).IsRegular := by
-  sorry
+  rw [IsRegular, toAlgebra_algebraMap] at hf hg ⊢
+  refine ⟨?_, ?_⟩
+  · simpa only [IsScalarTower.algebraMap_eq A B C] using hf.1.comp hg.1
+  · intro p hp
+    refine ⟨h p, ?_⟩
+    intro K hK hAlg hFin hIns
+    have hB : IsRegularRing (TensorProduct p.ResidueField K (p.Fiber B)) :=
+      Algebra.isRegularRing_tensorProduct_of_isGeometricallyRegular (hf.2 p) K
+        (IntermediateField.fg_top _ _)
+    have hC : IsNoetherianRing (TensorProduct p.ResidueField K (p.Fiber C)) := by
+      have := h p
+      let e := Algebra.TensorProduct.comm p.ResidueField K (p.Fiber C)
+      have : IsNoetherianRing (TensorProduct p.ResidueField (p.Fiber C) K) :=
+        IsNoetherianRing.of_finite (p.Fiber C) _
+      exact isNoetherianRing_of_ringEquiv _ e.toRingEquiv.symm
+    let f := Algebra.TensorProduct.map (AlgHom.id p.ResidueField K)
+      (Algebra.TensorProduct.map (AlgHom.id p.ResidueField p.ResidueField)
+        (IsScalarTower.toAlgHom A B C))
+    let := f.toRingHom.toAlgebra
+    apply isRegularRing_of_flat_of_regular_fibers
+      (R := TensorProduct p.ResidueField K (p.Fiber B))
+    · rw [RingHom.algebraMap_toAlgebra]
+      exact (hg.1.lTensor (S := p.ResidueField) p.ResidueField).lTensor
+        (S := p.ResidueField) K
+    · exact IsRegular.extendedFiber_regular (by
+        rw [IsRegular, toAlgebra_algebraMap]
+        exact hg) p K
 
 end RingHom
