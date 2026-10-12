@@ -15,30 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Write n = p+q. The composite from Z_(r+1) into Z_r/B_r is killed by d_r: a representative has differential in F^(p+r+1), so its target graded class is zero. The representative equation for D proves this after pulling back the epimorphism from unquotiented representatives to graded cycles. Thus the composite factors uniquely through the kernel, giving f. To see that f is epic, locally lift a page cycle to an r-cycle representative x. Since its differential is an r-boundary in the target graded piece, after another epimorphic pullback write dx = dy modulo F^(p+r+1), with y in F^(p+1). Then x-y has the same source graded class and lies in the (r+1)-cycle representatives. These local lifts show that the image of f is the whole kernel. Pullbacks of epimorphisms remain epic in an abelian category, so this proves the assertion without projectivity assumptions.",
+   "text": "Factor the successor inclusion followed by the page quotient through the outgoing kernel using the existence lemma.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
-    "lem-sp-filtered-complex-page-differential"
+    "lem-sp-filtered-complex-successor-cycles-cover-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the epimorphy lemma to this factorization and pair its epimorphy with the representative equation.",
+   "uses": [
+    "lem-sp-filtered-complex-successor-cycles-cover-epi"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-sp-filtration",
-  "def-sp-filtered-complex-subquotients",
-  "lem-sp-filtered-complex-page-differential"
+  "lem-sp-filtered-complex-successor-cycles-cover-exists",
+  "lem-sp-filtered-complex-successor-cycles-cover-epi"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "H2: componentwise kernel/image extraction from Tag 012K and steps 1–2 of lem-sp-filtered-complex-page-homology"
+  "place": "B3: separate the kernel factorization and representative correction; the Lean proof combines these two strict substatements."
  },
  "mathlib_searches": [
   {
@@ -118,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-466b3",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T194117-L-457028",
+  "landing": "20261012T225258-L-1800701",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proof with their DAG nodes, Tag 012K, preserved interfaces, clean compilation, and axiom probes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

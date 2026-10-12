@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverExists
+import Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverEpi
 
 /-!
 # Successor cycles cover the kernel of a page differential
@@ -50,6 +50,8 @@ theorem filteredComplex_successor_cycles_cover
       F.complexCycles pq.1 (pq.1 + pq.2) r) :
     ∃ f : (F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) : C) ⟶ D.page.cycles pq,
       Epi f ∧ f ≫ D.page.iCycles pq =
-        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq := by sorry
+        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq := by
+  obtain ⟨f, hf⟩ := filteredComplex_successor_cycles_cover_exists K F r hr D pq hZ
+  exact ⟨f, filteredComplex_successor_cycles_cover_epi K F r hr D pq hZ f hf, hf⟩
 
 end CategoryTheory

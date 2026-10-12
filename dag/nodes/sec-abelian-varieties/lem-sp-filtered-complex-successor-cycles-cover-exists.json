@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-filtered-complex-successor-cycles-cover-exists",
+ "kind": "statement",
+ "title": "Successor cycles map exists",
+ "statement": "With an abelian category C, a cochain complex K, a decreasing filtration F, r >= 1, page differential data D, a bidegree pq, and the inclusion hZ of graded successor cycles into graded r-cycles, the inclusion followed by the r-page quotient factors through the kernel of the outgoing page differential, with exactly the prescribed composite.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [
+  {
+   "text": "Put p = pq.1, n = pq.1 + pq.2 and j = (p+r,pq.2-r+1). Let a be the successor-cycle inclusion followed by the page quotient projection. The image factorization defining graded successor cycles gives an epimorphism from their unquotiented representatives onto them: adding F^(p+1) does not change this image because the graded projection kills F^(p+1). On these representatives, dx lies in F^(p+r+1). Regard dx as a representative in F^(p+r); its graded class is zero, so in D.on_representatives take the target graded cycle to be zero. This gives (a followed by D.d pq j) = 0 after the representative epimorphism, hence before it by cancellation. The kernel universal property, HomologicalComplex.liftCycles, now gives f with f followed by D.page.iCycles pq equal to a. No epimorphy claim about f is needed for this factorization.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "B3 second reading: exists part of Tag 012K representative calculation, independent of the parent cover theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category the kernel of the differential on a filtered cochain complex quotient page is covered by the next filtration cycle subobject",
+   "results": "8 hits, including CochainComplex.cm5b and injective-resolution statements; none identifies these concrete filtered subobjects.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.liftCycles",
+   "results": "12 hits; liftCycles and liftCycles_i provide the generic kernel universal property, but not annihilation of the concrete successor inclusion or its epimorphy.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftCycles|cyclesIsKernel|epi_of_image",
+   "results": "25 generic homological-complex hits, no filtered successor statement. Local rg of lean/Sheaf and lean/WeilConjectures found only the existing target and its callers; quotient-image comparison is a different statement and is still sorry.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of next filtered cycles followed by projection to a spectral sequence page factors through the kernel of its differential, and that factorization is an epimorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Outgoing-kernel calculation for successor homology of the concrete filtered-complex page, Tag 012K.",
+   "via": [
+    "lem-sp-filtered-complex-page-homology",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCoverExists",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSuccessorCyclesCoverExists.lean",
+  "declaration": "CategoryTheory.filteredComplex_successor_cycles_cover_exists",
+  "statement": "theorem filteredComplex_successor_cycles_cover_exists\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)\n    (hZ : F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) ≤\n      F.complexCycles pq.1 (pq.1 + pq.2) r) :\n    ∃ f : (F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) : C) ⟶ D.page.cycles pq,\n      f ≫ D.page.iCycles pq =\n        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T225258-L-1800701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T225258-L-1800701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
