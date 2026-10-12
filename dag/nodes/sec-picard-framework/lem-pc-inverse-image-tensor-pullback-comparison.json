@@ -1,0 +1,165 @@
+{
+ "id": "lem-pc-inverse-image-tensor-pullback-comparison",
+ "kind": "lemma",
+ "title": "Inverse image equals tensor pullback to the inverse-image ring",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces, $R$ a sheaf of commutative rings on $Y$, and $K^\\bullet$ a cochain complex of $R$-modules [def-pc-cochain-complex-modules]. Use the canonical inverse-image modules [def-pc-topological-inverse-image-module] and their functor $I_f$ [lem-pc-inverse-image-module-functor-exact]. Equip $(X,f^{-1}R)\\to(Y,R)$ with structure map $R\\to f_*f^{-1}R$ equal to the inverse-image adjunction unit. The termwise tensor pullback, defined using sheaf change of rings [def-pur-sheaf-tensor-product], is isomorphic as a complex of $f^{-1}R$-modules to $I_f(K^\\bullet)$. This assertion assumes neither K-flatness nor exactness of $K^\\bullet$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008A (lemma-adjointness-tensor-restrict), Section 0094 (section-ringed-spaces-functoriality-modules); the identity adjoint ring map case used in Cohomology Tag 06YC"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-topological-inverse-image-module",
+  "lem-pc-inverse-image-module-functor-exact",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The adjoint ring map of the inverse-image unit is the identity on the inverse-image ring, by Adjunction.homEquiv_symm_unit.",
+   "uses": [
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each section ring A, ModuleCat.extendScalarsId identifies extension along the identity with the original module, with inverse m mapped to 1 tensor m. The characterized changeOfRingsMap sends that tensor to 1 tensor the restricted m, because ring restrictions preserve 1. PresheafOfModules.isoMk assembles the resulting presheaf-module isomorphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Sheafify this isomorphism and compose with the module-sheafification counit isomorphism on the original sheaf. This identifies changeOfRings along the identity with the original module.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "ModuleCat.extendScalarsId.inv.naturality proves compatibility with module morphisms before sheafification. Cancel the invertible presheaf-module components, apply functoriality of module sheafification, and then apply naturality of the sheafification counit. This gives naturality of the sheaf-level isomorphism for changeOfRingsHom.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the identity-ring isomorphism along the adjoint-ring-map equality. Apply the naturality just proved to every differential in the canonical inverse-image complex. HomologicalComplex.Hom.isoOfComponents yields the required isomorphism of complexes.",
+   "uses": [
+    "lem-pc-inverse-image-module-functor-exact",
+    "def-pc-topological-inverse-image-module",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-topological-inverse-image-module",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-inverse-image-module-functor-exact",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-12",
+  "note": "The Lean proof fills the elementary construction and comparison details from the cited source, using the named Mathlib declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact inverse image functor on sheaves of modules preserves K-flat complexes",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.rTensor_reflects_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex, QuasiIso",
+   "results": "loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(exact|KFlat)|map.*quasiIso|quasiIso.*map",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Opposite.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules is an exact additive functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsId|changeOfRings.*[Ii]d|tensorPullback.*[Ii]so",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InverseImageExactKFlat",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-derived-pullback",
+   "place": "exact inverse image and inverse image of a K-flat resolution in the derived pullback construction",
+   "via": [
+    "lem-pc-inverse-image-exact-kflat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/InverseImageTensorPullbackComparison.lean",
+  "declaration": "TopCat.Sheaf.exists_inverseImage_tensorPullback_iso",
+  "statement": "theorem exists_inverseImage_tensorPullback_iso {X Y : TopCat.{u}} (f : X ⟶ Y) (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u}) (K : CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) : Nonempty (CochainComplex.tensorPullbackComplex f (inverseImageRing f R) R ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map f) CommRingCat.{u} _ _).unit.app R) K ≅ ((inverseImageModuleFunctor f R).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085225-L-8625",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085225-L-8625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

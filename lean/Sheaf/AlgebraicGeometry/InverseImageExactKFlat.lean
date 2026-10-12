@@ -9,9 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Topology.InverseImageModule
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.Topology.InverseImageStalk
+import Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison
 
 /-! # Exact inverse image and K-flat resolutions
 
@@ -26,6 +24,19 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+set_option synthInstance.maxSize 256 in
+private theorem isKFlat_of_iso {X : TopCat.{u}}
+    {R : CategoryTheory.Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}}
+    {K L : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose (Opens.grothendieckTopology X)
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}
+    (e : K ≅ L) (hK : CochainComplex.IsKFlat (R := R) K) :
+    CochainComplex.IsKFlat (R := R) L := by
+  let := SheafOfModules.monoidalCategory R
+  intro F hF i
+  exact (hK F hF i).of_iso
+    (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e)
 
 /-- Exact module inverse image carries K-flat resolutions to K-flat resolutions.
 Source: Stacks Project, Cohomology, Tags 06YI and 06YC.
@@ -58,6 +69,20 @@ theorem exists_inverseImage_exact_kFlat {T S : Scheme.{u}} (g : T ⟶ S) :
             CochainComplex.IsKFlatResolution
               (R := TopCat.Sheaf.inverseImageRing g.base S.sheaf)
               ((I.mapHomologicalComplex (ComplexShape.up ℤ)).map s)) := by
-  sorry
+  let I := TopCat.Sheaf.inverseImageModuleFunctor g.base S.sheaf
+  obtain ⟨hadd, hlim, hcolim⟩ :=
+    TopCat.Sheaf.inverseImageModuleFunctor_exact g.base S.sheaf
+  refine ⟨I, fun _ ↦ rfl, ?_, hadd, hlim, hcolim, ?_⟩
+  · intro M N a
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  · intro P G s hs
+    have : QuasiIso s := hs.1
+    refine ⟨inferInstance, ?_⟩
+    obtain ⟨e⟩ := TopCat.Sheaf.exists_inverseImage_tensorPullback_iso g.base S.sheaf P
+    exact isKFlat_of_iso e (CochainComplex.isKFlat_pullback g.base
+      (TopCat.Sheaf.inverseImageRing g.base S.sheaf) S.sheaf
+      ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (TopologicalSpace.Opens.map g.base) CommRingCat.{u} _ _).unit.app S.sheaf) P hs.2)
 
 end AlgebraicGeometry

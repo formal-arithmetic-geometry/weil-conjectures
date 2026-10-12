@@ -16,38 +16,49 @@
  ],
  "proof": [
   {
-   "text": "The canonical inverse-image maps preserve identity, composition and addition since their underlying abelian-sheaf maps do. They therefore assemble to the additive functor I with the recorded objects and maps.",
+   "text": "Choose the canonical inverse-image module functor supplied by lem-pc-inverse-image-module-functor-exact. Its object and map formulas are definitional. Its additivity and finite-limit and finite-colimit preservation provide the first clauses.",
    "uses": [
+    "lem-pc-inverse-image-module-functor-exact",
     "def-pc-topological-inverse-image-module"
    ],
    "elementary": true
   },
   {
-   "text": "At t in T, the underlying abelian stalk of I(M) is naturally the stalk M at g(t). Exactness of sheaf sequences is checked on stalks, so I preserves finite limits and finite colimits. Its termwise functor preserves homology and hence quasi-isomorphisms.",
+   "text": "For a K-flat resolution s, install its quasi-isomorphism clause as a local instance. Mathlib HomologicalComplex.quasiIso_map_of_preservesHomology gives that the image of s is a quasi-isomorphism, since an additive functor preserving finite limits and colimits preserves homology.",
    "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk"
+    "lem-pc-inverse-image-module-functor-exact",
+    "def-pc-kflat-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply K-flat pullback preservation to (T,g^{-1} O_S) -> (S,O_S) with adjoint ring map the identity. Tensoring over g^{-1} O_S with that same ring is naturally the identity on modules and on complexes, so this pullback is I(P). Thus I(P) is K-flat. Combining this with the previous quasi-isomorphism clause proves resolution preservation.",
+   "text": "Use the ringed-space map with target ring sheaf the canonical inverse-image ring and structure morphism the inverse-image adjunction unit. Apply lem-pc-kflat-pullback-preservation to the K-flat source complex. The proved comparison lem-pc-inverse-image-tensor-pullback-comparison identifies this tensor pullback with the termwise inverse image.",
    "uses": [
     "lem-pc-kflat-pullback-preservation",
-    "def-pur-sheaf-tensor-product"
+    "lem-pc-inverse-image-tensor-pullback-comparison"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "K-flatness is invariant under an isomorphism of complexes: for an arbitrary acyclic test complex, map the isomorphism through the total-tensor bifunctor, and transport exactness in every degree using HomologicalComplex.ExactAt.of_iso. Combine this K-flatness with the quasi-isomorphism from step 2 to obtain the image K-flat resolution.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-inverse-image-module-functor-exact",
   "def-pc-topological-inverse-image-module",
-  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-pc-kflat-complex",
   "lem-pc-kflat-pullback-preservation",
-  "def-pur-sheaf-tensor-product"
+  "lem-pc-inverse-image-tensor-pullback-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma Tag 06YJ (lemma-derived-base-change), proof; Lemma Tag 06YC (lemma-pullback-K-flat)"
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-12",
+  "note": "Lean proof of the existing route; exactness uses the Mathlib site-pullback and reflective sheafification argument instead of the stalk criterion. Identity tensor comparison is proved explicitly."
  },
  "mathlib_searches": [
   {
@@ -114,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T063519-L-3159337",
+  "landing": "20261012T085225-L-8625",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

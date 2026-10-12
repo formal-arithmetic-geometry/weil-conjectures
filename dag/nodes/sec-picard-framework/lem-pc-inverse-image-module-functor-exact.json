@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-inverse-image-module-functor-exact",
+ "kind": "lemma",
+ "title": "The canonical inverse-image module functor is additive and exact",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces and let $R$ be a sheaf of commutative rings on $Y$. The canonical objects and maps of module inverse image [def-pc-topological-inverse-image-module] form a functor $I_f:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(f^{-1}R)$. This functor is additive and preserves finite limits and finite colimits.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008X (lemma-pullback-module) and 008Y (lemma-adjoint-push-pull-modules); exactness formalized using Mathlib site pullback and module sheafification"
+ },
+ "stmt_deps": [
+  "def-pc-topological-inverse-image-module"
+ ],
+ "proof": [
+  {
+   "text": "Define the functor on objects and maps by canonical module inverse image. Forgetting module actions is faithful and sends its maps to the underlying abelian inverse-image functor. Its identity and composition laws therefore follow from the abelian functor laws.",
+   "uses": [
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The abelian inverse-image functor is the constructed left adjoint of sheaf pushforward. The latter is additive by its sectionwise definition, so Adjunction.left_adjoint_additive proves additivity of inverse image. Forgetful faithfulness then proves additivity on modules.",
+   "uses": [
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib Functor.sheafPullbackConstruction preserves finite limits for Opens.map f. SheafOfModules.toSheaf preserves and reflects finite limits. The composite of module inverse image with toSheaf is definitionally toSheaf followed by abelian inverse image, so preservesFiniteLimits_of_reflects_of_preserves gives the desired finite-limit preservation.",
+   "uses": [
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For finite colimits, let L be module sheafification, U forgetting to module presheaves, and H forgetting to abelian sheaves. L composed with H is abelian presheaf forgetting followed by abelian sheafification; both preserve finite colimits. For a sheaf-module diagram D, sheafify a colimit cocone of D composed with U. L preserves that colimit, and L composed with H also does. The counit isomorphism identifies D composed with U composed with L with D, proving that H preserves finite colimits. It reflects finite colimits since it preserves them and reflects isomorphisms. Abelian inverse image preserves colimits as a left adjoint. Apply preservesFiniteColimits_of_reflects_of_preserves to module inverse image composed with H.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-topological-inverse-image-module",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-12",
+  "note": "The Lean proof fills the elementary construction and comparison details from the cited source, using the named Mathlib declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact inverse image functor on sheaves of modules preserves K-flat complexes",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.rTensor_reflects_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex, QuasiIso",
+   "results": "loogle: unknown identifier 'Functor.mapHomologicalComplex'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(exact|KFlat)|map.*quasiIso|quasiIso.*map",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Opposite.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules is an exact additive functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "12 hits: ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsId|changeOfRings.*[Ii]d|tensorPullback.*[Ii]so",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InverseImageExactKFlat",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-derived-pullback",
+   "place": "exact inverse image and inverse image of a K-flat resolution in the derived pullback construction",
+   "via": [
+    "lem-pc-inverse-image-exact-kflat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InverseImageModuleFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/InverseImageModuleFunctor.lean",
+  "declaration": "TopCat.Sheaf.inverseImageModuleFunctor_exact",
+  "statement": "theorem inverseImageModuleFunctor_exact : (inverseImageModuleFunctor f R).Additive ∧ PreservesFiniteLimits (inverseImageModuleFunctor f R) ∧ PreservesFiniteColimits (inverseImageModuleFunctor f R)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12",
+  "declarations": [
+   "TopCat.Sheaf.inverseImageModuleFunctor",
+   "TopCat.Sheaf.inverseImageModuleFunctor_additive",
+   "TopCat.Sheaf.inverseImageModuleFunctor_preservesFiniteLimits",
+   "TopCat.Sheaf.inverseImageModuleFunctor_preservesFiniteColimits",
+   "TopCat.Sheaf.inverseImageModuleFunctor_exact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085225-L-8625",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085225-L-8625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
