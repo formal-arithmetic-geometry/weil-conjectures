@@ -10,7 +10,6 @@ public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.Topology.SetsExtensionByEmpty
 import Sheaf.Topology.SheafDirectedColimitFiniteCoequalizers
 import Sheaf.Topology.SpectralFiniteCoequalizerEmbedsConstant
 
@@ -71,6 +70,34 @@ theorem spectral_sheaf_colimit_constant_embeddings
                 ⟨fun x : {x : X // x ∈ V ∧ x ∈ Z k} ↦
                     ⟨x.1, f.le x.2.1, x.2.2⟩,
                   continuous_subtype_val.subtype_mk _⟩ (e U s k) := by
-  sorry
+  let B : Set (Opens X) := {U | IsCompact (U : Set X)}
+  have hBasis : IsTopologicalBasis ((fun U : Opens X ↦ (U : Set X)) '' B) := by
+    have hB : (fun U : Opens X ↦ (U : Set X)) '' B =
+        {U : Set X | IsOpen U ∧ IsCompact U} := by
+      ext U
+      constructor
+      · rintro ⟨V, hV, rfl⟩
+        exact ⟨V.isOpen, hV⟩
+      · rintro ⟨hOpen, hCompact⟩
+        exact ⟨⟨U, hOpen⟩, hCompact, rfl⟩
+    rw [hB]
+    exact PrespectralSpace.isTopologicalBasis
+  obtain ⟨I, hOrder, hNonempty, hDirected, D, ι, hColimit, hTerms⟩ :=
+    exists_directedColimit_finiteCoequalizers X B hBasis (fun _ h ↦ h) F
+  let : Preorder I := hOrder
+  let : Nonempty I := hNonempty
+  let : IsDirected I (· ≤ ·) := hDirected
+  refine ⟨I, hOrder, hNonempty, hDirected, D, ι, hColimit, ?_⟩
+  intro i
+  obtain ⟨m, n, U, V, S, T, hU, hV, hS, hT, β, γ, q, hq, hcoeq⟩ := hTerms i
+  let generators : Fin n → CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u) :=
+    fun a ↦ extensionByEmptyConstant (U a) (S a)
+  let relations : Fin m → CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u) :=
+    fun b ↦ extensionByEmptyConstant (V b) (T b)
+  exact spectral_finite_coequalizer_embeds_constant X (D.obj i) m n U V S T
+    hU hV hS hT
+    (Cofan.mk _ (Sigma.ι generators))
+    (Cofan.mk _ (Sigma.ι relations))
+    ⟨coproductIsCoproduct generators⟩ ⟨coproductIsCoproduct relations⟩ β γ q hq hcoeq
 
 end TopCat
