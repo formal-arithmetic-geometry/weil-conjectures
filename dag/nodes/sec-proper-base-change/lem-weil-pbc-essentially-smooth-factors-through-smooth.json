@@ -28,65 +28,26 @@
  ],
  "proof": [
   {
-   "text": "(Presentation of $D$; the smooth algebras $P_f$.) By definition of essential smoothness [def-weil-pbc-essentially-smooth-ring-map] there are a smooth $R$-algebra $P$ [def-weil-pbc-smooth-ring-map], a multiplicative subset $S\\subseteq P$ and an isomorphism of $R$-algebras $\\varphi:D\\to S^{-1}P$. For $f\\in S$ let $P_f$ be the localization of $P$ at $\\{1,f,f^2,\\dots\\}$, an $R$-algebra through $R\\to P\\to P_f$. Since $R\\to P$ is smooth, $R\\to P\\to P_f$ is smooth [lem-weil-pbc-smooth-ring-map-principal-localization]: every $P_f$, $f\\in S$, is a smooth $R$-algebra.",
+   "text": "Unpack essential smoothness as an R-algebra equivalence e : D ≃ₐ[R] Localization S for smooth P. Apply factors_through_principal_localization to e.comp g, obtaining s and C → P_s → Localization S. Mathlib Smooth.of_isLocalization_Away and Smooth.comp imply Smooth R P_s. Set T = ULift P_s to meet the universe and transport smoothness with Smooth.of_equiv. Compose with e.symm to obtain the required factorization; pointwise equality follows from hk and e.symm_apply_apply.",
    "uses": [
     "def-weil-pbc-essentially-smooth-ring-map",
     "def-weil-pbc-smooth-ring-map",
+    "lem-factors-through-localization-of-smooth",
     "lem-weil-pbc-smooth-ring-map-principal-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ, Ad (item-eighth-resolve), lines 3062-3074 ('D' is essentially smooth ... Hence D'[t_1,...,t_d] is a filtered colimit of smooth ... algebras and B (x) ... factors through one of these')"
-   }
-  },
-  {
-   "text": "($S^{-1}P$ is a filtered colimit of the $P_f$ as $R$-algebras.) Preorder $S$ by divisibility ($f\\le g$ iff $g=fh$ for some $h\\in P$). By [lem-weil-pbc-localization-colimit-principal-localizations] this preorder, regarded as a category $J$, is filtered, $f\\mapsto P_f$ with the maps $\\rho_{fg}:P_f\\to P_g$, $a/f^e\\mapsto ah^e/g^e$, is a functor from $J$ to commutative rings, and $(S^{-1}P,(\\kappa_f)_{f\\in S})$, $\\kappa_f(a/f^e)=a/f^e$, is its colimit in the category of commutative rings [def-weil-pbc-category-colimit]. All these maps are homomorphisms of $R$-algebras: $\\rho_{fg}(a/1)=a/1$ and $\\kappa_f(a/1)=a/1$ for $a\\in P$, so $\\rho_{fg}$ and $\\kappa_f$ commute with the structure maps from $P$, hence with those from $R$ (which factor through $R\\to P$).",
-   "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243: S^{-1}M = colim_{f in S} M_f, here M = P) and Lemma Tag 00QO (lemma-characterize-finite-presentation, line 31886, (1) implies (3))"
-   }
-  },
-  {
-   "text": "(Factorization through a stage.) Choose an isomorphism of $R$-algebras $C\\cong R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ and replace $C$ by this quotient (transporting $g$ along the isomorphism and back at the end). The map $\\varphi\\circ g:C\\to S^{-1}P$ is a homomorphism of $R$-algebras into the filtered colimit of Step 2, whose stages $P_f$, transition maps $\\rho_{fg}$ and coprojections $\\kappa_f$ are $R$-algebras and $R$-algebra maps. By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] there are $f\\in S$ and a homomorphism of $R$-algebras $g':C\\to P_f$ with $\\kappa_f\\circ g'=\\varphi\\circ g$ (this is Stacks, Algebra, Lemma 00QO, (1) implies (3)).",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243: S^{-1}M = colim_{f in S} M_f, here M = P) and Lemma Tag 00QO (lemma-characterize-finite-presentation, line 31886, (1) implies (3))"
-   }
-  },
-  {
-   "text": "(Conclusion.) Put $T=P_f$, smooth over $R$ by Step 1, with the $R$-algebra maps $g':C\\to T$ and $\\varphi^{-1}\\circ\\kappa_f:T\\to D$. Then $(\\varphi^{-1}\\circ\\kappa_f)\\circ g'=\\varphi^{-1}\\circ\\varphi\\circ g=g$, so $g$ factors as $C\\to T\\to D$ with $T$ a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
-   "uses": [
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ, Ad (item-eighth-resolve), lines 3062-3074 ('D' is essentially smooth ... Hence D'[t_1,...,t_d] is a filtered colimit of smooth ... algebras and B (x) ... factors through one of these')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-essentially-smooth-ring-map",
   "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-localization-colimit-principal-localizations",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+  "lem-factors-through-localization-of-smooth",
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ, Ad (item-eighth-resolve), lines 3062-3074; the colimit and factorization steps are Algebra, Lemmas Tag 00CR and Tag 00QO (literature/stacks-project/algebra.tex)"
+  "place": "Tag 07FJ; principal-stage descent split off and smoothness discharged by Mathlib"
  },
  "mathlib_searches": [
   {
@@ -162,5 +123,15 @@
   "group": "G1",
   "result": "pass",
   "note": "R,C,D CommRing + Algebra R C/D; FinitePresentation R C; hD : Algebra.EssentiallySmooth R D (recorded); g : C →ₐ[R] D; ∃ T CommRing/Algebra R T, Algebra.Smooth R T ∧ ∃ f k, k.comp f = g; T in max universe holds since P_s lives in max u w; #check resolves Algebra.EssentiallySmooth/Algebra.Smooth"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T113947-L-820843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
