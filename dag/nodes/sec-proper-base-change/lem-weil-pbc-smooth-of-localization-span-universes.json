@@ -21,20 +21,23 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite principal-cover smoothness criterion, with the algebra structures transported so that R and A may lie in different universes.",
-   "uses": [
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": false
+   "text": "Apply Mathlib Algebra.FinitePresentation.of_span_eq_top_target to s and hs, using the finitePresentation field of each smooth localization. This criterion is already universe-polymorphic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "By Mathlib Algebra.smoothLocus_eq_univ_iff, formal smoothness is equivalent to the smooth locus being all of Spec A. Rewrite the unit-ideal spanning hypothesis as the union of the basic opens being all of Spec A, using PrimeSpectrum.iSup_basicOpen_eq_top_iff'. Each basic open is contained in the smooth locus by Algebra.basicOpen_subset_smoothLocus_iff and the formallySmooth field of the corresponding hypothesis. Combine formal smoothness with the finite presentation obtained in the first step.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-smooth-ring-map"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "mathlib",
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-12",
   "document": "Mathlib/RingTheory/RingHom/Smooth.lean",
-  "place": "RingHom.Smooth.ofLocalizationSpanTarget"
+  "place": "RingHom.Smooth.ofLocalizationSpanTarget: its finite-presentation and smooth-locus argument reused directly with separate universes"
  },
  "mathlib_searches": [
   {
@@ -94,10 +97,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T113946-L-820474",
-  "kind": "interface",
+  "landing": "20261012T160145-L-2567611",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
