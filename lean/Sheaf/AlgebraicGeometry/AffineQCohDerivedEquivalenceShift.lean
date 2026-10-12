@@ -1,9 +1,23 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under the Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group B3
+-/
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+
+/-! # Affine derived equivalence on shifts of the unit
+
+Source: Stacks Project, Derived Categories of Schemes, Tag 06Z0.
+(blueprint: new-affine-qcoh-derived-equivalence-shift).
+
+The termwise tilde comparison identifies the image of the degree-zero free
+rank-one module with the structure sheaf. Shift compatibility then gives the
+same identification for every integer shift.
+-/
 
 @[expose] public section
 
@@ -38,6 +52,21 @@ theorem affineQCohDerivedEquivalence_shift (A : Type u) [CommRing A]
           ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) 0).obj
             (SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)))⟦k⟧) := by
-  sorry
+  obtain ⟨comparison⟩ := hcomp
+  obtain ⟨commShift, _⟩ := htri
+  let F := e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι
+  let M := ModuleCat.of A A
+  let S := SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)
+  let : (tilde.functor (.of A)).PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
+  let baseIso : F.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj M) ≅
+      (DerivedCategory.singleFunctor S 0).obj (SheafOfModules.unit
+        (moduleRings (Spec (.of A)).toRingedSpace)) :=
+    comparison.app ((HomologicalComplex.single (ModuleCat.{u} A) (.up ℤ) 0).obj M) ≪≫
+      DerivedCategory.Q.mapIso
+        ((HomologicalComplex.singleMapHomologicalComplex
+          (tilde.functor (.of A)) (.up ℤ) 0).app M) ≪≫
+      (DerivedCategory.singleFunctor S 0).mapIso (tildeSelf (R := .of A))
+  intro k
+  exact ⟨(F.commShiftIso k).app _ ≪≫ (shiftFunctor _ k).mapIso baseIso⟩
 
 end AlgebraicGeometry
