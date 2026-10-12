@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-zariski-etale-resolution-cocycle-equivalences",
+ "kind": "statement",
+ "title": "Termwise additive equivalences for resolution cocycles",
+ "statement": "For the displayed Zariski and étale injective resolutions and object, there exist the two additive equivalences appearing in the cocycle-homology comparison.",
+ "stmt_deps": [
+  "lem-weil-pbc-zariski-etale-resolution-cocycle-homology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "sites-cohomology.tex Section 01FT, equation-cohomology-object-site; derived.tex Tag 06XR (1), lemma-compute-ext-resolutions. The corresponding original .tex sections were fetched into the sandbox scratchpad and read."
+ },
+ "proof": [
+  {
+   "text": "This is the corresponding termwise Ext and homology argument from the source proof, isolated as an intermediate component.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "sites-cohomology.tex Section 01FT, equation-cohomology-object-site; derived.tex Tag 06XR (1), lemma-compute-ext-resolutions. The corresponding original .tex sections were fetched into the sandbox scratchpad and read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext computed by cocycles in an injective resolution and section homology naturality",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext cocycle classes evaluation on representable sheaf gives homology of section complex natural for chain maps",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CochainComplex.HomComplex.leftHomologyData_H_coe, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass. Ext cocycle APIs found, no complete object-section comparison.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extMk",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.InjectiveResolution.extMk_zero, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.extMk_eq_zero_iff, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.neg_extMk, CategoryTheory.InjectiveResolution.sub_extMk. Ext cocycle APIs found, no complete object-section comparison.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk_surjective|extMk_comp_mk₀|homologyMap_eq",
+   "date": "2026-10-12",
+   "results": "23 hits: Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean, Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean. Ext cocycle APIs found, no complete object-section comparison.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiEtaleResolutionCocycleHomology",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-etale-resolution-cocycle-homology",
+   "place": "intermediate decomposition",
+   "via": [
+    "lem-weil-pbc-zariski-etale-resolution-cocycle-homology"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZariskiEtaleResolutionCocycleEquivalences",
+  "file": "lean/Sheaf/Paper/ZariskiEtaleResolutionCocycleEquivalences.lean",
+  "declaration": "zariski_etale_resolution_cocycle_equivalences",
+  "statement": "theorem zariski_etale_resolution_cocycle_equivalences\n    {X : Scheme.{u + 1}}\n    (i : X.Opens ⥤ X.Etale)\n    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)\n      X.smallEtaleTopology)\n    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt\n      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})]\n    [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution F)\n    (R : InjectiveResolution ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F))\n    (b : R.cocomplex ⟶\n      ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n        (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex)\n    (q : ℕ) (V : X.Opens) :\n    ∃ (e₁ : Sheaf.H' ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n        (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F) q V ≃+\n        ↑(HomologicalComplex.homology\n          (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙\n            (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex\n               (ComplexShape.up ℕ)).obj R.cocomplex) q))\n      (e₂ : Sheaf.H' F q (i.obj V) ≃+\n        ↑(HomologicalComplex.homology\n          (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙\n            (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex\n               (ComplexShape.up ℕ)).obj\n                (((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n                  (Opens.grothendieckTopology X.carrier)\n                    X.smallEtaleTopology).mapHomologicalComplex\n                       (ComplexShape.up ℕ)).obj I.cocomplex)) q)), True",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T184326-L-4012997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T184326-L-4012997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

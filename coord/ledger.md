@@ -9018,3 +9018,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/N3/Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel (stage 3; reviewer PASS; first push; landing 20261012T184325-L-4012551 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/N3/Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion (stage 3; reviewer PASS; first push; landing 20261012T184326-L-4012727 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/N3/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionUnitKFlat (stage 3; reviewer PASS; first push; landing 20261012T184326-L-4012875 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/N3/Sheaf.Paper.ZariskiEtaleResolutionCocycleHomology (stage 3; reviewer PASS; first push; landing 20261012T184326-L-4012997 (interface); batch 20261012T184234; modules 3; new nodes 2)

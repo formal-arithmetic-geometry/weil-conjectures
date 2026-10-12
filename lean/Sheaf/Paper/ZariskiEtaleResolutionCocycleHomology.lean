@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+import Sheaf.Paper.ZariskiEtaleResolutionCocycleEquivalences
+import Sheaf.Paper.ZariskiEtaleResolutionCocycleCompatibility
 
 /-! # Cocycle comparisons for object cohomology
 
@@ -96,4 +98,7 @@ theorem zariski_etale_resolution_cocycle_homology
         (HomologicalComplex.homologyMap
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).map b) q).hom (e₁ (R.extMk a (q + 1) rfl ha)) := by sorry
+               (ComplexShape.up ℕ)).map b) q).hom (e₁ (R.extMk a (q + 1) rfl ha)) := by
+  obtain ⟨e₁, e₂, _⟩ := zariski_etale_resolution_cocycle_equivalences i hi F I R b q V
+  refine ⟨e₁, e₂, ?_⟩
+  exact zariski_etale_resolution_cocycle_compatibility i hi F I R b q V e₁ e₂
