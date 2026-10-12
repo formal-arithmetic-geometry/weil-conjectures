@@ -9,9 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.RingTheory.AnnihilatorLocalizationAway
+import Sheaf.AlgebraicGeometry.AnnihilatorAffineBasicOpen
 
 /-! # Scheme-theoretic support
 
@@ -27,6 +25,72 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem kernel_restrict
+    {X Z : Scheme.{u}} (i : Z ⟶ X) (U V : X.Opens) (h : V ≤ U)
+    (a : Γ(X, U)) (ha : a ∈ RingHom.ker (i.app U).hom) :
+    X.presheaf.map (homOfLE h).op a ∈ RingHom.ker (i.app V).hom := by
+  rw [RingHom.mem_ker] at ha ⊢
+  have hn := congrArg (fun f ↦ f a) (i.naturality (homOfLE h).op)
+  change (i.app V).hom (X.presheaf.map (homOfLE h).op a) =
+    Z.presheaf.map ((Opens.map i.base).map (homOfLE h)).op ((i.app U).hom a) at hn
+  rw [ha, map_zero] at hn
+  exact hn
+
+private theorem kernel_of_affine_restrictions
+    {X Z : Scheme.{u}} (i : Z ⟶ X) (U : X.Opens) (a : Γ(X, U))
+    (ha : ∀ (V : X.affineOpens) (h : V.1 ≤ U),
+      X.presheaf.map (homOfLE h).op a ∈ RingHom.ker (i.app V.1).hom) :
+    a ∈ RingHom.ker (i.app U).hom := by
+  rw [RingHom.mem_ker]
+  apply Z.IsSheaf.section_ext
+  intro x hx
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open hx U.isOpen
+  have hVU : V ≤ U := hVU
+  have hp : i ⁻¹ᵁ V ≤ i ⁻¹ᵁ U := (Opens.map i.base).map (homOfLE hVU) |>.le
+  refine ⟨i ⁻¹ᵁ V, hp, hxV, ?_⟩
+  rw [map_zero]
+  have hn := congrArg (fun f ↦ f a) (i.naturality (homOfLE hVU).op)
+  change (i.app V).hom (X.presheaf.map (homOfLE hVU).op a) =
+    Z.presheaf.map (homOfLE hp).op ((i.app U).hom a) at hn
+  rw [← hn]
+  exact RingHom.mem_ker.mp (ha ⟨V, hV⟩ hVU)
+
+private theorem annihilator_kernel_iff
+    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] (I : X.IdealSheafData)
+    (hI : ∀ U : X.affineOpens,
+      I.ideal U = Module.annihilator Γ(X, U.1) Γ(F, U.1))
+    (U : X.Opens) (a : Γ(X, U)) :
+    a ∈ RingHom.ker (I.subschemeι.app U).hom ↔
+      ∀ (V : X.Opens) (h : V ≤ U) (s : Γ(F, V)),
+        X.presheaf.map (homOfLE h).op a • s = 0 := by
+  constructor
+  · intro ha V h s
+    apply TopCat.Presheaf.IsSheaf.section_ext F.isSheaf
+    intro x hx
+    obtain ⟨_, ⟨W, hW, rfl⟩, hxW, hWV⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open hx V.isOpen
+    have hWV : W ≤ V := hWV
+    refine ⟨W, hWV, hxW, ?_⟩
+    have hk := kernel_restrict I.subschemeι U W (hWV.trans h) a ha
+    rw [I.ker_subschemeι_app ⟨W, hW⟩, hI] at hk
+    change F.val.map (homOfLE hWV).op (_ • s) = F.val.map (homOfLE hWV).op 0
+    rw [map_zero, F.val.map_smul]
+    change X.presheaf.map (homOfLE hWV).op
+      (X.presheaf.map (homOfLE h).op a) • F.presheaf.map (homOfLE hWV).op s = 0
+    have hr : X.presheaf.map (homOfLE hWV).op
+        (X.presheaf.map (homOfLE h).op a) =
+        X.presheaf.map (homOfLE (hWV.trans h)).op a := by
+      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+      rfl
+    rw [hr]
+    exact Module.mem_annihilator.mp hk _
+  · intro ha
+    apply kernel_of_affine_restrictions I.subschemeι U a
+    intro V h
+    rw [I.ker_subschemeι_app V, hI]
+    exact Module.mem_annihilator.mpr (ha V.1 h)
 
 /-- The annihilator ideal sheaf cuts out the scheme-theoretic support of a finite type
 quasi-coherent module. Its sections on an arbitrary open are the kernel of the closed
@@ -84,6 +148,37 @@ theorem schemeTheoreticSupport
           (s : F.presheaf.obj (Opposite.op V)), a • s = 0) →
         ∀ (U : X.Opens),
           RingHom.ker (i'.app U).hom ≤ RingHom.ker (I.subschemeι.app U).hom) := by
-  sorry
+  let I : X.IdealSheafData :=
+    { ideal := fun U ↦ Module.annihilator Γ(X, U.1) Γ(F, U.1)
+      map_ideal_basicOpen := Modules.annihilator_affine_basicOpen X F }
+  have hI (U : X.affineOpens) :
+      I.ideal U = Module.annihilator Γ(X, U.1) Γ(F, U.1) := rfl
+  have hker := annihilator_kernel_iff X F I hI
+  refine ⟨I, hI, inferInstance, I.ker_subschemeι, hker, ?_, ?_, ?_, ?_⟩
+  · intro U
+    apply IsPullback.flip
+    apply IsOpenImmersion.isPullback
+    · exact (I.subschemeCover_map_subschemeι U).trans (I.glueDataObjι_ι U)
+    · rw [IsAffineOpen.opensRange_fromSpec, I.opensRange_subschemeCover_map]
+  · rw [I.range_subschemeι]
+    ext x
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, _⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+    have hloc := (Modules.finite_type_module_support_closed X F).2.2.1 ⟨U, hU⟩
+    rw [hU.fromSpec_image_zeroLocus] at hloc
+    have hs := I.coe_support_inter ⟨U, hU⟩
+    rw [hI] at hs
+    have he := hs.trans hloc.symm
+    have hx := congrArg (fun S : Set X ↦ x ∈ S) he
+    simpa only [Set.mem_inter_iff, hxU, and_true, Set.mem_ofPred_eq] using hx.to_iff
+  · intro V a s
+    have ha := (hker V a.1).mp a.2 V le_rfl s
+    change a.1 • s = 0
+    simpa using ha
+  · intro Z' i' _ hkill U a ha
+    apply (hker U a).mpr
+    intro V h s
+    exact hkill V ⟨X.presheaf.map (homOfLE h).op a,
+      kernel_restrict i' U V h a ha⟩ s
 
 end AlgebraicGeometry.Scheme

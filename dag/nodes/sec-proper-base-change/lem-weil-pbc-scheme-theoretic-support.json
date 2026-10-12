@@ -31,115 +31,55 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 ($\\operatorname{Ann}(\\mathcal F)$ is a sheaf of ideals of $\\mathcal O_X$).* For open $U$, $\\operatorname{Ann}(\\mathcal F)(U)$ is an ideal of $\\mathcal O_X(U)$: if $a,b$ lie in it and $c\\in\\mathcal O_X(U)$, then $(a+b)|_Vs=a|_Vs+b|_Vs=0$ and $(ca)|_Vs=c|_V(a|_Vs)=0$ for every open $V\\subseteq U$ and $s\\in\\mathcal F(V)$, since $\\mathcal F(V)$ is an $\\mathcal O_X(V)$-module and restriction is a ring map [def-weil-sheaf-of-modules-category]. It is stable under restriction: for $W\\subseteq U$ and $V\\subseteq W$, $(a|_W)|_V=a|_V$. It is a sheaf, i.e. membership is local: let $a\\in\\mathcal O_X(U)$ and $U=\\bigcup_jU_j$ an open covering with $a|_{U_j}\\in\\operatorname{Ann}(\\mathcal F)(U_j)$ for all $j$; for $V\\subseteq U$ open and $s\\in\\mathcal F(V)$, $(a|_Vs)|_{V\\cap U_j}=a|_{V\\cap U_j}\\,s|_{V\\cap U_j}=0$ for all $j$, so $a|_Vs=0$ by the sheaf property of $\\mathcal F$, and $a\\in\\operatorname{Ann}(\\mathcal F)(U)$. As $\\mathcal O_X$ is a sheaf, the subpresheaf $\\operatorname{Ann}(\\mathcal F)$ with this locality is a subsheaf of ideals.",
+   "text": "Build IdealSheafData explicitly with ideal(U)=Ann_{O_X(U)}F(U), its basic-open compatibility proved by lem-weil-pbc-annihilator-affine-basic-open. Mathlib constructs its subscheme, proves its inclusion is a closed immersion and its kernel ideal sheaf is I. The subscheme cover has preimage U as its range and the required composite with the inclusion; IsOpenImmersion.isPullback gives the quotient chart square.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-annihilator-affine-basic-open",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 05JU and its proof (the annihilator ideal sheaf is implicit there; this step writes out that the rule is a sheaf of ideals)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (sections on affine opens: $\\operatorname{Ann}(\\mathcal F)(W)=\\operatorname{Ann}_{\\mathcal O_X(W)}(\\mathcal F(W))$).* Let $W\\subseteq X$ be an affine open, $A=\\mathcal O_X(W)$, $M=\\mathcal F(W)$. The inclusion $\\subseteq$ is the case $V=W$ of the definition. Conversely let $a\\in\\operatorname{Ann}_A(M)$, $V\\subseteq W$ open and $s\\in\\mathcal F(V)$. Under $W\\cong\\operatorname{Spec}A$ [lem-weil-pbc-affine-open-spec-points] the principal opens $W_g$, $g\\in A$, correspond to the $D(g)$ and form a basis of the topology of $W$ [def-weil-affine-spectrum]; so $V$ is covered by principal opens $W_g\\subseteq V$. Each $W_g$ is an affine open with $\\mathcal O_X(W)\\to\\mathcal O_X(W_g)$ a localization $A\\to A_g$ [lem-weil-pbc-affine-ideals-closed-subscheme](0), and since $\\mathcal F$ is quasi-coherent the map $M\\otimes_AA_g\\to\\mathcal F(W_g)$, $m\\otimes r\\mapsto r\\,m|_{W_g}$, is bijective [lem-weil-pbc-quasi-coherent-affine-section-base-change] (with $U'=W$, $U=W_g$). So every element of $\\mathcal F(W_g)$ is $\\sum_kr_k\\,m_k|_{W_g}$, and $a|_{W_g}\\sum_kr_km_k|_{W_g}=\\sum_kr_k(am_k)|_{W_g}=0$ as $am_k=0$. In particular $a|_{W_g}\\,s|_{W_g}=(a|_Vs)|_{W_g}=0$ for every $W_g\\subseteq V$ in the covering, hence $a|_Vs=0$ by the sheaf property of $\\mathcal F$. So $a\\in\\operatorname{Ann}(\\mathcal F)(W)$. (No finiteness is used here.)",
+   "text": "For any morphism i and U, restriction preserves membership in ker(i.app U) by naturality. Conversely a section whose restriction lies in the kernel on every affine open contained in U is in the kernel on U: for a point of i^{-1}(U), choose an affine neighborhood V of its image inside U and use the sheaf section_ext theorem on the preimages. Specialize to I.subscheme inclusion. A kernel section restricted to any affine W kills F(W), by Mathlib ker_subschemeι_app and the defining equality of I. For an arbitrary smaller V, cover V by such affine W and apply the sheaf property of F to the products, using semilinearity of restriction. Conversely the all-smaller-opens annihilation rule implies annihilation on each affine W, hence membership in its kernel, and the previous local kernel criterion proves membership globally.",
    "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sbc-closed-immersion-ideal-sheaf",
     "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-ideals-closed-subscheme",
-    "lem-weil-pbc-quasi-coherent-affine-section-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 05JU (1) and its proof ('the characterization in (1)'): agent-written verification that the sheaf Ann(F) has the affine-local sections Ann_A(M) of (1)"
-   }
-  },
-  {
-   "text": "*Step 3 (compatibility with principal opens).* Let $W$, $A$, $M$ be as in Step 2 and $f\\in A$. Since $\\mathcal F$ is quasi-coherent of finite type, $M$ is a finitely generated $A$-module [lem-weil-pbc-quasi-coherent-finite-type-affine](c). By [lem-weil-pbc-affine-ideals-closed-subscheme](0) $W_f$ is affine and the restriction $A\\to\\mathcal O_X(W_f)$ is a localization at $f$, so $\\mathcal O_X(W_f)=A_f$; and by [lem-weil-pbc-quasi-coherent-affine-section-base-change] $\\mathcal F(W_f)\\cong M\\otimes_AA_f\\cong M_f$ [def-weil-pbc-module-localization-away] as $A_f$-modules, $m|_{W_f}\\leftrightarrow m/1$ ($M\\otimes_AA_f\\to M_f$, $m\\otimes(r/f^e)\\mapsto rm/f^e$, is the standard isomorphism). An isomorphism of $A_f$-modules preserves annihilators, so Step 2 for $W_f$ gives $\\operatorname{Ann}(\\mathcal F)(W_f)=\\operatorname{Ann}_{A_f}(M_f)$, and [lem-weil-pbc-annihilator-localization-finite] gives $\\operatorname{Ann}_{A_f}(M_f)=\\operatorname{Ann}_A(M)A_f$, the ideal generated by the image of $\\operatorname{Ann}_A(M)=\\operatorname{Ann}(\\mathcal F)(W)$ (Step 2) under the restriction $A\\to A_f$. This is the 'algebra fact' to which Stacks reduces the lemma.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-ideals-closed-subscheme",
-    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-    "def-weil-pbc-module-localization-away",
-    "lem-weil-pbc-annihilator-localization-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 05JU: 'This comes down to the following algebra fact: If A is a ring, f in A, and M is a finite A-module, then Ann_A(M)_f = Ann_{A_f}(M_f). We omit the proof.' (Algebra, Lemma 07T8)"
-   }
-  },
-  {
-   "text": "*Step 4 (the closed subscheme; clause (2)).* By Steps 2 and 3 the ideals $I_W=\\operatorname{Ann}_{\\mathcal O_X(W)}(\\mathcal F(W))=\\operatorname{Ann}(\\mathcal F)(W)$, $W$ affine open, satisfy the hypothesis of [lem-weil-pbc-affine-ideals-closed-subscheme](1). It gives a closed immersion $i:Z\\to X$ [def-weil-closed-immersion] whose ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf] has $\\mathcal I(W)=\\operatorname{Ann}_{\\mathcal O_X(W)}(\\mathcal F(W))$ for every affine open $W$, such that for every affine open $U=\\operatorname{Spec}A$, $i^{-1}(U)\\to U$ is isomorphic over $U$ to $\\operatorname{Spec}(A/\\operatorname{Ann}_A(\\mathcal F(U)))\\to\\operatorname{Spec}A$ (the second half of (2)), and with $i(Z)\\cap U$ corresponding to $V(\\operatorname{Ann}_A(\\mathcal F(U)))$.",
-   "uses": [
-    "lem-weil-pbc-affine-ideals-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 05JU ('it suffices to prove that the given rule produces a quasi-coherent sheaf of ideals, see Lemma 01QQ') and Lemma 01QQ (morphisms-lemma-closed-immersion-bijection-ideals)"
-   }
-  },
-  {
-   "text": "*Step 5 ($\\mathcal I=\\operatorname{Ann}(\\mathcal F)$; clause (1) and the first half of (2)).* $\\mathcal I$ and $\\operatorname{Ann}(\\mathcal F)$ (Step 1) are subsheaves of $\\mathcal O_X$ which, by Steps 2 and 4, have the same sections on every affine open. For any open $V$ and $a\\in\\mathcal O_X(V)$, the affine opens $W\\subseteq V$ cover $V$ [def-pc-scheme], and since both are sheaves (Step 1; $\\mathcal I$ is the kernel of a map of sheaves), $a$ lies in either one iff all $a|_W$ do; so $\\mathcal I(V)=\\operatorname{Ann}(\\mathcal F)(V)$. Hence $\\operatorname{Ann}(\\mathcal F)$ is the ideal sheaf of the closed immersion $i$, so it is a quasi-coherent sheaf of ideals [def-sbc-closed-immersion-ideal-sheaf], and $\\operatorname{Ann}(\\mathcal F)(U)=\\operatorname{Ann}_{\\mathcal O_X(U)}(\\mathcal F(U))$ on affine opens is Step 2. This proves (1) and that the ideal sheaf of $i$ is $\\operatorname{Ann}(\\mathcal F)$ in (2).",
-   "uses": [
-    "def-pc-scheme",
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 05JU (1) and Lemma 01QQ (3) => (2)"
-   }
-  },
-  {
-   "text": "*Step 6 (clause (3): $i(Z)=\\operatorname{Supp}(\\mathcal F)$).* Let $U$ be an affine open, $A=\\mathcal O_X(U)$, $M=\\mathcal F(U)$, identified with $\\operatorname{Spec}A$ as in [lem-weil-pbc-affine-open-spec-points]. By Step 4, $i(Z)\\cap U$ is the set of $x\\in U$ with $\\operatorname{Ann}_A(M)\\subseteq\\mathfrak p_x$; by [lem-weil-pbc-finite-type-module-support-closed], $\\operatorname{Supp}(\\mathcal F)\\cap U$ [def-weil-pbc-closed-subset-proper-over-base](2) is the same set. The affine opens cover $X$ [def-pc-scheme], so $i(Z)=\\operatorname{Supp}(\\mathcal F)$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "def-weil-pbc-closed-subset-proper-over-base",
     "def-pc-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 05JU (4) and its proof ('We have Supp = Z by Algebra, Lemma 00L2 (algebra-lemma-support-closed)')"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 7 (clauses (4) and (5)).* (4): for $a\\in\\operatorname{Ann}(\\mathcal F)(V)$ and $s\\in\\mathcal F(V)$, take the open $V\\subseteq V$ in the definition: $as=a|_Vs=0$. (5): let $\\mathcal I'$ be the ideal sheaf of a closed immersion $i':Z'\\to X$ [def-sbc-closed-immersion-ideal-sheaf] with $\\mathcal I'\\mathcal F=0$, i.e. $bs=0$ for every open $V$, $b\\in\\mathcal I'(V)$, $s\\in\\mathcal F(V)$. Let $a\\in\\mathcal I'(U)$; for $V\\subseteq U$ open, $a|_V\\in\\mathcal I'(V)$ ($\\mathcal I'$ is a subsheaf), so $a|_Vs=0$ for all $s\\in\\mathcal F(V)$; thus $a\\in\\operatorname{Ann}(\\mathcal F)(U)$ and $\\mathcal I'\\subseteq\\operatorname{Ann}(\\mathcal F)$. (This is the minimality of $Z$ in Stacks 05JU, stated in terms of ideals: $Z'$ with $\\mathcal I'\\mathcal F=0$ contains $Z$.)",
+   "text": "Mathlib range_subschemeι identifies the image with I.support. On each affine U, coe_support_inter identifies this support with the zero locus of I.ideal U. Rewrite using its annihilator description. The affine support formula of finite_type_module_support_closed and fromSpec_image_zeroLocus identify that zero locus with the nonzero-stalk locus intersected with U. Every point has an affine neighborhood, so the two loci agree globally.",
    "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf"
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-pc-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 05JU ('smallest closed subscheme') and the minimality argument in its proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use the arbitrary-open kernel criterion with V=U and identity restriction to prove annihilation. For any other closed immersion i prime whose kernel annihilates F, naturality sends its kernel sections into the kernel on every smaller open. Apply its assumed annihilation there, then the arbitrary-open kernel criterion for I to obtain the stated kernel inclusion. No change to any hypothesis or conclusion is needed.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-affine-spectrum",
+  "lem-weil-pbc-annihilator-affine-basic-open",
   "lem-weil-pbc-affine-ideals-closed-subscheme",
-  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-annihilator-localization-finite",
-  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
   "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-affine-open-spec-points",
   "def-pc-scheme",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "def-weil-pbc-closed-subset-proper-over-base"
+  "lem-weil-pbc-finite-type-module-support-closed"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 05JU (morphisms-lemma-scheme-theoretic-support) with its proof and Definition 05JV; the omitted algebra fact is Algebra, Lemma 07T8 (algebra.tex); Steps 1, 2, 5 and 7 write out what the proof leaves implicit for the annihilator-sheaf formulation of the node"
+  "place": "H1 Lean realization of Stacks 05JU and 05JV: explicit compatible affine ideals, Mathlib subscheme construction, sheaf locality for arbitrary opens, existing finite-type support formula. The localization calculation is proved in the new compatibility module; no new holes."
  },
  "mathlib_searches": [
   {
@@ -222,5 +162,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T152347-L-2313004",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

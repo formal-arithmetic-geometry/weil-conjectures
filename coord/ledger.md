@@ -8330,3 +8330,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:23 L: merged deliver/B2/Sheaf.AlgebraicGeometry.BaseChangeMapCech (stage 3; reviewer PASS; first push; landing 20261012T152346-L-2312572 (interface); batch 20261012T152345; modules 1; new nodes 0; change records: coord/changes/baseChangeMap_cech-imports.md)
 - 15:23 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ModuleCechComparison (stage 3; reviewer PASS; first push; landing 20261012T152346-L-2312722 (interface); batch 20261012T152345; modules 2; new nodes 1)
 - 15:23 L: merged deliver/F1/Sheaf.CategoryTheory.ColimitSites (stage 3; reviewer PASS; first push; landing 20261012T152346-L-2312871 (interface); batch 20261012T152345; modules 4; new nodes 3)
+- 15:23 L: merged deliver/H1/Sheaf.Paper.SchemeTheoreticSupport (stage 3; reviewer PASS; after a return; landing 20261012T152347-L-2313004 (interface); batch 20261012T152345; modules 2; new nodes 1)
