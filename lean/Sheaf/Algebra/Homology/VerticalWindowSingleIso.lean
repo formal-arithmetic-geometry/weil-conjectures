@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalWindow
 public import Mathlib.Algebra.Homology.Single
+import Sheaf.Algebra.Homology.VerticalWindowComponentNaturality
 
 /-!
 # The single-degree smart window as a functor
@@ -44,6 +45,15 @@ which gives the same homology formula without excluding the boundary case. -/
 theorem verticalWindow_single_iso (q : ℕ) :
     Nonempty (verticalWindow (C := C) (q : ℤ) (q + 1) ≅
       HomologicalComplex.homologyFunctor C (ComplexShape.up ℕ) q ⋙
-        HomologicalComplex.single C (ComplexShape.up ℕ) q) := by sorry
+        HomologicalComplex.single C (ComplexShape.up ℕ) q) := by
+  let F := verticalWindow (C := C) (q : ℤ) (q + 1)
+  let G := HomologicalComplex.homologyFunctor C (ComplexShape.up ℕ) q ⋙
+    HomologicalComplex.single C (ComplexShape.up ℕ) q
+  let app : ∀ K : CochainComplex C ℕ, F.obj K ≅ G.obj K := fun K ↦
+    verticalWindowComponentIso (C := C) q K
+  refine ⟨CategoryTheory.NatIso.ofComponents app ?_⟩
+  intro K L f
+  simpa [app, F, G, HomologicalComplex.homologyFunctor] using
+    verticalWindow_component_naturality (C := C) q f
 
 end HomologicalComplex₂
