@@ -80,20 +80,37 @@
  "statement": "theorem equivariantModulePresheaf_pointwise_of_diagonal\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N N' : Rep.{u + 1} (ZMod ℓ) P)\n    (η : c.equivariantModulePresheaf ℓ N ⟶ c.equivariantModulePresheaf ℓ N')\n    (f : N.V →ₗ[ZMod ℓ] N'.V)\n    (hf : letI := c.etale\n      ∀ (s : c.equivariantSections ℓ N (Etale.mk c.π)) (x : c.P),\n        (η.app (op (Etale.mk c.π)) s).val\n            ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x) =\n          f (s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))) :\n    ∀ (W : V.Etale) (s : c.equivariantSections ℓ N W) (x : c.sectionSpace W),\n      (η.app (op W) s).val x = f (s.val x)",
  "proof": [
   {
-   "text": "Proof: Fix W, s and a point x of T = W times_V c.P. Regard T as an etale\nobject over V, with its map to c.P. Let O be the open fibre of the locally\nconstant function s through x, and let n = s(x). The graph of O to c.P is a\nsection of the torsor over O. Trivialization by this graph identifies its total\nspace with copies of O indexed by P. Extend the constant diagonal value n to\nan equivariant section q over the torsor object by assigning rho(g)n on the\ng-th translate of the diagonal. Restrict q along O to c.P. It agrees with the\nrestriction of s along O to W: their graph values are n, and equivariance\ndetermines their values on every translate. Naturality of eta along these two\nmaps gives agreement of the transformed sections on O. Evaluate at the graph\npoint over x. Its restriction to W is the original point x, while its restriction\nto c.P is the diagonal at the second projection of x. The assumed diagonal\nformula for q at that point makes this transformed value f(n). Consequently\neta(s)(x)=f(s(x)). Since x was arbitrary the formula holds everywhere.\nNo choice of geometric points or lifts is needed. Empty W gives a vacuous\npointwise conclusion, and the trivial group and zero coefficients satisfy the\nsame calculation.",
+   "text": "Fix W, s and x. Use diagonalEvaluation_surjective at b0(x), where b0 is the second pullback projection, to choose a section q with diagonal value s(x). This witness is used only in a proof, not as definition data. Pull the locally constant diagonal values of q back along b0. Intersect its open fiber at s(x) with the open fiber of s at s(x), giving an open O containing x.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module",
+    "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Regard O as an etale object B over c.P and push it forward to the etale object U over V. Its maps a to W and b to the torsor define a graph k into U times_V c.P. Pullback hom_ext shows k followed by sectionRestriction(a) is O.ι and k followed by sectionRestriction(b) is b followed by the diagonal. The two restricted sections have equal graph values by the definition of O. Apply injectivity of diagonalEvaluation_bijective on B to identify these restrictions.",
+   "uses": [
+    "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of eta along a and b to this equality and evaluate on the graph at x. The resulting equality identifies eta_W(s)(x) with eta_torsor(q) at the diagonal of b0(x). Apply hf, then the defining equality for q, obtaining f(s(x)).",
    "uses": [
     "def-weil-pbc-torsor-associated-module"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-torsor-associated-module"
+  "def-weil-pbc-torsor-associated-module",
+  "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation",
+  "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DV5 (3), 0DV6 (context); elementary diagonal trivialization and naturality argument"
+  "place": "Tags 0DV5 (3), 0DV6; G1 Lean implementation using two open fibers and the proved injectivity of diagonalEvaluation_bijective"
  },
  "lean": {
   "existing": false,
@@ -122,10 +139,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T150951-L-2230130",
-  "kind": "interface",
+  "landing": "20261012T160135-L-2563695",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
