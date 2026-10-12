@@ -9942,3 +9942,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat (stage 3; reviewer PASS; first push; landing 20261012T225325-L-1811484 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.HomComplexSingleNatural (stage 3; reviewer PASS; first push; landing 20261012T225325-L-1811598 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechColimit (stage 3; reviewer PASS; first push; landing 20261012T225325-L-1811703 (interface); batch 20261012T225253; modules 2; new nodes 1)
+- 22:53 L: merged deliver/Q3/Sheaf.RingTheory.ResidueFormallySmoothTransport (stage 3; reviewer PASS; first push; landing 20261012T225326-L-1811801 (interface); batch 20261012T225253; modules 2; new nodes 1)

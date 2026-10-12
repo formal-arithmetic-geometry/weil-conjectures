@@ -2,6 +2,7 @@ module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.FormallySmoothAdicRingEquiv
 
 @[expose] public section
 
@@ -42,6 +43,9 @@ theorem residue_formallySmooth_transport
     letI : Algebra (IsLocalRing.ResidueField A₀) E :=
       ((algebraMap (IsLocalRing.ResidueField A) E).comp
         (IsLocalRing.ResidueField.map α)).toAlgebra
-    Algebra.FormallySmoothAdic (IsLocalRing.ResidueField A₀) E n := by sorry
+    Algebra.FormallySmoothAdic (IsLocalRing.ResidueField A₀) E n := by
+  let e : IsLocalRing.ResidueField A₀ ≃+* IsLocalRing.ResidueField A :=
+    RingEquiv.ofBijective (IsLocalRing.ResidueField.map α) hres
+  exact Algebra.FormallySmoothAdic.of_ringEquiv e n hfs
 
 end RingHom
