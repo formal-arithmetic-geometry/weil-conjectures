@@ -1,0 +1,124 @@
+{
+ "kind": "lemma",
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTower",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-derived-limit-tower-core"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemmas 13.34.3 and 13.34.6, Tags 0BK6, 0BK7 and 070M"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasLimit_of_equalizer_and_product|towerLimit|roosComplex",
+   "results": "4 Mathlib hits, including hasLimit_of_equalizer_and_product, used in the proof.",
+   "date": "2026-10-12",
+   "verdict": "used general construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective inverse system derived limit Roos triangle",
+   "results": "8 hits; inspected cm5b and DerivedCategory.triangleOfSESIso; no exact comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedLimit",
+   "results": "0 hits; identifier unknown to the Mathlib index. Local rg checked the project definition and users.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of a K-injective tower represents a derived limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "id": "lem-weil-derived-limit-tower-core-property",
+ "title": "Derived-limit property of a tower limit cone",
+ "statement": "Let A be an abelian category with exact countable products and enough injectives, with derived category D(A) [def-weil-abstract-derived-category] equipped with any chosen countable products and localization functor Q. Let I be a K-injective cochain complex of inverse systems indexed by the opposite of the natural numbers, let K be a sequence of objects of D(A), and let f_n: K_{n+1} → K_n be its transition maps. Given an isomorphism from I.asFunctor followed by Q to the tower (K,f), every limit cone c of I.asFunctor has Q(c.pt) as a derived limit of (K,f) [def-weil-derived-limit].",
+ "stmt_deps": [
+  "def-weil-derived-limit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The product and one-minus-shift triangle represent the derived limit, and the Roos comparison quasi-isomorphism identifies its shifted cone with the degreewise inverse-limit complex. Transport this identification across the representation isomorphism and the supplied limit cone.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-derived-limit",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-derived-limit-roos-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-ringed-space-product-kinjective",
+  "def-weil-derived-limit",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-derived-limit-roos-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerProperty.lean",
+  "place": "theorem derivedCategory_towerLimit_property"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerProperty",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerProperty.lean",
+  "declaration": "CategoryTheory.derivedCategory_towerLimit_property",
+  "statement": "theorem derivedCategory_towerLimit_property\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    (hP : HasCountableProducts (DerivedCategory A)) :\n    letI : HasCountableProducts (DerivedCategory A) := hP\n    ∀ (_ : EnoughInjectives A)\n      (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective]\n      (K : ℕ → DerivedCategory A) (f : ∀ n : ℕ, K (n + 1) ⟶ K n)\n      (_e : I.asFunctor ⋙ DerivedCategory.Q ≅ Functor.ofOpSequence f)\n      (c : Cone I.asFunctor), IsLimit c →\n      IsDerivedLimit f (DerivedCategory.Q.obj c.pt)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-89151",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184314-L-4008534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-89151",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184314-L-4008534",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered Lean files, DAG nodes, report, and change record agree; all delivered modules and direct importer compile cleanly, with only the documented property sorryAx."
+ }
+}

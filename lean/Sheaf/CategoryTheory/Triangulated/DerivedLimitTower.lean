@@ -1,16 +1,14 @@
 module
 
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Functor.OfSequence
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.Functor
 
-import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.Algebra.Homology.RoosComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerProperty
 
 @[expose] public section
 universe w v u
@@ -47,6 +45,11 @@ theorem derivedCategory_towerLimit_core
       (_e : I.asFunctor ⋙ DerivedCategory.Q ≅ Functor.ofOpSequence f),
       ∃ c : Cone I.asFunctor, Nonempty (IsLimit c) ∧
         IsDerivedLimit f (DerivedCategory.Q.obj c.pt) := by
-  sorry
+  let : HasCountableProducts (DerivedCategory A) := hP
+  intro hI I hKI K f e
+  have hc' := (derivedCategory_towerLimit_cone A hP) hI I
+  obtain ⟨c, hc⟩ := hc'
+  refine ⟨c, hc, ?_⟩
+  exact (derivedCategory_towerLimit_property A hP hI I K f e c hc.some)
 
 end CategoryTheory
