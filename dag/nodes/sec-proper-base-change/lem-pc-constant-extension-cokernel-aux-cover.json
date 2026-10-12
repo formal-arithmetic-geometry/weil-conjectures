@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-constant-extension-cokernel-aux-cover",
+ "kind": "statement",
+ "title": "Local cokernel presentation without finite source",
+ "statement": "An extension as in lem-pc-constant-extension-cokernel-presentation admits a local cokernel presentation, without the finite generation clause.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-constructible-constant",
+  "def-constructible-finite"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, Lemma 18.43.5 extension argument, pushout diagram"
+ },
+ "proof": [
+  {
+   "text": "Construct the finite free presentation and simultaneous local lifts described in the Stacks Tag 093U extension argument; the remaining sheaf-theoretic details are isolated in this intermediate statement.",
+   "uses": [
+    "lem-pc-constant-extension-cokernel-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-constant-extension-cokernel-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, Lemma 18.43.5 extension argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An extension of constant module sheaves locally has a cokernel presentation",
+   "results": "service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of constant module sheaves locally has a cokernel presentation",
+   "results": "no exact match; found unrelated quasicoherent presentations",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*presentation|presentation.*cokernel",
+   "results": "no exact match in project; Mathlib presentations unrelated",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantExtensionCokernelPresentation",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-constructible-flc-serre",
+   "place": "extension paragraph: finite free presentation, simultaneous local lifts, and the pushout diagram of Stacks Tag 093U",
+   "via": [
+    "lem-constructible-constant-extension-cover"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantExtensionCokernelAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_constantExtension_cokernelPresentation_aux_cover",
+  "statement": "theorem exists_constantExtension_cokernelPresentation_aux_cover {X : Scheme.{u}}\n    {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]\n    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}\n    (hS : S.ShortExact)\n    [S.X₁.IsConstant X.smallEtaleTopology] [S.X₃.IsConstant X.smallEtaleTopology]\n    [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)\n      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]\n    [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)\n      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i,\n      ∃ K L : ModuleCat.{u + 1} Λ, ∃ φ :\n        (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj K ⟶\n          (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj L,\n          Nonempty (cokernel φ ≅\n            (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj S.X₂)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638623",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053940-L-2638623",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

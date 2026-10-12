@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+
+import Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux
 import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift
 import WeilConjectures.ConstructibleSheaf.Biproduct
@@ -58,6 +60,8 @@ theorem exists_constantExtension_cokernelPresentation {X : Scheme.{u}}
         ∃ φ : (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj K ⟶
           (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj L,
           Nonempty (cokernel φ ≅ (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj S.X₂) := by
-  sorry
+  obtain ⟨𝒰, h𝒰⟩ := exists_constantExtension_cokernelPresentation_aux_cover hS
+  refine ⟨𝒰, fun i ↦ ?_⟩
+  exact finite_cokernelPresentation_of_local_presentation (h𝒰 i)
 
 end AlgebraicGeometry.Scheme
