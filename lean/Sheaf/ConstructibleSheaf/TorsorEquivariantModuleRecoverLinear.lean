@@ -6,6 +6,8 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
+import Sheaf.ConstructibleSheaf.TorsorEquivariantModuleRecoverLinearDiagonal
+import Sheaf.ConstructibleSheaf.TorsorEquivariantModulePointwiseFromDiagonal
 
 /-!
 # Linear recovery for equivariant section transformations
@@ -49,6 +51,14 @@ theorem equivariantModulePresheaf_recoverLinear
     (η : c.equivariantModulePresheaf ℓ N ⟶ c.equivariantModulePresheaf ℓ N') :
     ∃! f : N.V →ₗ[ZMod ℓ] N'.V,
       ∀ (W : V.Etale) (s : c.equivariantSections ℓ N W) (x : c.sectionSpace W),
-        (η.app (op W) s).val x = f (s.val x) := by sorry
+        (η.app (op W) s).val x = f (s.val x) := by
+  let := c.etale
+  obtain ⟨f, hf, huniq⟩ := c.equivariantModulePresheaf_recoverLinear_diagonal ℓ N N' η
+  refine ⟨f, c.equivariantModulePresheaf_pointwise_of_diagonal ℓ N N' η f hf, ?_⟩
+  intro g hg
+  apply huniq g
+  intro s x
+  exact hg (Etale.mk c.π) s
+    ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x)
 
 end AlgebraicGeometry.Scheme.GaloisCover

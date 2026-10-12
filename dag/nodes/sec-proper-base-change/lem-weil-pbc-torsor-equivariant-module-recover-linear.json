@@ -21,20 +21,28 @@
  ],
  "proof": [
   {
-   "text": "Proof: On the etale object c.P over V, identify the pulled-back torsor with the\ndisjoint union of its translates of the diagonal, using the torsor isomorphism.\nEvaluation on the diagonal identifies equivariant sections over this object\nwith locally constant N-valued functions on c.P. Connectedness and nonemptiness\nmake these functions constant, so evaluation identifies them with N. Conjugate\nthe component of the natural transformation by these linear identifications;\nthis gives a linear map f of values. For an arbitrary etale object W, pull back\nto W times_V c.P. The diagonal trivializes the torsor there. On open fibres of a\nlocally constant section its value is constant, and such a constant section is\nthe restriction of the section over c.P with that value. Naturality with respect\nto the map to c.P and to open inclusions therefore says that the transformation\nacts there by f. These open fibres cover, so this holds at every point and then\non W by the pulled-back etale cover. Uniqueness follows by evaluation on the\ndiagonal at any point of the nonempty c.P. This argument recovers linearity and\nthe pointwise formula only; equivariance of f is a separate consequence.",
+   "text": "Recover the unique linear map from eta on the diagonal of the torsor object.",
    "uses": [
-    "def-weil-pbc-torsor-associated-module"
+    "lem-weil-pbc-torsor-equivariant-module-recover-linear-diagonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the naturality/open-fibre propagation statement to obtain the pointwise formula on arbitrary etale objects. Any other map with this global formula has the diagonal formula at the torsor object, so diagonal uniqueness gives equality.",
+   "uses": [
+    "lem-weil-pbc-torsor-equivariant-module-pointwise-from-diagonal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-torsor-associated-module"
+  "lem-weil-pbc-torsor-equivariant-module-recover-linear-diagonal",
+  "lem-weil-pbc-torsor-equivariant-module-pointwise-from-diagonal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+  "place": "Tags 0DV5 (3) and 0DV6 (context); diagonal linear recovery and open-fibre naturality"
  },
  "mathlib_searches": [
   {
@@ -108,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9cf2f",
-  "group": "N1",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T135257-L-1679505",
+  "landing": "20261012T150951-L-2230130",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged fullness signature and implemented proof with its node, all three helper signatures and proofs in words with their nodes, and the earlier repairs; all four delivered modules and the sole direct importer compile cleanly, with only allowed axioms and expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

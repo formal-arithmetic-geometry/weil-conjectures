@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 (context); elementary diagonal trivialization and naturality argument"
+ },
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorEquivariantModuleRecoverLinear",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsor-equivariant-module-recover-linear",
+   "place": "intermediate step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations locally constant module sections connected space linear map",
+   "results": "Found CompHausLike.LocallyConstantModule.functorToPresheaves_map_app, CompHausLike.LocallyConstantModule.functor_map_val, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, LocallyConstant.mapₗ, LocallyConstant.congrRightₗ, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.LocallyConstantModule.functor_obj_val. No torsor-specific existence theorem; these are generic locally constant function maps and surjective linear-map lemmas.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective, LinearMap",
+   "results": "Found LinearMap.ne_zero_of_surjective, LinearMap.surjective_of_comp_eq_id, Function.Surjective.injective_linearMapComp_right, LinearMap.cancel_right, LinearMap.surjective_comp_left_of_exists_rightInverse, LinearMap.funLeft_injective_of_surjective, LinearMap.funLeft_surjective_of_injective, Submodule.comap_injective_of_surjective. No torsor-specific existence theorem; these are generic locally constant function maps and surjective linear-map lemmas.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*(diagonal|recover)|LocallyConstant.*(constant|linear)",
+   "results": "Found Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean. No torsor-specific existence theorem; these are generic locally constant function maps and surjective linear-map lemmas.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between locally constant sheaves on a connected space is determined by its action on constant sections",
+   "results": "Service unavailable: Internal Server Error. No mathematical search verdict; compensated by successful Lean Finder, Loogle, Mathlib grep and project-source grep.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivariant locally constant sections torsor diagonal evaluation bijective connected naturality open fibers",
+   "results": "Found CompHausLike.LocallyConstant.counitAppAppImage, CompHausLike.LocallyConstant.componentHom, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.presheaf_ext, Profinite.exists_locallyConstant_finite_aux, CompHausLike.LocallyConstant.incl_comap, Profinite.exists_locallyConstant_fin_two, Profinite.exists_locallyConstant. The compact-Hausdorff presheaf results have a different site; LocallyConstant.apply_eq_of_isPreconnected supplies the elementary constancy step only. No exact statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, IsPreconnected",
+   "results": "Found LocallyConstant.apply_eq_of_isPreconnected. The compact-Hausdorff presheaf results have a different site; LocallyConstant.apply_eq_of_isPreconnected supplies the elementary constancy step only. No exact statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-weil-pbc-torsor-equivariant-module-recover-linear-diagonal",
+ "title": "Unique linear recovery on the torsor diagonal",
+ "statement": "theorem equivariantModulePresheaf_recoverLinear_diagonal\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) [ConnectedSpace c.P]\n    (N N' : Rep.{u + 1} (ZMod ℓ) P)\n    (η : c.equivariantModulePresheaf ℓ N ⟶ c.equivariantModulePresheaf ℓ N') :\n    letI := c.etale\n    ∃! f : N.V →ₗ[ZMod ℓ] N'.V,\n      ∀ (s : c.equivariantSections ℓ N (Etale.mk c.π)) (x : c.P),\n        (η.app (op (Etale.mk c.π)) s).val\n            ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x) =\n          f (s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))",
+ "proof": [
+  {
+   "text": "Proof: The torsor isomorphism, with its factors interchanged, identifies\nc.P times_V c.P with copies of c.P indexed by g in P. On the g-th copy a section\nhas the value rho(g) applied to its value on the diagonal. Thus restriction to\nthe diagonal determines an equivariant section. Conversely any locally constant\nfunction t on c.P extends on the g-th copy with value rho(g)t. This extension\nis locally constant because the copies are open, and equivariance follows from\nrho(hg)=rho(h)rho(g). The restriction and extension operations are linear and\ninverse. Every locally constant function on the connected nonempty space c.P\nis constant, so diagonal evaluation gives a linear isomorphism from these sections\nto N, and likewise to N'. Conjugate the linear component eta at Etale.mk c.pi\nby these two isomorphisms to obtain f. At each point x the diagonal evaluations\nare the same constants, so the asserted formula holds for every s and x.\nFor uniqueness fix one x, which exists by connectedness. For every n, extend\nthe constant diagonal function with value n; evaluating the formulas for two\ncandidate maps on this section at x shows equality at n. Linear extensionality\nthen gives equality of the maps. The zero module and trivial group work with\nthe same construction; ell need not be prime or positive.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 (context); elementary diagonal trivialization and naturality argument"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorEquivariantModuleRecoverLinearDiagonal",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorEquivariantModuleRecoverLinearDiagonal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_recoverLinear_diagonal",
+  "statement": "theorem equivariantModulePresheaf_recoverLinear_diagonal\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) [ConnectedSpace c.P]\n    (N N' : Rep.{u + 1} (ZMod ℓ) P)\n    (η : c.equivariantModulePresheaf ℓ N ⟶ c.equivariantModulePresheaf ℓ N') :\n    letI := c.etale\n    ∃! f : N.V →ₗ[ZMod ℓ] N'.V,\n      ∀ (s : c.equivariantSections ℓ N (Etale.mk c.π)) (x : c.P),\n        (η.app (op (Etale.mk c.π)) s).val\n            ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x) =\n          f (s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T150951-L-2230130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T150951-L-2230130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
