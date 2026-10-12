@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.WeilSheaf.Finiteness
+public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 
 /-!
@@ -32,24 +33,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 section Iso
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {F G : WeilSheaf k₀ l X}
-
-/-- An isomorphism of Weil sheaves induces an isomorphism of the geometric stalks, compatible
-with the Frobenius. -/
-theorem nonempty_equiv_stalkAt_of_iso (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) :=
-  ⟨⟨LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
-    (LinearMap.ext fun v ↦ by
-      change stalkAtMap s m hs e.hom (stalkAtMap s m hs e.inv v) = v
-      rw [← stalkAtMap_comp, e.inv_hom_id, stalkAtMap_id])
-    (LinearMap.ext fun v ↦ by
-      change stalkAtMap s m hs e.inv (stalkAtMap s m hs e.hom v) = v
-      rw [← stalkAtMap_comp, e.hom_inv_id, stalkAtMap_id]),
-    fun v ↦ (congrFun (LinearEquiv.coe_ofLinearMap _ _ _ _) _).trans
-      ((stalkAtMap_frobenius s m hs e.hom v).trans
-        (congrArg _ (congrFun (LinearEquiv.coe_ofLinearMap _ _ _ _) _).symm))⟩⟩
 
 /-- `ι`-reality is invariant under isomorphism. -/
 theorem IsReal.of_iso {ι : PadicAlgCl l →+* ℂ} (e : F ≅ G) (h : F.IsReal ι) : G.IsReal ι :=

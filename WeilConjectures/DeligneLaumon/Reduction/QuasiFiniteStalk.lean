@@ -11,6 +11,8 @@ public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 
 /-!
@@ -124,34 +126,6 @@ theorem WeilSheaf.charpolyRev_compactlySupportedCohomology_zero_of_subsingleton 
 end QuasiFiniteCohomology
 
 section Helpers
-
-/-- Equivalent Frobenius modules have the same traces of powers of the Frobenius. -/
-theorem _root_.FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type} [Field K]
-    {M N : FrobeniusModule.{u + 1, 0} K} (e : M.Equiv N) (m : ℕ) :
-    LinearMap.trace K N.carrier (N.frobeniusEnd ^ m) =
-      LinearMap.trace K M.carrier (M.frobeniusEnd ^ m) := by
-  have hpow : ∀ n : ℕ, (e.toLinearEquiv.conj M.frobeniusEnd) ^ n =
-      e.toLinearEquiv.conj (M.frobeniusEnd ^ n) := by
-    intro n
-    induction n with
-    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
-    | succ n ih => rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
-        LinearEquiv.conj_comp]
-  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
-
-/-- Over an algebraically closed field, endomorphisms with the same characteristic polynomial
-have the same traces of powers. -/
-theorem _root_.LinearMap.trace_pow_eq_of_charpoly_eq {K V W : Type*} [Field K] [IsAlgClosed K]
-    [AddCommGroup V] [Module K V] [FiniteDimensional K V] [AddCommGroup W] [Module K W]
-    [FiniteDimensional K W] {A : Module.End K V} {B : Module.End K W}
-    (h : A.charpoly = B.charpoly) (m : ℕ) :
-    LinearMap.trace K V (A ^ m) = LinearMap.trace K W (B ^ m) := by
-  classical
-  rw [LinearMap.trace_eq_matrix_trace K (Module.finBasis K V),
-    LinearMap.trace_eq_matrix_trace K (Module.finBasis K W), ← LinearMap.toMatrix_pow,
-    ← LinearMap.toMatrix_pow, Matrix.trace_pow_eq_sum_pow_roots_charpoly,
-    Matrix.trace_pow_eq_sum_pow_roots_charpoly, LinearMap.charpoly_toMatrix,
-    LinearMap.charpoly_toMatrix, h]
 
 /-- The trace bookkeeping behind the Frobenius at a point of a quasi-finite direct image: if the
 traces of the powers of `H₁ ≃ H₂` are `d tr (A^{m / d})` (for `d ∣ m`) on the one hand and

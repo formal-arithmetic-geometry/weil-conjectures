@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.Complex.Basic
 public import Mathlib.RingTheory.PowerSeries.PiTopology
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.WellKnown
@@ -200,19 +201,6 @@ namespace PowerSeries
 
 variable {R : Type*} [CommRing R]
 
-/-- The logarithmic derivative of a finite product is the sum of the logarithmic derivatives of
-the factors: if `X fⱼ' = aⱼ fⱼ` for all `j`, then `X (∏ fⱼ)' = (∑ aⱼ) ∏ fⱼ`. -/
-theorem X_mul_derivative_prod {J : Type*} {f a : J → R⟦X⟧}
-    (hf : ∀ j, X * derivative R (f j) = a j * f j) (s : Finset J) :
-    X * derivative R (∏ j ∈ s, f j) = (∑ j ∈ s, a j) * ∏ j ∈ s, f j := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert j s hj ih =>
-    rw [Finset.prod_insert hj, Finset.sum_insert hj, Derivation.leibniz, smul_eq_mul,
-      smul_eq_mul]
-    linear_combination (f j) * ih + (∏ i ∈ s, f i) * hf j
-
 namespace WithPiTopology
 
 open scoped PowerSeries.WithPiTopology
@@ -241,8 +229,8 @@ theorem X_mul_derivative_tprod_of_X_pow_dvd_sub_one {J : Type*} {f a : J → R�
     exact (Finset.sum_subset (Finset.subset_union_left (s₂ := S n))
       fun j _ hj ↦ hz i le_rfl j hj).trans (Finset.sum_subset
         (Finset.subset_union_right (s₁ := S i)) fun j _ hj ↦ hz n hi j hj).symm
-  rw [coeff_X_mul_derivative, hP n le_rfl, ← coeff_X_mul_derivative, X_mul_derivative_prod hf,
-    coeff_mul, coeff_mul]
+  rw [coeff_X_mul_derivative, hP n le_rfl, ← coeff_X_mul_derivative,
+    X_mul_derivative_prod _ fun j _ ↦ hf j, coeff_mul, coeff_mul]
   refine Finset.sum_congr rfl fun p hp ↦ ?_
   have h := Finset.mem_antidiagonal.1 hp
   rw [hcoeff p.1 (by omega), hP p.2 (by omega)]

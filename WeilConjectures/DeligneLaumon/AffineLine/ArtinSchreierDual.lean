@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
 public import WeilConjectures.DeligneLaumon.AffineLine.GeometricSMul
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
+public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
@@ -42,13 +43,6 @@ noncomputable def dualIsoOfIso {F F' : WeilSheaf k₀ l X} (hF : F.IsLisse) (hF'
     (e : F ≅ F') : F.dual hF ≅ F'.dual hF' :=
   ObjectProperty.isoMk _
     (ProEtaleWeilSheaf.ihomMapIsoLeft ((ObjectProperty.ι _).mapIso e).symm _)
-
-variable (k₀ l X) in
-/-- The underlying `ℓ`-adic sheaf on `X̄` of a Weil sheaf, as a functor. -/
-noncomputable abbrev carrierFunctor :
-    WeilSheaf k₀ l X ⥤ ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ObjectProperty.ι (WeilSheaf.objectProperty k₀ l X) ⋙
-    Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
 
 end WeilSheaf
 

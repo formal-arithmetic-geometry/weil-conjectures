@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.HomologySequence
+public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.TraceFunction
 
 /-!
@@ -78,11 +79,6 @@ theorem isZero_homologySheaf_toShiftedComplex {a : ℤ} (ha : a ≠ -1) (G : Wei
       ((_root_.DerivedCategory.singleFunctor _ (-1)).obj G.obj) (-1)).1 inferInstance a h
   · exact (_root_.DerivedCategory.isLE_iff
       ((_root_.DerivedCategory.singleFunctor _ (-1)).obj G.obj) (-1)).1 inferInstance a h
-
-/-- Isomorphic Weil sheaves are simultaneously lisse. -/
-theorem IsLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (hF : F.IsLisse) : G.IsLisse :=
-  ProEtale.IsAdicLisseSheaf.of_iso
-    ((Endofunctor.IsoAlgebra.forget _).mapIso ((ObjectProperty.ι _).mapIso e)) hF
 
 /-- Isomorphic Weil sheaves have the same upper weight bounds. -/
 theorem HasWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} (e : F ≅ G)

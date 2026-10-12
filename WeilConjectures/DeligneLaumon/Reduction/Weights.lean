@@ -11,6 +11,7 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.HomologySequence
+public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.Triangle
 
 /-!
@@ -384,14 +385,6 @@ are retracts of those of the ambient complex (blueprint: `lem-zl-complex-retract
 theorem IsMixedOfWeightsAtMost.of_retract (h : Retract K L) (hL : L.IsMixedOfWeightsAtMost ι w) :
     K.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ (hL b).of_retract (h.map (homologySheaf b))
-
-/-- The cohomology sheaves of a shifted Weil complex: `𝓗ᵃ(K[n]) ≅ 𝓗ⁿ⁺ᵃK`. -/
-noncomputable def homologySheafShiftIso (K : WeilComplex k₀ l X) (n a a' : ℤ) (h : n + a = a') :
-    (homologySheaf a).obj (K⟦n⟧) ≅ (homologySheaf a').obj K :=
-  ObjectProperty.isoMk _
-    ((_root_.DerivedCategory.homologyFunctor _ a).mapIso
-        (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso n).app K) ≪≫
-      ((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso n a a' h).app K.obj)
 
 /-- A shift `K[n]` of a Weil complex mixed of weights at most `w` is mixed of weights at most
 `w + n`. -/

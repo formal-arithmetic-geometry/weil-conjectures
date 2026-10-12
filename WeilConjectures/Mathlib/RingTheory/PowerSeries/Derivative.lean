@@ -17,6 +17,7 @@ public import Mathlib.Tactic.LinearCombination
 
 - `PowerSeries.map_derivative` — the formal derivative commutes with the coefficientwise map
   along a ring homomorphism.
+- `PowerSeries.X_mul_derivative_prod` — the logarithmic derivative of a finite product.
 - `PowerSeries.neg_X_mul_derivative_prod_one_sub_C_mul_X` — the logarithmic derivative of
   `∏ (1 - c X)` is the generating series of the power sums `∑ cⁿ`.
 - `PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg` — if all power sums of a multiset of
@@ -34,6 +35,21 @@ theorem map_derivative (φ : R →+* S) (f : R⟦X⟧) :
     map φ (derivative R f) = derivative S (map φ f) := by
   ext n
   simp [coeff_derivative]
+
+/-- The logarithmic derivative of a finite product is the sum of the logarithmic derivatives of
+the factors: if `X fᵢ' = aᵢ fᵢ` for all `i ∈ s`, then `X (∏ fᵢ)' = (∑ aᵢ) ∏ fᵢ`. -/
+theorem X_mul_derivative_prod {R : Type*} [CommRing R] {ι : Type*} {f a : ι → R⟦X⟧}
+    (s : Finset ι) (h : ∀ i ∈ s, X * derivative R (f i) = a i * f i) :
+    X * derivative R (∏ i ∈ s, f i) = (∑ i ∈ s, a i) * ∏ i ∈ s, f i := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert b s hb ih =>
+    have hb' := h b (Finset.mem_insert_self b s)
+    have ihs := ih fun i hi ↦ h i (Finset.mem_insert_of_mem hi)
+    rw [Finset.prod_insert hb, Finset.sum_insert hb, Derivation.leibniz, smul_eq_mul,
+      smul_eq_mul]
+    linear_combination f b * ihs + (∏ i ∈ s, f i) * hb'
 
 /-- The logarithmic derivative of `P = ∏ (1 - c X)` is the generating series of the power sums:
 `-X P' = P ∑_{n ≥ 1} pₙ Xⁿ` with `pₙ = ∑ cⁿ`. -/

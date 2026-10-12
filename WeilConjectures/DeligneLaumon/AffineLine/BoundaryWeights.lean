@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.PointCountFiber
@@ -38,7 +39,6 @@ they are `O(q_y^{mw/2})`, and the eigenvalues of `F_y` have absolute value at mo
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.of_epi`: quotients preserve weight bounds.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_of_forall_norm_traceFunction_le`: a bound
   `O(q^{nw/2})` on the trace function gives weights at most `w`.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_upperStar_boundarySheaf`: the boundary
@@ -62,15 +62,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 namespace WeilSheaf
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- A quotient of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
-Frobenius-equivariant quotients. -/
-theorem HasWeightsAtMost.of_epi [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    {ι : PadicAlgCl l →+* ℂ} {w : ℝ} {F G : WeilSheaf k₀ l X}
-    (f : F ⟶ G) [Epi f] (h : WeilSheaf.HasWeightsAtMost ι F w) :
-    WeilSheaf.HasWeightsAtMost ι G w := fun x ↦
-  FrobeniusModule.HasWeightsAtMost.of_surjective _ (stalkAtMap_frobenius _ _ _ f)
-    (surjective_stalkAtMap _ _ _ f) (h x)
 
 /-- A closed point `x` of degree `d` lies under an `𝔽_{q^{md}}`-rational point for every `m`:
 its residue field embeds into the field with `q^{md}` elements. -/
