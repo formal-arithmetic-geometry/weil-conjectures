@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
 /-!
 
@@ -275,6 +276,7 @@ theorem monoidalClosed_uncurry {M N P : Ab.{u}} (f : N ⟶ (ihom M).obj P) (m : 
     (MonoidalClosed.uncurry f).hom (m ⊗ₜ[ℤ] n) = (f.hom n).hom m :=
   rfl
 
+instance : CategoryTheory.Abelian.HasFunctorialFlatResolution Ab.{u} := sorry
 
 section Ring
 
