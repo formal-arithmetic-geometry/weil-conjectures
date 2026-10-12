@@ -398,6 +398,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCover
@@ -1410,6 +1412,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.ChartTransition
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Top
 public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Lagrange
@@ -1497,6 +1500,7 @@ public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
+public import WeilConjectures.Mathlib.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
