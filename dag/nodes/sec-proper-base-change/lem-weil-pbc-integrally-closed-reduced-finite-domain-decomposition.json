@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-integrally-closed-reduced-finite-domain-decomposition",
+ "kind": "statement",
+ "title": "Integral closedness lifts the finite minimal-prime decomposition to domain factors",
+ "statement": "Let $R$ be a reduced commutative ring with finitely many minimal prime ideals. Suppose $R$ is integrally closed [def-weil-pbc-integral-closure] in its total ring of fractions $Q(R)$ [def-weil-pbc-module-localization]. Then for some integer $n\\ge 0$ there are commutative integral domains $A_i$ for $i\\in\\operatorname{Fin}(n)$ and a ring isomorphism $R\\simeq\\prod_i A_i$. No integral closedness of the factors is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 030C (lemma-characterize-reduced-ring-normal), proof, second and third paragraphs; https://stacks.math.columbia.edu/tag/030C"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "The total ring of fractions splits at the minimal primes. Let $\\mathfrak p_1,\\dots,\\mathfrak p_n$ be the finitely many minimal primes. In a reduced ring the nonzerodivisors are exactly the elements outside their union [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes], so every denominator becomes a unit in each $R_{\\mathfrak p_i}$. The localization map therefore gives $Q(R)\\to\\prod_iR_{\\mathfrak p_i}$. The standard localization-prime correspondence identifies the primes of $Q(R)$ with the primes of $R$ disjoint from the denominators; prime avoidance forces each such prime to be one of the $\\mathfrak p_i$. By [lem-weil-pbc-minimal-prime-reduced-localization-field] each $R_{\\mathfrak p_i}$ is a field. The localization $Q(R)$ is reduced: if $(r/s)^m=0$, then some nonzerodivisor $u$ kills $r^m$, hence $r^m=0$ and then $r=0$. Therefore the intersection of the finitely many maximal ideals of $Q(R)$ is its nilradical and is zero [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. The product-of-localizations decomposition [lem-weil-pbc-product-of-localizations-at-maximal] identifies the displayed map with an isomorphism. (If $n=0$, then $R=0$ and the assertion is the evident zero-ring case.)",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030C proof, using Lemmas Tags 00EW, 02LX, 00EU and the localization-prime correspondence"
+   }
+  },
+  {
+   "text": "The coordinate idempotents of the product of fields satisfy the monic polynomial T^2-T. Integral closedness in the total fractions lifts each uniquely to R. Injectivity of R into its total fractions gives orthogonality and sum one. Multiplication by these idempotents gives R isomorphic to the product of the image rings, with inverse summation. Each image ring embeds in its corresponding field, since all other coordinates are zero. Its identity has coordinate one, so it is nonzero and hence a domain. Enumerate the factors by Fin n and package them in CommRingCat. In the zero-ring case n=0 gives the empty product.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 030C (lemma-characterize-reduced-ring-normal), proof, second and third paragraphs; https://stacks.math.columbia.edu/tag/030C"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 030C (lemma-characterize-reduced-ring-normal), proof, second and third paragraphs; https://stacks.math.columbia.edu/tag/030C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A reduced commutative ring with finitely many minimal primes integrally closed in its total ring of fractions decomposes as a finite product of domains",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced ring integrally closed in its total fraction ring with finitely many minimal primes is isomorphic to a finite product of domains",
+   "results": "isDedekindRing_iff, isDedekindDomain_iff and unrelated prime-product lemmas; none states the decomposition",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes.*IsIntegrallyClosed|IsIntegrallyClosed.*minimalPrimes|IsReduced.*IsIntegrallyClosed",
+   "results": "0 hits. Direct source searches also found no domain-factor decomposition. Blueprint searches for finite product of domains and 030C returned zero blueprint nodes.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "proof, second paragraph: normality of strict henselization; domain-factor part of the reduced normality criterion, Tag 030C",
+   "via": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegrallyClosedReducedFiniteDomainDecomposition",
+  "file": "lean/Sheaf/RingTheory/IntegrallyClosedReducedFiniteDomainDecomposition.lean",
+  "declaration": "exists_finite_domain_factors_of_integrallyClosed_totalFractions",
+  "statement": "theorem exists_finite_domain_factors_of_integrallyClosed_totalFractions (R : Type u) [CommRing R] [IsReduced R] (hfinite : (minimalPrimes R).Finite) (hclosed : IsIntegrallyClosedIn R (FractionRing R)) : ∃ (n : ℕ) (A : Fin n → CommRingCat.{u}), (∀ i : Fin n, IsDomain (A i)) ∧ Nonempty (R ≃+* (∀ i : Fin n, A i))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085216-L-3938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085216-L-3938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
