@@ -5784,3 +5784,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:10 L: merged deliver/K1/Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions (stage 3; reviewer PASS; after a return; landing 20261012T010850-L-737348 (interface); modules 3; new nodes 2)
 - 01:10 L: returned deliver/V1/Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage (reviewer RETURN: (reviewer X-586d4, head 586d4aff1) B9: Correct blueprint provenance in both new node files dag/nodes/sec-proper-base-cha)
 - 01:14 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (reviewer X-de254, head de254d0c2) C1/C2: FlatCohomologyComparison.lean publicly adds `invImage_preservesFiniteLimits` a)
+- 01:14 L: returned deliver/K1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial (reviewer RETURN: (reviewer X-a9a96, head a9a96f81c) D1: `cohomologyPullbackComposition` and `cohomologyPullbackIdentity` are exact restat)
