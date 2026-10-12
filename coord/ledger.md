@@ -9567,3 +9567,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:22 L: merged deliver/H2/Sheaf.RingTheory.IsN1OfLocalCharacterization (stage 3; reviewer PASS; first push; landing 20261012T212207-L-1097300 (interface); batch 20261012T212205; modules 3; new nodes 2)
 - 21:22 L: merged deliver/J3/Sheaf.RingTheory.RegularLocalFibreFinrankComparison (stage 3; reviewer PASS; first push; landing 20261012T212208-L-1097450 (proof); batch 20261012T212205; modules 1; new nodes 0)
 - 21:22 L: merged deliver/K2/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (stage 3; reviewer PASS; first push; landing 20261012T212208-L-1097599 (interface); batch 20261012T212205; modules 2; new nodes 1)
+- 21:22 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift (stage 3; reviewer PASS; first push; landing 20261012T212209-L-1097756 (interface); batch 20261012T212205; modules 3; new nodes 2)
