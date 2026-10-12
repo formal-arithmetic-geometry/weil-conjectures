@@ -5887,3 +5887,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:10 L: merged deliver/P1/Sheaf.CategoryTheory.SiteCechComplex (stage 3; reviewer PASS; first push; landing 20261012T030943-L-1317572 (interface); modules 1; new nodes 0; change records: coord/changes/site-cech-complex-imports.md)
 - 03:10 L: merged deliver/Z2/lem-sc-boundary-cech-compatibility (stage 2; reviewer PASS; first push; Sheaf.Paper.BoundaryCechCompatibility AlgebraicGeometry.Scheme.Modules.boundary_cech_compatibility)
 - 03:12 L: merged deliver/V1/WeilConjectures.ConstructibleSheaf.LocallyConstantReduction (stage 3; reviewer PASS; after a return; landing 20261012T031106-L-1325090 (interface); modules 3; new nodes 2)
+- 03:13 L: merged deliver/Z2/def-nagata-relative-gluing-valid-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataRelativeGluingValidStage AlgebraicGeometry.nagataRelativeGluingValidStage; statement corrected (2 citers))

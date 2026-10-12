@@ -7,7 +7,7 @@
  },
  "kind": "definition",
  "title": "Cocycle-valid stage for the relative datum",
- "statement": "For the raw datum, form the finite list of required equalities of overlap\nopens, inverse identities, and triple-overlap cocycles. Attach to each the\nselected equality stage from the preceding constructions and define\n$\\lambda_{\\mathrm{rel}}(X/S)$ to be their common upper bound together with\n$\\lambda_{\\mathrm{raw}}(X/S)$. Let\n$\\mathsf R_{X,\\lambda_{\\mathrm{rel}}}$ be the raw datum transported to this\nstage.\nCanonical comparison maps identify the source and target of each later-stage\nequality. Transporting its witness preserves the equation, so the finite\nupper-bound list is well typed.",
+ "statement": "Fix a raw relative gluing datum $R$ of [def-nagata-relative-gluing-datum-descent], with its fixed binary upper bounds and auxiliary linear order of [def-nagata-directed-finite-upper-bound]. Use the canonical raw chart and overlap schemes over the raw base. Fix their canonical inclusion maps, characterized by their projections to the descended charts and by their over-base typing. Write $a_{jkl}$ and $b_{jkl}$ for the left and right inclusions and $g_{jkl}$ and $h_{jkl}$ for the forward and backward maps followed by the corresponding chart inclusions. Write $W_{jk}$ and $V_{jk}$ for the unions of the left and right raw overlap opens.\nForm the following finite lists. The open equations are $W_{jj}=T_j$, $W_{jk}=V_{kj}$, and $g_{jkl}^{-1}(W_{kz})=a_{jkl}^{-1}(W_{jz})$ for every chart triple and first overlap piece. The map equations are the two inverse identities on each piece, agreement of forward maps on intersections of left pieces, agreement of backward maps on intersections of right pieces, agreement of forward maps with backward maps of the reversed orientation on their common domain, the identity $g_{jjl}=a_{jjl}$, and the triple cocycle $g_{kzm} g_{jkl}=g_{jzn}$ on the fibre product expressing the common domain of these composites and the direct piece. All common domains are canonical fibre products over the charts in the category of schemes over the raw base.\nFor each listed open equation retain the compactness and limit-equality inputs of [def-nagata-qc-open-equality-stage] and apply that construction. For each listed parallel map equation retain the finite-presentation, affine-cover, generator and coefficient-equality choices of [def-nagata-morphism-equality-stage] and apply that construction; the finite coefficient witnesses are supplied by [lemma-nagata-filtered-colimit-finite-data]. Define $\\lambda_{\\mathrm{rel}}$ to be the selected finite upper bound of the raw stage and exactly these selected equality stages. Define $\\mathsf R_{X,\\lambda_{\\mathrm{rel}}}$ by canonical base change of all raw charts, overlap schemes, inclusions and both overlap-map directions, with inverse images of their raw opens. Functorial base change identifies the sources and targets of parallel maps and preserves their equations. The actual gluing axioms at this stage are the subsequent eventual-axioms lemma, not inputs to this definition.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-relative-gluing-valid-stage.md",
   "place": "node def-nagata-relative-gluing-valid-stage, order 360"
@@ -82,5 +82,68 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nrg2521 (reviewer sub-agent of L); spot-checked: Statement word for word as blueprint order 360 (B3 ok); stmt_deps = blueprint uses, the four cited definitions plus lemma-nagata-filtered-colimit-finite-data as source of the selected equality stages (tolerated as for siblings); blueprint.same_as null; split_report date 2026-10-10; no proof steps, empty citations; class (b): lambda_rel and the cocycle list defined in no other node on sheaf-dag; matches siblings def-nagata-glued-limit-comparison and def-nagata-separated-descent-stage. No repair needed; second reading by M1 missed no fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataRelativeGluingValidStage",
+  "declaration": "AlgebraicGeometry.nagataRelativeGluingValidStage",
+  "declarations": [
+   "AlgebraicGeometry.nagataRelativeRawChart",
+   "AlgebraicGeometry.nagataRelativeRawLeft",
+   "AlgebraicGeometry.nagataRelativeRawRight",
+   "AlgebraicGeometry.NagataRelativeRawInclusions",
+   "AlgebraicGeometry.NagataRelativeMapRelation",
+   "AlgebraicGeometry.NagataRelativeOpenRelation",
+   "AlgebraicGeometry.nagataRelativeForwardToChart",
+   "AlgebraicGeometry.nagataRelativeBackwardToChart",
+   "AlgebraicGeometry.nagataRelativeMapRelations",
+   "AlgebraicGeometry.nagataRelativeOpenRelations",
+   "AlgebraicGeometry.NagataRelativeOpenEqualityChoice",
+   "AlgebraicGeometry.NagataRelativeMapEqualityChoice",
+   "AlgebraicGeometry.nagataRelativeOpenEqualityStage",
+   "AlgebraicGeometry.nagataRelativeMapEqualityStage",
+   "AlgebraicGeometry.NagataRelativeGluingValidStageData",
+   "AlgebraicGeometry.nagataRelativeGluingEqualityStages",
+   "AlgebraicGeometry.nagataRelativeGluingValidStage",
+   "AlgebraicGeometry.nagataRelativeRawStage_le_validStage",
+   "AlgebraicGeometry.NagataRelativeGluingTransport",
+   "AlgebraicGeometry.nagataRelativeGluingAtStage",
+   "AlgebraicGeometry.nagataRelativeGluingValidDatum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataRelativeGluingValidStage.lean",
+  "statement": "def nagataRelativeGluingValidStage : I",
+  "branch": "sheaf-dag",
+  "by": "Z2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "Z2-vs",
+  "group": "Z2",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "Z2 stage 2",
+  "old_statement": "For the raw datum, form the finite list of required equalities of overlap\nopens, inverse identities, and triple-overlap cocycles. Attach to each the\nselected equality stage from the preceding constructions and define\n$\\lambda_{\\mathrm{rel}}(X/S)$ to be their common upper bound together with\n$\\lambda_{\\mathrm{raw}}(X/S)$. Let\n$\\mathsf R_{X,\\lambda_{\\mathrm{rel}}}$ be the raw datum transported to this\nstage.\nCanonical comparison maps identify the source and target of each later-stage\nequality. Transporting its witness preserves the equation, so the finite\nupper-bound list is well typed.",
+  "what": "The finite list and the source/target identifications were unnamed. On basic overlap pieces a triple composite is not defined on the whole first piece, and separately descended pieces need not agree before further descent. Specify the common pullback domains, piecewise agreement, opposite orientations and diagonal conditions needed to glue; retain the preceding equality constructions as actual choice data.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-relative-gluing-valid-stage.md",
+   "place": "node def-nagata-relative-gluing-valid-stage, order 360"
+  },
+  "citers": [
+   {
+    "id": "lemma-nagata-relative-gluing-axioms-eventually",
+    "holds": true,
+    "note": "Uses the same selected common stage and canonically transported datum; the explicit relation lists specify the formerly unnamed gluing conditions."
+   },
+   {
+    "id": "def-nagata-finite-presentation-descent",
+    "holds": true,
+    "note": "Uses the same selected common stage and canonically transported datum; the explicit relation lists specify the formerly unnamed gluing conditions."
+   }
+  ]
  }
 }
