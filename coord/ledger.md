@@ -8417,3 +8417,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:48 L: merged deliver/T3/Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonEqualOpen (stage 3; reviewer PASS; first push; landing 20261012T154836-L-2474647 (interface); batch 20261012T154824; modules 2; new nodes 1)
 - 15:48 L: merged deliver/U2/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (stage 3; reviewer PASS; first push; landing 20261012T154836-L-2474766 (proof); batch 20261012T154824; modules 1; new nodes 0)
 - 15:48 L: merged deliver/Y2/Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux (stage 3; reviewer PASS; first push; landing 20261012T154837-L-2474939 (interface); batch 20261012T154824; modules 2; new nodes 1)
+- 15:48 L: merged deliver/Y2/Sheaf.RingTheory.SingularIdealsOfAnnihilatorBound (stage 3; reviewer PASS; first push; landing 20261012T154837-L-2475057 (interface); batch 20261012T154824; modules 3; new nodes 2)

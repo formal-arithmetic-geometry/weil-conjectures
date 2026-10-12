@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.SingularIdealsRelativeBound
+import Sheaf.RingTheory.SingularIdealsAbsoluteBound
 
 /-! # From an annihilator bound to singular-ideal comparisons
 
@@ -54,6 +56,7 @@ theorem singularIdeals_of_annihilator_bound
     Ideal.map dB.toRingHom (singularIdeal R D) ≤
       @singularIdeal D B _ _ dB.toRingHom.toAlgebra ∧
     Ideal.map dB.toRingHom (singularIdeal R D) ≤ singularIdeal R B := by
-  sorry
+  exact ⟨singularIdeal_map_le_relative_of_annihilator_bound R D B dB hfp π hR hbound,
+    singularIdeal_map_le_absolute_of_annihilator_bound R D B dB hfp π hR hbound⟩
 
 end Algebra
