@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
@@ -36,8 +37,7 @@ of `i_*` on `Dᵇc(-, Λ)` without those hypotheses is constructed in
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.isTriangulated_boundedConstructibleIntegral`:
-  `Dᵇc(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`, provided constructible sheaves of
-  `Λ`-modules on `X` are closed under extensions.
+  `Dᵇc(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`.
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar_obj`: `Rf_*`
   preserves `Dᵇc(-, Λ)` (clause (1)).
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_of_rightDerivedLowerStar_obj`: `Ri_*`
@@ -73,6 +73,26 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   essentiallySmall_of_small_of_locallySmall _
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ}
+
+/-- An element `r` of the ideal `J` kills the reduction `K ⊗ᴸ (Λ ⧸ J)_X` of every object `K` of
+`D(X_ét, Λ)`: it kills `Λ ⧸ J`, hence the constant complex `(Λ ⧸ J)_X`, and tensoring with `K`
+is `Λ`-linear. -/
+lemma smul_id_reductionModIdeal {X : Scheme.{u}} {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
+    (K : 𝐃(X, Λ)) :
+    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
+  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
+    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
+      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
+    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
+      Ideal.Quotient.eq_zero_iff_mem]
+    exact J.mul_mem_right _ hr
+  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
+    ← (_root_.DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
+    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
+    Functor.map_zero, Functor.map_zero, Functor.map_zero]
 
 /-! ### Tor amplitude and closure properties -/
 
@@ -179,8 +199,6 @@ lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
         boundedConstructible_and_torAmplitudeIn_reductionModIdeal_shift _ m
           (hK.2.choose_spec.choose_spec n)⟩⟩
 
-variable [IsNoetherianRing Λ] [(constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions]
-
 open ZeroObject in
 /-- `Dᵇc(X, Λ)` contains the zero object.
 Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
@@ -196,8 +214,13 @@ lemma DerivedCategory.containsZero_boundedConstructibleIntegral (hϖ : ϖ ∈ no
         ((reductionModIdeal Λ X _).map_isZero (isZero_zero _)),
       torAmplitudeIn_reductionModIdeal_of_isZero (isZero_zero _) _ 0 0⟩⟩⟩
 
-/-- `Dᵇc(X, Λ)` is closed under extensions: the reduction of a distinguished triangle is
-distinguished, and the Tor amplitude interval is widened.
+variable [IsNoetherianRing Λ] [Finite (Λ ⧸ I)]
+
+/-- `Dᵇc(X, Λ)` is closed under extensions, for `Λ` noetherian and `Λ ⧸ I` finite: the reduction
+of a distinguished triangle modulo `Iⁿ⁺¹` is distinguished, its middle vertex is killed by `Iⁿ⁺¹`
+and `Λ ⧸ Iⁿ⁺¹` is finite, so it is bounded constructible
+(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`); and the
+Tor amplitude interval is widened.
 Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
@@ -210,15 +233,17 @@ lemma DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral
     ⟨(_root_.DerivedCategory.derivedComplete _ I).ext_of_isTriangulatedClosed₂ T hT hc₁ hc₃,
       min a c, max b d, fun n ↦ ?_⟩
   have hT' := (reductionModIdeal Λ X (I ^ (n + 1))).map_distinguished T hT
-  exact ⟨(DerivedCategory.boundedConstructible _ X).ext_of_isTriangulatedClosed₂ _ hT'
-      (h₁ n).1 (h₃ n).1, DerivedCategory.torAmplitudeIn_obj₂ _ hT' (h₁ n).2 (h₃ n).2⟩
+  have : Finite (Λ ⧸ I ^ (n + 1)) := Ideal.finite_quotient_pow (IsNoetherian.noetherian I) _
+  exact ⟨DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero hT' (h₁ n).1 (h₃ n).1
+      fun r hr ↦ smul_id_reductionModIdeal hr _,
+    DerivedCategory.torAmplitudeIn_obj₂ _ hT' (h₁ n).2 (h₃ n).2⟩
 
 /-- `Dᵇc(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`, for `I = (ϖ)` with `ϖ` a
-nonzerodivisor, `Λ` noetherian, and constructible sheaves of `Λ`-modules on `X` closed under
-extensions: derived complete objects form a triangulated subcategory
-(`DerivedCategory.isTriangulated_derivedComplete`), the reductions are triangulated functors,
-bounded constructible complexes then form a triangulated subcategory, and Tor amplitude is stable
-under shifts and, with the interval widened, under extensions.
+nonzerodivisor, `Λ` noetherian and `Λ ⧸ I` finite: derived complete objects form a triangulated
+subcategory (`DerivedCategory.isTriangulated_derivedComplete`), the reductions are triangulated
+functors whose values are killed by `Iⁿ⁺¹`, bounded constructible complexes are closed under such
+extensions, and Tor amplitude is stable under shifts and, with the interval widened, under
+extensions.
 Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :

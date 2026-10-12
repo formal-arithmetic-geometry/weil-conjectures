@@ -38,8 +38,7 @@ exceptional inverse image (`boundedConstructibleIntegralClosedUpperShriekIso`).
 
 The hypothesis `I = (ϖ)` is recorded as a `Fact`, and the triangulated structure on `Dᵇc(-, Λ)`
 (`AlgebraicGeometry.Etale.DerivedCategory.isTriangulated_boundedConstructibleIntegral`) uses that
-constructible sheaves of `Λ`-modules are closed under extensions, which is assumed on `X` and `U`
-as an instance hypothesis: the repository proves it for finite `Λ` only.
+`Λ` is noetherian and `Λ ⧸ I` is finite.
 -/
 
 @[expose] public section
@@ -179,8 +178,7 @@ lemma boundedConstructibleIntegralRightDerivedLowerStar_essImage_of_isZero
     ((DerivedCategory.boundedConstructibleIntegral I X).prop_of_iso e K.property)⟩,
     ⟨ObjectProperty.isoMk _ e.symm⟩⟩
 
-variable [(constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions]
-  [(constructibleSheaf (ModuleCat.{u + 1} Λ) U).IsClosedUnderExtensions]
+variable [Finite (Λ ⧸ I)]
 
 include hij in
 /-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`, the
@@ -332,8 +330,6 @@ section Comparison
 
 variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
   [Finite (Λ ⧸ I)] [Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})]
-  [(constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions]
-  [(constructibleSheaf (ModuleCat.{u + 1} Λ) U).IsClosedUnderExtensions]
   {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
   (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
