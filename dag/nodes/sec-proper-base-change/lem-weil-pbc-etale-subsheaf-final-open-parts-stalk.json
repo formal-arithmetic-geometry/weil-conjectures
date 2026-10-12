@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Represent a stalk element by a section over a pointed étale neighbourhood. The factorization property of W puts the image point in W. Conversely x in W lifts through its open immersion; W with this lift is a pointed étale neighbourhood, and the identity factorization yields a unique section whose image gives a stalk element.",
+   "text": "Use Mathlib Point.toPresheafFiber_jointly_surjective to represent a stalk element by a section over a pointed étale neighbourhood U. The emptiness clause of hW rules out failure of factorization for U, and the Unique clause gives its factorization through W. Evaluating its composition with the pointed lift puts x(default) in W. Conversely, if x(default) is in W, every point of Spec Ω has this same image because Spec Ω is a singleton. Thus its image is contained in the range of W.ι. Apply IsOpenImmersion.lift and lift_fac to obtain a pointed lift through W. The identity factorization of W gives a Unique section by hW, and Point.toPresheafFiber sends its distinguished section to a stalk element.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
     "def-weil-geometric-point"
@@ -35,7 +35,7 @@
    "elementary": false
   },
   {
-   "text": "Monicity into the terminal sheaf makes every section set a subsingleton. Any two stalk representatives become comparable in a common pointed refinement and their restrictions agree by subsingletonness, so the filtered colimit is a subsingleton. A nonempty subsingleton admits a Unique structure, and a Unique structure supplies an element.",
+   "text": "First any inhabited section set H(U) is Unique directly from hW: otherwise U fails to factor through W, and the emptiness clause contradicts its section. For two stalk elements apply Mathlib Point.toPresheafFiber_jointly_surjective₂ to obtain representatives za and zb on one pointed neighbourhood. Their equality follows from Unique H(U), and their images in the stalk are equal. This constructs Subsingleton of the stalk. A nonempty subsingleton admits a Unique structure by choosing its distinguished element and using Subsingleton.elim; conversely a Unique structure supplies its default element. The monicity assumption is unchanged, but the factorization hypothesis already supplies the uniqueness used by this proof.",
    "uses": [
     "def-weil-pbc-etale-sheaf-of-sets",
     "def-weil-pbc-geometric-stalks"
@@ -129,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T060742-L-2909850",
-  "kind": "interface",
+  "landing": "20261012T085257-L-22134",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
