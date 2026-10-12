@@ -66,6 +66,98 @@ private lemma resolutionDerivedIso_comp
   simp [Category.assoc, H, L]
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
+private lemma mapExtendIso_comp_hom
+    {A : Type uA} [Category.{vA} A] [Abelian A]
+    {B : Type uB} [Category.{vB} B] [Abelian B]
+    {C : Type uC} [Category.{vC} C] [Abelian C]
+    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
+    (K : CochainComplex A ℕ) :
+    (K.mapExtendIso ComplexShape.embeddingUpNat (F ⋙ G)).hom =
+      (G.mapHomologicalComplex _).map
+          (K.mapExtendIso ComplexShape.embeddingUpNat F).hom ≫
+        (((F.mapHomologicalComplex _).obj K).mapExtendIso
+          ComplexShape.embeddingUpNat G).hom := by
+  ext i
+  by_cases hi : ∃ j, ComplexShape.embeddingUpNat.f j = i
+  · obtain ⟨j, rfl⟩ := hi
+    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+    dsimp [HomologicalComplex.mapExtendIso, HomologicalComplex.Hom.isoOfComponents]
+    rw [HomologicalComplex.mapExtendX_hom_eq _ _ (ComplexShape.embeddingUpNat.r_f j),
+      HomologicalComplex.mapExtendX_hom_eq _ _ (ComplexShape.embeddingUpNat.r_f j),
+      HomologicalComplex.mapExtendX_hom_eq _ _ (ComplexShape.embeddingUpNat.r_f j)]
+    simp [eqToHom_map]
+  · apply IsZero.eq_of_tgt
+    exact HomologicalComplex.isZero_extend_X _ _ _ (by simpa using hi)
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma canonicalResolutionDerivedIso_comp
+    {A : Type uA} [Category.{vA} A] [Abelian A] [EnoughInjectives A]
+    {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B]
+    {C : Type uC} [Category.{vC} C] [Abelian C]
+    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C]
+    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits G]
+    (hFG : ∀ (J : A) [Injective J], G.rightAcyclic (F.obj J))
+    {X : A} (I : InjectiveResolution X) :
+    (F.rightDerivedFunctorPlusCompIsoOfRightAcyclic G hFG).hom.app
+        ((DerivedCategory.Plus.singleFunctor A 0).obj X) ≫
+        G.rightDerivedFunctorPlus.map (canonicalResolutionDerivedIso F I).hom =
+      (canonicalResolutionDerivedIso (F ⋙ G) I).hom ≫
+        DerivedCategory.Plus.Q.map
+          ((CochainComplex.plus C).isoMk
+            (X := G.mapCochainComplexPlus.obj
+              ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+                ComplexShape.embeddingUpNat, 0, inferInstance⟩)
+            (Y := ⟨(((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+              I.cocomplex).extend ComplexShape.embeddingUpNat, 0, inferInstance⟩)
+            (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).mapExtendIso
+              ComplexShape.embeddingUpNat G)).inv ≫
+        G.rightDerivedFunctorPlusUnit.app
+          ((HomotopyCategory.Plus.quotient B).obj
+            ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+              ComplexShape.embeddingUpNat, 0, inferInstance⟩) := by
+  let mF : F.mapCochainComplexPlus.obj ⟨I.cochainComplex, 0, inferInstance⟩ ≅
+      ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+        ComplexShape.embeddingUpNat, 0, inferInstance⟩ :=
+    (CochainComplex.plus B).isoMk
+    (I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat F)
+  let mG : G.mapCochainComplexPlus.obj
+      (⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+        ComplexShape.embeddingUpNat, 0, inferInstance⟩) ≅
+      ⟨(((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+        ComplexShape.embeddingUpNat, 0, inferInstance⟩ := (CochainComplex.plus C).isoMk
+    (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).mapExtendIso
+      ComplexShape.embeddingUpNat G)
+  let mFG : (F ⋙ G).mapCochainComplexPlus.obj ⟨I.cochainComplex, 0, inferInstance⟩ ≅
+      ⟨(((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+        ComplexShape.embeddingUpNat, 0, inferInstance⟩ := (CochainComplex.plus C).isoMk
+    (I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat (F ⋙ G))
+  have hm : mFG.hom = G.mapCochainComplexPlus.map mF.hom ≫ mG.hom := by
+    apply ObjectProperty.hom_ext
+    exact mapExtendIso_comp_hom F G I.cocomplex
+  have hn := G.rightDerivedFunctorPlusUnit.naturality
+    ((HomotopyCategory.Plus.quotient B).map mF.hom)
+  dsimp [canonicalResolutionDerivedIso]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc, resolutionDerivedIso_comp F G hFG I, Category.assoc]
+  change (resolutionDerivedIso (F ⋙ G) I).hom ≫
+      G.rightDerivedFunctorPlusUnit.app
+        ((HomotopyCategory.Plus.quotient B).obj
+          (F.mapCochainComplexPlus.obj ⟨I.cochainComplex, 0, inferInstance⟩)) ≫
+        G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map mF.hom) =
+    (resolutionDerivedIso (F ⋙ G) I).hom ≫ DerivedCategory.Plus.Q.map mFG.hom ≫
+      DerivedCategory.Plus.Q.map mG.inv ≫ G.rightDerivedFunctorPlusUnit.app
+        ((HomotopyCategory.Plus.quotient B).obj
+          ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+            ComplexShape.embeddingUpNat, 0, inferInstance⟩)
+  rw [hm]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc (DerivedCategory.Plus.Q.map mG.hom),
+    ← Functor.map_comp, Iso.hom_inv_id, Functor.map_id, Category.id_comp]
+  congr 1
+  exact hn.symm
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical resolution comparison transports the composite derived unit.
 Source: Stacks Project, Tags 015M and 015N, composition unit and abutment identification.
 (blueprint: lem-pc-canonical-resolution-composite-unit-comparison).
@@ -112,6 +204,36 @@ theorem resolution_composite_unit_transport
           (G.rightDerivedFunctorPlusUnit.app
             ((HomotopyCategory.Plus.quotient B).obj
               ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
-                ComplexShape.embeddingUpNat, 0, inferInstance⟩)) := by sorry
+                ComplexShape.embeddingUpNat, 0, inferInstance⟩)) := by
+  let mG : G.mapCochainComplexPlus.obj
+      ⟨((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+        ComplexShape.embeddingUpNat, 0, inferInstance⟩ ≅
+      ⟨(((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).extend
+        ComplexShape.embeddingUpNat, 0, inferInstance⟩ := (CochainComplex.plus C).isoMk
+    (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).mapExtendIso
+      ComplexShape.embeddingUpNat G)
+  have hn := DerivedCategory.Plus.homologyFunctorObjQIso_hom_naturality mG.inv n
+  have hc := canonicalResolutionDerivedIso_comp F G
+    (fun J _ q ↦ hFG J (q + 1) (by lia)) I
+  have hh := resolution_homology_transport (F ⋙ G) X I n
+  apply (cancel_epi (I.isoRightDerivedObj (F ⋙ G) n).hom).1
+  apply (cancel_epi
+    ((F ⋙ G).homologyRightDerivedFunctorPlusObjSingleFunctorIso X n).hom).1
+  simp only [Iso.hom_inv_id_assoc]
+  rw [← Category.assoc
+    ((F ⋙ G).homologyRightDerivedFunctorPlusObjSingleFunctorIso X n).hom
+    (I.isoRightDerivedObj (F ⋙ G) n).hom, hh]
+  simp only [Category.assoc]
+  dsimp [Functor.grothendieckSpectralObjectHBotTopIso,
+    Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← Functor.map_comp, hc]
+  simp only [Functor.map_comp]
+  erw [Iso.hom_inv_id_assoc]
+  rw [← Category.assoc
+    (DerivedCategory.Plus.homologyFunctorObjQIso _ n).hom]
+  erw [← hn]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rfl
 
 end CategoryTheory
