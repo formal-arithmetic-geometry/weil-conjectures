@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Proof of lem-weil-pbc-normal-extension-purely-inseparable-then-galois, steps 2-3; step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)): the N-2 property used there, through the criterion 032N; 032N proof, 'By Fields, Lemma 030M there exists a subextension M/M_insep/K such that M_insep/K is purely inseparable, and M/M_insep is separable'",
+   "via": [
+    "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+    "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fixed field of automorphisms is purely inseparable",
+ "statement": "Let $F$ and $E$ be fields and let $E/F$ be an algebraic normal extension [def-pc-field-extension, def-weil-algebraic-element]. Put $S=\\{x\\in E: \\sigma(x)=x\\text{ for every }F\\text{-algebra automorphism }\\sigma\\text{ of }E\\}$. Then $S/F$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension].",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 030M (lemma-normal-case, line 3666), part (2), with $E_{insep}=E^{\\mathrm{Aut}(E/F)}$ as in its proof ('Details omitted'); tag verified in literature/stacks-project/tags/tags (030M,fields-lemma-normal-case)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "For an element a of the fixed field, use minpoly.algHom_eq for its injective inclusion into E. Normal.splits' splits its minimal polynomial over E. Every root b is sigma(a) for an F-automorphism sigma, by minpoly.exists_algEquiv_of_root' [lem-weil-pbc-normal-extension-conjugate-by-automorphism], and so b=a. Conversely minpoly.aeval and minpoly.ne_zero show a is a root. The finite set of distinct roots is exactly {a}.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-conjugate-by-automorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Polynomial.natSepDegree_eq_of_splits identifies the separable degree with the cardinality of this singleton, namely one. Apply isPurelyInseparable_iff_natSepDegree_eq_one to all elements of the fixed field. These are proved Mathlib tools from FieldTheory.SeparableDegree and FieldTheory.PurelyInseparable.Basic, respectively.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-extension-conjugate-by-automorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 030M (2); single-root argument from 0BME (2), reduced using Mathlib separable-degree criteria; fully formalized by W2 second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixed field of all automorphisms of a normal algebraic extension is purely inseparable and the extension over the fixed field is Galois",
+   "results": "['IsGalois.of_fixedField_normal_subgroup', 'InfiniteGalois.normal_iff_isGalois', 'IsGalois.of_fixed_field', 'IsGalois.of_fixedField_eq_bot', 'IsGalois.fixingSubgroup_normal_of_isGalois', 'IsGaloisGroup.intermediateField', 'IsGaloisGroup.fixedPoints_eq_bot', 'IsGaloisGroup.fixedPoints']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*IsPurelyInseparable|isPurelyInseparable_fixedField|Normal.*fixedField|IsGalois.*fixedField",
+   "results": "['Mathlib/NumberTheory/NumberField/CMField.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Infinite.lean', 'Mathlib/FieldTheory/Galois/Infinite.lean']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField.fixedField",
+   "results": "[]",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed field of all automorphisms of a normal algebraic field extension is purely inseparable over the base and the extension over this fixed field is separable",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "natSepDegree.*root|root.*natSepDegree|isPurelyInseparable_iff_natSepDegree_eq_one",
+   "results": "Polynomial.natSepDegree_eq_of_splits (FieldTheory/SeparableDegree.lean:372); isPurelyInseparable_iff_natSepDegree_eq_one (FieldTheory/PurelyInseparable/Basic.lean:287); minpoly.exists_algEquiv_of_root' (FieldTheory/Normal/Basic.lean:279). Read and applied in the compiled proof.",
+   "date": "2026-10-13",
+   "verdict": "component proved by these tools; no exact statement duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.NormalExtensionFixedField",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.NormalExtensionFixedFieldPurelyInseparable",
+  "file": "lean/Sheaf/FieldTheory/NormalExtensionFixedFieldPurelyInseparable.lean",
+  "declaration": "Normal.fixedField_purelyInseparable",
+  "statement": "theorem fixedField_purelyInseparable\n    (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Normal F E] :\n    IsPurelyInseparable F (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T210030-L-954061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T210030-L-954061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

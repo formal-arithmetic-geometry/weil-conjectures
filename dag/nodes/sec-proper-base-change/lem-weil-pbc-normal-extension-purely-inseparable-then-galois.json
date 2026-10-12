@@ -32,92 +32,22 @@
  ],
  "proof": [
   {
-   "text": "Write $G$ for the group of $F$-algebra automorphisms of $E$ [def-pc-field-extension], so $E_{insep}=\\{x\\in E:\\sigma(x)=x\\ \\forall\\sigma\\in G\\}$. Each $\\sigma\\in G$ is a ring automorphism fixing (the image of) $F$, so $F\\subseteq E_{insep}$, and if $x,y\\in E_{insep}$ then $\\sigma(x\\pm y)=x\\pm y$, $\\sigma(xy)=xy$ and, for $x\\neq0$, $\\sigma(x^{-1})=\\sigma(x)^{-1}=x^{-1}$. Hence $E_{insep}$ is a subfield of $E$ containing $F$.",
+   "text": "Let $S=E^{\\mathrm{Aut}(E/F)}$, an intermediate field by its definition. The first component lemma gives pure inseparability of $S/F$; the second gives separability and normality of $E/S$. Combine these three assertions by conjunction introduction.",
    "uses": [
-    "def-pc-field-extension"
+    "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+    "lem-weil-pbc-normal-extension-fixed-field-separable-normal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma 030M (fields-lemma-normal-case, line 3666), proof: 'We set $E_{insep}=E^{\\mathrm{Aut}(E/F)}$. Details omitted' (definition of $E_{insep}$)"
-   }
-  },
-  {
-   "text": "Orbits are root sets. Let $\\alpha\\in E$, let $P\\in F[T]$ be its minimal polynomial over $F$ [def-weil-pbc-separable-algebraic-extension] ($\\alpha$ is algebraic over $F$ [def-weil-algebraic-element] since $E/F$ is algebraic), and let $S_\\alpha=\\{\\beta\\in E:P(\\beta)=0\\}$. Then $\\alpha\\in S_\\alpha$, and $S_\\alpha$ is finite, with at most $\\deg P$ elements, as $P\\neq0$ in $E[T]$. For $\\sigma\\in G$ and $\\beta\\in S_\\alpha$, applying $\\sigma$ to $P(\\beta)=0$ (the coefficients of $P$ lie in $F$ and are fixed) gives $P(\\sigma(\\beta))=0$, so $\\sigma$ maps $S_\\alpha$ injectively into itself, hence bijectively since $S_\\alpha$ is finite. Conversely, for every $\\beta\\in S_\\alpha$ there is $\\sigma\\in G$ with $\\sigma(\\alpha)=\\beta$ by [lem-weil-pbc-normal-extension-conjugate-by-automorphism] ($E/F$ is algebraic and normal). Hence $S_\\alpha=\\{\\sigma(\\alpha):\\sigma\\in G\\}$, and every $\\sigma\\in G$ permutes $S_\\alpha$.",
-   "uses": [
-    "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-weil-algebraic-element"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma 0BME (fields-lemma-lift-maps, line 1946) part (2), via the node cited; the orbit argument of the proof of Lemma 09I3 (fields-lemma-galois-over-fixed-field, line 2727)"
-   }
-  },
-  {
-   "text": "$E_{insep}/F$ is purely inseparable. Let $\\alpha\\in E_{insep}$ with minimal polynomial $P$ over $F$, of degree $d\\geq1$. By normality $P=\\prod_{i=1}^d(T-\\alpha_i)$ in $E[T]$ with $\\alpha_i\\in S_\\alpha$; by step 2 each $\\alpha_i=\\sigma_i(\\alpha)$ for some $\\sigma_i\\in G$, and $\\sigma_i(\\alpha)=\\alpha$ as $\\alpha\\in E_{insep}$. So $P=(T-\\alpha)^d$ in $E[T]$. If $F$ has characteristic $0$: the coefficient of $T^{d-1}$ in $P$ is $-d\\alpha\\in F$ and $d\\neq0$ in $F$, so $\\alpha\\in F$; hence $E_{insep}=F$. If $F$ has characteristic $p>0$: write $d=p^em$ with $p\\nmid m$. In $E[T]$ we have $(T-\\alpha)^{p^e}=T^{p^e}-\\alpha^{p^e}$ (the binomial coefficients $\\binom{p^e}{k}$, $0<k<p^e$, are divisible by $p$), so $P=(T^{p^e}-\\alpha^{p^e})^m$, whose coefficient of $T^{p^e(m-1)}$ is $-m\\alpha^{p^e}$. This lies in $F$ and $m$ is invertible in $F$, so $\\alpha^{p^e}\\in F$. In both cases $E_{insep}/F$ is purely inseparable in the sense of [def-weil-pbc-finite-purely-inseparable-extension] (in characteristic $0$: $E_{insep}=F$; in characteristic $p$: every element has a $p^e$-th power in $F$).",
-   "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma 030M (fields-lemma-normal-case, line 3666), proof: 'We set $E_{insep}=E^{\\mathrm{Aut}(E/F)}$. Details omitted' (part (2), first half), written out by the agent; definition 09HE (fields-definition-purely-inseparable, line 1581)"
-   }
-  },
-  {
-   "text": "$E/E_{insep}$ is algebraic and normal: apply [lem-weil-pbc-normal-extension-normal-over-intermediate] to the tower $F\\subseteq E_{insep}\\subseteq E$ (step 1), $E/F$ being algebraic and normal.",
-   "uses": [
-    "lem-weil-pbc-normal-extension-normal-over-intermediate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma 09HN (fields-lemma-normal-goes-up, line 1838)"
-   }
-  },
-  {
-   "text": "$E/E_{insep}$ is separable. Let $\\alpha\\in E$; it is algebraic over $E_{insep}$ by step 4. Let $S_\\alpha=\\{\\beta_1,\\dots,\\beta_r\\}$ be as in step 2, the $\\beta_j$ pairwise distinct, and $Q=\\prod_{j=1}^r(T-\\beta_j)\\in E[T]$, monic. For $\\sigma\\in G$ let $Q^\\sigma$ be the polynomial obtained by applying $\\sigma$ to the coefficients; $f\\mapsto f^\\sigma$ is a ring automorphism of $E[T]$ fixing $T$, so $Q^\\sigma=\\prod_j(T-\\sigma(\\beta_j))=Q$, because $\\sigma$ permutes $S_\\alpha$ (step 2). Thus every coefficient of $Q$ is fixed by $G$, i.e. $Q\\in E_{insep}[T]$ [def-weil-polynomial-ring]. Since $Q(\\alpha)=0$ ($\\alpha\\in S_\\alpha$), the minimal polynomial $R$ of $\\alpha$ over $E_{insep}$ [def-weil-pbc-separable-algebraic-extension], the monic generator of the kernel of $E_{insep}[T]\\to E$, $T\\mapsto\\alpha$, divides $Q$ in $E_{insep}[T]$. By [lem-weil-pbc-distinct-linear-factors-separable] with $K=E_{insep}$, $L=E$, $Q$ and hence $R$ is separable [def-pc-separable-polynomial]. So $\\alpha$ is separable over $E_{insep}$, and $E/E_{insep}$ is separable algebraic [def-weil-pbc-separable-algebraic-extension].",
-   "uses": [
-    "lem-weil-pbc-distinct-linear-factors-separable",
-    "def-weil-pbc-separable-algebraic-extension",
-    "def-pc-separable-polynomial",
-    "def-weil-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "the orbit-polynomial argument of the proof of Fields, Lemma 09I3 (fields-lemma-galois-over-fixed-field, line 2727, first paragraph), with $G=\\mathrm{Aut}(E/F)$ possibly infinite but the orbit $S_\\alpha$ finite by step 2; Lemma 09H3 (line 1207) via the node cited"
-   }
-  },
-  {
-   "text": "By steps 4 and 5, $E/E_{insep}$ is algebraic, separable and normal, i.e. Galois (Definition 09I0). Together with steps 1 and 3 this is the statement.",
-   "uses": [
-    "def-weil-pbc-separable-algebraic-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Definition 09I0 (fields-definition-galois, line 2654); Fields, Lemma 030M (fields-lemma-normal-case, line 3666), proof: 'We set $E_{insep}=E^{\\mathrm{Aut}(E/F)}$. Details omitted'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-field-extension",
-  "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
-  "def-weil-pbc-separable-algebraic-extension",
-  "def-weil-algebraic-element",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "lem-weil-pbc-normal-extension-normal-over-intermediate",
-  "lem-weil-pbc-distinct-linear-factors-separable",
-  "def-pc-separable-polynomial",
-  "def-weil-polynomial-ring"
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+  "lem-weil-pbc-normal-extension-fixed-field-separable-normal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/fields.tex",
-  "place": "Fields, Lemma 030M (fields-lemma-normal-case, line 3666), part (2): the source defines $E_{insep}=E^{\\mathrm{Aut}(E/F)}$ and omits the details; the details are written by the agent after the proofs of Lemmas 0BME (line 1946), 09HN (line 1838) and 09I3 (line 2727) of the same file"
+  "place": "Fields, Lemma 030M (2): combine the fixed-field purely inseparable and separable-normal parts; the component nodes retain the original argument."
  },
  "mathlib_searches": [
   {
@@ -211,5 +141,15 @@
   "group": "H1",
   "result": "fix",
   "note": "F field, E/F Algebra; algebraic+normal = [Normal F E] (extends Algebra.IsAlgebraic, splits'); E_insep = IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E)) (mem_fixedField_iff: fixed by every F-aut; subfield containing F by type); IsPurelyInseparable F S; Algebra.IsSeparable S E ∧ Normal S E = IsGalois via isGalois_iff, no finiteness; let S inlined (FIX)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T210030-L-954061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

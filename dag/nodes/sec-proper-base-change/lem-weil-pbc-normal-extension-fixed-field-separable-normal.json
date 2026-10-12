@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-normal-extension-fixed-field-separable-normal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Proof of lem-weil-pbc-normal-extension-purely-inseparable-then-galois, steps 4-5; step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)): the N-2 property used there, through the criterion 032N; 032N proof, 'By Fields, Lemma 030M there exists a subextension M/M_insep/K such that M_insep/K is purely inseparable, and M/M_insep is separable'",
+   "via": [
+    "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+    "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Extension over the fixed field is separable and normal",
+ "statement": "Let $F$ and $E$ be fields and let $E/F$ be an algebraic normal extension [def-pc-field-extension, def-weil-algebraic-element]. Put $S=\\{x\\in E: \\sigma(x)=x\\text{ for every }F\\text{-algebra automorphism }\\sigma\\text{ of }E\\}$. Then $E/S$ is separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 030M (lemma-normal-case, line 3666), part (2), with $E_{insep}=E^{\\mathrm{Aut}(E/F)}$ as in its proof ('Details omitted'); tag verified in literature/stacks-project/tags/tags (030M,fields-lemma-normal-case)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Let t be the finite set of distinct E-roots of minpoly F a. The polynomial is nonzero by algebraicity, and a belongs to t. Each F-automorphism sigma preserves t: Polynomial.aeval_algHom_apply maps the vanishing equation to itself. Its inverse proves surjectivity on t. No transitivity or conjugacy theorem is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "IntermediateField.normal supplies Normal S E from Normal F E for the fixed intermediate field S (the instance uses Normal.tower_top_of_normal [lem-weil-pbc-normal-extension-normal-over-intermediate]).",
+   "uses": [
+    "lem-weil-pbc-normal-extension-normal-over-intermediate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form q=product over y in t of (X-C y). Finset.prod_bij for sigma gives q.map sigma=q, so every coefficient is in S. Construct Q in S[X] with Polynomial.toSubring and identify Q.map (algebraMap S E)=q using map_toSubring. Since a is a root, minpoly S a divides Q by minpoly.dvd. Distinct factors give separability of q, separable_map descends it to Q, and Separable.of_dvd gives separability of minpoly S a [lem-weil-pbc-distinct-linear-factors-separable]. This proves Algebra.IsSeparable S E; normality is supplied by the preceding instance. Q is an explicit coefficient construction, with no existential witness choice.",
+   "uses": [
+    "lem-weil-pbc-distinct-linear-factors-separable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-extension-normal-over-intermediate",
+  "lem-weil-pbc-distinct-linear-factors-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 030M (2); finite root-product argument of 09I3 first paragraph, using finite individual root sets rather than a finite group; fully formalized by W2 second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixed field of all automorphisms of a normal algebraic extension is purely inseparable and the extension over the fixed field is Galois",
+   "results": "['IsGalois.of_fixedField_normal_subgroup', 'InfiniteGalois.normal_iff_isGalois', 'IsGalois.of_fixed_field', 'IsGalois.of_fixedField_eq_bot', 'IsGalois.fixingSubgroup_normal_of_isGalois', 'IsGaloisGroup.intermediateField', 'IsGaloisGroup.fixedPoints_eq_bot', 'IsGaloisGroup.fixedPoints']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*IsPurelyInseparable|isPurelyInseparable_fixedField|Normal.*fixedField|IsGalois.*fixedField",
+   "results": "['Mathlib/NumberTheory/NumberField/CMField.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Basic.lean', 'Mathlib/FieldTheory/Galois/Infinite.lean', 'Mathlib/FieldTheory/Galois/Infinite.lean']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField.fixedField",
+   "results": "[]",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed field of all automorphisms of a normal algebraic field extension is purely inseparable over the base and the extension over this fixed field is separable",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.NormalExtensionFixedField",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.NormalExtensionFixedFieldGalois",
+  "file": "lean/Sheaf/FieldTheory/NormalExtensionFixedFieldGalois.lean",
+  "declaration": "Normal.fixedField_separable_normal",
+  "statement": "theorem fixedField_separable_normal\n    (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Normal F E] :\n    Algebra.IsSeparable (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E ∧\n      Normal (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T210030-L-954061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T210030-L-954061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

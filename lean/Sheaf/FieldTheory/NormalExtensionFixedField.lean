@@ -7,6 +7,8 @@ module
 
 public import Mathlib.FieldTheory.Galois.Basic
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.FieldTheory.NormalExtensionFixedFieldPurelyInseparable
+import Sheaf.FieldTheory.NormalExtensionFixedFieldGalois
 
 /-!
 # The fixed field of all automorphisms of a normal extension
@@ -52,6 +54,11 @@ theorem fixedField_purelyInseparable_and_galois
     IsPurelyInseparable F (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) ∧
       Algebra.IsSeparable (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E ∧
       Normal (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E := by
-  sorry
+  let S := IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))
+  have hp : IsPurelyInseparable F S :=
+    fixedField_purelyInseparable F E
+  have hg : Algebra.IsSeparable S E ∧ Normal S E :=
+    fixedField_separable_normal F E
+  exact ⟨hp, hg.1, hg.2⟩
 
 end Normal
