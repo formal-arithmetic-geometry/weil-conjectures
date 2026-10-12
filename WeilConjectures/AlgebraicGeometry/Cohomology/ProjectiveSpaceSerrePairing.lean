@@ -582,6 +582,76 @@ lemma exists_twistPolynomialSection_eq [Nonempty n] {m : ℤ} (hm : 0 ≤ m)
   · rw [← hGt i, hG' i₀ i]
     exact twistPolynomialSection_map _ (hG' i₀ i ▸ hmem)
 
+/-- A polynomial is determined by its global section. -/
+lemma twistPolynomialSection_injective [Nonempty n] {m : ℤ} {c c' : (n → ℤ) →₀ A}
+    (hc : c ∈ Finsupp.supported A A (monomialExponents n m))
+    (hc' : c' ∈ Finsupp.supported A A (monomialExponents n m))
+    (h : twistPolynomialSection A m c = twistPolynomialSection A m c') : c = c' := by
+  obtain ⟨i⟩ := ‹Nonempty n›
+  refine twistLaurentSection_injective (Set.singleton_nonempty i)
+    (Finsupp.supported_mono (monomialExponents_subset_laurentExponents _) hc)
+    (Finsupp.supported_mono (monomialExponents_subset_laurentExponents _) hc') ?_
+  rw [← twistPolynomialSection_map _ hc, ← twistPolynomialSection_map _ hc', h]
+
+omit [Fintype n] in
+lemma natCastExponents_injective : Function.Injective (natCastExponents n) :=
+  fun _ _ h ↦ Finsupp.ext fun i ↦ Int.ofNat_inj.1 (congr_fun h i)
+
+omit [Fintype n] in
+lemma homogeneousSubmoduleCoeff_apply (D : ℕ) (f : MvPolynomial.homogeneousSubmodule n A D) :
+    homogeneousSubmoduleCoeff A D f =
+      Finsupp.mapDomain (natCastExponents n) (AddMonoidAlgebra.coeff (f : MvPolynomial n A)) :=
+  rfl
+
+omit [Fintype n] in
+lemma homogeneousSubmoduleCoeff_injective (D : ℕ) :
+    Function.Injective (homogeneousSubmoduleCoeff A (n := n) D) := fun f g h ↦ by
+  rw [homogeneousSubmoduleCoeff_apply, homogeneousSubmoduleCoeff_apply] at h
+  exact Subtype.ext (AddMonoidAlgebra.coeff_injective
+    (Finsupp.mapDomain_injective natCastExponents_injective h))
+
+/-- Every family of coefficients supported on the monomials of degree `D` comes from a
+homogeneous polynomial of degree `D`. -/
+lemma exists_homogeneousSubmoduleCoeff_eq {D : ℕ} {c : (n → ℤ) →₀ A}
+    (hc : c ∈ Finsupp.supported A A (monomialExponents n D)) :
+    ∃ f, homogeneousSubmoduleCoeff A D f = c := by
+  have hrange : ↑c.support ⊆ Set.range (natCastExponents n) := fun e he ↦
+    ⟨Finsupp.equivFunOnFinite.symm fun i ↦ (e i).toNat,
+      funext fun i ↦ Int.toNat_of_nonneg ((hc he).2 i)⟩
+  let G := Finsupp.comapDomain (natCastExponents n) c natCastExponents_injective.injOn
+  refine ⟨⟨AddMonoidAlgebra.ofCoeff G, fun s hs ↦ ?_⟩, ?_⟩
+  · have he : natCastExponents n s ∈ c.support := Finsupp.mem_support_iff.2 hs
+    have hsum : ∑ i, ((s i : ℕ) : ℤ) = D := (hc he).1
+    have hd : s.degree = D := by
+      rw [Finsupp.degree_eq_sum]
+      exact_mod_cast hsum
+    rwa [Finsupp.degree_eq_weight_one] at hd
+  · rw [homogeneousSubmoduleCoeff_apply]
+    exact Finsupp.mapDomain_comapDomain _ natCastExponents_injective c hrange
+
+/-- **`H⁰(ℙⁿ_A, 𝒪(D)) ≅ A[x₀, …, xₙ]_D`**: the global sections of `𝒪(D)`, `D ≥ 0`, are the
+homogeneous polynomials of degree `D`.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+theorem bijective_homogeneousSubmoduleToTwist [Nonempty n] (D : ℕ) :
+    Function.Bijective (homogeneousSubmoduleToTwist (n := n) A D) := by
+  refine ⟨fun f g h ↦ homogeneousSubmoduleCoeff_injective D
+    (twistPolynomialSection_injective (coeff_toLaurent_mem f.2) (coeff_toLaurent_mem g.2) h),
+    fun t ↦ ?_⟩
+  obtain ⟨c, hc, rfl⟩ := exists_twistPolynomialSection_eq (Int.natCast_nonneg D) t
+  obtain ⟨f, rfl⟩ := exists_homogeneousSubmoduleCoeff_eq hc
+  exact ⟨f, rfl⟩
+
+variable (A) in
+/-- **`H⁰(ℙⁿ_A, 𝒪(D)) ≅ A[x₀, …, xₙ]_D`**, as `A`-modules.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+def homogeneousSubmoduleLinearEquivTwist [Nonempty n] (D : ℕ) :
+    MvPolynomial.homogeneousSubmodule n A D ≃ₗ[A]
+      (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+        ((twist n (Spec (.of A)) D).presheafModuleCat.obj (op ⊤)) :=
+  LinearEquiv.ofBijective _ (bijective_homogeneousSubmoduleToTwist D)
+
 end Pairing
 
 end AlgebraicGeometry.ProjectiveSpace
