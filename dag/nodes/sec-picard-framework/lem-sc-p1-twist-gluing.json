@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-p1-twist-gluing",
+ "kind": "statement",
+ "title": "Gluing the standard generators of a projective-line twist",
+ "statement": "Let k be a field and d∈ℤ. On P¹_k with its standard cover [def-sc-p1-standard], there exists an O-module L and sections g₀ and g₁ which trivialize L on every subopen of U₀ and U₁ respectively and satisfy g₀|U₀₁=(x₀/x₁)^d g₁|U₀₁; equivalently there exists TwistData of degree d on L. This statement asserts no invertibility conclusion and no uniqueness or comparison with another module.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-twist-exists.md",
+  "place": "Proof, construction of the local free modules, the transition map, its cocycle, and the glued module"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard"
+ ],
+ "proof": [
+  {
+   "text": "Take the structure sheaf on each standard open. On U₀∩U₁ use multiplication by u₀₁=(x₀/x₁)^d; in the reverse direction use its inverse, and on self-overlaps use identities. Restriction is a ring homomorphism, so these define sheaf-of-modules isomorphisms. The standard opens cover the line.",
+   "uses": [
+    "def-sc-p1-standard"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The nontrivial cocycle equations on the two-member cover are u₀₁u₀₁⁻¹=1 and u₀₁⁻¹u₀₁=1; all remaining equations contain an identity map. Apply the existence clause of the gluing theorem to obtain L and isomorphisms φᵢ:L.over Uᵢ≅𝒪.over Uᵢ satisfying φ₀≫(multiplication by u₀₁)=φ₁ on the overlap.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define gᵢ=φᵢ⁻¹(1) on Uᵢ. On every V≤Uᵢ, naturality gives gᵢ|V=φᵢ⁻¹(1), and linearity gives a•gᵢ|V=φᵢ⁻¹(a). Therefore multiplication by gᵢ|V is bijective. Evaluate the compatibility equation on g₀|U₀₁: its image under φ₁ is u₀₁. Applying φ₁⁻¹ yields g₀|U₀₁=u₀₁•g₁|U₀₁. These generators and their bijectivity statements provide all five fields of TwistData.",
+   "uses": [
+    "def-sc-p1-standard"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-twist-exists.md",
+  "place": "Proof, construction of the local free modules, the transition map, its cocycle, and the glued module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence of a sheaf of modules on the projective line with local bases related by a unit on the overlap",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules with a basis section on each open of a cover is locally free of rank one and maps preserving the generators are unique",
+   "results": "SheafOfModules.freeSection, SheafOfModules.GeneratingSections.π, SheafOfModules.LocalGeneratorsData; none constructs a twist with the prescribed transition unit.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "SheafOfModules.unitHomEquiv and its naturality lemmas construct morphisms from the unit, not the glued twist.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TwistData|unitHomEquiv|isFreeGenerator",
+   "results": "Existing TwistData definition in TransitionUnits; ProjShiftedFreeTwist asserts existence only as part of a stronger theorem and imports the present item, so cannot be used without a cycle. No separate construction theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-twist-exists",
+   "place": "Proof, first three sentences: local free modules, transition map, cocycle identities, and gluing the module and its trivializations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineTwistGluing.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.exists_twistData",
+  "statement": "theorem exists_twistData (k : Type u) [Field k] (d : ℤ) :\n    ∃ L : (ProjectiveLine (Spec (.of k))).Modules,\n      Nonempty (TwistData (Spec (.of k)) d L)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
