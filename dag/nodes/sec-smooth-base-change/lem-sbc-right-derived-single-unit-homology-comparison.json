@@ -1,0 +1,131 @@
+{
+ "id": "lem-sbc-right-derived-single-unit-homology-comparison",
+ "kind": "statement",
+ "title": "RightDerivedSingleUnitHomologyComparison",
+ "statement": "Let B and C be abelian categories with derived categories and enough injectives in B [def-weil-pbc-derived-categories]. For any additive G : B → C and Y in B, define u_G(Y) : G(Y)[0] → R⁺G(Y[0]) by the right-derived unit on the homotopy single complex, transported by the canonical single-complex isomorphisms. Define a⁺_G(Y) by composing the inverse of H⁰(G(Y)[0]) ≅ G(Y) with H⁰(u_G(Y)). Under the single-complex comparison H⁰(R⁺G(Y[0])) ≅ R⁰G(Y) [lem-sp-derived-functor-single-identification], a⁺_G(Y) is the classical augmentation toRightDerivedZero(Y) [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. No left exactness assumption on G is needed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD, part (3); the defining derived unit equation and single-complex comparisons in PlusBaseChange.lean and PlusSingle.lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "Expand the single-complex comparison using the chosen injective resolution. Naturality of the derived unit along its augmentation cancels the unit on the injective resolution against the inverse used by the comparison.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the remaining resolution augmentation through homologyFunctorObjQIso and the natural-number to integer-complex homology comparison. In degree zero this is the cycles lift toRightDerivedZero' followed by isoHomologyπ₀ and isoRightDerivedObj.inv, precisely the classical augmentation.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD, part (3); the defining derived unit equation and single-complex comparisons in PlusBaseChange.lean and PlusSingle.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth right derived functor augmentation is homology of the derived functor unit",
+   "results": "['CategoryTheory.Functor.toRightDerivedZero', 'CategoryTheory.Functor.rightDerived', 'DerivedCategory.homologyFunctorFactors', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj', 'CategoryTheory.Functor.fromLeftDerivedZero', 'DerivedCategory.homologyFunctorFactorsh', 'DerivedCategory.singleFunctorCompHomologyFunctorIso', 'CategoryTheory.Functor.leftDerived']",
+   "verdict": "partial match; no equation matching the required comparison",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero|rightDerivedBaseChange",
+   "results": "['Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean']",
+   "verdict": "partial match; no equation matching the required comparison",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.toRightDerivedZero",
+   "results": "['CategoryTheory.Functor.toRightDerivedZero', 'CategoryTheory.instIsIsoFunctorToRightDerivedZero', 'CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective', 'CategoryTheory.instIsIsoAppToRightDerivedZero', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app', 'CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc']",
+   "verdict": "partial match; no equation matching the required comparison",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "zeroth right derived functor augmentation equals homology of derived unit on single complex",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toRightDerivedZero\", \"homology\"",
+   "results": "0 hits; local rg found toRightDerivedZero' naturality and resolution independence, not a comparison with the derived single unit.",
+   "verdict": "no duplicate of the augmentation comparison",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedBaseChangeZeroUnit",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-right-derived-base-change-zero-unit",
+   "place": "degree-zero augmentation identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedSingleUnitHomologyComparison.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedPlusSingleUnitHomology_comp_comparison",
+  "statement": "theorem rightDerivedPlusSingleUnitHomology_comp_comparison (Y : B) : G.rightDerivedPlusSingleUnitHomology Y ≫ (G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).hom.app Y = G.toRightDerivedZero.app Y",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "declarations": [
+   "CategoryTheory.Functor.rightDerivedPlusSingleUnit",
+   "CategoryTheory.Functor.rightDerivedPlusSingleUnitHomology",
+   "CategoryTheory.Functor.rightDerivedPlusSingleUnitHomology_comp_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T060748-L-2912497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T060748-L-2912497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

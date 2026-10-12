@@ -6,8 +6,7 @@ Authors: SHEAF group W2
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.SixFunctors.BaseChange.Derived
+import Sheaf.CategoryTheory.RightDerivedBaseChangeSingleUnitHomology
 
 /-!
 # The degree-zero unit equation for derived base change
@@ -32,6 +31,8 @@ variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Categor
   [PreservesFiniteLimits β] [PreservesFiniteColimits β]
   [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
 
+-- Keep the original left-exactness hypotheses in the public signature.
+set_option linter.unusedSectionVars false in
 /-- The classical degree-zero base-change map respects the augmentations from the
 underived functors.
 
@@ -55,6 +56,17 @@ Proof:
 theorem rightDerivedBaseChange_zero_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
     γ.map (G.toRightDerivedZero.app Y) ≫ (rightDerivedBaseChange e 0).app Y =
       e.app Y ≫ G'.toRightDerivedZero.app (β.obj Y) := by
-  sorry
+  rw [rightDerivedBaseChange_app,
+    ← rightDerivedPlusSingleUnitHomology_comp_comparison G Y,
+    ← rightDerivedPlusSingleUnitHomology_comp_comparison G' (β.obj Y)]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← γ.map_comp_assoc
+    ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).hom.app Y)
+    ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).inv.app Y),
+    Iso.hom_inv_id_app, γ.map_id, Category.id_comp]
+  simpa only [Category.assoc] using
+    congrArg (fun f ↦ f ≫
+      (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).hom.app
+        (β.obj Y)) (rightDerivedBaseChange_single_unit_homology e Y)
 
 end CategoryTheory.Functor
