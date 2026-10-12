@@ -11,7 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import Sheaf.Algebra.Homology.RelativeFlatExtension
+import Sheaf.Algebra.Homology.FlatAugmentationEpicification
 
 /-!
 # One extension of a flat replacement of a good truncation
@@ -87,6 +88,52 @@ theorem exists_flat_truncation_successor
       (∀ i : ℤ, SheafOfModules.IsFlat (E'.X i)) ∧ QuasiIso q' ∧
       (∀ i : ℤ, Epi (q'.f i)) ∧
       t ≫ q' ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q ≫ G.ιTruncLE (n : ℤ) := by
-  sorry
+  -- The relative cone construction and all-degree disks do not need these assumptions.
+  have _hq := hquasi
+  have _he := hepi
+  let m : ℤ := ((n + 1 : ℕ) : ℤ)
+  have hstrict : (G.truncLE (n : ℤ)).IsStrictlyLE m := by
+    rw [isStrictlyLE_iff]
+    intro i hi
+    exact (G.truncLE (n : ℤ)).isZero_of_isStrictlyLE (n : ℤ) i (by dsimp [m] at hi; omega)
+  have : IsIso ((G.truncLE (n : ℤ)).ιTruncLE m) := inferInstance
+  let j : G.truncLE (n : ℤ) ⟶ G.truncLE m :=
+    inv ((G.truncLE (n : ℤ)).ιTruncLE m) ≫ truncLEMap (G.ιTruncLE (n : ℤ)) m
+  have hj : j ≫ G.ιTruncLE m = G.ιTruncLE (n : ℤ) := by
+    dsimp [j]
+    rw [Category.assoc, ιTruncLE_naturality, ← Category.assoc, IsIso.inv_hom_id,
+      Category.id_comp]
+  have hH : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((G.truncLE m).X i) :=
+    ⟨m, fun i hi ↦ (G.truncLE m).isZero_of_isStrictlyLE m i hi⟩
+  obtain ⟨b, hbE⟩ := hbounded
+  let N : ℤ := max b m
+  let cone := mappingCone (q ≫ j)
+  have hcone : ∀ i : ℤ, N < i → IsZero (cone.X i) := by
+    intro i hi
+    rw [mappingCone.isZero_X_iff]
+    constructor
+    · exact hbE (i + 1) (by dsimp [N] at hi; omega)
+    · exact (G.truncLE m).isZero_of_isStrictlyLE m i (by dsimp [N] at hi; omega)
+  obtain ⟨Q, ε, hQ⟩ := exists_functorial_boundedAbove_flat_replacement J R N
+  let X : ObjectProperty.FullSubcategory
+      (fun F : CochainComplex _ ℤ ↦ ∀ i : ℤ, N < i → IsZero (F.X i)) :=
+    ⟨cone, hcone⟩
+  obtain ⟨hflatQ, hboundQ, _, hquasiQ⟩ := hQ X
+  obtain ⟨F, t, g, hb, hf, hg, ht⟩ :=
+    exists_relative_boundedAbove_flat_extension E (G.truncLE m) (q ≫ j)
+      ⟨b, hbE⟩ hflat (Q.obj X) (ε.app X) ⟨N, hboundQ⟩ hflatQ hquasiQ
+  obtain ⟨F', s, g', hb', hf', hs, he', hsg⟩ :=
+    exists_boundedAbove_flat_epicification hcover F (G.truncLE m) g hb hH hf
+  have : QuasiIso s := hs
+  have : QuasiIso (s ≫ g') := by rw [hsg]; exact hg
+  have hg' : QuasiIso g' := quasiIso_of_comp_left s g'
+  refine ⟨F', t ≫ s, g', hb', hf', hg', he', ?_⟩
+  change (t ≫ s) ≫ g' ≫ G.ιTruncLE m = q ≫ G.ιTruncLE (n : ℤ)
+  calc
+    (t ≫ s) ≫ g' ≫ G.ιTruncLE m = t ≫ (s ≫ g') ≫ G.ιTruncLE m := by
+      simp only [Category.assoc]
+    _ = t ≫ g ≫ G.ιTruncLE m := by rw [hsg]
+    _ = (q ≫ j) ≫ G.ιTruncLE m := by rw [← Category.assoc, ht]
+    _ = q ≫ G.ιTruncLE (n : ℤ) := by rw [Category.assoc, hj]
 
 end CochainComplex

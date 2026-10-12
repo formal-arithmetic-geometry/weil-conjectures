@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-flat-augmentation-epicification",
+ "kind": "statement",
+ "title": "Termwise epicification by bounded flat contractible disks",
+ "statement": "Let E,H be bounded-above cochain complexes of module sheaves on a small ringed site, E termwise flat, and f:E -> H any chain map. Suppose every module sheaf has an epimorphism from a flat module sheaf. There exist a bounded-above termwise flat complex F and maps s:E -> F and g:F -> H such that s is a quasi-isomorphism, g is termwise epic, and s followed by g equals f strictly. No quasi-isomorphism property of f or g is assumed or asserted. [def-pc-cochain-complex-modules, def-pc-flat-sheaf-modules, def-pc-quasi-iso-modules]",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix an upper bound N for H. For each i <= N choose, using the explicitly assumed cover property, a flat epimorphism p_i:P_i -> H^i. For i > N use P_i=0, which is flat by tensor closedness. Form the identity disk on P_i in degrees i and i+1. Their sum has degree j term P_j plus P_(j-1), differential sending the first summand identically to the second in degree j+1 and killing the second. A contracting homotopy sends the second summand to the first in degree j-1. These formulas directly verify differential squared zero and dh+hd=identity.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The disk augmentations have components p_i and p_i followed by d_H. Together they give a chain map a:D -> H, epic in every degree: its P_i restriction is p_i for i<=N, and H^i is zero otherwise. Set F=E plus D, take the inclusion s:E -> F, and g=[f,a]. Thus s followed by g equals f and g is termwise epic. Projection onto E and the contracting homotopy of D show that s is a homotopy equivalence, hence quasi-isomorphic. The terms of F are finite sums of flat terms; F is bounded by the maximum of a bound for E and N+1.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-coproduct-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX; separated triangle realization and generalized the source disk addition to every degree below the bound"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative cone replacement; adding contractible flat disks for termwise epimorphic augmentation",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "mappingCone, fst, snd, inl, inr, descCochain, liftCochain and isZero_X_iff; tools for construction, no relative flat extension or flat disk augmentation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*flat|flat.*successor|special.*direct.*system; contractible|degreewise.*epi in homology modules",
+   "results": "No matching flat relative extension or flat epicification theorem. Mathlib CM5a/CM5b use injectives and lower bounds; unsuitable. Project bounded flat replacements are the existing source of the cone replacement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatTruncationSuccessor",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "One relative successor step in the flat truncation tower, Termwise epicification by bounded flat contractible disks",
+   "via": [
+    "lem-pc-flat-truncation-successor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatAugmentationEpicification",
+  "file": "lean/Sheaf/Algebra/Homology/FlatAugmentationEpicification.lean",
+  "declaration": "CochainComplex.exists_boundedAbove_flat_epicification",
+  "statement": "theorem exists_boundedAbove_flat_epicification (hcover : ∀ M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R), ∃ (P : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (p : P ⟶ M), SheafOfModules.IsFlat P ∧ Epi p) (E H : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : E ⟶ H) (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i)) (hH : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (H.X i)) (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i)) : ∃ (F : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (s : E ⟶ F) (g : F ⟶ H), (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧ (∀ i : ℤ, SheafOfModules.IsFlat (F.X i)) ∧ QuasiIso s ∧ (∀ i : ℤ, Epi (g.f i)) ∧ s ≫ g = f",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T110323-L-623448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T110323-L-623448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

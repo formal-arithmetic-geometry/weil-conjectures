@@ -26,35 +26,38 @@
  ],
  "proof": [
   {
-   "text": "Compose the prescribed augmentation q with the inclusion into the next good truncation. Its mapping cone is bounded above because E and the next truncation are bounded above. Apply [lem-pc-kflat-bounded-flat-replacement] at any common upper bound to obtain a termwise epimorphic quasi-isomorphism Q -> C with bounded-above flat Q.",
+   "text": "Construct the map j:truncLE(n)G -> truncLE(n+1)G using the inverse truncation inclusion for the already strictly bounded complex truncLE(n)G followed by truncLEMap of its inclusion into G. Naturality gives j followed by the next inclusion equals the old inclusion. Put m=n+1 and N=max(b,m), where b bounds E. Cone(q followed by j) has degree i term E^(i+1) plus truncLE(m)G^i, so its terms vanish above N. Specialize the existing bounded flat replacement functor at this cone to get a bounded-above flat Q and a quasi-isomorphism Q -> Cone(q followed by j).",
    "uses": [
     "lem-pc-kflat-bounded-flat-replacement"
    ],
    "elementary": false
   },
   {
-   "text": "The map Q -> C -> E[1] defines the extension triangle E -> E' -> Q -> E[1]. Represent its first map by a degreewise split injection with cokernel Q. The resulting terms of E' are isomorphic to E^i plus Q^i, so [lem-pc-sites-modules-coproduct-flat] gives flatness; their common upper bound gives boundedness. The morphism of triangles to E -> truncLE(n+1)G -> C gives an augmentation f. Extend its augmentation-square homotopy along the degreewise retractions and subtract the homotopy differential from f; this makes the square commute strictly. Long exact cohomology sequences, identity on E, and the quasi-isomorphism Q -> C show that f is a quasi-isomorphism. These are precisely the triangle construction and homotopy correction in 06XX.",
+   "text": "Apply the relative cone-extension theorem to this prescribed Q and cone map. It gives a bounded-above flat F, t:E -> F, and a quasi-isomorphism g:F -> truncLE(m)G satisfying t followed by g equals q followed by j strictly.",
    "uses": [
-    "lem-pc-sites-modules-coproduct-flat"
+    "lem-pc-relative-flat-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Strict commutativity and termwise epimorphy of q make f epic away from degrees n and n+1. Apply the explicitly assumed flat-cover property to G^n and obtain P -> G^n with flat P and epic map. Add its identity disk in degrees n and n+1, with augmentation the cover in degree n and its differential in degree n+1. This disk covers degree n and the boundaries in degree n+1. The epimorphism H^(n+1)(f) supplies the remaining cycles, so the sum augmentation is epic in degree n+1 as well. The disk is contractible, so the new augmentation remains a quasi-isomorphism. The finite direct sums remain flat by [lem-pc-sites-modules-coproduct-flat], and boundedness is preserved. The original E includes through the old summand, so the strict square remains valid. Compose it with the inclusion into G to obtain the asserted equality.",
+   "text": "Apply bounded flat epicification to g, using hcover and the bound m for its target. It gives bounded-above flat F-prime, a quasi-isomorphism s:F -> F-prime and a termwise epic g-prime:F-prime -> truncLE(m)G, with s followed by g-prime equals g. Since s and s followed by g-prime are quasi-isomorphisms, two-out-of-three makes g-prime a quasi-isomorphism. Use t followed by s as the new transition. Reassociate the composites, substitute both strict equalities, and use the equality for j to obtain the original assertion. This all-degree disk variant does not use hquasi or hepi of the original augmentation; their hypotheses and the declaration signature are retained unchanged.",
    "uses": [
-    "lem-pc-sites-modules-coproduct-flat"
+    "lem-pc-flat-augmentation-epicification"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-flat-augmentation-epicification",
   "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-sites-modules-coproduct-flat"
+  "lem-pc-relative-flat-extension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; specialization to flat module sheaves as in Cohomology on Sites, Lemma 077J"
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX; explicit cone replacement and strict composition, with all-degree identity disks instead of just the two potentially deficient degrees"
  },
  "mathlib_searches": [
   {
@@ -121,9 +124,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T095924-L-325018",
+  "landing": "20261012T110323-L-623448",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

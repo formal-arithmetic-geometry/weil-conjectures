@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-relative-flat-extension",
+ "kind": "statement",
+ "title": "Relative flat extension from a prescribed flat cone replacement",
+ "statement": "Let E,H be cochain complexes of module sheaves on a small ringed site, and f:E -> H. Assume E has bounded-above flat terms, and prescribe a bounded-above flat complex Q with a quasi-isomorphism r:Q -> Cone(f). There exist a bounded-above flat complex F, maps t:E -> F and g:F -> H, such that g is a quasi-isomorphism and t followed by g equals f strictly. No epimorphy for g is asserted. [def-pc-cochain-complex-modules, def-pc-flat-sheaf-modules, def-pc-quasi-iso-modules]",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "The prescribed map r:Q -> Cone(f), followed by Cone(f) -> E[1], determines a distinguished triangle E -> F -> Q -> E[1]. Realize F by the shifted cone of this composite; the inclusion E -> F is degreewise split and F^i is isomorphic to E^i plus Q^i. A common bound for E and Q bounds F, and finite coproduct flatness makes its terms flat.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity on E and r extend to a morphism from this triangle to the cone triangle E -> H -> Cone(f) -> E[1]. Its middle map g:F -> H is quasi-isomorphic by the long exact cohomology sequences, since identity on E and r are quasi-isomorphisms. The square with E initially commutes up to homotopy. Extend that homotopy to F by precomposing each component with the degreewise retraction F^i -> E^i and subtract its homotopy differential from g. The new g is a chain map, has the same cohomology maps, and satisfies t followed by g equals f strictly.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-modules-coproduct-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX; separated triangle realization and generalized the source disk addition to every degree below the bound"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative cone replacement; adding contractible flat disks for termwise epimorphic augmentation",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "mappingCone, fst, snd, inl, inr, descCochain, liftCochain and isZero_X_iff; tools for construction, no relative flat extension or flat disk augmentation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*flat|flat.*successor|special.*direct.*system; contractible|degreewise.*epi in homology modules",
+   "results": "No matching flat relative extension or flat epicification theorem. Mathlib CM5a/CM5b use injectives and lower bounds; unsuitable. Project bounded flat replacements are the existing source of the cone replacement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatTruncationSuccessor",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "One relative successor step in the flat truncation tower, Relative flat extension from a prescribed flat cone replacement",
+   "via": [
+    "lem-pc-flat-truncation-successor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RelativeFlatExtension",
+  "file": "lean/Sheaf/Algebra/Homology/RelativeFlatExtension.lean",
+  "declaration": "CochainComplex.exists_relative_boundedAbove_flat_extension",
+  "statement": "theorem exists_relative_boundedAbove_flat_extension (E H : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : E ⟶ H) (hE : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i)) (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i)) (Q : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (r : Q ⟶ mappingCone f) (hQ : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (Q.X i)) (hflatQ : ∀ i : ℤ, SheafOfModules.IsFlat (Q.X i)) (hr : QuasiIso r) : ∃ (F : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : E ⟶ F) (g : F ⟶ H), (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧ (∀ i : ℤ, SheafOfModules.IsFlat (F.X i)) ∧ QuasiIso g ∧ t ≫ g = f",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T110323-L-623448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T110323-L-623448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
