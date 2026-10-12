@@ -9,8 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
-import Sheaf.CategoryTheory.Sites.TorsorH1Functoriality
-import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestriction
 
 /-!
 # Picard restriction and first cohomology of units
@@ -52,6 +51,41 @@ theorem picard_h1_restriction_compatibility {Z X : Scheme.{v}} (i : Z ⟶ X)
         (Sheaf.H.map (unitsSheafToPushforward i) 1
           (Pic.toH1Units X (Pic.ofIsInvertible L))) =
         Pic.toH1Units Z (@Pic.ofIsInvertible Z ((Modules.tensorPullback i).obj L) h) := by
-  sorry
+  obtain ⟨adj⟩ := Modules.nonempty_tensorPullbackAdjunction i
+  let e := ((Modules.pullbackPushforwardAdjunction i).leftAdjointUniq adj).app L
+  let : Modules.IsInvertible ((Modules.tensorPullback i).obj L) :=
+    Modules.IsInvertible.of_iso e
+  have := Modules.IsInvertible.sheafOfModules_isInvertible L
+  have := Modules.IsInvertible.sheafOfModules_isInvertible ((Modules.tensorPullback i).obj L)
+  refine ⟨inferInstance, ?_⟩
+  change unitsPushforwardCohomologyComparison i 1
+    (Sheaf.H.map (unitsSheafToPushforward i) 1 (Pic.toH1Units X (Pic.mk L))) =
+      Pic.toH1Units Z (Pic.mk ((Modules.tensorPullback i).obj L))
+  rw [Pic.toH1Units_mk, Pic.toH1Units_mk]
+  rw [← unitsTorsor_closed_restriction_class i
+    ((Modules.tensorPullback i).obj L).generatorsTorsor]
+  congr 1
+  symm
+  refine Sheaf.Torsor.classH1_eq_map_of_equivariant
+    CategoryTheory.Limits.isTerminalTop (unitsSheafToPushforward i) L.generatorsTorsor
+    (unitsTorsorClosedPushforward i ((Modules.tensorPullback i).obj L).generatorsTorsor)
+    (fun U s ↦ ⟨e.hom.app (i ⁻¹ᵁ U.unop) (Modules.pullbackSection i s.1),
+      (Modules.IsFreeGenerator.pullback_unit_app i s.2).app_hom e⟩) ?_ ?_
+  · intro U V f s
+    exact Subtype.ext
+      ((Modules.Hom.app_presheaf_map e.hom
+        ((TopologicalSpace.Opens.map i.base).map f.unop)
+        (Modules.pullbackSection i (show Γ(L, U.unop) from s.1))).symm.trans
+          (congrArg (e.hom.app (i ⁻¹ᵁ V.unop))
+            (Modules.pullbackSection_map i (leOfHom f.unop)
+              (show Γ(L, U.unop) from s.1)).symm))
+  · intro U a s
+    exact Subtype.ext
+      ((congrArg (e.hom.app (i ⁻¹ᵁ U.unop))
+        (Modules.pullbackSection_smul i (unitsSheaf.toUnits a : Γ(X, U.unop))
+          (show Γ(L, U.unop) from s.1))).trans
+            (Modules.Hom.app_smul e.hom
+              (i.app U.unop (unitsSheaf.toUnits a : Γ(X, U.unop)))
+              (Modules.pullbackSection i (show Γ(L, U.unop) from s.1))))
 
 end AlgebraicGeometry.Scheme

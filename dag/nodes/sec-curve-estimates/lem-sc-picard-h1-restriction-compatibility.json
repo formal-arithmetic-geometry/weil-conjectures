@@ -33,53 +33,37 @@
  ],
  "proof": [
   {
-   "text": "For an invertible module L on X, the first isomorphism of [thm-sc-hilbert-90] sends its isomorphism class to the Zariski O_X^*-torsor Isom(O_X,L). Thus the class represented by L is represented by this torsor in H^1(X, O_X^*).",
+   "text": "Obtain the canonical isomorphism from abstract module pullback to tensorPullback from uniqueness of left adjoints of pushforward [def-pc-module-pullback]. Abstract pullback preserves invertibility; transport along this isomorphism to supply the invertibility witness for tensorPullback. The Hilbert-90 formula [thm-sc-hilbert-90], Pic.toH1Units_mk, identifies both classes with generator-torsor classes.",
    "uses": [
+    "def-pc-module-pullback",
     "thm-sc-hilbert-90"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY proof, final sentence, using Cohomology Lemma 09NU"
-   }
+   "elementary": false
   },
   {
-   "text": "Pulling the transition isomorphisms of L back along the closed immersion i identifies the pushout of the O_X^*-torsor Isom(O_X,L) along O_X^* -> i_*O_Z^* with the i_*O_Z^*-torsor i_*Isom(O_Z,i^*L): on an open U of X where L|_U = O_U s, the pullback i^*L [def-pc-module-pullback] is free on i^*s over Z \\cap U, and u s \\mapsto i^\\sharp(u) i^*s matches the actions through O_X^* -> i_*O_Z^*. By clause (1) of [lem-sc-torsor-h1-functoriality] applied to O_X^* -> i_*O_Z^*, the induced map H^1(X,O_X^*) -> H^1(X,i_*O_Z^*) sends the class of Isom(O_X,L) to the class of i_*Isom(O_Z,i^*L).",
+   "text": "Construct the equivariant map from the generator torsor of L to the explicit direct-image generator torsor of tensorPullback(i,L). On U it sends s to e.hom.app(i^{-1}U)(pullbackSection i s). The proved IsFreeGenerator.pullback_unit_app and IsFreeGenerator.app_hom show it is a generator; Hom.app_presheaf_map with pullbackSection_map prove naturality; pullbackSection_smul with Hom.app_smul prove equivariance along unitsSheafToPushforward. Apply the proved Sheaf.Torsor.classH1_eq_map_of_equivariant to identify the H^1 image class.",
    "uses": [
-    "thm-sc-hilbert-90",
-    "def-pc-module-pullback",
-    "lem-sc-torsor-h1-functoriality"
+    "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY proof, final sentence, together with Cohomology Lemma 09NU"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-cohomology-closed-immersion-pushforward] with p=1 and F=O_Z^*, H^1(X,i_*O_Z^*) = H^1(Z,O_Z^*), and by clause (2) of [lem-sc-torsor-h1-functoriality] this identification carries the class of i_*Isom(O_Z,i^*L) to the class of the O_Z^*-torsor Isom(O_Z,i^*L). Applying the first isomorphism of [thm-sc-hilbert-90] on Z, the composite sends [L] to [i^*L], so the stated square commutes.",
+   "text": "Apply [lem-sc-units-torsor-closed-restriction-class] to the generator torsor on Z. Rewrite its equality and use the equivariant-map equality from step 2. This proves the requested square with unchanged hypotheses and conclusion.",
    "uses": [
-    "lem-sc-cohomology-closed-immersion-pushforward",
-    "thm-sc-hilbert-90",
-    "lem-sc-torsor-h1-functoriality"
+    "lem-sc-units-torsor-closed-restriction-class"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY proof, sentence beginning 'By Cohomology, Lemma 02UV' and final sentence"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sc-hilbert-90",
   "def-pc-module-pullback",
-  "lem-sc-cohomology-closed-immersion-pushforward",
-  "lem-sc-torsor-h1-functoriality"
+  "lem-sc-units-torsor-closed-restriction-class",
+  "thm-sc-hilbert-90"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Lemma 09NY proof, final sentence, with Cohomology Lemmas 02UV and 09NU"
+  "place": "Lemma 09NY, final sentence, with Cohomology Lemmas 02FQ and 02UV; Lean uses the existing proved free-generator pullback and equivariant classH1 naturality lemmas"
  },
  "mathlib_searches": [
   {
@@ -161,5 +145,15 @@
   "group": "U1",
   "result": "pass",
   "note": "independent Codex review: Matched arbitrary schemes, closed immersion, invertible module, tensor pullback class, canonical Hilbert-90 maps, units sheaf map, inverse-image/counit cohomology comparison, and equality with the node; definitions contain no sorry. Requested import repair is present; standalone compilation passed in 18.5 s and dependency-ordered combined compilation in 23.1 s, without warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0d54",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T112829-L-763981",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, DAG statements/dependencies, report, and compilation match the reviewed packet and stage-3 requirements."
  }
 }

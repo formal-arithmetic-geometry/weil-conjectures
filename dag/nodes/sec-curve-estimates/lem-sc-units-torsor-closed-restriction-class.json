@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-units-torsor-closed-restriction-class",
+ "kind": "statement",
+ "title": "Closed-immersion comparison of the direct-image units torsor class",
+ "statement": "Let i:Z\\to X be a closed immersion of schemes [def-weil-closed-immersion]. For an O_Z^*-torsor Q [def-sc-gm-torsor], construct i_*Q on opens U of X by Q(i^{-1}U), with the action of i_*O_Z^* on these same opens. Then the canonical cohomology comparison c_i:H^1(X,i_*O_Z^*)\\to H^1(Z,O_Z^*) of [def-sc-zariski-units-restriction] sends the canonical torsor class [i_*Q] to [Q]. The classes use the canonical torsor classification [lem-sc-torsor-h1] and abelian sheaf cohomology [def-sc-topological-abelian-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ (lemma-torsors-h1), boundary-of-one construction, and Lemma 02UV (lemma-cohomology-and-closed-immersions); used in Varieties Lemma 09NY, final sentence"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-gm-torsor",
+  "def-sc-zariski-units-restriction",
+  "lem-sc-torsor-h1",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the direct-image torsor explicitly on inverse-image opens. Its zero, addition, restriction and simple-transitivity laws are inherited from Q. At an image point, extend a trivializing open V to the complement of the closed image of Z minus V and intersect with the ambient open. Off the image, choose an open disjoint from the image; the sheaf on its empty inverse image has a unique section. This verifies local inhabitation, including the empty-scheme case.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the extension of the constant integer sheaf by the units sheaf representing Q using [lem-sc-torsor-h1-boundary-representative]. Its class is the boundary of one. Exact closed direct image followed by pullback along restriction of constant integer sections gives the extension whose fibre above one is the constructed direct-image torsor [lem-sc-torsor-h1-ext-pushforward]. The identification is sectionwise, is natural under restriction and respects translation. The boundary representative description on X therefore gives its class as the boundary of one for this extension.",
+   "uses": [
+    "lem-sc-torsor-h1-boundary-representative",
+    "lem-sc-torsor-h1-ext-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed-immersion comparison commutes with boundaries and is the extension of the global-section identification [lem-sc-closed-pushforward-boundary-naturality]. Identify its inverse with the exact-inverse-image, constant-sheaf-isomorphism and counit map of [def-sc-zariski-units-restriction]: applying exact inverse image to the image extension and composing with the counit recovers the original extension by the adjunction triangle identities; the constant comparison carries one to one. It consequently carries the boundary of one of the image extension to that of the original extension, proving the equality.",
+   "uses": [
+    "lem-sc-closed-pushforward-boundary-naturality",
+    "def-sc-zariski-units-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "def-sc-zariski-units-restriction",
+  "def-weil-closed-immersion",
+  "lem-sc-closed-pushforward-boundary-naturality",
+  "lem-sc-torsor-h1-boundary-representative",
+  "lem-sc-torsor-h1-ext-pushforward"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ (lemma-torsors-h1), boundary-of-one construction, and Lemma 02UV (lemma-cohomology-and-closed-immersions); used in Varieties Lemma 09NY, final sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology comparison for a closed embedding sends the direct image torsor class to the original torsor class",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Sheaf\"",
+   "results": "0 hits: none; no closed-pushforward sheaf torsor comparison theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFreeGenerator|classH1",
+   "results": "0 hits: none; no closed-pushforward sheaf torsor comparison theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "final proof sentence identifying H^1 restriction with restriction of line bundles: the closed-immersion comparison of the direct-image generator torsor class",
+   "via": [
+    "lem-sc-picard-h1-restriction-compatibility",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitsTorsorClosedRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.unitsTorsor_closed_restriction_class",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.unitsTorsorClosedPushforward",
+   "AlgebraicGeometry.Scheme.unitsTorsor_closed_restriction_class"
+  ],
+  "statement": "theorem unitsTorsor_closed_restriction_class {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (Q : Sheaf.Torsor Z.unitsSheaf) : unitsPushforwardCohomologyComparison i 1 (Sheaf.Torsor.classH1 _ isTerminalTop ⟦unitsTorsorClosedPushforward i Q⟧) = Sheaf.Torsor.classH1 Z.unitsSheaf isTerminalTop ⟦Q⟧",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0d54",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T112829-L-763981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0d54",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T112829-L-763981",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean modules, DAG statements/dependencies, report, and compilation match the reviewed packet and stage-3 requirements."
+ }
+}
