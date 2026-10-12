@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Spec
+import Mathlib.RingTheory.Localization.BaseChange
+import Sheaf.AlgebraicGeometry.RefinementLocalizationGeometry
+import Sheaf.AlgebraicGeometry.ReducedProductLocalization
 
 /-!
 # Combining finitely many localizations of a finite domain decomposition
@@ -95,4 +98,39 @@ theorem exists_refinement_of_finite_domain_splitting
               (Spec.map (CommRingCat.ofHom (algebraMap A'' (E j))))) ∧
           letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A'')
           Nonempty (((B ⊗[A] A'') ⧸ nilradical (B ⊗[A] A'')) ≃ₐ[A''] (∀ j, E j)) := by
-  sorry
+  classical
+  let S := Localization.Away c
+  have : IsDomain S := Localization.Away.isDomain hc
+  let t : S := ∏ j, s j
+  have ht : t ≠ 0 := Finset.prod_ne_zero_iff.mpr (fun j _ ↦ hs j)
+  let a : A := (IsLocalization.Away.sec c t).1
+  have hassoc : Associated (algebraMap A S a) t :=
+    IsLocalization.Away.associated_sec_fst c t
+  have ha : a ≠ 0 := by
+    intro h
+    have hzero : algebraMap A S a = 0 := by simp [h]
+    exact ht (hassoc.eq_zero_iff.mp hzero)
+  let d := c * a
+  have hd : d ≠ 0 := mul_ne_zero hc ha
+  let T := Localization.Away (algebraMap A S a)
+  have : IsLocalization.Away t T := IsLocalization.Away.of_associated hassoc
+  let U := Localization.Away d
+  let e : U ≃ₐ[A] T := IsLocalization.algEquiv (Submonoid.powers d) U T
+  let : Algebra U T := e.toRingHom.toAlgebra
+  have : IsScalarTower A U T := .of_algebraMap_eq fun z ↦ (e.commutes z).symm
+  have hUT : Function.Bijective (algebraMap U T) := e.bijective
+  let C := T ⊗[S] A'
+  let : Algebra A' C := Algebra.TensorProduct.rightAlgebra
+  have : IsScalarTower A A' C := .of_algebraMap_eq fun z ↦ by
+    rw [IsScalarTower.algebraMap_apply A S A',
+      ← IsScalarTower.algebraMap_apply S A' C,
+      IsScalarTower.algebraMap_apply A S C]
+  have : IsLocalization.Away (algebraMap S A' t) C :=
+    IsLocalization.Away.tensorRight (R := S) (S := A') (A := T) (r := t)
+  obtain ⟨hfinite, hetale, hsurj, hfactors⟩ :=
+    refinement_localization_geometry S A' hcover r D hinj s hs hhomeo T U hUT
+  have hproduct := reduced_product_localization A B A' r D hsplit
+    (algebraMap S A' t) C
+  refine ⟨d, C, inferInstance, inferInstance, inferInstance, inferInstance,
+    hd, hfinite, hetale, hsurj, (fun j ↦ C ⊗[A'] D j), inferInstance,
+    inferInstance, hfactors, hproduct⟩
