@@ -10,11 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.Paper.HigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+
+import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono
+import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductEpi
 
 /-! # The second-page coproduct comparison for lower-truncated direct image
 
@@ -60,6 +58,17 @@ theorem truncated_directImage_secondPage_coproduct
     IsIso (Sigma.desc (fun i ↦ (schemeModuleHigherDirectImage f (p : ℤ)).map
       ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) r).map
-          ((DerivedCategory.TStructure.t.truncGE a).map (ι i))))) := by sorry
+          ((DerivedCategory.TStructure.t.truncGE a).map (ι i))))) := by
+  have hm : Mono (Sigma.desc (fun i ↦ (schemeModuleHigherDirectImage f (p : ℤ)).map
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) r).map
+          ((DerivedCategory.TStructure.t.truncGE a).map (ι i))))) :=
+    truncated_directImage_secondPage_coproduct_mono f I E S ι hc a p r
+  have he : Epi (Sigma.desc (fun i ↦ (schemeModuleHigherDirectImage f (p : ℤ)).map
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) r).map
+          ((DerivedCategory.TStructure.t.truncGE a).map (ι i))))) :=
+    truncated_directImage_secondPage_coproduct_epi f I E S ι hc a p r
+  exact isIso_of_mono_of_epi _
 
 end AlgebraicGeometry

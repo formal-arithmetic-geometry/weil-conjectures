@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-truncated-direct-image-second-page-coproduct-mono",
+ "kind": "statement",
+ "title": "Second-page coproduct comparison for lower-truncated direct image mono",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], and let $E_i\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category] have an ambient coproduct cofan $\\iota_i:E_i\\to S$ in $D(\\mathcal O_X)$. Using canonical lower truncation [def-sbc-standard-tstructure-derived-category], for every $a,r\\in\\mathbb Z$ and $p\\in\\mathbb N$, with $Rf_*$ as in [def-pc-derived-direct-image], the canonical map $\\bigoplus_i H^p(Rf_*(H^r(\\tau_{\\ge a}E_i)[0]))\\to H^p(Rf_*(H^r(\\tau_{\\ge a}S)[0]))$ induced by $H^r(\\tau_{\\ge a}\\iota_i)$ is a monomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DZ",
+  "place": "Second-page injectivity; agent-written projection argument, using Tag 009E (5)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The composite functor F of truncation, cohomology, and derived direct image on degree-zero modules is additive. From the ambient coproduct universal property construct pi_i, identity on summand i and zero on the others. Functoriality makes F(pi_i) composed with the displayed comparison the i-th coproduct projection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify every stalk of the source coproduct with the direct sum of the stalks using lem-pc-stalk-direct-sums. A vector killed by the comparison has all components zero, by applying the F(pi_i) stalk maps, hence is zero. Stalkwise injectivity gives a monomorphism by sheaf separation. Empty families have zero source, singleton comparisons are images of isomorphisms, and r < a gives zero cohomology.",
+   "uses": [
+    "lem-pc-stalk-direct-sums"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-stalk-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tag 08DZ",
+  "place": "Agent-written additive projection and stalk argument, Tag 009E (5); independently read by X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The comparison from a direct sum to the image of a direct sum under an additive functor is a monomorphism in a Grothendieck abelian category",
+   "results": "Hits: CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom, CategoryTheory.IsGrothendieckAbelian.mono_of_isColimit_monoOver, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.F_obj, CategoryTheory.IsGrothendieckAbelian.instMonoIMonomorphismsRlpMonoMapFactorizationDataRlp, AlgebraicTopology.DoldKan.instMonoChainComplexNatInclusionOfMooreComplexMap, CategoryTheory.instMonoMap'KernelCokernelCompSequenceOfNatNat, CategoryTheory.kernelCokernelCompSequence.instMonoι, CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functorToMonoOver_obj",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.desc, CategoryTheory.Mono",
+   "results": "Hits: CategoryTheory.Limits.MonoCoprod.mono_of_injective'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*(injective|monomorphism)|[Mm]ono.*Sigma.desc|sigmaToPi",
+   "results": "Hits: Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean, Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean, Mathlib/CategoryTheory/Abelian/NonPreadditive.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Colim.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor into sheaves of modules induces an injective coproduct comparison, because coproduct projections detect every stalk component",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproduct",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ, second-page coproduct step in the bounded-below spectral-sequence reduction",
+   "via": [
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncatedDirectImageSecondPageCoproductMono.lean",
+  "declaration": "AlgebraicGeometry.truncated_directImage_secondPage_coproduct_mono",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13",
+  "statement": "theorem truncated_directImage_secondPage_coproduct_mono\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (I : Type u) (E : I → schemeDerivedQCohCategory X)\n    (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S)\n    (hc : IsColimit (Cofan.mk S ι)) (a : ℤ) (p : ℕ) (r : ℤ) :\n    Mono (Sigma.desc (fun i ↦ (schemeModuleHigherDirectImage f (p : ℤ)).map\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) r).map\n          ((DerivedCategory.TStructure.t.truncGE a).map (ι i)))))"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T165541-L-2942588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T165541-L-2942588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
