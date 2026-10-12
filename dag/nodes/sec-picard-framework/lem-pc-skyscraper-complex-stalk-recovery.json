@@ -15,20 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Construct the canonical degreewise stalk isomorphisms from the filtered-colimit description and verify compatibility with differentials and module actions.",
+   "text": "For a stalk module N, send n to the germ at x of the constant global section with value n. Restriction of this section shows that its germ is also represented by the constant section on any neighbourhood of x.",
    "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Represent a scalar in the stalk ring by a section a on a neighbourhood U. The germ_smul identity for presheaves of modules identifies the germ of a times the constant section with germ(a) times its germ. The sectionwise skyscraper action is exactly germ(a) acting on its value, proving linearity.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For injectivity, Mathlib TopCat.Presheaf.germ_eq gives a neighbourhood on which two constant sections agree; evaluate there at the membership proof of x. For surjectivity, TopCat.Presheaf.exists_germ_eq represents any stalk element by s on U. Since PLift(x in U) is a subsingleton inhabited by hx, s is the constant function with value s(hx). Thus the constant-section germ is bijective.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pointwise skyscraper morphisms take constant sections to constant sections. TopCat.Presheaf.stalkFunctor_map_germ_apply therefore proves naturality of the linear bijections. Apply this to every differential of M, use LinearEquiv.ofBijective and HomologicalComplex.Hom.isoOfComponents, and invert the resulting isomorphism.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-pc-module-stalk-functor",
     "def-pc-cochain-complex-modules"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-ringed-module-skyscraper",
+  "def-pc-module-stalk-functor",
   "def-pc-cochain-complex-modules"
  ],
  "proof_origin": {
-  "by": "Y2",
+  "by": "G1",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Definition Tag 009A (case (4)) and Lemma Tag 009C, applied degreewise; filtered-colimit computation of the stalk at x"
+  "place": "Tag 009A (4); explicit constant-section germ proof of the neighbourhood-colimit stalk computation, followed by naturality and degreewise assembly. Lean argument written by G1."
  },
  "mathlib_searches": [
   {
@@ -117,10 +145,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T113950-L-822418",
-  "kind": "interface",
+  "landing": "20261012T160827-L-2611005",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
