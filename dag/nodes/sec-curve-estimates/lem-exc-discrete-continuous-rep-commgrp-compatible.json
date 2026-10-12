@@ -75,20 +75,36 @@
  "statement": "Under the hypotheses of lem-exc-discrete-continuous-rep-commgrp, the elementwise construction yields an equivalence E and chosen isomorphisms e_X between the two underlying action functors, such that every equivariant morphism f satisfies F.map f ≫ e_Y = e_X ≫ G.map f.",
  "proof": [
   {
-   "text": "Construct the forward and inverse functors from internal commutative group laws and discrete continuous integer representations, then prove the carrier comparisons and their compatibility on morphisms.",
+   "text": "Construct the reverse functor H from discrete continuous integer representations to internal commutative groups using the represented presheaf of equivariant functions. Its action on carriers and morphisms is the original one. Faithfulness follows by equality of underlying functions.",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "def-exc-discrete-continuous-rep-to-commgrp"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use fullness and essential surjectivity to make H an equivalence; take its inverse equivalence E.",
+   "uses": [
+    "lem-exc-discrete-continuous-rep-to-commgrp-full",
+    "lem-exc-discrete-continuous-rep-to-commgrp-ess-surj"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the counit of H.asEquivalence with the internal-group forgetful functor and the inclusion into plain actions. Because H retains the underlying action definitionally, its components have exactly the requested carrier types. Naturality of the whiskered counit supplies every compatibility square.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category"
+  "def-exc-discrete-continuous-rep-to-commgrp",
+  "lem-exc-discrete-continuous-rep-to-commgrp-ess-surj",
+  "lem-exc-discrete-continuous-rep-to-commgrp-full"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JQ"
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point",
+  "note": "Explicit reverse functor and counit assembly of the source identification."
  },
  "lean": {
   "existing": false,
@@ -114,9 +130,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T112843-L-769043",
+  "landing": "20261012T144126-L-2100952",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

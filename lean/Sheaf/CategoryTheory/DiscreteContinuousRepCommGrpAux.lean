@@ -3,6 +3,8 @@ module
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpFull
+import Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpEssSurj
 
 @[expose] public section
 
@@ -46,6 +48,18 @@ theorem discreteContinuousRep_equiv_with_compatible_objectwise_iso
           (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G).map f) ≫
             (e Y).hom = (e X).hom ≫
               ((CommGrp.forget (DiscreteContAction (Type w) G) ⋙ V).map f) := by
-  sorry
+  dsimp
+  let H := discreteContinuousRepToCommGrp (G := G)
+  let := discreteContinuousRepToCommGrp_full G
+  let := discreteContinuousRepToCommGrp_essSurj G
+  let : H.IsEquivalence := {}
+  let E := H.asEquivalence
+  let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type w) (G := G)) ⋙
+    ObjectProperty.ι (Action.IsContinuous (V := Type w) (G := G))
+  let W := CommGrp.forget (DiscreteContAction (Type w) G) ⋙ V
+  let e := Functor.isoWhiskerRight E.counitIso W
+  refine ⟨E.symm, fun X ↦ e.app X, ?_⟩
+  intro X Y f
+  exact e.hom.naturality f
 
 end Rep

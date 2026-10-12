@@ -1,0 +1,138 @@
+{
+ "id": "lem-exc-discrete-continuous-rep-to-commgrp-full",
+ "kind": "statement",
+ "title": "Fullness of the discrete representation to internal group functor",
+ "statement": "For every topological group $G$ and carrier universe $w$, equip $\\mathcal C=\\mathrm{DiscreteContAction}(\\mathrm{Type}(w),G)$ with a Cartesian monoidal structure and braiding. The functor $H$ of [def-exc-discrete-continuous-rep-to-commgrp] is full: every internal group morphism $H(M)\\to H(N)$ is induced by an equivariant integer-linear map $M\\to N$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+ },
+ "stmt_deps": [
+  "def-exc-discrete-continuous-rep-to-commgrp"
+ ],
+ "proof": [
+  {
+   "text": "For every pair of equivariant maps s,t from X to the underlying action of M, multiplication in Hom(X,H(M)) evaluates pointwise as s(x)+t(x). This follows by evaluating the represented multiplication after the Cartesian lift, and using lift_fst and lift_snd.",
+   "uses": [
+    "def-exc-discrete-continuous-rep-to-commgrp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the product representation M×M. Its stabilizer at (x,y) is the intersection of the open stabilizers of x and y. Apply the internal group morphism to the product of the two projection maps, and evaluate at (x,y). Thus its underlying equivariant function preserves addition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Preservation of addition implies preservation of zero by cancellation. Use int_smul_eq_zsmul for each stored module structure and map_zsmul for the additive homomorphism to obtain integer-linearity. Equivariance is already part of the underlying action morphism. The resulting representation morphism maps to the original internal morphism since their underlying functions coincide.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-continuous-rep-to-commgrp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point",
+  "note": "Explicit categorical and elementwise expansion of the formal identification in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal commutative group objects in discrete continuous group actions",
+   "results": "Internal Server Error; the service was unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative group objects in group actions equivalent to integer linear representations",
+   "results": "Eight hits; ofMulDistribMulAction constructs individual representations but no equivalence with internal groups in discrete continuous actions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapCommGrp\"",
+   "results": "Twelve hits including mapCommGrp and its full-faithfulness; none constructs the discrete representation functor or proves its essential surjectivity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp.*Action|Action.*CommGrp|continuousSMul_iff_stabilizer_isOpen",
+   "results": "Found continuousSMul_iff_stabilizer_isOpen, CommGrpObj.ofRepresentableBy, and the internal commutative group/type equivalence. Searches in both library roots found no reverse representation functor or its fullness/essential-surjectivity lemmas. Blueprint search of discrete continuous and Tag 04JQ found no duplicate of these component statements.",
+   "date": "2026-10-12",
+   "verdict": "use Mathlib for continuity and represented internal group laws; specialized components are new"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, abelian enhancement of the set-valued G-set equivalence: a G-module is a G-set with an equivariant commutative group law",
+   "via": [
+    "lem-exc-discrete-continuous-rep-commgrp-compatible",
+    "lem-exc-discrete-continuous-rep-commgrp",
+    "lem-exc-abelian-sheaves-gmodules-transport",
+    "lem-exc-abelian-sheaves-gmodules-core",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiscreteContinuousRepToCommGrpFull",
+  "file": "lean/Sheaf/CategoryTheory/DiscreteContinuousRepToCommGrpFull.lean",
+  "declaration": "Rep.discreteContinuousRepToCommGrp_full",
+  "statement": "theorem discreteContinuousRepToCommGrp_full\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]\n    [BraidedCategory (DiscreteContAction (Type w) G)] :\n    (discreteContinuousRepToCommGrp (G := G)).Full",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2100952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2100952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
