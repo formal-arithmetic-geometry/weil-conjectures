@@ -10,9 +10,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.RingTheory.PresentationLocalizedConormalSplit
-import Mathlib.RingTheory.Kaehler.TensorProduct
-import Mathlib.LinearAlgebra.TensorProduct.Prod
+import Sheaf.RingTheory.SmoothQuotientFibreFinrankAdd
 
 /-! # Differential rank at points of fibres of a smooth polynomial quotient
 Source: Stacks Project, Smoothing Ring Maps, proofs of Lemmas 07CG and 07CH.
@@ -61,6 +59,9 @@ theorem smooth_quotient_fibre_differential_rank
         (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]
           KaehlerDifferential p.ResidueField
             (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) = n - c := by
-  sorry
+  have h := smooth_quotient_fibre_finrank_add f b p q
+  constructor
+  · omega
+  · omega
 
 end Algebra

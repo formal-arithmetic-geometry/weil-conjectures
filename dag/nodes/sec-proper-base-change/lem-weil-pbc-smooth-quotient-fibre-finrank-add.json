@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-smooth-quotient-fibre-finrank-add",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-quotient-fibre-differential-rank",
+   "place": "Additive rank identity used in the proof of the differential rank formula",
+   "via": [
+    "lem-weil-pbc-smooth-quotient-fibre-differential-rank"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Additive finrank identity for a smooth quotient fibre",
+ "statement": "Let R be a commutative ring, n,c natural numbers, f : Fin c → MvPolynomial (Fin n) R, and Q the indicated polynomial quotient. Assume Q is smooth over R and the conormal module has a Fin c basis. For a prime p of R and a prime q of the fibre, the sum of c and the finrank over the residue field of q of the base-changed Kähler differentials of the fibre equals n.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tags 07CG and 07CH, split conormal sequence and fibre dimension sentence."
+ },
+ "stmt_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-presentation-localized-conormal-split"
+ ],
+ "proof": [
+  {
+   "text": "Tensor the split conormal sequence for the smooth polynomial quotient with the residue field at q, use the chosen conormal basis and the polynomial coordinate basis, and identify the differential summand by Kähler differential base change and tensor associativity. The resulting direct-sum equivalence has finite-dimensional total space of rank n and first summand rank c, so its second summand has rank d with c+d=n.",
+   "uses": [
+    "lem-weil-pbc-presentation-localized-conormal-split",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-module-base-change",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-presentation-localized-conormal-split",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-module-base-change",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tags 07CG and 07CH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finrank tensor Kahler differential smooth quotient fibre additive rank",
+   "results": "No exact match; only standard smooth rank formulas.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank TensorProduct KaehlerDifferential",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*KaehlerDifferential|finrank.*Cotangent",
+   "results": "Related smooth-point formulas only; no additive identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothQuotientFibreDifferentialRank",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothQuotientFibreFinrankAdd",
+  "file": "lean/Sheaf/RingTheory/SmoothQuotientFibreFinrankAdd.lean",
+  "declaration": "Algebra.smooth_quotient_fibre_finrank_add",
+  "statement": "theorem smooth_quotient_fibre_finrank_add\n    {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)\n    [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n    (b : Module.Basis (Fin c)\n      (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n      (Ideal.span (Set.range f)).Cotangent)\n    (p : Ideal R) [p.IsPrime]\n    (q : PrimeSpectrum (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) :\n    c + Module.finrank q.asIdeal.ResidueField\n      (q.asIdeal.ResidueField ⊗[p.Fiber\n        (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n          KaehlerDifferential p.ResidueField\n            (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) = n",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T214714-L-1272768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T214714-L-1272768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
