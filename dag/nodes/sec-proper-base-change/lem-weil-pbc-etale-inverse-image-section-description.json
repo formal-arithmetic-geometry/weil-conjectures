@@ -26,49 +26,23 @@
  ],
  "proof": [
   {
-   "text": "By the definition of the etale inverse image, $g^{-1}F$ is the sheafification of the presheaf $P$ on $T_{\\Et}$ with $P(T')$ the filtered colimit over pairs $(V\\to S,\\,T'\\to V\\times_ST)$ of $F(V)$. Thus a section of $g^{-1}F$ is a section of the sheafification of this presheaf.",
+   "text": "Apply the local sheafification representative theorem, apply the pointwise Kan representative theorem to each representative, and compose the two equalities.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "lem-weil-pbc-etale-inverse-image-section-description-core",
+    "lem-weil-pbc-etale-inverse-image-section-description-representation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
-   }
-  },
-  {
-   "text": "Apply the local-section clause of sheafification to the section over $T$. There is an etale covering $\\{T_a\\to T\\}$ and, for each $a$, an element $p_a\\in P(T_a)$ whose image in the sheafification is the restriction of the original section.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
-   }
-  },
-  {
-   "text": "For each $a$, the filtered-colimit representation of $p_a$ supplies an etale object $V_a\\to S$, a morphism $T_a\\to V_a\\times_ST$, and a section $t_a\\in F(V_a)$ representing $p_a$. Composing $T_a\\to V_a\\times_ST$ with the projection gives a factorization $T_a\\to V_a\\to S$, and the image of $t_a$ in the inverse image is exactly the restriction of the original section to $T_a$. Hence the claimed local description holds.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-etale-inverse-image-section-description-core",
+  "lem-weil-pbc-etale-inverse-image-section-description-representation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09XN (lemma-describe-pullback), proof paragraph beginning 'By construction of g_{i, small}^{-1}G'"
+  "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'",
+  "note": "Direct Mathlib local-surjectivity and pointwise Kan colimit route through two proved specializations."
  },
  "mathlib_searches": [
   {
@@ -167,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T060748-L-2912658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

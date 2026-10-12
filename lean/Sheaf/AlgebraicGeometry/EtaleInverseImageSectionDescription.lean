@@ -6,8 +6,8 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.AlgebraicGeometry.EtaleInverseImageLocalSheafification
+import Sheaf.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 
 /-!
 # Local representatives of sections of an étale inverse image
@@ -57,6 +57,13 @@ theorem etaleInverseImageSectionDescription (S T : Scheme.{u}) (g : T ⟶ S)
               (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1))
               (S.smallGrothendieckTopology @Etale)
               (T.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op V) t) := by
-  sorry
+  dsimp [Scheme.etaleSetPullback]
+  obtain ⟨I, Z, π, hπ, hp⟩ := etaleInverseImageSectionDescription_core S T g F s
+  refine ⟨I, Z, π, hπ, ?_⟩
+  intro i
+  obtain ⟨p, hp⟩ := hp i
+  obtain ⟨V, a, t, ht⟩ :=
+    etaleInverseImageSectionDescription_representation S T g F (Z i) p
+  exact ⟨V, a, t, hp.trans ht⟩
 
 end AlgebraicGeometry

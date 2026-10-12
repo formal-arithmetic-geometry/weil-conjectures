@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-section-description-core",
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "title": "Core local representative theorem",
+ "statement": "For a scheme morphism g:T→S and set sheaf F on S_et [lem-weil-pbc-sets-etale-inverse-image-composition-units], every section of g⁻¹F over T has, on an étale cover indexed in Type u, representatives in the presheaf left Kan extension of F along opposite base change.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "Unfold g⁻¹F as sheafification aP. Mathlib Presheaf.isLocallySurjective_toSheafify and imageSieve_mem show that arrows on which s has a P-representative form a covering sieve. Scheme.mem_smallGrothendieckTopology extracts an étale Cover with index in Type u whose presieve lies in that sieve. Use its objects and maps as Z and π; Sieve.le_generate makes this family covering, and image-sieve membership supplies each p and its equation.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 09XN (lemma-describe-pullback), proof, paragraph beginning 'By construction of g_{i, small}^{-1}G'",
+  "note": "Direct specialization of generic Mathlib construction lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left Kan extension elements represented by source sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification unit locally surjective covering sieve",
+   "results": "Presheaf.isLocallySurjective_toSheafify and imageSieve_mem",
+   "date": "2026-10-12",
+   "verdict": "generic tools used; no exact scheme-specific theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSieve_mem",
+   "results": "Mathlib/CategoryTheory/Sites/LocallySurjective.lean:97",
+   "date": "2026-10-12",
+   "verdict": "used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-inverse-image-section-description",
+   "place": "intermediate proof step",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageLocalSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageLocalSheafification.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageSectionDescription_core",
+  "statement": "theorem etaleInverseImageSectionDescription_core (S T : Scheme.{u}) (g : T ⟶ S) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (s : ((Scheme.etaleSetPullback g).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 T)))) : let P := (MorphismProperty.Over.pullback @Etale ⊤ g).op.lan.obj ((sheafToPresheaf S.smallEtaleTopology (Type (u + 1))).obj F) ∃ (I : Type u) (Z : I → T.Etale) (π : ∀ i : I, Z i ⟶ Scheme.Etale.mk (𝟙 T)), Sieve.ofArrows Z π ∈ T.smallEtaleTopology (Scheme.Etale.mk (𝟙 T)) ∧ ∀ i : I, ∃ p : P.obj (op (Z i)), ((Scheme.etaleSetPullback g).obj F).obj.map (π i).op s = (toSheafify T.smallEtaleTopology P).app (op (Z i)) p",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T060748-L-2912658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T060748-L-2912658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
