@@ -20,44 +20,51 @@
  ],
  "proof": [
   {
-   "text": "The proper closed subscheme $Z$ is given. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (1), lift both coherent modules to $Z$ and identify their Hom sets. Its formal version (2) identifies Hom sets of their completions and is compatible with completion of a morphism.",
+   "text": "X is Noetherian by finite type over Spec A, and Z is Noetherian by properness of j≫f. Coherence on X gives quasi-coherence and finite type. The annihilation theorem makes the adjunction units G→j_*j^*G and F→j_*j^*F invertible and makes the pullbacks quasi-coherent and finite type. Coherence on Z gives coherent objects GZ and FZ.",
    "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper completion on Z is fully faithful. Closed pushforward is fully faithful, hence so is termwise pushforward on inverse systems. Use the natural completion comparison from closedImmersion_coherentFormal_equivalence to transfer full faithfulness to the composite Coh(Z)→Modules(X)→formal systems(X). Since Coh(Z)→Modules(X) is itself fully faithful, the completion map between the two pushforward objects is bijective.",
+   "uses": [
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
     "lem-weil-pbc-closed-immersion-coherent-equivalence",
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-formal-completion-fully-faithful-proper] on $Z\\to\\operatorname{Spec}A$. Transport its completion bijection through the two preceding Hom identifications to obtain a bijection on $X$.",
-   "uses": [
-    "lem-weil-pbc-formal-completion-fully-faithful-proper",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "[lem-weil-pbc-thickening-systems-dictionary] identifies the morphisms of the completed objects with compatible families on $X_n$, and takes a completed morphism to its restrictions. The canonical comparison is the given $c_n$; thus the resulting bijection is the displayed restriction map.",
-   "uses": [
-    "lem-weil-pbc-thickening-systems-dictionary"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of the natural transformation c_n gives compatibility for each restricted morphism. This supplies the proof component of the compatible-family subtype.",
+   "text": "Transport the preceding bijection from j_*GZ and j_*FZ back to G and F through their invertible units. The helper map_bijective_of_isos verifies the naturality square for a functor and conjugation of Hom by isomorphisms, then proves injectivity and surjectivity.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "The formal-Hom dictionary gives an equivalence e from these formal completion morphisms to the compatible restriction families, and specifies e(formalCompletionMap w)=(j_n^*w)_n. Compose its bijection with the completion bijection. Rewrite by that equation to obtain exactly the stated restriction map.",
+   "uses": [
+    "lem-weil-pbc-thickening-completion-hom-dictionary"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
   "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
   "lem-weil-pbc-formal-completion-fully-faithful-proper",
-  "lem-weil-pbc-thickening-systems-dictionary"
+  "lem-weil-pbc-thickening-completion-hom-dictionary",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E and Remark 088F; the dictionary and natural comparison details are expanded as in the parent proof."
+  "place": "Theorem 088E first paragraph, Lemmas 087T and 0883 and Remark 088F; explicit categorical transport through constructed pullbacks and invertible units"
  },
  "mathlib_searches": [
   {
@@ -130,9 +137,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T085240-L-15135",
+  "landing": "20261012T135318-L-1693309",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
