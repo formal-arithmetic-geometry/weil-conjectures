@@ -1,6 +1,6 @@
 # Work queue
 
-107 items; claim with `tools/claim.py next <group> [--stage N]`.
+108 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (97)
+## Stage 3: modules to prove (98)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -75,15 +75,16 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechMathlibComparison` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients` | 6 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero` | 6 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison` | 7 | 1 | proof |
+| `Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation` | 7 | 1 | proof |
 | `Sheaf.Topology.ClosedUnionCohomologyVanishing` | 7 | 1 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
