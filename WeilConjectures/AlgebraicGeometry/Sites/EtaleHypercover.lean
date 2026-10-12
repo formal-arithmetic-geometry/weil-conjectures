@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimitModule
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Refinement
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Map
 
@@ -92,21 +93,10 @@ instance [CompactSpace X] [QuasiSeparatedSpace X] : (etaleQcqs X).IsClosedUnderF
   (etaleQcqs X).isClosedUnderFiniteProducts_of_terminal_of_pullback
 
 end Qcqs
+
 section Lift
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
-
-/-- A jointly surjective family of morphisms of étale `X`-schemes is a covering family for every
-étale sheaf of `Λ`-modules. -/
-lemma isSheafFor_ofArrows_moduleCat (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    {W : X.Etale} {κ : Type*} {U : κ → X.Etale} (g : ∀ a, U a ⟶ W)
-    (hg : ⋃ a, Set.range (g a).left = Set.univ) :
-    Presieve.IsSheafFor (F.obj ⋙ CategoryTheory.forget _) (Presieve.ofArrows U g) := by
-  have := (isSheaf_iff_isSheaf_of_type _ _).mp
-    (Presheaf.isSheaf_comp_of_isSheaf _ F.obj (CategoryTheory.forget (ModuleCat.{u + 1} Λ))
-      F.property)
-  rw [Presieve.isSheafFor_iff_generate]
-  exact this _ ((ofArrows_mem_smallEtaleTopology_iff g).2 hg)
 
 /-- An étale sheaf of `Λ`-modules has at most one section over an étale `X`-scheme with empty
 underlying scheme. -/
