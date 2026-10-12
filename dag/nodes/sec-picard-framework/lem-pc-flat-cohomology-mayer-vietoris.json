@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-flat-cohomology-mayer-vietoris",
+ "kind": "statement",
+ "title": "Exact Mayer--Vietoris diagram of canonical flat base-change comparisons",
+ "statement": "Let $R,S$ be commutative rings with $S$ a flat $R$-algebra [def-weil-pbc-flat-ring-map], $f:X\\to\\operatorname{Spec}R$ a morphism of schemes [def-pc-scheme], $M$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and $U,V\\subseteq X$ open subschemes with $U\\cup V=X$. Write $M_W=M|_W$ using module pullback [def-pc-base-change], and $W_S=W\\times_{\\operatorname{Spec}R}\\operatorname{Spec}S$ with pulled-back module $M_{W,S}$. Put $A(W,n)=S\\otimes_R H^n(W,M_W)$, $B(W,n)=H^n(W_S,M_{W,S})$, $A_X(n)=S\\otimes_R H^n(X,M)$ and $B_X(n)=H^n(X_S,M_S)$, using Ext-based cohomology [pqf-def-cohomology]. Let $\\beta(W,n):A(W,n)\\to B(W,n)$ and $\\beta_X(n):A_X(n)\\to B_X(n)$ be exactly the canonical comparisons of [def-pc-flat-cohomology-comparison], and let $P_n=\\beta(U,n)\\times\\beta(V,n)$. There exist $S$-linear maps $r_n:A_X(n)\\to A(U,n)\\times A(V,n)$, $d_n:A(U,n)\\times A(V,n)\\to A(U\\cap V,n)$, $\\delta_n:A(U\\cap V,n)\\to A_X(n+1)$ and corresponding maps $r'_n,d'_n,\\delta'_n$ between the $B$ terms, such that $r_0,r'_0$ are injective, both rows are exact at each consecutive pair $(r_n,d_n),(d_n,\\delta_n),(\\delta_n,r_{n+1})$ and their primed analogues, and for every $n\\geq0$ the squares commute: $r'_n\\beta_X(n)=P_nr_n$, $d'_nP_n=\\beta(U\\cap V,n)d_n$, and $\\delta'_n\\beta(U\\cap V,n)=\\beta_X(n+1)\\delta_n$. No comparison is assumed bijective. These are the scalar-extended and pulled-back Mayer--Vietoris rows transported to the displayed terms; neither compactness nor separatedness is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-flat-ring-map",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Tag 02KH, coherent-lemma-flat-base-change-cohomology, proof, Mayer--Vietoris alternative; Tag 01EB, cohomology-lemma-mayer-vietoris, exact sequence and functoriality"
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sc-mayer-vietoris-ringed-space] to the two-open cover of X. Naturality in M makes every horizontal map R-linear. Tensor with S using [lem-weil-pbc-flat-tensor-exact], preserving exactness and the initial injection. Identify the tensor of the binary direct sum with the product of the tensor factors. This produces the upper maps r_n, d_n and delta_n.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preimages of U and V under the projection X_S to X cover X_S and intersect in the preimage of U intersection V. Apply [lem-sc-mayer-vietoris-ringed-space] to the pulled-back module. Cartesian open immersion identifications and iterated module-pullback isomorphisms identify the lower terms with B(W,n) as defined in the statement, producing r prime, d prime and delta prime with exactness and an initial injection.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact abelian-sheaf inverse image and the coefficient map in [def-pc-flat-cohomology-comparison]. Inverse image transports the short exact sequence of free abelian sheaves attached to the Mayer-Vietoris square to the inverse-image cover. Its Ext class defines the boundary. Functoriality of Ext and preservation of Yoneda composition identify the resulting long-sequence comparison with H.baseChangeLinear: the constant-sheaf isomorphism handles the union term, and the cartesian open isomorphisms handle the restricted terms. Hence the restriction, difference and boundary squares commute. Extend scalars; on a pure tensor s tensor x both composites are s times the common pre-extension value, so linearity proves all three displayed squares. No local bijectivity assumption is involved.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-sc-mayer-vietoris-ringed-space"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-sc-mayer-vietoris-ringed-space",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Expanded construction of the exact comparison diagram in the Mayer--Vietoris alternative, using Tag 01EB and exact inverse image on Ext"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical flat scalar extension cohomology comparison commutes with the Mayer Vietoris long exact sequence, including connecting maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical flat scalar extension cohomology comparison commutes with the Mayer Vietoris long exact sequence, including connecting maps",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, groupCohomology.map_cochainsFunctor_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, groupCohomology.mapShortComplex₁_exact, groupCohomology.mapShortComplex₃_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, groupCohomology.mapShortComplex₂_exact",
+   "date": "2026-10-12",
+   "verdict": "No complete match; general Mayer--Vietoris infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|baseChange.*[Ee]xact|baseChange.*[Cc]ommut",
+   "results": "Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-12",
+   "verdict": "No complete match; general Mayer--Vietoris infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyGluing",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "proof, quasi-separated-case paragraph: Mayer--Vietoris and induction on the number of affine opens",
+   "via": [
+    "lem-pc-flat-cohomology-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyMayerVietoris",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyMayerVietoris.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.baseChange_mayerVietoris",
+  "statement": "theorem H.baseChange_mayerVietoris {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules) [M.IsQuasicoherent] (U V : X.Opens) (hcover : U ⊔ V = ⊤) : let A := fun (W : X.Opens) (n : ℕ) ↦ TensorProduct R S (HOver (W.ι ≫ f) ((pullback W.ι).obj M) n) let B := fun (W : X.Opens) (n : ℕ) ↦ HOver (baseChangeSnd (S := S) (W.ι ≫ f)) (baseChangedModule (S := S) (W.ι ≫ f) ((pullback W.ι).obj M)) n let AX := fun n : ℕ ↦ TensorProduct R S (HOver f M n) let BX := fun n : ℕ ↦ HOver (baseChangeSnd (S := S) f) (baseChangedModule (S := S) f M) n let β := fun (W : X.Opens) (n : ℕ) ↦ H.baseChange (S := S) (W.ι ≫ f) ((pullback W.ι).obj M) n let βX := fun n : ℕ ↦ H.baseChange (S := S) f M n ∃ (r : ∀ n : ℕ, AX n →ₗ[S] A U n × A V n) (d : ∀ n : ℕ, A U n × A V n →ₗ[S] A (U ⊓ V) n) (δ : ∀ n : ℕ, A (U ⊓ V) n →ₗ[S] AX (n + 1)) (r' : ∀ n : ℕ, BX n →ₗ[S] B U n × B V n) (d' : ∀ n : ℕ, B U n × B V n →ₗ[S] B (U ⊓ V) n) (δ' : ∀ n : ℕ, B (U ⊓ V) n →ₗ[S] BX (n + 1)), Function.Injective (r 0) ∧ Function.Injective (r' 0) ∧ (∀ n : ℕ, Function.Exact (r n) (d n) ∧ Function.Exact (d n) (δ n) ∧ Function.Exact (δ n) (r (n + 1))) ∧ (∀ n : ℕ, Function.Exact (r' n) (d' n) ∧ Function.Exact (d' n) (δ' n) ∧ Function.Exact (δ' n) (r' (n + 1))) ∧ (∀ n : ℕ, (r' n).comp (βX n) = ((β U n).prodMap (β V n)).comp (r n)) ∧ (∀ n : ℕ, (d' n).comp ((β U n).prodMap (β V n)) = (β (U ⊓ V) n).comp (d n)) ∧ (∀ n : ℕ, (δ' n).comp (β (U ⊓ V) n) = (βX (n + 1)).comp (δ n))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2919087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2919087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

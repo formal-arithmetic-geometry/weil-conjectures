@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.Topology.ModuleMayerVietoris
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyMayerVietoris
+import Mathlib.Algebra.FiveLemma
 
 /-! # Mayer--Vietoris gluing of the canonical flat base-change comparison
 
@@ -58,6 +59,36 @@ theorem H.baseChange_bijective_of_openCover
       (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) q))
     (hUV : ∀ q : ℕ, Function.Bijective
       (H.baseChange (S := S) ((U ⊓ V).ι ≫ f) ((pullback (U ⊓ V).ι).obj M) q))
-    (q : ℕ) : Function.Bijective (H.baseChange (S := S) f M q) := by sorry
+    (q : ℕ) : Function.Bijective (H.baseChange (S := S) f M q) := by
+  obtain ⟨r, d, δ, r', d', δ', hr, hr', hA, hB, cr, cd, cδ⟩ :=
+    H.baseChange_mayerVietoris (S := S) f M U V hcover
+  have hp (n : ℕ) : Function.Bijective
+      ((H.baseChange (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) n).prodMap
+        (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) n)) := by
+    exact (hU n).prodMap (hV n)
+  cases q with
+  | zero =>
+    exact LinearMap.bijective_of_bijective_of_injective_of_left_exact
+      (r 0) (d 0) (r' 0) (d' 0) (H.baseChange (S := S) f M 0)
+      ((H.baseChange (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) 0).prodMap
+        (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) 0))
+      (H.baseChange (S := S) ((U ⊓ V).ι ≫ f) ((pullback (U ⊓ V).ι).obj M) 0)
+      (cr 0) (cd 0) (hA 0).1 (hB 0).1 (hp 0) (hUV 0).1 hr hr'
+  | succ n =>
+    exact LinearMap.bijective_of_surjective_of_bijective_of_bijective_of_injective
+      (d n) (δ n) (r (n + 1)) (d (n + 1))
+      (d' n) (δ' n) (r' (n + 1)) (d' (n + 1))
+      ((H.baseChange (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) n).prodMap
+        (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) n))
+      (H.baseChange (S := S) ((U ⊓ V).ι ≫ f) ((pullback (U ⊓ V).ι).obj M) n)
+      (H.baseChange (S := S) f M (n + 1))
+      ((H.baseChange (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) (n + 1)).prodMap
+        (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) (n + 1)))
+      (H.baseChange (S := S) ((U ⊓ V).ι ≫ f)
+        ((pullback (U ⊓ V).ι).obj M) (n + 1))
+      (cd n) (cδ n) (cr (n + 1)) (cd (n + 1))
+      (hA n).2.1 (hA n).2.2 (hA (n + 1)).1
+      (hB n).2.1 (hB n).2.2 (hB (n + 1)).1
+      (hp n).2 (hUV n) (hp (n + 1)) (hUV (n + 1)).1
 
 end AlgebraicGeometry.Scheme.Modules
