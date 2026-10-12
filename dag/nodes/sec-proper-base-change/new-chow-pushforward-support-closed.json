@@ -1,0 +1,129 @@
+{
+ "id": "new-chow-pushforward-support-closed",
+ "kind": "statement",
+ "title": "Closed support of proper pushforward lies in image",
+ "statement": "Let Z be Noetherian, q : Y → Z proper, and F coherent on Y. If C is a closed subset equal to the support of F, then the support of q_*F is a closed subset D of Z contained in q(C).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, support of H paragraph; Tag 02O5"
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Since q is proper and Z Noetherian, Y is Noetherian. Proper coherent pushforward is coherent by Tag 02O5. On Z it is quasi-coherent of finite type by Tag 01XZ, so Tag 056J gives a closed support D.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Properness makes q(C) closed. For x outside q(C), put V = Z minus q(C). By hC every stalk of F on q inverse image V is zero. Any two sections on an open there have equal germs, hence agree locally and then globally by sheaf separatedness. Thus q_*F has singleton sections on every open inside V. Shrink a representative of any germ at x by intersecting with V; all such germs agree, so the pushforward stalk is zero. Contraposition gives D contained in q(C). This includes the zero module and empty source or target.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-coherent-hi",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, support of H paragraph; Tag 02O5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "support of proper pushforward of coherent sheaf is closed and contained in image of support",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn; LeanFinder and Mathlib source grep were used instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "support of pushforward contained in image support",
+   "results": "8 hits about probability mass functions and finitely supported functions, including PMF.support_map and Finsupp.mapDomain_support; none concerns sheaves or module stalks.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*pushforward|pushforward.*support",
+   "results": "9 hits in locally finitely supported functions and Haar measure extensions; none states sheaf pushforward support containment. Library source searches found only the larger proper-support statement and the higher-direct-image coherence theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of direct image sheaf vanishes outside closed image",
+   "results": "Independent B2 reading: eight hits inspected, concerning germ restriction, skyscraper stalks, residue-field evaluation and spreading out; none proves the proper coherent pushforward support assertion.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward",
+   "results": "Independent B2 reading: twelve hits inspected, giving pushforward, its adjunctions and composition isomorphism, but no support theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed.*support|support.*isClosed",
+   "results": "Independent B2 reading: 25 Mathlib hits inspected, on function and measure support rather than module stalk support. Project searches for coherent pushforward and ClosedPushforwardStalks found coherence only and the special case of a closed embedding, insufficient for arbitrary proper q.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowAlgebraizationSupport",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-algebraization-support",
+   "place": "split of its support argument",
+   "via": [
+    "new-chow-algebraization-support"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PushforwardSupportClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/PushforwardSupportClosed.lean",
+  "declaration": "AlgebraicGeometry.pushforward_support_closed_subset",
+  "statement": "theorem pushforward_support_closed_subset\n    {Z Y : Scheme.{u}} [IsNoetherian Z]\n    (q : Y ⟶ Z) [IsProper q] (F : CoherentModules Y)\n    (C : TopologicalSpace.Closeds Y)\n    (hC : (C : Set Y) = {x : Y | ¬ Subsingleton (F.obj.presheaf.stalk x)}) :\n    ∃ D : TopologicalSpace.Closeds Z,\n      (D : Set Z) =\n        {x : Z | ¬ Subsingleton (((Scheme.Modules.pushforward q).obj F.obj).presheaf.stalk x)} ∧\n      (D : Set Z) ⊆ q '' (C : Set Y)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T225256-L-1800381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T225256-L-1800381",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

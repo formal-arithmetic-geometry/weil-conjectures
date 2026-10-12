@@ -9861,3 +9861,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:52 L: merged deliver/A4/Sheaf.RingTheory.KaehlerDifferentialZeroIffPow (stage 3; reviewer PASS; first push; landing 20261012T225255-L-1800036 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:52 L: merged deliver/A4/Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal (stage 3; reviewer PASS; first push; landing 20261012T225256-L-1800134 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.CechDifferentialRepeatedCancellation (stage 3; reviewer PASS; first push; landing 20261012T225256-L-1800279 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ChowAlgebraizationSupport (stage 3; reviewer PASS; first push; landing 20261012T225256-L-1800381 (interface); batch 20261012T225253; modules 2; new nodes 1)

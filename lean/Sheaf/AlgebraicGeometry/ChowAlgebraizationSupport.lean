@@ -2,8 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import Sheaf.AlgebraicGeometry.PushforwardSupportClosed
 
 @[expose] public section
 
@@ -33,6 +32,15 @@ theorem chow_algebraization_pushforward_support
     (q : Y ⟶ Z) [IsProper q] (F : CoherentModules Y)
     (hF : Scheme.Modules.HasSupportProperOver (q ≫ f) F.obj) :
     Scheme.Modules.HasSupportProperOver f ((Scheme.Modules.pushforward q).obj F.obj) := by
-  sorry
+  obtain ⟨C, hC, hCp⟩ := hF
+  obtain ⟨D, hD, hDsub⟩ := pushforward_support_closed_subset q F C hC
+  obtain ⟨W, hWset, hWproper⟩ :=
+    (Scheme.closed_subset_proper_over_base_properties (q ≫ f) C).2.2.2 q f rfl hCp
+  have hDW : (D : Set Z) ⊆ W := by
+    rw [hWset]
+    exact hDsub
+  have hDproper :=
+    (Scheme.closed_subset_proper_over_base_properties f W).2.2.1 D hDW hWproper
+  exact ⟨D, hD, hDproper⟩
 
 end AlgebraicGeometry
