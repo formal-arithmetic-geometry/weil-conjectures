@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-section-differential-basis-quotient",
+ "kind": "statement",
+ "title": "Differential basis quotient has vanishing localized cotangent obstructions",
+ "statement": "Let R,D,Q be commutative rings, D a smooth R-algebra [def-weil-pbc-smooth-ring-map], and Q an R-algebra whose structure map R→Q is surjective. Let σ:D→Q be an R-algebra homomorphism, n≥0, and f:Fin n→D with σ(fᵢ)=0. Suppose 1⊗dfᵢ is a Q-basis [def-weil-pbc-free-module] of Q⊗_D Ω[D/R] [def-weil-pbc-kahler-differentials], using σ for the D-action. Set a=(fᵢ) and C=D/a. Given a ring homomorphism τ:C→Q with τ∘(D→C)=σ, every prime q of C containing ker τ has H₁(L[C/R])_q=0 and Ω[C/R]_q=0 (the localizations of modules [def-weil-pbc-module-localization]).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M7, second paragraph, the Jacobi-Zariski sequence and rank/Nakayama argument through H₁ and Ω vanishing"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Set C=D/(fᵢ). Smoothness gives projectivity of Ω[D/R] and vanishing of H₁(L[D/R]). Apply the smooth Jacobi-Zariski quotient sequence to a=(fᵢ). The map δ:a/a²→C⊗_D Ω[D/R] sends the class of fᵢ to 1⊗dfᵢ; its kernel identifies with H₁(L[C/R]) and its cokernel with Ω[C/R].",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-quotient-smooth",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix q⊇ker τ and pull back to p in D. The identity τ∘mk=σ implies ker σ⊆p. Surjectivity of R→Q implies σ is surjective, so D/ker σ≅Q and the map D→κ(p) factors through Q. The given basis specializes to a κ(p)-basis of Ω[D/R]⊗_D κ(p) of size n. The finite projective module Ω[D/R]_p is free and its rank is this residue-field dimension, hence n. Therefore (C⊗_D Ω[D/R])_q is free of rank n over C_q.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-rank-locally-constant",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Modulo the maximal ideal of C_q the images δ(fᵢ) form the given residue-field basis. Nakayama implies δ_q is surjective. Since the fᵢ generate a, their conormal classes generate (a/a²)_q, giving a surjection ψ:C_q^n→(a/a²)_q. Choose a basis identification θ of the target of δ_q with C_q^n. The composite θδ_qψ is a surjective endomorphism of a finite module, hence bijective. Injectivity of the composite implies injectivity of ψ; its surjectivity makes ψ bijective. For any element killed by δ_q, lift it along ψ and use injectivity of the composite to see it is zero. Thus δ_q is bijective.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization preserves exactness of the Jacobi-Zariski sequence. The localized H₁ injects into ker δ_q=0, and the localized Ω is the cokernel of the surjective δ_q, hence zero. Zero additive modules are subsingleton, giving both conclusions.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "lem-weil-pbc-jacobi-zariski-quotient-smooth",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G1",
+  "date": "2026-10-12",
+  "description": "Follows Stacks 07M7, with the module and ring-map transports written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a smooth algebra by kernel elements with a basis of differentials along a surjective section has vanishing localized cotangent complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotienting a smooth algebra by elements in a section kernel whose differentials form a basis modulo that kernel gives zero localized cotangent homology and differentials",
+   "results": "Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.Extension.cotangentComplex_mk; Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff; Algebra.Generators.cotangentCompAwaySec",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; no statement with this conclusion and these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*kaehler|kaehler.*basis|cotangent.*quotient|quotient.*cotangent",
+   "results": "Kaehler/Polynomial.lean, Extension/Cotangent/Basic.lean and Extension/Cotangent/Free.lean give basis or differential-map ingredients; Ideal/CotangentBaseChange.lean gives base change of cotangents. None gives the section differential-basis quotient conclusion.",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; no statement with this conclusion and these hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionEtaleNeighbourhoods",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-section-etale-neighbourhoods",
+   "place": "Tag 07M7, second paragraph, the Jacobi-Zariski sequence and rank/Nakayama argument through H₁ and Ω vanishing",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SectionDifferentialBasisQuotient",
+  "file": "lean/Sheaf/RingTheory/SectionDifferentialBasisQuotient.lean",
+  "declaration": "Algebra.localized_cotangent_vanishes_of_section_differential_basis",
+  "statement": "theorem localized_cotangent_vanishes_of_section_differential_basis\n    (R D Q : Type u) [CommRing R] [CommRing D] [CommRing Q]\n    [Algebra R D] [Algebra R Q] [Smooth R D]\n    (σ : D →ₐ[R] Q) (hπ : Function.Surjective (algebraMap R Q))\n    (n : ℕ) (f : Fin n → D) (hf : ∀ i, σ (f i) = 0)\n    (hb : letI : Algebra D Q := σ.toRingHom.toAlgebra\n      ∃ b : Module.Basis (Fin n) Q (Q ⊗[D] KaehlerDifferential R D),\n        ∀ i, b i = 1 ⊗ₜ[D] KaehlerDifferential.D R D (f i))\n    (τ : (D ⧸ Ideal.span (Set.range f)) →+* Q)\n    (hτ : τ.comp (Ideal.Quotient.mk (Ideal.span (Set.range f))) = σ.toRingHom) :\n    ∀ q : PrimeSpectrum (D ⧸ Ideal.span (Set.range f)),\n      RingHom.ker τ ≤ q.asIdeal →\n        Subsingleton (LocalizedModule q.asIdeal.primeCompl\n          (H1Cotangent R (D ⧸ Ideal.span (Set.range f)))) ∧\n        Subsingleton (LocalizedModule q.asIdeal.primeCompl\n          (KaehlerDifferential R (D ⧸ Ideal.span (Set.range f))))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095902-L-316404",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095902-L-316404",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

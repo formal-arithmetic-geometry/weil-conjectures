@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-smooth-section-differential-basis",
+ "kind": "statement",
+ "title": "Stabilize a smooth section to a differential basis",
+ "statement": "Let A and B be commutative rings, B a smooth A-algebra [def-weil-pbc-smooth-ring-map], J an ideal of A, and σ:B→A/J an A-algebra map. There exist an A-algebra A₁ étale over A [def-weil-etale-morphism], an A-algebra D also equipped with a compatible A₁-algebra structure, with D smooth over A₁, and A-algebra maps j:B→D and τ:D→A/J such that τ∘j=σ and the composite A₁→D→A/J is surjective. Moreover there exist n≥0 and elements fᵢ∈D indexed by Fin n, all killed by τ, such that (1⊗dfᵢ) is a basis [def-weil-pbc-free-module] of (A/J)⊗_D Ω[D/A₁] [def-weil-pbc-kahler-differentials], where D acts on A/J through τ. No quotient or étale neighbourhood of D is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M7, first paragraph and choice of kernel lifts at the beginning of the second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Put N=ker σ. The map σ is surjective because σ(algebraMap(a)) is the class of a, and A→A/J is surjective. Apply the smooth conormal sequence. Its right term is (A/J)⊗_B Ω[B/A], finite projective by smoothness and base change of a finite projective module. The image of J/J² is (JB+N²)/N²: if σ(b) is the class of a and x∈J, then (b-algebraMap(a))algebraMap(x)∈N². Thus P=N/(N²+JB) identifies with that right term.",
+   "uses": [
+    "lem-weil-pbc-smooth-conormal-sequence-exact",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite projective complement Kbar with P⊕Kbar≅(A/J)^n. By projective lifting, choose A→A₁ étale, a quotient equivalence α:A/J≅A₁/JA₁ compatible with A, and a finite projective A₁-module K whose reduction is Kbar base changed by α. Put B₁=A₁⊗_A B and σ₁(a₁⊗b)=class(a₁)α(σ(b)). Base change of smoothness and differentials gives P₁≅P⊗_(A/J)(A₁/JA₁), so P₁⊕K/JK is free of rank n.",
+   "uses": [
+    "lem-weil-pbc-lift-projective-module-etale",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-smooth-conormal-sequence-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct D=B₁⊗_(A₁) Sym_(A₁)(K). The symmetric algebra is smooth, so D is smooth over A₁. Its augmentation p:D→B₁ and σ₁ give the section ρ:D→A₁/JA₁. Writing the augmentation ideal as k, its degree-one quotient k/k² is B₁⊗K, and ker ρ=j(ker σ₁)⊕k. Modulo the square of ker ρ and JD, the degree-zero part is P₁ and the degree-one part is K/JK. Products of positive-degree elements and products with the old kernel are killed. Thus the conormal module along ρ is P₁⊕K/JK, finite free of rank n.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-conormal-sequence-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a basis of the free conormal module and lift each vector to an fᵢ∈ker ρ. The conormal identification sends these vectors to 1⊗dfᵢ. Compose ρ with α⁻¹ to obtain τ:D→A/J; restrict the canonical map into D to B to obtain j. The maps are A-linear and τj=σ. The composite A₁→D→A/J is the quotient A₁→A₁/JA₁ followed by α⁻¹, hence surjective. Transport the basis along α⁻¹.",
+   "uses": [
+    "lem-weil-pbc-smooth-conormal-sequence-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-lift-projective-module-etale",
+  "lem-weil-pbc-smooth-conormal-sequence-exact",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G1",
+  "date": "2026-10-12",
+  "description": "Follows Stacks 07M7, with the module and ring-map transports written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth algebra with a section to a quotient ring, an etale base change and a symmetric algebra give a finite basis of differentials along the section",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth section to A modulo an ideal has a free differential module after etale base change and tensoring a symmetric algebra of a finite projective complement",
+   "results": "Algebra.IsStandardSmooth.free_kaehlerDifferential; Algebra.FormallySmooth.projective_kaehlerDifferential; Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; no statement with this conclusion and these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*section|section.*smooth; basis.*kaehler|kaehler.*basis",
+   "results": "Smooth/StandardSmoothOfFree.lean and Kaehler/Polynomial.lean contain standard smooth and polynomial differential bases. No simultaneous section stabilization theorem. The existing conormal-free-presentation-basis node is about a polynomial presentation kernel, not a section kernel.",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; no statement with this conclusion and these hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionEtaleNeighbourhoods",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-section-etale-neighbourhoods",
+   "place": "Tag 07M7, first paragraph and choice of kernel lifts at the beginning of the second paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionDifferentialBasis",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionDifferentialBasis.lean",
+  "declaration": "AlgebraicGeometry.exists_smooth_section_differential_basis",
+  "statement": "theorem exists_smooth_section_differential_basis\n    (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]\n    [Algebra.Smooth A B] (J : Ideal A) (σ : B →ₐ[A] A ⧸ J) :\n    ∃ A₁ : CommAlgCat.{u} A,\n      Etale (Spec.map (CommRingCat.ofHom (algebraMap A A₁))) ∧\n      ∃ (D : CommAlgCat.{u} A) (_ : Algebra A₁ D) (_ : IsScalarTower A A₁ D),\n        Algebra.Smooth A₁ D ∧\n        ∃ (j : B →ₐ[A] D) (τ : D →ₐ[A] A ⧸ J),\n          τ.comp j = σ ∧\n          Function.Surjective (τ.toRingHom.comp (algebraMap A₁ D)) ∧\n          ∃ (n : ℕ) (f : Fin n → D), (∀ i, τ (f i) = 0) ∧\n            letI : Algebra D (A ⧸ J) := τ.toRingHom.toAlgebra\n            ∃ b : Module.Basis (Fin n) (A ⧸ J) ((A ⧸ J) ⊗[D] KaehlerDifferential A₁ D),\n              ∀ i, b i = 1 ⊗ₜ[D] KaehlerDifferential.D A₁ D (f i)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095902-L-316404",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095902-L-316404",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
