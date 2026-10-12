@@ -1,0 +1,146 @@
+{
+ "id": "new-algclosed-differential-fiber-finrank",
+ "kind": "statement",
+ "title": "Differential fibre finrank comparison above a prime",
+ "statement": "Let k be a field, S a finite type k-algebra, q a prime of S, and let K be algebraically closed over k with a maximal prime qK of K tensor_k S contracting to q. Then the finrank of the Kähler differential fibre at qK equals that at q.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-field-extension",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00TT, proof of (2) => (1), construction of K and m; Tag 00RV for differential base change. Read at https://stacks.math.columbia.edu/tag/00TT."
+ },
+ "proof": [
+  {
+   "text": "Install the tensor product right S-algebra structure. Contraction gives the S-algebra residue-field embedding f : kappa(q) to kappa(qK), using Ideal.ResidueField.mapₐ. Its algebra structure gives IsScalarTower S kappa(q) kappa(qK).",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base-change the inverse of KaehlerDifferential.tensorKaehlerEquiv k K S B to L = kappa(qK), and use TensorProduct.AlgebraTensorModule.cancelBaseChange S B L L to obtain the L-linear equivalence from the differential fibre over B to L tensor_S Omega[S/k].",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with the inverse of cancelBaseChange S kappa(q) L L to identify this with L tensor_kappa(q) (kappa(q) tensor_S Omega[S/k]). Apply e.finrank_eq and Module.finrank_baseChange. No flatness or smoothness is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00TT (explicit geometric point construction) and Tag 00RV (differential base change); read at https://stacks.math.columbia.edu/tag/00TT and https://stacks.math.columbia.edu/tag/00RV on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Taking the algebraic closure of the residue field yields a closed point over any given prime; differential fibre dimensions are invariant under scalar extension",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differential module under extension of scalars is the tensor product, and its dimension at corresponding prime ideals is unchanged",
+   "date": "2026-10-12",
+   "results": "Module.rankAtStalk_baseChange, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.SubmersivePresentation.rank_kaehlerDifferential, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.rankAtStalk_eq_finrank_tensorProduct, IsBaseChange.finrank_eq_of_le_nonZeroDivisors, Module.rankAtStalk_eq, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth",
+   "verdict": "No complete matching theorem; the existing residue-field, tensor-base-change and finrank tools are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ResidueField, RingHom.ker",
+   "date": "2026-10-12",
+   "results": "Ideal.ResidueField.lift, Ideal.ResidueField.liftₐ, Ideal.ker_algebraMap_residueField, Ideal.ResidueField.lift_algebraMap, Ideal.ResidueField.liftₐ_comp_toAlgHom, Ideal.ResidueField.liftₐ_algebraMap, PrimeSpectrum.preimageEquivFiber_apply_asIdeal, Algebra.IsUnramifiedAt.not_minpoly_sq_dvd",
+   "verdict": "No complete matching theorem; the existing residue-field, tensor-base-change and finrank tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|finrank_baseChange|ker_isMaximal_of_surjective|ker_algebraMap_residueField",
+   "date": "2026-10-12",
+   "results": "Mathlib/Topology/Algebra/Module/Spaces/CharacterSpace.lean, Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; read tensorKaehlerEquiv (Kaehler/TensorProduct.lean:249), finrank_baseChange (Dimension/Constructions.lean:379), ker_isMaximal_of_surjective (Ideal/Maps.lean:842), and ker_algebraMap_residueField (ResidueField/Ideal.lean:81).",
+   "verdict": "Existing building blocks, no complete matching statement. The existence proof uses the maximal-kernel and residue-field results; the remaining comparison is tensor cancellation plus differential base change and finrank_baseChange."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rankAtStalk_baseChange",
+   "date": "2026-10-13",
+   "results": "Module.rankAtStalk_baseChange",
+   "verdict": "rankAtStalk_baseChange requires Flat S Omega[S/k] and cannot apply here. Direct tensor base change and cancellation prove the comparison without flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of the fiber of a finite module is unchanged by extension of scalars at a prime lying above the original prime",
+   "date": "2026-10-13",
+   "results": "Module.rankAtStalk_baseChange, Ideal.finrank_quotient_map, Module.rankAtStalk_eq, IsBaseChange.finrank_eq_of_le_nonZeroDivisors, Ideal.inertiaDeg, Module.rankAtStalk_eq_finrank_tensorProduct, IsLocalRing.finrank_quotient_map, Ideal.inertiaDeg_algebraMap",
+   "verdict": "rankAtStalk_baseChange requires Flat S Omega[S/k] and cannot apply here. Direct tensor base change and cancellation prove the comparison without flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "mapₐ|tensorKaehlerEquiv|finrank_baseChange",
+   "date": "2026-10-13",
+   "results": "Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "verdict": "rankAtStalk_baseChange requires Flat S Omega[S/k] and cannot apply here. Direct tensor base change and cancellation prove the comparison without flatness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AlgClosedDifferentialFiberAtClosedPoint",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-algclosed-differential-fiber-at-closed-point",
+   "place": "decomposition of the proof"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AlgClosedDifferentialFiberFinrank",
+  "file": "lean/Sheaf/RingTheory/AlgClosedDifferentialFiberFinrank.lean",
+  "declaration": "Algebra.algClosed_prime_over_finrank_differentials_eq",
+  "statement": "theorem algClosed_prime_over_finrank_differentials_eq\n    {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [FiniteType k S]\n    (q : PrimeSpectrum S)\n    (K : Type (max u v)) (_hK : Field K) (_hAk : Algebra k K) (_hCK : IsAlgClosed K)\n    (qK : PrimeSpectrum (K ⊗[k] S))\n    (_hmax : qK.asIdeal.IsMaximal)\n    (hq : PrimeSpectrum.comap\n      (TensorProduct.includeRight : S →ₐ[k] K ⊗[k] S).toRingHom qK = q) :\n    Module.finrank qK.asIdeal.ResidueField\n        (qK.asIdeal.ResidueField ⊗[K ⊗[k] S] KaehlerDifferential K (K ⊗[k] S)) =\n      Module.finrank q.asIdeal.ResidueField\n        (q.asIdeal.ResidueField ⊗[S] KaehlerDifferential k S)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T205631-L-932586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T205631-L-932586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

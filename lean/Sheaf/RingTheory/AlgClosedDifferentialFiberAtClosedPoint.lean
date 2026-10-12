@@ -6,6 +6,8 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+import Sheaf.RingTheory.AlgClosedPrimeOver
+import Sheaf.RingTheory.AlgClosedDifferentialFiberFinrank
 
 @[expose] public section
 
@@ -15,6 +17,7 @@ open scoped TensorProduct
 
 namespace Algebra
 
+set_option linter.unusedVariables false in
 /-- A prime has a closed point above it after an algebraically closed scalar extension,
 with the same differential-fibre dimension. No smoothness or dimension bound is assumed.
 Source: Stacks Project, Algebra, proof of Tag 00TT, the construction of the maximal ideal
@@ -44,6 +47,9 @@ theorem exists_algClosed_prime_over_finrank_differentials_eq
           (qK.asIdeal.ResidueField ⊗[K ⊗[k] S] KaehlerDifferential K (K ⊗[k] S)) =
           Module.finrank q.asIdeal.ResidueField
             (q.asIdeal.ResidueField ⊗[S] KaehlerDifferential k S) := by
-  sorry
+  obtain ⟨K, _hK, _hAk, _hCK, qK, hmax, hq⟩ := exists_algClosed_prime_over (k := k) q
+  exact ⟨K, _hK, _hAk, _hCK, qK, hmax, hq,
+    algClosed_prime_over_finrank_differentials_eq (k := k) (S := S) q K _hK _hAk _hCK qK
+      hmax hq⟩
 
 end Algebra
