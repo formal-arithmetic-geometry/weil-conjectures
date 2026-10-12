@@ -6843,3 +6843,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/G2/Sheaf.Algebra.Category.ModuleCat.TorSymmetry (stage 3; reviewer PASS; first push; landing 20261012T085241-L-15527 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChangeComparison (stage 3; reviewer PASS; after a return; landing 20261012T085241-L-15643 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/G2/Sheaf.AlgebraicGeometry.EtaleTensorSections (stage 3; reviewer PASS; first push; landing 20261012T085242-L-15771 (interface); batch 20261012T085205; modules 1; new nodes 0; change records: coord/changes/etaleTensorSectionsTransparency.md)
+- 08:52 L: merged deliver/G2/Sheaf.AlgebraicGeometry.LocalDvrBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085242-L-15889 (interface); batch 20261012T085205; modules 2; new nodes 1)

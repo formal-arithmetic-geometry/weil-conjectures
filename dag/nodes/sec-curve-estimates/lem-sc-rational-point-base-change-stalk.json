@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-rational-point-base-change-stalk",
+ "kind": "statement",
+ "title": "Scalar-extension stalk maps preserve uniformizers at rational points",
+ "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-sc-field-extension], let $X$ be a smooth proper connected curve over $k$ [def-sc-curves], and let $P$ be a closed point of $X$. Write $X'=X\\times_k k'$ and $p:X'\\to X$ [def-pc-base-change]. For any $P'\\in X'$ with $p(P')=P$, every irreducible element $t$ of $\\mathcal O_{X,p(P')}$ has irreducible image under the stalk map $p^\\#: \\mathcal O_{X,p(P')}\\to\\mathcal O_{X',P'}$ (irreducible means nonzero, nonunit, and every factorization has a unit factor).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
+  "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood Spec A of P. Its residue field A/m is k by the Nullstellensatz. The fibre-prime correspondence of [lem-weil-pbc-fibre-ring-primes-residue-fields] identifies the fibre with Spec k', so the given P' corresponds to m(A tensor_k k').",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
+    "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+   }
+  },
+  {
+   "text": "Smoothness gives regularity by [lem-sc-smooth-regular], and connectedness gives integrality by [lem-sc-regular-connected-integral]. Dimension one and regularity make the source closed stalk a DVR by [lem-sc-regular-dim1-dvr]. Apply [lem-sc-base-change-curve] to obtain the same properties for the target; P' has residue field k' and is closed.",
+   "uses": [
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-base-change-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
+    "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+   }
+  },
+  {
+   "text": "The target stalk is canonically the localization of O_{X,P} tensor_k k' at the extended maximal ideal. In the source DVR, irreducible t generates the maximal ideal. By [lem-sc-dvr-field-extension-order], the image of t generates the target maximal ideal, hence is irreducible. These identifications commute with the stalk map.",
+   "uses": [
+    "lem-sc-dvr-field-extension-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
+    "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "order of vanishing is preserved by unramified extension of discrete valuation rings",
+   "results": "Ramification index one results for unramified maps; no scalar-extension stalk/uniformizer result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ring.ordFrac",
+   "results": "ordFrac_irreducible and ordFrac_of_isUnit prove the order comparison once preservation of irreducibles is known.",
+   "date": "2026-10-12",
+   "verdict": "related tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "ordFrac.*(map|comp)|functionFieldMap; rational.*(base.change|fiber)|base.change.*rational|uniformizer.*stalk",
+   "results": "DensePoints.baseChangeFieldPoint_eq_of_fst_eq proves uniqueness; no statement of uniformizer preservation at scheme stalks.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique point above a rational closed point after field extension with uniformizer preserved",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalDvrBaseChange",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
+   "via": [
+    "lem-sc-local-dvr-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RationalPointBaseChangeStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalPointBaseChangeStalk.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rational_point_base_change_stalk",
+  "statement": "theorem Scheme.rational_point_base_change_stalk (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k'] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [IsConnectedCurve s] [Smooth s] [IsProper s] (P : X) (hP : P ∈ closedPoints X) (P' : (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{u})) (hP' : pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) P' = P) : ∀ t : X.presheaf.stalk (pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) P'), Irreducible t → Irreducible ((pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).stalkMap P' t)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-base-change-curve",
+  "lem-sc-dvr-field-extension-order"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-15889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-15889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
