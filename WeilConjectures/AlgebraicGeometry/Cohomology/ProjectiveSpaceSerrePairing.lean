@@ -173,6 +173,66 @@ lemma twistTensorIso_hom_app_twistLaurentSection {s : Set n} (hs : s.Nonempty) {
       AddMonoidAlgebra.ofCoeff_smul, smul_mul_assoc, AddMonoidAlgebra.coeff_smul,
       twistLaurentSection_smul]
 
+omit [Fintype n] in
+lemma presheaf_map_structureRingHomOpen {U V : (ℙ(n; Spec (.of A))).Opens} (h : V ≤ U) (r : A) :
+    (ℙ(n; Spec (.of A))).presheaf.map (homOfLE h).op (structureRingHomOpen A U r) =
+      structureRingHomOpen A V r := by
+  simp only [structureRingHomOpen, RingHom.comp_apply]
+  rw [← CommRingCat.comp_apply, ← Functor.map_comp]
+  rfl
+
+/-- **Restriction of Laurent polynomial sections**: for `t ⊆ s`, the restriction to `U_s` of
+the section of a Laurent polynomial regular on `U_t` is its section over `U_s`. -/
+lemma twistLaurentSection_map {m : ℤ} {s t : Set n} (hts : t ⊆ s) {c : (n → ℤ) →₀ A}
+    (hc : c ∈ Finsupp.supported A A (laurentExponents t m)) :
+    (twist n (Spec (.of A)) m).presheaf.map (homOfLE ((toProjInt n (Spec (.of A))).preimage_mono
+        (Proj.basicOpen_monomialToNat_indicator_mono (R := ULift.{u} ℤ) hts))).op
+        (twistLaurentSection A m t c) =
+      twistLaurentSection A m s c := by
+  rw [Finsupp.supported_eq_span_single] at hc
+  induction hc using Submodule.span_induction with
+  | mem x hx =>
+    obtain ⟨e, he, rfl⟩ := hx
+    rw [twistLaurentSection_single, twistLaurentSection_single, map_smul,
+      presheaf_map_structureRingHomOpen, twistLaurentMonomial_of_mem he,
+      twistLaurentMonomial_of_mem (laurentExponents_mono hts m he),
+      twist_presheaf_map_twistMonomialSection hts]
+  | zero => rw [twistLaurentSection_zero, map_zero, twistLaurentSection_zero]
+  | add x x' _ _ h h' => rw [twistLaurentSection_add, map_add, h, h', twistLaurentSection_add]
+  | smul r x _ h =>
+    rw [twistLaurentSection_smul, map_smul, presheaf_map_structureRingHomOpen, h,
+      twistLaurentSection_smul]
+
+variable (n) in
+/-- `U_∅ = D₊(1)` is all of `ℙ(n; S)`. -/
+lemma preimage_basicOpenInt_empty (S : Scheme.{u}) :
+    toProjInt n S ⁻¹ᵁ basicOpenInt n (∅ : Set n) = ⊤ :=
+  eq_top_iff.2 fun _ _ ↦ Proj.mem_basicOpen_monomialToNat_indicator.2 fun _ hi ↦ hi.elim
+
+/-- Monomials are Laurent monomials regular on every `U_s`. -/
+lemma monomialExponents_subset_laurentExponents {m : ℤ} (s : Set n) :
+    monomialExponents n m ⊆ laurentExponents s m :=
+  fun _ he ↦ ⟨he.1, fun i _ ↦ he.2 i⟩
+
+variable (A) in
+/-- **The global section of `𝒪(a)` of a polynomial**: the section `∑ cₑ xᵉ` of `𝒪(a)` over
+`ℙ(n; Spec A)` of a family of coefficients `(cₑ)`, the terms with `e ≱ 0` or `∑ eᵢ ≠ a` being
+dropped. -/
+def twistPolynomialSection (a : ℤ) (c : (n → ℤ) →₀ A) : Γ(twist n (Spec (.of A)) a, ⊤) :=
+  (twist n (Spec (.of A)) a).presheaf.map
+    (homOfLE (preimage_basicOpenInt_empty n (Spec (.of A))).ge).op (twistLaurentSection A a ∅ c)
+
+/-- The restriction of the global section of a polynomial to `U_s` is its section over `U_s`. -/
+lemma twistPolynomialSection_map {a : ℤ} (s : Set n) {c : (n → ℤ) →₀ A}
+    (hc : c ∈ Finsupp.supported A A (monomialExponents n a)) :
+    (twist n (Spec (.of A)) a).presheaf.map
+        (homOfLE (le_top : toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s ≤ ⊤)).op
+        (twistPolynomialSection A a c) =
+      twistLaurentSection A a s c := by
+  rw [twistPolynomialSection, presheaf_map_homOfLE_map_homOfLE]
+  exact twistLaurentSection_map (Set.empty_subset s)
+    (Finsupp.supported_mono (monomialExponents_subset_laurentExponents ∅) hc)
+
 end LaurentSection
 
 end AlgebraicGeometry.ProjectiveSpace
