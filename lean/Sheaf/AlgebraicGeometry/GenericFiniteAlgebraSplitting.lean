@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Spec
 import Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension
 import Sheaf.AlgebraicGeometry.SpreadPurelyInseparableFactors
 import Sheaf.FieldTheory.GenericSeparableAlgebraSplitting
+import Sheaf.AlgebraicGeometry.SpreadGenericProductDomains
+import Sheaf.AlgebraicGeometry.RefineFiniteDomainSplitting
 
 /-!
 # Generic splitting of a finite algebra after an étale base change
@@ -64,4 +66,52 @@ theorem exists_generic_finite_algebra_splitting
               (Spec.map (CommRingCat.ofHom (algebraMap A' (D j))))) ∧
           letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A')
           Nonempty (((B ⊗[A] A') ⧸ nilradical (B ⊗[A] A')) ≃ₐ[A'] (∀ j, D j)) := by
-  sorry
+  classical
+  let K := FractionRing A
+  let C := K ⊗[A] B
+  obtain ⟨K', hK', aK', hfin, hsep, r, L, hL, aL, hfields, hsplit⟩ :=
+    Algebra.exists_separable_extension_reduction_tensorProduct_equiv_pi K C
+  let : Algebra A K' := Algebra.compHom K' (algebraMap A K)
+  have : IsScalarTower A K K' := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  obtain ⟨c0, hc0, S0, hS0, A0, hA0, hEt0, hFrac0, _, _, hsurj0⟩ :=
+    exists_spread_finite_separable_extension A K K'
+  obtain ⟨c, A', hA', aS', aA', hTower, hDomain, aFrac, hc, hfinite,
+      hEtale, hFrac, hcover, D, hD, aD, aDL, aAL, hTDL, hTKL, hprops, hsplit'⟩ :=
+    exists_spread_generic_product_domains A B K K' r L hsplit c0 hc0 S0 A0 hsurj0
+  have : ∀ j, Module.Finite A' (D j) := fun j ↦ (hprops j).1
+  have : ∀ j, IsDomain (D j) := fun j ↦ (hprops j).2.1
+  have : ∀ j, IsFractionRing (D j) (L j) := fun j ↦ (hprops j).2.2
+  have hinj : ∀ j, Function.Injective (algebraMap A' (D j)) := fun j ↦
+    algebraMap_injective_of_field_isFractionRing A' (D j) K' (L j)
+  let : ∀ j, Algebra (Localization.Away c) (D j) :=
+    fun j ↦ Algebra.compHom (D j) (algebraMap (Localization.Away c) A')
+  have : ∀ j, IsScalarTower (Localization.Away c) A' (D j) :=
+    fun j ↦ IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsDomain (Localization.Away c) := Localization.Away.isDomain hc
+  have : Etale (Spec.map (CommRingCat.ofHom
+      (algebraMap (Localization.Away c) A'))) := by
+    exact (HasRingHomProperty.Spec_iff (P := @Etale)).mpr
+      (RingHom.etale_algebraMap.mpr hEtale)
+  have hlocal : ∀ j, ∃ s : Localization.Away c, s ≠ 0 ∧
+      (topologically IsHomeomorph).universally
+        (Spec.map (CommRingCat.ofHom
+          (Algebra.TensorProduct.map
+            (IsScalarTower.toAlgHom (Localization.Away c) A' (D j))
+            (AlgHom.id (Localization.Away c) (Localization.Away s))).toRingHom)) := by
+    intro j
+    have : Module.Finite K' (L j) := (hfields j).1
+    have : IsPurelyInseparable K' (L j) := (hfields j).2
+    obtain ⟨s, hs, _, _, hhomeo⟩ := exists_spread_purely_inseparable_factors
+      (Localization.Away c) A' (D j) (FractionRing (Localization.Away c)) K' (L j)
+    exact ⟨s, hs, hhomeo⟩
+  choose s hs hhomeo using hlocal
+  obtain ⟨d, A'', hA'', aS'', aA'', hT'', hd, hfin'', hEt'', hcover'',
+      E, hE, aE, hEprops, hsplit''⟩ :=
+    exists_refinement_of_finite_domain_splitting A B c hc A' hcover r D hinj hsplit' s hs hhomeo
+  refine ⟨d, A'', hA'', aS'', aA'', hT'', hd, hfin'', hEt'', hcover'',
+    r, E, hE, aE, ?_, hsplit''⟩
+  intro j
+  obtain ⟨hfiniteE, hdomainE, hsurjE, hhomeoE⟩ := hEprops j
+  refine ⟨hfiniteE, hdomainE, ?_, hsurjE, hhomeoE⟩
+  exact (IsFinite.SpecMap_iff _).mpr (RingHom.finite_algebraMap.mpr hfiniteE)
+

@@ -23,60 +23,46 @@
  ],
  "proof": [
   {
-   "text": "Pass to the generic fibre C=B tensor_A K. By [lem-weil-pbc-generic-separable-algebra-splitting], after a finite separable extension K'/K the reduction of C tensor_K K' is a finite product of fields L_j, each purely inseparable over K'.",
+   "text": "Form K=FractionRing A and C=K tensor_A B. The finite base-change instance makes C finite-dimensional over K. Apply Algebra.exists_separable_extension_reduction_tensorProduct_equiv_pi to obtain K', its finiteness and separability, the fields L_j and their generic reduced product equivalence. Install the compatible A-algebra on K' by composition.",
    "uses": [
     "lem-weil-pbc-generic-separable-algebra-splitting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "proof, finite-algebra calculation, generic fibre"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-spread-finite-separable-extension], after inverting a nonzero c in A the extension K'/K is the fraction-field extension of a finite etale A[c^{-1}]-algebra A'; the resulting morphism Spec(A') to Spec(A[c^{-1}]) is finite etale and surjective.",
+   "text": "Apply exists_spread_finite_separable_extension A K K' to obtain c0, S0 and A0 with finite etale surjective structure and fraction field K'. Pass this actual model and the generic reduced product equivalence to exists_spread_generic_product_domains. It returns c, A', the finite domains D_j, their fraction fields L_j, the compatible scalar towers, and the reduced tensor product equivalence.",
    "uses": [
-    "lem-weil-pbc-spread-finite-separable-extension"
+    "lem-weil-pbc-spread-finite-separable-extension",
+    "lem-weil-pbc-spread-generic-product-domains"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "proof, finite-algebra calculation, spreading out the separable extension"
-   }
+   "elementary": false
   },
   {
-   "text": "For each purely inseparable field factor L_j, let D_j be the corresponding factor of (B tensor_A A')_red after the generic idempotents have been spread. After enlarging the localization once for the finitely many factors, each D_j is a finite A'-algebra domain with fraction field L_j, so [lem-weil-pbc-spread-purely-inseparable-factors] gives that Spec(D_j) to Spec(A') is surjective and radicial, hence a universal homeomorphism.",
+   "text": "For each j, compatibility with the fraction fields makes A' to D_j injective, by algebraMap_injective_of_field_isFractionRing. Supply the induced A[1/c]-algebra on D_j by composition. Convert Algebra.Etale to the scheme Etale instance using HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap. Apply exists_spread_purely_inseparable_factors over A[1/c], with its canonical fraction field, to get a nonzero s_j and a universal homeomorphism after localizing at s_j. Choose the finite family of these witnesses inside the proof.",
    "uses": [
     "lem-weil-pbc-spread-purely-inseparable-factors"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "proof, finite-algebra calculation, purely inseparable factors"
-   }
+   "elementary": false
   },
   {
-   "text": "Let e_j be the orthogonal generic idempotents giving the product decomposition in [lem-weil-pbc-generic-separable-algebra-splitting]. Since B tensor_A A' is finite over A', clear the finitely many denominators in the e_j and in the equations e_j^2=e_j, e_je_{j'}=0 (j not equal to j'), and sum_j e_j=1; after one principal localization these equations hold in the reduction of B tensor_A A'. The corresponding finite factors D_j have generic fraction fields L_j. After a further principal localization, make the reduced finite A'-module torsion free and clear generators and relations for the D_j; the spread idempotents then split (B tensor_A A')_red as the product of these domains D_j, each embedded in its generic field L_j. Applying [lem-weil-pbc-spread-purely-inseparable-factors] to each D_j supplies the finite, surjective, radicial, and universal-homeomorphism properties. This avoids any assertion about integral closures or equality with integral closures.",
+   "text": "Apply exists_refinement_of_finite_domain_splitting to the existing product, the injective factor maps and the family s_j. This gives d, A'' and factors E_j, together with finiteness, domains, surjectivity, universal homeomorphisms and the required equivalence. Preserve r and fill the additional IsFinite clauses by IsFinite.SpecMap_iff and RingHom.finite_algebraMap. All existential witnesses and conjunctions are assembled without further holes.",
    "uses": [
-    "lem-weil-pbc-generic-separable-algebra-splitting",
-    "lem-weil-pbc-spread-purely-inseparable-factors"
+    "lem-weil-pbc-refine-finite-domain-splitting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-    "place": "proof, finite-algebra calculation, spreading the product idempotents"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-generic-separable-algebra-splitting",
   "lem-weil-pbc-spread-finite-separable-extension",
-  "lem-weil-pbc-spread-purely-inseparable-factors"
+  "lem-weil-pbc-spread-generic-product-domains",
+  "lem-weil-pbc-spread-purely-inseparable-factors",
+  "lem-weil-pbc-refine-finite-domain-splitting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "## Proof, finite-algebra calculation"
+  "place": "proof steps 4--9, formal reduction by D3 with two explicit spreading/localization glue lemmas"
  },
  "mathlib_searches": [
   {
@@ -163,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T135226-L-1659066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

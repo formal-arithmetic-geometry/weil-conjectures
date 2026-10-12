@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-refine-finite-domain-splitting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "proof steps 4--9: taking a common principal localization for the finitely many purely inseparable factors",
+   "via": [
+    "lem-weil-pbc-generic-finite-algebra-splitting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A common localization for a specified finite domain product",
+ "statement": "Let $A$ be a Noetherian domain, $B$ a finite $A$-algebra, $c\\in A$ nonzero, and $S=A[1/c]$. Let $A'$ be a finite etale domain algebra over $S$ with surjective spectrum map and compatible $A$-algebra structure. Let $D_j$ be a finite family of finite domain $A'$-algebras with injective structure maps and compatible $S$-algebra scalar towers. Suppose $(B\\otimes_A A')_{\\mathrm{red}}\\simeq\\prod_jD_j$ as $A'$-algebras. For each $j$ let $s_j\\in S$ be nonzero and suppose $\\operatorname{Spec}(D_j\\otimes_S S[1/s_j])\\to\\operatorname{Spec}(A'\\otimes_S S[1/s_j])$ is a universal homeomorphism. Then there are a nonzero $d\\in A$, a finite etale surjective $A[1/d]$-algebra $A''$, and finite domain $A''$-algebras $E_j$ with surjective universal-homeomorphism spectrum maps, such that $(B\\otimes_A A'')_{\\mathrm{red}}\\simeq\\prod_j E_j$ as $A''$-algebras. The original number of factors is preserved, including zero factors. The rings are represented in the universe of $A$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "taking a common principal localization for the finitely many purely inseparable factors"
+ },
+ "stmt_deps": [
+  "pqf-lem-finite-integral-lft",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "def-pc-field-extension",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "1. Put `t = prod j, s j` in `S = A[1/c]` (the empty product is one). It is nonzero since\n`S` is a domain. Write it as `a / c^n` with `a` nonzero in `A`. Set `d = c * a`.\nThe universal properties identify `S[1/t]` with `A[1/d]`: inverting `t` inverts `a`,\nand conversely; inverting the product `c*a` inverts both factors.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "taking a common principal localization for the finitely many purely inseparable factors"
+   }
+  },
+  {
+   "text": "2. Set `A'' = A' tensor_S S[1/t]` and `E j = D j tensor_S S[1/t]` with the induced\nmaps. This is localization at the image of `t` in each ring. The maps from `S` into `A'`\nand then into each `D j` are injective: the first is a finite etale surjective\nmap between domains, so its kernel vanishes by lying over and reducedness; injectivity\nof the second is a hypothesis. Thus\nthe localized factors remain domains. Finiteness, etaleness, and surjectivity of the base\ncover persist under base change. Finiteness of each factor does also.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "taking a common principal localization for the finitely many purely inseparable factors"
+   }
+  },
+  {
+   "text": "3. Each `s j` is a unit in `S[1/t]` because it divides `t`. Therefore each new factor map\nis a base change of the specified universal homeomorphism on `S[1/s j]`. Stability under\nbase change gives its universal-homeomorphism property, and in particular surjectivity.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "taking a common principal localization for the finitely many purely inseparable factors"
+   }
+  },
+  {
+   "text": "4. Localize the given reduced product equivalence. Localization commutes with finite\nproducts and with reduction: a fraction is nilpotent exactly when some denominator\nmultiple of its numerator is nilpotent. Tensor associativity identifies the localized\nleft side with the reduction of `B tensor_A A''`. Transport along the base localization\nisomorphism of step 1 to obtain the asserted `A''`-algebra equivalence. For zero factors\nthis says that localization of the zero ring is zero.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "taking a common principal localization for the finitely many purely inseparable factors"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9, finite-algebra calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Combine finitely many principal localizations of finite algebra domain factors preserving a reduced product decomposition and universal homeomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Combine finitely many principal localizations of finite algebra domain factors preserving a reduced product decomposition and universal homeomorphisms",
+   "results": "Algebra.Etale.of_isLocalization_Away, Algebra.Etale.exists_subalgebra_fg and RingHom.Etale.ofLocalizationSpan; no exact common-localization product theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*localiz|spread.*idempotent; nilradical.*localiz|localiz.*nilradical|tensorProduct.*pi|Away.*mul in pinned Mathlib/RingTheory; rg over lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search idempotents and localization",
+   "results": "Localization/Pi and localization-away infrastructure; no theorem with these hypotheses and conclusions. DAG idempotent-spreading occurrence only in the parent item; no duplicate blueprint statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RefineFiniteDomainSplitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/RefineFiniteDomainSplitting.lean",
+  "declaration": "exists_refinement_of_finite_domain_splitting",
+  "statement": "theorem exists_refinement_of_finite_domain_splitting\n    (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (c : A) (hc : c ≠ 0)\n    (A' : Type u) [CommRing A'] [IsDomain A']\n    [Algebra (Localization.Away c) A'] [Algebra A A']\n    [IsScalarTower A (Localization.Away c) A']\n    [Module.Finite (Localization.Away c) A'] [Algebra.Etale (Localization.Away c) A']\n    (hcover : Surjective\n      (Spec.map (CommRingCat.ofHom (algebraMap (Localization.Away c) A'))))\n    (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, IsDomain (D j)]\n    [∀ j, Algebra A' (D j)] [∀ j, Module.Finite A' (D j)]\n    (hinj : ∀ j, Function.Injective (algebraMap A' (D j)))\n    [∀ j, Algebra (Localization.Away c) (D j)]\n    [∀ j, IsScalarTower (Localization.Away c) A' (D j)]\n    (hsplit : letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A')\n      Nonempty (((B ⊗[A] A') ⧸ nilradical (B ⊗[A] A')) ≃ₐ[A'] (∀ j, D j)))\n    (s : Fin r → Localization.Away c) (hs : ∀ j, s j ≠ 0)\n    (hhomeo : ∀ j, (topologically IsHomeomorph).universally\n      (Spec.map (CommRingCat.ofHom\n        (Algebra.TensorProduct.map\n          (IsScalarTower.toAlgHom (Localization.Away c) A' (D j))\n          (AlgHom.id (Localization.Away c) (Localization.Away (s j)))).toRingHom))) :\n    ∃ (d : A) (A'' : Type u) (_ : CommRing A'') (_ : Algebra (Localization.Away d) A'')\n      (_ : Algebra A A'') (_ : IsScalarTower A (Localization.Away d) A''),\n      d ≠ 0 ∧ Module.Finite (Localization.Away d) A'' ∧\n        Algebra.Etale (Localization.Away d) A'' ∧\n        Surjective (Spec.map (CommRingCat.ofHom (algebraMap (Localization.Away d) A''))) ∧\n        ∃ (E : Fin r → Type u) (_ : ∀ j, CommRing (E j))\n          (_ : ∀ j, Algebra A'' (E j)),\n          (∀ j, Module.Finite A'' (E j) ∧ IsDomain (E j) ∧\n            Surjective (Spec.map (CommRingCat.ofHom (algebraMap A'' (E j)))) ∧\n            (topologically IsHomeomorph).universally\n              (Spec.map (CommRingCat.ofHom (algebraMap A'' (E j))))) ∧\n          letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A'')\n          Nonempty (((B ⊗[A] A'') ⧸ nilradical (B ⊗[A] A'')) ≃ₐ[A''] (∀ j, E j))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T135226-L-1659066",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T135226-L-1659066",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
