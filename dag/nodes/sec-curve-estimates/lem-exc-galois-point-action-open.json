@@ -14,20 +14,35 @@
  },
  "proof": [
   {
-   "text": "The construction extends field automorphisms and acts by precomposition; finite separable residue fields ensure independence and openness.",
+   "text": "Factor x:Spec Omega -> X over Spec K through a lift l:Spec Ks -> X, using the proved source declaration Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed in WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts. Its hypotheses hold because Ks is separably closed and X -> Spec K is etale. Compatibility of the base maps is IsScalarTower.algebraMap_apply. This is a direct specialization of a closed library theorem; no fibre-decomposition module is imported.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct H as the stabilizer of l under the concrete precomposition action on Ks-valued points. The continuity theorem [lem-exc-etale-field-geometric-action-continuous], together with Mathlib continuousSMul_iff_stabilizer_isOpen for a discrete action, makes H open. The monoid homomorphism rho defines a MulAction on Omega-valued lifts, so the desired set is also a subgroup stabilizer.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-exc-etale-field-geometric-action-continuous"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For g in H, extend g to a K-automorphism tau of Omega. The private helper proves this directly from Mathlib: choose a transcendence basis v of Omega over Ks; identify A=Ks[v] with a multivariable polynomial algebra via AlgebraicIndependent.aevalEquiv; apply g to coefficients with MvPolynomial.mapEquiv and transport to A. Omega is an algebraic closure of A by IsAlgClosed.isAlgClosure_of_transcendence_basis. IsAlgClosure.equivOfEquiv extends the coefficient automorphism to a ring automorphism of Omega, and equivOfEquiv_algebraMap gives its restriction to Ks. The tower identity and g.commutes show that it fixes K, so it is the required K-algebra automorphism. This helper is completely proved, using no postponed statements.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the supplied formula hρ to tau. Substitute x=Spec(Ks -> Omega) followed by l. The extension equation and Spec.map_comp move Spec(tau) past Spec(Ks -> Omega); since g fixes l, the result is x. Equality of the underlying scheme maps gives equality of Over morphisms. Thus H is contained in the rho-stabilizer of x. Mathlib Subgroup.isOpen_mono proves the larger stabilizer open.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "lem-exc-etale-field-geometric-action-continuous"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03QW"
+  "place": "Tag 03QW, section-galois-action-stalks; R2 implements transfer from the proved separable-closure action (Stacks Tag 03QR, pione.tex, lemma-sheaves-point). The field-extension helper expands the algebraic-closure extension argument using the pinned Mathlib Classification and Basic modules; Stacks fields.tex, lemma-algebraic-closures-isomorphic."
  },
  "mathlib_searches": [
   {
@@ -97,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T110321-L-622579",
-  "kind": "interface",
+  "landing": "20261012T135308-L-1688960",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
