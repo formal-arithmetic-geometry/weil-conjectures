@@ -1,0 +1,146 @@
+{
+ "id": "lem-pbc-prime-coefficient-constructibility-transfer",
+ "kind": "statement",
+ "title": "Constructibility transfers to prime coefficients through an abelian sheaf isomorphism",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a finite commutative ring. Let $r$ be a prime, $F$ a constructible sheaf of $\\Lambda$-modules on $X_{\\mathrm{Et}}$ [def-weil-pbc-etale-sheaves], [def-constructible-constructible], and $G$ a sheaf of $\\operatorname{ULift}(\\mathbf Z/r)$-modules on this site. If their underlying abelian sheaves are isomorphic, then $G$ is constructible. No curve, nonempty-scheme or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Theorem 03SC, second proof paragraph, passage from prime-annihilated sheaves to constructible prime-field sheaves; Definition 03RW (2),(3). Agent-expanded coefficient bookkeeping."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite constructible stratification of F. On each stratum its pullback is finite locally constant. The finite-module-values equivalence gives etale local constant finite module values. Forget their coefficients to obtain finite constant abelian values.",
+   "uses": [
+    "def-constructible-constructible",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image commutes with forgetting module coefficients: compute inverse image by the left Kan extension and sheafification; the forgetful functor preserves the filtered colimits in the Kan extension and preserves sheafification. Restriction to a cover member is sectionwise. Forgetting a constant module sheaf gives its constant abelian sheaf, since constants are sheafifications of constant presheaves. Thus the given abelian isomorphism supplies finite constant abelian trivializations for the pullback of G on the same strata.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "lem-weil-pbc-constant-module-sheaf-underlying"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Discard empty cover members. On a nonempty member, the constant abelian value identifies with a geometric stalk; that stalk is killed by r because it comes from a prime-field module sheaf. Its finite abelian group therefore has the canonical ZMod r module structure, lifted to ULift(ZMod r). Every additive map between groups killed by r is linear: represent each scalar by an integer and use preservation of integer multiplication. Consequently the abelian trivializations and their inverses lift to module trivializations.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-finite-local-cyclic-module-forget"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each finite prime-field value is finitely generated. Apply the finite-module-values equivalence on each stratum and retain the original stratification to witness constructibility of G. For empty strata use the empty covers; for the zero ring or zero sheaf the finite values are zero.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-constructible-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constructible",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-finite-local-cyclic-module-forget"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Theorem 03SC second proof paragraph and Definition 03RW (2),(3); explicit prime-coefficient transport of the existing global stratification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible module sheaf killed by a prime admits a constructible ZMod prime module sheaf with isomorphic underlying abelian sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module sheaf killed by a prime admits a constructible ZMod prime module sheaf with isomorphic underlying abelian sheaf",
+   "results": "CondensedMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.IsSolid; CondensedMod.ofSheafCompHaus; CondensedMod.LocallyConstant.functor; LightCondMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod",
+   "date": "2026-10-12",
+   "verdict": "No matching constructible etale coefficient-transfer theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(ZMod|prime)|ZMod.*constructible",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching constructible etale coefficient-transfer theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeFieldFiltration",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Prime-coefficient devissage in the second proof paragraph of Stacks 03SC: a prime-annihilated constructible sheaf is a constructible prime-field sheaf.",
+   "via": [
+    "lem-v2-constructible-prime-field-filtration",
+    "lem-weil-pbc-constructible-prime-module-devissage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientConstructibilityTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimeCoefficientConstructibilityTransfer.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleSheaf_prime_of_underlyingAbelianIso",
+  "statement": "theorem isConstructibleSheaf_prime_of_underlyingAbelianIso\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})\n    (r : ℕ) [Fact r.Prime]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]\n    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))\n    (e : (sheafCompose _ (forget₂\n          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})).obj G ≅\n        (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) :\n    IsConstructibleSheaf G",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
