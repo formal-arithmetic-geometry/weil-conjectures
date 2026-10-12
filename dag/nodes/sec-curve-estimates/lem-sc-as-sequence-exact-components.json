@@ -19,20 +19,25 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The source proof establishes exactness sectionwise, injectivity of the constant inclusion, and surjectivity of the Artin–Schreier map; these are packaged as the three conjuncts used by the companion theorem.",
+   "text": "Use [lem-sc-as-kernel-sections] to obtain sectionwise injectivity of iota and lifts of roots. The section formula for wp turns a wp-killed section into a root. Choose these unique lifts for each component of a map killed by wp. Injectivity makes the component lifts additive and natural, and makes them unique. This constructs the universal property IsLimit (KernelFork.ofι iota hzero). ShortComplex.exact_of_f_is_kernel and mono_of_isLimit_fork give exactness and monicity.",
    "uses": [
-    "lem-sc-as-sequence"
+    "lem-sc-as-kernel-sections"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Proved directly in Lean: the prime field ULift (ZMod p) maps to the global sections of an etale object U via its structural map to Spec k. Base-change the proved upstream AffineSpace.surjective_artinSchreierMap along U -> Spec ULift (ZMod p), and use AffineSpace.etale_artinSchreierMap, since p vanishes on U. Pull this finite etale surjective Artin–Schreier map back along the affine-line section with coordinate a_U(x). The pulled-back coordinate is a solution y^p-y=g^*a_U(x). Transfer y through a_V.symm. The formulas hwp and hrestr show that the singleton covering sieve is contained in the image sieve of wp. Sheaf.epi_of_isLocallySurjective gives epimorphicity. These upstream lemmas are already proved tools; no parent Artin–Schreier sheaf-sequence theorem is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-as-sequence"
+  "lem-sc-as-kernel-sections"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
-  "place": "Kernel and epimorphism part"
+  "place": "Kernel identification from first sentence, local surjectivity from Artin–Schreier covers; C1 proves the categorical assembly and covers with upstream affine-space lemmas"
  },
  "mathlib_searches": [
   {
@@ -90,9 +95,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T053939-L-2638409",
+  "landing": "20261012T070530-L-3467773",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

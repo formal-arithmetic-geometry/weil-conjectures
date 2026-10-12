@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-as-kernel-sections",
+ "kind": "statement",
+ "title": "Sectionwise prime-field kernel identification for Artin–Schreier data",
+ "statement": "Let $k$ be a field of prime characteristic $p$, let $C$ be a scheme [def-pc-scheme], and let $f:C\\to\\operatorname{Spec}k$. On the small etale site [def-weil-pbc-etale-site], let $G$ be a sheaf of abelian groups [def-weil-pbc-abelian-etale-sheaves] with additive equivalences $a_U:G(U)\\simeq\\Gamma(U,\\mathcal O_U)$ compatible with restrictions. Let $\\iota:\\underline{\\mathbf Z/p}\\to G$ be a sheaf morphism from the constant sheaf [def-sc-constant-sheaves], such that $a_U(\\iota_U(\\eta_U(c)))=c\\cdot1$ for every $c\\in\\mathbf Z/p$, where $\\eta$ is the constant-presheaf sheafification unit [def-weil-pbc-sheafification]. Then, for every etale object $U$, $\\iota_U$ is injective, and every $x\\in G(U)$ satisfying $a_U(x)^p=a_U(x)$ is $\\iota_U(y)$ for some $y\\in\\underline{\\mathbf Z/p}(U)$. This applies to disconnected and empty objects; y is a constant-sheaf section, not necessarily the image of one single constant.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Proof, first sentence: the kernel of wp is the constant prime-field sheaf; local-ring calculation and sheaf descent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "The structural map to Spec k makes p vanish in all section rings and local rings. At each point of an etale object U, apply [lem-sc-local-ring-artin-schreier-kernel] to the germ of a section satisfying x^p=x. There is a unique prime-field constant with that germ. Equality of germs supplies an open neighborhood on which the section equals the constant. These neighborhoods are etale over C because open immersions are etale and etale morphisms compose. The restriction formula for a and the constant-section formula for iota identify these equalities with equalities in G.",
+   "uses": [
+    "lem-sc-local-ring-artin-schreier-kernel",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification unit of the constant abelian presheaf is locally surjective (Mathlib Presheaf.isLocallySurjective_toSheafify, applied on the small etale site with AddCommGrpCat at the displayed universe). Thus a pair of constant-sheaf sections with equal images under iota has a common covering sieve where both sections are represented by constants. At each point, uniqueness in [lem-sc-local-ring-artin-schreier-kernel] makes the two constants equal. For any nonempty object in that cover, choosing a point therefore makes the represented sections equal; on an empty object the sheaf has its unique section. Separatedness gives equality of the original sections.",
+   "uses": [
+    "lem-sc-local-ring-artin-schreier-kernel",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a root x, take the open cover furnished by the first step, and on each member take the constant-sheaf section represented by its unique constant. Its image is the restriction of x. The injectivity from the second step makes these sections compatible on overlaps. The sheaf condition glues them uniquely to y, and separatedness in G gives iota(y)=x. On the empty object the empty cover yields its unique section. This proves precisely the injectivity and root-lifting clauses.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-local-ring-artin-schreier-kernel",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Proof, first sentence: the kernel of wp is the constant prime-field sheaf; local-ring calculation and sheaf descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The kernel of Frobenius minus identity on the etale additive structure sheaf consists of sections of the constant prime field sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections in the kernel of Frobenius minus identity are locally constant prime field elements and the Artin Schreier map is locally surjective",
+   "results": "IsArithFrobAt.exists_of_isInvariant, surjective_fontaineTheta, PerfectClosure.mk_surjective, surjective_frobenius, IsArithFrobAt.arithFrobAt, PerfectionMap.surjective, arithFrobAt, Perfection.coeff_surjective",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the kernel-section statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallySurjective\"",
+   "results": "CategoryTheory.Presheaf.IsLocallySurjective, CategoryTheory.Sheaf.IsLocallySurjective, CategoryTheory.Sheaf.instIsLocallySurjectiveFunToImage, CategoryTheory.Presheaf.instIsLocallySurjectiveFunToRangeSheafify, CategoryTheory.Presheaf.isLocallySurjective_toSheafify', CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Presheaf.isLocallySurjective_of_iso, CategoryTheory.Sheaf.isLocallySurjective_iff_epi",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the kernel-section statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pow_eq_self_iff|sheaf.*kernel",
+   "results": "Mathlib/NumberTheory/Fermat.lean, Mathlib/NumberTheory/Fermat.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the kernel-section statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArtinSchreierExactComponents",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-as-sequence",
+   "place": "Proof, first sentence: kernel is the constant prime-field sheaf; sectionwise lifting after local-ring identification",
+   "via": [
+    "lem-sc-as-sequence-exact-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreierKernelSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSchreierKernelSections.lean",
+  "declaration": "AlgebraicGeometry.artinSchreier_kernel_sections",
+  "statement": "theorem artinSchreier_kernel_sections\n    {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    (p : ℕ) [CharP k p] (hp : p.Prime)\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (iota : C.constantZMod p ⟶ G)\n    (hrestr : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x))\n    (hiota : ∀ (U : C.Etaleᵒᵖ) (c : ZMod p),\n      a U (iota.hom.app U\n        ((toSheafify C.smallEtaleTopology\n          ((Functor.const C.Etaleᵒᵖ).obj\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =\n        (c.val : Γ(U.unop.left, ⊤))) :\n    ∀ U : C.Etaleᵒᵖ, Function.Injective (iota.hom.app U) ∧\n      ∀ x : G.obj.obj U, (a U x) ^ p = a U x → ∃ y, iota.hom.app U y = x",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
