@@ -9537,3 +9537,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: returned deliver/G3/Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasIsosRepresentation (reviewer RETURN: (the landing tools, head dc1799a66) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 21:16 L: returned deliver/J1/Sheaf.CategoryTheory.ColimitSiteRawSectionSheaf (reviewer RETURN: (the landing tools, head bc78c772f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 21:16 L: returned deliver/W3/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationAdicReduction (reviewer RETURN: (the landing tools, head dfc3a0757) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 21:16 L: merged deliver/A2/Sheaf.RingTheory.LocalizedConormalBasisJacobian (stage 3; reviewer PASS; first push; landing 20261012T211611-L-1056211 (proof); batch 20261012T211610; modules 1; new nodes 0)
