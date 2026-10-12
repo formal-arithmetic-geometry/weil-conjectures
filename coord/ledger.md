@@ -8101,3 +8101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/G2/Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso (stage 3; reviewer PASS; first push; landing 20261012T144113-L-2096006 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/G2/Sheaf.CategoryTheory.LeftDerivedValueMorphism (stage 3; reviewer PASS; first push; landing 20261012T144113-L-2096139 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/G2/Sheaf.RingTheory.ColimitFlatRingMap (stage 3; reviewer PASS; first push; landing 20261012T144113-L-2096284 (proof); batch 20261012T144049; modules 1; new nodes 2)
+- 14:41 L: merged deliver/G2/Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators (stage 3; reviewer PASS; first push; landing 20261012T144114-L-2096411 (proof); batch 20261012T144049; modules 1; new nodes 0)
