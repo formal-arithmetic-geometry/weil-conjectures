@@ -24,76 +24,51 @@
  ],
  "proof": [
   {
-   "text": "*Uniqueness of lifts holds for every local ring.* Let $B$ be a finite $R$-algebra and $e,e'\\in B$ idempotents with $e\\equiv e'\\bmod\\mathfrak mB$. Put $d=e-e'\\in\\mathfrak mB$. Expanding with $e^2=e$, $e'^2=e'$: $d^2=e-2ee'+e'$ and $d^3=d\\cdot d^2=(e-2ee'+ee')-(ee'-2ee'+e')=e-e'=d$, so $d(1-d^2)=0$. Since $d^2\\in\\mathfrak mB$ and $\\mathfrak mB$ lies in the Jacobson radical of $B$ [lem-weil-pbc-finite-algebra-local-radical], $1-d^2$ is a unit of $B$; hence $d=0$, i.e. $e=e'$. So for every finite $R$-algebra $B$ the reduction map from idempotents of $B$ to idempotents of $B/\\mathfrak mB$ is injective, and (i) amounts to its surjectivity for all finite $B$.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-local-radical"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical) and its use in the proof of Lemma Tag 09XI ((2)=>(4): IB lies in the Jacobson radical of B for B integral, so idempotents are determined modulo IB); 09XF is proved there by localizing at maximal ideals, here by the identity d^3=d"
-   }
+   "text": "Universe bookkeeping: transfer the assumed lifting property from ULift B to any finite R-algebra B in Type u. The algebra equivalence ULift B ≃ B induces an equivalence of quotients by the extended maximal ideal. Transport the residue idempotent upward, apply the hypothesis, and transport the resulting idempotent downward. Only existence is needed in this direction.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*(i)$\\Rightarrow$(ii).* Assume (i). Let $f\\in R[T]$ be monic of degree $n$ and $a_0\\in\\kappa$ with $\\overline f(a_0)=0\\neq\\overline{f'}(a_0)$. In $\\kappa[T]$ write $\\overline f=(T-a_0)h_0$; then $\\overline{f}'=h_0+(T-a_0)h_0'$ gives $h_0(a_0)=\\overline{f'}(a_0)\\neq0$, so $T-a_0\\nmid h_0$ and the ideals $(T-a_0)$, $(h_0)$ of $\\kappa[T]$ are comaximal ($T-a_0$ is irreducible); by the Chinese remainder theorem $\\kappa[T]/(\\overline f)\\cong\\kappa[T]/(T-a_0)\\times\\kappa[T]/(h_0)$. Let $S=R[T]/(f)$: it is a free $R$-module with basis $1,T,\\dots,T^{n-1}$, hence a finite $R$-algebra, and $S/\\mathfrak mS\\cong\\kappa[T]/(\\overline f)$ [lem-weil-pbc-monic-quotient-free]. Let $\\bar e\\in S/\\mathfrak mS$ be the idempotent corresponding to $(1,0)$, so that $\\bar e(S/\\mathfrak mS)\\cong\\kappa[T]/(T-a_0)\\cong\\kappa$ as quotients of $\\kappa[T]$. By (i) [def-weil-pbc-henselian-terminology] there is an idempotent $e\\in S$ lifting $\\bar e$. Then $S=eS\\times(1-e)S$, and $A=eS$ is a ring (unit $e$) and an $R$-algebra, a quotient of $S$ via $s\\mapsto es$, and an $R$-module direct summand of the finite free $R$-module $S$; so $A$ is finitely generated and flat (a direct summand of a flat module is flat), hence free [lem-weil-pbc-finite-flat-local-free]. Moreover $A/\\mathfrak mA=\\bar e(S/\\mathfrak mS)\\cong\\kappa$, so a basis of $A$ has exactly one element (its image is a $\\kappa$-basis of $A/\\mathfrak mA$): $A=Rb$ freely. Write $e=ub$ with $u\\in R$; $e$ is the unit of $A$ and $A/\\mathfrak mA\\neq0$, so $e\\notin\\mathfrak mA$, i.e. $u\\notin\\mathfrak m$, and $u$ is a unit; hence $e$ is also a basis and the structure map $R\\to A$, $r\\mapsto re$, is an isomorphism of $R$-algebras. Let $a\\in R$ be the image of $T$ under the $R$-algebra map $\\varphi:R[T]\\to S\\to A\\cong R$; then $\\varphi$ is evaluation at $a$, and $f(a)=\\varphi(f)=0$ because $f=0$ in $S$. Reducing modulo $\\mathfrak m$, $\\varphi$ followed by $R\\to\\kappa$ equals $R[T]\\to S/\\mathfrak mS\\to\\bar e(S/\\mathfrak mS)\\cong\\kappa[T]/(T-a_0)\\cong\\kappa$, which sends $T$ to $a_0$; hence $a\\bmod\\mathfrak m=a_0$. This is (ii).",
+   "text": "For a monic f, put S=AdjoinRoot f, finite over R by [lem-weil-pbc-monic-quotient-free]. More generally suppose its reduction is a product g0*h0 of coprime monic polynomials. Choose Bezout coefficients a*g0+b*h0=1 and put p0=b*h0. Lift the coefficients of p0 to a polynomial p over R. Under the coefficient-reduction equivalence S/mS ≃ kappa[X]/(fbar), the class e0 of p is idempotent: p0^2-p0=-(a*b)*(g0*h0). This constructs the CRT idempotent without importing a separate CRT statement.",
    "uses": [
-    "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-finite-flat-local-free"
+    "lem-weil-pbc-monic-quotient-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 10=>1 (S=R[T]/(f), the factor with residue ring kappa[T]/(T-a_0) is finite free of rank 1, hence equal to R, and the image of T is the root), with the factor obtained from the lifted idempotent as in more-algebra.tex Lemma Tag 09XI, proof of (3)=>(1)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(ii)$\\Rightarrow$ etale retractions (Stacks' condition (8)).* Assume (ii). Then for every ring map $R\\to R'$ with $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale and every prime $\\mathfrak m'\\subset R'$ over $\\mathfrak m$ with $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism there is a (unique) $R$-algebra map $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$ [lem-weil-pbc-root-lifting-etale-retraction].",
-   "uses": [
-    "lem-weil-pbc-root-lifting-etale-retraction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 1=>8"
-   }
+   "text": "Apply the assumed lifting property to e0 to obtain an idempotent e in S. For q=g0 or h0, the canonical map S→AdjoinRoot q kills mS, because its restriction to R factors through the residue map. Apply its induced quotient map to the equality e mod mS=e0. The images of e are therefore 1 in AdjoinRoot g0 (by the Bezout identity) and 0 in AdjoinRoot h0.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Etale retractions $\\Rightarrow$ finite algebras split (Stacks (8)$\\Rightarrow$(10)).* By step 3 the hypothesis of [lem-weil-pbc-etale-retraction-finite-product-local] holds for $R$, so every finite $R$-algebra $B$ is isomorphic as an $R$-algebra to a finite product $B_1\\times\\cdots\\times B_r$ of local rings.",
+   "text": "The maximal ideal of R lies in the Jacobson radical, since every maximal ideal equals it. Apply [lem-weil-pbc-idempotent-splitting-monic-factorization] to e and the two computed images, obtaining monic g,h with f=g*h and reductions g0,h0.",
    "uses": [
-    "lem-weil-pbc-etale-retraction-finite-product-local"
+    "lem-weil-pbc-idempotent-splitting-monic-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 8=>10"
-   }
+   "elementary": false
   },
   {
-   "text": "*(ii)$\\Rightarrow$(i): products of local rings lift idempotents.* Assume (ii) and let $B$ be a finite $R$-algebra; by step 4 we may take $B=B_1\\times\\cdots\\times B_r$ with each $B_i$ local, with maximal ideal $\\mathfrak n_i$. Each $B_i$ is a quotient of $B$ (projection), hence a finite $R$-algebra, so $\\mathfrak mB_i\\subset\\mathfrak n_i$ [lem-weil-pbc-finite-algebra-local-radical]; thus $\\bar B_i=B_i/\\mathfrak mB_i$ is a nonzero local ring. Since $\\mathfrak mB=\\prod_i\\mathfrak mB_i$ (an element $\\sum_k x_k(b_{k,i})_i$, $x_k\\in\\mathfrak m$, has components $\\sum_kx_kb_{k,i}\\in\\mathfrak mB_i$, and conversely $(y_i)_i=\\sum_i\\epsilon_iy_i$ with $\\epsilon_i$ the $i$-th unit vector), $B/\\mathfrak mB\\cong\\prod_i\\bar B_i$ componentwise. A local ring has no idempotents besides $0,1$ (if $\\epsilon^2=\\epsilon$, one of $\\epsilon$, $1-\\epsilon$ is a unit and $\\epsilon(1-\\epsilon)=0$). Idempotents of a product are computed componentwise, so every idempotent of $B/\\mathfrak mB$ is $(\\epsilon_i)_i$ with $\\epsilon_i\\in\\{0,1\\}\\subset\\bar B_i$; the element $(\\epsilon_i)_i\\in\\prod_iB_i=B$ (same $0$s and $1$s) is an idempotent of $B$ reducing to it. With the uniqueness of step 1, every idempotent of $B/\\mathfrak mB$ lifts uniquely to an idempotent of $B$: $R$ is henselian in the sense of [def-weil-pbc-henselian-terminology]. Together with step 2 this proves (i)$\\Leftrightarrow$(ii).",
+   "text": "For a simple residue root a0, take g0=X-a0 and h0=fbar divByMonic (X-a0). Polynomial.mul_divByMonic_eq_iff_isRoot gives fbar=g0*h0, monicity of fbar and g0 gives monicity of h0, and Polynomial.isCoprime_of_is_root_of_eval_derivative_ne_zero gives coprimality. Step 4 lifts this factorization. Since reduction preserves the natural degree of a monic polynomial, g has degree one; hence g=X+C(g.coeff 0). Put a=-g.coeff 0. Evaluating f=g*h gives f(a)=0, and comparing constant coefficients in gbar=X-a0 gives residue(a)=a0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conversely, the given root-lifting condition yields HenselianLocalRing R by HenselianLocalRing.TFAE, hence HenselianRing R (maximalIdeal R). Every finite R-algebra is integral. Apply [lem-weil-pbc-henselian-pair-integral-idempotent-lifting], in its recorded Lean signature Algebra.existsUnique_isIdempotentElem_of_henselianRing, to any finite B and any residue idempotent. It supplies exactly the unique idempotent lift required on the left side.",
    "uses": [
-    "lem-weil-pbc-finite-algebra-local-radical",
-    "def-weil-pbc-henselian-terminology"
+    "lem-weil-pbc-henselian-pair-integral-idempotent-lifting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 04GG (lemma-characterize-henselian), statement (10), and the reduction 'S/mS = prod A_i/mA_i is the decomposition as a product of local rings' in the proof of 10=>1; the passage from (10) to idempotent lifting (the bridge to more-algebra.tex Lemma Tag 09XI (3)) is written out here"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-algebra-local-radical",
-  "def-weil-pbc-henselian-terminology",
   "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-finite-flat-local-free",
-  "lem-weil-pbc-root-lifting-etale-retraction",
-  "lem-weil-pbc-etale-retraction-finite-product-local"
+  "lem-weil-pbc-idempotent-splitting-monic-factorization",
+  "lem-weil-pbc-henselian-pair-integral-idempotent-lifting"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 04GG (lemma-characterize-henselian): (ii) is (1) (Definition Tag 04GF); route (1)=>(8)=>(10)=>idempotent lifting and idempotent lifting=>(1) by the argument of 10=>1; uniqueness of idempotent lifts from more-algebra.tex Lemma Tag 09XF / proof of 09XI. The bridge between (10) and idempotent lifting and the elementary verifications are written out by the worker."
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Algebra Tag 04GG, proof of (10) => (1), extracting a linear factor; More on Algebra Tag 09XI, proof of (3) => (1), monic factorization from the CRT idempotent, and the integral-algebra idempotent criterion. The CRT, quotient-map, degree-one and universe-transport calculations are written out in Lean by W2."
  },
  "mathlib_searches": [
   {
@@ -191,5 +166,15 @@
   "group": "J1",
   "result": "pass",
   "note": "local ring R = [CommRing R][IsLocalRing R]; (i) inline idempotent lifting over finite B : Type (max u v) mod (maximalIdeal R).map, ∃! idempotent lift, same form as landed StrictlyHenselianOfDimensionZero/HenselianIntegralIdempotentLifting per def-weil-pbc-henselian-terminology note; (ii) monic f, a0 in ResidueField, aeval a0 f = 0, aeval a0 f' ≠ 0, ∃ a, IsRoot ∧ residue a = a0 = HenselianLocalRing.TFAE item 2; not Mathlib's is_henselian (an iff with the idempotent form); #check ok, compiles"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042425-L-1823769",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
