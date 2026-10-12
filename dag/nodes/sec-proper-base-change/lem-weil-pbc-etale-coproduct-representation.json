@@ -14,38 +14,44 @@
  },
  "proof": [
   {
-   "text": "Form B as the coproduct of U_i and V as the coproduct of Q_i, with the morphism pi = Sigma.map(Q_i.hom). For each i its component square is cartesian: the inverse image of U_i in V is Q_i, by disjointness and the coproduct universal property. For etale W over B, the W_i = W times_B U_i cover W and are disjoint open subschemes.",
+   "text": "For X_i = Q_i.left and Y_i = U_i.left, show that the natural square of Sigma.map(Q_i.hom) at each coprojection is cartesian. The inverse image of the range of Sigma.ι Y i is the range of Sigma.ι X i: writing a point of the coproduct as (j,x), sigmaι_eq_iff forces j = i. Apply IsOpenImmersion.isPullback to this equality of open ranges. The universal property of this square gives a natural isomorphism from the restriction of the lifted Yoneda presheaf of V to the lifted Yoneda presheaf of Q_i.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family"
    ],
    "elementary": false
   },
   {
-   "text": "Transport E.over B to the small etale site of B. Its sections on W_i are the sections of E on W_i to U_i to T. The assumed local representation identifies these sections with morphisms W_i to Q_i over U_i. The component pullback identifies those morphisms with maps W_i to V over B.",
+   "text": "Let R_i be composition along U_i to B and D_i be base change along this coprojection followed by R_i. The counit of mapPullbackAdj is a natural projection D_i to the identity. Its components are the pullback projections. Their ranges are inverse images of the component ranges, so they are disjoint and jointly surjective. Etale.isIso_piLift_of_disjoint makes the restriction from any sheaf H to the product of D_i.op composed with H.obj an isomorphism, objectwise. piObjIso and NatIso.isIso_of_isIso_app make this an isomorphism of presheaves.",
    "uses": [
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-disjoint-etale-sections-product"
    ],
    "elementary": false
   },
   {
-   "text": "The disjoint-cover sheaf axiom identifies sections of the transported sheaf on W with the product of its sections on the W_i. Apply the same axiom to the representable etale presheaf of V. Compose these two product identifications with the local representation isomorphisms. Restriction along W prime to W commutes with the component pullbacks and with the local representation maps; uniqueness of gluing proves naturality. Gluing the inverses gives inverse maps. For empty indices every W is empty, and the empty-cover axiom gives singleton section sets.",
+   "text": "Let F be E.over B transported to the small etale site of B. Restricting F along R_i agrees with E.over U_i transported to the small etale site of U_i. The identity of the underlying scheme gives the comparison isomorphism, since Sigma.ι composed with Sigma.desc is U_i.hom. Applying E to this isomorphism proves naturality. Compose with the given local representation and the inverse component Yoneda comparison from step 1.",
    "uses": [
-    "lem-weil-pbc-disjoint-etale-sections-product",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+    "def-weil-pbc-etale-site"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Give the lifted Yoneda presheaf of V its sheaf structure using Mathlib directly: Subcanonical.of_le applied to etaleTopology_le_proetaleTopology, then subcanonical_of_full_of_faithful for Etale.forget B, supplies B.smallEtaleTopology.Subcanonical. Whisker the local isomorphisms from step 3 with base change. Compose the restriction-product isomorphism for F, Pi.mapIso of these local isomorphisms, and the inverse restriction-product isomorphism for the Yoneda sheaf. This gives the desired global presheaf isomorphism. All products and cover arguments allow empty indices.",
+   "uses": [
+    "lem-weil-pbc-disjoint-etale-sections-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
   "lem-weil-pbc-disjoint-etale-sections-product",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03RV and 02W5, assembly step expanded as disjoint-cover sheaf gluing; online text read on 2026-10-12 by H3."
+  "place": "Tags 03RV and 02W5; disjoint-cover gluing with component pullback representable comparison, formalized directly via Sigma coproduct and Etale.isIso_piLift_of_disjoint."
  },
  "mathlib_searches": [
   {
@@ -118,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-f9bfc",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T095907-L-318313",
+  "landing": "20261012T113946-L-820580",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, report, change record, compilation, axioms, and sole direct importer matched the stage-3 brief."
  }
 }
