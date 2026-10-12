@@ -7674,3 +7674,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 
 - 21:02 L: error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.lean:103:11: overloaded, errors 
 error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
+- 13:02 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (reviewer RETURN: (reviewer X-cf25b, head cf25b19f5) F: The change record's ## Users omits seven computed users reported in packet §1(d): )
