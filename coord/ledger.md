@@ -8987,3 +8987,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/K2/Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel (stage 3; reviewer PASS; first push; landing 20261012T184315-L-4008684 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SheafTensorPushoutCancellation (stage 3; reviewer PASS; first push; landing 20261012T184315-L-4008795 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/K3/Sheaf.RingTheory.PairHenselizationFiberLocalization (stage 3; reviewer PASS; first push; landing 20261012T184315-L-4008896 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/M1/Sheaf.AlgebraicGeometry.AffineHomComplexEvaluationD (stage 3; reviewer PASS; first push; landing 20261012T184316-L-4009004 (proof); batch 20261012T184234; modules 1; new nodes 1)
