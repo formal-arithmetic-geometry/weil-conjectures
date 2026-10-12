@@ -6,11 +6,6 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
-import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 
 /-!
 # Global sections and geometric connectedness
@@ -43,6 +38,16 @@ theorem globalSectionsRingHom_bijective_iff_geometricallyConnected
     [IsProper (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))] :
     Function.Bijective (globalSectionsRingHom k (X := X)) ↔
       GeometricallyConnected (X ↘ Spec (.of k)) := by
-  sorry
+  constructor
+  · intro h
+    have : GlobalSectionsBijective k X := ⟨h⟩
+    refine ⟨geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms.mpr ?_⟩
+    intro K _ _
+    exact GlobalSectionsBijective.connectedSpace (k := K)
+      (X := CategoryTheory.Limits.pullback (X ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+  · intro h
+    have : GeometricallyConnected (X ↘ Spec (.of k)) := h
+    exact GlobalSectionsBijective.bijective_globalSectionsRingHom
 
 end AlgebraicGeometry.Scheme
