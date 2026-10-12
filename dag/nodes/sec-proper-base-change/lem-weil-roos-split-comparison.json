@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-roos-split-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-limit-existence",
+   "place": "Assertion (3): Roos comparison for a K-injective tower",
+   "via": [
+    "lem-weil-derived-limit-roos-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Roos comparison on split-term complexes",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with countable products and let $J$ be an integer-indexed cochain complex of inverse systems [def-weil-inverse-system], with all transitions split epimorphisms in every degree. There exist a termwise product complex $P$, its transition chain map $s=1-\\mathrm{shift}$ [def-weil-tower-transition-endomorphism], a termwise kernel complex $L$ with inclusion $i:L\\to P$, and a complex $C$ identified in degree $p+1$ with $P^p\\oplus P^{p+1}$. The product differential is componentwise that of $J$, and the differential on $C$ is $(y,x)\\mapsto(-dy-sx,dx)$. There exists a quasi-isomorphism $\\eta:L\\to C$ with components $(0,i)$. The kernel inclusion is equipped with its termwise limiting kernel fork. This statement makes no K-injectivity assumption.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070M, split short exact sequence and cone comparison; original Roos node Steps 1,3,4"
+ },
+ "proof": [
+  {
+   "text": "Form PJ termwise by countable products and let sJ be one minus transition\nshift. Naturality of the transition shift gives a chain map. Define LJ as its\nkernel complex. Define CJ explicitly with terms PJ^(p-1) ⊞ PJ^p and differential\n(y,x) ↦ (-dy-sJ x, dx); the square is zero by commutation of d and sJ.\nChoose a section σ_n of each split transition in every degree. On the product\nrecursively define a_n by a_0=0 and a_(n+1)=(a_n-pr_n)σ_n. Their product lift a\nsatisfies a sJ = id by checking every projection, so sJ is degreewise epi.\nApply the degreewise-epi kernel/shifted-cone comparison, and transport it through\nthe explicit identification of the signed cone with the shifted Mathlib cone.\nIts projection equations identify it with (0,iJ) and give the asserted equations.\nThe kernel comparison is a quasi-isomorphism, and conjugating by the cone\nisomorphism preserves this property.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 070M (lemma-difficulty-K-injectives), using Tag 0BK6 (lemma-product-K-injective); the arbitrary-tower form is obtained by replacing a K-injective representative by a termwise injective one"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-tower-transition-endomorphism",
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070M, split short exact sequence and cone comparison; original Roos node Steps 1,3,4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A K-injective complex of inverse systems computes derived inverse limit by the cone of one minus shift on products",
+   "results": "HomologicalComplex.coneOfHasLimitEval, HomologicalComplex.isLimitOfEval, HomologicalComplex.coneOfHasLimitEval_pt_X, HomologicalComplex.isLimitConeOfHasLimitEval, HomologicalComplex.coneOfHasLimitEval_pt_d, HomologicalComplex.coneOfHasLimitEval_π_app_f, HomologicalComplex.instHasLimit, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related generic homological-complex results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related generic homological-complex results"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*homotop|homotop.*quasiIso",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related generic homological-complex results"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|tower.*split|homotopy.*retract",
+   "results": "Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/Construction.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related generic homological-complex results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex of inverse systems admits a quasi-isomorphism into a complex whose tower transitions split; mapping cone of the cokernel of a split envelope",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.mappingCone.quasiIso_descShortComplex, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.cm5b, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related generic homological-complex results"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homotopyCofiber.XIsoBiprod",
+   "results": "HomologicalComplex.homotopyCofiber.XIsoBiprod, HomologicalComplex.homotopyCofiber.inr_XIsoBiprod_inv, HomologicalComplex.homotopyCofiber.inl_XIsoBiprod_inv, HomologicalComplex.homotopyCofiber.inrX_XIsoBiprod_hom, HomologicalComplex.homotopyCofiber.inlX_XIsoBiprod_hom, HomologicalComplex.homotopyCofiber.inr_XIsoBiprod_inv_assoc, HomologicalComplex.homotopyCofiber.inl_XIsoBiprod_inv_assoc, HomologicalComplex.homotopyCofiber.inrX_XIsoBiprod_hom_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related generic homological-complex results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Roos comparison of kernel of one minus shift and shifted cone for a split inverse system of cochain complexes; natural under homotopy retractions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.Algebra.Homology.RoosComplex",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RoosSplitComparison",
+  "declaration": "CategoryTheory.roos_split_comparison",
+  "file": "lean/Sheaf/Algebra/Homology/RoosSplitComparison.lean",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "existing": false,
+  "statement": "theorem roos_split_comparison\n    (A : Type u) [Category.{v} A] [Abelian A]\n    [HasLimitsOfShape (Discrete ℕ) A]\n    (J : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)\n    (hSplit : ∀ (p : ℤ) (n : ℕ),\n      IsSplitEpi ((J.X p).map (homOfLE (Nat.le_succ n)).op)) :\n    ∃ (PJ LJ CJ : CochainComplex A ℤ)\n      (ePJ : ∀ p : ℤ, PJ.X p ≅ ∏ᶜ (fun n : ℕ ↦ (J.X p).obj (Opposite.op n)))\n      (sJ : PJ ⟶ PJ) (iJ : LJ ⟶ PJ)\n      (hKJ : ∀ p : ℤ, iJ.f p ≫ sJ.f p = 0)\n      (eCJ : ∀ p : ℤ, CJ.X (p + 1) ≅ PJ.X p ⊞ PJ.X (p + 1))\n      (etaJ : LJ ⟶ CJ)\n      (_hLJ : ∀ p : ℤ, IsLimit (KernelFork.ofι (iJ.f p) (hKJ p))),\n      (∀ p q : ℤ, PJ.d p q ≫ (ePJ q).hom =\n      (ePJ p).hom ≫ Limits.Pi.map (fun n ↦ (J.d p q).app (Opposite.op n))) ∧\n      (∀ p : ℤ, sJ.f p = (ePJ p).hom ≫\n      towerTransitionEndomorphism\n        (fun n ↦ (J.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (ePJ p).inv) ∧\n      (∀ p : ℤ, CJ.d (p + 1) (p + 1 + 1) ≫ (eCJ (p + 1)).hom =\n      (eCJ p).hom ≫ biprod.lift\n        (-(biprod.fst ≫ PJ.d p (p + 1)) - biprod.snd ≫ sJ.f (p + 1))\n        (biprod.snd ≫ PJ.d (p + 1) (p + 1 + 1))) ∧\n      (∀ p : ℤ, etaJ.f (p + 1) ≫ (eCJ p).hom = biprod.lift 0 (iJ.f (p + 1))) ∧\n      QuasiIso etaJ"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095923-L-324393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095923-L-324393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
