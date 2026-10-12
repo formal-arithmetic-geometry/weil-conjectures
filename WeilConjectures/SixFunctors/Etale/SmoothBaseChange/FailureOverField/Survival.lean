@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 
