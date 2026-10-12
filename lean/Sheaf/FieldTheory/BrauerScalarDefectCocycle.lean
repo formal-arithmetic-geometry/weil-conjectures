@@ -5,7 +5,8 @@ Authors: SHEAF worker R2
 -/
 module
 public import Sheaf.FieldTheory.BrauerScalarDefect
-import Sheaf.FieldTheory.GaloisUnitsCohomology
+import Sheaf.FieldTheory.BrauerScalarDefectScalarData
+import Sheaf.FieldTheory.BrauerScalarDefectCocycleRealization
 
 /-!
 # The continuous scalar-defect cocycle
@@ -60,5 +61,10 @@ theorem exists_brauerScalarDefect_cocycle (K : Type u) [Field K] (A : CSA.{u, u}
     ∃ z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2,
       ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) =
         Matrix.GeneralLinearGroup.scalar (Fin n) (galoisUnitsCocycleValue K z g h) *
-          b (g * h) := by sorry
+          b (g * h) := by
+  obtain ⟨c, hlc, hrel, hc⟩ := exists_brauerScalarDefect_scalar_data K A n hn e b hb hdesc
+  obtain ⟨z, hz⟩ := exists_galoisUnits_cocycle_of_scalar_cocycle K c hlc hc
+  refine ⟨z, ?_⟩
+  intro g h
+  simpa [hz g h] using hrel g h
 end Field
