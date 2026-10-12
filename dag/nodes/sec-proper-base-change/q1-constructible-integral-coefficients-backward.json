@@ -1,0 +1,126 @@
+{
+ "id": "q1-constructible-integral-coefficients-backward",
+ "kind": "statement",
+ "title": "Backward implication for constructibility with integral coefficients",
+ "statement": "theorem isConstructibleSheaf_integral_backward {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : X.IsTorsionAbelianSheaf F) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F) → IsConstructibleSheaf ((sheafCompose X.smallEtaleTopology E).obj F)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW (definition-constructible), parts (2) and (3), and Lemma 095E (lemma-constructible-quasi-compact-quasi-separated); integral torsion specialization and underlying-set comparison written by Q1 for step 5 of lem-weil-pbc-curve-assertions-retract. Read the public Stacks pages for Tags 03RW and 095E."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The backward implication is proved by refining finite set-valued local trivializations until the abelian-group operation tables are constant, yielding finite integral-module trivializations.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW (definition-constructible), parts (2) and (3), and Lemma 095E (lemma-constructible-quasi-compact-quasi-separated); integral torsion specialization and underlying-set comparison written by Q1 for step 5 of lem-weil-pbc-curve-assertions-retract. Read the public Stacks pages for Tags 03RW and 095E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torsion abelian etale sheaf is constructible if and only if its canonical integral module sheaf is constructible",
+   "results": "CondensedMod.ofSheafCompHaus; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CompHausLike.LocallyConstantModule.functor; SheafOfModules.IsFiniteType; CondensedMod.ofSheafStonean; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-12",
+   "verdict": "related, no exact comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isConstant_iff_forget",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_forget",
+   "date": "2026-10-12",
+   "verdict": "related, no exact comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*integral|integral.*constructible",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torsion abelian etale sheaf is constructible if and only if its canonical integral module sheaf is constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "q1-constructible-integral-coefficients",
+   "place": "direction backward"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsBackward",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleIntegralCoefficientsBackward.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleSheaf_integral_backward",
+  "statement": "theorem isConstructibleSheaf_integral_backward {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : X.IsTorsionAbelianSheaf F) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F) → IsConstructibleSheaf ((sheafCompose X.smallEtaleTopology E).obj F)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T060745-L-2911122",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T060745-L-2911122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
+
+import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsForward
+import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsBackward
 import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
@@ -85,6 +88,9 @@ theorem isConstructibleSheaf_integral_iff {X : Scheme.{u}}
       IsConstructibleEtaleSheafOfSets
         ((sheafCompose X.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F) := by
-  sorry
+  dsimp
+  constructor
+  · exact isConstructibleSheaf_integral_forward F hF
+  · exact isConstructibleSheaf_integral_backward F hF
 
 end AlgebraicGeometry.Scheme
