@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomial
 
 /-! # Lifting compatible residue embeddings through strict henselizations
 
@@ -62,6 +61,12 @@ theorem Etale.compatibleStrictHenselization_residue_image
       eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)
     : ∀ x : IsLocalRing.ResidueField A,
       ∃ y : IsLocalRing.ResidueField B,
-        (Spec.preimage ρB).hom y = (Spec.preimage (ι ≫ ρA)).hom x := by sorry
+        (Spec.preimage ρB).hom y = (Spec.preimage (ι ≫ ρA)).hom x := by
+  intro x
+  obtain ⟨p, hp, hsep, hroot⟩ :=
+    Etale.compatibleStrictHenselization_residue_separable_polynomial
+      σ τ ι hι ν eA eB ρA ρB hρA hρB x
+  apply (IsSepClosed.splits_of_separable p hsep).mem_range_of_isRoot hp
+  simpa only [Polynomial.IsRoot, Polynomial.eval_map] using hroot
 
 end AlgebraicGeometry

@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-compatible-strict-henselization-residue-polynomial",
+ "kind": "statement",
+ "title": "Separable polynomial for a compatible strict-henselization residue element",
+ "statement": "Let g:T→S be a scheme morphism and k,k′ separably closed fields, Ω an algebraically closed field, σ:Spec k→S, τ:Spec k′→T, ι:Spec k′→Spec k with ι≫σ=τ≫g, and ν:Spec Ω→Spec k′. Let A be a strictly henselian local ring with separably closed residue field and B a henselian local ring (no separably closed residue-field hypothesis is required), eA:Spec A≅S_(ν≫ι≫σ), eB:Spec B≅T_(ν≫τ), and residue embeddings ρA,ρB whose composites through the closed-point and structural maps equal σ and τ. Let a:κA→k′ be the ring homomorphism corresponding to ι≫ρA and b:κB→k′ the one corresponding to ρB. For every x in κA there exists a nonzero separable polynomial p over κB such that evaluating the polynomial obtained by applying b to its coefficients at a(x) gives zero. This is a polynomial witness only; no preimage in κB is asserted. The scheme, geometric point, residue field, strictly henselian ring and strict-henselization constructions are those of [def-pc-scheme] [def-pc-separably-closed] [def-weil-geometric-point] [def-weil-residue-field] [def-weil-pbc-henselian-terminology] [def-weil-pbc-strict-henselization-limit] [def-weil-pbc-strict-henselization-structural-map].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX and 095T"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-separably-closed",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify strict-henselization residue fields with relative separable closures using pointed étale-neighbourhood colimits and transport the residue maps through the given strict-henselization isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a monic separable polynomial for x over the first point residue field. Extend its coefficients through the residue map of g into the second model residue field. Monicity ensures nonzeroness, and separability is preserved by field embeddings. The point factorization equalities and hι identify its evaluation after applying ρB with the original zero evaluation. No splitting or preimage is asserted here. This step does not use separable closedness of the second model residue field.",
+   "uses": [
+    "def-pc-separably-closed"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-pc-separably-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX and 095T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict henselization residue field separable algebraic polynomial",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization residue field elements separable over base residue field",
+   "results": "Algebra.instIsSeparableResidueFieldOfFormallyUnramified and HenselianLocalRing.TFAE; no exact model theorem",
+   "date": "2026-10-13",
+   "verdict": "lower-level APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits.mem_range_of_isRoot",
+   "results": "Polynomial.Splits.mem_range_of_isRoot in Mathlib.Algebra.Polynomial.Splits",
+   "date": "2026-10-13",
+   "verdict": "used in target proof"
+  },
+  {
+   "tool": "grep",
+   "query": "splits_of_separable|mem_range_of_isRoot",
+   "results": "Mathlib/FieldTheory/IsSepClosed.lean:67; Mathlib/Algebra/Polynomial/Splits.lean:548",
+   "date": "2026-10-13",
+   "verdict": "used in target proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueImage",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-compatible-strict-henselization-residue-image",
+   "place": "factorization intermediate"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomial",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResiduePolynomial.lean",
+  "declaration": "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_separable_polynomial",
+  "statement": "theorem Etale.compatibleStrictHenselization_residue_separable_polynomial\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) :\n    ∀ x : IsLocalRing.ResidueField A,\n      ∃ p : Polynomial (IsLocalRing.ResidueField B),\n        p ≠ 0 ∧ p.Separable ∧\n          p.eval₂ (Spec.preimage ρB).hom ((Spec.preimage (ι ≫ ρA)).hom x) = 0",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T163614-L-2785234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T163614-L-2785234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
