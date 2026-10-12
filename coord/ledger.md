@@ -5809,3 +5809,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:47 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore (stage 3; reviewer PASS; after a return; landing 20261012T014629-L-887723 (interface); modules 2; new nodes 1)
 - 01:48 L: merged deliver/H1/Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback (stage 3; reviewer PASS; first push; landing 20261012T014718-L-890962 (interface); modules 3; new nodes 3)
 - 01:49 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit (reviewer RETURN: (reviewer X-d74a6, head d74a65977) C1/G1: In dag/nodes/sec-curve-estimates/lem-weil-pbc-cohomology-filtered-colimit.json)
+- 01:50 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections (stage 3; reviewer PASS; after a return; landing 20261012T014912-L-898850 (interface); modules 3; new nodes 2)

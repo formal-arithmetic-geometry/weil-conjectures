@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-zero-dimensional-base-change-geometric-points",
+ "kind": "statement",
+ "title": "Geometric-point data for a zero-dimensional field base change",
+ "statement": "Let k and k′ be algebraically closed fields and f:C→Spec k a separated finite-type scheme of dimension at most zero [def-weil-pbc-curve-setting]. In a cartesian square [def-pc-base-change] with lower map ι:Spec k′→Spec k and projection ι′:C′→C, C′→Spec k′ is again a curve of dimension at most zero. There is an equivalence b:|C′|≃|C| equal pointwise to ι′, and a family of geometric points s(c′):Spec k′→C′ [def-weil-geometric-point] with s(c′)(default)=c′. No sheaf occurs in this statement.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "Degree-zero proof, point bijection and chosen geometric points; Stacks Tags 00KH, 00FV, 01JT."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-pc-base-change",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "The zero-dimensional base-change point description gives a bijective projection and dimension zero, and Nullstellensatz identifies residue fields on C′ with k′. Choose the canonical residue-field point at each c′; the empty scheme gives the empty family. Transport the point description from the canonical pullback to the given cartesian square.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-base-change-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Separatedness and finite type are stable under base change. Together with dimension zero, these supply IsCurve f′.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zero-dimensional-base-change-points",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "proof_origin": {
+  "by": "P1",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "Degree-zero proof, point bijection and chosen geometric points; Stacks Tags 00KH, 00FV, 01JT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional scheme of finite type over an algebraically closed field has the same points after field extension",
+   "results": "UNAVAILABLE: Internal Server Error. Other services and local searches used.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "points of an artinian scheme over an algebraically closed field under extension of scalars",
+   "results": "Artinian finiteness and dimension results only; no geometric-point family for arbitrary square.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related tools identified."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsArtinianScheme",
+   "results": "IsArtinianScheme.finite exists, but does not construct rational geometric points or the projection equivalence.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related tools identified."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*points|geometric.*[Pp]oint",
+   "results": "Mathlib only has generic geometric fibre definitions. Local library has zeroDimensional_baseChange_points for the canonical square, which the plan uses; no statement supplies the entire arbitrary-square geometric data.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related tools identified."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+   "place": "Degree-zero proof, point bijection and chosen geometric points; Stacks Tags 00KH, 00FV, 01JT.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalBaseChangeGeometricPoints.lean",
+  "declaration": "AlgebraicGeometry.zeroDimensional_baseChange_geometric_points",
+  "statement": "theorem zeroDimensional_baseChange_geometric_points {k k' : Type u}\n    [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)\n    {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}\n    (h : IsPullback ι' f' f ι) :\n    IsCurve f' ∧ topologicalKrullDim C' ≤ 0 ∧\n      ∃ b : C' ≃ C, (∀ c', b c' = ι' c') ∧\n        ∃ s : C' → (Spec (.of k') ⟶ C'), ∀ c', s c' default = c'",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e08dd",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T014912-L-898850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e08dd",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T014912-L-898850",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature is unchanged; proof, split statements, nodes, imports, report, and mechanical checks satisfy all stage-3 review points."
+ }
+}

@@ -16,38 +16,36 @@
  ],
  "proof": [
   {
-   "text": "The projection induces a bijection between the finite discrete point sets of C′ and C; each residue field on C is k. The base change is again separated and finite type, of dimension at most zero. For an arbitrary cartesian square identify it with the canonical pullback via its universal property.",
+   "text": "Obtain curve structure, dimension zero on C′, an equivalence b of point sets, and k′-valued geometric points t over all points of C′ from zeroDimensional_baseChange_geometric_points. Compose with ι′ and reindex by b.symm to obtain points s over C.",
    "uses": [
-    "lem-weil-pbc-zero-dimensional-base-change-points",
-    "lem-pod-separated-finite-type-base-change"
+    "lem-weil-pbc-zero-dimensional-base-change-geometric-points"
    ],
    "elementary": false
   },
   {
-   "text": "Choose an algebraically closed geometric point above each point of C′ and compose with the projection. Reindex along the point bijection to obtain a geometric point above every point of C. The canonical germ maps on C and C′ identify sections of F and ι′⁻¹F with products of their respective geometric stalks. This also applies to the empty scheme.",
+   "text": "Apply zeroDimensional_sections_stalks twice to show the two products of identity-neighbourhood germ maps are isomorphisms. Compose with the explicit global-sections evaluation isomorphisms at the identity étale objects.",
    "uses": [
     "lem-weil-pbc-zero-dimensional-sections-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "For each chosen point, the inverse-image stalk is canonically isomorphic to the original stalk. Its compatibility with the adjunction-unit germ shows that the sections pullback, under the two product identifications, is exactly the product of these isomorphisms reindexed along the bijection of points. Its inverse is the product of the inverse stalk maps with the inverse reindexing. Thus the specified globalSectionsUpperStarMap is bijective, not merely some abstract map between isomorphic groups.",
+   "text": "For each c′ obtain an inverse-image stalk isomorphism with the global-section germ equality from exists_globalSections_stalk_comparison. Combine these with Pi.mapIso and Pi.reindex. Verify the product equality by Pi.hom_ext, Pi.lift_π and the reindex projection formula. Cancel the isomorphisms on the right to prove the canonical global-sections map is an isomorphism, then apply ConcreteCategory.isIso_iff_bijective.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-weil-pbc-global-sections-stalk-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-zero-dimensional-base-change-points",
-  "lem-weil-pbc-zero-dimensional-sections-stalks"
+  "lem-weil-pbc-zero-dimensional-base-change-geometric-points",
+  "lem-weil-pbc-zero-dimensional-sections-stalks",
+  "lem-weil-pbc-global-sections-stalk-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "P1",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-  "place": "Proof steps 1 and 4 of the expanded DAG proof: the point bijection and compatibility of stalk germs. Stacks Tags 03Q1 and 0GJA."
+  "place": "Second reading: genuine reduction via point choice, two existing stalk-product isomorphisms, single-stalk compatibility, Pi.mapIso and Pi.reindex."
  },
  "mathlib_searches": [
   {
@@ -121,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-efdeb",
-  "group": "G1",
+  "reviewer": "X-e08dd",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T001209-L-509996",
+  "landing": "20261012T014912-L-898850",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; proofs, new declarations, node metadata, imports, and report satisfy the stage-3 review requirements."
+  "note": "independent Codex review: Delivered files compile cleanly; target signature is unchanged; proof, split statements, nodes, imports, report, and mechanical checks satisfy all stage-3 review points."
  }
 }

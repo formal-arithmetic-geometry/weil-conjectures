@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-global-sections-stalk-comparison",
+ "kind": "statement",
+ "title": "Global-sections pullback and one geometric stalk",
+ "statement": "For any morphism g:Y→X of schemes and geometric point y:Spec Ω→Y with Ω algebraically closed [def-weil-geometric-point], and any abelian étale sheaf F on X [def-weil-pbc-abelian-etale-sheaves], there is an isomorphism c:(g⁻¹F)_y≅F_(y g) [def-weil-pbc-geometric-stalks]. The composite of the canonical global-sections pullback [def-weil-pbc-finite-section-pullback], evaluation at the identity étale object of Y, its germ at y, and c equals evaluation at the identity étale object of X followed by the germ at y g. Evaluation uses Sheaf.ΓNatIsoSheafSections and the explicit terminal proof MorphismProperty.Over.mkIdTerminal.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "Degree-zero proof, inverse-image stalk and germ compatibility; Stacks Tag 03Q1 (3)."
+ },
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Take the inverse-image stalk isomorphism and its germ compatibility. Evaluate it at the identity étale neighbourhood. The definition of globalSectionsUpperStarMap evaluates the adjunction unit at the chosen terminal object and then restricts along its base-change terminal isomorphism. Transport terminal evaluations to the identity objects by the unique terminal isomorphisms; naturality of evaluation and the point-colimit relation toPresheafFiber_w identify the induced germ with the identity-neighbourhood germ. Apply inverseImage_stalk_germ to obtain the displayed equality.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "P1",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "Degree-zero proof, inverse-image stalk and germ compatibility; Stacks Tag 03Q1 (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of an etale sheaf under pullback commute with germ maps to geometric stalks",
+   "results": "UNAVAILABLE: Internal Server Error. Other services and local searches used.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global section pullback germ at geometric point compatibility",
+   "results": "Only structure-sheaf Zariski stalkMap_germ results, not this étale sheaf map.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related tools identified."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+   "results": "toPresheafFiber_w and naturality exist; no canonical global-sections pullback formula.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related tools identified."
+  },
+  {
+   "tool": "grep",
+   "query": "zeroDimensional.*baseChange|globalSectionsUpperStarMap.*stalk",
+   "results": "No Mathlib match. The library inverseImage_stalk_germ supplies neighbourhood-unit compatibility; GlobalSections.lean defines the map using chosen terminal identifications, so an evaluation-interface specialization is still needed.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related tools identified."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+   "place": "Degree-zero proof, inverse-image stalk and germ compatibility; Stacks Tag 03Q1 (3).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsStalkComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_globalSections_stalk_comparison",
+  "statement": "theorem exists_globalSections_stalk_comparison {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    ∃ c : (pointSmallEtale y).sheafFiber.obj (((g)^*[AddCommGrpCat.{u + 1}]).obj F) ≅\n        (pointSmallEtale (y ≫ g)).sheafFiber.obj F,\n      globalSectionsUpperStarMap AddCommGrpCat.{u + 1} g F ≫\n        (Sheaf.ΓNatIsoSheafSections _ _ (MorphismProperty.Over.mkIdTerminal @Etale Y)).hom.app\n          (((g)^*[AddCommGrpCat.{u + 1}]).obj F) ≫\n        (pointSmallEtale y).toPresheafFiber (Scheme.Etale.mk (𝟙 Y))\n          (Over.homMk y (Category.comp_id y))\n          (((g)^*[AddCommGrpCat.{u + 1}]).obj F).obj ≫ c.hom =\n      (Sheaf.ΓNatIsoSheafSections _ _ (MorphismProperty.Over.mkIdTerminal @Etale X)).hom.app F ≫\n        (pointSmallEtale (y ≫ g)).toPresheafFiber (Scheme.Etale.mk (𝟙 X))\n          (Over.homMk (y ≫ g) (Category.comp_id (y ≫ g))) F.obj",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e08dd",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T014912-L-898850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e08dd",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T014912-L-898850",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature is unchanged; proof, split statements, nodes, imports, report, and mechanical checks satisfy all stage-3 review points."
+ }
+}
