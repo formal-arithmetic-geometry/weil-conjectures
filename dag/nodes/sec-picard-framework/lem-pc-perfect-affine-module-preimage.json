@@ -15,40 +15,42 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pc-affine-qcoh-derived-equivalence] and its comparison with termwise tilde; take C=e.inverse(E). The counit gives the asserted isomorphism. Choose a complex M representing C by essential surjectivity of the derived localization Q.",
+   "text": "Transport the chosen over-site derived localizations to modules on open subschemes through Scheme.Modules.overEquiv, using Mathlib localization invariance under equivalence. Choose the affine equivalence e and a complex M with Q(M) isomorphic to e.inverse(E). Its comparison and counit identify S=Q(tilde(M)) with E. Transport perfectness through the over-site restriction functors. Set the output object C=Q(M).",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence"
    ],
    "elementary": true
   },
   {
-   "text": "Perfectness gives pseudo-coherence and local finite Tor dimension by [lem-pc-perfect-pseudo-coherent-locally-finite-tor]. On the quasi-compact affine spectrum choose a finite cover and take the minimum lower bound and maximum upper bound. Restriction commutes with derived tensor and restriction detects vanishing of cohomology sheaves, giving global finite Tor amplitude; on the empty spectrum take [0,0].",
+   "text": "Apply [lem-pc-perfect-pseudo-coherent-locally-finite-tor] to S. Its pseudo-coherence clause transfers to Q(M) by [lem-pc-affine-pseudo-coherent-criterion]. Apply [lem-pc-quasi-compact-finite-tor-dimension] to the local finite-Tor clause on the compact affine spectrum, obtaining a single nonempty interval.",
    "uses": [
-    "lem-pc-perfect-pseudo-coherent-locally-finite-tor"
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-quasi-compact-finite-tor-dimension"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-pc-affine-pseudo-coherent-criterion] and [lem-pc-affine-tor-amplitude-criterion] to M and transfer the properties along Q(M) ≅ C. This stops before the ring perfectness criterion.",
+   "text": "Apply [lem-pc-affine-tor-amplitude-criterion] to M with this interval. The counit composed with e applied to the representing isomorphism supplies E isomorphic to e(Q(M)); retain the original natural comparison. No bounded projective replacement is constructed.",
    "uses": [
-    "lem-pc-affine-pseudo-coherent-criterion",
     "lem-pc-affine-tor-amplitude-criterion"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-affine-qcoh-derived-equivalence",
   "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
   "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-quasi-compact-finite-tor-dimension",
   "lem-pc-affine-tor-amplitude-criterion"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P3",
-  "date": "2026-10-12",
+  "group": "U3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EB proof, intermediate step before ring criterion"
+  "place": "Tag 08EB proof; explicit localization transport and compactness reduction"
  },
  "mathlib_searches": [
   {
@@ -126,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T110314-L-620079",
+  "landing": "20261012T194147-L-466905",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

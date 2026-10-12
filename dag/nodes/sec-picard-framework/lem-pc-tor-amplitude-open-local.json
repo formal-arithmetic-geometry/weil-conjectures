@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-tor-amplitude-open-local",
+ "kind": "statement",
+ "title": "Tor amplitude in a fixed interval is local on open neighbourhoods",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with chosen derived localizations for module sheaves on $X$ and on each open subscheme [def-pc-derived-category]. Let $E\\in D(\\mathcal O_X)$ and $a\\leq b$ be integers. Suppose every point $x\\in X$ has an open neighbourhood $U$ such that for every $\\mathcal O_U$-module $G$ and every $i\\notin[a,b]$, $H^i(L(U\\hookrightarrow X)^*E\\otimes^L G)=0$ [def-pc-derived-pullback, def-pc-derived-tensor-cohomology-vanishes]. Then for every $\\mathcal O_X$-module $G$ and every $i\\notin[a,b]$, $H^i(E\\otimes^L G)=0$. The interval is fixed before choosing the neighbourhood or test module; no compactness or quasi-coherence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CG (definition-tor-amplitude); Tag 09U9 (lemma-tor-amplitude-stalk), proof and finite-subcover consequence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof": [
+  {
+   "text": "Fix G and i outside the interval. Choose a K-flat representative P of E using [lem-pc-kflat-resolution] and essential surjectivity of Q. By [lem-pc-kflat-derived-tensor-comparison] its total tensor with G in degree zero computes the derived tensor, independently of any other K-flat representative.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each x choose U from the hypothesis. Open tensor pullback agrees with exact restriction: both are left adjoint to the same pushforward, hence uniquely isomorphic; deriving exact restriction computes its termwise functor (the construction [def-pc-derived-pullback]). Restriction preserves K-flatness and total tensor by [lem-pc-open-restriction-kflat-model] and [lem-pc-open-restriction-total-tensor]; equivalently use [lem-pc-derived-tensor-open-restriction-universes]. Apply the local bound to the restriction of G. The K-flat comparison identifies its zero cohomology with the restriction of the cohomology of the fixed global tensor model.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-open-restriction-kflat-model",
+    "lem-pc-open-restriction-total-tensor",
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The global cohomology sheaf therefore has zero stalk at every x. Apply [pqf-lem-sheaf-zero-stalks]. Together with P and its representation isomorphism this witnesses [def-pc-derived-tensor-cohomology-vanishes]. The same argument applies when X is empty.",
+   "uses": [
+    "pqf-lem-sheaf-zero-stalks",
+    "def-pc-derived-tensor-cohomology-vanishes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "def-pc-derived-pullback",
+  "lem-pc-open-restriction-kflat-model",
+  "lem-pc-open-restriction-total-tensor",
+  "lem-pc-derived-tensor-open-restriction-universes",
+  "pqf-lem-sheaf-zero-stalks",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09U9 proof; the compact case also uses the finite-subcover argument in lem-pc-perfect-affine-module-preimage step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude in a fixed interval is local on open neighbourhoods of a scheme",
+   "results": "Eight results about local properties of schemes and morphisms; none about Tor amplitude or derived tensor vanishing.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero",
+   "results": "Generic IsZero results only, no local derived tensor criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.*amplitude|[Tt]orAmplitude",
+   "results": "No Mathlib AlgebraicGeometry hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude in a fixed interval is local on open neighbourhoods of a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives affine perfectness argument, as decomposed in lem-pc-perfect-affine-module-preimage step 2: globalize the local finite-Tor interval",
+   "via": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-perfect-affine-module-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeOpenLocal.lean",
+  "declaration": "AlgebraicGeometry.torAmplitude_of_open_neighbourhoods",
+  "statement": "theorem torAmplitude_of_open_neighbourhoods (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory X) (a b : ℤ) (hab : a ≤ b)\n    (h : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧\n      ∀ (G : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (i : ℤ),\n        i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes U.toScheme\n          ((derivedPullback U.ι).obj E) G i) :\n    ∀ (G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ),\n      i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X E G i",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T194147-L-466905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T194147-L-466905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

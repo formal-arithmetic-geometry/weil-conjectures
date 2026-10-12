@@ -9287,3 +9287,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/U2/Sheaf.AlgebraicGeometry.TangentMapLinear (stage 3; reviewer PASS; first push; landing 20261012T194146-L-466597 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/U2/Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralTotal (stage 3; reviewer PASS; after a return; landing 20261012T194146-L-466702 (interface); batch 20261012T194054; modules 2; new nodes 0; change records: coord/changes/cechDoubleComplex_general_total.md)
 - 19:41 L: merged deliver/U2/Sheaf.RingTheory.PrescribedResidueBasisSpreads (stage 3; reviewer PASS; first push; landing 20261012T194147-L-466806 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/U3/Sheaf.AlgebraicGeometry.PerfectAffineModulePreimage (stage 3; reviewer PASS; first push; landing 20261012T194147-L-466905 (interface); batch 20261012T194054; modules 3; new nodes 2)
