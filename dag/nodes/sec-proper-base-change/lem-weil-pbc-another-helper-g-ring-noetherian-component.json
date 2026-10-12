@@ -1,0 +1,109 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PU (lemma-another-helper-G-ring, line 12494) and its proof (Algebra Lemma Tag 07N9 completion-finite-extension; More on Algebra Lemmas 07PE derivation-extends, 07EC formally-smooth, 07ED formally-smooth-completion, Proposition 07PM fs-regular, Lemma 07PF quotient-regular)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-g-ring"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formal fibre of polynomial ring over complete local domain of characteristic p geometrically regular",
+   "results": "Algebra.FormallySmooth.of_perfectField (Mathlib.RingTheory.Smooth.Field), Algebra.mvPolynomial, Algebra.FormallySmooth.polynomial, Algebra.IsSmoothAt, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq: no formal fibres",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal fibres of a polynomial ring over a Noetherian complete local domain at a maximal ideal are geometrically regular",
+   "results": "Algebra.IsSmoothAt, Algebra.IsEtaleAt, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Polynomial.not_quasiFiniteAt: nothing on formal fibres",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'formal.?fib|geometrically.?regular|IsGRing' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-another-helper-g-ring-noetherian-component",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-another-helper-g-ring",
+   "place": "decomposition in stage 3",
+   "via": []
+  }
+ },
+ "title": "Noetherian component of polynomial formal fibre",
+ "statement": "intermediate theorem used to prove formalFiber_isGeometricallyRegular",
+ "proof": [
+  {
+   "text": "Apply the corresponding Noetherianity theorem for the completed localization and then the fibre Noetherianity theorem.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-fibre-ring-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-fibre-ring-noetherian"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 07PU"
+ },
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialFormalFiber",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialFormalFiberNoetherian",
+  "file": "lean/Sheaf/RingTheory/PolynomialFormalFiberNoetherian.lean",
+  "declaration": "Polynomial.formalFiber_isNoetherian",
+  "statement": "theorem formalFiber_isNoetherian (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (p : ℕ) (hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p] (q : Ideal (Polynomial A)) [q.IsMaximal] (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) (r : Ideal (Polynomial A)) [r.IsPrime] (hrq : r ≤ q) (hr : r ≠ ⊥) (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) : let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) IsNoetherianRing (r.Fiber C)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T112847-L-770505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T112847-L-770505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

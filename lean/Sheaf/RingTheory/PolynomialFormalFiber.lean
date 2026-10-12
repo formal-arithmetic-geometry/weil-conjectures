@@ -17,6 +17,8 @@ import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
 import Sheaf.RingTheory.HypersurfaceDerivationRegular
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
+import Sheaf.RingTheory.PolynomialFormalFiberNoetherian
+import Sheaf.RingTheory.PolynomialFormalFiberGeometric
 
 /-!
 # Formal fibres of a polynomial ring over a complete local domain
@@ -78,6 +80,7 @@ theorem formalFiber_isGeometricallyRegular (A : Type u) [CommRing A] [IsDomain A
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
       (Localization.AtPrime q)
     IsNoetherianRing (r.Fiber C) ∧ Algebra.IsGeometricallyRegular r.ResidueField (r.Fiber C) := by
-  sorry
+  exact ⟨formalFiber_isNoetherian A p hp q hq r hrq hr hrA,
+    formalFiber_isGeometricallyRegular_component A p hp q hq r hrq hr hrA⟩
 
 end Polynomial
