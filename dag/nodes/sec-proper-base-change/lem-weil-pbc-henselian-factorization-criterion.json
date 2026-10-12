@@ -25,82 +25,52 @@
  ],
  "proof": [
   {
-   "text": "*(3)$\\Rightarrow$(1), part (i): $I$ lies in the Jacobson radical.* Assume $(A,I)$ is henselian [def-weil-pbc-henselian-terminology]. Let $\\mathfrak m$ be a maximal ideal of $A$ and suppose $I\\not\\subseteq\\mathfrak m$; then $I+\\mathfrak m=A$. The ring $B=A/(I\\cap\\mathfrak m)$ is a finite (cyclic) $A$-algebra, and by the Chinese remainder theorem ($I$, $\\mathfrak m$ comaximal) $B\\cong A/I\\times A/\\mathfrak m$. Under this isomorphism the image of $I$ is $0\\times(I+\\mathfrak m)/\\mathfrak m=0\\times A/\\mathfrak m$, so $B/IB\\cong A/I$ and $B\\to B/IB$ is the first projection. The idempotents $(1,1)$ and $(1,0)$ of $B$ are distinct ($A/\\mathfrak m\\neq0$) and both map to $1$, contradicting the uniqueness of lifts in the definition. Hence $I\\subseteq\\mathfrak m$ for every maximal ideal $\\mathfrak m$, i.e. (i).",
+   "text": "The recorded henselian predicate is Mathlib HenselianRing A I. Its jac field gives I ≤ jacobson(0) directly.",
    "uses": [
     "def-weil-pbc-henselian-terminology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI, proof, paragraph 'Assume (3). Let $\\mathfrak m$ be a maximal ideal and consider the finite map $A\\to B=A/(I\\cap\\mathfrak m)$ ... Thus we see that $I$ is contained in the Jacobson radical of $A$'"
-   }
+   "elementary": true
   },
   {
-   "text": "*(3)$\\Rightarrow$(1), part (ii): factorizations lift.* Assume $(A,I)$ henselian; by step 1, $I$ lies in the Jacobson radical. Let $f\\in A[T]$ be monic and $\\overline f=g_0h_0$ with $g_0,h_0$ monic generating the unit ideal of $(A/I)[T]$. Put $B=A[T]/(f)$: a free $A$-module with basis $1,T,\\dots,T^{\\deg f-1}$, hence a finite $A$-algebra, with $B/IB\\cong(A/I)[T]/(\\overline f)$ [lem-weil-pbc-monic-quotient-free]. As the ideals $(g_0)$, $(h_0)$ of $(A/I)[T]$ are comaximal, $(g_0)\\cap(h_0)=(g_0h_0)=(\\overline f)$ and the Chinese remainder theorem gives $B/IB\\cong(A/I)[T]/(g_0)\\times(A/I)[T]/(h_0)$; let $\\bar e\\in B/IB$ be the idempotent corresponding to $(1,0)$. By the definition of henselian [def-weil-pbc-henselian-terminology] applied to the finite $A$-algebra $B$ there is an idempotent $e\\in B$ lifting $\\bar e$. By [lem-weil-pbc-idempotent-splitting-monic-factorization] (its hypotheses: $I$ in the Jacobson radical, $f$, $g_0$, $h_0$, $\\bar e$, $e$ as here) there are monic $g,h\\in A[T]$ with $f=gh$ and reductions $g_0$, $h_0$. This is (ii).",
+   "text": "For monic f set B = AdjoinRoot f, a finite A-algebra by Polynomial.Monic.finite_adjoinRoot. Choose Bezout coefficients a,b for g0,h0. The element p0=b*h0 has residues 1 and 0 in the two factor quotients and is idempotent modulo f0=g0*h0. Lift p0 to a polynomial p using surjectivity of coefficient reduction. AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot identifies its class in B/IB with this idempotent. Apply [lem-weil-pbc-henselian-pair-integral-idempotent-lifting] to get an idempotent e of B. Factor the maps to AdjoinRoot g0 and AdjoinRoot h0 through B/IB; applying them to the lifted equality gives residues 1 and 0. Apply [lem-weil-pbc-idempotent-splitting-monic-factorization] to obtain the required factors. All quotient and Bezout glue is proved in the private helper factorization_of_lifting.",
    "uses": [
     "lem-weil-pbc-monic-quotient-free",
-    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
     "lem-weil-pbc-idempotent-splitting-monic-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI, proof, paragraph 'Assume (3)', from 'Let $f\\in A[T]$ be monic' to 'Thus (3) implies (1)'"
+    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), equivalence (3)$\\Leftrightarrow$(1): (3) is the definition [def-weil-pbc-henselian-terminology] (idempotents of $B/IB$ lift bijectively for finite $B$), (1) is Stacks' Definition Tag 09XE (definition-henselian-pair, line 2394) = conditions (i) and (ii); proof of 09XI: (3)$\\Rightarrow$(1) directly, (1)$\\Rightarrow$(5)$\\Rightarrow$(2)$\\Rightarrow$(4)$\\Rightarrow$(3)"
    }
   },
   {
-   "text": "*(1)$\\Rightarrow$(5): Gabber's root condition.* Assume (i) and (ii). Let $f(T)=T^n(T-1)+a_nT^n+\\dots+a_1T+a_0$ with $n\\ge1$ and $a_0,\\dots,a_n\\in I$; $f$ is monic of degree $n+1$ and $\\overline f=T^n(T-1)$. The monic polynomials $g_0=T^n$, $h_0=T-1$ generate the unit ideal: $1=T^n-(T-1)(T^{n-1}+\\dots+T+1)$. By (ii), $f=gh$ with $g,h\\in A[T]$ monic, $\\overline g=T^n$, $\\overline h=T-1$. If $A/I=0$, then $1\\in I$ lies in the Jacobson radical by (i), so $A$ has no maximal ideal, $A=0$, and $\\alpha=0$ is a root of $f$ in $1+I=A$. Otherwise the reduction of a monic polynomial is monic of the same degree, so $\\deg h=1$, $h=T-\\alpha$ with $\\alpha\\equiv1$ modulo $I$, and $f(\\alpha)=g(\\alpha)h(\\alpha)=0$. So every such $f$ has a root in $1+I$, and $I$ lies in the Jacobson radical by (i): this is condition (5) of 09XI.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI, proof, paragraph 'Assume (1). Let $f$ be as in (5) ... Thus (1) implies (5)'"
-   }
-  },
-  {
-   "text": "*(5)$\\Rightarrow$(2): sections of etale algebras lift.* By step 3, $I$ lies in the Jacobson radical and every polynomial $T^n(T-1)+a_nT^n+\\dots+a_0$ ($n\\ge1$, $a_i\\in I$) has a root in $1+I$. By [lem-weil-pbc-gabber-root-criterion-etale-section-lifting], for every ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale and every $A$-algebra map $\\sigma:A'\\to A/I$ there is an $A$-algebra map $\\tau:A'\\to A$ lifting $\\sigma$.",
+   "text": "Conversely assume the Jacobson condition and monic coprime factorization lifting. To prove the is_henselian field, take monic f and a0 with f(a0) in I and f'(a0) a unit modulo I. Handle the zero ring by nontriviality. In a nonzero ring the Jacobson condition implies I is proper, so A/I is nonzero. Put x=a0 mod I and f0=f mod I. Divide f0 by X-C(x); since f0(x)=0 the remainder vanishes and f0=(X-C(x))*q with q monic. The differentiated division identity gives q(x)=f0'(x), a unit. Dividing q by X-C(x) and multiplying its remainder identity by q(x)^(-1) provides explicit Bezout coefficients, proving IsCoprime (X-C(x)) q. Lift this factorization to f=g*h. Reduction preserves the degree of monic g, so g has degree one. Thus g=X+C(g.coeff 0), and alpha=-g.coeff 0 is a root of f. Taking constant coefficients of g mod I=X-C(x) proves alpha-a0 in I. This establishes Mathlib HenselianRing without any additional assumption.",
    "uses": [
-    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI, proof, paragraphs from 'Assume (5). We will show that (2) holds' to the end of the proof"
-   }
-  },
-  {
-   "text": "*(2)$\\Rightarrow$(4)$\\Rightarrow$(3): $(A,I)$ is henselian.* By step 4 the hypothesis of [lem-weil-pbc-etale-section-lifting-henselian-pair] holds, so $(A,I)$ is henselian [def-weil-pbc-henselian-terminology]: for every finite $A$-algebra $B$ every idempotent of $B/IB$ lifts uniquely to an idempotent of $B$. With steps 1-2 this proves the equivalence.",
-   "uses": [
-    "lem-weil-pbc-etale-section-lifting-henselian-pair",
     "def-weil-pbc-henselian-terminology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI, proof, first paragraph 'Assume (2) ... In this way we see that (2) implies (4)' and 'The implication (4)$\\Rightarrow$(3) is trivial'"
-   }
-  },
-  {
-   "text": "*The particular case.* If $I$ lies in the Jacobson radical, condition (i) holds, so the equivalence of steps 1-5 reads: $(A,I)$ henselian if and only if (ii).",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI with Definition Tag 09XE"
+    "place": "Definition Tag 09XE and Lemma Tag 09XI; agent-written direct linear-factor argument for the recorded simple-root predicate, in place of the reverse Gabber chain."
    }
+  },
+  {
+   "text": "Given I ≤ jacobson(0), the conjunction in the main equivalence is equivalent to factorization lifting alone. Compose these equivalences to obtain the particular-case conjunct.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-henselian-terminology",
   "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-idempotent-splitting-monic-factorization",
-  "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
-  "lem-weil-pbc-etale-section-lifting-henselian-pair"
+  "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
+  "lem-weil-pbc-idempotent-splitting-monic-factorization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair), proof of (3)$\\Rightarrow$(1), (1)$\\Rightarrow$(5), (5)$\\Rightarrow$(2), (2)$\\Rightarrow$(4)$\\Rightarrow$(3); Definition Tag 09XE"
+  "place": "B3 stage 3: Stacks 09XI forward CRT-idempotent factorization argument; reverse direction directly verifies Mathlib simple-root lifting using the lifted linear factor. Reuses the existing integral-idempotent lifting theorem."
  },
  "mathlib_searches": [
   {
@@ -205,5 +175,15 @@
   "group": "G1",
   "result": "fix",
   "note": "A, I arbitrary; henselian = recorded HenselianRing A I; (i) I ≤ jacobson ⊥; (ii) monic f, monic g₀ h₀, IsCoprime, f.map mk I = g₀*h₀ → ∃ monic g h, f = g*h, reductions g₀ h₀ (∃, no uniqueness as 09XE); iff bracketed; particular case as conjunct; reverted the delivery's change of existing node(s) def-weil-pbc-henselian-terminology (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/RingTheory/HenselianPair.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070529-L-3466994",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
