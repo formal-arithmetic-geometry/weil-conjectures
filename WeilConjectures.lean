@@ -1,5 +1,6 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
+public import WeilConjectures.Algebra.AddConjugate
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
@@ -464,6 +465,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
+public import WeilConjectures.AlgebraicGeometry.Sites.EtalePointFieldExtension
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleSectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleStructureSheaf
@@ -1952,6 +1954,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapConjugate
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
