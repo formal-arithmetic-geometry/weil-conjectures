@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Sheaf.Topology.PresheafModuleStalkFunctor
 
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+import Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroHomFormula
+import Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks
+
 /-!
 # Extension by zero of modules on an open subscheme
 
@@ -27,29 +32,9 @@ noncomputable section
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Extension by zero is additive, canonically left adjoint to restriction, and has the
-expected stalks. Modules on `U` are represented on the localized opens site using
-`overEquiv U`. The direct sum has one summand when `V ≤ U` and no summands otherwise.
-The adjunction formula on each summand specifies the map induced by sheafification.
-Source: Stacks Project, Definition 00A4 (1),(2),(5),(6), Lemma 00A7 (2),(3)
-(blueprint: lem-weil-pbc-module-extension-by-zero-adjunction).
-
-Proof: (1) The presheaf restrictions are those of the input on opens contained in `U`,
-and zero otherwise; their functor laws and semilinearity follow sectionwise.
-(2) Sheafification gives the induced morphisms, with functoriality and additivity by
-uniqueness of factorization (`def-weil-presheaf-modules-sheafification`).
-(3) A presheaf morphism out of this extension is exactly a morphism on `U`: extend its
-components by zero outside `U`. These constructions are inverse and natural.
-(4) Compose that bijection with the sheafification universal property to get the stated
-adjunction, whose component formula is composition with the sheafification map.
-(5) Outside `U` every neighbourhood has zero sections of the extension presheaf; inside
-`U`, neighbourhoods contained in `U` are cofinal, so its stalk is the input stalk.
-The identification is linear on germs and natural in the input (`def-weil-pbc-module-stalk`).
-(6) Sheafification induces an isomorphism on stalks
-(`lem-weil-pbc-stalk-sheafification-space`); composing gives the canonical stalk map `t` below.
-Its linearity follows from semilinearity of the sheafification map on sections, and its
-naturality in the input (the last clause) from naturality of the adjunction unit,
-`overFunctorEquiv` and `restrictStalkNatIso`. -/
+/-- Extension by zero is additive, left adjoint to restriction, and has the stated stalk properties.
+Source: Stacks Project, Definition 00A4 and Lemma 00A7.
+(blueprint: lem-weil-pbc-module-extension-by-zero-adjunction). -/
 theorem module_extensionByZero_adjunction (X : Scheme.{u}) (U : X.Opens) :
     let R := X.ringCatSheaf
     let P := SheafOfModules.extensionByZeroPresheaf.{u} R U
@@ -92,6 +77,16 @@ theorem module_extensionByZero_adjunction (X : Scheme.{u}) (U : X.Opens) :
               ((toPresheaf X).map (L.map α)) =
             (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map
               ((toPresheaf U.toScheme).map ((overEquiv U).functor.map α)) ≫ t F' x) := by
-  sorry
+  dsimp
+  let L := SheafOfModules.extensionByZeroPresheaf.{u} X.ringCatSheaf U ⋙
+    PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)
+  have : PreservesFiniteLimits L :=
+    (open_restriction_adjunction_exact (X.toRingedSpace) U).2.2.1
+  have : PreservesLimit (Functor.empty.{0} _) L := inferInstance
+  have : L.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_preserves_terminal_object
+  have hadd : L.Additive := Functor.additive_of_preserves_binary_products L
+  obtain ⟨adj, hformula⟩ := module_extensionByZero_hom_formula X U
+  exact ⟨hadd, adj, hformula, module_extensionByZero_unit_stalks X U adj⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -34,84 +34,23 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 ($j_{p!}$ on presheaves of modules).* Let $\\mathcal F$ be an $\\mathcal O_U$-module. The rule for $j_{p!}\\mathcal F$ is well defined: if $V'\\subseteq V$ and $V\\subseteq U$ then $V'\\subseteq U$, so the restriction $\\mathcal F(V)\\to\\mathcal F(V')$ lands in $(j_{p!}\\mathcal F)(V')$; if $V\\not\\subseteq U$ the source is $0$ and the map is $0$. For $V''\\subseteq V'\\subseteq V$ the composite of the restrictions is the restriction along $V''\\subseteq V$: for $V\\subseteq U$ these are restrictions of $\\mathcal F$, and for $V\\not\\subseteq U$ both maps start at $0$; restriction along $V\\subseteq V$ is the identity in both cases. So $j_{p!}\\mathcal F$ is a presheaf of abelian groups. Each $(j_{p!}\\mathcal F)(V)$ is an $\\mathcal O_X(V)$-module: for $V\\subseteq U$ through $\\mathcal O_X(V)=\\mathcal O_U(V)$, for $V\\not\\subseteq U$ the zero module. A restriction along $V'\\subseteq V$ is semilinear over $\\mathcal O_X(V)\\to\\mathcal O_X(V')$: for $V\\subseteq U$ this is the semilinearity of the restriction of the $\\mathcal O_U$-module $\\mathcal F$ over $\\mathcal O_U(V)\\to\\mathcal O_U(V')$, which is the restriction of $\\mathcal O_X$, and for $V\\not\\subseteq U$ the map is $0$ out of $0$. So $j_{p!}\\mathcal F$ is a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification]. For $\\alpha:\\mathcal F\\to\\mathcal F'$ the family $j_{p!}\\alpha$ ($\\alpha_V$ for $V\\subseteq U$, $0$ otherwise) commutes with restrictions (for $V\\subseteq U$ by the naturality of $\\alpha$, otherwise both composites start at $0$) and is $\\mathcal O_X(V)$-linear on each $V$ (since $\\alpha_V$ is $\\mathcal O_U(V)$-linear [def-weil-sheaf-of-modules-category]); so it is a morphism of presheaves of $\\mathcal O_X$-modules. Sectionwise one reads off $j_{p!}(\\beta\\alpha)=j_{p!}\\beta\\circ j_{p!}\\alpha$, $j_{p!}(\\mathrm{id})=\\mathrm{id}$ and $j_{p!}(\\alpha+\\alpha')=j_{p!}\\alpha+j_{p!}\\alpha'$ (morphisms are added sectionwise).",
+   "text": "The exact open-restriction theorem supplies preservation of finite limits, hence zero morphisms and additivity of L. Combine that additive-functor result with the component-formula and unit-stalk intermediate theorems, then package their conjunctions.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A7 (label lemma-j-shriek-modules, line 4771) and Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2),(5),(6); proof omitted in the source, written after the proof of Lemma 00A3 (label lemma-j-shriek, line 4549)"
-   }
-  },
-  {
-   "text": "*Step 2 (clause (1): $j_!$ is an additive functor).* By [def-weil-presheaf-modules-sheafification] the presheaf of $\\mathcal O_X$-modules $j_{p!}\\mathcal F$ (Step 1) has a sheafification $\\theta_{\\mathcal F}:j_{p!}\\mathcal F\\to j_!\\mathcal F$, an $\\mathcal O_X$-linear map to a sheaf of $\\mathcal O_X$-modules through which every $\\mathcal O_X$-linear map from $j_{p!}\\mathcal F$ to a sheaf of $\\mathcal O_X$-modules factors uniquely. For $\\alpha:\\mathcal F\\to\\mathcal F'$ the map $\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha:j_{p!}\\mathcal F\\to j_!\\mathcal F'$ is $\\mathcal O_X$-linear with target a sheaf of $\\mathcal O_X$-modules, so there is exactly one morphism $j_!\\alpha:j_!\\mathcal F\\to j_!\\mathcal F'$ of $\\mathcal O_X$-modules with $j_!\\alpha\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha$ (this is the 'induced morphism' of the statement). Functoriality: $j_!\\beta\\circ j_!\\alpha$ and $j_!(\\beta\\alpha)$ both satisfy $(-)\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F''}\\circ j_{p!}(\\beta\\alpha)$ by Step 1, and $\\mathrm{id}$ satisfies the condition for $j_!(\\mathrm{id})$, so uniqueness gives $j_!(\\beta\\alpha)=j_!\\beta\\circ j_!\\alpha$ and $j_!(\\mathrm{id})=\\mathrm{id}$. Additivity: the Hom sets of $\\Mod(\\mathcal O_X)$ are abelian groups under sectionwise addition and composition is biadditive [def-weil-sheaf-of-modules-category]; hence $(j_!\\alpha+j_!\\alpha')\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha+\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha'=\\theta_{\\mathcal F'}\\circ j_{p!}(\\alpha+\\alpha')$ (Step 1), and uniqueness gives $j_!(\\alpha+\\alpha')=j_!\\alpha+j_!\\alpha'$.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-module-extension-by-zero-hom-formula",
+    "lem-weil-pbc-module-extension-by-zero-unit-stalks",
+    "lem-sc-derived-open-restriction-adjunction-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A7 (label lemma-j-shriek-modules, line 4771) and Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2),(5),(6); proof omitted in the source, written after the proof of Lemma 00A3 (label lemma-j-shriek, line 4549)"
-   }
-  },
-  {
-   "text": "*Step 3 (the adjunction on the presheaf level).* Let $\\mathcal F$ be an $\\mathcal O_U$-module and $\\mathcal G$ an $\\mathcal O_X$-module, with its restriction $\\mathcal G|_U$, an $\\mathcal O_U$-module [lem-weil-pbc-module-restriction-open-immersion-colimits]. Let $\\Phi:\\Hom_{\\mathrm{PMod}(\\mathcal O_X)}(j_{p!}\\mathcal F,\\mathcal G)\\to\\Hom_{\\mathcal O_U}(\\mathcal F,\\mathcal G|_U)$, $\\varphi\\mapsto\\varphi|_U=(\\varphi_W)_{W\\subseteq U}$: for $W\\subseteq U$ open, $\\varphi_W:\\mathcal F(W)=(j_{p!}\\mathcal F)(W)\\to\\mathcal G(W)=(\\mathcal G|_U)(W)$ is $\\mathcal O_X(W)=\\mathcal O_U(W)$-linear, and for $W'\\subseteq W\\subseteq U$ the restriction maps of $j_{p!}\\mathcal F$ and of $\\mathcal G|_U$ are those of $\\mathcal F$ and of $\\mathcal G$, so $\\varphi|_U$ commutes with them; it is a morphism of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Conversely, for $a:\\mathcal F\\to\\mathcal G|_U$ let $\\tilde a_V=a_V$ for $V\\subseteq U$ and $\\tilde a_V=0:0\\to\\mathcal G(V)$ for $V\\not\\subseteq U$. Each $\\tilde a_V$ is $\\mathcal O_X(V)$-linear. For $V'\\subseteq V$: if $V\\subseteq U$, then $V'\\subseteq U$ and $\\tilde a_{V'}(s|_{V'})=a_{V'}(s|_{V'})=a_V(s)|_{V'}$ by the naturality of $a$; if $V\\not\\subseteq U$, both composites $(j_{p!}\\mathcal F)(V)=0\\to\\mathcal G(V')$ are $0$. So $\\tilde a$ is a morphism of presheaves of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification]. Clearly $\\Phi(\\tilde a)=a$; and $\\widetilde{\\Phi(\\varphi)}=\\varphi$, since both agree at $V\\subseteq U$ and at $V\\not\\subseteq U$ both are maps out of the zero module, hence $0$. So $\\Phi$ is bijective. It is natural: for $\\alpha:\\mathcal F'\\to\\mathcal F$, $\\Phi(\\varphi\\circ j_{p!}\\alpha)$ has components $\\varphi_W\\circ\\alpha_W$ ($W\\subseteq U$), i.e. $\\Phi(\\varphi\\circ j_{p!}\\alpha)=\\Phi(\\varphi)\\circ\\alpha$; for $\\gamma:\\mathcal G\\to\\mathcal G'$, $\\Phi(\\gamma\\circ\\varphi)=\\gamma|_U\\circ\\Phi(\\varphi)$ componentwise.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A7 (label lemma-j-shriek-modules, line 4771) and Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2),(5),(6); proof omitted in the source, written after the proof of Lemma 00A3 (label lemma-j-shriek, line 4549)"
-   }
-  },
-  {
-   "text": "*Step 4 (clause (2)).* Let $\\mathcal F$, $\\mathcal G$ be as in Step 3. By the universal property of the sheafification of presheaves of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification], $\\psi\\mapsto\\psi\\circ\\theta_{\\mathcal F}$ is a bijection $\\Hom_{\\mathcal O_X}(j_!\\mathcal F,\\mathcal G)\\to\\Hom_{\\mathrm{PMod}(\\mathcal O_X)}(j_{p!}\\mathcal F,\\mathcal G)$ ($\\mathcal G$ is a sheaf of $\\mathcal O_X$-modules; existence of the factorization is surjectivity, its uniqueness injectivity). Composing with the bijection $\\Phi$ of Step 3 gives that $\\psi\\mapsto\\Phi(\\psi\\circ\\theta_{\\mathcal F})=(\\psi\\circ\\theta_{\\mathcal F})|_U$ is bijective; its inverse sends $a$ to the unique $\\psi$ with $\\psi\\circ\\theta_{\\mathcal F}=\\tilde a$. Naturality in $\\mathcal G$: for $\\gamma:\\mathcal G\\to\\mathcal G'$, $((\\gamma\\psi)\\circ\\theta_{\\mathcal F})|_U=\\Phi(\\gamma\\circ(\\psi\\theta_{\\mathcal F}))=\\gamma|_U\\circ(\\psi\\circ\\theta_{\\mathcal F})|_U$ by Step 3. Naturality in $\\mathcal F$: for $\\alpha:\\mathcal F'\\to\\mathcal F$, $(\\psi\\circ j_!\\alpha)\\circ\\theta_{\\mathcal F'}=\\psi\\circ\\theta_{\\mathcal F}\\circ j_{p!}\\alpha$ by the defining property of $j_!\\alpha$ (Step 2), so $((\\psi\\circ j_!\\alpha)\\circ\\theta_{\\mathcal F'})|_U=\\Phi(\\psi\\theta_{\\mathcal F}\\circ j_{p!}\\alpha)=(\\psi\\circ\\theta_{\\mathcal F})|_U\\circ\\alpha$ by Step 3. Hence $j_!$ is left adjoint to $\\mathcal G\\mapsto\\mathcal G|_U$.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A7 (label lemma-j-shriek-modules, line 4771) and Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2),(5),(6); proof omitted in the source, written after the proof of Lemma 00A3 (label lemma-j-shriek, line 4549)"
-   }
-  },
-  {
-   "text": "*Step 5 (stalks of $j_{p!}\\mathcal F$).* Let $x\\in X$; stalks, germs and the module structures on stalks are as in [def-weil-pbc-module-stalk]: every element of a stalk is a germ, and $s_x=s'_x$ iff $s,s'$ agree on some smaller open neighbourhood of $x$. (a) If $x\\notin U$, no open neighbourhood $V$ of $x$ is contained in $U$, so $(j_{p!}\\mathcal F)(V)=0$ for all of them; every element of $(j_{p!}\\mathcal F)_x$ is a germ of an element of $0$, so $(j_{p!}\\mathcal F)_x=0$. (b) Let $x\\in U$. The open neighbourhoods of $x$ in $U$ are the open neighbourhoods $V$ of $x$ in $X$ with $V\\subseteq U$, and on them $\\mathcal F(V)=(j_{p!}\\mathcal F)(V)$ with the same restriction maps, $\\mathcal O_U(V)=\\mathcal O_X(V)$ likewise. Define $\\lambda:\\mathcal F_x\\to(j_{p!}\\mathcal F)_x$ by $s_x\\mapsto s_x$ ($s\\in\\mathcal F(V)$, $x\\in V\\subseteq U$). Well defined: if $s_x=s'_x$ in $\\mathcal F_x$, then $s|_W=s'|_W$ for an open $x\\in W\\subseteq U$, so the germs agree in $(j_{p!}\\mathcal F)_x$. Injective: if $s_x=0$ in $(j_{p!}\\mathcal F)_x$, then $s|_W=0$ for some open $x\\in W\\subseteq V\\subseteq U$, so $s_x=0$ in $\\mathcal F_x$. Surjective: an element of $(j_{p!}\\mathcal F)_x$ is a germ $t_x$, $t\\in(j_{p!}\\mathcal F)(V)$; then $t_x=(t|_{V\\cap U})_x$ and $t|_{V\\cap U}\\in\\mathcal F(V\\cap U)$, so $t_x=\\lambda((t|_{V\\cap U})_x)$. The same argument for $\\mathcal O$ shows that $\\mu:\\mathcal O_{U,x}\\to\\mathcal O_{X,x}$, $r_x\\mapsto r_x$, is a ring isomorphism (it is compatible with sums and products of germs), and $\\mathcal F_x$ is an $\\mathcal O_{X,x}$-module through $\\mu^{-1}$; then $\\lambda(r_xs_x)=\\lambda((r|_Ws|_W)_x)=r_x\\lambda(s_x)$, so $\\lambda$ is an isomorphism of $\\mathcal O_{X,x}$-modules. For $\\alpha:\\mathcal F\\to\\mathcal F'$, $\\lambda'(\\alpha_x(s_x))=(\\alpha_V(s))_x=(j_{p!}\\alpha)_V(s)_x=(j_{p!}\\alpha)_x(\\lambda(s_x))$, so $\\lambda$ is natural in $\\mathcal F$.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, proof of Lemma 00A3 (label lemma-j-shriek, line 4549: 'obvious from the definition ... and the definition of a stalk') and proof of Lemma 00A0 (label lemma-j-pullback, line 4453) part (3) (cofinality of the neighbourhoods inside U), for the presheaf of modules of Step 1"
-   }
-  },
-  {
-   "text": "*Step 6 (clause (3)).* By [def-weil-presheaf-modules-sheafification] the underlying sheaf of abelian groups of $j_!\\mathcal F$, with $\\theta_{\\mathcal F}$, is the sheafification of the underlying presheaf of abelian groups of $j_{p!}\\mathcal F$; so by [lem-weil-pbc-stalk-sheafification-space] the map $\\theta_{\\mathcal F,x}:(j_{p!}\\mathcal F)_x\\to(j_!\\mathcal F)_x$, $s_x\\mapsto\\theta_{\\mathcal F,V}(s)_x$, is a group isomorphism for every $x\\in X$, and it is $\\mathcal O_{X,x}$-linear since $\\theta_{\\mathcal F}$ is $\\mathcal O_X$-linear [def-weil-pbc-module-stalk]. If $x\\notin U$, $(j_!\\mathcal F)_x\\cong(j_{p!}\\mathcal F)_x=0$ by Step 5(a). If $x\\in U$, the map of the statement is $\\theta_{\\mathcal F,x}\\circ\\lambda$ ($s_x\\mapsto\\theta_{\\mathcal F,V}(s)_x$ for $s\\in\\mathcal F(V)$, $x\\in V\\subseteq U$), well defined and an isomorphism of $\\mathcal O_{X,x}$-modules as a composite of two (Step 5(b)). Naturality: for $\\alpha:\\mathcal F\\to\\mathcal F'$, taking stalks of $j_!\\alpha\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha$ (Step 2; stalks of a composite are the composite of stalks, by the formula $s_x\\mapsto\\varphi(s)_x$) gives $(j_!\\alpha)_x\\circ\\theta_{\\mathcal F,x}=\\theta_{\\mathcal F',x}\\circ(j_{p!}\\alpha)_x$, and with the naturality of $\\lambda$ (Step 5) $(j_!\\alpha)_x\\circ(\\theta_{\\mathcal F,x}\\lambda)=(\\theta_{\\mathcal F',x}\\lambda')\\circ\\alpha_x$.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-stalk-sheafification-space",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A7 (label lemma-j-shriek-modules, line 4771) and Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2),(5),(6); proof omitted in the source, written after the proof of Lemma 00A3 (label lemma-j-shriek, line 4549)"
+    "place": "Lemma 00A7"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-stalk-sheafification-space"
+  "lem-weil-pbc-module-extension-by-zero-hom-formula",
+  "lem-weil-pbc-module-extension-by-zero-unit-stalks",
+  "lem-sc-derived-open-restriction-adjunction-exact"
  ],
  "proof_origin": {
   "by": "agent",
@@ -238,5 +177,15 @@
   "group": "G1",
   "result": "fix",
   "note": "X scheme, U : X.Opens, O_U-modules as SheafOfModules (R.over U), G|_U = overFunctor, j_p! = landed extensionByZeroPresheaf (one summand iff V<=U), j_! = module sheafification; (1) Additive; (2) adjunction with homEquiv fixed to (psi o theta)|_U on every V<=U; (3) zero stalks off U, t from unit iso + O_X,x-linear (Mathlib stalk Module instances); FIX: added the dropped naturality-in-F clause of (3)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

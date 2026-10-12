@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-module-extension-by-zero-hom-formula",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-extension-by-zero-adjunction",
+   "place": "stage 3 decomposition",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Component formula for extension by zero",
+ "statement": "For every scheme X and open U, writing L for the sheafification of the extension-by-zero presheaf functor on modules, there exists an adjunction adj : L ⊣ overFunctor (the restriction functor) such that, for every F, G, morphism ψ : L.obj F ⟶ G, open V and map h : V ⟶ U, and section s of F over h, the adjunction hom-equivalence evaluated at h and s equals the sheafification Hom-equivalence applied to ψ and the direct-sum injection of s into the h-summand.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition 00A4 and Lemma 00A7 (2)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the direct-sum universal property to identify maps out of the extension presheaf with maps on the open. Compose this bijection with the sheafification Hom equivalence and evaluate on the canonical injection.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition 00A4 and Lemma 00A7 (2)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition 00A4 and Lemma 00A7 (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero of a sheaf of modules along an open immersion is left adjoint to restriction",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction (restrictFunctor f ⊣ pushforward f), instIsLeftAdjointRestrictFunctor, pullbackPushforwardAdjunction, restrict_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf); SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous); stalkSkyscraperSheafAdjunction (Mathlib.Topology.Sheaves.Skyscraper)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the adjunction restriction ⊣ pushforward (restriction as a left adjoint); no left adjoint j_! of restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero j_! of sheaves along an open embedding, left adjoint to restriction, stalks zero outside the open",
+   "results": "stalkSkyscraperSheafAdjunction, instIsLeftAdjointPresheafStalkFunctor, skyscraperPresheafStalkAdjunction (Mathlib.Topology.Sheaves.Skyscraper); PresheafedSpace.restrictStalkIso (Mathlib.Geometry.RingedSpace.Stalks); Scheme.Modules.restrictStalkNatIso (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"; \"lowerShriek\"",
+   "results": "none; none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero in Mathlib source",
+   "results": "No matching Mathlib declaration; only the project construction is relevant.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroHomFormula",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_extensionByZero_hom_formula",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExtensionByZeroHomFormula.lean",
+  "statement": "theorem module_extensionByZero_hom_formula (X : Scheme.{u}) (U : X.Opens) :\n    let R := X.ringCatSheaf\n    let P := SheafOfModules.extensionByZeroPresheaf.{u} R U\n    let L := P ⋙ PresheafOfModules.sheafification (𝟙 R.obj)\n    ∃ adj : L ⊣ SheafOfModules.overFunctor R U,\n        (∀ (F : SheafOfModules.{u} (R.over U)) (G : X.Modules)\n          (ψ : L.obj F ⟶ G) (V : X.Opens) (h : V ⟶ U)\n          (s : F.val.obj (op (Over.mk h))),\n          ((adj.homEquiv F G ψ).val.app (op (Over.mk h))) s =\n            (PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj) ψ).app (op V)\n              (DirectSum.of (fun φ : V ⟶ U => F.val.obj (op (Over.mk φ))) h s)) ",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": "none",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108324",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": null,
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108324",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
