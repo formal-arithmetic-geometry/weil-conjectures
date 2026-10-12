@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "Conventions. Points of $\\operatorname{Spec}A$ are the prime ideals $\\mathfrak p$ of $A$ [def-weil-affine-spectrum], $D(a)=\\{\\mathfrak p: a\\notin\\mathfrak p\\}$ and $V(a_1,\\dots,a_n)=\\{\\mathfrak p: a_1,\\dots,a_n\\in\\mathfrak p\\}$ (for $n=0$, $V()=\\operatorname{Spec}A$). Two facts used below: (i) $V(a_1,\\dots,a_n)\\cap V(b_1,\\dots,b_m)=V(a_1,\\dots,a_n,b_1,\\dots,b_m)$, directly from the definition; (ii) $D(a)\\cap D(b)=D(ab)$: if $a\\notin\\mathfrak p$ and $b\\notin\\mathfrak p$ then $ab\\notin\\mathfrak p$ because $\\mathfrak p$ is prime, and if $ab\\notin\\mathfrak p$ then $a\\notin\\mathfrak p$ and $b\\notin\\mathfrak p$ because $\\mathfrak p$ is an ideal. Hence a finite intersection of sets $D(a)$ and $V(\\dots)$ containing at least one $D(\\cdot)$ is basic: $D(a_1)\\cap\\dots\\cap D(a_p)\\cap V(b_1,\\dots,b_q)=D(a_1\\cdots a_p)\\cap V(b_1,\\dots,b_q)$.",
+   "text": "Define membership of a basic set as simultaneous membership of every g-coordinate in the prime ideal and nonmembership of f; this follows by unfolding toSet and zeroLocus.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Membership in $B\\setminus C$. Let $\\mathfrak p\\in\\operatorname{Spec}A$. Then $\\mathfrak p\\notin C=D(h)\\cap V(k_1,\\dots,k_s)$ if and only if $h\\in\\mathfrak p$ or $k_j\\notin\\mathfrak p$ for some $j\\in\\{1,\\dots,s\\}$. So $\\mathfrak p\\in B\\setminus C$ if and only if $\\mathfrak p\\in B$ and either (a) $h\\in\\mathfrak p$, or (b) $h\\notin\\mathfrak p$ and there is a $j$ with $k_j\\notin\\mathfrak p$; in case (b) let $j$ be the least such index, so that $k_1,\\dots,k_{j-1}\\in\\mathfrak p$ and $k_j\\notin\\mathfrak p$. (When $s=0$, case (b) never occurs.)",
+   "text": "Induct on s. For s=0, choose the single basic set with g extended by h; its set is exactly the difference, and a singleton family is pairwise disjoint.",
    "uses": [
     "def-weil-affine-spectrum"
    ],
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "The pieces. Put $P_0=B\\cap V(h)=D(f)\\cap V(g_1,\\dots,g_r,h)$ and, for $j=1,\\dots,s$, $P_j=B\\cap D(h)\\cap V(k_1,\\dots,k_{j-1})\\cap D(k_j)=D(fhk_j)\\cap V(g_1,\\dots,g_r,k_1,\\dots,k_{j-1})$; the equalities hold by (i) and (ii) of the first step, so all $s+1$ pieces are basic. Case (a) of the second step says exactly $\\mathfrak p\\in P_0$, and case (b) with least index $j$ says exactly $\\mathfrak p\\in P_j$. Inclusion $B\\setminus C\\subseteq P_0\\cup\\dots\\cup P_s$: a point of $B\\setminus C$ is in case (a) or (b), hence in $P_0$ or in $P_j$ for its least index $j$. Inclusion $P_0\\cup\\dots\\cup P_s\\subseteq B\\setminus C$: every $P_j$ lies in $B$; a point of $P_0$ has $h\\in\\mathfrak p$, so it is not in $D(h)\\supseteq C$; a point of $P_j$ ($j\\ge1$) has $k_j\\notin\\mathfrak p$, so it is not in $V(k_1,\\dots,k_s)\\supseteq C$. Hence $B\\setminus C=P_0\\cup P_1\\cup\\dots\\cup P_s$.",
+   "text": "For the successor step write C_prefix = D(h) ∩ V(k_1,...,k_s) and a = k_(s+1). Apply the induction hypothesis to B \\ C_prefix. Construct E = D(fha) ∩ V(g_1,...,g_r,k_1,...,k_s). Since a product is outside a prime ideal exactly when each factor is outside, E = B ∩ C_prefix ∩ D(a). The new second basic set is C_prefix ∩ V(a).",
    "uses": [
     "def-weil-affine-spectrum"
    ],
@@ -62,8 +62,10 @@
    }
   },
   {
-   "text": "Pairwise disjointness. $P_0\\cap P_j=\\emptyset$ for $j\\ge1$: points of $P_0$ have $h\\in\\mathfrak p$, points of $P_j$ have $h\\notin\\mathfrak p$. For $1\\le j<j'\\le s$, $P_j\\cap P_{j'}=\\emptyset$: points of $P_j$ have $k_j\\notin\\mathfrak p$, while points of $P_{j'}$ lie in $V(k_1,\\dots,k_{j'-1})$ and so have $k_j\\in\\mathfrak p$. Therefore $B\\setminus C$ is the pairwise-disjoint union of the $s+1$ basic sets $P_0,\\dots,P_s$ (some of which may be empty; a family with empty members is still a finite pairwise-disjoint family of basic sets, and empty members may also be dropped).",
-   "uses": [],
+   "text": "Prepend E to the old family. Every old piece lies in B \\ C_prefix by the induction union equality, while E lies in C_prefix, so E is disjoint from every old piece. Old pieces remain pairwise disjoint. For each prime, split on membership in C_prefix: outside it the old union is exactly B; inside it the new difference is B ∩ D(a), exactly E. Thus B \\ (C_prefix ∩ V(a)) is the union of E and the old family.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
@@ -77,7 +79,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0G1P (lemma-constructible) for the basic sets; the source Etale Cohomology, Lemma Tag 03S0 (etale-cohomology.tex line 12049) only asserts the refinement, the set calculation is the agent's"
+  "place": "Algebra Lemma 0G1P basic-set description; direct finite induction implementing the refinement asserted in Etale Cohomology Lemma 03S0"
  },
  "mathlib_searches": [
   {
@@ -184,5 +186,15 @@
   "group": "K1",
   "result": "fix",
   "note": "A: {A : Type u} [CommRing A]; B=D(f)∩V(g_1..g_r), C=D(h)∩V(k_1..k_s) as BasicConstructibleSetData.toSet with r,s:ℕ incl. 0; conclusion ∃ n (incl. 0, empty union) S : Fin n → basic data, Pairwise Disjoint, B \\ C = ⋃ S; left out new module(s) lean/Sheaf/Paper/AffineBasicSetDifference.lean (--drop-files)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085259-L-23354",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
