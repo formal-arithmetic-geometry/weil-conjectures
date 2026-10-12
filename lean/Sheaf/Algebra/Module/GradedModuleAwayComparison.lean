@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Mathlib.Algebra.Module.LocalizedModule.Away
+import Sheaf.Algebra.Module.GradedModuleAwayClearing
+import Sheaf.Algebra.Module.GradedModuleAwayKernel
 
 /-!
 # GradedModuleAwayComparison
@@ -20,6 +23,83 @@ universe u v
 
 namespace LocalizedModule
 
+private theorem comparisonOfClearing
+    {A : Type*} [CommRing A] {B : Type*} [CommRing B]
+    {P : Type*} [AddCommGroup P] [Module A P]
+    {Q : Type*} [AddCommGroup Q] [Module B Q]
+    (r : A →+* B) (f : P →+ Q) (u : A)
+    (hf : ∀ a x, f (a • x) = r a • f x) (hu : IsUnit (r u))
+    (hs : ∀ y : Q, ∃ n x, (r u) ^ n • y = f x)
+    (hk : ∀ x : P, f x = 0 → ∃ n : ℕ, u ^ n • x = 0)
+    (hsR : ∀ y : B, ∃ (n : ℕ) (x : A), (r u) ^ n * y = r x)
+    (hkR : ∀ x : A, r x = 0 → ∃ n : ℕ, u ^ n * x = 0) :
+    ∃ (t : LocalizedModule.Away u P ≃+ Q) (tR : Localization.Away u ≃+* B),
+      (∀ a, tR (algebraMap A (Localization.Away u) a) = r a) ∧
+      (∀ x, t (mk x 1) = f x) ∧
+      (∀ (x : P) (k : ℕ), (r u) ^ k •
+        t (mk x (⟨u ^ k, ⟨k, rfl⟩⟩ : Submonoid.powers u)) = f x) ∧
+      (∀ (a : Localization.Away u) (x : LocalizedModule.Away u P),
+        t (a • x) = tR a • t x) := by
+  classical
+  let algebraAB : Algebra A B := r.toAlgebra
+  let moduleAQ : Module A Q := Module.compHom Q r
+  have hsm (a : A) (x : Q) : a • x = r a • x := rfl
+  let l : P →ₗ[A] Q := { f with map_smul' := hf }
+  have hunit : IsUnit (algebraMap A (Module.End A Q) u) := by
+    rw [Module.End.isUnit_iff]
+    exact hu.smul_bijective
+  let : IsLocalizedModule.Away u l :=
+    IsLocalizedModule.Away.mk_of_addCommGroup hunit
+      (by
+        intro y
+        obtain ⟨n, x, hx⟩ := hs y
+        refine ⟨n, x, ?_⟩
+        change r (u ^ n) • y = f x
+        simpa only [map_pow] using hx) hk
+  let : IsLocalization.Away u B := by
+    constructor
+    constructor
+    · rintro ⟨_, n, rfl⟩
+      simpa only [RingHom.algebraMap_toAlgebra, map_pow] using hu.pow n
+    · intro y
+      obtain ⟨n, a, ha⟩ := hsR y
+      refine ⟨⟨a, ⟨u ^ n, ⟨n, rfl⟩⟩⟩, ?_⟩
+      simpa only [RingHom.algebraMap_toAlgebra, map_pow, mul_comm] using ha
+    · intro a b hab
+      change r a = r b at hab
+      obtain ⟨n, hn⟩ := hkR (a - b) (by simp [hab])
+      exact ⟨⟨u ^ n, ⟨n, rfl⟩⟩, by simpa [mul_sub, sub_eq_zero] using hn⟩
+  let t := IsLocalizedModule.iso (Submonoid.powers u) l
+  let tR := IsLocalization.algEquiv (Submonoid.powers u) (Localization.Away u) B
+  have ht (x : P) : t (mk x 1) = f x := IsLocalizedModule.iso_mk_one _ _ x
+  have htR (a : A) : tR (algebraMap A (Localization.Away u) a) = r a :=
+    tR.commutes a
+  refine ⟨t.toAddEquiv, tR.toRingEquiv, htR, ht, ?_, ?_⟩
+  · intro x k
+    change (r u) ^ k • t (mk x _) = f x
+    rw [← map_pow, ← hsm]
+    rw [← t.map_smul]
+    rw [smul'_mk]
+    change t (mk ((u ^ k) • x) _) = f x
+    exact (congrArg t (mk_cancel
+      (⟨u ^ k, ⟨k, rfl⟩⟩ : Submonoid.powers u) x)).trans (ht x)
+  · intro a x
+    obtain ⟨⟨b, s⟩, hab⟩ := IsLocalization.surj (Submonoid.powers u) a
+    have huS : IsUnit (r s) := IsLocalization.map_units B s
+    apply huS.smul_left_cancel.mp
+    change r s • t (a • x) = r s • (tR a • t x)
+    calc
+      r s • t (a • x) = t ((s : A) • (a • x)) := by
+        simpa only [hsm] using (t.map_smul (s : A) _).symm
+      _ = t ((b : A) • x) := by
+        congr 1
+        rw [← algebraMap_smul (Localization.Away u) (s : A), smul_smul,
+          mul_comm, hab, algebraMap_smul]
+      _ = r b • t x := by simpa only [hsm] using t.map_smul b x
+      _ = r s • (tR a • t x) := by
+        rw [smul_smul, ← htR s, ← map_mul, mul_comm, hab, htR]
+
+set_option linter.unusedVariables false in
 /-- Principal localization comparisons for a fixed family of restriction maps.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), proof of
 (1)(e),(h), and the fraction formulas in its proof.
@@ -92,6 +172,19 @@ theorem gradedModuleAwayComparison
           theta f g p (mk x (⟨(U f g) ^ k, ⟨k, rfl⟩⟩ : Submonoid.powers (U f g))) =
             rho f g p x) ∧
         (∀ (r : Localization.Away (U f g)) (x : LocalizedModule.Away (U f g) (Z f)),
-          theta f g p (r • x) = thetaS f g p r • theta f g p x)) := by sorry
+          theta f g p (r • x) = thetaS f g p r • theta f g p x)) := by
+  classical
+  dsimp only
+  intro Z hZ lambda lambdaS rho rhoS U h
+  have hs := gradedModuleAwayClearing 𝒜 𝓜 h𝓜 hsmul Z hZ lambda lambdaS rho rhoS U h
+  have hk := gradedModuleAwayKernel 𝒜 𝓜 h𝓜 hsmul Z hZ lambda lambdaS rho rhoS U h
+  have hp (f g : {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2})
+      (p : ∃ (e k : ℕ) (a : S),
+        0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) :=
+    comparisonOfClearing (rhoS f g p) (rho f g p) (U f g)
+      (h.2 f g p).2.2.2.2.2.2.2.2.2.2.1 (h.2 f g p).2.2.2.2.2.2.2.2.2.2.2
+      (hs f g p).1 (hk f g p).1 (hs f g p).2 (hk f g p).2
+  choose theta thetaS htheta using hp
+  exact ⟨theta, thetaS, htheta⟩
 
 end LocalizedModule

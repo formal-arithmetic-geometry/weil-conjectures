@@ -29,40 +29,10 @@
  ],
  "proof": [
   {
-   "text": "*(iii) The map $\\theta$.* Regard $M_{(g)}$ as an $S_{(f)}$-module through $\\rho^S$; by step 4, $\\rho:M_{(f)}\\to M_{(g)}$ is $S_{(f)}$-linear, and $u$ acts on $M_{(g)}$ as multiplication by the unit $\\rho^S(u)$ (step 6), i.e. bijectively. By the universal property of the localization $(M_{(f)})_u$ of the $S_{(f)}$-module $M_{(f)}$ at $u$ [def-weil-pbc-module-localization-away] there is a unique $S_{(f)}$-linear $\\theta=\\theta_{f,g}:(M_{(f)})_u\\to M_{(g)}$ with $\\theta(z/1)=\\rho(z)$; as in step 2, $u^k\\cdot(z/u^k)=z/1$ forces $\\theta(z/u^k)=\\rho^S(u)^{-k}\\rho(z)$. For $M=S$ this gives $\\theta^S:(S_{(f)})_u\\to S_{(g)}$, $r/u^k\\mapsto\\rho^S(u)^{-k}\\rho^S(r)$, a ring homomorphism: $\\theta^S(1)=1$ and $\\theta^S((r/u^j)(r'/u^k))=\\rho^S(u)^{-j-k}\\rho^S(rr')=\\theta^S(r/u^j)\\theta^S(r'/u^k)$ ($\\rho^S$ multiplicative). $\\theta$ is $\\theta^S$-semilinear: $\\theta((r/u^j)(z/u^k))=\\theta(rz/u^{j+k})=\\rho^S(u)^{-j-k}\\rho^S(r)\\rho(z)=\\theta^S(r/u^j)\\theta(z/u^k)$ (step 4).",
+   "text": "Apply the denominator-clearing and kernel-detection statements to each relation. Restrict scalars on Z g along rhoS and package rho as a linear map. The unit rhoS(U) and the clearing/kernel properties give IsLocalizedModule.Away via Mathlib IsLocalizedModule.Away.mk_of_addCommGroup. For the ring, the same properties give IsLocalization.Away, using subtraction to reduce equality to the zero kernel. IsLocalizedModule.iso and IsLocalization.algEquiv construct the equivalences. The unit fraction and algebraMap formulas give both extension laws. Apply linearity to U^k times x/U^k to obtain the fraction identity. For semilinearity, represent a scalar r by b/s, multiply both desired sides by the unit rhoS(s), and use linearity and the ring equivalence algebraMap formula to identify both with rhoS(b) times theta(x). Choose these uniquely specified comparisons for every relation.",
    "uses": [
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away",
-    "def-sc-degree-zero-module-fractions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
-   }
-  },
-  {
-   "text": "*(iii) $\\theta$ is surjective.* Let $y/g^n\\in M_{(g)}$, $y\\in M_{n\\delta}$. Put $Y=g^{n(d-1)}y\\in M_{n\\delta+n(d-1)\\delta}=M_{nd\\delta}$ (here $d\\ge1$); then $y/g^n=Y/g^{nd}$ in $M_g$, and $z=Y/f^{n\\delta}\\in M_{(f)}$ since $Y\\in M_{(n\\delta)d}$. Compute in $M_g$, where $f/1$ is a unit (step 2): $\\rho(z)=\\lambda(Y/f^{n\\delta})=(f/1)^{-n\\delta}(Y/1)$ and $\\rho^S(u)^{-n}=v^n=(f/1)^{n\\delta}/g^{nd}$ (step 6). Hence $\\theta(z/u^n)=\\rho^S(u)^{-n}\\rho(z)=(f/1)^{n\\delta}(1/g^{nd})(f/1)^{-n\\delta}(Y/1)=Y/g^{nd}=y/g^n$.",
-   "uses": [
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away",
-    "def-sc-degree-zero-module-fractions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
-   }
-  },
-  {
-   "text": "*(iii) $\\theta$ is injective, hence an isomorphism.* Let $\\theta(z/u^k)=0$ with $z=x/f^m$, $x\\in M_{md}$. Multiplying by $\\rho^S(u)^k$ gives $\\rho(z)=0$, i.e. $a^mx/g^{em}=0$ in $M_g$, so $g^Na^mx=0$ in $M$ for some $N\\ge0$ [def-weil-pbc-module-localization-away]. Multiply by $f^m$: $g^{N+em}x=g^N(af)^mx=f^m\\cdot g^Na^mx=0$. Choose $K$ with $Kd\\ge N+em$; then $g^{Kd}x=0$, so $u^K z=g^{Kd}x/f^{K\\delta+m}=0$ in $M_f$, hence in $M_{(f)}$, and therefore $z/u^k=0$ in $(M_{(f)})_u$ (an element $z/u^k$ vanishes when a power of $u$ kills $z$). So $\\theta$ is bijective; being additive and $\\theta^S$-semilinear, it is an isomorphism of modules over the ring map $\\theta^S$, and for $M=S$, $\\theta^S$ is a bijective ring homomorphism, a ring isomorphism. This is (iii).",
-   "uses": [
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away",
-    "def-sc-degree-zero-module-fractions"
+    "lem-weil-pbc-graded-module-away-clearing",
+    "lem-weil-pbc-graded-module-away-kernel"
    ],
    "elementary": false,
    "source": {
@@ -72,15 +42,13 @@
   }
  ],
  "proof_deps": [
-  "def-nagata-homogeneous-localization-degree-zero",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-ring-localization-away",
-  "def-sc-degree-zero-module-fractions"
+  "lem-weil-pbc-graded-module-away-clearing",
+  "lem-weil-pbc-graded-module-away-kernel"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "Lemma 01M4 (lemma-standard-open), fraction formulas; degree bookkeeping and bijectivity expanded as in the parent node"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M4",
+  "place": "(1)(e),(h): fraction argument split into clearing and kernel; equivalences and compatibility proved using Mathlib localization API"
  },
  "mathlib_searches": [
   {
@@ -154,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-c2166",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T085344-L-41644",
+  "landing": "20261012T135335-L-1701016",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG records, the original interface, Stacks 01M4, axiom checks, and compilation of all delivered modules plus the sole direct importer."
  }
 }

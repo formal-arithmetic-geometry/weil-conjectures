@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-graded-module-away-kernel",
+ "kind": "statement",
+ "title": "Kernel detection for graded degree-zero restriction maps",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be a commutative graded ring and $M=\\bigoplus_{z\\in\\mathbf Z}M_z$ an $S$-module with $S_nM_z\\subset M_{n+z}$. Let $F=\\{(f,d):d>0, f\\in S_d\\}$, $R_f=S_{(f)}$, $L_f=S_f$, $N_f=M_f$ [def-nagata-homogeneous-localization-degree-zero, def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. Write $f\\preceq g$ for a homogeneous relation $g^e=af$ with $e>0$. Suppose submodules $Z_f\\subset N_f$ have precisely the equal-degree fractions as carriers [def-sc-degree-zero-module-fractions]. Suppose maps $\\lambda_{f,g}:N_f\\to N_g$, $\\lambda^S_{f,g}:L_f\\to L_g$, $\\rho_{f,g}:Z_f\\to Z_g$, $\\rho^S_{f,g}:R_f\\to R_g$ and $U_{f,g}=g^{\\deg f}/f^{\\deg g}$ are given. Assume $f/1$ is a unit with inverse $a/g^e$, multiplication by $f$ on $N_g$ is bijective, $\\lambda$ is the unique $S$-linear extension of $x/1$ with formula $x/f^m\\mapsto a^mx/g^{em}$, $\\lambda^S$ preserves $S$, $\\lambda$ is semilinear over $\\lambda^S$, $\\rho,\\rho^S$ are their restrictions, $\\rho$ is semilinear over $\\rho^S$, and $\\rho^S(U)$ is a unit. Then for every $f\\preceq g$, each $x\\in Z_f$ with $\\rho(x)=0$ is killed by some power of $U$, and each $a\\in R_f$ with $\\rho^S(a)=0$ is killed by some power of $U$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+ },
+ "stmt_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Represent z in Z f by x/f^m and choose the homogeneous relation g^e = a*f.\nIf rho(z) = 0, the lambda fraction formula gives a^m • x/g^(e*m) = 0.\nThe ordinary localization zero criterion supplies N with g^N*a^m • x = 0.\nMultiplying this equality by f^m yields g^(N+e*m) • x = 0. Since d = deg f\nis positive, choose K with K*d >= N+e*m. Then g^(K*d) • x = 0, which\nsays U^K • z = 0 in N f and hence in its submodule Z f. For the ring\nkernel the identical computation uses multiplication rather than scalar action,\nthe given compatibility of rhoS with lambdaS, and localization's zero criterion.\nIndeed lambdaS preserves S and hence sends b/f^m to b*(a/g^e)^m, since it\npreserves inverses and the given inverse of f/1 is a/g^e. The formula for U\nidentifies U^K*z with g^(K*d)*x/f^(K*deg g+m). The inclusions of Z f and R f\nin their ordinary localizations are injective, so vanishing there suffices.\nIf a denominator is nilpotent the same zero criterion still applies; cancellation\nin the original ring is never used.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M4",
+  "place": "Expansion of the fraction computations in (1)(e),(h); source text read online"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clearing denominators and detecting the kernel of degree zero graded module localization restriction maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero localization of a graded module at g is the principal localization at g power degree f divided by f power degree g of the degree zero localization at f",
+   "results": "HomogeneousLocalization.Away.isLocalization_mul; Away.mk; Away.val_mk; no module analogue",
+   "date": "2026-10-12",
+   "verdict": "No exact match; the ring product case does not establish the stated module computation"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule|isLocalization_mul in Mathlib; gradedModuleAway in lean/Sheaf and lean/WeilConjectures",
+   "results": "IsLocalizedModule.Away.mk_of_addCommGroup, .surj, .exists_of_eq; HomogeneousLocalization.Away.isLocalization_mul; no exact graded-module clearing/kernel statement",
+   "date": "2026-10-12",
+   "verdict": "Supporting localization API only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous localization at a principal open as localization of another degree zero part, surjectivity after multiplying by powers and torsion kernel",
+   "results": "HomogeneousLocalization.Away.mk_surjective; Away.isLocalizationElem; Away.isLocalization_mul; no exact module comparison result",
+   "date": "2026-10-12",
+   "verdict": "Representation API and ring product case only; neither proves this general module clearing/kernel statement"
+  },
+  {
+   "tool": "grep",
+   "query": "away.*(surj|ker)|exists.*pow.*(smul|zero)|isLocalization.*[Mm]ul",
+   "results": "HomogeneousLocalization.Away.mk_surjective; Away.isLocalization_mul and fraction identities",
+   "date": "2026-10-12",
+   "verdict": "No exact general graded module clearing or kernel theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.Away.mk_of_addCommGroup",
+   "results": "IsLocalizedModule.Away.mk_of_addCommGroup",
+   "date": "2026-10-12",
+   "verdict": "The generic localization criterion is used in the comparison proof; it requires the two split-off computations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Module.GradedModuleAwayComparison",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "step 2, 9 of its split (source: Lemma (Tag 01NE) via Lemma (Tag 01NA, label lemma-apply)); restriction lemma steps 7–9; comparison injectivity",
+   "via": [
+    "lem-weil-pbc-graded-module-away-comparison",
+    "lem-weil-pbc-graded-module-away-restriction",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.GradedModuleAwayKernel",
+  "file": "lean/Sheaf/Algebra/Module/GradedModuleAwayKernel.lean",
+  "declaration": "LocalizedModule.gradedModuleAwayKernel",
+  "statement": "theorem gradedModuleAwayKernel\n    {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]\n    (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (x : M),\n      a ∈ 𝒜 n → x ∈ 𝓜 z → a • x ∈ 𝓜 (n + z)) :\n    let F := {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}\n    let R := fun f : F ↦ HomogeneousLocalization.Away 𝒜 f.val.1\n    let L := fun f : F ↦ Localization.Away f.val.1\n    let N := fun f : F ↦ LocalizedModule.Away f.val.1 M\n    let Rel := fun f g : F ↦ ∃ (e k : ℕ) (a : S),\n      0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1\n    letI : ∀ f : F, Module (R f) (N f) :=\n      fun f ↦ Module.compHom (N f) (algebraMap (R f) (L f))\n    ∀ (Z : ∀ f : F, Submodule (R f) (N f)),\n      (∀ f : F, (Z f : Set (N f)) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)) →\n    ∀ (lambda : ∀ (f g : F), Rel f g → N f →ₗ[S] N g)\n      (lambdaS : ∀ (f g : F), Rel f g → L f →+* L g)\n      (rho : ∀ (f g : F), Rel f g → Z f →+ Z g)\n      (rhoS : ∀ (f g : F), Rel f g → R f →+* R g)\n      (U : ∀ (f g : F), R f),\n      (∀ (f g : F), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)\n        (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1)) ∧\n      (∀ (f g : F) (p : Rel f g),\n        IsUnit (algebraMap S (L g) f.val.1) ∧\n        Function.Bijective (fun x : N g ↦ f.val.1 • x) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k →\n          g.val.1 ^ e = a * f.val.1 →\n          algebraMap S (L g) f.val.1 * Localization.mk a\n            (⟨g.val.1 ^ e, ⟨e, rfl⟩⟩ : Submonoid.powers g.val.1) = 1) ∧\n        (∀ x : M, lambda f g p (mk x 1) = mk x 1) ∧\n        (∀ T : N f →ₗ[S] N g,\n          (∀ x : M, T (mk x 1) = mk x 1) → T = lambda f g p) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k →\n          g.val.1 ^ e = a * f.val.1 → ∀ (x : M) (m : ℕ),\n          lambda f g p (mk x (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1)) =\n            mk (a ^ m • x)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1)) ∧\n        (∀ r : S, lambdaS f g p (algebraMap S (L f) r) = algebraMap S (L g) r) ∧\n        (∀ (r : L f) (x : N f),\n          lambda f g p (r • x) = lambdaS f g p r • lambda f g p x) ∧\n        (∀ x : Z f, (rho f g p x : N g) = lambda f g p (x : N f)) ∧\n        (∀ r : R f, (rhoS f g p r).val = lambdaS f g p r.val) ∧\n        (∀ (r : R f) (x : Z f), rho f g p (r • x) = rhoS f g p r • rho f g p x) ∧\n        IsUnit (rhoS f g p (U f g))) →\n    ∀ (f g : F) (p : Rel f g),\n      (∀ x : Z f, rho f g p x = 0 → ∃ n : ℕ, (U f g) ^ n • x = 0) ∧\n      (∀ x : R f, rhoS f g p x = 0 → ∃ n : ℕ, (U f g) ^ n * x = 0)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c2166",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135335-L-1701016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c2166",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135335-L-1701016",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG records, the original interface, Stacks 01M4, axiom checks, and compilation of all delivered modules plus the sole direct importer."
+ }
+}

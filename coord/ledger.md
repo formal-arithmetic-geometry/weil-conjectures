@@ -7990,3 +7990,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/X2/Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension (stage 3; reviewer PASS; first push; landing 20261012T135334-L-1700459 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:53 L: merged deliver/X2/Sheaf.CategoryTheory.SiteExtensionByZeroPresheafAdjoint (stage 3; reviewer PASS; first push; landing 20261012T135335-L-1700694 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/X2/Sheaf.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic (stage 3; reviewer PASS; first push; landing 20261012T135335-L-1700830 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:53 L: merged deliver/X3/Sheaf.Algebra.Module.GradedModuleAwayComparison (stage 3; reviewer PASS; first push; landing 20261012T135335-L-1701016 (interface); batch 20261012T135212; modules 3; new nodes 2)
