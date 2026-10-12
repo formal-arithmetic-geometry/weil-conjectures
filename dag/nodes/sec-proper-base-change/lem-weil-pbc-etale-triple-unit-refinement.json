@@ -9,12 +9,14 @@
  },
  "proof": [
   {
-   "text": "Write beta:B -> K for the residue map of t. Its kernel is q, since the residue-field embedding is injective. Thus beta(f) is nonzero and is a unit in K. The universal property extends beta to B[1/f] -> K.",
-   "uses": [],
+   "text": "Write beta:B -> K for the residue map of t. The residue-field identification identifies this composite with B -> kappa(q) -> K. The first map has kernel q by the definition of the residue field, and the subsequent field maps are injective; hence beta(x)=0 exactly when x belongs to q. The existing proved helper triple_map_eq_zero implements this calculation and is reused from the simple-roots construction module. Thus beta(f) is nonzero and a unit in K. Define L = Localization.Away f and gamma:L -> K by IsLocalization.Away.lift; lift_eq proves that gamma extends beta.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
    "elementary": true
   },
   {
-   "text": "The kernel q_s of the extended map is prime, pulls back to q, and hence lies over p. The induced injection B[1/f]/q_s -> K extends to its fraction field, giving phi_s. Compatibility follows by restriction to R. Spec(B[1/f]) -> Spec(B) is the principal open immersion, hence is etale by lem-weil-pbc-etale-composition-cancellation(1); composing with Spec(B) -> Spec(R) is etale by clause (2), so this is a triple s and the localization map is a morphism t -> s. The image of f is invertible by construction.",
+   "text": "Construct q_s as the prime kernel of gamma. Elements outside q_s have nonzero, hence invertible, image in K, so Ideal.ResidueField.lift supplies the residue-field map, transported to the scheme residue field by Spec.residueFieldIso. Its composite with evaluation equals gamma by lift_algebraMap. The identity gamma(algebraMap b) = beta(b) shows that q_s pulls back to q, so lies over p, and gives compatibility with chi. Algebra.Etale.of_isLocalizationAway f and HasRingHomProperty.Spec_iff show that Spec(L) -> Spec(B) is etale; clause (2) of lem-weil-pbc-etale-composition-cancellation composes this with the given etale map to Spec(R). Construct the triple s with ring L and the morphism t -> s using Under.homMk and Over.homMk. The ring diagram sends it to the localization map, whose value on f is a unit by IsLocalization.Away.algebraMap_isUnit.",
    "uses": [
     "lem-weil-pbc-etale-composition-cancellation"
    ],
@@ -22,9 +24,10 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-spec-residue-field-identification",
   "lem-weil-pbc-etale-composition-cancellation"
  ],
- "proof_origin": "Stacks Project Tags 04GN and 04GP, with kernel and residue-field constructions; second reading by D2, 2026-10-12.",
+ "proof_origin": "Stacks Project Tags 04GN and 04GP, principal-localization refinement in the henselization proof, with kernel and residue-field constructions. Lean proof by A3, 2026-10-12; principal-localization etaleness is supplied directly by Mathlib (Stacks Tag 00U2(1)), and composition by the existing Mathlib leaf. Repair by A3: reuse the existing triple_map_eq_zero helper, exposed in its original module; no duplicate kernel theorem is declared.",
  "status": "split",
  "created": {
   "by": "worker",
@@ -106,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2e48d",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T085225-L-8352",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, cited dependencies and sources, import-change users, unit route, report, and earlier return; all modules and the direct importer compile cleanly; axiom audits show only standard axioms and the three reported helper sorries."
+  "landing": "20261012T135216-L-1655242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
