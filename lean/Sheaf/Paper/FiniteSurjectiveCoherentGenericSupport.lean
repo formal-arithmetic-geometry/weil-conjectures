@@ -12,14 +12,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.ReducedSourceFactors
 import Sheaf.Topology.PresheafModuleStalkFunctor
+import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Coherent sheaf with prescribed generic support
 
@@ -75,6 +73,122 @@ theorem exists_coherent_pushforward_support_eq_range
         ∀ s : ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj
           ((Modules.pushforward f).obj F) : Type u),
           a • s = 0 := by
-  sorry
+  classical
+  obtain ⟨y, hy⟩ := f.surjective ξ
+  let I := IdealSheafData.vanishingIdeal ⟨closure {y}, isClosed_closure⟩
+  let j := I.subschemeι
+  let O : I.subscheme.Modules := SheafOfModules.unit I.subscheme.ringCatSheaf
+  let F := (Modules.pushforward j).obj O
+  let G := (Modules.pushforward f).obj F
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian f
+  have hO : RingedSpace.IsCoherent I.subscheme.toRingedSpace O :=
+    Modules.isCoherent_unit_of_finite_to_locallyNoetherian j
+  have hF : RingedSpace.IsCoherent Y.toRingedSpace F :=
+    (Modules.isCoherent_pushforward_of_isFinite j O hO).1
+  have hG : RingedSpace.IsCoherent X.toRingedSpace G :=
+    (Modules.isCoherent_pushforward_of_isFinite f F hF).1
+  obtain ⟨hq, ht⟩ :=
+    (Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mp hG
+  have : G.IsQuasicoherent := hq
+  have : G.IsFiniteType := ht
+  have hclosed : IsClosed {x : X | ¬ Subsingleton (G.presheaf.stalk x)} :=
+    (Modules.finite_type_module_support_closed X G).2.2.2
+  have hgeneric :
+      (¬ Subsingleton (G.presheaf.stalk (f y))) ∧
+        ∀ a : (X.toRingedSpace.presheaf.stalk (f y) : Type u),
+          a ∈ IsLocalRing.maximalIdeal (X.toRingedSpace.presheaf.stalk (f y)) →
+          ∀ s : ((RingedSpace.moduleStalkFunctor X.toRingedSpace (f y)).obj G : Type u),
+            a • s = 0 := by
+    have hrange : Set.range j.base = closure {y} := by
+      simp [j, I, IdealSheafData.range_subschemeι,
+        IdealSheafData.coe_support_vanishingIdeal]
+    obtain ⟨z, hz⟩ : y ∈ Set.range j.base :=
+      hrange.symm ▸ subset_closure (Set.mem_singleton y)
+    constructor
+    · intro h
+      have h01 := @Subsingleton.elim _ h
+        (G.presheaf.germ ⊤ (f y) (by trivial)
+          (show G.presheaf.obj (Opposite.op ⊤) from
+            (1 : Γ(I.subscheme, j ⁻¹ᵁ (f ⁻¹ᵁ ⊤)))))
+        (G.presheaf.germ ⊤ (f y) (by trivial) 0)
+      obtain ⟨U, hU, k, l, heq⟩ := G.presheaf.germ_eq (f y)
+        (show f y ∈ (⊤ : X.Opens) from trivial) (by trivial) _ _ h01
+      have hmap : G.presheaf.map k.op
+          (show G.presheaf.obj (Opposite.op ⊤) from
+            (1 : Γ(I.subscheme, j ⁻¹ᵁ (f ⁻¹ᵁ ⊤)))) =
+          (1 : Γ(I.subscheme, j ⁻¹ᵁ (f ⁻¹ᵁ U))) :=
+        (I.subscheme.presheaf.map
+          ((Opens.map j.base).map ((Opens.map f.base).map k)).op).hom.map_one
+      have hone : (1 : Γ(I.subscheme, j ⁻¹ᵁ (f ⁻¹ᵁ U))) = 0 := by
+        simpa only [hmap, map_zero] using heq
+      have hzU : z ∈ j ⁻¹ᵁ (f ⁻¹ᵁ U) := by
+        change f (j z) ∈ U
+        rwa [hz]
+      have hstalk := congrArg
+        (fun t ↦ I.subscheme.presheaf.germ (j ⁻¹ᵁ (f ⁻¹ᵁ U)) z hzU t) hone
+      exact one_ne_zero (by simpa only [map_one, map_zero] using hstalk)
+    · intro a ha s
+      obtain ⟨U, hU, r, rfl⟩ := X.presheaf.exists_germ_eq a
+      obtain ⟨V, hVU, hV, m, rfl⟩ := G.presheaf.exists_le_germ_eq s hU
+      rw [← X.presheaf.germ_res_apply (homOfLE hVU) (f y) hV r] at ha ⊢
+      let rV := X.presheaf.map (homOfLE hVU).op r
+      have ev0 : X.evaluation V (f y) hV rV = 0 := by
+        exact (IsLocalRing.residue_eq_zero_iff _).mpr ha
+      have pull0 : j.app (f ⁻¹ᵁ V) (f.app V rV) = 0 := by
+        apply (IdealSheafData.mem_idealOfOpens_iff I).mp
+        apply ((IdealSheafData.reduced_induced_closed_subscheme Y
+          ⟨closure {y}, isClosed_closure⟩).1 (f ⁻¹ᵁ V) (f.app V rV)).mpr
+        intro t ht htT
+        rw [Y.evaluation_eq_zero_iff_notMem_basicOpen]
+        intro htopen
+        have hyopen := (specializes_iff_mem_closure.mpr htT).mem_open
+          (Y.basicOpen (f.app V rV)).isOpen htopen
+        have ey0 := evaluation_naturality_apply f y hV rV
+        rw [ev0, map_zero] at ey0
+        exact ((Y.evaluation_eq_zero_iff_notMem_basicOpen y hV _).mp ey0.symm) hyopen
+      erw [← PresheafOfModules.germ_smul G.val]
+      have hsmul :
+          (X.presheaf.map (homOfLE hVU).op r) • m = 0 := by
+        change (j.app (f ⁻¹ᵁ V) (f.app V rV)) *
+          (show Γ(I.subscheme, j ⁻¹ᵁ (f ⁻¹ᵁ V)) from m) = 0
+        rw [pull0, zero_mul]
+      rw [hsmul, map_zero]
+  rw [hy] at hgeneric
+  refine ⟨F, hF, ?_, hgeneric.2⟩
+  apply Set.Subset.antisymm
+  · intro x hx
+    by_contra hnot
+    let V : X.Opens := ⟨(Set.range i.base)ᶜ, hξ.isClosed.isOpen_compl⟩
+    have hxV : x ∈ V := hnot
+    have hrange : Set.range j.base = closure {y} := by
+      simp [j, I, IdealSheafData.range_subschemeι,
+        IdealSheafData.coe_support_vanishingIdeal]
+    have himage : ∀ z : I.subscheme, f (j z) ∈ Set.range i.base := by
+      intro z
+      have hz : j z ∈ closure {y} := hrange ▸ ⟨z, rfl⟩
+      have hfz := (specializes_iff_mem_closure.mpr hz).map f.continuous
+      rw [hy] at hfz
+      exact hξ.specializes_iff_mem.mp hfz
+    have hempty (U : X.Opens) (hU : U ≤ V) : j ⁻¹ᵁ (f ⁻¹ᵁ U) = ⊥ := by
+      ext z
+      exact ⟨fun hz ↦ (hU hz) (himage z), False.elim⟩
+    have htrivial (U : X.Opens) (hU : U ≤ V) : Subsingleton (G.presheaf.obj
+        (Opposite.op U)) := by
+      change Subsingleton (O.presheaf.obj (Opposite.op (j ⁻¹ᵁ (f ⁻¹ᵁ U))))
+      exact AddCommGrpCat.subsingleton_of_isZero
+        ((TopCat.Sheaf.isTerminalOfEqEmpty ⟨O.presheaf, O.isSheaf⟩ (hempty U hU)).isZero)
+    apply hx
+    refine ⟨?_⟩
+    intro a b
+    obtain ⟨U, hUV, hxU, s, rfl⟩ := G.presheaf.exists_le_germ_eq a hxV
+    obtain ⟨W, hWV, hxW, t, rfl⟩ := G.presheaf.exists_le_germ_eq b hxV
+    have hxQ : x ∈ U ⊓ W := ⟨hxU, hxW⟩
+    have := htrivial (U ⊓ W) (inf_le_left.trans hUV)
+    have heq : G.presheaf.map (homOfLE (inf_le_left : U ⊓ W ≤ U)).op s =
+        G.presheaf.map (homOfLE (inf_le_right : U ⊓ W ≤ W)).op t :=
+      Subsingleton.elim _ _
+    rw [← G.presheaf.germ_res_apply (homOfLE (inf_le_left : U ⊓ W ≤ U)) x hxQ s,
+      ← G.presheaf.germ_res_apply (homOfLE (inf_le_right : U ⊓ W ≤ W)) x hxQ t, heq]
+  · exact (hξ.mem_closed_set_iff hclosed).mp hgeneric.1
 
 end AlgebraicGeometry.Scheme
