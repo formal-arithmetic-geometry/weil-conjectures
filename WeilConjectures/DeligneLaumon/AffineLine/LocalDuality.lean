@@ -61,6 +61,31 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
   should be replaced by one about these maps.
 -/
 
+/-
+Plan of the proof of `exists_linearEquiv_dual_stalk_higherDirectImage` (work in progress).
+
+Route: the Verdier duality argument of the blueprint, with the nodes of other sections stated
+for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual` (each with `sorry`, each with its
+blueprint id), and with honest data:
+* `Rf^!` is the right adjoint of `Rf₀!` on Weil complexes (`WeilComplex.upperShriek`); that it
+  exists is the constructible adjunction of `thm-coef-qbar-verdier`;
+* `ω_X = Ra_X^! ℚ̄_ℓ` and `𝔻_X = RHom(-, ω_X)` (`ProEtaleWeilSheaf.derivedHom`).
+Nodes used: `thm-coef-qbar-verdier` (adjunction, typing of `𝔻`, exactness, biduality,
+`Rf^! = 𝔻 f^* 𝔻`), `fix-cor-verdier-exchange` (for `j`),
+`cor-pur-adic-and-rational-smooth-dualizing-complexes` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
+`lem-sf-hom-finite-projective` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`),
+`prop-sf-localization-all-stages` (4) (`Ri^! Rj_* = 0`, unit of `Ri_! ⊣ Ri^!`).
+Proved here:
+1. `𝔻_C Rj_* G ≅ j_! 𝔻_U G` (exchange + biduality);
+2. `Ri^! 𝔻_C K ≅ 𝔻_Z i^* K` (`Rf^! = 𝔻 f^* 𝔻` + biduality);
+3. `Ri^! j_! G ≅ i^* Rj_* G [-1]` (open–closed triangle, `j^* Rj_* = 𝟭`, step (4) of the
+   localization node);
+4. `𝔻_Z A(F) ≅ A(F^∨(1))[1]` for `A(F) = i^* Rj_* F`, using `𝔻_U F ≅ F^∨(1)[2]`;
+5. `𝔻_Z` is t-exact on the finite reduced `Z` (dévissage from `𝔻_Z (G[0]) ≅ G^∨[0]`), hence
+   `𝓗⁻¹(𝔻_Z A) ≅ (𝓗¹ A)^∨` as Weil sheaves on `Z`; taking stalks at `s`, with
+   `(G^∨)_s = (G_s)^∨` and the twist `(1)` acting by `q_s⁻¹` on the local Frobenius, gives `e`.
+-/
+
 @[expose] public section
 
 universe u
