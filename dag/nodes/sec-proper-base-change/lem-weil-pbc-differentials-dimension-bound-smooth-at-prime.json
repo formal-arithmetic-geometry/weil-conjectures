@@ -36,105 +36,56 @@
  ],
  "proof": [
   {
-   "text": "(The algebraically closed field.) Write $\\kappa=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime], a field extension of $k$ through $k\\to S\\to\\kappa$. Let $K$ be an algebraic closure of $\\kappa$ [def-weil-algebraic-closure] with its field homomorphism $\\psi:\\kappa\\to K$; then $K$ is an algebraically closed field extension of $k$ through $k\\to S\\to\\kappa\\xrightarrow{\\psi}K$ [def-pc-field-extension] carrying a $k$-algebra map $\\psi$ from $\\kappa(\\mathfrak q)$, as the source asks. Put $S_K=K\\otimes_kS$, a $K$-algebra through $\\lambda\\mapsto\\lambda\\otimes1$, with $j:S\\to S_K$, $s\\mapsto1\\otimes s$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. If $s_1,\\dots,s_n$ generate $S$ as a $k$-algebra [def-weil-pbc-finite-type-algebra], then $1\\otimes s_1,\\dots,1\\otimes s_n$ generate $S_K$ as a $K$-algebra, since $\\lambda\\otimes p(s_1,\\dots,s_n)=\\lambda\\,p(1\\otimes s_1,\\dots,1\\otimes s_n)$ for a polynomial $p$ over $k$ and the $\\lambda\\otimes s$ span $S_K$; so $S_K$ is a finite type $K$-algebra.",
+   "text": "Use the geometric closed-point differential-fibre comparison to obtain K, a maximal prime qK over q, and the equality of the two differential-fibre finranks. This does not use the dimension-bound hypothesis or assume smoothness.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-algebraic-closure",
-    "def-pc-field-extension",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-finite-type-algebra"
+    "new-algclosed-differential-fiber-at-closed-point"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38652-38655"
-   }
+   "elementary": false
   },
   {
-   "text": "(The point $\\mathfrak m$ over $\\mathfrak q$.) By [lem-weil-pbc-algebra-tensor-pushout-universal-property] (2), applied to the $k$-algebra maps $\\mathrm{id}_K:K\\to K$ and $S\\to\\kappa\\xrightarrow{\\psi}K$, there is a $k$-algebra map $\\phi:S_K\\to K$ with $\\phi(\\lambda\\otimes s)=\\lambda\\,\\psi(\\bar s)$, $\\bar s$ the image of $s$ in $\\kappa$; this is the composite $S_K\\to K\\otimes_k\\kappa\\xrightarrow{\\mathrm{id}_K\\otimes\\psi}K$ of the source. It is $K$-linear and surjective ($\\phi(\\lambda\\otimes1)=\\lambda$), so $\\mathfrak m=\\ker\\phi$ is a maximal ideal of $S_K$ with $S_K/\\mathfrak m\\cong K$; hence the residue field $\\kappa(\\mathfrak m)=(S_K)_{\\mathfrak m}/\\mathfrak m(S_K)_{\\mathfrak m}\\cong S_K/\\mathfrak m$ [def-weil-pbc-localization-at-prime] is $K$, with $S_K\\to\\kappa(\\mathfrak m)$ equal to $\\phi$. Moreover $\\phi(j(s))=\\psi(\\bar s)$, and $\\psi$ is injective (a homomorphism of fields), so $j^{-1}(\\mathfrak m)=\\{s:\\bar s=0\\}=\\mathfrak q$: $\\mathfrak m$ lies over $\\mathfrak q$.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38655-38664"
-   }
-  },
-  {
-   "text": "(Dimensions.) By [lem-weil-pbc-dimension-at-point-field-extension] for $k\\to K$, the finite type $k$-algebra $S$ and the prime $\\mathfrak m$ of $S_K$ lying over $\\mathfrak q$ (step 2), $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim_{\\mathfrak m}(\\operatorname{Spec}S_K)$ [def-kun-topological-dimension-at-point]; that node writes $S\\otimes_kK$, and the swap $s\\otimes\\lambda\\mapsto\\lambda\\otimes s$ is an isomorphism of $K$-algebras compatible with the maps from $S$, so it carries the prime over $\\mathfrak q$ to $\\mathfrak m$ and induces a homeomorphism of spectra, which preserves dimensions at corresponding points. By [lem-weil-pbc-closed-point-dimension-local-ring] for the field $K$, the finite type $K$-algebra $S_K$ (step 1) and its maximal ideal $\\mathfrak m$, $\\dim_{\\mathfrak m}(\\operatorname{Spec}S_K)=\\dim((S_K)_{\\mathfrak m})$ [def-weil-pbc-krull-dimension-ring]. Hence $$\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim((S_K)_{\\mathfrak m}).$$",
+   "text": "The tensor commutation K tensor_k S ≃ S tensor_k K induces a homeomorphism of prime spectra. Point dimension is invariant under this homeomorphism: pull back each open neighborhood and use the homeomorphism of the neighborhood subspaces in both directions. Field-extension invariance, applied on the S-first tensor product, and the contraction equality then give dim_q Spec S = dim_qK Spec (K tensor_k S).",
    "uses": [
     "lem-weil-pbc-dimension-at-point-field-extension",
-    "def-kun-topological-dimension-at-point",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite type survives tensor base change. Apply the closed-point dimension lemma at the maximal prime qK to identify its point dimension with ringKrullDim of the localization. Together with the fibre finrank equality, rewrite the assumed inequality to the local-ring dimension bound required by the algebraically closed maximal-ideal criterion. That criterion gives a smooth principal localization away from qK, hence IsSmoothAtPrime K qK.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
     "lem-weil-pbc-closed-point-dimension-local-ring",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38664-38669 (citing Lemma 00P4 lemma-dimension-at-a-point-preserved-field-extension and Lemma 00OU lemma-dimension-closed-point-finite-type-field)"
-   }
-  },
-  {
-   "text": "(Differentials.) By [lem-weil-pbc-kahler-differentials-base-change] for $k\\to K$ and $k\\to S$, $\\Omega_{S_K/K}\\cong S_K\\otimes_S\\Omega_{S/k}$ as $S_K$-modules [def-weil-pbc-kahler-differentials]. Tensoring with $\\kappa(\\mathfrak m)=K$ over $S_K$ (step 2) and using associativity, $\\Omega_{S_K/K}\\otimes_{S_K}\\kappa(\\mathfrak m)\\cong\\Omega_{S/k}\\otimes_SK$, where $S$ acts on $K$ through $\\phi\\circ j=\\psi\\circ(S\\to\\kappa)$; since this map factors through $\\kappa=\\kappa(\\mathfrak q)$, $\\Omega_{S/k}\\otimes_SK\\cong(\\Omega_{S/k}\\otimes_S\\kappa)\\otimes_\\kappa K$, the extension of scalars of the $\\kappa$-vector space $V=\\Omega_{S/k}\\otimes_S\\kappa$ along $\\psi$. A basis $(e_i)$ of $V$ gives the basis $(e_i\\otimes1)$ of $V\\otimes_\\kappa K$, so $$\\dim_{\\kappa(\\mathfrak m)}\\Omega_{S_K/K}\\otimes_{S_K}\\kappa(\\mathfrak m)=\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q).$$ (The source first replaces $S$ by a principal localization $S_g$ on which $\\Omega_{S/k}$ is generated by at most $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$ elements, by Nakayama, and transports this generator bound; only the fibre dimension at $\\mathfrak m$ enters the next step, and the equality above gives it directly, so that detour is not needed.)",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38646-38651 and 38670-38673 (citing Lemma 00DV lemma-NAK and Lemma 00RV lemma-differentials-base-change)"
-   }
-  },
-  {
-   "text": "(Smooth after base change.) By steps 4, the hypothesis and step 3, $$\\dim_{\\kappa(\\mathfrak m)}\\Omega_{S_K/K}\\otimes_{S_K}\\kappa(\\mathfrak m)=\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)\\le\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim((S_K)_{\\mathfrak m}).$$ $K$ is algebraically closed, $S_K$ is a finite type $K$-algebra (step 1) and $\\mathfrak m$ is a maximal ideal of $S_K$ (step 2), so [lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound] gives that $K\\to S_K$ is smooth at $\\mathfrak m$ [def-weil-pbc-singular-ideal].",
-   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
     "lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound",
-    "def-weil-pbc-singular-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38673-38675 (citing Lemma 00TS lemma-characterize-smooth-kbar, (2) => (4))"
-   }
-  },
-  {
-   "text": "(Descent.) By [lem-weil-pbc-smooth-at-prime-field-extension-descent] for the field extension $K/k$ of step 1, the finite type $k$-algebra $S$, the prime $\\mathfrak q_K=\\mathfrak m$ of $S_K=K\\otimes_kS$ and $j^{-1}(\\mathfrak m)=\\mathfrak q$ (step 2), smoothness of $K\\to S_K$ at $\\mathfrak m$ (step 5) implies that $k\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal]: there is $g\\in S\\setminus\\mathfrak q$ with $S_g$ a smooth $k$-algebra [def-weil-pbc-smooth-ring-map].",
-   "uses": [
-    "lem-weil-pbc-smooth-at-prime-field-extension-descent",
     "def-weil-pbc-singular-ideal",
     "def-weil-pbc-smooth-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38675-38677 (citing Lemma 00TG lemma-flat-base-change-locus-smooth, whose special case for a field extension is 02UQ)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply field-extension smoothness descent at qK, then rewrite its contraction to q.",
+   "uses": [
+    "lem-weil-pbc-smooth-at-prime-field-extension-descent"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-algebraic-closure",
-  "def-pc-field-extension",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "def-weil-pbc-finite-type-algebra",
+  "new-algclosed-differential-fiber-at-closed-point",
   "lem-weil-pbc-dimension-at-point-field-extension",
   "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-finite-type-algebra",
   "lem-weil-pbc-closed-point-dimension-local-ring",
   "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-kahler-differentials-base-change",
-  "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound",
   "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
-  "def-weil-pbc-smooth-ring-map"
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-at-prime-field-extension-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), proof of (2) => (1), lines 38646-38677"
+  "place": "Tag 00TT, proof of (2) => (1). Steps 1, 2 and 4 are split into the geometric fibre comparison; steps 3, 5 and 6 are implemented using existing declarations and tensor symmetry."
  },
  "mathlib_searches": [
   {
@@ -212,5 +163,15 @@
   "group": "K1",
   "result": "pass",
   "note": "k field, S [FiniteType k S] (Algebra.FiniteType), q : PrimeSpectrum S, kappa(q)=Ideal.ResidueField, Omega=KaehlerDifferential, fibre kappa ⊗[S] Omega with leftModule (rfl-checked), finrank cast ≤ topologicalKrullDimAt q on Spec S, conclusion Algebra.IsSmoothAtPrime = ∃ g ∉ q, Algebra.Smooth k (Localization.Away g); #check names resolved"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T184245-L-3997611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

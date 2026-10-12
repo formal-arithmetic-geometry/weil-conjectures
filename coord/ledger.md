@@ -8895,3 +8895,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/C1/Sheaf.AlgebraicGeometry.RightAdjointTensorLocusLocalizing (stage 3; reviewer PASS; first push; landing 20261012T184244-L-3997017 (interface); batch 20261012T184234; modules 4; new nodes 3)
 - 18:42 L: merged deliver/C2/Sheaf.Algebra.Homology.VerticalCutoffQuotientComparison (stage 3; reviewer PASS; first push; landing 20261012T184244-L-3997273 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/C2/Sheaf.RingTheory.FormallySmoothAdicClosedFiber (stage 3; reviewer PASS; after a return; landing 20261012T184245-L-3997420 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:42 L: merged deliver/C2/Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound (stage 3; reviewer PASS; first push; landing 20261012T184245-L-3997611 (interface); batch 20261012T184234; modules 2; new nodes 1)

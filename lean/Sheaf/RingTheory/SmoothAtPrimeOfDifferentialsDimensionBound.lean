@@ -12,6 +12,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.RingTheory.AlgClosedDifferentialFiberAtClosedPoint
 import Sheaf.Paper.SmoothAtMaximalIdeal
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent
@@ -69,6 +70,50 @@ theorem isSmoothAtPrime_of_finrank_kaehlerDifferential_le
       (q.asIdeal.ResidueField ⊗[S] KaehlerDifferential k S) : WithBot ℕ∞) ≤
         topologicalKrullDimAt q) :
     IsSmoothAtPrime k q := by
-  sorry
+  obtain ⟨K, hK, hAk, hCK, qK, hmax, hq, hfiber⟩ :=
+    exists_algClosed_prime_over_finrank_differentials_eq (k := k) q
+  let : Field K := hK
+  let : Algebra k K := hAk
+  let : IsAlgClosed K := hCK
+  let : qK.asIdeal.IsMaximal := hmax
+  have hlocal := AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal
+    (k := K) (Algebra.FiniteType.iff_quotient_mvPolynomial''.mp inferInstance) qK.asIdeal
+  have hdimK : topologicalKrullDimAt q = topologicalKrullDimAt qK := by
+    let e := TensorProduct.comm k S K
+    let q' := PrimeSpectrum.comap e.toRingEquiv.toRingHom qK
+    have hc : PrimeSpectrum.comap
+        (TensorProduct.includeLeftRingHom (R := k) (A := S) (B := K)) q' = q := by
+      rw [show q' = PrimeSpectrum.comap e.toRingEquiv.toRingHom qK from rfl,
+        ← PrimeSpectrum.comap_comp_apply]
+      convert hq using 1
+      congr 1
+    have hd := AlgebraicGeometry.topologicalKrullDimAt_spec_tensorProduct_field_extension q'
+    rw [hc] at hd
+    let eh := PrimeSpectrum.homeomorphOfRingEquiv e.toRingEquiv
+    have hle : ∀ {X Y : Type (max u v)} [TopologicalSpace X] [TopologicalSpace Y]
+        (e : X ≃ₜ Y) (x : X), topologicalKrullDimAt x ≤ topologicalKrullDimAt (e x) := by
+      intro X Y _ _ e x
+      refine le_iInf₂ fun U hx ↦ ?_
+      let V : TopologicalSpace.Opens X := ⟨e ⁻¹' U, U.isOpen.preimage e.continuous⟩
+      let eV : V ≃ₜ U := e.subtype (fun _ ↦ Iff.rfl)
+      exact (iInf₂_le V hx).trans_eq
+        (IsHomeomorph.topologicalKrullDim_eq eV eV.isHomeomorph)
+    have heq : eh.symm qK = q' := by rfl
+    have he : topologicalKrullDimAt q' = topologicalKrullDimAt qK := by
+      apply le_antisymm
+      · have hh := hle eh (eh.symm qK)
+        rw [eh.apply_symm_apply, heq] at hh
+        exact hh
+      · simpa only [heq] using hle eh.symm qK
+    exact hd.trans he
+  have hbound : (Module.finrank qK.asIdeal.ResidueField
+      (qK.asIdeal.ResidueField ⊗[K ⊗[k] S] KaehlerDifferential K (K ⊗[k] S)) :
+        WithBot ℕ∞) ≤ ringKrullDim (Localization.AtPrime qK.asIdeal) := by
+    rw [hfiber, ← hlocal, ← hdimK]
+    exact hdim
+  have hsmooth : IsSmoothAtPrime K qK :=
+    smoothAtMaximalIdeal_of_finrank_differentials_le_krullDim K (K ⊗[k] S)
+      qK.asIdeal hmax hbound
+  exact hq ▸ isSmoothAtPrime_of_fieldExtension qK hsmooth
 
 end Algebra
