@@ -306,7 +306,9 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 The affine space of blueprint `def-sbc-affine-space` is Mathlib's `AlgebraicGeometry.AffineSpace`,
 and the smooth morphisms (of relative dimension `n`) of blueprint `def-sbc-smooth-morphisms` are
-Mathlib's `AlgebraicGeometry.Smooth` and `AlgebraicGeometry.SmoothOfRelativeDimension`. -/
+Mathlib's `AlgebraicGeometry.Smooth` and `AlgebraicGeometry.SmoothOfRelativeDimension`; the
+morphisms locally of finite presentation of blueprint `def-sbc-locally-finite-presentation` are
+Mathlib's `AlgebraicGeometry.LocallyOfFinitePresentation`. -/
 instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S : Scheme.{u}) :
     SmoothOfRelativeDimension (Nat.card n) (𝔸(n; S) ↘ S) :=
   have := smoothOfRelativeDimension_isStableUnderBaseChange (n := Nat.card n)

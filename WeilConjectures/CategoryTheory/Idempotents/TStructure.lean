@@ -35,7 +35,8 @@ definitions and instances:
 - `def-weil-derived-cohomology-sheaves` (the cohomology sheaves `𝓗ʳ(K)` of a complex of sheaves of
   modules for the standard t-structure) is `DerivedCategory.homologyFunctor` applied to the
   derived category of a category of sheaves of modules, the standard t-structure being
-  `DerivedCategory.TStructure.t`.
+  `DerivedCategory.TStructure.t`; this standard t-structure on the derived category of an
+  abelian category is blueprint `def-sbc-standard-tstructure-derived-category`.
 - `lem-weil-karoubi-envelope-fully-faithful` (the canonical functor `C ⥤ Karoubi C` is fully
   faithful) is `CategoryTheory.Idempotents.fullyFaithfulToKaroubi`.
 - `lem-weil-karoubi-envelope-idempotent-complete` (the Karoubi envelope is idempotent complete) is
