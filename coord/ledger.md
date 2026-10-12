@@ -7657,3 +7657,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:32 L: merged deliver/M2/Sheaf.CategoryTheory.ExactCoupleConvergence (stage 3; reviewer PASS; first push; landing 20261012T123243-L-1102566 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:33 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct (reviewer RETURN: (reviewer X-0acbe, head 0acbe0653) C1 (brief point 6): Include dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-sheaf-cl)
 - 12:33 L: merged deliver/M3/Sheaf.Algebra.Homology.DerivedInternalHomSingleComparison (stage 3; reviewer PASS; first push; landing 20261012T123347-L-1109351 (interface); batch 20261012T120425; modules 2; new nodes 1)
+- 12:34 L: merged deliver/N2/Sheaf.CategoryTheory.Triangulated.MilnorBoundaryFactorization (stage 3; reviewer PASS; first push; landing 20261012T123433-L-1113062 (proof); batch 20261012T120425; modules 1; new nodes 0)
