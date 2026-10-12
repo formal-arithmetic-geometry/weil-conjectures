@@ -7727,3 +7727,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: returned deliver/G3/Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections (reviewer RETURN: (the landing tools, head 931b625b6) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 13:52 L: returned deliver/J1/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections (reviewer RETURN: (the landing tools, head 656a34556) the delivery did not land: refused by tools/import_prune_check.py for lean/WeilConje)
 - 13:52 L: returned deliver/J2/Sheaf.Algebra.Homology.HomComplexUnitIso (reviewer RETURN: (the landing tools, head 225965e18) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 13:52 L: returned deliver/K3/Sheaf.RingTheory.FiniteGabberSectionModel (reviewer RETURN: (the landing tools, head 8c9914caf) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
