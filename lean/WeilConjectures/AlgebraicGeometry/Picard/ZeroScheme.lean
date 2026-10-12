@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+import Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso
 
 /-!
 # The zero-scheme dictionary and the representability of `F`
@@ -153,6 +154,8 @@ lemma isInvertible_pullback_pushforward
   (SheafOfModules.IsInvertible.of_iso.{u, u, u}
     ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _)).pullback
 
+-- Keep the existing geometric-integrality binder, although the generic comparison needs none.
+set_option linter.unusedSectionVars false in
 /-- **The adjunction morphism commutes with base change.** For `ℒ ∈ F(T)` and a morphism
 `i : T' ⟶ T` of `k`-schemes, with base change `i' : X_{T'} ⟶ X_T`, the pullback
 `i'^* φ_ℒ : i'^* f_T^* f_{T,*} ℒ ⟶ i'^* ℒ` of the adjunction morphism of `ℒ` is isomorphic, as
@@ -171,8 +174,42 @@ theorem nonempty_arrowIso_pullback_directImageCounit
     Nonempty (Arrow.mk ((Modules.pullback (baseChangeMap (X ↘ Spec (.of k)) i)).map
         (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1)) ≅
       Arrow.mk (Pic.directImageCounit (X ↘ Spec (.of k)) T'
-        (Pic.map (baseChangeMap (X ↘ Spec (.of k)) i) ℒ.1.1))) :=
-  sorry
+        (Pic.map (baseChangeMap (X ↘ Spec (.of k)) i) ℒ.1.1))) := by
+  let f := Limits.pullback.snd (X ↘ Spec (.of k)) T.hom
+  let f' := Limits.pullback.snd (X ↘ Spec (.of k)) T'.hom
+  let g' := baseChangeMap (X ↘ Spec (.of k)) i
+  let M := (fromSkeleton _).obj ℒ.1.1.val
+  have : IsProper f := MorphismProperty.pullback_snd (P := @IsProper) _ _ ‹_›
+  have : Flat f := MorphismProperty.pullback_snd (P := @Flat) _ _ (inferInstance)
+  have : LocallyOfFinitePresentation f :=
+    MorphismProperty.pullback_snd (P := @LocallyOfFinitePresentation) _ _ (inferInstance)
+  have := ℒ.1.1.isInvertible
+  let sq := isPullback_baseChangeMap (X ↘ Spec (.of k)) i
+  let c := (Modules.pullbackComp g' f).app ((Modules.pushforward f).obj M) ≪≫
+    (Modules.pullbackCongr sq.w).app ((Modules.pushforward f).obj M) ≪≫
+    ((Modules.pullbackComp f' i.left).app ((Modules.pushforward f).obj M)).symm
+  let b := (Modules.pullbackPushforwardAdjunction f').homEquiv _ _
+    (c.inv ≫ (Modules.pullback g').map ((Modules.pullbackPushforwardAdjunction f).counit.app M))
+  have : IsIso b := Modules.isIso_counitBaseChange_of_invertibleDirectImage
+    f i.left g' f' sq M ℒ.2.1 ℒ.2.2
+  have hb : (Modules.pullback f').map b ≫
+      (Modules.pullbackPushforwardAdjunction f').counit.app ((Modules.pullback g').obj M) =
+      c.inv ≫ (Modules.pullback g').map
+        ((Modules.pullbackPushforwardAdjunction f).counit.app M) := by
+    exact ((Modules.pullbackPushforwardAdjunction f').homEquiv_counit (g := b)).symm.trans
+      (Equiv.symm_apply_apply _ _)
+  let e := (fromSkeletonToSkeletonIso ((Modules.pullback g').obj M)).symm
+  refine ⟨Arrow.isoMk
+    (c ≪≫ (Modules.pullback f').mapIso (asIso b) ≪≫
+      (Modules.pullback f').mapIso ((Modules.pushforward f').mapIso e)) e ?_⟩
+  change (c.hom ≫ (Modules.pullback f').map b ≫
+      (Modules.pullback f').map ((Modules.pushforward f').map e.hom)) ≫
+      (Modules.pullbackPushforwardAdjunction f').counit.app _ =
+      (Modules.pullback g').map ((Modules.pullbackPushforwardAdjunction f).counit.app M) ≫ e.hom
+  rw [Category.assoc, Category.assoc,
+    (Modules.pullbackPushforwardAdjunction f').counit_naturality e.hom,
+    ← Category.assoc _ _ e.hom, hb]
+  simp
 
 /-- **The zero-scheme dictionary is natural.** For `ℒ ∈ F(T)` and `i : T' ⟶ T`, the zero scheme
 of the adjunction morphism of `ℒ_{T'}` is the base change to `X_{T'}` of the zero scheme of the

@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-counit-base-change-is-iso",
+ "kind": "statement",
+ "title": "The canonical degree-zero base-change map is invertible",
+ "statement": "Let X,S,X\\prime,S\\prime be schemes [def-pc-scheme], f:X\\to S a proper flat morphism locally of finite presentation [def-weil-proper-morphism] [def-weil-flat-morphism] [def-sbc-locally-finite-presentation], and let g:S\\prime\\to S, g\\prime:X\\prime\\to X, f\\prime:X\\prime\\to S\\prime form a cartesian square [def-pc-fibre-product]. Assume module categories on X and X\\prime have injective resolutions [def-sp-injective-resolutions]. Let M be an invertible O_X-module [def-sc-invertible-module], with R^0 f_* M invertible and R^q f_* M=0 for q>0 [def-pc-invertible-in-degree-zero]. Write c:g\\prime^*f^*\\cong f\\prime^*g^* for the canonical pullback-composition isomorphism [def-pc-module-pullback]. Then the map beta:g^*f_* M\\to f\\prime_*g\\prime^*M adjoint to c^{-1} followed by g\\prime^*(epsilon_M) under the canonical pullback/pushforward adjunction [lem-pc-module-pullback-adjunction] is an isomorphism.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "nonempty_arrowIso_pullback_directImageCounit docstring, degree-zero base-change argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sp-injective-resolutions",
+  "def-sc-invertible-module",
+  "def-pc-invertible-in-degree-zero",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "An invertible module M is quasi-coherent and, since f is flat, flat over S. Properness implies quasi-compactness and separatedness. Apply relatively flat derived base change [lem-pc-rf-base-change-flat-module] to M and the cartesian square. Use [lem-pc-base-change-map-cech] to identify this comparison with the canonical mate of the pullback-composition isomorphism, rather than an unspecified isomorphism of objects. The finite affine Cech cover computes both direct images and the comparison is the tensor comparison on its terms.",
+   "uses": [
+    "lem-pc-rf-base-change-flat-module",
+    "lem-pc-base-change-map-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right-derived direct image is connective. Its positive cohomology vanishes by hq; truncation therefore identifies it with R^0 f_* M in degree zero. The latter is invertible by h0, hence flat, so its derived pullback has no negative cohomology and agrees with ordinary pullback in degree zero. Taking H^0 of the canonical comparison in Step 1 gives an isomorphism g^* R^0 f_* M to R^0 f\\prime_* g\\prime^* M. Here use the single-degree cohomology calculation [lem-pc-degree-zero-properties] and the bounded-flat-complex pullback calculation [lem-pc-flat-complex-derived-pullback].",
+   "uses": [
+    "lem-pc-degree-zero-properties",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural isomorphism R^0 f_* to f_* (and its base-changed counterpart). In the canonical pullback/pushforward adjunction, let c be the composite of pullbackComp(g\\prime,f), pullbackCongr(sq.w), and the inverse of pullbackComp(f\\prime,g). The comparison of Step 2 is the mate beta = homEquiv(c^{-1} followed by g\\prime^*(epsilon_M)). Indeed the adjunction sends beta to f\\prime^*(beta) followed by epsilon; the inverse-adjoint identity recovers exactly c^{-1} followed by the pulled-back counit. The Cech comparison of Step 1 is induced by this same sectionwise pullback map, so not merely some isomorphic module map. Thus the displayed beta is invertible. On an empty base both modules are zero and the conclusion still holds.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-base-change-map-cech",
+  "lem-pc-degree-zero-properties",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "nonempty_arrowIso_pullback_directImageCounit docstring, degree-zero base-change argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChange.*counit|counit.*baseChange|homEquiv_counit",
+   "results": "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; categorical infrastructure or unrelated morphism properties only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv_counit",
+   "results": "loogle: unknown identifier 'Adjunction.homEquiv_counit'",
+   "date": "2026-10-12",
+   "verdict": "no exact match; categorical infrastructure or unrelated morphism properties only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat family and a line bundle with invertible direct image concentrated in degree zero the canonical base change map is an isomorphism",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; RingHom.IsStableUnderBaseChange.pullback_fst_appTop; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.affineAnd_isStableUnderBaseChange; AlgebraicGeometry.Flat.isIso_of_surjective_of_mono; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-12",
+   "verdict": "no exact match; categorical infrastructure or unrelated morphism properties only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical base change morphism for direct image of a line bundle is an isomorphism if higher direct images vanish and the zeroth direct image is invertible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-arrow-iso-pullback-counit",
+   "place": "Step 1: canonical degree-zero base-change comparison",
+   "via": [
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CounitBaseChangeIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_counitBaseChange_of_invertibleDirectImage",
+  "statement": "theorem isIso_counitBaseChange_of_invertibleDirectImage {X S X' S' : Scheme.{u}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentation f] [Flat f] (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g) [HasInjectiveResolutions X.Modules] [HasInjectiveResolutions X'.Modules] (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] (h0 : SheafOfModules.IsInvertible.{u, u, u} (((pushforward f).rightDerived 0).obj M)) (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) : let c := (pullbackComp g' f).app ((pushforward f).obj M) ≪≫ (pullbackCongr sq.w).app ((pushforward f).obj M) ≪≫ ((pullbackComp f' g).app ((pushforward f).obj M)).symm IsIso ((pullbackPushforwardAdjunction f').homEquiv _ _ (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M)))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T042414-L-1818601",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T042414-L-1818601",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
