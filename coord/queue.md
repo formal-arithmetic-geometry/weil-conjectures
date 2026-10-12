@@ -1,6 +1,6 @@
 # Work queue
 
-1830 items; claim with `tools/claim.py next <group> [--stage N]`.
+1831 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (14)
 
@@ -29,7 +29,7 @@
 
 Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (1815)
+## Stage 3: modules to prove (1816)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -731,7 +731,6 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.Topology.ConstructibleInConstructible` | 8 | 1 | proof |
 | `Sheaf.Topology.FlasqueZariskiAcyclic` | 8 | 1 | proof |
 | `Sheaf.Topology.InverseImageStalk` | 8 | 2 | proof |
-| `Sheaf.Topology.IrreducibleConstantSections` | 8 | 1 | proof |
 | `Sheaf.Topology.RingedSpaceModuleCohomology` | 8 | 2 | proof |
 | `Sheaf.Topology.RingedSpaceModuleEnoughInjectives` | 8 | 1 | proof |
 | `Sheaf.Topology.SetsExtensionByEmptyAdjunction` | 8 | 1 | proof |
@@ -745,7 +744,6 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.Topology.TopologicalFilteredCohomology` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.EffectiveDescent` | 8 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.Slicing` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup` | 8 | 1 | proof |
 | `WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech` | 8 | 2 | proof |
@@ -857,6 +855,8 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.UnderlyingFiniteEtaleExtension` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Ogoma` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit` | 9 | 1 | proof |
@@ -997,6 +997,7 @@ Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.RingTheory.UniversalFirstOrderThickening` | 9 | 1 | proof |
 | `Sheaf.RingTheory.ZariskiPairRankOnePropagation` | 9 | 1 | proof |
 | `Sheaf.RingTheory.ZariskisMainAway` | 9 | 1 | proof |
+| `Sheaf.Topology.ConstantSheafLocallyConstantComparison` | 9 | 1 | proof |
 | `Sheaf.Topology.ConstructibleIntersection` | 9 | 1 | proof |
 | `Sheaf.Topology.ConstructibleIsRetrocompact` | 9 | 1 | proof |
 | `Sheaf.Topology.DimensionSupremumLocalDimensions` | 9 | 1 | proof |
