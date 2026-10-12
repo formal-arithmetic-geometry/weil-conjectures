@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-normal-local-depth-two",
+ "kind": "statement",
+ "title": "Depth at least two for a normal local domain",
+ "statement": "Let $A$ be a Noetherian local domain [def-weil-pbc-noetherian-ring] [def-weil-pbc-normal-ring] that is integrally closed in its fraction field, with $\\dim A\\ge2$ [def-weil-pbc-krull-dimension-ring]. Then $\\operatorname{depth}(A)\\ge2$ [def-weil-pbc-depth].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031S (lemma-criterion-normal), forward implication, second paragraph; Tag 0BHZ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "*(1) $\\Rightarrow$ (2), depth when $d\\ge2$.* Let $(A,\\mathfrak m)$ be a Noetherian local normal domain [def-weil-pbc-normal-ring] of dimension $d\\ge2$ (possibly $d=\\infty$ a priori). Apply [lem-weil-pbc-kollar-local-dichotomy] (i) to $A$. Case (1) is impossible: an Artinian local ring has $\\mathfrak m$ as its only prime [lem-weil-pbc-artinian-local-unique-prime], so its dimension is $0$. Case (2) is impossible as $d\\ne1$. Suppose case (4): $\\varphi:A\\to A'$ finite, not an isomorphism, $A'\\ne0$, $\\mathfrak m^n\\ker\\varphi=0$, $\\mathfrak m^nA'\\subseteq\\varphi(A)$, no element of $A'$ with annihilator $\\mathfrak m$. As $d\\ge1$, $(0)\\subsetneq\\mathfrak m$, so $\\mathfrak m^n\\ne0$ in the domain $A$ and $\\mathfrak m^n\\ker\\varphi=0$ forces $\\ker\\varphi=0$; identify $A\\subseteq A'$. By [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] applied to the finite $A$-module $A'$ there is $x\\in\\mathfrak m$ that is a nonzerodivisor on $A'$; $x\\ne0$ since $A'\\ne0$. Since $x^n\\in\\mathfrak m^n$, $x^ny\\in A$ for every $y\\in A'$. Let $K$ be the fraction field of $A$ and define $\\iota:A'\\to K$, $\\iota(y)=(x^ny)/x^n$. It is additive, $\\iota(1)=1$, and multiplicative because $x^n\\cdot(x^ny)(x^nz)=x^{2n}\\cdot(x^nyz)$ in $A'$, hence in $A$; it is injective because $x^ny=0$ forces $y=0$; and it restricts to the inclusion $A\\subseteq K$. Every $y\\in A'$ is integral over $A$ since $A'$ is a finite $A$-algebra [lem-weil-pbc-finite-algebra-is-integral], so $\\iota(y)\\in K$ is integral over $A$ [def-weil-pbc-integral-closure] and lies in $A$ because $A$ is integrally closed in $K$; by injectivity of $\\iota$, $y\\in A$. So $A'=A$ and $\\varphi$ is an isomorphism, a contradiction. Hence case (3) holds: $\\operatorname{depth}(A)\\ge2=\\min\\{2,d\\}$ [def-weil-pbc-depth].",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-kollar-local-dichotomy",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-kollar-local-dichotomy",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-depth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031S (lemma-criterion-normal), forward implication, second paragraph; Tag 0BHZ; localization and denominator details written out by P1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ring is normal if and only if Serre R1 S2",
+   "results": "Hits: IsNoetherianRing.of_isLocalization_maximal, AlgebraicGeometry.isLocallyNoetherian_Spec, IsNoetherianRing.of_prime, AlgebraicGeometry.isNoetherianRing_of_away, IsNoetherianRing.of_prime_ne_bot, AlgebraicGeometry.isNoetherian_Spec, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "depth|Serre|isIntegral.*localization",
+   "results": "Hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, IsLocalization",
+   "results": "Hits: isIntegrallyClosed_of_isLocalization, Algebra.intTrace_eq_of_isLocalization, Algebra.intNorm_eq_of_isLocalization, IsDedekindDomain.differentIdeal_dvd_map_differentIdeal, Submodule.traceDual_eq_span_map_traceDual_of_linearDisjoint, Ideal.spanIntNorm_localization",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre S2 ring intersection height one localizations total fraction ring",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian integrally closed local domain of dimension at least two has depth at least two",
+   "results": "Hits: tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDedekindDomainDvr.ring_dimensionLEOne, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, isDedekindRing_iff, isDedekindDomain_iff, IsDedekindDomainInv.dimensionLEOne, Ring.DimensionLEOne.integralClosure, IsDiscreteValuationRing.TFAE",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral total fraction has a denominator outside a prime whose localization is a normal domain",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegral, FractionRing",
+   "results": "No hits.",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SerreCriterionNormal",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "forward implication, high-dimensional depth step (step 3 of the Lean docstring)",
+   "via": [
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NormalLocalDepthTwo",
+  "file": "lean/Sheaf/RingTheory/NormalLocalDepthTwo.lean",
+  "declaration": "IsLocalRing.depth_two_of_normal",
+  "statement": "theorem IsLocalRing.depth_two_of_normal (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] (hdim : (2 : WithBot ℕ∞) ≤ ringKrullDim A) : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T085316-L-30537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T085316-L-30537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

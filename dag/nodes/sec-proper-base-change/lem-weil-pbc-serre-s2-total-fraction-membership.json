@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-serre-s2-total-fraction-membership",
+ "kind": "statement",
+ "title": "Total-fraction membership detected in codimension at most one for S2 rings",
+ "statement": "Let $R$ be a reduced Noetherian commutative ring [def-weil-pbc-noetherian-ring] satisfying $(S_2)$ [def-weil-pbc-serre-conditions-rk-sk]. Let $x\\in Q(R)$, the localization at its nonzerodivisors [def-weil-pbc-module-localization]. Suppose for every prime $p$ of height at most one [def-weil-pbc-krull-dimension-ring] there exist $s\\notin p$ and $a\\in R$ with $sx=a$ in $Q(R)$. Then $x$ belongs to the image of $R\\to Q(R)$. Reduced means that no nonzero element is nilpotent.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031T (lemma-normal-domain), proof of (1) and (2), using only S2 and a regular denominator"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write x=a/b with b regular. If a belongs to bR, cancel the unit b in Q(R) to express x as an element of R. Otherwise its class in R/bR is nonzero. Noetherian associated-prime existence gives an associated prime p containing its annihilator J.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The regular quotient associated-height lemma gives height(p)≤1. Choose s outside p and c with sx=c. Multiply by b and use injectivity R→Q(R) to obtain sa=cb, hence s belongs to J⊆p, a contradiction.",
+   "uses": [
+    "lem-weil-pbc-serre-s2-regular-quotient-associated-height",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-serre-s2-regular-quotient-associated-height"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031T (lemma-normal-domain), proof of (1) and (2), using only S2 and a regular denominator; localization and denominator details written out by P1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ring is normal if and only if Serre R1 S2",
+   "results": "Hits: IsNoetherianRing.of_isLocalization_maximal, AlgebraicGeometry.isLocallyNoetherian_Spec, IsNoetherianRing.of_prime, AlgebraicGeometry.isNoetherianRing_of_away, IsNoetherianRing.of_prime_ne_bot, AlgebraicGeometry.isNoetherian_Spec, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "depth|Serre|isIntegral.*localization",
+   "results": "Hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, IsLocalization",
+   "results": "Hits: isIntegrallyClosed_of_isLocalization, Algebra.intTrace_eq_of_isLocalization, Algebra.intNorm_eq_of_isLocalization, IsDedekindDomain.differentIdeal_dvd_map_differentIdeal, Submodule.traceDual_eq_span_map_traceDual_of_linearDisjoint, Ideal.spanIntNorm_localization",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre S2 ring intersection height one localizations total fraction ring",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian integrally closed local domain of dimension at least two has depth at least two",
+   "results": "Hits: tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDedekindDomainDvr.ring_dimensionLEOne, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, isDedekindRing_iff, isDedekindDomain_iff, IsDedekindDomainInv.dimensionLEOne, Ring.DimensionLEOne.integralClosure, IsDiscreteValuationRing.TFAE",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral total fraction has a denominator outside a prime whose localization is a normal domain",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegral, FractionRing",
+   "results": "No hits.",
+   "verdict": "No exact match for these auxiliary statements; relevant localization and DVR tools inspected.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SerreCriterionNormal",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "reverse implication, integral closedness in the total fractions, replacing the conductor induction below this node",
+   "via": [
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SerreS2TotalFractionMembership",
+  "file": "lean/Sheaf/RingTheory/SerreS2TotalFractionMembership.lean",
+  "declaration": "Ring.exists_algebraMap_eq_of_serreS_two",
+  "statement": "theorem Ring.exists_algebraMap_eq_of_serreS_two (R : Type u) [CommRing R] [IsNoetherianRing R] [IsReduced R] (hS : Ring.IsSerreS R 2) (x : FractionRing R) (hlocal : ∀ (p : Ideal R) [p.IsPrime], p.height ≤ (1 : ℕ∞) → ∃ s : R, s ∉ p ∧ ∃ a : R, algebraMap R (FractionRing R) s * x = algebraMap R (FractionRing R) a) : ∃ a : R, algebraMap R (FractionRing R) a = x",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T085316-L-30537",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T085316-L-30537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
