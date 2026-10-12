@@ -193,6 +193,45 @@ theorem iterCoeff_comp_eq
     simp only [Functor.comp_map] at h1 h2 h4
     rw [reassoc_of% h1, ← reassoc_of% h2, ← reassoc_of% h3, ← reassoc_of% h4, ← reassoc_of% h5]
 
+include ρ in
+/-- If two Frobenius coefficient morphisms are compatible along `t : K ⟶ Res K'`, then so are the
+stalk endomorphisms `(ψ_m)_x̄` at a point `x̄` fixed by `Φ^m`: `L x̄^* t`, read through
+`Lx̄^* Res ≅ Res Lx̄^*`, intertwines them. -/
+theorem iterStalk_comp_eq
+    (h : ψ ≫ t = ((upperStar (ModuleCat.{u + 1} Λ) Φ).leftDerivedFunctor).map t ≫
+      (leftDerivedUpperStarRestrictScalarsIso ρ Φ).hom.app K' ≫
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ).map ψ') (m : ℕ)
+    (x y : s ⟶ X) (hx : x ≫ endPow Φ m = y) :
+    ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) hx).inv.app K ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) x (endPow Φ m)).hom.app K ≫
+        ((upperStar (ModuleCat.{u + 1} Λ) x).leftDerivedFunctor).map (iterCoeff Φ ψ m)) ≫
+      ((upperStar (ModuleCat.{u + 1} Λ) x).leftDerivedFunctor).map t ≫
+        (leftDerivedUpperStarRestrictScalarsIso ρ x).hom.app K' =
+    ((upperStar (ModuleCat.{u + 1} Λ) y).leftDerivedFunctor).map t ≫
+      (leftDerivedUpperStarRestrictScalarsIso ρ y).hom.app K' ≫
+        (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ).map
+          ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ') hx).inv.app K' ≫
+            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ') x (endPow Φ m)).hom.app K' ≫
+            ((upperStar (ModuleCat.{u + 1} Λ') x).leftDerivedFunctor).map (iterCoeff Φ ψ' m)) := by
+  have hi := iterCoeff_comp_eq ρ Φ ψ ψ' t h m
+  have h1 := (leftDerivedUpperStarRestrictScalarsIso ρ x).hom.naturality (iterCoeff Φ ψ' m)
+  have h2 := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) x (endPow Φ m)).hom.naturality t
+  have h3 := leftDerivedUpperStarRestrictScalarsIso_comp_hom_app ρ x (endPow Φ m) K'
+  have h4 := (leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) hx).inv.naturality t
+  have h5' : (leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) hx).inv.app
+        ((Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ).obj K') ≫
+      (leftDerivedUpperStarRestrictScalarsIso ρ (x ≫ endPow Φ m)).hom.app K' =
+      (leftDerivedUpperStarRestrictScalarsIso ρ y).hom.app K' ≫
+        (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ).map
+          ((leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ') hx).inv.app K') := by
+    subst hx
+    simp
+  simp only [Functor.comp_map] at h1 h2 h4
+  simp only [Category.assoc]
+  rw [← Functor.map_comp_assoc, hi]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [h1, ← reassoc_of% h2, ← reassoc_of% h3, ← reassoc_of% h4, reassoc_of% h5']
+
 end Generic
 
 end AlgebraicGeometry.ProEtale
