@@ -18,49 +18,32 @@
  ],
  "proof": [
   {
-   "text": "Identify H^0 with sections at the terminal etale object, naturally in coefficients. The adjunction-unit characterization of degree-zero cohomology pullback identifies the given cohomology legs with section legs.",
+   "text": "The affine projections make the limit qcqs. Apply Scheme.etaleCohomology_isColimit_of_isFiltered in degree zero. The plus-derived single-functor compatibility followed by rightDerivedZeroIsoSelf identifies this functor naturally with global sections; transport the image cocone along that isomorphism. Evaluation at the terminal object, H.equiv₀ naturality, and filtered group representatives lift the class in H^0(L) to a class z in H^0(G_i).",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cohomology-pullback-degree-zero"
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "Pass to cofinal tails. For affine stages use 0EYL to express the affine etale site at the limit as the colimit of stage sites. The affine sheaf equivalence and uniqueness of left adjoints identify inverse images and units. Apply the degree-zero section formula 09YN. For general qcqs stages choose finite affine covers and finite affine refinements of overlaps; their inverse systems are affine on a cofinal tail. The finite sheaf equalizer and commutation of filtered colimits with finite limits give the same section comparison globally.",
+   "text": "Transport z through eG_i and apply fixed-pullback degree-zero descent, obtaining x at j and f:i to j. Apply H^0(phi_f) to x and transport through eH_j inverse. Naturality of cohomologyMap and H.map, hG, and L.w f identify its image with z. hB and injectivity of eB give the required equation in B.pt.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-pretopology-sheaf-condition",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "lem-weil-pbc-fixed-pullback-degree-zero-descent"
    ],
    "elementary": false
-  },
-  {
-   "text": "Every element of the filtered group colimit is represented at some stage. Transport it back across eH and eB. The section-leg comparison from step 1 and hB prove the displayed representative equation. Nonempty indexing represents zero even on the empty scheme.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-pretopology-sheaf-condition",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-weil-pbc-fixed-pullback-degree-zero-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/09YP",
-  "place": "Explicit scheme translation of the degree-zero and dimension-shifting parts of 09YP/0739, retaining finite qcqs covers."
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Degree-zero argument factored into the existing filtered-cohomology theorem specialized at zero, natural global-section identification, and fixed-coefficient inverse-limit descent. Repair of duplicate abelianSectionsColimit helper."
  },
  "mathlib_searches": [
   {
@@ -143,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-4102e",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T085234-L-12487",
+  "landing": "20261012T135229-L-1660313",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the proof with its recorded dependencies, and the remaining fixed-sheaf statement with its source; verified compilation and axioms."
  }
 }

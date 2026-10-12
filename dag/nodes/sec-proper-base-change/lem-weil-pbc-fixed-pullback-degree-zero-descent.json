@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-fixed-pullback-degree-zero-descent",
+ "kind": "statement",
+ "title": "Degree-zero descent for a fixed pullback sheaf",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an inverse system of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition maps, with limit cone $(X,(p_i))$ [def-weil-pbc-category-colimit]. Fix $i\\in I$ and an abelian sheaf $F$ on $(D_i)_{\\acute{e}t}$ [def-weil-pbc-abelian-etale-sheaves]. For every $y\\in H^0(X,p_i^{-1}F)$ [def-weil-pbc-inverse-image, def-weil-pbc-etale-cohomology], there exist $j\\in I$, $f:i\\to j$, and $x\\in H^0(D_j,D(f^{\\mathrm{op}})^{-1}F)$ such that $p_j^*(x)=H^0(\\alpha_f)(y)$ [def-weil-pbc-cohomology-pullback], where $\\alpha_f:p_i^{-1}F\\cong p_j^{-1}D(f^{\\mathrm{op}})^{-1}F$ is the canonical inverse-image composition isomorphism from $D(f^{\\mathrm{op}})\\circ p_j=p_i$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Etale Cohomology, Tag 09YQ (label theorem-colimit), degree zero for a fixed inverse-image sheaf, via 0EYL, 04HR, 09YN and 03S2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the nonempty cofinal upper tail of i. Identify degree-zero cohomology with global sections by H.equiv₀ and the degree-zero pullback/unit formula.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine etale objects, the affine etale-site colimit and affine-topos equivalence identify inverse images compatibly with units. Apply the colimit-site section comparison. For the identity etale object of a qcqs stage choose a finite affine cover and finite affine refinements of overlaps. Descend local sections and the finitely many equality equations to one common stage, then glue by the sheaf equalizer. Filtered colimits commute with these finite equalizers.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-pretopology-sheaf-condition",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate the descended section back to H^0. The unit compatibility of the composition comparison gives precisely the displayed equation. Empty schemes and zero sheaves have the zero class represented as zero; nonempty indexing supplies a stage.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-pretopology-sheaf-condition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Degree-zero fixed-coefficient section descent with finite affine-cover gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero cohomology of an abelian sheaf pulled back to an inverse limit of schemes has a representative at a later stage",
+   "date": "2026-10-12",
+   "results": "Internal Server Error: service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.equiv₀",
+   "date": "2026-10-12",
+   "results": "H.equiv₀, equiv₀_naturality, equiv₀_symm_naturality.",
+   "verdict": "Degree-zero identification only, no inverse-limit descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero etale cohomology global sections of filtered colimit of abelian sheaves on quasi compact quasi separated schemes",
+   "date": "2026-10-12",
+   "results": "AffineTransitionLimit structure-sheaf section descent, Sheaf.H definition.",
+   "verdict": "No arbitrary abelian-sheaf match."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap.*comp|etale.*section.*[Ll]ift|degree.zero.*descent",
+   "date": "2026-10-12",
+   "results": "Existing EtaleCohomologyClassDescent requires torsion and arbitrary positive degrees; EtaleSetSectionLift is sets and a base-changed site object; no exact abelian H^0 descent declaration.",
+   "verdict": "No exact match; existing results require coefficient/unit transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections inverse image abelian sheaf directed inverse scheme limit continuity",
+   "date": "2026-10-12",
+   "results": "Second reader: structure-sheaf section descent in AffineTransitionLimit and scheme/sheaf gluing; no arbitrary abelian inverse-image sections theorem.",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStar.*(forget|sheafCompose)|sheafCompose.*upperStar|cohomologyMap.*equiv|equiv₀.*cohomologyMap; pullback sections continuity in lean/",
+   "date": "2026-10-12",
+   "results": "Second reader inspected EtaleSetSectionLift, PullbackSectionsIsColimit, ModulePullbackSectionComparison and EtaleInverseImageAlgebraicStructures. Sets lifting needs abelian/unit transport; module colimit is restricted to affine objects and its coefficient comparison is still sorry. No exact abelian H^0 theorem.",
+   "verdict": "No duplicate or few-minute complete proof from these interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Fixed-coefficient degree-zero continuity subargument of inverse-limit cohomology descent",
+   "via": [
+    "lem-weil-pbc-etale-limit-cohomology-degree-zero-descent",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixedPullbackDegreeZeroDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedPullbackDegreeZeroDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.fixed_pullback_degree_zero_descent",
+  "statement": "theorem fixed_pullback_degree_zero_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (i : I) (F : Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (y : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F) 0) :\n    ∃ (j : I) (f : i ⟶ j)\n      (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj F) 0),\n      cohomologyMap (c.π.app (op j)) _ 0 x =\n        Sheaf.H.map\n          ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n            (c.π.app (op i)) (c.w f.op).symm).hom.app F) 0 y",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4102e",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T135229-L-1660313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4102e",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T135229-L-1660313",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the proof with its recorded dependencies, and the remaining fixed-sheaf statement with its source; verified compilation and axioms."
+ }
+}
