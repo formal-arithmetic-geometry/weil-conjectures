@@ -44,6 +44,19 @@ theorem IsAmple.exists_finite_affine_cover (X : Scheme.{u}) (L : X.Modules)
             (⊤ : Submodule (X.presheaf.stalk x)
               ↑(TopCat.Presheaf.stalk (L.tensorPow (n i)).val.presheaf x))) ∧
       (∀ x : X, ∃ i : Fin m, x ∈ U i) := by
-  sorry
+  classical
+  have : CompactSpace X := hL.1
+  choose n hn s U hx hU hmem using hL.2
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
+    (fun x : X ↦ (U x : Set X)) (fun x ↦ (U x).isOpen) (by
+      intro x _
+      exact Set.mem_iUnion.mpr ⟨x, hx x⟩)
+  let e := t.equivFin.symm
+  refine ⟨t.card, (fun i ↦ n (e i)), (fun i ↦ s (e i)), (fun i ↦ U (e i)),
+    (fun i ↦ hn (e i)), (fun i ↦ hU (e i)), (fun i x ↦ hmem (e i) x), ?_⟩
+  intro x
+  obtain ⟨y, hy, hxy⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
+  refine ⟨t.equivFin ⟨y, hy⟩, ?_⟩
+  simpa [e] using hxy
 
 end AlgebraicGeometry.Scheme.Modules
