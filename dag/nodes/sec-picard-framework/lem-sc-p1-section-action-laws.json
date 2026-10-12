@@ -13,11 +13,28 @@
  ],
  "proof": [
   {
-   "text": "The homogeneous twist multiplication map acts on local fractions by multiplication by a/1. These maps are additive in a and in the section, multiplication by 1 is identity, and successive multiplications by a and b give multiplication by ab, with the degree cast (z+e)+f=z+(e+f). Tensoring with G and applying global sections preserve the identities. Negative B_z is a zero group. Expand serreSectionSMul as the double sum over polynomial and section support. Terms outside supports vanish. Additivity follows by distributing finite sums over additive homogeneous components and additive section maps. Recompose ab from the finite convolution of the components of a and b, then use the composite-map identity to obtain associativity. The degree-zero component of 1 gives the unit law. For a homogeneous a and a single section injection, each support has at most one entry, giving the single-summand identity; if either is zero, multiplication by zero or the zero section gives the same equality. This verifies precisely the concrete action, without choosing any module witness.",
+   "text": "On twists, multiplication by 1/1 is identity and successive multiplication by b/1 and a/1 is multiplication by (ab)/1. Prove the equalities pointwise in Localization.AtPrime, with an eqToHom degree transport. Tensoring by G and taking sections preserve these equalities. The two private coherence lemmas are fully proved.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf"
    ],
    "elementary": false
+  },
+  {
+   "text": "The homogeneous operation is additive in its section argument. It is additive in its polynomial argument because twistMul is additive, and tensorLeft G is additive: it is a left adjoint in the closed monoidal category of sheaves of modules and hence preserves binary coproducts and biproducts. Zero maps and negative source degrees are handled explicitly.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bundle the homogeneous bilinear maps into nested DFinsupp.sumAddHom maps and precompose with DirectSum.decomposeAddEquiv. Show by expanding sumAddHom that its value is precisely the given finite double sum. Both distributive laws and both zero laws follow from map_add and map_zero. For a homogeneous scalar and a single summand, apply decompose_of_mem and sum_single_index twice to obtain the single-summand formula, including zero cases.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the section direct sum for the unit law. For associativity, use DirectSum.Decomposition.inductionOn for each polynomial and DirectSum.induction_on for sections. The additive cases use the proved distributive laws. The homogeneous single-summand case uses the proved section-map composition identity and the degree equality z+(e+f)=(z+f)+e. Negative source degrees yield zero maps. Combine the five proved laws into the original conjunction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks Project, Lemma 01YS(5), graded module construction; agent expansion of the finite-sum action verification."
+  "place": "Stacks Lemma 01YS(5), graded section module construction; direct finite-support verification by R3, using Definition 01MN and Lemma 01M7 for twists."
  },
  "mathlib_searches": [
   {
@@ -103,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T110319-L-622047",
-  "kind": "interface",
+  "landing": "20261012T135311-L-1690027",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
