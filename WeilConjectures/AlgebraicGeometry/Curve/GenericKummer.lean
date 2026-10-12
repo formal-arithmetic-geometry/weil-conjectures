@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.SixFunctors.Finite.Exact
 
 /-!
 # The generic Kummer residue sheaf
@@ -98,6 +99,13 @@ noncomputable def isColimitOfπNsmulOfCofan {ι : Type*} {P P' : ι → C} (n : 
           c.inj i ≫ k := Cofork.IsColimit.π_desc (hq i)
       rw [hd, ← hm, ← Category.assoc, ← Category.assoc, Cofan.IsColimit.fac])
 
+/-- A cokernel of `f` is a cokernel of any `f' = f`. -/
+noncomputable def isColimitOfπOfEq {X Y Z : C} {f f' : X ⟶ Y} (hf : f = f') {π : Y ⟶ Z}
+    (w : f ≫ π = 0) (h : IsColimit (CokernelCofork.ofπ π w)) :
+    IsColimit (CokernelCofork.ofπ (f := f') π (hf ▸ w)) := by
+  subst hf
+  exact h
+
 end Preadditive
 
 variable {C : Type*} [Category* C]
@@ -124,6 +132,17 @@ noncomputable def isColimitOfπOfShortExact [Abelian C] {S : ShortComplex C} (hS
     exact ⟨h.desc (CokernelCofork.ofπ k' hck), by rw [Category.assoc, hd, hk']⟩
 
 end CategoryTheory.Limits.CokernelCofork
+
+namespace CategoryTheory
+
+/-- The constant functor into a functor category preserves finite limits, which are computed
+pointwise. -/
+instance Functor.const_preservesFiniteLimits {C A : Type*} [Category* C] [Category* A] :
+    PreservesFiniteLimits (Functor.const C : A ⥤ C ⥤ A) :=
+  preservesFiniteLimits_of_evaluation _ fun _ ↦
+    preservesFiniteLimits_of_natIso (NatIso.ofComponents (fun _ ↦ Iso.refl _) : 𝟭 A ≅ _)
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
@@ -217,5 +236,81 @@ noncomputable def isColimitOfπDivisorSequenceMapComp [IsLocallyNoetherian X] [I
     (a := n • 𝟙 _) (b := n • 𝟙 _) (c := n • 𝟙 _) (by simp) (by simp) w h
 
 end Generic
+
+section Point
+
+/-- The reduction map `ℤ ⟶ ℤ/n`. -/
+noncomputable def intToZMod (n : ℕ) :
+    AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ AddCommGrpCat.of (ULift.{u + 1} (ZMod n)) :=
+  AddCommGrpCat.ofHom (AddEquiv.ulift.symm.toAddMonoidHom.comp
+    ((Int.castAddHom (ZMod n)).comp AddEquiv.ulift.toAddMonoidHom))
+
+lemma nsmul_comp_intToZMod (n : ℕ) :
+    (n • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} ℤ))) ≫ intToZMod.{u} n = 0 := by
+  ext x
+  simp [intToZMod]
+
+/-- The short exact sequence `0 ⟶ ℤ ⟶ ℤ ⟶ ℤ/n ⟶ 0` of abelian groups, for `n ≠ 0`. -/
+lemma shortExact_intToZMod (n : ℕ) (hn : n ≠ 0) :
+    (ShortComplex.mk _ _ (nsmul_comp_intToZMod.{u} n)).ShortExact := by
+  refine ShortComplex.ShortExact.mk' ?_ ?_ ?_
+  · rw [ShortComplex.ab_exact_iff]
+    intro x hx
+    have hx' : ((x.down : ℤ) : ZMod n) = 0 := congrArg ULift.down hx
+    obtain ⟨m, hm⟩ := (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).1 hx'
+    exact ⟨ULift.up m, ULift.ext _ _ (by
+      change (n • ULift.up m : ULift.{u + 1} ℤ).down = x.down
+      simp [hm])⟩
+  · rw [AddCommGrpCat.mono_iff_injective]
+    intro a b hab
+    have : (n : ℤ) * a.down = n * b.down := by
+      simpa [nsmul_eq_mul] using congrArg ULift.down hab
+    exact ULift.ext _ _ (mul_left_cancel₀ (by exact_mod_cast hn) this)
+  · rw [AddCommGrpCat.epi_iff_surjective]
+    intro y
+    obtain ⟨m, hm⟩ := ZMod.intCast_surjective y.down
+    exact ⟨ULift.up m, ULift.ext _ _ hm⟩
+
+variable (X : Scheme.{u})
+
+/-- The étale sheaf `i_{x*} ℤ/n` on `X`: the pushforward of the constant sheaf `ℤ/n` along
+`Spec κ(x) ⟶ X`. -/
+noncomputable def pointConstantZMod (x : X) (n : ℕ) :
+    Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+  (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).obj
+    ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))))
+
+/-- The reduction map `i_{x*} ℤ ⟶ i_{x*} ℤ/n`. -/
+noncomputable def pointConstantIntToZMod (x : X) (n : ℕ) :
+    X.pointConstantInt x ⟶ X.pointConstantZMod x n :=
+  (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).map
+    ((constantSheaf _ AddCommGrpCat.{u + 1}).map (intToZMod n))
+
+/-- **`i_{x*} ℤ/n` is the cokernel of `n` on `i_{x*} ℤ`** for a closed point `x`: the constant
+sheaf functor is exact, and so is `i_{x*}`, the pushforward along a closed immersion. -/
+theorem exists_isColimit_pointConstantIntToZMod {x : X} (hx : IsClosed {x}) (n : ℕ)
+    (hn : n ≠ 0) :
+    ∃ (w : (n • 𝟙 (X.pointConstantInt x)) ≫ X.pointConstantIntToZMod x n = 0),
+      Nonempty (IsColimit (CokernelCofork.ofπ _ w)) := by
+  have := isClosed_singleton_iff_isClosedImmersion.mp hx
+  set G := Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)
+  set K := constantSheaf (Spec (X.residueField x)).smallEtaleTopology AddCommGrpCat.{u + 1}
+  have : PreservesFiniteLimits K :=
+    inferInstanceAs (PreservesFiniteLimits (Functor.const _ ⋙ presheafToSheaf _ _))
+  have hS₁ := (shortExact_intToZMod.{u} n hn).map_of_exact K
+  have := hS₁.mono_f
+  have := hS₁.epi_g
+  have hS₂ : ((ShortComplex.mk _ _ (nsmul_comp_intToZMod.{u} n)).map K |>.map G).Exact :=
+    hS₁.exact.map_of_mono_of_preservesKernel G hS₁.mono_f inferInstance
+  have : Epi (((ShortComplex.mk _ _ (nsmul_comp_intToZMod.{u} n)).map K |>.map G).g) :=
+    G.map_epi _
+  have hf : G.map (K.map (n • 𝟙 (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) =
+      n • 𝟙 (X.pointConstantInt x) := by
+    rw [Functor.map_nsmul, Functor.map_nsmul, CategoryTheory.Functor.map_id,
+      CategoryTheory.Functor.map_id]
+    rfl
+  exact ⟨_, ⟨CokernelCofork.isColimitOfπOfEq hf _ hS₂.gIsCokernel⟩⟩
+
+end Point
 
 end AlgebraicGeometry.Scheme
