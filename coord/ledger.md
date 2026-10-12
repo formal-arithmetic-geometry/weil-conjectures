@@ -9616,3 +9616,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:34 L: merged deliver/T2/Sheaf.RingTheory.CyclicGlobalDimension (stage 3; reviewer PASS; first push; landing 20261012T213438-L-1178890 (proof); batch 20261012T213434; modules 1; new nodes 0)
 - 21:34 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentation (stage 3; reviewer PASS; first push; landing 20261012T213438-L-1179047 (proof); batch 20261012T213434; modules 1; new nodes 0)
 - 21:34 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AffineSheafResolutionOfRingModel (stage 3; reviewer PASS; first push; landing 20261012T213439-L-1179242 (proof); batch 20261012T213434; modules 1; new nodes 0)
+- 21:37 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-be589, head be58923be) C6: The delivery introduces a cycle between `lem-pd-glued-effective-model-charts` and)
