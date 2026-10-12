@@ -13,25 +13,37 @@
  ],
  "proof": [
   {
-   "text": "Identify the restriction of the concrete tensor pullback over g⁻¹(V) with tensor pullback along the restricted ringed-space morphism g⁻¹(V)→V. Opens contained in V are cofinal in the inverse-image computation on opens contained in g⁻¹(V); tensor products and sheafification commute with restriction.",
+   "text": "Put F = Opens.map g and U = F(V). The functor Over.post F from the slice over V to the slice over U is continuous: F is representably flat, hence preserves finite limits; Over.post F preserves finite limits, hence is flat, and cover preservation descends to slices. It is final because it preserves terminal objects. Restrict g-sharp to obtain the concrete slice-site ring map.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The inverse-image/extension-of-scalars composite along that restricted morphism is a left adjoint by the underived tensor pullback theorem, hence preserves coproducts and cokernels. It sends the unit to the unit by b tensor a ↦ b g-sharp(a), with inverse b ↦ b tensor 1. Apply Mathlib SheafOfModules.Presentation.map to p, then Presentation.ofIsIso along the restriction comparison. This supplies the required global presentation.",
+   "text": "Compare F composed with Over.star U and Over.star V composed with Over.post F using the inverse of the product comparison of F. Pushforward composition and pushforwardCongr₂ give an isomorphism between direct image after the right adjoint of restriction over U and the right adjoint of restriction over V after slice direct image. For the ring maps, compose structure-sheaf restrictions along the product comparison and the second projection; prodComparison_snd reduces this to the naturality identity of g-sharp at prod.snd. Thus the comparison respects scalar actions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose the concrete tensor functor and its adjunction furnished by the underived theorem. Compose this adjunction with the restriction adjunction over U. Compare with restriction over V followed by the slice module-pullback adjunction. The preceding right-adjoint isomorphism and Adjunction.leftAdjointUniq identify these left adjoints. At G, transport along the prescribed object equality of the tensor functor to obtain the isomorphism from slice pullback of G.over V to the displayed concrete tensor pullback over U.",
    "uses": [
     "lem-pc-ringed-space-tensor-pullback-underived"
    ],
    "elementary": false
+  },
+  {
+   "text": "The slice module pullback is a left adjoint and therefore preserves colimits. Since Over.post F is final, Mathlib pullbackObjUnitToUnit is an isomorphism. Apply Presentation.map to p with the inverse unit isomorphism, and transport its presentation through the comparison with Presentation.ofIsIso.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-ringed-space-tensor-pullback-underived"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/01BG",
-  "place": "Lemma 17.10.4"
+  "place": "Lemma 17.10.4; restriction comparison implemented by uniqueness of left adjoints and the product comparison on opens"
  },
  "mathlib_searches": [
   {
@@ -102,10 +114,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T144059-L-2090941",
-  "kind": "interface",
+  "landing": "20261012T194105-L-453142",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
