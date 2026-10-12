@@ -14,15 +14,14 @@
  ],
  "proof": [
   {
-   "text": "Identify j_V!Z and j_U!Z with sheafifications of the slice extension presheaves of C=Z_X, by the constant integer open-extension comparison. On an open W, send the summand indexed by an arrow W→V to the summand indexed by W→V→U, acting identically on C(W). Naturality follows because both restriction operations precompose the arrow and restrict the same section. Thus there is a morphism of extension presheaves.",
+   "text": "Apply nested_slice_extension_stalks to the constant integer sheaf on X to get a map g of slice extension presheaves which is an isomorphism on every stalk in V.",
    "uses": [
-    "new-node-constant-integer-open-extension-comparison",
-    "def-weil-pbc-site-extension-by-zero-presheaf"
+    "new-lem-sc-nested-slice-extension-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "For W⊆V, both sums have one summand C(W), and the index map identifies them by the identity. At x∈V, neighborhoods contained in V are cofinal, hence the induced presheaf stalk map is an isomorphism. The sheafification units are stalk isomorphisms, naturally in the presheaf. Conjugate the sheafified map by the two comparison isomorphisms to obtain f. Its stalk map is an isomorphism at every point of V. V empty gives a vacuous condition, and V=U gives the identity index map.",
+   "text": "Use the constant integer open-extension comparison for V and U. Sheafify g and conjugate by these comparison isomorphisms. Naturality of the sheafification units and their stalk isomorphisms show that the sheafified g has isomorphic stalk maps in V; the two comparison maps preserve this property.",
    "uses": [
     "new-node-constant-integer-open-extension-comparison",
     "lem-weil-pbc-stalk-sheafification-space"
@@ -31,15 +30,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-extension-by-zero-presheaf",
-  "lem-weil-pbc-stalk-sheafification-space",
-  "new-node-constant-integer-open-extension-comparison"
+  "new-lem-sc-nested-slice-extension-stalks",
+  "new-node-constant-integer-open-extension-comparison",
+  "lem-weil-pbc-stalk-sheafification-space"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
   "place": "Lemma 0A38, final paragraph, and Lemma 00A5(3); https://stacks.math.columbia.edu/tag/0A38 and https://stacks.math.columbia.edu/tag/00A5",
-  "note": "Follows the parent node plan; interface and expanded glue argument written by A2."
+  "note": "S1 stage-3 decomposition: separate the presheaf direct-sum/cofinal-neighborhood step, then prove the sheafification and comparison transport in Lean."
  },
  "mathlib_searches": [
   {
@@ -118,9 +117,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T085210-L-1639",
+  "landing": "20261012T110317-L-621215",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
