@@ -41,6 +41,8 @@ theorem fpqcCover_specMap_algebraMap_of_field
       Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧
       QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧
       Presieve.singleton (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∈
-        Scheme.fpqcPrecoverage (Spec (.of k)) := sorry
+        Scheme.fpqcPrecoverage (Spec (.of k)) := by
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_⟩
+  exact Scheme.Hom.singleton_mem_fpqcPrecoverage _
 
 end AlgebraicGeometry
