@@ -1,0 +1,117 @@
+{
+ "id": "lem-stage3-inverse-mate-equivalences",
+ "kind": "statement",
+ "title": "Inverse mates of invertible squares along equivalences are invertible",
+ "statement": "theorem isIso_inverseMate_of_equivalences\n    {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}\n    [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]\n    {G : C ⥤ E} {H : D ⥤ F} [G.IsEquivalence] [H.IsEquivalence]\n    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}\n    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\n    (beta : R₁ ⋙ G ≅ H ⋙ R₂) :\n    IsIso (((mateEquiv adj₁ adj₂).symm beta.hom).natTrans)",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65; the natural Hom-bijection proof, with Mathlib Adjunction.Mates.unit_mateEquiv_symm"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For x and z choose z0=H.inv(z) with counit isomorphism H(z0) to z. Full faithfulness of H, adj1, full faithfulness of G, beta(z0), and adj2 give a bijection Hom(H(L1(x)),z) to Hom(L2(G(x)),z).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inverse-mate unit equation and naturality of beta identify this bijection with precomposition by the inverse-mate component alpha(x).",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Surjectivity at z=L2(G(x)) gives a left inverse of alpha(x); injectivity at z=H(L1(x)) gives the other inverse equation. Thus every component is invertible, hence alpha is invertible. This is the checked Mathlib isIso_of_coyoneda_map_bijective argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent J1 second reader",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65; the natural Hom-bijection proof, with Mathlib Adjunction.Mates.unit_mateEquiv_symm",
+  "note": "Fully proved in Lean; no sorry in this new generic tool."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse mate of an isomorphism is invertible when the two vertical functors are equivalences",
+   "results": "Service returned Internal Server Error; no absence conclusion inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of right adjoints commuting with equivalences induces a left adjoint isomorphism compatible with units",
+   "results": "Generic composition and adjunction tools; no exact inverse-mate invertibility theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, unit_mateEquiv_symm and iterated_mateEquiv_conjugateEquiv_symm supply the mate and unit equation. The last gives a composite-transport alternative, not this immediate invertibility statement.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "grep",
+   "query": "mate|conjugate|lift.*[Ff]ully[Ff]aithful",
+   "results": "Mathlib Adjunction.Mates supplies mate and conjugate tools; no inverse-mate equivalence invertibility theorem. Upstream isIso_map_mateEquiv_app_of_isIso proves a related forward-mate result for fully faithful left adjoints.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleRestrictionUnit",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-etale-restriction-unit",
+   "place": "second reading: genuine reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InverseMateEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/InverseMateEquivalence.lean",
+  "declaration": "CategoryTheory.isIso_inverseMate_of_equivalences",
+  "statement": "theorem isIso_inverseMate_of_equivalences\n    {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}\n    [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]\n    {G : C ⥤ E} {H : D ⥤ F} [G.IsEquivalence] [H.IsEquivalence]\n    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}\n    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\n    (beta : R₁ ⋙ G ≅ H ⋙ R₂) :\n    IsIso (((mateEquiv adj₁ adj₂).symm beta.hom).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060740-L-2908600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060740-L-2908600",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

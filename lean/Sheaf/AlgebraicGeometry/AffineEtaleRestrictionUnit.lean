@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
+import Sheaf.CategoryTheory.InverseMateEquivalence
 
 /-! # Affine étale inverse-image restriction units -/
 
@@ -60,6 +62,60 @@ theorem affineEtale_inverseImage_restriction_unit
           (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).unit).app
           G).hom.app (op V.obj) s)) =
         ((a h).unit.app (((fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1))
-          (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)).hom.app (op V) s) := by sorry
+          (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)).hom.app (op V) s) := by
+  classical
+  let rho := fun S : Scheme.{u} ↦
+    (fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type (u + 1))
+      (fullAffineEtaleTopology S) S.smallEtaleTopology
+  have hrho (S : Scheme.{u}) : (rho S).IsEquivalence :=
+    fullAffineEtale_large_sets_equivalence S
+  let adj := fun {X Y : Scheme.{u}} (h : Y ⟶ X) ↦
+    Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1))
+      (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)
+  have hpb {X Y : Scheme.{u}} (h : Y ⟶ X) :
+      (MorphismProperty.Over.pullback @Etale ⊤ h).IsContinuous
+        X.smallEtaleTopology Y.smallEtaleTopology :=
+    Scheme.isContinuous_overPullback @Etale @Etale le_rfl h
+  have hcomp {X Y : Scheme.{u}} (h : Y ⟶ X) :
+      (fullAffineEtaleInclusion X ⋙
+        MorphismProperty.Over.pullback @Etale ⊤ h).IsContinuous
+        (fullAffineEtaleTopology X) Y.smallEtaleTopology :=
+    Functor.isContinuous_comp _ _ (fullAffineEtaleTopology X)
+      X.smallEtaleTopology Y.smallEtaleTopology
+  have hcompU {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] :
+      (U h ⋙ fullAffineEtaleInclusion Y).IsContinuous
+        (fullAffineEtaleTopology X) Y.smallEtaleTopology :=
+    Functor.isContinuous_comp _ _ (fullAffineEtaleTopology X)
+      (fullAffineEtaleTopology Y) Y.smallEtaleTopology
+  let beta := fun {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] ↦
+    (Functor.sheafPushforwardContinuousComp (fullAffineEtaleInclusion X)
+      (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1))
+      (fullAffineEtaleTopology X) X.smallEtaleTopology Y.smallEtaleTopology) ≪≫
+    (Functor.sheafPushforwardContinuousIso (t h).symm (Type (u + 1))
+      (fullAffineEtaleTopology X) Y.smallEtaleTopology) ≪≫
+    (Functor.sheafPushforwardContinuousComp (U h) (fullAffineEtaleInclusion Y)
+      (Type (u + 1)) (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)
+      Y.smallEtaleTopology).symm
+  let alpha := fun {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] ↦
+    ((mateEquiv (adj h) (a h)).symm (beta h).hom).natTrans
+  have halpha {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] : IsIso (alpha h) :=
+    isIso_inverseMate_of_equivalences (adj h) (a h) (beta h)
+  refine ⟨fun h ↦ (asIso (alpha h)).symm, ?_⟩
+  intro X Y h _ G V s
+  have eqn := unit_mateEquiv_symm (adj h) (a h) (beta h).hom G
+  have sections := congrArg (fun f ↦ f.hom.app (op V) s) eqn
+  change (((etaleSetPullback h).obj G).obj.map ((t h).hom.app V).op
+      (((adj h).unit.app G).hom.app (op V.obj) s)) =
+    ((alpha h).app G).hom.app (op ((U h).obj V))
+      (((a h).unit.app ((rho X).obj G)).hom.app (op V) s) at sections
+  change ((asIso (alpha h)).inv.app G).hom.app (op ((U h).obj V))
+      (((etaleSetPullback h).obj G).obj.map ((t h).hom.app V).op
+        (((adj h).unit.app G).hom.app (op V.obj) s)) =
+    ((a h).unit.app ((rho X).obj G)).hom.app (op V) s
+  rw [sections]
+  exact congrArg (fun f ↦ f.hom.app (op ((U h).obj V))
+    (((a h).unit.app ((rho X).obj G)).hom.app (op V) s))
+    ((asIso (alpha h)).hom_inv_id_app G)
 
 end AlgebraicGeometry.Scheme
