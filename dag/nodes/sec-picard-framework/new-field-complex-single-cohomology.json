@@ -13,26 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Apply moduleSpecΓFunctor, an additive equivalence from module sheaves on a field spectrum to R-vector spaces. It preserves homology. Write V_n for the term, Z_n for cycles and B_n for boundaries. Choose vector-space complements H_n of B_n inside Z_n and C_n of Z_n inside V_n. Then V_n=B_n⊕H_n⊕C_n; projection Z_n→H_n identifies H_n with the homology in degree n.",
+   "text": "The proven global-sections equivalence isEquivalence_moduleSpecΓFunctor identifies module sheaves on Spec R with R-vector spaces. Module.projective_of_isSemisimpleRing and Module.injective_of_isSemisimpleRing, together with categorical reflection along a fully faithful equivalence, prove every module sheaf projective and injective. This uses only existing proved source-library and Mathlib results.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The differential restricts to an isomorphism C_n→B_(n+1). Define the homotopy V_n→V_(n-1) to be its inverse on B_n, and zero on H_n and C_n. Projection onto H_n and inclusion of H_n are chain maps. On B_n, d h is the identity and h d is zero; on C_n, h d is the identity and d h is zero; on H_n both are zero. Thus d h+h d=id-inclusion∘projection, whereas projection∘inclusion=id.",
+   "text": "For H=H^j(P), lift id_H across π:Z^j(P)→H using projectivity to obtain s with s≫π=id_H. Extend π across the monomorphism i:Z^j(P)→P^j using injectivity to obtain r with i≫r=π. The equations d≫r=0 and s≫i≫d=0 give a:P→single_j(H) and b:single_j(H)→P. Componentwise, b≫a=id_single: in degree j this follows from s≫i≫r=s≫π=id_H, and in every other degree the single complex term is zero.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The assumed homology vanishing for all integer degrees other than j forces the corresponding H_n summands to be zero. Identify H_j with the actual homology, giving a homotopy equivalence to its single complex in degree j. Transport maps and the two homotopies along the inverse global-sections equivalence and its unit isomorphism. Naturality of the unit and preservation of compositions and sums establish the same identities for sheaves. This argument is degreewise and applies to unbounded or acyclic complexes too.",
+   "text": "The cycles map of a≫b in degree j is π≫s, by cancelling the cycles inclusion. Cancelling π in homology naturality shows H^j(a≫b)=id. In all other degrees the hypothesis gives a zero homology object, whose endomorphisms agree. Therefore every homology map of a≫b-id_P is zero.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-split-category-null-homotopy to a≫b-id_P and convert the resulting homotopy to zero via Homotopy.equivSubZero into a homotopy a≫b~id_P. Together with b≫a=id_single, this is the required HomotopyEquiv. The proof remains degreewise for unbounded complexes and also applies when H is zero.",
+   "uses": [
+    "lem-pc-split-category-null-homotopy"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-split-category-null-homotopy"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Expanded vector-space contraction from lem-pc-finite-free-single-field-fibre proof step 2; the formulas are recorded in the module docstring."
+  "place": "Field-complex contraction in step 4, as expanded in the original node. B2 implements it by split-category null homotopies and projective/injective lifts rather than a termwise homology complex."
  },
  "mathlib_searches": [
   {
@@ -118,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-e8b9d",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T184323-L-4011726",
+  "landing": "20261012T202229-L-700573",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures match all three delivered nodes; recorded interface repair is justified; all delivered modules and direct importers compile; original caller fails exactly as reported; adaptation is minimal; axiom checks agree with the single recorded remaining sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

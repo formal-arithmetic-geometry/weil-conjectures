@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-split-category-null-homotopy",
+ "kind": "statement",
+ "title": "Homology-zero cochain maps in a split abelian category are null homotopic",
+ "statement": "Let C be an abelian category [def-sp-abelian] in which every object is projective (every map from it lifts across an epimorphism) and injective [def-sp-injective-resolutions]. Let K and L be arbitrary integer-indexed cochain complexes in C, meaning objects K^i and L^i with degree-one differentials whose consecutive composites vanish. A cochain map f:K→L inducing the zero map on H^q=ker(d^q)/im(d^(q-1)) for every integer q admits a degree-minus-one homotopy A with f=d_K A+A d_L. No boundedness or concentration of homology is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof step 4: boundary/complement contractions, expanded in new-field-complex-single-cohomology steps 1 and 2; the abstract split-category formulation is written and proved by B2."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Choose r_i:K^i→Z_K^i retracting the cycles inclusion by Injective.factorThru. The homology-zero condition and homology naturality show cyclesMap(f)_i≫π_L=0. The exact sequence L^(i-1)→Z_L^i→H_L^i, obtained from homologyIsCokernel, lets ShortComplex.Exact.liftFromProjective lift cyclesMap(f)_i to t_i:Z_K^i→L^(i-1). Consequently t_i≫d_L=i_K≫f_i.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set A_i=r_i≫t_i and let T=d_K A+A d_L, the chain map Homotopy.nullHomotopicMap'. The nullHomotopy' constructor proves T null homotopic. Restricting T to cycles kills the first summand and uses i_K≫r_i=id in the second, so i_K≫T_i=i_K≫f_i. Hence g=f-T kills cycles. Commutation with differentials gives g_i≫d_L=d_K≫g_(i+1)=0, because d_K factors through cycles.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Inclusion_K≫(id-r_i≫inclusion_K)=0. The exact sequence Z_K^i→K^i→K^(i+1), obtained from cyclesIsKernel, and injectivity give u_i:K^(i+1)→K^i with d_K≫u_i=id-r_i≫inclusion_K, by ShortComplex.Exact.descToInjective. Put B_i=u_(i-1)≫g_(i-1). Then d_K B=g because g kills cycles; B d_L=0 because g has image in cycles. Thus Homotopy.nullHomotopicMap'(B)=g and nullHomotopy'(B) contracts g. Add this to the homotopy of T; the equality f=T+g completes the proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "B2 abstract categorical implementation of the vector-space splitting contraction in proof step 4; complete Lean proof from Mathlib exact lifting and homotopy constructors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category where every object is projective and injective a map of unbounded cochain complexes inducing zero on homology is null homotopic",
+   "results": "Service unavailable: Internal Server Error. The other kinds of search and local source reading were completed.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a split abelian category any chain map inducing zero on homology is null homotopic",
+   "results": "ShortComplex.homologyMap_nullHomotopic and left/right variants prove the converse for short complexes, not this result for unbounded cochain complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*homologyMap|homologyMap.*homotopy|homotopy.*zero.*homology; rg nullHomotopy and homologyMap_zero in Sheaf and WeilConjectures; blueprint_refs search null homotopy and homology splitting",
+   "results": "Homotopy.homologyMap_eq and short-complex lemmas prove invariance or the converse. No existing general null-homotopy theorem found. Mathlib supplies Exact.liftFromProjective, Exact.descToInjective, homologyIsCokernel, cyclesIsKernel, and nullHomotopy' used in the complete proof. No blueprint duplicate found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldComplexSingleCohomology",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-single-field-fibre",
+   "place": "Proof step 2: contraction of boundary/complement pairs over the residue field, before choosing a cohomology basis.",
+   "via": [
+    "new-field-complex-single-cohomology",
+    "new-field-complex-homotopy-normal-form"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SplitCategoryNullHomotopy",
+  "file": "lean/Sheaf/CategoryTheory/SplitCategoryNullHomotopy.lean",
+  "declaration": "CochainComplex.nonempty_nullHomotopy_of_homologyMap_zero",
+  "statement": "theorem nonempty_nullHomotopy_of_homologyMap_zero\n    {C : Type*} [Category* C] [Abelian C]\n    [∀ X : C, Projective X] [∀ X : C, Injective X]\n    {K L : CochainComplex C ℤ} (f : K ⟶ L)\n    (hf : ∀ q : ℤ, HomologicalComplex.homologyMap f q = 0) :\n    Nonempty (Homotopy f 0)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T202229-L-700573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T202229-L-700573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
