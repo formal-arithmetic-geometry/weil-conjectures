@@ -15,16 +15,67 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Split the proper base-change argument by the displayed degree restriction and apply the corresponding intermediate theorem.",
+   "text": "Write the base-field morphism as Spec.map of a ring homomorphism and give k' its induced k-algebra structure. The constant module sheaf is killed by r: r vanishes in Λ/(r). Forgetting modules preserves this identity, so its underlying abelian sheaf A is torsion. Split according to whether (r : k) is zero. These statements are proved by the private helpers constant_killed and forget_killed, including when Λ/(r) is zero.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "If r vanishes in k, primality gives CharP k r, and injectivity of the field homomorphism gives CharP k' r. Use baseChange_curve and the homeomorphism of h.isoPullback to give f' the curve structure. Smoothness is stable under base change. A connected scheme over the separably closed k is geometrically connected, and this property is stable under base change, so C' is connected.",
+   "uses": [
+    "lem-sc-base-change-curve",
+    "lem-weil-separably-closed-geometrically-connected"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In characteristic r and degree two, apply subsingleton_sheafH_constantModSheaf_of_charP_two over each field. constantCommuteCompose, inverse image of constant sheaves, and their inverses identify the pulled-back underlying abelian sheaf with the underlying constant module sheaf on C'. Apply Sheaf.functorH to that isomorphism to transport target vanishing. Any map between these zero groups is injective and surjective.",
+   "uses": [
+    "lem-sc-c3-degree-two",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In characteristic r and q different from two, the hypothesis 2 ≤ q gives 3 ≤ q. The existing source-library theorem IsCurve.subsingleton_sheafH_of_three_le (the Ext-cohomology form of lem-sc-cohomological-dimension) makes source and target zero; the pulled-back abelian sheaf is torsion by Etale.isTorsion_upperStar. Construct injectivity by subsingleton elimination and surjectivity with the zero preimage.",
+   "uses": [
+    "lem-sc-cohomological-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If (r : k) is nonzero, use prime injective cohomology comparison. On the standard fibre product, its degree-zero hypothesis is isIso_globalSectionsUpperStarMap_algClosed_extension and its positive-degree hypothesis is subsingleton_cohomology_upperStar_injective_algClosed_extension. The private helper standard_prime_comparison combines them for any module sheaf killed by r.",
+   "uses": [
+    "lem-weil-pbc-prime-injective-cohomology-comparison",
+    "lem-sc-algclosed-extension-module-sections",
+    "lem-sc-algclosed-extension-injective-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this standard comparison to the identity inverse image F₀ of the constant module sheaf; additivity of inverse image proves r • id F₀ = 0. Use exists_addEquiv_cohomology_restrictionSquare with i = id C and j = h.isoPullback.inv. Both vertical restriction maps are bijective by topological invariance for isomorphisms. Its commuting equation identifies the arbitrary square map with the standard map via the two additive equivalences b₁ and b₂. For injectivity, apply b₁ and the standard comparison; for surjectivity, lift b₂(y) by the standard map and then apply b₁ inverse. The equation proves that this preimage maps to y.",
+   "uses": [
+    "lem-weil-pbc-cohomology-restriction-square-transport",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-base-change-curve",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lem-sc-c3-degree-two",
+  "lemma-constructible-pullback-constant",
+  "lem-sc-cohomological-dimension",
+  "lem-weil-pbc-prime-injective-cohomology-comparison",
+  "lem-sc-algclosed-extension-module-sections",
+  "lem-sc-algclosed-extension-injective-acyclic",
+  "lem-weil-pbc-cohomology-restriction-square-transport",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "stage-3 decomposition",
-  "place": "C7 degree split"
+  "document": "Existing library characteristic split: Stacks Tags 03SC, 0363, 095T and 0F1C; blueprint lem-sc-c3",
+  "place": "W2 stage 3: characteristic-r degree-two and higher vanishing, prime-to-characteristic injective comparison, and transport through h.isoPullback"
  },
  "mathlib_searches": [
   {
@@ -88,10 +139,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T184343-L-4019871",
-  "kind": "interface",
+  "landing": "20261012T194152-L-469017",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
