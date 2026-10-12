@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-affine-universal-tensor-exact",
+ "kind": "statement",
+ "title": "Square-zero affine base-change tests detect module tensor exactness",
+ "statement": "Let S be an affine scheme [def-pc-scheme], C a cochain complex of quasi-coherent O_S-modules [def-pc-cochain-complex-modules] [pqf-def-coherent], and a an integer. Put A = Gamma(S,O_S) and let P be the complex obtained by applying the global-sections evaluation functor termwise. If H^a(g*C) is zero for every scheme map g:S′ -> S [def-pc-base-change], then for every A-module N the ordinary module tensor complex P tensor_A N is exact in degree a. No flatness, boundedness or finite-presentation hypothesis is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01IB (affine equivalence), Tag 01I9 (affine pullback); steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat, square-zero test."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "pqf-def-coherent",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The affine equivalence identifies C with the sheafification of P. Kernels and cokernels of quasi-coherent sheaves are quasi-coherent; hence this equivalence computes homology of these complexes as module homology.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed A-module N use the explicit trivial square-zero A-algebra B=A direct-sum N: (a,x)(b,y)=(ab,ay+bx), with unit (1,0) and the inclusion of A. The spectrum of its inclusion maps to S through the canonical affine isomorphism. The natural affine pullback comparison identifies the global-sections complex of g*C with B tensor_A P. Compatibility with every differential follows from naturality. The homology of this complex is zero by the hypothesis and the preceding affine equivalence.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "As A-modules N is a retract of B, via x -> (0,x) and (a,x) -> x. Tensor these two A-linear maps with P in every degree, and commute factors to use right tensoring. They are complex maps and their composite is the identity. Applying homology gives a retraction of H^a(P tensor N) from the zero module. Therefore this homology is zero, equivalently the tensor complex is ExactAt a. The splitting uses only additive A-linearity; the projection to N need not be a ring map.",
+   "uses": [
+    "lem-weil-pbc-retract-of-zero-object"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-retract-of-zero-object",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01IB (affine equivalence), Tag 01I9 (affine pullback); steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat, square-zero test.; detailed affine specialization by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat sheaf opcycles from global sections flatness and universal tensor exactness on affine schemes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal homology vanishing after scheme pullback implies exactness of global sections complex tensored with any module on an affine scheme",
+   "results": "Module.Flat tensor exactness criteria and faithfully flat tensor detection; no square-zero scheme testing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme a quasi coherent complex with flat module opcycles in its global sections complex has flat sheaf opcycles",
+   "results": "Scheme.Hom.flat_appLE, AlgebraicGeometry.flat_iff, and module tensor flatness criteria; none transfers opcycles from affine global sections.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\", \"Flat\"",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_universal_tensor_exact|affine_opcycles_flat_from_sections|IsFlatOver|pullbackSpecΓEquiv",
+   "results": "msearch grep returned 0 hits. Direct rg found pullbackSpecΓEquiv, tildeCokernelIso, isFlat_tilde and isFlat_of_isFlatOver_identity, but none states either required comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineUniversallyExactOpcyclesFlat",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), construction of a flat cohomology model: square-zero affine tests in steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat.",
+   "via": [
+    "lem-pc-affine-universally-exact-opcycles-flat",
+    "lem-pc-affine-flat-connective-truncation",
+    "lem-pc-proper-flat-finite-presentation-model",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineUniversalTensorExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineUniversalTensorExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_universal_tensor_exact",
+  "statement": "theorem affine_universal_tensor_exact (S : Scheme.{u}) (hS : IsAffine S)\n    (C : CochainComplex S.Modules ℤ) (a : ℤ)\n    (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)\n    (hexact : ∀ {S' : Scheme.{u}} (g : S' ⟶ S),\n      IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology a))\n    (N : ModuleCat.{u} Γ(S, ⊤)) :\n    (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj\n      (((SheafOfModules.evaluation (R := S.ringCatSheaf) (.op ⊤) :\n        S.Modules ⥤ ModuleCat.{u} Γ(S, ⊤)).mapHomologicalComplex\n        (.up ℤ)).obj C)).ExactAt a",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T235554-L-2201213",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T235554-L-2201213",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

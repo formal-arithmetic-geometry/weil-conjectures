@@ -15,50 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Set A=Gamma(S,O_S) and use the affine quasi-coherent equivalence to identify C with the sheafification of its global-sections complex P. The given IsFlatOver condition at U=V=S makes each P^n flat over A. The equivalence identifies homology of quasi-coherent complexes with homology of their module complexes.",
+   "text": "Define F to be evaluation on the top open and P=F(C). Evaluate each term’s IsFlatOver(identity) at V=U=S. Identify the identity appLE ring map with the identity, so the induced scalar action equals the native global-section action. This gives Module.Flat A (P.X n) for every n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_universal_tensor_exact in degree -1 to each A-module N. Its tensor complex is ExactAt (0-1).",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-pc-affine-universal-tensor-exact"
    ],
    "elementary": false
   },
   {
-   "text": "For an arbitrary A-module N form the square-zero A-algebra A direct-sum N with product (a,x)(b,y)=(ab,ay+bx). Pullback to its spectrum identifies the module complex with P tensor_A (A direct-sum N). Restricting scalars gives P direct-sum (P tensor_A N). Universal degree-minus-one vanishing therefore forces H^(-1)(P tensor_A N)=0: this homology is a direct summand of zero. The splitting maps are induced by the two additive summand inclusions and projections and commute with each differential.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pc-base-change",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply Module.Flat.opcycles_of_exactAt to P at a=0. Exactness of the preceding tensor complex for every N is exactly the hypothesis just obtained. This proves flatness over A of Q=P.opcycles 0.",
+   "text": "Apply Module.Flat.opcycles_of_exactAt to P at zero, using the term flatness and tensor exactness just obtained.",
    "uses": [
     "lem-pc-module-flat-opcycles-tor-criterion"
    ],
    "elementary": false
   },
   {
-   "text": "The tilde functor preserves cokernels, identifying C.opcycles 0 with the associated sheaf of Q. Its stalk at a prime is the corresponding localization of Q, and is flat over the localized structure ring. On each affine open U of S, the local flatness criterion makes Gamma(U,C.opcycles 0) flat over Gamma(U,O_S). For affine U contained in affine V, the open immersion U -> V makes Gamma(U,O_S) flat over Gamma(V,O_S); transitivity therefore proves flatness of Gamma(U,C.opcycles 0) over Gamma(V,O_S). These are exactly all tests in IsFlatOver(identity). Zero rings, empty schemes and zero complexes are included.",
+   "text": "Apply affine_opcycles_flat_from_sections at zero using quasi-coherence of C^(-1) and C^0 and the module opcycles flatness. This gives exactly the unchanged IsFlatOver(identity) conclusion.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-pc-affine-sections-flat-over-base"
+    "lem-pc-affine-opcycles-flat-from-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-affine-sections-flat-over-base",
-  "lem-pc-module-flat-opcycles-tor-criterion",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-pc-affine-opcycles-flat-from-sections",
+  "lem-pc-affine-universal-tensor-exact",
+  "lem-pc-module-flat-opcycles-tor-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0653 (tensor exactness implies flat opcycles) and 01IB (affine quasi-coherent equivalence); https://stacks.math.columbia.edu/tag/0653 and https://stacks.math.columbia.edu/tag/01IB; the specialized argument was written by U2 after reading these sources online"
+  "place": "Tags 0653 and 01IB; original four-step square-zero argument made into Lean by H1. Steps 1--2 and 4 are separated as two strictly partial comparison statements."
  },
  "mathlib_searches": [
   {
@@ -147,9 +138,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T223421-L-1642388",
+  "landing": "20261012T235554-L-2201213",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
