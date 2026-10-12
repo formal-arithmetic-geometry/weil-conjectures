@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-smooth-proper-relative-dualizing-general] with $S=\\operatorname{Spec}k$, $X=C$, $f=g$, and $d=1$. The hypotheses match: $\\operatorname{Spec}k$ is Noetherian, and the given morphism is smooth and proper of pure relative dimension one. This gives $g^!\\mathcal O_{\\operatorname{Spec}k}\\cong\\Omega^1_{C/k}[1]$ since for $S=\\operatorname{Spec}k$ and $X=C$ the sheaf $\\Omega^1_{X/S}=\\Delta^*(\\mathcal I/\\mathcal I^2)$ of the cited node is by definition the sheaf $\\Omega^1_{C/k}$ of [def-sc-kahler-differentials].",
+   "text": "Apply smoothProper_dualizing [lem-sc-smooth-proper-relative-dualizing-general] to X=C, S=Spec(k), f=g and d=1, with the supplied R, comparison, a, adj, O and hO. Compactness and local Noetherianity of Spec(k) are inferred from the field hypothesis. This yields the derived single object of exteriorSheaf g.relativeDifferentials 1 shifted by one.",
    "uses": [
     "lem-sc-smooth-proper-relative-dualizing-general"
    ],
@@ -38,9 +38,11 @@
    }
   },
   {
-   "text": "For $d=1$, the first exterior power is the module itself, so $\\Omega^1_{C/k}=\\bigwedge^1\\Omega^1_{C/k}$ by the defining property of the exterior algebra; the shift $[d]$ is therefore $[1]$. Rewriting the conclusion of Step 1 with these identities is exactly the displayed isomorphism.",
-   "uses": [],
-   "elementary": true,
+   "text": "Use exteriorSheaf_one_iso [lem-sc-smooth-proper-curve-dualizing-exterior-one] on g.relativeDifferentials. Map this isomorphism through DerivedCategory.singleFunctor and the shift-by-one functor, then compose with the isomorphism of Step 1.",
+   "uses": [
+    "lem-sc-smooth-proper-curve-dualizing-exterior-one"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
     "place": "Tag 0BRT, Lemma 48.15.7, the $d=1$ specialization"
@@ -48,7 +50,8 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-smooth-proper-relative-dualizing-general"
+  "lem-sc-smooth-proper-relative-dualizing-general",
+  "lem-sc-smooth-proper-curve-dualizing-exterior-one"
  ],
  "proof_origin": {
   "by": "document",
@@ -140,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T060736-L-2906497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

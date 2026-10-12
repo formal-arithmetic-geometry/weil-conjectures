@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.SmoothProperRelativeDualizing
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafOneIso
 
 /-! # The dualizing complex of a smooth proper curve
 
@@ -59,6 +60,11 @@ theorem smoothProperCurve_dualizing
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings C.toRingedSpace)) 0).obj
           g.relativeDifferentials)⟦(1 : ℤ)⟧) := by
-  sorry
+  have h := smoothProper_dualizing (X := C) (S := Spec (.of k)) g 1 R comparison a adj O hO
+  obtain ⟨e⟩ := Scheme.Modules.exteriorSheaf_one_iso g.relativeDifferentials
+  obtain ⟨i⟩ := h
+  let j := Functor.mapIso
+    (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings C.toRingedSpace)) 0) e
+  exact ⟨i ≪≫ (shiftFunctor _ (1 : ℤ)).mapIso j⟩
 
 end AlgebraicGeometry
