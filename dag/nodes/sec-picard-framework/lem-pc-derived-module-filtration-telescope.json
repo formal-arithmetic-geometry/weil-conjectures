@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-derived-module-filtration-telescope",
+ "kind": "statement",
+ "title": "Mapping telescope of an exhaustive module-complex filtration",
+ "statement": "For a commutative ring R, a cochain complex L of R-modules, complexes F_n, monomorphisms i_n:F_n→L and maps s_n:F_n→F_{n+1} with s_n followed by i_{n+1} equal to i_n, suppose every element in every degree of L comes from some F_n. In the derived category [def-weil-abstract-derived-category] there is an object S and a colimit cofan exhibiting S as the coproduct of the Q(F_n), indexed by ULift ℕ in the module universe, and maps making S→S→Q(L)→S[1] a distinguished triangle.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 15.60.11 (Tag 09PB)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Form the termwise sum S_0 of F_n, its shift map induced by s_n, and p:S_0→L induced by i_n. The sequence 0→S_0 --(1-shift)→S_0 --p→L→0 is degreewise exact. Injectivity follows recursively from the component at zero. Exhaustion gives surjectivity. A finite tuple in ker p is congruent modulo im(1-shift) to one component at a common later filtration stage; monicity of that stage inclusion makes this component zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 15.60.11 (Tag 09PB)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the short exact sequence. Use [lem-pc-derived-module-direct-sums] to identify Q(S_0) with a derived coproduct; reindex along ULift ℕ≃ℕ.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 15.60.11 (Tag 09PB)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-derived-module-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 15.60.11 (Tag 09PB)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exhaustive filtration of a complex gives a distinguished mapping telescope triangle in its derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exhaustive increasing sequence of subcomplexes has a distinguished mapping telescope triangle in the derived category",
+   "results": "Search executed: 8 hits. ['DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'CategoryTheory.Triangulated.TStructure.exists_triangle', 'DerivedCategory.left_fac_of_isStrictlyGE', 'DerivedCategory.TStructure.t', 'DerivedCategory.right_fac_of_isStrictlyLE', 'DerivedCategory.mem_distTriang_iff', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE']. No matching construction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|filtered.*free|cellular",
+   "results": "Search executed: 0 hits. []. No matching construction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedModuleFreeGeneration",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-module-free-generation",
+   "place": "Mapping telescope of an exhaustive module-complex filtration",
+   "via": [
+    "lem-pc-derived-module-free-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedModuleFiltrationTelescope",
+  "file": "lean/Sheaf/CategoryTheory/DerivedModuleFiltrationTelescope.lean",
+  "declaration": "CategoryTheory.derivedModuleFiltrationTelescope",
+  "statement": "theorem derivedModuleFiltrationTelescope (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (L : CochainComplex (ModuleCat.{max u v} R) ℤ) (F : ℕ → CochainComplex (ModuleCat.{max u v} R) ℤ) (ι : ∀ n, F n ⟶ L) (step : ∀ n, F n ⟶ F (n + 1)) (hmono : ∀ n, Mono (ι n)) (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n) (hexhaustive : ∀ (k : ℤ) (x : L.X k), ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x) : ∃ (S : DerivedCategory (ModuleCat.{max u v} R)) (j : ∀ n : ULift.{max u v} ℕ, DerivedCategory.Q.obj (F n.down) ⟶ S), Nonempty (IsColimit (Cofan.mk S j)) ∧ ∃ (a : S ⟶ S) (b : S ⟶ DerivedCategory.Q.obj L) (c : DerivedCategory.Q.obj L ⟶ S⟦(1 : ℤ)⟧), Pretriangulated.Triangle.mk a b c ∈ Pretriangulated.distinguishedTriangles",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053941-L-2639183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053941-L-2639183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
