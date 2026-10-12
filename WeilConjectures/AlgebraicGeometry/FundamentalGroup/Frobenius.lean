@@ -14,7 +14,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromyFrobenius
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingMonodromy
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorLifting
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
@@ -279,7 +282,64 @@ theorem exists_picTorsionPairing {C : Scheme.{u}}
           Ψ n t ⟨(l : ℤ) • (y : Additive p.geometricFiber.Pic),
             AddSubgroup.zsmul_mem_torsionBy_pow y.2⟩ =
           ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1)) (ZMod (l ^ n)) (Ψ (n + 1) t' y) := by
-  sorry
+  have hl : l.Prime := Fact.out
+  let _ : Fintype K := Fintype.ofFinite K
+  let _ : p.geometricFiber.Over (Spec (.of (AlgebraicClosure K))) :=
+    ⟨p.geometricFiberToAlgebraicClosure⟩
+  have : SmoothOfRelativeDimension 1 (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd p _))
+  have : IsProper (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (IsProper (pullback.snd p _))
+  have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
+  have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected p
+  have : GeometricallyIntegral p := .of_geometricallyReduced_of_geometricallyIrreducible _
+  have : GeometricallyIntegral (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd p _))
+  obtain ⟨r, hr⟩ := exists_card_continuousMonoidHom_zmod_eq p l s G
+  -- `ℓ` is invertible in `K̄`
+  have hlK : (l : K) ≠ 0 := fun h ↦ (Fact.out : ringChar K ≠ l)
+    ((Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime K (ringChar K)) hl).1
+      ((ringChar.spec K l).1 h))
+  have hm (n : ℕ) : ((l ^ n : ℕ) : AlgebraicClosure K) ≠ 0 := by
+    rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
+    exact pow_ne_zero _ ((map_ne_zero _).2 hlK)
+  have hne (n : ℕ) : NeZero (l ^ n) := ⟨pow_ne_zero _ hl.ne_zero⟩
+  have heq (n : ℕ) : AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l : ℤ) ^ n) =
+      AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l ^ n : ℕ) : ℤ) := by
+    rw [Nat.cast_pow]
+  -- the geometric Galois Frobenius lies over the Frobenius of `Spec K̄`
+  have hf : p.geometricGaloisFrobenius.hom ≫
+      (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) =
+      (p.geometricFiber ↘ Spec (.of (AlgebraicClosure K))) ≫ (specGeometricFrobenius K).hom :=
+    p.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure
+  have hincl (n : ℕ) (z : AddSubgroup.torsionBy (Additive p.geometricFiber.Pic) ((l ^ n : ℕ) : ℤ)) :
+      AddSubgroup.inclusion (heq n).le ⟨z.1, (heq n).ge z.2⟩ = z :=
+    Subtype.ext rfl
+  refine ⟨fun n t ↦ haveI := hne n
+    (t.picPairing (hm n)).comp (AddSubgroup.inclusion (heq n).le), fun n t h0 ↦ ?_,
+    fun n t₁ t₂ h ↦ ?_, fun n t y ↦ ?_, fun n t t' hmon y ↦ ?_⟩
+  · have := hne n
+    refine exists_section_of_picPairing_eq_zero s G (fun k _ ↦ hr k) (hm n) t ?_
+    ext z
+    have h1 := DFunLike.congr_fun h0 ⟨z.1, (heq n).ge z.2⟩
+    rw [AddMonoidHom.comp_apply, hincl] at h1
+    exact h1
+  · have := hne n
+    exact congrArg (fun φ ↦ φ.comp (AddSubgroup.inclusion (heq n).le))
+      (picPairing_eq_of_isIsomorphic (hm n) h)
+  · have := hne n
+    rw [AddMonoidHom.comp_apply, AddMonoidHom.comp_apply,
+      picPairing_transport p.geometricGaloisFrobenius.hom (specGeometricFrobenius K).hom hf
+        (hm n) t (t.mapIso p.geometricGaloisFrobenius) (𝟙 _) (Category.id_comp _).symm
+        (by rw [Category.comp_id, Category.id_comp]; rfl)]
+    exact congrArg _ (Subtype.ext rfl)
+  · have := hne n
+    have := hne (n + 1)
+    rw [AddMonoidHom.comp_apply, AddMonoidHom.comp_apply]
+    refine Eq.trans ?_ (picPairing_zsmul_of_monodromy s G (hm n) (hm (n + 1)) t t' hmon
+      (AddSubgroup.inclusion (heq (n + 1)).le y)
+      ((heq n).le (AddSubgroup.zsmul_mem_torsionBy_pow y.2)))
+    exact congrArg _ (Subtype.ext rfl)
 
 /-- Blueprint `lem-wf-proper-curve-compatible-h1-no-fixed`: No fixed compatible `H¹`-system on a
 proper curve.
