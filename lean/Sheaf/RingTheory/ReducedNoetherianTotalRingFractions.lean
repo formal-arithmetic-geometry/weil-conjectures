@@ -14,7 +14,6 @@ import Mathlib.RingTheory.LocalProperties.Reduced
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.Algebra.Algebra.Pi
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Total ring of fractions of a reduced Noetherian ring
@@ -50,20 +49,30 @@ private theorem minimalPrime_of_disjoint
   have heq : p = q := hpq.antisymm (hqm.2 ⟨inferInstance, bot_le⟩ hpq)
   exact heq ▸ hqm
 
-/-- The component map from a total fraction ring to the minimal-prime localizations is bijective.
-
-Source: Stacks Project, Algebra, Lemma Tag 02LX, final product-decomposition step.
-The proof uses localization prime correspondence to identify all primes of the total
-fraction ring, then applies the finite product decomposition and identifies each factor.
-(blueprint: lem-weil-pbc-fraction-ring-pi-bijective-compatible)
+/-- The component map is injective; this is the injectivity half of the finite
+product decomposition of the total ring of fractions.
+(blueprint: lem-weil-pbc-fraction-ring-pi-injective)
 -/
-theorem fractionRing_pi_bijective_of_compatible
+theorem fractionRing_pi_injective_of_compatible
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]
     {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}
     (φ : ∀ i : Fin t, FractionRing R →+* Localization.AtPrime (q i).val.asIdeal)
     (hφ : ∀ i : Fin t, (φ i).comp (algebraMap R (FractionRing R)) =
       algebraMap R (Localization.AtPrime (q i).val.asIdeal)) :
-    Function.Bijective (RingHom.pi φ) := by
+    Function.Injective (RingHom.pi φ) := by
+  sorry
+
+/-- The component map is surjective; this is the surjectivity half of the finite
+product decomposition of the total ring of fractions.
+(blueprint: lem-weil-pbc-fraction-ring-pi-surjective)
+-/
+theorem fractionRing_pi_surjective_of_compatible
+    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]
+    {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}
+    (φ : ∀ i : Fin t, FractionRing R →+* Localization.AtPrime (q i).val.asIdeal)
+    (hφ : ∀ i : Fin t, (φ i).comp (algebraMap R (FractionRing R)) =
+      algebraMap R (Localization.AtPrime (q i).val.asIdeal)) :
+    Function.Surjective (RingHom.pi φ) := by
   sorry
 
 /-- The total ring of fractions of a reduced Noetherian ring is the product of
@@ -82,6 +91,16 @@ total fraction ring with the product of its localizations there. (5) The
 localization correspondence identifies each factor with the corresponding
 localization of the original ring, and uniqueness identifies the resulting map
 with the componentwise map in the statement. -/
+theorem fractionRing_pi_bijective_of_compatible
+    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]
+    {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}
+    (φ : ∀ i : Fin t, FractionRing R →+* Localization.AtPrime (q i).val.asIdeal)
+    (hφ : ∀ i : Fin t, (φ i).comp (algebraMap R (FractionRing R)) =
+      algebraMap R (Localization.AtPrime (q i).val.asIdeal)) :
+    Function.Bijective (RingHom.pi φ) := by
+  exact ⟨fractionRing_pi_injective_of_compatible φ hφ,
+    fractionRing_pi_surjective_of_compatible φ hφ⟩
+
 theorem reduced_noetherian_total_ring_fractions
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R] :
     ∃ t : ℕ,
