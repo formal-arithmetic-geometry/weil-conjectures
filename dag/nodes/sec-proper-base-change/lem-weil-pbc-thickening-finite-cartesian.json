@@ -37,10 +37,11 @@
    }
   },
   {
-   "text": "($(X\\subseteq X')\\to(S\\subseteq S')$ is a morphism of thickenings.) A finite order thickening $S\\to S'$ is a surjective closed immersion [def-sbc-first-order-thickening]. The projection $i_X:X=S\\times_{S'}X'\\to X'$ is its base change along $f'$, hence again a surjective closed immersion [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism], i.e. $X\\subseteq X'$ is a thickening; and $f'\\circ i_X=i_S\\circ f$ is the commutativity of the fibre product square. (This is More on Morphisms, Lemma 09ZU, whose proof Stacks omits; the argument given here is that omitted proof.)",
+   "text": "Choose n with i.ker^(n+1) = 0. Mathlib Scheme.IdealSheafData.support_pow_succ and support_bot give i.ker.support = the whole target. Scheme.Hom.support_ker identifies this support with the closure of the range; since i is a closed immersion its range is closed, so i is surjective. Both closed immersions and surjective scheme morphisms are stable under base change (the two cited Mathlib leaves), so pullback.fst f' i is a thickening. The square commutes by pullback.condition. This constructs the morphism of thickenings required in step 4 without introducing universal homeomorphisms.",
    "uses": [
     "def-sbc-first-order-thickening",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-surjective-base-change",
     "def-pc-base-change"
    ],
    "elementary": false,
@@ -72,7 +73,7 @@
    }
   },
   {
-   "text": "($f'$ is locally of finite type.) $S\\subseteq S'$ is a finite order thickening and $X=S\\times_{S'}X'$, and $f$ is locally of finite type by step 3; hence $f'$ is locally of finite type by part (2) of the same lemma 09ZW.",
+   "text": "($f'$ is locally of finite type.) $S\\subseteq S'$ is a finite order thickening and $X=S\\times_{S'}X'$, and $f$ is locally of finite type by step 3; hence $f'$ is locally of finite type by part (2) of the same lemma 09ZW. The local finite type lemma is stated for pullback.fst i f', whereas this theorem uses pullback.snd f' i. Precompose the latter with (pullbackSymmetry i f').hom, an isomorphism; pullbackSymmetry_hom_comp_snd and stability of local finite type under composition identify the resulting locally finite type map with pullback.fst i f'. Apply the cited equivalence to it.",
    "uses": [
     "lem-weil-pbc-thickening-lft-cartesian"
    ],
@@ -97,7 +98,8 @@
  "proof_deps": [
   "lem-weil-pbc-finite-morphism-permanence",
   "def-sbc-first-order-thickening",
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-surjective-base-change",
   "def-pc-base-change",
   "lem-weil-pbc-finite-iff-integral-lft",
   "lem-weil-pbc-thickening-integral",
@@ -106,7 +108,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 09ZW, proof: base change paragraph and 'Proof of (8)'; Lemma 09ZU (proof omitted in the source, written out in step 2)"
+  "place": "More on Morphisms, Lemma 09ZW, proof: base change paragraph and 'Proof of (8)'; Lemma 09ZU (proof omitted in the source, written out in step 2); stage-3 Lean proof uses Mathlib support of ideal powers, base-change instances for closed immersions and surjectivity, and pullback symmetry in steps 2 and 5"
  },
  "mathlib_searches": [
   {
@@ -189,5 +191,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-47842",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135317-L-1692992",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proof and DAG records match the unchanged theorem; delivered module and its sole direct importer compile cleanly, with allowed axioms only."
  }
 }
