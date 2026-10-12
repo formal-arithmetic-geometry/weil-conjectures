@@ -31,56 +31,43 @@
  ],
  "proof": [
   {
-   "text": "(Isomorphisms of $\\mathit{Coh}(X,\\mathcal I)$ and uniqueness of kernels and cokernels.) Composition in $\\mathit{Coh}(X,\\mathcal I)$ is termwise [def-weil-pbc-coherent-formal-module] (1), so if $\\varphi=(\\varphi_n)$ is an isomorphism with inverse $\\psi=(\\psi_n)$, then $\\psi_n\\circ\\varphi_n=\\mathrm{id}$ and $\\varphi_n\\circ\\psi_n=\\mathrm{id}$, i.e. every $\\varphi_n$ is an isomorphism of $\\mathcal O_X$-modules. If $q:\\mathcal F\\to\\mathcal C$ and $q':\\mathcal F\\to\\mathcal C'$ are two cokernels of the same morphism $\\beta$ of a category with zero morphisms, the universal properties give $\\varphi:\\mathcal C\\to\\mathcal C'$ and $\\psi:\\mathcal C'\\to\\mathcal C$ with $\\varphi\\circ q=q'$, $\\psi\\circ q'=q$; then $\\psi\\varphi q=q=\\mathrm{id}\\circ q$ and $\\varphi\\psi q'=q'$, so by the uniqueness clauses $\\psi\\varphi=\\mathrm{id}$, $\\varphi\\psi=\\mathrm{id}$: $\\varphi$ is an isomorphism with $\\varphi\\circ q=q'$. Dually, two kernels $\\iota:\\mathcal K\\to\\mathcal F$, $\\iota':\\mathcal K'\\to\\mathcal F$ of the same morphism differ by an isomorphism $\\psi:\\mathcal K\\to\\mathcal K'$ with $\\iota'\\circ\\psi=\\iota$.",
+   "text": "Install the abelian structure supplied by [lem-weil-pbc-coherent-formal-modules-abelian]. For the evaluation functor at index n, that same theorem supplies a colimiting cokernel cofork of the first arrow and a colimiting evaluated cofork. Apply preservesColimit_of_preserves_colimit_cocone. The second arrow is a cokernel by [lem-weil-pbc-abelian-exact-epi-cokernel]; ShortComplex.Exact.map_of_epi_of_preservesCokernel gives evaluated exactness, and Cofork.IsColimit.epi applied to CokernelCofork.mapIsColimit gives the component epimorphism.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remark (a); proof of Lemma 087X (lemma-inverse-systems-abelian): the cokernel of alpha is (Coker alpha_n)"
-   }
-  },
-  {
-   "text": "(Proof of (a).) By [lem-weil-pbc-coherent-formal-modules-abelian] $\\mathit{Coh}(X,\\mathcal I)$ is abelian, and by the definition of a short exact sequence [def-weil-pbc-exact-sequence] the complex $(\\mathcal G_n)\\xrightarrow{\\beta}(\\mathcal F_n)\\xrightarrow{\\alpha}(\\mathcal H_n)$ is exact at $(\\mathcal F_n)$ and $\\alpha$ is an epimorphism; hence $\\alpha$ is a cokernel of $\\beta$ [lem-weil-pbc-abelian-exact-epi-cokernel] (a). By [lem-weil-pbc-coherent-formal-modules-abelian] (cokernel clause; its proof constructs it as the system of the termwise cokernels with the termwise quotient maps) another cokernel of $\\beta$ is $q=(q_n):(\\mathcal F_n)\\to(\\mathcal C_n)$, $q_n:\\mathcal F_n\\to\\mathcal C_n=\\operatorname{Coker}\\beta_n$ the cokernel of $\\beta_n$ in $\\mathit{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. By Step 1 there is an isomorphism $\\varphi:(\\mathcal C_n)\\to(\\mathcal H_n)$ with $\\alpha=\\varphi\\circ q$, and every $\\varphi_n$ is an isomorphism, so $\\alpha_n=\\varphi_n\\circ q_n$. The modules $\\mathcal G_n,\\mathcal F_n$ are coherent, hence quasi-coherent [pqf-def-coherent], and by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1) $q_n$ is an epimorphism with $\\ker q_n=\\operatorname{Im}\\beta_n$. Therefore $\\alpha_n$ is an epimorphism (surjective) and $\\ker\\alpha_n=\\ker q_n=\\operatorname{Im}\\beta_n$ ($\\varphi_n$ being injective), i.e. $\\mathcal G_n\\to\\mathcal F_n\\to\\mathcal H_n\\to0$ is exact for every $n\\ge1$.",
-   "uses": [
+    "def-weil-pbc-coherent-formal-module",
     "lem-weil-pbc-coherent-formal-modules-abelian",
     "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-epi-cokernel",
-    "def-weil-sheaf-of-modules-category",
-    "pqf-def-coherent",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remark (a); proof of Lemma 087X (lemma-inverse-systems-abelian): the cokernel of alpha is (Coker alpha_n)"
-   }
-  },
-  {
-   "text": "(Proof of (b).) Since $\\mathit{Coh}(X,\\mathcal I)$ is abelian [lem-weil-pbc-coherent-formal-modules-abelian] and the sequence is short exact, $\\beta$ is a kernel of $\\alpha$ [lem-weil-pbc-abelian-short-exact-kernel]. Let $c\\ge0$, $\\mathcal K'_{l,m}$, $\\mathcal K'_m$, $\\mathcal K_n=\\mathcal K'_{n+c}/\\mathcal I^n\\mathcal K'_{n+c}$ and $\\iota:(\\mathcal K_n)\\to(\\mathcal F_n)$ be as in [lem-weil-pbc-coherent-formal-module-kernel] for $\\alpha$; $\\iota$ is also a kernel of $\\alpha$, so by Step 1 there is an isomorphism $\\psi:(\\mathcal K_n)\\to(\\mathcal G_n)$ with $\\beta\\circ\\psi=\\iota$, and each $\\psi_n:\\mathcal K_n\\to\\mathcal G_n$ is an isomorphism of $\\mathcal O_X$-modules. Fix $n\\ge1$ and put $m=n+2c\\ge n$. As $m\\ge(n+c)+c$, [lem-weil-pbc-coherent-formal-module-kernel] (1) gives $\\mathcal K'_{n+c}=\\mathcal K'_{m,n+c}$, the image sheaf of $\\operatorname{Ker}\\alpha_m\\hookrightarrow\\mathcal F_m\\to\\mathcal F_{n+c}$. The corestriction $\\operatorname{Ker}\\alpha_m\\to\\mathcal K'_{n+c}$ is $\\mathcal O_X$-linear and surjective: by the definition of the image sheaf [lem-weil-pbc-quasi-coherent-module-cokernel-image], every local section of $\\mathcal K'_{n+c}$ is locally the image of a local section of $\\operatorname{Ker}\\alpha_m$. The quotient map $\\mathcal K'_{n+c}\\to\\mathcal K'_{n+c}/\\mathcal I^n\\mathcal K'_{n+c}=\\mathcal K_n$ is a cokernel, hence surjective ([def-weil-pbc-coherent-formal-module] (0), [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1)), and $\\psi_n$ is an isomorphism. The composite $\\operatorname{Ker}\\alpha_m\\to\\mathcal K'_{n+c}\\to\\mathcal K_n\\xrightarrow{\\psi_n}\\mathcal G_n$ is therefore a surjective $\\mathcal O_X$-linear map, which is (b).",
-   "uses": [
-    "lem-weil-pbc-coherent-formal-modules-abelian",
-    "lem-weil-pbc-abelian-short-exact-kernel",
-    "lem-weil-pbc-coherent-formal-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remark (b); proof of Lemma 087X (lemma-inverse-systems-abelian), claims (a)-(d): the kernel of alpha has levels K_n = K'_m/I^n K'_m, K'_m the image of Ker(alpha_l) -> F_m for l >= m + c"
-   }
-  },
-  {
-   "text": "(Remark: $\\beta_n$ need not be injective.) Under the isomorphism $\\psi$ of Step 3, $\\beta_n\\circ\\psi_n=\\iota_n$, and $\\iota_n$ is not injective in general [lem-weil-pbc-coherent-formal-module-kernel] (3); this is why (a) asserts exactness only at $\\mathcal F_n$ and $\\mathcal H_n$.",
-   "uses": [
-    "lem-weil-pbc-coherent-formal-module-kernel"
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remark (b); proof of Lemma 087X (lemma-inverse-systems-abelian), claims (a)-(d): the kernel of alpha has levels K_n = K'_m/I^n K'_m, K'_m the image of Ker(alpha_l) -> F_m for l >= m + c"
+    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remarks (a) and (b), referring to the proof of Lemma 087X (lemma-inverse-systems-abelian)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coherent-formal-module-kernel] to the second arrow. Its unique factorization property constructs IsLimit of the kernel fork via KernelFork.IsLimit.ofι. The first arrow is a kernel by [lem-weil-pbc-abelian-short-exact-kernel]. IsLimit.conePointUniqueUpToIso therefore gives an isomorphism from the constructed kernel K to the first term of the complex; the inclusion functor maps it to an isomorphism of inverse systems.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-abelian-short-exact-kernel",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remarks (a) and (b), referring to the proof of Lemma 087X (lemma-inverse-systems-abelian)"
+   }
+  },
+  {
+   "text": "At index n+c the image comparison in [lem-weil-pbc-coherent-formal-module-kernel] identifies T_(n+c) with the abelian image of Ker(alpha_(n+c+c)) → F_(n+c). Compose Abelian.factorThruImage with the inverse of this comparison, formalModuleQuotientπ at exponent n+1, the quotient comparison to K_n, and the component of K ≅ G. Every factor is epi: the image corestriction and cokernel projection by Mathlib abelian-category instances, and the comparison maps by their isomorphism instances. Their composite is epi and n ≤ n+c+c. This uses positive level n+1 throughout and makes no injectivity assertion for G_n → F_n.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remarks (a) and (b), referring to the proof of Lemma 087X (lemma-inverse-systems-abelian)"
    }
   }
  ],
@@ -89,16 +76,15 @@
   "lem-weil-pbc-coherent-formal-modules-abelian",
   "def-weil-pbc-exact-sequence",
   "lem-weil-pbc-abelian-exact-epi-cokernel",
-  "def-weil-sheaf-of-modules-category",
-  "pqf-def-coherent",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-formal-module-kernel",
   "lem-weil-pbc-abelian-short-exact-kernel",
-  "lem-weil-pbc-coherent-formal-module-kernel"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remarks (a) and (b), referring to the proof of Lemma 087X (lemma-inverse-systems-abelian)"
+  "place": "Cohomology of Schemes, proof of Lemma 0CYV (lemma-systems-with-proper-support), first paragraph, remarks (a) and (b), referring to the proof of Lemma 087X (lemma-inverse-systems-abelian)",
+  "note": "B3 stage-3 Lean proof from the existing abelian and kernel interfaces; Mathlib handles cokernel preservation, kernel comparison and epi composition."
  },
  "mathlib_searches": [
   {
@@ -174,5 +160,15 @@
   "group": "P1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T184242-L-3996165",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

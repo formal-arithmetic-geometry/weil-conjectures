@@ -7,10 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Mathlib.CategoryTheory.Limits.Shapes.RegularMono
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Levels of a short exact sequence of coherent formal modules
 
@@ -35,24 +33,17 @@ back to the proof of Lemma 087X
 (blueprint: lem-weil-pbc-coherent-formal-short-exact-levels).
 
 Proof:
-1. Composition is termwise (def-weil-pbc-coherent-formal-module). Thus an isomorphism
-of systems has isomorphic components. Uniqueness of kernels and cokernels gives
-comparison isomorphisms commuting with their structure maps.
-2. By lem-weil-pbc-coherent-formal-modules-abelian and
-lem-weil-pbc-abelian-exact-epi-cokernel, the second arrow is a cokernel of the first.
-The termwise cokernels give another cokernel. The comparison isomorphism identifies
-its component projections with the second arrow's components. These are epimorphisms
-with kernel equal to the first arrow's image, by
-lem-weil-pbc-quasi-coherent-module-cokernel-image (and pqf-def-coherent).
-3. By lem-weil-pbc-abelian-short-exact-kernel, the first arrow is a kernel of the second.
-Compare with the kernel constructed in lem-weil-pbc-coherent-formal-module-kernel.
-For positive level N, choose M = N + 2c with its uniform Artin-Rees constant c.
-The image of Ker(alpha_M) in F_(N+c) is the stabilized K'_(N+c).
-The image corestriction onto K'_(N+c), its quotient onto
-K'_(N+c)/I^N K'_(N+c), and the component of the comparison isomorphism onto G_N
-are all epimorphisms. Their composite proves the quotient assertion.
-4. The kernel construction need not have injective component maps; hence exactness
-is asserted only at F_N and surjectivity at H_N, not injectivity at G_N.
+1. Use the abelian structure and termwise cokernel clause of
+   coherentFormalModule_abelian. The given limiting cokernel cofork and its image
+   show that evaluation preserves the cokernel of S.f. Mathlib then maps the exact
+   complex to an exact complex, and the evaluated cokernel projection is epi.
+2. Apply coherentFormalModule_kernel to S.g. Its universal factorization property
+   gives a limiting kernel fork. Compare it with hS.fIsKernel to obtain K ≅ S.X₁.
+3. For index n, use the kernel construction's image comparison at n+c. The abelian
+   image corestriction from Ker(S.g at n+c+c), the inverse image comparison,
+   the quotient projection, the quotient comparison, and the component of K ≅ S.X₁
+   compose to the required epimorphism. The index n+c+c is at least n.
+4. No monomorphism assertion for the first arrow at a level is needed.
 -/
 theorem coherentFormalModule_shortExact_levels (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) (S : ShortComplex (CoherentFormalModule X I))
@@ -62,6 +53,43 @@ theorem coherentFormalModule_shortExact_levels (X : Scheme.{u}) [IsNoetherian X]
         (evaluation ℕᵒᵖ X.Modules).obj (op n))).Exact ∧ Epi (S.g.hom.app (op n))) ∧
     (∀ n : ℕ, ∃ m : ℕ, n ≤ m ∧
       ∃ q : kernel (S.g.hom.app (op m)) ⟶ S.X₁.obj.obj (op n), Epi q) := by
-  sorry
+  classical
+  obtain ⟨hAb, hCok⟩ := coherentFormalModule_abelian X I
+  let : Abelian (CoherentFormalModule X I) := hAb.some
+  have : Balanced (CoherentFormalModule X I) := by
+    let : Preadditive (CoherentFormalModule X I) := hAb.some.toPreadditive
+    let : HasZeroMorphisms (CoherentFormalModule X I) :=
+      Preadditive.preadditiveHasZeroMorphisms
+    have : IsNormalEpiCategory (CoherentFormalModule X I) :=
+      Abelian.toIsNormalEpiCategory (C := CoherentFormalModule X I)
+    infer_instance
+  constructor
+  · intro n
+    let E := (IsCoherentFormalModule I).ι ⋙
+      (evaluation ℕᵒᵖ X.Modules).obj (op n)
+    obtain ⟨c, hc, hn⟩ := hCok S.X₁ S.X₂ S.f
+    have : PreservesColimit (parallelPair S.f 0) E :=
+      preservesColimit_of_preserves_colimit_cocone hc.some (hn n).some
+    have hg := CokernelCofork.mapIsColimit _ hS.gIsCokernel E
+    refine ⟨hS.exact.map_of_epi_of_preservesCokernel E hS.epi_g inferInstance, ?_⟩
+    exact Cofork.IsColimit.epi hg
+  · intro n
+    obtain ⟨c, hstab, T, j, hj, K, ι, e, htrans, hcomp, hz, huni⟩ :=
+      coherentFormalModule_kernel I S.X₂ S.X₃ S.g
+    let hk : IsLimit (KernelFork.ofι ι hz) := KernelFork.IsLimit.ofι ι hz
+      (fun γ hγ => (huni _ γ hγ).choose)
+      (fun γ hγ => (huni _ γ hγ).choose_spec.1)
+      (fun γ hγ δ hδ => (huni _ γ hγ).choose_spec.2 δ hδ)
+    let ψ : K ≅ S.X₁ := hk.conePointUniqueUpToIso hS.fIsKernel
+    obtain ⟨a, ha⟩ := hj (n + c)
+    let f := kernel.ι (S.g.hom.app (op (n + c + c))) ≫
+      S.X₂.obj.map (homOfLE (Nat.le_add_right (n + c) c)).op
+    let q : kernel (S.g.hom.app (op (n + c + c))) ⟶ S.X₁.obj.obj (op n) :=
+      Abelian.factorThruImage f ≫ a.inv ≫
+        formalModuleQuotientπ I (n + 1) (T.obj (op (n + c))) ≫ (e n).hom ≫
+          ((IsCoherentFormalModule I).ι.mapIso ψ).hom.app (op n)
+    refine ⟨n + c + c, by omega, q, ?_⟩
+    dsimp only [q, formalModuleQuotientπ]
+    infer_instance
 
 end AlgebraicGeometry
