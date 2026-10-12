@@ -18,43 +18,54 @@
  ],
  "proof": [
   {
-   "text": "The source of each closed j_n is Noetherian. Closed-immersion coherent equivalence implies coherence of its pushed term and annihilation by j_n.ker=J^(n+1). On affine opens the range of the multiplication-image power is J(U)^(n+1), so the ideal-sheaf power and the image power give the same annihilation condition.",
+   "text": "Install the closed-immersion hypotheses from hgeom. Mathlib LocallyOfFiniteType.isLocallyNoetherian makes each T_n locally Noetherian; the coherent/finite-type criterion gives quasi-coherence of M_n. Apply isCoherent_pushforward_of_isFinite directly to the closed, hence finite, j_n, obtaining coherence of each pushed term. No categorical equivalence is needed.",
    "uses": [
     "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
    ],
    "elementary": false
   },
   {
-   "text": "Since i_n≫j_(n+1)=j_n and both j maps are closed, i_n is closed. The formula for the kernel of a composite and the closed-immersion comap/map identity imply i_n.ker=(J^(n+1)).comap j_(n+1). Compute its affine sections to identify its multiplication image with the (n+1)st power of J.comap j_(n+1).",
+   "text": "The multiplication-image power inclusion is monic by two-step induction. The affine-section lemma identifies its range with J(U)^r for every positive r; IdealSheafData.range_toModulesι_app gives the same range for (J^r).toModulesι. Reuse AlgebraicGeometry.Scheme.subobject_le_of_affine_range from AffinePushforwardIdealProduct (import all exposes this private theorem), which uses the existing hom_zero_of_affine helper, to prove equality of these subobjects: restrict a composite with the other inclusion's cokernel projection to the affine basis, where it vanishes, then use sheaf separatedness; kernel.lift and the abelian image factorization give the desired factorization. Subobject.isoOfMkEqMk yields power_inclusion_iso respecting both inclusions. Tensor this isomorphism with the ambient module and use imageSubobject_iso_comp to identify multiplication images. Closed pushforward annihilation, with hgeom identifying the kernel, makes multiplication by J^(n+1) zero on all sections; the sheafification adjunction and pure-tensor induction give product_zero_iff. Transfer the resulting zero object through the product isomorphism.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-affine-pushforward-ideal-product"
    ],
+   "elementary": false
+  },
+  {
+   "text": "Use IsClosedImmersion.of_comp_isClosedImmersion and hi_n to prove i_n closed. Its kernel is recovered by comap_map_of_isClosedImmersion for j_(n+1). Then map_ker, hi_n, hgeom and comap_pow give i_n.ker=(J.comap j_(n+1))^(n+1). These are explicit rewrites of ideal data; no affine computation remains.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "Transport the closed-immersion unit-quotient identity to the specified ai_n by uniqueness of adjunctions with the same right adjoint. Follow the unit quotient by i_(n,*) of the comparison isomorphism, obtaining the adjoint transition. Push this identity by j_(n+1),*. The ideal-power quotient comparison gives an isomorphism from formalModuleQuotient J (n+1) of the pushed term to pushed M_n. Its composite with the quotient projection is the explicit adjacent transition. The sequence successor lemma identifies this with P(M).map of the adjacent arrow.",
+   "text": "The private quotient_unit_power helper uses power_inclusion_iso and product_inclusion_iso to identify the formal quotient with the cokernel of multiplication by i_n.ker. A cokernel.mapIso respecting the projection transports the existing closed-immersion unit-quotient isomorphism to the formal quotient. Compose with the pushforward of leftAdjointUniq to transport its projection equation from the lemma's chosen adjunction to ai_n, using unit_leftAdjointUniq_hom_app. Obtain the quotient pushforward comparison rho from closedImmersion_pushforward_idealPowers for j_(n+1). Compose rho, the pushforward of this unit quotient, the twice-pushed M.comparison n and thickeningPushforwardComparison. Rewrite the quotient projection equation with the rho equation, Functor.map_comp and the unit quotient equation; Adjunction.homEquiv_unit identifies the result with the explicit transition. thickeningSystemPushforward_transition identifies that map with the inverse-system successor arrow. This supplies the third conjunct.",
    "uses": [
     "lem-weil-pbc-closed-immersion-unit-quotient",
     "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
-    "lem-weil-pbc-thickening-system-pushforward-functor"
+    "lem-weil-pbc-thickening-system-pushforward-functor",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-affine-pushforward-ideal-product",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
   "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
   "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-finite-pushforward-coherent",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "lem-weil-pbc-thickening-system-pushforward-functor",
+  "pqf-lem-coherent-ft-locnoeth",
   "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880; detailed termwise dictionary from parent proof steps 1--2 and 5"
+  "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence), equation 0880; S1 Lean proof uses finite pushforward and closed pushforward annihilation directly, proves the image-power/ideal-data bridge and transports the unit quotient to the supplied adjunction. Repair: reuse the private affine-range comparison from AffinePushforwardIdealProduct via import all; delete both duplicate local proofs."
  },
  "mathlib_searches": [
   {
@@ -139,10 +150,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T194157-L-470857",
-  "kind": "interface",
+  "landing": "20261012T223416-L-1640550",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
