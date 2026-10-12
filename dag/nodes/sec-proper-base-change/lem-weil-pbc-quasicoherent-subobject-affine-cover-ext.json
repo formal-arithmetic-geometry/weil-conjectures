@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-quasicoherent-subobject-affine-cover-ext",
+ "kind": "statement",
+ "title": "An inclusion into a quasi-coherent subobject is detected on an affine cover",
+ "statement": "Let X be a scheme [def-pc-scheme], F an O_X-module, and G <= H subobjects of F [def-weil-sheaf-of-modules-category]. Assume H is quasi-coherent [pqf-def-coherent]. For any affine open cover (U_i), equality of the images of Gamma(U_i,G) and Gamma(U_i,H) in Gamma(U_i,F) implies G = H. The smaller subobject need not be quasi-coherent and the cover need not be finite.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "place": "exists_map_eq_pow_smul_of_isAffineOpen, used to formalize the local-to-global step in Stacks Tag 01Y8"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Use the subobject inequality to construct the inclusion phi:G -> H. Evaluation preserves monomorphisms, so phi and H -> F are injective on sections over each open. Equal section images make phi surjective over each U_i.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The basic opens D(f) in the U_i form a basis. For a section t of H over D(f), the denominator lemma supplies n and s in Gamma(U_i,H) restricting to f^n t. Lift s to G over U_i, restrict to D(f), and multiply by the inverse nth power of f, which is a unit in its basic-open section ring. Naturality makes this a preimage of t.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf morphism underlying phi is bijective on a basis. Mathlib TopCat.Sheaf.isIso_iff_isIso_basis makes it an isomorphism. The forgetful functor to abelian presheaves reflects isomorphisms. Apply Subobject.eq_of_comm to the isomorphism and the factorization through H -> F.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "place": "exists_map_eq_pow_smul_of_isAffineOpen, used to formalize the local-to-global step in Stacks Tag 01Y8; details formalized by G1 from the existing proved library constructions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf has finitely generated sections on affine opens. Quasi coherent subsheaves determined by sections on an affine open cover",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Subobject\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*affine.*finite|subobject.*affine.*cover|isIso_iff_isIso_basis|exists_map_eq_pow_smul_of_isAffineOpen",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules have finite sections on affine opens; equality of comparable subobjects is detected on an affine open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules",
+  "group": "G1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite affine stabilization in Tag 01Y8, within the finite-etale-lifting essential-surjectivity proof",
+   "via": [
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasicoherentSubobjectAffineCoverExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentSubobjectAffineCoverExt.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasicoherent_subobject_eq_of_affine_cover",
+  "statement": "theorem quasicoherent_subobject_eq_of_affine_cover (X : Scheme.{u}) (F : X.Modules) (G H : Subobject F) (hH : (H : X.Modules).IsQuasicoherent) (hGH : G ≤ H) (I : Type v) (U : I → X.affineOpens) (hU : ⨆ i, (U i).1 = ⊤) (hsections : ∀ i, LinearMap.range (G.arrow.val.app (.op (U i).1)).hom = LinearMap.range (H.arrow.val.app (.op (U i).1)).hom) : G = H",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T194111-L-455199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T194111-L-455199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

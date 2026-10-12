@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-coherent-affine-sections-finite",
+ "kind": "statement",
+ "title": "Finite affine sections of a coherent module",
+ "statement": "Let X be a scheme [def-pc-scheme], F a coherent O_X-module [pqf-def-coherent], and U an affine open. Gamma(U,F) is finitely generated over Gamma(U,O_X) [def-weil-finitely-generated-module]. No Noetherian hypothesis is needed.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteTypeLocallyNoetherian.lean",
+  "place": "the coherent-to-finite-presentation construction in isCoherent_iff_isQuasicoherent_and_isFiniteType; Stacks Tags 01BV, 01BO and 01PC"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite local generators. Reindex them by ULift (Fin n); coherence makes the kernel of each generator epimorphism finite type. Apply the existing private isFinitePresentation_of_generators_kernel via a proof-only import all of CoherentFiniteTypeLocallyNoetherian: its restriction and cokernel construction gives finite presentations from these finite generators and finite-type kernels, without any Noetherian hypothesis. Apply locality of finite presentation.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-library affine sections theorem to the resulting global finite presentation. Finitely presented ring modules are finite.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-affine-sections",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-finite-presentation-affine-sections",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteTypeLocallyNoetherian.lean",
+  "place": "the existing private isFinitePresentation_of_generators_kernel, imported with import all, and the coherent-to-finite-presentation construction in isCoherent_iff_isQuasicoherent_and_isFiniteType; Stacks Tags 01BV, 01BO and 01PC; G1 specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf has finitely generated sections on affine opens. Quasi coherent subsheaves determined by sections on an affine open cover",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Subobject\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*affine.*finite|subobject.*affine.*cover|isIso_iff_isIso_basis|exists_map_eq_pow_smul_of_isAffineOpen",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules have finite sections on affine opens; equality of comparable subobjects is detected on an affine open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules",
+  "group": "G1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite affine stabilization in Tag 01Y8, within the finite-etale-lifting essential-surjectivity proof",
+   "via": [
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentAffineSectionsFinite.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_affine_sections_finite",
+  "statement": "theorem coherent_affine_sections_finite (X : Scheme.{u}) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (U : X.Opens) (hU : IsAffineOpen U) : Module.Finite Γ(X, U) Γ(F, U)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T194111-L-455199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T194111-L-455199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

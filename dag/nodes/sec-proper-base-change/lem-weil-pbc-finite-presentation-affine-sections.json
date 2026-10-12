@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-affine-sections",
+ "kind": "statement",
+ "title": "Affine sections of a finitely presented sheaf are finitely presented",
+ "statement": "Let X be a scheme [def-pc-scheme], F an O_X-module of finite presentation [def-weil-pbc-module-finite-type-presentation], and U an affine open. The module Gamma(U,F) is finitely presented over Gamma(U,O_X).",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/FiniteDescent.lean",
+  "place": "finitePresentation_sections_of_isFinitePresentation, proof (Stacks 01PC)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Cover U by basic opens lying in a finite-local-presentation cover. On each basic open, restrict its presentation to Spec of its section ring, where the finite generators and relations give finitely presented global sections. These basic opens span the unit ideal. The source theorem descends finite presentation along their section localizations using Module.FinitePresentation.of_localizationSpan'.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/FiniteDescent.lean",
+  "place": "finitePresentation_sections_of_isFinitePresentation, proof (Stacks 01PC); details formalized by G1 from the existing proved library constructions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf has finitely generated sections on affine opens. Quasi coherent subsheaves determined by sections on an affine open cover",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Subobject\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*affine.*finite|subobject.*affine.*cover|isIso_iff_isIso_basis|exists_map_eq_pow_smul_of_isAffineOpen",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; source library supplies the finite-presentation sections result and basic-open denominator lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules have finite sections on affine opens; equality of comparable subobjects is detected on an affine open cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules",
+  "group": "G1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "finite affine stabilization in Tag 01Y8, within the finite-etale-lifting essential-surjectivity proof",
+   "via": [
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePresentation_sections_of_isFinitePresentation",
+  "statement": "theorem finitePresentation_sections_of_isFinitePresentation (F : X.Modules) [F.IsFinitePresentation] {U : X.Opens} (hU : IsAffineOpen U) : Module.FinitePresentation Γ(X, U) Γ(F, U)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T194111-L-455199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T194111-L-455199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
