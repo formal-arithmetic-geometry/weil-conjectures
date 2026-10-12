@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-local-comparison",
+ "kind": "statement",
+ "title": "Local finite presentation comparison maps",
+ "statement": "Let X be a ringed space, F a finitely presented module, and psi: O_X^r -> F an epimorphism. For each point x there is a neighborhood U, a finite presentation P of F restricted to U, a map psi-prime from O_U^r to F restricted to U, and comparison maps alpha and beta satisfying alpha followed by P.generators.pi = psi-prime and beta followed by psi-prime = P.generators.pi. The restriction of kernel psi is isomorphic to kernel psi-prime.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BP(1), proof first paragraph; kernels: Section 01AF",
+  "url": "https://stacks.math.columbia.edu/tag/01BP"
+ },
+ "proof": [
+  {
+   "text": "Choose a presentation around x from the local finite presentation data. Since its generator map and psi are epis, local lifting supplies lifts of each of the finitely many basis images in both directions. Intersect their neighborhoods containing x.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the presentation to the intersection; restriction preserves finite free modules, kernels, and epis. Transport the restricted psi across the canonical free-module isomorphism to obtain psi-prime. Define alpha and beta from the chosen lifts. Their equations hold on bases and hence as module morphisms. Sectionwise kernels identify the restricted kernel with kernel psi-prime.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BP(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free epimorphism to finitely presented module sheaf kernel local comparison maps",
+   "results": "Service unavailable; recorded by msearch.py.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation sheaf kernel of finite free epimorphism finite generating sections",
+   "results": "Finite-presentation definitions and constructors only; no direct kernel theorem.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections",
+   "results": "GeneratingSections.ofEpi and equivOfIso; no local comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteType|IsFinitePresentation",
+   "results": "Finite-presentation and finite-type structures, no arbitrary finite free kernel theorem.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf modules finite presentation simultaneous local lift morphism from finite free module",
+   "results": "Second reader: finite presentation definitions and local quasicoherent-data constructors; no simultaneous comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Presentation, SheafOfModules.over",
+   "results": "Second reader: QuasicoherentData.mk, presentation, ofIsIso_presentation; no comparison maps.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "Presentation.map|isFinite_map|over.*free|free.*over",
+   "results": "Second reader: presentation transport and free-module lemmas only; no simultaneous local comparison.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'); the local presentation and comparison-map shrinking step of Lemma 01BP(1)",
+   "via": [
+    "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationLocalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationLocalComparison.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.finitePresentation_local_comparison",
+  "statement": "theorem finitePresentation_local_comparison (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) [F.IsFinitePresentation] (r : ℕ) (ψ : SheafOfModules.free (R := moduleRings X) (ULift.{u} (Fin r)) ⟶ F) (hψ : Epi ψ) (x : X) : ∃ (U : Opens X), x ∈ U ∧ ∃ (ψ' : SheafOfModules.free (R := (moduleRings X).over U) (ULift.{u} (Fin r)) ⟶ F.over U) (P : (F.over U).Presentation), P.IsFinite ∧ ∃ (α : SheafOfModules.free (R := (moduleRings X).over U) (ULift.{u} (Fin r)) ⟶ SheafOfModules.free P.generators.I) (β : SheafOfModules.free (R := (moduleRings X).over U) P.generators.I ⟶ SheafOfModules.free (ULift.{u} (Fin r))), α ≫ P.generators.π = ψ' ∧ β ≫ ψ' = P.generators.π ∧ Nonempty ((kernel ψ).over U ≅ kernel ψ')",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144152-L-2109725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144152-L-2109725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

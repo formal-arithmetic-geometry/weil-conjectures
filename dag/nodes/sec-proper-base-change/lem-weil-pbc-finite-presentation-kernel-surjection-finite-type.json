@@ -29,59 +29,36 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (maps out of finite free modules; kernels).* For an open $W\\subseteq X$ and $n\\ge0$, $\\mathcal O_W^{\\oplus n}$ is the finite direct sum, i.e. the product, of $n$ copies of $\\mathcal O_W$, with $\\mathcal O_W^{\\oplus n}(V)=\\mathcal O_X(V)^n$ for $V\\subseteq W$; let $e_1,\\dots,e_n\\in\\mathcal O_X(W)^n$ be the standard basis sections, and identify $\\mathcal O_W^{\\oplus m}\\oplus\\mathcal O_W^{\\oplus r}=\\mathcal O_W^{\\oplus(m+r)}$. For an $\\mathcal O_W$-module $\\mathcal G$, a morphism $\\varphi:\\mathcal O_W^{\\oplus n}\\to\\mathcal G$ is determined by the sections $\\varphi_W(e_i)\\in\\mathcal G(W)$: every section over $V\\subseteq W$ is $\\sum_if_ie_i|_V$ with $f_i\\in\\mathcal O_X(V)$, and $\\varphi_V(\\sum_if_ie_i|_V)=\\sum_if_i\\,\\varphi_W(e_i)|_V$ by $\\mathcal O_X(V)$-linearity and compatibility with restriction; conversely, for any $s_1,\\dots,s_n\\in\\mathcal G(W)$ this formula defines a morphism of $\\mathcal O_W$-modules $\\varphi_s$ with $\\varphi_s(e_i)=s_i$ (it is $\\mathcal O_X(V)$-linear on each $V$ and commutes with restrictions because restriction is semilinear) [def-weil-sheaf-of-modules-category]. In particular two morphisms out of $\\mathcal O_W^{\\oplus n}$ that agree on $e_1,\\dots,e_n$ are equal. The kernel of a morphism $\\psi$ of $\\mathcal O_X$-modules is the sub-$\\mathcal O_X$-module $V\\mapsto\\ker\\psi_V$ [def-weil-sheaf-of-modules-category]; hence for an open $U$, $\\operatorname{Ker}(\\psi)|_U=\\operatorname{Ker}(\\psi|_U)$, and a morphism $\\gamma$ into the source of $\\psi$ with $\\psi\\circ\\gamma=0$ factors (uniquely) through $\\operatorname{Ker}\\psi$, the factorization having the same sections as $\\gamma$.",
+   "text": "For each point x, apply finitePresentation_local_comparison to get a neighborhood U(x), a finite presentation P(x), the restricted finite-free map psi-prime, comparison maps alpha and beta, and the kernel-restriction isomorphism.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-finite-presentation-local-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Section 01AF (label section-kernels, lines 102-116: kernels are sectionwise and are kernels in Mod(O_X)); the correspondence between maps out of O^n and n-tuples of sections is used without comment in the proof of Lemma 01BP ('This gives a morphism of sheaves alpha')"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (a presentation near $x$, and the lifts $\\alpha$, $\\beta$).* Let $x\\in X$. Since $\\mathcal F$ is of finite presentation, choose an open $U\\ni x$ and an exact sequence $\\mathcal O_U^{\\oplus m}\\xrightarrow{\\chi}\\mathcal O_U^{\\oplus n}\\xrightarrow{\\varphi}\\mathcal F|_U\\to0$. By [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) (on the ringed space $(U,\\mathcal O_U)$) $\\varphi$ is surjective as a map of sheaves. For $k=1,\\dots,r$ the section $\\psi_X(e_k)|_U\\in\\mathcal F(U)$ therefore lifts on the member containing $x$ of some open covering of $U$: there are an open $W_k$ with $x\\in W_k\\subseteq U$ and $\\tilde e_k\\in\\mathcal O_X(W_k)^n$ with $\\varphi(\\tilde e_k)=\\psi(e_k)|_{W_k}$. Likewise $\\psi$ is surjective as a map of sheaves [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) (on $X$), so for $j=1,\\dots,n$ there are an open $W'_j$ with $x\\in W'_j\\subseteq U$ and $b_j\\in\\mathcal O_X(W'_j)^r$ with $\\psi(b_j)=\\varphi(e_j)|_{W'_j}$. Replace $U$ by the open $U\\cap\\bigcap_kW_k\\cap\\bigcap_jW'_j\\ni x$ (a finite intersection) and restrict $\\chi,\\varphi,\\tilde e_k,b_j$ to it. The restricted sequence is still exact with $\\varphi$ surjective: by [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1),(2) both properties are conditions on all opens $W$ of $U$ and their coverings, and those of the smaller $U$ are among them. By Step 1 let $\\alpha:\\mathcal O_U^{\\oplus r}\\to\\mathcal O_U^{\\oplus n}$ be the morphism with $\\alpha(e_k)=\\tilde e_k$ and $\\beta:\\mathcal O_U^{\\oplus n}\\to\\mathcal O_U^{\\oplus r}$ the one with $\\beta(e_j)=b_j$. Then $\\varphi\\circ\\alpha$ and $\\psi|_U$ agree on every $e_k$, and $\\psi|_U\\circ\\beta$ and $\\varphi$ agree on every $e_j$, so by the uniqueness in Step 1: $\\varphi\\circ\\alpha=\\psi|_U$ and $\\psi|_U\\circ\\beta=\\varphi$.",
+   "text": "Apply finitePresentation_kernel_comparison_generators to the local presentation and comparison equations. Transport the resulting finite generating sections to (kernel psi).over U(x) along the inverse of the kernel isomorphism using GeneratingSections.ofEpi.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-finite-presentation-kernel-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BP, proof of (1), first paragraph (presentation over U; 'after shrinking U ... lift psi(e_k) ... This gives a morphism alpha with phi o alpha = psi. Similarly ... beta with psi o beta = phi'); Definition 01BN (label definition-finite-presentation, line 1378)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (the map $\\gamma$ lands in $\\operatorname{Ker}\\psi$).* Let $\\gamma=(\\beta\\circ\\chi,\\ 1-\\beta\\circ\\alpha):\\mathcal O_U^{\\oplus m}\\oplus\\mathcal O_U^{\\oplus r}\\to\\mathcal O_U^{\\oplus r}$, $(t,s)\\mapsto\\beta\\chi(t)+s-\\beta\\alpha(s)$. Then, writing $\\psi$ for $\\psi|_U$: $\\psi\\circ\\beta\\circ\\chi=\\varphi\\circ\\chi=0$ (the presentation is a complex) and $\\psi\\circ(1-\\beta\\circ\\alpha)=\\psi-\\varphi\\circ\\alpha=\\psi-\\psi=0$ (Step 2). So $\\psi\\circ\\gamma=0$ and $\\gamma$ factors through $\\operatorname{Ker}(\\psi|_U)=\\operatorname{Ker}(\\psi)|_U$ (Step 1).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BP, proof of (1), the displayed map (beta o chi, 1 - beta o alpha); that it lands in Ker(psi) is left implicit there"
-   }
-  },
-  {
-   "text": "*Step 4 (surjectivity onto $\\operatorname{Ker}\\psi$; conclusion).* Let $W\\subseteq U$ be open and $s\\in\\mathcal O_X(W)^r$ with $\\psi(s)=0$. Then $\\varphi(\\alpha(s))=\\psi(s)=0$ (Step 2), so by exactness of the presentation at $\\mathcal O_U^{\\oplus n}$ [lem-weil-pbc-ringed-space-module-exactness-local-lifting](2) there are an open covering $W=\\bigcup_iW_i$ and $t_i\\in\\mathcal O_X(W_i)^m$ with $\\chi(t_i)=\\alpha(s)|_{W_i}$. On $W_i$: $\\gamma(t_i,s|_{W_i})=\\beta\\chi(t_i)+s|_{W_i}-\\beta\\alpha(s|_{W_i})=\\beta\\alpha(s)|_{W_i}+s|_{W_i}-\\beta\\alpha(s)|_{W_i}=s|_{W_i}$. Hence the factorization $\\gamma:\\mathcal O_U^{\\oplus(m+r)}\\to\\operatorname{Ker}(\\psi)|_U$ of Step 3 (same sections, $\\operatorname{Ker}(\\psi)|_U(W)=\\ker\\psi_W$) is surjective as a map of sheaves, i.e. a surjection of $\\mathcal O_U$-modules [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1). As $x$ was arbitrary, every point of $X$ has an open neighbourhood $U$ with a surjection $\\mathcal O_U^{\\oplus s}\\to\\operatorname{Ker}(\\psi)|_U$, $s=m+r$: $\\operatorname{Ker}(\\psi)$ is of finite type [pqf-def-coherent] (the definition read on the ringed space $X$, as in the statement).",
+   "text": "The opens U(x) cover X because x belongs to U(x). Assemble the finite generating families into LocalGeneratorsData indexed by X and apply IsFiniteType.mk.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
     "pqf-def-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BP, proof of (1), last sentence ('is a surjection onto the kernel of psi', not argued there); finite type is Modules, Definition 01B5"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-weil-pbc-finite-presentation-local-comparison",
+  "lem-weil-pbc-finite-presentation-kernel-comparison",
   "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BP (label lemma-kernel-surjection-finite-free-onto-finite-presentation, line 1457), proof of part (1)"
+  "place": "Modules, Lemma 01BP(1), same comparison-map construction; categorical split-epi proof makes its final surjectivity assertion explicit."
  },
  "mathlib_searches": [
   {
@@ -179,5 +156,15 @@
   "group": "M1",
   "result": "fix",
   "note": "X RingedSpace; F SheafOfModules (moduleRings X); finite presentation (01BN) -> Mathlib [F.IsFinitePresentation] replacing inline hF (H4/H12); r : ℕ incl. 0; ψ : free (ULift (Fin r)) ⟶ F with Epi ψ; conclusion (kernel ψ).IsFiniteType = pqf-def-coherent finite-type clause as in landed Coherent.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T144152-L-2109725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
