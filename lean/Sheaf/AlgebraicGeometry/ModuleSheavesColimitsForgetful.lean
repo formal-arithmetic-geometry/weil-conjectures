@@ -6,6 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # Colimits of sheaves of modules and the forgetful functor
@@ -75,6 +76,46 @@ theorem moduleSheaves_colimits_forgetful
                       toSheafify J
                         (PresheafOfModules.colimitPresheafOfModules
                           (F ⋙ SheafOfModules.forget R)).presheaf)) := by
-  sorry
+  classical
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  intro K _
+  have : PreservesLimitsOfShape K
+      (SheafOfModules.toSheaf.{v'} R ⋙ sheafToPresheaf J AddCommGrpCat.{v'}) :=
+    inferInstanceAs (PreservesLimitsOfShape K
+      (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj))
+  have : PreservesLimitsOfShape K (SheafOfModules.toSheaf.{v'} R) :=
+    preservesLimitsOfShape_of_reflects_of_preserves _ (sheafToPresheaf J AddCommGrpCat.{v'})
+  refine ⟨inferInstance, inferInstance, fun X ↦ inferInstance, ?_⟩
+  intro F
+  let L := PresheafOfModules.sheafification.{v'} (𝟙 R.obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{v'} (𝟙 R.obj)
+  let c := PresheafOfModules.colimitCocone (F ⋙ SheafOfModules.forget R)
+  let e : F ≅ (F ⋙ SheafOfModules.forget R) ⋙ L :=
+    Functor.isoWhiskerLeft F (asIso adj.counit).symm
+  let s := (Cocone.precompose e.hom).obj (L.mapCocone c)
+  refine ⟨s, ⟨?_⟩, Iso.refl _, ?_⟩
+  · exact (IsColimit.precomposeHomEquiv e _).symm
+      (isColimitOfPreserves L (PresheafOfModules.isColimitColimitCocone _))
+  · intro i
+    simp only [s, Cocone.precompose_obj_ι, Functor.mapCocone_ι_app,
+      NatTrans.comp_app, Iso.refl_hom]
+    have hunit : (e.hom.app i).val =
+        adj.unit.app ((SheafOfModules.forget R).obj (F.obj i)) := by
+      have : IsIso (adj.counit.app (F.obj i)).val :=
+        inferInstanceAs (IsIso ((SheafOfModules.forget R).map
+          (adj.counit.app (F.obj i))))
+      apply (cancel_mono (adj.counit.app (F.obj i)).val).1
+      have h := congrArg SheafOfModules.Hom.val
+        ((asIso adj.counit).inv_hom_id_app (F.obj i))
+      exact h.trans (adj.right_triangle_components (F.obj i)).symm
+    simp only [SheafOfModules.comp_val, SheafOfModules.id_val,
+      hunit, Functor.map_comp]
+    change (PresheafOfModules.toPresheaf R.obj).map
+        (adj.unit.app ((SheafOfModules.forget R).obj (F.obj i)) ≫
+          (SheafOfModules.forget R).map (L.map (c.ι.app i))) = _
+    erw [← adj.unit.naturality (c.ι.app i), Functor.map_comp]
+    simp only [adj, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+    rfl
+
 
 end CategoryTheory

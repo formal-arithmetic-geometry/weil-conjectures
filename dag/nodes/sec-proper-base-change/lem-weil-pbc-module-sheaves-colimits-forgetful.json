@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "*Limits (clauses (2) and (3) for limits).* Let $i\\mapsto\\mathcal F_i$ be a diagram $\\mathcal I\\to\\Mod(\\mathcal O)$ with $\\mathcal I$ small. By [lem-weil-pbc-module-sheaves-limits-sectionwise] it has a limit $\\lim_i\\mathcal F_i$ in $\\Mod(\\mathcal O)$, computed sectionwise: $(\\lim_i\\mathcal F_i)(V)=\\lim_i\\mathcal F_i(V)$ with componentwise operations and restrictions, the projections being the coordinate maps, and the underlying abelian group of $(\\lim_i\\mathcal F_i)(V)$ is the limit of the abelian groups $\\mathcal F_i(V)$. Hence the underlying abelian sheaf $\\mathrm{forget}(\\lim_i\\mathcal F_i)$, with the projections, is the sectionwise limit of the presheaves of abelian groups $\\mathrm{forget}(\\mathcal F_i)$ [def-weil-sheaf-of-modules-category]. By [lem-weil-pbc-sheafification-exact] (1) the limit of the diagram $i\\mapsto\\mathrm{forget}(\\mathcal F_i)$ in $\\Ab(\\mathcal C)$ is its limit as presheaves, computed sectionwise; so $\\mathrm{forget}(\\lim_i\\mathcal F_i)$ with $\\mathrm{forget}$ of the projections is a limit of $i\\mapsto\\mathrm{forget}(\\mathcal F_i)$ in $\\Ab(\\mathcal C)$: $\\mathrm{forget}$ commutes with small limits.",
+   "text": "Use Mathlib SheafOfModules.hasLimitsOfSize and evaluationPreservesLimitsOfShape for sectionwise limits. The composite toSheaf followed by sheafToPresheaf is definitionally forget followed by toPresheaf and preserves limits. Since sheafToPresheaf reflects limits, toSheaf preserves limits of each small shape. Mathlib also supplies faithfulness and preservation of finite limits.",
    "uses": [
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "def-weil-sheaf-of-modules-category",
@@ -36,48 +36,45 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DB (lemma-limits-colimits), proof, the limit part; Lemma 03CO (lemma-limits-colimits-abelian-sheaves) (2)"
+    "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "*Colimits exist and are the sheafified sectionwise colimits (clause (2) for colimits).* Let $i\\mapsto\\mathcal F_i$ be a diagram $\\mathcal I\\to\\Mod(\\mathcal O)$ with $\\mathcal I$ small, regarded as a diagram of presheaves of $\\mathcal O$-modules. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] the sectionwise colimit $\\mathcal P:V\\mapsto\\colim_i\\mathcal F_i(V)$ is a presheaf of $\\mathcal O$-modules and, with the induced maps $\\iota_i:\\mathcal F_i\\to\\mathcal P$, a colimit of the diagram in $\\mathrm{PMod}(\\mathcal O)$. Let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be its sheafification as a presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification], and put $\\iota^\\#_i=\\eta\\circ\\iota_i:\\mathcal F_i\\to\\mathcal P^\\#$, a cocone in $\\Mod(\\mathcal O)$. It is a colimit [def-weil-pbc-category-colimit]: let $(\\mathcal G,(g_i)_i)$ be a cocone in $\\Mod(\\mathcal O)$. Morphisms of sheaves of $\\mathcal O$-modules are the morphisms of their underlying presheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category], so $(\\mathcal G,(g_i))$ is a cocone in $\\mathrm{PMod}(\\mathcal O)$, and there is exactly one $g:\\mathcal P\\to\\mathcal G$ in $\\mathrm{PMod}(\\mathcal O)$ with $g\\iota_i=g_i$ for all $i$; by the universal property of $\\eta$ [def-weil-presheaf-modules-sheafification] there is exactly one $h:\\mathcal P^\\#\\to\\mathcal G$ in $\\Mod(\\mathcal O)$ with $h\\eta=g$. Then $h\\iota^\\#_i=g_i$ for all $i$; and if $h'$ also satisfies $h'\\iota^\\#_i=g_i$ for all $i$, then $h'\\eta$ satisfies $(h'\\eta)\\iota_i=g_i$, so $h'\\eta=g$ and $h'=h$. Hence $\\colim_i\\mathcal F_i=\\mathcal P^\\#$ exists in $\\Mod(\\mathcal O)$, with coprojections $\\iota^\\#_i$.",
+   "text": "Use the existing sorry-free source-library instances SheafOfModules.preservesColimitsOfShape_toSheaf and preservesFiniteColimits_toSheaf in WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification. These apply to every small shape since AddCommGrpCat has such colimits. The proof uses the sheafification adjunction, its invertible counit, sheafificationCompToSheaf and preservation of presheaf colimits. Mathlib SheafOfModules.Colimits supplies existence of colimits. Finite limit and finite colimit preservation give the stated exactness formulation directly.",
    "uses": [
     "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
     "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-category-colimit",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DB (lemma-limits-colimits), proof, the colimit part ('it is easy to see that (colim F_i)^# is the colimit'), with Lemma 03CY (lemma-sheafification-presheaf-modules) and the adjunction formula after it"
+    "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "*$\\mathrm{forget}$ commutes with colimits (clause (3) for colimits).* Keep the notation of step 2 and let $\\mathcal G_i=\\mathrm{forget}(\\mathcal F_i)\\in\\Ab(\\mathcal C)$. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] the underlying presheaf of abelian groups $\\mathcal Q$ of $\\mathcal P$, with the maps $\\iota_i$, is the colimit of the $\\mathcal G_i$ in the category $\\mathrm{PAb}(\\mathcal C)$ of presheaves of abelian groups. By the construction of [def-weil-presheaf-modules-sheafification], the underlying abelian sheaf of $\\mathcal P^\\#$, with the map $\\eta$, is the sheafification $\\mathcal Q\\to\\mathcal Q^\\#$ of $\\mathcal Q$ as a presheaf of abelian groups [def-weil-pbc-sheafification], the $\\mathcal O$-module structure being added on top of it. So $\\mathrm{forget}(\\colim_i\\mathcal F_i)=\\mathcal Q^\\#$ and $\\mathrm{forget}(\\iota^\\#_i)=\\eta\\circ\\iota_i$. Now $(\\mathcal Q^\\#,(\\eta\\iota_i)_i)$ is a colimit of $i\\mapsto\\mathcal G_i$ in $\\Ab(\\mathcal C)$ (this is Stacks 03CO (4), the colimit of abelian sheaves is the sheafification of the presheaf colimit), by the argument of step 2 with $\\mathbf Z$ in place of $\\mathcal O$: for a cocone $(\\mathcal H,(g_i))$ in $\\Ab(\\mathcal C)$, which is a cocone in $\\mathrm{PAb}(\\mathcal C)$ since $\\Ab(\\mathcal C)$ is a full subcategory, the colimit property of $\\mathcal Q$ gives exactly one $g:\\mathcal Q\\to\\mathcal H$ with $g\\iota_i=g_i$, and the universal property of sheafification [def-weil-pbc-sheafification] exactly one $h:\\mathcal Q^\\#\\to\\mathcal H$ with $h\\eta=g$; uniqueness of $h$ with $h\\eta\\iota_i=g_i$ for all $i$ follows as in step 2. Hence $\\mathrm{forget}$ carries the colimit cocone of step 2 to a colimit cocone in $\\Ab(\\mathcal C)$; equivalently the canonical morphism $\\colim_i\\mathrm{forget}(\\mathcal F_i)\\to\\mathrm{forget}(\\colim_i\\mathcal F_i)$ is an isomorphism, two colimits of the same diagram being related by a unique isomorphism compatible with the coprojections [def-weil-pbc-category-colimit].",
+   "text": "For F, take the explicit sectionwise presheaf colimit cocone c. Let L be module sheafification and adj its adjunction. The inverse counit gives a diagram isomorphism e : F ≅ (F ⋙ forget R) ⋙ L. Precompose the cocone L.mapCocone c with e.hom. The left adjoint L preserves c as a colimit; IsColimit.precomposeHomEquiv transports that property to the desired cocone. Its vertex is definitionally L.obj c.pt, so choose Iso.refl for the vertex isomorphism.",
    "uses": [
     "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
     "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-sheafification",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03DB (lemma-limits-colimits), proof, last sentence ('by Lemma 03CO forgetting the O-module structure is the colimit in Ab(C)'); Lemma 03CO (lemma-limits-colimits-abelian-sheaves) (4) and its proof (sheafification left adjoint to the inclusion)"
+    "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "*Faithfulness, kernels, cokernels, exactness (clause (1)).* $\\mathrm{forget}$ is the identity on morphisms, a morphism of sheaves of $\\mathcal O$-modules being a morphism of the underlying abelian sheaves with $\\mathcal O(U)$-linear components [def-weil-sheaf-of-modules-category]; so it is injective on each set of morphisms, i.e. faithful, and it is additive, addition of morphisms in $\\Mod(\\mathcal O)$ being the sectionwise addition of morphisms of abelian sheaves. Let $\\varphi:\\mathcal F\\to\\mathcal G$ in $\\Mod(\\mathcal O)$. Its kernel is the limit of the diagram $\\mathcal F\\rightrightarrows\\mathcal G$ formed by $\\varphi$ and $0$; by step 1 it is the sectionwise kernel $V\\mapsto\\ker(\\varphi_V)$ and $\\mathrm{forget}$ carries it to the kernel of $\\mathrm{forget}(\\varphi)$ in $\\Ab(\\mathcal C)$, which is also the sectionwise kernel [lem-weil-pbc-sheafification-exact] (1). Its cokernel is the colimit of the same diagram; by step 2 it is the sheafification of the sectionwise colimit of that diagram, which is the sectionwise cokernel $V\\mapsto\\mathcal G(V)/\\varphi_V(\\mathcal F(V))$; by step 3 $\\mathrm{forget}$ carries it to the cokernel of $\\mathrm{forget}(\\varphi)$ in $\\Ab(\\mathcal C)$, the sheafification of the same sectionwise cokernel of abelian groups. Both categories are abelian ([def-weil-sheaf-of-modules-category]; [def-pur-abelian-sheaf-kernel] for $\\Ab(\\mathcal C)$). An additive functor between abelian categories that preserves kernels and cokernels preserves images $\\operatorname{im}\\psi=\\ker(\\operatorname{coker}\\psi)$, hence carries a sequence $A\\xrightarrow{\\alpha}B\\xrightarrow{\\beta}C$ with $\\operatorname{im}\\alpha=\\ker\\beta$ to one with the same property: $\\mathrm{forget}$ is exact. (Equivalently it preserves finite limits and finite colimits, by steps 1 and 3.)",
+   "text": "The right triangle identity identifies the underlying presheaf map of the inverse counit at F.obj i with adj.unit.app (forget(F.obj i)): cancel the invertible counit and compare its inverse identity with the triangle identity. Unit naturality moves this unit past L.map (c.ι.app i). Applying toPresheaf and the lemma toPresheaf_map_sheafificationAdjunction_unit_app gives precisely c.ι.app i followed by toSheafify, the required formula.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-sheafification-exact",
-    "def-pur-abelian-sheaf-kernel"
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 'Sheaves of modules' before Lemma 03DA (kernel and cokernel of a morphism of O-modules are those of abelian sheaves) and Lemma 03DA (lemma-abelian: the forgetful functor is exact)"
+    "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)"
    }
   }
  ],
@@ -87,14 +84,16 @@
   "lem-weil-pbc-sheafification-exact",
   "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-category-colimit",
   "def-weil-pbc-sheafification",
-  "def-pur-abelian-sheaf-kernel"
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "U2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Modules on Sites, Lemma 03DA (lemma-abelian), Lemma 03DB (lemma-limits-colimits), Lemma 03CO (lemma-limits-colimits-abelian-sheaves), Lemma 03CY (lemma-sheafification-presheaf-modules); steps that Stacks calls easy written out"
+  "place": "Modules on Sites, Lemma 03DA (label lemma-abelian: Mod(O) abelian, forgetful functor to Ab(C) exact) and Lemma 03DB (label lemma-limits-colimits: limits and colimits exist and the forgetful functor commutes with them), with Lemma 03CO (label lemma-limits-colimits-abelian-sheaves) and Lemma 03CY (label lemma-sheafification-presheaf-modules)",
+  "note": "Stacks argument realized with Mathlib constructions and the existing sorry-free source-library preservation instances; triangle and naturality glue written in Lean by U2."
  },
  "mathlib_searches": [
   {
@@ -216,5 +215,15 @@
   "group": "J1",
   "result": "pass",
   "note": "general site C/J with HasSheafify+WEqualsLocallyBijective AddCommGrpCat.{v'} (not hollow: inferInstance fails); R : Sheaf J RingCat; toSheaf Faithful/finite exact; Has(Co)LimitsOfSize.{v',v'}; K : Type v' small (index in module universe); evaluation preserves limits (sectionwise); colimit cocone iso to module sheafification of colimitPresheafOfModules with coprojections = colimitCocone.ι ≫ toSheafify; toSheaf preserves limits/colimits of shape K (not Mathlib instances)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T042423-L-1822665",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
