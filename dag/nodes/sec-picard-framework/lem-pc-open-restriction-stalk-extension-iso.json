@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-open-restriction-stalk-extension-iso",
+ "kind": "statement",
+ "title": "Stalk complex of open restriction is extension of stalk scalars",
+ "statement": "Let j : X → Y be an open immersion of schemes [def-pc-scheme], let x be a point of X, and let K be an arbitrary unbounded cochain complex of O_Y-modules [def-weil-sheaf-of-modules-category]. The complex obtained by applying extension of scalars along the actual ring homomorphism j.stalkMap x to the module stalk complex K_(j x) [def-pc-module-stalk-functor] is isomorphic, as a cochain complex of O_(X,x)-modules, to the stalk at x of the termwise restriction of K by Scheme.Modules.restrictFunctor j [lem-weil-pbc-module-restriction-open-immersion-colimits].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Sheaves, Lemma 6.26.4, specialized to an open immersion; Mathlib Scheme.Modules.restrictStalkNatIso and its germ formula"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Put rho = j.stalkMap x. For any section r on U containing x, apply rho to the desired inverse-stalk-map formula. The germ_stalkMap_apply formula and appIso_inv_app show that rho inverse sends germ(r) to germ(j.appIso(U).inv(r)). Hence the formula holds by injectivity of rho.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Represent a scalar and a restricted module stalk element on two opens and restrict both to their intersection. Use the module stalk germ_smul identity, the preceding ring germ formula, and germ_restrictStalkNatIso_hom_app. The sectionwise action in restrictFunctor is precisely through j.appIso.inv, so the additive comparison epsilon satisfies epsilon(r • m) = rho inverse(r) • epsilon(m). Taking r = rho(a) gives an A-linear map restrictScalars(rho)(restricted stalk) → original stalk. It is bijective and natural because the underlying additive comparison is so.",
+   "uses": [
+    "def-pc-module-stalk-functor",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ring map rho is invertible for an open immersion. Thus restrictScalars(rho) is an equivalence, and the counit of extendScalars(rho) ⊣ restrictScalars(rho) is invertible. Apply extendScalars to the inverse of the natural linear comparison and compose with this counit. Apply NatIso.mapHomologicalComplex to the resulting natural isomorphism and evaluate at K. This supplies the required chain isomorphism including its differentials.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0098",
+  "place": "Stalk formula for pullback; its specialization to open restriction is proved by Q1 directly from Mathlib germ formulas and the extension/restriction adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalk of a sheaf of modules restricted along an open immersion is extension of scalars of its stalk",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder, Loogle and local source search instead.",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of restriction of sheaf of modules along open immersion is extension of scalars along stalk ring map",
+   "results": "restrictStalkNatIso and its two germ formulas; only the underlying additive stalk comparison, no linear extension-of-scalars complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictStalkNatIso\"",
+   "results": "Three hits: restrictStalkNatIso, germ_restrictStalkNatIso_hom_app, germ_restrictStalkNatIso_inv_app. Used the hom comparison and germ formula.",
+   "date": "2026-10-13",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*restrict|restrict.*stalk|stalkMap.*smul in lean/Sheaf, lean/WeilConjectures and Mathlib/AlgebraicGeometry/Modules",
+   "results": "No scalar-compatible open restriction complex comparison. FlatPullbackStalk supplies the scheme module-stalk Module instance used; IsKFlatTilde handles affine tilde rather than open restriction. TensorPullbackStalkComplex handles a different explicit tensorPullbackComplex construction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-kflat-open-restriction",
+   "place": "Scalar-compatible stalk comparison in step 2",
+   "via": [
+    "lem-pc-kflat-open-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/RestrictionStalkExtensionIso.lean",
+  "declaration": "AlgebraicGeometry.nonempty_restriction_stalk_extension_iso",
+  "statement": "theorem nonempty_restriction_stalk_extension_iso\n    {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (x : X)\n    (K : CochainComplex Y.Modules ℤ) :\n    Nonempty\n      ((((ModuleCat.extendScalars (j.stalkMap x).hom).mapHomologicalComplex (.up ℤ)).obj\n        (((RingedSpace.moduleStalkFunctor Y.toRingedSpace (j x)).mapHomologicalComplex\n          (.up ℤ)).obj K)) ≅\n        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex\n          (.up ℤ)).obj\n            (((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184332-L-4015746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184332-L-4015746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

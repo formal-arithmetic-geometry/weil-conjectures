@@ -8,6 +8,9 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.Algebra.Homology.KFlatModuleBaseChange
+import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # K-flatness under open restriction
 
@@ -46,6 +49,16 @@ theorem isKFlat_restrict {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) :
     CochainComplex.IsKFlat (R := X.sheaf)
       (((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
+  have hstalk :=
+    (RingedSpace.isKFlat_iff_stalk_isKFlat Y.toRingedSpace K).mp hK
+  apply (RingedSpace.isKFlat_iff_stalk_isKFlat X.toRingedSpace _).mpr
+  intro x F hF
+  obtain ⟨e⟩ := nonempty_restriction_stalk_extension_iso j x K
+  have h := CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat
+    (j.stalkMap x).hom _ (hstalk (j x)) F hF
+  let T := ((MonoidalCategory.curriedTensor
+    (ModuleCat.{u} (X.presheaf.stalk x))).map₂CochainComplex).obj F
+  intro i
+  exact (h i).of_iso (T.mapIso e)
 
 end AlgebraicGeometry

@@ -9035,3 +9035,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.AffineAlternatingCechBaseChangeFactorization (stage 3; reviewer PASS; first push; landing 20261012T184331-L-4015232 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.CechDifferentialPermutation (stage 3; reviewer PASS; first push; landing 20261012T184332-L-4015461 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.FormalFibreTransitionIdempotents (stage 3; reviewer PASS; first push; landing 20261012T184332-L-4015598 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction (stage 3; reviewer PASS; first push; landing 20261012T184332-L-4015746 (interface); batch 20261012T184234; modules 2; new nodes 1)
