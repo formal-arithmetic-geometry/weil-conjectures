@@ -6293,3 +6293,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ProperLimitNoetherian (stage 3; reviewer PASS; first push; landing 20261012T053957-L-2647625 (interface); batch 20261012T053916; modules 2; new nodes 2)
 - 05:39 L: merged deliver/U1/Sheaf.Paper.PQFCohomology (stage 3; reviewer PASS; first push; landing 20261012T053958-L-2647757 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/U2/Sheaf.AlgebraicGeometry.FpqcMorphismsDescend (stage 3; reviewer PASS; first push; landing 20261012T053958-L-2647855 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/V1/Sheaf.AlgebraicGeometry.Curve.FiniteCoverLowerShriekCoefficientCompatibility (stage 3; reviewer PASS; first push; landing 20261012T053958-L-2647953 (proof); batch 20261012T053916; modules 1; new nodes 2)
