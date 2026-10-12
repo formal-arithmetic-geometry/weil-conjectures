@@ -7,7 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
+import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Descent of local finite presentation along fpqc coverings
@@ -57,6 +58,10 @@ theorem locallyOfFinitePresentation_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ 
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, LocallyOfFinitePresentation (pullback.snd f (g i))) :
     LocallyOfFinitePresentation f := by
-  sorry
+  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology
+    (P := @LocallyOfFinitePresentation)
+    (Precoverage.generate_mem_toGrothendieck hg) f
+    (fun i ↦ pullback.fst f (g i)) (fun i ↦ pullback.snd f (g i))
+    (fun i ↦ IsPullback.of_hasPullback f (g i)) h
 
 end AlgebraicGeometry

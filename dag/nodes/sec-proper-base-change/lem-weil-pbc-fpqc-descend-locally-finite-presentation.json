@@ -33,114 +33,34 @@
  ],
  "proof": [
   {
-   "text": "*Being locally of finite presentation is invariant under isomorphism and Zariski local on the base (conditions (0) and (2) of [lem-weil-pbc-fpqc-local-on-base-criterion] for $\\mathcal P$ = locally of finite presentation).* (0): let $f:X\\to S$ be locally of finite presentation and $a:X\\to\\tilde X$, $b:S\\to\\tilde S$ isomorphisms with $\\tilde f\\circ a=b\\circ f$. For $\\tilde x=a(x)\\in\\tilde X$ choose, by [def-sbc-locally-finite-presentation], affine opens $x\\in U\\subseteq X$, $V\\subseteq S$ with $f(U)\\subseteq V$ and $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ of finite presentation. Then $a(U)\\ni\\tilde x$ and $b(V)$ are affine opens [def-pc-scheme] with $\\tilde f(a(U))\\subseteq b(V)$, and $\\mathcal O_{\\tilde S}(b(V))\\to\\mathcal O_{\\tilde X}(a(U))$ is identified with $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ through the ring isomorphisms $b^\\sharp,a^\\sharp$, hence is of finite presentation (a presentation transports along an isomorphism of algebras, [def-weil-pbc-finitely-presented-algebra]); so $\\tilde f$ is locally of finite presentation. (2): let $S=\\bigcup_kV_k$ be an open covering such that every restriction $f^{-1}(V_k)\\to V_k$ is locally of finite presentation. For $x\\in X$ pick $k$ with $f(x)\\in V_k$; by [def-sbc-locally-finite-presentation] for $f^{-1}(V_k)\\to V_k$ there are affine opens $x\\in U\\subseteq f^{-1}(V_k)$, $V\\subseteq V_k$ with $f(U)\\subseteq V$ and $\\mathcal O(V)\\to\\mathcal O(U)$ of finite presentation. An affine open of an open subscheme is an affine open of the ambient scheme, with the same ring of sections [def-pc-scheme]; so the same $U,V$ show that $f$ is of finite presentation at $x$, and $f$ is locally of finite presentation.",
+   "text": "Mathlib gives IsZariskiLocalAtTarget and stability under arbitrary base change for LocallyOfFinitePresentation [def-sbc-locally-finite-presentation], and its LocalFlatDescent instance derives descent along Surjective ⊓ Flat ⊓ QuasiCompact from RingHom.FinitePresentation.codescendsAlong_faithfullyFlat [lem-weil-pbc-finite-presentation-descends-faithfully-flat].",
    "uses": [
     "def-sbc-locally-finite-presentation",
-    "def-pc-scheme",
-    "def-weil-pbc-finitely-presented-algebra"
+    "lem-weil-pbc-finite-presentation-descends-faithfully-flat"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KY (lemma-descending-property-locally-finite-presentation, line 5767), proof, first sentences: 'Zariski local on the base, see Morphisms, Lemma 01TQ' (morphisms.tex line 4096; the source writes 'Being locally of finite type' there, a slip for 'locally of finite presentation'); invariance under isomorphism is the convention of Definition Tag 02KO"
-   }
+   "elementary": false
   },
   {
-   "text": "*Being locally of finite presentation is stable under base change (condition (1)).* If $f:X\\to S$ is locally of finite presentation and $g:S'\\to S$ is any morphism, in particular a flat one, then the second projection $X\\times_SS'\\to S'$ is locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence].",
+   "text": "The covering presieve generates a covering sieve: Precoverage.generate_mem_toGrothendieck hg, with Sieve.ofArrows definitionally the generated sieve. For each i use the canonical pullback square, IsPullback.of_hasPullback f (g i). Apply the already proved source-library family-descent theorem [lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent] with P = LocallyOfFinitePresentation and the hypotheses h. This proves the original statement with every universe and hypothesis unchanged.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KY, proof: 'preserved under base change, see Morphisms, Lemma 01TS' (lemma-base-change-finite-presentation, morphisms.tex line 4159)"
-   }
-  },
-  {
-   "text": "*Condition (3), the ring map of the base.* Let $g:S'\\to S$ be a flat surjective [def-weil-surjective-morphism] morphism of affine schemes, $f:X\\to S$ a morphism, $X'=X\\times_SS'$ with projections $g':X'\\to X$, $f':X'\\to S'$ [def-pc-fibre-product], and assume $f'$ locally of finite presentation. By step 1 (invariance under isomorphism, applied to $f$, $g$ and $f'$) we may assume $S=\\operatorname{Spec}R$ and $S'=\\operatorname{Spec}R'$ [def-pc-scheme]; then $g=\\operatorname{Spec}\\rho$ for a unique ring map $\\rho:R\\to R'$ [def-weil-affine-spectrum]. Since $g$ is flat, $\\rho$ is a flat ring map by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Since $g$ is surjective, the map of prime spectra $\\mathfrak q\\mapsto\\rho^{-1}(\\mathfrak q)$, which is the map of underlying sets of $\\operatorname{Spec}\\rho$ [def-weil-affine-spectrum], is surjective. Hence $\\rho$ is faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] [def-weil-pbc-faithfully-flat-ring-map].",
-   "uses": [
-    "def-weil-surjective-morphism",
-    "def-pc-fibre-product",
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-    "def-weil-pbc-faithfully-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KY, proof: 'Write S = Spec(R), S' = Spec(R') ... We know that R -> R' is faithfully flat' (the faithful flatness is Algebra, Lemma Tag 00HQ, lemma-ff-rings, algebra.tex line 9164, with Morphisms, Lemma Tag 01U5)"
-   }
-  },
-  {
-   "text": "*Condition (3), the base change of an affine open.* Keep the notation of step 3 and let $U\\subseteq X$ be an affine open, $U\\cong\\operatorname{Spec}A$ [def-pc-scheme]; then $f|_U:U\\to\\operatorname{Spec}R$ is $\\operatorname{Spec}\\alpha$ for a unique ring map $\\alpha:R\\to A$ [def-weil-affine-spectrum], making $A$ an $R$-algebra. Let $U'=g'^{-1}(U)$, an open subscheme of $X'$. By [lem-weil-pbc-open-preimage-fibre-product] (applied to $g'$ and $U$) the square formed by $U'\\to U$, $U'\\hookrightarrow X'$, $U\\hookrightarrow X$, $g'$ is cartesian; it sits on top of the cartesian square $(X',g',f')$ of $f$ and $g$, so by [lem-weil-pbc-cartesian-square-pasting] the outer rectangle is cartesian: $U'$ with $U'\\to U$ and $f'|_{U'}:U'\\to S'$ is a fibre product $U\\times_SS'$ of $f|_U$ and $g$ [def-pc-fibre-product]. By [lem-weil-pbc-fibre-product-affine-spectra] and the uniqueness of fibre products up to unique isomorphism, there is an isomorphism $U'\\cong\\operatorname{Spec}(A\\otimes_RR')$ under which $f'|_{U'}$ becomes $\\operatorname{Spec}$ of $R'\\to A\\otimes_RR'$, $r'\\mapsto1\\otimes r'$. In particular $U'$ is an affine open of $X'$ with $f'(U')\\subseteq S'$, $S'$ affine, and the ring map $\\mathcal O_{S'}(S')=R'\\to\\mathcal O_{X'}(U')\\cong A\\otimes_RR'$ induced by $f'$ is $r'\\mapsto1\\otimes r'$. Since $f'$ is locally of finite presentation, this ring map is of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation] (with $U'\\subseteq X'$, $V=S'$). Through the swap isomorphism $A\\otimes_RR'\\cong R'\\otimes_RA$, $a\\otimes r'\\mapsto r'\\otimes a$, which is an isomorphism of $R'$-algebras, this says: $A'=R'\\otimes_RA$ is a finitely presented $R'$-algebra [def-weil-pbc-finitely-presented-algebra].",
-   "uses": [
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KY, proof: 'Let U ⊂ X be an affine open. Then U' = S' ×_S U is affine ... A' = R' ⊗_R A and R' -> A' is of finite presentation' (Morphisms, Lemma Tag 01TQ (1)=>(2) for the last clause)"
-   }
-  },
-  {
-   "text": "*Condition (3), conclusion.* By step 3, $\\rho:R\\to R'$ is faithfully flat, and by step 4, $R'\\otimes_RA$ is a finitely presented $R'$-algebra; so $\\alpha:R\\to A$ is of finite presentation by the direction 'if' of [lem-weil-pbc-finite-presentation-descends-faithfully-flat]. The ring map $\\alpha$ is the map $\\mathcal O_S(S)\\to\\mathcal O_X(U)$ induced by $f$, with $U\\subseteq X$ and $S$ affine opens and $f(U)\\subseteq S$. Every $x\\in X$ lies in an affine open $U$ [def-pc-scheme], so $f$ is of finite presentation at every point, i.e. locally of finite presentation [def-sbc-locally-finite-presentation]. Thus being locally of finite presentation satisfies condition (3) of [lem-weil-pbc-fpqc-local-on-base-criterion].",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-descends-faithfully-flat",
-    "def-pc-scheme",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KY, proof: 'We have to show that R -> A is of finite presentation. This is the result of Algebra, Lemma 00QQ. It follows that f is locally of finite presentation.'"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 1, 2 and 5 the class of morphisms locally of finite presentation [def-sbc-locally-finite-presentation] satisfies conditions (0)-(3) of [lem-weil-pbc-fpqc-local-on-base-criterion]. Applied to $f:X\\to S$ and the fpqc covering $\\{g_i:S_i\\to S\\}_{i\\in I}$ [def-weil-pbc-fpqc-covering], whose base changes $f_i:X\\times_SS_i\\to S_i$ are locally of finite presentation by hypothesis, it gives that $f$ is locally of finite presentation.",
-   "uses": [
-    "lem-weil-pbc-fpqc-local-on-base-criterion",
-    "def-sbc-locally-finite-presentation",
-    "def-weil-pbc-fpqc-covering"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KY, proof, last sentence: 'Therefore Lemma 02KP (lemma-descending-properties-morphisms, line 5407) applies and we win.'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-locally-finite-presentation",
-  "def-pc-scheme",
-  "def-weil-pbc-finitely-presented-algebra",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-surjective-morphism",
-  "def-pc-fibre-product",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
   "lem-weil-pbc-finite-presentation-descends-faithfully-flat",
-  "lem-weil-pbc-fpqc-local-on-base-criterion",
-  "def-weil-pbc-fpqc-covering"
+  "lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 02KY (lemma-descending-property-locally-finite-presentation, line 5767) and its proof, through Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407); Algebra, Lemma Tag 00QQ; Morphisms, Lemmas Tag 01TQ and 01TS"
+  "place": "Tag 02KY via the already formalized fpqc-family descent tool (02KP) in WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc, and Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent"
  },
  "mathlib_searches": [
   {
@@ -238,5 +158,15 @@
   "group": "J1",
   "result": "pass",
   "note": "X S f; arbitrary I:Type v, S' g; hg ofArrows ∈ Scheme.fpqcPrecoverage S (recorded def); f_i = pullback.snd f (g i); h ∀ i LocallyOfFinitePresentation; concl LocallyOfFinitePresentation f; identical to H1 f7dc0d331 form with P:=LFP; covering family, not Mathlib single-morphism DescendsAlong"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053921-L-2630441",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
