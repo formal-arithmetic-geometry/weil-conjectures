@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-derived-global-germ-exchange",
+ "kind": "statement",
+ "title": "Derived global germ compatibility with exchange",
+ "statement": "For any cartesian square (f,f′,g,g′) [def-weil-pbc-cartesian-square], any separably closed geometric point t of Y′ [def-weil-pbc-geometric-stalks], and K∈D⁺(X_et,Ab) [def-weil-pbc-derived-categories], the canonical derived pulled global germ followed by D(stalk_t) of exchange [def-weil-pbc-derived-exchange] equals RΓ of the derived adjunction unit followed by Leray and then the target canonical derived global germ [def-weil-pbc-derived-global-germ]. No invertibility of either germ, strict-local hypothesis, properness or torsion is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "https://stacks.math.columbia.edu/tag/03QO; https://stacks.math.columbia.edu/tag/03Q1; https://stacks.math.columbia.edu/tag/095T; Tags 01EZ, 01F8, 08J6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-global-germ",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use a bounded below injective representative I for K and an injective replacement J of its exact inverse image. The termwise exchange formula computes exchange on I followed by pushforward of replacement. Global germs are natural and the inverse-image stalk isomorphism respects unit germs, so this termwise composite equals the pullback-of-sections unit followed by replacement and the target germ. Expand upperStarCompSheafFiberIso into sheafPullbackIso, sheafFiberComapIso and pointSmallEtaleComapIso and use their germ/unit formulas directly. The algebraically closed wrapper inverseImage_stalk_germ is not applicable to a merely separably closed field and is not used.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-termwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use right-derived extensionality and the unit compatibilities of derived natural transformations, exact-functor comparisons and Leray to transport the termwise equality to the chosen D⁺ functors. The derived-unit formula identifies the transported pullback of sections with RΓ of the derived adjunction unit followed by Leray.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-derived-exchange-termwise"
+ ],
+ "proof_origin": {
+  "by": "U1 stage 3 worker",
+  "document": "Stacks Project",
+  "place": "Tags 03QO, 03Q1, 095T; categorical expansion using the library derived unit and termwise exchange formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact stalk functor derived global sections strictly henselian local base natural isomorphism",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso, AlgebraicGeometry.localRingHom_comp_stalkIso_apply', AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.localRingHom_comp_stalkIso_apply, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso",
+   "verdict": "No exact result for these canonical derived germ constructions; the library supplies the individual functoriality and homology APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.mapDerivedCategoryPlusHomologyFunctorIso'",
+   "verdict": "No exact result for these canonical derived germ constructions; the library supplies the individual functoriality and homology APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "strictLocal.*derivedGlobal|derivedGlobal.*[Gg]erm",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact result for these canonical derived germ constructions; the library supplies the individual functoriality and homology APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived natural transformation global sections germ compatibility with base change morphism",
+   "date": "2026-10-12",
+   "results": "8 hits: TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk, TopCat.Presheaf.map_germ_eq_Γgerm, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc, TopCat.Presheaf.map_germ_eq_Γgerm_assoc, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom",
+   "verdict": "No exact result for these canonical derived germ constructions; the library supplies the individual functoriality and homology APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiberNatTrans_app, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext, CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext_iff, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_naturality, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_naturality_assoc",
+   "verdict": "No exact result for these canonical derived germ constructions; the library supplies the individual functoriality and homology APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Gg]erm|[Gg]erm.*rightDerived",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact result for these canonical derived germ constructions; the library supplies the individual functoriality and homology APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global germ at geometric point and base change compatibility",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalDerivedGlobalExchange",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: identify strict-local stalk exchange with total-space cohomology before closed-fibre comparison.",
+   "via": [
+    "lem-weil-pbc-strict-local-derived-global-exchange",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedGlobalGermExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedGlobalGermExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedGlobalGerm_exchange",
+  "statement": "theorem derivedGlobalGerm_exchange {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y') (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) : (derivedPulledGlobalGerm f g t).app K ≫ (pointSmallEtale t).sheafFiber.mapDerivedCategoryPlus.map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) = ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').derivedPlus.unit.app K) ≫ (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _ (lowerStar AddCommGrpCat.{u + 1} g') (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) _ _ _ _ (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g')) (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g')).hom.app (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K)) ≫ (derivedGlobalGerm f' t).app (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T095925-L-325210",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T095925-L-325210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
