@@ -1,6 +1,6 @@
 # Work queue
 
-107 items; claim with `tools/claim.py next <group> [--stage N]`.
+105 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -15,17 +15,16 @@
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
-## Stage 2: nodes to state (3)
+## Stage 2: nodes to state (2)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-nagata-relative-gluing-valid-stage` | 2 | state | 5 |
-| `lem-sc-boundary-cech-compatibility` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 
 Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (96)
+## Stage 3: modules to prove (95)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -84,7 +83,6 @@ Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero` | 6 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison` | 7 | 1 | proof |
-| `Sheaf.CategoryTheory.SiteCechComplex` | 7 | 14 | proof |
 | `Sheaf.Topology.ClosedUnionCohomologyVanishing` | 7 | 1 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
