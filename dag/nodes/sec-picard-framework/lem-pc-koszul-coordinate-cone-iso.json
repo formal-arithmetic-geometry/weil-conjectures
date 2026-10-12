@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-koszul-coordinate-cone-iso",
+ "kind": "statement",
+ "title": "A sheafified Koszul coordinate is a scalar mapping cone",
+ "statement": "Let A be a commutative ring, r a natural number, g:Fin(r+1)->A, i:Fin(r+1), and a in A. On X=Spec(A) [def-pc-scheme], use the category of O_X-modules [def-weil-sheaf-of-modules-category]. Let P be the Koszul complex [def-weil-pbc-koszul-complex] on the r generators j |-> g(i.succAbove(j)), extended by zero to cochain degrees -q. Let T be termwise associated sheaf, from cochain complexes of A-modules to cochain complexes of O_X-modules. Then the sheafified extended Koszul complex on update(g,i,a) is isomorphic, as a cochain complex, to the mapping cone of T(a times id_P). No derived-category localization, positivity, regularity, or quasi-coherence hypothesis on an auxiliary object is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0628 and 0629, adjoining the final generator as a scalar cone. Read online at https://stacks.math.columbia.edu/tag/0629 (the TeX source is absent locally)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the free-module basis by the permutation placing i last and sending the prefix j to i.succAbove(j). Exterior powers of this permutation commute with contraction against the reindexed sequence: check the identity on exterior-algebra scalars and extend by the left-induction Leibniz formula. This gives a Koszul complex isomorphism with the distinguished coordinate last.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the last coordinate split exterior degree q into the prefix degree q and last-basis-vector wedge prefix degree q-1. The established tensor cone coordinates at M=A, followed by the tensor-unit isomorphism, give this decomposition and the boundary matrix (x,y) -> (d x + a*y,-d y). Degree zero has only the prefix summand. Alternatively construct the untensored maps directly from koszulLastAssembly and its bijectivity. Extend to cochain degrees -q and reorder the two summands into Mathlib mapping-cone order. The matrix equations are precisely the chain-map equations of the degreewise isomorphism, including the degree-zero boundary.",
+   "uses": [
+    "lem-weil-pbc-koszul-tensor-cone-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the additive termwise tilde functor to the preceding complex isomorphism. Mathlib CochainComplex.mappingCone.mapHomologicalComplexIso identifies its image cone with the cone of the mapped scalar endomorphism. Compose these two isomorphisms. This works for r=0, for zero scalars, and over the zero ring: the basis decompositions and differential equations do not assume any generator is regular or nonzero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-koszul-tensor-cone-coordinates"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0628 and 0629, adjoining the final generator as a scalar cone. Read online at https://stacks.math.columbia.edu/tag/0629 (the TeX source is absent locally).",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "koszul|Koszul",
+   "date": "2026-10-12",
+   "results": "1 hits: Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "verdict": "No Koszul multiplication or coordinate-cone identification; generic tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Koszul complex on a sequence with a distinguished coordinate is isomorphic to the mapping cone of multiplication by that coordinate on the remaining Koszul complex",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error; recorded as unavailable, with no mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex is isomorphic to the cone of multiplication by the last generator",
+   "date": "2026-10-12",
+   "results": "8 hits: CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.mappingConeHomOfDegreewiseSplitIso, HomologicalComplex.homotopyCofiber.XIso, CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f, CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, ChainComplex.mkXIso, CochainComplex.augmentTruncate",
+   "verdict": "No Koszul multiplication or coordinate-cone identification; generic tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction step: Koszul orthogonality forces the affine restriction to be the pushforward from the smaller open; Koszul orthogonality propagates to positive powers; A sheafified Koszul coordinate is a scalar mapping cone",
+   "via": [
+    "lem-pc-koszul-coordinate-mul-triangle",
+    "lem-pc-koszul-powers-orthogonality",
+    "lem-pc-perfect-generation-koszul-orthogonal",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulCoordinateConeIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCoordinateConeIso.lean",
+  "declaration": "AlgebraicGeometry.koszul_coordinate_cone_iso",
+  "statement": "theorem koszul_coordinate_cone_iso (A : Type u) [CommRing A] (r : ℕ) (g : Fin (r + 1) → A) (i : Fin (r + 1)) (a : A) : let T := @Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) let P := (ExteriorAlgebra.koszulComplex A r (fun j ↦ g (i.succAbove j))).extend ComplexShape.embeddingDownNat Nonempty (T.obj ((ExteriorAlgebra.koszulComplex A (r + 1) (Function.update g i a)).extend ComplexShape.embeddingDownNat) ≅ CochainComplex.mappingCone (T.map (a • 𝟙 P)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465180",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
