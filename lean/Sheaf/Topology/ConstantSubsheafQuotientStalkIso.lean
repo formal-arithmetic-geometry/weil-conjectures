@@ -8,8 +8,9 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.Topology.AbelianOpenExtensionIntegerGermCoordinates
+import Sheaf.Topology.ConstantSubsheafQuotientGermCoordinates
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 
 /-! # ConstantSubsheafQuotientStalkIso
 
@@ -24,6 +25,25 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 
 namespace TopCat.Sheaf
+
+private theorem isIso_of_integer_coordinates {G H : AddCommGrpCat.{u}}
+    (f : G ⟶ H) (a : G) (t : H)
+    (ha : ∀ v : G, ∃! z : ℤ, z • a = v)
+    (ht : ∀ v : H, ∃! z : ℤ, z • t = v) (hfa : f a = t) : IsIso f := by
+  apply (ConcreteCategory.isIso_iff_bijective f).mpr
+  constructor
+  · intro v w hvw
+    obtain ⟨z, hz, _⟩ := ha v
+    obtain ⟨k, hk, _⟩ := ha w
+    obtain ⟨r, hr, hu⟩ := ht (f v)
+    have hz' : z • t = f v := by rw [← hfa, ← map_zsmul f.hom, hz]
+    have hk' : k • t = f v := by rw [← hfa, ← map_zsmul f.hom, hk, hvw]
+    have hzk : z = k := (hu z hz').trans (hu k hk').symm
+    rw [← hz, ← hk, hzk]
+  · intro v
+    obtain ⟨z, hz, _⟩ := ht v
+    refine ⟨z • a, ?_⟩
+    rw [map_zsmul f.hom, hfa, hz]
 
 /-- Source: Stacks Project, Cohomology, Lemma 0A38, final paragraph.
 Proof: Fix x in U outside V. Every A i containing x has label b+1: a smaller
@@ -88,6 +108,43 @@ theorem constantSubsheaf_quotient_stalk_iso
             (op ((Opens.map (iSup A).inclusion').obj (A i))) (ULift.up 1))) =
           (cokernel.π l).hom.app (op (A i)) (s i)) →
       ∀ x : X, x ∈ U → x ∉ V →
-        IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom) := by sorry
+        IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom) := by
+  classical
+  intro D f L l U V hLzero q hq x hxu hxv
+  obtain ⟨i, hxi⟩ := (Opens.mem_iSup.mp hxu)
+  have hci : c i = b + 1 := by
+    have hn : ¬ c i ≤ b := by
+      intro h
+      apply hxv
+      exact (le_iSup (fun j : Fin n ↦ if c j ≤ b then A j else ⊥) i)
+        (by simpa [h] using hxi)
+    have hi := (hc i).2
+    omega
+  let E := (abelianOpenExtensionByZero (iSup A)).obj
+    ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A)))
+      AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))
+  let a := TopCat.Presheaf.germ E.obj (A i) x hxi
+    (abelianOpenExtensionSection (iSup A)
+      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A)))
+        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))
+      (A i) (le_iSup A i)
+      ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A)))
+        ((Functor.const (Opens ((Opens.toTopCat X).obj (iSup A)))ᵒᵖ).obj
+          (AddCommGrpCat.of (ULift.{u} ℤ)))).app
+        (op ((Opens.map (iSup A).inclusion').obj (A i))) (ULift.up 1)))
+  let t := TopCat.Presheaf.germ (cokernel l).obj (A i) x hxi
+    ((cokernel.π l).hom.app (op (A i)) (s i))
+  let Q := (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom
+  have ha : ∀ v : ↑(TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) E.obj x),
+      ∃! z : ℤ, z • a = v :=
+    abelianOpenExtension_integer_germ_coordinates X (iSup A) (A i) (le_iSup A i) x hxi
+  have ht : ∀ v : ↑(TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) (cokernel l).obj x),
+      ∃! z : ℤ, z • t = v :=
+    constantSubsheaf_quotient_germ_coordinates X K C ι isoC n A c g s hsection hvalue b hc
+      L l x (hLzero x hxv) hxv i hxi
+  have hQa : Q a = t := by
+    dsimp only [Q, a, t]
+    rw [TopCat.Presheaf.stalkFunctor_map_germ_apply, hq i hci]
+  exact isIso_of_integer_coordinates Q a t ha ht hQa
 
 end TopCat.Sheaf

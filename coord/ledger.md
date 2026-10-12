@@ -8232,3 +8232,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/V3/Sheaf.AlgebraicGeometry.CoherentFormalModule (stage 3; reviewer PASS; first push; landing 20261012T144155-L-2110629 (proof); batch 20261012T144049; modules 1; new nodes 1)
 - 14:41 L: merged deliver/V3/Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt (stage 3; reviewer PASS; first push; landing 20261012T144155-L-2110752 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/V3/Sheaf.Topology.ConstantSubsheafQuotientGluing (stage 3; reviewer PASS; after a return; landing 20261012T144155-L-2110903 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/V3/Sheaf.Topology.ConstantSubsheafQuotientStalkIso (stage 3; reviewer PASS; after a return; landing 20261012T144156-L-2111031 (interface); batch 20261012T144049; modules 3; new nodes 2)
