@@ -17,39 +17,36 @@
  },
  "proof": [
   {
-   "text": "Apply [lem-sc-mayer-vietoris-ringed-space] to the two-open cover of X. Naturality in M makes every horizontal map R-linear. Tensor with S using [lem-weil-pbc-flat-tensor-exact], preserving exactness and the initial injection. Identify the tensor of the binary direct sum with the product of the tensor factors. This produces the upper maps r_n, d_n and delta_n.",
+   "text": "Obtain the two exact cohomology rows and all three pointwise comparison squares before scalar extension from H.baseChangeLinear_mayerVietoris. This construction involves neither tensor products nor flatness.",
    "uses": [
-    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-pc-cohomology-mayer-vietoris-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor each original horizontal map with S using LinearMap.baseChange. Identify the tensor of the middle product with the product of the tensors by TensorProduct.prodRight; define rt by postcomposing with this equivalence and dt by precomposing with its inverse. Flatness preserves the initial injection and all three exact pairs. Conjugating the middle exact pair by the product equivalence, and using its surjectivity and injectivity for the other two pairs, proves the displayed upper exactness. Keep the lower exact row unchanged.",
+   "uses": [
     "lem-weil-pbc-flat-tensor-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The preimages of U and V under the projection X_S to X cover X_S and intersect in the preimage of U intersection V. Apply [lem-sc-mayer-vietoris-ringed-space] to the pulled-back module. Cartesian open immersion identifications and iterated module-pullback isomorphisms identify the lower terms with B(W,n) as defined in the statement, producing r prime, d prime and delta prime with exactness and an initial injection.",
+   "text": "The canonical H.baseChange is extendComparison of H.baseChangeLinear. For the restriction and boundary squares use algebra-tensor extensionality: on s tensor x, linearity reduces the equation to s times the corresponding unextended square. For the difference square use surjectivity of TensorProduct.prodRight and tensor induction; its pure-tensor case is s times the unextended difference square, and its zero and sum cases follow from linearity. Assemble the six maps, both injections, both exact rows and the three commuting squares.",
    "uses": [
-    "lem-sc-mayer-vietoris-ringed-space",
     "def-pc-flat-cohomology-comparison"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use the exact abelian-sheaf inverse image and the coefficient map in [def-pc-flat-cohomology-comparison]. Inverse image transports the short exact sequence of free abelian sheaves attached to the Mayer-Vietoris square to the inverse-image cover. Its Ext class defines the boundary. Functoriality of Ext and preservation of Yoneda composition identify the resulting long-sequence comparison with H.baseChangeLinear: the constant-sheaf isomorphism handles the union term, and the cartesian open isomorphisms handle the restricted terms. Hence the restriction, difference and boundary squares commute. Extend scalars; on a pure tensor s tensor x both composites are s times the common pre-extension value, so linearity proves all three displayed squares. No local bijectivity assumption is involved.",
-   "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "lem-sc-mayer-vietoris-ringed-space"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "lem-sc-mayer-vietoris-ringed-space",
-  "lem-weil-pbc-flat-tensor-exact"
+  "lem-pc-cohomology-mayer-vietoris-inverse-image",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pc-flat-cohomology-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Expanded construction of the exact comparison diagram in the Mayer--Vietoris alternative, using Tag 01EB and exact inverse image on Ext"
+  "place": "Mayer--Vietoris alternative: Lean scalar-extension proof from the inverse-image comparison before tensoring. Flat exactness and initial injectivity use Mathlib; product transport and all three extended squares are proved in the item."
  },
  "mathlib_searches": [
   {
@@ -128,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T060800-L-2919087",
+  "landing": "20261012T063508-L-3154216",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -10,7 +10,8 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.LinearAlgebra.Prod
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.Topology.ModuleMayerVietoris
+import Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisInverseImage
+import Mathlib.LinearAlgebra.TensorProduct.Prod
 
 /-! # The flat base-change Mayer--Vietoris comparison diagram
 
@@ -90,6 +91,64 @@ theorem H.baseChange_mayerVietoris
       (∀ n : ℕ, (r' n).comp (βX n) = ((β U n).prodMap (β V n)).comp (r n)) ∧
       (∀ n : ℕ, (d' n).comp ((β U n).prodMap (β V n)) =
         (β (U ⊓ V) n).comp (d n)) ∧
-      (∀ n : ℕ, (δ' n).comp (β (U ⊓ V) n) = (βX (n + 1)).comp (δ n)) := by sorry
+      (∀ n : ℕ, (δ' n).comp (β (U ⊓ V) n) = (βX (n + 1)).comp (δ n)) := by
+  classical
+  dsimp only
+  obtain ⟨r, d, δ, r', d', δ', hr, hr', hex, hex', hs₁, hs₂, hs₃⟩ :=
+    H.baseChangeLinear_mayerVietoris (S := S) f M U V hcover
+  let E := fun n : ℕ ↦ TensorProduct.prodRight R S S
+    (HOver (U.ι ≫ f) ((pullback U.ι).obj M) n)
+    (HOver (V.ι ≫ f) ((pullback V.ι).obj M) n)
+  let rt := fun n ↦ (E n).toLinearMap.comp ((r n).baseChange S)
+  let dt := fun n ↦ ((d n).baseChange S).comp (E n).symm.toLinearMap
+  let δt := fun n ↦ (δ n).baseChange S
+  refine ⟨rt, dt, δt, r', d', δ', ?_, hr', ?_, hex', ?_, ?_, ?_⟩
+  · exact (E 0).injective.comp
+      (Module.Flat.lTensor_preserves_injective_linearMap (r 0) hr)
+  · intro n
+    refine ⟨?_, ?_, ?_⟩
+    · exact (LinearEquiv.conj_exact_iff_exact _ _ (E n)).mpr
+        (Module.Flat.lTensor_exact S (hex n).1)
+    · intro x
+      change (δ n).lTensor S x = 0 ↔ ∃ y, dt n y = x
+      rw [Module.Flat.lTensor_exact S (hex n).2.1 x]
+      constructor
+      · rintro ⟨y, hy⟩
+        exact ⟨E n y, by simpa [dt, LinearMap.baseChange_eq_ltensor] using hy⟩
+      · rintro ⟨y, hy⟩
+        exact ⟨(E n).symm y, hy⟩
+    · intro x
+      change E (n + 1) ((r (n + 1)).baseChange S x) = 0 ↔
+        ∃ y, δt n y = x
+      rw [map_eq_zero_iff _ (E (n + 1)).injective]
+      exact Module.Flat.lTensor_exact S (hex n).2.2 x
+  · intro n
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro s x
+    change r' n (extendComparison _ (s ⊗ₜ[R] x)) =
+      ((H.baseChange (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) n)
+        (rt n (s ⊗ₜ[R] x)).1,
+       (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) n)
+        (rt n (s ⊗ₜ[R] x)).2)
+    simpa [rt, E, H.baseChange, extendComparison] using
+      congrArg (fun y ↦ s • y) (hs₁ n x)
+  · intro n
+    apply LinearMap.ext
+    intro x
+    obtain ⟨y, rfl⟩ := (E n).surjective x
+    induction y using TensorProduct.induction_on with
+    | zero =>
+      change d' n 0 = 0
+      exact map_zero _
+    | tmul s x =>
+      simpa [dt, E, H.baseChange, extendComparison, ← Prod.smul_mk] using
+        congrArg (fun y ↦ s • y) (hs₂ n x)
+    | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
+  · intro n
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro s x
+    simpa [δt, H.baseChange, extendComparison] using
+      congrArg (fun y ↦ s • y) (hs₃ n x)
+
 
 end AlgebraicGeometry.Scheme.Modules
