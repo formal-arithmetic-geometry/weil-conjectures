@@ -7144,3 +7144,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram (stage 3; reviewer PASS; first push; landing 20261012T085405-L-49818 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:54 L: merged deliver/Y2/Sheaf.RingTheory.EtaleRingMapConormalCriterion (stage 3; reviewer PASS; first push; landing 20261012T085405-L-49962 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:54 L: merged deliver/Y3/Sheaf.Algebra.Homology.BoundedFlatReplacement (stage 3; reviewer PASS; first push; landing 20261012T085405-L-50060 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:54 L: merged deliver/Y3/Sheaf.Paper.LisseModuleSheaves (stage 3; reviewer PASS; first push; landing 20261012T085406-L-50165 (proof); batch 20261012T085205; modules 1; new nodes 0)

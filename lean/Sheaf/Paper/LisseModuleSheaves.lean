@@ -124,6 +124,68 @@ def ModuleObjectStruct.IsUnderlying (F : Sheaf Y.smallEtaleTopology (ModuleCat.{
     (∀ U (x : F.obj.obj U), S.neg.hom.app U x = -x) ∧
     ∀ (r : Λ) U (x : F.obj.obj U), (S.smul r).hom.app U x = r • x
 
+private theorem sheafType_ext
+    {A B : Sheaf Y.smallEtaleTopology (Type (u + 1))} {f g : A ⟶ B}
+    (h : ∀ U x, f.hom.app U x = g.hom.app U x) : f = g := by
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  exact ConcreteCategory.hom_ext _ _ (h U)
+
+@[simp] private theorem sheafType_comp_apply
+    {A B C : Sheaf Y.smallEtaleTopology (Type (u + 1))} (f : A ⟶ B) (g : B ⟶ C)
+    (U : Y.Etaleᵒᵖ) (x : A.obj.obj U) :
+    (f ≫ g).hom.app U x = g.hom.app U (f.hom.app U x) := rfl
+
+@[simp] private theorem sheafType_id_apply
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (U : Y.Etaleᵒᵖ)
+    (x : A.obj.obj U) : (𝟙 A : A ⟶ A).hom.app U x = x := rfl
+
+private theorem sheafType_congr
+    {A B : Sheaf Y.smallEtaleTopology (Type (u + 1))} {f g : A ⟶ B}
+    (h : f = g) (U : Y.Etaleᵒᵖ) (x : A.obj.obj U) :
+    f.hom.app U x = g.hom.app U x := congrArg (fun k ↦ k.hom.app U x) h
+
+private theorem moduleObjectStruct_ext
+    {A : Sheaf Y.smallEtaleTopology (Type (u + 1))} {S T : ModuleObjectStruct Λ A}
+    (ha : S.add = T.add) (hz : S.zero = T.zero) (hn : S.neg = T.neg)
+    (hm : S.smul = T.smul) : S = T := by
+  cases S
+  cases T
+  cases ha
+  cases hz
+  cases hn
+  cases hm
+  rfl
+
+@[simp] private theorem sheafType_map_fst_apply
+    {A B C D : Sheaf Y.smallEtaleTopology (Type (u + 1))}
+    (f : A ⟶ C) (g : B ⟶ D) (U : Y.Etaleᵒᵖ) (x : (A ⨯ B).obj.obj U) :
+    (prod.fst : C ⨯ D ⟶ C).hom.app U ((prod.map f g).hom.app U x) =
+      f.hom.app U ((prod.fst : A ⨯ B ⟶ A).hom.app U x) := by
+  exact sheafType_congr (prod.map_fst f g) U x
+
+@[simp] private theorem sheafType_map_snd_apply
+    {A B C D : Sheaf Y.smallEtaleTopology (Type (u + 1))}
+    (f : A ⟶ C) (g : B ⟶ D) (U : Y.Etaleᵒᵖ) (x : (A ⨯ B).obj.obj U) :
+    (prod.snd : C ⨯ D ⟶ D).hom.app U ((prod.map f g).hom.app U x) =
+      g.hom.app U ((prod.snd : A ⨯ B ⟶ B).hom.app U x) := by
+  exact sheafType_congr (prod.map_snd f g) U x
+
+@[simp] private theorem sheafType_lift_fst_apply
+    {A B C : Sheaf Y.smallEtaleTopology (Type (u + 1))}
+    (f : A ⟶ B) (g : A ⟶ C) (U : Y.Etaleᵒᵖ) (x : A.obj.obj U) :
+    (prod.fst : B ⨯ C ⟶ B).hom.app U ((prod.lift f g).hom.app U x) =
+      f.hom.app U x := by
+  exact sheafType_congr (prod.lift_fst f g) U x
+
+@[simp] private theorem sheafType_lift_snd_apply
+    {A B C : Sheaf Y.smallEtaleTopology (Type (u + 1))}
+    (f : A ⟶ B) (g : A ⟶ C) (U : Y.Etaleᵒᵖ) (x : A.obj.obj U) :
+    (prod.snd : B ⨯ C ⟶ C).hom.app U ((prod.lift f g).hom.app U x) =
+      g.hom.app U x := by
+  exact sheafType_congr (prod.lift_snd f g) U x
+
 /-- Clause (1): a sheaf of left modules over a finite ring `Λ` is lisse if and only if its
 underlying sheaf of sets lies in `FLC(Y)`. Source: Stacks Project, Lemma 0DV5 (1), using
 Lemma 093S (1) (blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
@@ -156,7 +218,103 @@ module axioms hold on sections. A morphism of sheaves is determined by its secti
 theorem existsUnique_moduleObjectStruct_isUnderlying
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ∃! S : ModuleObjectStruct Λ ((sheafForget Y.smallEtaleTopology).obj F), S.IsUnderlying F := by
-  sorry
+  let A := (sheafForget Y.smallEtaleTopology).obj F
+  let a : A ⨯ A ⟶ A := ObjectProperty.homMk
+    { app := fun U ↦ ↾(fun x =>
+        @id (F.obj.obj U) ((prod.fst : A ⨯ A ⟶ A).hom.app U x) +
+          @id (F.obj.obj U) ((prod.snd : A ⨯ A ⟶ A).hom.app U x))
+      naturality := fun U V f ↦ by
+        apply ConcreteCategory.hom_ext
+        intro x
+        have hf := ConcreteCategory.congr_hom ((prod.fst : A ⨯ A ⟶ A).hom.naturality f) x
+        have hs := ConcreteCategory.congr_hom ((prod.snd : A ⨯ A ⟶ A).hom.naturality f) x
+        change _ = F.obj.map f (_ + _)
+        rw [map_add]
+        exact congrArg₂ (fun (x y : F.obj.obj V) ↦ x + y) hf hs }
+  let z : ⊤_ (Sheaf Y.smallEtaleTopology (Type (u + 1))) ⟶ A := ObjectProperty.homMk
+    { app := fun U ↦ ↾(fun _ ↦ (0 : F.obj.obj U))
+      naturality := fun U V f ↦ by
+        apply ConcreteCategory.hom_ext
+        intro x
+        exact (map_zero (F.obj.map f).hom).symm }
+  let n : A ⟶ A := ObjectProperty.homMk
+    { app := fun U ↦ ↾(fun x : F.obj.obj U ↦ -x)
+      naturality := fun U V f ↦ by
+        apply ConcreteCategory.hom_ext
+        intro x
+        exact (map_neg (F.obj.map f).hom (@id (F.obj.obj U) x)).symm }
+  let m : Λ → (A ⟶ A) := fun r ↦ ObjectProperty.homMk
+    { app := fun U ↦ ↾(fun x : F.obj.obj U ↦ r • x)
+      naturality := fun U V f ↦ by
+        apply ConcreteCategory.hom_ext
+        intro x
+        exact (map_smul (F.obj.map f).hom r (@id (F.obj.obj U) x)).symm }
+  have ha : ∀ U x, a.hom.app U x =
+      @id (F.obj.obj U) ((prod.fst : A ⨯ A ⟶ A).hom.app U x) +
+        @id (F.obj.obj U) ((prod.snd : A ⨯ A ⟶ A).hom.app U x) := fun _ _ ↦ rfl
+  have hz : ∀ U x, z.hom.app U x = (0 : F.obj.obj U) := fun _ _ ↦ rfl
+  have hn : ∀ U (x : F.obj.obj U), n.hom.app U x = -x := fun _ _ ↦ rfl
+  have hm : ∀ r U (x : F.obj.obj U), (m r).hom.app U x = r • x := fun _ _ _ ↦ rfl
+  let S : ModuleObjectStruct Λ A :=
+    { add := a
+      zero := z
+      neg := n
+      smul := m
+      add_assoc := by
+        apply sheafType_ext
+        intro U x
+        simp only [sheafType_comp_apply, ha, sheafType_map_fst_apply,
+          sheafType_map_snd_apply, sheafType_id_apply, prod.associator_hom,
+          sheafType_lift_fst_apply, sheafType_lift_snd_apply]
+        exact @add_assoc (F.obj.obj U) _ _ _ _
+      add_comm := by
+        apply sheafType_ext
+        intro U x
+        simp only [sheafType_comp_apply, ha, prod.braiding_hom,
+          sheafType_lift_fst_apply, sheafType_lift_snd_apply]
+        exact @add_comm (F.obj.obj U) _ _ _
+      zero_add := by
+        apply sheafType_ext
+        intro U x
+        simp [ha, hz]
+      neg_add_cancel := by
+        apply sheafType_ext
+        intro U x
+        simp [ha, hz, hn]
+      one_smul := by
+        apply sheafType_ext
+        intro U x
+        simp [hm]
+      mul_smul := fun r s ↦ by
+        apply sheafType_ext
+        intro U x
+        simp [hm, mul_smul]
+      smul_add := fun r ↦ by
+        apply sheafType_ext
+        intro U x
+        simp [ha, hm, smul_add]
+      add_smul := fun r s ↦ by
+        apply sheafType_ext
+        intro U x
+        simp [ha, hm, add_smul]
+      smul_zero := fun r ↦ by
+        apply sheafType_ext
+        intro U x
+        simp [hz, hm]
+      zero_smul := by
+        apply sheafType_ext
+        intro U x
+        simp [hz, hm] }
+  refine ⟨S, ⟨ha, hz, hn, hm⟩, ?_⟩
+  intro T hT
+  have ea : T.add = S.add := sheafType_ext (fun U x ↦ (hT.1 U x).trans (ha U x).symm)
+  have ez : T.zero = S.zero :=
+    sheafType_ext (fun U x ↦ (hT.2.1 U x).trans (hz U x).symm)
+  have en : T.neg = S.neg :=
+    sheafType_ext (fun U x ↦ (hT.2.2.1 U x).trans (hn U x).symm)
+  have em : T.smul = S.smul := funext fun r =>
+    sheafType_ext (fun U x ↦ (hT.2.2.2 r U x).trans (hm r U x).symm)
+  exact moduleObjectStruct_ext ea ez en em
 
 /-- The module-object structure of the underlying sheaf of sets of a sheaf of `Λ`-modules:
 its addition, zero, negation and scalar multiplications. Source: Stacks Project, Lemma 0DV5
@@ -181,7 +339,51 @@ theorem underlyingModuleObjectStruct_map
       (underlyingModuleObjectStruct F).neg ≫ φ = φ ≫ (underlyingModuleObjectStruct G).neg ∧
       ∀ r : Λ, (underlyingModuleObjectStruct F).smul r ≫ φ =
         φ ≫ (underlyingModuleObjectStruct G).smul r := by
-  sorry
+  have hF := (existsUnique_moduleObjectStruct_isUnderlying F).exists.choose_spec
+  have hG := (existsUnique_moduleObjectStruct_isUnderlying G).exists.choose_spec
+  change (underlyingModuleObjectStruct F).IsUnderlying F at hF
+  change (underlyingModuleObjectStruct G).IsUnderlying G at hG
+  dsimp only
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply ConcreteCategory.hom_ext
+    intro x
+    change f.hom.app U ((underlyingModuleObjectStruct F).add.hom.app U x) =
+      (underlyingModuleObjectStruct G).add.hom.app U
+        ((prod.map ((sheafForget Y.smallEtaleTopology).map f)
+          ((sheafForget Y.smallEtaleTopology).map f)).hom.app U x)
+    rw [hF.1, map_add, hG.1]
+    have hf := congrArg (fun k ↦ k.hom.app U x)
+      (prod.map_fst ((sheafForget Y.smallEtaleTopology).map f)
+        ((sheafForget Y.smallEtaleTopology).map f))
+    have hs := congrArg (fun k ↦ k.hom.app U x)
+      (prod.map_snd ((sheafForget Y.smallEtaleTopology).map f)
+        ((sheafForget Y.smallEtaleTopology).map f))
+    exact congrArg₂ (· + ·) hf.symm hs.symm
+  · apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply ConcreteCategory.hom_ext
+    intro x
+    change f.hom.app U ((underlyingModuleObjectStruct F).zero.hom.app U x) =
+      (underlyingModuleObjectStruct G).zero.hom.app U x
+    rw [hF.2.1, hG.2.1, map_zero]
+  · apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply ConcreteCategory.hom_ext
+    intro x
+    change f.hom.app U ((underlyingModuleObjectStruct F).neg.hom.app U x) =
+      (underlyingModuleObjectStruct G).neg.hom.app U (f.hom.app U x)
+    rw [hF.2.2.1, hG.2.2.1, map_neg]
+  · intro r
+    apply sheafType_ext
+    intro U x
+    change f.hom.app U (((underlyingModuleObjectStruct F).smul r).hom.app U x) =
+      ((underlyingModuleObjectStruct G).smul r).hom.app U (f.hom.app U x)
+    rw [hF.2.2.2, hG.2.2.2, map_smul]
 
 variable (Y Λ) in
 /-- The functor of clause (2): a lisse sheaf `F` goes to its underlying sheaf of sets (in
