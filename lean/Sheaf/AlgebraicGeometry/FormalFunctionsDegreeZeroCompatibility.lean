@@ -1,6 +1,9 @@
 module
 public import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso
 import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroSystemIso
+import Sheaf.AlgebraicGeometry.FormalFibreCohomology
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import Sheaf.Paper.HigherDirectImagePresheaf
 @[expose] public section
 universe u
 set_option autoImplicit false

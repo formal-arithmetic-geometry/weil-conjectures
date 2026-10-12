@@ -18,6 +18,7 @@ import Sheaf.FieldTheory.SeparableSmoothColimit
 import Sheaf.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SingularIdeal
 
 @[expose] public section
 

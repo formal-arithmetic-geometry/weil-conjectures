@@ -2,6 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
+import Sheaf.LinearAlgebra.MatrixRankFieldExtension
 
 @[expose] public section
 

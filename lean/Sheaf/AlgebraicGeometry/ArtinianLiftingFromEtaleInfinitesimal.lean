@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.Artinian.Module
+import Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale
 
 /-! # Artinian test-diagram lifting from infinitesimal étaleness
 

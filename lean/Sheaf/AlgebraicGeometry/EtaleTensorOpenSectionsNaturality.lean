@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Canonical open-section comparisons and restriction compatibility
 

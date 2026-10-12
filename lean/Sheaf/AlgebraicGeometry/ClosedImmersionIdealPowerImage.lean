@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 
 /-! # Image of an ideal power after closed pushforward
 

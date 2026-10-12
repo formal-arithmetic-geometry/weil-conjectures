@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Polynomial.AlgebraMap
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Finite product presentation of extended polynomial formal fibres

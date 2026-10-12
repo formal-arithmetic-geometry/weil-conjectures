@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.CategoryTheory.Sites.Adjunction
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical coefficient comparison for constant-module sections
 

@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The stage diagram of an étale injective replacement
 

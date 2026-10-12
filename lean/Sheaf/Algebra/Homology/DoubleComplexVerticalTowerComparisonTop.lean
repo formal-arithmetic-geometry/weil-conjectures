@@ -1,6 +1,7 @@
 module
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.Algebra.Homology.DoubleComplexVerticalWindow
 @[expose] public section
 universe v u
 open CategoryTheory CategoryTheory.Limits

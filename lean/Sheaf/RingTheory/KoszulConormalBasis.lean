@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.Paper.KoszulComplex
 
 /-!
 # Conormal basis of a Koszul-regular sequence

@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.CategoryTheory.FilteredColimitCategories
 
 
 /-! # General-object section functor presentation

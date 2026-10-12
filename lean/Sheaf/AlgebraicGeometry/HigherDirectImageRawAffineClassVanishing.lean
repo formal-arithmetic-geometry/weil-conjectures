@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
 import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Eventual zero of raw affine cohomology classes
 

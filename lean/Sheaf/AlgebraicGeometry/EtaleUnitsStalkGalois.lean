@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # The geometric stalk of units and its Galois action

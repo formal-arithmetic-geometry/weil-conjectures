@@ -6,6 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The stationary subquotient comparison at explicit filtration bounds
 

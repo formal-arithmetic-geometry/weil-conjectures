@@ -5,6 +5,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 @[expose] public section
 

@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 import Sheaf.AlgebraicGeometry.FiniteScalarRightAdjointQCoh
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
 import Sheaf.AlgebraicGeometry.FiniteAffineDerivedFactorization
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Lifting the exact affine right adjoint to degree zero
 Source: Stacks Project, Tags 0AX2, 0AX3 and 0AVW

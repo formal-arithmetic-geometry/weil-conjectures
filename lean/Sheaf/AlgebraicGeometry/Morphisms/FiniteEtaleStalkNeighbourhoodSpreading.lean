@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 
 /-!
 # Spreading a finite etale stalk model and its comparison

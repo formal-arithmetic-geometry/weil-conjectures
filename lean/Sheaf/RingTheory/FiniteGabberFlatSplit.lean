@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.Ring.Basic
+import Sheaf.RingTheory.LiftIdempotentUpstairs
 
 /-!
 # The flat split neighbourhood in Gabber's finite-algebra argument

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Adjunction
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Local constancy of module operations on finite locally constant sets

@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators
 public import Mathlib.Algebra.Homology.Homotopy
+import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # The first Čech sorting identity

@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 import Sheaf.Paper.SchemeTheoreticSupport
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # The integral-support induction step for coherent devissage

@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.PopescuLiftInduction
 import Sheaf.RingTheory.StrictlyStandardBaseChange
 import Mathlib.RingTheory.TensorProduct.Quotient
+import Sheaf.RingTheory.PopescuResolution
+import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Quotient data for the Popescu lifting induction

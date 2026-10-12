@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Finite-free exterior frames on a trivializing open
 (blueprint: lem-sc-exterior-dual-local-frames)

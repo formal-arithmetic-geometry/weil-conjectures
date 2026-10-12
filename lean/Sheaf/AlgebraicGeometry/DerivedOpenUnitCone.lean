@@ -6,6 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Support and quasi-coherence of the derived open-unit cone
 Source: Stacks Project, Tag 09IR, proof of lemma-orthogonal-koszul-complex;

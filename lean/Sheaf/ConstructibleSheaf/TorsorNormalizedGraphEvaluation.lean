@@ -7,6 +7,7 @@ module
 
 public import Sheaf.ConstructibleSheaf.TorsorSectionRepresentation
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
 
 /-!
 # Normalized evaluation as the constant-sheaf coordinates upstairs

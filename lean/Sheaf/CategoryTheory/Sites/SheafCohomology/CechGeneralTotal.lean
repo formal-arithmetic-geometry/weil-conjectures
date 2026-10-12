@@ -1,5 +1,6 @@
 module
 public import Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralColumns
+import Sheaf.CategoryTheory.CechResolutionTotal
 @[expose] public section
 universe w v u
 namespace CategoryTheory

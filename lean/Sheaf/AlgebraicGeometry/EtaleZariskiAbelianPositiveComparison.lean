@@ -12,6 +12,16 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.SiteLerayDegenerate
+import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
+import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Positive-degree comparison for underlying abelian sheaves
 

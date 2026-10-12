@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import WeilConjectures.Compactification.FiniteTypeDirected
+import Sheaf.Paper.PQFCohomology
 
 /-! # Finite-type representatives for first cohomology of ideal sheaves
 

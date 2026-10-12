@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Restriction of sections classified by a constant sheaf map
 

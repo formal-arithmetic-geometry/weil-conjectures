@@ -6,6 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Perfect objects under scheme isomorphisms
 

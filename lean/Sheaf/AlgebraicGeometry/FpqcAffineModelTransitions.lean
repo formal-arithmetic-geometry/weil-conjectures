@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Cover.Directed
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
 
 /-!
 # Transition maps between effective affine models

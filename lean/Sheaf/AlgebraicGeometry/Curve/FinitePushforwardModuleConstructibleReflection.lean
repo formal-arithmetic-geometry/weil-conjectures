@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import WeilConjectures.SixFunctors.Finite.BaseChange
+import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-! # Constructibility reflected by finite direct image on curves
 

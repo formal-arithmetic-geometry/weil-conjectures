@@ -10,6 +10,21 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The geometric dictionary for stalkwise formal functions
 

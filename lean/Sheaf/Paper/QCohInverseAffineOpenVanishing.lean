@@ -14,6 +14,9 @@ import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.Topology.RestrictInjectiveResolution
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Quasi-coherent vanishing over inverse images of affine opens
 

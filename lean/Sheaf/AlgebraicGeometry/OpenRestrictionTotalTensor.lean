@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Open restriction of total tensor complexes
 

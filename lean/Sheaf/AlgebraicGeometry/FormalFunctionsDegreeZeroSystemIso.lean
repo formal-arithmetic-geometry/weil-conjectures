@@ -3,6 +3,7 @@ public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.TensorPullback
 @[expose] public section
 universe u
 set_option autoImplicit false

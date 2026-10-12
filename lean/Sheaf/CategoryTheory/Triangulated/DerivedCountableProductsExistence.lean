@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Sheaf.CategoryTheory.LocalizationHomColimit
 
 @[expose] public section
 universe w v u

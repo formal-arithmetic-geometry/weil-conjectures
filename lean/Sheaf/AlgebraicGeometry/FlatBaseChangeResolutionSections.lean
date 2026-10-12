@@ -10,6 +10,8 @@ import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
 import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # FlatBaseChangeResolutionSections
 

@@ -5,6 +5,7 @@ Authors: SHEAF group W2
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 /-! # Free abelian sheaves for a two-open cover
 
 Source: Stacks Project, Tag 01EB.

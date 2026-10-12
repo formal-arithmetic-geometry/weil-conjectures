@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.CategoryTheory.ImageFiltration
 import Sheaf.CategoryTheory.DerivedCoupleExact
 import Sheaf.CategoryTheory.HalfPlaneSharpBounds
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-! Canonical finite-page quotient comparisons. -/
 

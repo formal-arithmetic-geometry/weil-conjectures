@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 
 /-!
 # Continuous cohomology of the geometric stalk over a field

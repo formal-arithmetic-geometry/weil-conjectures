@@ -6,6 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Differentials on individual filtered-complex pages

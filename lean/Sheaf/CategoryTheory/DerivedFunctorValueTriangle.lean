@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 import Sheaf.CategoryTheory.LeftDerivedValueMorphism
 import Sheaf.CategoryTheory.TriangleMorphismCategory
 import Sheaf.CategoryTheory.DerivedFunctorShift
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 @[expose] public section
 

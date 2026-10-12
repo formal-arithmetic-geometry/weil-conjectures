@@ -2,6 +2,8 @@ module
 
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyData
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 @[expose] public section
 universe u

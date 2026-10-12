@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Reconstruction from cohomology on finitely many rank strata
 

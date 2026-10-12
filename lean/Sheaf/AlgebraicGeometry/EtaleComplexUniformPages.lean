@@ -15,6 +15,7 @@ public import Sheaf.Paper.EtaleTermwiseHypercohomology
 import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
 import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
 /-! # Uniform stable pages for a diagram of étale complexes
 
 Source: Stacks Project, Tags 015J and 0EZM.

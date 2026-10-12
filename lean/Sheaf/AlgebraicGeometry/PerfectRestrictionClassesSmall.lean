@@ -6,6 +6,9 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectGluingEndpointProperties
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 
 /-! # Small classes of restrictions of perfect objects
 

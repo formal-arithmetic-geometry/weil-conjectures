@@ -2,6 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 @[expose] public section
 universe u

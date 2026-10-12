@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # One local representative equation
 

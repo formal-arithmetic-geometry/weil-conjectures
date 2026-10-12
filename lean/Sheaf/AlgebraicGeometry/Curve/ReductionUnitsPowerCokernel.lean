@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.ReductionIdealPowerQuotient
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
+import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
 
 /-! # Comparison of the multiplicative and additive nilradical-power cokernels
 

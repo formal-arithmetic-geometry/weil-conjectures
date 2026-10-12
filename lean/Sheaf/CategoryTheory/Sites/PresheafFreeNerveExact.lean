@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicTopology.CechNerve
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Sheaf.AlgebraicTopology.SetCechNerveFreeResolution
+import Sheaf.CategoryTheory.Sites.PresheafCechComplex
 
 /-!
 # Exactness of the free module presheaf nerve

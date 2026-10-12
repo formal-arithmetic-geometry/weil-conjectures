@@ -6,6 +6,21 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.AdicCompletion.Algebra
+import Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.CompletionFiniteQuotient
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.Derivation.DetectNonPthPower
+import Sheaf.RingTheory.FiniteSubalgebraFractionField
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.RingTheory.PurelyInseparableIntegralPrimeUnique
+import Sheaf.RingTheory.RadicialPrimeUniqueDegreeP
+import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularRingNormal
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 Geometric-regularity component for the characteristic-p formal fibre theorem.

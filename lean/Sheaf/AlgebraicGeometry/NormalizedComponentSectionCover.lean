@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 import Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections
+import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # A normalized frame cover for prescribed component sections
 

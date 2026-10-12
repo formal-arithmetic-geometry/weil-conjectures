@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSourceComparison
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSections
 
 /-! # EtaleGeneratorsPullbackTargetComparison
 

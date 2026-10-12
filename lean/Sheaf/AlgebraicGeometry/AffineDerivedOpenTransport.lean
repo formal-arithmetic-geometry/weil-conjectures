@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Transport of derived open restriction along an affine presentation
 Source: Stacks Project, Tags 079W and 09IR.

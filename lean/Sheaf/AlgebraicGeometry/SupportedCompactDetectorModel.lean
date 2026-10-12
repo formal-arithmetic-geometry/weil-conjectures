@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.CategoryTheory.CompactObject
 public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.TriangulatedEquivalenceTransfer
+import Sheaf.Topology.StalkDirectSums
 
 /-! # A small-Hom model for a supported compact detector
 

@@ -14,6 +14,7 @@ import Sheaf.RingTheory.KoszulConormalBasis
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 import Mathlib.Algebra.Homology.SingleHomology
+import Sheaf.Paper.KoszulComplex
 
 /-!
 # Duality for a Koszul-regular quotient

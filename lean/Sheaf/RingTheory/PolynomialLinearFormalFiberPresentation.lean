@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Linear polynomial formal fibres as hypersurfaces

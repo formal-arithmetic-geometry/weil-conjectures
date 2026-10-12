@@ -9,6 +9,7 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 
 /-! # Bounded flat complexes computing proper cohomology -/
 

@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.Images
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Kernel of the closed immersion pullback unit

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Lifting a pair of finite free chain maps from a stalk
 

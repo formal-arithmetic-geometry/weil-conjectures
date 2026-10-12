@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
+import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
 
 /-! # Total homology of the étale open Čech resolution
 

@@ -12,6 +12,8 @@ import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # The strict-local base-change mate on the closed stalk
 

@@ -6,6 +6,9 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Pullback compatibility of the canonical derived-Hom class map
 

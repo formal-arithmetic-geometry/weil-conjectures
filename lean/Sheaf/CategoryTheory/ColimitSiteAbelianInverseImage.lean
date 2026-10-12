@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Sheaf.CategoryTheory.FilteredColimitCategories
 
 /-! # A step in the filtered colimit site construction.
 

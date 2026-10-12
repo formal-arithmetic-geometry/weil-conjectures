@@ -1,5 +1,6 @@
 module
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Sheaf.FieldTheory.GaloisUnitsCohomology
 
 @[expose] public section
 universe u

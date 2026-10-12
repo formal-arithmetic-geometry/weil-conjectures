@@ -10,6 +10,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
 import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
+import Sheaf.CategoryTheory.KInjectiveComputes
 
 /-! # Computing one filtered Cartan--Eilenberg step
 

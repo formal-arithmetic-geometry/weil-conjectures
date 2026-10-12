@@ -9,6 +9,8 @@ public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Finite abutment of a filtered-complex exact couple

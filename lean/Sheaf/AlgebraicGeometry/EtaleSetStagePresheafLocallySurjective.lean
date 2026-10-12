@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
 import Sheaf.CategoryTheory.ColimitSites
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Local surjective comparison with the stage presheaf colimit
 

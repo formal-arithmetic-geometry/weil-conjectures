@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 public import Mathlib.RingTheory.Ideal.Maps
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Finite coefficients of a finite-stalk module sheaf

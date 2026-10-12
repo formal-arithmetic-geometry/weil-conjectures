@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
 
 /-! # K-flat models under open restriction
 

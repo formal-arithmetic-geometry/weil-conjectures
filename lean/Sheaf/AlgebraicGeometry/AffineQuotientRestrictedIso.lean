@@ -6,6 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # The sheaf associated with an affine quotient

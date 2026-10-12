@@ -6,6 +6,9 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Compatibility of the canonical comparison with smaller opens
 

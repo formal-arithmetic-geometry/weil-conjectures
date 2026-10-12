@@ -6,6 +6,14 @@ Authors: SHEAF group H2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Paper.ColimitSitesInjectiveSystem
 
 /-! # Exact connecting ladders for affine-stage cohomology
 

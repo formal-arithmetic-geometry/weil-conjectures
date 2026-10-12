@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # Detecting nonvanishing from the section-ring chart formula
 

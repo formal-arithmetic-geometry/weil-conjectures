@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleComplexFiltrationPageData
 public import Mathlib.CategoryTheory.Limits.Final
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.ExistsDirectedReindexing
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import Sheaf.CategoryTheory.KInjectiveBridge
+import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Functorial hypercohomology quotient presentations
 

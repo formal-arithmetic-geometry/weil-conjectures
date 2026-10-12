@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Affine module tensor CoherenceComparisons
 
 Source: Stacks Project, Morphisms, Lemma 01SB.

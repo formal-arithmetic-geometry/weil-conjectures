@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.Topology.RestrictInjectiveResolution
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Uniform cohomological dimension of inverse images of affine opens
 

@@ -15,6 +15,9 @@ import Sheaf.Algebra.Homology.FilteredComplexZBDescription
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
+import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
 
 /-! # Coherent filtered Cartan--Eilenberg total maps
 

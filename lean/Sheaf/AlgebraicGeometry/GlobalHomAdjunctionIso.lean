@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 import Sheaf.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
 import Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
 
 /-!
 Canonical adjunction and tensor data are pinned by their characterising equations.

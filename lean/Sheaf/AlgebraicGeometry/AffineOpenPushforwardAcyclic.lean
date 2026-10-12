@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.CategoryTheory.GrothendieckComposablePair
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-! # Acyclic direct images from affine opens
 

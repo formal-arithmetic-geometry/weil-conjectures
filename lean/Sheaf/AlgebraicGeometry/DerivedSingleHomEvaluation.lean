@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 
 /-! # Derived single-source Hom evaluation
 

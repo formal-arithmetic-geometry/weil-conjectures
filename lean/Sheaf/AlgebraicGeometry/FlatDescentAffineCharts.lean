@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-!
 # Affine charts for flatness descent

@@ -1,5 +1,8 @@
 module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.RingTheory.StrictHenselizationTriples
 @[expose] public section
 universe u
 open CategoryTheory

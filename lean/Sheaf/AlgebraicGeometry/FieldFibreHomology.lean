@@ -2,6 +2,7 @@ module
 
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 
 @[expose] public section
 set_option autoImplicit false

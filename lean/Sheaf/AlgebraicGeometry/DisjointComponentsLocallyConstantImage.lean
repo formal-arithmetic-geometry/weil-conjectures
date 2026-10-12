@@ -6,6 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Local constancy of direct image from disjoint components
 

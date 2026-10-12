@@ -2,6 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeConstruction
 
 @[expose] public section
 

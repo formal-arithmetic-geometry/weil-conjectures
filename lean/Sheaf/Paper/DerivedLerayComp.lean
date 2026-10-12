@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Composition of the unbounded Leray comparison -/
 

@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Degreewise affine singleton tensor comparison
 Source: Stacks Project, Tag 03P2, affine tensor-product calculation.

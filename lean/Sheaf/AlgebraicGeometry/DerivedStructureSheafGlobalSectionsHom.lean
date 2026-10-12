@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Derived global sections and maps from the structure sheaf
 Source: Stacks Project, Tag 09M1, proof, first paragraph.

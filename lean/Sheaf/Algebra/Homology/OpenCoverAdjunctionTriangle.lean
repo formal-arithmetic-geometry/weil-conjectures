@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Geometry.RingedSpace.Basic
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # Canonical adjunction maps in the geometric open-cover triangle
 

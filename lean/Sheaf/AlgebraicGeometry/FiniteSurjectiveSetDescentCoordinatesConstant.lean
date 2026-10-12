@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 public import WeilConjectures.SixFunctors.Finite.Stalk
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Constancy of compatible finite-descent stalk coordinates
 

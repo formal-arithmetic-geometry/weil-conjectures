@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+import Sheaf.Algebra.Homology.HomComplex
 
 @[expose] public section
 

@@ -6,6 +6,11 @@ Authors: SHEAF group H2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.CategoryTheory.ColimitSiteSections
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # The degree-zero affine continuity kernel
 

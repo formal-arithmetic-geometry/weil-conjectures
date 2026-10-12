@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.AffineTildeTotalTensor
+import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
+import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Derived tensor through the canonical affine spectrum chart
 

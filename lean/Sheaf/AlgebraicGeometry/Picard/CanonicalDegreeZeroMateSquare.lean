@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageCompariso
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Degree-zero compatibility square for the canonical mate
 

@@ -6,6 +6,7 @@ Authors: SHEAF worker B2
 module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Sheaf.FieldTheory.GaloisUnitsCohomology
 
 /-!
 # Splitting the tensor product of scalar-defect realizations

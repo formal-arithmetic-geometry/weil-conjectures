@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Supported thickening systems and completion isomorphisms
 Source: Stacks Project, Remark 088F and Lemma 087T.

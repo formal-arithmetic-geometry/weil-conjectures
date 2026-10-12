@@ -6,6 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
 
 /-!
 # Eventual smoothness in a noetherian approximation

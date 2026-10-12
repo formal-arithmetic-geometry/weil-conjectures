@@ -12,6 +12,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
+import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
+import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.RingTheory.NormalLocalDepthTwo
 
 /-!
 # Extension over a stalk before spreading

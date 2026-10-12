@@ -2,6 +2,9 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.FieldTheory.OpenSubgroupFixedField
+import Sheaf.RepresentationTheory.SylowModuleFiltration
 @[expose] public section
 set_option autoImplicit false
 universe u

@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.DescendSurjective
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.CategoryTheory.ColimitSiteCechComplex
 import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # Finite Čech complexes on inverse limits of schemes
 

@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
+import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSections
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # EtaleGeneratorsPullbackSourceComparison
 

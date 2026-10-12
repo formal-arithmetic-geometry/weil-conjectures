@@ -2,6 +2,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.StrictHenselization
 @[expose] public section
 universe u
 set_option autoImplicit false

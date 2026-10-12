@@ -6,6 +6,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 import Sheaf.RingTheory.ImprovePresentation
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
+import Sheaf.RingTheory.SingularIdeal
 
 @[expose] public section
 

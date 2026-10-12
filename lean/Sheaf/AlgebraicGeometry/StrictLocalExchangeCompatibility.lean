@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Exchange and the representative restriction comparison
 

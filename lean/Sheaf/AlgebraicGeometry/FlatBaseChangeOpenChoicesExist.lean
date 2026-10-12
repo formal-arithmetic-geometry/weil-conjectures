@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # FlatBaseChangeOpenChoicesExist
 

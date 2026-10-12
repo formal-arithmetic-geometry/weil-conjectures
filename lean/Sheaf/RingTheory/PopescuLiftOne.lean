@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RingTheory.PopescuLiftInduction
 import Sheaf.RingTheory.PopescuDesingularizeLiftingApply
+import Sheaf.RingTheory.PopescuResolution
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Lifting a Popescu resolution for one element

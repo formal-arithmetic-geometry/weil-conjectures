@@ -6,6 +6,16 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
+import Sheaf.Paper.SiteRestrictionInjectives
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Computing source derived sections on an injective representative
 

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Module constructibility from finite sets and finite coefficients

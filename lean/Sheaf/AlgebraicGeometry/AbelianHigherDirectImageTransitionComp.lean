@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Composition of abelian higher direct image transitions
 Source: Stacks Project, Tag 09Z1, canonical cohomology comparison maps. -/

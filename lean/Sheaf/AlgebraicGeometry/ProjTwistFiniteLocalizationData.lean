@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import Sheaf.RingTheory.CoverModuleExact
+import Sheaf.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
 
 /-!
 # Finite localization data of twist sections

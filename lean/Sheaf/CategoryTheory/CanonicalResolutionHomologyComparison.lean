@@ -6,6 +6,7 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.CategoryTheory.CanonicalResolutionDerivedIso
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-! # Resolution comparisons and the composite derived unit
 

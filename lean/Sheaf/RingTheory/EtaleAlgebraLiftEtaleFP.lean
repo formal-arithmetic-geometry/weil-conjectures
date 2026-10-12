@@ -1,6 +1,7 @@
 module
 public import Sheaf.RingTheory.JacobianPresentationLift
 public import Mathlib.RingTheory.Etale.Basic
+import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 @[expose] public section
 universe u v
 namespace Algebra

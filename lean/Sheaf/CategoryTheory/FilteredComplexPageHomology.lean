@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
 
 /-!
 # Successor homology of a filtered-complex quotient page

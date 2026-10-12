@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Quasi-coherence of the affine tensor pushout algebra
 
 Source: Stacks Project, Morphisms, Lemma 01SB.

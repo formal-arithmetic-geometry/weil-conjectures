@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Exact comparison ladder for binary continuity
 

@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos
+import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
+import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The canonical exact-derived affine algebra counit
 

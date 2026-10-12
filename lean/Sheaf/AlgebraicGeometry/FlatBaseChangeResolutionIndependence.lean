@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # FlatBaseChangeResolutionIndependence
 

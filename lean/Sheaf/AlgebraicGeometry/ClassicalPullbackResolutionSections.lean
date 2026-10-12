@@ -6,6 +6,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-! # Pullback computed on a comparison of injective resolutions -/
 

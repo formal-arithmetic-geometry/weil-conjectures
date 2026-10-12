@@ -6,6 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # The top-open comparison unit equation
 

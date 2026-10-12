@@ -11,6 +11,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.CategoryTheory.ExactCoupleMorphism
+import Sheaf.CategoryTheory.TruncationHypercohomology
 
 /-! # Finite filtered comparison from a bounded-below second-page coproduct comparison
 
