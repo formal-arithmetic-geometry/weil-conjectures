@@ -6300,3 +6300,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/V1/Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraAffineInclusion (stage 3; reviewer PASS; first push; landing 20261012T053959-L-2648506 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:40 L: merged deliver/V2/Sheaf.Algebra.Homology.FilteredFreeResolution (stage 3; reviewer PASS; first push; landing 20261012T054000-L-2648627 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:40 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage (stage 3; reviewer PASS; first push; landing 20261012T054000-L-2648778 (interface); batch 20261012T053916; modules 5; new nodes 4)
+- 05:40 L: merged deliver/W2/Sheaf.Algebra.Homology.KFlat (stage 3; reviewer PASS; first push; landing 20261012T054000-L-2648887 (proof); batch 20261012T053916; modules 1; new nodes 0)

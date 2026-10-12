@@ -98,7 +98,15 @@ theorem preservesZeroMorphisms_curriedTensor_obj
       ((sheafCompose J
           (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))).obj
         M).PreservesZeroMorphisms :=
-  sorry
+  by
+    let := monoidalCategory R
+    let := symmetricCategory R
+    refine ⟨fun X Y ↦ ?_⟩
+    change M ◁ (0 : X ⟶ Y) = 0
+    have h : (0 : X ⟶ Y) ▷ M = 0 :=
+      congrArg (fun t ↦ t.app M) ((curriedTensor _).map_zero X Y)
+    apply (cancel_mono (β_ M Y).hom).1
+    rw [BraidedCategory.braiding_naturality_right, h, comp_zero, zero_comp]
 
 end SheafOfModules
 
