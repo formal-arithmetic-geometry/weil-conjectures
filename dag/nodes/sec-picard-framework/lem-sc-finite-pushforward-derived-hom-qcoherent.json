@@ -29,11 +29,9 @@
  ],
  "proof": [
   {
-   "text": "Because $f$ is finite and $Y$ is Noetherian, $B=f_*\\mathcal O_X$ is coherent quasi-coherent by [lem-weil-pbc-finite-pushforward-coherent]. By [lem-sc-coherent-pseudo-coherent] and [def-pur-pseudo-coherent-complex], $B$ is pseudo-coherent.",
+   "text": "Substitute the given equality of sheaf algebras B = f_* O_X. Its underlying module is definitionally (Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf). Apply isCoherent_unit_of_finite_to_locallyNoetherian and then the coherence clause of isCoherent_pushforward_of_isFinite [lem-weil-pbc-finite-pushforward-coherent].",
    "uses": [
-    "lem-weil-pbc-finite-pushforward-coherent",
-    "lem-sc-coherent-pseudo-coherent",
-    "def-pur-pseudo-coherent-complex"
+    "lem-weil-pbc-finite-pushforward-coherent"
    ],
    "elementary": false,
    "source": {
@@ -42,7 +40,20 @@
    }
   },
   {
-   "text": "Apply [lem-sc-pseudo-coherent-rhom-qcoherent] to the quasi-coherent algebra $B$ and $K$. By [def-pc-derived-rhom-algebra-module] its derived internal Hom has the natural $B$-module structure, and the lemma gives $D^+_{\\mathrm{QCoh}}(B)$ membership as defined in [def-pc-derived-category-qcoh-algebra].",
+   "text": "Apply isCoherent_iff_isQuasicoherent_and_isFiniteType [pqf-lem-coherent-ft-locnoeth] on the Noetherian target to obtain quasi-coherence of B. Apply isPseudoCoherent_singleFunctor_obj_of_isCoherent [lem-sc-coherent-pseudo-coherent] to obtain pseudo-coherence [def-pur-pseudo-coherent-complex] of B in degree zero.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sc-coherent-pseudo-coherent",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex and literature/stacks-project/perfect.tex",
+    "place": "Tag 01XZ; Tag 08E8, lemma-identify-pseudo-coherent-noetherian"
+   }
+  },
+  {
+   "text": "Apply pseudoCoherentRHomQuasiCoherent [lem-sc-pseudo-coherent-rhom-qcoherent] to B, its quasi-coherence and pseudo-coherence, K.obj, K.property and hK. Mathlib DerivedCategory.Q_obj_single_obj identifies the degree-zero representatives. The lemma supplies the algebra-module derived quasi-coherence, underlying quasi-coherence and underlying lower bound together, for [def-pc-derived-rhom-algebra-module] and [def-pc-derived-category-qcoh-algebra]. Package these with the previously proved pseudo-coherence and quasi-coherence witness.",
    "uses": [
     "lem-sc-pseudo-coherent-rhom-qcoherent",
     "def-pc-derived-rhom-algebra-module",
@@ -53,21 +64,11 @@
     "document": "literature/stacks-project/duality.tex",
     "place": "Tag 0AX2 and perfect.tex Tag 0A6H"
    }
-  },
-  {
-   "text": "By [def-pc-derived-category-qcoh-algebra], a quasi-coherent $B$-module has quasi-coherent underlying $\\mathcal O_Y$-module. Restriction of scalars leaves cohomology unchanged, so the object belongs to $D^+_{\\mathrm{QCoh}}(Y)$. ",
-   "uses": [
-    "def-pc-derived-category-qcoh-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 0A6A and 08DL"
-   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-sc-coherent-pseudo-coherent",
   "def-pur-pseudo-coherent-complex",
   "lem-sc-pseudo-coherent-rhom-qcoherent",
@@ -75,9 +76,11 @@
   "def-pc-derived-category-qcoh-algebra"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AX2"
+  "place": "Tag 0AX2; Lean composition of the existing coherence and pseudo-coherent derived Hom lemmas"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -142,5 +145,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T085403-L-49132",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

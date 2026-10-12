@@ -10,8 +10,8 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentPseudoCoherent
-import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent
 
@@ -39,20 +39,18 @@ Source: Stacks Project, Duality for Schemes, Tag 0AX2, with Tags 0AUC, 0AUP and 
 (blueprint: lem-sc-finite-pushforward-derived-hom-qcoherent).
 
 Proof:
-1. Finite pushforward of the structure sheaf is coherent and quasi-coherent on the
-   Noetherian target (`lem-weil-pbc-finite-pushforward-coherent`). Coherent modules on a
-   Noetherian scheme are pseudo-coherent (`lem-sc-coherent-pseudo-coherent`), using
-   `def-pur-pseudo-coherent-complex` for the degree-zero complex of `B`.
-2. Apply `lem-sc-pseudo-coherent-rhom-qcoherent` to `B` and `K`. The functor
-   `derivedRHomAlgebraModule` (`def-pc-derived-rhom-algebra-module`) supplies the natural
-   algebra action; `sheafAlgebraDerivedQCohProperty`
-   (`def-pc-derived-category-qcoh-algebra`) expresses the asserted membership in
-   `D⁺_QCoh(B)`. Local boundedness becomes global using a finite affine cover of `Y`.
-3. Restriction of scalars is exact and leaves underlying cohomology sheaves unchanged.
-   By `def-pc-derived-category-qcoh-algebra`, quasi-coherent `B`-modules have
-   quasi-coherent underlying `𝒪_Y`-modules. The same lower bound therefore applies after
-   forgetting the action. `derivedRHomAlgebraModule_underlying` identifies this forgotten
-   object with `derivedInternalHom` (`def-pur-derived-internal-hom`). -/
+1. The equality identifying B includes its algebra structure. After substitution, its
+   underlying module is definitionally the pushforward of the unit module. Apply
+   `isCoherent_unit_of_finite_to_locallyNoetherian` and
+   `isCoherent_pushforward_of_isFinite` (lem-weil-pbc-finite-pushforward-coherent).
+2. On the Noetherian target, the coherence criterion
+   `isCoherent_iff_isQuasicoherent_and_isFiniteType` (pqf-lem-coherent-ft-locnoeth)
+   gives quasi-coherence. Apply `isPseudoCoherent_singleFunctor_obj_of_isCoherent`
+   (lem-sc-coherent-pseudo-coherent) to obtain pseudo-coherence of B[0].
+3. Apply `pseudoCoherentRHomQuasiCoherent` (lem-sc-pseudo-coherent-rhom-qcoherent)
+   with K's quasi-coherence property and lower bound. Mathlib's `Q_obj_single_obj`
+   identifies the two presentations of B[0]. The lemma gives all three remaining
+   conclusions, including the underlying object's quasi-coherence and lower bound. -/
 theorem finite_pushforward_derivedHom_qcoherent {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y]
     (B : Y.CommAlgebraSheaf)
@@ -81,6 +79,18 @@ theorem finite_pushforward_derivedHom_qcoherent {X Y : Scheme.{u}}
           ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).map
             B.hom)).mapDerivedCategory.obj
               ((derivedRHomAlgebraModule Y B hB).obj K.obj)).IsGE n := by
-  sorry
+  have hmod : B.toModule =
+      (Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf) := by
+    subst B
+    rfl
+  have hcoh : RingedSpace.IsCoherent Y.toRingedSpace B.toModule := by
+    rw [hmod]
+    exact (Scheme.Modules.isCoherent_pushforward_of_isFinite f _
+      (Scheme.Modules.isCoherent_unit_of_finite_to_locallyNoetherian f)).1
+  have hB := ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    Y B.toModule).mp hcoh).1
+  have hpc := Scheme.isPseudoCoherent_singleFunctor_obj_of_isCoherent Y B.toModule hcoh
+  refine ⟨hB, hpc, ?_⟩
+  exact pseudoCoherentRHomQuasiCoherent Y B hB (by simpa using hpc) K.obj K.property hK
 
 end AlgebraicGeometry
