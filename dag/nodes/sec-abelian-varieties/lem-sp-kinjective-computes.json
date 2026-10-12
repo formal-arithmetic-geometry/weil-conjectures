@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "Apply the comparison principle to the two resolution maps $f:K\\to I$ and $g:K\\to J$. It gives maps $u:I\\to J$ and $w:J\\to I$, unique up to homotopy, with $uf\\simeq g$ and $wg\\simeq f$. Applying the principle again with target $I$ (respectively $J$) to the two maps from $K$ obtained by composing with $f$ (respectively $g$) shows $wu\\simeq\\operatorname{id}_I$ and $uw\\simeq\\operatorname{id}_J$. The additive functor $v$ carries the displayed homotopies to homotopies, so $v(u)$ and $v(w)$ are inverse in the homotopy category and induce the same cohomology maps by [lem-weil-pbc-homotopic-maps-equal-cohomology]. For a morphism of resolved complexes, composing either comparison map with the source and target resolution maps gives the same map from the original complex; the same uniqueness argument therefore makes these isomorphisms commute with that morphism. Thus the identification is canonical and functorial in $K$.",
+   "text": "Apply the comparison principle to the two resolution maps. Surjectivity gives comparison maps under K; injectivity gives uniqueness and shows their composites equal identities in the homotopy category. Lift these equalities to homotopies. Applying the additive functor to the homotopies gives the displayed inverse morphisms and isomorphism after quotienting. For each morphism of bounded-below complexes choose its comparison lift. Uniqueness proves the identity law; compose the equations under the resolution maps to prove the composition law. This defines the functor on the prescribed chosen resolutions, with identity objectwise comparison isomorphisms.",
    "uses": [
     "lem-sp-kinjective-comparison-principle",
     "def-sp-kinjective-bridge",
@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "The category $\\mathcal A$ is Grothendieck, so it has enough injectives by [lem-sp-grothendieck-enough-injectives]; this is the hypothesis of [lem-weil-pbc-dplus-injective-representative] and of the definition of ^pv$ in [def-sp-left-exact-additive]. By [lem-weil-pbc-dplus-injective-representative], every bounded-below complex of injectives is K-injective. An injective resolution \\to I^\\bullet$ is bounded below, consists of injectives, and is a quasi-isomorphism by [def-sp-injective-resolutions], hence is a K-injective resolution of [0]$. The definition of $ in [def-sp-kinjective-bridge] gives (X[0])\\cong v(I^\\bullet)$, and the definition of ^pv(X)$ in [def-sp-left-exact-additive] identifies its hmtBcth cohomology with ^pv(X)$.",
+   "text": "Grothendieck abelian categories have enough injectives, hence chosen ordinary injective resolutions exist. Mathlib CochainComplex.isKInjective_of_injective proves K-injectivity of each bounded-below complex of injectives. The extension to integer degrees of an InjectiveResolution augmentation is a quasi-isomorphism and its target is K-injective, by the existing Mathlib instances. Compare any chosen K-injective resolution of X[0] with this extension using the comparison principle. Apply HomotopyCategory.homologyFunctor to the resulting mapped comparison isomorphism and use homologyFunctorFactors at both endpoints. HomologicalComplex.mapExtendIso (WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap) identifies F of the extended injective resolution with the extension of F of the resolution. HomologicalComplex.extendHomologyIso identifies its integer-degree p homology with its natural-degree p homology. InjectiveResolution.isoRightDerivedObj identifies the latter with (F.rightDerived p).obj X.",
    "uses": [
     "lem-sp-grothendieck-enough-injectives",
     "lem-weil-pbc-dplus-injective-representative",
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "The shift of a K-injective complex is K-injective and the shift of a quasi-isomorphism is a quasi-isomorphism by [lem-weil-pbc-kinjective-shift]. Thus $K[n]\\to I[n]$ is a K-injective resolution. Since $v$ is additive, it commutes termwise with shifts, so $Rv(K[n])=v(I[n])=v(I)[n]=(RvK)[n]$.",
+   "text": "The shift of a K-injective complex is K-injective and the shift of a quasi-isomorphism is a quasi-isomorphism. Use the shift compatibility isomorphism of CochainComplex.Plus.ι to regard the shifted augmentation as a resolution of (K[n]).obj. Compare the given resolution of K[n] with this shifted resolution. Apply F termwise and the homotopy quotient to get the comparison isomorphism, then compose with the commShiftIso of F.mapHomologicalComplex and of HomotopyCategory.quotient.",
    "uses": [
     "lem-weil-pbc-kinjective-shift"
    ],
@@ -83,7 +83,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-kinjective-computes.md",
-  "place": "## Proof"
+  "place": "Proof clauses (1)--(3), realized in Lean by N1 using Mathlib homotopy quotient, shift, and homology APIs and the existing mapExtendIso"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -164,5 +164,15 @@
   "group": "K1",
   "result": "fix",
   "note": "C,D Grothendieck abelian (both, per node), F additive+PreservesFiniteLimits (left exact), K : Plus C; (1) comparison maps under K, homotopy inverse, unique up to homotopy, canonical iso Q.map(M.map u) of recorded rightDerivedComplexWithResolution, functoriality RF with naturality; (2) bounded-below injectives IsKInjective, InjectiveResolution extended is QuasiIso into K-injective, H^p ≅ F.rightDerived p for p:ℕ; (3) iso in K(D) for all n:ℤ; FIX: dropped proof-internal shifted-resolution existence/HEq sub-conjunct from (3)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T053944-L-2640823",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
