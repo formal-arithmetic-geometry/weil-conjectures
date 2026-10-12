@@ -318,9 +318,11 @@ def check(args):
             continue
         changed.append(path)
         expected = path.parent.name if path.name == '_section.md' else path.name.removesuffix('.md')
+        if front.get('kind') == 'proof' and path.name != front.get('of', '') + '.proof.md':
+            errors.append(f'{path}: proof filename must match of target')
         if expected != ident and front.get('kind') != 'proof':
             errors.append(f'{path}: id {ident} != filename {expected}')
-        if high(path):
+        if high(path) or (front.get('of') in bp and high(bp[front['of']][0])):
             errors.append(f'protected layer changed: {path}')
         if FORBIDDEN.search(actual):
             errors.append(f'forbidden text: {path}: {FORBIDDEN.search(actual).group()}')
