@@ -8,8 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Base change on the full affine étale sites
@@ -38,7 +36,9 @@ theorem affineEtaleBaseChange_isAffine {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] (U : T.FullAffineEtale) :
     IsAffine (((MorphismProperty.Over.pullback @Etale ⊤ h).obj
       ((fullAffineEtaleInclusion T).obj U)).left) := by
-  sorry
+  let : IsAffine ((𝟭 Scheme).obj U.obj.left) := U.property
+  change IsAffine (pullback U.obj.hom h)
+  exact AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1 U.obj.hom h
 
 /-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR
 (blueprint: lem-weil-pbc-affine-etale-site-base-change).
