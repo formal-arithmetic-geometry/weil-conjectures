@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree
+import Sheaf.AlgebraicGeometry.FiniteEquationsOfClosedAffine
 
 /-! # Finite equations for the closed fibre-degree sublevel locus -/
 
@@ -43,6 +43,11 @@ theorem exists_finite_equations_degree_sublevel_inter_affine
     (hWge : ∀ s : S, s ∈ W → r ≤ (f.fiberToSpecResidueField s).finrankΓ) :
     ∃ t : Finset Γ(S, W), ∀ s : S, s ∈ W →
       ((f.fiberToSpecResidueField s).finrankΓ ≤ r ↔ ∀ a ∈ t, s ∉ S.basicOpen a) := by
-  sorry
+  obtain ⟨I, hI, hIZ⟩ := exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine
+    f hf r W hW hclosed hdegree hWge
+  obtain ⟨t, ht⟩ := exists_finite_equations_of_finitely_generated_zeroLocus hI
+  refine ⟨t, fun s hs ↦ ?_⟩
+  change s ∈ {s : S | (f.fiberToSpecResidueField s).finrankΓ ≤ r} ↔ _
+  exact (hIZ s hs).trans (ht s hs)
 
 end AlgebraicGeometry.Scheme.Hom

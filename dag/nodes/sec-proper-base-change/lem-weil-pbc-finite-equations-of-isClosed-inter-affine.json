@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-finite-equations-of-isClosed-inter-affine",
+ "kind": "statement",
+ "title": "Finitely generated ideal for a quasi-finite degree sublevel locus on an affine open",
+ "statement": "Under the flat, locally finitely presented, separated, quasi-finite hypotheses and the universal degree criterion, the degree-≤r locus restricted to an affine open W is the zero locus of a finitely generated ideal of Γ(S,W).",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Tag 07RZ, proof, second paragraph"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Identify the affine open with the spectrum of its coordinate ring. Express the closed sublevel locus as the vanishing locus of an ideal, descend the finite locally free degree-r morphism along the filtered system of finitely generated subideals, and use the universal degree criterion to obtain a finitely generated subideal with the same vanishing locus.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07RZ, second paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen, IsCompact",
+   "results": "AlgebraicGeometry.IsAffineOpen.isCompact, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf, AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left, AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right, AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left, AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right",
+   "date": "2026-10-12",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi finite flat morphism degree rank locus quasicompact affine open",
+   "results": "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.flat_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-12",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen, IsCompact",
+   "results": "AlgebraicGeometry.IsAffineOpen.isCompact, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf, AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left, AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right, AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_left, AlgebraicGeometry.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right",
+   "date": "2026-10-12",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "finrankΓ",
+   "results": "no hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine open fibre degree sublevel locus is cut out by finitely many sections for a flat separated quasi finite finitely presented scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteDegreeSublevelFiniteEquations",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qf-degree-sublevel-finite-equations",
+   "place": "decomposition of its proof",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEquationsOfClosedAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEquationsOfClosedAffine.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine",
+  "statement": "theorem exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite) (r : ℕ) (W : S.Opens) (hW : IsAffineOpen W) (hclosed : IsClosed {s : S | (f.fiberToSpecResidueField s).finrankΓ ≤ r}) (hdegree : ∀ (T : Scheme.{u}) (g : T ⟶ S), (pullback.snd f g).IsFiniteLocallyFreeOfDegree r ↔ Set.range g ⊆ {s : S | (f.fiberToSpecResidueField s).finrankΓ = r}) (hWge : ∀ s : S, s ∈ W → r ≤ (f.fiberToSpecResidueField s).finrankΓ) : ∃ I : Ideal Γ(S, W), I.FG ∧ ∀ s : S, s ∈ W → (s ∈ {s : S | (f.fiberToSpecResidueField s).finrankΓ ≤ r} ↔ s ∈ S.zeroLocus (U := W) I)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T165531-L-2939372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T165531-L-2939372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
