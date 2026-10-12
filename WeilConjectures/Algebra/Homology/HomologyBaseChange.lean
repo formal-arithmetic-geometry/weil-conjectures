@@ -248,4 +248,69 @@ theorem homologyBaseChange_naturality {S₁ S₂ : ShortComplex (ModuleCat.{u} A
     erw [homologyMap_moduleCatHomologyIso_inv_mk]
     congr 2
 
+/-- **Flat base change commutes with homology**: for `B` flat over `A`, the base change map on
+homology is bijective. -/
+theorem bijective_homologyBaseChange_of_flat [Module.Flat A B] :
+    Function.Bijective (S.homologyBaseChange B) := by
+  rw [bijective_homologyBaseChange_iff]
+  refine S.bijective_homologyBaseChangeAux_of_exact B
+    (Module.Flat.lTensor_preserves_injective_linearMap _ Subtype.val_injective)
+    (Module.Flat.lTensor_exact B fun x ↦ ?_)
+  simp
+
+section FieldExtension
+
+variable (L L' : Type u) [Field L] [Field L'] [Algebra A L] [Algebra A L'] [Algebra L L']
+  [IsScalarTower A L L']
+
+/-- Base change in two steps `A ⟶ L ⟶ L'` is base change along `A ⟶ L'`. -/
+noncomputable def baseChangeBaseChangeIso :
+    (S.baseChange L).baseChange L' ≅ S.baseChange L' :=
+  ShortComplex.isoMk (AlgebraTensorModule.cancelBaseChange A L L' L' S.X₁).toModuleIso
+    (AlgebraTensorModule.cancelBaseChange A L L' L' S.X₂).toModuleIso
+    (AlgebraTensorModule.cancelBaseChange A L L' L' S.X₃).toModuleIso
+    (by
+      ext : 1
+      refine LinearMap.ext fun x ↦ ?_
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
+      | tmul l y =>
+        induction y using TensorProduct.induction_on with
+        | zero => simp
+        | add y y' hy hy' =>
+          simp only [tmul_add, map_add] at hy hy' ⊢
+          rw [hy, hy']
+        | tmul a x =>
+          simp only [ModuleCat.hom_comp, LinearMap.comp_apply, LinearEquiv.toModuleIso_hom,
+            ModuleCat.hom_ofHom]
+          erw [AlgebraTensorModule.cancelBaseChange_tmul])
+    (by
+      ext : 1
+      refine LinearMap.ext fun x ↦ ?_
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
+      | tmul l y =>
+        induction y using TensorProduct.induction_on with
+        | zero => simp
+        | add y y' hy hy' =>
+          simp only [tmul_add, map_add] at hy hy' ⊢
+          rw [hy, hy']
+        | tmul a x =>
+          simp only [ModuleCat.hom_comp, LinearMap.comp_apply, LinearEquiv.toModuleIso_hom,
+            ModuleCat.hom_ofHom]
+          erw [AlgebraTensorModule.cancelBaseChange_tmul])
+
+/-- **The dimension of the homology after base change to a field does not change under a field
+extension.** -/
+theorem finrank_homology_baseChange_eq_of_isScalarTower :
+    Module.finrank L' (S.baseChange L').homology = Module.finrank L (S.baseChange L).homology := by
+  rw [← (homologyMapIso (S.baseChangeBaseChangeIso L L')).toLinearEquiv.finrank_eq,
+    ← (LinearEquiv.ofBijective _
+      ((S.baseChange L).bijective_homologyBaseChange_of_flat L')).finrank_eq,
+    Module.finrank_baseChange]
+
+end FieldExtension
+
 end CategoryTheory.ShortComplex
