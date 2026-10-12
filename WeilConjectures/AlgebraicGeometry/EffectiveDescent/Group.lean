@@ -160,6 +160,8 @@ abbrev descendPoint {T : Scheme.{u}} {f : T ⟶ X} (a : Over.mk f ⟶ V) :
     rw [← Category.assoc, Over.w a]
     rfl)
 
+/-- Restricting the point of `V` induced by `descendPoint hqV a` along the section
+`T ⟶ T ×_Y X` given by `f` recovers `a`. -/
 lemma homMk_liftPoint_descendPoint {T : Scheme.{u}} {f : T ⟶ X} (a : Over.mk f ⟶ V) :
     (Over.homMk (pullback.lift (𝟙 T) f (by simp)) (by simp) :
       Over.mk f ⟶ Over.mk (pullback.snd (f ≫ p) p)) ≫ liftPoint hqV (descendPoint hqV a) = a := by

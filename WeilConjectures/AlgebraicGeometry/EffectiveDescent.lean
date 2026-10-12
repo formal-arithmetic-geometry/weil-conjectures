@@ -18,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 
 /-!
 # Effective descent for schemes
@@ -33,10 +34,18 @@ finite separable extension of the base field.
   free morphism, descent data on schemes in which every finite set of points lies in an affine open
   (for instance projective schemes over a field) are effective (blueprint
   `thm-pd-effective-descent`).
+- `CategoryTheory.Over.DescentDatum.isEffective_of_isClosedImmersion`: along a surjective finite
+  locally free morphism with affine source `X`, descent data on projective schemes over `X` are
+  effective (blueprint `thm-pd-effective-descent`).
 - `CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback`: compatible morphisms descend
   (blueprint `lem-pd-morphisms-descend`).
-- `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible group scheme
-  structures descend (blueprint `lem-pd-group-scheme-descent`).
+- `CategoryTheory.Over.DescentDatum.existsUnique_grpObj_of_isPullback`: compatible group scheme
+  structures descend, uniquely (blueprint `lem-pd-group-scheme-descent`).
+- `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible commutative group
+  scheme structures descend (blueprint `lem-pd-group-scheme-descent`).
+- `AlgebraicGeometry.locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback`:
+  finite type, smoothness, properness and connectedness descend along a field extension (blueprint
+  `thm-pd-fpqc-local-properties`).
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`:
   properness, smoothness of relative dimension `n` and geometric integrality descend along a field
   extension (blueprint `thm-pd-fpqc-local-properties`).
@@ -70,6 +79,33 @@ theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentati
   refine isEffective_of_forall_exists_mem fun v ↦ ?_
   obtain ⟨U, hv, hU, hUa, W, hW, hUW⟩ := D.exists_isInvariant_isAffineOpen hV v
   exact ⟨U, hU, hv, D.isEffective_restrict_of_isAffineOpen hU hUa hW hUW⟩
+
+/-- **Effective descent for projective schemes.** Let `p : X ⟶ Y` be a surjective finite locally
+free morphism with `X` affine, and let `V` be a scheme over `X` such that `V ⟶ X` is projective:
+there is a closed immersion `i : V ⟶ ℙ(α; X)`, with `α` finite, whose composition with the
+projection `ℙ(α; X) ⟶ X` is the structure morphism of `V`. Then every descent datum on `V`
+relative to `p` is effective.
+
+This is Stacks 0CCJ: finitely many points of `V` lie in an affine open (Stacks 01ZY,
+`exists_isAffineOpen_superset_of_isImmersion_of_isAffine`), which is the hypothesis of
+`isEffective_of_isFinite`. The blueprint states this for an arbitrary base; here `X`, hence the
+projective space `ℙ(α; X)`, is assumed affine, which covers the case of a finite extension of
+fields used for the Jacobian.
+
+(blueprint: `thm-pd-effective-descent`) -/
+theorem isEffective_of_isClosedImmersion [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
+    [Surjective p] [IsAffine X] {V : Over X} {α : Type u} [Finite α] (i : V.left ⟶ ℙ(α; X))
+    [IsClosedImmersion i] (hi : i ≫ ℙ(α; X) ↘ X = V.hom) (D : Over.DescentDatum p V) :
+    D.IsEffective := by
+  have : CompactSpace ℙ(α; X) := QuasiCompact.compactSpace_of_compactSpace (ℙ(α; X) ↘ X)
+  have : CompactSpace V.left := QuasiCompact.compactSpace_of_compactSpace i
+  have : QuasiSeparated V.hom := by
+    rw [← hi]
+    infer_instance
+  have : QuasiSeparatedSpace V.left := quasiSeparatedSpace_of_quasiSeparated V.hom
+  exact D.isEffective_of_isFinite fun s hs ↦
+    exists_isAffineOpen_superset_of_isImmersion_of_isAffine i s hs
+
 
 /-- **Morphisms descend.** Let `p : X ⟶ Y` be faithfully flat and quasi-compact, and let `V`, `W`
 be schemes over `X` with descent data `D`, `E` that are effective, with descended schemes `V₀`,

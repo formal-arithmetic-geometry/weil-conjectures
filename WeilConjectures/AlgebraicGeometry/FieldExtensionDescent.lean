@@ -36,6 +36,9 @@ scheme over a field `k` can be checked after base change to an arbitrary field e
   surjective morphisms.
 - `AlgebraicGeometry.GeometricallyIntegral.of_isPullback`: geometric integrality descends along
   field extensions.
+- `AlgebraicGeometry.of_isPullback_Spec_map_algebraMap`,
+  `AlgebraicGeometry.connectedSpace_of_isPullback_Spec_map_algebraMap`: properties satisfying fpqc
+  descent, and connectedness, descend along field extensions.
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux`:
   the combination of the above for a base change along a field extension.
 -/
