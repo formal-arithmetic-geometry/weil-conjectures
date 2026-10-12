@@ -7033,3 +7033,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatum (stage 3; reviewer PASS; first push; landing 20261012T085334-L-37394 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/S1/Sheaf.Topology.AbelianSheafFiniteGenerationExhaustion (stage 3; reviewer PASS; first push; landing 20261012T085334-L-37491 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FiniteConstantMapOpenFactorization (stage 3; reviewer PASS; first push; landing 20261012T085334-L-37588 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor (stage 3; reviewer PASS; first push; landing 20261012T085335-L-37690 (proof); batch 20261012T085205; modules 1; new nodes 0)
