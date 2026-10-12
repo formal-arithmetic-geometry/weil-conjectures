@@ -32,54 +32,42 @@
  ],
  "proof": [
   {
-   "text": "If $Y=\\varnothing$, the conclusion is immediate. Otherwise, [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] gives that the underlying space is Noetherian. Since $\\dim Y\\le0$, [lem-sc-zero-dim-noetherian-finite-discrete] gives that $|Y|$ is finite and discrete.",
+   "text": "Apply lem-sc-zero-dim-noetherian-finite-discrete directly, including the empty scheme. Install the resulting Finite Y and DiscreteTopology Y instances.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
     "lem-sc-zero-dim-noetherian-finite-discrete"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), proof"
-   }
+   "elementary": false
   },
   {
-   "text": "The scheme is quasi-compact and separated by hypothesis, and its underlying space is finite discrete by step 1. Therefore [lem-sc-finite-discrete-separated-affine] applies and $Y$ is affine.",
+   "text": "Apply the proved Mathlib finite-discrete scheme affineness instance (lem-weil-pbc-finite-discrete-scheme-affine). Quasi-compactness and separatedness are not needed for this step.",
    "uses": [
-    "lem-sc-finite-discrete-separated-affine"
+    "lem-weil-pbc-finite-discrete-scheme-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0CKV (properties-lemma-dimension-zero), final assertion"
-   }
+   "elementary": false
   },
   {
-   "text": "On an affine scheme the trivial invertible module $\\mathcal O_Y$ is ample: $Y$ is quasi-compact by hypothesis, which is condition (1); for condition (2) take $n=1$ and the global section $1$ of $\\mathcal O_Y=\\mathcal O_Y^{\\otimes1}$, whose nonvanishing locus is all of $Y$, which is affine by step 2, so every point $x\\in Y$ lies in the affine open $Y_1=Y$.",
+   "text": "Unfold IsAmple. Compactness is assumed. For each point choose n=1 and the global section obtained by transporting 1 through the inverse right unitor from the structure module to its tensor power one, and choose U=top, affine by step 2. Construct the canonical additive map from the structure-module stalk to the local ring as a colimit desc of the ring germs; germ compatibility with scalar multiplication makes it linear using stalkLinearMapMk. Compose it with the linear stalk map of the right unitor. This composite sends the chosen germ to 1, by naturality of germs and the inverse-hom identity. Its image of the maximal ideal times the source stalk is contained in the maximal ideal. Membership of the chosen germ there would therefore give 1 in the maximal ideal, contradicting maximality. This proves that the nonvanishing locus is the top open.",
    "uses": [
     "def-sc-invertible-module",
     "def-weil-pbc-ample-invertible-module",
-    "def-weil-affine-spectrum"
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0CKV, conclusion together with the definition of an ample invertible module"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
   "lem-sc-zero-dim-noetherian-finite-discrete",
-  "lem-sc-finite-discrete-separated-affine",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-stalk"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Lemmas 0AAX and 0CKV"
+  "place": "R3 Lean proof following 0AAX and 0CKV, with the ampleness verification of Definition 01PS; affineness via Mathlib finite-discrete instance."
  },
  "mathlib_searches": [
   {
@@ -158,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T085332-L-36681",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
