@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-abutment-finite-page-comparison",
+ "kind": "statement",
+ "title": "Canonical finite-page maps from incoming-alpha graded quotients",
+ "statement": "Let $X$ be a type-zero exact couple in an abelian category [def-sp-exact-couple], with the lower-half-plane bounds at $a$, and let $L$ be its limiting subobjects [def-sp-convergence], equal to the cycles and boundaries at the sharp bound $\\max(2,q-a+2,p+1)$. Suppose $\\iota_r:D_r\\to D$ is the recursively composed derived-D inclusion with $\\iota_0=1$, $F_A^pD^{0,n}$ is the incoming alpha image for $p\\ge0$ [def-sp-filtration], and $F_H=F_A.image(c_n)$ for invertible $c_n$ [def-sp-image-filtration]. For $p\\ge0$, set $R=\\max(p+3,q-a+2)$, $u=p-R+2$, $v=q+R-2$. The alpha iterate $\\lambda:D^{0,p+q}\\to D^{u,v}$ is invertible and induces an invertible lift of $F_A^p$ to $D_{R-2}^{u,v}$. The derived $g$ induces an isomorphism $\\psi:\\operatorname{gr}^pF_A\\to E_R^{p,q}$. Transport along $c$ induces $\\mathrm{gr}(c)$ and the step map, and stable cycles and boundaries induce $E_R^{p,q}\\to E_\\infty^{p,q}$. All these maps commute with their image inclusions and cokernel projections; their composite is the comparison $\\Theta:\\operatorname{gr}^pF_H\\to E_\\infty^{p,q}$. The exact index transports and all eight map equations are part of the interface below.\n\nExact Lean interface:\n```lean\ntheorem abutment_finite_page_comparison {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) (a : ℤ) (hDzero : ∀ p q : ℤ, q < a → IsZero (X.D p q)) (hEzero : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) (inc : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q) (hinc0 : ∀ p q : ℤ, inc 0 p q = 𝟙 _) (hinc : ∀ (r : ℕ) (p q : ℤ), inc (r + 1) p q = (X.pageCouple r).derivedDInclusion p q ≫ inc r p q) (L : X.LimitSubobjects) (hL : ∀ p q : ℤ, L.Z p q = X.cycleBoundaryTower.Z ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q ∧ L.B p q = X.cycleBoundaryTower.B ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q) (H : ℤ → B) (c : ∀ n : ℤ, X.D 0 n ⟶ H n) (hiso : ∀ n : ℤ, IsIso (c n)) (FA : ∀ n : ℤ, DecreasingFiltration (X.D 0 n)) (FH : ∀ n : ℤ, DecreasingFiltration (H n)) (hFA : ∀ n p : ℤ, 0 ≤ p → (FA n).step p = imageSubobject (X.incomingAlphaIter p.toNat 0 n)) (hFH : ∀ n : ℤ, FH n = (FA n).image (c n)) : (∀ (p q : ℤ) (hp : 0 ≤ p), ∃ (lambda : X.D 0 (p + q) ⟶ X.D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2)) (lift : ((FA (p + q)).step p : B) ⟶ (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2)) (psi : (FA (p + q)).gradedPiece p ≅ X.page (max (p + 3) (q - a + 2)).toNat p q) (grc : (FA (p + q)).gradedPiece p ≅ (FH (p + q)).gradedPiece p) (stable : X.page (max (p + 3) (q - a + 2)).toNat p q ≅ X.pageInfinity L p q) (Theta : (FH (p + q)).gradedPiece p ≅ X.pageInfinity L p q) (cStep : ((FA (p + q)).step p : B) ⟶ ((FH (p + q)).step p : B)) (hZ : X.cycleBoundaryTower.Z ((max (p + 3) (q - a + 2)).toNat - 2) p q = L.Z p q), IsIso lambda ∧ lambda = X.alphaIter (-(p - max (p + 3) (q - a + 2) + 2)).toNat 0 (p + q) ≫ eqToHom (by congr 1 <;> omega) ∧ IsIso lift ∧ lift ≫ inc ((max (p + 3) (q - a + 2)).toNat - 2) (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2) = ((FA (p + q)).step p).arrow ≫ lambda ∧ cStep ≫ ((FH (p + q)).step p).arrow = ((FA (p + q)).step p).arrow ≫ c (p + q) ∧ cStep ≫ cokernel.π (Subobject.ofLE ((FH (p + q)).step (p + 1)) ((FH (p + q)).step p) ((FH (p + q)).antitone_step (by omega))) = cokernel.π (Subobject.ofLE ((FA (p + q)).step (p + 1)) ((FA (p + q)).step p) ((FA (p + q)).antitone_step (by omega))) ≫ grc.hom ∧ X.cycleBoundaryTower.projection ((max (p + 3) (q - a + 2)).toNat - 2) p q ≫ stable.hom = eqToHom (congrArg (fun S : Subobject (X.E p q) ↦ (S : B)) hZ) ≫ cokernel.π (Subobject.ofLE (L.B p q) (L.Z p q) (X.limitBoundary_le_cycle L p q)) ∧ cokernel.π (Subobject.ofLE ((FA (p + q)).step (p + 1)) ((FA (p + q)).step p) ((FA (p + q)).antitone_step (by omega))) ≫ psi.hom = lift ≫ (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).g (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2) ≫ eqToHom (by unfold BigradedExactCouple.page; congr 1 <;> omega) ∧ Theta = grc.symm ≪≫ psi ≪≫ stable)\n```",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "def-sp-image-filtration"
+ ],
+ "proof": [
+  {
+   "text": "For p>=0 put R=max(p+3,q-a+2),\nu=p-R+2 and v=q+R-2. The alpha iterate from (0,p+q) to (u,v) is invertible:\nall intervening negative-first-index E terms vanish. Iterating the derived-D\nimage construction identifies D_(R-2)(u,v) with the incoming p-fold alpha image\nunder this isomorphism. The induced lift is invertible, and its equation follows\nby induction from the given recursive inclusions. The incoming derived alpha\nimage corresponds to the next filtration step. The target of the derived f map\nis zero by the D lower bound. Derived-couple exactness consequently makes g a\ncokernel of the next step, inducing psi with the stated quotient equation.\nTransport the two adjacent steps along c, giving cStep and the induced graded\nisomorphism grc. Stabilization at R identifies cycles and boundaries with L;\nthe quotient universal property gives stable with its projection equation.\nFinally set Theta=grc.symm followed by psi and stable. These arguments also\napply when q<a: both quotient objects vanish, and the same universal properties\nsupply all maps and equations.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "def-sp-filtration",
+    "def-sp-image-filtration",
+    "lem-sp-derived-couple-exact",
+    "lem-sp-half-plane-sharp-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "def-sp-image-filtration",
+  "lem-sp-derived-couple-exact",
+  "lem-sp-half-plane-sharp-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-12",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stable spectral sequence pages canonically identify with graded incoming alpha image quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable spectral sequence page is a cokernel of consecutive incoming alpha image subobjects",
+   "results": "Hits: HomologicalComplex.image_to_eq_image, HomologicalComplex.image_eq_image, CategoryTheory.ComposableArrows.IsComplex.cokerToKer', HomologicalComplex.extend.leftHomologyData.cokernelCofork, HomologicalComplex.extend.rightHomologyData.cokernelCofork, HomologicalComplex.extend.leftHomologyData.isColimitCokernelCofork, HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff', HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff; no exact interface match.",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alphaDiagonal|incomingAlphaIter|pageInfinity|bridgeIso",
+   "results": "Hits: none; no exact interface match.",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationCanonicalAbutment",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, steps 5--7: Canonical finite-page maps from incoming-alpha graded quotients",
+   "via": [
+    "lem-sp-truncation-canonical-abutment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AbutmentFinitePageComparison",
+  "file": "lean/Sheaf/CategoryTheory/AbutmentFinitePageComparison.lean",
+  "declaration": "CategoryTheory.abutment_finite_page_comparison",
+  "statement": "theorem abutment_finite_page_comparison {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) (a : ℤ) (hDzero : ∀ p q : ℤ, q < a → IsZero (X.D p q)) (hEzero : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) (inc : ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q) (hinc0 : ∀ p q : ℤ, inc 0 p q = 𝟙 _) (hinc : ∀ (r : ℕ) (p q : ℤ), inc (r + 1) p q = (X.pageCouple r).derivedDInclusion p q ≫ inc r p q) (L : X.LimitSubobjects) (hL : ∀ p q : ℤ, L.Z p q = X.cycleBoundaryTower.Z ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q ∧ L.B p q = X.cycleBoundaryTower.B ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q) (H : ℤ → B) (c : ∀ n : ℤ, X.D 0 n ⟶ H n) (hiso : ∀ n : ℤ, IsIso (c n)) (FA : ∀ n : ℤ, DecreasingFiltration (X.D 0 n)) (FH : ∀ n : ℤ, DecreasingFiltration (H n)) (hFA : ∀ n p : ℤ, 0 ≤ p → (FA n).step p = imageSubobject (X.incomingAlphaIter p.toNat 0 n)) (hFH : ∀ n : ℤ, FH n = (FA n).image (c n)) : (∀ (p q : ℤ) (hp : 0 ≤ p), ∃ (lambda : X.D 0 (p + q) ⟶ X.D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2)) (lift : ((FA (p + q)).step p : B) ⟶ (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).D (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2)) (psi : (FA (p + q)).gradedPiece p ≅ X.page (max (p + 3) (q - a + 2)).toNat p q) (grc : (FA (p + q)).gradedPiece p ≅ (FH (p + q)).gradedPiece p) (stable : X.page (max (p + 3) (q - a + 2)).toNat p q ≅ X.pageInfinity L p q) (Theta : (FH (p + q)).gradedPiece p ≅ X.pageInfinity L p q) (cStep : ((FA (p + q)).step p : B) ⟶ ((FH (p + q)).step p : B)) (hZ : X.cycleBoundaryTower.Z ((max (p + 3) (q - a + 2)).toNat - 2) p q = L.Z p q), IsIso lambda ∧ lambda = X.alphaIter (-(p - max (p + 3) (q - a + 2) + 2)).toNat 0 (p + q) ≫ eqToHom (by congr 1 <;> omega) ∧ IsIso lift ∧ lift ≫ inc ((max (p + 3) (q - a + 2)).toNat - 2) (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2) = ((FA (p + q)).step p).arrow ≫ lambda ∧ cStep ≫ ((FH (p + q)).step p).arrow = ((FA (p + q)).step p).arrow ≫ c (p + q) ∧ cStep ≫ cokernel.π (Subobject.ofLE ((FH (p + q)).step (p + 1)) ((FH (p + q)).step p) ((FH (p + q)).antitone_step (by omega))) = cokernel.π (Subobject.ofLE ((FA (p + q)).step (p + 1)) ((FA (p + q)).step p) ((FA (p + q)).antitone_step (by omega))) ≫ grc.hom ∧ X.cycleBoundaryTower.projection ((max (p + 3) (q - a + 2)).toNat - 2) p q ≫ stable.hom = eqToHom (congrArg (fun S : Subobject (X.E p q) ↦ (S : B)) hZ) ≫ cokernel.π (Subobject.ofLE (L.B p q) (L.Z p q) (X.limitBoundary_le_cycle L p q)) ∧ cokernel.π (Subobject.ofLE ((FA (p + q)).step (p + 1)) ((FA (p + q)).step p) ((FA (p + q)).antitone_step (by omega))) ≫ psi.hom = lift ≫ (X.pageCouple ((max (p + 3) (q - a + 2)).toNat - 2)).g (p - max (p + 3) (q - a + 2) + 2) (q + max (p + 3) (q - a + 2) - 2) ≫ eqToHom (by unfold BigradedExactCouple.page; congr 1 <;> omega) ∧ Theta = grc.symm ≪≫ psi ≪≫ stable)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

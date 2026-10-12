@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-truncation-abutment-cocone",
+ "kind": "statement",
+ "title": "Canonical normalized truncation cocone",
+ "statement": "For a left exact additive functor between Grothendieck abelian categories and a bounded-below complex $K$, let $X$ be a type-zero exact couple whose $D$ objects and $\\alpha$ maps agree with the truncation couple [def-sp-truncation-couple]. Put $H^n=H^n(RF K)$, define $j_{n,q}:D^{n-q,q}\\to H^n$ by the inverse bridge followed by $H^n(RF(\\tau_{\\le q}K\\to K))$, and let $c_n:D^{0,n}\\to H^n$ be its component at $q=n$. Then $c_n$ is invertible, the transported $j_{n,n-p}$ form a cocone for $\\alpha$ [def-sp-convergence], and for $p\\ge0$ this cocone map is the incoming $p$-fold alpha iterate followed by $c_n$. No cohomological lower bound or identification of the $E,f,g$ data is required.\n\nExact Lean interface:\n```lean\ntheorem truncation_abutment_cocone {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (X : BigradedExactCouple B 0) (hD : X.D = TruncationCouple.D F K) (halpha : (∀ p q : ℤ, X.alpha p q = eqToHom (by rw [hD]) ≫ TruncationCouple.alpha F K p q ≫ eqToHom (by rw [hD]))) : ∃ (H : ℤ → B) (hH : H = fun n : ℤ ↦ (DerivedCategory.homologyFunctor B n).obj (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K.obj))) (j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n) (c : ∀ n : ℤ, X.D 0 n ⟶ H n), (∀ n q : ℤ, j n q = eqToHom (by rw [hD]; unfold TruncationCouple.D; congr 1; omega) ≫ (TruncationCouple.bridgeIso F (TruncationCouple.truncation K q) n).inv ≫ (DerivedCategory.homologyFunctor B n).map (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q))) ≫ eqToHom (by rw [hH])) ∧ (∀ n : ℤ, c n = eqToHom (by congr 1; omega) ≫ j n n) ∧ (∀ n : ℤ, IsIso (c n)) ∧ (∀ n p : ℤ, X.alphaDiagonal n p ≫ eqToHom (by congr 1; omega) ≫ j n (n - p) = eqToHom (by congr 1; omega) ≫ j n (n - (p + 1))) ∧ (∀ (n p : ℤ) (hp : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n - p) = X.incomingAlphaIter p.toNat 0 n ≫ c n)\n```",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sp-truncation-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Set H to the cohomology of RF(K), j to the inverse bridge followed by\nRF of the truncation inclusion, and c to the degree-zero component of j.\nThe inclusion tau<=n K -> K induces an isomorphism in degree n by 05TC (2);\ntransport this isomorphism through the bridge to obtain invertibility of c.\nFor the cocone equation, substitute the definition of alpha. The adjacent\nbridge and inverse bridge cancel. Functoriality reduces the result to the\ntransition followed by the truncation inclusion being the preceding inclusion.\nIterate this equation p times for p>=0. At p=0 the normalization is the\ndefinition of c; the successor step uses the incoming-alpha recursion.\nInteger transports respect these compositions by proof irrelevance.",
+   "uses": [
+    "def-sp-truncation-couple",
+    "def-sp-convergence",
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-truncation-couple",
+  "def-sp-convergence",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-12",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical cocone from cohomology of truncations to derived functor cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical cocone from cohomology of truncations to derived functor cohomology",
+   "results": "Hits: CochainComplex.shortComplexTruncLE, CategoryTheory.Functor.rightDerived, CochainComplex.shortComplexTruncLEX₃ToTruncGE, CochainComplex.πTruncGE, CochainComplex.truncGE, DerivedCategory.Q, CochainComplex.truncLE, DerivedCategory.right_fac_of_isStrictlyLE; no exact interface match.",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLEι|ιTruncLE|rightDerivedFunctorPlus",
+   "results": "Hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; no exact interface match.",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationCanonicalAbutment",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, steps 5--7: Canonical normalized truncation cocone",
+   "via": [
+    "lem-sp-truncation-canonical-abutment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TruncationAbutmentCocone",
+  "file": "lean/Sheaf/CategoryTheory/TruncationAbutmentCocone.lean",
+  "declaration": "CategoryTheory.truncation_abutment_cocone",
+  "statement": "theorem truncation_abutment_cocone {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (X : BigradedExactCouple B 0) (hD : X.D = TruncationCouple.D F K) (halpha : (∀ p q : ℤ, X.alpha p q = eqToHom (by rw [hD]) ≫ TruncationCouple.alpha F K p q ≫ eqToHom (by rw [hD]))) : ∃ (H : ℤ → B) (hH : H = fun n : ℤ ↦ (DerivedCategory.homologyFunctor B n).obj (F.rightDerivedFunctor.obj (DerivedCategory.Q.obj K.obj))) (j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n) (c : ∀ n : ℤ, X.D 0 n ⟶ H n), (∀ n q : ℤ, j n q = eqToHom (by rw [hD]; unfold TruncationCouple.D; congr 1; omega) ≫ (TruncationCouple.bridgeIso F (TruncationCouple.truncation K q) n).inv ≫ (DerivedCategory.homologyFunctor B n).map (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE q))) ≫ eqToHom (by rw [hH])) ∧ (∀ n : ℤ, c n = eqToHom (by congr 1; omega) ≫ j n n) ∧ (∀ n : ℤ, IsIso (c n)) ∧ (∀ n p : ℤ, X.alphaDiagonal n p ≫ eqToHom (by congr 1; omega) ≫ j n (n - p) = eqToHom (by congr 1; omega) ≫ j n (n - (p + 1))) ∧ (∀ (n p : ℤ) (hp : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n - p) = X.incomingAlphaIter p.toNat 0 n ≫ c n)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

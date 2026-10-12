@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-abutment-image-filtration",
+ "kind": "statement",
+ "title": "Finite image filtration and convergence transported to an invertible cocone",
+ "statement": "Let $X$ be a type-zero exact couple in an abelian category [def-sp-exact-couple], with $D^{p,q}=0$ for $q<a$ and $E^{p,q}=0$ for $p<0$ or $q<a$. Let $L$ be any limiting cycles and boundaries [def-sp-convergence]. Suppose a cocone $j_{n,q}:D^{n-q,q}\\to H^n$ has invertible component $c_n$ at $q=n$, and its nonnegative-index maps are incoming alpha iterates followed by $c_n$. There are decreasing filtrations [def-sp-filtration] $F_A$ on $D^{0,n}$ and $F_H$ on $H^n$, with $F_A^p$ the incoming-alpha image for $p\\ge0$, $F_A^p=\\top$ for $p\\le0$, and $F_H=F_A.image(c_n)$ [def-sp-image-filtration]. The steps $F_H^p$ are the images of $j_{n,n-p}$, are top for $p\\le0$, and bottom for $p\\ge n-a+1$. These filtrations are finite, exhaustive, separated and complete for the inverse-limit quotient tower. For $p<0$ their graded pieces and the infinite page vanish. The cocone is a diagonal colimit with object $H^n$, and $X$ converges to it with limiting subobjects $L$.\n\nExact Lean interface:\n```lean\ntheorem abutment_image_filtration {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) (a : ℤ) (hDzero : ∀ p q : ℤ, q < a → IsZero (X.D p q)) (hEzero : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) (L : X.LimitSubobjects) (H : ℤ → B) (j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n) (c : ∀ n : ℤ, X.D 0 n ⟶ H n) (hc : ∀ n : ℤ, c n = eqToHom (by congr 1; omega) ≫ j n n) (hiso : ∀ n : ℤ, IsIso (c n)) (hcomm : ∀ n p : ℤ, X.alphaDiagonal n p ≫ eqToHom (by congr 1; omega) ≫ j n (n - p) = eqToHom (by congr 1; omega) ≫ j n (n - (p + 1))) (hnorm : ∀ (n p : ℤ) (hp : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n - p) = X.incomingAlphaIter p.toNat 0 n ≫ c n) : ∃ (FA : ∀ n : ℤ, DecreasingFiltration (X.D 0 n)) (FH : ∀ n : ℤ, DecreasingFiltration (H n)), (∀ n p : ℤ, 0 ≤ p → (FA n).step p = imageSubobject (X.incomingAlphaIter p.toNat 0 n)) ∧ (∀ n p : ℤ, p ≤ 0 → (FA n).step p = ⊤) ∧ (∀ n : ℤ, FH n = (FA n).image (c n)) ∧ (∀ n p : ℤ, (FH n).step p = imageSubobject (j n (n - p))) ∧ (∀ n p : ℤ, p ≤ 0 → (FH n).step p = ⊤) ∧ (∀ n p : ℤ, n - a + 1 ≤ p → (FH n).step p = ⊥) ∧ (∀ n : ℤ, (FH n).IsFinite ∧ (FH n).IsExhaustive ∧ (FH n).IsSeparated ∧ BigradedExactCouple.IsInverseLimit (FH n)) ∧ (∀ p q : ℤ, p < 0 → IsZero ((FH (p + q)).gradedPiece p) ∧ IsZero (X.pageInfinity L p q)) ∧ ∃ (AH : ∀ n : ℤ, X.AlphaColimit n) (hAH : ∀ n : ℤ, (AH n).obj = H n), (∀ n p : ℤ, (AH n).ι p ≫ eqToHom (hAH n) = eqToHom (by congr 1; omega) ≫ j n (n - p)) ∧ X.ConvergesTo L AH\n```",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "def-sp-image-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized diagonal colimits A supplied by negative-E vanishing.\nFactor the prescribed cocone through A using its universal property. Its component\nat zero and the normalization identify the factor with eqToHom(hA) followed by c,\nso this factor is invertible. Transport A along this isomorphism to obtain AH,\nand along eqToHom(hA) to obtain AA with object D(0,n). Define FA and FH to be\nthe image filtrations of AA and AH. The positive normalization gives the\nincoming-alpha image formula for FA; image pushforward gives FH=FA.image(c).\nThe transported cocone gives the j-image formula. Negative-index cocone maps\nare invertible, giving top for p<=0; when p>=n-a+1 the source D(p,n-p) is zero,\ngiving bottom. These bounds prove finiteness, exhaustiveness and separatedness.\nBeyond the bottom bound the cokernel projections are invertible; factor a\ncompatible quotient cone through one such projection and use integer induction\nto prove all its equations. Cancellation there proves uniqueness.\nConstruct the isomorphism between the transported and original graded pieces\nby cokernel.mapIso on the two imageSubobjectCompIso maps. Cancellation of the\nimage arrows proves the square commutes and that the canonical graded maps\ncommute with this isomorphism. Half-plane weak convergence for A then gives\nweak convergence for AH by invariance of kernels under postcomposition by an\nisomorphism. Sharp bounds give regularity, and the preceding filtration and\ninverse-limit properties complete convergence. For p<0 both adjacent steps\nare top, making their inclusion invertible and its cokernel zero. The canonical\nweak-convergence comparison transports this zero-object assertion to E_infinity.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtration",
+    "def-sp-image-filtration",
+    "lem-sp-half-plane-diagonal-colimits",
+    "lem-sp-half-plane-weak-convergence",
+    "lem-sp-half-plane-sharp-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-filtration",
+  "def-sp-image-filtration",
+  "lem-sp-half-plane-diagonal-colimits",
+  "lem-sp-half-plane-weak-convergence",
+  "lem-sp-half-plane-sharp-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-12",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport of finite image filtration and exact couple convergence along an invertible diagonal cocone",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized invertible diagonal cocone transports finite image filtration and spectral sequence convergence",
+   "results": "Hits: CategoryTheory.Functor.IsEventuallyConstantFrom.cocone, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq, CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp, CategoryTheory.Functor.IsEventuallyConstantFrom.isColimitCocone, localCohomology.isoOfFinal, HomologicalComplex.coconeOfHasColimitEval, CategoryTheory.Functor.IsEventuallyConstantFrom.cocone_ι_app, CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range; no exact interface match.",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "imageSubobjectCompIso|cokernel\\.mapIso|IsInverseLimit",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Algebra/Homology/ImageToKernel.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/AbelianImages.lean; no exact interface match.",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationCanonicalAbutment",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, steps 5--7: Finite image filtration and convergence transported to an invertible cocone",
+   "via": [
+    "lem-sp-truncation-canonical-abutment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AbutmentImageFiltration",
+  "file": "lean/Sheaf/CategoryTheory/AbutmentImageFiltration.lean",
+  "declaration": "CategoryTheory.abutment_image_filtration",
+  "statement": "theorem abutment_image_filtration {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) (a : ℤ) (hDzero : ∀ p q : ℤ, q < a → IsZero (X.D p q)) (hEzero : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) (L : X.LimitSubobjects) (H : ℤ → B) (j : ∀ n q : ℤ, X.D (n - q) q ⟶ H n) (c : ∀ n : ℤ, X.D 0 n ⟶ H n) (hc : ∀ n : ℤ, c n = eqToHom (by congr 1; omega) ≫ j n n) (hiso : ∀ n : ℤ, IsIso (c n)) (hcomm : ∀ n p : ℤ, X.alphaDiagonal n p ≫ eqToHom (by congr 1; omega) ≫ j n (n - p) = eqToHom (by congr 1; omega) ≫ j n (n - (p + 1))) (hnorm : ∀ (n p : ℤ) (hp : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n - p) = X.incomingAlphaIter p.toNat 0 n ≫ c n) : ∃ (FA : ∀ n : ℤ, DecreasingFiltration (X.D 0 n)) (FH : ∀ n : ℤ, DecreasingFiltration (H n)), (∀ n p : ℤ, 0 ≤ p → (FA n).step p = imageSubobject (X.incomingAlphaIter p.toNat 0 n)) ∧ (∀ n p : ℤ, p ≤ 0 → (FA n).step p = ⊤) ∧ (∀ n : ℤ, FH n = (FA n).image (c n)) ∧ (∀ n p : ℤ, (FH n).step p = imageSubobject (j n (n - p))) ∧ (∀ n p : ℤ, p ≤ 0 → (FH n).step p = ⊤) ∧ (∀ n p : ℤ, n - a + 1 ≤ p → (FH n).step p = ⊥) ∧ (∀ n : ℤ, (FH n).IsFinite ∧ (FH n).IsExhaustive ∧ (FH n).IsSeparated ∧ BigradedExactCouple.IsInverseLimit (FH n)) ∧ (∀ p q : ℤ, p < 0 → IsZero ((FH (p + q)).gradedPiece p) ∧ IsZero (X.pageInfinity L p q)) ∧ ∃ (AH : ∀ n : ℤ, X.AlphaColimit n) (hAH : ∀ n : ℤ, (AH n).obj = H n), (∀ n p : ℤ, (AH n).ι p ≫ eqToHom (hAH n) = eqToHom (by congr 1; omega) ≫ j n (n - p)) ∧ X.ConvergesTo L AH",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

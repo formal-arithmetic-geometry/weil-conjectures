@@ -10,11 +10,9 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.CategoryTheory.ImageFiltration
 import Sheaf.CategoryTheory.HalfPlaneSharpBounds
 import Sheaf.CategoryTheory.HalfPlaneConvergence
-import Sheaf.CategoryTheory.DerivedCoupleExact
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.TruncationAbutmentCocone
+import Sheaf.CategoryTheory.AbutmentImageFiltration
+import Sheaf.CategoryTheory.AbutmentFinitePageComparison
 
 /-! Canonical truncation-couple proof step. -/
 
@@ -25,6 +23,69 @@ universe u₁ u₂ v₁ v₂ w₁ w₂
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private noncomputable def pageDInclusions
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) :
+    ∀ (r : ℕ) (p q : ℤ), (X.pageCouple r).D p q ⟶ X.D p q
+  | 0, _, _ => 𝟙 _
+  | r + 1, p, q => (X.pageCouple r).derivedDInclusion p q ≫ pageDInclusions X r p q
+
+private theorem limit_subobjects_stationary
+    {B : Type u₂} [Category.{v₂} B] [Abelian B]
+    (X : BigradedExactCouple B 0) (L : X.LimitSubobjects) (p q : ℤ) (r : ℕ)
+    (h : ∀ t : ℕ, r ≤ t →
+      X.cycleBoundaryTower.Z t p q = X.cycleBoundaryTower.Z r p q ∧
+      X.cycleBoundaryTower.B t p q = X.cycleBoundaryTower.B r p q) :
+    L.Z p q = X.cycleBoundaryTower.Z r p q ∧
+      L.B p q = X.cycleBoundaryTower.B r p q := by
+  have hZ : Antitone (fun t ↦ X.cycleBoundaryTower.Z t p q) :=
+    antitone_nat_of_succ_le (fun t ↦ X.cycleBoundaryTower.Z_decreasing t p q)
+  have hB : Monotone (fun t ↦ X.cycleBoundaryTower.B t p q) :=
+    monotone_nat_of_le_succ (fun t ↦ X.cycleBoundaryTower.B_increasing t p q)
+  constructor
+  · apply le_antisymm
+    · exact (L.Z_glb p q).1 ⟨r, rfl⟩
+    · apply (L.Z_glb p q).2
+      rintro _ ⟨t, rfl⟩
+      by_cases ht : t ≤ r
+      · exact hZ ht
+      · exact le_of_eq (h t (by omega)).1.symm
+  · apply le_antisymm
+    · apply (L.B_lub p q).2
+      rintro _ ⟨t, rfl⟩
+      by_cases ht : t ≤ r
+      · exact hB ht
+      · exact le_of_eq (h t (by omega)).2
+    · exact (L.B_lub p q).1 ⟨r, rfl⟩
+
+private noncomputable def quotientIsoOfKernel
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] {V W T : B}
+    (i : V ⟶ W) [Mono i] (f : W ⟶ T) [Epi f]
+    (h : kernelSubobject f = Subobject.mk i) : cokernel i ≅ T := by
+  let e : kernel f ≅ V := Subobject.isoOfMkEqMk (kernel.ι f) i h
+  have he : e.hom ≫ i = kernel.ι f := by simp [e]
+  have hif : i ≫ f = 0 := by
+    apply (cancel_epi e.hom).1
+    rw [← Category.assoc, he, kernel.condition, comp_zero]
+  have hfg : kernel.ι f ≫ cokernel.π i = 0 := by
+    rw [← he, Category.assoc, cokernel.condition, comp_zero]
+  refine
+    { hom := cokernel.desc i f hif
+      inv := Abelian.epiDesc f (cokernel.π i) hfg
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }
+  · apply (cancel_epi (cokernel.π i)).1
+    simp
+  · apply (cancel_epi f).1
+    simp
+
+private noncomputable def quotientOfLECongr
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] {V : B}
+    (S T S' T' : Subobject V) (h : S ≤ T) (h' : S' ≤ T')
+    (hS : S = S') (hT : T = T') :
+    cokernel (Subobject.ofLE S T h) ≅ cokernel (Subobject.ofLE S' T' h') := by
+  subst S' T'
+  exact Iso.refl _
 
 /-- Canonical abutment maps and finite image filtration of a truncation couple.
 Source: Stacks Tags 011R, 011T, 012F, 012U (3), 05TC (2);
@@ -157,6 +218,49 @@ theorem truncation_canonical_abutment
           (∀ n p : ℤ, (AH n).ι p ≫ eqToHom (hAH n) =
             eqToHom (by congr 1; omega) ≫ j n (n - p)) ∧
           X.ConvergesTo L AH := by
-  sorry
+  classical
+  have _ := hf
+  have _ := hg
+  have _ := ha
+  let inc := pageDInclusions X
+  have hinc0 : ∀ p q : ℤ, inc 0 p q = 𝟙 _ := fun _ _ ↦ rfl
+  have hinc : ∀ (r : ℕ) (p q : ℤ), inc (r + 1) p q =
+      (X.pageCouple r).derivedDInclusion p q ≫ inc r p q := fun _ _ _ ↦ rfl
+  obtain ⟨L, _⟩ := X.halfPlaneConvergence a hDzero hEzero
+  obtain ⟨_, _, _, _, hstationary, _⟩ := halfPlane_sharp_bounds X a hDzero hEzero
+  have hL : ∀ p q : ℤ,
+      L.Z p q = X.cycleBoundaryTower.Z
+        ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q ∧
+      L.B p q = X.cycleBoundaryTower.B
+        ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q := by
+    intro p q
+    apply limit_subobjects_stationary X L p q
+    intro t ht
+    have hk : 2 ≤ max 2 (max (q - a + 2) (p + 1)) := le_max_left _ _
+    have hb : max 2 (max (q - a + 2) (p + 1)) ≤ ((t + 2 : ℕ) : ℤ) := by
+      omega
+    simpa only [Nat.add_sub_cancel] using hstationary p q (t + 2) hb
+  obtain ⟨H, hH, j, c, hj, hc, hiso, hcomm, hnorm⟩ :=
+    truncation_abutment_cocone F K X hD halpha
+  obtain ⟨FA, FH, hFA, hFAtop, hFH, hFHj, hFHtop, hFHbot, hfinite,
+      hnegative, hcolimit⟩ :=
+    abutment_image_filtration X a hDzero hEzero L H j c hc hiso hcomm hnorm
+  have hpage (p q : ℤ) : Nonempty (X.pageInfinity L p q ≅
+      X.page (max 2 (max (q - a + 2) (p + 1))).toNat p q) := by
+    let r := (max 2 (max (q - a + 2) (p + 1))).toNat - 2
+    have := X.cycleBoundaryTower.projection_epi r p q
+    refine ⟨quotientOfLECongr (L.B p q) (L.Z p q)
+      (X.cycleBoundaryTower.B r p q) (X.cycleBoundaryTower.Z r p q)
+      (X.limitBoundary_le_cycle L p q) (X.cycleBoundaryTower.B_le_Z r p q)
+      (hL p q).2 (hL p q).1 ≪≫ ?_⟩
+    exact quotientIsoOfKernel _ (X.cycleBoundaryTower.projection r p q)
+      (X.cycleBoundaryTower.projection_kernel r p q)
+  have hgraded := 
+    abutment_finite_page_comparison X a hDzero hEzero inc hinc0 hinc L hL
+      H c hiso FA FH hFA hFH
+  refine ⟨inc, L, H, hH, j, c, FA, FH, hinc0, hinc, ?_, hj, hc, hiso,
+    hFA, hFAtop, hFH, hFHj, hFHtop, hFHbot, hfinite, hnegative, hgraded, hcolimit⟩
+  intro p q
+  exact ⟨(hL p q).1, (hL p q).2, hpage p q⟩
 
 end CategoryTheory

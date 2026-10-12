@@ -16,20 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Include each iterated D image recursively in D. Sharp stabilization identifies\nits stable cycles and boundaries with their intersection and union, defining L.\nTake H^n=H^n(RF K), and define j by the bridge followed by RF of the truncation\ninclusion. Functoriality and the transition-inclusion equation identify j with the\nalpha composites. The inclusion tau<=n K -> K is an isomorphism after degree-n\nderived cohomology by 05TC (2), so c is an isomorphism. Filter D(0,n) by incoming\nalpha images and transport this filtration along c. Negative initial E degrees\nmake alpha an isomorphism to the left of p=0, giving fullness for p<=0; lower D\nvanishing gives zero for p>=n-a+1. Thus the filtration is finite, exhaustive,\nseparated, and its quotient tower is eventually H^n, proving the inverse-limit\nproperty. At r=max(p+3,q-a+2), lambda=alpha^(-u) identifies F^p with D_r(u,v)\nand F^(p+1) with its incoming alpha image. The next D is zero. Exactness therefore\nmakes g_r induce the quotient isomorphism psi, with the displayed commuting\nequation. Transport across c on graded objects and the stabilized quotient map\nto obtain Theta. For p<0 both graded objects and the infinite page vanish.\nThe alpha diagonal colimit is D(0,n); transport its cocone along c to H^n.\nThe cocone equation follows from the composite-inclusion identity. Its canonical\ncomparison with the stable page is exactly Theta, so these maps give convergence.",
+   "text": "Construct the iterated D inclusions recursively from the derived-D inclusions. Obtain limiting subobjects from halfPlaneConvergence. Sharp stabilization and monotonicity show, by the greatest-lower-bound and least-upper-bound properties, that these limit subobjects equal the sharp stationary cycles and boundaries. The cycle-tower projection is epic with kernel the boundary inclusion, so its cokernel is the finite page; transport the quotient along these subobject equalities to identify the infinite and sharp finite pages.",
    "uses": [
-    "def-sp-truncation-couple",
     "def-sp-exact-couple",
     "def-sp-convergence",
-    "def-sp-filtration",
-    "def-sp-image-filtration",
-    "lem-sp-half-plane-sharp-bounds",
     "thm-sp-half-plane-convergence",
-    "lem-sp-derived-couple-exact",
-    "lem-weil-pbc-derived-functor-truncation-iso",
-    "lem-weil-pbc-derived-direct-image-triangulated"
+    "lem-sp-half-plane-sharp-bounds"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+   }
+  },
+  {
+   "text": "Apply truncation_abutment_cocone to obtain the explicitly prescribed H,j,c, the invertibility of c, and its diagonal cocone and positive incoming-alpha normalization equations. Apply the proved abstract abutment_image_filtration to this cocone and the chosen L. It constructs FA,FH, all image and support equations, the finite inverse-limit filtration, the negative graded/infinite-page vanishing, and the prescribed diagonal colimit with convergence.",
+   "uses": [
+    "lem-sp-truncation-abutment-cocone",
+    "lem-sp-abutment-image-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
+   }
+  },
+  {
+   "text": "Apply abutment_finite_page_comparison to the recursive inclusions, sharp limit-subobject equalities and the incoming-alpha/image filtrations. This supplies the positive-bidegree lambda,lift,psi,grc,stable,Theta,cStep,hZ and their equations. Assemble these witnesses with the previously proved normalization, stabilization, filtration and colimit clauses, preserving the original statement exactly.",
+   "uses": [
+    "lem-sp-abutment-finite-page-comparison"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
     "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
@@ -37,21 +54,20 @@
   }
  ],
  "proof_deps": [
-  "def-sp-truncation-couple",
   "def-sp-exact-couple",
   "def-sp-convergence",
-  "def-sp-filtration",
-  "def-sp-image-filtration",
-  "lem-sp-half-plane-sharp-bounds",
   "thm-sp-half-plane-convergence",
-  "lem-sp-derived-couple-exact",
-  "lem-weil-pbc-derived-functor-truncation-iso",
-  "lem-weil-pbc-derived-direct-image-triangulated"
+  "lem-sp-half-plane-sharp-bounds",
+  "lem-sp-truncation-abutment-cocone",
+  "lem-sp-abutment-image-filtration",
+  "lem-sp-abutment-finite-page-comparison"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C1",
+  "date": "2026-10-12",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
-  "place": "Lean interface refinement of steps 5--7"
+  "place": "proof, steps 5--7; Lean refinement with the same objects and canonical maps"
  },
  "mathlib_searches": [
   {
@@ -134,9 +150,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T070547-L-3475880",
+  "landing": "20261012T144056-L-2089848",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
