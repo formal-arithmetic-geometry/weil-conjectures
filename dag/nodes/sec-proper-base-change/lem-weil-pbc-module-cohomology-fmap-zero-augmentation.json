@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-zero-augmentation",
+ "kind": "statement",
+ "title": "Augmentation compatibility in degree zero",
+ "statement": "For h:X -> Y, phi:G -> h_*F and any resolution data D of [def-weil-pbc-module-cohomology-fmap], the canonical map Gamma(Y,G) -> H^0(Y,G) followed by D.map(0) equals Gamma(phi) followed by Gamma(X,F) -> H^0(X,F). Cohomology and the augmentations are those of [def-sc-ringed-space-module-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7, Equation 01F9 and Remark 01FB; Derived Categories 013P, 013S, 05TG for resolution comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For a short complex of modules, express the cycles and homology comparison isomorphisms using any left homology data. Its projection identity and functoriality show that forgetting its homology projection equals the projection in abelian groups after the cycles comparison. Use InjectiveResolution.toRightDerivedZero_eq, cancel the resolution comparison, and then cancel the cycles inclusion to express the canonical augmentation in the abelian-group sections complex.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "D.sections and the identity restriction along the inverse image of the whole space imply that a.inv.f 0 is the identity. The component of a.hom_inv_id gives that a.hom.f 0 is the identity as well. Cancel the inclusion of cycles, use cyclesMap_i and toRightDerivedZero'_comp_iCycles, and apply the global sections functor to D.compatible. This proves the augmentation square at cycles. Compose it with the homology projection and use homologyπ_naturality to obtain the square at homology.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand D.map 0. Postcompose with the source resolution comparison and the inverse forgetful homology comparison, and cancel them. The homology map of the vertical complex map is invertible by D.invertible; postcompose with it and cancel its inverse. Express both canonical augmentations with the first step; the resulting equality is exactly the homology square of the second step.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 01FB augmentation argument, implemented using Mathlib RightDerived and ShortComplex homology data"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*homologyπ|mapCyclesIso.*iCycles",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/ConcreteCategory.lean",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the degree zero right derived augmentation with a morphism of resolutions and forgetting module structure",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.Constructor.fromRightResolution_map, CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.Constructor.fromRightResolution_obj, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.LocalizerMorphism.functorialRightResolutions.Φ_functor_map_ι_app, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation to the zeroth right derived functor is compatible with a chosen injective resolution and forgetting module structure",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation",
+  "group": "N2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+   "place": "Basic-properties proof clause (2), augmentation square; restoration of the assigned node removed from the refreshed base",
+   "via": [
+    "def-weil-pbc-module-cohomology-fmap"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapZeroAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ModuleCohomologyFMapData.map_zero_augmentation",
+  "statement": "theorem ModuleCohomologyFMapData.map_zero_augmentation {X Y : Scheme.{u}} {h : X ⟶ Y} {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf} {φ : G ⟶ (pushforward h).obj F} (D : ModuleCohomologyFMapData h G F φ) : (forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).toRightDerivedZero.app G) ≫ D.map 0 = (forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).map φ) ≫ (forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}).map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app F)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4011983",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4011983",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
