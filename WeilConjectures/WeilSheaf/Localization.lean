@@ -307,8 +307,6 @@ instance WeilComplex.isIso_closedUpperShriekAdjunction_unit :
 
 section Equivariance
 
-variable [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
-
 /-- Blueprint `prop-sf-localization-all-stages` (Weil clause), equivariance of the closed-support
 triangle: forgetting the Weil structures carries the closed-support triangle
 `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` of a Weil complex `K` to the closed-support triangle
@@ -322,17 +320,17 @@ the triangle is distinguished with outer vertices in the essential images of `ī
 and such a triangle is the closed-support triangle
 (`CategoryTheory.Pretriangulated.Recollement.exists_iso_triangle`).
 
-The hypothesis that `U` is locally of finite type over `k₀`, which follows from `j` being an
-open immersion (`AlgebraicGeometry.locallyOfFiniteType_over_of_isOver`), makes `Dᵇc(Ū, ℚ̄_ℓ)`
-triangulated. -/
+That `U` is locally of finite type over `k₀`, which makes `Dᵇc(Ū, ℚ̄_ℓ)` triangulated, follows
+from `j` being an open immersion (`AlgebraicGeometry.locallyOfFiniteType_over_of_isOver`). -/
 theorem WeilComplex.exists_iso_mapTriangle_closedSupportTriangle (K : WeilComplex k₀ l X) {w}
-    (hw : WeilComplex.closedSupportTriangle i j hij K w ∈ distTriang _) {w'}
-    (hw' : ProEtale.boundedConstructibleAdicClosedSupportTriangle
+    (hw : WeilComplex.closedSupportTriangle i j hij K w ∈ distTriang _) :
+    haveI := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
+    ∀ {w'}, ProEtale.boundedConstructibleAdicClosedSupportTriangle
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
       ringChar_algebraicClosure_ne (Scheme.Hom.geometricFiberMap i (comp_over i _))
       (Scheme.Hom.geometricFiberMap j (comp_over j _))
       (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)
-      ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K) w' ∈ distTriang _) :
+      ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K) w' ∈ distTriang _ →
     ∃ e : (WeilComplex.forgetBoundedConstructibleAdic k₀ l X).mapTriangle.obj
         (WeilComplex.closedSupportTriangle i j hij K w) ≅
       ProEtale.boundedConstructibleAdicClosedSupportTriangle
@@ -342,6 +340,8 @@ theorem WeilComplex.exists_iso_mapTriangle_closedSupportTriangle (K : WeilComple
         (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)
         ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K) w',
       e.hom.hom₂ = 𝟙 _ := by
+  intro w' hw'
+  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
   obtain ⟨eI⟩ := WeilComplex.nonempty_derivedLowerStar_comp_forget_iso (k₀ := k₀) (l := l) i
   obtain ⟨eJ⟩ := WeilComplex.nonempty_derivedLowerStar_comp_forget_iso (k₀ := k₀) (l := l) j
   refine Recollement.exists_iso_triangle
@@ -363,6 +363,7 @@ isomorphism of closed-support triangles
 (`AlgebraicGeometry.WeilComplex.exists_iso_mapTriangle_closedSupportTriangle`), `ī_*` being fully
 faithful. -/
 theorem WeilComplex.nonempty_forget_closedUpperShriek_obj_iso (K : WeilComplex k₀ l X) :
+    haveI := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
     Nonempty ((WeilComplex.forgetBoundedConstructibleAdic k₀ l Z).obj
         ((WeilComplex.closedUpperShriek i j hij).obj K) ≅
       (ProEtale.boundedConstructibleAdicClosedUpperShriek
@@ -371,6 +372,7 @@ theorem WeilComplex.nonempty_forget_closedUpperShriek_obj_iso (K : WeilComplex k
         (Scheme.Hom.geometricFiberMap j (comp_over j _))
         (Scheme.Hom.isCompl_range_geometricFiberMap i j _ _ hij)).obj
         ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K)) := by
+  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
   obtain ⟨w, hw, -⟩ := WeilComplex.existsUnique_distTriang_closedSupportTriangle i j hij K
   obtain ⟨w', hw', -⟩ :=
     ProEtale.existsUnique_distTriang_boundedConstructibleAdicClosedSupportTriangle
@@ -405,6 +407,7 @@ from the isomorphism of closed-support triangles
 (`AlgebraicGeometry.WeilComplex.exists_iso_mapTriangle_closedSupportTriangle`), `ī_*` being
 fully faithful (`CategoryTheory.Adjunction.isIso_mateEquiv_app`). -/
 theorem WeilComplex.exists_closedUpperShriek_comp_forget_iso :
+    haveI := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
     ∃ (eI : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i ⋙
           WeilComplex.forgetBoundedConstructibleAdic k₀ l X ≅
         WeilComplex.forgetBoundedConstructibleAdic k₀ l Z ⋙
@@ -431,6 +434,7 @@ theorem WeilComplex.exists_closedUpperShriek_comp_forget_iso :
           ((WeilComplex.forgetBoundedConstructibleAdic k₀ l X).obj K) =
         eI.inv.app _ ≫ (WeilComplex.forgetBoundedConstructibleAdic k₀ l X).map
           ((WeilComplex.closedUpperShriekAdjunction i j hij).counit.app K) := by
+  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
   obtain ⟨eI₀⟩ := WeilComplex.nonempty_derivedLowerStar_comp_forget_iso (k₀ := k₀) (l := l) i
   let eI : WeilComplex.derivedLowerStar i ⋙ WeilComplex.forgetBoundedConstructibleAdic k₀ l X ≅
       WeilComplex.forgetBoundedConstructibleAdic k₀ l Z ⋙
