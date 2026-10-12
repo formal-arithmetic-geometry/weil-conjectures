@@ -13,7 +13,15 @@
  ],
  "proof": [
   {
-   "text": "Write Q=R[v,w], xi_i=pi^2 sum s_ik v_k+pi^3 w_i, G=(g), and I=(f(xi)). The iterated quotient S/K equals Q/(G+I) by the quotient universal property.",
+   "text": "Put I=(f_j(xi)), J=(g_j), T=(Q/I)_pi and let a:Q→T be the composite of quotient and localization. For j<c, applying a to f_j(xi)=pi^3 g_j gives a(pi)^3 a(g_j)=0. The image of pi is a unit in T, so a(g_j)=0. Hence J is contained in the kernel of a.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map a factors through Q/J and then through D=(Q/J)/map(I), since it kills I. Inverting pi gives a map D_pi→T. Conversely the composite Q→D→D_pi kills I and gives T→D_pi. The composites are the identities: use localization extensionality, quotient extensionality, and agreement on Q. This is the private proved helper remove_redundant_localized_relations; no localization-quotient commutation theorem is used.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-finitely-presented-algebra"
@@ -21,29 +29,30 @@
    "elementary": false
   },
   {
-   "text": "Localization commutes with these quotients. Since pi^3 g_j=f_j(xi), after inverting pi the ideal G is contained in I, so the localized ring is Q_pi/I.",
+   "text": "More generally set xi_i=t_i(v)+pi^d w_i. Construct a map A→(Q/I)_pi by factoring evaluation x_i↦xi_i through the kernel of the presentation; then extend it to A_pi. Together with v_k↦v_k this gives back:A_pi[v]→(Q/I)_pi. Define theta:Q→A_pi[v] by v_k↦v_k and w_i↦pi^(-d)(x_i-t_i(v)). Its value on xi_i is x_i, so every substituted presentation relation vanishes. Theta therefore extends to forward:(Q/I)_pi→A_pi[v].",
    "uses": [
-    "lem-weil-pbc-localization-quotient-commute"
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finitely-presented-algebra"
    ],
    "elementary": false
   },
   {
-   "text": "Adjoin x_i with relations x_i-xi_i. Eliminating x gives Q_pi/I. Imposing f(x)=0 first identifies it with A_pi[v,w]/(x_i-pi^2 sum s_ik v_k-pi^3 w_i). Here pi^3 is a unit, so each relation solves uniquely for w_i. Evaluation at the solutions and inclusion of v define inverse R-algebra maps to A_pi[v]. Verify the composites on all generators. The proof also applies when variables or relations are empty, or the localized rings are zero.",
+   "text": "Forward composed with back fixes A: check the presentation generators, then use surjectivity of the presentation evaluation. It fixes A_pi by localization extensionality and fixes every v_k, so it is the identity. Back composed with forward fixes every v_k. On w_i, use back(x_i)=xi_i and back(t_i(v))=t_i(v) to obtain pi^(-d)(xi_i-t_i(v))=w_i. Quotient and localization extensionality give the identity everywhere. These computations are the private proved helper localized_affine_presentation_quotient_equiv. Specialize d=3 and t_i=pi^2 sum_k s_ik v_k, and compose with the redundant-relation equivalence. All maps are R-algebra maps; no nontriviality or nonempty-index hypothesis is used.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finitely-presented-algebra"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-finitely-presented-algebra",
-  "lem-weil-pbc-localization-quotient-commute"
+  "def-weil-pbc-finitely-presented-algebra"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+  "place": "Stacks Project, proof of Lemma Tag 07CR (lemma-desingularize), equations h_i and identification B_pi ≅ A_pi[v]; explicit inverse maps formalized by K2."
  },
  "mathlib_searches": [
   {
@@ -139,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-33db4",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T220527-L-1395874",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled successfully, and the direct importer compiled against them; signatures, nodes, reports, proofs, and remaining sorry statements satisfy the review brief."
+  "landing": "20261012T235555-L-2201559",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
