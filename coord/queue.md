@@ -1,6 +1,6 @@
 # Work queue
 
-60 items; claim with `tools/claim.py next <group> [--stage N]`.
+59 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (50)
+## Stage 3: modules to prove (49)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -53,7 +53,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.InverseImageStalkGerm` | 4 | 1 | proof |
