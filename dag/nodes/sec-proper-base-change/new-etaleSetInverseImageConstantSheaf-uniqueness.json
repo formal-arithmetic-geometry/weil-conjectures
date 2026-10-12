@@ -1,0 +1,140 @@
+{
+ "id": "new-etaleSetInverseImageConstantSheaf-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness part",
+ "statement": "For schemes U,V, v : V ⟶ U and E, any morphism satisfying the canonical-section equations is uniquely determined by those equations.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Section 18.43 (Tag 093I, sites-modules-section-constant) and Lemma 093R (sites-modules-lemma-pullback-locally-constant), whose omitted proof is this identification; with Sites, Example 0H7J (sites-example-constant-sheaf), the universal property of the constant sheaf, and the adjunction $v^{-1}\\dashv v_*$"
+ },
+ "proof": [
+  {
+   "text": "Apply the representation of constant sheaves by indexed coproducts, inverse-image representability, and the base-change coproduct isomorphism; verify the canonical-section equations and the isomorphism property.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-galois-inverse-image-representable",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-inverse-image-representable",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 093R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a constant sheaf of sets along a morphism of schemes is the constant sheaf",
+   "results": "CategoryTheory.Sheaf.isConstant_of_forget, isConstant_iff_forget, isConstant_of_iso, constantSheaf; no statement on inverse image of a constant sheaf along a morphism of schemes",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant",
+   "results": "Sheaf.mem_essImage_of_isConstant, IsConstant.mk, isConstant_of_iso, isConstant_of_forget, isConstant_iff_forget, isConstant_of_isIso_counit_app, isConstant_iff_isIso_counit_app (Mathlib.CategoryTheory.Sites.ConstantSheaf): no statement on the inverse image of a constant sheaf along a morphism of sites/schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.IsConstant, sheafPullback, Scheme",
+   "results": "no declarations (unknown identifier Sheaf.IsConstant)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf|sheafPullback in Mathlib/CategoryTheory/Sites",
+   "results": "no matching declaration returned by the search command",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of a constant sheaf of sets along a scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+  "worker": "stage1",
+  "summary": "Split the inverse-image statement through the existing representation of a constant sheaf by the coproduct of copies of the base, the existing inverse-image formula for representable etale sheaves, and a new statement-only node distributing an arbitrary indexed coproduct over base change. The canonical-section condition is tracked through the unit and composition compatibilities of etale inverse images; uniqueness follows from the sheafification universal property and the same representable identifications.",
+  "blueprint": "The steps realize the paragraph beginning 'The base Y_(ybar) is strictly henselian local' in lemma-weil-pbc-proper-underived-exchange: pullback of the constant sheaf on the base and naturality of its canonical sections.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "The route needs the representation of a set-valued constant etale sheaf by the coproduct of copies of the base; no node in sk-thm-iff supplies this representability fact."
+   },
+   {
+    "node": "lem-galois-inverse-image-representable",
+    "why": "The route needs the inverse image formula for representable etale sheaves; no node in sk-thm-iff supplies this site-theoretic base-change fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-inverse-image-representable"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafUnique",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetInverseImageConstantSheafUnique.lean",
+  "declaration": "AlgebraicGeometry.etaleSetInverseImageConstantSheaf_unique",
+  "statement": "theorem etaleSetInverseImageConstantSheaf_unique\n    (U V : Scheme.{u}) (v : V ⟶ U) (E : Type u)\n    (γ : etaleSetInverseImageConstantSheafHom U V v E)\n    (hγ : etaleSetInverseImageConstantSheafCondition U V v E γ) :\n    ∀ γ' : etaleSetInverseImageConstantSheafHom U V v E,\n      etaleSetInverseImageConstantSheafCondition U V v E γ' → γ' = γ",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

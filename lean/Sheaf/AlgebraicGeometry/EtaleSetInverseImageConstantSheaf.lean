@@ -6,7 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafExists
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafUnique
 import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange
 
@@ -103,6 +104,12 @@ theorem etaleSetInverseImageConstantSheaf
           (P := @AlgebraicGeometry.Etale) (Q := ⊤) v).obj
                 (Scheme.Etale.mk (𝟙 U)))) ⟨e⟩) →
           γ' = γ := by
-  sorry
+  obtain ⟨γ, hγ, hIso⟩ := etaleSetInverseImageConstantSheaf_exists U V v E
+  refine ⟨γ, ?_, hIso, ?_⟩
+  · simpa [etaleSetInverseImageConstantSheafCondition] using hγ
+  · intro γ' hγ'
+    apply etaleSetInverseImageConstantSheaf_unique U V v E γ
+    · simpa [etaleSetInverseImageConstantSheafCondition] using hγ
+    · simpa [etaleSetInverseImageConstantSheafCondition] using hγ'
 
 end AlgebraicGeometry
