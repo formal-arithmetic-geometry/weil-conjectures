@@ -34,6 +34,8 @@ affine (lem-weil-pbc-surjective-universally-closed-affine-target).
 -/
 theorem isAffine_of_isThickening {X X' : Scheme.{u}} (i : X ⟶ X')
     (hi : IsThickening i) [IsAffine X] : IsAffine X' := by
-  sorry
+  let : IsClosedImmersion i := hi.1
+  let : Surjective i := hi.2
+  exact isAffine_of_surjective_of_universallyClosed i
 
 end AlgebraicGeometry
