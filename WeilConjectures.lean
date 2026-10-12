@@ -334,8 +334,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresent
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.PointedCover
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
-public import WeilConjectures.AlgebraicGeometry.Morphisms.PuritySmooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuritySmooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
@@ -707,8 +707,8 @@ public import WeilConjectures.CategoryTheory.Pro.Basic
 public import WeilConjectures.CategoryTheory.Pro.Generating
 public import WeilConjectures.CategoryTheory.Pro.HypercoverColimit
 public import WeilConjectures.CategoryTheory.Pro.PresheafColimit
-public import WeilConjectures.CategoryTheory.Shift.AdjunctionHomEquiv
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
+public import WeilConjectures.CategoryTheory.Shift.AdjunctionHomEquiv
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import WeilConjectures.CategoryTheory.Sites.CechComplexModule
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
@@ -1594,6 +1594,7 @@ public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
+public import WeilConjectures.RingTheory.Etale.IntegralClosureSpreading
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
 public import WeilConjectures.RingTheory.GenericConnectedness
@@ -1861,9 +1862,9 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftedHomPresheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageCohomology
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionShift
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
@@ -1872,6 +1873,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.Cri
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.LongExactSequence
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
@@ -1900,6 +1902,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkUnit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Finite.BaseChange
@@ -1911,6 +1914,7 @@ public import WeilConjectures.SixFunctors.Finite.Isotypic
 public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.Integral.BaseChange
 public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.SixFunctors.Integral.StalkRestrict
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
@@ -1966,6 +1970,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.AdicBaseChangeTower
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.AdicSmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.TorsionSmoothBaseChange
