@@ -15,18 +15,24 @@
  },
  "proof": [
   {
-   "text": "Identify U with Spec O_S(U) and use the affine tilde-Gamma equivalence to write the underlying module as the tilde of its global sections. Fractions of these sections generate on principal opens.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use all global sections as A-module generators. The A-linear evaluation contains the O-linear evaluation image and is locally surjective. The latter condition is unchanged on passing between the open subscheme and its slice site, and is equivalent to epimorphy of module sheaves.",
+   "text": "Transport the underlying quasi-coherent module from the slice over U to U.toScheme by overEquiv. Quasi-coherence is preserved by the continuous, cocontinuous site equivalence: apply the existing public Mathlib theorem isQuasicoherent_pushforward_of_isLeftAdjoint directly in the slice-generation proof (without a separate slice quasi-coherence declaration), using its unit-sheaf identification and continuity of Over.post. Identify the affine open subscheme with its spectrum and restrict along isoSpec.inv; this restriction preserves quasi-coherence.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the resulting module N on Spec R, isIso_fromTildeΓ_of_isQuasicoherent identifies N with the tilde of its global sections. Mathlib presentationTilde for the set of all elements and all relations gives a presentation of that tilde. Transport along fromTildeΓ and take its generating sections. Map these generators along restriction by isoSpec.hom, then along the inverse slice equivalence. Colimit preservation and the unit-sheaf isomorphisms preserve generating families. The composite restriction is the identity by restrictFunctorComp, restrictFunctorCongr and restrictFunctorId, and the slice unit isomorphism returns the original underlying module.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the same generating sections for the algebra module. To prove that their A-linear evaluation is epi, let two A-linear maps agree after evaluation. The freeHomEquiv converts this into equality of the images of every generator. After restricting scalars the O-linear evaluations of the two maps agree, again by freeHomEquiv. Cancel the generating O-linear evaluation epimorphism. Equality of the scalar-restricted maps gives equality of the original maps objectwise, since restriction of scalars leaves their functions unchanged. This argument requires no quasi-coherence of A.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -34,9 +40,9 @@
   "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 0H88, proof, second paragraph; EGA I, Proposition 9.6.1; explicit scalar-restriction and slice transport by second reader G1"
+  "place": "Morphisms, Lemma 0H88, proof, second paragraph; EGA I, Proposition 9.6.1. D2 formalization uses Mathlib presentationTilde, affine and slice transport, and an elementary cancellation proof for scalar extension of generating families."
  },
  "mathlib_searches": [
   {
@@ -112,10 +118,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T160135-L-2563594",
-  "kind": "interface",
+  "landing": "20261012T173815-L-3292333",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
