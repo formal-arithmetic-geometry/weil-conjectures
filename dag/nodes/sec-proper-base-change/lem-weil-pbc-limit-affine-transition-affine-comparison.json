@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-limit-affine-transition-affine-comparison",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-limit-affine-transition",
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Affine comparison for affine transition limit",
+ "statement": "For an affine transition limit cone whose stages are affine, the limit point is canonically isomorphic to the spectrum of the colimit of global sections, compatibly with projections.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemmas 01YX and 01YW"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For affine stages, the spectrum of the filtered colimit of global sections is a limit by Stacks Limits Lemma 01YW.  Uniqueness of limit cones gives the displayed isomorphism and projection equations.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": "written from the Stacks Project proof",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LimitAffineTransition",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LimitAffineTransition",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitAffineTransition.lean",
+  "declaration": "AlgebraicGeometry.limit_affine_transition_affine_comparison",
+  "statement": "theorem limit_affine_transition_affine_comparison {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (ha : ∀ i : Iᵒᵖ, IsAffine (D.obj i)) : ∃ e : c.pt ≅ Spec (colimit (D.op ⋙ Scheme.Γ)), ∀ i : Iᵒᵖ, e.hom ≫ Spec.map (colimit.ι (D.op ⋙ Scheme.Γ) (op i)) = c.π.app i ≫ (ΓSpec.adjunction.unit.app (D.obj i))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "existence of limits of schemes with affine transition morphisms",
+   "results": "No exact declaration; only theorems assuming a limit cone, such as isAffineHom_π_app and isLimitOpensCone.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "∃ c : Cone D, Nonempty (IsLimit c) IsAffineHom",
+   "results": "No matching declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasLimit affine transition schemes relativeSpec colimit",
+   "results": "Mathlib AffineTransitionLimit provides projection/open lemmas for an existing cone but no existence theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T044741-L-2033988",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T044741-L-2033988",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

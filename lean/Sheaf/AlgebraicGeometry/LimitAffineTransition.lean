@@ -6,8 +6,6 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 
 /-!
 # Existence of inverse limits with affine transition morphisms
@@ -24,37 +22,45 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+/-- Core existence of the limit cone for a cofiltered diagram with affine transitions.
+
+The proof constructs the relative spectrum of the filtered colimit of the pushforward
+structure algebras along one stage.  On every affine open of that stage, the resulting
+cone is the spectrum of a filtered colimit of rings, hence is limiting; compatible local
+factorizations glue uniquely.  This is the construction in Stacks, Limits, Lemma 01YX.
+(blueprint: lem-weil-pbc-limit-affine-transition-core). -/
+theorem exists_limit_affine_transition_core
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
+    (D : Iᵒᵖ ⥤ Scheme.{u})
+    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] :
+    ∃ c : Cone D, Nonempty (IsLimit c) := by
+  sorry
+
+/-- The affine-stage comparison for a limiting cone.
+
+When every stage is affine, the cone with vertex the spectrum of the filtered colimit of
+global sections is limiting by the affine-scheme limit theorem.  Uniqueness of limits then
+gives the displayed isomorphism and its compatibility with every projection.  This is
+Stacks, Limits, Lemma 01YW (blueprint: lem-weil-pbc-limit-affine-transition-affine-comparison).
+-/
+theorem limit_affine_transition_affine_comparison
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
+    (D : Iᵒᵖ ⥤ Scheme.{u})
+    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]
+    (c : Cone D) (hc : IsLimit c)
+    (ha : ∀ i : Iᵒᵖ, IsAffine (D.obj i)) :
+    ∃ e : c.pt ≅ Spec (colimit (D.op ⋙ Scheme.Γ)),
+      ∀ i : Iᵒᵖ, e.hom ≫ Spec.map (colimit.ι (D.op ⋙ Scheme.Γ) (op i)) =
+        c.π.app i ≫ (ΓSpec.adjunction.unit.app (D.obj i)) := by
+  sorry
+
 /-- An inverse system over a directed set with affine transition morphisms has a limit,
 its projections are affine, and inverse images of arbitrary opens of any stage are limits
 of the corresponding inverse images. For affine stages the limit is the spectrum of the
 colimit of their global sections.
 
 Source: Stacks Project, Limits, Lemmas 01YX and 01YW
-(blueprint: lem-weil-pbc-limit-affine-transition).
-
-Proof:
-1. Choose a stage i₀. The upper tail is cofinal by directedness, so it suffices to construct
-   the limit there (lem-weil-pbc-colimit-initial-full-subcategory).
-2. For each i ≥ i₀, the affine morphism to Sᵢ₀ is the relative spectrum of the quasi-coherent
-   algebra Aᵢ = fᵢᵢ₀,* Oᵢ. Transitions induce compatible algebra maps
-   (lem-weil-pbc-affine-morphism-relative-spec).
-3. Their colimit A is quasi-coherent, with sections on affine opens given by the colimit
-   of sections (lem-weil-pbc-quasi-coherent-algebra-colimit).
-4. Set S = Spec over Sᵢ₀ of A. The algebra coprojections give compatible scheme projections
-   (lem-weil-pbc-affine-morphism-relative-spec).
-5. Over each affine open of Sᵢ₀ the resulting cone is the spectrum of a colimit of rings,
-   hence limiting (lem-weil-pbc-spec-colimit-limit).
-6. Two maps to S with the same projections agree locally on inverse images of these
-   affine opens, hence globally (lem-weil-pbc-scheme-morphism-gluing).
-7. For any compatible cone from T, choose affine opens in T mapping into affine opens
-   of Sᵢ₀. Step 5 supplies local factorizations, Step 6 makes them agree on intersections,
-   and gluing gives the unique global factorization. Cofinality extends this to all stages
-   (def-pc-scheme, lem-weil-pbc-scheme-morphism-gluing).
-8. Every projection is affine, and restriction to any open of a stage is limiting with
-   affine transitions (lem-weil-pbc-limit-cone-affine-projections-opens).
-9. If every stage is affine, the spectrum of the colimit of their global sections is
-   another limit cone (lem-weil-pbc-spec-colimit-limit). Uniqueness of limits gives the
-   isomorphism compatible with every projection. -/
+(blueprint: lem-weil-pbc-limit-affine-transition). -/
 theorem exists_limit_affine_transition
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -68,6 +74,15 @@ theorem exists_limit_affine_transition
         ∃ e : c.pt ≅ Spec (colimit (D.op ⋙ Scheme.Γ)),
           ∀ i : Iᵒᵖ, e.hom ≫ Spec.map (colimit.ι (D.op ⋙ Scheme.Γ) (op i)) =
             c.π.app i ≫ (ΓSpec.adjunction.unit.app (D.obj i))) := by
-  sorry
+  obtain ⟨c, ⟨hc⟩⟩ := exists_limit_affine_transition_core D
+  refine ⟨c, ⟨hc⟩, ?_, ?_, ?_⟩
+  · intro i
+    exact isAffineHom_π_app D c hc i
+  · intro i U
+    refine ⟨⟨isLimitOpensCone D c hc i U⟩, ?_⟩
+    intro j k f
+    infer_instance
+  · intro ha
+    exact limit_affine_transition_affine_comparison D c hc ha
 
 end AlgebraicGeometry

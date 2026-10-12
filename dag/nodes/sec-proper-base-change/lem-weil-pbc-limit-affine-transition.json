@@ -25,121 +25,43 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (reduction to $I_{\\ge0}$).* If $I=\\emptyset$ the limit is the terminal scheme $\\operatorname{Spec}\\mathbf Z$ and the other clauses are void; so let $I\\neq\\emptyset$ (Stacks: a directed set is nonempty) and choose $0\\in I$. The subset $I_{\\ge0}$ is directed, and every $i\\in I$ has some $j\\in I_{\\ge0}$ with $j\\ge i$ ($I$ directed). View the system as a functor $D$ from the cofiltered category $\\mathcal I$ ($\\operatorname{Hom}(i,i')=\\{*\\}$ iff $i\\ge i'$) to schemes; a limit of $D$ in schemes is a colimit of $D^{\\mathrm{op}}:\\mathcal I^{\\mathrm{op}}\\to\\mathrm{Sch}^{\\mathrm{op}}$. By [lem-weil-pbc-colimit-initial-full-subcategory](1) with $\\mathcal C=\\mathrm{Sch}^{\\mathrm{op}}$ and the full subcategory $\\mathcal J=I_{\\ge0}$, the limit of $D$ exists as soon as the limit of the restricted system $(S_i)_{i\\ge0}$ exists, and then it is the same scheme, the projection to $S_i$ for arbitrary $i$ being $f_{ji}\\circ f_j$ for any $j\\ge i,0$. So it suffices to construct $\\varprojlim_{i\\ge0}S_i$.",
+   "text": "Apply the core existence theorem to obtain a cone c and a limit proof hc.",
    "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory"
+    "lem-weil-pbc-limit-affine-transition-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof, first sentences ('Choose an element 0 in I. Note that I is nonempty as the limit is directed.')"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (the algebras $\\mathcal A_i$).* For $i\\ge0$ the morphism $f_{i0}:S_i\\to S_0$ is affine (a transition morphism; $f_{00}=\\mathrm{id}$). By [lem-weil-pbc-affine-morphism-relative-spec](1) $\\mathcal A_i:=f_{i0,*}\\mathcal O_{S_i}$ is a quasi-coherent $\\mathcal O_{S_0}$-algebra, and by its part (3) $S_i\\cong\\underline{\\operatorname{Spec}}_{S_0}(\\mathcal A_i)$ over $S_0$. For $i\\ge i'\\ge0$ the transition morphism $f_{ii'}$ is a morphism over $S_0$ ($f_{i'0}\\circ f_{ii'}=f_{i0}$), so the functor of part (3) gives an $\\mathcal O_{S_0}$-algebra map $\\varphi_{ii'}=f_{i'0,*}(f_{ii'}^\\sharp):\\mathcal A_{i'}\\to\\mathcal A_i$; functoriality and $f_{ii}=\\mathrm{id}$, $f_{i'i''}\\circ f_{ii'}=f_{ii''}$ make $(\\mathcal A_i,\\varphi_{ii'})_{i\\ge0}$ a directed system of quasi-coherent $\\mathcal O_{S_0}$-algebras.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof ('consider the quasi-coherent sheaf of O_{S_0}-algebras A_i = f_{i0,*}O_{S_i}. Recall that S_i = Spec_{S_0}(A_i), see Morphisms, Lemma 01S8')"
-   }
-  },
-  {
-   "text": "*Step 3 (the colimit algebra).* By [lem-weil-pbc-quasi-coherent-algebra-colimit] the colimit $\\mathcal A=\\varinjlim_{i\\ge0}\\mathcal A_i$, with coprojections $\\iota_i:\\mathcal A_i\\to\\mathcal A$, is a quasi-coherent $\\mathcal O_{S_0}$-algebra, and for every affine open $U_0\\subseteq S_0$ the map $\\varinjlim_i\\mathcal A_i(U_0)\\to\\mathcal A(U_0)$ induced by the $\\iota_{i,U_0}$ is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-algebra-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof ('Set A = colim A_i. This is a quasi-coherent sheaf of O_{S_0}-algebras, see Schemes, Section 26.24')"
-   }
-  },
-  {
-   "text": "*Step 4 (the scheme $S$ and its projections).* Put $S=\\underline{\\operatorname{Spec}}_{S_0}(\\mathcal A)$ with the affine structure morphism $f_0:S\\to S_0$ of [lem-weil-pbc-affine-morphism-relative-spec](2). Under the anti-equivalence of its part (3) (and the identifications $S_i\\cong\\underline{\\operatorname{Spec}}_{S_0}(\\mathcal A_i)$ of Step 2), the coprojections $\\iota_i$ correspond to $S_0$-morphisms $f_i:S\\to S_i$, $i\\ge0$ (for $i=0$ this is $f_0$, as $\\iota_0$ composed with $\\mathcal O_{S_0}\\to\\mathcal A_0$ is the structure map). Since $\\iota_i\\circ\\varphi_{ii'}=\\iota_{i'}$, functoriality gives $f_{ii'}\\circ f_i=f_{i'}$ for $i\\ge i'\\ge0$: $(S,(f_i)_{i\\ge0})$ is a cone over $(S_i)_{i\\ge0}$.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof ('Set S = Spec_{S_0}(A). By Morphisms, Lemma 01SA we get for i >= 0 morphisms f_i : S -> S_i compatible with the transition morphisms')"
-   }
-  },
-  {
-   "text": "*Step 5 (the limit over an affine open of $S_0$; Lemma 01YW).* Let $U_0\\subseteq S_0$ be an affine open, $U_i=f_{i0}^{-1}(U_0)$ ($i\\ge0$) and $U=f_0^{-1}(U_0)$. By [lem-weil-pbc-affine-morphism-relative-spec](2),(3) there are isomorphisms $U_i\\cong\\operatorname{Spec}\\mathcal A_i(U_0)$ (note $\\mathcal A_i(U_0)=\\Gamma(U_i,\\mathcal O_{S_i})$) and $U\\cong\\operatorname{Spec}\\mathcal A(U_0)$ under which the restricted transition morphisms $U_i\\to U_{i'}$ are $\\operatorname{Spec}(\\varphi_{ii',U_0})$ and the restricted projections $U\\to U_i$ are $\\operatorname{Spec}(\\iota_{i,U_0})$. By Step 3, $(\\mathcal A(U_0),(\\iota_{i,U_0}))$ is the colimit of the rings $\\mathcal A_i(U_0)$, so by [lem-weil-pbc-spec-colimit-limit] $(U,(f_i|_U)_{i\\ge0})$ is a limit of the system $(U_i)_{i\\ge0}$ in the category of schemes. Explicitly: for every scheme $V$ and morphisms $h_i:V\\to U_i$ with $f_{ii'}\\circ h_i=h_{i'}$ there is exactly one $h:V\\to U$ with $f_i\\circ h=h_i$ for all $i\\ge0$.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-quasi-coherent-algebra-colimit",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof ('By Lemma 01YW above we see that for any affine open U_0 in S_0 the inverse image U = f_0^{-1}(U_0) is the limit of the system of opens U_i = f_{i0}^{-1}(U_0), i >= 0 in the category of schemes'); Limits, Lemma 01YW (line 42)"
-   }
-  },
-  {
-   "text": "*Step 6 (uniqueness, locally).* Let $W$ be a scheme and $h,h':W\\to S$ morphisms with $f_i\\circ h=f_i\\circ h'$ for all $i\\ge0$. Then $h=h'$. Indeed, let $w\\in W$ and choose an affine open $U_0\\subseteq S_0$ containing $f_0(h(w))=f_0(h'(w))$; put $U=f_0^{-1}(U_0)$ and $W_w=h^{-1}(U)=(f_0\\circ h)^{-1}(U_0)=(f_0\\circ h')^{-1}(U_0)=h'^{-1}(U)$, an open neighbourhood of $w$. The restrictions $h|_{W_w},h'|_{W_w}:W_w\\to U$ have the same composites $f_i\\circ h|_{W_w}=f_i\\circ h'|_{W_w}:W_w\\to U_i$, so they are equal by the uniqueness in Step 5. The $W_w$ cover $W$, hence $h=h'$ by the uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing].",
-   "uses": [
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof (the 'uniqueness property' invoked for the glueing, written out)"
-   }
-  },
-  {
-   "text": "*Step 7 ($S$ is the limit).* Let $T$ be a scheme and $g_i:T\\to S_i$ ($i\\ge0$) morphisms with $f_{ii'}\\circ g_i=g_{i'}$. For $t\\in T$ choose an affine open $U_0\\subseteq S_0$ containing $g_0(t)$ and an affine open $V\\ni t$ of $T$ with $V\\subseteq g_0^{-1}(U_0)$ (the affine opens of a scheme form a basis of its topology [def-pc-scheme]: every point has an affine neighbourhood $\\operatorname{Spec}R$, whose principal opens $D(r)\\cong\\operatorname{Spec}R_r$ form a basis). For $i\\ge0$, $f_{i0}(g_i(V))=g_0(V)\\subseteq U_0$, so $g_i|_V$ factors through $U_i=f_{i0}^{-1}(U_0)$, compatibly in $i$; by Step 5 there is a unique $g_V:V\\to U=f_0^{-1}(U_0)\\subseteq S$ with $f_i\\circ g_V=g_i|_V$ for all $i\\ge0$. These $V$ cover $T$. For two of them, $g_V|_{V\\cap V'}$ and $g_{V'}|_{V\\cap V'}$ have the same composites $g_i|_{V\\cap V'}$ with every $f_i$, so they agree by Step 6. By [lem-weil-pbc-scheme-morphism-gluing] the $g_V$ glue to $g:T\\to S$ with $g|_V=g_V$; then $(f_i\\circ g)|_V=g_i|_V$ for every $V$ of the cover, so $f_i\\circ g=g_i$ (uniqueness clause of the same lemma). If $g':T\\to S$ also satisfies $f_i\\circ g'=g_i$ for all $i\\ge0$, then $g'=g$ by Step 6. Hence $(S,(f_i)_{i\\ge0})$ is a limit of $(S_i)_{i\\ge0}$ in the category of schemes, and by Step 1 $S=\\varprojlim_{i\\in I}S_i$.",
-   "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof, second paragraph ('Let T be a scheme. Let g_i : T -> S_i be a compatible system of morphisms ... The morphisms g_V glue to a morphism g : T -> S because of the uniqueness property')"
-   }
-  },
-  {
-   "text": "*Step 8 (the projections are affine; the limit commutes with opens of a stage).* Now that the limit $(S,(f_i)_{i\\in I})$ exists, [lem-weil-pbc-limit-cone-affine-projections-opens](1) shows that every $f_i:S\\to S_i$, $i\\in I$, is affine, and its part (2) shows, for every $0\\in I$ and every open $U_0\\subseteq S_0$, that the restricted transition morphisms $f_{i0}^{-1}(U_0)\\to f_{i'0}^{-1}(U_0)$ are affine and that $f_0^{-1}(U_0)$ with the restricted projections is $\\varprojlim_{i\\ge0}f_{i0}^{-1}(U_0)$ in the category of schemes. (Stacks obtains (1) from Morphisms, Lemma 01SG (affine permanence) and (2) 'from the construction'; the cited node gives both for any limit cone, which is what the users of this lemma apply.)",
+   "text": "For each stage, the projection is affine by the affine projection theorem for any limit cone.",
    "uses": [
     "lem-weil-pbc-limit-cone-affine-projections-opens"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit), proof ('Note that the morphisms f_i are affine by Morphisms, Lemma 01SG' and 'The final statement is clear from the construction of the limit above')"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 9 (the affine case, Lemma 01YW).* If all $S_i$ are affine, write $R_i=\\Gamma(S_i,\\mathcal O_{S_i})$; the transition morphisms give ring maps $R_{i'}\\to R_i$ ($i\\ge i'$), a directed system with colimit $R=\\varinjlim_iR_i$. By [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}R$ with the morphisms induced by the coprojections is a limit of the system $(\\operatorname{Spec}R_i)\\cong(S_i)$ (each $S_i\\cong\\operatorname{Spec}R_i$ canonically, $S_i$ being affine). Two limits of the same system are isomorphic by a unique isomorphism compatible with the projections, so $S\\cong\\operatorname{Spec}(\\varinjlim_i\\Gamma(S_i,\\mathcal O_{S_i}))$; in particular $S$ is affine.",
+   "text": "For each open U of a stage, opensCone is limiting and its transition maps are affine by the corresponding theorem for limit cones.",
    "uses": [
-    "lem-weil-pbc-spec-colimit-limit"
+    "lem-weil-pbc-limit-cone-affine-projections-opens"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42), proof ('Just define S = Spec(colim R_i)')"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Under the hypothesis that all stages are affine, apply the affine comparison theorem to c and hc.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition-affine-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-quasi-coherent-algebra-colimit",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "def-pc-scheme",
-  "lem-weil-pbc-limit-cone-affine-projections-opens"
+  "lem-weil-pbc-limit-affine-transition-core",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-limit-affine-transition-affine-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma 01YX (lemma-directed-inverse-system-has-limit, line 58) and Lemma 01YW (line 42), with their proofs"
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/LimitAffineTransition.lean",
+  "place": "the proof of exists_limit_affine_transition"
  },
  "mathlib_searches": [
   {
@@ -243,5 +165,15 @@
   "group": "M1",
   "result": "pass",
   "note": "directed set = Preorder+IsDirected+Nonempty (Stacks nonempty, no stage fixed); D : Iᵒᵖ ⥤ Scheme.{u}; affine transitions = instance IsAffineHom (D.map f); limit exists = ∃ c, Nonempty (IsLimit c); projections IsAffineHom; per stage i and arbitrary open U: Mathlib opensCone is limit (Over i = upper tail of I), restricted transitions IsAffineHom; affine case iso c.pt ≅ Spec(colimit Γ) compatible via Spec.map colimit.ι and ΓSpec unit; #check opensCone/opensDiagram are Mathlib AlgebraicGeometry, types of unit and Spec.map checked; I : Type u tied to Scheme.{u} as Mathlib/NoetherianApproximation"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T044741-L-2033988",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
