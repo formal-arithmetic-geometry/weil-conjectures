@@ -7,6 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.CategoryTheory.SiteCechComplex
 public import Mathlib.GroupTheory.Perm.Sign
+import Sheaf.AlgebraicGeometry.CechDifferentialRepeatedDecomposition
+import Sheaf.AlgebraicGeometry.CechDifferentialRepeatedCancellation
 
 /-!
 # Cancellation of repeated Čech tuples
@@ -47,6 +49,9 @@ theorem cechDifferential_repeated (X : Scheme.{u}) {I : Type v}
       c t = (Equiv.Perm.sign σ : ℤ) • F.map (S.indexMap t σ).op (c (t ∘ σ)))
     (hz : ∀ t : Fin (p + 1) → I, ¬ Function.Injective t → c t = 0)
     (t : Fin (p + 2) → I) (ht : ¬ Function.Injective t) :
-    S.differentialValue F p c t = 0 := by sorry
+    S.differentialValue F p c t = 0 := by
+  obtain ⟨a, b, htab, hab⟩ := Function.not_injective_iff.mp ht
+  rw [cechDifferential_repeated_decomposition X U F S p c t a b hab htab hz]
+  exact cechDifferential_repeated_cancellation X U F S p c t a b hab htab hc
 
 end AlgebraicGeometry.Scheme
