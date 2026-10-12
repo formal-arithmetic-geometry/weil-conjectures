@@ -6046,3 +6046,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/C2/Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation (stage 3; reviewer PASS; first push; landing 20261012T044739-L-2032646 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/C2/Sheaf.Paper.GabberZariskiEtaleRestrictionInjective (stage 3; reviewer PASS; first push; landing 20261012T044739-L-2032811 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/D2/Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete (stage 3; reviewer PASS; first push; landing 20261012T044739-L-2032950 (interface); batch 20261012T044734; modules 3; new nodes 2)
+- 04:47 L: merged deliver/D2/Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion (stage 3; reviewer PASS; first push; landing 20261012T044740-L-2033120 (interface); batch 20261012T044734; modules 3; new nodes 2)

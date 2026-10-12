@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-gabber-h0-etale-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof of Tag 0A0C, invocation of 09ZF after 0A0B; within 09ZF, first two proof paragraphs, injectivity only",
+   "via": [
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Injectivity of étale restriction from universal Zariski restriction",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion]. Suppose that for every Zariski sheaf of sets $G$ [def-weil-pbc-topological-inverse-image], the canonical unit on global sections $\\Gamma(X,G)\\to\\Gamma(Z,i^{-1}_{\\rm Zar}G)$ is bijective. For every sheaf of sets $F$ on the small étale site of $X$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets], the unit restriction $\\Gamma(X,F)\\to\\Gamma(Z,i^{-1}_{\\rm et}F)$ is injective. Here restriction is the inverse-image adjunction unit evaluated at the terminal étale object [lem-weil-pbc-sets-finite-surjective-descent]; no quasi-compactness or finite-base-change hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, first two proof paragraphs (the injectivity argument)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-finite-surjective-descent"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a continuous inclusion k of the Zariski site into the small étale site, with k followed by the fully faithful forgetful functor equal to X.restrictFunctor. The canonical lift j has the same composite. Lift their equality to a natural isomorphism k ≅ j using fully faithful whiskering; continuity transports along it. Precomposition by j thus gives the canonical Zariski restriction sheaves of F and its inverse image. The pullback square of the restriction to an open yields each required base-change isomorphism and its projection equation.",
+   "uses": [
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Zariski-to-étale comparison theorem to these canonical restriction sheaves and identifications. Its unit equation says that restriction at the top open factors as the Zariski unit followed by the comparison, which is injective. The Zariski unit is bijective by hypothesis, hence this composite is injective.",
+   "uses": [
+    "lem-weil-pbc-gabber-zariski-etale-restriction-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The top-open inclusion is isomorphic to the identity étale object using Scheme.topIso. Pull sections at the identity back along this isomorphism. Naturality of the inverse-image unit transports an assumed equality of their restrictions to an equality at the top-open inclusion. The comparison-unit equation and comparison injectivity give equality of their Zariski-unit images. Zariski injectivity from the hypothesis gives equality of the sections at the top open. Applying the inverse isomorphism gives equality of the original sections.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, first two proof paragraphs (the injectivity argument)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zariski restriction bijective implies etale restriction injective for a closed immersion",
+   "results": "HTTP 500 Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski restriction bijective implies etale restriction injective for a closed immersion",
+   "results": "AlgebraicGeometry.IsEtale.of_comp and other étale morphism definitions and permanence lemmas; no section comparison or finite lifting theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zariski.*etale.*inject|etale.*restriction.*inject",
+   "results": "No hits in Mathlib",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberH0EtaleInjective",
+  "declaration": "AlgebraicGeometry.gabber_h0_etale_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0EtaleInjective.lean",
+  "statement": "theorem gabber_h0_etale_injective {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (hZar : letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1), (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P := fun P U ↦ @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U) inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P) ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat, Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1)) (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app (op (⊤ : X.Opens)))) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) : Function.Injective (etaleSetDescentUnit i F (Scheme.Etale.mk (𝟙 X)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T044740-L-2033120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
