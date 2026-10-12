@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 public import WeilConjectures.AlgebraicGeometry.IdempotentBasicOpen
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentableLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Topology.SpectralSpace.ClopenExtension
@@ -156,6 +158,79 @@ lemma Scheme.range_of_isPullback_quotient
   rw [← hq, ← Scheme.Pullback.range_fst, ← h.isoPullback_hom_fst, Scheme.Hom.comp_base,
     TopCat.coe_comp, Set.range_comp, Set.range_eq_univ.2 h.isoPullback.hom.surjective,
     Set.image_univ]
+
+/-- Over a henselian pair, an open subset of a proper `Y` containing the closed fibre is all of
+`Y`: its complement is closed, hence meets the closed fibre if it is nonempty. -/
+lemma Scheme.eq_top_of_range_subset_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) {U : Y.Opens}
+    (hU : Set.range i ⊆ (U : Set Y)) : U = ⊤ := by
+  by_contra hne
+  have hne' : ((U : Set Y)ᶜ).Nonempty := by
+    rw [Set.nonempty_compl]
+    exact fun h' ↦ hne (SetLike.coe_injective (h'.trans TopologicalSpace.Opens.coe_top.symm))
+  obtain ⟨y, hyU, hy⟩ := f.nonempty_inter_preimage_zeroLocus I HenselianRing.jac
+    U.isOpen.isClosed_compl hne'
+  rw [← Scheme.range_of_isPullback_quotient I f i f₀ h] at hy
+  exact hyU (hU hy)
+
+/-- **Clopen lifting over a henselian pair.** Every open and closed subset of the closed fibre
+`Y₀` of a proper `Y` over a henselian pair is the preimage of an open and closed subset of `Y`.
+This is the clopen extension `exists_isClopen_inter_eq_of_isConnected_inter` applied to the
+closed fibre, whose hypothesis is the connectedness input
+`AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter`. -/
+lemma Scheme.exists_isClopen_preimage_eq_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+    {U₀ : Set Y₀} (hU₀ : IsClopen U₀) :
+    ∃ U : Set Y, IsClopen U ∧ i ⁻¹' U = U₀ := by
+  have hi := Scheme.isClosedImmersion_of_isPullback_quotient I f i f₀ h
+  have hrange := Scheme.range_of_isPullback_quotient I f i f₀ h
+  obtain ⟨_, -, hC⟩ := f.spectralSpace_and_isClosed_and_isConnected_inter I
+  have hinj : Function.Injective i := i.isClosedEmbedding.injective
+  have hAT : i '' U₀ ⊆ f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) :=
+    hrange ▸ Set.image_subset_range _ _
+  have hB : f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) \ i '' U₀ = i '' U₀ᶜ := by
+    rw [Set.image_compl_eq_range_sdiff_image hinj, hrange]
+  obtain ⟨U, hU, hUA⟩ := exists_isClopen_inter_eq_of_isConnected_inter hC hAT
+    (i.isClosedEmbedding.isClosedMap _ hU₀.isClosed)
+    (hB ▸ i.isClosedEmbedding.isClosedMap _ hU₀.isOpen.isClosed_compl)
+  refine ⟨U, hU, Set.ext fun z ↦ ?_⟩
+  have hz : i z ∈ f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := hrange ▸ Set.mem_range_self z
+  change i z ∈ U ↔ z ∈ U₀
+  rw [← hinj.mem_set_image, ← hUA]
+  exact ⟨fun h ↦ ⟨h, hz⟩, fun h ↦ h.1⟩
+
+/-- **Rigidity over a henselian pair.** Two morphisms `a b : Y ⟶ W` from a proper `Y` over a
+henselian pair into a scheme `W` unramified over `Z`, which agree over `Z` and on the closed
+fibre `Y₀`, are equal: the open locus where they agree contains the closed fibre. -/
+lemma Scheme.eq_of_comp_eq_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+    {W Z : Scheme.{u}} (p : W ⟶ Z) [FormallyUnramified p] [LocallyOfFiniteType p]
+    {a b : Y ⟶ W} (hab : a ≫ p = b ≫ p)
+    (hi : i ≫ a = i ≫ b) : a = b := by
+  have hE := Scheme.eq_top_of_range_subset_of_henselianRing I f i f₀ h
+    (FormallyUnramified.range_subset_eqLocus p a b hab i hi)
+  have key : (⊤ : Y.Opens).ι ≫ a = (⊤ : Y.Opens).ι ≫ b := by
+    rw [← Y.isoOfEq_hom_ι hE.symm, Category.assoc, Category.assoc,
+      FormallyUnramified.eqLocus_ι_comp_eq]
+  rwa [← Scheme.topIso_hom, cancel_epi] at key
+
+/-- **Isomorphisms lift over a henselian pair.** A finite étale morphism `p : W ⟶ Y` to a proper
+`Y` over a henselian pair whose base change to the closed fibre is an isomorphism is an
+isomorphism: its rank is locally constant and equal to `1` along the closed fibre. -/
+lemma Scheme.isIso_of_isPullback_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+    {W W₀ : Scheme.{u}} (p : W ⟶ Y) [IsFinite p] [Etale p]
+    (p₀ : W₀ ⟶ Y₀) (j : W₀ ⟶ W) (hp : IsPullback j p₀ p i) [IsIso p₀] : IsIso p := by
+  rw [Scheme.Hom.isIso_iff_finrank_eq]
+  let U : Y.Opens := ⟨{y | p.finrank y = 1}, p.isLocallyConstant_finrank.isOpen_fiber 1⟩
+  have hU := Scheme.eq_top_of_range_subset_of_henselianRing I f i f₀ h (U := U) (by
+    rintro _ ⟨y₀, rfl⟩
+    change p.finrank (i y₀) = 1
+    rw [← Scheme.Hom.finrank_of_isPullback j p₀ p i hp, Scheme.Hom.finrank_eq_one_of_isIso]
+    rfl)
+  funext y
+  have : y ∈ U := hU ▸ trivial
+  exact this
 
 /-- **Idempotent lifting for the structure sheaf over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
