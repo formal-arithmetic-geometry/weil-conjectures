@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "For each point choose a pair $(\\mathcal L_x,s_x)$ as in the hypothesis. The opens $X_{s_x}$ are affine and cover $X$; quasi-compactness of $X$ gives finitely many pairs $(\\mathcal L_i,s_i)$, $i=1,\\ldots,n$, with $X=\\bigcup_i X_{s_i}$.",
+   "text": "For each point choose a pair $(\\mathcal L_x,s_x)$ as in the hypothesis. The opens $X_{s_x}$ are affine and cover $X$; quasi-compactness of $X$ gives finitely many pairs $(\\mathcal L_i,s_i)$, $i=1,\\ldots,n$, with $X=\\bigcup_i X_{s_i}$. Handle the empty scheme first with the structure module. For nonempty X enumerate the finite subcover by Fin f.card and append one input factor from an arbitrary point, so the family has f.card + 1 factors and can use positiveTensorFamily without a separate zero-factor construction.",
    "uses": [
     "def-weil-pbc-quasi-compact-scheme"
    ],
@@ -54,12 +54,12 @@
    }
   },
   {
-   "text": "Let $\\mathcal L=\\mathcal L_1\\otimes_{\\mathcal O_X}\\cdots\\otimes_{\\mathcal O_X}\\mathcal L_n$, the tensor product [def-pur-sheaf-tensor-product]. By [lem-sc-tensor-globally-generated], this is an invertible (and globally generated) $\\mathcal O_X$-module. For every multi-index $J=(j_1,\\ldots,j_n)$ with $0\\le j_i\\le m_i$ let $\\tau_J=t_{1,j_1}\\otimes\\cdots\\otimes t_{n,j_n}\\in\\Gamma(X,\\mathcal L)$.",
+   "text": "Form the left-associated positiveTensorFamily of the finite family (def-sc-positive-tensor-family). Induction on the number of factors, using the already proved IsInvertible.tensorObj instance in WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula (the tensor-invertibility clause of lem-pc-tensor-dual-invertible), proves it invertible; global generation of the product is unnecessary. Restrict each top-open section to all opens to obtain compatible sections, then form positiveTensorFamilySection for each choice of factor sections.",
    "uses": [
-    "lem-sc-tensor-globally-generated",
-    "def-pur-sheaf-tensor-product",
+    "def-sc-positive-tensor-family",
+    "lem-pc-tensor-dual-invertible",
     "def-sc-invertible-module",
-    "def-weil-pbc-generating-sections"
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
@@ -68,10 +68,11 @@
    }
   },
   {
-   "text": "If some $j_i=0$, then $X_{t_{i,j_i}}=X_{s_i}$ is affine, so [lem-sc-tensor-section-affine-open] shows $X_{\\tau_J}$ is affine. These opens cover $X$: given $x$, choose for every $i$ a section $t_{i,j_i}$ nonvanishing at $x$ using the covers in step 2; the resulting $\\tau_J$ is nonvanishing at $x$, and if all $j_i\\ne0$ replace one index by $0$ for which $x\\in X_{s_i}$ (step 1), preserving nonvanishing. Hence the invertible module $\\mathcal L$ has a cover by affine opens $X_{\\tau_J}$ with $\\tau_J\\in\\Gamma(X,\\mathcal L^{\\otimes1})$, and $X$ is quasi-compact, which is precisely ampleness by [def-weil-pbc-ample-invertible-module].",
+   "text": "If some $j_i=0$, then $X_{t_{i,j_i}}=X_{s_i}$ is affine, so [lem-sc-tensor-section-affine-open] shows $X_{\\tau_J}$ is affine. These opens cover $X$: given $x$, choose for every $i$ a section $t_{i,j_i}$ nonvanishing at $x$ using the covers in step 2; the resulting $\\tau_J$ is nonvanishing at $x$, and if all $j_i\\ne0$ replace one index by $0$ for which $x\\in X_{s_i}$ (step 1), preserving nonvanishing. Hence the invertible module $\\mathcal L$ has a cover by affine opens $X_{\\tau_J}$ with $\\tau_J\\in\\Gamma(X,\\mathcal L^{\\otimes1})$, and $X$ is quasi-compact, which is precisely ampleness by [def-weil-pbc-ample-invertible-module]. At each point construct only the required multi-index, replacing the section in one affine-cover factor by its distinguished section. Transport the tensor section along the inverse right unitor N ≅ N.tensorPow 1. Use the existing private nonvanishingLocus_iso theorem from Sheaf.AlgebraicGeometry.AmpleIso, accessed by a proof-only import all, to preserve the locus (lem-sc-ample-iso); its already proved stalk-linearity argument is reused, not duplicated. Thus n = 1 and the affine tensor locus witness IsAmple.",
    "uses": [
     "lem-sc-tensor-section-affine-open",
-    "def-weil-pbc-ample-invertible-module"
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-ample-iso"
    ],
    "elementary": false,
    "source": {
@@ -85,15 +86,17 @@
   "lem-sc-finite-sections-cover-qc",
   "def-weil-pbc-generating-sections",
   "def-weil-pbc-ample-invertible-module",
-  "lem-sc-tensor-globally-generated",
+  "def-sc-positive-tensor-family",
+  "lem-pc-tensor-dual-invertible",
   "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
   "lem-sc-tensor-section-affine-open",
-  "def-pur-sheaf-tensor-product"
+  "lem-sc-ample-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NC (varieties-lemma-enough-globally-generated-ample), proof"
+  "place": "Tag 09NC, lemma-enough-globally-generated-ample, proof; Lean realization by J1, retaining the finite-cover and tensor-section route and using proved tensor invertibility; repair of dd0079fe1: reuse AmpleIso private locus theorem through import all, deleting duplicate helpers"
  },
  "mathlib_searches": [
   {
@@ -173,5 +176,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T135243-L-1669750",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
