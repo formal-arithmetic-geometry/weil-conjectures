@@ -15,18 +15,63 @@
  ],
  "proof": [
   {
-   "text": "Write the generic point of the integral Noetherian base as the inverse limit of its\nnonempty affine open neighbourhoods. The qcqs family restricts to the corresponding\ninverse system with affine transition maps. Finite étale morphisms are of finite\npresentation and descend through this system, as do their finite group action and the\nsimple-transitivity isomorphism. Descend the cover and its generic comparison at a\ncommon stage; shrink the neighbourhood so finiteness and étaleness hold. Restricting\nthat neighbourhood in S gives U. The generic-fibre map j factors through c⁻¹(U),\nand the descended comparison gives the asserted pullback square.",
-   "uses": [],
+   "text": "Specialize the affine-neighbourhood limit theorem to the generic point of S. Every nonempty affine open contains this point, and its stalk is S.functionField, so the limit is Spec S.functionField. Use the already proved specialization Scheme.isLimitFunctionFieldCone and the factorization Scheme.fromSpecFunctionField_eq_functionFieldCone_comp in WeilConjectures.AlgebraicGeometry.FunctionFieldLimit. Reindex its cofiltered poset by the opposite of the order dual to match the increasing-directed-set interfaces.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Base change that diagram along c. Its stages are C times_S Spec Gamma(S,U), and its cone point is C times_S Spec S.functionField. The supplied square identifies this point with Cη. The pullback-map squares and Mathlib isLimitOfIsPullbackOfIsConnected give the limiting property. The stages are qcqs because c is qcqs and the bases are affine; their transition morphisms are affine base changes of morphisms of affine schemes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport Z.π to the canonical generic-fibre pullback. A finite étale morphism is locally of finite presentation, quasi-compact, and quasi-separated. Apply Scheme.exists_isPullback_of_finitePresentation to obtain a finitely presented model p at a stage, with a cartesian comparison. Since this stage is qcqs, its finitely presented model is qcqs as well.",
+   "uses": [
+    "lemma-nagata-finite-presentation-descends",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_isFinite_baseChange_stage to p as a morphism in the slice over its stage, using finiteness of its generic base change. Apply Etale.exists_stage_of_inverseLimit to the same morphism, using étaleness of the generic base change. Directedness supplies one stage later than both. Finiteness and étaleness persist there under base change. Construct the comparison by pullback.lift and prove its square cartesian by IsPullback.of_right; this is the private proved helper exists_finiteEtale_limit_stage.",
+   "uses": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-etale",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let U be the nonempty affine open indexing that stage; it contains the generic point. The standard restriction square for c and the affine-open isoSpec identify the stage with (c preimage U).toScheme. Compose the generic-fibre comparison and the inverse of this identification to construct jU. The first pullback-projection equations prove jU followed by the open inclusion equals j. Transport the model morphism along the same isomorphism; finiteness and étaleness are preserved. IsPullback.of_iso transports the comparison square to the square asserted in the conclusion. The group action and simple-transitivity laws are never needed.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-nagata-finite-presentation-descends"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "M2",
+  "by": "F2",
   "document": "Stacks Project",
-  "place": "Tags 0EYJ, 01ZM, 01ZO, 07RP: initial generic open model",
-  "note": "Strict subargument of the Noetherian extension proof; the parent supplies Noetherian induction."
+  "place": "Tags 0EYJ (initial open), 01ZM (finite presentation), 01ZO (finiteness), 07RP (etaleness); affine-neighbourhood limit as in limits.tex, Tag 0GWT proof and Tag 01YW",
+  "note": "Lean assembly of existing declarations. The group action is not descended, because the conclusion asks only for the underlying finite etale morphism. The generic limit is implemented by the already proved FunctionFieldLimit specialization."
  },
  "mathlib_searches": [
   {
@@ -170,10 +215,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T110311-L-618930",
-  "kind": "interface",
+  "landing": "20261012T135233-L-1664799",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
