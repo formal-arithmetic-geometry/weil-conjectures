@@ -26,46 +26,51 @@
  ],
  "proof": [
   {
-   "text": "Assume M^\\bullet has Tor amplitude in [a,b]. By [lem-pc-module-tor-amplitude-flat-model], choose a complex P^\\bullet of flat A-modules concentrated in [a,b] and an isomorphism M^\\bullet\\cong P^\\bullet in D(A). Under [lem-pc-affine-qcoh-derived-equivalence], E is isomorphic to the associated complex \\widetilde{P^\\bullet}. The associated complex is K-flat by [lem-pc-affine-tilde-kflat]. By the convention for the derived tensor product fixed in [lem-pc-affine-derived-pullback-tensor-tilde] (the total tensor complex of a K-flat resolution of the first factor with the second), for every \\mathcal O_X-module \\mathcal G the derived tensor E\\otimes^\\mathbf L\\mathcal G is represented by the ordinary tensor complex \\widetilde{P^\\bullet}\\otimes\\mathcal G. Since P^\\bullet is zero outside [a,b], so is this tensor complex, and its cohomology vanishes there; hence E has Tor amplitude in [a,b].",
+   "text": "Choose a module flat model P in [a,b] using module_torAmplitudeIn_iff_exists_flat_model. BoundedFlatKFlat supplies the acyclicity formulation of K-flatness; isKFlat_tilde therefore makes termwise tilde P K-flat. Transport the derived isomorphism to the termwise tilde of M using the affine equivalence comparison. For any sheaf G, mapBifunctorSingle₂Iso identifies tensor with G in degree zero with termwise tensor. Tilde and tensorRight G preserve zero objects, so the tensor terms, and therefore homology, vanish outside [a,b]. This gives an explicit witness of schemeDerivedTensorCohomologyVanishes.",
    "uses": [
     "lem-pc-module-tor-amplitude-flat-model",
-    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-module-bounded-flat-kflat",
     "lem-pc-affine-tilde-kflat",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-qcoh-derived-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.10.4 (Tag 08E9), proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume E has Tor amplitude in [a,b] and let N be an A-module. By [lem-pc-affine-qcoh-derived-equivalence], E\\cong\\widetilde{M^\\bullet}, so [lem-pc-affine-derived-pullback-tensor-tilde, part (3)] (with N^\\bullet=N in degree 0) gives E\\otimes^{\\mathbf L}_{\\mathcal O_X}\\widetilde N\\cong\\widetilde{K^\\bullet} in D(\\mathcal O_X), where K^\\bullet is a complex of A-modules representing M^\\bullet\\otimes_A^{\\mathbf L}N. The functor Q\\mapsto\\widetilde Q is exact, since on stalks it is localization [lem-weil-pbc-spec-tilde-stalk-localization] and localization is exact; hence H^i(\\widetilde{K^\\bullet})\\cong\\widetilde{H^i(K^\\bullet)}. An A-module Q with \\widetilde Q=0 is zero, because Q\\cong\\Gamma(X,\\widetilde Q) [lem-weil-pbc-affine-tilde-gamma-adjunction, part (2)]. Taking \\mathcal G=\\widetilde N in (i), for i\\notin[a,b] we get \\widetilde{H^i(K^\\bullet)}=0, so H^i(M^\\bullet\\otimes_A^{\\mathbf L}N)=0. Thus M^\\bullet has Tor amplitude in [a,b].",
+   "text": "For the converse take a flat K-flat module resolution s:P to M from the proved generic source exists_quasiIso_flat_kFlat. For each module N and degree i outside [a,b], apply the given sheaf vanishing to tilde N. Unpack its K-flat witness and use kFlat_derivedTensor_comparison_natIso on singleton constant families to deduce zero cohomology of the sheaf derived tensor. The single-complex functor comparison and derivedTensor_tilde_iso identify that tensor with Q of tilde Tot(P tensor N[0]). The module K-flat comparison QObjTensorQObjIsoOfKFlatLeft identifies Q of Tot(P tensor N[0]) with Q(M) tensor-derived N[0].",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-kflat-derived-tensor-comparison",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affineDerivedTilde_homology_comparison to the affine derived equivalence and to the total module tensor complex. This identifies the sheaf cohomology with tilde of the module derived cohomology. Full faithfulness of tilde, from its adjunction with invertible unit, detects the zero identity morphism and hence zero module cohomology. The isGE_iff and isLE_iff characterizations convert vanishing below a and above b to homologyConcentratedIn for every N, which is exactly torAmplitudeIn.",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "new-affine-derived-tilde-homology-comparison",
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma 36.10.4 (Tag 08E9), proof, second paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-module-tor-amplitude-flat-model",
-  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-module-bounded-flat-kflat",
   "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-kflat-derived-tensor-comparison",
   "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "new-affine-derived-tilde-homology-comparison",
   "lem-weil-pbc-affine-tilde-gamma-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Lemma 36.10.4 (Tag 08E9)"
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/08E9",
+  "place": "Proof of part (1), implemented by B3 using the existing affine tensor and cohomology comparisons; generic source K-flat resolutions avoid bounded free-resolution reductions."
  },
  "mathlib_searches": [
   {
@@ -166,5 +171,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T220516-L-1392092",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

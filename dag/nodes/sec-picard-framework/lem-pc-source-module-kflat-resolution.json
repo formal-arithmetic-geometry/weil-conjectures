@@ -1,0 +1,107 @@
+{
+ "id": "lem-pc-source-module-kflat-resolution",
+ "kind": "statement",
+ "title": "Flat K-flat module resolutions from the source library",
+ "statement": "For a commutative ring A and every unbounded cochain complex M of A-modules, there exist a cochain complex P and a quasi-isomorphism s:P to M, with every term P^n categorically flat and P categorically K-flat [def-pc-module-kflat-complex]. Categorical flatness agrees with module flatness. No boundedness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Y4",
+  "place": "Lemma 15.60.10; the generic construction is already proved in the source FlatModel module."
+ },
+ "proof": [
+  {
+   "text": "Use the functorial flat resolution of ModuleCat A, regarded as a left resolution by flat objects, and reduce it. Apply its unbounded resolution functor to M. Its resolution natural transformation supplies the map s and is a quasi-isomorphism. The construction is the filtered colimit of compatible bounded-above total flat resolutions. Each bounded-above flat complex is K-flat; exact filtered colimits and tensor preservation of those colimits imply K-flatness of the unbounded resolution. Evaluation preserves colimits, and flat objects are closed under these filtered colimits, so every term is flat. This is exactly the proved source theorem exists_quasiIso_flat_kFlat, specialized to ModuleCat A.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "CochainComplex.exists_quasiIso_flat_kFlat; specialization of the cited Stacks construction, already proved in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kFlat|flat.model|torAmplitude",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No matching Mathlib theorem; reuse the proved source declarations in FlatModel."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\"",
+   "results": "1 hits: Lean.mkFlatCtorOfStructCtorName",
+   "date": "2026-10-13",
+   "verdict": "No matching Mathlib theorem; reuse the proved source declarations in FlatModel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat flat resolutions and bounded flat models of Tor amplitude in an abelian monoidal derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV proof: affine Tor amplitude criterion, converse module derived tensor computation",
+   "via": [
+    "lem-pc-affine-tor-amplitude-criterion",
+    "lem-pc-tor-amplitude-qcoh-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "CochainComplex.exists_quasiIso_flat_kFlat",
+  "statement": "lemma exists_quasiIso_flat_kFlat (L : CochainComplex C ℤ) : ∃ (P : CochainComplex C ℤ) (π : P ⟶ L), QuasiIso π ∧ (∀ n, ObjectProperty.flat (P.X n)) ∧ (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13",
+  "note": "Existing proved generic source declaration, specialized to ModuleCat A; no new module or sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T220516-L-1392092",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T220516-L-1392092",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
