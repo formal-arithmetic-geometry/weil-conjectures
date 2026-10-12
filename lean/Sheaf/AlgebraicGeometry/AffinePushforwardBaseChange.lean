@@ -15,6 +15,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
@@ -73,7 +75,9 @@ theorem affinePushforward_baseChange {X S X' S' : Scheme.{u}}
     (F : X.Modules) [F.IsQuasicoherent] :
     ((pushforward f).obj F).IsQuasicoherent ∧
       IsIso (moduleBaseChangeMap f f' g g' sq.w F) := by
-  sorry
+  constructor
+  · exact isQuasicoherent_pushforward_of_isAffineHom f F
+  · exact affinePushforward_baseChange_isIso f f' g g' sq F
 
 /-- On affine charts, the canonical map is the tensor associativity identification.
 The two equivalences are pinned by their values on generators, using the canonical units.
