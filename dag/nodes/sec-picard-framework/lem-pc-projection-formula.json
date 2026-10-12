@@ -30,53 +30,47 @@
  ],
  "proof": [
   {
-   "text": "The canonical projection map is natural in E and K, and the isomorphism assertion can be checked after restriction to an open covering of Y. By [lem-pc-projection-locality], it is enough to prove the assertion when Y is affine, Y=Spec(A).",
+   "text": "For the invertible-module higher-direct-image case recorded in lean, use the already proved ordinary projection morphism projectionHom f M N, which is an isomorphism for invertible N. Check naturality in M on elementary tensors after the tensor-sheafification adjunction: whiskerRight_app_tmulSection and projectionHom_app_tmulSection identify both sides with phi(x) tensor eta(n). Thus this is a natural isomorphism between f_* followed by tensoring with N and tensoring with f^*N followed by f_*. This uses the projection-formula declarations recorded by lem-pc-closed-immersion-coherent-cohomology, which are valid for arbitrary f, not only closed immersions.",
    "uses": [
-    "lem-pc-projection-locality"
+    "lem-pc-closed-immersion-coherent-cohomology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Equation 20.54.2.1 (cohomology-equation-projection-formula-map), and the locality reduction in perfect.tex Lemma 36.22.1 (Tag 08EU)"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean",
+    "place": "projectionHom_app_tmulSection, isIso_projectionHom, and nonempty_pushforward_tensorObj_pullback_iso"
    }
   },
   {
-   "text": "Assume Y=\\operatorname{Spec}(A). By [lem-pc-affine-qcoh-derived-equivalence], M\\mapsto\\widetilde M is an equivalence of triangulated categories D(A)\\to D_{\\mathrm{QCoh}}(\\mathcal O_Y) sending A[k] to \\mathcal O_Y[k]; being an equivalence it preserves direct sums, which exist in D_{\\mathrm{QCoh}}(\\mathcal O_Y) by [lem-pc-derived-qcoh-direct-sums]. Let T(M) be the property that the canonical map is an isomorphism for K=\\widetilde M (E fixed). (i) T is closed under direct sums: Lf^* and E\\otimes^{\\mathbb L}- are left adjoints, hence preserve direct sums; by [lem-pc-derived-pullback-tensor-qcoh] each E\\otimes^{\\mathbb L}Lf^*\\widetilde{M_i} lies in D_{\\mathrm{QCoh}}(\\mathcal O_X), so Rf_* preserves their direct sum by [lem-pc-derived-direct-image-direct-sums]; by naturality in K the map for \\bigoplus M_i is the direct sum of the maps for the M_i. (ii) If two of the vertices of a distinguished triangle in D(A) satisfy T, so does the third: all functors involved are exact, the canonical maps form a morphism of distinguished triangles, and the five lemma applies. (iii) T is closed under retracts. (iv) T(A[k]) holds: for K=\\mathcal O_Y[k] both sides are canonically Rf_*(E)[k] and the canonical map is the identity under these identifications. By [lem-pc-derived-module-free-generation], T(M) holds for every M in D(A), hence the map is an isomorphism for every K in D_{\\mathrm{QCoh}}(\\mathcal O_Y).",
+   "text": "For an invertible module P, the proved tensor-dual evaluation P tensor P^dual is isomorphic to the unit. Mathlib BraidedCategory.tensorRightEquivalence therefore makes tensorRight P an equivalence. Apply this to N on T and f^*N on X, using invertibility of pullback. These tensor functors preserve injective objects, finite limits and finite colimits, and hence homology. Tensoring an injective resolution I of F with f^*N gives an injective resolution J of F tensor f^*N; its augmentation is the image of the original augmentation composed with the single-complex comparison.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-derived-direct-image-direct-sums",
-    "lem-pc-derived-module-free-generation"
+    "lem-pc-tensor-dual-invertible",
+    "def-sc-invertible-module"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.22.1 (Tag 08EU), second and third paragraphs; Lemma 36.3.5 (Tag 06Z0); Lemma 36.4.5 (Tag 08DZ); More on Algebra, Remark 15.60.11 (Tag 09PB)"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/Dual.lean",
+    "place": "nonempty_tensorObj_dual_iso_unit; Mathlib BraidedCategory.tensorRightEquivalence and HomologicalComplex.singleMapHomologicalComplex"
    }
   },
   {
-   "text": "For an invertible O_Y-module N, regard N as N[0] in D_QCoh(O_Y). Specializing the derived formula to K=N[0] gives the displayed ordinary tensor formula because N is locally free, so tensoring with N is already derived and Lf^*N=f^*N.",
+   "text": "Apply the natural ordinary projection-formula isomorphism termwise to I. It identifies f_*(I tensor f^*N) with f_*I tensor N as complexes. Take degree-q homology, using mapHomologyIso for the exact tensorRight N equivalence. Compose with J.isoRightDerivedObj and the tensor image of the inverse of I.isoRightDerivedObj. The result is R^q f_*(F tensor f^*N) isomorphic to R^q f_*F tensor N. This proves precisely the existing Lean declaration, with no qcqs hypotheses needed. The unrestricted unbounded D_QCoh statement in the natural-language node is broader than this existing Lean declaration and is not claimed by this delivery.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-f-representable/lem-pc-projection-formula.md",
-    "place": "Proof, final specialization"
+    "document": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+    "place": "InjectiveResolution.isoRightDerivedObj; Mathlib/Algebra/Homology/Additive.lean, Functor.mapHomologicalComplexCompIso; ShortComplex.mapHomologyIso"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-projection-locality",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-derived-qcoh-direct-sums",
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "lem-pc-derived-direct-image-direct-sums",
-  "lem-pc-derived-module-free-generation"
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-invertible-module"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-f-representable/lem-pc-projection-formula.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean",
+  "place": "ordinary projection formula and exact tensor equivalences, lifted through injective resolutions by J1, 2026-10-12"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -157,5 +151,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage:443"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T144119-L-2098920",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

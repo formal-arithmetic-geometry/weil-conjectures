@@ -7,16 +7,17 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.AlgebraicGeometry.ProjectionFormulaLocality
 import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
-import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-!
 # Sections of higher direct images over an affine base
@@ -148,6 +149,30 @@ theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Ty
   exact (congrArg e h).trans ((e.map_smulₛₗ _ y).trans
     (smul_H_eq_globalSectionsRingHom_smul K ℱ q c (e y)).symm)
 
+open MonoidalCategory in
+private theorem projection_naturality (N : T.Modules) {M M' : X.Modules} (φ : M ⟶ M') :
+    ((pushforward f).map φ ▷ N) ≫ projectionHom f M' N =
+      projectionHom f M N ≫ (pushforward f).map (φ ▷ (pullback f).obj N) := by
+  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification
+    ((pushforward f).obj M) N).inv).mp
+  apply ((PresheafOfModules.sheafificationAdjunction (𝟙 T.ringCatSheaf.obj)).homEquiv
+    (((pushforward f).obj M).val ⊗ N.val) _).injective
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext' (R := Γ(T, U.unop))
+    (M := Γ((pushforward f).obj M, U.unop)) (N := Γ(N, U.unop))
+    (R₂ := Γ(T, U.unop)) (σ₁₂ := RingHom.id _)
+    (P₂ := Γ((pushforward f).obj (M' ⊗ (pullback f).obj N), U.unop))
+  intro x n
+  change (((pushforward f).map φ ▷ N) ≫ projectionHom f M' N).app U.unop
+      (tmulSection x n) =
+    (projectionHom f M N ≫ (pushforward f).map (φ ▷ (pullback f).obj N)).app U.unop
+      (tmulSection x n)
+  simp only [Hom.comp_app, ConcreteCategory.comp_apply, whiskerRight_app_tmulSection,
+    projectionHom_app_tmulSection]
+  exact (whiskerRight_app_tmulSection φ x _).symm
+
 section BaseChange
 
 variable [HasInjectiveResolutions X.Modules]
@@ -188,8 +213,34 @@ higher direct images; it holds for every `f` and `ℱ`, as both sides are comput
 theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [𝒩.IsInvertible]
     (q : ℕ) :
     Nonempty ((higherDirectImage f q).obj (ℱ ⊗ (Modules.pullback f).obj 𝒩) ≅
-      (higherDirectImage f q).obj ℱ ⊗ 𝒩) :=
-  sorry
+      (higherDirectImage f q).obj ℱ ⊗ 𝒩) := by
+  let A := tensorRight ((Modules.pullback f).obj 𝒩)
+  let B := tensorRight 𝒩
+  have : A.IsEquivalence :=
+    (BraidedCategory.tensorRightEquivalence _ _
+      (nonempty_tensorObj_dual_iso_unit ((Modules.pullback f).obj 𝒩)).some).isEquivalence_functor
+  have : B.IsEquivalence :=
+    (BraidedCategory.tensorRightEquivalence _ _
+      (nonempty_tensorObj_dual_iso_unit 𝒩).some).isEquivalence_functor
+  have : A.Additive := Functor.additive_of_preserves_binary_products A
+  have : B.Additive := Functor.additive_of_preserves_binary_products B
+  have (M : X.Modules) : IsIso (projectionHom f M 𝒩) := isIso_projectionHom f M 𝒩
+  let I := injectiveResolution ℱ
+  let J : InjectiveResolution (A.obj ℱ) :=
+    { cocomplex := (A.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+      injective := fun n ↦ A.injective_obj (I.cocomplex.X n)
+      ι := (HomologicalComplex.singleMapHomologicalComplex A (.up ℕ) 0).inv.app ℱ ≫
+        (A.mapHomologicalComplex (.up ℕ)).map I.ι }
+  let e : pushforward f ⋙ B ≅ A ⋙ pushforward f :=
+    NatIso.ofComponents (fun M ↦ asIso (projectionHom f M 𝒩))
+      (fun φ ↦ projection_naturality f 𝒩 φ)
+  let K := ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+  let eK := (Functor.mapHomologicalComplexCompIso e (.up ℕ)).app I.cocomplex ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl (A ⋙ pushforward f))
+      (.up ℕ)).symm.app I.cocomplex
+  exact ⟨J.isoRightDerivedObj (pushforward f) q ≪≫
+    (HomologicalComplex.homologyFunctor T.Modules (.up ℕ) q).mapIso eK.symm ≪≫
+    (K.sc q).mapHomologyIso B ≪≫ B.mapIso (I.isoRightDerivedObj (pushforward f) q).symm⟩
 
 end BaseChange
 
@@ -238,8 +289,18 @@ given there cover `T`, and one takes for `N` the maximum of their bounds.
 
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem exists_isZero_higherDirectImage [CompactSpace T] :
-    ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) :=
-  sorry
+    ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) := by
+  classical
+  choose U d ht hd using exists_isZero_higherDirectImage_restrict f ℱ
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover (fun t ↦ (U t : Set T))
+    (fun t ↦ (U t).isOpen) (fun t _ ↦ Set.mem_iUnion.mpr ⟨t, ht t⟩)
+  refine ⟨s.sup d, fun q hq ↦ ?_⟩
+  refine isZero_of_iSup_eq_top _ (fun t : s ↦ U t) ?_
+    (fun t ↦ hd t q ((Finset.le_sup t.property).trans hq))
+  apply eq_top_iff.2
+  intro t _
+  obtain ⟨i, hi, hti⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ t))
+  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i, hi⟩, hti⟩
 
 end Vanishing
 
