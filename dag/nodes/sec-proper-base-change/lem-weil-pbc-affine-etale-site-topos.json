@@ -30,128 +30,71 @@
  ],
  "proof": [
   {
-   "text": "*$S_{affine,\\Et}$ is a site.* Write $\\mathcal C=S_{affine,\\Et}$ (objects the etale $U\\to S$ with $U$ affine [def-pc-scheme], morphisms the $S$-morphisms, a full subcategory of $S_{\\Et}$ [def-weil-pbc-etale-site]) and $\\iota:\\mathcal C\\to S_{\\Et}$ for the inclusion. (i) Fibre products: for morphisms $V\\to U\\leftarrow W$ in $\\mathcal C$ the scheme-theoretic fibre product $V\\times_UW$ with its map to $S$ is etale over $S$ and is a fibre product in $S_{\\Et}$ ([lem-weil-pbc-etale-base-change-finite-limits](2)); it is affine, since $U,V,W$ are affine and a fibre product of affine schemes over an affine scheme is $\\operatorname{Spec}$ of the tensor product ([lem-weil-pbc-fibre-product-affine-spectra], after choosing isomorphisms $U\\cong\\operatorname{Spec}A$, $V\\cong\\operatorname{Spec}B$, $W\\cong\\operatorname{Spec}C$ and using that a morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is $\\operatorname{Spec}$ of a ring map, [def-weil-affine-spectrum]); as $\\mathcal C$ is full, $V\\times_UW$ is a fibre product in $\\mathcal C$, and $\\iota$ preserves fibre products. (ii) Site axioms for the standard etale coverings (finite families $\\{U_j\\to U\\}$ of morphisms of $\\mathcal C$ with $U=\\bigcup_jf_j(U_j)$; each $U_j\\to U$ is etale by [lem-weil-pbc-etale-composition-cancellation](3), being an $S$-morphism between schemes etale over $S$): an isomorphism $\\{V\\xrightarrow{\\sim}U\\}$ is a finite jointly surjective family of affines, hence standard; if $\\{U_j\\to U\\}_{j\\le m}$ and, for each $j$, $\\{U_{jk}\\to U_j\\}_{k\\le m_j}$ are standard, then $\\{U_{jk}\\to U\\}$ is finite, consists of affines, and is jointly surjective (a point of $U$ is the image of a point of some $U_j$, which is the image of a point of some $U_{jk}$), so it is standard; if $\\{U_j\\to U\\}$ is standard and $T\\to U$ is a morphism of $\\mathcal C$, then $\\{U_j\\times_UT\\to T\\}$ is finite, its members are objects of $\\mathcal C$ by (i), and it is jointly surjective with etale members by [lem-weil-pbc-etale-covering-base-change], so it is standard. Hence $\\mathcal C$ with the standard etale coverings is a site in the sense of [def-weil-pbc-sites-and-cohomology](1), with fibre products computed in $S_{\\Et}$.",
+   "text": "Continuity follows from the proved finite-cover sheaf condition. Special cocontinuity and both sheaf equivalences are proved using finite affine refinement, affine image covers, and the one-hypercover-dense full inclusion. Combine the three statements by conjunction.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-affine-etale-inclusion-continuity_sheaf_condition",
+    "lem-weil-pbc-affine-etale-special_cocontinuity",
+    "lem-weil-pbc-affine-etale-sets_equivalence",
+    "lem-weil-pbc-affine-etale-ab_equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
+   }
+  },
+  {
+   "text": "Obtain arbitrary degreewise natural isomorphisms from fullAffineEtale_cohomology_comparison_data. Independently construct a degree-zero natural isomorphism by composing Ext.addEquiv_0, sheafification, the free-abelian adjunction and Yoneda on both sites. Since restriction evaluates identically at corresponding objects, these identify the same sections. Its normalization follows by cancelling an additive equivalence and its inverse.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-cohomology_comparison_data",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topologies.tex",
-    "place": "Definition Tag 021B (4) and Definition Tag 0219; Lemma Tag 021C (label lemma-verify-site-etale; the case S_{affine,etale} is omitted there, the argument given for (Aff/S)_etale is the one written here) and Lemma Tag 021D (label lemma-fibre-products-etale)"
+    "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
    }
   },
   {
-   "text": "*$\\iota$ is special cocontinuous.* We check conditions (a)-(e) of [def-weil-pbc-special-cocontinuous-functor] (Stacks Sites, Lemma 03A0 (1)-(5)), following the proof of Topologies Lemma 021E. (a) Cocontinuity: let $U\\in\\operatorname{Ob}(\\mathcal C)$ and let $\\{V_k\\to\\iota(U)\\}_{k\\in K}$ be a covering of $S_{\\Et}$, i.e. a jointly surjective family of etale morphisms. Since $U$ is affine, [lem-weil-pbc-etale-covering-affine-refinement] gives finitely many affine open subschemes $U_j\\subseteq V_{k(j)}$ whose images cover $U$; the open immersion $U_j\\hookrightarrow V_{k(j)}$ is etale and composites of etale morphisms are etale ([lem-weil-pbc-etale-composition-cancellation](1),(2)), so $U_j\\to U$ and $U_j\\to U\\to S$ are etale, $U_j\\in\\operatorname{Ob}(\\mathcal C)$, $\\{U_j\\to U\\}$ is a standard etale covering of $\\mathcal C$, and each $\\iota(U_j)\\to\\iota(U)$ factors through $V_{k(j)}\\to\\iota(U)$: the family refines the given covering. (b) Continuity: a standard etale covering $\\{U_j\\to U\\}$ is a jointly surjective family of etale morphisms, hence a covering of $S_{\\Et}$ [def-weil-pbc-etale-site], and for $T\\to U$ in $\\mathcal C$ the morphisms $\\iota(U_j\\times_UT)\\to\\iota(U_j)\\times_{\\iota(U)}\\iota(T)$ are isomorphisms because fibre products of $\\mathcal C$ are those of $S_{\\Et}$ (step 1); this is continuity in the sense of [def-weil-pbc-sites-and-cohomology](3). (c) If $a,b:U'\\to U$ in $\\mathcal C$ have $\\iota(a)=\\iota(b)$ then $a=b$ ($\\iota$ is the inclusion of a subcategory), and the covering $\\{\\mathrm{id}_{U'}\\}$ works. (d) Given $U',U\\in\\operatorname{Ob}(\\mathcal C)$ and $c:\\iota(U')\\to\\iota(U)$ in $S_{\\Et}$, $c$ is a morphism of $\\mathcal C$ ($\\mathcal C$ is full); take the covering $\\{\\mathrm{id}_{U'}\\}$ and $c_1=c$. (e) Let $V\\to S$ be an object of $S_{\\Et}$. $V$ is covered by affine open subschemes $V_k$ (every scheme is locally affine, [def-pc-scheme]); the open immersions $V_k\\hookrightarrow V$ [def-weil-open-immersion] are etale and $V_k\\to V\\to S$ is etale ([lem-weil-pbc-etale-composition-cancellation](1),(2)), so $V_k\\in\\operatorname{Ob}(\\mathcal C)$ and $\\{\\iota(V_k)\\to V\\}$ is a jointly surjective family of etale morphisms, a covering of $S_{\\Et}$. Hence $\\iota$ is special cocontinuous.",
+   "text": "Apply the proved normalized degree-zero comparison theorem. Define the family by cases: use this witness at zero and the supplied comparisons at successors. The required normalization is the witness property.",
    "uses": [
-    "def-weil-pbc-special-cocontinuous-functor",
-    "lem-weil-pbc-etale-covering-affine-refinement",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
     "def-weil-pbc-sites-and-cohomology",
-    "def-pc-scheme",
-    "def-weil-open-immersion"
+    "lem-weil-pbc-affine-etale-cohomology_comparison_point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topologies.tex",
-    "place": "Proof of Lemma Tag 021E (label lemma-affine-big-site-etale), adapted to the small sites as the hint of Lemma Tag 04HR says; Lemma Tag 0218 (label lemma-etale-affine) for (a); conditions of literature/stacks-project/sites.tex Lemma Tag 03A0 (label lemma-equivalence)"
+    "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
    }
   },
   {
-   "text": "*The standard etale topology on $\\mathcal C$ is the topology induced from $S_{\\Et}$.* Let $J_{\\mathrm{std}}$ be the Grothendieck topology on $\\mathcal C$ generated by the standard etale coverings (a sieve $R$ on $U$ is covering iff it contains the members of a standard etale covering of $U$), and $J_{\\Et}$ the one on $S_{\\Et}$ generated by the jointly surjective etale families. Both families of coverings satisfy the site axioms (step 1, [def-weil-pbc-etale-site]) and both categories have fibre products, so by [lem-weil-pbc-pretopology-sheaf-condition] the sheaves of sets, resp. of abelian groups, on the site $\\mathcal C$ are exactly the $J_{\\mathrm{std}}$-sheaves, and the sheaves of sets [def-weil-pbc-etale-sheaf-of-sets], resp. abelian sheaves [def-weil-pbc-abelian-etale-sheaves], on $S_{\\Et}$ are exactly the $J_{\\Et}$-sheaves. Claim: for a sieve $R$ on $U\\in\\operatorname{Ob}(\\mathcal C)$, $R\\in J_{\\mathrm{std}}(U)$ iff the sieve $\\iota R$ on $\\iota(U)$ generated by the morphisms $\\iota(r)$, $r\\in R$, lies in $J_{\\Et}(\\iota U)$; that is, $J_{\\mathrm{std}}$ is the topology induced by $\\iota$ from $J_{\\Et}$. If $R$ contains the members of a standard covering $\\{U_j\\to U\\}$, these form a covering of $S_{\\Et}$ (step 2(b)) whose members lie in $\\iota R$, so $\\iota R\\in J_{\\Et}(\\iota U)$. Conversely, if $\\iota R\\in J_{\\Et}(\\iota U)$, it contains the members of a jointly surjective etale family $\\{V_k\\to\\iota(U)\\}$; by step 2(a) there is a standard covering $\\{g_j:U_j\\to U\\}$ such that each $g_j$ factors as $U_j\\xrightarrow{h_j}V_{k(j)}\\to\\iota(U)$; as $V_{k(j)}\\to\\iota(U)$ lies in $\\iota R$ it factors as $V_{k(j)}\\xrightarrow{w}\\iota(W)\\xrightarrow{\\iota(r)}\\iota(U)$ with $r:W\\to U$ in $R$; then $w\\circ h_j:U_j\\to W$ is a morphism between objects of $\\mathcal C$, hence of $\\mathcal C$ ($\\mathcal C$ full), and $g_j=r\\circ(w\\circ h_j)\\in R$ because $R$ is a sieve. So $R$ contains a standard covering and $R\\in J_{\\mathrm{std}}(U)$.",
+   "text": "Identify global Ext cohomology with cohomology at the terminal identity object by the representing-object isomorphism of fullAffineEtale_cohomology_base_left. Compose the objectwise comparison with it to obtain the affine-base comparison. Pair the two Nonempty statements. The displayed result does not need the separate K-injective derived-category bridge.",
    "uses": [
-    "lem-weil-pbc-pretopology-sheaf-condition",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00ZC (label lemma-site-gives-topology) for the passage from coverings to topologies; the comparison of the two topologies is written by the agent from conditions (1), (2) and fullness in Lemma Tag 03A0, to meet the form of the equivalence in Mathlib (Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, AffineEtale.topology = induced topology)"
-   }
-  },
-  {
-   "text": "*Restriction is an equivalence (sets and abelian groups).* Let $\\mathcal V$ be the category of sets or of abelian groups. Let $\\mathcal A_S$ (pairs $(R,f)$, $f:\\operatorname{Spec}R\\to S$ etale) and $P:\\mathcal A_S\\to S_{\\Et}$ be as in [lem-weil-pbc-affine-etale-induced-sheaf-equivalence], with the topology $T_P$ induced by $P$. Define $e:\\mathcal A_S\\to\\mathcal C$ by $e(R,f)=(\\operatorname{Spec}R\\xrightarrow{f}S)$ and $e(g)=g$; then $\\iota\\circ e=P$. $e$ is fully faithful (in both categories a morphism is an $S$-morphism $\\operatorname{Spec}R\\to\\operatorname{Spec}R'$) and essentially surjective: an object $U\\to S$ of $\\mathcal C$ has $U$ affine, so there is an isomorphism $\\varphi:\\operatorname{Spec}A\\xrightarrow{\\sim}U$ [def-pc-scheme], the composite $f=(U\\to S)\\circ\\varphi$ is etale ([lem-weil-pbc-etale-composition-cancellation](2), an isomorphism being an open immersion), and $\\varphi:e(A,f)\\to U$ is an isomorphism of $\\mathcal C$. So $e$ is an equivalence of categories. For a sieve $R$ on $c\\in\\mathcal A_S$, the sieve on $P(c)=\\iota(e(c))$ generated by the $P(r)=\\iota(e(r))$ is the sieve $\\iota(eR)$ generated by $\\iota$ of the sieve $eR$ generated by the $e(r)$ (both consist of the morphisms factoring through some $\\iota(e(r))$); hence by step 3, $R\\in T_P(c)$ iff $eR\\in J_{\\mathrm{std}}(e(c))$, i.e. $T_P$ is the topology induced by $e$ from $J_{\\mathrm{std}}$. By [lem-weil-pbc-site-equivalence-sheaf-transport] (applied to $e:\\mathcal A_S\\to\\mathcal C$, $J=J_{\\mathrm{std}}$, $K=T_P$), $\\mathrm{Res}_e:\\mathcal F\\mapsto\\mathcal F\\circ e$ is an equivalence $\\operatorname{Sh}(\\mathcal C,J_{\\mathrm{std}};\\mathcal V)\\to\\operatorname{Sh}(\\mathcal A_S,T_P;\\mathcal V)$. By [lem-weil-pbc-affine-etale-induced-sheaf-equivalence], $\\mathrm{Res}_P:\\mathcal G\\mapsto\\mathcal G\\circ P$ is an equivalence $\\operatorname{Sh}(S_{\\Et};\\mathcal V)\\to\\operatorname{Sh}(\\mathcal A_S,T_P;\\mathcal V)$. The restriction $\\mathrm{Res}_\\iota:\\mathcal G\\mapsto\\mathcal G\\circ\\iota$ carries sheaves on $S_{\\Et}$ to sheaves on $\\mathcal C$ (for a standard covering $\\{U_j\\to U\\}$, a covering of $S_{\\Et}$ whose fibre products are computed in $S_{\\Et}$ (steps 1, 2(b)), the equalizer diagram of $\\mathcal G\\circ\\iota$ is that of $\\mathcal G$; this is $u^s$ of [def-weil-pbc-sites-and-cohomology](3)), and $\\mathrm{Res}_P=\\mathrm{Res}_e\\circ\\mathrm{Res}_\\iota$ because $P=\\iota\\circ e$. With a quasi-inverse $Q_e$ of $\\mathrm{Res}_e$ we get $\\mathrm{Res}_\\iota\\cong Q_e\\circ\\mathrm{Res}_e\\circ\\mathrm{Res}_\\iota=Q_e\\circ\\mathrm{Res}_P$, a composite of equivalences, so $\\mathrm{Res}_\\iota$ is an equivalence (a functor isomorphic to an equivalence is one). By step 3 the source and target are the categories of sheaves of $\\mathcal V$ on $S_{\\Et}$ and on the site $S_{affine,\\Et}$ of the statement. This proves the equivalence of topoi (sheaves of sets) and of the categories of abelian sheaves $\\Ab(S_{\\Et})\\to\\Ab(S_{affine,\\Et})$, $\\mathcal G\\mapsto\\mathcal G|_{S_{affine,\\Et}}$. (This is the conclusion of Stacks Sites Lemma 03A0 for the special cocontinuous $\\iota$ of step 2: the morphism of topoi of $\\iota$ has inverse image $\\mathcal G\\mapsto\\mathcal G\\circ\\iota$.)",
-   "uses": [
-    "lem-weil-pbc-affine-etale-induced-sheaf-equivalence",
-    "lem-weil-pbc-site-equivalence-sheaf-transport",
-    "def-pc-scheme",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-affine-etale-cohomology_base_left",
+    "lem-weil-pbc-affine-etale-cohomology_base_right"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemma Tag 04HR (label lemma-alternative), equivalence clause (proof omitted in Stacks; written by the agent along Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, AffineEtale.sheafEquiv, and Mathlib/CategoryTheory/Sites/Equivalence.lean, Equivalence.sheafCongr)"
-   }
-  },
-  {
-   "text": "*Cohomology over an affine $U$.* Write $\\Phi=\\mathrm{Res}_\\iota:\\Ab(S_{\\Et})\\to\\Ab(\\mathcal C)$, $\\Phi(\\mathcal G)=\\mathcal G|_{S_{affine,\\Et}}$. Both categories are abelian with enough injectives ([def-weil-pbc-abelian-etale-sheaves], [lem-weil-pbc-site-sheaves-enough-injectives]); $\\Phi$ is additive ($(\\varphi+\\psi)\\circ\\iota=\\varphi\\circ\\iota+\\psi\\circ\\iota$, sums of morphisms of sheaves being taken sectionwise) and an equivalence (step 4). Let $U\\in\\operatorname{Ob}(\\mathcal C)$ and $\\mathcal G\\in\\Ab(S_{\\Et})$; choose an injective resolution $s:\\mathcal G\\to\\mathcal I^\\bullet$ in $\\Ab(S_{\\Et})$ ([lem-weil-pbc-left-exact-injective-resolution-degree-zero](1)). By [lem-weil-pbc-equivalence-injective-resolutions](3), $\\Phi(s):\\Phi\\mathcal G\\to\\Phi\\mathcal I^\\bullet$ is an injective resolution in $\\Ab(\\mathcal C)$. Since $\\Gamma(U,\\Phi\\mathcal I^q)=\\mathcal I^q(\\iota U)=\\Gamma(\\iota U,\\mathcal I^q)$ with the same differentials, the definition of cohomology over an object [def-weil-pbc-sites-and-cohomology](2) (computed with any injective resolution, up to canonical isomorphism) gives $H^p(U,\\mathcal G|_{S_{affine,\\Et}})=H^p(\\Gamma(U,\\Phi\\mathcal I^\\bullet))=H^p(\\Gamma(\\iota U,\\mathcal I^\\bullet))=H^p(U,\\mathcal G)$. Independence and functoriality: if $\\varphi:\\mathcal G\\to\\mathcal G'$ and $\\varphi^\\bullet:\\mathcal I^\\bullet\\to\\mathcal I'^\\bullet$ is a morphism of injective resolutions lifting it (unique up to homotopy), then $\\Phi(\\varphi^\\bullet)$ lifts $\\Phi(\\varphi)$ and a homotopy goes to a homotopy ([lem-weil-pbc-equivalence-injective-resolutions](3)), and $\\Gamma(U,\\Phi\\varphi^\\bullet)=\\Gamma(\\iota U,\\varphi^\\bullet)$; so the maps induced on $H^p$ by $\\varphi$ on both sides correspond under the identification (with $\\varphi=\\mathrm{id}$ this shows the identification does not depend on the chosen resolution), i.e. the isomorphisms are functorial in $\\mathcal G$. For $p=0$ both sides are identified with sections through the augmentation, $H^0(U,\\Phi\\mathcal G)\\cong\\Phi\\mathcal G(U)$ and $H^0(U,\\mathcal G)\\cong\\mathcal G(\\iota U)$ ([lem-weil-pbc-left-exact-injective-resolution-degree-zero](2) for the left exact functors $\\Gamma(U,-)$, $\\Gamma(\\iota U,-)$), and $\\Phi(s)(U)=s(\\iota U)$, so the isomorphism in degree $0$ is the identity of $\\mathcal G(U)=\\Phi\\mathcal G(U)$.",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-equivalence-injective-resolutions",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03YU (label lemma-cohomology-bigger-site) and its proof: sections over corresponding objects agree and injectives go to injectives (here because Phi is an equivalence, Homology Lemma 015Z applied to Phi and its quasi-inverse)"
-   }
-  },
-  {
-   "text": "*The case $U=S$ affine.* The object $\\mathrm{id}_S:S\\to S$ is a final object of $S_{\\Et}$ ([lem-weil-pbc-etale-base-change-finite-limits](2)) and $\\Gamma(S,-)$ is evaluation at it. The etale cohomology $H^p(S_{\\Et},\\mathcal G)$ of [def-weil-pbc-etale-cohomology] is $\\mathcal H^p(\\Gamma(S,\\mathcal K^\\bullet))$ for a K-injective resolution $\\mathcal G\\to\\mathcal K^\\bullet$ [def-weil-pbc-kinjective-resolutions]. An injective resolution $\\mathcal G\\to\\mathcal I^\\bullet$ is a bounded below complex of injectives, hence K-injective, and two K-injective resolutions of $\\mathcal G$ are chain homotopy equivalent compatibly with the augmentations, functorially up to homotopy ([prop-weil-pbc-kinjective-resolutions-exist]); so $H^p(S_{\\Et},\\mathcal G)=H^p(\\Gamma(S,\\mathcal I^\\bullet))=H^p(S,\\mathcal G)$, cohomology over the final object in the sense of [def-weil-pbc-sites-and-cohomology](2), canonically and functorially in $\\mathcal G$. If $S$ is affine, $S\\to S$ is an object of $S_{affine,\\Et}$ and step 5 with $U=S$ gives $H^p(S,\\mathcal G|_{S_{affine,\\Et}})\\cong H^p(S_{\\Et},\\mathcal G)$, functorially in $\\mathcal G$.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-kinjective-resolutions",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 01FT (cohomology over an object as right derived functors of sections) and Lemma Tag 03YU (the global case H^p(C, -) as cohomology over the final object)"
+    "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-affine-etale-inclusion-continuity_sheaf_condition",
+  "lem-weil-pbc-affine-etale-special_cocontinuity",
+  "lem-weil-pbc-affine-etale-sets_equivalence",
+  "lem-weil-pbc-affine-etale-ab_equivalence",
+  "lem-weil-pbc-affine-etale-cohomology_comparison_data",
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-special-cocontinuous-functor",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-pretopology-sheaf-condition",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-affine-etale-induced-sheaf-equivalence",
-  "lem-weil-pbc-site-equivalence-sheaf-transport",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-equivalence-injective-resolutions",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-kinjective-resolutions",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "lem-weil-pbc-affine-etale-cohomology_comparison_point",
+  "lem-weil-pbc-affine-etale-cohomology_base_left",
+  "lem-weil-pbc-affine-etale-cohomology_base_right"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/topologies.tex",
-  "place": "Lemma Tag 04HR (proof omitted in Stacks: 'compare with the proof of Lemma 021E'): steps 1-2 adapt Lemmas 021C, 021D and the proof of 021E (with Lemma 0218); steps 3-4 (the equivalence) are written by the agent along Mathlib's AffineEtale.sheafEquiv instead of Stacks Sites Lemma 03A0; steps 5-6 follow literature/stacks-project/sites-cohomology.tex Lemma 03YU"
+  "place": "Stage-3 K1 proof route: finite affine refinement, one-hypercover density, and Ext representing objects; 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -237,29 +180,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-df32a",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T044751-L-2038357",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.fullAffineEtaleInclusion_isContinuous",
-   "AlgebraicGeometry.Scheme.fullAffineEtaleInclusion_special_equivalences",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_base",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_comparison"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.fullAffineEtaleInclusion_continuity_sheaf_condition",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_ab_equivalence",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_base",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_base_left",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_base_right",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_comparison",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_comparison_data",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_comparison_point",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_sets_equivalence",
-   "AlgebraicGeometry.Scheme.fullAffineEtale_special_cocontinuity"
-  ]
+  "landing": "20261012T160828-L-2611503",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG nodes, change record, and report match the corrected proof and statement; all files compile, with only the named comparison-data sorryAx remaining."
  }
 }

@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Intermediate result fullAffineEtale_cohomology_comparison_point",
- "statement": "Intermediate theorem used by lem-weil-pbc-affine-etale-site-topos.",
+ "statement": "For every scheme S [def-pc-scheme], every affine object U of its full affine etale site [def-weil-pbc-full-affine-etale-site], and Ext structures in a common universe w on the categories of abelian sheaves on both sites [def-weil-pbc-abelian-etale-sheaves], there exists a natural additive degree-zero cohomology comparison from the restricted sheaf at U to the original sheaf at its image in the small etale site [def-weil-pbc-etale-site]. Under the canonical Ext-zero, sheafification, free-abelian and Yoneda identifications with sections [def-weil-pbc-sites-and-cohomology], it is the identity on sections: for every abelian sheaf G and every degree-zero class x, the section obtained from the image of x is the section obtained from x.",
  "source": {
   "document": "literature/stacks-project/topologies.tex",
   "place": "Lemma Tag 04HR (lemma-alternative; proof 'omitted, compare with Lemma 021E (lemma-affine-big-site-etale)'), Definitions Tag 0219 (definition-standard-etale) and Tag 021B (definition-big-small-etale) part (4); for the cohomology clause the pattern of Cohomology on Sites Lemma Tag 03YU (sites-cohomology.tex, lemma-cohomology-bigger-site: an equivalence of topoi preserving the sections over corresponding objects carries injectives to injectives)"
@@ -30,20 +30,26 @@
  ],
  "proof": [
   {
-   "text": "The result is the corresponding component of the site comparison argument described in the parent node; the remaining construction is deferred as this named obligation.",
-   "uses": [],
+   "text": "Use Ext.addEquiv₀, sheafificationAdjunction.homAddEquiv, AddCommGrpCat.adj.whiskerRight and yonedaEquiv to identify degree-zero cohomology with sections on both sites. Restriction has the same section groups and map components. Compose the first equivalence with the inverse of the second, and use naturality of the adjunctions and Ext-zero postcomposition to give a natural isomorphism. Its section identity is AddEquiv.apply_symm_apply.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-full-affine-etale-site"
+   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemma Tag 04HR"
+    "place": "Cohomology on Sites Lemma Tag 03YU, degree-zero sections identification"
    }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-full-affine-etale-site"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/topologies.tex",
-  "place": "Reduction of lem-weil-pbc-affine-etale-site-topos"
+  "place": "Stage-3 K1 proof route: finite affine refinement, one-hypercover density, and Ext representing objects; 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -112,7 +118,7 @@
   "module": "Sheaf.AlgebraicGeometry.FullAffineEtaleTopos",
   "file": "lean/Sheaf/AlgebraicGeometry/FullAffineEtaleTopos.lean",
   "declaration": "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_comparison_point",
-  "statement": "theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u}) [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})] [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})] (U : S.FullAffineEtale) (e : ∀ p : ℕ, (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u} (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙ Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) p ⋙ (CategoryTheory.evaluation _ _).obj (op U) ≅ Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology p ⋙ (CategoryTheory.evaluation _ _).obj (op U.obj)) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u}) (x : Sheaf.H'.{w} (((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u} (fullAffineEtaleTopology S) S.smallEtaleTopology).obj G) 0 U) : (((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u}).homEquiv _ _ (Ext.homEquiv₀ (((e 0).app G).hom x))).app (op U.obj)) (FreeAbelianGroup.of (𝟙 U.obj)) = (((sheafificationAdjunction (fullAffineEtaleTopology S) AddCommGrpCat.{u}).homEquiv _ _ (Ext.homEquiv₀ x)).app (op U)) (FreeAbelianGroup.of (𝟙 U))",
+  "statement": "theorem fullAffineEtale_cohomology_comparison_point (S : Scheme.{u})\n    [HasExt.{w} (Sheaf (fullAffineEtaleTopology S) AddCommGrpCat.{u})]\n    [HasExt.{w} (Sheaf S.smallEtaleTopology AddCommGrpCat.{u})]\n    (U : S.FullAffineEtale) :\n    ∃ e :\n      (fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}\n          (fullAffineEtaleTopology S) S.smallEtaleTopology ⋙\n        Sheaf.cohomologyPresheafFunctor.{w} (fullAffineEtaleTopology S) 0 ⋙\n          (CategoryTheory.evaluation _ _).obj (op U) ≅\n      Sheaf.cohomologyPresheafFunctor.{w} S.smallEtaleTopology 0 ⋙\n        (CategoryTheory.evaluation _ _).obj (op U.obj),\n    ∀ (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u})\n      (x : Sheaf.H'.{w}\n        (((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u}\n          (fullAffineEtaleTopology S) S.smallEtaleTopology).obj G) 0 U),\n      (((sheafificationAdjunction S.smallEtaleTopology AddCommGrpCat.{u}).homEquiv _ _\n        (Ext.homEquiv₀ ((e.app G).hom x))).app (op U.obj))\n          (FreeAbelianGroup.of (𝟙 U.obj)) =\n      (((sheafificationAdjunction (fullAffineEtaleTopology S) AddCommGrpCat.{u}).homEquiv\n        _ _ (Ext.homEquiv₀ x)).app (op U)) (FreeAbelianGroup.of (𝟙 U))",
   "branch": "sheaf-dag",
   "by": "P2",
   "date": "2026-10-12"
@@ -128,11 +134,34 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "X-df32a",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T044751-L-2038357",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T160828-L-2611503",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG nodes, change record, and report match the corrected proof and statement; all files compile, with only the named comparison-data sorryAx remaining."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "K1 stage 2",
+  "old_statement": "Intermediate theorem used by lem-weil-pbc-affine-etale-site-topos.",
+  "what": "The old Lean assertion quantified over an arbitrary comparison and is false: negating the comparison changes the image of section 1 on a nonempty affine scheme. Replace it with the existence of a normalized degree-zero comparison, without changing the parent theorem.",
+  "source": {
+   "document": "literature/stacks-project/topologies.tex",
+   "place": "Cohomology on Sites Lemma Tag 03YU, degree-zero sections identification"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "The result is the corresponding component of the site comparison argument described in the parent node; the remaining construction is deferred as this named obligation.",
+    "uses": [],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/topologies.tex",
+     "place": "Lemma Tag 04HR"
+    }
+   }
+  ],
+  "old_proof_deps": []
  }
 }
