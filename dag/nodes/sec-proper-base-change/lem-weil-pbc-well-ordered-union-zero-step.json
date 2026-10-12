@@ -1,0 +1,157 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0D1U, zero case; https://stacks.math.columbia.edu/tag/0D1U"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0D1U: source argument, with categorical projective presentations and shrinking for independent universes; D4, 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "wellOrderedUnion|well.ordered.*projective|transfinite.*projective",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean",
+   "verdict": "No filtration theorem. Direct-sum projectivity is a component only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"DirectSum\"",
+   "date": "2026-10-12",
+   "results": "Module.Projective.directSum, Module.Projective.directSum_iff",
+   "verdict": "No filtration theorem. Direct-sum projectivity is a component only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module is projective if it is an exhaustive well ordered union of submodules with projective successive quotients",
+   "date": "2026-10-12",
+   "results": "ModuleCat.enoughProjectives, ModuleCat.projective_of_module_projective, ModuleCat.projective_of_categoryTheory_projective, Module.Projective.of_lifting_property'', IsProjective.iff_projective, Module.Projective.of_lifting_property, Module.Projective, Module.Projective.of_lifting_property'",
+   "verdict": "No filtration theorem. Direct-sum projectivity is a component only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exhaustive well ordered filtration with successive quotients of projective dimension at most n implies projective dimension at most n for its union",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WellOrderedUnionProjectiveDimension",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-well-ordered-union-projective-dimension",
+   "place": "decomposition of induction proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-well-ordered-union-zero-step",
+ "title": "Base case of the well-ordered union projective resolution argument",
+ "statement": "Let R be a commutative ring, M an R-module, E a linearly ordered well-ordered set, and F : E → Submodule R M a monotone family with every element of M in some F e. Let U e be the supremum of stages F i with i < e, pulled back into F e. If every quotient F e / U e has a projective resolution of length at most zero [def-weil-pbc-finite-global-dimension], then M has one of length at most zero.",
+ "proof": [
+  {
+   "text": "(Case $n=0$: the quotients are projective and the projections split.) For $n=0$ a projective resolution of length $\\le0$ of $Q_e=M_e/M_{<e}$ [def-weil-pbc-quotient-module] is an exact sequence $0\\to P_0\\to Q_e\\to0$ [def-weil-pbc-finite-global-dimension], i.e. an isomorphism $P_0\\cong Q_e$ with $P_0$ projective; hence $Q_e$ is projective [lem-weil-pbc-projective-direct-summand] (2). The sequence $0\\to M_{<e}\\to M_e\\xrightarrow{q_e}Q_e\\to0$ ($q_e$ the quotient map, surjective with kernel $M_{<e}$) is short exact with projective quotient, so there is an $R$-linear section $s_e:Q_e\\to M_e$ with $q_e\\circ s_e=\\mathrm{id}_{Q_e}$ [lem-weil-pbc-ses-projective-quotient-splits]. Choose one $s_e$ for every $e\\in E$ (axiom of choice), regard it as a map to $M$, and let $\\psi:\\bigoplus_{e\\in E}Q_e\\to M$ [def-weil-pbc-direct-sum-modules] be the $R$-linear map $\\psi((x_e)_e)=\\sum_es_e(x_e)$ (a finite sum). In Lean use categorical projectivity from the length-zero augmentation being an isomorphism, and categorical splitting of the quotient epimorphism. This avoids a Small R hypothesis.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-quotient-module",
+    "lem-weil-pbc-projective-direct-summand",
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26811-26813"
+   }
+  },
+  {
+   "text": "($\\psi$ is injective.) Let $x=(x_e)_e\\ne0$ in $\\bigoplus_eQ_e$. Its support $\\{e:x_e\\ne0\\}$ is finite and nonempty; let $e_{\\max}$ be its largest element. For $e$ in the support, $s_e(x_e)\\in M_e\\subseteq M_{e_{\\max}}$, so $y=\\psi(x)\\in M_{e_{\\max}}$. Apply $q_{e_{\\max}}$: for $e<e_{\\max}$ in the support, $s_e(x_e)\\in M_e\\subseteq M_{<e_{\\max}}=\\operatorname{Ker}q_{e_{\\max}}$, and $q_{e_{\\max}}(s_{e_{\\max}}(x_{e_{\\max}}))=x_{e_{\\max}}$. Hence $q_{e_{\\max}}(y)=x_{e_{\\max}}\\ne0$, so $y\\ne0$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26813-26817"
+   }
+  },
+  {
+   "text": "($\\psi$ is surjective, by transfinite induction.) Suppose not. Since $M=\\bigcup_eM_e$, the set of $e\\in E$ with $M_e\\not\\subseteq\\operatorname{Im}\\psi$ is nonempty; as $E$ is well-ordered it has a least element $e$, so $M_{e'}\\subseteq\\operatorname{Im}\\psi$ for every $e'<e$, hence $M_{<e}\\subseteq\\operatorname{Im}\\psi$. Take $y\\in M_e\\setminus\\operatorname{Im}\\psi$ and $x_e=q_e(y)\\in Q_e$. Then $q_e(y-s_e(x_e))=x_e-x_e=0$, so $y-s_e(x_e)\\in M_{<e}\\subseteq\\operatorname{Im}\\psi$, and $s_e(x_e)=\\psi(\\iota_e(x_e))\\in\\operatorname{Im}\\psi$ ($\\iota_e$ the canonical inclusion). So $y\\in\\operatorname{Im}\\psi$, a contradiction. Thus $\\psi$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26818-26824"
+   }
+  },
+  {
+   "text": "(Conclusion for $n=0$.) $\\bigoplus_eQ_e$ is projective as a direct sum of the projective modules $Q_e$ [lem-weil-pbc-projective-direct-sum-family] (Stacks 065Q, which the source cites), so $M\\cong\\bigoplus_eQ_e$ is projective [lem-weil-pbc-projective-direct-summand] (2), and $0\\to M\\xrightarrow{\\mathrm{id}}M\\to0$ is a projective resolution of length $\\le0$ [def-weil-pbc-finite-global-dimension]. This is $C(0)$. For independent index and module universes, shrink the external direct sum along its linear equivalence with M, and prove categorical projectivity of the shrunk sum by lifting each quotient component and summing on finite supports.",
+   "uses": [
+    "lem-weil-pbc-projective-direct-sum-family",
+    "lem-weil-pbc-projective-direct-summand",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26824-26826"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-projective-direct-sum-family",
+  "lem-weil-pbc-projective-direct-summand",
+  "lem-weil-pbc-ses-projective-quotient-splits"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionZero",
+  "file": "lean/Sheaf/RingTheory/WellOrderedUnionProjectiveDimensionZero.lean",
+  "declaration": "ModuleCat.hasProjectiveResolutionLE_of_wellOrderedUnion_zero",
+  "statement": "theorem hasProjectiveResolutionLE_of_wellOrderedUnion_zero\n    {R : Type u} [CommRing R] (M : ModuleCat.{v} R)\n    {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]\n    (F : E → Submodule R M) (hF : Monotone F)\n    (hcover : ∀ x : M, ∃ e : E, x ∈ F e)\n    (hquot : ∀ e : E, HasProjectiveResolutionLE\n      (ModuleCat.of R ((F e) ⧸\n        ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) 0) :\n    HasProjectiveResolutionLE M 0",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261012T230754-L-1907773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261012T230754-L-1907773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

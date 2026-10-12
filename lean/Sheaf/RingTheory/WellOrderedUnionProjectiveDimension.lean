@@ -8,8 +8,8 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Order.RelClasses
 public import Mathlib.LinearAlgebra.Quotient.Defs
-import Sheaf.Algebra.ProjectiveDimensionWellDefined
-import Sheaf.RingTheory.ProjectiveDimensionSESKernel
+import Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionZero
+import Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionSucc
 
 /-!
 # Projective dimension of a well-ordered union of submodules
@@ -31,33 +31,14 @@ inclusion of `F e` into `M`. For a least index this is the zero submodule.
 Source: Stacks Project, Algebra, Lemma 0D1U
 (blueprint: lem-weil-pbc-well-ordered-union-projective-dimension).
 
-Proof (the node's eleven steps):
-1. Induct on `n`, with the claim quantified over all modules and all well-ordered filtrations.
-A finite set of elements in a chain lies in a single stage, by taking a largest index.
-2. For `n = 0`, every successive quotient is projective, so the quotient projections split
-(`lem-weil-pbc-projective-direct-summand`, `lem-weil-pbc-ses-projective-quotient-splits`).
-Choose sections and form the map from the direct sum of the quotients to `M`.
-3. This map is injective: a nonzero finite support has a largest index, and projection to
-that index's quotient detects its nonzero component.
-4. It is surjective by transfinite induction: subtract the section of the image of an
-element in its stage's quotient; the difference belongs to the predecessor union.
-5. Direct sums of projectives are projective (`lem-weil-pbc-projective-direct-sum-family`),
-so the resulting isomorphism gives a length-zero resolution of `M`.
-6. For positive `n`, take the free module on the elements of `M`, filtered by the free
-modules on the elements of the stages. Its kernel is filtered by the corresponding kernels.
-Finite support shows that both filtrations exhaust their modules.
-7. The inclusions and the free-module surjection give a short exact sequence of successive
-quotients of the kernel, free module and `M`. Injectivity follows from intersection with
-the predecessor free module; exactness follows by subtracting the basis vector of the
-image; surjectivity follows from surjectivity on each stage.
-8. The free successive quotient has basis the elements of the stage outside its predecessor
-union, hence is projective and admits a resolution of length at most `n - 1` by padding.
-9. Dimension shifting (`lem-weil-pbc-projective-dimension-ses-kernel`) gives length at most
-`n - 1` for the kernel's successive quotients.
-10. Apply the induction hypothesis to the kernel filtration.
-11. Splice its resolution with the free-module surjection onto `M`; exactness at the free
-term is the kernel equality, and exactness at the preceding term uses injectivity of the
-kernel inclusion. This gives the required length at most `n` resolution. -/
+Proof: generalize the module, the index type and all filtration hypotheses before
+induction on the length bound. At zero use the splitting/direct-sum base case
+`hasProjectiveResolutionLE_of_wellOrderedUnion_zero`. At a successor use
+`hasProjectiveResolutionLE_of_wellOrderedUnion_succ`, supplying the generalized
+induction hypothesis. The successor obligation constructs a projective presentation,
+filters its kernel, applies the induction hypothesis to that kernel and splices its
+resolution with the presentation. These two obligations are stated separately;
+the induction combining them is complete. -/
 theorem hasProjectiveResolutionLE_of_wellOrderedUnion
     {R : Type u} [CommRing R] (M : ModuleCat.{v} R) (n : ℕ)
     {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]
@@ -67,6 +48,13 @@ theorem hasProjectiveResolutionLE_of_wellOrderedUnion
       (ModuleCat.of R ((F e) ⧸
         ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) n) :
     HasProjectiveResolutionLE M n := by
-  sorry
+  revert M E F hF hcover hquot
+  induction n with
+  | zero =>
+      intro M E _ _ F hF hcover hquot
+      exact hasProjectiveResolutionLE_of_wellOrderedUnion_zero M F hF hcover hquot
+  | succ n ih =>
+      intro M E _ _ F hF hcover hquot
+      exact hasProjectiveResolutionLE_of_wellOrderedUnion_succ n ih M F hF hcover hquot
 
 end ModuleCat

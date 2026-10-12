@@ -10003,3 +10003,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: merged deliver/C4/Sheaf.RingTheory.SmoothLocalizationConormalSplit (stage 3; reviewer PASS; first push; landing 20261012T230753-L-1907427 (proof); batch 20261012T230749; modules 1; new nodes 0)
 - 23:07 L: merged deliver/C4/Sheaf.RingTheory.SmoothStableConormalBasis (stage 3; reviewer PASS; first push; landing 20261012T230753-L-1907525 (interface); batch 20261012T230749; modules 2; new nodes 1)
 - 23:07 L: merged deliver/D3/Sheaf.RingTheory.KoszulConormalComparisonQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T230754-L-1907628 (interface); batch 20261012T230749; modules 3; new nodes 2)
+- 23:07 L: merged deliver/D4/Sheaf.RingTheory.WellOrderedUnionProjectiveDimension (stage 3; reviewer PASS; first push; landing 20261012T230754-L-1907773 (interface); batch 20261012T230749; modules 3; new nodes 2)

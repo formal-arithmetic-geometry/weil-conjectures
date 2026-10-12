@@ -30,159 +30,33 @@
  ],
  "proof": [
   {
-   "text": "(The inductive claim.) Following the source we prove by induction on $n\\ge0$ the claim $C(n)$: for every $R$-module $M$, every well-ordered set $(E,\\le)$ and every family $(M_e)_{e\\in E}$ of submodules with $M_{e'}\\subseteq M_e$ for $e'\\le e$ and $M=\\bigcup_eM_e$ such that every $M_e/M_{<e}$ ($M_{<e}=\\bigcup_{e'<e}M_{e'}$) has a projective resolution of length $\\le n$ [def-weil-pbc-finite-global-dimension], the module $M$ has a projective resolution of length $\\le n$. The item is $C(n)$. Two facts about chains used below: since $E$ is totally ordered, the $M_e$ form a chain, so $M_{<e}$ is a submodule of $M_e$, and finitely many elements of $M$ (resp. of $M_{<e}$) lie in a single $M_{e_0}$ (resp. a single $M_{e'}$ with $e'<e$): each lies in some $M_{e_j}$ and one takes the largest $e_j$.",
-   "uses": [
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, line 26808 ('We will prove this by induction on n')"
-   }
+   "text": "Generalize M, E, F and all filtration hypotheses before induction on n. The induction hypothesis must hold for every module and filtration in the same universes, so it applies to the kernel filtration in the successor step.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "(Case $n=0$: the quotients are projective and the projections split.) For $n=0$ a projective resolution of length $\\le0$ of $Q_e=M_e/M_{<e}$ [def-weil-pbc-quotient-module] is an exact sequence $0\\to P_0\\to Q_e\\to0$ [def-weil-pbc-finite-global-dimension], i.e. an isomorphism $P_0\\cong Q_e$ with $P_0$ projective; hence $Q_e$ is projective [lem-weil-pbc-projective-direct-summand] (2). The sequence $0\\to M_{<e}\\to M_e\\xrightarrow{q_e}Q_e\\to0$ ($q_e$ the quotient map, surjective with kernel $M_{<e}$) is short exact with projective quotient, so there is an $R$-linear section $s_e:Q_e\\to M_e$ with $q_e\\circ s_e=\\mathrm{id}_{Q_e}$ [lem-weil-pbc-ses-projective-quotient-splits]. Choose one $s_e$ for every $e\\in E$ (axiom of choice), regard it as a map to $M$, and let $\\psi:\\bigoplus_{e\\in E}Q_e\\to M$ [def-weil-pbc-direct-sum-modules] be the $R$-linear map $\\psi((x_e)_e)=\\sum_es_e(x_e)$ (a finite sum).",
+   "text": "At n=0 apply the separately stated zero-step theorem to this filtration.",
    "uses": [
-    "def-weil-pbc-finite-global-dimension",
-    "def-weil-pbc-quotient-module",
-    "lem-weil-pbc-projective-direct-summand",
-    "lem-weil-pbc-ses-projective-quotient-splits",
-    "def-weil-pbc-direct-sum-modules"
+    "lem-weil-pbc-well-ordered-union-zero-step"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26811-26813"
-   }
+   "elementary": false
   },
   {
-   "text": "($\\psi$ is injective.) Let $x=(x_e)_e\\ne0$ in $\\bigoplus_eQ_e$. Its support $\\{e:x_e\\ne0\\}$ is finite and nonempty; let $e_{\\max}$ be its largest element. For $e$ in the support, $s_e(x_e)\\in M_e\\subseteq M_{e_{\\max}}$, so $y=\\psi(x)\\in M_{e_{\\max}}$. Apply $q_{e_{\\max}}$: for $e<e_{\\max}$ in the support, $s_e(x_e)\\in M_e\\subseteq M_{<e_{\\max}}=\\operatorname{Ker}q_{e_{\\max}}$, and $q_{e_{\\max}}(s_{e_{\\max}}(x_{e_{\\max}}))=x_{e_{\\max}}$. Hence $q_{e_{\\max}}(y)=x_{e_{\\max}}\\ne0$, so $y\\ne0$.",
+   "text": "At n+1 apply the successor-step theorem with the generalized induction hypothesis, the module, and the filtration data.",
    "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module"
+    "lem-weil-pbc-well-ordered-union-succ-step"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26813-26817"
-   }
-  },
-  {
-   "text": "($\\psi$ is surjective, by transfinite induction.) Suppose not. Since $M=\\bigcup_eM_e$, the set of $e\\in E$ with $M_e\\not\\subseteq\\operatorname{Im}\\psi$ is nonempty; as $E$ is well-ordered it has a least element $e$, so $M_{e'}\\subseteq\\operatorname{Im}\\psi$ for every $e'<e$, hence $M_{<e}\\subseteq\\operatorname{Im}\\psi$. Take $y\\in M_e\\setminus\\operatorname{Im}\\psi$ and $x_e=q_e(y)\\in Q_e$. Then $q_e(y-s_e(x_e))=x_e-x_e=0$, so $y-s_e(x_e)\\in M_{<e}\\subseteq\\operatorname{Im}\\psi$, and $s_e(x_e)=\\psi(\\iota_e(x_e))\\in\\operatorname{Im}\\psi$ ($\\iota_e$ the canonical inclusion). So $y\\in\\operatorname{Im}\\psi$, a contradiction. Thus $\\psi$ is an isomorphism.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26818-26824"
-   }
-  },
-  {
-   "text": "(Conclusion for $n=0$.) $\\bigoplus_eQ_e$ is projective as a direct sum of the projective modules $Q_e$ [lem-weil-pbc-projective-direct-sum-family] (Stacks 065Q, which the source cites), so $M\\cong\\bigoplus_eQ_e$ is projective [lem-weil-pbc-projective-direct-summand] (2), and $0\\to M\\xrightarrow{\\mathrm{id}}M\\to0$ is a projective resolution of length $\\le0$ [def-weil-pbc-finite-global-dimension]. This is $C(0)$.",
-   "uses": [
-    "lem-weil-pbc-projective-direct-sum-family",
-    "lem-weil-pbc-projective-direct-summand",
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26824-26826"
-   }
-  },
-  {
-   "text": "(Case $n\\ge1$: the free modules.) Assume $C(n-1)$ and let $M,E,(M_e)$ be as in $C(n)$. Let $F=\\bigoplus_{m\\in M}R$ [def-weil-pbc-direct-sum-modules] be the free $R$-module [def-weil-pbc-free-module] with basis $([m])_{m\\in M}$, and $\\pi:F\\to M$ the $R$-linear map with $\\pi([m])=m$; it is surjective. Let $K=\\operatorname{Ker}\\pi$. For $e\\in E$ let $F_e\\subseteq F$ be the submodule spanned by $\\{[m]:m\\in M_e\\}$ (free on the set of elements of $M_e$) and $K_e=K\\cap F_e=\\operatorname{Ker}(\\pi|_{F_e}:F_e\\to M_e)$; $\\pi(F_e)=M_e$. For $e'\\le e$, $M_{e'}\\subseteq M_e$ gives $F_{e'}\\subseteq F_e$ and $K_{e'}\\subseteq K_e$ (the transition maps are injective). Every element of $F$ is a finite combination of basis vectors $[m_j]$, and the $m_j$ lie in one $M_{e_0}$ (Step 1), so $F=\\bigcup_eF_e$ and $K=\\bigcup_eK_e$. Put $F_{<e}=\\bigcup_{e'<e}F_{e'}$ and $K_{<e}=\\bigcup_{e'<e}K_{e'}$. By the chain fact of Step 1, $F_{<e}$ is the span of $\\{[m]:m\\in M_{<e}\\}$ (an element of the span uses finitely many $m_j\\in M_{<e}$, all in one $M_{e'}$, $e'<e$), and $K_{<e}=K\\cap F_{<e}$.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26829-26837"
-   }
-  },
-  {
-   "text": "(The short exact sequence of successive quotients.) The inclusion $K_e\\subseteq F_e$ and $\\pi|_{F_e}$ induce $R$-linear maps $\\alpha:K_e/K_{<e}\\to F_e/F_{<e}$ and $\\beta:F_e/F_{<e}\\to M_e/M_{<e}$ [def-weil-pbc-quotient-module] (well defined since $K_{<e}\\subseteq F_{<e}$ and $\\pi(F_{<e})\\subseteq M_{<e}$, Step 6). The sequence $0\\to K_e/K_{<e}\\xrightarrow{\\alpha}F_e/F_{<e}\\xrightarrow{\\beta}M_e/M_{<e}\\to0$ is exact [def-weil-pbc-exact-sequence]: $\\alpha$ injective, since $k\\in K_e\\cap F_{<e}$ lies in $K\\cap F_{<e}=K_{<e}$; $\\beta\\alpha=0$ since $\\pi(K_e)=0$; $\\operatorname{Ker}\\beta\\subseteq\\operatorname{Im}\\alpha$: if $f\\in F_e$ and $m:=\\pi(f)\\in M_{<e}$, then $[m]\\in F_{<e}\\subseteq F_e$ and $f-[m]\\in F_e$ with $\\pi(f-[m])=0$, so $f-[m]\\in K_e$ and $f\\bmod F_{<e}=\\alpha((f-[m])\\bmod K_{<e})$; $\\beta$ surjective since $\\pi(F_e)=M_e$.",
-   "uses": [
-    "def-weil-pbc-quotient-module",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26837-26844"
-   }
-  },
-  {
-   "text": "($F_e/F_{<e}$ is free, hence has a projective resolution of length $\\le n-1$.) The basis $\\{[m]:m\\in M_e\\}$ of $F_e$ is the disjoint union of $\\{[m]:m\\in M_{<e}\\}$, a basis of $F_{<e}$ (Step 6), and $B_e=\\{[m]:m\\in M_e\\setminus M_{<e}\\}$; so $F_e=F_{<e}\\oplus\\operatorname{span}(B_e)$ and $F_e/F_{<e}$ is free with basis the classes of $B_e$ [def-weil-pbc-free-module] (as the source says), hence projective [lem-weil-pbc-free-module-projective]. So $0\\to F_e/F_{<e}\\xrightarrow{\\mathrm{id}}F_e/F_{<e}\\to0$ is a projective resolution of length $\\le0$, and padding with zeros [lem-weil-pbc-projective-dimension-well-defined] (1) gives one of length $\\le n-1$ [def-weil-pbc-finite-global-dimension] ($n-1\\ge0$).",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-free-module-projective",
-    "lem-weil-pbc-projective-dimension-well-defined",
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26844-26846"
-   }
-  },
-  {
-   "text": "(Dimension shifting.) Apply [lem-weil-pbc-projective-dimension-ses-kernel] (Stacks 065S (1), which the source cites) with $m=n-1$ to the short exact sequence of Step 7: the middle term $F_e/F_{<e}$ has a projective resolution of length $\\le n-1$ (Step 8), and the quotient $M_e/M_{<e}$ has one of length $\\le n$ by hypothesis. Hence $K_e/K_{<e}$ has a projective resolution of length $\\le n-1$, for every $e\\in E$.",
-   "uses": [
-    "lem-weil-pbc-projective-dimension-ses-kernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26847-26850"
-   }
-  },
-  {
-   "text": "(Induction hypothesis.) By Steps 6 and 9, the module $K$, the well-ordered set $E$ and the submodules $(K_e)_{e\\in E}$ satisfy the hypotheses of $C(n-1)$: $K_{e'}\\subseteq K_e$ for $e'\\le e$, $K=\\bigcup_eK_e$, $K_{<e}=\\bigcup_{e'<e}K_{e'}$, and every $K_e/K_{<e}$ has a projective resolution of length $\\le n-1$. By $C(n-1)$ there is an exact sequence $0\\to Q_{n-1}\\to\\dots\\to Q_0\\xrightarrow{\\varepsilon}K\\to0$ with all $Q_i$ projective [def-weil-pbc-finite-global-dimension].",
-   "uses": [
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26850-26851"
-   }
-  },
-  {
-   "text": "(Splicing: conclusion for $n$.) Let $j:K\\to F$ be the inclusion. The sequence $0\\to Q_{n-1}\\to\\dots\\to Q_1\\to Q_0\\xrightarrow{j\\varepsilon}F\\xrightarrow{\\pi}M\\to0$ is exact [def-weil-pbc-exact-sequence]: at $M$, $\\pi$ is surjective; at $F$, $\\operatorname{Im}(j\\varepsilon)=K=\\operatorname{Ker}\\pi$ since $\\varepsilon$ is surjective; at $Q_0$, $\\operatorname{Ker}(j\\varepsilon)=\\operatorname{Ker}\\varepsilon$ since $j$ is injective, which is the image of $Q_1\\to Q_0$ (for $n=1$, $\\varepsilon$ is injective and $Q_0$ is the leftmost term); at $Q_1,\\dots,Q_{n-1}$ exactness is that of the resolution of $K$. $F$ is free, hence projective [lem-weil-pbc-free-module-projective]. So this is a projective resolution of $M$ of length $\\le n$ [def-weil-pbc-finite-global-dimension], which proves $C(n)$ and the lemma.",
-   "uses": [
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-free-module-projective",
-    "def-weil-pbc-finite-global-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof, lines 26851-26852 ('Whence M has projective dimension at most n')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-global-dimension",
-  "def-weil-pbc-quotient-module",
-  "lem-weil-pbc-projective-direct-summand",
-  "lem-weil-pbc-ses-projective-quotient-splits",
-  "def-weil-pbc-direct-sum-modules",
-  "lem-weil-pbc-projective-direct-sum-family",
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-free-module-projective",
-  "lem-weil-pbc-projective-dimension-well-defined",
-  "lem-weil-pbc-projective-dimension-ses-kernel"
+  "lem-weil-pbc-well-ordered-union-zero-step",
+  "lem-weil-pbc-well-ordered-union-succ-step"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0D1U (lemma-colimit-projective-dimension, line 26800), proof lines 26807-26853 (argument of Auslander); Lemma Tag 065Q (line 18864) and Lemma Tag 065S (line 26762) as cited there"
+  "place": "Lemma Tag 0D1U, induction on n; obligations separated by D4"
  },
  "mathlib_searches": [
   {
@@ -281,5 +155,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261012T230754-L-1907773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

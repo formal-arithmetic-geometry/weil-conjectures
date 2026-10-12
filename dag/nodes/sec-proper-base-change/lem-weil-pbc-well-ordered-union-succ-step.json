@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0D1U, succ case; https://stacks.math.columbia.edu/tag/0D1U"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0D1U: source argument, with categorical projective presentations and shrinking for independent universes; D4, 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "wellOrderedUnion|well.ordered.*projective|transfinite.*projective",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean",
+   "verdict": "No filtration theorem. Direct-sum projectivity is a component only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"DirectSum\"",
+   "date": "2026-10-12",
+   "results": "Module.Projective.directSum, Module.Projective.directSum_iff",
+   "verdict": "No filtration theorem. Direct-sum projectivity is a component only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module is projective if it is an exhaustive well ordered union of submodules with projective successive quotients",
+   "date": "2026-10-12",
+   "results": "ModuleCat.enoughProjectives, ModuleCat.projective_of_module_projective, ModuleCat.projective_of_categoryTheory_projective, Module.Projective.of_lifting_property'', IsProjective.iff_projective, Module.Projective.of_lifting_property, Module.Projective, Module.Projective.of_lifting_property'",
+   "verdict": "No filtration theorem. Direct-sum projectivity is a component only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exhaustive well ordered filtration with successive quotients of projective dimension at most n implies projective dimension at most n for its union",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.WellOrderedUnionProjectiveDimension",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-well-ordered-union-projective-dimension",
+   "place": "decomposition of induction proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-well-ordered-union-succ-step",
+ "title": "Successor step of the well-ordered union projective resolution argument",
+ "statement": "Let R be a commutative ring and n a natural number. Assume that for every R-module N in universe v and every exhaustive monotone well-ordered filtration indexed in universe w, bounds n on the successive quotient projective resolutions imply a bound n on the resolution of N [def-weil-pbc-finite-global-dimension]. Let M have such a filtration F whose successive quotients instead have bounds n+1. Then M has a projective resolution of length at most n+1.",
+ "proof": [
+  {
+   "text": "For each successive quotient Q e choose the degree-zero projective presentation in its supplied resolution, using zero for zero Q e. Lift each presentation through F e → Q e by categorical projectivity. Sum the lifts into pi : P → M. Induction on e shows each partial sum maps onto F e. Distinct nonzero Q e admit distinct chosen elements of M, so active indices inject into M and the sum can be shrunk into universe v. Componentwise lifting proves P categorical-projective.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-direct-sum-modules",
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "lem-weil-pbc-projective-direct-sum-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filter K = ker pi by intersections G e with partial sums of P. Finite supports give exhaustion and identify predecessor sums with their union. The predecessor sum maps onto the predecessor union U e in M. The kernel sequence on successive quotients is therefore 0 → G e/G_{<e} → P e → Q e → 0. To prove middle exactness subtract a lift in the predecessor sum of the image of the chosen representative.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Dimension shift this projective presentation to bound the resolution of G e/G_{<e} by n, by the Schanuel proof of Stacks 065S (1). Use the supplied resolution of Q e, not a newly chosen arbitrary projective cover. The existing Lean SES-kernel lemma is restricted to module universe max u v; at unrestricted v the same proof must be formalized categorically. Apply the supplied induction hypothesis to K and G.",
+   "uses": [
+    "lem-weil-pbc-projective-dimension-ses-kernel",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Append P → M to the shifted kernel resolution. The image at P is ker pi; injectivity of K → P preserves exactness at the preceding term. All subsequent terms and differentials are unchanged and all terms in degrees above n+1 are zero. For n=0 this is the two-term resolution.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-projective-dimension-ses-kernel",
+  "lem-weil-pbc-projective-direct-sum-family",
+  "lem-weil-pbc-ses-projective-quotient-splits"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.WellOrderedUnionProjectiveDimensionSucc",
+  "file": "lean/Sheaf/RingTheory/WellOrderedUnionProjectiveDimensionSucc.lean",
+  "declaration": "ModuleCat.hasProjectiveResolutionLE_of_wellOrderedUnion_succ",
+  "statement": "theorem hasProjectiveResolutionLE_of_wellOrderedUnion_succ\n    {R : Type u} [CommRing R] (n : ℕ)\n    (hIH : ∀ (M : ModuleCat.{v} R) {E : Type w} [LinearOrder E]\n      [IsWellOrder E (· < ·)] (F : E → Submodule R M) (hF : Monotone F)\n      (hcover : ∀ x : M, ∃ e : E, x ∈ F e)\n      (hquot : ∀ e : E, HasProjectiveResolutionLE\n        (ModuleCat.of R ((F e) ⧸\n          ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) n),\n      HasProjectiveResolutionLE M n)\n    (M : ModuleCat.{v} R) {E : Type w} [LinearOrder E]\n    [IsWellOrder E (· < ·)] (F : E → Submodule R M) (hF : Monotone F)\n    (hcover : ∀ x : M, ∃ e : E, x ∈ F e)\n    (hquot : ∀ e : E, HasProjectiveResolutionLE\n      (ModuleCat.of R ((F e) ⧸\n        ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) (n + 1)) :\n    HasProjectiveResolutionLE M (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261012T230754-L-1907773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261012T230754-L-1907773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
