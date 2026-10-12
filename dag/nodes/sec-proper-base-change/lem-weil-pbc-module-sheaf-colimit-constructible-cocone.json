@@ -16,52 +16,49 @@
  },
  "proof": [
   {
-   "text": "Form L = colim D and its comparison t:L -> F. Finite presentation of every constructible G identifies Hom(G,L) with colim Hom(G,D_a). Factorization and refinement are respectively surjectivity and injectivity of Hom(G,t), by the equality criterion for filtered colimits of sets.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-constructible-finitely-presented"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
-   }
-  },
-  {
-   "text": "Constructible generation implies these G separate morphisms. Injectivity makes t monic. Surjectivity lets every summand of the generating epimorphism onto F lift to L, so that epimorphism factors through t; thus t is epic.",
+   "text": "Constructible sheaves form a separating object property: for every sheaf H use [lem-weil-pbc-constructible-generation] to obtain an epimorphism from a coproduct of constructible objects, and apply Mathlib ObjectProperty.IsSeparating.mk_of_exists_epi.",
    "uses": [
     "lem-weil-pbc-constructible-generation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+    "place": "Tag 09Z4, lemma-constructible-is-compact, proof of the module case; Tag 095N; Sites Tag 0738(4)"
    }
   },
   {
-   "text": "The module-sheaf category is abelian, so the monic and epic comparison is an isomorphism. Transport the existing colimit cocone along it; its legs become exactly iota.",
+   "text": "Form L=colim D and t:L -> F induced by the given cocone [def-weil-pbc-category-colimit]. For constructible G, factor any maps p,q:G -> L through stages using [lem-weil-pbc-constructible-large-colimit-factorization]. If p followed by t equals q followed by t, hrelations gives a common stage where their representatives agree. Composing that equality with the colimit leg proves p=q.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "def-weil-pbc-category-colimit"
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-constructible-large-colimit-factorization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+    "place": "Tag 09Z4, lemma-constructible-is-compact, proof of the module case; Tag 095N; Sites Tag 0738(4)"
+   }
+  },
+  {
+   "text": "For a constructible G and p:G -> F, hfactor gives q:G -> D(a) with iota_a q=p. Thus q followed by the colimit leg is a lift through t, unique by the preceding injectivity. The ambient module-sheaf category is abelian (existing library instances), hence balanced. Mathlib ObjectProperty.IsSeparating.isDetecting makes t an isomorphism. The identities colimit_iota_a followed by t=iota_a give an isomorphism of cocones via Cocone.ext; IsColimit.ofIsoColimit transports the colimit structure to Cocone.mk F iota.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z4, lemma-constructible-is-compact, proof of the module case; Tag 095N; Sites Tag 0738(4)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-constructible-finitely-presented",
   "lem-weil-pbc-constructible-generation",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-constructible-large-colimit-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Explicit categorical reduction of the construction in 03SA(3), using 095N, 03RZ and 09Z4"
+  "place": "Categorical recognition argument following 03SA(3), using constructible generation and the factorization part of 09Z4; implemented with Mathlib separating-object detection and cocone transport"
  },
  "mathlib_searches": [
   {
@@ -136,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-72c2e",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T023314-L-1110539",
+  "landing": "20261012T042418-L-1820610",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes, dependencies and cited Stacks arguments; compilation and scratch axiom checks pass; earlier B5 return is repaired."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -5995,3 +5995,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/R1/WeilConjectures.SixFunctors.Integral.BaseChange (stage 3; reviewer PASS; first push; landing 20261012T042417-L-1820239 (interface); batch 20261012T042402; modules 2; new nodes 2)
 - 04:24 L: merged deliver/R2/Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic (stage 3; reviewer PASS; first push; landing 20261012T042418-L-1820343 (interface); batch 20261012T042402; modules 2; new nodes 1)
 - 04:24 L: merged deliver/R2/WeilConjectures.AlgebraicGeometry.TangentSpace (stage 3; reviewer PASS; first push; landing 20261012T042418-L-1820507 (interface); batch 20261012T042402; modules 5; new nodes 5)
+- 04:24 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ConstructibleColimitCocone (stage 3; reviewer PASS; first push; landing 20261012T042418-L-1820610 (interface); batch 20261012T042402; modules 2; new nodes 1)
