@@ -392,7 +392,7 @@ lemma cohomologyClass_extClass {S : ShortComplex (Sheaf J (ModuleCat.{max u v} R
     apply (freeSheafHomEquiv J R (U.obj q) S.X₃).injective
     rw [freeSheafHomEquiv_comp, Equiv.apply_symm_apply, Equiv.apply_symm_apply]
   rw [cohomologyClass, cohomologyClass, hU.isResolution.cocycleClass_congr q hφ _
-    (by rw [← hφ]; exact (isCocycle_iff_d_comp_eq_zero _).1 hw)]
+    (hφ ▸ (isCocycle_iff_d_comp_eq_zero _).1 hw)]
   refine hU.isResolution.cocycleClass_extClass hS q _ _ _ ?_ _
   apply (freeSheafHomEquiv J R (U.obj (q + 1)) S.X₂).injective
   rw [freeSheafHomEquiv_comp, freeSheafHomEquiv_d_comp, Equiv.apply_symm_apply,
