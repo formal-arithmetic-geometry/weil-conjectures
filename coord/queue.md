@@ -37,7 +37,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
@@ -48,6 +47,7 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint` | 3 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
