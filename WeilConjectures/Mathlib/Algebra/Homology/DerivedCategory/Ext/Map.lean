@@ -25,6 +25,9 @@ functor `G` up to isomorphism and on `u` up to precomposition.
 - `CategoryTheory.Abelian.Ext.mk₀_comp_mapExactFunctor_comp_eq_zero_iff`: the class pushed
   forward along `G₁` and then along `G₂` vanishes exactly when it vanishes pushed forward
   along any functor isomorphic to `G₁ ⋙ G₂`.
+- `CategoryTheory.Abelian.Ext.mapExactFunctor_mapExactFunctor`: in every degree, pushing a
+  class forward along `G₁` and then along `G₂` is pushing it forward along a functor
+  isomorphic to `G₁ ⋙ G₂`, up to the components of the isomorphism.
 -/
 
 @[expose] public section
@@ -109,5 +112,61 @@ lemma mk₀_comp_mapExactFunctor_comp_eq_zero_iff (G₁ : C ⥤ D) [G₁.Additiv
     refine ⟨u₂ ≫ G₂.map u₁ ≫ τ.inv.app A ≫ inv u ≫ c ≫ τ.hom.app S.X₂, ?_⟩
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← reassoc_of% hc,
       IsIso.inv_hom_id_assoc]
+
+
+/-- Precomposing with the class of an isomorphism does not change whether an `Ext`-class
+vanishes. -/
+lemma mk₀_comp_eq_zero_iff_of_isIso {A A' B : C} (e : A' ⟶ A) [IsIso e] {n : ℕ}
+    (z : Ext A B n) : (mk₀ e).comp z (zero_add n) = 0 ↔ z = 0 := by
+  refine ⟨fun h ↦ ?_, fun h ↦ by rw [h, comp_zero]⟩
+  have := congrArg (fun t ↦ (mk₀ (inv e)).comp t (zero_add n)) h
+  simpa [← comp_assoc_of_second_deg_zero, mk₀_comp_mk₀] using this
+
+/-- Postcomposing with the class of an isomorphism does not change whether an `Ext`-class
+vanishes. -/
+lemma comp_mk₀_eq_zero_iff_of_isIso {A B B' : C} (e : B ⟶ B') [IsIso e] {n : ℕ}
+    (z : Ext A B n) : z.comp (mk₀ e) (add_zero n) = 0 ↔ z = 0 := by
+  refine ⟨fun h ↦ ?_, fun h ↦ by rw [h, zero_comp]⟩
+  have := congrArg (fun t ↦ t.comp (mk₀ (inv e)) (add_zero n)) h
+  simpa [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀] using this
+
+/-- Let `G₁ : C ⥤ D`, `G₂ : D ⥤ E` and `G : C ⥤ E` be exact functors and `τ : G ≅ G₁ ⋙ G₂`.
+Pushing a class `x` of `Extⁿ(A, B)` forward along `G₁` and then along `G₂` is pushing it forward
+along `G`, up to the isomorphisms `τ_A` and `τ_B`. -/
+lemma mapExactFunctor_mapExactFunctor (G₁ : C ⥤ D) [G₁.Additive]
+    [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁] (G₂ : D ⥤ E) [G₂.Additive]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂] (G : C ⥤ E) [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (τ : G ≅ G₁ ⋙ G₂) {A B : C} {n : ℕ}
+    (x : Ext A B n) :
+    (x.mapExactFunctor G₁).mapExactFunctor G₂ =
+      (mk₀ (τ.inv.app A)).comp ((x.mapExactFunctor G).comp (mk₀ (τ.hom.app B)) (add_zero n))
+        (zero_add n) := by
+  induction n generalizing B with
+  | zero =>
+    obtain ⟨f, rfl⟩ := (mk₀_bijective A B).2 x
+    simp only [mapExactFunctor_mk₀, mk₀_comp_mk₀]
+    congr 1
+    have := τ.hom.naturality f
+    simp only [Functor.comp_map] at this
+    rw [this, Iso.inv_hom_id_app_assoc]
+  | succ n ih =>
+    let ι := Injective.ι B
+    let S := ShortComplex.mk ι (cokernel.π ι) (cokernel.condition ι)
+    have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel ι }
+    obtain ⟨y, rfl⟩ := covariant_sequence_exact₁ A hS x (eq_zero_of_injective _) rfl
+    let φ : S.map G ⟶ (S.map G₁).map G₂ :=
+      { τ₁ := τ.hom.app _
+        τ₂ := τ.hom.app _
+        τ₃ := τ.hom.app _
+        comm₁₂ := (τ.hom.naturality S.f).symm
+        comm₂₃ := (τ.hom.naturality S.g).symm }
+    have hnat := (hS.map_of_exact G).extClass_naturality
+      ((hS.map_of_exact G₁).map_of_exact G₂) φ
+    rw [mapExactFunctor_comp, mapExactFunctor_comp, mapExactFunctor_extClass,
+      mapExactFunctor_extClass, ih, mapExactFunctor_comp, mapExactFunctor_extClass]
+    change _ = (mk₀ (τ.hom.app S.X₃)).comp _ _ at hnat
+    rw [comp_assoc _ _ _ (zero_add n) rfl (by omega)]
+    simp only [comp_assoc_of_second_deg_zero, comp_assoc_of_third_deg_zero]
+    rw [← hnat]
 
 end CategoryTheory.Abelian.Ext

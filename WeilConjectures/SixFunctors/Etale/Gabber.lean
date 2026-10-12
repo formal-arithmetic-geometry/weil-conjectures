@@ -6,9 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -156,8 +158,23 @@ theorem exists_cohomologyMap_eq_zero_of_isLimit {J : Type u} [SmallCategory J] [
     [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c)
     (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {q : ℕ} (x : Sheaf.H G q) (j₀ : J)
     (hx : cohomologyMap (c.π.app j₀ ≫ π.app j₀) G q x = 0) :
-    ∃ j, cohomologyMap (π.app j) G q x = 0 :=
-  sorry
+    ∃ j, cohomologyMap (π.app j) G q x = 0 := by
+  have hπ {j k : J} (a : j ⟶ k) : D.map a ≫ π.app k = π.app j := by
+    simpa using π.naturality a
+  have hp (j : J) : c.π.app j ≫ π.app j = c.π.app j₀ ≫ π.app j₀ := by
+    rw [← c.w (IsCofiltered.minToLeft j j₀), ← c.w (IsCofiltered.minToRight j j₀),
+      Category.assoc, Category.assoc, hπ, hπ]
+  have : ∀ j, CompactSpace ((Over.lift D π).obj j).left := fun j ↦
+    inferInstanceAs (CompactSpace (D.obj j))
+  have : ∀ j, QuasiSeparatedSpace ((Over.lift D π).obj j).left := fun j ↦
+    inferInstanceAs (QuasiSeparatedSpace (D.obj j))
+  have : ∀ {j k : J} (a : j ⟶ k), IsAffineHom ((Over.lift D π).map a).left := fun a ↦
+    inferInstanceAs (IsAffineHom (D.map a))
+  obtain ⟨j, a, h⟩ := (cohomologyMap_isColimit_of_isLimit G (Over.lift D π)
+    (Over.liftCone D π c _ hp) (hc.ofIsoLimit (Cones.ext (Iso.refl _))) q).2 j₀
+    (cohomologyMap (π.app j₀) G q x)
+    ((cohomologyMap_comp_eq_zero_iff (c.π.app j₀) (π.app j₀) _ rfl G x).2 hx)
+  exact ⟨j, (cohomologyMap_comp_eq_zero_iff (D.map a) (π.app j₀) _ (hπ a) G x).1 h⟩
 
 /-- **Constructible approximation of a class.** Let `(A, I)` be a henselian pair, `Λ` finite
 and `F` a sheaf of `Λ`-modules on `Spec A`. Every class `c ∈ Hᵠ(Spec (A ⧸ I), F|)` comes from

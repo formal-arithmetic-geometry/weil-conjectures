@@ -25,6 +25,7 @@ one pulling back along `g` and then along `f` kills a class exactly when pulling
   the coefficient sheaf.
 - `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap_eq_zero_iff`: pulling back in two steps
   kills a class of degree one exactly when pulling back along the composite does.
+- `AlgebraicGeometry.Etale.cohomologyMap_comp_eq_zero_iff`: the same in every degree.
 -/
 
 @[expose] public section
@@ -70,5 +71,18 @@ lemma cohomologyMap_eq_zero_of_fac (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk
     (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (x : Sheaf.H F 1)
     (hx : cohomologyMap g F 1 x = 0) : cohomologyMap k F 1 x = 0 := by
   rw [← cohomologyMap_cohomologyMap_eq_zero_iff f g k hk, hx, map_zero]
+
+/-- A class of any degree on `Z` dies after pulling back along `g : Y ⟶ Z` and then along
+`f : X ⟶ Y` exactly when it dies after pulling back along `f ≫ g`. -/
+theorem cohomologyMap_comp_eq_zero_iff (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk : f ≫ g = k)
+    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ} (x : Sheaf.H F n) :
+    cohomologyMap f _ n (cohomologyMap g F n x) = 0 ↔ cohomologyMap k F n x = 0 := by
+  subst hk
+  have : EnoughInjectives (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
+  rw [cohomologyMap_apply, cohomologyMap_apply, cohomologyMap_apply, Ext.mapExactFunctor_comp,
+    Ext.mapExactFunctor_mk₀, Ext.mapExactFunctor_mapExactFunctor _ _ _
+      (upperStarComp AddCommGrpCat.{u + 1} f g), Ext.mk₀_comp_eq_zero_iff_of_isIso,
+    Ext.mk₀_comp_eq_zero_iff_of_isIso, Ext.mk₀_comp_eq_zero_iff_of_isIso,
+    Ext.mk₀_comp_eq_zero_iff_of_isIso, Ext.comp_mk₀_eq_zero_iff_of_isIso]
 
 end AlgebraicGeometry.Etale
