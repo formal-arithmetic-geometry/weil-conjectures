@@ -481,9 +481,8 @@ theorem higherDirectImageBound_of_isAffineHom (W : X.Opens) [IsAffineHom (W.ι �
   have := isGrothendieckAbelian (W : Scheme.{u})
   have hE (I : X.Modules) [Injective I] :
       (pushforward (W.ι ≫ f)).rightAcyclic ((restrictFunctor W.ι).obj I) :=
-    have := isFlasque_of_injective I
-    have := isFlasque_restrict W.ι I
     rightAcyclic_pushforward_of_isFlasque _ _
+      (isFlasque_restrict W.ι _ (isFlasque_of_injective I))
   let e (p : ℕ) : ((pushforwardRestrict f W).rightDerived p).obj ℱ ≅
       (higherDirectImage (W.ι ≫ f) p).obj (ℱ.restrict W.ι) :=
     Functor.compRightDerivedObjIso (restrictFunctor W.ι) (pushforward (W.ι ≫ f)) hE p ℱ
