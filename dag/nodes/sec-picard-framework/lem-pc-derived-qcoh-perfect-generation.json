@@ -26,66 +26,46 @@
  ],
  "proof": [
   {
-   "text": "For an affine scheme X = Spec(A), O_X is a perfect object of D_QCoh(O_X) and a perfect generator: E = 0 exactly when Hom(O_X[n], E) vanishes for every n.",
+   "text": "Apply supported_perfect_generator to T = X. The support condition is vacuous, so its triangulated-property conclusion gives that D_QCoh(X) is triangulated. Quasi-coherent cohomology is invariant under derived isomorphisms by functoriality of cohomology and isomorphism invariance of quasi-coherent modules.",
    "uses": [
-    "lem-pc-perfect-generation-affine-base"
+    "lem-pc-supported-perfect-generator"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IS affine case, using Tag 06Z0"
-   }
+   "elementary": false
   },
   {
-   "text": "Let X be quasi-compact and quasi-separated with X = U union V, U quasi-compact open and V affine open, and let P be a perfect generator of D_QCoh(O_U). The cited induction step gives a perfect Q on X and a perfect Koszul object K' supported on V minus U such that Q direct-sum K' is a generator of D_QCoh(O_X); a direct sum of two perfect objects is perfect (on a common refinement of the two coverings the sum of two strictly perfect complexes is strictly perfect), so D_QCoh(O_X) has a single perfect generator.",
+   "text": "Apply supported_derived_generated_perfect with V the empty open, which is compact. Its support conditions are vacuous. Obtain a perfect object G and, for every Y, a sequence K starting at zero, distinguished transition triangles K_n -> K_(n+1) -> C_n -> K_n[1] with C_n a coproduct of shifts of G, and a distinguished telescope triangle S -> S -> Y -> S[1], where S is a coproduct of the K_n.",
    "uses": [
-    "lem-pc-perfect-generation-open-induction-step"
+    "lem-sc-supported-derived-generated-perfect"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Theorem theorem-bondal-van-den-Bergh, induction step"
-   }
+   "elementary": false
   },
   {
-   "text": "For the qcqs scheme X, let P(W), for a quasi-compact open W of X, be the property that D_QCoh(O_W) has a perfect generator, i.e. a perfect object G with E = 0 if and only if Hom(G[n], E) = 0 for all n, for every E in D_QCoh(O_W). P holds for every affine open by Step 1. If U is quasi-compact open, V affine open and P(U) holds, then U union V is a quasi-compact open of the quasi-separated X, hence itself quasi-compact and quasi-separated, and Step 2 applied to U union V gives P(U union V). By the induction principle, P(X) holds: D_QCoh(O_X) has a perfect generator G.",
-   "uses": [
-    "lem-sc-invert-s-cohomology-induction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 08DR (coherent-lemma-induction-principle), as applied in Tag 09IS"
-   }
+   "text": "Fix any property P in the intersection defining perfectLocalizingClosure. Lift P to the ambient derived category by R(A) iff there exists a proof that A has quasi-coherent cohomology and P holds of the corresponding full-subcategory object. Full-subcategory isomorphisms and proof irrelevance show R is isomorphism-closed; the closure assumptions on P make R shift-closed and cone-closed, using the triangulated closure of quasi-coherence. The generator G satisfies R, and its contractible distinguished triangle G -> G -> 0 proves R(0). Rotation of distinguished triangles gives closure under the middle term as well.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Let S be the smallest strictly full subcategory of D_QCoh(O_X) containing every perfect complex and closed under shifts, cones, retracts and set-indexed direct sums. D_QCoh(O_X) is triangulated with set-indexed direct sums by lem-pc-derived-qcoh-direct-sums, and G is compact by lem-pc-perfect-object-compact; the one-member family (G) has coproduct G, which is a generator in the sense of def-pc-generators (a nonzero K has Hom(G[-n], K) nonzero for some n, i.e. a nonzero map G -> K[n]). By lem-pc-compact-generators-build-objects every object Y of D_QCoh(O_X) sits in a triangle (sum_n X_n) -> (sum_n X_n) -> Y -> with X_1 a direct sum of shifts of G and X_{n+1} the cone of a map Z_n -> X_n with Z_n a direct sum of shifts of G. Shifts of G are perfect, so X_1 and every Z_n lie in S; by induction every X_n lies in S, hence the direct sum of the X_n and its cone Y lie in S. Thus S is all of D_QCoh(O_X).",
+   "text": "For any u-small colimiting cofan of objects satisfying R, schemeDerivedQCohClosedUnderCoproducts gives quasi-coherence of its point. The coproduct closure of P then implies R of that point. This includes empty and singleton coproducts.",
    "uses": [
-    "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-perfect-object-compact",
-    "def-pc-generators",
-    "lem-pc-compact-generators-build-objects"
+    "lem-pc-derived-qcoh-closed-coproducts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09SN (lemma-write-as-colimit), applied to the perfect generator of Tag 09IS"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Induct on n. The initial K_0 is zero, hence in R. Every attaching coproduct C_n is in R since shifts of G are; the transition triangle and middle-term closure put K_(n+1) in R. Reindex the countable cofan S by ULift.{u} Nat using Equiv.ulift, preserving its universal property and bringing its index into the closure universe Type u. Hence S satisfies R. Cone closure in the final telescope triangle gives R(Y), so P(Y). Since P was arbitrary in the defining intersection, every Y lies in perfectLocalizingClosure. Antisymmetry yields equality with top.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-generation-affine-base",
-  "lem-pc-perfect-generation-open-induction-step",
-  "lem-sc-invert-s-cohomology-induction",
-  "lem-pc-derived-qcoh-direct-sums",
-  "lem-pc-perfect-object-compact",
-  "def-pc-generators",
-  "lem-pc-compact-generators-build-objects"
+  "lem-pc-supported-perfect-generator",
+  "lem-sc-supported-derived-generated-perfect",
+  "lem-pc-derived-qcoh-closed-coproducts"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Theorem theorem-bondal-van-den-Bergh, proof"
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Proof of Lemma 48.4.3(3), Tag 0E4G, specialized to the empty open; telescope construction of Derived Categories Tag 09SN; Lean closure argument by A3 stage-3 worker"
  },
  "mathlib_searches": [
   {
@@ -169,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085211-L-1886",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
