@@ -17,90 +17,36 @@
  ],
  "proof": [
   {
-   "text": "Reindex the opposite of the small cofiltered category by a final functor from a nonempty directed partial order (Tag 0032). Its opposite is initial, so the restricted scheme cone is limiting. Affineness and qcqs are preserved. Finality identifies the colimits of the restricted and original pushforward diagrams.",
-   "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
-   }
+   "text": "Use the conservative family of universe-lifted geometric points of X. Mathlib ObjectProperty.IsConservativeFamilyOfPoints.jointlyReflectMonomorphisms, applied with ModuleCat coefficients, reduces monicity to injectivity on each geometric stalk. ModuleCat.mono_iff_injective and injective_iff_map_eq_zero reduce this to a zero-kernel assertion.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Pull each constant sheaf back to the limit. The constant-sheaf pullback comparison identifies it with the same constant sheaf on the limit. The identity and composition equations for pullback, including the adjunction units, show that transitions become identities. The colimit on the limit is the constant sheaf, since the directed category is nonempty and connected.",
-   "uses": [
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-constant-module-pushforward-functoriality",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
-   }
+   "text": "The stalk functor preserves colimits, and the module forgetful functor preserves filtered colimits. Shrink the latter preservation instance to the small index universe. Apply Types.jointly_surjective_of_isColimit to represent a stalk element z by a stage element x. The equation colimit.ι_desc shows that a zero image of z means that the cocone leg kills x.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Forget coefficients to abelian sheaves. Constant-sheaf pullback comparisons and pushforward commute with this forgetful functor. Apply Tag 09Z1 in degree zero: left exactness identifies R^0 of pushforward with ordinary pushforward. Under this identification, the higher-direct-image comparison components are the adjunction unit, constant-sheaf pullback comparison, and direct-image composition comparison. Thus `hK` and `hι` identify the supplied diagrams and cocone with the canonical continuity comparison.",
+   "text": "Use hι to identify the image of x under the canonical stage-to-limit map, after transporting by eK_i.hom, with the image of the cocone leg followed by e.hom. This is zero. Apply the germ-vanishing lemma to get an explicit arrow g:j -> i whose canonical transition kills that transported germ.",
    "uses": [
-    "sbc-lem-higher-direct-image-limit",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-constant-module-pushforward-functoriality"
+    "lem-weil-pbc-constant-module-pushforward-germ-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
-   }
+   "elementary": false
   },
   {
-   "text": "Use only the injectivity part of degree-zero continuity. On each affine etale test object, two representatives with the same image at the limit agree after passing to a later stage. Equality in a filtered colimit is precisely eventual equality, so the comparison is injective on this basis. The affine etale objects cover every etale object; the separation for sheaves therefore makes the comparison a monomorphism of abelian sheaves.",
-   "uses": [
-    "sbc-lem-higher-direct-image-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
-   }
-  },
-  {
-   "text": "Forgetting coefficients preserves filtered colimits: sheafify the sectionwise filtered module colimit, whose underlying group is the filtered group colimit; the underlying abelian sheaf of module sheafification is abelian sheafification. Thus the underlying comparison is the abelian comparison of step 4. The forgetful functor is faithful, so it reflects monomorphisms by cancellation of any two maps. Hence the module comparison is monic. This argument does not need descent of sections.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
-   }
-  },
-  {
-   "text": "Transfer along the final reindexing and the isomorphisms `eK` and `e`. Composition with these isomorphisms preserves injectivity.\n",
-   "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
-   }
+   "text": "Use hK to express K.map(g.op) through eK_i.hom, the canonical transition, and eK_j.inv. The preceding vanishing and preservation of zero imply that this K transition kills x. Finally colimit.w identifies the original colimit coprojection of x with the coprojection of its zero transition image. Hence z=0. This proves stalkwise injectivity and thus monicity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-constant-module-pushforward-functoriality",
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lemma-constructible-pullback-constant",
-  "sbc-lem-higher-direct-image-limit"
+  "lem-weil-pbc-constant-module-pushforward-germ-vanishing"
  ],
  "proof_origin": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008",
   "by": "agent",
-  "note": "Split into the injectivity and surjectivity halves of degree-zero continuity; canonical Stacks Tags 09Z1, 09Z6 and 09YQ read online on 2026-10-12."
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1, degree-zero injectivity, with the finite-approximation step isolated as canonical germ vanishing",
+  "note": "K2 stage 3: actual Lean reduction through module-valued geometric stalks; no derived-image or coefficient-forgetting comparison is needed in the combining proof."
  },
  "mathlib_searches": [
   {
@@ -175,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T063515-L-3157596",
+  "landing": "20261012T085259-L-22986",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

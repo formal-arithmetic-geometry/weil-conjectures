@@ -6,8 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
-import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.ConstantModulePushforwardGermVanishing
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -98,6 +97,45 @@ theorem mono_constantModulePushforwardComparison
       ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))
     (hι : ∀ i : Iᵒᵖ, c.ι.app i ≫ e.hom =
       (eK i).hom ≫ constantModulePushforwardMap Λ M _ _ (π.app i.unop) (hπ i.unop)) :
-    Mono (colimit.desc K c) := by sorry
+    Mono (colimit.desc K c) := by
+  classical
+  have hmono := (Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale X)
+    |>.jointlyReflectMonomorphisms (ModuleCat.{u + 1} Λ)
+  refine @JointlyReflectMonomorphisms.mono _ _ _ _ _ _ hmono _ _
+    (colimit.desc K c) ?_
+  rintro ⟨-, ⟨s⟩⟩
+  let T := (X.uliftPointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  apply (ModuleCat.mono_iff_injective _).2
+  apply (injective_iff_map_eq_zero (T.map (colimit.desc K c)).hom).2
+  intro z hz
+  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+    (forget (ModuleCat.{u + 1} Λ))
+  have hC := isColimitOfPreserves (T ⋙ forget (ModuleCat.{u + 1} Λ))
+    (colimit.isColimit K)
+  obtain ⟨i, x, hx⟩ := Types.jointly_surjective_of_isColimit hC z
+  change (T.map (colimit.ι K i)) x = z at hx
+  subst z
+  have hzero : (T.map (c.ι.app i)) x = 0 := by
+    rw [← ConcreteCategory.comp_apply, ← T.map_comp, colimit.ι_desc] at hz
+    exact hz
+  have hcanonical : T.map
+      (constantModulePushforwardMap Λ M (p i.unop) ν
+        (π.app i.unop) (hπ i.unop)) ((T.map (eK i).hom) x) = 0 := by
+    rw [← ConcreteCategory.comp_apply, ← T.map_comp, ← hι i,
+      T.map_comp, ConcreteCategory.comp_apply, hzero, map_zero]
+  obtain ⟨j, g, hg⟩ := exists_constantModulePushforward_germ_eq_zero
+    Λ M D p hp ν π hπ hc s i.unop ((T.map (eK i).hom) x) hcanonical
+  have htransition : (T.map (K.map g.op)) x = 0 := by
+    rw [hK, T.map_comp, T.map_comp]
+    simp only [ConcreteCategory.comp_apply]
+    change (T.map (eK (op j)).inv)
+      ((T.map (constantModulePushforwardMap Λ M (p i.unop) (p j)
+        (D.map g) (hp g))) ((T.map (eK i).hom) x)) = 0
+    rw [hg, map_zero]
+  calc
+    (T.map (colimit.ι K i)) x =
+        (T.map (colimit.ι K (op j))) ((T.map (K.map g.op)) x) := by
+      rw [← ConcreteCategory.comp_apply, ← T.map_comp, colimit.w]
+    _ = 0 := by rw [htransition, map_zero]
 
 end AlgebraicGeometry.Etale
