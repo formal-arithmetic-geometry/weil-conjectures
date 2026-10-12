@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Choose the finite constructible stratification [def-constructible-constructible]. Its strata have Noetherian underlying spaces as embedded subspaces of X. The images of an etale trivializing cover of each locally constant restriction [def-constructible-finite-locally-constant] are open and cover the stratum. Compactness gives finitely many members; discard empty members and choose one point on each. Compose with the stratum immersion to obtain a finite list x_i in X.",
+   "text": "Choose the finite stratification from IsConstructibleSheaf.exists_stratification. Each stratum is Noetherian as an embedded subspace of X, hence compact. Its locally constant restriction has a trivializing etale cover. Etale chart maps are open, and isCompact_univ.elim_finite_subcover chooses finitely many chart images covering the stratum. Collect the annihilator ideals of their constant module values.",
    "uses": [
     "def-constructible-constructible",
     "def-constructible-finite-locally-constant"
@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "For each selected member, the algebraic-closure point of x_i lifts through its locally closed stratum and the etale chart. The inverse-image stalk isomorphism identifies its stalk of F with the constant value of that chart. Use the constant-sheaf stalk formula and the natural uliftSheafFiberIso to make this a linear isomorphism. A scalar annihilating the selected stalk therefore annihilates the chart value. Every geometric point of X lifts through its unique stratum and some selected chart, so the scalar annihilates all geometric stalks of F.",
+   "text": "For a geometric point on a stratum, exists_fac_of_etale_of_isSepClosed lifts it through a selected chart containing its image. The over-site equivalence and uniqueness of left adjoints identify the localized constant chart with its upperStar restriction. Point.sheafFiberConstantSheafIso and Etale.upperStarCompSheafFiberIso give a module isomorphism from the original stalk to the constant value, hence equal annihilator ideals by LinearEquiv.annihilator_eq. Every algebraic-closure point of X lifts to its stratum by exists_comp_eq_of_mem_range; the same upperStar stalk comparison and uliftSheafFiberIso show that all displayed stalk ideals lie in the finite union of the stratum sets. Enumerate the finite range of the stalk-ideal function using Set.Finite.fin_param, and select one point realizing each enumerated ideal. Every stalk ideal is one of these representatives, so iInf_le gives containment of the representative intersection in the intersection of all stalk ideals.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
     "lemma-openclosed-stalk-upperstar"
@@ -31,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "The scalar endomorphism of F is zero on every geometric stalk, hence zero by geometric stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative]. On evaluating at an arbitrary etale object U the scalar kills every section of F(U), and hence belongs to their annihilator intersection. For empty X take n=0: there are no stalk conditions and conservativity forces every scalar endomorphism to be zero. For a zero sheaf all the annihilators are the unit ideal.",
+   "text": "For a scalar in the intersection of all stalk annihilators, transport annihilation along Point.uliftSheafFiberIso. Naturality of toPresheafFiber and presheafFiber_hom_ext prove that the stalk of the scalar endomorphism r • id_F is r • id on the stalk. Its stalk maps are zero, and sheafHom_ext_of_sheafFiber_map_algClosurePoint implies r • id_F = 0. Evaluating at each etale object and each section proves membership in its module annihilator, giving the required ideal containment. For empty X the finite range is empty and the enumeration has n=0; joint faithfulness applies vacuously. The zero sheaf has unit annihilators. These cases require no separate assumptions.",
    "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
@@ -46,9 +46,9 @@
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "B3 stage 3",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "Finite-cover argument in steps 1 and 3 of lem-weil-pbc-finite-coefficient-of-finite-stalks"
+  "place": "Finite-cover argument in finite-coefficient reduction, steps 1 and 3; compiled via finite range of stalk annihilator ideals, representative selection, and scalar-endomorphism conservativity."
  },
  "mathlib_searches": [
   {
@@ -122,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T163612-L-2784309",
-  "kind": "interface",
+  "landing": "20261012T173809-L-3290889",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
