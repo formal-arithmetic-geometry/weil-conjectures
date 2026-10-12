@@ -16,38 +16,46 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-pbc-scheme-coproduct-family] and uniqueness of coproducts to obtain pairwise disjoint clopen images covering Y from hcolim. *The pieces of $W\\times_XY$.* Fix an object $w:W\\to X$ of $X_{\\Et}$ and write $W_Y=W\\times_XY$ with projections $p:W_Y\\to W$, $q:W_Y\\to Y$ [def-pc-fibre-product]; $(W_Y,q)$ is the object of $Y_{\\Et}$ at which $f_*H$ is evaluated (the pullback evaluation object). Put $O_j=q^{-1}(V_j)$. Since the $V_j$ are pairwise disjoint, open and closed and cover $Y$, the $O_j$ ($j\\in J$) are pairwise disjoint, open and closed and cover $W_Y$; if $J=\\varnothing$ then $Y=\\varnothing$ and $W_Y=\\varnothing$. By [lem-weil-pbc-open-fibre-product] (with base $X$, the open $W\\subseteq W$, the open $V_j\\subseteq Y$, $U=X$) the canonical morphism $W\\times_XV_j\\to W_Y$ is an open immersion with image $p^{-1}(W)\\cap q^{-1}(V_j)=O_j$, compatibly with the projections; the projection $W\\times_XV_j\\to W$ is the base change along $w$ of the isomorphism $f|_{V_j}:V_j\\to X$, hence an isomorphism (its inverse is $(\\mathrm{id}_W,(f|_{V_j})^{-1}\\circ w)$, by the universal property [def-pc-fibre-product]). So $p|_{O_j}:O_j\\to W$ is an isomorphism of schemes from the open subscheme $O_j$. Now $\\sigma_{j,W}=(\\mathrm{id}_W,s_j\\circ w)$ satisfies $p\\circ\\sigma_{j,W}=\\mathrm{id}_W$ and $q\\circ\\sigma_{j,W}=s_j\\circ w$, which lands in $V_j$; so $\\sigma_{j,W}$ maps $W$ into the open $O_j$, hence factors through the open subscheme $O_j$ [def-weil-open-immersion], and the factored morphism is a right inverse of the isomorphism $p|_{O_j}$, hence equal to its inverse. Thus $\\sigma_{j,W}$ is an open immersion with image $O_j$ (an isomorphism $W\\xrightarrow{\\sim}O_j$ followed by the inclusion). The morphism $s_j\\circ w:W\\to Y$ is etale ($s_j$ is an open immersion, hence etale, and $w$ is etale [lem-weil-pbc-etale-composition-cancellation] (1), (2)), so $W_j:=(W,s_j\\circ w)$ is an object of $Y_{\\Et}$, $\\sigma_{j,W}:W_j\\to(W_Y,q)$ is a morphism of $Y_{\\Et}$ (as $q\\circ\\sigma_{j,W}=s_j\\circ w$) and is etale (open immersion), and the family $\\{\\sigma_{j,W}:W_j\\to W_Y\\}_{j\\in J}$ is jointly surjective (the $O_j$ cover $W_Y$), so it is a covering of $W_Y$ in $Y_{\\Et}$ [def-weil-pbc-etale-site] (the empty family when $J=\\varnothing$, which covers $W_Y=\\varnothing$).",
+   "text": "Install the open-immersion instances and the inverse isomorphisms t_j and i_j ; f. Let sigma_j be the displayed pullback lift. The square with top sigma_j, left W -> X -> V_j, right the pullback projection to Y and bottom i_j is cartesian: cancel the cartesian square W times_X Y over X from the outer square with horizontal isomorphisms id_W and i_j ; f, using IsPullback.of_right. Thus sigma_j is an open immersion and its range is the inverse image of range(i_j) under the projection to Y (IsPullback.isOpenImmersion_fst and Scheme.range_snd_of_isPullback in WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier). Its monicity descends through the faithful forgetful functor from the small etale site to schemes.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product",
     "def-weil-open-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-scheme-coproduct-family"
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'A finite etale morphism is locally isomorphic to a disjoint union of isomorphisms ... Thus the lemma says that if F_i ... then prod F_i is too. This is clear.' (the identification of the direct image with the product is left implicit there; written out by an agent)"
+    "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'Thus the lemma says that if F_i ... then prod F_i is too'"
    }
   },
   {
-   "text": "Apply the sheaf equalizer condition in the coefficient category of modules to this covering. For unequal indices the overlap is empty and H(empty) is zero by the empty cover. For equal indices the overlap projections agree because sigma is monic. Every family is compatible and therefore glues uniquely. For any module M and linear maps from M to the section modules on the sheets, glue their values elementwise. Uniqueness of gluing shows the glued assignment is additive and Lambda-linear; uniqueness also proves the universal property for this fan. The same argument for empty J makes H(W times_X Y) terminal. These are precisely the existence and uniqueness clauses of IsLimit.",
+   "text": "Use the coproduct isomorphism e : coproduct V_j -> Y determined by hcolim. Transport the covering property of sigmaOpenCover V along the homeomorphism of e to see that the ranges of i_j cover Y. Transport equality of points back along this homeomorphism and apply sigmaι_eq_iff to prove that these ranges are pairwise disjoint. Pull back coverage and disjointness along the projection to Y using the range identities from step 1. The jointly-surjective criterion of Scheme.ofArrows_mem_smallEtaleTopology_iff makes the generated sieve covering. This works for an empty index type without selecting an index unless a point of the pullback is given.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'Thus the lemma says that if F_i ... then prod F_i is too'"
+   }
+  },
+  {
+   "text": "Apply Scheme.Etale.isIso_piLift_of_disjoint to H and the monic disjoint covering family sigma. ModuleCat has the requisite product because J is finite. The resulting IsIso of the restriction map Pi.lift is equivalent to Nonempty (IsLimit (Fan.mk ...)) by Fan.nonempty_isLimit_iff_isIso_piLift. This proves the original limiting fan with exactly its displayed legs; no new intermediate statements or sorries are needed.",
+   "uses": [
+    "lem-weil-pbc-disjoint-etale-sections-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00VM (sites-definition-sheaf-sets: the sheaf condition as an equalizer), applied to the covering of W x_X Y by its open and closed pieces; the empty covering of the empty object gives F(empty) = a point"
+    "place": "Definition 00VM, the equalizer sheaf condition; applied through the proved source theorem Scheme.Etale.isIso_piLift_of_disjoint"
    }
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'Thus the lemma says that if F_i ... then prod F_i is too'; the implicit disjoint-cover calculation expanded using the equalizer sheaf condition, sites.tex Definition 00VM"
+  "place": "proof of Lemma 095B (lemma-pushforward-locally-constant), lines 9982-9991: 'Thus the lemma says that if F_i ... then prod F_i is too'; G2 proof uses cartesian-square cancellation and coproduct point identities for geometry, then the proved disjoint-etale-sections-product theorem and the categorical limiting-fan criterion."
  },
  "mathlib_searches": [
   {
@@ -124,12 +132,11 @@
  },
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-weil-pbc-open-fibre-product",
   "def-weil-open-immersion",
   "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-scheme-coproduct-family",
   "def-weil-pbc-etale-site",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-scheme-coproduct-family"
+  "lem-weil-pbc-disjoint-etale-sections-product"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -145,10 +152,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T063524-L-3161876",
-  "kind": "interface",
+  "landing": "20261012T070537-L-3471033",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
