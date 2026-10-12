@@ -26,6 +26,19 @@
  ],
  "proof": [
   {
+   "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. No K-flat construction is reproved here: existence of the canonical pullback tensor isomorphism and the Leray comparison remain the existing named theorem holes of this module.",
+   "uses": [
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-derived-pullback-tensor-comparison",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08I3, evaluation-mate comparison; Tag 08DJ, tensor-Hom naturality"
+   }
+  },
+  {
    "text": "The qcqs hypotheses ensure that the restricted derived direct image preserves D_{\\mathrm{QCoh}} and has right adjoint a, with counit (the sheafy trace) Rf_*a(K)\\to K, by [lem-pc-qcqs-derived-direct-image-right-adjoint]. Use the counit-induced internal-Hom comparison stated in [lem-pc-qcqs-sheaf-rhom-adjunction]; that node records the canonical map and says that after applying the coherator DQ_Y it is an isomorphism. Its construction from the counit is natural in P and K.",
    "uses": [
     "lem-pc-qcqs-derived-direct-image-right-adjoint",
@@ -38,12 +51,13 @@
    }
   },
   {
-   "text": "Apply derived global sections to the comparison map of [lem-pc-qcqs-sheaf-rhom-adjunction]. Let p_X:(X,\\mathcal O_X)\\to(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X)) and p_Y:(Y,\\mathcal O_Y)\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be the morphisms of ringed spaces of [def-pc-global-derived-rhom], so R\\Gamma(X,-)=Rp_{X,*} and R\\Gamma(Y,-)=Rp_{Y,*}, and let r:(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X))\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be given by f^\\sharp:\\Gamma(Y,\\mathcal O_Y)\\to\\Gamma(X,\\mathcal O_X), so p_Y\\circ f=r\\circ p_X and Rr_*=r_* is the exact restriction of scalars. Applying the canonical composition isomorphism [lem-pc-ringed-spaces-derived-direct-image-composition] to both factorizations gives the derived Leray identity R\\Gamma(Y,-)\\circ Rf_*\\cong r_*\\circ R\\Gamma(X,-) on D(\\mathcal O_X). Thus [def-pc-global-derived-rhom] identifies the two sides with R\\operatorname{Hom}_X(P,a(K)) (with scalars restricted to \\Gamma(Y,\\mathcal O_Y)) and R\\operatorname{Hom}_Y(Rf_*P,K). Since the map becomes an isomorphism after DQ_Y, [lem-pc-dq-coherator-adjunction] (Y is quasi-compact and quasi-separated) gives a quasi-isomorphism on R\\Gamma(Y,-): in each degree use H^i(Y,E)=Hom(\\mathcal O_Y[-i],DQ_Y E), with \\mathcal O_Y[-i] quasi-coherent. This also gives naturality in P and K.",
+   "text": "Apply derived global sections to the comparison map of [lem-pc-qcqs-sheaf-rhom-adjunction]. Let p_X:(X,\\mathcal O_X)\\to(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X)) and p_Y:(Y,\\mathcal O_Y)\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be the morphisms of ringed spaces of [def-pc-global-derived-rhom], so R\\Gamma(X,-)=Rp_{X,*} and R\\Gamma(Y,-)=Rp_{Y,*}, and let r:(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X))\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be given by f^\\sharp:\\Gamma(Y,\\mathcal O_Y)\\to\\Gamma(X,\\mathcal O_X), so p_Y\\circ f=r\\circ p_X and Rr_*=r_* is the exact restriction of scalars. Applying the canonical composition isomorphism [lem-pc-ringed-spaces-derived-direct-image-composition] to both factorizations gives the derived Leray identity R\\Gamma(Y,-)\\circ Rf_*\\cong r_*\\circ R\\Gamma(X,-) on D(\\mathcal O_X). Thus [def-pc-global-derived-rhom] identifies the two sides with R\\operatorname{Hom}_X(P,a(K)) (with scalars restricted to \\Gamma(Y,\\mathcal O_Y)) and R\\operatorname{Hom}_Y(Rf_*P,K). Since the map becomes an isomorphism after DQ_Y, [lem-pc-dq-coherator-adjunction] (Y is quasi-compact and quasi-separated) gives a quasi-isomorphism on R\\Gamma(Y,-): in each degree use H^i(Y,E)=Hom(\\mathcal O_Y[-i],DQ_Y E), with \\mathcal O_Y[-i] quasi-coherent. This also gives naturality in P and K. The proved bridge lem-pc-dq-coherator-derived-global-sections transports the existing K-injective detection statement to an arbitrary derived morphism using representative isomorphisms, the fully faithful K-injective model and the right-derived unit. Applying it to the coherated sheaf comparison and composing with the inverse Leray comparison proves invertibility of the actual map. Map the sheaf comparison naturality equation through global sections and use inverse Leray naturality to prove the second clause.",
    "uses": [
     "def-pc-global-derived-rhom",
     "lem-pc-qcqs-sheaf-rhom-adjunction",
     "lem-pc-dq-coherator-adjunction",
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-dq-coherator-derived-global-sections"
    ],
    "elementary": false,
    "source": {
@@ -53,16 +67,20 @@
   }
  ],
  "proof_deps": [
-  "def-pc-global-derived-rhom",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-derived-base-change-map",
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "def-pc-global-derived-rhom",
   "lem-pc-dq-coherator-adjunction",
-  "lem-pc-ringed-spaces-derived-direct-image-composition"
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-dq-coherator-derived-global-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0B6I (Lemma 48.1.1, lemma-iso-global-hom)"
+  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3"
  },
  "mathlib_searches": [
   {
@@ -158,5 +176,15 @@
   "group": "V1",
   "result": "pass",
   "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff3b3",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135310-L-1689664",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proofs and coherator bridge with their nodes and cited dependencies; existing signatures and definition bodies are unchanged. Both modules and all three direct importers compile cleanly; axiom checks show only permitted axioms and sorryAx from named open dependencies."
  }
 }

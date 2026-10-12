@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-dq-coherator-derived-global-sections",
+ "kind": "statement",
+ "title": "Coherator detection on arbitrary derived morphisms",
+ "statement": "Let Y be a quasi-compact and quasi-separated scheme, with derived category and quasi-coherent full subcategory [def-pc-derived-category]. Let DQ be a right adjoint to the inclusion. If s:E→E′ is a morphism of the ambient derived category whose image DQ(s) is an isomorphism, then RΓ(Y,s) [def-pc-global-derived-rhom] is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I, final proof paragraph (https://stacks.math.columbia.edu/tag/0B6I)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Choose K-injective representatives I,J and representing isomorphisms. Transport s to Q(I)→Q(J). The bijective Qh-map on morphisms into J [lem-sc-kinjective-quasi-iso-comparison] and fullness of the homotopy quotient give a chain map r whose localization equals that transported morphism. Isomorphism after DQ is preserved under these conjugations. Apply dqCoherator_detects_globalSections [lem-pc-dq-coherator-adjunction] to r. Its termwise global-sections map is a quasi-isomorphism, so its localization is an isomorphism. Naturality of mapHomotopyCategoryFactors and quotientCompQhIso transports this to the homotopy model. Naturality of the invertible right-derived units on I and J then shows RΓ(Q(r)) is invertible. Finally transport back to s along the representing isomorphisms.",
+   "uses": [
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-pc-dq-coherator-adjunction",
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-pc-dq-coherator-adjunction",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0B6I, final paragraph, K-injective transport implemented by R3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections preserves isomorphisms detected by derived quasi-coherent coherator",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the derived category whose image under the quasi-coherent derived coherator is invertible becomes invertible after derived global sections",
+   "results": "DerivedCategory.isIso_Q_map_iff_quasiIso and CochainComplex.IsKInjective.Qh_map_bijective; no scheme coherator theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "Exact K-injective full faithfulness statement used in the proof",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "dqCoherator.*globalSections|exists_iso_Q_obj_of_isKInjective",
+   "results": "Existing dqCoherator_detects_globalSections only handles chain maps of K-injectives; upstream exists_iso_Q_obj_of_isKInjective supplies representatives",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-global-hom-adjunction",
+   "place": "Step 2: coherator detection after applying derived global sections",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DQCoheratorDerivedGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/DQCoheratorDerivedGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.dqCoherator_isIso_derivedGlobalSections",
+  "statement": "theorem dqCoherator_isIso_derivedGlobalSections (Y : Scheme.{u})\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wA}\n      (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))]\n    (DQ : schemeDerivedCategory Y ⥤ schemeDerivedQCohCategory Y)\n    (adj : (schemeDerivedQCohProperty Y).ι ⊣ DQ)\n    {E E' : schemeDerivedCategory Y} (s : E ⟶ E') [IsIso (DQ.map s)] :\n    IsIso ((schemeDerivedGlobalSections Y).map s)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff3b3",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135310-L-1689664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff3b3",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135310-L-1689664",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proofs and coherator bridge with their nodes and cited dependencies; existing signatures and definition bodies are unchanged. Both modules and all three direct importers compile cleanly; axiom checks show only permitted axioms and sorryAx from named open dependencies."
+ }
+}
