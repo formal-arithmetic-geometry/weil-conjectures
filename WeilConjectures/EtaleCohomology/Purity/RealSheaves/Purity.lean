@@ -97,6 +97,12 @@ universe u
 
 open CategoryTheory
 
+/- `Mathlib.AlgebraicGeometry.Group.Affine` (imported through linear algebraic groups) makes
+`Spec k` an object over itself through `specOverSpec`, which is not reducibly the identity
+structure `CategoryTheory.instOverClass` used by Weil sheaves on `Spec k`. Prefer the latter, so
+that importers of this file keep finding the identity structure. -/
+attribute [instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
